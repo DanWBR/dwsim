@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="&gt;&gt;LabelWithDivider1.Name" xml:space="preserve">
     <value>LabelWithDivider1</value>
@@ -133,7 +133,7 @@
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>P0</value>
@@ -145,7 +145,7 @@
     <value>Panel0</value>
   </data>
   <data name="&gt;&gt;Panel0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel0.Parent" xml:space="preserve">
     <value>P0</value>
@@ -153,18 +153,18 @@
   <data name="&gt;&gt;Panel0.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="P0.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="P0.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="P0.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 476</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="P0.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -172,7 +172,7 @@
     <value>P0</value>
   </data>
   <data name="&gt;&gt;P0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P0.Parent" xml:space="preserve">
     <value>$this</value>
@@ -208,7 +208,7 @@
     <value>Label3</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -220,7 +220,7 @@
     <value>Label2</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -232,7 +232,7 @@
     <value>Label1</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -244,7 +244,7 @@
     <value>Button3</value>
   </data>
   <data name="&gt;&gt;Button3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -256,7 +256,7 @@
     <value>Button2</value>
   </data>
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -268,7 +268,7 @@
     <value>Button1</value>
   </data>
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -292,7 +292,7 @@
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>P0</value>
@@ -322,7 +322,7 @@
     <value>Label3</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -349,7 +349,7 @@
     <value>Label2</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -382,7 +382,7 @@
     <value>Label1</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -409,7 +409,7 @@
     <value>Button3</value>
   </data>
   <data name="&gt;&gt;Button3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -439,7 +439,7 @@
     <value>Button2</value>
   </data>
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -466,7 +466,7 @@
     <value>Button1</value>
   </data>
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -475,7 +475,7 @@
     <value>5</value>
   </data>
   <data name="Panel0.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
+    <value>Stretch</value>
   </data>
   <data name="Panel0.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -493,7 +493,7 @@
     <value>Panel0</value>
   </data>
   <data name="&gt;&gt;Panel0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel0.Parent" xml:space="preserve">
     <value>P0</value>
@@ -517,7 +517,7 @@
     <value>Panel3</value>
   </data>
   <data name="&gt;&gt;Panel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel3.Parent" xml:space="preserve">
     <value>P1</value>
@@ -529,7 +529,7 @@
     <value>Panel4</value>
   </data>
   <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
     <value>P1</value>
@@ -553,7 +553,7 @@
     <value>P1</value>
   </data>
   <data name="&gt;&gt;P1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -589,7 +589,7 @@
     <value>Button27</value>
   </data>
   <data name="&gt;&gt;Button27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button27.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -601,7 +601,7 @@
     <value>Label4</value>
   </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -613,7 +613,7 @@
     <value>Label5</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -625,7 +625,7 @@
     <value>Label6</value>
   </data>
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -637,7 +637,7 @@
     <value>Button4</value>
   </data>
   <data name="&gt;&gt;Button4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -649,7 +649,7 @@
     <value>Button5</value>
   </data>
   <data name="&gt;&gt;Button5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button5.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -661,7 +661,7 @@
     <value>Button6</value>
   </data>
   <data name="&gt;&gt;Button6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -685,7 +685,7 @@
     <value>Panel3</value>
   </data>
   <data name="&gt;&gt;Panel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel3.Parent" xml:space="preserve">
     <value>P1</value>
@@ -712,7 +712,7 @@
     <value>Button27</value>
   </data>
   <data name="&gt;&gt;Button27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button27.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -742,7 +742,7 @@
     <value>Label4</value>
   </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -770,7 +770,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label5</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -803,7 +803,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label6</value>
   </data>
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -830,7 +830,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button4</value>
   </data>
   <data name="&gt;&gt;Button4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -857,7 +857,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button5</value>
   </data>
   <data name="&gt;&gt;Button5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button5.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -884,7 +884,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button6</value>
   </data>
   <data name="&gt;&gt;Button6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -896,7 +896,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxKAPI</value>
   </data>
   <data name="&gt;&gt;TextBoxKAPI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxKAPI.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -908,7 +908,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label45</value>
   </data>
   <data name="&gt;&gt;Label45.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label45.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -920,7 +920,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxBulkMW</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkMW.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -932,7 +932,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxBulkD</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkD.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -944,7 +944,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label44</value>
   </data>
   <data name="&gt;&gt;Label44.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label44.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -956,7 +956,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label43</value>
   </data>
   <data name="&gt;&gt;Label43.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label43.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -968,7 +968,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label38</value>
   </data>
   <data name="&gt;&gt;Label38.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label38.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -980,7 +980,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxBasis</value>
   </data>
   <data name="&gt;&gt;ComboBoxBasis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxBasis.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -992,7 +992,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label42</value>
   </data>
   <data name="&gt;&gt;Label42.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label42.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1004,7 +1004,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonD20</value>
   </data>
   <data name="&gt;&gt;RadioButtonD20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonD20.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1016,7 +1016,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonD60</value>
   </data>
   <data name="&gt;&gt;RadioButtonD60.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonD60.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1028,7 +1028,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label41</value>
   </data>
   <data name="&gt;&gt;Label41.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label41.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1040,7 +1040,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxVT2</value>
   </data>
   <data name="&gt;&gt;TextBoxVT2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxVT2.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1052,7 +1052,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label40</value>
   </data>
   <data name="&gt;&gt;Label40.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label40.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1064,7 +1064,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxVT1</value>
   </data>
   <data name="&gt;&gt;TextBoxVT1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxVT1.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1076,7 +1076,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label39</value>
   </data>
   <data name="&gt;&gt;Label39.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label39.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1088,7 +1088,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxDistMethod</value>
   </data>
   <data name="&gt;&gt;ComboBoxDistMethod.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxDistMethod.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1100,7 +1100,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxVISC</value>
   </data>
   <data name="&gt;&gt;CheckBoxVISC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxVISC.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1112,7 +1112,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxSG</value>
   </data>
   <data name="&gt;&gt;CheckBoxSG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxSG.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1124,7 +1124,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxMW</value>
   </data>
   <data name="&gt;&gt;CheckBoxMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxMW.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1136,7 +1136,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label7</value>
   </data>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1148,7 +1148,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBox1</value>
   </data>
   <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1172,7 +1172,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel4</value>
   </data>
   <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
     <value>P1</value>
@@ -1193,7 +1193,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxKAPI</value>
   </data>
   <data name="&gt;&gt;TextBoxKAPI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxKAPI.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1223,7 +1223,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label45</value>
   </data>
   <data name="&gt;&gt;Label45.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label45.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1244,7 +1244,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxBulkMW</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkMW.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1265,7 +1265,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxBulkD</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkD.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1295,7 +1295,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label44</value>
   </data>
   <data name="&gt;&gt;Label44.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label44.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1305,6 +1305,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="Label43.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label43.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 225</value>
@@ -1322,7 +1325,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label43</value>
   </data>
   <data name="&gt;&gt;Label43.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label43.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1355,7 +1358,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label38</value>
   </data>
   <data name="&gt;&gt;Label38.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label38.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1385,7 +1388,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxBasis</value>
   </data>
   <data name="&gt;&gt;ComboBoxBasis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxBasis.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1415,7 +1418,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label42</value>
   </data>
   <data name="&gt;&gt;Label42.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label42.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1448,7 +1451,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonD20</value>
   </data>
   <data name="&gt;&gt;RadioButtonD20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonD20.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1461,6 +1464,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="RadioButtonD60.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="RadioButtonD60.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="RadioButtonD60.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 100</value>
@@ -1478,7 +1484,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonD60</value>
   </data>
   <data name="&gt;&gt;RadioButtonD60.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonD60.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1508,7 +1514,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label41</value>
   </data>
   <data name="&gt;&gt;Label41.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label41.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1535,7 +1541,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxVT2</value>
   </data>
   <data name="&gt;&gt;TextBoxVT2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxVT2.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1565,7 +1571,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label40</value>
   </data>
   <data name="&gt;&gt;Label40.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label40.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1592,7 +1598,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxVT1</value>
   </data>
   <data name="&gt;&gt;TextBoxVT1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxVT1.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1625,7 +1631,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label39</value>
   </data>
   <data name="&gt;&gt;Label39.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label39.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1658,7 +1664,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxDistMethod</value>
   </data>
   <data name="&gt;&gt;ComboBoxDistMethod.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxDistMethod.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1688,7 +1694,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxVISC</value>
   </data>
   <data name="&gt;&gt;CheckBoxVISC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxVISC.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1718,7 +1724,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxSG</value>
   </data>
   <data name="&gt;&gt;CheckBoxSG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxSG.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1748,7 +1754,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxMW</value>
   </data>
   <data name="&gt;&gt;CheckBoxMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxMW.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1781,7 +1787,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label7</value>
   </data>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1814,7 +1820,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBox1</value>
   </data>
   <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1838,7 +1844,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel5</value>
   </data>
   <data name="&gt;&gt;Panel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
     <value>P2</value>
@@ -1850,7 +1856,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel6</value>
   </data>
   <data name="&gt;&gt;Panel6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel6.Parent" xml:space="preserve">
     <value>P2</value>
@@ -1874,7 +1880,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>P2</value>
   </data>
   <data name="&gt;&gt;P2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1910,7 +1916,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button26</value>
   </data>
   <data name="&gt;&gt;Button26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button26.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -1922,7 +1928,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label8</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -1934,7 +1940,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label9</value>
   </data>
   <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -1946,7 +1952,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label10</value>
   </data>
   <data name="&gt;&gt;Label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -1958,7 +1964,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button7</value>
   </data>
   <data name="&gt;&gt;Button7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button7.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -1970,7 +1976,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button8</value>
   </data>
   <data name="&gt;&gt;Button8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button8.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -1982,7 +1988,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button9</value>
   </data>
   <data name="&gt;&gt;Button9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button9.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2006,13 +2012,16 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel5</value>
   </data>
   <data name="&gt;&gt;Panel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
     <value>P2</value>
   </data>
   <data name="&gt;&gt;Panel5.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="Button26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button26.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 84</value>
@@ -2030,7 +2039,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button26</value>
   </data>
   <data name="&gt;&gt;Button26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button26.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2060,7 +2069,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label8</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2087,7 +2096,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label9</value>
   </data>
   <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2120,7 +2129,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label10</value>
   </data>
   <data name="&gt;&gt;Label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2147,7 +2156,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button7</value>
   </data>
   <data name="&gt;&gt;Button7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button7.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2174,7 +2183,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button8</value>
   </data>
   <data name="&gt;&gt;Button8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button8.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2201,7 +2210,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button9</value>
   </data>
   <data name="&gt;&gt;Button9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button9.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -2213,7 +2222,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button25</value>
   </data>
   <data name="&gt;&gt;Button25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button25.Parent" xml:space="preserve">
     <value>Panel6</value>
@@ -2225,7 +2234,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>DataGridView1</value>
   </data>
   <data name="&gt;&gt;DataGridView1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
     <value>Panel6</value>
@@ -2237,7 +2246,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label11</value>
   </data>
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>Panel6</value>
@@ -2261,13 +2270,16 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel6</value>
   </data>
   <data name="&gt;&gt;Panel6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel6.Parent" xml:space="preserve">
     <value>P2</value>
   </data>
   <data name="&gt;&gt;Panel6.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="Button25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button25.Location" type="System.Drawing.Point, System.Drawing">
     <value>465, 9</value>
@@ -2285,7 +2297,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button25</value>
   </data>
   <data name="&gt;&gt;Button25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button25.Parent" xml:space="preserve">
     <value>Panel6</value>
@@ -2293,37 +2305,37 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button25.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="vap.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="vap.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="vap.HeaderText" xml:space="preserve">
     <value>% VAP</value>
   </data>
-  <metadata name="temp.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="temp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="temp.HeaderText" xml:space="preserve">
     <value>Temperatura</value>
   </data>
-  <metadata name="mm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="mm.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="mm.HeaderText" xml:space="preserve">
     <value>Massa Molar</value>
   </data>
-  <metadata name="dens.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dens.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dens.HeaderText" xml:space="preserve">
     <value>Densidade</value>
   </data>
-  <metadata name="visc1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="visc1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="visc1.HeaderText" xml:space="preserve">
     <value>Viscosidade 1</value>
   </data>
-  <metadata name="visc2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="visc2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="visc2.HeaderText" xml:space="preserve">
@@ -2345,7 +2357,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>DataGridView1</value>
   </data>
   <data name="&gt;&gt;DataGridView1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
     <value>Panel6</value>
@@ -2378,7 +2390,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label11</value>
   </data>
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>Panel6</value>
@@ -2402,7 +2414,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel7</value>
   </data>
   <data name="&gt;&gt;Panel7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel7.Parent" xml:space="preserve">
     <value>P3</value>
@@ -2414,7 +2426,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel8</value>
   </data>
   <data name="&gt;&gt;Panel8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel8.Parent" xml:space="preserve">
     <value>P3</value>
@@ -2438,7 +2450,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>P3</value>
   </data>
   <data name="&gt;&gt;P3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P3.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2474,7 +2486,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label12</value>
   </data>
   <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2486,7 +2498,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label13</value>
   </data>
   <data name="&gt;&gt;Label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2498,7 +2510,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label14</value>
   </data>
   <data name="&gt;&gt;Label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2510,7 +2522,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button10</value>
   </data>
   <data name="&gt;&gt;Button10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2522,7 +2534,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button11</value>
   </data>
   <data name="&gt;&gt;Button11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button11.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2534,7 +2546,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button12</value>
   </data>
   <data name="&gt;&gt;Button12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button12.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2558,7 +2570,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel7</value>
   </data>
   <data name="&gt;&gt;Panel7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel7.Parent" xml:space="preserve">
     <value>P3</value>
@@ -2588,7 +2600,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label12</value>
   </data>
   <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2615,7 +2627,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label13</value>
   </data>
   <data name="&gt;&gt;Label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2648,7 +2660,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label14</value>
   </data>
   <data name="&gt;&gt;Label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2675,7 +2687,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button10</value>
   </data>
   <data name="&gt;&gt;Button10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2702,7 +2714,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button11</value>
   </data>
   <data name="&gt;&gt;Button11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button11.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2729,7 +2741,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button12</value>
   </data>
   <data name="&gt;&gt;Button12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button12.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -2741,7 +2753,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>GraphCurves</value>
   </data>
   <data name="&gt;&gt;GraphCurves.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.19406, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;GraphCurves.Parent" xml:space="preserve">
     <value>Panel8</value>
@@ -2753,7 +2765,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label15</value>
   </data>
   <data name="&gt;&gt;Label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
     <value>Panel8</value>
@@ -2777,34 +2789,13 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel8</value>
   </data>
   <data name="&gt;&gt;Panel8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel8.Parent" xml:space="preserve">
     <value>P3</value>
   </data>
   <data name="&gt;&gt;Panel8.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="GraphCurves.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 36</value>
-  </data>
-  <data name="GraphCurves.Size" type="System.Drawing.Size, System.Drawing">
-    <value>587, 304</value>
-  </data>
-  <data name="GraphCurves.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;GraphCurves.Name" xml:space="preserve">
-    <value>GraphCurves</value>
-  </data>
-  <data name="&gt;&gt;GraphCurves.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
-  </data>
-  <data name="&gt;&gt;GraphCurves.Parent" xml:space="preserve">
-    <value>Panel8</value>
-  </data>
-  <data name="&gt;&gt;GraphCurves.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2831,7 +2822,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label15</value>
   </data>
   <data name="&gt;&gt;Label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
     <value>Panel8</value>
@@ -2855,7 +2846,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel9</value>
   </data>
   <data name="&gt;&gt;Panel9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel9.Parent" xml:space="preserve">
     <value>P4</value>
@@ -2867,7 +2858,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel10</value>
   </data>
   <data name="&gt;&gt;Panel10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel10.Parent" xml:space="preserve">
     <value>P4</value>
@@ -2891,7 +2882,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>P4</value>
   </data>
   <data name="&gt;&gt;P4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P4.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2927,7 +2918,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label16</value>
   </data>
   <data name="&gt;&gt;Label16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -2939,7 +2930,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label17</value>
   </data>
   <data name="&gt;&gt;Label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -2951,7 +2942,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label18</value>
   </data>
   <data name="&gt;&gt;Label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label18.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -2963,7 +2954,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button13</value>
   </data>
   <data name="&gt;&gt;Button13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button13.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -2975,7 +2966,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button14</value>
   </data>
   <data name="&gt;&gt;Button14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button14.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -2987,7 +2978,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button15</value>
   </data>
   <data name="&gt;&gt;Button15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button15.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -3011,7 +3002,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel9</value>
   </data>
   <data name="&gt;&gt;Panel9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel9.Parent" xml:space="preserve">
     <value>P4</value>
@@ -3041,7 +3032,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label16</value>
   </data>
   <data name="&gt;&gt;Label16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -3068,7 +3059,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label17</value>
   </data>
   <data name="&gt;&gt;Label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -3101,7 +3092,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label18</value>
   </data>
   <data name="&gt;&gt;Label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label18.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -3128,7 +3119,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button13</value>
   </data>
   <data name="&gt;&gt;Button13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button13.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -3155,7 +3146,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button14</value>
   </data>
   <data name="&gt;&gt;Button14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button14.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -3182,7 +3173,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button15</value>
   </data>
   <data name="&gt;&gt;Button15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button15.Parent" xml:space="preserve">
     <value>Panel9</value>
@@ -3194,7 +3185,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxTempCuts</value>
   </data>
   <data name="&gt;&gt;TextBoxTempCuts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxTempCuts.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3206,7 +3197,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxNumberOfPseudos</value>
   </data>
   <data name="&gt;&gt;TextBoxNumberOfPseudos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxNumberOfPseudos.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3218,7 +3209,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonGenOpt2</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt2.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3230,7 +3221,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonGenOpt1</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt1.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3242,7 +3233,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label19</value>
   </data>
   <data name="&gt;&gt;Label19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3266,7 +3257,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel10</value>
   </data>
   <data name="&gt;&gt;Panel10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel10.Parent" xml:space="preserve">
     <value>P4</value>
@@ -3290,7 +3281,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxTempCuts</value>
   </data>
   <data name="&gt;&gt;TextBoxTempCuts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxTempCuts.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3317,7 +3308,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>TextBoxNumberOfPseudos</value>
   </data>
   <data name="&gt;&gt;TextBoxNumberOfPseudos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBoxNumberOfPseudos.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3347,7 +3338,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonGenOpt2</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt2.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3377,7 +3368,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>RadioButtonGenOpt1</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButtonGenOpt1.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3410,7 +3401,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label19</value>
   </data>
   <data name="&gt;&gt;Label19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
     <value>Panel10</value>
@@ -3434,7 +3425,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel11</value>
   </data>
   <data name="&gt;&gt;Panel11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel11.Parent" xml:space="preserve">
     <value>P5</value>
@@ -3446,7 +3437,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel12</value>
   </data>
   <data name="&gt;&gt;Panel12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel12.Parent" xml:space="preserve">
     <value>P5</value>
@@ -3470,7 +3461,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>P5</value>
   </data>
   <data name="&gt;&gt;P5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P5.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3506,7 +3497,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label20</value>
   </data>
   <data name="&gt;&gt;Label20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label20.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3518,7 +3509,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label21</value>
   </data>
   <data name="&gt;&gt;Label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label21.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3530,7 +3521,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label22</value>
   </data>
   <data name="&gt;&gt;Label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3542,7 +3533,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button16</value>
   </data>
   <data name="&gt;&gt;Button16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button16.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3554,7 +3545,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button17</value>
   </data>
   <data name="&gt;&gt;Button17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button17.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3566,7 +3557,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button18</value>
   </data>
   <data name="&gt;&gt;Button18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button18.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3590,7 +3581,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel11</value>
   </data>
   <data name="&gt;&gt;Panel11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel11.Parent" xml:space="preserve">
     <value>P5</value>
@@ -3620,7 +3611,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label20</value>
   </data>
   <data name="&gt;&gt;Label20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label20.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3647,7 +3638,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label21</value>
   </data>
   <data name="&gt;&gt;Label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label21.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3680,7 +3671,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label22</value>
   </data>
   <data name="&gt;&gt;Label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3707,7 +3698,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button16</value>
   </data>
   <data name="&gt;&gt;Button16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button16.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3734,7 +3725,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button17</value>
   </data>
   <data name="&gt;&gt;Button17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button17.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3761,7 +3752,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button18</value>
   </data>
   <data name="&gt;&gt;Button18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button18.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -3773,7 +3764,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>GraphComps</value>
   </data>
   <data name="&gt;&gt;GraphComps.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.19406, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;GraphComps.Parent" xml:space="preserve">
     <value>Panel12</value>
@@ -3785,7 +3776,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label23</value>
   </data>
   <data name="&gt;&gt;Label23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label23.Parent" xml:space="preserve">
     <value>Panel12</value>
@@ -3809,34 +3800,13 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel12</value>
   </data>
   <data name="&gt;&gt;Panel12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel12.Parent" xml:space="preserve">
     <value>P5</value>
   </data>
   <data name="&gt;&gt;Panel12.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="GraphComps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 35</value>
-  </data>
-  <data name="GraphComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>587, 305</value>
-  </data>
-  <data name="GraphComps.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;GraphComps.Name" xml:space="preserve">
-    <value>GraphComps</value>
-  </data>
-  <data name="&gt;&gt;GraphComps.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
-  </data>
-  <data name="&gt;&gt;GraphComps.Parent" xml:space="preserve">
-    <value>Panel12</value>
-  </data>
-  <data name="&gt;&gt;GraphComps.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="Label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3863,7 +3833,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label23</value>
   </data>
   <data name="&gt;&gt;Label23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label23.Parent" xml:space="preserve">
     <value>Panel12</value>
@@ -3887,7 +3857,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel13</value>
   </data>
   <data name="&gt;&gt;Panel13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel13.Parent" xml:space="preserve">
     <value>P6</value>
@@ -3899,7 +3869,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel14</value>
   </data>
   <data name="&gt;&gt;Panel14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel14.Parent" xml:space="preserve">
     <value>P6</value>
@@ -3923,7 +3893,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>P6</value>
   </data>
   <data name="&gt;&gt;P6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P6.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3959,7 +3929,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label24</value>
   </data>
   <data name="&gt;&gt;Label24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label24.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -3971,7 +3941,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label25</value>
   </data>
   <data name="&gt;&gt;Label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label25.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -3983,7 +3953,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label26</value>
   </data>
   <data name="&gt;&gt;Label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label26.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -3995,7 +3965,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button19</value>
   </data>
   <data name="&gt;&gt;Button19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button19.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4007,7 +3977,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button20</value>
   </data>
   <data name="&gt;&gt;Button20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button20.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4019,7 +3989,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button21</value>
   </data>
   <data name="&gt;&gt;Button21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button21.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4043,7 +4013,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel13</value>
   </data>
   <data name="&gt;&gt;Panel13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel13.Parent" xml:space="preserve">
     <value>P6</value>
@@ -4073,7 +4043,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label24</value>
   </data>
   <data name="&gt;&gt;Label24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label24.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4100,7 +4070,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label25</value>
   </data>
   <data name="&gt;&gt;Label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label25.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4133,7 +4103,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label26</value>
   </data>
   <data name="&gt;&gt;Label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label26.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4160,7 +4130,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button19</value>
   </data>
   <data name="&gt;&gt;Button19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button19.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4187,7 +4157,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button20</value>
   </data>
   <data name="&gt;&gt;Button20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button20.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4214,7 +4184,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Button21</value>
   </data>
   <data name="&gt;&gt;Button21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button21.Parent" xml:space="preserve">
     <value>Panel13</value>
@@ -4226,7 +4196,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxADJZRA</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJZRA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJZRA.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4238,7 +4208,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxADJAF</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJAF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJAF.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4250,7 +4220,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxViscM</value>
   </data>
   <data name="&gt;&gt;ComboBoxViscM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxViscM.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4262,7 +4232,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxMW</value>
   </data>
   <data name="&gt;&gt;ComboBoxMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxMW.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4274,7 +4244,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxSG</value>
   </data>
   <data name="&gt;&gt;ComboBoxSG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxSG.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4286,7 +4256,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxAF</value>
   </data>
   <data name="&gt;&gt;ComboBoxAF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxAF.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4298,7 +4268,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxPC</value>
   </data>
   <data name="&gt;&gt;ComboBoxPC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxPC.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4310,7 +4280,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label33</value>
   </data>
   <data name="&gt;&gt;Label33.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label33.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4322,7 +4292,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label32</value>
   </data>
   <data name="&gt;&gt;Label32.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label32.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4334,7 +4304,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label31</value>
   </data>
   <data name="&gt;&gt;Label31.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label31.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4346,7 +4316,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label30</value>
   </data>
   <data name="&gt;&gt;Label30.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label30.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4358,7 +4328,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label29</value>
   </data>
   <data name="&gt;&gt;Label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label29.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4370,7 +4340,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxTC</value>
   </data>
   <data name="&gt;&gt;ComboBoxTC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxTC.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4382,7 +4352,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label28</value>
   </data>
   <data name="&gt;&gt;Label28.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label28.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4394,7 +4364,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label27</value>
   </data>
   <data name="&gt;&gt;Label27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label27.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4418,7 +4388,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel14</value>
   </data>
   <data name="&gt;&gt;Panel14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel14.Parent" xml:space="preserve">
     <value>P6</value>
@@ -4448,7 +4418,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxADJZRA</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJZRA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJZRA.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4478,7 +4448,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>CheckBoxADJAF</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJAF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJAF.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4505,7 +4475,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxViscM</value>
   </data>
   <data name="&gt;&gt;ComboBoxViscM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxViscM.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4538,7 +4508,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxMW</value>
   </data>
   <data name="&gt;&gt;ComboBoxMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxMW.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4565,7 +4535,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxSG</value>
   </data>
   <data name="&gt;&gt;ComboBoxSG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxSG.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4592,7 +4562,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxAF</value>
   </data>
   <data name="&gt;&gt;ComboBoxAF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxAF.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4622,7 +4592,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxPC</value>
   </data>
   <data name="&gt;&gt;ComboBoxPC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxPC.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4652,7 +4622,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label33</value>
   </data>
   <data name="&gt;&gt;Label33.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label33.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4682,7 +4652,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label32</value>
   </data>
   <data name="&gt;&gt;Label32.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label32.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4712,7 +4682,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label31</value>
   </data>
   <data name="&gt;&gt;Label31.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label31.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4742,7 +4712,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label30</value>
   </data>
   <data name="&gt;&gt;Label30.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label30.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4772,7 +4742,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label29</value>
   </data>
   <data name="&gt;&gt;Label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label29.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4805,7 +4775,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>ComboBoxTC</value>
   </data>
   <data name="&gt;&gt;ComboBoxTC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxTC.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4835,7 +4805,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label28</value>
   </data>
   <data name="&gt;&gt;Label28.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label28.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4868,7 +4838,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label27</value>
   </data>
   <data name="&gt;&gt;Label27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label27.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -4880,7 +4850,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel16</value>
   </data>
   <data name="&gt;&gt;Panel16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel16.Parent" xml:space="preserve">
     <value>P7</value>
@@ -4904,7 +4874,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel15</value>
   </data>
   <data name="&gt;&gt;Panel15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel15.Parent" xml:space="preserve">
     <value>P7</value>
@@ -4928,7 +4898,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>P7</value>
   </data>
   <data name="&gt;&gt;P7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P7.Parent" xml:space="preserve">
     <value>$this</value>
@@ -4936,335 +4906,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;P7.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="LabelWithDivider8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LabelWithDivider8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 350</value>
-  </data>
-  <data name="LabelWithDivider8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 10</value>
-  </data>
-  <data name="LabelWithDivider8.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;LabelWithDivider8.Name" xml:space="preserve">
-    <value>LabelWithDivider8</value>
-  </data>
-  <data name="&gt;&gt;LabelWithDivider8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;LabelWithDivider8.Parent" xml:space="preserve">
-    <value>P7</value>
-  </data>
-  <data name="&gt;&gt;LabelWithDivider8.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Name" xml:space="preserve">
-    <value>TextBoxStreamName</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Label34.Name" xml:space="preserve">
-    <value>Label34</value>
-  </data>
-  <data name="&gt;&gt;Label34.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label34.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Label34.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;Label35.Name" xml:space="preserve">
-    <value>Label35</value>
-  </data>
-  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label35.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Label35.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
-    <value>Label36</value>
-  </data>
-  <data name="&gt;&gt;Label36.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label36.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Label36.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;Button22.Name" xml:space="preserve">
-    <value>Button22</value>
-  </data>
-  <data name="&gt;&gt;Button22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button22.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Button22.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;Button23.Name" xml:space="preserve">
-    <value>Button23</value>
-  </data>
-  <data name="&gt;&gt;Button23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button23.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Button23.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;Button24.Name" xml:space="preserve">
-    <value>Button24</value>
-  </data>
-  <data name="&gt;&gt;Button24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button24.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Button24.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="Panel15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="Panel15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 357</value>
-  </data>
-  <data name="Panel15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 119</value>
-  </data>
-  <data name="Panel15.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;Panel15.Name" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Panel15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Panel15.Parent" xml:space="preserve">
-    <value>P7</value>
-  </data>
-  <data name="&gt;&gt;Panel15.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="TextBoxStreamName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 87</value>
-  </data>
-  <data name="TextBoxStreamName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 20</value>
-  </data>
-  <data name="TextBoxStreamName.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Name" xml:space="preserve">
-    <value>TextBoxStreamName</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Label34.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 90</value>
-  </data>
-  <data name="Label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
-  <data name="Label34.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="Label34.Text" xml:space="preserve">
-    <value>Nome da corrente</value>
-  </data>
-  <data name="&gt;&gt;Label34.Name" xml:space="preserve">
-    <value>Label34</value>
-  </data>
-  <data name="&gt;&gt;Label34.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label34.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Label34.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
-  </data>
-  <data name="Label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 57</value>
-  </data>
-  <data name="Label35.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="Label35.Text" xml:space="preserve">
-    <value>A tabela acima mostra os resultados da caracterização. Clique em 'Finalizar' para sair e criar uma corrente de matéria com os componentes gerados.</value>
-  </data>
-  <data name="&gt;&gt;Label35.Name" xml:space="preserve">
-    <value>Label35</value>
-  </data>
-  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label35.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Label35.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="Label36.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label36.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
-  </data>
-  <data name="Label36.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
-  </data>
-  <data name="Label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 16</value>
-  </data>
-  <data name="Label36.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="Label36.Text" xml:space="preserve">
-    <value>Passo 7 - Resultados</value>
-  </data>
-  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
-    <value>Label36</value>
-  </data>
-  <data name="&gt;&gt;Label36.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label36.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Label36.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="Button22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 84</value>
-  </data>
-  <data name="Button22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="Button22.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="Button22.Text" xml:space="preserve">
-    <value>Cancelar</value>
-  </data>
-  <data name="&gt;&gt;Button22.Name" xml:space="preserve">
-    <value>Button22</value>
-  </data>
-  <data name="&gt;&gt;Button22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button22.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Button22.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="Button23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>449, 84</value>
-  </data>
-  <data name="Button23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="Button23.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="Button23.Text" xml:space="preserve">
-    <value>&lt; Anterior</value>
-  </data>
-  <data name="&gt;&gt;Button23.Name" xml:space="preserve">
-    <value>Button23</value>
-  </data>
-  <data name="&gt;&gt;Button23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button23.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Button23.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="Button24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>530, 84</value>
-  </data>
-  <data name="Button24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="Button24.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="Button24.Text" xml:space="preserve">
-    <value>Finalizar</value>
-  </data>
-  <data name="&gt;&gt;Button24.Name" xml:space="preserve">
-    <value>Button24</value>
-  </data>
-  <data name="&gt;&gt;Button24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button24.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;Button24.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="&gt;&gt;DataGridView2.Name" xml:space="preserve">
     <value>DataGridView2</value>
   </data>
   <data name="&gt;&gt;DataGridView2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridView2.Parent" xml:space="preserve">
     <value>Panel16</value>
@@ -5276,7 +4922,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label37</value>
   </data>
   <data name="&gt;&gt;Label37.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label37.Parent" xml:space="preserve">
     <value>Panel16</value>
@@ -5300,7 +4946,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel16</value>
   </data>
   <data name="&gt;&gt;Panel16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel16.Parent" xml:space="preserve">
     <value>P7</value>
@@ -5308,7 +4954,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel16.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
@@ -5317,7 +4963,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column4.HeaderText" xml:space="preserve">
@@ -5326,7 +4972,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Column4.Width" type="System.Int32, mscorlib">
     <value>87</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
@@ -5335,7 +4981,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column3.HeaderText" xml:space="preserve">
@@ -5344,7 +4990,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Column3.Width" type="System.Int32, mscorlib">
     <value>79</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
@@ -5353,7 +4999,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
@@ -5362,7 +5008,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
@@ -5371,7 +5017,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
@@ -5380,25 +5026,25 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
-  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Visc 1</value>
   </data>
   <data name="Column1.Width" type="System.Int32, mscorlib">
-    <value>52</value>
+    <value>57</value>
   </data>
-  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Visc 2</value>
   </data>
   <data name="Column2.Width" type="System.Int32, mscorlib">
-    <value>52</value>
+    <value>57</value>
   </data>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column5.HeaderText" xml:space="preserve">
@@ -5407,14 +5053,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>99</value>
   </data>
-  <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>SRK VShift (ci/bi)</value>
   </data>
   <data name="Column6.Width" type="System.Int32, mscorlib">
-    <value>106</value>
+    <value>105</value>
   </data>
   <data name="DataGridView2.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 35</value>
@@ -5429,7 +5075,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>DataGridView2</value>
   </data>
   <data name="&gt;&gt;DataGridView2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridView2.Parent" xml:space="preserve">
     <value>Panel16</value>
@@ -5462,7 +5108,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Label37</value>
   </data>
   <data name="&gt;&gt;Label37.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label37.Parent" xml:space="preserve">
     <value>Panel16</value>
@@ -5470,7 +5116,376 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label37.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="LabelWithDivider8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LabelWithDivider8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 350</value>
+  </data>
+  <data name="LabelWithDivider8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 10</value>
+  </data>
+  <data name="LabelWithDivider8.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;LabelWithDivider8.Name" xml:space="preserve">
+    <value>LabelWithDivider8</value>
+  </data>
+  <data name="&gt;&gt;LabelWithDivider8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;LabelWithDivider8.Parent" xml:space="preserve">
+    <value>P7</value>
+  </data>
+  <data name="&gt;&gt;LabelWithDivider8.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.Name" xml:space="preserve">
+    <value>TextBoxStreamName</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Label34.Name" xml:space="preserve">
+    <value>Label34</value>
+  </data>
+  <data name="&gt;&gt;Label34.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label34.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Label34.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Label35.Name" xml:space="preserve">
+    <value>Label35</value>
+  </data>
+  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label35.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Label35.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
+    <value>Label36</value>
+  </data>
+  <data name="&gt;&gt;Label36.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label36.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Label36.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;Button22.Name" xml:space="preserve">
+    <value>Button22</value>
+  </data>
+  <data name="&gt;&gt;Button22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button22.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Button22.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Button23.Name" xml:space="preserve">
+    <value>Button23</value>
+  </data>
+  <data name="&gt;&gt;Button23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button23.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Button23.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;Button24.Name" xml:space="preserve">
+    <value>Button24</value>
+  </data>
+  <data name="&gt;&gt;Button24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button24.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Button24.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="Panel15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="Panel15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 357</value>
+  </data>
+  <data name="Panel15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 119</value>
+  </data>
+  <data name="Panel15.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Panel15.Name" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Panel15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Panel15.Parent" xml:space="preserve">
+    <value>P7</value>
+  </data>
+  <data name="&gt;&gt;Panel15.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="TextBoxStreamName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 87</value>
+  </data>
+  <data name="TextBoxStreamName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 20</value>
+  </data>
+  <data name="TextBoxStreamName.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.Name" xml:space="preserve">
+    <value>TextBoxStreamName</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Label34.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 90</value>
+  </data>
+  <data name="Label34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="Label34.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="Label34.Text" xml:space="preserve">
+    <value>Nome da corrente</value>
+  </data>
+  <data name="&gt;&gt;Label34.Name" xml:space="preserve">
+    <value>Label34</value>
+  </data>
+  <data name="&gt;&gt;Label34.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label34.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Label34.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Label35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
+  </data>
+  <data name="Label35.Size" type="System.Drawing.Size, System.Drawing">
+    <value>593, 57</value>
+  </data>
+  <data name="Label35.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="Label35.Text" xml:space="preserve">
+    <value>A tabela acima mostra os resultados da caracterização. Clique em 'Finalizar' para sair e criar uma corrente de matéria com os componentes gerados.</value>
+  </data>
+  <data name="&gt;&gt;Label35.Name" xml:space="preserve">
+    <value>Label35</value>
+  </data>
+  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label35.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Label35.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Label36.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label36.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Label36.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label36.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
+  <data name="Label36.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 16</value>
+  </data>
+  <data name="Label36.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="Label36.Text" xml:space="preserve">
+    <value>Passo 7 - Resultados</value>
+  </data>
+  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
+    <value>Label36</value>
+  </data>
+  <data name="&gt;&gt;Label36.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label36.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Label36.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Button22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>368, 84</value>
+  </data>
+  <data name="Button22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="Button22.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="Button22.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="&gt;&gt;Button22.Name" xml:space="preserve">
+    <value>Button22</value>
+  </data>
+  <data name="&gt;&gt;Button22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button22.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Button22.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Button23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>449, 84</value>
+  </data>
+  <data name="Button23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="Button23.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Button23.Text" xml:space="preserve">
+    <value>&lt; Anterior</value>
+  </data>
+  <data name="&gt;&gt;Button23.Name" xml:space="preserve">
+    <value>Button23</value>
+  </data>
+  <data name="&gt;&gt;Button23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button23.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Button23.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Button24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>530, 84</value>
+  </data>
+  <data name="Button24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="Button24.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Button24.Text" xml:space="preserve">
+    <value>Finalizar</value>
+  </data>
+  <data name="&gt;&gt;Button24.Name" xml:space="preserve">
+    <value>Button24</value>
+  </data>
+  <data name="&gt;&gt;Button24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button24.Parent" xml:space="preserve">
+    <value>Panel15</value>
+  </data>
+  <data name="&gt;&gt;Button24.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="GraphCurves.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 36</value>
+  </data>
+  <data name="GraphCurves.Size" type="System.Drawing.Size, System.Drawing">
+    <value>587, 304</value>
+  </data>
+  <data name="GraphCurves.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;GraphCurves.Name" xml:space="preserve">
+    <value>GraphCurves</value>
+  </data>
+  <data name="&gt;&gt;GraphCurves.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.19406, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GraphCurves.Parent" xml:space="preserve">
+    <value>Panel8</value>
+  </data>
+  <data name="&gt;&gt;GraphCurves.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="GraphComps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 35</value>
+  </data>
+  <data name="GraphComps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>587, 305</value>
+  </data>
+  <data name="GraphComps.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;GraphComps.Name" xml:space="preserve">
+    <value>GraphComps</value>
+  </data>
+  <data name="&gt;&gt;GraphComps.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.19406, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GraphComps.Parent" xml:space="preserve">
+    <value>Panel12</value>
+  </data>
+  <data name="&gt;&gt;GraphComps.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -5478,6 +5493,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>614, 476</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -5489,114 +5507,114 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>vap</value>
   </data>
   <data name="&gt;&gt;vap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;temp.Name" xml:space="preserve">
     <value>temp</value>
   </data>
   <data name="&gt;&gt;temp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mm.Name" xml:space="preserve">
     <value>mm</value>
   </data>
   <data name="&gt;&gt;mm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dens.Name" xml:space="preserve">
     <value>dens</value>
   </data>
   <data name="&gt;&gt;dens.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;visc1.Name" xml:space="preserve">
     <value>visc1</value>
   </data>
   <data name="&gt;&gt;visc1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;visc2.Name" xml:space="preserve">
     <value>visc2</value>
   </data>
   <data name="&gt;&gt;visc2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn1</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column4.Name" xml:space="preserve">
     <value>Column4</value>
   </data>
   <data name="&gt;&gt;Column4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn2</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column3.Name" xml:space="preserve">
     <value>Column3</value>
   </data>
   <data name="&gt;&gt;Column3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn3</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn4.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn4</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn5.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn5</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn6.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn6</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
   <data name="&gt;&gt;Column2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column5.Name" xml:space="preserve">
     <value>Column5</value>
   </data>
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column6.Name" xml:space="preserve">
     <value>Column6</value>
   </data>
   <data name="&gt;&gt;Column6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DCCharacterizationWizard</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

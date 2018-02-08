@@ -22,168 +22,168 @@ Partial Class DCCharacterizationWizard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DCCharacterizationWizard))
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.P0 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.Panel0 = New System.Windows.Forms.Panel
-        Me.P1 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.Button27 = New System.Windows.Forms.Button
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Button4 = New System.Windows.Forms.Button
-        Me.Button5 = New System.Windows.Forms.Button
-        Me.Button6 = New System.Windows.Forms.Button
-        Me.Panel4 = New System.Windows.Forms.Panel
-        Me.TextBoxKAPI = New System.Windows.Forms.TextBox
-        Me.Label45 = New System.Windows.Forms.Label
-        Me.TextBoxBulkMW = New System.Windows.Forms.TextBox
-        Me.TextBoxBulkD = New System.Windows.Forms.TextBox
-        Me.Label44 = New System.Windows.Forms.Label
-        Me.Label43 = New System.Windows.Forms.Label
-        Me.Label38 = New System.Windows.Forms.Label
-        Me.ComboBoxBasis = New System.Windows.Forms.ComboBox
-        Me.Label42 = New System.Windows.Forms.Label
-        Me.RadioButtonD20 = New System.Windows.Forms.RadioButton
-        Me.RadioButtonD60 = New System.Windows.Forms.RadioButton
-        Me.Label41 = New System.Windows.Forms.Label
-        Me.TextBoxVT2 = New System.Windows.Forms.TextBox
-        Me.Label40 = New System.Windows.Forms.Label
-        Me.TextBoxVT1 = New System.Windows.Forms.TextBox
-        Me.Label39 = New System.Windows.Forms.Label
-        Me.ComboBoxDistMethod = New System.Windows.Forms.ComboBox
-        Me.CheckBoxVISC = New System.Windows.Forms.CheckBox
-        Me.CheckBoxSG = New System.Windows.Forms.CheckBox
-        Me.CheckBoxMW = New System.Windows.Forms.CheckBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox
-        Me.P2 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider3 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel5 = New System.Windows.Forms.Panel
-        Me.Button26 = New System.Windows.Forms.Button
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Button7 = New System.Windows.Forms.Button
-        Me.Button8 = New System.Windows.Forms.Button
-        Me.Button9 = New System.Windows.Forms.Button
-        Me.Panel6 = New System.Windows.Forms.Panel
-        Me.Button25 = New System.Windows.Forms.Button
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.vap = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.temp = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.mm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.dens = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.visc1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.visc2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.P3 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider4 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel7 = New System.Windows.Forms.Panel
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.Button10 = New System.Windows.Forms.Button
-        Me.Button11 = New System.Windows.Forms.Button
-        Me.Button12 = New System.Windows.Forms.Button
-        Me.Panel8 = New System.Windows.Forms.Panel
-        Me.GraphCurves = New ZedGraph.ZedGraphControl
-        Me.Label15 = New System.Windows.Forms.Label
-        Me.P4 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider5 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel9 = New System.Windows.Forms.Panel
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.Label18 = New System.Windows.Forms.Label
-        Me.Button13 = New System.Windows.Forms.Button
-        Me.Button14 = New System.Windows.Forms.Button
-        Me.Button15 = New System.Windows.Forms.Button
-        Me.Panel10 = New System.Windows.Forms.Panel
-        Me.TextBoxTempCuts = New System.Windows.Forms.TextBox
-        Me.TextBoxNumberOfPseudos = New System.Windows.Forms.TextBox
-        Me.RadioButtonGenOpt2 = New System.Windows.Forms.RadioButton
-        Me.RadioButtonGenOpt1 = New System.Windows.Forms.RadioButton
-        Me.Label19 = New System.Windows.Forms.Label
-        Me.P5 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider6 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel11 = New System.Windows.Forms.Panel
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.Label21 = New System.Windows.Forms.Label
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.Button16 = New System.Windows.Forms.Button
-        Me.Button17 = New System.Windows.Forms.Button
-        Me.Button18 = New System.Windows.Forms.Button
-        Me.Panel12 = New System.Windows.Forms.Panel
-        Me.GraphComps = New ZedGraph.ZedGraphControl
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.P6 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider7 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel13 = New System.Windows.Forms.Panel
-        Me.Label24 = New System.Windows.Forms.Label
-        Me.Label25 = New System.Windows.Forms.Label
-        Me.Label26 = New System.Windows.Forms.Label
-        Me.Button19 = New System.Windows.Forms.Button
-        Me.Button20 = New System.Windows.Forms.Button
-        Me.Button21 = New System.Windows.Forms.Button
-        Me.Panel14 = New System.Windows.Forms.Panel
-        Me.CheckBoxADJZRA = New System.Windows.Forms.CheckBox
-        Me.CheckBoxADJAF = New System.Windows.Forms.CheckBox
-        Me.ComboBoxViscM = New System.Windows.Forms.ComboBox
-        Me.ComboBoxMW = New System.Windows.Forms.ComboBox
-        Me.ComboBoxSG = New System.Windows.Forms.ComboBox
-        Me.ComboBoxAF = New System.Windows.Forms.ComboBox
-        Me.ComboBoxPC = New System.Windows.Forms.ComboBox
-        Me.Label33 = New System.Windows.Forms.Label
-        Me.Label32 = New System.Windows.Forms.Label
-        Me.Label31 = New System.Windows.Forms.Label
-        Me.Label30 = New System.Windows.Forms.Label
-        Me.Label29 = New System.Windows.Forms.Label
-        Me.ComboBoxTC = New System.Windows.Forms.ComboBox
-        Me.Label28 = New System.Windows.Forms.Label
-        Me.Label27 = New System.Windows.Forms.Label
-        Me.P7 = New System.Windows.Forms.Panel
-        Me.LabelWithDivider8 = New System.Windows.Forms.LabelWithDivider
-        Me.Panel15 = New System.Windows.Forms.Panel
-        Me.TextBoxStreamName = New System.Windows.Forms.TextBox
-        Me.Label34 = New System.Windows.Forms.Label
-        Me.Label35 = New System.Windows.Forms.Label
-        Me.Label36 = New System.Windows.Forms.Label
-        Me.Button22 = New System.Windows.Forms.Button
-        Me.Button23 = New System.Windows.Forms.Button
-        Me.Button24 = New System.Windows.Forms.Button
-        Me.Panel16 = New System.Windows.Forms.Panel
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView
-        Me.Label37 = New System.Windows.Forms.Label
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.P0 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Panel0 = New System.Windows.Forms.Panel()
+        Me.P1 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Button27 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.TextBoxKAPI = New System.Windows.Forms.TextBox()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.TextBoxBulkMW = New System.Windows.Forms.TextBox()
+        Me.TextBoxBulkD = New System.Windows.Forms.TextBox()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.ComboBoxBasis = New System.Windows.Forms.ComboBox()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.RadioButtonD20 = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonD60 = New System.Windows.Forms.RadioButton()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.TextBoxVT2 = New System.Windows.Forms.TextBox()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.TextBoxVT1 = New System.Windows.Forms.TextBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.ComboBoxDistMethod = New System.Windows.Forms.ComboBox()
+        Me.CheckBoxVISC = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxSG = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxMW = New System.Windows.Forms.CheckBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.P2 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider3 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Button26 = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Button25 = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.vap = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.temp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dens = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.visc1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.visc2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.P3 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider4 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.P4 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider5 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.TextBoxTempCuts = New System.Windows.Forms.TextBox()
+        Me.TextBoxNumberOfPseudos = New System.Windows.Forms.TextBox()
+        Me.RadioButtonGenOpt2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonGenOpt1 = New System.Windows.Forms.RadioButton()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.P5 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider6 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Button16 = New System.Windows.Forms.Button()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.P6 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider7 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Panel14 = New System.Windows.Forms.Panel()
+        Me.CheckBoxADJZRA = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxADJAF = New System.Windows.Forms.CheckBox()
+        Me.ComboBoxViscM = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxMW = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxSG = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxAF = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxPC = New System.Windows.Forms.ComboBox()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.ComboBoxTC = New System.Windows.Forms.ComboBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.P7 = New System.Windows.Forms.Panel()
+        Me.Panel16 = New System.Windows.Forms.Panel()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.LabelWithDivider8 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel15 = New System.Windows.Forms.Panel()
+        Me.TextBoxStreamName = New System.Windows.Forms.TextBox()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Button22 = New System.Windows.Forms.Button()
+        Me.Button23 = New System.Windows.Forms.Button()
+        Me.Button24 = New System.Windows.Forms.Button()
+        Me.GraphCurves = New ZedGraph.ZedGraphControl()
+        Me.GraphComps = New ZedGraph.ZedGraphControl()
         Me.P0.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.P1.SuspendLayout()
@@ -206,9 +206,9 @@ Partial Class DCCharacterizationWizard
         Me.Panel13.SuspendLayout()
         Me.Panel14.SuspendLayout()
         Me.P7.SuspendLayout()
-        Me.Panel15.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel15.SuspendLayout()
         Me.SuspendLayout()
         '
         'P0
@@ -716,18 +716,6 @@ Partial Class DCCharacterizationWizard
         resources.ApplyResources(Me.Panel8, "Panel8")
         Me.Panel8.Name = "Panel8"
         '
-        'GraphCurves
-        '
-        resources.ApplyResources(Me.GraphCurves, "GraphCurves")
-        Me.GraphCurves.Name = "GraphCurves"
-        Me.GraphCurves.ScrollGrace = 0
-        Me.GraphCurves.ScrollMaxX = 0
-        Me.GraphCurves.ScrollMaxY = 0
-        Me.GraphCurves.ScrollMaxY2 = 0
-        Me.GraphCurves.ScrollMinX = 0
-        Me.GraphCurves.ScrollMinY = 0
-        Me.GraphCurves.ScrollMinY2 = 0
-        '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
@@ -897,18 +885,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel12.Controls.Add(Me.Label23)
         resources.ApplyResources(Me.Panel12, "Panel12")
         Me.Panel12.Name = "Panel12"
-        '
-        'GraphComps
-        '
-        resources.ApplyResources(Me.GraphComps, "GraphComps")
-        Me.GraphComps.Name = "GraphComps"
-        Me.GraphComps.ScrollGrace = 0
-        Me.GraphComps.ScrollMaxX = 0
-        Me.GraphComps.ScrollMaxY = 0
-        Me.GraphComps.ScrollMaxY2 = 0
-        Me.GraphComps.ScrollMinX = 0
-        Me.GraphComps.ScrollMinY = 0
-        Me.GraphComps.ScrollMinY2 = 0
         '
         'Label23
         '
@@ -1099,63 +1075,6 @@ Partial Class DCCharacterizationWizard
         resources.ApplyResources(Me.P7, "P7")
         Me.P7.Name = "P7"
         '
-        'LabelWithDivider8
-        '
-        Me.LabelWithDivider8.BackColor = System.Drawing.Color.White
-        resources.ApplyResources(Me.LabelWithDivider8, "LabelWithDivider8")
-        Me.LabelWithDivider8.Name = "LabelWithDivider8"
-        '
-        'Panel15
-        '
-        Me.Panel15.BackColor = System.Drawing.Color.White
-        Me.Panel15.Controls.Add(Me.TextBoxStreamName)
-        Me.Panel15.Controls.Add(Me.Label34)
-        Me.Panel15.Controls.Add(Me.Label35)
-        Me.Panel15.Controls.Add(Me.Label36)
-        Me.Panel15.Controls.Add(Me.Button22)
-        Me.Panel15.Controls.Add(Me.Button23)
-        Me.Panel15.Controls.Add(Me.Button24)
-        resources.ApplyResources(Me.Panel15, "Panel15")
-        Me.Panel15.Name = "Panel15"
-        '
-        'TextBoxStreamName
-        '
-        resources.ApplyResources(Me.TextBoxStreamName, "TextBoxStreamName")
-        Me.TextBoxStreamName.Name = "TextBoxStreamName"
-        '
-        'Label34
-        '
-        resources.ApplyResources(Me.Label34, "Label34")
-        Me.Label34.Name = "Label34"
-        '
-        'Label35
-        '
-        resources.ApplyResources(Me.Label35, "Label35")
-        Me.Label35.Name = "Label35"
-        '
-        'Label36
-        '
-        resources.ApplyResources(Me.Label36, "Label36")
-        Me.Label36.Name = "Label36"
-        '
-        'Button22
-        '
-        resources.ApplyResources(Me.Button22, "Button22")
-        Me.Button22.Name = "Button22"
-        Me.Button22.UseVisualStyleBackColor = True
-        '
-        'Button23
-        '
-        resources.ApplyResources(Me.Button23, "Button23")
-        Me.Button23.Name = "Button23"
-        Me.Button23.UseVisualStyleBackColor = True
-        '
-        'Button24
-        '
-        resources.ApplyResources(Me.Button24, "Button24")
-        Me.Button24.Name = "Button24"
-        Me.Button24.UseVisualStyleBackColor = True
-        '
         'Panel16
         '
         Me.Panel16.Controls.Add(Me.DataGridView2)
@@ -1202,11 +1121,6 @@ Partial Class DCCharacterizationWizard
         Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle16
         Me.DataGridView2.RowHeadersVisible = False
         Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'Label37
-        '
-        resources.ApplyResources(Me.Label37, "Label37")
-        Me.Label37.Name = "Label37"
         '
         'DataGridViewTextBoxColumn1
         '
@@ -1280,6 +1194,94 @@ Partial Class DCCharacterizationWizard
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
+        'Label37
+        '
+        resources.ApplyResources(Me.Label37, "Label37")
+        Me.Label37.Name = "Label37"
+        '
+        'LabelWithDivider8
+        '
+        Me.LabelWithDivider8.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.LabelWithDivider8, "LabelWithDivider8")
+        Me.LabelWithDivider8.Name = "LabelWithDivider8"
+        '
+        'Panel15
+        '
+        Me.Panel15.BackColor = System.Drawing.Color.White
+        Me.Panel15.Controls.Add(Me.TextBoxStreamName)
+        Me.Panel15.Controls.Add(Me.Label34)
+        Me.Panel15.Controls.Add(Me.Label35)
+        Me.Panel15.Controls.Add(Me.Label36)
+        Me.Panel15.Controls.Add(Me.Button22)
+        Me.Panel15.Controls.Add(Me.Button23)
+        Me.Panel15.Controls.Add(Me.Button24)
+        resources.ApplyResources(Me.Panel15, "Panel15")
+        Me.Panel15.Name = "Panel15"
+        '
+        'TextBoxStreamName
+        '
+        resources.ApplyResources(Me.TextBoxStreamName, "TextBoxStreamName")
+        Me.TextBoxStreamName.Name = "TextBoxStreamName"
+        '
+        'Label34
+        '
+        resources.ApplyResources(Me.Label34, "Label34")
+        Me.Label34.Name = "Label34"
+        '
+        'Label35
+        '
+        resources.ApplyResources(Me.Label35, "Label35")
+        Me.Label35.Name = "Label35"
+        '
+        'Label36
+        '
+        resources.ApplyResources(Me.Label36, "Label36")
+        Me.Label36.Name = "Label36"
+        '
+        'Button22
+        '
+        resources.ApplyResources(Me.Button22, "Button22")
+        Me.Button22.Name = "Button22"
+        Me.Button22.UseVisualStyleBackColor = True
+        '
+        'Button23
+        '
+        resources.ApplyResources(Me.Button23, "Button23")
+        Me.Button23.Name = "Button23"
+        Me.Button23.UseVisualStyleBackColor = True
+        '
+        'Button24
+        '
+        resources.ApplyResources(Me.Button24, "Button24")
+        Me.Button24.Name = "Button24"
+        Me.Button24.UseVisualStyleBackColor = True
+        '
+        'GraphCurves
+        '
+        Me.GraphCurves.IsShowCopyMessage = False
+        resources.ApplyResources(Me.GraphCurves, "GraphCurves")
+        Me.GraphCurves.Name = "GraphCurves"
+        Me.GraphCurves.ScrollGrace = 0.0R
+        Me.GraphCurves.ScrollMaxX = 0.0R
+        Me.GraphCurves.ScrollMaxY = 0.0R
+        Me.GraphCurves.ScrollMaxY2 = 0.0R
+        Me.GraphCurves.ScrollMinX = 0.0R
+        Me.GraphCurves.ScrollMinY = 0.0R
+        Me.GraphCurves.ScrollMinY2 = 0.0R
+        '
+        'GraphComps
+        '
+        Me.GraphComps.IsShowCopyMessage = False
+        resources.ApplyResources(Me.GraphComps, "GraphComps")
+        Me.GraphComps.Name = "GraphComps"
+        Me.GraphComps.ScrollGrace = 0.0R
+        Me.GraphComps.ScrollMaxX = 0.0R
+        Me.GraphComps.ScrollMaxY = 0.0R
+        Me.GraphComps.ScrollMaxY2 = 0.0R
+        Me.GraphComps.ScrollMinX = 0.0R
+        Me.GraphComps.ScrollMinY = 0.0R
+        Me.GraphComps.ScrollMinY2 = 0.0R
+        '
         'DCCharacterizationWizard
         '
         resources.ApplyResources(Me, "$this")
@@ -1333,11 +1335,11 @@ Partial Class DCCharacterizationWizard
         Me.Panel14.ResumeLayout(False)
         Me.Panel14.PerformLayout()
         Me.P7.ResumeLayout(False)
-        Me.Panel15.ResumeLayout(False)
-        Me.Panel15.PerformLayout()
         Me.Panel16.ResumeLayout(False)
         Me.Panel16.PerformLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel15.ResumeLayout(False)
+        Me.Panel15.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
