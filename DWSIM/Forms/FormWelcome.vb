@@ -99,43 +99,45 @@ Public Class FormWelcome
         Call FormMain.LoadFileDialog()
     End Sub
 
-    Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate
+    Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
 
-        If File.Exists(Me.lvlatest.SelectedItems(0).Tag) Then
+        Dim lview = DirectCast(sender, ListView)
+
+        If File.Exists(lview.SelectedItems(0).Tag) Then
 
             Me.Hide()
             Application.DoEvents()
 
-            FormMain.filename = Me.lvlatest.SelectedItems(0).Tag
-            Select Case Path.GetExtension(Me.lvlatest.SelectedItems(0).Tag).ToLower
+            FormMain.filename = lview.SelectedItems(0).Tag
+            Select Case Path.GetExtension(lview.SelectedItems(0).Tag).ToLower
                 Case ".dwxml"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadXML(Me.lvlatest.SelectedItems(0).Tag)
+                    FormMain.LoadXML(lview.SelectedItems(0).Tag)
                 Case ".dwxmz"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadAndExtractXMLZIP(Me.lvlatest.SelectedItems(0).Tag)
+                    FormMain.LoadAndExtractXMLZIP(lview.SelectedItems(0).Tag)
                 Case ".dwsim"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     'Application.DoEvents()
                     'Application.DoEvents()
-                    'FormMain.LoadF(Me.lvlatest.SelectedItems(0).Tag)
+                    'FormMain.LoadF(lview.SelectedItems(0).Tag)
                 Case ".xml"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadMobileXML(Me.lvlatest.SelectedItems(0).Tag)
+                    FormMain.LoadMobileXML(lview.SelectedItems(0).Tag)
                 Case ".dwcsd"
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = FormMain
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
+                    Dim objStreamReader As New FileStream(lview.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                    NewMDIChild.mycase.Filename = Me.lvlatest.SelectedItems(0).Tag
+                    NewMDIChild.mycase.Filename = lview.SelectedItems(0).Tag
                     objStreamReader.Close()
                     NewMDIChild.WriteData()
                     NewMDIChild.Activate()
@@ -143,10 +145,10 @@ Public Class FormWelcome
                     Dim NewMDIChild As New FormDataRegression()
                     NewMDIChild.MdiParent = Me.Owner
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
+                    Dim objStreamReader As New FileStream(lview.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.currcase = x.Deserialize(objStreamReader)
-                    NewMDIChild.currcase.filename = Me.lvlatest.SelectedItems(0).Tag
+                    NewMDIChild.currcase.filename = lview.SelectedItems(0).Tag
                     objStreamReader.Close()
                     NewMDIChild.LoadCase(NewMDIChild.currcase, False)
                     NewMDIChild.Activate()
@@ -154,10 +156,10 @@ Public Class FormWelcome
                     Dim NewMDIChild As New FormUNIFACRegression()
                     NewMDIChild.MdiParent = Me.Owner
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
+                    Dim objStreamReader As New FileStream(lview.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                    NewMDIChild.mycase.Filename = Me.lvlatest.SelectedItems(0).Tag
+                    NewMDIChild.mycase.Filename = lview.SelectedItems(0).Tag
                     objStreamReader.Close()
                     NewMDIChild.LoadCase(NewMDIChild.mycase, False)
                     NewMDIChild.Activate()
@@ -167,7 +169,7 @@ Public Class FormWelcome
 
         Else
 
-            Throw New FileNotFoundException("File not found.", Me.lvlatest.SelectedItems(0).Tag.ToString)
+            Throw New FileNotFoundException("File not found.", lview.SelectedItems(0).Tag.ToString)
 
         End If
 
