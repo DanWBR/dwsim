@@ -1666,7 +1666,7 @@ Partial Class MaterialStreamEditor
         'ToolTip2
         '
         Me.ToolTip2.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTip2.ToolTipTitle = "Tipp"
+        Me.ToolTip2.ToolTipTitle = "Tip"
         '
         'MaterialStreamEditor
         '
