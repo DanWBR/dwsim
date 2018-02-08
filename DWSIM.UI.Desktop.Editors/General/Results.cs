@@ -33,7 +33,7 @@ namespace DWSIM.UI.Desktop.Editors
     {
 
         static string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
-        
+
         public ISimulationObject SimObject;
 
         public TableLayout container;
@@ -47,7 +47,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Initialize()
         {
-                      
+
             var su = SimObject.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
             var nf = SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
@@ -61,8 +61,8 @@ namespace DWSIM.UI.Desktop.Editors
                 string[] units = { su.distance, "degrees", su.pressure, su.temperature, su.velocity, su.velocity,
 									su.heatflow, "", su.heat_transf_coeff, su.heat_transf_coeff, su.heat_transf_coeff,
 									su.heat_transf_coeff, su.heat_transf_coeff};
-                      
-                var btn = new Button {Text = "View Pipe Properties Profile"};
+
+                var btn = new Button { Text = "View Pipe Properties Profile" };
                 container.Rows.Add(new TableRow(btn));
                 btn.Click += (sender, e) =>
                 {
@@ -76,29 +76,29 @@ namespace DWSIM.UI.Desktop.Editors
                     List<double> px, py;
 
                     var txtres = s.CreateAndAddMultilineMonoSpaceTextBoxRow(plotcontainer, "", 400, true, null);
-            
+
                     s.CreateAndAddLabelRow(plotcontainer, "Pipe Segment Profiles: " + SimObject.GraphicObject.Tag);
                     var xsp = s.CreateAndAddDropDownRow(plotcontainer, "X Axis Data", datatype.ToList(), 0, null);
                     var ysp = s.CreateAndAddDropDownRow(plotcontainer, "Y Axis Data", datatype.ToList(), 2, null);
                     s.CreateAndAddButtonRow(plotcontainer, "Update Chart/Table", null, (sender2, e2) =>
                     {
-                            px = PopulateData(pipe, xsp.SelectedIndex);
-                            py = PopulateData(pipe, ysp.SelectedIndex);
-                            var model = CreatePipeResultsModel(px.ToArray(), py.ToArray(),
-                                                               datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")",
-                                                               datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
-                            chart.Model = model;
-                            chart.Visible = true;
-                            chart.Model.InvalidatePlot(true);
-                            chart.Invalidate();
-                            int i = 0;
-                            var txt = new System.Text.StringBuilder();
-                            txt.AppendLine(datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")\t\t" + datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
-                            for (i = 0; i <= px.Count - 1; i++)
-                            {
-                                txt.AppendLine(px[i].ToString(nf) + "\t\t" + py[i].ToString(nf));
-                            }
-                            txtres.Text = txt.ToString();
+                        px = PopulateData(pipe, xsp.SelectedIndex);
+                        py = PopulateData(pipe, ysp.SelectedIndex);
+                        var model = CreatePipeResultsModel(px.ToArray(), py.ToArray(),
+                                                           datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")",
+                                                           datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
+                        chart.Model = model;
+                        chart.Visible = true;
+                        chart.Model.InvalidatePlot(true);
+                        chart.Invalidate();
+                        int i = 0;
+                        var txt = new System.Text.StringBuilder();
+                        txt.AppendLine(datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")\t\t" + datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
+                        for (i = 0; i <= px.Count - 1; i++)
+                        {
+                            txt.AppendLine(px[i].ToString(nf) + "\t\t" + py[i].ToString(nf));
+                        }
+                        txtres.Text = txt.ToString();
                     });
                     s.CreateAndAddLabelRow(plotcontainer, "Results Chart");
                     s.CreateAndAddControlRow(plotcontainer, chart);
@@ -117,7 +117,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                 string[] units = { "", su.pressure, su.temperature, su.molarflow, su.molarflow };
 
-                var btn = new Button {Text = "View Column Properties Profile"};
+                var btn = new Button { Text = "View Column Properties Profile" };
                 container.Rows.Add(new TableRow(btn));
                 btn.Click += (sender, e) =>
                 {
@@ -167,7 +167,7 @@ namespace DWSIM.UI.Desktop.Editors
                 if (reactor.points != null && reactor.points.Count > 0)
                 {
 
-                    var btn = new Button {Text = "View PFR Properties Profile"};
+                    var btn = new Button { Text = "View PFR Properties Profile" };
                     container.Rows.Add(new TableRow(btn));
                     btn.Click += (sender, e) =>
                     {
@@ -240,8 +240,15 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
-            var txtcontrol = new TextArea {ReadOnly = true};
-            txtcontrol.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+            var txtcontrol = new TextArea { ReadOnly = true };
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                txtcontrol.Font = Fonts.Monospace(SystemFonts.Default().Size);
+            }
+            else
+            {
+                txtcontrol.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+            }
 
             container.Rows.Add(new TableRow(txtcontrol));
 
@@ -445,7 +452,7 @@ namespace DWSIM.UI.Desktop.Editors
             model.LegendPosition = LegendPosition.BottomCenter;
             model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView;
             model.AddLineSeries(x, y);
-                     
+
             return model;
 
         }
