@@ -56,15 +56,29 @@ Public Class FormWelcome
             End If
         Next
 
+        Dim samples = Directory.EnumerateFiles(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "samples", "*.dw*", SearchOption.TopDirectoryOnly)
+
+        For Each f As String In samples
+            Me.lvsamples.Items.Add(Path.GetFileName(f), 0).Tag = f
+            Dim lvi = Me.lvsamples.Items(Me.lvsamples.Items.Count - 1)
+            lvi.ToolTipText = f
+            Select Case Path.GetExtension(f).ToLower
+                Case ".dwsim"
+                    lvi.ImageIndex = 0
+                Case ".dwxml", ".dwxmz"
+                    lvi.ImageIndex = 1
+                Case ".dwcsd"
+                    lvi.ImageIndex = 2
+                Case ".dwrsd"
+                    lvi.ImageIndex = 3
+            End Select
+        Next
+
         If DWSIM.App.IsRunningOnMono Then
             Me.lvlatest.View = View.List
             Me.lvlatestfolders.View = View.List
         End If
 
-    End Sub
-
-    Private Sub KryptonButton3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Close()
     End Sub
 
     Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
@@ -169,14 +183,6 @@ Public Class FormWelcome
 
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        Me.Close()
-        Application.DoEvents()
-        Application.DoEvents()
-        FormMain.OpenFileDialog1.InitialDirectory = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "samples"
-        Call FormMain.LoadFileDialog()
-    End Sub
-
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Dim NewMDIChild As New FormCompoundCreator()
         'Set the Parent Form of the Child window.
@@ -205,12 +211,6 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
     End Sub
 
-    Private Sub Button6_Click(sender As System.Object, e As System.EventArgs)
-        Me.Close()
-        Application.DoEvents()
-        Process.Start(My.Application.Info.DirectoryPath & "\docs\")
-    End Sub
-
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
         Process.Start("https://sourceforge.net/p/dwsim/donate/?source=navbar")
     End Sub
@@ -233,4 +233,23 @@ Public Class FormWelcome
         Process.Start("https://play.google.com/store/apps/details?id=com.danielmedeiros.dwsim_simulator")
     End Sub
 
+    Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel4.LinkClicked
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Main_Page")
+    End Sub
+
+    Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel5.LinkClicked
+        Process.Start("https://sourceforge.net/p/dwsim/discussion/?source=navbar")
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Process.Start("https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q")
+    End Sub
+
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Category:Tutorials")
+    End Sub
+
+    Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Process.Start("http://dwsim.fossee.in/flowsheeting-project/completed-flowsheet")
+    End Sub
 End Class

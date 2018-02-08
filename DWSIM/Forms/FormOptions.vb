@@ -67,8 +67,6 @@ Public Class FormOptions
 
         Me.chkIgnoreCompConstData.Checked = My.Settings.IgnoreCompoundPropertiesOnLoad
 
-        Me.chkShowWhatsNew.Checked = My.Settings.ShowWhatsNew
-
         Me.cbudb.Checked = My.Settings.ReplaceComps
 
         cbDefaultLocation.Items.Clear()
@@ -602,10 +600,6 @@ Public Class FormOptions
 
     Private Sub chkStorePreviousSolutions_CheckedChanged(sender As Object, e As EventArgs) Handles chkStorePreviousSolutions.CheckedChanged
         My.Settings.StorePreviousSolutions = chkStorePreviousSolutions.Checked
-    End Sub
-
-    Private Sub chkShowWhatsNew_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowWhatsNew.CheckedChanged
-        My.Settings.ShowWhatsNew = chkShowWhatsNew.Checked
     End Sub
 
     Private Sub chkSaveBackupFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveBackupFile.CheckedChanged

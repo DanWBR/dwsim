@@ -130,16 +130,12 @@
   <data name="Label12.Text" xml:space="preserve">
     <value>Create a New Data Regression Study</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ColumnHeader1.Width" type="System.Int32, mscorlib">
-    <value>338</value>
-  </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAVQBAgFUAQIBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAXgBAgF4AQIBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -210,17 +206,8 @@
         AQMBwAEDCP8L
 </value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 14</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Opens the 'Samples' folder located in DWSIM directory.</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 16</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Open Samples</value>
+  <data name="lvlatest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 348</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 14</value>
@@ -229,10 +216,10 @@
     <value>Opens a new Compound Creator Utility window.</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 16</value>
+    <value>167, 16</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
-    <value>Create New Compound</value>
+    <value>Create a New Compound</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 14</value>
@@ -253,31 +240,16 @@
     <value>Create New Simulation</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 16</value>
+    <value>70, 16</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
-    <value>Open Simulation/Study</value>
+    <value>Open File</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 19</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Tasks</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 19</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Recent Files</value>
-  </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 19</value>
-  </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>Recent Folders</value>
-  </data>
-  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
-    <value>338</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Donate to the project, supporting the developers and encouraging the development of new features!</value>
@@ -289,10 +261,67 @@
     <value>Support the Project</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 19</value>
+    <value>236, 19</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
-    <value>Mobile Versions</value>
+    <value>Mobile Versions (iOS/Android)</value>
+  </data>
+  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 40</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 380</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 354</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Recent Files</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Recent Folders</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Samples</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Resources</value>
+  </data>
+  <data name="LinkLabel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 19</value>
+  </data>
+  <data name="LinkLabel5.Text" xml:space="preserve">
+    <value>Discussion Forums</value>
+  </data>
+  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 19</value>
+  </data>
+  <data name="LinkLabel4.Text" xml:space="preserve">
+    <value>Official Page</value>
+  </data>
+  <data name="LinkLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 19</value>
+  </data>
+  <data name="LinkLabel3.Text" xml:space="preserve">
+    <value>Completed Flowsheets (FOSSEE)</value>
+  </data>
+  <data name="LinkLabel2.Text" xml:space="preserve">
+    <value>Tutorials</value>
+  </data>
+  <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 19</value>
+  </data>
+  <data name="LinkLabel1.Text" xml:space="preserve">
+    <value>Official YouTube Channel</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>361, 9</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 19</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Quick Access</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Welcome to DWSIM</value>

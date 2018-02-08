@@ -342,13 +342,6 @@ Public Class FormFlowsheet
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, MessageType.Tip)
 
-        If My.Settings.ShowWhatsNew Then
-            If Not DWSIM.App.IsRunningOnMono Then
-                Dim fwn As New FormWhatsNew
-                fwn.Show()
-            End If
-        End If
-
         FormSurface.FlowsheetDesignSurface.DrawFloatingTables = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetDesignSurface.DrawPropertyLists = Options.DisplayCornerPropertyList
 

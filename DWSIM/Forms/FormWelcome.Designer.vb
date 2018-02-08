@@ -29,8 +29,6 @@ Partial Class FormWelcome
         Me.lvlatest = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -38,13 +36,10 @@ Partial Class FormWelcome
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.lvlatestfolders = New System.Windows.Forms.ListView()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -53,6 +48,24 @@ Partial Class FormWelcome
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.lvsamples = New System.Windows.Forms.ListView()
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.LinkLabel5 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel4 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label11
@@ -104,20 +117,6 @@ Partial Class FormWelcome
         Me.ImageList1.Images.SetKeyName(3, "DWSIM_XML.png")
         Me.ImageList1.Images.SetKeyName(4, "folder.png")
         '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label5.Name = "Label5"
-        '
-        'Label8
-        '
-        resources.ApplyResources(Me.Label8, "Label8")
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label8.Name = "Label8"
-        '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
@@ -167,20 +166,6 @@ Partial Class FormWelcome
         Me.Label1.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label1.Name = "Label1"
         '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label2.Name = "Label2"
-        '
-        'Label16
-        '
-        resources.ApplyResources(Me.Label16, "Label16")
-        Me.Label16.BackColor = System.Drawing.Color.Transparent
-        Me.Label16.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label16.Name = "Label16"
-        '
         'lvlatestfolders
         '
         resources.ApplyResources(Me.lvlatestfolders, "lvlatestfolders")
@@ -225,16 +210,6 @@ Partial Class FormWelcome
         Me.Button12.ForeColor = System.Drawing.Color.Black
         Me.Button12.Name = "Button12"
         Me.Button12.UseVisualStyleBackColor = False
-        '
-        'Button4
-        '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.BackgroundImage = Global.DWSIM.My.Resources.Resources.document_open
-        Me.Button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -306,19 +281,137 @@ Partial Class FormWelcome
         Me.Label14.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label14.Name = "Label14"
         '
+        'TabControl1
+        '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.lvlatest)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage3
+        '
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.lvlatestfolders)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.lvsamples)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'lvsamples
+        '
+        resources.ApplyResources(Me.lvsamples, "lvsamples")
+        Me.lvsamples.Activation = System.Windows.Forms.ItemActivation.OneClick
+        Me.lvsamples.AutoArrange = False
+        Me.lvsamples.BackColor = System.Drawing.Color.White
+        Me.lvsamples.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lvsamples.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
+        Me.lvsamples.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lvsamples.FullRowSelect = True
+        Me.lvsamples.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lvsamples.HoverSelection = True
+        Me.lvsamples.LargeImageList = Me.ImageList1
+        Me.lvsamples.MultiSelect = False
+        Me.lvsamples.Name = "lvsamples"
+        Me.lvsamples.ShowGroups = False
+        Me.lvsamples.SmallImageList = Me.ImageList1
+        Me.lvsamples.TileSize = New System.Drawing.Size(320, 20)
+        Me.lvsamples.UseCompatibleStateImageBehavior = False
+        Me.lvsamples.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader2
+        '
+        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
+        '
+        'TabPage4
+        '
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.LinkLabel5)
+        Me.TabPage4.Controls.Add(Me.LinkLabel4)
+        Me.TabPage4.Controls.Add(Me.LinkLabel3)
+        Me.TabPage4.Controls.Add(Me.LinkLabel2)
+        Me.TabPage4.Controls.Add(Me.LinkLabel1)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'LinkLabel5
+        '
+        resources.ApplyResources(Me.LinkLabel5, "LinkLabel5")
+        Me.LinkLabel5.ForeColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.LinkLabel5.LinkColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel5.Name = "LinkLabel5"
+        Me.LinkLabel5.TabStop = True
+        '
+        'LinkLabel4
+        '
+        resources.ApplyResources(Me.LinkLabel4, "LinkLabel4")
+        Me.LinkLabel4.ForeColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.LinkLabel4.LinkColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel4.Name = "LinkLabel4"
+        Me.LinkLabel4.TabStop = True
+        '
+        'LinkLabel3
+        '
+        resources.ApplyResources(Me.LinkLabel3, "LinkLabel3")
+        Me.LinkLabel3.ForeColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.LinkLabel3.LinkColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.TabStop = True
+        '
+        'LinkLabel2
+        '
+        resources.ApplyResources(Me.LinkLabel2, "LinkLabel2")
+        Me.LinkLabel2.ForeColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.LinkLabel2.LinkColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.TabStop = True
+        '
+        'LinkLabel1
+        '
+        resources.ApplyResources(Me.LinkLabel1, "LinkLabel1")
+        Me.LinkLabel1.ForeColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.LinkLabel1.LinkColor = System.Drawing.Color.SteelBlue
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.TabStop = True
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label2.Name = "Label2"
+        '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button12)
-        Me.Controls.Add(Me.lvlatestfolders)
-        Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button3)
@@ -327,22 +420,24 @@ Partial Class FormWelcome
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.lvlatest)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label7)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormWelcome"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -353,9 +448,6 @@ Partial Class FormWelcome
     Public WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents lvlatest As System.Windows.Forms.ListView
-    Public WithEvents Label5 As System.Windows.Forms.Label
-    Public WithEvents Label8 As System.Windows.Forms.Label
-    Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label11 As System.Windows.Forms.Label
@@ -365,8 +457,6 @@ Partial Class FormWelcome
     Public WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents lvlatestfolders As System.Windows.Forms.ListView
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Public WithEvents Button11 As System.Windows.Forms.Button
@@ -376,4 +466,17 @@ Partial Class FormWelcome
     Public WithEvents Label15 As System.Windows.Forms.Label
     Public WithEvents Label13 As System.Windows.Forms.Label
     Public WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents lvsamples As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Public WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents LinkLabel5 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LinkLabel4 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
 End Class

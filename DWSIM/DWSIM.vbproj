@@ -525,12 +525,6 @@
     <Compile Include="Forms\FormUpgradeWarning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormWhatsNew.Designer.vb">
-      <DependentUpon>FormWhatsNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormWhatsNew.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Languages\DWSIM1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1104,18 +1098,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUpgradeWarning.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWhatsNew.de.resx">
-      <DependentUpon>FormWhatsNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWhatsNew.en.resx">
-      <DependentUpon>FormWhatsNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWhatsNew.es.resx">
-      <DependentUpon>FormWhatsNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWhatsNew.resx">
-      <DependentUpon>FormWhatsNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreen.de.resx">
       <DependentUpon>SplashScreen.vb</DependentUpon>
@@ -2158,9 +2140,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWelcome.de.resx">
-      <DependentUpon>FormWelcome.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWelcome.es.resx">
       <DependentUpon>FormWelcome.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUnhandledException.de.resx">
