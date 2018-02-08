@@ -195,7 +195,7 @@ namespace DWSIM.UI.Desktop.Editors
                     return;
                 }
 
-                var dialog = ProgressDialog.Show(this, "Petroleum Characterization", "Generating compounds, please wait...", true);
+                var dialog = ProgressDialog.Show(this, "Petroleum Characterization", "Generating compounds, please wait...", false);
 
                 Task.Factory.StartNew(() =>
                 {
@@ -369,7 +369,7 @@ namespace DWSIM.UI.Desktop.Editors
                 double K = 12.0;
                 tbp2[0] = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp2[0], 1333, K);
                 tbp2[1] = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp2[1], 1333, K);
-                tbp[22] = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp2[2], 1333, K);
+                tbp2[2] = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp2[2], 1333, K);
                 tbp2[3] = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp2[3], 1333, K);
                 tbp2[4] = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp2[4], 1333, K);
                 tbp2[5] = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp2[5], 1333, K);
@@ -670,11 +670,11 @@ namespace DWSIM.UI.Desktop.Editors
                 cprops.IsPF = 1;
                 cprops.PF_Watson_K = Math.Pow((1.8 * cprops.NBP.GetValueOrDefault()), (1 / 3)) / cprops.PF_SG.GetValueOrDefault();
 
-                var tmp = (object[])methods2.calculate_Hf_Sf(cprops.PF_SG.GetValueOrDefault(), cprops.Molar_Weight, cprops.NBP.GetValueOrDefault());
+                var tmp = (double[])methods2.calculate_Hf_Sf(cprops.PF_SG.GetValueOrDefault(), cprops.Molar_Weight, cprops.NBP.GetValueOrDefault());
 
-                cprops.IG_Enthalpy_of_Formation_25C = (double)tmp[0];
-                cprops.IG_Entropy_of_Formation_25C = (double)tmp[1];
-                cprops.IG_Gibbs_Energy_of_Formation_25C = (double)tmp[0] - 298.15 * (double)tmp[1];
+                cprops.IG_Enthalpy_of_Formation_25C = tmp[0];
+                cprops.IG_Entropy_of_Formation_25C = tmp[1];
+                cprops.IG_Gibbs_Energy_of_Formation_25C = tmp[0] - 298.15 * tmp[1];
 
                 DWSIM.Thermodynamics.Utilities.Hypos.Methods.HYP methods = new DWSIM.Thermodynamics.Utilities.Hypos.Methods.HYP();
 
