@@ -44,18 +44,18 @@ namespace DWSIM.UI
 
             Title = "DWSIMLauncher".Localize();
 
-            //switch (GlobalSettings.Settings.RunningPlatform())
-            //{
-            //    case GlobalSettings.Settings.Platform.Windows:
-            //        ClientSize = new Size(690, 420);
-            //        break;
-            //    case GlobalSettings.Settings.Platform.Linux:
-            //        ClientSize = new Size(690, 365);
-            //        break;
-            //    case GlobalSettings.Settings.Platform.Mac:
-            //        ClientSize = new Size(690, 350);
-            //        break;
-            //}
+            switch (GlobalSettings.Settings.RunningPlatform())
+            {
+                case GlobalSettings.Settings.Platform.Windows:
+                    ClientSize = new Size(690, 420);
+                    break;
+                case GlobalSettings.Settings.Platform.Linux:
+                    ClientSize = new Size(690, 365);
+                    break;
+                case GlobalSettings.Settings.Platform.Mac:
+                    ClientSize = new Size(690, 350);
+                    break;
+            }
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 

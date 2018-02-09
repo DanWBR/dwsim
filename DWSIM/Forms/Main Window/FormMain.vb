@@ -2214,9 +2214,9 @@ Label_00CC:
 
             Application.DoEvents()
 
-            Select Case Me.OpenFileDialog1.FilterIndex
-                Case 1
-simx:               Dim myStream As System.IO.FileStream
+            Select Case Path.GetExtension(OpenFileDialog1.FileName).ToLower()
+                Case ".dwxml"
+                    Dim myStream As System.IO.FileStream
                     myStream = Me.OpenFileDialog1.OpenFile()
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
@@ -2229,8 +2229,8 @@ simx:               Dim myStream As System.IO.FileStream
                                                     Me.Invoke(Sub() floading.ProgressBar1.Value = x)
                                                 End Sub)
                     End If
-                Case 2
-simx2:              Dim myStream As System.IO.FileStream
+                Case ".dwxmz"
+                    Dim myStream As System.IO.FileStream
                     myStream = Me.OpenFileDialog1.OpenFile()
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
@@ -2243,8 +2243,8 @@ simx2:              Dim myStream As System.IO.FileStream
                                                                  Me.Invoke(Sub() floading.ProgressBar1.Value = x)
                                                              End Sub)
                     End If
-                Case 3
-simxm:              Dim myStream As System.IO.FileStream
+                Case ".xml"
+                    Dim myStream As System.IO.FileStream
                     myStream = Me.OpenFileDialog1.OpenFile()
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
@@ -2255,8 +2255,8 @@ simxm:              Dim myStream As System.IO.FileStream
                         Application.DoEvents()
                         Me.LoadMobileXML(Me.filename)
                     End If
-                Case 4
-csd:                Application.DoEvents()
+                Case ".dwcsd"
+                    Application.DoEvents()
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = Me
                     NewMDIChild.Show()
@@ -2271,8 +2271,8 @@ csd:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 5
-rsd:                Application.DoEvents()
+                Case ".dwrsd"
+                    Application.DoEvents()
                     Dim NewMDIChild As New FormDataRegression()
                     NewMDIChild.MdiParent = Me
                     NewMDIChild.Show()
@@ -2287,8 +2287,8 @@ rsd:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 6
-ruf:                Application.DoEvents()
+                Case ".dwruf"
+                    Application.DoEvents()
                     Dim NewMDIChild As New FormUNIFACRegression()
                     NewMDIChild.MdiParent = Me
                     NewMDIChild.Show()
@@ -2303,21 +2303,6 @@ ruf:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 7
-                    Select Case Path.GetExtension(Me.OpenFileDialog1.FileName).ToLower()
-                        Case ".dwxml"
-                            GoTo simx
-                        Case ".dwxmz"
-                            GoTo simx2
-                        Case ".xml"
-                            GoTo simxm
-                        Case ".dwcsd"
-                            GoTo csd
-                        Case ".dwrsd"
-                            GoTo rsd
-                        Case ".dwruf"
-                            GoTo ruf
-                    End Select
             End Select
 
             floading.Close()
