@@ -34,11 +34,11 @@ namespace DWSIM.Automation
         {
             if (System.IO.Path.GetExtension(filepath).ToLower().Contains("dwxmz"))
             {
-                return fm.LoadAndExtractXMLZIP(filepath, true);
+                return fm.LoadAndExtractXMLZIP(filepath, null, true);
             }
             else
             {
-                return fm.LoadXML(filepath, "", true);
+                return fm.LoadXML(filepath, null, "", true);
             }
         }
 
