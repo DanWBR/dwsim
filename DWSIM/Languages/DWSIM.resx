@@ -5499,4 +5499,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="UnsupportedSolver" xml:space="preserve">
     <value>O método de resolução de colunas selecionado não é suportado por esta coluna.</value>
   </data>
+  <data name="LoadingFile" xml:space="preserve">
+    <value>Carregando arquivo...</value>
+  </data>
 </root>

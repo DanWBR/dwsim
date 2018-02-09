@@ -87,11 +87,11 @@ Public Class FormMain
                     Case ".dwxml"
                         'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + MyFiles(i) + "..."
                         Application.DoEvents()
-                        Me.LoadXML(MyFiles(i))
+                        Me.LoadXML(MyFiles(i), Nothing)
                     Case ".dwxmz"
                         'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + MyFiles(i) + "..."
                         Application.DoEvents()
-                        Me.LoadAndExtractXMLZIP(MyFiles(i))
+                        Me.LoadAndExtractXMLZIP(MyFiles(i), Nothing)
                     Case ".dwsim"
                         'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + MyFiles(i) + "..."
                         'Application.DoEvents()
@@ -642,9 +642,9 @@ Public Class FormMain
                             Case ".dwsim"
                                 'Me.LoadF(Me.filename)
                             Case ".dwxml"
-                                Me.LoadXML(Me.filename)
+                                Me.LoadXML(Me.filename, Nothing)
                             Case ".dwxmz"
-                                Me.LoadAndExtractXMLZIP(Me.filename)
+                                Me.LoadAndExtractXMLZIP(Me.filename, Nothing)
                             Case ".dwcsd"
                                 Dim NewMDIChild As New FormCompoundCreator()
                                 NewMDIChild.MdiParent = Me
@@ -1290,7 +1290,7 @@ Public Class FormMain
 
     End Sub
 
-    Public Function LoadXML(ByVal path As String, Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
+    Public Function LoadXML(ByVal path As String, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
         My.Application.PushUndoRedoAction = False
 
@@ -1308,6 +1308,8 @@ Public Class FormMain
             SharedClasses.Utility.UpdateElement(xel1)
             SharedClasses.Utility.UpdateElementFromNewUI(xel1)
         Next
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
         Try
             If My.Settings.SimulationUpgradeWarning Then
@@ -1335,6 +1337,8 @@ Public Class FormMain
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
 
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
+
         If simulationfilename <> "" Then Me.filename = simulationfilename Else Me.filename = path
 
         form.FilePath = Me.filename
@@ -1343,6 +1347,8 @@ Public Class FormMain
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
         AddGraphicObjects(form, data, excs)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(25)
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
@@ -1359,6 +1365,8 @@ Public Class FormMain
                 excs.Add(New Exception("Error Loading Compound Information", ex))
             End Try
         Next
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(35)
 
         If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties") IsNot Nothing Then
 
@@ -1431,6 +1439,8 @@ Public Class FormMain
             End Try
         Next
 
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(65)
+
         My.Application.ActiveSimulation = form
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
@@ -1470,6 +1480,8 @@ Public Class FormMain
         Next
 
         AddSimulationObjects(form, objlist, excs)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
 
@@ -1537,6 +1549,8 @@ Public Class FormMain
 
         End If
 
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(85)
+
         If xdoc.Element("DWSIM_Simulation_Data").Element("WatchItems") IsNot Nothing Then
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("WatchItems").Elements.ToList
@@ -1577,6 +1591,8 @@ Public Class FormMain
 
         End If
 
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
+
         Try
             If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New SpreadsheetForm()
             Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
@@ -1605,6 +1621,8 @@ Public Class FormMain
                 form.Options.NotSelectedComponents.Add(tmpc.Name, newc)
             End If
         Next
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(100)
 
         If Not forcommandline Then
 
@@ -2089,7 +2107,7 @@ Public Class FormMain
         End Using
     End Function
 
-    Function LoadAndExtractXMLZIP(ByVal caminho As String, Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
+    Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
         Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
         Dim fullname As String = ""
@@ -2127,7 +2145,7 @@ Label_00CC:
                     entry = stream.GetNextEntry
                 Loop
             End Using
-            Dim fs As Interfaces.IFlowsheet = LoadXML(fullname, caminho, forcommandline)
+            Dim fs As Interfaces.IFlowsheet = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline)
             File.Delete(fullname)
             fs.FilePath = caminho
             fs.Options.FilePath = caminho
@@ -2188,6 +2206,14 @@ Label_00CC:
     Sub LoadFileDialog()
 
         If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+
+            Dim floading As New FormLoadingSimulation
+
+            floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & Me.OpenFileDialog1.FileName & ")"
+            floading.Show()
+
+            Application.DoEvents()
+
             Select Case Me.OpenFileDialog1.FilterIndex
                 Case 1
 simx:               Dim myStream As System.IO.FileStream
@@ -2199,7 +2225,9 @@ simx:               Dim myStream As System.IO.FileStream
                         'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                         Application.DoEvents()
                         Application.DoEvents()
-                        Me.LoadXML(Me.filename)
+                        Me.LoadXML(Me.filename, Sub(x)
+                                                    Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                End Sub)
                     End If
                 Case 2
 simx2:              Dim myStream As System.IO.FileStream
@@ -2211,7 +2239,9 @@ simx2:              Dim myStream As System.IO.FileStream
                         'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                         Application.DoEvents()
                         Application.DoEvents()
-                        Me.LoadAndExtractXMLZIP(Me.filename)
+                        Me.LoadAndExtractXMLZIP(Me.filename, Sub(x)
+                                                                 Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                             End Sub)
                     End If
                 Case 3
 simxm:              Dim myStream As System.IO.FileStream
@@ -2289,6 +2319,9 @@ ruf:                Application.DoEvents()
                             GoTo ruf
                     End Select
             End Select
+
+            floading.Close()
+
         End If
 
     End Sub
@@ -2499,6 +2532,14 @@ ruf:                Application.DoEvents()
         Dim myLink As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
         If myLink.Text <> DWSIM.App.GetLocalString("vazio") Then
             If File.Exists(myLink.Tag.ToString) Then
+
+                Dim floading As New FormLoadingSimulation
+
+                floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & myLink.Tag.ToString & ")"
+                floading.Show()
+
+                Application.DoEvents()
+
                 Dim nome = myLink.Tag.ToString
                 'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " (" + nome + ")"
                 Me.filename = nome
@@ -2507,9 +2548,13 @@ ruf:                Application.DoEvents()
                 Try
                     Select Case Path.GetExtension(nome).ToLower()
                         Case ".dwxml"
-                            LoadXML(nome)
+                            LoadXML(nome, Sub(x)
+                                              Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                          End Sub)
                         Case ".dwxmz"
-                            LoadAndExtractXMLZIP(nome)
+                            LoadAndExtractXMLZIP(nome, Sub(x)
+                                                           Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                       End Sub)
                         Case ".dwsim"
                             ' Me.LoadF(nome)
                         Case ".xml"
@@ -2549,6 +2594,7 @@ ruf:                Application.DoEvents()
                 Finally
                     'Me.ToolStripStatusLabel1.Text = ""
                     If objStreamReader IsNot Nothing Then objStreamReader.Close()
+                    floading.Close()
                 End Try
             End If
         End If

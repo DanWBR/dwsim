@@ -103,9 +103,16 @@ Public Class FormWelcome
 
         Dim lview = DirectCast(sender, ListView)
 
+
         If File.Exists(lview.SelectedItems(0).Tag) Then
 
             Me.Hide()
+
+            Dim floading As New FormLoadingSimulation
+
+            floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & lview.SelectedItems(0).Tag.ToString & ")"
+            floading.Show()
+
             Application.DoEvents()
 
             FormMain.filename = lview.SelectedItems(0).Tag
@@ -114,12 +121,16 @@ Public Class FormWelcome
                     'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadXML(lview.SelectedItems(0).Tag)
+                    FormMain.LoadXML(lview.SelectedItems(0).Tag, Sub(x)
+                                                                     Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                 End Sub)
                 Case ".dwxmz"
                     'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadAndExtractXMLZIP(lview.SelectedItems(0).Tag)
+                    FormMain.LoadAndExtractXMLZIP(lview.SelectedItems(0).Tag, Sub(x)
+                                                                                  Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                              End Sub)
                 Case ".dwsim"
                     'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     'Application.DoEvents()
@@ -164,6 +175,8 @@ Public Class FormWelcome
                     NewMDIChild.LoadCase(NewMDIChild.mycase, False)
                     NewMDIChild.Activate()
             End Select
+
+            floading.Close()
 
             Me.Close()
 

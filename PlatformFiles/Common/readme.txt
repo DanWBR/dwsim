@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 10
+Version 5.1 Update 11
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 11
+
+- [CHG] UI enhancements
+- [FIX] Fixed CSTR and PFR heat balances
+- [FIX] Fixed issues with Petroleum Characterization utilities
+- [FIX] Fixed Raoult's Law entropy calculations
 
 Version 5.1 Update 10
 

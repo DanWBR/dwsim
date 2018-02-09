@@ -1,13 +1,12 @@
+Version 5.1 Update 11
+
+- [CHG] UI enhancements
+- [FIX] Fixed CSTR and PFR heat balances
+- [FIX] Fixed issues with Petroleum Characterization utilities
+- [FIX] Fixed Raoult's Law entropy calculations
+
 Version 5.1 Update 10
 
 - [FIX] Fixed HetCat reaction support on CSTR
 - [FIX] Fixed reaction temperature limits not working on Equilibrium and CSTR reactors
 - [FIX] Fixed loading of duplicate compounds (Classic UI)
-
-Version 5.1 Update 9
-
-- [NEW] Exposed Pipe Segment hydraulic and thermal properties to analysis tools
-- [NEW] Exposed Equilibrium Reactor convergence parameters
-- [CHG] Classic UI updates
-- [FIX] Fixed bugs with Compound Creator Wizard running on the Classic UI
-- [FIX] Fixed a bug with the Gibbs Reactor

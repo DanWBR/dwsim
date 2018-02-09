@@ -441,6 +441,12 @@
     <Compile Include="Forms\FormImportCompoundOnline.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormLoadingSimulation.Designer.vb">
+      <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLoadingSimulation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormSearchingChemeo.Designer.vb">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </Compile>
@@ -1002,6 +1008,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundOnline.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLoadingSimulation.resx">
+      <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
