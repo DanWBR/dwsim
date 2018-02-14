@@ -160,7 +160,7 @@ Namespace PropertyPackages
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 Case "entropy", "entropynf"
-                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -168,7 +168,7 @@ Namespace PropertyPackages
                     result = m_id.H_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEnthalpy = result
                 Case "excessentropy"
-                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEntropy = result
                 Case "enthalpyf"
                     Dim entF As Double = Me.AUX_HFm25(phase)
@@ -178,7 +178,7 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpyF = result
                 Case "entropyf"
                     Dim entF As Double = Me.AUX_SFm25(phase)
-                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF = result + entF
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
@@ -274,7 +274,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 result = Me.m_id.H_RA_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, dwpl), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                result = Me.m_id.S_RA_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, dwpl), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, dwpl))
+                result = Me.m_id.S_RA_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, dwpl), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = 0
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -299,7 +299,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 result = Me.m_id.H_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, Phase.Vapor), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                result = Me.m_id.S_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, Phase.Vapor))
+                result = Me.m_id.S_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = 1
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -631,11 +631,11 @@ Namespace PropertyPackages
             Dim S As Double
 
             If st = State.Liquid Then
-                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T), Me.RET_Sid(298.15, T, P, Vx))
+                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T))
             ElseIf st = State.Vapor Then
-                S = Me.m_id.S_RA_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T), Me.RET_Sid(298.15, T, P, Vx))
+                S = Me.m_id.S_RA_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T))
             ElseIf st = State.Solid Then
-                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T), Me.RET_Sid(298.15, T, P, Vx)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
             End If
 
             Return S
@@ -646,11 +646,11 @@ Namespace PropertyPackages
             Dim S As Double
 
             If st = State.Liquid Then
-                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, 0, Me.RET_VHVAP(T), Me.RET_Sid(298.15, T, P, Vx))
+                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, 0, Me.RET_VHVAP(T))
             ElseIf st = State.Vapor Then
-                S = Me.m_id.S_RA_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, 0, Me.RET_VHVAP(T), Me.RET_Sid(298.15, T, P, Vx))
+                S = Me.m_id.S_RA_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, 0, Me.RET_VHVAP(T))
             ElseIf st = State.Solid Then
-                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, 0, Me.RET_VHVAP(T), Me.RET_Sid(298.15, T, P, Vx)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, 0, Me.RET_VHVAP(T)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
             End If
 
             Return S

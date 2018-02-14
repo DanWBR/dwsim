@@ -57,13 +57,34 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function S_RA_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal VMM As Array, ByVal Sid As Double, ByVal HVap As Array, ByVal Hid As Double) As Double
+        Function S_RA_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal VMM As Array, ByVal Sid As Double, ByVal HVap As Array) As Double
+
+            Dim i, n As Integer
+
+            n = Vz.Length - 1
+
+            Dim R, DSres As Double
+
+            R = 8.314
+
+            i = 0
+            Dim MMm = 0.0#
+            Do
+                MMm += Vz(i) * VMM(i)
+                i += 1
+            Loop Until i = n + 1
 
             If TIPO = "L" Then
-                Return Sid + Me.H_RA_MIX(TIPO, T, P, Vz, VKij, VTc, VPc, Vw, VMM, Hid, HVap) / T
+                Dim val As Double
+                For i = 0 To n
+                    If T / VTc(i) <= 1 Then val += Vz(i) * HVap(i) * VMM(i)
+                Next
+                DSres = -val / T
             Else
-                Return Sid + Me.H_RA_MIX(TIPO, T, P, Vz, VKij, VTc, VPc, Vw, VMM, Hid, HVap) / T
+                DSres = 0
             End If
+
+            S_RA_MIX = Sid + DSres / MMm
 
         End Function
 

@@ -27,8 +27,8 @@ Imports Ciloci.Flee
 
 Namespace PropertyPackages
 
-    <System.Runtime.InteropServices.Guid(LIQUAC2PropertyPackage.ClassId)> _
-<System.Serializable()> Public Class LIQUAC2PropertyPackage
+    <System.Runtime.InteropServices.Guid(LIQUAC2PropertyPackage.ClassId)>
+    <System.Serializable()> Public Class LIQUAC2PropertyPackage
 
         Inherits PropertyPackages.ElectrolyteBasePropertyPackage
 
@@ -65,11 +65,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case phase.Vapor
+                Case Phase.Vapor
                     state = "V"
-                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3
+                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     state = "L"
-                Case phase.Solid
+                Case Phase.Solid
                     state = "S"
             End Select
 
@@ -103,10 +103,10 @@ Namespace PropertyPackages
                     For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
-                    If phase = phase.Solid Then
+                    If phase = Phase.Solid Then
                         result = Me.AUX_SOLIDCP(RET_VMAS(phase), constprops, T)
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
-                    ElseIf phase = phase.Vapor Then
+                    ElseIf phase = Phase.Vapor Then
                         resultObj = m_id.CpCv(state, T, P, RET_VMOL(phase), RET_VKij(), RET_VMAS(phase), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = resultObj(1)
                     Else
@@ -117,7 +117,7 @@ Namespace PropertyPackages
                     For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
-                    If phase = phase.Solid Then
+                    If phase = Phase.Solid Then
                         result = Me.AUX_SOLIDCP(RET_VMAS(phase), constprops, T)
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                     Else
@@ -129,12 +129,12 @@ Namespace PropertyPackages
                     For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
-                    If phase = phase.Solid Then
+                    If phase = Phase.Solid Then
                         result = Me.m_elec.SolidEnthalpy(T, RET_VMOL(phase), constprops)
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                         result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
-                    ElseIf phase = phase.Vapor Then
+                    ElseIf phase = Phase.Vapor Then
                         result = Me.m_elec.LiquidEnthalpy(T, RET_VMOL(phase), constprops, Me.m_uni.GAMMA_MR(T + 0.1, RET_VMOL(phase), constprops), Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), False)
                         result += Me.RET_HVAPM(RET_VMAS(phase), T)
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
@@ -149,13 +149,13 @@ Namespace PropertyPackages
                     For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
-                    If phase = phase.Solid Then
+                    If phase = Phase.Solid Then
                         result = 0.0#
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                         result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
-                    ElseIf phase = phase.Vapor Then
-                        result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    ElseIf phase = Phase.Vapor Then
+                        result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T))
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                         result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -166,7 +166,7 @@ Namespace PropertyPackages
                     result = m_id.H_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEnthalpy = result
                 Case "excessentropy"
-                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEntropy = result
                 Case "enthalpyf"
                     Dim entF As Double = Me.AUX_HFm25(phase)
@@ -176,7 +176,7 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpyF = result
                 Case "entropyf"
                     Dim entF As Double = Me.AUX_SFm25(phase)
-                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF = result + entF
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
@@ -335,7 +335,7 @@ Namespace PropertyPackages
                 result = Me.m_elec.LiquidEnthalpy(T, RET_VMOL(Phase.Vapor), constprops, Me.m_uni.GAMMA_MR(T + 0.1, RET_VMOL(Phase.Vapor), constprops), Me.m_uni.GAMMA_MR(T, RET_VMOL(Phase.Vapor), constprops), False)
                 result += Me.RET_HVAPM(RET_VMAS(Phase.Vapor), T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                result = Me.m_id.S_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, Phase.Vapor))
+                result = Me.m_id.S_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = 1
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result

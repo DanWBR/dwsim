@@ -168,7 +168,7 @@ Namespace PropertyPackages
                         result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
                     ElseIf phase = phase.Vapor Then
-                        result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                        result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T))
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                         result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -179,7 +179,7 @@ Namespace PropertyPackages
                     result = m_id.H_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEnthalpy = result
                 Case "excessentropy"
-                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0, Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEntropy = result
                 Case "enthalpyf"
                     Dim entF As Double = Me.AUX_HFm25(phase)
@@ -189,7 +189,7 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpyF = result
                 Case "entropyf"
                     Dim entF As Double = Me.AUX_SFm25(phase)
-                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, phase))
+                    result = m_id.S_RA_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase), Me.RET_VHVAP(T))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF = result + entF
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
