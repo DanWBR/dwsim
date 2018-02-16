@@ -177,6 +177,8 @@ Namespace PropertyPackages
 
         <JsonIgnore> <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
 
+        Private dummyipvec As Double(,)
+
 #End Region
 
 #Region "   Constructor"
@@ -410,15 +412,6 @@ Namespace PropertyPackages
             Get
                 Return _packagetype
             End Get
-        End Property
-
-        Public Property ParametrosDeInteracao() As DataTable
-            Get
-                Return m_ip
-            End Get
-            Set(ByVal value As DataTable)
-                m_ip = value
-            End Set
         End Property
 
         Public ReadOnly Property Parameters() As Dictionary(Of String, Double)
@@ -6343,24 +6336,7 @@ Final3:
 
         Public Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
-            Dim nsteps As Integer = Math.Abs(T2 - T1) / 5
-
-            If nsteps < 5 Then nsteps = 5
-
-            Dim deltaT As Double = (T2 - T1) / nsteps
-
-            Dim i As Integer
-            Dim integral, Ti As Double
-
-            Ti = T1 + deltaT / 2
-
-            integral = 0.0#
-            For i = 0 To nsteps - 1
-                integral += Me.AUX_CPi(subst, Ti) * deltaT
-                Ti += deltaT
-            Next
-            
-            Return integral
+            Return SimpsonIntegrator.Integrate(Function(x) AUX_CPi(subst, x), T1, T2, 0.01)
 
         End Function
 
@@ -6389,24 +6365,7 @@ Final3:
 
         Public Function AUX_INT_CPDT_Ti(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
-            Dim nsteps As Integer = Math.Abs(T2 - T1) / 5
-
-            If nsteps < 5 Then nsteps = 5
-
-            Dim deltaT As Double = (T2 - T1) / nsteps
-
-            Dim i As Integer
-            Dim integral, Ti As Double
-
-            Ti = T1 + deltaT / 2
-
-            integral = 0.0#
-            For i = 0 To nsteps - 1
-                integral += Me.AUX_CPi(subst, Ti) * deltaT / (Ti - deltaT)
-                Ti += deltaT
-            Next
-            
-            Return integral 'kJ/Kg
+            Return SimpsonIntegrator.Integrate(Function(x) AUX_CPi(subst, x) / x, T1, T2, 0.01)
 
         End Function
 
@@ -7036,7 +6995,7 @@ Final3:
             If Phase = PropertyPackages.Phase.Liquid3 Then phaseID = 5
             If Phase = PropertyPackages.Phase.Vapor Then phaseID = 2
             If Phase = PropertyPackages.Phase.Mixture Then phaseID = 0
-            'subst.MassFraction.GetValueOrDefault * subst.ConstantProperties.Standard_Absolute_Entropy 
+
             For Each subst In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                 If subst.MoleFraction.GetValueOrDefault <> 0 Then val += -8.314 * subst.MoleFraction.GetValueOrDefault * Math.Log(subst.MoleFraction.GetValueOrDefault) / subst.ConstantProperties.Molar_Weight
             Next
@@ -7050,14 +7009,11 @@ Final3:
         Public Function RET_Sid(ByVal T1 As Double, ByVal T2 As Double, ByVal P2 As Double, ByVal Vz As Double()) As Double
 
             Dim val As Double
-            Dim Vw = Me.AUX_CONVERT_MOL_TO_MASS(Vz)
-
             Dim i As Integer = 0
 
-            'Vw(i) * subst.ConstantProperties.Standard_Absolute_Entropy
-            val = 0
+            val = 0.0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                If Vz(i) <> 0 Then val += -8.314 * Vz(i) * Math.Log(Vz(i)) / subst.ConstantProperties.Molar_Weight
+                If Vz(i) <> 0.0 Then val += -8.314 * Vz(i) * Math.Log(Vz(i)) / subst.ConstantProperties.Molar_Weight
                 i = i + 1
             Next
             Dim tmp1 = 8.314 * Math.Log(P2 / 101325) / Me.AUX_MMM(Vz)
@@ -7105,43 +7061,19 @@ Final3:
 
         Public Overridable Function RET_VKij() As Double(,)
 
-            If Me.ParametrosDeInteracao Is Nothing Then
-                Me.ParametrosDeInteracao = New DataTable
-                With Me.ParametrosDeInteracao.Columns
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                        .Add(subst.ConstantProperties.ID, GetType(System.Double))
-                    Next
-                End With
-
-                With Me.ParametrosDeInteracao.Rows
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                        .Add()
-                    Next
-                End With
+            If dummyipvec Is Nothing Then
+                Dim dv(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                dummyipvec = dv
+                Return dv
+            Else
+                If dummyipvec.GetLength(0) <> Me.CurrentMaterialStream.Phases(0).Compounds.Count Then
+                    Dim dv(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                    dummyipvec = dv
+                    Return dv
+                Else
+                    Return dummyipvec
+                End If
             End If
-
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim i As Integer = 0
-            Dim l As Integer = 0
-            For Each r As DataRow In Me.ParametrosDeInteracao.Rows
-                i = 0
-                Do
-                    If l <> i And r.Item(i).GetType().ToString <> "System.DBNull" Then
-                        Dim value As Double
-                        If Double.TryParse(r.Item(i), value) Then
-                            val(l, i) = r.Item(i)
-                        Else
-                            val(l, i) = 0
-                        End If
-                    Else
-                        val(l, i) = 0
-                    End If
-                    i = i + 1
-                Loop Until i = Me.ParametrosDeInteracao.Rows.Count
-                l = l + 1
-            Next
-
-            Return val
 
         End Function
 

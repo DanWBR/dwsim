@@ -181,6 +181,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.DrawingTools.SkiaShar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.ExtensionMethods.Eto", "DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj", "{5BA7546B-010C-4197-975E-F462BBEA1EC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.SimpsonIntegrator", "DWSIM.MathOps.SimpsonIntegrator\DWSIM.MathOps.SimpsonIntegrator.csproj", "{86AF29BB-4CB1-4818-98A3-031D0711625D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -905,6 +907,18 @@ Global
 		{5BA7546B-010C-4197-975E-F462BBEA1EC4}.Release|x64.Build.0 = Release|Any CPU
 		{5BA7546B-010C-4197-975E-F462BBEA1EC4}.Release|x86.ActiveCfg = Release|Any CPU
 		{5BA7546B-010C-4197-975E-F462BBEA1EC4}.Release|x86.Build.0 = Release|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Release|x64.ActiveCfg = Release|Any CPU
+		{86AF29BB-4CB1-4818-98A3-031D0711625D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
