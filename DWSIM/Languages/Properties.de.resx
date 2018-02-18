@@ -197,6 +197,9 @@
   <data name="PROP_CS_4" xml:space="preserve">
     <value>Wärmeleistung</value>
   </data>
+  <data name="PROP_CS_5" xml:space="preserve">
+    <value>Outlet Temperature</value>
+  </data>
   <data name="PROP_DC_0" xml:space="preserve">
     <value>Kondensatordruck</value>
     <comment>1</comment>

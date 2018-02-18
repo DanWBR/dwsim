@@ -1498,4 +1498,7 @@
   <data name="PROP_MS_231" xml:space="preserve">
     <value>Energia Livre de Helmholtz Molar da Fase Sólida</value>
   </data>
+  <data name="PROP_CS_5" xml:space="preserve">
+    <value>Outlet Temperature</value>
+  </data>
 </root>

@@ -1335,6 +1335,8 @@ out:        Dim ms1, ms2 As MaterialStream
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
                     Case 4
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
+                    Case 5
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
                 End Select
 
                 Return value
@@ -1348,15 +1350,15 @@ out:        Dim ms1, ms2 As MaterialStream
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RW
-                    For i = 0 To 4
+                    For i = 0 To 5
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 4
+                    For i = 0 To 5
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 4
+                    For i = 0 To 5
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
             End Select
@@ -1381,6 +1383,8 @@ out:        Dim ms1, ms2 As MaterialStream
                     Me.Volume = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
                 Case 3
                     Me.DeltaT = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
+                Case 5
+                    Me.OutletTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
             End Select
             Return 1
         End Function
@@ -1407,6 +1411,8 @@ out:        Dim ms1, ms2 As MaterialStream
                         value = su.deltaT
                     Case 4
                         value = su.heatflow
+                    Case 5
+                        value = su.temperature
                 End Select
 
                 Return value

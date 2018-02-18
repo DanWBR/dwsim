@@ -1560,4 +1560,7 @@
   <data name="PROP_MS_245" xml:space="preserve">
     <value>Molarity (Fase Sólida)</value>
   </data>
+  <data name="PROP_CS_5" xml:space="preserve">
+    <value>Temperatura na Saída</value>
+  </data>
 </root>

@@ -201,6 +201,9 @@
   <data name="PROP_CS_4" xml:space="preserve">
     <value>Heat load</value>
   </data>
+  <data name="PROP_CS_5" xml:space="preserve">
+    <value>Outlet Temperature</value>
+  </data>
   <data name="PROP_DC_0" xml:space="preserve">
     <value>Condenser Pressure</value>
     <comment>1</comment>
