@@ -150,7 +150,8 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var drop = new DropDown { Width = 200 };
+            var drop = new DropDown();
+            if (!Eto.Forms.Application.Instance.Platform.IsGtk) drop.Width = 200;
 
             foreach (var item in options)
             {
