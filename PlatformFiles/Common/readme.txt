@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 11
+Version 5.1 Update 12
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 12
+
+- [NEW] Exposed CSTR Outlet Temperature for Analysis tools
+- [CHG] Updated method for calculating Cp and Cp/T integrals
+- [FIX] Fixed ComboBox width for GTK# (Cross-Platform UI)
+- [FIX] Fixed System of Units ComboBox selection not working (Classic UI)
+- [FIX] Fixed Raoult's Law PP Entropy calculations
+- [FIX] Pipe Profile fixes (Classic UI)
 
 Version 5.1 Update 11
 

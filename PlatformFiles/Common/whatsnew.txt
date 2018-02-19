@@ -1,12 +1,8 @@
-Version 5.1 Update 11
+Version 5.1 Update 12
 
-- [CHG] UI enhancements
-- [FIX] Fixed CSTR and PFR heat balances
-- [FIX] Fixed issues with Petroleum Characterization utilities
-- [FIX] Fixed Raoult's Law entropy calculations
-
-Version 5.1 Update 10
-
-- [FIX] Fixed HetCat reaction support on CSTR
-- [FIX] Fixed reaction temperature limits not working on Equilibrium and CSTR reactors
-- [FIX] Fixed loading of duplicate compounds (Classic UI)
+- [NEW] Exposed CSTR Outlet Temperature for Analysis tools
+- [CHG] Updated method for calculating Cp and Cp/T integrals
+- [FIX] Fixed ComboBox width for GTK# (Cross-Platform UI)
+- [FIX] Fixed System of Units ComboBox selection not working (Classic UI)
+- [FIX] Fixed Raoult's Law PP Entropy calculations
+- [FIX] Pipe Profile fixes (Classic UI)
