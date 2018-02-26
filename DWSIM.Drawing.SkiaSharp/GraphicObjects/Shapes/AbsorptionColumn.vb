@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Shapes
 
@@ -70,11 +71,11 @@ Namespace GraphicObjects.Shapes
             Dim myIC1 As New ConnectionPoint
 
             With InputConnectors
-                    For i As Integer = 0 To InCount - 1
-                        .Item(i).Position = New Point(X, Y + (i + 1) / InCount * Height)
-                        .Item(i).Direction = ConDir.Right
-                        .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
-                    Next
+                For i As Integer = 0 To InCount - 1
+                    .Item(i).Position = New Point(X, Y + (i + 1) / InCount * Height)
+                    .Item(i).Direction = ConDir.Right
+                    .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
+                Next
             End With
 
             With OutputConnectors
@@ -114,8 +115,8 @@ Namespace GraphicObjects.Shapes
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
 
-           canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
-           
+            canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
+
 
             'Me.DrawRoundRect(g, X + 0.05 * 1.25 * Width, Y + 0.1 * Height, X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height, 20, myPen)
 

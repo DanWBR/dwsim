@@ -5,6 +5,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.DrawingTools.Point
 
 Public Class GraphicsSurface
 

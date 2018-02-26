@@ -3,6 +3,7 @@ Imports System.Linq
 Imports System.Xml.Linq
 Imports DWSIM.Interfaces
 Imports Interfaces = DWSIM.Interfaces
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects
 
@@ -83,7 +84,7 @@ Namespace GraphicObjects
         Public Sub New(ByVal position As SKPoint, owner As IGraphicObject)
 
             Me.New()
-            _relposition = New Point(position)
+            _relposition = New Point(position.X, position.Y)
             Me.Owner = owner
 
         End Sub
@@ -132,7 +133,7 @@ Namespace GraphicObjects
 
         Public Property Owner As IGraphicObject Implements IGraphicObjectExtension.Owner
 
-        Private _relposition As New DWSIM.Drawing.SkiaSharp.Point
+        Private _relposition As New Point
 
         Public Property RelativePosition As IPoint Implements IGraphicObjectExtension.RelativePosition
             Get

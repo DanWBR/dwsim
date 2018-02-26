@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Shapes
 
@@ -83,7 +84,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-          
+
             Dim myPen As New SKPaint()
             With myPen
                 .Color = LineColor
@@ -103,7 +104,7 @@ Namespace GraphicObjects.Shapes
             gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height))
             gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height))
             gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
-            
+
             gp.Close()
 
             canvas.DrawPath(gp, myPen)

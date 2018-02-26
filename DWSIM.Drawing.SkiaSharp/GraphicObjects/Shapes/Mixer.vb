@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Shapes
 

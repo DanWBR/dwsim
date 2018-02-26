@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Shapes
 
@@ -91,7 +92,7 @@ Namespace GraphicObjects.Shapes
                 .Direction = ConDir.Up
                 .Active = False
             End With
-            
+
         End Sub
 
         Public Overrides Sub Draw(ByVal g As Object)

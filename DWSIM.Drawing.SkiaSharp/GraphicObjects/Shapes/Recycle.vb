@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Shapes
 
@@ -56,7 +57,7 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count <> 0 Then
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
                 Else
                     .Add(myIC1)
                 End If
@@ -86,7 +87,7 @@ Namespace GraphicObjects.Shapes
             UpdateStatus()
             MyBase.Draw(g)
 
-           
+
             Dim myPen As New SKPaint()
             With myPen
                 .Color = SKColors.LightGreen

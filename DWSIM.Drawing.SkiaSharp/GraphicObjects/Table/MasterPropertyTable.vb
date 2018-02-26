@@ -20,6 +20,7 @@ Imports System.Linq
 Imports DWSIM.Interfaces
 Imports System.Xml
 Imports DWSIM.SharedClasses.Extras
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Tables
 
@@ -104,7 +105,7 @@ Namespace GraphicObjects.Tables
 
         Public Sub New(ByVal graphicPosition As Point)
             Me.New()
-            Me.SetPosition(graphicPosition.ToSKPoint)
+            'Me.SetPosition(graphicPosition.ToSKPoint)
         End Sub
 
         Public Sub New(ByVal posX As Integer, ByVal posY As Integer)

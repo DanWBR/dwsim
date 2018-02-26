@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Shapes
 
@@ -60,7 +61,7 @@ Namespace GraphicObjects.Shapes
 
                 If .Count <> 0 Then
                     .Item(0).Position = New Point(X + (0.25 - 0.14) * Width, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + (0.25 - 0.14) * Width, Y + 0.7 * Height)
+                    .Item(1).Position = New Point(X + (0.25 - 0.14) * Width, Y + 0.7 * Height)
                 Else
                     .Add(myIC1)
                     .Add(myIC2)

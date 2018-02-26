@@ -1,6 +1,7 @@
 Imports Interfaces = DWSIM.Interfaces
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects
 
@@ -102,7 +103,7 @@ Namespace GraphicObjects
         End Function
 
         Public Sub SetStartPosition(ByVal Value As Point)
-            Me.SetPosition(Value.ToSKPoint)
+            'Me.SetPosition(Value.ToSKPoint)
         End Sub
 
         Public Function GetEndPosition() As Point
@@ -752,7 +753,7 @@ Namespace GraphicObjects
 
             Dim path As New SKPath()
 
-            Dim points() As SKPoint = PointList.Select(Function(x) x.ToSKPoint).ToArray
+            Dim points() As Point = PointList.Select(Function(x) x).ToArray
 
             path.MoveTo(points(0).X, points(0).Y)
             For i As Integer = 1 To points.Length - 1

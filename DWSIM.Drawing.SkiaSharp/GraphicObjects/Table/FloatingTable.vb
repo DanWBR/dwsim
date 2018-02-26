@@ -21,6 +21,7 @@ Imports DWSIM.Interfaces
 Imports System.Xml
 Imports DWSIM.SharedClasses.Extras
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Tables
 
@@ -41,7 +42,7 @@ Namespace GraphicObjects.Tables
 
         Public Sub New(ByRef owner As ISimulationObject, ByVal graphicPosition As Point)
             Me.New(owner)
-            Me.SetPosition(graphicPosition.ToSKPoint)
+            'Me.SetPosition(graphicPosition.ToSKPoint)
         End Sub
 
         Public Sub New(ByRef owner As ISimulationObject, ByVal posX As Integer, ByVal posY As Integer)
