@@ -117,7 +117,6 @@
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />
     <Compile Include="Flowsheet\SensitivityAnalysis.vb" />
-    <Compile Include="Misc\CalculationMonitoring.vb" />
     <Compile Include="Misc\Crypto.vb" />
     <Compile Include="Misc\CapeOpenObjInfo.vb" />
     <Compile Include="Misc\CCapeCollection.vb" />
