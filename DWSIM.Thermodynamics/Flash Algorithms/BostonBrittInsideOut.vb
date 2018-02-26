@@ -403,7 +403,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                 Do
                     Tref += 0.8 * Vz(i) * VTc(i)
                     Tmin += 0.1 * Vz(i) * VTc(i)
-                    Tmax += 2.0 * Vz(i) * VTc(i)
+                    Tmax += 5.0 * Vz(i) * VTc(i)
                     i += 1
                 Loop Until i = n + 1
             Else
@@ -876,7 +876,7 @@ restart:    Do
                 Do
                     Tref += 0.8 * Vz(i) * VTc(i)
                     Tmin += 0.1 * Vz(i) * VTc(i)
-                    Tmax += 2.0 * Vz(i) * VTc(i)
+                    Tmax += 5.0 * Vz(i) * VTc(i)
                     i += 1
                 Loop Until i = n + 1
             Else

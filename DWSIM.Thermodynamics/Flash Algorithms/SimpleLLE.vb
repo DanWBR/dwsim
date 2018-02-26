@@ -37,7 +37,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
-
         Public Property InitialEstimatesForPhase1 As Double()
         Public Property UseInitialEstimatesForPhase1 As Boolean = False
 
@@ -47,6 +46,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Sub New()
             MyBase.New()
         End Sub
+
+        Public Overrides ReadOnly Property InternalUseOnly As Boolean
+            Get
+                Return True
+            End Get
+        End Property
 
         Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
             Get

@@ -35,6 +35,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Inherits FlashAlgorithm
 
+        Public Overrides ReadOnly Property InternalUseOnly As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
         Public proppack As PropertyPackage
 
         Dim tmpx As Double(), tmpdx As Double()

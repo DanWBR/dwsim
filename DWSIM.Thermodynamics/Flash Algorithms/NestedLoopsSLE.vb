@@ -950,10 +950,10 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
                 Tinf = Tref - 250
                 Tsup = Tref + 250
             Else
-                Tinf = 100
-                Tsup = 2000
+                Tinf = 20
+                Tsup = 10000
             End If
-            If Tinf < 100 Then Tinf = 100
+            If Tinf < 20 Then Tinf = 20
 
             Dim bo As New BrentOpt.Brent
             bo.DefineFuncDelegate(AddressOf Herror)
@@ -1041,10 +1041,10 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
                 Tinf = Tref - 200
                 Tsup = Tref + 200
             Else
-                Tinf = 100
-                Tsup = 2000
+                Tinf = 20
+                Tsup = 10000
             End If
-            If Tinf < 100 Then Tinf = 100
+            If Tinf < 20 Then Tinf = 20
             Dim bo As New BrentOpt.Brent
             bo.DefineFuncDelegate(AddressOf Serror)
             WriteDebugInfo("PS Flash: Starting calculation for " & Tinf & " <= T <= " & Tsup)

@@ -802,8 +802,8 @@ out:
 
             Dim Tmin, Tmax, epsilon(4) As Double
 
-            Tmax = 2000.0#
-            Tmin = 50.0#
+            Tmax = 10000.0#
+            Tmin = 20.0#
 
             epsilon(0) = 0.001
             epsilon(1) = 0.01
@@ -926,8 +926,8 @@ alt:
 
             Dim Tmin, Tmax, epsilon(4) As Double
 
-            Tmax = 2000.0#
-            Tmin = 50.0#
+            Tmax = 10000.0#
+            Tmin = 20.0#
 
             epsilon(0) = 0.001
             epsilon(1) = 0.01

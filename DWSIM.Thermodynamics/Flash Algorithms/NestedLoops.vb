@@ -361,8 +361,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
-            Tmax = 4000.0#
-            Tmin = 50.0#
+            Tmax = 10000.0#
+            Tmin = 20.0#
             maxDT = 30.0#
 
             epsilon(0) = 1
@@ -490,8 +490,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim Tmin, Tmax As Double
 
-            Tmax = 2000.0#
-            Tmin = 50.0#
+            Tmax = 10000.0#
+            Tmin = 20.0#
 
             If Tref = 0.0# Then Tref = 298.15
 
@@ -674,8 +674,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim Tmin, Tmax, epsilon(4) As Double
 
-            Tmax = 2000.0#
-            Tmin = 50.0#
+            Tmax = 10000.0#
+            Tmin = 20.0#
 
             epsilon(0) = 1
             epsilon(1) = 0.1
@@ -809,8 +809,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim Tmin, Tmax As Double
 
-            Tmax = 2000.0#
-            Tmin = 50.0#
+            Tmax = 10000.0#
+            Tmin = 20.0#
 
             If Tref = 0.0# Then Tref = 298.15
 
