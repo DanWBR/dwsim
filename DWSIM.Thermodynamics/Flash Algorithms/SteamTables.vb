@@ -42,6 +42,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Dim spp As SteamTablesPropertyPackage
 
+        Public Overrides ReadOnly Property InternalUseOnly As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
         Sub New()
             MyBase.New()
         End Sub
