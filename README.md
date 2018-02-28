@@ -29,7 +29,6 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 DWSIM.Apps.Updater|Updater Application
 DWSIM.ExtensionMethods|Extension Methods
 DWSIM.ExtensionMethods.Eto|Extension Methods for Eto.Forms
-DWSIM.FileDownloader|File downloader for automatic updates
 DWSIM.FlowsheetSolver|Flowsheet Solver library
 DWSIM.GlobalSettings|Shared global settings
 DWSIM.Interfaces|Interface definitions
@@ -49,7 +48,6 @@ DWSIM.UnitOperations|Unit Operations library
 DWSIM.XMLSerializer|Custom XML Serializer
 **Classic UI Projects (Windows Forms)**
 DWSIM|Main DWSIM GUI with Tools and Utilities
-DWSIM.Apps.RunAsx86|Runs DWSIM in 32-bit mode (Windows)
 DWSIM.Automation|Automation Library
 DWSIM.Automation.Tests|Automation Testing Application
 DWSIM.Apps.AzureServer|Azure Solver Server 
@@ -62,7 +60,6 @@ DWSIM.Controls.ZedGraph|Custom ZedGraph Library
 DWSIM.DrawingTools|Flowsheet Drawing Tools
 DWSIM.Plugins.NaturalGas|Natural Gas Properties Plugin
 **Cross-Platform UI Projects**
-DWSIM.Controls.MonoMac.TextEditor|Control for script code editing on Mac platform
 DWSIM.DrawingTools.SkiaSharp|Flowsheet Drawing Tools (SkiaSharp-based)
 DWSIM.DrawingTools.SkiaSharp.Extended|Additional Flowsheet Drawing Tools (SkiaSharp-based)
 DWSIM.FlowsheetBase|Flowsheet Base Class for Cross-Platform UI
