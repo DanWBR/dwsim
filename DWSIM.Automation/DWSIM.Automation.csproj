@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\DWSIM\bin\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -128,6 +128,15 @@
     <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)"=="Release" (
+
+xcopy "$(SolutionDir)DWSIM.Automation\bin\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM.Automation\bin\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM.Automation\bin\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+
+)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
