@@ -31,7 +31,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>..\DWSIM\bin\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>AzureServer.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
@@ -145,10 +145,12 @@
     <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
       <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
       <Name>DWSIM.FlowsheetSolver</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
@@ -158,6 +160,7 @@
     <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34be2d2d-9b3c-4c12-8c90-732e21cd7cb1}</Project>
@@ -166,6 +169,15 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)"=="Release" (
+
+xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+
+)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

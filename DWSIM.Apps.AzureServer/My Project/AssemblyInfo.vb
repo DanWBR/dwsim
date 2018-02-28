@@ -11,14 +11,14 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("DWSIM Azure Service Bus Solver Server")> 
 <Assembly: AssemblyDescription("DWSIM - Open Source Chemical Process Simulator")> 
 <Assembly: AssemblyCompany("DWSIM Project")> 
-<Assembly: AssemblyProduct("DWSIM")> 
-<Assembly: AssemblyCopyright("Copyright © 2007-2016 Daniel Medeiros")> 
+<Assembly: AssemblyProduct("DWSIM")>
+<Assembly: AssemblyCopyright("Copyright © 2007-2018 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("DWSIM")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("1064197c-aba3-4f6f-81df-4c2d53be71f5")> 
+<Assembly: Guid("1064197c-aba3-4f6f-81df-4c2d53be71f5")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,4 +31,4 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("5.1.*")> 
+<Assembly: AssemblyVersion("5.2.*")>
