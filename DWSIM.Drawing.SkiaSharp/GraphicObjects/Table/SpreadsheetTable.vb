@@ -48,7 +48,7 @@ Namespace GraphicObjects.Tables
 
         Public Sub New(ByVal graphicPosition As Point)
             Me.New()
-            'Me.SetPosition(graphicPosition.ToSKPoint)
+            Me.SetPosition(graphicPosition.X, graphicPosition.Y)
         End Sub
 
         Public Sub New(ByVal posX As Integer, ByVal posY As Integer)

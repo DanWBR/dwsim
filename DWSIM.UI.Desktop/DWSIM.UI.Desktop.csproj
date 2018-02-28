@@ -256,6 +256,7 @@
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Debug\plugins\*" "$(TargetDir)\plugins\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Windows\CoolProp.dll" "$(TargetDir)" /E /Y /F /D
 
 ) else if "$(PlatformName)" == "x64" (
 

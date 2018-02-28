@@ -239,6 +239,11 @@ Namespace GraphicObjects
             Y = Value.Y
         End Sub
 
+        Public Overridable Sub SetPosition(ByVal X0 As Integer, ByVal Y0 As Integer)
+            X = X0
+            Y = Y0
+        End Sub
+
         Public Overridable Sub SetSize(ByVal Value As SKSize)
             Width = Value.Width
             Height = Value.Height
