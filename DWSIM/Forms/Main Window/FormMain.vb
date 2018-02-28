@@ -679,9 +679,6 @@ Public Class FormMain
             OpenWelcomeScreen()
         End If
 
-        'check for updates (automatic updater)
-        If My.Settings.AutomaticUpdates Then Task.Factory.StartNew(Sub() LaunchUpdateProcess())
-
     End Sub
 
     Sub OpenWelcomeScreen()
@@ -3049,70 +3046,9 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub LaunchUpdateProcess()
-
-        Dim updater As New Global.DWSIM.Updater.Updater()
-
-        AddHandler UpdateBox_Button1.Click, Sub() Me.UIThread(Sub()
-                                                                  updater.Downloader.Stop(True)
-                                                                  updater.DeleteFiles()
-                                                                  UpdateBox_Panel.Visible = False
-                                                                  timer1.Stop()
-                                                              End Sub)
-
-        updater.BeginUpdater = Sub()
-                                   Me.UIThread(Sub()
-                                                   UpdateBox_Panel.Visible = True
-                                                   UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "..."
-                                               End Sub)
-                               End Sub
-
-        updater.UpdaterRunning = Sub()
-                                     Me.UIThread(Sub()
-                                                     AddHandler timer1.Tick, Sub()
-                                                                                 Me.UIThread(Sub()
-                                                                                                 Try
-                                                                                                     UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "... " &
-                                                                                                         updater.Downloader.CurrentFile.Name & " (" & FileDownloader.FormatSizeBinary(updater.Downloader.CurrentFileProgress) & "/" &
-                                                                                                         FileDownloader.FormatSizeBinary(updater.Downloader.CurrentFileSize) & ")" & ", " &
-                                                                                                         String.Format("{0}/s", FileDownloader.FormatSizeBinary(updater.Downloader.DownloadSpeed))
-                                                                                                     UpdateBox_ProgressBar1.Value = updater.Downloader.TotalPercentage
-                                                                                                 Catch ex As Exception
-                                                                                                 End Try
-                                                                                             End Sub)
-                                                                             End Sub
-                                                     timer1.Interval = 500
-                                                     timer1.Start()
-                                                 End Sub)
-                                 End Sub
-
-        AddHandler updater.Downloader.FileDownloadFailed, Sub() Me.UIThread(Sub()
-                                                                                updater.DeleteFiles()
-                                                                                UpdateBox_Panel.Visible = False
-                                                                                timer1.Stop()
-                                                                            End Sub)
-
-        AddHandler updater.Downloader.Canceled, Sub() Me.UIThread(Sub()
-                                                                      updater.DeleteFiles()
-                                                                      UpdateBox_Panel.Visible = False
-                                                                      timer1.Stop()
-                                                                  End Sub)
-
-        AddHandler updater.Downloader.Completed, Sub() Me.UIThread(Sub()
-                                                                       UpdateBox_Label1.Text = DWSIM.App.GetLocalString("UpdateReady")
-                                                                       UpdateBox_ProgressBar1.Visible = False
-                                                                       UpdateBox_Button1.Enabled = False
-                                                                       UpdateBox_Button2.Enabled = True
-                                                                       timer1.Stop()
-                                                                   End Sub)
-
-        updater.LaunchUpdateProcess()
-
-    End Sub
-
 #End Region
 
-    Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) Handles UpdateBox_Button2.Click
+    Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) 
         Try
             File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run", "")
             Application.Restart()
