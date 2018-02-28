@@ -75,20 +75,36 @@ namespace DWSIM.UI.Forms.Forms
 
             string osinfo = "", clrinfo = "", meminfo = "";
 
-            osinfo = Environment.OSVersion.ToString();
-
-            if (GlobalSettings.Settings.IsRunningOnMono())
+            if (Application.Instance.Platform.IsMac)
             {
-                Type type = Type.GetType("Mono.Runtime");
-                if (type != null)
+                var osversion = Environment.OSVersion.Version.ToString();
+                switch (osversion)
                 {
-                    MethodInfo dispalayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
-                    if (dispalayName != null) clrinfo = "Mono Framework, Version " + dispalayName.Invoke(null, null).ToString();
+                    case "11.0.0.0": osinfo = "Mac OS X Lion (v10.7.0)"; break;
+                    case "11.4.2.0": osinfo = "Mac OS X Lion (v10.7.5)"; break;
+                    case "12.0.0.0": osinfo = "OS X Mountain Lion (v10.8.0)"; break;
+                    case "13.0.0.0": osinfo = "OS X Mavericks (v10.9.0)"; break;
+                    case "13.4.0.0": osinfo = "OS X Mavericks (v10.9.5)"; break;
+                    case "14.0.0.0": osinfo = "OS X Yosemite (v10.10.0)"; break;
+                    case "14.5.0.0": osinfo = "OS X Yosemite (v10.10.5)"; break;
+                    case "15.0.0.0": osinfo = "OS X El Captain (v10.11.0)"; break;
+                    case "15.6.0.0": osinfo = "OS X El Captain (v10.11.6)"; break;
+                    case "16.0.0.0": osinfo = "macOS Sierra (v10.12.0)"; break;
+                    case "16.1.0.0": osinfo = "macOS Sierra (v10.12.1)"; break;
+                    case "16.3.0.0": osinfo = "macOS Sierra (v10.12.2)"; break;
+                    case "16.4.0.0": osinfo = "macOS Sierra (v10.12.3)"; break;
+                    case "16.5.0.0": osinfo = "macOS Sierra (v10.12.4)"; break;
+                    case "16.6.0.0": osinfo = "macOS Sierra (v10.12.5)"; break;
+                    case "16.7.0.0": osinfo = "macOS Sierra (v10.12.6)"; break;
+                    case "17.0.0.0": osinfo = "macOS High Sierra (v10.13.0)"; break;
+                    default: osinfo = osversion; break;
                 }
             }
             else {
-                clrinfo = "Microsoft .NET Framework, Runtime Version " + System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion().ToString();            
+                osinfo = Environment.OSVersion.ToString();
             }
+
+            clrinfo = SharedClasses.Utility.GetRuntimeVersion();
             
             meminfo = (GC.GetTotalMemory(false) / 1024 / 1024).ToString("#") + " MB managed, " + (Environment.WorkingSet / 1024 / 1024).ToString("#") + " MB total";
 

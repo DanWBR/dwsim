@@ -60,7 +60,7 @@ namespace DWSIM.UI.Forms
                 if (vinfo > 0) lbl1a.Text += " Update " + vinfo;
             }
 
-            var lbl2 = new Label { Style = "splashlabels2", Text = "FrameworkVersion".Localize() + Environment.Version.ToString() };
+            var lbl2 = new Label { Style = "splashlabels2", Text = SharedClasses.Utility.GetRuntimeVersion() };
 
             var lbl3 = new Label { Style = "fixedwidth", Text = "GPLNotice".Localize() };
 

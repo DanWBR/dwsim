@@ -451,4 +451,23 @@ Public Class Utility
 
     End Function
 
+    Shared Function GetRuntimeVersion() As String
+
+        If GlobalSettings.Settings.IsRunningOnMono Then
+
+            Dim t As Type = Type.GetType("Mono.Runtime")
+            Dim displayName As MethodInfo = t.GetMethod("GetDisplayName", BindingFlags.NonPublic + BindingFlags.Static)
+            Dim verstr As String = "Mono Framework v" & displayName.Invoke(Nothing, Nothing)
+            If verstr.Contains("(") Then verstr = verstr.Substring(0, verstr.IndexOf("(") - 1)
+            If displayName IsNot Nothing Then Return verstr Else Return ""
+
+        Else
+
+            Return ".NET Framework (CLR v" & Environment.Version.ToString() & ")"
+
+        End If
+
+
+    End Function
+
 End Class

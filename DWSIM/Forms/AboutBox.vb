@@ -34,7 +34,7 @@ Public Class AboutBox
         Copyright.Text = My.Application.Info.Copyright
 
         LblOSInfo.Text = My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"
-        LblCLRInfo.Text = "Microsoft .NET Framework, Runtime Version " & System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion.ToString()
+        LblCLRInfo.Text = SharedClasses.Utility.GetRuntimeVersion()
         Lblmem.Text = (GC.GetTotalMemory(False) / 1024 / 1024).ToString("#") & " MB managed, " & (My.Application.Info.WorkingSet / 1024 / 1024).ToString("#") & " MB total"
 
         Lblcpuinfo.Text = "Retrieving CPU info..."
@@ -121,7 +121,6 @@ Public Class AboutBox
             .Add(New Object() {"pyeq2", "10.1", "2013", "James R. Phillips", "https://code.google.com/p/pyeq2/", "BSD 3", "http://opensource.org/licenses/BSD-3-Clause"})
             .Add(New Object() {"IPOPT", "3.9.2", "2011", "COIN-OR", "https://projects.coin-or.org/Ipopt", "Eclipse Public License", "http://www.eclipse.org/legal/epl-v10.html"})
             .Add(New Object() {"lp_solve", "5.5", "2009", "Michel Berkelaar, Kjell Eikland, Peter Notebaert", "http://lpsolve.sourceforge.net", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
-            .Add(New Object() {"FPROPS", "r4057", "2011", "ASCEND Project", "http://ascend4.org/FPROPS", "GPLv3", "http://www.gnu.org/licenses/gpl.html"})
             .Add(New Object() {"CoolProp", "6.0.0", "2016", "Ian H. Bell", "http://wwww.coolprop.org", "MIT-style License", "https://github.com/ibell/coolprop/blob/master/LICENSE"})
             .Add(New Object() {"ChemSep Database", "7.12", "2016", "Harry Kooijman, Ross Taylor", "http://www.chemsep.org", "Perl Artistic License v2", "http://www.perlfoundation.org/artistic_license_2_0"})
             .Add(New Object() {"Flee", "0.9.14", "2009", "Eugene Ciloci", "https://flee.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
@@ -135,24 +134,20 @@ Public Class AboutBox
             .Add(New Object() {"Indigo", "1.1", "2013", "GGA Software Services LLC", "http://www.ggasoftware.com/opensource/indigo", "GPLv3", "http://www.gnu.org/licenses/gpl.html"})
             .Add(New Object() {"Nini", "1.1", "2010", "Brent R. Matzelle", "https://sourceforge.net/projects/nini", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"SyntaxBox", "1.4.10.17492", "2010", "Roger Alsing", "https://syntaxbox.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
-            .Add(New Object() {"DockPanel", "2.7", "2013", "DockPanel Project", "https://sourceforge.net/projects/dockpanel", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
-            .Add(New Object() {"ZedGraph", "5.1.0.32336", "2005", "John Champion", "https://sourceforge.net/projects/zedgraph", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"scintillaNET", "3.5.1.0", "2015", "Jacob Slusser", "https://github.com/jacobslusser/scintillaNET", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"Jolt.NET", "0.4", "2009", "Steve Guidi", "https://github.com/jacobslusser/scintillaNET", "New BSD License (BSD)", "http://jolt.codeplex.com/license"})
             .Add(New Object() {"Yeppp!", "1.0.0.1", "2014", "Marat Dukhan", "http://www.yeppp.info", "Yeppp! License", "http://www.yeppp.info/resources/yeppp-license.txt"})
             .Add(New Object() {"ExcelDNA", "0.33", "2015", "Govert van Drimmelen", "http://excel-dna.net/", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"AODL", "1.4.0.3", "2011", "Chris Constantin", "https://bitbucket.org/chrisc/aodl", "Apache License v2", "https://wiki.openoffice.org/wiki/OpenOffice.org_Wiki:Copyrights"})
-            .Add(New Object() {"SwarmOps", "3.1", "2011", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/swarmops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/swarmops/cs/files/license.txt"})
-            .Add(New Object() {"RandomOps", "2.1", "2010", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/randomops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/randomops/cs/files/license.txt"})
         End With
         Me.DataGridView1.Sort(Me.DataGridView1.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
 
         'get DWSIM components' versions
 
-        Dim assnames = New String() {"DWSIM.exe", "DWSIM.Automation.dll", "DWSIM.DrawingTools.dll", "DWSIM.ExtensionMethods.dll", "DWSIM.FileDownloader.dll",
+        Dim assnames = New String() {"DWSIM.exe", "DWSIM.Automation.dll", "DWSIM.DrawingTools.dll", "DWSIM.ExtensionMethods.dll",
                                      "DWSIM.FlowsheetSolver.dll", "DWSIM.GlobalSettings.dll", "DWSIM.Interfaces.dll", "DWSIM.MathOps.dll",
                                      "DWSIM.SharedClasses.dll", "DWSIM.Thermodynamics.dll",
-                                     "DWSIM.UnitOperations.dll", "DWSIM.Updater.exe", "DWSIM.XMLSerializer.dll"}
+                                     "DWSIM.UnitOperations.dll", "DWSIM.XMLSerializer.dll"}
 
         dgvDWSIMComponents.Rows.Clear()
         For Each assn In assnames

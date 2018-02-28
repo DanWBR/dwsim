@@ -95,10 +95,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DWSIM.Controls.MonoMac.TextEditor\DWSIM.Controls.MonoMac.TextEditor.csproj">
-      <Project>{922424d8-eb54-422f-a7d1-9ead36f5481c}</Project>
-      <Name>DWSIM.Controls.MonoMac.TextEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
       <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp</Name>

@@ -4,8 +4,6 @@ using MonoMac.CoreGraphics;
 using SkiaSharp;
 using System;
 using DWSIM.UI.Controls;
-using System.IO;
-using MonoMac.AppKit.TextKit.Formatter;
 
 namespace DWSIM.UI.Desktop.Mac
 {
