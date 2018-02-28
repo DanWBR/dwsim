@@ -3,6 +3,7 @@ Imports System.Net.Http
 Imports System.Net
 Imports System.Text
 Imports System.Web
+Imports Globalization = System.Globalization
 
 Public Class KDBParser
 

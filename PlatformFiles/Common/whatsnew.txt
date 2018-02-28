@@ -1,8 +1,5 @@
-Version 5.1 Update 12
 
-- [NEW] Exposed CSTR Outlet Temperature for Analysis tools
-- [CHG] Updated method for calculating Cp and Cp/T integrals
-- [FIX] Fixed ComboBox width for GTK# (Cross-Platform UI)
-- [FIX] Fixed System of Units ComboBox selection not working (Classic UI)
-- [FIX] Fixed Raoult's Law PP Entropy calculations
-- [FIX] Pipe Profile fixes (Classic UI)
+Version 5.2
+
+- [CHG] Updated the target version of .NET Framework to v4.7.1
+- [FIX] Fixed Flash Algorithm temperature limits

@@ -5,6 +5,7 @@ Imports System.Text
 Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Web
+Imports Globalization = System.Globalization
 
 Public Class ChemeoParser
 

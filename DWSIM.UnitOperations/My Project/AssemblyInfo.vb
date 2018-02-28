@@ -13,8 +13,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("DWSIM Unit Operations")>
 <Assembly: AssemblyDescription("DWSIM Simulator Unit Operations Library")>
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.UnitOperations")> 
-<Assembly: AssemblyCopyright("Copyright © 2016- 2017 DWSIM Project")> 
+<Assembly: AssemblyProduct("DWSIM.UnitOperations")>
+<Assembly: AssemblyCopyright("Copyright © 2016- 2018 DWSIM Project")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
@@ -33,6 +33,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("5.1.*")> 
+<Assembly: AssemblyVersion("5.2.*")>
 
 <Assembly: NeutralResourcesLanguageAttribute("pt-BR")> 

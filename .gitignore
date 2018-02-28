@@ -103,3 +103,4 @@ TCPServer/bin/Debug/*
 /packages/SkiaSharp.1.55.1
 /packages
 /DistPackages
+/.vs/DWSIM5/v15/Server/sqlite3

@@ -77,6 +77,5 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 
 ### Compiling
 
-- DWSIM can be compiled using Visual Studio 2013 or newer, only on Windows.
-- To get pre-release [Eto.Forms](https://github.com/picoe/Eto) packages, add https://www.myget.org/F/eto/ as a NuGet package source.
+- DWSIM can be compiled using Visual Studio 2017 on Windows.
 - To compile everything, change the Build target to 'Debug/Release' => 'x64'.

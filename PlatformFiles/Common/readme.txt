@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 12
+Version 5.2
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -27,14 +27,14 @@ SYSTEM REQUIREMENTS
 
 OS:             
 
-Windows: 64-bit x86 XP/Vista/7/8/10
+Windows: 32/64-bit Vista/7/8/10
 Linux: 64-bit x86 Ubuntu 12.04 or newer / 32-bit armhf Raspbian/Ubuntu MATE
 macOS: 10.7 (OS X Lion) or newer
 
 Software:
 
-Microsoft .NET Framework 4.5 or newer (Windows) 
-Mono Framework 5.0.0 or newer (Linux/macOS)
+Microsoft .NET Framework 4.7.1 or newer (Windows) 
+Mono Framework 5.8.0 or newer (Linux/macOS)
 
 CPU:			
 
@@ -61,6 +61,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2
+
+- [CHG] Updated the target version of .NET Framework to v4.7.1
+- [FIX] Fixed Flash Algorithm temperature limits
 
 Version 5.1 Update 12
 
