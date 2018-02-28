@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using ScintillaNET;
 using System.Drawing;
+using System;
 
 namespace DWSIM.UI.Desktop.WinForms
 {
@@ -10,21 +11,34 @@ namespace DWSIM.UI.Desktop.WinForms
     {
 
         ScintillaNET.Scintilla te;
+        TextBox te2;
+        Type t;
 
         public CodeEditorControlHandler()
         {
 
-            te = new Scintilla();
+            t = Type.GetType("Mono.Runtime");
+            if (t != null)
+            {
+                te2 = new TextBox();
+                te2.Font = new System.Drawing.Font(FontFamily.GenericMonospace, 9.0f);
+                te2.Multiline = true;
+                te2.ScrollBars = ScrollBars.Both;
+                this.Control = te2;
+            }
+            else {
+                te = new Scintilla();
+                te.AnnotationVisible = ScintillaNET.Annotation.Standard;
+                te.AutoCChooseSingle = true;
+                te.AutoCMaxHeight = 10;
+                te.AutoCOrder = ScintillaNET.Order.PerformSort;
+                te.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                te.Lexer = ScintillaNET.Lexer.Python;
+                te.UseTabs = false;
+                SetEditorStyle(te);
+                this.Control = te;
+            }
 
-            te.AnnotationVisible = ScintillaNET.Annotation.Standard;
-            te.AutoCChooseSingle = true;
-            te.AutoCMaxHeight = 10;
-            te.AutoCOrder = ScintillaNET.Order.PerformSort;
-            te.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            te.Lexer = ScintillaNET.Lexer.Python;
-            te.UseTabs = false;
-            SetEditorStyle(te);
-            this.Control = te;
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -44,12 +58,26 @@ namespace DWSIM.UI.Desktop.WinForms
         {
             get
             {
-                return te.Text;
+                if (t != null)
+                {
+                    return te2.Text;
+                }
+                else
+                {
+                    return te.Text;
+                }
             }
 
             set
             {
-                te.Text = value;
+                if (t != null)
+                {
+                    te2.Text = value;
+                }
+                else
+                {
+                    te.Text = value;
+                }
             }
         }
 

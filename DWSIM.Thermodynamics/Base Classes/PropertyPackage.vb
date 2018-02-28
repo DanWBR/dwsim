@@ -10939,6 +10939,8 @@ Final3:
                                                Sub(sender, e)
                                                    If PropertyOverrides.ContainsKey(sender.SelectedKey) Then
                                                        codeeditor.Text = PropertyOverrides(sender.SelectedKey)
+                                                   Else
+                                                       codeeditor.Text = ""
                                                    End If
                                                End Sub)
 
