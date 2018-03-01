@@ -87,6 +87,8 @@ Namespace DWSIM
             My.Settings.CurrentPlatform = GlobalSettings.Settings.GetPlatform
             My.Settings.CurrentEnvironment = GlobalSettings.Settings.GetEnvironment
 
+            GlobalSettings.Settings.InspectorEnabled = My.Settings.InspectorEnabled
+
             GlobalSettings.Settings.CalculatorActivated = True
 
             GlobalSettings.Settings.UserDatabases.Clear()

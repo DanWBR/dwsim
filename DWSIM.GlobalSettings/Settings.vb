@@ -126,7 +126,7 @@ Public Class Settings
 
     Public Shared Property CalculationRequestID As String = ""
 
-    Public Shared Property CalculationMonitorEnabled As Boolean = False
+    Public Shared Property InspectorEnabled As Boolean = False
 
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
@@ -370,6 +370,8 @@ Public Class Settings
 
         CurrentVersion = source.Configs("Misc").Get("CurrentVersion", "")
 
+        InspectorEnabled = source.Configs("Misc").GetBoolean("InspectorEnabled", False)
+
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
         'autom = source.Configs("Misc").GetBoolean("AutoUpdate", True)
@@ -483,6 +485,8 @@ Public Class Settings
         source.Configs("Misc").Set("UseSIMDExtensions", UseSIMDExtensions)
 
         source.Configs("Misc").Set("CurrentVersion", CurrentVersion)
+
+        source.Configs("Misc").Set("InspectorEnabled", InspectorEnabled)
 
         'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
         'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)
