@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>5.2</Version>
+    <Authors>Daniel Medeiros</Authors>
+    <Company>DWSIM Project</Company>
+    <Copyright>Copyright 2018 Daniel Medeiros</Copyright>
+  </PropertyGroup>
+
+</Project>
