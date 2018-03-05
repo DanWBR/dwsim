@@ -86,7 +86,7 @@ Namespace GraphicObjects
 
 #End Region
 
-        Public Sub UpdateStatus2(ByRef ConnPen As SKPaint, ByRef Conn As ConnectorGraphic, ByRef p1 As Point, ByRef p2 As Point)
+        Public Sub UpdateStatus2(ByVal ConnPen As SKPaint, ByVal Conn As ConnectorGraphic)
 
             ConnPen = New SKPaint()
 
@@ -732,7 +732,7 @@ Namespace GraphicObjects
 
             Dim myPen As New SKPaint
 
-            UpdateStatus2(myPen, Me, StartPos, EndPos)
+            UpdateStatus2(myPen, Me)
 
             With myPen
                 .IsStroke = True
