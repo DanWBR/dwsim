@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Eto.Drawing;
 using Eto.Forms;
 using DWSIM.ExtensionMethods;
+using System.IO;
 
 namespace DWSIM.UI.Shared
 {
@@ -13,6 +14,15 @@ namespace DWSIM.UI.Shared
     {
 
         static string imgprefix = "DWSIM.ExtensionMethods.Eto.Resources.Icons.";
+
+        public static byte[] ImageToByte(System.Drawing.Bitmap img)
+        {
+            using (var stream = new MemoryStream())
+            {
+                img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                return stream.ToArray();
+            }
+        }
 
         public static bool IsValidDouble(string s)
         {

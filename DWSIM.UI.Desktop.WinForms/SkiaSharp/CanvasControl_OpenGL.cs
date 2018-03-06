@@ -52,6 +52,11 @@ namespace DWSIM.UI.Desktop.WinForms
         public Action<Eto.Forms.MouseEventArgs> WPFMouseDown;
         public Action<Eto.Forms.MouseEventArgs> WPFMouseUp;
         public Action<Eto.Forms.MouseEventArgs> WPFMouseDoubleClick;
+        public Action<Eto.Forms.DragEventArgs> WPFDragEnter;
+        public Action<Eto.Forms.DragEventArgs> WPFDragOver;
+        public Action<Eto.Forms.DragEventArgs> WPFDragDrop;
+
+        public Func<DragEventArgs, Eto.Forms.DragEventArgs> GetEtoDragEventArgs;
 
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
@@ -65,6 +70,7 @@ namespace DWSIM.UI.Desktop.WinForms
         public FlowsheetSurface_WinForms_OpenGL()
         {
             ResizeRedraw = true;
+            AllowDrop = true;
         }
 
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
@@ -178,6 +184,47 @@ namespace DWSIM.UI.Desktop.WinForms
             fsurface.Zoom += e.Delta / 4 / 100.0f;
             this.Invalidate();
         }
+
+        protected override void OnDragEnter(DragEventArgs drgevent)
+        {
+            base.OnDragEnter(drgevent);
+            drgevent.Effect = DragDropEffects.All;
+            if (WPFHost) WPFDragEnter.Invoke(GetDragEventArgs(drgevent));
+        }
+
+        protected override void OnDragOver(DragEventArgs drgevent)
+        {
+            base.OnDragOver(drgevent);
+            if (WPFHost) WPFDragOver.Invoke(GetDragEventArgs(drgevent));
+        }
+
+        protected override void OnDragDrop(DragEventArgs drgevent)
+        {
+            base.OnDragDrop(drgevent);
+            if (WPFHost) WPFDragDrop.Invoke(GetDragEventArgs(drgevent));
+        }
+
+        Eto.Forms.DragEventArgs GetDragEventArgs(DragEventArgs data)
+        {
+            var dragData = (data.Data as DataObject).ToEto();
+            var sourceWidget = data.Data.GetData("eto.source.control");
+            var source = sourceWidget == null ? null : (Eto.Forms.Control)sourceWidget;
+            var modifiers = data.GetEtoModifiers();
+            var buttons = data.GetEtoButtons();
+            var location = PointFromScreen(new Eto.Drawing.PointF(data.X, data.Y));
+            return new Eto.Forms.DragEventArgs(source, dragData, data.AllowedEffect.ToEto(), location, modifiers, buttons);
+        }
+
+        public virtual Eto.Drawing.PointF PointFromScreen(Eto.Drawing.PointF point)
+        {
+            return !this.IsDisposed ? this.PointToClient(point.ToSDPoint()).ToEto() : Eto.Drawing.PointF.Empty; // safety check added because this is hit in certain situations.
+        }
+
+        public virtual Eto.Drawing.PointF PointToScreen(Eto.Drawing.PointF point)
+        {
+            return !this.IsDisposed ? this.PointToScreen(point.ToSDPoint()).ToEto() : Eto.Drawing.PointF.Empty; // safety check added because this is hit in certain situations.
+        }
+
 
     }
 

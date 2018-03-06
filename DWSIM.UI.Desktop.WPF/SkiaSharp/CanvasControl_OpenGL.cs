@@ -48,6 +48,23 @@ namespace DWSIM.UI.Desktop.WPF
                 this.Callback.OnMouseDoubleClick(Widget, e);
             });
 
+            nativecontrol.WinFormsControl.AllowDrop = true;
+
+            nativecontrol.WinFormsControl.WPFDragEnter = ((e) =>
+            {
+                this.Callback.OnDragEnter(Widget, e);
+            });
+
+            nativecontrol.WinFormsControl.WPFDragOver = ((e) =>
+            {
+                this.Callback.OnDragOver(Widget, e);
+            });
+
+            nativecontrol.WinFormsControl.WPFDragDrop = ((e) =>
+            {
+                this.Callback.OnDragDrop(Widget, e);
+            });
+
         }
 
         public override void OnLoadComplete(EventArgs e)
@@ -106,7 +123,6 @@ namespace DWSIM.UI.Desktop.WPF
         public FlowsheetSurface_WPF_OpenGL()
         {
             this.Loaded += Window_Loaded;
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

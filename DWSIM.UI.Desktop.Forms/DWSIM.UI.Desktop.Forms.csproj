@@ -106,10 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\AboutBox.cs" />
-    <Compile Include="Forms\Flowsheet.cs" />
-    <Compile Include="Forms\Flowsheet.eto.cs">
+    <Compile Include="Forms\Flowsheet\EditorContainer\EditorContainer.cs" />
+    <Compile Include="Forms\Flowsheet\Flowsheet.cs" />
+    <Compile Include="Forms\Flowsheet\Flowsheet.eto.cs">
       <DependentUpon>Flowsheet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Flowsheet\Objects\FlowsheetObjectPanelItem.cs" />
     <Compile Include="Forms\GeneralSettings.cs" />
     <Compile Include="Forms\LoadingData.cs" />
     <Compile Include="Forms\LoadingData.eto.cs">
@@ -121,8 +123,8 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\MainForm.cs" />
-    <Compile Include="Forms\MainForm.eto.cs">
+    <Compile Include="Forms\Main\MainForm.cs" />
+    <Compile Include="Forms\Main\MainForm.eto.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Shared\Shared.cs" />
