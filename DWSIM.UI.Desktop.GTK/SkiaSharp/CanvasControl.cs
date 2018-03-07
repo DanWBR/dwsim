@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 using DWSIM.Drawing.SkiaSharp;
 using DWSIM.UI.Controls;
 using SkiaSharp;
+using Eto.Forms;
+using Eto.GtkSharp.Forms;
+using Eto.Drawing;
+using Eto.GtkSharp;
 
 namespace DWSIM.UI.Desktop.GTK
 {
     public class FlowsheetSurfaceControlHandler : Eto.GtkSharp.Forms.GtkControl<Gtk.EventBox, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
     {
-       private FlowsheetSurface_GTK nativecontrol;
+        private FlowsheetSurface_GTK nativecontrol;
 
-       public FlowsheetSurfaceControlHandler()
+        public FlowsheetSurfaceControlHandler()
         {
             nativecontrol = new FlowsheetSurface_GTK();
             this.Control = nativecontrol;
@@ -61,7 +65,7 @@ namespace DWSIM.UI.Desktop.GTK
                 ((FlowsheetSurface_GTK)this.Control).fbase = value;
             }
         }
-
+        
     }
 
     public class FlowsheetSurface_GTK : Gtk.EventBox

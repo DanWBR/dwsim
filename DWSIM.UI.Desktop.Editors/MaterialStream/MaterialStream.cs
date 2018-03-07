@@ -274,11 +274,11 @@ namespace DWSIM.UI.Desktop.Editors
                             }
                         };
 
-                        s.CreateAndAddLabelRow(container, "Composition Tools");
+                        s.CreateAndAddLabelRow(container, "Mixture Composition Tools");
 
                         Double total = 0.0f;
 
-                        var btnNormalize = s.CreateAndAddLabelAndButtonRow(container, "Normalize Composition", "Normalize", null, null);
+                        var btnNormalize = s.CreateAndAddButtonRow(container, "Normalize", null, null);
 
                         btnNormalize.Click += (sender, e) =>
                         {
@@ -305,7 +305,7 @@ namespace DWSIM.UI.Desktop.Editors
                             }
                         };
 
-                        var btnEqualize = s.CreateAndAddLabelAndButtonRow(container, "Equalize Composition", "Equalize", null, null);
+                        var btnEqualize = s.CreateAndAddButtonRow(container, "Equalize", null, null);
 
                         btnEqualize.Click += (sender, e) =>
                         {
@@ -315,7 +315,7 @@ namespace DWSIM.UI.Desktop.Editors
                             }
                         };
 
-                        var btnClear = s.CreateAndAddLabelAndButtonRow(container, "Clear Composition", "Clear", null, null);
+                        var btnClear = s.CreateAndAddButtonRow(container, "Clear", null, null);
 
                         btnClear.Click += (sender, e) =>
                         {
@@ -325,7 +325,7 @@ namespace DWSIM.UI.Desktop.Editors
                             }
                         };
 
-                        var btnAccept = s.CreateAndAddLabelAndButtonRow(container, "Accept Changes and Update Composition", "Accept", null, null);
+                        var btnAccept = s.CreateAndAddButtonRow(container, "Accept/Update", null, null);
 
                         btnAccept.Click += (sender, e) =>
                         {

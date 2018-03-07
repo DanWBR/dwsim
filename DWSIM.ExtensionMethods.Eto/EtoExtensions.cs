@@ -161,7 +161,7 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             var drop = new DropDown();
-            if (!Eto.Forms.Application.Instance.Platform.IsGtk) drop.Width = 200;
+            if (!Eto.Forms.Application.Instance.Platform.IsGtk) drop.Width = 140;
 
             foreach (var item in options)
             {
@@ -233,7 +233,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200, Style = "textbox-rightalign" };
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 140, Style = "textbox-rightalign" };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -250,7 +250,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var editor = new ColorPicker { Width = 200,  Value = currval };
+            var editor = new ColorPicker { Width = 140,  Value = currval };
 
             if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((ColorPicker)sender, e);
 
@@ -267,7 +267,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var editor = new NumericStepper { Width = 200, Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
+            var editor = new NumericStepper { Width = 140, Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
 
             if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((NumericStepper)sender, e);
 
@@ -285,7 +285,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200, Style = "textbox-rightalign" };
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 140, Style = "textbox-rightalign" };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -375,7 +375,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval, Width = 200 };
+            var edittext = new TextBox { Text = currval, Width = 140 };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -392,7 +392,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center };
-            var txt2 = new Label { Text = text2, Width = 200, VerticalAlignment = VerticalAlignment.Center };
+            var txt2 = new Label { Text = text2, Width = 140, VerticalAlignment = VerticalAlignment.Center };
 
             var tr = new TableRow(txt, null, txt2);
 
@@ -460,7 +460,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
-            var btn = new Button { Width = 200, Text = buttonlabel };
+            var btn = new Button { Width = 140, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
@@ -480,7 +480,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
-            control.Width = 200;
+            control.Width = 140;
 
             var tr = new TableRow(txt, null, control);
 
@@ -493,7 +493,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center, Font = SystemFonts.Bold() };
-            var btn = new Button { Width = 200, Text = buttonlabel };
+            var btn = new Button { Width = 140, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
@@ -629,7 +629,7 @@ namespace DWSIM.UI.Shared
         public static Button CreateAndAddButtonRow(this DynamicLayout container, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
         {
 
-            var btn = new Button { Width = 200, Text = buttonlabel };
+            var btn = new Button { Width = 140, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
