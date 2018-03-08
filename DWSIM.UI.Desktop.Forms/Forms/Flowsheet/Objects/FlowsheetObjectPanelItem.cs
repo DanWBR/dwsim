@@ -34,13 +34,13 @@ namespace DWSIM.UI.Forms
 
             MouseLeave += FlowsheetObjectPanelItem_MouseLeave;
 
-            BackgroundColor = SystemColors.ControlBackground;
+            BackgroundColor = Colors.White;
 
         }
 
         private void FlowsheetObjectPanelItem_MouseLeave(object sender, MouseEventArgs e)
         {
-            BackgroundColor = SystemColors.ControlBackground;
+            BackgroundColor = Colors.White;
         }
 
         private void FlowsheetObjectPanelItem_MouseEnter(object sender, MouseEventArgs e)

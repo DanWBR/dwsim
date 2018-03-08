@@ -1,5 +1,6 @@
 ﻿using DWSIM.Drawing.SkiaSharp;
 using MonoMac.AppKit;
+using MonoMac.Foundation;
 using MonoMac.CoreGraphics;
 using SkiaSharp;
 using System;
@@ -105,6 +106,25 @@ namespace DWSIM.UI.Desktop.Mac
         {
             drawable = new SKDrawable();
             BecomeFirstResponder();
+            RegisterForDraggedTypes(new string[] { NSPasteboard.NSStringType, NSPasteboard.NSPasteboardTypeString  });
+        }
+
+        public override void DraggingEnded(NSDraggingInfo sender)
+        {
+            Console.WriteLine("DraggingEnded");
+            base.DraggingEnded(sender);
+        }
+
+        public override NSDragOperation DraggingEntered(NSDraggingInfo sender)
+        {
+            Console.WriteLine("DraggingEntered");
+            return base.DraggingEntered(sender);
+        }
+
+        public override NSDragOperation DraggingUpdated(NSDraggingInfo sender)
+        {
+            Console.WriteLine("DraggingUpdated");
+            return base.DraggingUpdated(sender);
         }
 
         public override CGRect Bounds

@@ -499,7 +499,7 @@ namespace DWSIM.UI.Forms
 
             split0.Panel1 = SplitterFlowsheet;
 
-            var objcontainer = new StackLayout() { AllowDrop = true };
+            var objcontainer = new StackLayout();
 
             foreach (var obj in ObjectList.Values)
             {
@@ -508,54 +508,21 @@ namespace DWSIM.UI.Forms
                 pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
                 pitem.txtName.Text = obj.GetDisplayName();
                 pitem.txtDescription.Text = obj.GetDisplayDescription();
-                if (Application.Instance.Platform.IsMac)
+                pitem.MouseDown += (sender, e) =>
                 {
-                    pitem.imgIcon.MouseDown += (sender, e) =>
-                    {
-                        var dobj = new DataObject();
-                        dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                        pitem.imgIcon.DoDragDrop(dobj, DragEffects.All);
-                        Console.WriteLine("DragStartedMAC");
-                        e.Handled = true;
-                    };
-                    pitem.txtName.MouseDown += (sender, e) =>
-                    {
-                        var dobj = new DataObject();
-                        dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                        pitem.txtName.DoDragDrop(dobj, DragEffects.All);
-                        Console.WriteLine("DragStartedMAC");
-                        e.Handled = true;
-                    };
-                    pitem.txtDescription.MouseDown += (sender, e) =>
-                    {
-                        var dobj = new DataObject();
-                        dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                        pitem.txtDescription.DoDragDrop(dobj, DragEffects.All);
-                        Console.WriteLine("DragStartedMAC");
-                        e.Handled = true;
-                    };
-                }
-                else
-                {
-                    pitem.MouseDown += (sender, e) =>
-                    {
-                        var dobj = new DataObject();
-                        dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                        pitem.DoDragDrop(dobj, DragEffects.All);
-                        Console.WriteLine("DragStarted");
-                        e.Handled = true;
-                    };
-                }
+                    var dobj = new DataObject();
+                    dobj.SetString(obj.GetDisplayName(), "ObjectName");
+                    pitem.DoDragDrop(dobj, DragEffects.All);
+                    e.Handled = true;
+                };
                 objcontainer.Items.Add(pitem);
             }
-
-            FlowsheetControl.AllowDrop = true;
+            
+            if (Application.Instance.Platform.IsWpf || Application.Instance.Platform.IsWinForms) FlowsheetControl.AllowDrop = true;
             FlowsheetControl.DragDrop += (sender, e) =>
             {
-                Console.WriteLine("DragDropped");
                 if (e.Data.GetString("ObjectName") != null)
                 {
-                    Console.WriteLine("DragDroppedOK");
                     FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y / FlowsheetControl.FlowsheetSurface.Zoom));
                 }
             };
@@ -564,7 +531,7 @@ namespace DWSIM.UI.Forms
 
             var PanelObjectsDescription = new Label { Text = "  " + "Drag and drop items to add them to the Flowsheet.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
 
-            var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, PanelObjectsDescription, new Scrollable() { Content = objcontainer } }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
+            var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, PanelObjectsDescription, new Scrollable() { Content = objcontainer, BackgroundColor = Colors.White } }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
 
             split0.Panel2 = PanelObjects;
             split0.Orientation = Orientation.Horizontal;

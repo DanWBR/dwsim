@@ -28,6 +28,21 @@ namespace DWSIM.UI.Desktop.GTK
             base.OnLoadComplete(e);
             nativecontrol.fbase = this.Widget.FlowsheetObject;
             nativecontrol.fsurface = this.Widget.FlowsheetSurface;
+            nativecontrol.DragDataGet += (sender, e2) => {
+                Console.WriteLine(e2.SelectionData.Type.Name);
+            };
+            nativecontrol.DragEnd += (sender, e2) => {
+                foreach (var item in e2.Args)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            };
+            nativecontrol.DragFailed += (sender, e2) => {
+                foreach (var item in e2.Args)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            };
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -84,6 +99,11 @@ namespace DWSIM.UI.Desktop.GTK
             this.ButtonReleaseEvent += FlowsheetSurface_GTK_ButtonReleaseEvent;
             this.MotionNotifyEvent += FlowsheetSurface_GTK_MotionNotifyEvent;
             this.ScrollEvent += FlowsheetSurface_GTK_ScrollEvent;
+
+            var targets = new List<Gtk.TargetEntry>();
+            targets.Add(new Gtk.TargetEntry("ObjectName", 0, 1));
+            Gtk.Drag.DestSet(this, Gtk.DestDefaults.All, targets.ToArray(), Gdk.DragAction.Copy | Gdk.DragAction.Link | Gdk.DragAction.Move);
+
         }
 
         void FlowsheetSurface_GTK_ScrollEvent(object o, Gtk.ScrollEventArgs args)
@@ -170,7 +190,7 @@ namespace DWSIM.UI.Desktop.GTK
                 }
 
             }
-
+            
             return true;
         }
 

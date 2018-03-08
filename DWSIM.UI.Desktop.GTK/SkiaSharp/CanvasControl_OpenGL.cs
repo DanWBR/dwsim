@@ -88,6 +88,10 @@ namespace DWSIM.UI.Desktop.GTK
             this.MotionNotifyEvent += FlowsheetSurface_GTK_MotionNotifyEvent;
             this.ScrollEvent += FlowsheetSurface_GTK_ScrollEvent;
 
+            var targets = new List<Gtk.TargetEntry>();
+            targets.Add(new Gtk.TargetEntry("ObjectName", 0, 1));
+            Gtk.Drag.DestSet(this, Gtk.DestDefaults.All, targets.ToArray(), Gdk.DragAction.Copy | Gdk.DragAction.Link | Gdk.DragAction.Move);
+
         }
 
         void FlowsheetSurface_GTK_ScrollEvent(object o, Gtk.ScrollEventArgs args)
