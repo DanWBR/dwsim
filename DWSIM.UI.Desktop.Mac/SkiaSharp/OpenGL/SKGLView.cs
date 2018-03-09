@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using MonoMac.AppKit;
-using MonoMac.CoreGraphics;
-using MonoMac.Foundation;
+using AppKit;
+using CoreGraphics;
+using Foundation;
 using SkiaSharp.Views.GlesInterop;
 using SkiaSharp.Views.Mac;
 

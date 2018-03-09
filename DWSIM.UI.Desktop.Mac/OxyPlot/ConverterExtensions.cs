@@ -12,8 +12,8 @@ namespace DWSIM.UI.Desktop.Mac
     using System;
     using Eto.Drawing;
 
-    using global::MonoMac.AppKit;
-    using global::MonoMac.CoreGraphics;
+    using global::AppKit;
+    using global::CoreGraphics;
 
     using OxyPlot;
 

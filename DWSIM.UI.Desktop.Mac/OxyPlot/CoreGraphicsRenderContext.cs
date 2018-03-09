@@ -14,10 +14,10 @@ namespace DWSIM.UI.Desktop.Mac
     using Eto.Drawing;
     using System.Linq;
 
-    using global::MonoMac.AppKit;
-    using global::MonoMac.CoreGraphics;
-    using global::MonoMac.CoreText;
-    using global::MonoMac.Foundation;
+    using global::AppKit;
+    using global::CoreGraphics;
+    using global::CoreText;
+    using global::Foundation;
     using OxyPlot;
 
     /// <summary>
@@ -311,8 +311,8 @@ namespace DWSIM.UI.Desktop.Mac
             {
                 using (var textLine = new CTLine(attributedString))
                 {
-                    float width;
-                    float height;
+                    nfloat width;
+                    nfloat height;
 
                     this.gctx.TextPosition = new CGPoint(0, 0);
 
@@ -494,8 +494,8 @@ namespace DWSIM.UI.Desktop.Mac
             leading = leading < 0 ? 0 : (float)Math.Floor(leading + 0.5f);
             var lineHeight = (float)Math.Floor(ascent + 0.5f) + (float)Math.Floor(descent + 0.5) + leading;
             var ascenderDelta = leading >= 0 ? 0 : (float)Math.Floor((0.2 * lineHeight) + 0.5);
-            defaultLineHeight = lineHeight + ascenderDelta;
-            delta = ascenderDelta - descent;
+            defaultLineHeight = (float)lineHeight + ascenderDelta;
+            delta = ascenderDelta - (float)descent;
         }
 
         /// <summary>
@@ -548,11 +548,11 @@ namespace DWSIM.UI.Desktop.Mac
             this.gctx.SetLineJoin(lineJoin.Convert());
             if (dashArray != null && dashArray.Length > 1)
             {
-                var lengths = dashArray.Select(d => (float)d).ToArray();
+                var lengths = dashArray.Select(d => (nfloat)d).ToArray();
                 this.gctx.SetLineDash(0f, lengths);
             }
             else {
-                this.gctx.SetLineDash(0f, new float[]{});    
+                this.gctx.SetLineDash(0f, new nfloat[]{});    
             }
         }
 

@@ -88,9 +88,6 @@
     <Reference Include="Eto.Gtk2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Gtk2.2.4.1\lib\net45\Eto.Gtk2.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Mac, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Mac.2.4.1\lib\net45\Eto.Mac.dll</HintPath>
-    </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.OxyPlot.1.2.0-beta\lib\net45\Eto.OxyPlot.dll</HintPath>
       <Private>True</Private>
@@ -104,6 +101,9 @@
     </Reference>
     <Reference Include="Eto.Wpf, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Wpf.2.4.1\lib\net45\Eto.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.XamMac2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.XamMac2.2.4.1\lib\net45\Eto.XamMac2.dll</HintPath>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -124,9 +124,6 @@
       <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Mac.2.4.1\lib\net45\MonoMac.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -171,6 +168,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Xamarin.Mac">
+      <HintPath>..\DWSIM\References\Xamarin.Mac.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
@@ -247,7 +247,7 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets'))" />
     <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets'))" />
+    <Error Condition="!Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
@@ -353,5 +353,5 @@ del "$(SolutionDir)DistPackages\Windows_32\*vshost*"
 )</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
-  <Import Project="..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets" Condition="Exists('..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets')" />
+  <Import Project="..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets" Condition="Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" />
 </Project>

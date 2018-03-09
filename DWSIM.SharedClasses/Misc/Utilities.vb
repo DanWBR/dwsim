@@ -455,11 +455,19 @@ Public Class Utility
 
         If GlobalSettings.Settings.IsRunningOnMono Then
 
-            Dim t As Type = Type.GetType("Mono.Runtime")
-            Dim displayName As MethodInfo = t.GetMethod("GetDisplayName", BindingFlags.NonPublic + BindingFlags.Static)
-            Dim verstr As String = "Mono Framework v" & displayName.Invoke(Nothing, Nothing)
-            If verstr.Contains("(") Then verstr = verstr.Substring(0, verstr.IndexOf("(") - 1)
-            If displayName IsNot Nothing Then Return verstr Else Return ""
+            If GlobalSettings.Settings.RunningPlatform = GlobalSettings.Settings.Platform.Mac Then
+
+                Return "Xamarin.Mac (CLR v" & Environment.Version.ToString() & ")"
+
+            Else
+
+                Dim t As Type = Type.GetType("Mono.Runtime")
+                Dim displayName As MethodInfo = t.GetMethod("GetDisplayName", BindingFlags.NonPublic + BindingFlags.Static)
+                Dim verstr As String = "Mono Framework v" & displayName.Invoke(Nothing, Nothing)
+                If verstr.Contains("(") Then verstr = verstr.Substring(0, verstr.IndexOf("(") - 1)
+                If displayName IsNot Nothing Then Return verstr Else Return ""
+
+            End If
 
         Else
 

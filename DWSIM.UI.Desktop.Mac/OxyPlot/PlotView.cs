@@ -9,11 +9,11 @@
 
 using System;
 using Eto.Drawing;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 
 using OxyPlot;
-using MonoMac.CoreGraphics;
+using CoreGraphics;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -304,7 +304,7 @@ namespace DWSIM.UI.Desktop.Mac
                 context.TranslateCTM(0f, dirtyRect.Height);
                 context.ScaleCTM(1f, -1f);
                 // TODO: scale font matrix??
-                context.SetFillColorWithColor(OxyPlot.OxyColors.White.ToCGColor());
+                context.SetFillColor(OxyPlot.OxyColors.White.ToCGColor());
                 context.FillRect(Bounds);
                 using (var renderer = new CoreGraphicsRenderContext(context))
                 {

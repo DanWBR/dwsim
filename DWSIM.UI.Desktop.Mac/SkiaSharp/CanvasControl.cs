@@ -1,10 +1,10 @@
 ﻿using DWSIM.Drawing.SkiaSharp;
-using MonoMac.AppKit;
-using MonoMac.Foundation;
-using MonoMac.CoreGraphics;
+using AppKit;
+using CoreGraphics;
 using SkiaSharp;
 using System;
 using DWSIM.UI.Controls;
+using System.Linq;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -97,8 +97,8 @@ namespace DWSIM.UI.Desktop.Mac
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
 
-        public float _lastTouchX;
-        public float _lastTouchY;
+        public nfloat _lastTouchX;
+        public nfloat _lastTouchY;
 
         private SKDrawable drawable;
 
@@ -106,25 +106,14 @@ namespace DWSIM.UI.Desktop.Mac
         {
             drawable = new SKDrawable();
             BecomeFirstResponder();
-            RegisterForDraggedTypes(new string[] { NSPasteboard.NSStringType, NSPasteboard.NSPasteboardTypeString  });
-        }
-
-        public override void DraggingEnded(NSDraggingInfo sender)
-        {
-            Console.WriteLine("DraggingEnded");
-            base.DraggingEnded(sender);
+            RegisterForDraggedTypes(new string[] {"ObjectName" });
         }
 
         public override NSDragOperation DraggingEntered(NSDraggingInfo sender)
         {
-            Console.WriteLine("DraggingEntered");
-            return base.DraggingEntered(sender);
-        }
-
-        public override NSDragOperation DraggingUpdated(NSDraggingInfo sender)
-        {
-            Console.WriteLine("DraggingUpdated");
-            return base.DraggingUpdated(sender);
+            if (sender.DraggingPasteboard.Types.Contains("ObjectName"))
+                return NSDragOperation.Generic;
+            else return NSDragOperation.None;
         }
 
         public override CGRect Bounds
@@ -220,7 +209,7 @@ namespace DWSIM.UI.Desktop.Mac
         public override void ScrollWheel(NSEvent theEvent)
         {
             var scroll = theEvent.ScrollingDeltaX;
-            fsurface.Zoom += scroll / 100.0f;
+            fsurface.Zoom += (float)(scroll / 100.0f);
             this.NeedsDisplay = true;
         }
 

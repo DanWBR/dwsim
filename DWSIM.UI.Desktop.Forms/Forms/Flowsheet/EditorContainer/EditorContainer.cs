@@ -30,7 +30,8 @@ namespace DWSIM.UI.Forms
 
             // connections
 
-            if (obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+            if (obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
             {
 
                 var tab1 = new TabPage();

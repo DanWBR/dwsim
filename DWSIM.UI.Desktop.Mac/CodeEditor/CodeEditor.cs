@@ -1,6 +1,6 @@
 ﻿using DWSIM.Drawing.SkiaSharp;
-using MonoMac.AppKit;
-using MonoMac.CoreGraphics;
+using AppKit;
+using CoreGraphics;
 using SkiaSharp;
 using System;
 using DWSIM.UI.Controls;

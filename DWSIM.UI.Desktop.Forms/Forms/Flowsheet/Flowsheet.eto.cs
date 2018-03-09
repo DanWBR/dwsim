@@ -107,6 +107,8 @@ namespace DWSIM.UI.Forms
             var btnOptions = new ButtonMenuItem { Text = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")), Shortcut = Keys.M | Application.Instance.AlternateModifier };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 };
 
+            if (Application.Instance.Platform.IsMac) btnSolve.Shortcut = Application.Instance.CommonModifier | Keys.Enter;
+
             var btnUtilities_TrueCriticalPoint = new ButtonMenuItem { Text = "True Critical Point", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_PhaseEnvelope = new ButtonMenuItem { Text = "Phase Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
@@ -511,14 +513,15 @@ namespace DWSIM.UI.Forms
                 pitem.MouseDown += (sender, e) =>
                 {
                     var dobj = new DataObject();
+                    dobj.Image = pitem.imgIcon.Image;
                     dobj.SetString(obj.GetDisplayName(), "ObjectName");
                     pitem.DoDragDrop(dobj, DragEffects.All);
                     e.Handled = true;
                 };
                 objcontainer.Items.Add(pitem);
             }
-            
-            if (Application.Instance.Platform.IsWpf || Application.Instance.Platform.IsWinForms) FlowsheetControl.AllowDrop = true;
+
+            if (Application.Instance.Platform.IsWpf) FlowsheetControl.AllowDrop = true;
             FlowsheetControl.DragDrop += (sender, e) =>
             {
                 if (e.Data.GetString("ObjectName") != null)
@@ -633,6 +636,7 @@ namespace DWSIM.UI.Forms
                 {
                     ResultsControl.UpdateList();
                     MaterialStreamListControl.UpdateList();
+                    UpdateEditorPanels();
                 });
             });
             FlowsheetObject.SolveFlowsheet(false);
@@ -878,18 +882,6 @@ namespace DWSIM.UI.Forms
                 obj.GraphicObject.Status = item1.Checked ? Interfaces.Enums.GraphicObjects.Status.Idle : Interfaces.Enums.GraphicObjects.Status.Inactive;
             };
 
-            var item2 = new ButtonMenuItem { Text = "Edit Connections", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Electrical_96px.png")) };
-            item2.Click += (sender, e) =>
-            {
-                EditConnections();
-            };
-
-            if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
-                obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
-            {
-                item2.Enabled = false;
-            }
-
             var item3 = new ButtonMenuItem { Text = "Calculate", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
             item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(false, obj);
 
@@ -899,32 +891,33 @@ namespace DWSIM.UI.Forms
                 DebugObject();
             };
 
-            var menuitem0 = new ButtonMenuItem { Text = "Edit Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
-            menuitem0.Click += (sender, e) =>
-            {
-                var simobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
-                if (simobj == null) return;
-                EditObject_New(simobj);
-            };
+            var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
 
-            var menuitem1 = new ButtonMenuItem { Text = "Edit Properties", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
-            menuitem1.Click += (sender, e) =>
-            {
-                EditSelectedObjectProperties();
-            };
+            ButtonMenuItem menuitem0;
 
-            var menuitem1a = new ButtonMenuItem { Text = "Edit Appearance", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paint-palette.png")) };
-            menuitem1a.Click += (sender, e) =>
+            if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table ||
+                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable ||
+                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable ||
+                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart ||
+                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
             {
-                EditAppearance();
-            };
-            menuitem1a.Enabled = (obj.GraphicObject is ShapeGraphic);
+                menuitem0 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+                menuitem0.Click += (sender, e) =>
+                {
+                    EditSelectedObjectProperties();
+                };
+            }
+            else {
+                menuitem0 = new ButtonMenuItem { Text = "Edit/View", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+                menuitem0.Click += (sender, e) =>
+                {
+                    var simobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+                    if (simobj == null) return;
+                    EditObject_New(simobj);
+                };
+            }
 
-            var menuitem2 = new ButtonMenuItem { Text = "View Results", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "ReportCard_96px.png")) };
-            menuitem2.Click += (sender, e) =>
-            {
-                ViewSelectedObjectResults();
-            };
+            
 
             var item5 = new ButtonMenuItem { Text = "Clone", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
             item5.Click += (sender, e) =>
@@ -952,7 +945,7 @@ namespace DWSIM.UI.Forms
                 DeleteObject();
             };
 
-            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem0, menuitem1, menuitem1a, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6 });
+            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), menuitem0, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), item5, item6 });
 
             return;
 
@@ -1081,104 +1074,6 @@ namespace DWSIM.UI.Forms
                     editor.Topmost = true;
                     editor.Show();
                 }
-                else
-                {
-                    var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
-                    if (obj == null) return;
-                    if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CapeOpenUO)
-                    {
-                        ((UnitOperations.UnitOperations.CapeOpenUO)obj).Edit();
-                    }
-                    else
-                    {
-                        var cont = UI.Shared.Common.GetDefaultContainer();
-                        if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
-                        {
-                            new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
-                        {
-                            new DWSIM.UI.Desktop.Editors.DistillationColumnEditor(obj, cont);
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn)
-                        {
-                            new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust)
-                        {
-                            DWSIM.UI.Desktop.Editors.LogicalBlocks.AdjustEditor.Populate(obj, cont);
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
-                        {
-                            DWSIM.UI.Desktop.Editors.LogicalBlocks.SpecEditor.Populate(obj, cont);
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Recycle)
-                        {
-                            DWSIM.UI.Desktop.Editors.LogicalBlocks.RecycleEditor.Populate(obj, cont);
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_EnergyRecycle)
-                        {
-                            DWSIM.UI.Desktop.Editors.LogicalBlocks.EnergyRecycleEditor.Populate(obj, cont);
-                        }
-                        else
-                        {
-                            new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
-                        }
-                        if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Pipe)
-                        {
-                            cont.Tag = "General";
-                            var cont2 = UI.Shared.Common.GetDefaultContainer();
-                            cont2.Tag = "Hydraulic Profile";
-                            new PipeHydraulicProfile(obj, cont2);
-                            var cont3 = UI.Shared.Common.GetDefaultContainer();
-                            cont3.Tag = "Thermal Profile";
-                            new PipeThermalProfile(obj, cont3);
-                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new[] { cont, cont2, cont3 });
-                            form.ShowInTaskbar = true;
-                            form.Topmost = true;
-                            form.Show();
-                            form.Width += 1;
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
-                        {
-                            cont.Tag = "General";
-                            var cont2 = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
-                            cont2.Tag = "Python Script";
-                            var scripteditor = new DWSIM.UI.Controls.CodeEditorControl() { Text = ((CustomUO)obj).ScriptText };
-                            var dyn1 = new DynamicLayout();
-                            dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
-                            {
-                                ((CustomUO)obj).ScriptText = scripteditor.Text;
-                            });
-                            cont2.Rows.Add(new TableRow(dyn1));
-                            cont2.Rows.Add(new TableRow(scripteditor));
-                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 800, 600, new Control[] { cont, cont2 });
-                            form.ShowInTaskbar = true;
-                            form.Topmost = true;
-                            form.Show();
-                            form.Width += 1;
-                        }
-                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.HeatExchanger)
-                        {
-                            cont.Tag = "General";
-                            var dyn1 = new UI.Desktop.Editors.ShellAndTubePropertiesView(obj);
-                            dyn1.Tag = "Shell and Tube Properties";
-                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new Control[] { cont, dyn1 });
-                            form.ShowInTaskbar = true;
-                            form.Topmost = true;
-                            form.Show();
-                            form.Width += 1;
-                        }
-                        else
-                        {
-                            var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, cont);
-                            form.ShowInTaskbar = true;
-                            form.Topmost = true;
-                            form.Show();
-                            form.Width += 1;
-                        }
-                    }
-                }
             }
         }
 
@@ -1290,6 +1185,14 @@ namespace DWSIM.UI.Forms
             if (EditorHolder.Pages.Count == 1) SplitterFlowsheet.Panel1.Width = 300;
             SplitterFlowsheet.Invalidate();
 
+        }
+
+        private void UpdateEditorPanels()
+        {
+            foreach (DocumentPage item in EditorHolder.Pages)
+            {
+                ((ObjectEditorContainer)item.Content).Init();
+            }
         }
 
     }

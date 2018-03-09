@@ -39,18 +39,15 @@
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Mac, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Mac.2.4.1\lib\net45\Eto.Mac.dll</HintPath>
-    </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.OxyPlot.1.2.0-beta\lib\net45\Eto.OxyPlot.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Mac.2.4.1\lib\net45\MonoMac.dll</HintPath>
+    <Reference Include="Eto.XamMac2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.XamMac2.2.4.1\lib\net45\Eto.XamMac2.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable0956\lib\net45\OxyPlot.dll</HintPath>
       <Private>True</Private>
@@ -73,6 +70,9 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Xamarin.Mac">
+      <HintPath>..\DWSIM\References\Xamarin.Mac.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeEditor\CodeEditor.cs" />
@@ -130,9 +130,9 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets'))" />
     <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets'))" />
+    <Error Condition="!Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets'))" />
   </Target>
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
   <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
-  <Import Project="..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets" Condition="Exists('..\packages\Eto.Platform.Mac.2.4.1\build\Eto.Platform.Mac.targets')" />
+  <Import Project="..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets" Condition="Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" />
 </Project>
