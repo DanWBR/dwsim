@@ -72,7 +72,7 @@ namespace DWSIM.UI.Desktop.Editors
                 s.CreateAndAddDropDownRow(container, "Property Package", proppacks, proppacks.IndexOf(selectedpp), (DropDown arg1, EventArgs ev) =>
                 {
                     MatStream.PropertyPackage = (PropertyPackage)MatStream.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
-                });
+                }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); } );
             }
 
             var flashalgos = MatStream.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
@@ -88,6 +88,7 @@ namespace DWSIM.UI.Desktop.Editors
             cbFlashAlg.SelectedIndexChanged += (sender, e) =>
             {
                 MatStream.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
+                if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke();
             };
 
             s.CreateAndAddLabelRow(container, "Properties");
@@ -145,7 +146,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    {
                                                        arg3.TextColor = (Colors.Red);
                                                    }
-                                               });
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Temperature"));
                         s.CreateAndAddTextBoxRow(container, nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ms.Phases[0].Properties.pressure.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
@@ -159,7 +160,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    {
                                                        arg3.TextColor = (Colors.Red);
                                                    }
-                                               });
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Pressure"));
                         var txtW = s.CreateAndAddTextBoxRow(container, nf, "Mass Flow (" + su.massflow + ")", cv.ConvertFromSI(su.massflow, ms.Phases[0].Properties.massflow.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
@@ -175,7 +176,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    {
                                                        arg3.TextColor = (Colors.Red);
                                                    }
-                                               });
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Mass Flow"));
                         var txtQ = s.CreateAndAddTextBoxRow(container, nf, "Molar Flow (" + su.molarflow + ")", cv.ConvertFromSI(su.molarflow, ms.Phases[0].Properties.molarflow.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
@@ -191,7 +192,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    {
                                                        arg3.TextColor = (Colors.Red);
                                                    }
-                                               });
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Molar Flow"));
                         s.CreateAndAddTextBoxRow(container, nf, "Volumetric Flow (" + su.volumetricFlow + ")", cv.ConvertFromSI(su.volumetricFlow, ms.Phases[0].Properties.volumetric_flow.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
@@ -207,7 +208,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    {
                                                        arg3.TextColor = (Colors.Red);
                                                    }
-                                               });
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Volumetric Flow"));
                         s.CreateAndAddTextBoxRow(container, nf, "Vapor Phase Mole Fraction (spec)", ms.Phases[2].Properties.molarfraction.GetValueOrDefault(),
                                                (TextBox arg3, EventArgs ev) =>
@@ -221,11 +222,11 @@ namespace DWSIM.UI.Desktop.Editors
                                                    {
                                                        arg3.TextColor = (Colors.Red);
                                                    }
-                                               });
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Vapor Phase Mole Fraction (spec)"));
 
-                        s.CreateAndAddLabelRow(container, "Composition");
+                        s.CreateAndAddLabelRow(container, "Mixture Composition");
 
                         s.CreateAndAddDescriptionRow(container, "Composition changes will only be committed after clicking on the 'Accept' button.");
 
@@ -273,9 +274,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     break;
                             }
                         };
-
-                        s.CreateAndAddLabelRow(container, "Mixture Composition Tools");
-
+                        
                         Double total = 0.0f;
 
                         var btnNormalize = s.CreateAndAddButtonRow(container, "Normalize", null, null);
@@ -472,6 +471,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     break;
                             }
 
+                            if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke();
 
                         };
 

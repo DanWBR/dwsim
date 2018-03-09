@@ -13,6 +13,8 @@ namespace DWSIM.UI.Desktop.Shared
         private Action<string, IFlowsheet.MessageType> listeningaction;
         public Action FinishedSolving;
 
+        public Action HighLevelSolve;
+
         public bool optimizing = false;
         public bool SupressMessages = false;
         private bool eventattached = false;

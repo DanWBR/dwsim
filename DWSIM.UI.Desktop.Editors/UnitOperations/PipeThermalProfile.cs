@@ -83,7 +83,7 @@ namespace DWSIM.UI.Desktop.Editors
                                          {
                                              profile.CGTC_Definido = cv.ConvertToSI(su.heat_transf_coeff, double.Parse(sender.Text));
                                          }
-                                     });
+                                     }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Ambient Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, profile.Temp_amb_definir),
                                      (sender, e) =>
@@ -92,7 +92,7 @@ namespace DWSIM.UI.Desktop.Editors
                                          {
                                              profile.Temp_amb_definir = cv.ConvertToSI(su.temperature, double.Parse(sender.Text));
                                          }
-                                     });
+                                     }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Ambient Temperature Gradient (" + su.deltaT + "/" + su.distance + ")", cv.ConvertFromSI(su.deltaT, profile.AmbientTemperatureGradient) / cv.ConvertFromSI(su.distance, 1),
                          (sender, e) =>
@@ -101,7 +101,7 @@ namespace DWSIM.UI.Desktop.Editors
                              {
                                  profile.AmbientTemperatureGradient = cv.ConvertToSI(su.deltaT, double.Parse(sender.Text)) / cv.ConvertToSI(su.distance, 1);
                              }
-                         });
+                         }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddLabelRow(container, "Defined Heat Exchange Parameters");
 
@@ -112,7 +112,7 @@ namespace DWSIM.UI.Desktop.Editors
                  {
                      profile.Calor_trocado = cv.ConvertToSI(su.heatflow, double.Parse(sender.Text));
                  }
-             });
+             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddLabelRow(container, "Calculated HTC Parameters");
 
@@ -123,7 +123,7 @@ namespace DWSIM.UI.Desktop.Editors
                                          {
                                              profile.Temp_amb_estimar = cv.ConvertToSI(su.temperature, double.Parse(sender.Text));
                                          }
-                                     });
+                                     }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Ambient Temperature Gradient (" + su.deltaT + "/" + su.distance + ")", cv.ConvertFromSI(su.deltaT, profile.AmbientTemperatureGradient_EstimateHTC) / cv.ConvertFromSI(su.distance, 1),
                          (sender, e) =>
@@ -132,7 +132,7 @@ namespace DWSIM.UI.Desktop.Editors
                              {
                                  profile.AmbientTemperatureGradient_EstimateHTC = cv.ConvertToSI(su.deltaT, double.Parse(sender.Text)) / cv.ConvertToSI(su.distance, 1);
                              }
-                         });
+                         }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddCheckBoxRow(container, "Include Pipe Walls", profile.Incluir_paredes, (sender, e) =>
             {
@@ -188,7 +188,7 @@ namespace DWSIM.UI.Desktop.Editors
                  {
                      profile.Espessura = cv.ConvertToSI(su.thickness, double.Parse(sender.Text));
                  }
-             });
+             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "User-Def. Thermal Cond. (" + su.thermalConductivity + ")", cv.ConvertFromSI(su.thermalConductivity, profile.Condtermica),
              (sender, e) =>
@@ -197,7 +197,7 @@ namespace DWSIM.UI.Desktop.Editors
                  {
                      profile.Condtermica = cv.ConvertToSI(su.thermalConductivity, double.Parse(sender.Text));
                  }
-             });
+             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddCheckBoxRow(container, "Include External HTC", profile.Incluir_cte, (sender, e) =>
             {
@@ -217,7 +217,7 @@ namespace DWSIM.UI.Desktop.Editors
                  {
                      profile.Velocidade = double.Parse(sender.Text);
                  }
-             });
+             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);
         

@@ -252,7 +252,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                         adjust.AdjustValue = cv.ConvertToSI(obj.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su), Double.Parse(sender.Text));
                     }
                 }
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)adjust.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             if (adjust.ControlledObjectData.ID != "" && adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ControlledObjectData.ID))
             {

@@ -178,7 +178,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.SimpsonIntegr
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.DrawingTools.Point", "DWSIM.DrawingTools.Point\DWSIM.DrawingTools.Point.vbproj", "{0F6737EB-DB5A-4872-BEF8-5EF10B4F1C1C}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Inspector", "DWSIM.Inspector\DWSIM.Inspector.vbproj", "{763FB0C2-BA91-4A0A-A180-87DDAA9E3D70}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "DWSIM.Inspector", "DWSIM.Inspector\DWSIM.Inspector.vbproj", "{763FB0C2-BA91-4A0A-A180-87DDAA9E3D70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -64,8 +64,12 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.2
 
+- [NEW] DWSIM Inspector - Understand the models behind the simulation
+- [NEW] Cross-Platform UI Enhancements: Drag-and-Drop to Add Flowsheet Objects, Object Property Editor Panels and much more
 - [CHG] Updated the target version of .NET Framework to v4.7.1
+- [CHG] macOS (OS X) version doesn't require the Mono Framework to be installed anymore
 - [FIX] Fixed Flash Algorithm temperature limits
+- [FIX] Fixed Equilibrium Reactor calculation restart
 
 Version 5.1 Update 12
 

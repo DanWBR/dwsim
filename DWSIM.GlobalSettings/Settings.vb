@@ -128,6 +128,14 @@ Public Class Settings
 
     Public Shared Property InspectorEnabled As Boolean = False
 
+    Public Shared Property EditorFontSize As Integer = -1
+
+    Public Shared Property EditorTextBoxFixedSize As Boolean = True
+
+    Public Shared Property EditOnSelect As Boolean = False
+
+    Public Shared Property CallSolverOnEditorPropertyChanged As Boolean = False
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
@@ -372,6 +380,14 @@ Public Class Settings
 
         InspectorEnabled = source.Configs("Misc").GetBoolean("InspectorEnabled", False)
 
+        EditorFontSize = source.Configs("Misc").GetInt("EditorFontSize", -1)
+
+        EditorTextBoxFixedSize = source.Configs("Misc").GetBoolean("EditorTextBoxFixedSize", True)
+
+        EditOnSelect = source.Configs("Misc").GetBoolean("EditOnSelect", False)
+
+        CallSolverOnEditorPropertyChanged = source.Configs("Misc").GetBoolean("CallSolverOnEditorPropertyChanged", False)
+
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
         'autom = source.Configs("Misc").GetBoolean("AutoUpdate", True)
@@ -487,6 +503,11 @@ Public Class Settings
         source.Configs("Misc").Set("CurrentVersion", CurrentVersion)
 
         source.Configs("Misc").Set("InspectorEnabled", InspectorEnabled)
+
+        source.Configs("Misc").Set("EditorFontSize", EditorFontSize)
+        source.Configs("Misc").Set("EditorTextBoxFixedSize", EditorTextBoxFixedSize)
+        source.Configs("Misc").Set("EditOnSelect", EditOnSelect)
+        source.Configs("Misc").Set("CallSolverOnEditorPropertyChanged", CallSolverOnEditorPropertyChanged)
 
         'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
         'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)

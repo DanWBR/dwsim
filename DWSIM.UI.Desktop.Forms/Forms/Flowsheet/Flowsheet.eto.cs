@@ -104,11 +104,10 @@ namespace DWSIM.UI.Forms
             var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")), Shortcut = Keys.Q | Application.Instance.CommonModifier };
             var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")), Shortcut = Keys.C | Application.Instance.AlternateModifier };
             var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")), Shortcut = Keys.B | Application.Instance.AlternateModifier };
-            var btnOptions = new ButtonMenuItem { Text = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")), Shortcut = Keys.M | Application.Instance.AlternateModifier };
+            var btnOptions = new ButtonMenuItem { Text = "Flowsheet Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")), Shortcut = Keys.M | Application.Instance.AlternateModifier };
+            var btnGlobalOptions = new ButtonMenuItem { Text = "Global Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")), Shortcut = Keys.G | Application.Instance.AlternateModifier };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 };
-
-            if (Application.Instance.Platform.IsMac) btnSolve.Shortcut = Application.Instance.CommonModifier | Keys.Enter;
-
+            
             var btnUtilities_TrueCriticalPoint = new ButtonMenuItem { Text = "True Critical Point", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_PhaseEnvelope = new ButtonMenuItem { Text = "Phase Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
@@ -221,7 +220,6 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-
             var chkSimSolver = new CheckMenuItem { Text = "Simultaneous Adjust Solver Active" };
             chkSimSolver.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
             chkSimSolver.CheckedChanged += (sender, e) =>
@@ -246,6 +244,8 @@ namespace DWSIM.UI.Forms
             }
 
             var btnShowHideObjectPalette = new ButtonMenuItem { Text = "Show/Hide Object Palette" };
+
+            var btnShowHideObjectEditorPanel = new ButtonMenuItem { Text = "Show/Hide Object Editor Panel" };
 
             //process plugin list
 
@@ -279,34 +279,34 @@ namespace DWSIM.UI.Forms
                 case GlobalSettings.Settings.Platform.Mac:
                     if (Application.Instance.Platform.IsMac)
                     {
-                        Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
+                        Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                         Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                         Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Insert(7, pluginsmenu);
-                        Menu.Items.Insert(7, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette } });
+                        Menu.Items.Insert(7, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
                     }
                     else
                     {
-                        Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Add(pluginsmenu);
-                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
                     }
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
                 case GlobalSettings.Settings.Platform.Windows:
-                    Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                     Menu.Items.Add(pluginsmenu);
-                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
                     break;
             }
 
@@ -385,6 +385,11 @@ namespace DWSIM.UI.Forms
                 var form = UI.Shared.Common.GetDefaultTabbedForm("Settings", 500, 500, new[] { cont, cont2 });
                 form.Show();
                 form.Width += 1;
+            };
+
+            btnGlobalOptions.Click += (sender, e) =>
+            {
+                new DWSIM.UI.Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
             btnSolve.Click += (sender, e) =>
@@ -490,11 +495,10 @@ namespace DWSIM.UI.Forms
 
             SplitterFlowsheet.Panel1.Width = 300;
             SplitterFlowsheet.Panel1.Visible = true;
-
-            EditorHolder.PageClosed += (sender, e) =>
+            
+            btnShowHideObjectEditorPanel.Click += (sender, e) =>
             {
-                SplitterFlowsheet.Panel1.Visible = (EditorHolder.Pages.Count > 0);
-                SplitterFlowsheet.Invalidate();
+                SplitterFlowsheet.Panel1.Visible = !SplitterFlowsheet.Panel1.Visible;
             };
 
             SplitterFlowsheet.Panel2 = FlowsheetControl;
@@ -566,6 +570,19 @@ namespace DWSIM.UI.Forms
             selctxmenu = new ContextMenu();
             deselctxmenu = new ContextMenu();
 
+            FlowsheetControl.FlowsheetSurface.SelectionChanged += (sender, e) =>
+            {
+                if (GlobalSettings.Settings.EditOnSelect)
+                {
+                    var sobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject("");
+                    if (sobj != null)
+                    {
+                        FlowsheetControl.FlowsheetSurface.InputRelease();
+                        Application.Instance.RunIteration();
+                        EditObject_New(sobj);
+                    }
+                }
+            };
 
             FlowsheetControl.MouseUp += (sender, e) =>
             {
@@ -586,6 +603,15 @@ namespace DWSIM.UI.Forms
                                 selctxmenu.Items.Clear();
                                 var itemtype = new ButtonMenuItem { Text = "Misc Object", Enabled = false };
                                 selctxmenu.Items.Add(itemtype);
+
+                                var menuitem0 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+                                menuitem0.Click += (sender2, e2) =>
+                                {
+                                    EditSelectedObjectProperties();
+                                };
+
+                                selctxmenu.Items.Add(menuitem0);
+
                                 var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
                                 delitem.Click += (sender2, e2) =>
                                 {
@@ -621,9 +647,11 @@ namespace DWSIM.UI.Forms
 
             Shown += Flowsheet_Shown;
 
+            FlowsheetObject.HighLevelSolve = () => SolveFlowsheet();
+
         }
 
-        private void SolveFlowsheet()
+        public void SolveFlowsheet()
         {
             FlowsheetObject.UpdateSpreadsheet(() =>
             {
@@ -892,33 +920,15 @@ namespace DWSIM.UI.Forms
             };
 
             var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-
-            ButtonMenuItem menuitem0;
-
-            if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table ||
-                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable ||
-                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable ||
-                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart ||
-                selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
+                        
+            var menuitem0 = new ButtonMenuItem { Text = "Edit/View", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+            menuitem0.Click += (sender, e) =>
             {
-                menuitem0 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
-                menuitem0.Click += (sender, e) =>
-                {
-                    EditSelectedObjectProperties();
-                };
-            }
-            else {
-                menuitem0 = new ButtonMenuItem { Text = "Edit/View", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
-                menuitem0.Click += (sender, e) =>
-                {
-                    var simobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
-                    if (simobj == null) return;
-                    EditObject_New(simobj);
-                };
-            }
-
+                var simobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+                if (simobj == null) return;
+                EditObject_New(simobj);
+            };
             
-
             var item5 = new ButtonMenuItem { Text = "Clone", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
             item5.Click += (sender, e) =>
             {
@@ -1175,14 +1185,17 @@ namespace DWSIM.UI.Forms
         private void EditObject_New(Interfaces.ISimulationObject obj)
         {
 
-            var editor = new ObjectEditorContainer(obj);
+            var existingeditor = EditorHolder.Pages.Where(x => x.Content.Tag.ToString() == obj.Name).FirstOrDefault();
 
-            var editorc = new DocumentPage(editor) { Closable = true, Text = obj.GraphicObject.Tag };
+            if (existingeditor != null) {
+                EditorHolder.SelectedPage = (DocumentPage)existingeditor;
+            } else {
+                var editor = new ObjectEditorContainer(obj);
+                var editorc = new DocumentPage(editor) { Closable = true, Text = obj.GraphicObject.Tag };
+                EditorHolder.Pages.Add(editorc);
+                EditorHolder.SelectedPage = editorc;
+            }
 
-            EditorHolder.Pages.Add(editorc);
-
-            SplitterFlowsheet.Panel1.Visible = true;
-            if (EditorHolder.Pages.Count == 1) SplitterFlowsheet.Panel1.Width = 300;
             SplitterFlowsheet.Invalidate();
 
         }

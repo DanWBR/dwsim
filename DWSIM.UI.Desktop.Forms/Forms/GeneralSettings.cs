@@ -71,6 +71,27 @@ namespace DWSIM.UI.Forms.Forms
             tab1.CreateAndAddCheckBoxRow("EnableAntiAliasing".Localize(prefix), Settings.DrawingAntiAlias, (CheckBox sender, EventArgs obj) => { Settings.DrawingAntiAlias = sender.Checked.Value; });
             tab1.CreateAndAddDescriptionRow("Sets anti-aliasing (edge smoothing) for the Flowsheet Designer.");
 
+            tab1.CreateAndAddLabelRow("Editors");
+
+            var sizes = new[] { "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" };
+
+            if (Settings.EditorFontSize == -1) Settings.EditorFontSize = (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
+
+            tab1.CreateAndAddDropDownRow("Font Size (Editor Labels/Descriptions)", sizes.ToList(), sizes.ToList().IndexOf(Settings.EditorFontSize.ToString()), (DropDown sender, EventArgs obj) => { Settings.EditorFontSize = int.Parse(sender.SelectedValue.ToString()); });
+            tab1.CreateAndAddDescriptionRow("Sets the Font Size for Editor labels and descriptions.");
+
+            tab1.CreateAndAddDropDownRow("Font Size (Text Reports)", sizes.ToList(), sizes.ToList().IndexOf(Settings.ResultsReportFontSize.ToString()), (DropDown sender, EventArgs obj) => { Settings.ResultsReportFontSize = int.Parse(sender.SelectedValue.ToString()); });
+            tab1.CreateAndAddDescriptionRow("Sets the Font Size for text reports.");
+
+            tab1.CreateAndAddCheckBoxRow("Fix Size of Input Controls", Settings.EditorTextBoxFixedSize, (CheckBox sender, EventArgs obj) => { Settings.EditorTextBoxFixedSize = sender.Checked.Value; });
+            tab1.CreateAndAddDescriptionRow("Fix the size of input textboxes and checkboxes on editors.");
+
+            tab1.CreateAndAddCheckBoxRow("View/Open Object Editor After Selection", Settings.EditOnSelect, (CheckBox sender, EventArgs obj) => { Settings.EditOnSelect = sender.Checked.Value; });
+            tab1.CreateAndAddDescriptionRow("Opens the object editor after selection on the flowsheet.");
+
+            tab1.CreateAndAddCheckBoxRow("Call Solver on Editor Property Update", Settings.CallSolverOnEditorPropertyChanged, (CheckBox sender, EventArgs obj) => { Settings.CallSolverOnEditorPropertyChanged = sender.Checked.Value; });
+            tab1.CreateAndAddDescriptionRow("Requests a flowsheet calculation after an object property is changed/updated on the editor.");
+
             var tab2 = Common.GetDefaultContainer();
             tab2.Tag = "Solver".Localize(prefix);
 
@@ -164,11 +185,7 @@ namespace DWSIM.UI.Forms.Forms
 
             var tab5 = Common.GetDefaultContainer();
             tab5.Tag = "Misc".Localize(prefix);
-
-            tab5.CreateAndAddLabelRow("Reports");
-            var sizes = new[] { "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" };
-            tab5.CreateAndAddDropDownRow("Font Size", sizes.ToList(), sizes.ToList().IndexOf(Settings.ResultsReportFontSize.ToString()), (DropDown sender, EventArgs obj) => { Settings.ResultsReportFontSize = int.Parse(sender.SelectedValue.ToString()); });
-
+            
             tab5.CreateAndAddLabelRow("Octave Settings");
             tab5.CreateAndAddDescriptionRow("Setup the path for Octave binaries to enable integration with DWSIM.");
             TextBox tbox = null;
@@ -205,7 +222,7 @@ namespace DWSIM.UI.Forms.Forms
                 if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
             });
 
-            return Common.GetDefaultTabbedForm("Title".Localize(prefix), 500, 400, new[] { tab1, tab2, tab3, tab4, tab5 });
+            return Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab3, tab4, tab5 });
 
         }
 

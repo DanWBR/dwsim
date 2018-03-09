@@ -61,7 +61,7 @@ Namespace Reactors
 
         Public Property ComponentIDs As New List(Of String)
 
-        Public Property UsePreviousReactionExtents As Boolean = True
+        Public Property UsePreviousReactionExtents As Boolean = False
         Public Property ReactionExtentsInitializer As Double = 0.2
 
         Public Property InternalLoopTolerance As Double = 0.00000001

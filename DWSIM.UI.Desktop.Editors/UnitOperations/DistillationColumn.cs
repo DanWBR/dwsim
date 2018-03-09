@@ -75,7 +75,7 @@ namespace DWSIM.UI.Desktop.Editors
                 s.CreateAndAddDropDownRow(container, "Property Package", proppacks, proppacks.IndexOf(selectedpp), (DropDown arg1, EventArgs ev) =>
                 {
                     column.PropertyPackage = (IPropertyPackage)column.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
-                });
+                }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
             }
             
             var flashalgos = column.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
@@ -91,6 +91,7 @@ namespace DWSIM.UI.Desktop.Editors
             cbFlashAlg.SelectedIndexChanged += (sender, e) =>
             {
                 column.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
+                if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke();
             };
 
             s.CreateAndAddLabelRow(container, "Object Properties");
@@ -501,7 +502,7 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     column.Specs["C"].SpecValue = Double.Parse(arg1.Text);
                 }
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
             s.CreateAndAddDropDownRow(container, "Units", units, units.IndexOf(column.Specs["C"].SpecUnit),
                                      (arg1, arg2) =>
                                      {
@@ -554,7 +555,7 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     column.Specs["R"].SpecValue = Double.Parse(arg1.Text);
                 }
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
             s.CreateAndAddDropDownRow(container, "Units", units, units.IndexOf(column.Specs["R"].SpecUnit),
                                      (arg1, arg2) =>
                                      {
@@ -582,7 +583,7 @@ namespace DWSIM.UI.Desktop.Editors
                 (sender, e) =>
                 {
                     if (sender.Text.IsValidDouble()) column.StopAtIterationNumber = (int)sender.Text.ToDoubleFromCurrent();
-                });
+                }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddLabelRow(container, "Newton Solver Settings");
 
@@ -593,19 +594,19 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Lower Bound", column.NS_LowerBound, (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.NS_LowerBound = (int)sender.Text.ToDoubleFromCurrent();
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Upper Bound", column.NS_UpperBound, (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.NS_UpperBound = (int)sender.Text.ToDoubleFromCurrent();
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Derivative Perturbation", column.SC_NumericalDerivativeStep, (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.SC_NumericalDerivativeStep = (int)sender.Text.ToDoubleFromCurrent();
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddCheckBoxRow(container, "Iteration Variables: Simplex Preconditioning", column.NS_SimplexPreconditioning, (sender, e) => column.NS_SimplexPreconditioning = sender.Checked.GetValueOrDefault());
+            s.CreateAndAddCheckBoxRow(container, "Iteration Variables: Simplex Preconditioning", column.NS_SimplexPreconditioning, (sender, e) => column.NS_SimplexPreconditioning = sender.Checked.GetValueOrDefault(), () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddLabelRow(container, "Inside-Out Solver Settings");
 
@@ -614,21 +615,21 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Lower Bound", column.IO_LowerBound, (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.IO_LowerBound = (int)sender.Text.ToDoubleFromCurrent();
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Upper Bound", column.IO_UpperBound, (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.IO_UpperBound = (int)sender.Text.ToDoubleFromCurrent();
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Derivative Perturbation", column.IO_NumericalDerivativeStep, (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.IO_NumericalDerivativeStep = (int)sender.Text.ToDoubleFromCurrent();
-            });
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddCheckBoxRow(container, "Adjust Sb Scaling Factor", column.AdjustSb, (sender, e) => column.AdjustSb = sender.Checked.GetValueOrDefault());
+            s.CreateAndAddCheckBoxRow(container, "Adjust Sb Scaling Factor", column.AdjustSb, (sender, e) => column.AdjustSb = sender.Checked.GetValueOrDefault(), () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddCheckBoxRow(container, "Calculate Kb by Weighted Average", column.KbjWeightedAverage, (sender, e) => column.KbjWeightedAverage = sender.Checked.GetValueOrDefault());
+            s.CreateAndAddCheckBoxRow(container, "Calculate Kb by Weighted Average", column.KbjWeightedAverage, (sender, e) => column.KbjWeightedAverage = sender.Checked.GetValueOrDefault(), () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);

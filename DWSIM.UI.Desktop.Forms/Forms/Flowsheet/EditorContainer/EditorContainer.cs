@@ -15,23 +15,34 @@ namespace DWSIM.UI.Forms
 
         public ISimulationObject obj;
 
+        public int SelectedPanel = -1;
+
+        private bool loaded = false;
+
         public ObjectEditorContainer(ISimulationObject sobj) : base()
         {
             obj = sobj;
-            Init();    
+            Tag = obj.Name;
+            this.Width = 300;
+            Init();
+            SelectedIndexChanged += (sender, e) => { if (loaded) SelectedPanel = SelectedIndex; };
         }
 
         public void Init()
         {
 
-            this.Width = 300;
+            loaded = false;
+
+            this.SuspendLayout();
 
             Pages.Clear();
-
+            
             // connections
 
             if (obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream &&
-                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
             {
 
                 var tab1 = new TabPage();
@@ -42,7 +53,7 @@ namespace DWSIM.UI.Forms
                 UI.Shared.Common.CreateAndAddDescriptionRow(cont0, "ConnectorsEditorDescription".Localize());
                 new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont0);
 
-                cont0.Width = this.Width;
+                cont0.Width = this.Width - 30;
 
                 var scr1 = new Scrollable() { Content = cont0 };
                 tab1.Content = scr1;
@@ -50,8 +61,7 @@ namespace DWSIM.UI.Forms
                 Pages.Add(tab1);
 
             }
-
-
+            
             // properties
 
             var tab2 = new TabPage();
@@ -61,10 +71,8 @@ namespace DWSIM.UI.Forms
 
             var cont = UI.Shared.Common.GetDefaultContainer();
 
-            cont.Width = this.Width;
-
-            tab2.Content = new Scrollable() { Content = cont };
-
+            cont.Width = this.Width - 30;
+                        
             if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
             {
                 new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
@@ -97,38 +105,46 @@ namespace DWSIM.UI.Forms
             {
                 new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
             }
+
+            tab2.Content = new Scrollable() { Content = cont, Width = this.Width-30 };
+
             if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Pipe)
             {
                 tab2.Text = "General";
                 var cont2 = UI.Shared.Common.GetDefaultContainer();
                 cont2.Tag = "Hydraulic Profile";
+                cont2.Width = this.Width - 30;
                 new PipeHydraulicProfile(obj, cont2);
-                Pages.Add(new TabPage(new Scrollable() { Content = cont2, Width = this.Width }) { Text = "Hydraulic Profile" });
+                Pages.Add(new TabPage(new Scrollable() { Content = cont2, Width = this.Width - 30 }) { Text = "Hydraulic Profile" });
                 var cont3 = UI.Shared.Common.GetDefaultContainer();
                 cont3.Tag = "Thermal Profile";
+                cont3.Width = this.Width - 30;
                 new PipeThermalProfile(obj, cont3);
-                Pages.Add(new TabPage(new Scrollable() { Content = cont3, Width = this.Width }) { Text = "Thermal Profile" });
+                Pages.Add(new TabPage(new Scrollable() { Content = cont3, Width = this.Width - 30 }) { Text = "Thermal Profile" });
             }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
             {
                 tab2.Text = "General";
                 var cont2 = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
                 cont2.Tag = "Python Script";
+                cont2.Width = this.Width - 30;
                 var scripteditor = new DWSIM.UI.Controls.CodeEditorControl() { Text = ((CustomUO)obj).ScriptText };
                 var dyn1 = new DynamicLayout();
                 dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
                 {
                     ((CustomUO)obj).ScriptText = scripteditor.Text;
                 });
+                dyn1.Width = this.Width - 30;
                 cont2.Rows.Add(new TableRow(dyn1));
                 cont2.Rows.Add(new TableRow(scripteditor));
-                Pages.Add(new TabPage(new Scrollable() { Content = cont2, Width = this.Width }) { Text = "Python Script" });
+                Pages.Add(new TabPage(new Scrollable() { Content = cont2, Width = this.Width - 30 }) { Text = "Python Script" });
             }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.HeatExchanger)
             {
                 tab2.Text = "General";
                 var dyn1 = new UI.Desktop.Editors.ShellAndTubePropertiesView(obj);
-                Pages.Add(new TabPage(new Scrollable() { Content = dyn1, Width = this.Width }) { Text = "Shell and Tube Properties" });
+                dyn1.Width = this.Width - 30;
+                Pages.Add(new TabPage(new Scrollable() { Content = dyn1, Width = this.Width - 30 }) { Text = "Shell and Tube Properties" });
             }
             
             if (obj.Calculated)
@@ -140,7 +156,7 @@ namespace DWSIM.UI.Forms
                 var container = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Results(obj, container);
 
-                tabr.Content = new Scrollable() { Content = container, Width = this.Width };
+                tabr.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
                 Pages.Add(tabr);
 
             }
@@ -150,10 +166,17 @@ namespace DWSIM.UI.Forms
                 var tabx = new TabPage();
                 tabx.Text = "Appearance";
                 var editor = new ObjectAppearanceEditorView(obj.GetFlowsheet(), (ShapeGraphic)obj.GraphicObject);
-                tabx.Content = new Scrollable() { Content = editor, Width = this.Width };
+                editor.Width = this.Width - 30;
+                tabx.Content = new Scrollable() { Content = editor, Width = this.Width - 30 };
 
                 Pages.Add(tabx);
             }
+
+            if (SelectedPanel >= 0) SelectedIndex = SelectedPanel;
+
+            loaded = true;
+
+            this.ResumeLayout();
 
         }
     }
