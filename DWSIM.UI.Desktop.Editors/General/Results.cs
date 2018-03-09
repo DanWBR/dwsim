@@ -241,15 +241,8 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             var txtcontrol = new TextArea { ReadOnly = true };
-            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
-            {
-                txtcontrol.Font = Fonts.Monospace(SystemFonts.Default().Size);
-            }
-            else
-            {
-                txtcontrol.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
-            }
-
+            txtcontrol.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+           
             container.Rows.Add(new TableRow(txtcontrol));
 
             var obj = (ISimulationObject)SimObject;

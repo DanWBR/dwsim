@@ -47,7 +47,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddLabelRow(container, "Material Stream Property Editor");
 
-            s.CreateAndAddDescriptionRow(container, "Except for compound amounts, property values are updated/stored as they are changed/edited. There's no need to press ENTER to commit the changes.");
+            s.CreateAndAddDescriptionRow(container, "Except for compound amounts, property values are updated/stored as they are changed/edited.");
 
             s.CreateAndAddLabelRow(container, "Material Stream Details");
 

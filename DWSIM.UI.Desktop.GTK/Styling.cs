@@ -49,8 +49,15 @@ namespace DWSIM.UI.Desktop.GTK
                 }
             });
 
+            Eto.Style.Add<Eto.Forms.TextBox>("textbox-rightalign", control =>
+            {
+                var tbox = (Gtk.Entry)control.ControlObject;
+                tbox.Alignment = 1.0f;
+            });
+
+
         }
-        
+
     }
 
 }

@@ -250,6 +250,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = 140;
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
@@ -289,6 +290,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var editor = new NumericStepper {  Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
+            editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = 140;
 
             if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((NumericStepper)sender, e);
@@ -309,6 +311,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat),   Style = "textbox-rightalign" };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = 140;
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
@@ -329,6 +332,8 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var edittext = new TextBox { Text = currval1, Width = 100 };
             var edittext2 = new TextBox { Text = currval2.ToString(numberformat), Width = 100 };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            edittext2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
             if (command2 != null) edittext2.TextChanged += (sender, e) => command2.Invoke((TextBox)sender, e);
@@ -345,6 +350,7 @@ namespace DWSIM.UI.Shared
         {
 
             var edittext = new TextArea { Text = text, ReadOnly = ro };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
 
@@ -379,6 +385,7 @@ namespace DWSIM.UI.Shared
         {
 
             var lbox = new ListBox { Height = height };
+            lbox.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             foreach (var item in listitems)
             {
@@ -402,6 +409,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var edittext = new TextBox { Text = currval, Width = 140 };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = 140;
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
@@ -455,6 +463,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var edittext = new TextBox { Text = currval, PlaceholderText = placeholder };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -476,6 +485,7 @@ namespace DWSIM.UI.Shared
         {
 
             var edittext = new TextBox { Text = text };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -557,6 +567,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var tbox = new TextBox { Text = textboxvalue };
+            tbox.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var btn = new Button { Width = 80, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);

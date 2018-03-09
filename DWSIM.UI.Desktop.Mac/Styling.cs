@@ -16,6 +16,13 @@ namespace DWSIM.UI.Desktop.Mac
                 cocoawnd.IsOpaque = false;
                 cocoawnd.BackgroundColor = NSColor.FromCalibratedWhite(1.0f, 0.0f);
                 cocoawnd.StyleMask = NSWindowStyle.Borderless;
+                cocoawnd.HasShadow = false;
+            });
+
+            Eto.Style.Add<Eto.Forms.TextBox>("textbox-rightalign", control =>
+            {
+                var tbox = (NSTextField)control.ControlObject;
+                tbox.Alignment = NSTextAlignment.Right;
             });
 
         }
