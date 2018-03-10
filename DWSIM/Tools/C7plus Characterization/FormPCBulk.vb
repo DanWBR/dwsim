@@ -724,7 +724,13 @@ Public Class FormPCBulk
         'OBJETO DWSIM
         Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
-        Call frm.AddComponentsRows(myCOMS)
+        frm.AddComponentsRows(myCOMS)
+        If frm.Options.PropertyPackages.Count > 0 Then
+            myCOMS.PropertyPackage = frm.Options.SelectedPropertyPackage
+        Else
+            myCOMS.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
+        End If
+        myCOMS.ClearAllProps()
         Dim wtotal As Double = 0
         For Each subst In ccol.Values
             wtotal += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight

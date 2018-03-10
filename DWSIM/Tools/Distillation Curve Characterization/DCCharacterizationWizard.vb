@@ -415,7 +415,11 @@ Public Class DCCharacterizationWizard
                     Select Case Me.ComboBoxSG.SelectedItem.ToString
                         Case "Riazi-Al-Sahhaf (1996)"
                             If .PF_MM.GetValueOrDefault = 0 Then
-                                .PF_MM = (1 / 0.01964 * (6.97996 - Math.Log(1080 - .NBP.GetValueOrDefault))) ^ (3 / 2)
+                                If .NBP.GetValueOrDefault < 1080 Then
+                                    .PF_MM = (1 / 0.01964 * (6.97996 - Math.Log(1080 - .NBP.GetValueOrDefault))) ^ (3 / 2)
+                                Else
+                                    .PF_MM = (1 / 0.01964 * (6.97996 + Math.Log(-1080 + .NBP.GetValueOrDefault))) ^ (3 / 2)
+                                End If
                             End If
                             .PF_SG = PropertyMethods.d15_Riazi(.PF_MM)
                         Case "Viscosity Data"
@@ -731,6 +735,12 @@ Public Class DCCharacterizationWizard
         Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
         form.AddComponentsRows(myCOMS)
+        If form.Options.PropertyPackages.Count > 0 Then
+            myCOMS.PropertyPackage = form.Options.SelectedPropertyPackage
+        Else
+            myCOMS.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
+        End If
+        myCOMS.ClearAllProps()
         Dim wtotal As Double = 0
         For Each subst In ccol.Values
             wtotal += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight

@@ -118,6 +118,9 @@
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.4.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Dynamic">
       <HintPath>..\DWSIM\References\Microsoft.Dynamic.dll</HintPath>
     </Reference>
@@ -150,6 +153,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />

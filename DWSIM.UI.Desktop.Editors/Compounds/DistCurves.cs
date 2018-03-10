@@ -517,7 +517,14 @@ namespace DWSIM.UI.Desktop.Editors
 
                     if (Math.Abs(cprops.PF_MM.GetValueOrDefault()) < 1e-10)
                     {
-                        cprops.PF_MM = Math.Pow((1 / 0.01964 * (6.97996 - Math.Log(1080 - cprops.NBP.GetValueOrDefault()))), (3 / 2));
+                        if (cprops.NBP.GetValueOrDefault() < 1080)
+                        {
+                            cprops.PF_MM = Math.Pow((1 / 0.01964 * (6.97996 - Math.Log(1080 - cprops.NBP.GetValueOrDefault()))), (3 / 2));
+                        }
+                        else
+                        {
+                            cprops.PF_MM = Math.Pow((1 / 0.01964 * (6.97996 + Math.Log(-1080 + cprops.NBP.GetValueOrDefault()))), (3 / 2));
+                        }
                     }
                     cprops.PF_SG = PropertyMethods.d15_Riazi(cprops.PF_MM.GetValueOrDefault());
                 }

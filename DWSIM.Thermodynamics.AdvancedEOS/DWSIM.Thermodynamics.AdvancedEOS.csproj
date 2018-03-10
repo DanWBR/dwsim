@@ -108,6 +108,7 @@
     <Compile Include="PropertyPackages\VPT.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Assets\ECE\%40cGCEoS\cGCEoS.m" />
     <None Include="Assets\ECE\%40cGCEoS\ClearGroups.m" />
     <None Include="Assets\ECE\%40cGCEoS\compr.m" />
