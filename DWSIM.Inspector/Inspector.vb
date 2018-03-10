@@ -21,7 +21,8 @@ Public Class InspectorItem
     Public Property Items As New List(Of InspectorItem)
 
     Sub New()
-
+        Time = Date.Now
+        ThreadID = System.Threading.Thread.CurrentThread.ManagedThreadId
     End Sub
 
 End Class
