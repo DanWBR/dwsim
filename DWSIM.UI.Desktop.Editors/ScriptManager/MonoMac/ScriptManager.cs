@@ -48,6 +48,7 @@ namespace DWSIM.UI.Desktop.Editors
             ScriptEditor = new ScriptItem_Mac();
 
             var btnNew = new Button { Text = "New Script" };
+            btnNew.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnNew.Click += (sender, e) =>
             {
                 var script = new DWSIM.FlowsheetSolver.Script { ID = Guid.NewGuid().ToString(), Title = "Script" + (Flowsheet.Scripts.Count + 1).ToString() };
@@ -159,6 +160,7 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             var btnDelete = new Button { Text = "Remove Selected" };
+            btnDelete.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnDelete.Click += (sender, e) =>
             {
                 Flowsheet.Scripts.Remove(lbScripts.SelectedKey);

@@ -504,6 +504,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var btn = new Button {  Text = buttonlabel };
+            btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = 140;
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);

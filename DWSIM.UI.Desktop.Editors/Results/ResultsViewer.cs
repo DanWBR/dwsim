@@ -40,26 +40,31 @@ namespace DWSIM.UI.Desktop.Editors
             var centercontainer = new TableLayout();
 
             var lbl = new Label { Text = "Select Object / View Results Report", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center };
+            lbl.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var btnExport = new Button { Text = "Export Selected to PDF" };
+            btnExport.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnExport.Click += (sender, e) =>
             {
                 ExportReports(true);
             };
 
             var btnExportAll = new Button { Text = "Export All to PDF" };
+            btnExportAll.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnExportAll.Click += (sender, e) =>
             {
                 ExportReports(false);
             };
 
             var btnExportAllODS = new Button { Text = "Export All to ODS" };
+            btnExportAllODS.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnExportAllODS.Click += (sender, e) =>
             {
                 ExportODS();
             };
 
             var btnExportAllODT = new Button { Text = "Export All to ODT" };
+            btnExportAllODT.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnExportAllODT.Click += (sender, e) =>
             {
                 ExportODT();
@@ -70,11 +75,15 @@ namespace DWSIM.UI.Desktop.Editors
             topcontainer.Spacing = new Size(10, 10);
 
             lblLastCalc = new Label { Text = "Last successful flowsheet calculation:" };
+            lblLastCalc.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             topcontainer.Rows.Add(new TableRow(lblLastCalc));
 
             lbObjects = new ListBox { Width = 300 };
+            lbObjects.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
             txtResults = new TextArea { ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size) };
+            txtResults.Font = Fonts.Monospace(DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             centercontainer.Rows.Add(new TableRow(lbObjects, txtResults));
             centercontainer.Padding = new Padding(5, 5, 5, 5);

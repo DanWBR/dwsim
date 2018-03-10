@@ -61,18 +61,24 @@ Namespace GraphicObjects.Tables
 
         Public Overrides Sub Draw(ByVal g As Object)
 
+            Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
+
+            If GlobalSettings.Settings.EditorFontSize = -1 Then
+                FontSize = New SKPaint().TextSize
+            Else
+                FontSize = GlobalSettings.Settings.EditorFontSize + 1.0
+            End If
+
             Dim zoom As Single = AdditionalInfo
 
             If zoom = 0 Then Exit Sub
 
-            Padding = 6 / zoom
-
-            Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
+            Padding = 4 / zoom
 
             Dim tpaint As New SKPaint()
 
             With tpaint
-                .TextSize = (FontSize + 3) / zoom
+                .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.White
                 .IsStroke = False
@@ -81,7 +87,7 @@ Namespace GraphicObjects.Tables
             Dim tbpaint As New SKPaint()
 
             With tbpaint
-                .TextSize = (FontSize + 3) / zoom
+                .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.White
                 .IsStroke = False

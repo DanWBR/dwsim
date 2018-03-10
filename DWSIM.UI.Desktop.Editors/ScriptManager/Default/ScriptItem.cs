@@ -62,14 +62,23 @@ namespace DWSIM.UI.Desktop.Editors
             txtScript = new Controls.CodeEditorControl();
 
             chkLink = new CheckBox { Text = "Link Script" };
+            chkLink.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var lbl1 = new Label { Text = "Object", VerticalAlignment = VerticalAlignment.Center };
             var lbl2 = new Label { Text = "Event", VerticalAlignment = VerticalAlignment.Center };
             var lbl3 = new Label { Text = "Python Interpreter", VerticalAlignment = VerticalAlignment.Center };
 
+            lbl1.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            lbl2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            lbl3.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
             var btn1 = new Button {Text = "Update Script"};
             var btn2 = new Button { Text = "Update and Run" };
             var btn3 = new Button { Text = "Update and Run (Async)" };
+
+            btn1.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btn2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btn3.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             btn1.Click += (sender, e) => {
                 flowsheet.Scripts[scriptID].ScriptText = txtScript.Text;
@@ -89,11 +98,17 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             var lbl4 = new Label { Text = "Script Name", VerticalAlignment = VerticalAlignment.Center };
+            lbl4.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             txtName = new TextBox { Text = "Script Name" };
-            
+            txtName.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
             cbLinkedObject = new DropDown();
             cbLinkedEvent = new DropDown();
             cbPythonInt = new DropDown();
+
+            cbLinkedObject.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            cbLinkedEvent.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            cbPythonInt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             cbLinkedEvent.Items.AddRange(new String[] { "Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer", "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer" }.Select((x) => new ListItem { Key = x, Text = x }));
             cbPythonInt.Items.AddRange(new String[] { "IronPython", "Python.NET" }.Select((x) => new ListItem { Key = x, Text = x }));

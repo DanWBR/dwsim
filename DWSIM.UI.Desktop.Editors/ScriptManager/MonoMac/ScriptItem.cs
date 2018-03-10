@@ -51,17 +51,29 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             chkLink = new CheckBox { Text = "Link Script", Height = 22};
+            chkLink.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var lbl1 = new Label { Text = "Object", VerticalAlignment = VerticalAlignment.Center};
             var lbl2 = new Label { Text = "Event", VerticalAlignment = VerticalAlignment.Center };
             var lbl3 = new Label { Text = "Python Interpreter", VerticalAlignment = VerticalAlignment.Center };
 
+            lbl1.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            lbl2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            lbl3.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
             var lbl4 = new Label { Text = "Script Name", VerticalAlignment = VerticalAlignment.Center };
             txtName = new TextBox { Text = "Script Name", Height = 22 };
+
+            lbl4.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            txtName.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             cbLinkedObject = new DropDown();
             cbLinkedEvent = new DropDown();
             cbPythonInt = new DropDown();
+
+            cbLinkedObject.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            cbLinkedEvent.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            cbPythonInt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             cbLinkedEvent.Items.AddRange(new String[] { "Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer", "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer" }.Select((x) => new ListItem { Key = x, Text = x }));
             cbPythonInt.Items.AddRange(new String[] { "IronPython", "Python.NET" }.Select((x) => new ListItem { Key = x, Text = x }));
@@ -74,7 +86,11 @@ namespace DWSIM.UI.Desktop.Editors
             btnRun = new Button { Text = "Store and Run" };
             btnRunAsync = new Button { Text = "Store and Run Async" };
             btnUpdate = new Button { Text = "Store Updated Script" };
-            
+
+            btnRun.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btnRunAsync.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btnUpdate.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
             var tr2 = new TableRow(btnUpdate, btnRun, btnRunAsync, lbl4, txtName);
             var tb2 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb2.Rows.Add(tr2);

@@ -42,6 +42,7 @@ namespace DWSIM.UI.Desktop.Editors
             tabScripts = new TabControl();
 
             var btnNew = new Button { Text = "New Script" };
+            btnNew.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnNew.Click += (sender, e) =>
             {
                 try {
@@ -55,6 +56,7 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             var btnDelete = new Button { Text = "Remove Selected" };
+            btnDelete.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnDelete.Click += (sender, e) =>
             {
                 if (tabScripts.SelectedPage != null)
@@ -68,6 +70,7 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             var btnDeleteAll = new Button { Text = "Remove All" };
+            btnDeleteAll.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnDeleteAll.Click += (sender, e) =>
             {
                 if (tabScripts.Pages.Count > 0)

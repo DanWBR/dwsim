@@ -382,7 +382,7 @@ namespace DWSIM.UI.Forms
                 cont.Tag = "Settings";
                 var cont2 = new UI.Desktop.Editors.FloatingTablesView(FlowsheetObject);
                 cont2.Tag = "Visible Properties";
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Settings", 500, 500, new[] { cont, cont2 });
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Flowsheet Settings", 800, 600, new[] { cont, cont2 });
                 form.Show();
                 form.Width += 1;
             };
@@ -486,8 +486,10 @@ namespace DWSIM.UI.Forms
             EditorHolder = new DocumentControl() { AllowReordering = true, BackgroundColor = SystemColors.ControlBackground };
 
             var PanelEditorsLabel = new Label { Text = "  " + "Object Editors", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            PanelEditorsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var PanelEditorsDescription = new Label { Text = "  " + "Object Editing Panels will appear here.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            PanelEditorsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var PanelEditors = new TableLayout { Rows = { PanelEditorsLabel, PanelEditorsDescription, EditorHolder }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
 
@@ -507,7 +509,7 @@ namespace DWSIM.UI.Forms
 
             var objcontainer = new StackLayout();
 
-            foreach (var obj in ObjectList.Values)
+            foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
             {
                 var pitem = new FlowsheetObjectPanelItem();
                 var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
@@ -535,8 +537,10 @@ namespace DWSIM.UI.Forms
             };
 
             var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var PanelObjectsDescription = new Label { Text = "  " + "Drag and drop items to add them to the Flowsheet.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            PanelObjectsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, PanelObjectsDescription, new Scrollable() { Content = objcontainer, BackgroundColor = Colors.White } }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
 
@@ -815,8 +819,10 @@ namespace DWSIM.UI.Forms
         {
 
             var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            label.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
+            outtxt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var container = new TableLayout { Rows = { label, outtxt }, Spacing = new Size(5, 5) };
 

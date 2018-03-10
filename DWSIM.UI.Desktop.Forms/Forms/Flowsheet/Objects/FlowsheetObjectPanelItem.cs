@@ -26,6 +26,9 @@ namespace DWSIM.UI.Forms
             txtName = new Label() { Text = "Name", Font = SystemFonts.Bold() };
             txtDescription = new Label() { Text = "Description", Size = new Size(padding + width - 10 - iconsize, height - 20)};
 
+            txtName.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            txtDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
             Add(imgIcon, padding, 3*padding);
             Add(txtName, padding+iconsize + 6, padding);
             Add(txtDescription, padding+iconsize + 6, padding+16);

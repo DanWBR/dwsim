@@ -136,6 +136,15 @@ namespace DWSIM.UI.Desktop.Editors
             var btnEvaluate = new Button { Text = "Evaluate" };
             var btnEvaluateAll = new Button { Text = "Evaluate All" };
 
+            txtcell.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            txttype.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            txtformula.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btnImport.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btnExport.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btnClear.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btnEvaluate.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            btnEvaluateAll.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+           
             btnEvaluate.Click += (sender, e) =>
             {
                 EvaluateAll(ccparams);
@@ -198,10 +207,10 @@ namespace DWSIM.UI.Desktop.Editors
 
                 selector.ShowModal(grid);
             };
-
-            var tr = new TableRow(new Label { Text = "Selected Cell", VerticalAlignment = VerticalAlignment.Center }, txtcell,
-                                    new Label { Text = "Type", VerticalAlignment = VerticalAlignment.Center }, txttype,
-                                    new Label { Text = "Contents", VerticalAlignment = VerticalAlignment.Center }, txtformula,
+            
+            var tr = new TableRow(new Label { Text = "Selected Cell", VerticalAlignment = VerticalAlignment.Center, Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize())}, txtcell,
+                                    new Label { Text = "Type", VerticalAlignment = VerticalAlignment.Center, Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize()) }, txttype,
+                                    new Label { Text = "Contents", VerticalAlignment = VerticalAlignment.Center, Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize()) }, txtformula,
                                     btnImport, btnExport, btnClear, btnEvaluate, btnEvaluateAll);
 
             tr.Cells[5].ScaleWidth = true;

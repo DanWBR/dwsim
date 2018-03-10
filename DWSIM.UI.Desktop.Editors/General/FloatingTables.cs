@@ -71,6 +71,7 @@ namespace DWSIM.UI.Desktop.Editors
             this.CreateAndAddDescriptionRow("Select the properties to show on Floating Property Tables and/or Anchored Property Lists according to object type.");
 
             var cbObjectType = this.CreateAndAddDropDownRow("Object Type", new List<string>(), 0, null);
+            cbObjectType.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             cbObjectType.Items.Clear();
             availableproperties.Clear();
@@ -102,6 +103,7 @@ namespace DWSIM.UI.Desktop.Editors
                 foreach (var item in availableproperties[selkey])
                 {
                     var check = new CheckBox {Text = flowsheet.GetTranslatedString(item), Tag = item, Checked = flowsheet.FlowsheetOptions.VisibleProperties[selkey].Contains(item) };
+                    check.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
                     check.CheckedChanged += (sender2, e2) => {
                         if (check.Checked.GetValueOrDefault())
                         {

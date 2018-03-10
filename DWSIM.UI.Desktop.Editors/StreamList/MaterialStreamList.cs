@@ -140,6 +140,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             txtView.Text = textlist;
+            txtView.Font = Fonts.Monospace(DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             lblLastUpdate.Text = "Updated on: " + DateTime.Now.ToString();
 
@@ -152,26 +153,29 @@ namespace DWSIM.UI.Desktop.Editors
             var centercontainer = new TableLayout();
                        
             var btnUpdate = new Button { Text = "Update Data" };
+            btnUpdate.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             btnUpdate.Click += (sender, e) =>
             {
                 UpdateList();
             };
 
             var txtpad = new TextBox{Text = PadSize.ToString()};
+            txtpad.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             txtpad.TextChanged += (sender, e) =>{
                 int ps = 0;
                 if (int.TryParse(txtpad.Text, out ps)) PadSize = int.Parse(txtpad.Text);
             };
 
             lblLastUpdate = new Label { Text = "Updated on: ", VerticalAlignment = VerticalAlignment.Center };
+            lblLastUpdate.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
             if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) topcontainer.Height = 34;
 
-            topcontainer.Rows.Add(new TableRow(lblLastUpdate, null, new Label { Text = "Column Size", VerticalAlignment = VerticalAlignment.Center }, txtpad, btnUpdate) { ScaleHeight = false });
+            topcontainer.Rows.Add(new TableRow(lblLastUpdate, null, new Label { Text = "Column Size", VerticalAlignment = VerticalAlignment.Center, Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize())}, txtpad, btnUpdate) { ScaleHeight = false });
 
-            txtView = new TextArea { ReadOnly = true, Wrap = false, Font = Fonts.Monospace(SystemFonts.Default().Size) };
+            txtView = new TextArea { ReadOnly = true, Wrap = false, Font = Fonts.Monospace(DWSIM.UI.Shared.Common.GetEditorFontSize()) };
 
             centercontainer.Rows.Add(new TableRow(txtView));
             centercontainer.Padding = new Padding(5, 5, 5, 5);

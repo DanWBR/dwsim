@@ -43,16 +43,18 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Spacing = new Size(10, 10);
 
-            container.Rows.Add(new TableRow(new Label { Text = "Simulation Compounds", Font = SystemFonts.Bold() }));
+            container.Rows.Add(new TableRow(new Label { Text = "Simulation Compounds", Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())}));
 
-            container.Rows.Add(new TableRow(new Label { Text = "Check compounds to add them to the simulation, uncheck to remove. You may have to double-click on the checkbox in order to change its state (checked/unchecked).", Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
+            container.Rows.Add(new TableRow(new Label { Text = "Check compounds to add them to the simulation, uncheck to remove. You may have to double-click on the checkbox in order to change its state (checked/unchecked).", Font = SystemFonts.Label(DWSIM.UI.Shared.Common.GetEditorFontSize() - 2.0f) }));
 
-            container.Rows.Add(new TableRow(new Label { Text = "Number of compounds available: " + complist.Count().ToString(), Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
+            container.Rows.Add(new TableRow(new Label { Text = "Number of compounds available: " + complist.Count().ToString(), Font = SystemFonts.Label(DWSIM.UI.Shared.Common.GetEditorFontSize() - 2.0f) }));
 
             var searchcontainer = new DynamicLayout();
 
             var txtsearch = new Label { Text = "Search  ", VerticalAlignment = VerticalAlignment.Center };
+            txtsearch.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             var edittext = new TextBox { Text = "", PlaceholderText = "Search by Name, Formula, CAS ID or Database (press ENTER to search)" };
+            edittext.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var tr = new TableRow(txtsearch, edittext);
 
@@ -74,7 +76,9 @@ namespace DWSIM.UI.Desktop.Editors
             container.Rows.Add(new TableRow(searchcontainer));
 
             var txt = new Label { Text = "Click to view properties of the selected compound", VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             var btn = new Button { Width = 200, Text = "View Properties" };
+            btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             btn.Click += (sender, e) =>
             {
