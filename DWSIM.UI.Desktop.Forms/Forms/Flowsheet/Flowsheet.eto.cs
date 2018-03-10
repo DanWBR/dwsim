@@ -570,15 +570,13 @@ namespace DWSIM.UI.Forms
             selctxmenu = new ContextMenu();
             deselctxmenu = new ContextMenu();
 
-            FlowsheetControl.FlowsheetSurface.SelectionChanged += (sender, e) =>
+            FlowsheetControl.FlowsheetSurface.InputReleased += (sender, e) =>
             {
                 if (GlobalSettings.Settings.EditOnSelect)
                 {
                     var sobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject("");
                     if (sobj != null)
                     {
-                        FlowsheetControl.FlowsheetSurface.InputRelease();
-                        Application.Instance.RunIteration();
                         EditObject_New(sobj);
                     }
                 }

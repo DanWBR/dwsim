@@ -15,6 +15,12 @@ Public Class GraphicsSurface
 
     Public Event SelectionChanged(ByVal sender As Object, ByVal e As SelectionChangedEventArgs)
 
+    Public Event InputPressed(ByVal sender As Object, ByVal e As SelectionChangedEventArgs)
+
+    Public Event InputMoved(ByVal sender As Object, ByVal e As SelectionChangedEventArgs)
+
+    Public Event InputReleased(ByVal sender As Object, ByVal e As SelectionChangedEventArgs)
+
     Public Event StatusUpdate(ByVal sender As Object, ByVal e As StatusUpdateEventArgs)
 
 #End Region
@@ -640,6 +646,8 @@ Public Class GraphicsSurface
 
         End If
 
+        RaiseEvent InputMoved(Me, New SelectionChangedEventArgs(SelectedObject))
+
     End Sub
 
     Public Sub InputRelease()
@@ -678,6 +686,8 @@ Public Class GraphicsSurface
 
         End If
 
+        RaiseEvent InputReleased(Me, New SelectionChangedEventArgs(SelectedObject))
+
     End Sub
 
     Public Sub InputPress(x As Integer, y As Integer)
@@ -711,6 +721,8 @@ Public Class GraphicsSurface
             End If
 
         End If
+
+        RaiseEvent InputPressed(Me, New SelectionChangedEventArgs(SelectedObject))
 
     End Sub
 
