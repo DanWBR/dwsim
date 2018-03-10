@@ -643,6 +643,8 @@ namespace DWSIM.UI.Shared
 
             var btn = new Button { Width = 100, Text = buttonlabel };
             var btn2 = new Button { Width = 100, Text = buttonlabel2 };
+            btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            btn2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
             if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), 22, 22, ImageInterpolation.Default);
@@ -682,6 +684,7 @@ namespace DWSIM.UI.Shared
         {
 
             var btn = new Button { Text = buttonlabel };
+            btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = 140;
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);

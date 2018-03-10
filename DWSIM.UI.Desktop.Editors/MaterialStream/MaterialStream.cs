@@ -278,6 +278,7 @@ namespace DWSIM.UI.Desktop.Editors
                         Double total = 0.0f;
 
                         var btnNormalize = s.CreateAndAddButtonRow(container, "Normalize", null, null);
+                        btnNormalize.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                         btnNormalize.Click += (sender, e) =>
                         {
@@ -305,6 +306,7 @@ namespace DWSIM.UI.Desktop.Editors
                         };
 
                         var btnEqualize = s.CreateAndAddButtonRow(container, "Equalize", null, null);
+                        btnEqualize.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                         btnEqualize.Click += (sender, e) =>
                         {
@@ -315,6 +317,7 @@ namespace DWSIM.UI.Desktop.Editors
                         };
 
                         var btnClear = s.CreateAndAddButtonRow(container, "Clear", null, null);
+                        btnClear.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                         btnClear.Click += (sender, e) =>
                         {
@@ -325,6 +328,7 @@ namespace DWSIM.UI.Desktop.Editors
                         };
 
                         var btnAccept = s.CreateAndAddButtonRow(container, "Accept/Update", null, null);
+                        btnAccept.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                         btnAccept.Click += (sender, e) =>
                         {
