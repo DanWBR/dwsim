@@ -478,7 +478,9 @@ namespace DWSIM.UI.Shared
 
         public static void CreateAndAddEmptySpace(this DynamicLayout container)
         {
-            container.AddRow(new TableRow(new Label { Text = "", Height = 10 }));
+            var h = 8 * GetEditorFontSize()/(int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
+
+            container.AddRow(new TableRow(new Label { Text = "", Height = h }));
         }
 
         public static TextBox CreateAndAddFullTextBoxRow(this DynamicLayout container, String text, Action<TextBox, EventArgs> command)
