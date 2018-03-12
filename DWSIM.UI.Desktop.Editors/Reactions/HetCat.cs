@@ -302,6 +302,22 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
             eq = eq.Remove(eq.Length - 2, 2);
+            //scan for neutrals
+            string neutrals = "";
+            foreach (var rxc in rx.Components.Values)
+            {
+                if (rxc.StoichCoeff == 0)
+                {
+                    neutrals += flowsheet.SelectedCompounds[rxc.CompName].Formula + ", ";
+                }
+            }
+            if (neutrals != "") {
+                neutrals = neutrals.Insert(0, " (N: ");
+                neutrals = neutrals.Remove(neutrals.Length - 2, 2);
+                neutrals = neutrals.Insert(neutrals.Length, ")");
+                eq += neutrals;
+            }
+
             if (rx.Components.ContainsKey(rx.BaseReactant)) { rx.ReactionHeat = (hp - hr) / Math.Abs(rx.Components[rx.BaseReactant].StoichCoeff); }
 
             txtEquation.Text += eq;

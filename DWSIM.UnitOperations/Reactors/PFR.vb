@@ -211,6 +211,7 @@ Namespace Reactors
 
                         Dim ir As Integer = 1
                         Dim ip As Integer = 1
+                        Dim ine As Integer = 1
 
                         For Each sb As ReactionStoichBase In rxn.Components.Values
                             If sb.StoichCoeff < 0 Then
@@ -219,6 +220,9 @@ Namespace Reactors
                             ElseIf sb.StoichCoeff > 0 Then
                                 rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
                                 ip += 1
+                            Else
+                                rxn.ExpContext.Variables.Add("N" & ine.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                ine += 1
                             End If
                         Next
 

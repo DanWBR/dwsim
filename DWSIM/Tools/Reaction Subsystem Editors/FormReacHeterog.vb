@@ -1,4 +1,4 @@
-'    Copyright 200-2015 Daniel Wagner O. de Medeiros
+'    Copyright 2000-2018 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -16,9 +16,8 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
-Imports Ciloci.Flee
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.Interfaces.Enums
+Imports System.Linq
 
 Public Class FormReacHeterog
 
@@ -172,6 +171,19 @@ Public Class FormReacHeterog
                 End If
             Next
             eq = eq.Remove(eq.Length - 2, 2)
+            Dim neutrals As String = ""
+            'scan for neutrals
+            For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
+                If row.Cells(4).Value = 0 And row.Cells(2).Value = True Then
+                    neutrals += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & ", "
+                End If
+            Next
+            If neutrals <> "" Then
+                neutrals = neutrals.Insert(0, " (N: ")
+                neutrals = neutrals.Remove(neutrals.Length - 2, 2)
+                neutrals = neutrals.Insert(neutrals.Length, ")")
+                eq += neutrals
+            End If
 
             Me.tbEquation.Text = eq
 
