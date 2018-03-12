@@ -1518,62 +1518,126 @@ Final3:     T = bbb
                 End Select
                 Return value
             Else
-                If prop.Contains("HydraulicSegment") Then
-                    Dim skey As Integer = prop.Split(",")(1)
-                    Dim sprop As String = prop.Split(",")(2)
-                    Select Case sprop
-                        Case "Length"
-                            Return cv.ConvertFromSI(su.distance, Profile.Sections(skey).Comprimento)
-                        Case "Elevation"
-                            Return cv.ConvertFromSI(su.distance, Profile.Sections(skey).Elevacao)
-                        Case "InternalDiameter"
-                            Return cv.Convert("in.", su.diameter, Profile.Sections(skey).DI)
-                        Case "ExternalDiameter"
-                            Return cv.Convert("in.", su.diameter, Profile.Sections(skey).DE)
-                        Case "Sections"
-                            Return Profile.Sections(skey).Incrementos
-                        Case Else
-                            Return 0.0
-                    End Select
-                ElseIf prop.Contains("ThermalProfile") Then
-                    Dim tprop As String = prop.Split(",")(1)
-                    Select Case tprop
-                        Case "CalculationType"
-                            Return ThermalProfile.TipoPerfil
-                        Case "OverallHTC"
-                            Return cv.ConvertFromSI(su.heat_transf_coeff, ThermalProfile.CGTC_Definido)
-                        Case "ExternalTemperatureDefinedHTC"
-                            Return cv.ConvertFromSI(su.temperature, ThermalProfile.Temp_amb_definir)
-                        Case "ExternalTemperatureEstimatedHTC"
-                            Return cv.ConvertFromSI(su.temperature, ThermalProfile.Temp_amb_estimar)
-                        Case "ExternalTemperatureGradientDefinedHTC"
-                            Return cv.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient) / cv.ConvertFromSI(su.distance, 1.0#)
-                        Case "ExternalTemperatureGradientEstimatedHTC"
-                            Return cv.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC) / cv.ConvertFromSI(su.distance, 1.0#)
-                        Case "HeatExchanged"
-                            Return cv.ConvertFromSI(su.heatflow, ThermalProfile.Calor_trocado)
-                        Case "IncludeWallHTC"
-                            Return ThermalProfile.Incluir_paredes
-                        Case "IncludeInternalHTC"
-                            Return ThermalProfile.Incluir_cti
-                        Case "IncludeInsulationHTC"
-                            Return ThermalProfile.Incluir_isolamento
-                        Case "InsulationThickness"
-                            Return cv.ConvertFromSI(su.thickness, ThermalProfile.Espessura)
-                        Case "InsulationThermalConductivity"
-                            Return cv.ConvertFromSI(su.thermalConductivity, ThermalProfile.Condtermica)
-                        Case "IncludeExternalHTC"
-                            Return ThermalProfile.Incluir_cte
-                        Case "ExternalEnvironmentType"
-                            Return ThermalProfile.Meio
-                        Case "ExternalEnvironmentVelocityOrDeepness"
-                            Return cv.ConvertFromSI(su.velocity, ThermalProfile.Velocidade)
-                        Case Else
-                            Return 0.0
-                    End Select
-                Else
-                    Return 0.0#
-                End If
+                Try
+                    If prop.Contains("Results") Then
+                        Dim skey As Integer = prop.Split(",")(1)
+                        Dim sindex As Integer = prop.Split(",")(3) - 1
+                        Dim sprop As String = prop.Split(",")(4)
+                        Select Case sprop
+                            Case "HeatTransfer"
+                                Return cv.ConvertFromSI(su.heatflow, Profile.Sections(skey).Resultados(sindex).CalorTransferido)
+                            Case "HeatCapacityLiquid"
+                                Return cv.ConvertFromSI(su.heatCapacityCp, Profile.Sections(skey).Resultados(sindex).Cpl)
+                            Case "HeatCapacityVapor"
+                                Return cv.ConvertFromSI(su.heatCapacityCp, Profile.Sections(skey).Resultados(sindex).Cpv)
+                            Case "PressureDropFriction"
+                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Resultados(sindex).DpPorFriccao)
+                            Case "PressureDropHydrostatic"
+                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Resultados(sindex).DpPorHidrostatico)
+                            Case "PressureDropTotal"
+                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Resultados(sindex).DpPorFriccao + Profile.Sections(skey).Resultados(sindex).DpPorHidrostatico)
+                            Case "LiquidHoldup"
+                                Return Profile.Sections(skey).Resultados(sindex).HoldupDeLiquido
+                            Case "HTCoverall"
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC)
+                            Case "HTCexternal"
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_external)
+                            Case "HTCinternal"
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_internal)
+                            Case "HTCinsulation"
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_insulation)
+                            Case "HTCpipewall"
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_pipewall)
+                            Case "ThermalConductivityLiquid"
+                                Return cv.ConvertFromSI(su.thermalConductivity, Profile.Sections(skey).Resultados(sindex).Kl)
+                            Case "ThermalConductivityVapor"
+                                Return cv.ConvertFromSI(su.thermalConductivity, Profile.Sections(skey).Resultados(sindex).Kv)
+                            Case "ReynoldsNumberLiquid"
+                                Return Profile.Sections(skey).Resultados(sindex).LiqRe
+                            Case "ReynoldsNumberVapor"
+                                Return Profile.Sections(skey).Resultados(sindex).VapRe
+                            Case "ViscosityLiquid"
+                                Return cv.ConvertFromSI(su.viscosity, Profile.Sections(skey).Resultados(sindex).MUl)
+                            Case "ViscosityVapor"
+                                Return cv.ConvertFromSI(su.viscosity, Profile.Sections(skey).Resultados(sindex).MUv)
+                            Case "VolumetricFlowLiquid"
+                                Return cv.ConvertFromSI(su.volumetricFlow, Profile.Sections(skey).Resultados(sindex).Ql)
+                            Case "VolumetricFlowVapor"
+                                Return cv.ConvertFromSI(su.volumetricFlow, Profile.Sections(skey).Resultados(sindex).Qv)
+                            Case "DensityLiquid"
+                                Return cv.ConvertFromSI(su.density, Profile.Sections(skey).Resultados(sindex).RHOl)
+                            Case "DensityVapor"
+                                Return cv.ConvertFromSI(su.density, Profile.Sections(skey).Resultados(sindex).RHOv)
+                            Case "SurfaceTension"
+                                Return cv.ConvertFromSI(su.surfaceTension, Profile.Sections(skey).Resultados(sindex).Surft)
+                            Case "InitialTemperature"
+                                Return cv.ConvertFromSI(su.temperature, Profile.Sections(skey).Resultados(sindex).TemperaturaInicial)
+                            Case "FlowRegime"
+                                Return Profile.Sections(skey).Resultados(sindex).TipoFluxo
+                            Case "VelocityLiquid"
+                                Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Resultados(sindex).LiqVel)
+                            Case "VelocityVapor"
+                                Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Resultados(sindex).VapVel)
+                        End Select
+                    ElseIf prop.Contains("HydraulicSegment") Then
+                        Dim skey As Integer = prop.Split(",")(1)
+                        Dim sprop As String = prop.Split(",")(2)
+                        Select Case sprop
+                            Case "Length"
+                                Return cv.ConvertFromSI(su.distance, Profile.Sections(skey).Comprimento)
+                            Case "Elevation"
+                                Return cv.ConvertFromSI(su.distance, Profile.Sections(skey).Elevacao)
+                            Case "InternalDiameter"
+                                Return cv.Convert("in.", su.diameter, Profile.Sections(skey).DI)
+                            Case "ExternalDiameter"
+                                Return cv.Convert("in.", su.diameter, Profile.Sections(skey).DE)
+                            Case "Sections"
+                                Return Profile.Sections(skey).Incrementos
+                            Case Else
+                                Return 0.0
+                        End Select
+                    ElseIf prop.Contains("ThermalProfile") Then
+                        Dim tprop As String = prop.Split(",")(1)
+                        Select Case tprop
+                            Case "CalculationType"
+                                Return ThermalProfile.TipoPerfil
+                            Case "OverallHTC"
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, ThermalProfile.CGTC_Definido)
+                            Case "ExternalTemperatureDefinedHTC"
+                                Return cv.ConvertFromSI(su.temperature, ThermalProfile.Temp_amb_definir)
+                            Case "ExternalTemperatureEstimatedHTC"
+                                Return cv.ConvertFromSI(su.temperature, ThermalProfile.Temp_amb_estimar)
+                            Case "ExternalTemperatureGradientDefinedHTC"
+                                Return cv.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient) / cv.ConvertFromSI(su.distance, 1.0#)
+                            Case "ExternalTemperatureGradientEstimatedHTC"
+                                Return cv.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC) / cv.ConvertFromSI(su.distance, 1.0#)
+                            Case "HeatExchanged"
+                                Return cv.ConvertFromSI(su.heatflow, ThermalProfile.Calor_trocado)
+                            Case "IncludeWallHTC"
+                                Return ThermalProfile.Incluir_paredes
+                            Case "IncludeInternalHTC"
+                                Return ThermalProfile.Incluir_cti
+                            Case "IncludeInsulationHTC"
+                                Return ThermalProfile.Incluir_isolamento
+                            Case "InsulationThickness"
+                                Return cv.ConvertFromSI(su.thickness, ThermalProfile.Espessura)
+                            Case "InsulationThermalConductivity"
+                                Return cv.ConvertFromSI(su.thermalConductivity, ThermalProfile.Condtermica)
+                            Case "IncludeExternalHTC"
+                                Return ThermalProfile.Incluir_cte
+                            Case "ExternalEnvironmentType"
+                                Return ThermalProfile.Meio
+                            Case "ExternalEnvironmentVelocityOrDeepness"
+                                Return cv.ConvertFromSI(su.velocity, ThermalProfile.Velocidade)
+                            Case Else
+                                Return 0.0
+                        End Select
+                    Else
+                        Return 0.0#
+                    End If
+                Catch ex As Exception
+                    Return "Error"
+                End Try
             End If
 
         End Function
@@ -1596,6 +1660,39 @@ Final3:     T = bbb
                 proplist.Add("HydraulicSegment," + ps.Key.ToString + ",InternalDiameter")
                 proplist.Add("HydraulicSegment," + ps.Key.ToString + ",ExternalDiameter")
                 proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Sections")
+            Next
+            For Each ps In Profile.Sections
+                Dim j As Integer = 1
+                For Each res In ps.Value.Resultados
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HeatTransfer")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HeatCapacityLiquid")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HeatCapacityVapor")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",PressureDropFriction")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",PressureDropHydrostatic")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",PressureDropTotal")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",LiquidHoldup")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HTCoverall")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HTCexternal")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HTCinternal")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HTCinsulation")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HTCpipewall")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ThermalConductivityLiquid")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ThermalConductivityVapor")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ReynoldsNumberLiquid")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ReynoldsNumberVapor")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ViscosityLiquid")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ViscosityVapor")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VolumetricFlowLiquid")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VolumetricFlowVapor")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",DensityLiquid")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",DensityVapor")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",SurfaceTension")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",InitialTemperature")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",FlowRegime")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VelocityLiquid")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VelocityVapor")
+                    j += 1
+                Next
             Next
             proplist.Add("ThermalProfile,CalculationType")
             proplist.Add("ThermalProfile,OverallHTC")
@@ -1642,56 +1739,60 @@ Final3:     T = bbb
                         Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval) / SystemsOfUnits.Converter.ConvertToSI(su.distance, 1.0#)
                 End Select
             Else
-                If prop.Contains("HydraulicSegment") Then
-                    Dim skey As Integer = prop.Split(",")(1)
-                    Dim sprop As String = prop.Split(",")(2)
-                    Select Case sprop
-                        Case "Length"
-                            Profile.Sections(skey).Comprimento = cv.ConvertToSI(su.distance, propval)
-                        Case "Elevation"
-                            Profile.Sections(skey).Elevacao = cv.ConvertToSI(su.distance, propval)
-                        Case "InternalDiameter"
-                            Profile.Sections(skey).DI = cv.Convert(su.diameter, "in.", propval)
-                        Case "ExternalDiameter"
-                            Profile.Sections(skey).DE = cv.Convert(su.diameter, "in.", propval)
-                        Case "Sections"
-                            Profile.Sections(skey).Incrementos = propval
-                    End Select
-                ElseIf prop.Contains("ThermalProfile") Then
-                    Dim tprop As String = prop.Split(",")(1)
-                    Select Case tprop
-                        Case "CalculationType"
-                            ThermalProfile.TipoPerfil = propval
-                        Case "OverallHTC"
-                            ThermalProfile.CGTC_Definido = cv.ConvertToSI(su.heat_transf_coeff, propval)
-                        Case "ExternalTemperatureDefinedHTC"
-                            ThermalProfile.Temp_amb_definir = cv.ConvertToSI(su.temperature, propval)
-                        Case "ExternalTemperatureEstimatedHTC"
-                            ThermalProfile.Temp_amb_estimar = cv.ConvertToSI(su.temperature, propval)
-                        Case "ExternalTemperatureGradientDefinedHTC"
-                            ThermalProfile.AmbientTemperatureGradient = cv.ConvertToSI(su.deltaT, propval) / cv.ConvertToSI(su.distance, 1.0#)
-                        Case "ExternalTemperatureGradientEstimatedHTC"
-                            ThermalProfile.AmbientTemperatureGradient_EstimateHTC = cv.ConvertToSI(su.deltaT, propval) / cv.ConvertToSI(su.distance, 1.0#)
-                        Case "HeatExchanged"
-                            ThermalProfile.Calor_trocado = cv.ConvertToSI(su.heatflow, propval)
-                        Case "IncludeWallHTC"
-                            ThermalProfile.Incluir_paredes = propval
-                        Case "IncludeInternalHTC"
-                            ThermalProfile.Incluir_cti = propval
-                        Case "IncludeInsulationHTC"
-                            ThermalProfile.Incluir_isolamento = propval
-                        Case "InsulationThickness"
-                            ThermalProfile.Espessura = cv.ConvertToSI(su.thickness, propval)
-                        Case "InsulationThermalConductivity"
-                            ThermalProfile.Condtermica = cv.ConvertToSI(su.thermalConductivity, propval)
-                        Case "IncludeExternalHTC"
-                            ThermalProfile.Incluir_cte = propval
-                        Case "ExternalEnvironmentType"
-                            ThermalProfile.Meio = propval
-                        Case "ExternalEnvironmentVelocityOrDeepness"
-                            ThermalProfile.Velocidade = cv.ConvertToSI(su.velocity, propval)
-                    End Select
-                End If
+                Try
+                    If prop.Contains("HydraulicSegment") Then
+                        Dim skey As Integer = prop.Split(",")(1)
+                        Dim sprop As String = prop.Split(",")(2)
+                        Select Case sprop
+                            Case "Length"
+                                Profile.Sections(skey).Comprimento = cv.ConvertToSI(su.distance, propval)
+                            Case "Elevation"
+                                Profile.Sections(skey).Elevacao = cv.ConvertToSI(su.distance, propval)
+                            Case "InternalDiameter"
+                                Profile.Sections(skey).DI = cv.Convert(su.diameter, "in.", propval)
+                            Case "ExternalDiameter"
+                                Profile.Sections(skey).DE = cv.Convert(su.diameter, "in.", propval)
+                            Case "Sections"
+                                Profile.Sections(skey).Incrementos = propval
+                        End Select
+                    ElseIf prop.Contains("ThermalProfile") Then
+                        Dim tprop As String = prop.Split(",")(1)
+                        Select Case tprop
+                            Case "CalculationType"
+                                ThermalProfile.TipoPerfil = propval
+                            Case "OverallHTC"
+                                ThermalProfile.CGTC_Definido = cv.ConvertToSI(su.heat_transf_coeff, propval)
+                            Case "ExternalTemperatureDefinedHTC"
+                                ThermalProfile.Temp_amb_definir = cv.ConvertToSI(su.temperature, propval)
+                            Case "ExternalTemperatureEstimatedHTC"
+                                ThermalProfile.Temp_amb_estimar = cv.ConvertToSI(su.temperature, propval)
+                            Case "ExternalTemperatureGradientDefinedHTC"
+                                ThermalProfile.AmbientTemperatureGradient = cv.ConvertToSI(su.deltaT, propval) / cv.ConvertToSI(su.distance, 1.0#)
+                            Case "ExternalTemperatureGradientEstimatedHTC"
+                                ThermalProfile.AmbientTemperatureGradient_EstimateHTC = cv.ConvertToSI(su.deltaT, propval) / cv.ConvertToSI(su.distance, 1.0#)
+                            Case "HeatExchanged"
+                                ThermalProfile.Calor_trocado = cv.ConvertToSI(su.heatflow, propval)
+                            Case "IncludeWallHTC"
+                                ThermalProfile.Incluir_paredes = propval
+                            Case "IncludeInternalHTC"
+                                ThermalProfile.Incluir_cti = propval
+                            Case "IncludeInsulationHTC"
+                                ThermalProfile.Incluir_isolamento = propval
+                            Case "InsulationThickness"
+                                ThermalProfile.Espessura = cv.ConvertToSI(su.thickness, propval)
+                            Case "InsulationThermalConductivity"
+                                ThermalProfile.Condtermica = cv.ConvertToSI(su.thermalConductivity, propval)
+                            Case "IncludeExternalHTC"
+                                ThermalProfile.Incluir_cte = propval
+                            Case "ExternalEnvironmentType"
+                                ThermalProfile.Meio = propval
+                            Case "ExternalEnvironmentVelocityOrDeepness"
+                                ThermalProfile.Velocidade = cv.ConvertToSI(su.velocity, propval)
+                        End Select
+                    End If
+                Catch ex As Exception
+                    FlowSheet.ShowMessage("Error setting property '" + prop + "': " + ex.Message, IFlowsheet.MessageType.GeneralError)
+                End Try
             End If
 
             Return 1
@@ -1728,7 +1829,65 @@ Final3:     T = bbb
                 End Select
                 Return value
             Else
-                If prop.Contains("HydraulicSegment") Then
+                If prop.Contains("Results") Then
+                    Dim sprop As String = prop.Split(",")(4)
+                    Select Case sprop
+                        Case "HeatTransfer"
+                            Return su.heatflow
+                        Case "HeatCapacityLiquid"
+                            Return su.heatCapacityCp
+                        Case "HeatCapacityVapor"
+                            Return su.heatCapacityCp
+                        Case "PressureDropFriction"
+                            Return su.deltaP
+                        Case "PressureDropHydrostatic"
+                            Return su.deltaP
+                        Case "PressureDropTotal"
+                            Return su.deltaP
+                        Case "LiquidHoldup"
+                            Return ""
+                        Case "HTCoverall"
+                            Return su.heat_transf_coeff
+                        Case "HTCexternal"
+                            Return su.heat_transf_coeff
+                        Case "HTCinternal"
+                            Return su.heat_transf_coeff
+                        Case "HTCinsulation"
+                            Return su.heat_transf_coeff
+                        Case "HTCpipewall"
+                            Return su.heat_transf_coeff
+                        Case "ThermalConductivityLiquid"
+                            Return su.thermalConductivity
+                        Case "ThermalConductivityVapor"
+                            Return su.thermalConductivity
+                        Case "ReynoldsNumberLiquid"
+                            Return ""
+                        Case "ReynoldsNumberVapor"
+                            Return ""
+                        Case "ViscosityLiquid"
+                            Return su.viscosity
+                        Case "ViscosityVapor"
+                            Return su.viscosity
+                        Case "VolumetricFlowLiquid"
+                            Return su.volumetricFlow
+                        Case "VolumetricFlowVapor"
+                            Return su.volumetricFlow
+                        Case "DensityLiquid"
+                            Return su.density
+                        Case "DensityVapor"
+                            Return su.density
+                        Case "SurfaceTension"
+                            Return su.surfaceTension
+                        Case "InitialTemperature"
+                            Return su.temperature
+                        Case "FlowRegime"
+                            Return ""
+                        Case "VelocityLiquid"
+                            Return su.velocity
+                        Case "VelocityVapor"
+                            Return su.velocity
+                    End Select
+                ElseIf prop.Contains("HydraulicSegment") Then
                     Dim skey As Integer = prop.Split(",")(1)
                     Dim sprop As String = prop.Split(",")(2)
                     Select Case sprop
