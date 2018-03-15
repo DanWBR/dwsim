@@ -234,6 +234,7 @@ namespace DWSIM.UI.Shared
                 container.AddRow(new TableRow(label));
             }
             container.CreateAndAddEmptySpace();
+            container.CreateAndAddEmptySpace();
         }
 
         public static TableRow CreateAndAddControlRow(this DynamicLayout container, Control control)

@@ -114,6 +114,8 @@ namespace DWSIM.UI.Forms
             var btnmZoomOut = new ButtonToolItem { ToolTip = "Zoom Out", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_out_filled.png")) };
             var btnmZoomFit = new ButtonToolItem { ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-fit_to_page_filled.png")) };
 
+            var btnmInspector = new ButtonToolItem { ToolTip = "Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
+
             if (Application.Instance.Platform.IsMac)
             {
                 btnmSave.Text = "Save";
@@ -125,11 +127,12 @@ namespace DWSIM.UI.Forms
                 btnmZoomIn.Text = "Zoom In";
                 btnmZoomOut.Text = "Zoom Out";
                 btnmZoomFit.Text = "Zoom to Fit";
+                btnmInspector.Text = "Inspector";
             }
 
             ToolBar = new ToolBar { Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmSolve, btnmSimultSolve, new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
-                    btnmZoomOut, btnmZoomIn, btnmZoomFit } };
+                    btnmZoomOut, btnmZoomIn, btnmZoomFit,new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmInspector } };
 
             // menu items
 
@@ -281,6 +284,7 @@ namespace DWSIM.UI.Forms
             var btnSensAnalysis = new ButtonMenuItem { Text = "Sensitivity Analysis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
             var btnOptimization = new ButtonMenuItem { Text = "Flowsheet Optimizer", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
 
+            var btnInspector = new ButtonMenuItem { Text = "Solution Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
 
             btnObjects.Click += (sender, e) =>
             {
@@ -377,7 +381,7 @@ namespace DWSIM.UI.Forms
             btnmSimultSolve.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
             btnmSimultSolve.CheckedChanged += (sender, e) =>
             {
-                FlowsheetObject.Options.SimultaneousAdjustSolverEnabled = chkSimSolver.Checked;
+                FlowsheetObject.Options.SimultaneousAdjustSolverEnabled = btnmSimultSolve.Checked;
                 chkSimSolver.Checked = btnmSimultSolve.Checked;
             };
 
@@ -438,7 +442,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                         Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
-                        Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
+                        Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Insert(7, pluginsmenu);
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
@@ -448,7 +452,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
-                        Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Add(pluginsmenu);
                         Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
@@ -459,7 +463,7 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
-                    Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                     Menu.Items.Add(pluginsmenu);
                     Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
