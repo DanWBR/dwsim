@@ -99,6 +99,36 @@ namespace DWSIM.UI.Forms
 
             ClientSize = new Size(1024, 768);
 
+            // toolbar
+
+            var btnmSave = new ButtonToolItem { ToolTip = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
+            
+            var btnmSolve = new ButtonToolItem { ToolTip = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+            var btnmSimultSolve = new CheckToolItem { ToolTip = "Enable/Disable Simultaneous Adjust Solver", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Checked_96px.png")) };
+
+            var btnmComps = new ButtonToolItem { ToolTip = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")) };
+            var btnmBasis = new ButtonToolItem { ToolTip = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")) };
+            var btnmOptions = new ButtonToolItem { ToolTip = "Flowsheet Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+            var btnmGlobalOptions = new ButtonToolItem { ToolTip = "Global Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+
+            var btnmZoomIn = new ButtonToolItem { ToolTip = "Flowsheet Zoom In", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_in_filled.png")) };
+            var btnmZoomOut = new ButtonToolItem { ToolTip = "Flowsheet Zoom Out", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_out_filled.png")) };
+            var btnmZoomFit = new ButtonToolItem { ToolTip = "Flowsheet Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-fit_to_page_filled.png")) };
+            
+            ToolBar = new ToolBar { Items = {btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions, btnmGlobalOptions,
+                new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmSolve, btnmSimultSolve, new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
+                    btnmZoomIn, btnmZoomOut, btnmZoomFit } };
+
+            if (Application.Instance.Platform.IsMac)
+            {
+                foreach (var item in ToolBar.Items)
+                {
+                    if (item is ButtonToolItem) item.Text = item.ToolTip;
+                }
+            }
+
+            // menu items
+
             var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")), Shortcut = Keys.S | Application.Instance.CommonModifier };
             var btnSaveAs = new ButtonMenuItem { Text = "Save As...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png")), Shortcut = Keys.S | Application.Instance.CommonModifier | Keys.Shift };
             var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")), Shortcut = Keys.Q | Application.Instance.CommonModifier };
