@@ -114,22 +114,22 @@ namespace DWSIM.UI.Forms
             var btnmZoomOut = new ButtonToolItem { ToolTip = "Zoom Out", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_out_filled.png")) };
             var btnmZoomFit = new ButtonToolItem { ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-fit_to_page_filled.png")) };
 
-            ToolBar = new ToolBar { Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions,
-                new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmSolve, btnmSimultSolve, new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
-                    btnmZoomIn, btnmZoomOut, btnmZoomFit } };
-
             if (Application.Instance.Platform.IsMac)
             {
-                btnmSave.Text = btnmSave.ToolTip;
-                btnmSolve.Text = btnmSolve.ToolTip;
-                btnmSimultSolve.Text = btnmSimultSolve.ToolTip;
-                btnmComps.Text = btnmComps.ToolTip;
-                btnmBasis.Text = btnmBasis.ToolTip;
-                btnmOptions.Text = btnmOptions.ToolTip;
-                btnmZoomIn.Text = btnmZoomIn.ToolTip;
-                btnmZoomOut.Text = btnmZoomOut.ToolTip;
-                btnmZoomFit.Text = btnmZoomFit.ToolTip;
+                btnmSave.Text = "Save";
+                btnmSolve.Text = "Solve";
+                btnmSimultSolve.Text = "Simult. Adjust";
+                btnmComps.Text = "Compounds";
+                btnmBasis.Text = "Basis";
+                btnmOptions.Text = "Settings";
+                btnmZoomIn.Text = "Zoom In";
+                btnmZoomOut.Text = "Zoom Out";
+                btnmZoomFit.Text = "Zoom to Fit";
             }
+
+            ToolBar = new ToolBar { Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions,
+                new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmSolve, btnmSimultSolve, new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
+                    btnmZoomOut, btnmZoomIn, btnmZoomFit } };
 
             // menu items
 
