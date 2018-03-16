@@ -156,8 +156,9 @@ Namespace DWSIM
             If My.Application._ResourceManager Is Nothing Then
 
                 Dim cultureinfo As String = "en"
+
                 Try
-                    cultureinfo = My.Settings.CultureInfo
+                    If GlobalSettings.Settings.OldUI Then cultureinfo = My.Settings.CultureInfo
                 Catch ex As System.Xml.XmlException
                     Dim filename As String = ex.SourceUri
                     Console.WriteLine(ex.Message & " [" & filename & "]")

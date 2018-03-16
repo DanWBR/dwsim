@@ -55,9 +55,9 @@ Public Class FormDataRegression
     Public drawtdep As Boolean = False
     Public output As Boolean = True
 
-    Private Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Public Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.MenuStrip1.Visible = False
+        Me.MenuStrip1.Visible = Not GlobalSettings.Settings.OldUI
 
         IP = New InteractionParameter
 

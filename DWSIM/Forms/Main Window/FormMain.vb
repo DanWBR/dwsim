@@ -189,46 +189,50 @@ Public Class FormMain
         End Try
     End Sub
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        My.Application.MainThreadId = Threading.Thread.CurrentThread.ManagedThreadId
+        If GlobalSettings.Settings.OldUI Then
 
-        If My.Settings.BackupFolder = "" Then My.Settings.BackupFolder = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM"
+            My.Application.MainThreadId = Threading.Thread.CurrentThread.ManagedThreadId
 
-        If My.Settings.BackupActivated Then
-            Me.TimerBackup.Interval = My.Settings.BackupInterval * 60000
-            Me.TimerBackup.Enabled = True
+            If My.Settings.BackupFolder = "" Then My.Settings.BackupFolder = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM"
+
+            If My.Settings.BackupActivated Then
+                Me.TimerBackup.Interval = My.Settings.BackupInterval * 60000
+                Me.TimerBackup.Enabled = True
+            End If
+
+            Me.dropdownlist = New ArrayList
+            Me.UpdateMRUList()
+
+            'load plugins from 'Plugins' folder
+
+            Dim pluginlist As List(Of Interfaces.IUtilityPlugin) = GetPlugins(LoadPluginAssemblies())
+
+            For Each ip As Interfaces.IUtilityPlugin In pluginlist
+                My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
+            Next
+
+            'load external property packages from 'propertypackages' folder, if there is any
+            Dim epplist As List(Of PropertyPackage) = GetExternalPPs(LoadExternalPPs())
+
+            For Each pp As PropertyPackage In epplist
+                PropertyPackages.Add(pp.ComponentName, pp)
+            Next
+
+            'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
+            'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
+
+            If My.Settings.ScriptPaths Is Nothing Then My.Settings.ScriptPaths = New Collections.Specialized.StringCollection()
+
+            Me.FrmOptions = New FormOptions
+            Me.FrmOptions.Dock = DockStyle.Fill
+            Me.SettingsPanel.Controls.Add(Me.FrmOptions)
+            Me.ButtonClose.BringToFront()
+
         End If
 
         Me.Text = DWSIM.App.GetLocalString("FormParent_FormText")
-
-        Me.dropdownlist = New ArrayList
-        Me.UpdateMRUList()
-
-        'load plugins from 'Plugins' folder
-
-        Dim pluginlist As List(Of Interfaces.IUtilityPlugin) = GetPlugins(LoadPluginAssemblies())
-
-        For Each ip As Interfaces.IUtilityPlugin In pluginlist
-            My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
-        Next
-
-        'load external property packages from 'propertypackages' folder, if there is any
-        Dim epplist As List(Of PropertyPackage) = GetExternalPPs(LoadExternalPPs())
-
-        For Each pp As PropertyPackage In epplist
-            PropertyPackages.Add(pp.ComponentName, pp)
-        Next
-
-        'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
-        'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
-
-        If My.Settings.ScriptPaths Is Nothing Then My.Settings.ScriptPaths = New Collections.Specialized.StringCollection()
-
-        Me.FrmOptions = New FormOptions
-        Me.FrmOptions.Dock = DockStyle.Fill
-        Me.SettingsPanel.Controls.Add(Me.FrmOptions)
-        Me.ButtonClose.BringToFront()
 
     End Sub
 
@@ -717,39 +721,43 @@ Public Class FormMain
         'load Biodiesel XML database
         Me.LoadBDDB()
 
-        Dim invaliddbs As New List(Of String)
+        If GlobalSettings.Settings.OldUI Then
 
-        'load user databases
-        For Each fpath As String In My.Settings.UserDatabases
-            Try
-                Dim componentes As ConstantProperties()
-                componentes = Databases.UserDB.ReadComps(fpath)
-                If componentes.Length > 0 Then
-                    If My.Settings.ReplaceComps Then
-                        For Each c As ConstantProperties In componentes
-                            If Not Me.AvailableComponents.ContainsKey(c.Name) Then
-                                Me.AvailableComponents.Add(c.Name, c)
-                            Else
-                                Me.AvailableComponents(c.Name) = c
-                            End If
-                        Next
-                    Else
-                        For Each c As ConstantProperties In componentes
-                            If Not Me.AvailableComponents.ContainsKey(c.Name) Then
-                                Me.AvailableComponents.Add(c.Name, c)
-                            End If
-                        Next
+            Dim invaliddbs As New List(Of String)
+
+            'load user databases
+            For Each fpath As String In My.Settings.UserDatabases
+                Try
+                    Dim componentes As ConstantProperties()
+                    componentes = Databases.UserDB.ReadComps(fpath)
+                    If componentes.Length > 0 Then
+                        If My.Settings.ReplaceComps Then
+                            For Each c As ConstantProperties In componentes
+                                If Not Me.AvailableComponents.ContainsKey(c.Name) Then
+                                    Me.AvailableComponents.Add(c.Name, c)
+                                Else
+                                    Me.AvailableComponents(c.Name) = c
+                                End If
+                            Next
+                        Else
+                            For Each c As ConstantProperties In componentes
+                                If Not Me.AvailableComponents.ContainsKey(c.Name) Then
+                                    Me.AvailableComponents.Add(c.Name, c)
+                                End If
+                            Next
+                        End If
                     End If
-                End If
-            Catch ex As Exception
-                invaliddbs.Add(fpath)
-            End Try
-        Next
+                Catch ex As Exception
+                    invaliddbs.Add(fpath)
+                End Try
+            Next
 
-        'remove non-existent or broken user databases from the list
-        For Each str As String In invaliddbs
-            My.Settings.UserDatabases.Remove(str)
-        Next
+            'remove non-existent or broken user databases from the list
+            For Each str As String In invaliddbs
+                My.Settings.UserDatabases.Remove(str)
+            Next
+
+        End If
 
         'check coolprop compat
         Dim cp As New CoolPropPropertyPackage()
@@ -3028,7 +3036,7 @@ Label_00CC:
             Try
                 Directory.CreateDirectory(folder)
             Catch ex As Exception
-                MessageBox.Show(DWSIM.App.GetLocalString("Erroaocriardiretriop") & vbCrLf & DWSIM.App.GetLocalString("Verifiquesevoctemonv"), _
+                MessageBox.Show(DWSIM.App.GetLocalString("Erroaocriardiretriop") & vbCrLf & DWSIM.App.GetLocalString("Verifiquesevoctemonv"),
                              DWSIM.App.GetLocalString("Cpiasdesegurana"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
@@ -3048,7 +3056,7 @@ Label_00CC:
 
 #End Region
 
-    Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) 
+    Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs)
         Try
             File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run", "")
             Application.Restart()

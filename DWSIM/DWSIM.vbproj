@@ -2407,10 +2407,14 @@ xcopy "$(SolutionDir)PlatformFiles\Windows\CoolProp.dll" "$(TargetDir)" /E /Y /F
 ) else if "$(PlatformName)"=="x64" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
 del "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
 del "$(SolutionDir)DistPackages\Windows\*.tmp"
+
+del "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*"
+del "$(SolutionDir)DistPackages\macOS\*.tmp"
 
 del "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
 del "$(SolutionDir)DistPackages\Linux\*.tmp"

@@ -885,10 +885,10 @@ Partial Class FormDataRegression
         '
         'SaveFileDialog1
         '
-        Me.SaveFileDialog1.CreatePrompt = True
+        'Me.SaveFileDialog1.CreatePrompt = True
         Me.SaveFileDialog1.DefaultExt = "xml"
         resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        Me.SaveFileDialog1.OverwritePrompt = False
+        'Me.SaveFileDialog1.OverwritePrompt = False
         '
         'FormDataRegression
         '

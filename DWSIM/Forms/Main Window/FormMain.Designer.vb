@@ -5,12 +5,12 @@ Imports System.Globalization
 Imports System.Linq
 Imports System.Runtime.Serialization.Formatters.Binary
 
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -24,7 +24,7 @@ Partial Class FormMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
@@ -675,14 +675,21 @@ Partial Class FormMain
 
             End If
 
-            'settings workaround for Mono
-            'load settings from INI file
-            DWSIM.App.LoadSettings()
+            If GlobalSettings.Settings.OldUI Then
 
-            DWSIM.App.InitializeSettings()
+                'settings workaround for Mono
+                'load settings from INI file
 
-            'loads the current language
-            My.Application.ChangeUICulture(My.Settings.CultureInfo)
+                DWSIM.App.LoadSettings()
+                DWSIM.App.InitializeSettings()
+
+                'loads the current language
+
+                My.Application.ChangeUICulture(My.Settings.CultureInfo)
+
+
+            End If
+
 
         End If
 
@@ -692,99 +699,104 @@ Partial Class FormMain
             InitializeComponent()
         End If
 
-        ' Add any initialization after the InitializeComponent() call.
+        If GlobalSettings.Settings.OldUI Then
 
-        If My.Settings.BackupFiles Is Nothing Then My.Settings.BackupFiles = New System.Collections.Specialized.StringCollection
-        If My.Settings.GeneralSettings Is Nothing Then My.Settings.GeneralSettings = New System.Collections.Specialized.StringCollection
-        If My.Settings.UserDatabases Is Nothing Then My.Settings.UserDatabases = New System.Collections.Specialized.StringCollection
-        If My.Settings.UserInteractionsDatabases Is Nothing Then My.Settings.UserInteractionsDatabases = New System.Collections.Specialized.StringCollection
+            ' Add any initialization after the InitializeComponent() call.
 
-        'load user unit systems
+            If My.Settings.BackupFiles Is Nothing Then My.Settings.BackupFiles = New System.Collections.Specialized.StringCollection
+            If My.Settings.GeneralSettings Is Nothing Then My.Settings.GeneralSettings = New System.Collections.Specialized.StringCollection
+            If My.Settings.UserDatabases Is Nothing Then My.Settings.UserDatabases = New System.Collections.Specialized.StringCollection
+            If My.Settings.UserInteractionsDatabases Is Nothing Then My.Settings.UserInteractionsDatabases = New System.Collections.Specialized.StringCollection
 
-        If My.Application.UserUnitSystems Is Nothing Then My.Application.UserUnitSystems = New Dictionary(Of String, SystemsOfUnits.Units)
-        If My.Application.UtilityPlugins Is Nothing Then My.Application.UtilityPlugins = New Dictionary(Of String, Interfaces.IUtilityPlugin)
+            'load user unit systems
 
-        Dim xdoc As New XDocument()
-        Dim xel As XElement
+            If My.Application.UserUnitSystems Is Nothing Then My.Application.UserUnitSystems = New Dictionary(Of String, SystemsOfUnits.Units)
+            If My.Application.UtilityPlugins Is Nothing Then My.Application.UtilityPlugins = New Dictionary(Of String, Interfaces.IUtilityPlugin)
 
-        If My.Settings.UserUnits <> "" Then
+            Dim xdoc As New XDocument()
+            Dim xel As XElement
 
-            Dim myarraylist As New ArrayList
+            If My.Settings.UserUnits <> "" Then
 
-            Try
-                xdoc = XDocument.Load(New StringReader(My.Settings.UserUnits))
-            Catch ex As Exception
-
-            End Try
-
-            If xdoc.Root Is Nothing Then
-
-                Dim formatter As New BinaryFormatter()
-                Dim bytearray() As Byte
-                bytearray = System.Text.Encoding.ASCII.GetBytes(My.Settings.UserUnits)
-                formatter = New BinaryFormatter()
-                Dim stream As New IO.MemoryStream(bytearray)
+                Dim myarraylist As New ArrayList
 
                 Try
-                    myarraylist = CType(formatter.Deserialize(stream), ArrayList)
+                    xdoc = XDocument.Load(New StringReader(My.Settings.UserUnits))
                 Catch ex As Exception
-                Finally
-                    stream.Close()
+
                 End Try
 
-            Else
+                If xdoc.Root Is Nothing Then
 
-                Dim data As List(Of XElement) = xdoc.Element("Units").Elements.ToList
+                    Dim formatter As New BinaryFormatter()
+                    Dim bytearray() As Byte
+                    bytearray = System.Text.Encoding.ASCII.GetBytes(My.Settings.UserUnits)
+                    formatter = New BinaryFormatter()
+                    Dim stream As New IO.MemoryStream(bytearray)
 
-                For Each xel In data
                     Try
-                        Dim su As New SystemsOfUnits.SI()
-                        su.LoadData(xel.Elements.ToList)
-                        myarraylist.Add(su)
+                        myarraylist = CType(formatter.Deserialize(stream), ArrayList)
                     Catch ex As Exception
-
+                    Finally
+                        stream.Close()
                     End Try
+
+                Else
+
+                    Dim data As List(Of XElement) = xdoc.Element("Units").Elements.ToList
+
+                    For Each xel In data
+                        Try
+                            Dim su As New SystemsOfUnits.SI()
+                            su.LoadData(xel.Elements.ToList)
+                            myarraylist.Add(su)
+                        Catch ex As Exception
+
+                        End Try
+                    Next
+
+                End If
+
+                For Each su As SystemsOfUnits.Units In myarraylist
+                    If Not My.Application.UserUnitSystems.ContainsKey(su.Name) Then My.Application.UserUnitSystems.Add(su.Name, su)
                 Next
 
             End If
-
-            For Each su As SystemsOfUnits.Units In myarraylist
-                If Not My.Application.UserUnitSystems.ContainsKey(su.Name) Then My.Application.UserUnitSystems.Add(su.Name, su)
-            Next
 
         End If
 
         pathsep = Path.DirectorySeparatorChar
 
-        If Not Settings.CAPEOPENMode AndAlso Not Settings.AutomationMode Then
-            AddPropPacks()
-            AddFlashAlgorithms()
-            GetComponents()
-        End If
-
-        With Me.AvailableUnitSystems
-
-            .Add("SI", New SystemsOfUnits.SI)
-            .Add("CGS", New SystemsOfUnits.CGS)
-            .Add("ENG", New SystemsOfUnits.English)
-            .Add("C1", New SystemsOfUnits.SIUnits_Custom1)
-            .Add("C2", New SystemsOfUnits.SIUnits_Custom2)
-            .Add("C3", New SystemsOfUnits.SIUnits_Custom3)
-            .Add("C4", New SystemsOfUnits.SIUnits_Custom4)
-            .Add("C5", New SystemsOfUnits.SIUnits_Custom5)
-
-            If Not My.Application.UserUnitSystems Is Nothing Then
-                If My.Application.UserUnitSystems.Count > 0 Then
-                    Dim su As New SystemsOfUnits.Units
-                    For Each su In My.Application.UserUnitSystems.Values
-                        If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
-                    Next
-                End If
+            If Not Settings.CAPEOPENMode AndAlso Not Settings.AutomationMode Then
+                AddPropPacks()
+                AddFlashAlgorithms()
+                GetComponents()
             End If
 
-        End With
+            With Me.AvailableUnitSystems
 
-        If DWSIM.App.IsRunningOnMono And Not GlobalSettings.Settings.AutomationMode Then
+                .Add("SI", New SystemsOfUnits.SI)
+                .Add("CGS", New SystemsOfUnits.CGS)
+                .Add("ENG", New SystemsOfUnits.English)
+                .Add("C1", New SystemsOfUnits.SIUnits_Custom1)
+                .Add("C2", New SystemsOfUnits.SIUnits_Custom2)
+                .Add("C3", New SystemsOfUnits.SIUnits_Custom3)
+                .Add("C4", New SystemsOfUnits.SIUnits_Custom4)
+                .Add("C5", New SystemsOfUnits.SIUnits_Custom5)
+
+                If Not My.Application.UserUnitSystems Is Nothing Then
+                    If My.Application.UserUnitSystems.Count > 0 Then
+                        Dim su As New SystemsOfUnits.Units
+                        For Each su In My.Application.UserUnitSystems.Values
+                            If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
+                        Next
+                    End If
+                End If
+
+            End With
+
+
+            If DWSIM.App.IsRunningOnMono And GlobalSettings.Settings.OldUI And Not GlobalSettings.Settings.AutomationMode Then
             Using spsh As New SplashScreen
                 spsh.Show()
                 Application.DoEvents()
@@ -793,6 +805,7 @@ Partial Class FormMain
         End If
 
     End Sub
+
     Public WithEvents DWSIMNaInternetToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents WikiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ForumToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
