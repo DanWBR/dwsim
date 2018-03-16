@@ -129,11 +129,11 @@ namespace DWSIM.UI.Desktop.Editors
                                                                },
                                                                (arg1, arg2) =>
                                                                {
-                                                                   if (Application.Instance.Platform.IsMac)
-                                                                   {
-                                                                       flowsheet.ShowMessage("Sorry, editing a Flash Algorithm is not yet possible on the macOS platform.", IFlowsheet.MessageType.GeneralError);
-                                                                       return;
-                                                                   }
+                                                                   //if (Application.Instance.Platform.IsMac)
+                                                                   //{
+                                                                   //    flowsheet.ShowMessage("Sorry, editing a Flash Algorithm is not yet possible on the macOS platform.", IFlowsheet.MessageType.GeneralError);
+                                                                   //    return;
+                                                                   //}
                                                                    Application.Instance.Invoke(() =>
                                                                    {
                                                                        Thermodynamics.FlashAlgorithmConfig f = new Thermodynamics.FlashAlgorithmConfig
@@ -207,11 +207,11 @@ namespace DWSIM.UI.Desktop.Editors
                                                                     }
                                                                     else
                                                                     {
-                                                                        if (Application.Instance.Platform.IsMac)
-                                                                        {
-                                                                            flowsheet.ShowMessage("Sorry, editing this Property Package is not yet possible on the macOS platform.", IFlowsheet.MessageType.GeneralError);
-                                                                            return;
-                                                                        }
+                                                                        //if (Application.Instance.Platform.IsMac)
+                                                                        //{
+                                                                        //    flowsheet.ShowMessage("Sorry, editing this Property Package is not yet possible on the macOS platform.", IFlowsheet.MessageType.GeneralError);
+                                                                        //    return;
+                                                                        //}
                                                                         Application.Instance.Invoke(() => { pp.DisplayEditingForm(); });
                                                                     }
                                                                 },
