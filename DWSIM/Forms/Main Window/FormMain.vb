@@ -2222,7 +2222,7 @@ Label_00CC:
             Select Case Path.GetExtension(OpenFileDialog1.FileName).ToLower()
                 Case ".dwxml"
                     Dim myStream As System.IO.FileStream
-                    myStream = Me.OpenFileDialog1.OpenFile()
+                    myStream = File.OpenRead(OpenFileDialog1.FileName)
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
                         myStream.Close()
@@ -2236,7 +2236,7 @@ Label_00CC:
                     End If
                 Case ".dwxmz"
                     Dim myStream As System.IO.FileStream
-                    myStream = Me.OpenFileDialog1.OpenFile()
+                    myStream = File.OpenRead(OpenFileDialog1.FileName)
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
                         myStream.Close()
@@ -2250,7 +2250,7 @@ Label_00CC:
                     End If
                 Case ".xml"
                     Dim myStream As System.IO.FileStream
-                    myStream = Me.OpenFileDialog1.OpenFile()
+                    myStream = File.OpenRead(OpenFileDialog1.FileName)
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
                         myStream.Close()

@@ -4,6 +4,7 @@ Imports Infralution.Localization
 Imports System.Globalization
 Imports System.Linq
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Configuration
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMain
@@ -675,21 +676,23 @@ Partial Class FormMain
 
             End If
 
-            If GlobalSettings.Settings.OldUI Then
+            If Not GlobalSettings.Settings.OldUI Then
 
-                'settings workaround for Mono
-                'load settings from INI file
+                Dim config = ConfigurationManager.OpenExeConfiguration("DWSIM.exe")
 
-                DWSIM.App.LoadSettings()
-                DWSIM.App.InitializeSettings()
-
-                'loads the current language
-
-                My.Application.ChangeUICulture(My.Settings.CultureInfo)
-
+                My.Settings.Initialize(New SettingsContext())
 
             End If
 
+            'settings workaround for Mono
+            'load settings from INI file
+
+            DWSIM.App.LoadSettings()
+            DWSIM.App.InitializeSettings()
+
+            'loads the current language
+
+            My.Application.ChangeUICulture(My.Settings.CultureInfo)
 
         End If
 
@@ -767,36 +770,36 @@ Partial Class FormMain
 
         pathsep = Path.DirectorySeparatorChar
 
-            If Not Settings.CAPEOPENMode AndAlso Not Settings.AutomationMode Then
-                AddPropPacks()
-                AddFlashAlgorithms()
-                GetComponents()
+        If Not Settings.CAPEOPENMode AndAlso Not Settings.AutomationMode Then
+            AddPropPacks()
+            AddFlashAlgorithms()
+            GetComponents()
+        End If
+
+        With Me.AvailableUnitSystems
+
+            .Add("SI", New SystemsOfUnits.SI)
+            .Add("CGS", New SystemsOfUnits.CGS)
+            .Add("ENG", New SystemsOfUnits.English)
+            .Add("C1", New SystemsOfUnits.SIUnits_Custom1)
+            .Add("C2", New SystemsOfUnits.SIUnits_Custom2)
+            .Add("C3", New SystemsOfUnits.SIUnits_Custom3)
+            .Add("C4", New SystemsOfUnits.SIUnits_Custom4)
+            .Add("C5", New SystemsOfUnits.SIUnits_Custom5)
+
+            If Not My.Application.UserUnitSystems Is Nothing Then
+                If My.Application.UserUnitSystems.Count > 0 Then
+                    Dim su As New SystemsOfUnits.Units
+                    For Each su In My.Application.UserUnitSystems.Values
+                        If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
+                    Next
+                End If
             End If
 
-            With Me.AvailableUnitSystems
-
-                .Add("SI", New SystemsOfUnits.SI)
-                .Add("CGS", New SystemsOfUnits.CGS)
-                .Add("ENG", New SystemsOfUnits.English)
-                .Add("C1", New SystemsOfUnits.SIUnits_Custom1)
-                .Add("C2", New SystemsOfUnits.SIUnits_Custom2)
-                .Add("C3", New SystemsOfUnits.SIUnits_Custom3)
-                .Add("C4", New SystemsOfUnits.SIUnits_Custom4)
-                .Add("C5", New SystemsOfUnits.SIUnits_Custom5)
-
-                If Not My.Application.UserUnitSystems Is Nothing Then
-                    If My.Application.UserUnitSystems.Count > 0 Then
-                        Dim su As New SystemsOfUnits.Units
-                        For Each su In My.Application.UserUnitSystems.Values
-                            If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
-                        Next
-                    End If
-                End If
-
-            End With
+        End With
 
 
-            If DWSIM.App.IsRunningOnMono And GlobalSettings.Settings.OldUI And Not GlobalSettings.Settings.AutomationMode Then
+        If DWSIM.App.IsRunningOnMono And GlobalSettings.Settings.OldUI And Not GlobalSettings.Settings.AutomationMode Then
             Using spsh As New SplashScreen
                 spsh.Show()
                 Application.DoEvents()
