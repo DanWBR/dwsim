@@ -676,22 +676,33 @@ Partial Class FormMain
 
             End If
 
-            'settings workaround for Mono
-            'load settings from INI file
+            If GlobalSettings.Settings.OldUI Then
 
-            DWSIM.App.LoadSettings()
+                'settings workaround for Mono
+                'load settings from INI file
+
+                DWSIM.App.LoadSettings()
+
                 DWSIM.App.InitializeSettings()
 
                 'loads the current language
 
                 My.Application.ChangeUICulture(My.Settings.CultureInfo)
 
+            Else
+
+                My.Application.ChangeUICulture("en")
+
             End If
 
-            ' This call is required by the Windows Form Designer.
+        End If
 
-            If Not My.Application.CommandLineMode Or Not Settings.CAPEOPENMode Then
+        ' This call is required by the Windows Form Designer.
+
+        If Not My.Application.CommandLineMode Or Not Settings.CAPEOPENMode Then
+
             InitializeComponent()
+
         End If
 
         If GlobalSettings.Settings.OldUI Then

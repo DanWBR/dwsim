@@ -41,7 +41,7 @@ Public Class FormFlowsheet
     Inherits Form
 
     'CAPE-OPEN PME/COSE Interfaces
-    Implements CapeOpen.ICapeCOSEUtilities, CapeOpen.ICapeMaterialTemplateSystem, CapeOpen.ICapeDiagnostic, 
+    Implements CapeOpen.ICapeCOSEUtilities, CapeOpen.ICapeMaterialTemplateSystem, CapeOpen.ICapeDiagnostic,
                 CapeOpen.ICapeFlowsheetMonitoring, CapeOpen.ICapeSimulationContext, CapeOpen.ICapeIdentification
 
     'DWSIM IFlowsheet interface
@@ -145,8 +145,10 @@ Public Class FormFlowsheet
             Me.WindowState = FormWindowState.Normal
         End If
 
-        showflowsheettoolstripmenuitem.Checked = My.Settings.ShowFlowsheetToolStrip
-        showunitstoolstripmenuitem.Checked = My.Settings.ShowUnitsToolStrip
+        If GlobalSettings.Settings.OldUI Then
+            showflowsheettoolstripmenuitem.Checked = My.Settings.ShowFlowsheetToolStrip
+            showunitstoolstripmenuitem.Checked = My.Settings.ShowUnitsToolStrip
+        End If
 
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.ExibirListaDeItensACalcularToolStripMenuItem.Checked = Me.Options.FlowsheetShowCalculationQueue
@@ -360,15 +362,19 @@ Public Class FormFlowsheet
             If obj.disposedValue = False Then obj.Dispose()
         Next
 
-        Dim path As String = My.Settings.BackupFolder + System.IO.Path.DirectorySeparatorChar + Me.Options.BackupFileName
+        If GlobalSettings.Settings.OldUI Then
 
-        If My.Settings.BackupFiles.Contains(path) Then
-            My.Settings.BackupFiles.Remove(path)
-            If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
-            Try
-                If File.Exists(path) Then File.Delete(path)
-            Catch ex As Exception
-            End Try
+            Dim path As String = My.Settings.BackupFolder + System.IO.Path.DirectorySeparatorChar + Me.Options.BackupFileName
+
+            If My.Settings.BackupFiles.Contains(path) Then
+                My.Settings.BackupFiles.Remove(path)
+                If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
+                Try
+                    If File.Exists(path) Then File.Delete(path)
+                Catch ex As Exception
+                End Try
+            End If
+
         End If
 
         Dim cnt As Integer = FormMain.MdiChildren.Length

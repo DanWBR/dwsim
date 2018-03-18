@@ -55,6 +55,9 @@ Public Class FormDataRegression
     Public drawtdep As Boolean = False
     Public output As Boolean = True
 
+    Dim doparallel As Boolean = False
+    Dim dogpu As Boolean = False
+
     Public Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Me.MenuStrip1.Visible = Not GlobalSettings.Settings.OldUI
@@ -353,8 +356,15 @@ Public Class FormDataRegression
         Application.DoEvents()
         If cancel Then Exit Function
 
-        Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
-        Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism}
+        Dim poptions As New ParallelOptions()
+
+        If GlobalSettings.Settings.OldUI Then
+            doparallel = My.Settings.EnableParallelProcessing
+            poptions.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
+        Else
+            doparallel = True
+            poptions.MaxDegreeOfParallelism = 4
+        End If
 
         Dim Vx1, Vx2, Vy As New ArrayList, IP(x.Length - 1, x.Length) As Double
         Dim Vx1c, Vx2c, Vyc As New ArrayList
@@ -1271,6 +1281,8 @@ Public Class FormDataRegression
 
             f = Double.MaxValue
 
+            Console.WriteLine(ex.ToString)
+
         End Try
 
         Return f
@@ -1578,6 +1590,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Catch ex As Exception
 
             Me.tbRegResults.AppendText(ex.ToString)
+
+            Console.WriteLine(ex.ToString)
 
         Finally
 
@@ -2762,6 +2776,12 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     Private Function FunctionValueNRTL(ByVal x() As Double) As Double
 
+        If GlobalSettings.Settings.OldUI Then
+            doparallel = My.Settings.EnableParallelProcessing
+        Else
+            doparallel = True
+        End If
+
         Dim a1(1), a2(1), a3(1) As Double
 
         nrtl.InteractionParameters.Clear()
@@ -2771,7 +2791,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).alpha12 = 0.2
 
-        If My.Settings.EnableParallelProcessing Then
+        If doparallel Then
 
             Try
                 Dim task1 As Task = New Task(Sub()
@@ -2815,6 +2835,12 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     Private Function FunctionValueUNIQUAC(ByVal x() As Double) As Double
 
+        If GlobalSettings.Settings.OldUI Then
+            doparallel = My.Settings.EnableParallelProcessing
+        Else
+            doparallel = True
+        End If
+
         Dim a1(1), a2(1), a3(1) As Double
 
         uniquac.InteractionParameters.Clear()
@@ -2823,7 +2849,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A12 = x(0)
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A21 = x(1)
 
-        If My.Settings.EnableParallelProcessing Then
+        If doparallel Then
 
             Try
                 Dim task1 As Task = New Task(Sub()
@@ -2925,11 +2951,19 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Dim a1(1), a2(1), a3(1) As Double
 
-        If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
+        If GlobalSettings.Settings.OldUI Then
+            doparallel = My.Settings.EnableParallelProcessing
+            dogpu = My.Settings.EnableGPUProcessing
+        Else
+            doparallel = True
+            dogpu = False
+        End If
 
-        If My.Settings.EnableParallelProcessing Then
+        If dogpu Then Calculator.InitComputeDevice()
 
-            If My.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
+        If doparallel Then
+
+            If dogpu Then GlobalSettings.Settings.gpu.EnableMultithreading()
             Try
                 Dim task1 As Task = New Task(Sub()
                                                  Select Case model
@@ -2974,7 +3008,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Catch ae As AggregateException
                 Throw ae.Flatten().InnerException
             Finally
-                If My.Settings.EnableGPUProcessing Then
+                If dogpu Then
                     GlobalSettings.Settings.gpu.DisableMultithreading()
                     GlobalSettings.Settings.gpu.FreeAll()
                 End If
@@ -3105,11 +3139,19 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Dim a1(1), a2(1), a3(1) As Double
 
-        If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
+        If GlobalSettings.Settings.OldUI Then
+            doparallel = My.Settings.EnableParallelProcessing
+            dogpu = My.Settings.EnableGPUProcessing
+        Else
+            doparallel = True
+        dogpu = False
+        End If
 
-        If My.Settings.EnableParallelProcessing Then
+        If dogpu Then Calculator.InitComputeDevice()
 
-            If My.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
+        If doparallel Then
+
+            If dogpu Then GlobalSettings.Settings.gpu.EnableMultithreading()
             Try
                 Dim task1 As Task = New Task(Sub()
                                                  Select Case model
@@ -3154,7 +3196,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Catch ae As AggregateException
                 Throw ae.Flatten().InnerException
             Finally
-                If My.Settings.EnableGPUProcessing Then
+                If dogpu Then
                     GlobalSettings.Settings.gpu.DisableMultithreading()
                     GlobalSettings.Settings.gpu.FreeAll()
                 End If

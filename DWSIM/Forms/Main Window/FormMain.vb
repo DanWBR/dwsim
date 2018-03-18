@@ -146,7 +146,7 @@ Public Class FormMain
         If Not e.Cancel Then
 
             'Check if DWSIM is running in Mono mode, then save settings to file.
-            If DWSIM.App.IsRunningOnMono Then
+            If DWSIM.App.IsRunningOnMono And GlobalSettings.Settings.OldUI Then
                 Try
                     DWSIM.App.SaveSettings()
                 Catch ex As UnauthorizedAccessException
@@ -2271,9 +2271,11 @@ Label_00CC:
                     NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
                     objStreamReader.Close()
                     NewMDIChild.WriteData()
-                    If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                        My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                        Me.UpdateMRUList()
+                    If GlobalSettings.Settings.OldUI Then
+                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
+                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
+                            Me.UpdateMRUList()
+                        End If
                     End If
                     NewMDIChild.Activate()
                 Case ".dwrsd"
@@ -2287,9 +2289,11 @@ Label_00CC:
                     NewMDIChild.currcase.filename = Me.OpenFileDialog1.FileName
                     objStreamReader.Close()
                     NewMDIChild.LoadCase(NewMDIChild.currcase, False)
-                    If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                        My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                        Me.UpdateMRUList()
+                    If GlobalSettings.Settings.OldUI Then
+                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
+                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
+                            Me.UpdateMRUList()
+                        End If
                     End If
                     NewMDIChild.Activate()
                 Case ".dwruf"
@@ -2303,9 +2307,11 @@ Label_00CC:
                     NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
                     objStreamReader.Close()
                     NewMDIChild.LoadCase(NewMDIChild.mycase, False)
-                    If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                        My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                        Me.UpdateMRUList()
+                    If GlobalSettings.Settings.OldUI Then
+                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
+                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
+                            Me.UpdateMRUList()
+                        End If
                     End If
                     NewMDIChild.Activate()
             End Select
