@@ -199,6 +199,10 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.macOS.ClassicUILoader\DWSIM.macOS.ClassicUILoader.csproj">
+      <Project>{9d7fac86-b3e6-4a7c-84a9-3776d78f9eb2}</Project>
+      <Name>DWSIM.macOS.ClassicUILoader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
       <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
       <Name>DWSIM.MathOps</Name>

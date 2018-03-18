@@ -248,25 +248,7 @@ namespace DWSIM.UI
             var aitem2 = new ButtonMenuItem { Text = "Open Classic UI" };
             aitem2.Click += (sender, e) =>
             {
-                var domain = AppDomain.CreateDomain("DWSIM_Classic");
-                var asm = Assembly.LoadFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DWSIM.exe"));
-                var instance = asm.CreateInstance("DWSIM.FormMain");
-                try
-                {
-                    instance.GetType().GetMethod("Form1_Load").Invoke(instance, new object[] { null, new System.EventArgs() });
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Load failed. " + ex.ToString());
-                }
-                try
-                {
-                    instance.GetType().GetMethod("Show", new Type[] { }).Invoke(instance, null);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Show failed. " + ex.ToString());
-                }
+                DWSIM.macOS.ClassicUILoader.Loader.Load();
             };
 
             var hitem1 = new ButtonMenuItem { Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };

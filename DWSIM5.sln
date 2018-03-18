@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM", "DWSIM\DWSIM.vbproj", "{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -179,6 +179,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.DrawingTools.Point", "DWSIM.DrawingTools.Point\DWSIM.DrawingTools.Point.vbproj", "{0F6737EB-DB5A-4872-BEF8-5EF10B4F1C1C}"
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "DWSIM.Inspector", "DWSIM.Inspector\DWSIM.Inspector.vbproj", "{763FB0C2-BA91-4A0A-A180-87DDAA9E3D70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.macOS.ClassicUILoader", "DWSIM.macOS.ClassicUILoader\DWSIM.macOS.ClassicUILoader.csproj", "{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -904,6 +906,22 @@ Global
 		{763FB0C2-BA91-4A0A-A180-87DDAA9E3D70}.Release|x64.Build.0 = Release|Any CPU
 		{763FB0C2-BA91-4A0A-A180-87DDAA9E3D70}.Release|x86.ActiveCfg = Release|Any CPU
 		{763FB0C2-BA91-4A0A-A180-87DDAA9E3D70}.Release|x86.Build.0 = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|x64.Build.0 = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|x64.ActiveCfg = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|x64.Build.0 = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D7FAC86-B3E6-4A7C-84A9-3776D78F9EB2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
