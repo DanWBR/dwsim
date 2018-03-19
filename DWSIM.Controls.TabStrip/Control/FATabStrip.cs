@@ -24,7 +24,7 @@ namespace FarsiLibrary.Win
 
         #region Constants
 
-        private const int DEF_HEADER_HEIGHT = 19;
+        private int DEF_HEADER_HEIGHT = 19;
         private const int DEF_GLYPH_WIDTH = 40;
 
         private int DEF_START_POS = 10;
@@ -314,6 +314,7 @@ namespace FarsiLibrary.Win
 
         protected override void OnPaint(PaintEventArgs e)
         {
+
             SetDefaultSelected();
             Rectangle borderRc = ClientRectangle;
             borderRc.Width--;
@@ -544,18 +545,20 @@ namespace FarsiLibrary.Win
             if (currentItem == SelectedItem)
                 currentFont = new Font(Font, FontStyle.Bold);
 
-            SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.DefaultFont, new SizeF(200, 10), sf);
-            textSize.Width += 15;
+            double dpiscale = g.DpiX / 96.0;
 
+            SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.DefaultFont, new SizeF(300, 10), sf);
+            textSize.Width += 15 * (float)(dpiscale + 0.3);
+            
             if (RightToLeft == RightToLeft.No)
             {
-                RectangleF buttonRect = new RectangleF(DEF_START_POS - 9, 1, textSize.Width, 18);
+                RectangleF buttonRect = new RectangleF(DEF_START_POS - 9, 1, textSize.Width, (int)(18 * dpiscale));
                 currentItem.StripRect = buttonRect;
                 DEF_START_POS += (int) textSize.Width;
             }
             else
             {
-                RectangleF buttonRect = new RectangleF(DEF_START_POS - textSize.Width + 1, 3, textSize.Width - 1, 17);
+                RectangleF buttonRect = new RectangleF(DEF_START_POS - textSize.Width + 1, 3, textSize.Width - 1, (int)(18 * dpiscale));
                 currentItem.StripRect = buttonRect;
                 DEF_START_POS -= (int) textSize.Width;
             }
@@ -618,11 +621,15 @@ namespace FarsiLibrary.Win
                 //               buttonRect.Left + buttonRect.Width, buttonRect.Height + 2);
                 //}
 
-                PointF textLoc = new PointF(buttonRect.Left + buttonRect.Height - 9, buttonRect.Top + (buttonRect.Height/2) - (textSize.Height/2) - 2);
+                double dpiscale = g.DpiX / 96.0;
+
+                var tmargin = 15 * (float)(dpiscale + 0.3)/2;
+
+                PointF textLoc = new PointF(buttonRect.Left + tmargin, buttonRect.Top + (buttonRect.Height/2) - (textSize.Height/2) - 2);
                 RectangleF textRect = buttonRect;
                 textRect.Location = textLoc;
-                textRect.Width = buttonRect.Width - (textRect.Left - buttonRect.Left) - 4;
-                textRect.Height = textSize.Height + currentFont.Size/2;
+                //textRect.Width = buttonRect.Width - (textRect.Left - buttonRect.Left) - 4;
+                //textRect.Height = textSize.Height + currentFont.Size/2;
 
                 if (currentItem == SelectedItem)
                 {
@@ -766,6 +773,13 @@ namespace FarsiLibrary.Win
         public FATabStrip()
         {
             BeginInit();
+
+            double dpiscale = 1.0;
+            using (Graphics g = this.CreateGraphics()) {
+                dpiscale = g.DpiX / 96.0;
+            }
+
+            DEF_HEADER_HEIGHT = (int)(19 * dpiscale);
 
             SetStyle(ControlStyles.ContainerControl, true);
             SetStyle(ControlStyles.UserPaint, true);

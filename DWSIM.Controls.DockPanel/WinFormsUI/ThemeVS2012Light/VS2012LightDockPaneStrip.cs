@@ -620,7 +620,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                 ButtonClose.Height + DocumentButtonGapTop + DocumentButtonGapBottom)
                 + DocumentStripGapBottom + DocumentStripGapTop;
 
-            return height;
+            //double dpi = 1.0;
+            //using (Graphics g = this.CreateGraphics())
+            //{
+            //    dpi = g.DpiX / 96.0;
+            //}
+
+            return height; //* (int)dpi;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -1181,6 +1187,13 @@ namespace WeifenLuo.WinFormsUI.Docking
             rectText = DrawHelper.RtlTransform(this, rectText);
             rectIcon = DrawHelper.RtlTransform(this, rectIcon);
 
+            if (g.DpiY > 96)
+            {
+                rectText.Y /= (int)(g.DpiY / 96.0);
+                rectText.Y -= 4;
+                rectText.Height *= (int)(g.DpiY / 96.0);
+            }
+
             Color activeColor = DockPane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor;
             Color lostFocusColor = DockPane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor;
             Color inactiveColor = DockPane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor;
@@ -1258,7 +1271,14 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
 
             const int gap = 3;
-            const int imageSize = 15;
+
+            double dpi = 1.0;
+            using (Graphics g = this.CreateGraphics())
+            {
+                dpi = g.DpiX / 96.0;
+            }
+
+            int imageSize = 15 * (int)dpi;
             return new Rectangle(rectTab.X + rectTab.Width - imageSize - gap - 1, rectTab.Y + gap, imageSize, imageSize);
         }
 
@@ -1347,7 +1367,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             // Set position and size of the buttons
             int buttonWidth = ButtonClose.Image.Width;
             int buttonHeight = ButtonClose.Image.Height;
-            int height = rectTabStrip.Height - DocumentButtonGapTop - DocumentButtonGapBottom;
+            int height = TextFont.Height;
             if (buttonHeight < height)
             {
                 buttonWidth = buttonWidth * (height / buttonHeight);

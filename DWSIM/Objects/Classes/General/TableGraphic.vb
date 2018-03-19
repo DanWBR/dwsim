@@ -1444,7 +1444,9 @@ Namespace GraphicObjects
                     Dim maxL1, maxL2, maxL3, count As Integer
                     Dim maxH As Integer
 
-                    Me.HeaderFont = New Font("Arial", 11 / Me.AdditionalInfo, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
+                    Dim dpiscale = g.DpiX / 96.0
+
+                    Me.HeaderFont = New Font("Arial", dpiscale * 11 / Me.AdditionalInfo, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
 
                     g.TextRenderingHint = Text.TextRenderingHint.SystemDefault
 

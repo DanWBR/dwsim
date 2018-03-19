@@ -23,8 +23,8 @@ Partial Class SpreadsheetForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SpreadsheetForm))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.A = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -90,11 +90,12 @@ Partial Class SpreadsheetForm
         '
         'DataGridView1
         '
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
         Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
+        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -103,12 +104,14 @@ Partial Class SpreadsheetForm
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.A, Me.B, Me.C, Me.D, Me.E, Me.F, Me.G, Me.H, Me.I, Me.J, Me.K, Me.L, Me.M, Me.N, Me.O, Me.P, Me.Q, Me.R, Me.S, Me.T, Me.U, Me.V, Me.W, Me.X, Me.Y, Me.Z})
         Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.DataGridView1.RowTemplate.Height = 20
+        Me.DataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DataGridView1.ShowCellErrors = False
         Me.DataGridView1.ShowEditingIcon = False
@@ -272,9 +275,10 @@ Partial Class SpreadsheetForm
         '
         'ContextMenuStrip1
         '
+        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CelulaToolStripMenuItem, Me.ToolStripSeparator2, Me.AvaliarFormulaToolStripMenuItem, Me.ImportarDadosToolStripMenuItem, Me.ExportarDadosToolStripMenuItem, Me.ToolStripSeparator1, Me.LimparToolStripMenuItem, Me.CopiarToolStripMenuItem, Me.ColarToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         '
         'CelulaToolStripMenuItem
         '
@@ -283,49 +287,49 @@ Partial Class SpreadsheetForm
         '
         'ToolStripSeparator2
         '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         '
         'AvaliarFormulaToolStripMenuItem
         '
+        resources.ApplyResources(Me.AvaliarFormulaToolStripMenuItem, "AvaliarFormulaToolStripMenuItem")
         Me.AvaliarFormulaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.calculator
         Me.AvaliarFormulaToolStripMenuItem.Name = "AvaliarFormulaToolStripMenuItem"
-        resources.ApplyResources(Me.AvaliarFormulaToolStripMenuItem, "AvaliarFormulaToolStripMenuItem")
         '
         'ImportarDadosToolStripMenuItem
         '
+        resources.ApplyResources(Me.ImportarDadosToolStripMenuItem, "ImportarDadosToolStripMenuItem")
         Me.ImportarDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_in1
         Me.ImportarDadosToolStripMenuItem.Name = "ImportarDadosToolStripMenuItem"
-        resources.ApplyResources(Me.ImportarDadosToolStripMenuItem, "ImportarDadosToolStripMenuItem")
         '
         'ExportarDadosToolStripMenuItem
         '
+        resources.ApplyResources(Me.ExportarDadosToolStripMenuItem, "ExportarDadosToolStripMenuItem")
         Me.ExportarDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_out
         Me.ExportarDadosToolStripMenuItem.Name = "ExportarDadosToolStripMenuItem"
-        resources.ApplyResources(Me.ExportarDadosToolStripMenuItem, "ExportarDadosToolStripMenuItem")
         '
         'ToolStripSeparator1
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         '
         'LimparToolStripMenuItem
         '
+        resources.ApplyResources(Me.LimparToolStripMenuItem, "LimparToolStripMenuItem")
         Me.LimparToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.LimparToolStripMenuItem.Name = "LimparToolStripMenuItem"
-        resources.ApplyResources(Me.LimparToolStripMenuItem, "LimparToolStripMenuItem")
         '
         'CopiarToolStripMenuItem
         '
+        resources.ApplyResources(Me.CopiarToolStripMenuItem, "CopiarToolStripMenuItem")
         Me.CopiarToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_copy
         Me.CopiarToolStripMenuItem.Name = "CopiarToolStripMenuItem"
-        resources.ApplyResources(Me.CopiarToolStripMenuItem, "CopiarToolStripMenuItem")
         '
         'ColarToolStripMenuItem
         '
+        resources.ApplyResources(Me.ColarToolStripMenuItem, "ColarToolStripMenuItem")
         Me.ColarToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.paste_plain
         Me.ColarToolStripMenuItem.Name = "ColarToolStripMenuItem"
-        resources.ApplyResources(Me.ColarToolStripMenuItem, "ColarToolStripMenuItem")
         '
         'tbCell
         '
@@ -359,8 +363,8 @@ Partial Class SpreadsheetForm
         '
         'Button2
         '
-        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.arrow_refresh
         resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.arrow_refresh
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
@@ -374,59 +378,60 @@ Partial Class SpreadsheetForm
         '
         'dckMenu
         '
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
+        Me.dckMenu.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
+        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         '
         'DockLeftToolStripMenuItem
         '
-        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
+        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         '
         'DockRightToolStripMenuItem
         '
-        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
+        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         '
         'DockTopToolStripMenuItem
         '
-        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
+        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         '
         'DockBottomToolStripMenuItem
         '
-        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
+        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
+        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
+        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
+        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
+        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         '
         'DocumentToolStripMenuItem
         '
-        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
+        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         '
         'Button4
         '

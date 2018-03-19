@@ -118,80 +118,86 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 170</value>
-  </data>
   <data name="CelulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>538, 38</value>
   </data>
   <data name="CelulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Cell</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 6</value>
+    <value>535, 6</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>538, 38</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Evaluate Formula</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>538, 38</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Import Value from Flowsheet</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>538, 38</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Export Value to Flowsheet Object</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 6</value>
+    <value>535, 6</value>
   </data>
   <data name="LimparToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>538, 38</value>
   </data>
   <data name="LimparToolStripMenuItem.Text" xml:space="preserve">
     <value>Clear</value>
   </data>
   <data name="CopiarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>538, 38</value>
   </data>
   <data name="CopiarToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="ColarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>538, 38</value>
   </data>
   <data name="ColarToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 282</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>68, 26</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="chkUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 791</value>
+  </data>
   <data name="chkUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 17</value>
+    <value>282, 30</value>
   </data>
   <data name="chkUpdate.Text" xml:space="preserve">
     <value>Toggle automatic update</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>675, 503</value>
+    <value>1496, 789</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 24</value>
+    <value>260, 36</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Copy data to Clipboard</value>
   </data>
+  <data name="chkUseRegionalSeparator.Location" type="System.Drawing.Point, System.Drawing">
+    <value>353, 791</value>
+  </data>
   <data name="chkUseRegionalSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 17</value>
+    <value>659, 30</value>
   </data>
   <data name="chkUseRegionalSeparator.Text" xml:space="preserve">
     <value>Use system-defined decimal separator for expressions/formulas</value>
