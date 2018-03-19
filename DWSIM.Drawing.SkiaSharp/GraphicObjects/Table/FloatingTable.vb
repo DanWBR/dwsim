@@ -69,11 +69,13 @@ Namespace GraphicObjects.Tables
                 FontSize = GlobalSettings.Settings.EditorFontSize + 1.0
             End If
 
+            FontSize *= GlobalSettings.Settings.DpiScale
+
             Dim zoom As Single = AdditionalInfo
 
             If zoom = 0 Then Exit Sub
 
-            Padding = 4 / zoom
+            Padding = 4 / zoom * GlobalSettings.Settings.DpiScale
 
             Dim tpaint As New SKPaint()
 

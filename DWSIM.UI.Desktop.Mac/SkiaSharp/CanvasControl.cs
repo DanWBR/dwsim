@@ -105,6 +105,7 @@ namespace DWSIM.UI.Desktop.Mac
         public FlowsheetSurface_Mac()
         {
             drawable = new SKDrawable();
+            GlobalSettings.Settings.DpiScale = 1.0f; // (float)AppKit.NSScreen.MainScreen.BackingScaleFactor;
             BecomeFirstResponder();
             RegisterForDraggedTypes(new string[] {"ObjectName" });
         }

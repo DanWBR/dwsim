@@ -53,10 +53,15 @@ namespace DWSIM.UI.Forms
         ContextMenu selctxmenu, deselctxmenu;
 
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
-
+        
         void InitializeComponent()
         {
 
+            if (Application.Instance.Platform.IsWpf)
+            {
+                GlobalSettings.Settings.DpiScale = Screen.RealDPI / 96.0;
+            }
+            
             // setup backup timer
 
             backupfilename = DateTime.Now.ToString().Replace('-', '_').Replace(':', '_').Replace(' ', '_').Replace('/', '_') + ".dwxmz";
@@ -130,9 +135,12 @@ namespace DWSIM.UI.Forms
                 btnmInspector.Text = "Inspector";
             }
 
-            ToolBar = new ToolBar { Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions,
+            ToolBar = new ToolBar
+            {
+                Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmSolve, btnmSimultSolve, new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
-                    btnmZoomOut, btnmZoomIn, btnmZoomFit,new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmInspector } };
+                    btnmZoomOut, btnmZoomIn, btnmZoomFit,new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmInspector }
+            };
 
             // menu items
 
@@ -147,7 +155,8 @@ namespace DWSIM.UI.Forms
 
             // actions
 
-            Action ActComps = () => {
+            Action ActComps = () =>
+            {
                 var cont = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
                 cont.Tag = "Simulation Compounds";
@@ -159,7 +168,8 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-            Action ActBasis = () => {
+            Action ActBasis = () =>
+            {
                 var cont1 = UI.Shared.Common.GetDefaultContainer();
                 cont1.Tag = "Thermodynamics";
                 new DWSIM.UI.Desktop.Editors.Models(FlowsheetObject, cont1);
@@ -171,7 +181,8 @@ namespace DWSIM.UI.Forms
                 form.Width += 10;
             };
 
-            Action ActOptions = () => {
+            Action ActOptions = () =>
+            {
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
                 cont.Tag = "Settings";
@@ -182,11 +193,13 @@ namespace DWSIM.UI.Forms
                 form.Width += 1;
             };
 
-            Action ActGlobalOptions = () => {
+            Action ActGlobalOptions = () =>
+            {
                 new DWSIM.UI.Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
-            Action ActSave = () => {
+            Action ActSave = () =>
+            {
                 try
                 {
                     if (FlowsheetObject.Options.FilePath != "")
@@ -239,15 +252,21 @@ namespace DWSIM.UI.Forms
 
             };
 
-            btnmZoomOut.Click += (sender, e) => {
-                FlowsheetControl.FlowsheetSurface.Zoom -= 0.05f;
+            btnmZoomOut.Click += (sender, e) =>
+            {
+                FlowsheetControl.FlowsheetSurface.Zoom -= 0.1f;
                 FlowsheetControl.Invalidate();
             };
-            btnmZoomIn.Click += (sender, e) => {
-                FlowsheetControl.FlowsheetSurface.Zoom += 0.05f;
+            btnmZoomIn.Click += (sender, e) =>
+            {
+                FlowsheetControl.FlowsheetSurface.Zoom += 0.1f;
                 FlowsheetControl.Invalidate();
             };
-            btnmZoomFit.Click += (sender, e) => FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
+            btnmZoomFit.Click += (sender, e) =>
+            {
+                FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+                FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+            };
 
             var btnUtilities_TrueCriticalPoint = new ButtonMenuItem { Text = "True Critical Point", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
@@ -338,9 +357,8 @@ namespace DWSIM.UI.Forms
                 var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
                 if (obj == null)
                 {
-                    var surface = FlowsheetControl.FlowsheetSurface;
-                    surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
-                    surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
+                    FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+                    FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                     FlowsheetControl.Invalidate();
                 }
                 if (e.Modifiers == Keys.Shift)
@@ -566,7 +584,7 @@ namespace DWSIM.UI.Forms
 
             SplitterFlowsheet.Panel1.Width = 300;
             SplitterFlowsheet.Panel1.Visible = true;
-            
+
             btnShowHideObjectEditorPanel.Click += (sender, e) =>
             {
                 SplitterFlowsheet.Panel1.Visible = !SplitterFlowsheet.Panel1.Visible;
@@ -748,8 +766,8 @@ namespace DWSIM.UI.Forms
         void Flowsheet_Shown(object sender, EventArgs e)
         {
 
-            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
-            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
+            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
             FlowsheetControl.Invalidate();
 
             ScriptListControl.UpdateList();
@@ -993,7 +1011,7 @@ namespace DWSIM.UI.Forms
             };
 
             var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                        
+
             var menuitem0 = new ButtonMenuItem { Text = "Edit/View", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
             menuitem0.Click += (sender, e) =>
             {
@@ -1001,7 +1019,7 @@ namespace DWSIM.UI.Forms
                 if (simobj == null) return;
                 EditObject_New(simobj);
             };
-            
+
             var item5 = new ButtonMenuItem { Text = "Clone", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
             item5.Click += (sender, e) =>
             {
@@ -1260,9 +1278,12 @@ namespace DWSIM.UI.Forms
 
             var existingeditor = EditorHolder.Pages.Where(x => x.Content.Tag.ToString() == obj.Name).FirstOrDefault();
 
-            if (existingeditor != null) {
+            if (existingeditor != null)
+            {
                 EditorHolder.SelectedPage = (DocumentPage)existingeditor;
-            } else {
+            }
+            else
+            {
                 var editor = new ObjectEditorContainer(obj);
                 var editorc = new DocumentPage(editor) { Closable = true, Text = obj.GraphicObject.Tag };
                 EditorHolder.Pages.Add(editorc);

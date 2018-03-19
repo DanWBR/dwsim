@@ -76,6 +76,8 @@ namespace DWSIM.UI.Desktop.WPF
     public class FlowsheetSurface_WPF : SkiaSharp.Views.WPF.SKElement
     {
 
+        double DpiScale = 1.0;
+
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
         private WriteableBitmap bitmap;
@@ -94,7 +96,7 @@ namespace DWSIM.UI.Desktop.WPF
         {
           
             base.OnRender(drawingContext);
-
+            
             int width, height;
             double dpiX = 1.0;
             double dpiY = 1.0;
@@ -137,8 +139,9 @@ namespace DWSIM.UI.Desktop.WPF
 
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
         {
-            _lastTouchX = (int)e.GetPosition(this).X;
-            _lastTouchY = (int)e.GetPosition(this).Y;
+            var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
+            _lastTouchX = (int)e.GetPosition(this).X * (float)m.M11;
+            _lastTouchY = (int)e.GetPosition(this).Y * (float)m.M22;
             fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
             this.InvalidateVisual();
         }
@@ -151,8 +154,9 @@ namespace DWSIM.UI.Desktop.WPF
 
         protected override void OnMouseMove(System.Windows.Input.MouseEventArgs e)
         {
-            _lastTouchX = (int)e.GetPosition(this).X;
-            _lastTouchY = (int)e.GetPosition(this).Y;
+            var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
+            _lastTouchX = (int)e.GetPosition(this).X*(float)m.M11;
+            _lastTouchY = (int)e.GetPosition(this).Y* (float)m.M22;
             fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
             this.InvalidateVisual();
         }

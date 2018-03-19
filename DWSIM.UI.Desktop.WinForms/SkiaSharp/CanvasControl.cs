@@ -70,6 +70,8 @@ namespace DWSIM.UI.Desktop.WinForms
     public class FlowsheetSurface_WinForms : SkiaSharp.Views.Desktop.SKControl
     {
 
+        double DpiScale = 1.0;
+
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
 
@@ -86,6 +88,8 @@ namespace DWSIM.UI.Desktop.WinForms
         {
 
             base.OnPaint(e);
+
+            DpiScale = e.Graphics.DpiX / 96.0;
 
             // get the bitmap
             CreateBitmap();

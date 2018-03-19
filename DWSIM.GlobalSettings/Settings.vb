@@ -136,6 +136,8 @@ Public Class Settings
 
     Public Shared Property CallSolverOnEditorPropertyChanged As Boolean = False
 
+    Public Shared Property DpiScale As Double = 1.0
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
