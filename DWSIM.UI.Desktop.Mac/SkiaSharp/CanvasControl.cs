@@ -5,6 +5,8 @@ using SkiaSharp;
 using System;
 using DWSIM.UI.Controls;
 using System.Linq;
+using DWSIM.UI.Desktop.Mac.TouchBar;
+using Foundation;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -31,8 +33,8 @@ namespace DWSIM.UI.Desktop.Mac
 
             Widget.MouseDown += (sender, e) =>
             {
-                //nativecontrol._lastTouchX = nativecontrol.ConvertPointFromView(theEvent.LocationInWindow, null).X;
-                //nativecontrol._lastTouchY = nativecontrol.Bounds.Height - nativecontrol.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+                BindTouchBar();
+                nativecontrol.SetTouchBar(null);
                 nativecontrol._lastTouchX = e.Location.X;
                 nativecontrol._lastTouchY = e.Location.Y;
                 nativecontrol.fsurface.InputPress((int)(nativecontrol._lastTouchX), (int)(nativecontrol._lastTouchY));
@@ -41,6 +43,12 @@ namespace DWSIM.UI.Desktop.Mac
                 nativecontrol.UpdateTrackingAreas();
             };
         
+        }
+
+        public void BindTouchBar()
+        {
+            nativecontrol.Window.Unbind(new NSString("touchBar"));
+            nativecontrol.Window.Bind(new NSString("touchBar"), nativecontrol, new NSString("touchBar"), null);
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -215,6 +223,19 @@ namespace DWSIM.UI.Desktop.Mac
         }
 
         public WeakReference WeakHandler { get; set; }
+
+        [Export("makeTouchBar")]
+        public NSTouchBar MakeTouchBar()
+        {
+
+            var bar = new NSTouchBar()
+            {
+                Delegate = new FlowsheetTouchBarDelegate() { Flowsheet = fbase },
+            };
+
+            bar.DefaultItemIdentifiers = new string[] { "0", "1", "2", "3" };
+            return bar;
+        }
 
     }
 
