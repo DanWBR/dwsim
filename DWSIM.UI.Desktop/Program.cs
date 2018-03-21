@@ -122,7 +122,19 @@ namespace DWSIM.UI.Desktop
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
                             break;
                     }
-                    new Application(platform).Run(new MainForm());
+                    var app = new Application(platform);
+                    app.Initialized += (sender, e) =>
+                    {
+                        if (GlobalSettings.Settings.RunningPlatform() == Settings.Platform.Mac)
+                        {
+                            if (GlobalSettings.Settings.MacOSRenderer == Settings.MacOSPlatformRenderer.MonoMac)
+                            {
+                                DWSIM.UI.Desktop.Mac.StyleSetter.FinishedLaunching();
+                                Console.WriteLine("FinishedLaunching");
+                            }
+                        }
+                    };
+                    app.Run(new MainForm());
                 }
             }
             catch (Exception ex)

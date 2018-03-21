@@ -6,6 +6,9 @@ using System;
 using DWSIM.UI.Controls;
 using SkiaSharp.Views.GlesInterop;
 using System.Linq;
+using DWSIM.UI.Desktop.Mac.TouchBar;
+using Foundation;
+using Eto.Mac.Forms;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -33,6 +36,8 @@ namespace DWSIM.UI.Desktop.Mac
 
             Widget.MouseDown += (sender, e) =>
             {
+                BindTouchBar();
+                nativecontrol.SetTouchBar(null);
                 var scale = (float)GlobalSettings.Settings.DpiScale;
                 nativecontrol._lastTouchX = e.Location.X * scale;
                 nativecontrol._lastTouchY = e.Location.Y * scale;
@@ -42,6 +47,12 @@ namespace DWSIM.UI.Desktop.Mac
                 nativecontrol.UpdateTrackingAreas();
             };
 
+        }
+
+        public void BindTouchBar()
+        {
+            nativecontrol.Window.Unbind(new NSString("touchBar"));
+            nativecontrol.Window.Bind(new NSString("touchBar"), nativecontrol, new NSString("touchBar"), null);
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -77,6 +88,7 @@ namespace DWSIM.UI.Desktop.Mac
                 ((FlowsheetSurface_Mac_OpenGL)this.Control).fsurface = value;
             }
         }
+
         public DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject
         {
             get
@@ -88,9 +100,10 @@ namespace DWSIM.UI.Desktop.Mac
                 ((FlowsheetSurface_Mac_OpenGL)this.Control).fbase = value;
             }
         }
-    }
 
-    public class FlowsheetSurface_Mac_OpenGL : SkiaSharp.Views.Mac.SKGLView, Eto.Mac.Forms.IMacControl
+    }
+    
+    public class FlowsheetSurface_Mac_OpenGL : SkiaSharp.Views.Mac.SKGLView, Eto.Mac.Forms.IMacControl, INSTouchBarProvider
     {
 
         private NSTrackingArea trackarea;
@@ -115,7 +128,6 @@ namespace DWSIM.UI.Desktop.Mac
                 return NSDragOperation.Generic;
             else return NSDragOperation.None;
         }
-
 
         public override CGRect Bounds
         {
@@ -148,6 +160,7 @@ namespace DWSIM.UI.Desktop.Mac
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
+            Console.WriteLine("AwakenFromNib");
         }
 
         public override void UpdateTrackingAreas()
@@ -186,7 +199,6 @@ namespace DWSIM.UI.Desktop.Mac
 
             OpenGLContext.FlushBuffer();
         }
-
 
         public override void MouseMoved(NSEvent theEvent)
         {
@@ -232,6 +244,19 @@ namespace DWSIM.UI.Desktop.Mac
         }
 
         public WeakReference WeakHandler { get; set; }
+
+        [Export("makeTouchBar")]
+        public NSTouchBar MakeTouchBar()
+        {
+
+            var bar = new NSTouchBar()
+            {
+                Delegate = new FlowsheetTouchBarDelegate() { Flowsheet = fbase },
+            };
+
+            bar.DefaultItemIdentifiers = new string[] {"0", "1", "2", "3" };
+            return bar;
+        }
 
     }
 

@@ -27,6 +27,11 @@ namespace DWSIM.UI.Desktop.Mac
 
         }
 
+        public static void FinishedLaunching()
+        {
+            NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+        }
+
     }
 
 }

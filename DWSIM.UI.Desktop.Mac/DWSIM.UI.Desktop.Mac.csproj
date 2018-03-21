@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkiaSharp\SKDrawable.cs" />
     <Compile Include="SkiaSharp\CanvasControl.cs" />
+    <Compile Include="TouchBar\TouchBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -124,7 +125,24 @@
       <Name>DWSIM.UI.Desktop.Forms</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\icons8-save_as.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\icons8-fit_to_page_filled.png" />
+    <EmbeddedResource Include="Icons\icons8-maintenance.png" />
+    <EmbeddedResource Include="Icons\icons8-math.png" />
+    <EmbeddedResource Include="Icons\icons8-play.png" />
+    <EmbeddedResource Include="Icons\icons8-save.png" />
+    <EmbeddedResource Include="Icons\icons8-sorting_options.png" />
+    <EmbeddedResource Include="Icons\icons8-spy_filled.png" />
+    <EmbeddedResource Include="Icons\icons8-thin_test_tube.png" />
+    <EmbeddedResource Include="Icons\icons8-zoom_in_filled.png" />
+    <EmbeddedResource Include="Icons\icons8-zoom_out_filled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\Checked_96px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

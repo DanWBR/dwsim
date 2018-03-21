@@ -53,7 +53,9 @@ namespace DWSIM.UI.Forms
         ContextMenu selctxmenu, deselctxmenu;
 
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
-        
+
+        public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActSimultAdjustSolver;
+
         void InitializeComponent()
         {
 
@@ -106,10 +108,10 @@ namespace DWSIM.UI.Forms
 
             // toolbar
 
-            var btnmSave = new ButtonToolItem { ToolTip = "Save", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
+            var btnmSave = new ButtonToolItem { ToolTip = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
 
-            var btnmSolve = new ButtonToolItem { ToolTip = "Solve", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
-            var btnmSimultSolve = new CheckToolItem { ToolTip = "Simult. Adjust", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Checked_96px.png")) };
+            var btnmSolve = new ButtonToolItem { ToolTip = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+            var btnmSimultSolve = new CheckToolItem { ToolTip = "Enable/Disable Simultaneous Adjust Solver", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Checked_96px.png")) };
 
             var btnmComps = new ButtonToolItem { ToolTip = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")) };
             var btnmBasis = new ButtonToolItem { ToolTip = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")) };
@@ -124,8 +126,8 @@ namespace DWSIM.UI.Forms
             if (Application.Instance.Platform.IsMac)
             {
                 btnmSave.Text = "Save";
-                btnmSolve.Text = "Solve";
-                btnmSimultSolve.Text = "Simult. Adjust";
+                btnmSolve.Text = "Solve Flowsheet";
+                btnmSimultSolve.Text = "E/D Simult. Adj. Solver";
                 btnmComps.Text = "Compounds";
                 btnmBasis.Text = "Basis";
                 btnmOptions.Text = "Settings";
@@ -155,7 +157,7 @@ namespace DWSIM.UI.Forms
 
             // actions
 
-            Action ActComps = () =>
+            ActComps = () =>
             {
                 var cont = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
@@ -168,7 +170,7 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-            Action ActBasis = () =>
+            ActBasis = () =>
             {
                 var cont1 = UI.Shared.Common.GetDefaultContainer();
                 cont1.Tag = "Thermodynamics";
@@ -181,7 +183,7 @@ namespace DWSIM.UI.Forms
                 form.Width += 10;
             };
 
-            Action ActOptions = () =>
+            ActOptions = () =>
             {
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
@@ -193,12 +195,12 @@ namespace DWSIM.UI.Forms
                 form.Width += 1;
             };
 
-            Action ActGlobalOptions = () =>
+            ActGlobalOptions = () =>
             {
                 new DWSIM.UI.Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
-            Action ActSave = () =>
+            ActSave = () =>
             {
                 try
                 {
@@ -217,6 +219,43 @@ namespace DWSIM.UI.Forms
                 }
             };
 
+            ActSaveAs = () => {
+                var dialog = new SaveFileDialog();
+                dialog.Title = "Save File".Localize();
+                dialog.Filters.Add(new FileFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
+                dialog.CurrentFilterIndex = 0;
+                if (dialog.ShowDialog(this) == DialogResult.Ok)
+                {
+                    SaveSimulation(dialog.FileName);
+                }
+            };
+
+            ActZoomIn = () => {
+                FlowsheetControl.FlowsheetSurface.Zoom += 0.1f;
+                FlowsheetControl.Invalidate();
+            };
+
+            ActZoomOut = () => {
+                FlowsheetControl.FlowsheetSurface.Zoom -= 0.1f;
+                FlowsheetControl.Invalidate();
+            };
+
+            ActZoomFit = () => {
+                FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+                FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+                FlowsheetControl.Invalidate();
+            };
+
+            FlowsheetObject.ActBasis = ActBasis;
+            FlowsheetObject.ActComps = ActComps;
+            FlowsheetObject.ActGlobalOptions = ActGlobalOptions;
+            FlowsheetObject.ActOptions = ActOptions;
+            FlowsheetObject.ActSave = ActSave;
+            FlowsheetObject.ActSaveAs = ActSaveAs;
+            FlowsheetObject.ActZoomFit = ActZoomFit;
+            FlowsheetObject.ActZoomIn = ActZoomIn;
+            FlowsheetObject.ActZoomOut = ActZoomOut;
+            
             // button click events
 
             btnClose.Click += (sender, e) => Close();
@@ -238,35 +277,13 @@ namespace DWSIM.UI.Forms
             btnSave.Click += (sender, e) => ActSave.Invoke();
             btnmSave.Click += (sender, e) => ActSave.Invoke();
 
-            btnSaveAs.Click += (sender, e) =>
-            {
+            btnSaveAs.Click += (sender, e) => ActSaveAs.Invoke();
 
-                var dialog = new SaveFileDialog();
-                dialog.Title = "Save File".Localize();
-                dialog.Filters.Add(new FileFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
-                dialog.CurrentFilterIndex = 0;
-                if (dialog.ShowDialog(this) == DialogResult.Ok)
-                {
-                    SaveSimulation(dialog.FileName);
-                }
+            btnmZoomOut.Click += (sender, e) => ActZoomOut.Invoke();
 
-            };
+            btnmZoomIn.Click += (sender, e) => ActZoomIn.Invoke();
 
-            btnmZoomOut.Click += (sender, e) =>
-            {
-                FlowsheetControl.FlowsheetSurface.Zoom -= 0.1f;
-                FlowsheetControl.Invalidate();
-            };
-            btnmZoomIn.Click += (sender, e) =>
-            {
-                FlowsheetControl.FlowsheetSurface.Zoom += 0.1f;
-                FlowsheetControl.Invalidate();
-            };
-            btnmZoomFit.Click += (sender, e) =>
-            {
-                FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
-                FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
-            };
+            btnmZoomFit.Click += (sender, e) => ActZoomFit.Invoke();
 
             var btnUtilities_TrueCriticalPoint = new ButtonMenuItem { Text = "True Critical Point", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
@@ -402,6 +419,14 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.Options.SimultaneousAdjustSolverEnabled = btnmSimultSolve.Checked;
                 chkSimSolver.Checked = btnmSimultSolve.Checked;
             };
+
+            ActSimultAdjustSolver = () => {
+                FlowsheetObject.Options.SimultaneousAdjustSolverEnabled = !FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
+                chkSimSolver.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
+                btnmSimultSolve.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
+            };
+
+            FlowsheetObject.ActSimultAdjustSolver = ActSimultAdjustSolver;
 
             // menu items
 
@@ -656,10 +681,16 @@ namespace DWSIM.UI.Forms
             split.FixedPanel = SplitterFixedPanel.Panel2;
             split.Panel2.Height = 100;
 
+            // main container
+            
             Content = split;
+
+            // context menus
 
             selctxmenu = new ContextMenu();
             deselctxmenu = new ContextMenu();
+
+            // flowsheet mouse up
 
             FlowsheetControl.FlowsheetSurface.InputReleased += (sender, e) =>
             {
@@ -725,6 +756,8 @@ namespace DWSIM.UI.Forms
                     }
                 }
             };
+
+            // additional events
 
             Closing += Flowsheet_Closing;
 
@@ -1296,6 +1329,7 @@ namespace DWSIM.UI.Forms
 
         private void UpdateEditorPanels()
         {
+            EditorHolder.SelectedPage = null;
             foreach (DocumentPage item in EditorHolder.Pages)
             {
                 ((ObjectEditorContainer)item.Content).Init();

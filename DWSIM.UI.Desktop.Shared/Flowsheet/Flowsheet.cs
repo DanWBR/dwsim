@@ -11,9 +11,12 @@ namespace DWSIM.UI.Desktop.Shared
     public class Flowsheet : FlowsheetBase.FlowsheetBase
     {
         private Action<string, IFlowsheet.MessageType> listeningaction;
+
         public Action FinishedSolving;
 
         public Action HighLevelSolve;
+
+        public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActSimultAdjustSolver;
 
         public bool optimizing = false;
         public bool SupressMessages = false;

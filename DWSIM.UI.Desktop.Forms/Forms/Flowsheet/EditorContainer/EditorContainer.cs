@@ -33,8 +33,6 @@ namespace DWSIM.UI.Forms
 
             loaded = false;
 
-            this.SuspendLayout();
-
             Pages.Clear();
             
             // connections
@@ -175,8 +173,6 @@ namespace DWSIM.UI.Forms
             if (SelectedPanel >= 0) SelectedIndex = SelectedPanel;
 
             loaded = true;
-
-            this.ResumeLayout();
 
         }
     }
