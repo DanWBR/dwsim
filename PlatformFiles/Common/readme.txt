@@ -34,7 +34,7 @@ macOS: 10.7 (OS X Lion) or newer
 Software:
 
 Microsoft .NET Framework 4.7.1 or newer (Windows) 
-Mono Framework 5.8.0 or newer (Linux/macOS)
+Mono Framework 5.8.0 or newer (Linux)
 
 CPU:			
 
@@ -64,12 +64,18 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.2
 
-- [NEW] DWSIM Inspector - Understand the models behind the simulation
+- [NEW] Solution Inspector - Understand the models behind the simulation
 - [NEW] Cross-Platform UI Enhancements: Drag-and-Drop to Add Flowsheet Objects, Object Property Editor Panels and much more
+- [NEW] Added support for Touch Bar on MacBook Pro 2016/2017 models
+- [NEW] Enhanced support for High DPI displays
+- [NEW] Added suppor for neutral compounds on HetCat Reaction Expressions
+- [NEW] Exposed Pipe Segment calculation results to analysis tools
+- [NEW] Added support for Classic UI on macOS (work in progress)
 - [CHG] Updated the target version of .NET Framework to v4.7.1
-- [CHG] macOS (OS X) version doesn't require the Mono Framework to be installed anymore
+- [CHG] Removed dependency of Mono Framework from macOS (OS X) version
 - [FIX] Fixed Flash Algorithm temperature limits
 - [FIX] Fixed Equilibrium Reactor calculation restart
+- [FIX] Fixed issues with Petroleum Characterization Utilities
 
 Version 5.1 Update 12
 
