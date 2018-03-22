@@ -63,7 +63,7 @@ namespace DWSIM.UI.Forms
             {
                 GlobalSettings.Settings.DpiScale = Screen.RealDPI / 96.0;
             }
-            
+
             // setup backup timer
 
             backupfilename = DateTime.Now.ToString().Replace('-', '_').Replace(':', '_').Replace(' ', '_').Replace('/', '_') + ".dwxmz";
@@ -219,7 +219,8 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            ActSaveAs = () => {
+            ActSaveAs = () =>
+            {
                 var dialog = new SaveFileDialog();
                 dialog.Title = "Save File".Localize();
                 dialog.Filters.Add(new FileFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
@@ -230,17 +231,20 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            ActZoomIn = () => {
+            ActZoomIn = () =>
+            {
                 FlowsheetControl.FlowsheetSurface.Zoom += 0.1f;
                 FlowsheetControl.Invalidate();
             };
 
-            ActZoomOut = () => {
+            ActZoomOut = () =>
+            {
                 FlowsheetControl.FlowsheetSurface.Zoom -= 0.1f;
                 FlowsheetControl.Invalidate();
             };
 
-            ActZoomFit = () => {
+            ActZoomFit = () =>
+            {
                 FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                 FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                 FlowsheetControl.Invalidate();
@@ -255,7 +259,7 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.ActZoomFit = ActZoomFit;
             FlowsheetObject.ActZoomIn = ActZoomIn;
             FlowsheetObject.ActZoomOut = ActZoomOut;
-            
+
             // button click events
 
             btnClose.Click += (sender, e) => Close();
@@ -420,7 +424,8 @@ namespace DWSIM.UI.Forms
                 chkSimSolver.Checked = btnmSimultSolve.Checked;
             };
 
-            ActSimultAdjustSolver = () => {
+            ActSimultAdjustSolver = () =>
+            {
                 FlowsheetObject.Options.SimultaneousAdjustSolverEnabled = !FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
                 chkSimSolver.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
                 btnmSimultSolve.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
@@ -682,7 +687,7 @@ namespace DWSIM.UI.Forms
             split.Panel2.Height = 100;
 
             // main container
-            
+
             Content = split;
 
             // context menus
@@ -1079,7 +1084,112 @@ namespace DWSIM.UI.Forms
                 DeleteObject();
             };
 
-            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), menuitem0, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), item5, item6 });
+            var item7 = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
+
+            item7.Click += (sender, e) =>
+            {
+                //copy all simulation properties from the selected object to clipboard
+                try
+                {
+                    var sobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+                    switch (sobj.ObjectType)
+                    {
+                        case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
+                            //((MasterTableGraphic)sobj).CopyToClipboard();
+                            break;
+                        case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
+                            //((SpreadsheetTableGraphic)sobj).CopyToClipboard();
+                            break;
+                        case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
+                            //((TableGraphic)sobj).CopyToClipboard();
+                            break;
+                        default:
+                            ((SharedClasses.UnitOperations.BaseClass)FlowsheetObject.SimulationObjects[sobj.Name]).CopyDataToClipboard((DWSIM.SharedClasses.SystemsOfUnits.Units)FlowsheetObject.FlowsheetOptions.SelectedUnitSystem, FlowsheetObject.FlowsheetOptions.NumberFormat);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    FlowsheetObject.ShowMessage("Error copying data to clipboard: " + ex.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError);
+                }
+            };
+
+            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), menuitem0, item7, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), item5, item6 });
+
+            if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+            {
+                bool cancopy;
+                if (!obj.GraphicObject.InputConnectors[0].IsAttached)
+                {
+                    cancopy = true;
+                }
+                else
+                {
+                    if (obj.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Recycle)
+                    {
+                        cancopy = true;
+                    }
+                    else
+                    {
+                        cancopy = false;
+                    }
+                }
+                if (cancopy)
+                {
+                    var aitem1 = new ButtonMenuItem { Text = "Copy Data From...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
+                    foreach (var mstr in FlowsheetObject.SimulationObjects.Values.Where((x) => x is Thermodynamics.Streams.MaterialStream))
+                    {
+                        if (mstr.GraphicObject.Tag != obj.GraphicObject.Tag)
+                        {
+                            var newtsmi = new ButtonMenuItem { Text = mstr.GraphicObject.Tag };
+                            newtsmi.Click += (sender, e) =>
+                            {
+                                var obj1 = FlowsheetObject.SimulationObjects[obj.Name];
+                                var obj2 = FlowsheetObject.GetSelectedFlowsheetSimulationObject(newtsmi.Text);
+                                ((Thermodynamics.Streams.MaterialStream)obj1).Assign((Thermodynamics.Streams.MaterialStream)obj2);
+                                SolveFlowsheet();
+                            };
+                            if (mstr.GraphicObject.Calculated) aitem1.Items.Add(newtsmi);
+                        }
+                    }
+                    selctxmenu.Items.Insert(5, aitem1);
+                }
+                var aitem2 = new ButtonMenuItem { Text = "Split Stream", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-line_spliting_filled.png")) };
+                aitem2.Click += (sender, e) =>
+                {
+                    try
+                    {
+
+                        var stream = FlowsheetControl.FlowsheetSurface.SelectedObject;
+                        var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 20, obj.GraphicObject.Y, obj.GraphicObject.Tag + "_CLONE");
+                        var id = isobj.Name;
+                        ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
+                        isobj.Name = id;
+                        foreach (var phase in ((DWSIM.Thermodynamics.Streams.MaterialStream)isobj).Phases.Values)
+                        {
+                            foreach (var comp in FlowsheetObject.SelectedCompounds.Values)
+                            {
+                                phase.Compounds[comp.Name].ConstantProperties = comp;
+                            }
+                        }
+                        isobj.GraphicObject.Status = stream.Status;
+                        Interfaces.IGraphicObject objfrom;
+                        int fromidx;
+                        if (stream.InputConnectors[0].IsAttached)
+                        {
+                            objfrom = stream.InputConnectors[0].AttachedConnector.AttachedFrom;
+                            fromidx = stream.InputConnectors[0].AttachedConnector.AttachedFromConnectorIndex;
+                            FlowsheetObject.DisconnectObjects(objfrom, stream);
+                            FlowsheetObject.ConnectObjects(objfrom, isobj.GraphicObject, fromidx, 0);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        FlowsheetObject.ShowMessage("Error splitting Material Stream: " + ex.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError);
+                    }
+                };
+                selctxmenu.Items.Insert(5, aitem2);
+            }
 
             return;
 
@@ -1329,10 +1439,9 @@ namespace DWSIM.UI.Forms
 
         private void UpdateEditorPanels()
         {
-            EditorHolder.SelectedPage = null;
             foreach (DocumentPage item in EditorHolder.Pages)
             {
-                ((ObjectEditorContainer)item.Content).Init();
+                ((ObjectEditorContainer)item.Content).Update();
             }
         }
 

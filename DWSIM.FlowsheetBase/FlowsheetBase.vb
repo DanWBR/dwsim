@@ -218,10 +218,14 @@ Imports System.Dynamic
     Public MustOverride Function GetNewInstance() As IFlowsheet Implements IFlowsheet.GetNewInstance
 
     Public Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetSelectedFlowsheetSimulationObject
-        If FlowsheetSurface.SelectedObject IsNot Nothing Then
-            If SimulationObjects.ContainsKey(FlowsheetSurface.SelectedObject.Name) Then Return SimulationObjects(FlowsheetSurface.SelectedObject.Name) Else Return Nothing
+        If tag Is Nothing OrElse tag = "" Then
+            If FlowsheetSurface.SelectedObject IsNot Nothing Then
+                If SimulationObjects.ContainsKey(FlowsheetSurface.SelectedObject.Name) Then Return SimulationObjects(FlowsheetSurface.SelectedObject.Name) Else Return Nothing
+            Else
+                Return Nothing
+            End If
         Else
-            Return Nothing
+            Return SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = tag).FirstOrDefault
         End If
     End Function
 

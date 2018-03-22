@@ -19,6 +19,8 @@ namespace DWSIM.UI.Forms
 
         private bool loaded = false;
 
+        private TabPage PageResults, PageEditor;
+
         public ObjectEditorContainer(ISimulationObject sobj) : base()
         {
             obj = sobj;
@@ -144,6 +146,8 @@ namespace DWSIM.UI.Forms
                 dyn1.Width = this.Width - 30;
                 Pages.Add(new TabPage(new Scrollable() { Content = dyn1, Width = this.Width - 30 }) { Text = "Shell and Tube Properties" });
             }
+
+            PageEditor = tab2;
             
             if (obj.Calculated)
             {
@@ -155,6 +159,9 @@ namespace DWSIM.UI.Forms
                 new DWSIM.UI.Desktop.Editors.Results(obj, container);
 
                 tabr.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
+
+                PageResults = tabr;
+
                 Pages.Add(tabr);
 
             }
@@ -173,6 +180,69 @@ namespace DWSIM.UI.Forms
             if (SelectedPanel >= 0) SelectedIndex = SelectedPanel;
 
             loaded = true;
+
+        }
+
+        public void Update()
+        {
+
+            if (PageEditor != null)
+            {
+
+                PageEditor.Content = null;
+
+                var cont = UI.Shared.Common.GetDefaultContainer();
+
+                cont.Width = this.Width - 30;
+
+                if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+                {
+                    new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
+                {
+                    new DWSIM.UI.Desktop.Editors.DistillationColumnEditor(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn)
+                {
+                    new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust)
+                {
+                    DWSIM.UI.Desktop.Editors.LogicalBlocks.AdjustEditor.Populate(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
+                {
+                    DWSIM.UI.Desktop.Editors.LogicalBlocks.SpecEditor.Populate(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Recycle)
+                {
+                    DWSIM.UI.Desktop.Editors.LogicalBlocks.RecycleEditor.Populate(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_EnergyRecycle)
+                {
+                    DWSIM.UI.Desktop.Editors.LogicalBlocks.EnergyRecycleEditor.Populate(obj, cont);
+                }
+                else
+                {
+                    new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
+                }
+
+                PageEditor.Content = new Scrollable() { Content = cont, Width = this.Width - 30 };
+
+            }
+
+            if (PageResults != null)
+            {
+                PageResults.Content = null;
+                if (obj.Calculated)
+                {
+                    var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
+                    var container = new TableLayout();
+                    new DWSIM.UI.Desktop.Editors.Results(obj, container);
+                    PageResults.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
+                }
+            }
 
         }
     }
