@@ -28,9 +28,12 @@ Public Class FormWelcome
         If DWSIM.App.IsRunningOnMono Then Me.BackgroundImageLayout = ImageLayout.Stretch
 
         Dim existingfiles As New List(Of String)
-        For Each f As String In My.Settings.MostRecentFiles
-            existingfiles.Add(f)
-        Next
+
+        If GlobalSettings.Settings.OldUI Then
+            For Each f As String In My.Settings.MostRecentFiles
+                existingfiles.Add(f)
+            Next
+        End If
 
         existingfiles = existingfiles.Where(Function(x) File.Exists(x)).OrderByDescending(Function(x) File.GetLastWriteTime(x)).ToList
 

@@ -108,7 +108,7 @@ Namespace GraphicObjects
 
             If Not Selected Then g.FillRectangle(New SolidBrush(Color.FromArgb(200, Color.White)), X + strx, Y + Height + 5, strdist.Width, strdist.Height)
 
-            g.DrawString(Me.Tag, New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False), New SolidBrush(Me.LineColor), X + strx, Y + Height + 5)
+            g.DrawString(Me.Tag, New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False), New SolidBrush(Me.LineColor), X + strx, Y + Height + 5, StringFormat.GenericDefault)
 
         End Sub
 

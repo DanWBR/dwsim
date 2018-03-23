@@ -133,9 +133,19 @@ Namespace DWSIM
 
             If My.Application._HelpManager Is Nothing Then
 
+                Dim cultureinfo As String = "en"
+
+                Try
+                    If GlobalSettings.Settings.OldUI Then cultureinfo = My.Settings.CultureInfo
+                Catch ex As System.Xml.XmlException
+                    Dim filename As String = ex.SourceUri
+                    Console.WriteLine(ex.Message & " [" & filename & "]")
+                    If File.Exists(filename) Then File.Delete(filename)
+                End Try
+
                 'loads the current language
-                My.Application._CultureInfo = New Globalization.CultureInfo(My.Settings.CultureInfo)
-                My.Application.ChangeUICulture(My.Settings.CultureInfo)
+                My.Application._CultureInfo = New Globalization.CultureInfo(cultureinfo)
+                My.Application.ChangeUICulture(cultureinfo)
 
                 'loads the resource manager
                 My.Application._HelpManager = New System.Resources.ResourceManager("DWSIM.Tips", System.Reflection.Assembly.GetExecutingAssembly())

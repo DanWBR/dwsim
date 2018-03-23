@@ -687,7 +687,7 @@ Public Class FormMain
 
     Sub OpenWelcomeScreen()
 
-        If My.Settings.BackupFiles.Count > 0 Then
+        If GlobalSettings.Settings.OldUI AndAlso My.Settings.BackupFiles.Count > 0 Then
             Me.FrmRec = New FormRecoverFiles
             If Me.FrmRec.ShowDialog(Me) = Windows.Forms.DialogResult.Ignore Then
                 Dim frmw As New FormWelcome

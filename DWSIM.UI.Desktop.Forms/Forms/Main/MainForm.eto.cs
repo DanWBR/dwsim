@@ -245,7 +245,7 @@ namespace DWSIM.UI
                 new Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
-            var aitem2 = new ButtonMenuItem { Text = "Open Classic UI" };
+            var aitem2 = new ButtonMenuItem { Text = "Open Classic UI", Shortcut = Keys.Alt | Keys.C };
             aitem2.Click += (sender, e) =>
             {
                 DWSIM.macOS.ClassicUILoader.Loader.Load();

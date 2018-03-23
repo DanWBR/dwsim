@@ -608,6 +608,11 @@ Public Class FormFlowsheet
 
                 frsht.UIThread(New System.Action(Sub()
 
+                                                     Dim showtips As Boolean = True
+                                                     If GlobalSettings.Settings.OldUI Then
+                                                         showtips = My.Settings.ShowTips
+                                                     End If
+
                                                      If Not My.Application.CommandLineMode Then
 
                                                          Dim frlog = frsht.FormLog
@@ -622,7 +627,7 @@ Public Class FormFlowsheet
                                                                  img = My.Resources.exclamation
                                                                  strtipo = DWSIM.App.GetLocalString("Erro")
                                                              Case DWSIM.Flowsheet.MessageType.Tip
-                                                                 If Not My.Settings.ShowTips Then Exit Sub
+                                                                 If Not showtips Then Exit Sub
                                                                  img = My.Resources.lightbulb
                                                                  strtipo = DWSIM.App.GetLocalString("Dica")
                                                              Case Else
