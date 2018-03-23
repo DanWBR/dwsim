@@ -606,7 +606,7 @@
       <Name>DWSIM.ExtensionMethods.Eto</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
-      <Project>{763fb0c2-ba91-4a0a-a180-87ddaa9e3d70}</Project>
+      <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
       <Name>DWSIM.Inspector</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.MathOps.SimpsonIntegrator\DWSIM.MathOps.SimpsonIntegrator.csproj">

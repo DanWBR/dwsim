@@ -865,6 +865,18 @@ Namespace PropertyPackages
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public Overridable Overloads Function DW_CalcKvalue(ByVal Vx As System.Array, ByVal Vy As System.Array, ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcKvalue", ComponentName & " K-value calculation (Property Package)", "Property Package K-value Calculation Routine")
+
+            IObj?.Paragraphs.Add("This is the K-value calculation routine which is called back from the Flash Algorithm during an equilibrium calculation. It is calculated for each compound as")
+
+            IObj?.Paragraphs.Add("<math>K = \frac{y}{x} = \frac{\phi_{L} }{\phi_{V} }</math>")
+
+            IObj?.Paragraphs.Add("where <math>\phi_{L}</math> and <math>\phi_{V}</math> are the fugacity coefficients of the compound on the liquid and vapor phase, respectively.")
+
+            IObj?.Paragraphs.Add("The fugacity coefficients also depend on x and y, and are used to calculate updated K-values, which is why this routine is always called from a successive substitution procedure.")
+
             Dim fugvap As Double() = Nothing
             Dim fugliq As Double() = Nothing
 
@@ -957,6 +969,8 @@ Namespace PropertyPackages
             For i = 0 To n
                 If K(i) < 0.0000000001 Then K(i) = 0.0000000001
             Next
+
+            IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToArrayString()))
 
             Return K
 
@@ -1709,6 +1723,10 @@ Namespace PropertyPackages
 
         Public Overridable Sub DW_CalcEquilibrium(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEquilibrium", ComponentName & " (Property Package)", "Property Package Equilibrium Calculation Routine")
+
             Me.CurrentMaterialStream.AtEquilibrium = False
 
             If Not Settings.CAPEOPENMode Then
@@ -1736,6 +1754,10 @@ Namespace PropertyPackages
             H = Me.CurrentMaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
             S = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
 
+            IObj?.Paragraphs.Add("This is the routine responsible to calculate the phase distribution of the currently associated Material Stream, using the specified Flash Algorithm.")
+
+            IObj?.Paragraphs.Add("The first thing that the routine does is to erase all previously calculated phase distribution and properties on the stream, if they exist.")
+
             Me.DW_ZerarPhaseProps(Phase.Vapor)
             Me.DW_ZerarPhaseProps(Phase.Liquid)
             Me.DW_ZerarPhaseProps(Phase.Liquid1)
@@ -1751,6 +1773,8 @@ Namespace PropertyPackages
             Me.DW_ZerarComposicoes(Phase.Aqueous)
             Me.DW_ZerarComposicoes(Phase.Solid)
 
+            IObj?.Paragraphs.Add("It then checks for the Material Stream State Specification, in order to proceed with the correct flash (equilibrium) calculation.")
+
             Select Case spec1
 
                 Case FlashSpec.T
@@ -1758,6 +1782,8 @@ Namespace PropertyPackages
                     Select Case spec2
 
                         Case FlashSpec.P
+
+                            IObj?.Paragraphs.Add("The defined specification is TP (Temperature and Pressure). DWSIM will call the 'Flash_PT' routine from the currently associated Flash Algorithm instance.")
 
                             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
@@ -1992,6 +2018,8 @@ Namespace PropertyPackages
 
                         Case FlashSpec.VAP
 
+                            IObj?.Paragraphs.Add("The defined specification is TVF (Temperature and Vapor Fraction). DWSIM will call the 'Flash_TV' routine from the currently associated Flash Algorithm instance.")
+
                             Dim KI(n) As Double
                             Dim HM, HV, HL, HL2, HS As Double
                             Dim SM, SV, SL, SL2, SS As Double
@@ -2146,6 +2174,8 @@ Namespace PropertyPackages
                     Select Case spec2
 
                         Case FlashSpec.H
+
+                            IObj?.Paragraphs.Add("The defined specification is PH (Pressure and Enthalpy). DWSIM will call the 'Flash_PH' routine from the currently associated Flash Algorithm instance.")
 
                             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
@@ -2388,6 +2418,8 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
 
                         Case FlashSpec.S
 
+                            IObj?.Paragraphs.Add("The defined specification is PS (Pressure and Entropy). DWSIM will call the 'Flash_PS' routine from the currently associated Flash Algorithm instance.")
+
                             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
@@ -2576,6 +2608,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         Case FlashSpec.VAP
 
+                            IObj?.Paragraphs.Add("The defined specification is PVF (Pressure and Vapor Fraction). DWSIM will call the 'Flash_PV' routine from the currently associated Flash Algorithm instance.")
+
                             Dim KI(n) As Double
                             Dim HM, HV, HL, HL2, HS As Double
                             Dim SM, SV, SL, SL2, SS As Double
@@ -2755,6 +2789,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 .Phases(0).Properties.entropy = S
 
             End With
+
+            IObj?.Paragraphs.Add("Phase Equilibrium for the currently associated Material Stream was calculated successfully.")
 
             Me.CurrentMaterialStream.AtEquilibrium = True
 

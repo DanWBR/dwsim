@@ -71,6 +71,44 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine")
+
+            IObj?.Paragraphs.Add("This routine tries to find the compositions of a liquid and a vapor phase at equilibrium by solving the Rachford-Rice equation using a newton convergence approach.")
+
+            IObj?.Paragraphs.Add("The Rachford-Rice equation is")
+
+            IObj?.Paragraphs.Add("<math>\sum_i\frac{z_i \, (K_i - 1)}{1 + \beta \, (K_i - 1)}= 0</math>")
+
+            IObj?.Paragraphs.Add(" where:")
+
+            IObj?.Paragraphs.Add("''z<sub>i</sub>'' is the mole fraction of component ''i'' in the feed liquid (assumed to be known);")
+            IObj?.Paragraphs.Add("''<math>\beta<math> is the fraction of feed that is vaporised;")
+            IObj?.Paragraphs.Add(" ''K<sub>i</sub>'' is the equilibrium constant of component ''i''.")
+
+            IObj?.Paragraphs.Add("The equilibrium constants ''K<sub>i</sub>'' are in general functions of many parameters, though the most important is arguably temperature; they are defined as:")
+
+            IObj?.Paragraphs.Add("<math>y_i = K_i \, x_i</math>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("''x<sub>i</sub>'' is the mole fraction of component ''i'' in liquid phase;")
+            IObj?.Paragraphs.Add("''y<sub>i</sub>'' is the mole fraction of component ''i'' in gas phase.")
+
+            IObj?.Paragraphs.Add("Once the Rachford-Rice equation has been solved for ''\beta'', the compositions ''x<sub>i</sub>'' and ''y<sub>i</sub>'' can be immediately calculated as:")
+
+            IObj?.Paragraphs.Add("<math>\begin{align}")
+            IObj?.Paragraphs.Add("x_i &= \ frac{z_i}{1+\beta(K_i-1)}\\")
+            IObj?.Paragraphs.Add("y_i &= K_i \,x_i.")
+            IObj?.Paragraphs.Add(" \end{align}</math>")
+
+            IObj?.Paragraphs.Add("The Rachford - Rice equation can have multiple solutions for ''\beta'', at most one of which guarantees that all ''x<sub>i</sub>'' and ''y<sub>i</sub>'' will be positive. In particular, if there is only one ''\beta'' for which:")
+            IObj?.Paragraphs.Add("<math>\frac{1}{1-K_\text{max}} = \ beta_ \ Text{min} < \beta < \beta_\text{max} = \frac{1}{1-K_\text{min}}</math>")
+            IObj?.Paragraphs.Add("then that ''\beta'' is the solution; if there are multiple  such ''\beta'''s, it means that either ''K''<sub>max</sub><1 or ''K''<sub>min</sub>>1, indicating respectively that no gas phase can be sustained (and therefore ''\beta''=0) or conversely that no liquid phase can exist (and therefore ''\beta''=1).")
+
+            IObj?.Paragraphs.Add("DWSIM initializes the current calculation with ideal K-values estimated from vapor pressure data for each compound, or by using previously calculated values from an earlier solution.")
+
             Dim i, n, ecount As Integer
             Dim Pb, Pd, Pmin, Pmax, Px As Double
             Dim d1, d2 As Date, dt As TimeSpan
@@ -112,6 +150,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Ki(i) = PrevKi(i)
                 Next
             End If
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: ", Ki.ToArrayString))
 
             'Estimate V
 
@@ -183,6 +223,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             V = Vmin + (Vmax - Vmin) / 2
             'V = (P - Pd) / (Pb - Pd)
 
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for V: ", V))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for L (1-V): ", L))
+
             L = 1 - V
 
             If n = 0 Then
@@ -216,10 +259,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim converged As Integer = 0
             Dim F, dF, e1, e2, e3 As Double
 
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: ", Vy.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: ", Vx.ToArrayString))
+
             Do
+
+                IObj?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 
                 Ki_ant = Ki.Clone
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+                IObj?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToArrayString))
 
                 Vy_ant = Vy.Clone
                 Vx_ant = Vx.Clone
@@ -235,10 +285,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vx = Vy.DivideY(Ki).NormalizeY
                 End If
 
+                IObj?.Paragraphs.Add(String.Format("y values (vapor phase composition) where updated. Current values: {0}", Vy.ToArrayString))
+                IObj?.Paragraphs.Add(String.Format("x values (liquid phase composition) where updated. Current values: {0}", Vx.ToArrayString))
+
                 e1 = Vx.SubtractY(Vx_ant).AbsSumY
                 e2 = Vy.SubtractY(Vy_ant).AbsSumY
 
                 e3 = (V - Vant)
+
+                IObj?.Paragraphs.Add(String.Format("Current Vapor Fraction (<math>\beta</math>) error: {0}", e3))
 
                 If Double.IsNaN(e1 + e2) Then
 
@@ -260,9 +315,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
                     dF = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
 
+                    IObj?.Paragraphs.Add(String.Format("Current value of the Rachford-Rice error function: {0}", F))
+
                     If Abs(F) < etol / 100 Then Exit Do
 
                     V = -F / dF + Vant
+
+                    IObj?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math>\beta</math>) value: {0}", V))
 
                 End If
 
@@ -312,6 +371,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             dt = d2 - d1
 
             WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
 
 out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 

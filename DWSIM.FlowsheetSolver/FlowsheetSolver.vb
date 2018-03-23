@@ -910,7 +910,17 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
     ''' <remarks></remarks>
     Public Shared Function SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False) As List(Of Exception)
 
+        Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
+
         If GlobalSettings.Settings.CalculatorActivated Then
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "SolveFlowsheet", "Solver Call", "Flowsheet Solver Call Event")
+
+            IObj?.Paragraphs.Add("The Flowsheet Solver controls the calculation of the entire flowsheet.")
+
+            IObj?.Paragraphs.Add("When the user requests a flowsheet calculation, it tries to determine the order of the objects to be calculated.")
 
             Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
@@ -964,6 +974,14 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Dim filteredlist As Dictionary(Of Integer, List(Of String)) = objl(2)
             Dim objstack As List(Of String) = objl(0)
 
+            IObj?.Paragraphs.Add("The objects which will be calculated are (in this order): ")
+
+            If IObj IsNot Nothing Then
+                For Each item In objstack
+                    IObj.Paragraphs.Add(fbag.SimulationObjects(item).GraphicObject.Tag & "(" & fbag.SimulationObjects(item).GetDisplayName & ")")
+                Next
+            End If
+
             If objstack.Count = 0 Then
                 GlobalSettings.Settings.CalculatorBusy = False
                 Return New List(Of Exception)
@@ -989,6 +1007,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             'find recycles
 
+            IObj?.Paragraphs.Add("The solver will now check for existing recycles, which will be connected to the tear streams.")
+
             Dim recycles As New List(Of String)
             Dim totalv As Integer = 0
 
@@ -1003,6 +1023,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     End If
                 End If
             Next
+
+            IObj?.Paragraphs.Add(String.Format("Number of recycles found: {0}.", totalv))
 
             'size hessian matrix, variables and error vectors for recycle simultaneous solving.
 
@@ -1317,6 +1339,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingok"), IFlowsheet.MessageType.Information)
                 fgui.ShowMessage(fgui.GetTranslatedString("Runtime") & ": " & (Date.Now - d1).ToString("g"), IFlowsheet.MessageType.Information)
 
+                IObj?.Paragraphs.Add(String.Format("Solver finished calculation of all objects in {0} seconds.", (Date.Now - d1).TotalSeconds))
+
                 fs.ErrorMessage = ""
                 fs.Solved = True
 
@@ -1325,6 +1349,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Dim baseexception As Exception = Nothing
 
                 fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingerror"), IFlowsheet.MessageType.GeneralError)
+
+                IObj?.Paragraphs.Add(fgui.GetTranslatedString("FSfinishedsolvingerror"))
 
                 For Each ex In age.Flatten().InnerExceptions
                     Dim euid As String = Guid.NewGuid().ToString()
@@ -1336,6 +1362,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                 baseexception = iex.InnerException
                             End While
                             fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
+                            IObj?.Paragraphs.Add(baseexception.Message)
                         Next
                     Else
                         baseexception = ex
@@ -1343,6 +1370,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             baseexception = baseexception.InnerException
                         End While
                         fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
+                        IObj?.Paragraphs.Add(baseexception.Message)
                     End If
                 Next
 
