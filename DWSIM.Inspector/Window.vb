@@ -10,19 +10,23 @@ Public Class Window
 
         Dim content As New TableLayout With {.Padding = New Padding(5, 5, 5, 5)}
 
-        Dim InspectorLabel = New Label With {.Text = "  " + "Solution Inspector", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
+        Dim InspectorLabel = New Label With {.Text = "Solution Inspector", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
         InspectorLabel.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())
 
-        Dim InspectorDescription = New Label With {.Text = "  " + "The Solution Inspector brings a structured view of all model calculations.", .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
+        Dim InspectorDescription = New Label With {.Text = "The Solution Inspector brings a structured view of all model calculations.", .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
         InspectorDescription.Font = New Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize())
 
         content.Rows.Add(New TableRow(InspectorLabel))
         content.Rows.Add(New TableRow(InspectorDescription))
         content.BackgroundColor = New Color(0.051F, 0.447F, 0.651F)
 
-        Dim SetsBox As New ListBox
+        Dim SetsBox As New ListBox With {.Height = 100}
 
-        content.Rows.Add(New TableRow(New GroupBox() With {.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White, .Content = SetsBox, .Height = 100, .Text = "Available Solution Sets"}))
+        Dim SetsLabel = New Label With {.Text = "Available Solution Sets", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
+        SetsLabel.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())
+
+        content.Rows.Add(New TableRow(SetsLabel))
+        content.Rows.Add(New TableRow(SetsBox))
 
         Dim leftcontainer, rightcontainer As New TableLayout
 

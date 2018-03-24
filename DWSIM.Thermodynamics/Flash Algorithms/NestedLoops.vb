@@ -324,7 +324,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     V = -F / dF + Vant
 
-                    IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math>\beta</math>) value: {0}", V))
+                    IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
 
                 End If
 
