@@ -897,6 +897,10 @@ Namespace PropertyPackages
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcFugCoeff", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity COefficient Calculation Routine")
+
             Dim lnfug As Double()
 
             If st = State.Liquid Then

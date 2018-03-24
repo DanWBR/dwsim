@@ -327,15 +327,46 @@ Namespace PropertyPackages.ThermoPlugs
 
         Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFug", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+
             If Settings.EnableGPUProcessing Then
+                IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the GPU.")
                 Return CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
             Else
+                IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the CPU.")
                 Return CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
             End If
 
         End Function
 
         Private Function CalcLnFugCPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "")
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "Peng-Robinson EOS Fugacity Coefficient (CPU)", "Peng-Robinson EOS Fugacity Coefficient Calculation Routine")
+
+            IObj?.Paragraphs.Add("The fugacity coefficient obtained with the Peng-Robinson EOS in given by")
+            IObj?.Paragraphs.Add("<math>\ln\dfrac{f_{i}}{x_{i}P}=\frac{b_{i}}{b_{m}}\left(Z-1\right)-\ln\left(Z-B\right)-\frac{A}{2\sqrt{2}B}\left(\frac{\sum_{k}x_{k}a_{ki}}{a_{m}}-\frac{b_{i}}{b_{m}}\right)\ln\left(\frac{Z+2,414B}{Z-0,414B}\right),</math>")
+            IObj?.Paragraphs.Add("where Z Is the phase compressibility factor (liquid Or vapor) And can be obtained from the equation")
+            IObj?.Paragraphs.Add("Z^ {3} - (1 - b)Z^{2}+(A-3B^{2}-2B)Z-(AB-B^{2}-2B)=0,\label{eq:PR_Z}</math>")
+            IObj?.Paragraphs.Add("<math>A =\ frac{a_{m}P}{R^{2}T^{2}}</math>")
+            IObj?.Paragraphs.Add("<math>B =\ frac{b_{m}P}{RT}</math>")
+            IObj?.Paragraphs.Add("<math>Z =\ frac{PV}{RT}</math>")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Phase: {0}", forcephase))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Dim n As Integer, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -378,6 +409,9 @@ Namespace PropertyPackages.ThermoPlugs
 
             a = Calc_SUM1(n, ai, VKij)
 
+            IObj?.Paragraphs.Add("<math>a_{i}</math>: " & ai.ToArrayString)
+            IObj?.Paragraphs.Add("<math>b_{i}</math>: " & bi.ToArrayString)
+
             Dim tmpa As Object = Calc_SUM2(n, Vx, a)
 
             aml2 = tmpa(0)
@@ -385,8 +419,14 @@ Namespace PropertyPackages.ThermoPlugs
 
             bml = Vx.MultiplyY(bi).SumY
 
+            IObj?.Paragraphs.Add("<math>a_{m}</math>: " & aml)
+            IObj?.Paragraphs.Add("<math>b_{m}</math>: " & bml)
+
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
+
+            IObj?.Paragraphs.Add(String.Format("A: {0}", AG))
+            IObj?.Paragraphs.Add(String.Format("B: {0}", BG))
 
             Dim _zarray As List(Of Double), _mingz As Object, Z As Double
 
@@ -407,6 +447,8 @@ Namespace PropertyPackages.ThermoPlugs
                 _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, Tc, Pc, w)
                 Z = _zarray(_mingz(0))
             End If
+
+            IObj?.Paragraphs.Add(String.Format("Z: {0}", Z))
 
             Dim Pcorr As Double = P
 
@@ -436,6 +478,10 @@ Namespace PropertyPackages.ThermoPlugs
                     i = i + 1
                 Loop Until i = n + 1
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Fugacity Coefficients: {0}", LN_CF.ExpY().ToArrayString))
 
             Return LN_CF
 

@@ -102,7 +102,10 @@ namespace DWSIM.UI.Forms.Forms
             tab2.CreateAndAddDescriptionRow("Enables utilization of special CPU instructions for accelerated math calculations.");
             //tab2.CreateAndAddCheckBoxRow("EnableGPUAccel".Localize(prefix), Settings.EnableGPUProcessing, (CheckBox sender, EventArgs obj) => { Settings.EnableGPUProcessing = sender.Checked.Value; });
             tab2.CreateAndAddCheckBoxRow("BreakOnException".Localize(prefix), Settings.SolverBreakOnException, (CheckBox sender, EventArgs obj) => { Settings.SolverBreakOnException = sender.Checked.GetValueOrDefault(); });
-            tab2.CreateAndAddDescriptionRow("If activated, the solver won't calculate the rest of the flowsheet if an error occurs during the claculation of an intermediate block/object.");
+            tab2.CreateAndAddDescriptionRow("If activated, the solver won't calculate the rest of the flowsheet if an error occurs during the calculation of an intermediate block/object.");
+
+            tab2.CreateAndAddLabelRow("Solution Inspector".Localize(prefix));
+            tab2.CreateAndAddCheckBoxRow("Enable Solution Inspector", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
 
             var tab3 = Common.GetDefaultContainer();
             tab3.Tag = "UserComps".Localize(prefix);
