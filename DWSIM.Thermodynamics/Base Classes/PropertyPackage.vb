@@ -961,7 +961,12 @@ Namespace PropertyPackages
                 End If
             End If
 
+            IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToArrayString()))
+
             If Me.AUX_CheckTrivial(K) Then
+
+                IObj?.Paragraphs.Add(String.Format("Trivial solution detected! Recalculating K-values..."))
+
                 Dim Pc, Tc, w As Double
                 If Not Parameters.ContainsKey("PP_FLASHALGORITHMIDEALKFALLBACK") Then Parameters.Add("PP_FLASHALGORITHMIDEALKFALLBACK", 1)
                 If Parameters("PP_FLASHALGORITHMIDEALKFALLBACK") = 1 Then

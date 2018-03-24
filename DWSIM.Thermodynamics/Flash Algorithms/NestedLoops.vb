@@ -296,7 +296,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 e3 = (V - Vant)
 
-                IObj2?.Paragraphs.Add(String.Format("Current Vapor Fraction (<math>\beta</math>) error: {0}", e3))
+                IObj2?.Paragraphs.Add(String.Format("Current Vapor Fraction (<math_inline>\beta</math_inline>) error: {0}", e3))
 
                 If Double.IsNaN(e1 + e2) Then
 
