@@ -126,7 +126,7 @@ Public Class Settings
 
     Public Shared Property CalculationRequestID As String = ""
 
-    Public Shared Property InspectorEnabled As Boolean = False
+    Public Shared Property InspectorEnabled As Boolean = True
 
     Public Shared Property EditorFontSize As Integer = -1
 

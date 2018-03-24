@@ -978,7 +978,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             If IObj IsNot Nothing Then
                 For Each item In objstack
-                    IObj.Paragraphs.Add(fbag.SimulationObjects(item).GraphicObject.Tag & "(" & fbag.SimulationObjects(item).GetDisplayName & ")")
+                    IObj.Paragraphs.Add(fbag.SimulationObjects(item).GraphicObject.Tag & " (" & fbag.SimulationObjects(item).GetDisplayName & ")")
                 Next
             End If
 

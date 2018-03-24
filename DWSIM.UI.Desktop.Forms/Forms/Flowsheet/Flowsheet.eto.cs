@@ -54,7 +54,7 @@ namespace DWSIM.UI.Forms
 
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
 
-        public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActSimultAdjustSolver;
+        public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActSimultAdjustSolver, ActInspector;
 
         void InitializeComponent()
         {
@@ -250,6 +250,13 @@ namespace DWSIM.UI.Forms
                 FlowsheetControl.Invalidate();
             };
 
+            ActInspector = () =>
+            {
+                var iform = Common.GetDefaultEditorForm("Solution Inspector", 1024, 768, DWSIM.Inspector.Window.GetInspectorWindow(), false);
+                iform.WindowState = WindowState.Maximized;
+                iform.Show();
+            };
+
             FlowsheetObject.ActBasis = ActBasis;
             FlowsheetObject.ActComps = ActComps;
             FlowsheetObject.ActGlobalOptions = ActGlobalOptions;
@@ -261,6 +268,8 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.ActZoomOut = ActZoomOut;
 
             // button click events
+
+            btnmInspector.Click += (sender, e) => ActInspector.Invoke();
 
             btnClose.Click += (sender, e) => Close();
 
@@ -325,6 +334,8 @@ namespace DWSIM.UI.Forms
             var btnOptimization = new ButtonMenuItem { Text = "Flowsheet Optimizer", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
 
             var btnInspector = new ButtonMenuItem { Text = "Solution Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
+
+            btnInspector.Click += (sender, e) => ActInspector.Invoke();
 
             btnObjects.Click += (sender, e) =>
             {

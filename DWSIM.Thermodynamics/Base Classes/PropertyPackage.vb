@@ -873,9 +873,17 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add("<math>K = \frac{y}{x} = \frac{\phi_{L} }{\phi_{V} }</math>")
 
-            IObj?.Paragraphs.Add("where <math>\phi_{L}</math> and <math>\phi_{V}</math> are the fugacity coefficients of the compound on the liquid and vapor phase, respectively.")
+            IObj?.Paragraphs.Add("where <math_inline>\phi_{L}</math_inline> and <math_inline>\phi_{V}</math_inline> are the fugacity coefficients of the compound on the liquid and vapor phase, respectively.")
 
             IObj?.Paragraphs.Add("The fugacity coefficients also depend on x and y, and are used to calculate updated K-values, which is why this routine is always called from a successive substitution procedure.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Phase 1 composition: {0}", Vx.ToArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Phase 2 composition: {0}", Vy.ToArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Calculation Type: {0}", type))
 
             Dim fugvap As Double() = Nothing
             Dim fugliq As Double() = Nothing
@@ -908,6 +916,11 @@ Namespace PropertyPackages
                     fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
                 End If
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Intermediate Calculated Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Phase 1 fugacity coefficients: {0}", fugliq.ToArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Phase 2 fugacity coefficients: {0}", fugvap.ToArrayString()))
 
             Dim n As Integer = fugvap.Length - 1
             Dim i As Integer
@@ -969,6 +982,8 @@ Namespace PropertyPackages
             For i = 0 To n
                 If K(i) < 0.0000000001 Then K(i) = 0.0000000001
             Next
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
             IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToArrayString()))
 
@@ -1725,7 +1740,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEquilibrium", ComponentName & " (Property Package)", "Property Package Equilibrium Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEquilibrium", ComponentName & " (Equilibrium)", "Property Package Equilibrium Calculation Routine")
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 

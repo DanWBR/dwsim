@@ -349,11 +349,11 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.Paragraphs.Add("The fugacity coefficient obtained with the Peng-Robinson EOS in given by")
             IObj?.Paragraphs.Add("<math>\ln\dfrac{f_{i}}{x_{i}P}=\frac{b_{i}}{b_{m}}\left(Z-1\right)-\ln\left(Z-B\right)-\frac{A}{2\sqrt{2}B}\left(\frac{\sum_{k}x_{k}a_{ki}}{a_{m}}-\frac{b_{i}}{b_{m}}\right)\ln\left(\frac{Z+2,414B}{Z-0,414B}\right),</math>")
-            IObj?.Paragraphs.Add("where Z Is the phase compressibility factor (liquid Or vapor) And can be obtained from the equation")
-            IObj?.Paragraphs.Add("Z^ {3} - (1 - b)Z^{2}+(A-3B^{2}-2B)Z-(AB-B^{2}-2B)=0,\label{eq:PR_Z}</math>")
-            IObj?.Paragraphs.Add("<math>A =\ frac{a_{m}P}{R^{2}T^{2}}</math>")
-            IObj?.Paragraphs.Add("<math>B =\ frac{b_{m}P}{RT}</math>")
-            IObj?.Paragraphs.Add("<math>Z =\ frac{PV}{RT}</math>")
+            IObj?.Paragraphs.Add("where Z Is the phase compressibility factor (liquid or vapor) and can be obtained from the equation")
+            IObj?.Paragraphs.Add("<math>Z^ {3} - (1 - b)Z^{2}+(A-3B^{2}-2B)Z-(AB-B^{2}-2B)=0,</math>")
+            IObj?.Paragraphs.Add("<math>A =\frac{a_{m}P}{R^{2}T^{2}}</math>")
+            IObj?.Paragraphs.Add("<math>B =\frac{b_{m}P}{RT}</math>")
+            IObj?.Paragraphs.Add("<math>Z =\frac{PV}{RT}</math>")
 
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 
@@ -409,8 +409,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             a = Calc_SUM1(n, ai, VKij)
 
-            IObj?.Paragraphs.Add("<math>a_{i}</math>: " & ai.ToArrayString)
-            IObj?.Paragraphs.Add("<math>b_{i}</math>: " & bi.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
 
             Dim tmpa As Object = Calc_SUM2(n, Vx, a)
 
@@ -419,14 +419,14 @@ Namespace PropertyPackages.ThermoPlugs
 
             bml = Vx.MultiplyY(bi).SumY
 
-            IObj?.Paragraphs.Add("<math>a_{m}</math>: " & aml)
-            IObj?.Paragraphs.Add("<math>b_{m}</math>: " & bml)
+            IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
+            IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
 
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            IObj?.Paragraphs.Add(String.Format("A: {0}", AG))
-            IObj?.Paragraphs.Add(String.Format("B: {0}", BG))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG))
 
             Dim _zarray As List(Of Double), _mingz As Object, Z As Double
 
@@ -448,7 +448,7 @@ Namespace PropertyPackages.ThermoPlugs
                 Z = _zarray(_mingz(0))
             End If
 
-            IObj?.Paragraphs.Add(String.Format("Z: {0}", Z))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
 
             Dim Pcorr As Double = P
 

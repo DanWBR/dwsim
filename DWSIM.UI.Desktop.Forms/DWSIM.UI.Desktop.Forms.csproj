@@ -195,6 +195,10 @@
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
+      <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
+      <Name>DWSIM.Inspector</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>

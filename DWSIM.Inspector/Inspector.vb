@@ -18,11 +18,12 @@
 
     End Function
 
-    Public Shared Sub CheckAndAdd(IObj As InspectorItem, callingmethod As String, method As String, name As String, description As String)
+    Public Shared Sub CheckAndAdd(ii As InspectorItem, callingmethod As String, method As String, name As String, description As String, Optional ownerID As String = "")
 
-        If IObj IsNot Nothing Then
-            Inspector.Host.Items.Add(IObj)
-            With IObj
+        If ii IsNot Nothing Then
+            Inspector.Host.Items.Add(ii)
+            With ii
+                .OwnerID = ownerID
                 .CallingMethodName = callingmethod
                 .MethodName = method
                 .Name = name
@@ -52,6 +53,8 @@ Public Class InspectorItem
 
     Public Property ThreadID As Integer = -1
 
+    Public Property OwnerID As String = ""
+
     Public Property StartTime As DateTime = DateTime.Now
 
     Public Property EndTime As DateTime
@@ -62,5 +65,31 @@ Public Class InspectorItem
         ThreadID = System.Threading.Thread.CurrentThread.ManagedThreadId
         SolutionID = Host.CurrentSolutionID
     End Sub
+
+    Public Function GetHTML() As String
+
+        Dim stb As New Text.StringBuilder
+
+        stb.AppendLine("<html>
+                        <head>
+                        <style>
+                            body {
+                                font-family: Arial, Helvetica, sans-serif;
+                            }
+                        </style>")
+        stb.AppendLine("<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>")
+        stb.AppendLine("<script type='text/x-mathjax-config'> MathJax.Hub.Config({ 'HTML-CSS': { scale: 100, linebreaks: { automatic: true } }, SVG: { linebreaks: { automatic:true } }, displayAlign: 'left' }); </script>")
+        stb.AppendLine("<script type='text/javascript' async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS_HTML'></script>")
+        stb.AppendLine("</head><section class='main'>")
+        stb.AppendLine("<div class='post'>")
+        stb.AppendLine(String.Format("<h1>{0}</h1><h2>{1}</h2>", Name, Description))
+        For Each p In Paragraphs.Reverse()
+            stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)"))
+        Next
+        stb.AppendLine("</div></section></html>")
+
+        Return stb.ToString()
+
+    End Function
 
 End Class

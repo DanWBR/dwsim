@@ -899,7 +899,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcFugCoeff", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity COefficient Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcFugCoeff", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
 
             Dim lnfug As Double()
 
