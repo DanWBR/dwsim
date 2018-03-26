@@ -4,6 +4,8 @@
 
     Public Shared CurrentSolutionID As String = ""
 
+    Public Shared CurrentItem As InspectorItem
+
     Public Shared Function GetNewInspectorItem() As InspectorItem
 
         If GlobalSettings.Settings.InspectorEnabled Then
@@ -18,17 +20,20 @@
 
     End Function
 
-    Public Shared Sub CheckAndAdd(ii As InspectorItem, callingmethod As String, method As String, name As String, description As String, Optional ownerID As String = "")
+    Public Shared Sub CheckAndAdd(ii As InspectorItem, callingmethod As String, method As String, name As String, description As String)
 
         If ii IsNot Nothing Then
-            Inspector.Host.Items.Add(ii)
             With ii
-                .OwnerID = ownerID
                 .CallingMethodName = callingmethod
                 .MethodName = method
                 .Name = name
                 .Description = description
             End With
+            If Host.CurrentItem IsNot Nothing Then
+                Host.CurrentItem.Items.Add(ii)
+            Else
+                Inspector.Host.Items.Add(ii)
+            End If
         End If
 
     End Sub
@@ -53,11 +58,9 @@ Public Class InspectorItem
 
     Public Property ThreadID As Integer = -1
 
-    Public Property OwnerID As String = ""
-
     Public Property StartTime As DateTime = DateTime.Now
 
-    Public Property EndTime As DateTime
+    Public Property Items As New List(Of InspectorItem)
 
     Sub New()
         ID = Guid.NewGuid().ToString()

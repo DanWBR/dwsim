@@ -265,7 +265,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PT", "PT Flash Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step", IObj?.ID)
+                Inspector.Host.CurrentItem = IObj
+
+                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PT", "PT Flash Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step")
 
                 IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 

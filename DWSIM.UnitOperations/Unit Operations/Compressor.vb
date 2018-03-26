@@ -155,7 +155,7 @@ Namespace UnitOperations
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
-            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, H2, cpig, cp, cv, mw As Double
+            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, P2i, Qi, H2, cpig, cp, cv, mw As Double
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
 
@@ -207,9 +207,29 @@ Namespace UnitOperations
 
                 CheckSpec(Me.DeltaQ, True, "power")
 
+                With esin
+                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                    .GraphicObject.Calculated = True
+                End With
+
                 Dim k As Double = cp / cv
 
-                P2 = Pi * ((1 + DeltaQ.GetValueOrDefault * (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+                P2i = Pi * ((1 + DeltaQ.GetValueOrDefault * (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+
+                Dim tmp As IFlashCalculationResult
+
+                'recalculate Q with P2i
+
+                Do
+
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
+                    Qi = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
+
+                    P2i *= DeltaQ.GetValueOrDefault / Qi
+
+                Loop Until Math.Abs((DeltaQ.GetValueOrDefault - Qi) / DeltaQ.GetValueOrDefault) < 0.01
+
+                P2 = P2i
 
                 If DebugMode Then AppendDebugLine(String.Format("Calculated outlet pressure: {0} Pa", P2))
 
@@ -222,7 +242,7 @@ Namespace UnitOperations
 
                 If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
-                Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
+                tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
 
                 If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
 
