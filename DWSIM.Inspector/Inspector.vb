@@ -87,8 +87,14 @@ Public Class InspectorItem
                             }
                         </style>")
         stb.AppendLine("<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>")
-        stb.AppendLine("<script type='text/x-mathjax-config'> MathJax.Hub.Config({ 'HTML-CSS': { scale: 100, linebreaks: { automatic: true } }, SVG: { linebreaks: { automatic:true } }, displayAlign: 'left' }); </script>")
-        stb.AppendLine("<script type='text/javascript' async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS_HTML'></script>")
+
+        If GlobalSettings.Settings.RunningPlatform = GlobalSettings.Settings.Platform.Windows Then
+            stb.AppendLine("<script type='text/javascript' async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=default'></script>")
+        Else
+            stb.AppendLine("<script type='text/x-mathjax-config'> MathJax.Hub.Config({ 'CommonHTML': { scale: 100, linebreaks: { automatic: true } }, SVG: { linebreaks: { automatic:true } }, displayAlign: 'left' }); </script>")
+            stb.AppendLine("<script type='text/javascript' async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML'></script>")
+        End If
+
         stb.AppendLine("</head><section class='main'>")
         stb.AppendLine("<div class='post'>")
         stb.AppendLine(String.Format("<h1>{0}</h1><h2>{1}</h2>", Name, Description))

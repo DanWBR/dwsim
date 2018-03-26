@@ -25,11 +25,10 @@ Public Class Window
         Dim SetsLabel = New Label With {.Text = "Available Solution Sets", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
         SetsLabel.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())
 
-        content.Rows.Add(New TableRow(SetsLabel))
-        content.Rows.Add(New TableRow(SetsBox))
-
         Dim leftcontainer, rightcontainer As New TableLayout
 
+        leftcontainer.Rows.Add(New TableRow(SetsLabel))
+        leftcontainer.Rows.Add(New TableRow(SetsBox))
         leftcontainer.Rows.Add(New Label With {.Text = "Items", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
         leftcontainer.Padding = New Padding(5, 5, 5, 5)
         leftcontainer.Spacing = New Size(10, 10)
@@ -58,7 +57,7 @@ Public Class Window
         Dim avsol As List(Of String) = Host.Items.Select(Of String)(Function(x) x.SolutionID).Distinct().ToList
 
         For Each item In avsol
-            SetsBox.Items.Add(New ListItem() With {.Text = Date.FromBinary(item).ToLongDateString(), .Key = item})
+            SetsBox.Items.Add(New ListItem() With {.Text = Date.FromBinary(item).ToString(), .Key = item})
         Next
 
         AddHandler SetsBox.SelectedIndexChanged,
@@ -72,7 +71,6 @@ Public Class Window
                     Dim titem = New TreeGridItem() With {.Values = {item.Name}, .Tag = item.ID}
                     tvc.Add(titem)
                     Dim nesteditems = GetItems(item)
-                    'nesteditems.Insert(0, item)
                     For Each item2 In nesteditems
                         Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeGridItem).Tag = item2.ParentID).FirstOrDefault
                         Dim titem2 = New TreeGridItem() With {.Values = {item2.Name}, .Tag = item2.ID}

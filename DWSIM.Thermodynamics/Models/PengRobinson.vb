@@ -376,6 +376,24 @@ Namespace PropertyPackages.Auxiliary
 
         Function H_PR_MIX_CPU(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), ByVal VMM As Double(), ByVal Hid As Double) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "Peng-Robinson EOS Fugacity Coefficient (CPU)", "Peng-Robinson EOS Fugacity Coefficient Calculation Routine")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Ideal Enthalpy (Ideal Gas State): {0} kJ/kg", Hid))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
+
             Dim n As Integer, R, Z, dadT As Double
             Dim i As Integer
 
@@ -421,9 +439,19 @@ Namespace PropertyPackages.Auxiliary
 
             Dim bm As Double = Vz.MultiplyY(bi).SumY
 
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
+
+            IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
+            IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
+
             Dim AG1 = am * P / (R * T) ^ 2
             Dim BG1 = bm * P / (R * T)
 
+            IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG1))
+
+            IObj?.SetCurrent()
             Dim _zarray As List(Of Double) = CalcZ2(AG1, BG1)
 
             If TIPO = "L" Then
@@ -432,7 +460,11 @@ Namespace PropertyPackages.Auxiliary
                 Z = _zarray.Max
             End If
 
+            IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
+
             Dim V = (Z * R * T / P) ' m3/mol
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>V</math_inline>: {0}", V))
 
             Dim tmp1 = MMm / V / 1000
 
@@ -447,9 +479,15 @@ Namespace PropertyPackages.Auxiliary
             Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / (8 ^ 0.5 * bm) * dadT * Math.Log((2 * Z + BG1 * (2 - 8 ^ 0.5)) / (2 * Z + BG1 * (2 + 8 ^ 0.5)))
             Dim DHres = DAres + T * (DSres) + R * T * (Z - 1)
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kmol", DHres))
+            IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kg", DHres / MMm))
+
             If MathEx.Common.Sum(Vz) = 0.0# Then
                 Return 0.0#
             Else
+                IObj?.Paragraphs.Add(String.Format("Calculated Total Enthalpy (Ideal + Departure): {0} kJ/kg", Hid + DHres / MMm))
                 Return Hid + DHres / MMm
             End If
 
