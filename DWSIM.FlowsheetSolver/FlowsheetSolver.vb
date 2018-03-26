@@ -460,7 +460,15 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             RaiseEvent CalculatingObject(myinfo)
 
             'fobj.UIThread(Sub() UpdateDisplayStatus(fobj, New String() {myinfo.Name}, True))
+
             Dim myobj = fbag.SimulationObjects(myinfo.Name)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.SetCurrent(Nothing)
+
+            IObj?.Paragraphs.Add("This is the main routine for the calculation of a single object. Check the nested items for model details.")
+
             Try
                 myobj.ErrorMessage = ""
                 If myobj.GraphicObject.Active Then
@@ -911,6 +919,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
     Public Shared Function SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False) As List(Of Exception)
 
         Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
+
+        If GlobalSettings.Settings.InspectorEnabled Then
+            GlobalSettings.Settings.EnableParallelProcessing = False
+            mode = 1
+        End If
 
         If GlobalSettings.Settings.CalculatorActivated Then
 

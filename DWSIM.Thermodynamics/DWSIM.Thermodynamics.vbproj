@@ -164,6 +164,7 @@
   <ItemGroup>
     <Import Include="DWSIM.ExtensionMethods" />
     <Import Include="DWSIM.GlobalSettings" />
+    <Import Include="DWSIM.Inspector" />
     <Import Include="DWSIM.MathOps" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />

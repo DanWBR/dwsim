@@ -137,12 +137,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     If VPc(i) > 0.0# Then
                         Vp(i) = VPc(i) * Exp(5.37 * (1 + Vw(i)) * (1 - VTc(i) / T))
                     Else
+                        IObj?.SetCurrent()
                         Vp(i) = PP.AUX_PVAPi(i, T)
                     End If
                 Next
                 Ki = Vp.MultiplyConstY(1 / P)
             Else
                 For i = 0 To n
+                    IObj?.SetCurrent()
                     Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = PrevKi(i)
                 Next
@@ -181,6 +183,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Abs(Pb - Pd) / Pb < 0.0000001 Then
                 'one comp only
+                IObj?.SetCurrent()
                 Px = PP.AUX_PVAPM(T)
                 If Px <= P Then
                     L = 1
@@ -263,13 +266,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Do
 
-                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+                IObj?.SetCurrent()
 
-                Inspector.Host.CurrentItem = IObj
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
                 Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PT", "PT Flash Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step")
 
                 IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                IObj2?.SetCurrent()
 
                 Ki_ant = Ki.Clone
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)

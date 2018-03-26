@@ -327,7 +327,7 @@ Namespace Streams
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Material Stream"), "Material Stream Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Material Stream"), "Material Stream Calculation Routine", True)
 
             IObj?.Paragraphs.Add("The Material Stream Calculation routine is responsible to calculate the phase distribution and its properties according to the specifications.")
 
@@ -473,6 +473,8 @@ Namespace Streams
 
                         IObj?.Paragraphs.Add("<math>W = \rho Q</math>")
 
+                        IObj?.SetCurrent()
+
                         .DW_CalcOverallDensity()
 
                         IObj?.Paragraphs.Add(String.Format("Specified Volumetric Flow: {0} m3/s", QV.GetValueOrDefault))
@@ -484,6 +486,8 @@ Namespace Streams
                         If DebugMode Then AppendDebugLine(String.Format("Calculated mass flow: {0} kg/s", Me.Phases(0).Properties.massflow.GetValueOrDefault))
 
                         IObj?.Paragraphs.Add(String.Format("Calculated Mass Flow: {0} kg/s", Phases(0).Properties.massflow.GetValueOrDefault))
+
+                        IObj?.SetCurrent()
 
                         .DW_CalcVazaoMolar()
 
@@ -570,36 +574,42 @@ Namespace Streams
                     Else
                         If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
                             IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 1'...")
+                            IObj?.SetCurrent()
                             .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                         Else
                             .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                         End If
                         If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
                             IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 2'...")
+                            IObj?.SetCurrent()
                             .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
                         Else
                             .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
                         End If
                         If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
                             IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 3'...")
+                            IObj?.SetCurrent()
                             .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
                         Else
                             .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
                         End If
                         If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
                             IObj?.Paragraphs.Add("Calculating properties of Phase 'Aqueous'...")
+                            IObj?.SetCurrent()
                             .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
                         Else
                             .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
                         End If
                         If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
                             IObj?.Paragraphs.Add("Calculating properties of Phase 'Solid'...")
+                            IObj?.SetCurrent()
                             .DW_CalcSolidPhaseProps()
                         Else
                             .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
                         End If
                         If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
                             IObj?.Paragraphs.Add("Calculating properties of Phase 'Vapor'...")
+                            IObj?.SetCurrent()
                             .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                         Else
                             .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
@@ -608,11 +618,17 @@ Namespace Streams
 
                     IObj?.Paragraphs.Add("Additional (new) properties like Bulk Modulus and Speed of Sound are calculated in a separate step.")
 
+                    IObj?.SetCurrent()
+
                     'calculate additional properties
                     .CalcAdditionalPhaseProperties()
 
-                    'process overriden properties (single phase)
+                    IObj?.SetCurrent()
+
+                    'process overridden properties (single phase)
                     .ProcessOverridenProperties(PhaseType.SinglePhase)
+
+                    IObj?.SetCurrent()
 
                     If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
                         .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
@@ -622,38 +638,55 @@ Namespace Streams
                         .DW_CalcLiqMixtureProps()
                     End If
 
-                    'process overriden properties (liquid mix)
+                    'process overridden properties (liquid mix)
                     .ProcessOverridenProperties(PhaseType.LiquidMixture)
 
-                    If DebugMode Then AppendDebugLine(String.Format("Phase properties calculated succesfully."))
+                    If DebugMode Then AppendDebugLine(String.Format("Phase properties calculated successfully."))
 
                     Select Case foption
                         Case 0, 1
+                            IObj?.SetCurrent()
                             .DW_CalcCompMolarFlow(-1)
+                            IObj?.SetCurrent()
                             .DW_CalcCompMassFlow(-1)
+                            IObj?.SetCurrent()
                             .DW_CalcCompVolFlow(-1)
+                            IObj?.SetCurrent()
                             .DW_CalcOverallProps()
+                            IObj?.SetCurrent()
                             .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
+                            IObj?.SetCurrent()
                             .DW_CalcVazaoVolumetrica()
+                            IObj?.SetCurrent()
                             .DW_CalcKvalue()
                         Case 2
                             'Me.Phases(0).Properties.massflow = QV * Me.Phases(0).Properties.density.GetValueOrDefault
                             '.DW_CalcVazaoMolar()
+                            IObj?.SetCurrent()
                             .DW_CalcCompMolarFlow(-1)
+                            IObj?.SetCurrent()
                             .DW_CalcCompMassFlow(-1)
+                            IObj?.SetCurrent()
                             .DW_CalcCompVolFlow(-1)
+                            IObj?.SetCurrent()
                             .DW_CalcOverallProps()
+                            IObj?.SetCurrent()
                             .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
+                            IObj?.SetCurrent()
                             .DW_CalcKvalue()
                     End Select
 
-                    'process overriden properties (overall)
+                    IObj?.SetCurrent()
+
+                    'process overridden properties (overall)
                     .ProcessOverridenProperties(PhaseType.Overall)
+
+                    IObj?.SetCurrent()
 
                     'calculate molar concentrations
                     .DW_CalcConcentrations()
 
-                    If DebugMode Then AppendDebugLine(String.Format("Material Stream calculated succesfully."))
+                    If DebugMode Then AppendDebugLine(String.Format("Material Stream calculated successfully."))
 
                 End If
 

@@ -901,6 +901,8 @@ Namespace PropertyPackages
 
             Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcFugCoeff", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
 
+            IObj?.SetCurrent()
+
             Dim lnfug As Double()
 
             If st = State.Liquid Then

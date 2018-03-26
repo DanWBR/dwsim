@@ -331,6 +331,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFug", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
 
+            IObj?.SetCurrent()
+
             If Settings.EnableGPUProcessing Then
                 IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the GPU.")
                 Return CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
@@ -430,6 +432,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim _zarray As List(Of Double), _mingz As Object, Z As Double
 
+            IObj?.SetCurrent()
+
             _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
             If _zarray.Count = 0 Then
                 Dim ex As New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
@@ -444,6 +448,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Z = Common.Max(_zarray.ToArray())
                 End If
             Else
+                IObj?.SetCurrent()
                 _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, Tc, Pc, w)
                 Z = _zarray(_mingz(0))
             End If

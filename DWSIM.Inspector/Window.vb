@@ -68,9 +68,20 @@ Public Class Window
 
                 Dim tvc As New TreeGridItemCollection()
 
-                For Each item In sitems
+                For Each item In sitems.Where(Function(x) x.ParentID = -1)
                     Dim titem = New TreeGridItem() With {.Values = {item.Name}, .Tag = item.ID}
                     tvc.Add(titem)
+                    Dim nesteditems = GetItems(item)
+                    'nesteditems.Insert(0, item)
+                    For Each item2 In nesteditems
+                        Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeGridItem).Tag = item2.ParentID).FirstOrDefault
+                        Dim titem2 = New TreeGridItem() With {.Values = {item2.Name}, .Tag = item2.ID}
+                        If parent Is Nothing Then
+                            tvc.Add(titem2)
+                        Else
+                            DirectCast(parent, TreeGridItem).Children.Add(titem2)
+                        End If
+                    Next
                 Next
 
                 itemSelector.DataStore = tvc
@@ -81,7 +92,8 @@ Public Class Window
             Sub(sender, e)
 
                 If itemSelector.SelectedItem IsNot Nothing Then
-                    Dim sitem = Host.Items.Where(Function(x) x.ID = DirectCast(itemSelector.SelectedItem, TreeGridItem).Tag.ToString).FirstOrDefault
+                    Dim nesteditems = GetItems(Host.Items.ToList)
+                    Dim sitem = nesteditems.Where(Function(x) x.ID = DirectCast(itemSelector.SelectedItem, TreeGridItem).Tag.ToString).FirstOrDefault
                     currentItemViewer.LoadHtml(sitem.GetHTML())
                 End If
 
@@ -91,6 +103,44 @@ Public Class Window
 
     End Function
 
+    Public Shared Function GetItems(ByVal list As List(Of InspectorItem)) As List(Of InspectorItem)
+        Dim myItems As List(Of InspectorItem) = New List(Of InspectorItem)()
+        For Each i As InspectorItem In list
+            GetInspectorItems(i, myItems)
+        Next
 
+        Return myItems
+    End Function
+
+    Public Shared Function GetItems(ByVal iitem As InspectorItem) As List(Of InspectorItem)
+        Dim myItems As List(Of InspectorItem) = New List(Of InspectorItem)()
+        For Each i As InspectorItem In iitem.Items
+            GetInspectorItems(i, myItems)
+        Next
+
+        Return myItems
+    End Function
+
+    Private Shared Sub GetInspectorItems(ByVal item As InspectorItem, ByVal items As List(Of InspectorItem))
+        items.Add(item)
+        For Each i As InspectorItem In item.Items
+            GetInspectorItems(i, items)
+        Next
+    End Sub
+
+    Public Shared Function GetAllTreeItems(ByVal iitem As TreeGridItemCollection) As List(Of TreeGridItem)
+        Dim myItems As List(Of TreeGridItem) = New List(Of TreeGridItem)()
+        For Each i As TreeGridItem In iitem
+            GetTreeItems(i, myItems)
+        Next
+        Return myItems
+    End Function
+
+    Private Shared Sub GetTreeItems(ByVal item As TreeGridItem, ByVal items As List(Of TreeGridItem))
+        items.Add(item)
+        For Each i As TreeGridItem In item.Children
+            GetTreeItems(i, items)
+        Next
+    End Sub
 
 End Class

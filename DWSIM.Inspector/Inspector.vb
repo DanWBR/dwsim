@@ -1,26 +1,28 @@
 ﻿Public Class Host
 
-    Public Shared Items As New Concurrent.ConcurrentBag(Of InspectorItem)
+    Public Shared Items As New List(Of InspectorItem)
 
     Public Shared CurrentSolutionID As String = ""
 
     Public Shared CurrentItem As InspectorItem
 
+    Public Shared Sub SetCurrent(ii As InspectorItem)
+
+        CurrentItem = ii
+
+    End Sub
+
     Public Shared Function GetNewInspectorItem() As InspectorItem
 
         If GlobalSettings.Settings.InspectorEnabled Then
-
             Return New Inspector.InspectorItem
-
         Else
-
             Return Nothing
-
         End If
 
     End Function
 
-    Public Shared Sub CheckAndAdd(ii As InspectorItem, callingmethod As String, method As String, name As String, description As String)
+    Public Shared Sub CheckAndAdd(ii As InspectorItem, callingmethod As String, method As String, name As String, description As String, Optional current As Boolean = False)
 
         If ii IsNot Nothing Then
             With ii
@@ -30,12 +32,14 @@
                 .Description = description
             End With
             If Host.CurrentItem IsNot Nothing Then
+                ii.ParentID = Host.CurrentItem.ID
                 Host.CurrentItem.Items.Add(ii)
             Else
+                ii.ParentID = -1
                 Inspector.Host.Items.Add(ii)
             End If
+            If current Then Inspector.Host.CurrentItem = ii
         End If
-
     End Sub
 
 End Class
@@ -43,6 +47,8 @@ End Class
 Public Class InspectorItem
 
     Public Property ID As String = ""
+
+    Public Property ParentID As String = ""
 
     Public Property Name As String = ""
 
@@ -96,3 +102,15 @@ Public Class InspectorItem
     End Function
 
 End Class
+
+Public Module InspectorExtensions
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Sub SetCurrent(ii As InspectorItem)
+
+        Inspector.Host.CurrentItem = ii
+
+    End Sub
+
+
+End Module
