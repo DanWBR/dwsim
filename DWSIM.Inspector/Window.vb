@@ -58,13 +58,13 @@ Public Class Window
         Dim avsol As List(Of String) = Host.Items.Select(Of String)(Function(x) x.SolutionID).Distinct().ToList
 
         For Each item In avsol
-            SetsBox.Items.Add(item)
+            SetsBox.Items.Add(New ListItem() With {.Text = Date.FromBinary(item).ToLongDateString(), .Key = item})
         Next
 
         AddHandler SetsBox.SelectedIndexChanged,
             Sub(sender, e)
 
-                Dim sitems = Host.Items.Where(Function(x) x.SolutionID = SetsBox.SelectedValue.ToString).ToList
+                Dim sitems = Host.Items.Where(Function(x) x.SolutionID = SetsBox.SelectedKey.ToString).ToList
 
                 Dim tvc As New TreeGridItemCollection()
 

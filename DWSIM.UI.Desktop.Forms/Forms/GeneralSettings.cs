@@ -104,7 +104,7 @@ namespace DWSIM.UI.Forms.Forms
             tab2.CreateAndAddCheckBoxRow("BreakOnException".Localize(prefix), Settings.SolverBreakOnException, (CheckBox sender, EventArgs obj) => { Settings.SolverBreakOnException = sender.Checked.GetValueOrDefault(); });
             tab2.CreateAndAddDescriptionRow("If activated, the solver won't calculate the rest of the flowsheet if an error occurs during the calculation of an intermediate block/object.");
 
-            tab2.CreateAndAddLabelRow("Solution Inspector".Localize(prefix));
+            tab2.CreateAndAddLabelRow("Solution Inspector");
             tab2.CreateAndAddCheckBoxRow("Enable Solution Inspector", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
 
             var tab3 = Common.GetDefaultContainer();
