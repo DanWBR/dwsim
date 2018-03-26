@@ -229,10 +229,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             V = Vmin + (Vmax - Vmin) / 2
             'V = (P - Pd) / (Pb - Pd)
 
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for V: ", V))
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for L (1-V): ", L))
-
             L = 1 - V
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for V: {0}", V))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for L (1-V): {0}", L))
 
             If n = 0 Then
                 If Vp(0) <= P Then
@@ -265,8 +265,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim converged As Integer = 0
             Dim F, dF, e1, e2, e3 As Double
 
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: ", Vy.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: ", Vx.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToArrayString))
 
             Do
 
@@ -680,6 +680,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Paragraphs.Add(String.Format("Calculated Dew Temperature: {0} K", Td))
 
+            IObj?.Paragraphs.Add(String.Format("Bubble Point Enthalpy Error (Spec - Calculated): {0}", Hb))
+
+            IObj?.Paragraphs.Add(String.Format("Dew Point Enthalpy Error (Spec - Calculated): {0}", Hd))
+
             If Hb > 0 And Hd < 0 Then
 
                 IObj?.Paragraphs.Add(String.Format("Enthalpy at Bubble Point is lower than spec. Requires partial evaporation."))
@@ -705,9 +709,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     V = V1 + (V2 - V1) * (0 - H1) / (H2 - H1)
                     If V < 0 Then V = 0.0#
                     If V > 1 Then V = 1.0#
+                    IObj?.Paragraphs.Add(String.Format("Updated Vapor Fraction estimate: {0}", V))
                     IObj?.SetCurrent()
                     resultFlash = Herror("PV", V, P, Vz, PP)
                     H1 = resultFlash(0)
+                    IObj?.Paragraphs.Add(String.Format("Enthalpy Error (Spec - Calculated): {0}", H1))
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
                 T = resultFlash(1)
@@ -737,8 +743,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent()
                     H2 = Hf - PP.DW_CalcEnthalpy(Vz, T2, P, State.Vapor)
                     T = T1 + (T2 - T1) * (0 - H1) / (H2 - H1)
+                    IObj?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", T))
                     IObj?.SetCurrent()
                     H1 = Hf - PP.DW_CalcEnthalpy(Vz, T, P, State.Vapor)
+                    IObj?.Paragraphs.Add(String.Format("Enthalpy Error (Spec - Calculated): {0}", H1))
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
                 L = 0
@@ -775,9 +783,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent()
                     H2 = Herror("PT", T2, P, Vz, PP)(0)
                     T = T1 + (T2 - T1) * (0 - H1) / (H2 - H1)
+                    IObj?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", T))
                     IObj?.SetCurrent()
                     resultFlash = Herror("PT", T, P, Vz, PP)
                     H1 = resultFlash(0)
+                    IObj?.Paragraphs.Add(String.Format("Enthalpy Error (Spec - Calculated): {0}", H1))
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
                 V = 0

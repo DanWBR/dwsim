@@ -349,6 +349,33 @@ Namespace PropertyPackages.ThermoPlugs
 
             Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "Peng-Robinson EOS Fugacity Coefficient (CPU)", "Peng-Robinson EOS Fugacity Coefficient Calculation Routine")
 
+            IObj?.Paragraphs.Add("The Peng-Robinson equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
+                                    which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
+                                    equations are, in fact, The simplest equations capable of representing The behavior of liquid And vapor phases simultaneously.
+                                    The Peng-Robinson EOS is written in the following form")
+            IObj?.Paragraphs.Add("<math>P=\frac{RT}{(V-b)}-\frac{a(T)}{V(V+b)+b(V-b)}<math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>P</math_inline> pressure")
+            IObj?.Paragraphs.Add("<math_inline>R</math_inline> ideal gas universal constant")
+            IObj?.Paragraphs.Add("<math_inline>v</math_inline> molar volume")
+            IObj?.Paragraphs.Add("<math_inline>b</math_inline> parameter related to hard-sphere volume")
+            IObj?.Paragraphs.Add("<math_inline>a</math_inline> parameter related to intermolecular forces")
+            IObj?.Paragraphs.Add("For pure substances, the a and b parameters are given by:")
+            IObj?.Paragraphs.Add("<math>a(T)=[1+(0.37464+1.54226\omega-0.26992\omega^{2})(1-T_{r}^{(1/2)})]^{2}0.45724(R^{2}T_{c}^{2})/P_{c}</math>")
+            IObj?.Paragraphs.Add("<math>b=0.07780(RT_{c})/P_{c}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>\omega</math_inline> acentric factor")
+            IObj?.Paragraphs.Add("<math_inline>T_{c}</math_inline> critical temperature ")
+            IObj?.Paragraphs.Add("<math_inline>P_{c}</math_inline> critical pressure")
+            IObj?.Paragraphs.Add("<math_inline>T_{r}</math_inline> reduced temperature, T/Tc")
+            IObj?.Paragraphs.Add("For mixtures, the above equation can be used, replacing a and b by mixture-representative values. Mixture a and b values are normally given by the basic mixing rule,")
+            IObj?.Paragraphs.Add("<math>a_{m}=\sum_{i}\sum_{j}x_{i}x_{j}\sqrt{(a_{i}a_{j})}(1-k_{ij})</math>")
+            IObj?.Paragraphs.Add("<math>b_{m}=\sum_{i}x_{i}b_{i}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>x_{i,j}</math_inline> molar fraction of the i Or j component in the phase (liquid Or vapor)")
+            IObj?.Paragraphs.Add("<math_inline>a_{i,j}</math_inline> i Or j component a constant ")
+            IObj?.Paragraphs.Add("<math_inline>b_{i,j}</math_inline> i Or j component b constant")
+            IObj?.Paragraphs.Add("<math_inline>k_{ij}</math_inline> binary interaction parameter which characterizes the i-j pair")
             IObj?.Paragraphs.Add("The fugacity coefficient obtained with the Peng-Robinson EOS in given by")
             IObj?.Paragraphs.Add("<math>\ln\frac{f_{i}}{x_{i}P}=\frac{b_{i}}{b_{m}}\left(Z-1\right)-\ln\left(Z-B\right)-\frac{A}{2\sqrt{2}B}\left(\frac{\sum_{k}x_{k}a_{ki}}{a_{m}}-\frac{b_{i}}{b_{m}}\right)\ln\left(\frac{Z+2,414B}{Z-0,414B}\right),</math>")
             IObj?.Paragraphs.Add("where Z Is the phase compressibility factor (liquid or vapor) and can be obtained from the equation")
@@ -395,14 +422,14 @@ Namespace PropertyPackages.ThermoPlugs
             If Settings.EnableParallelProcessing Then
                 Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     alpha(ii) = (1 + (0.37464 + 1.54226 * W(ii) - 0.26992 * W(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
+                                                     alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
                                                      ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
                                                      bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
                                                  End Sub)
             Else
                 i = 0
                 Do
-                    alpha(i) = (1 + (0.37464 + 1.54226 * W(i) - 0.26992 * W(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                    alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
                     ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
                     bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     i = i + 1
@@ -692,6 +719,28 @@ Namespace PropertyPackages.ThermoPlugs
 
         Shared Function CalcZ(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double()) As List(Of Double)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcZ", "Peng-Robinson EOS Compressibility Factor", "Peng-Robinson EOS Compressibility Factor Calculation Routine")
+
+            IObj?.Paragraphs.Add("The compressibility factor (liquid or vapor) can be obtained from the equation")
+            IObj?.Paragraphs.Add("<math>Z^ {3} - (1 - b)Z^{2}+(A-3B^{2}-2B)Z-(AB-B^{2}-2B)=0,</math>")
+            IObj?.Paragraphs.Add("<math>A =\frac{a_{m}P}{R^{2}T^{2}}</math>")
+            IObj?.Paragraphs.Add("<math>B =\frac{b_{m}P}{RT}</math>")
+            IObj?.Paragraphs.Add("<math>Z =\frac{PV}{RT}</math>")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
+
             Dim n As Integer, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
 
@@ -742,6 +791,15 @@ Namespace PropertyPackages.ThermoPlugs
             Dim AG = aml * P / (R * T) ^ 2
             Dim BG = bml * P / (R * T)
 
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
+
+            IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
+            IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG))
+
             coeff(0) = -AG * BG + BG ^ 2 + BG ^ 3
             coeff(1) = AG - 3 * BG ^ 2 - 2 * BG
             coeff(2) = BG - 1
@@ -789,6 +847,11 @@ Namespace PropertyPackages.ThermoPlugs
             If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
             If temp1(1, 1) = 0.0# And temp1(1, 0) > 0.0# Then result.Add(temp1(1, 0))
             If temp1(2, 1) = 0.0# And temp1(2, 0) > 0.0# Then result.Add(temp1(2, 0))
+
+            IObj?.Paragraphs.Add(String.Format("Found {0} roots for the cubic equation.", result.Count))
+            For Each item In result
+                IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", item))
+            Next
 
             Return result
 

@@ -268,6 +268,12 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
             Dim Ti1, Ti2, w1, w2, A, Tc1, Th1, Wc, Wh, P1, P2, Th2, Tc2, U As Double
             Dim Pc1, Ph1, Pc2, Ph2, DeltaHc, DeltaHh, H1, H2, Hc1, Hh1, Hc2, Hh2, CPC, CPH As Double
             Dim StIn0, StIn1, StOut0, StOut1, StInCold, StInHot, StOutHot, StOutCold As MaterialStream
@@ -350,7 +356,9 @@ Namespace UnitOperations
             tmpstr.PropertyPackage.CurrentMaterialStream = tmpstr
             tmpstr.Phases("0").Properties.temperature = Tc1
             tmpstr.Phases("0").Properties.pressure = Ph2
+            IObj?.SetCurrent()
             tmpstr.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
+            IObj?.SetCurrent()
             tmpstr.Calculate(False, True)
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHh = Wh * (Hh1 - HHx) 'kW
@@ -362,7 +370,9 @@ Namespace UnitOperations
             tmpstr.PropertyPackage.CurrentMaterialStream = tmpstr
             tmpstr.Phases("0").Properties.temperature = Th1
             tmpstr.Phases("0").Properties.pressure = Pc2
+            IObj?.SetCurrent()
             tmpstr.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
+            IObj?.SetCurrent()
             tmpstr.Calculate(False, True)
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHc = Wc * (HHx - Hc1) 'kW
@@ -414,6 +424,7 @@ Namespace UnitOperations
                             tmpstr.Phases(0).Properties.enthalpy = Hc1 + i / nsteps * dhc
                             tmpstr.Phases(0).Properties.pressure = Pc1 - i / nsteps * ColdSidePressureDrop
                             tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                            IObj?.SetCurrent()
                             tmpstr.Calculate(True, True)
 
                             qprof.Add(i / nsteps * dhc * Wc)
@@ -430,6 +441,7 @@ Namespace UnitOperations
                             tmpstr.Phases(0).Properties.enthalpy = Hh1 - i / nsteps * dhc
                             tmpstr.Phases(0).Properties.pressure = Ph1 - i / nsteps * HotSidePressureDrop
                             tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                            IObj?.SetCurrent()
                             tmpstr.Calculate(True, True)
 
                             thprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
@@ -489,6 +501,7 @@ Namespace UnitOperations
                     Hh2 = Hh1 + DeltaHh
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
+                    IObj?.SetCurrent()
                     tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, 0)
                     Th2 = tmp.CalculatedTemperature
                     If DebugMode Then AppendDebugLine(String.Format("Calculated hot stream outlet temperature T2 = {0} K", Th2))
@@ -529,12 +542,14 @@ Namespace UnitOperations
                         Hc2 = Qi / Wc + Hc1
                         Hh2 = Hh1 - Qi / Wh
                         StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+                        IObj?.SetCurrent()
                         tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
                         Tc2 = tmp.CalculatedTemperature
                         PIc2 = (1 + tmp.GetLiquidPhase1MoleFraction) * (1 + tmp.GetVaporPhaseMoleFraction * (1 + tmp.GetSolidPhaseMoleFraction)) 'phase indicator cold stream
                         If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]  ===> Tc2 = {2} K", Pc2, Hc2, Tc2))
 
                         StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                        IObj?.SetCurrent()
                         tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
                         Th2 = tmp.CalculatedTemperature
                         PIh2 = (1 + tmp.GetLiquidPhase1MoleFraction) * (1 + tmp.GetVaporPhaseMoleFraction * (1 + tmp.GetSolidPhaseMoleFraction)) 'phase indicator hot stream
@@ -626,6 +641,7 @@ Namespace UnitOperations
                     StInCold.PropertyPackage.CurrentMaterialStream = StInCold
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
+                    IObj?.SetCurrent()
                     Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc1)
                     Tc2 = tmp.CalculatedTemperature
                     Hh2 = Hh1 + DeltaHh
@@ -634,6 +650,7 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Calculated cold stream outlet temperature T2 = {0} K", Tc2))
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
 
+                    IObj?.SetCurrent()
                     tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th1)
                     Th2 = tmp.CalculatedTemperature
 
@@ -657,6 +674,7 @@ Namespace UnitOperations
 
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate hot stream outlet enthalpy... P = {0} Pa, T = K", Ph2, Th2))
+                    IObj?.SetCurrent()
                     Dim tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Ph2, Th2, 0.0#)
                     Hh2 = tmp.CalculatedEnthalpy
                     Q = -Wh * (Hh2 - Hh1)
@@ -665,6 +683,7 @@ Namespace UnitOperations
                     Hc2 = Hc1 + DeltaHc
                     StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
+                    IObj?.SetCurrent()
                     tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc1)
                     Tc2 = tmp.CalculatedTemperature
                     If DebugMode Then AppendDebugLine(String.Format("Calculated cold stream outlet temperature T2 = {0} K", Tc2))
@@ -685,12 +704,14 @@ Namespace UnitOperations
                     Tc2 = TempColdOut
                     StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate cold stream outlet enthalpy... P = {0} Pa, T = K", Pc2, Tc2))
+                    IObj?.SetCurrent()
                     Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                     Hc2 = tmp.CalculatedEnthalpy
                     Q = Wc * (Hc2 - Hc1)
                     DeltaHh = -Q / Wh
                     Hh2 = Hh1 + DeltaHh
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                    IObj?.SetCurrent()
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
                     tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th1)
                     Th2 = tmp.CalculatedTemperature
@@ -714,6 +735,7 @@ Namespace UnitOperations
                             Tc2 = TempColdOut
                             StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                             If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate cold stream outlet enthalpy... P = {0} Pa, T = {1} K", Pc2, Tc2))
+                            IObj?.SetCurrent()
                             Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                             Hc2 = tmp.CalculatedEnthalpy
                             Q = Wc * (Hc2 - Hc1)
@@ -721,6 +743,7 @@ Namespace UnitOperations
                             Hh2 = Hh1 + DeltaHh
                             StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                             If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
+                            IObj?.SetCurrent()
                             tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, 0)
                             Th2 = tmp.CalculatedTemperature
                             If DebugMode Then AppendDebugLine(String.Format("Calculated hot stream outlet temperature T2 = {0} K", Th2))
@@ -728,6 +751,7 @@ Namespace UnitOperations
                             Th2 = TempHotOut
                             StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                             If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate hot stream outlet enthalpy... P = {0} Pa, T = {1} K", Ph2, Th2))
+                            IObj?.SetCurrent()
                             Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Ph2, Th2, 0)
                             Hh2 = tmp.CalculatedEnthalpy
                             Q = -Wh * (Hh2 - Hh1)
@@ -735,6 +759,7 @@ Namespace UnitOperations
                             Hc2 = Hc1 + DeltaHc
                             StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                             If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
+                            IObj?.SetCurrent()
                             tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, 0)
                             Tc2 = tmp.CalculatedTemperature
                             If DebugMode Then AppendDebugLine(String.Format("Calculated cold stream outlet temperature T2 = {0} K", Tc2))
@@ -837,6 +862,7 @@ Namespace UnitOperations
                         Thm = (Th1 - Th2) / 2 + Th2
                         '4, 5
                         StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+                        IObj?.SetCurrent()
                         Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                         Hc2 = tmp.CalculatedEnthalpy
                         Q = Wc * (Hc2 - Hc1)
@@ -845,22 +871,27 @@ Namespace UnitOperations
                         tms.Phases(0).Properties.temperature = Tcm
                         With tms.PropertyPackage
                             .CurrentMaterialStream = tms
+                            IObj?.SetCurrent()
                             .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             If tms.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                IObj?.SetCurrent()
                                 .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                             Else
                                 .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                IObj?.SetCurrent()
                                 .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                             Else
                                 .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And tms.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
+                                IObj?.SetCurrent()
                                 .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                             Else
                                 .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                             End If
+                            IObj?.SetCurrent()
                             tms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                         End With
                         rhoc = tms.Phases(0).Properties.density.GetValueOrDefault
@@ -873,25 +904,29 @@ Namespace UnitOperations
                         tms.PropertyPackage.CurrentMaterialStream = tms
                         With tms.PropertyPackage
                             .CurrentMaterialStream = tms
+                            IObj?.SetCurrent()
                             .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             If tms.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                IObj?.SetCurrent()
                                 .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                             Else
                                 .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                IObj?.SetCurrent()
                                 .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                             Else
                                 .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And tms.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
+                                IObj?.SetCurrent()
                                 .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                             Else
                                 .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                             End If
+                            IObj?.SetCurrent()
                             tms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                         End With
-                        tms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                         rhoh = tms.Phases(0).Properties.density.GetValueOrDefault
                         CPH = tms.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
                         kh = tms.Phases(0).Properties.thermalConductivity.GetValueOrDefault
@@ -1203,11 +1238,13 @@ Namespace UnitOperations
                             Hc2 = Hc1 + DeltaHc
                             Hh2 = Hh1 + DeltaHh
                             StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+                            IObj?.SetCurrent()
                             tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
                             Tc2_ant = Tc2
                             Tc2 = tmp.CalculatedTemperature
                             Tc2 = 0.1 * Tc2 + 0.9 * Tc2_ant
                             StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                            IObj?.SetCurrent()
                             tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
                             Th2_ant = Th2
                             Th2 = tmp.CalculatedTemperature

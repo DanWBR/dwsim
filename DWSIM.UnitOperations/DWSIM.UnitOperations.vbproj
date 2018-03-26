@@ -169,6 +169,7 @@
     <Import Include="DWSIM.DrawingTools" />
     <Import Include="DWSIM.ExtensionMethods" />
     <Import Include="DWSIM.GlobalSettings" />
+    <Import Include="DWSIM.Inspector" />
     <Import Include="DWSIM.Interfaces" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
