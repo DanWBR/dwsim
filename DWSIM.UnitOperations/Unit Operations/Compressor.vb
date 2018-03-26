@@ -227,7 +227,7 @@ Namespace UnitOperations
 
                     P2i *= DeltaQ.GetValueOrDefault / Qi
 
-                Loop Until Math.Abs((DeltaQ.GetValueOrDefault - Qi) / DeltaQ.GetValueOrDefault) < 0.01
+                Loop Until Math.Abs((DeltaQ.GetValueOrDefault - Qi) / DeltaQ.GetValueOrDefault) < 0.001
 
                 P2 = P2i
 
@@ -616,6 +616,8 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                     str.AppendLine("    Pressure increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.deltaP)
                 Case CalculationMode.OutletPressure
                     str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.pressure)
+                Case CalculationMode.PowerRequired, CalculationMode.EnergyStream
+                    str.AppendLine("   Power Required: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.heatflow)
             End Select
             str.AppendLine("    Efficiency: " & Convert.ToDouble(EficienciaAdiabatica).ToString(numberformat, ci))
             str.AppendLine()
@@ -636,11 +638,13 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
         Public Overrides Function GetPropertyDescription(p As String) As String
             If p.Equals("Calculation Mode") Then
-                Return "Select the variable to specify for the calculation of the Compressor/Expander."
+                Return "Select the variable to specify for the calculation of the Compressor."
             ElseIf p.Equals("Pressure Increase") Then
                 Return "If you chose the 'Pressure Variation' calculation mode, enter the desired value for the pressure increase."
             ElseIf p.Equals("Outlet Pressure") Then
-                Return "If you chose the 'Outlet Pressure' calculation mode, enter the desired outlet pressure. Expansion or compression will be calculated accordingly."
+                Return "If you chose the 'Outlet Pressure' calculation mode, enter the desired outlet pressure."
+            ElseIf p.Equals("Power Required") Then
+                Return "If you chose the 'Power Required' calculation mode, enter the desired required compressor power."
             ElseIf p.Equals("Efficiency (%)") Then
                 Return "Enter the isentropic efficiency of the compressor. 100% efficiency means a totally isentropic process."
             Else
