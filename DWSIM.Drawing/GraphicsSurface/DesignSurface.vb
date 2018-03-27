@@ -101,7 +101,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private m_ShowGrid As Boolean = True
     Private m_NonPrintingAreaColor As Color = Color.Gray
     Private m_GridColor As Color = Color.LightBlue
-    Private m_GridSize As Single = 100
+    Private m_GridSize As Single = 50
     Private m_GridLineWidth As Integer = 1
     Private m_MarginLineWidth As Integer = 1
     Private m_MarginColor As Color = Color.Green
@@ -401,8 +401,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public Overridable Sub DrawGrid(ByVal g As Graphics)
         Dim bounds As Rectangle
-        Dim horizGridSize As Integer = ConvertToHPixels(GridSize / 100) * Me.Zoom
-        Dim vertGridSize As Integer = ConvertToVPixels(GridSize / 100) * Me.Zoom
+        Dim horizGridSize As Integer = ConvertToHPixels(GridSize / 100) '* Me.Zoom
+        Dim vertGridSize As Integer = ConvertToVPixels(GridSize / 100) '* Me.Zoom
         bounds = ConvertToPixels(SurfaceBounds)
         bounds = ZoomRectangle(bounds)
         If Me.AutoScrollMinSize.Height <> bounds.Height _
@@ -1098,8 +1098,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             draggingfs = False
 
             If dragging And SnapToGrid Then
-                Dim horizGridSize As Integer = ConvertToHPixels(GridSize / 100) * Me.Zoom
-                Dim vertGridSize As Integer = ConvertToVPixels(GridSize / 100) * Me.Zoom
+                Dim horizGridSize As Integer = ConvertToHPixels(GridSize / 100) '* Me.Zoom
+                Dim vertGridSize As Integer = ConvertToVPixels(GridSize / 100) '* Me.Zoom
                 Dim bounds As Rectangle = ConvertToPixels(SurfaceBounds)
                 bounds = ZoomRectangle(bounds)
                 Dim oc As Point

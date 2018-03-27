@@ -172,6 +172,7 @@ Public Class FormFlowsheet
         Me.tsbSimultAdjustSolver.Checked = Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled
 
         Me.FormSurface.ToolStripButton16.Checked = Me.Options.FlowsheetSnapToGrid
+        Me.FormSurface.FlowsheetDesignSurface.SnapToGrid = Me.Options.FlowsheetSnapToGrid
         Me.FormSurface.ToolStripButton17.Checked = Me.Options.FlowsheetQuickConnect
 
         If Me.ScriptCollection Is Nothing Then Me.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
