@@ -203,17 +203,17 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Calculator.WriteToConsole("PR cubic equation root finder (Z) for T = " & T & " K, P = " & P & " Pa and Phase = " & TIPO, 3)
-            Calculator.WriteToConsole("Mole fractions: " & DirectCast(Vx, Double()).ToArrayString, 3)
+            Calculator.WriteToConsole("Mole fractions: " & DirectCast(Vx, Double()).ToMathArrayString, 3)
 
             Dim n, R, coeff(3) As Double
 
@@ -259,8 +259,8 @@ Namespace PropertyPackages.Auxiliary
                 i = i + 1
             Loop Until i = n + 1
 
-            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
-            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
 
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
@@ -451,11 +451,11 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
             IObj?.Paragraphs.Add(String.Format("Ideal Enthalpy (Ideal Gas State): {0} kJ/kg", Hid))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
@@ -505,8 +505,8 @@ Namespace PropertyPackages.Auxiliary
 
             Dim bm As Double = Vz.MultiplyY(bi).SumY
 
-            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
-            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
 
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
@@ -559,7 +559,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function S_PR_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal VMM As Array, ByVal Sid As Double) As Double
+        Function S_PR_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz() As Double, ByVal VKij(,) As Double, ByVal VTc() As Double, ByVal VPc() As Double, ByVal Vw() As Double, ByVal VMM() As Double, ByVal Sid As Double) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -602,11 +602,11 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
             IObj?.Paragraphs.Add(String.Format("Ideal Enthalpy (Ideal Gas State): {0} kJ/kg", Sid))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
@@ -678,8 +678,8 @@ Namespace PropertyPackages.Auxiliary
 
             'Dim dadT = 
 
-            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
-            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
 
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)

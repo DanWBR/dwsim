@@ -154,9 +154,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
 
             'Estimate V
 
@@ -265,8 +265,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim converged As Integer = 0
             Dim F, dF, e1, e2, e3 As Double
 
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
 
             Do
 
@@ -283,7 +283,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Ki_ant = Ki.Clone
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
-                IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToArrayString))
+                IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
                 Vy_ant = Vy.Clone
                 Vx_ant = Vx.Clone
@@ -299,8 +299,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vx = Vy.DivideY(Ki).NormalizeY
                 End If
 
-                IObj2?.Paragraphs.Add(String.Format("y values (vapor phase composition) where updated. Current values: {0}", Vy.ToArrayString))
-                IObj2?.Paragraphs.Add(String.Format("x values (liquid phase composition) where updated. Current values: {0}", Vx.ToArrayString))
+                IObj2?.Paragraphs.Add(String.Format("y values (vapor phase composition) where updated. Current values: {0}", Vy.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("x values (liquid phase composition) where updated. Current values: {0}", Vx.ToMathArrayString))
 
                 e1 = Vx.SubtractY(Vx_ant).AbsSumY
                 e2 = Vy.SubtractY(Vy_ant).AbsSumY
@@ -311,7 +311,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Double.IsNaN(e1 + e2) Then
 
-                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
@@ -349,13 +349,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 ecount += 1
 
                 If Double.IsNaN(V) Then
-                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
                 End If
                 If ecount > maxit_e Then
-                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
@@ -388,7 +388,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
 
-            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", Ki.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", Ki.ToMathArrayString))
 
             Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
@@ -478,8 +478,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
             IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", H))
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", T))
 
             For j = 0 To 2
@@ -635,8 +635,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
             IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", H))
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", T))
 
             'calculate dew point and boiling point
@@ -759,7 +759,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Next
 
                 If T <= Tmin Or T >= Tmax Or ecount > maxitEXT Then
-                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
@@ -800,7 +800,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Next
 
                 If T <= Tmin Or T >= Tmax Or ecount > maxitEXT Then
-                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
@@ -926,7 +926,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Next
 
             If Double.IsNaN(T) Or T <= Tmin Or T >= Tmax Then
-                Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                 ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                 ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                 Throw ex
@@ -1087,7 +1087,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Next
 
                 If T <= Tmin Or T >= Tmax Then
-                    Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
@@ -1121,7 +1121,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Next
 
                 If T <= Tmin Or T >= Tmax Then
-                    Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
@@ -1499,7 +1499,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             dt = d2 - d1
 
             If ecount > maxit_e Then
-                Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
                 ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                 ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                 Throw ex
@@ -1787,7 +1787,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
 
             If PP.AUX_CheckTrivial(Ki) Then
                 Dim ex As New Exception("PV Flash [NL]: Invalid result: converged to the trivial solution (T = " & T & " ).")

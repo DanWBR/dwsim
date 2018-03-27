@@ -219,7 +219,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         Shared Function ZtoMinG(ByVal Z_ As Double(), ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Object, ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double()) As Object
 
-            Calculator.WriteToConsole("PR min-G root finder (Z) for T = " & T & " K, P = " & P & " Pa and Z = " & DirectCast(Z_, Double()).ToArrayString, 3)
+            Calculator.WriteToConsole("PR min-G root finder (Z) for T = " & T & " K, P = " & P & " Pa and Z = " & DirectCast(Z_, Double()).ToMathArrayString, 3)
 
             Dim S, H, Z As Double
 
@@ -388,11 +388,11 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", forcephase))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
@@ -438,8 +438,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             a = Calc_SUM1(n, ai, VKij)
 
-            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
-            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
 
             Dim tmpa As Object = Calc_SUM2(n, Vx, a)
 
@@ -463,7 +463,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
             If _zarray.Count = 0 Then
-                Dim ex As New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
+                Dim ex As New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToMathArrayString))
                 ex.Data.Add("DetailedDescription", "This error occurs when the PR EOS is unable to find a density root with the given parameters.")
                 ex.Data.Add("UserAction", "Check if the parameters are valid (T, P, composition). If this error keeps occuring, try another Property Package or check the Material Stream / Unit Operation properties.")
                 Throw ex
@@ -513,7 +513,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
-            IObj?.Paragraphs.Add(String.Format("Fugacity Coefficients: {0}", LN_CF.ExpY().ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Fugacity Coefficients: {0}", LN_CF.ExpY().ToMathArrayString))
 
             Return LN_CF
 
@@ -733,11 +733,11 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToArrayString))
-            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
@@ -791,8 +791,8 @@ Namespace PropertyPackages.ThermoPlugs
             Dim AG = aml * P / (R * T) ^ 2
             Dim BG = bml * P / (R * T)
 
-            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToArrayString)
-            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToArrayString)
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
 
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)

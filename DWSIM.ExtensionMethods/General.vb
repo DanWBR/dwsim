@@ -259,7 +259,7 @@ Public Module General
         Return Height
     End Function
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ToArrayString(vector As Double()) As String
 
         Dim retstr As String = "{ "
@@ -268,6 +268,59 @@ Public Module General
         Next
         retstr.TrimEnd(",")
         retstr += "}"
+
+        Return retstr
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function ToMathArrayString(vector As Double()) As String
+
+        Dim retstr As String = "<math_inline>\left[{\begin{array}{}"
+        For Each d In vector
+            retstr += d.ToString + " & "
+        Next
+        retstr.TrimEnd(" ")
+        retstr.TrimEnd("&")
+        retstr += "\end{array}}\right]</math_inline>"
+
+        Return retstr
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function ToMathArrayString(vector As String()) As String
+
+        Dim retstr As String = "<math_inline>\left[{\begin{array}{}"
+        For Each s In vector
+            retstr += s + " & "
+        Next
+        retstr.TrimEnd(" ")
+        retstr.TrimEnd("&")
+        retstr += "\end{array}}\right]</math_inline>"
+
+        Return retstr
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function ToMathArrayString(vector As Double(,)) As String
+
+        Dim i, j, n, m As Integer
+        n = vector.Rank
+        m = vector.GetUpperBound(0)
+        Dim retstr As String = "<math_inline>\left[{\begin{array}{}"
+
+        For i = 0 To n
+            For j = 0 To m
+                retstr += vector(i, j).ToString + " & "
+            Next
+            retstr.TrimEnd(" ")
+            retstr.TrimEnd("&")
+            retstr += "\\"
+        Next
+        retstr.TrimEnd("\")
+        retstr += "\end{array}}\right]</math_inline>"
 
         Return retstr
 
