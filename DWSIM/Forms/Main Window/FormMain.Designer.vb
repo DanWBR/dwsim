@@ -219,7 +219,6 @@ Partial Class FormMain
         'PreferenciasDoDWSIMToolStripMenuItem
         '
         Me.PreferenciasDoDWSIMToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.application_edit
-        Me.PreferenciasDoDWSIMToolStripMenuItem.MergeIndex = 12
         Me.PreferenciasDoDWSIMToolStripMenuItem.Name = "PreferenciasDoDWSIMToolStripMenuItem"
         resources.ApplyResources(Me.PreferenciasDoDWSIMToolStripMenuItem, "PreferenciasDoDWSIMToolStripMenuItem")
         '

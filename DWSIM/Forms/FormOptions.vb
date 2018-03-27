@@ -55,6 +55,8 @@ Public Class FormOptions
         Me.tbMaxThreadMultiplier.Text = My.Settings.MaxThreadMultiplier
         Me.chkEnableSIMD.Checked = My.Settings.UseSIMDExtensions
 
+        Me.chkEnableInspector.Checked = My.Settings.InspectorEnabled
+
         Me.KryptonCheckBox1.Checked = My.Settings.ShowTips
 
         Me.chkSaveBackupFile.Checked = My.Settings.SaveBackupFile
@@ -690,5 +692,10 @@ Public Class FormOptions
             My.Settings.PythonProcessTimeout = tbPythonTimeout.Text
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub chkEnableInspector_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableInspector.CheckedChanged
+        My.Settings.InspectorEnabled = chkEnableInspector.Checked
+        Settings.InspectorEnabled = My.Settings.InspectorEnabled
     End Sub
 End Class

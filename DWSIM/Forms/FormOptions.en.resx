@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkEnableInspector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="chkEnableInspector.Text" xml:space="preserve">
+    <value>Enable Solution Inspector</value>
+  </data>
+  <data name="GroupBox18.Text" xml:space="preserve">
+    <value>Solution Inspector</value>
+  </data>
   <data name="chkStorePreviousSolutions.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 17</value>
   </data>
@@ -529,12 +538,6 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>UI Language</value>
   </data>
-  <data name="chkShowWhatsNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 17</value>
-  </data>
-  <data name="chkShowWhatsNew.Text" xml:space="preserve">
-    <value>Show "What's New" Window on Startup</value>
-  </data>
   <data name="KryptonCheckBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
   </data>
@@ -582,7 +585,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAZABCAGQAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAaABCAGgAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

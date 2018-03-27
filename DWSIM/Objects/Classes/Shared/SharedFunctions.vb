@@ -73,6 +73,8 @@ Namespace DWSIM
             GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
             GlobalSettings.Settings.DefaultEditFormLocation = My.Settings.DefaultEditorLocation
 
+            GlobalSettings.Settings.InspectorEnabled = My.Settings.InspectorEnabled
+
             GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents = My.Settings.HideSolidPhase_CO
 
             GlobalSettings.Settings.OctavePath = My.Settings.OctavePath

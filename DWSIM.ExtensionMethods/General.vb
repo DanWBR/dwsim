@@ -307,8 +307,8 @@ Public Module General
     Public Function ToMathArrayString(vector As Double(,)) As String
 
         Dim i, j, n, m As Integer
-        n = vector.Rank
-        m = vector.GetUpperBound(0)
+        n = vector.GetUpperBound(0)
+        m = vector.GetUpperBound(1)
         Dim retstr As String = "<math_inline>\left[{\begin{array}{}"
 
         For i = 0 To n

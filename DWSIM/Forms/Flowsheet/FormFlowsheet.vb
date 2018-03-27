@@ -3203,6 +3203,17 @@ Public Class FormFlowsheet
         End If
     End Sub
 
+    Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
+
+        Dim iform = Global.DWSIM.UI.Shared.Common.GetDefaultEditorForm("Solution Inspector", 1024, 768, Global.DWSIM.Inspector.Window.GetInspectorWindow(), False)
+        iform.WindowState = WindowState.Maximized
+        iform.Show()
+
+        'start dispatcher for WPF Interop
+        'If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
+
+    End Sub
+
     Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click
         If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then
             Calculator.ExcelLogForm = New LogForm
