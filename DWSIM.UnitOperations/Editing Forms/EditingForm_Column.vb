@@ -390,15 +390,11 @@ Public Class EditingForm_Column
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnResults.Click
 
-        Dim d As New WeifenLuo.WinFormsUI.Docking.DockContent()
-
         Dim reditor As New EditingForm_Column_Results With {.dc = Me.SimObject}
-        reditor.Dock = DockStyle.Fill
-        d.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
-        d.TabText = d.Text
-        d.Controls.Add(reditor)
-        d.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
-        SimObject.FlowSheet.DisplayForm(d)
+        reditor.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
+        reditor.TabText = reditor.Text
+        reditor.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
+        SimObject.FlowSheet.DisplayForm(reditor)
 
     End Sub
 

@@ -128,13 +128,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 20</value>
+    <value>434, 20</value>
   </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Open file with initial estimates</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 51</value>
+    <value>569, 51</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>File</value>
@@ -185,10 +185,10 @@
     <value>Liquid Flow</value>
   </data>
   <data name="dgvv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 180</value>
+    <value>534, 180</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 180</value>
+    <value>561, 180</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Variables</value>
@@ -218,14 +218,18 @@
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dgvcl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="dgvcl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-151, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="dgvcl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>591, 180</value>
+    <value>561, 180</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 180</value>
+    <value>561, 180</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Compositions (Liquid Phase)</value>
@@ -254,23 +258,26 @@
   <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
+  <data name="dgvcv.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="dgvcv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-151, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="dgvcv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>591, 180</value>
+    <value>561, 180</value>
   </data>
   <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 180</value>
+    <value>561, 180</value>
   </data>
   <data name="FaTabStripItem5.Title" xml:space="preserve">
     <value>Compositions (Vapor Phase)</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 201</value>
+    <value>563, 201</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 220</value>
+    <value>569, 220</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Estimates</value>
@@ -342,6 +349,6 @@
     <value>Load Initial Estimates File</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 275</value>
+    <value>578, 275</value>
   </data>
 </root>

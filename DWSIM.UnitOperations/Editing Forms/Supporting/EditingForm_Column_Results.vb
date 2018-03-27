@@ -21,7 +21,7 @@ Imports System.Drawing
 
 Public Class EditingForm_Column_Results
 
-    Inherits UserControl
+    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Public dc As Column
 
@@ -50,6 +50,7 @@ Public Class EditingForm_Column_Results
         FillGraphs()
 
         SelTab = 0
+
     End Sub
 
     Private Sub FillTables()
