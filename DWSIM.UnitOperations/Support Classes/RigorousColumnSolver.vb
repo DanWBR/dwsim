@@ -2380,23 +2380,23 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                              Sub(ipar)
                                                                  If IdealH Then
                                                                      Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - 0.1, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
                                                                      If llextr Then
                                                                          Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
-                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 0.1, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
                                                                      Else
                                                                          Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
-                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 0.1, P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
                                                                      End If
                                                                  Else
                                                                      Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - 0.1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                      If llextr Then
                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
-                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 0.1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                      Else
                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
-                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 0.1, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                      End If
                                                                  End If
                                                              End Sub),
@@ -2409,26 +2409,26 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If IdealH Then
                         For i = 0 To ns
                             Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
-                            dHl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            dHl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
                             If llextr Then
                                 Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
-                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
                             Else
                                 Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
-                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
                             End If
                             ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
                     Else
                         For i = 0 To ns
                             Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
-                            dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
                             If llextr Then
                                 Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
-                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
                             Else
                                 Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
-                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
                             End If
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
@@ -2443,8 +2443,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Else
                         H(i) = Lj(i - 1) * Hl(i - 1) + Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
                     End If
-                    dHldT(i) = (Hl(i) - dHl(i)) / 1
-                    dHvdT(i) = (Hv(i) - dHv(i)) / 1
+                    dHldT(i) = (Hl(i) - dHl(i)) / 0.1
+                    dHvdT(i) = (Hv(i) - dHv(i)) / 0.1
                 Next
 
                 For i = 0 To ns
@@ -2473,8 +2473,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    If Abs(xth(i)) > 0.1 * Tj(i) Then
-                        Tj(i) = Tj(i) + Sign(xth(i)) * 0.1 * Tj(i)
+                    If Abs(xth(i)) > 0.05 * Tj(i) Then
+                        Tj(i) = Tj(i) + Sign(xth(i)) * 0.05 * Tj(i)
                     Else
                         Tj(i) = Tj(i) + xth(i)
                     End If

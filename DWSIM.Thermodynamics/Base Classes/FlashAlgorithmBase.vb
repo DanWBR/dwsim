@@ -580,7 +580,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         If Vz(i) <> 0.0# Then
                             Y(nt + 1, i) = sum0(i) / UBound(VzArray, 1)
                         Else
-                            Y(n + 1, i) = 0.0#
+                            Y(nt + 1, i) = 0.0#
                         End If
                         i = i + 1
                     Loop Until i = n + 1
@@ -603,7 +603,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Y(nt + 1, i) = sum0(i) / UBound(VzArray, 1)
                             Y(nt + 2, i) = Exp(h(i))
                         Else
-                            Y(n + 1, i) = 0.0#
+                            Y(nt + 1, i) = 0.0#
+                            Y(nt + 2, i) = 0.0#
                         End If
                         i = i + 1
                     Loop Until i = n + 1
