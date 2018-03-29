@@ -327,6 +327,30 @@ Public Module General
     End Function
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Function ToMathArrayString(vector As Double()()) As String
+
+        Dim i, j, n, m As Integer
+        n = vector.GetUpperBound(0)
+        m = vector(0).GetUpperBound(0)
+
+        Dim retstr As String = "<math_inline>\left[{\begin{array}{}"
+
+        For i = 0 To n
+            For j = 0 To m
+                retstr += vector(i)(j).ToString + " & "
+            Next
+            retstr.TrimEnd(" ")
+            retstr.TrimEnd("&")
+            retstr += "\\"
+        Next
+        retstr.TrimEnd("\")
+        retstr += "\end{array}}\right]</math_inline>"
+
+        Return retstr
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ToDoubleWithSeparator(s As String, sep As String) As Double
         Dim nstring As String = s.Replace(sep, ".")
         If Double.TryParse(nstring, Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, New Double) Then

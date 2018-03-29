@@ -2384,6 +2384,12 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
             'Validate unitop status.
             Me.Validate()
 
@@ -2558,11 +2564,13 @@ Namespace UnitOperations
                     T2 = T1
                 Case ColType.DistillationColumn
                     Try
+                        IObj?.SetCurrent()
                         T1 = pp.DW_CalcBubT(zm, P(0), MathEx.Common.Min(FT))(4) '* 1.01
                     Catch ex As Exception
                         T1 = MathEx.Common.Min(FT)
                     End Try
                     Try
+                        IObj?.SetCurrent()
                         T2 = pp.DW_CalcDewT(zm, P(ns), MathEx.Common.Max(FT))(4) '* 0.99
                     Catch ex As Exception
                         T2 = MathEx.Common.Max(FT)
@@ -2686,6 +2694,7 @@ Namespace UnitOperations
                         z(i)(j) = zm(j)
                     Next
                 Else
+                    IObj?.SetCurrent()
                     Dim flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
                     If llextractor Then
                         x(i) = flashresult(2)
@@ -2776,6 +2785,8 @@ Namespace UnitOperations
 
             Dim result As Object
 
+            IObj?.SetCurrent()
+
             Select Case Me.SolvingMethod
                 Case 0 'BP
                     If Not TypeOf Me Is DistillationColumn Then Throw New Exception(FlowSheet.GetTranslatedString("UnsupportedSolver"))
@@ -2832,6 +2843,8 @@ Namespace UnitOperations
             VSSf = result(3)
             LSSf = result(4)
             Q = result(8)
+
+            IObj?.SetCurrent()
 
             If SolverScheme <> SolvingScheme.Direct Then
                 're-run solver using refined initial estimates from last run with ideal properties
@@ -2903,6 +2916,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.molarflow = LSSf(0)
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0) - Me.CondenserDeltaP
+                            IObj?.SetCurrent()
                             .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -2922,6 +2936,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
+                            IObj?.SetCurrent()
                             .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -2941,6 +2956,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
                             .Phases(0).Properties.pressure = P(ns)
+                            IObj?.SetCurrent()
                             .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(ns), Tf(ns), P(ns), PropertyPackages.State.Liquid)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -2962,6 +2978,7 @@ Namespace UnitOperations
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
+                                IObj?.SetCurrent()
                                 .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Liquid)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -2980,6 +2997,7 @@ Namespace UnitOperations
                                 .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
+                                IObj?.SetCurrent()
                                 .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Vapor)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values

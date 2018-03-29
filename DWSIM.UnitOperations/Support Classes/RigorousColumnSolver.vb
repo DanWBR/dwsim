@@ -81,8 +81,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Sub
 
-        Private Function CalcKbj1(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Object, _
-                                        ByVal z()() As Double, ByVal y()() As Double, ByVal T() As Double, _
+        Private Function CalcKbj1(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Object,
+                                        ByVal z()() As Double, ByVal y()() As Double, ByVal T() As Double,
                                         ByVal P() As Double, ByRef pp As PropertyPackages.PropertyPackage) As Object
 
             Dim i, j As Integer
@@ -100,8 +100,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Private Function CalcKbj2(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Object, _
-                                      ByVal z()() As Double, ByVal y()() As Double, ByVal T() As Double, _
+        Private Function CalcKbj2(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Object,
+                                      ByVal z()() As Double, ByVal y()() As Double, ByVal T() As Double,
                                       ByVal P() As Double, ByRef pp As PropertyPackages.PropertyPackage) As Object
 
             Dim i, j As Integer
@@ -684,20 +684,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer, _
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array, _
-                                ByVal Q As Array, ByVal L As Array, _
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double, _
-                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double, _
-                                ByVal fc()() As Double, _
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array, _
-                                ByVal condt As DistillationColumn.condtype, _
-                                ByVal eff() As Double, _
+        Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Array, ByVal F As Array, ByVal V As Array,
+                                ByVal Q As Array, ByVal L As Array,
+                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Array, ByVal T As Array, ByVal P As Array,
+                                ByVal condt As DistillationColumn.condtype,
+                                ByVal eff() As Double,
                                 ByVal AdjustSb As Boolean,
-                                ByVal coltype As Column.ColType, ByVal KbjWA As Boolean, _
-                                ByVal pp As PropertyPackages.PropertyPackage, _
-                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec), _
-                                ByVal epsilon As Double, _
+                                ByVal coltype As Column.ColType, ByVal KbjWA As Boolean,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal epsilon As Double,
                                 ByVal Solver As OptimizationMethod,
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
@@ -1596,12 +1596,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Return True
         End Function
 
-        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
+        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(),
          ByRef jCol As Integer(), ByRef values As Double()) As Boolean
             Return False
         End Function
 
-        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(),
          ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
             Return False
         End Function
@@ -1618,18 +1618,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
     <System.Serializable()> Public Class WangHenkeMethod
 
-        Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer, _
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array, _
-                                ByVal Q As Array, ByVal L As Array, _
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double, _
-                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double, _
-                                ByVal fc()() As Double, _
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array, _
-                                ByVal condt As DistillationColumn.condtype, _
-                                ByVal stopatitnumber As Integer, _
-                                ByVal eff() As Double, _
-                                ByVal coltype As Column.ColType, _
-                                ByVal pp As PropertyPackages.PropertyPackage, _
+        Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Array, ByVal F As Array, ByVal V As Array,
+                                ByVal Q As Array, ByVal L As Array,
+                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Array, ByVal T As Array, ByVal P As Array,
+                                ByVal condt As DistillationColumn.condtype,
+                                ByVal stopatitnumber As Integer,
+                                ByVal eff() As Double,
+                                ByVal coltype As Column.ColType,
+                                ByVal pp As PropertyPackages.PropertyPackage,
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
 
@@ -1659,18 +1659,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
 
             Select Case specs("C").SType
-                Case ColumnSpec.SpecType.Component_Fraction, _
-                ColumnSpec.SpecType.Component_Mass_Flow_Rate, _
-                ColumnSpec.SpecType.Component_Molar_Flow_Rate, _
-                ColumnSpec.SpecType.Component_Recovery, _
+                Case ColumnSpec.SpecType.Component_Fraction,
+                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                ColumnSpec.SpecType.Component_Recovery,
                 ColumnSpec.SpecType.Temperature
                     Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCUnsupportedError1"))
             End Select
             Select Case specs("R").SType
-                Case ColumnSpec.SpecType.Component_Fraction, _
-                ColumnSpec.SpecType.Component_Mass_Flow_Rate, _
-                ColumnSpec.SpecType.Component_Molar_Flow_Rate, _
-                ColumnSpec.SpecType.Component_Recovery, _
+                Case ColumnSpec.SpecType.Component_Fraction,
+                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                ColumnSpec.SpecType.Component_Recovery,
                 ColumnSpec.SpecType.Temperature
                     Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCUnsupportedError1"))
             End Select
@@ -1864,8 +1864,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, nc, poptions,
                                                                  Sub(ipar)
-                                                                         xt(ipar) = Tomich.TDMASolve(at(ipar), bt(ipar), ct(ipar), dt(ipar))
-                                                                     End Sub),
+                                                                     xt(ipar) = Tomich.TDMASolve(at(ipar), bt(ipar), ct(ipar), dt(ipar))
+                                                                 End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
                                                       Settings.AppTaskScheduler)
@@ -2168,19 +2168,87 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
     <System.Serializable()> Public Class BurninghamOttoMethod
 
-        Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer, _
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array, _
-                                ByVal Q As Array, ByVal L As Array, _
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double, _
-                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double, _
-                                ByVal fc()() As Double, _
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array, _
-                                ByVal stopatitnumber As Integer, _
-                                ByVal eff() As Double, _
-                                ByVal pp As PropertyPackages.PropertyPackage, _
-                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec), _
+        Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
+                                ByVal stopatitnumber As Integer,
+                                ByVal eff() As Double,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
                                 Optional ByVal llextr As Boolean = False) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Sum-Rates (SR) Method", "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("The species in most absorbers and strippers cover a wide range of volatility. Hence, the BP method of 
+                                    solving the MESH equations fails because bubble-point temperature calculations are too sensitive to 
+                                    liquid-phase composition, and the stage energy balance is much more sensitive to stage temperatures 
+                                    than to interstage flow rates. In this case, Friday and Smith showed that an alternative procedure 
+                                    devised by Sujata could be used. This sum-rates (SR) method was further developed in conjunction with 
+                                    the tridiagonal-matrix formulation for the modified M equations by Burningham and Otto.")
+
+            IObj?.Paragraphs.Add("Problem specifications consist of conditions and stage locations for feeds, stage pressure, sidestream 
+                                    flow rates, stage heat-transfer rates, and number of stages. Tear variables Tj and Vj are assumed to 
+                                    initiate the calculations. It is sufficient to assume a set of Vj values based on the assumption of 
+                                    constant-molar flows, working up from the absorber bottom using specified vapor feeds and vapor sidestream 
+                                    flows, if any. An initial set of Tj values can be obtained from assumed top-stage and bottom-stage values 
+                                    and a linear variation with stages in between. Values of xi,j are established by solving the tridiagonal 
+                                    matrix by the Thomas algorithm. These values are not normalized but utilized directly to produce new values 
+                                    of Lj through the sum-rates equation:")
+
+            IObj?.Paragraphs.Add("<math>L^{(k+1)}_{j}=L^{(k)}_j\sum\limits_{i=1}^{C}{x_{i,j}}</math>")
+
+            IObj?.Paragraphs.Add("where <math_inline>L^{(k)}_j</math_inline> values are obtained from <math_inline>V^{(k)}_j</math_inline> 
+                                    values by")
+
+            IObj?.Paragraphs.Add("<math>L_{j}=V_{j+1}+\sum\limits_{m=1}^{j}{(F_{m}-U_{m}-W_{m})-V_{1}}</math>")
+
+            IObj?.Paragraphs.Add("Corresponding values of <math_inline>V^{(k+1)}_j</math_inline> are obtained from a total material balance:")
+
+            IObj?.Paragraphs.Add("<math>V_{j}=L_{j-1}-L_{N}+\sum\limits_{m=j}^{N}{(F_{m}-U_{m}-W_{m})}</math>")
+
+            IObj?.Paragraphs.Add("Normalized <math_inline>x_{i,j}</math_inline> values are calculated and Corresponding values of 
+                                    <math_inline>y_{i,j}</math_inline> are computed from")
+
+            IObj?.Paragraphs.Add("<math>y_{i,j}=K_{i,j}x_{i,j}</math>")
+
+            IObj?.Paragraphs.Add("A new set of Tj is obtained by solving the simultaneous energy-balance relations for the N stages. The                                     temperatures are embedded in the specific enthalpies for the unspecified vapor and liquid flow rates.                                     Typically, these enthalpies are nonlinear in temperature. Therefore, an iterative procedure such as the 
+                                    Newton–Raphson method is required.")
+
+            IObj?.Paragraphs.Add("To obtain a new set of Tj from the energy equation, the Newton–Raphson recursion equation is")
+
+            IObj?.Paragraphs.Add("<math>\left(\frac{\partial H_j}{\partial T_{j-1}} \right)^{(r)}\Delta T^{(r)}_{j-1} +\left(\frac{\partial H_j}{\partial T_{j}} \right)^{(r)}\Delta T^{(r)}_{j}+ \left(\frac{\partial H_j}{\partial T_{j+1}} \right)^{(r)}\Delta T^{(r)}_{j+1}=-H^{(r)}_j</math>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<math>\Delta T^{(r)}_{j}=T^{(r+1)}_j-T^{(r)}_j</math>")
+
+            IObj?.Paragraphs.Add("<math>\frac{\partial H_j}{\partial T_{j-1}}=L_{j-1}\frac{\partial h_{L_{j-1}}}{\partial T_{j-1}}</math>")
+
+            IObj?.Paragraphs.Add("<math>\frac{\partial H_j}{\partial T_{j}}=-(L_{j}+U_{j})\frac{\partial h_{L_{j}}}{\partial T_{j}}-(V_j+W_j)\frac{\partial h_{V_{j}}}{\partial T_{j}}</math>")
+
+            IObj?.Paragraphs.Add("<math>\frac{\partial H_j}{\partial T_{j+1}}=V_{j+1}\frac{\partial h_{V_{j+1}}}{\partial T_{j+1}}</math>")
+
+            IObj?.Paragraphs.Add("The partial derivatives are calculated numerically using the values provided by the Property Package.")
+
+            IObj?.Paragraphs.Add("The N relations form a tridiagonal matrix equation that is linear in <math_inline>\Delta T^{(r)}_{j}</math_inline>.")
+
+            IObj?.Paragraphs.Add("The matrix of partial derivatives is called the Jacobian correction matrix. The Thomas algorithm can be employed 
+                                    to solve for the set of corrections <math_inline>\Delta T^{(r)}_{j}</math_inline>. New guesses of Tj are then determined from")
+
+            IObj?.Paragraphs.Add("<math>T_j^{(r+1)}=T_j^{(r)}+\Delta T_j^{(r)}</math>")
+
+            IObj?.Paragraphs.Add("When corrections <math_inline>\Delta T^{(r)}_{j}</math_inline> approach zero, the resulting values of Tj are 
+                                    used with criteria to determine if convergence has been achieved. If not, before beginning a new k iteration, 
+                                    values of Vj and Tj are adjusted. Convergence is rapid for the sum-rates method.")
 
             Dim ppr As PropertyPackages.RaoultPropertyPackage = Nothing
 
@@ -2228,6 +2296,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Hfj(i) = HF(i) / 1000
                 fcj(i) = fc(i)
             Next
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters / Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Stage Temperatures: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Stage Pressures: {0}", P.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Feeds: {0}", F.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Flows: {0}", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Flows: {0}", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Side Draws: {0}", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Side Draws: {0}", LSS.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Mixture Compositions: {0}", z.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Compositions: {0}", x.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor/Liquid2 Phase Compositions: {0}", y.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("K-values: {0}", K.ToMathArrayString))
 
             For i = 0 To ns
                 For j = 0 To nc - 1
@@ -2532,6 +2616,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Calculator.WriteToConsole("Sum Rates solver composition error = " & comperror, 1)
 
             Loop Until t_error <= tol(1) And comperror <= tol(1)
+
+            For Each Ki In K
+                If pp.AUX_CheckTrivial(Ki) Then Throw New Exception("Invalid result - converged to the trivial solution.")
+            Next
 
             ' finished, return arrays
 
