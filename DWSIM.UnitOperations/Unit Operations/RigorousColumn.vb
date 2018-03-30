@@ -2821,6 +2821,7 @@ Namespace UnitOperations
                 End If
                 IObj?.Paragraphs.Add(String.Format("Spec Type: {0}", [Enum].GetName(sp.SType.GetType, sp.SType)))
                 IObj?.Paragraphs.Add(String.Format("Spec Value: {0}", sp.SpecValue))
+                IObj?.Paragraphs.Add(String.Format("Spec Stage: {0}", sp.StageNumber))
                 IObj?.Paragraphs.Add(String.Format("Spec Units: {0}", sp.SpecUnit))
                 IObj?.Paragraphs.Add(String.Format("Compound (if applicable): {0}", sp.ComponentID))
             Next
