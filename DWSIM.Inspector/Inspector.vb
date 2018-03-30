@@ -99,7 +99,7 @@ Public Class InspectorItem
         stb.AppendLine("<div class='post'>")
         stb.AppendLine(String.Format("<h1>{0}</h1><h2>{1}</h2>", Name, Description))
         For Each p In Paragraphs.Reverse()
-            stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)"))
+            stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)").Replace("<m>", "$$").Replace("</m>", "$$").Replace("<mi>", "\(").Replace("</mi>", "\)"))
         Next
         stb.AppendLine("</div></section></html>")
 

@@ -42,6 +42,44 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Shared Function TDMASolve(ByVal a As Double(), ByVal b As Double(), ByVal c As Double(), ByVal d As Double()) As Double()
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "TDMASolve", "Tridiagonal Matrix Algorithm", "Tomich TDM Solver", True)
+
+            IObj?.Paragraphs.Add("The key to the BP and SR tearing procedures is the tridiagonal matrix, which results from a modified form of the M equations, when they are torn from the other equations by selecting Tj and Vj as the tear variables, leaving the modified M equations linear in the unknown liquid mole fractions.")
+
+            IObj?.Paragraphs.Add("This set of equations, one for each component, is solved by a modified Gaussian–elimination algorithm due to Thomas as applied by Wang and Henke. Equations for calculating y and L are partitioned from the other equations. The result for each component, i, and each stage, j, is as follows, where the i subscripts have been dropped from the B, C, and D terms.")
+
+            IObj?.Paragraphs.Add("<math>A_jx_{i,j-1}+B_jx_{i,j}+C_jx_{i,j+1}=D_j</math>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<math>A_j = V_j+\sum\limits_{m=1}^{j-1} (F_m-W_m-U_m)-V_1</math>")
+
+            IObj?.Paragraphs.Add("<math>B_j=-[V_{j+1}+\sum\limits_{m+1}^j(F_m-W_m-U_m)-V_1+U_j+(V_j+W_j)K_{i,j}], 1\leq j\leq N</math>")
+
+            IObj?.Paragraphs.Add("<math>C_j=V_{j+1}K_{i,j+1}, 1 \leq j \leq N-1</math>")
+
+            IObj?.Paragraphs.Add("<math>D_j=-F_jz_{i,j}, 1 \leq j \leq N</math>")
+
+            IObj?.Paragraphs.Add("with <mi>x_{i,0}=0</mi>; <mi>V_{N+1}=0</mi>; <mi>W_1 = 0</mi>, and <mi>U_N=0</mi>, as indicated in Figure 10.3. If the modified M equations are grouped by component, they can be partitioned by writing them as a series of separate tridiagonal-matrix equations, one for each component, where the output variable for each matrix equation is xi over the entire N-stage cascade.")
+
+            IObj?.Paragraphs.Add("Constants Bj and Cj for each component depend only on tear variables T and V if K-values are composition-independent. If not, previous iteration compositions may be used to estimate K-values.")
+
+            IObj?.Paragraphs.Add("The Thomas algorithm for solving the linearized equation set is a Gaussian–elimination procedure involving forward elimination starting from stage 1 and working toward stage N to finally isolate <mi>x_{i,N}</mi>. Other values of <mi>x_{i,j}</mi> are then obtained, starting with <mi>x_{i,N-1}</mi> by backward substitution.")
+
+            IObj?.Paragraphs.Add("The Thomas algorithm avoids buildup of computer truncation errors because none of the steps involves subtraction of nearly equal quantities. Furthermore, computed values of xi,j are almost always positive. The algorithmis superior to alternative matrix-inversion routines. A modified Thomas algorithm for difficult cases is given by Boston and Sullivan [9]. Such cases can occur for columns with large numbers of equilibrium stages and components whose absorption factors, <mi>A=L/KV</mi>, are less than unity in one section and greater than unity in another.")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("A: {0}", a.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("B: {0}", b.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("C: {0}", c.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("D: {0}", d.ToMathArrayString))
+
             ' Warning: will modify c and d!
 
             Dim n As Integer = d.Length
@@ -68,6 +106,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i As Integer = n - 2 To 0 Step -1
                 x(i) = d(i) - c(i) * x(i + 1)
             Next
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("x: {0}", x.ToMathArrayString))
 
             Return x
 
@@ -2220,7 +2262,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             IObj?.Paragraphs.Add("<math>y_{i,j}=K_{i,j}x_{i,j}</math>")
 
-            IObj?.Paragraphs.Add("A new set of Tj is obtained by solving the simultaneous energy-balance relations for the N stages. The                                     temperatures are embedded in the specific enthalpies for the unspecified vapor and liquid flow rates.                                     Typically, these enthalpies are nonlinear in temperature. Therefore, an iterative procedure such as the 
+            IObj?.Paragraphs.Add("A new set of Tj is obtained by solving the simultaneous energy-balance relations for the N stages. The 
+                                    temperatures are embedded in the specific enthalpies for the unspecified vapor and liquid flow rates. 
+                                    Typically, these enthalpies are nonlinear in temperature. Therefore, an iterative procedure such as the 
                                     Newton–Raphson method is required.")
 
             IObj?.Paragraphs.Add("To obtain a new set of Tj from the energy equation, the Newton–Raphson recursion equation is")
@@ -2316,6 +2360,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 0 To ns
                 For j = 0 To nc - 1
                     K(i)(j) = Kval(i)(j)
+                    IObj?.SetCurrent()
                     If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Or K(i)(j) = 0# Then K(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
                 Next
             Next
@@ -2326,6 +2371,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             ic = 0
             Do
 
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Solve", "Sum-Rates (SR) Internal Loop #" & ic, "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
+
                 Dim il_err As Double = 0.0#
                 Dim il_err_ant As Double = 0.0#
                 Dim num, denom, x0, fx0 As New ArrayList
@@ -2333,6 +2384,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 'step4
 
                 'find component liquid flows by the tridiagonal matrix method
+
+                IObj2?.Paragraphs.Add(String.Format("Find component liquid flows by the tridiagonal matrix method"))
+                IObj2?.Paragraphs.Add(String.Format("Calculating TDM A, B, C, D"))
 
                 Dim at(nc - 1)(), bt(nc - 1)(), ct(nc - 1)(), dt(nc - 1)(), xt(nc - 1)() As Double
 
@@ -2373,10 +2427,29 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 'solve matrices
 
+                IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver to calculate liquid phase compositions"))
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("A: {0}", at.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("B: {0}", bt.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("C: {0}", ct.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("D: {0}", dt.ToMathArrayString))
+
                 'tomich
+
                 For i = 0 To nc - 1
+                    IObj2?.SetCurrent()
+                    IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver for Stage #{0}...", i + 1))
                     xt(i) = Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
                 Next
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("TDM solved successfully."))
 
                 Dim sumx(ns), sumy(ns), sumz(ns) As Double
 
@@ -2391,14 +2464,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 'Ljs
                 For i = 0 To ns
-                    'If sumx(i) > 1.5 Then
-                    '    Lj(i) = Lj(i) * 1.5
-                    'ElseIf sumx(i) < 0.5 Then
-                    '    Lj(i) = Lj(i) * 0.5
-                    'Else
                     Lj(i) = Lj(i) * sumx(i)
-                    'End If
                 Next
+
+                IObj2?.Paragraphs.Add(String.Format("l: {0}", lc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("L: {0}", Lj.ToMathArrayString))
 
                 For i = 0 To ns
                     For j = 0 To nc - 1
@@ -2408,11 +2479,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                 Next
 
+                IObj2?.Paragraphs.Add(String.Format("x: {0}", xc.ToMathArrayString))
+
                 For i = 0 To ns
                     For j = 0 To nc - 1
                         yc(i)(j) = yc(i)(j) / sumy(i)
                     Next
                 Next
+
+                IObj2?.Paragraphs.Add(String.Format("y: {0}", yc.ToMathArrayString))
 
                 For i = 0 To ns
                     sum3(i) = 0
@@ -2445,6 +2520,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                 Next
 
+                IObj2?.Paragraphs.Add(String.Format("v: {0}", vc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("V: {0}", Vj.ToMathArrayString))
+
                 For i = 0 To ns
                     For j = 0 To nc - 1
                         zc(i)(j) = zc(i)(j) / sumz(i)
@@ -2454,6 +2533,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 'Dim tmp As Object
 
                 'calculate new temperatures
+
+
+                IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
                 ''''''''''''''''''''
                 Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns) As Double
@@ -2492,32 +2574,45 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Else
                     If IdealH Then
                         For i = 0 To ns
+                            IObj2?.SetCurrent()
                             Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
                             dHl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
                             If llextr Then
                                 Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
                                 dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
                             Else
                                 Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
                                 dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
                             End If
                             ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
                     Else
                         For i = 0 To ns
+                            IObj2?.SetCurrent()
                             Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
                             dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
                             If llextr Then
                                 Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
                                 dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
                             Else
                                 Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
                                 dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 0.1, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
                             End If
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
                     End If
                 End If
+
+                IObj2?.Paragraphs.Add(String.Format("HL: {0}", Hl.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("HV: {0}", Hl.ToMathArrayString))
 
                 For i = 0 To ns
                     If i = 0 Then
@@ -2531,11 +2626,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     dHvdT(i) = (Hv(i) - dHv(i)) / 0.1
                 Next
 
+                IObj2?.Paragraphs.Add(("<mi>\frac{\partial h_L}{\partial T}</mi>: " & dHldT.ToMathArrayString))
+                IObj2?.Paragraphs.Add(("<mi>\frac{\partial h_V}{\partial T}</mi>: " & dHvdT.ToMathArrayString))
+
                 For i = 0 To ns
                     If i > 0 Then dHdTa(i) = Lj(i - 1) * dHldT(i - 1)
                     dHdTb(i) = -(Lj(i) + LSSj(i)) * dHldT(i) - (Vj(i) + VSSj(i)) * dHvdT(i)
                     If i < ns Then dHdTc(i) = Vj(i + 1) * dHvdT(i + 1)
                 Next
+
+                IObj2?.Paragraphs.Add(String.Format("H: {0}", H.ToMathArrayString))
 
                 Dim ath(ns), bth(ns), cth(ns), dth(ns), xth(ns) As Double
 
@@ -2549,9 +2649,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 'solve matrices
                 'tomich
 
+                IObj2?.Paragraphs.Add("Calling TDM Solver to solve for enthalpies/temperatures")
+
+                IObj2?.SetCurrent()
+
                 xth = Tomich.TDMASolve(ath, bth, cth, dth)
 
                 Dim tmp As Object
+
+                IObj2?.Paragraphs.Add(String.Format("Calculated Temperature perturbations: {0}", xth.ToMathArrayString))
 
                 t_error = 0.0#
                 comperror = 0.0#
@@ -2564,12 +2670,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     End If
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     If IdealK Then
+                        IObj2?.SetCurrent()
                         If llextr Then
                             tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
                             tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
                         End If
                     Else
+                        IObj2?.SetCurrent()
                         If llextr Then
                             tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
@@ -2583,6 +2691,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             If llextr Then
                                 K(i)(j) = 1.0#
                             Else
+                                IObj2?.SetCurrent()
                                 K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
                             End If
                         End If
@@ -2595,11 +2704,23 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                 Next
 
+                IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated K-values: {0}", K.ToMathArrayString))
+
                 For i = 0 To ns
                     For j = 0 To nc - 1
                         yc(i)(j) = yc(i)(j) / sumy(i)
                     Next
                 Next
+
+                IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", yc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Temperature error: {0}", t_error))
+
+                IObj2?.Paragraphs.Add(String.Format("Composition error: {0}", comperror))
+
+                IObj2?.Paragraphs.Add(String.Format("Combined Temperature/Composition error: {0}", t_error + comperror))
 
                 ic = ic + 1
 
@@ -2617,8 +2738,25 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Loop Until t_error <= tol(1) And comperror <= tol(1)
 
+            IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged values for T: {0}", Tj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for V: {0}", Vj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for L: {0}", Lj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for VSS: {0}", VSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for LSS: {0}", LSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for y: {0}", yc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
             For Each Ki In K
-                If pp.AUX_CheckTrivial(Ki) Then Throw New Exception("Invalid result - converged to the trivial solution.")
+                If pp.AUX_CheckTrivial(Ki) Then
+                    IObj?.Paragraphs.Add("Invalid result - converged to the trivial solution.")
+                    Throw New Exception("Invalid result - converged to the trivial solution.")
+                End If
             Next
 
             ' finished, return arrays
