@@ -1,4 +1,6 @@
-﻿Public Class Host
+﻿Imports System.Runtime.CompilerServices
+
+Public Class Host
 
     Public Shared Items As New List(Of InspectorItem)
 
@@ -12,10 +14,10 @@
 
     End Sub
 
-    Public Shared Function GetNewInspectorItem() As InspectorItem
+    Public Shared Function GetNewInspectorItem(<CallerMemberName> Optional memberName As String = "", <CallerFilePath> Optional fileName As String = "", <CallerLineNumber> Optional lineNumber As Integer = 0) As InspectorItem
 
         If GlobalSettings.Settings.InspectorEnabled Then
-            Return New Inspector.InspectorItem
+            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace("C:\Users\Daniel\Source\Repos\dwsim5\", "https://github.com/DanWBR/dwsim5/blob/master/").Replace("/", "\")}
         Else
             Return Nothing
         End If
@@ -68,11 +70,14 @@ Public Class InspectorItem
 
     Public Property Items As New List(Of InspectorItem)
 
+    Public Property CodePath As String = ""
+
     Sub New()
         ID = Guid.NewGuid().ToString()
         StartTime = Date.Now
         ThreadID = System.Threading.Thread.CurrentThread.ManagedThreadId
         SolutionID = Host.CurrentSolutionID
+        Dim st As New StackTrace()
     End Sub
 
     Public Function GetHTML() As String

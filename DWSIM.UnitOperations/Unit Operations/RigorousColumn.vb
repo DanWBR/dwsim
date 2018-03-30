@@ -2390,6 +2390,44 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("For any stage in a countercurrent cascade, assume (1) phase equilibrium is achieved at each stage, (2) no chemical reactions occur, and (3) entrainment of liquid drops in vapor and occlusion of vapor bubbles in liquid are negligible. Figure 1 represents such a stage for the vapor–liquid case, where the stages are numbered down from the top. The same representation applies to liquid–liquid extraction if the higher-density liquid phases are represented by liquid streams and the lower-density liquid phases are represented by vapor streams.")
+
+            IObj?.Paragraphs.Add("Entering stage j is a single- or two-phase feed of molar flow rate Fj, with overall composition in mole fractions zi,j of component i, temperature TFj , pressure PFj , and corresponding overall molar enthalpy hFj.")
+
+            IObj?.Paragraphs.Add("Also entering stage j is interstage liquid from stage j-1 above, if any, of molar flow rate Lj-1, with composition in mole fractions xij-1, enthalpy hLj-1, temperature Tj-1, and pressure Pj-1, which is equal to or less than the pressure of stage j. Pressure of liquid from stage j-1 is increased adiabatically by hydrostatic head change across head L.")
+
+            IObj?.Paragraphs.Add("Similarly, from stage j+1 below, interstage vapor of molar flow rate V+1, with composition in mole fractions yij+1, enthalpy hV+1, temperature Tj+1, and pressure Pj+1 enters stage j.")
+
+            IObj?.Paragraphs.Add("Leaving stage j is vapor of intensive properties yij, hVj, Tj, and Pj. This stream can be divided into a vapor sidestream of molar flow rate Wj and an interstage stream of molar flow rate Vj to be sent to stage j-1 or, if j=1, to leave as a product. Also leaving stage j is liquid of intensive properties xij, hLj, Tj, and Pj, in equilibrium with vapor (Vj+Wj). This liquid is divided into a sidestream of molar flow rate Uj and an interstage stream of molar flow rate Lj to be sent to stage j+1 or, if j=N, to leave as a product.")
+
+            IObj?.Paragraphs.Add("Associated with each general stage are the following indexed equations expressed in terms of the variable set in Figure 1. However, variables other than those shown in Figure 1 can be used, e.g. component flow rates can replace mole fractions, and sidestream flow rates can be expressed as fractions of interstage flow rates. The equations are referred to as MESH equations, after Wang and Henke.")
+
+            IObj?.Paragraphs.Add("M equations—Material balance for each component (C equations for each stage).")
+
+            IObj?.Paragraphs.Add("<m>M_{i,j}=L_{j-1}x_{i,j-1}+V_{j+1}y_{i,j+1}+F_jz_{i,j}-(L_j+U_j)x_{i,j}-(V_j+W_j)y_{i,j}</m>")
+
+            IObj?.Paragraphs.Add("E equations—phase-Equilibrium relation for each component (C equations for each stage),")
+
+            IObj?.Paragraphs.Add("<m>E_{i,j}=y_{i,j}-K_{i,j}x_{i,j}=0</m>")
+
+            IObj?.Paragraphs.Add("where <mi>K_{i,j}</mi> is the phase-equilibrium ratio or K-value.")
+
+            IObj?.Paragraphs.Add("S equations—mole-fraction Summations (one for each stage),")
+
+            IObj?.Paragraphs.Add("<m>(S_y)_j=\sum\limits_{i=1}^{C}{y_{i,j}}-1=0</m>")
+
+            IObj?.Paragraphs.Add("<m>(S_x)_j=\sum\limits_{i=1}^{C}{x_{i,j}} -1=0</m>")
+
+            IObj?.Paragraphs.Add("H equation—energy balance (one for each stage).")
+
+            IObj?.Paragraphs.Add("<m>H_j=L_{j-1}h_{L_{j-1}}+V_{j+1}h_{V_{j+1}}+F_jh_{F_j}-(L_j+U_j)h_{L_j}-(V_j+W_j)h_{V_j}-Q_j=0</m>")
+
+            IObj?.Paragraphs.Add("A countercurrent cascade of N such stages is represented by N(2C+3) such equations in [N(3C+10)+1] variables. If N and all Fj, zij, TFj, PFj, Pj, Uj, Wj, and Qj are specified, the model is represented by N(2C+3) simultaneous algebraic equations in N(2C+3) unknown (output) variables comprising all xij, yij, Lj, Vj, and Tj, where the M, E, and H equations are nonlinear. If other variables are specified, corresponding substitutions are made to the list of output variables. Regardless, the result is a set containing nonlinear equations that must be solved by an iterative technique.")
+
+            IObj?.Paragraphs.Add("<h2>Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add("DWSIM will calculate new or use existing initial estimates and forward the values to the selected solver.")
+
             'Validate unitop status.
             Me.Validate()
 
@@ -2421,7 +2459,7 @@ Namespace UnitOperations
             tol(0) = Me.InternalLoopTolerance
             tol(1) = Me.ExternalLoopTolerance
 
-            Dim F(ns), Q(ns), V(ns), L(ns), VSS(ns), LSS(ns), HF(ns), T(ns), FT(ns), P(ns), fracv(ns), eff(ns), _
+            Dim F(ns), Q(ns), V(ns), L(ns), VSS(ns), LSS(ns), HF(ns), T(ns), FT(ns), P(ns), fracv(ns), eff(ns),
                 distrate, rr, vaprate As Double
 
             Dim x(ns)() As Double, y(ns)() As Double, z(ns)() As Double, fc(ns)() As Double
@@ -2439,6 +2477,8 @@ Namespace UnitOperations
 
             Dim sumcf(nc - 1), sumF, zm(nc - 1) As Double
 
+            IObj?.Paragraphs.Add("Collecting data from connected streams...")
+
             i = 0
 
             Dim stream As MaterialStream = Nothing
@@ -2449,7 +2489,7 @@ Namespace UnitOperations
                         stream = FlowSheet.SimulationObjects(ms.StreamID)
                         pp.CurrentMaterialStream = stream
                         F(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.molarflow.GetValueOrDefault
-                        HF(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.enthalpy.GetValueOrDefault * _
+                        HF(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.enthalpy.GetValueOrDefault *
                                                                 stream.Phases(0).Properties.molecularWeight.GetValueOrDefault
                         FT(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.temperature.GetValueOrDefault
                         sumF += F(StageIndex(ms.AssociatedStage))
@@ -2522,6 +2562,10 @@ Namespace UnitOperations
                     distrate = sumF / 2 - sum0_ - vaprate
                 End If
             End If
+
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Distillate Rate: {0} mol/s", distrate))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Vapor Overflow Rate: {0} mol/s", vaprate))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Reflux Ratio: {0}", rr))
 
             compids = New ArrayList
             compids.Clear()
@@ -2723,6 +2767,13 @@ Namespace UnitOperations
                     Q(0) = 0
             End Select
 
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Temperature Profile: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Interstage Liquid Flow Rate: {0} mol/s", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Interstage Vapor/Liquid2 Flow Rate: {0} mol/s", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Liquid Side Draw Rate: {0} mol/s", LSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Vapor/Liquid2 Side Draw Rate: {0} mol/s", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Heat Added/Removed Profile: {0} kW", Q.ToMathArrayString))
+
             'store initial values
 
             x0.Clear()
@@ -2740,11 +2791,15 @@ Namespace UnitOperations
             VSS0 = VSS
             LSS0 = LSS
 
+            IObj?.Paragraphs.Add("<h2>Column Specifications</h2>")
+
+            IObj?.Paragraphs.Add("Processing Specs...")
+
             'process specifications
             For Each sp As Auxiliary.SepOps.ColumnSpec In Me.Specs.Values
-                If sp.SType = ColumnSpec.SpecType.Component_Fraction Or _
-                sp.SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate Or _
-                sp.SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Or _
+                If sp.SType = ColumnSpec.SpecType.Component_Fraction Or
+                sp.SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate Or
+                sp.SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Or
                 sp.SType = ColumnSpec.SpecType.Component_Recovery Then
                     i = 0
                     For Each comp As BaseClasses.Compound In stream.Phases(0).Compounds.Values
@@ -2764,6 +2819,10 @@ Namespace UnitOperations
                     sp.SpecValue = sumF - sumLSS - sumVSS - V(0)
                     sp.StageNumber = 0
                 End If
+                IObj?.Paragraphs.Add(String.Format("Spec Type: {0}", [Enum].GetName(sp.SType.GetType, sp.SType)))
+                IObj?.Paragraphs.Add(String.Format("Spec Value: {0}", sp.SpecValue))
+                IObj?.Paragraphs.Add(String.Format("Spec Units: {0}", sp.SpecUnit))
+                IObj?.Paragraphs.Add(String.Format("Compound (if applicable): {0}", sp.ComponentID))
             Next
 
             Dim idealk0, idealh0 As Boolean
@@ -2782,6 +2841,26 @@ Namespace UnitOperations
                     idealk0 = True
                     idealh0 = True
             End Select
+
+
+            IObj?.Paragraphs.Add("<h2>Rigorous Solver</h2>")
+
+            Select Case Me.SolvingMethod
+                Case 0 'BP
+                    IObj?.Paragraphs.Add("Selected Solver: Wang-Henke Bubble-Point (BP)")
+                Case 1 'SC
+                    IObj?.Paragraphs.Add("Selected Solver: Naphtali-Sandholm Simultaneous Correction (SC)")
+                Case 2 'IO 
+                    IObj?.Paragraphs.Add("Selected Solver: Russell Inside-Out (IO)")
+                Case 3 'SR
+                    IObj?.Paragraphs.Add("Selected Solver: Burningham-Otto Sum-Rates (SR)")
+            End Select
+
+            IObj?.Paragraphs.Add(String.Format("Solving Scheme: {0}", [Enum].GetName(SolverScheme.GetType, SolverScheme)))
+
+            If idealk0 Or idealh0 Then
+                IObj?.Paragraphs.Add("Calling the rigorous solver to calculate solution using Ideal K-values and/or Enthalpy values.")
+            End If
 
             Dim result As Object
 
@@ -2823,7 +2902,7 @@ Namespace UnitOperations
                 xf.Add(result(6)(i))
                 x(i) = result(5)(i)
                 y(i) = result(6)(i)
-                If Me.SolvingMethod = SolvingMethods.ColSolvingMethod.Russell_InsideOut Or _
+                If Me.SolvingMethod = SolvingMethods.ColSolvingMethod.Russell_InsideOut Or
                    Me.SolvingMethod = SolvingMethods.ColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Then
                     Dim obj(nc - 1) As Double
                     For j = 0 To nc - 1
@@ -2848,6 +2927,7 @@ Namespace UnitOperations
 
             If SolverScheme <> SolvingScheme.Direct Then
                 're-run solver using refined initial estimates from last run with ideal properties
+                IObj?.Paragraphs.Add("Re-running solver using refined initial estimates from last run with ideal properties.")
                 Select Case Me.SolvingMethod
                     Case 2 'IO 
                         Dim rm As New SolvingMethods.RussellMethod
@@ -2869,9 +2949,12 @@ Namespace UnitOperations
                 End Select
             End If
 
+            IObj?.Paragraphs.Add("Column is solved.")
+
             'if enabled, auto update initial estimates
 
             If Me.AutoUpdateInitialEstimates Then
+                IObj?.Paragraphs.Add("Auto-updating initial estimates...")
                 For i = 0 To Me.Stages.Count - 1
                     Me.InitialEstimates.StageTemps(i).Value = Tf(i)
                     Me.InitialEstimates.VapMolarFlows(i).Value = Vf(i)
@@ -2900,6 +2983,8 @@ Namespace UnitOperations
             RefluxRatio = Lf(0) / (LSSf(0) + Vf(0))
 
             'copy results to output streams
+
+            IObj?.Paragraphs.Add("Copying results to outlet streams...")
 
             'product flows
 
@@ -3015,6 +3100,8 @@ Namespace UnitOperations
             Next
 
             'condenser/reboiler duties
+
+            IObj?.Paragraphs.Add("Updating Reboiler/Condenser duties...")
 
             Dim esm As Streams.EnergyStream
 
@@ -3325,17 +3412,17 @@ Namespace UnitOperations
             model.TitleFontSize = 11
             model.SubtitleFontSize = 10
 
-            model.Axes.Add(New LinearAxis() With { _
-                .MajorGridlineStyle = LineStyle.Dash, _
-                .MinorGridlineStyle = LineStyle.Dot, _
-                .Position = AxisPosition.Bottom, _
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Bottom,
                 .FontSize = 10
             })
 
-            model.Axes.Add(New LinearAxis() With { _
-                .MajorGridlineStyle = LineStyle.Dash, _
-                .MinorGridlineStyle = LineStyle.Dot, _
-                .Position = AxisPosition.Left, _
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Left,
                 .FontSize = 10,
                 .Title = "Stage",
                 .StartPosition = 1,

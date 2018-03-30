@@ -1661,12 +1661,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
     <System.Serializable()> Public Class WangHenkeMethod
 
         Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array,
-                                ByVal Q As Array, ByVal L As Array,
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
                                 ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
                                 ByVal fc()() As Double,
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
                                 ByVal condt As DistillationColumn.condtype,
                                 ByVal stopatitnumber As Integer,
                                 ByVal eff() As Double,
@@ -1674,6 +1674,76 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal pp As PropertyPackages.PropertyPackage,
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Bubble-Point (BP) Method", "Wang-Henke Bubble-Point (BP) Method for Distillation Columns", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("Frequently, distillation involves species that cover a relatively narrow range of K-values. A particularly effective procedure for this case was suggested by Friday and Smith and developed in detail by Wang and Henke. It is referred to as the bubble-point (BP) method because a new set of stage temperatures is computed during each iteration from the bubble-point equations. All equations are partitioned and solved sequentially except for the M equations, which are solved separately for each component by the tridiagonal-matrix technique.")
+
+            IObj?.Paragraphs.Add("Specifications are conditions and stage location of feeds, stage pressures, flow rates of sidestreams (note that liquid distillate flow rate, if any, is designated as U1), heat-transfer rates for all stages except stage 1 (condenser) and stage N (reboiler), total stages, bubble-point reflux flow rate, and vapor distillate flow rate.")
+
+            IObj?.Paragraphs.Add("To initiate the calculations, values of tear variables, Vj and Tj, are assumed. Generally, it is sufficient to establish an initial set of Vj values based on constant-molar interstage flows using the specified reflux, distillate, feed, and sidestream flows. Initial Tj values can be provided by computing the bubble-point temperature of an estimated bottoms product and the dew-point temperature of an assumed distillate product (or computing a bubble-point temperature if distillate is liquid, or a temperature in between the dew point and bubble point if distillate is both vapor and liquid), and then using linear interpolation for the other stage temperatures.")
+
+            IObj?.Paragraphs.Add("To solve the Tridiagonal Matrix for <mi>x_{i}</mi> by the Thomas method, <mi>K_{i,j}</mi> values are required. When they are composition-dependent, initial assumptions for all <mi>x_{i,j}</mi> and <mi>y_{i,j}</mi> values are also needed, unless ideal K-values are employed initially. For each iteration, the computed set of <mi>x_{i,j}</mi> values for each stage are not likely to satisfy the summation constraint. Although not mentioned by Wang and Henke, it is advisable to normalize the set of computed <mi>x_{i,j}</mi> values by the relation")
+
+            IObj?.Paragraphs.Add("<m>(x_{i,j})_{normalized}=\frac{x_{i,j}}{\sum\limits_{i=1}^{C}{x_{i,j}} }</m>")
+
+            IObj?.Paragraphs.Add("New temperatures for the stages are obtained by bubble point calculations using normalized <mi>x_{i,j}</mi> values.")
+
+            IObj?.Paragraphs.Add("Values of <mi>y_{i,j}</mi> are determined along with the calculation of stage temperatures using the E equations. With a consistent set of values for <mi>x_{i,j}</mi>, Tj, and <mi>y_{i,j}</mi>, molar enthalpies are computed for each liquid and vapor stream leaving a stage. Since F1, V1, U1, W1, and L1 are specified, V2 and the condenser duty are readily obtained. Reboiler duty is determined by")
+
+            IObj?.Paragraphs.Add("<m>Q_N=\sum\limits_{j=1}^{N}{(F_jh_{F_j}-U_jh_{L_j}-W_jh_{V_j})}-\sum\limits_{j=1}^{N-1}{(Q_j-V_1h_{V_1}-L_Nh_{L_N})}</m>")
+
+            IObj?.Paragraphs.Add("A new set of Vj tear variables is computed by applying a modified energy balance obtained by")
+
+            IObj?.Paragraphs.Add("<m>\alpha _jV_j+\beta _jV_{j+1}=\gamma _j</m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<m>\alpha _j = h_{L_{j-1}}-h_{V_j}</m>")
+
+            IObj?.Paragraphs.Add("<m>\beta _j=h_{V_{j+1}}-h_{L_j}</m>")
+
+            IObj?.Paragraphs.Add("<m>\gamma _j =\left[\sum\limits_{m=1}^{j-1}{(F_m-W_m-U_m)-V_1}\right](h_{L_j}-h_{L_{j=1}})+F_j(h_{L_j}-h_{F_j})+W_j(h_{V_j}-h_{L_j})+Q_j</m>")
+
+            IObj?.Paragraphs.Add("and enthalpies are evaluated at the stage temperatures last computed rather than at those used to initiate the iteration.")
+
+            IObj?.Paragraphs.Add("<m>V_j=\frac{\gamma _{j-1}-\alpha _{j-1}V_{j-1}}{\beta _{j-1}} </m>")
+
+            IObj?.Paragraphs.Add("Corresponding liquid flow rates are obtained from")
+
+            IObj?.Paragraphs.Add("<m>L_j=V_{j+1}+\sum\limits_{m=1}^{j}{(F_m-U_m-W_m)-V_1} </m>")
+
+            IObj?.Paragraphs.Add("One convergence criterion is")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{j=1}^{N}{\left[\frac{T_j^{(k)}-T_j^{(k-1)}}{T_j^{(k)}}\right]^2+\sum\limits_{j=1}^{N}{\left[\frac{V_j^{(k)}-V_j^{(k-1)}}{V_j^{(k)}} \right]^2 }}\leq \in</m>")
+
+            IObj?.Paragraphs.Add("where T is an absolute temperature and <mi>\in</mi> is some prescribed tolerance. However, Wang and Henke suggest that the following simpler criterion, which is based on successive sets of Tj values only, is adequate.")
+
+            IObj?.Paragraphs.Add("Successive substitution is often employed for iterating the tear variables; that is, values of Tj and Vj are used directly to initiate the next iteration. It is desirable to inspect, and, if necessary, adjust the generated tear variables prior to beginning the next iteration.")
+
+            IObj?.Paragraphs.Add("The BP convergence rate is unpredictable, and can depend on the assumed initial set of Tj values. Cases with high reflux ratios can be more difficult to converge than those with low ratios. Orbach and Crowe describe an extrapolation method for accelerating convergence based on periodic adjustment of the tear variables when their values form geometric progressions during at least four successive iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters / Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Stage Temperatures: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Stage Pressures: {0}", P.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Feeds: {0}", F.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Flows: {0}", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Flows: {0}", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Side Draws: {0}", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Side Draws: {0}", LSS.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Mixture Compositions: {0}", z.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Compositions: {0}", x.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor/Liquid2 Phase Compositions: {0}", y.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("K-values: {0}", Kval.ToMathArrayString))
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
 
             Dim ppr As PropertyPackages.RaoultPropertyPackage = Nothing
 
@@ -1780,17 +1850,23 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Else
                 For i = 0 To ns
+                    IObj?.SetCurrent
                     If IdealH Then
                         ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Hl(i) = ppr.DW_CalcEnthalpy(x(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(x(i)) / 1000
+                        IObj?.SetCurrent
                         Hv(i) = ppr.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(y(i)) / 1000
                     Else
                         pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Hl(i) = pp.DW_CalcEnthalpy(x(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(i)) / 1000
+                        IObj?.SetCurrent
                         Hv(i) = pp.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(i)) / 1000
                     End If
                 Next
             End If
+
+            IObj?.Paragraphs.Add(String.Format("Vapor Enthalpies: {0}", Hv.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Enthalpies: {0}", Hl.ToMathArrayString))
 
             Select Case specs("C").SType
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
@@ -1838,13 +1914,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 LSSj(0) = D2
             End If
 
-
             'step3
 
             'internal loop
 
             ic = 0
             Do
+
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Solve", "Bubble-Point (BP) Internal Loop #" & ic, "Wang-Henke Bubble-Point (BP) Method for Distillation", True)
 
                 Dim il_err As Double = 0.0#
                 Dim il_err_ant As Double = 0.0#
@@ -1853,6 +1934,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 'step4
 
                 'find component liquid flows by the tridiagonal matrix method
+
+                IObj2?.Paragraphs.Add(String.Format("Find component liquid flows by the tridiagonal matrix method"))
+                IObj2?.Paragraphs.Add(String.Format("Calculating TDM A, B, C, D"))
 
                 Dim at(nc - 1)(), bt(nc - 1)(), ct(nc - 1)(), dt(nc - 1)(), xt(nc - 1)() As Double
 
@@ -1901,7 +1985,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 'solve matrices
 
+                IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver to calculate liquid phase compositions"))
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("A: {0}", at.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("B: {0}", bt.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("C: {0}", ct.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("D: {0}", dt.ToMathArrayString))
+
                 'tomich
+
                 If doparallel Then
 
                     Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, nc, poptions,
@@ -1915,9 +2012,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Else
                     For i = 0 To nc - 1
+                        IObj2?.SetCurrent()
+                        IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver for Stage #{0}...", i + 1))
                         xt(i) = Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
                     Next
                 End If
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("TDM solved successfully."))
 
                 Dim sumx(ns), sumy(ns) As Double
 
@@ -1945,6 +2048,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If Lj(i) < 0.0# Then Lj(i) = 0.001
                 Next
 
+                IObj2?.Paragraphs.Add(String.Format("l: {0}", lc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("L: {0}", Lj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("x: {0}", xc.ToMathArrayString))
+
                 Dim tmp As Object
 
                 'calculate new temperatures
@@ -1952,6 +2061,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
                 Next
+
+                IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
                 If doparallel Then
                     Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
@@ -1973,6 +2084,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     t1.Wait()
                 Else
                     For i = 0 To ns
+                        IObj2?.SetCurrent
                         If IdealK Then
                             ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
                             tmp = ppr.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
@@ -1999,11 +2111,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Tj(i) = Tj_ant(i)
                 Next
 
+                IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
+
                 t_error_ant = t_error
                 t_error = 0.0#
                 For i = 0 To ns
                     t_error += (Tj(i) - Tj_ant(i)) ^ 2
                 Next
+
+                IObj2?.Paragraphs.Add(String.Format("Temperature error: {0}", t_error))
 
                 For i = ns To 0 Step -1
                     sumy(i) = 0
@@ -2022,6 +2138,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         yc(i)(j) = yc(i)(j) / sumy(i)
                     Next
                 Next
+
+                IObj2?.Paragraphs.Add(String.Format("y: {0}", yc.ToMathArrayString))
 
                 If doparallel Then
 
@@ -2042,13 +2160,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Else
                     For i = 0 To ns
+                        IObj2?.SetCurrent
                         If IdealH Then
                             ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
                             Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent
                             Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
                         Else
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                             Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent
                             Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
                         End If
                     Next
@@ -2156,6 +2277,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If Lj(i) < 0.0# Then Lj(i) = 0.0001 * Fj.Sum
                 Next
 
+                IObj2?.Paragraphs.Add(String.Format("alpha: {0}", alpha.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("beta: {0}", beta.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("gamma: {0}", gamma.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated L: {0}", Lj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated V: {0}", Vj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated LSS: {0}", LSSj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated VSS: {0}", VSSj.ToMathArrayString))
+
                 'reboiler and condenser heat duties
                 Select Case coltype
                     Case Column.ColType.DistillationColumn
@@ -2186,6 +2321,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         End If
                 End Select
 
+                IObj2?.Paragraphs.Add(String.Format("Updated Q: {0}", Q.ToMathArrayString))
+
                 ic = ic + 1
 
                 If Not IdealH And Not IdealK Then
@@ -2199,6 +2336,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Calculator.WriteToConsole("Bubble Point solver T error = " & t_error, 1)
 
             Loop Until t_error < tol(1)
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged values for T: {0}", Tj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for V: {0}", Vj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for L: {0}", Lj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for VSS: {0}", VSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for LSS: {0}", LSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for y: {0}", yc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
 
             'finished, return arrays
 
@@ -2356,6 +2507,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Liquid Phase Compositions: {0}", x.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Vapor/Liquid2 Phase Compositions: {0}", y.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("K-values: {0}", K.ToMathArrayString))
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
 
             For i = 0 To ns
                 For j = 0 To nc - 1
@@ -2769,6 +2922,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
     <System.Serializable()> Public Class NaphtaliSandholmMethod
 
+        Dim _IObj As Inspector.InspectorItem
+
         Sub New()
 
         End Sub
@@ -2820,7 +2975,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionValue(ByVal xl() As Double) As Double
 
+            _IObj?.SetCurrent
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "FunctionValue", "Simultaneous Correction (SC) Method MEH Equations Calculator", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
+
+            IObj?.SetCurrent()
+
             Dim x As Double() = xl.ExpY
+
+            IObj?.Paragraphs.Add(String.Format("Input Variables: {0}", xl.ToMathArrayString))
 
             If x.Where(Function(xi) xi < 0#).Count > 0 Then
                 Return x.AbsSqrSumY * 100
@@ -2973,12 +3138,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Dim tmp0 As Object
                 For i = 0 To ns
                     If ik Then
+                        IObj?.SetCurrent
                         If llextr Then
                             tmp0 = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
                             tmp0 = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
                         End If
                     Else
+                        IObj?.SetCurrent
                         If llextr Then
                             tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
@@ -3036,12 +3203,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 For i = 0 To ns
                     If Vj(i) <> 0 Then
                         If ih Then
+                            IObj?.SetCurrent
                             If llextr Then
                                 Hv(i) = _ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _ppr.AUX_MMM(yc(i)) / 1000
                             Else
                                 Hv(i) = _ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * _ppr.AUX_MMM(yc(i)) / 1000
                             End If
                         Else
+                            IObj?.SetCurrent
                             If llextr Then
                                 Hv(i) = _pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _pp.AUX_MMM(yc(i)) / 1000
                             Else
@@ -3052,6 +3221,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Hv(i) = 0
                     End If
                     If Lj(i) <> 0 Then
+                        IObj?.SetCurrent
                         If ih Then
                             Hl(i) = _ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _ppr.AUX_MMM(xc(i)) / 1000
                         Else
@@ -3232,6 +3402,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
             Next
 
+
+            IObj?.Paragraphs.Add(String.Format("M Equation Deviations: {0}", M.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("E Equation Deviations: {0}", E.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("H Equation Deviations: {0}", H.ToMathArrayString))
+
             If Not grad Then
                 _pp.CurrentMaterialStream.Flowsheet.ShowMessage("NS solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
                 _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
@@ -3240,6 +3415,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 0 To errors.Length - 1
                 If Double.IsNaN(errors(i)) Or Double.IsInfinity(errors(i)) Then errors(i) = 10000000000.0
             Next
+
+            IObj?.Paragraphs.Add(String.Format("Total Error: {0}", errors.AbsSqrSumY))
 
             Return errors.AbsSqrSumY
 
@@ -3281,12 +3458,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         End Function
 
         Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array,
-                                ByVal Q As Array, ByVal L As Array,
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
                                 ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
                                 ByVal fc()() As Double,
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
                                 ByVal condt As DistillationColumn.condtype,
                                 ByVal eff() As Double,
                                 ByVal coltype As Column.ColType,
@@ -3298,6 +3475,79 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal SimplexPreconditioning As Boolean,
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
                                 Optional ByVal LLEX As Boolean = False) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Simultaneous Correction (SC) Method", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("BP and SR methods for vapor–liquid systems converge with difficulty or not at all for very nonideal liquid mixtures or for cases where the separator is like an absorber or stripper in one section and a fractionator in another section (e.g., reboiled absorber). Furthermore, BP and SR methods are generally restricted to limited specifications. Universal procedures for solving separation problems are based on the solution of the MESH equations, or combinations thereof, by simultaneous-correction (SC) techniques, which employ the Newton–Raphson (NR) method.")
+
+            IObj?.Paragraphs.Add("To develop an SC procedure, it is necessary to select and order the unknown variables and corresponding functions (MESH equations). As discussed by Goldstein and Stanfield, grouping of functions by type is computationally most efficient for problems involving many components, but few stages. For problems involving many stages but relatively few components, it is most efficient to group the functions according to stage location. The latter grouping, presented here, is described by Naphtali and was implemented by Naphtali and Sandholm.")
+
+            IObj?.Paragraphs.Add("The stage model is again employed. However, rather than solving the N(2C+3) MESH equations simultaneously, some equations are combined with the other MESH equations to eliminate 2N variables and thus reduce the problem to the simultaneous solution of N(2C+1) equations. This gives")
+
+            IObj?.Paragraphs.Add("<m>V_j=\sum\limits_{i=1}^{C}{v_{i,j}}</m>")
+
+            IObj?.Paragraphs.Add("<m>L_j=\sum\limits_{i=1}^{C}{l_{i,j}}</m>")
+
+            IObj?.Paragraphs.Add("where mole-fraction definitions are used:")
+
+            IObj?.Paragraphs.Add("<m>y_{i,j}=\frac{v_{i,j}}{V_j} </m>")
+
+            IObj?.Paragraphs.Add("<m>x_{i,j}=\frac{l_{i,j}}{L_j} </m>")
+
+            IObj?.Paragraphs.Add("As a result, the following N(2C+1) equations are obtained, where <mi>s_j=U_j/L_j</mi> and <mi>S_j=W_j/V_j</mi> are dimensionless sidestream flows.")
+
+            IObj?.Paragraphs.Add("Material Balance")
+
+            IObj?.Paragraphs.Add("<m>M_{i,j}=l_{i,j}(1+s_j)+v_{i,j}(1+S_j)-l_{i,j-1}-v_{i,j+1}-f_{i,j}=0</m>")
+
+            IObj?.Paragraphs.Add("Phase Equilibria")
+
+            IObj?.Paragraphs.Add("<m>E_{i,j}=K_{i,j}l_{i,j}\frac{\sum\limits_{k=1}^{C}{v_{k,j}} }{\sum\limits_{k=1}^{C}{l_{k,j}} }-v_{i,j}=0</m>")
+
+            IObj?.Paragraphs.Add("Energy Balance")
+
+            IObj?.Paragraphs.Add("<m>H_j=h_{L_j}(1+s_j)\sum\limits_{i=1}^{C}{l_{i,j}}+h_{V_j}(1+S_j)\sum\limits_{i=1}^{C}{v_{i,j}}-h_{L_{j-1}}\sum\limits_{i=1}^{C}{l_{i,j-1}}-h_{V_{j+1}}\sum\limits_{i=1}^{C}{v_{i,j+1}}-h_{F_j}\sum\limits_{i=1}^{C}{f_{i,j}}-Q_j=0</m>")
+
+            IObj?.Paragraphs.Add("where <mi>f_{i,j}=F_jz_{i,j}</mi>.")
+
+            IObj?.Paragraphs.Add("If N and all fi,j, TFj, PFj, Pj, sj, Sj and Qj are specified, the M, E, and H functions are nonlinear in the N(2C+1) unknown (output) variables yij, lij and Tj for i = 1 to C and j = 1 to N. Although other sets of specified and unknown variables are possible, this set is considered first.")
+
+            IObj?.Paragraphs.Add("The above equations are solved simultaneously by the Newton–Raphson iterative method in which successive sets of the output variables are computed until the values of the M, E, and H functions are driven to within the convergence criteria or zero. During the iterations, nonzero values of the functions are called discrepancies or errors.")
+
+            IObj?.Paragraphs.Add("Problem specifications are quite flexible. However, number of stages, and pressure, compositions, flow rates, and stage locations for all feeds are necessary specifications. The thermal condition of each feed can be given in terms of enthalpy, temperature, or fraction vaporized. A two-phase feed can be sent to the same stage or the vapor can be directed to the stage above. Stage pressures and stage efficiencies can be designated by specifying top- and bottom-stage values with remaining values obtained by linear interpolation. By default, intermediate stages are assumed adiabatic unless Qj or Tj values are specified. Vapor and/or liquid sidestreams can be designated in terms of total flow or flow rate of a specified component, or by the ratio of the sidestream flow to the flow rate passing to the next stage. The top- and bottom-stage specifications are selected from Q1 or QN, and/or from the other specifications.")
+
+            IObj?.Paragraphs.Add("To achieve convergence, the Newton–Raphson procedure requires guesses for the values of all output variables. Rather than provide these a priori, they can be generated if T, V, and L are guessed for the bottom and top stages and, perhaps, for one or more intermediate stages. Remaining guessed Tj, Vj, and Lj values are obtained by linear interpolation of the Tj values and computed (Vj=Lj) values. Initial values for yij and lij are then obtained by either of two techniques. Based on initial guesses for all output variables, the sum of the squares of the discrepancy functions is compared to the convergence criterion")
+
+            IObj?.Paragraphs.Add("<m>\tau _3=\sum\limits_{j=1}^{N}{\left\{(H_j)^2+\sum\limits_{i=1}^{C}{\left[(M_{i,j})^2+(E_{i,j})^2\right]} \right\} }\leq \epsilon _3</m>")
+
+            IObj?.Paragraphs.Add("For all discrepancies to be of the same order of magnitude, it is necessary to divide energy-balance functions Hj by a scale factor approximating the latent heat of vaporization (e.g.,
+1,000 Btu/lbmol). If the convergence criterion is")
+
+            IObj?.Paragraphs.Add("<m>\epsilon _3 = N(2C+1)\left(\sum\limits_{j=1}^{N}{F_j^2} \right)10^{-10} </m>")
+
+            IObj?.Paragraphs.Add("resulting converged values will generally be accurate, on the average, to four or more significant figures. When employing the above equation, most problems converge in 10 iterations or fewer. The convergence criterion is far from satisfied during the first iteration with guessed values for the output variables. For subsequent iterations, Newton–Raphson corrections can be added directly to the present values of the output variables to obtain a new set of output variables. Alternatively, a damping factor can be employed where t is a nonnegative, scalar step factor. At each iteration, a value of t is applied to all output variables. By permitting t to vary from slightly greater than 0 up to 2, it can dampen or accelerate convergence, as appropriate. For each iteration, a t that minimizes the sum of the squares is sought. Generally, optimal values of t proceed from an initial value for the second iteration at between 0 and 1 to a value nearly equal to or slightly greater than 1 when the criterion is almost satisfied. If there is no optimal value of t in the designated range, t can be set to 1, or some smaller value, and the sum of squares can be allowed to increase. Generally, after several iterations, the sum of squares decreases for every iteration.")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters / Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Stage Temperatures: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Stage Pressures: {0}", P.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Feeds: {0}", F.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Flows: {0}", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Flows: {0}", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Side Draws: {0}", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Side Draws: {0}", LSS.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Mixture Compositions: {0}", z.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Compositions: {0}", x.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor/Liquid2 Phase Compositions: {0}", y.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("K-values: {0}", Kval.ToMathArrayString))
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
 
             ik = IdealK
             ih = IdealH
@@ -3470,6 +3720,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
             Next
 
+            IObj?.Paragraphs.Add("Creating variable vectors...")
+
+            IObj?.Paragraphs.Add(String.Format("Initial Variable Values: {0}", xvar.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Lower Bounds: {0}", lb.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Upper Bounds: {0}", ub.ToMathArrayString))
+
+            _IObj = IObj
+
             grad = False
 
             'enhance initial estimates with simplex optimization algorithm
@@ -3572,6 +3830,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             xvar = initval.ExpY
 
+            IObj?.Paragraphs.Add(String.Format("Final Variable Values: {0}", xvar.ToMathArrayString))
+
             il_err = FunctionValue(xvar.LogY)
 
             pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err, IFlowsheet.MessageType.Information)
@@ -3609,7 +3869,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Next
 
             ' finished, de-normalize and return arrays
-            Dim K(ns, nc - 1) As Object
+            Dim K(ns, nc - 1) As Double
             For i = 0 To ns
                 For j = 0 To nc - 1
                     K(i, j) = _Kval(i)(j)
@@ -3650,6 +3910,21 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 VSS(i) = VSS(i) * maxF
                 Q(i) = Q(i) * maxF
             Next
+
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & maxits & " iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged values for T: {0}", Tj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for V: {0}", Vj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for L: {0}", Lj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for VSS: {0}", VSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for LSS: {0}", LSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for y: {0}", yc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
 
