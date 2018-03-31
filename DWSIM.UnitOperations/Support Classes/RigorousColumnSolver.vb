@@ -119,17 +119,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
     <System.Serializable()> Public Class RussellMethod
 
+        Dim _IObj As Inspector.InspectorItem
+
         Sub New()
 
         End Sub
 
-        Private Function CalcKbj1(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Object,
+        Private Function CalcKbj1(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Double,
                                         ByVal z()() As Double, ByVal y()() As Double, ByVal T() As Double,
-                                        ByVal P() As Double, ByRef pp As PropertyPackages.PropertyPackage) As Object
+                                        ByVal P() As Double, ByRef pp As PropertyPackages.PropertyPackage) As Double()
 
             Dim i, j As Integer
 
-            Dim Kbj1(ns) As Object
+            Dim Kbj1(ns) As Double
 
             For i = 0 To ns
                 Kbj1(i) = K(i, 0)
@@ -142,13 +144,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Private Function CalcKbj2(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Object,
+        Private Function CalcKbj2(ByVal ns As Integer, ByVal nc As Integer, ByVal K(,) As Double,
                                       ByVal z()() As Double, ByVal y()() As Double, ByVal T() As Double,
-                                      ByVal P() As Double, ByRef pp As PropertyPackages.PropertyPackage) As Object
+                                      ByVal P() As Double, ByRef pp As PropertyPackages.PropertyPackage) As Double()
 
             Dim i, j As Integer
 
-            Dim Kbj1(ns) As Object
+            Dim Kbj1(ns) As Double
             Dim Kw11(ns)(), Kw21(ns)() As Double
             Dim wi(ns, nc - 1), ti(ns, nc - 1), sumwi(ns), sumti(ns) As Double
             For i = 0 To ns
@@ -206,7 +208,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _Bj, _Aj, _Cj, _Dj, _Ej, _Fj, _eff, _T_, _Tj, _Lj, _Vj, _LSSj, _VSSj, _LSS, _VSS, _Rlj, _Rvj, _F, _P, _HF, _Q, Vjj As Double()
         Dim _S, _alpha As Double(,)
         Dim _fc, _xc, _yc, _lc, _vc, _zc As Double()()
-        Dim _Kbj As Object()
+        Dim _Kbj As Double()
         Dim _rr, _Sb, _maxF As Double
         Public _pp As PropertyPackages.PropertyPackage
         Public _ppr As PropertyPackages.RaoultPropertyPackage
@@ -243,6 +245,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         End Function
 
         Public Function FunctionValue(ByVal x() As Double) As Double
+
+            _IObj?.SetCurrent
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "FunctionValue", "Inside-Out (IO) Method Modified MESH Equations Calculator", "Russell IO Method for Distillation, Absorption and Stripping", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add(String.Format("Input Variables: {0}", x.ToMathArrayString))
 
             Dim errors(x.Length - 1) As Double
 
@@ -341,6 +353,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'tomich
             For i = 0 To _nc - 1
+                IObj?.SetCurrent()
                 xt(i) = Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
             Next
 
@@ -468,6 +481,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 _Tj(i) = _Bj(i) / (_Aj(i) - Log(_Kbj(i)))
                 If Abs(_Tj(i) - _Tj_ant(i)) > 100 Or Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then
                     'switch to a bubble point temperature calculation...
+                    IObj?.SetCurrent()
                     If ik Then
                         Dim tmp = _ppr.DW_CalcBubT(_xc(i), _P(i), _Tj(i), Nothing, False)
                         _Tj(i) = tmp(4)
@@ -490,7 +504,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim Hv(_ns), Hl(_ns), Hidv(_ns), Hidl(_ns), DHv(_ns), DHl(_ns) As Double
 
             For i = 0 To _ns
+                IObj?.SetCurrent()
                 Hidv(i) = _pp.RET_Hid(298.15, _Tj(i), _yc(i))
+                IObj?.SetCurrent()
                 Hidl(i) = _pp.RET_Hid(298.15, _Tj(i), _xc(i))
                 DHv(i) = _Cj(i) + _Dj(i) * (_Tj(i) - _T_(i))
                 DHl(i) = _Ej(i) + _Fj(i) * (_Tj(i) - _T_(i))
@@ -691,6 +707,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Next
             If _condtype = Column.condtype.Partial_Condenser Then errors(_el) = (_Vj(0) - Vjj(0))
 
+            IObj?.Paragraphs.Add(String.Format("MESH Equation Deviations: {0}", errors.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Total Error: {0}", errors.AbsSqrSumY))
+
             Return errors.AbsSqrSumY
 
         End Function
@@ -727,12 +747,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         End Function
 
         Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array,
-                                ByVal Q As Array, ByVal L As Array,
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
                                 ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
                                 ByVal fc()() As Double,
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
                                 ByVal condt As DistillationColumn.condtype,
                                 ByVal eff() As Double,
                                 ByVal AdjustSb As Boolean,
@@ -744,6 +764,192 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
                                 Optional ByVal llex As Boolean = False) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Inside-Out (IO) Method", "Russell Inside-Out (IO) Method for Distillation Columns", True)
+
+            IObj?.Paragraphs.Add("In the BP, SR, and NR methods, the major computational effort is expended in calculating K-values and enthalpies when rigorous thermodynamic-property models are utilized, because property calculations are made at each iteration. Furthermore, at each iteration, derivatives are required of: (1) all properties with respect to temperature and compositions of both phases for the NR method; (2) K-values with respect to temperature for the BP method, unless Muller’s method is used, and (3) vapor and liquid enthalpies with respect to temperature for the SR method.")
+
+            IObj?.Paragraphs.Add("In 1974, Boston and Sullivan presented an algorithm designed to reduce the time spent computing thermodynamic properties when making column calculations. Two sets of thermodynamic-property models are employed: (1) a simple, approximate, empirical set used frequently to converge inner-loop calculations, and (2) a rigorous set used less often in the outer loop. The MESH equations are always solved in the inner loop with the approximate set. The parameters in the empirical equations for the inner-loop set are updated only infrequently in the outer loop using the rigorous equations. The distinguishing Boston–Sullivan feature is the inner and outer loops, hence the name inside-out method. Another feature of the inside-out method is the choice of iteration variables. For the NR method, the iteration variables are <mi>l_{ij}</mi>, <mi>y_{ij}</mi>, and <mi>T_{j}</mi>. For the BP and SR methods, the choice is <mi>x_{ij}</mi>, <mi>y_{ij}</mi>, <mi>T_{j}</mi>, <mi>L_{j}</mi>, and <mi>V_{j}</mi>. For the inside-out method, the iteration variables for the outer loop are the parameters in the approximate equations for the thermodynamic properties. The iteration variables for the inner loop are related to stripping factors, <mi>S_{ij}=K_{i,j}V_j/L_j</mi>.")
+
+            IObj?.Paragraphs.Add("The inside-out method takes advantage of the following characteristics of the iterative calculations:")
+
+            IObj?.Paragraphs.Add("1. Component relative volatilities vary much less than component K-values.")
+
+            IObj?.Paragraphs.Add("2. Enthalpy of vaporization varies less than phase enthalpies.")
+
+            IObj?.Paragraphs.Add("3. Component stripping factors combine effects of temperature and liquid and vapor flows at each stage. ")
+
+            IObj?.Paragraphs.Add("The inner loop of the inside-out method uses relative volatility, energy, and stripping factors to improve stability and reduce computing time. A widely used implementation is that of Russell, which is described here together with further refinements suggested and tested by Jelinek.")
+
+            IObj?.Paragraphs.Add("<h3>MESH Equations for Inside-Out Method</h3>")
+
+            IObj?.Paragraphs.Add("As with the BP, SR, and NR methods, the equilibrium-stage model is employed. The form of the equations is similar to the NR method in that component flow rates are utilized. However, in addition, the following innerloop variables are defined:")
+
+            IObj?.Paragraphs.Add("<m>\alpha _{i,j}=K_{i,j}/K_{b,j}</m>")
+
+            IObj?.Paragraphs.Add("<m>S_{b,j}=K_{b,j}V_j/L_j</m>")
+
+            IObj?.Paragraphs.Add("<m>R_{L_j}=1+U_j/L_j</m>")
+
+            IObj?.Paragraphs.Add("<m>R_{V_j}=1+W_j/V_j</m>")
+
+            IObj?.Paragraphs.Add("where <mi>K_b</mi> is the K-value for a base or hypothetical reference component, <mi>S_{b,j}</mi> is the stripping factor for the base component, <mi>R_{L_j}</mi> is a liquid-phase withdrawal factor, and <mi>R_{V_j}</mi> is a vapor-phase withdrawal factor. For stages without sidestreams, <mi>R_{L_j}</mi> and <mi>R_{V_j}</mi> reduce to 1. The MESH equations become as follows:")
+
+            IObj?.Paragraphs.Add("<h4>Phase Equilibria</h4>")
+
+            IObj?.Paragraphs.Add("<m>v_{i,j}=\alpha _{i,j}S_{b,j}l_{i,j}, i=1 to C, j = 1 to N</m>")
+
+            IObj?.Paragraphs.Add("<h4>Component Material Balance</h4>")
+
+            IObj?.Paragraphs.Add("<m>l_{i,j-1}-(R_{L_j}+\alpha _{i,j}S_{b,j}R_{V_j})l_{i,j}+(\alpha _{i,j+1}S_{b,j+1})l_{i,j+1}=-f_{i,j}, i=1 to C, j = 1 to N</m>")
+
+            IObj?.Paragraphs.Add("<h4>Energy Balance</h4>")
+
+            IObj?.Paragraphs.Add("<m>H_j=h_{L_j}R_{L_j}L_j+h_{V_j}R_{V_j}V_j-h_{L_{j-1}}-h_{V_{j+1}}V_{j+1}-h_{F_j}F_j-Q_j=0, j = 1 to N</m>")
+
+            IObj?.Paragraphs.Add("where <mi>S_{i,j}=\alpha _{i,j}S_{b,j}</mi>.")
+
+            IObj?.Paragraphs.Add("In addition, discrepancy functions can be added to the MESH equations to permit any reasonable set of product specifications.")
+
+            IObj?.Paragraphs.Add("<h3>Rigorous and Complex Thermodynamic-Property Models</h3>")
+
+            IObj?.Paragraphs.Add("The complex thermodynamic models referred to in Figure 10.30 can include any of the models discussed in Chapter 2, including those based on P–y–T equations of state and those based on free-energy models for liquid-phase activity coefficients. These generate parameters in the approximate thermodynamic-property models of the form")
+
+            IObj?.Paragraphs.Add("<m>K_{i,j}=K_{i,j}\left\{P_j,T_j,x_j,y_j\right\}</m>")
+
+            IObj?.Paragraphs.Add("<m>h_{V_j}=h_{V_j}\left\{P_j,T_j,x_j\right\}</m>")
+
+            IObj?.Paragraphs.Add("<m>h_{L_j}=h_{L_j}\left\{P_j,T_j,x_j\right\}</m>")
+
+            IObj?.Paragraphs.Add("<h3>Approximate Thermodynamic-Property Models</h3>")
+
+            IObj?.Paragraphs.Add("The approximate models in the inside-out method are designed to facilitate calculation of stage temperatures and stripping factors.")
+
+            IObj?.Paragraphs.Add("<h4>K-values</h4>")
+
+            IObj?.Paragraphs.Add("The approximate K-value model of Russell and Jelinek, which differs slightly from that of Boston and Sullivan and originated from a proposal in Robinson and Gilliland,")
+
+            IObj?.Paragraphs.Add("<m>K_{b,j}=\exp (A_j-B_j/T_j)</m>")
+
+            IObj?.Paragraphs.Add("Either a feed component or a hypothetical reference component can be selected as the base, b, with the latter preferred, and determined from a vapor-composition weighting using the following relations:")
+
+            IObj?.Paragraphs.Add("<m>K_{b,j}=\exp \left(\sum\limits_{i}{w_{i,j}\ln K_{i,j}} \right) </m>")
+
+            IObj?.Paragraphs.Add("where <mi>w_{i,j}</mi> are weighting functions given by")
+
+            IObj?.Paragraphs.Add("<m>w_{i,j}=\frac{y_{i,j\left[\partial \ln K_{i,j}/\partial (1/T)\right] }}{\sum\limits_{i}{y_{i,j}\left[\partial \ln K_{i,j}/\partial (1/T)\right] }} </m>")
+
+            IObj?.Paragraphs.Add("<h4>Enthalpies</h4>")
+
+            IObj?.Paragraphs.Add("Boston and Sullivan and Russell employ the same approximate enthalpy models. Jelinek does not use approximate enthalpy models, because the additional complexity involved in the use of two enthalpy models may not always be justified to the extent that approximate and rigorous K-value models are justified. ")
+
+            IObj?.Paragraphs.Add("<h3>Inside-Out Algorithm</h3>")
+
+            IObj?.Paragraphs.Add("The inside-out algorithm of Russell involves an initialization procedure, inner-loop iterations, and outer-loop iterations.")
+
+            IObj?.Paragraphs.Add("<h4>Initialization Procedure</h4>")
+
+            IObj?.Paragraphs.Add("First, it is necessary to provide reasonably good estimates of all stage values of <mi>x_{i,j}</mi>, <mi>y_{i,j}</mi>, Tj, Vj, and Lj. Boston and Sullivan suggest the following procedure:")
+
+            IObj?.Paragraphs.Add("1. Specify the number of theoretical stages, conditions of all feeds, feed-stage locations, and pressure profile.")
+
+            IObj?.Paragraphs.Add("2. Specify stage locations for each product withdrawal (including sidestreams) and for each heat exchanger.")
+
+            IObj?.Paragraphs.Add("3. Provide an additional specification for each product and each intermediate heat exchanger. ")
+
+            IObj?.Paragraphs.Add("4. If not specified, estimate each product-withdrawal rate, and estimate each value of Vj. Obtain values of Lj from the total material-balance equation.")
+
+            IObj?.Paragraphs.Add("5. Estimate an initial temperature profile, Tj, by combining all feed streams (composite feed) and determining bubble- and dew-point temperatures at average column pressure. The dew-point temperature is the top-stage temperature, T1, whereas the bubble-point temperature is the bottom-stage temperature, TN. Intermediate stage temperatures are estimated by interpolation.")
+
+            IObj?.Paragraphs.Add("6. Flash the composite feed isothermally at the average column pressure and temperature. The resulting vapor and liquid compositions, yi and xi, are the estimated stage compositions.")
+
+            IObj?.Paragraphs.Add("7. With the initial estimates from steps 1 through 6, use the complex thermodynamic-property correlation to determine values of the stagewise outside-loop K and h parameters Aj, Bj, ai,j, <mi>b_{i,j}</mi>, cj, dj, ej, fj, <mi>K_{i,j}</mi>, and <mi>\alpha _{i,j}</mi> of the approximate models.")
+
+            IObj?.Paragraphs.Add("8. Compute initial values of <mi>S_{b,j}</mi>, <mi>R_{L_j}</mi>, and <mi>R_{V_j}</mi>.")
+
+            IObj?.Paragraphs.Add("<h4>Inner-Loop Calculation Sequence</h4>")
+
+            IObj?.Paragraphs.Add("An iterative sequence of inner-loop calculations begins with values for the outside-loop parameters listed in step 7, obtained initially from the initialization procedure and later from outer-loop calculations, using results from the inner loop.")
+
+            IObj?.Paragraphs.Add("9. Compute component liquid flow rates, <mi>l_{i,j}</mi>, from the set of N equations for each of the C components by the tridiagonal-matrix algorithm.")
+
+            IObj?.Paragraphs.Add("10. Compute component vapor flows, <mi>y_{i,j}</mi>.")
+
+            IObj?.Paragraphs.Add("11. Compute a revised set of flow rates, Vj and Lj, from the component flow rates.")
+
+            IObj?.Paragraphs.Add("12. To calculate a revised set of stage temperatures, Tj, compute a set of xi values for each stage, then a revised set of <mi>K_{b,j}</mi> values from a combination of the bubble-point equation, which gives")
+
+            IObj?.Paragraphs.Add("<m>K_{b,j}=\frac{1}{\sum\limits_{i=1}^{C}{(\alpha _{i,j}x_{i,j})} } </m>")
+
+            IObj?.Paragraphs.Add("From this new set of <mi>K_{b,j}</mi> values, compute a set of stage temperatures:")
+
+            IObj?.Paragraphs.Add("<m>T_j=\frac{B_j}{A_j-\ln K_{b,j}}</m>")
+
+            IObj?.Paragraphs.Add("At this point in the inner-loop iterative sequence, there is a revised set of <mi>y_{i,j}</mi>, <mi>l_{i,j}</mi>, and Tj, which satisfy the component material-balance and phase-equilibria equations for the estimated properties. However, these values do not satisfy the energy-balance and specification equations unless the estimated base-component stripping factors and productwithdrawal rates are correct.")
+
+            IObj?.Paragraphs.Add("13. Select inner-loop iteration variables as")
+
+            IObj?.Paragraphs.Add("<m>\ln S_{b,j}=\ln (K_{b,j}V_j/L_j)</m>")
+
+            IObj?.Paragraphs.Add("together with any other iteration variables. If the reflux ratio (L/D) and bottoms flow rate (B) are specified rather than the two duties (which is the more common situation), the two discrepancy functions D1 and D2 are added:")
+
+            IObj?.Paragraphs.Add("<m>D_1=L_1-(L/D)V_1=0</m>")
+
+            IObj?.Paragraphs.Add("<m>D_2=L_N-B=0</m>")
+
+            IObj?.Paragraphs.Add("For each sidestream, a sidestream-withdrawal factor is added as an inner-loop iteration variable, e.g., ln(Uj/Lj) and ln(Wj/Vj), together with a specification on purity or some other variable.")
+
+            IObj?.Paragraphs.Add("14. Compute stream enthalpies.")
+
+            IObj?.Paragraphs.Add("15. Compute normalized discrepancies of Hj, D1, D2, etc., from the energy balances but compute Q1 from H1, and QN from HN where appropriate.")
+
+            IObj?.Paragraphs.Add("16. Compute the Jacobian of partial derivatives of Hj, D1, D2, etc., with respect to the iteration variables, by perturbation of each iteration variable and recalculation of the discrepancies through steps 9 to 15, numerically or by differentiation.")
+
+            IObj?.Paragraphs.Add("17. Compute corrections to the inner-loop iteration variables by a NR iteration of the type discussed for the SR and NR methods.")
+
+            IObj?.Paragraphs.Add("18. Compute new values of the iteration variables from the sum of the previous values and the corrections with (10-66), using damping if necessary to reduce the sum of squares of the normalized discrepancies.")
+
+            IObj?.Paragraphs.Add("19. Check whether the sum-of-squares is sufficiently small. If so, proceed to the outer-loop calculation procedure given next. If not, repeat steps 15 to 18 using the latest iteration variables. For any subsequent cycles through steps 15 to 18, Russell uses Broyden updates to avoid reestimation of the Jacobian partial derivatives, whereas Jelinek recommends the standard NR method of recalculating the partial derivatives for each inner-loop iteration.")
+
+            IObj?.Paragraphs.Add("20. Upon convergence of steps 15 to 19, steps 9 through 12 will have produced an improved set of primitive variables <mi>x_{i,j}</mi>, <mi>y_{i,j}</mi>, <mi>l_{i,j}</mi>, Tj, Vj, and Lj. The values of these variables are not correct until the approximate thermodynamic properties are in agreement with the properties from the rigorous models. The primitive variables are input to the outer-loop calculations to bring the approximate and complex models into successively better agreement.")
+
+            IObj?.Paragraphs.Add("<h4>Outer-Loop Calculation Sequence</h4>")
+
+            IObj?.Paragraphs.Add("Each outer loop proceeds as follows:")
+
+            IObj?.Paragraphs.Add("21. Using the values of the primitive variables from step 20, compute relative volatilities and stream enthalpies from the complex thermodynamic models. If they are in close agreement with previous values used to initiate a set of inner-loop iterations, both outer- and inner-loop iterations are converged, and the problem is solved. If not, proceed to step 22.")
+
+            IObj?.Paragraphs.Add("22. Determine values of the stagewise outside-loop K and h parameters of the approximate models from the complex models, as in initialization step 7.")
+
+            IObj?.Paragraphs.Add("23. Compute values of Sb,j, RLj, and RVj, as in initialization step 8.")
+
+            IObj?.Paragraphs.Add("24. Repeat the inner-loop calculation of Steps 9–20. Although convergence of the inside-out method is not guaranteed, for most problems, the method is robust and rapid. Convergence difficulties arise because of poor initial estimates, which result in negative or zero flow rates at certain locations in the column. To counteract this tendency, all component stripping factors use a scalar multiplier, Sb, called a base stripping factor, to give")
+
+            IObj?.Paragraphs.Add("<m>S_{i,j}=S_b\alpha _{i,j}S_{b,j}</m>")
+
+            IObj?.Paragraphs.Add("The value of Sb is initially chosen to force the results of the initialization procedure to give a reasonable distribution of component flows throughout the column. Russell recommends that Sb be chosen only once, but Boston and Sullivan compute a new Sb for each new set of <mi>S_{b,j}</mi> values.")
+
+            IObj?.Paragraphs.Add("For highly nonideal-liquid mixtures, use of the inside-out method may lead to difficulties, and the NR method should be tried. If the NR method also fails to converge, relaxation or continuation methods are usually successful, but computing time may be an order of magnitude longer than that for similar problems converged successfully with the inside-out method.")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters / Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Stage Temperatures: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Stage Pressures: {0}", P.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Feeds: {0}", F.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Flows: {0}", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Flows: {0}", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Side Draws: {0}", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Side Draws: {0}", LSS.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Mixture Compositions: {0}", z.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Compositions: {0}", x.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor/Liquid2 Phase Compositions: {0}", y.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("K-values: {0}", Kval.ToMathArrayString))
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
 
             ik = IdealK
             ih = IdealH
@@ -842,8 +1048,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'find Kbref 
 
-            Dim Kbj(ns), Kbj_ant(ns) As Object
-            Dim K(ns, nc - 1), K_ant(ns, nc - 1), K2j(ns, nc - 1) As Object
+            Dim Kbj(ns), Kbj_ant(ns) As Double
+            Dim K(ns, nc - 1), K_ant(ns, nc - 1), K2j(ns, nc - 1) As Double
 
             Dim Kw1(ns)(), Kw2(ns)() As Object
             Dim wi(ns, nc - 1), ti(ns, nc - 1), sumwi(ns), sumti(ns) As Double
@@ -855,6 +1061,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim tmp0 As Object = Nothing
 
             For i = 0 To ns
+                IObj?.SetCurrent()
                 If ik Then
                     If Not llextr Then tmp0 = _ppr.DW_CalcKvalue(z(i), T(i), P(i))
                 Else
@@ -867,6 +1074,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
             Next
 
+            IObj?.SetCurrent()
             If KbjWA = False Then
                 Kbj = CalcKbj1(ns, nc, K, z, y, T, P, pp)
             Else
@@ -885,7 +1093,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'initialize A/B/C/D/E/F
 
-            Dim Kbj1(ns), Kbj2(ns) As Object
+            Dim Kbj1(ns), Kbj2(ns) As Double
             Dim Tj1(ns), Tj2(ns), Aj(ns), Bj(ns), Cj(ns), Dj(ns), Ej(ns), Fj(ns) As Double
             Dim Aj_ant(ns), Bj_ant(ns), Cj_ant(ns), Dj_ant(ns), Ej_ant(ns), Fj_ant(ns) As Double
             Dim Hl1(ns), Hl2(ns), Hv1(ns), Hv2(ns) As Double
@@ -901,28 +1109,42 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Kbj1(i) = Kbj(i)
                 'new Ks
                 If ih Then
+                    IObj?.SetCurrent()
                     If llextr Then
                         K2(i) = _ppr.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i), "LL")
+                        IObj?.SetCurrent()
                         Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                        IObj?.SetCurrent()
                         Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                     Else
                         K2(i) = _ppr.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i))
+                        IObj?.SetCurrent()
                         Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                        IObj?.SetCurrent()
                         Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
                     End If
+                    IObj?.SetCurrent()
                     Hl1(i) = _ppr.DW_CalcEnthalpyDeparture(x(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                    IObj?.SetCurrent()
                     Hl2(i) = _ppr.DW_CalcEnthalpyDeparture(x(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                 Else
+                    IObj?.SetCurrent()
                     If llextr Then
                         K2(i) = pp.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i), "LL")
+                        IObj?.SetCurrent()
                         Hv1(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                        IObj?.SetCurrent()
                         Hv2(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                     Else
                         K2(i) = pp.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i))
+                        IObj?.SetCurrent()
                         Hv1(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                        IObj?.SetCurrent()
                         Hv2(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
                     End If
+                    IObj?.SetCurrent()
                     Hl1(i) = pp.DW_CalcEnthalpyDeparture(x(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                    IObj?.SetCurrent()
                     Hl2(i) = pp.DW_CalcEnthalpyDeparture(x(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                 End If
                 For j = 0 To nc - 1
@@ -931,6 +1153,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
             Next
 
+            IObj?.SetCurrent()
             If KbjWA = False Then
                 Kbj2 = CalcKbj1(ns, nc, K2j, z, y, Tj2, P, pp)
             Else
@@ -945,6 +1168,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Fj(i) = (Hl1(i) - Hl2(i)) / (Tj1(i) - Tj2(i))
                 Ej(i) = Hl1(i) - Fj(i) * (Tj1(i) - T_(i))
             Next
+
+            IObj?.Paragraphs.Add("Initializing Model Variables...")
+
+            IObj?.Paragraphs.Add(String.Format("Kbj: {0}", Kbj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("alpha ij: {0}", alpha.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("A: {0}", Aj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("B: {0}", Bj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("C: {0}", Cj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("D: {0}", Dj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("E: {0}", Ej.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("F: {0}", Fj.ToMathArrayString))
 
             'external loop
 
@@ -998,6 +1232,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     S(i, j) = Sbj(i) * alpha(i, j) * Sb
                 Next
             Next
+
+            IObj?.Paragraphs.Add(String.Format("Sb: {0}", Sbj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Rl: {0}", Rlj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Rv: {0}", Rvj.ToMathArrayString))
 
             Dim vcnt, lcnt As Integer
 
@@ -1094,6 +1332,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             ec = 0
             ic = 0
             Do
+
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Solve", "IO External Loop Iteration", "Inside-Out External Loop Convergence Iteration Step")
+
+                IObj2?.Paragraphs.Add(String.Format("This is the IO external convergence loop iteration #{0}.", ec))
+
+                IObj2?.SetCurrent()
 
                 iic = 0
 
@@ -1211,6 +1459,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     lconstr(i) = LowerBound
                     uconstr(i) = UpperBound
                 Next
+
+                _IObj = IObj2
 
                 Dim n As Integer = xvar.Length - 1
 
@@ -1405,6 +1655,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Else
                     For i = 0 To ns
+                        IObj2?.SetCurrent()
                         If ik Then
                             If llextr Then
                                 tmp(i) = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
@@ -1426,6 +1677,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                 End If
 
+                IObj2?.SetCurrent()
                 If KbjWA = False Then
                     Kbj1 = CalcKbj1(ns, nc, K, zc, yc, Tj1, P, pp)
                 Else
@@ -1483,6 +1735,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     For i = 0 To ns
 
                         'new Ks
+                        IObj2?.SetCurrent()
                         If ik Then
                             K2(i) = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj2(i), P(i))
                         Else
@@ -1531,33 +1784,42 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Else
                     For i = 0 To ns
-
+                        IObj2?.SetCurrent()
                         'enthalpies
                         If ih Then
                             If llextr Then
                                 Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                                IObj2?.SetCurrent()
                                 Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                             Else
                                 Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                                IObj2?.SetCurrent()
                                 Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
                             End If
+                            IObj2?.SetCurrent()
                             Hl1(i) = _ppr.DW_CalcEnthalpyDeparture(xc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                            IObj2?.SetCurrent()
                             Hl2(i) = _ppr.DW_CalcEnthalpyDeparture(xc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                         Else
                             If llextr Then
                                 Hv1(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                                IObj2?.SetCurrent()
                                 Hv2(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                             Else
                                 Hv1(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                                IObj2?.SetCurrent()
                                 Hv2(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
                             End If
+                            IObj2?.SetCurrent()
                             Hl1(i) = pp.DW_CalcEnthalpyDeparture(xc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                            IObj2?.SetCurrent()
                             Hl2(i) = pp.DW_CalcEnthalpyDeparture(xc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                         End If
 
                     Next
                 End If
 
+                IObj2?.SetCurrent()
                 If KbjWA = False Then
                     Kbj2 = CalcKbj1(ns, nc, K2j, zc, yc, Tj2, P, pp)
                 Else
@@ -1582,6 +1844,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Ej_ant(i) = Ej(i)
                     Ej(i) = Hl1(i) - Fj(i) * (Tj1(i) - T_(i))
                 Next
+
+                IObj2?.Paragraphs.Add("Updating Model Variables...")
+
+                IObj2?.Paragraphs.Add(String.Format("Kbj: {0}", Kbj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("alpha ij: {0}", alpha.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("A: {0}", Aj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("B: {0}", Bj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("C: {0}", Cj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("D: {0}", Dj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("E: {0}", Ej.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("F: {0}", Fj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Sb: {0}", Sbj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Rl: {0}", Rlj.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Rv: {0}", Rvj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("External Loop error: {0}", el_err))
 
                 ec += 1
 
@@ -1617,6 +1895,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 VSS(i) = VSS(i) * maxF
                 Q(i) = Q(i) * maxF
             Next
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ec & " iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged values for T: {0}", Tj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for V: {0}", Vj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for L: {0}", Lj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for VSS: {0}", VSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for LSS: {0}", LSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for y: {0}", yc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, il_err, ec, el_err, dfdx}
 
@@ -3911,8 +4203,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Q(i) = Q(i) * maxF
             Next
 
-
-            IObj?.Paragraphs.Add("The algorithm converged in " & maxits & " iterations.")
+            IObj?.Paragraphs.Add("The algorithm converged in " & ec & " iterations.")
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
 

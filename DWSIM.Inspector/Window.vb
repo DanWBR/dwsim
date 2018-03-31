@@ -13,7 +13,7 @@ Public Class Window
         Dim InspectorLabel = New Label With {.Text = "Solution Inspector", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
         InspectorLabel.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())
 
-        Dim InspectorDescription = New Label With {.Text = "The Solution Inspector brings a structured view of all model calculations.", .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
+        Dim InspectorDescription = New Label With {.Text = "The Solution Inspector brings a human-readable, hierarchized view of all model calculations in a Flowsheet Solver run.", .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
         InspectorDescription.Font = New Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize())
 
         content.Rows.Add(New TableRow(InspectorLabel))
