@@ -45,6 +45,8 @@ Namespace Reactors
 
         End Enum
 
+        Private _IObj As InspectorItem
+
         Private _solvemethod As SolvingMethod = SolvingMethod.DirectMinimization
         Protected m_reactionextents As Dictionary(Of String, Double)
         Private _rex_iest As New ArrayList
@@ -679,6 +681,7 @@ Namespace Reactors
             tms.Phases(0).Properties.massflow = sumw
             pp.CurrentMaterialStream = tms
             tms.SpecType = StreamSpec.Temperature_and_Pressure
+            _IObj?.SetCurrent
             tms.Calculate(True, True)
             pp.CurrentMaterialStream = tms
 
@@ -909,6 +912,114 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+
+            IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add("The calculation of chemical equilibrium at specified temperature and pressure is in many ways similar to the calculation of phase equilibrium. In both cases the equilibrium state corresponds to a global minimum of the Gibbs energy subject to a set of material balance constraints.")
+
+            IObj?.Paragraphs.Add("For the phase equilibrium calculation these constraints represent component material balances, and they are usually eliminated explicitly by calculating the molar component amounts in one of the equilibrium phases from that in the other. A similar procedure can be used to convert the chemical equilibrium calculation to an unconstrained optimization problem, through the use of the 'reaction extents' formulation which ensures automatic satisfaction of all material balance constraints. Alternatively, a formulation can be set up by means of classical methods for constrained optimization where the constraints are handled by means of Lagrange multipliers.")
+
+            IObj?.Paragraphs.Add("<h3>Chemical reaction equilibrium</h3>")
+
+            IObj?.Paragraphs.Add("In phase equilibrium calculations for a given feed at specified temperature and pressure a material balance must be satisfied for each component in the mixture, the total amount in the combined product phases being identical to that in the feed. When chemical reactions occur, additional degrees of freedom are available, resulting in a set of material balance constraints, which is smaller than the number of components in the mixture.")
+
+            IObj?.Paragraphs.Add("The mixture composition at chemical equilibrium at constant T and p satisfies the condition of minimum Gibbs energy,")
+
+            IObj?.Paragraphs.Add("<m>\min G = \min \sum\limits_{i=1}^{C}{n_i\mu _i} </m>")
+
+            IObj?.Paragraphs.Add("subject to a set of M < C material balance constraints. In addition we must require that")
+
+            IObj?.Paragraphs.Add("<m>n_i \geq 0, i=1,2,...,C</m>")
+
+            IObj?.Paragraphs.Add("<h3>Formula matrix and element balances</h3>")
+
+            IObj?.Paragraphs.Add("The alternative formulation of the constraints is based on the requirement of conservation of chemical elements. A key concept in this approach is the formula matrix for the reaction components. In this matrix, Aji is the formula content of element j in component i.")
+
+            IObj?.Paragraphs.Add("The element conservation constraints can be written")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{A}\mathbf{n}=\mathbf{b}</m>")
+
+            IObj?.Paragraphs.Add("where <mi>b_k</mi> is the total amount of element k in the reaction mixture. The matrix A has M = C — R rows, where R is the number of independent reactions. It is readily shown that A, b, n0 and E are related as follows:")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{A}\mathbf{n}= \mathbf{A}\mathbf{n_0}+\mathbf{A}\mathbf{E}\zeta </m>")
+
+            IObj?.Paragraphs.Add("This equation must be satisfied for all values of <mi>\zeta</mi>, and therefore")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{A}\mathbf{E}=0, \mathbf{A}\mathbf{n_0}=\mathbf{b}</m>")
+
+            IObj?.Paragraphs.Add("The M rows of A must be linearly independent. If this is not the case, it is necessary to redefine the chosen 'elements'.")
+
+            IObj?.Paragraphs.Add("<h3>Solution by constrained optimization</h3>")
+
+            IObj?.Paragraphs.Add("The constraints defined above can be incorporated into the Gibbs energy minimization by means of Lagrange multipliers, <mi>\lambda</mi>. We find it preferable to work with the reduced Gibbs energy and form the augmented objective function,")
+
+            IObj?.Paragraphs.Add("<m>\mathscr{L}(\mathbf{n,\lambda})=\sum\limits_{i}^{C}{\frac{n_iu_i}{RT}}-\sum\limits_{j=1}^{M}{\lambda _j}\left(\sum\limits_{i}^{C}{A_{j,i}n_i-b_j} \right) </m>")
+
+            IObj?.Paragraphs.Add("by adding to the original objective function the constraint terms, multiplied by the Lagrange multipliers.")
+
+            IObj?.Paragraphs.Add("At the minimum it is required that the derivatives of the Lagrange function are equal to zero")
+
+            IObj?.Paragraphs.Add("<m>\frac{\partial \mathscr{L}}{\partial n_i}=\frac{\mu _i}{RT}-\sum\limits_{j=1}^{M}{A_{j,i}\lambda _j}=0</m>")
+
+            IObj?.Paragraphs.Add("<m>\frac{\partial \mathscr{L}}{\partial \lambda_j}=-\sum\limits_{i=1}^{C}{A_{j,i}n_i}+b_j=0  </m>")
+
+            IObj?.Paragraphs.Add("which yields a total of C + M equations to determine the C + M variables.")
+
+            IObj?.Paragraphs.Add("The numerical solution of the partial derivatives is simplified when the reaction mixture forms an ideal solution. In this case, we can write")
+
+            IObj?.Paragraphs.Add("<m>\frac{\mu _i}{RT} =\frac{\mu _i^*}{RT} +\ln x_i+\ln \varphi _i+ln(P/P_0)=\frac{\mu _i^{pure}}{RT}+\ln x_i</m>")
+
+            IObj?.Paragraphs.Add("where <mi>\mu _i^{pure}</mi> is the chemical potential of pure component i at the system temperature and pressure. The set of the first derivative equations then yields")
+
+            IObj?.Paragraphs.Add("<m>\ln x_i=\sum\limits_{j=1}^{M}{A_{j,i}\lambda _j}-\frac{\mu _i^{pure}}{RT}  </m>")
+
+            IObj?.Paragraphs.Add("Substituting <mi>n_i=n_tx_i</mi>, where nt is the total number of moles, we obtain the M + 1 equations")
+
+            IObj?.Paragraphs.Add("<m>n_t\sum\limits_{i=1}^{C}{A_{j,i}x_i}-b_j=0, j=1,2,...,M</m>")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{i=1}^{C}{x_i}-1=0</m>")
+
+            IObj?.Paragraphs.Add("The number of unknowns is now reduced to M +1: The M Lagrange multipliers and the total number of moles present, nt.")
+
+            IObj?.Paragraphs.Add("The approach is readily generalised to multiphase systems. Let the chemical potential of pure component i in phase k at the system temperature and pressure be <mi>\mu _{i,k}^{pure}</mi>. Then,")
+
+            IObj?.Paragraphs.Add("<m>\ln x_{i,k}=\sum\limits_{j=1}^{M}{A_{j,i}\lambda _j}-\frac{\mu_{i,k}^{pure}}{RT}</m>")
+
+            IObj?.Paragraphs.Add("and we arrive at the following set of M + F equations")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{k=1}^{F}{n_{t,k}}\sum\limits_{i=1}^{C}{A_{ji}x_{i,k}}-b_j=0 </m>")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{i=1}^{C}{x_{i,k}}-1=0 </m>")
+
+            IObj?.Paragraphs.Add("For moderately non-ideal mixtures, a successive substitution procedure is attractive. We just replace <mi>\mu _{i,k}^{pure}</mi> by <mi>\mu _i^*(T)+RT\ln (\varphi_{i,k}P/P_0)</mi> where <mi>\mu _i^*(T)</mi> is the ideal gas chemical potential at temperature T and pressure P0, and <mi>\varphi_{i,k}</mi>  is the fugacity coefficient of component i in phase k. A composition estimate provides initial values of the fugacity coeffcients, and the set of equations above are solved, yielding new phase compositions. These are in turn used to update the fugacity coefficients in an outer loop, and the process is repeated until convergence. Conceptually, we can consider the use of the  above equations as an approach where the equilibrium relations are satisfied automatically whereas the material  balances are solved iteratively.")
+
+            IObj?.Paragraphs.Add("Initial estimates for the single phase as well as for the multiphase equilibrium calculation can be generated by means of linear programming. We construct an approximate solution based on the assumption that the chem ical potentials are composition independent. Evidently, this approximation is poor except for components with a mole fraction near 1, but it enables us to use a simple safe solution procedure. For the single phase equilibrium  calculation the Gibbs energy minimization becomes")
+
+            IObj?.Paragraphs.Add("<m>\min \sum\limits_{i=1}^{C}{\frac{n_i\mu _i^{pure}}{RT} } </m>")
+
+            IObj?.Paragraphs.Add("subject to")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{i=1}^{C}{A_{ji}n_i-b_j}=0,\space n_i \geq0,\space j=1,2,...,M </m>")
+
+            IObj?.Paragraphs.Add("which is the standard form of a linear programming problem. The solution is (except in degenerate cases) a set of M non-zero values of the component mole numbers that enable a unique determination of the corresponding Lagrange multipliers from")
+
+            IObj?.Paragraphs.Add("<m>\frac{\mu _i^{pure}}{RT}=\sum\limits_{j=1}^{M}{A_{ji}\lambda _j},\space n_i \geq 0  </m>")
+
+            IObj?.Paragraphs.Add("The initial estimate from linear programming will yield a reasonable approximation for the Lagrange multipliers and the total number of moles.")
+
+            IObj?.Paragraphs.Add("Problems can arise in cases where the solution to the LP-subproblem corresponds to a number of equilibrium components which is smaller than M. A simple example is given by the mixture (H2O, H2, 02). If the overall mixture composition corresponds to a b-vector with a ratio of H to O of exactly 2:1, the LP-solution at low temperature will be formation of water only, and we are unable to determine individual Lagrange multipliers for H and O.")
+
+            IObj?.Paragraphs.Add("<h2>DWSIM Procedure</h2>")
+
+            IObj?.Paragraphs.Add("DWSIM calculates the Gibbs Reactor using three nested loops. The external loop converges temperature for an adiabatic calculation, taking into account the composition changes during the convergence of inner loops.")
+            IObj?.Paragraphs.Add("The intermediate loop converges the mass balance for all phases using an initial distribution obtained from the initial estimates for the overall composition.")
+            IObj?.Paragraphs.Add("The internal loop converges fugacity coefficients calculated with the current estimate for phase compositions.")
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
+
             If Me.Conversions Is Nothing Then Me.m_conversions = New Dictionary(Of String, Double)
             If Me.ReactionExtents Is Nothing Then Me.m_reactionextents = New Dictionary(Of String, Double)
             If Me.ReactionExtentsEstimates Is Nothing Then Me._rex_iest = New ArrayList
@@ -958,6 +1069,7 @@ Namespace Reactors
                     T = OutletTemperature
             End Select
 
+            IObj?.SetCurrent
             Hr0i = pp.RET_Hid(298.15, T, pp.RET_VMOL(PropertyPackages.Phase.Mixture)) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             ims.Phases(0).Properties.temperature = T
@@ -1021,6 +1133,9 @@ Namespace Reactors
                         Me.TotalElements(i) = sum_e
                     Next
 
+                    IObj?.Paragraphs.Add(String.Format("Element Matrix: {0}", ElementMatrix.ToMathArrayString))
+                    IObj?.Paragraphs.Add(String.Format("Total Elements: {0}", TotalElements.ToMathArrayString))
+
                     Me.ComponentConversions.Clear()
                     For Each s1 As String In Me.ComponentIDs
                         Me.ComponentConversions.Add(s1, 0)
@@ -1032,7 +1147,6 @@ Namespace Reactors
 
                     Dim re(c) As Double
 
-
                     'calculate ideal gas gibbs energy values
 
                     Dim igge(c) As Double
@@ -1040,13 +1154,15 @@ Namespace Reactors
                     pp.CurrentMaterialStream = ims
 
                     For i = 0 To c
+                        IObj?.SetCurrent
                         igge(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * T)
                     Next
 
                     igcp = igge.Clone
 
-                    Dim resc(c), resc2(c), inval(c), topvals(e) As Double
+                    IObj?.Paragraphs.Add(String.Format("Ideal Gas Gibbs Energy values: {0}", igge.ToMathArrayString))
 
+                    Dim resc(c), resc2(c), inval(c), topvals(e) As Double
 
                     For i = 0 To c
                         inval(i) = N0(Me.ComponentIDs(i)) / N0.Values.Sum
@@ -1092,6 +1208,8 @@ Namespace Reactors
                         resc2(idx) = vars(idx)
                     Next
 
+                    IObj?.Paragraphs.Add(String.Format("Initial Mole Amounts {0}", N0.Values.ToArray.ToMathArrayString))
+
                     'lagrange multipliers
 
                     Dim lagrm(e) As Double
@@ -1108,7 +1226,15 @@ Namespace Reactors
 
                     'this call to FunctionValue2G returns the gibbs energy in kJ/s for the inlet stream - initial gibbs energy.
 
+                    _IObj = IObj
+
+                    IObj?.SetCurrent
+
                     g0 = FunctionValue2G(result)
+
+                    IObj?.SetCurrent
+
+                    IObj?.Paragraphs.Add(String.Format("Initial Gibbs Energy: {0}", g0))
 
                     Me.InitialGibbsEnergy = g0
 
@@ -1120,13 +1246,22 @@ Namespace Reactors
 
                     Do
 
+                        Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                        _IObj = IObj2
+
+                        Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Calculate", "Gibbs Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
+
                         pp.CurrentMaterialStream = tms
 
                         For i = 0 To c
+                            IObj2?.SetCurrent
                             igcp(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * T)
                         Next
 
                         'estimate initial distribution between phases and fugacity coefficients
+
+                        IObj2?.Paragraphs.Add("Estimating initial distribution between phases and fugacity coefficients...")
 
                         Dim xm0(tms.Phases(0).Compounds.Count - 1) As Double, ids As New List(Of String)
 
@@ -1158,8 +1293,11 @@ Namespace Reactors
 
                         End If
 
+                        IObj2?.Paragraphs.Add(String.Format("Initial Estimate for Mixture Molar Composition: {0}", xm0.ToMathArrayString))
+
                         Dim nv, nl1, nl2, ns As Double
 
+                        IObj2?.SetCurrent
                         Dim flashresults = pp.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.T, P, T, pp, xm0, Nothing, 0)
 
                         With flashresults
@@ -1167,9 +1305,13 @@ Namespace Reactors
                             xl1_0 = .GetLiquidPhase1MoleFractions
                             xl2_0 = .GetLiquidPhase2MoleFractions
                             xs_0 = .GetSolidPhaseMoleFractions
+                            IObj2?.SetCurrent
                             fv_0 = pp.DW_CalcFugCoeff(xv_0, T, P, PropertyPackages.State.Vapor).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                            IObj2?.SetCurrent
                             fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                            IObj2?.SetCurrent
                             fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                            IObj2?.SetCurrent
                             fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                             nv = .GetVaporPhaseMoleFraction
                             nl1 = .GetLiquidPhase1MoleFraction
@@ -1186,6 +1328,16 @@ Namespace Reactors
                         fl1_0 = FixFugCoeff(fl1_0, T, PropertyPackages.State.Liquid)
                         fl2_0 = FixFugCoeff(fl2_0, T, PropertyPackages.State.Liquid)
                         fs_0 = FixFugCoeff(fs_0, T, PropertyPackages.State.Solid)
+
+                        IObj2?.Paragraphs.Add(String.Format("Initial Vapor Phase Amount: {0}", nv))
+                        IObj2?.Paragraphs.Add(String.Format("Initial Liquid Phase 1 Amount: {0}", nl1))
+                        IObj2?.Paragraphs.Add(String.Format("Initial Liquid Phase 2 Amount: {0}", nl2))
+                        IObj2?.Paragraphs.Add(String.Format("Initial Solid Phase Amount: {0}", ns))
+
+                        IObj2?.Paragraphs.Add(String.Format("Initial Vapor Phase Composition: {0}", xv_0.ToMathArrayString))
+                        IObj2?.Paragraphs.Add(String.Format("Initial Liquid Phase 1 Composition: {0}", xl1_0.ToMathArrayString))
+                        IObj2?.Paragraphs.Add(String.Format("Initial Liquid Phase 2 Composition: {0}", xl2_0.ToMathArrayString))
+                        IObj2?.Paragraphs.Add(String.Format("Initial Solid Phase Composition: {0}", xs_0.ToMathArrayString))
 
                         'outer loop for converging fugacity coefficients
 
@@ -1220,11 +1372,21 @@ Namespace Reactors
 
                         lagrm = smplres.Take(e + 1).ToArray
 
+                        IObj2?.Paragraphs.Add(String.Format("Lagrange Multipliers: {0}", lagrm.ToMathArrayString))
+
                         'convergence of the material balance + gibbs minimization using Newton's method
                         'external loop: fugacity coefficient calculation/update
                         'internal loop: material balance convergence
 
                         Do
+
+                            IObj2?.SetCurrent
+
+                            Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                            _IObj = IObj3
+
+                            Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Calculate", "Gibbs Reactor External Loop Iteration #" & ni_ext, "Converge Fugacity Coefficients", True)
 
                             ni_int = 0
 
@@ -1233,6 +1395,16 @@ Namespace Reactors
                             px = x.Clone
 
                             Do
+
+                                IObj3?.SetCurrent
+
+                                Dim IObj4 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                                _IObj = IObj4
+
+                                Inspector.Host.CheckAndAdd(IObj4, New StackFrame(1).GetMethod().Name, "Calculate", "Gibbs Reactor Internal Loop Iteration #" & ni_int, "Converge Material Balance", True)
+
+                                IObj4?.Paragraphs.Add(String.Format("Variable Values: {0}", x.ToMathArrayString))
 
                                 fx = Me.FunctionValue2N(x)
 
@@ -1259,6 +1431,8 @@ Namespace Reactors
 
                                     End If
 
+                                    IObj4?.Paragraphs.Add(String.Format("Variable Changes: {0}", dx.ToMathArrayString))
+
                                     For i = 0 To x.Length - 1
                                         x(i) -= dx(i) * df
                                     Next
@@ -1270,6 +1444,8 @@ Namespace Reactors
                                     Next
 
                                 End If
+
+                                IObj4?.Paragraphs.Add(String.Format("Updated Variable Values: {0}", x.ToMathArrayString))
 
                                 ni_int += 1
 
@@ -1283,14 +1459,20 @@ Namespace Reactors
 
                             lagrm = x.Take(e + 1).ToArray
 
+                            IObj3?.Paragraphs.Add(String.Format("Updated Lagrange Multipliers: {0}", lagrm.ToMathArrayString))
+
                             nv = x(e + 1)
                             nl1 = x(e + 2)
                             nl2 = x(e + 3)
                             ns = x(e + 4)
 
+                            IObj3?.SetCurrent
                             fv_0 = pp.DW_CalcFugCoeff(xv_0, T, P, PropertyPackages.State.Vapor).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                            IObj3?.SetCurrent
                             fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                            IObj3?.SetCurrent
                             fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                            IObj3?.SetCurrent
                             fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
 
                             fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
@@ -1298,7 +1480,19 @@ Namespace Reactors
                             fl2_0 = FixFugCoeff(fl2_0, T, PropertyPackages.State.Liquid)
                             fs_0 = FixFugCoeff(fs_0, T, PropertyPackages.State.Solid)
 
+                            IObj3?.Paragraphs.Add(String.Format("Vapor Phase Amount: {0}", nv))
+                            IObj3?.Paragraphs.Add(String.Format("Liquid Phase 1 Amount: {0}", nl1))
+                            IObj3?.Paragraphs.Add(String.Format("Liquid Phase 2 Amount: {0}", nl2))
+                            IObj3?.Paragraphs.Add(String.Format("Solid Phase Amount: {0}", ns))
+
+                            IObj3?.Paragraphs.Add(String.Format("Vapor Phase Composition: {0}", xv_0.ToMathArrayString))
+                            IObj3?.Paragraphs.Add(String.Format("Liquid Phase 1 Composition: {0}", xl1_0.ToMathArrayString))
+                            IObj3?.Paragraphs.Add(String.Format("Liquid Phase 2 Composition: {0}", xl2_0.ToMathArrayString))
+                            IObj3?.Paragraphs.Add(String.Format("Solid Phase Composition: {0}", xs_0.ToMathArrayString))
+
                             sumerr = px.SubtractY(x).AbsSqrSumY
+
+                            IObj3?.Paragraphs.Add(String.Format("Error Value: {0}", sumerr))
 
                             ni_ext += 1
 
@@ -1318,7 +1512,15 @@ Namespace Reactors
                             DN(ids(i)) = N(ids(i)) - N0(ids(i))
                         Next
 
+                        _IObj = IObj2
+
+                        IObj2?.SetCurrent
+
                         g1 = FunctionValue2G(N.Values.ToArray)
+
+                        IObj2?.SetCurrent
+
+                        IObj2?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
                         If (g1 > g0) Then FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("GibbsLocalEquilibrium"), IFlowsheet.MessageType.Warning)
 
@@ -1327,6 +1529,8 @@ Namespace Reactors
                         'this call to FunctionValue2FC returns the element material balance - should be very very close to zero.
 
                         _elbal = Me.FunctionValue2FC(N.Values.ToArray)
+
+                        IObj2?.Paragraphs.Add(String.Format("Element Balance: {0}", _elbal))
 
                         'calculate component conversions.
 
@@ -1362,6 +1566,8 @@ Namespace Reactors
 
                         ims = tms.Clone
                         ims.SetFlowsheet(tms.FlowSheet)
+
+                        IObj2?.SetCurrent
 
                         Me.PropertyPackage.CurrentMaterialStream = ims
 
@@ -1757,6 +1963,7 @@ Namespace Reactors
 
             End Select
 
+            IObj?.SetCurrent
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 

@@ -36,6 +36,8 @@ Namespace Reactors
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorConvEqGibbs
 
+        Private _IObj As InspectorItem
+
         Dim tmpx As Double(), tmpdx As Double()
 
         Dim tms As MaterialStream
@@ -136,7 +138,9 @@ Namespace Reactors
 
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
+            _IObj?.SetCurrent
             fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+            _IObj?.SetCurrent
             fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
 
             i = 0
@@ -257,6 +261,7 @@ Namespace Reactors
             tms.Phases(0).Properties.massflow = sumw
 
             pp.CurrentMaterialStream = tms
+            _IObj?.SetCurrent
             tms.Calculate(True, True)
             pp.CurrentMaterialStream = tms
 
@@ -390,6 +395,106 @@ Namespace Reactors
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+
+            IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add("The calculation of chemical equilibrium at specified temperature and pressure is in many ways similar to the calculation of phase equilibrium. In both cases the equilibrium state corresponds to a global minimum of the Gibbs energy subject to a set of material balance constraints.")
+
+            IObj?.Paragraphs.Add("For the phase equilibrium calculation these constraints represent component material balances, and they are usually eliminated explicitly by calculating the molar component amounts in one of the equilibrium phases from that in the other. A similar procedure can be used to convert the chemical equilibrium calculation to an unconstrained optimization problem, through the use of the 'reaction extents' formulation which ensures automatic satisfaction of all material balance constraints.")
+
+            IObj?.Paragraphs.Add("<h3>Chemical reaction equilibrium</h3>")
+
+            IObj?.Paragraphs.Add("In phase equilibrium calculations for a given feed at specified temperature and pressure a material balance must be satisfied for each component in the mixture, the total amount in the combined product phases being identical to that in the feed. When chemical reactions occur, additional degrees of freedom are available, resulting in a set of material balance constraints, which is smaller than the number of components in the mixture.")
+
+            IObj?.Paragraphs.Add("The mixture composition at chemical equilibrium at constant T and p satisfies the condition of minimum Gibbs energy,")
+
+            IObj?.Paragraphs.Add("<m>\min G = \min \sum\limits_{i=1}^{C}{n_i\mu _i} </m>")
+
+            IObj?.Paragraphs.Add("subject to a set of M < C material balance constraints. In addition we must require that")
+
+            IObj?.Paragraphs.Add("<m>n_i \geq 0, i=1,2,...,C</m>")
+
+            IObj?.Paragraphs.Add("The material balance constraints can be formulated in different ways, and the most important formulations are outlined below. To illustrate the concepts, we shall consider a specific example, the combustion of a mixture of 1 mole propane (C3H8) and 5 moles oxygen (02), at 2200 K, 4.0 MPa. Under these conditions the reaction mixture is assumed to contain the following species (components) at equilibrium: C02 (1), CO (2), H20 (3), 02 (4), H2 (5), O (6), H (7) and OH (8).")
+
+            IObj?.Paragraphs.Add("Independent chemical reactions and reaction extents ")
+
+            IObj?.Paragraphs.Add("One approach eliminates the material balance constraints by formulating a complete set of independent chemical reactions between the mixture components. In our example, the following reactions could be chosen:")
+
+            IObj?.Paragraphs.Add("2CO2 <--> 2CO + O2")
+            IObj?.Paragraphs.Add("2H2O <--> 2H2 + O2")
+            IObj?.Paragraphs.Add("H2 <--> 2H")
+            IObj?.Paragraphs.Add("O2 <--> 2O")
+            IObj?.Paragraphs.Add("H2 + O2 <--> 2OH")
+
+            IObj?.Paragraphs.Add("Each reaction is characterized by a stoichiometric vector, <mi>\nu</mi>, where the i'th element of the vector represents the stoichiometric coefficient of component i in the reaction, with a negative sign for components on the left hand side and positive on the right hand side. Thus,")
+
+            IObj?.Paragraphs.Add("<m>\nu_1=(-2,2,0,1,0,0,0,0)^T</m>")
+
+            IObj?.Paragraphs.Add("The chosen set of chemical reactions must have linearly independent stoichiometric vectors, i.e., none of the reactions may be linear combinations of other reactions. If e.g. the reaction")
+
+            IObj?.Paragraphs.Add("C02 + H2 <-->	CO + H2O")
+
+            IObj?.Paragraphs.Add("was chosen a candidate for a potential 6th reaction, its stoichiometric vector")
+
+            IObj?.Paragraphs.Add("<m>\nu_6=(-1,1,1,0,-1,0,0,0)^T</m>")
+
+            IObj?.Paragraphs.Add("shows that the choice is illegal, since <mi>\nu_6=1/2(\nu_1-\nu_2)</mi>.")
+
+            IObj?.Paragraphs.Add("The R (here, R = 5) stoichiometric vectors are combined into an C x R matrix E, given by")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{E}=(\nu_1,\nu_2,...,\nu_R)</m>")
+
+            IObj?.Paragraphs.Add("A test for linear independence of the stoichiometric vectors is that the matrix E must be of rank R. Given an initial composition vector <mi>\nu_0</mi> consistent with the overall feed composition, the vector of moles n can be written in the general form")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{n}=\mathbf{n_0}+\sum\limits_{k=1}^{R}{\nu_k\zeta_k} </m>")
+
+            IObj?.Paragraphs.Add("or")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{n}=\mathbf{n_0}+\mathbf{E}\zeta</m>")
+
+            IObj?.Paragraphs.Add("where <mi>\zeta_k</mi> is called the extent of the k'th reaction.")
+
+            IObj?.Paragraphs.Add("The composition vector no can be chosen as the feed composition, if all components present in the feed are also found in the equilibrium mixture. For the present example, the equilibrium concentration of propane is likely to be extremely small (below 10-30) and propane is therefore not included in the vector of possible product components. Some consistent choices of no are")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{n_0}=(3,0,4,0,0,0,0,0)^T</m>")
+
+            IObj?.Paragraphs.Add("(3 moles C02, 4 moles H20) or")
+
+            IObj?.Paragraphs.Add("<m>\mathbf{n_0}=(0,3,0,3.5,4,0,0,0)^T</m>")
+
+            IObj?.Paragraphs.Add("(3 moles CO, 3.5 moles 02, 4 moles H2). An alternative possibility is of course to introduce C3H8 as an additional component in the reaction mixture, together with a reaction involving propane, e.g.")
+
+            IObj?.Paragraphs.Add("C3H8 +502 <--> 3C02 + 4H20")
+
+            IObj?.Paragraphs.Add("in which case the feed composition is chosen as the no-vector.")
+
+            IObj?.Paragraphs.Add("The substitution of the mole vector enables us to formulate the equilibrium calculation in terms of the R independent variable <mi>\zeta _k</mi>, i.e.,")
+
+            IObj?.Paragraphs.Add("<m>\min G=\min G(\mathbf{n}(\zeta _k))</m>")
+
+            IObj?.Paragraphs.Add("At equilibrium the derivatives of G with respect to the reaction extents must equal zero")
+
+            IObj?.Paragraphs.Add("<m>\frac{\partial G}{\partial \zeta_k}=\sum\limits_{i=1}^{C}{\frac{\partial G}{\partial n_i}\frac{\partial n_i}{\partial \zeta_k}}=\sum\limits_{i=1}^{C}{\mu_iE_{i,k}}=0,\space k=1,2,...,R</m>")
+
+            IObj?.Paragraphs.Add("Any suitable procedure can be used for G, and the approach based on reaction extents can be used without essential differences for ideal as well as for non-ideal mixtures.")
+
+            IObj?.Paragraphs.Add("The reaction extent approach is best suited for problems where the number of independent reactions is small, or where the mixture is highly nonideal.")
+
+            IObj?.Paragraphs.Add("<h2>DWSIM Procedure</h2>")
+
+            IObj?.Paragraphs.Add("DWSIM uses an inner loop to converge the reaction extents using information about the equilibrium constant for each reaction,")
+
+            IObj?.Paragraphs.Add("<m>\ln K = \prod{basis^\nu}</m>")
+
+            IObj?.Paragraphs.Add("where K is the equilibrium constant, 'basis' is the reaction basis for each reaction compound (i.e. activity, fugacity, partial pressure, etc.), and <mi>\nu</mi> is the stoichiometric coefficient.")
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
+
+            _IObj = IObj
 
             Dim i, j As Integer
 
@@ -548,11 +653,19 @@ Namespace Reactors
                 Next
             End If
 
+            IObj?.Paragraphs.Add(String.Format("Initial Estimates for Reaction Extents: {0}", REx.ToMathArrayString))
+
             Dim g0, g1 As Double
 
             Dim REx0(REx.Length - 1) As Double
 
+            IObj?.SetCurrent
+
             g0 = FunctionValue2G(REx0)
+
+            IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add(String.Format("Initial Gibbs Energy: {0}", g0))
 
             Me.InitialGibbsEnergy = g0
 
@@ -562,6 +675,12 @@ Namespace Reactors
             Dim cnt As Integer = 0
 
             Do
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                _IObj = IObj2
+
+                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Calculate", "Equilibrium Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
 
                 'solve using newton's method
 
@@ -573,11 +692,33 @@ Namespace Reactors
                 niter = 0
                 Do
 
+                    IObj2?.SetCurrent
+
+                    Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                    _IObj = IObj3
+
+                    Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Calculate", "Equilibrium Reactor Reaction Extents Convergence Loop Iteration #" & niter, "", True)
+
+                    IObj3?.SetCurrent
+
+                    IObj3?.Paragraphs.Add(String.Format("Tentative Reaction Extents: {0}", x.ToMathArrayString))
+
                     fx = Me.FunctionValue2N(x)
+
+                    IObj3?.SetCurrent
+
+                    IObj3?.Paragraphs.Add(String.Format("Error Function Values: {0}", fx.ToMathArrayString))
 
                     If AbsSum(fx) < InternalLoopTolerance Then Exit Do
 
+                    IObj3?.SetCurrent
+
                     dfdx = Me.FunctionGradient2N(x)
+
+                    IObj3?.Paragraphs.Add(String.Format("Reaction Extents Jacobian Matrix: {0}", dfdx.ToMathArrayString))
+
+                    IObj3?.SetCurrent
 
                     Dim success As Boolean
                     success = SysLin.rsolve.rmatrixsolve(dfdx, fx, r + 1, dx)
@@ -606,6 +747,10 @@ Namespace Reactors
                         Next
                     End If
 
+                    IObj3?.Paragraphs.Add(String.Format("Reaction Extents Update: {0}", dx.ToMathArrayString))
+
+                    IObj3?.Paragraphs.Add(String.Format("Updated Reaction Extents: {0}", x.ToMathArrayString))
+
                     niter += 1
 
                 Loop Until niter >= InternalLoopMaximumIterations
@@ -614,7 +759,13 @@ Namespace Reactors
 
                 'reevaluate function
 
+                IObj2?.SetCurrent
+
+                _IObj = IObj2
+
                 g1 = FunctionValue2G(REx)
+
+                IObj2?.SetCurrent
 
                 Me.FinalGibbsEnergy = g1
 
@@ -689,6 +840,8 @@ Namespace Reactors
                 ims = tms.Clone
                 ims.SetFlowsheet(tms.FlowSheet)
 
+                IObj2?.SetCurrent
+
                 Select Case Me.ReactorOperationMode
 
                     Case OperationMode.Adiabatic
@@ -755,9 +908,13 @@ Namespace Reactors
 
             Loop Until CalcFinished
 
+            IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
+
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             pp.CurrentMaterialStream = ims
+
+            IObj?.SetCurrent
 
             'do a flash calc (calculate final temperature/enthalpy)
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
