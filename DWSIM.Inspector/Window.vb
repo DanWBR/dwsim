@@ -63,8 +63,6 @@ Public Class Window
         AddHandler SetsBox.SelectedIndexChanged,
             Sub(sender, e)
 
-                Dim allitems = GetItems(Host.Items.ToList)
-
                 Dim f As New Eto.Forms.Form
                 Dim loadingtext As Label
                 Dim progressSpinner As ProgressBar
@@ -84,10 +82,9 @@ Public Class Window
                     Dim row1 = New TableLayout
                     row1.Rows.Add(New TableRow(New TableCell() {Nothing, progressSpinner, Nothing}))
                     Dim row3 = New TableLayout
-                    row3.Rows.Add(New TableRow(New TableCell() {Nothing, btnCancel, Nothing}))
+                    row3.Rows.Add(New TableRow(New TableCell() {loadingtext, Nothing, btnCancel}))
                     Dim Container = New TableLayout With {.Spacing = New Size(5, 5), .Padding = New Padding(25, 10, 25, 10)}
                     Container.Rows.Add(row1)
-                    Container.Rows.Add(loadingtext)
                     Container.Rows.Add(row3)
                     Container.Rows.Add(Nothing)
 
@@ -127,7 +124,12 @@ Public Class Window
                                                 ct.Cancel()
                                             End Sub
 
+                Dim allitems As List(Of InspectorItem)
+
                 Task.Factory.StartNew(Sub()
+                                          Application.Instance.Invoke(Sub()
+                                                                          allitems = GetItems(Host.Items.Where(Function(x) x.SolutionID = SetsBox.SelectedKey.ToString).ToList)
+                                                                      End Sub)
                                           Dim i As Integer = 1
                                           For Each item In sitems.Where(Function(x) x.ParentID = -1)
                                               Dim titem = New TreeGridItem() With {.Values = {item.Name}, .Tag = item.ID}
