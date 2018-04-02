@@ -63,26 +63,107 @@ Public Class Window
         AddHandler SetsBox.SelectedIndexChanged,
             Sub(sender, e)
 
+                Dim allitems = GetItems(Host.Items.ToList)
+
+                Dim f As New Eto.Forms.Form
+                Dim loadingtext As Label
+                Dim progressSpinner As ProgressBar
+                Dim btnCancel As Button
+
+                With f
+
+                    .Topmost = True
+                    .Title = "Loading Inspector Items"
+
+                    progressSpinner = New ProgressBar With {.Width = 350, .Height = 20, .Enabled = True}
+                    loadingtext = New Label With {.Text = "Loading items..."}
+                    loadingtext.VerticalAlignment = VerticalAlignment.Center
+                    loadingtext.TextAlignment = TextAlignment.Center
+                    btnCancel = New Button With {.Text = "Cancel"}
+
+                    Dim row1 = New TableLayout
+                    row1.Rows.Add(New TableRow(New TableCell() {Nothing, progressSpinner, Nothing}))
+                    Dim row3 = New TableLayout
+                    row3.Rows.Add(New TableRow(New TableCell() {Nothing, btnCancel, Nothing}))
+                    Dim Container = New TableLayout With {.Spacing = New Size(5, 5), .Padding = New Padding(25, 10, 25, 10)}
+                    Container.Rows.Add(row1)
+                    Container.Rows.Add(loadingtext)
+                    Container.Rows.Add(row3)
+                    Container.Rows.Add(Nothing)
+
+                    .Content = Container
+
+                    .WindowStyle = Eto.Forms.WindowStyle.Default
+
+                    .ShowInTaskbar = False
+
+                    .Maximizable = False
+                    .Minimizable = False
+
+                    Dim w = 400
+                    Dim h = 100
+
+                    Dim center = Screen.PrimaryScreen.WorkingArea.Center
+                    center.X -= w / 2
+                    center.Y -= h / 2
+
+                    .Location = New Point(center)
+
+                    .ClientSize = New Size(w, h)
+
+                End With
+
+                content.Enabled = False
+
+                f.Show()
+
                 Dim sitems = Host.Items.Where(Function(x) x.SolutionID = SetsBox.SelectedKey.ToString).ToList
 
                 Dim tvc As New TreeGridItemCollection()
 
-                For Each item In sitems.Where(Function(x) x.ParentID = -1)
-                    Dim titem = New TreeGridItem() With {.Values = {item.Name}, .Tag = item.ID}
-                    tvc.Add(titem)
-                    Dim nesteditems = GetItems(item)
-                    For Each item2 In nesteditems
-                        Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeGridItem).Tag = item2.ParentID).FirstOrDefault
-                        Dim titem2 = New TreeGridItem() With {.Values = {item2.Name}, .Tag = item2.ID}
-                        If parent Is Nothing Then
-                            tvc.Add(titem2)
-                        Else
-                            DirectCast(parent, TreeGridItem).Children.Add(titem2)
-                        End If
-                    Next
-                Next
+                Dim ct As New Threading.CancellationTokenSource
 
-                itemSelector.DataStore = tvc
+                AddHandler btnCancel.Click, Sub()
+                                                ct.Cancel()
+                                            End Sub
+
+                Task.Factory.StartNew(Sub()
+                                          Dim i As Integer = 1
+                                          For Each item In sitems.Where(Function(x) x.ParentID = -1)
+                                              Dim titem = New TreeGridItem() With {.Values = {item.Name}, .Tag = item.ID}
+                                              tvc.Add(titem)
+                                              Application.Instance.Invoke(Sub()
+                                                                              loadingtext.Text = String.Format("Loading items ({0}/{1})...", i, allitems.Count)
+                                                                              progressSpinner.Value = i / allitems.Count * 100
+                                                                              content.ParentWindow.Invalidate()
+                                                                          End Sub)
+                                              i += 1
+                                              Dim nesteditems = GetItems(item)
+                                              For Each item2 In nesteditems
+                                                  Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeGridItem).Tag = item2.ParentID).FirstOrDefault
+                                                  Dim titem2 = New TreeGridItem() With {.Values = {item2.Name}, .Tag = item2.ID}
+                                                  If parent Is Nothing Then
+                                                      tvc.Add(titem2)
+                                                  Else
+                                                      DirectCast(parent, TreeGridItem).Children.Add(titem2)
+                                                  End If
+                                                  Application.Instance.Invoke(Sub()
+                                                                                  loadingtext.Text = String.Format("Loading items ({0}/{1})...", i, allitems.Count)
+                                                                                  progressSpinner.Value = i / allitems.Count * 100
+                                                                                  content.ParentWindow.Invalidate()
+                                                                              End Sub)
+                                                  i += 1
+                                                  If ct.IsCancellationRequested Then Throw New TaskCanceledException()
+                                              Next
+                                          Next
+                                      End Sub, ct.Token).ContinueWith(Sub()
+                                                                          Application.Instance.Invoke(Sub()
+                                                                                                          itemSelector.DataStore = tvc
+                                                                                                          content.Enabled = True
+                                                                                                          f.Close()
+                                                                                                      End Sub)
+                                                                      End Sub)
+
 
             End Sub
 
