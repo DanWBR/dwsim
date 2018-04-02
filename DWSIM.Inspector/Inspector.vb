@@ -1,4 +1,6 @@
-﻿Imports System.Runtime.CompilerServices
+﻿Imports System.Drawing
+Imports System.Runtime.CompilerServices
+Imports System.IO
 
 Public Class Host
 
@@ -17,7 +19,7 @@ Public Class Host
     Public Shared Function GetNewInspectorItem(<CallerMemberName> Optional memberName As String = "", <CallerFilePath> Optional fileName As String = "", <CallerLineNumber> Optional lineNumber As Integer = 0) As InspectorItem
 
         If GlobalSettings.Settings.InspectorEnabled Then
-            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace("C:\Users\Daniel\Source\Repos\dwsim5\", "https://github.com/DanWBR/dwsim5/blob/master/").Replace("/", "\")}
+            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace(fileName.Substring(0, fileName.IndexOf(Path.DirectorySeparatorChar & "dwsim5" & Path.DirectorySeparatorChar) + 7), "https://github.com/DanWBR/dwsim5/blob/master").Replace("\", "/")}
         Else
             Return Nothing
         End If
@@ -82,7 +84,7 @@ Public Class InspectorItem
 
     Public Function GetHTML() As String
 
-        Dim stb As New Text.StringBuilder
+        Dim stb As New System.Text.StringBuilder
 
         stb.AppendLine("<html>
                         <head>
@@ -103,12 +105,25 @@ Public Class InspectorItem
         stb.AppendLine("</head><section class='main'>")
         stb.AppendLine("<div class='post'>")
         stb.AppendLine(String.Format("<h1>{0}</h1><h2>{1}</h2>", Name, Description))
+        stb.AppendLine("<hr>")
+        stb.AppendLine(String.Format("<div><div style='float:left; vertical-align:middle;'><b>Source Code (Visual Basic)</b>: {0}</div><div style='text-align:right;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{1}' alt='View on GitHub' width='150'></a></div></div>", CodePath, GetImagePath(My.Resources.viewongithub, "viewongithub.png")))
+        stb.AppendLine("<hr>")
         For Each p In Paragraphs.Reverse()
             stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)").Replace("<m>", "$$").Replace("</m>", "$$").Replace("<mi>", "\(").Replace("</mi>", "\)"))
         Next
         stb.AppendLine("</div></section></html>")
 
         Return stb.ToString()
+
+    End Function
+
+    Private Function GetImagePath(image As Bitmap, filename As String) As String
+
+        'save image
+        Dim imgpath As String = Path.Combine(Path.GetTempPath, "DWSIM", "Images")
+        Directory.CreateDirectory(imgpath)
+        image.Save(Path.Combine(imgpath, filename), Imaging.ImageFormat.Png)
+        Return Path.Combine(imgpath, filename)
 
     End Function
 
