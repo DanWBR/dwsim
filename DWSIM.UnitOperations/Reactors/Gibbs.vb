@@ -970,7 +970,7 @@ Namespace Reactors
 
             IObj?.Paragraphs.Add("The numerical solution of the partial derivatives is simplified when the reaction mixture forms an ideal solution. In this case, we can write")
 
-            IObj?.Paragraphs.Add("<m>\frac{\mu _i}{RT} =\frac{\mu _i^*}{RT} +\ln x_i+\ln \varphi _i+ln(P/P_0)=\frac{\mu _i^{pure}}{RT}+\ln x_i</m>")
+            IObj?.Paragraphs.Add("<m>\frac{\mu _i}{RT} =\frac{\mu _i^*}{RT} +\ln x_i+\ln \varphi _i+\ln (P/P_0)=\frac{\mu _i^{pure}}{RT}+\ln x_i</m>")
 
             IObj?.Paragraphs.Add("where <mi>\mu _i^{pure}</mi> is the chemical potential of pure component i at the system temperature and pressure. The set of the first derivative equations then yields")
 
