@@ -133,6 +133,18 @@ Public Class InspectorItem
 
     End Function
 
+    Public Shared Function GetImageHTML(imageid As String, filename As String) As String
+
+        'save image
+        Dim imgpath As String = Path.Combine(Path.GetTempPath, "DWSIM", "Images")
+        Directory.CreateDirectory(imgpath)
+        Dim image As Bitmap = My.Resources.ResourceManager.GetObject(imageid)
+        image.Save(Path.Combine(imgpath, filename), Imaging.ImageFormat.Png)
+        Dim ipath = Path.Combine(imgpath, filename)
+        Return String.Format("<img style='border:0;' src='{0}' alt=''>", ipath)
+
+    End Function
+
 End Class
 
 Public Module InspectorExtensions
