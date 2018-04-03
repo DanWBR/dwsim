@@ -19,7 +19,7 @@ Public Class Host
     Public Shared Function GetNewInspectorItem(<CallerMemberName> Optional memberName As String = "", <CallerFilePath> Optional fileName As String = "", <CallerLineNumber> Optional lineNumber As Integer = 0) As InspectorItem
 
         If GlobalSettings.Settings.InspectorEnabled Then
-            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace(fileName.Substring(0, fileName.IndexOf(Path.DirectorySeparatorChar & "dwsim5" & Path.DirectorySeparatorChar) + 7), "https://github.com/DanWBR/dwsim5/blob/master").Replace("\", "/")}
+            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace(fileName.Substring(0, fileName.IndexOf("\dwsim5\") + 7), "https://github.com/DanWBR/dwsim5/blob/master").Replace("\", "/")}
         Else
             Return Nothing
         End If
@@ -91,6 +91,7 @@ Public Class InspectorItem
                         <style>
                             body {
                                 font-family: Arial, Helvetica, sans-serif;
+                                font-size: 80%;
                             }
                         </style>")
         stb.AppendLine("<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>")
@@ -106,7 +107,7 @@ Public Class InspectorItem
         stb.AppendLine("<div class='post'>")
         stb.AppendLine(String.Format("<h1>{0}</h1><h2>{1}</h2>", Name, Description))
         stb.AppendLine("<hr>")
-        stb.AppendLine(String.Format("<div><div style='float:left; vertical-align:middle;'><b>Source Code (Visual Basic)</b>: {0}</div><div style='text-align:right;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{1}' alt='View on GitHub' width='150'></a></div></div>", CodePath, GetImagePath(My.Resources.viewongithub, "viewongithub.png")))
+        stb.AppendLine(String.Format("<div><div style='float:right;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{1}' alt='View on GitHub' width='150'></a></div><div style='style='float:left;height:100px;line-height:100px;'><b>Source Code (Visual Basic)</b>: {0}</div></div>", CodePath.Replace("https://github.com/DanWBR/dwsim5/blob/master/", ""), GetImagePath("viewongithub.png")))
         stb.AppendLine("<hr>")
         For Each p In Paragraphs.Reverse()
             stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)").Replace("<m>", "$$").Replace("</m>", "$$").Replace("<mi>", "\(").Replace("</mi>", "\)"))
@@ -123,24 +124,15 @@ Public Class InspectorItem
 
     End Function
 
-    Private Function GetImagePath(image As Bitmap, filename As String) As String
+    Private Function GetImagePath(filename As String) As String
 
-        'save image
-        Dim imgpath As String = Path.Combine(Path.GetTempPath, "DWSIM", "Images")
-        Directory.CreateDirectory(imgpath)
-        image.Save(Path.Combine(imgpath, filename), Imaging.ImageFormat.Png)
-        Return Path.Combine(imgpath, filename)
+        Return "http://dwsim.inforside.com.br/inspector/images/" & filename
 
     End Function
 
-    Public Shared Function GetImageHTML(imageid As String, filename As String) As String
+    Public Shared Function GetImageHTML(filename As String) As String
 
-        'save image
-        Dim imgpath As String = Path.Combine(Path.GetTempPath, "DWSIM", "Images")
-        Directory.CreateDirectory(imgpath)
-        Dim image As Bitmap = My.Resources.ResourceManager.GetObject(imageid)
-        image.Save(Path.Combine(imgpath, filename), Imaging.ImageFormat.Png)
-        Dim ipath = Path.Combine(imgpath, filename)
+        Dim ipath = "http://dwsim.inforside.com.br/inspector/images/" & filename
         Return String.Format("<img style='border:0;' src='{0}' alt=''>", ipath)
 
     End Function

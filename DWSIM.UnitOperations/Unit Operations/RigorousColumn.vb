@@ -2392,7 +2392,7 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("For any stage in a countercurrent cascade, assume (1) phase equilibrium is achieved at each stage, (2) no chemical reactions occur, and (3) entrainment of liquid drops in vapor and occlusion of vapor bubbles in liquid are negligible. Figure 1 represents such a stage for the vapor–liquid case, where the stages are numbered down from the top. The same representation applies to liquid–liquid extraction if the higher-density liquid phases are represented by liquid streams and the lower-density liquid phases are represented by vapor streams.")
 
-            IObj?.Paragraphs.Add(InspectorItem.GetImageHTML("image1", "image1.png"))
+            IObj?.Paragraphs.Add(InspectorItem.GetImageHTML("image1.jpg"))
 
             IObj?.Paragraphs.Add("Entering stage j is a single- or two-phase feed of molar flow rate Fj, with overall composition in mole fractions zi,j of component i, temperature TFj , pressure PFj , and corresponding overall molar enthalpy hFj.")
 

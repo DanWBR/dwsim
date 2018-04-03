@@ -98,7 +98,7 @@ Public Class Window
                     .Minimizable = False
 
                     Dim w = 400
-                    Dim h = 100
+                    Dim h = 80
 
                     Dim center = Screen.PrimaryScreen.WorkingArea.Center
                     center.X -= w / 2
