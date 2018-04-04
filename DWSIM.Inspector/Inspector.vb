@@ -107,8 +107,8 @@ Public Class InspectorItem
         stb.AppendLine("<div class='post'>")
         stb.AppendLine(String.Format("<h1>{0}</h1><h2>{1}</h2>", Name, Description))
         stb.AppendLine("<hr>")
-        stb.AppendLine(String.Format("<div><div style='float:right;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{1}' alt='View on GitHub' width='150'></a></div><div style='style='float:left;height:100px;line-height:100px;'><b>Source Code (Visual Basic)</b>: {0}</div></div>", CodePath.Replace("https://github.com/DanWBR/dwsim5/blob/master/", ""), GetImagePath("viewongithub.png")))
-        stb.AppendLine("<hr>")
+        stb.AppendLine(String.Format("<div><div style='float:right;height:40px;line-height:40px;vertical-align:middle;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{1}' alt='View on GitHub' width='200'></a></div><div style='float:left;height:40px;line-height:40px;vertical-align:middle;'><b>Source Code (Visual Basic)</b>: {0}</div></div>", CodePath.Replace("https://github.com/DanWBR/dwsim5/blob/master/", ""), GetImagePath("viewongithub.png")))
+        stb.AppendLine("<hr style='clear:both;'>")
         For Each p In Paragraphs.Reverse()
             stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)").Replace("<m>", "$$").Replace("</m>", "$$").Replace("<mi>", "\(").Replace("</mi>", "\)"))
         Next
