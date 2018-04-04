@@ -680,6 +680,7 @@ Namespace Reactors
                         ims.SpecType = StreamSpec.Temperature_and_Pressure
                 End Select
 
+                IObj?.SetCurrent()
                 ims.Calculate(True, True)
 
                 T = ims.Phases(0).Properties.temperature 'read temperature -> PH-Flash

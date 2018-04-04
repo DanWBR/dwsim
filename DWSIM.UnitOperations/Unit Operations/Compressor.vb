@@ -185,6 +185,7 @@ Namespace UnitOperations
                 Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault.ToString
                 Pi = msin.Phases(0).Properties.pressure.GetValueOrDefault.ToString
                 rho_vi = msin.Phases(2).Properties.density.GetValueOrDefault.ToString
+                IObj?.SetCurrent()
                 cpig = Me.PropertyPackage.AUX_CPm(PhaseName.Vapor, Ti)
                 cp = msin.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
                 cv = msin.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
@@ -228,6 +229,7 @@ Namespace UnitOperations
 
                 Do
 
+                    IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
                     Qi = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
 
@@ -248,6 +250,7 @@ Namespace UnitOperations
 
                 If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
+                IObj?.SetCurrent()
                 tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
 
                 If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
@@ -260,6 +263,7 @@ Namespace UnitOperations
 
                 If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
+                IObj?.SetCurrent()
                 tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
 
                 T2 = tmp.CalculatedTemperature
@@ -320,6 +324,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
                 If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
+                IObj?.SetCurrent()
                 Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
                 T2 = tmp.CalculatedTemperature
                 H2 = tmp.CalculatedEnthalpy
@@ -337,6 +342,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
                 If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
 
+                IObj?.SetCurrent()
                 tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi, T2)
                 T2 = tmp.CalculatedTemperature
                 Me.DeltaT = T2 - Ti

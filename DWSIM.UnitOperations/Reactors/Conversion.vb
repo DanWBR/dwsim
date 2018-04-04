@@ -416,6 +416,7 @@ Namespace Reactors
                         ims.Phases(0).Properties.enthalpy = Hp
                         ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
+                        IObj?.SetCurrent()
                         ims.Calculate(True, True)
 
                         Dim Tout As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
@@ -423,6 +424,7 @@ Namespace Reactors
 
                     Case OperationMode.Isothermic
 
+                        IObj?.SetCurrent()
                         ims.SpecType = StreamSpec.Temperature_and_Pressure
                         ims.Calculate(True, True)
 
@@ -443,6 +445,7 @@ Namespace Reactors
                         ims.Phases(0).Properties.temperature = Tout
                         ims.SpecType = StreamSpec.Temperature_and_Pressure
 
+                        IObj?.SetCurrent()
                         ims.Calculate(True, True)
 
                         'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -482,6 +485,7 @@ Namespace Reactors
             Dim xl, xv, xs, T, P, H, S, wtotalx, wtotaly, wtotalS, wl, wv, ws As Double
             Dim nc As Integer = ims.Phases(0).Compounds.Count - 1
             pp.CurrentMaterialStream = ims
+            IObj?.SetCurrent()
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
             Dim Vx(nc), Vy(nc), Vs(nc), Vwx(nc), Vwy(nc), Vws(nc) As Double

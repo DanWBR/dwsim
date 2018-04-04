@@ -182,6 +182,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
+                    IObj?.SetCurrent()
                     Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, 0)
                     T2 = tmp.CalculatedTemperature
                     CheckSpec(T2, True, "outlet temperature")
@@ -202,6 +203,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
 
+                    IObj?.SetCurrent()
                     Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, P2, T2, 0)
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")
@@ -222,6 +224,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
 
+                    IObj?.SetCurrent()
                     Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, P2, T2, 0)
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")
@@ -240,6 +243,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PVF flash to calculate outlet temperature... P = {0} Pa, VF = {1}", P2, V2))
 
+                    IObj?.SetCurrent()
                     Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P2, m_VFout.GetValueOrDefault, Ti)
 
                     H2 = tmp.CalculatedEnthalpy

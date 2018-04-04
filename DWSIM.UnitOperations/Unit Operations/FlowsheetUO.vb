@@ -778,6 +778,7 @@ Label_00CC:
             Fsheet.MasterFlowsheet = Me.FlowSheet
             Fsheet.RedirectMessages = Me.RedirectOutput
 
+            IObj?.SetCurrent()
             Select Case Settings.SolverMode
                 Case 0, 3, 4
                     DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 0, Settings.TaskCancellationTokenSource)

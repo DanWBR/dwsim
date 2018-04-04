@@ -257,6 +257,7 @@ Namespace UnitOperations
                 Throw New Exception("Error: Negative Pressure! Orifice Plate to small for inlet stream.")
             End If
 
+            IObj?.SetCurrent()
             Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
             T2 = tmp.CalculatedTemperature
 

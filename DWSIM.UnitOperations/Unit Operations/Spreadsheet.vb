@@ -539,6 +539,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = SMass
 
                             Try
+                                IObj?.SetCurrent()
                                 Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, P2, T2, 0)
                                 H2 = tmp.CalculatedEnthalpy
                                 .Phases(0).Properties.enthalpy = H2

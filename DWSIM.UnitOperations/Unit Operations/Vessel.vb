@@ -299,6 +299,7 @@ Namespace UnitOperations
 
                 Else
 
+                    IObj?.SetCurrent()
                     MixedStream.PropertyPackage = Me.PropertyPackage
                     MixedStream.SpecType = StreamSpec.Pressure_and_Enthalpy
                     MixedStream.Calculate(True, True)
@@ -326,6 +327,7 @@ Namespace UnitOperations
 
                 Me.PropertyPackage.CurrentMaterialStream = MixedStream
 
+                IObj?.SetCurrent()
                 MixedStream.PropertyPackage = Me.PropertyPackage
                 MixedStream.SpecType = StreamSpec.Temperature_and_Pressure
                 MixedStream.Calculate(True, True)

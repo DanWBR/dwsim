@@ -161,7 +161,7 @@ Namespace UnitOperations
 
             ims.Validate()
 
-            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, H2, cp, cv, mw As Double
+            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, H2, cp, cv, mw, Qi, P2i As Double
 
             qli = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault.ToString
 
@@ -212,6 +212,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
+                    IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
                     T2 = tmp.CalculatedTemperature
                     CheckSpec(T2, True, "outlet temperature")
@@ -226,6 +227,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
 
+                    IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ.GetValueOrDefault / Wi, T2)
 
                     T2 = tmp.CalculatedTemperature
@@ -238,10 +240,25 @@ Namespace UnitOperations
 
                     Dim k As Double = cp / cv
 
-                    P2 = Pi * ((1 - DeltaQ.GetValueOrDefault * (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+                    P2i = Pi * ((1 - DeltaQ.GetValueOrDefault * (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+
+                    'recalculate Q with P2i
+
+                    Do
+
+                        IObj?.SetCurrent()
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
+                        Qi = -Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
+
+                        P2i *= DeltaQ.GetValueOrDefault / Qi
+
+                    Loop Until Math.Abs((DeltaQ.GetValueOrDefault - Qi) / DeltaQ.GetValueOrDefault) < 0.001
+
+                    P2 = P2i
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
 
+                    IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2)
 
                     T2 = tmp.CalculatedTemperature

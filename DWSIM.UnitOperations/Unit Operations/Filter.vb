@@ -215,8 +215,10 @@ Namespace UnitOperations
             'do a flash calculation on streams to calculate energy imbalance
 
             outstr1.PropertyPackage.CurrentMaterialStream = outstr1
+            IObj?.SetCurrent()
             outstr1.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
             outstr2.PropertyPackage.CurrentMaterialStream = outstr2
+            IObj?.SetCurrent()
             outstr2.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
 
             Dim Hi, Ho1, Ho2, Wi, Wo1, Wo2 As Double

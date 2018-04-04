@@ -483,6 +483,7 @@ Namespace UnitOperations
                                 oms.PropertyPackage.CurrentMaterialStream = oms
 
                                 Tout_ant = Tout
+                                IObj?.SetCurrent()
                                 Tout = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout).CalculatedTemperature
                                 Tout = 0.7 * Tout_ant + 0.3 * Tout
 
@@ -509,6 +510,7 @@ Namespace UnitOperations
                                 If oms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
                                     oms.Phases(0).Properties.temperature = Tin - 2
                                     oms.PropertyPackage.CurrentMaterialStream = oms
+                                    IObj?.SetCurrent()
                                     oms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                                     z2 = oms.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
                                     dzdT = (z2 - z) / -2
@@ -539,6 +541,7 @@ Namespace UnitOperations
 
                             oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
 
+                            IObj?.SetCurrent()
                             oms.Calculate(True, True)
 
                             With oms
@@ -609,6 +612,7 @@ Namespace UnitOperations
                                 oms.Phases(0).Properties.temperature = Tpe
                                 oms.Phases(0).Properties.pressure = Ppe
 
+                                IObj?.SetCurrent()
                                 oms.Calculate(True, True)
 
                             End With

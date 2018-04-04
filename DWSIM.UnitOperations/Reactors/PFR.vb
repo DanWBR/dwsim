@@ -582,6 +582,7 @@ Namespace Reactors
                             'Products Enthalpy (kJ/kg * kg/s = kW)
                             Hp = Hr - DHr
 
+                            IObj?.SetCurrent()
                             tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
                             Dim Tout As Double = tmp.CalculatedTemperature
 
@@ -608,6 +609,7 @@ Namespace Reactors
 
                     End Select
 
+                    IObj?.SetCurrent()
                     ims.PropertyPackage.CurrentMaterialStream = ims
                     ims.Calculate(True, True)
 

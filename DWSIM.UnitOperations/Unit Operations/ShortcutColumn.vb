@@ -138,6 +138,7 @@ Namespace UnitOperations
 
             feed.PropertyPackage.CurrentMaterialStream = feed
 
+            IObj?.SetCurrent()
             K = feed.PropertyPackage.DW_CalcKvalue(z, T, P)
 
             For i = 0 To n
@@ -354,6 +355,7 @@ restart:    B = F - D
                 comp.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
             Next
 
+            IObj?.SetCurrent()
             If Me.condtype = CondenserType.PartialCond Then
                 result = pp.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, m_condenserpressure, 1, 0)
                 TD = result.CalculatedTemperature
@@ -364,6 +366,7 @@ restart:    B = F - D
             With distillate.Phases(0)
                 .Properties.temperature = TD
             End With
+            IObj?.SetCurrent()
             distillate.Calculate(True, True)
 
             HD = distillate.Phases(0).Properties.enthalpy.GetValueOrDefault * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
@@ -374,23 +377,28 @@ restart:    B = F - D
                 comp.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
             Next
 
+            IObj?.SetCurrent()
             result = pp.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, m_boilerpressure, 0.001, 0)
             TB = result.CalculatedTemperature
             With bottoms.Phases(0)
                 .Properties.temperature = TB
             End With
+            IObj?.SetCurrent()
             bottoms.Calculate(True, True)
 
             HB = bottoms.Phases(0).Properties.enthalpy.GetValueOrDefault * bottoms.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
             pp.CurrentMaterialStream = distillate
             If Me.condtype = CondenserType.PartialCond Then
+                IObj?.SetCurrent()
                 result = pp.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, m_condenserpressure, 0, 0)
                 HL = result.CalculatedEnthalpy * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
                 m_Qc = -(HL - HD) * L / 1000
             ElseIf Me.condtype = CondenserType.TotalCond Then
+                IObj?.SetCurrent()
                 result = pp.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, m_condenserpressure, 1, 0)
                 HD0 = result.CalculatedEnthalpy * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
+                IObj?.SetCurrent()
                 result = pp.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, m_condenserpressure, 0, 0)
                 HL = result.CalculatedEnthalpy * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
                 m_Qc = -(HL - HD0) * (L + D) / 1000

@@ -159,6 +159,7 @@ Namespace UnitOperations
 
             If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
+            IObj?.SetCurrent()
             Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
             T2 = tmp.CalculatedTemperature
             CheckSpec(T2, True, "outlet temperature")

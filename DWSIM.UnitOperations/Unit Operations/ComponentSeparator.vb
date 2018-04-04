@@ -325,6 +325,7 @@ Namespace UnitOperations
             If Wo1 <> 0.0# Then
                 outstr1.PropertyPackage.CurrentMaterialStream = outstr1
                 outstr1.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
+                IObj?.SetCurrent()
                 outstr1.Calculate(False, True)
                 Ho1 = outstr1.Phases(0).Properties.enthalpy.GetValueOrDefault
             End If
@@ -332,6 +333,7 @@ Namespace UnitOperations
             If Wo2 <> 0.0# Then
                 outstr2.PropertyPackage.CurrentMaterialStream = outstr2
                 outstr2.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
+                IObj?.SetCurrent()
                 outstr2.Calculate(False, True)
                 Ho2 = outstr2.Phases(0).Properties.enthalpy.GetValueOrDefault
             End If
