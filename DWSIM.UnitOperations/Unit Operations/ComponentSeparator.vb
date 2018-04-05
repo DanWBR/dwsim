@@ -193,6 +193,11 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The Component Separator is a mass balance unit operation. The 
+                                components are separated between two streams, specified as 
+                                fractions or absolute flow rates. The energy balance is then 
+                                calculated after the separation.")
+
             Dim su As SystemsOfUnits.Units = FlowSheet.FlowsheetOptions.SelectedUnitSystem
             Dim cv As New SystemsOfUnits.Converter
 

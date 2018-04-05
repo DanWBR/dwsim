@@ -232,6 +232,37 @@ Namespace SpecialOps
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.paragraphs.add("The Recycle operation is composed by a block 
+                                in the flowsheet which does convergence verifications in systems 
+                                were downstream material connects somewhere upstream in the 
+                                diagram. With this tool it is possible to build complex 
+                                flowsheets, with many recycles, and solve them in an efficient 
+                                way by using the acceleration methods presents in this logical 
+                                operation.")
+
+            Iobj?.paragraphs.add("There are two acceleration methods available: Wegstein and 
+                                Dominant Eigenvalue. The Wegstein method must be used when there 
+                                isn't a significant interaction between convergent variables, in 
+                                the contrary the other method can be used. The successive 
+                                substitution method is slow, but convergence is guaranteed.")
+
+            Iobj?.paragraphs.add("The Wegstein method requires some parameters which can be edited 
+                                by the user. The dominant eigenvalue does not require any 
+                                additional parameter. The user can define convergence parameters 
+                                for temperature, pressure and mass flow in the recycle, that is, 
+                                the minimum acceptable values for the difference in these values 
+                                between the inlet and outlet streams, which, rigorously, must be 
+                                identical. The smaller these values are, the more time is used by 
+                                the calculator in order to converge the recycle.")
+
+            Iobj?.paragraphs.add("As a result, the actual error values are shown, together with the 
+                                necessary convergence iteration steps.")
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac7"))

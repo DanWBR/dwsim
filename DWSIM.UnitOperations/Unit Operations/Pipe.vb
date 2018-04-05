@@ -218,6 +218,58 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The Pipe Segment unit operation  can be used to 
+                                simulate fluid flow process in a pipe. Two of the most used 
+                                correlations for the calculation of pressure drop are available 
+                                in DWSIM. Temperature can be rigorously calculated considering 
+                                the influence of the environment. With the help of the Recycle 
+                                Logical Operation, the user can build large water distribution 
+                                systems, as an example.")
+
+            IObj?.Paragraphs.Add("The pipe segment is divided in sections, which can be straight 
+                                tubes, valves, curves, etc. Each section is subdivided in small 
+                                sections for calculation purposes, as defined by the user.")
+
+            IObj?.Paragraphs.Add("The pipe segment is calculated based on incremental mass and 
+                            energy balances. The complete algorithm consists in three nested 
+                            loops. The external loop iterates on the sections (increments), 
+                            the middle loop iterates on the temperature and the internal loop 
+                            calculates the pressure. The pressure and temperature are 
+                            calculated as follows:")
+
+            IObj?.Paragraphs.Add("1. The inlet temperature and pressure are used to estimate the 
+                            increment outlet pressure and temperature.")
+
+            IObj?.Paragraphs.Add("2. Fluid properties are calculated based in a arithmetic mean of 
+                            inlet and outlet conditions.")
+
+            IObj?.Paragraphs.Add("3. The calculated properties and the inlet pressure are used to 
+                              calculate the pressure drop. With it, the outlet pressure is 
+                              calculated.")
+
+            IObj?.Paragraphs.Add("4. The calculated and estimated pressure are compared, and if 
+                              their difference exceeds the tolerance, a new outlet pressure 
+                              is estimated, and the steps 2 and 3 are repeated.")
+
+            IObj?.Paragraphs.Add("5. Once the internal loop has converged, the outlet temperature 
+                              is calculated. If the global heat transfer coefficient (U) was 
+                              given, the outlet temperature is calculated from the following 
+                              equation:")
+
+            IObj?.Paragraphs.Add("<m>Q=UA\Delta T_{ml}</m>")
+
+            IObj?.Paragraphs.Add("where: Q = heat transferred, A = heat transfer area (external 
+                              surface) and `\Delta T_{ml}` = logarithmic mean temperature 
+                              difference.")
+
+            IObj?.Paragraphs.Add("6. The calculated temperature is compared to the estimated one, 
+                              and if their difference exceeds the specified tolerance, a new 
+                              temperature is estimated and new properties are calculated 
+                              (return to step 2).")
+
+            IObj?.Paragraphs.Add("7. When both pressure and temperature converges, the results are 
+                            passed to the next increment, where calculation restarts.")
+
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow3"))
             ElseIf Not Me.Profile.Status = PipeEditorStatus.OK Then

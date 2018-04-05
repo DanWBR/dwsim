@@ -440,6 +440,54 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The calculation method for the pump is different for the two 
+                            cases (when the provided delta-p or the potency of the energy 
+                            stream is used). In the first method, we have the following 
+                            sequence:")
+
+            IObj?.Paragraphs.Add("• Outlet stream enthalpy:")
+
+            IObj?.Paragraphs.Add("<m>H_{2}=H_{1}+\frac{\Delta P}{\rho},</m>")
+
+            IObj?.Paragraphs.Add("• Pump discharge pressure:")
+
+            IObj?.Paragraphs.Add("<m>P_{2}=P_{1}+\Delta P</m>")
+
+            IObj?.Paragraphs.Add("• Pump required power:")
+
+            IObj?.Paragraphs.Add("<m>Pot=\frac{W(H_{2}-H_{1})}{\eta},</m>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<mi>Pot</mi> pump power")
+
+            IObj?.Paragraphs.Add("<mi>W</mi> mass flow")
+
+            IObj?.Paragraphs.Add("<mi>H_{2}</mi> outlet stream specific enthalpy")
+
+            IObj?.Paragraphs.Add("<mi>H_{1}</mi> inlet stream specific enthalpy")
+
+            IObj?.Paragraphs.Add("<mi>\eta</mi> pump efficiency")
+
+            IObj?.Paragraphs.Add("• Outlet temperature: PH Flash (with P2 and H2).")
+
+            IObj?.Paragraphs.Add("In the second case (calculated outlet pressure), we have the 
+                                following sequence:")
+
+            IObj?.Paragraphs.Add("• Outlet stream enthalpy:")
+
+            IObj?.Paragraphs.Add("<mi>H_{2}=H_{1}+\frac{Pot\,\eta}{W},</m>")
+
+            IObj?.Paragraphs.Add("• \Delta P:")
+
+            IObj?.Paragraphs.Add("<mi>\Delta P=\rho(H_{2}-H_{1}),</m>")
+
+            IObj?.Paragraphs.Add("• Discharge pressure:")
+
+            IObj?.Paragraphs.Add("<m>P_{2}=P_{1}+\Delta P</m>")
+
+            IObj?.Paragraphs.Add("• Outlet temperature: PH Flash.")
+
             If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 'Call function to calculate flowsheet
                 Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow4"))

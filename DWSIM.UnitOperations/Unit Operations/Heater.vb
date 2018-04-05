@@ -152,6 +152,11 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The heater simulates a stream heating process. 
+                                The outlet stream temperature is calculated by doing a PH Flash, 
+                                were the outlet stream enthalpy is calculated by an energy balance 
+                                through the heater.")
+
             If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow2"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then

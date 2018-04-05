@@ -121,6 +121,9 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The splitter is a mass balance unit operation - divides a 
+                                    material stream into two or three other streams.")
+
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac8"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then

@@ -75,6 +75,15 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The Mixer is used to mix up to six material streams into one, while executing all the mass and energy balances.")
+
+            IObj?.Paragraphs.Add("The mixer does the mass balance in the equipment and determines 
+                                the mass flow and the composition of the outlet stream. Pressure 
+                                is calculated according to the parameter defined by the user. 
+                                Temperature is calculated by doing a PH Flash in the outlet 
+                                stream, with the enthalpy calculated from the inlet streams 
+                                (energy balance).")
+
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac6"))
             End If

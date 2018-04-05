@@ -274,6 +274,63 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("DWSIM has a model for the countercurrent, two-stream heat 
+                                exchanger which supports phase change and multiple phases in a 
+                                stream.")
+
+            IObj?.Paragraphs.Add("Input Parameters")
+
+            IObj?.Paragraphs.Add("The heat exchanger in DWSIM has five calculation modes: ")
+
+            IObj?.Paragraphs.Add("1. Calculate hot fluid outlet temperature: you must provide the 
+                              cold fluid outlet temperature and the exchange area to 
+                              calculate the hot fluid temperature.")
+
+            IObj?.Paragraphs.Add("2. Calculate cold fluid outlet temperature: in this mode, DWSIM 
+                                needs the hot fluid outlet temperature and the exchange area to 
+                                calculate the cold fluid temperature.")
+
+            IObj?.Paragraphs.Add("3. Calculate both temperatures: in this mode, DWSIM needs the 
+                              exchange area and the heat exchanged to calculate both 
+                              temperatures.")
+
+            IObj?.Paragraphs.Add("4. Calculate area: in this mode you must provide the HTC and both temperatures to calculate the exchange area.")
+
+            IObj?.Paragraphs.Add("5. Rate a Shell and Tube exchanger: in this mode you must provide 
+                          the exchanger geometry and DWSIM will calculate output 
+                          temperatures, pressure drop on the shell and tubes, overall 
+                          HTC, LMTD, and exchange area. This calculation mode uses a 
+                          simplified version of Tinker's method for Shell and Tube 
+                          exchanger calculations. ")
+
+            IObj?.Paragraphs.Add("You can provide the pressure drop for both fluids in the exchanger for modes 1 to 4 only.")
+
+            IObj?.Paragraphs.Add("Calculation Mode")
+
+            IObj?.Paragraphs.Add("The heat exchanger in DWSIM is calculated using the simple  convection heat equation:")
+
+            IObj?.Paragraphs.Add("<m>Q=UA\Delta T_{ml},</m>")
+
+            IObj?.Paragraphs.Add("where: Q = heat transferred, A = heat transfer area (external 
+                            surface) and <mi>\Delta T_{ml}</mi> = Logarithmic Mean Temperature 
+                            Difference (LMTD). We also remember that:")
+
+            IObj?.Paragraphs.Add("<m>Q=m\Delta H,</m>")
+
+            IObj?.Paragraphs.Add("where: <mi>Q</mi> = heat transferred from/to the fluid and <mi>\Delta H</mi> = outlet-inlet enthalpy difference.")
+
+            IObj?.Paragraphs.Add("The calculation procedure depends on the mode selected:")
+
+            IObj?.Paragraphs.Add("1. Calculate hot fluid outlet temperature: HTC (Heat Transfer Coefficient), hot fluid outlet temperature, heat load and LMTD.")
+
+            IObj?.Paragraphs.Add("2. Calculate cold fluid outlet temperature: HTC, cold fluid outlet temperature, heat load and LMTD.")
+
+            IObj?.Paragraphs.Add("3. Calculate both temperatures: HTC, cold and hot fluid outlet temperatures and LMTD.")
+
+            IObj?.Paragraphs.Add("4. Calculate area: exchange area and LMTD.")
+
+            IObj?.Paragraphs.Add("5. Rate Shell and Tube exchanger: exchanger geometry information.")
+
             Dim Ti1, Ti2, w1, w2, A, Tc1, Th1, Wc, Wh, P1, P2, Th2, Tc2, U As Double
             Dim Pc1, Ph1, Pc2, Ph2, DeltaHc, DeltaHh, H1, H2, Hc1, Hh1, Hc2, Hh2, CPC, CPH As Double
             Dim StIn0, StIn1, StOut0, StOut1, StInCold, StInHot, StOutHot, StOutCold As MaterialStream

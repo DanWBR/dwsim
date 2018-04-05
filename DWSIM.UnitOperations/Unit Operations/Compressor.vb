@@ -153,6 +153,66 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The compressor is used to provide energy to a vapor stream in the 
+                            form of pressure. The ideal process is isentropic (constant 
+                            entropy) and the non-idealities are considered according to the 
+                            compressor efficiency, which is defined by the user.")
+
+            IObj?.Paragraphs.Add("Calculation Method")
+
+            IObj?.Paragraphs.Add("The compressor calculation is different for the two cases (when 
+                                the provided delta-p or the potency of the energy stream is 
+                                used). In the first method, we have the following sequence:")
+
+            IObj?.Paragraphs.Add("• Outlet pressure calculation:")
+
+            IObj?.Paragraphs.Add("<m>P_{2}=P_{1}+\Delta P</m>")
+
+            IObj?.Paragraphs.Add("• Outlet enthalpy: A PS Flash (Pressure-Entropy) is done to 
+                              obtain the ideal process enthalpy change. The outlet real 
+                              enthalpy is then calculated by:")
+
+            IObj?.Paragraphs.Add("<m>H_{2}=H_{1}+\frac{\Delta H_{id}}{\eta\,W},</m>")
+
+            IObj?.Paragraphs.Add("• Power required by the compressor:")
+
+            IObj?.Paragraphs.Add("<m>Pot=\frac{W(H_{2_{id}}-H_{1})}{\eta},</m>")
+
+            IObj?.Paragraphs.Add("• Outlet temperature: PH Flash with <mi>P_{2}</mi> and <mi>H_{2}</mi>.")
+
+            IObj?.Paragraphs.Add("In the second case (calculated outlet pressure), we have the 
+                                following sequence:")
+
+            IObj?.Paragraphs.Add("• Discharge pressure:")
+
+            IObj?.Paragraphs.Add("<m>P_{2}=P_{1}[1+\frac{Pot}{\eta W}\frac{k-1}{k}\frac{MM}{8.314T_{1}}]^{[k/(k-1)]},</m>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<mi>P_{2}</mi> outlet stream pressure")
+
+            IObj?.Paragraphs.Add("<mi>P_{1}</mi> inlet stream pressure")
+
+            IObj?.Paragraphs.Add("<mi>Pot</mi> compressor power")
+
+            IObj?.Paragraphs.Add("<mi>W</mi> mass flow")
+
+            IObj?.Paragraphs.Add("<mi>\eta</mi> compressor adiabatic efficiency")
+
+            IObj?.Paragraphs.Add("<mi>k</mi> adiabatic coefficient <mi>(Cp_{gi}/Cv_{gi})</mi>")
+
+            IObj?.Paragraphs.Add("<mi>MM</mi> gas molecular weight")
+
+            IObj?.Paragraphs.Add("<mi>T_{1}</mi> inlet stream temperature")
+
+            IObj?.Paragraphs.Add("• Outlet enthalpy: A PS Flash (Pressure-Entropy) is done to 
+                              obtain the ideal process enthalpy change. The outlet real 
+                              enthalpy is then calculated by: ")
+
+            IObj?.Paragraphs.Add("<m>H_{2}=H_{1}+\frac{\Delta H_{id}}{\eta\,W},</m>")
+
+            IObj?.Paragraphs.Add("• Outlet temperature: PH Flash with <mi>P_{2}</mi> and <mi>H_{2}</mi>.")
+
             If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then

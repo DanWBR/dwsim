@@ -123,6 +123,15 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The Valve works like a fixed pressure drop for the process, where 
+                                the outlet material stream properties are calculated beginning 
+                                from the principle that the expansion is an isenthalpic process.")
+
+            IObj?.Paragraphs.Add("The outlet stream pressure is calculated from the inlet pressure 
+                                and the pressure drop. The outlet stream temperature is found by 
+                                doing a PH Flash. This way, in the majority of cases, the outlet 
+                                temperature will be less than or equal to the inlet one.")
+
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then

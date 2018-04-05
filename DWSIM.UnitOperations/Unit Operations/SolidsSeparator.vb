@@ -77,6 +77,8 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The solids separator is used to separate solids from a liquid phase in a mixed material stream.")
+
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then

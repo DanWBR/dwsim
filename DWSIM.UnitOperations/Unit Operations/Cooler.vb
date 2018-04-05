@@ -140,6 +140,10 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The cooler simulates a stream cooling process. 
+                                The outlet stream temperature is calculated by doing a PH Flash, 
+                                were the outlet stream enthalpy is calculated by an energy balance 
+                                through the cooler.")
 
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow2"))

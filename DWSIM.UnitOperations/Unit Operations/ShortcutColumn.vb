@@ -94,6 +94,15 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("The shortcut column is used to calculate the minimum reflux and 
+                                distribution of products in a distillation column by the method 
+                                of Fenske-Underwood-Gilliland. The column should have a 
+                                single feed stage, two products (top and bottom), condenser 
+                                (partial or total) and reboiler. The results are the minimum 
+                                reflux, thermal loads and temperature of the condenser and 
+                                reboiler for a fixed reflux ratio, in addition to determining the 
+                                optimum feed stage and the minimum number of stages.")
+
             'Validate unitop status.
             Me.Validate()
 
