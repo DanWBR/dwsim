@@ -379,7 +379,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Método de Cálculo Entalpia/Entropia/Cp/Cv (0 = Lee-Kesler, 1 = Ideal, 2 = Excesso).
+        '''  Looks up a localized string similar to Método de Cálculo Entalpia/Entropia/Cp/Cv (0 = Lee-Kesler, 1 = Ideal, 2 = Excesso, 3 = Experimental).
         '''</summary>
         Friend Shared ReadOnly Property PP_ENTH_CP_CALC_METHOD() As String
             Get

@@ -319,6 +319,8 @@ Namespace PropertyPackages
                         H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                     Case 2 'Excess
                         H = Me.RET_Hid(298.15, T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    Case 3 'Experimental Liquid
+                        H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx))
                 End Select
             ElseIf st = State.Vapor Then
                 Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
@@ -328,6 +330,8 @@ Namespace PropertyPackages
                         H = Me.RET_Hid(298.15, T, Vx)
                     Case 2 'Excess
                         H = Me.RET_Hid(298.15, T, Vx)
+                    Case 3 'Experimental Liquid
+                        H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                 End Select
             ElseIf st = State.Solid Then
                 Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
@@ -337,6 +341,8 @@ Namespace PropertyPackages
                         H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                     Case 2 'Excess
                         H = Me.RET_Hid(298.15, T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    Case 3 'Experimental Liquid
+                        H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                 End Select
             End If
 
@@ -383,6 +389,8 @@ Namespace PropertyPackages
                         S = Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                     Case 2 'Excess
                         S = Me.RET_Sid(298.15, T, P, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                    Case 3 'Experimental Liquid
+                        S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T
                 End Select
             ElseIf st = State.Vapor Then
                 Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
@@ -392,6 +400,8 @@ Namespace PropertyPackages
                         S = Me.RET_Sid(298.15, T, P, Vx)
                     Case 2 'Excess
                         S = Me.RET_Sid(298.15, T, P, Vx)
+                    Case 3 'Experimental Liquid
+                        S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                 End Select
             ElseIf st = State.Solid Then
                 Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
@@ -401,6 +411,8 @@ Namespace PropertyPackages
                         S = Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                     Case 2 'Excess
                         S = Me.RET_Sid(298.15, T, P, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                    Case 3 'Experimental Liquid
+                        S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                 End Select
             End If
 
@@ -566,7 +578,7 @@ Namespace PropertyPackages
                             Case 0 'LK
                                 resultObj = Me.m_lk.CpCvR_LK(state, T, P, RET_VMOL(phase), RET_VKij(), RET_VMAS(phase), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                                 result = resultObj(1)
-                            Case 1 'Ideal
+                            Case 1, 3 'Ideal/Experimental
                                 result = Me.AUX_LIQCPm(T, phaseID)
                             Case 2 'Excess
                                 result = Me.AUX_LIQCPm(T, phaseID) + Me.m_act.CalcExcessHeatCapacity(T, RET_VMOL(phase), Me.GetArguments()) / Me.AUX_MMM(phase)
@@ -582,7 +594,7 @@ Namespace PropertyPackages
                             Case 0 'LK
                                 resultObj = Me.m_lk.CpCvR_LK(state, T, P, RET_VMOL(phase), RET_VKij(), RET_VMAS(phase), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                                 result = resultObj(2)
-                            Case 1 'Ideal
+                            Case 1, 3 'Ideal/Experimental
                                 result = Me.AUX_LIQCPm(T, phaseID)
                             Case 2 'Excess
                                 result = Me.AUX_LIQCPm(T, phaseID) + Me.m_act.CalcExcessHeatCapacity(T, RET_VMOL(phase), Me.GetArguments()) / Me.AUX_MMM(phase)
@@ -724,7 +736,7 @@ Namespace PropertyPackages
                         resultObj = Me.m_lk.CpCvR_LK("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VMAS(dwpl), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = resultObj(1)
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = resultObj(2)
-                    Case 1 'Ideal
+                    Case 1, 3 'Ideal/Experimental
                         result = Me.AUX_LIQCPm(T, phaseID)
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result

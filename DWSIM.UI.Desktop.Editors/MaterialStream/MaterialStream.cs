@@ -110,6 +110,12 @@ namespace DWSIM.UI.Desktop.Editors
                         case StreamSpec.Pressure_and_VaporFraction:
                             position = 2;
                             break;
+                        case StreamSpec.Pressure_and_Enthalpy:
+                            position = 3;
+                            break;
+                        case StreamSpec.Pressure_and_Entropy:
+                            position = 4;
+                            break;
                     }
                     if (ms.GraphicObject.InputConnectors[0].IsAttached &&
                         ms.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.ObjectType != ObjectType.OT_Recycle)
@@ -130,6 +136,12 @@ namespace DWSIM.UI.Desktop.Editors
                                     break;
                                 case 2:
                                     ms.SpecType = StreamSpec.Pressure_and_VaporFraction;
+                                    break;
+                                case 3:
+                                    ms.SpecType = StreamSpec.Pressure_and_Enthalpy;
+                                    break;
+                                case 4:
+                                    ms.SpecType = StreamSpec.Pressure_and_Entropy;
                                     break;
                             }
                         });
@@ -225,6 +237,34 @@ namespace DWSIM.UI.Desktop.Editors
                                                }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Vapor Phase Mole Fraction (spec)"));
+                        s.CreateAndAddTextBoxRow(container, nf, "Specific Enthalpy (" + su.enthalpy + ")", cv.ConvertFromSI(su.enthalpy, ms.Phases[0].Properties.enthalpy.GetValueOrDefault()),
+                                               (TextBox arg3, EventArgs ev) =>
+                                               {
+                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   {
+                                                       arg3.TextColor = (SystemColors.ControlText);
+                                                       ms.Phases[0].Properties.enthalpy = cv.ConvertToSI(su.enthalpy, Double.Parse(arg3.Text.ToString()));
+                                                   }
+                                                   else
+                                                   {
+                                                       arg3.TextColor = (Colors.Red);
+                                                   }
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
+                        s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Specific Enthalpy"));
+                        s.CreateAndAddTextBoxRow(container, nf, "Specific Entropy (" + su.entropy + ")", cv.ConvertFromSI(su.entropy, ms.Phases[0].Properties.entropy.GetValueOrDefault()),
+                                               (TextBox arg3, EventArgs ev) =>
+                                               {
+                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   {
+                                                       arg3.TextColor = (SystemColors.ControlText);
+                                                       ms.Phases[0].Properties.entropy = cv.ConvertToSI(su.entropy, Double.Parse(arg3.Text.ToString()));
+                                                   }
+                                                   else
+                                                   {
+                                                       arg3.TextColor = (Colors.Red);
+                                                   }
+                                               }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
+                        s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Specific Entropy"));
 
                         s.CreateAndAddLabelRow(container, "Mixture Composition");
 

@@ -235,7 +235,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson. Recomendado para uso com os Componentes Hipotéticos.</value>
   </data>
   <data name="PP_ENTH_CP_CALC_METHOD" xml:space="preserve">
-    <value>Método de Cálculo Entalpia/Entropia/Cp/Cv (0 = Lee-Kesler, 1 = Ideal, 2 = Excesso)</value>
+    <value>Método de Cálculo Entalpia/Entropia/Cp/Cv (0 = Lee-Kesler, 1 = Ideal, 2 = Excesso, 3 = Experimental)</value>
   </data>
   <data name="PP_FLASHALGORITHM" xml:space="preserve">
     <value>Algoritmo Flash (2 = Definição Global, 0 = LA ELV, 1 = IO ELV, 3 = IO ELLV, 4 = Gibbs ELV, 5 = Gibbs ELLV, 6 = NL ELLV, 7 = NL ESL, 8 = NL Imisc., 9 = LLE Simples)</value>

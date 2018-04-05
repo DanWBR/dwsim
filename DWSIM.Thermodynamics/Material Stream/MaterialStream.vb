@@ -6652,7 +6652,11 @@ Namespace Streams
             ElseIf p.Equals("Temperature") Then
                 Return "Enter the temperature of the stream if the Flash Spec is T/P or T/VF, otherwise it will be calculated."
             ElseIf p.Equals("Pressure") Then
-                Return "Enter the pressure of the stream if the Flash Spec is T/P or P/VF, otherwise it will be calculated."
+                Return "Enter the pressure of the stream if the Flash Spec is T/P, P/H, P/S or P/VF, otherwise it will be calculated."
+            ElseIf p.Equals("Specific Enthalpy") Then
+                Return "Enter the enthalpy of the stream if the Flash Spec is P/H, otherwise it will be calculated."
+            ElseIf p.Equals("Specific Entropy") Then
+                Return "Enter the entropy of the stream if the Flash Spec is P/S, otherwise it will be calculated."
             ElseIf p.Equals("Mass Flow") Then
                 Return "Enter the Mass flow of the stream. Molar and Volumetric ones will be calculated to match this value."
             ElseIf p.Equals("Molar Flow") Then

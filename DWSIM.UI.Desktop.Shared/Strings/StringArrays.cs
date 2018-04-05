@@ -34,7 +34,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] flash_spec()
         {
-            return new String[] { "Temperature and Pressure", "Temperature and Vapor Fraction", "Pressure and Vapor Fraction" };
+            return new String[] { "Temperature and Pressure (T/P)", "Temperature and Vapor Fraction (T/VF)", "Pressure and Vapor Fraction (P/VF)", "Pressure and Enthalpy (P/H)", "Pressure and Entropy (P/S)" };
         }
         public static String[] numberformat()
         {

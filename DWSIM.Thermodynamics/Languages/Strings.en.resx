@@ -228,7 +228,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Property Package that uses the UNIFAC Group Contribution Method for equilibrium calculations. Recommended for use with Hypotheticals.</value>
   </data>
   <data name="PP_ENTH_CP_CALC_METHOD" xml:space="preserve">
-    <value>Enthalpy/Entropy/Cp calculation method (0 = Lee-Kesler, 1 = Ideal, 2 = Excess)</value>
+    <value>Enthalpy/Entropy/Cp calculation method (0 = Lee-Kesler, 1 = Ideal, 2 = Excess, 3 = Experimental)</value>
   </data>
   <data name="PP_FLASHALGORITHM" xml:space="preserve">
     <value>Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE)</value>
