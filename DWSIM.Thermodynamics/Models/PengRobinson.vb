@@ -412,7 +412,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "Peng-Robinson EOS Enthalpy", "Peng-Robinson EOS Enthalpy Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "H_PR_MIX_CPU", "Peng-Robinson EOS Enthalpy", "Peng-Robinson EOS Enthalpy Calculation Routine")
 
             IObj?.Paragraphs.Add("The Peng-Robinson equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
                                     which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 

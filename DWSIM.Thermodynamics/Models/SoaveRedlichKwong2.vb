@@ -320,15 +320,74 @@ Namespace PropertyPackages.ThermoPlugs
 
         Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFug", "SRK EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent()
+
             If Settings.EnableGPUProcessing Then
+                IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the GPU.")
                 Return CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
             Else
+                IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the CPU.")
                 Return CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
             End If
 
         End Function
 
         Private Function CalcLnFugCPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "")
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "SRK EOS Fugacity Coefficient (CPU)", "SRK EOS Fugacity Coefficient Calculation Routine")
+
+            IObj?.Paragraphs.Add("The SRK equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
+                                    which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
+                                    equations are, in fact, The simplest equations capable of representing The behavior of liquid And vapor phases simultaneously.
+                                    The SRK EOS is written in the following form")
+            IObj?.Paragraphs.Add("<math>P=\frac{RT}{(V-b)}-\frac{a(T)}{V(V+b)}<math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>P</math_inline> pressure")
+            IObj?.Paragraphs.Add("<math_inline>R</math_inline> ideal gas universal constant")
+            IObj?.Paragraphs.Add("<math_inline>v</math_inline> molar volume")
+            IObj?.Paragraphs.Add("<math_inline>b</math_inline> parameter related to hard-sphere volume")
+            IObj?.Paragraphs.Add("<math_inline>a</math_inline> parameter related to intermolecular forces")
+            IObj?.Paragraphs.Add("For pure substances, the a and b parameters are given by:")
+            IObj?.Paragraphs.Add("<math>a(T)=[1+(0.48+1.574\omega-0.176\omega^{2})(1-T_{r}^{(1/2)})]^{2}0.42747(R^{2}T_{c}^{2})/P_{c}</math>")
+            IObj?.Paragraphs.Add("<math>b=0.08664(RT_{c})/P_{c}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>\omega</math_inline> acentric factor")
+            IObj?.Paragraphs.Add("<math_inline>T_{c}</math_inline> critical temperature ")
+            IObj?.Paragraphs.Add("<math_inline>P_{c}</math_inline> critical pressure")
+            IObj?.Paragraphs.Add("<math_inline>T_{r}</math_inline> reduced temperature, T/Tc")
+            IObj?.Paragraphs.Add("For mixtures, the above equation can be used, replacing a and b by mixture-representative values. Mixture a and b values are normally given by the basic mixing rule,")
+            IObj?.Paragraphs.Add("<math>a_{m}=\sum_{i}\sum_{j}x_{i}x_{j}\sqrt{(a_{i}a_{j})}(1-k_{ij})</math>")
+            IObj?.Paragraphs.Add("<math>b_{m}=\sum_{i}x_{i}b_{i}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>x_{i,j}</math_inline> molar fraction of the i Or j component in the phase (liquid Or vapor)")
+            IObj?.Paragraphs.Add("<math_inline>a_{i,j}</math_inline> i Or j component a constant ")
+            IObj?.Paragraphs.Add("<math_inline>b_{i,j}</math_inline> i Or j component b constant")
+            IObj?.Paragraphs.Add("<math_inline>k_{ij}</math_inline> binary interaction parameter which characterizes the i-j pair")
+            IObj?.Paragraphs.Add("The fugacity coefficient obtained with the Peng-Robinson EOS in given by")
+            IObj?.Paragraphs.Add("<math>\ln\dfrac{f_{i}}{x_{i}P}=\frac{b_{i}}{b_{m}}(Z-1)-\ln(Z-B)-\frac{A}{B}(\frac{\sum_{k}x_{k}a_{ki}}{a_{m}}-\frac{b_{i}}{b_{m}})\ln(\frac{Z+B}{Z}),</math>")
+            IObj?.Paragraphs.Add("where Z Is the phase compressibility factor (liquid or vapor) and can be obtained from the equation")
+            IObj?.Paragraphs.Add("<math>Z^{3}-Z^{2}+(A-B-B^{2})Z-AB=0,</math>")
+            IObj?.Paragraphs.Add("<math>A=\frac{a_{m}P}{R^{2}T^{2}}</math>")
+            IObj?.Paragraphs.Add("<math>B=\frac{b_{m}P}{RT}</math>")
+            IObj?.Paragraphs.Add("<math>Z=\frac{PV}{RT}</math>")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", forcephase))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -363,6 +422,9 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim tmpa As Object = Calc_SUM2(n, Vx, a)
 
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
+
             aml2 = tmpa(0)
             aml = tmpa(1)
 
@@ -373,11 +435,16 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
+            IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
+            IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
+
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As ArrayList, _mingz As Object, Z As Double
+            IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG))
 
+            Dim _zarray As ArrayList, _mingz As Object, Z As Double
 
             _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
             If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
@@ -397,6 +464,8 @@ Namespace PropertyPackages.ThermoPlugs
             Z = ZP(0)
             Pcorr = ZP(1)
 
+            IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
+
             i = 0
             Do
                 t1 = bi(i) * (Z - 1) / bml
@@ -407,6 +476,10 @@ Namespace PropertyPackages.ThermoPlugs
                 LN_CF(i) = t1 + t2 - (t3 * t4 / t5) + Math.Log(Pcorr / P)
                 i = i + 1
             Loop Until i = n + 1
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Fugacity Coefficients: {0}", LN_CF.ExpY().ToMathArrayString))
 
             Return LN_CF
 

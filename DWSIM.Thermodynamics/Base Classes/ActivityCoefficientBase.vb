@@ -309,6 +309,12 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEnthalpy", "Enthalpy", "Property Package Enthalpy Calculation Routine")
+
+            IObj?.SetCurrent()
+
             Dim H As Double
 
             If st = State.Liquid Then
@@ -378,6 +384,12 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEntropy", "Entropy", "Entropy Calculation Routine")
+
+            IObj?.SetCurrent()
 
             Dim S As Double
 

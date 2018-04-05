@@ -709,15 +709,27 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEnthalpy", "SRK EOS Enthalpy", "SRK Enthalpy Calculation Routine")
+
+            IObj?.SetCurrent()
+
             Dim H As Double
 
+            Dim Hid As Double = Me.RET_Hid(298.15, T, Vx)
+
+            IObj?.SetCurrent()
+
             If st = State.Liquid Then
-                H = Me.m_pr.H_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx))
+                H = Me.m_pr.H_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid)
             ElseIf st = State.Vapor Then
-                H = Me.m_pr.H_SRK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx))
+                H = Me.m_pr.H_SRK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid)
             ElseIf st = State.Solid Then
-                H = Me.m_pr.H_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                H = Me.m_pr.H_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
             End If
+
+            Return H
 
             Return H
 
@@ -741,14 +753,24 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEntropy", "SRK EOS Entropy", "Property Package Entropy Calculation Routine")
+
+            IObj?.SetCurrent()
+
             Dim S As Double
 
+            Dim Sid As Double = Me.RET_Sid(298.15, T, P, Vx)
+
+            IObj?.SetCurrent()
+
             If st = State.Liquid Then
-                S = Me.m_pr.S_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx))
+                S = Me.m_pr.S_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid)
             ElseIf st = State.Vapor Then
-                S = Me.m_pr.S_SRK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx))
+                S = Me.m_pr.S_SRK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid)
             ElseIf st = State.Solid Then
-                S = Me.m_pr.S_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                S = Me.m_pr.S_SRK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
             End If
 
             Return S
@@ -879,6 +901,12 @@ Namespace PropertyPackages
             Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcFugCoeff", "SRK EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent()
 
             Dim srkn As New PropertyPackages.ThermoPlugs.SRK
 

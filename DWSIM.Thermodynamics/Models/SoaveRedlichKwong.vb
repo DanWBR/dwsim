@@ -233,6 +233,63 @@ Namespace PropertyPackages.Auxiliary
 
         Function H_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Object, ByVal VKij As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VMM As Object, ByVal Hid As Double) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "H_SRK_MIX", "SRK EOS Enthalpy", "SRK EOS Enthalpy Calculation Routine")
+
+            IObj?.Paragraphs.Add("The SRK equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
+                                    which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
+                                    equations are, in fact, The simplest equations capable of representing The behavior of liquid And vapor phases simultaneously.
+                                    The SRK EOS is written in the following form")
+            IObj?.Paragraphs.Add("<math>P=\frac{RT}{(V-b)}-\frac{a(T)}{V(V+b)}<math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>P</math_inline> pressure")
+            IObj?.Paragraphs.Add("<math_inline>R</math_inline> ideal gas universal constant")
+            IObj?.Paragraphs.Add("<math_inline>v</math_inline> molar volume")
+            IObj?.Paragraphs.Add("<math_inline>b</math_inline> parameter related to hard-sphere volume")
+            IObj?.Paragraphs.Add("<math_inline>a</math_inline> parameter related to intermolecular forces")
+            IObj?.Paragraphs.Add("For pure substances, the a and b parameters are given by:")
+            IObj?.Paragraphs.Add("<math>a(T)=[1+(0.48+1.574\omega-0.176\omega^{2})(1-T_{r}^{(1/2)})]^{2}0.42747(R^{2}T_{c}^{2})/P_{c}</math>")
+            IObj?.Paragraphs.Add("<math>b=0.08664(RT_{c})/P_{c}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>\omega</math_inline> acentric factor")
+            IObj?.Paragraphs.Add("<math_inline>T_{c}</math_inline> critical temperature ")
+            IObj?.Paragraphs.Add("<math_inline>P_{c}</math_inline> critical pressure")
+            IObj?.Paragraphs.Add("<math_inline>T_{r}</math_inline> reduced temperature, T/Tc")
+            IObj?.Paragraphs.Add("For mixtures, the above equation can be used, replacing a and b by mixture-representative values. Mixture a and b values are normally given by the basic mixing rule,")
+            IObj?.Paragraphs.Add("<math>a_{m}=\sum_{i}\sum_{j}x_{i}x_{j}\sqrt{(a_{i}a_{j})}(1-k_{ij})</math>")
+            IObj?.Paragraphs.Add("<math>b_{m}=\sum_{i}x_{i}b_{i}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>x_{i,j}</math_inline> molar fraction of the i Or j component in the phase (liquid Or vapor)")
+            IObj?.Paragraphs.Add("<math_inline>a_{i,j}</math_inline> i Or j component a constant ")
+            IObj?.Paragraphs.Add("<math_inline>b_{i,j}</math_inline> i Or j component b constant")
+            IObj?.Paragraphs.Add("<math_inline>k_{ij}</math_inline> binary interaction parameter which characterizes the i-j pair")
+            IObj?.Paragraphs.Add("The fugacity coefficient obtained with the Peng-Robinson EOS in given by")
+            IObj?.Paragraphs.Add("<math>\ln\dfrac{f_{i}}{x_{i}P}=\frac{b_{i}}{b_{m}}(Z-1)-\ln(Z-B)-\frac{A}{B}(\frac{\sum_{k}x_{k}a_{ki}}{a_{m}}-\frac{b_{i}}{b_{m}})\ln(\frac{Z+B}{Z}),</math>")
+            IObj?.Paragraphs.Add("where Z Is the phase compressibility factor (liquid or vapor) and can be obtained from the equation")
+            IObj?.Paragraphs.Add("<math>Z^{3}-Z^{2}+(A-B-B^{2})Z-AB=0,</math>")
+            IObj?.Paragraphs.Add("<math>A=\frac{a_{m}P}{R^{2}T^{2}}</math>")
+            IObj?.Paragraphs.Add("<math>B=\frac{b_{m}P}{RT}</math>")
+            IObj?.Paragraphs.Add("<math>Z=\frac{PV}{RT}</math>")
+
+            IObj?.Paragraphs.Add("For the SRK EOS, Enthalpy is calculated by a departure function, which represents the difference between the current state and the ideal gas state.")
+
+            IObj?.Paragraphs.Add("<math>\frac{H-H^{id}}{RT}=Z-1-\frac{1}{bRT}[a-T\frac{da}{dT}]\ln[1+\frac{b}{V}]</math>")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Ideal Enthalpy (Ideal Gas State): {0} kJ/kg", Hid))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
+
             Dim ai(), bi(), ci() As Double
             Dim n, R As Double
             Dim Tc(), Pc(), Vc(), w(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
@@ -298,8 +355,17 @@ Namespace PropertyPackages.Auxiliary
                 i = i + 1
             Loop Until i = n + 1
 
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
+
+            IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
+            IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
+
             Dim AG1 = am * P / (R * T) ^ 2
             Dim BG1 = bm * P / (R * T)
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG1))
 
             Dim coeff(3) As Double
 
@@ -373,7 +439,11 @@ Namespace PropertyPackages.Auxiliary
 
             End If
 
+            IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
+
             Dim V = (Z * R * T / P) ' m3/mol
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>V</math_inline>: {0}", V))
 
             Dim tmp1 = MMm / V / 1000
 
@@ -400,15 +470,78 @@ Namespace PropertyPackages.Auxiliary
             Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / ((uu ^ 2 - 4 * ww) ^ 0.5 * bm) * dadT * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5)))
             Dim DHres = DAres + T * (DSres) + R * T * (Z - 1)
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kmol", DHres))
+            IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kg", DHres / MMm))
+
             If MathEx.Common.Sum(Vz) = 0.0# Then
                 H_SRK_MIX = 0.0#
             Else
+                IObj?.Paragraphs.Add(String.Format("Calculated Total Enthalpy (Ideal + Departure): {0} kJ/kg", Hid + DHres / MMm))
                 H_SRK_MIX = Hid + DHres / MMm '/ 1000
             End If
 
         End Function
 
-        Function S_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal VMM As Array, ByVal Sid As Double) As Double
+        Function S_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Object, ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VMM As Double(), ByVal Sid As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "H_SRK_MIX", "SRK EOS Enthalpy", "SRK EOS Enthalpy Calculation Routine")
+
+            IObj?.Paragraphs.Add("The SRK equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
+                                    which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
+                                    equations are, in fact, The simplest equations capable of representing The behavior of liquid And vapor phases simultaneously.
+                                    The SRK EOS is written in the following form")
+            IObj?.Paragraphs.Add("<math>P=\frac{RT}{(V-b)}-\frac{a(T)}{V(V+b)}<math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>P</math_inline> pressure")
+            IObj?.Paragraphs.Add("<math_inline>R</math_inline> ideal gas universal constant")
+            IObj?.Paragraphs.Add("<math_inline>v</math_inline> molar volume")
+            IObj?.Paragraphs.Add("<math_inline>b</math_inline> parameter related to hard-sphere volume")
+            IObj?.Paragraphs.Add("<math_inline>a</math_inline> parameter related to intermolecular forces")
+            IObj?.Paragraphs.Add("For pure substances, the a and b parameters are given by:")
+            IObj?.Paragraphs.Add("<math>a(T)=[1+(0.48+1.574\omega-0.176\omega^{2})(1-T_{r}^{(1/2)})]^{2}0.42747(R^{2}T_{c}^{2})/P_{c}</math>")
+            IObj?.Paragraphs.Add("<math>b=0.08664(RT_{c})/P_{c}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>\omega</math_inline> acentric factor")
+            IObj?.Paragraphs.Add("<math_inline>T_{c}</math_inline> critical temperature ")
+            IObj?.Paragraphs.Add("<math_inline>P_{c}</math_inline> critical pressure")
+            IObj?.Paragraphs.Add("<math_inline>T_{r}</math_inline> reduced temperature, T/Tc")
+            IObj?.Paragraphs.Add("For mixtures, the above equation can be used, replacing a and b by mixture-representative values. Mixture a and b values are normally given by the basic mixing rule,")
+            IObj?.Paragraphs.Add("<math>a_{m}=\sum_{i}\sum_{j}x_{i}x_{j}\sqrt{(a_{i}a_{j})}(1-k_{ij})</math>")
+            IObj?.Paragraphs.Add("<math>b_{m}=\sum_{i}x_{i}b_{i}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>x_{i,j}</math_inline> molar fraction of the i Or j component in the phase (liquid Or vapor)")
+            IObj?.Paragraphs.Add("<math_inline>a_{i,j}</math_inline> i Or j component a constant ")
+            IObj?.Paragraphs.Add("<math_inline>b_{i,j}</math_inline> i Or j component b constant")
+            IObj?.Paragraphs.Add("<math_inline>k_{ij}</math_inline> binary interaction parameter which characterizes the i-j pair")
+            IObj?.Paragraphs.Add("The fugacity coefficient obtained with the Peng-Robinson EOS in given by")
+            IObj?.Paragraphs.Add("<math>\ln\dfrac{f_{i}}{x_{i}P}=\frac{b_{i}}{b_{m}}(Z-1)-\ln(Z-B)-\frac{A}{B}(\frac{\sum_{k}x_{k}a_{ki}}{a_{m}}-\frac{b_{i}}{b_{m}})\ln(\frac{Z+B}{Z}),</math>")
+            IObj?.Paragraphs.Add("where Z Is the phase compressibility factor (liquid or vapor) and can be obtained from the equation")
+            IObj?.Paragraphs.Add("<math>Z^{3}-Z^{2}+(A-B-B^{2})Z-AB=0,</math>")
+            IObj?.Paragraphs.Add("<math>A=\frac{a_{m}P}{R^{2}T^{2}}</math>")
+            IObj?.Paragraphs.Add("<math>B=\frac{b_{m}P}{RT}</math>")
+            IObj?.Paragraphs.Add("<math>Z=\frac{PV}{RT}</math>")
+
+            IObj?.Paragraphs.Add("For the SRK EOS, Entropy is calculated by a departure function, which represents the difference between the current state and the ideal gas state.")
+
+            IObj?.Paragraphs.Add("<math>\frac{S-S^{id}}{RT}=\ln(Z-B)-\ln\frac{P}{P^{0}}-\frac{A}{B}[\frac{T}{a}\frac{da}{dT}]\ln[1+\frac{B}{Z}]</math>")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Ideal Entropy (Ideal Gas State): {0} kJ/kg", Sid))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Dim ai(), bi(), ci() As Double
             Dim n, R As Double
@@ -477,8 +610,17 @@ Namespace PropertyPackages.Auxiliary
 
             'Dim dadT = 
 
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
+
+            IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
+            IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
+
             Dim AG1 = am * P / (R * T) ^ 2
             Dim BG1 = bm * P / (R * T)
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG1))
 
             Dim coeff(3) As Double
 
@@ -549,7 +691,11 @@ Namespace PropertyPackages.Auxiliary
 
             End If
 
+            IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
+
             Dim V = (Z * R * T / P) ' m3/mol
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>V</math_inline>: {0}", V))
 
             Dim tmp1 = MMm / V / 1000
 
@@ -575,9 +721,15 @@ Namespace PropertyPackages.Auxiliary
             'Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(V * 101325 / (R * 298.15)) - 1 / ((uu ^ 2 - 4 * ww) ^ 0.5 * bm) * dadT * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5)))
             Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / ((uu ^ 2 - 4 * ww) ^ 0.5 * bm) * dadT * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5)))
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Calculated Entropy Departure: {0} kJ/kmol", DSres))
+            IObj?.Paragraphs.Add(String.Format("Calculated Entropy Departure: {0} kJ/kg", DSres / MMm))
+
             If MathEx.Common.Sum(Vz) = 0.0# Then
                 S_SRK_MIX = 0.0#
             Else
+                IObj?.Paragraphs.Add(String.Format("Calculated Total Entropy (Ideal + Departure): {0} kJ/kg", Sid + DSres / MMm))
                 S_SRK_MIX = Sid + DSres / MMm '/ 1000
             End If
 
