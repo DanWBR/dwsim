@@ -866,6 +866,8 @@ Namespace UnitOperations
             segmento = Nothing
             results = Nothing
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

@@ -418,6 +418,8 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add(String.Format("Activity Coefficients: {0}", g.ToMathArrayString))
 
+            IObj?.Close()
+
             Return g
 
         End Function

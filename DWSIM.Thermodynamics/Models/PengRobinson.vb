@@ -322,6 +322,8 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z_PR))
 
+            IObj?.Close()
+
             Calculator.WriteToConsole("Result: Z = " & Z_PR, 3)
 
         End Function
@@ -550,6 +552,8 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kmol", DHres))
             IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kg", DHres / MMm))
 
+            IObj?.Close()
+
             If MathEx.Common.Sum(Vz) = 0.0# Then
                 Return 0.0#
             Else
@@ -777,6 +781,8 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add(String.Format("Calculated Entropy Departure: {0} kJ/kmol.K", DSres))
             IObj?.Paragraphs.Add(String.Format("Calculated Entropy Departure: {0} kJ/kg.K", DSres / MMm))
+
+            IObj?.Close()
 
             If MathEx.Common.Sum(Vz) = 0.0# Then
                 S_PR_MIX = 0.0#

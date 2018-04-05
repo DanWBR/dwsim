@@ -352,6 +352,8 @@ Namespace PropertyPackages
                 End Select
             End If
 
+            IObj?.Close()
+
             Return H
 
         End Function
@@ -427,6 +429,8 @@ Namespace PropertyPackages
                         S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                 End Select
             End If
+
+            IObj?.Close()
 
             Return S
 

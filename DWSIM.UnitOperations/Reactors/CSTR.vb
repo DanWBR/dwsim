@@ -805,6 +805,9 @@ out:        Dim ms1, ms2 As MaterialStream
                 .EnergyFlow = DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
             End With
+
+            IObj?.Close()
+
         End Sub
         Public Sub OldCalculate(Optional ByVal args As Object = Nothing)
 

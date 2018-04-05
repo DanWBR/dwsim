@@ -365,6 +365,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
+                IObj2?.Close()
+
             Loop Until converged = 1
 
             If V <= 0.0# Then
@@ -390,6 +392,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", Ki.ToMathArrayString))
 
+            IObj?.Close()
+
             Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
@@ -406,9 +410,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False OrElse PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
                 IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
+
+                IObj?.Close()
+
                 Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
             Else
                 IObj?.Paragraphs.Add("Using the fast version of the PH Flash Algorithm.")
+
+                IObj?.Close()
+
                 Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
             End If
         End Function
@@ -551,6 +561,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     cnt += 1
 
+                    IObj2?.Close()
+
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1) Or x1 < 0.0#
 
                 IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, T))
@@ -562,6 +574,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 End If
 
             Next
+
+            IObj?.Close()
 
             If Double.IsNaN(T) Or T <= Tmin Or T >= Tmax Or cnt > maxitEXT Or Abs(fx) > tolEXT Then
                 'switch to mode 2 if it doesn't converge using fast mode.
@@ -817,6 +831,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             WriteDebugInfo("PH Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Close()
 
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 

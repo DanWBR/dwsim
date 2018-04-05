@@ -1119,6 +1119,8 @@ Namespace UnitOperations
                 End Try
             End If
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

@@ -442,6 +442,8 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
             If DebugMode Then AppendDebugLine("Calculation finished successfully.")
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

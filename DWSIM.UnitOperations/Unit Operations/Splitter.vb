@@ -287,6 +287,8 @@ Namespace UnitOperations
 
             End Select
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

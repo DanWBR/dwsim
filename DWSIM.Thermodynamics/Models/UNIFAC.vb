@@ -304,6 +304,8 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add(String.Format("Activity Coefficients: {0}", Vgamma.ToMathArrayString))
 
+            IObj?.Close()
+
             Return Vgamma
 
         End Function

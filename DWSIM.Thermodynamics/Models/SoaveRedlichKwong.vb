@@ -482,6 +482,8 @@ Namespace PropertyPackages.Auxiliary
                 H_SRK_MIX = Hid + DHres / MMm '/ 1000
             End If
 
+            IObj?.Close()
+
         End Function
 
         Function S_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Object, ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VMM As Double(), ByVal Sid As Double) As Double
@@ -732,6 +734,8 @@ Namespace PropertyPackages.Auxiliary
                 IObj?.Paragraphs.Add(String.Format("Calculated Total Entropy (Ideal + Departure): {0} kJ/kg", Sid + DSres / MMm))
                 S_SRK_MIX = Sid + DSres / MMm '/ 1000
             End If
+
+            IObj?.Close()
 
         End Function
 

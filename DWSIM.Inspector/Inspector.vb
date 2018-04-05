@@ -62,13 +62,17 @@ Public Class InspectorItem
 
     Public Property CallingMethodName As String = ""
 
-    Public Property Paragraphs As New Concurrent.ConcurrentBag(Of String)
+    Public Property Paragraphs As New List(Of String)
 
     Public Property SolutionID As String = ""
 
     Public Property ThreadID As Integer = -1
 
     Public Property StartTime As DateTime = DateTime.Now
+
+    Public Property EndTime As DateTime = DateTime.Now
+
+    Public Property TimeTaken As TimeSpan
 
     Public Property Items As New List(Of InspectorItem)
 
@@ -80,6 +84,11 @@ Public Class InspectorItem
         ThreadID = System.Threading.Thread.CurrentThread.ManagedThreadId
         SolutionID = Host.CurrentSolutionID
         Dim st As New StackTrace()
+    End Sub
+
+    Public Sub Close()
+        EndTime = DateTime.Now
+        TimeTaken = StartTime - EndTime
     End Sub
 
     Public Function GetHTML() As String
@@ -109,7 +118,7 @@ Public Class InspectorItem
         stb.AppendLine("<hr>")
         stb.AppendLine(String.Format("<div><div style='float:right;height:40px;line-height:40px;vertical-align:middle;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{1}' alt='View on GitHub' width='200'></a></div><div style='float:left;height:40px;line-height:40px;vertical-align:middle;'><b>Source Code (Visual Basic)</b>: {0}</div></div>", CodePath.Replace("https://github.com/DanWBR/dwsim5/blob/master/", ""), GetImagePath("viewongithub.png")))
         stb.AppendLine("<hr style='clear:both;'>")
-        For Each p In Paragraphs.Reverse()
+        For Each p In Paragraphs
             stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)").Replace("<m>", "$$").Replace("</m>", "$$").Replace("<mi>", "\(").Replace("</mi>", "\)"))
         Next
         stb.AppendLine("<hr>")

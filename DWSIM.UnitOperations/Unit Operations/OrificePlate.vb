@@ -279,6 +279,8 @@ Namespace UnitOperations
                 .SpecType = StreamSpec.Pressure_and_Enthalpy
             End With
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

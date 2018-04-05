@@ -160,6 +160,8 @@ Namespace UnitOperations
             outstr2.Phases(0).Properties.temperature = instr.Phases(0).Properties.temperature.GetValueOrDefault
             outstr2.Phases(0).Properties.pressure = instr.Phases(0).Properties.pressure.GetValueOrDefault
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

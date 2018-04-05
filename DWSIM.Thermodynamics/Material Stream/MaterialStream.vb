@@ -695,6 +695,8 @@ Namespace Streams
 
             End With
 
+            IObj?.Close()
+
         End Sub
 
         ''' <summary>

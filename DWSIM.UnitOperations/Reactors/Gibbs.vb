@@ -1453,6 +1453,8 @@ Namespace Reactors
 
                                 FlowSheet.CheckStatus()
 
+                                IObj4?.Close()
+
                             Loop Until ni_int > MaximumInternalIterations
 
                             If ni_int > MaximumInternalIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
@@ -1493,6 +1495,8 @@ Namespace Reactors
                             sumerr = px.SubtractY(x).AbsSqrSumY
 
                             IObj3?.Paragraphs.Add(String.Format("Error Value: {0}", sumerr))
+
+                            IObj3?.Close()
 
                             ni_ext += 1
 
@@ -1644,6 +1648,8 @@ Namespace Reactors
                         If cnt > 50 Then
                             Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                         End If
+
+                        IObj2?.Close()
 
                     Loop Until CalcFinished
 
@@ -2050,6 +2056,8 @@ Namespace Reactors
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
             End With
+
+            IObj?.Close()
 
         End Sub
 

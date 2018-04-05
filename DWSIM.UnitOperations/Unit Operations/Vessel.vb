@@ -498,6 +498,8 @@ Namespace UnitOperations
 
             SizeVertical()
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

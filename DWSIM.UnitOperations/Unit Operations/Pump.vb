@@ -895,6 +895,8 @@ Namespace UnitOperations
 
             End If
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

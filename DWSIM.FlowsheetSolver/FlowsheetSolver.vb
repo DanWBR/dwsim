@@ -527,10 +527,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 fgui.UpdateInterface()
             End Try
 
+            IObj?.Close()
 
             If fqueue.CalculationQueue.Count > 0 Then fqueue.CalculationQueue.Dequeue()
 
         End While
+
 
         Return loopex
 
@@ -1404,6 +1406,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             GlobalSettings.Settings.CalculatorBusy = False
 
             RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
+
+            IObj?.Close()
 
             If age Is Nothing Then
                 Return New List(Of Exception)

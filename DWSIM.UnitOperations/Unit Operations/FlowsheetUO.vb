@@ -883,6 +883,8 @@ Label_00CC:
 
             Calculated = True
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object

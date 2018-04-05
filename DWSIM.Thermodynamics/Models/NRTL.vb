@@ -400,6 +400,8 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add(String.Format("Activity Coefficients: {0}", Vg.ToMathArrayString))
 
+            IObj?.Close()
+
             Return Vg
 
         End Function

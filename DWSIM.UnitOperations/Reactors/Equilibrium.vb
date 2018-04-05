@@ -753,6 +753,8 @@ Namespace Reactors
 
                     niter += 1
 
+                    IObj3?.Close()
+
                 Loop Until niter >= InternalLoopMaximumIterations
 
                 If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
@@ -906,6 +908,8 @@ Namespace Reactors
 
                 If cnt >= ExternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
+                IObj2?.Close()
+
             Loop Until CalcFinished
 
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
@@ -1008,6 +1012,8 @@ Namespace Reactors
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
             End With
+
+            IObj?.Close()
 
         End Sub
 

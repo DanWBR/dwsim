@@ -162,6 +162,8 @@ Namespace UnitOperations
 
             Me.ResidenceTime = Me.Volume / Q
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

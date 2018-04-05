@@ -111,6 +111,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             IObj?.Paragraphs.Add(String.Format("x: {0}", x.ToMathArrayString))
 
+            IObj?.Close()
+
             Return x
 
         End Function
@@ -710,6 +712,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("MESH Equation Deviations: {0}", errors.ToMathArrayString))
 
             IObj?.Paragraphs.Add(String.Format("Total Error: {0}", errors.AbsSqrSumY))
+
+            IObj?.Close()
 
             Return errors.AbsSqrSumY
 
@@ -1873,6 +1877,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: outer loop error value = " & el_err, IFlowsheet.MessageType.Information)
 
+                IObj2?.Close()
+
             Loop Until Abs(el_err) < tol(1)
 
             il_err = FunctionValue(xvar)
@@ -1909,6 +1915,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
+            IObj?.Close()
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, il_err, ec, el_err, dfdx}
 
@@ -2627,6 +2635,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Calculator.WriteToConsole("Bubble Point solver T error = " & t_error, 1)
 
+                IObj2?.Close()
+
             Loop Until t_error < tol(1)
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
@@ -2642,6 +2652,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
+            IObj?.Close()
 
             'finished, return arrays
 
@@ -3181,6 +3193,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Calculator.WriteToConsole("Sum Rates solver T error = " & t_error, 1)
                 Calculator.WriteToConsole("Sum Rates solver composition error = " & comperror, 1)
 
+                IObj2?.Close()
+
             Loop Until t_error <= tol(1) And comperror <= tol(1)
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
@@ -3196,6 +3210,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
+            IObj?.Close()
 
             For Each Ki In K
                 If pp.AUX_CheckTrivial(Ki) Then
@@ -3710,6 +3726,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             IObj?.Paragraphs.Add(String.Format("Total Error: {0}", errors.AbsSqrSumY))
 
+            IObj?.Close()
+
             Return errors.AbsSqrSumY
 
         End Function
@@ -4216,6 +4234,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
+            IObj?.Close()
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
 

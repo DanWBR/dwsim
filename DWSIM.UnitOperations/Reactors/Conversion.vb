@@ -586,6 +586,8 @@ Namespace Reactors
                 .GraphicObject.Calculated = True
             End With
 
+            IObj?.Close()
+
         End Sub
 
         Public Overrides Sub DeCalculate()

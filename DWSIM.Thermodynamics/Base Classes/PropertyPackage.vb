@@ -994,6 +994,8 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToArrayString()))
 
+            IObj?.Close()
+
             Return K
 
         End Function
@@ -2961,6 +2963,8 @@ redirect2:                      IObj?.SetCurrent()
             End With
 
             IObj?.Paragraphs.Add("Phase Equilibrium for the currently associated Material Stream was calculated successfully.")
+
+            IObj?.Close()
 
             Me.CurrentMaterialStream.AtEquilibrium = True
 

@@ -331,6 +331,7 @@ Namespace UnitOperations
 
             End If
 
+            IObj?.Close()
 
         End Sub
 

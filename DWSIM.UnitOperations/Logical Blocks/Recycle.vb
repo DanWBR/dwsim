@@ -480,6 +480,8 @@ Namespace SpecialOps
 
             Me.IterationCount += 1
 
+            IObj?.Close()
+
         End Sub
 
         Public Overloads Sub DeCalculate()

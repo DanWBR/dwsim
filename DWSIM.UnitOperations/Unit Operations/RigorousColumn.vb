@@ -3122,6 +3122,8 @@ Namespace UnitOperations
                 End If
             Next
 
+            IObj?.Close()
+
         End Sub
 
         Function CalcIdealVapFrac(ByVal Vz As Object, ByVal PVAP As Object, ByVal P As Double) As Double

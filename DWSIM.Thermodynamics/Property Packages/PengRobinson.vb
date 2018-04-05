@@ -745,6 +745,8 @@ Namespace PropertyPackages
                 H = Me.m_pr.H_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
             End If
 
+            IObj?.Close()
+
             Return H
 
         End Function
@@ -786,6 +788,8 @@ Namespace PropertyPackages
             ElseIf st = State.Solid Then
                 S = Me.m_pr.S_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
             End If
+
+            IObj?.Close()
 
             Return S
 
@@ -937,6 +941,8 @@ Namespace PropertyPackages
             fugcoeff = lnfug.ExpY
 
             Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+
+            IObj?.Close()
 
             Return fugcoeff
 

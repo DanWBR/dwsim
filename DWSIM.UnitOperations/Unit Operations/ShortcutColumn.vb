@@ -436,8 +436,7 @@ restart:    B = F - D
                 .GraphicObject.Calculated = True
             End With
 
-            'call the flowsheet calculation routine
-
+            IObj?.Close()
 
         End Sub
 
