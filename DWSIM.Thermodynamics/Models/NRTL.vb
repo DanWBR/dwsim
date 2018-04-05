@@ -210,6 +210,79 @@ Namespace PropertyPackages.Auxiliary
 
         Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), ByVal Vids As String()) As Double()
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "GAMMA_MR", "NRTL Activity Coefficient", "Non-Random-Two-Liquid Activity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add("Wilson (1964) presented a model relating <mi>g^{E}</mi> to the molar 
+                                fraction, based mainly on molecular considerations, using the 
+                                concept of local composition. Basically, the concept of local 
+                                composition states that the composition of the system in the 
+                                vicinity of a given molecule is not equal to the overall 
+                                composition of the system, because of intermolecular forces.")
+
+            IObj?.Paragraphs.Add("Wilson's equation provides a good representation of the Gibbs' 
+                                excess free energy for a variety of mixtures, and is particularly 
+                                useful in solutions of polar compounds or with a tendency to 
+                                association in apolar solvents, where Van Laar's equation or 
+                                Margules' one are not sufficient. Wilson's equation has the 
+                                advantage of being easily extended to multicomponent solutions 
+                                but has two disadvantages: first, the less important, is that the 
+                                equations are not applicable to systems where the logarithms of 
+                                activity coefficients, when plotted as a function of x, show a 
+                                maximum or a minimum. However, these systems are not common. The 
+                                second, a little more serious, is that the model of Wilson is not 
+                                able to predict limited miscibility, that is, it is not useful 
+                                for LLE calculations.")
+
+            IObj?.Paragraphs.Add("Renon and Prausnitz developed the NRTL equation (Non-Random, 
+                                Two-Liquid) based on the concept of local composition but, unlike 
+                                Wilson's model, the NRTL model is applicable to systems of 
+                                partial miscibility. The model equation is:")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}=\frac{\underset{j=1}{\overset{n}{\sum}}\tau_{ji}x_{j}G_{ji}}{\underset{k=1}{\overset{n}{\sum}}x_{k}G_{ki}}+\underset{j=1}{\overset{n}{\sum}}\frac{x_{j}G_{ij}}{\underset{k=1}{\overset{n}{\sum}}x_{k}G_{kj}}(\tau_{ij}-\frac{\underset{m=1}{\overset{n}{\sum}}\tau_{mj}x_{m}G_{mj}}{\underset{k=1}{\overset{n}{\sum}}x_{k}G_{kj}}),</m>")
+
+            IObj?.Paragraphs.Add("<m>G_{ij}=exp(-\tau_{ij}\alpha_{ij}),</m>")
+
+            IObj?.Paragraphs.Add("<m>\tau_{ij}=a_{ij}/{RT},</m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<mi>\gamma_{i}</mi> Activity coefficient of component i")
+
+            IObj?.Paragraphs.Add("<mi>x_{i}</mi> Molar fraction of component i")
+
+            IObj?.Paragraphs.Add("<mi>a_{ij}</mi> Interaction parameter between i-j <mi>(a_{ij}\neq a_{ji})</mi> (cal/mol)")
+
+            IObj?.Paragraphs.Add("<mi>T</mi> Temperature (K)")
+
+            IObj?.Paragraphs.Add("<mi>\alpha_{ij}</mi> non-randomness parameter for the i-j pair <mi>(\alpha_{ij}=\alpha_{ji})</mi>")
+
+            IObj?.Paragraphs.Add("The significance of <mi>G_{ij}</mi> is similar to <mi>\Lambda_{ij}</mi> from 
+                                Wilson's equation, that is, they are characteristic energy 
+                                parameters of the ij interaction. The parameter is related to the 
+                                non-randomness of the mixture, i.e. that the components in the 
+                                mixture are not randomly distributed but follow a pattern 
+                                dictated by the local composition. When it is zero, the mixture 
+                                is completely random, and the equation is reduced to the 
+                                two-suffix Margules equation.")
+
+            IObj?.Paragraphs.Add("For ideal or moderately ideal systems, the NRTL model does not 
+                                offer much advantage over Van Laar and three-suffix Margules, but 
+                                for strongly non-ideal systems, this equation can provide a good 
+                                representation of experimental data, although good quality data 
+                                is necessary to estimate the three required parameters.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Compound IDs: {0}", Vids.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
+
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
@@ -275,17 +348,6 @@ Namespace PropertyPackages.Auxiliary
                 i = i + 1
             Loop Until i = n + 1
 
-            'i = 0
-            'Do
-            '    j = 0
-            '    Do
-            '        Gij(i, j) = Math.Exp(-alpha12(i, j) * tau_ij(i, j))
-            '        Gji(i, j) = Math.Exp(-alpha12(i, j) * tau_ji(i, j))
-            '        j = j + 1
-            '    Loop Until j = n + 1
-            '    i = i + 1
-            'Loop Until i = n + 1
-
             If doparallel And n > 10 Then
                 Parallel.For(0, n + 1, poptions, Sub(ip)
                                                      Gij(ip) = alpha12(ip).NegateY.MultiplyY(tau_ij(ip)).ExpY
@@ -298,18 +360,12 @@ Namespace PropertyPackages.Auxiliary
                 Next
             End If
 
-            'i = 0
-            'Do
-            '    S(i) = 0
-            '    C(i) = 0
-            '    j = 0
-            '    Do
-            '        S(i) += Vx(j) * Gji(i)(j)
-            '        C(i) += Vx(j) * Gji(i)(j) * tau_ji(i)(j)
-            '        j = j + 1
-            '    Loop Until j = n + 1
-            '    i = i + 1
-            'Loop Until i = n + 1
+
+            IObj?.Paragraphs.Add(String.Format("Gij: {0}", Gij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Gji: {0}", Gji.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("tau_ij: {0}", tau_ij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("tau_ji: {0}", tau_ji.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("alpha12: {0}", alpha12.ToMathArrayString))
 
             If doparallel And n > 10 Then
                 Parallel.For(0, n + 1, poptions, Sub(ip)
@@ -323,17 +379,8 @@ Namespace PropertyPackages.Auxiliary
                 Next
             End If
 
-            'i = 0
-            'Do
-            '    lnVg(i) = C(i) / S(i)
-            '    j = 0
-            '    Do
-            '        lnVg(i) += Vx(j) * Gij(i)(j) * (tau_ij(i)(j) - C(j) / S(j)) / S(j)
-            '       j = j + 1
-            '    Loop Until j = n + 1
-            '    Vg(i) = Math.Exp(lnVg(i))
-            '    i = i + 1
-            'Loop Until i = n + 1
+            IObj?.Paragraphs.Add(String.Format("S: {0}", S.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("C: {0}", C.ToMathArrayString))
 
             lnVg = C.DivideY(S)
 
@@ -348,6 +395,10 @@ Namespace PropertyPackages.Auxiliary
             End If
 
             Vg = lnVg.ExpY
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Activity Coefficients: {0}", Vg.ToMathArrayString))
 
             Return Vg
 

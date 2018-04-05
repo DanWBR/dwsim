@@ -57,6 +57,148 @@ Namespace PropertyPackages.Auxiliary
 
         Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), ByVal VQ As Double(), ByVal VR As Double(), ByVal VEKI As List(Of Dictionary(Of Integer, Double))) As Double()
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "GAMMA_MR", "Modified UNIFAC (Dortmund) Activity Coefficient", "MODFAC-Do Activity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add("The UNIFAC method is based on the UNIQUAC equation. When applied to a solution of groups, the equations are written in the form:")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{C}=1-J_{i}+\ln J_{i}-5q_{i}(1-J_{i}/L_{i}+\ln J_{i}/L_{i})<m>")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{R}=q_{i}(1-\sum_{k}(\theta_{k}\beta_{ik}/s_{k})-e_{ki}ln\beta_{ik}/s_{k})<m>")
+
+            IObj?.Paragraphs.Add("Furthermore, the following definitions apply:")
+
+            IObj?.Paragraphs.Add("<m>r_{i}=\sum_{k}\nu_{k}^{(i)}R_{k}<m>")
+
+            IObj?.Paragraphs.Add("<m>q_{i}=\sum_{k}\nu_{k}^{(i)}Q_{k}<m>")
+
+            IObj?.Paragraphs.Add("<m>e_{ki}=(\nu_{k}^{(i)}Q_{k})/q_{i}<m>")
+
+            IObj?.Paragraphs.Add("<m>\beta_{ik}=\sum_{m}e_{mk}\tau_{mk}<m>")
+
+            IObj?.Paragraphs.Add("<m>\theta_{k}=(\sum_{i}x_{i}q_{i}e_{ki})/(\sum_{i}x_{j}q_{j})<m>")
+
+            IObj?.Paragraphs.Add("<m>s_{k}=\sum_{m}\theta_{m}\tau_{mk}<m>")
+
+            IObj?.Paragraphs.Add("<m>s_{i}=\sum_{l}\theta_{l}\tau_{li}<m>")
+
+            IObj?.Paragraphs.Add("<m>\tau_{mk}=\exp(-a_{mk})/T<m>")
+
+            IObj?.Paragraphs.Add("The i subscript identify the species, and j is an index that goes 
+                                through all the species. The k subscript identify the subgroups, 
+                                and m is an index that goes through all the subgroups. The 
+                                parameter <mi>\nu_{k}^{(i)}<mi> is the number of the k subgroup in a 
+                                molecule of the i species. The subgroup parameter values <mi>R_{k}<mi> 
+                                and <mi>Q_{k}<mi> and the interaction parameters <mi>-a_{mk}<mi> are obtained in 
+                                the literature. ")
+
+            IObj?.Paragraphs.Add("<h3> Modified UNIFAC (Dortmund) model</h3>")
+
+            IObj?.Paragraphs.Add("The UNIFAC model, despite being widely used in various 
+                                applications, has some limitations which are, in some way, 
+                                inherent to the model. Some of these limitations are:")
+
+            IObj?.Paragraphs.Add("1. UNIFAC is unable to distinguish between some types of isomers. ")
+
+            IObj?.Paragraphs.Add("2. The <m>\gamma-\phi<m> approach limits the use of UNIFAC for 
+                                applications under the pressure range of 10-15 atm. ")
+
+            IObj?.Paragraphs.Add("3. The temperature is limited within the range of approximately 
+                                275-425 K. ")
+
+            IObj?.Paragraphs.Add("4. Non-condensable gases and supercritical components are not 
+                                included. ")
+
+            IObj?.Paragraphs.Add("5. Proximity effects are not taken into account. ")
+
+            IObj?.Paragraphs.Add("6. The parameters of liquid-liquid equilibrium are different from 
+                                those of vapor-liquid equilibrium. ")
+
+            IObj?.Paragraphs.Add("7. Polymers are not included. ")
+
+            IObj?.Paragraphs.Add("8. Electrolytes are not included.")
+
+            IObj?.Paragraphs.Add("Some of these limitations can be overcome. The insensitivity of 
+                                some types of isomers can be eliminated through a careful choice 
+                                of the groups used to represent the molecules. The fact that the 
+                                parameters for the liquid-liquid equilibrium are different from 
+                                those for the vapor-liquid equilibrium seems not to have a 
+                                theoretical solution at this time. One solution is to use both 
+                                data from both equiibria to determine the parameters as a 
+                                modified UNIFAC model. The limitations on the pressure and 
+                                temperature can be overcome if the UNIFAC model is used with 
+                                equations of state, which carry with them the dependencies of 
+                                pressure and temperature.")
+
+            IObj?.Paragraphs.Add("These limitations of the original UNIFAC model have led several 
+                                authors to propose changes in both combinatorial and the residual 
+                                parts. To modify the combinatorial part, the basis is the 
+                                suggestion given by Kikic et al. (1980) in the sense that the 
+                                Staverman-Guggenheim correction on the original term of 
+                                Flory-Huggins is very small and can, in most cases, be neglected. 
+                                As a result, this correction was empirically removed from the 
+                                UNIFAC model. Among these modifications, the proposed by Gmehling 
+                                and coworkers [Weidlich and Gmehling, 1986; Weidlich and 
+                                Gmehling, 1987; Gmehling et al., 1993], known as the model 
+                                UNIFAC-Dortmund, is one of the most promising. In this model, the 
+                                combinatorial part of the original UNIFAC is replaced by:")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{C}=1-J_{i}+\ln J_{i}-5q_{i}(1-J_{i}/L_{i}+\ln J_{i}/L_{i})<m>")
+
+            IObj?.Paragraphs.Add("<m>J_{i}=r_{i}^{3/4}/(\sum_{j}r_{j}^{3/4}x_{j})<m>")
+
+            IObj?.Paragraphs.Add("where the remaining quantities is defined the same way as in the original UNIFAC. 
+                                Thus, the correction in-Staverman Guggenheim is empirically taken 
+                                from the template. It is important to note that the in the 
+                                UNIFAC-Dortmund model, the quantities <mi>R_{k}<m> and <mi>Q_{k}<m> are no 
+                                longer calculated on the volume and surface area of Van der Waals 
+                                forces, as proposed by Bondi (1968), but are additional 
+                                adjustable parameters of the model.")
+
+            IObj?.Paragraphs.Add("The residual part is still given by the solution for groups, just 
+                                as in the original UNIFAC, but now the parameters of group 
+                                interaction are considered temperature dependent, according to:")
+
+            IObj?.Paragraphs.Add("<m>\tau_{mk}=\exp(-a_{mk}^{(0)}+a_{mk}^{(1)}T+a_{mk}^{(2)}T^{2})/T<m>")
+
+            IObj?.Paragraphs.Add("These parameters must be estimated from experimental phase 
+                                equilibrium data. Gmehling et al. (1993) presented an array of 
+                                parameters for 45 major groups, adjusted using data from the 
+                                vapor-liquid equilibrium, excess enthalpies, activity 
+                                coefficients at infinite dilution and liquid-liquid equilibrium. 
+                                enthalpy and entropy of liquid and vapor.")
+
+            IObj?.Paragraphs.Add("<h3>Modified UNIFAC (NIST) model</h3>")
+
+            IObj?.Paragraphs.Add("This model [7] is similar to the Modified UNIFAC (Dortmund), with 
+                                new modified UNIFAC parameters reported for 89 main groups and 
+                                984 group–group interactions using critically evaluated phase 
+                                equilibrium data including vapor–liquid equilibrium (VLE), 
+                                liquid–liquid equilibrium (LLE), solid–liquid equilibrium (SLE), 
+                                excess enthalpy (HE), infinite dilution activity coefficient 
+                                (AINF) and excess heat capacity (CPE) data. A new algorithmic 
+                                framework for quality assessment of phase equilibrium data was 
+                                applied for qualifying the consistency of data and screening out 
+                                possible erroneous data. Substantial improvement over previous 
+                                versions of UNIFAC is observed due to inclusion of experimental 
+                                data from recent publications and proper weighting based on a 
+                                quality assessment procedure. The systems requiring further 
+                                verification of phase equilibrium data were identified where 
+                                insufficient number of experimental data points is available or 
+                                where existing data are conflicting.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Q: {0}", VQ.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("R: {0}", VR.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
+
             CheckParameters(VEKI)
 
             Dim i, m, k As Integer
@@ -157,6 +299,14 @@ Namespace PropertyPackages.Auxiliary
                 i = i + 1
             Loop Until i = n + 1
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("ln gamma c: {0}", Vgammac.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("ln gamma r: {0}", Vgammar.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("ln gamma : {0}", Vgamma.LogY.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Activity Coefficients: {0}", Vgamma.ToMathArrayString))
+
             Return Vgamma
 
         End Function
@@ -181,7 +331,7 @@ Namespace PropertyPackages.Auxiliary
                             If Not Me.ModfGroups.InteracParam_aij(g1).ContainsKey(g2) Then
                                 If Me.ModfGroups.InteracParam_aij.ContainsKey(g2) Then
                                     If Not Me.ModfGroups.InteracParam_aij(g2).ContainsKey(g1) And g2 <> g1 Then
-                                        Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " & _
+                                        Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " &
                                                             Me.ModfGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                                     End If
                                 End If
@@ -189,11 +339,11 @@ Namespace PropertyPackages.Auxiliary
                         Else
                             If Me.ModfGroups.InteracParam_aij.ContainsKey(g2) Then
                                 If Not Me.ModfGroups.InteracParam_aij(g2).ContainsKey(g1) And g2 <> g1 Then
-                                    Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " & _
+                                    Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " &
                                                         Me.ModfGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                                 End If
                             Else
-                                Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " & _
+                                Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " &
                                                     Me.ModfGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                             End If
                         End If

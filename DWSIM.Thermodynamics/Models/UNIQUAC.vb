@@ -23,7 +23,7 @@ Imports System.IO
 
 Namespace PropertyPackages.Auxiliary
 
-    <DelimitedRecord(";")> <IgnoreFirst()> <System.Serializable()> _
+    <DelimitedRecord(";")> <IgnoreFirst()> <System.Serializable()>
     Public Class UNIQUAC_IPData
 
         Implements ICloneable
@@ -229,6 +229,86 @@ Namespace PropertyPackages.Auxiliary
 
         Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), ByVal Vids As String(), ByVal VQ As Double(), ByVal VR As Double())
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "GAMMA_MR", "UNIQUAC Activity Coefficient", "UNIQUAC Activity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add("The UNIQUAC equation considers <mi>g\equiv G^{E}/{RT}<mi> formed by two 
+                                additive parts, one combinatorial term <m>g^{C}<m> to take into account 
+                                the size of the molecules, and one residual term <mi>g^{R}<m>i, which 
+                                take into account the interactions between molecules:")
+
+            IObj?.Paragraphs.Add("<m>g\equiv g^{C}+g^{R}<m>")
+
+            IObj?.Paragraphs.Add("The <mi>g^{C}<mi> function contains only pure species parameters, while 
+                                the <mi>g^{R}<mi> function incorporates two binary parameters for each 
+                                pair of molecules. For a multicomponent system, ")
+
+            IObj?.Paragraphs.Add("<m>g^{C}=\sum_{i}x_{i}\ln\phi_{i}/x_{i}+5\sum_{i}q_{i}x_{i}\ln\theta_{i}/\phi_{i}<m>")
+
+            IObj?.Paragraphs.Add("and")
+
+            IObj?.Paragraphs.Add("<m>g^{R}=-\sum_{i}q_{i}x_{i}\ln(\sum_{j}\theta_{j}\tau_{j}i)<m>")
+
+            IObj?.Paragraphs.Add("where ")
+
+            IObj?.Paragraphs.Add("<m>\phi_{i}\equiv(x_{i}r_{i})/(\sum_{j}x_{j}r_{j})<m>v")
+
+            IObj?.Paragraphs.Add("and")
+
+            IObj?.Paragraphs.Add("<m>\theta_{i}\equiv(x_{i}q_{i})/(\sum_{j}x_{j}q_{j})<m>")
+
+            IObj?.Paragraphs.Add("The i subscript indicates the species, and j is an index that 
+                                represents all the species, i included. All sums are over all the 
+                                species. Note that <mi>\tau_{ij}\neq\tau_{ji}<mi>. When <mi>i=j<mi>, <mi>\tau_{ii}=\tau_{jj}=1<mi>. ")
+
+            IObj?.Paragraphs.Add("In these equations, <mi>r_{i}<mi> (a relative molecular volume) and <mi>q_{i}<mi>
+                                 (a relative molecular surface area) are pure species parameters. 
+                                The influence of temperature in <mi>g<mi> enters by means of the <mi>\tau_{ij}<mi>
+                                 parameters, which are temperature-dependent:")
+
+            IObj?.Paragraphs.Add("<m>\tau_{ij}=\exp(u_{ij}-u_{jj})/{RT}<m>")
+
+            IObj?.Paragraphs.Add("This way, the UNIQUAC parameters are values of <mi>(u_{ij}-u_{jj})<mi>.")
+
+            IObj?.Paragraphs.Add("An expression for <m>\gamma_{i}<m> is found through the application of 
+                                the following relation:")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}=[\partialnG^{E}/{RT}/(\partialn_{i})]_{(P,T,n_{j\neq i})}<m>")
+
+            IObj?.Paragraphs.Add("The result is represented by the following equations:")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}=\ln\gamma_{i}^{C}+\ln\gamma_{i}^{R}<m>")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{C}=1-J_{i}+\ln J_{i}-5q_{i}(1-J_{i}/L_{i}+\ln J_{i}/L_{i})<m>")
+
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{R}=q_{i}(1-\ln s_{i}-\sum_{j}\theta_{j}\tau_{ij}/s_{j})<m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<m>J_{i}=r_{i}/(\sum_{j}r_{j}x_{j})<m>")
+
+            IObj?.Paragraphs.Add("<m>L=q_{i}/(\sum_{j}q_{j}x_{j})<m>")
+
+            IObj?.Paragraphs.Add("<m>s_{i}=\sum_{l}\theta_{l}\tau_{li}<m>")
+
+            IObj?.Paragraphs.Add("Again the i subscript identify the species, j and l are indexes 
+                                which represent all the species, including i. all sums are over 
+                                all the species, and <mi>\tau_{ij}=1<mi> for <mi>i=j<mi>. The parameters values <mi>(u_{ij}-u_{jj})<mi>
+                                 are found by regression of binary VLE/LLE data.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Compound IDs: {0}", Vids.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Q: {0}", VQ.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("R: {0}", VR.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
+
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
@@ -281,17 +361,6 @@ Namespace PropertyPackages.Auxiliary
                 i = i + 1
             Loop Until i = n + 1
 
-            'i = 0
-            'Do
-            '    j = 0
-            '    Do
-            '        tau_ij(i)(j) = Math.Exp(-(a12(i)(j) + b12(i)(j) * T + c12(i)(j) * T ^ 2) / (1.98721 * T))
-            '        tau_ji(j)(i) = Math.Exp(-(a21(i)(j) + b21(i)(j) * T + c21(i)(j) * T ^ 2) / (1.98721 * T))
-            '        j = j + 1
-            '    Loop Until j = n + 1
-            '    i = i + 1
-            'Loop Until i = n + 1
-
             If doparallel And n > 10 Then
                 Parallel.For(0, n + 1, poptions, Sub(ip)
                                                      tau_ij(ip) = a12(ip).NegateY.AddY(b12(ip).MultiplyConstY(T).AddY(c12(ip).MultiplyConstY(T ^ 2))).MultiplyConstY(1 / (1.98721 * T)).ExpY
@@ -304,40 +373,15 @@ Namespace PropertyPackages.Auxiliary
                 Next
             End If
 
-            'r = 0.0#
-            'q = 0.0#
-            'i = 0
-            'Do
-            '    r += Vx(i) * VR(i)
-            '    q += Vx(i) * VQ(i)
-            '    i = i + 1
-            'Loop Until i = n + 1
+            IObj?.Paragraphs.Add(String.Format("tau_ij: {0}", tau_ij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("tau_ji: {0}", tau_ji.ToMathArrayString))
 
             r = Vx.MultiplyY(VR).SumY
             q = Vx.MultiplyY(VQ).SumY
 
-            'i = 0
-            'Do
-            '    fi(i) = Vx(i) * VR(i) / r
-            '    teta(i) = Vx(i) * VQ(i) / q
-            '    l(i) = z / 2 * (VR(i) - VQ(i)) - (VR(i) - 1)
-            '    i = i + 1
-            'Loop Until i = n + 1
-
             fi = Vx.MultiplyY(VR).MultiplyConstY(1 / r)
             teta = Vx.MultiplyY(VQ).MultiplyConstY(1 / q)
             l = VR.SubtractY(VQ).MultiplyConstY(z / 2).SubtractY(VR.AddConstY(-1))
-
-            'i = 0
-            'Do
-            '    S(i) = 0
-            '    j = 0
-            '    Do
-            '        S(i) += teta(j) * tau_ji(j)(i)
-            '        j = j + 1
-            '    Loop Until j = n + 1
-            '    i = i + 1
-            'Loop Until i = n + 1
 
             If doparallel And n > 10 Then
                 Parallel.For(0, n + 1, poptions, Sub(ip)
@@ -348,19 +392,6 @@ Namespace PropertyPackages.Auxiliary
                     S(i) = teta.MultiplyY(tau_ij(i)).SumY
                 Next
             End If
-
-
-            'i = 0
-            'Do
-            '    sum1(i) = 0
-            '    j = 0
-            '    Do
-            '        sum1(i) += teta(j) * tau_ij(i)(j) / S(j)
-            '        j = j + 1
-            '    Loop Until j = n + 1
-            '    sum2 += Vx(i) * l(i)
-            '    i = i + 1
-            'Loop Until i = n + 1
 
             If doparallel And n > 10 Then
                 Parallel.For(0, n + 1, poptions, Sub(ip)
@@ -374,23 +405,18 @@ Namespace PropertyPackages.Auxiliary
 
             sum2 = Vx.MultiplyY(l).SumY
 
-            'i = 0
-            'Do
-            '    If Vx(i) <> 0.0# Then
-            '        lngc(i) = 1 - VR(i) / r + Math.Log(VR(i) / r) - z / 2 * VQ(i) * (1 - fi(i) / teta(i) + Math.Log(fi(i) / teta(i)))
-            '    Else
-            '        lngc(i) = 1 - VR(i) / r
-            '    End If
-            '    lngr(i) = VQ(i) * (1 - Math.Log(S(i)) - sum1(i))
-            '    lng(i) = lngc(i) + lngr(i)
-            '    g(i) = Math.Exp(lng(i))
-            '    i = i + 1
-            'Loop Until i = n + 1
-
             lngc = VR.MultiplyConstY(-1 / r).AddConstY(1).AddY(VR.MultiplyConstY(1 / r).LogY.AddY(VQ.MultiplyConstY(-z / 2).MultiplyY(fi.DivideY(teta).NegateY.AddConstY(1).AddY(fi.DivideY(teta).LogY))))
             lngr = VQ.MultiplyY(S.LogY.NegateY.SubtractY(sum1).AddConstY(1))
             lng = lngc.AddY(lngr)
             g = lng.ExpY
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("ln gc: {0}", lngc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("ln gr: {0}", lngr.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("ln g: {0}", lng.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Activity Coefficients: {0}", g.ToMathArrayString))
 
             Return g
 
