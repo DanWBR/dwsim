@@ -1,5 +1,5 @@
 '    DWSIM Nested Loops Flash Algorithms
-'    Copyright 2010-2015 Daniel Wagner O. de Medeiros, Gregor Reichert
+'    Copyright 2010-2015 Daniel Wagner O. de Medeiros, Gregor Reichert    
 '
 '    This file is part of DWSIM.
 '
@@ -424,9 +424,22 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PS", Name & " (PS Flash)", "Pressure-Entropy Flash Algorithm Routine")
+
+            IObj?.Paragraphs.Add("The PS Flash calculates the equilibrium temperature and phase distribution given the mixture's pressure and overall entropy.")
+
+            IObj?.SetCurrent()
+
             If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False OrElse PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
+                IObj?.Paragraphs.Add("Using the normal version of the PS Flash Algorithm.")
+                IObj?.Close()
                 Return Flash_PS_2(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
             Else
+                IObj?.Paragraphs.Add("Using the fast version of the PS Flash Algorithm.")
+                IObj?.Close()
                 Return Flash_PS_1(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
             End If
         End Function
@@ -482,7 +495,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim cnt As Integer
 
             If Tref = 0.0# Then Tref = 298.15
-            T = x1
+            T = Tref
 
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 
@@ -840,6 +853,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         Public Function Flash_PS_1(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PS", Name & " (PS Flash - Fast Mode)", "Pressure-Entropy Flash Algorithm Routine (Fast Mode)")
+
+            IObj?.Paragraphs.Add("The PS Flash in fast mode uses two nested loops (hence the name) to calculate temperature and phase distribution. 
+                                    The external one converges the temperature, while the internal one finds the phase distribution for the current temperature estimate in the external loop.
+                                    The algorithm converges when the calculated overall entropy for the tentative phase distribution and temperature matches the specified one.")
+
+            IObj?.SetCurrent()
+
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
@@ -881,12 +904,28 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             If Tref = 0 Then Tref = 298.15
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", H))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", Tref))
+
             For j = 0 To 2
 
                 cnt = 0
                 x1 = Tref
 
                 Do
+
+                    IObj?.SetCurrent()
+
+                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                    Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PS", "PS Flash Newton Iteration", "Pressure-Entropy Flash Algorithm (Fast Mode) Convergence Iteration Step")
+
+                    IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
                     If cnt < 2 Then
 
@@ -907,16 +946,23 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             Task.WaitAll(task1, task2)
 
                         Else
+                            IObj2?.SetCurrent()
                             fx = Serror("PT", x1, P, Vz, PP)(0)
+                            IObj2?.SetCurrent()
                             fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                         End If
+
+                        IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx2))
 
                         dfdx = (fx2 - fx) / epsilon(j)
 
                     Else
 
                         fx2 = fx
+                        IObj2?.SetCurrent()
                         fx = Serror("PT", x1, P, Vz, PP)(0)
+
+                        IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
 
                         dfdx = (fx - fx2) / (x1 - x0)
 
@@ -926,12 +972,18 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     dx = fx / dfdx
 
+                    IObj2?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", T))
+
                     x0 = x1
                     x1 = x1 - dx
 
                     cnt += 1
 
+                    IObj2?.Close()
+
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
+
+                IObj?.Paragraphs.Add(String.Format("The PS Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, T))
 
                 T = x1
 
@@ -940,6 +992,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 End If
 
             Next
+
+            IObj?.Close()
 
             If Double.IsNaN(T) Or T <= Tmin Or T >= Tmax Then
                 Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
@@ -966,12 +1020,23 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             WriteDebugInfo("PS Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
 
         Public Function Flash_PS_2(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PS", Name & " (PS Flash - Normal Mode)", "Pressure-Entropy Flash Algorithm Routine (Normal Mode)")
+
+            IObj?.Paragraphs.Add("The PS Flash in normal mode calculates the entropy at mixture bubble and dew points, in order to determine the state of the mixture. 
+                                  It then converges the temperature or vapor fraction depending on the estimated state.")
+
+            IObj?.SetCurrent()
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
@@ -1008,7 +1073,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             If Tref = 0.0# Then Tref = 298.15
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Entropy: {0} kJ/kg", S))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", T))
+
             'calculate dew point and boiling point
+
+            IObj?.Paragraphs.Add(String.Format("Calculating Dew and Bubble points..."))
 
             Dim alreadymt As Boolean = False
 
@@ -1033,9 +1108,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Task.WaitAll(task1, task2)
 
             Else
+                IObj?.SetCurrent()
                 ErrRes = Serror("PV", 0, P, Vz, PP)
                 Sb = ErrRes(0)
                 Tb = ErrRes(1)
+                IObj?.SetCurrent()
                 ErrRes = Serror("PV", 1, P, Vz, PP)
                 Sd = ErrRes(0)
                 Td = ErrRes(1)
@@ -1043,7 +1120,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim S1, S2, T1, T2, V1, V2 As Double
 
+            IObj?.Paragraphs.Add(String.Format("Calculated Bubble Temperature: {0} K", Tb))
+
+            IObj?.Paragraphs.Add(String.Format("Calculated Dew Temperature: {0} K", Td))
+
+            IObj?.Paragraphs.Add(String.Format("Bubble Point Entropy Error (Spec - Calculated): {0}", Sb))
+
+            IObj?.Paragraphs.Add(String.Format("Dew Point Entropy Error (Spec - Calculated): {0}", Sd))
+
             If Sb > 0 And Sd < 0 Then
+
+                IObj?.Paragraphs.Add(String.Format("Entropy at Bubble Point is lower than spec. Requires partial evaporation."))
 
                 'specified entropy requires partial evaporation 
                 'calculate vapour fraction
@@ -1060,12 +1147,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         V2 = V1 - 0.01
                     End If
 
+                    IObj?.SetCurrent()
                     S2 = Serror("PV", V2, P, Vz, PP)(0)
                     V = V1 + (V2 - V1) * (0 - S1) / (S2 - S1)
                     If V < 0 Then V = 0
                     If V > 1 Then V = 1
+                    IObj?.Paragraphs.Add(String.Format("Updated Vapor Fraction estimate: {0}", V))
+                    IObj?.SetCurrent()
                     resultFlash = Serror("PV", V, P, Vz, PP)
                     S1 = resultFlash(0)
+                    IObj?.Paragraphs.Add(String.Format("Entropy Error (Spec - Calculated): {0}", S1))
                 Loop Until Abs(S1) < itol Or ecount > maxitEXT
 
                 T = resultFlash(1)
@@ -1078,6 +1169,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             ElseIf Sd > 0 Then
 
+                IObj?.Paragraphs.Add(String.Format("Spec Entropy is higher than the calculated one at Dew Point. Single Vapor Phase detected."))
+
                 'only gas phase
                 'calculate temperature
 
@@ -1088,9 +1181,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     ecount += 1
                     T1 = T
                     T2 = T1 + 1
+                    IObj?.SetCurrent()
                     S2 = Sf - PP.DW_CalcEntropy(Vz, T2, P, State.Vapor)
                     T = T1 + (T2 - T1) * (0 - S1) / (S2 - S1)
+                    IObj?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", T))
+                    IObj?.SetCurrent()
                     S1 = Sf - PP.DW_CalcEntropy(Vz, T, P, State.Vapor)
+                    IObj?.Paragraphs.Add(String.Format("Entropy Error (Spec - Calculated): {0}", S1))
                 Loop Until Abs(S1) < itol Or ecount > maxitEXT
 
                 L = 0
@@ -1111,6 +1208,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Else
 
+                IObj?.Paragraphs.Add(String.Format("Spec Entropy is lower than the calculated one at Bubble Point. Liquid Phase detected."))
+
                 'specified enthalpy requires pure liquid 
                 'calculate temperature
 
@@ -1121,10 +1220,14 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     ecount += 1
                     T1 = T
                     T2 = T1 - 1
+                    IObj?.SetCurrent()
                     S2 = Serror("PT", T2, P, Vz, PP)(0)
                     T = T1 + (T2 - T1) * (0 - S1) / (S2 - S1)
+                    IObj?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", T))
+                    IObj?.SetCurrent()
                     resultFlash = Serror("PT", T, P, Vz, PP)
                     S1 = resultFlash(0)
+                    IObj?.Paragraphs.Add(String.Format("Entropy Error (Spec - Calculated): {0}", S1))
                 Loop Until Abs(S1) < itol Or ecount > maxitEXT
 
                 V = 0
@@ -1145,17 +1248,36 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             End If
 
+            IObj?.Paragraphs.Add(String.Format("Final converged value for T: {0} K", T))
+
             d2 = Date.Now
 
             dt = d2 - d1
 
             WriteDebugInfo("PS Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Close()
+
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_TV", Name & " (TV Flash)", "Temperature/Vapor Fraction Flash Algorithm Routine")
+
+            IObj?.Paragraphs.Add("This routine calculates the pressure at which the specified mixture composition finds itself in vapor-liquid equilibrium with a vapor phase mole fraction equal to V at the specified T.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} Pa", T))
+            IObj?.Paragraphs.Add(String.Format("Vapor Mole Fraction: {0} ", V))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, n, ecount As Integer
@@ -1226,12 +1348,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Else
                     i = 0
                     Do
+                        IObj?.SetCurrent
                         Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = Vp(i) / P
                         i += 1
                     Loop Until i = n + 1
                 End If
             End If
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for P: {0} K", P))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
 
             i = 0
             Do
@@ -1260,12 +1386,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 i = i + 1
             Loop Until i = n + 1
 
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
+
             If PP.AUX_IS_SINGLECOMP(Vz) Then
                 WriteDebugInfo("TV Flash [NL]: Converged in 1 iteration.")
                 P = 0
                 For i = 0 To n
+                    IObj?.SetCurrent
                     P += Vz(i) * PP.AUX_PVAPi(i, T)
                 Next
+                IObj?.Close()
                 Return New Object() {L, V, Vx, Vy, P, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
             End If
 
@@ -1275,14 +1406,43 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             If V = 1.0# Or V = 0.0# Then
 
+                If V = 1.0 Then
+                    IObj?.Paragraphs.Add("This is a dew point calculation (V = 1).")
+                Else
+                    IObj?.Paragraphs.Add("This is a bubble point calculation (V = 0).")
+                End If
+
                 ecount = 0
                 Do
+
+                    IObj?.SetCurrent
+
+                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                    Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Newton Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+
+                    IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of P, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                    IObj2?.SetCurrent()
+
+                    IObj2?.Paragraphs.Add(String.Format("Tentative pressure value: {0} K", P))
 
                     marcador3 = 0
 
                     Dim cont_int = 0
                     Do
 
+                        IObj2?.SetCurrent
+
+                        Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                        Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Inner Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+
+                        IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of P to converge x and y.", ecount))
+
+                        IObj3?.SetCurrent()
+
+                        IObj3?.Paragraphs.Add(String.Format("Tentative value for K: {0}", Ki.ToMathArrayString))
 
                         Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
@@ -1339,16 +1499,30 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         cont_int = cont_int + 1
 
+                        IObj3?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
+                        IObj3?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
+
+                        IObj3?.Close()
+
                     Loop Until marcador2 = 1 Or Double.IsNaN(stmp4) Or cont_int > maxit_i
+
+                    IObj2?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
+                    IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
 
                     Dim K1(n), K2(n), dKdP(n) As Double
 
+                    IObj?.SetCurrent
                     K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                    IObj?.SetCurrent
                     K2 = PP.DW_CalcKvalue(Vx, Vy, T, P * 1.001)
 
                     For i = 0 To n
                         dKdP(i) = (K2(i) - K1(i)) / (0.001 * P)
                     Next
+
+                    IObj2?.Paragraphs.Add(String.Format("K: {0}", Ki.ToMathArrayString))
+
+                    IObj2?.Paragraphs.Add(String.Format("dK/dP: {0}", dKdP.ToMathArrayString))
 
                     fval = stmp4 - 1
 
@@ -1385,9 +1559,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     End If
 
+                    IObj2?.Paragraphs.Add(String.Format("Pressure error: {0} K", deltaP))
+
+                    IObj2?.Paragraphs.Add(String.Format("Updated Pressure: {0} K", P))
+
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
                     If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                    IObj2?.Close()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1395,7 +1575,31 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 ecount = 0
 
+                IObj?.SetCurrent
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Newton Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+
+                IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of P, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("Tentative temperature value: {0} K", T))
+
                 Do
+
+                    IObj2?.SetCurrent
+
+                    Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                    Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Inner Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+
+                    IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of P to converge x and y.", ecount))
+
+                    IObj3?.SetCurrent()
+
+                    IObj3?.Paragraphs.Add(String.Format("Tentative value for K: {0}", Ki.ToMathArrayString))
 
                     Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
@@ -1427,6 +1631,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         i = i + 1
                     Loop Until i = n + 1
 
+                    IObj2?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
+                    IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
+
                     If V <= 0.5 Then
 
                         i = 0
@@ -1438,7 +1645,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         Dim K1(n), K2(n), dKdP(n) As Double
 
+                        IObj2?.SetCurrent
+
                         K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+                        IObj2?.SetCurrent
+
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T, P * 1.001)
 
                         For i = 0 To n
@@ -1452,6 +1664,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             i = i + 1
                         Loop Until i = n + 1
 
+                        IObj2?.Paragraphs.Add(String.Format("dK/dP: {0}", dKdP.ToMathArrayString))
+
                     Else
 
                         i = 0
@@ -1463,7 +1677,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         Dim K1(n), K2(n), dKdP(n) As Double
 
+                        IObj2?.SetCurrent
                         K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        IObj2?.SetCurrent
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T, P * 1.001)
 
                         For i = 0 To n
@@ -1476,6 +1692,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             dFdP = dFdP - Vy(i) / (Ki(i) ^ 2) * dKdP(i)
                             i = i + 1
                         Loop Until i = n + 1
+
+                        IObj2?.Paragraphs.Add(String.Format("dK/dP: {0}", dKdP.ToMathArrayString))
+
                     End If
 
                     ecount += 1
@@ -1502,9 +1721,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     End If
 
+                    IObj2?.Paragraphs.Add(String.Format("Pressure error: {0} K", deltaP))
+
+                    IObj2?.Paragraphs.Add(String.Format("Updated Pressure: {0} K", P))
+
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
                     If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                    IObj2?.Close()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1524,6 +1749,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             If PP.AUX_CheckTrivial(Ki) Then Throw New Exception("TV Flash [NL]: Invalid result: converged to the trivial solution (P = " & P & " ).")
 
             WriteDebugInfo("TV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged value for P: {0}", P))
+
+            IObj?.Close()
 
             Return New Object() {L, V, Vx, Vy, P, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
@@ -1887,7 +2118,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         IObj2?.Paragraphs.Add(String.Format("dK/dT: {0}", dKdT.ToMathArrayString))
 
                     End If
-
 
                     ecount += 1
 
