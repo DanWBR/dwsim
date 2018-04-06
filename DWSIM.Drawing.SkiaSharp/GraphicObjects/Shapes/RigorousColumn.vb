@@ -78,6 +78,7 @@ Namespace GraphicObjects.Shapes
                 .Item(10).ConnectorName = "Reboiler Duty"
                 .Item(10).Direction = ConDir.Left
                 .Item(10).Type = ConType.ConEn
+                .Item(10).IsEnergyConnector = True
             End With
 
             With OutputConnectors
@@ -97,6 +98,7 @@ Namespace GraphicObjects.Shapes
                 .Item(10).ConnectorName = "Condenser Duty"
                 .Item(10).Direction = ConDir.Right
                 .Item(10).Type = ConType.ConEn
+                .Item(10).IsEnergyConnector = True
             End With
 
             EnergyConnector.Active = False

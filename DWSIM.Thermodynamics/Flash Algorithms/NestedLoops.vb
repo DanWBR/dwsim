@@ -1531,6 +1531,19 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PV", Name & " (PV Flash)", "Pressure/Vapor Fraction Flash Algorithm Routine")
+
+            IObj?.Paragraphs.Add("This routine calculates the temperature at which the specified mixture composition finds itself in vapor-liquid equilibrium with a vapor phase mole fraction equal to V at the specified P.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Vapor Mole Fraction: {0} ", V))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
             Dim L, Lf, Vf, T, Tf, deltaT As Double
@@ -1583,6 +1596,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             If Not ReuseKI Then
                 i = 0
                 Do
+                    IObj?.SetCurrent
                     Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = Vp(i) / P
                     i += 1
@@ -1590,18 +1604,23 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Else
                 If Not PP.AUX_CheckTrivial(PrevKi) And Not Double.IsNaN(PrevKi(0)) Then
                     For i = 0 To n
+                        IObj?.SetCurrent
                         Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = PrevKi(i)
                     Next
                 Else
                     i = 0
                     Do
+                        IObj?.SetCurrent
                         Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = Vp(i) / P
                         i += 1
                     Loop Until i = n + 1
                 End If
             End If
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for T: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
 
             i = 0
             Do
@@ -1619,12 +1638,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Vx = Vx.NormalizeY()
             Vy = Vy.NormalizeY()
 
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
+
             If PP.AUX_IS_SINGLECOMP(Vz) Then
                 WriteDebugInfo("PV Flash [NL]: Converged in 1 iteration.")
                 T = 0
                 For i = 0 To n
+                    IObj?.SetCurrent
                     T += Vz(i) * PP.AUX_TSATi(P, i)
                 Next
+                IObj?.Close()
                 Return New Object() {L, V, Vx, Vy, T, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
             End If
 
@@ -1634,13 +1658,43 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             If V = 1.0# Or V = 0.0# Then
 
+                If V = 1.0 Then
+                    IObj?.Paragraphs.Add("This is a dew point calculation (V = 1).")
+                Else
+                    IObj?.Paragraphs.Add("This is a bubble point calculation (V = 0).")
+                End If
+
                 ecount = 0
                 Do
+
+                    IObj?.SetCurrent
+
+                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                    Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Newton Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+
+                    IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of T, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                    IObj2?.SetCurrent()
+
+                    IObj2?.Paragraphs.Add(String.Format("Tentative temperature value: {0} K", T))
 
                     marcador3 = 0
 
                     Dim cont_int = 0
                     Do
+
+                        IObj2?.SetCurrent
+
+                        Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                        Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Inner Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+
+                        IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of T to converge x and y.", ecount))
+
+                        IObj3?.SetCurrent()
+
+                        IObj3?.Paragraphs.Add(String.Format("Tentative value for K: {0}", Ki.ToMathArrayString))
 
                         Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
@@ -1679,14 +1733,28 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         cont_int = cont_int + 1
 
+                        IObj3?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
+                        IObj3?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
+
+                        IObj3?.Close()
+
                     Loop Until marcador2 = 1 Or Double.IsNaN(stmp4) Or cont_int > maxit_i
+
+                    IObj2?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
+                    IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
 
                     Dim K1(n), K2(n), dKdT(n) As Double
 
+                    IObj?.SetCurrent
                     K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                    IObj?.SetCurrent
                     K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                     dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.01)
+
+                    IObj2?.Paragraphs.Add(String.Format("K: {0}", Ki.ToMathArrayString))
+
+                    IObj2?.Paragraphs.Add(String.Format("dK/dT: {0}", dKdT.ToMathArrayString))
 
                     fval = stmp4 - 1
 
@@ -1706,6 +1774,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Tant = T
                     deltaT = -fval / dFdT
 
+                    IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
+
                     If Abs(deltaT) < etol / 1000 And ecount > 5 Then Exit Do
 
                     If Abs(deltaT) > 0.1 * T And ecount < 5 Then
@@ -1714,9 +1784,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         T = T + deltaT
                     End If
 
+                    IObj2?.Paragraphs.Add(String.Format("Updated Temperature: {0} K", T))
+
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
                     If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                    IObj2?.Close()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1724,7 +1798,31 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 ecount = 0
 
+                IObj?.SetCurrent
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Newton Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+
+                IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of T, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("Tentative temperature value: {0} K", T))
+
                 Do
+
+                    IObj2?.SetCurrent
+
+                    Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                    Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Inner Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+
+                    IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of T to converge x and y.", ecount))
+
+                    IObj3?.SetCurrent()
+
+                    IObj3?.Paragraphs.Add(String.Format("Tentative value for K: {0}", Ki.ToMathArrayString))
 
                     Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
@@ -1745,18 +1843,28 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Vx = Vx.NormalizeY()
                     Vy = Vy.NormalizeY()
 
+                    IObj2?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
+                    IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
+
                     If V <= 0.5 Then
 
                         stmp4 = Ki.MultiplyY(Vx).SumY
 
                         Dim K1(n), K2(n), dKdT(n) As Double
 
+                        IObj2?.SetCurrent
+
                         K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+                        IObj2?.SetCurrent
+
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                         dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.01)
 
                         dFdT = Vx.MultiplyY(dKdT).SumY
+
+                        IObj2?.Paragraphs.Add(String.Format("dK/dT: {0}", dKdT.ToMathArrayString))
 
                     Else
 
@@ -1764,14 +1872,22 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         Dim K1(n), K2(n), dKdT(n) As Double
 
+                        IObj2?.SetCurrent
+
                         K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+                        IObj2?.SetCurrent
+
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                         dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.01)
 
                         dFdT = -Vy.DivideY(Ki).DivideY(Ki).MultiplyY(dKdT).SumY
 
+                        IObj2?.Paragraphs.Add(String.Format("dK/dT: {0}", dKdT.ToMathArrayString))
+
                     End If
+
 
                     ecount += 1
 
@@ -1781,6 +1897,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     deltaT = -fval / dFdT
 
+                    IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
+
                     If Abs(deltaT) < etol / 1000 And ecount > 5 Then Exit Do
 
                     If Abs(deltaT) > 0.1 * T And ecount < 5 Then
@@ -1789,11 +1907,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         T = T + deltaT
                     End If
 
+                    IObj2?.Paragraphs.Add(String.Format("Updated Temperature: {0} K", T))
+
                     e1 = Vx.SubtractY(Vx_ant).AbsSumY + Vy.SubtractY(Vy_ant).AbsSumY + Math.Abs(T - Tant)
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
                     If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                    IObj2?.Close()
 
                 Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1813,6 +1935,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             End If
 
             WriteDebugInfo("PV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged value for T: {0}", T))
+
+            IObj?.Close()
 
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 

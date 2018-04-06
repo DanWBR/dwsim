@@ -863,7 +863,7 @@ Namespace PropertyPackages
         ''' <param name="P">Pressure of the system.</param>
         ''' <returns>An array containing K-values for all components in the mixture.</returns>
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
-        Public Overridable Overloads Function DW_CalcKvalue(ByVal Vx As System.Array, ByVal Vy As System.Array, ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
+        Public Overridable Overloads Function DW_CalcKvalue(ByVal Vx As Double(), ByVal Vy As Double(), ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -881,8 +881,8 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Phase 1 composition: {0}", Vx.ToArrayString()))
-            IObj?.Paragraphs.Add(String.Format("Phase 2 composition: {0}", Vy.ToArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Phase 1 composition: {0}", Vx.ToMathArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Phase 2 composition: {0}", Vy.ToMathArrayString()))
             IObj?.Paragraphs.Add(String.Format("Calculation Type: {0}", type))
 
             Dim fugvap As Double() = Nothing
@@ -921,8 +921,8 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add(String.Format("<h2>Intermediate Calculated Parameters</h2>"))
 
-            IObj?.Paragraphs.Add(String.Format("Phase 1 fugacity coefficients: {0}", fugliq.ToArrayString()))
-            IObj?.Paragraphs.Add(String.Format("Phase 2 fugacity coefficients: {0}", fugvap.ToArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Phase 1 fugacity coefficients: {0}", fugliq.ToMathArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Phase 2 fugacity coefficients: {0}", fugvap.ToMathArrayString()))
 
             Dim n As Integer = fugvap.Length - 1
             Dim i As Integer
@@ -963,7 +963,7 @@ Namespace PropertyPackages
                 End If
             End If
 
-            IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToMathArrayString()))
 
             If Me.AUX_CheckTrivial(K) Then
 
@@ -992,7 +992,7 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
-            IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToArrayString()))
+            IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToMathArrayString()))
 
             IObj?.Close()
 

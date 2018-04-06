@@ -8,7 +8,7 @@ Public Class Window
 
         'Layout
 
-        Dim content As New TableLayout With {.Padding = New Padding(5, 5, 5, 5)}
+        Dim content As New TableLayout With {.Padding = New Padding(5, 5, 5, 5), .Spacing = New Size(10, 10)}
 
         Dim InspectorLabel = New Label With {.Text = "Solution Inspector", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
         InspectorLabel.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())
@@ -50,7 +50,14 @@ Public Class Window
 
         rightcontainer.Rows.Add(New TableRow(currentItemViewer))
 
-        content.Rows.Add(New TableLayout(New TableRow(leftcontainer, rightcontainer)))
+        Dim splitterpanel As New Splitter()
+
+        splitterpanel.Panel1 = leftcontainer
+        splitterpanel.Panel2 = rightcontainer
+        splitterpanel.Orientation = Orientation.Horizontal
+        splitterpanel.SplitterWidth = 1
+
+        content.Rows.Add(splitterpanel)
 
         'Events
 
@@ -124,7 +131,7 @@ Public Class Window
                                                 ct.Cancel()
                                             End Sub
 
-                Dim allitems As List(Of InspectorItem)
+                Dim allitems As New List(Of InspectorItem)
 
                 Task.Factory.StartNew(Sub()
                                           Application.Instance.Invoke(Sub()
@@ -132,10 +139,10 @@ Public Class Window
                                                                       End Sub)
                                           Dim i As Integer = 1
                                           For Each item In sitems.Where(Function(x) x.ParentID = -1)
-                                              Dim titem = New TreeGridItem() With {.Values = {item.Name}, .Tag = item.ID}
+                                              Dim titem = New TreeGridItem() With {.Values = {item.Name + " (" + item.TimeTaken.TotalMilliseconds.ToString("N0") + " ms)"}, .Tag = item.ID}
                                               tvc.Add(titem)
                                               Application.Instance.Invoke(Sub()
-                                                                              loadingtext.Text = String.Format("Loading items ({0}/{1})...", i, allitems.Count)
+                                                                              loadingtext.Text = String.Format("Loading items... ({0}/{1})", i, allitems.Count)
                                                                               progressSpinner.Value = i / allitems.Count * 100
                                                                               content.ParentWindow.Invalidate()
                                                                           End Sub)
@@ -143,14 +150,14 @@ Public Class Window
                                               Dim nesteditems = GetItems(item)
                                               For Each item2 In nesteditems
                                                   Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeGridItem).Tag = item2.ParentID).FirstOrDefault
-                                                  Dim titem2 = New TreeGridItem() With {.Values = {item2.Name}, .Tag = item2.ID}
+                                                  Dim titem2 = New TreeGridItem() With {.Values = {item2.Name + " (" + item2.TimeTaken.TotalMilliseconds.ToString("N0") + " ms)"}, .Tag = item2.ID}
                                                   If parent Is Nothing Then
                                                       tvc.Add(titem2)
                                                   Else
                                                       DirectCast(parent, TreeGridItem).Children.Add(titem2)
                                                   End If
                                                   Application.Instance.Invoke(Sub()
-                                                                                  loadingtext.Text = String.Format("Loading items ({0}/{1})...", i, allitems.Count)
+                                                                                  loadingtext.Text = String.Format("Loading items... ({0}/{1})", i, allitems.Count)
                                                                                   progressSpinner.Value = i / allitems.Count * 100
                                                                                   content.ParentWindow.Invalidate()
                                                                               End Sub)

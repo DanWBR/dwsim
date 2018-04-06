@@ -88,7 +88,7 @@ Public Class InspectorItem
 
     Public Sub Close()
         EndTime = DateTime.Now
-        TimeTaken = StartTime - EndTime
+        TimeTaken = EndTime - StartTime
     End Sub
 
     Public Function GetHTML() As String
@@ -126,7 +126,9 @@ Public Class InspectorItem
         stb.AppendLine(String.Format("ID: {0}<br/>", ID))
         stb.AppendLine(String.Format("Parent Item ID: {0}<br/>", ParentID))
         stb.AppendLine(String.Format("Thread ID: {0}<br/>", ThreadID))
-        stb.AppendLine(String.Format("Date Created: {0}", StartTime))
+        stb.AppendLine(String.Format("Started: {0}<br/>", StartTime))
+        stb.AppendLine(String.Format("Finished: {0}<br/>", EndTime))
+        stb.AppendLine(String.Format("Time Taken: {0} ms", Convert.ToInt32(TimeTaken.TotalMilliseconds)))
         stb.AppendLine("</div></section></html>")
 
         Return stb.ToString()

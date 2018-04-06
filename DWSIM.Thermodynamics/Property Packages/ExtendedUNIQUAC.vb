@@ -540,7 +540,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcKvalue(Vx As Array, Vy As Array, T As Double, P As Double, Optional type As String = "LV") As Double()
+        Public Overrides Function DW_CalcKvalue(Vx As Double(), Vy As Double(), T As Double, P As Double, Optional type As String = "LV") As Double()
 
             Dim val0 As Double() = MyBase.DW_CalcKvalue(Vx, Vy, T, P, type)
 
