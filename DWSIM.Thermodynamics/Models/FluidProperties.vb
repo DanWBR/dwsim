@@ -313,6 +313,58 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function condtg_elyhanley(ByVal T As Double, ByVal Tc As Double, ByVal Vc As Double, ByVal Zc As Double, ByVal w As Double, ByVal M As Double, ByVal Cv As Double)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "condtg_elyhanley", "Vapor Phase Thermal Conductivity Estimation (Ely-Hanley)", "Vapor Phase Thermal Conductivity Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("When experimental data is not available, vapor phase thermal conductivity is calculated by the Ely and Hanley method,")
+
+            IObj?.Paragraphs.Add("<m>\lambda_{V}=\lambda^{*}+\frac{1000\eta^{*}}{MM}1.32(C_{v}-\frac{3R}{2}),<m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<mi>\lambda_{V}</mi> vapor phase thermal conductivity (W/[m.K])")
+
+            IObj?.Paragraphs.Add("<mi>C_{v}</mi> constant volume heat capacity (J/[mol.K])")
+
+            IObj?.Paragraphs.Add("<mi>\lambda^{*}</mi> and <mi>\eta^{*}</mi> are defined by:")
+
+            IObj?.Paragraphs.Add("<m>\lambda^{*}=\lambda_{0}H<m>")
+
+            IObj?.Paragraphs.Add("<m>H=(\frac{16.04E-3}{MM/1000})^{1/2}f^{1/2}/h^{2/3}<m>")
+
+            IObj?.Paragraphs.Add("<m>\lambda_{0}=1944\eta_{0}<m>")
+
+            IObj?.Paragraphs.Add("<m>f=\frac{T_{0}\theta}{190.4}<m>")
+
+            IObj?.Paragraphs.Add("<m>h=\frac{V_{c}}{99.2}\phi<m>")
+
+            IObj?.Paragraphs.Add("<m>\theta=1+(\omega-0.011)(0.56553-0.86276\ln T^{+}-0.69852/T^{+}<m>")
+
+            IObj?.Paragraphs.Add("<m>\phi=[1+(\omega-0.011)(0.38650-1.1617\ln T^{+})]0.288/Z_{c}<m>")
+
+            IObj?.Paragraphs.Add("If <mi>T_{r}\leq 2, T^{+}=T_{r}</mi>. If <mi>T_{r}>2,T^{+}=2.</mi>")
+
+            IObj?.Paragraphs.Add("<m>h=\frac{V_{c}}{99.2}\phi<m>")
+
+            IObj?.Paragraphs.Add("<m>\eta^{*}=\eta_{0}H\frac{MM/1000}{16.04E-3}<m>")
+
+            IObj?.Paragraphs.Add("<m>\eta_{0}=10^{-7}\sum_{n=1}^{9}C_{n}T_{0}^{(n-4)/3}<m>")
+
+            IObj?.Paragraphs.Add("<m>T_{0}=T/f<m>")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperature: {0} K", Tc))
+            IObj?.Paragraphs.Add(String.Format("Critical Volume: {0} m3/mol", Vc))
+            IObj?.Paragraphs.Add(String.Format("Critical Compressibility: {0}", Zc))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factor: {0}", w))
+            IObj?.Paragraphs.Add(String.Format("Molecular Weight: {0}", M))
+            IObj?.Paragraphs.Add(String.Format("Heat Capacity (Cv): {0} kj/[kg.K]", Cv))
+
             Dim Tr, Tplus, teta, omega, f, h, T0, eta0, lambda0, C(8), lambda_, eta_, Hgrande
 
             Tr = T / Tc
@@ -371,7 +423,13 @@ Namespace PropertyPackages.Auxiliary
 
             eta_ = eta0 * Hgrande * M / (0.01604)
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
             condtg_elyhanley = lambda_ + (eta_ / M) * 1.32 * (Cv - 3 * 8.314 / 2) 'W/(m.K)
+
+            IObj?.Paragraphs.Add(String.Format("Thermal Conductivity: {0} W/[m.K]", condtg_elyhanley))
+
+            IObj?.Close()
 
         End Function
 
@@ -616,6 +674,58 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function CpCvR(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal Vzmass As Double(), ByVal VTc As Double(), ByVal VPc As Double(), ByVal VCpig As Double(), ByVal VMM As Double(), ByVal Vw As Double(), ByVal VZRa As Double()) As Double()
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CpCvR", "Peng-Robinson EOS Heat Capacity Ratio", "Peng-Robinson EOS Heat Capacity Ratio Calculation Routine")
+
+            IObj?.Paragraphs.Add("The Peng-Robinson equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
+                                    which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
+                                    equations are, in fact, The simplest equations capable of representing The behavior of liquid And vapor phases simultaneously.
+                                    The Peng-Robinson EOS is written in the following form")
+            IObj?.Paragraphs.Add("<math>P=\frac{RT}{(V-b)}-\frac{a(T)}{V(V+b)+b(V-b)}<math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>P</math_inline> pressure")
+            IObj?.Paragraphs.Add("<math_inline>R</math_inline> ideal gas universal constant")
+            IObj?.Paragraphs.Add("<math_inline>v</math_inline> molar volume")
+            IObj?.Paragraphs.Add("<math_inline>b</math_inline> parameter related to hard-sphere volume")
+            IObj?.Paragraphs.Add("<math_inline>a</math_inline> parameter related to intermolecular forces")
+            IObj?.Paragraphs.Add("For pure substances, the a and b parameters are given by:")
+            IObj?.Paragraphs.Add("<math>a(T)=[1+(0.37464+1.54226\omega-0.26992\omega^{2})(1-T_{r}^{(1/2)})]^{2}0.45724(R^{2}T_{c}^{2})/P_{c}</math>")
+            IObj?.Paragraphs.Add("<math>b=0.07780(RT_{c})/P_{c}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>\omega</math_inline> acentric factor")
+            IObj?.Paragraphs.Add("<math_inline>T_{c}</math_inline> critical temperature ")
+            IObj?.Paragraphs.Add("<math_inline>P_{c}</math_inline> critical pressure")
+            IObj?.Paragraphs.Add("<math_inline>T_{r}</math_inline> reduced temperature, T/Tc")
+            IObj?.Paragraphs.Add("For mixtures, the above equation can be used, replacing a and b by mixture-representative values. Mixture a and b values are normally given by the basic mixing rule,")
+            IObj?.Paragraphs.Add("<math>a_{m}=\sum_{i}\sum_{j}x_{i}x_{j}\sqrt{(a_{i}a_{j})}(1-k_{ij})</math>")
+            IObj?.Paragraphs.Add("<math>b_{m}=\sum_{i}x_{i}b_{i}</math>")
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<math_inline>x_{i,j}</math_inline> molar fraction of the i Or j component in the phase (liquid Or vapor)")
+            IObj?.Paragraphs.Add("<math_inline>a_{i,j}</math_inline> i Or j component a constant ")
+            IObj?.Paragraphs.Add("<math_inline>b_{i,j}</math_inline> i Or j component b constant")
+            IObj?.Paragraphs.Add("<math_inline>k_{ij}</math_inline> binary interaction parameter which characterizes the i-j pair")
+
+            IObj?.Paragraphs.Add("Heat capacities are obtained directly from the EOS, by using the following thermodynamic relations:")
+
+            IObj?.Paragraphs.Add("<m>C_{p}-C_{p}^{id}=T\intop_{\infty}^{V}(\frac{\partial^{2}P}{\partial T^{2}})dV-\frac{T(\partial P/\partial T)_{V}^{2}}{(\partial P/\partial V)_{T}}-R<m>")
+
+            IObj?.Paragraphs.Add("<m>C_{p}-C_{v}=-T\frac{(\frac{\partial P}{\partial T})_{V}^{2}}{(\frac{\partial P}{\partial V})_{T}}<m>")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Ideal Gas Heat Capacities: {0}", VCpig.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
+
             Dim dadt, n, R, Z As Double
             Dim i, j As Integer
 
@@ -685,6 +795,15 @@ Namespace PropertyPackages.Auxiliary
 
             Dim AG1 = am * P / (R * T) ^ 2
             Dim BG1 = bm * P / (R * T)
+
+            IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
+            IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
+
+            IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
+            IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
+            IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG1))
 
             Dim coeff(3) As Double
 
@@ -757,7 +876,11 @@ Namespace PropertyPackages.Auxiliary
 
             End If
 
+            IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
+
             Dim V As Double = (Z * R * T / P) ' m3/mol
+
+            IObj?.Paragraphs.Add(String.Format("<math_inline>V</math_inline>: {0}", V))
 
             Dim tmp1 As Double = MMm / V / 1000
 
@@ -790,12 +913,20 @@ Namespace PropertyPackages.Auxiliary
 
             Dim Int_d2P_dT2_V_dV As Double = -d2adt2 * Math.Log((-(2 ^ 0.5) * bm + bm + V) / ((2 ^ 0.5) * bm + bm + V)) / (8 ^ 0.5 * bm)
 
+            IObj?.Paragraphs.Add(String.Format("dP/dT (V): {0}", dP_dT_V))
+            IObj?.Paragraphs.Add(String.Format("dV/dT (P): {0}", dV_dT_P))
+            IObj?.Paragraphs.Add(String.Format("dP/dV (T): {0}", dP_dV_T))
+            IObj?.Paragraphs.Add(String.Format("d2P/dT2: {0}", d2P_dT2))
+            IObj?.Paragraphs.Add(String.Format("Int_d2P_dT2_V_dV: {0}", Int_d2P_dT2_V_dV))
+
             Dim Cpm_ig As Double = 0.0#
             i = 0
             Do
                 Cpm_ig += Vzmass(i) * VCpig(i) * MMm
                 i += 1
             Loop Until i = n + 1
+
+            IObj?.Paragraphs.Add(String.Format("Cpm_ig: {0}", Cpm_ig))
 
             Dim Cv As Double = T * Int_d2P_dT2_V_dV + Cpm_ig - 2 * R - T * dP_dT_V ^ 2 / dP_dV_T
             'Dim Cp = Cpm_ig + T * Int_d2P_dT2_V_dV - T * dP_dT_V ^ 2 / dP_dV_T - R
@@ -810,6 +941,14 @@ Namespace PropertyPackages.Auxiliary
             tmp(0) = Cp_Cv2
             tmp(1) = Cp / MMm
             tmp(2) = Cv / MMm
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Cp: {0} kJ/kg", tmp(1)))
+            IObj?.Paragraphs.Add(String.Format("Cv: {0} kJ/kg", tmp(2)))
+            IObj?.Paragraphs.Add(String.Format("Cp/Cv: {0} kJ/kg", tmp(0)))
+
+            IObj?.Close()
 
             CpCvR = tmp
 

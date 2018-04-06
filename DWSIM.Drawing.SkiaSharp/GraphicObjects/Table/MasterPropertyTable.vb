@@ -53,6 +53,9 @@ Namespace GraphicObjects.Tables
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortableItems").Elements.ToList
                 m_sortableitems.Add(xel.Value)
             Next
+            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortedList").Elements.ToList
+                m_sortedlist.Add(xel.Value)
+            Next
             Return True
         End Function
 

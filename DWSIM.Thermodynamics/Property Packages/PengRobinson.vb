@@ -318,7 +318,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & " (Phase Properties)", "Property Package Phase Properties Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
 
             IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase properties of the currently associated Material Stream.")
 
@@ -932,14 +932,33 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_VAPDENS", "Vapor Phase Density", "Vapor Phase Density Calculation Routine")
+
+            IObj?.SetCurrent()
+
             Dim val As Double
             val = m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "V")
+
+            IObj?.Paragraphs.Add("<h2>Intermediate Calculations</h2>")
+            IObj?.Paragraphs.Add(String.Format("Vapor Phase Compressibility Factor: {0}", val))
+
             val = (8.314 * val * T / P)
             If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                 val -= Me.AUX_CM(Phase.Vapor)
             End If
             val = 1 / val * Me.AUX_MMM(Phase.Vapor) / 1000
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Vapor Phase Density: {0} kg/m3", val))
+
+            IObj?.Close()
+
             Return val
+
         End Function
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()

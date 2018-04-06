@@ -3913,7 +3913,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 i = i + 1
 
-            Loop Until i >= options.DewCurveMaximumPoints Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
+            Loop Until i >= options.DewCurveMaximumPoints Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or
                         Double.IsNaN(PO(PO.Count - 1)) = True Or Double.IsNaN(TVD(TVD.Count - 1)) = True Or T >= options.DewCurveMaximumTemperature
 
             If recalcCP OrElse (Not TypeOf Me Is PengRobinsonPropertyPackage And Not TypeOf Me Is SRKPropertyPackage) Then
@@ -4120,8 +4120,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         If PQ(PQ.Count - 1) = PQ(PQ.Count - 2) Or TQ(TQ.Count - 1) = TQ(TQ.Count - 2) Then Exit Do
                     End If
 
-                Loop Until i >= npoints Or PQ(PQ.Count - 1) = 0 Or PQ(PQ.Count - 1) < 0 Or TQ(TQ.Count - 1) < 0 Or _
-                            Double.IsNaN(PQ(PQ.Count - 1)) = True Or Double.IsNaN(TQ(TQ.Count - 1)) = True Or _
+                Loop Until i >= npoints Or PQ(PQ.Count - 1) = 0 Or PQ(PQ.Count - 1) < 0 Or TQ(TQ.Count - 1) < 0 Or
+                            Double.IsNaN(PQ(PQ.Count - 1)) = True Or Double.IsNaN(TQ(TQ.Count - 1)) = True Or
                             Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02
 
             Else
@@ -5244,7 +5244,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             Else
 
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or _
+                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
                     Dim A, B, C, D, E, result As Double
                     A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
@@ -5265,8 +5265,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     'CAL/MOL.K [CP=A+(B*T)+(C*T^2)+(D*T^3)], T in K
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight * 4.1868 'kJ/kg.K
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or _
+                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
@@ -5403,7 +5403,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Else
 
 
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or _
+                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
                     Dim A, B, C, D, E, result As Double
                     A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Vapor_Pressure_Constant_A
@@ -5421,10 +5421,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     '[LN(P)=A-B/(T+C), P(mmHG) T(K)]
                     result = Math.Exp(A - B / (T + C)) * 133.322368 'mmHg to Pascal
                     Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or _
+                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.VaporPressureEquation
@@ -5742,9 +5742,9 @@ Final3:
 
             If Tr >= 1 Then Return 0.0#
 
-            If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or _
+            If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
                                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsHYPO = 1 Or _
+                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsHYPO = 1 Or
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
                     Dim tr1 As Double
                     tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
@@ -5754,9 +5754,9 @@ Final3:
                     result = A * (1 - Tr) ^ (B + C * Tr + D * Tr ^ 2)
                     Return result / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight / 1000 'kJ/kg
                 End If
-            ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Or _
-            Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
-           Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
+            ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Or
+            Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
+           Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
            Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                 Dim tr1 As Double
                 If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
@@ -5804,7 +5804,7 @@ Final3:
                     End With
 
                 Else
-                    If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or _
+                    If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
                         Dim A, B, C, D, E, result As Double
                         A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
@@ -5821,10 +5821,10 @@ Final3:
                         '[LOG(V)=B*(1/T-1/C), T(K) V(CP)]
                         result = Exp(B * (1 / T - 1 / C)) * 0.001
                         Return result
-                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or _
+                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
+                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
+                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
+                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                         Dim A, B, C, D, E, result As Double
                         Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.LiquidViscosityEquation
@@ -5875,27 +5875,75 @@ Final3:
 
         Public Function AUX_LIQVISCm(ByVal T As Double, Optional ByVal phaseid As Integer = 3) As Double
 
-            Dim val, val2, logvisc, result As Double
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQVISCm", "Liquid Phase Viscosity", "Liquid Phase Viscosity Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            Dim val, result As Double
             Dim subst As Interfaces.ICompound
 
+            IObj?.Paragraphs.Add("Liquid phase viscosity is calculated from")
+
+            IObj?.Paragraphs.Add("<m>\eta_{L}=\exp(\sum_{i}x_{i}\ln\eta_{i}),<m>")
+
+            IObj?.Paragraphs.Add("where <mi>\eta_{i}</mi> is the viscosity of each component in the phase, 
+                                which depends on the temperature and is calculated from experimental data whenever available.
+                                Dependence of viscosity with the temperature  is described in the equation")
+
+            IObj?.Paragraphs.Add("<m>\eta=\exp(A+B/T+C\ln T+DT^{E}),<m>")
+
+            IObj?.Paragraphs.Add("where A, B, C, D and E are experimental coefficients (or 
+                                generated by DWSIM for pseudocomponents or hypotheticals).")
+
             val = 0
-            val2 = 0
+            Dim sval As Double = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                'logvisc = Math.Log(Me.AUX_LIQVISCi(subst.Name, T))
-                If Not Double.IsInfinity(logvisc) Then
-                    val += subst.MoleFraction.GetValueOrDefault * Me.AUX_LIQVISCi(subst.Name, T)
-                Else
-                    val2 += subst.MoleFraction.GetValueOrDefault
-                End If
+                IObj?.SetCurrent()
+                sval = Me.AUX_LIQVISCi(subst.Name, T)
+                IObj?.Paragraphs.Add(String.Format("Calculating Liquid Viscosity for {0}... {1} Pa.s (xi = {2})", subst.Name, sval, subst.MoleFraction.GetValueOrDefault))
+                val += subst.MoleFraction.GetValueOrDefault * sval
             Next
 
-            result = (val / (1 - val2))
+            result = val
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Viscosity: {0} Pa.s", result))
+
+            IObj?.Close()
 
             Return result
 
         End Function
 
         Public Overridable Function AUX_SURFTM(ByVal T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_SURFTM", "Liquid Phase Surface Tension", "Liquid Phase Surface Tension Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("The liquid phase surface 
+                                tension is calculated by doing a molar average of the individual 
+                                component tensions. When experimental data is not available, the value 
+                                is calculated with the Brock-Bird equation,")
+
+            IObj?.Paragraphs.Add("<m>\frac{\sigma}{P_{c}^{2/3}T_{c}^{1/3}}=(0.132\alpha_{c}-0.279)(1-T_{r})^{11/9}</m>")
+
+            IObj?.Paragraphs.Add("<m>\alpha_{c}=0.9076[1+\frac{T_{br}\ln(P_{c}/1.01325)}{1-T_{br}}],</m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<mi>\sigma</mi> Surface tension (N/m)")
+
+            IObj?.Paragraphs.Add("<mi>T_{c}</mi> Critical temperature (K)")
+
+            IObj?.Paragraphs.Add("<mi>P_{c}</mi> Critical pressure (Pa)")
+
+            IObj?.Paragraphs.Add("<mi>T_{br}</mi> Reduced normal boiling point, <mi>T_{b}/T_{c}</mi>")
 
             Dim val As Double = 0
             Dim tmpval As Double = 0.0#
@@ -5904,16 +5952,20 @@ Final3:
             Dim ftotal As Double = 1
 
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+                IObj?.SetCurrent()
+                IObj?.Paragraphs.Add(String.Format("Calculating Thermal Conductivity for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
                 If T / subst.ConstantProperties.Critical_Temperature < 1 Then
                     With subst.ConstantProperties
                         If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
                             tmpval = Me.CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
+                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} N/m", tmpval))
                         ElseIf .IsIon Or .IsSalt Then
                             tmpval = 0.0#
                         Else
                             nbp = subst.ConstantProperties.Normal_Boiling_Point
                             If nbp = 0 Then nbp = 0.7 * subst.ConstantProperties.Critical_Temperature
                             tmpval = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Brock-Bird correlation: {0} N/m", tmpval))
                         End If
                     End With
                 Else
@@ -5922,6 +5974,12 @@ Final3:
                 End If
                 val += subst.MoleFraction.GetValueOrDefault * tmpval / ftotal
             Next
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Surface Tension: {0} N/m", val))
+
+            IObj?.Close()
 
             Return val
 
@@ -5954,47 +6012,109 @@ Final3:
 
         Public Overridable Function AUX_CONDTL(ByVal T As Double, Optional ByVal phaseid As Integer = 3) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_CONDTL", "Liquid Phase Thermal Conductivity", "Liquid Phase Thermal Conductivity Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("When experimental data is not available, the contribution of each 
+                                component for the thermal conductivity of the liquid phase is 
+                                calculated by the Latini method,")
+
+            IObj?.Paragraphs.Add("<m>\lambda_{i}	=	\frac{A(1-T_{r})^{0.38}}{T_{r}^{1/6}}<m>")
+
+            IObj?.Paragraphs.Add("<m>A=\frac{A^{*}T_{b}^{0.38}}{MM^{\beta}T_{c}^{\gamma}},<m>")
+
+            IObj?.Paragraphs.Add("where <mi>A^{*}</mi>,<mi>\alpha</mi>,<mi>\beta</mi> and <mi>\gamma</mi> depend on the nature of 
+                                the liquid (Saturated Hydrocarbon, Aromatic, Water, etc). The 
+                                liquid phase thermal conductivity is calculated from the 
+                                individual values by the Li method,")
+
+            IObj?.Paragraphs.Add("<m>\lambda_{L}	=\sum\sum\phi_{i}\phi_{j}\lambda_{ij}	<m>")
+
+            IObj?.Paragraphs.Add("<m>\lambda_{ij}	=	2(\lambda_{i}^{-1}+\lambda_{j}^{-1})^{-1}<m>")
+
+            IObj?.Paragraphs.Add("<m>\phi_{i}=\frac{x_{i}V_{c_{i}}}{\sum x_{i}V_{c_{i}}},<m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<mi>\lambda_{L}</mi> liquid phase thermal conductivity (W/[m.K])")
+
             Dim val As Double
             Dim subst As Interfaces.ICompound
             Dim vcl(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1)
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                IObj?.SetCurrent()
+                IObj?.Paragraphs.Add(String.Format("Calculating Thermal Conductivity for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
                 If subst.ConstantProperties.LiquidThermalConductivityEquation <> "" Then
                     If Integer.TryParse(subst.ConstantProperties.VaporThermalConductivityEquation, New Integer) Then
                         vcl(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                     Else
                         vcl(i) = Me.ParseEquation(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T)
                     End If
+                    IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} W/[m.K]", vcl(i)))
                 ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
                     vcl(i) = 0.0#
                 Else
                     vcl(i) = Auxiliary.PROPS.condl_latini(T, subst.ConstantProperties.Normal_Boiling_Point, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Molar_Weight, "")
+                    IObj?.Paragraphs.Add(String.Format("Value estimated with Latini correlation: {0} W/[m.K]", vcl(i)))
                 End If
 
-                    i = i + 1
+                i = i + 1
             Next
+
             val = Auxiliary.PROPS.condlm_li(Me.RET_VVC, vcl, Me.RET_VMOL(Me.RET_PHASECODE(phaseid)))
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Average Mixture Value from Li's mixing rule: {0} W/[m.K]", val))
+
+            IObj?.Close()
+
             Return val
 
         End Function
 
         Public Overridable Function AUX_CONDTG(ByVal T As Double, ByVal P As Double) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_CONDTG", "Vapor Phase Thermal Conductivity", "Vapor Phase Thermal Conductivity Calculation Routine")
+
+            IObj?.SetCurrent()
+
             Dim val As Double
             Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
+            Dim sval As Double = 0
             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                IObj?.SetCurrent()
+                IObj?.Paragraphs.Add(String.Format("Calculating Thermal Conductivity for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
                 If subst.ConstantProperties.VaporThermalConductivityEquation <> "" Then
                     If Integer.TryParse(subst.ConstantProperties.VaporThermalConductivityEquation, New Integer) Then
-                        val += subst.MoleFraction.GetValueOrDefault * Me.CalcCSTDepProp(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                        sval = Me.CalcCSTDepProp(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                        IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} W/[m.K]", sval))
+                        val += subst.MoleFraction.GetValueOrDefault * sval
                     Else
-                        val += subst.MoleFraction.GetValueOrDefault * ParseEquation(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T)
+                        sval = ParseEquation(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T)
+                        IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} W/[m.K]", sval))
+                        val += subst.MoleFraction.GetValueOrDefault * sval
                     End If
                 Else
-                    val += subst.MoleFraction.GetValueOrDefault * Auxiliary.PROPS.condtg_elyhanley(T, Me.AUX_TCM(Phase.Vapor), Me.AUX_VCM(Phase.Vapor), Me.AUX_ZCM(Phase.Vapor), Me.AUX_WM(Phase.Vapor), Me.AUX_MMM(Phase.Vapor), Me.DW_CalcCv_ISOL(Phase.Vapor, T, P) * Me.AUX_MMM(Phase.Vapor))
+                    sval = Auxiliary.PROPS.condtg_elyhanley(T, Me.AUX_TCM(Phase.Vapor), Me.AUX_VCM(Phase.Vapor), Me.AUX_ZCM(Phase.Vapor), Me.AUX_WM(Phase.Vapor), Me.AUX_MMM(Phase.Vapor), Me.DW_CalcCv_ISOL(Phase.Vapor, T, P) * Me.AUX_MMM(Phase.Vapor))
+                    IObj?.Paragraphs.Add(String.Format("Value estimated with Ely-Hanley correlation: {0} W/[m.K]", sval))
+                    val += subst.MoleFraction.GetValueOrDefault * sval
                 End If
                 i = i + 1
             Next
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Molar Average Value: {0} W/[m.K]", val))
+
+            IObj?.Close()
 
             Return val
 
@@ -6034,13 +6154,69 @@ Final3:
 
         Public Overridable Function AUX_VAPVISCm(ByVal T As Double, ByVal RHO As Double, ByVal MM As Double) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_VAPVISCm", "Vapor Phase Viscosity", "Vapor Phase Viscosity Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("Vapor phase viscosity is calculated in two steps. First, when 
+                                experimental data is not available, the temperature dependence is 
+                                given by the Lucas equation,")
+
+            IObj?.Paragraphs.Add("<m>\eta\xi=[0,.807T_{r}^{0,618}-0.357\exp(-0.449T_{r})+0.34\exp(-4.058T_{r})+0.018]</m>")
+
+            IObj?.Paragraphs.Add("<m>\xi=0,176(\frac{T_{c}}{MM^{3}P_{c}^{4}})^{1/6},</m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<mi>\eta</mi> Viscosity <mi>(\mu P)</mi>")
+
+            IObj?.Paragraphs.Add("<mi>T_{c},P_{c}</mi> Component (or mixture) critical properties ")
+
+            IObj?.Paragraphs.Add("<mi>T_{r}</mi> Reduced temperature, `T/T_{c}`")
+
+            IObj?.Paragraphs.Add("<mi>MM</mi> Molecular weight (kg/kmol)")
+
+            IObj?.Paragraphs.Add("In the second step, the experimental or calculated viscosity with 
+                                the Lucas method is corrected to take into account the effect of 
+                                pressure, by the Jossi-Stiel-Thodos method,")
+
+            IObj?.Paragraphs.Add("<m>[(\eta-\eta_{0})(\frac{T_{c}}{MM^{3}P_{c}^{4}})^{1/6}+1]^{1/4}	=	1.023+0.23364\rho_{r}+
+	                            +	0.58533\rho_{r}^{2}-0.40758\rho_{r}^{3}+0.093324\rho_{r}^{4},<m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<mi>\eta,\eta_{0}</mi> Corrected viscosity / Lucas method calculated 
+                                viscosity <mi>(\mu P)</mi>")
+
+            IObj?.Paragraphs.Add("<mi>T_{c},P_{c}</mi> Component critical properties")
+
+            IObj?.Paragraphs.Add("<mi>\rho_{r}</mi> Reduced density, <mi>\rho/\rho_{c}=V/V_{c}</mi>")
+
+            IObj?.Paragraphs.Add("`MM` Molecular weight (kg/kmol)")
+
+            IObj?.Paragraphs.Add("If the vapor phase contains more than a component, the viscosity 
+                                is calculated by the same procedure, but with the required 
+                                properties calculated by a molar average.")
+
             Dim val As Double = 0.0#
+            Dim sval As Double = 0
 
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                val += subst.MoleFraction.GetValueOrDefault * Me.AUX_VAPVISCi(subst.ConstantProperties, T)
+                IObj?.Paragraphs.Add(String.Format("Calculating viscosity for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
+                sval = Me.AUX_VAPVISCi(subst.ConstantProperties, T)
+                IObj?.Paragraphs.Add(String.Format("Calculated value: {0} Pa.s", sval))
+                val += subst.MoleFraction.GetValueOrDefault * sval
             Next
 
             val = Auxiliary.PROPS.viscg_jossi_stiel_thodos(val, T, MM / RHO / 1000, AUX_TCM(Phase.Vapor), AUX_PCM(Phase.Vapor), AUX_VCM(Phase.Vapor), AUX_MMM(Phase.Vapor))
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Molar Average Value: {0} Pa.s", val))
+
+            IObj?.Close()
 
             Return val
 
@@ -6197,13 +6373,100 @@ Final3:
 
         Public Overridable Function AUX_LIQDENS(ByVal T As Double, Optional ByVal P As Double = 0, Optional ByVal Pvp As Double = 0, Optional ByVal phaseid As Integer = 3, Optional ByVal FORCE_EOS As Boolean = False) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQDENS", "Liquid Phase Density", "Liquid Phase Density Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("Liquid phase density is calculated with the Rackett equation for 
+                                non-EOS models when experimental data is not available,")
+
+            IObj?.Paragraphs.Add("<m>V_{s}=\frac{RT_{C}}{P_{C}}Z_{RA}^{[1+(1-T_{r})^{2/7}]},</m>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<mi>V_{s}</mi> Saturated molar volume (m³/mol)")
+
+            IObj?.Paragraphs.Add("<mi>T_{c}</mi> Critical temperature (K)")
+
+            IObj?.Paragraphs.Add("<mi>P_{c}</mi> Critical pressure (Pa)")
+
+            IObj?.Paragraphs.Add("<mi>T_{r}</mi> Reduced temperature")
+
+            IObj?.Paragraphs.Add("<mi>Z_{RA}</mi> Rackett constant of the component/mixture")
+
+            IObj?.Paragraphs.Add("<mi>R</mi> Ideal Gas constant (8.314 J/[mol.K])")
+
+            IObj?.Paragraphs.Add("If <mi>T\geq T_{cm}</mi>, the Rackett method does not provide a value 
+                                for <mi>V_{s}</mi> and, in this case, DWSIM uses the EOS-generated 
+                                compressibility factor to calculate the density of the liquid phase.")
+
+            IObj?.Paragraphs.Add("For mixtures, the equation becomes")
+
+            IObj?.Paragraphs.Add("<m>V_{s}=R(\sum\frac{x_{i}T_{c_{i}}}{P_{c_{i}}})Z_{RA}^{[1+(1-T_{r})^{2/7}]},</m>")
+
+            IObj?.Paragraphs.Add("with <mi>T_{r}=T/T_{cm}</mi>, and")
+
+            IObj?.Paragraphs.Add("<m>T_{c_{m}}=\sum\sum\phi_{i}\phi_{j}T_{c_{ij}},</m>")
+
+            IObj?.Paragraphs.Add("<m>\phi_{i}=\frac{x_{i}V_{c_{i}}}{\sum x_{i}V_{c_{i}}},</m>")
+
+            IObj?.Paragraphs.Add("<m>T_{c_{ij}}=[\frac{8(V_{c_{i}}V_{c_{j}})^{1/2}}{(V_{c_{i}}^{1/3}+V_{c_{j}}^{1/3})^{3}}](T_{c_{i}}T_{c_{j}})^{1/2},</m>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<mi>x_{i}</mi> Molar fraction")
+
+            IObj?.Paragraphs.Add("<mi>V_{c_{i}}</mi> Critical volume (m³/mol)")
+
+            IObj?.Paragraphs.Add("If <mi>Z_{RA}</mi> isn't available, it is calculated from the component 
+                                acentric factor,")
+
+            IObj?.Paragraphs.Add("<mi>Z_{RA}=0.2956-0.08775\omega,</mi>")
+
+            IObj?.Paragraphs.Add("If the component (or mixture) isn't saturated, a correction is 
+                                applied in order to account for the effect of pressure in the volume,")
+
+            IObj?.Paragraphs.Add("<mi>V=V_{s}[1-(0.0861488+0.0344483\omega)\ln\frac{\beta+P}{\beta+P_{vp}}],</mi>")
+
+            IObj?.Paragraphs.Add("with")
+
+            IObj?.Paragraphs.Add("<mi>\frac{\beta}{P}	=	-1-9.070217(1-T_{r})^{1/3}+62.45326(1-T_{r})^{2/3}-135.1102(1-T_{r})+
+		                        +\exp(4.79594+0.250047\omega+1.14188\omega^{2})(1-T_{r})^{4/3},</mi>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<mi>V</mi> Compressed liquid volume (m³/mol)")
+
+            IObj?.Paragraphs.Add("<mi>P</mi> Pressure (Pa)")
+
+            IObj?.Paragraphs.Add("<mi>P_{vp}</mi> Vapor pressure / Bubble point pressure (Pa)")
+
+            IObj?.Paragraphs.Add("Finally, density is calculated from the molar volume by the 
+                                following relation:")
+
+            IObj?.Paragraphs.Add("<m>\rho=\frac{MM}{1000V},<m>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<mi>\rho</mi> Density (kg/m³)")
+
+            IObj?.Paragraphs.Add("<mi>V</mi> Specific volume of the fluid (m³/mol)")
+
+            IObj?.Paragraphs.Add("<mi>MM</mi> Liquid phase molecular volume (kg/kmol)")
+
             Dim val As Double
             Dim m_pr2 As New PropertyPackages.Auxiliary.PengRobinson
+
+            IObj?.Paragraphs.Add("<h2>Calculations</h2>")
 
             If phaseid = 1 Then
 
                 If T / Me.AUX_TCM(Phase.Liquid) > 1 Then
 
+                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
+                    IObj?.SetCurrent()
                     Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     val = 1 / (8.314 * Z * T / P)
                     val = val * Me.AUX_MMM(Phase.Liquid) / 1000
@@ -6216,14 +6479,19 @@ Final3:
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                                IObj?.SetCurrent()
+                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         vk(i) = Me.AUX_LIQDENSi(subst, T)
+                                        IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
                                     Else
                                         vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                     End If
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                 End If
                                 vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
                                 i = i + 1
@@ -6231,9 +6499,11 @@ Final3:
                             val = 1 / MathEx.Common.Sum(vk)
                         Else
                             val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid), Me.AUX_PCM(Phase.Liquid), Me.AUX_WM(Phase.Liquid), Me.AUX_MMM(Phase.Liquid), Me.AUX_ZRAM(Phase.Liquid), P, Me.AUX_PVAPM(T))
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                         End If
                     Else
                         val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid), Me.AUX_PCM(Phase.Liquid), Me.AUX_WM(Phase.Liquid), Me.AUX_MMM(Phase.Liquid), Me.AUX_ZRAM(Phase.Liquid), P, Me.AUX_PVAPM(T))
+                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                     End If
 
                 End If
@@ -6242,6 +6512,8 @@ Final3:
 
                 If T / Me.AUX_TCM(Phase.Vapor) > 1 Then
 
+                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
+                    IObj?.SetCurrent()
                     Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     val = 1 / (8.314 * Z * T / P)
                     val = val * Me.AUX_MMM(Phase.Vapor) / 1000
@@ -6250,13 +6522,15 @@ Final3:
 
                     Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                     val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Vapor), Me.AUX_PCM(Phase.Vapor), Me.AUX_WM(Phase.Vapor), Me.AUX_MMM(Phase.Vapor), Me.AUX_ZRAM(Phase.Vapor), P, Me.AUX_PVAPM(T))
+                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
 
                 End If
 
             ElseIf phaseid = 3 Then
 
                 If T / Me.AUX_TCM(Phase.Liquid1) > 1 Then
-
+                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
+                    IObj?.SetCurrent()
                     Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid1), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     val = 1 / (8.314 * Z * T / P)
                     val = val * Me.AUX_MMM(Phase.Liquid1) / 1000
@@ -6269,22 +6543,28 @@ Final3:
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                                IObj?.SetCurrent()
+                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = AUX_LIQDENSi(subst, T)
+                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
                                             vk(i) = 1.0E+20
                                         Else
                                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                         End If
                                     Else
                                         vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                     End If
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                 End If
                                 vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
                                 i = i + 1
@@ -6292,9 +6572,11 @@ Final3:
                             val = 1 / MathEx.Common.Sum(vk)
                         Else
                             val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid1), Me.AUX_PCM(Phase.Liquid1), Me.AUX_WM(Phase.Liquid1), Me.AUX_MMM(Phase.Liquid1), Me.AUX_ZRAM(Phase.Liquid1), P, Me.AUX_PVAPM(T))
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                         End If
                     Else
                         val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid1), Me.AUX_PCM(Phase.Liquid1), Me.AUX_WM(Phase.Liquid1), Me.AUX_MMM(Phase.Liquid1), Me.AUX_ZRAM(Phase.Liquid1), P, Me.AUX_PVAPM(T))
+                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                     End If
 
                 End If
@@ -6302,7 +6584,8 @@ Final3:
             ElseIf phaseid = 4 Then
 
                 If T / Me.AUX_TCM(Phase.Liquid2) > 1 Then
-
+                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
+                    IObj?.SetCurrent()
                     Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid2), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     val = 1 / (8.314 * Z * T / P)
                     val = val * Me.AUX_MMM(Phase.Liquid2) / 1000
@@ -6315,20 +6598,26 @@ Final3:
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                                IObj?.SetCurrent()
+                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = AUX_LIQDENSi(subst, T)
+                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         Else
                                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                         End If
                                     Else
                                         vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                     End If
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                 End If
                                 vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
                                 i = i + 1
@@ -6336,9 +6625,11 @@ Final3:
                             val = 1 / MathEx.Common.Sum(vk)
                         Else
                             val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid2), Me.AUX_PCM(Phase.Liquid2), Me.AUX_WM(Phase.Liquid2), Me.AUX_MMM(Phase.Liquid2), Me.AUX_ZRAM(Phase.Liquid2), P, Me.AUX_PVAPM(T))
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                         End If
                     Else
                         val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid2), Me.AUX_PCM(Phase.Liquid2), Me.AUX_WM(Phase.Liquid2), Me.AUX_MMM(Phase.Liquid2), Me.AUX_ZRAM(Phase.Liquid2), P, Me.AUX_PVAPM(T))
+                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                     End If
 
                 End If
@@ -6346,7 +6637,8 @@ Final3:
             ElseIf phaseid = 5 Then
 
                 If T / Me.AUX_TCM(Phase.Liquid3) > 1 Then
-
+                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
+                    IObj?.SetCurrent()
                     Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid3), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     val = 1 / (8.314 * Z * T / P)
                     val = val * Me.AUX_MMM(Phase.Liquid3) / 1000
@@ -6359,20 +6651,26 @@ Final3:
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                                IObj?.SetCurrent()
+                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = AUX_LIQDENSi(subst, T)
+                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         Else
                                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                         End If
                                     Else
                                         vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                     End If
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                 End If
                                 vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
                                 i = i + 1
@@ -6380,9 +6678,11 @@ Final3:
                             val = 1 / MathEx.Common.Sum(vk)
                         Else
                             val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid3), Me.AUX_PCM(Phase.Liquid3), Me.AUX_WM(Phase.Liquid3), Me.AUX_MMM(Phase.Liquid3), Me.AUX_ZRAM(Phase.Liquid3), P, Me.AUX_PVAPM(T))
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                         End If
                     Else
                         val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid3), Me.AUX_PCM(Phase.Liquid3), Me.AUX_WM(Phase.Liquid3), Me.AUX_MMM(Phase.Liquid3), Me.AUX_ZRAM(Phase.Liquid3), P, Me.AUX_PVAPM(T))
+                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                     End If
 
                 End If
@@ -6403,18 +6703,24 @@ Final3:
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                                IObj?.SetCurrent()
+                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = AUX_LIQDENSi(subst, T)
+                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
                                         Else
                                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                         End If
                                     Else
                                         vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                     End If
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                                 End If
                                 vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
                                 i = i + 1
@@ -6422,15 +6728,23 @@ Final3:
                             val = 1 / MathEx.Common.Sum(vk)
                         Else
                             val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Aqueous), Me.AUX_PCM(Phase.Aqueous), Me.AUX_WM(Phase.Aqueous), Me.AUX_MMM(Phase.Aqueous), Me.AUX_ZRAM(Phase.Aqueous), P, Me.AUX_PVAPM(T))
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                         End If
                     Else
                         val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Aqueous), Me.AUX_PCM(Phase.Aqueous), Me.AUX_WM(Phase.Aqueous), Me.AUX_MMM(Phase.Aqueous), Me.AUX_ZRAM(Phase.Aqueous), P, Me.AUX_PVAPM(T))
+                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
                     End If
 
                 End If
             End If
 
             m_pr2 = Nothing
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Density: {0} kg/m3", val))
+
+            IObj?.Close()
 
             Return val
 
@@ -9209,10 +9523,10 @@ Final3:
         ''' implements the ICapeThermoPropertyRoutine interface this method should return False.</remarks>
         Public Overridable Function CheckSinglePhasePropSpec(ByVal [property] As String, ByVal phaseLabel As String) As Boolean Implements ICapeThermoPropertyRoutine.CheckSinglePhasePropSpec
             Select Case [property].ToLower
-                Case "compressibilityfactor", "heatofvaporization", "heatcapacity", "heatcapacitycv", _
-                    "idealgasheatcapacity", "idealgasenthalpy", "excessenthalpy", "excessentropy", _
-                    "viscosity", "thermalconductivity", "fugacity", "fugacitycoefficient", "activity", "activitycoefficient", _
-                    "dewpointpressure", "dewpointtemperature", "logfugacitycoefficient", "volume", "density", _
+                Case "compressibilityfactor", "heatofvaporization", "heatcapacity", "heatcapacitycv",
+                    "idealgasheatcapacity", "idealgasenthalpy", "excessenthalpy", "excessentropy",
+                    "viscosity", "thermalconductivity", "fugacity", "fugacitycoefficient", "activity", "activitycoefficient",
+                    "dewpointpressure", "dewpointtemperature", "logfugacitycoefficient", "volume", "density",
                     "enthalpy", "entropy", "gibbsfreeenergy", "moles", "mass", "molecularweight", "totalflow"
                     Return True
                 Case Else
@@ -10497,7 +10811,7 @@ Final3:
                 Next
             Catch ex As Exception
             End Try
-           
+
             Select Case Me.ComponentName
 
                 Case "Peng-Robinson (PR)"

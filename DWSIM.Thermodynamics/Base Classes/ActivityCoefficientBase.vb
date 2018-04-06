@@ -89,16 +89,37 @@ Namespace PropertyPackages
 #Region "Functions to Calculate Isolated Properties"
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_VAPDENS", "Vapor Phase Density", "Vapor Phase Density Calculation Routine")
+
+            IObj?.SetCurrent()
+
             Dim val As Double
             Dim Z As Double = 1.0#
             If Not Me.Parameters.ContainsKey("PP_IDEAL_VAPOR_PHASE_FUG") Then Me.Parameters.Add("PP_IDEAL_VAPOR_PHASE_FUG", 0)
             If Me.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = 1 Then
+                IObj?.Paragraphs.Add("Ideal Gas Vapor Phase assumption is enabled.")
                 Z = 1.0#
             Else
+                IObj?.Paragraphs.Add("Real Gas Vapor Phase assumption is enabled.")
                 Z = m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")
             End If
+
+            IObj?.Paragraphs.Add("<h2>Intermediate Calculations</h2>")
+            IObj?.Paragraphs.Add(String.Format("Vapor Phase Compressibility Factor: {0}", val))
+
             val = P / (Z * 8.314 * T) / 1000 * AUX_MMM(Phase.Vapor)
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Vapor Phase Density: {0} kg/m3", val))
+
+            IObj?.Close()
+
             Return val
+
         End Function
 
         Public Overloads Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
@@ -681,7 +702,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & " (Phase Properties)", "Property Package Phase Properties Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
 
             IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase properties of the currently associated Material Stream.")
 
