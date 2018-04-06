@@ -3206,7 +3206,7 @@ Public Class FormFlowsheet
     Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
 
         Dim iform = Global.DWSIM.UI.Shared.Common.GetDefaultEditorForm("Solution Inspector", 1024, 768, Global.DWSIM.Inspector.Window.GetInspectorWindow(), False)
-        iform.WindowState = WindowState.Maximized
+        iform.WindowState = Eto.Forms.WindowState.Maximized
         iform.Show()
 
         'start dispatcher for WPF Interop

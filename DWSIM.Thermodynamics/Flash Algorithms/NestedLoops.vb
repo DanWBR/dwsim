@@ -907,7 +907,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", H))
+            IObj?.Paragraphs.Add(String.Format("Entropy: {0} kJ/kg", S))
             IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", Tref))
