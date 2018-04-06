@@ -136,6 +136,7 @@ Partial Class FormOptions
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ofdcs = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -191,6 +192,7 @@ Partial Class FormOptions
         'GroupBox18
         '
         resources.ApplyResources(Me.GroupBox18, "GroupBox18")
+        Me.GroupBox18.Controls.Add(Me.Label21)
         Me.GroupBox18.Controls.Add(Me.chkEnableInspector)
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.TabStop = False
@@ -969,6 +971,11 @@ Partial Class FormOptions
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        '
         'FormOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -1136,4 +1143,5 @@ Partial Class FormOptions
     Public WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents GroupBox18 As GroupBox
     Public WithEvents chkEnableInspector As CheckBox
+    Friend WithEvents Label21 As Label
 End Class

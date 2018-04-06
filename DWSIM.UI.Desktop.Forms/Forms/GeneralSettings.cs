@@ -105,7 +105,9 @@ namespace DWSIM.UI.Forms.Forms
             tab2.CreateAndAddDescriptionRow("If activated, the solver won't calculate the rest of the flowsheet if an error occurs during the calculation of an intermediate block/object.");
 
             tab2.CreateAndAddLabelRow("Solution Inspector");
-            tab2.CreateAndAddCheckBoxRow("Enable Solution Inspector", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
+            tab2.CreateAndAddCheckBoxRow("Enable Inspector Reports", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
+            tab2.CreateAndAddDescriptionRow("Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector tool to view these reports.");
+            tab2.CreateAndAddDescriptionRow("When the Inspector Reports feature is enabled and the Flowsheet Solver is called, the Parallel CPU Processing is automatically disabled. You must re-enable it manually and disable the Inspector to increase the calculation speed again.");
 
             var tab3 = Common.GetDefaultContainer();
             tab3.Tag = "UserComps".Localize(prefix);

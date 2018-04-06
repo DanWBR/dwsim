@@ -476,9 +476,9 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("• Outlet stream enthalpy:")
 
-            IObj?.Paragraphs.Add("<mi>H_{2}=H_{1}+\frac{Pot\,\eta}{W},</m>")
+            IObj?.Paragraphs.Add("<m>H_{2}=H_{1}+\frac{Pot\,\eta}{W},</m>")
 
-            IObj?.Paragraphs.Add("• \Delta P:")
+            IObj?.Paragraphs.Add("• <mi>\Delta P</mi>:")
 
             IObj?.Paragraphs.Add("<mi>\Delta P=\rho(H_{2}-H_{1}),</m>")
 

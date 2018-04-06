@@ -49,6 +49,9 @@
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
     </Reference>
+    <Reference Include="Eto.Forms.Controls.SkiaSharp.Shared">
+      <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
