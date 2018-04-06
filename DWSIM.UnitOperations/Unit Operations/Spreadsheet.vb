@@ -798,9 +798,9 @@ Namespace UnitOperations
                     Case "Calc"
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, DeltaQ.GetValueOrDefault)
                     Case "In"
-                        value = InputParams(propID).Value
+                        If InputParams.ContainsKey(propID) Then value = InputParams(propID).Value
                     Case "Out"
-                        value = OutputParams(propID).Value
+                        If OutputParams.ContainsKey(propID) Then value = OutputParams(propID).Value
                 End Select
 
                 Return value
@@ -860,9 +860,9 @@ Namespace UnitOperations
                 Case "Calc"
                     DeltaQ = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                 Case "In"
-                    InputParams(propID).Value = propval
+                    If InputParams.ContainsKey(propID) Then InputParams(propID).Value = propval
                 Case "Out"
-                    OutputParams(propID).Value = propval
+                    If OutputParams.ContainsKey(propID) Then OutputParams(propID).Value = propval
             End Select
 
             Return 1
@@ -885,9 +885,9 @@ Namespace UnitOperations
                     Case "Calc"
                         value = su.heatflow
                     Case "In"
-                        value = InputParams(propID).Unit
+                        If InputParams.ContainsKey(propID) Then value = InputParams(propID).Unit
                     Case "Out"
-                        value = OutputParams(propID).Unit
+                        If OutputParams.ContainsKey(propID) Then value = OutputParams(propID).Unit
                 End Select
 
                 Return value
