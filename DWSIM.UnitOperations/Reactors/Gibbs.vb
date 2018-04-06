@@ -914,7 +914,7 @@ Namespace Reactors
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
 
             IObj?.SetCurrent
 
@@ -1250,7 +1250,7 @@ Namespace Reactors
 
                         _IObj = IObj2
 
-                        Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Calculate", "Gibbs Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
+                        Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", "Gibbs Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
 
                         pp.CurrentMaterialStream = tms
 
@@ -1386,7 +1386,7 @@ Namespace Reactors
 
                             _IObj = IObj3
 
-                            Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Calculate", "Gibbs Reactor External Loop Iteration #" & ni_ext, "Converge Fugacity Coefficients", True)
+                            Inspector.Host.CheckAndAdd(IObj3, "", "Calculate", "Gibbs Reactor External Loop Iteration #" & ni_ext, "Converge Fugacity Coefficients", True)
 
                             ni_int = 0
 
@@ -1402,7 +1402,7 @@ Namespace Reactors
 
                                 _IObj = IObj4
 
-                                Inspector.Host.CheckAndAdd(IObj4, New StackFrame(1).GetMethod().Name, "Calculate", "Gibbs Reactor Internal Loop Iteration #" & ni_int, "Converge Material Balance", True)
+                                Inspector.Host.CheckAndAdd(IObj4, "", "Calculate", "Gibbs Reactor Internal Loop Iteration #" & ni_int, "Converge Material Balance", True)
 
                                 IObj4?.Paragraphs.Add(String.Format("Variable Values: {0}", x.ToMathArrayString))
 

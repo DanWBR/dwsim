@@ -59,7 +59,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "GAMMA_MR", "Modified UNIFAC (Dortmund) Activity Coefficient", "MODFAC-Do Activity Coefficient Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "GAMMA_MR", "Modified UNIFAC (Dortmund) Activity Coefficient", "MODFAC-Do Activity Coefficient Calculation Routine")
 
             IObj?.SetCurrent
 

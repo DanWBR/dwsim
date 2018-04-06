@@ -322,7 +322,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFug", "SRK EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcLnFug", "SRK EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
 
             IObj?.SetCurrent()
 
@@ -345,7 +345,7 @@ Namespace PropertyPackages.ThermoPlugs
         Private Function CalcLnFugCPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "")
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "SRK EOS Fugacity Coefficient (CPU)", "SRK EOS Fugacity Coefficient Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcLnFugCPU", "SRK EOS Fugacity Coefficient (CPU)", "SRK EOS Fugacity Coefficient Calculation Routine")
 
             IObj?.Paragraphs.Add("The SRK equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
                                     which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 

@@ -27,7 +27,19 @@ Namespace PropertyPackages.Auxiliary
 
         End Sub
 
-        Function MixCritProp_LK(ByVal Vz As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object)
+        Function MixCritProp_LK(ByVal Vz As Double(), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double())
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "MixCritProp_LK", "Lee-Kesler Mixture Critical Properties", "Lee-Kesler Mixture Critical Properties Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
 
             Dim Pcm, Tcm, Vcm, wm As Double
             Dim n As Integer = Vz.Length - 1
@@ -78,11 +90,35 @@ Namespace PropertyPackages.Auxiliary
 
             Pcm = (0.2905 - 0.085 * wm) * 8.314 * Tcm / Vcm
 
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("Mixture Critical Temperature: {0} K", Tcm))
+            IObj?.Paragraphs.Add(String.Format("Mixture Critical Pressure: {0} Pa", Pcm))
+            IObj?.Paragraphs.Add(String.Format("Mixture Critical Volume: {0} ", Vcm))
+            IObj?.Paragraphs.Add(String.Format("Mixture Acentric Factor: {0} ", wm))
+
             Return New Object() {Tcm, Pcm, Vcm, wm}
 
         End Function
 
-        Function H_LK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Object, ByVal VKij As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VMM As Object, ByVal Hid As Double) As Double
+        Function H_LK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VMM As Double(), ByVal Hid As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "H_LK_MIX", "Lee-Kesler Enthalpy", "Lee-Kesler Enthalpy Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Ideal Gas Enthalpy: {0} kJ/kg", Hid))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             Dim n, R As Double
             Dim Tc(), Pc(), w(), Tr() As Double
@@ -110,12 +146,16 @@ Namespace PropertyPackages.Auxiliary
                 i += 1
             Loop Until i = n + 1
 
+            IObj?.SetCurrent
+
             'mixture critical properties
             Dim Tcm, Pcm, wm As Double
             Dim obj = Me.MixCritProp_LK(Vz, VTc, VPc, Vw)
             Tcm = obj(0)
             Pcm = obj(1)
             wm = obj(3)
+
+            IObj?.SetCurrent
 
             'Dim DHres = R * Tcm * Me.Hlk(T / Tcm, P / Pcm, wm)
             Dim DHres = R * Tcm * Me.H_LK(TIPO, T / Tcm, P / Pcm, wm)
@@ -128,9 +168,31 @@ Namespace PropertyPackages.Auxiliary
                 H_LK_MIX = Hid + DHres / MMm '/ 1000
             End If
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("Specific Enthalpy: {0} kJ/kg", H_LK_MIX))
+
+            IObj?.Close()
+
         End Function
 
-        Function S_LK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal VMM As Array, ByVal Sid As Double) As Double
+        Function S_LK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VMM As Double(), ByVal Sid As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "S_LK_MIX", "Lee-Kesler Entropy", "Lee-Kesler Entropy Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Ideal Gas Entropy: {0} kJ/kg.K", Sid))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             Dim n, R As Double
             Dim Tc(), Pc(), w(), Tr() As Double
@@ -158,6 +220,8 @@ Namespace PropertyPackages.Auxiliary
                 i += 1
             Loop Until i = n + 1
 
+            IObj?.SetCurrent
+
             'mixture critical properties
             Dim Tcm, Pcm, wm As Double
             Dim obj = Me.MixCritProp_LK(Vz, VTc, VPc, Vw)
@@ -165,8 +229,9 @@ Namespace PropertyPackages.Auxiliary
             Pcm = obj(1)
             wm = obj(3)
 
-            Dim DSres = R * Me.S_LK(TIPO, T / Tcm, P, Pcm, wm)
+            IObj?.SetCurrent
 
+            Dim DSres = R * Me.S_LK(TIPO, T / Tcm, P, Pcm, wm)
 
             If MathEx.Common.Sum(Vz) = 0.0# Then
                 S_LK_MIX = 0.0#
@@ -174,9 +239,20 @@ Namespace PropertyPackages.Auxiliary
                 S_LK_MIX = Sid + DSres / MMm '/ 1000
             End If
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("Specific Enthalpy: {0} kJ/kg", S_LK_MIX))
+
+            IObj?.Close()
+
         End Function
 
         Function Z_LK(ByVal TIPO As String, ByVal Tr As Double, ByVal Pr As Double, ByVal w As Double)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Z_LK", "Lee-Kesler Compressibility Factor", "Lee-Kesler Compressibility Factor Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
 
             Dim z, zh, zs, wh, Vr As Double
             Dim B, C, D, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
@@ -198,6 +274,7 @@ Namespace PropertyPackages.Auxiliary
             C = c1 - c2 / Tr + c3 / Tr ^ 3
             D = d1 + d2 / Tr
 
+            IObj?.SetCurrent
             Vr = Me.ESTIMAR_Vr2(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
             zs = Pr * Vr / Tr
 
@@ -218,6 +295,8 @@ Namespace PropertyPackages.Auxiliary
             C = c1 - c2 / Tr + c3 / Tr ^ 3
             D = d1 + d2 / Tr
 
+            IObj?.SetCurrent
+
             Vr = Me.ESTIMAR_Vr2(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
 
             zh = Pr * Vr / Tr
@@ -226,11 +305,30 @@ Namespace PropertyPackages.Auxiliary
 
             z = zs + w / wh * (zh - zs)
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("z: {0}", z))
+            IObj?.Paragraphs.Add(String.Format("zs: {0}", zs))
+            IObj?.Paragraphs.Add(String.Format("zh: {0}", zh))
+
+            IObj?.Close()
+
             Return New Object() {z, zs, zh}
 
         End Function
 
         Function H_LK(ByVal TIPO As String, ByVal Tr As Double, ByVal Pr As Double, ByVal w As Double)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "H_LK", "Lee-Kesler Enthalpy", "Lee-Kesler Enthalpy Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
+            IObj?.Paragraphs.Add(String.Format("Reduced Pressure: {0}", Pr))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factor: {0}", w))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             Dim zs, zh, wh, Vr, z, DHresS, DHresH, DHres As Double
             Dim E, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
@@ -285,11 +383,31 @@ Namespace PropertyPackages.Auxiliary
 
             DHres = DHresS + w / wh * (DHresH - DHresS)
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("DHres: {0}", DHres))
+            IObj?.Paragraphs.Add(String.Format("DHresS: {0}", DHresS))
+            IObj?.Paragraphs.Add(String.Format("DHresH: {0}", DHresH))
+
+            IObj?.Close()
+
             Return DHres
 
         End Function
 
         Function S_LK(ByVal TIPO As String, ByVal Tr As Double, ByVal P As Double, ByVal Pc As Double, ByVal w As Double)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "S_LK", "Lee-Kesler Entropy", "Lee-Kesler Entropy Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressure: {0} Pa", Pc))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factor: {0}", w))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             Dim zs, zh, wh, Vr, z, DSresS, DSresH, DSres, Pr As Double
             Dim E, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
@@ -348,47 +466,35 @@ Namespace PropertyPackages.Auxiliary
 
             DSres = DSresS + w / wh * (DSresH - DSresS)
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("DSres: {0}", DSres))
+            IObj?.Paragraphs.Add(String.Format("DSresS: {0}", DSresS))
+            IObj?.Paragraphs.Add(String.Format("DSresH: {0}", DSresH))
+
+            IObj?.Close()
+
             Return DSres
 
         End Function
 
-        Function ESTIMAR_Vr(ByVal TIPO, ByVal Pr, ByVal Tr, ByVal B, ByVal C, ByVal D, ByVal c4, ByVal beta, ByVal gamma)
-
-            Dim cnt As Integer = 0
-            Dim Vr, Vrant, Vrant2, fi, fi_ant, fi_ant2, dfidVr As Double
-
-            fi_ant2 = 0
-            fi_ant = 0
-            fi = 0
-            If TIPO = "L" Then Vr = 0.05 Else Vr = 1.0# ' Tr / Pr * 0.3
-            Do
-                fi_ant2 = fi_ant
-                fi_ant = fi
-                fi = Pr * Vr / Tr - (1 + B / Vr + C / Vr ^ 2 + D / Vr ^ 5 + c4 / Tr ^ 3 / Vr ^ 2 * (beta + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
-                dfidVr = -B * Vr ^ -2 - 2 * C * Vr ^ -3 - 5 * D * Vr ^ -6 + _
-                        (-2 * beta * c4 * Vr ^ -3 / Tr ^ 3 * Math.Exp(-gamma * Vr ^ -2) + beta * c4 * Vr ^ -2 / Tr ^ 3 * Math.Exp(-gamma * Vr ^ -2) * (2 * gamma * Vr ^ -3)) + _
-                        (-4 * gamma * c4 / Tr ^ 3 * Vr ^ -5 * Math.Exp(-gamma * Vr ^ -2) + gamma * c4 * Tr ^ -3 * Vr ^ -4 * Math.Exp(-gamma * Vr ^ -2) * (2 * gamma * Vr ^ -3)) + _
-                        -Pr / Tr
-                dfidVr = -dfidVr
-
-                Vrant2 = Vrant
-                Vrant = Vr
-                Vr = Vr - fi / dfidVr
-
-                If Vr < 0 Then
-                    If TIPO = "L" Then Vr = 0.996 * Vrant Else Vr = Tr / Pr * 0.35
-                    fi_ant2 = 0
-                    fi_ant = 0
-                End If
-                If Math.Abs(fi - fi_ant2) = 0 Then Vr = Vrant * 0.999
-                cnt += 1
-            Loop Until Math.Abs(fi) < 0.001 Or cnt >= 100
-
-            Return Vr
-
-        End Function
-
         Function ESTIMAR_Vr2(ByVal TIPO, ByVal Pr, ByVal Tr, ByVal B, ByVal C, ByVal D, ByVal c4, ByVal beta, ByVal gamma)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "ESTIMAR_Vr2", "Lee-Kesler Reduced Volume", "Lee-Kesler Reduced Volume Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
+            IObj?.Paragraphs.Add(String.Format("Reduced Pressure: {0}", Pr))
+            IObj?.Paragraphs.Add(String.Format("B: {0}", B))
+            IObj?.Paragraphs.Add(String.Format("C: {0}", C))
+            IObj?.Paragraphs.Add(String.Format("D: {0}", D))
+            IObj?.Paragraphs.Add(String.Format("c4: {0}", c4))
+            IObj?.Paragraphs.Add(String.Format("beta: {0}", beta))
+            IObj?.Paragraphs.Add(String.Format("gamma: {0}", gamma))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             Dim i As Integer
 
@@ -495,11 +601,28 @@ Namespace PropertyPackages.Auxiliary
 
 Final3:
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("Reduced Volume: {0}", bbb))
+
+            IObj?.Close()
+
             Return bbb
 
         End Function
 
         Function CPCV_LK(ByVal TIPO As String, ByVal Tr As Double, ByVal Pr As Double, ByVal w As Double)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "S_LK", "Lee-Kesler Cp/Cv", "Lee-Kesler Cp/Cv Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
+            IObj?.Paragraphs.Add(String.Format("Reduced Pressure: {0}", Pr))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factor: {0}", w))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             Dim zs, zh, wh, Vr, z, DCvS, DCvH, DCpS, DCpH, DCv, DCp, dPdT, dPdV As Double
             Dim E, B, C, D, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
@@ -573,11 +696,29 @@ Final3:
             tmp2(0) = DCp
             tmp2(1) = DCv
 
+            IObj?.Close()
+
             Return tmp2
 
         End Function
 
-        Function CpCvR_LK(ByVal TIPO, ByVal T, ByVal P, ByVal Vz, ByVal VKij, ByVal Vzmass, ByVal VTc, ByVal VPc, ByVal VCpig, ByVal VMM, ByVal Vw, ByVal VZRa)
+        Function CpCvR_LK(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal Vzmass As Double(), ByVal VTc As Double(), ByVal VPc As Double(), ByVal VCpig As Double(), ByVal VMM As Double(), ByVal Vw As Double(), ByVal VZRa As Double())
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CpCvR_LK", "Lee-Kesler Cp/Cv", "Lee-Kesler Heat Capacity Calculation Routine")
+
+            PopulateWithDefaultText(IObj)
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             Dim n, R As Double
             Dim Tc(), Pc(), Vc(), w(), Tr() As Double
@@ -612,12 +753,16 @@ Final3:
                 i += 1
             Loop Until i = n + 1
 
+            IObj?.SetCurrent
+
             'mixture critical properties
             Dim Tcm, Pcm, wm As Double
             Dim obj = Me.MixCritProp_LK(Vz, VTc, VPc, Vw)
             Tcm = obj(0)
             Pcm = obj(1)
             wm = obj(3)
+
+            IObj?.SetCurrent
 
             Dim lkcp = Me.CPCV_LK(TIPO, T / Tcm, P / Pcm, wm)
 
@@ -626,10 +771,91 @@ Final3:
             tmp(1) = (lkcp(0) * R + Cpm_ig) / MMm
             tmp(2) = (lkcp(1) * R + Cpm_ig - R) / MMm
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+            IObj?.Paragraphs.Add(String.Format("Cp/Cv: {0}", tmp(0)))
+            IObj?.Paragraphs.Add(String.Format("Cp: {0} kJ/[kg.K]", tmp(1)))
+            IObj?.Paragraphs.Add(String.Format("Cv: {0} kJ/[kg.K]", tmp(2)))
+
+            IObj?.Close()
+
             CpCvR_LK = tmp
 
         End Function
 
+        Private Sub PopulateWithDefaultText(iobj As InspectorItem)
+
+            iobj?.Paragraphs.Add("Enthalpies, entropies and heat capacities are calculated by the 
+                            Lee-Kesler model through the following equations:")
+
+            iobj?.Paragraphs.Add("<m>\frac{H-H^{id}}{RT_{c}}=T_{r}(Z-1-\frac{b_{2}+2b_{3}/T_{r}+3b_{4}/T_{r}^{2}}{T_{r}V_{r}}-\frac{c_{2}-3c_{3}/T_{r}^{2}}{2T_{r}V_{r}^{2}}+\frac{d_{2}}{5T_{r}V_{r}^{2}}+3E)<m>")
+
+            iobj?.Paragraphs.Add("<m>\frac{S-S^{id}}{R}+\ln(\frac{P}{P_{0}})=\ln Z-\frac{b_{2}+b_{3}/T_{r}^{2}+2b_{4}/T_{r}^{3}}{V_{r}}-\frac{c_{1}-2c_{3}/T_{r}^{3}}{2V_{r}^{2}}+\frac{d_{1}}{5V_{r}^{5}}+2E<m>")
+
+            iobj?.Paragraphs.Add("<m>\frac{C_{v}-C_{v}^{id}}{R}=\frac{2(b_{3}+3b_{4}/T_{r})}{T_{r}^{2}V_{r}}-\frac{3c_{3}}{T_{r}^{3}V_{r}^{2}}-6E<m>")
+
+            iobj?.Paragraphs.Add("<m>\frac{C_{p}-C_{p}^{id}}{R}=\frac{C_{v}-C_{v}^{id}}{R}-1-T_{r}\frac{(\frac{\partial P_{r}}{\partial T_{r}^ {}})_{V_{r}}^{2}}{(\frac{\partial P_{r}}{\partial V_{r}})_{T_{r}}}<m>")
+
+            iobj?.Paragraphs.Add("<m>E=\frac{c_{4}}{2T_{r}^{3}\gamma}[\beta+1-(\beta+1+\frac{\gamma}{V_{r}^{2}})\exp(-\frac{\gamma}{V_{r}^{2}})]<m>")
+
+            iobj?.Paragraphs.Add("An iterative method is required to calculate <mi>V_{r}</mi>. The user 
+                            should always watch the values generated by DWSIM in order to 
+                            detect any issues in the compressibility factors generated by the 
+                            Lee-Kesler model.")
+
+            iobj?.Paragraphs.Add("<m>Z=\frac{P_{r}V_{r}}{T_{r}}=1+\frac{B}{V_{r}}+\frac{C}{V_{r}^{2}}+\frac{D}{V_{r}^{5}}+\frac{c_{4}}{T_{r}^{3}V_{r}^{2}}(\beta+\frac{\gamma}{V_{r}^{2}})\exp(-\frac{\gamma}{V_{r}^{2}})<m>")
+
+            iobj?.Paragraphs.Add("<m>B=b_{1}-b_{2}/T_{r}-b_{3}/T_{r}^{2}-b_{4}/T_{r}^{3}<m>")
+
+            iobj?.Paragraphs.Add("<m>C=c_{1}-c_{2}/T_{r}+c_{3}/T_{r}^{3}<m>")
+
+            iobj?.Paragraphs.Add("<m>D=d_{1}+d_{2}/T_{r}<m>")
+
+            iobj?.Paragraphs.Add("Each property must be calculated based in two fluids apart from 
+                            the main one, one simple and other for reference. For example, 
+                            for the compressibility factor,")
+
+            iobj?.Paragraphs.Add("<m>Z=Z^{(0)}+\frac{\omega}{\omega^{(r)}}(Z^{(r)}-Z^{(0)}),<m>")
+
+            iobj?.Paragraphs.Add("where the (0) superscript refers to the simple fluid while the (r)
+                             superscript refers to the reference fluid. This way, property 
+                            calculation by the Lee-Kesler model should follow the sequence 
+                            below (enthalpy calculation example):")
+
+            iobj?.Paragraphs.Add("1. <mi>V_{r}</mi> and <mi>Z^{(0)}</mi> are calculated for the simple fluid at the 
+                          fluid <mi>T_{r}</mi> and <mi>P_{r}</mi>. With the constants for the simple fluid, as shown in the table
+                          , <mi>(H-H^{0})/{RT}_{c}</mi> is calculated. This term is <mi>[(H-H^{0})/{RT}_{c}]^{(0)}</mi>
+                          . In this calculation, Z in the equation is <mi>Z^{(0)}</mi>.")
+
+            iobj?.Paragraphs.Add("2. Step 1 is repeated, using the same <mi>T_{r}</mi> and <mi>P_{r}</mi>, but 
+                          using the constants for the reference fluid as shown in table. 
+                          With these values, the equation allows the 
+                          calculation of <mi>[(H-H^{0})/{RT}_{c}]^{(r)}</mi>. In this 
+                          step, <mi>Z</mi> in the equation is <mi>Z^{(r)}</mi>.")
+
+            iobj?.Paragraphs.Add("3. Finally, one determines the residual enthalpy for the fluid of interest by")
+
+            iobj?.Paragraphs.Add("<m>[(H-H^{0})/{RT}_{c}] = [(H-H^{0})/{RT}_{c}]^{(0)}+\frac{\omega}{\omega^{(r)}}([(H-H^{0})/{RT}_{c}]^{(r)}-[(H-H^{0})/{RT}_{c}]^{(0)}),<m>")
+
+            iobj?.Paragraphs.Add("where <mi>\omega^{(r)}=0.3978</mi>.")
+
+            iobj?.Paragraphs.Add("<h4>Constants for the Lee-Kesler model</h4>")
+            iobj?.Paragraphs.Add("<table style='width:100%;text-align:center'>
+                            <tr><th>Constant</th><th>         Simple Fluid</th><th>    Reference Fluid</th></tr>  
+                            <tr><td>        <m>b_{1}<m> </td><td>          0.1181193 </td><td>        0.2026579 </td></tr>    
+                            <tr><td>        <m>b_{2}<m> </td><td>           0.265728  </td><td>       0.331511      </td></tr>
+                            <tr><td>        <m>b_{3}<m> </td><td>           0.154790 </td><td>        0.027655      </td></tr>
+                            <tr><td>        <m>b_{4}<m></td><td>            0.030323 </td><td>        0.203488      </td></tr>
+                            <tr><td>        <m>c_{1}<m>  </td><td>         0.0236744 </td><td>        0.0313385     </td></tr>
+                            <tr><td>        <m>c_{2}<m></td><td>           0.0186984  </td><td>       0.0503618     </td></tr>
+                            <tr><td>        <m>c_{3}<m></td><td>              0.0    </td><td>        0.016901      </td></tr>
+                            <tr><td>        <m>c_{4}<m></td><td>            0.042724 </td><td>        0.041577      </td></tr>
+                            <tr><td>  <m>d_{1}\times10^{4}<m></td><td>      0155488  </td><td>         0.48736      </td></tr>
+                            <tr><td>  <m>d_{2}\times10^{4}<m></td><td>      0.623689 </td><td>        0.0740336     </td></tr>
+                            <tr><td>        <m>\beta<m>  </td><td>          0.65392 </td><td>           1.226       </td></tr>
+                            <tr><td>       <m>\gamma<m>  </td><td>          0.060167  </td><td>        0.03754      </td></tr>
+                            </table>")
+
+        End Sub
 
     End Class
 

@@ -327,7 +327,7 @@ Namespace Streams
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", "Material Stream Calculation Routine", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", "Material Stream Calculation Routine", True)
 
             IObj?.Paragraphs.Add("The Material Stream Calculation routine is responsible to calculate the phase distribution and its properties according to the specifications.")
 

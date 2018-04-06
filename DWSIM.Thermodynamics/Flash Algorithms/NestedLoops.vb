@@ -73,7 +73,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine")
 
             IObj?.Paragraphs.Add("This routine tries to find the compositions of a liquid and a vapor phase at equilibrium by solving the Rachford-Rice equation using a newton convergence approach.")
 
@@ -274,7 +274,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PT", "PT Flash Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step")
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PT", "PT Flash Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step")
 
                 IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 
@@ -402,7 +402,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PH", Name & " (PH Flash)", "Pressure-Enthalpy Flash Algorithm Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash)", "Pressure-Enthalpy Flash Algorithm Routine")
 
             IObj?.Paragraphs.Add("The PH Flash calculates the equilibrium temperature and phase distribution given the mixture's pressure and overall enthalpy.")
 
@@ -427,7 +427,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PS", Name & " (PS Flash)", "Pressure-Entropy Flash Algorithm Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", Name & " (PS Flash)", "Pressure-Entropy Flash Algorithm Routine")
 
             IObj?.Paragraphs.Add("The PS Flash calculates the equilibrium temperature and phase distribution given the mixture's pressure and overall entropy.")
 
@@ -448,7 +448,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PH", Name & " (PH Flash - Fast Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Fast Mode)")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash - Fast Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Fast Mode)")
 
             IObj?.Paragraphs.Add("The PH Flash in fast mode uses two nested loops (hence the name) to calculate temperature and phase distribution. 
                                     The external one converges the temperature, while the internal one finds the phase distribution for the current temperature estimate in the external loop.
@@ -516,7 +516,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                    Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PH", "PH Flash Newton Iteration", "Pressure-Enthalpy Flash Algorithm (Fast Mode) Convergence Iteration Step")
+                    Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PH", "PH Flash Newton Iteration", "Pressure-Enthalpy Flash Algorithm (Fast Mode) Convergence Iteration Step")
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
@@ -617,7 +617,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PH", Name & " (PH Flash - Normal Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Normal Mode)")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash - Normal Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Normal Mode)")
 
             IObj?.Paragraphs.Add("The PH Flash in normal mode calculates the enthalpy at mixture bubble and dew points, in order to determine the state of the mixture. 
                                   It then converges the temperature or vapor fraction depending on the estimated state.")
@@ -855,7 +855,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PS", Name & " (PS Flash - Fast Mode)", "Pressure-Entropy Flash Algorithm Routine (Fast Mode)")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", Name & " (PS Flash - Fast Mode)", "Pressure-Entropy Flash Algorithm Routine (Fast Mode)")
 
             IObj?.Paragraphs.Add("The PS Flash in fast mode uses two nested loops (hence the name) to calculate temperature and phase distribution. 
                                     The external one converges the temperature, while the internal one finds the phase distribution for the current temperature estimate in the external loop.
@@ -923,7 +923,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                    Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PS", "PS Flash Newton Iteration", "Pressure-Entropy Flash Algorithm (Fast Mode) Convergence Iteration Step")
+                    Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PS", "PS Flash Newton Iteration", "Pressure-Entropy Flash Algorithm (Fast Mode) Convergence Iteration Step")
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
@@ -1031,7 +1031,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PS", Name & " (PS Flash - Normal Mode)", "Pressure-Entropy Flash Algorithm Routine (Normal Mode)")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", Name & " (PS Flash - Normal Mode)", "Pressure-Entropy Flash Algorithm Routine (Normal Mode)")
 
             IObj?.Paragraphs.Add("The PS Flash in normal mode calculates the entropy at mixture bubble and dew points, in order to determine the state of the mixture. 
                                   It then converges the temperature or vapor fraction depending on the estimated state.")
@@ -1268,7 +1268,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_TV", Name & " (TV Flash)", "Temperature/Vapor Fraction Flash Algorithm Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_TV", Name & " (TV Flash)", "Temperature/Vapor Fraction Flash Algorithm Routine")
 
             IObj?.Paragraphs.Add("This routine calculates the pressure at which the specified mixture composition finds itself in vapor-liquid equilibrium with a vapor phase mole fraction equal to V at the specified T.")
 
@@ -1419,7 +1419,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                    Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Newton Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+                    Inspector.Host.CheckAndAdd(IObj2, "", "Flash_TV", "TV Flash Newton Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Iteration Step")
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of P, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 
@@ -1436,7 +1436,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                        Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Inner Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+                        Inspector.Host.CheckAndAdd(IObj3, "", "Flash_TV", "TV Flash Inner Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
 
                         IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of P to converge x and y.", ecount))
 
@@ -1579,7 +1579,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Newton Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_TV", "TV Flash Newton Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Iteration Step")
 
                 IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of P, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 
@@ -1593,7 +1593,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                    Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_TV", "TV Flash Inner Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+                    Inspector.Host.CheckAndAdd(IObj3, "", "Flash_TV", "TV Flash Inner Iteration", "Temperature-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
 
                     IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of P to converge x and y.", ecount))
 
@@ -1764,7 +1764,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Flash_PV", Name & " (PV Flash)", "Pressure/Vapor Fraction Flash Algorithm Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PV", Name & " (PV Flash)", "Pressure/Vapor Fraction Flash Algorithm Routine")
 
             IObj?.Paragraphs.Add("This routine calculates the temperature at which the specified mixture composition finds itself in vapor-liquid equilibrium with a vapor phase mole fraction equal to V at the specified P.")
 
@@ -1902,7 +1902,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                    Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Newton Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+                    Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PV", "PV Flash Newton Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Iteration Step")
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of T, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 
@@ -1919,7 +1919,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                        Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Inner Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+                        Inspector.Host.CheckAndAdd(IObj3, "", "Flash_PV", "PV Flash Inner Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
 
                         IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of T to converge x and y.", ecount))
 
@@ -2033,7 +2033,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Newton Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Iteration Step")
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PV", "PV Flash Newton Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Iteration Step")
 
                 IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of T, y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 
@@ -2047,7 +2047,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                    Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Flash_PV", "PV Flash Inner Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
+                    Inspector.Host.CheckAndAdd(IObj3, "", "Flash_PV", "PV Flash Inner Iteration", "Pressure-Vapor Fraction Flash Algorithm Convergence Inner Iteration Step")
 
                     IObj3?.Paragraphs.Add(String.Format("This is the inner convergence loop iteration #{0}. DWSIM will use the current value of T to converge x and y.", ecount))
 

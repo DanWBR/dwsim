@@ -316,6 +316,14 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & " (Phase Properties)", "Property Package Phase Properties Calculation Routine")
+
+            IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase properties of the currently associated Material Stream.")
+
+            IObj?.Paragraphs.Add("Specified Phase: " & [Enum].GetName(Phase.GetType, Phase))
+
             Dim result As Double
             Dim resultObj As Object = Nothing
             Dim dwpl As Phase
@@ -369,7 +377,9 @@ Namespace PropertyPackages
                     result = 0
                 End If
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = result
+                IObj?.SetCurrent
                 Me.DW_CalcCompVolFlow(phaseID)
+                IObj?.SetCurrent
                 Me.DW_CalcCompFugCoeff(Phase)
 
             End If
@@ -437,6 +447,7 @@ Namespace PropertyPackages
                     mw = Me.AUX_MMM(Phase)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = mw
 
+                    IObj?.SetCurrent
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         Dim val As Double
                         val = m_pr.Z_PR(T, P, RET_VMOL(Phase), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
@@ -452,27 +463,33 @@ Namespace PropertyPackages
 
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = dens
 
+                    IObj?.SetCurrent
                     h = Me.m_pr.H_PR_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, dwpl))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = h
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = h * mw
 
+                    IObj?.SetCurrent
                     s = Me.m_pr.S_PR_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, dwpl))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = s
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = s * mw
 
+                    IObj?.SetCurrent
                     z = Me.m_pr.Z_PR(T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                         z -= Me.AUX_CM(dwpl) / 8.314 / T * P
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = z
 
+                    IObj?.SetCurrent
                     resultObj = Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VMAS(dwpl), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = resultObj(1)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = resultObj(2)
 
+                    IObj?.SetCurrent
                     tc = Me.AUX_CONDTL(T)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = tc
 
+                    IObj?.SetCurrent
                     visc = Me.AUX_LIQVISCm(T)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = visc
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = visc / dens
@@ -525,30 +542,37 @@ Namespace PropertyPackages
                     mw = Me.AUX_MMM(Phase)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = mw
 
+                    IObj?.SetCurrent
                     dens = Me.AUX_VAPDENS(T, P)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = dens
 
+                    IObj?.SetCurrent
                     h = Me.m_pr.H_PR_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, Phase.Vapor))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = h
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = h * mw
 
+                    IObj?.SetCurrent
                     s = Me.m_pr.S_PR_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = s
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = s * mw
 
+                    IObj?.SetCurrent
                     z = Me.m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                         z -= Me.AUX_CM(Phase.Vapor) / 8.314 / T * P
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = z
 
+                    IObj?.SetCurrent
                     resultObj = Auxiliary.PROPS.CpCvR("V", T, P, RET_VMOL(PropertyPackages.Phase.Vapor), RET_VKij(), RET_VMAS(PropertyPackages.Phase.Vapor), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = resultObj(1)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = resultObj(2)
 
+                    IObj?.SetCurrent
                     tc = Me.AUX_CONDTG(T, P)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = tc
 
+                    IObj?.SetCurrent
                     visc = Me.AUX_VAPVISCm(T, Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault, Me.AUX_MMM(Phase))
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = visc
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = visc / dens
@@ -557,11 +581,13 @@ Namespace PropertyPackages
 
             ElseIf phaseID = 1 Then
 
+                IObj?.SetCurrent
                 DW_CalcLiqMixtureProps()
 
 
             Else
 
+                IObj?.SetCurrent
                 DW_CalcOverallProps()
 
             End If
@@ -575,6 +601,7 @@ Namespace PropertyPackages
                 'Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = result
             End If
 
+            IObj?.Close()
 
         End Sub
 
@@ -727,7 +754,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEnthalpy", "Peng-Robinson EOS Enthalpy", "Property Package Enthalpy Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEnthalpy", "Peng-Robinson EOS Enthalpy", "Property Package Enthalpy Calculation Routine")
 
             IObj?.SetCurrent()
 
@@ -771,7 +798,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEntropy", "Peng-Robinson EOS Entropy", "Property Package Entropy Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEntropy", "Peng-Robinson EOS Entropy", "Property Package Entropy Calculation Routine")
 
             IObj?.SetCurrent()
 
@@ -836,7 +863,7 @@ Namespace PropertyPackages
             If Not Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") Then Me.Parameters.Add("PP_USE_EOS_LIQDENS", 0)
 
             Select Case phase
-                Case phase.Liquid
+                Case Phase.Liquid
                     key = "1"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -846,7 +873,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case phase.Aqueous
+                Case Phase.Aqueous
                     key = "6"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -856,7 +883,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case phase.Liquid1
+                Case Phase.Liquid1
                     key = "3"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -866,7 +893,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case phase.Liquid2
+                Case Phase.Liquid2
                     key = "4"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -876,7 +903,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case phase.Liquid3
+                Case Phase.Liquid3
                     key = "5"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -886,10 +913,10 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case phase.Vapor
+                Case Phase.Vapor
                     partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.01)
                     key = "2"
-                Case phase.Solid
+                Case Phase.Solid
                     partvol = New ArrayList
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                         partvol.Add(0.0#)
@@ -923,7 +950,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcFugCoeff", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcFugCoeff", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
 
             IObj?.SetCurrent()
 

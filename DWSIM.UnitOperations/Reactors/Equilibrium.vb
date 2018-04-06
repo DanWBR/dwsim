@@ -398,7 +398,7 @@ Namespace Reactors
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
 
             IObj?.SetCurrent
 
@@ -680,7 +680,7 @@ Namespace Reactors
 
                 _IObj = IObj2
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Calculate", "Equilibrium Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
+                Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", "Equilibrium Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
 
                 'solve using newton's method
 
@@ -698,7 +698,7 @@ Namespace Reactors
 
                     _IObj = IObj3
 
-                    Inspector.Host.CheckAndAdd(IObj3, New StackFrame(1).GetMethod().Name, "Calculate", "Equilibrium Reactor Reaction Extents Convergence Loop Iteration #" & niter, "", True)
+                    Inspector.Host.CheckAndAdd(IObj3, "", "Calculate", "Equilibrium Reactor Reaction Extents Convergence Loop Iteration #" & niter, "", True)
 
                     IObj3?.SetCurrent
 

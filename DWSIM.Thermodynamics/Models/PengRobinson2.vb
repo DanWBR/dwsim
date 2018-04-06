@@ -329,7 +329,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFug", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcLnFug", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
 
             IObj?.SetCurrent()
 
@@ -353,7 +353,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "Peng-Robinson EOS Fugacity Coefficient (CPU)", "Peng-Robinson EOS Fugacity Coefficient Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcLnFugCPU", "Peng-Robinson EOS Fugacity Coefficient (CPU)", "Peng-Robinson EOS Fugacity Coefficient Calculation Routine")
 
             IObj?.Paragraphs.Add("The Peng-Robinson equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
                                     which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
@@ -729,7 +729,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcZ", "Peng-Robinson EOS Compressibility Factor", "Peng-Robinson EOS Compressibility Factor Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcZ", "Peng-Robinson EOS Compressibility Factor", "Peng-Robinson EOS Compressibility Factor Calculation Routine")
 
             IObj?.Paragraphs.Add("The compressibility factor (liquid or vapor) can be obtained from the equation")
             IObj?.Paragraphs.Add("<math>Z^ {3} - (1 - b)Z^{2}+(A-3B^{2}-2B)Z-(AB-B^{2}-2B)=0,</math>")

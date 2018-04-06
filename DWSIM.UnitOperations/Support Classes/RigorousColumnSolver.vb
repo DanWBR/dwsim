@@ -44,7 +44,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "TDMASolve", "Tridiagonal Matrix Algorithm", "Tomich TDM Solver", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "TDMASolve", "Tridiagonal Matrix Algorithm", "Tomich TDM Solver", True)
 
             IObj?.Paragraphs.Add("The key to the BP and SR tearing procedures is the tridiagonal matrix, which results from a modified form of the M equations, when they are torn from the other equations by selecting Tj and Vj as the tear variables, leaving the modified M equations linear in the unknown liquid mole fractions.")
 
@@ -252,7 +252,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "FunctionValue", "Inside-Out (IO) Method Modified MESH Equations Calculator", "Russell IO Method for Distillation, Absorption and Stripping", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "FunctionValue", "Inside-Out (IO) Method Modified MESH Equations Calculator", "Russell IO Method for Distillation, Absorption and Stripping", True)
 
             IObj?.SetCurrent()
 
@@ -771,7 +771,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Inside-Out (IO) Method", "Russell Inside-Out (IO) Method for Distillation Columns", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Inside-Out (IO) Method", "Russell Inside-Out (IO) Method for Distillation Columns", True)
 
             IObj?.Paragraphs.Add("In the BP, SR, and NR methods, the major computational effort is expended in calculating K-values and enthalpies when rigorous thermodynamic-property models are utilized, because property calculations are made at each iteration. Furthermore, at each iteration, derivatives are required of: (1) all properties with respect to temperature and compositions of both phases for the NR method; (2) K-values with respect to temperature for the BP method, unless Muller’s method is used, and (3) vapor and liquid enthalpies with respect to temperature for the SR method.")
 
@@ -1341,7 +1341,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Solve", "IO External Loop Iteration", "Inside-Out External Loop Convergence Iteration Step")
+                Inspector.Host.CheckAndAdd(IObj2, "", "Solve", "IO External Loop Iteration", "Inside-Out External Loop Convergence Iteration Step")
 
                 IObj2?.Paragraphs.Add(String.Format("This is the IO external convergence loop iteration #{0}.", ec))
 
@@ -1977,7 +1977,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Bubble-Point (BP) Method", "Wang-Henke Bubble-Point (BP) Method for Distillation Columns", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Bubble-Point (BP) Method", "Wang-Henke Bubble-Point (BP) Method for Distillation Columns", True)
 
             IObj?.SetCurrent()
 
@@ -2225,7 +2225,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Solve", "Bubble-Point (BP) Internal Loop #" & ic, "Wang-Henke Bubble-Point (BP) Method for Distillation", True)
+                Inspector.Host.CheckAndAdd(IObj2, "", "Solve", "Bubble-Point (BP) Internal Loop #" & ic, "Wang-Henke Bubble-Point (BP) Method for Distillation", True)
 
                 Dim il_err As Double = 0.0#
                 Dim il_err_ant As Double = 0.0#
@@ -2681,7 +2681,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Sum-Rates (SR) Method", "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Sum-Rates (SR) Method", "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
 
             IObj?.SetCurrent()
 
@@ -2832,7 +2832,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, New StackFrame(1).GetMethod().Name, "Solve", "Sum-Rates (SR) Internal Loop #" & ic, "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
+                Inspector.Host.CheckAndAdd(IObj2, "", "Solve", "Sum-Rates (SR) Internal Loop #" & ic, "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
 
                 Dim il_err As Double = 0.0#
                 Dim il_err_ant As Double = 0.0#
@@ -3287,7 +3287,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "FunctionValue", "Simultaneous Correction (SC) Method MEH Equations Calculator", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "FunctionValue", "Simultaneous Correction (SC) Method MEH Equations Calculator", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
 
             IObj?.SetCurrent()
 
@@ -3788,7 +3788,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Solve", "Simultaneous Correction (SC) Method", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Simultaneous Correction (SC) Method", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
 
             IObj?.SetCurrent()
 

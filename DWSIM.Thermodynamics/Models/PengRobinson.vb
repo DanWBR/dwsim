@@ -191,7 +191,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "Z_PR", "Peng-Robinson EOS Compressibility Factor", "Peng-Robinson EOS Compressibility Factor Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "Z_PR", "Peng-Robinson EOS Compressibility Factor", "Peng-Robinson EOS Compressibility Factor Calculation Routine")
 
             IObj?.Paragraphs.Add("The compressibility factor (liquid or vapor) can be obtained from the equation")
             IObj?.Paragraphs.Add("<math>Z^ {3} - (1 - b)Z^{2}+(A-3B^{2}-2B)Z-(AB-B^{2}-2B)=0,</math>")
@@ -414,7 +414,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "H_PR_MIX_CPU", "Peng-Robinson EOS Enthalpy", "Peng-Robinson EOS Enthalpy Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "H_PR_MIX_CPU", "Peng-Robinson EOS Enthalpy", "Peng-Robinson EOS Enthalpy Calculation Routine")
 
             IObj?.Paragraphs.Add("The Peng-Robinson equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
                                     which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
@@ -567,7 +567,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "CalcLnFugCPU", "Peng-Robinson Entropy", "Peng-Robinson EOS Entropy Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcLnFugCPU", "Peng-Robinson Entropy", "Peng-Robinson EOS Entropy Calculation Routine")
 
             IObj?.Paragraphs.Add("The Peng-Robinson equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
                                     which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 

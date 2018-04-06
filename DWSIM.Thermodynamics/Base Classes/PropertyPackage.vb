@@ -867,7 +867,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcKvalue", ComponentName & " K-value calculation (Property Package)", "Property Package K-value Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcKvalue", ComponentName & " K-value calculation (Property Package)", "Property Package K-value Calculation Routine")
 
             IObj?.Paragraphs.Add("This is the K-value calculation routine which is called back from the Flash Algorithm during an equilibrium calculation. It is calculated for each compound as")
 
@@ -1749,7 +1749,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, New StackFrame(1).GetMethod().Name, "DW_CalcEquilibrium", ComponentName & " (Equilibrium)", "Property Package Equilibrium Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEquilibrium", ComponentName & " (Equilibrium)", "Property Package Equilibrium Calculation Routine")
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
@@ -1778,7 +1778,7 @@ Namespace PropertyPackages
             H = Me.CurrentMaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
             S = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
 
-            IObj?.Paragraphs.Add("This is the routine responsible to calculate the phase distribution of the currently associated Material Stream, using the specified Flash Algorithm.")
+            IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase distribution in the currently associated Material Stream, using the specified Flash Algorithm.")
 
             IObj?.Paragraphs.Add("The first thing that the routine does is to erase all previously calculated phase distribution and properties on the stream, if they exist.")
 
@@ -2344,6 +2344,7 @@ Namespace PropertyPackages
                                 ElseIf xs = 0.0# Then
                                     LoopVarF = H
                                     LoopVarX = P
+                                    IObj?.SetCurrent()
                                     T = brentsolverT.BrentOpt(Me.AUX_TFM(Phase.Mixture), 2000, 20, 0.0001, 1000, Nothing)
                                     IObj?.SetCurrent()
                                     If xv = 0.0# Then
@@ -2971,29 +2972,37 @@ redirect2:                      IObj?.SetCurrent()
         End Sub
 
         Private Function EnthalpyTx(ByVal x As Double, ByVal otherargs As Object) As Double
-
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "EnthalpyTx", "Single-Compound Enthalpy Calculation", "Temperature Loop", True)
             Dim er As Double = LoopVarF - Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), x, LoopVarX, LoopVarState)
+            IObj?.Close()
             Return er
 
         End Function
 
         Private Function EnthalpyPx(ByVal x As Double, ByVal otherargs As Object) As Double
-
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "EnthalpyPx", "Single-Compound Enthalpy Calculation", "Pressure Loop", True)
             Dim er As Double = LoopVarF - Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), LoopVarX, x, LoopVarState)
+            IObj?.Close()
             Return er
 
         End Function
 
         Private Function EntropyTx(ByVal x As Double, ByVal otherargs As Object) As Double
-
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "EntropyTx", "Single-Compound Enthalpy Calculation", "Temperature Loop", True)
             Dim er As Double = LoopVarF - Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), x, LoopVarX, LoopVarState)
+            IObj?.Close()
             Return er
 
         End Function
 
         Private Function EntropyPx(ByVal x As Double, ByVal otherargs As Object) As Double
-
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "EntropyPx", "Single-Compound Entropy Calculation", "Pressure Loop", True)
             Dim er As Double = LoopVarF - Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), LoopVarX, x, LoopVarState)
+            IObj?.Close()
             Return er
 
         End Function
