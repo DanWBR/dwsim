@@ -103,12 +103,11 @@ Public Class InspectorItem
                                 font-size: 100%;
                             }
                         </style>")
-        stb.AppendLine("<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>")
 
         If GlobalSettings.Settings.RunningPlatform = GlobalSettings.Settings.Platform.Windows Then
             stb.AppendLine("<script type='text/javascript' async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>")
         Else
-            stb.AppendLine("<script type='text/x-mathjax-config'> MathJax.Hub.Config({ 'CommonHTML': { scale: 100, linebreaks: { automatic: true, width: 'container' } }, SVG: { linebreaks: { automatic:true, , width: 'container' } }, displayAlign: 'left' }); </script>")
+            stb.AppendLine("<script type='text/x-mathjax-config'> MathJax.Hub.Config({ 'CommonHTML': { scale: 100, linebreaks: { automatic: true } }, SVG: { linebreaks: { automatic:true } }, displayAlign: 'left' }); </script>")
             stb.AppendLine("<script type='text/javascript' async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML'></script>")
         End If
 

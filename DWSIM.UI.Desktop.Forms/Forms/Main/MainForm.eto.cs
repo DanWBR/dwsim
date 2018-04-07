@@ -50,7 +50,7 @@ namespace DWSIM.UI
                     ClientSize = new Size(690, 420);
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
-                    ClientSize = new Size(690, 365);
+                    ClientSize = new Size(690, 370);
                     break;
                 case GlobalSettings.Settings.Platform.Mac:
                     ClientSize = new Size(690, 350);
@@ -322,6 +322,12 @@ namespace DWSIM.UI
         {
             Application.Instance.Invoke(() =>
             {
+                switch (GlobalSettings.Settings.RunningPlatform())
+                {
+                    case GlobalSettings.Settings.Platform.Windows:
+                        ClientSize = new Size(700, 400);
+                        break;
+                }
                 var splash = new SplashScreen { MainFrm = this };
                 splash.Show();
             });

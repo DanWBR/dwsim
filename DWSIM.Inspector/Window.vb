@@ -23,14 +23,14 @@ Public Class Window
 
         Dim SetsBox As New ListBox With {.Height = 100}
 
-        Dim SetsLabel = New Label With {.Text = "Available Solution Report Sets", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
+        Dim SetsLabel = New Label With {.VerticalAlignment = VerticalAlignment.Center, .Text = "Available Solution Report Sets", .Font = SystemFonts.Bold(), .TextColor = Colors.White, .Height = 20}
         SetsLabel.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())
 
         Dim leftcontainer, rightcontainer As New TableLayout
 
         leftcontainer.Rows.Add(New TableRow(SetsLabel))
         leftcontainer.Rows.Add(New TableRow(SetsBox))
-        leftcontainer.Rows.Add(New Label With {.Text = "Reports", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
+        leftcontainer.Rows.Add(New Label With {.VerticalAlignment = VerticalAlignment.Center, .Text = "Reports", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
         leftcontainer.Padding = New Padding(5, 5, 5, 5)
         leftcontainer.Spacing = New Size(10, 10)
         leftcontainer.Width = 350
@@ -43,7 +43,7 @@ Public Class Window
 
         leftcontainer.Rows.Add(itemSelector)
 
-        rightcontainer.Rows.Add(New Label With {.Text = "Selected Report", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
+        rightcontainer.Rows.Add(New Label With {.VerticalAlignment = VerticalAlignment.Center, .Text = "Selected Report", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
         rightcontainer.Padding = New Padding(5, 5, 5, 5)
         rightcontainer.Spacing = New Size(10, 10)
 
@@ -51,7 +51,7 @@ Public Class Window
 
         rightcontainer.Rows.Add(New TableRow(currentItemViewer))
 
-        Dim lblTools As New Label() With {.Text = "Inspector Tools", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White}
+        Dim lblTools As New Label() With {.VerticalAlignment = VerticalAlignment.Center, .Text = "Inspector Tools", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White}
         Dim btnExportHTML As New Button() With {.Text = "Export Selected Item to HTML File"}
 
         AddHandler btnExportHTML.Click, Sub()
