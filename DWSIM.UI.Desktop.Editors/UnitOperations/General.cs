@@ -1880,13 +1880,13 @@ namespace DWSIM.UI.Desktop.Editors
                     int posp = 0;
                     switch (pipe.Specification)
                     {
-                        case Pipe.specmode.Length:
+                        case Pipe.Specmode.Length:
                             posp = 0;
                             break;
-                        case Pipe.specmode.OutletPressure:
+                        case Pipe.Specmode.OutletPressure:
                             posp = 1;
                             break;
-                        case Pipe.specmode.OutletTemperature:
+                        case Pipe.Specmode.OutletTemperature:
                             posp = 2;
                             break;
                     }
@@ -1895,13 +1895,13 @@ namespace DWSIM.UI.Desktop.Editors
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
-                                pipe.Specification = Pipe.specmode.Length;
+                                pipe.Specification = Pipe.Specmode.Length;
                                 break;
                             case 1:
-                                pipe.Specification = Pipe.specmode.OutletPressure;
+                                pipe.Specification = Pipe.Specmode.OutletPressure;
                                 break;
                             case 2:
-                                pipe.Specification = Pipe.specmode.OutletTemperature;
+                                pipe.Specification = Pipe.Specmode.OutletTemperature;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());

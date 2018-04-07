@@ -63,13 +63,13 @@ Namespace UnitOperations
 
         Protected m_includejteffect As Boolean = False
 
-        Public Enum specmode
+        Public Enum Specmode
             Length = 0
             OutletPressure = 1
             OutletTemperature = 2
         End Enum
 
-        Public Property Specification As specmode = specmode.Length
+        Public Property Specification As Specmode = Specmode.Length
         Public Property OutletPressure As Double = 101325
         Public Property OutletTemperature As Double = 298.15
 
@@ -1642,6 +1642,8 @@ Final3:     T = bbb
                                 Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Resultados(sindex).LiqVel)
                             Case "VelocityVapor"
                                 Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Resultados(sindex).VapVel)
+                            Case Else
+                                Return 0.0
                         End Select
                     ElseIf prop.Contains("HydraulicSegment") Then
                         Dim skey As Integer = prop.Split(",")(1)
@@ -1950,6 +1952,8 @@ Final3:     T = bbb
                             Return su.velocity
                         Case "VelocityVapor"
                             Return su.velocity
+                        Case Else
+                            Return 0.0
                     End Select
                 ElseIf prop.Contains("HydraulicSegment") Then
                     Dim skey As Integer = prop.Split(",")(1)
