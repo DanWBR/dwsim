@@ -22,14 +22,14 @@ Public Class Window
 
         Dim SetsBox As New ListBox With {.Height = 100}
 
-        Dim SetsLabel = New Label With {.Text = "Available Solution Sets", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
+        Dim SetsLabel = New Label With {.Text = "Available Solution Report Sets", .Font = SystemFonts.Bold(), .VerticalAlignment = VerticalAlignment.Bottom, .TextColor = Colors.White, .Height = 20}
         SetsLabel.Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())
 
         Dim leftcontainer, rightcontainer As New TableLayout
 
         leftcontainer.Rows.Add(New TableRow(SetsLabel))
         leftcontainer.Rows.Add(New TableRow(SetsBox))
-        leftcontainer.Rows.Add(New Label With {.Text = "Items", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
+        leftcontainer.Rows.Add(New Label With {.Text = "Reports", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
         leftcontainer.Padding = New Padding(5, 5, 5, 5)
         leftcontainer.Spacing = New Size(10, 10)
         leftcontainer.Width = 350
@@ -42,7 +42,7 @@ Public Class Window
 
         leftcontainer.Rows.Add(itemSelector)
 
-        rightcontainer.Rows.Add(New Label With {.Text = "Selected Item", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
+        rightcontainer.Rows.Add(New Label With {.Text = "Selected Report", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
         rightcontainer.Padding = New Padding(5, 5, 5, 5)
         rightcontainer.Spacing = New Size(10, 10)
 
@@ -78,10 +78,10 @@ Public Class Window
                 With f
 
                     .Topmost = True
-                    .Title = "Loading Inspector Items"
+                    .Title = "Loading Inspector Reports"
 
                     progressSpinner = New ProgressBar With {.Width = 350, .Height = 20, .Enabled = True}
-                    loadingtext = New Label With {.Text = "Loading items..."}
+                    loadingtext = New Label With {.Text = "Loading reports..."}
                     loadingtext.VerticalAlignment = VerticalAlignment.Center
                     loadingtext.TextAlignment = TextAlignment.Center
                     btnCancel = New Button With {.Text = "Cancel"}
@@ -142,7 +142,7 @@ Public Class Window
                                               Dim titem = New TreeGridItem() With {.Values = {item.Name + " (" + item.TimeTaken.TotalMilliseconds.ToString("N0") + " ms)"}, .Tag = item.ID}
                                               tvc.Add(titem)
                                               Application.Instance.Invoke(Sub()
-                                                                              loadingtext.Text = String.Format("Loading items... ({0}/{1})", i, allitems.Count)
+                                                                              loadingtext.Text = String.Format("Loading reports... ({0}/{1})", i, allitems.Count)
                                                                               progressSpinner.Value = i / allitems.Count * 100
                                                                               content.ParentWindow.Invalidate()
                                                                           End Sub)
@@ -157,7 +157,7 @@ Public Class Window
                                                       DirectCast(parent, TreeGridItem).Children.Add(titem2)
                                                   End If
                                                   Application.Instance.Invoke(Sub()
-                                                                                  loadingtext.Text = String.Format("Loading items... ({0}/{1})", i, allitems.Count)
+                                                                                  loadingtext.Text = String.Format("Loading reports... ({0}/{1})", i, allitems.Count)
                                                                                   progressSpinner.Value = i / allitems.Count * 100
                                                                                   content.ParentWindow.Invalidate()
                                                                               End Sub)

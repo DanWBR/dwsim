@@ -331,6 +331,8 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("5. Rate Shell and Tube exchanger: exchanger geometry information.")
 
+            IObj?.Paragraphs.Add("<h2>Inlet Streams</h2>")
+
             Dim Ti1, Ti2, w1, w2, A, Tc1, Th1, Wc, Wh, P1, P2, Th2, Tc2, U As Double
             Dim Pc1, Ph1, Pc2, Ph2, DeltaHc, DeltaHh, H1, H2, Hc1, Hh1, Hc2, Hh2, CPC, CPH As Double
             Dim StIn0, StIn1, StOut0, StOut1, StInCold, StInHot, StOutHot, StOutCold As MaterialStream
@@ -398,6 +400,36 @@ Namespace UnitOperations
                 StOutHot = StOut0
             End If
 
+            IObj?.Paragraphs.Add(String.Format("<h3>Cold Stream: {0}</h3>", StInCold.GraphicObject.Tag))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", StInCold.Phases(0).Properties.temperature.GetValueOrDefault))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", StInCold.Phases(0).Properties.pressure.GetValueOrDefault))
+            IObj?.Paragraphs.Add(String.Format("Mass Flow: {0} kg/s", StInCold.Phases(0).Properties.massflow.GetValueOrDefault))
+            IObj?.Paragraphs.Add(String.Format("Specific Enthalpy: {0} kJ/kg", StInCold.Phases(0).Properties.enthalpy.GetValueOrDefault))
+
+
+            IObj?.Paragraphs.Add(String.Format("<h3>Hot Stream: {0}</h3>", StInHot.GraphicObject.Tag))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", StInHot.Phases(0).Properties.temperature.GetValueOrDefault))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", StInHot.Phases(0).Properties.pressure.GetValueOrDefault))
+            IObj?.Paragraphs.Add(String.Format("Mass Flow: {0} kg/s", StInHot.Phases(0).Properties.massflow.GetValueOrDefault))
+            IObj?.Paragraphs.Add(String.Format("Specific Enthalpy: {0} kJ/kg", StInHot.Phases(0).Properties.enthalpy.GetValueOrDefault))
+
+            IObj?.Paragraphs.Add("<h2>Maximum Heat Exchange</h2>")
+
+            IObj?.Paragraphs.Add("Calculating maximum theoretical heat exchange...")
+
+            IObj?.Paragraphs.Add("The maximum theoretical heat exchange is calculated as the smallest value from")
+
+            IObj?.Paragraphs.Add("<m>Q_{max,hot}=W_{hot}(H_{hot,in}-H_{hot,c})</m>")
+            IObj?.Paragraphs.Add("<m>Q_{max,cold}=W_{cold}(H_{cold,in}-H_{cold,h})</m>")
+
+            IObj?.Paragraphs.Add("where")
+            IObj?.Paragraphs.Add("<mi>H_{hot,in}</mi> is the hot stream inlet enthalpy")
+            IObj?.Paragraphs.Add("<mi>H_{hot,c}</mi> is the hot stream enthalpy at cold stream inlet temperature")
+            IObj?.Paragraphs.Add("<mi>H_{cold,in}</mi> is the cold stream inlet enthalpy ")
+            IObj?.Paragraphs.Add("<mi>H_{cold,h}</mi> is the cold stream enthalpy at hot stream inlet temperature")
+
             Pc2 = Pc1 - ColdSidePressureDrop
             Ph2 = Ph1 - HotSidePressureDrop
 
@@ -420,6 +452,8 @@ Namespace UnitOperations
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHh = Wh * (Hh1 - HHx) 'kW
 
+            IObj?.Paragraphs.Add("<mi>Q_{hot}</mi> = " & DeltaHh & " kW")
+
             If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate cold stream outlet enthalpy... P = {0} Pa, T = {1} K", Pc2, Th1))
             tmpstr = StInCold.Clone
             tmpstr.PropertyPackage = StInCold.PropertyPackage.Clone
@@ -434,7 +468,11 @@ Namespace UnitOperations
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHc = Wc * (HHx - Hc1) 'kW
 
+            IObj?.Paragraphs.Add("<mi>Q_{cold}</mi> = " & DeltaHc & " kW")
+
             MaxHeatExchange = Min(DeltaHc, DeltaHh) 'kW
+
+            IObj?.Paragraphs.Add("<mi>Q_{max}</mi> = " & MaxHeatExchange & " kW")
 
             tmpstr.PropertyPackage = Nothing
             tmpstr.Dispose()
@@ -448,6 +486,12 @@ Namespace UnitOperations
 
             CPC = StInCold.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
             CPH = StInHot.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
+
+            IObj?.Paragraphs.Add("<h2>Actual Heat Exchange</h2>")
+
+            IObj?.Paragraphs.Add("Calculating heat exchanged...")
+
+            IObj?.Paragraphs.Add(String.Format("Calculation mode: {0}", [Enum].GetName(CalcMode.GetType, CalcMode)))
 
             Select Case CalcMode
 
@@ -838,6 +882,8 @@ Namespace UnitOperations
 
                     'Shell and Tube HX calculation using Tinker's method.
 
+                    IObj?.Paragraphs.Add("Shell and Tube HX calculation uses Tinker's method, more details <a href='http://essel.com.br/cursos/03_trocadores.htm'>on this link</a>, Chapter 5 (Capitulo 5).")
+
                     Dim Tc2_ant, Th2_ant As Double
                     Dim Ud, Ur, U_ant, Rf, fx, Fant, F As Double
                     Dim DTm, Tcm, Thm, R, Sf, P As Double
@@ -873,11 +919,19 @@ Namespace UnitOperations
                     F = 1.0#
                     U = 500.0#
 
+                    IObj?.Paragraphs.Add("<h3>Initial Estimates</h3>")
+
+                    IObj?.Paragraphs.Add("<mi>T_{c,out}</mi> = " & Tc2 & " K")
+                    IObj?.Paragraphs.Add("<mi>T_{h,out}</mi> = " & Th2 & " K")
+                    IObj?.Paragraphs.Add("<mi>U</mi> = " & U & " W/[m2.K]")
+
                     Dim rhoc, muc, kc, rhoh, muh, kh, rs, rt, Atc, Nc, di, de, pitch, L, n, hi, nt, vt, Ret, Prt As Double
 
                     Dim icnt As Integer = 0
 
                     Do
+
+                        IObj?.Paragraphs.Add("<h4>Convergence Loop #" & icnt & "</h4>")
 
                         Select Case Me.FlowDir
                             Case FlowDirection.CoCurrent
@@ -885,6 +939,8 @@ Namespace UnitOperations
                             Case FlowDirection.CounterCurrent
                                 LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
                         End Select
+
+                        IObj?.Paragraphs.Add("<mi>\Delta T_{ml}</mi> = " & LMTD & " K")
 
                         If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
@@ -897,6 +953,9 @@ Namespace UnitOperations
                             R = (Tc1 - Tc2) / (Th2 - Th1)
                             P = (Th2 - Th1) / (Tc1 - Th1)
                         End If
+
+                        IObj?.Paragraphs.Add("<mi>R</mi> = " & R)
+                        IObj?.Paragraphs.Add("<mi>P</mi> = " & P)
 
                         Fant = F
 
@@ -917,7 +976,15 @@ Namespace UnitOperations
                         '3
                         Tcm = (Tc2 - Tc1) / 2 + Tc1
                         Thm = (Th1 - Th2) / 2 + Th2
+
+
+                        IObj?.Paragraphs.Add("<mi>F</mi> = " & F)
+                        IObj?.Paragraphs.Add("<mi>\Delta T_m</mi> = " & DTm & " K")
+                        IObj?.Paragraphs.Add("<mi>T_{c,m}</mi> = " & Tcm & " K")
+                        IObj?.Paragraphs.Add("<mi>T_{h,m}</mi> = " & Thm & " K")
+
                         '4, 5
+
                         StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                         IObj?.SetCurrent()
                         Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
@@ -988,7 +1055,9 @@ Namespace UnitOperations
                         CPH = tms.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
                         kh = tms.Phases(0).Properties.thermalConductivity.GetValueOrDefault
                         muh = tms.Phases(1).Properties.viscosity.GetValueOrDefault * tms.Phases(1).Properties.molarfraction.GetValueOrDefault + tms.Phases(2).Properties.viscosity.GetValueOrDefault * tms.Phases(2).Properties.molarfraction.GetValueOrDefault
+
                         '6
+
                         rs = Me.STProperties.Shell_Fouling
                         rt = Me.STProperties.Tube_Fouling
                         Nc = STProperties.Shell_NumberOfShellsInSeries
@@ -1017,7 +1086,12 @@ Namespace UnitOperations
                             Ret = rhoh * vt * di / muh
                             Prt = muh * CPH / kh * 1000
                         End If
+
+                        IObj?.Paragraphs.Add("<mi>Re_{tube}</mi> = " & Ret)
+                        IObj?.Paragraphs.Add("<mi>Pr_{tube}</mi> = " & Prt)
+
                         'calcular DeltaP
+
                         Dim dpt, dps As Double
                         'tube
                         dpt = 0.0#
@@ -1038,6 +1112,9 @@ Namespace UnitOperations
                             'hot
                             dpt = fric * L * STProperties.Tube_PassesPerShell / di * vt ^ 2 / 2 * rhoh
                         End If
+
+                        IObj?.Paragraphs.Add("<mi>\Delta P_{tube}</mi> = " & dpt & " Pa")
+
                         'tube heat transfer coeff
                         If STProperties.Tube_Fluid = 0 Then
                             'cold
@@ -1046,6 +1123,9 @@ Namespace UnitOperations
                             'hot
                             hi = Pipe.hint_petukhov(kh, di, fric, Ret, Prt)
                         End If
+
+                        IObj?.Paragraphs.Add("<mi>h_{int,tube}</mi> = " & hi & " W/[m2.K]")
+
                         'shell internal diameter
                         Dim Dsi, Dsf, nsc, HDi, Nb As Double
                         Select Case STProperties.Tube_Layout
@@ -1126,6 +1206,10 @@ Namespace UnitOperations
                             Res = Gsf * de / muh
                             Prs = muh * CPH / kh * 1000
                         End If
+
+                        IObj?.Paragraphs.Add("<mi>Re_{shell}</mi> = " & Res)
+                        IObj?.Paragraphs.Add("<mi>Pr_{shell}</mi> = " & Prs)
+
                         Select Case STProperties.Tube_Layout
                             Case 0, 1
                                 If Res < 100 Then
@@ -1214,6 +1298,9 @@ Namespace UnitOperations
                                     End If
                                 End If
                         End Select
+
+
+
                         'Cx
                         Dim Cx As Double = 0
                         Select Case STProperties.Tube_Layout
@@ -1231,7 +1318,11 @@ Namespace UnitOperations
                             dps = 4 * fs * Gsf ^ 2 / (2 * rhoh) * Cx * (1 - HDi) * Dsi / pitch * Nb * (1 + Y * pitch / Dsi)
                         End If
                         dps *= Nc
+
+                        IObj?.Paragraphs.Add("<mi>\Delta P_{shell}</mi> = " & dps & " Pa")
+
                         'shell htc
+
                         Dim M As Double = 0.96#
                         dis = STProperties.Shell_Di
                         Fh = 1 / (1 + Nh * (dis / pitch) ^ 0.5)
@@ -1268,6 +1359,9 @@ Namespace UnitOperations
                         Ec = lb + (L - lb) * (2 * STProperties.Shell_BaffleSpacing / (L - lb)) ^ 0.6 / L
                         If Double.IsNaN(Ec) Then Ec = 1
                         he *= Ec
+
+                        IObj?.Paragraphs.Add("<mi>h_{ext,shell}</mi> = " & he & " W/[m2.K]")
+
                         'global HTC (U)
                         Dim kt As Double = STProperties.Tube_ThermalConductivity
                         Dim f1, f2, f3, f4, f5 As Double
@@ -1307,6 +1401,13 @@ Namespace UnitOperations
                             Th2 = tmp.CalculatedTemperature
                             Th2 = 0.1 * Th2 + 0.9 * Th2_ant
                         End If
+
+                        IObj?.Paragraphs.Add("<mi>Q</mi> = " & Q & " kW")
+                        IObj?.Paragraphs.Add("<mi>U</mi> = " & U & " W/[m2.K]")
+
+                        IObj?.Paragraphs.Add("<mi>T_{c,out}</mi> = " & Tc2 & " K")
+                        IObj?.Paragraphs.Add("<mi>T_{h,out}</mi> = " & Th2 & " K")
+
                         STProperties.Ft = f1 'tube side
                         STProperties.Fc = f3 'heat conductivity pipe
                         STProperties.Fs = f5 'shell side
@@ -1324,9 +1425,12 @@ Namespace UnitOperations
                         Me.LMTD_F = F
                         If CalculationMode = HeatExchangerCalcMode.ShellandTube_Rating Then
                             fx = Math.Abs((Th2 - Th2_ant) ^ 2 + (Tc2 - Tc2_ant) ^ 2)
+                            IObj?.Paragraphs.Add("Temperature error = " & fx)
                         Else
                             fx = Math.Abs((U - U_ant)) ^ 2
+                            IObj?.Paragraphs.Add("Overall HTC error = " & fx)
                         End If
+
                         FlowSheet.CheckStatus()
                         icnt += 1
                     Loop Until fx < 0.01 Or icnt > 100
@@ -1337,7 +1441,22 @@ Namespace UnitOperations
             CheckSpec(Ph2, True, "hot stream outlet pressure")
             CheckSpec(Pc2, True, "cold stream outlet pressure")
 
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add("<mi>T_{c,out}</mi> = " & Tc2 & " K")
+            IObj?.Paragraphs.Add("<mi>T_{h,out}</mi> = " & Th2 & " K")
+            IObj?.Paragraphs.Add("<mi>P_{c,out}</mi> = " & Pc2 & " Pa")
+            IObj?.Paragraphs.Add("<mi>P_{h,out}</mi> = " & Ph2 & " Pa")
+
+            IObj?.Paragraphs.Add("<mi>Q</mi> = " & Q & " kW")
+
+            IObj?.Paragraphs.Add("<mi>U</mi> = " & U & " W/[m2.K]")
+
+            IObj?.Paragraphs.Add("<mi>\Delta T_{ml}</mi> = " & LMTD & " K")
+
             ThermalEfficiency = Q / MaxHeatExchange * 100
+
+            IObj?.Paragraphs.Add("<mi>Q/Q_{max}</mi> = " & ThermalEfficiency & " %")
 
             If Not DebugMode Then
 
