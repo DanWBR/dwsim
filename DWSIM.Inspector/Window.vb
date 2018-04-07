@@ -1,4 +1,5 @@
-﻿Imports Eto.Drawing
+﻿Imports System.IO
+Imports Eto.Drawing
 Imports Eto.Forms
 Imports c = DWSIM.UI.Shared.Common
 
@@ -49,6 +50,32 @@ Public Class Window
         Dim currentItemViewer As New WebView With {.BrowserContextMenuEnabled = True}
 
         rightcontainer.Rows.Add(New TableRow(currentItemViewer))
+
+        Dim lblTools As New Label() With {.Text = "Inspector Tools", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White}
+        Dim btnExportHTML As New Button() With {.Text = "Export Selected Item to HTML File"}
+
+        AddHandler btnExportHTML.Click, Sub()
+                                            Dim Dialog As New SaveFileDialog()
+                                            Dialog.Title = "Export HTML Page"
+                                            Dialog.Filters.Add(New FileFilter("HTML File", {".htm"}))
+                                            Dialog.CurrentFilterIndex = 0
+                                            If Dialog.ShowDialog(content.ParentWindow) = DialogResult.Ok Then
+                                                Dim nesteditems = GetItems(Host.Items.ToList)
+                                                Dim sitem = nesteditems.Where(Function(x) x.ID = DirectCast(itemSelector.SelectedItem, TreeGridItem).Tag.ToString).FirstOrDefault
+                                                File.WriteAllText(Dialog.FileName, sitem.GetHTML)
+                                            End If
+                                        End Sub
+
+        Dim btnPerfAn As New Button() With {.Text = "Performance Analyzer"}
+
+
+        Dim l1 As New TableLayout(New TableRow(lblTools, Nothing, btnPerfAn, btnExportHTML))
+        'l1.Padding = New Padding(5, 5, 5, 5)
+        l1.Spacing = New Size(10, 10)
+
+        rightcontainer.Rows.Add(New TableRow(l1))
+
+        rightcontainer.Rows(1).ScaleHeight = True
 
         Dim splitterpanel As New Splitter()
 

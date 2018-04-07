@@ -58,6 +58,26 @@ Namespace FlowPackages
 
             CalculateDeltaP = Nothing
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalculateDeltaP", "Petalas and Aziz Pressure Drop", "Petalas and Aziz Multiphase Pressure Drop Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+
+            IObj?.Paragraphs.Add("<mi>D</mi> = " & D & " m")
+            IObj?.Paragraphs.Add("<mi>L</mi> = " & L & " m")
+            IObj?.Paragraphs.Add("<mi>H</mi> = " & deltaz & " m")
+            IObj?.Paragraphs.Add("<mi>k</mi> = " & k & " m")
+            IObj?.Paragraphs.Add("<mi>Q_V</mi> = " & qv & " m3/d actual")
+            IObj?.Paragraphs.Add("<mi>Q_L</mi> = " & ql & " m3/d actual")
+            IObj?.Paragraphs.Add("<mi>\mu _V</mi> = " & muv & " cP")
+            IObj?.Paragraphs.Add("<mi>\mu _L</mi> = " & mul & " cP")
+            IObj?.Paragraphs.Add("<mi>\rho _V</mi> = " & rhov & " kg/m3")
+            IObj?.Paragraphs.Add("<mi>\rho _L</mi> = " & rhol & " kg/m3")
+            IObj?.Paragraphs.Add("<mi>\sigma</mi> = " & surft & " N/m")
+
             Dim ResVector(4) As Object
 
             If qv = 0.0# Then
@@ -181,6 +201,16 @@ Namespace FlowPackages
                 CalculateDeltaP = New Object() {FlowRegime, eL, dPfr * 6894.76 * 3.28084 * L, dPhh * 6894.76 * 3.28084 * L, (dPfr + dPhh) * 6894.76 * 3.28084 * L}
 
             End If
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add("Flow Regime: " & FlowRegime)
+            IObj?.Paragraphs.Add("<mi>e_L</mi> = " & eL)
+            IObj?.Paragraphs.Add("<mi>\Delta P_{friction}</mi> = " & dPfr * 6894.76 * 3.28084 * L & " Pa")
+            IObj?.Paragraphs.Add("<mi>\Delta P_{elevation}</mi> = " & dPhh * 6894.76 * 3.28084 * L & " Pa")
+            IObj?.Paragraphs.Add("<mi>\Delta P_{total}</mi> = " & (dPfr + dPhh) * 6894.76 * 3.28084 * L & " Pa")
+
+            IObj?.Close()
 
         End Function
 

@@ -452,6 +452,7 @@ Namespace UnitOperations
 
                                         End With
 
+                                        IObj?.SetCurrent()
                                         resv = fpp.CalculateDeltaP(.DI * 0.0254, .Comprimento / .Incrementos, .Elevacao / .Incrementos, Me.rugosidade(.Material), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
 
                                         tipofluxo = resv(0)

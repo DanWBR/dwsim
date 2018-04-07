@@ -23,6 +23,42 @@ Namespace FlowPackages
 
       Public Overrides Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalculateDeltaP", "Lockhart and Martinelli Pressure Drop", "Lockhart and Martinelli Multiphase Pressure Drop Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("Pressure drop for each of the phases are calculated explicitly assuming that either liquid or gas is flowing through the pipe based on procedure provided for <a href='https://cheguide.com/2015/08/single-phase-fluid-flow-pressure-drop/'>single phase flow</a>.</p>
+                                <pre><code>(?P/L)<sub>G</sub> = function(Q<sub>G</sub>, D, µ<sub>G</sub>, ?<sub>G</sub>, e)</code>
+                                <code>(?P/L)<sub>L</sub> = function(Q<sub>L</sub>, D, µ<sub>L</sub>, ?<sub>L</sub>, e)</code></pre>
+                                <p>A pressure ratio is calculated.</p>
+                                <pre><code>X² = (?P/L)<sub>L</sub> / (?P/L)<sub>G</sub></code></pre>
+                                <p><img src='https//cheguide.com/wp-content/uploads/2015/08/ff_Lockhart_Martinelli.gif' alt='Lockhart - Martinelli Correlation' /></p>
+                                <p>A separate pressure drop is calculated for each phase.</p>
+                                <pre><code>(?P/L)<sub>L1</sub> = f²<sub>L</sub> (?P/L)<sub>L</sub></code>
+                                <code>(?P/L)<sub>G1</sub> = f²<sub>G</sub> (?P/L)<sub>G</sub></code></pre>
+                                <p>Estimated two phase pressure drop is maximum of these</p>
+                                <pre><code>(?P/L)<sub>TP</sub> = Max((?P/L)<sub>L1</sub>,(?P/L)<sub>G1</sub>)</code></pre><p>")
+
+            IObj?.Paragraphs.Add("Reference: <a href='https://cheguide.com/tag/lockhart-martinelli/'>https://cheguide.com/tag/lockhart-martinelli/</a>")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+
+            IObj?.Paragraphs.Add("<mi>D</mi> = " & D & " m")
+            IObj?.Paragraphs.Add("<mi>L</mi> = " & L & " m")
+            IObj?.Paragraphs.Add("<mi>H</mi> = " & deltaz & " m")
+            IObj?.Paragraphs.Add("<mi>k</mi> = " & k & " m")
+            IObj?.Paragraphs.Add("<mi>Q_V</mi> = " & qv & " m3/d actual")
+            IObj?.Paragraphs.Add("<mi>Q_L</mi> = " & ql & " m3/d actual")
+            IObj?.Paragraphs.Add("<mi>\mu _V</mi> = " & muv & " cP")
+            IObj?.Paragraphs.Add("<mi>\mu _L</mi> = " & mul & " cP")
+            IObj?.Paragraphs.Add("<mi>\rho _V</mi> = " & rhov & " kg/m3")
+            IObj?.Paragraphs.Add("<mi>\rho _L</mi> = " & rhol & " kg/m3")
+            IObj?.Paragraphs.Add("<mi>\sigma</mi> = " & surft & " N/m")
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
+
             CalculateDeltaP = Nothing
 
             Dim resvect(4) As Object
@@ -41,6 +77,10 @@ Namespace FlowPackages
                 Else
                     fric = 64 / Re_fit
                 End If
+
+                IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
+                IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
+                IObj?.Paragraphs.Add("<mi>v_L</mi> = " & vlo & " m/s")
 
                 Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
                 Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
@@ -67,6 +107,10 @@ Namespace FlowPackages
                 Else
                     fric = 64 / Re_fit
                 End If
+
+                IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
+                IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
+                IObj?.Paragraphs.Add("<mi>v_V</mi> = " & vgo & " m/s")
 
                 Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
                 Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
@@ -136,6 +180,12 @@ Namespace FlowPackages
 
                 Xtt = ((1 - Cg) / Cg) ^ 0.9 * (rhov / rhol) ^ 0.5 * (mul / muv) ^ 0.1
 
+                IObj?.Paragraphs.Add("<mi>Re_{sg}</mi> = " & Re_SG)
+                IObj?.Paragraphs.Add("<mi>Re_{sl}</mi> = " & Re_SL)
+                IObj?.Paragraphs.Add("<mi>f_{sg}</mi> = " & fsg)
+                IObj?.Paragraphs.Add("<mi>f_{sl}</mi> = " & fsl)
+                IObj?.Paragraphs.Add("<mi>X</mi> = " & Xtt)
+
                 If Vsl > Vsg Then
                     fi_Ltt = 1 + 20 / Xtt + 1 / Xtt ^ 2
                     dPf = fi_Ltt * dP_SL
@@ -155,6 +205,16 @@ Namespace FlowPackages
                 CalculateDeltaP = resvect
 
             End If
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add("Flow Regime: " & resvect(0))
+            IObj?.Paragraphs.Add("<mi>e_L</mi> = " & resvect(1))
+            IObj?.Paragraphs.Add("<mi>\Delta P_{friction}</mi> = " & resvect(2) & " Pa")
+            IObj?.Paragraphs.Add("<mi>\Delta P_{elevation}</mi> = " & resvect(3) & " Pa")
+            IObj?.Paragraphs.Add("<mi>\Delta P_{total}</mi> = " & resvect(4) & " Pa")
+
+            IObj?.Close()
 
         End Function
 

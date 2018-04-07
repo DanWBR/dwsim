@@ -1978,7 +1978,7 @@ Label_00CC:
                 If Not item.IsAbstract Then
                     Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                     obj.SetFlowsheet(Me)
-                    Me.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
+                    Me.FlowsheetOptions.VisibleProperties(item.Name) = obj.GetDefaultProperties.ToList
                     obj = Nothing
                 End If
             Next
