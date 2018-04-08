@@ -340,6 +340,9 @@ Namespace UnitOperations
 
             Do
 
+                IObj?.Paragraphs.Add(String.Format("External Loop #{0}", countext))
+                IObj?.Paragraphs.Add("This is the external loop to converge pressure when outlet temperature is specified or vice-versa.")
+
                 oms = Me.GetInletMaterialStream(0).Clone()
                 oms.SetFlowsheet(Me.FlowSheet)
                 oms.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
@@ -377,9 +380,14 @@ Namespace UnitOperations
 
                 For Each segmento In Me.Profile.Sections.Values
 
+                    IObj?.Paragraphs.Add(String.Format("Calculating segment {0}...", segmento.Indice))
+
                     segmento.Resultados.Clear()
 
                     If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Then
+
+                        IObj?.Paragraphs.Add(String.Format("Segment type: {0}", segmento.TipoSegmento))
+                        IObj?.Paragraphs.Add(String.Format("Segment increments: {0}", segmento.Incrementos))
 
                         j = 0
                         nseg = segmento.Incrementos
@@ -410,6 +418,8 @@ Namespace UnitOperations
 
                         Do
 
+                            IObj?.Paragraphs.Add(String.Format("Calculating increment {0}...", j + 1))
+
                             If Text > Tin Then
                                 Tout = Tin * 1.005
                             Else
@@ -423,9 +433,13 @@ Namespace UnitOperations
                             'Loop externo (convergencia do Delta T)
                             Do
 
+                                IObj?.Paragraphs.Add(String.Format("Temperature convergence loop iteration #{0}", cntT))
+
                                 cntP = 0
                                 'Loop interno (convergencia do Delta P)
                                 Do
+
+                                    IObj?.Paragraphs.Add(String.Format("Pressure convergence loop iteration #{0}", cntP))
 
                                     With segmento
                                         count = 0
@@ -452,6 +466,7 @@ Namespace UnitOperations
 
                                         End With
 
+                                        IObj?.Paragraphs.Add(String.Format("Calling Pressure Drop calculation routine..."))
                                         IObj?.SetCurrent()
                                         resv = fpp.CalculateDeltaP(.DI * 0.0254, .Comprimento / .Incrementos, .Elevacao / .Incrementos, Me.rugosidade(.Material), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
 
@@ -467,6 +482,9 @@ Namespace UnitOperations
                                     Pout_ant = Pout
                                     Pout = Pin - dpt
 
+                                    IObj?.Paragraphs.Add(String.Format("Inlet pressure: {0} Pa", Pin))
+                                    IObj?.Paragraphs.Add(String.Format("Calculated outlet pressure: {0} Pa", Pout))
+
                                     fP_ant2 = fP_ant
                                     fP_ant = fP
                                     fP = Pout - Pout_ant
@@ -474,6 +492,8 @@ Namespace UnitOperations
                                     If cntP > 3 Then
                                         Pout = Pout - fP * (Pout - Pout_ant2) / (fP - fP_ant2)
                                     End If
+
+                                    IObj?.Paragraphs.Add(String.Format("Updated outlet pressure: {0} Pa", Pout))
 
                                     cntP += 1
 
@@ -487,6 +507,10 @@ Namespace UnitOperations
 
                                 Loop Until Math.Abs(fP) < Me.TolP
 
+                                IObj?.Paragraphs.Add(String.Format("Converged outlet pressure: {0} Pa", Pout))
+
+                                IObj?.Paragraphs.Add(String.Format("Proceeding with temperature convergence..."))
+
                                 With segmento
 
                                     Cp_m = holdup * Cp_l + (1 - holdup) * Cp_v
@@ -498,11 +522,11 @@ Namespace UnitOperations
                                         ElseIf Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                             Tpe = Tin + (Tout - Tin) / 2
-                                            Dim resultU As Double() = CalcOverallHeatTransferCoefficient(.Material, holdup, .Comprimento / .Incrementos, _
+                                            Dim resultU As Double() = CalcOverallHeatTransferCoefficient(.Material, holdup, .Comprimento / .Incrementos,
                                                                                 .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material), Tpe, Text + dText_dL * currL,
-                                                                                results.VapVel, results.LiqVel, results.Cpl, results.Cpv, results.Kl, results.Kv, _
-                                                                                results.MUl, results.MUv, results.RHOl, results.RHOv, _
-                                                                                Me.ThermalProfile.Incluir_cti, Me.ThermalProfile.Incluir_isolamento, _
+                                                                                results.VapVel, results.LiqVel, results.Cpl, results.Cpv, results.Kl, results.Kv,
+                                                                                results.MUl, results.MUv, results.RHOl, results.RHOv,
+                                                                                Me.ThermalProfile.Incluir_cti, Me.ThermalProfile.Incluir_isolamento,
                                                                                 Me.ThermalProfile.Incluir_paredes, Me.ThermalProfile.Incluir_cte)
                                             U = resultU(0)
                                             With results
@@ -531,7 +555,14 @@ Namespace UnitOperations
                                     End If
                                 End With
 
+                                IObj?.Paragraphs.Add(String.Format("Calculated/Estimated HTC: {0} W/[m2.K]", U))
+                                IObj?.Paragraphs.Add(String.Format("Calculated Heat Transfer Area: {0} m2", A))
+                                IObj?.Paragraphs.Add(String.Format("Calculated/Specified Heat Transfer: {0} kW", DQ))
+
                                 Hout = Hin + DQ / Win
+
+                                IObj?.Paragraphs.Add(String.Format("Inlet Enthalpy: {0} kJ/kg", Hin))
+                                IObj?.Paragraphs.Add(String.Format("Outlet Enthalpy: {0} kJ/kg", Hout))
 
                                 oms.PropertyPackage.CurrentMaterialStream = oms
 
@@ -539,6 +570,8 @@ Namespace UnitOperations
                                 IObj?.SetCurrent()
                                 Tout = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout).CalculatedTemperature
                                 Tout = 0.7 * Tout_ant + 0.3 * Tout
+
+                                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Temperature: {0} K", Tout))
 
                                 fT = Tout - Tout_ant
 
@@ -556,7 +589,11 @@ Namespace UnitOperations
 
                             Loop
 
+                            IObj?.Paragraphs.Add(String.Format("Converged Outlet Temperature: {0} K", Tout))
+
                             If IncludeJTEffect Then
+
+                                IObj?.Paragraphs.Add(String.Format("Taking into account JT effects..."))
 
                                 Cp_m = (w_l * Cp_l + w_v * Cp_v) / w
 
@@ -584,6 +621,8 @@ Namespace UnitOperations
                                 Tout_ant = Tout
                                 Tout = Toutj
 
+                                IObj?.Paragraphs.Add(String.Format("Updated Outlet Temperature: {0} K", Tout))
+
                             End If
 
                             oms.PropertyPackage.CurrentMaterialStream = oms
@@ -593,6 +632,8 @@ Namespace UnitOperations
                             oms.Phases(0).Properties.enthalpy = Hout
 
                             oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+
+                            IObj?.Paragraphs.Add(String.Format("Recalculating the temporary material stream and moving on to the next segment/increment..."))
 
                             IObj?.SetCurrent()
                             oms.Calculate(True, True)

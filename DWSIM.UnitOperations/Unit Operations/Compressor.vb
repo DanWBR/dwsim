@@ -75,8 +75,6 @@ Namespace UnitOperations
             MyBase.CreateNew()
             Me.ComponentName = name
             Me.ComponentDescription = description
-
-
         End Sub
 
         Public Property EficienciaPolitropica() As Nullable(Of Double)
@@ -161,7 +159,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("Calculation Method")
 
             IObj?.Paragraphs.Add("The compressor calculation is different for the two cases (when 
-                                the provided delta-p or the potency of the energy stream is 
+                                the provided delta-p or energy stream / power is 
                                 used). In the first method, we have the following sequence:")
 
             IObj?.Paragraphs.Add("• Outlet pressure calculation:")
@@ -204,6 +202,8 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("<mi>MM</mi> gas molecular weight")
 
             IObj?.Paragraphs.Add("<mi>T_{1}</mi> inlet stream temperature")
+
+            IObj?.Paragraphs.Add("The calculated outlet pressure using the above expression is used as a first estimate to calculate the power in an inner loop. The outlet pressure is updated is then updated until the calculated power matches the specified one.")
 
             IObj?.Paragraphs.Add("• Outlet enthalpy: A PS Flash (Pressure-Entropy) is done to 
                               obtain the ideal process enthalpy change. The outlet real 
