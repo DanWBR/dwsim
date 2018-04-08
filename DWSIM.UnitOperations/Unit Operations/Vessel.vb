@@ -152,7 +152,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("The separator vessel (also known as flash drum) is used to separate liquid phases from vapor in a mixed 
                                 material stream.")
 
-            IObj?.Paragraphs.Add("The separator vessel just divides the inlet stream phases into 
+            IObj?.Paragraphs.Add("The separator vessel simply divides the inlet stream phases into 
                                 two or three distinct streams. If the user defines values for the 
                                 separation temperature and/or pressure, a TP Flash is done in the 
                                 new conditions before the distribution of phases through the 
