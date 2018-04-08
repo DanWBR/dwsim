@@ -252,7 +252,7 @@ namespace DWSIM.UI.Forms
 
             ActInspector = () =>
             {
-                var iform = Common.GetDefaultEditorForm("Solution Inspector", 1024, 768, DWSIM.Inspector.Window.GetInspectorWindow(), false);
+                var iform = Common.GetDefaultEditorForm("DWSIM - Solution Inspector", 1024, 768, DWSIM.Inspector.Window.GetInspectorWindow(), false);
                 iform.WindowState = WindowState.Maximized;
                 iform.Show();
             };

@@ -68,6 +68,11 @@ Public Class Window
 
         Dim btnPerfAn As New Button() With {.Text = "Performance Analyzer"}
 
+        AddHandler btnPerfAn.Click, Sub()
+                                        Dim f = c.GetDefaultEditorForm("DWSIM - Solution Inspector / Performance Analyzer", 1024, 768, PerfAn.GetPerfAnWindow(SetsBox.SelectedKey), False)
+                                        f.WindowState = WindowState.Maximized
+                                        f.Show()
+                                    End Sub
 
         Dim l1 As New TableLayout(New TableRow(lblTools, Nothing, btnPerfAn, btnExportHTML))
         'l1.Padding = New Padding(5, 5, 5, 5)
