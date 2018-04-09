@@ -33,8 +33,6 @@ Namespace Reactors
 
         Inherits Reactor
 
-        Private _IObj As InspectorItem
-
         Public Enum EReactorMode
             SingleOutlet
             TwoOutlets
@@ -456,6 +454,16 @@ Namespace Reactors
 
             Do
 
+                IObj?.SetCurrent
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", String.Format("CSTR Convergence Loop #{0}", NIter), "", True)
+
+                IObj2?.Paragraphs.Add("Assume output composition as input composition initially, 
+                                        then do molar balances for every component for small time steps until composition becomes stable. ")
+                IObj2?.Paragraphs.Add("Time step: Moles in reactor(t+dT)= Moles in reactor (t) + Feed - consumption (composition,temperature) - Output(composition)")
+
                 'initialise component reaction rates
                 Ri.Clear()
                 For Each comp In ims.Phases(0).Compounds.Values
@@ -625,6 +633,9 @@ Namespace Reactors
                         End If
                     Next
 
+                    IObj2?.Paragraphs.Add(String.Format("Compounds : {0}", Ri.Keys.ToArray.ToMathArrayString))
+                    IObj2?.Paragraphs.Add(String.Format("Compound Change Rates: {0} mol/s", Ri.Values.ToArray.ToMathArrayString))
+
                     'calculate heat of reaction
                     'Reaction Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
                     'kW (kJ/s) = kJ/kmol * mol/s * 0.001 mol/kmol
@@ -633,6 +644,8 @@ Namespace Reactors
                     DHr += Hr 'Total Heat released 
 
                 Next
+
+                IObj2?.Paragraphs.Add(String.Format("Total Heat of Reaction: {0} kW", DHr))
 
                 'Calculate composition of mixture in reactor
                 'Doing molar balance, calculate new component inventory of reactor after time step
@@ -661,11 +674,16 @@ Namespace Reactors
                 Mout = M.MultiplyConstY(W) 'total components massflow
                 Nout = Mout.DivideY(MM).MultiplyConstY(1000) 'total components molar flow
 
+                IObj2?.Paragraphs.Add(String.Format("Previous Compound Compositions: {0}", LC.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Updated Compound Compositions: {0}", Y.ToMathArrayString))
+
                 'Update iteration variables
                 OErr = IErr
                 IErr = Y.SubtractY(LC).AbsSumY 'Calculate difference to last composition
                 Y.CopyTo(LC, 0) 'Save composition as last composition (LC) for next iteration
                 NIter += 1
+
+                IObj2?.Paragraphs.Add(String.Format("Composition Error (Squared Sum): {0}", IErr))
 
                 'Accelerate calculations by increasing time step up to residence time as maximum
 
@@ -698,12 +716,14 @@ Namespace Reactors
                         ims.SpecType = StreamSpec.Temperature_and_Pressure
                 End Select
 
-                IObj?.SetCurrent()
+                IObj2?.SetCurrent()
                 ims.Calculate(True, True)
 
                 T = ims.Phases(0).Properties.temperature 'read temperature -> PH-Flash
 
                 If NIter > 100 Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+
+                IObj2?.Close()
 
             Loop Until IErr < 0.000001 Or MaxChange < 0.0001 'repeat until composition is constant
 
