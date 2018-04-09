@@ -267,7 +267,9 @@ Namespace Reactors
 
                         denmval = rxn.Expr.Evaluate
 
+                        IObj2?.Paragraphs.Add(String.Format("Numerator Expression: {0}", rxn.RateEquationNumerator))
                         IObj2?.Paragraphs.Add(String.Format("Numerator Value: {0}", numval))
+                        IObj2?.Paragraphs.Add(String.Format("Denominator Expression: {0}", rxn.RateEquationDenominator))
                         IObj2?.Paragraphs.Add(String.Format("Denominator Value: {0}", denmval))
 
                         rx = numval / denmval
@@ -306,7 +308,7 @@ Namespace Reactors
 
             IObj2?.Paragraphs.Add("<h2>Results</h2>")
 
-            IObj2?.Paragraphs.Add(String.Format("Compound Mole Flows Variation: {0} mol/[m3.s]", dy.ToMathArrayString))
+            IObj2?.Paragraphs.Add(String.Format("Compound Mole Flow Variation: {0} mol/[m3.s]", dy.ToMathArrayString))
 
             IObj2?.Close()
 
@@ -335,7 +337,7 @@ Namespace Reactors
                                             Reactions are defined by the amount of a base compound which Is
                                 consumed in the reaction. This amount can be a fixed value Or a
                                 Function of() the system temperature. Conversion reactions are supported
-                                by the Conversion reactor.<br><br><span style='font-weight bold; font-style: italic;'>Kinetic</span> reactions are reactions defined by a kinetic expression. These reactions are supported by the PFR and CSTR reactors. <br><br><span style='font-weight: bold; font-style: italic;'>Heterogeneous Catalytic</span> reactions&nbsp;in DWSIM must obey the <span style='font-style: italic;'>Langmuir&#8211;Hinshelwood</span> 
+                                by the Conversion reactor.<br><br><span style='font-style: italic;'>Kinetic</span> reactions are reactions defined by a kinetic expression. These reactions are supported by the PFR and CSTR reactors. <br><br><span style='font-style: italic;'>Heterogeneous Catalytic</span> reactions&nbsp;in DWSIM must obey the <span style='font-style: italic;'>Langmuir&#8211;Hinshelwood</span> 
                                             mechanism, where compounds react over a solid catalyst surface. In this 
                                 model, Reaction rates are a function of catalyst amount (i.e. mol/kg 
                                 cat.s). These Reactions are supported by the PFR And CStr reactors.<p>")
@@ -455,6 +457,8 @@ Namespace Reactors
                 Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", String.Format("PFR Volume Step Calculation (V = {0} m3)", currvol), "", True)
 
                 IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("This is the calculation routine for convergence of the compound concentrations/amounts at volume step {0}/{1} m3.", currvol, Volume))
 
                 _IObj = IObj2
 
@@ -756,7 +760,7 @@ Namespace Reactors
                 prevvol = currvol
                 currvol += dV * Volume
 
-            Loop Until (currvol - Volume) >= Volume
+            Loop Until currvol >= Volume
 
             Me.DeltaP = P0 - P
 
