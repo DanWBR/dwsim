@@ -211,7 +211,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _S, _alpha As Double(,)
         Dim _fc, _xc, _yc, _lc, _vc, _zc As Double()()
         Dim _Kbj As Double()
-        Dim _rr, _Sb, _maxF As Double
+        Dim _rr, _Sb, _maxF, _maxtchange As Double
         Public _pp As PropertyPackages.PropertyPackage
         Public _ppr As PropertyPackages.RaoultPropertyPackage
         Dim _coltype As Column.ColType
@@ -481,7 +481,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 _Kbj(i) = 1 / sum_axi(i)
                 _Tj_ant(i) = _Tj(i)
                 _Tj(i) = _Bj(i) / (_Aj(i) - Log(_Kbj(i)))
-                If Abs(_Tj(i) - _Tj_ant(i)) > 100 Or Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then
+                If Abs(_Tj(i) - _Tj_ant(i)) > _maxtchange Or Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then
                     'switch to a bubble point temperature calculation...
                     IObj?.SetCurrent()
                     If ik Then
@@ -496,6 +496,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     End If
                     If Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then Throw New Exception(_pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                End If
+                If Abs(_Tj(i) - _Tj_ant(i)) > _maxtchange Then
+                    _Tj(i) = _Tj_ant(i) + Sign(_Tj(i) - _Tj_ant(i)) * _maxtchange
                 End If
             Next
 
@@ -767,7 +770,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal Solver As OptimizationMethod,
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
+                                ByVal MaxTChange As Double,
                                 Optional ByVal llex As Boolean = False) As Object
+
+            _maxtchange = MaxTChange
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1980,7 +1986,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal coltype As Column.ColType,
                                 ByVal pp As PropertyPackages.PropertyPackage,
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
-                                ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean, ByVal MaxTChange As Double) As Object
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -2407,7 +2413,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 For i = 0 To ns
                     dTj(i) = Tj(i) - Tj_ant(i)
-                    If Abs(dTj(i)) > 10 Then Tj(i) = Math.Sign(dTj(i)) * 10 + Tj_ant(i)
+                    If Abs(dTj(i)) > MaxTChange Then Tj(i) = Math.Sign(dTj(i)) * MaxTChange + Tj_ant(i)
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                 Next
 
@@ -2684,6 +2690,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal pp As PropertyPackages.PropertyPackage,
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
+                                ByVal MaxTChange As Double,
                                 Optional ByVal llextr As Boolean = False) As Object
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -3127,8 +3134,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    If Abs(xth(i)) > 0.05 * Tj(i) Then
-                        Tj(i) = Tj(i) + Sign(xth(i)) * 0.05 * Tj(i)
+                    If Abs(xth(i)) > MaxTChange Then
+                        Tj(i) = Tj(i) + Sign(xth(i)) * MaxTChange
                     Else
                         Tj(i) = Tj(i) + xth(i)
                     End If
@@ -3259,7 +3266,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _condtype As DistillationColumn.condtype
         Dim llextr As Boolean = False
         Dim _Kval()() As Double
-        Dim _maxT, _maxvc, _maxlc As Double
+        Dim _maxT, _maxvc, _maxlc, _maxtchange, _Tj_ant() As Double
 
         Private grad As Boolean = False
 
@@ -3340,7 +3347,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim sumF As Double = 0
             Dim sumLSS As Double = 0
             Dim sumVSS As Double = 0
-            Dim Tj(ns), vc(ns)(), lc(ns)(), zc(ns)(), Vj(ns), Lj(ns), xc(ns)(), yc(ns)(), Kval(ns)() As Double
+            Dim Tj(ns), Tj_ant(ns), vc(ns)(), lc(ns)(), zc(ns)(), Vj(ns), Lj(ns), xc(ns)(), yc(ns)(), Kval(ns)() As Double
 
             For i = 0 To ns
                 Array.Resize(lc(i), nc)
@@ -3354,12 +3361,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To ns
                 Tj(i) = x(i * (2 * nc + 1)) * _maxT
+                If Abs(Tj(i) - _Tj_ant(i)) > _maxtchange Then
+                    Tj(i) = _Tj_ant(i) + Sign(Tj(i) - _Tj_ant(i)) * _maxtchange
+                End If
                 If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(_pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                 For j = 0 To nc - 1
                     vc(i)(j) = x(i * (2 * nc + 1) + j + 1) * _maxvc
                     lc(i)(j) = x(i * (2 * nc + 1) + j + 1 + nc) * _maxlc
                 Next
             Next
+
+            _Tj_ant = Tj.Clone
 
             Dim VSSj(ns), LSSj(ns), Hv(ns), Hl(ns), Hv0(ns), Hl0(ns) As Double
             Dim sumvkj(ns), sumlkj(ns) As Double
@@ -3791,7 +3803,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
                                 ByVal SimplexPreconditioning As Boolean,
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
+                                ByVal MaxTChange As Double,
                                 Optional ByVal LLEX As Boolean = False) As Object
+
+            _Tj_ant = T.Clone
+
+            _maxtchange = MaxTChange
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 

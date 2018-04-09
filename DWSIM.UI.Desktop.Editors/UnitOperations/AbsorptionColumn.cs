@@ -356,6 +356,30 @@ namespace DWSIM.UI.Desktop.Editors
                 column.SolverScheme = (UnitOperations.UnitOperations.Column.SolvingScheme)sender.SelectedIndex;
             });
 
+            s.CreateAndAddTextBoxRow(container, "N0", "Maximum Iterations", column.MaxIterations,
+            (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.MaxIterations = (int)sender.Text.ToDoubleFromCurrent();
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (External Loop)", column.ExternalLoopTolerance,
+            (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.ExternalLoopTolerance = (int)sender.Text.ToDoubleFromCurrent();
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (Internal Loop)", column.InternalLoopTolerance,
+            (sender, e) =>
+            {
+            if (sender.Text.IsValidDouble()) column.InternalLoopTolerance = (int)sender.Text.ToDoubleFromCurrent();
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
+            
+            s.CreateAndAddTextBoxRow(container, nf, "Maximum Temperature Change Step (" + su.deltaT + ")", cv.ConvertFromSI(su.deltaT, column.MaximumTemperatureStep),
+            (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.MaximumTemperatureStep = cv.ConvertToSI(su.deltaT, sender.Text.ToDoubleFromCurrent());
+            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
+
             s.CreateAndAddLabelRow(container, "Bubble Point Solver Settings");
 
             s.CreateAndAddTextBoxRow(container, "N0", "Stop at iteration number", column.StopAtIterationNumber,

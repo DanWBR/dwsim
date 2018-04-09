@@ -45,6 +45,9 @@ Partial Class EditingForm_Column
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabGeneral = New System.Windows.Forms.TabPage()
+        Me.lblTemperatureUnit = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.tbMaxTChange = New System.Windows.Forms.TextBox()
         Me.cbSolverScheme = New System.Windows.Forms.ComboBox()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
@@ -269,6 +272,9 @@ Partial Class EditingForm_Column
         'TabGeneral
         '
         resources.ApplyResources(Me.TabGeneral, "TabGeneral")
+        Me.TabGeneral.Controls.Add(Me.lblTemperatureUnit)
+        Me.TabGeneral.Controls.Add(Me.Label30)
+        Me.TabGeneral.Controls.Add(Me.tbMaxTChange)
         Me.TabGeneral.Controls.Add(Me.cbSolverScheme)
         Me.TabGeneral.Controls.Add(Me.Label27)
         Me.TabGeneral.Controls.Add(Me.cbSolvingMethod)
@@ -290,6 +296,24 @@ Partial Class EditingForm_Column
         Me.TabGeneral.Name = "TabGeneral"
         Me.ToolTip1.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip"))
         Me.TabGeneral.UseVisualStyleBackColor = True
+        '
+        'lblTemperatureUnit
+        '
+        resources.ApplyResources(Me.lblTemperatureUnit, "lblTemperatureUnit")
+        Me.lblTemperatureUnit.Name = "lblTemperatureUnit"
+        Me.ToolTip1.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip"))
+        '
+        'Label30
+        '
+        resources.ApplyResources(Me.Label30, "Label30")
+        Me.Label30.Name = "Label30"
+        Me.ToolTip1.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip"))
+        '
+        'tbMaxTChange
+        '
+        resources.ApplyResources(Me.tbMaxTChange, "tbMaxTChange")
+        Me.tbMaxTChange.Name = "tbMaxTChange"
+        Me.ToolTip1.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip"))
         '
         'cbSolverScheme
         '
@@ -1073,4 +1097,7 @@ Partial Class EditingForm_Column
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lblTemperatureUnit As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents tbMaxTChange As TextBox
 End Class

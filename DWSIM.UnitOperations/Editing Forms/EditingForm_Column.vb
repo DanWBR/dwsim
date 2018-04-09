@@ -41,6 +41,10 @@ Public Class EditingForm_Column
 
             Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
 
+            tbMaxTChange.Text = su.Converter.ConvertFromSI(units.deltaT, SimObject.MaximumTemperatureStep).ToString(nf)
+
+            lblTemperatureUnit.Text = units.deltaT
+
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
                 lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
@@ -799,7 +803,7 @@ Public Class EditingForm_Column
 
     Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tb_IO_LowerBound.TextChanged, tb_IO_UpperBound.TextChanged, tb_NS_LowerBound.TextChanged, tb_NS_UpperBound.TextChanged,
                                                                                 tbBPStopAtIter.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
-                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged, tb_IO_NumDeriv.TextChanged, tb_NS_NumDeriv.TextChanged
+                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged, tb_IO_NumDeriv.TextChanged, tb_NS_NumDeriv.TextChanged, tbMaxTChange.TextChanged
         Dim tbox = DirectCast(sender, TextBox)
 
         If Loaded Then
@@ -835,4 +839,9 @@ Public Class EditingForm_Column
         End If
     End Sub
 
+    Private Sub tbMaxTChange_KeyDown(sender As Object, e As KeyEventArgs) Handles tbMaxTChange.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.MaximumTemperatureStep = su.Converter.ConvertToSI(units.deltaT, tbMaxTChange.Text)
+        End If
+    End Sub
 End Class
