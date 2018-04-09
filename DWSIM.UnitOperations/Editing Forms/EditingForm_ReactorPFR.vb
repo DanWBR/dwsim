@@ -514,14 +514,14 @@ Public Class EditingForm_ReactorPFR
             i = 0
             Do
                 color1 = Color.FromArgb(255, rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255))
-                With .AddCurve(vn(i), su.Converter.ConvertArrayFromSI(units.volume, vx), su.Converter.ConvertArrayFromSI(units.molar_conc, vya(i)), color1, ZedGraph.SymbolType.Circle)
+                With .AddCurve(vn(i), su.Converter.ConvertArrayFromSI(units.distance, vx), su.Converter.ConvertArrayFromSI(units.molar_conc, vya(i)), color1, ZedGraph.SymbolType.Circle)
                     .Line.IsSmooth = True
                     .Symbol.IsVisible = False
                 End With
                 i += 1
             Loop Until i = vn.Length - 1
             color1 = Color.FromArgb(255, rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255))
-            With .AddCurve("T / " & units.temperature, su.Converter.ConvertArrayFromSI(units.volume, vx), su.Converter.ConvertArrayFromSI(units.temperature, vya(i)), color1, ZedGraph.SymbolType.Circle)
+            With .AddCurve("T / " & units.temperature, su.Converter.ConvertArrayFromSI(units.distance, vx), su.Converter.ConvertArrayFromSI(units.temperature, vya(i)), color1, ZedGraph.SymbolType.Circle)
                 .Line.IsSmooth = True
                 .Symbol.IsVisible = False
                 .IsY2Axis = True
@@ -534,7 +534,7 @@ Public Class EditingForm_ReactorPFR
                 .IsY2Axis = True
                 .YAxisIndex = 1
             End With
-            .XAxis.Title.Text = "V / " & units.volume
+            .XAxis.Title.Text = "Reactor Length / " & units.distance
             .XAxis.Title.FontSpec.Size = 16
             .XAxis.Scale.FontSpec.Size = 16
             .XAxis.Scale.MaxAuto = False

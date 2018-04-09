@@ -33,6 +33,8 @@ Namespace Reactors
 
         Inherits Reactor
 
+        Private _IObj As InspectorItem
+
         Public Enum EReactorMode
             SingleOutlet
             TwoOutlets
@@ -289,6 +291,22 @@ Namespace Reactors
 
             IObj?.SetCurrent()
 
+            IObj?.Paragraphs.Add("To run a simulation of a reactor, the user needs to define the chemical reactions which will take place in the reactor.</p>
+                                This Is done through the&nbsp;<span style='font-weight bold;'>Reactions Manager, </span>accessible through <span style='font-weight: bold;'>Simulation Settings &gt; Basis &gt; Open Chemical Reactions Manager</span> or <span style='font-weight: bold;'>Tools &gt; Reactions Manager</span> menus (see separate documentation).<br><br>Reactions can be of&nbsp;<span style='font-weight: bold;'>Equilibrium</span>,<span style='font-weight: bold;'>&nbsp;Conversion</span>,<span style='font-weight: bold;'>&nbsp;Kinetic</span> or&nbsp;<span style='font-weight: bold;'>Heterogeneous Catalytic</span> types. One or more reactions can be&nbsp;combined to define
+                                            a&nbsp;<span style='font-weight bold;'>Reaction Set</span>. The reactors then 'see' the reactions through the reaction sets.
+                                <br><br><span style ='font-weight bold; font-style: italic;'>Equilibrium</span>
+                                Reactions are defined by an equilibrium constant (K). The source Of
+                                Information for the equilibrium constant can be a direct gibbs energy
+                                calculation, an expression defined by the user Or a constant value.
+                                Equilibrium Reactions can be used in Equilibrium And Gibbs reactors.<br><br><span style='font-weight bold; font-style: italic;'>Conversion</span>
+                                            Reactions are defined by the amount of a base compound which Is
+                                consumed in the reaction. This amount can be a fixed value Or a
+                                Function of() the system temperature. Conversion reactions are supported
+                                by the Conversion reactor.<br><br><span style='font-weight bold; font-style: italic;'>Kinetic</span> reactions are reactions defined by a kinetic expression. These reactions are supported by the PFR and CSTR reactors. <br><br><span style='font-weight: bold; font-style: italic;'>Heterogeneous Catalytic</span> reactions&nbsp;in DWSIM must obey the <span style='font-style: italic;'>Langmuir&#8211;Hinshelwood</span> 
+                                            mechanism, where compounds react over a solid catalyst surface. In this 
+                                model, Reaction rates are a function of catalyst amount (i.e. mol/kg 
+                                cat.s). These Reactions are supported by the PFR And CStr reactors.<p>")
+
             'ims-stream (internal material stream) to be used during internal calculations
             'Clone inlet stream as initial estimation
             ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
@@ -347,7 +365,7 @@ Namespace Reactors
 
             'Check Reaction type, Base components and reaction volume
             If FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Count = 0 Then Throw New Exception("No reaction defined")
-            ErrCode = "No kinetic or catalytic reaction found"
+            ErrCode = "No kinetic Or catalytic reaction found"
             For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 rxn = FlowSheet.Reactions(rxnsb.ReactionID)
                 If (rxn.ReactionType = ReactionType.Kinetic Or rxn.ReactionType = ReactionType.Heterogeneous_Catalytic) And rxnsb.IsActive Then
@@ -1490,7 +1508,7 @@ out:        Dim ms1, ms2 As MaterialStream
 
             Dim str As New Text.StringBuilder
 
-            str.AppendLine("Reactor: " & Me.GraphicObject.Tag)
+            str.AppendLine("Reactor:  " & Me.GraphicObject.Tag)
             str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
             str.AppendLine()
             str.AppendLine("Calculation Parameters")

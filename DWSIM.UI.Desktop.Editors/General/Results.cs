@@ -464,7 +464,7 @@ namespace DWSIM.UI.Desktop.Editors
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Bottom,
                 FontSize = 12,
-                Title = "Volume (" + su.volume + ")"
+                Title = "Reactor Length (" + su.distance + ")"
             });
             model.Axes.Add(new LinearAxis()
             {

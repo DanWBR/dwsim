@@ -510,20 +510,99 @@ Namespace PropertyPackages
 
         Public Sub CalcAdditionalPhaseProperties() Implements IPropertyPackage.CalcAdditionalPhaseProperties
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcAdditionalPhaseProperties", ComponentName & " (Additional Properties)", "Property Package Additional Phase Properties Calculation Routine")
+
+            IObj?.Paragraphs.Add("<h3>Isothermal Compressibility</h3>")
+
+            IObj?.Paragraphs.Add("Isothermal compressibility of a given phase is calculated 
+                                following the thermodynamic definition:")
+
+            IObj?.Paragraphs.Add("<m>\beta=-\frac{1}{V}\frac{\partial V}{\partial P}<m>")
+
+            IObj?.Paragraphs.Add("The above expression is calculated rigorously by the PR and SRK 
+                                equations of state. For the other models, a numerical derivative 
+                                approximation is used.")
+
+            IObj?.Paragraphs.Add("<h3>Bulk Modulus</h3>")
+
+            IObj?.Paragraphs.Add("The Bulk Modulus of a phase is defined as the inverse of the 
+                                isothermal compressibility:")
+
+            IObj?.Paragraphs.Add("<m>K=\frac{1}{\beta}<m>")
+
+            IObj?.Paragraphs.Add("<h3>Speed of Sound</h3><p>")
+
+            IObj?.Paragraphs.Add("The speed of sound in a given phase is calculated by the 
+                                following equations:")
+
+            IObj?.Paragraphs.Add("<m>c=\sqrt{\frac{K}{\rho}},</m>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<mi>c</mi> Speed of sound (m/s)")
+
+            IObj?.Paragraphs.Add("<mi>K</mi> Bulk Modulus (Pa)")
+
+            IObj?.Paragraphs.Add("<mi>\rho</mi> Phase Density (kg/m³)")
+
+            IObj?.Paragraphs.Add("<h3>Joule-Thomson Coefficient</h3>")
+
+            IObj?.Paragraphs.Add("In thermodynamics, the Joule–Thomson effect (also known as the 
+                                Joule–Kelvin effect, Kelvin–Joule effect, or Joule–Thomson 
+                                expansion) describes the temperature change of a real gas or 
+                                liquid when it is forced through a valve or porous plug while 
+                                kept insulated so that no heat is exchanged with the environment. 
+                                This procedure is called a throttling process or Joule–Thomson 
+                                process. At room temperature, all gases except hydrogen, helium 
+                                and neon cool upon expansion by the Joule–Thomson process. The 
+                                rate of change of temperature with respect to pressure in a 
+                                Joule–Thomson process is the Joule–Thomson coefficient.")
+
+            IObj?.Paragraphs.Add("The Joule-Thomson coefficient for a given phase is calculated by 
+                                the following definition:")
+
+            IObj?.Paragraphs.Add("<m>\mu=(\frac{\partial T}{\partial P})_{H},</m>")
+
+            IObj?.Paragraphs.Add("The JT coefficient is calculated rigorously by the PR and SRK 
+                                equations of state, while the Goldzberg correlation is used for 
+                                all other models,")
+
+            IObj?.Paragraphs.Add("<m>\mu=\frac{0.0048823T_{pc}(18/T_{pr}^{2}-1)}{P_{pc}C_{p}\gamma},</m>
+                                for gases, and")
+
+            IObj?.Paragraphs.Add("<m>\mu=-\frac{1}{\rho C_{p}}</m>")
+
+            IObj?.Paragraphs.Add("for liquids.")
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
             For Each p As IPhase In Me.CurrentMaterialStream.Phases.Values
+                IObj?.Paragraphs.Add(String.Format("<h3>{0}</h3>", p.Name))
                 If p.Name <> "Mixture" And p.Name <> "OverallLiquid" Then
+
                     With p.Properties
                         .isothermal_compressibility = CalcIsothermalCompressibility(p)
                         .bulk_modulus = CalcBulkModulus(p)
                         .speedOfSound = CalcSpeedOfSound(p)
                         .jouleThomsonCoefficient = CalcJouleThomsonCoefficient(p)
                     End With
+
                     CalcInternalEnergy(p)
                     CalcGibbsFreeEnergy(p)
                     CalcHelmholtzEnergy(p)
                     CalcDiffusionCoefficients(p)
+
+                    IObj?.Paragraphs.Add(String.Format("Isothermal Compressibility: {0} 1/Pa", p.Properties.isothermal_compressibility))
+                    IObj?.Paragraphs.Add(String.Format("Bulk Modulus: {0} Pa", p.Properties.bulk_modulus))
+                    IObj?.Paragraphs.Add(String.Format("Speed of Sound: {0} m/s", p.Properties.speedOfSound))
+                    IObj?.Paragraphs.Add(String.Format("Joule-Thomson Coefficient: {0} K/Pa", p.Properties.jouleThomsonCoefficient))
+
                 End If
             Next
+
+            IObj?.Close()
 
         End Sub
 

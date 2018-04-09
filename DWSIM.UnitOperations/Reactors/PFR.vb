@@ -35,6 +35,8 @@ Namespace Reactors
 
         Inherits Reactor
 
+        Private _IObj As InspectorItem
+
         Protected m_vol As Double
         Protected m_dv As Double = 0.01
 
@@ -122,6 +124,21 @@ Namespace Reactors
 
         Public Function ODEFunc(ByVal x As Double, ByVal y As Double()) As Double()
 
+            _IObj?.SetCurrent
+
+            Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj2, "", "ODEFunc", "ODE solver for reactor concentrations", "", True)
+
+            IObj2?.SetCurrent
+
+            IObj2?.Paragraphs.Add("<h2>Input Vars</h2>")
+
+            IObj2?.Paragraphs.Add(String.Format("Volume Step: {0}", x))
+            IObj2?.Paragraphs.Add(String.Format("Compound Mole Flows: {0} mol/s", y.ToMathArrayString))
+
+            IObj2?.Paragraphs.Add("<h2>Intermediate Calcs</h2>")
+
             Dim conv As New SystemsOfUnits.Converter
 
             Dim i As Integer = 0
@@ -131,9 +148,15 @@ Namespace Reactors
 
             j = 0
             For Each s As String In N00.Keys
-                C(s) = y(j) * ResidenceTime / (Volume * VolumeFraction)
+                If y(j) < 0 Then
+                    C(s) = 0.0#
+                Else
+                    C(s) = y(j) * ResidenceTime / (Volume * VolumeFraction)
+                End If
                 j = j + 1
             Next
+
+            IObj2?.Paragraphs.Add(String.Format("Compound Concentrations: {0} mol/m3", C.Values.ToArray.ToMathArrayString))
 
             'conversion factors for different basis other than molar concentrations
             Dim convfactors As New Dictionary(Of String, Double)
@@ -154,12 +177,17 @@ Namespace Reactors
 
             i = 0
             Do
+
                 'process reaction i
                 rxn = FlowSheet.Reactions(ar(i))
                 BC = rxn.BaseReactant
                 scBC = rxn.Components(BC).StoichCoeff
 
+                IObj2?.Paragraphs.Add(String.Format("Reaction ID: {0}", rxn.Name))
+
                 Dim T As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
+
+                IObj2?.Paragraphs.Add(String.Format("T: {0} K", T))
 
                 Dim rx As Double = 0.0#
 
@@ -186,6 +214,8 @@ Namespace Reactors
                     Next
 
                     rx = kxf * rxf - kxr * rxr
+
+                    IObj2?.Paragraphs.Add(String.Format("Reaction Rate: {0} {1}", rx, rxn.VelUnit))
 
                     Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
 
@@ -215,12 +245,15 @@ Namespace Reactors
 
                         For Each sb As ReactionStoichBase In rxn.Components.Values
                             If sb.StoichCoeff < 0 Then
+                                IObj2?.Paragraphs.Add(String.Format("R{0} ({1}): {2} {3}", ir.ToString, sb.CompName, C(sb.CompName) * convfactors(sb.CompName), rxn.ConcUnit))
                                 rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
                                 ir += 1
                             ElseIf sb.StoichCoeff > 0 Then
+                                IObj2?.Paragraphs.Add(String.Format("P{0} ({1}): {2} {3}", ip.ToString, sb.CompName, C(sb.CompName) * convfactors(sb.CompName), rxn.ConcUnit))
                                 rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
                                 ip += 1
                             Else
+                                IObj2?.Paragraphs.Add(String.Format("N{0} ({1}): {2} {3}", ine.ToString, sb.CompName, C(sb.CompName) * convfactors(sb.CompName), rxn.ConcUnit))
                                 rxn.ExpContext.Variables.Add("N" & ine.ToString, C(sb.CompName) * convfactors(sb.CompName))
                                 ine += 1
                             End If
@@ -234,9 +267,14 @@ Namespace Reactors
 
                         denmval = rxn.Expr.Evaluate
 
+                        IObj2?.Paragraphs.Add(String.Format("Numerator Value: {0}", numval))
+                        IObj2?.Paragraphs.Add(String.Format("Denominator Value: {0}", denmval))
+
                         rx = numval / denmval
 
                     End If
+
+                    IObj2?.Paragraphs.Add(String.Format("Reaction Rate: {0} {1}", rx, rxn.VelUnit))
 
                     Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
 
@@ -266,6 +304,14 @@ Namespace Reactors
 
             FlowSheet.CheckStatus()
 
+            IObj2?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj2?.Paragraphs.Add(String.Format("Compound Mole Flows Variation: {0} mol/[m3.s]", dy.ToMathArrayString))
+
+            IObj2?.Close()
+
+            If Double.IsNaN(dy.Sum) Then Throw New Exception("PFR ODE solver failed to find a solution.")
+
             Return dy
 
         End Function
@@ -277,6 +323,22 @@ Namespace Reactors
             Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
 
             IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("To run a simulation of a reactor, the user needs to define the chemical reactions which will take place in the reactor.</p>
+                                This Is done through the&nbsp;<span style='font-weight bold;'>Reactions Manager, </span>accessible through <span style='font-weight: bold;'>Simulation Settings &gt; Basis &gt; Open Chemical Reactions Manager</span> or <span style='font-weight: bold;'>Tools &gt; Reactions Manager</span> menus (see separate documentation).<br><br>Reactions can be of&nbsp;<span style='font-weight: bold;'>Equilibrium</span>,<span style='font-weight: bold;'>&nbsp;Conversion</span>,<span style='font-weight: bold;'>&nbsp;Kinetic</span> or&nbsp;<span style='font-weight: bold;'>Heterogeneous Catalytic</span> types. One or more reactions can be&nbsp;combined to define
+                                            a&nbsp;<span style='font-weight bold;'>Reaction Set</span>. The reactors then 'see' the reactions through the reaction sets.
+                                <br><br><span style ='font-weight bold; font-style: italic;'>Equilibrium</span>
+                                Reactions are defined by an equilibrium constant (K). The source Of
+                                Information for the equilibrium constant can be a direct gibbs energy
+                                calculation, an expression defined by the user Or a constant value.
+                                Equilibrium Reactions can be used in Equilibrium And Gibbs reactors.<br><br><span style='font-weight bold; font-style: italic;'>Conversion</span>
+                                            Reactions are defined by the amount of a base compound which Is
+                                consumed in the reaction. This amount can be a fixed value Or a
+                                Function of() the system temperature. Conversion reactions are supported
+                                by the Conversion reactor.<br><br><span style='font-weight bold; font-style: italic;'>Kinetic</span> reactions are reactions defined by a kinetic expression. These reactions are supported by the PFR and CSTR reactors. <br><br><span style='font-weight: bold; font-style: italic;'>Heterogeneous Catalytic</span> reactions&nbsp;in DWSIM must obey the <span style='font-style: italic;'>Langmuir&#8211;Hinshelwood</span> 
+                                            mechanism, where compounds react over a solid catalyst surface. In this 
+                                model, Reaction rates are a function of catalyst amount (i.e. mol/kg 
+                                cat.s). These Reactions are supported by the PFR And CStr reactors.<p>")
 
             N00 = New Dictionary(Of String, Double)
             C0 = New Dictionary(Of String, Double)
@@ -386,6 +448,16 @@ Namespace Reactors
             Dim prevvol As Double = 0.0#
             Do
 
+                IObj?.SetCurrent
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", String.Format("PFR Volume Step Calculation (V = {0} m3)", currvol), "", True)
+
+                IObj2?.SetCurrent()
+
+                _IObj = IObj2
+
                 C = New Dictionary(Of String, Double)
                 C0 = New Dictionary(Of String, Double)
 
@@ -475,16 +547,18 @@ Namespace Reactors
                     Next
 
                     Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
-                    'odesolver.RelTol = 0.000001
-                    'odesolver.AbsTol = 0.0000000001
+                    odesolver.RelTol = 0.000001
+                    odesolver.AbsTol = 0.0000000001
                     odesolver.InitializeODEs(AddressOf ODEFunc, N.Count)
-                    odesolver.Solve(vc, 0.0#, 0.05 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
+                    IObj2?.SetCurrent
+                    odesolver.Solve(vc, 0.0#, 0.1 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
 
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
                     C.Clear()
                     i = 0
                     For Each sb As KeyValuePair(Of String, Double) In C0
+                        If vc(i) < 0.0# Then vc(i) = 0.0#
                         C(sb.Key) = Convert.ToDouble(vc(i) * ResidenceTime / Volume / VolumeFraction)
                         i = i + 1
                     Next
@@ -529,7 +603,7 @@ Namespace Reactors
                             DHr += rxn.ReactionHeat * Abs(Rxi(rxn.ID)) / 1000 * CatalystLoading * dV * Volume
                         End If
 
-                        If Ri.Values.Sum = 0.0# Then DHr = 0.0#
+                        'If Ri.Values.Sum = 0.0# Then DHr = 0.0#
 
                         i += 1
 
@@ -617,7 +691,7 @@ Namespace Reactors
 
                 'add data to array
                 Dim tmparr(C.Count + 2) As Double
-                tmparr(0) = currvol
+                tmparr(0) = currvol / Volume * Length
                 i = 1
                 For Each d As Double In Me.C.Values
                     tmparr(i) = d
@@ -682,7 +756,7 @@ Namespace Reactors
                 prevvol = currvol
                 currvol += dV * Volume
 
-            Loop Until (currvol - Volume) >= dV
+            Loop Until (currvol - Volume) >= Volume
 
             Me.DeltaP = P0 - P
 
@@ -696,9 +770,13 @@ Namespace Reactors
                 Do
 
                     'process reaction i
+
                     rxn = FlowSheet.Reactions(ar(i))
 
-                    RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant))
+                    Dim f = Rxi(rxn.ID) / Ri(rxn.BaseReactant)
+                    If Double.IsNaN(f) Or Double.IsInfinity(f) Then f = 1.0#
+
+                    RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000 * f)
                     DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID))
 
                     i += 1
