@@ -317,7 +317,6 @@ Namespace PropertyPackages
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
             Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
 
             IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase properties of the currently associated Material Stream.")
@@ -972,6 +971,13 @@ Namespace PropertyPackages
             Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcFugCoeff", "Peng-Robinson EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
 
             IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
 
             Dim lnfug As Double()
 

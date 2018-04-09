@@ -133,7 +133,7 @@ public class CoolProp {
     if (CoolPropPINVOKE.SWIGPendingException.Pending) throw CoolPropPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public static void set_error_string(string error) {
+    public static void set_error_string(string error) {
     CoolPropPINVOKE.set_error_string(error);
     if (CoolPropPINVOKE.SWIGPendingException.Pending) throw CoolPropPINVOKE.SWIGPendingException.Retrieve();
   }

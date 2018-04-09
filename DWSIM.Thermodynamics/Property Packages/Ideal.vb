@@ -216,6 +216,14 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
+
+            IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase properties of the currently associated Material Stream.")
+
+            IObj?.Paragraphs.Add("Specified Phase: " & [Enum].GetName(Phase.GetType, Phase))
+
             Dim result As Double
             Dim resultObj As Object
             Dim dwpl As Phase
@@ -264,20 +272,26 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = result
                 result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(Phase) / 1000 / Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = result
+                IObj?.SetCurrent
                 Me.DW_CalcCompVolFlow(phaseID)
+                IObj?.SetCurrent
                 Me.DW_CalcCompFugCoeff(Phase)
             End If
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
+                IObj?.SetCurrent
                 result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
+                IObj?.SetCurrent
                 result = Me.m_id.H_RA_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, dwpl), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
+                IObj?.SetCurrent
                 result = Me.m_id.S_RA_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, dwpl), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = 0
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
+                IObj?.SetCurrent
                 resultObj = Me.m_id.CpCv("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VMAS(dwpl), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = Me.AUX_LIQCPm(T, phaseID)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp.GetValueOrDefault
@@ -287,22 +301,28 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
+                IObj?.SetCurrent
                 result = Me.AUX_CONDTL(T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
+                IObj?.SetCurrent
                 result = Me.AUX_LIQVISCm(T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
 
             ElseIf phaseID = 2 Then
 
+                IObj?.SetCurrent
                 result = Me.AUX_VAPDENS(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
+                IObj?.SetCurrent
                 result = Me.m_id.H_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, Phase.Vapor), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
+                IObj?.SetCurrent
                 result = Me.m_id.S_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor), Me.RET_VHVAP(T))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = 1
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
+                IObj?.SetCurrent
                 result = Me.AUX_CPm(PropertyPackages.Phase.Vapor, T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = Me.AUX_CPm(Phase.Vapor, T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp.GetValueOrDefault - 8.314 / Me.AUX_MMM(Phase.Vapor)
@@ -312,8 +332,10 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
+                IObj?.SetCurrent
                 result = Me.AUX_CONDTG(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
+                IObj?.SetCurrent
                 result = Me.AUX_VAPVISCm(T, Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault, Me.AUX_MMM(Phase))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
@@ -326,10 +348,12 @@ Namespace PropertyPackages
                 For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     constprops.Add(su.ConstantProperties)
                 Next
+                IObj?.SetCurrent
                 result = Me.DW_CalcSolidEnthalpy(T, RET_VMOL(PropertyPackages.Phase.Solid), constprops)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result / T
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = 0.0# 'result
+                IObj?.SetCurrent
                 result = Me.DW_CalcSolidHeatCapacityCp(T, RET_VMOL(PropertyPackages.Phase.Solid), constprops)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
@@ -339,16 +363,19 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
+                IObj?.SetCurrent
                 result = Me.AUX_CONDTG(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = 0.0# 'result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = 1.0E+20
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = 1.0E+20
             ElseIf phaseID = 1 Then
 
+                IObj?.SetCurrent
                 DW_CalcLiqMixtureProps()
 
             Else
 
+                IObj?.SetCurrent
                 DW_CalcOverallProps()
 
             End If
@@ -361,6 +388,7 @@ Namespace PropertyPackages
                 'Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = result
             End If
 
+            IObj?.Close()
 
         End Sub
 
@@ -663,6 +691,19 @@ Namespace PropertyPackages
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcFugCoeff", "Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
+
             Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim fugcoeff(n) As Double
@@ -671,8 +712,10 @@ Namespace PropertyPackages
                 Dim Tc As Object = Me.RET_VTC()
                 For i = 0 To n
                     If T / Tc(i) >= 1 Then
+                        IObj?.SetCurrent()
                         fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
                     Else
+                        IObj?.SetCurrent()
                         fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
                     End If
                 Next
@@ -683,6 +726,12 @@ Namespace PropertyPackages
             End If
 
             Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Fugacity Coefficients: {0}", fugcoeff.ToMathArrayString))
+
+            IObj?.Close()
 
             Return fugcoeff
 

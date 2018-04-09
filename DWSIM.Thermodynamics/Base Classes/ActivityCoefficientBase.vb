@@ -490,6 +490,20 @@ Namespace PropertyPackages
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcFugCoeff", "Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
+
             Dim n As Integer = Vx.Length - 1
             Dim lnfug(n), ativ(n) As Double
             Dim fugcoeff(n), poy(n) As Double
@@ -505,10 +519,13 @@ Namespace PropertyPackages
                     Dim Psati, vli As Double
                     For i = 0 To n
                         If T < 0.98 * Tc(i) Then
+                            IObj?.SetCurrent()
                             vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
                             If Double.IsNaN(vli) Then
+                                IObj?.SetCurrent()
                                 vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
                             End If
+                            IObj?.SetCurrent()
                             Psati = AUX_PVAPi(i, T)
                             poy(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
                         End If
@@ -519,15 +536,18 @@ Namespace PropertyPackages
                     Next
                 End If
 
+                IObj?.SetCurrent()
                 ativ = Me.m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
 
                 For i = 0 To n
                     Tr = T / Tc(i)
                     If Tr >= 1.02 Then
+                        IObj?.SetCurrent()
                         lnfug(i) = Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P)
                     ElseIf Tr < 0.98 Then
                         lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
                     Else 'do interpolation at proximity of critical point
+                        IObj?.SetCurrent()
                         Dim a2 As Double = AUX_KHenry(Me.RET_VNAMES(i), 1.02 * Tc(i))
                         Dim a1 As Double = ativ(i) * Me.AUX_PVAPi(i, 0.98 * Tc(i))
                         lnfug(i) = Math.Log(((Tr - 0.98) / (1.02 - 0.98) * (a2 - a1) + a1) / P)
@@ -543,6 +563,7 @@ Namespace PropertyPackages
                     Next
                 Else
                     Dim prn As New PropertyPackages.ThermoPlugs.PR
+                    IObj?.SetCurrent()
                     lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "V")
                 End If
 
@@ -553,6 +574,12 @@ Namespace PropertyPackages
             Next
 
             Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Fugacity Coefficients: {0}", fugcoeff.ToMathArrayString))
+
+            IObj?.Close()
 
             Return fugcoeff
 

@@ -35,6 +35,8 @@ Namespace PropertyPackages
 
         Public CompoundAliases As New Dictionary(Of String, List(Of String))
 
+        Private _IObj As InspectorItem
+
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
             GetListOfSupportedCompounds()
@@ -79,9 +81,20 @@ Namespace PropertyPackages
             Return CompoundAliases(casid)(0)
         End Function
 
+        Private Sub SetCPDebugLevel()
+
+            If GlobalSettings.Settings.InspectorEnabled Then
+                CoolProp.set_debug_level(100000)
+            Else
+                CoolProp.set_debug_level(0)
+            End If
+
+        End Sub
+
 #Region "    DWSIM Functions"
 
         Private Sub WriteWarningMessage(message As String)
+            _IObj?.Paragraphs.Add(message)
             Select Case Settings.DebugLevel
                 Case 0
                     'do nothing
@@ -91,6 +104,15 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Function AUX_CPi(sub1 As String, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Ideal Gas Heat Capacity - {0})", sub1)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_CPi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
@@ -115,10 +137,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Ideal Gas Heat Capacity value...")
                 val = MyBase.AUX_CPi(sub1, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Ideal Gas Heat Capacity: {0} kJ/[kg.K]", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_PVAPi(index As Integer, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Vapor Pressure - {0})", index)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_PVAPi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -139,10 +175,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Vapor Pressure value...")
                 val = MyBase.AUX_PVAPi(index, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Vapor Pressure: {0} Pa", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Vapor Pressure - {0})", sub1)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_PVAPi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
@@ -162,10 +212,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Vapor Pressure value...")
                 val = MyBase.AUX_PVAPi(sub1, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Vapor Pressure: {0} Pa", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_TSATi(PVAP As Double, index As Integer) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Saturation Temperature - {0})", index)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_TSATi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Vapor Pressure: {0} Pa", PVAP))
+
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Pmin, Pmax, val As Double
             If IsCompoundSupported(sub1) Then
@@ -186,10 +250,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Saturation Temperature value...")
                 val = MyBase.AUX_TSATi(PVAP, index)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Saturation Temperature: {0} K", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_TSATi(PVAP As Double, subst As String) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Saturation Temperature - {0})", subst)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_TSATi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Vapor Pressure: {0} Pa", PVAP))
+
             Dim Pmin, Pmax, val As Double
             If IsCompoundSupported(subst) Then
                 Pmin = CoolProp.Props1SI(GetCoolPropName(subst), "PMIN")
@@ -209,10 +287,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & subst & " not supported. Estimating Saturation Temperature value...")
                 val = MyBase.AUX_TSATi(PVAP, subst)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Saturation Temperature: {0} K", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_LIQDENSi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Density - {0})", cprop.Name)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQDENSi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -234,10 +326,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Density value...")
                 val = MyBase.AUX_LIQDENSi(cprop, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_LIQ_Cpi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Heat Capacity - {0})", cprop.Name)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQ_Cpi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -259,10 +365,25 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Heat Capacity value...")
                 val = MyBase.AUX_LIQ_Cpi(cprop, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Liquid Cp: {0} kJ/[kg.K]", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_CONDTG(T As Double, P As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Vapor Thermal Conductivity)")
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_CONDTG", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
@@ -333,10 +454,24 @@ Namespace PropertyPackages
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Thermal Conductivity: {0} W/[m.K]", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_CONDTL(T As Double, Optional phaseid As Integer = 3) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Thermal Conductivity)")
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_CONDTL", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Tb, Tc As Double
@@ -391,10 +526,25 @@ Namespace PropertyPackages
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Thermal Conductivity: {0} W/[m.K]", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_LIQDENS(T As Double, Vx As System.Array, Optional P As Double = 0.0, Optional Pvp As Double = 0.0, Optional FORCE_EOS As Boolean = False) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Density)")
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQDENS", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Tc As Double
@@ -431,10 +581,24 @@ Namespace PropertyPackages
                 i = i + 1
             Next
             val = 1 / MathEx.Common.Sum(vk)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_LIQDENSi(subst As Interfaces.ICompound, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Density - {0})", subst.Name)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQDENSi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim sub1 = subst.ConstantProperties.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -456,10 +620,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Density value...")
                 val = MyBase.AUX_LIQDENSi(subst, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_LIQTHERMCONDi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Thermal Conductivity - {0})", cprop.Name)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQTHERMCONDi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -481,10 +659,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Thermal Conductivity value...")
                 val = MyBase.AUX_LIQTHERMCONDi(cprop, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Thermal Conductivity: {0} W/[m.K]", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_LIQVISCi(sub1 As String, T As Double) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Viscosity - {0})", sub1)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQVISCi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
@@ -505,10 +697,24 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Viscosity value...")
                 val = MyBase.AUX_LIQVISCi(sub1, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Viscosity: {0} Pa.s", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overrides Function AUX_SURFTi(constprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Surface Tension - {0})", constprop.Name)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_SURFTi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim sub1 = constprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -534,6 +740,11 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Thermal Surface Tension value...")
                 val = MyBase.AUX_LIQTHERMCONDi(constprop, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Surface Tension: {0} N/m", val))
+            IObj?.Close()
+
             Return val
         End Function
 
@@ -549,6 +760,16 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function AUX_VAPTHERMCONDi(cprop As Interfaces.ICompoundConstantProperties, T As Double, P As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Vapor Thermal Coductivity - {0})", cprop.Name)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_VAPTHERMCONDi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -598,10 +819,25 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Vapor Thermal Conductivity value...")
                 val = MyBase.AUX_VAPTHERMCONDi(cprop, T, P)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Thermal Conductivity: {0} W/[m.K]", val))
+            IObj?.Close()
+
             Return val
         End Function
 
         Public Overloads Function AUX_VAPVISCi(cprop As Interfaces.ICompoundConstantProperties, T As Double, P As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Vapor Viscosity - {0})", cprop.Name)
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_VAPVISCi", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, val As Double
             If IsCompoundSupported(sub1) Then
@@ -622,6 +858,11 @@ Namespace PropertyPackages
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Vapor Viscosity value...")
                 val = MyBase.AUX_VAPVISCi(cprop, T)
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Viscosity: {0} Pa.s", val))
+            IObj?.Close()
+
             Return val
         End Function
 
@@ -690,6 +931,15 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_LIQDENS(ByVal T As Double, Optional ByVal P As Double = 0.0, Optional ByVal Pvp As Double = 0.0, Optional ByVal phaseid As Integer = 3, Optional ByVal FORCE_EOS As Boolean = False) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Liquid Density)")
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQDENS", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+
             Dim val As Double
             Dim i As Integer
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
@@ -701,11 +951,25 @@ Namespace PropertyPackages
             Next
             val = 1 / MathEx.Common.Sum(vk)
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
+            IObj?.Close()
+
+
             Return val
 
         End Function
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Vapor Density)")
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_VAPDENS", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
 
             Dim val As Double = 1.0
             Dim i As Integer
@@ -765,6 +1029,11 @@ Namespace PropertyPackages
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
+            IObj?.Close()
+
             Return val
 
         End Function
@@ -1015,6 +1284,20 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+            SetCPDebugLevel()
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Phase Enthalpy)")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEnthalpy", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
+
             Dim val As Double
             Dim i As Integer
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
@@ -1106,6 +1389,10 @@ Namespace PropertyPackages
 
             val = MathEx.Common.Sum(vk)
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", val))
+            IObj?.Close()
+
             Return val
 
         End Function
@@ -1117,6 +1404,20 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+            SetCPDebugLevel()
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim routinename As String = ComponentName & String.Format(" (Phase Entropy)")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEntropy", routinename, "", True)
+            _IObj = IObj
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
 
             Dim val As Double
             Dim i As Integer
@@ -1209,6 +1510,10 @@ Namespace PropertyPackages
 
             val = MathEx.Common.Sum(vk)
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Entropy: {0} kJ/[kg.K]", val))
+            IObj?.Close()
+
             Return val
 
         End Function
@@ -1220,6 +1525,21 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            SetCPDebugLevel()
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcFugCoeff", "Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
 
             Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
@@ -1233,8 +1553,10 @@ Namespace PropertyPackages
                 Dim Tc As Object = Me.RET_VTC()
                 For i = 0 To n
                     If T / Tc(i) >= 1 Then
+                        IObj?.SetCurrent()
                         fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
                     Else
+                        IObj?.SetCurrent()
                         fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
                     End If
                 Next
@@ -1245,6 +1567,10 @@ Namespace PropertyPackages
             End If
 
             Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Fugacity Coefficients: {0}", fugcoeff.ToMathArrayString))
+            IObj?.Close()
 
             Return fugcoeff
 
@@ -1269,6 +1595,16 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As Phase)
+
+            SetCPDebugLevel()
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
+
+            IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase properties of the currently associated Material Stream.")
+
+            IObj?.Paragraphs.Add("Specified Phase: " & [Enum].GetName(Phase.GetType, Phase))
 
             Dim result As Double
             Dim dwpl As Phase
@@ -1318,42 +1654,54 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = result
                 result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(Phase) / 1000 / Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = result
+                IObj?.SetCurrent
                 Me.DW_CalcCompVolFlow(phaseID)
+                IObj?.SetCurrent
                 Me.DW_CalcCompFugCoeff(Phase)
             End If
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
 
+                IObj?.SetCurrent
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = AUX_LIQDENS(T, P, 0.0#, phaseID)
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
 
+                IObj?.SetCurrent
                 result = P / (Me.AUX_LIQDENS(T, P, 0, phaseID) * 8.314 * T) / 1000 * AUX_MMM(Phase)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcCp_ISOL(Phase, T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcCv_ISOL(Phase, T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
 
                 result = Me.AUX_MMM(Phase)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
 
+                IObj?.SetCurrent
                 result = Me.AUX_CONDTL(T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
+                IObj?.SetCurrent
                 result = Me.AUX_LIQVISCm(T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
 
@@ -1361,47 +1709,60 @@ Namespace PropertyPackages
 
             ElseIf phaseID = 2 Then
 
+                IObj?.SetCurrent
                 result = Me.AUX_VAPDENS(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
 
+                IObj?.SetCurrent
                 result = P / (Me.AUX_VAPDENS(T, P) * 8.314 * T) / 1000 * AUX_MMM(Phase)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcCp_ISOL(Phase, T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcCv_ISOL(Phase, T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
 
+                IObj?.SetCurrent
                 result = Me.AUX_MMM(Phase)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
 
+                IObj?.SetCurrent
                 result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
 
+                IObj?.SetCurrent
                 result = Me.AUX_CONDTG(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
+                IObj?.SetCurrent
                 result = Me.AUX_VAPVISCMIX(T, P, Me.AUX_MMM(Phase))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault
 
             ElseIf phaseID = 1 Then
 
+                IObj?.SetCurrent
                 DW_CalcLiqMixtureProps()
 
 
             Else
 
+                IObj?.SetCurrent
                 DW_CalcOverallProps()
 
             End If
@@ -1412,6 +1773,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = result
             End If
 
+            IObj?.Close()
 
         End Sub
 

@@ -75,9 +75,7 @@ namespace DWSIM.UI.Desktop.WPF
 
     public class FlowsheetSurface_WPF : SkiaSharp.Views.WPF.SKElement
     {
-
-        double DpiScale = 1.0;
-
+        
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
         private WriteableBitmap bitmap;
