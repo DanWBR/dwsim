@@ -148,23 +148,19 @@ namespace DWSIM.UI.Forms
             }
 
             PageEditor = tab2;
-            
-            if (obj.Calculated)
-            {
-                var tabr = new TabPage();
-                tabr.Text = "Results";
 
-                var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
-                var container = new TableLayout();
-                new DWSIM.UI.Desktop.Editors.Results(obj, container);
+            var tabr = new TabPage();
+            tabr.Text = "Results";
 
-                tabr.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
+            var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
+            var container = new TableLayout();
+            new DWSIM.UI.Desktop.Editors.Results(obj, container);
 
-                PageResults = tabr;
+            tabr.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
 
-                Pages.Add(tabr);
+            PageResults = tabr;
 
-            }
+            Pages.Add(tabr);
 
             if (obj.GraphicObject is ShapeGraphic)
             {
@@ -231,18 +227,11 @@ namespace DWSIM.UI.Forms
                 PageEditor.Content = new Scrollable() { Content = cont, Width = this.Width - 30 };
 
             }
-
-            if (PageResults != null)
-            {
-                PageResults.Content = null;
-                if (obj.Calculated)
-                {
-                    var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
-                    var container = new TableLayout();
-                    new DWSIM.UI.Desktop.Editors.Results(obj, container);
-                    PageResults.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
-                }
-            }
+            
+            var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
+            var container = new TableLayout();
+            new DWSIM.UI.Desktop.Editors.Results(obj, container);
+            PageResults.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
 
         }
     }
