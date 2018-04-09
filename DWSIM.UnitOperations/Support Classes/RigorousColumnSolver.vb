@@ -1916,6 +1916,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
 
+            For Each Ki In K.ToJaggedArray
+                If pp.AUX_CheckTrivial(Ki) Then
+                    IObj?.Paragraphs.Add("Invalid result - converged to the trivial solution.")
+                    Throw New Exception("Invalid result - converged to the trivial solution.")
+                End If
+            Next
+
             IObj?.Close()
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, il_err, ec, el_err, dfdx}
@@ -4234,6 +4241,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
+            For Each Ki In _Kval
+                If pp.AUX_CheckTrivial(Ki) Then
+                    IObj?.Paragraphs.Add("Invalid result - converged to the trivial solution.")
+                    Throw New Exception("Invalid result - converged to the trivial solution.")
+                End If
+            Next
 
             IObj?.Close()
 

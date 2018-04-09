@@ -2756,6 +2756,9 @@ Namespace UnitOperations
                     For j = 0 To nc - 1
                         Kval(i)(j) = y(i)(j) / x(i)(j)
                     Next
+                    If llextractor And pp.AUX_CheckTrivial(Kval(i)) Then
+                        Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
+                    End If
                 End If
                 i = i + 1
             Next
