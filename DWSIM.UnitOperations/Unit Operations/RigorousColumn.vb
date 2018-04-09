@@ -3030,7 +3030,11 @@ Namespace UnitOperations
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
                             IObj?.SetCurrent()
-                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
+                            If llextractor Then
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
+                            Else
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
+                            End If
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = yf(0)(i)

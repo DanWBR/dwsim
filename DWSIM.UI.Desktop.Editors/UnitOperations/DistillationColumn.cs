@@ -586,13 +586,13 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (External Loop)", column.ExternalLoopTolerance,
             (sender, e) =>
             {
-                if (sender.Text.IsValidDouble()) column.ExternalLoopTolerance = (int)sender.Text.ToDoubleFromCurrent();
+                if (sender.Text.IsValidDouble()) column.ExternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (Internal Loop)", column.InternalLoopTolerance,
             (sender, e) =>
             {
-                if (sender.Text.IsValidDouble()) column.InternalLoopTolerance = (int)sender.Text.ToDoubleFromCurrent();
+                if (sender.Text.IsValidDouble()) column.InternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             s.CreateAndAddTextBoxRow(container, nf, "Maximum Temperature Change Step (" + su.deltaT + ")", cv.ConvertFromSI(su.deltaT, column.MaximumTemperatureStep),
