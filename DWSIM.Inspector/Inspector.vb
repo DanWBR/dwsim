@@ -122,7 +122,7 @@ Public Class InspectorItem
         stb.AppendLine(String.Format("ID: {0}<br/>", ID))
         stb.AppendLine(String.Format("Parent Item ID: {0}<br/>", ParentID))
         stb.AppendLine(String.Format("Thread ID: {0}<br/>", ThreadID))
-        stb.AppendLine(String.Format("Time Taken: {0} ms", Convert.ToInt32(TimeTaken.TotalMilliseconds)))
+        stb.AppendLine(String.Format("Time Taken: {0} ms", TimeTaken.TotalMilliseconds))
         stb.AppendLine("</div></section></html>")
 
         Return stb.ToString()

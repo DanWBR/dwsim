@@ -2750,7 +2750,9 @@ Namespace UnitOperations
                         L2 = flashresult(5)
                         Vx1 = flashresult(2)
                         Vx2 = flashresult(6)
+                        IObj?.SetCurrent()
                         rho1 = pp.AUX_LIQDENS(T(i), Vx1)
+                        IObj?.SetCurrent()
                         rho2 = pp.AUX_LIQDENS(T(i), Vx2)
                         If rho1 > rho2 Then
                             x(i) = Vx1

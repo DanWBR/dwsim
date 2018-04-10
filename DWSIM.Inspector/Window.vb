@@ -173,6 +173,7 @@ Public Class Window
                                           For Each item In sitems.Where(Function(x) x.ParentID = -1)
                                               Dim timetaken = item.TimeTaken.TotalMilliseconds.ToString("N0") + " ms"
                                               If timetaken = "0 ms" Then timetaken = (item.TimeTaken.TotalMilliseconds * 1000).ToString("N0") + " µs"
+                                              If timetaken = "0 µs" Then timetaken = (item.TimeTaken.TotalMilliseconds * 1000000).ToString("N0") + " ns"
                                               Dim titem = New TreeGridItem() With {.Values = {item.Name + " (" + timetaken + ")"}, .Tag = item.ID}
                                               tvc.Add(titem)
                                               Application.Instance.Invoke(Sub()
@@ -186,6 +187,7 @@ Public Class Window
                                                   Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeGridItem).Tag = item2.ParentID).FirstOrDefault
                                                   Dim timetaken2 = item2.TimeTaken.TotalMilliseconds.ToString("N0") + " ms"
                                                   If timetaken2 = "0 ms" Then timetaken2 = (item2.TimeTaken.TotalMilliseconds * 1000).ToString("N0") + " µs"
+                                                  If timetaken2 = "0 µs" Then timetaken2 = (item2.TimeTaken.TotalMilliseconds * 1000000).ToString("N0") + " ns"
                                                   Dim titem2 = New TreeGridItem() With {.Values = {item2.Name + " (" + timetaken2 + ")"}, .Tag = item2.ID}
                                                   If parent Is Nothing Then
                                                       tvc.Add(titem2)

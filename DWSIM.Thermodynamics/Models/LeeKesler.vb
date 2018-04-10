@@ -97,6 +97,8 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Mixture Critical Volume: {0} ", Vcm))
             IObj?.Paragraphs.Add(String.Format("Mixture Acentric Factor: {0} ", wm))
 
+            IObj?.Close()
+
             Return New Object() {Tcm, Pcm, Vcm, wm}
 
         End Function
