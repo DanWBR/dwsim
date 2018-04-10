@@ -207,8 +207,6 @@ namespace DWSIM.UI.Desktop.Shared
             else
             {
 
-                st.Start();
-
                 Application.Instance.AsyncInvoke(() =>
                 {
                     FlowsheetForm.Enabled = false;
@@ -217,6 +215,8 @@ namespace DWSIM.UI.Desktop.Shared
                     if (solvform != null) solvform.ShowModalAsync(FlowsheetControl);
                 });
 
+                st.Start();
+                
             }
 
         }
