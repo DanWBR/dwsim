@@ -66,16 +66,16 @@ Public Class Window
                                             End If
                                         End Sub
 
-        Dim btnPerfAn As New Button() With {.Text = "Performance Analyzer"}
+        'Dim btnPerfAn As New Button() With {.Text = "Performance Analyzer"}
 
-        AddHandler btnPerfAn.Click, Sub()
-                                        Dim f = c.GetDefaultEditorForm("DWSIM - Solution Inspector / Performance Analyzer", 1024, 768, PerfAn.GetPerfAnWindow(SetsBox.SelectedKey), False)
-                                        f.WindowState = WindowState.Maximized
-                                        f.Show()
-                                    End Sub
+        'AddHandler btnPerfAn.Click, Sub()
+        'Dim f = c.GetDefaultEditorForm("DWSIM - Solution Inspector / Performance Analyzer", 1024, 768, PerfAn.GetPerfAnWindow(SetsBox.SelectedKey), False)
+        'f.WindowState = WindowState.Maximized
+        'f.Show()
+        'End Sub
 
-        Dim l1 As New TableLayout(New TableRow(lblTools, Nothing, btnPerfAn, btnExportHTML))
-        'l1.Padding = New Padding(5, 5, 5, 5)
+        Dim l1 As New TableLayout(New TableRow(lblTools, Nothing, btnExportHTML))
+        'Dim l1 As New TableLayout(New TableRow(lblTools, Nothing, btnPerfAn, btnExportHTML))
         l1.Spacing = New Size(10, 10)
 
         rightcontainer.Rows.Add(New TableRow(l1))
@@ -171,7 +171,9 @@ Public Class Window
                                                                       End Sub)
                                           Dim i As Integer = 1
                                           For Each item In sitems.Where(Function(x) x.ParentID = -1)
-                                              Dim titem = New TreeGridItem() With {.Values = {item.Name + " (" + item.TimeTaken.TotalMilliseconds.ToString("N0") + " ms)"}, .Tag = item.ID}
+                                              Dim timetaken = item.TimeTaken.TotalMilliseconds.ToString("N0") + " ms"
+                                              If timetaken = "0 ms" Then timetaken = (item.TimeTaken.TotalMilliseconds * 1000).ToString("N0") + " µs"
+                                              Dim titem = New TreeGridItem() With {.Values = {item.Name + " (" + timetaken + ")"}, .Tag = item.ID}
                                               tvc.Add(titem)
                                               Application.Instance.Invoke(Sub()
                                                                               loadingtext.Text = String.Format("Loading reports... ({0}/{1})", i, allitems.Count)
@@ -182,7 +184,9 @@ Public Class Window
                                               Dim nesteditems = GetItems(item)
                                               For Each item2 In nesteditems
                                                   Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeGridItem).Tag = item2.ParentID).FirstOrDefault
-                                                  Dim titem2 = New TreeGridItem() With {.Values = {item2.Name + " (" + item2.TimeTaken.TotalMilliseconds.ToString("N0") + " ms)"}, .Tag = item2.ID}
+                                                  Dim timetaken2 = item2.TimeTaken.TotalMilliseconds.ToString("N0") + " ms"
+                                                  If timetaken2 = "0 ms" Then timetaken2 = (item2.TimeTaken.TotalMilliseconds * 1000).ToString("N0") + " µs"
+                                                  Dim titem2 = New TreeGridItem() With {.Values = {item2.Name + " (" + timetaken2 + ")"}, .Tag = item2.ID}
                                                   If parent Is Nothing Then
                                                       tvc.Add(titem2)
                                                   Else

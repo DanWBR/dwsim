@@ -1022,10 +1022,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             'find recycles
 
-            IObj?.Paragraphs.Add("The solver will now check for existing recycles, which will be connected to the tear streams.")
+            IObj?.Paragraphs.Add("The solver will now check for Recycles connected to 'tear' Material Streams...")
 
             Dim recycles As New List(Of String)
             Dim totalv As Integer = 0
+            Dim totalr As Integer = 0
 
             For Each r In objstack
                 Dim robj = fbag.SimulationObjects(r)
@@ -1036,10 +1037,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         If rec.Values.Count = 0 Then fbag.SimulationObjects(robj.Name).Calculate()
                         totalv += rec.Values.Count
                     End If
+                    totalr += 1
                 End If
             Next
 
-            IObj?.Paragraphs.Add(String.Format("Number of recycles found: {0}.", totalv))
+            IObj?.Paragraphs.Add(String.Format("Number of Recycles found: {0}.", totalr))
 
             'size hessian matrix, variables and error vectors for recycle simultaneous solving.
 

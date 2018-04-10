@@ -68,27 +68,24 @@ Public Class InspectorItem
 
     Public Property ThreadID As Integer = -1
 
-    Public Property StartTime As DateTime = DateTime.Now
-
-    Public Property EndTime As DateTime = DateTime.Now
-
     Public Property TimeTaken As TimeSpan
 
     Public Property Items As New List(Of InspectorItem)
 
     Public Property CodePath As String = ""
 
+    Private Property _Counter As New Stopwatch
+
     Sub New()
         ID = Guid.NewGuid().ToString()
-        StartTime = Date.Now
         ThreadID = System.Threading.Thread.CurrentThread.ManagedThreadId
         SolutionID = Host.CurrentSolutionID
-        Dim st As New StackTrace()
+        _Counter.Start()
     End Sub
 
     Public Sub Close()
-        EndTime = DateTime.Now
-        TimeTaken = EndTime - StartTime
+        _Counter.Stop()
+        TimeTaken = _Counter.Elapsed
     End Sub
 
     Public Function GetHTML() As String
@@ -125,8 +122,6 @@ Public Class InspectorItem
         stb.AppendLine(String.Format("ID: {0}<br/>", ID))
         stb.AppendLine(String.Format("Parent Item ID: {0}<br/>", ParentID))
         stb.AppendLine(String.Format("Thread ID: {0}<br/>", ThreadID))
-        stb.AppendLine(String.Format("Started: {0}<br/>", StartTime))
-        stb.AppendLine(String.Format("Finished: {0}<br/>", EndTime))
         stb.AppendLine(String.Format("Time Taken: {0} ms", Convert.ToInt32(TimeTaken.TotalMilliseconds)))
         stb.AppendLine("</div></section></html>")
 
