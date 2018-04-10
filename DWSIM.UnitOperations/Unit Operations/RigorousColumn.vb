@@ -2745,17 +2745,36 @@ Namespace UnitOperations
                     IObj?.SetCurrent()
                     Dim flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
                     If llextractor Then
-                        x(i) = flashresult(2)
-                        y(i) = flashresult(6)
+                        Dim L1, L2, Vx1(), Vx2(), rho1, rho2 As Double
+                        L1 = flashresult(0)
+                        L2 = flashresult(5)
+                        Vx1 = flashresult(2)
+                        Vx2 = flashresult(6)
+                        rho1 = pp.AUX_LIQDENS(T(i), Vx1)
+                        rho2 = pp.AUX_LIQDENS(T(i), Vx2)
+                        If rho1 > rho2 Then
+                            x(i) = Vx1
+                            y(i) = Vx2
+                        Else
+                            x(i) = Vx2
+                            y(i) = Vx1
+                        End If
                         If y(i).SumY = 0.0# Then
                             y(i) = x(i).Clone
                         End If
-                        Dim VL As Double = V(i) + L(i)
                         If Not Me.UseVaporFlowEstimates Then
-                            V(i) = VL * flashresult(5)
+                            If rho1 > rho2 Then
+                                V(i) = F(lastF) + F(firstF) * L1
+                            Else
+                                V(i) = F(lastF) + F(firstF) * L2
+                            End If
                         End If
                         If Not Me.UseLiquidFlowEstimates Then
-                            L(i) = VL * flashresult(0)
+                            If rho1 > rho2 Then
+                                L(i) = F(firstF) * (1 - L1)
+                            Else
+                                L(i) = F(firstF) * (1 - L2)
+                            End If
                         End If
                     Else
                         x(i) = flashresult(2)
