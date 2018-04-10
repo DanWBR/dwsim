@@ -2750,6 +2750,13 @@ Namespace UnitOperations
                         If y(i).SumY = 0.0# Then
                             y(i) = x(i).Clone
                         End If
+                        Dim VL As Double = V(i) + L(i)
+                        If Not Me.UseVaporFlowEstimates Then
+                            V(i) = VL * flashresult(5)
+                        End If
+                        If Not Me.UseLiquidFlowEstimates Then
+                            L(i) = VL * flashresult(0)
+                        End If
                     Else
                         x(i) = flashresult(2)
                         y(i) = flashresult(3)

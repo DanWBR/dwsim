@@ -344,7 +344,7 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddLabelRow(container, "Column Solver Selection");
 
             var methods = new string[] { "Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)", "Burningham-Otto (Sum Rates) (Absorber Only)" };
-            var strategies = new string[] { "Direct Rigorous", "Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous" };
+            var strategies = new string[] { "Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous", "Direct Rigorous" };
 
             s.CreateAndAddDropDownRow(container, "Solving Method", methods.ToList(), (int)column.SolvingMethod, (sender, e) =>
             {
