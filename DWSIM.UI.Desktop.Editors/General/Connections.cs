@@ -17,14 +17,15 @@ namespace DWSIM.UI.Desktop.Editors
 
         public ISimulationObject SimObject;
 
-        public DynamicLayout container;
+        public TableLayout container;
 
         public ConnectionsEditor(ISimulationObject selectedobject, DynamicLayout layout)
 		{
             SimObject = selectedobject;
-            container = layout;
-			Initialize();
-		}
+            container = new TableLayout();
+            Initialize();
+            layout.Add(container);
+        }
 
         void Initialize()
         {
@@ -73,8 +74,10 @@ namespace DWSIM.UI.Desktop.Editors
 
         void CreateAndAddRow(string direction, IConnectionPoint connector, IEnumerable<String> options)
         {
-            
-            var cbConnection = s.CreateAndAddDropDownRow(container, connector.ConnectorName, options.ToList(), 0, null);
+
+            DynamicLayout cont1 = new DynamicLayout();
+
+            var cbConnection = s.CreateAndAddDropDownRow(cont1, connector.ConnectorName, options.ToList(), 0, null);
 
             if (connector.IsAttached)
             {
@@ -238,6 +241,8 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             cbConnection.Tag = true;
+
+            container.Rows.Add(new TableRow(cont1));
 
             return;
 
