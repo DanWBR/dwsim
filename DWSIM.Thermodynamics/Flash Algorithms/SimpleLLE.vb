@@ -77,6 +77,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Use estimates for Liquid Phase 1: {0}", UseInitialEstimatesForPhase1))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for Liquid Phase 1: {0}", InitialEstimatesForPhase1.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Use estimates for Liquid Phase 2: {0}", UseInitialEstimatesForPhase2))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for Liquid Phase 2: {0}", InitialEstimatesForPhase2.ToMathArrayString))
+
             Dim i, j, n, ecount As Integer
             n = Vz.Length - 1
 
@@ -153,6 +168,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             'calculate vapour pressures
             For i = 0 To n
+                IObj?.SetCurrent
                 Vp(i) = PP.AUX_PVAPi(i, T)
             Next
 
@@ -172,7 +188,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vx1 = Vn1.MultiplyConstY(1 / L1).NormalizeY
                 Vx2 = Vn2.MultiplyConstY(1 / L2).NormalizeY
 
+                IObj?.SetCurrent
                 fi1 = PP.DW_CalcFugCoeff(Vx1, T, P, State.Liquid)
+                IObj?.SetCurrent
                 fi2 = PP.DW_CalcFugCoeff(Vx2, T, P, State.Liquid)
 
                 For i = 0 To n
@@ -219,6 +237,17 @@ out:        d2 = Date.Now
             dt = d2 - d1
 
             WriteDebugInfo("PT Flash [SimpleLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & err)
+
+            IObj?.Paragraphs.Add("PT Flash [SimpleLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & err)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase 1 Molar Fraction: {0}", L1))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase 2 Molar Fraction: {0}", L2))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase 1 Molar Composition: {0}", Vx1.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
+
+            IObj?.Close()
 
             If L1 < 0.0001 Or L2 < 0.0001 Or S < 0.0001 Then
                 'merge phases - both phases are identical

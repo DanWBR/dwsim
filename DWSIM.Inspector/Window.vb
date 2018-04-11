@@ -43,16 +43,14 @@ Public Class Window
 
         leftcontainer.Rows.Add(itemSelector)
 
-        rightcontainer.Rows.Add(New Label With {.VerticalAlignment = VerticalAlignment.Center, .Text = "Selected Report", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White})
         rightcontainer.Padding = New Padding(5, 5, 5, 5)
         rightcontainer.Spacing = New Size(10, 10)
 
         Dim currentItemViewer As New WebView With {.BrowserContextMenuEnabled = True}
 
-        rightcontainer.Rows.Add(New TableRow(currentItemViewer))
 
-        Dim lblTools As New Label() With {.VerticalAlignment = VerticalAlignment.Center, .Text = "Inspector Tools", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White}
-        Dim btnExportHTML As New Button() With {.Text = "Export Selected Item to HTML File"}
+        Dim lblTools As New Label() With {.VerticalAlignment = VerticalAlignment.Center, .Text = "Selected Report", .Font = New Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()), .TextColor = Colors.White}
+        Dim btnExportHTML As New Button() With {.Text = "Export to HTML File"}
 
         AddHandler btnExportHTML.Click, Sub()
                                             Dim Dialog As New SaveFileDialog()
@@ -79,6 +77,8 @@ Public Class Window
         l1.Spacing = New Size(10, 10)
 
         rightcontainer.Rows.Add(New TableRow(l1))
+
+        rightcontainer.Rows.Add(New TableRow(currentItemViewer))
 
         rightcontainer.Rows(1).ScaleHeight = True
 
