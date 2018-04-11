@@ -415,7 +415,7 @@ out:
 
             ' check if there is a liquid phase
 
-            IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase> If it does, then it calls the liquid phase stability test algorithm.")
+            IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
 
             If L > 0 Then ' we have a liquid phase
 

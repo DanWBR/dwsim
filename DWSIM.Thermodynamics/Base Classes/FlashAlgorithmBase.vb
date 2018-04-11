@@ -479,13 +479,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Inspector.Host.CheckAndAdd(IObj, "", "StabTest", Name & " (Stability Test)", "Liquid Phase Stability Test Routine", True)
 
-            IObj?.Paragraphs.Add("Stability analysis represents the most challenging problem associated with multiphase flash calculations. The phase split calculation, which given the number of phases leads to locating an unconstrained local minimum, is essentially a purely technical problem, where the choice of solution procedure affects speed rather than reliability. The stability analysis, in contrast, requires the determination of a global minimum, with no advance information on the location of this minimum. Any practical implementation of multiphase stability analysis has to balance speed of execution against reliability, the more extensive, and thus more costly, search being less likely to overlook indications of instability. Previous algorithms have mostly been based on partly empirical observations relating to the characteristics of multiphase equilibrium, selecting trial phase compositions in the manner most likely to yield conclusive information. Currently, 'safe' algorithms that are guaranteed to resolve the stability question are under active investigation by many groups. The techniques used comprise global optimization methods and interval analysis, and currently the time expenditure for the calculations appear prohibitive for more complex problems.")
+            IObj?.Paragraphs.Add("Stability analysis represents the most challenging problem associated with multiphase flash calculations. 
+The phase split calculation, which given the number of phases leads to locating an unconstrained local minimum, is essentially a purely 
+technical problem, where the choice of solution procedure affects speed rather than reliability. The stability analysis, in contrast, 
+requires the determination of a global minimum, with no advance information on the location of this minimum. Any practical implementation 
+of multiphase stability analysis has to balance speed of execution against reliability, the more extensive, and thus more costly, search 
+being less likely to overlook indications of instability. Previous algorithms have mostly been based on partly empirical observations 
+relating to the characteristics of multiphase equilibrium, selecting trial phase compositions in the manner most likely to yield conclusive 
+information. Currently, 'safe' algorithms that are guaranteed to resolve the stability question are under active investigation by many groups. 
+The techniques used comprise global optimization methods and interval analysis, and currently the time expenditure for the calculations appear 
+prohibitive for more complex problems.")
 
-            IObj?.Paragraphs.Add("The essential difference between stability analysis for two-phase (vapour / liquid) and multiphase problems is that selection of two trial phase compositions (with subsequent local minimization) is adequate and feasible — in the first case, whereas even selection of as many trial phases as the number of components in the mixture may not be sufficient in the latter. For mixtures containing 10 or more components, converging the tangent plane distance minimization for a large number of individual initial estimates represents a substantial effort, and we therefore suggest the use of a screening procedure rather than a full search. The outcome of the screening procedure then decides which of the trial phases to investigate further.")
+            IObj?.Paragraphs.Add("The essential difference between stability analysis for two-phase (vapour/liquid) and multiphase problems 
+is that selection of two trial phase compositions (with subsequent local minimization) is adequate and feasible — in the first case, whereas
+even selection of as many trial phases as the number of components in the mixture may not be sufficient in the latter. For mixtures containing 
+10 or more components, converging the tangent plane distance minimization for a large number of individual initial estimates represents a 
+substantial effort, and we therefore suggest the use of a screening procedure rather than a full search. The outcome of the screening procedure 
+then decides which of the trial phases to investigate further.")
 
             IObj?.Paragraphs.Add("<h3>Selection of initial estimates for stability analysis</h3>")
 
-            IObj?.Paragraphs.Add("Assume that the current status of a multiphase equilibrium calculation is that a local minimum in the Gibbs energy corresponding to F phases has been determined, i.e.")
+            IObj?.Paragraphs.Add("Assume that the current status of a multiphase equilibrium calculation is that a local minimum in the Gibbs 
+energy corresponding to F phases has been determined, i.e.")
 
             IObj?.Paragraphs.Add("<m>\ln f_{iL}=\ln f_{i2} = ... = \ln f_{iF}\space\space(=\ln f^*_i)</m>")
 
@@ -499,23 +514,51 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Paragraphs.Add("<m>tpd(\mathbf{w})=\sum\limits_{i}{w_i}(\ln f_i(\mathbf{w})-\ln f^*_i)=\sum\limits_{i}{w_i(\ln w_i +\ln \varphi _i(\mathbf{w})-d_i)} </m>")
 
-            IObj?.Paragraphs.Add("with <mi>d_i = \ln (f^*_i/P)</mi> and if <mi>tpd(\mathbf{w})</mi> is non-negative for all w the equilibrium phase distribution is stable and no further calculation is required. If, on the other hand, a composition w with a negative tangent plane distance can be located, the phase distribution is unstable and the composition w can be utilised for generating initial estimates for an F+l-phase calculation, as  know that the mixture Gibbs energy can be reduced by introducing a small amount of a phase with this composition.")
+            IObj?.Paragraphs.Add("with <mi>d_i = \ln (f^*_i/P)</mi> and if <mi>tpd(\mathbf{w})</mi> is non-negative for all w the equilibrium 
+phase distribution is stable and no further calculation is required. If, on the other hand, a composition w with a negative tangent plane 
+distance can be located, the phase distribution is unstable and the composition w can be utilised for generating initial estimates for an 
+F+l-phase calculation, as it is known that the mixture Gibbs energy can be reduced by introducing a small amount of a phase with this composition.")
 
-            IObj?.Paragraphs.Add("In practice we shall test a sequence of composition estimates w for neg. ative tangent plane distances. If none of the trial phases verify instability, the mixture is assumed to be stable. One of the objectives is to select and evaluate the set of trial phase compositions most likely to indicate instability and thus to form new phases. Another objective is to perform the  for a given test phase as economically as possible.")
+            IObj?.Paragraphs.Add("In practice we shall test a sequence of composition estimates w for negative tangent plane distances. 
+If none of the trial phases verify instability, the mixture is assumed to be stable. One of the objectives is to select and evaluate 
+the set of trial phase compositions most likely to indicate instability and thus to form new phases. Another objective is to perform 
+the  for a given test phase as economically as possible.")
 
-            IObj?.Paragraphs.Add("When a trial phase has been chosen, refinement is performed by means of successive substitution, as for the two-phase flash. Continuation of successivo substitution until convergence will locate either a non-trivial minimum, i.e. a minimum with a composition different from that of any of the equilibrium phases, or a trivial solution. The aim of the screening procedure is to decide at an early stage whether convergence to a trivial solution is likely to occur, in which case further iteration on the chosen trial phase can be abandoned, Obviously, increasing the number of successive substitution steps increases the reliability of the screening procedure, as well as the associated cost.")
+            IObj?.Paragraphs.Add("When a trial phase has been chosen, refinement is performed by means of successive substitution, 
+as for the two-phase flash. Continuation of successivo substitution until convergence will locate either a non-trivial minimum, i.e. 
+a minimum with a composition different from that of any of the equilibrium phases, or a trivial solution. The aim of the screening 
+procedure is to decide at an early stage whether convergence to a trivial solution is likely to occur, in which case further iteration 
+on the chosen trial phase can be abandoned, Obviously, increasing the number of successive substitution steps increases the reliability 
+of the screening procedure, as well as the associated cost.")
 
-            IObj?.Paragraphs.Add("In the procedure of Michelsen, 2 4 steps of successive substitution  performed in parallel for each trial phase. If instability (negative till) is not encountered during these steps, only the trial phase composition with the smaller, decreasing U-value is converged. The screening procedure is evidently empirical and cannot be guaranteed to succeed, but practical experience indicates that with proper selection of the initial phase compositionsthe approach represents a reasonable compromise between reliability and cost.")
+            IObj?.Paragraphs.Add("In the procedure of Michelsen, 2-4 steps of successive substitution  performed in parallel for each 
+trial phase. If instability (negative till) is not encountered during these steps, only the trial phase composition with the smaller, 
+decreasing U-value is converged. The screening procedure is evidently empirical and cannot be guaranteed to succeed, but practical 
+experience indicates that with proper selection of the initial phase compositionsthe approach represents a reasonable compromise 
+between reliability and cost.")
 
             IObj?.Paragraphs.Add("<h3>Selection of trial phase compositions</h3>")
 
-            IObj?.Paragraphs.Add("In the absence of any advance knowledge about the nature of the mixture to be flashed, at least C + 1 different initial trial phases are required. One of these is used to search for a vapour (fortunately, equilibrium comprises at most one vapour phase), and the remaining C trial phases cater for the possibility of formation of a liquid phase rich in the corresponding mixture component.")
+            IObj?.Paragraphs.Add("In the absence of any advance knowledge about the nature of the mixture to be flashed, at least C + 1 
+different initial trial phases are required. One of these is used to search for a vapour (fortunately, equilibrium comprises at most 
+one vapour phase), and the remaining C trial phases cater for the possibility of formation of a liquid phase rich in the corresponding 
+mixture component.")
 
-            IObj?.Paragraphs.Add("The initial composition of the vapour phase is calculated as Wi = exp(di), based on the assumption that the trial phase is an ideal vapour (with a fugacity coefficient of 1), and in all subsequent iterations properties of this trial phases are calculated using the vapour density, if the equation of state has multiple roots.")
+            IObj?.Paragraphs.Add("The initial composition of the vapour phase is calculated as Wi = exp(di), based on the assumption 
+that the trial phase is an ideal vapour (with a fugacity coefficient of 1), and in all subsequent iterations properties of this trial 
+phases are calculated using the vapour density, if the equation of state has multiple roots.")
 
-            IObj?.Paragraphs.Add("The additional C trial phases are initiated as the respective pure components, properties of the trial phase being calculated with the liquid density, as the purpose of this search is to reveal the potential formation of new liquidlike phases. Starting from each 'corner' of the composition space aims at ensuring that the search will cover the entire region as well as possible. The use of pure trial phases also ensures rapid detection of instability with highly immiscible components.")
+            IObj?.Paragraphs.Add("The additional C trial phases are initiated as the respective pure components, properties of the trial 
+phase being calculated with the liquid density, as the purpose of this search is to reveal the potential formation of new liquid like 
+phases. Starting from each 'corner' of the composition space aims at ensuring that the search will cover the entire region as well as possible. 
+The use of pure trial phases also ensures rapid detection of instability with highly immiscible components.")
 
-            IObj?.Paragraphs.Add("Unfortunately, even converging all C + 1 trial phase compositions does not guarantee that the global minimum of the tangent plane distance will be located, and many practically important exceptions are found. These are characterised by the existence of a liquid phase dominated by a light component, e.g. methane or carbon dioxide, under conditions where this component is unable to exist as a pure liquid. As a consequence the pure component initialization is incapable of creating the liquid phase rich in this particular component, and there is no certainty that the alternative initializations, which start far from the desired minimum, will converge to this solution.")
+            IObj?.Paragraphs.Add("Unfortunately, even converging all C + 1 trial phase compositions does not guarantee that the global 
+minimum of the tangent plane distance will be located, and many practically important exceptions are found. These are characterised by 
+the existence of a liquid phase dominated by a light component, e.g. methane or carbon dioxide, under conditions where this component is 
+unable to exist as a pure liquid. As a consequence the pure component initialization is incapable of creating the liquid phase rich in
+this particular component, and there is no certainty that the alternative initializations, which start far from the desired minimum, 
+will converge to this solution.")
 
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 

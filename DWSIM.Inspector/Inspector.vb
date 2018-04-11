@@ -117,12 +117,6 @@ Public Class InspectorItem
         For Each p In Paragraphs
             stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)").Replace("<m>", "$$").Replace("</m>", "$$").Replace("<mi>", "\(").Replace("</mi>", "\)"))
         Next
-        stb.AppendLine("<hr>")
-        stb.AppendLine("<b>Item Details</b><br/>")
-        stb.AppendLine(String.Format("ID: {0}<br/>", ID))
-        stb.AppendLine(String.Format("Parent Item ID: {0}<br/>", ParentID))
-        stb.AppendLine(String.Format("Thread ID: {0}<br/>", ThreadID))
-        stb.AppendLine(String.Format("Time Taken: {0} ms", TimeTaken.TotalMilliseconds))
         stb.AppendLine("</div></section></html>")
 
         Return stb.ToString()
