@@ -221,7 +221,7 @@ Namespace UnitOperations
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
-            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, P2i, Qi, H2, cpig, cp, cv, mw As Double
+            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, P2i, Qi, H2, cpig, cp, cv, mw, fx, fx0, fx00, P2i0, P2i00 As Double
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
 
@@ -285,6 +285,8 @@ Namespace UnitOperations
 
                 Dim tmp As IFlashCalculationResult
 
+                Dim icnt As Integer = 0
+
                 'recalculate Q with P2i
 
                 Do
@@ -293,7 +295,24 @@ Namespace UnitOperations
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
                     Qi = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
 
-                    P2i *= DeltaQ.GetValueOrDefault / Qi
+                    If DebugMode Then AppendDebugLine(String.Format("Qi: {0}", Qi))
+
+                    fx00 = fx0
+                    fx0 = fx
+                    fx = Qi - DeltaQ
+
+                    P2i00 = P2i0
+                    P2i0 = P2i
+
+                    If icnt <= 2 Then
+                        P2i *= 1.01
+                    Else
+                        P2i = P2i - fx / ((fx - fx00) / (P2i - P2i00))
+                    End If
+
+                    If DebugMode Then AppendDebugLine(String.Format("P2i: {0}", P2i))
+
+                    icnt += 1
 
                 Loop Until Math.Abs((DeltaQ.GetValueOrDefault - Qi) / DeltaQ.GetValueOrDefault) < 0.001
 
