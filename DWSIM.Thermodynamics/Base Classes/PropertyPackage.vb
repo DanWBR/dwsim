@@ -1828,7 +1828,7 @@ Namespace PropertyPackages
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEquilibrium", ComponentName & " (Equilibrium)", "Property Package Equilibrium Calculation Routine")
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEquilibrium", ComponentName & " (Phase Equilibria)", "Property Package Equilibrium Calculation Routine")
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 

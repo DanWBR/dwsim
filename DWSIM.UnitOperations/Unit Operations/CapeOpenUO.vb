@@ -1105,6 +1105,7 @@ Namespace UnitOperations
                             ur.selectedReport = r
                             Dim msg2 As String = ""
                             ur.ProduceReport(msg2)
+                            IObj?.Paragraphs.Add(msg2)
                         Next
                     End If
                 Catch ex As Exception

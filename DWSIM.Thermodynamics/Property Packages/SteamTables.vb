@@ -67,6 +67,10 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcEquilibrium(ByVal spec1 As PropertyPackages.FlashSpec, ByVal spec2 As PropertyPackages.FlashSpec)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEquilibrium", ComponentName & " (Phase Equilibria)", "Property Package Equilibrium Calculation Routine")
+
             Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
@@ -381,6 +385,8 @@ FINAL:
             End With
 
             Me.CurrentMaterialStream.AtEquilibrium = True
+
+            IObj?.Close()
 
         End Sub
 
@@ -709,6 +715,13 @@ FINAL:
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
+
+            IObj?.Paragraphs.Add("This is the routine responsible for the calculation of phase properties of the currently associated Material Stream.")
+
+            IObj?.Paragraphs.Add("Specified Phase: " & [Enum].GetName(Phase.GetType, Phase))
+
             Dim result As Double
 
             Dim T, Tsat, P As Double
@@ -836,10 +849,12 @@ FINAL:
 
             ElseIf phaseID = 1 Then
 
+                IObj?.SetCurrent
                 DW_CalcLiqMixtureProps()
 
             Else
 
+                IObj?.SetCurrent
                 DW_CalcOverallProps()
 
             End If
@@ -848,6 +863,8 @@ FINAL:
                 result = overallmolarflow * phasemolarfrac * Me.AUX_MMM(PropertyPackages.Phase.Mixture) / 1000 / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = result
             End If
+
+            IObj?.Close()
 
         End Sub
 
@@ -944,6 +961,13 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEnthalpy", "Steam Tables Enthalpy", "Property Package Enthalpy Calculation Routine")
+
+            IObj?.SetCurrent()
+
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
             Dim Tbound = 1073.15
@@ -1065,6 +1089,7 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
             Dim Tmin As Double = 273.15
