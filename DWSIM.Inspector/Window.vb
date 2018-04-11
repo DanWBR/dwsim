@@ -96,7 +96,7 @@ Public Class Window
         Dim avsol As List(Of String) = Host.Items.Select(Of String)(Function(x) x.SolutionID).Distinct().ToList
 
         For Each item In avsol
-            SetsBox.Items.Add(New ListItem() With {.Text = Date.FromBinary(item).ToString(), .Key = item})
+            If item <> "" Then SetsBox.Items.Add(New ListItem() With {.Text = Date.FromBinary(item).ToString(), .Key = item})
         Next
 
         AddHandler SetsBox.SelectedIndexChanged,
