@@ -159,6 +159,34 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             _IObj = IObj
 
+            IObj?.Paragraphs.Add("In terms of component fugacities the objective function for Gibbs energy minimization can be formulated")
+
+            IObj?.Paragraphs.Add("<m>Q = \sum\limits_{k=1}^{F}{   \sum\limits_{i=1}^{C}{n_{ik}\ln f_{ik} } </m>}")
+
+            IObj?.Paragraphs.Add("A straightforward approach is to use the molar amounts in phases 1 to F — 1 as the independent variables, eliminating the nt•F by means of the overall material balance, i.e.,")
+
+            IObj?.Paragraphs.Add("<m>n_{iF}=z_i-\sum\limits_{k=1}^{F-1}{n_{ik}} </m>")
+
+            IObj?.Paragraphs.Add("The gradient and the Hessian are then given by")
+
+            IObj?.Paragraphs.Add("<m>\frac{\partial Q}{\partial n_{ij}}=\ln f_{ij}-\ln f_{iF} </m>")
+
+            IObj?.Paragraphs.Add("and")
+
+            IObj?.Paragraphs.Add("<m>\frac{\partial^2Q}{\partial n_{ij}\partial n_{lm}}=\frac{\partial \ln f_{ij}}{\partial n_{ij}}\delta_jm + \frac{\partial \ln f_{iF}}{\partial n_{lF}}</m>")
+
+            IObj?.Paragraphs.Add("This choice of independent variables may, however, create problems when specific components in phase F are present in very small amounts since the calculation of the <mi>n_{jF}</mi> will be sensitive to roundoff errors. In addition, the ideal solution contribution to the Hessian matrix introduces large off-diagonal elements (<mi>1/n_{iF}</mi>) making the set of linear equations, that must be solved for the correction vector, ill-conditioned. For this reason, Michelsen suggested to use individual 'dependent' variables for each component, selecting")
+
+            IObj?.Paragraphs.Add("<m>n_{im} = z_i - \sum\limits_{k\neq M}^{F}{n_{ik}}</m>")
+
+            IObj?.Paragraphs.Add("where M specifies the phase in which component i is present in the largest amount. Michelson also chose to use scaled independent variables, given by")
+
+            IObj?.Paragraphs.Add("<m>\theta _{ij} = \frac{n_{ij}}{z_i}</m>")
+
+            IObj?.Paragraphs.Add("and suggested to use the Murray factorization of the Hessian to ensure a positive definite approximation to this matrix.")
+
+            IObj?.Paragraphs.Add("The approach of Michelsen appears to work adequately in practice, but it  is by no means guaranteed to be the most efficient approach. An alternative possibility worthwhile considering is the restricted step method, which works very well for the two-phase problem, but no natural diagonal correction term to the Hessian in the cases where modifications are needed seems evident. New and more efficient algorithms may well appear, but drastic gains are not likely to be found.")
+
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 
             IObj?.Paragraphs.Add(String.Format("Three-Phase (VLLE) mode: {0}", Not ForceTwoPhaseOnly))
@@ -167,6 +195,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
             IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Solver</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Gibbs Energy will be minimized using the {0} solver.", [Enum].GetName(Solver.GetType, Solver)))
 
             Me.Solver = [Enum].Parse(Me.Solver.GetType, Me.FlashSettings(FlashSetting.GM_OptimizationMethod))
 
@@ -336,6 +368,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 uconstr(i) = Vz(i)
             Next
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Intermediate Calculations</h2>"))
+
             IObj?.Paragraphs.Add(String.Format("Initial estimate for V: {0}", V))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for L (1-V): {0}", L))
 
@@ -388,8 +422,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     initval = solver.ComputeMin(AddressOf FunctionValue, variables)
                     solver = Nothing
                 Case OptimizationMethod.IPOPT
-                    Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, _
-                           0, 0, AddressOf eval_f, AddressOf eval_g, _
+                    Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
+                           0, 0, AddressOf eval_f, AddressOf eval_g,
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                         problem.AddOption("tol", etol)
                         problem.AddOption("max_iter", maxit_e)
@@ -431,6 +465,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Ki = Vy.DivideY(Vx1)
 
             IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
             IObj?.Paragraphs.Add(String.Format("Converged Vapor Phase molar fraction: {0}", V))
             IObj?.Paragraphs.Add(String.Format("Converged Liquid Phase molar fraction: {0}", L))
@@ -530,6 +566,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 For i = 0 To nc
                                     vx2est(i) = stresult(1)(j, i)
                                 Next
+                                IObj?.SetCurrent
                                 fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
                                 gl = 0.0#
                                 For i = 0 To nc
@@ -649,8 +686,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
                                 solver = Nothing
                             Case OptimizationMethod.IPOPT
-                                Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0, _
-                                        AddressOf eval_f, AddressOf eval_g, _
+                                Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
+                                        AddressOf eval_f, AddressOf eval_g,
                                         AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                                     problem.AddOption("tol", etol)
                                     problem.AddOption("max_iter", maxit_e)
@@ -699,6 +736,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         End If
 
                         FunctionValue(initval2)
+
+                        IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
                         IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
 
@@ -751,6 +790,16 @@ out:        Return result
 
         Public Function FunctionValue(ByVal x() As Double) As Double
 
+            _IObj?.SetCurrent
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "FunctionValue", "Gibbs Minimization Function Calculator", "", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add(String.Format("Input Variables: {0}", x.ToMathArrayString))
+
             If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim pval As Double = 0.0#
@@ -784,7 +833,9 @@ out:        Return result
                             Task.WaitAll(task1, task2)
 
                         Else
+                            IObj?.SetCurrent()
                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                            IObj?.SetCurrent()
                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
                         End If
 
@@ -795,7 +846,18 @@ out:        Return result
                             If Vx1(i) <> 0.0# Then Gl1 += Vx1(i) * L * Log(fcl(i) * Vx1(i))
                         Next
 
+                        IObj?.Paragraphs.Add(String.Format("Calculated Vapor Phase fugacity coefficients: {0}", fcv.ToMathArrayString))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase fugacity coefficients: {0}", fcl.ToMathArrayString))
+
+                        IObj?.Paragraphs.Add(String.Format("Calculated Vapor Phase molar fraction: {0}", V))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase molar fraction: {0}", L))
+
+                        IObj?.Paragraphs.Add(String.Format("Calculated Vapor Phase composition: {0}", Vy.ToMathArrayString))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase composition: {0}", Vx1.ToMathArrayString))
+
                         Gm = Gv + Gl1
+
+                        IObj?.Paragraphs.Add(String.Format("Calculated Gibbs Energy Value: {0}", Gm))
 
                         WriteDebugInfo("[GM] V = " & Format(V, "N4") & ", L = " & Format(L, "N4") & " / GE = " & Format(Gm * 8.314 * Tf, "N2") & " kJ/kmol")
 
@@ -849,8 +911,11 @@ out:        Return result
                             Task.WaitAll(task1, task2, task3)
 
                         Else
+                            IObj?.SetCurrent()
                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                            IObj?.SetCurrent()
                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                            IObj?.SetCurrent()
                             fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
                         End If
 
@@ -863,7 +928,21 @@ out:        Return result
                             If Vx2(i) <> 0 Then Gl2 += Vx2(i) * L2 * Log(fcl2(i) * Vx2(i))
                         Next
 
+                        IObj?.Paragraphs.Add(String.Format("Calculated Vapor Phase fugacity coefficients: {0}", fcv.ToMathArrayString))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 1 fugacity coefficients: {0}", fcl.ToMathArrayString))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 2 fugacity coefficients: {0}", fcl2.ToMathArrayString))
+
+                        IObj?.Paragraphs.Add(String.Format("Calculated Vapor Phase molar fraction: {0}", V))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 1 molar fraction: {0}", L1))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 2 molar fraction: {0}", L2))
+
+                        IObj?.Paragraphs.Add(String.Format("Calculated Vapor Phase composition: {0}", Vy.ToMathArrayString))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 1 composition: {0}", Vx1.ToMathArrayString))
+                        IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 2 composition: {0}", Vx2.ToMathArrayString))
+
                         Gm = Gv + Gl1 + Gl2 + pval
+
+                        IObj?.Paragraphs.Add(String.Format("Calculated Gibbs Energy Value: {0}", Gm))
 
                         WriteDebugInfo("[GM] V = " & Format(V / 1000, "N4") & ", L1 = " & Format(L1 / 1000, "N4") & ", L2 = " & Format(L2 / 1000, "N4") & " / GE = " & Format(Gm * 8.314 * Tf / 1000, "N2") & " kJ/kmol")
 
@@ -1229,7 +1308,7 @@ out:        Return result
             Return True
         End Function
 
-        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
+        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(),
          ByRef jCol As Integer(), ByRef values As Double()) As Boolean
 
             Dim k As Integer
@@ -1263,7 +1342,7 @@ out:        Return result
             Return True
         End Function
 
-        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(),
          ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
 
             If values Is Nothing Then
@@ -1283,9 +1362,9 @@ out:        Return result
 
         End Function
 
-        Public Function intermediate(ByVal alg_mod As IpoptAlgorithmMode, ByVal iter_count As Integer, ByVal obj_value As Double, _
-                                     ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double, _
-                                     ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double, _
+        Public Function intermediate(ByVal alg_mod As IpoptAlgorithmMode, ByVal iter_count As Integer, ByVal obj_value As Double,
+                                     ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
+                                     ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                                      ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
             objval0 = objval
             objval = obj_value

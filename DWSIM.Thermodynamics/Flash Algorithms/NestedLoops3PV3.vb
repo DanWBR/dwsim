@@ -112,7 +112,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Paragraphs.Add("DWSIM initializes the current calculation with ideal K-values estimated from vapor pressure data for each compound, or by using previously calculated values from an earlier solution.")
 
-
             Dim d1, d2 As Date, dt As TimeSpan
             Dim i, j, k As Integer
 
@@ -483,6 +482,7 @@ out:
                             For i = 0 To nc
                                 vx2est(i) = stresult(1)(j, i)
                             Next
+                            IObj?.SetCurrent
                             fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
                             gl = 0.0#
                             For i = 0 To nc
@@ -574,6 +574,51 @@ out:
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT_3P", Name & " (Three-Phase PT Flash)", "Pressure-Temperature Three-Phase VLLE Flash Algorithm Routine")
+
+            IObj?.Paragraphs.Add("In general VLLE with three or more components, the phase
+                                rule shows that at a set temperature there will be a three-phase
+                                region extending from the onset of the second liquid-phase, the
+                                second or upper dew-point pressure, to the bubble-point pressure.
+                                Whether the first dew-point liquid is identified as LI or as LII
+                                depends upon a number of factors including pure-component
+                                vapor pressures.")
+
+            IObj?.Paragraphs.Add("As in VLE flash equations, we start with")
+
+            IObj?.Paragraphs.Add("<m>\sum y_i=1; \sum x^I_i=1; \sum x^{II}_i=1;</m>")
+
+            IObj?.Paragraphs.Add("and consider Rachford–Rice combinations where any one
+                                of the sums is subtracted from another one of the sums. There
+                                are three ways of doing this, but only two are independent. We will form two equations by first subtracting the second sum from the first and second by subtracting the third sum from the
+                                first:")
+
+            IObj?.Paragraphs.Add("<m>\sum (y_i-x^I_i)=0; \sum (y_i-x^{II}_i)=0;</m>")
+
+            IObj?.Paragraphs.Add("These equations can be written as:")
+
+            IObj?.Paragraphs.Add("<m>\sum y_i \left[1-\frac{1}{K^I_i})\right]=0;\sum y_i \left[1-\frac{1}{K^{II}_i})\right]=0</m>")
+
+            IObj?.Paragraphs.Add("so we define")
+
+            IObj?.Paragraphs.Add("<m>\beta ^j_i \equiv [1-(K^j_i)^{-1}]</m>")
+
+            IObj?.Paragraphs.Add("so now the equilibrium equations read")
+
+            IObj?.Paragraphs.Add("<m>\sum \beta^I_iy_i = 0;\sum \beta^{II}_iy_i = 0</m>")
+
+            IObj?.Paragraphs.Add("Think of <mi>\beta ^j_i</mi> as a redefined K-value being <mi>\left[\frac{y_i-x_i}{y_i}\right]</mi>.")
+
+            IObj?.Paragraphs.Add("The above equation is now combined with the material balances, which can be written conveniently as:")
+
+            IObj?.Paragraphs.Add("<m>z_i = y_i[1-\beta ^I_iL^I-\beta ^{II}_iL^{II}]</m>")
+
+            IObj?.Paragraphs.Add("Now the equilibrium equations become")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{i}{\left[\frac{\beta ^I_iz_i}{1=\beta^I_iL^I-\beta ^{II}_iL^{II}}\right] }=0</m>")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{i}{\left[\frac{\beta ^{II}_iz_i}{1=\beta^I_iL^I-\beta ^{II}_iL^{II}}\right] }=0</m>")
+
+            IObj?.Paragraphs.Add("These two equations are solved for <mi>L^I</mi> and <mi>L^{II}</mi>.")
 
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 
@@ -729,6 +774,25 @@ out:
 
             Do
 
+
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PT", "PT VLLE Flash Newton Iteration", "Pressure-Temperature VLLE Flash Algorithm Convergence Iteration Step")
+
+                IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                IObj2?.Paragraphs.Add(String.Format("Current Estimate for Vapor Phase Molar Fraction (V): {0}", V))
+                IObj2?.Paragraphs.Add(String.Format("Current Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
+                IObj2?.Paragraphs.Add(String.Format("Current Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
+
+                IObj2?.Paragraphs.Add(String.Format("Current Estimate for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Current Estimate for Liquid Phase 1 Molar Composition: {0}", Vx1.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Current Estimate for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
+
+                IObj2?.SetCurrent()
+
                 If Settings.EnableParallelProcessing Then
 
                     Dim task1 As Task = New Task(Sub()
@@ -746,11 +810,11 @@ out:
                     Task.WaitAll(task1, task2, task3)
 
                 Else
-                    IObj?.SetCurrent
+                    IObj2?.SetCurrent()
                     CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid)
-                    IObj?.SetCurrent
+                    IObj2?.SetCurrent()
                     CFL2 = proppack.DW_CalcFugCoeff(Vx2, T, P, State.Liquid)
-                    IObj?.SetCurrent
+                    IObj2?.SetCurrent()
                     CFV = proppack.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
                 End If
 
@@ -807,6 +871,8 @@ out:
                 Loop Until i = n + 1
                 e3 = (V - Vant) + (L1 - L1ant) + (L2 - L2ant)
 
+                IObj2?.Paragraphs.Add(String.Format("Current phase fraction error: {0}", e3))
+
                 If (Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e3) + Math.Abs(e2) + Math.Abs(L1ant - L1) + Math.Abs(L2ant - L2)) < etol Then
 
                     Exit Do
@@ -831,6 +897,9 @@ out:
                         dF2dL2 = dF2dL2 + b2(i) * Vz(i) * (-b2(i)) / (1 - b1(i) * L1 - b2(i) * L2) ^ 2
                         i = i + 1
                     Loop Until i = n + 1
+
+                    IObj2?.Paragraphs.Add(String.Format("Equilibrium Equation 1 error: {0}", F1))
+                    IObj2?.Paragraphs.Add(String.Format("Equilibrium Equation 2 error: {0}", F2))
 
                     If Abs(F1) + Abs(F2) < etol Then Exit Do
 
@@ -858,10 +927,15 @@ out:
 
                     V = 1 - L1 - L2
 
+                    IObj2?.Paragraphs.Add(String.Format("Updated Estimate for Vapor Phase Molar Fraction (V): {0}", V))
+                    IObj2?.Paragraphs.Add(String.Format("Updated Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
+                    IObj2?.Paragraphs.Add(String.Format("Updated Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
+
                     If V <= 0.0# Or Abs(L1) > 1.0# Or Abs(L2) > 1.0# Then
+                        IObj2?.Paragraphs.Add("No vapor phase in the current estimate. Switching to Simple LLE FLash Algorithm...")
                         'switch to simple LLE flash procedure.
                         Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = Vx1EST, .InitialEstimatesForPhase2 = Vx2EST, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
-                        IObj?.SetCurrent
+                        IObj2?.SetCurrent
                         Dim result As Object = slle.Flash_PT(Vz, P, T, PP)
                         L1 = result(0)
                         V = result(1)
@@ -877,6 +951,8 @@ out:
                 End If
 
                 If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+
+                IObj2?.Close()
 
                 ecount += 1
 
@@ -897,6 +973,14 @@ out:
             Next
 
             IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations.")
+
+            IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Fraction (V): {0}", V))
+            IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
+            IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
+
+            IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Composition: {0}", Vx1.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
 
             IObj?.Close()
 
