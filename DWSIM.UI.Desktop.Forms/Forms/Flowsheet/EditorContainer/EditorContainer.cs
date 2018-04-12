@@ -152,7 +152,6 @@ namespace DWSIM.UI.Forms
             var tabr = new TabPage();
             tabr.Text = "Results";
 
-            var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
             var container = new TableLayout();
             new DWSIM.UI.Desktop.Editors.Results(obj, container);
 
