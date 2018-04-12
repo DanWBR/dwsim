@@ -43,20 +43,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.distance, comp_ant)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.distance, comp_ant)
-                                i += 1
-                            Next
-                        End If
-
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.distance, comp_ant)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.distance, comp_ant)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 1
@@ -66,19 +68,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 2
@@ -88,19 +93,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 3
@@ -110,19 +118,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 4
@@ -132,19 +143,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 5
@@ -154,19 +168,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vx(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vx(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
         End Select
@@ -215,19 +232,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.distance, comp_ant)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.distance, comp_ant)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.distance, comp_ant)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.distance, comp_ant)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 1
@@ -237,19 +257,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 2
@@ -259,19 +282,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 3
@@ -281,19 +307,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.velocity, res.LiqVel)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 4
@@ -303,19 +332,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
             Case 5
@@ -325,19 +357,22 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
-                                comp_ant += ps.Comprimento / ps.Incrementos
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vy(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vy(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    i += 1
+                                Next
+                            End If
+                            comp_ant += ps.Comprimento / ps.Incrementos
+                        Next
                     Next
                 End With
         End Select
