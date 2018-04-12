@@ -118,23 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ArquivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="ArquivoToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
   <data name="CloseToolStripMenuItem.Text" xml:space="preserve">
     <value>Close Active Simulation</value>
   </data>
-  <data name="EditarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
+  <data name="ArquivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
   </data>
-  <data name="EditarToolStripMenuItem.Text" xml:space="preserve">
-    <value>E&amp;dit</value>
+  <data name="ArquivoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tsmiUndo.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
@@ -209,11 +203,11 @@
   <data name="tsmiConfigSimulation.Text" xml:space="preserve">
     <value>Simulation settings</value>
   </data>
-  <data name="InserirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
+  <data name="EditarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 20</value>
   </data>
-  <data name="InserirToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Insert</value>
+  <data name="EditarToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;dit</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 22</value>
@@ -263,11 +257,11 @@
   <data name="GraficoToolStripMenuItem.Text" xml:space="preserve">
     <value>Chart</value>
   </data>
-  <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="InserirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
   </data>
-  <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
+  <data name="InserirToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Insert</value>
   </data>
   <data name="InspectorTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>324, 22</value>
@@ -314,14 +308,11 @@
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>321, 6</value>
   </data>
-  <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
+  <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
   </data>
-  <data name="UtilitiesTSMI.Text" xml:space="preserve">
-    <value>&amp;Utilities</value>
-  </data>
-  <data name="UtilitiesTSMI.ToolTipText" xml:space="preserve">
-    <value>Displays a list of Utilities currently attached to Flowsheet Objects.</value>
+  <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
   </data>
   <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
@@ -332,11 +323,14 @@
   <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
     <value>Add Utility</value>
   </data>
-  <data name="OtimizaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
+  <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
   </data>
-  <data name="OtimizaToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Optimization</value>
+  <data name="UtilitiesTSMI.Text" xml:space="preserve">
+    <value>&amp;Utilities</value>
+  </data>
+  <data name="UtilitiesTSMI.ToolTipText" xml:space="preserve">
+    <value>Displays a list of Utilities currently attached to Flowsheet Objects.</value>
   </data>
   <data name="AnaliseDeSensibilidadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
@@ -350,17 +344,17 @@
   <data name="MultivariateOptimizerToolStripMenuItem.Text" xml:space="preserve">
     <value>Multivariate Optimizer</value>
   </data>
+  <data name="OtimizaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="OtimizaToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Optimization</value>
+  </data>
   <data name="IronRubyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 22</value>
   </data>
   <data name="IronRubyToolStripMenuItem.Text" xml:space="preserve">
     <value>Script Manager</value>
-  </data>
-  <data name="ResultadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
-  </data>
-  <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Results</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 22</value>
@@ -368,14 +362,14 @@
   <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
     <value>Create Report</value>
   </data>
+  <data name="ResultadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Results</value>
+  </data>
   <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Text" xml:space="preserve">
     <value>CAPE-OPEN Plugins</value>
-  </data>
-  <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="ExibirToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;View</value>
   </data>
   <data name="ExibirListaDeItensACalcularToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 22</value>
@@ -431,6 +425,12 @@
   <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
     <value>Close Opened Object Editors</value>
   </data>
+  <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="ExibirToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>This.toolStripMenuItem3</value>
   </data>
@@ -447,137 +447,35 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>This simulation is currently running in Mobile Compatibility Mode.</value>
   </data>
-  <data name="StatusStrip0.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 5, 0, 5</value>
+  <data name="ToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 22</value>
   </data>
-  <data name="tssbSimulationSettings.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tssbSimulationSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 28</value>
-  </data>
-  <data name="tssbSimulationSettings.Text" xml:space="preserve">
+  <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Settings</value>
-  </data>
-  <data name="FormataçãoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="FormataçãoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Number Formatting</value>
-  </data>
-  <data name="NúmerosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Numbers</value>
-  </data>
-  <data name="ToolStripComboBoxNumberFormatting.ToolTipText" xml:space="preserve">
-    <value>Number Formatting</value>
-  </data>
-  <data name="FraçõesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Fractions</value>
-  </data>
-  <data name="ToolStripComboBoxNumberFractionFormatting.ToolTipText" xml:space="preserve">
-    <value>Composition/Fraction Number Formatting</value>
-  </data>
-  <data name="AjudaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="tsbmiUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="tsbmiUnits.Text" xml:space="preserve">
-    <value>System of Units</value>
-  </data>
-  <data name="ToolStripComboBoxUnitSystem.ToolTipText" xml:space="preserve">
-    <value>System of Units</value>
-  </data>
-  <data name="tsbEditUnits.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbEditUnits.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsbEditUnits.Text" xml:space="preserve">
-    <value>Edit Selected</value>
-  </data>
-  <data name="AdicionarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="tsbmiReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="tsbmiReactions.Text" xml:space="preserve">
-    <value>Reactions</value>
-  </data>
-  <data name="tsbmiModels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="tsbmiModels.Text" xml:space="preserve">
-    <value>Basis</value>
-  </data>
-  <data name="tsbmiCompounds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="tsbmiCompounds.Text" xml:space="preserve">
-    <value>Compounds</value>
-  </data>
-  <data name="tssbSolverConfig.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tssbSolverConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 28</value>
-  </data>
-  <data name="tssbSolverConfig.Text" xml:space="preserve">
-    <value>Solve Flowsheet</value>
-  </data>
-  <data name="tsbSimultAdjustSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
-  </data>
-  <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
-    <value>Simultaneous Adjust Solver Active (F7)</value>
-  </data>
-  <data name="tsbAbortCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
-  </data>
-  <data name="tsbAbortCalc.Text" xml:space="preserve">
-    <value>Abort Solver (Pause/Break)</value>
-  </data>
-  <data name="tsbCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
-  </data>
-  <data name="tsbCalc.Text" xml:space="preserve">
-    <value>Solve Flowsheet (F5)</value>
-  </data>
-  <data name="tsbAtivar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
   </data>
   <data name="tsbAtivar.Text" xml:space="preserve">
     <value>Flowsheet Calculator Active (F6)</value>
   </data>
-  <data name="tsbUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 28</value>
+  <data name="tsbCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
+  <data name="tsbCalc.Text" xml:space="preserve">
+    <value>Solve Flowsheet (F5)</value>
+  </data>
+  <data name="tsbAbortCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="tsbAbortCalc.Text" xml:space="preserve">
+    <value>Abort Solver (Pause/Break)</value>
+  </data>
+  <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
+    <value>Simultaneous Adjust Solver Active (F7)</value>
   </data>
   <data name="tsbUndo.Text" xml:space="preserve">
     <value>Undo</value>
   </data>
-  <data name="tsbRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 28</value>
-  </data>
   <data name="tsbRedo.Text" xml:space="preserve">
     <value>Redo</value>
-  </data>
-  <data name="tsbLogMessage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

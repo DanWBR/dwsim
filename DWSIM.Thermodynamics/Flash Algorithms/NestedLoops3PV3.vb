@@ -614,9 +614,9 @@ out:
 
             IObj?.Paragraphs.Add("Now the equilibrium equations become")
 
-            IObj?.Paragraphs.Add("<m>\sum\limits_{i}{\left[\frac{\beta ^I_iz_i}{1=\beta^I_iL^I-\beta ^{II}_iL^{II}}\right] }=0</m>")
+            IObj?.Paragraphs.Add("<m>\sum\limits_{i}{\left[\frac{\beta ^I_iz_i}{1-\beta^I_iL^I-\beta ^{II}_iL^{II}}\right] }=0</m>")
 
-            IObj?.Paragraphs.Add("<m>\sum\limits_{i}{\left[\frac{\beta ^{II}_iz_i}{1=\beta^I_iL^I-\beta ^{II}_iL^{II}}\right] }=0</m>")
+            IObj?.Paragraphs.Add("<m>\sum\limits_{i}{\left[\frac{\beta ^{II}_iz_i}{1-\beta^I_iL^I-\beta ^{II}_iL^{II}}\right] }=0</m>")
 
             IObj?.Paragraphs.Add("These two equations are solved for <mi>L^I</mi> and <mi>L^{II}</mi>.")
 

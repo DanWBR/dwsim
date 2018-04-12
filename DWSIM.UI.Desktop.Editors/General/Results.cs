@@ -288,7 +288,7 @@ namespace DWSIM.UI.Desktop.Editors
                     double comp_ant = 0.0f;
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -302,7 +302,7 @@ namespace DWSIM.UI.Desktop.Editors
                     
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -315,7 +315,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -328,7 +328,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -341,7 +341,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -354,7 +354,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -367,7 +367,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -380,7 +380,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -393,7 +393,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -406,7 +406,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -419,7 +419,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -432,7 +432,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {
@@ -445,7 +445,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        for (qi = 1; qi == sec.Quantidade; qi++)
+                        for (qi = 1; qi == 1; qi++)
                         {
                             foreach (var res in sec.Resultados)
                             {

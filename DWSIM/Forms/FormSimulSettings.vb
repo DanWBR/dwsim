@@ -217,8 +217,6 @@ Public Class FormSimulSettings
 
             Me.ComboBox2.Items.Clear()
             Me.ComboBox2.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
-            FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
-            FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
 
         Else
 
@@ -239,15 +237,10 @@ Public Class FormSimulSettings
         ComboBox1.SelectedItem = Me.FrmChild.Options.NumberFormat
         ComboBox3.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
 
-        FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
-        FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
-
         If Me.FrmChild.Options.SelectedUnitSystem.Name <> "" Then
             ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name
-            FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
         Else
             ComboBox2.SelectedIndex = 0
-            FrmChild.ToolStripComboBoxUnitSystem.SelectedIndex = 0
         End If
 
         Me.TBaut.Text = Me.FrmChild.Options.SimulationAuthor
@@ -637,8 +630,6 @@ Public Class FormSimulSettings
             .Style.Tag = 38
         End With
 
-        FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
-
         FrmChild.UpdateOpenEditForms()
 
         My.Application.PushUndoRedoAction = True
@@ -851,8 +842,6 @@ Public Class FormSimulSettings
 
             Me.ComboBox2.SelectedIndex = 0
             Me.ComboBox2.Items.Remove(str)
-            Me.FrmChild.ToolStripComboBoxUnitSystem.SelectedIndex = 0
-            Me.FrmChild.ToolStripComboBoxUnitSystem.Items.Remove(str)
 
         Else
 
@@ -914,10 +903,7 @@ Public Class FormSimulSettings
                     Me.FrmChild.Options.SelectedUnitSystem.Name = su.Name
                     Dim array1(FormMain.AvailableUnitSystems.Count - 1) As String
                     FormMain.AvailableUnitSystems.Keys.CopyTo(array1, 0)
-                    FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
-                    FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(array1)
                     ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name
-                    FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
                 Catch ex As System.Runtime.Serialization.SerializationException
                     MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Finally

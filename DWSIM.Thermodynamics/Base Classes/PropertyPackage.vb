@@ -583,15 +583,22 @@ Namespace PropertyPackages
                 If p.Name <> "Mixture" And p.Name <> "OverallLiquid" Then
 
                     With p.Properties
+                        IObj?.SetCurrent
                         .isothermal_compressibility = CalcIsothermalCompressibility(p)
-                        .bulk_modulus = CalcBulkModulus(p)
+                        If .isothermal_compressibility <> 0.0# Then .bulk_modulus = 1 / .isothermal_compressibility Else .bulk_modulus = 0.0#
+                        IObj?.SetCurrent
                         .speedOfSound = CalcSpeedOfSound(p)
+                        IObj?.SetCurrent
                         .jouleThomsonCoefficient = CalcJouleThomsonCoefficient(p)
                     End With
 
+                    IObj?.SetCurrent
                     CalcInternalEnergy(p)
+                    IObj?.SetCurrent
                     CalcGibbsFreeEnergy(p)
+                    IObj?.SetCurrent
                     CalcHelmholtzEnergy(p)
+                    IObj?.SetCurrent
                     CalcDiffusionCoefficients(p)
 
                     IObj?.Paragraphs.Add(String.Format("Isothermal Compressibility: {0} 1/Pa", p.Properties.isothermal_compressibility))
@@ -608,6 +615,10 @@ Namespace PropertyPackages
 
         Public Overridable Function CalcIsothermalCompressibility(p As IPhase) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcIsothermalCompressibility", ComponentName & " (Isothermal Compressibility)", "")
+
             Dim Z, P0, T, Z1 As Double
 
             T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
@@ -622,6 +633,8 @@ Namespace PropertyPackages
             CurrentMaterialStream = cmst
 
             cmst.Phases(0).Properties.pressure = P0 + 0.0001
+
+            IObj?.SetCurrent
 
             Select Case p.Name
                 Case "Mixture"
@@ -653,24 +666,24 @@ Namespace PropertyPackages
 
             If Double.IsNaN(K) Or Double.IsInfinity(K) Then K = 0.0#
 
+            IObj?.Close()
+
             Return K
-
-        End Function
-
-        Public Overridable Function CalcBulkModulus(p As IPhase) As Double
-
-            Dim BM As Double = CalcIsothermalCompressibility(p)
-
-            If BM <> 0.0# Then Return 1 / BM Else Return 0.0#
 
         End Function
 
         Public Overridable Function CalcSpeedOfSound(p As IPhase) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcSpeedOfSound", ComponentName & " (Speed of Sound)", "")
+
             Dim K, rho As Double
 
             K = p.Properties.bulk_modulus.GetValueOrDefault
             rho = p.Properties.density.GetValueOrDefault
+
+            IObj?.Close()
 
             Return (K / rho) ^ 0.5
 
@@ -678,8 +691,14 @@ Namespace PropertyPackages
 
         Public Overridable Function CalcJouleThomsonCoefficient(p As IPhase) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalcJouleThomsonCoefficient", ComponentName & " (Joule-Thomson Coefficient)", "")
+
             Dim T As Double
             T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+
+            IObj?.Close()
 
             Select Case p.Name
                 Case "Mixture"

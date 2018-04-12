@@ -255,17 +255,6 @@ Public Class FormFlowsheet
         End If
 
         Me.UpdateFormText()
-        Me.ToolStripComboBoxUnitSystem.Items.Clear()
-        Me.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
-
-        If Me.Options.SelectedUnitSystem.Name <> "" Then
-            Me.ToolStripComboBoxUnitSystem.SelectedItem = Me.Options.SelectedUnitSystem.Name
-        Else
-            Me.ToolStripComboBoxUnitSystem.SelectedIndex = 0
-        End If
-
-        Me.ToolStripComboBoxNumberFormatting.SelectedItem = Me.Options.NumberFormat
-        Me.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.Options.FractionNumberFormat
 
         'load plugins
         CreatePluginsList()
@@ -304,25 +293,6 @@ Public Class FormFlowsheet
                 End With
             End If
 
-        Else
-
-            Me.ToolStripComboBoxUnitSystem.Items.Clear()
-            Me.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
-
-            If Me.ToolStripComboBoxUnitSystem.Items.Contains(Me.Options.SelectedUnitSystem.Name) Then
-                Me.ToolStripComboBoxUnitSystem.SelectedItem = Me.Options.SelectedUnitSystem.Name
-            Else
-                If Me.Options.SelectedUnitSystem.Name <> "" Then
-                    QuestionID = 0
-                    ShowQuestionPanel(MessageBoxIcon.Question, DWSIM.App.GetLocalString("ConfirmAddUnitSystemFromSimulation"), True, DWSIM.App.GetLocalString("Sim"), True, DWSIM.App.GetLocalString("No"))
-                Else
-                    Me.ToolStripComboBoxUnitSystem.SelectedIndex = 0
-                    Me.ToolStripComboBoxUnitSystem.SelectedItem = Me.Options.SelectedUnitSystem.Name
-                End If
-            End If
-            Me.ToolStripComboBoxNumberFormatting.SelectedItem = Me.Options.NumberFormat
-            Me.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.Options.FractionNumberFormat
-
         End If
 
         Me.FormLog.Grid1.Sort(Me.FormLog.Grid1.Columns(1), ListSortDirection.Descending)
@@ -351,6 +321,8 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+
+        ToolStripManager.RevertMerge(FormMain.ToolStrip1, ToolStrip1)
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
 
@@ -487,7 +459,6 @@ Public Class FormFlowsheet
             My.Application.UserUnitSystems.Add(su.Name, su)
             FormMain.AvailableUnitSystems.Add(su.Name, su)
             Me.FrmStSim1.ComboBox2.Items.Add(su.Name)
-            Me.ToolStripComboBoxUnitSystem.Items.Add(su.Name)
         Else
             MessageBox.Show("Please input a different name for the unit system.")
         End If
@@ -635,13 +606,6 @@ Public Class FormFlowsheet
                                                                  img = My.Resources.information
                                                                  strtipo = DWSIM.App.GetLocalString("Mensagem")
                                                          End Select
-
-                                                         If texto.Length < 90 Then
-                                                             tsbLogMessage.Text = "[" + Date.Now.ToString + "] " + texto
-                                                         Else
-                                                             tsbLogMessage.Text = "[" + Date.Now.ToString + "] " + texto.Substring(0, 90) & "..."
-                                                         End If
-                                                         tsbLogMessage.Image = img
 
                                                          Dim r As Integer = frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
@@ -984,25 +948,18 @@ Public Class FormFlowsheet
         FormSurface.TSBtabela.Checked = False
     End Sub
 
-    Public Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
-        GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
-        tsbCalc.Enabled = tsbAtivar.Checked
-        tsbAbortCalc.Enabled = tsbAtivar.Checked
-        tsbSimultAdjustSolver.Enabled = tsbAtivar.Checked
-    End Sub
-
     Private Sub FecharSimulacaoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
 
-    Public Sub tsbAbortCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbAbortCalc.Click
+    Public Sub tsbAbortCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         GlobalSettings.Settings.CalculatorStopRequested = True
         If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
             GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
         End If
     End Sub
 
-    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click, tssbSolverConfig.ButtonClick
+    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
@@ -1034,50 +991,6 @@ Public Class FormFlowsheet
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
         Dim frmdc As New DCCharacterizationWizard
         frmdc.ShowDialog(Me)
-    End Sub
-
-    Private Sub ToolStripComboBoxNumberFormatting_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ToolStripComboBoxNumberFormatting.SelectedIndexChanged
-        Me.Options.NumberFormat = Me.ToolStripComboBoxNumberFormatting.SelectedItem
-        Try
-            Me.FormSurface.UpdateSelectedObject()
-            Me.UpdateOpenEditForms()
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub ToolStripComboBoxNumberFractionFormatting_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripComboBoxNumberFractionFormatting.SelectedIndexChanged
-        Me.Options.FractionNumberFormat = Me.ToolStripComboBoxNumberFractionFormatting.SelectedItem
-        Try
-            Me.FormSurface.UpdateSelectedObject()
-            Me.UpdateOpenEditForms()
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub ToolStripComboBoxUnitSystem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripComboBoxUnitSystem.SelectedIndexChanged
-
-        Try
-
-            If FormMain.AvailableUnitSystems.ContainsKey(Me.ToolStripComboBoxUnitSystem.SelectedItem.ToString) Then
-                Me.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(Me.ToolStripComboBoxUnitSystem.SelectedItem.ToString)
-            End If
-
-            FormSurface.UpdateSelectedObject()
-            FormSurface.FlowsheetDesignSurface.Refresh()
-            UpdateOpenEditForms()
-
-            If Me.ToolStripComboBoxUnitSystem.SelectedIndex > 2 Then
-                tsbEditUnits.Enabled = True
-            Else
-                tsbEditUnits.Enabled = False
-            End If
-
-        Catch ex As Exception
-
-        End Try
-
     End Sub
 
     Private Sub IronRubyToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IronRubyToolStripMenuItem.Click
@@ -1162,10 +1075,6 @@ Public Class FormFlowsheet
         Catch ex As Exception
 
         End Try
-    End Sub
-
-    Public Sub tsbSimultAdjustSolver_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
-        Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled = tsbSimultAdjustSolver.Checked
     End Sub
 
     Sub ChangeEditMenuStatus(status As Boolean)
@@ -1912,16 +1821,11 @@ Public Class FormFlowsheet
         Select Case QuestionID
             Case 0 'question about adding or not a new user-defined unit from the simulation file
                 AddUnitSystem(Me.Options.SelectedUnitSystem)
-                Me.ToolStripComboBoxUnitSystem.SelectedItem = Me.Options.SelectedUnitSystem.Name
         End Select
     End Sub
 
     Private Sub QuestionBox_Button2_Click(sender As Object, e As EventArgs) Handles QuestionBox_Button2.Click
         Me.QuestionBox_Panel.Visible = False
-        Select Case QuestionID
-            Case 0 'question about adding or not a new user-defined unit from the simulation file
-                Me.ToolStripComboBoxUnitSystem.SelectedIndex = 0
-        End Select
     End Sub
 
     Sub ShowQuestionPanel(ByVal icon As MessageBoxIcon, ByVal question As String, ByVal button1visible As Boolean, ByVal button1text As String, ByVal button2visible As Boolean, ByVal button2text As String)
@@ -2492,13 +2396,13 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Public Sub tsbUndo_Click(sender As Object, e As EventArgs) Handles tsbUndo.Click
+    Public Sub tsbUndo_Click(sender As Object, e As EventArgs)
 
         UndoActions(tsbUndo.DropDownItems(0), e)
 
     End Sub
 
-    Public Sub tsbRedo_Click(sender As Object, e As EventArgs) Handles tsbRedo.Click
+    Public Sub tsbRedo_Click(sender As Object, e As EventArgs)
 
         RedoActions(tsbRedo.DropDownItems(0), e)
 
@@ -2612,7 +2516,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs) Handles tsbUndo.MouseEnter
+    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs)
 
         If TypeOf sender Is ToolStripMenuItem Then
             Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
@@ -2627,7 +2531,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs) Handles tsbRedo.MouseEnter
+    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs)
 
         If TypeOf sender Is ToolStripMenuItem Then
             Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
@@ -3069,21 +2973,7 @@ Public Class FormFlowsheet
 
 #End Region
 
-    Private Sub tsbLogWindow_Click(sender As Object, e As EventArgs) Handles tsbLogMessage.Click
-
-        If FormLog.VisibleState <> DockState.Unknown Then
-            FormLog.VisibleState = DockState.Unknown
-            FormLog.Hide()
-        Else
-            FormLog.VisibleState = DockState.DockBottom
-            FormLog.Show()
-        End If
-
-        tsbLogMessage.BackColor = If(FormLog.VisibleState <> DockState.Unknown, Color.FromKnownColor(KnownColor.GradientActiveCaption), Color.FromKnownColor(KnownColor.Control))
-
-    End Sub
-
-    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles tsbmiCompounds.Click
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
             Me.FrmStSim1.Show(Me.dckPanel)
@@ -3093,7 +2983,7 @@ Public Class FormFlowsheet
         Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage1
     End Sub
 
-    Private Sub tsbmiModels_Click(sender As Object, e As EventArgs) Handles tsbmiModels.Click
+    Private Sub tsbmiModels_Click(sender As Object, e As EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
             Me.FrmStSim1.Show(Me.dckPanel)
@@ -3103,7 +2993,7 @@ Public Class FormFlowsheet
         Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage2
     End Sub
 
-    Private Sub tsbmiReactions_Click(sender As Object, e As EventArgs) Handles tsbmiReactions.Click
+    Private Sub tsbmiReactions_Click(sender As Object, e As EventArgs)
         If FrmReacMan Is Nothing OrElse FrmReacMan.IsDisposed Then
             FrmReacMan = New FormReacManager
             FrmReacMan.Show(Me.dckPanel)
@@ -3112,16 +3002,16 @@ Public Class FormFlowsheet
         End If
     End Sub
 
-    Private Sub AjudaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AjudaToolStripMenuItem.Click
+    Private Sub AjudaToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Process.Start("https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx")
     End Sub
 
-    Private Sub EditarSelecionadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsbEditUnits.Click
+    Private Sub EditarSelecionadoToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Dim frmUnit As New FormUnitGen With {.EditMode = True}
         frmUnit.ShowDialog(Me)
     End Sub
 
-    Private Sub AdicionarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdicionarToolStripMenuItem.Click
+    Private Sub AdicionarToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Dim frmUnit As New FormUnitGen
         frmUnit.ShowDialog(Me)
     End Sub
@@ -3194,7 +3084,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs) Handles tssbSimulationSettings.ButtonClick
+    Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
             Me.FrmStSim1.Show(Me.dckPanel)
@@ -3212,6 +3102,43 @@ Public Class FormFlowsheet
         'start dispatcher for WPF Interop
         'If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
 
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
+        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+        If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
+        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
+    End Sub
+
+    Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
+        GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
+        tsbCalc.Enabled = tsbAtivar.Checked
+        tsbAbortCalc.Enabled = tsbAtivar.Checked
+        tsbSimultAdjustSolver.Enabled = tsbAtivar.Checked
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsbAbortCalc.Click
+        GlobalSettings.Settings.CalculatorStopRequested = True
+        If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
+            GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
+        End If
+    End Sub
+
+    Private Sub tsbSimultAdjustSolver_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Public Sub tsbSimultAdjustSolver_CheckedChanged(sender As Object, e As EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
+        Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled = tsbSimultAdjustSolver.Checked
     End Sub
 
     Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click

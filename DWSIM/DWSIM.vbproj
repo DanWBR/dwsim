@@ -1903,6 +1903,8 @@
     <None Include="Resources\ddbsearch.jpg" />
     <None Include="Resources\database_save.jpg" />
     <None Include="Resources\database_save1.png" />
+    <None Include="Resources\control_power_blue.png" />
+    <None Include="Resources\control_power.png" />
     <Content Include="Resources\de.png" />
     <None Include="Resources\emblem-symbolic-link.png" />
     <None Include="Resources\de1.png" />

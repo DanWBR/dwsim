@@ -105,6 +105,7 @@ Partial Class FormMain
         Me.ErrorBox_Button1 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ErrorBox_Label1 = New System.Windows.Forms.Label()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -365,7 +366,7 @@ Partial Class FormMain
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         '
@@ -571,6 +572,11 @@ Partial Class FormMain
         resources.ApplyResources(Me.ErrorBox_Label1, "ErrorBox_Label1")
         Me.ErrorBox_Label1.ForeColor = System.Drawing.Color.DarkRed
         Me.ErrorBox_Label1.Name = "ErrorBox_Label1"
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
         '
         'FormMain
         '
@@ -852,5 +858,5 @@ Partial Class FormMain
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents ErrorBox_Label1 As System.Windows.Forms.Label
     Friend WithEvents GuiaDoUsuarioHTMLToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
 End Class

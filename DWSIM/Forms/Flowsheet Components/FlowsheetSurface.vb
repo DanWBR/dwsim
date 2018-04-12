@@ -105,7 +105,7 @@ Public Class FlowsheetSurface
             Flowsheet.tsbCalc_Click(sender, e)
         ElseIf e.KeyCode = Keys.F6 Then
             Flowsheet.tsbAtivar.Checked = Not Flowsheet.tsbAtivar.Checked
-            Flowsheet.tsbAtivar_Click(sender, e)
+            Flowsheet.tsbAtivar_CheckedChanged(sender, e)
         ElseIf e.KeyCode = Keys.F7 Then
             Flowsheet.tsbSimultAdjustSolver.Checked = Not Flowsheet.tsbSimultAdjustSolver.Checked
             Flowsheet.tsbSimultAdjustSolver_CheckedChanged(sender, e)

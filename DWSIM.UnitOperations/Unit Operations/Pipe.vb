@@ -387,6 +387,8 @@ Namespace UnitOperations
 
                 For Each segmento In Me.Profile.Sections.Values
 
+                    segmento.Resultados.Clear()
+
                     For iq = 1 To segmento.Quantidade
 
                         IObj2?.SetCurrent
@@ -396,8 +398,6 @@ Namespace UnitOperations
                         Inspector.Host.CheckAndAdd(IObj3, "", "Calculate", String.Format("Segment #{0} ({1}/{2})", segmento.Indice, iq, segmento.Quantidade), "", True)
 
                         IObj3?.Paragraphs.Add(String.Format("Calculating segment {0} ({1}/{2})...", segmento.Indice, iq, segmento.Quantidade))
-
-                        segmento.Resultados.Clear()
 
                         If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Then
 
@@ -738,6 +738,7 @@ Namespace UnitOperations
                         Else
 
                             segmento.Comprimento = 0.1 '10 cm default
+                            segmento.Incrementos = 1 'only one increment
 
                             'CALCULAR DP PARA VALVULAS
                             count = 0
@@ -2252,9 +2253,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.distance, (Math.Atan(ps.Elevacao / (ps.Comprimento ^ 2 - ps.Elevacao ^ 2) ^ 0.5) * 180 / Math.PI)).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2267,9 +2266,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2283,9 +2280,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpPorFriccao).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2298,9 +2293,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpPorHidrostatico).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2313,9 +2306,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2328,9 +2319,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel.GetValueOrDefault).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2343,9 +2332,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel.GetValueOrDefault).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2358,9 +2345,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & res.LiqRe.GetValueOrDefault.ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2373,9 +2358,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & res.VapRe.GetValueOrDefault.ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2388,9 +2371,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & res.HoldupDeLiquido.GetValueOrDefault.ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2403,9 +2384,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & res.TipoFluxo)
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2418,9 +2397,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2433,9 +2410,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC.GetValueOrDefault).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2448,9 +2423,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2463,10 +2436,8 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall).ToString(numberformat, ci))
-                Next
-                If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
                     comp_ant += ps.Comprimento / ps.Incrementos
-                End If
+                Next
             Next
 
             str.AppendLine()
@@ -2478,9 +2449,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2493,9 +2462,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 
@@ -2508,9 +2475,7 @@ Final3:     T = bbb
                 For Each res In ps.Resultados
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.EnergyFlow_Inicial).ToString(numberformat, ci))
-                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
-                        comp_ant += ps.Comprimento / ps.Incrementos
-                    End If
+                    comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
 

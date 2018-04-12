@@ -144,14 +144,8 @@ Public Class FormSimulWizard
         FormMain.AvailableUnitSystems.Keys.CopyTo(array1, 0)
         Me.ComboBox2.Items.Clear()
         Me.ComboBox2.Items.AddRange(array1)
-        FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
-        FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(array1)
-
-        FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
-        FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
 
         ComboBox2.SelectedIndex = 0
-        FrmChild.ToolStripComboBoxUnitSystem.SelectedIndex = 0
 
         ListBoxPP.SelectedIndex = 0
 
@@ -363,8 +357,6 @@ Public Class FormSimulWizard
             .Add(New Object() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
         End With
-
-        FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
 
     End Sub
 
