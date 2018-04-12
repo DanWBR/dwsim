@@ -197,10 +197,13 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        For Each res In ps.Resultados
-                            vy(i) = cv.ConvertFromSI(su.heat_transf_coeff, res.HTC)
-                            i += 1
+                        For qi = 1 To ps.Quantidade
+                            For Each res In ps.Resultados
+                                vy(i) = cv.ConvertFromSI(su.heat_transf_coeff, res.HTC)
+                                i += 1
+                            Next
                         Next
                     Next
                 End With
@@ -211,18 +214,21 @@ Public Class EditingForm_Pipe_ResultsChart
                     Dim res As PipeResults
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
+                    Dim qi As Integer = 1
                     For Each ps In .Sections.Values
-                        If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                            For Each res In ps.Resultados
-                                vy(i) = res.HoldupDeLiquido
-                                i += 1
-                            Next
-                        Else
-                            For Each res In ps.Resultados
-                                vy(i) = res.HoldupDeLiquido
-                                i += 1
-                            Next
-                        End If
+                        For qi = 1 To ps.Quantidade
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Resultados
+                                    vy(i) = res.HoldupDeLiquido
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Resultados
+                                    vy(i) = res.HoldupDeLiquido
+                                    i += 1
+                                Next
+                            End If
+                        Next
                     Next
                 End With
             Case 0

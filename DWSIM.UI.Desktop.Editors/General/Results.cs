@@ -278,6 +278,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         List<double> PopulateData(Pipe pipe, int position)
         {
+            int qi = 1;
             var su = SimObject.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
             List<double> vec = new List<double>();
             switch (position)
@@ -287,20 +288,26 @@ namespace DWSIM.UI.Desktop.Editors
                     double comp_ant = 0.0f;
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.distance, comp_ant));
-                            comp_ant += sec.Comprimento / sec.Incrementos;
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.distance, comp_ant));
+                                comp_ant += sec.Comprimento / sec.Incrementos;
+                            }
                         }
                     }
                     break;
                 case 1: //elevation
-
+                    
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(Math.Atan(sec.Elevacao / Math.Pow(Math.Pow(sec.Comprimento, 2) - Math.Pow(sec.Elevacao, 2), 0.5) * 180 / Math.PI));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(Math.Atan(sec.Elevacao / Math.Pow(Math.Pow(sec.Comprimento, 2) - Math.Pow(sec.Elevacao, 2), 0.5) * 180 / Math.PI));
+                            }
                         }
                     }
                     break;
@@ -308,9 +315,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault()));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault()));
+                            }
                         }
                     }
                     break;
@@ -318,9 +328,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault()));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault()));
+                            }
                         }
                     }
                     break;
@@ -328,9 +341,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.velocity, res.LiqVel.GetValueOrDefault()));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.velocity, res.LiqVel.GetValueOrDefault()));
+                            }
                         }
                     }
                     break;
@@ -338,9 +354,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.velocity, res.VapVel.GetValueOrDefault()));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.velocity, res.VapVel.GetValueOrDefault()));
+                            }
                         }
                     }
                     break;
@@ -348,9 +367,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault()));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault()));
+                            }
                         }
                     }
                     break;
@@ -358,9 +380,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(res.HoldupDeLiquido.GetValueOrDefault());
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(res.HoldupDeLiquido.GetValueOrDefault());
+                            }
                         }
                     }
                     break;
@@ -368,9 +393,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC.GetValueOrDefault()));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC.GetValueOrDefault()));
+                            }
                         }
                     }
                     break;
@@ -378,9 +406,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal));
+                            }
                         }
                     }
                     break;
@@ -388,9 +419,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall));
+                            }
                         }
                     }
                     break;
@@ -398,9 +432,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation));
+                            }
                         }
                     }
                     break;
@@ -408,9 +445,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     foreach (var sec in pipe.Profile.Sections.Values)
                     {
-                        foreach (var res in sec.Resultados)
+                        for (qi = 1; qi == sec.Quantidade; qi++)
                         {
-                            vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_external));
+                            foreach (var res in sec.Resultados)
+                            {
+                                vec.Add(cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_external));
+                            }
                         }
                     }
                     break;
