@@ -7,8 +7,15 @@ Version 5.2
 - [NEW] Added suppor for neutral compounds on HetCat Reaction Expressions
 - [NEW] Exposed Pipe Segment calculation results to analysis tools
 - [NEW] Added support for Classic UI on macOS (work in progress)
+- [NEW] Added an option to calculate Phase Enthalpies based on liquid phase Cp values on Activity Coefficient-based PPs
+- [CHG] Relocated Flowsheet Solver Controls on the Classic UI
+- [CHG] Exposing all flash specs on MS editor (New UI)
 - [CHG] Updated the target version of .NET Framework to v4.7.1
 - [CHG] Removed dependency of Mono Framework from macOS (OS X) version
+- [FIX] Rigorous Column fixes for Liquid-Liquid Extraction
+- [FIX] PFR zero-flow fix
+- [FIX] Fixed Master Property Table not updating upon loading
+- [FIX] Fixed Pipe Segment Quantity
 - [FIX] Fixed Flash Algorithm temperature limits
 - [FIX] Fixed Equilibrium Reactor calculation restart
 - [FIX] Fixed issues with Petroleum Characterization Utilities
