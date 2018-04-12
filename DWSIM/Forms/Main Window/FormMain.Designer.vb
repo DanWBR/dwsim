@@ -61,7 +61,6 @@ Partial Class FormMain
         Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualTecnicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GuiaDoUsuarioHTMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.DWSIMNaInternetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,6 +86,7 @@ Partial Class FormMain
         Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbRegCO = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -105,7 +105,6 @@ Partial Class FormMain
         Me.ErrorBox_Button1 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ErrorBox_Label1 = New System.Windows.Forms.Label()
-        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -117,6 +116,7 @@ Partial Class FormMain
         '
         Me.MenuStrip1.AllowItemReorder = True
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.VerToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.WindowsMenu, Me.VerToolStripMenuItem1, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -303,7 +303,7 @@ Partial Class FormMain
         '
         'DocumentacaoToolStripMenuItem
         '
-        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualTecnicoToolStripMenuItem, Me.GuiaDoUsuarioToolStripMenuItem, Me.GuiaDoUsuarioHTMLToolStripMenuItem})
+        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualTecnicoToolStripMenuItem, Me.GuiaDoUsuarioToolStripMenuItem})
         Me.DocumentacaoToolStripMenuItem.Name = "DocumentacaoToolStripMenuItem"
         resources.ApplyResources(Me.DocumentacaoToolStripMenuItem, "DocumentacaoToolStripMenuItem")
         '
@@ -318,12 +318,6 @@ Partial Class FormMain
         Me.GuiaDoUsuarioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
         Me.GuiaDoUsuarioToolStripMenuItem.Name = "GuiaDoUsuarioToolStripMenuItem"
         resources.ApplyResources(Me.GuiaDoUsuarioToolStripMenuItem, "GuiaDoUsuarioToolStripMenuItem")
-        '
-        'GuiaDoUsuarioHTMLToolStripMenuItem
-        '
-        Me.GuiaDoUsuarioHTMLToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_world
-        Me.GuiaDoUsuarioHTMLToolStripMenuItem.Name = "GuiaDoUsuarioHTMLToolStripMenuItem"
-        resources.ApplyResources(Me.GuiaDoUsuarioHTMLToolStripMenuItem, "GuiaDoUsuarioHTMLToolStripMenuItem")
         '
         'toolStripSeparator5
         '
@@ -366,6 +360,7 @@ Partial Class FormMain
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
@@ -481,6 +476,11 @@ Partial Class FormMain
         resources.ApplyResources(Me.tsbRegCO, "tsbRegCO")
         Me.tsbRegCO.Name = "tsbRegCO"
         '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
+        '
         'BgLoadComp
         '
         Me.BgLoadComp.WorkerReportsProgress = True
@@ -572,11 +572,6 @@ Partial Class FormMain
         resources.ApplyResources(Me.ErrorBox_Label1, "ErrorBox_Label1")
         Me.ErrorBox_Label1.ForeColor = System.Drawing.Color.DarkRed
         Me.ErrorBox_Label1.Name = "ErrorBox_Label1"
-        '
-        'ToolStripSeparator8
-        '
-        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
         '
         'FormMain
         '
@@ -857,6 +852,5 @@ Partial Class FormMain
     Friend WithEvents ErrorBox_Button1 As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents ErrorBox_Label1 As System.Windows.Forms.Label
-    Friend WithEvents GuiaDoUsuarioHTMLToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
 End Class

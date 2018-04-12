@@ -2404,6 +2404,11 @@ Label_00CC:
 
 #Region "    Click Handlers"
 
+    Private Sub RegistroCAPEOPENToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroCAPEOPENToolStripMenuItem.Click, tsbRegCO.Click
+        Dim f As New FormCORegistration
+        f.ShowDialog(Me)
+    End Sub
+
     Private Sub VerToolStripMenuItem_DropDownOpened(sender As Object, e As EventArgs) Handles VerToolStripMenuItem.DropDownOpened
 
         If Me.ActiveMdiChild IsNot Nothing Then
@@ -3063,33 +3068,5 @@ Label_00CC:
     End Sub
 
 #End Region
-
-    Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs)
-        Try
-            File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run", "")
-            Application.Restart()
-        Catch ex As Exception
-            MessageBox.Show("Application restart failed. Please restart DWSIM manually.")
-        End Try
-    End Sub
-
-    Private Sub RegistroCAPEOPENToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroCAPEOPENToolStripMenuItem.Click, tsbRegCO.Click
-        Dim f As New FormCORegistration
-        f.ShowDialog(Me)
-    End Sub
-
-    Private Sub GuiaDoUsuarioHTMLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuarioHTMLToolStripMenuItem.Click
-        If DWSIM.App.IsRunningOnMono Then
-            Dim p As New Process()
-            With p
-                .StartInfo.FileName = "xdg-open"
-                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide" & Path.DirectorySeparatorChar & "user_guide.html"
-                .StartInfo.UseShellExecute = False
-                .Start()
-            End With
-        Else
-            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide" & Path.DirectorySeparatorChar & "user_guide.html")
-        End If
-    End Sub
 
 End Class
