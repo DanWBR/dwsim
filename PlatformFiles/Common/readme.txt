@@ -64,16 +64,16 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.2
 
-- [NEW] Solution Inspector - Understand the models behind the simulation
-- [NEW] Cross-Platform UI Enhancements: Drag-and-Drop to Add Flowsheet Objects, Object Property Editor Panels and much more
+- [NEW] Solution Inspector - understand the models behind the simulation
+- [NEW] Cross-Platform UI Enhancements: Drag-and-Drop to add Flowsheet Objects, object property editor Panels and much more
 - [NEW] Added support for Touch Bar on MacBook Pro 2016/2017 models
 - [NEW] Enhanced support for High DPI displays
-- [NEW] Added suppor for neutral compounds on HetCat Reaction Expressions
+- [NEW] Added support for neutral compounds on HetCat Reaction Expressions
 - [NEW] Exposed Pipe Segment calculation results to analysis tools
 - [NEW] Added support for Classic UI on macOS (work in progress)
 - [NEW] Added an option to calculate Phase Enthalpies based on liquid phase Cp values on Activity Coefficient-based PPs
 - [CHG] Relocated Flowsheet Solver Controls on the Classic UI
-- [CHG] Exposing all flash specs on MS editor (New UI)
+- [CHG] Exposing all flash specs on MS editor (Cross-Platform UI)
 - [CHG] Updated the target version of .NET Framework to v4.7.1
 - [CHG] Removed dependency of Mono Framework from macOS (OS X) version
 - [FIX] Rigorous Column fixes for Liquid-Liquid Extraction
