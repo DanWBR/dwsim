@@ -752,7 +752,7 @@ namespace DWSIM.UI.Forms
                                 delitem.Click += (sender2, e2) =>
                                 {
                                     if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
-                                    {
+                                    {   
                                         FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
                                     }
                                 };
@@ -1354,6 +1354,11 @@ namespace DWSIM.UI.Forms
             if (obj == null) return;
             if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
             {
+                var editor = EditorHolder.Pages.Where(x => (string)x.Content.Tag == obj.Name).First();
+                if (editor != null)
+                {
+                    EditorHolder.Pages.Remove(editor);
+                }
                 FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
             }
         }
