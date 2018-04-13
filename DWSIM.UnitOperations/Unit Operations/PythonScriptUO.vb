@@ -281,8 +281,6 @@ Namespace UnitOperations
                     If Not GlobalSettings.Settings.IsRunningOnMono() Then
                         If Not Directory.Exists(GlobalSettings.Settings.PythonPath) Then
                             Throw New Exception("Python Binaries Path is not defined correctly.")
-                        ElseIf Not File.Exists(Path.Combine(GlobalSettings.Settings.PythonPath, "python27.dll")) Then
-                            Throw New Exception("'python27.dll' not found in Python Binaries Path.")
                         End If
                     End If
 

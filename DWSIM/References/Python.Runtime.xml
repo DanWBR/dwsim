@@ -156,17 +156,6 @@
             type. Returns null if the named type cannot be found.
             </summary>
         </member>
-        <member name="T:Python.Runtime.AssemblyManager.AssemblyList">
-            <summary>
-            Wrapper around List&lt;Assembly&gt; for thread safe access
-            </summary>
-        </member>
-        <member name="T:Python.Runtime.AssemblyManager.AssemblyList.Enumerator">
-            <summary>
-            Enumerator wrapping around <see cref="F:Python.Runtime.AssemblyManager.AssemblyList._list" />'s enumerator.
-            Acquires and releases a read lock on <see cref="F:Python.Runtime.AssemblyManager.AssemblyList._lock" /> during enumeration
-            </summary>
-        </member>
         <member name="T:Python.Runtime.IPythonDerivedType">
             <summary>
             Managed class that provides the implementation for reflected types.
@@ -690,7 +679,7 @@
             Implements __call__ for reflected delegate types.
             </summary>
         </member>
-        <member name="M:Python.Runtime.DelegateObject.tp_compare(System.IntPtr,System.IntPtr)">
+        <member name="M:Python.Runtime.DelegateObject.tp_richcompare(System.IntPtr,System.IntPtr,System.Int32)">
             <summary>
             Implements __cmp__ for reflected delegate types.
             </summary>
@@ -1366,6 +1355,17 @@
             possible since sys.ps1 is created after the CLR module is
             created.
             </summary>
+        </member>
+        <member name="M:Python.Runtime.CLRModule.GetClrType(System.Type)">
+            <summary>
+            Get a Type instance for a class object.
+            clr.GetClrType(IComparable) gives you the Type for IComparable,
+            that you can e.g. perform reflection on. Similar to typeof(IComparable) in C#
+            or clr.GetClrType(IComparable) in IronPython.
+            
+            </summary>
+            <param name="type"></param>
+            <returns>The Type object</returns>
         </member>
         <member name="T:Python.Runtime.ModulePropertyObject">
             <summary>
@@ -2124,6 +2124,15 @@
             value of the Python object.
             </remarks>
         </member>
+        <member name="M:Python.Runtime.PyObject.As``1">
+            <summary>
+            As Method
+            </summary>
+            <remarks>
+            Return a managed object of the given type, based on the
+            value of the Python object.
+            </remarks>
+        </member>
         <member name="M:Python.Runtime.PyObject.Dispose(System.Boolean)">
             <summary>
             Dispose Method
@@ -2559,6 +2568,268 @@
             "hash(obj)".
             </remarks>
         </member>
+        <member name="T:Python.Runtime.PyGILAttribute">
+            <summary>
+            Classes/methods have this attribute must be used with GIL obtained.
+            </summary>
+        </member>
+        <member name="F:Python.Runtime.PyScope.obj">
+            <summary>
+            the python Module object the scope associated with.
+            </summary>
+        </member>
+        <member name="F:Python.Runtime.PyScope.variables">
+            <summary>
+            the variable dict of the scope.
+            </summary>
+        </member>
+        <member name="F:Python.Runtime.PyScope.Manager">
+            <summary>
+            The Manager this scope associated with.
+            It provides scopes this scope can import.
+            </summary>
+        </member>
+        <member name="E:Python.Runtime.PyScope.OnDispose">
+            <summary>
+            event which will be triggered after the scope disposed.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.PyScope.#ctor(System.IntPtr,Python.Runtime.PyScopeManager)">
+            <summary>
+            Constructor
+            </summary>
+            <remarks>
+            Create a scope based on a Python Module.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Variables">
+            <summary>
+            return the variable dict of the scope.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Python.Runtime.PyScope.NewScope">
+            <summary>
+            Create a scope, and import all from this scope
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Import(System.String,System.String)">
+            <summary>
+            Import method
+            </summary>
+            <remarks>
+            Import a scope or a module of given name,
+            scope will be looked up first.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Import(Python.Runtime.PyScope,System.String)">
+            <summary>
+            Import method
+            </summary>
+            <remarks>
+            Import a scope as a variable of given name.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Import(Python.Runtime.PyObject,System.String)">
+            <summary>
+            Import Method
+            </summary>
+            <remarks>
+            The 'import .. as ..' statement in Python.
+            Import a module as a variable into the scope.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.ImportAll(System.String)">
+            <summary>
+            ImportAll Method
+            </summary>
+            <remarks>
+            The 'import * from ..' statement in Python.
+            Import all content of a scope/module of given name into the scope, scope will be looked up first.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.ImportAll(Python.Runtime.PyScope)">
+            <summary>
+            ImportAll Method
+            </summary>
+            <remarks>
+            Import all variables of the scope into this scope.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.ImportAll(Python.Runtime.PyObject)">
+            <summary>
+            ImportAll Method
+            </summary>
+            <remarks>
+            Import all variables of the module into this scope.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.ImportAll(Python.Runtime.PyDict)">
+            <summary>
+            ImportAll Method
+            </summary>
+            <remarks>
+            Import all variables in the dictionary into this scope.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Execute(Python.Runtime.PyObject,Python.Runtime.PyDict)">
+            <summary>
+            Execute method
+            </summary>
+            <remarks>
+            Execute a Python ast and return the result as a PyObject.
+            The ast can be either an expression or stmts.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Execute``1(Python.Runtime.PyObject,Python.Runtime.PyDict)">
+            <summary>
+            Execute method
+            </summary>
+            <remarks>
+            Execute a Python ast and return the result as a PyObject,
+            and convert the result to a Managed Object of given type.
+            The ast can be either an expression or stmts.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Eval(System.String,Python.Runtime.PyDict)">
+            <summary>
+            Eval method
+            </summary>
+            <remarks>
+            Evaluate a Python expression and return the result as a PyObject
+            or null if an exception is raised.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Eval``1(System.String,Python.Runtime.PyDict)">
+            <summary>
+            Evaluate a Python expression
+            </summary>
+            <remarks>
+            Evaluate a Python expression
+            and  convert the result to a Managed Object of given type.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Exec(System.String,Python.Runtime.PyDict)">
+            <summary>
+            Exec Method
+            </summary>
+            <remarks>
+            Exec a Python script and save its local variables in the current local variable dict.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Set(System.String,System.Object)">
+            <summary>
+            Set Variable Method
+            </summary>
+            <remarks>
+            Add a new variable to the variables dict if it not exist
+            or update its value if the variable exists.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Remove(System.String)">
+            <summary>
+            Remove Method
+            </summary>
+            <remarks>
+            Remove a variable from the variables dict.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Contains(System.String)">
+            <summary>
+            Contains Method
+            </summary>
+            <remarks>
+            Returns true if the variable exists in the scope.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Get(System.String)">
+            <summary>
+            Get Method
+            </summary>
+            <remarks>
+            Returns the value of the variable of given name.
+            If the variable does not exist, throw an Exception.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.TryGet(System.String,Python.Runtime.PyObject@)">
+            <summary>
+            TryGet Method
+            </summary>
+            <remarks>
+            Returns the value of the variable, local variable first.
+            If the variable does not exist, return null.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.Get``1(System.String)">
+            <summary>
+            Get Method
+            </summary>
+            <remarks>
+            Obtain the value of the variable of given name,
+            and convert the result to a Managed Object of given type.
+            If the variable does not exist, throw an Exception.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScope.TryGet``1(System.String,``0@)">
+            <summary>
+            TryGet Method
+            </summary>
+            <remarks>
+            Obtain the value of the variable of given name,
+            and convert the result to a Managed Object of given type.
+            If the variable does not exist, return false.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScopeManager.Create">
+            <summary>
+            Create Method
+            </summary>
+            <remarks>
+            Create an anonymous scope.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScopeManager.Create(System.String)">
+            <summary>
+            Create Method
+            </summary>
+            <remarks>
+            Create an named scope of given name.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScopeManager.Contains(System.String)">
+            <summary>
+            Contains Method
+            </summary>
+            <remarks>
+            return true if the scope exists in this manager.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScopeManager.Get(System.String)">
+            <summary>
+            Get Method
+            </summary>
+            <remarks>
+            Find the scope in this manager.
+            If the scope not exist, an Exception will be thrown.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScopeManager.TryGet(System.String,Python.Runtime.PyScope@)">
+            <summary>
+            Get Method
+            </summary>
+            <remarks>
+            Try to find the scope in this manager.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyScopeManager.Remove(Python.Runtime.PyScope)">
+            <summary>
+            Remove Method
+            </summary>
+            <remarks>
+            remove the scope from this manager.
+            </remarks>
+        </member>
         <member name="T:Python.Runtime.PySequence">
             <summary>
             Represents a generic Python sequence. The methods of this class are
@@ -2880,6 +3151,11 @@
             A string representing the python exception stack trace.
             </remarks>
         </member>
+        <member name="P:Python.Runtime.PythonException.PythonTypeName">
+            <summary>
+            Python error type name.
+            </summary>
+        </member>
         <member name="M:Python.Runtime.PythonException.Dispose">
             <summary>
             Dispose Method
@@ -3030,6 +3306,11 @@
             Managed version of the standard Python C API PyObject_Type call.
             This version avoids a managed  &lt;-&gt; unmanaged transition.
             This one does incref the returned type object.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Runtime.PyObject_IsIterable(System.IntPtr)">
+            <summary>
+            Test whether the Python object is an iterable.
             </summary>
         </member>
         <member name="M:Python.Runtime.Runtime.GetManagedString(System.IntPtr)">
