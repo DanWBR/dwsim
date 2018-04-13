@@ -156,17 +156,6 @@
             type. Returns null if the named type cannot be found.
             </summary>
         </member>
-        <member name="T:Python.Runtime.AssemblyManager.AssemblyList">
-            <summary>
-            Wrapper around List&lt;Assembly&gt; for thread safe access
-            </summary>
-        </member>
-        <member name="T:Python.Runtime.AssemblyManager.AssemblyList.Enumerator">
-            <summary>
-            Enumerator wrapping around <see cref="F:Python.Runtime.AssemblyManager.AssemblyList._list" />'s enumerator.
-            Acquires and releases a read lock on <see cref="F:Python.Runtime.AssemblyManager.AssemblyList._lock" /> during enumeration
-            </summary>
-        </member>
         <member name="T:Python.Runtime.IPythonDerivedType">
             <summary>
             Managed class that provides the implementation for reflected types.
@@ -690,7 +679,7 @@
             Implements __call__ for reflected delegate types.
             </summary>
         </member>
-        <member name="M:Python.Runtime.DelegateObject.tp_compare(System.IntPtr,System.IntPtr)">
+        <member name="M:Python.Runtime.DelegateObject.tp_richcompare(System.IntPtr,System.IntPtr,System.Int32)">
             <summary>
             Implements __cmp__ for reflected delegate types.
             </summary>
@@ -3161,6 +3150,11 @@
             <remarks>
             A string representing the python exception stack trace.
             </remarks>
+        </member>
+        <member name="P:Python.Runtime.PythonException.PythonTypeName">
+            <summary>
+            Python error type name.
+            </summary>
         </member>
         <member name="M:Python.Runtime.PythonException.Dispose">
             <summary>
