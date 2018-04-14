@@ -1563,4 +1563,7 @@
   <data name="PROP_CS_5" xml:space="preserve">
     <value>Temperatura na Saída</value>
   </data>
+  <data name="PROP_HX_28" xml:space="preserve">
+    <value>Perda Térmica</value>
+  </data>
 </root>

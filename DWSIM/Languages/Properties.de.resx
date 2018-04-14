@@ -374,6 +374,9 @@
   <data name="PROP_HX_27" xml:space="preserve">
     <value>Minimale Temperaturdifferenz</value>
   </data>
+  <data name="PROP_HX_28" xml:space="preserve">
+    <value>Heat Loss</value>
+  </data>
   <data name="PROP_HX_3" xml:space="preserve">
     <value>Austrittstemperatur des kalten Mediums</value>
   </data>

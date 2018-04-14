@@ -378,6 +378,9 @@
   <data name="PROP_HX_27" xml:space="preserve">
     <value>Minimum Temperature Difference</value>
   </data>
+  <data name="PROP_HX_28" xml:space="preserve">
+    <value>Heat Loss</value>
+  </data>
   <data name="PROP_HX_3" xml:space="preserve">
     <value>Cold fluid outlet temperature</value>
   </data>

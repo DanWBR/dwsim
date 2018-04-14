@@ -1105,6 +1105,19 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Heat Exchanged"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Heat Loss (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, hx.HeatLoss),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               hx.HeatLoss = cv.ConvertToSI(su.heatflow, Double.Parse(arg3.Text.ToString()));
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum Temperature Difference (" + su.deltaT + ")", cv.ConvertFromSI(su.deltaT, hx.MITA),
                        (TextBox arg3, EventArgs ev) =>
                        {

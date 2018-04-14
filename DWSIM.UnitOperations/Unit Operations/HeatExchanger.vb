@@ -96,6 +96,8 @@ Namespace UnitOperations
         Public Property TemperatureProfileHot As Double() = {}
         Public Property IgnoreLMTDError As Boolean = True
 
+        Public Property HeatLoss As Double = 0.0
+
         Public Property STProperties() As STHXProperties
             Get
                 If m_stprops Is Nothing Then m_stprops = New STHXProperties
@@ -489,6 +491,8 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("<h2>Actual Heat Exchange</h2>")
 
+            IObj?.Paragraphs.Add("<mi>Q_{loss}</mi> = " & HeatLoss & " kW")
+
             IObj?.Paragraphs.Add("Calculating heat exchanged...")
 
             IObj?.Paragraphs.Add(String.Format("Calculation mode: {0}", [Enum].GetName(CalcMode.GetType, CalcMode)))
@@ -598,7 +602,8 @@ Namespace UnitOperations
 
                     Dim tmp As IFlashCalculationResult
 
-                    DeltaHh = -Q / Wh
+                    DeltaHh = -(Q + HeatLoss) / Wh
+
                     Hh2 = Hh1 + DeltaHh
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
@@ -641,7 +646,7 @@ Namespace UnitOperations
                         If DebugMode Then AppendDebugLine(String.Format("Iteration loop: {0}", count))
 
                         Hc2 = Qi / Wc + Hc1
-                        Hh2 = Hh1 - Qi / Wh
+                        Hh2 = Hh1 - Qi / Wh - HeatLoss / Wh
                         StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                         IObj?.SetCurrent()
                         tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
@@ -735,7 +740,7 @@ Namespace UnitOperations
 
                     A = Area
                     DeltaHc = Q / Wc
-                    DeltaHh = -Q / Wh
+                    DeltaHh = -(Q + HeatLoss) / Wh
                     Hc2 = Hc1 + DeltaHc
                     Hh2 = Hh1 + DeltaHh
 
@@ -780,7 +785,7 @@ Namespace UnitOperations
                     Hh2 = tmp.CalculatedEnthalpy
                     Q = -Wh * (Hh2 - Hh1)
 
-                    DeltaHc = Q / Wc
+                    DeltaHc = (Q - HeatLoss) / Wc
                     Hc2 = Hc1 + DeltaHc
                     StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
@@ -809,7 +814,7 @@ Namespace UnitOperations
                     Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                     Hc2 = tmp.CalculatedEnthalpy
                     Q = Wc * (Hc2 - Hc1)
-                    DeltaHh = -Q / Wh
+                    DeltaHh = -(Q + HeatLoss) / Wh
                     Hh2 = Hh1 + DeltaHh
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                     IObj?.SetCurrent()
@@ -840,7 +845,7 @@ Namespace UnitOperations
                             Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                             Hc2 = tmp.CalculatedEnthalpy
                             Q = Wc * (Hc2 - Hc1)
-                            DeltaHh = -Q / Wh
+                            DeltaHh = -(Q + HeatLoss) / Wh
                             Hh2 = Hh1 + DeltaHh
                             StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                             If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
@@ -856,7 +861,7 @@ Namespace UnitOperations
                             Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Ph2, Th2, 0)
                             Hh2 = tmp.CalculatedEnthalpy
                             Q = -Wh * (Hh2 - Hh1)
-                            DeltaHc = Q / Wc
+                            DeltaHc = (Q - HeatLoss) / Wc
                             Hc2 = Hc1 + DeltaHc
                             StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                             If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
@@ -988,8 +993,6 @@ Namespace UnitOperations
                         StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                         IObj?.SetCurrent()
                         Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
-                        Hc2 = tmp.CalculatedEnthalpy
-                        Q = Wc * (Hc2 - Hc1)
                         Dim tms As MaterialStream = StInCold.Clone
                         tms.SetFlowsheet(StInCold.FlowSheet)
                         tms.Phases(0).Properties.temperature = Tcm
@@ -1384,8 +1387,15 @@ Namespace UnitOperations
                             STProperties.OverallFoulingFactor = f2 + f4
                             U = 1 / U
                             Q = U * A * F * LMTD / 1000
-                            DeltaHc = Q / Wc
-                            DeltaHh = -Q / Wh
+                            If STProperties.Shell_Fluid = 0 Then
+                                'cold
+                                DeltaHc = (Q - HeatLoss) / Wc
+                                DeltaHh = -Q / Wh
+                            Else
+                                'hot
+                                DeltaHc = Q / Wc
+                                DeltaHh = -(Q + HeatLoss) / Wh
+                            End If
                             Hc2 = Hc1 + DeltaHc
                             Hh2 = Hh1 + DeltaHh
                             StInCold.PropertyPackage.CurrentMaterialStream = StInCold
@@ -1454,7 +1464,9 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("<mi>\Delta T_{ml}</mi> = " & LMTD & " K")
 
-            ThermalEfficiency = Q / MaxHeatExchange * 100
+            ThermalEfficiency = (Q + HeatLoss) / MaxHeatExchange * 100
+
+            If ThermalEfficiency > 100.0 Then Throw New Exception("Invalid Heat Loss.")
 
             IObj?.Paragraphs.Add("<mi>Q/Q_{max}</mi> = " & ThermalEfficiency & " %")
 
@@ -1582,6 +1594,8 @@ Namespace UnitOperations
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, MaxHeatExchange)
                     Case 27
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, MITA)
+                    Case 28
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, HeatLoss)
                 End Select
 
                 Return value
@@ -1605,7 +1619,7 @@ Namespace UnitOperations
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 27
+                    For i = 0 To 28
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
                 Case PropertyType.WR
@@ -1614,7 +1628,7 @@ Namespace UnitOperations
                     Next
                     proplist.Add("PROP_HX_27")
                 Case PropertyType.ALL
-                    For i = 0 To 27
+                    For i = 0 To 28
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
             End Select
@@ -1673,6 +1687,8 @@ Namespace UnitOperations
                     Me.STProperties.Tube_Pitch = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval)
                 Case 27
                     Me.MITA = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
+                Case 28
+                    Me.HeatLoss = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
             End Select
             Return 1
         End Function
@@ -1696,7 +1712,7 @@ Namespace UnitOperations
                     Case 1
                         'PROP_HX_1	Heat Exchange Area (A)
                         value = su.area
-                    Case 2
+                    Case 2, 28
                         'PROP_HX_2	Heat Load
                         value = su.heatflow
                     Case 3
@@ -1857,6 +1873,7 @@ Namespace UnitOperations
             End Select
             str.AppendLine("    Hot fluid pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
             str.AppendLine("    Cold fluid pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine("    Heat loss: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.HeatLoss).ToString(numberformat, ci) & " " & su.heatflow)
             str.AppendLine()
             str.AppendLine("Results")
             str.AppendLine()
@@ -1922,6 +1939,8 @@ Namespace UnitOperations
                 Return "Enter the Mimimum Internal Temperature Approach (MITA) (for Pinch Point calculation mode only)."
             ElseIf p.Equals("Ignore LMTD Error") Then
                 Return "If checked, continues solving even if the calculated LMTD is invalid."
+            ElseIf p.Equals("Heat Loss") Then
+                Return "Enter the total Heat Loss on this exchanger."
             Else
                 Return p
             End If
