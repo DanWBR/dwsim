@@ -1464,9 +1464,9 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("<mi>\Delta T_{ml}</mi> = " & LMTD & " K")
 
-            ThermalEfficiency = (Q + HeatLoss) / MaxHeatExchange * 100
+            ThermalEfficiency = (Q - HeatLoss) / MaxHeatExchange * 100
 
-            If ThermalEfficiency > 100.0 Then Throw New Exception("Invalid Heat Loss.")
+            If HeatLoss > Q Then Throw New Exception("Invalid Heat Loss.")
 
             IObj?.Paragraphs.Add("<mi>Q/Q_{max}</mi> = " & ThermalEfficiency & " %")
 

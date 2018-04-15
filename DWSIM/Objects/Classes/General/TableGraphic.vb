@@ -1196,6 +1196,14 @@ Namespace GraphicObjects
 
         Protected m_TextRenderStyle As Drawing2D.SmoothingMode = Drawing2D.SmoothingMode.Default
 
+        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
+            Return True
+        End Function
+
+        Public Overrides Function SaveData() As List(Of XElement)
+            Return New List(Of XElement)
+        End Function
+
 #Region "Constructors"
 
         Public Sub New()
