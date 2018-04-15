@@ -189,43 +189,48 @@ Imports System.Threading.Tasks
 
         End If
 
-        Using Py.GIL
+        Dim t3 As Task = Task.Factory.StartNew(Sub()
+                                                   fsheet.RunCodeOnUIThread(Sub()
+                                                                                Using Py.GIL
 
-            Try
+                                                                                    Try
 
-                Dim sys As Object = PythonEngine.ImportModule("sys")
+                                                                                        Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                                                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
 
-                PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                                                        PythonEngine.RunSimpleString(codeToRedirectOutput)
 
-                Dim locals As New PyDict()
+                                                                                        Dim locals As New PyDict()
 
-                locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
-                locals.SetItem("Flowsheet", fsheet.ToPython)
-                locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.ToPython)
-                Dim Solver As New FlowsheetSolver.FlowsheetSolver
-                locals.SetItem("Solver", Solver.ToPython)
+                                                                                        locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
+                                                                                        locals.SetItem("Flowsheet", fsheet.ToPython)
+                                                                                        locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.ToPython)
+                                                                                        Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                                                                        locals.SetItem("Solver", Solver.ToPython)
 
-                PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                                                                                        PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                                                                                        fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, DWSIM.Flowsheet.MessageType.Information)
 
-            Catch ex As Exception
+                                                                                    Catch ex As Exception
 
-                If My.Application.CommandLineMode Then
-                    Console.WriteLine()
-                    Console.WriteLine("Error running script: " & ex.ToString)
-                    Console.WriteLine()
-                Else
-                    fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
-                End If
+                                                                                        If My.Application.CommandLineMode Then
+                                                                                            Console.WriteLine()
+                                                                                            Console.WriteLine("Error running script: " & ex.ToString)
+                                                                                            Console.WriteLine()
+                                                                                        Else
+                                                                                            fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+                                                                                        End If
 
-            Finally
+                                                                                    Finally
 
-            End Try
+                                                                                    End Try
 
-        End Using
+                                                                                End Using
+                                                                            End Sub)
+                                               End Sub)
+        t3.Wait()
 
     End Sub
 
