@@ -77,4 +77,4 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 ### Compiling
 
 - DWSIM can be compiled using Visual Studio 2017 on Windows.
-- To compile everything, change the Build target to 'Debug/Release' => 'x64'.
+- To compile everything, change the Build target to 'Debug' or 'Release' and 'x64'.
