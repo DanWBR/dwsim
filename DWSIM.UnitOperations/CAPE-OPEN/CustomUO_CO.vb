@@ -218,13 +218,13 @@ Namespace UnitOperations.CAPEOPENWrappers
             Dim edform As New EditingForm_CustomUO_ScriptEditor
             With edform
                 .CAPEOPEN = True
-                .fontname = DirectCast(Me.Parameters(1), OptionParameter).Value
-                .fontsize = DirectCast(Me.Parameters(2), OptionParameter).Value
+                _fontname = DirectCast(Me.Parameters(1), OptionParameter).Value
+                _fontsize = DirectCast(Me.Parameters(2), OptionParameter).Value
                 .txtScript.Text = DirectCast(Me.Parameters(0), OptionParameter).Value
                 .highlightspaces = DirectCast(Me.Parameters(3), BooleanParameter).Value
                 .ShowDialog()
-                DirectCast(Me.Parameters(1), OptionParameter).Value = .fontname
-                DirectCast(Me.Parameters(2), OptionParameter).Value = .fontsize
+                DirectCast(Me.Parameters(1), OptionParameter).Value = _fontname
+                DirectCast(Me.Parameters(2), OptionParameter).Value = _fontsize
                 DirectCast(Me.Parameters(0), OptionParameter).Value = .scripttext
                 DirectCast(Me.Parameters(3), BooleanParameter).Value = .highlightspaces
             End With
