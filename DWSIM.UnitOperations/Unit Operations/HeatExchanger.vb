@@ -1627,6 +1627,7 @@ Namespace UnitOperations
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
                     proplist.Add("PROP_HX_27")
+                    proplist.Add("PROP_HX_28")
                 Case PropertyType.ALL
                     For i = 0 To 28
                         proplist.Add("PROP_HX_" + CStr(i))
