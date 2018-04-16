@@ -33,8 +33,6 @@ Imports System.Drawing
 
     Public language As Integer
     Public includes As String()
-    Public fontname As String = "Courier New"
-    Public fontsize As Integer = 10
     Public highlightspaces As Boolean = False
     Public scripttext As String = ""
 
@@ -94,13 +92,18 @@ Imports System.Drawing
             tscb1.Items.Add(font_family.Name)
         Next font_family
 
-        tscb1.SelectedItem = fontname
-
         tscb2.Items.AddRange(New Object() {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16})
 
-        tscb2.SelectedItem = fontsize
-
         btnHighlightSpaces.Checked = highlightspaces
+
+        Try
+            tscb1.SelectedItem = ScriptUO.FontName
+        Catch ex As Exception
+        End Try
+        Try
+            tscb2.SelectedItem = ScriptUO.FontSize
+        Catch ex As Exception
+        End Try
 
         txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
 
@@ -147,10 +150,18 @@ Imports System.Drawing
     End Sub
 
     Private Sub tscb1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb1.SelectedIndexChanged
+        Try
+            ScriptUO.FontName = tscb1.SelectedItem.ToString
+        Catch ex As Exception
+        End Try
         If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
     End Sub
 
     Private Sub tscb2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb2.SelectedIndexChanged
+        Try
+            ScriptUO.FontSize = tscb2.SelectedItem.ToString
+        Catch ex As Exception
+        End Try
         If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
     End Sub
 
