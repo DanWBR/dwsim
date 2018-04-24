@@ -950,8 +950,8 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
                 Tinf = Tref - 250
                 Tsup = Tref + 250
             Else
-                Tinf = 20
-                Tsup = 10000
+                Tinf = PP.RET_VTF.MinY * 0.3
+                Tsup = 5000
             End If
             If Tinf < 20 Then Tinf = 20
 
@@ -974,7 +974,7 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
                 If x1 < 0 Then GoTo alt
                 cnt += 1
             Loop Until cnt > 20 Or Double.IsNaN(x1)
-            If Double.IsNaN(x1) Then
+            If Double.IsNaN(x1) Or cnt > 20 Then
 alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
             Else
                 T = x1
@@ -1041,7 +1041,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
                 Tinf = Tref - 200
                 Tsup = Tref + 200
             Else
-                Tinf = 20
+                Tinf = PP.RET_VTF.MinY * 0.3
                 Tsup = 10000
             End If
             If Tinf < 20 Then Tinf = 20
@@ -1064,8 +1064,8 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
                 If x1 < 0 Then GoTo alt
                 cnt += 1
             Loop Until cnt > 50 Or Double.IsNaN(x1)
-            If Double.IsNaN(x1) Then
-alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
+            If Double.IsNaN(x1) Or cnt > 50 Then
+alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
             Else
                 T = x1
             End If
