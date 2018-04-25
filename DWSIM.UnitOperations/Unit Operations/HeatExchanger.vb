@@ -1387,32 +1387,33 @@ Namespace UnitOperations
                             STProperties.OverallFoulingFactor = f2 + f4
                             U = 1 / U
                             Q = U * A * F * LMTD / 1000
+                            If Q > MaxHeatExchange Then Q = MaxHeatExchange
                             If STProperties.Shell_Fluid = 0 Then
-                                'cold
-                                DeltaHc = (Q - HeatLoss) / Wc
-                                DeltaHh = -Q / Wh
-                            Else
-                                'hot
-                                DeltaHc = Q / Wc
-                                DeltaHh = -(Q + HeatLoss) / Wh
+                                    'cold
+                                    DeltaHc = (Q - HeatLoss) / Wc
+                                    DeltaHh = -Q / Wh
+                                Else
+                                    'hot
+                                    DeltaHc = Q / Wc
+                                    DeltaHh = -(Q + HeatLoss) / Wh
+                                End If
+                                Hc2 = Hc1 + DeltaHc
+                                Hh2 = Hh1 + DeltaHh
+                                StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+                                IObj?.SetCurrent()
+                                tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
+                                Tc2_ant = Tc2
+                                Tc2 = tmp.CalculatedTemperature
+                                Tc2 = 0.1 * Tc2 + 0.9 * Tc2_ant
+                                StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                                IObj?.SetCurrent()
+                                tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
+                                Th2_ant = Th2
+                                Th2 = tmp.CalculatedTemperature
+                                Th2 = 0.1 * Th2 + 0.9 * Th2_ant
                             End If
-                            Hc2 = Hc1 + DeltaHc
-                            Hh2 = Hh1 + DeltaHh
-                            StInCold.PropertyPackage.CurrentMaterialStream = StInCold
-                            IObj?.SetCurrent()
-                            tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
-                            Tc2_ant = Tc2
-                            Tc2 = tmp.CalculatedTemperature
-                            Tc2 = 0.1 * Tc2 + 0.9 * Tc2_ant
-                            StInHot.PropertyPackage.CurrentMaterialStream = StInHot
-                            IObj?.SetCurrent()
-                            tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
-                            Th2_ant = Th2
-                            Th2 = tmp.CalculatedTemperature
-                            Th2 = 0.1 * Th2 + 0.9 * Th2_ant
-                        End If
 
-                        IObj?.Paragraphs.Add("<mi>Q</mi> = " & Q & " kW")
+                            IObj?.Paragraphs.Add("<mi>Q</mi> = " & Q & " kW")
                         IObj?.Paragraphs.Add("<mi>U</mi> = " & U & " W/[m2.K]")
 
                         IObj?.Paragraphs.Add("<mi>T_{c,out}</mi> = " & Tc2 & " K")

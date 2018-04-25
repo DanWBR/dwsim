@@ -228,7 +228,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    if (Double.TryParse(arg3.Text.ToString(), out val))
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
-                                                       ms.Phases[2].Properties.molarfraction = cv.ConvertToSI(su.volumetricFlow, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[2].Properties.molarfraction = Double.Parse(arg3.Text.ToString());
                                                    }
                                                    else
                                                    {
