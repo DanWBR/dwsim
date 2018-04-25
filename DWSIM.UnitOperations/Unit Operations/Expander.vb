@@ -200,6 +200,8 @@ Namespace UnitOperations
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
 
+            IObj?.Paragraphs.Add("Calculation Mode: " & CalcMode.ToString)
+
             Me.PropertyPackage.CurrentMaterialStream = ims
             Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault.ToString
             Pi = ims.Phases(0).Properties.pressure.GetValueOrDefault.ToString
@@ -213,6 +215,14 @@ Namespace UnitOperations
             cp = ims.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
             cv = ims.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
             mw = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
+
+            IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+            IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+            IObj?.Paragraphs.Add(String.Format("<mi>P_1</mi>: {0} Pa", Pi))
+            IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+            IObj?.Paragraphs.Add(String.Format("<mi>S_1</mi>: {0} kJ/[kg.K]", Si))
+            IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", EficienciaAdiabatica.GetValueOrDefault))
 
             If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, S = {3} kJ/[kg.K], W = {4} kg/s", Ti, Pi, Hi, Si, Wi))
@@ -241,6 +251,12 @@ Namespace UnitOperations
                     CheckSpec(T2, True, "outlet temperature")
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")
+
+                    IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+                    IObj?.Paragraphs.Add("<mi>S_{2,id}</mi>: " & String.Format("{0} kJ/[kg.K]", tmp.CalculatedEntropy))
+                    IObj?.Paragraphs.Add("<mi>T_{2,id}</mi>: " & String.Format("{0} K", tmp.CalculatedTemperature))
+                    IObj?.Paragraphs.Add("<mi>H_{2,id}</mi>: " & String.Format("{0} kJ/kg", tmp.CalculatedEnthalpy))
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
 
@@ -308,6 +324,10 @@ Namespace UnitOperations
                     POut = P2
                     DeltaP = Pi - P2
 
+                    IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
+
             End Select
 
             CheckSpec(T2, True, "outlet temperature")
@@ -319,6 +339,10 @@ Namespace UnitOperations
             H2 = Hi - Me.DeltaQ.GetValueOrDefault / Wi
 
             OutletTemperature = T2
+
+            IObj?.Paragraphs.Add(String.Format("<mi>P_{2}</mi>: {0} Pa", P2))
+            IObj?.Paragraphs.Add(String.Format("<mi>T_{2}</mi>: {0} K", T2))
+            IObj?.Paragraphs.Add(String.Format("<mi>H_{2}</mi>: {0} kJ/kg", H2))
 
             If Not DebugMode Then
 

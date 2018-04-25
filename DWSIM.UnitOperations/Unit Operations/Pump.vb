@@ -480,7 +480,7 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("• <mi>\Delta P</mi>:")
 
-            IObj?.Paragraphs.Add("<mi>\Delta P=\rho(H_{2}-H_{1}),</m>")
+            IObj?.Paragraphs.Add("<m>\Delta P=\rho(H_{2}-H_{1}),</m>")
 
             IObj?.Paragraphs.Add("• Discharge pressure:")
 
@@ -527,6 +527,16 @@ Namespace UnitOperations
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, W = {3} kg/s, Liquid Flow = {4} m3/s", Ti, Pi, Hi, Wi, qli))
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
+
+            IObj?.Paragraphs.Add("Calculation mode: " & CalcMode.ToString)
+
+            IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+            IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+            IObj?.Paragraphs.Add(String.Format("<mi>P_1</mi>: {0} Pa", Pi))
+            IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+            IObj?.Paragraphs.Add(String.Format("<mi>S_1</mi>: {0} K", T2))
+            IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", Eficiencia.GetValueOrDefault))
 
             Select Case Me.CalcMode
 
@@ -869,6 +879,12 @@ Namespace UnitOperations
             End Select
 
             OutletTemperature = T2
+
+            IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+            IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
+            IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} Pa", T2))
+            IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
 
             If Not DebugMode Then
 

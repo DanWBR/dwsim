@@ -25,6 +25,7 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.Thermodynamics
+Imports DWSIM.ExtensionMethods
 
 Imports DotNumerics.Optimization
 
@@ -172,11 +173,27 @@ Namespace Reactors
 
             'loop through conversion reaction groups (parallel/sequential) as defined in the reaction set
 
+            IObj?.Paragraphs.Add("<h2>Calculation Procedure</h2>")
+
+            IObj?.Paragraphs.Add("Looping through conversion reaction groups (parallel/sequential) as defined in the reaction set...")
+
             For Each ar In Me.ReactionsSequence
+
+                IObj?.SetCurrent
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", String.Format("Reaction Sequence ID #{0}", "Reaction Names:" & ReactionsSequence.IndexOf(ar)), ar.Select(Of String)(Function(ari) FlowSheet.Reactions(ari).Name).ToArray.ToArrayString, True)
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add("This is the calculation routine for a group of reactions as defined in the reaction set.")
 
                 'Reactants Enthalpy (kJ/kg * kg/s = kW)
 
                 Hr = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                IObj2?.Paragraphs.Add(String.Format("Reactants Enthalpy: {0} kJ/kg", Hr))
 
                 pp.CurrentMaterialStream = ims
 
@@ -222,15 +239,24 @@ Namespace Reactors
 
                 Loop Until i = ar.Count
 
+                IObj2?.Paragraphs.Add(String.Format("Compounds: {0}", N0.Keys.ToArray.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Initial Mole Flows: {0} mol/s", N0.Values.ToArray.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add("Solving Parallel Reactions with Simplex solver...")
+
                 ' solve parallel reactions with Simplex NL solver
+
+                IObj2?.Paragraphs.Add("Problem Setup: minimize the difference between defined and calculated (final) conversions, subject to all mole flows being equal to or higher than zero.")
 
                 ' problem setup: minimize the difference between defined and calculated (final) conversions, subject to Ni >= 0.
 
-                ' this solution scheme for parallel reactions guarantee that the mass balance is preserved, even if the final
+                IObj2?.Paragraphs.Add("This solution scheme for parallel reactions guarantees that the mass balance is preserved, even if the final conversion values aren't reached due to limited reactant amounts.")
+
+                ' this solution scheme for parallel reactions guarantees that the mass balance is preserved, even if the final
                 ' conversion values aren't reached due to limited reactant amounts.
 
                 Dim xref(ar.Count - 1), xf(ar.Count - 1), dni(N.Count - 1) As Double
-                
+
                 Dim splex As New Simplex()
                 Dim vars As New List(Of OptSimplexBoundVariable)
 
@@ -328,6 +354,9 @@ Namespace Reactors
 
                                       End Function, vars.ToArray)
 
+                IObj2?.Paragraphs.Add(String.Format("Specified Reaction Conversions: {0}", xref.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Final Reaction Conversions: {0}", xf.ToMathArrayString))
+
                 ' at this point, the xf vector holds the final conversion values as calculated 
                 ' by the simplex solver, and the energy balance can be calculated (again). 
 
@@ -415,6 +444,8 @@ Namespace Reactors
 
                 Loop Until i = ar.Count
 
+                IObj2?.Paragraphs.Add(String.Format("Total Heat of Reaction: {0} kW", DHr))
+
                 'do a flash calc (calculate final temperature/enthalpy)
 
                 pp.CurrentMaterialStream = ims
@@ -429,6 +460,8 @@ Namespace Reactors
                         Hp = Hr + Hid_p - Hid_r - DHr
                         Hp = Hp / W
 
+                        IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
+
                         ims.Phases(0).Properties.enthalpy = Hp
                         ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
@@ -437,6 +470,8 @@ Namespace Reactors
 
                         Dim Tout As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
                         Me.DeltaT = Tout - Tin
+
+                        IObj2?.Paragraphs.Add(String.Format("Heat Balance: {0} kW", DeltaQ))
 
                     Case OperationMode.Isothermic
 
@@ -447,10 +482,14 @@ Namespace Reactors
                         'Products Enthalpy (kJ/kg * kg/s = kW)
                         Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
+                        IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
+
                         'Heat (kW)
                         Me.DeltaQ += DHr + Hid_r - Hr - Hid_p
 
                         Me.DeltaT = 0
+
+                        IObj2?.Paragraphs.Add(String.Format("Heat Balance: {0} kW", DeltaQ))
 
                     Case OperationMode.OutletTemperature
 
@@ -467,10 +506,18 @@ Namespace Reactors
                         'Products Enthalpy (kJ/kg * kg/s = kW)
                         Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
+                        IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
+
                         'Heat (kW)
                         Me.DeltaQ = Me.DeltaQ + DHr + Hid_r - Hr - Hid_p
 
+                        IObj2?.Paragraphs.Add(String.Format("Heat Balance: {0} kW", DeltaQ))
+
                 End Select
+
+                IObj2?.Paragraphs.Add(String.Format("Outlet Temperature: {0} K", OutletTemperature))
+
+                IObj2?.Close()
 
             Next
 
@@ -496,6 +543,17 @@ Namespace Reactors
             For i = 0 To ni0.Length - 1
                 Me.ComponentConversions(cnames(i)) = (ni0(i) - nif(i)) / ni0(i)
             Next
+
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", N0.Keys.ToArray.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial Mole Flows: {0} mol/s", ni0.ToArray.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final Mole Flows: {0} mol/s", nif.ToArray.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Conversions: {0}", ComponentConversions.Values.Select(Of Double)(Function(d) If(Not Double.IsNaN(d) And Not Double.IsInfinity(d), d, 0.0)).ToArray.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
+
+            IObj?.Paragraphs.Add(String.Format("Heat Balance: {0} kW", DeltaQ))
+
+            IObj?.Paragraphs.Add(String.Format("Outlet Temperature: {0} K", OutletTemperature))
 
             'Copy results to upstream MS
             Dim xl, xv, xs, T, P, H, S, wtotalx, wtotaly, wtotalS, wl, wv, ws As Double

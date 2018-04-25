@@ -103,6 +103,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Function Flash_PT_SS(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+
             Dim i, n, ecount As Integer
             Dim soma_x, soma_y, soma_s As Double
             Dim d1, d2 As Date, dt As TimeSpan
@@ -178,7 +179,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim convergiu = 0
             Dim F = 0.0#
 
+
             Do
+
+
 
                 Ki_ant = Ki.Clone
 
@@ -314,6 +318,18 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Function Flash_SL(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_SL", Name & " (SLE Flash)", "Pressure-Temperature Solid-Liquid Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add("This routine tries to find the compositions of liquid and solid phases at equilibrium.")
+
+            IObj?.Paragraphs.Add("During the convergence process, solubility is checked for compounds in the liquid phase through the following equilibrium relation:")
+
+            IObj?.Paragraphs.Add("<m>-\ln x_i^L\gamma_i^L= \frac{\Delta h_{m,i}}{RT}\left(1-\frac{T}{T_{m,i}}\right)-\frac{\Delta c_{P,i}(T_{m,i}-T)}{RT}+\frac{\Delta c_{P,i}}{R}\ln \frac{T_m}{T}</m>")
+
+            IObj?.Paragraphs.Add("where <mi>x_i^L</mi> is the compound mole fraction in the liquid phase, <mi>\gamma _i^L</mi> is the activity coefficient of the compound in the liquid phase, <mi>T_{m,i}</mi> is the compound's melting point and <mi>\Delta c_{P,i}</mi> is the heat capacity difference of the compound between liquid and solid states.")
+
             'This flash is used to calculate the solid/liquid equilibrium at given pressure and temperature
             'Input parameters:  global mole fractions Vz
             'Result Parameters: number of moles in each phase
@@ -336,6 +352,16 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Tf = PP.RET_VTF 'Fusion temperature
             Hf = PP.RET_VHF 'Enthalpy of fusion
             Tc = PP.RET_VTC 'Critical Temperature
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Fusion Temperatures: {0} K", Tf.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Fusion Enthalpies: {0} kJ/mol", Hf.ToMathArrayString))
 
             If Vz.MaxY = 1.0# Then 'only a single component
                 ecount = 0
@@ -363,7 +389,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Vn = PP.RET_VNAMES()
             For i = 0 To n
                 constprop = PP.CurrentMaterialStream.Phases(0).Compounds(Vn(i)).ConstantProperties
+                IObj?.SetCurrent
                 cpl(i) = PP.AUX_LIQ_Cpi(constprop, Tf(i))
+                IObj?.SetCurrent
                 cps(i) = PP.AUX_SolidHeatCapacity(constprop, Tf(i))
                 'ignoring heat capacity difference due to issues with DWSIM characterization
                 dCp(i) = 0.0# '(cpl(i) - cps(i)) * constprop.Molar_Weight
@@ -372,13 +400,20 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             'Calculate max activities for solubility of solids
             For i = 0 To n
                 MaxAct(i) = Exp(-Hf(i) * 1000 / 8.31446 / T * (1 - T / Tf(i)) - dCp(i) / 8.31446 * ((T - Tf(i)) / T + Log(Tf(i) / T)))
+                IObj?.SetCurrent
                 Vp(i) = PP.AUX_PVAPi(i, T)
             Next
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculations</h2>"))
+
             L = 1
             Do
+
                 ecount += 1
 
+                IObj?.Paragraphs.Add(String.Format("<h3>Loop {0}</h3>", ecount))
+
+                IObj?.SetCurrent
                 ActCoeff = PP.DW_CalcFugCoeff(Vx, T, P, State.Liquid).MultiplyConstY(P).DivideY(Vp)
                 MaxX = MaxAct.DivideY(ActCoeff)
                 For i = 0 To n
@@ -387,6 +422,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                     'If compound is in forced solids list, put it in solid phase
                     If PP.ForcedSolids.Contains(Vn(i)) Then MaxX(i) = 0.0
                 Next
+
+                IObj?.Paragraphs.Add(String.Format("Activity coefficients: {0}", ActCoeff.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Maximum solubilities (mole fractions): {0}", MaxX.ToMathArrayString))
 
                 MaxLiquPhase = Vz.DivideY(MaxX)
                 SF = 0
@@ -448,16 +486,74 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                     Exit Do
                 End If
 
+                IObj?.Paragraphs.Add(String.Format("Current estimates for liquid phase composition: {0}", Vx.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Current estimates for solid phase composition: {0}", Vs.ToMathArrayString))
+
+                IObj?.Paragraphs.Add(String.Format("Current estimates for liquid phase mole fraction: {0}", L))
+                IObj?.Paragraphs.Add(String.Format("Current estimates for solid phase mole fraction: {0}", 1 - L))
 
             Loop Until Abs(L - L_old) < MaxError
 
 out:        d2 = Date.Now
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Final liquid phase composition: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final solid phase composition: {0}", Vs.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Final liquid phase mole fraction: {0}", L))
+            IObj?.Paragraphs.Add(String.Format("Final solid phase mole fraction: {0}", 1 - L))
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & (d2 - d1).TotalMilliseconds & " ms. Error function value: " & Abs(L - L_old))
+
+            IObj?.Close()
 
             Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
 
         End Function
 
         Public Function Flash_PT_NL(ByVal Vz0 As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add("This routine tries to find the compositions of vapor, liquid and solid phases at equilibrium by solving the Rachford-Rice equation using a newton convergence approach.")
+
+            IObj?.Paragraphs.Add("The Rachford-Rice equation is")
+
+            IObj?.Paragraphs.Add("<math>\sum_i\frac{z_i \, (K_i - 1)}{1 + \beta \, (K_i - 1)}= 0</math>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<math_inline>z_{i}</math_inline> is the mole fraction of component i in the feed liquid (assumed to be known);")
+            IObj?.Paragraphs.Add("<math_inline>\beta</math_inline> is the fraction of feed that is vaporised;")
+            IObj?.Paragraphs.Add("<math_inline>K_{i}</math_inline> is the equilibrium constant of component i.")
+
+            IObj?.Paragraphs.Add("The equilibrium constants K<sub>i</sub> are in general functions of many parameters, though the most important is arguably temperature; they are defined as:")
+
+            IObj?.Paragraphs.Add("<math>y_i = K_i \, x_i</math>")
+
+            IObj?.Paragraphs.Add("where:")
+
+            IObj?.Paragraphs.Add("<math_inline>x_i</math_inline> is the mole fraction of component i in liquid phase;")
+            IObj?.Paragraphs.Add("<math_inline>y_i</math_inline> is the mole fraction of component i in gas phase.")
+
+            IObj?.Paragraphs.Add("Once the Rachford-Rice equation has been solved for <math_inline>\beta</math_inline>, the compositions x<sub>i</sub> and y<sub>i</sub> can be immediately calculated as:")
+
+            IObj?.Paragraphs.Add("<math>x_i =\frac{z_i}{1+\beta(K_i-1)}\\y_i=K_i\,x_i</math>")
+
+            IObj?.Paragraphs.Add("The Rachford - Rice equation can have multiple solutions for <math_inline>\beta</math_inline>, at most one of which guarantees that all <math_inline>x_i</math_inline> and <math_inline>y_i</math_inline> will be positive. In particular, if there is only one <math_inline>\beta</math_inline> for which:")
+            IObj?.Paragraphs.Add("<math>\frac{1}{1-K_\text{max}}=\beta_\text{min}<\beta<\beta_\text{max}=\frac{1}{1-K_\text{min}}</math>")
+            IObj?.Paragraphs.Add("then that <math_inline>\beta</math_inline> is the solution; if there are multiple  such <math_inline>\beta</math_inline>s, it means that either <math_inline>K_{max}<1</math_inline> or <math_inline>K_{min}>1</math_inline>, indicating respectively that no gas phase can be sustained (and therefore <math_inline>\beta=0</math_inline>) or conversely that no liquid phase can exist (and therefore <math_inline>\beta=1</math_inline>).")
+
+            IObj?.Paragraphs.Add("DWSIM initializes the current calculation with ideal K-values estimated from vapor pressure data for each compound, or by using previously calculated values from an earlier solution.")
+
+            IObj?.Paragraphs.Add("During the convergence process, solubility is checked for compounds in the liquid phase through the following equilibrium relation:")
+
+            IObj?.Paragraphs.Add("<m>-\ln x_i^L\gamma_i^L= \frac{\Delta h_{m,i}}{RT}\left(1-\frac{T}{T_{m,i}}\right)-\frac{\Delta c_{P,i}(T_{m,i}-T)}{RT}+\frac{\Delta c_{P,i}}{R}\ln \frac{T_m}{T}</m>")
+
+            IObj?.Paragraphs.Add("where <mi>x_i^L</mi> is the compound mole fraction in the liquid phase, <mi>\gamma _i^L</mi> is the activity coefficient of the compound in the liquid phase, <mi>T_{m,i}</mi> is the compound's melting point and <mi>\Delta c_{P,i}</mi> is the heat capacity difference of the compound between liquid and solid states.")
 
             Dim i, n, ecount, gcount As Integer
             Dim Pb, Pd, Pmin, Pmax, Px As Double
@@ -502,12 +598,34 @@ out:        d2 = Date.Now
             L = 1.0
             V = 0.0
 
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Calculated Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for V: {0}", V))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for L: {0}", L))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for S: {0}", S))
+
             'do flash calculation iterations
             Do
+
                 GL_old = L
                 GV_old = V
                 GS_old = S
                 gcount += 1
+
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PT", "PT SVLE Internal Loop Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step", True)
+
+                IObj2?.Paragraphs.Add(String.Format("This is the SVLE convergence loop iteration #{0}. DWSIM will use the current values of y, x and s to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
 
                 If V < 1.0 Then
 
@@ -524,6 +642,7 @@ out:        d2 = Date.Now
                     '== Do initial SLE flash to precipitate solids ==
                     '================================================
                     Dim SL_Result As Object
+                    IObj2?.SetCurrent
                     SL_Result = Flash_SL(Vz, P, T, PP)
                     Vx = SL_Result(3)
                     Vs = SL_Result(4)
@@ -611,8 +730,6 @@ out:        d2 = Date.Now
                 If g > 0 Then Vmin = V Else Vmax = V
 
                 V = Vmin + (Vmax - Vmin) / 2
-                'V = (P - Pd) / (Pb - Pd)
-
                 L = 1 - V
 
                 If n = 0 Then
@@ -657,22 +774,20 @@ out:        d2 = Date.Now
 
                 Do
 
+                    IObj2?.SetCurrent()
+
+                    Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                    Inspector.Host.CheckAndAdd(IObj3, "", "Flash_PT", "PT Flash VLE Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step")
+
+                    IObj3?.Paragraphs.Add(String.Format("This is the VLE Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                    IObj3?.SetCurrent()
+
                     Ki_ant = Ki.Clone
                     Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
-                    'i = 0
-                    'Do
-                    '    If Vz(i) <> 0 Then
-                    '        Vy_ant(i) = Vy(i)
-                    '        Vx_ant(i) = Vx(i)
-                    '        Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
-                    '        Vx(i) = Vy(i) / Ki(i)
-                    '    Else
-                    '        Vy(i) = 0
-                    '        Vx(i) = 0
-                    '    End If
-                    '    i += 1
-                    'Loop Until i = n + 1
+                    IObj3?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
                     Vy_ant = Vy.Clone
                     Vx_ant = Vx.Clone
@@ -686,10 +801,15 @@ out:        d2 = Date.Now
                     Vx = Vx.NormalizeY
                     Vy = Vy.NormalizeY
 
+                    IObj3?.Paragraphs.Add(String.Format("y values (vapor phase composition) where updated. Current values: {0}", Vy.ToMathArrayString))
+                    IObj3?.Paragraphs.Add(String.Format("x values (liquid phase composition) where updated. Current values: {0}", Vx.ToMathArrayString))
+
                     e1 = Vx.SubtractY(Vx_ant).AbsSumY
                     e2 = Vy.SubtractY(Vy_ant).AbsSumY
 
                     e3 = (V - Vant)
+
+                    IObj3?.Paragraphs.Add(String.Format("Current Vapor Fraction (<math_inline>\beta</math_inline>) error: {0}", e3))
 
                     If Double.IsNaN(e1 + e2) Then
 
@@ -716,14 +836,13 @@ out:        d2 = Date.Now
                             i = i + 1
                         Loop Until i = n + 1
 
-                        'F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
-                        'dF = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
+                        IObj3?.Paragraphs.Add(String.Format("Current value of the Rachford-Rice error function: {0}", F))
 
                         If Abs(F) < etol / 100 Then Exit Do
 
                         V = -F / dF + Vant
 
-                        'If V >= 1.01 Or V <= -0.01 Then V = -0.1 * F / dF + Vant
+                        IObj3?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
 
                     End If
 
@@ -737,10 +856,11 @@ out:        d2 = Date.Now
                     If Double.IsNaN(V) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
                     If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-
                     WriteDebugInfo("PT Flash [NL-SLE]: Iteration #" & ecount & ", VF = " & V)
 
                     If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                    IObj3?.Close()
 
                 Loop Until convergiu = 1
 
@@ -751,6 +871,16 @@ out:            'calculate global phase fractions
                 If gcount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
 out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) < 0.0000005) And (Math.Abs(GS_old - S) < 0.0000005) Then GlobalConv = True
+
+                IObj2?.Paragraphs.Add(String.Format("Current estimates for liquid phase composition: {0}", Vx.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Current estimates for solid phase composition: {0}", Vs.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Current estimates for vapor phase composition: {0}", Vy.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Current estimates for liquid phase mole fraction: {0}", L))
+                IObj2?.Paragraphs.Add(String.Format("Current estimates for solid phase mole fraction: {0}", S))
+                IObj2?.Paragraphs.Add(String.Format("Current estimates for vapor phase mole fraction: {0}", V))
+
+                IObj2?.Close()
 
             Loop Until GlobalConv
 
@@ -773,6 +903,18 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
             End If
 
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add(String.Format("Final liquid phase composition: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final solid phase composition: {0}", Vs.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final vapor phase composition: {0}", Vy.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Final liquid phase mole fraction: {0}", L))
+            IObj?.Paragraphs.Add(String.Format("Final solid phase mole fraction: {0}", S))
+            IObj?.Paragraphs.Add(String.Format("Final vapor phase mole fraction: {0}", V))
+
+            IObj?.Close()
+
             d2 = Date.Now
 
             dt = d2 - d1
@@ -784,6 +926,7 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
         End Function
 
         Public Function Flash_PT_E(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
 
             Dim d1, d2 As Date, dt As TimeSpan
 
@@ -836,7 +979,7 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
             Do
 
-                activcoeff = PP.DW_CalcFugCoeff(Vxl, T, P, State.Liquid)
+
 
                 For i = 0 To n
                     activcoeff(i) = activcoeff(i) * P / PP.AUX_PVAPi(ids(i), T)
@@ -911,6 +1054,7 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
             dt = d2 - d1
 
+
             WriteDebugInfo("PT Flash [NL-SLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & errfunc)
 
 out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector, S, Vxs}
@@ -918,6 +1062,16 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
         End Function
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash - Fast Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Fast Mode)")
+
+            IObj?.Paragraphs.Add("The PH Flash in fast mode uses two nested loops (hence the name) to calculate temperature and phase distribution. 
+                                    The external one converges the temperature, while the internal one finds the phase distribution for the current temperature estimate in the external loop.
+                                    The algorithm converges when the calculated overall enthalpy for the tentative phase distribution and temperature matches the specified one.")
+
+            IObj?.SetCurrent()
 
             CompoundProperties = PP.DW_GetConstantProperties
 
@@ -964,10 +1118,21 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
             Dim cnt As Integer = 0
 
             If Tref = 0 Then Tref = 300.0#
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", H))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", Tref))
+
             x1 = Tref
             Try
                 Do
+                    IObj?.SetCurrent()
                     fx = Herror(x1, {P, Vz, PP})
+                    IObj?.SetCurrent()
                     fx2 = Herror(x1 + 1, {P, Vz, PP})
                     If Abs(fx) < etol Then Exit Do
                     dfdx = (fx2 - fx)
@@ -986,6 +1151,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
 
             'End If
 
+            IObj?.SetCurrent()
             Dim tmp As Object = Flash_PT(Vz, P, T, PP)
 
             L = tmp(0)
@@ -1006,11 +1172,25 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
 
             WriteDebugInfo("PH Flash [NL-SLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
+            IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, T))
+
+            IObj?.Close()
+
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, S, Vs}
 
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", Name & " (PS Flash - Fast Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Fast Mode)")
+
+            IObj?.Paragraphs.Add("The PH Flash in fast mode uses two nested loops (hence the name) to calculate temperature and phase distribution. 
+                                    The external one converges the temperature, while the internal one finds the phase distribution for the current temperature estimate in the external loop.
+                                    The algorithm converges when the calculated overall enthalpy for the tentative phase distribution and temperature matches the specified one.")
+
+            IObj?.SetCurrent()
 
             CompoundProperties = PP.DW_GetConstantProperties
 
@@ -1059,9 +1239,20 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
 
             If Tref = 0 Then Tref = 298.15
             x1 = Tref
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Entropy: {0} kJ/kg", S))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", Tref))
+
             Try
                 Do
+                    IObj?.SetCurrent()
                     fx = Serror(x1, {P, Vz, PP})
+                    IObj?.SetCurrent()
                     fx2 = Serror(x1 + 1, {P, Vz, PP})
                     If Abs(fx) < etol Then Exit Do
                     dfdx = (fx2 - fx)
@@ -1073,11 +1264,13 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
                 x1 = Double.NaN
             End Try
             If Double.IsNaN(x1) Or cnt > 50 Then
+                IObj?.SetCurrent()
 alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
             Else
                 T = x1
             End If
 
+            IObj?.SetCurrent()
             Dim tmp As Object = Flash_PT(Vz, P, T, PP)
 
             L = tmp(0)
@@ -1097,6 +1290,10 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
             dt = d2 - d1
 
             WriteDebugInfo("PS Flash [NL-SLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add(String.Format("The PS Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, T))
+
+            IObj?.Close()
 
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, Ss, Vs}
 

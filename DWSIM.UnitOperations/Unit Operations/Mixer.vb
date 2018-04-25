@@ -102,6 +102,7 @@ Namespace UnitOperations
             Dim cp As IConnectionPoint
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached Then
+                    IObj?.Paragraphs.Add(String.Format("<h3>Inlet Stream #{0}</h3>", i))
                     If cp.AttachedConnector.AttachedFrom.Calculated = False Then Throw New Exception(FlowSheet.GetTranslatedString("Umaoumaiscorrentesna"))
                     ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
                     ms.Validate()
@@ -121,7 +122,9 @@ Namespace UnitOperations
                         P = P + ms.Phases(0).Properties.pressure.GetValueOrDefault
                         i += 1
                     End If
-
+                    IObj?.Paragraphs.Add(String.Format("Mass Flow: {0} kg/s", ms.Phases(0).Properties.massflow.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", ms.Phases(0).Properties.pressure.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", ms.Phases(0).Properties.enthalpy.GetValueOrDefault))
                     We = ms.Phases(0).Properties.massflow.GetValueOrDefault
                     W += We
                     If Not Double.IsNaN(ms.Phases(0).Properties.enthalpy.GetValueOrDefault) Then H += We * ms.Phases(0).Properties.enthalpy.GetValueOrDefault
@@ -151,6 +154,12 @@ Namespace UnitOperations
             Next
 
             If W = 0.0# Then T = 273.15
+
+            IObj?.Paragraphs.Add("Outlet Mixed Stream</h3>")
+
+            IObj?.Paragraphs.Add(String.Format("Mass Flow: {0} kg/s", W))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", Hs))
 
             Dim omstr As MaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
             With omstr

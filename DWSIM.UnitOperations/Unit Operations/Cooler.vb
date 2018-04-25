@@ -181,8 +181,26 @@ Namespace UnitOperations
 
                 Case CalculationMode.HeatRemoved
 
+                    IObj?.Paragraphs.Add("Calculation Mode: Heat Removed")
+
+                    IObj?.Paragraphs.Add("Outlet Stream will be specified with Pressure and Enthalpy. Temperature will be calculated through a PH Flash call.")
+
+                    IObj?.Paragraphs.Add("<m>H_2 = \frac{-Q}{W}\frac{\eta}{100}+H_1</m>")
+
                     H2 = -Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi + Hi
                     CheckSpec(H2, False, "outlet enthalpy")
+
+
+                    IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", Eficiencia.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+
+                    IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
@@ -192,6 +210,9 @@ Namespace UnitOperations
                     CheckSpec(T2, True, "outlet temperature")
                     Me.DeltaT = T2 - Ti
                     OutletTemperature = T2
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
+                    IObj?.Paragraphs.Add(String.Format("<mi>\Delta T</mi>: {0} K", DeltaT))
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
@@ -203,7 +224,20 @@ Namespace UnitOperations
 
                 Case CalculationMode.OutletTemperature
 
+                    IObj?.Paragraphs.Add("Calculation Mode: Outlet Temperature")
+
+                    IObj?.Paragraphs.Add("Outlet Stream will be specified with Pressure and Temperature. Enthalpy will be calculated through a PT Flash call.")
+
                     T2 = Me.OutletTemperature.GetValueOrDefault
+
+                    IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
+                    IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", Eficiencia.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+
+                    IObj?.Paragraphs.Add("<h3>Results</h3>")
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
 
@@ -214,6 +248,13 @@ Namespace UnitOperations
                     Me.DeltaT = T2 - Ti
                     Me.DeltaQ = -(H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
 
+                    IObj?.Paragraphs.Add(String.Format("<mi>\Delta T</mi>: {0} K", DeltaT))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
+
+                    IObj?.Paragraphs.Add("<m>Q = -\frac{H_2-H_1}{\eta /100}W</m>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
+
                     'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
                     With esout
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
@@ -222,9 +263,22 @@ Namespace UnitOperations
 
                 Case CalculationMode.TemperatureChange
 
+                    IObj?.Paragraphs.Add("Calculation Mode: Temperature Change")
+
+                    IObj?.Paragraphs.Add("Outlet Stream will be specified with Pressure and Temperature. Enthalpy will be calculated through a PT Flash call.")
+
                     T2 = Ti + Me.DeltaT.GetValueOrDefault
 
                     Me.OutletTemperature = T2
+
+                    IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>\Delta T</mi>: {0} K", DeltaT.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", Eficiencia.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+
+                    IObj?.Paragraphs.Add("<h3>Results</h3>")
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
 
@@ -235,6 +289,13 @@ Namespace UnitOperations
                     Me.DeltaQ = -(H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
                     OutletTemperature = T2
 
+                    IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
+
+                    IObj?.Paragraphs.Add("<m>Q = -\frac{H_2-H_1}{\eta /100}W</m>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
+
                     'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
                     With esout
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
@@ -243,7 +304,18 @@ Namespace UnitOperations
 
                 Case CalculationMode.OutletVaporFraction
 
+                    IObj?.Paragraphs.Add("Calculation Mode: Outlet Vapor Fraction")
+
+                    IObj?.Paragraphs.Add("Outlet Stream will be specified with Pressure and Temperature. Temperature will be calculated through a PVF Flash call.")
+
                     V2 = m_VFout.GetValueOrDefault
+
+                    IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>VF_2</mi>: {0}", V2))
+                    IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", Eficiencia.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PVF flash to calculate outlet temperature... P = {0} Pa, VF = {1}", P2, V2))
 
@@ -257,6 +329,15 @@ Namespace UnitOperations
                     Me.DeltaT = T2 - Ti
                     Me.DeltaQ = -(H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
                     OutletTemperature = T2
+
+                    IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
+
+                    IObj?.Paragraphs.Add("<m>Q = -\frac{H_2-H_1}{\eta /100}W</m>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 

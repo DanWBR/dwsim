@@ -233,6 +233,8 @@ Namespace UnitOperations
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
 
+            IObj?.Paragraphs.Add("Calculation Mode: " & CalcMode.ToString)
+
             If Not IgnorePhase And DebugMode Then AppendDebugLine("Checking if there is a liquid phase in the inlet stream...")
 
             If qli > 0 And Not Me.IgnorePhase Then Throw New Exception(FlowSheet.GetTranslatedString("ExisteumaPhaselquidan"))
@@ -256,6 +258,14 @@ Namespace UnitOperations
                 Wi = msin.Phases(0).Properties.massflow.GetValueOrDefault.ToString
                 ei = Hi * Wi
                 ein = ei
+
+                IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+                IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+                IObj?.Paragraphs.Add(String.Format("<mi>P_1</mi>: {0} Pa", Pi))
+                IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+                IObj?.Paragraphs.Add(String.Format("<mi>S_1</mi>: {0} kJ/[kg.K]", Si))
+                IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", EficienciaAdiabatica.GetValueOrDefault))
 
                 If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
                 If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, S = {3} kJ/[kg.K], W = {4} kg/s, cp = {5} kJ/[kg.K]", Ti, Pi, Hi, Si, Wi, cp))
@@ -332,6 +342,12 @@ Namespace UnitOperations
                 IObj?.SetCurrent()
                 tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
 
+                IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+                IObj?.Paragraphs.Add("<mi>S_{2,id}</mi>: " & String.Format("{0} kJ/[kg.K]", tmp.CalculatedEntropy))
+                IObj?.Paragraphs.Add("<mi>T_{2,id}</mi>: " & String.Format("{0} K", tmp.CalculatedTemperature))
+                IObj?.Paragraphs.Add("<mi>H_{2,id}</mi>: " & String.Format("{0} kJ/kg", tmp.CalculatedEnthalpy))
+
                 If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
 
                 H2 = Hi + (tmp.CalculatedEnthalpy - Hi) / (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
@@ -354,6 +370,11 @@ Namespace UnitOperations
                 Me.DeltaT = T2 - Ti
 
                 OutletTemperature = T2
+
+                IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
+                IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
+                IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
+                IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
 
                 If Not DebugMode Then
 
@@ -385,6 +406,14 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 ei = Hi * Wi
                 ein = ei
 
+                IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+                IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+                IObj?.Paragraphs.Add(String.Format("<mi>P_1</mi>: {0} Pa", Pi))
+                IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+                IObj?.Paragraphs.Add(String.Format("<mi>S_1</mi>: {0} kJ/[kg.K]", Si))
+                IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", EficienciaAdiabatica.GetValueOrDefault))
+
                 If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
                 If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, S = {3} kJ/[kg.K], W = {4} kg/s", Ti, Pi, Hi, Si, Wi, cp))
 
@@ -407,6 +436,12 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
                 T2 = tmp.CalculatedTemperature
                 H2 = tmp.CalculatedEnthalpy
+
+                IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+                IObj?.Paragraphs.Add("<mi>S_{2,id}</mi>: " & String.Format("{0} kJ/[kg.K]", tmp.CalculatedEntropy))
+                IObj?.Paragraphs.Add("<mi>T_{2,id}</mi>: " & String.Format("{0} K", T2))
+                IObj?.Paragraphs.Add("<mi>H_{2,id}</mi>: " & String.Format("{0} kJ/kg", H2))
 
                 If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
 
@@ -433,6 +468,11 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 H2 = Hi + Me.DeltaQ.GetValueOrDefault / Wi
 
                 OutletTemperature = T2
+
+                IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
+                IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
+                IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
+                IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
 
                 If Not DebugMode Then
 
