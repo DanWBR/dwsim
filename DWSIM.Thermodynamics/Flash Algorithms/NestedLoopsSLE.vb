@@ -965,16 +965,20 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
 
             If Tref = 0 Then Tref = 300.0#
             x1 = Tref
-            Do
-                fx = Herror(x1, {P, Vz, PP})
-                fx2 = Herror(x1 + 1, {P, Vz, PP})
-                If Abs(fx) < etol Then Exit Do
-                dfdx = (fx2 - fx)
-                x1 = x1 - fx / dfdx
-                If x1 < 0 Then GoTo alt
-                cnt += 1
-            Loop Until cnt > 20 Or Double.IsNaN(x1)
-            If Double.IsNaN(x1) Or cnt > 20 Then
+            Try
+                Do
+                    fx = Herror(x1, {P, Vz, PP})
+                    fx2 = Herror(x1 + 1, {P, Vz, PP})
+                    If Abs(fx) < etol Then Exit Do
+                    dfdx = (fx2 - fx)
+                    x1 = x1 - fx / dfdx
+                    If x1 < 0 Then GoTo alt
+                    cnt += 1
+                Loop Until cnt > 50 Or Double.IsNaN(x1)
+            Catch ex As Exception
+                x1 = Double.NaN
+            End Try
+            If Double.IsNaN(x1) Or cnt > 50 Then
 alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
             Else
                 T = x1
@@ -1055,15 +1059,19 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
 
             If Tref = 0 Then Tref = 298.15
             x1 = Tref
-            Do
-                fx = Serror(x1, {P, Vz, PP})
-                fx2 = Serror(x1 + 1, {P, Vz, PP})
-                If Abs(fx) < etol Then Exit Do
-                dfdx = (fx2 - fx)
-                x1 = x1 - fx / dfdx
-                If x1 < 0 Then GoTo alt
-                cnt += 1
-            Loop Until cnt > 50 Or Double.IsNaN(x1)
+            Try
+                Do
+                    fx = Serror(x1, {P, Vz, PP})
+                    fx2 = Serror(x1 + 1, {P, Vz, PP})
+                    If Abs(fx) < etol Then Exit Do
+                    dfdx = (fx2 - fx)
+                    x1 = x1 - fx / dfdx
+                    If x1 < 0 Then GoTo alt
+                    cnt += 1
+                Loop Until cnt > 50 Or Double.IsNaN(x1)
+            Catch ex As Exception
+                x1 = Double.NaN
+            End Try
             If Double.IsNaN(x1) Or cnt > 50 Then
 alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
             Else
