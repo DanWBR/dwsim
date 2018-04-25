@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2
+Version 5.2 Update 1
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 1
+
+- [CHG] Added more Solution Inspector model descriptions (NL SVLE Flash, Conversion Reactor, Compressor, Cooler, Expander, Heater, Mixer and Pump)
+- [FIX] Fixed an issue with the Shell-and-Tube Heat Exchanger model
+- [FIX] Fixed Material Stream Vapor Fraction editing on the New UI
+- [FIX] Fixed an issue with the Nested Loops SVLE (Eutectic) PH/PS Flashes
 
 Version 5.2
 

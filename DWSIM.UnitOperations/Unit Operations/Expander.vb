@@ -340,9 +340,9 @@ Namespace UnitOperations
 
             OutletTemperature = T2
 
-            IObj?.Paragraphs.Add(String.Format("<mi>P_{2}</mi>: {0} Pa", P2))
-            IObj?.Paragraphs.Add(String.Format("<mi>T_{2}</mi>: {0} K", T2))
-            IObj?.Paragraphs.Add(String.Format("<mi>H_{2}</mi>: {0} kJ/kg", H2))
+            IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
+            IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
+            IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
 
             If Not DebugMode Then
 
