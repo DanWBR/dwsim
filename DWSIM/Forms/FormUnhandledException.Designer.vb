@@ -37,7 +37,6 @@ Partial Class FormUnhandledException
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -45,7 +44,6 @@ Partial Class FormUnhandledException
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -145,11 +143,6 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
         '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        '
         'Button4
         '
         resources.ApplyResources(Me.Button4, "Button4")
@@ -188,11 +181,6 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
         '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
@@ -221,7 +209,6 @@ Partial Class FormUnhandledException
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button6)
@@ -229,7 +216,6 @@ Partial Class FormUnhandledException
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.LabelWithDivider2)
         Me.Controls.Add(Me.TabControl1)
@@ -270,7 +256,6 @@ Partial Class FormUnhandledException
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Public WithEvents LabelWithDivider2 As System.Windows.Forms.LabelWithDivider
     Public WithEvents Button1 As System.Windows.Forms.Button
-    Public WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
@@ -278,7 +263,6 @@ Partial Class FormUnhandledException
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Public WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents Label4 As System.Windows.Forms.Label
-    Public WithEvents Label5 As System.Windows.Forms.Label
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label8 As System.Windows.Forms.Label

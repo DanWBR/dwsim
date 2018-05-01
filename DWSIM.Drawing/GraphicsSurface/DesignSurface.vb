@@ -1145,6 +1145,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Protected Overrides Sub OnMouseWheel(ByVal e As System.Windows.Forms.MouseEventArgs)
+
         If e.Delta <> 0 Then 'has wheel been moved?
 
             'The .NET docs suggest that e.Delta returns the actual number of notches
@@ -1157,6 +1158,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             'for more information
 
             If My.Computer.Keyboard.CtrlKeyDown Then
+
                 Dim dx, dy As Integer
 
                 Dim Cursorpos, Pos1, Pos2 As Drawing.Point
@@ -1178,26 +1180,29 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                 End Try
 
-                RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.SurfaceZoomChanged, _
-                        Me.SelectedObject, String.Format("Zoom set to {0}", Me.Zoom * 100), _
+                RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.SurfaceZoomChanged,
+                        Me.SelectedObject, String.Format("Zoom set to {0}", Me.Zoom * 100),
                         Nothing, Me.Zoom))
 
             Else
 
                 Dim detents As Integer = e.Delta / 120
 
+                Dim deltascroll As Integer = 3
+                If My.Computer.Mouse.WheelExists Then deltascroll = My.Computer.Mouse.WheelScrollLines
+
                 If detents > 0 Then
-                    If Me.VerticalScroll.Value > 4 * My.Computer.Mouse.WheelScrollLines Then
-                        If 4 * My.Computer.Mouse.WheelScrollLines > Me.VerticalScroll.SmallChange Then
-                            Me.VerticalScroll.Value -= 4 * My.Computer.Mouse.WheelScrollLines
+                    If Me.VerticalScroll.Value > 4 * deltascroll Then
+                        If 4 * deltascroll > Me.VerticalScroll.SmallChange Then
+                            Me.VerticalScroll.Value -= 4 * deltascroll
                         End If
                     Else
                         Me.VerticalScroll.Value = 0
                     End If
                 ElseIf detents < 0 Then
-                    If Me.VerticalScroll.Value > 4 * My.Computer.Mouse.WheelScrollLines Then
-                        If 4 * My.Computer.Mouse.WheelScrollLines > Me.VerticalScroll.SmallChange Then
-                            Me.VerticalScroll.Value += 4 * My.Computer.Mouse.WheelScrollLines
+                    If Me.VerticalScroll.Value > 4 * deltascroll Then
+                        If 4 * deltascroll > Me.VerticalScroll.SmallChange Then
+                            Me.VerticalScroll.Value += 4 * deltascroll
                         End If
                     Else
                         Me.VerticalScroll.Value = 0
