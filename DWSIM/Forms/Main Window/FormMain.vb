@@ -3060,6 +3060,25 @@ Label_00CC:
 
     End Sub
 
+    Private Sub bgSaveBackup_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgSaveBackup.DoWork
+        If Not My.Application.CalculatorBusy Then
+            Dim bw As BackgroundWorker = CType(sender, BackgroundWorker)
+            Dim folder As String = My.Settings.BackupFolder
+            If Not Directory.Exists(My.Settings.BackupFolder) Then Directory.CreateDirectory(My.Settings.BackupFolder)
+            Dim path As String = ""
+            For Each form0 As Form In Me.MdiChildren
+                If TypeOf form0 Is FormFlowsheet Then
+                    path = folder + IO.Path.DirectorySeparatorChar + CType(form0, FormFlowsheet).Options.BackupFileName
+                    Me.SaveXMLZIP(path, form0)
+                    If Not My.Settings.BackupFiles.Contains(path) Then
+                        My.Settings.BackupFiles.Add(path)
+                        If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
+                    End If
+                End If
+            Next
+        End If
+    End Sub
+
     Private Sub bgSaveBackup_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgSaveBackup.RunWorkerCompleted
         If Not (e.Error Is Nothing) Then
             ' There was an error during the operation.

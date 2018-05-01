@@ -39,4 +39,23 @@ Public Class FormRecoverFiles
         Me.Close()
     End Sub
 
+    Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
+
+        For Each row As DataGridViewRow In Me.Grid1.SelectedRows
+            Try
+                If row.Cells(0).Value = 1 Then
+                    Application.DoEvents()
+                    FormMain.LoadAndExtractXMLZIP(row.Cells(1).Value, Nothing)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrircpiadeseg"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        Next
+
+        My.Settings.BackupFiles.Clear()
+        If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
+        Me.Close()
+
+    End Sub
+
 End Class
