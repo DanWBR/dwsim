@@ -97,11 +97,12 @@ Namespace UnitOperations
         End Property
 
         Public Property PreferredFlashAlgorithmTag As String = "" Implements ISimulationObject.PreferredFlashAlgorithmTag
+
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated
 
         Public Property DebugMode As Boolean = False Implements Interfaces.ISimulationObject.DebugMode
 
-        Public Property DebugText As String = "" Implements Interfaces.ISimulationObject.DebugText
+        <Xml.Serialization.XmlIgnore> Public Property DebugText As String = "" Implements Interfaces.ISimulationObject.DebugText
 
         <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date Implements Interfaces.ISimulationObject.LastUpdated
 

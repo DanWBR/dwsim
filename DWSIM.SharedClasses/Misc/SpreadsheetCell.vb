@@ -75,6 +75,7 @@ Namespace Spreadsheet
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
             ToolTipText = Xml.XmlConvert.EncodeName(ToolTipText)
+            If ToolTipText.Length > 65536 Then ToolTipText = Xml.XmlConvert.EncodeName("")
             If Expression <> "" Then
                 Return XMLSerializer.XMLSerializer.Serialize(Me, True)
             Else
