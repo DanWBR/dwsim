@@ -2038,7 +2038,7 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
-                    s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET (Python 2.7)" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
+                    s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
                     break;
                 case ObjectType.ExcelUO:
                     var exceluo = (ExcelUO)SimObject;
