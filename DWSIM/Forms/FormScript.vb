@@ -197,9 +197,10 @@ Imports System.Threading.Tasks
 
                                                                                         Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                                                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-
-                                                                                        PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                                                        If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                            Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                                                            PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                                                        End If
 
                                                                                         Dim locals As New PyDict()
 
@@ -211,7 +212,9 @@ Imports System.Threading.Tasks
 
                                                                                         PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                                                        fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                                                                                        If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                            fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                                                                                        End If
 
                                                                                     Catch ex As Exception
 

@@ -1354,7 +1354,7 @@ namespace DWSIM.UI.Forms
             if (obj == null) return;
             if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
             {
-                var editor = EditorHolder.Pages.Where(x => (string)x.Content.Tag == obj.Name).First();
+                var editor = EditorHolder.Pages.Where(x => (string)x.Content.Tag == obj.Name).FirstOrDefault();
                 if (editor != null)
                 {
                     EditorHolder.Pages.Remove(editor);

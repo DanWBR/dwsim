@@ -2078,9 +2078,10 @@ Label_00CC:
 
                                                                                  Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                                                 Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-
-                                                                                 PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                                                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                     Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                                                     PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                                                 End If
 
                                                                                  Dim locals As New PyDict()
 
@@ -2088,11 +2089,16 @@ Label_00CC:
                                                                                  locals.SetItem("Flowsheet", Me.ToPython)
                                                                                  Dim Solver As New FlowsheetSolver.FlowsheetSolver
                                                                                  locals.SetItem("Solver", Solver.ToPython)
-                                                                                 locals.SetItem("Application", GetApplicationObject.ToPython)
+
+                                                                                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                     locals.SetItem("Application", GetApplicationObject.ToPython)
+                                                                                 End If
 
                                                                                  PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                                                 ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                                                                                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                     ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                                                                                 End If
 
                                                                              Catch ex As Exception
 
