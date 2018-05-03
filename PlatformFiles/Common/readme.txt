@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 1
+Version 5.2 Update 2
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 2
+
+- [FIX] Fixed Python.NET issues on Linux and macOS
+- [FIX] Fixed flowsheet object removal on Cross-Platform UI
+- [FIX] Fixed error when connecting rigorous distillation column reboiler duty on Cross-Platform UI
+- [FIX] Fixed a bug with the spreadsheet
+- [FIX] Restored backup function on Classic UI
+- [FIX] Fixed mouse wheel absent bug on Classic UI
 
 Version 5.2 Update 1
 

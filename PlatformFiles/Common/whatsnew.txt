@@ -1,6 +1,8 @@
-Version 5.2 Update 1
+Version 5.2 Update 2
 
-- Added more Solution Inspector model descriptions (NL SVLE Flash, Conversion Reactor, Compressor, Cooler, Expander, Heater, Mixer and Pump)
-- Fixed an issue with the Shell-and-Tube Heat Exchanger model
-- Fixed Material Stream Vapor Fraction editing on the New UI
-- Fixed an issue with the Nested Loops SVLE (Eutectic) PH/PS Flashes
+- [FIX] Fixed Python.NET issues on Linux and macOS
+- [FIX] Fixed flowsheet object removal on Cross-Platform UI
+- [FIX] Fixed error when connecting rigorous distillation column reboiler duty on Cross-Platform UI
+- [FIX] Fixed a bug with the spreadsheet
+- [FIX] Restored backup function on Classic UI
+- [FIX] Fixed mouse wheel absent bug on Classic UI
