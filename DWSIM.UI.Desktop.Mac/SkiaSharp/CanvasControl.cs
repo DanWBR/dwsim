@@ -33,8 +33,11 @@ namespace DWSIM.UI.Desktop.Mac
 
             Widget.MouseDown += (sender, e) =>
             {
-                BindTouchBar();
-                nativecontrol.SetTouchBar(null);
+                if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(10, 12, 2)))
+                {
+                    BindTouchBar();
+                    nativecontrol.SetTouchBar(null);
+                }
                 nativecontrol._lastTouchX = e.Location.X;
                 nativecontrol._lastTouchY = e.Location.Y;
                 nativecontrol.fsurface.InputPress((int)(nativecontrol._lastTouchX), (int)(nativecontrol._lastTouchY));

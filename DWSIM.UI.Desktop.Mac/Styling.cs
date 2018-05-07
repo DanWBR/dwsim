@@ -1,4 +1,5 @@
 ﻿using AppKit;
+using Foundation;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -29,7 +30,10 @@ namespace DWSIM.UI.Desktop.Mac
 
         public static void FinishedLaunching()
         {
-            NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+            if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(10, 12, 2)))
+            {
+                NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+            }
         }
 
     }
