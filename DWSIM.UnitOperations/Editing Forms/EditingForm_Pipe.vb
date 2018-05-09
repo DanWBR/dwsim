@@ -435,11 +435,11 @@ Public Class EditingForm_Pipe
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Select Case cbPDropModel.SelectedIndex
             Case 0
-                Process.Start("https://cdn.ihs.com/fekete/help/Harmony/content/html_files/reference_material/calculations_and_correlations/pressure_loss_calculations.htm#Beggs_and_Brill_Correlation")
+                Process.Start("http://www.ihsenergy.ca/support/documentation_ca/Harmony/content/html_files/reference_material/calculations_and_correlations/pressure_loss_calculations.htm#Beggs_and_Brill_Correlation")
             Case 1
                 Process.Start("http://thermopedia.com/content/37/")
             Case 2
-                Process.Start("https://cdn.ihs.com/fekete/help/Harmony/content/html_files/reference_material/calculations_and_correlations/pressure_loss_calculations.htm#Petalas_and_Aziz_Mechanistic_Model")
+                Process.Start("http://www.ihsenergy.ca/support/documentation_ca/Harmony/content/html_files/reference_material/calculations_and_correlations/pressure_loss_calculations.htm#Petalas_and_Aziz_Mechanistic_Model")
         End Select
     End Sub
 End Class
