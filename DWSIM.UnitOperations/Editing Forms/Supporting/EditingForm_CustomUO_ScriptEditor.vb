@@ -36,6 +36,9 @@ Imports System.Drawing
     Public highlightspaces As Boolean = False
     Public scripttext As String = ""
 
+    Public FontSize As Integer = 10
+    Public FontName As String = ""
+
     Private reader As New List(Of Jolt.XmlDocCommentReader)
 
     Public CAPEOPEN As Boolean = False
@@ -96,14 +99,19 @@ Imports System.Drawing
 
         btnHighlightSpaces.Checked = highlightspaces
 
-        Try
-            tscb1.SelectedItem = ScriptUO.FontName
-        Catch ex As Exception
-        End Try
-        Try
-            tscb2.SelectedItem = ScriptUO.FontSize
-        Catch ex As Exception
-        End Try
+        If CAPEOPEN Then
+            tscb1.SelectedItem = FontName
+            tscb2.SelectedItem = FontSize
+        Else
+            Try
+                tscb1.SelectedItem = ScriptUO.FontName
+            Catch ex As Exception
+            End Try
+            Try
+                tscb2.SelectedItem = ScriptUO.FontSize
+            Catch ex As Exception
+            End Try
+        End If
 
         txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
 
@@ -150,18 +158,26 @@ Imports System.Drawing
     End Sub
 
     Private Sub tscb1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb1.SelectedIndexChanged
-        Try
-            ScriptUO.FontName = tscb1.SelectedItem.ToString
-        Catch ex As Exception
-        End Try
+        If CAPEOPEN Then
+            Try
+                ScriptUO.FontName = tscb1.SelectedItem.ToString
+            Catch ex As Exception
+            End Try
+        Else
+            FontName = tscb1.SelectedItem.ToString
+        End If
         If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
     End Sub
 
     Private Sub tscb2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb2.SelectedIndexChanged
-        Try
-            ScriptUO.FontSize = tscb2.SelectedItem.ToString
-        Catch ex As Exception
-        End Try
+        If CAPEOPEN Then
+            Try
+                ScriptUO.FontSize = tscb2.SelectedItem.ToString
+            Catch ex As Exception
+            End Try
+        Else
+            FontSize = tscb2.SelectedItem.ToString
+        End If
         If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
     End Sub
 

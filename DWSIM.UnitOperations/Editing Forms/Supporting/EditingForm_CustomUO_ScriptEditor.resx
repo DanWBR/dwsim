@@ -131,8 +131,11 @@
   <data name="txtScript.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="txtScript.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="txtScript.Size" type="System.Drawing.Size, System.Drawing">
-    <value>896, 465</value>
+    <value>1195, 615</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txtScript.TabIndex" type="System.Int32, mscorlib">
@@ -151,7 +154,7 @@
     <value>0</value>
   </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>896, 465</value>
+    <value>1195, 615</value>
   </data>
   <data name="FaTabStripItem3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -163,7 +166,7 @@
     <value>FaTabStripItem3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6674.23447, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6688.16839, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -177,11 +180,17 @@
   <data name="ListBox1.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="ListBox1.ItemHeight" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
   <data name="ListBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ListBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="ListBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>896, 465</value>
+    <value>1195, 608</value>
   </data>
   <data name="ListBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -199,7 +208,7 @@
     <value>0</value>
   </data>
   <data name="FaTabStripItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>896, 465</value>
+    <value>1195, 608</value>
   </data>
   <data name="FaTabStripItem4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -211,7 +220,7 @@
     <value>FaTabStripItem4</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6674.23447, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6688.16839, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -220,10 +229,10 @@
     <value>1</value>
   </data>
   <data name="FaTabStrip2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+    <value>0, 28</value>
   </data>
   <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>898, 486</value>
+    <value>1197, 640</value>
   </data>
   <data name="FaTabStrip2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -235,7 +244,7 @@
     <value>FaTabStrip2</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6674.23447, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6688.16839, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -251,7 +260,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABs
-        CQAAAk1TRnQBSQFMAgEBBQEAATABAgEwAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBBQEAATgBAgE4AQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -300,7 +309,7 @@
   <data name="OpenToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJHSURBVDhPxZBdSNNhFMb/F110ZZEVhVBgeeHNICiiuggp
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJHSURBVDhPxZBdSNNhFMb/F110ZZEVhVBgeeHNICiiuggp
         olAUyyxI0oSaH1QYC3N+tKnp5ubm1JUua5uuqdNKMwr7kApFItTUkWZqVhSVYmao5Nevvy7UoYR3HXh4
         4XCe33nOKyy3lAY7l9RWMo0O/raWXxEyo5spVYTNvOGyfIRPfW+ptOkXqaPl6T83hcRmExSdgzAz3NVm
         YWyoYla/B+1M9JtxWLPpaH22JORIjI6gKAMB0jyEimIdo4OlbuaprwVMOOMovammpDADc34qppwUrmnl
@@ -317,7 +326,7 @@
     <value>Magenta</value>
   </data>
   <data name="OpenToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="OpenToolStripButton.Text" xml:space="preserve">
     <value>&amp;Abrir</value>
@@ -325,7 +334,7 @@
   <data name="SaveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIySURBVDhPrZLfS5NRGMfff6H7boIuuq2pMZyL1eAt11CW
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAIySURBVDhPrZLfS5NRGMfff6H7boIuuq2pMZyL1eAt11CW
         DcOKsB9vpFmaLtNExco0av6CbIVLJ61Wk3BSkT/AFCkRZSpZmrmiJQ41xSaCwdfznL15XEUX0Reem5f3
         8znnec4j/Zc8fxYGla91CS3eRTx0z6OpMYS7jmnU1X6B/VYA18snUVoyjsKCt8jLHcH5c36ouCQR2NUJ
         1Nas4G9ZXlmFKbULh1Kf8lJxSfI+WeCCyopv6q+/h+DQ/DJ2WV5Ao1FgPegRAveDOS4oLfmq/h6dn/DH
@@ -342,7 +351,7 @@
     <value>Magenta</value>
   </data>
   <data name="SaveToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="SaveToolStripButton.Text" xml:space="preserve">
     <value>&amp;Salvar</value>
@@ -353,7 +362,7 @@
   <data name="PrintToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIpSURBVDhPtZL/T1JRGMb5p1itrVZbbRpqZbawnBENV1I0
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAIpSURBVDhPtZL/T1JRGMb5p1itrVZbbRpqZbawnBENV1I0
         jGlByTSyJTXJwq2oKZQb1KAv6JCYWSxvBrkkZUq4CeQEiRABFeLL072Xa0zRra31bO8v57zP5znnPYf1
         X+TxhWF6O7VtGYcnwbSWijKPOLzYrPSvLPwLS3huGUMlT7o9wGD9grVUBj+icdid03S9tDmgNxNwTgVQ
         J+rA8XNtWwM+uuZATMwxmQVRycuJFNyzIRitDlScugKzjSgFRGJJaIwEsrk8AsHIhnSL/Ssck37UNipQ
@@ -369,18 +378,18 @@
     <value>Magenta</value>
   </data>
   <data name="PrintToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="PrintToolStripButton.Text" xml:space="preserve">
     <value>&amp;Imprimir</value>
   </data>
   <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="CutToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGDSURBVDhPrZFNSwJRGIX9NYGbFoUlFElY1EJQKEYhCJsi
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAGDSURBVDhPrZFNSwJRGIX9NYGbFoUlFElY1EJQKEYhCJsi
         LaVsERnRF5iCaSZJO1toCDVGFkgoFpWQWWRR2aIvUxm1BKN1wSnHCFw4TOCzue+9nPNw4eVVnav4Izzb
         QfxeGZ5TWaxT/rK3irzmC7CsusvC1G4IkbNLboIiDieF4GGUKeTeClDpppF8eeEu2PIfwfrzizSdw3Hk
         EnKlFpkMzV2wH77AosOFTV8A+vkl9CiHuJeLJNNZjM8tYWB0FkTvMAwmy/8ERTR6CwjlGAi1Ccence6C
@@ -394,7 +403,7 @@
     <value>Magenta</value>
   </data>
   <data name="CutToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="CutToolStripButton.Text" xml:space="preserve">
     <value>&amp;Recortar (Ctrl+X)</value>
@@ -402,7 +411,7 @@
   <data name="CopyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHkSURBVDhPvZHfS1NhHIf3p5QypLr2D4goMwoMCi/qIugH
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAHkSURBVDhPvZHfS1NhHIf3p5QypLr2D4goMwoMCi/qIugH
         Xe1Cr7qKDIMkZixwNhfWLGWbnuki0kXKzLU023KubBNPJrbRdOzocm6e2dPOO21mMS+CHvjcvOf9PF++
         79H9M+7RT2iRRsIi9sEAXe43yAvf2LpSHq28G9uAnytNT4jMLewtcQ2Ht2pF8ps/aOt+gccX5lxD694S
         +1BQFD1RkN5DSFa4Z3uONKbgHE3h8KZ4OJTC1J8UiSzmfhd2uf1CoJHbyKOsZokl0kKwm+aeJaov+wjO
@@ -417,7 +426,7 @@
     <value>Magenta</value>
   </data>
   <data name="CopyToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="CopyToolStripButton.Text" xml:space="preserve">
     <value>&amp;Copiar (Ctrl+C)</value>
@@ -425,7 +434,7 @@
   <data name="PasteToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJSSURBVDhPtZJrSJNRGMdf6IN9KbpQn/pUEH2JIoLqQ0Zh
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJSSURBVDhPtZJrSJNRGMdf6IN9KbpQn/pUEH2JIoLqQ0Zh
         FqYZRmJG1iKmUqKyLB2pqSm6vC1Nm5GXoeatEsVJ0RASR3eNzegikRq5lrV3857Fr/d9ddlICoL+8OfA
         Oef/e57zcIT/os7WLMw302muSGJ2689qqi7A44q8IzjtNYzarzHQm8tZtT8FmRqu6LToMxN+B8qhCbGR
         KVcDE85ajKUaxoaryEuL4UVXIudPB5Ko2oy98xjDptXERuz3hsgAOTzlqqMk6yjdllzE90UM9Wp5azlB
@@ -442,27 +451,27 @@
     <value>Magenta</value>
   </data>
   <data name="PasteToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="PasteToolStripButton.Text" xml:space="preserve">
     <value>&amp;Colar (Ctrl+V)</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="tscb1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 25</value>
+    <value>132, 28</value>
   </data>
   <data name="tscb2.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="tscb2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 23</value>
+    <value>45, 28</value>
   </data>
   <data name="btnHighlightSpaces.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
         YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
         0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
         bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
@@ -478,19 +487,19 @@
     <value>Magenta</value>
   </data>
   <data name="btnHighlightSpaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 22</value>
+    <value>119, 25</value>
   </data>
   <data name="btnHighlightSpaces.Text" xml:space="preserve">
     <value>Realçar espaços</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="btnUndo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="btnUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="btnUndo.Text" xml:space="preserve">
     <value>Desfazer (Ctrl+Z)</value>
@@ -499,19 +508,19 @@
     <value>Magenta</value>
   </data>
   <data name="btnRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="btnRedo.Text" xml:space="preserve">
     <value>Refazer (Ctrl+Y)</value>
   </data>
   <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="ToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="ToolStripButton2.Text" xml:space="preserve">
     <value>Selecionar Arquivo para Inclusão</value>
@@ -520,30 +529,30 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Selecionar Arquivo de Inclusão Selecionado</value>
   </data>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="btnDebug.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="btnDebug.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="btnDebug.Text" xml:space="preserve">
     <value>Testar Script (F5)</value>
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="HelpToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIVSURBVDhPtVJNaxNRFM1PyE+Yn1AUXLjK0uWgDWQZwUUX
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAIVSURBVDhPtVJNaxNRFM1PyE+Yn1AUXLjK0uWgDWQZwUUX
         KsGFBEEcCkIwqBEpGiydsSo2kupsasdo7Yi2toh0sFZjG5JpiZo20/TpVOmH5njvm8BYahEXHji8+968
         c+55l4n8F0zM+rhVWkHmdg29A/PoK1Yw8uIjOp/3xpvqBgrjLeilZbjNLXxZ34bwt6jexMVCGRndQenl
         0p+NWHzPXoP3rQ3bAbQhQM0E5Np2BKprbZzrm8TIs8puE+68+r0NwwZiacCwALEBCVcAqet8JlAjk1PZ
@@ -559,7 +568,7 @@
     <value>Magenta</value>
   </data>
   <data name="HelpToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="HelpToolStripButton.Text" xml:space="preserve">
     <value>Ajuda</value>
@@ -568,19 +577,19 @@
     <value>Magenta</value>
   </data>
   <data name="APIHelptsbutton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 25</value>
   </data>
   <data name="APIHelptsbutton.Text" xml:space="preserve">
     <value>Ajuda da API</value>
   </data>
   <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>898, 25</value>
+    <value>1197, 28</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -652,13 +661,16 @@
     <value>55</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>898, 511</value>
+    <value>1197, 668</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

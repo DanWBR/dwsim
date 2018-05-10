@@ -220,9 +220,13 @@ Namespace UnitOperations.CAPEOPENWrappers
                 .CAPEOPEN = True
                 _fontname = DirectCast(Me.Parameters(1), OptionParameter).Value
                 _fontsize = DirectCast(Me.Parameters(2), OptionParameter).Value
+                .FontName = _fontname
+                .FontSize = _fontsize
                 .txtScript.Text = DirectCast(Me.Parameters(0), OptionParameter).Value
                 .highlightspaces = DirectCast(Me.Parameters(3), BooleanParameter).Value
                 .ShowDialog()
+                _fontname = .FontName
+                _fontsize = .FontSize
                 DirectCast(Me.Parameters(1), OptionParameter).Value = _fontname
                 DirectCast(Me.Parameters(2), OptionParameter).Value = _fontsize
                 DirectCast(Me.Parameters(0), OptionParameter).Value = .scripttext

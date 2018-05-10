@@ -124,6 +124,7 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.tscb1, Me.tscb2, Me.btnHighlightSpaces, Me.ToolStripSeparator2, Me.btnUndo, Me.btnRedo, Me.ToolStripSeparator6, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripSeparator3, Me.btnDebug, Me.ToolStripSeparator4, Me.HelpToolStripButton, Me.APIHelptsbutton, Me.ToolStripSeparator5})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
