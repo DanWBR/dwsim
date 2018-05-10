@@ -488,6 +488,9 @@ Namespace Reactors
                 'Reactants Enthalpy (kJ/kg * kg/s = kW)
                 Hr = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
 
+                Ri.Clear()
+                Rxi.Clear()
+
                 'loop through reactions
                 For Each ar In Me.ReactionsSequence
 
@@ -535,9 +538,6 @@ Namespace Reactors
 
                     Loop Until i = ar.Count
 
-                    Ri.Clear()
-                    Rxi.Clear()
-
                     'SOLVE ODEs
 
                     Me.activeAL = Me.ReactionsSequence.IndexOf(ar)
@@ -562,7 +562,9 @@ Namespace Reactors
                     C.Clear()
                     i = 0
                     For Each sb As KeyValuePair(Of String, Double) In C0
-                        If vc(i) < 0.0# Then vc(i) = 0.0#
+                        If vc(i) < 0.0# Then
+                            vc(i) = 0.0#
+                        End If
                         C(sb.Key) = Convert.ToDouble(vc(i) * ResidenceTime / Volume / VolumeFraction)
                         i = i + 1
                     Next
