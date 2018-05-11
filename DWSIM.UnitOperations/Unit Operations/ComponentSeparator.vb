@@ -438,7 +438,7 @@ Namespace UnitOperations
                     Dim compound As String = prop.Split("_")(1)
 
                     If ComponentSepSpecs.ContainsKey(compound) Then
-                        Return ComponentSepSpecs(compound).SpecValue
+                        Return SystemsOfUnits.Converter.ConvertToSI(ComponentSepSpecs(compound).SpecUnit, ComponentSepSpecs(compound).SpecValue)
                     End If
 
                 ElseIf prop.Equals("SpecifiedStreamIndex") Then
@@ -494,14 +494,13 @@ Namespace UnitOperations
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
 
             If prop.StartsWith("SepSpecValue_") Then
 
                 Dim compound As String = prop.Split("_")(1)
 
                 If ComponentSepSpecs.ContainsKey(compound) Then
-                    ComponentSepSpecs(compound).SpecValue = Convert.ToDouble(propval)
+                    ComponentSepSpecs(compound).SpecValue = SystemsOfUnits.Converter.ConvertFromSI(ComponentSepSpecs(compound).SpecUnit, propval)
                 End If
 
             ElseIf prop.Equals("SpecifiedStreamIndex") Then
