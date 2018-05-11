@@ -426,6 +426,7 @@ Namespace Reactors
 
             Dim N0 As New Dictionary(Of String, Double)
             Dim N As New Dictionary(Of String, Double)
+            Dim Nnr As New Dictionary(Of String, Double)
             N00.Clear()
 
             Dim DHr, Hr, Hr0, Hp, T, T0, P, P0, Qf, Q, W As Double
@@ -503,6 +504,7 @@ Namespace Reactors
                         rxn = FlowSheet.Reactions(ar(i))
 
                         Dim m0 As Double = 0.0#
+                        Dim m0nr As Double = 0.0#
 
                         'initial mole flows
                         For Each sb As ReactionStoichBase In rxn.Components.Values
@@ -518,13 +520,18 @@ Namespace Reactors
 
                             If m0 = 0.0# Then m0 = 0.0000000001
 
+                            m0nr = ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault - m0
+                            If m0nr < 0.0# Then m0nr = 0.0
+
                             If Not N0.ContainsKey(sb.CompName) Then
                                 N0.Add(sb.CompName, m0)
+                                Nnr.Add(sb.CompName, m0nr)
                                 N00.Add(sb.CompName, N0(sb.CompName))
                                 N.Add(sb.CompName, N0(sb.CompName))
                                 C0.Add(sb.CompName, N0(sb.CompName) / Qf)
                             Else
                                 N0(sb.CompName) = m0
+                                Nnr(sb.CompName) = m0nr
                                 N(sb.CompName) = N0(sb.CompName)
                                 C0(sb.CompName) = N0(sb.CompName) / Qf
                             End If
@@ -620,15 +627,15 @@ Namespace Reactors
                     'compute new mole flows
                     For Each s2 As Compound In ims.Phases(0).Compounds.Values
                         If N.ContainsKey(s2.Name) Then
-                            Nsum += N(s2.Name)
+                            Nsum += N(s2.Name) + Nnr(s2.Name)
                         Else
                             Nsum += s2.MolarFlow.GetValueOrDefault
                         End If
                     Next
                     For Each s2 As Compound In ims.Phases(0).Compounds.Values
                         If N.ContainsKey(s2.Name) Then
-                            s2.MoleFraction = N(s2.Name) / Nsum
-                            s2.MolarFlow = N(s2.Name)
+                            s2.MoleFraction = (N(s2.Name) + Nnr(s2.Name)) / Nsum
+                            s2.MolarFlow = N(s2.Name) + Nnr(s2.Name)
                         Else
                             s2.MoleFraction = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault / Nsum
                             s2.MolarFlow = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault
