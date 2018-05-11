@@ -1,8 +1,7 @@
-Version 5.2 Update 2
+Version 5.2 Update 3
 
-- [FIX] Fixed Python.NET issues on Linux and macOS
-- [FIX] Fixed flowsheet object removal on Cross-Platform UI
-- [FIX] Fixed error when connecting rigorous distillation column reboiler duty on Cross-Platform UI
-- [FIX] Fixed a bug with the spreadsheet
-- [FIX] Restored backup function on Classic UI
-- [FIX] Fixed mouse wheel absent bug on Classic UI
+- [FIX] Fixed a bug with the PFR model
+- [FIX] Fixed a bug with the Heat Exchanger model
+- [FIX] Fixed a bug with the Compound Separator model
+- [FIX] Report tool fixes (Classic UI)
+- [FIX] Touch Bar fix for macOS < 10.12.2
