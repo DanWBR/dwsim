@@ -38,8 +38,12 @@ namespace DWSIM.UI.Desktop.Mac
             {
                 if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(10, 12, 2)))
                 {
-                    BindTouchBar();
-                    nativecontrol.SetTouchBar(null);
+                    try
+                    {
+                        BindTouchBar();
+                        nativecontrol.SetTouchBar(null);
+                    }
+                    catch { }
                 }
                 var scale = (float)GlobalSettings.Settings.DpiScale;
                 nativecontrol._lastTouchX = e.Location.X * scale;

@@ -186,7 +186,13 @@ Public Class FormReportConfig
                 End If
             Else
                 For Each prop As String In properties
-                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(prop), Format(baseobj.GetPropertyValue(prop, su), nf), baseobj.GetPropertyUnit(prop, su)})
+                    Dim val = baseobj.GetPropertyValue(prop, su)
+                    Try
+                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(prop), Format(val, nf), baseobj.GetPropertyUnit(prop, su)})
+                    Catch ex As Exception
+                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(prop), val.ToString, baseobj.GetPropertyUnit(prop, su)})
+                    End Try
+
                 Next
             End If
         Next

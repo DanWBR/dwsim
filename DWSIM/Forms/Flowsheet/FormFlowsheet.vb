@@ -1029,6 +1029,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
+        FrmReport = New FormReportConfig
         Me.FrmReport.Show(Me)
     End Sub
 
