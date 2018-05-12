@@ -382,7 +382,7 @@
     <value>Avaliar Fórmula</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+I</value>
+    <value>Control+I</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 38</value>
@@ -391,7 +391,7 @@
     <value>Importar Dados</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+E</value>
+    <value>Control+E</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 38</value>
@@ -403,7 +403,7 @@
     <value>271, 6</value>
   </data>
   <data name="LimparToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Del</value>
+    <value>Delete</value>
   </data>
   <data name="LimparToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 38</value>
@@ -412,7 +412,7 @@
     <value>Limpar</value>
   </data>
   <data name="CopiarToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+C</value>
+    <value>Control+C</value>
   </data>
   <data name="CopiarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 38</value>
@@ -421,7 +421,7 @@
     <value>Copiar</value>
   </data>
   <data name="ColarToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+V</value>
+    <value>Control+V</value>
   </data>
   <data name="ColarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 38</value>

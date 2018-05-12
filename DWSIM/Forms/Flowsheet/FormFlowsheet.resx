@@ -210,7 +210,7 @@
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiExportData.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Shift+E</value>
+    <value>Control+Shift+E</value>
   </data>
   <data name="tsbUndo.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 22</value>
@@ -289,7 +289,7 @@
     <value>ExibirListaDeItensACalcularToolStripMenuItem</value>
   </data>
   <data name="tsmiRedo.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Y</value>
+    <value>Control+Y</value>
   </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>ToolStripMenuItem3</value>
@@ -694,7 +694,7 @@
     <value>TimerScripts5</value>
   </data>
   <data name="tsmiUndo.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Z</value>
+    <value>Control+Z</value>
   </data>
   <data name="&gt;&gt;QuestionBox_PictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -818,7 +818,7 @@
 </value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+A</value>
+    <value>Control+A</value>
   </data>
   <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
@@ -857,7 +857,7 @@
     <value>376, 22</value>
   </data>
   <data name="tsmiCloneSelected.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Shift+C</value>
+    <value>Control+Shift+C</value>
   </data>
   <data name="&gt;&gt;tsmiExportData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1331,7 +1331,7 @@
     <value>376, 22</value>
   </data>
   <data name="CloseToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+F4</value>
+    <value>Control+F4</value>
   </data>
   <data name="&gt;&gt;IronRubyToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1376,7 +1376,7 @@
     <value>376, 22</value>
   </data>
   <data name="tsmiRecalc.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+R</value>
+    <value>Control+R</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
     <value>ToolStripSeparator1</value>
