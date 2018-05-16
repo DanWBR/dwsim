@@ -1,7 +1,3 @@
-Version 5.2 Update 3
+Version 5.2 Update 4
 
-- [FIX] Fixed a bug with the PFR model
-- [FIX] Fixed a bug with the Heat Exchanger model
-- [FIX] Fixed a bug with the Compound Separator model
-- [FIX] Report tool fixes (Classic UI)
-- [FIX] Touch Bar fix for macOS < 10.12.2
+- Bug fixes
