@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 14</value>
+    <value>310, 16</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Regression von Gleichgewichtsdaten (VLE/LLE)</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 16</value>
+    <value>183, 19</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
     <value>Regression von Daten</value>
@@ -135,7 +135,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAaABAgGgAQIBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAcQBAgHEAQIBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -207,62 +207,106 @@
 </value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 14</value>
+    <value>289, 16</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Definition eigener Komponenten (Reinstoffe)</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 16</value>
+    <value>177, 19</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Eigene Komponenten</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 14</value>
+    <value>254, 16</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Erstellt eine neue stationäre Simulation</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 14</value>
+    <value>227, 16</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Öffnet eine existierende Simulation</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 16</value>
+    <value>208, 19</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Neue Simulation erstellen</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 16</value>
+    <value>145, 19</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Simulation öffnen</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 19</value>
+    <value>100, 24</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Aufgaben</value>
   </data>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Spenden Sie für das Projekt, unterstützen Sie die Entwickler und fördern Sie die Entwicklung neuer Funktionen!</value>
+  </data>
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 24</value>
+  </data>
+  <data name="Label13.Text" xml:space="preserve">
+    <value>Unterstützung Projekt</value>
+  </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 19</value>
+    <value>306, 24</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
-    <value>Dokumentation</value>
+    <value>Mobile Versionen (iOS/Android)</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Letzte Dateien</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Letzte Ordner</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Beispiele</value>
+  </data>
+  <data name="LinkLabel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 24</value>
+  </data>
+  <data name="LinkLabel5.Text" xml:space="preserve">
+    <value>Diskussionsforen</value>
+  </data>
+  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 24</value>
+  </data>
+  <data name="LinkLabel4.Text" xml:space="preserve">
+    <value>Offizielle Homepage</value>
+  </data>
+  <data name="LinkLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>290, 24</value>
+  </data>
+  <data name="LinkLabel3.Text" xml:space="preserve">
+    <value>Flowsheets (Projekt FOSSEE)</value>
+  </data>
+  <data name="LinkLabel2.Text" xml:space="preserve">
+    <value>Tutorials</value>
+  </data>
+  <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 24</value>
+  </data>
+  <data name="LinkLabel1.Text" xml:space="preserve">
+    <value>Offizieller YouTube-Kanal</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Resourcen</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 19</value>
+    <value>140, 24</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Neueste Dateien</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+    <value>Schnellzugriff</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Willkommen bei DWSIM</value>

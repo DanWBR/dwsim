@@ -1504,4 +1504,7 @@
   <data name="PROP_HX_28" xml:space="preserve">
     <value>Perda Térmica</value>
   </data>
+  <data name="PROP_PU_4" xml:space="preserve">
+    <value>NPSH Disponível</value>
+  </data>
 </root>

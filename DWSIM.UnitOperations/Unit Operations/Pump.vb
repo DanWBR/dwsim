@@ -978,6 +978,8 @@ Namespace UnitOperations
                     Case 3
                         'PROP_PU_3	Power Required
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
+                    Case 4
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.NPSH.GetValueOrDefault)
 
                 End Select
 
@@ -998,15 +1000,15 @@ Namespace UnitOperations
                         proplist.Add("PROP_PU_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 3
+                    For i = 0 To 4
                         proplist.Add("PROP_PU_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 3
+                    For i = 0 To 4
                         proplist.Add("PROP_PU_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 3
+                    For i = 0 To 4
                         proplist.Add("PROP_PU_" + CStr(i))
                     Next
             End Select
@@ -1060,6 +1062,8 @@ Namespace UnitOperations
                     Case 3
                         'PROP_PU_3	Power Required
                         value = su.heatflow
+                    Case 4
+                        value = su.distance
 
                 End Select
 

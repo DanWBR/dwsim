@@ -1367,6 +1367,9 @@
     <value>Power Required</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_PU_4" xml:space="preserve">
+    <value>Available NPSH</value>
+  </data>
   <data name="PROP_RA_0" xml:space="preserve">
     <value>Top Stage Pressure</value>
     <comment>1</comment>
