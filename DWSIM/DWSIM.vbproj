@@ -1984,6 +1984,7 @@
     <None Include="Resources\python_icon.png" />
     <None Include="Resources\python-logo.png" />
     <None Include="Resources\icons8-spy_filled.png" />
+    <None Include="Resources\PayPal-Donate-Button-PNG-HD.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

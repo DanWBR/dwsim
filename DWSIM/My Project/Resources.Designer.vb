@@ -2103,6 +2103,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property PayPal_Donate_Button_PNG_HD() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("PayPal-Donate-Button-PNG-HD", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property pic21() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("pic21", resourceCulture)
