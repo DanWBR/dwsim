@@ -92,6 +92,8 @@ namespace DWSIM.UI.Desktop.Shared
 
             //var surface = ((DWSIM.Drawing.SkiaSharp.GraphicsSurface)this.GetSurface());
 
+            bool IsFormDisposed = false;
+
             if (PropertyPackages.Count == 0)
             {
                 ShowMessage("Please select a Property Package before solving the flowsheet.", IFlowsheet.MessageType.GeneralError);
@@ -120,6 +122,7 @@ namespace DWSIM.UI.Desktop.Shared
                         FlowsheetForm.Enabled = true;
                         FlowsheetControl.Invalidate();
                         solvform.Close();
+                        IsFormDisposed = true;
                     });
                     GlobalSettings.Settings.CalculatorStopRequested = true;
                     if (GlobalSettings.Settings.TaskCancellationTokenSource != null)
@@ -142,7 +145,7 @@ namespace DWSIM.UI.Desktop.Shared
                     {
                         Application.Instance.AsyncInvoke(() =>
                         {
-                            if (solvform != null && !optimizing)
+                            if (solvform != null && !optimizing && !IsFormDisposed)
                             {
                                 solvform.lblMessage.Text = "Solving flowsheet model, please wait...\nCurrent object: " + objinfo.Tag;
                             }
@@ -150,7 +153,6 @@ namespace DWSIM.UI.Desktop.Shared
                     };
                 }
                 RequestCalculation(gobj);
-                if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) Task.Delay(1000).Wait();
             });
 
             st.ContinueWith((t) =>
@@ -164,6 +166,7 @@ namespace DWSIM.UI.Desktop.Shared
                     {
                         solvform.Close();
                         solvform = null;
+                        IsFormDisposed = true;
                     }
                 });
                 GlobalSettings.Settings.CalculatorStopRequested = false;
@@ -212,7 +215,7 @@ namespace DWSIM.UI.Desktop.Shared
                     FlowsheetForm.Enabled = false;
                     FlowsheetControl.Invalidate();
                     FlowsheetForm.Invalidate();
-                    if (solvform != null) solvform.ShowModalAsync(FlowsheetControl);
+                    if (solvform != null && !IsFormDisposed) solvform.ShowModalAsync(FlowsheetControl);
                 });
 
                 st.Start();

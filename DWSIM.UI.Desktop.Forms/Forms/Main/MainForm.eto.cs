@@ -72,7 +72,7 @@ namespace DWSIM.UI
 
             Eto.Style.Add<Button>("donate", button =>
             {
-                button.BackgroundColor = Colors.Yellow;
+                button.BackgroundColor = Colors.LightYellow;
                 button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
                 button.TextColor = bgcolor;
                 button.ImagePosition = ButtonImagePosition.Left;
