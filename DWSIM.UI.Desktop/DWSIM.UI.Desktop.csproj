@@ -284,10 +284,10 @@ xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Linux\"
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
-xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
-xcopy "$(SolutionDir)PlatformFiles\Linux\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-xcopy "$(SolutionDir)PlatformFiles\Raspberry\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
-xcopy "$(SolutionDir)PlatformFiles\macOS\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F
+xcopy "$(SolutionDir)PlatformFiles\Linux\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F
+xcopy "$(SolutionDir)PlatformFiles\Raspberry\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F
+xcopy "$(SolutionDir)PlatformFiles\macOS\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F
 
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Windows\plugins\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Linux\plugins\" /E /Y /F /D
