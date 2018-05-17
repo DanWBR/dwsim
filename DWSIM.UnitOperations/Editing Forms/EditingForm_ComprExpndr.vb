@@ -35,7 +35,7 @@ Public Class EditingForm_ComprExpndr
 
             chkActive.Checked = .GraphicObject.Active
 
-            Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
+            Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
 
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
@@ -192,7 +192,7 @@ Public Class EditingForm_ComprExpndr
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
-        Me.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
+        Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetDisplayName() & ")"
         If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
         DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
         lblTag.Focus()

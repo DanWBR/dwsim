@@ -60,7 +60,7 @@ Public Class MaterialStreamEditor
 
             chkActive.Checked = MatStream.GraphicObject.Active
 
-            Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
+            Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
 
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
@@ -551,7 +551,7 @@ Public Class MaterialStreamEditor
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then MatStream.GraphicObject.Tag = lblTag.Text
         If Loaded Then MatStream.FlowSheet.UpdateOpenEditForms()
-        Me.Text = MatStream.GetDisplayName() & ": " & MatStream.GraphicObject.Tag
+        Me.Text = MatStream.GraphicObject.Tag & " (" & MatStream.GetDisplayName() & ")"
         DirectCast(MatStream.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
         lblTag.Focus()
         lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)

@@ -203,19 +203,19 @@ namespace DWSIM.UI.Forms.Forms
         private void AddComponentInfo()
         {
             components.Add(new ComponentInfo("CoolProp", "6.0.0", "2016", "Ian H. Bell", "http://wwww.coolprop.org", "MIT-style License", "https://github.com/ibell/coolprop/blob/master/LICENSE"));
-            components.Add(new ComponentInfo("ChemSep Database", "7.12", "2016", "Harry Kooijman, Ross Taylor", "http://www.chemsep.org", "Perl Artistic License v2", "http://www.perlfoundation.org/artistic_license_2_0"));
+            components.Add(new ComponentInfo("ChemSep Database", "7.15", "2017", "Harry Kooijman, Ross Taylor", "http://www.chemsep.org", "Perl Artistic License v2", "http://www.perlfoundation.org/artistic_license_2_0"));
             components.Add(new ComponentInfo("Flee", "0.9.14", "2009", "Eugene Ciloci", "https://flee.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"));
             components.Add(new ComponentInfo("DotNumerics", "1.0", "2009", "Jose Antonio De Santiago Castillo", "http://www.dotnumerics.com", "GPLv3", "http://www.gnu.org/licenses/gpl.html"));
-            components.Add(new ComponentInfo("FileHelpers", "1.6", "2007", "Marcos Meli", "https://sourceforge.net/projects/filehelpers", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"));
+            components.Add(new ComponentInfo("FileHelpers", "3.2.7", "2018", "Marcos Meli", "https://sourceforge.net/projects/filehelpers", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"));
             components.Add(new ComponentInfo("SharpZipLib", "0.85.4.369", "2010", "IC#Code", "http://www.icsharpcode.net/OpenSource/SharpZipLib", "GPLv2", "http://www.gnu.org/licenses/gpl.html"));
             components.Add(new ComponentInfo("Nini", "1.1", "2010", "Brent R. Matzelle", "https://sourceforge.net/projects/nini", "MIT License", "http://www.opensource.org/licenses/mit-license.html"));
             components.Add(new ComponentInfo("ScintillaNET", "3.5.1.0", "2015", "Jacob Slusser", "https://github.com/jacobslusser/scintillaNET", "MIT License", "http://www.opensource.org/licenses/mit-license.html"));
             components.Add(new ComponentInfo("Yeppp!", "1.0.0.1", "2014", "Marat Dukhan", "http://www.yeppp.info", "Yeppp! License", "http://www.yeppp.info/resources/yeppp-license.txt"));
             components.Add(new ComponentInfo("SwarmOps", "3.1", "2011", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/swarmops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/swarmops/cs/files/license.txt"));
             components.Add(new ComponentInfo("RandomOps", "2.1", "2010", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/randomops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/randomops/cs/files/license.txt" ));
-            components.Add(new ComponentInfo("Eto.Forms", "2.4", "2017", "Curtis Wensley", "https://github.com/picoe/Eto", "BSD-3 License", "http://opensource.org/licenses/BSD-3-Clause"));
+            components.Add(new ComponentInfo("Eto.Forms", "2.4.1", "2018", "Curtis Wensley", "https://github.com/picoe/Eto", "BSD-3 License", "http://opensource.org/licenses/BSD-3-Clause"));
             components.Add(new ComponentInfo("OxyPlot", "2.0", "2017", "OxyPlot team", "http://www.oxyplot.org", "MIT License", "http://www.opensource.org/licenses/mit-license.html"));
-            components.Add(new ComponentInfo("SkiaSharp", "1.55.x", "2017", "Xamarin team", "https://github.com/mono/SkiaSharp/", "MIT License", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
+            components.Add(new ComponentInfo("SkiaSharp", "1.56.0", "2018", "Xamarin team", "https://github.com/mono/SkiaSharp/", "MIT License", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
         }
 
         public class ComponentInfo

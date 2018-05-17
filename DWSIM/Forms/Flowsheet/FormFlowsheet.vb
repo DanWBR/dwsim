@@ -2685,6 +2685,13 @@ Public Class FormFlowsheet
                 dckPanel.DefaultFloatWindowSize = New Size(cnt.Width, cnt.Height)
             End If
             cnt.Show(Me.dckPanel)
+            Try
+                Dim editors = dckPanel.Contents.Where(Function(d) TypeOf d Is DockContent).Where(Function(d2) DirectCast(d2, DockContent).Tag = "ObjectEditor").ToList
+                If editors.Count > 4 Then
+                    DirectCast(editors(0), DockContent).Close()
+                End If
+            Catch ex As Exception
+            End Try
         Else
             DirectCast(form, Form).Show(Me)
         End If

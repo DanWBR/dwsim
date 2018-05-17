@@ -759,6 +759,8 @@ Namespace GraphicObjects
 
         Public Property VisibleProperties As New Dictionary(Of String, List(Of String))
 
+        Private Property ClipboardData As String = ""
+
         <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
 
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
@@ -974,12 +976,7 @@ Namespace GraphicObjects
 
         Public Sub CopyToClipboard()
 
-            Dim i As Integer = 0
-            Dim j As Integer = 0
-
-            Dim data As String = Me.HeaderText & vbCrLf
-
-            Clipboard.SetText(data)
+            Clipboard.SetText(ClipboardData)
 
         End Sub
 
@@ -1116,6 +1113,8 @@ Namespace GraphicObjects
                 g.DrawString(Me.HeaderText, Me.HeaderFont, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + Padding, Y + Padding)
                 Dim n As Integer = 1
 
+                ClipboardData = HeaderText + vbCrLf
+
                 For Each item In VisibleProperties
                     For Each value In item.Value
 
@@ -1137,6 +1136,8 @@ Namespace GraphicObjects
                         g.DrawString(propunit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + maxL0 + maxL1 + maxL2 + Padding, Y + n * maxH + Padding)
 
                         g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+
+                        ClipboardData += propstring & vbTab & propval & vbTab & propunit & vbCrLf
 
                         n += 1
 

@@ -450,11 +450,13 @@ Namespace UnitOperations
             If f Is Nothing Then
                 f = New EditingForm_Filter With {.SimObject = Me}
                 f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
                     f = New EditingForm_Filter With {.SimObject = Me}
                     f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
                     Me.FlowSheet.DisplayForm(f)
                 Else
                     f.Activate()

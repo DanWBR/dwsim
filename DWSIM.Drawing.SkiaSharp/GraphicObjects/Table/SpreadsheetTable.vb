@@ -30,6 +30,8 @@ Namespace GraphicObjects.Tables
 
         <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
 
+        Public Property ClipboardData As String = ""
+
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
@@ -133,15 +135,19 @@ Namespace GraphicObjects.Tables
 
                 size = MeasureString("MEASURE", tpaint)
 
+                ClipboardData = ""
+
                 n = 0
                 leftmargin = 0
                 For j = 0 To SpreadsheetData(0).Count - 1
                     m = 0
                     For i = 0 To SpreadsheetData.Count - 1
                         canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                        ClipboardData += SpreadsheetData(i)(j) + vbTab
                         If i < SpreadsheetData.Count - 1 Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
                         m += 1
                     Next
+                    ClipboardData += vbCrLf
                     leftmargin += maxW(n)
                     If j < SpreadsheetData(0).Count - 1 Then canvas.DrawLine(X + leftmargin, Y, X + leftmargin, Y + (SpreadsheetData.Count) * itemheight, bpaint)
                     n += 1

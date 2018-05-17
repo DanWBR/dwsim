@@ -38,6 +38,8 @@ Namespace GraphicObjects.Tables
 
         Protected m_items As Dictionary(Of String, List(Of NodeItem))
 
+        Public Property ClipboardData As String = ""
+
         <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -462,6 +464,10 @@ Namespace GraphicObjects.Tables
 
                 size = MeasureString("MEASURE", tpaint)
 
+                ClipboardData = HeaderText + vbCrLf
+
+                SetClipboardData()
+
                 'desenhar textos e retangulos
                 canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
                 If Not m_items Is Nothing Then
@@ -472,9 +478,13 @@ Namespace GraphicObjects.Tables
                                 canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + Padding, Y + Height, bpaint)
                                 n = 1
                                 For Each ni In m_items(s)
-                                    If i = 0 Then canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If i = 0 Then
+                                        canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    End If
                                     canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
-                                    If i = m_items.Count - 1 Then canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If i = m_items.Count - 1 Then
+                                        canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    End If
                                     n += 1
                                 Next
                                 i += 1
@@ -487,9 +497,13 @@ Namespace GraphicObjects.Tables
                                 canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + Padding, Y + Height, bpaint)
                                 n = 2
                                 For Each ni In m_items(s)
-                                    If i = 0 Then canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If i = 0 Then
+                                        canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    End If
                                     canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
-                                    If i = m_items.Count - 1 Then canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If i = m_items.Count - 1 Then
+                                        canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    End If
                                     n += 1
                                 Next
                                 i += 1
@@ -521,6 +535,36 @@ Namespace GraphicObjects.Tables
             End If
 
         End Sub
+
+        Public Sub SetClipboardData()
+
+            Dim i As Integer = 0
+            Dim j As Integer = 0
+
+            Dim data As String = ""
+
+            Dim refitem = m_items.Values.FirstOrDefault
+
+            If Not m_items Is Nothing Then
+                If Not m_sortedlist Is Nothing Then
+                    For Each s As String In m_sortedlist
+                        data += vbTab & m_items(s)(0).Value
+                    Next
+                    data += vbCrLf
+                    For j = 1 To refitem.Count - 1
+                        data += Flowsheet.GetTranslatedString(refitem(j).Text) & vbTab
+                        For Each s As String In m_sortedlist
+                            data += m_items(s)(j).Value & vbTab
+                        Next
+                        data += refitem(j).Unit & vbCrLf
+                    Next
+                End If
+            End If
+
+            ClipboardData = data
+
+        End Sub
+
 
     End Class
 

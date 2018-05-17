@@ -673,11 +673,13 @@ restart:    B = F - D
             If f Is Nothing Then
                 f = New EditingForm_ShortcutColumn With {.SimObject = Me}
                 f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
                     f = New EditingForm_ShortcutColumn With {.SimObject = Me}
                     f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
                     Me.FlowSheet.DisplayForm(f)
                 Else
                     f.Activate()

@@ -35,6 +35,8 @@ Namespace GraphicObjects.Tables
 
         Public Property HeaderText As String = "PROPERTIES TABLE"
 
+        Public Property ClipboardData As String = ""
+
         <Xml.Serialization.XmlIgnore> Public Property Flowsheet As IFlowsheet
 
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
@@ -194,6 +196,8 @@ Namespace GraphicObjects.Tables
 
                 size = MeasureString("MEASURE", tpaint)
 
+                ClipboardData = HeaderText + vbCrLf
+
                 canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
                 Dim n As Integer = 1
 
@@ -219,6 +223,8 @@ Namespace GraphicObjects.Tables
                         canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1 - Padding, Y + n * maxH + Padding + size.Height, tpaint)
                         canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
                         canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
+
+                        ClipboardData += propstring + vbTab + propval + vbTab + propunit + vbCrLf
 
                         n += 1
 

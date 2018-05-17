@@ -33,7 +33,7 @@ Public Class EditingForm_Vessel
 
             chkActive.Checked = VesselObject.GraphicObject.Active
 
-            Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
+            Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
 
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then

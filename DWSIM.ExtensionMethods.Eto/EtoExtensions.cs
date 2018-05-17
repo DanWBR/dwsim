@@ -404,7 +404,7 @@ namespace DWSIM.UI.Shared
 
         }
 
-        public static TextBox CreateAndAddStringEditorRow(this DynamicLayout container, String text, String currval, Action<TextBox, EventArgs> command)
+        public static TextBox CreateAndAddStringEditorRow(this DynamicLayout container, String text, String currval, Action<TextBox, EventArgs> command, Action keypress = null)
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
@@ -414,6 +414,7 @@ namespace DWSIM.UI.Shared
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = 140;
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+            if (keypress != null) edittext.KeyUp += (sender, e) => { if (e.Key == Keys.Enter) keypress.Invoke(); };
 
             var tr = new TableRow(txt, null, edittext);
 

@@ -34,8 +34,6 @@ namespace DWSIM.UI.Desktop.Editors
 
             Padding = new Padding(10);
 
-            this.CreateAndAddLabelRow("Description");
-            this.CreateAndAddStringEditorRow("Name", gobj.Tag, (sender, e) => gobj.Tag = sender.Text);
             this.CreateAndAddLabelRow("Dimensions");
             this.CreateAndAddTextBoxRow("N0", "Width", gobj.Width,
                 (sender, e) => { if (sender.Text.IsValidDouble()) gobj.Width = (int)sender.Text.ToDoubleFromCurrent(); });

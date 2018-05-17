@@ -730,14 +730,11 @@ namespace DWSIM.UI.Forms
                         var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
                         switch (obj.ObjectType)
                         {
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart:
                                 selctxmenu.Items.Clear();
-                                var itemtype = new ButtonMenuItem { Text = "Misc Object", Enabled = false };
+                                var itemtype = new ButtonMenuItem { Text = "Data Table", Enabled = false };
                                 selctxmenu.Items.Add(itemtype);
 
                                 var menuitem0 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
@@ -748,15 +745,49 @@ namespace DWSIM.UI.Forms
 
                                 selctxmenu.Items.Add(menuitem0);
 
+                                var item7 = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
+
+                                item7.Click += (sender2, e2) =>
+                                {
+                                    new Clipboard().Text = obj.GetType().GetProperty("ClipboardData").GetValue(obj).ToString();
+                                };
+
+                                selctxmenu.Items.Add(item7);
+
                                 var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
                                 delitem.Click += (sender2, e2) =>
+                                {
+                                    if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                                    {
+                                        FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
+                                    }
+                                };
+                                selctxmenu.Items.Add(delitem);
+                                break;
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart:
+                                selctxmenu.Items.Clear();
+                                var itemtype2 = new ButtonMenuItem { Text = "Misc Object", Enabled = false };
+                                selctxmenu.Items.Add(itemtype2);
+
+                                var menuitem02 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+                                menuitem02.Click += (sender2, e2) =>
+                                {
+                                    EditSelectedObjectProperties();
+                                };
+
+                                selctxmenu.Items.Add(menuitem02);
+
+                                var delitem2 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
+                                delitem2.Click += (sender2, e2) =>
                                 {
                                     if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
                                     {   
                                         FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
                                     }
                                 };
-                                selctxmenu.Items.Add(delitem);
+                                selctxmenu.Items.Add(delitem2);
                                 break;
                             default:
                                 SetupSelectedContextMenu();
@@ -1103,21 +1134,7 @@ namespace DWSIM.UI.Forms
                 try
                 {
                     var sobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                    switch (sobj.ObjectType)
-                    {
-                        case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
-                            //((MasterTableGraphic)sobj).CopyToClipboard();
-                            break;
-                        case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
-                            //((SpreadsheetTableGraphic)sobj).CopyToClipboard();
-                            break;
-                        case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
-                            //((TableGraphic)sobj).CopyToClipboard();
-                            break;
-                        default:
-                            ((SharedClasses.UnitOperations.BaseClass)FlowsheetObject.SimulationObjects[sobj.Name]).CopyDataToClipboard((DWSIM.SharedClasses.SystemsOfUnits.Units)FlowsheetObject.FlowsheetOptions.SelectedUnitSystem, FlowsheetObject.FlowsheetOptions.NumberFormat);
-                            break;
-                    }
+                    ((SharedClasses.UnitOperations.BaseClass)FlowsheetObject.SimulationObjects[sobj.Name]).CopyDataToClipboard((DWSIM.SharedClasses.SystemsOfUnits.Units)FlowsheetObject.FlowsheetOptions.SelectedUnitSystem, FlowsheetObject.FlowsheetOptions.NumberFormat);
                 }
                 catch (Exception ex)
                 {
@@ -1447,6 +1464,13 @@ namespace DWSIM.UI.Forms
                 var editorc = new DocumentPage(editor) { Closable = true, Text = obj.GraphicObject.Tag };
                 EditorHolder.Pages.Add(editorc);
                 EditorHolder.SelectedPage = editorc;
+                if (EditorHolder.Pages.Count > 6)
+                {
+                    try
+                    {
+                        EditorHolder.Pages.Remove(EditorHolder.Pages.First());
+                    } catch { }
+                }
             }
 
             SplitterFlowsheet.Invalidate();

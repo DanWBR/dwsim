@@ -41,6 +41,11 @@ namespace DWSIM.UI.Desktop.Editors
             Initialize();
         }
 
+        void CallSolverIfNeeded()
+        {
+            if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke();
+        }
+
         void Initialize()
         {
 
@@ -57,7 +62,7 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddStringEditorRow(container, "Name", column.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
             {
                 column.GraphicObject.Tag = arg3.Text;
-            });
+            }, () => CallSolverIfNeeded());
 
             s.CreateAndAddLabelRow(container, "Property Package");
 
