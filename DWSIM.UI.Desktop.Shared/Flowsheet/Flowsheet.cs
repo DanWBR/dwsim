@@ -145,7 +145,7 @@ namespace DWSIM.UI.Desktop.Shared
                     {
                         Application.Instance.AsyncInvoke(() =>
                         {
-                            if (solvform != null && !optimizing && !IsFormDisposed)
+                            if (solvform != null && !optimizing)
                             {
                                 solvform.lblMessage.Text = "Solving flowsheet model, please wait...\nCurrent object: " + objinfo.Tag;
                             }
