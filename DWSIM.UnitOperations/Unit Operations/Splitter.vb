@@ -493,6 +493,25 @@ Namespace UnitOperations
                 Return True
             End Get
         End Property
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Specification") Then
+                Return "Define how you will specify this splitter block."
+            ElseIf p.Equals("Split Ratio Stream 1") Then
+                Return "If you chose 'Split Ratios' as the specification mode, enter the fraction of the inlet mass flow that will be directed to the outlet stream 1."
+            ElseIf p.Equals("Split Ratio Stream 2") Then
+                Return "If you chose 'Split Ratios' as the specification mode, enter the fraction of the inlet mass flow that will be directed to the outlet stream 2."
+            ElseIf p.Equals("Split Ratio Stream 3") Then
+                Return "If you chose 'Split Ratios' as the specification mode and have 3 outlet streams connected to this splitter, enter the fraction of the inlet mass flow that will be directed to the outlet stream 3."
+            ElseIf p.Equals("Stream 1 Mass/Mole Flow Spec") Then
+                Return "If you chose a Flow Spec as the specification mode, enter the flow amount of the stream 1. If only two outlet streams are connected, you don't need to specify a flow amount for the stream 2 as it will be calculated to close the mass balance."
+            ElseIf p.Equals("Stream 2 Mass/Mole Flow Spec") Then
+                Return "If you chose a Flow Spec as the specification mode, enter the flow amount of the stream 2. This is required only if you have 3 outlet streams connected to this splitter."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace

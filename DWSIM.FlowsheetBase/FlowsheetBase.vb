@@ -415,7 +415,7 @@ Imports System.Dynamic
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_PFR, x, y, tag))
 
-            Case "Continous Stirred Tank Reactor (CSTR)"
+            Case "Continuous Stirred Tank Reactor (CSTR)"
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_CSTR, x, y, tag))
 
