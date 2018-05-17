@@ -153,6 +153,7 @@ namespace DWSIM.UI.Desktop.Shared
                     };
                 }
                 RequestCalculation(gobj);
+                Task.Delay(1000).Wait();
             });
 
             st.ContinueWith((t) =>
@@ -215,7 +216,12 @@ namespace DWSIM.UI.Desktop.Shared
                     FlowsheetForm.Enabled = false;
                     FlowsheetControl.Invalidate();
                     FlowsheetForm.Invalidate();
-                    if (solvform != null && !IsFormDisposed) solvform.ShowModalAsync(FlowsheetControl);
+                    if (solvform != null && !IsFormDisposed)
+                    {
+                        try {
+                            solvform.ShowModal(FlowsheetControl);
+                        } catch { }
+                    } 
                 });
 
                 st.Start();
