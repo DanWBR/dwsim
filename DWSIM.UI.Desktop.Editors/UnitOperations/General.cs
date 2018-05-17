@@ -1834,7 +1834,7 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         sm1 = cv.ConvertFromSI(su.molarflow, splitter.StreamFlowSpec);
                     }
-                    s.CreateAndAddTextBoxRow(container, nf, "Stream 1 Mass/Mole Flow Spec (" + su.massflow + "|" + su.molarflow + ")", sm1,
+                    s.CreateAndAddTextBoxRow(container, nf, "S1 Flow (" + su.massflow + "|" + su.molarflow + ")", sm1,
                                 (TextBox arg3, EventArgs ev) =>
                                 {
                                     if (Double.TryParse(arg3.Text.ToString(), out val))
@@ -1865,7 +1865,7 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         sm2 = cv.ConvertFromSI(su.molarflow, splitter.Stream2FlowSpec);
                     }
-                    s.CreateAndAddTextBoxRow(container, nf, "Stream 2 Mass/Mole Flow Spec (" + su.massflow + "|" + su.molarflow + ")", sm2,
+                    s.CreateAndAddTextBoxRow(container, nf, "S2 Flow (" + su.massflow + "|" + su.molarflow + ")", sm2,
                                 (TextBox arg3, EventArgs ev) =>
                                 {
                                     if (Double.TryParse(arg3.Text.ToString(), out val))
