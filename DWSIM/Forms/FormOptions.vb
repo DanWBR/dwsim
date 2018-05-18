@@ -64,9 +64,6 @@ Public Class FormOptions
         Me.KryptonTextBox1.Text = My.Settings.BackupFolder
         Me.TrackBar1.Value = My.Settings.BackupInterval
 
-        Me.chkUpdates.Checked = My.Settings.CheckForUpdates
-        Me.chkAutoUpdate.Checked = My.Settings.AutomaticUpdates
-
         Me.chkIgnoreCompConstData.Checked = My.Settings.IgnoreCompoundPropertiesOnLoad
 
         Me.cbudb.Checked = My.Settings.ReplaceComps
@@ -442,10 +439,6 @@ Public Class FormOptions
         End If
     End Sub
 
-    Private Sub chkUpdates_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUpdates.CheckedChanged
-        My.Settings.CheckForUpdates = Me.chkUpdates.Checked
-    End Sub
-
     Private Sub chkEnableParallelCalcs_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkEnableParallelCalcs.CheckedChanged
         My.Settings.EnableParallelProcessing = Me.chkEnableParallelCalcs.Checked
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
@@ -641,10 +634,6 @@ Public Class FormOptions
     Private Sub cbDefaultLocation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDefaultLocation.SelectedIndexChanged
         My.Settings.DefaultEditorLocation = cbDefaultLocation.SelectedIndex
         GlobalSettings.Settings.DefaultEditFormLocation = cbDefaultLocation.SelectedIndex
-    End Sub
-
-    Private Sub chkAutoUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoUpdate.CheckedChanged
-        My.Settings.AutomaticUpdates = chkAutoUpdate.Checked
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableMultipleEditors.CheckedChanged

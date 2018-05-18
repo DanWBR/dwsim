@@ -30,6 +30,7 @@ Partial Class FormOptions
         Me.FaTabStrip1 = New System.Windows.Forms.TabControl()
         Me.FaTabStripItem1 = New System.Windows.Forms.TabPage()
         Me.GroupBox18 = New System.Windows.Forms.GroupBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.chkEnableInspector = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.chkStorePreviousSolutions = New System.Windows.Forms.CheckBox()
@@ -121,9 +122,6 @@ Partial Class FormOptions
         Me.chkIgnoreCompConstData = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.chkHideSolidPhaseCO = New System.Windows.Forms.CheckBox()
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.chkAutoUpdate = New System.Windows.Forms.CheckBox()
-        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ComboBoxUILanguage = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -136,7 +134,6 @@ Partial Class FormOptions
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ofdcs = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Label21 = New System.Windows.Forms.Label()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -163,7 +160,6 @@ Partial Class FormOptions
         Me.GroupBox16.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
-        Me.GroupBox13.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -196,6 +192,11 @@ Partial Class FormOptions
         Me.GroupBox18.Controls.Add(Me.chkEnableInspector)
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.TabStop = False
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
         '
         'chkEnableInspector
         '
@@ -762,7 +763,6 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox13)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
@@ -868,24 +868,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.chkHideSolidPhaseCO, "chkHideSolidPhaseCO")
         Me.chkHideSolidPhaseCO.Name = "chkHideSolidPhaseCO"
         '
-        'GroupBox13
-        '
-        resources.ApplyResources(Me.GroupBox13, "GroupBox13")
-        Me.GroupBox13.Controls.Add(Me.chkAutoUpdate)
-        Me.GroupBox13.Controls.Add(Me.chkUpdates)
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.TabStop = False
-        '
-        'chkAutoUpdate
-        '
-        resources.ApplyResources(Me.chkAutoUpdate, "chkAutoUpdate")
-        Me.chkAutoUpdate.Name = "chkAutoUpdate"
-        '
-        'chkUpdates
-        '
-        resources.ApplyResources(Me.chkUpdates, "chkUpdates")
-        Me.chkUpdates.Name = "chkUpdates"
-        '
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
@@ -971,11 +953,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         '
-        'Label21
-        '
-        resources.ApplyResources(Me.Label21, "Label21")
-        Me.Label21.Name = "Label21"
-        '
         'FormOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -1023,8 +1000,6 @@ Partial Class FormOptions
         Me.GroupBox16.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
-        Me.GroupBox13.ResumeLayout(False)
-        Me.GroupBox13.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox9.ResumeLayout(False)
@@ -1120,9 +1095,6 @@ Partial Class FormOptions
     Public WithEvents chkCloseFormsOnDeselect As System.Windows.Forms.CheckBox
     Friend WithEvents cbDefaultLocation As System.Windows.Forms.ComboBox
     Public WithEvents Label14 As System.Windows.Forms.Label
-    Public WithEvents GroupBox13 As System.Windows.Forms.GroupBox
-    Public WithEvents chkAutoUpdate As System.Windows.Forms.CheckBox
-    Public WithEvents chkUpdates As System.Windows.Forms.CheckBox
     Public WithEvents chkEnableMultipleEditors As System.Windows.Forms.CheckBox
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents GroupBox14 As System.Windows.Forms.GroupBox
