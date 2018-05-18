@@ -663,7 +663,7 @@ Imports System.Dynamic
 
             Case ObjectType.Expander
 
-                Dim myComp As New ExpanderGraphic(mpx, mpy, 50, 50)
+                Dim myComp As New TurbineGraphic(mpx, mpy, 50, 50)
                 myComp.Tag = "X-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
