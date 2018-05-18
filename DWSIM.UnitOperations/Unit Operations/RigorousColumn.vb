@@ -1216,6 +1216,8 @@ Namespace UnitOperations
 
         Public _sm As SolvingMethods.ColSolvingMethod
 
+        Public Overrides Property Visible As Boolean = False
+
         Public Sub New()
             MyBase.New()
         End Sub
@@ -1368,6 +1370,8 @@ Namespace UnitOperations
         'solving method (default = IO)
 
         Public _sm As SolvingMethods.ColSolvingMethod
+
+        Public Overrides Property Visible As Boolean = False
 
         Public Sub New()
             MyBase.New()

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 4
+Version 5.2 Update 5
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 5
+
+- [NEW] Data copy from property tables to clipboard (Cross-Platform UI)
+- [CHG] Limited the maximum mumber of simultaneous opened object editors
+- [FIX] Fixed data copy from property table to clipboard (Classic UI)
+- [FIX] Bug fixes
 
 Version 5.2 Update 4
 

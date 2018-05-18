@@ -28,7 +28,7 @@ Public Class SimulationObjectsPanel
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                 If Not Flowsheet.MobileCompatibilityMode Then
-                    add = True
+                    add = obj.GetType.GetProperty("Visible").GetValue(obj)
                 Else
                     add = obj.MobileCompatible
                 End If

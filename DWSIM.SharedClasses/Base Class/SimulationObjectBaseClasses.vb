@@ -44,6 +44,8 @@ Namespace UnitOperations
 
         Public Property ExtraProperties As New ExpandoObject Implements ISimulationObject.ExtraProperties
 
+        Public Overridable Property Visible As Boolean = True
+
 #Region "    Constructors"
 
         Public Sub New()

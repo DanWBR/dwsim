@@ -16,6 +16,7 @@ using DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables;
 using System.Timers;
 using System.Diagnostics;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts;
+using System.Reflection;
 
 namespace DWSIM.UI.Forms
 {
@@ -639,20 +640,23 @@ namespace DWSIM.UI.Forms
 
             foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
             {
-                var pitem = new FlowsheetObjectPanelItem();
-                var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
-                pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
-                pitem.txtName.Text = obj.GetDisplayName();
-                pitem.txtDescription.Text = obj.GetDisplayDescription();
-                pitem.MouseDown += (sender, e) =>
+                if ((Boolean)(obj.GetType().GetProperty("Visible").GetValue(obj)))
                 {
-                    var dobj = new DataObject();
-                    dobj.Image = pitem.imgIcon.Image;
-                    dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                    pitem.DoDragDrop(dobj, DragEffects.All);
-                    e.Handled = true;
-                };
-                objcontainer.Items.Add(pitem);
+                    var pitem = new FlowsheetObjectPanelItem();
+                    var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
+                    pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
+                    pitem.txtName.Text = obj.GetDisplayName();
+                    pitem.txtDescription.Text = obj.GetDisplayDescription();
+                    pitem.MouseDown += (sender, e) =>
+                    {
+                        var dobj = new DataObject();
+                        dobj.Image = pitem.imgIcon.Image;
+                        dobj.SetString(obj.GetDisplayName(), "ObjectName");
+                        pitem.DoDragDrop(dobj, DragEffects.All);
+                        e.Handled = true;
+                    };
+                    objcontainer.Items.Add(pitem);
+                }
             }
 
             if (Application.Instance.Platform.IsWpf) FlowsheetControl.AllowDrop = true;
@@ -783,7 +787,7 @@ namespace DWSIM.UI.Forms
                                 delitem2.Click += (sender2, e2) =>
                                 {
                                     if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
-                                    {   
+                                    {
                                         FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
                                     }
                                 };
@@ -1469,7 +1473,8 @@ namespace DWSIM.UI.Forms
                     try
                     {
                         EditorHolder.Pages.Remove(EditorHolder.Pages.First());
-                    } catch { }
+                    }
+                    catch { }
                 }
             }
 

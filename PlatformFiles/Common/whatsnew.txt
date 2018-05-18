@@ -1,3 +1,6 @@
-Version 5.2 Update 4
+Version 5.2 Update 5
 
-- Bug fixes
+- [NEW] Data copy from property tables to clipboard (Cross-Platform UI)
+- [CHG] Limited the maximum mumber of simultaneous opened object editors
+- [FIX] Fixed data copy from property table to clipboard (Classic UI)
+- [FIX] Bug fixes
