@@ -1467,7 +1467,7 @@ Namespace UnitOperations
 
             ThermalEfficiency = (Q - HeatLoss) / MaxHeatExchange * 100
 
-            If HeatLoss > Q Then Throw New Exception("Invalid Heat Loss.")
+            If HeatLoss > Math.Abs(Q.GetValueOrDefault) Then Throw New Exception("Invalid Heat Loss.")
 
             IObj?.Paragraphs.Add("<mi>Q/Q_{max}</mi> = " & ThermalEfficiency & " %")
 

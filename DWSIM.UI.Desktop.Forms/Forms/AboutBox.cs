@@ -203,7 +203,7 @@ namespace DWSIM.UI.Forms.Forms
         private void AddComponentInfo()
         {
             components.Add(new ComponentInfo("CoolProp", "6.0.0", "2016", "Ian H. Bell", "http://wwww.coolprop.org", "MIT-style License", "https://github.com/ibell/coolprop/blob/master/LICENSE"));
-            components.Add(new ComponentInfo("ChemSep Database", "7.15", "2017", "Harry Kooijman, Ross Taylor", "http://www.chemsep.org", "Perl Artistic License v2", "http://www.perlfoundation.org/artistic_license_2_0"));
+            components.Add(new ComponentInfo("ChemSep Database", "7.30", "2018", "Harry Kooijman, Ross Taylor", "http://www.chemsep.org", "Perl Artistic License v2", "http://www.perlfoundation.org/artistic_license_2_0"));
             components.Add(new ComponentInfo("Flee", "0.9.14", "2009", "Eugene Ciloci", "https://flee.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"));
             components.Add(new ComponentInfo("DotNumerics", "1.0", "2009", "Jose Antonio De Santiago Castillo", "http://www.dotnumerics.com", "GPLv3", "http://www.gnu.org/licenses/gpl.html"));
             components.Add(new ComponentInfo("FileHelpers", "3.2.7", "2018", "Marcos Meli", "https://sourceforge.net/projects/filehelpers", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"));
