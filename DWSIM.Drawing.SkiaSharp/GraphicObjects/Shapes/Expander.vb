@@ -4,7 +4,7 @@ Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects.Shapes
 
-    Public Class ExpanderGraphic
+    Public Class TurbineGraphic
 
         Inherits ShapeGraphic
 
