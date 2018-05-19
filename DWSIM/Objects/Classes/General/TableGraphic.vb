@@ -512,7 +512,7 @@ Namespace GraphicObjects
             Dim i As Integer = 0
             Dim j As Integer = 0
 
-            Dim data As String = ""
+            Dim data As String = HeaderText + vbCrLf + "Object"
 
             Dim refitem = m_items.Values.FirstOrDefault
 
@@ -1137,7 +1137,7 @@ Namespace GraphicObjects
 
                         g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
 
-                        ClipboardData += propstring & vbTab & propval & vbTab & propunit & vbCrLf
+                        ClipboardData += Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag + vbTab + propstring & vbTab & propval & vbTab & propunit & vbCrLf
 
                         n += 1
 

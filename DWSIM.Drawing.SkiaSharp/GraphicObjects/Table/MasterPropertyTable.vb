@@ -541,7 +541,7 @@ Namespace GraphicObjects.Tables
             Dim i As Integer = 0
             Dim j As Integer = 0
 
-            Dim data As String = ""
+            Dim data As String = HeaderText + vbCrLf + "Object"
 
             Dim refitem = m_items.Values.FirstOrDefault
 

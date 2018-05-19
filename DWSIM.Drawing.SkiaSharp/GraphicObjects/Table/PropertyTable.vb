@@ -224,7 +224,7 @@ Namespace GraphicObjects.Tables
                         canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
                         canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
 
-                        ClipboardData += propstring + vbTab + propval + vbTab + propunit + vbCrLf
+                        ClipboardData += Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag + vbTab + propstring + vbTab + propval + vbTab + propunit + vbCrLf
 
                         n += 1
 

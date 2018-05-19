@@ -875,7 +875,7 @@ namespace DWSIM.UI.Forms
                     }
                 };
 
-                this.Enabled = false;
+                //this.Enabled = false;
                 TabContainer.SelectedPage = TabPageSpreadsheet;
 
             }
