@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 47</value>
+    <value>12, 61</value>
   </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 130</value>
+    <value>424, 170</value>
   </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector tool to view these reports.
@@ -134,40 +134,40 @@
 When the Inspector Reports feature is enabled and the Flowsheet Solver is called, the Parallel CPU Processing is automatically disabled and the Solver Mode is changed to 'Background Thread'. You must re-enable it manually and disable the Inspector to increase the calculation speed again.</value>
   </data>
   <data name="chkEnableInspector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>184, 21</value>
   </data>
   <data name="chkEnableInspector.Text" xml:space="preserve">
     <value>Enable Inspector Reports</value>
   </data>
   <data name="GroupBox18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 508</value>
+    <value>11, 664</value>
   </data>
   <data name="GroupBox18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 190</value>
+    <value>451, 248</value>
   </data>
   <data name="GroupBox18.Text" xml:space="preserve">
     <value>Solution Inspector</value>
   </data>
   <data name="chkStorePreviousSolutions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 17</value>
+    <value>176, 21</value>
   </data>
   <data name="chkStorePreviousSolutions.Text" xml:space="preserve">
     <value>Store previous solutions</value>
   </data>
   <data name="chkSolverBreak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 17</value>
+    <value>311, 21</value>
   </data>
   <data name="chkSolverBreak.Text" xml:space="preserve">
     <value>Break calculation when an exception is thrown</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+    <value>58, 17</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
     <value>seconds</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
+    <value>97, 17</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Solver timeout</value>
@@ -185,19 +185,19 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Network Computer</value>
   </data>
   <data name="cbSolverMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 20</value>
+    <value>175, 26</value>
   </data>
   <data name="cbSolverMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 21</value>
+    <value>260, 25</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>110, 17</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Calculation Mode</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
+    <value>89, 17</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>x 'CPU cores'</value>
@@ -209,19 +209,19 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Limited Concurrency</value>
   </data>
   <data name="cbTaskScheduler.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 26</value>
   </data>
   <data name="cbTaskScheduler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>249, 25</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+    <value>100, 17</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Task Scheduler</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 13</value>
+    <value>161, 17</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Maximum parallel threads</value>
@@ -230,7 +230,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Additional Settings</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+    <value>118, 17</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Connection String</value>
@@ -239,13 +239,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Azure Service Bus Settings</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>116, 17</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>TCP Port Number</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+    <value>72, 17</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>IP Address</value>
@@ -257,52 +257,52 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Solver Options</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
+    <value>49, 17</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Device</value>
   </data>
   <data name="chkEnableSIMD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 17</value>
+    <value>213, 21</value>
   </data>
   <data name="chkEnableSIMD.Text" xml:space="preserve">
     <value>Enable CPU SIMD Acceleration</value>
   </data>
   <data name="tbGPUCaps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 98</value>
+    <value>427, 129</value>
   </data>
   <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 118</value>
+    <value>435, 154</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>OpenCL/CUDA device info</value>
   </data>
   <data name="cbGPU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 123</value>
+    <value>175, 161</value>
   </data>
   <data name="cbGPU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 21</value>
+    <value>267, 25</value>
   </data>
   <data name="chkEnableGPUProcessing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 17</value>
+    <value>277, 21</value>
   </data>
   <data name="chkEnableGPUProcessing.Text" xml:space="preserve">
     <value>Enable OpenCL/CUDA Parallel Processing</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
+    <value>131, 17</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Maximum Parallelism</value>
   </data>
   <data name="chkEnableParallelCalcs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 17</value>
+    <value>213, 21</value>
   </data>
   <data name="chkEnableParallelCalcs.Text" xml:space="preserve">
     <value>Enable CPU Parallel Processing</value>
   </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 275</value>
+    <value>451, 360</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Local Calculation Engine Settings</value>
@@ -314,7 +314,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Copy and associate</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 13</value>
+    <value>123, 17</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Property Packages</value>
@@ -326,7 +326,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Copy and associate non-existent</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
+    <value>83, 17</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Compounds</value>
@@ -335,19 +335,19 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Cut/Copy/Paste Flowsheet Objects</value>
   </data>
   <data name="chkEnableMultipleEditors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 17</value>
+    <value>165, 21</value>
   </data>
   <data name="chkEnableMultipleEditors.Text" xml:space="preserve">
     <value>Enable multiple editors</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 13</value>
+    <value>150, 17</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Default initial placement</value>
   </data>
   <data name="chkCloseFormsOnDeselect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 17</value>
+    <value>198, 21</value>
   </data>
   <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
     <value>Close editors on deselecting</value>
@@ -356,7 +356,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Flowsheet Object Editors</value>
   </data>
   <data name="CheckBoxUndoRedoRecalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 17</value>
+    <value>348, 21</value>
   </data>
   <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
     <value>Recalculate flowsheet when undoing/redoing actions</value>
@@ -368,7 +368,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Flowsheet</value>
   </data>
   <data name="cbudb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 17</value>
+    <value>263, 21</value>
   </data>
   <data name="cbudb.Text" xml:space="preserve">
     <value>Replace compounds with equal names</value>
@@ -440,16 +440,19 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>User-Defined Datasets</value>
   </data>
   <data name="chkSaveBackupFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 17</value>
+    <value>277, 21</value>
   </data>
   <data name="chkSaveBackupFile.Text" xml:space="preserve">
     <value>Keep a copy of existing files when saving</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 25</value>
+    <value>315, 33</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Delete All ".dwbak" Files in Backup Folder</value>
+  </data>
+  <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
   </data>
   <data name="KryptonLabel3.Text" xml:space="preserve">
     <value>5 minutes</value>
@@ -461,13 +464,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Select</value>
   </data>
   <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+    <value>98, 17</value>
   </data>
   <data name="KryptonLabel1.Text" xml:space="preserve">
     <value>Save to folder:</value>
   </data>
   <data name="KryptonCheckBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 17</value>
+    <value>161, 21</value>
   </data>
   <data name="KryptonCheckBox6.Text" xml:space="preserve">
     <value>Enable backup copies</value>
@@ -479,13 +482,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Backups</value>
   </data>
   <data name="tbPythonTimeout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 80</value>
+    <value>255, 105</value>
   </data>
   <data name="tbPythonTimeout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 21</value>
+    <value>68, 24</value>
   </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 13</value>
+    <value>217, 17</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Python process timeout (minutes)</value>
@@ -494,7 +497,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Select</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 13</value>
+    <value>239, 17</value>
   </data>
   <data name="Label18.Text" xml:space="preserve">
     <value>Python Binaries Path (Windows only):</value>
@@ -503,13 +506,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Python brigde settings</value>
   </data>
   <data name="tbOctaveTimeout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 83</value>
+    <value>255, 109</value>
   </data>
   <data name="tbOctaveTimeout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 21</value>
+    <value>68, 24</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 13</value>
+    <value>216, 17</value>
   </data>
   <data name="Label20.Text" xml:space="preserve">
     <value>Octave process timeout (minutes)</value>
@@ -518,7 +521,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Select</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 13</value>
+    <value>238, 17</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Octave Binaries Path (Windows only):</value>
@@ -536,16 +539,16 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Remove Solid Phase from the list of present phases for external components (requires restart)</value>
   </data>
   <data name="ComboBoxUILanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 25</value>
+    <value>153, 33</value>
   </data>
   <data name="ComboBoxUILanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 21</value>
+    <value>284, 25</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 30</value>
+    <value>13, 39</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
+    <value>68, 17</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Language</value>
@@ -554,7 +557,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>UI Language</value>
   </data>
   <data name="KryptonCheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
+    <value>92, 21</value>
   </data>
   <data name="KryptonCheckBox1.Text" xml:space="preserve">
     <value>Show Tips</value>
@@ -575,16 +578,16 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>High</value>
   </data>
   <data name="cbDebugLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 23</value>
+    <value>153, 30</value>
   </data>
   <data name="cbDebugLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 21</value>
+    <value>133, 25</value>
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 28</value>
+    <value>13, 37</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>84, 17</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Debug Level</value>
@@ -600,7 +603,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAbgBCAG4AQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAdgBCAHYAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

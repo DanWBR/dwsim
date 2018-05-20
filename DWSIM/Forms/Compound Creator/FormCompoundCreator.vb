@@ -3363,6 +3363,10 @@ Public Class FormCompoundCreator
 
     End Sub
 
+    Private Sub DBOpenDlg_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles DBOpenDlg.FileOk
+
+    End Sub
+
     Private Sub BancoDeDadosChemeoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BancoDeDadosChemeoToolStripMenuItem.Click
 
         Dim f As New FormImportCompoundDataChemeo

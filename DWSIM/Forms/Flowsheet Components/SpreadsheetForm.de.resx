@@ -119,145 +119,148 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 170</value>
+    <value>395, 282</value>
   </data>
   <data name="CelulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 22</value>
+    <value>394, 38</value>
   </data>
   <data name="CelulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Zelle</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 6</value>
+    <value>391, 6</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 22</value>
+    <value>394, 38</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Formel auswerten</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 22</value>
+    <value>394, 38</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Wert aus Fließbild importieren</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 22</value>
+    <value>394, 38</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Wert in Simulationsobjekt exportieren</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 6</value>
+    <value>391, 6</value>
   </data>
   <data name="LimparToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 22</value>
+    <value>394, 38</value>
   </data>
   <data name="LimparToolStripMenuItem.Text" xml:space="preserve">
     <value>Löschen</value>
   </data>
   <data name="CopiarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 22</value>
+    <value>394, 38</value>
   </data>
   <data name="CopiarToolStripMenuItem.Text" xml:space="preserve">
     <value>Kopieren</value>
   </data>
   <data name="ColarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 22</value>
+    <value>394, 38</value>
   </data>
   <data name="ColarToolStripMenuItem.Text" xml:space="preserve">
     <value>Einfügen</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>38, 17</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Wert</value>
   </data>
+  <data name="chkUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 517</value>
+  </data>
   <data name="chkUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 17</value>
+    <value>207, 21</value>
   </data>
   <data name="chkUpdate.Text" xml:space="preserve">
     <value>Automatisch neu berechnen</value>
   </data>
   <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 224</value>
+    <value>255, 244</value>
   </data>
   <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="FloatToolStripMenuItem.Text" xml:space="preserve">
     <value>Schwebend</value>
   </data>
   <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
     <value>Links andocken</value>
   </data>
   <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
     <value>Rechts andocken</value>
   </data>
   <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockTopToolStripMenuItem.Text" xml:space="preserve">
     <value>Oben andocken</value>
   </data>
   <data name="DockBottomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockBottomToolStripMenuItem.Text" xml:space="preserve">
     <value>Unten andocken</value>
   </data>
   <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Links andocken Auto-Hide</value>
   </data>
   <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Rechts andocken Auto-Hide</value>
   </data>
   <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockTopAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Oben andocken Auto-Hide</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Unten andocken Auto-Hide</value>
   </data>
   <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>254, 24</value>
   </data>
   <data name="DocumentToolStripMenuItem.Text" xml:space="preserve">
     <value>Dokument</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 503</value>
+    <value>782, 515</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 24</value>
+    <value>252, 27</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Daten in Zwischenablage kopieren</value>
   </data>
   <data name="chkUseRegionalSeparator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 508</value>
+    <value>256, 517</value>
   </data>
   <data name="chkUseRegionalSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 17</value>
+    <value>406, 21</value>
   </data>
   <data name="chkUseRegionalSeparator.Text" xml:space="preserve">
     <value>Verwende Systemdefinition für Dezimalseparator in Formeln</value>

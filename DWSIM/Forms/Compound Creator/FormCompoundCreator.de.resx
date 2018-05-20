@@ -118,605 +118,1207 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1669, 786</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Komponenten Eigenschaften</value>
+  </data>
   <data name="RadioButton3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 20</value>
+    <value>265, 26</value>
+  </data>
+  <data name="RadioButton3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="RadioButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 17</value>
+    <value>118, 21</value>
   </data>
   <data name="RadioButton3.Text" xml:space="preserve">
     <value>Elektrolyt/Salz</value>
   </data>
-  <data name="RadioButton3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="RadioButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 20</value>
+    <value>163, 26</value>
+  </data>
+  <data name="RadioButton2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="RadioButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 17</value>
+    <value>91, 21</value>
   </data>
   <data name="RadioButton2.Text" xml:space="preserve">
     <value>'Black-Oil'</value>
   </data>
-  <data name="RadioButton2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>408, 29</value>
   </data>
-  <data name="Label16.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 17</value>
   </data>
   <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 24</value>
+    <value>663, 31</value>
+  </data>
+  <data name="Label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Label17.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="TextBoxName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>538, 19</value>
+    <value>717, 25</value>
+  </data>
+  <data name="TextBoxName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="TextBoxName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 20</value>
-  </data>
-  <data name="TextBoxName.ToolTip" xml:space="preserve">
-    <value />
+    <value>679, 23</value>
   </data>
   <data name="RadioButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 20</value>
+    <value>64, 26</value>
+  </data>
+  <data name="RadioButton1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="RadioButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 17</value>
+    <value>87, 21</value>
   </data>
   <data name="RadioButton1.Text" xml:space="preserve">
     <value>Standard</value>
   </data>
-  <data name="RadioButton1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label54.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 29</value>
+  </data>
+  <data name="Label54.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label54.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
+    <value>40, 17</value>
   </data>
   <data name="Label54.Text" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="Label54.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 241</value>
-  </data>
-  <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1167, 111</value>
-  </data>
-  <data name="TextBoxComments.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label94.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 241</value>
-  </data>
-  <data name="Label94.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="Label94.Text" xml:space="preserve">
-    <value>Bemerkungen</value>
-  </data>
-  <data name="Label94.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 18</value>
-  </data>
-  <data name="LinkLabel1.Text" xml:space="preserve">
-    <value>CAS Nummer</value>
-  </data>
-  <data name="btnRenderSMILES.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LinkPubChem.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TextBoxSMILES.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TextBoxCAS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label51.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
-  </data>
-  <data name="Label21.Text" xml:space="preserve">
-    <value>Formel</value>
-  </data>
-  <data name="Label21.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label47.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TextBoxFormula.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 164</value>
-  </data>
-  <data name="pbRender.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
-  </data>
-  <data name="Label22.Text" xml:space="preserve">
-    <value>Molgewicht</value>
-  </data>
-  <data name="Label22.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblMW.ToolTip" xml:space="preserve">
-    <value />
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Identifikation</value>
   </data>
-  <data name="FaTabStripItem1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblBOT1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblBOT2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOT1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOT2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblBOVisc1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblBOVisc2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOV1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOV2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label108.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOPNAP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label107.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOPNAN.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label106.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOPNAA.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label105.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 13</value>
-  </data>
-  <data name="Label105.Text" xml:space="preserve">
-    <value>PNA Analyse, Aromaten</value>
-  </data>
-  <data name="Label105.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label104.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 13</value>
-  </data>
-  <data name="Label104.Text" xml:space="preserve">
-    <value>PNA Analyse, Naphthene</value>
-  </data>
-  <data name="Label104.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label103.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 13</value>
-  </data>
-  <data name="Label103.Text" xml:space="preserve">
-    <value>PNA Analyse, Paraffine</value>
-  </data>
-  <data name="Label103.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label96.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
-  <data name="Label96.Text" xml:space="preserve">
-    <value>Ölviscosität 2</value>
-  </data>
-  <data name="Label96.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label95.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
-  <data name="Label95.Text" xml:space="preserve">
-    <value>Ölviscosität 1</value>
-  </data>
-  <data name="Label95.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Optionale Daten</value>
-  </data>
-  <data name="GroupBox8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label102.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblBORGO.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOBSW.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOGOR.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOSGO.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbBOSGG.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label99.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
-  </data>
-  <data name="Label99.Text" xml:space="preserve">
-    <value>Spezifische Öldichte</value>
-  </data>
-  <data name="Label99.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label100.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 13</value>
-  </data>
-  <data name="Label100.Text" xml:space="preserve">
-    <value>spezifische Gasdichte</value>
-  </data>
-  <data name="Label100.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label98.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label97.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 13</value>
-  </data>
-  <data name="Label97.Text" xml:space="preserve">
-    <value>Gas-Öl Verhältnis @ SC</value>
-  </data>
-  <data name="Label97.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Benötigte Daten</value>
-  </data>
-  <data name="GroupBox7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FaTabStripItemBO.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label111.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label110.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label109.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecSolidDensT.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label101.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecSolidDens.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecEnthFusion.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecSolidTf.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label125.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
-  </data>
-  <data name="Label125.Text" xml:space="preserve">
-    <value>Feststoffdichte</value>
-  </data>
-  <data name="Label125.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label123.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 13</value>
-  </data>
-  <data name="Label123.Text" xml:space="preserve">
-    <value>Schmelztemperatur Tf</value>
-  </data>
-  <data name="Label123.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label124.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 13</value>
-  </data>
-  <data name="Label124.Text" xml:space="preserve">
-    <value>Schmelzenthalpie @ Tf</value>
-  </data>
-  <data name="Label124.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Feststoff / Ausfällung</value>
-  </data>
-  <data name="GroupBox12.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label126.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label113.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label112.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecHeatCapacityForm.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecEnthForm.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecGibbsEnergyForm.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label120.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 13</value>
-  </data>
-  <data name="Label120.Text" xml:space="preserve">
-    <value>Gibbs Bildungsenthalpie</value>
-  </data>
-  <data name="Label120.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label121.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
-  </data>
-  <data name="Label121.Text" xml:space="preserve">
-    <value>Bildungsenthalpie</value>
-  </data>
-  <data name="Label121.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label122.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="Label122.Text" xml:space="preserve">
-    <value>Wärmekapazität</value>
-  </data>
-  <data name="Label122.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Bildungsenergieen @ 298 K / 25 °C</value>
-  </data>
-  <data name="GroupBox9.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbElecIonCharge.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label127.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
-  </data>
-  <data name="Label127.Text" xml:space="preserve">
-    <value>Ladung Ion</value>
-  </data>
-  <data name="Label127.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbEsteqCoeffNegIon.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbEsteqCoeffPosIon.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbHydrNumber.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbNegativeIonFormula.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbPositiveIonFormula.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label114.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 13</value>
-  </data>
-  <data name="Label114.Text" xml:space="preserve">
-    <value>Typ</value>
-  </data>
-  <data name="Label114.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbIon.Text" xml:space="preserve">
-    <value>Ion</value>
-  </data>
-  <data name="rbIon.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbSalt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 17</value>
-  </data>
-  <data name="rbSalt.Text" xml:space="preserve">
-    <value>Salz</value>
-  </data>
-  <data name="rbSalt.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbHydratedSalt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
-  </data>
-  <data name="rbHydratedSalt.Text" xml:space="preserve">
-    <value>Hydratsalz</value>
-  </data>
-  <data name="rbHydratedSalt.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label115.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 13</value>
-  </data>
-  <data name="Label115.Text" xml:space="preserve">
-    <value>Formel Kation (pos.)</value>
-  </data>
-  <data name="Label115.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label116.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
-  </data>
-  <data name="Label116.Text" xml:space="preserve">
-    <value>Formel Anion (neg.)</value>
-  </data>
-  <data name="Label116.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label117.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="Label117.Text" xml:space="preserve">
-    <value>Hydratzahl</value>
-  </data>
-  <data name="Label117.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label119.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 13</value>
-  </data>
-  <data name="Label119.Text" xml:space="preserve">
-    <value>Stöchiometrischer Koeffizient Anion</value>
-  </data>
-  <data name="Label119.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label118.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 13</value>
-  </data>
-  <data name="Label118.Text" xml:space="preserve">
-    <value>Stöchiometrischer Koeffizient Kation</value>
-  </data>
-  <data name="Label118.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>Molekül</value>
-  </data>
-  <data name="GroupBox10.ToolTip" xml:space="preserve">
-    <value />
+  <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
   </data>
   <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>895, 431</value>
+    <value>1651, 692</value>
   </data>
   <data name="FaTabStripItemEL.Title" xml:space="preserve">
     <value>Elektrolyt/Salz</value>
   </data>
-  <data name="FaTabStripItemEL.ToolTip" xml:space="preserve">
-    <value />
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
   </data>
-  <data name="TBUnifac.ToolTip" xml:space="preserve">
-    <value />
+  <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
   </data>
-  <data name="PicUNIFAC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>Eigenschaften</value>
+  </data>
+  <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem7.Title" xml:space="preserve">
+    <value>Dampfdruck</value>
+  </data>
+  <data name="FaTabStripItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem8.Title" xml:space="preserve">
+    <value>Wärmekapazität</value>
+  </data>
+  <data name="FaTabStripItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem9.Title" xml:space="preserve">
+    <value>Flüssigkeitsdichte</value>
+  </data>
+  <data name="FaTabStripItem10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem10.Title" xml:space="preserve">
+    <value>Viskositat Flüssigkeit</value>
+  </data>
+  <data name="FaTabStripItem11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1651, 692</value>
+  </data>
+  <data name="FaTabStripItem11.Title" xml:space="preserve">
+    <value>Feststoff</value>
+  </data>
+  <data name="FaTabStrip2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 61</value>
+  </data>
+  <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1653, 717</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FaTabStrip2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 318</value>
+  </data>
+  <data name="TextBoxComments.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1555, 144</value>
+  </data>
+  <data name="Label94.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 318</value>
+  </data>
+  <data name="Label94.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label94.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 17</value>
+  </data>
+  <data name="Label94.Text" xml:space="preserve">
+    <value>Bemerkungen</value>
+  </data>
+  <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 21</value>
+  </data>
+  <data name="LinkLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 22</value>
+  </data>
+  <data name="LinkLabel1.Text" xml:space="preserve">
+    <value>CAS Nummer</value>
+  </data>
+  <data name="btnRenderSMILES.Location" type="System.Drawing.Point, System.Drawing">
+    <value>871, 14</value>
+  </data>
+  <data name="btnRenderSMILES.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRenderSMILES.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 30</value>
+  </data>
+  <data name="LinkPubChem.Location" type="System.Drawing.Point, System.Drawing">
+    <value>451, 55</value>
+  </data>
+  <data name="LinkPubChem.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LinkPubChem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 22</value>
+  </data>
+  <data name="TextBoxSMILES.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 17</value>
+  </data>
+  <data name="TextBoxSMILES.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxSMILES.Size" type="System.Drawing.Size, System.Drawing">
+    <value>451, 24</value>
+  </data>
+  <data name="TextBoxCAS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 17</value>
+  </data>
+  <data name="TextBoxCAS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxCAS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 24</value>
+  </data>
+  <data name="Label51.Location" type="System.Drawing.Point, System.Drawing">
+    <value>332, 21</value>
+  </data>
+  <data name="Label51.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label51.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 17</value>
+  </data>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 92</value>
+  </data>
+  <data name="Label21.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="Label21.Text" xml:space="preserve">
+    <value>Formel</value>
+  </data>
+  <data name="Label47.Location" type="System.Drawing.Point, System.Drawing">
+    <value>332, 56</value>
+  </data>
+  <data name="Label47.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label47.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="TextBoxFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 88</value>
+  </data>
+  <data name="TextBoxFormula.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxFormula.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 24</value>
+  </data>
+  <data name="pbRender.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 89</value>
+  </data>
+  <data name="pbRender.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1333, 217</value>
+  </data>
+  <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 56</value>
+  </data>
+  <data name="Label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Molgewicht</value>
+  </data>
+  <data name="TextBoxMW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 52</value>
+  </data>
+  <data name="TextBoxMW.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxMW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 24</value>
+  </data>
+  <data name="lblMW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 56</value>
+  </data>
+  <data name="lblMW.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblMW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="CheckBoxMW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 56</value>
+  </data>
+  <data name="CheckBoxMW.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxMW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>427, 8</value>
+  </data>
+  <data name="GroupBox8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox8.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>537, 222</value>
+  </data>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Optionale Daten</value>
+  </data>
+  <data name="lblBOT1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>509, 35</value>
+  </data>
+  <data name="lblBOT1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblBOT1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="lblBOT2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>508, 71</value>
+  </data>
+  <data name="lblBOT2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblBOT2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="tbBOT1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>419, 31</value>
+  </data>
+  <data name="tbBOT1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOT1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="tbBOT2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>419, 67</value>
+  </data>
+  <data name="tbBOT2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOT2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="lblBOVisc1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>353, 35</value>
+  </data>
+  <data name="lblBOVisc1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblBOVisc1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
+  </data>
+  <data name="lblBOVisc2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>353, 72</value>
+  </data>
+  <data name="lblBOVisc2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblBOVisc2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
+  </data>
+  <data name="tbBOV1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 31</value>
+  </data>
+  <data name="tbBOV1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOV1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="tbBOV2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 67</value>
+  </data>
+  <data name="tbBOV2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOV2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="Label108.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 106</value>
+  </data>
+  <data name="Label108.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label108.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 17</value>
+  </data>
+  <data name="tbBOPNAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 102</value>
+  </data>
+  <data name="tbBOPNAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOPNAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="Label107.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 141</value>
+  </data>
+  <data name="Label107.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label107.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 17</value>
+  </data>
+  <data name="tbBOPNAN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 137</value>
+  </data>
+  <data name="tbBOPNAN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOPNAN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="Label106.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 177</value>
+  </data>
+  <data name="Label106.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label106.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 17</value>
+  </data>
+  <data name="tbBOPNAA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 173</value>
+  </data>
+  <data name="tbBOPNAA.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOPNAA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="Label105.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 177</value>
+  </data>
+  <data name="Label105.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label105.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 17</value>
+  </data>
+  <data name="Label105.Text" xml:space="preserve">
+    <value>PNA Analyse, Aromaten</value>
+  </data>
+  <data name="Label104.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 141</value>
+  </data>
+  <data name="Label104.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label104.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 17</value>
+  </data>
+  <data name="Label104.Text" xml:space="preserve">
+    <value>PNA Analyse, Naphthene</value>
+  </data>
+  <data name="Label103.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 106</value>
+  </data>
+  <data name="Label103.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label103.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 17</value>
+  </data>
+  <data name="Label103.Text" xml:space="preserve">
+    <value>PNA Analyse, Paraffine</value>
+  </data>
+  <data name="Label96.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 71</value>
+  </data>
+  <data name="Label96.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label96.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="Label96.Text" xml:space="preserve">
+    <value>Ölviscosität 2</value>
+  </data>
+  <data name="Label95.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 37</value>
+  </data>
+  <data name="Label95.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label95.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="Label95.Text" xml:space="preserve">
+    <value>Ölviscosität 1</value>
+  </data>
+  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="GroupBox7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>411, 222</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Benötigte Daten</value>
+  </data>
+  <data name="Label102.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 143</value>
+  </data>
+  <data name="Label102.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label102.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 17</value>
+  </data>
+  <data name="lblBORGO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 107</value>
+  </data>
+  <data name="lblBORGO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblBORGO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 17</value>
+  </data>
+  <data name="tbBOBSW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 139</value>
+  </data>
+  <data name="tbBOBSW.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOBSW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="tbBOGOR.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 103</value>
+  </data>
+  <data name="tbBOGOR.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOGOR.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="tbBOSGO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 68</value>
+  </data>
+  <data name="tbBOSGO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOSGO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="tbBOSGG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 33</value>
+  </data>
+  <data name="tbBOSGG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbBOSGG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="Label99.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 72</value>
+  </data>
+  <data name="Label99.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label99.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 17</value>
+  </data>
+  <data name="Label99.Text" xml:space="preserve">
+    <value>Spezifische Öldichte</value>
+  </data>
+  <data name="Label100.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 37</value>
+  </data>
+  <data name="Label100.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label100.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
+  </data>
+  <data name="Label100.Text" xml:space="preserve">
+    <value>spezifische Gasdichte</value>
+  </data>
+  <data name="Label98.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 143</value>
+  </data>
+  <data name="Label98.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label98.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 17</value>
+  </data>
+  <data name="Label97.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 107</value>
+  </data>
+  <data name="Label97.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label97.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 17</value>
+  </data>
+  <data name="Label97.Text" xml:space="preserve">
+    <value>Gas-Öl Verhältnis @ SC</value>
+  </data>
+  <data name="GroupBox12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>596, 9</value>
+  </data>
+  <data name="GroupBox12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox12.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 152</value>
+  </data>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Feststoff / Ausfällung</value>
+  </data>
+  <data name="Label111.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 69</value>
+  </data>
+  <data name="Label111.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label111.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="Label110.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 34</value>
+  </data>
+  <data name="Label110.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label110.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 17</value>
+  </data>
+  <data name="Label109.Location" type="System.Drawing.Point, System.Drawing">
+    <value>485, 105</value>
+  </data>
+  <data name="Label109.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label109.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 17</value>
+  </data>
+  <data name="tbElecSolidDensT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>412, 101</value>
+  </data>
+  <data name="tbElecSolidDensT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecSolidDensT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 24</value>
+  </data>
+  <data name="Label101.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 105</value>
+  </data>
+  <data name="Label101.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label101.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="tbElecSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 101</value>
+  </data>
+  <data name="tbElecSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="tbElecEnthFusion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 65</value>
+  </data>
+  <data name="tbElecEnthFusion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecEnthFusion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="tbElecSolidTf.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 30</value>
+  </data>
+  <data name="tbElecSolidTf.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecSolidTf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="Label125.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 105</value>
+  </data>
+  <data name="Label125.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label125.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 17</value>
+  </data>
+  <data name="Label125.Text" xml:space="preserve">
+    <value>Feststoffdichte</value>
+  </data>
+  <data name="Label123.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 34</value>
+  </data>
+  <data name="Label123.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label123.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 17</value>
+  </data>
+  <data name="Label123.Text" xml:space="preserve">
+    <value>Schmelztemperatur Tf</value>
+  </data>
+  <data name="Label124.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 69</value>
+  </data>
+  <data name="Label124.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label124.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 17</value>
+  </data>
+  <data name="Label124.Text" xml:space="preserve">
+    <value>Schmelzenthalpie @ Tf</value>
+  </data>
+  <data name="GroupBox9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>596, 163</value>
+  </data>
+  <data name="GroupBox9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox9.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 150</value>
+  </data>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Bildungsenergieen @ 298 K / 25 °C</value>
+  </data>
+  <data name="Label126.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 111</value>
+  </data>
+  <data name="Label126.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label126.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 17</value>
+  </data>
+  <data name="Label113.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 76</value>
+  </data>
+  <data name="Label113.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label113.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="Label112.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 41</value>
+  </data>
+  <data name="Label112.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label112.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="tbElecHeatCapacityForm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 107</value>
+  </data>
+  <data name="tbElecHeatCapacityForm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecHeatCapacityForm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="tbElecEnthForm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 72</value>
+  </data>
+  <data name="tbElecEnthForm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecEnthForm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="tbElecGibbsEnergyForm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 37</value>
+  </data>
+  <data name="tbElecGibbsEnergyForm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecGibbsEnergyForm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="Label120.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 41</value>
+  </data>
+  <data name="Label120.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label120.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 17</value>
+  </data>
+  <data name="Label120.Text" xml:space="preserve">
+    <value>Gibbs Bildungsenthalpie</value>
+  </data>
+  <data name="Label121.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 76</value>
+  </data>
+  <data name="Label121.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label121.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 17</value>
+  </data>
+  <data name="Label121.Text" xml:space="preserve">
+    <value>Bildungsenthalpie</value>
+  </data>
+  <data name="Label122.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 111</value>
+  </data>
+  <data name="Label122.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label122.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 17</value>
+  </data>
+  <data name="Label122.Text" xml:space="preserve">
+    <value>Wärmekapazität</value>
+  </data>
+  <data name="GroupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 9</value>
+  </data>
+  <data name="GroupBox10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox10.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 305</value>
+  </data>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Molekül</value>
+  </data>
+  <data name="tbElecIonCharge.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 246</value>
+  </data>
+  <data name="tbElecIonCharge.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbElecIonCharge.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="Label127.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 250</value>
+  </data>
+  <data name="Label127.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label127.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
+  </data>
+  <data name="Label127.Text" xml:space="preserve">
+    <value>Ladung Ion</value>
+  </data>
+  <data name="tbEsteqCoeffNegIon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 211</value>
+  </data>
+  <data name="tbEsteqCoeffNegIon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbEsteqCoeffNegIon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="tbEsteqCoeffPosIon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 175</value>
+  </data>
+  <data name="tbEsteqCoeffPosIon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbEsteqCoeffPosIon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="tbHydrNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 140</value>
+  </data>
+  <data name="tbHydrNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbHydrNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="tbNegativeIonFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 105</value>
+  </data>
+  <data name="tbNegativeIonFormula.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbNegativeIonFormula.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 24</value>
+  </data>
+  <data name="tbPositiveIonFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 69</value>
+  </data>
+  <data name="tbPositiveIonFormula.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbPositiveIonFormula.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 24</value>
+  </data>
+  <data name="Label114.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 34</value>
+  </data>
+  <data name="Label114.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label114.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 17</value>
+  </data>
+  <data name="Label114.Text" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="rbIon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 31</value>
+  </data>
+  <data name="rbIon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbIon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 21</value>
+  </data>
+  <data name="rbIon.Text" xml:space="preserve">
+    <value>Ion</value>
+  </data>
+  <data name="rbSalt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 31</value>
+  </data>
+  <data name="rbSalt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbSalt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 21</value>
+  </data>
+  <data name="rbSalt.Text" xml:space="preserve">
+    <value>Salz</value>
+  </data>
+  <data name="rbHydratedSalt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>439, 31</value>
+  </data>
+  <data name="rbHydratedSalt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbHydratedSalt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
+  </data>
+  <data name="rbHydratedSalt.Text" xml:space="preserve">
+    <value>Hydratsalz</value>
+  </data>
+  <data name="Label115.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 73</value>
+  </data>
+  <data name="Label115.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label115.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 17</value>
+  </data>
+  <data name="Label115.Text" xml:space="preserve">
+    <value>Formel Kation (pos.)</value>
+  </data>
+  <data name="Label116.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 109</value>
+  </data>
+  <data name="Label116.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label116.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 17</value>
+  </data>
+  <data name="Label116.Text" xml:space="preserve">
+    <value>Formel Anion (neg.)</value>
+  </data>
+  <data name="Label117.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 144</value>
+  </data>
+  <data name="Label117.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label117.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="Label117.Text" xml:space="preserve">
+    <value>Hydratzahl</value>
+  </data>
+  <data name="Label119.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 214</value>
+  </data>
+  <data name="Label119.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label119.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 17</value>
+  </data>
+  <data name="Label119.Text" xml:space="preserve">
+    <value>Stöchiometrischer Koeffizient Anion</value>
+  </data>
+  <data name="Label118.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 179</value>
+  </data>
+  <data name="Label118.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label118.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 17</value>
+  </data>
+  <data name="Label118.Text" xml:space="preserve">
+    <value>Stöchiometrischer Koeffizient Kation</value>
+  </data>
+  <data name="TBUnifac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>953, 318</value>
+  </data>
+  <data name="TBUnifac.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TBUnifac.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 151</value>
+  </data>
+  <data name="PicUNIFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>953, 47</value>
+  </data>
+  <data name="PicUNIFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="PicUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 262</value>
+  </data>
+  <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>648, 21</value>
+  </data>
+  <data name="LinkLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 22</value>
   </data>
   <data name="LinkLabel2.ToolTip" xml:space="preserve">
     <value>Aufruf der Dortmund-Dataenbank zur Unterstützung bei der UNIFAC-Gruppenzuordnung.</value>
   </data>
+  <data name="Label60.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 21</value>
+  </data>
+  <data name="Label60.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
   <data name="Label60.Size" type="System.Drawing.Size, System.Drawing">
-    <value>446, 13</value>
+    <value>559, 17</value>
   </data>
   <data name="Label60.Text" xml:space="preserve">
     <value>Tragen Sie die Anzahl aller UNIFAC Gruppen der Komponentenstruktur ein, falls vorhanden.</value>
   </data>
-  <data name="Label60.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GridUNIFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 47</value>
   </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Anzahl</value>
+  <data name="GridUNIFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="GridUNIFAC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GridUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>920, 625</value>
   </data>
-  <data name="FaTabStripItem2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LinkLabel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>645, 21</value>
   </data>
-  <data name="TBModfac.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LinkLabel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="PicMODFAC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 22</value>
   </data>
-  <data name="DataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
-    <value>Anzahl</value>
+  <data name="TBModfac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>953, 318</value>
   </data>
-  <data name="GridMODFAC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TBModfac.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TBModfac.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 151</value>
+  </data>
+  <data name="PicMODFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>953, 47</value>
+  </data>
+  <data name="PicMODFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="PicMODFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 262</value>
+  </data>
+  <data name="GridMODFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 47</value>
+  </data>
+  <data name="GridMODFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridMODFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>920, 625</value>
+  </data>
+  <data name="Label85.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 21</value>
+  </data>
+  <data name="Label85.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label85.Size" type="System.Drawing.Size, System.Drawing">
-    <value>451, 13</value>
+    <value>567, 17</value>
   </data>
   <data name="Label85.Text" xml:space="preserve">
     <value>Tragen Sie die Anzahl aller MODFAC Gruppen der Komponentenstruktur ein, falls vorhanden.</value>
   </data>
-  <data name="Label85.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TbNISTMODFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>953, 318</value>
   </data>
-  <data name="FaTabStripItem5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TbNISTMODFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="TbNISTMODFAC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TbNISTMODFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 151</value>
   </data>
-  <data name="PicNISTMODFAC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="PicNISTMODFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>953, 47</value>
   </data>
-  <data name="DataGridViewImageColumn1.HeaderText" xml:space="preserve">
-    <value>Beispiel</value>
+  <data name="PicNISTMODFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="GridNISTMODFAC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="PicNISTMODFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 262</value>
   </data>
-  <data name="FaTabStripItem6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GridNISTMODFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 47</value>
+  </data>
+  <data name="GridNISTMODFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridNISTMODFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>920, 625</value>
+  </data>
+  <data name="Label58.Location" type="System.Drawing.Point, System.Drawing">
+    <value>868, 81</value>
+  </data>
+  <data name="Label58.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label58.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 13</value>
+    <value>145, 17</value>
   </data>
   <data name="Label58.Text" xml:space="preserve">
     <value>Atom Anzahl zusätzlich</value>
   </data>
-  <data name="Label58.ToolTip" xml:space="preserve">
-    <value />
+  <data name="AddAtomDataGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>872, 102</value>
+  </data>
+  <data name="AddAtomDataGrid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="AddAtomDataGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 567</value>
   </data>
   <data name="Atom.HeaderText" xml:space="preserve">
     <value>Atom</value>
@@ -724,23 +1326,38 @@
   <data name="Count.HeaderText" xml:space="preserve">
     <value>Anzahl</value>
   </data>
-  <data name="AddAtomDataGrid.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 12</value>
+  </data>
+  <data name="TextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>623, 45</value>
   </data>
   <data name="TextBox1.Text" xml:space="preserve">
     <value>Achtung! Die Definition von zusätzlichen Jobackgruppen oder Atomen wird die  Verwendung der UNIFAC/MODFAC Pakete verhindern!</value>
   </data>
-  <data name="TextBox1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label59.Location" type="System.Drawing.Point, System.Drawing">
+    <value>685, 81</value>
+  </data>
+  <data name="Label59.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label59.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 13</value>
+    <value>134, 17</value>
   </data>
   <data name="Label59.Text" xml:space="preserve">
     <value>Atom Anzahl UNIFAC</value>
   </data>
-  <data name="Label59.ToolTip" xml:space="preserve">
-    <value />
+  <data name="AtomDataGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>689, 102</value>
+  </data>
+  <data name="AtomDataGrid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="AtomDataGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 567</value>
   </data>
   <data name="ColAtom.HeaderText" xml:space="preserve">
     <value>Atom</value>
@@ -748,33 +1365,50 @@
   <data name="ColCount.HeaderText" xml:space="preserve">
     <value>Anzahl</value>
   </data>
-  <data name="AtomDataGrid.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LinkLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>696, 12</value>
+  </data>
+  <data name="LinkLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LinkLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 22</value>
   </data>
   <data name="LinkLabel3.ToolTip" xml:space="preserve">
     <value>Aufruf der Chemeo-Dataenbank zur Unterstützung bei der Joback-Gruppenzuordnung.</value>
   </data>
+  <data name="Label57.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 81</value>
+  </data>
+  <data name="Label57.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
   <data name="Label57.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 13</value>
+    <value>629, 17</value>
   </data>
   <data name="Label57.Text" xml:space="preserve">
     <value>Tragen Sie die Anzahl aller zusätzlicher Joback Gruppen der Komponentenstruktur ein, falls vorhanden.</value>
   </data>
-  <data name="Label57.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GridJoback.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 102</value>
+  </data>
+  <data name="GridJoback.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridJoback.Size" type="System.Drawing.Size, System.Drawing">
+    <value>657, 567</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Typ</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Column2.Width" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>38</value>
   </data>
   <data name="ColumnGroupName.HeaderText" xml:space="preserve">
     <value>Gruppe</value>
   </data>
   <data name="ColumnGroupName.Width" type="System.Int32, mscorlib">
-    <value>48</value>
+    <value>59</value>
   </data>
   <data name="ColumnCountUNIFAC.HeaderText" xml:space="preserve">
     <value>Anzahl UNIFAC</value>
@@ -788,1265 +1422,2369 @@
   <data name="ColumnCountJoback.ToolTipText" xml:space="preserve">
     <value>Anzahl zusätzlicher Joback-Gruppen welche nicht bereits als UNIFAC-Untergruppe definiert sind.</value>
   </data>
-  <data name="GridJoback.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1016, 17</value>
   </data>
-  <data name="FaTabStripItem3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="LabelWithDivider8.Text" xml:space="preserve">
-    <value>Attraktions-Parameter</value>
+  <data name="GroupBox6.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="LabelWithDivider8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TextBoxPCSAFTEpsilon.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label20.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LabelWithDivider9.Text" xml:space="preserve">
-    <value>Segment Nummer</value>
-  </data>
-  <data name="LabelWithDivider9.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TextBoxPCSAFTm.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label25.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LabelWithDivider10.Text" xml:space="preserve">
-    <value>Segment Durchmesser</value>
-  </data>
-  <data name="LabelWithDivider10.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TextBoxPCSAFTSigma.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label27.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 267</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>PC-SAFT Parameter</value>
   </data>
-  <data name="GroupBox6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelWithDivider8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 146</value>
   </data>
-  <data name="TextBoxUNIQUAC_R.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelWithDivider8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label48.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelWithDivider8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 24</value>
   </data>
-  <data name="TextBoxUNIQUAC_Q.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelWithDivider8.Text" xml:space="preserve">
+    <value>Attraktions-Parameter</value>
   </data>
-  <data name="Label49.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxPCSAFTEpsilon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 174</value>
+  </data>
+  <data name="TextBoxPCSAFTEpsilon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxPCSAFTEpsilon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 24</value>
+  </data>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 178</value>
+  </data>
+  <data name="Label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 17</value>
+  </data>
+  <data name="LabelWithDivider9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 89</value>
+  </data>
+  <data name="LabelWithDivider9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 24</value>
+  </data>
+  <data name="LabelWithDivider9.Text" xml:space="preserve">
+    <value>Segment Nummer</value>
+  </data>
+  <data name="TextBoxPCSAFTm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 116</value>
+  </data>
+  <data name="TextBoxPCSAFTm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxPCSAFTm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 24</value>
+  </data>
+  <data name="Label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 120</value>
+  </data>
+  <data name="Label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 17</value>
+  </data>
+  <data name="LabelWithDivider10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 31</value>
+  </data>
+  <data name="LabelWithDivider10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 24</value>
+  </data>
+  <data name="LabelWithDivider10.Text" xml:space="preserve">
+    <value>Segment Durchmesser</value>
+  </data>
+  <data name="TextBoxPCSAFTSigma.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 59</value>
+  </data>
+  <data name="TextBoxPCSAFTSigma.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxPCSAFTSigma.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 24</value>
+  </data>
+  <data name="Label27.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 63</value>
+  </data>
+  <data name="Label27.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="CheckBoxAF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>947, 277</value>
+  </data>
+  <data name="CheckBoxAF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxAF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="CheckBoxCSLV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>585, 277</value>
+  </data>
+  <data name="CheckBoxCSLV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxCSLV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1016, 292</value>
+  </data>
+  <data name="GroupBox11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox11.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 118</value>
   </data>
   <data name="GroupBox11.Text" xml:space="preserve">
     <value>UNIQUAC Parameter</value>
   </data>
-  <data name="GroupBox11.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxUNIQUAC_R.Location" type="System.Drawing.Point, System.Drawing">
+    <value>56, 68</value>
+  </data>
+  <data name="TextBoxUNIQUAC_R.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxUNIQUAC_R.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 24</value>
+  </data>
+  <data name="Label48.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 72</value>
+  </data>
+  <data name="Label48.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label48.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="TextBoxUNIQUAC_Q.Location" type="System.Drawing.Point, System.Drawing">
+    <value>56, 27</value>
+  </data>
+  <data name="TextBoxUNIQUAC_Q.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxUNIQUAC_Q.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 24</value>
+  </data>
+  <data name="Label49.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 31</value>
+  </data>
+  <data name="Label49.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label49.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="LabelWithDivider12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 17</value>
+  </data>
+  <data name="LabelWithDivider12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 24</value>
   </data>
   <data name="LabelWithDivider12.Text" xml:space="preserve">
     <value>Bildungseigenschaften</value>
   </data>
-  <data name="LabelWithDivider12.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelWithDivider2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 17</value>
+  </data>
+  <data name="LabelWithDivider2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 24</value>
   </data>
   <data name="LabelWithDivider2.Text" xml:space="preserve">
     <value>Kritische Temperatur</value>
   </data>
-  <data name="LabelWithDivider2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxZRa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>947, 220</value>
+  </data>
+  <data name="CheckBoxZRa.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxZRa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="CheckBoxCSSP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>585, 242</value>
+  </data>
+  <data name="CheckBoxCSSP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxCSSP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="Label50.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 44</value>
+  </data>
+  <data name="Label50.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label50.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 13</value>
+    <value>229, 17</value>
   </data>
   <data name="Label50.Text" xml:space="preserve">
     <value>Bildungsenthalpy (Ideales Gas, 25 C)</value>
   </data>
-  <data name="Label50.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 47</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="TextBoxDHF.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 17</value>
   </data>
-  <data name="lblDHF.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxCSAF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>585, 207</value>
   </data>
-  <data name="TextBoxTc.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxCSAF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxCSAF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="TextBoxDHF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 41</value>
+  </data>
+  <data name="TextBoxDHF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxDHF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="CheckBoxZc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>947, 162</value>
+  </data>
+  <data name="CheckBoxZc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxZc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="CheckBoxNBP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>585, 144</value>
+  </data>
+  <data name="CheckBoxNBP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxNBP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="lblDHF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 44</value>
+  </data>
+  <data name="lblDHF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblDHF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="TextBoxTc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>725, 43</value>
+  </data>
+  <data name="TextBoxTc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxTc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 24</value>
+  </data>
+  <data name="CheckBoxDGF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>585, 78</value>
+  </data>
+  <data name="CheckBoxDGF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxDGF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="LabelWithDivider4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>689, 131</value>
+  </data>
+  <data name="LabelWithDivider4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 24</value>
   </data>
   <data name="LabelWithDivider4.Text" xml:space="preserve">
     <value>Kritische Kompressibilität</value>
   </data>
-  <data name="LabelWithDivider4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label53.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 78</value>
+  </data>
+  <data name="Label53.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label53.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 13</value>
+    <value>257, 17</value>
   </data>
   <data name="Label53.Text" xml:space="preserve">
     <value>Gibbs Bildungsenergie (Ideales Gas, 25 C)</value>
   </data>
-  <data name="Label53.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxPc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>947, 105</value>
   </data>
-  <data name="Label12.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxPc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="TextBoxDGF.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxPc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
   </data>
-  <data name="lblTc.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxDHF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>585, 44</value>
   </data>
-  <data name="Label68.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxDHF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="TextBoxZc.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxDHF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
   </data>
-  <data name="lblDGF.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 220</value>
   </data>
-  <data name="TextBoxVTCSRK.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="TextBoxZRa.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 17</value>
+  </data>
+  <data name="TextBoxDGF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 75</value>
+  </data>
+  <data name="TextBoxDGF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxDGF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="lblTc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>889, 47</value>
+  </data>
+  <data name="lblTc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblTc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="Label68.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 348</value>
+  </data>
+  <data name="Label68.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label68.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 17</value>
+  </data>
+  <data name="TextBoxZc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>725, 158</value>
+  </data>
+  <data name="TextBoxZc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxZc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 24</value>
+  </data>
+  <data name="lblDGF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 78</value>
+  </data>
+  <data name="lblDGF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblDGF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="CheckBoxTc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>947, 46</value>
+  </data>
+  <data name="CheckBoxTc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxTc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="TextBoxVTCSRK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 344</value>
+  </data>
+  <data name="TextBoxVTCSRK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxVTCSRK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="TextBoxZRa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>725, 216</value>
+  </data>
+  <data name="TextBoxZRa.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxZRa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 24</value>
+  </data>
+  <data name="Label56.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 144</value>
+  </data>
+  <data name="Label56.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label56.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 13</value>
+    <value>185, 17</value>
   </data>
   <data name="Label56.Text" xml:space="preserve">
     <value>Normaler Siedepunkt (1 atm)</value>
   </data>
-  <data name="Label56.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 105</value>
   </data>
-  <data name="Label8.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 17</value>
+  </data>
+  <data name="Text1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 348</value>
+  </data>
+  <data name="Text1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Text1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 13</value>
+    <value>227, 17</value>
   </data>
   <data name="Text1.Text" xml:space="preserve">
     <value>SRK Volumen-Translationskoeffizient</value>
   </data>
-  <data name="Text1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 162</value>
   </data>
-  <data name="Label11.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="TextBoxNBP.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 17</value>
+  </data>
+  <data name="TextBoxNBP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 140</value>
+  </data>
+  <data name="TextBoxNBP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxNBP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="LabelWithDivider6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 246</value>
+  </data>
+  <data name="LabelWithDivider6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 24</value>
   </data>
   <data name="LabelWithDivider6.Text" xml:space="preserve">
     <value>Azentrischer Faktor</value>
   </data>
-  <data name="LabelWithDivider6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label67.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 313</value>
   </data>
-  <data name="Label67.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label67.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label67.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 17</value>
+  </data>
+  <data name="LabelWithDivider5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 188</value>
+  </data>
+  <data name="LabelWithDivider5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 24</value>
   </data>
   <data name="LabelWithDivider5.Text" xml:space="preserve">
     <value>Rackett Parameter</value>
   </data>
-  <data name="LabelWithDivider5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblNBP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 144</value>
   </data>
-  <data name="lblNBP.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblNBP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="TextBoxPc.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblNBP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
-  <data name="Label66.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxPc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>725, 101</value>
+  </data>
+  <data name="TextBoxPc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxPc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 24</value>
+  </data>
+  <data name="Label66.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 277</value>
+  </data>
+  <data name="Label66.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label66.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 17</value>
+  </data>
+  <data name="LabelWithDivider3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 73</value>
+  </data>
+  <data name="LabelWithDivider3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 24</value>
   </data>
   <data name="LabelWithDivider3.Text" xml:space="preserve">
     <value>Kritischer Druck</value>
   </data>
-  <data name="LabelWithDivider3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelWithDivider13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 111</value>
+  </data>
+  <data name="LabelWithDivider13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 24</value>
   </data>
   <data name="LabelWithDivider13.Text" xml:space="preserve">
     <value>Normaler Siedepunkt</value>
   </data>
-  <data name="LabelWithDivider13.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxAF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>725, 273</value>
   </data>
-  <data name="TextBoxAF.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxAF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="TextBoxVTCPR.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxAF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 24</value>
   </data>
-  <data name="Label14.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxVTCPR.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 309</value>
+  </data>
+  <data name="TextBoxVTCPR.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxVTCPR.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>691, 277</value>
+  </data>
+  <data name="Label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="LabelWithDivider16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 174</value>
+  </data>
+  <data name="LabelWithDivider16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 24</value>
   </data>
   <data name="LabelWithDivider16.Text" xml:space="preserve">
     <value>Modellparameter</value>
   </data>
-  <data name="LabelWithDivider16.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblPc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>888, 105</value>
   </data>
-  <data name="lblPc.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblPc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="TextBoxCSLV.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblPc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 17</value>
+  </data>
+  <data name="TextBoxCSLV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 273</value>
+  </data>
+  <data name="TextBoxCSLV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxCSLV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="Label62.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 207</value>
+  </data>
+  <data name="Label62.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label62.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 13</value>
+    <value>207, 17</value>
   </data>
   <data name="Label62.Text" xml:space="preserve">
     <value>Chao-Seader azentrischer Faktor</value>
   </data>
-  <data name="Label62.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxCSSP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 238</value>
   </data>
-  <data name="TextBoxCSSP.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxCSSP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="TextBoxCSAF.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxCSSP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="TextBoxCSAF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 203</value>
+  </data>
+  <data name="TextBoxCSAF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxCSAF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="Label65.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 313</value>
+  </data>
+  <data name="Label65.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label65.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 13</value>
+    <value>295, 17</value>
   </data>
   <data name="Label65.Text" xml:space="preserve">
     <value>Peng-Robinson Volumen-Translationskoeffizient</value>
   </data>
-  <data name="Label65.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label61.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 242</value>
   </data>
-  <data name="Label61.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label61.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label61.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="Label64.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 277</value>
+  </data>
+  <data name="Label64.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label64.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 13</value>
+    <value>214, 17</value>
   </data>
   <data name="Label64.Text" xml:space="preserve">
     <value>Chao-Seader Molvolumen (flüssig)</value>
   </data>
-  <data name="Label64.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label63.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 242</value>
+  </data>
+  <data name="Label63.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label63.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 13</value>
+    <value>221, 17</value>
   </data>
   <data name="Label63.Text" xml:space="preserve">
     <value>Chao-Seader Löslichkeitsparameter</value>
   </data>
-  <data name="Label63.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FaTabStripItem4.Title" xml:space="preserve">
-    <value>Eigenschaften</value>
-  </data>
-  <data name="FaTabStripItem4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbUserDefEqPVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 65</value>
+    <value>320, 85</value>
   </data>
-  <data name="tbUserDefEqPVAP.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbUserDefEqPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbUserDefEqPVAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 24</value>
   </data>
   <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 224</value>
+    <value>316, 293</value>
+  </data>
+  <data name="Label43.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label43.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 13</value>
+    <value>126, 17</value>
   </data>
   <data name="Label43.Text" xml:space="preserve">
     <value>* Pvap in Pa, T in K</value>
   </data>
-  <data name="Label43.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbEstimatePVAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 21</value>
+  </data>
+  <data name="rbEstimatePVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbEstimatePVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 17</value>
+    <value>151, 21</value>
   </data>
   <data name="rbEstimatePVAP.Text" xml:space="preserve">
     <value>Schätze (Lee Kesler)</value>
   </data>
-  <data name="rbEstimatePVAP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbPVAP_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 196</value>
+    <value>343, 256</value>
   </data>
-  <data name="tbPVAP_E.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbPVAP_E.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbPVAP_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="rbRegressPVAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 51</value>
+  </data>
+  <data name="rbRegressPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbRegressPVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+    <value>189, 21</value>
   </data>
   <data name="rbRegressPVAP.Text" xml:space="preserve">
     <value>Regression Versuchsdaten</value>
   </data>
-  <data name="rbRegressPVAP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 199</value>
+    <value>319, 260</value>
   </data>
-  <data name="Label13.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="GridExpDataPVAP.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="GridExpDataPVAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 81</value>
+  </data>
+  <data name="GridExpDataPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridExpDataPVAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 214</value>
   </data>
   <data name="tbPVAP_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 170</value>
+    <value>343, 222</value>
   </data>
-  <data name="tbPVAP_D.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbPVAP_D.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbPVAP_D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="btnRegressPVAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 311</value>
+  </data>
+  <data name="btnRegressPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRegressPVAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
   </data>
   <data name="btnRegressPVAP.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
-  <data name="btnRegressPVAP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 173</value>
+    <value>319, 226</value>
   </data>
-  <data name="Label10.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="btnViewPVAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 311</value>
+  </data>
+  <data name="btnViewPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnViewPVAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 30</value>
   </data>
   <data name="btnViewPVAP.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
-  <data name="btnViewPVAP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbPVAP_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 144</value>
+    <value>343, 188</value>
   </data>
-  <data name="tbPVAP_C.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbPVAP_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbPVAP_C.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 353</value>
+  </data>
+  <data name="Label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 147</value>
+    <value>319, 192</value>
   </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="tbStatusPVAP.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="tbStatusPVAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 349</value>
+  </data>
+  <data name="tbStatusPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbStatusPVAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 24</value>
   </data>
   <data name="tbPVAP_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 118</value>
+    <value>343, 154</value>
   </data>
-  <data name="tbPVAP_B.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbPVAP_B.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbPVAP_B.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
   <data name="rbCoeffPVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 16</value>
+    <value>323, 21</value>
+  </data>
+  <data name="rbCoeffPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbCoeffPVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 17</value>
+    <value>193, 21</value>
   </data>
   <data name="rbCoeffPVAP.Text" xml:space="preserve">
     <value>Eingabe der Koeffizienten *</value>
   </data>
-  <data name="rbCoeffPVAP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 121</value>
+    <value>319, 158</value>
   </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
   <data name="cbEqPVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 38</value>
+    <value>397, 50</value>
+  </data>
+  <data name="cbEqPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cbEqPVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 21</value>
-  </data>
-  <data name="cbEqPVAP.ToolTip" xml:space="preserve">
-    <value />
+    <value>193, 25</value>
   </data>
   <data name="tbPVAP_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 92</value>
+    <value>343, 120</value>
   </data>
-  <data name="tbPVAP_A.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbPVAP_A.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbPVAP_A.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
   <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 41</value>
+    <value>319, 54</value>
+  </data>
+  <data name="Label30.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
+    <value>67, 17</value>
   </data>
   <data name="Label30.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
-  <data name="Label30.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 95</value>
+    <value>319, 124</value>
   </data>
-  <data name="Label29.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label29.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="FaTabStripItem7.Title" xml:space="preserve">
-    <value>Dampfdruck</value>
+  <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
-  <data name="FaTabStripItem7.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>672, 17</value>
   </data>
-  <data name="tbUserDefCPLEq.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label86.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label87.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 13</value>
-  </data>
-  <data name="Label87.Text" xml:space="preserve">
-    <value>* Cp in J/[kmol.K], T in K</value>
-  </data>
-  <data name="Label87.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbStatusCPLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label88.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCPLiquid_E.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label89.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="Label89.Text" xml:space="preserve">
-    <value>Gleichung</value>
-  </data>
-  <data name="Label89.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCPLiquid_A.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label90.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbEqCPLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnViewCPLiquid.Text" xml:space="preserve">
-    <value>Diagramm</value>
-  </data>
-  <data name="btnViewCPLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label91.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCPLiquid_D.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbCoeffCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 17</value>
-  </data>
-  <data name="rbCoeffCPLiquid.Text" xml:space="preserve">
-    <value>Eingabe der Koeffizienten*</value>
-  </data>
-  <data name="rbCoeffCPLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnRegressCPLiquid.Text" xml:space="preserve">
-    <value>Datenregression</value>
-  </data>
-  <data name="btnRegressCPLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCPLiquid_B.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label92.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label93.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GridExpDataCPLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbRegressCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
-  </data>
-  <data name="rbRegressCPLiquid.Text" xml:space="preserve">
-    <value>Regression Versuchsdaten</value>
-  </data>
-  <data name="rbRegressCPLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCPLiquid_C.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 452</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Cp (Flüssigkeit)</value>
   </data>
-  <data name="GroupBox5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbUserDefCPLEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 99</value>
   </data>
-  <data name="tbUserDefCPIGEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 66</value>
+  <data name="tbUserDefCPLEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbUserDefCPIGEq.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbUserDefCPLEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 24</value>
   </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label86.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 364</value>
   </data>
-  <data name="Label44.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 225</value>
+  <data name="Label86.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label44.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 13</value>
+  <data name="Label86.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
   </data>
-  <data name="Label44.Text" xml:space="preserve">
+  <data name="Label87.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 313</value>
+  </data>
+  <data name="Label87.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label87.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 17</value>
+  </data>
+  <data name="Label87.Text" xml:space="preserve">
     <value>* Cp in J/[kmol.K], T in K</value>
   </data>
-  <data name="Label44.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbStatusCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 360</value>
   </data>
-  <data name="rbEstimateCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 17</value>
+  <data name="tbStatusCPLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="rbEstimateCPIG.Text" xml:space="preserve">
-    <value>Schätze (Joback/UNIFAC)</value>
+  <data name="tbStatusCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 24</value>
   </data>
-  <data name="rbEstimateCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label88.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 144</value>
   </data>
-  <data name="tbStatusCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label88.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 96</value>
+  <data name="Label88.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
-  <data name="Label26.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_E.Location" type="System.Drawing.Point, System.Drawing">
+    <value>371, 276</value>
   </data>
-  <data name="tbCPIG_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 197</value>
+  <data name="tbCPLiquid_E.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbCPIG_E.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
-  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 42</value>
+  <data name="Label89.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 68</value>
   </data>
-  <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
+  <data name="Label89.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label28.Text" xml:space="preserve">
+  <data name="Label89.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="Label89.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
-  <data name="Label28.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_A.Location" type="System.Drawing.Point, System.Drawing">
+    <value>371, 140</value>
   </data>
-  <data name="tbCPIG_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 93</value>
+  <data name="tbCPLiquid_A.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbCPIG_A.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_A.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
-  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 200</value>
+  <data name="Label90.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 280</value>
   </data>
-  <data name="Label18.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label90.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="cbEqCPIG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 39</value>
+  <data name="Label90.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
-  <data name="cbEqCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 21</value>
+  <data name="cbEqCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>416, 64</value>
   </data>
-  <data name="cbEqCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbEqCPLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="btnViewCPIG.Text" xml:space="preserve">
+  <data name="cbEqCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 25</value>
+  </data>
+  <data name="btnViewCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 322</value>
+  </data>
+  <data name="btnViewCPLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnViewCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 30</value>
+  </data>
+  <data name="btnViewCPLiquid.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
-  <data name="btnViewCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label91.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 178</value>
   </data>
-  <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 122</value>
+  <data name="Label91.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label24.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label91.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
-  <data name="tbCPIG_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 171</value>
+  <data name="tbCPLiquid_D.Location" type="System.Drawing.Point, System.Drawing">
+    <value>371, 242</value>
   </data>
-  <data name="tbCPIG_D.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_D.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="rbCoeffCPIG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 16</value>
+  <data name="tbCPLiquid_D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
-  <data name="rbCoeffCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 17</value>
+  <data name="rbCoeffCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 31</value>
   </data>
-  <data name="rbCoeffCPIG.Text" xml:space="preserve">
-    <value>Eingabe der Koeffizienten *</value>
+  <data name="rbCoeffCPLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="rbCoeffCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbCoeffCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 21</value>
   </data>
-  <data name="btnRegressCPIG.Text" xml:space="preserve">
+  <data name="rbCoeffCPLiquid.Text" xml:space="preserve">
+    <value>Eingabe der Koeffizienten*</value>
+  </data>
+  <data name="btnRegressCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 322</value>
+  </data>
+  <data name="btnRegressCPLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRegressCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
+  </data>
+  <data name="btnRegressCPLiquid.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
-  <data name="btnRegressCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_B.Location" type="System.Drawing.Point, System.Drawing">
+    <value>371, 174</value>
   </data>
-  <data name="tbCPIG_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 119</value>
+  <data name="tbCPLiquid_B.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbCPIG_B.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_B.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
-  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 174</value>
+  <data name="Label92.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 246</value>
   </data>
-  <data name="Label19.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label92.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 148</value>
+  <data name="Label92.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
   </data>
-  <data name="Label23.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label93.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 212</value>
   </data>
-  <data name="GridExpDataCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label93.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="rbRegressCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+  <data name="Label93.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 17</value>
   </data>
-  <data name="rbRegressCPIG.Text" xml:space="preserve">
+  <data name="GridExpDataCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 64</value>
+  </data>
+  <data name="GridExpDataCPLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridExpDataCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 250</value>
+  </data>
+  <data name="rbRegressCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 31</value>
+  </data>
+  <data name="rbRegressCPLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbRegressCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 21</value>
+  </data>
+  <data name="rbRegressCPLiquid.Text" xml:space="preserve">
     <value>Regression Versuchsdaten</value>
   </data>
-  <data name="rbRegressCPIG.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_C.Location" type="System.Drawing.Point, System.Drawing">
+    <value>371, 208</value>
   </data>
-  <data name="tbCPIG_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 145</value>
+  <data name="tbCPLiquid_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbCPIG_C.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCPLiquid_C.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 17</value>
+  </data>
+  <data name="GroupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>655, 452</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Cp (Ideales Gas)</value>
   </data>
-  <data name="GroupBox4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbUserDefCPIGEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 86</value>
   </data>
-  <data name="FaTabStripItem8.Title" xml:space="preserve">
-    <value>Wärmekapazität</value>
+  <data name="tbUserDefCPIGEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="FaTabStripItem8.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbUserDefCPIGEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 24</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 364</value>
+  </data>
+  <data name="Label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
+  </data>
+  <data name="Label44.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 294</value>
+  </data>
+  <data name="Label44.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label44.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 17</value>
+  </data>
+  <data name="Label44.Text" xml:space="preserve">
+    <value>* Cp in J/[kmol.K], T in K</value>
+  </data>
+  <data name="rbEstimateCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 31</value>
+  </data>
+  <data name="rbEstimateCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbEstimateCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="rbEstimateCPIG.Text" xml:space="preserve">
+    <value>Schätze (Joback/UNIFAC)</value>
+  </data>
+  <data name="tbStatusCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 360</value>
+  </data>
+  <data name="tbStatusCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbStatusCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 24</value>
+  </data>
+  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 126</value>
+  </data>
+  <data name="Label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="tbCPIG_E.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 258</value>
+  </data>
+  <data name="tbCPIG_E.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCPIG_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 55</value>
+  </data>
+  <data name="Label28.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="Label28.Text" xml:space="preserve">
+    <value>Gleichung</value>
+  </data>
+  <data name="tbCPIG_A.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 122</value>
+  </data>
+  <data name="tbCPIG_A.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCPIG_A.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 262</value>
+  </data>
+  <data name="Label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="cbEqCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>397, 51</value>
+  </data>
+  <data name="cbEqCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cbEqCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 25</value>
+  </data>
+  <data name="btnViewCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 322</value>
+  </data>
+  <data name="btnViewCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnViewCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 30</value>
+  </data>
+  <data name="btnViewCPIG.Text" xml:space="preserve">
+    <value>Diagramm</value>
+  </data>
+  <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 160</value>
+  </data>
+  <data name="Label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="tbCPIG_D.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 224</value>
+  </data>
+  <data name="tbCPIG_D.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCPIG_D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="rbCoeffCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>320, 21</value>
+  </data>
+  <data name="rbCoeffCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbCoeffCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 21</value>
+  </data>
+  <data name="rbCoeffCPIG.Text" xml:space="preserve">
+    <value>Eingabe der Koeffizienten *</value>
+  </data>
+  <data name="btnRegressCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 322</value>
+  </data>
+  <data name="btnRegressCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRegressCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
+  </data>
+  <data name="btnRegressCPIG.Text" xml:space="preserve">
+    <value>Datenregression</value>
+  </data>
+  <data name="tbCPIG_B.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 156</value>
+  </data>
+  <data name="tbCPIG_B.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCPIG_B.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 228</value>
+  </data>
+  <data name="Label19.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 194</value>
+  </data>
+  <data name="Label23.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="GridExpDataCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 92</value>
+  </data>
+  <data name="GridExpDataCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridExpDataCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 222</value>
+  </data>
+  <data name="rbRegressCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 61</value>
+  </data>
+  <data name="rbRegressCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbRegressCPIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 21</value>
+  </data>
+  <data name="rbRegressCPIG.Text" xml:space="preserve">
+    <value>Regression Versuchsdaten</value>
+  </data>
+  <data name="tbCPIG_C.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 190</value>
+  </data>
+  <data name="tbCPIG_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCPIG_C.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
   <data name="tbUserDefDensLiqEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 66</value>
+    <value>319, 86</value>
   </data>
-  <data name="tbUserDefDensLiqEq.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbUserDefDensLiqEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbUserDefDensLiqEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 24</value>
   </data>
   <data name="Label45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 225</value>
+    <value>321, 294</value>
+  </data>
+  <data name="Label45.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 13</value>
+    <value>159, 17</value>
   </data>
   <data name="Label45.Text" xml:space="preserve">
     <value>* Dichte in kg/m3, T in K</value>
   </data>
-  <data name="Label45.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbEstimateLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 21</value>
+  </data>
+  <data name="rbEstimateLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbEstimateLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 17</value>
+    <value>138, 21</value>
   </data>
   <data name="rbEstimateLIQDENS.Text" xml:space="preserve">
     <value>Schätze (Rackett)</value>
   </data>
-  <data name="rbEstimateLIQDENS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbLIQDENS_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 197</value>
+    <value>345, 258</value>
   </data>
-  <data name="tbLIQDENS_E.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQDENS_E.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQDENS_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="rbRegressLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 51</value>
+  </data>
+  <data name="rbRegressLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbRegressLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+    <value>189, 21</value>
   </data>
   <data name="rbRegressLIQDENS.Text" xml:space="preserve">
     <value>Regression Versuchsdaten</value>
   </data>
-  <data name="rbRegressLIQDENS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 202</value>
+    <value>317, 264</value>
   </data>
-  <data name="Label31.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label31.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="GridExpDataLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 81</value>
+  </data>
+  <data name="GridExpDataLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="GridExpDataLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 170</value>
-  </data>
-  <data name="GridExpDataLIQDENS.ToolTip" xml:space="preserve">
-    <value />
+    <value>277, 222</value>
   </data>
   <data name="tbLIQDENS_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 171</value>
+    <value>345, 224</value>
   </data>
-  <data name="tbLIQDENS_D.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQDENS_D.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQDENS_D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="btnRegressLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 311</value>
+  </data>
+  <data name="btnRegressLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRegressLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
   </data>
   <data name="btnRegressLIQDENS.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
-  <data name="btnRegressLIQDENS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 176</value>
+    <value>317, 230</value>
   </data>
-  <data name="Label32.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label32.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="btnViewLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 311</value>
+  </data>
+  <data name="btnViewLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnViewLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 30</value>
   </data>
   <data name="btnViewLIQDENS.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
-  <data name="btnViewLIQDENS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbLIQDENS_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 145</value>
+    <value>345, 190</value>
   </data>
-  <data name="tbLIQDENS_C.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQDENS_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQDENS_C.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 353</value>
+  </data>
+  <data name="Label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
   </data>
   <data name="Label33.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 150</value>
+    <value>317, 196</value>
   </data>
-  <data name="Label33.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label33.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="tbStatusLIQDENS.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label33.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="tbStatusLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 349</value>
+  </data>
+  <data name="tbStatusLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbStatusLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 24</value>
   </data>
   <data name="tbLIQDENS_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 119</value>
+    <value>345, 156</value>
   </data>
-  <data name="tbLIQDENS_B.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQDENS_B.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQDENS_B.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
   <data name="rbCoeffLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 16</value>
+    <value>321, 21</value>
+  </data>
+  <data name="rbCoeffLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbCoeffLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 17</value>
+    <value>193, 21</value>
   </data>
   <data name="rbCoeffLIQDENS.Text" xml:space="preserve">
     <value>Eingabe der Koeffizienten *</value>
   </data>
-  <data name="rbCoeffLIQDENS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 124</value>
+    <value>317, 162</value>
   </data>
-  <data name="Label34.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label34.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
   <data name="cbEqLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 39</value>
+    <value>400, 51</value>
+  </data>
+  <data name="cbEqLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cbEqLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 21</value>
-  </data>
-  <data name="cbEqLIQDENS.ToolTip" xml:space="preserve">
-    <value />
+    <value>193, 25</value>
   </data>
   <data name="tbLIQDENS_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 93</value>
+    <value>345, 122</value>
   </data>
-  <data name="tbLIQDENS_A.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQDENS_A.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQDENS_A.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
   <data name="Label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 42</value>
+    <value>319, 55</value>
+  </data>
+  <data name="Label36.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
+    <value>67, 17</value>
   </data>
   <data name="Label36.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
-  <data name="Label36.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 98</value>
+    <value>317, 128</value>
   </data>
-  <data name="Label35.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label35.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="FaTabStripItem9.Title" xml:space="preserve">
-    <value>Flüssigkeitsdichte</value>
-  </data>
-  <data name="FaTabStripItem9.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label35.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
   <data name="tbUserDefLiqViscEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 65</value>
+    <value>316, 85</value>
   </data>
-  <data name="tbUserDefLiqViscEq.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbUserDefLiqViscEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbUserDefLiqViscEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 24</value>
   </data>
   <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 224</value>
+    <value>316, 293</value>
+  </data>
+  <data name="Label46.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
+    <value>128, 17</value>
   </data>
   <data name="Label46.Text" xml:space="preserve">
     <value>* Visc in Pa.s, T in K</value>
   </data>
-  <data name="Label46.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbEstimateLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 21</value>
+  </data>
+  <data name="rbEstimateLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbEstimateLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 17</value>
+    <value>161, 21</value>
   </data>
   <data name="rbEstimateLIQVISC.Text" xml:space="preserve">
     <value>Schätze (Letsou-Stiel)</value>
   </data>
-  <data name="rbEstimateLIQVISC.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbLIQVISC_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 196</value>
+    <value>343, 256</value>
   </data>
-  <data name="tbLIQVISC_E.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQVISC_E.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQVISC_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="rbRegressLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 51</value>
+  </data>
+  <data name="rbRegressLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbRegressLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+    <value>189, 21</value>
   </data>
   <data name="rbRegressLIQVISC.Text" xml:space="preserve">
     <value>Regression Versuchsdaten</value>
   </data>
-  <data name="rbRegressLIQVISC.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 202</value>
+    <value>316, 264</value>
   </data>
-  <data name="Label37.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label37.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="GridExpDataLIQVISC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label37.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
+  </data>
+  <data name="GridExpDataLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 81</value>
+  </data>
+  <data name="GridExpDataLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridExpDataLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 222</value>
   </data>
   <data name="tbLIQVISC_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 170</value>
+    <value>343, 222</value>
   </data>
-  <data name="tbLIQVISC_D.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQVISC_D.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQVISC_D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="btnRegressLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 311</value>
+  </data>
+  <data name="btnRegressLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRegressLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
   </data>
   <data name="btnRegressLIQVISC.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
-  <data name="btnRegressLIQVISC.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 176</value>
+    <value>316, 230</value>
   </data>
-  <data name="Label38.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label38.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label38.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="btnViewLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 311</value>
+  </data>
+  <data name="btnViewLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnViewLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 30</value>
   </data>
   <data name="btnViewLIQVISC.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
-  <data name="btnViewLIQVISC.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbLIQVISC_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 144</value>
+    <value>343, 188</value>
   </data>
-  <data name="tbLIQVISC_C.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQVISC_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label9.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQVISC_C.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 353</value>
+  </data>
+  <data name="Label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
   </data>
   <data name="Label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 150</value>
+    <value>316, 196</value>
   </data>
-  <data name="Label39.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label39.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="tbStatusLIQVISC.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label39.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="tbStatusLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 349</value>
+  </data>
+  <data name="tbStatusLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbStatusLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 24</value>
   </data>
   <data name="tbLIQVISC_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 118</value>
+    <value>343, 154</value>
   </data>
-  <data name="tbLIQVISC_B.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQVISC_B.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQVISC_B.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
   <data name="rbCoeffLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 16</value>
+    <value>320, 21</value>
+  </data>
+  <data name="rbCoeffLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rbCoeffLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 17</value>
+    <value>193, 21</value>
   </data>
   <data name="rbCoeffLIQVISC.Text" xml:space="preserve">
     <value>Eingabe der Koeffizienten *</value>
   </data>
-  <data name="rbCoeffLIQVISC.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 124</value>
+    <value>316, 162</value>
   </data>
-  <data name="Label40.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label40.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label40.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
   <data name="cbEqLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 38</value>
+    <value>397, 50</value>
+  </data>
+  <data name="cbEqLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cbEqLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 21</value>
-  </data>
-  <data name="cbEqLIQVISC.ToolTip" xml:space="preserve">
-    <value />
+    <value>193, 25</value>
   </data>
   <data name="tbLIQVISC_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 92</value>
+    <value>343, 120</value>
   </data>
-  <data name="tbLIQVISC_A.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbLIQVISC_A.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbLIQVISC_A.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 24</value>
   </data>
   <data name="Label42.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 41</value>
+    <value>316, 54</value>
+  </data>
+  <data name="Label42.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label42.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
+    <value>67, 17</value>
   </data>
   <data name="Label42.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
-  <data name="Label42.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 98</value>
+    <value>316, 128</value>
   </data>
-  <data name="Label41.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label41.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="FaTabStripItem10.Title" xml:space="preserve">
-    <value>Viskositat Flüssigkeit</value>
+  <data name="Label41.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
-  <data name="FaTabStripItem10.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelWithDivider7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 24</value>
+  </data>
+  <data name="LabelWithDivider7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>868, 26</value>
   </data>
   <data name="LabelWithDivider7.Text" xml:space="preserve">
     <value>Dichte / Wärmekapazität</value>
   </data>
-  <data name="LabelWithDivider7.ToolTip" xml:space="preserve">
-    <value />
+  <data name="gbCPs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>453, 54</value>
   </data>
-  <data name="Label84.ToolTip" xml:space="preserve">
-    <value />
+  <data name="gbCPs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbStatusSolidCp.ToolTip" xml:space="preserve">
-    <value />
+  <data name="gbCPs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="btnRegressSolidCp.Text" xml:space="preserve">
-    <value>Datenregression</value>
-  </data>
-  <data name="btnRegressSolidCp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnViewSolidCp.Text" xml:space="preserve">
-    <value>Diagramm</value>
-  </data>
-  <data name="btnViewSolidCp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbCoeffSolidCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 17</value>
-  </data>
-  <data name="rbCoeffSolidCp.Text" xml:space="preserve">
-    <value>Eingabe der Koeffizienten *</value>
-  </data>
-  <data name="rbCoeffSolidCp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbRegressSolidCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
-  </data>
-  <data name="rbRegressSolidCp.Text" xml:space="preserve">
-    <value>Regression Versuchsdaten</value>
-  </data>
-  <data name="rbRegressSolidCp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GridExpDataCpS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label75.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCpS_E.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label73.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCpS_D.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label72.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCpS_C.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label71.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCpS_B.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label70.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label69.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbCpS_A.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbEqCpS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label74.Text" xml:space="preserve">
-    <value>Gleichung</value>
-  </data>
-  <data name="Label74.ToolTip" xml:space="preserve">
-    <value />
+  <data name="gbCPs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 418</value>
   </data>
   <data name="gbCPs.Text" xml:space="preserve">
     <value>Wärmekapazität (Feststoff)</value>
   </data>
-  <data name="gbCPs.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label84.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 324</value>
   </data>
-  <data name="rbEstimateSolidDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 17</value>
+  <data name="Label84.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="rbEstimateSolidDens.Text" xml:space="preserve">
-    <value>Schätze (DWSIM)</value>
+  <data name="Label84.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
   </data>
-  <data name="rbEstimateSolidDens.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbStatusSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 320</value>
   </data>
-  <data name="Label83.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbStatusSolidCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbStatusSolidDens.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbStatusSolidCp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 24</value>
   </data>
-  <data name="btnRegressSolidDens.Text" xml:space="preserve">
+  <data name="btnRegressSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 284</value>
+  </data>
+  <data name="btnRegressSolidCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRegressSolidCp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
+  </data>
+  <data name="btnRegressSolidCp.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
-  <data name="btnRegressSolidDens.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnViewSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 284</value>
   </data>
-  <data name="btnViewSolidDens.Text" xml:space="preserve">
+  <data name="btnViewSolidCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnViewSolidCp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 30</value>
+  </data>
+  <data name="btnViewSolidCp.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
-  <data name="btnViewSolidDens.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbCoeffSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 358</value>
   </data>
-  <data name="rbCoeffSolidDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 17</value>
+  <data name="rbCoeffSolidCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="rbCoeffSolidDens.Text" xml:space="preserve">
+  <data name="rbCoeffSolidCp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 21</value>
+  </data>
+  <data name="rbCoeffSolidCp.Text" xml:space="preserve">
     <value>Eingabe der Koeffizienten *</value>
   </data>
-  <data name="rbCoeffSolidDens.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbRegressSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 388</value>
   </data>
-  <data name="rbRegressSolidDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+  <data name="rbRegressSolidCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="rbRegressSolidDens.Text" xml:space="preserve">
+  <data name="rbRegressSolidCp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 21</value>
+  </data>
+  <data name="rbRegressSolidCp.Text" xml:space="preserve">
     <value>Regression Versuchsdaten</value>
   </data>
-  <data name="rbRegressSolidDens.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GridExpDataCpS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 69</value>
   </data>
-  <data name="Label77.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GridExpDataCpS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label78.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GridExpDataCpS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 173</value>
   </data>
-  <data name="GridExpDataRoS.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label75.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 250</value>
   </data>
-  <data name="tbRoS_E.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label75.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label79.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label75.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 17</value>
   </data>
-  <data name="tbRoS_D.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCpS_E.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 214</value>
   </data>
-  <data name="Label80.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCpS_E.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="tbRoS_C.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCpS_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
   </data>
-  <data name="Label81.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label73.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 218</value>
   </data>
-  <data name="tbRoS_B.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label73.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="Label82.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label73.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
   </data>
-  <data name="tbRoS_A.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCpS_D.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 179</value>
   </data>
-  <data name="cbEqSolidDENS.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbCpS_D.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label76.Text" xml:space="preserve">
+  <data name="tbCpS_D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="Label72.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 183</value>
+  </data>
+  <data name="Label72.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label72.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="tbCpS_C.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 144</value>
+  </data>
+  <data name="tbCpS_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCpS_C.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="Label71.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 148</value>
+  </data>
+  <data name="Label71.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label71.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="tbCpS_B.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 105</value>
+  </data>
+  <data name="tbCpS_B.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCpS_B.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="Label70.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 109</value>
+  </data>
+  <data name="Label70.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label70.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="Label69.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 73</value>
+  </data>
+  <data name="Label69.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label69.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="tbCpS_A.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 69</value>
+  </data>
+  <data name="tbCpS_A.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbCpS_A.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="cbEqCpS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 29</value>
+  </data>
+  <data name="cbEqCpS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cbEqCpS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 25</value>
+  </data>
+  <data name="Label74.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 33</value>
+  </data>
+  <data name="Label74.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label74.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 24</value>
+  </data>
+  <data name="Label74.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
-  <data name="Label76.ToolTip" xml:space="preserve">
-    <value />
+  <data name="gbSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 54</value>
+  </data>
+  <data name="gbSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="gbSolidDens.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="gbSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 418</value>
   </data>
   <data name="gbSolidDens.Text" xml:space="preserve">
     <value>Dichte (Feststoff)</value>
   </data>
-  <data name="gbSolidDens.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbEstimateSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 358</value>
   </data>
-  <data name="lblEnthOfFusion.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbEstimateSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="TextBoxEnthOfFusion2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbEstimateSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="rbEstimateSolidDens.Text" xml:space="preserve">
+    <value>Schätze (DWSIM)</value>
+  </data>
+  <data name="Label83.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 324</value>
+  </data>
+  <data name="Label83.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label83.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
+  </data>
+  <data name="tbStatusSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 320</value>
+  </data>
+  <data name="tbStatusSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbStatusSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 24</value>
+  </data>
+  <data name="btnRegressSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 284</value>
+  </data>
+  <data name="btnRegressSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnRegressSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
+  </data>
+  <data name="btnRegressSolidDens.Text" xml:space="preserve">
+    <value>Datenregression</value>
+  </data>
+  <data name="btnViewSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 284</value>
+  </data>
+  <data name="btnViewSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnViewSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 30</value>
+  </data>
+  <data name="btnViewSolidDens.Text" xml:space="preserve">
+    <value>Diagramm</value>
+  </data>
+  <data name="rbCoeffSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 358</value>
+  </data>
+  <data name="rbCoeffSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbCoeffSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 21</value>
+  </data>
+  <data name="rbCoeffSolidDens.Text" xml:space="preserve">
+    <value>Eingabe der Koeffizienten *</value>
+  </data>
+  <data name="rbRegressSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 388</value>
+  </data>
+  <data name="rbRegressSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbRegressSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 21</value>
+  </data>
+  <data name="rbRegressSolidDens.Text" xml:space="preserve">
+    <value>Regression Versuchsdaten</value>
+  </data>
+  <data name="Label77.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 250</value>
+  </data>
+  <data name="Label77.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label77.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 17</value>
+  </data>
+  <data name="Label78.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 218</value>
+  </data>
+  <data name="Label78.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label78.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="GridExpDataRoS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 69</value>
+  </data>
+  <data name="GridExpDataRoS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="GridExpDataRoS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 173</value>
+  </data>
+  <data name="tbRoS_E.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 214</value>
+  </data>
+  <data name="tbRoS_E.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbRoS_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="Label79.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 183</value>
+  </data>
+  <data name="Label79.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label79.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="tbRoS_D.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 179</value>
+  </data>
+  <data name="tbRoS_D.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbRoS_D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="Label80.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 148</value>
+  </data>
+  <data name="Label80.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label80.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="tbRoS_C.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 144</value>
+  </data>
+  <data name="tbRoS_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbRoS_C.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="Label81.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 109</value>
+  </data>
+  <data name="Label81.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label81.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="tbRoS_B.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 105</value>
+  </data>
+  <data name="tbRoS_B.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbRoS_B.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="Label82.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 73</value>
+  </data>
+  <data name="Label82.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label82.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="tbRoS_A.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 69</value>
+  </data>
+  <data name="tbRoS_A.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tbRoS_A.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="cbEqSolidDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 30</value>
+  </data>
+  <data name="cbEqSolidDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cbEqSolidDENS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 25</value>
+  </data>
+  <data name="Label76.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 34</value>
+  </data>
+  <data name="Label76.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label76.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 24</value>
+  </data>
+  <data name="Label76.Text" xml:space="preserve">
+    <value>Gleichung</value>
+  </data>
+  <data name="lblEnthOfFusion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1211, 158</value>
+  </data>
+  <data name="lblEnthOfFusion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblEnthOfFusion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="TextBoxEnthOfFusion2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1111, 154</value>
+  </data>
+  <data name="TextBoxEnthOfFusion2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxEnthOfFusion2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="CheckBoxEnthOfFusion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1279, 123</value>
+  </data>
+  <data name="CheckBoxEnthOfFusion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CheckBoxEnthOfFusion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
+  </data>
+  <data name="LabelWithDivider1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>925, 24</value>
+  </data>
+  <data name="LabelWithDivider1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LabelWithDivider1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 24</value>
   </data>
   <data name="LabelWithDivider1.Text" xml:space="preserve">
     <value>Schmelzpunkt Daten</value>
   </data>
-  <data name="LabelWithDivider1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblEnthOfFusionKJmol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1211, 123</value>
   </data>
-  <data name="lblEnthOfFusionKJmol.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblEnthOfFusionKJmol.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblEnthOfFusionKJmol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="Label52.Location" type="System.Drawing.Point, System.Drawing">
+    <value>925, 64</value>
+  </data>
+  <data name="Label52.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label52.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>94, 17</value>
   </data>
   <data name="Label52.Text" xml:space="preserve">
     <value>Schmelzpunkt</value>
   </data>
-  <data name="Label52.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxEnthOfFusion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1111, 119</value>
   </data>
-  <data name="TextBoxEnthOfFusion.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxEnthOfFusion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="TextBoxMeltingTemp.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxEnthOfFusion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="TextBoxMeltingTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1111, 60</value>
+  </data>
+  <data name="TextBoxMeltingTemp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="TextBoxMeltingTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="Label55.Location" type="System.Drawing.Point, System.Drawing">
+    <value>925, 123</value>
+  </data>
+  <data name="Label55.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="Label55.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>112, 17</value>
   </data>
   <data name="Label55.Text" xml:space="preserve">
     <value>Schmelzenthalpie</value>
   </data>
-  <data name="Label55.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblMeltingTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1211, 64</value>
   </data>
-  <data name="lblMeltingTemp.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblMeltingTemp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="FaTabStripItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
+  <data name="lblMeltingTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 17</value>
   </data>
-  <data name="FaTabStripItem11.Title" xml:space="preserve">
-    <value>Feststoff</value>
+  <data name="CheckBoxMeltingTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1279, 64</value>
   </data>
-  <data name="FaTabStripItem11.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CheckBoxMeltingTemp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="FaTabStrip2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="CheckBoxMeltingTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 17</value>
   </data>
-  <data name="FaTabStrip2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxID.Location" type="System.Drawing.Point, System.Drawing">
+    <value>440, 25</value>
   </data>
-  <data name="TextBoxID.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxID.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Komponenten Eigenschaften</value>
-  </data>
-  <data name="GroupBox2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TextBoxID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 23</value>
   </data>
   <data name="DBOpenDlg.Filter" xml:space="preserve">
     <value>XML Files|*.xml</value>
@@ -2054,71 +3792,128 @@
   <data name="DBOpenDlg.Title" xml:space="preserve">
     <value>Öffne/Erzeuge Database</value>
   </data>
-  <data name="StatusStrip1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 761</value>
   </data>
-  <data name="ComboBox1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="StatusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 25, 0</value>
+  </data>
+  <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1669, 25</value>
+  </data>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 20</value>
+  </data>
+  <data name="ToolStripStatusDWSIM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 20</value>
+  </data>
+  <data name="ToolStripStatusDWSIM.Text" xml:space="preserve">
+    <value>Gespeichert</value>
+  </data>
+  <data name="ToolStripSpace1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 20</value>
+  </data>
+  <data name="ToolStripStatusUserDB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 20</value>
+  </data>
+  <data name="ToolStripStatusUserDB.Text" xml:space="preserve">
+    <value>Gespeichert</value>
+  </data>
+  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 25</value>
+  </data>
+  <data name="MenuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 3, 0, 3</value>
+  </data>
+  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1669, 30</value>
+  </data>
+  <data name="ComponenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 25</value>
+  </data>
+  <data name="ComponenteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Komponente</value>
   </data>
   <data name="SalvarNoBancoDeDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="SalvarNoBancoDeDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Export in XML-Datenbank</value>
   </data>
   <data name="ExportarDadosParaArquivoJSONToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="ExportarDadosParaArquivoJSONToolStripMenuItem.Text" xml:space="preserve">
     <value>Export zu JSON-Archiv</value>
   </data>
+  <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 26</value>
+  </data>
+  <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importiere Daten aus Online-Quellen</value>
+  </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>300, 26</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Text" xml:space="preserve">
     <value>KDB/CHERIC Datenbank</value>
   </data>
   <data name="BancoDeDadosChemeoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>300, 26</value>
   </data>
   <data name="BancoDeDadosChemeoToolStripMenuItem.Text" xml:space="preserve">
     <value>Cheméo Datenbank</value>
   </data>
   <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>300, 26</value>
   </data>
   <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Text" xml:space="preserve">
     <value>UNIFAC/MODFAC Struktur (DDB)</value>
   </data>
-  <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
-  </data>
-  <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Importiere Daten aus Online-Quellen</value>
-  </data>
-  <data name="ComponenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
-  </data>
-  <data name="ComponenteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Komponente</value>
-  </data>
-  <data name="cbUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 23</value>
-  </data>
   <data name="SistemasDeUnidadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 20</value>
+    <value>127, 25</value>
   </data>
   <data name="SistemasDeUnidadesToolStripMenuItem.Text" xml:space="preserve">
     <value>Einheitensystem</value>
   </data>
-  <data name="MenuStrip1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 28</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
     <value>JSON Archiv|*.json</value>
   </data>
+  <data name="SaveFileDialog1.Title" xml:space="preserve">
+    <value>Exportiere Komponente in JSON-Archiv</value>
+  </data>
   <data name="SaveFileDialog2.Filter" xml:space="preserve">
     <value>XML Archiv|*.xml</value>
+  </data>
+  <data name="SaveFileDialog2.Title" xml:space="preserve">
+    <value>Exportiere Komponente in XML-Datenbank</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Anzahl</value>
+  </data>
+  <data name="UNIFACImageColumn.HeaderText" xml:space="preserve">
+    <value>Beispiel</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
+    <value>Anzahl</value>
+  </data>
+  <data name="MODFACImageColumn.HeaderText" xml:space="preserve">
+    <value>Beispiel</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
+    <value>Anzahl</value>
+  </data>
+  <data name="DataGridViewImageColumn1.HeaderText" xml:space="preserve">
+    <value>Beispiel</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 17</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1669, 786</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3564,10 +5359,10 @@
         AACAAYABwAOAAeAHwAP4HwAE
 </value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Komponente / Komponentenmanager</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>
