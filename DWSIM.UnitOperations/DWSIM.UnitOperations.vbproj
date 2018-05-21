@@ -563,6 +563,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.de.resx">
+      <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.en.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </EmbeddedResource>
@@ -805,6 +808,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.de.resx">
+      <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.en.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>

@@ -123,15 +123,21 @@
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 89</value>
+  </data>
   <data name="lblConnectedTo.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="lblStatus.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 89</value>
+  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>66, 17</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
@@ -141,6 +147,9 @@
   </data>
   <data name="Label12.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
@@ -173,13 +182,16 @@
     <value />
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+    <value>121, 17</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
   <data name="Label9.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 928</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
@@ -208,8 +220,14 @@
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 194</value>
+  </data>
   <data name="dgvoutputvars.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>407, 202</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Output</value>
@@ -259,8 +277,14 @@
   <data name="DataGridViewButtonColumn2.ToolTipText" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="dgoutlets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 194</value>
+  </data>
   <data name="dgoutlets.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>407, 202</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Outlet</value>
@@ -280,8 +304,14 @@
   <data name="DataGridViewButtonColumn4.ToolTipText" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="dgenergy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 194</value>
+  </data>
   <data name="dgenergy.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>407, 202</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Energy</value>
@@ -308,7 +338,7 @@
     <value />
   </data>
   <data name="chkRecalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 17</value>
+    <value>202, 21</value>
   </data>
   <data name="chkRecalc.Text" xml:space="preserve">
     <value>Recalculate Outlet Streams</value>
@@ -321,22 +351,25 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cbOverrideShape.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 26</value>
+    <value>219, 34</value>
   </data>
   <data name="cbOverrideShape.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>225, 25</value>
   </data>
   <data name="cbOverrideShape.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 13</value>
+    <value>197, 17</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Flowsheet Object Appearance</value>
   </data>
   <data name="Label2.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 564</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Settings</value>
@@ -348,7 +381,7 @@
     <value />
   </data>
   <data name="lblCOVer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 72</value>
+    <value>217, 84</value>
   </data>
   <data name="lblCOVer.ToolTip" xml:space="preserve">
     <value />
@@ -357,7 +390,7 @@
     <value />
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 13</value>
+    <value>193, 17</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Object / CAPE-OPEN Version</value>
@@ -366,7 +399,7 @@
     <value />
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+    <value>79, 17</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Description</value>
@@ -382,6 +415,9 @@
   </data>
   <data name="GroupBox7.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />

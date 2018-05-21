@@ -25,14 +25,14 @@ Partial Class EditingForm_CAPEOPENUO
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_CAPEOPENUO))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -53,32 +53,16 @@ Partial Class EditingForm_CAPEOPENUO
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgvinputvars = New System.Windows.Forms.DataGridView()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvoutputvars = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dginlets = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.dgoutlets = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewButtonColumn1 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.DataGridViewButtonColumn2 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.dgenergy = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewButtonColumn3 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.DataGridViewButtonColumn4 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -92,6 +76,22 @@ Partial Class EditingForm_CAPEOPENUO
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewButtonColumn1 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.DataGridViewButtonColumn2 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewButtonColumn3 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.DataGridViewButtonColumn4 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -263,38 +263,20 @@ Partial Class EditingForm_CAPEOPENUO
         Me.dgvinputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvinputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvinputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column5})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.NullValue = "<empty>"
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle18.NullValue = "<empty>"
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle18
         Me.dgvinputvars.MultiSelect = False
         Me.dgvinputvars.Name = "dgvinputvars"
         Me.dgvinputvars.RowHeadersVisible = False
         Me.dgvinputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.ToolTip1.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip"))
-        '
-        'Column3
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Column3.FillWeight = 25.0!
-        resources.ApplyResources(Me.Column3, "Column3")
-        Me.Column3.Name = "Column3"
-        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column5
-        '
-        Me.Column5.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'TabPage2
         '
@@ -314,43 +296,21 @@ Partial Class EditingForm_CAPEOPENUO
         Me.dgvoutputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvoutputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvoutputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.NullValue = "<empty>"
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle21.NullValue = "<empty>"
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle21
         Me.dgvoutputvars.MultiSelect = False
         Me.dgvoutputvars.Name = "dgvoutputvars"
         Me.dgvoutputvars.ReadOnly = True
         Me.dgvoutputvars.RowHeadersVisible = False
         Me.dgvoutputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.ToolTip1.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip"))
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'GroupBox1
         '
@@ -388,55 +348,20 @@ Partial Class EditingForm_CAPEOPENUO
         Me.dginlets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dginlets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dginlets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.Column1, Me.Column2})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.NullValue = "<empty>"
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dginlets.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle22.NullValue = "<empty>"
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dginlets.DefaultCellStyle = DataGridViewCellStyle22
         Me.dginlets.MultiSelect = False
         Me.dginlets.Name = "dginlets"
         Me.dginlets.RowHeadersVisible = False
         Me.dginlets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.ToolTip1.SetToolTip(Me.dginlets, resources.GetString("dginlets.ToolTip"))
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewTextBoxColumn3.FillWeight = 50.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewTextBoxColumn4.FillWeight = 70.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'Column1
-        '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column1.FillWeight = 10.0!
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
-        Me.Column1.Text = "C"
-        Me.Column1.UseColumnTextForButtonValue = True
-        '
-        'Column2
-        '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column2.FillWeight = 10.0!
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        Me.Column2.Text = "D"
-        Me.Column2.UseColumnTextForButtonValue = True
         '
         'TabPage4
         '
@@ -456,55 +381,20 @@ Partial Class EditingForm_CAPEOPENUO
         Me.dgoutlets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgoutlets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgoutlets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewComboBoxColumn1, Me.DataGridViewButtonColumn1, Me.DataGridViewButtonColumn2})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.NullValue = "<empty>"
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgoutlets.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle23.NullValue = "<empty>"
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgoutlets.DefaultCellStyle = DataGridViewCellStyle23
         Me.dgoutlets.MultiSelect = False
         Me.dgoutlets.Name = "dgoutlets"
         Me.dgoutlets.RowHeadersVisible = False
         Me.dgoutlets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.ToolTip1.SetToolTip(Me.dgoutlets, resources.GetString("dgoutlets.ToolTip"))
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewTextBoxColumn5.FillWeight = 50.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewComboBoxColumn1
-        '
-        Me.DataGridViewComboBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewComboBoxColumn1.FillWeight = 70.0!
-        resources.ApplyResources(Me.DataGridViewComboBoxColumn1, "DataGridViewComboBoxColumn1")
-        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
-        Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'DataGridViewButtonColumn1
-        '
-        Me.DataGridViewButtonColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewButtonColumn1.FillWeight = 10.0!
-        resources.ApplyResources(Me.DataGridViewButtonColumn1, "DataGridViewButtonColumn1")
-        Me.DataGridViewButtonColumn1.Name = "DataGridViewButtonColumn1"
-        Me.DataGridViewButtonColumn1.Text = "C"
-        Me.DataGridViewButtonColumn1.UseColumnTextForButtonValue = True
-        '
-        'DataGridViewButtonColumn2
-        '
-        Me.DataGridViewButtonColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewButtonColumn2.FillWeight = 10.0!
-        resources.ApplyResources(Me.DataGridViewButtonColumn2, "DataGridViewButtonColumn2")
-        Me.DataGridViewButtonColumn2.Name = "DataGridViewButtonColumn2"
-        Me.DataGridViewButtonColumn2.Text = "D"
-        Me.DataGridViewButtonColumn2.UseColumnTextForButtonValue = True
         '
         'TabPage5
         '
@@ -524,55 +414,20 @@ Partial Class EditingForm_CAPEOPENUO
         Me.dgenergy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgenergy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgenergy.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6, Me.DataGridViewComboBoxColumn2, Me.DataGridViewButtonColumn3, Me.DataGridViewButtonColumn4})
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.NullValue = "<empty>"
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgenergy.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle24.NullValue = "<empty>"
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgenergy.DefaultCellStyle = DataGridViewCellStyle24
         Me.dgenergy.MultiSelect = False
         Me.dgenergy.Name = "dgenergy"
         Me.dgenergy.RowHeadersVisible = False
         Me.dgenergy.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.ToolTip1.SetToolTip(Me.dgenergy, resources.GetString("dgenergy.ToolTip"))
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewTextBoxColumn6.FillWeight = 50.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewComboBoxColumn2
-        '
-        Me.DataGridViewComboBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewComboBoxColumn2.FillWeight = 70.0!
-        resources.ApplyResources(Me.DataGridViewComboBoxColumn2, "DataGridViewComboBoxColumn2")
-        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
-        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'DataGridViewButtonColumn3
-        '
-        Me.DataGridViewButtonColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewButtonColumn3.FillWeight = 10.0!
-        resources.ApplyResources(Me.DataGridViewButtonColumn3, "DataGridViewButtonColumn3")
-        Me.DataGridViewButtonColumn3.Name = "DataGridViewButtonColumn3"
-        Me.DataGridViewButtonColumn3.Text = "C"
-        Me.DataGridViewButtonColumn3.UseColumnTextForButtonValue = True
-        '
-        'DataGridViewButtonColumn4
-        '
-        Me.DataGridViewButtonColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewButtonColumn4.FillWeight = 10.0!
-        resources.ApplyResources(Me.DataGridViewButtonColumn4, "DataGridViewButtonColumn4")
-        Me.DataGridViewButtonColumn4.Name = "DataGridViewButtonColumn4"
-        Me.DataGridViewButtonColumn4.Text = "D"
-        Me.DataGridViewButtonColumn4.UseColumnTextForButtonValue = True
         '
         'GroupBox2
         '
@@ -669,6 +524,151 @@ Partial Class EditingForm_CAPEOPENUO
         Me.Label6.Name = "Label6"
         Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn3.FillWeight = 50.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn4.FillWeight = 70.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'Column1
+        '
+        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column1.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        Me.Column1.Text = "C"
+        Me.Column1.UseColumnTextForButtonValue = True
+        '
+        'Column2
+        '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column2.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column2, "Column2")
+        Me.Column2.Name = "Column2"
+        Me.Column2.Text = "D"
+        Me.Column2.UseColumnTextForButtonValue = True
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn5.FillWeight = 50.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewComboBoxColumn1
+        '
+        Me.DataGridViewComboBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewComboBoxColumn1.FillWeight = 70.0!
+        resources.ApplyResources(Me.DataGridViewComboBoxColumn1, "DataGridViewComboBoxColumn1")
+        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
+        Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'DataGridViewButtonColumn1
+        '
+        Me.DataGridViewButtonColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn1.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn1, "DataGridViewButtonColumn1")
+        Me.DataGridViewButtonColumn1.Name = "DataGridViewButtonColumn1"
+        Me.DataGridViewButtonColumn1.Text = "C"
+        Me.DataGridViewButtonColumn1.UseColumnTextForButtonValue = True
+        '
+        'DataGridViewButtonColumn2
+        '
+        Me.DataGridViewButtonColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn2.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn2, "DataGridViewButtonColumn2")
+        Me.DataGridViewButtonColumn2.Name = "DataGridViewButtonColumn2"
+        Me.DataGridViewButtonColumn2.Text = "D"
+        Me.DataGridViewButtonColumn2.UseColumnTextForButtonValue = True
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn6.FillWeight = 50.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewComboBoxColumn2
+        '
+        Me.DataGridViewComboBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewComboBoxColumn2.FillWeight = 70.0!
+        resources.ApplyResources(Me.DataGridViewComboBoxColumn2, "DataGridViewComboBoxColumn2")
+        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
+        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'DataGridViewButtonColumn3
+        '
+        Me.DataGridViewButtonColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn3.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn3, "DataGridViewButtonColumn3")
+        Me.DataGridViewButtonColumn3.Name = "DataGridViewButtonColumn3"
+        Me.DataGridViewButtonColumn3.Text = "C"
+        Me.DataGridViewButtonColumn3.UseColumnTextForButtonValue = True
+        '
+        'DataGridViewButtonColumn4
+        '
+        Me.DataGridViewButtonColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn4.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn4, "DataGridViewButtonColumn4")
+        Me.DataGridViewButtonColumn4.Name = "DataGridViewButtonColumn4"
+        Me.DataGridViewButtonColumn4.Text = "D"
+        Me.DataGridViewButtonColumn4.UseColumnTextForButtonValue = True
+        '
+        'Column3
+        '
+        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle17
+        Me.Column3.FillWeight = 25.0!
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
+        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column5
+        '
+        Me.Column5.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle19
+        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle20
+        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
         'EditingForm_CAPEOPENUO
         '
         resources.ApplyResources(Me, "$this")
@@ -733,8 +733,6 @@ Partial Class EditingForm_CAPEOPENUO
     Public WithEvents dgvoutputvars As System.Windows.Forms.DataGridView
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TabControl2 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Public WithEvents dginlets As System.Windows.Forms.DataGridView
@@ -753,18 +751,20 @@ Partial Class EditingForm_CAPEOPENUO
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn1 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewButtonColumn1 As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents DataGridViewButtonColumn2 As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn2 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewButtonColumn3 As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents DataGridViewButtonColumn4 As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewComboBoxColumn
+    Friend WithEvents Column1 As DataGridViewButtonColumn
+    Friend WithEvents Column2 As DataGridViewButtonColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn1 As DataGridViewComboBoxColumn
+    Friend WithEvents DataGridViewButtonColumn1 As DataGridViewButtonColumn
+    Friend WithEvents DataGridViewButtonColumn2 As DataGridViewButtonColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn2 As DataGridViewComboBoxColumn
+    Friend WithEvents DataGridViewButtonColumn3 As DataGridViewButtonColumn
+    Friend WithEvents DataGridViewButtonColumn4 As DataGridViewButtonColumn
 End Class

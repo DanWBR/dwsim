@@ -127,7 +127,7 @@ Partial Class Form_CapeOpenSelector
         'BackgroundWorker1
         '
         '
-        'FormCapeOpenUnitSelector
+        'Form_CapeOpenSelector
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -150,7 +150,7 @@ Partial Class Form_CapeOpenSelector
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ListBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
-        Me.Name = "FormCapeOpenUnitSelector"
+        Me.Name = "Form_CapeOpenSelector"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.ResumeLayout(False)
