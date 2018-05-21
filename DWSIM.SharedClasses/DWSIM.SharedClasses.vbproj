@@ -112,10 +112,10 @@
     <Compile Include="Base Class\FlowsheetBag.vb" />
     <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
     <Compile Include="ExceptionProcessing\ExceptionProcessing.vb" />
-    <Compile Include="Flowsheet\AssayClass.vb" />
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />
     <Compile Include="Flowsheet\SensitivityAnalysis.vb" />
+    <Compile Include="Misc\AssayClass.vb" />
     <Compile Include="Misc\Crypto.vb" />
     <Compile Include="Misc\CapeOpenObjInfo.vb" />
     <Compile Include="Misc\CCapeCollection.vb" />

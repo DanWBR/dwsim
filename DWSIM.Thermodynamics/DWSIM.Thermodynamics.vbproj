@@ -333,13 +333,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Models\BlackOilProperties.vb" />
-    <Compile Include="PetroleumCharacterization\AssayClass.vb" />
     <Compile Include="PetroleumCharacterization\CurveConversion.vb" />
     <Compile Include="PetroleumCharacterization\Fitting.vb" />
     <Compile Include="PetroleumCharacterization\GenerateCompounds.vb" />
     <Compile Include="PetroleumCharacterization\GL.vb" />
     <Compile Include="PetroleumCharacterization\LM.vb" />
     <Compile Include="PetroleumCharacterization\PropertyMethods.vb" />
+    <Compile Include="PetroleumCharacterization\QualityCheck.vb" />
     <Compile Include="PetroleumCharacterization\Riazi.vb" />
     <Compile Include="Property Packages\BlackOil.vb" />
     <Compile Include="Interfaces\CAPE-OPEN.vb" />

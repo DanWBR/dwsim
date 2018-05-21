@@ -42,7 +42,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
 
             Dim factor, fval As Double
 
-            fval = brentsolver.brentoptimize(0.1, 10, 0.01, factor)
+            fval = brentsolver.brentoptimize(0.1, 10, 0.0000000001, factor)
 
             Return factor
 

@@ -704,56 +704,89 @@ Public Class FormPCBulk
         Dim gObj As DrawingTools.GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
-        If Not frm.FrmStSim1.initialized Then frm.FrmStSim1.Init()
-
-        For Each subst In ccol.Values
-            tmpcomp = subst.ConstantProperties
-            frm.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
-            idx = frm.FrmStSim1.AddCompToGrid(tmpcomp)
-            frm.FrmStSim1.AddCompToSimulation(idx)
-        Next
-
-        Dim myMStr As New DrawingTools.GraphicObjects.MaterialStreamGraphic(frm.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value + 100, frm.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value + 100, 20, 20, 0)
-        myMStr.LineWidth = 2
-        myMStr.Fill = True
-        myMStr.FillColor = Color.WhiteSmoke
-        myMStr.LineColor = Color.Red
-        myMStr.Tag = corr
-        gObj = myMStr
-        gObj.Name = "MAT-" & Guid.NewGuid.ToString
-        'OBJETO DWSIM
-        Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
-        myCOMS.GraphicObject = myMStr
-        frm.AddComponentsRows(myCOMS)
+        Dim myassay As SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay =
+            New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text,
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_wk.Text),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v1.Text),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v2.Text))
+        Dim ms As New Streams.MaterialStream("", "")
+        ms.SetFlowsheet(frm)
         If frm.Options.PropertyPackages.Count > 0 Then
-            myCOMS.PropertyPackage = frm.Options.SelectedPropertyPackage
+            ms.PropertyPackage = frm.Options.SelectedPropertyPackage
         Else
-            myCOMS.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
+            ms.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
         End If
-        myCOMS.ClearAllProps()
-        Dim wtotal As Double = 0
         For Each subst In ccol.Values
-            wtotal += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+            ms.Phases(0).Compounds.Add(subst.Name, subst)
+            ms.Phases(1).Compounds.Add(subst.Name, New Compound(subst.Name, "") With {.ConstantProperties = subst.ConstantProperties})
+            ms.Phases(2).Compounds.Add(subst.Name, New Compound(subst.Name, "") With {.ConstantProperties = subst.ConstantProperties})
+            ms.Phases(3).Compounds.Add(subst.Name, New Compound(subst.Name, "") With {.ConstantProperties = subst.ConstantProperties})
+            ms.Phases(4).Compounds.Add(subst.Name, New Compound(subst.Name, "") With {.ConstantProperties = subst.ConstantProperties})
+            ms.Phases(5).Compounds.Add(subst.Name, New Compound(subst.Name, "") With {.ConstantProperties = subst.ConstantProperties})
+            ms.Phases(6).Compounds.Add(subst.Name, New Compound(subst.Name, "") With {.ConstantProperties = subst.ConstantProperties})
+            ms.Phases(7).Compounds.Add(subst.Name, New Compound(subst.Name, "") With {.ConstantProperties = subst.ConstantProperties})
         Next
-        For Each subst In ccol.Values
-            subst.MassFraction = subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
-        Next
-        For Each subst In ccol.Values
-            With myCOMS.Phases(0).Compounds
-                .Item(subst.Name).ConstantProperties = subst.ConstantProperties
-                .Item(subst.Name).MassFraction = subst.MassFraction
-                .Item(subst.Name).MoleFraction = subst.MoleFraction
-            End With
-            myCOMS.Phases(1).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
-            myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
-        Next
-        myCOMS.SetFlowsheet(frm)
-        frm.AddSimulationObject(myCOMS)
-        frm.AddGraphicObject(gObj)
-        frm.FormSurface.FlowsheetDesignSurface.Invalidate()
 
-        Me.Close()
+        Dim qc As New QualityCheck(myassay, ms)
+        qc.DoQualityCheck()
+        qc.DisplayForm(Sub(c)
+                           Dim f As New FormPureComp() With {.Flowsheet = frm, .Added = False, .MyCompound = c}
+                           f.ShowDialog()
+                       End Sub,
+                       Sub()
+                           If Not frm.FrmStSim1.initialized Then frm.FrmStSim1.Init()
 
+                           For Each subst In ccol.Values
+                               tmpcomp = subst.ConstantProperties
+                               frm.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
+                               idx = frm.FrmStSim1.AddCompToGrid(tmpcomp)
+                               frm.FrmStSim1.AddCompToSimulation(idx)
+                           Next
+
+                           Dim myMStr As New DrawingTools.GraphicObjects.MaterialStreamGraphic(frm.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value + 100, frm.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value + 100, 20, 20, 0)
+                           myMStr.LineWidth = 2
+                           myMStr.Fill = True
+                           myMStr.FillColor = Color.WhiteSmoke
+                           myMStr.LineColor = Color.Red
+                           myMStr.Tag = corr
+                           gObj = myMStr
+                           gObj.Name = "MAT-" & Guid.NewGuid.ToString
+                           'OBJETO DWSIM
+                           Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
+                           myCOMS.GraphicObject = myMStr
+                           frm.AddComponentsRows(myCOMS)
+                           If frm.Options.PropertyPackages.Count > 0 Then
+                               myCOMS.PropertyPackage = frm.Options.SelectedPropertyPackage
+                           Else
+                               myCOMS.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
+                           End If
+                           myCOMS.ClearAllProps()
+                           Dim wtotal As Double = 0
+                           For Each subst In ccol.Values
+                               wtotal += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+                           Next
+                           For Each subst In ccol.Values
+                               subst.MassFraction = subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
+                           Next
+                           For Each subst In ccol.Values
+                               With myCOMS.Phases(0).Compounds
+                                   .Item(subst.Name).ConstantProperties = subst.ConstantProperties
+                                   .Item(subst.Name).MassFraction = subst.MassFraction
+                                   .Item(subst.Name).MoleFraction = subst.MoleFraction
+                               End With
+                               myCOMS.Phases(1).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
+                               myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
+                           Next
+                           myCOMS.SetFlowsheet(frm)
+                           frm.AddSimulationObject(myCOMS)
+                           frm.AddGraphicObject(gObj)
+                           frm.FormSurface.FlowsheetDesignSurface.Invalidate()
+
+                           Me.Close()
+
+                       End Sub)
 
     End Sub
 
@@ -767,7 +800,7 @@ Public Class FormPCBulk
         'salvar ensaio
 
         Try
-            Dim myassay As Utilities.PetroleumCharacterization.Assay.Assay = New Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text, SystemsOfUnits.Converter.ConvertToSI("C", tb_t1.Text), SystemsOfUnits.Converter.ConvertToSI("C", tb_t2.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v1.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v2.Text))
+            Dim myassay As SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay = New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text, SystemsOfUnits.Converter.ConvertToSI("C", tb_t1.Text), SystemsOfUnits.Converter.ConvertToSI("C", tb_t2.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v1.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v2.Text))
             myassay.Name = Me.TextBox1.Text
             frm.Options.PetroleumAssays.Add(Guid.NewGuid().ToString, myassay)
             MessageBox.Show("Assay data was saved succesfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -785,17 +818,17 @@ Public Class FormPCBulk
 
         If frmam.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
 
-            Dim myassay As Utilities.PetroleumCharacterization.Assay.Assay = frmam.currentassay
+            Dim myassay As SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay = frmam.currentassay
 
             If Not myassay Is Nothing Then
 
                 Me.tb_mw.Text = Format(myassay.MW, nf)
                 Me.tb_sg.Text = Format(myassay.SG60, nf)
-                Me.tb_t1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI("C", myassay.T1), nf)
-                Me.tb_t2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI("C", myassay.T2), nf)
-                Me.tb_wk.Text = Format(myassay.NBPAVG, nf)
-                Me.tb_v1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI("cSt", myassay.V1), nf)
-                Me.tb_v2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI("cSt", myassay.V2), nf)
+                Me.tb_t1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, myassay.T1), nf)
+                Me.tb_t2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, myassay.T2), nf)
+                Me.tb_wk.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, myassay.NBPAVG), nf)
+                Me.tb_v1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, myassay.V1), nf)
+                Me.tb_v2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, myassay.V2), nf)
 
             End If
 

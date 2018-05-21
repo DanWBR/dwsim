@@ -22,7 +22,7 @@ Imports System.Reflection
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Namespace DWSIM.Utilities.PetroleumCharacterization.Assay
+Namespace Utilities.PetroleumCharacterization.Assay
 
     <System.Serializable()> Public Class Assay
 
@@ -35,7 +35,6 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Assay
         'Bulk fields
         Private _mw As Double
         Private _sg60 As Double
-        Private _sg20 As Double
         Private _nbpavg As Double
         Private _t1 As Double
         Private _t2 As Double
@@ -275,15 +274,6 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Assay
             End Set
         End Property
 
-        Public Property SG20() As Double
-            Get
-                Return _sg20
-            End Get
-            Set(ByVal value As Double)
-                _sg20 = value
-            End Set
-        End Property
-
         Public Property SG60() As Double
             Get
                 Return _sg60
@@ -353,7 +343,6 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Assay
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
-            Return True
 
         End Function
 

@@ -89,7 +89,7 @@ Namespace DWSIM.Flowsheet
 
         Public Property SimulationMode As String = ""
 
-        Public PetroleumAssays As Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
+        Public PetroleumAssays As Dictionary(Of String, Utilities.PetroleumCharacterization.Assay.Assay)
 
         Public SelectedUnitSystem As SystemsOfUnits.Units
 
@@ -102,7 +102,7 @@ Namespace DWSIM.Flowsheet
             ReactionSets = New Dictionary(Of String, Interfaces.IReactionSet)
             Databases = New Dictionary(Of String, String())
             PropertyPackages = New Dictionary(Of String, IPropertyPackage)
-            PetroleumAssays = New Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
+            PetroleumAssays = New Dictionary(Of String, Utilities.PetroleumCharacterization.Assay.Assay)
 
             'With ReactionSets
             '    .Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))

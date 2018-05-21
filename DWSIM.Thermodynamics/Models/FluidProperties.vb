@@ -644,7 +644,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Shared Function oilvisc_twu(ByVal T, ByVal T1, ByVal T2, ByVal v1, ByVal v2)
+        Shared Function oilvisc_twu(ByVal T, ByVal T1, ByVal T2, ByVal v1, ByVal v2) As Double
 
             'v = m2/s, T = K
 
@@ -660,11 +660,11 @@ Namespace PropertyPackages.Auxiliary
             Z1 = vk1 + 0.7 + Math.Exp(-1.47 - 1.84 * vk1 - 0.51 * vk1 ^ 2)
             Z2 = vk2 + 0.7 + Math.Exp(-1.47 - 1.84 * vk2 - 0.51 * vk2 ^ 2)
 
-            Dim var1 As Double = (Math.Log(Math.Log(Z1)) + Math.Log(Math.Log(Z2)))
-            Dim var2 As Double = (Math.Log(T1) + Math.Log(T2))
+            Dim var1 As Double = (Math.Log10(Math.Log10(Z1)) - Math.Log10(Math.Log10(Z2)))
+            Dim var2 As Double = (Math.Log10(T1) - Math.Log10(T2))
             B = var1 / var2
 
-            Z = Math.Exp(Math.Exp(Math.Log(Math.Log(Z1)) + B * (Math.Log(T) - Math.Log(T2))))
+            Z = Math.Pow(10, (Math.Pow(10, (Math.Log10(Math.Log10(Z1)) + B * (Math.Log10(T) - Math.Log10(T1))))))
 
             Dim tmp = Z - 0.7 - Math.Exp(-0.7487 - 3.295 * (Z - 0.7) + 0.6119 * (Z - 0.7) ^ 2 - 0.3193 * (Z - 0.7) ^ 3)
 

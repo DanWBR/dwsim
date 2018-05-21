@@ -1,0 +1,172 @@
+﻿'    Petroleum Assay Characterization Quality Check
+'    Copyright 2018 Daniel Wagner O. de Medeiros
+'
+'    This file is part of DWSIM.
+'
+'    DWSIM is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 3 of the License, or
+'    (at your option) any later version.
+'
+'    DWSIM is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+'
+'    You should have received a copy of the GNU General Public License
+'    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports System.Text
+Imports DWSIM.Interfaces
+Imports DWSIM.Thermodynamics.Streams
+Imports DWSIM.SharedClasses.Utilities.PetroleumCharacterization.Assay
+Imports Eto.Forms
+Imports DWSIM.UI.Shared.Common
+Imports DWSIM.Thermodynamics.BaseClasses
+
+Public Class QualityCheck
+
+    Private _ms As MaterialStream
+    Private _assay As Assay
+
+    Private _report As New StringBuilder
+    Private _compounds As New List(Of ICompoundConstantProperties)
+    Private _dlgresult As DialogResult
+
+    Sub New(assay As Assay, ms As MaterialStream)
+        _assay = assay
+        _ms = ms
+    End Sub
+
+    Sub DoQualityCheck()
+
+        _compounds = _ms.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties).ToList
+
+        _report.Clear()
+        _report.AppendLine("Petroleum Assay Characterization Quality Check")
+        _report.AppendLine()
+
+        Dim pp = _ms.PropertyPackage
+
+        If _assay.IsBulk Then
+
+            'bulk characterization
+
+            'check mw
+            If _assay.MW > 0 Then
+                _ms.PropertyPackage = pp
+                _ms.ClearCalculatedProps()
+                pp.CurrentMaterialStream = _ms
+                Dim mwcalc = _ms.PropertyPackage.AUX_MMM(PropertyPackages.Phase.Mixture)
+                Dim mwerr = (_assay.MW - mwcalc) / _assay.MW
+                _report.AppendLine(String.Format("Molecular Weight (Specified): {0:N2}", _assay.MW))
+                _report.AppendLine(String.Format("Molecular Weight (Calculated): {0:N2}", mwcalc))
+                _report.AppendLine(String.Format("Molecular Weight Error: {0:P}", mwerr))
+                _report.AppendLine()
+            End If
+
+            If _assay.SG60 > 0 Then
+                _ms.PropertyPackage = pp
+                _ms.ClearCalculatedProps()
+                pp.CurrentMaterialStream = _ms
+                _ms.Phases(0).Properties.temperature = 15.56 + 273.15
+                _ms.Phases(0).Properties.pressure = 101325
+                _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
+                _ms.Calculate()
+                Dim sgcalc = _ms.Phases(3).Properties.density.GetValueOrDefault / 1000
+                Dim sgerr = (_assay.SG60 - sgcalc) / _assay.SG60
+                _report.AppendLine(String.Format("Specific Gravity (Specified): {0:N4}", _assay.SG60))
+                _report.AppendLine(String.Format("Specific Gravity (Calculated): {0:N4}", sgcalc))
+                _report.AppendLine(String.Format("Specific Gravity Error: {0:P}", sgerr))
+                _report.AppendLine()
+            End If
+
+            If _assay.NBPAVG > 0 Then
+                Dim nbpcalc = _ms.Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault * x.ConstantProperties.NBP).Sum.GetValueOrDefault
+                Dim nbperr = (_assay.NBPAVG - nbpcalc) / _assay.NBPAVG
+                _report.AppendLine(String.Format("Normal Boiling Point (Specified): {0:N2}", _assay.NBPAVG))
+                _report.AppendLine(String.Format("Normal Boiling Point (Calculated): {0:N2}", nbpcalc))
+                _report.AppendLine(String.Format("Normal Boiling Point Error: {0:P}", nbperr))
+                _report.AppendLine()
+            End If
+
+            If _assay.V1 > 0 Then
+                _ms.PropertyPackage = pp
+                _ms.ClearCalculatedProps()
+                pp.CurrentMaterialStream = _ms
+                _ms.Phases(0).Properties.temperature = _assay.T1
+                _ms.Phases(0).Properties.pressure = 101325
+                _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
+                _ms.Calculate()
+                Dim v1calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                Dim v1err = (_assay.V1 - v1calc) / _assay.V1
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Specified): {0:G4}", _assay.V1))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4}", v1calc))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) Error: {0:P}", v1err))
+                _report.AppendLine()
+            End If
+
+            If _assay.V2 > 0 Then
+                _ms.PropertyPackage = pp
+                pp.CurrentMaterialStream = _ms
+                _ms.Phases(0).Properties.temperature = _assay.T2
+                _ms.Phases(0).Properties.pressure = 101325
+                _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
+                _ms.Calculate()
+                Dim v2calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                Dim v2err = (_assay.V2 - v2calc) / _assay.V2
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Specified): {0:G4}", _assay.V2))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4}", v2calc))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) Error: {0:P}", v2err))
+                _report.AppendLine()
+            End If
+
+        Else
+
+            'distillation curves characterization
+
+        End If
+
+    End Sub
+
+    Function DisplayForm(displaycompoundviewer As Action(Of ConstantProperties), positiveanswer As Action) As DialogResult
+
+        Dim co1 = UI.Shared.Common.GetDefaultContainer()
+        co1.Tag = "Quality Check Report"
+        Dim co2 = UI.Shared.Common.GetDefaultContainer()
+        co2.Tag = "Pseudocompound Properties"
+
+        Dim myform = UI.Shared.Common.GetDefaultTabbedForm("Petroleum Characterization Quality Check", 750, 600, {co1, co2})
+
+
+        co1.CreateAndAddLabelRow("Quality Check Report")
+        co1.CreateAndAddMultilineMonoSpaceTextBoxRow(_report.ToString, 400, True, Nothing)
+        co1.CreateAndAddDescriptionRow("Analyze the report and the properties of the generated pseudocompounds. Click 'Yes' if you want to proceed adding the compounds to the simulation. If you're not satisfied with the generated properties, click 'No', select a different set of property methods and parameters and try again.")
+        co1.CreateAndAddLabelAndTwoButtonsRow("", "No", Nothing, "Yes", Nothing,
+                                              Sub()
+                                                  _dlgresult = DialogResult.No
+                                                  myform.Close()
+                                              End Sub,
+                                              Sub()
+                                                  _dlgresult = DialogResult.Yes
+                                                  myform.Close()
+                                              End Sub)
+
+
+        co2.CreateAndAddLabelRow("Pseudocompounds")
+
+        For Each c In _compounds
+            co2.CreateAndAddLabelAndButtonRow(c.Name, "View Properties",
+                                              Nothing,
+                                              Sub()
+                                                  displaycompoundviewer(c)
+                                              End Sub)
+        Next
+
+        myform.Show()
+
+        AddHandler myform.Closed, Sub() If _dlgresult = DialogResult.Yes Then positiveanswer.Invoke
+
+    End Function
+
+End Class
