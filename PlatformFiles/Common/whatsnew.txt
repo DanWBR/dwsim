@@ -1,6 +1,7 @@
-Version 5.2 Update 5
+Version 5.2 Update 6
 
-- [NEW] Data copy from property tables to clipboard (Cross-Platform UI)
-- [CHG] Limited the maximum mumber of simultaneous opened object editors
-- [FIX] Fixed data copy from property table to clipboard (Classic UI)
+- [NEW] Added Quality Check to Petroleum Characterization Tools
+- [CHG] Enhanced Petroleum Characterization Tools on Cross-Platform UI
+- [CHG] Removed Update checkboxes on Classic UI
+- [FIX] Fixed missing Expander on Cross-Platform UI
 - [FIX] Bug fixes

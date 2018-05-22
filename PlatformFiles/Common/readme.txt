@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 5
+Version 5.2 Update 6
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 6
+
+- [NEW] Added Quality Check to Petroleum Characterization Tools
+- [CHG] Enhanced Petroleum Characterization Tools on Cross-Platform UI
+- [CHG] Removed Update checkboxes on Classic UI
+- [FIX] Fixed missing Expander on Cross-Platform UI
+- [FIX] Bug fixes
 
 Version 5.2 Update 5
 
