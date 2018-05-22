@@ -23,6 +23,7 @@ Imports DWSIM.SharedClasses.Utilities.PetroleumCharacterization.Assay
 Imports Eto.Forms
 Imports DWSIM.UI.Shared.Common
 Imports DWSIM.Thermodynamics.BaseClasses
+Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Public Class QualityCheck
 
@@ -45,6 +46,8 @@ Public Class QualityCheck
         _report.Clear()
         _report.AppendLine("Petroleum Assay Characterization Quality Check")
         _report.AppendLine()
+
+        Dim su = _ms.FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
         Dim pp = _ms.PropertyPackage
 
@@ -84,8 +87,8 @@ Public Class QualityCheck
             If _assay.NBPAVG > 0 Then
                 Dim nbpcalc = _ms.Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault * x.ConstantProperties.NBP).Sum.GetValueOrDefault
                 Dim nbperr = (_assay.NBPAVG - nbpcalc) / _assay.NBPAVG
-                _report.AppendLine(String.Format("Normal Boiling Point (Specified): {0:N2}", _assay.NBPAVG))
-                _report.AppendLine(String.Format("Normal Boiling Point (Calculated): {0:N2}", nbpcalc))
+                _report.AppendLine(String.Format("Normal Boiling Point (Specified): {0:N2} {1}", cv.ConvertFromSI(su.temperature, _assay.NBPAVG), su.temperature))
+                _report.AppendLine(String.Format("Normal Boiling Point (Calculated): {0:N2} {1}", cv.ConvertFromSI(su.temperature, nbpcalc), su.temperature))
                 _report.AppendLine(String.Format("Normal Boiling Point Error: {0:P}", nbperr))
                 _report.AppendLine()
             End If
@@ -100,8 +103,8 @@ Public Class QualityCheck
                 _ms.Calculate()
                 Dim v1calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
                 Dim v1err = (_assay.V1 - v1calc) / _assay.V1
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Specified): {0:G4}", _assay.V1))
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4}", v1calc))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, _assay.V1), su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v1calc), su.cinematic_viscosity))
                 _report.AppendLine(String.Format("Kinematic Viscosity (1) Error: {0:P}", v1err))
                 _report.AppendLine()
             End If
@@ -115,8 +118,8 @@ Public Class QualityCheck
                 _ms.Calculate()
                 Dim v2calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
                 Dim v2err = (_assay.V2 - v2calc) / _assay.V2
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Specified): {0:G4}", _assay.V2))
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4}", v2calc))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.temperature, _assay.V2), su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.temperature, v2calc), su.cinematic_viscosity))
                 _report.AppendLine(String.Format("Kinematic Viscosity (2) Error: {0:P}", v2err))
                 _report.AppendLine()
             End If
@@ -124,6 +127,82 @@ Public Class QualityCheck
         Else
 
             'distillation curves characterization
+
+            'check mw
+            If _assay.MW > 0 Then
+                _ms.PropertyPackage = pp
+                _ms.ClearCalculatedProps()
+                pp.CurrentMaterialStream = _ms
+                Dim mwcalc = _ms.PropertyPackage.AUX_MMM(PropertyPackages.Phase.Mixture)
+                Dim mwerr = (_assay.MW - mwcalc) / _assay.MW
+                _report.AppendLine(String.Format("Molecular Weight (Specified): {0:N2}", _assay.MW))
+                _report.AppendLine(String.Format("Molecular Weight (Calculated): {0:N2}", mwcalc))
+                _report.AppendLine(String.Format("Molecular Weight Error: {0:P}", mwerr))
+                _report.AppendLine()
+            End If
+
+            If _assay.API > 0 Then
+                _ms.PropertyPackage = pp
+                _ms.ClearCalculatedProps()
+                pp.CurrentMaterialStream = _ms
+                _ms.Phases(0).Properties.temperature = 15.56 + 273.15
+                _ms.Phases(0).Properties.pressure = 101325
+                _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
+                _ms.Calculate()
+                Dim apicalc = _ms.Phases(3).Properties.density.GetValueOrDefault / 1000
+                apicalc = 141.5 / apicalc - 131.5
+                Dim apierr = (_assay.API - apicalc) / _assay.API
+                _report.AppendLine(String.Format("API (Specified): {0:N4}", _assay.API))
+                _report.AppendLine(String.Format("API (Calculated): {0:N4}", apicalc))
+                _report.AppendLine(String.Format("API Error: {0:P}", apierr))
+                _report.AppendLine()
+            End If
+
+            Dim nbpcalc = _ms.Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault * x.ConstantProperties.NBP).Sum.GetValueOrDefault
+            _report.AppendLine(String.Format("Normal Boiling Point (Calculated Average): {0:N2} {1}", nbpcalc, su.temperature))
+            _report.AppendLine()
+
+            If _assay.HasViscCurves Then
+
+                _ms.PropertyPackage = pp
+                _ms.ClearCalculatedProps()
+
+                pp.CurrentMaterialStream = _ms
+
+                _ms.Phases(0).Properties.temperature = _assay.T1
+                _ms.Phases(0).Properties.pressure = 101325
+                _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
+                _ms.Calculate()
+
+                Dim v1calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                Dim v1min = _assay.PY_V1.ToDoubleList().Min
+                Dim v1max = _assay.PY_V1.ToDoubleList().Max
+
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Minimum): {0:G4} {1}", v1min, su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Maximum): {0:G4} {1}", v1max, su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4} {1}", v1calc, su.cinematic_viscosity))
+                _report.AppendLine()
+
+                _ms.PropertyPackage = pp
+                _ms.ClearCalculatedProps()
+
+                pp.CurrentMaterialStream = _ms
+
+                _ms.Phases(0).Properties.temperature = _assay.T2
+                _ms.Phases(0).Properties.pressure = 101325
+                _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
+                _ms.Calculate()
+
+                Dim v2calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                Dim v2min = _assay.PY_V2.ToDoubleList().Min
+                Dim v2max = _assay.PY_V2.ToDoubleList().Max
+
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Minimum): {0:G4} {1}", v2min, su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Maximum): {0:G4} {1}", v2max, su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4} {1}", v2calc, su.cinematic_viscosity))
+                _report.AppendLine()
+
+            End If
 
         End If
 
@@ -137,7 +216,6 @@ Public Class QualityCheck
         co2.Tag = "Pseudocompound Properties"
 
         Dim myform = UI.Shared.Common.GetDefaultTabbedForm("Petroleum Characterization Quality Check", 750, 600, {co1, co2})
-
 
         co1.CreateAndAddLabelRow("Quality Check Report")
         co1.CreateAndAddMultilineMonoSpaceTextBoxRow(_report.ToString, 400, True, Nothing)

@@ -97,7 +97,7 @@ Namespace Utilities.PetroleumCharacterization.Assay
             _py_nbp = New ArrayList
             _py_mw = New ArrayList
             _py_sg = New ArrayList
-            _py_v2 = New ArrayList
+            _py_v1 = New ArrayList
             _py_v2 = New ArrayList
         End Sub
 

@@ -705,12 +705,12 @@ Public Class FormPCBulk
         Dim idx As Integer = 0
 
         Dim myassay As SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay =
-            New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text,
-                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_wk.Text),
-                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text),
-                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text),
-                                                                              SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v1.Text),
-                                                                              SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v2.Text))
+            New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text.ToDoubleFromCurrent, tb_sg.Text.ToDoubleFromCurrent,
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_wk.Text.ToDoubleFromCurrent),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text.ToDoubleFromCurrent),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text.ToDoubleFromCurrent),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v1.Text.ToDoubleFromCurrent),
+                                                                              SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v2.Text.ToDoubleFromCurrent))
         Dim ms As New Streams.MaterialStream("", "")
         ms.SetFlowsheet(frm)
         If frm.Options.PropertyPackages.Count > 0 Then

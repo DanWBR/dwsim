@@ -374,7 +374,11 @@ Public Module General
 
         Dim ci As CultureInfo = CultureInfo.InstalledUICulture
 
-        Return Double.Parse(s, ci)
+        If Double.TryParse(s, NumberStyles.Any, ci, New Double) Then
+            Return Double.Parse(s, ci)
+        Else
+            Return 0.0
+        End If
 
     End Function
 
