@@ -46,13 +46,14 @@ namespace DWSIM.UI.Desktop.Editors
         private String assayname;
 
         int ncomps = 10;
-        SampleType type = SampleType.Light;
+        string Tccorr = "Riazi-Daubert (1985)", Pccorr = "Riazi-Daubert (1985)", AFcorr = "Lee-Kesler (1976)", MWcorr = "Winn (1956)";
 
         List<double> cuttemps = new List<double>(), cb = new List<double>(), tbp = new List<double>(), mwc = new List<double>(), sgc = new List<double>(), visc100 = new List<double>(), visc210 = new List<double>();
         int pseudocuts = 0;
         double mwb, sgb;
         int tbpcurvetype = 0, curvebasis = 0, pseudomode = 0;
         bool hasmwc = false, hassgc = false, hasvisc100c = false, hasvisc210c = false;
+        bool adjustAf = true, adjustZR = true;
 
         string decsep1, decsep2;
 
@@ -80,22 +81,34 @@ namespace DWSIM.UI.Desktop.Editors
             });
             s.CreateAndAddDescriptionRow(this, "Enter the name of the assay. It will be used to identify the Material Stream on the flowsheet and the associated compounds as well.");
 
-            s.CreateAndAddDropDownRow(this, "Assay Type", new List<string>() { "Light", "Average", "Heavy" }, 0, (arg3, arg2) =>
+            s.CreateAndAddLabelRow(this, "Property Methods");
+
+            s.CreateAndAddDescriptionRow(this, "Select the methods to calculate compound properties.");
+
+            s.CreateAndAddDropDownRow(this, "Molecular Weight", new List<string>() { "Winn (1956)", "Riazi (1986)", "Lee-Kesler (1974)" }, 0, (arg3, arg2) =>
             {
-                switch (arg3.SelectedIndex)
-                {
-                    case 0:
-                        type = SampleType.Light;
-                        break;
-                    case 1:
-                        type = SampleType.Average;
-                        break;
-                    case 2:
-                        type = SampleType.Heavy;
-                        break;
-                }
+                MWcorr = arg3.SelectedValue.ToString();
             });
-            s.CreateAndAddDescriptionRow(this, "Select the type of the assay. Property calculation methods will be selected according to this setting.");
+            s.CreateAndAddDropDownRow(this, "Critical Temperature", new List<string>() { "Riazi-Daubert (1985)", "Riazi (2005)", "Lee-Kesler (1976)", "Farah (2006)" }, 0, (arg3, arg2) =>
+            {
+                Tccorr = arg3.SelectedValue.ToString();
+            });
+            s.CreateAndAddDropDownRow(this, "Critical Pressure", new List<string>() { "Riazi-Daubert (1985)", "Lee-Kesler (1976)", "Farah (2006)" }, 0, (arg3, arg2) =>
+            {
+                Pccorr = arg3.SelectedValue.ToString();
+            });
+            s.CreateAndAddDropDownRow(this, "Acentric Factor", new List<string>() { "Lee-Kesler (1976)", "Korsten (2000)" }, 0, (arg3, arg2) =>
+            {
+                AFcorr = arg3.SelectedValue.ToString();
+            });
+            s.CreateAndAddCheckBoxRow(this, "Adjust Acentric Factors to match Normal Boiling Temperatures", adjustAf, (arg1, arg2) =>
+            {
+                adjustAf = arg1.Checked.GetValueOrDefault();
+            }, null);
+            s.CreateAndAddCheckBoxRow(this, "Adjust Rackett Parameters to match Specific Gravities", adjustZR, (arg1, arg2) =>
+            {
+                adjustZR = arg1.Checked.GetValueOrDefault();
+            }, null);
 
             s.CreateAndAddLabelRow(this, "Setup Curves");
 
@@ -199,97 +212,126 @@ namespace DWSIM.UI.Desktop.Editors
 
                 Task.Factory.StartNew(() =>
                 {
-
                     comps = GenerateCompounds(su);
-
-                    foreach (var comp in comps.Values)
-                    {
-                        if (!flowsheet.AvailableCompounds.ContainsKey(comp.Name))
-                        {
-                            flowsheet.AvailableCompounds.Add(comp.Name, comp.ConstantProperties);
-                        }
-                        flowsheet.SelectedCompounds.Add(comp.Name, flowsheet.AvailableCompounds[comp.Name]);
-                        foreach (MaterialStream obj in flowsheet.SimulationObjects.Values.Where((x) => x.GraphicObject.ObjectType == ObjectType.MaterialStream))
-                        {
-                            foreach (var phase in obj.Phases.Values)
-                            {
-                                phase.Compounds.Add(comp.Name, new Compound(comp.Name, ""));
-                                phase.Compounds[comp.Name].ConstantProperties = flowsheet.SelectedCompounds[comp.Name];
-                            }
-                        }
-                    }
-
-                    var ms = (MaterialStream)flowsheet.AddObject(ObjectType.MaterialStream, 100, 100, assayname);
-
-                    double wtotal = comps.Values.Select((x) => x.MoleFraction.GetValueOrDefault() * x.ConstantProperties.Molar_Weight).Sum();
-
-                    foreach (var c in ms.Phases[0].Compounds.Values)
-                    {
-                        c.MassFraction = 0.0f;
-                        c.MoleFraction = 0.0f;
-                    }
-
-                    foreach (var c in comps.Values)
-                    {
-                        c.MassFraction = c.MoleFraction.GetValueOrDefault() * c.ConstantProperties.Molar_Weight / wtotal;
-                        ms.Phases[0].Compounds[c.Name].MassFraction = c.MassFraction.GetValueOrDefault();
-                        ms.Phases[0].Compounds[c.Name].MoleFraction = c.MoleFraction.GetValueOrDefault();
-                    }
-
                 }).ContinueWith((t) =>
                 {
-                    Application.Instance.Invoke(() =>
-                    {
-                        dialog.Close();
-                    });
+                    Application.Instance.Invoke(() => { dialog.Close(); });
                     if (t.Exception == null)
                     {
+                        var api = 141.5 / sgb - 131.5;
+                        if (sgb == 0.0) api = 0.0;
+                        var assay = new DWSIM.SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(12.0, mwb, api, 310.928, 372.039, tbpcurvetype, "",
+                            new System.Collections.ArrayList(cb), new System.Collections.ArrayList(tbp), new System.Collections.ArrayList(mwc),
+                            new System.Collections.ArrayList(sgc), new System.Collections.ArrayList(visc100), new System.Collections.ArrayList(visc210));
+                        var ms2 = new MaterialStream("", "");
+                        ms2.SetFlowsheet(flowsheet);
+                        if (flowsheet.PropertyPackages.Count > 0)
+                        {
+                            ms2.SetPropertyPackage(flowsheet.PropertyPackages.Values.First());
+                        }
+                        else
+                        {
+                            ms2.SetPropertyPackage(new Thermodynamics.PropertyPackages.PengRobinsonPropertyPackage());
+                        }
+                        foreach (var subst in comps.Values)
+                        {
+                            ms2.Phases[0].Compounds.Add(subst.Name, subst);
+                            ms2.Phases[1].Compounds.Add(subst.Name, new Compound(subst.Name, "") { ConstantProperties = subst.ConstantProperties });
+                            ms2.Phases[2].Compounds.Add(subst.Name, new Compound(subst.Name, "") { ConstantProperties = subst.ConstantProperties });
+                            ms2.Phases[3].Compounds.Add(subst.Name, new Compound(subst.Name, "") { ConstantProperties = subst.ConstantProperties });
+                            ms2.Phases[4].Compounds.Add(subst.Name, new Compound(subst.Name, "") { ConstantProperties = subst.ConstantProperties });
+                            ms2.Phases[5].Compounds.Add(subst.Name, new Compound(subst.Name, "") { ConstantProperties = subst.ConstantProperties });
+                            ms2.Phases[6].Compounds.Add(subst.Name, new Compound(subst.Name, "") { ConstantProperties = subst.ConstantProperties });
+                            ms2.Phases[7].Compounds.Add(subst.Name, new Compound(subst.Name, "") { ConstantProperties = subst.ConstantProperties });
+                        }
+                        var qc = new Thermodynamics.QualityCheck(assay, ms2);
+                        qc.DoQualityCheck();
                         Application.Instance.Invoke(() =>
                         {
-
-                             flowsheet.UpdateInterface();
-                             flowsheet.ShowMessage("Material Stream '" + assayname + "' added successfully. " + ncomps.ToString() + " compounds created.", IFlowsheet.MessageType.Information);
-
-                            if (MessageBox.Show("Do you want to export the created compounds to a XML database?", "Petroleum C7+ Characterization", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
+                            qc.DisplayForm((c) =>
                             {
-                                try
+                                Application.Instance.Invoke(() =>
                                 {
-                                    var compstoexport = comps.Values.Select((x) => x.ConstantProperties).ToArray();
-                                    var savedialog = new SaveFileDialog();
-                                    savedialog.Title = "Save Compounds to XML Database";
-                                    savedialog.Filters.Add(new FileFilter("XML File", new[] { ".xml" }));
-                                    savedialog.CurrentFilterIndex = 0;
-                                    if (savedialog.ShowDialog(this) == DialogResult.Ok)
+                                    var form = s.GetDefaultEditorForm("Compound Properties: " + c.Name, 800, 600, new CompoundViewer((Flowsheet)flowsheet, c), false);
+                                    form.Show();
+                                });
+                            }, () =>
+                            {
+                                foreach (var comp in comps.Values)
+                                {
+                                    if (!flowsheet.AvailableCompounds.ContainsKey(comp.Name))
                                     {
-                                        try
+                                        flowsheet.AvailableCompounds.Add(comp.Name, comp.ConstantProperties);
+                                    }
+                                    flowsheet.SelectedCompounds.Add(comp.Name, flowsheet.AvailableCompounds[comp.Name]);
+                                    foreach (MaterialStream obj in flowsheet.SimulationObjects.Values.Where((x) => x.GraphicObject.ObjectType == ObjectType.MaterialStream))
+                                    {
+                                        foreach (var phase in obj.Phases.Values)
                                         {
-                                            if (!File.Exists(savedialog.FileName))
-                                            {
-                                                File.WriteAllText(savedialog.FileName, "");
-                                                Thermodynamics.Databases.UserDB.CreateNew(savedialog.FileName, "compounds");
-                                            }
-                                            Thermodynamics.Databases.UserDB.AddCompounds(compstoexport, savedialog.FileName, true);
-                                            flowsheet.ShowMessage("Compounds successfully saved to XML file.", IFlowsheet.MessageType.Information);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                                            phase.Compounds.Add(comp.Name, new Thermodynamics.BaseClasses.Compound(comp.Name, ""));
+                                            phase.Compounds[comp.Name].ConstantProperties = flowsheet.SelectedCompounds[comp.Name];
                                         }
                                     }
                                 }
-                                catch (Exception ex)
+                                var ms = (MaterialStream)flowsheet.AddObject(ObjectType.MaterialStream, 100, 100, assayname);
+                                double wtotal = comps.Values.Select((x) => x.MoleFraction.GetValueOrDefault() * x.ConstantProperties.Molar_Weight).Sum();
+                                foreach (var c in ms.Phases[0].Compounds.Values)
                                 {
-                                    flowsheet.ShowMessage("Error saving data: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                                    c.MassFraction = 0.0f;
+                                    c.MoleFraction = 0.0f;
                                 }
-                            }
+                                foreach (var c in comps.Values)
+                                {
+                                    c.MassFraction = c.MoleFraction.GetValueOrDefault() * c.ConstantProperties.Molar_Weight / wtotal;
+                                    ms.Phases[0].Compounds[c.Name].MassFraction = c.MassFraction.GetValueOrDefault();
+                                    ms.Phases[0].Compounds[c.Name].MoleFraction = c.MoleFraction.GetValueOrDefault();
+                                }
+                                Application.Instance.Invoke(() =>
+                                {
+                                    flowsheet.UpdateInterface();
+                                    flowsheet.ShowMessage("Material Stream '" + assayname + "' added successfully. " + ncomps.ToString() + " compounds created.", IFlowsheet.MessageType.Information);
 
+                                    if (MessageBox.Show("Do you want to export the created compounds to a XML database?", "Petroleum C7+ Characterization", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
+                                    {
+                                        try
+                                        {
+                                            var compstoexport = comps.Values.Select((x) => x.ConstantProperties).ToArray();
+                                            var savedialog = new SaveFileDialog();
+                                            savedialog.Title = "Save Compounds to XML Database";
+                                            savedialog.Filters.Add(new FileFilter("XML File", new[] { ".xml" }));
+                                            savedialog.CurrentFilterIndex = 0;
+                                            if (savedialog.ShowDialog(this) == DialogResult.Ok)
+                                            {
+                                                try
+                                                {
+                                                    if (!File.Exists(savedialog.FileName))
+                                                    {
+                                                        File.WriteAllText(savedialog.FileName, "");
+                                                        Thermodynamics.Databases.UserDB.CreateNew(savedialog.FileName, "compounds");
+                                                    }
+                                                    Thermodynamics.Databases.UserDB.AddCompounds(compstoexport, savedialog.FileName, true);
+                                                    flowsheet.ShowMessage("Compounds successfully saved to XML file.", IFlowsheet.MessageType.Information);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                                                }
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            flowsheet.ShowMessage("Error saving data: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                                        }
+                                    }
+                                });
+                            });
                         });
                     }
                     else
                     {
                         Application.Instance.Invoke(() =>
                         {
-                            flowsheet.ShowMessage("Error: " + t.Exception.GetBaseException().Message, IFlowsheet.MessageType.GeneralError);
+                            flowsheet.ShowMessage("Error saving data: " + t.Exception.GetBaseException().Message, IFlowsheet.MessageType.GeneralError);
                         });
                     }
                 });
@@ -514,7 +556,6 @@ namespace DWSIM.UI.Desktop.Editors
                 //SG
                 if (!hassgc)
                 {
-
                     if (Math.Abs(cprops.PF_MM.GetValueOrDefault()) < 1e-10)
                     {
                         if (cprops.NBP.GetValueOrDefault() < 1080)
@@ -538,15 +579,15 @@ namespace DWSIM.UI.Desktop.Editors
                 //MW
                 if (!hasmwc)
                 {
-                    switch (type)
+                    switch (MWcorr)
                     {
-                        case SampleType.Light:
+                        case "Winn (1956)":
                             cprops.PF_MM = PropertyMethods.MW_Winn(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                             break;
-                        case SampleType.Average:
+                        case "Riazi (1986)":
                             cprops.PF_MM = PropertyMethods.MW_Riazi(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                             break;
-                        case SampleType.Heavy:
+                        case "Lee-Kesler (1974)":
                             cprops.PF_MM = PropertyMethods.MW_LeeKesler(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                             break;
                     }
@@ -633,41 +674,43 @@ namespace DWSIM.UI.Desktop.Editors
                 cprops.PF_vB = PropertyMethods.ViscWaltherASTM_B(cprops.PF_Tv1.GetValueOrDefault(), cprops.PF_v1.GetValueOrDefault(), cprops.PF_Tv2.GetValueOrDefault(), cprops.PF_v2.GetValueOrDefault());
 
                 //Tc
-                switch (type)
+                switch (Tccorr)
                 {
-                    case SampleType.Light:
+                    case "Riazi-Daubert (1985)":
                         cprops.Critical_Temperature = PropertyMethods.Tc_RiaziDaubert(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                         break;
-                    case SampleType.Average:
+                    case "Lee-Kesler (1976)":
                         cprops.Critical_Temperature = PropertyMethods.Tc_LeeKesler(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                         break;
-                    case SampleType.Heavy:
+                    case "Farah (2006)":
                         cprops.Critical_Temperature = PropertyMethods.Tc_Farah(cprops.PF_vA.GetValueOrDefault(), cprops.PF_vB.GetValueOrDefault(), cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
+                        break;
+                    case "Riazi (2005)":
+                        cprops.Critical_Temperature = PropertyMethods.Tc_Riazi(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                         break;
                 }
 
                 //Pc
-                switch (type)
+                switch (Pccorr)
                 {
-                    case SampleType.Light:
+                    case "Riazi-Daubert (1985)":
                         cprops.Critical_Pressure = PropertyMethods.Pc_RiaziDaubert(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                         break;
-                    case SampleType.Average:
+                    case "Lee-Kesler (1976)":
                         cprops.Critical_Pressure = PropertyMethods.Pc_LeeKesler(cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                         break;
-                    case SampleType.Heavy:
+                    case "Farah (2006)":
                         cprops.Critical_Pressure = PropertyMethods.Pc_Farah(cprops.PF_vA.GetValueOrDefault(), cprops.PF_vB.GetValueOrDefault(), cprops.NBP.GetValueOrDefault(), cprops.PF_SG.GetValueOrDefault());
                         break;
                 }
 
                 //Af
-                switch (type)
+                switch (AFcorr)
                 {
-                    case SampleType.Heavy:
+                    case "Lee-Kesler (1976)":
                         cprops.Acentric_Factor = PropertyMethods.AcentricFactor_LeeKesler(cprops.Critical_Temperature, cprops.Critical_Pressure, cprops.NBP.GetValueOrDefault());
                         break;
-                    case SampleType.Light:
-                    case SampleType.Average:
+                    case "Korsten (2000)":
                         cprops.Acentric_Factor = PropertyMethods.AcentricFactor_Korsten(cprops.Critical_Temperature, cprops.Critical_Pressure, cprops.NBP.GetValueOrDefault());
                         break;
                 }
@@ -739,46 +782,51 @@ namespace DWSIM.UI.Desktop.Editors
             i = 0;
             foreach (var c in ccol.Values)
             {
-
-                var _with4 = nbpfit;
-                _with4._pp = pp;
-                _with4._ms = tms;
-                _with4._idx = i;
-                try
+                if (adjustAf)
                 {
-                    fw = _with4.MinimizeError();
+                    nbpfit._pp = pp;
+                    nbpfit._ms = tms;
+                    nbpfit._idx = i;
+                    if (c.ConstantProperties.Acentric_Factor < 0)
+                    {
+                        c.ConstantProperties.Acentric_Factor = 0.5;
+                        recalcVc = true;
+                    }
+                    try
+                    {
+                        fw = nbpfit.MinimizeError();
+                    }
+                    catch (Exception ex)
+                    {
+                        flowsheet.ShowMessage("Error fitting Acentric Factor for compound '" + c.Name + "': " + ex.Message, IFlowsheet.MessageType.GeneralError);
+                    }
+                    c.ConstantProperties.Acentric_Factor *= fw;
                 }
-                catch (Exception ex)
-                {
-                    flowsheet.ShowMessage("Error fitting Acentric Factor for compound '" + c.Name + "': " + ex.Message, IFlowsheet.MessageType.GeneralError);
-                }
-                var _with5 = c.ConstantProperties;
-                c.ConstantProperties.Acentric_Factor *= fw;
                 c.ConstantProperties.Z_Rackett = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Zc1(c.ConstantProperties.Acentric_Factor);
-                if (_with5.Z_Rackett < 0)
+                if (c.ConstantProperties.Z_Rackett < 0)
                 {
-                    _with5.Z_Rackett = 0.2;
+                    c.ConstantProperties.Z_Rackett = 0.2;
                     recalcVc = true;
                 }
-                _with5.Critical_Compressibility = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Zc1(_with5.Acentric_Factor);
-                _with5.Critical_Volume = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Vc(_with5.Critical_Temperature, _with5.Critical_Pressure, _with5.Acentric_Factor, _with5.Critical_Compressibility);
-
-                var _with6 = dfit;
-                _with6._comp = c;
-                try
+                c.ConstantProperties.Critical_Compressibility = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Zc1(c.ConstantProperties.Acentric_Factor);
+                c.ConstantProperties.Critical_Volume = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Vc(c.ConstantProperties.Critical_Temperature, c.ConstantProperties.Critical_Pressure, c.ConstantProperties.Acentric_Factor, c.ConstantProperties.Critical_Compressibility);
+                if (adjustZR)
                 {
-                    fzra = _with6.MinimizeError();
+                    dfit._comp = c;
+                    try
+                    {
+                        fzra = dfit.MinimizeError();
+                    }
+                    catch (Exception ex)
+                    {
+                        flowsheet.ShowMessage("Error fitting Rackett Parameter for compound '" + c.Name + "': " + ex.Message, IFlowsheet.MessageType.GeneralError);
+                    }
+                    c.ConstantProperties.Z_Rackett *= fzra;
                 }
-                catch (Exception ex)
+                if (c.ConstantProperties.Critical_Compressibility < 0 | recalcVc)
                 {
-                    flowsheet.ShowMessage("Error fitting Rackett Parameter for compound '" + c.Name + "': " + ex.Message, IFlowsheet.MessageType.GeneralError);
-                }
-                var _with7 = c.ConstantProperties;
-                _with7.Z_Rackett *= fzra;
-                if (_with7.Critical_Compressibility < 0 | recalcVc)
-                {
-                    _with7.Critical_Compressibility = _with7.Z_Rackett;
-                    _with7.Critical_Volume = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Vc(_with7.Critical_Temperature, _with7.Critical_Pressure, _with7.Acentric_Factor, _with7.Critical_Compressibility);
+                    c.ConstantProperties.Critical_Compressibility = c.ConstantProperties.Z_Rackett;
+                    c.ConstantProperties.Critical_Volume = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Vc(c.ConstantProperties.Critical_Temperature, c.ConstantProperties.Critical_Pressure, c.ConstantProperties.Acentric_Factor, c.ConstantProperties.Critical_Compressibility);
                 }
 
                 c.ConstantProperties.PR_Volume_Translation_Coefficient = 1;

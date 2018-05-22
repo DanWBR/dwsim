@@ -27,7 +27,7 @@ Namespace Utilities.PetroleumCharacterization
 
         Public data As New List(Of String())
 
-        Public Function GenerateCompounds(prefix As String, count As Integer, type As SampleType, mwi As Nullable(Of Double), sgi As Nullable(Of Double),
+        Public Function GenerateCompounds(prefix As String, count As Integer, TCcorr As String, PCcorr As String, AFcorr As String, MWcorr As String, AdjustAF As Boolean, AdjustZR As Boolean, mwi As Nullable(Of Double), sgi As Nullable(Of Double),
                                                 tbi As Nullable(Of Double), v1i As Nullable(Of Double), v2i As Nullable(Of Double),
                                                 t1i As Nullable(Of Double), t2i As Nullable(Of Double),
                                                 _mw0 As Double, _sg0 As Double, _tb0 As Double) As Dictionary(Of String, ICompound)
@@ -116,10 +116,12 @@ Namespace Utilities.PetroleumCharacterization
 
                     For i = 1 To n
 
-                        Select Case type
-                            Case SampleType.Light, SampleType.Average
+                        Select Case MWcorr
+                            Case "Riazi (1986)"
                                 dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                            Case SampleType.Heavy
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
                                 dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
                         End Select
 
@@ -130,10 +132,12 @@ Namespace Utilities.PetroleumCharacterization
                     For i = 1 To n
                         dMW(i) = ((Math.Log(1.07 - dSG(i)) - 3.56073) / (-2.93886)) ^ 10
                         dTB(i) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(i) ^ (2 / 3))
-                        Select Case type
-                            Case SampleType.Light, SampleType.Average
+                        Select Case MWcorr
+                            Case "Riazi (1986)"
                                 dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                            Case SampleType.Heavy
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
                                 dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
                         End Select
                     Next
@@ -155,10 +159,12 @@ Namespace Utilities.PetroleumCharacterization
 
                     For i = 1 To n
 
-                        Select Case type
-                            Case SampleType.Light, SampleType.Average
+                        Select Case MWcorr
+                            Case "Riazi (1986)"
                                 dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                            Case SampleType.Heavy
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
                                 dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
                         End Select
 
@@ -168,10 +174,12 @@ Namespace Utilities.PetroleumCharacterization
 
                     For i = 1 To n
 
-                        Select Case type
-                            Case SampleType.Light, SampleType.Average
+                        Select Case MWcorr
+                            Case "Riazi (1986)"
                                 dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                            Case SampleType.Heavy
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
                                 dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
                         End Select
 
@@ -276,30 +284,32 @@ Namespace Utilities.PetroleumCharacterization
                     .Molar_Weight = dMW(i)
 
                     'Tc
-                    Select Case type
-                        Case SampleType.Light
+                    Select Case TCcorr
+                        Case "Riazi-Daubert (1985)"
+                            .Critical_Temperature = PropertyMethods.Tc_RiaziDaubert(.NBP.GetValueOrDefault(), .PF_SG.GetValueOrDefault())
+                        Case "Riazi (2005)"
                             .Critical_Temperature = PropertyMethods.Tc_Riazi(.NBP.GetValueOrDefault(), .PF_SG.GetValueOrDefault())
-                        Case SampleType.Average
+                        Case "Lee-Kesler (1976)"
                             .Critical_Temperature = PropertyMethods.Tc_LeeKesler(.NBP.GetValueOrDefault(), .PF_SG.GetValueOrDefault())
-                        Case SampleType.Heavy
+                        Case "Farah (2006)"
                             .Critical_Temperature = PropertyMethods.Tc_Farah(.PF_vA.GetValueOrDefault(), .PF_vB.GetValueOrDefault(), .NBP.GetValueOrDefault(), .PF_SG.GetValueOrDefault())
                     End Select
 
                     'Pc
-                    Select Case type
-                        Case SampleType.Light
+                    Select Case PCcorr
+                        Case "Riazi-Daubert (1985)"
                             .Critical_Pressure = PropertyMethods.Pc_RiaziDaubert(.NBP.GetValueOrDefault(), .PF_SG.GetValueOrDefault())
-                        Case SampleType.Average
+                        Case "Lee-Kesler (1976)"
                             .Critical_Pressure = PropertyMethods.Pc_LeeKesler(.NBP.GetValueOrDefault(), .PF_SG.GetValueOrDefault())
-                        Case SampleType.Heavy
+                        Case "Farah (2006)"
                             .Critical_Pressure = PropertyMethods.Pc_Farah(.PF_vA.GetValueOrDefault(), .PF_vB.GetValueOrDefault(), .NBP.GetValueOrDefault(), .PF_SG.GetValueOrDefault())
                     End Select
 
                     'Af
-                    Select Case type
-                        Case SampleType.Heavy
+                    Select Case AFcorr
+                        Case "Lee-Kesler (1976)"
                             .Acentric_Factor = PropertyMethods.AcentricFactor_LeeKesler(.Critical_Temperature, .Critical_Pressure, .NBP.GetValueOrDefault())
-                        Case SampleType.Light, SampleType.Average
+                        Case "Korsten (2000)"
                             .Acentric_Factor = PropertyMethods.AcentricFactor_Korsten(.Critical_Temperature, .Critical_Pressure, .NBP.GetValueOrDefault())
                     End Select
 
@@ -375,33 +385,41 @@ Namespace Utilities.PetroleumCharacterization
 
             i = 0
             For Each c As Compound In ccol.Values
-                With nbpfit
-                    ._pp = pp
-                    ._ms = tms
-                    ._idx = i
-                    fw = .MinimizeError()
-                End With
-                With c.ConstantProperties
-                    c.ConstantProperties.Acentric_Factor *= fw
-                    c.ConstantProperties.Z_Rackett = PROPS.Zc1(c.ConstantProperties.Acentric_Factor)
-                    If .Z_Rackett < 0 Then
-                        .Z_Rackett = 0.2
+                If AdjustAF Then
+                    If c.ConstantProperties.Acentric_Factor < 0 Then
+                        c.ConstantProperties.Acentric_Factor = 0.5
                         recalcVc = True
                     End If
-                    .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)
-                    .Critical_Volume = PROPS.Vc(.Critical_Temperature, .Critical_Pressure, .Acentric_Factor, .Critical_Compressibility)
-                End With
-                With dfit
-                    ._comp = c
-                    fzra = .MinimizeError()
-                End With
-                With c.ConstantProperties
-                    .Z_Rackett *= fzra
-                    If .Critical_Compressibility < 0 Or recalcVc Then
-                        .Critical_Compressibility = .Z_Rackett
+                    With nbpfit
+                        ._pp = pp
+                        ._ms = tms
+                        ._idx = i
+                        fw = .MinimizeError()
+                    End With
+                    With c.ConstantProperties
+                        c.ConstantProperties.Acentric_Factor *= fw
+                        c.ConstantProperties.Z_Rackett = PROPS.Zc1(c.ConstantProperties.Acentric_Factor)
+                        If .Z_Rackett < 0 Then
+                            .Z_Rackett = 0.2
+                            recalcVc = True
+                        End If
+                        .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)
                         .Critical_Volume = PROPS.Vc(.Critical_Temperature, .Critical_Pressure, .Acentric_Factor, .Critical_Compressibility)
-                    End If
-                End With
+                    End With
+                End If
+                If AdjustZR Then
+                    With dfit
+                        ._comp = c
+                        fzra = .MinimizeError()
+                    End With
+                    With c.ConstantProperties
+                        .Z_Rackett *= fzra
+                        If .Critical_Compressibility < 0 Or recalcVc Then
+                            .Critical_Compressibility = .Z_Rackett
+                            .Critical_Volume = PROPS.Vc(.Critical_Temperature, .Critical_Pressure, .Acentric_Factor, .Critical_Compressibility)
+                        End If
+                    End With
+                End If
                 c.ConstantProperties.PR_Volume_Translation_Coefficient = 1.0#
                 prvsfit._comp = c
                 fprvs = prvsfit.MinimizeError()

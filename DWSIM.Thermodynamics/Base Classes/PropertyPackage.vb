@@ -4259,7 +4259,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             Dim Pest, Tmax As Double, eos As String
 
-            If Me.ComponentName.Contains("PR") Then eos = "PR" Else eos = "SRK"
+            If TypeOf Me Is PengRobinsonPropertyPackage Then eos = "PR" Else eos = "SRK"
 
             Pest = PCR * 10
             Dim Tmin As Double = MathEx.Common.Max(Me.RET_VTF)

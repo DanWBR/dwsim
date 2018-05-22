@@ -59,7 +59,7 @@ Namespace Utilities.PetroleumCharacterization.Assay
 
         'Constructors
 
-        Sub New(ByVal k_api As Double, ByVal mw As Double, ByVal api As Double, ByVal t1 As Double, ByVal t2 As Double, ByVal nbptype As String, ByVal sgtype As String, ByVal px As ArrayList, ByVal pynbp As ArrayList, ByVal pymw As ArrayList, ByVal pysg As ArrayList, ByVal pyv1 As ArrayList, ByVal pyv2 As ArrayList)
+        Sub New(ByVal k_api As Double, ByVal mw As Double, ByVal api As Double, ByVal t1 As Double, ByVal t2 As Double, ByVal nbptype As Integer, ByVal sgtype As String, ByVal px As ArrayList, ByVal pynbp As ArrayList, ByVal pymw As ArrayList, ByVal pysg As ArrayList, ByVal pyv1 As ArrayList, ByVal pyv2 As ArrayList)
             Me.New()
             _k_api = k_api
             _mw = mw

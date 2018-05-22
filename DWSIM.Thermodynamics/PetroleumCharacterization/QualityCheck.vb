@@ -75,12 +75,18 @@ Public Class QualityCheck
                 _ms.Phases(0).Properties.temperature = 15.56 + 273.15
                 _ms.Phases(0).Properties.pressure = 101325
                 _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
-                _ms.Calculate()
-                Dim sgcalc = _ms.Phases(3).Properties.density.GetValueOrDefault / 1000
-                Dim sgerr = (_assay.SG60 - sgcalc) / _assay.SG60
-                _report.AppendLine(String.Format("Specific Gravity (Specified): {0:N4}", _assay.SG60))
-                _report.AppendLine(String.Format("Specific Gravity (Calculated): {0:N4}", sgcalc))
-                _report.AppendLine(String.Format("Specific Gravity Error: {0:P}", sgerr))
+                Try
+                    _ms.Calculate()
+                    Dim sgcalc = _ms.Phases(3).Properties.density.GetValueOrDefault / 1000
+                    Dim sgerr = (_assay.SG60 - sgcalc) / _assay.SG60
+                    _report.AppendLine(String.Format("Specific Gravity (Specified): {0:N4}", _assay.SG60))
+                    _report.AppendLine(String.Format("Specific Gravity (Calculated): {0:N4}", sgcalc))
+                    _report.AppendLine(String.Format("Specific Gravity Error: {0:P}", sgerr))
+                Catch ex As Exception
+                    _ms.Calculate()
+                    _report.AppendLine(String.Format("Specific Gravity (Specified): {0:N4}", _assay.SG60))
+                    _report.AppendLine(String.Format("Specific Gravity (Calculated): ERROR"))
+                End Try
                 _report.AppendLine()
             End If
 
@@ -100,12 +106,17 @@ Public Class QualityCheck
                 _ms.Phases(0).Properties.temperature = _assay.T1
                 _ms.Phases(0).Properties.pressure = 101325
                 _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
-                _ms.Calculate()
-                Dim v1calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
-                Dim v1err = (_assay.V1 - v1calc) / _assay.V1
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, _assay.V1), su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v1calc), su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) Error: {0:P}", v1err))
+                Try
+                    _ms.Calculate()
+                    Dim v1calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                    Dim v1err = (_assay.V1 - v1calc) / _assay.V1
+                    _report.AppendLine(String.Format("Kinematic Viscosity (1) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, _assay.V1), su.cinematic_viscosity))
+                    _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v1calc), su.cinematic_viscosity))
+                    _report.AppendLine(String.Format("Kinematic Viscosity (1) Error: {0:P}", v1err))
+                Catch ex As Exception
+                    _report.AppendLine(String.Format("Kinematic Viscosity (1) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, _assay.V1), su.cinematic_viscosity))
+                    _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): ERROR"))
+                End Try
                 _report.AppendLine()
             End If
 
@@ -115,12 +126,17 @@ Public Class QualityCheck
                 _ms.Phases(0).Properties.temperature = _assay.T2
                 _ms.Phases(0).Properties.pressure = 101325
                 _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
-                _ms.Calculate()
-                Dim v2calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
-                Dim v2err = (_assay.V2 - v2calc) / _assay.V2
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.temperature, _assay.V2), su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.temperature, v2calc), su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) Error: {0:P}", v2err))
+                Try
+                    _ms.Calculate()
+                    Dim v2calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                    Dim v2err = (_assay.V2 - v2calc) / _assay.V2
+                    _report.AppendLine(String.Format("Kinematic Viscosity (2) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, _assay.V2), su.cinematic_viscosity))
+                    _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v2calc), su.cinematic_viscosity))
+                    _report.AppendLine(String.Format("Kinematic Viscosity (2) Error: {0:P}", v2err))
+                Catch ex As Exception
+                    _report.AppendLine(String.Format("Kinematic Viscosity (2) (Specified): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, _assay.V2), su.cinematic_viscosity))
+                    _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): ERROR"))
+                End Try
                 _report.AppendLine()
             End If
 
@@ -148,13 +164,18 @@ Public Class QualityCheck
                 _ms.Phases(0).Properties.temperature = 15.56 + 273.15
                 _ms.Phases(0).Properties.pressure = 101325
                 _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
-                _ms.Calculate()
-                Dim apicalc = _ms.Phases(3).Properties.density.GetValueOrDefault / 1000
-                apicalc = 141.5 / apicalc - 131.5
-                Dim apierr = (_assay.API - apicalc) / _assay.API
-                _report.AppendLine(String.Format("API (Specified): {0:N4}", _assay.API))
-                _report.AppendLine(String.Format("API (Calculated): {0:N4}", apicalc))
-                _report.AppendLine(String.Format("API Error: {0:P}", apierr))
+                Try
+                    _ms.Calculate()
+                    Dim apicalc = _ms.Phases(3).Properties.density.GetValueOrDefault / 1000
+                    apicalc = 141.5 / apicalc - 131.5
+                    Dim apierr = (_assay.API - apicalc) / _assay.API
+                    _report.AppendLine(String.Format("API (Specified): {0:N4}", _assay.API))
+                    _report.AppendLine(String.Format("API (Calculated): {0:N4}", apicalc))
+                    _report.AppendLine(String.Format("API Error: {0:P}", apierr))
+                Catch ex As Exception
+                    _report.AppendLine(String.Format("API (Specified): {0:N4}", _assay.API))
+                    _report.AppendLine(String.Format("API (Calculated): ERROR"))
+                End Try
                 _report.AppendLine()
             End If
 
@@ -163,24 +184,23 @@ Public Class QualityCheck
             _report.AppendLine()
 
             If _assay.HasViscCurves Then
-
                 _ms.PropertyPackage = pp
                 _ms.ClearCalculatedProps()
-
                 pp.CurrentMaterialStream = _ms
-
                 _ms.Phases(0).Properties.temperature = _assay.T1
                 _ms.Phases(0).Properties.pressure = 101325
                 _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
-                _ms.Calculate()
-
-                Dim v1calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                Try
+                    _ms.Calculate()
+                    Dim v1calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                    _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v1calc), su.cinematic_viscosity))
+                Catch ex As Exception
+                    _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): ERROR"))
+                End Try
                 Dim v1min = _assay.PY_V1.ToDoubleList().Min
                 Dim v1max = _assay.PY_V1.ToDoubleList().Max
-
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Minimum): {0:G4} {1}", v1min, su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Maximum): {0:G4} {1}", v1max, su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Calculated): {0:G4} {1}", v1calc, su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Minimum): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v1min), su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (1) (Maximum): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v1max), su.cinematic_viscosity))
                 _report.AppendLine()
 
                 _ms.PropertyPackage = pp
@@ -191,17 +211,18 @@ Public Class QualityCheck
                 _ms.Phases(0).Properties.temperature = _assay.T2
                 _ms.Phases(0).Properties.pressure = 101325
                 _ms.SpecType = Enums.StreamSpec.Temperature_and_Pressure
-                _ms.Calculate()
-
-                Dim v2calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                Try
+                    _ms.Calculate()
+                    Dim v2calc = _ms.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                    _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v2calc), su.cinematic_viscosity))
+                Catch ex As Exception
+                    _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): ERROR"))
+                End Try
                 Dim v2min = _assay.PY_V2.ToDoubleList().Min
                 Dim v2max = _assay.PY_V2.ToDoubleList().Max
-
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Minimum): {0:G4} {1}", v2min, su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Maximum): {0:G4} {1}", v2max, su.cinematic_viscosity))
-                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Calculated): {0:G4} {1}", v2calc, su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Minimum): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v2min), su.cinematic_viscosity))
+                _report.AppendLine(String.Format("Kinematic Viscosity (2) (Maximum): {0:G4} {1}", cv.ConvertFromSI(su.cinematic_viscosity, v2max), su.cinematic_viscosity))
                 _report.AppendLine()
-
             End If
 
         End If
@@ -215,11 +236,11 @@ Public Class QualityCheck
         Dim co2 = UI.Shared.Common.GetDefaultContainer()
         co2.Tag = "Pseudocompound Properties"
 
-        Dim myform = UI.Shared.Common.GetDefaultTabbedForm("Petroleum Characterization Quality Check", 750, 600, {co1, co2})
+        Dim myform = UI.Shared.Common.GetDefaultTabbedForm("Petroleum Characterization Quality Check", 750, 575, {co1, co2})
 
         co1.CreateAndAddLabelRow("Quality Check Report")
         co1.CreateAndAddMultilineMonoSpaceTextBoxRow(_report.ToString, 400, True, Nothing)
-        co1.CreateAndAddDescriptionRow("Analyze the report and the properties of the generated pseudocompounds. Click 'Yes' if you want to proceed adding the compounds to the simulation. If you're not satisfied with the generated properties, click 'No', select a different set of property methods and parameters and try again.")
+        co1.CreateAndAddLabelRow2("Analyze the report and the properties of the generated pseudocompounds. Click 'Yes' if you want to proceed adding the compounds to the simulation. If you're not satisfied with the generated properties, click 'No', select a different set of property methods and parameters and try again.")
         co1.CreateAndAddLabelAndTwoButtonsRow("", "No", Nothing, "Yes", Nothing,
                                               Sub()
                                                   _dlgresult = DialogResult.No

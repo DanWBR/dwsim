@@ -419,6 +419,10 @@ Public Class FormPCBulk
         i = 0
         For Each c As Compound In ccol.Values
             If Me.CheckBoxADJAF.Checked Then
+                If c.ConstantProperties.Acentric_Factor < 0 Then
+                    c.ConstantProperties.Acentric_Factor = 0.5
+                    recalcVc = True
+                End If
                 With nbpfit
                     ._pp = pp
                     ._ms = tms

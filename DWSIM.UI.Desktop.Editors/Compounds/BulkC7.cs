@@ -32,7 +32,9 @@ namespace DWSIM.UI.Desktop.Editors
 
         int ncomps = 10;
         double t1, t2, v1, v2, mw0, sg0, nbp0;
-        SampleType type = SampleType.Light;
+        string Tccorr = "Riazi-Daubert (1985)", Pccorr = "Riazi-Daubert (1985)", AFcorr = "Lee-Kesler (1976)", MWcorr = "Winn (1956)";
+        bool adjustAf = true, adjustZR = true;
+
         Nullable<double> mw, sg, nbp;
 
 
@@ -68,24 +70,38 @@ namespace DWSIM.UI.Desktop.Editors
             });
             s.CreateAndAddDescriptionRow(this, "Enter the name of the assay. It will be used to identify the Material Stream on the flowsheet and the associated compounds as well.");
 
+            s.CreateAndAddLabelRow(this, "Property Methods");
+
+            s.CreateAndAddDescriptionRow(this, "Select the methods to calculate compound properties.");
+
+            s.CreateAndAddDropDownRow(this, "Molecular Weight", new List<string>() { "Winn (1956)", "Riazi (1986)", "Lee-Kesler (1974)" }, 0, (arg3, arg2) =>
+            {
+                MWcorr = arg3.SelectedValue.ToString();
+            });
+            s.CreateAndAddDropDownRow(this, "Critical Temperature", new List<string>() { "Riazi-Daubert (1985)", "Riazi (2005)", "Lee-Kesler (1976)", "Farah (2006)" }, 0, (arg3, arg2) =>
+            {
+                Tccorr = arg3.SelectedValue.ToString();
+            });
+            s.CreateAndAddDropDownRow(this, "Critical Pressure", new List<string>() { "Riazi-Daubert (1985)", "Lee-Kesler (1976)", "Farah (2006)" }, 0, (arg3, arg2) =>
+            {
+                Pccorr = arg3.SelectedValue.ToString();
+            });
+            s.CreateAndAddDropDownRow(this, "Acentric Factor", new List<string>() { "Lee-Kesler (1976)", "Korsten (2000)" }, 0, (arg3, arg2) =>
+            {
+                AFcorr = arg3.SelectedValue.ToString();
+            });
+            s.CreateAndAddCheckBoxRow(this, "Adjust Acentric Factors to match Normal Boiling Temperatures", adjustAf, (arg1, arg2) =>
+            {
+                adjustAf = arg1.Checked.GetValueOrDefault();
+            }, null);
+            s.CreateAndAddCheckBoxRow(this, "Adjust Rackett Parameters to match Specific Gravities", adjustZR, (arg1, arg2) =>
+            {
+                adjustZR = arg1.Checked.GetValueOrDefault();
+            }, null);
+
             s.CreateAndAddLabelRow(this, "Assay Properties");
-            s.CreateAndAddDescriptionRow(this, "Select the assay type and define at least one of the following three properties in order to calculate a property distribution.");
-            s.CreateAndAddDropDownRow(this, "Assay Type", new List<string>() { "Light", "Average", "Heavy" }, 0, (arg3, arg2) =>
-               {
-                   switch (arg3.SelectedIndex)
-                   {
-                       case 0:
-                           type = SampleType.Light;
-                           break;
-                       case 1:
-                           type = SampleType.Average;
-                           break;
-                       case 2:
-                           type = SampleType.Heavy;
-                           break;
-                   }
-               });
-            s.CreateAndAddDescriptionRow(this, "Select the type of the assay. Property calculation methods will be selected according to this setting.");
+            s.CreateAndAddDescriptionRow(this, "Define at least one of the following three properties in order to calculate a property distribution.");
+
             s.CreateAndAddTextBoxRow(this, nf, "Molar Weight", mw.GetValueOrDefault(), (arg3, arg2) =>
             {
                 if (s.IsValidDouble(arg3.Text))
@@ -154,7 +170,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var comps = new Dictionary<string, ICompound>();
                 Task.Factory.StartNew(() =>
                 {
-                    comps = new GenerateCompounds().GenerateCompounds(assayname, ncomps, type, mw, sg, nbp, v1, v2, t1, t2, mw0, sg0, nbp0);
+                    comps = new GenerateCompounds().GenerateCompounds(assayname, ncomps, Tccorr, Pccorr, AFcorr, MWcorr, adjustAf, adjustZR, mw, sg, nbp, v1, v2, t1, t2, mw0, sg0, nbp0);
                 }).ContinueWith((t) =>
                 {
                     Application.Instance.Invoke(() => { dialog.Close(); });
