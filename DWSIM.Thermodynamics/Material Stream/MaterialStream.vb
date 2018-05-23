@@ -810,7 +810,7 @@ Namespace Streams
 
             AtEquilibrium = False
 
-            GraphicObject.Calculated = False
+            If GraphicObject IsNot Nothing Then GraphicObject.Calculated = False
 
         End Sub
 

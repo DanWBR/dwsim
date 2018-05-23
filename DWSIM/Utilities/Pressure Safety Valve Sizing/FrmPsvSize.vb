@@ -118,28 +118,13 @@ Public Class FrmPsvSize
         If Me.ComboBox1.SelectedItem = DWSIM.App.GetLocalString("GsLquidoBifsico") And Me.ComboBox2.SelectedItem = "API RP 520" Then
 
             Dim mymat As Streams.MaterialStream = entmat.Clone
+
+            mymat.PropertyPackage = entmat.PropertyPackage
+
             mymat.Phases(0).Properties.pressure = entmat.Phases(0).Properties.pressure.GetValueOrDefault * 0.9
 
-            With mymat.PropertyPackage
-                .CurrentMaterialStream = mymat
-                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                If mymat.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                    .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
-                Else
-                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
-                End If
-                If mymat.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                    .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                Else
-                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                End If
-                If mymat.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And mymat.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
-                    .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                Else
-                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
-                End If
-                mymat.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-            End With
+            mymat.PropertyPackage.CurrentMaterialStream = mymat
+            mymat.Calculate()
 
             Dim rho90 = mymat.Phases(0).Properties.density.GetValueOrDefault
 

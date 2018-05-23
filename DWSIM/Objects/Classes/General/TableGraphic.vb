@@ -1445,7 +1445,7 @@ Namespace GraphicObjects
 
                 If Me.Owner.GetFlowsheet IsNot Nothing Then
 
-                    Me.Opacity = 225
+                    Me.Opacity = 240
 
                     Dim gContainer As System.Drawing.Drawing2D.GraphicsContainer
                     Dim myMatrix As Drawing2D.Matrix
@@ -1458,7 +1458,7 @@ Namespace GraphicObjects
 
                     Dim dpiscale = g.DpiX / 96.0
 
-                    Me.HeaderFont = New Font("Arial", dpiscale * 11 / Me.AdditionalInfo, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
+                    Me.HeaderFont = New Font("Arial", dpiscale * 11 / AdditionalInfo, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
 
                     g.TextRenderingHint = Text.TextRenderingHint.SystemDefault
 
@@ -1557,21 +1557,11 @@ Namespace GraphicObjects
 
                     'draw shadow
 
-                    Dim rect0 As New Rectangle(X + 4, Y + 4, Width, Height)
-                    DrawRoundRect(g, Pens.Transparent, rect0.X, rect0.Y, rect0.Width, rect0.Height, 10, New SolidBrush(Color.FromArgb(100, Color.Gray)))
-                    g.FillRectangle(New SolidBrush(Color.FromArgb(50, Color.DimGray)), rect0)
-                    Me.DrawRoundRect(g, New Pen(Color.Transparent), X + 4, Y + 4, Width, Height, 10, New SolidBrush(Color.FromArgb(50, Color.DimGray)))
-
-
-                    m_Color_Gradient_1 = Color.FromArgb(255, BackgroundGradientColor1)
-                    m_Color_Gradient_2 = Color.FromArgb(255, BackgroundGradientColor2)
+                    Dim rect0 As New Rectangle(X + 2, Y + 2, Width, Height)
+                    DrawRoundRect(g, Pens.Transparent, rect0.X, rect0.Y, rect0.Width, rect0.Height, 6, New SolidBrush(Color.FromArgb(50, Color.DimGray)))
 
                     Dim rect As New Rectangle(X, Y, Width, Height)
-                    If Me.IsGradientBackground = False Then
-                        DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New SolidBrush(Color.FromArgb(Me.Opacity, Me.BackgroundColor)))
-                    Else
-                        DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New Drawing2D.LinearGradientBrush(rect, Me.m_Color_Gradient_1, Me.m_Color_Gradient_2, LinearGradientMode.Vertical))
-                    End If
+                    DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New SolidBrush(Color.FromArgb(Me.Opacity, Me.BackgroundColor)))
 
                     Dim format1 As New StringFormat(StringFormatFlags.NoClip)
                     With format1
