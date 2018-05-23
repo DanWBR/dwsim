@@ -161,7 +161,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Paragraphs.Add("In terms of component fugacities the objective function for Gibbs energy minimization can be formulated")
 
-            IObj?.Paragraphs.Add("<m>Q = \sum\limits_{k=1}^{F}{   \sum\limits_{i=1}^{C}{n_{ik}\ln f_{ik} } </m>}")
+            IObj?.Paragraphs.Add("<m>Q = \sum\limits_{k=1}^{F}{\sum\limits_{i=1}^{C}{n_{ik}\ln f_{ik} }}</m>")
 
             IObj?.Paragraphs.Add("A straightforward approach is to use the molar amounts in phases 1 to F — 1 as the independent variables, eliminating the nt•F by means of the overall material balance, i.e.,")
 
@@ -1484,7 +1484,7 @@ out:        Return result
 
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
 
-                IObj?.Paragraphs.Add(String.Format("The PS Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, x1))
+                IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, x1))
 
                 T = x1
 
