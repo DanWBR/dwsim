@@ -218,9 +218,18 @@ Label_00CC:
 
         Private Shared Function InitializeFlowsheetInternal(xdoc As XDocument, fs As IFlowsheet)
 
-            For Each xel1 As XElement In xdoc.Descendants
-                SharedClasses.Utility.UpdateElement(xel1)
-            Next
+            'For Each xel1 As XElement In xdoc.Descendants
+            '    SharedClasses.Utility.UpdateElement(xel1)
+            'Next
+
+            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                   SharedClasses.Utility.UpdateElement(xel1)
+                                                   If GlobalSettings.Settings.OldUI Then
+                                                       SharedClasses.Utility.UpdateElementFromNewUI(xel1)
+                                                   Else
+                                                       SharedClasses.Utility.UpdateElementForNewUI(xel1)
+                                                   End If
+                                               End Sub)
 
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
