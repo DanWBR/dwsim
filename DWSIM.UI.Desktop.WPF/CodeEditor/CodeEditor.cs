@@ -31,6 +31,9 @@ namespace DWSIM.UI.Desktop.WPF
             te.FontFamily = new System.Windows.Media.FontFamily("Consolas");
             te.ShowLineNumbers = true;
             te.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("C#");
+            te.Options.ConvertTabsToSpaces = false;
+            te.Options.EnableHyperlinks = true;
+            te.Options.EnableTextDragDrop = true;
 
             this.Control = te;
         }
