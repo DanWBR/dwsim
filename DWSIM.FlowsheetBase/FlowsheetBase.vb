@@ -997,10 +997,15 @@ Imports System.Dynamic
 
     Public Sub LoadFromXML(xdoc As XDocument) Implements IFlowsheet.LoadFromXML
 
-        For Each xel1 As XElement In xdoc.Descendants
-            SharedClasses.Utility.UpdateElement(xel1)
-            SharedClasses.Utility.UpdateElementForNewUI(xel1)
-        Next
+        'For Each xel1 As XElement In xdoc.Descendants
+        '    SharedClasses.Utility.UpdateElement(xel1)
+        '    SharedClasses.Utility.UpdateElementForNewUI(xel1)
+        'Next
+
+        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                               SharedClasses.Utility.UpdateElement(xel1)
+                                               SharedClasses.Utility.UpdateElementFromNewUI(xel1)
+                                           End Sub)
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 

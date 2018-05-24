@@ -1311,10 +1311,15 @@ Public Class FormMain
             xdoc = XDocument.Load(fstr)
         End Using
 
-        For Each xel1 As XElement In xdoc.Descendants
-            SharedClasses.Utility.UpdateElement(xel1)
-            SharedClasses.Utility.UpdateElementFromNewUI(xel1)
-        Next
+        'For Each xel1 As XElement In xdoc.Descendants
+        '    SharedClasses.Utility.UpdateElement(xel1)
+        '    SharedClasses.Utility.UpdateElementFromNewUI(xel1)
+        'Next
+
+        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                               SharedClasses.Utility.UpdateElement(xel1)
+                                               SharedClasses.Utility.UpdateElementFromNewUI(xel1)
+                                           End Sub)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
