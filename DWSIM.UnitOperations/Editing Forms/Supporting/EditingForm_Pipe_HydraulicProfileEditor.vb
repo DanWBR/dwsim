@@ -583,9 +583,13 @@ Imports System.Drawing
 
     End Sub
 
-    Public Function DN(ByVal i As Integer, ByVal k As Integer) As String
+    Public Function DN(ByVal i As Integer, ByVal k As Integer) As Object
 
-        Return DNom(i, k)
+        If Double.TryParse(DNom(i, k), New Double) Then
+            Return Double.Parse(DNom(i, k), System.Globalization.CultureInfo.InvariantCulture)
+        Else
+            Return DNom(i, k)
+        End If
 
     End Function
 
