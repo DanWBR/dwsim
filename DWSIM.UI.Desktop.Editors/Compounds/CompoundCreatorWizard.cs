@@ -343,7 +343,7 @@ namespace DWSIM.UI.Desktop.Editors
                     if (comp.IsHydratedSalt) tval = 2;
                     dl.CreateAndAddDropDownRow("Electrolyte Type", type.ToList(), tval, (sender, e) =>
                     {
-                        switch (tval)
+                        switch (sender.SelectedIndex)
                         {
                             case 0:
                                 comp.IsIon = true;
