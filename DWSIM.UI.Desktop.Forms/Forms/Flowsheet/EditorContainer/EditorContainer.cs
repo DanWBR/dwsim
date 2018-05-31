@@ -186,7 +186,8 @@ namespace DWSIM.UI.Forms
 
                 try
                 {
-                    PageEditor.Text = obj.GraphicObject.Tag;
+                    DocumentPage dpage = (DocumentPage)PageEditor.Parent.Parent;
+                    dpage.Text = obj.GraphicObject.Tag;
                 }
                 catch { }
 

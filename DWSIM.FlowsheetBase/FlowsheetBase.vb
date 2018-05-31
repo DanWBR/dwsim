@@ -1004,7 +1004,7 @@ Imports System.Dynamic
 
         Parallel.ForEach(xdoc.Descendants, Sub(xel1)
                                                SharedClasses.Utility.UpdateElement(xel1)
-                                               SharedClasses.Utility.UpdateElementFromNewUI(xel1)
+                                               SharedClasses.Utility.UpdateElementForNewUI(xel1)
                                            End Sub)
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
