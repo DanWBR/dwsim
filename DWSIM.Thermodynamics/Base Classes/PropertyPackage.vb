@@ -2250,6 +2250,16 @@ Namespace PropertyPackages
 
                             End If
 
+                            If xv = 1.0 Then
+                                xl = 1.0E-20
+                                xl2 = 0.0
+                                xs = 0.0
+                            ElseIf xl = 1.0 Then
+                                xv = 1.0E-20
+                                xl2 = 0.0
+                                xs = 0.0
+                            End If
+
                             Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
                             Me.CurrentMaterialStream.Phases(4).Properties.molarfraction = xl2
                             Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = xv
@@ -2918,6 +2928,16 @@ redirect2:                      IObj?.SetCurrent()
                                 Vx2 = result(8)
                                 Vs = result(10)
 
+                            End If
+
+                            If xv = 1.0 Then
+                                xl = 1.0E-20
+                                xl2 = 0.0
+                                xs = 0.0
+                            ElseIf xl = 1.0 Then
+                                xv = 1.0E-20
+                                xl2 = 0.0
+                                xs = 0.0
                             End If
 
                             Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
@@ -9144,7 +9164,7 @@ Final3:
             Select Case fFlags
                 Case CapeCalculationCode.CAPE_LOG_FUGACITY_COEFFICIENTS
                     'normalize mole fractions
-                    Dim tmols As Double, Vx(moleNumbers.length) As Double
+                    Dim tmols As Double
                     For i As Integer = 0 To moleNumbers.length - 1
                         tmols += moleNumbers(i)
                     Next
@@ -9153,11 +9173,11 @@ Final3:
                     Next
                     Select Case phaseLabel
                         Case "Vapor"
-                            lnPhi = Me.DW_CalcFugCoeff(Vx, temperature, pressure, State.Vapor)
+                            lnPhi = Me.DW_CalcFugCoeff(moleNumbers, temperature, pressure, State.Vapor)
                         Case "Liquid"
-                            lnPhi = Me.DW_CalcFugCoeff(Vx, temperature, pressure, State.Liquid)
+                            lnPhi = Me.DW_CalcFugCoeff(moleNumbers, temperature, pressure, State.Liquid)
                         Case "Solid"
-                            lnPhi = Me.DW_CalcFugCoeff(Vx, temperature, pressure, State.Solid)
+                            lnPhi = Me.DW_CalcFugCoeff(moleNumbers, temperature, pressure, State.Solid)
                     End Select
                     For i As Integer = 0 To moleNumbers.length - 1
                         lnPhi(i) = Log(lnPhi(i))
@@ -9906,6 +9926,12 @@ Final3:
 
                 Dim mys As ICapeThermoMaterial = _como
 
+                Dim Vx As Object = Nothing
+
+                mys.GetOverallProp("fraction", "Mole", Vx)
+
+                Me.CurrentMaterialStream.SetPhaseComposition(Vx, Phase.Mixture)
+
                 If spec1 = FlashSpec.T And spec2 = P Then
                     mys.GetOverallProp("temperature", Nothing, res)
                     T = res(0)
@@ -9959,10 +9985,10 @@ Final3:
                 Dim l2ok As Boolean = False
                 Dim sok As Boolean = False
 
-                If ms.Phases(2).Properties.molarfraction.HasValue Then vok = True
-                If ms.Phases(3).Properties.molarfraction.HasValue Then l1ok = True
-                If ms.Phases(4).Properties.molarfraction.HasValue Then l2ok = True
-                If ms.Phases(7).Properties.molarfraction.HasValue Then sok = True
+                If ms.Phases(2).Properties.molarfraction.GetValueOrDefault >= 1.0E-20 Then vok = True
+                If ms.Phases(3).Properties.molarfraction.GetValueOrDefault >= 1.0E-20 Then l1ok = True
+                If ms.Phases(4).Properties.molarfraction.GetValueOrDefault >= 1.0E-20 Then l2ok = True
+                If ms.Phases(7).Properties.molarfraction.GetValueOrDefault >= 1.0E-20 Then sok = True
 
                 If GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents Then sok = False
 
@@ -10214,189 +10240,7 @@ Final3:
                     Next
                 Next
 
-                'transfer values
-
-                Dim mys As ICapeThermoMaterial = material
-
-                Dim Tv, Tl1, Tl2, Ts, Pv, Pl1, Pl2, Ps, xv, xl1, xl2, xs As Double
-                Dim Vz As Object = Nothing
-                Dim Vy As Object = Nothing
-                Dim Vx1 As Object = Nothing
-                Dim Vx2 As Object = Nothing
-                Dim Vs As Object = Nothing
-                Dim Vwy As Object = Nothing
-                Dim Vwx1 As Object = Nothing
-                Dim Vwx2 As Object = Nothing
-                Dim Vws As Object = Nothing
-                Dim labels As Object = Nothing
-                Dim statuses As Object = Nothing
-                Dim res As Object = Nothing
-
-                Try
-                    mys.GetOverallProp("fraction", "Mole", res)
-                    Vz = res
-                Catch ex As Exception
-                    Vz = RET_NullVector()
-                End Try
-
-                mys.GetPresentPhases(labels, statuses)
-
-                Dim data(0) As Double
-
-                Dim i As Integer = 0
-                Dim n As Integer = UBound(labels)
-
-                For i = 0 To n
-                    If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
-                        Select Case labels(i)
-                            Case "Vapor"
-                                mys.GetTPFraction(labels(i), Tv, Pv, Vy)
-                            Case "Liquid"
-                                mys.GetTPFraction(labels(i), Tl1, Pl1, Vx1)
-                            Case "Liquid2"
-                                mys.GetTPFraction(labels(i), Tl2, Pl2, Vx2)
-                            Case "Solid"
-                                mys.GetTPFraction(labels(i), Ts, Ps, Vs)
-                        End Select
-                        Select Case labels(i)
-                            Case "Vapor"
-                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                                xv = res(0)
-                            Case "Liquid"
-                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                                xl1 = res(0)
-                            Case "Liquid2"
-                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                                xl2 = res(0)
-                            Case "Solid"
-                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                                xs = res(0)
-                        End Select
-                    Else
-                        Select Case labels(i)
-                            Case "Vapor"
-                                xv = 0.0#
-                            Case "Liquid"
-                                xl1 = 0.0#
-                            Case "Liquid2"
-                                xl2 = 0.0#
-                            Case "Solid"
-                                xs = 0.0#
-                        End Select
-                    End If
-                Next
-
                 Me.CurrentMaterialStream = ms
-
-                'copy fractions
-
-                With ms
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(0).Compounds.Values
-                        s.MoleFraction = Vz(i)
-                        i += 1
-                    Next
-                    If Vy IsNot Nothing Then
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                            s.MoleFraction = Vy(i)
-                            i += 1
-                        Next
-                        Vwy = Me.AUX_CONVERT_MOL_TO_MASS(Vy)
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                            s.MassFraction = Vwy(i)
-                            i += 1
-                        Next
-                    Else
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                            s.MoleFraction = 0.0#
-                            i += 1
-                        Next
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                            s.MassFraction = 0.0#
-                            i += 1
-                        Next
-                    End If
-                    .Phases(2).Properties.molarfraction = xv
-                    If Vx1 IsNot Nothing Then
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                            s.MoleFraction = Vx1(i)
-                            i += 1
-                        Next
-                        Vwx1 = Me.AUX_CONVERT_MOL_TO_MASS(Vx1)
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                            s.MassFraction = Vwx1(i)
-                            i += 1
-                        Next
-                    Else
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                            s.MoleFraction = 0.0#
-                            i += 1
-                        Next
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                            s.MassFraction = 0.0#
-                            i += 1
-                        Next
-                    End If
-                    .Phases(3).Properties.molarfraction = xl1
-                    If Vx2 IsNot Nothing Then
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                            s.MoleFraction = Vx2(i)
-                            i += 1
-                        Next
-                        Vwx2 = Me.AUX_CONVERT_MOL_TO_MASS(Vx2)
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                            s.MassFraction = Vwx2(i)
-                            i += 1
-                        Next
-                    Else
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                            s.MoleFraction = 0.0#
-                            i += 1
-                        Next
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                            s.MassFraction = 0.0#
-                            i += 1
-                        Next
-                    End If
-                    .Phases(4).Properties.molarfraction = xl2
-                    If Vs IsNot Nothing Then
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                            s.MoleFraction = Vs(i)
-                            i += 1
-                        Next
-                        Vws = Me.AUX_CONVERT_MOL_TO_MASS(Vs)
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                            s.MassFraction = Vws(i)
-                            i += 1
-                        Next
-                    Else
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                            s.MoleFraction = 0.0#
-                            i += 1
-                        Next
-                        i = 0
-                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                            s.MassFraction = 0.0#
-                            i += 1
-                        Next
-                    End If
-                    .Phases(7).Properties.molarfraction = xs
-                End With
 
                 Return ms
 
@@ -10407,6 +10251,192 @@ Final3:
             End If
 
         End Function
+
+        Public Sub COMaterial_GetCompositions()
+
+            Dim mys As ICapeThermoMaterial = _como
+
+            'transfer values
+
+            Dim Tv, Tl1, Tl2, Ts, Pv, Pl1, Pl2, Ps, xv, xl1, xl2, xs As Double
+            Dim Vz As Object = Nothing
+            Dim Vy As Object = Nothing
+            Dim Vx1 As Object = Nothing
+            Dim Vx2 As Object = Nothing
+            Dim Vs As Object = Nothing
+            Dim Vwy As Object = Nothing
+            Dim Vwx1 As Object = Nothing
+            Dim Vwx2 As Object = Nothing
+            Dim Vws As Object = Nothing
+            Dim labels As Object = Nothing
+            Dim statuses As Object = Nothing
+            Dim res As Object = Nothing
+
+            Try
+                mys.GetOverallProp("fraction", "Mole", res)
+                Vz = res
+            Catch ex As Exception
+                Vz = RET_NullVector()
+            End Try
+
+            mys.GetPresentPhases(labels, statuses)
+
+            Dim data(0) As Double
+
+            Dim i As Integer = 0
+            Dim n As Integer = UBound(labels)
+
+            For i = 0 To n
+                If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
+                    Select Case labels(i)
+                        Case "Vapor"
+                            mys.GetTPFraction(labels(i), Tv, Pv, Vy)
+                        Case "Liquid"
+                            mys.GetTPFraction(labels(i), Tl1, Pl1, Vx1)
+                        Case "Liquid2"
+                            mys.GetTPFraction(labels(i), Tl2, Pl2, Vx2)
+                        Case "Solid"
+                            mys.GetTPFraction(labels(i), Ts, Ps, Vs)
+                    End Select
+                    Select Case labels(i)
+                        Case "Vapor"
+                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                            xv = res(0)
+                        Case "Liquid"
+                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                            xl1 = res(0)
+                        Case "Liquid2"
+                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                            xl2 = res(0)
+                        Case "Solid"
+                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                            xs = res(0)
+                    End Select
+                Else
+                    Select Case labels(i)
+                        Case "Vapor"
+                            xv = 0.0#
+                        Case "Liquid"
+                            xl1 = 0.0#
+                        Case "Liquid2"
+                            xl2 = 0.0#
+                        Case "Solid"
+                            xs = 0.0#
+                    End Select
+                End If
+            Next
+
+            'copy fractions
+
+            With Me.CurrentMaterialStream
+                i = 0
+                For Each s As Interfaces.ICompound In .Phases(0).Compounds.Values
+                    s.MoleFraction = Vz(i)
+                    i += 1
+                Next
+                If Vy IsNot Nothing Then
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                        s.MoleFraction = Vy(i)
+                        i += 1
+                    Next
+                    Vwy = Me.AUX_CONVERT_MOL_TO_MASS(Vy)
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                        s.MassFraction = Vwy(i)
+                        i += 1
+                    Next
+                Else
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                        s.MoleFraction = 0.0#
+                        i += 1
+                    Next
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                        s.MassFraction = 0.0#
+                        i += 1
+                    Next
+                End If
+                .Phases(2).Properties.molarfraction = xv
+                If Vx1 IsNot Nothing Then
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                        s.MoleFraction = Vx1(i)
+                        i += 1
+                    Next
+                    Vwx1 = Me.AUX_CONVERT_MOL_TO_MASS(Vx1)
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                        s.MassFraction = Vwx1(i)
+                        i += 1
+                    Next
+                Else
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                        s.MoleFraction = 0.0#
+                        i += 1
+                    Next
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                        s.MassFraction = 0.0#
+                        i += 1
+                    Next
+                End If
+                .Phases(3).Properties.molarfraction = xl1
+                If Vx2 IsNot Nothing Then
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                        s.MoleFraction = Vx2(i)
+                        i += 1
+                    Next
+                    Vwx2 = Me.AUX_CONVERT_MOL_TO_MASS(Vx2)
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                        s.MassFraction = Vwx2(i)
+                        i += 1
+                    Next
+                Else
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                        s.MoleFraction = 0.0#
+                        i += 1
+                    Next
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                        s.MassFraction = 0.0#
+                        i += 1
+                    Next
+                End If
+                .Phases(4).Properties.molarfraction = xl2
+                If Vs IsNot Nothing Then
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                        s.MoleFraction = Vs(i)
+                        i += 1
+                    Next
+                    Vws = Me.AUX_CONVERT_MOL_TO_MASS(Vs)
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                        s.MassFraction = Vws(i)
+                        i += 1
+                    Next
+                Else
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                        s.MoleFraction = 0.0#
+                        i += 1
+                    Next
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                        s.MassFraction = 0.0#
+                        i += 1
+                    Next
+                End If
+                .Phases(7).Properties.molarfraction = xs
+            End With
+
+        End Sub
 
 #End Region
 
