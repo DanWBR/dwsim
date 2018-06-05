@@ -1104,7 +1104,7 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
                 Tinf = Tref - 250
                 Tsup = Tref + 250
             Else
-                Tinf = PP.RET_VTF.MinY * 0.3
+                Tinf = PP.RET_VTF.MultiplyY(Vz).SumY * 0.3
                 Tsup = 5000
             End If
             If Tinf < 20 Then Tinf = 20
@@ -1225,7 +1225,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
                 Tinf = Tref - 200
                 Tsup = Tref + 200
             Else
-                Tinf = PP.RET_VTF.MinY * 0.3
+                Tinf = PP.RET_VTF.MultiplyY(Vz).SumY * 0.3
                 Tsup = 10000
             End If
             If Tinf < 20 Then Tinf = 20
