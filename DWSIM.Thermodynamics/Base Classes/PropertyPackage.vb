@@ -2250,14 +2250,16 @@ Namespace PropertyPackages
 
                             End If
 
-                            If xv = 1.0 Then
-                                xl = 1.0E-20
-                                xl2 = 0.0
-                                xs = 0.0
-                            ElseIf xl = 1.0 Then
-                                xv = 1.0E-20
-                                xl2 = 0.0
-                                xs = 0.0
+                            If Settings.CAPEOPENMode Then
+                                If xv = 1.0 Then
+                                    xl = 1.0E-20
+                                    xl2 = 0.0
+                                    xs = 0.0
+                                ElseIf xl = 1.0 Then
+                                    xv = 1.0E-20
+                                    xl2 = 0.0
+                                    xs = 0.0
+                                End If
                             End If
 
                             Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
@@ -2930,14 +2932,16 @@ redirect2:                      IObj?.SetCurrent()
 
                             End If
 
-                            If xv = 1.0 Then
-                                xl = 1.0E-20
-                                xl2 = 0.0
-                                xs = 0.0
-                            ElseIf xl = 1.0 Then
-                                xv = 1.0E-20
-                                xl2 = 0.0
-                                xs = 0.0
+                            If Settings.CAPEOPENMode Then
+                                If xv = 1.0 Then
+                                    xl = 1.0E-20
+                                    xl2 = 0.0
+                                    xs = 0.0
+                                ElseIf xl = 1.0 Then
+                                    xv = 1.0E-20
+                                    xl2 = 0.0
+                                    xs = 0.0
+                                End If
                             End If
 
                             Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
