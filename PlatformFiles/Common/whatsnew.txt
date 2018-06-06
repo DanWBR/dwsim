@@ -1,7 +1,7 @@
-Version 5.2 Update 6
+Version 5.2 Update 7
 
-- [NEW] Added Quality Check to Petroleum Characterization Tools
-- [CHG] Enhanced Petroleum Characterization Tools on Cross-Platform UI
-- [CHG] Removed Update checkboxes on Classic UI
-- [FIX] Fixed missing Expander on Cross-Platform UI
-- [FIX] Bug fixes
+- [FIX] Fixed a bug with the Compound Creator Wizard
+- [FIX] Fixed a bug with the SVLE Flash Algorithm
+- [FIX] CAPE-OPEN fixes
+- [FIX] Fixed pipe segment diameter quick input (Classic UI)
+- [FIX] Other fixes and enhancements
