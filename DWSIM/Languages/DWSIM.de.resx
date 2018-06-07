@@ -5444,4 +5444,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="LoadingFile" xml:space="preserve">
     <value>Loading file...</value>
   </data>
+  <data name="ObjectIsActive" xml:space="preserve">
+    <value>Active (click to deactivate)</value>
+  </data>
+  <data name="ObjectIsInactive" xml:space="preserve">
+    <value>Inactive (click to activate)</value>
+  </data>
 </root>

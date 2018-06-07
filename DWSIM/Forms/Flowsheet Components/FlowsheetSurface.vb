@@ -589,7 +589,13 @@ Public Class FlowsheetSurface
         Me.MergeStreamsToolStripMenuItem.Visible = False
 
         Me.AtivadoToolStripMenuItem.Checked = Me.FlowsheetDesignSurface.SelectedObject.Active
-      
+
+        If AtivadoToolStripMenuItem.Checked Then
+            AtivadoToolStripMenuItem.Text = DWSIM.App.GetLocalString("ObjectIsActive")
+        Else
+            AtivadoToolStripMenuItem.Text = DWSIM.App.GetLocalString("ObjectIsInactive")
+        End If
+
         DepurarObjetoToolStripMenuItem.Visible = Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name)
 
         If Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.GO_Image And _
