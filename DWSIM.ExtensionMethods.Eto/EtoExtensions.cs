@@ -197,6 +197,7 @@ namespace DWSIM.UI.Shared
         {
             var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
             label.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            container.CreateAndAddEmptySpace();
             container.AddRow(new TableRow(label));
             container.CreateAndAddEmptySpace();
             return label;
@@ -206,6 +207,7 @@ namespace DWSIM.UI.Shared
         {
             var lbl = new Label { Text = text, Wrap = WrapMode.Word };
             lbl.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            container.CreateAndAddEmptySpace();
             container.AddRow(new TableRow(lbl));
             container.CreateAndAddEmptySpace();
             return lbl;
