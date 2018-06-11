@@ -114,8 +114,8 @@ Public Class Populate
             Dim iw20r As Double = 0
 
             'methane number variables
-            Dim mon, mn, xc1, xc2, xc3, xc4, xco2, xn2 As Double
-            Dim c1, c2, c3, ic4, nc4, co2, n2 As ICompound
+            Dim mon, mn, mn2, xc1, xc2, xc3, xc4, xnc4, xic4, xnc5, xic5, xc6, xc7, xc8, xc9, xco2, xn2 As Double
+            Dim c1, c2, c3, ic4, nc4, ic5, nc5, nc6, nc7, nc8, nc9, co2, n2 As ICompound
 
             'molecular weight
             Dim mw As Double = dobj.Phases(0).Properties.molecularWeight.GetValueOrDefault
@@ -257,19 +257,42 @@ Public Class Populate
             c3 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "74-98-6").FirstOrDefault
             nc4 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "106-97-8").FirstOrDefault
             ic4 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "75-28-5").FirstOrDefault
+            nc5 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "109-66-0").FirstOrDefault
+            ic5 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "78-78-4").FirstOrDefault
+            nc6 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "110-54-3").FirstOrDefault
+            nc7 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "142-82-5").FirstOrDefault
+            nc8 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "111-65-9").FirstOrDefault
+            nc9 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "111-84-2").FirstOrDefault
             co2 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "124-38-9").FirstOrDefault
             n2 = (From c As ICompound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "7727-37-9").FirstOrDefault
 
             If Not c1 Is Nothing Then xc1 = c1.MoleFraction.GetValueOrDefault
             If Not c2 Is Nothing Then xc2 = c2.MoleFraction.GetValueOrDefault
             If Not c3 Is Nothing Then xc3 = c3.MoleFraction.GetValueOrDefault
-            If Not nc4 Is Nothing Then xc4 = nc4.MoleFraction.GetValueOrDefault
-            If Not ic4 Is Nothing Then xc4 += ic4.MoleFraction.GetValueOrDefault
+            If Not nc4 Is Nothing Then
+                xc4 = nc4.MoleFraction.GetValueOrDefault
+                xnc4 = nc4.MoleFraction.GetValueOrDefault
+            End If
+            If Not ic4 Is Nothing Then
+                xc4 += ic4.MoleFraction.GetValueOrDefault
+                xic4 = ic4.MoleFraction.GetValueOrDefault
+            End If
+            If Not nc5 Is Nothing Then xnc5 = nc5.MoleFraction.GetValueOrDefault
+            If Not ic5 Is Nothing Then xic5 = ic5.MoleFraction.GetValueOrDefault
+            If Not nc6 Is Nothing Then xc6 = nc6.MoleFraction.GetValueOrDefault
+            If Not nc7 Is Nothing Then xc7 = nc7.MoleFraction.GetValueOrDefault
+            If Not nc8 Is Nothing Then xc8 = nc8.MoleFraction.GetValueOrDefault
+            If Not nc9 Is Nothing Then xc9 = nc9.MoleFraction.GetValueOrDefault
             If Not co2 Is Nothing Then xco2 = co2.MoleFraction.GetValueOrDefault
             If Not n2 Is Nothing Then xn2 = n2.MoleFraction.GetValueOrDefault
 
             mon = 137.78 * xc1 + 29.948 * xc2 - 18.193 * xc3 - 167.062 * xc4 + 181.233 * xco2 + 26.994 * xn2
             mn = 1.445 * mon - 103.42
+
+            Dim mnc As New MethaneNumberInterface
+            Dim mncr = mnc.Calculate(xc1, xc2, xc3, xic4, xnc4, xic5, xnc5, xc6, xc7, xc8, xc9, xn2, xco2, 0, 0, 0, 0)
+
+            mn2 = mncr.dblMethaneNumber
 
             'get a reference to the current number format.
             Dim nf As String = fsheet.FlowsheetOptions.NumberFormat
@@ -327,7 +350,8 @@ Public Class Populate
                     .Item.Add("Wobbe Index @ SC (kJ/m3)", Format(iw15r, nf), True, "Natural Gas Properties", "SC = Standard Conditions (T = 15.56 °C, P = 1 atm)", True)
                     .Item.Add("Wobbe Index @ BR (kJ/m3)", Format(iw20r, nf), True, "Natural Gas Properties", "BR = CNTP (T = 20 °C, P = 1 atm)", True)
                     .Item.Add("Motor Octane Number (MON)", Format(mon, nf), True, "Natural Gas Properties", "Motor Octane Number", True)
-                    .Item.Add("Methane Number (MN)", Format(mn, nf), True, "Natural Gas Properties", "Methane Number", True)
+                    .Item.Add("Methane Number (H/C Ratio Method)", Format(mn, nf), True, "Natural Gas Properties", "Methane Number (H/C Ratio Method)", True)
+                    .Item.Add("Methane Number (New Method)", Format(mn, nf), True, "Natural Gas Properties", "Methane Number (New Method)", True)
                     .Item.Add("HC Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, hdp), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
                     .Item.Add("Water Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp), nf), True, "Natural Gas Properties", "", True)
                     .Item.Add("Water Dew Point (Ideal) @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
