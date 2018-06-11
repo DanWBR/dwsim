@@ -351,7 +351,7 @@ Public Class Populate
                     .Item.Add("Wobbe Index @ BR (kJ/m3)", Format(iw20r, nf), True, "Natural Gas Properties", "BR = CNTP (T = 20 °C, P = 1 atm)", True)
                     .Item.Add("Motor Octane Number (MON)", Format(mon, nf), True, "Natural Gas Properties", "Motor Octane Number", True)
                     .Item.Add("Methane Number (H/C Ratio Method)", Format(mn, nf), True, "Natural Gas Properties", "Methane Number (H/C Ratio Method)", True)
-                    .Item.Add("Methane Number (New Method)", Format(mn, nf), True, "Natural Gas Properties", "Methane Number (New Method)", True)
+                    .Item.Add("Methane Number (New Method)", Format(mn2, nf), True, "Natural Gas Properties", "Methane Number (New Method)", True)
                     .Item.Add("HC Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, hdp), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
                     .Item.Add("Water Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp), nf), True, "Natural Gas Properties", "", True)
                     .Item.Add("Water Dew Point (Ideal) @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
