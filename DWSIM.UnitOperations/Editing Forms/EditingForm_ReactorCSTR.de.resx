@@ -122,10 +122,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+    <value>100, 17</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Verbunden mit</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Objekt</value>
@@ -143,13 +146,13 @@
     <value>Konfiguration</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>120, 17</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithmus</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+    <value>121, 17</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
@@ -158,37 +161,37 @@
     <value>Konfiguration Property Package</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>66, 17</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Gasraum</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 13</value>
+    <value>143, 17</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Beladung Katalysator</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 13</value>
+    <value>87, 17</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Druckverlust</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
+    <value>111, 17</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Reaktorvolumen</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
+    <value>90, 17</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Reaktionsset</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
+    <value>128, 17</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Austrittstemperatur</value>
@@ -203,7 +206,7 @@
     <value>Austrittstemperatur</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
+    <value>134, 17</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Berechnungsmodus</value>
@@ -212,7 +215,7 @@
     <value>Berechnungsparameter</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+    <value>99, 17</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Austrittstrom 2</value>
@@ -240,7 +243,7 @@
     <value>Trennen</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+    <value>92, 17</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Energiestrom</value>
@@ -252,13 +255,13 @@
     <value>Trennen</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+    <value>99, 17</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Austrittstrom 1</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>83, 17</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Eintrittstrom</value>
@@ -291,10 +294,10 @@
     <value>Einheit</value>
   </data>
   <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 171</value>
+    <value>434, 207</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 177</value>
+    <value>442, 215</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Reaktionen</value>
@@ -306,10 +309,10 @@
     <value>Umsatz (%)</value>
   </data>
   <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 177</value>
+    <value>442, 215</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 177</value>
+    <value>442, 215</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Umsätze</value>

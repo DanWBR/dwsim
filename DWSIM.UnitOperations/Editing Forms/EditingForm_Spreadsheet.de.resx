@@ -133,23 +133,17 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Objekt</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Allgemeine Information</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Notizen</value>
-  </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
-    <value>Konfiguration</value>
+    <value>Konfigurieren</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
-    <value>Konfiguration</value>
+    <value>Konfigurieren</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 17</value>
+    <value>115, 17</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
-    <value>Flash Algorithmus</value>
+    <value>Flashalgorithmus</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 17</value>
@@ -160,173 +154,199 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Konfiguration Property Package</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 17</value>
+  <data name="btnCreateAndConnectOutlet4.ToolTip" xml:space="preserve">
+    <value>Erstellen und verbinden</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Leerraumanteil (Katalysator)</value>
-  </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 17</value>
-  </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Durchmesser Katalysator</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 17</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Beladung Katalysator</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 17</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Reaktorlänge</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 17</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Reaktorvolumen</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 17</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Reaktionsset</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 17</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Austrittstemperatur</value>
-  </data>
-  <data name="cbCalcMode.Items" xml:space="preserve">
-    <value>Isotherm</value>
-  </data>
-  <data name="cbCalcMode.Items1" xml:space="preserve">
-    <value>Adiabatisch</value>
-  </data>
-  <data name="cbCalcMode.Items2" xml:space="preserve">
-    <value>Austrittstemperatur</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 17</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Berechnungsmodus</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Berechnungsparameter</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnCreateAndConnectEnergy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="btnDisconnectOutlet4.ToolTip" xml:space="preserve">
+    <value>Trennen</value>
   </data>
   <data name="btnCreateAndConnectEnergy.ToolTip" xml:space="preserve">
     <value>Erstellen und verbinden</value>
   </data>
-  <data name="btnCreateAndConnectOutlet1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="btnCreateAndConnectOutlet3.ToolTip" xml:space="preserve">
+    <value>Erstellen und verbinden</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet2.ToolTip" xml:space="preserve">
+    <value>Erstellen und verbinden</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Erstellen und verbinden</value>
   </data>
-  <data name="btnCreateAndConnectInlet1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="btnCreateAndConnectInlet4.ToolTip" xml:space="preserve">
+    <value>Erstellen und verbinden</value>
+  </data>
+  <data name="btnCreateAndConnectInlet3.ToolTip" xml:space="preserve">
+    <value>Erstellen und verbinden</value>
+  </data>
+  <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
+    <value>Erstellen und verbinden</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Erstellen und verbinden</value>
   </data>
-  <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
+  <data name="btnDisconnectEnergyE.ToolTip" xml:space="preserve">
     <value>Trennen</value>
   </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 17</value>
+  <data name="btnDisconnectOutlet3.ToolTip" xml:space="preserve">
+    <value>Trennen</value>
   </data>
-  <data name="Label14.Text" xml:space="preserve">
-    <value>Energiestrom</value>
+  <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
+    <value>Trennen</value>
   </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
+    <value>Trennen</value>
+  </data>
+  <data name="btnDisconnect4.ToolTip" xml:space="preserve">
+    <value>Trennen</value>
+  </data>
+  <data name="btnDisconnect3.ToolTip" xml:space="preserve">
+    <value>Trennen</value>
+  </data>
+  <data name="btnDisconnect2.ToolTip" xml:space="preserve">
     <value>Trennen</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Trennen</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 17</value>
+  <data name="BtnEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJhSURBVDhPpZPvS1NRGMfvv9Db6FUvIpDqLwj6AZER
+        lKQgSfpiJoFLy2G2KwUiomKGjZltaUmuYjaEVVpCM20r25TU+WPaNjVt9zqcd7vbvVtrjW/n3K0f6ivr
+        wIfnnMPz/Z6H55zDAPgvmLyr5vJWq1+qfeoD+4Rg+gzto3lc655F9YMZaLrcqDJO4IrhEyrvjkGtd4I1
+        OiSqUwwaLP60bnANO6WybSStGNCT/4WylmGiJwasyYt4PL5jVI22jIG2ZwGyLENSkCBJBDK32+3bGLfp
+        Mf+4EF5rAya7TmCqPaeYoQ2LRqMorHf/JkbWVPD3kDkr+KEaRNwvgVgAYbcFo7dOrjG02xFRhBghiJFs
+        FDcZyFw/hLk6JFefgx9uQXy6Dz+WHZh+WJZg6FUJQhjhcFiJCmGBRIHsCVhfJOKZG0jHHYj71dhwXYan
+        RwWnQQWXLm8fo+mcQigUwnoWOg+th5QKXLZ2CNNapBOjkH0lSKwUITrHYrn7LCpudtLiGKayYxzBYHBT
+        D+j6bV8z+LGarLgYiS/nIc7UYtF4GrzHgfxqS8agQu8Cz/OEtWzk4flgwtzralL2OySWVPi2cgERUonP
+        cArfRU7JOafpzRiodR8RCHCEADiCs78DswMspl614auzAPJSETYmr8N7/wxWFybAcTSPQ16VOWNA3rT5
+        0m278rJKm4bQ23wciC5j3piPIXY33t/LxUDdEZRrDaTsZ+RkM4iGQh2Ybb+r/mJOKjmqR9J5B86Go+gt
+        3RMb1B48tDXvF9s2Cg7vSjSW7E/ZmnJTb1qPjbyoObB3a84fwPwEPf0hhODLb0IAAAAASUVORK5CYII=
+</value>
   </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Austrittstrom</value>
+  <data name="BtnEdit.ToolTip" xml:space="preserve">
+    <value>Bearbeiten</value>
   </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 17</value>
+  <data name="BtnNew.ToolTip" xml:space="preserve">
+    <value>Neu erstellen</value>
   </data>
-  <data name="Label19.Text" xml:space="preserve">
-    <value>Eintrittstrom</value>
+  <data name="BtnSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJrSURBVDhPddFvSBNxGAfwvYzoVQS9EZJeXe8qoyMy
+        KdKcOZv/bqfNXW5taBZZGJF1/qM1UUyZUTJnpNTdpBXzRTaH52rOnIPtBkUKFRUFXXEEQS+C4Hh6fisD
+        vfnicy9+PN/v788ZACBLFhtoOcCF5IBdzUw6NVl0aKkJm7o0xoYW79TQq3PrZT9ywObKTNoVWeTk1MRJ
+        PnmXpZb8FmpplOETo6ycGGGVeW+la32YyO5MwukHVk/m089dqBa1onOoAu2Meys9cW+NEu0z6U5iSItc
+        KC1wMg5S6AxqR5fRJXQRWVF+bNAsz/WZQroCWWxUU+P1PA5VoyuIhNsQCZNTtKDiOU85H+2rUHUFmYBD
+        S46xZPezaHXX1SuQEzUh62yPkYr2mzVdQVqwawkfQwrIIAmeR6Ss+d+aE7EznSXUnMekL0jes6qJkVpy
+        BSMiQXJkEnah06gRFYWvlfAzXaX6Kyz6LPifGfKI+ciCSJDsakckbEZ5kZ6yX0/bjyZ1BfHhKnrhNqPE
+        hszkN+5ARxCLGFSI8uLDzO+XwVaIth2GqdbC+jUF5PN84IRrfqhSifZXyJK7jI90HaPCHSVU+GoxHxuo
+        1paftMPnlA/eL9wE6boZHjUf2L6mgJBuHKdRSPKYVPJYkrtcC3eW/pjtMcHbZ73w9fV9+LYiwJvZbgg6
+        D2mTjv3Zkv8FG5m6UGSLDdbBhxdDoLwah4+JW5D026HXSL0TTxVszhla73HLQZvkroKV6Q5Ynu6CuNcC
+        wSb6u8Dt3ZIzkMtDF20TGgog0m3EK9BfMLyNrOcc3kigcd9Wf91ut8Dt2fR3DQx/AFxruSM0P5p9AAAA
+        AElFTkSuQmCC
+</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Verbindungen</value>
+  <data name="BtnSearch.ToolTip" xml:space="preserve">
+    <value>Suchen</value>
   </data>
-  <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Eigenschaft</value>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Variablen</value>
   </data>
-  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Eintritt</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="Column5.HeaderText" xml:space="preserve">
     <value>Wert</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Einheit</value>
   </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Allgemein</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Reaktion</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>Eigenschaft</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
-    <value>Wert</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
-    <value>Einheit</value>
-  </data>
-  <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 218</value>
-  </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 226</value>
+    <value>450, 242</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
-    <value>Reaktionen</value>
+    <value>Ausgang</value>
   </data>
-  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
-    <value>Komponente</value>
+  <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Variable</value>
   </data>
-  <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
-    <value>Umsatz (%)</value>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Wert</value>
   </data>
-  <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 226</value>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Einheit</value>
   </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 226</value>
+  <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>442, 234</value>
   </data>
-  <data name="TabPage3.Text" xml:space="preserve">
-    <value>Umsätze</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Verbindungen</value>
   </data>
-  <data name="ZedGraphControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 218</value>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
   </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 226</value>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Austrittstrom 4</value>
   </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Konzentrationsprofile</value>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Ergebnisse</value>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Energiestrom</value>
+  </data>
+  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
+  </data>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Austrittstrom 3</value>
+  </data>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
+  </data>
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Austrittstrom 2</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Austrittstrom 1</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 17</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Eintrittstrom 4</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 17</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Eintrittstrom 3</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 17</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Eintrittstrom 2</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 17</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Eintrittstrom 1</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Arbeitsblatt</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Datei</value>
   </data>
 </root>

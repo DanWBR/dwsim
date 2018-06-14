@@ -698,6 +698,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Splitter.de.resx">
       <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.de.resx">
+      <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.en.resx">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </EmbeddedResource>
