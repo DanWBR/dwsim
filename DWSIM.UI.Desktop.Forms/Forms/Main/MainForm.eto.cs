@@ -103,6 +103,7 @@ namespace DWSIM.UI
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Open File".Localize();
                 dialog.Filters.Add(new FileFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
+                dialog.Filters.Add(new FileFilter("Mobile XML Simulation File (Android/iOS)", new[] { ".xml" }));
                 dialog.MultiSelect = false;
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
@@ -387,6 +388,10 @@ namespace DWSIM.UI
                 else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
                 {
                     form.FlowsheetObject.LoadFromXML(XDocument.Load(path));
+                }
+                else if (System.IO.Path.GetExtension(path).ToLower() == ".xml")
+                {
+                    form.FlowsheetObject.LoadFromMXML(XDocument.Load(path));
                 }
                 form.FlowsheetObject.FilePath = path;
                 form.FlowsheetObject.FlowsheetOptions.FilePath = path;

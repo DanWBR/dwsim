@@ -995,6 +995,17 @@ Imports System.Dynamic
 
     End Function
 
+    Public Sub LoadFromMXML(xdoc As XDocument)
+
+        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                               SharedClasses.Utility.UpdateElementForMobileXMLLoading_CrossPlatformUI(xel1)
+                                           End Sub)
+
+        LoadFromXML(xdoc)
+
+    End Sub
+
+
     Public Sub LoadFromXML(xdoc As XDocument) Implements IFlowsheet.LoadFromXML
 
         'For Each xel1 As XElement In xdoc.Descendants
@@ -1092,6 +1103,7 @@ Imports System.Dynamic
 
         For Each xel As XElement In data
             Try
+                xel.Element("Type").Value = xel.Element("Type").Value.Replace("PortableDTL.DTL.SimulationObjects", "DWSIM.Thermodynamics")
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
                 Dim obj As PropertyPackage = Nothing
                 If xel.Element("Type").Value.Contains("AdvancedEOS") Then
@@ -1194,29 +1206,38 @@ Imports System.Dynamic
             End Try
         Next
 
-        data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
 
-        For Each xel As XElement In data
-            Try
-                Dim obj As New Optimization.OptimizationCase
-                obj.LoadData(xel.Elements.ToList)
-                OptimizationCollection.Add(obj)
-            Catch ex As Exception
-                excs.Add(New Exception("Error Loading Optimization Case Information", ex))
-            End Try
-        Next
+        If xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases") IsNot Nothing Then
 
-        data = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis").Elements.ToList
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
 
-        For Each xel As XElement In data
-            Try
-                Dim obj As New Optimization.SensitivityAnalysisCase
-                obj.LoadData(xel.Elements.ToList)
-                SensAnalysisCollection.Add(obj)
-            Catch ex As Exception
-                excs.Add(New Exception("Error Loading Sensitivity Analysis Case Information", ex))
-            End Try
-        Next
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New Optimization.OptimizationCase
+                    obj.LoadData(xel.Elements.ToList)
+                    OptimizationCollection.Add(obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Optimization Case Information", ex))
+                End Try
+            Next
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis").Elements.ToList
+
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New Optimization.SensitivityAnalysisCase
+                    obj.LoadData(xel.Elements.ToList)
+                    SensAnalysisCollection.Add(obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Sensitivity Analysis Case Information", ex))
+                End Try
+            Next
+
+        End If
 
         Scripts = New Dictionary(Of String, Interfaces.IScript)
 
@@ -1250,6 +1271,18 @@ Imports System.Dynamic
         End If
 
     End Sub
+
+    Public Function SaveToMXML() As XDocument
+
+        Dim xdoc = SaveToXML()
+
+        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                               SharedClasses.Utility.UpdateElementForMobileXMLSaving_CrossPlatformUI(xel1)
+                                           End Sub)
+
+        Return xdoc
+
+    End Function
 
     Public Function SaveToXML() As XDocument Implements IFlowsheet.SaveToXML
 

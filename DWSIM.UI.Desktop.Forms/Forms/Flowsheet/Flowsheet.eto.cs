@@ -225,6 +225,7 @@ namespace DWSIM.UI.Forms
                 var dialog = new SaveFileDialog();
                 dialog.Title = "Save File".Localize();
                 dialog.Filters.Add(new FileFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
+                dialog.Filters.Add(new FileFilter("Mobile XML Simulation File (Android/iOS)".Localize(), new[] { ".xml" }));
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
@@ -563,12 +564,15 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.LoadSpreadsheetData = new Action<XDocument>((xdoc) =>
             {
-                string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
-                string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
-                if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
-                if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
-                Spreadsheet.CopyFromDT();
-                Spreadsheet.EvaluateAll();
+                if (xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis") != null)
+                {
+                    string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
+                    string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
+                    if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
+                    if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
+                    Spreadsheet.CopyFromDT();
+                    Spreadsheet.EvaluateAll();
+                }
             });
 
             FlowsheetObject.SaveSpreadsheetData = new Action<XDocument>((xdoc) =>
@@ -899,53 +903,64 @@ namespace DWSIM.UI.Forms
         void SaveSimulation(string path, bool backup = false)
         {
 
-            Application.Instance.Invoke(() => ScriptListControl.UpdateScripts());
 
-            path = Path.ChangeExtension(path, ".dwxmz");
-
-            string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
-
-            using (var fstream = new FileStream(xmlfile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
             {
-                FlowsheetObject.SaveToXML().Save(fstream);
+                Application.Instance.Invoke(() => ScriptListControl.UpdateScripts());
+
+                path = Path.ChangeExtension(path, ".dwxmz");
+
+                string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
+
+                using (var fstream = new FileStream(xmlfile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                {
+                    FlowsheetObject.SaveToXML().Save(fstream);
+                }
+
+                var i_Files = new List<string>();
+                if (File.Exists(xmlfile))
+                    i_Files.Add(xmlfile);
+
+                ZipOutputStream strmZipOutputStream = default(ZipOutputStream);
+
+                strmZipOutputStream = new ZipOutputStream(File.Create(path));
+
+                strmZipOutputStream.SetLevel(9);
+
+                if (FlowsheetObject.Options.UsePassword)
+                    strmZipOutputStream.Password = FlowsheetObject.Options.Password;
+
+                string strFile = null;
+
+                foreach (string strFile_loopVariable in i_Files)
+                {
+                    strFile = strFile_loopVariable;
+                    FileStream strmFile = File.OpenRead(strFile);
+                    byte[] abyBuffer = new byte[strmFile.Length];
+
+                    strmFile.Read(abyBuffer, 0, abyBuffer.Length);
+                    ZipEntry objZipEntry = new ZipEntry(Path.GetFileName(strFile));
+
+                    objZipEntry.DateTime = DateTime.Now;
+                    objZipEntry.Size = strmFile.Length;
+                    strmFile.Close();
+                    strmZipOutputStream.PutNextEntry(objZipEntry);
+                    strmZipOutputStream.Write(abyBuffer, 0, abyBuffer.Length);
+
+                }
+
+                strmZipOutputStream.Finish();
+                strmZipOutputStream.Close();
+
+                File.Delete(xmlfile);
             }
-
-            var i_Files = new List<string>();
-            if (File.Exists(xmlfile))
-                i_Files.Add(xmlfile);
-
-            ZipOutputStream strmZipOutputStream = default(ZipOutputStream);
-
-            strmZipOutputStream = new ZipOutputStream(File.Create(path));
-
-            strmZipOutputStream.SetLevel(9);
-
-            if (FlowsheetObject.Options.UsePassword)
-                strmZipOutputStream.Password = FlowsheetObject.Options.Password;
-
-            string strFile = null;
-
-            foreach (string strFile_loopVariable in i_Files)
+            else if (System.IO.Path.GetExtension(path).ToLower() == ".xml")
             {
-                strFile = strFile_loopVariable;
-                FileStream strmFile = File.OpenRead(strFile);
-                byte[] abyBuffer = new byte[strmFile.Length];
-
-                strmFile.Read(abyBuffer, 0, abyBuffer.Length);
-                ZipEntry objZipEntry = new ZipEntry(Path.GetFileName(strFile));
-
-                objZipEntry.DateTime = DateTime.Now;
-                objZipEntry.Size = strmFile.Length;
-                strmFile.Close();
-                strmZipOutputStream.PutNextEntry(objZipEntry);
-                strmZipOutputStream.Write(abyBuffer, 0, abyBuffer.Length);
-
+                using (var fstream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                {
+                    FlowsheetObject.SaveToMXML().Save(fstream);
+                }
             }
-
-            strmZipOutputStream.Finish();
-            strmZipOutputStream.Close();
-
-            File.Delete(xmlfile);
 
             if (!backup)
             {

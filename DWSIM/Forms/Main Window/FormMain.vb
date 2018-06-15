@@ -687,7 +687,7 @@ Public Class FormMain
 
     End Sub
 
-    Sub OpenWelcomeScreen()
+    Sub CheckForUpdates()
 
         ' check for updates
         Task.Factory.StartNew(Function()
@@ -700,17 +700,13 @@ Public Class FormMain
                                                              If (t.Result) Then
                                                                  If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable"), DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
                                                                      Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems")
-                                                                 Else
-                                                                     OpenWelcomeScreen2()
                                                                  End If
-                                                             Else
-                                                                 OpenWelcomeScreen2()
                                                              End If
                                                          End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
     End Sub
 
-    Sub OpenWelcomeScreen2()
+    Sub OpenWelcomeScreen()
 
         If GlobalSettings.Settings.OldUI AndAlso My.Settings.BackupFiles.Count > 0 Then
             Me.FrmRec = New FormRecoverFiles
@@ -722,6 +718,8 @@ Public Class FormMain
             Dim frmw As New FormWelcome
             frmw.ShowDialog(Me)
         End If
+
+        CheckForUpdates()
 
     End Sub
 
