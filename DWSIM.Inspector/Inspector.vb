@@ -37,6 +37,7 @@ Public Class Host
             End With
             If Host.CurrentItem IsNot Nothing Then
                 ii.ParentID = Host.CurrentItem.ID
+                Host.CurrentItem.Paragraphs.Add(String.Format("<div style='color:gray'>[Calling function <i>{0}</i> ({1} - {2})]</div>", method, name, description))
                 Host.CurrentItem.Items.Add(ii)
             Else
                 ii.ParentID = -1

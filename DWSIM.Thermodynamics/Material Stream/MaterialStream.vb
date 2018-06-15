@@ -426,6 +426,8 @@ Namespace Streams
                         If Not Me.GraphicObject Is Nothing AndAlso Me.GraphicObject.InputConnectors(0).IsAttached AndAlso
                             Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle Then
                             If DebugMode Then AppendDebugLine(String.Format("Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced."))
+                            IObj?.Paragraphs.Add("<b>WARNING: Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced.</b>")
+                            IObj?.Paragraphs.Add(String.Format("<b>Current State Variables: P = {0} Pa, H = {1} kJ/kg</b>", P, H))
                             .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
                         Else
                             Select Case Me.SpecType
