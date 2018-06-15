@@ -108,6 +108,8 @@ namespace DWSIM.UI.Forms.Forms
             tab2.CreateAndAddCheckBoxRow("Enable Inspector Reports", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
             tab2.CreateAndAddDescriptionRow("Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector tool to view these reports.");
             tab2.CreateAndAddDescriptionRow("When the Inspector Reports feature is enabled and the Flowsheet Solver is called, the Parallel CPU Processing is automatically disabled. You must re-enable it manually and disable the Inspector to increase the calculation speed again.");
+            tab2.CreateAndAddCheckBoxRow("Clear Previous Reports on new Flowsheet Calculation Request", Settings.ClearInspectorHistoryOnNewCalculationRequest, (CheckBox sender, EventArgs obj) => { Settings.ClearInspectorHistoryOnNewCalculationRequest = sender.Checked.GetValueOrDefault(); });
+            tab2.CreateAndAddDescriptionRow("This will erase all previously stored reports when a new flowsheet calculation request is made by the user.");
 
             var tab3 = Common.GetDefaultContainer();
             tab3.Tag = "UserComps".Localize(prefix);

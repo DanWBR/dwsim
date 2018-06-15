@@ -5508,4 +5508,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ObjectIsInactive" xml:space="preserve">
     <value>Inativo (clique para ativar)</value>
   </data>
+  <data name="UpdatedVersionAvailable" xml:space="preserve">
+    <value>Uma versão atualizada do DWSIM está disponível no site oficial. Mantenha o DWSIM atualizado para corrigir problemas e aproveitar novos recursos.</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Atualização Disponível</value>
+  </data>
 </root>

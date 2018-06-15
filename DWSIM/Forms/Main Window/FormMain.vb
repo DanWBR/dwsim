@@ -689,6 +689,29 @@ Public Class FormMain
 
     Sub OpenWelcomeScreen()
 
+        ' check for updates
+        Task.Factory.StartNew(Function()
+                                  Dim updfile = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "version.info"
+                                  Dim uinfo = "0"
+                                  If (File.Exists(updfile)) Then uinfo = File.ReadAllText(updfile)
+                                  GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." + uinfo
+                                  Return SharedClasses.UpdateCheck.CheckForUpdates()
+                              End Function).ContinueWith(Sub(t)
+                                                             If (t.Result) Then
+                                                                 If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable"), DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
+                                                                     Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems")
+                                                                 Else
+                                                                     OpenWelcomeScreen2()
+                                                                 End If
+                                                             Else
+                                                                 OpenWelcomeScreen2()
+                                                             End If
+                                                         End Sub, TaskContinuationOptions.ExecuteSynchronously)
+
+    End Sub
+
+    Sub OpenWelcomeScreen2()
+
         If GlobalSettings.Settings.OldUI AndAlso My.Settings.BackupFiles.Count > 0 Then
             Me.FrmRec = New FormRecoverFiles
             If Me.FrmRec.ShowDialog(Me) = Windows.Forms.DialogResult.Ignore Then

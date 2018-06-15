@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="UnitsOfMeasure\ConvertExtensions.vb" />
     <Compile Include="UnitsOfMeasure\SystemsOfUnits.vb" />
+    <Compile Include="UpdateCheck\UpdateCheck.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -124,9 +124,13 @@ Public Class Settings
 
     Public Shared CurrentVersion As String = ""
 
+    Public Shared CurrentRunningVersion As String = ""
+
     Public Shared Property CalculationRequestID As String = ""
 
     Public Shared Property InspectorEnabled As Boolean = True
+
+    Public Shared Property ClearInspectorHistoryOnNewCalculationRequest As Boolean = True
 
     Public Shared Property EditorFontSize As Integer = -1
 
@@ -381,6 +385,7 @@ Public Class Settings
         CurrentVersion = source.Configs("Misc").Get("CurrentVersion", "")
 
         InspectorEnabled = source.Configs("Misc").GetBoolean("InspectorEnabled", False)
+        ClearInspectorHistoryOnNewCalculationRequest = source.Configs("Misc").GetBoolean("ClearInspectorHistoryOnNewCalculationRequest", True)
 
         EditorFontSize = source.Configs("Misc").GetInt("EditorFontSize", -1)
 
@@ -505,6 +510,7 @@ Public Class Settings
         source.Configs("Misc").Set("CurrentVersion", CurrentVersion)
 
         source.Configs("Misc").Set("InspectorEnabled", InspectorEnabled)
+        source.Configs("Misc").Set("ClearInspectorHistoryOnNewCalculationRequest", ClearInspectorHistoryOnNewCalculationRequest)
 
         source.Configs("Misc").Set("EditorFontSize", EditorFontSize)
         source.Configs("Misc").Set("EditorTextBoxFixedSize", EditorTextBoxFixedSize)

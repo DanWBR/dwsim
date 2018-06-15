@@ -14914,6 +14914,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Atualização Disponível.
+        '''</summary>
+        Friend Shared ReadOnly Property UpdateAvailable() As String
+            Get
+                Return ResourceManager.GetString("UpdateAvailable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Uma versão atualizada do DWSIM está disponível no site oficial. Mantenha o DWSIM atualizado para corrigir problemas e aproveitar novos recursos..
+        '''</summary>
+        Friend Shared ReadOnly Property UpdatedVersionAvailable() As String
+            Get
+                Return ResourceManager.GetString("UpdatedVersionAvailable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Atualizar ao salvar.
         '''</summary>
         Friend Shared ReadOnly Property UpdateOnSave() As String

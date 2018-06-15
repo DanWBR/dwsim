@@ -220,7 +220,11 @@ Public Class Window
                 If itemSelector.SelectedItem IsNot Nothing Then
                     Dim nesteditems = GetItems(Host.Items.ToList)
                     Dim sitem = nesteditems.Where(Function(x) x.ID = DirectCast(itemSelector.SelectedItem, TreeGridItem).Tag.ToString).FirstOrDefault
-                    currentItemViewer.LoadHtml(sitem.GetHTML())
+                    If Not sitem Is Nothing Then
+                        currentItemViewer.LoadHtml(sitem.GetHTML())
+                    Else
+                        MessageBox.Show("Selected report not found.")
+                    End If
                 End If
 
             End Sub
