@@ -365,7 +365,11 @@ namespace DWSIM.UI
         void LoadSimulation(string path)
         {
 
-            var form = new Forms.Flowsheet();
+            Forms.Flowsheet form = null;
+
+            Application.Instance.Invoke(() => {
+                form = new Forms.Flowsheet();
+            });
 
             OpenForms += 1;
             form.Closed += (sender2, e2) =>

@@ -70,6 +70,18 @@ namespace DWSIM.UI.Desktop.WPF
                 {
                     e.Row.Header = (e.Row.GetIndex() + 1).ToString();
                 };
+                wpfgrid.MaxHeight = 1000;
+                wpfgrid.UpdateLayout();
+            });
+
+            Eto.Style.Add<Eto.Forms.GridView>("fastgrid", control =>
+            {
+                var wpfgrid = (Eto.Wpf.Forms.Controls.EtoDataGrid)control.ControlObject;
+                wpfgrid.EnableColumnVirtualization = true;
+                wpfgrid.EnableRowVirtualization = true;
+                VirtualizingPanel.SetVirtualizationMode(wpfgrid, VirtualizationMode.Recycling);
+                VirtualizingStackPanel.SetIsVirtualizing(wpfgrid, true);
+                wpfgrid.MaxHeight = 1000;
                 wpfgrid.UpdateLayout();
             });
 

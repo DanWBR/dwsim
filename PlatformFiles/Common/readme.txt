@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 7
+Version 5.2 Update 8
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 8
+
+- [NEW] Solution Inspector enhancements
+- [FIX] Fixed loading of mobile-saved simulation files
+- [FIX] Fixed a bug with the Equilibrium Reactor
+- [FIX] Other bug fixes
 
 Version 5.2 Update 7
 

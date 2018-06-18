@@ -116,6 +116,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             listcontainer = new GridView { DataStore = obslist, RowHeight = 20 };
+            listcontainer.Style = "fastgrid";
 
             if (Application.Instance.Platform.IsWinForms) listcontainer.Height = 370;
 
