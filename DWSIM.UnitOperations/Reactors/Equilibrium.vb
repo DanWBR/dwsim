@@ -226,6 +226,7 @@ Namespace Reactors
 
             For Each s As String In DN.Keys
                 N(s) = N0(s) + DN(s)
+                If N(s) < 0.0 Then N(s) = 0.0
             Next
 
             Dim fw(c), fm(c), sumfm, sum1, sumn, sumw As Double
@@ -830,7 +831,7 @@ Namespace Reactors
                 Dim sum1 As Double = 0
                 For Each subst As Compound In tms.Phases(0).Compounds.Values
                     If subst.MoleFraction.GetValueOrDefault < 0 Then
-                        subst.MolarFlow = 0
+                        subst.MolarFlow = 0.0
                     Else
                         sum1 += subst.MolarFlow.GetValueOrDefault
                     End If
