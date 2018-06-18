@@ -215,6 +215,7 @@ Namespace Reactors
 
             Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
 
+
             i = 0
             For Each s As String In N.Keys
                 DN(s) = 0
@@ -766,6 +767,8 @@ Namespace Reactors
 
                 _IObj = IObj2
 
+                tms.Phases(0).Properties.temperature = T
+
                 g1 = FunctionValue2G(REx)
 
                 IObj2?.SetCurrent
@@ -812,7 +815,11 @@ Namespace Reactors
                     Next
 
                     'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                    DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                    If rx.Components(rx.BaseReactant).StoichCoeff > 0 Then
+                        DHr += -rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                    Else
+                        DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                    End If
 
                     i += 1
                 Loop Until i = Me.Reactions.Count
@@ -866,7 +873,7 @@ Namespace Reactors
 
                         If Math.Abs(T - TLast) < ExternalLoopTolerance Then CalcFinished = True
 
-                        T = 0.7 * TLast + 0.3 * T
+                        T = 0.9 * TLast + 0.1 * T
 
                         ims.Phases(0).Properties.temperature = T
 
