@@ -338,9 +338,9 @@ Namespace Reactors
                 delta1 = con_val(i) - con_lc(i)
                 delta2 = con_val(i) - con_uc(i)
                 If delta1 < 0 Then
-                    pen_val += -delta1 * 1000000.0#
+                    pen_val += -delta1 * 1000000.0# * (i + 1) ^ 2
                 ElseIf delta2 > 1 Then
-                    pen_val += -delta2 * 1000000.0#
+                    pen_val += -delta2 * 1000000.0# * (i + 1) ^ 2
                 Else
                     pen_val += 0.0#
                 End If
