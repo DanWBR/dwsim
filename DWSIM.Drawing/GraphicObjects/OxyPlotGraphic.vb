@@ -2,6 +2,8 @@
 Imports System.Drawing.Drawing2D
 Imports OxyPlot
 Imports DWSIM.Interfaces
+Imports DWSIM.extensionmethods
+Imports OxyPlot.Series
 
 Namespace GraphicObjects
 
@@ -42,6 +44,37 @@ Namespace GraphicObjects
         Public Property OwnerID As String = ""
 
         Public Property ModelName As String = ""
+
+        Private Function GetClipboardData(model As PlotModel) As String
+
+            Dim sb As New System.Text.StringBuilder
+
+            sb.AppendLine(model.Title)
+            sb.AppendLine(model.Subtitle)
+
+            sb.AppendLine()
+
+            For Each ls As LineSeries In model.Series.Where(Function(x) TypeOf x Is LineSeries)
+                sb.AppendLine(ls.Title)
+                sb.AppendLine(model.Axes(0).Title & vbTab & model.Axes(1).Title)
+                For Each p In ls.Points
+                    sb.AppendLine(p.X & vbTab & p.Y)
+                Next
+                sb.AppendLine()
+            Next
+
+            Return sb.ToString
+
+        End Function
+
+        Public Function CopyToClipboard() As String
+            Dim model = Flowsheet.SimulationObjects(OwnerID).GetChartModel(ModelName)
+            If model IsNot Nothing Then
+                Return GetClipboardData(model)
+            Else
+                Return ""
+            End If
+        End Function
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
 

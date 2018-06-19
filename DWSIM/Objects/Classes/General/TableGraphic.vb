@@ -1896,124 +1896,124 @@ Namespace GraphicObjects
                                     p = MSObj.GetPhase("Overall")
                                     g.DrawString(p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Vapor")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid1")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid2")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Solid")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                 Case CompositionBasis.Mass_Fractions
                                     atext = MSObj.Flowsheet.GetTranslatedString("FraoMssica")
                                     p = MSObj.GetPhase("Vapor")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid1")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid2")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Solid")
                                     g.DrawString(p.Properties.massfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                 Case CompositionBasis.Molar_Flows
                                     p = MSObj.GetPhase("Overall")
                                     g.DrawString(p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Vapor")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid1")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid2")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Solid")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     g.DrawString(p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                 Case CompositionBasis.Molar_Fractions
                                     p = MSObj.GetPhase("Vapor")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid1")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid2")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Solid")
                                     g.DrawString(p.Properties.molarfraction.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), format1)
                                 Case CompositionBasis.Volumetric_Flows
                                     p = MSObj.GetPhase("Overall")
                                     g.DrawString(p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Vapor")
                                     g.DrawString(p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid1")
                                     g.DrawString(p.Properties.volumetric_flow.GetValueOrDefault.ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Liquid2")
                                     g.DrawString(p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                     p = MSObj.GetPhase("Solid")
                                     g.DrawString(p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf),
                                              New Font(Me.HeaderFont, FontStyle.Regular), New SolidBrush(FontColor),
-                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 4) * maxH + Padding + DeltaY), format1)
+                                             New PointF(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9 + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), format1)
                                 Case CompositionBasis.Volumetric_Fractions
                             End Select
 

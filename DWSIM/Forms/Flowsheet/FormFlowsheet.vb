@@ -867,6 +867,8 @@ Public Class FormFlowsheet
                     DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, SpreadsheetTableGraphic).CopyToClipboard()
                 Case ObjectType.GO_Table
                     DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, TableGraphic).CopyToClipboard()
+                Case ObjectType.GO_Chart
+                    Clipboard.SetText(DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, OxyPlotGraphic).CopyToClipboard())
                 Case Else
                     Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).CopyDataToClipboard(Options.SelectedUnitSystem, Options.NumberFormat)
             End Select

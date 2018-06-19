@@ -110,4 +110,23 @@ Public Module OxyPlot
         model.Series.Add(columnSeries)
     End Sub
 
+    <System.Runtime.CompilerServices.Extension>
+    Public Function GetClipboardData(model As PlotModel) As String
+
+        Dim sb As New Text.StringBuilder
+
+        For Each ls As LineSeries In model.Series.Where(Function(x) TypeOf x Is LineSeries)
+            sb.AppendLine(ls.Title)
+            sb.AppendLine()
+            sb.AppendLine(ls.XAxis.Title & vbTab & ls.YAxis.Title)
+            For Each p In ls.Points
+                sb.AppendLine(p.X & vbTab & p.Y)
+            Next
+            sb.AppendLine()
+        Next
+
+        Return sb.ToString
+
+    End Function
+
 End Module

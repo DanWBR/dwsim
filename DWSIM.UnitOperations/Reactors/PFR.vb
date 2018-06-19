@@ -146,12 +146,26 @@ Namespace Reactors
             Dim scBC As Double = 0
             Dim BC As String = ""
 
+            Dim Qf As Double
+
+            If Me.Reactions.Count > 0 Then
+                Select Case FlowSheet.Reactions(Me.Reactions(0)).ReactionPhase
+                    Case PhaseName.Vapor
+                        Qf = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
+                    Case PhaseName.Liquid
+                        Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault()
+                    Case PhaseName.Mixture
+                        Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault() +
+                                ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
+                End Select
+            End If
+
             j = 0
             For Each s As String In N00.Keys
                 If y(j) < 0 Then
                     C(s) = 0.0#
                 Else
-                    C(s) = y(j) * ResidenceTime / (Volume * VolumeFraction)
+                    C(s) = y(j) / Qf
                 End If
                 j = j + 1
             Next
@@ -449,6 +463,11 @@ Namespace Reactors
             'do the calculations on each dV
             Dim currvol As Double = 0.0#
             Dim prevvol As Double = 0.0#
+
+            Dim nloops As Integer = 1.0 / dV
+
+            Dim counter As Integer = 0
+
             Do
 
                 IObj?.SetCurrent
@@ -564,6 +583,16 @@ Namespace Reactors
                     IObj2?.SetCurrent
                     odesolver.Solve(vc, 0.0#, 0.1 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
 
+                    'Dim vec = MathNet.Numerics.LinearAlgebra.CreateVector.DenseOfArray(Of Double)(vc)
+
+                    'Dim result = MathNet.Numerics.OdeSolvers.RungeKutta.FourthOrder(vec, 0.0#, dV * Volume, 10,
+                    '                                                                Function(x As Double, v As MathNet.Numerics.LinearAlgebra.Vector(Of Double))
+                    '                                                                    Dim res = ODEFunc(x, v.ToArray)
+                    '                                                                    Return MathNet.Numerics.LinearAlgebra.CreateVector.DenseOfArray(Of Double)(res)
+                    '                                                                End Function)
+
+                    'vc = result.Last.ToArray
+
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
                     C.Clear()
@@ -572,7 +601,7 @@ Namespace Reactors
                         If vc(i) < 0.0# Then
                             vc(i) = 0.0#
                         End If
-                        C(sb.Key) = Convert.ToDouble(vc(i) * ResidenceTime / Volume / VolumeFraction)
+                        C(sb.Key) = vc(i) / Qf
                         i = i + 1
                     Next
 
@@ -769,7 +798,9 @@ Namespace Reactors
                 prevvol = currvol
                 currvol += dV * Volume
 
-            Loop Until currvol >= Volume
+                counter += 1
+
+            Loop Until counter > nloops
 
             Me.DeltaP = P0 - P
 
@@ -1190,7 +1221,7 @@ Namespace Reactors
             Dim vn As New List(Of String)()
 
             For Each obj In points
-                vx.Add(DirectCast(obj, Double())(0) * Length / Volume)
+                vx.Add(DirectCast(obj, Double())(0))
             Next
 
             Dim j As Integer
@@ -1205,7 +1236,6 @@ Namespace Reactors
                 vn.Add(st)
             Next
             Dim color As OxyColor
-            
 
             Select Case name
 
@@ -1221,7 +1251,7 @@ Namespace Reactors
                     })
 
                     color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
-                    model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.volume, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.temperature, vya(ComponentConversions.Count).ToArray()), color)
+                    model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.distance, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.temperature, vya(ComponentConversions.Count).ToArray()), color)
                     model.Series(model.Series.Count - 1).Title = "Temperature"
                     DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "temp"
 
@@ -1237,7 +1267,7 @@ Namespace Reactors
                     })
 
                     color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
-                    model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.volume, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.pressure, vya(ComponentConversions.Count + 1).ToArray()), color)
+                    model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.distance, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.pressure, vya(ComponentConversions.Count + 1).ToArray()), color)
                     model.Series(model.Series.Count - 1).Title = "Pressure"
                     DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "press"
 
@@ -1254,7 +1284,7 @@ Namespace Reactors
 
                     For j = 0 To vn.Count - 1
                         color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
-                        model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.volume, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.molar_conc, vya(j).ToArray()), color)
+                        model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.distance, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.molar_conc, vya(j).ToArray()), color)
                         model.Series(model.Series.Count - 1).Title = vn(j)
                         DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "conc"
                     Next
