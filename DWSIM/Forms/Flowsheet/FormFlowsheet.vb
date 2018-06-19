@@ -81,7 +81,7 @@ Public Class FormFlowsheet
     Public FormSensAnalysis0 As New FormSensAnalysis
     Public FormOptimization0 As New FormOptimization
 
-    Public WithEvents Options As New DWSIM.Flowsheet.FlowsheetVariables
+    Public WithEvents Options As New SharedClasses.DWSIM.Flowsheet.FlowsheetVariables
 
     Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
@@ -93,7 +93,7 @@ Public Class FormFlowsheet
 
     Public prevcolor1, prevcolor2 As Color
 
-    Public Collections As New DWSIM.Flowsheet.ObjectCollection
+    Public Collections As New SharedClasses.DWSIM.Flowsheet.ObjectCollection
 
     Public ID As String
 
@@ -310,10 +310,10 @@ Public Class FormFlowsheet
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
 
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, MessageType.Tip)
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, MessageType.Tip)
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, MessageType.Tip)
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         FormSurface.FlowsheetDesignSurface.DrawFloatingTables = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetDesignSurface.DrawPropertyLists = Options.DisplayCornerPropertyList
@@ -434,9 +434,9 @@ Public Class FormFlowsheet
                                         Console.WriteLine()
                                     Else
                                         If scr.LinkedObjectName <> "" Then
-                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...", Color.Blue, MessageType.Information)
+                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...", Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
                                         Else
-                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", Color.Blue, MessageType.Information)
+                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
                                         End If
                                     End If
                                     If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
@@ -554,7 +554,7 @@ Public Class FormFlowsheet
         Return myNewPoint
     End Function
 
-    Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As DWSIM.Flowsheet.MessageType, Optional ByVal exceptionID As String = "")
+    Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As SharedClasses.DWSIM.Flowsheet.MessageType, Optional ByVal exceptionID As String = "")
 
         If texto.Trim <> "" Then
 
@@ -592,13 +592,13 @@ Public Class FormFlowsheet
                                                          Dim img As Bitmap
                                                          Dim strtipo As String
                                                          Select Case tipo
-                                                             Case DWSIM.Flowsheet.MessageType.Warning
+                                                             Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
                                                                  img = My.Resources._error
                                                                  strtipo = DWSIM.App.GetLocalString("Aviso")
-                                                             Case DWSIM.Flowsheet.MessageType.GeneralError
+                                                             Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
                                                                  img = My.Resources.exclamation
                                                                  strtipo = DWSIM.App.GetLocalString("Erro")
-                                                             Case DWSIM.Flowsheet.MessageType.Tip
+                                                             Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
                                                                  If Not showtips Then Exit Sub
                                                                  img = My.Resources.lightbulb
                                                                  strtipo = DWSIM.App.GetLocalString("Dica")
@@ -626,18 +626,18 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub WriteMessage(ByVal message As String)
-        WriteToLog(message, Color.Black, DWSIM.Flowsheet.MessageType.Information)
+        WriteToLog(message, Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
     End Sub
 
     Public Sub CheckCollections()
 
-        If Collections.GraphicObjectCollection Is Nothing Then Collections.GraphicObjectCollection = New Dictionary(Of String, GraphicObject)
+        If Collections.GraphicObjectCollection Is Nothing Then Collections.GraphicObjectCollection = New Dictionary(Of String, IGraphicObject)
 
         If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
 
-        If Collections.OPT_SensAnalysisCollection Is Nothing Then Collections.OPT_SensAnalysisCollection = New List(Of DWSIM.Optimization.SensitivityAnalysisCase)
+        If Collections.OPT_SensAnalysisCollection Is Nothing Then Collections.OPT_SensAnalysisCollection = New List(Of SharedClasses.Flowsheet.Optimization.SensitivityAnalysisCase)
 
-        If Collections.OPT_OptimizationCollection Is Nothing Then Collections.OPT_OptimizationCollection = New List(Of DWSIM.Optimization.OptimizationCase)
+        If Collections.OPT_OptimizationCollection Is Nothing Then Collections.OPT_OptimizationCollection = New List(Of SharedClasses.Flowsheet.Optimization.OptimizationCase)
 
     End Sub
 
@@ -871,7 +871,7 @@ Public Class FormFlowsheet
                     Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).CopyDataToClipboard(Options.SelectedUnitSystem, Options.NumberFormat)
             End Select
         Catch ex As Exception
-            WriteToLog("Error copying data to clipboard: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+            WriteToLog("Error copying data to clipboard: " & ex.ToString, Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
         End Try
     End Sub
 
@@ -1307,7 +1307,7 @@ Public Class FormFlowsheet
 
     Public Sub DisconnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal triggercalc As Boolean = False)
 
-        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         Dim conObj As ConnectorGraphic = Nothing
         Dim SelObj As GraphicObject = gObjFrom
@@ -1378,7 +1378,7 @@ Public Class FormFlowsheet
 
     Public Sub ConnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal fidx As Integer = -1, Optional ByVal tidx As Integer = -1)
 
-        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         If gObjFrom.ObjectType <> ObjectType.GO_Image And gObjFrom.ObjectType <> ObjectType.GO_Table And
         gObjFrom.ObjectType <> ObjectType.GO_Table And gObjFrom.ObjectType <> ObjectType.GO_FloatingTable And
@@ -1539,11 +1539,11 @@ Public Class FormFlowsheet
                         End If
                     End If
                 Else
-                    Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, MessageType.Information)
+                    Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
                     Exit Sub
                 End If
             Else
-                Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, MessageType.Information)
+                Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
                 Exit Sub
             End If
             If con1OK = True And con2OK = True Then
@@ -1673,7 +1673,7 @@ Public Class FormFlowsheet
                 End With
             End If
         Catch ex As Exception
-            Me.WriteToLog("Error creating CAPE-OPEN Flowsheet Monitoring Object: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+            Me.WriteToLog("Error creating CAPE-OPEN Flowsheet Monitoring Object: " & ex.ToString, Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
         Finally
             If TryCast(_como, CapeOpen.ICapeUtilities) IsNot Nothing Then
                 With CType(_como, CapeOpen.ICapeUtilities)
@@ -1927,7 +1927,7 @@ Public Class FormFlowsheet
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
 
-        For Each pp As KeyValuePair(Of String, Thermodynamics.PropertyPackages.PropertyPackage) In Options.PropertyPackages
+        For Each pp In Options.PropertyPackages
             Dim createdms As Boolean = False
             If pp.Value.CurrentMaterialStream Is Nothing Then
                 Dim ms As New Streams.MaterialStream("", "", Me, pp.Value)
@@ -2368,7 +2368,7 @@ Public Class FormFlowsheet
 
         Catch ex As Exception
 
-            WriteToLog(ex.ToString(), Color.Red, MessageType.GeneralError)
+            WriteToLog(ex.ToString(), Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
 
         End Try
 
@@ -2594,15 +2594,15 @@ Public Class FormFlowsheet
     Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "") Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
         Select Case mtype
             Case Interfaces.IFlowsheet.MessageType.Information
-                WriteToLog(text, Color.Blue, MessageType.Information)
+                WriteToLog(text, Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
             Case Interfaces.IFlowsheet.MessageType.GeneralError
-                WriteToLog(text, Color.Red, MessageType.GeneralError, exceptionID)
+                WriteToLog(text, Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError, exceptionID)
             Case Interfaces.IFlowsheet.MessageType.Warning
-                WriteToLog(text, Color.OrangeRed, MessageType.Warning)
+                WriteToLog(text, Color.OrangeRed, SharedClasses.DWSIM.Flowsheet.MessageType.Warning)
             Case Interfaces.IFlowsheet.MessageType.Tip
-                WriteToLog(text, Color.Blue, MessageType.Tip)
+                WriteToLog(text, Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
             Case Interfaces.IFlowsheet.MessageType.Other
-                WriteToLog(text, Color.Black, MessageType.Information)
+                WriteToLog(text, Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
         End Select
     End Sub
 
@@ -2866,7 +2866,7 @@ Public Class FormFlowsheet
                             If FormSpreadsheet IsNot Nothing AndAlso FormSpreadsheet.chkUpdate.Checked Then Me.FormSpreadsheet.EvaluateAll()
                         End Sub)
         Catch ex As Exception
-            WriteToLog("Error updating spreadsheet: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
+            WriteToLog("Error updating spreadsheet: " & ex.Message.ToString, Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
         End Try
 
     End Sub

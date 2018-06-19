@@ -289,6 +289,7 @@ Namespace Enums
         Molar_Flows
         Mass_Flows
         Volumetric_Flows
+        DefaultBasis
     End Enum
 
     Public Enum PhaseLabel

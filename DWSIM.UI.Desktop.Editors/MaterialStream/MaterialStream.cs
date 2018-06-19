@@ -62,6 +62,14 @@ namespace DWSIM.UI.Desktop.Editors
                 MatStream.GraphicObject.Tag = arg3.Text;
             }, () => CallSolverIfNeeded());
 
+            s.CreateAndAddDropDownRow(container, "Compound Amount Basis",
+            new List<string>() { "Molar Fractions", "Mass Fractions", "Volumetric Fractions", "Molar Flows", "Mass Flows", "Volumetric Flows", "Default" },
+            (int)MatStream.FloatingTableAmountBasis, (sender, e) =>
+            {
+                MatStream.FloatingTableAmountBasis = (DWSIM.Interfaces.Enums.CompositionBasis)sender.SelectedIndex;
+            });
+            s.CreateAndAddDescriptionRow(container, "Select the basis to display compound amounts in floating tables, if enabled.");
+
             s.CreateAndAddLabelRow(container, "Property Package");
 
             var proppacks = MatStream.GetFlowsheet().PropertyPackages.Values.Select((x) => x.Tag).ToList();

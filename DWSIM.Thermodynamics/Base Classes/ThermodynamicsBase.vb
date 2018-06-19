@@ -456,7 +456,7 @@ Namespace BaseClasses
 
 #Region "    CAPE-OPEN Reaction Package Methods and Properties"
 
-        Protected m_params As CapeOpen.ParameterCollection
+        Protected m_params As New CapeOpen.ParameterCollection
         Protected m_str As Streams.MaterialStream
         <System.NonSerialized()> Protected m_pme As Interfaces.IFlowsheet
         Protected m_kre As Reaction

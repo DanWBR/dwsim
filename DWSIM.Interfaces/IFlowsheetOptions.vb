@@ -78,4 +78,8 @@
 
     Property DisplayCornerPropertyListPadding As Integer
 
+    Property DefaultFloatingTableCompoundAmountBasis As Enums.CompositionBasis
+
+    Property DisplayFloatingTableCompoundAmounts As Boolean
+
 End Interface

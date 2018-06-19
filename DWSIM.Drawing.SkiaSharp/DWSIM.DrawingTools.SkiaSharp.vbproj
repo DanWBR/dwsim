@@ -216,6 +216,10 @@
       <Project>{0f6737eb-db5a-4872-bef8-5ef10b4f1c1c}</Project>
       <Name>DWSIM.DrawingTools.Point</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1E12C010-2661-4896-9C00-90F8B41ED10A}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>

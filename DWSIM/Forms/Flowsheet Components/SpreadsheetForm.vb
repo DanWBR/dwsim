@@ -18,6 +18,7 @@
 
 Imports Ciloci.Flee
 Imports System.Linq
+Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 
 Public Class SpreadsheetForm
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
@@ -621,7 +622,7 @@ Public Class SpreadsheetForm
                 cell.Tag = ccparams.Clone
                 cell.ToolTipText = ccparams.ToolTipText
                 cell.Style.BackColor = cell.OwningColumn.DefaultCellStyle.BackColor
-                My.Application.ActiveSimulation.WriteToLog(Me.Text & ": " & DWSIM.App.GetLocalString("Invalidexpressiononcell") & " " & GetCellString(cell) & " - " & ex.Message, Color.Brown, DWSIM.Flowsheet.MessageType.Information)
+                My.Application.ActiveSimulation.WriteToLog(Me.Text & ": " & DWSIM.App.GetLocalString("Invalidexpressiononcell") & " " & GetCellString(cell) & " - " & ex.Message, Color.Brown, MessageType.Information)
             End Try
 
         End If

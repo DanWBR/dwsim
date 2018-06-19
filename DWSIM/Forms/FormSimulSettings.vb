@@ -263,6 +263,9 @@ Public Class FormSimulSettings
         chkShowFloatingTables.Checked = FrmChild.Options.DisplayFloatingPropertyTables
         chkShowAnchoredPropertyLists.Checked = FrmChild.Options.DisplayCornerPropertyList
 
+        chkDisplayFloatingTableCompoundAmounts.Checked = FrmChild.Options.DisplayFloatingTableCompoundAmounts
+        cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex = FrmChild.Options.DefaultFloatingTableCompoundAmountBasis
+
         Me.loaded = True
 
     End Sub
@@ -1689,6 +1692,14 @@ Public Class FormSimulSettings
         FrmChild.Options.DisplayCornerPropertyListFontColor = FontDialog1.Color.Name
         FrmChild.Options.DisplayCornerPropertyListFontSize = FontDialog1.Font.Size
 
+    End Sub
+
+    Private Sub chkDisplayFloatingTableCompoundAmounts_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayFloatingTableCompoundAmounts.CheckedChanged
+        FrmChild.Options.DisplayFloatingTableCompoundAmounts = chkDisplayFloatingTableCompoundAmounts.Checked
+    End Sub
+
+    Private Sub cbDefaultFloatingTableCompoundAmountBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDefaultFloatingTableCompoundAmountBasis.SelectedIndexChanged
+        FrmChild.Options.DefaultFloatingTableCompoundAmountBasis = cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex
     End Sub
 
     Private Sub btnConfigPPAdv_Click(sender As Object, e As EventArgs) Handles btnConfigPPAdv.Click

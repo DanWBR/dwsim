@@ -18,6 +18,7 @@
 
 Imports System.Linq
 Imports DWSIM.Interfaces
+Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses.Flowsheet
 
 Namespace DWSIM.Flowsheet
@@ -223,6 +224,10 @@ Namespace DWSIM.Flowsheet
         Public Property DisplayCornerPropertyListFontSize As Integer = 8 Implements IFlowsheetOptions.DisplayCornerPropertyListFontSize
 
         Public Property DisplayCornerPropertyListPadding As Integer = 4 Implements IFlowsheetOptions.DisplayCornerPropertyListPadding
+
+        Public Property DefaultFloatingTableCompoundAmountBasis As CompositionBasis = CompositionBasis.Molar_Fractions Implements IFlowsheetOptions.DefaultFloatingTableCompoundAmountBasis
+
+        Public Property DisplayFloatingTableCompoundAmounts As Boolean = True Implements IFlowsheetOptions.DisplayFloatingTableCompoundAmounts
 
     End Class
 

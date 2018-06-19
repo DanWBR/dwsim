@@ -134,6 +134,18 @@ namespace DWSIM.UI.Desktop.Editors
                 surface.DrawFloatingTable = flowsheet.FlowsheetOptions.DisplayFloatingPropertyTables;
             });
 
+            s.CreateAndAddCheckBoxRow(container, "Display Compound Amount Floating Tables for Material Streams", flowsheet.FlowsheetOptions.DisplayFloatingTableCompoundAmounts, (sender, e) =>
+            {
+                flowsheet.Options.DisplayFloatingTableCompoundAmounts = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddDropDownRow(container, "Compound Amount Default Basis", 
+                new List<string>() { "Molar Fractions", "Mass Fractions","Volumetric Fractions","Molar Flows","Mass Flows","Volumetric Flows" }, 
+                (int)flowsheet.FlowsheetOptions.DefaultFloatingTableCompoundAmountBasis, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DefaultFloatingTableCompoundAmountBasis = (DWSIM.Interfaces.Enums.CompositionBasis)sender.SelectedIndex;
+            });
+
             s.CreateAndAddCheckBoxRow(container, "Display Anchored Property Lists", flowsheet.FlowsheetOptions.DisplayCornerPropertyList, (sender, e) =>
             {
                 flowsheet.FlowsheetOptions.DisplayCornerPropertyList = sender.Checked.GetValueOrDefault();

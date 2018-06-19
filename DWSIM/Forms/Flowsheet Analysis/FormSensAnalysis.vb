@@ -22,6 +22,8 @@ Imports DWSIM.DrawingTools
 Imports Ciloci.Flee
 Imports DWSIM.FlowsheetSolver
 Imports System.Linq
+Imports DWSIM.SharedClasses.Flowsheet.Optimization
+Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 
 Public Class FormSensAnalysis
 
@@ -42,7 +44,7 @@ Public Class FormSensAnalysis
 
     Private Sub FormSensAnalysis_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.tabtext = Me.Text
+        Me.TabText = Me.Text
 
         If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then
             ' set the bounds of this form's FloatWindow to our desired position and size
@@ -62,9 +64,9 @@ Public Class FormSensAnalysis
 
         Me.lbCases.Items.Clear()
 
-        If form.Collections.OPT_SensAnalysisCollection Is Nothing Then form.Collections.OPT_SensAnalysisCollection = New List(Of DWSIM.Optimization.SensitivityAnalysisCase)
+        If form.Collections.OPT_SensAnalysisCollection Is Nothing Then form.Collections.OPT_SensAnalysisCollection = New List(Of SensitivityAnalysisCase)
 
-        For Each sacase As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+        For Each sacase As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
             Me.lbCases.Items.Add(sacase.name)
         Next
 
@@ -131,7 +133,7 @@ Public Class FormSensAnalysis
 
         If Me.lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = Me.lbCases.Items.Count - 1
 
-        form.WriteToLog(DWSIM.App.GetLocalTipString("FSAN001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+        form.WriteToLog(DWSIM.App.GetLocalTipString("FSAN001"), Color.Black, MessageType.Tip)
 
     End Sub
 
@@ -229,7 +231,7 @@ Public Class FormSensAnalysis
     Private Function GetNameIndex(ByVal N As String) As Integer
         Dim i As Integer
 
-        For Each s As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+        For Each s As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
             If s.name = N Then Return i
             i += 1
         Next
@@ -239,7 +241,7 @@ Public Class FormSensAnalysis
 
     Private Sub btnNewCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewCase.Click
 
-        Dim sacase As New DWSIM.Optimization.SensitivityAnalysisCase
+        Dim sacase As New SensitivityAnalysisCase
         Dim n As Integer = form.Collections.OPT_SensAnalysisCollection.Count
 
         Do
@@ -256,7 +258,7 @@ Public Class FormSensAnalysis
 
     End Sub
 
-    Private Sub PopulateForm(ByRef sacase As DWSIM.Optimization.SensitivityAnalysisCase)
+    Private Sub PopulateForm(ByRef sacase As SensitivityAnalysisCase)
         EnableAutoSave = False 'disable automatic saving during populating on changing of fields
         With sacase
             Me.tbCaseName.Text = sacase.name
@@ -363,7 +365,7 @@ Public Class FormSensAnalysis
             Me.selectedindex = Me.lbCases.SelectedIndex
 
             If Not Me.lbCases.SelectedItem Is Nothing Then
-                For Each sacase As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+                For Each sacase As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
                     If sacase.name = Me.lbCases.SelectedItem.ToString Then
                         Me.selectedsacase = sacase
                         Me.PopulateForm(sacase)
@@ -393,12 +395,12 @@ Public Class FormSensAnalysis
 
     Private Sub btnCopyCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyCase.Click
 
-        Dim sacase2 As New DWSIM.Optimization.SensitivityAnalysisCase
-        
+        Dim sacase2 As New SensitivityAnalysisCase
+
         Dim sacase = form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex)
         sacase2 = sacase.Clone
         sacase2.name = sacase.name & "_1"
-        
+
         Me.lbCases.Items.Add(sacase2.name)
         Me.lbCases.SelectedItem = sacase2.name
         form.Collections.OPT_SensAnalysisCollection.Add(sacase2)
@@ -419,7 +421,7 @@ Public Class FormSensAnalysis
 
     End Sub
 
-    Private Sub SaveForm(ByRef sacase As DWSIM.Optimization.SensitivityAnalysisCase)
+    Private Sub SaveForm(ByRef sacase As SensitivityAnalysisCase)
 
         With sacase
             sacase.name = Me.tbCaseName.Text
@@ -511,13 +513,13 @@ Public Class FormSensAnalysis
                     .results.Add(New Double() {row.Cells(0).Value, row.Cells(1).Value, row.Cells(2).Value})
                 Next
             Catch ex As Exception
-                form.WriteToLog(ex.Message, Color.BurlyWood, DWSIM.Flowsheet.MessageType.Warning)
+                form.WriteToLog(ex.Message, Color.BurlyWood, MessageType.Warning)
             End Try
             .stats = Me.tbStats.Text
             If Me.chkIndVar2.Checked Then .numvar = 2 Else .numvar = 1
             .expression = Me.tbExpression.Text
             .variables.Clear()
-            If Me.rbExp.Checked Then .depvartype = DWSIM.Optimization.SADependentVariableType.Expression Else .depvartype = DWSIM.Optimization.SADependentVariableType.Variable
+            If Me.rbExp.Checked Then .depvartype = SADependentVariableType.Expression Else .depvartype = SADependentVariableType.Variable
             For Each dgrow As DataGridViewRow In Me.dgVariables.Rows
                 Dim var As New SAVariable
                 With var
@@ -558,14 +560,14 @@ Public Class FormSensAnalysis
 
         Me.lbCases.SelectedIndex = Me.selectedindex
 
-        For Each sacase2 As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+        For Each sacase2 As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
             If sacase2.name = Me.lbCases.SelectedItem.ToString Then
                 idx = form.Collections.OPT_SensAnalysisCollection.IndexOf(sacase2)
                 Exit For
             End If
         Next
 
-        Dim sacase As DWSIM.Optimization.SensitivityAnalysisCase = form.Collections.OPT_SensAnalysisCollection(idx)
+        Dim sacase As SensitivityAnalysisCase = form.Collections.OPT_SensAnalysisCollection(idx)
 
         SaveForm(sacase)
 

@@ -5954,7 +5954,7 @@ Namespace Streams
             End Get
         End Property
 
-        Public Property FloatingTableAmountBasis As CompositionBasis = CompositionBasis.Mass_Fractions Implements IMaterialStream.FloatingTableAmountBasis
+        Public Property FloatingTableAmountBasis As CompositionBasis = CompositionBasis.DefaultBasis Implements IMaterialStream.FloatingTableAmountBasis
 
         Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 

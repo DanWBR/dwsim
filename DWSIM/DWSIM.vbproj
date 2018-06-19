@@ -555,7 +555,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Classes\Optimization\Optimization.vb" />
     <Compile Include="Forms\AboutBox.Designer.vb">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </Compile>
@@ -637,7 +636,6 @@
     <Compile Include="Forms\FormSimulSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\Classes\Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Forms\Flowsheet Components\LogPanel.Designer.vb">
       <DependentUpon>LogPanel.vb</DependentUpon>
     </Compile>
@@ -686,7 +684,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
-    <Compile Include="Objects\Classes\Optimization\SensitivityAnalysis.vb" />
     <Compile Include="Tools\Assay Manager\FormAssayManager.Designer.vb">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </Compile>

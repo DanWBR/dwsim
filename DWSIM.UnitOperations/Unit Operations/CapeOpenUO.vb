@@ -1048,7 +1048,7 @@ Namespace UnitOperations
                     'set reaction set, if supported
                     If Not TryCast(_couo, ICapeKineticReactionContext) Is Nothing Then
                         Me.FlowSheet.ReactionSets(Me.ReactionSetID).simulationContext = Me.FlowSheet
-                        Dim myset As Object = CType(Me.FlowSheet.ReactionSets(Me.ReactionSetID), Object)
+                        Dim myset = Me.FlowSheet.ReactionSets(Me.ReactionSetID)
                         Dim myruo As ICapeKineticReactionContext = _couo
                         myruo.SetReactionObject(myset)
                     End If

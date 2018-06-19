@@ -31,7 +31,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DrawingTools
 Imports Infralution.Localization
 Imports System.Globalization
-Imports DWSIM.DWSIM.Flowsheet
+Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 Imports System.Threading.Tasks
 Imports System.Xml.Serialization
 Imports System.Xml
@@ -44,6 +44,7 @@ Imports System.Net
 Imports DWSIM.GraphicObjects
 Imports DWSIM.SharedClasses.Extras
 Imports System.Dynamic
+Imports DWSIM.SharedClasses.Flowsheet.Optimization
 
 Public Class FormMain
 
@@ -1227,7 +1228,7 @@ Public Class FormMain
 
             For Each xel As XElement In data
                 Try
-                    Dim obj As New DWSIM.Optimization.SensitivityAnalysisCase
+                    Dim obj As New SensitivityAnalysisCase
                     obj.LoadData(xel.Elements.ToList)
                     form.Collections.OPT_SensAnalysisCollection.Add(obj)
                 Catch ex As Exception
@@ -1305,7 +1306,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -1546,7 +1547,7 @@ Public Class FormMain
 
         For Each xel As XElement In data
             Try
-                Dim obj As New DWSIM.Optimization.OptimizationCase
+                Dim obj As New OptimizationCase
                 obj.LoadData(xel.Elements.ToList)
                 form.Collections.OPT_OptimizationCollection.Add(obj)
             Catch ex As Exception
@@ -1558,7 +1559,7 @@ Public Class FormMain
 
         For Each xel As XElement In data
             Try
-                Dim obj As New DWSIM.Optimization.SensitivityAnalysisCase
+                Dim obj As New SensitivityAnalysisCase
                 obj.LoadData(xel.Elements.ToList)
                 form.Collections.OPT_SensAnalysisCollection.Add(obj)
             Catch ex As Exception
@@ -1758,7 +1759,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -1854,7 +1855,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
 
-        For Each pp As KeyValuePair(Of String, PropertyPackage) In form.Options.PropertyPackages
+        For Each pp In form.Options.PropertyPackages
             Dim createdms As Boolean = False
             If pp.Value.CurrentMaterialStream Is Nothing Then
                 Dim ms As New Streams.MaterialStream("", "", form, pp.Value)
@@ -1891,14 +1892,14 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases")
 
-        For Each pp As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
+        For Each pp As OptimizationCase In form.Collections.OPT_OptimizationCollection
             xel.Add(New XElement("OptimizationCase", {pp.SaveData().ToArray()}))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SensitivityAnalysis"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis")
 
-        For Each pp As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+        For Each pp As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
             xel.Add(New XElement("SensitivityAnalysisCase", {pp.SaveData().ToArray()}))
         Next
 
@@ -1918,7 +1919,7 @@ Public Class FormMain
                                    End If
                                    form.Options.FilePath = Me.filename
                                    form.UpdateFormText()
-                                   form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                                   form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
                                    'Me.ToolStripStatusLabel1.Text = ""
                                End Sub))
 
@@ -2002,7 +2003,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
 
-        For Each pp As KeyValuePair(Of String, PropertyPackage) In form.Options.PropertyPackages
+        For Each pp In form.Options.PropertyPackages
             Dim createdms As Boolean = False
             If pp.Value.CurrentMaterialStream Is Nothing Then
                 Dim ms As New Streams.MaterialStream("", "", form, pp.Value)
@@ -2039,14 +2040,14 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases")
 
-        For Each pp As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
+        For Each pp As OptimizationCase In form.Collections.OPT_OptimizationCollection
             xel.Add(New XElement("OptimizationCase", {pp.SaveData().ToArray()}))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SensitivityAnalysis"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis")
 
-        For Each pp As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+        For Each pp As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
             xel.Add(New XElement("SensitivityAnalysisCase", {pp.SaveData().ToArray()}))
         Next
 
@@ -2118,7 +2119,7 @@ Public Class FormMain
                                        End If
                                        form.Options.FilePath = Me.filename
                                        form.UpdateFormText()
-                                       form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                                       form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
                                        'Me.ToolStripStatusLabel1.Text = ""
                                    End Sub))
         End If

@@ -191,6 +191,10 @@ Public Class MaterialStreamEditor
             cbFlashAlg.Items.AddRange(flashalgos)
             If .PreferredFlashAlgorithmTag <> "" Then cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag Else cbFlashAlg.SelectedIndex = 0
 
+            'compound amounts floating table
+
+            cbFloatingTableCompoundAmountBasis.SelectedIndex = MatStream.FloatingTableAmountBasis
+
             'annotation
 
             Try
@@ -1487,6 +1491,10 @@ Public Class MaterialStreamEditor
         ToolTip1.ToolTipTitle = MatStream.FlowSheet.GetTranslatedString("Ateno2")
         ToolTip1.ToolTipIcon = ToolTipIcon.Warning
         ToolTip1.Show(MatStream.FlowSheet.GetTranslatedString("CommitChangesWarning"), ctrl, 0, ctrl.Height + 4, 3000)
+    End Sub
+
+    Private Sub cbFloatingTableCompoundAmountBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFloatingTableCompoundAmountBasis.SelectedIndexChanged
+        MatStream.FloatingTableAmountBasis = cbFloatingTableCompoundAmountBasis.SelectedIndex
     End Sub
 
     Private Sub SaveViewState()

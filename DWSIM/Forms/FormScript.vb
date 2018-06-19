@@ -9,6 +9,7 @@ Imports FarsiLibrary.Win
 Imports System.Threading
 Imports Python.Runtime
 Imports System.Threading.Tasks
+Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 
 <System.Serializable()> Public Class FormScript
 
@@ -154,7 +155,7 @@ Imports System.Threading.Tasks
                 Console.WriteLine("Error running script: " & ops.FormatException(ex).ToString)
                 Console.WriteLine()
             Else
-                fsheet.WriteToLog("Error running script: " & ops.FormatException(ex).ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+                fsheet.WriteToLog("Error running script: " & ops.FormatException(ex).ToString, Color.Red, MessageType.GeneralError)
             End If
         Finally
             engine.Runtime.Shutdown()
@@ -213,7 +214,7 @@ Imports System.Threading.Tasks
                                                                                         PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
                                                                                         If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                            fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                                                                                            fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
                                                                                         End If
 
                                                                                     Catch ex As Exception
@@ -223,7 +224,7 @@ Imports System.Threading.Tasks
                                                                                             Console.WriteLine("Error running script: " & ex.ToString)
                                                                                             Console.WriteLine()
                                                                                         Else
-                                                                                            fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+                                                                                            fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
                                                                                         End If
 
                                                                                     Finally
@@ -415,7 +416,7 @@ Imports System.Threading.Tasks
             End If
         Next
 
-        fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+        fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, MessageType.Information)
 
     End Sub
 
@@ -772,7 +773,7 @@ Public Class DataGridViewTextStream
 
     Public Overrides Sub Write(ByVal buffer As Byte(), ByVal offset As Integer, ByVal count As Integer)
         Dim output As String = Encoding.UTF8.GetString(buffer, offset, count)
-        target.WriteToLog(output, Color.DarkGray, DWSIM.Flowsheet.MessageType.Information)
+        target.WriteToLog(output, Color.DarkGray, MessageType.Information)
     End Sub
 
 End Class

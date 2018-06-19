@@ -27,6 +27,8 @@ Imports DotNumerics
 Imports DWSIM.FlowsheetSolver
 Imports Cureos.Numerics
 Imports DWSIM.SharedClasses
+Imports DWSIM.SharedClasses.Flowsheet.Optimization
+Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 
 Public Class FormOptimization
 
@@ -79,9 +81,9 @@ Public Class FormOptimization
 
         Me.lbCases.Items.Clear()
 
-        If form.Collections.OPT_OptimizationCollection Is Nothing Then form.Collections.OPT_OptimizationCollection = New List(Of DWSIM.Optimization.OptimizationCase)
+        If form.Collections.OPT_OptimizationCollection Is Nothing Then form.Collections.OPT_OptimizationCollection = New List(Of OptimizationCase)
 
-        For Each optcase As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
+        For Each optcase As OptimizationCase In form.Collections.OPT_OptimizationCollection
             Me.lbCases.Items.Add(optcase.name)
         Next
 
@@ -128,7 +130,7 @@ Public Class FormOptimization
 
         If Me.lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = 0
 
-        form.WriteToLog(DWSIM.App.GetLocalTipString("FOPT001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+        form.WriteToLog(DWSIM.App.GetLocalTipString("FOPT001"), Color.Black, MessageType.Tip)
 
     End Sub
 
@@ -141,7 +143,7 @@ Public Class FormOptimization
     End Sub
 
     Private Sub btnCopyCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyCase.Click
-        Dim optcase2 As New DWSIM.Optimization.OptimizationCase
+        Dim optcase2 As New OptimizationCase
         Dim optcase = form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex)
         optcase2 = optcase.Clone
         optcase2.name = optcase.name & "_1"
@@ -167,7 +169,7 @@ Public Class FormOptimization
 
     Private Sub btnNewCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewCase.Click
 
-        Dim optcase As New DWSIM.Optimization.OptimizationCase
+        Dim optcase As New OptimizationCase
 
         optcase.name = "optcase" & form.Collections.OPT_OptimizationCollection.Count
 
@@ -183,7 +185,7 @@ Public Class FormOptimization
         Me.selectedindex0 = Me.lbCases.SelectedIndex
 
         If Not Me.lbCases.SelectedItem Is Nothing Then
-            For Each optcase As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
+            For Each optcase As OptimizationCase In form.Collections.OPT_OptimizationCollection
                 If optcase.name = Me.lbCases.SelectedItem.ToString Then
                     Me.selectedoptcase = optcase
                     Me.PopulateForm(optcase)
@@ -372,7 +374,7 @@ Public Class FormOptimization
             Dim xmin As Double
 
             With selectedoptcase
-                form.WriteToLog("Optimization started with method " & Me.ComboBox1.SelectedItem.ToString, Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
+                form.WriteToLog("Optimization started with method " & Me.ComboBox1.SelectedItem.ToString, Color.SeaGreen, MessageType.Information)
                 Select Case .solvm
                     Case OptimizationCase.SolvingMethod.AL_BRENT
                         Dim brentsolver As New BrentOpt.BrentMinimize
@@ -437,8 +439,8 @@ Public Class FormOptimization
                     Case OptimizationCase.SolvingMethod.IPOPT
                         Dim obj As Double
                         Dim status As IpoptReturnCode
-                        Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, 0, Nothing, Nothing, _
-                         0, 0, AddressOf eval_f, AddressOf eval_g, _
+                        Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, 0, Nothing, Nothing,
+                         0, 0, AddressOf eval_f, AddressOf eval_g,
                          AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                             problem.AddOption("tol", .tolerance)
                             problem.AddOption("max_iter", .maxits)
@@ -449,9 +451,9 @@ Public Class FormOptimization
                         End Using
                 End Select
             End With
-            form.WriteToLog("Optimization finished successfully.", Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
+            form.WriteToLog("Optimization finished successfully.", Color.SeaGreen, MessageType.Information)
         Catch ex As Exception
-            form.WriteToLog("Optimization error: " & ex.Message, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+            form.WriteToLog("Optimization error: " & ex.Message, Color.Red, MessageType.GeneralError)
         Finally
             Me.btnRun.Enabled = True
             Me.btnAbort.Enabled = False
@@ -1238,7 +1240,7 @@ Public Class FormOptimization
 
     End Function
 
-    Private Sub SaveForm(ByRef optcase As DWSIM.Optimization.OptimizationCase, Optional ByVal OnlyVars As Boolean = False)
+    Private Sub SaveForm(ByRef optcase As OptimizationCase, Optional ByVal OnlyVars As Boolean = False)
 
         If Me.selectedoptcase Is Nothing Then Me.selectedoptcase = form.Collections.OPT_OptimizationCollection(0)
 
@@ -1320,7 +1322,7 @@ Public Class FormOptimization
 
     End Sub
 
-    Private Sub PopulateForm(ByRef optcase As DWSIM.Optimization.OptimizationCase)
+    Private Sub PopulateForm(ByRef optcase As OptimizationCase)
 
         With optcase
             Me.tbCaseDesc.Text = .description
@@ -1437,7 +1439,7 @@ Public Class FormOptimization
             End If
         End If
 
-        form.WriteToLog("Optimization iteration #" & Me.selectedoptcase.results.Count & ", objective function value = " & Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1), Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
+        form.WriteToLog("Optimization iteration #" & Me.selectedoptcase.results.Count & ", objective function value = " & Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1), Color.SeaGreen, MessageType.Information)
 
         Dim curve As LineItem = Me.grProgress.GraphPane.CurveList(0)
         Dim list As IPointListEdit = curve.Points
@@ -1489,7 +1491,7 @@ Public Class FormOptimization
     End Sub
 
     Private Sub dgVariables_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgVariables.DataError
-        My.Application.ActiveSimulation.WriteToLog(e.Exception.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+        My.Application.ActiveSimulation.WriteToLog(e.Exception.Message.ToString, Color.Red, MessageType.GeneralError)
     End Sub
 
     'IPOPT
