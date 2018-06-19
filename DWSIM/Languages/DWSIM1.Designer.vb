@@ -2117,6 +2117,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Quantidades das Substâncias - Base: .
+        '''</summary>
+        Friend Shared ReadOnly Property CompoundAmounts() As String
+            Get
+                Return ResourceManager.GetString("CompoundAmounts", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to O componente já está adicionado à simulação. Importação cancelada..
         '''</summary>
         Friend Shared ReadOnly Property CompoundExists() As String
@@ -2131,6 +2140,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property CompoundNotFound() As String
             Get
                 Return ResourceManager.GetString("CompoundNotFound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Substâncias / Fases.
+        '''</summary>
+        Friend Shared ReadOnly Property CompoundsPhases() As String
+            Get
+                Return ResourceManager.GetString("CompoundsPhases", resourceCulture)
             End Get
         End Property
         
@@ -7035,6 +7053,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property FracaoMolar3() As String
             Get
                 Return ResourceManager.GetString("FracaoMolar3", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Fração.
+        '''</summary>
+        Friend Shared ReadOnly Property Fraction() As String
+            Get
+                Return ResourceManager.GetString("Fraction", resourceCulture)
             End Get
         End Property
         
@@ -14500,6 +14527,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Total.
+        '''</summary>
+        Friend Shared ReadOnly Property Total() As String
+            Get
+                Return ResourceManager.GetString("Total", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Transição.
         '''</summary>
         Friend Shared ReadOnly Property Transio() As String
@@ -16089,6 +16125,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property VolumeMolar() As String
             Get
                 Return ResourceManager.GetString("VolumeMolar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Fração Volumétrica.
+        '''</summary>
+        Friend Shared ReadOnly Property VolumetricFraction() As String
+            Get
+                Return ResourceManager.GetString("VolumetricFraction", resourceCulture)
             End Get
         End Property
         

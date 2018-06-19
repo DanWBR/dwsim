@@ -59,4 +59,6 @@
 
     Sub SetCurrentMaterialStream(ms As Object)
 
+    Property FloatingTableAmountBasis As Enums.CompositionBasis
+
 End Interface

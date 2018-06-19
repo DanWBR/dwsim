@@ -5514,4 +5514,19 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Atualização Disponível</value>
   </data>
+  <data name="CompoundAmounts" xml:space="preserve">
+    <value>Quantidades das Substâncias - Base: </value>
+  </data>
+  <data name="CompoundsPhases" xml:space="preserve">
+    <value>Substâncias / Fases</value>
+  </data>
+  <data name="Fraction" xml:space="preserve">
+    <value>Fração</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="VolumetricFraction" xml:space="preserve">
+    <value>Fração Volumétrica</value>
+  </data>
 </root>

@@ -5498,4 +5498,19 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="UpdatedVersionAvailable" xml:space="preserve">
     <value>An updated version is available to download from the official website. Update DWSIM to fix bugs, crashes and take advantage of new features.</value>
   </data>
+  <data name="CompoundAmounts" xml:space="preserve">
+    <value>Compound Amounts - Basis: </value>
+  </data>
+  <data name="CompoundsPhases" xml:space="preserve">
+    <value>Compounds / Phases</value>
+  </data>
+  <data name="Fraction" xml:space="preserve">
+    <value>Fraction</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="VolumetricFraction" xml:space="preserve">
+    <value>Volumetric Fraction</value>
+  </data>
 </root>
