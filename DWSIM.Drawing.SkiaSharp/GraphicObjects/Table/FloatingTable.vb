@@ -435,8 +435,8 @@ Namespace GraphicObjects.Tables
 
                             'draw shadow
 
-                            DrawRoundRect(g, X + 2, Y + DeltaY + 2 - size.Height, Width2, Height2, 6, spaint)
-                            DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 6, bpaint)
+                            DrawRoundRect(g, X + 4 / zoom, Y + DeltaY + 4 / zoom - size.Height, Width2, Height2, 5 / zoom, spaint)
+                            DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 5 / zoom, bpaint)
 
                             Dim atext As String = ""
 

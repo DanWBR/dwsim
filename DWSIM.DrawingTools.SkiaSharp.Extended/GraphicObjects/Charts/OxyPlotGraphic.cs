@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using OxyPlot;
+using OxyPlot.Series;
 using SkiaSharp;
 
 namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
@@ -13,6 +14,9 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
     {
 
         private Renderers.SKCanvasRenderContext renderer = new Renderers.SKCanvasRenderContext(1.0);
+
+
+        public string ClipboardData { get; set; } = "";
 
         #region "Constructors"
 
@@ -130,6 +134,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
                     if (model != null)
                     {
+                        ClipboardData = GetClipboardData((PlotModel)model);
                         try
                         {
                             using (var bmp = new SKBitmap(Width * 2, Height * 2))
@@ -185,6 +190,30 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
             canvas.DrawText(text, X + (Width - width) / 2, Y + (Height - height) / 2, tpaint);
 
             canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
+
+        }
+
+        private string GetClipboardData(PlotModel model)
+        {
+            var sb = new System.Text.StringBuilder();
+
+            sb.AppendLine(model.Title);
+            sb.AppendLine(model.Subtitle);
+
+            sb.AppendLine();
+
+            foreach (LineSeries ls in model.Series.Where((x) => x is LineSeries))
+            {
+                sb.AppendLine(ls.Title);
+                sb.AppendLine(model.Axes[0].Title + "\t" + model.Axes[1].Title);
+                foreach (var p in ls.Points)
+                {
+                    sb.AppendLine(p.X + "\t" + p.Y);
+                }
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
 
         }
 

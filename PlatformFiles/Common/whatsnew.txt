@@ -1,6 +1,6 @@
-Version 5.2 Update 8
+Version 5.2 Update 9
 
-- [NEW] Solution Inspector enhancements
-- [FIX] Fixed loading of mobile-saved simulation files
-- [FIX] Fixed a bug with the Equilibrium Reactor
-- [FIX] Other bug fixes
+- [NEW] Added Floating Table for compound amounts in Material Streams
+- [NEW] Copy data from chart objects
+- [FIX] Fixed bugs with the PFR and Equilibrium Reactors
+- [FIX] Fixed Adjust Control Panel (Classic UI)

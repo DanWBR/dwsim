@@ -125,6 +125,8 @@ Public Class FormFlowsheet
             Me.dckPanel.Skin.DockPaneStripSkin.TextFont = SystemFonts.DefaultFont
         End If
 
+        Options.ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))
+
     End Sub
 
     Private Sub FormChild_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated

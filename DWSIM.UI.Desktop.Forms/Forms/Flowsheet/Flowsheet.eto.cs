@@ -787,6 +787,15 @@ namespace DWSIM.UI.Forms
 
                                 selctxmenu.Items.Add(menuitem02);
 
+                                var item7a = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
+
+                                item7a.Click += (sender2, e2) =>
+                                {
+                                    new Clipboard().Text = obj.GetType().GetProperty("ClipboardData").GetValue(obj).ToString();
+                                };
+
+                                selctxmenu.Items.Add(item7a);
+
                                 var delitem2 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
                                 delitem2.Click += (sender2, e2) =>
                                 {
