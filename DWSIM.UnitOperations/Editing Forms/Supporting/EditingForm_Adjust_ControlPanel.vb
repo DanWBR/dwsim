@@ -12,7 +12,7 @@ Public Class EditingForm_Adjust_ControlPanel
     Public usemaxmin As Boolean = False
 
     Public myADJ As SpecialOps.Adjust
-    Public py1, py2 As ArrayList
+    Public py1, py2, px As New List(Of Double)
 
     Public su As SharedClasses.SystemsOfUnits.Units
     Public nf As String
@@ -42,11 +42,14 @@ Public Class EditingForm_Adjust_ControlPanel
         With Me.GraphControl.GraphPane
             .Title.IsVisible = False
             .XAxis.Title.Text = formC.GetTranslatedString("Iterao")
-            .YAxis.Title.Text = formC.GetTranslatedString(myADJ.ControlledObjectData.PropertyName) & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")"
+            .YAxis.Title.Text = "SP/CV - " + formC.GetTranslatedString(myADJ.ControlledObjectData.PropertyName) & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")"
+            .Y2Axis.IsVisible = True
+            .Y2Axis.Title.Text = "MV - " + formC.GetTranslatedString(myADJ.ManipulatedObjectData.PropertyName) & " (" & myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, Me.su) & ")"
         End With
 
-        py1 = New ArrayList
-        py2 = New ArrayList
+        py1 = New List(Of Double)
+        py2 = New List(Of Double)
+        px = New List(Of Double)
 
         Me.Text = myADJ.GraphicObject.Tag & " - " & formC.GetTranslatedString("PaineldeControle")
         Me.TabText = Me.Text
@@ -62,6 +65,7 @@ Public Class EditingForm_Adjust_ControlPanel
 
         py1.Clear()
         py2.Clear()
+        px.Clear()
 
         With Me.GraphControl.GraphPane
             .CurveList.Clear()
@@ -107,16 +111,18 @@ Public Class EditingForm_Adjust_ControlPanel
             stepsize = .StepSize
             tol = .Tolerance
             If Me.usemaxmin Then
-                min = .MinVal.GetValueOrDefault
-                max = .MaxVal.GetValueOrDefault
+                min = .MinVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
+                max = .MaxVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
             End If
         End With
 
         With Me.Grid1.Columns
             .Clear()
             .Add("c1", formC.GetTranslatedString("Iter"))
-            .Add("c2", "Var.")
-            .Add("c3", formC.GetTranslatedString("Erro"))
+            .Add("c2", "MV")
+            .Add("c3", "CV")
+            .Add("c4", "SP")
+            .Add("c5", formC.GetTranslatedString("Erro"))
         End With
         For Each co As DataGridViewColumn In Me.Grid1.Columns
             co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -132,7 +138,8 @@ Public Class EditingForm_Adjust_ControlPanel
             Do
                 fi_ant2 = fi_ant
                 fi_ant = fi
-                fi = cvVal - adjval
+                fi = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
+                    adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
 
                 Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
                 Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (cnt + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
@@ -173,8 +180,9 @@ Public Class EditingForm_Adjust_ControlPanel
                 cvVal = Me.GetCtlVarValue()
                 cnt += 1
 
-                py1.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
-                py2.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
+                px.Add(var.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
+                py1.Add(adjval)
+                py2.Add(cvVal)
 
                 AtualizaGrafico()
 
@@ -216,8 +224,8 @@ Public Class EditingForm_Adjust_ControlPanel
 
         ElseIf Me.rbBrent.Checked Then
 
-            minval = myADJ.MinVal.GetValueOrDefault
-            maxval = myADJ.MaxVal.GetValueOrDefault
+            minval = myADJ.MinVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
+            maxval = myADJ.MaxVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
 
             Dim l As Integer = 0
             Dim i As Integer = 0
@@ -229,30 +237,34 @@ Public Class EditingForm_Adjust_ControlPanel
             delta = (maxval - minval) / nsub
 
             Do
+                px.Add(minval.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
                 Me.SetMnpVarValue(minval)
 
                 DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
 
                 cvVal = Me.GetCtlVarValue()
-                f = cvVal - adjval
+                f = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
+                    adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
                 Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
                 Me.lblItXdeY.Text = formC.GetTranslatedString("Procurandosubinterva")
                 Me.tbErro.Text = f
-                py1.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
-                py2.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
+                py1.Add(adjval)
+                py2.Add(cvVal)
                 AtualizaGrafico()
                 minval = minval + delta
+                px.Add(minval.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
                 Me.SetMnpVarValue(minval)
 
                 DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
 
                 cvVal = Me.GetCtlVarValue()
-                f_inf = cvVal - adjval
+                f_inf = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
+                    adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
                 Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
                 Me.lblItXdeY.Text = formC.GetTranslatedString("Procurandosubinterva")
                 Me.tbErro.Text = f_inf
-                py1.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
-                py2.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
+                py1.Add(adjval)
+                py2.Add(cvVal)
                 AtualizaGrafico()
                 l += 1
                 If l > 5 Then
@@ -360,8 +372,9 @@ Public Class EditingForm_Adjust_ControlPanel
                 Me.tbErro.Text = fbb
                 iter2 += 1
 
-                py1.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
-                py2.Add(SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
+                px.Add(bbb.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
+                py1.Add(adjval)
+                py2.Add(cvVal)
 
                 AtualizaGrafico()
 
@@ -398,12 +411,14 @@ Final3:
         cancelar = False
 
         Dim j, k As Integer
-        Dim data(2, py1.Count - 1) As String
+        Dim data(4, py1.Count - 1) As String
         j = 0
         For Each d As Double In py1
             data(0, j) = j
-            data(1, j) = py2(j)
-            data(2, j) = -py1(j) + py2(j)
+            data(1, j) = px(j)
+            data(2, j) = py2(j)
+            data(3, j) = py1(j)
+            data(4, j) = -py1(j) + py2(j)
             j = j + 1
         Next
         With Me.Grid1.Rows
@@ -420,7 +435,7 @@ Final3:
                             .Item(k).Cells(j).Value = data(j, k)
                         End If
                         j = j + 1
-                    Loop Until j = 3
+                    Loop Until j = 5
                     k = k + 1
                 Loop Until k = py1.Count
             End If
@@ -576,6 +591,12 @@ Final3:
             If list2 Is Nothing Then Return
             list2.Add(py2.Count, py2(py2.Count - 1))
 
+            Dim curve3 As ZedGraph.LineItem = GraphControl.GraphPane.CurveList(2)
+            If curve3 Is Nothing Then Return
+            Dim list3 As ZedGraph.IPointListEdit = curve3.Points
+            If list3 Is Nothing Then Return
+            list3.Add(px.Count, px(px.Count - 1))
+
             GraphControl.AxisChange()
             ' Force a redraw
             GraphControl.Invalidate()
@@ -594,6 +615,12 @@ Final3:
                     .Line.IsSmooth = False
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
+                With .AddCurve(formC.GetTranslatedString("VarivelManipulada") & " (" & myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, Me.su) & ")", New Double() {1}, New Double() {CDbl(px(0))}, Color.Salmon, ZedGraph.SymbolType.Circle)
+                    .Color = Color.Salmon
+                    .Line.IsSmooth = False
+                    .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                    .IsY2Axis = True
+                End With
                 .AxisChange(Me.CreateGraphics)
                 Me.GraphControl.IsAutoScrollRange = True
                 Me.GraphControl.Invalidate()
@@ -606,15 +633,21 @@ Final3:
     End Sub
 
     Private Sub tbMaxIt_TextChanged(sender As Object, e As EventArgs) Handles tbMaxIt.TextChanged
-        If loaded Then myADJ.MaximumIterations = Integer.Parse(tbMaxIt.Text)
+        If Double.TryParse(tbMaxIt.Text, New Double) Then
+            If loaded Then myADJ.MaximumIterations = Integer.Parse(tbMaxIt.Text)
+        End If
     End Sub
 
     Private Sub tbStep_TextChanged(sender As Object, e As EventArgs) Handles tbStep.TextChanged
-        If loaded Then myADJ.StepSize = Double.Parse(tbStep.Text)
+        If Double.TryParse(tbStep.Text, New Double) Then
+            If loaded Then myADJ.StepSize = Double.Parse(tbStep.Text)
+        End If
     End Sub
 
     Private Sub tbTol_TextChanged(sender As Object, e As EventArgs) Handles tbTol.TextChanged
-        If loaded Then myADJ.Tolerance = Double.Parse(tbTol.Text)
+        If Double.TryParse(tbTol.Text, New Double) Then
+            If loaded Then myADJ.Tolerance = Double.Parse(tbTol.Text)
+        End If
     End Sub
 
     Private Sub rbBrent_CheckedChanged(sender As Object, e As EventArgs) Handles rbBrent.CheckedChanged
@@ -624,11 +657,21 @@ Final3:
     End Sub
 
     Private Sub tbMin_TextChanged(sender As Object, e As EventArgs) Handles tbMin.TextChanged
-        If loaded Then myADJ.MinVal = Double.Parse(tbMin.Text)
+        If loaded Then
+            Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
+            If Double.TryParse(tbMin.Text, New Double) Then
+                myADJ.MinVal = Double.Parse(tbMin.Text).ConvertToSI(units)
+            End If
+        End If
     End Sub
 
     Private Sub tbMax_TextChanged(sender As Object, e As EventArgs) Handles tbMax.TextChanged
-        If loaded Then myADJ.MaxVal = Double.Parse(tbMax.Text)
+        If loaded Then
+            Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
+            If Double.TryParse(tbMin.Text, New Double) Then
+                myADJ.MaxVal = Double.Parse(tbMax.Text).ConvertToSI(units)
+            End If
+        End If
     End Sub
 
     Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,
