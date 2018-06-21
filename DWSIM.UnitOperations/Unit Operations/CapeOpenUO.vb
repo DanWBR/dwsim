@@ -1044,23 +1044,23 @@ Namespace UnitOperations
                 Next
                 Dim myuo As CapeOpen.ICapeUnit = _couo
                 Dim msg As String = ""
-                'Try
-                '    'set reaction set, if supported
-                '    If Not TryCast(_couo, ICapeKineticReactionContext) Is Nothing Then
-                '        Me.FlowSheet.ReactionSets(Me.ReactionSetID).simulationContext = Me.FlowSheet
-                '        Dim myset = Me.FlowSheet.ReactionSets(Me.ReactionSetID)
-                '        Dim myruo As ICapeKineticReactionContext = _couo
-                '        myruo.SetReactionObject(myset)
-                '    End If
-                'Catch ex As Exception
-                '    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                '        If c.Type = ConType.ConEn Then
-                '            If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
-                '        End If
-                '    Next
-                '    Dim ecu As CapeOpen.ECapeUser = myuo
-                '    Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
-                'End Try
+                Try
+                    'set reaction set, if supported
+                    If Not TryCast(_couo, CAPEOPEN110.ICapeKineticReactionContext) Is Nothing Then
+                        Me.FlowSheet.ReactionSets(Me.ReactionSetID).simulationContext = Me.FlowSheet
+                        Dim myset = DirectCast(Me.FlowSheet.ReactionSets(Me.ReactionSetID), ReactionSet)
+                        Dim myruo As CAPEOPEN110.ICapeKineticReactionContext = _couo
+                        myruo.SetReactionObject(myset)
+                    End If
+                Catch ex As Exception
+                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                        If c.Type = ConType.ConEn Then
+                            If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
+                        End If
+                    Next
+                    Dim ecu As CapeOpen.ECapeUser = myuo
+                    Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
+                End Try
 
                 For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                     If c.IsAttached And c.Type = ConType.ConOut Then
