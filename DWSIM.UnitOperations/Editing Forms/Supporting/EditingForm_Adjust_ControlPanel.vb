@@ -660,7 +660,7 @@ Final3:
         If loaded Then
             Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
             If Double.TryParse(tbMin.Text, New Double) Then
-                myADJ.MinVal = Double.Parse(tbMin.Text).ConvertToSI(units)
+                myADJ.MinVal = Double.Parse(tbMin.Text)
             End If
         End If
     End Sub
@@ -668,8 +668,8 @@ Final3:
     Private Sub tbMax_TextChanged(sender As Object, e As EventArgs) Handles tbMax.TextChanged
         If loaded Then
             Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
-            If Double.TryParse(tbMin.Text, New Double) Then
-                myADJ.MaxVal = Double.Parse(tbMax.Text).ConvertToSI(units)
+            If Double.TryParse(tbMax.Text, New Double) Then
+                myADJ.MaxVal = Double.Parse(tbMax.Text)
             End If
         End If
     End Sub
