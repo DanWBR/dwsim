@@ -136,7 +136,7 @@ namespace DWSIM.UI.Forms
                     var wntext = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "whatsnew.txt"));
                     MessageBox.Show(wntext, "What's New", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
                 }
-
+                CheckForUpdates();
             }));
         }
 
@@ -165,6 +165,11 @@ namespace DWSIM.UI.Forms
                 }
                 catch { }
             }
+            
+        }
+
+        void CheckForUpdates()
+        {
 
             //check for updates
 
@@ -174,6 +179,7 @@ namespace DWSIM.UI.Forms
                 string uinfo = "0";
                 if (File.Exists(updfile)) uinfo = File.ReadAllText(updfile);
                 GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." + uinfo;
+                Console.WriteLine("Current Version: " + GlobalSettings.Settings.CurrentRunningVersion);
                 return SharedClasses.UpdateCheck.CheckForUpdates();
             }).ContinueWith((t) =>
             {

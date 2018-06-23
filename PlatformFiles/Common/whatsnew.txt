@@ -1,6 +1,5 @@
-Version 5.2 Update 9
+Version 5.2 Update 10
 
-- [NEW] Added Floating Table for compound amounts in Material Streams
-- [NEW] Copy data from chart objects
-- [FIX] Fixed bugs with the PFR and Equilibrium Reactors
+- [FIX] Fixed a bug with the CAPE-OPEN UO Socket
 - [FIX] Fixed Adjust Control Panel (Classic UI)
+- [FIX] Fixed Update reminder
