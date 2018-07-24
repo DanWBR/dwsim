@@ -357,7 +357,9 @@ Namespace Reactors
 #End Region
 
         Public Overrides Function CloneXML() As Object
-            Return New Reactor_Equilibrium().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Reactor_Equilibrium()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

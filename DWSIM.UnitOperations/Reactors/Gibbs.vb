@@ -75,7 +75,9 @@ Namespace Reactors
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Reactor_Gibbs().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Reactor_Gibbs()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

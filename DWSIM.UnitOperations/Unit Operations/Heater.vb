@@ -137,7 +137,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Heater().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Heater()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

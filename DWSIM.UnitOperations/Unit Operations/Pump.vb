@@ -208,7 +208,9 @@ Namespace UnitOperations
         Property OutletTemperature As Double = 298.15#
 
         Public Overrides Function CloneXML() As Object
-            Return New Pump().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Pump()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

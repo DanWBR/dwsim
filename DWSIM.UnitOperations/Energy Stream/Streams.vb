@@ -197,7 +197,9 @@ Namespace Streams
 #End Region
 
         Public Overrides Function CloneXML() As Object
-            Return New EnergyStream().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New EnergyStream()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

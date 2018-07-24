@@ -59,7 +59,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Tank().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Tank()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

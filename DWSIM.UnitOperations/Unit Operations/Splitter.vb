@@ -47,7 +47,9 @@ Namespace UnitOperations
         Public Property OperationMode As OpMode = OpMode.SplitRatios
 
         Public Overrides Function CloneXML() As Object
-            Return New Splitter().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Splitter()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object
@@ -66,10 +68,12 @@ Namespace UnitOperations
                 m_ratios.Add(Double.Parse(xel.Value, ci))
             Next
 
-            OutCount = 0
-            For Each cp In GraphicObject.OutputConnectors
-                If cp.IsAttached Then OutCount += 1
-            Next
+            If Not GraphicObject Is Nothing Then
+                OutCount = 0
+                For Each cp In GraphicObject.OutputConnectors
+                    If cp.IsAttached Then OutCount += 1
+                Next
+            End If
 
             Return True
 

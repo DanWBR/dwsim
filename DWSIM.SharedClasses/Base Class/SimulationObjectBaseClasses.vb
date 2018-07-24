@@ -513,17 +513,7 @@ Namespace UnitOperations
 
         Function ObjectCopy(ByVal obj As UnitOperations.BaseClass) As Object
 
-            If GlobalSettings.Settings.AutomationMode Then
-                Return Me.CloneXML
-            Else
-                Using objMemStream As New MemoryStream()
-                    Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
-                    objBinaryFormatter.Serialize(objMemStream, Me)
-                    objMemStream.Seek(0, SeekOrigin.Begin)
-                    objBinaryFormatter.AssemblyFormat = Formatters.FormatterAssemblyStyle.Simple
-                    Return objBinaryFormatter.Deserialize(objMemStream)
-                End Using
-            End If
+            Return Me.CloneXML
 
         End Function
 

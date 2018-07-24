@@ -2017,7 +2017,7 @@ Public Class FormMain
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
         For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
-            If Not go.IsConnector Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
+            If Not go.IsConnector And Not go.ObjectType = ObjectType.GO_FloatingTable Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))

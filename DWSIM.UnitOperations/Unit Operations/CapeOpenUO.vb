@@ -164,7 +164,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New CapeOpenUO().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New CapeOpenUO()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

@@ -60,7 +60,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Mixer().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Mixer()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

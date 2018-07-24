@@ -68,7 +68,9 @@ Namespace SpecialOps
         End Property
 
         Public Overrides Function CloneXML() As Object
-            Return New Recycle().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Recycle()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

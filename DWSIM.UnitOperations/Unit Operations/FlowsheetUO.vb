@@ -112,7 +112,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Flowsheet().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Flowsheet()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

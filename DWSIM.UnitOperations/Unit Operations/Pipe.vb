@@ -203,7 +203,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Pipe().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Pipe()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

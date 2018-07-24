@@ -115,7 +115,9 @@ Namespace Reactors
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Reactor_PFR().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Reactor_PFR()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

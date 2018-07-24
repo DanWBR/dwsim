@@ -67,7 +67,9 @@ Namespace SpecialOps
         Protected m_initialEstimate As Nullable(Of Double) = Nothing
 
         Public Overrides Function CloneXML() As Object
-            Return New Adjust().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Adjust()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

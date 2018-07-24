@@ -700,7 +700,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New DistillationColumn().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New DistillationColumn()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object
@@ -1043,7 +1045,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New AbsorptionColumn().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New AbsorptionColumn()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object
@@ -1241,7 +1245,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New ReboiledAbsorber().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New ReboiledAbsorber()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object
@@ -1396,7 +1402,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New RefluxedAbsorber().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New RefluxedAbsorber()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

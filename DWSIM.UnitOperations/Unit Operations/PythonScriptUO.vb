@@ -120,7 +120,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New CustomUO().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New CustomUO()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

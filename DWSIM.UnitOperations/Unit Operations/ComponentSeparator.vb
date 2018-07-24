@@ -105,7 +105,9 @@ Namespace UnitOperations
         Protected _streamindex As Byte = 0
 
         Public Overrides Function CloneXML() As Object
-            Return New ComponentSeparator().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New ComponentSeparator()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

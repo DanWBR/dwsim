@@ -45,7 +45,9 @@ Namespace SpecialOps
         Protected m_IterationsTaken As Integer = 0
 
         Public Overrides Function CloneXML() As Object
-            Return New EnergyRecycle().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New EnergyRecycle()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

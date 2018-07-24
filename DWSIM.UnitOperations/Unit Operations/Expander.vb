@@ -93,7 +93,9 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Return New Expander().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Expander()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object

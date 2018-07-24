@@ -67,7 +67,9 @@ Namespace SpecialOps
         Protected nf As String = ""
 
         Public Overrides Function CloneXML() As Object
-            Return New Spec().LoadData(Me.SaveData)
+            Dim obj As ICustomXMLSerialization = New Spec()
+            obj.LoadData(Me.SaveData)
+            Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object
