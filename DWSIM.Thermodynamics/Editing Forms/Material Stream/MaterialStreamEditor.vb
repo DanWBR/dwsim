@@ -36,7 +36,10 @@ Public Class MaterialStreamEditor
             TabPhaseComps.SelectedIndex = .CompoundsAmountSelectedTab
             TabCompoundPhaseProps.SelectedIndex = .CompoundsPropertySelectedTab
             TabPhaseProps.SelectedIndex = .PhasePropsSelectedTab
+            TabControlMain0.SelectedIndex = .MainSelectedTab0
         End With
+
+        rtbAnnotations.ToolbarVisible = True
 
     End Sub
 
@@ -326,12 +329,12 @@ Public Class MaterialStreamEditor
 
             If .GraphicObject.InputConnectors(0).IsAttached Then
                 If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
-                    TabPageInput.Enabled = True
+                    TabPageInputPane.Enabled = True
                 Else
-                    TabPageInput.Enabled = False
+                    TabPageInputPane.Enabled = False
                 End If
             Else
-                TabPageInput.Enabled = True
+                TabPageInputPane.Enabled = True
             End If
 
         End With
@@ -616,7 +619,6 @@ Public Class MaterialStreamEditor
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = row.Cells(1).Value / total
         Next
-        If Not committing Then ShowUncommittedChangesWarning(btnNormalizeInput)
     End Sub
 
     Private Sub btnEqualizeInput_Click(sender As Object, e As EventArgs) Handles btnEqualizeInput.Click
@@ -624,14 +626,12 @@ Public Class MaterialStreamEditor
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 1.0# / gridInputComposition.Rows.Count
         Next
-        ShowUncommittedChangesWarning(btnEqualizeInput)
     End Sub
 
     Private Sub btnEraseInput_Click(sender As Object, e As EventArgs) Handles btnEraseInput.Click
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 0.0#
         Next
-        ShowUncommittedChangesWarning(btnEraseInput)
     End Sub
 
     Private Sub btnCompAcceptChanges_Click(sender As Object, e As EventArgs) Handles btnCompAcceptChanges.Click
@@ -1116,12 +1116,6 @@ Public Class MaterialStreamEditor
             tbox.ForeColor = Drawing.Color.Red
         End If
 
-        If Loaded Then
-            ToolTip1.ToolTipTitle = MatStream.FlowSheet.GetTranslatedString("Informao")
-            ToolTip1.ToolTipIcon = ToolTipIcon.Info
-            ToolTip1.Show(MatStream.FlowSheet.GetTranslatedString("CommitChanges"), tbox, 0, tbox.Height + 4, 2000)
-        End If
-
     End Sub
 
     Private Sub cbCalculatedAmountsBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalculatedAmountsBasis.SelectedIndexChanged
@@ -1133,10 +1127,6 @@ Public Class MaterialStreamEditor
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiq2, MatStream.Phases(4))
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompSolid, MatStream.Phases(7))
 
-    End Sub
-
-    Private Sub gridInputComposition_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellEndEdit
-        ShowUncommittedChangesWarning(lblInputAmount)
     End Sub
 
     Private Sub gridInputComposition_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellValueChanged
@@ -1485,12 +1475,6 @@ Public Class MaterialStreamEditor
 
         End If
 
-    End Sub
-
-    Private Sub ShowUncommittedChangesWarning(ctrl As Control)
-        ToolTip1.ToolTipTitle = MatStream.FlowSheet.GetTranslatedString("Ateno2")
-        ToolTip1.ToolTipIcon = ToolTipIcon.Warning
-        ToolTip1.Show(MatStream.FlowSheet.GetTranslatedString("CommitChangesWarning"), ctrl, 0, ctrl.Height + 4, 3000)
     End Sub
 
     Private Sub cbFloatingTableCompoundAmountBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFloatingTableCompoundAmountBasis.SelectedIndexChanged

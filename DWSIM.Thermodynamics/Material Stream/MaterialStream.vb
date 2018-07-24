@@ -6716,6 +6716,7 @@ Namespace Streams.Editors
         Public Property CompoundsAmountSelectedTab As Integer = 0
         Public Property CompoundsPropertySelectedTab As Integer = 0
         Public Property PhasePropsSelectedTab As Integer = 0
+        Public Property MainSelectedTab0 As Integer = 0
 
     End Class
 

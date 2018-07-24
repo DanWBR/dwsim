@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="chkActive.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnUtils.Location" type="System.Drawing.Point, System.Drawing">
+    <value>397, 19</value>
+  </data>
+  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 20</value>
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 43</value>
+  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
   </data>
@@ -130,8 +136,14 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>430, 98</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>430, 86</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
@@ -154,6 +166,9 @@
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="btnDisconnectO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 49</value>
+  </data>
   <data name="btnDisconnectI.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
@@ -172,11 +187,20 @@
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="btnDisconnectI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 23</value>
+  </data>
+  <data name="cbOutlet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 21</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Downstream</value>
+  </data>
+  <data name="cbInlet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 21</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -184,17 +208,48 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Upstream</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 564</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>430, 88</value>
+  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
   </data>
+  <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 53</value>
+  </data>
+  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 26</value>
+  </data>
+  <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 21</value>
+  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
+  </data>
+  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
+  </data>
+  <data name="tbFracSpec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 260</value>
+  </data>
+  <data name="tbFracSpec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 20</value>
+  </data>
+  <data name="rbSpecSolid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>349, 261</value>
   </data>
   <data name="rbSpecSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 17</value>
@@ -203,7 +258,7 @@
     <value>Solid</value>
   </data>
   <data name="rbSpecLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 220</value>
+    <value>290, 261</value>
   </data>
   <data name="rbSpecLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 17</value>
@@ -211,14 +266,23 @@
   <data name="rbSpecLiquid.Text" xml:space="preserve">
     <value>Liquid</value>
   </data>
+  <data name="rbSpecVapor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>231, 261</value>
+  </data>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 264</value>
+  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 13</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Phase Mole Fraction</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Composition</value>
+  <data name="cbSolvent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 32</value>
+  </data>
+  <data name="cbSolvent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 21</value>
   </data>
   <data name="lblSolvent.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -226,20 +290,59 @@
   <data name="lblSolvent.Text" xml:space="preserve">
     <value>Solvent</value>
   </data>
-  <data name="btnCompAcceptChanges.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnCompAcceptChanges.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="btnCompAcceptChanges.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 274</value>
+  </data>
+  <data name="btnCompAcceptChanges.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 22</value>
+  </data>
+  <data name="btnCompAcceptChanges.Text" xml:space="preserve">
+    <value>Commit New Values (Accept)</value>
+  </data>
+  <data name="lblInputAmount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 173</value>
+  </data>
+  <data name="btnEraseInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="btnEraseInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 247</value>
+  </data>
+  <data name="btnEraseInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 22</value>
   </data>
   <data name="btnEraseInput.Text" xml:space="preserve">
-    <value>C</value>
+    <value>Clear (Erase All)</value>
   </data>
-  <data name="btnEraseInput.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnEqualizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
-  <data name="btnEqualizeInput.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnEqualizeInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 220</value>
   </data>
-  <data name="btnNormalizeInput.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnEqualizeInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 22</value>
+  </data>
+  <data name="btnEqualizeInput.Text" xml:space="preserve">
+    <value>Equalize Composition</value>
+  </data>
+  <data name="btnNormalizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="btnNormalizeInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 193</value>
+  </data>
+  <data name="btnNormalizeInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 22</value>
+  </data>
+  <data name="btnNormalizeInput.Text" xml:space="preserve">
+    <value>Normalize Composition</value>
+  </data>
+  <data name="gridInputComposition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 101</value>
   </data>
   <data name="compname.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -268,11 +371,32 @@
   <data name="cbCompBasis.Items6" xml:space="preserve">
     <value>Molalities</value>
   </data>
+  <data name="cbCompBasis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 7</value>
+  </data>
+  <data name="cbCompBasis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 21</value>
+  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Basis</value>
+  </data>
+  <data name="cbUnitsS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 228</value>
+  </data>
+  <data name="cbUnitsS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="tbEntr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 229</value>
+  </data>
+  <data name="tbEntr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 233</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -280,11 +404,77 @@
   <data name="Label15.Text" xml:space="preserve">
     <value>Specific Entropy</value>
   </data>
+  <data name="cbUnitsH.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 197</value>
+  </data>
+  <data name="cbUnitsH.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="tbEnth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 198</value>
+  </data>
+  <data name="tbEnth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
+  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 202</value>
+  </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Specific Enthalpy</value>
+  </data>
+  <data name="cbUnitsQ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 166</value>
+  </data>
+  <data name="cbUnitsQ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="tbVolFlow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 167</value>
+  </data>
+  <data name="tbVolFlow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
+  <data name="cbUnitsM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 135</value>
+  </data>
+  <data name="cbUnitsM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="tbMoleFlow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 136</value>
+  </data>
+  <data name="tbMoleFlow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
+  <data name="cbUnitsW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 104</value>
+  </data>
+  <data name="cbUnitsW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="tbMassFlow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 105</value>
+  </data>
+  <data name="tbMassFlow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
+  <data name="cbUnitsP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 73</value>
+  </data>
+  <data name="cbUnitsP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="tbPressure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 74</value>
+  </data>
+  <data name="tbPressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 171</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -292,11 +482,29 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Volumetric Flow</value>
   </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 140</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Molar Flow</value>
+  </data>
+  <data name="cbUnitsT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 42</value>
+  </data>
+  <data name="cbUnitsT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="tbTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 43</value>
+  </data>
+  <data name="tbTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 109</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -304,11 +512,17 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Mass Flow</value>
   </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 78</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Pressure</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 47</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Temperature</value>
@@ -330,6 +544,15 @@
   </data>
   <data name="cbSpec.Items5" xml:space="preserve">
     <value>Pressure and Solid Fraction (PSF)</value>
+  </data>
+  <data name="cbSpec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 11</value>
+  </data>
+  <data name="cbSpec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 21</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 15</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -382,8 +605,20 @@
   <data name="TCPTSMI.Text" xml:space="preserve">
     <value>True Critical Point</value>
   </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 329</value>
+  </data>
+  <data name="TabPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 303</value>
+  </data>
+  <data name="tabPropsMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
+  </data>
   <data name="tabPropsMix.Text" xml:space="preserve">
     <value>Mixture</value>
+  </data>
+  <data name="gridPropertiesMixture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -394,8 +629,14 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="tabPropsVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
+  </data>
   <data name="tabPropsVapor.Text" xml:space="preserve">
     <value>Vapor</value>
+  </data>
+  <data name="gridPropertiesVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
   </data>
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -406,8 +647,14 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="tabPropsLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
+  </data>
   <data name="tabPropsLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
+  </data>
+  <data name="gridPropertiesLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -418,8 +665,14 @@
   <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="tabPropsLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
+  </data>
   <data name="tabPropsLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
+  </data>
+  <data name="gridPropertiesLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
   </data>
   <data name="DataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -430,8 +683,14 @@
   <data name="DataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="tabPropsLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
+  </data>
   <data name="tabPropsLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
+  </data>
+  <data name="gridPropertiesLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
   </data>
   <data name="DataGridViewTextBoxColumn12.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -442,8 +701,14 @@
   <data name="DataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="tabPropsSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
+  </data>
   <data name="tabPropsSolid.Text" xml:space="preserve">
     <value>Solid</value>
+  </data>
+  <data name="gridPropertiesSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 277</value>
   </data>
   <data name="DataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -453,6 +718,9 @@
   </data>
   <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
     <value>Units</value>
+  </data>
+  <data name="lblAmountTotal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 15</value>
   </data>
   <data name="cbCalculatedAmountsBasis.Items" xml:space="preserve">
     <value>Mole Fractions</value>
@@ -475,14 +743,26 @@
   <data name="cbCalculatedAmountsBasis.Items6" xml:space="preserve">
     <value>Molalities</value>
   </data>
+  <data name="cbCalculatedAmountsBasis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 21</value>
+  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Basis</value>
   </data>
+  <data name="TabPhaseComps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>392, 224</value>
+  </data>
+  <data name="tabCompMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
+  </data>
   <data name="tabCompMix.Text" xml:space="preserve">
     <value>Mixture</value>
+  </data>
+  <data name="gridCompMixture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
   </data>
   <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -490,8 +770,14 @@
   <data name="DataGridViewTextBoxColumn19.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="tabCompVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
+  </data>
   <data name="tabCompVapor.Text" xml:space="preserve">
     <value>Vapor</value>
+  </data>
+  <data name="gridCompVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
   </data>
   <data name="DataGridViewTextBoxColumn20.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -499,8 +785,14 @@
   <data name="DataGridViewTextBoxColumn21.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="tabCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
+  </data>
   <data name="tabCompLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
+  </data>
+  <data name="gridCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
   </data>
   <data name="DataGridViewTextBoxColumn22.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -508,8 +800,14 @@
   <data name="DataGridViewTextBoxColumn23.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="tabCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
+  </data>
   <data name="tabCompLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
+  </data>
+  <data name="gridCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
   </data>
   <data name="DataGridViewTextBoxColumn24.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -517,8 +815,14 @@
   <data name="DataGridViewTextBoxColumn25.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="tabCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
+  </data>
   <data name="tabCompLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
+  </data>
+  <data name="gridCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
   </data>
   <data name="DataGridViewTextBoxColumn26.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -526,8 +830,14 @@
   <data name="DataGridViewTextBoxColumn27.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="tabCompSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
+  </data>
   <data name="tabCompSolid.Text" xml:space="preserve">
     <value>Solid</value>
+  </data>
+  <data name="gridCompSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 198</value>
   </data>
   <data name="DataGridViewTextBoxColumn28.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -535,17 +845,134 @@
   <data name="DataGridViewTextBoxColumn29.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="TabPageInput.Text" xml:space="preserve">
-    <value>Input Data</value>
+  <data name="TabControlMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 329</value>
+  </data>
+  <data name="TabPageResultsComp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 303</value>
   </data>
   <data name="TabPageResultsComp.Text" xml:space="preserve">
     <value>Compounds</value>
   </data>
+  <data name="TabControlCompound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>402, 297</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 271</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Amounts</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 271</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="lblCompPropUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 15</value>
+  </data>
+  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="TabCompoundPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>392, 227</value>
+  </data>
+  <data name="TabCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="TabCompPropVapor.Text" xml:space="preserve">
+    <value>Vapor</value>
+  </data>
+  <data name="gridCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn32.HeaderText" xml:space="preserve">
+    <value>Compound</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn33.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="TabCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="TabCompPropLiq1.Text" xml:space="preserve">
+    <value>Liquid 1</value>
+  </data>
+  <data name="gridCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn36.HeaderText" xml:space="preserve">
+    <value>Compound</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn37.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="TabCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="TabCompPropLiq2.Text" xml:space="preserve">
+    <value>Liquid 2</value>
+  </data>
+  <data name="gridCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn38.HeaderText" xml:space="preserve">
+    <value>Compound</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn39.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="TabCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="TabCompPropSolid.Text" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="gridCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 201</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn40.HeaderText" xml:space="preserve">
+    <value>Compound</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn41.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="cbCompoundPhaseProperties.Items" xml:space="preserve">
+    <value>Fugacity Coefficients</value>
+  </data>
+  <data name="cbCompoundPhaseProperties.Items1" xml:space="preserve">
+    <value>Log Fugacity Coefficients</value>
+  </data>
+  <data name="cbCompoundPhaseProperties.Items2" xml:space="preserve">
+    <value>Activity Coefficients</value>
+  </data>
+  <data name="cbCompoundPhaseProperties.Items3" xml:space="preserve">
+    <value>Partial Pressures</value>
+  </data>
+  <data name="cbCompoundPhaseProperties.Items4" xml:space="preserve">
+    <value>Partial Volumes</value>
+  </data>
+  <data name="cbCompoundPhaseProperties.Items5" xml:space="preserve">
+    <value>Infinite Dilution Diffusion Coefficients</value>
+  </data>
+  <data name="cbCompoundPhaseProperties.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 21</value>
+  </data>
+  <data name="TabPageResultsProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 303</value>
+  </data>
   <data name="TabPageResultsProps.Text" xml:space="preserve">
     <value>Phase Properties</value>
   </data>
-  <data name="TabPageAnnotations.Text" xml:space="preserve">
-    <value>Annotations</value>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 69</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Compound Amounts</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -574,82 +1001,52 @@
   <data name="cbFloatingTableCompoundAmountBasis.Items6" xml:space="preserve">
     <value>Simulation Default</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
+  <data name="cbFloatingTableCompoundAmountBasis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 21</value>
+  </data>
+  <data name="TabPageInputConditions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 303</value>
+  </data>
+  <data name="TabPageInputConditions.Text" xml:space="preserve">
+    <value>Stream Conditions</value>
+  </data>
+  <data name="TabPageInputComposition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 303</value>
+  </data>
+  <data name="TabPageInputComposition.Text" xml:space="preserve">
     <value>Compound Amounts</value>
   </data>
-  <data name="TabPage3.Text" xml:space="preserve">
-    <value>Floating Table</value>
+  <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 329</value>
   </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Amounts</value>
+  <data name="TabPageInputPane.Size" type="System.Drawing.Size, System.Drawing">
+    <value>422, 335</value>
   </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Properties</value>
+  <data name="TabPageInputPane.Text" xml:space="preserve">
+    <value>Input Data</value>
   </data>
-  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+  <data name="TabPageResultsPane.Size" type="System.Drawing.Size, System.Drawing">
+    <value>422, 335</value>
   </data>
-  <data name="Label18.Text" xml:space="preserve">
-    <value>Property</value>
+  <data name="TabPageResultsPane.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
-  <data name="TabCompPropVapor.Text" xml:space="preserve">
-    <value>Vapor</value>
+  <data name="TabPageAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>422, 335</value>
   </data>
-  <data name="DataGridViewTextBoxColumn32.HeaderText" xml:space="preserve">
-    <value>Compound</value>
+  <data name="TabPageAnnotations.Text" xml:space="preserve">
+    <value>Annotations</value>
   </data>
-  <data name="DataGridViewTextBoxColumn33.HeaderText" xml:space="preserve">
-    <value>Property</value>
+  <data name="TabPageFloatingTables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>422, 335</value>
   </data>
-  <data name="TabCompPropLiq1.Text" xml:space="preserve">
-    <value>Liquid 1</value>
+  <data name="TabPageFloatingTables.Text" xml:space="preserve">
+    <value>Floating Tables</value>
   </data>
-  <data name="DataGridViewTextBoxColumn36.HeaderText" xml:space="preserve">
-    <value>Compound</value>
+  <data name="TabControlMain0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>430, 361</value>
   </data>
-  <data name="DataGridViewTextBoxColumn37.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="TabCompPropLiq2.Text" xml:space="preserve">
-    <value>Liquid 2</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn38.HeaderText" xml:space="preserve">
-    <value>Compound</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn39.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="TabCompPropSolid.Text" xml:space="preserve">
-    <value>Solid</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn40.HeaderText" xml:space="preserve">
-    <value>Compound</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn41.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Items" xml:space="preserve">
-    <value>Fugacity Coefficients</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Items1" xml:space="preserve">
-    <value>Log Fugacity Coefficients</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Items2" xml:space="preserve">
-    <value>Activity Coefficients</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Items3" xml:space="preserve">
-    <value>Partial Pressures</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Items4" xml:space="preserve">
-    <value>Partial Volumes</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Items5" xml:space="preserve">
-    <value>Infinite Dilution Diffusion Coefficients</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 12</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 21</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>443, 662</value>
   </data>
 </root>
