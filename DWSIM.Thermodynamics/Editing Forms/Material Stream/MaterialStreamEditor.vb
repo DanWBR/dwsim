@@ -212,8 +212,8 @@ Public Class MaterialStreamEditor
 
             If .Calculated Then
 
-                If Not TabControlMain.TabPages.Contains(TabPageResultsComp) Then TabControlMain.TabPages.Insert(1, TabPageResultsComp)
-                If Not TabControlMain.TabPages.Contains(TabPageResultsProps) Then TabControlMain.TabPages.Insert(2, TabPageResultsProps)
+                If Not TabControlMain.TabPages.Contains(TabPageResultsComp) Then TabControlMain.TabPages.Add(TabPageResultsComp)
+                If Not TabControlMain.TabPages.Contains(TabPageResultsProps) Then TabControlMain.TabPages.Add(TabPageResultsProps)
 
                 'result compositions
 
