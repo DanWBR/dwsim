@@ -1458,7 +1458,7 @@ Namespace GraphicObjects
 
                     Dim dpiscale = g.DpiX / 96.0
 
-                    Me.HeaderFont = New Font("Arial", dpiscale * 11 / AdditionalInfo, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
+                    Me.HeaderFont = New Font("Arial", dpiscale * 10 / AdditionalInfo, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
 
                     g.TextRenderingHint = Text.TextRenderingHint.SystemDefault
 
@@ -1550,55 +1550,58 @@ Namespace GraphicObjects
 
                         maxH = maxH + 2 * Padding
 
+                        If Width > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth * 2 / 3 Then Exit Sub
+                        If Height > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight * 2 / 3 Then Exit Sub
+
                         If m_BorderPen Is Nothing Then m_BorderPen = New Drawing.Pen(Color.SteelBlue)
 
-                        With Me.m_BorderPen
-                            .Color = Color.SteelBlue
-                            .DashStyle = Me.BorderStyle
-                        End With
+                            With Me.m_BorderPen
+                                .Color = Color.SteelBlue
+                                .DashStyle = Me.BorderStyle
+                            End With
 
-                        'draw shadow
+                            'draw shadow
 
-                        Dim rect0 As New Rectangle(X + 2, Y + 2, Width, Height)
-                        DrawRoundRect(g, Pens.Transparent, rect0.X, rect0.Y, rect0.Width, rect0.Height, 6, New SolidBrush(Color.FromArgb(50, Color.DimGray)))
+                            Dim rect0 As New Rectangle(X + 2, Y + 2, Width, Height)
+                            DrawRoundRect(g, Pens.Transparent, rect0.X, rect0.Y, rect0.Width, rect0.Height, 6, New SolidBrush(Color.FromArgb(50, Color.DimGray)))
 
-                        Dim rect As New Rectangle(X, Y, Width, Height)
-                        DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New SolidBrush(Color.FromArgb(Me.Opacity, Me.BackgroundColor)))
+                            Dim rect As New Rectangle(X, Y, Width, Height)
+                            DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New SolidBrush(Color.FromArgb(Me.Opacity, Me.BackgroundColor)))
 
-                        Dim format1 As New StringFormat(StringFormatFlags.NoClip)
-                        With format1
-                            .Alignment = StringAlignment.Far
-                        End With
+                            Dim format1 As New StringFormat(StringFormatFlags.NoClip)
+                            With format1
+                                .Alignment = StringAlignment.Far
+                            End With
 
-                        'desenhar textos e retangulos
-                        g.DrawString(Me.Owner.GraphicObject.Tag.ToUpper, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + Padding)
-                        g.DrawString(DWSIM.App.GetLocalString(Me.Owner.GraphicObject.Description), Me.HeaderFont, New SolidBrush(FontColor), X + Padding + 3, Y + maxH)
-                        Dim n As Integer = 1
-                        For Each prop In props
-                            propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
-                            pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            If pval0 Is Nothing Then Exit For
-                            If TypeOf pval0 Is Double Then
-                                propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
-                            Else
-                                propval = pval0.ToString
-                            End If
-                            propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            g.DrawString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + (n + 1) * maxH + Padding)
-                            g.DrawString(propval, Me.HeaderFont, New SolidBrush(FontColor), X + maxL1 + maxL2 + 3, Y + (n + 1) * maxH + Padding, format1)
-                            g.DrawString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding)
-                            'g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
-                            n += 1
-                        Next
+                            'desenhar textos e retangulos
+                            g.DrawString(Me.Owner.GraphicObject.Tag.ToUpper, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + Padding)
+                            g.DrawString(DWSIM.App.GetLocalString(Me.Owner.GraphicObject.Description), Me.HeaderFont, New SolidBrush(FontColor), X + Padding + 3, Y + maxH)
+                            Dim n As Integer = 1
+                            For Each prop In props
+                                propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
+                                pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                                If pval0 Is Nothing Then Exit For
+                                If TypeOf pval0 Is Double Then
+                                    propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
+                                Else
+                                    propval = pval0.ToString
+                                End If
+                                propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                                g.DrawString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + (n + 1) * maxH + Padding)
+                                g.DrawString(propval, Me.HeaderFont, New SolidBrush(FontColor), X + maxL1 + maxL2 + 3, Y + (n + 1) * maxH + Padding, format1)
+                                g.DrawString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding)
+                                'g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+                                n += 1
+                            Next
 
-                        Me.m_BorderPen.Width = 1 / Me.AdditionalInfo
+                            Me.m_BorderPen.Width = 1 / Me.AdditionalInfo
 
-                        DrawRoundRect(g, Me.m_BorderPen, Me.X, Me.Y, Me.Width, Me.Height, 3, Brushes.Transparent)
-                        g.DrawLine(Me.m_BorderPen, X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding)
+                            DrawRoundRect(g, Me.m_BorderPen, Me.X, Me.Y, Me.Width, Me.Height, 3, Brushes.Transparent)
+                            g.DrawLine(Me.m_BorderPen, X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding)
 
-                    Else
+                        Else
 
-                        Dim MSObj = DirectCast(Me.Owner, Interfaces.IMaterialStream)
+                            Dim MSObj = DirectCast(Me.Owner, Interfaces.IMaterialStream)
 
                         Dim ABasis = MSObj.FloatingTableAmountBasis
 
@@ -1805,6 +1808,9 @@ Namespace GraphicObjects
                         Dim DeltaY As Integer = -Height2 - (n + 3) * Padding
 
                         If MSObj.Flowsheet.FlowsheetOptions.DisplayFloatingTableCompoundAmounts And (Y + DeltaY) > 0 Then
+
+                            If Width2 > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth * 2 / 3 Then Exit Sub
+                            If Height2 > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight * 2 / 3 Then Exit Sub
 
                             'draw shadow
 

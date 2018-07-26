@@ -46,7 +46,6 @@ Public Class FormFlowsheet
 
     'DWSIM IFlowsheet interface
     Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI, Interfaces.IFlowsheetCalculationQueue
-
     Public Shadows Const ClassId As String = "0294AA84-9269-46CE-A854-BEF64539287B"
     Public Shadows Const InterfaceId As String = "F405F679-7C8F-4737-BE58-738624220B7D"
     Public Shadows Const EventsId As String = "5E0BA6EE-9025-4C33-A896-E061F32E93BF"
@@ -3162,4 +3161,11 @@ Public Class FormFlowsheet
         Calculator.ExcelLogForm.Show()
     End Sub
 
+    Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
+        Return FormSurface.FlowsheetDesignSurface.Width
+    End Function
+
+    Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
+        Return FormSurface.FlowsheetDesignSurface.Height
+    End Function
 End Class

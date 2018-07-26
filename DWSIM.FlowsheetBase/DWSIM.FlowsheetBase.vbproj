@@ -114,6 +114,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\Python.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />

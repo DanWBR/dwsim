@@ -2174,5 +2174,12 @@ Label_00CC:
 
     Public MustOverride Function GetApplicationObject() As Object Implements IFlowsheet.GetApplicationObject
 
+    Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
+        Return FlowsheetSurface.Size.Width
+    End Function
+
+    Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
+        Return FlowsheetSurface.Size.Height
+    End Function
 End Class
 
