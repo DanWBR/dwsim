@@ -1550,8 +1550,8 @@ Namespace GraphicObjects
 
                         maxH = maxH + 2 * Padding
 
-                        If Width > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth * 2 / 3 Then Exit Sub
-                        If Height > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight * 2 / 3 Then Exit Sub
+                        If Width > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth Then Exit Sub
+                        If Height > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight Then Exit Sub
 
                         If m_BorderPen Is Nothing Then m_BorderPen = New Drawing.Pen(Color.SteelBlue)
 
