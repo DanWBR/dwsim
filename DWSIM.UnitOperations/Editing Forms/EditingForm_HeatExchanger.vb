@@ -134,6 +134,8 @@ Public Class EditingForm_HeatExchanger
             cbMITA.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
             cbMITA.SelectedItem = units.deltaT
 
+            cbEfficiency.SelectedIndex = 0
+
             cbCalcMode.SelectedIndex = .CalculationMode
 
             cbFlowDir.SelectedIndex = .FlowDir
@@ -149,6 +151,8 @@ Public Class EditingForm_HeatExchanger
             tbHeatLoss.Text = su.Converter.ConvertFromSI(units.heatflow, .HeatLoss).ToString(nf)
 
             tbMITA.Text = su.Converter.ConvertFromSI(units.deltaT, .MITA).ToString(nf)
+
+            tbEfficiency.Text = .ThermalEfficiency.ToString(nf)
 
             chkIgnoreLMTD.Checked = .IgnoreLMTDError
 
@@ -229,6 +233,7 @@ Public Class EditingForm_HeatExchanger
         tbArea.Enabled = True
         tbHeat.Enabled = True
         tbMITA.Enabled = False
+        tbEfficiency.Enabled = False
 
         cbColdFluidOutletT.Enabled = True
         cbHotFluidOutletT.Enabled = True
@@ -248,6 +253,7 @@ Public Class EditingForm_HeatExchanger
                 cbHeat.Enabled = False
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
+                tbEfficiency.Enabled = False
             Case 1
                 'Temperatura de Saída do Fluido Frio
                 tbColdFluidOutletT.Enabled = False
@@ -256,6 +262,7 @@ Public Class EditingForm_HeatExchanger
                 cbHeat.Enabled = False
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
+                tbEfficiency.Enabled = False
             Case 2
                 'Temperaturas de Saída
                 tbHotFluidOutletT.Enabled = False
@@ -266,6 +273,7 @@ Public Class EditingForm_HeatExchanger
                 cbOverallHTC.Enabled = False
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
+                tbEfficiency.Enabled = False
             Case 3
                 'Temperaturas de Saída (UA)
                 tbHotFluidOutletT.Enabled = False
@@ -276,6 +284,7 @@ Public Class EditingForm_HeatExchanger
                 cbHeat.Enabled = False
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
+                tbEfficiency.Enabled = False
             Case 4
                 'Área
                 tbArea.Enabled = False
@@ -284,6 +293,7 @@ Public Class EditingForm_HeatExchanger
                 cbHeat.Enabled = False
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
+                tbEfficiency.Enabled = False
             Case 5
                 'Avaliação de Trocador Casco e Tubos
                 tbHotFluidOutletT.Enabled = False
@@ -299,6 +309,7 @@ Public Class EditingForm_HeatExchanger
                 btnEditSTProps.Enabled = True
                 tbColdFluidPDrop.Enabled = False
                 tbHotFluidPDrop.Enabled = False
+                tbEfficiency.Enabled = False
             Case 6
                 'Trocador Casco e Tubos - Fator de Fouling
                 tbOverallU.Enabled = False
@@ -310,6 +321,7 @@ Public Class EditingForm_HeatExchanger
                 btnEditSTProps.Enabled = True
                 tbColdFluidPDrop.Enabled = False
                 tbHotFluidPDrop.Enabled = False
+                tbEfficiency.Enabled = False
             Case 7
                 'Ponto de 'Pinch'
                 tbMITA.Enabled = True
@@ -324,6 +336,23 @@ Public Class EditingForm_HeatExchanger
                 cbHeat.Enabled = False
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
+                tbEfficiency.Enabled = False
+            Case 8
+                'Thermal Efficiency
+                tbHotFluidOutletT.Enabled = False
+                cbHotFluidOutletT.Enabled = False
+                tbColdFluidOutletT.Enabled = False
+                cbColdFluidOutletT.Enabled = False
+                tbOverallU.Enabled = True
+                tbArea.Enabled = False
+                tbHeat.Enabled = False
+                cbOverallHTC.Enabled = True
+                cbArea.Enabled = False
+                cbHeat.Enabled = False
+                btnEditSTProps.Enabled = False
+                tbColdFluidPDrop.Enabled = True
+                tbHotFluidPDrop.Enabled = True
+                tbEfficiency.Enabled = True
         End Select
 
     End Sub
@@ -399,6 +428,7 @@ Public Class EditingForm_HeatExchanger
         If sender Is tbHeat Then uobj.Q = su.Converter.ConvertToSI(cbHeat.SelectedItem.ToString, tbHeat.Text)
         If sender Is tbHeatLoss Then uobj.HeatLoss = su.Converter.ConvertToSI(cbHeatLoss.SelectedItem.ToString, tbHeatLoss.Text)
         If sender Is tbMITA Then uobj.MITA = su.Converter.ConvertToSI(cbMITA.SelectedItem.ToString, tbMITA.Text)
+        If sender Is tbEfficiency Then uobj.ThermalEfficiency = tbEfficiency.Text
 
         RequestCalc()
 
@@ -413,7 +443,7 @@ Public Class EditingForm_HeatExchanger
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbColdFluidPDrop.TextChanged, tbHotFluidPDrop.TextChanged,
                                                                         tbColdFluidOutletT.TextChanged, tbHotFluidOutletT.TextChanged,
                                                                         tbArea.TextChanged, tbHeat.TextChanged, tbOverallU.TextChanged,
-                                                                        tbMITA.TextChanged, tbHeatLoss.TextChanged
+                                                                        tbMITA.TextChanged, tbHeatLoss.TextChanged, tbEfficiency.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -428,7 +458,7 @@ Public Class EditingForm_HeatExchanger
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbColdFluidPDrop.KeyDown, tbHotFluidPDrop.KeyDown,
                                                                         tbColdFluidOutletT.KeyDown, tbHotFluidOutletT.KeyDown,
                                                                         tbArea.KeyDown, tbHeat.KeyDown, tbOverallU.KeyDown,
-                                                                        tbMITA.KeyDown, tbHeatLoss.KeyDown
+                                                                        tbMITA.KeyDown, tbHeatLoss.KeyDown, tbEfficiency.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 

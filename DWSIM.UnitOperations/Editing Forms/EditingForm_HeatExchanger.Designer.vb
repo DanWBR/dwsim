@@ -43,6 +43,9 @@ Partial Class EditingForm_HeatExchanger
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbEfficiency = New System.Windows.Forms.ComboBox()
+        Me.tbEfficiency = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.cbHeatLoss = New System.Windows.Forms.ComboBox()
         Me.tbHeatLoss = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -226,6 +229,9 @@ Partial Class EditingForm_HeatExchanger
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.cbEfficiency)
+        Me.GroupBox2.Controls.Add(Me.tbEfficiency)
+        Me.GroupBox2.Controls.Add(Me.Label21)
         Me.GroupBox2.Controls.Add(Me.cbHeatLoss)
         Me.GroupBox2.Controls.Add(Me.tbHeatLoss)
         Me.GroupBox2.Controls.Add(Me.Label20)
@@ -262,6 +268,27 @@ Partial Class EditingForm_HeatExchanger
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        '
+        'cbEfficiency
+        '
+        resources.ApplyResources(Me.cbEfficiency, "cbEfficiency")
+        Me.cbEfficiency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEfficiency.FormattingEnabled = True
+        Me.cbEfficiency.Items.AddRange(New Object() {resources.GetString("cbEfficiency.Items")})
+        Me.cbEfficiency.Name = "cbEfficiency"
+        Me.ToolTip1.SetToolTip(Me.cbEfficiency, resources.GetString("cbEfficiency.ToolTip"))
+        '
+        'tbEfficiency
+        '
+        resources.ApplyResources(Me.tbEfficiency, "tbEfficiency")
+        Me.tbEfficiency.Name = "tbEfficiency"
+        Me.ToolTip1.SetToolTip(Me.tbEfficiency, resources.GetString("tbEfficiency.ToolTip"))
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
         '
         'cbHeatLoss
         '
@@ -486,7 +513,7 @@ Partial Class EditingForm_HeatExchanger
         resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
         Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6"), resources.GetString("cbCalcMode.Items7")})
+        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6"), resources.GetString("cbCalcMode.Items7"), resources.GetString("cbCalcMode.Items8")})
         Me.cbCalcMode.Name = "cbCalcMode"
         Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
         '
@@ -791,4 +818,7 @@ Partial Class EditingForm_HeatExchanger
     Friend WithEvents cbHeatLoss As ComboBox
     Friend WithEvents tbHeatLoss As TextBox
     Friend WithEvents Label20 As Label
+    Friend WithEvents cbEfficiency As ComboBox
+    Friend WithEvents tbEfficiency As TextBox
+    Friend WithEvents Label21 As Label
 End Class

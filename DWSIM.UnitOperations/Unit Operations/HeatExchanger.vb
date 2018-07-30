@@ -42,6 +42,7 @@ Namespace UnitOperations
         ShellandTube_Rating = 5
         ShellandTube_CalcFoulingFactor = 6
         PinchPoint = 7
+        ThermalEfficiency = 8
 
     End Enum
 
@@ -500,6 +501,48 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add(String.Format("Calculation mode: {0}", [Enum].GetName(CalcMode.GetType, CalcMode)))
 
             Select Case CalcMode
+
+                Case HeatExchangerCalcMode.ThermalEfficiency
+
+                    Q = MaxHeatExchange * ThermalEfficiency / 100.0
+
+                    If Q > MaxHeatExchange Then Throw New Exception("Defined heat exchange is invalid (higher than the theoretical maximum).")
+
+                    DeltaHc = Q / Wc
+                    DeltaHh = -(Q + HeatLoss) / Wh
+                    Hc2 = Hc1 + DeltaHc
+                    Hh2 = Hh1 + DeltaHh
+
+                    StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
+                    IObj?.SetCurrent()
+                    Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc1)
+                    Tc2 = tmp.CalculatedTemperature
+                    Hh2 = Hh1 + DeltaHh
+                    StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+
+                    If DebugMode Then AppendDebugLine(String.Format("Calculated cold stream outlet temperature T2 = {0} K", Tc2))
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
+
+                    IObj?.SetCurrent()
+                    tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th1)
+                    Th2 = tmp.CalculatedTemperature
+
+                    If DebugMode Then AppendDebugLine(String.Format("Calculated hot stream outlet temperature T2 = {0} K", Th2))
+
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
+
+                    A = Q * 1000 / U / LMTD
+
+                    Area = A
 
                 Case HeatExchangerCalcMode.PinchPoint
 
@@ -1391,31 +1434,31 @@ Namespace UnitOperations
                             Q = U * A * F * LMTD / 1000
                             If Q > MaxHeatExchange Then Q = MaxHeatExchange
                             If STProperties.Shell_Fluid = 0 Then
-                                    'cold
-                                    DeltaHc = (Q - HeatLoss) / Wc
-                                    DeltaHh = -Q / Wh
-                                Else
-                                    'hot
-                                    DeltaHc = Q / Wc
-                                    DeltaHh = -(Q + HeatLoss) / Wh
-                                End If
-                                Hc2 = Hc1 + DeltaHc
-                                Hh2 = Hh1 + DeltaHh
-                                StInCold.PropertyPackage.CurrentMaterialStream = StInCold
-                                IObj?.SetCurrent()
-                                tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
-                                Tc2_ant = Tc2
-                                Tc2 = tmp.CalculatedTemperature
-                                Tc2 = 0.1 * Tc2 + 0.9 * Tc2_ant
-                                StInHot.PropertyPackage.CurrentMaterialStream = StInHot
-                                IObj?.SetCurrent()
-                                tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
-                                Th2_ant = Th2
-                                Th2 = tmp.CalculatedTemperature
-                                Th2 = 0.1 * Th2 + 0.9 * Th2_ant
+                                'cold
+                                DeltaHc = (Q - HeatLoss) / Wc
+                                DeltaHh = -Q / Wh
+                            Else
+                                'hot
+                                DeltaHc = Q / Wc
+                                DeltaHh = -(Q + HeatLoss) / Wh
                             End If
+                            Hc2 = Hc1 + DeltaHc
+                            Hh2 = Hh1 + DeltaHh
+                            StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+                            IObj?.SetCurrent()
+                            tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
+                            Tc2_ant = Tc2
+                            Tc2 = tmp.CalculatedTemperature
+                            Tc2 = 0.1 * Tc2 + 0.9 * Tc2_ant
+                            StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                            IObj?.SetCurrent()
+                            tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
+                            Th2_ant = Th2
+                            Th2 = tmp.CalculatedTemperature
+                            Th2 = 0.1 * Th2 + 0.9 * Th2_ant
+                        End If
 
-                            IObj?.Paragraphs.Add("<mi>Q</mi> = " & Q & " kW")
+                        IObj?.Paragraphs.Add("<mi>Q</mi> = " & Q & " kW")
                         IObj?.Paragraphs.Add("<mi>U</mi> = " & U & " W/[m2.K]")
 
                         IObj?.Paragraphs.Add("<mi>T_{c,out}</mi> = " & Tc2 & " K")

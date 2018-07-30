@@ -117,21 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 56</value>
-  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 17</value>
+    <value>51, 13</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 17</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
@@ -149,7 +143,7 @@
     <value>Flash Algorithm</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 17</value>
+    <value>92, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
@@ -157,29 +151,34 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
   </data>
-  <data name="cbHeatLoss.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 376</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbEfficiency.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="tbHeatLoss.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 376</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbEfficiency.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 377</value>
+  <data name="cbEfficiency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 21</value>
+  </data>
+  <data name="tbEfficiency.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 13</value>
+  </data>
+  <data name="Label21.Text" xml:space="preserve">
+    <value>Heat Transfer Efficiency</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
+    <value>55, 13</value>
   </data>
   <data name="Label20.Text" xml:space="preserve">
     <value>Heat Loss</value>
   </data>
-  <data name="tbMITA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 344</value>
-  </data>
-  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 344</value>
-  </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 17</value>
+    <value>139, 13</value>
   </data>
   <data name="Label18.Text" xml:space="preserve">
     <value>Min Temperature Difference</value>
@@ -187,38 +186,26 @@
   <data name="btnEditSTProps.Text" xml:space="preserve">
     <value>Edit Shell and Tube Heat Exchanger Properties</value>
   </data>
-  <data name="tbHeat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 310</value>
-  </data>
-  <data name="tbArea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 274</value>
-  </data>
-  <data name="tbOverallU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 239</value>
-  </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 310</value>
-  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 17</value>
+    <value>87, 13</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Heat Exchanged</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 17</value>
+    <value>106, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Heat Exchange Area</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 17</value>
+    <value>158, 13</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Global Heat Transfer Coefficient</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
+    <value>74, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Flow Direction</value>
@@ -229,56 +216,32 @@
   <data name="cbFlowDir.Items1" xml:space="preserve">
     <value>Co Current</value>
   </data>
-  <data name="cbFlowDir.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 66</value>
-  </data>
   <data name="chkIgnoreLMTD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 21</value>
+    <value>114, 17</value>
   </data>
   <data name="chkIgnoreLMTD.Text" xml:space="preserve">
     <value>Ignore LMTD Error</value>
   </data>
-  <data name="cbHotFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 202</value>
-  </data>
-  <data name="tbHotFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 204</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 17</value>
+    <value>143, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Hot Fluid Outlet Temperature</value>
   </data>
-  <data name="cbColdFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 168</value>
-  </data>
-  <data name="tbColdFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 170</value>
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 17</value>
+    <value>147, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Cold Fluid Outlet Temperature</value>
   </data>
-  <data name="cbHotFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 134</value>
-  </data>
-  <data name="tbHotFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 136</value>
-  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 17</value>
+    <value>119, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Hot Fluid Pressure Drop</value>
   </data>
-  <data name="cbColdFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 99</value>
-  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 17</value>
+    <value>123, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Cold Fluid Pressure Drop</value>
@@ -307,8 +270,11 @@
   <data name="cbCalcMode.Items7" xml:space="preserve">
     <value>Pinch Point</value>
   </data>
+  <data name="cbCalcMode.Items8" xml:space="preserve">
+    <value>Heat Transfer Efficiency</value>
+  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 17</value>
+    <value>86, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Calculation Type</value>
@@ -322,32 +288,26 @@
   <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
-  <data name="btnDisconnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 126</value>
-  </data>
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
-  </data>
-  <data name="btnDisconnect2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 93</value>
   </data>
   <data name="btnDisconnect2.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 101</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 17</value>
+    <value>80, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Outlet Stream 2</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 17</value>
+    <value>72, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Inlet Stream 2</value>
-  </data>
-  <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>389, 60</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
@@ -355,29 +315,23 @@
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
-  <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 60</value>
-  </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
-  </data>
-  <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 27</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 17</value>
+    <value>80, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Outlet Stream 1</value>
   </data>
-  <data name="cbOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 62</value>
+  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 25</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 17</value>
+    <value>72, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream 1</value>
@@ -399,9 +353,5 @@
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Results</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
   </data>
 </root>
