@@ -540,6 +540,8 @@ Namespace UnitOperations
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
+                    U = OverallCoefficient.GetValueOrDefault
+
                     A = Q * 1000 / U / LMTD
 
                     Area = A
