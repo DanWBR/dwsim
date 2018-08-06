@@ -515,19 +515,30 @@ Namespace PropertyPackages
 
                 If Not Me.Parameters.ContainsKey("PP_POYNTING") Then Me.Parameters.Add("PP_POYNTING", 1)
                 If Me.Parameters("PP_POYNTING") = 1 Then
+                    IObj?.Paragraphs.Add(String.Format("<h2>Poynting Correction</h2>"))
+                    IObj?.Paragraphs.Add(String.Format("Poynting Correction Factor calculation is enabled."))
+                    IObj?.Paragraphs.Add("The Poynting factor is a correction factor for the liquid phase vapor pressure. 
+                                        Unless pressures are very high, the Poynting factor is usually small and the exponential term is near 1.")
+                    IObj?.Paragraphs.Add("<m>{\ln {\frac {f}{f_{\mathrm {sat} }}}={\frac {V_{\mathrm {m} }}{RT}}\int _{P_{\mathrm {sat} }}^{P}dp={\frac {V\left(P-P_{\mathrm {sat} }\right)}{RT}}.}</m>")
+                    IObj?.Paragraphs.Add("This fraction is known as the Poynting correction factor. Using <mi>f_{sat}=\phi_{sat} P_{sat}</mi>, where <mi>\phi_{sat}</mi> is the fugacity coefficient,")
+                    IObj?.Paragraphs.Add("<m>f=\varphi _{\mathrm {sat} }P_{\mathrm {sat} }\exp \left({\frac {V\left(P-P_{\mathrm {sat} }\right)}{RT}}\right).</m>")
                     Dim constprop = Me.DW_GetConstantProperties
                     Dim Psati, vli As Double
                     For i = 0 To n
                         If T < 0.98 * Tc(i) Then
                             IObj?.SetCurrent()
+                            IObj?.Paragraphs.Add(String.Format("<b>{0}</b>", constprop(i).Name))
                             vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
                             If Double.IsNaN(vli) Then
                                 IObj?.SetCurrent()
                                 vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
                             End If
+                            IObj?.Paragraphs.Add(String.Format("Molar Volume (V) @ {0} K: {1} m3/kmol", T, vli))
                             IObj?.SetCurrent()
                             Psati = AUX_PVAPi(i, T)
+                            IObj?.Paragraphs.Add(String.Format("Vapor Pressure (Psat) @ {0} K: {1} Pa", T, Psati))
                             poy(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
+                            IObj?.Paragraphs.Add(String.Format("Poynting Correction Factor: {0}", poy(i)))
                         End If
                     Next
                 Else

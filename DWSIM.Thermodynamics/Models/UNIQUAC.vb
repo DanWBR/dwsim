@@ -235,68 +235,68 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.SetCurrent
 
-            IObj?.Paragraphs.Add("The UNIQUAC equation considers <mi>g\equiv G^{E}/{RT}<mi> formed by two 
-                                additive parts, one combinatorial term <m>g^{C}<m> to take into account 
-                                the size of the molecules, and one residual term <mi>g^{R}<m>i, which 
+            IObj?.Paragraphs.Add("The UNIQUAC equation considers <mi>g\equiv G^{E}/{RT}</mi> formed by two 
+                                additive parts, one combinatorial term <mi>g^{C}</mi> to take into account 
+                                the size of the molecules, and one residual term <mi>g^{R}</mi>, which 
                                 take into account the interactions between molecules:")
 
-            IObj?.Paragraphs.Add("<m>g\equiv g^{C}+g^{R}<m>")
+            IObj?.Paragraphs.Add("<m>g\equiv g^{C}+g^{R}</m>")
 
-            IObj?.Paragraphs.Add("The <mi>g^{C}<mi> function contains only pure species parameters, while 
-                                the <mi>g^{R}<mi> function incorporates two binary parameters for each 
+            IObj?.Paragraphs.Add("The <mi>g^{C}</mi> function contains only pure species parameters, while 
+                                the <mi>g^{R}</mi> function incorporates two binary parameters for each 
                                 pair of molecules. For a multicomponent system, ")
 
-            IObj?.Paragraphs.Add("<m>g^{C}=\sum_{i}x_{i}\ln\phi_{i}/x_{i}+5\sum_{i}q_{i}x_{i}\ln\theta_{i}/\phi_{i}<m>")
+            IObj?.Paragraphs.Add("<m>g^{C}=\sum_{i}x_{i}\ln\phi_{i}/x_{i}+5\sum_{i}q_{i}x_{i}\ln\theta_{i}/\phi_{i}</m>")
 
             IObj?.Paragraphs.Add("and")
 
-            IObj?.Paragraphs.Add("<m>g^{R}=-\sum_{i}q_{i}x_{i}\ln(\sum_{j}\theta_{j}\tau_{j}i)<m>")
+            IObj?.Paragraphs.Add("<m>g^{R}=-\sum_{i}q_{i}x_{i}\ln(\sum_{j}\theta_{j}\tau_{j}i)</m>")
 
             IObj?.Paragraphs.Add("where ")
 
-            IObj?.Paragraphs.Add("<m>\phi_{i}\equiv(x_{i}r_{i})/(\sum_{j}x_{j}r_{j})<m>v")
+            IObj?.Paragraphs.Add("<m>\phi_{i}\equiv(x_{i}r_{i})/(\sum_{j}x_{j}r_{j})</m>")
 
             IObj?.Paragraphs.Add("and")
 
-            IObj?.Paragraphs.Add("<m>\theta_{i}\equiv(x_{i}q_{i})/(\sum_{j}x_{j}q_{j})<m>")
+            IObj?.Paragraphs.Add("<m>\theta_{i}\equiv(x_{i}q_{i})/(\sum_{j}x_{j}q_{j})</m>")
 
             IObj?.Paragraphs.Add("The i subscript indicates the species, and j is an index that 
                                 represents all the species, i included. All sums are over all the 
-                                species. Note that <mi>\tau_{ij}\neq\tau_{ji}<mi>. When <mi>i=j<mi>, <mi>\tau_{ii}=\tau_{jj}=1<mi>. ")
+                                species. Note that <mi>\tau_{ij}\neq\tau_{ji}</mi>. When <mi>i=j</mi>, <mi>\tau_{ii}=\tau_{jj}=1</mi>. ")
 
-            IObj?.Paragraphs.Add("In these equations, <mi>r_{i}<mi> (a relative molecular volume) and <mi>q_{i}<mi>
+            IObj?.Paragraphs.Add("In these equations, <mi>r_{i}</mi> (a relative molecular volume) and <mi>q_{i}</mi>
                                  (a relative molecular surface area) are pure species parameters. 
-                                The influence of temperature in <mi>g<mi> enters by means of the <mi>\tau_{ij}<mi>
+                                The influence of temperature in <mi>g</mi> enters by means of the <mi>\tau_{ij}</mi>
                                  parameters, which are temperature-dependent:")
 
-            IObj?.Paragraphs.Add("<m>\tau_{ij}=\exp(u_{ij}-u_{jj})/{RT}<m>")
+            IObj?.Paragraphs.Add("<m>\tau_{ij}=\exp(u_{ij}-u_{jj})/{RT}</m>")
 
-            IObj?.Paragraphs.Add("This way, the UNIQUAC parameters are values of <mi>(u_{ij}-u_{jj})<mi>.")
+            IObj?.Paragraphs.Add("This way, the UNIQUAC parameters are values of <mi>(u_{ij}-u_{jj})</mi>.")
 
-            IObj?.Paragraphs.Add("An expression for <m>\gamma_{i}<m> is found through the application of 
+            IObj?.Paragraphs.Add("An expression for <mi>\gamma_{i}</mi> is found through the application of 
                                 the following relation:")
 
-            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}=[\partialnG^{E}/{RT}/(\partialn_{i})]_{(P,T,n_{j\neq i})}<m>")
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}=[\partial nG^{E}/{RT}/(\partial n_{i})]_{(P,T,n_{j\neq i})}</m>")
 
             IObj?.Paragraphs.Add("The result is represented by the following equations:")
 
-            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}=\ln\gamma_{i}^{C}+\ln\gamma_{i}^{R}<m>")
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}=\ln\gamma_{i}^{C}+\ln\gamma_{i}^{R}</m>")
 
-            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{C}=1-J_{i}+\ln J_{i}-5q_{i}(1-J_{i}/L_{i}+\ln J_{i}/L_{i})<m>")
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{C}=1-J_{i}+\ln J_{i}-5q_{i}(1-J_{i}/L_{i}+\ln J_{i}/L_{i})</m>")
 
-            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{R}=q_{i}(1-\ln s_{i}-\sum_{j}\theta_{j}\tau_{ij}/s_{j})<m>")
+            IObj?.Paragraphs.Add("<m>\ln\gamma_{i}^{R}=q_{i}(1-\ln s_{i}-\sum_{j}\theta_{j}\tau_{ij}/s_{j})</m>")
 
             IObj?.Paragraphs.Add("where")
 
-            IObj?.Paragraphs.Add("<m>J_{i}=r_{i}/(\sum_{j}r_{j}x_{j})<m>")
+            IObj?.Paragraphs.Add("<m>J_{i}=r_{i}/(\sum_{j}r_{j}x_{j})</m>")
 
-            IObj?.Paragraphs.Add("<m>L=q_{i}/(\sum_{j}q_{j}x_{j})<m>")
+            IObj?.Paragraphs.Add("<m>L=q_{i}/(\sum_{j}q_{j}x_{j})</m>")
 
-            IObj?.Paragraphs.Add("<m>s_{i}=\sum_{l}\theta_{l}\tau_{li}<m>")
+            IObj?.Paragraphs.Add("<m>s_{i}=\sum_{l}\theta_{l}\tau_{li}</m>")
 
             IObj?.Paragraphs.Add("Again the i subscript identify the species, j and l are indexes 
                                 which represent all the species, including i. all sums are over 
-                                all the species, and <mi>\tau_{ij}=1<mi> for <mi>i=j<mi>. The parameters values <mi>(u_{ij}-u_{jj})<mi>
+                                all the species, and <mi>\tau_{ij}=1</mi> for <mi>i=j</mi>. The parameters values <mi>(u_{ij}-u_{jj})</mi>
                                  are found by regression of binary VLE/LLE data.")
 
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
