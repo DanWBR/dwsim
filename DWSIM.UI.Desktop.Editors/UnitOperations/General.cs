@@ -903,6 +903,9 @@ namespace DWSIM.UI.Desktop.Editors
                         case HeatExchangerCalcMode.PinchPoint:
                             pos7 = 7;
                             break;
+                        case HeatExchangerCalcMode.ThermalEfficiency:
+                            pos7 = 8;
+                            break;
                     }
 
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.hxcalcmode().ToList(), pos7, (DropDown arg3, EventArgs ev) =>
@@ -933,6 +936,9 @@ namespace DWSIM.UI.Desktop.Editors
                             case 7:
                                 hx.CalculationMode = HeatExchangerCalcMode.PinchPoint;
                                 break;
+                            case 8:
+                                hx.CalculationMode = HeatExchangerCalcMode.ThermalEfficiency;
+                                break;
                         }
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
@@ -948,6 +954,7 @@ namespace DWSIM.UI.Desktop.Editors
                     strdescr.AppendLine("Shell and Tube (Rating): Exchanger Geometry (input on separate window)");
                     strdescr.AppendLine("Shell and Tube (Design): Outlet Temperatures and Exchanger Geometry (input on separate tab)");
                     strdescr.AppendLine("Pinch Point: Overall HTC and MITA");
+                    strdescr.AppendLine("Thermal Efficiency: HX Efficiency and Overall HTC");
                     strdescr.AppendLine("*Pressure drop is required for both fluids except for Shell and Tube Rating mode.");
 
                     s.CreateAndAddDescriptionRow(container, strdescr.ToString());
@@ -1133,6 +1140,19 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("MITA"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Heat Transfer Efficiency (%)", hx.ThermalEfficiency,
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               hx.ThermalEfficiency = Double.Parse(arg3.Text.ToString());
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       }, () => CallSolverIfNeeded());
                     s.CreateAndAddCheckBoxRow(container, "Ignore LMTD Error", hx.IgnoreLMTDError, (sender, e) => { hx.IgnoreLMTDError = sender.Checked.GetValueOrDefault(); });
                     s.CreateAndAddDescriptionRow(container,
                     SimObject.GetPropertyDescription("Ignore LMTD Error"));

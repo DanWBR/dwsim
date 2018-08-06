@@ -81,7 +81,8 @@ namespace DWSIM.UI.Desktop.Shared
             "Calculate Area",
             "Shell and Tube (Rating)",
             "Shell and Tube (Design)",
-            "Pinch Point"}; 
+            "Pinch Point",
+            "Thermal Efficiency" }; 
         }
         public static String[] hxflowdir()
         {
