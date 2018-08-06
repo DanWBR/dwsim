@@ -501,6 +501,7 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", RET_VNAMES.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
 
@@ -549,6 +550,12 @@ Namespace PropertyPackages
 
                 IObj?.SetCurrent()
                 ativ = Me.m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
+
+                IObj?.Paragraphs.Add(String.Format("<h2>Activity Coefficients</h2>"))
+                IObj?.Paragraphs.Add(String.Format("Calculated Activity Coefficients: {0}", ativ.ToMathArrayString))
+
+                IObj?.Paragraphs.Add(String.Format("<h2>Fugacity Coefficients</h2>"))
+                IObj?.Paragraphs.Add("<m>f_i = \gamma_i P_{sat_i} Poy_i</m>")
 
                 For i = 0 To n
                     Tr = T / Tc(i)
