@@ -80,11 +80,11 @@
       <HintPath>..\DWSIM.UI.Desktop.GTK\Libraries\gtk-sharp-2.0\atk-sharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.4.6782.27823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.5.0-build1496\lib\netstandard1.0\Eto.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Direct2D, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Direct2D.2.4.1\lib\net45\Eto.Direct2D.dll</HintPath>
+    <Reference Include="Eto.Direct2D, Version=2.4.6782.27828, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Direct2D.2.5.0-build1496\lib\net45\Eto.Direct2D.dll</HintPath>
     </Reference>
     <Reference Include="Eto.Forms.Controls.SkiaSharp.GTK">
       <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.GTK.dll</HintPath>
@@ -101,8 +101,8 @@
     <Reference Include="Eto.Forms.Controls.SkiaSharp.WPF">
       <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Gtk2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Gtk2.2.4.1\lib\net45\Eto.Gtk2.dll</HintPath>
+    <Reference Include="Eto.Gtk2, Version=2.4.6782.27852, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Gtk2.2.5.0-build1496\lib\net45\Eto.Gtk2.dll</HintPath>
     </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.OxyPlot.1.2.0-beta\lib\net45\Eto.OxyPlot.dll</HintPath>
@@ -112,14 +112,14 @@
       <HintPath>..\packages\Eto.OxyPlot.Wpf.1.2.0-beta\lib\net45\Eto.OxyPlot.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.WinForms, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Windows.2.4.1\lib\net45\Eto.WinForms.dll</HintPath>
+    <Reference Include="Eto.WinForms, Version=2.4.6782.27851, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Windows.2.5.0-build1496\lib\net45\Eto.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Wpf, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Wpf.2.4.1\lib\net45\Eto.Wpf.dll</HintPath>
+    <Reference Include="Eto.Wpf, Version=2.4.6782.27851, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Wpf.2.5.0-build1496\lib\net45\Eto.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.XamMac2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.XamMac2.2.4.1\lib\net45\Eto.XamMac2.dll</HintPath>
+    <Reference Include="Eto.XamMac2">
+      <HintPath>..\PlatformFiles\macOS\Eto.XamMac2.dll</HintPath>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -260,9 +260,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
@@ -366,7 +365,6 @@ del "$(SolutionDir)DistPackages\Windows_32\*vshost*"
 
 )</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
-  <Import Project="..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets" Condition="Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" />
   <Import Project="..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" />
+  <Import Project="..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets')" />
 </Project>

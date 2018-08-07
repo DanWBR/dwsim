@@ -149,7 +149,7 @@ Public Class Window
 
                 End With
 
-                content.Enabled = False
+                'content.Enabled = False
 
                 f.Show()
 
@@ -206,7 +206,7 @@ Public Class Window
                                       End Sub, ct.Token).ContinueWith(Sub()
                                                                           Application.Instance.Invoke(Sub()
                                                                                                           itemSelector.DataStore = tvc
-                                                                                                          content.Enabled = True
+                                                                                                          'content.Enabled = True
                                                                                                           f.Close()
                                                                                                       End Sub)
                                                                       End Sub)

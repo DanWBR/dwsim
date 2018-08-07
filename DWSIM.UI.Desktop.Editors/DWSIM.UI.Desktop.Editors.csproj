@@ -43,16 +43,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
-    <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.4.6782.27823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.5.0-build1496\lib\netstandard1.0\Eto.dll</HintPath>
     </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.OxyPlot.1.2.0-beta\lib\net45\Eto.OxyPlot.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.WinForms, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Windows.2.4.1\lib\net45\Eto.WinForms.dll</HintPath>
+    <Reference Include="Eto.WinForms, Version=2.4.6782.27851, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Windows.2.5.0-build1496\lib\net45\Eto.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -225,9 +225,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets'))" />
   </Target>
-  <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
   <Import Project="..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" />
+  <Import Project="..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.5.0-build1496\build\Eto.Forms.targets')" />
 </Project>

@@ -510,6 +510,8 @@ Namespace PropertyPackages
             Dim fugcoeff(n), poy(n) As Double
             Dim i As Integer
 
+            Dim constprop = Me.DW_GetConstantProperties
+
             Dim Tc As Object = Me.RET_VTC()
             Dim Tr As Double
             If st = State.Liquid Then
@@ -523,7 +525,6 @@ Namespace PropertyPackages
                     IObj?.Paragraphs.Add("<m>{\ln {\frac {f}{f_{\mathrm {sat} }}}={\frac {V_{\mathrm {m} }}{RT}}\int _{P_{\mathrm {sat} }}^{P}dp={\frac {V\left(P-P_{\mathrm {sat} }\right)}{RT}}.}</m>")
                     IObj?.Paragraphs.Add("This fraction is known as the Poynting correction factor. Using <mi>f_{sat}=\phi_{sat} P_{sat}</mi>, where <mi>\phi_{sat}</mi> is the fugacity coefficient,")
                     IObj?.Paragraphs.Add("<m>f=\varphi _{\mathrm {sat} }P_{\mathrm {sat} }\exp \left({\frac {V\left(P-P_{\mathrm {sat} }\right)}{RT}}\right).</m>")
-                    Dim constprop = Me.DW_GetConstantProperties
                     Dim Psati, vli As Double
                     For i = 0 To n
                         If T < 0.98 * Tc(i) Then
@@ -549,21 +550,29 @@ Namespace PropertyPackages
                 End If
 
                 IObj?.SetCurrent()
+                IObj?.Paragraphs.Add(String.Format("<h2>Activity Coefficients</h2>"))
                 ativ = Me.m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
 
-                IObj?.Paragraphs.Add(String.Format("<h2>Activity Coefficients</h2>"))
                 IObj?.Paragraphs.Add(String.Format("Calculated Activity Coefficients: {0}", ativ.ToMathArrayString))
 
                 IObj?.Paragraphs.Add(String.Format("<h2>Fugacity Coefficients</h2>"))
-                IObj?.Paragraphs.Add("<m>f_i = \gamma_i P_{sat_i} Poy_i</m>")
 
                 For i = 0 To n
                     Tr = T / Tc(i)
+                    IObj?.Paragraphs.Add(String.Format("<b>{0}</b>", constprop(i).Name))
+                    IObj?.Paragraphs.Add("Reduced Temperature (<mi>T_r=T/T_c</mi>): " & Tr.ToString)
                     If Tr >= 1.02 Then
                         IObj?.SetCurrent()
+                        IObj?.Paragraphs.Add("<m>f_i = H_i/P</m>")
                         lnfug(i) = Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P)
+                        IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, Exp(lnfug(i)) * P))
                     ElseIf Tr < 0.98 Then
+                        IObj?.Paragraphs.Add("<m>f_i = \gamma_i Poy_i P_{sat_i}/P</m>")
+                        IObj?.Paragraphs.Add(String.Format("Activity Coefficient: {0}", ativ(i)))
+                        IObj?.Paragraphs.Add(String.Format("Vapor Pressure (Psat) @ {0} K: {1} Pa", T, Me.AUX_PVAPi(i, T)))
+                        IObj?.Paragraphs.Add(String.Format("Poynting Correction Factor: {0}", poy(i)))
                         lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
+                        IObj?.Paragraphs.Add(String.Format("Fugacity Coefficient: {0}", Exp(lnfug(i))))
                     Else 'do interpolation at proximity of critical point
                         IObj?.SetCurrent()
                         Dim a2 As Double = AUX_KHenry(Me.RET_VNAMES(i), 1.02 * Tc(i))
