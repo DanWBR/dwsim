@@ -1074,7 +1074,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                    & " / " & DN(r, 4))
+                    & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1087,7 +1087,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1100,7 +1100,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1113,7 +1113,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1126,7 +1126,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1139,7 +1139,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1152,7 +1152,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1165,7 +1165,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1179,7 +1179,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
@@ -1192,7 +1192,7 @@ Imports System.Drawing
             If aux <> 0 Then .Clear()
             Do
                 .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4))
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
                 r = r + 1
             Loop Until r = linha_final - 3
         End With
