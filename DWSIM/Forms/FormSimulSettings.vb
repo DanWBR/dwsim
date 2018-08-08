@@ -244,7 +244,7 @@ Public Class FormSimulSettings
         End If
 
         Me.TBaut.Text = Me.FrmChild.Options.SimulationAuthor
-        Me.TBdesc.Text = Me.FrmChild.Options.SimulationComments
+        Me.TBdesc.Text = Me.FrmChild.Options.SimulationComments.Replace(vbLf, vbCrLf)
         Me.TBtit.Text = Me.FrmChild.Options.SimulationName
 
         Me.tbPassword.Text = FrmChild.Options.Password
