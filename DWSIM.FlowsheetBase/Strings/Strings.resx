@@ -5315,4 +5315,13 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="VolumetricFraction" xml:space="preserve">
     <value>Volumetric Fraction</value>
   </data>
+  <data name="Rugosity" xml:space="preserve">
+    <value>Rugosity</value>
+  </data>
+  <data name="ThermCond" xml:space="preserve">
+    <value>Thermal Cond.</value>
+  </data>
+  <data name="UserDefined" xml:space="preserve">
+    <value>User Defined</value>
+  </data>
 </root>

@@ -12952,6 +12952,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Rugosidade.
+        '''</summary>
+        Friend Shared ReadOnly Property Rugosity() As String
+            Get
+                Return ResourceManager.GetString("Rugosity", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Tempo de cálculo da última execução.
         '''</summary>
         Friend Shared ReadOnly Property Runtime() As String
@@ -14383,6 +14392,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Cond. Térmica.
+        '''</summary>
+        Friend Shared ReadOnly Property ThermCond() As String
+            Get
+                Return ResourceManager.GetString("ThermCond", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Tipo.
         '''</summary>
         Friend Shared ReadOnly Property Tipo() As String
@@ -15018,6 +15036,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property UsarDeltaPfornecido() As String
             Get
                 Return ResourceManager.GetString("UsarDeltaPfornecido", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Definido Pelo Usuário.
+        '''</summary>
+        Friend Shared ReadOnly Property UserDefined() As String
+            Get
+                Return ResourceManager.GetString("UserDefined", resourceCulture)
             End Get
         End Property
         

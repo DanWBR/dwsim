@@ -45,6 +45,7 @@ namespace DWSIM.UI.Desktop.Editors
             materials.Add("PVC");
             materials.Add("PVC+PFRV");
             materials.Add(fs.GetTranslatedString("CommercialCopper"));
+            materials.Add(fs.GetTranslatedString("UserDefined"));
 
             sectypes = new List<string>();
             sectypes.Add(fs.GetTranslatedString("Tubulaosimples"));
@@ -80,13 +81,43 @@ namespace DWSIM.UI.Desktop.Editors
             var lblseg = container.CreateAndAddTwoLabelsRow("Segment", section.Indice.ToString());
 
             container.CreateAndAddDropDownRow("Type", sectypes, Array.IndexOf(sectypes.ToArray(), section.TipoSegmento), (sender, e) => section.TipoSegmento = sectypes[sender.SelectedIndex]);
-            container.CreateAndAddDropDownRow("Material", materials, Array.IndexOf(materials.ToArray(), section.Material), (sender, e) => section.Material = materials[sender.SelectedIndex]);
+            var cbm = container.CreateAndAddDropDownRow("Material", materials, Array.IndexOf(materials.ToArray(), section.Material), (sender, e) => section.Material = materials[sender.SelectedIndex]);
+            var tbr = container.CreateAndAddTextBoxRow("G8", "Rugosity " + " (" + su.distance + ") *", cv.ConvertFromSI(su.distance, section.PipeWallRugosity), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.PipeWallRugosity = cv.ConvertToSI(su.distance, double.Parse(sender.Text.ToString())); });
+            var tbtc = container.CreateAndAddStringEditorRow("Thermal Conductivity " + " (" + su.thermalConductivity + ") *", section.PipeWallThermalConductivityExpression, (sender, e) => { section.PipeWallThermalConductivityExpression = sender.Text.ToString(); });
             container.CreateAndAddTextBoxRow("N0", "Increments", section.Incrementos, (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Incrementos = int.Parse(sender.Text.ToString()); });
             container.CreateAndAddTextBoxRow("N0", "Quantity", section.Quantidade, (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Quantidade = int.Parse(sender.Text.ToString());});
             container.CreateAndAddTextBoxRow(nf, "Length" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Comprimento), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Comprimento = cv.ConvertToSI(su.distance, double.Parse(sender.Text.ToString())); });
             container.CreateAndAddTextBoxRow(nf, "Elevation" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Elevacao), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Elevacao = cv.ConvertToSI(su.distance, double.Parse(sender.Text.ToString())); });
             container.CreateAndAddTextBoxRow(nf, "External Diameter" + " (" + su.diameter + ")", cv.Convert("in", su.diameter, section.DE), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DE = cv.Convert(su.diameter, "in", double.Parse(sender.Text.ToString())); });
             container.CreateAndAddTextBoxRow(nf, "Internal Diameter" + " (" + su.diameter + ")", cv.Convert("in", su.diameter, section.DI), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DI = cv.Convert(su.diameter, "in", double.Parse(sender.Text.ToString())); });
+            container.CreateAndAddDescriptionRow("* Fields required/used only for User-Defined materials");
+            tbr.ReadOnly = section.Material != flowsheet.GetTranslatedString("UserDefined");
+            tbtc.ReadOnly = tbr.ReadOnly;
+            if (tbr.ReadOnly)
+            {
+                tbr.BackgroundColor = Eto.Drawing.Colors.LightGrey;
+                tbtc.BackgroundColor = Eto.Drawing.Colors.LightGrey;
+            }
+            else
+            {
+                tbr.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
+                tbtc.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
+            }
+            cbm.SelectedValueChanged += (sender, e) => {
+                if (cbm.SelectedValue.ToString() == flowsheet.GetTranslatedString("UserDefined"))
+                {
+                    tbr.ReadOnly = false;
+                    tbtc.ReadOnly = false;
+                    tbr.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
+                    tbtc.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
+                }
+                else {
+                    tbr.ReadOnly = true;
+                    tbtc.ReadOnly = true;
+                    tbr.BackgroundColor = Eto.Drawing.Colors.LightGrey;
+                    tbtc.BackgroundColor = Eto.Drawing.Colors.LightGrey;
+                }
+            };
         }
     }
 }

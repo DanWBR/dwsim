@@ -708,6 +708,15 @@ namespace DWSIM.UI.Desktop.Editors
                         case Valve.CalculationMode.OutletPressure:
                             pos5 = 0;
                             break;
+                        case Valve.CalculationMode.Kv_Liquid:
+                            pos5 = 2;
+                            break;
+                        case Valve.CalculationMode.Kv_Gas:
+                            pos5 = 3;
+                            break;
+                        case Valve.CalculationMode.Kv_Steam:
+                            pos5 = 4;
+                            break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.valvecalcmode().ToList(), pos5, (DropDown arg3, EventArgs ev) =>
                     {
@@ -718,6 +727,15 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case 1:
                                 valve.CalcMode = Valve.CalculationMode.DeltaP;
+                                break;
+                            case 2:
+                                valve.CalcMode = Valve.CalculationMode.Kv_Liquid;
+                                break;
+                            case 3:
+                                valve.CalcMode = Valve.CalculationMode.Kv_Gas;
+                                break;
+                            case 4:
+                                valve.CalcMode = Valve.CalculationMode.Kv_Steam;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
@@ -753,6 +771,34 @@ namespace DWSIM.UI.Desktop.Editors
                                }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Kv(max)", valve.Kv,
+                               (TextBox arg3, EventArgs ev) =>
+                               {
+                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                   {
+                                       arg3.TextColor = (SystemColors.ControlText);
+                                       valve.Kv = Double.Parse(arg3.Text.ToString());
+                                   }
+                                   else
+                                   {
+                                       arg3.TextColor = (Colors.Red);
+                                   }
+                               }, () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Use Opening (%) versus Kv/Kvmax (%) relationship", valve.EnableOpeningKvRelationship, (sender, e) => { valve.EnableOpeningKvRelationship = sender.Checked.GetValueOrDefault(); });
+                    s.CreateAndAddStringEditorRow(container, "Kv/Kvmax (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Opening (%)", valve.OpeningPct,
+                               (TextBox arg3, EventArgs ev) =>
+                               {
+                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                   {
+                                       arg3.TextColor = (SystemColors.ControlText);
+                                       valve.OpeningPct = Double.Parse(arg3.Text.ToString());
+                                   }
+                                   else
+                                   {
+                                       arg3.TextColor = (Colors.Red);
+                                   }
+                               }, () => CallSolverIfNeeded());
                     break;
                 case ObjectType.ShortcutColumn:
                     var sc = (ShortcutColumn)SimObject;

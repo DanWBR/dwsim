@@ -54,7 +54,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] valvecalcmode()
         {
-            return new String[] { "Outlet Pressure", "Pressure Drop" };
+            return new String[] { "Outlet Pressure", "Pressure Drop", "Liquid Service Kv (IEC 60534)", "Gas Service Kv (IEC 60534)", "Steam Service Kv (IEC 60534)"  };
         }
         public static String[] pumpcalcmode()
         {

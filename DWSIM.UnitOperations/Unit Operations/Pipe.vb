@@ -505,7 +505,7 @@ Namespace UnitOperations
 
                                             IObj6?.SetCurrent()
 
-                                            resv = fpp.CalculateDeltaP(.DI * 0.0254, .Comprimento / .Incrementos, .Elevacao / .Incrementos, Me.rugosidade(.Material), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                                            resv = fpp.CalculateDeltaP(.DI * 0.0254, .Comprimento / .Incrementos, .Elevacao / .Incrementos, Me.rugosidade(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
 
                                             IObj6?.SetCurrent()
 
@@ -564,8 +564,8 @@ Namespace UnitOperations
                                                 A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                                 Tpe = Tin + (Tout - Tin) / 2
                                                 IObj5?.SetCurrent
-                                                Dim resultU As Double() = CalcOverallHeatTransferCoefficient(.Material, holdup, .Comprimento / .Incrementos,
-                                                                                .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material), Tpe, Text + dText_dL * currL,
+                                                Dim resultU As Double() = CalcOverallHeatTransferCoefficient(segmento, .Material, holdup, .Comprimento / .Incrementos,
+                                                                                .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material, segmento), Tpe, Text + dText_dL * currL,
                                                                                 results.VapVel, results.LiqVel, results.Cpl, results.Cpv, results.Kl, results.Kv,
                                                                                 results.MUl, results.MUv, results.RHOl, results.RHOv,
                                                                                 Me.ThermalProfile.Incluir_cti, Me.ThermalProfile.Incluir_isolamento,
@@ -1211,35 +1211,67 @@ Namespace UnitOperations
 
         End Function
 
-        Function rugosidade(ByVal material As String) As Double
+        Function rugosidade(ByVal material As String, section As PipeSection) As Double
 
             Dim epsilon As Double
-            'rugosidade em metros
 
-            If material = FlowSheet.GetTranslatedString("AoComum") Then epsilon = 0.0000457
-            If material = FlowSheet.GetTranslatedString("AoCarbono") Then epsilon = 0.000045
-            If material = FlowSheet.GetTranslatedString("FerroBottomido") Then epsilon = 0.000259
-            If material = FlowSheet.GetTranslatedString("AoInoxidvel") Then epsilon = 0.000045
-            If material = "PVC" Then epsilon = 0.0000015
-            If material = "PVC+PFRV" Then epsilon = 0.0000015
-            If material = FlowSheet.GetTranslatedString("CommercialCopper") Then epsilon = 0.0000015
+            'pipe wall rugosity in m
+
+            Select Case material
+                Case FlowSheet.GetTranslatedString("AoComum"), "Steel"
+                    epsilon = 0.0000457
+                Case FlowSheet.GetTranslatedString("AoCarbono"), "CarbonSteel"
+                    epsilon = 0.000045
+                Case FlowSheet.GetTranslatedString("FerroBottomido"), "CastIron"
+                    epsilon = 0.000259
+                Case FlowSheet.GetTranslatedString("AoInoxidvel"), "StainlessSteel"
+                    epsilon = 0.000045
+                Case "PVC"
+                    epsilon = 0.0000015
+                Case "PVC+PFRV"
+                    epsilon = 0.0000015
+                Case FlowSheet.GetTranslatedString("CommercialCopper"), "CommercialCopper"
+                    epsilon = 0.0000015
+                Case Else
+                    epsilon = section.PipeWallRugosity
+            End Select
 
             rugosidade = epsilon
 
         End Function
 
-        Function k_parede(ByVal material As String, ByVal T As Double) As Double
+        Function k_parede(ByVal material As String, ByVal T As Double, section As PipeSection) As Double
 
             Dim kp As Double
-            'condutividade termica da parede do duto, em W/m.K
 
-            If material = FlowSheet.GetTranslatedString("AoComum") Then kp = -0.000000004 * T ^ 3 - 0.00002 * T ^ 2 + 0.021 * T + 33.743
-            If material = FlowSheet.GetTranslatedString("AoCarbono") Then kp = 0.000000007 * T ^ 3 - 0.00002 * T ^ 2 - 0.0291 * T + 70.765
-            If material = FlowSheet.GetTranslatedString("FerroBottomido") Then kp = -0.00000008 * T ^ 3 + 0.0002 * T ^ 2 - 0.211 * T + 127.99
-            If material = FlowSheet.GetTranslatedString("AoInoxidvel") Then kp = 14.6 + 0.0127 * (T - 273.15)
-            If material = "PVC" Then kp = 0.16
-            If material = "PVC+PFRV" Then kp = 0.16
-            If material = FlowSheet.GetTranslatedString("CommercialCopper") Then kp = 420.75 - 0.068493 * T
+            Select Case material
+                Case FlowSheet.GetTranslatedString("AoComum"), "Steel"
+                    kp = -0.000000004 * T ^ 3 - 0.00002 * T ^ 2 + 0.021 * T + 33.743
+                Case FlowSheet.GetTranslatedString("AoCarbono"), "CarbonSteel"
+                    kp = 0.000000007 * T ^ 3 - 0.00002 * T ^ 2 - 0.0291 * T + 70.765
+                Case FlowSheet.GetTranslatedString("FerroBottomido"), "CastIron"
+                    kp = -0.00000008 * T ^ 3 + 0.0002 * T ^ 2 - 0.211 * T + 127.99
+                Case FlowSheet.GetTranslatedString("AoInoxidvel"), "StainlessSteel"
+                    kp = 14.6 + 0.0127 * (T - 273.15)
+                Case "PVC"
+                    kp = 0.16
+                Case "PVC+PFRV"
+                    kp = 0.16
+                Case FlowSheet.GetTranslatedString("CommercialCopper"), "CommercialCopper"
+                    kp = 420.75 - 0.068493 * T
+                Case Else
+                    Try
+                        Dim ExpContext As New Ciloci.Flee.ExpressionContext
+                        ExpContext.Imports.AddType(GetType(System.Math))
+                        ExpContext.Variables.Clear()
+                        ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                        ExpContext.Variables.Add("T", T)
+                        Dim Expr = ExpContext.CompileGeneric(Of Double)(section.PipeWallThermalConductivityExpression)
+                        kp = cv.ConvertToSI(FlowSheet.FlowsheetOptions.SelectedUnitSystem.thermalConductivity, Expr.Evaluate)
+                    Catch ex As Exception
+                        Throw New Exception("Invalid expression for thermal conductivity at Pipe Section #" & section.Indice, ex)
+                    End Try
+            End Select
 
             k_parede = kp   'W/m.K
 
@@ -1258,7 +1290,7 @@ Namespace UnitOperations
 
         End Function
 
-        Function CalcOverallHeatTransferCoefficient(ByVal materialparede As String, ByVal EL As Double, ByVal L As Double,
+        Function CalcOverallHeatTransferCoefficient(ByVal section As PipeSection, ByVal materialparede As String, ByVal EL As Double, ByVal L As Double,
                             ByVal Dint As Double, ByVal Dext As Double, ByVal rugosidade As Double,
                             ByVal T As Double, ByVal Text As Double, ByVal vel_g As Double, ByVal vel_l As Double,
                             ByVal Cpl As Double, ByVal Cpv As Double, ByVal kl As Double, ByVal kv As Double,
@@ -1270,7 +1302,7 @@ Namespace UnitOperations
 
             Inspector.Host.CheckAndAdd(IObj, "", "CalcOverallHeatTransferCoefficient", "Overall HTC Calculation", "Overal Heat Transfer Coefficient Calculation Routine", True)
 
-            IObj?.Paragraphs.Add("This is the external loop to converge pressure when outlet temperature is specified or vice-versa.")
+            IObj?.Paragraphs.Add("This Is the external loop To converge pressure When outlet temperature Is specified Or vice-versa.")
 
             IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
 
@@ -1313,7 +1345,7 @@ Namespace UnitOperations
                 'Internal Re calc
                 Dim Re_int = NRe(rho, vel, Dint, mu)
 
-                Dim epsilon = Me.rugosidade(materialparede)
+                Dim epsilon = Me.rugosidade(materialparede, section)
                 Dim ffint = 0.0#
                 If Re_int > 3250 Then
                     Dim a1 = Math.Log(((epsilon / Dint) ^ 1.1096) / 2.8257 + (7.149 / Re_int) ^ 0.8961) / Math.Log(10.0#)
@@ -1339,7 +1371,7 @@ Namespace UnitOperations
 
             If parede = True Then
 
-                U_parede = k_parede(materialparede, T) / (Math.Log(Dext / Dint) * Dint)
+                U_parede = k_parede(materialparede, T, section) / (Math.Log(Dext / Dint) * Dint)
                 If Dext = Dint Then U_parede = 0.0#
 
             End If
@@ -1794,9 +1826,9 @@ Final3:     T = bbb
                             Case "Elevation"
                                 Return cv.ConvertFromSI(su.distance, Profile.Sections(skey).Elevacao)
                             Case "InternalDiameter"
-                                Return cv.Convert("in.", su.diameter, Profile.Sections(skey).DI)
+                                Return cv.Convert("In.", su.diameter, Profile.Sections(skey).DI)
                             Case "ExternalDiameter"
-                                Return cv.Convert("in.", su.diameter, Profile.Sections(skey).DE)
+                                Return cv.Convert("In.", su.diameter, Profile.Sections(skey).DE)
                             Case "Sections"
                                 Return Profile.Sections(skey).Incrementos
                             Case Else
@@ -1955,9 +1987,9 @@ Final3:     T = bbb
                             Case "Elevation"
                                 Profile.Sections(skey).Elevacao = cv.ConvertToSI(su.distance, propval)
                             Case "InternalDiameter"
-                                Profile.Sections(skey).DI = cv.Convert(su.diameter, "in.", propval)
+                                Profile.Sections(skey).DI = cv.Convert(su.diameter, "In.", propval)
                             Case "ExternalDiameter"
-                                Profile.Sections(skey).DE = cv.Convert(su.diameter, "in.", propval)
+                                Profile.Sections(skey).DE = cv.Convert(su.diameter, "In.", propval)
                             Case "Sections"
                                 Profile.Sections(skey).Incrementos = propval
                         End Select
@@ -1997,7 +2029,7 @@ Final3:     T = bbb
                         End Select
                     End If
                 Catch ex As Exception
-                    FlowSheet.ShowMessage("Error setting property '" + prop + "': " + ex.Message, IFlowsheet.MessageType.GeneralError)
+                    FlowSheet.ShowMessage("Error setting Property '" + prop + "': " + ex.Message, IFlowsheet.MessageType.GeneralError)
                 End Try
             End If
 

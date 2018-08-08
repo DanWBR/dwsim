@@ -1572,4 +1572,10 @@
     <value>Temperaturabfall</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_VA_4" xml:space="preserve">
+    <value>Kv(max)</value>
+  </data>
+  <data name="PROP_VA_5" xml:space="preserve">
+    <value>Opening</value>
+  </data>
 </root>

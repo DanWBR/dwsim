@@ -114,6 +114,7 @@ Imports System.Drawing
             .Items.Add("PVC")
             .Items.Add("PVC+PFRV")
             .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("UserDefined"))
             .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
         End With
 
@@ -170,6 +171,7 @@ Imports System.Drawing
             .Items.Add("PVC")
             .Items.Add("PVC+PFRV")
             .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("UserDefined"))
             .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
         End With
 
@@ -220,15 +222,19 @@ Imports System.Drawing
             GridMalha.Rows.Add()
             GridMalha.Rows.Add()
             GridMalha.Rows.Add()
+            GridMalha.Rows.Add()
+            GridMalha.Rows.Add()
             GridMalha.Rows(0).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Segmento")
             GridMalha.Rows(1).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Tipo")
             GridMalha.Rows(2).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Quantidade")
             GridMalha.Rows(3).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Incrementos")
             GridMalha.Rows(4).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Material")
-            GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin").Replace("(in.)", "(" & Units.diameter & ")")
-            GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin").Replace("(in.)", "(" & Units.diameter & ")")
+            GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity").Replace("(m)", "(" & Units.distance & ")")
+            GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond").Replace("(W.[m.K])", "(" & Units.thermalConductivity & ")")
+            GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom").Replace("(m)", "(" & Units.distance & ")")
+            GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom").Replace("(m)", "(" & Units.distance & ")")
+            GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin").Replace("(in.)", "(" & Units.diameter & ")")
+            GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin").Replace("(in.)", "(" & Units.diameter & ")")
 
             Dim CBTemplate As New DataGridViewComboBoxCell()
             Dim CBMat As New DataGridViewComboBoxCell()
@@ -273,6 +279,7 @@ Imports System.Drawing
                 .Items.Add("PVC")
                 .Items.Add("PVC+PFRV")
                 .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
+                .Items.Add(PipeOp.FlowSheet.GetTranslatedString("UserDefined"))
                 .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
             End With
 
@@ -759,22 +766,22 @@ Imports System.Drawing
             If x = 1 Then
                 If GridMalha.CurrentCell.Value <> PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then
                     GridMalha.Rows(3).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = True
-                    GridMalha.Rows(5).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = True
-                    GridMalha.Rows(6).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = True
                     GridMalha.Rows(7).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = True
+                    GridMalha.Rows(8).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = True
+                    GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = True
                     GridMalha.Rows(3).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
-                    GridMalha.Rows(5).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
-                    GridMalha.Rows(6).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
                     GridMalha.Rows(7).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
+                    GridMalha.Rows(8).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
+                    GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
                 Else
                     GridMalha.Rows(3).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = False
-                    GridMalha.Rows(5).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = False
-                    GridMalha.Rows(6).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = False
                     GridMalha.Rows(7).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = False
+                    GridMalha.Rows(8).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = False
+                    GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).ReadOnly = False
                     GridMalha.Rows(3).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = Nothing
-                    GridMalha.Rows(5).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = Nothing
-                    GridMalha.Rows(6).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = Nothing
                     GridMalha.Rows(7).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = Nothing
+                    GridMalha.Rows(8).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = Nothing
+                    GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Style.BackColor = Nothing
                 End If
             End If
         End If
@@ -783,15 +790,11 @@ Imports System.Drawing
 
     Private Sub GridMalha_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles GridMalha.DataError
 
-
-
     End Sub
-
-
 
     Private Sub GridMalha_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles GridMalha.MouseDoubleClick
 
-        If GridMalha.CurrentCell.RowIndex = 7 And GridMalha.CurrentCell.ReadOnly = False Then
+        If GridMalha.CurrentCell.RowIndex = 9 And GridMalha.CurrentCell.ReadOnly = False Then
 
             CMenu1.Show(MousePosition.X, MousePosition.Y)
             CMenu1.SetBounds(MousePosition.X, MousePosition.Y, 256, 20)
@@ -917,14 +920,17 @@ Imports System.Drawing
                 v3 = Me.GridMalha.Rows(2).Cells(column.Name).Value
                 v4 = Me.GridMalha.Rows(3).Cells(column.Name).Value
                 v5 = Me.GridMalha.Rows(4).Cells(column.Name).Value
-                v6 = Me.GridMalha.Rows(5).Cells(column.Name).Value
-                v7 = Me.GridMalha.Rows(6).Cells(column.Name).Value
-                v8 = Me.GridMalha.Rows(7).Cells(column.Name).Value
-                v9 = Me.GridMalha.Rows(8).Cells(column.Name).Value
-
+                v6 = Me.GridMalha.Rows(7).Cells(column.Name).Value
+                v7 = Me.GridMalha.Rows(8).Cells(column.Name).Value
+                v8 = Me.GridMalha.Rows(9).Cells(column.Name).Value
+                v9 = Me.GridMalha.Rows(10).Cells(column.Name).Value
                 If v2 = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then v2 = "Tubulaosimples"
-
-                PipeOp.Profile.Sections.Add(column.Index + 1, New PipeSection(v1, v2, v3, v4, v5, cv.Convert(Me.Units.distance, "m", v6), cv.Convert(Me.Units.distance, "m", v7), cv.Convert(Me.Units.diameter, "in", v8), cv.Convert(Me.Units.diameter, "in", v9)))
+                Dim ps As New PipeSection(v1, v2, v3, v4, v5, cv.Convert(Me.Units.distance, "m", v6), cv.Convert(Me.Units.distance, "m", v7), cv.Convert(Me.Units.diameter, "in", v8), cv.Convert(Me.Units.diameter, "in", v9))
+                If ps.Material = PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
+                    ps.PipeWallRugosity = Me.GridMalha.Rows(5).Cells(column.Name).Value
+                    ps.PipeWallThermalConductivityExpression = Me.GridMalha.Rows(6).Cells(column.Name).Value
+                End If
+                PipeOp.Profile.Sections.Add(column.Index + 1, ps)
             Else
                 ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1 & ": " & parsingresult
                 RaiseEvent StatusChanged(e, PipeEditorStatus.Erro)
@@ -966,21 +972,21 @@ Imports System.Drawing
                     If Not .Rows(3).Cells(column.Name).Value > 0.0# Then
                         Return "Invalid number of sections"
                     End If
-                    If Not Convert.ToDouble(.Rows(5).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(5).Cells(column.Name).Value) Then
+                    If Not Convert.ToDouble(.Rows(7).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(7).Cells(column.Name).Value) Then
                         Return "Invalid length"
                     End If
-                    If Double.IsNaN(.Rows(6).Cells(column.Name).Value) Then
+                    If Double.IsNaN(.Rows(8).Cells(column.Name).Value) Then
                         Return "Invalid elevation"
                         Exit Function
                     End If
-                    If Math.Abs(Convert.ToDouble(.Rows(6).Cells(column.Name).Value)) > Math.Abs(Convert.ToDouble(.Rows(5).Cells(column.Name).Value)) Then
+                    If Math.Abs(Convert.ToDouble(.Rows(8).Cells(column.Name).Value)) > Math.Abs(Convert.ToDouble(.Rows(7).Cells(column.Name).Value)) Then
                         Return "Invalid elevation (H > L!)"
                     End If
-                    If Not Convert.ToDouble(.Rows(7).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(7).Cells(column.Name).Value) Then
+                    If Not Convert.ToDouble(.Rows(9).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(9).Cells(column.Name).Value) Then
                         Return "Invalid external diameter"
                         Exit Function
                     End If
-                    If Not Convert.ToDouble(.Rows(8).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(8).Cells(column.Name).Value) Or CDbl(.Rows(8).Cells(column.Name).Value) > CDbl(.Rows(7).Cells(column.Name).Value) Then
+                    If Not Convert.ToDouble(.Rows(10).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(10).Cells(column.Name).Value) Or CDbl(.Rows(10).Cells(column.Name).Value) > CDbl(.Rows(9).Cells(column.Name).Value) Then
                         Return "Invalid internal diameter"
                         Exit Function
                     End If
@@ -1014,10 +1020,25 @@ Imports System.Drawing
             Else
                 Me.GridMalha.Rows(4).Cells(psec.Indice - 1).Value = psec.Material
             End If
-            Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = Format(cv.Convert("m", Me.Units.distance, psec.Comprimento), NumberFormat)
-            Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = Format(cv.Convert("m", Me.Units.distance, psec.Elevacao), NumberFormat)
-            Me.GridMalha.Rows(7).Cells(psec.Indice - 1).Value = Format(cv.Convert("in", Me.Units.diameter, psec.DE), NumberFormat)
-            Me.GridMalha.Rows(8).Cells(psec.Indice - 1).Value = Format(cv.Convert("in", Me.Units.diameter, psec.DI), NumberFormat)
+            If psec.Material = PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = cv.Convert("m", Me.Units.distance, psec.PipeWallRugosity)
+                Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = psec.PipeWallThermalConductivityExpression
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Style.BackColor = Nothing
+                Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Style.BackColor = Nothing
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).ReadOnly = False
+                Me.GridMalha.Rows(6).Cells(psec.Indice - 1).ReadOnly = False
+            Else
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = cv.ConvertFromSI(Me.Units.distance, PipeOp.rugosidade(psec.Material, Nothing))
+                Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = "T-Dep"
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Style.BackColor = Color.LightGray
+                Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Style.BackColor = Color.LightGray
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).ReadOnly = True
+                Me.GridMalha.Rows(6).Cells(psec.Indice - 1).ReadOnly = True
+            End If
+            Me.GridMalha.Rows(7).Cells(psec.Indice - 1).Value = Format(cv.Convert("m", Me.Units.distance, psec.Comprimento), NumberFormat)
+            Me.GridMalha.Rows(8).Cells(psec.Indice - 1).Value = Format(cv.Convert("m", Me.Units.distance, psec.Elevacao), NumberFormat)
+            Me.GridMalha.Rows(9).Cells(psec.Indice - 1).Value = Format(cv.Convert("in", Me.Units.diameter, psec.DE), NumberFormat)
+            Me.GridMalha.Rows(10).Cells(psec.Indice - 1).Value = Format(cv.Convert("in", Me.Units.diameter, psec.DI), NumberFormat)
         Next
         psec = Nothing
 
@@ -1189,15 +1210,19 @@ Imports System.Drawing
         GridMalha.Rows.Add()
         GridMalha.Rows.Add()
         GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
         GridMalha.Rows(0).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Segmento")
         GridMalha.Rows(1).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Tipo")
         GridMalha.Rows(2).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Quantidade")
         GridMalha.Rows(3).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Incrementos")
         GridMalha.Rows(4).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Material")
-        GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom")
-        GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom")
-        GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin")
-        GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin")
+        GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (m)"
+        GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (W/[m.K])"
+        GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom")
+        GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom")
+        GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin")
+        GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin")
 
         CBTemplate = New DataGridViewComboBoxCell()
         CBMat = New DataGridViewComboBoxCell()
@@ -1241,6 +1266,7 @@ Imports System.Drawing
             .Items.Add("PVC")
             .Items.Add("PVC+PFRV")
             .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("UserDefined"))
             .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
         End With
 
@@ -1259,10 +1285,12 @@ Imports System.Drawing
         NumberFormat = PipeOp.FlowSheet.FlowsheetOptions.NumberFormat
 
         If Not PipeOp.Profile Is Nothing Then
-            GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin").Replace("(in.)", "(" & Units.diameter & ")")
-            GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin").Replace("(in.)", "(" & Units.diameter & ")")
+            GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (" & Units.distance & ")"
+            GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (" & Units.thermalConductivity & ")"
+            GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom").Replace("(m)", "(" & Units.distance & ")")
+            GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom").Replace("(m)", "(" & Units.distance & ")")
+            GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin").Replace("(in.)", "(" & Units.diameter & ")")
+            GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin").Replace("(in.)", "(" & Units.diameter & ")")
             If PipeOp.Profile.Sections.Count > 0 Then
                 Me.ConvertProfileToGrid(PipeOp.Profile)
                 Me.GridMalha.Columns.RemoveAt(Me.GridMalha.Columns.Count - 1)
@@ -1383,6 +1411,33 @@ Imports System.Drawing
         If loaded Then
             ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Modified")
             ToolStripLabel2.ForeColor = Color.DarkOrange
+
+            If e.RowIndex = 4 Then
+                Dim material = GridMalha.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                If material IsNot Nothing Then
+                    If material.ToString <> PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
+                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = True
+                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = True
+                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.rugosidade(material.ToString, Nothing)
+                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = "T-Dep"
+                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
+                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
+                    Else
+                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = False
+                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = False
+                        If PipeOp.Profile.Sections.ContainsKey(e.ColumnIndex + 1) Then
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.Profile.Sections(e.ColumnIndex + 1).PipeWallRugosity
+                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = PipeOp.Profile.Sections(e.ColumnIndex + 1).PipeWallThermalConductivityExpression
+                        Else
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = 0.00001
+                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = ""
+                        End If
+                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = Nothing
+                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = Nothing
+                    End If
+                End If
+            End If
+
         End If
 
     End Sub

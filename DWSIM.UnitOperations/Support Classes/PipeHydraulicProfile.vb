@@ -102,6 +102,10 @@ Namespace UnitOperations.Auxiliary.Pipe
         Protected m_comprimento, m_elev As Double
         Protected m_de, m_di As Double
 
+        Public Property PipeWallRugosity As Double = 0.0# 'm
+
+        Public Property PipeWallThermalConductivityExpression As String = ""
+
         Protected m_results As New System.Collections.Generic.List(Of PipeResults)
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData

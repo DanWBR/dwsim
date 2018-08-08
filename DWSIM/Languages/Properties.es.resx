@@ -1507,4 +1507,10 @@
   <data name="PROP_PU_4" xml:space="preserve">
     <value>NPSH Disponível</value>
   </data>
+  <data name="PROP_VA_4" xml:space="preserve">
+    <value>Kv(max)</value>
+  </data>
+  <data name="PROP_VA_5" xml:space="preserve">
+    <value>Abertura</value>
+  </data>
 </root>

@@ -61,7 +61,12 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
-            Return Me.m_iapws97.densW(T, P / 100000)
+            Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
+            If T < Tsat Then
+                Return Me.m_iapws97.densSatVapTW(T)
+            Else
+                Return Me.m_iapws97.densW(T, P / 100000)
+            End If
 
         End Function
 

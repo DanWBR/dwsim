@@ -43,12 +43,13 @@ Partial Class EditingForm_Valve
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cbDeltaT = New System.Windows.Forms.ComboBox()
-        Me.tbDeltaT = New System.Windows.Forms.TextBox()
+        Me.tbOp = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.cbTemp = New System.Windows.Forms.ComboBox()
-        Me.tbTemp = New System.Windows.Forms.TextBox()
+        Me.tbKvOpRel = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.chkEnableKvOpRel = New System.Windows.Forms.CheckBox()
+        Me.tbKv = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.cbPress = New System.Windows.Forms.ComboBox()
         Me.tbOutletPressure = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -157,7 +158,7 @@ Partial Class EditingForm_Valve
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -223,12 +224,13 @@ Partial Class EditingForm_Valve
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbDeltaT)
-        Me.GroupBox2.Controls.Add(Me.tbDeltaT)
+        Me.GroupBox2.Controls.Add(Me.tbOp)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.cbTemp)
-        Me.GroupBox2.Controls.Add(Me.tbTemp)
+        Me.GroupBox2.Controls.Add(Me.tbKvOpRel)
         Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.chkEnableKvOpRel)
+        Me.GroupBox2.Controls.Add(Me.tbKv)
+        Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.cbPress)
         Me.GroupBox2.Controls.Add(Me.tbOutletPressure)
         Me.GroupBox2.Controls.Add(Me.Label2)
@@ -241,20 +243,11 @@ Partial Class EditingForm_Valve
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
-        'cbDeltaT
+        'tbOp
         '
-        resources.ApplyResources(Me.cbDeltaT, "cbDeltaT")
-        Me.cbDeltaT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDeltaT.FormattingEnabled = True
-        Me.cbDeltaT.Items.AddRange(New Object() {resources.GetString("cbDeltaT.Items"), resources.GetString("cbDeltaT.Items1"), resources.GetString("cbDeltaT.Items2")})
-        Me.cbDeltaT.Name = "cbDeltaT"
-        Me.ToolTip1.SetToolTip(Me.cbDeltaT, resources.GetString("cbDeltaT.ToolTip"))
-        '
-        'tbDeltaT
-        '
-        resources.ApplyResources(Me.tbDeltaT, "tbDeltaT")
-        Me.tbDeltaT.Name = "tbDeltaT"
-        Me.ToolTip1.SetToolTip(Me.tbDeltaT, resources.GetString("tbDeltaT.ToolTip"))
+        resources.ApplyResources(Me.tbOp, "tbOp")
+        Me.tbOp.Name = "tbOp"
+        Me.ToolTip1.SetToolTip(Me.tbOp, resources.GetString("tbOp.ToolTip"))
         '
         'Label5
         '
@@ -262,26 +255,36 @@ Partial Class EditingForm_Valve
         Me.Label5.Name = "Label5"
         Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
-        'cbTemp
+        'tbKvOpRel
         '
-        resources.ApplyResources(Me.cbTemp, "cbTemp")
-        Me.cbTemp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTemp.FormattingEnabled = True
-        Me.cbTemp.Items.AddRange(New Object() {resources.GetString("cbTemp.Items"), resources.GetString("cbTemp.Items1"), resources.GetString("cbTemp.Items2")})
-        Me.cbTemp.Name = "cbTemp"
-        Me.ToolTip1.SetToolTip(Me.cbTemp, resources.GetString("cbTemp.ToolTip"))
-        '
-        'tbTemp
-        '
-        resources.ApplyResources(Me.tbTemp, "tbTemp")
-        Me.tbTemp.Name = "tbTemp"
-        Me.ToolTip1.SetToolTip(Me.tbTemp, resources.GetString("tbTemp.ToolTip"))
+        resources.ApplyResources(Me.tbKvOpRel, "tbKvOpRel")
+        Me.tbKvOpRel.Name = "tbKvOpRel"
+        Me.ToolTip1.SetToolTip(Me.tbKvOpRel, resources.GetString("tbKvOpRel.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
         Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        '
+        'chkEnableKvOpRel
+        '
+        resources.ApplyResources(Me.chkEnableKvOpRel, "chkEnableKvOpRel")
+        Me.chkEnableKvOpRel.Name = "chkEnableKvOpRel"
+        Me.ToolTip1.SetToolTip(Me.chkEnableKvOpRel, resources.GetString("chkEnableKvOpRel.ToolTip"))
+        Me.chkEnableKvOpRel.UseVisualStyleBackColor = True
+        '
+        'tbKv
+        '
+        resources.ApplyResources(Me.tbKv, "tbKv")
+        Me.tbKv.Name = "tbKv"
+        Me.ToolTip1.SetToolTip(Me.tbKv, resources.GetString("tbKv.ToolTip"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'cbPress
         '
@@ -330,7 +333,7 @@ Partial Class EditingForm_Valve
         resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
         Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1")})
+        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4")})
         Me.cbCalcMode.Name = "cbCalcMode"
         Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
         '
@@ -418,6 +421,7 @@ Partial Class EditingForm_Valve
         'UtilitiesCtxMenu
         '
         resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
+        Me.UtilitiesCtxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI})
         Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
         Me.ToolTip1.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip"))
@@ -493,16 +497,17 @@ Partial Class EditingForm_Valve
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lblTag As System.Windows.Forms.TextBox
-    Friend WithEvents cbDeltaT As System.Windows.Forms.ComboBox
-    Friend WithEvents tbDeltaT As System.Windows.Forms.TextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents cbTemp As System.Windows.Forms.ComboBox
-    Friend WithEvents tbTemp As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
     Friend WithEvents btnUtils As System.Windows.Forms.Button
     Friend WithEvents UtilitiesCtxMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents AddUtilityTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents sizingtsmi As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tbKv As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents tbKvOpRel As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents chkEnableKvOpRel As CheckBox
+    Friend WithEvents tbOp As TextBox
+    Friend WithEvents Label5 As Label
 End Class

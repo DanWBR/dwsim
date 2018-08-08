@@ -790,7 +790,7 @@ Namespace UnitOperations
         End Sub
 
         ''' <summary>
-        ''' Gets the current flowsheet where this object is.
+        ''' Gets the current flowsheet where this object is located.
         ''' </summary>
         ''' <value></value>
         ''' <returns>Flowsheet instance.</returns>
