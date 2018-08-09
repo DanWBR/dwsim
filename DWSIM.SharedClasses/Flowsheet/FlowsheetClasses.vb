@@ -229,6 +229,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property DisplayFloatingTableCompoundAmounts As Boolean = True Implements IFlowsheetOptions.DisplayFloatingTableCompoundAmounts
 
+        Public Property SpreadsheetUnitLockingMode As Boolean = True Implements IFlowsheetOptions.SpreadsheetUnitLockingMode
+
     End Class
 
 End Namespace

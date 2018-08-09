@@ -56,6 +56,8 @@
 
     Property SpreadsheetUseRegionalSeparator As Boolean
 
+    Property SpreadsheetUnitLockingMode As Boolean
+
     Property MassBalanceCheck As WarningType
 
     Property EnergyBalanceCheck As WarningType

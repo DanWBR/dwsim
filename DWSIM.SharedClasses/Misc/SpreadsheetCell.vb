@@ -25,6 +25,7 @@ Namespace Spreadsheet
         Write = 1
         Expression = 2
         None = 3
+        Unit = 4
     End Enum
 
     <System.Serializable()> Public Class SpreadsheetCellParameters

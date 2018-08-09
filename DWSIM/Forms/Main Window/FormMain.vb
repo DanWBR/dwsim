@@ -699,8 +699,9 @@ Public Class FormMain
                                   Return SharedClasses.UpdateCheck.CheckForUpdates()
                               End Function).ContinueWith(Sub(t)
                                                              If (t.Result) Then
+                                                                 Dim whatsnew = SharedClasses.UpdateCheck.GetWhatsNew()
                                                                  Me.UIThreadInvoke(Sub()
-                                                                                       If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable"), DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
+                                                                                       If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable") & vbCrLf & vbCrLf & whatsnew, DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
                                                                                            Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems")
                                                                                        End If
                                                                                    End Sub)

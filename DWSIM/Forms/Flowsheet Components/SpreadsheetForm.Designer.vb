@@ -83,9 +83,12 @@ Partial Class SpreadsheetForm
         Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.chkUseRegionalSeparator = New System.Windows.Forms.CheckBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.chkEnableUnitLocking = New System.Windows.Forms.CheckBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.dckMenu.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -276,7 +279,6 @@ Partial Class SpreadsheetForm
         'ContextMenuStrip1
         '
         resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
-        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CelulaToolStripMenuItem, Me.ToolStripSeparator2, Me.AvaliarFormulaToolStripMenuItem, Me.ImportarDadosToolStripMenuItem, Me.ExportarDadosToolStripMenuItem, Me.ToolStripSeparator1, Me.LimparToolStripMenuItem, Me.CopiarToolStripMenuItem, Me.ColarToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         '
@@ -448,17 +450,33 @@ Partial Class SpreadsheetForm
         Me.chkUseRegionalSeparator.Name = "chkUseRegionalSeparator"
         Me.chkUseRegionalSeparator.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.chkEnableUnitLocking)
+        Me.GroupBox1.Controls.Add(Me.chkUpdate)
+        Me.GroupBox1.Controls.Add(Me.chkUseRegionalSeparator)
+        Me.GroupBox1.Controls.Add(Me.Button4)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        '
+        'chkEnableUnitLocking
+        '
+        resources.ApplyResources(Me.chkEnableUnitLocking, "chkEnableUnitLocking")
+        Me.chkEnableUnitLocking.Checked = True
+        Me.chkEnableUnitLocking.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkEnableUnitLocking.Name = "chkEnableUnitLocking"
+        Me.chkEnableUnitLocking.UseVisualStyleBackColor = True
+        '
         'SpreadsheetForm
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CloseButton = False
         Me.CloseButtonVisible = False
-        Me.Controls.Add(Me.chkUseRegionalSeparator)
-        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.chkUpdate)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.tbValue)
         Me.Controls.Add(Me.Label1)
@@ -472,6 +490,8 @@ Partial Class SpreadsheetForm
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.dckMenu.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -533,4 +553,6 @@ Partial Class SpreadsheetForm
     Friend WithEvents DocumentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents chkUseRegionalSeparator As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Public WithEvents chkEnableUnitLocking As CheckBox
 End Class

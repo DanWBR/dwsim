@@ -24,4 +24,19 @@ Public Class UpdateCheck
         End Try
     End Function
 
+    Public Shared Function GetWhatsNew() As String
+        Try
+            Dim webClient = New WebClient()
+            Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br/")))
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            webClient.Proxy = proxyObj
+            Dim url = New Uri("http://dwsim.inforside.com.br/update/whatsnew_d.txt")
+            Dim whatsnew As String = ""
+            whatsnew = webClient.DownloadString(url)
+            Return whatsnew
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
 End Class

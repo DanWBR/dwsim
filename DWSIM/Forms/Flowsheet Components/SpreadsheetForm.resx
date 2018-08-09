@@ -124,6 +124,10 @@
   <data name="chkUpdate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkEnableUnitLocking.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 66</value>
+  </data>
   <data name="V.HeaderText" xml:space="preserve">
     <value>V</value>
   </data>
@@ -173,15 +177,17 @@
   <data name="&gt;&gt;C.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1025, 463</value>
+    <value>777, 306</value>
   </data>
   <data name="&gt;&gt;B.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="B.HeaderText" xml:space="preserve">
     <value>B</value>
+  </data>
+  <data name="chkEnableUnitLocking.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="T.HeaderText" xml:space="preserve">
     <value>T</value>
@@ -192,14 +198,8 @@
   <data name="R.HeaderText" xml:space="preserve">
     <value>R</value>
   </data>
-  <data name="chkUpdate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="Button3.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;M.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="S.Width" type="System.Int32, mscorlib">
     <value>65</value>
@@ -208,7 +208,7 @@
     <value>Button4</value>
   </data>
   <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>GroupBox1</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -217,7 +217,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 244</value>
+    <value>197, 224</value>
   </data>
   <data name="&gt;&gt;B.Name" xml:space="preserve">
     <value>B</value>
@@ -229,7 +229,7 @@
     <value>C</value>
   </data>
   <data name="tbCell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 23</value>
+    <value>44, 20</value>
   </data>
   <data name="Button4.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -250,16 +250,19 @@
     <value>65</value>
   </data>
   <data name="chkUseRegionalSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 21</value>
+    <value>324, 17</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Exportar como Propriedade</value>
+  </data>
+  <data name="&gt;&gt;chkUseRegionalSeparator.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Bottom Auto-Hide</value>
   </data>
   <data name="DataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 44</value>
+    <value>7, 34</value>
   </data>
   <data name="&gt;&gt;E.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -276,17 +279,14 @@
   <data name="&gt;&gt;Y.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Button3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="chkEnableUnitLocking.Text" xml:space="preserve">
+    <value>Ativar Modo Bloqueio de Unidades</value>
   </data>
   <data name="&gt;&gt;T.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockLeftAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="&gt;&gt;R.Name" xml:space="preserve">
-    <value>R</value>
   </data>
   <data name="&gt;&gt;Y.Name" xml:space="preserve">
     <value>Y</value>
@@ -304,7 +304,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="Button4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -313,13 +313,16 @@
     <value>True</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>968, 8</value>
+    <value>734, 6</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CopiarToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkEnableUnitLocking.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 17</value>
   </data>
   <data name="chkUpdate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -336,14 +339,14 @@
   <data name="H.Width" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
-  <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar Dados</value>
   </data>
   <data name="&gt;&gt;chkUpdate.Name" xml:space="preserve">
     <value>chkUpdate</value>
   </data>
-  <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F9</value>
@@ -355,7 +358,7 @@
     <value>Document</value>
   </data>
   <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -367,7 +370,7 @@
     <value>ContextMenuStrip1</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 17</value>
+    <value>31, 13</value>
   </data>
   <data name="&gt;&gt;I.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -376,10 +379,13 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 17</value>
+    <value>6, 13</value>
   </data>
   <data name="W.Width" type="System.Int32, mscorlib">
     <value>65</value>
+  </data>
+  <data name="chkEnableUnitLocking.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ColarToolStripMenuItem.Text" xml:space="preserve">
     <value>Colar</value>
@@ -388,10 +394,10 @@
     <value>DockRightToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;DataGridView1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 38</value>
+    <value>274, 38</value>
   </data>
   <data name="Y.HeaderText" xml:space="preserve">
     <value>Y</value>
@@ -401,6 +407,9 @@
   </data>
   <data name="S.HeaderText" xml:space="preserve">
     <value>S</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -418,10 +427,13 @@
     <value>L</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="CelulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Celula</value>
+  </data>
+  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="ColarToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+V</value>
@@ -438,38 +450,32 @@
   <data name="&gt;&gt;Z.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;A.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="&gt;&gt;Button2.Name" xml:space="preserve">
     <value>Button2</value>
   </data>
   <data name="tbCell.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 9</value>
+    <value>7, 7</value>
   </data>
   <data name="M.Width" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="&gt;&gt;tbCell.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;chkUseRegionalSeparator.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;tbCell.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="Button4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
   </data>
   <data name="N.HeaderText" xml:space="preserve">
     <value>N</value>
@@ -478,10 +484,7 @@
     <value>N</value>
   </data>
   <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
-  </data>
-  <data name="&gt;&gt;F.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>196, 22</value>
   </data>
   <data name="&gt;&gt;D.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -513,8 +516,8 @@
   <data name="&gt;&gt;tbCell.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Importar Dados</value>
+  <data name="&gt;&gt;chkEnableUnitLocking.Name" xml:space="preserve">
+    <value>chkEnableUnitLocking</value>
   </data>
   <data name="chkUseRegionalSeparator.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -538,7 +541,7 @@
     <value>Dock Bottom</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 27</value>
+    <value>236, 29</value>
   </data>
   <data name="&gt;&gt;U.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -546,17 +549,20 @@
   <data name="A.Width" type="System.Int32, mscorlib">
     <value>64</value>
   </data>
-  <data name="Button2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="chkEnableUnitLocking.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="chkUseRegionalSeparator.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="LimparToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 38</value>
+    <value>274, 38</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2002,14 +2008,11 @@
         AACAAYABwAOAAeAHwAP4H+AH
 </value>
   </data>
-  <data name="&gt;&gt;M.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="CelulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 38</value>
+    <value>274, 38</value>
   </data>
   <data name="chkUpdate.Text" xml:space="preserve">
-    <value>Atualizar automaticamente</value>
+    <value>Atualizar Automaticamente</value>
   </data>
   <data name="&gt;&gt;S.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2018,7 +2021,7 @@
     <value>False</value>
   </data>
   <data name="ColarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 38</value>
+    <value>274, 38</value>
   </data>
   <data name="LimparToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Del</value>
@@ -2029,8 +2032,14 @@
   <data name="&gt;&gt;chkUseRegionalSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;chkEnableUnitLocking.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 29</value>
+    <value>22, 22</value>
   </data>
   <data name="&gt;&gt;Button4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2039,7 +2048,7 @@
     <value>Avaliar Fórmula</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 6</value>
+    <value>271, 6</value>
   </data>
   <data name="Button4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -2048,19 +2057,16 @@
     <value>M</value>
   </data>
   <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
-  </data>
-  <data name="&gt;&gt;R.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>196, 22</value>
   </data>
   <data name="&gt;&gt;L.Name" xml:space="preserve">
     <value>L</value>
   </data>
   <data name="&gt;&gt;chkUpdate.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>GroupBox1</value>
   </data>
   <data name="chkUseRegionalSeparator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 521</value>
+    <value>6, 43</value>
   </data>
   <data name="DockTopToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2084,7 +2090,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 8</value>
+    <value>57, 6</value>
   </data>
   <data name="&gt;&gt;DataGridView1.Name" xml:space="preserve">
     <value>DataGridView1</value>
@@ -2096,10 +2102,10 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbValue.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;Q.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 346</value>
   </data>
   <data name="tbValue.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2108,7 +2114,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 29</value>
+    <value>22, 22</value>
   </data>
   <data name="J.HeaderText" xml:space="preserve">
     <value>J</value>
@@ -2118,9 +2124,6 @@
   </data>
   <data name="D.Width" type="System.Int32, mscorlib">
     <value>64</value>
-  </data>
-  <data name="chkUseRegionalSeparator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
   </data>
   <data name="chkUpdate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2137,14 +2140,14 @@
   <data name="K.Width" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
-  <data name="Button4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="DataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;ColarToolStripMenuItem.Name" xml:space="preserve">
     <value>ColarToolStripMenuItem</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Opções de Controle</value>
   </data>
   <data name="C.Width" type="System.Int32, mscorlib">
     <value>64</value>
@@ -2153,7 +2156,7 @@
     <value>E</value>
   </data>
   <data name="DockBottomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
+    <value>196, 22</value>
   </data>
   <data name="Y.Width" type="System.Int32, mscorlib">
     <value>65</value>
@@ -2161,17 +2164,26 @@
   <data name="$this.TabText" xml:space="preserve">
     <value>Planilha</value>
   </data>
+  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Left Auto-Hide</value>
+  </data>
   <data name="&gt;&gt;T.Name" xml:space="preserve">
     <value>T</value>
   </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Left Auto-Hide</value>
+  <data name="&gt;&gt;F.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;J.Name" xml:space="preserve">
+    <value>J</value>
   </data>
   <data name="B.Width" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
   <data name="&gt;&gt;X.Name" xml:space="preserve">
     <value>X</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>777, 93</value>
   </data>
   <data name="X.Width" type="System.Int32, mscorlib">
     <value>65</value>
@@ -2189,7 +2201,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 29</value>
+    <value>22, 22</value>
   </data>
   <data name="&gt;&gt;DocumentToolStripMenuItem.Name" xml:space="preserve">
     <value>DocumentToolStripMenuItem</value>
@@ -2203,17 +2215,23 @@
   <data name="Button4.Text" xml:space="preserve">
     <value>Copiar dados para a Área de Transferência</value>
   </data>
+  <data name="&gt;&gt;chkEnableUnitLocking.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;dckMenu.Name" xml:space="preserve">
     <value>dckMenu</value>
   </data>
   <data name="&gt;&gt;AvaliarFormulaToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkUseRegionalSeparator.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;R.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -2222,10 +2240,10 @@
     <value>ImageBeforeText</value>
   </data>
   <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
+    <value>196, 22</value>
   </data>
   <data name="CopiarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 38</value>
+    <value>274, 38</value>
   </data>
   <data name="&gt;&gt;tbCell.Name" xml:space="preserve">
     <value>tbCell</value>
@@ -2252,13 +2270,13 @@
     <value>H</value>
   </data>
   <data name="tbValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 9</value>
+    <value>122, 7</value>
   </data>
   <data name="&gt;&gt;P.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockLeftAutoHideToolStripMenuItem</value>
+  <data name="&gt;&gt;R.Name" xml:space="preserve">
+    <value>R</value>
   </data>
   <data name="&gt;&gt;chkUpdate.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2285,7 +2303,7 @@
     <value>64</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 6</value>
+    <value>271, 6</value>
   </data>
   <data name="DocumentToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2300,13 +2318,10 @@
     <value>SpreadsheetForm</value>
   </data>
   <data name="&gt;&gt;chkUpdate.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="I.HeaderText" xml:space="preserve">
     <value>I</value>
-  </data>
-  <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="chkUpdate.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2315,10 +2330,10 @@
     <value>A</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 38</value>
+    <value>274, 38</value>
   </data>
-  <data name="Label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="Button3.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="F.Width" type="System.Int32, mscorlib">
     <value>65</value>
@@ -2328,9 +2343,6 @@
   </data>
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="tbValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
   </data>
   <data name="H.HeaderText" xml:space="preserve">
     <value>H</value>
@@ -2348,10 +2360,13 @@
     <value>V</value>
   </data>
   <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
+    <value>196, 22</value>
   </data>
   <data name="&gt;&gt;K.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;W.Name" xml:space="preserve">
+    <value>W</value>
   </data>
   <data name="Button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2363,10 +2378,10 @@
     <value>Z</value>
   </data>
   <data name="chkUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 521</value>
+    <value>6, 20</value>
   </data>
   <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
+    <value>196, 22</value>
   </data>
   <data name="D.HeaderText" xml:space="preserve">
     <value>D</value>
@@ -2384,10 +2399,7 @@
     <value>CelulaToolStripMenuItem</value>
   </data>
   <data name="tbValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 23</value>
-  </data>
-  <data name="tbCell.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>606, 20</value>
   </data>
   <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2405,16 +2417,13 @@
     <value>Dock Top Auto-Hide</value>
   </data>
   <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
-  </data>
-  <data name="DataGridView1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>196, 22</value>
   </data>
   <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 282</value>
+    <value>275, 282</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1047, 549</value>
+    <value>793, 445</value>
   </data>
   <data name="Q.Width" type="System.Int32, mscorlib">
     <value>65</value>
@@ -2423,7 +2432,13 @@
     <value>DockTopToolStripMenuItem</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 14</value>
+    <value>85, 11</value>
+  </data>
+  <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockLeftAutoHideToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="tbCell.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2431,29 +2446,35 @@
   <data name="Q.HeaderText" xml:space="preserve">
     <value>Q</value>
   </data>
+  <data name="&gt;&gt;chkEnableUnitLocking.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
   <data name="&gt;&gt;E.Name" xml:space="preserve">
     <value>E</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>726, 518</value>
+    <value>535, 54</value>
   </data>
-  <data name="&gt;&gt;J.Name" xml:space="preserve">
-    <value>J</value>
+  <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="P.Width" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
+  <data name="chkEnableUnitLocking.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
   <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
+    <value>196, 22</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 38</value>
-  </data>
-  <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
+    <value>274, 38</value>
   </data>
   <data name="chkUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 21</value>
+    <value>151, 17</value>
   </data>
   <data name="&gt;&gt;L.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2468,7 +2489,7 @@
     <value>LimparToolStripMenuItem</value>
   </data>
   <data name="chkUseRegionalSeparator.Text" xml:space="preserve">
-    <value>Usar separador decimal do sistema em expressões/fórmulas</value>
+    <value>Usar Separador Decimal do Sistema em Expressões e Fórmulas</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
     <value>ToolStripSeparator1</value>
@@ -2482,26 +2503,29 @@
   <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="chkUseRegionalSeparator.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tbValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;W.Name" xml:space="preserve">
-    <value>W</value>
+  <data name="&gt;&gt;Q.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="W.HeaderText" xml:space="preserve">
     <value>W</value>
   </data>
   <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 24</value>
+    <value>196, 22</value>
   </data>
   <data name="Button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1005, 8</value>
+    <value>762, 6</value>
   </data>
   <data name="O.HeaderText" xml:space="preserve">
     <value>O</value>
@@ -2545,6 +2569,9 @@
   <metadata name="F.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
   <metadata name="Q.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2567,9 +2594,6 @@
     <value>69</value>
   </metadata>
   <metadata name="N.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="S.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="D.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2597,6 +2621,9 @@
     <value>True</value>
   </metadata>
   <metadata name="T.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="S.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="L.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

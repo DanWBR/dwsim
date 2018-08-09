@@ -185,9 +185,10 @@ namespace DWSIM.UI.Forms
             {
                 if (t.Result)
                 {
+                    var whatsnew = SharedClasses.UpdateCheck.GetWhatsNew();
                     Application.Instance.Invoke(() =>
                     {
-                        if (MessageBox.Show("An updated version is available to download from the official website. Update DWSIM to fix bugs, crashes and take advantage of new features.", "Update Available", MessageBoxButtons.OKCancel, MessageBoxType.Information, MessageBoxDefaultButton.OK) == DialogResult.Ok)
+                        if (MessageBox.Show("An updated version is available to download from the official website. Update DWSIM to fix bugs, crashes and take advantage of new features.\n\n" + whatsnew, "Update Available", MessageBoxButtons.OKCancel, MessageBoxType.Information, MessageBoxDefaultButton.OK) == DialogResult.Ok)
                         {
                             Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems");
                         }

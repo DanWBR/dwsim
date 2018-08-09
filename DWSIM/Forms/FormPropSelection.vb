@@ -67,7 +67,6 @@ Public Class FormPropSelection
         TreeView2.Nodes.Clear()
         TreeView3.Nodes.Clear()
 
-      
         With TreeView2.Nodes
             Select Case TreeView1.SelectedNode.Index
                 Case 0
@@ -249,17 +248,32 @@ Public Class FormPropSelection
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
         If Not Me.TreeView3.SelectedNode Is Nothing Then
             If ssmode Then
-                Dim cparams As Global.DWSIM.SharedClasses.Spreadsheet.SpreadsheetCellParameters
+                Dim cparams, cparams2 As Global.DWSIM.SharedClasses.Spreadsheet.SpreadsheetCellParameters
                 cparams = ssheet.DataGridView1.SelectedCells(0).Tag
+                Dim scell = ssheet.DataGridView1.SelectedCells(0)
                 If mode = 0 Then
                     cparams.Expression = ":" & Me.TreeView2.SelectedNode.Tag & "," & Me.TreeView3.SelectedNode.Tag
                     cparams.CellType = Global.DWSIM.SharedClasses.Spreadsheet.VarType.Read
-                    ssheet.UpdateValue(ssheet.DataGridView1.SelectedCells(0), cparams.Expression)
+                    ssheet.UpdateValue(scell, cparams.Expression)
+                    If formC.Options.SpreadsheetUnitLockingMode Then
+                        Dim obj As SharedClasses.UnitOperations.BaseClass = formC.GetFlowsheetSimulationObject(Me.TreeView2.SelectedNode.Text)
+                        Dim scell2 = ssheet.DataGridView1.Rows(scell.RowIndex).Cells(scell.ColumnIndex + 1)
+                        cparams2 = scell2.Tag
+                        cparams2.CellType = Spreadsheet.VarType.Unit
+                        cparams2.Expression = obj.GetPropertyUnit(Me.TreeView3.SelectedNode.Tag)
+                        ssheet.UpdateValue(scell2, cparams2.Expression)
+                    End If
                 Else
                     cparams.ObjectID = Me.TreeView2.SelectedNode.Tag
                     cparams.PropID = Me.TreeView3.SelectedNode.Tag
                     cparams.CellType = Global.DWSIM.SharedClasses.Spreadsheet.VarType.Write
                     ssheet.UpdateValue(ssheet.DataGridView1.SelectedCells(0), cparams.Expression)
+                    If formC.Options.SpreadsheetUnitLockingMode Then
+                        Dim scell2 = ssheet.DataGridView1.Rows(scell.RowIndex).Cells(scell.ColumnIndex + 1)
+                        cparams2 = scell2.Tag
+                        cparams2.CellType = Spreadsheet.VarType.Unit
+                        ssheet.UpdateValue(scell2, cparams2.Expression)
+                    End If
                 End If
             Else
                 Dim obj As SharedClasses.UnitOperations.BaseClass = formC.GetFlowsheetSimulationObject(Me.TreeView2.SelectedNode.Text)
