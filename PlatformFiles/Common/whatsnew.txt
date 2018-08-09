@@ -1,6 +1,7 @@
-Version 5.2 Update 11
+Version 5.2 Update 12
 
-- [NEW] Heat Exchanger thermal efficiency calculation mode
-- [CHG] Material Stream editor updates (Classic UI)
-- [FIX] Fixed Flowsheet Object cloning
-- [FIX] Fixed Liquid Phase Enthalpy calculation for some Property Packages
+- [NEW] New Kv calculation mode for Valve model
+- [NEW] User-Defined Pipe Wall Material
+- [NEW] Unit locking mode for Spreadsheet (Classic UI)
+- [FIX] Fixed a bug with Pump calculations
+- [FIX] Fixed simulation comments not restoring correctly on Classic UI

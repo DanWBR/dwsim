@@ -171,14 +171,26 @@ Namespace UnitOperations
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, W = {3} kg/s", Ti, Pi, Hi, Wi))
 
             If EnableOpeningKvRelationship Then
+                IObj?.Paragraphs.Add("<h2>Opening/Kv relationship</h2>")
+                IObj?.Paragraphs.Add("When this feature is enabled, you can enter an expression that relates the valve stem opening with the maximum flow value (Kvmax).")
+                IObj?.Paragraphs.Add("The relationship between control valve capacity and valve stem travel is known as the Flow Characteristic of the 
+                                    Control Valve. Trim design of the valve affects how the control valve capacity changes as the valve moves through 
+                                    its complete travel. Because of the variation in trim design, many valves are not linear in nature. Valve trims 
+                                    are instead designed, or characterized, in order to meet the large variety of control application needs. Many 
+                                    control loops have inherent non linearity's, which may be possible to compensate selecting the control valve trim.")
+                IObj?.Paragraphs.Add("<img src='https://www.engineeringtoolbox.com/docs/documents/485/Control_Valve_Flow_Characteristics.gif'></img>")
                 Try
                     Dim ExpContext As New Ciloci.Flee.ExpressionContext
                     ExpContext.Imports.AddType(GetType(System.Math))
                     ExpContext.Variables.Clear()
                     ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                     ExpContext.Variables.Add("OP", OpeningPct)
+                    IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                    IObj?.Paragraphs.Add("Opening/Kvmax relationship expression: " & PercentOpeningVersusPercentKvExpression)
                     Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
                     Kvc = Kv * Expr.Evaluate() / 100
+                    IObj?.Paragraphs.Add("Calculated Kv/Kvmax (%): " & Kvc / Kv * 100)
+                    IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
                 Catch ex As Exception
                     Throw New Exception("Invalid expression for Kv/Opening relationship.")
                 End Try
@@ -188,8 +200,16 @@ Namespace UnitOperations
 
             'reference: https://www.samson.de/document/t00050en.pdf
 
+            If CalcMode = CalculationMode.Kv_Gas Or CalcMode = CalculationMode.Kv_Liquid Or CalcMode = CalculationMode.Kv_Steam Then
+                IObj?.Paragraphs.Add("<h2>Kv Calculation Mode</h2>")
+                IObj?.Paragraphs.Add("Kv flow equations in DWSIM are implemented as per IEC 60534 for non-critical flow (P2 > 0.5*P1).")
+                IObj?.Paragraphs.Add("For more information, see <a href='https://www.samson.de/document/t00050en.pdf'>this document</a>.")
+                IObj?.Paragraphs.Add(String.Format("Kv = {0}", Kvc))
+            End If
+
             If CalcMode = CalculationMode.Kv_Liquid Then
                 P2 = Pi - 100 / rho * (Wi * 3600 / Kvc) ^ 2
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             ElseIf CalcMode = CalculationMode.Kv_Gas Then
                 ims.PropertyPackage.CurrentMaterialStream = ims
                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
@@ -201,6 +221,7 @@ Namespace UnitOperations
                     icount += 1
                     If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
                 Loop Until Math.Abs(P2 - P2ant) < 0.0001
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             ElseIf CalcMode = CalculationMode.Kv_Steam Then
                 P2 = Pi * 0.7
                 icount = 0
@@ -211,6 +232,7 @@ Namespace UnitOperations
                     icount += 1
                     If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
                 Loop Until Math.Abs(P2 - P2ant) < 0.0001
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             End If
 
             If Me.CalcMode = CalculationMode.DeltaP Then
@@ -227,29 +249,36 @@ Namespace UnitOperations
 
             If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
-                IObj?.SetCurrent()
-                Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
-                T2 = tmp.CalculatedTemperature
-                CheckSpec(T2, True, "outlet temperature")
-                H2c = tmp.CalculatedEnthalpy
-                CheckSpec(H2c, False, "outlet enthalpy")
+            IObj?.Paragraphs.Add(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
-                If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
+            IObj?.Paragraphs.Add(String.Format("Inlet Stream Enthalpy = {0} kJ/kg", Hi))
 
-                Houtlet = H2c
-                Hinlet = Hi
+            IObj?.SetCurrent()
+            Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+            T2 = tmp.CalculatedTemperature
+            CheckSpec(T2, True, "outlet temperature")
+            H2c = tmp.CalculatedEnthalpy
+            CheckSpec(H2c, False, "outlet enthalpy")
 
-                'Dim htol As Double = Me.PropertyPackage.Parameters("PP_PHFELT")
-                'Dim herr As Double = Math.Abs((H2c - H2) / H2)
+            If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-                'If herr > 0.01 Then Throw New Exception("The enthalpy of inlet and outlet streams doesn't match. Result is invalid.")
+            IObj?.Paragraphs.Add(String.Format("Outlet Stream Enthalpy = {0} kJ/kg", H2c))
+            IObj?.Paragraphs.Add(String.Format("Calculated Outlet Temperature T2 = {0} K", T2))
 
-                Me.DeltaT = T2 - Ti
-                Me.DeltaQ = 0
+            Houtlet = H2c
+            Hinlet = Hi
 
-                OutletTemperature = T2
+            'Dim htol As Double = Me.PropertyPackage.Parameters("PP_PHFELT")
+            'Dim herr As Double = Math.Abs((H2c - H2) / H2)
 
-                If Not DebugMode Then
+            'If herr > 0.01 Then Throw New Exception("The enthalpy of inlet and outlet streams doesn't match. Result is invalid.")
+
+            Me.DeltaT = T2 - Ti
+            Me.DeltaQ = 0
+
+            OutletTemperature = T2
+
+            If Not DebugMode Then
 
                 With Me.GetOutletMaterialStream(0)
                     .Phases(0).Properties.temperature = T2

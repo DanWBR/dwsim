@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 11
+Version 5.2 Update 12
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 12
+
+- [NEW] New Kv calculation mode for Valve model
+- [NEW] User-Defined Pipe Wall Material
+- [NEW] Unit locking mode for Spreadsheet (Classic UI)
+- [FIX] Fixed a bug with Pump calculations
+- [FIX] Fixed simulation comments not restoring correctly on Classic UI
 
 Version 5.2 Update 11
 
