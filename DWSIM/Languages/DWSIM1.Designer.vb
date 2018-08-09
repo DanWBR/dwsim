@@ -1568,6 +1568,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Esta célula contém a unidade que será lida ou escrita para a variável da célula esquerda adjacente..
+        '''</summary>
+        Friend Shared ReadOnly Property CellUnitLocked() As String
+            Get
+                Return ResourceManager.GetString("CellUnitLocked", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to O valor desta célula será escrito em um objeto no fluxograma..
         '''</summary>
         Friend Shared ReadOnly Property CellWillWrite() As String

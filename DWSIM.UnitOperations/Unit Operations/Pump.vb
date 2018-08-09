@@ -714,7 +714,7 @@ Namespace UnitOperations
 
                 Case CalculationMode.EnergyStream
 
-                    Dim tmp As Object
+                    Dim tmp As IFlashCalculationResult
 
                     'Corrente de EnergyFlow - pegar valor do DH
                     With esin
@@ -733,7 +733,7 @@ Namespace UnitOperations
 
                     IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
-                    T2 = tmp(2)
+                    T2 = tmp.CalculatedTemperature.GetValueOrDefault
                     CheckSpec(T2, True, "outlet temperature")
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
@@ -755,7 +755,7 @@ Namespace UnitOperations
 
                 Case CalculationMode.Power
 
-                    Dim tmp As Object
+                    Dim tmp As IFlashCalculationResult
 
                     'Corrente de EnergyFlow - pegar valor do DH
                     With esin
@@ -774,7 +774,7 @@ Namespace UnitOperations
 
                     IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
-                    T2 = tmp(2)
+                    T2 = tmp.CalculatedTemperature.GetValueOrDefault
                     CheckSpec(T2, True, "outlet temperature")
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
@@ -811,7 +811,7 @@ Namespace UnitOperations
 
                     IObj?.SetCurrent()
                     Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, 0.0#)
-                    T2 = tmp.CalculatedTemperature
+                    T2 = tmp.CalculatedTemperature.GetValueOrDefault
                     CheckSpec(T2, True, "outlet temperature")
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))

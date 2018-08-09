@@ -70,7 +70,7 @@ Public Class SpreadsheetForm
 
         chkUseRegionalSeparator.Checked = formc.Options.SpreadsheetUseRegionalSeparator
 
-        chkEnableUnitLocking.Checked = formc.Options.SpreadsheetUseRegionalSeparator
+        chkEnableUnitLocking.Checked = formc.Options.SpreadsheetUnitLockingMode
 
         If Me.loaded = False Then
             Me.DataGridView1.Rows.Add(100)
@@ -573,7 +573,9 @@ Public Class SpreadsheetForm
                     End If
                     cell.ToolTipText = ccparams.ToolTipText
                 ElseIf ccparams.CellType = Spreadsheet.VarType.Unit Then
+                    ccparams.ToolTipText = DWSIM.App.GetLocalString("CellUnitLocked")
                     cell.Style.BackColor = Color.Beige
+                    cell.ToolTipText = ccparams.ToolTipText
                 End If
                 If expression <> "" Then
                     If expression.Substring(0, 1) = "=" Then
@@ -608,7 +610,7 @@ Public Class SpreadsheetForm
                         cell.Style.BackColor = Color.LightGreen
                     Else
                         cell.Value = expression
-                        If ccparams.CellType <> Spreadsheet.VarType.Write Then
+                        If ccparams.CellType <> Spreadsheet.VarType.Write And ccparams.CellType <> Spreadsheet.VarType.Unit Then
                             ccparams.ToolTipText = expression
                             cell.ToolTipText = ccparams.ToolTipText
                             cell.Style.BackColor = cell.OwningColumn.DefaultCellStyle.BackColor
@@ -795,12 +797,14 @@ Public Class SpreadsheetForm
                     If ccparams.CellType = Spreadsheet.VarType.Write And Not ce.Value Is Nothing Then
                         obj = formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID)
                         If ce.ColumnIndex + 1 < DataGridView1.Columns.GetColumnCount(DataGridViewElementStates.None) Then
-                            Dim adjcell = r.Cells.Item(ce.ColumnIndex + 1)
-                            Dim ccparams2 As Spreadsheet.SpreadsheetCellParameters = ccparams = ce.Tag
-                            If ccparams2.CellType = Spreadsheet.VarType.Unit Then
-                                obj.SetPropertyValue(ccparams.PropID, SystemsOfUnits.Converter.ConvertToSI(ccparams2.Expression, ce.Value))
-                            Else
-                                obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
+                            If formc.Options.SpreadsheetUnitLockingMode Then
+                                Dim adjcell = r.Cells.Item(ce.ColumnIndex + 1)
+                                Dim ccparams2 As Spreadsheet.SpreadsheetCellParameters = adjcell.Tag
+                                If ccparams2.CellType = Spreadsheet.VarType.Unit Then
+                                    obj.SetPropertyValue(ccparams.PropID, SystemsOfUnits.Converter.ConvertToSI(ccparams2.Expression, ce.Value))
+                                Else
+                                    obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
+                                End If
                             End If
                         Else
                             obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
