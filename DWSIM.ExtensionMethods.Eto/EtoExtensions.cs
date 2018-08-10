@@ -78,7 +78,6 @@ namespace DWSIM.UI.Shared
                 form.Content = content;
             }
             return form;
-
         }
 
         public static Form GetDefaultEditorForm(string title, int width, int height, Control content, bool scrollable)
@@ -99,12 +98,10 @@ namespace DWSIM.UI.Shared
                 form.Content = content;
             }
             return form;
-
         }
 
         public static Form GetDefaultTabbedForm(string title, int width, int height, Control[] contents)
         {
-
             List<TabPage> tabs = new List<TabPage>();
 
             foreach (var content in contents)

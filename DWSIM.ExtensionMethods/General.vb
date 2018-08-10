@@ -136,6 +136,37 @@ Public Module General
 
     End Function
 
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function IsValidDoubleExpression(str As String) As Boolean
+
+        If Double.TryParse(str, New Double) Then
+            Return True
+        Else
+            Try
+                Dim ExpContext As New Ciloci.Flee.ExpressionContext
+                ExpContext.Imports.AddType(GetType(System.Math))
+                ExpContext.Variables.Clear()
+                ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                Dim Expr = ExpContext.CompileGeneric(Of Double)(str)
+                Expr.Evaluate()
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End If
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function ParseExpressionToDouble(str As String) As Double
+        Dim ExpContext As New Ciloci.Flee.ExpressionContext
+        ExpContext.Imports.AddType(GetType(System.Math))
+        ExpContext.Variables.Clear()
+        ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+        Dim Expr = ExpContext.CompileGeneric(Of Double)(str)
+        Return Expr.Evaluate()
+    End Function
+
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToString(sourcearray As String(), ci As CultureInfo) As String
 
