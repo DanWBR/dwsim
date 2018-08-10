@@ -157,8 +157,12 @@ Public Module General
     <System.Runtime.CompilerServices.Extension()>
     Public Function ParseExpressionToDouble(str As String) As Double
         If Not SharedClasses.ExpressionParser.ParserInitialized Then SharedClasses.ExpressionParser.InitializeExpressionParser()
-        Dim Expr = SharedClasses.ExpressionParser.ExpContext.CompileGeneric(Of Double)(str)
-        Return Expr.Evaluate()
+        Try
+            Dim Expr = SharedClasses.ExpressionParser.ExpContext.CompileGeneric(Of Double)(str)
+            Return Expr.Evaluate()
+        Catch ex As Exception
+            Return Convert.ToDouble(str)
+        End Try
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _

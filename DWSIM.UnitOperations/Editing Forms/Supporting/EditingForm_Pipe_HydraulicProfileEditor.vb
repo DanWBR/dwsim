@@ -969,24 +969,24 @@ Imports System.Drawing
                     Exit Function
                 End If
                 If .Rows(1).Cells(column.Name).Value = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then
-                    If Not .Rows(3).Cells(column.Name).Value > 0.0# Then
+                    If Not .Rows(3).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Then
                         Return "Invalid number of sections"
                     End If
-                    If Not Convert.ToDouble(.Rows(7).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(7).Cells(column.Name).Value) Then
+                    If Not .Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or Not .Rows(7).Cells(column.Name).Value.ToString.IsValidDoubleExpression Then
                         Return "Invalid length"
                     End If
-                    If Double.IsNaN(.Rows(8).Cells(column.Name).Value) Then
+                    If Not .Rows(8).Cells(column.Name).Value.ToString.IsValidDoubleExpression Then
                         Return "Invalid elevation"
                         Exit Function
                     End If
-                    If Math.Abs(Convert.ToDouble(.Rows(8).Cells(column.Name).Value)) > Math.Abs(Convert.ToDouble(.Rows(7).Cells(column.Name).Value)) Then
+                    If Math.Abs(.Rows(8).Cells(column.Name).Value.ToString.ParseExpressionToDouble) > Math.Abs(.Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
                         Return "Invalid elevation (H > L!)"
                     End If
-                    If Not Convert.ToDouble(.Rows(9).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(9).Cells(column.Name).Value) Then
+                    If Not .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Then
                         Return "Invalid external diameter"
                         Exit Function
                     End If
-                    If Not Convert.ToDouble(.Rows(10).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(10).Cells(column.Name).Value) Or CDbl(.Rows(10).Cells(column.Name).Value) > CDbl(.Rows(9).Cells(column.Name).Value) Then
+                    If Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble Then
                         Return "Invalid internal diameter"
                         Exit Function
                     End If
