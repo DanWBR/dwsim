@@ -419,16 +419,16 @@ Public Class EditingForm_HeatExchanger
 
         uobj.CalculationMode = cbCalcMode.SelectedIndex
 
-        If sender Is tbHotFluidPDrop Then uobj.HotSidePressureDrop = su.Converter.ConvertToSI(cbHotFluidPDrop.SelectedItem.ToString, tbHotFluidPDrop.Text)
-        If sender Is tbColdFluidPDrop Then uobj.ColdSidePressureDrop = su.Converter.ConvertToSI(cbColdFluidPDrop.SelectedItem.ToString, tbColdFluidPDrop.Text)
-        If sender Is tbHotFluidOutletT Then uobj.HotSideOutletTemperature = su.Converter.ConvertToSI(cbHotFluidOutletT.SelectedItem.ToString, tbHotFluidOutletT.Text)
-        If sender Is tbColdFluidOutletT Then uobj.ColdSideOutletTemperature = su.Converter.ConvertToSI(cbColdFluidOutletT.SelectedItem.ToString, tbColdFluidOutletT.Text)
-        If sender Is tbArea Then uobj.Area = su.Converter.ConvertToSI(cbArea.SelectedItem.ToString, tbArea.Text)
-        If sender Is tbOverallU Then uobj.OverallCoefficient = su.Converter.ConvertToSI(cbOverallHTC.SelectedItem.ToString, tbOverallU.Text)
-        If sender Is tbHeat Then uobj.Q = su.Converter.ConvertToSI(cbHeat.SelectedItem.ToString, tbHeat.Text)
-        If sender Is tbHeatLoss Then uobj.HeatLoss = su.Converter.ConvertToSI(cbHeatLoss.SelectedItem.ToString, tbHeatLoss.Text)
-        If sender Is tbMITA Then uobj.MITA = su.Converter.ConvertToSI(cbMITA.SelectedItem.ToString, tbMITA.Text)
-        If sender Is tbEfficiency Then uobj.ThermalEfficiency = tbEfficiency.Text
+        If sender Is tbHotFluidPDrop Then uobj.HotSidePressureDrop = su.Converter.ConvertToSI(cbHotFluidPDrop.SelectedItem.ToString, tbHotFluidPDrop.Text.ParseExpressionToDouble)
+        If sender Is tbColdFluidPDrop Then uobj.ColdSidePressureDrop = su.Converter.ConvertToSI(cbColdFluidPDrop.SelectedItem.ToString, tbColdFluidPDrop.Text.ParseExpressionToDouble)
+        If sender Is tbHotFluidOutletT Then uobj.HotSideOutletTemperature = su.Converter.ConvertToSI(cbHotFluidOutletT.SelectedItem.ToString, tbHotFluidOutletT.Text.ParseExpressionToDouble)
+        If sender Is tbColdFluidOutletT Then uobj.ColdSideOutletTemperature = su.Converter.ConvertToSI(cbColdFluidOutletT.SelectedItem.ToString, tbColdFluidOutletT.Text.ParseExpressionToDouble)
+        If sender Is tbArea Then uobj.Area = su.Converter.ConvertToSI(cbArea.SelectedItem.ToString, tbArea.Text.ParseExpressionToDouble)
+        If sender Is tbOverallU Then uobj.OverallCoefficient = su.Converter.ConvertToSI(cbOverallHTC.SelectedItem.ToString, tbOverallU.Text.ParseExpressionToDouble)
+        If sender Is tbHeat Then uobj.Q = su.Converter.ConvertToSI(cbHeat.SelectedItem.ToString, tbHeat.Text.ParseExpressionToDouble)
+        If sender Is tbHeatLoss Then uobj.HeatLoss = su.Converter.ConvertToSI(cbHeatLoss.SelectedItem.ToString, tbHeatLoss.Text.ParseExpressionToDouble)
+        If sender Is tbMITA Then uobj.MITA = su.Converter.ConvertToSI(cbMITA.SelectedItem.ToString, tbMITA.Text.ParseExpressionToDouble)
+        If sender Is tbEfficiency Then uobj.ThermalEfficiency = tbEfficiency.Text.ParseExpressionToDouble
 
         RequestCalc()
 
@@ -447,7 +447,7 @@ Public Class EditingForm_HeatExchanger
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

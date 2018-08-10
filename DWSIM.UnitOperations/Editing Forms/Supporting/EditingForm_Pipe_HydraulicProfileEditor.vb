@@ -920,14 +920,14 @@ Imports System.Drawing
                 v3 = Me.GridMalha.Rows(2).Cells(column.Name).Value
                 v4 = Me.GridMalha.Rows(3).Cells(column.Name).Value
                 v5 = Me.GridMalha.Rows(4).Cells(column.Name).Value
-                v6 = Me.GridMalha.Rows(7).Cells(column.Name).Value
-                v7 = Me.GridMalha.Rows(8).Cells(column.Name).Value
-                v8 = Me.GridMalha.Rows(9).Cells(column.Name).Value
-                v9 = Me.GridMalha.Rows(10).Cells(column.Name).Value
+                v6 = Me.GridMalha.Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble
+                v7 = Me.GridMalha.Rows(8).Cells(column.Name).Value.ToString.ParseExpressionToDouble
+                v8 = Me.GridMalha.Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble
+                v9 = Me.GridMalha.Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble
                 If v2 = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then v2 = "Tubulaosimples"
                 Dim ps As New PipeSection(v1, v2, v3, v4, v5, cv.Convert(Me.Units.distance, "m", v6), cv.Convert(Me.Units.distance, "m", v7), cv.Convert(Me.Units.diameter, "in", v8), cv.Convert(Me.Units.diameter, "in", v9))
                 If ps.Material = PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
-                    ps.PipeWallRugosity = Me.GridMalha.Rows(5).Cells(column.Name).Value
+                    ps.PipeWallRugosity = Me.GridMalha.Rows(5).Cells(column.Name).Value.ToString.ParseExpressionToDouble
                     ps.PipeWallThermalConductivityExpression = Me.GridMalha.Rows(6).Cells(column.Name).Value
                 End If
                 PipeOp.Profile.Sections.Add(column.Index + 1, ps)

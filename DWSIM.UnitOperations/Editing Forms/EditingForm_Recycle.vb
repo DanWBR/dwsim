@@ -138,9 +138,9 @@ Public Class EditingForm_Recycle
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbTT Then SimObject.ConvergenceParameters.Temperatura = su.Converter.ConvertToSI(cbT.SelectedItem.ToString, tbTT.Text)
-        If sender Is tbWT Then SimObject.ConvergenceParameters.VazaoMassica = su.Converter.ConvertToSI(cbW.SelectedItem.ToString, tbWT.Text)
-        If sender Is tbPT Then SimObject.ConvergenceParameters.Pressao = su.Converter.ConvertToSI(cbP.SelectedItem.ToString, tbPT.Text)
+        If sender Is tbTT Then SimObject.ConvergenceParameters.Temperatura = su.Converter.ConvertToSI(cbT.SelectedItem.ToString, tbTT.Text.ParseExpressionToDouble)
+        If sender Is tbWT Then SimObject.ConvergenceParameters.VazaoMassica = su.Converter.ConvertToSI(cbW.SelectedItem.ToString, tbWT.Text.ParseExpressionToDouble)
+        If sender Is tbPT Then SimObject.ConvergenceParameters.Pressao = su.Converter.ConvertToSI(cbP.SelectedItem.ToString, tbPT.Text.ParseExpressionToDouble)
 
     End Sub
 
@@ -154,7 +154,7 @@ Public Class EditingForm_Recycle
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

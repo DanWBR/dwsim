@@ -173,8 +173,8 @@ Public Class EditingForm_Tank
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbResidTime Then SimObject.ResidenceTime = su.Converter.ConvertToSI(cbResidTime.SelectedItem.ToString, tbResidTime.Text)
-        If sender Is tbVolume Then SimObject.Volume = su.Converter.ConvertToSI(cbVolume.SelectedItem.ToString, tbVolume.Text)
+        If sender Is tbResidTime Then SimObject.ResidenceTime = su.Converter.ConvertToSI(cbResidTime.SelectedItem.ToString, tbResidTime.Text.ParseExpressionToDouble)
+        If sender Is tbVolume Then SimObject.Volume = su.Converter.ConvertToSI(cbVolume.SelectedItem.ToString, tbVolume.Text.ParseExpressionToDouble)
 
         RequestCalc()
 
@@ -190,7 +190,7 @@ Public Class EditingForm_Tank
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

@@ -146,7 +146,7 @@ Public Class EditingForm_EnergyStream
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbEnergyFlow Then SimObject.EnergyFlow = su.Converter.ConvertToSI(cbEnergyFlow.SelectedItem.ToString, tbEnergyFlow.Text)
+        If sender Is tbEnergyFlow Then SimObject.EnergyFlow = su.Converter.ConvertToSI(cbEnergyFlow.SelectedItem.ToString, tbEnergyFlow.Text.ParseExpressionToDouble)
 
         RequestCalc()
 
@@ -162,7 +162,7 @@ Public Class EditingForm_EnergyStream
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

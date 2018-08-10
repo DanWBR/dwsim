@@ -377,7 +377,7 @@ Public Class EditingForm_ReactorCSTR
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
@@ -399,12 +399,12 @@ Public Class EditingForm_ReactorCSTR
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-        If sender Is tbVol Then SimObject.Volume = su.Converter.ConvertToSI(cbVol.SelectedItem.ToString, tbVol.Text)
-        If sender Is tbHeadspace Then SimObject.Headspace = su.Converter.ConvertToSI(cbHeadspace.SelectedItem.ToString, tbHeadspace.Text)
-        If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text)
-        If sender Is tbCatLoad Then SimObject.CatalystAmount = su.Converter.ConvertToSI(cbCatLoad.SelectedItem.ToString, tbCatLoad.Text)
-      
+        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
+        If sender Is tbVol Then SimObject.Volume = su.Converter.ConvertToSI(cbVol.SelectedItem.ToString, tbVol.Text.ParseExpressionToDouble)
+        If sender Is tbHeadspace Then SimObject.Headspace = su.Converter.ConvertToSI(cbHeadspace.SelectedItem.ToString, tbHeadspace.Text.ParseExpressionToDouble)
+        If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text.ParseExpressionToDouble)
+        If sender Is tbCatLoad Then SimObject.CatalystAmount = su.Converter.ConvertToSI(cbCatLoad.SelectedItem.ToString, tbCatLoad.Text.ParseExpressionToDouble)
+
         RequestCalc()
 
     End Sub

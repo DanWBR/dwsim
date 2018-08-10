@@ -1012,43 +1012,43 @@ Public Class MaterialStreamEditor
 
             If sender Is tbTemp Then
                 oldvalue = .temperature.GetValueOrDefault
-                .temperature = Converter.ConvertToSI(cbUnitsT.SelectedItem.ToString, Double.Parse(tbTemp.Text))
+                .temperature = Converter.ConvertToSI(cbUnitsT.SelectedItem.ToString, tbTemp.Text.ParseExpressionToDouble)
                 newvalue = .temperature.GetValueOrDefault
                 propname = "PROP_MS_0"
             End If
             If sender Is tbPressure Then
                 oldvalue = .pressure.GetValueOrDefault
-                .pressure = Converter.ConvertToSI(cbUnitsP.SelectedItem.ToString, Double.Parse(tbPressure.Text))
+                .pressure = Converter.ConvertToSI(cbUnitsP.SelectedItem.ToString, tbPressure.Text.ParseExpressionToDouble)
                 newvalue = .pressure.GetValueOrDefault
                 propname = "PROP_MS_1"
             End If
             If sender Is tbMassFlow Then
                 oldvalue = .massflow.GetValueOrDefault
-                .massflow = Converter.ConvertToSI(cbUnitsW.SelectedItem.ToString, Double.Parse(tbMassFlow.Text))
+                .massflow = Converter.ConvertToSI(cbUnitsW.SelectedItem.ToString, tbMassFlow.Text.ParseExpressionToDouble)
                 newvalue = .massflow.GetValueOrDefault
                 propname = "PROP_MS_2"
             End If
             If sender Is tbMoleFlow Then
                 oldvalue = .molarflow.GetValueOrDefault
-                .molarflow = Converter.ConvertToSI(cbUnitsM.SelectedItem.ToString, Double.Parse(tbMoleFlow.Text))
+                .molarflow = Converter.ConvertToSI(cbUnitsM.SelectedItem.ToString, tbMoleFlow.Text.ParseExpressionToDouble)
                 newvalue = .molarflow.GetValueOrDefault
                 propname = "PROP_MS_3"
             End If
             If sender Is tbVolFlow Then
                 oldvalue = .volumetric_flow.GetValueOrDefault
-                .volumetric_flow = Converter.ConvertToSI(cbUnitsQ.SelectedItem.ToString, Double.Parse(tbVolFlow.Text))
+                .volumetric_flow = Converter.ConvertToSI(cbUnitsQ.SelectedItem.ToString, tbVolFlow.Text.ParseExpressionToDouble)
                 newvalue = .volumetric_flow.GetValueOrDefault
                 propname = "PROP_MS_4"
             End If
             If sender Is tbEnth Then
                 oldvalue = .enthalpy.GetValueOrDefault
-                .enthalpy = Converter.ConvertToSI(cbUnitsH.SelectedItem.ToString, Double.Parse(tbEnth.Text))
+                .enthalpy = Converter.ConvertToSI(cbUnitsH.SelectedItem.ToString, tbEnth.Text.ParseExpressionToDouble)
                 newvalue = .enthalpy.GetValueOrDefault
                 propname = "PROP_MS_7"
             End If
             If sender Is tbEntr Then
                 oldvalue = .entropy.GetValueOrDefault
-                .entropy = Converter.ConvertToSI(cbUnitsS.SelectedItem.ToString, Double.Parse(tbEntr.Text))
+                .entropy = Converter.ConvertToSI(cbUnitsS.SelectedItem.ToString, tbEntr.Text.ParseExpressionToDouble)
                 newvalue = .entropy.GetValueOrDefault
                 propname = "PROP_MS_8"
             End If
@@ -1057,17 +1057,17 @@ Public Class MaterialStreamEditor
 
         If sender Is tbFracSpec And rbSpecVapor.Checked Then
             oldvalue = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
-            MatStream.Phases(2).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
+            MatStream.Phases(2).Properties.molarfraction = tbFracSpec.Text.ParseExpressionToDouble
             newvalue = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             propname = "PROP_MS_27"
         ElseIf sender Is tbFracSpec And rbSpecLiquid.Checked Then
             oldvalue = 1.0# - MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
-            MatStream.Phases(2).Properties.molarfraction = 1.0# - Double.Parse(tbFracSpec.Text)
+            MatStream.Phases(2).Properties.molarfraction = 1.0# - tbFracSpec.Text.ParseExpressionToDouble
             newvalue = 1.0# - MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             propname = "PROP_MS_27"
         ElseIf sender Is tbFracSpec And rbSpecSolid.Checked Then
             oldvalue = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault
-            MatStream.Phases(7).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
+            MatStream.Phases(7).Properties.molarfraction = tbFracSpec.Text.ParseExpressionToDouble
             newvalue = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault
             propname = "PROP_MS_146"
         End If
@@ -1110,7 +1110,7 @@ Public Class MaterialStreamEditor
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

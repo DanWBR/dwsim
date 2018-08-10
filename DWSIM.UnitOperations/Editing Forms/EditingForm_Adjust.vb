@@ -265,12 +265,12 @@ Public Class EditingForm_Adjust
 
             Try
                 Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
-                SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text))
+                SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text.ParseExpressionToDouble))
             Catch ex As Exception
             End Try
 
             Try
-                SimObject.Tolerance = Double.Parse(tbTolerance.Text)
+                SimObject.Tolerance = Double.Parse(tbTolerance.Text.ParseExpressionToDouble)
             Catch ex As Exception
             End Try
 
@@ -286,7 +286,7 @@ Public Class EditingForm_Adjust
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

@@ -204,11 +204,11 @@ Public Class EditingForm_ShortcutColumn
             uobj.condtype = UnitOperations.ShortcutColumn.CondenserType.PartialCond
         End If
 
-        If sender Is tbHKmolfrac Then uobj.m_heavykeymolarfrac = tbHKmolfrac.Text
-        If sender Is tbLKmolfrac Then uobj.m_lightkeymolarfrac = tbLKmolfrac.Text
-        If sender Is tbRefluxRatio Then uobj.m_refluxratio = tbRefluxRatio.Text
-        If sender Is tbRebPressure Then uobj.m_boilerpressure = su.Converter.ConvertToSI(cbRebPressureUnits.SelectedItem.ToString, tbRebPressure.Text)
-        If sender Is tbCondPressure Then uobj.m_condenserpressure = su.Converter.ConvertToSI(cbCondPressureUnits.SelectedItem.ToString, tbCondPressure.Text)
+        If sender Is tbHKmolfrac Then uobj.m_heavykeymolarfrac = tbHKmolfrac.Text.ParseExpressionToDouble
+        If sender Is tbLKmolfrac Then uobj.m_lightkeymolarfrac = tbLKmolfrac.Text.ParseExpressionToDouble
+        If sender Is tbRefluxRatio Then uobj.m_refluxratio = tbRefluxRatio.Text.ParseExpressionToDouble
+        If sender Is tbRebPressure Then uobj.m_boilerpressure = su.Converter.ConvertToSI(cbRebPressureUnits.SelectedItem.ToString, tbRebPressure.Text.ParseExpressionToDouble)
+        If sender Is tbCondPressure Then uobj.m_condenserpressure = su.Converter.ConvertToSI(cbCondPressureUnits.SelectedItem.ToString, tbCondPressure.Text.ParseExpressionToDouble)
 
         RequestCalc()
 
@@ -226,7 +226,7 @@ Public Class EditingForm_ShortcutColumn
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

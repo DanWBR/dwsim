@@ -352,7 +352,7 @@ Public Class EditingForm_ReactorPFR
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
@@ -374,12 +374,12 @@ Public Class EditingForm_ReactorPFR
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-        If sender Is tbVol Then SimObject.Volume = su.Converter.ConvertToSI(cbVol.SelectedItem.ToString, tbVol.Text)
-        If sender Is tbLength Then SimObject.Length = su.Converter.ConvertToSI(cbLength.SelectedItem.ToString, tbLength.Text)
-        If sender Is tbCatDiam Then SimObject.CatalystParticleDiameter = su.Converter.ConvertToSI(cbCatDiam.SelectedItem.ToString, tbCatDiam.Text)
-        If sender Is tbCatLoad Then SimObject.CatalystLoading = su.Converter.ConvertToSI(cbCatLoad.SelectedItem.ToString, tbCatLoad.Text)
-        If sender Is tbCatVoidFrac Then SimObject.CatalystVoidFraction = tbCatVoidFrac.Text
+        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
+        If sender Is tbVol Then SimObject.Volume = su.Converter.ConvertToSI(cbVol.SelectedItem.ToString, tbVol.Text.ParseExpressionToDouble)
+        If sender Is tbLength Then SimObject.Length = su.Converter.ConvertToSI(cbLength.SelectedItem.ToString, tbLength.Text.ParseExpressionToDouble)
+        If sender Is tbCatDiam Then SimObject.CatalystParticleDiameter = su.Converter.ConvertToSI(cbCatDiam.SelectedItem.ToString, tbCatDiam.Text.ParseExpressionToDouble)
+        If sender Is tbCatLoad Then SimObject.CatalystLoading = su.Converter.ConvertToSI(cbCatLoad.SelectedItem.ToString, tbCatLoad.Text.ParseExpressionToDouble)
+        If sender Is tbCatVoidFrac Then SimObject.CatalystVoidFraction = tbCatVoidFrac.Text.ParseExpressionToDouble
 
         RequestCalc()
 

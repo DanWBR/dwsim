@@ -311,7 +311,7 @@ Public Class EditingForm_Pipe
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
@@ -333,10 +333,10 @@ Public Class EditingForm_Pipe
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-        If sender Is tbOutletPressure Then SimObject.OutletPressure = su.Converter.ConvertToSI(cbPressure.SelectedItem.ToString, tbOutletPressure.Text)
-        If sender Is tbTtol Then SimObject.TolT = su.Converter.ConvertToSI(cbTtol.SelectedItem.ToString, tbTtol.Text)
-        If sender Is tbPtol Then SimObject.TolP = su.Converter.ConvertToSI(cbPtol.SelectedItem.ToString, tbPtol.Text)
+        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
+        If sender Is tbOutletPressure Then SimObject.OutletPressure = su.Converter.ConvertToSI(cbPressure.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)
+        If sender Is tbTtol Then SimObject.TolT = su.Converter.ConvertToSI(cbTtol.SelectedItem.ToString, tbTtol.Text.ParseExpressionToDouble)
+        If sender Is tbPtol Then SimObject.TolP = su.Converter.ConvertToSI(cbPtol.SelectedItem.ToString, tbPtol.Text.ParseExpressionToDouble)
 
         RequestCalc()
 

@@ -346,7 +346,7 @@ Public Class EditingForm_Vessel
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
@@ -368,8 +368,8 @@ Public Class EditingForm_Vessel
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbTemperature Then VesselObject.FlashTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbTemperature.Text)
-        If sender Is tbPressure Then VesselObject.FlashPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbPressure.Text)
+        If sender Is tbTemperature Then VesselObject.FlashTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbTemperature.Text.ParseExpressionToDouble)
+        If sender Is tbPressure Then VesselObject.FlashPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbPressure.Text.ParseExpressionToDouble)
 
         RequestCalc()
 

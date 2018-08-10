@@ -143,11 +143,8 @@ Public Module General
             Return True
         Else
             Try
-                Dim ExpContext As New Ciloci.Flee.ExpressionContext
-                ExpContext.Imports.AddType(GetType(System.Math))
-                ExpContext.Variables.Clear()
-                ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                Dim Expr = ExpContext.CompileGeneric(Of Double)(str)
+                If Not SharedClasses.ExpressionParser.ParserInitialized Then SharedClasses.ExpressionParser.InitializeExpressionParser()
+                Dim Expr = SharedClasses.ExpressionParser.ExpContext.CompileGeneric(Of Double)(str)
                 Expr.Evaluate()
                 Return True
             Catch ex As Exception
@@ -159,11 +156,8 @@ Public Module General
 
     <System.Runtime.CompilerServices.Extension()>
     Public Function ParseExpressionToDouble(str As String) As Double
-        Dim ExpContext As New Ciloci.Flee.ExpressionContext
-        ExpContext.Imports.AddType(GetType(System.Math))
-        ExpContext.Variables.Clear()
-        ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-        Dim Expr = ExpContext.CompileGeneric(Of Double)(str)
+        If Not SharedClasses.ExpressionParser.ParserInitialized Then SharedClasses.ExpressionParser.InitializeExpressionParser()
+        Dim Expr = SharedClasses.ExpressionParser.ExpContext.CompileGeneric(Of Double)(str)
         Return Expr.Evaluate()
     End Function
 

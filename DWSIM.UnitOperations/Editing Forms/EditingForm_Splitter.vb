@@ -255,8 +255,8 @@ Public Class EditingForm_Splitter
                 uobj.OperationMode = UnitOperations.Splitter.OpMode.StreamMoleFlowSpec
         End Select
 
-        If sender Is tbFlowSpec1 Then uobj.StreamFlowSpec = su.Converter.ConvertToSI(cbFlowSpec1.SelectedItem.ToString, tbFlowSpec1.Text)
-        If sender Is tbFlowSpec2 Then uobj.Stream2FlowSpec = su.Converter.ConvertToSI(cbFlowSpec2.SelectedItem.ToString, tbFlowSpec2.Text)
+        If sender Is tbFlowSpec1 Then uobj.StreamFlowSpec = su.Converter.ConvertToSI(cbFlowSpec1.SelectedItem.ToString, tbFlowSpec1.Text.ParseExpressionToDouble)
+        If sender Is tbFlowSpec2 Then uobj.Stream2FlowSpec = su.Converter.ConvertToSI(cbFlowSpec2.SelectedItem.ToString, tbFlowSpec2.Text.ParseExpressionToDouble)
 
         RequestCalc()
 
@@ -272,7 +272,7 @@ Public Class EditingForm_Splitter
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

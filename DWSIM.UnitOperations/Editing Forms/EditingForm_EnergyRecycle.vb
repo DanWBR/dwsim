@@ -123,8 +123,8 @@ Public Class EditingForm_EnergyRecycle
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbET Then SimObject.ConvergenceParameters.Energy = su.Converter.ConvertToSI(cbE.SelectedItem.ToString, tbET.Text)
-     
+        If sender Is tbET Then SimObject.ConvergenceParameters.Energy = su.Converter.ConvertToSI(cbE.SelectedItem.ToString, tbET.Text.ParseExpressionToDouble)
+
     End Sub
 
     Sub RequestCalc()
@@ -137,7 +137,7 @@ Public Class EditingForm_EnergyRecycle
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

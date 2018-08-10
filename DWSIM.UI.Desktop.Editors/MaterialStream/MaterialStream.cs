@@ -21,6 +21,7 @@ using Eto.Drawing;
 using StringResources = DWSIM.UI.Desktop.Shared.StringArrays;
 using DWSIM.Thermodynamics.PropertyPackages;
 using DWSIM.Interfaces.Enums;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -161,10 +162,10 @@ namespace DWSIM.UI.Desktop.Editors
                         s.CreateAndAddTextBoxRow(container, nf, "Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, ms.Phases[0].Properties.temperature.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
-                                                       ms.Phases[0].Properties.temperature = cv.ConvertToSI(su.temperature, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[0].Properties.temperature = cv.ConvertToSI(su.temperature, arg3.Text.ToString().ParseExpressionToDouble());
                                                    }
                                                    else
                                                    {
@@ -175,10 +176,10 @@ namespace DWSIM.UI.Desktop.Editors
                         s.CreateAndAddTextBoxRow(container, nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ms.Phases[0].Properties.pressure.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
-                                                       ms.Phases[0].Properties.pressure = cv.ConvertToSI(su.pressure, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[0].Properties.pressure = cv.ConvertToSI(su.pressure, arg3.Text.ToString().ParseExpressionToDouble());
                                                    }
                                                    else
                                                    {
@@ -189,12 +190,12 @@ namespace DWSIM.UI.Desktop.Editors
                         var txtW = s.CreateAndAddTextBoxRow(container, nf, "Mass Flow (" + su.massflow + ")", cv.ConvertFromSI(su.massflow, ms.Phases[0].Properties.massflow.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
                                                        ms.Phases[0].Properties.volumetric_flow = null;
                                                        ms.Phases[0].Properties.molarflow = null;
-                                                       ms.Phases[0].Properties.massflow = cv.ConvertToSI(su.massflow, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[0].Properties.massflow = cv.ConvertToSI(su.massflow, arg3.Text.ToString().ParseExpressionToDouble());
                                                    }
                                                    else
                                                    {
@@ -205,12 +206,12 @@ namespace DWSIM.UI.Desktop.Editors
                         var txtQ = s.CreateAndAddTextBoxRow(container, nf, "Molar Flow (" + su.molarflow + ")", cv.ConvertFromSI(su.molarflow, ms.Phases[0].Properties.molarflow.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
                                                        ms.Phases[0].Properties.massflow = null;
                                                        ms.Phases[0].Properties.volumetric_flow = null;
-                                                       ms.Phases[0].Properties.molarflow = cv.ConvertToSI(su.molarflow, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[0].Properties.molarflow = cv.ConvertToSI(su.molarflow, arg3.Text.ToString().ParseExpressionToDouble());
                                                    }
                                                    else
                                                    {
@@ -221,12 +222,12 @@ namespace DWSIM.UI.Desktop.Editors
                         s.CreateAndAddTextBoxRow(container, nf, "Volumetric Flow (" + su.volumetricFlow + ")", cv.ConvertFromSI(su.volumetricFlow, ms.Phases[0].Properties.volumetric_flow.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
                                                        ms.Phases[0].Properties.massflow = null;
                                                        ms.Phases[0].Properties.molarflow = null;
-                                                       ms.Phases[0].Properties.volumetric_flow = cv.ConvertToSI(su.volumetricFlow, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[0].Properties.volumetric_flow = cv.ConvertToSI(su.volumetricFlow, arg3.Text.ToString().ParseExpressionToDouble());
                                                    }
                                                    else
                                                    {
@@ -237,10 +238,10 @@ namespace DWSIM.UI.Desktop.Editors
                         s.CreateAndAddTextBoxRow(container, nf, "Vapor Phase Mole Fraction (spec)", ms.Phases[2].Properties.molarfraction.GetValueOrDefault(),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
-                                                       ms.Phases[2].Properties.molarfraction = Double.Parse(arg3.Text.ToString());
+                                                       ms.Phases[2].Properties.molarfraction = arg3.Text.ToString().ParseExpressionToDouble();
                                                    }
                                                    else
                                                    {
@@ -252,10 +253,10 @@ namespace DWSIM.UI.Desktop.Editors
                         s.CreateAndAddTextBoxRow(container, nf, "Specific Enthalpy (" + su.enthalpy + ")", cv.ConvertFromSI(su.enthalpy, ms.Phases[0].Properties.enthalpy.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
-                                                       ms.Phases[0].Properties.enthalpy = cv.ConvertToSI(su.enthalpy, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[0].Properties.enthalpy = cv.ConvertToSI(su.enthalpy, arg3.Text.ToString().ParseExpressionToDouble());
                                                    }
                                                    else
                                                    {
@@ -266,10 +267,10 @@ namespace DWSIM.UI.Desktop.Editors
                         s.CreateAndAddTextBoxRow(container, nf, "Specific Entropy (" + su.entropy + ")", cv.ConvertFromSI(su.entropy, ms.Phases[0].Properties.entropy.GetValueOrDefault()),
                                                (TextBox arg3, EventArgs ev) =>
                                                {
-                                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                                   if (arg3.Text.IsValidDoubleExpression())
                                                    {
                                                        arg3.TextColor = (SystemColors.ControlText);
-                                                       ms.Phases[0].Properties.entropy = cv.ConvertToSI(su.entropy, Double.Parse(arg3.Text.ToString()));
+                                                       ms.Phases[0].Properties.entropy = cv.ConvertToSI(su.entropy, arg3.Text.ToString().ParseExpressionToDouble());
                                                    }
                                                    else
                                                    {

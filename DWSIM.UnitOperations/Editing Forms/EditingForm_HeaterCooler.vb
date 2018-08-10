@@ -339,11 +339,11 @@ Public Class EditingForm_HeaterCooler
             End Select
 
             If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
-            If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text)
-            If sender Is tbOutletTemperature Then uobj.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-            If sender Is tbOutletVapFrac Then uobj.OutletVaporFraction = Double.Parse(tbOutletVapFrac.Text)
-            If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text)
-            If sender Is tbTemperatureChange Then uobj.DeltaT = su.Converter.ConvertToSI(cbDeltaTemp.SelectedItem.ToString, tbTemperatureChange.Text)
+            If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text.ParseExpressionToDouble)
+            If sender Is tbOutletTemperature Then uobj.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
+            If sender Is tbOutletVapFrac Then uobj.OutletVaporFraction = Double.Parse(tbOutletVapFrac.Text.ParseExpressionToDouble)
+            If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text.ParseExpressionToDouble)
+            If sender Is tbTemperatureChange Then uobj.DeltaT = su.Converter.ConvertToSI(cbDeltaTemp.SelectedItem.ToString, tbTemperatureChange.Text.ParseExpressionToDouble)
 
         Else
 
@@ -360,12 +360,12 @@ Public Class EditingForm_HeaterCooler
                     uobj.CalcMode = UnitOperations.Cooler.CalculationMode.OutletVaporFraction
             End Select
 
-            If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
-            If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text)
-            If sender Is tbOutletTemperature Then uobj.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-            If sender Is tbOutletVapFrac Then uobj.OutletVaporFraction = Double.Parse(tbOutletVapFrac.Text)
-            If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text)
-            If sender Is tbTemperatureChange Then uobj.DeltaT = su.Converter.ConvertToSI(cbDeltaTemp.SelectedItem.ToString, tbTemperatureChange.Text)
+            If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text.ParseExpressionToDouble)
+            If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text.ParseExpressionToDouble)
+            If sender Is tbOutletTemperature Then uobj.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
+            If sender Is tbOutletVapFrac Then uobj.OutletVaporFraction = Double.Parse(tbOutletVapFrac.Text.ParseExpressionToDouble)
+            If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text.ParseExpressionToDouble)
+            If sender Is tbTemperatureChange Then uobj.DeltaT = su.Converter.ConvertToSI(cbDeltaTemp.SelectedItem.ToString, tbTemperatureChange.Text.ParseExpressionToDouble)
 
         End If
 
@@ -384,7 +384,7 @@ Public Class EditingForm_HeaterCooler
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

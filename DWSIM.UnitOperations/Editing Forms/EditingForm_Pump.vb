@@ -282,10 +282,10 @@ Public Class EditingForm_Pump
         End Select
 
         If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
-        If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text)
-        If sender Is tbOutletPressure Then uobj.Pout = su.Converter.ConvertToSI(cbPressure.SelectedItem.ToString, tbOutletPressure.Text)
-        If sender Is tbPressureIncr Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureIncr.Text)
-      
+        If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text.ParseExpressionToDouble)
+        If sender Is tbOutletPressure Then uobj.Pout = su.Converter.ConvertToSI(cbPressure.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)
+        If sender Is tbPressureIncr Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureIncr.Text.ParseExpressionToDouble)
+
         RequestCalc()
 
     End Sub
@@ -301,7 +301,7 @@ Public Class EditingForm_Pump
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red

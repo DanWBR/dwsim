@@ -366,7 +366,7 @@ Public Class EditingForm_Column
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
@@ -626,7 +626,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.VaporFlowRate = su.Converter.ConvertToSI(SimObject.VaporFlowRateUnit, tbCondVapFlow.Text)
+            SimObject.VaporFlowRate = su.Converter.ConvertToSI(SimObject.VaporFlowRateUnit, tbCondVapFlow.Text.ParseExpressionToDouble)
 
             RequestCalc()
 
@@ -650,7 +650,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text)
+            SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text.ParseExpressionToDouble)
             SimObject.Stages(SimObject.Stages.Count - 1).P = SimObject.ReboilerPressure
 
             UpdateInfo()
@@ -703,7 +703,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.Specs("R").SpecValue = Double.Parse(tbRebSpecValue.Text)
+            SimObject.Specs("R").SpecValue = Double.Parse(tbRebSpecValue.Text.ParseExpressionToDouble)
 
             RequestCalc()
 
@@ -775,25 +775,25 @@ Public Class EditingForm_Column
 
     Private Sub tb_NS_LowerBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_NS_LowerBound.KeyDown
         If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.NS_LowerBound = tb_NS_LowerBound.Text
+            SimObject.NS_LowerBound = tb_NS_LowerBound.Text.ParseExpressionToDouble
         End If
     End Sub
 
     Private Sub tb_NS_UpperBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_NS_UpperBound.KeyDown
         If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.NS_UpperBound = tb_NS_UpperBound.Text
+            SimObject.NS_UpperBound = tb_NS_UpperBound.Text.ParseExpressionToDouble
         End If
     End Sub
 
     Private Sub tb_IO_LowerBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_IO_LowerBound.KeyDown
         If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.IO_LowerBound = tb_IO_LowerBound.Text
+            SimObject.IO_LowerBound = tb_IO_LowerBound.Text.ParseExpressionToDouble
         End If
     End Sub
 
     Private Sub tb_IO_UpperBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_IO_UpperBound.KeyDown
         If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.IO_UpperBound = tb_IO_UpperBound.Text
+            SimObject.IO_UpperBound = tb_IO_UpperBound.Text.ParseExpressionToDouble
         End If
     End Sub
 
@@ -829,19 +829,19 @@ Public Class EditingForm_Column
 
     Private Sub tb_IO_NumDeriv_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_IO_NumDeriv.KeyDown
         If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.IO_NumericalDerivativeStep = tb_IO_NumDeriv.Text
+            SimObject.IO_NumericalDerivativeStep = tb_IO_NumDeriv.Text.ParseExpressionToDouble
         End If
     End Sub
 
     Private Sub tb_NS_NumDeriv_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_NS_NumDeriv.KeyDown
         If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.SC_NumericalDerivativeStep = tb_NS_NumDeriv.Text
+            SimObject.SC_NumericalDerivativeStep = tb_NS_NumDeriv.Text.ParseExpressionToDouble
         End If
     End Sub
 
     Private Sub tbMaxTChange_KeyDown(sender As Object, e As KeyEventArgs) Handles tbMaxTChange.KeyDown
         If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.MaximumTemperatureStep = su.Converter.ConvertToSI(units.deltaT, tbMaxTChange.Text)
+            SimObject.MaximumTemperatureStep = su.Converter.ConvertToSI(units.deltaT, tbMaxTChange.Text.ParseExpressionToDouble)
         End If
     End Sub
 End Class

@@ -500,7 +500,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
@@ -526,19 +526,19 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Sub UpdateProps(sender As Object)
 
-        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-        If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text)
-        If sender Is txtDampingLowerLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit = txtDampingLowerLimit.Text
-        If sender Is txtDampingUpperLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit = txtDampingUpperLimit.Text
-        If sender Is tbExtLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations = tbExtLoopMaxIts.Text
-        If sender Is tbIntLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations = tbIntLoopMaxIts.Text
-        If sender Is tbExtLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance = tbExtLoopTol.Text
-        If sender Is tbIntLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance = tbIntLoopTol.Text
-        If sender Is tbExtLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations = tbExtLoopMaxItsEq.Text
-        If sender Is tbIntLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations = tbIntLoopMaxItsEq.Text
-        If sender Is tbExtLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance = tbExtLoopTolEq.Text
-        If sender Is tbIntLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance = tbIntLoopTolEq.Text
-        If sender Is tbExtentsInitializer Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer = tbExtentsInitializer.Text
+        If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
+        If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text.ParseExpressionToDouble)
+        If sender Is txtDampingLowerLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit = txtDampingLowerLimit.Text.ParseExpressionToDouble
+        If sender Is txtDampingUpperLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit = txtDampingUpperLimit.Text.ParseExpressionToDouble
+        If sender Is tbExtLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations = tbExtLoopMaxIts.Text.ParseExpressionToDouble
+        If sender Is tbIntLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations = tbIntLoopMaxIts.Text.ParseExpressionToDouble
+        If sender Is tbExtLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance = tbExtLoopTol.Text.ParseExpressionToDouble
+        If sender Is tbIntLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance = tbIntLoopTol.Text.ParseExpressionToDouble
+        If sender Is tbExtLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations = tbExtLoopMaxItsEq.Text.ParseExpressionToDouble
+        If sender Is tbIntLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations = tbIntLoopMaxItsEq.Text.ParseExpressionToDouble
+        If sender Is tbExtLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance = tbExtLoopTolEq.Text.ParseExpressionToDouble
+        If sender Is tbIntLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance = tbIntLoopTolEq.Text.ParseExpressionToDouble
+        If sender Is tbExtentsInitializer Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer = tbExtentsInitializer.Text.ParseExpressionToDouble
 
         RequestCalc()
 

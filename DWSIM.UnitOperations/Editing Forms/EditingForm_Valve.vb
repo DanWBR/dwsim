@@ -260,10 +260,10 @@ Public Class EditingForm_Valve
                 uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
         End Select
 
-        If sender Is tbOutletPressure Then uobj.OutletPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text)
-        If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text)
-        If sender Is tbKv Then uobj.Kv = tbKv.Text
-        If sender Is tbOp Then uobj.OpeningPct = tbOp.Text
+        If sender Is tbOutletPressure Then uobj.OutletPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)
+        If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text.ParseExpressionToDouble)
+        If sender Is tbKv Then uobj.Kv = tbKv.Text.ParseExpressionToDouble
+        If sender Is tbOp Then uobj.OpeningPct = tbOp.Text.ParseExpressionToDouble
 
         RequestCalc()
 
@@ -279,7 +279,7 @@ Public Class EditingForm_Valve
 
         Dim tbox = DirectCast(sender, TextBox)
 
-        If Double.TryParse(tbox.Text, New Double()) Then
+        If tbox.Text.IsValidDoubleExpression Then
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
