@@ -262,6 +262,96 @@ Namespace SystemsOfUnits
 
         End Function
 
+        Public Function GetUnitType(unit As String) As Enums.UnitOfMeasure Implements IUnitsOfMeasure.GetUnitType
+
+            Select Case unit
+                Case "K", "R", "C", "F"
+                    Return Enums.UnitOfMeasure.temperature
+                Case "Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"
+                    Return Enums.UnitOfMeasure.pressure
+                Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"
+                    Return Enums.UnitOfMeasure.massflow
+                Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"
+                    Return Enums.UnitOfMeasure.molarflow
+                Case "m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"
+                    Return Enums.UnitOfMeasure.volumetricFlow
+                Case "kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"
+                    Return Enums.UnitOfMeasure.enthalpy
+                Case "kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"
+                    Return Enums.UnitOfMeasure.entropy
+                Case "kg/kmol", "g/mol", "lbm/lbmol"
+                    Return Enums.UnitOfMeasure.molecularWeight
+                Case "N/m", "dyn/cm", "lbf/in"
+                    Return Enums.UnitOfMeasure.surfaceTension
+                Case "kg/m3", "g/cm3", "lbm/ft3"
+                    Return Enums.UnitOfMeasure.density
+                Case "kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"
+                    Return Enums.UnitOfMeasure.heatCapacityCp
+                Case "W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"
+                    Return Enums.UnitOfMeasure.thermalConductivity
+                Case "m2/s", "cSt", "ft2/s", "mm2/s", "cm2/s"
+                    Return Enums.UnitOfMeasure.cinematic_viscosity
+                Case "kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"
+                    Return Enums.UnitOfMeasure.viscosity
+                Case "Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"
+                    Return Enums.UnitOfMeasure.deltaP
+                Case "C.", "K.", "F.", "R."
+                    Return Enums.UnitOfMeasure.deltaT
+                Case "m", "ft", "cm"
+                    Return Enums.UnitOfMeasure.distance
+                Case "kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"
+                    Return Enums.UnitOfMeasure.heatflow
+                Case "s", "min.", "h"
+                    Return Enums.UnitOfMeasure.time
+                Case "m3", "cm3", "L", "ft3"
+                    Return Enums.UnitOfMeasure.volume
+                Case "m3/kmol", "cm3/mmol", "ft3/lbmol"
+                    Return Enums.UnitOfMeasure.molar_volume
+                Case "m2", "cm2", "ft2"
+                    Return Enums.UnitOfMeasure.area
+                Case "m", "mm", "cm", "in", "ft"
+                    Return Enums.UnitOfMeasure.diameter
+                Case "N", "dyn", "kgf", "lbf"
+                    Return Enums.UnitOfMeasure.force
+                Case "W/[m2.K]", "cal/[cm2.s.C]", "BTU/[ft2.h.R]"
+                    Return Enums.UnitOfMeasure.heat_transf_coeff
+                Case "m/s2", "cm/s2", "ft/s2"
+                    Return Enums.UnitOfMeasure.accel
+                Case "m3/kg", "cm3/g", "ft3/lbm"
+                    Return Enums.UnitOfMeasure.spec_vol
+                Case "kmol/m3", "mol/m3", "mol/L", "mol/cm3", "mol/mL", "lbmol/ft3"
+                    Return Enums.UnitOfMeasure.molar_conc
+                Case "kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"
+                    Return Enums.UnitOfMeasure.mass_conc
+                Case "kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"
+                    Return Enums.UnitOfMeasure.reac_rate
+                Case "kJ/kmol", "cal/mol", "BTU/lbmol"
+                    Return Enums.UnitOfMeasure.molar_enthalpy
+                Case "kJ/[kmol.K]", "cal/[mol.C]", "BTU/[lbmol.R]"
+                    Return Enums.UnitOfMeasure.molar_entropy
+                Case "m/s", "cm/s", "mm/s", "km/h", "ft/h", "ft/min", "ft/s", "in/s"
+                    Return Enums.UnitOfMeasure.velocity
+                Case "K.m2/W", "C.cm2.s/cal", "ft2.h.F/BTU"
+                    Return Enums.UnitOfMeasure.foulingfactor
+                Case "m/kg", "ft/lbm", "cm/g"
+                    Return Enums.UnitOfMeasure.cakeresistance
+                Case "m-1", "cm-1", "ft-1"
+                    Return Enums.UnitOfMeasure.mediumresistance
+                Case "kg", "g", "lb"
+                    Return Enums.UnitOfMeasure.mass
+                Case "K/Pa", "F/psi", "C/atm"
+                    Return Enums.UnitOfMeasure.jouleThomsonCoefficient
+                Case "1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"
+                    Return Enums.UnitOfMeasure.compressibility
+                Case "kmol/[kg.s]", "kmol/[kg.min.]", "kmol/[kg.h]", "mol/[kg.s]", "mol/[kg.min.]", "mol/[kg.h]", "lbmol/[lbm.h]"
+                    Return Enums.UnitOfMeasure.reac_rate_heterog
+                Case Else
+                    Return Enums.UnitOfMeasure.none
+            End Select
+
+        End Function
+
+
     End Class
 
     <System.Serializable()> Public Class SI

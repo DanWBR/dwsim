@@ -74,7 +74,7 @@ Namespace GraphicObjects.Tables
 
             Dim zoom As Single = AdditionalInfo
 
-            If zoom = 0 Then Exit Sub
+            If zoom = 0.0 Then Exit Sub
 
             Padding = 4 / zoom * GlobalSettings.Settings.DpiScale
 
@@ -361,7 +361,7 @@ Namespace GraphicObjects.Tables
                         Dim sumL = maxL1 + maxL2 + maxL3
                         Dim sumL2 = maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9
 
-                        If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
+                        'If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
 
                         If maxH = 0 Then maxH = 20.0
 

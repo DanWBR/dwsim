@@ -165,6 +165,7 @@ Namespace Enums
         volume
         volumetricFlow
         diffusivity
+        none
 
     End Enum
 

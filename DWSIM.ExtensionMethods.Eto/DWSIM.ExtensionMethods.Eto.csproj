@@ -69,6 +69,14 @@
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\DWSIM_ico.ico" />

@@ -1,7 +1,4 @@
-Version 5.2 Update 12
+Version 5.2 Update 13
 
-- [NEW] New Kv calculation mode for Valve model
-- [NEW] User-Defined Pipe Wall Material
-- [NEW] Unit locking mode for Spreadsheet (Classic UI)
-- [FIX] Fixed a bug with Pump calculations
-- [FIX] Fixed simulation comments not restoring correctly on Classic UI
+- [NEW] Enhancements to input textboxes
+- [NEW] Enter math expressions on input textboxes
