@@ -9,7 +9,7 @@ Imports DWSIM.DrawingTools.Point
 
 Public Class GraphicsSurface
 
-    Private DrawingCanvas As SKCanvas
+    Public DrawingCanvas As SKCanvas
 
 #Region "Events"
 
