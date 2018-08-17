@@ -35,6 +35,7 @@ namespace DWSIM.UI.Desktop
                 CudafyModes.Target = (eGPUType)Settings.CudafyTarget;
                 Cudafy.Translator.CudafyTranslator.GenerateDebug = false;
                 if (GlobalSettings.Settings.EnableGPUProcessing) DWSIM.Thermodynamics.Calculator.InitComputeDevice();
+                Console.WriteLine("GPU initialized successfully: " + Settings.SelectedGPU + "(" + CudafyModes.Target.ToString() +")");
             }
             catch (Exception ex)
             {

@@ -97,9 +97,8 @@ namespace DWSIM.UI.Forms.Forms
             tab1.CreateAndAddDescriptionRow("Requests a flowsheet calculation after an object property is changed/updated on the editor.");
 
             var tab2a = Common.GetDefaultContainer();
-            tab2a.Tag = "Inspector".Localize(prefix);
+            tab2a.Tag = "Inspector";
             
-            tab2a.CreateAndAddLabelRow("Solution Inspector");
             tab2a.CreateAndAddCheckBoxRow("Enable Inspector Reports", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
             tab2a.CreateAndAddDescriptionRow("Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector tool to view these reports.");
             tab2a.CreateAndAddDescriptionRow("When the Inspector Reports feature is enabled and the Flowsheet Solver is called, the Parallel CPU Processing is automatically disabled. You must re-enable it manually and disable the Inspector to increase the calculation speed again.");
@@ -335,7 +334,7 @@ namespace DWSIM.UI.Forms.Forms
                 if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
             });
 
-            return Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab3, tab4, tab5 });
+            return Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a,tab3, tab4, tab5 });
 
         }
 
