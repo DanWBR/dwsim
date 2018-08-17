@@ -650,7 +650,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub srk_gpu_sum1(thread As Cudafy.GThread, alpha As Double(), ai As Double(), bi As Double(), Tc As Double(), Pc As Double(), W As Double(), T As Double)
+        <Cudafy.Cudafy()> Public Shared Sub srk_gpu_sum1(thread As Cudafy.GThread, alpha As Double(), ai As Double(), bi As Double(), Tc As Double(), Pc As Double(), W As Double(), T As Double)
 
             Dim i As Integer = thread.blockIdx.x
 
@@ -661,7 +661,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub srk_gpu_sum2(thread As Cudafy.GThread, a As Double(,), ai As Double(), VKij As Double(,))
+        <Cudafy.Cudafy()> Public Shared Sub srk_gpu_sum2(thread As Cudafy.GThread, a As Double(,), ai As Double(), VKij As Double(,))
 
             Dim i As Integer = thread.blockIdx.x
             Dim j As Integer = thread.blockIdx.y
@@ -670,7 +670,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub srk_gpu_sum3(thread As Cudafy.GThread, Vx As Double(), a As Double(,), aml_temp As Double(), aml2_temp As Double())
+        <Cudafy.Cudafy()> Public Shared Sub srk_gpu_sum3(thread As Cudafy.GThread, Vx As Double(), a As Double(,), aml_temp As Double(), aml2_temp As Double())
 
             Dim i As Integer = thread.blockIdx.x
 
@@ -683,7 +683,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub srk_gpu_sum4(thread As Cudafy.GThread, Vx As Double(), bi As Double(), bml_temp As Double())
+        <Cudafy.Cudafy()> Public Shared Sub srk_gpu_sum4(thread As Cudafy.GThread, Vx As Double(), bi As Double(), bml_temp As Double())
 
             Dim i As Integer = thread.blockIdx.x
 

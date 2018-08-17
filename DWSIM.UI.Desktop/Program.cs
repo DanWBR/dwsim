@@ -4,6 +4,8 @@ using DWSIM.UI.Controls;
 using Eto.Forms;
 using DWSIM.GlobalSettings;
 using Eto.Forms.Controls.SkiaSharp.Shared;
+using Cudafy;
+using System.Reflection;
 
 namespace DWSIM.UI.Desktop
 {
@@ -25,6 +27,30 @@ namespace DWSIM.UI.Desktop
             Settings.OldUI = false;
 
             Settings.LoadSettings("dwsim_newui.ini");
+
+            // initialize gpu if enabled
+            try {
+                //set CUDA params
+                CudafyModes.Compiler = eGPUCompiler.All;
+                CudafyModes.Target = (eGPUType)Settings.CudafyTarget;
+                Cudafy.Translator.CudafyTranslator.GenerateDebug = false;
+                if (GlobalSettings.Settings.EnableGPUProcessing) DWSIM.Thermodynamics.Calculator.InitComputeDevice();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GPU initialization failed: " + ex.ToString());
+                var ex1 = ex;
+                while (ex1.InnerException != null)
+                {
+                    Console.WriteLine("GPU initialization failed (IEX): " + ex1.InnerException.ToString());
+                    if (ex1.InnerException is ReflectionTypeLoadException)
+                    {
+                        foreach (var tlex in ((ReflectionTypeLoadException)(ex1.InnerException)).LoaderExceptions)
+                        { Console.WriteLine("GPU initialization failed (TLEX): " + tlex.Message); }
+                    }
+                    ex1 = ex1.InnerException;
+                }
+            }
 
             Eto.Platform platform = null;
 

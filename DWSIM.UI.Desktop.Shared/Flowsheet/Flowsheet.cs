@@ -64,7 +64,6 @@ namespace DWSIM.UI.Desktop.Shared
             if (!SupressMessages)
             {
                 if (listeningaction != null) listeningaction(text, mtype);
-                //Console.WriteLine(text);
             }
         }
 

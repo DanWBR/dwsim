@@ -479,12 +479,9 @@ Public Class FormOptions
 
             End Try
             If loaded Then
-                If Not Settings.gpu Is Nothing Then
-                    Settings.gpu.Dispose()
-                    Settings.gpu = Nothing
-                Else
-                    Calculator.InitComputeDevice()
-                End If
+                If Settings.gpu IsNot Nothing Then Settings.gpu.Dispose()
+                Settings.gpu = Nothing
+                Calculator.InitComputeDevice()
             End If
         End If
     End Sub

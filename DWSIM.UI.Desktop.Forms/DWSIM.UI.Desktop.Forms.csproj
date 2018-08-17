@@ -77,6 +77,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
     </Reference>
+    <Reference Include="Cudafy.NET, Version=1.28.5482.15045, Culture=neutral, PublicKeyToken=63a4c9931616906b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Cudafy.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Eto, Version=2.4.6782.27823, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Forms.2.5.0-build1496\lib\netstandard1.0\Eto.dll</HintPath>
     </Reference>

@@ -137,8 +137,10 @@ Public Class Calculator
                                         GetType(PropertyPackages.ThermoPlugs.SRK))
                             Settings.gpumod.Serialize("cudacode.cdfy")
                         Case 2
-                            Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
-                                        GetType(PropertyPackages.ThermoPlugs.PR),
+                            'Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker),
+                            '            GetType(PropertyPackages.ThermoPlugs.PR),
+                            '            GetType(PropertyPackages.ThermoPlugs.SRK))
+                            Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.ThermoPlugs.PR),
                                         GetType(PropertyPackages.ThermoPlugs.SRK))
                     End Select
                 End If

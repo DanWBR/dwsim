@@ -1,4 +1,4 @@
-Version 5.2 Update 13
+Version 5.2 Update 14
 
-- [NEW] Enhancements to input textboxes
-- [NEW] Enter math expressions on input textboxes
+- [NEW] Added support for OpenCL GPU acceleration on macOS and Linux
+- [FIX] Fixed Classic UI Material Stream Editor

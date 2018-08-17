@@ -648,10 +648,10 @@ Namespace PropertyPackages.ThermoPlugs
             gpu.CopyToDevice(bml_temp, dev_bml_temp)
 
             ' launch subs
-            gpu.Launch(n + 1, 1).pr_gpu_sum1(dev_alpha, dev_ai, dev_bi, dev_Tc, dev_Pc, dev_W, T)
-            gpu.Launch(New dim3(n + 1, n + 1), 1).pr_gpu_sum2(dev_a, dev_ai, dev_vkij)
-            gpu.Launch(n + 1, 1).pr_gpu_sum3(dev_Vx, dev_a, dev_aml_temp, dev_aml2_temp)
-            gpu.Launch(n + 1, 1).pr_gpu_sum4(dev_Vx, dev_bi, dev_bml_temp)
+            gpu.Launch(n + 1, 1, "pr_gpu_sum1", dev_alpha, dev_ai, dev_bi, dev_Tc, dev_Pc, dev_W, T)
+            gpu.Launch(New dim3(n + 1, n + 1), 1, "pr_gpu_sum2", dev_a, dev_ai, dev_vkij)
+            gpu.Launch(n + 1, 1, "pr_gpu_sum3", dev_Vx, dev_a, dev_aml_temp, dev_aml2_temp)
+            gpu.Launch(n + 1, 1, "pr_gpu_sum4", dev_Vx, dev_bi, dev_bml_temp)
 
             ' copy the arrays back from the GPU to the CPU
             gpu.CopyFromDevice(dev_alpha, alpha)
@@ -685,7 +685,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub pr_gpu_sum1(thread As Cudafy.GThread, alpha As Double(), ai As Double(), bi As Double(), Tc As Double(), Pc As Double(), W As Double(), T As Double)
+        <Cudafy.Cudafy()> Public Shared Sub pr_gpu_sum1(thread As Cudafy.GThread, alpha As Double(), ai As Double(), bi As Double(), Tc As Double(), Pc As Double(), W As Double(), T As Double)
 
             Dim i As Integer = thread.blockIdx.x
 
@@ -695,7 +695,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub pr_gpu_sum2(thread As Cudafy.GThread, a As Double(,), ai As Double(), VKij As Double(,))
+        <Cudafy.Cudafy()> Public Shared Sub pr_gpu_sum2(thread As Cudafy.GThread, a As Double(,), ai As Double(), VKij As Double(,))
 
             Dim i As Integer = thread.blockIdx.x
             Dim j As Integer = thread.blockIdx.y
@@ -704,7 +704,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub pr_gpu_sum3(thread As Cudafy.GThread, Vx As Double(), a As Double(,), aml_temp As Double(), aml2_temp As Double())
+        <Cudafy.Cudafy()> Public Shared Sub pr_gpu_sum3(thread As Cudafy.GThread, Vx As Double(), a As Double(,), aml_temp As Double(), aml2_temp As Double())
 
             Dim i As Integer = thread.blockIdx.x
 
@@ -717,7 +717,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        <Cudafy.Cudafy()> Private Shared Sub pr_gpu_sum4(thread As Cudafy.GThread, Vx As Double(), bi As Double(), bml_temp As Double())
+        <Cudafy.Cudafy()> Public Shared Sub pr_gpu_sum4(thread As Cudafy.GThread, Vx As Double(), bi As Double(), bml_temp As Double())
 
             Dim i As Integer = thread.blockIdx.x
 
