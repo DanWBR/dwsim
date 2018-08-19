@@ -6,7 +6,7 @@ Imports System.Xml.Serialization
 
 Namespace PropertyGridEx
 
-    <Serializable(), XmlRootAttribute("CustomProperty")> _
+    <Serializable(), XmlRootAttribute("CustomProperty")>
     Public Class CustomProperty
 
 #Region "Protected variables"
@@ -207,11 +207,11 @@ Namespace PropertyGridEx
 
 #Region "Public properties"
 
-        <Category("Appearance"), _
-         DisplayName("Name"), _
-         DescriptionAttribute("Display Name of the CustomProperty."), _
-         ParenthesizePropertyName(True), _
-         XmlElementAttribute("Name")> _
+        <Category("Appearance"),
+         DisplayName("Name"),
+         DescriptionAttribute("Display Name of the CustomProperty."),
+         ParenthesizePropertyName(True),
+         XmlElementAttribute("Name")>
         Public Property Name() As String
             Get
                 Return sName
@@ -221,10 +221,10 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Appearance"), _
-         DisplayName("ReadOnly"), _
-         DescriptionAttribute("Set read only attribute of the CustomProperty."), _
-         XmlElementAttribute("ReadOnly")> _
+        <Category("Appearance"),
+         DisplayName("ReadOnly"),
+         DescriptionAttribute("Set read only attribute of the CustomProperty."),
+         XmlElementAttribute("ReadOnly")>
         Public Property IsReadOnly() As Boolean
             Get
                 Return bIsReadOnly
@@ -234,8 +234,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Appearance"), _
-         DescriptionAttribute("Set visibility attribute of the CustomProperty.")> _
+        <Category("Appearance"),
+         DescriptionAttribute("Set visibility attribute of the CustomProperty.")>
         Public Property Visible() As Boolean
             Get
                 Return bVisible
@@ -245,8 +245,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Appearance"), _
-         DescriptionAttribute("Represent the Value of the CustomProperty.")> _
+        <Category("Appearance"),
+         DescriptionAttribute("Represent the Value of the CustomProperty.")>
         Public Property Value() As Object
             Get
                 If bRef Then
@@ -273,7 +273,7 @@ Namespace PropertyGridEx
                         If Not method Is Nothing Then
                             method.SetValue(oRef, value)
                         Else
-                            oRef.GetType().GetProperty(sProp).SetValue( oRef, value, Nothing)
+                            oRef.GetType().GetProperty(sProp).SetValue(oRef, value, Nothing)
                         End If
                     End If
                 Else
@@ -282,8 +282,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Appearance"), _
-         DescriptionAttribute("Set description associated with the CustomProperty.")> _
+        <Category("Appearance"),
+         DescriptionAttribute("Set description associated with the CustomProperty.")>
         Public Property Description() As String
             Get
                 Return sDescription
@@ -293,8 +293,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Appearance"), _
-         DescriptionAttribute("Set category associated with the CustomProperty.")> _
+        <Category("Appearance"),
+         DescriptionAttribute("Set category associated with the CustomProperty.")>
         Public Property Category() As String
             Get
                 Return sCategory
@@ -304,7 +304,7 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public ReadOnly Property Type() As System.Type
             Get
                 If Value IsNot Nothing Then
@@ -319,7 +319,7 @@ Namespace PropertyGridEx
             End Get
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property Attributes() As AttributeCollection
             Get
                 Return oCustomAttributes
@@ -329,9 +329,9 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Behavior"), _
-         DescriptionAttribute("Indicates if the property is browsable or not."), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Behavior"),
+         DescriptionAttribute("Indicates if the property is browsable or not."),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property IsBrowsable() As Boolean
             Get
                 Return bIsBrowsable
@@ -344,11 +344,11 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Appearance"), _
-         DisplayName("Parenthesize"), _
-         DescriptionAttribute("Indicates whether the name of the associated property is displayed with parentheses in the Properties window."), _
-         DefaultValue(False), _
-         XmlElementAttribute("Parenthesize")> _
+        <Category("Appearance"),
+         DisplayName("Parenthesize"),
+         DescriptionAttribute("Indicates whether the name of the associated property is displayed with parentheses in the Properties window."),
+         DefaultValue(False),
+         XmlElementAttribute("Parenthesize")>
         Public Property Parenthesize() As Boolean
             Get
                 Return bParenthesize
@@ -359,9 +359,9 @@ Namespace PropertyGridEx
         End Property
 
 
-        <Category("Behavior"), _
-         DescriptionAttribute("Indicates the style of the label when a property is browsable."), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Behavior"),
+         DescriptionAttribute("Indicates the style of the label when a property is browsable."),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property BrowsableLabelStyle() As BrowsableTypeConverter.LabelStyle
             Get
                 Return eBrowsablePropertyLabel
@@ -371,15 +371,15 @@ Namespace PropertyGridEx
                 If value <> eBrowsablePropertyLabel Then Update = True
                 eBrowsablePropertyLabel = value
                 If Update Then
-                    Dim style As New BrowsableTypeConverter.BrowsableLabelStyleAttribute(Value)
+                    Dim style As New BrowsableTypeConverter.BrowsableLabelStyleAttribute(value)
                     oCustomAttributes = New AttributeCollection(New Attribute() {style})
                 End If
             End Set
         End Property
 
-        <Category("Behavior"), _
-         DescriptionAttribute("Indicates if the property is masked or not."), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Behavior"),
+         DescriptionAttribute("Indicates if the property is masked or not."),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property IsPassword() As Boolean
             Get
                 Return bIsPassword
@@ -389,9 +389,9 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Behavior"), _
-         DescriptionAttribute("Indicates if the property represents a value in percentage."), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Behavior"),
+         DescriptionAttribute("Indicates if the property represents a value in percentage."),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property IsPercentage() As Boolean
             Get
                 Return bIsPercentage
@@ -401,9 +401,9 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Behavior"), _
-         DescriptionAttribute("Indicates if the property uses a FileNameEditor converter."), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Behavior"),
+         DescriptionAttribute("Indicates if the property uses a FileNameEditor converter."),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property UseFileNameEditor() As Boolean
             Get
                 Return bUseFileNameEditor
@@ -413,9 +413,9 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Behavior"), _
-         DescriptionAttribute("Apply a filter to FileNameEditor converter."), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Behavior"),
+         DescriptionAttribute("Apply a filter to FileNameEditor converter."),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property FileNameFilter() As String
             Get
                 Return sFilter
@@ -428,9 +428,9 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Behavior"), _
-         DescriptionAttribute("DialogType of the FileNameEditor."), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Behavior"),
+         DescriptionAttribute("DialogType of the FileNameEditor."),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property FileNameDialogType() As UIFilenameEditor.FileDialogType
             Get
                 Return eDialogType
@@ -443,9 +443,9 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Behavior"), _
-         DescriptionAttribute("Custom Choices list."), _
-         XmlIgnore()> _
+        <Category("Behavior"),
+         DescriptionAttribute("Custom Choices list."),
+         XmlIgnore()>
         Public Property Choices() As CustomChoices
             Get
                 Return oChoices
@@ -456,8 +456,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Databinding"), _
-         XmlIgnore()> _
+        <Category("Databinding"),
+         XmlIgnore()>
         Public Property Datasource() As Object
             Get
                 Return oDatasource
@@ -468,8 +468,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Databinding"), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Databinding"),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property ValueMember() As String
             Get
                 Return sValueMember
@@ -480,8 +480,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Databinding"), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Databinding"),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property DisplayMember() As String
             Get
                 Return sDisplayMember
@@ -492,8 +492,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Databinding"), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Databinding"),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property SelectedValue() As Object
             Get
                 Return oSelectedValue
@@ -503,8 +503,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Databinding"), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Databinding"),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property SelectedItem() As Object
             Get
                 Return oSelectedItem
@@ -514,8 +514,8 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <Category("Databinding"), _
-         XmlElementAttribute(IsNullable:=False)> _
+        <Category("Databinding"),
+         XmlElementAttribute(IsNullable:=False)>
         Public Property IsDropdownResizable() As Boolean
             Get
                 Return bIsDropdownResizable
@@ -526,7 +526,7 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property CustomEditor() As UITypeEditor
             Get
                 Return oCustomEditor
@@ -536,7 +536,7 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property CustomTypeConverter() As TypeConverter
             Get
                 Return oCustomTypeConverter
@@ -546,7 +546,7 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property Tag() As Object
             Get
                 Return oTag
@@ -556,13 +556,13 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property Tag2() As Object
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property Tag3() As Object
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property DefaultValue() As Object
             Get
                 Return oDefaultValue
@@ -572,7 +572,7 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property DefaultType() As Type
             Get
                 Return oDefaultType
@@ -582,7 +582,7 @@ Namespace PropertyGridEx
             End Set
         End Property
 
-        <XmlIgnore()> _
+        <XmlIgnore()>
         Public Property OnClick() As UICustomEventEditor.OnClick
             Get
                 Return MethodDelegate
@@ -651,7 +651,7 @@ Namespace PropertyGridEx
 
             Public Overrides Function ShouldSerializeValue(ByVal component As Object) As Boolean
                 Dim oValue As Object = oCustomProperty.Value
-                If oCustomProperty.DefaultValue IsNot Nothing AndAlso _
+                If oCustomProperty.DefaultValue IsNot Nothing AndAlso
                    oValue IsNot Nothing Then
                     Return Not oValue.Equals(oCustomProperty.DefaultValue)
                 Else

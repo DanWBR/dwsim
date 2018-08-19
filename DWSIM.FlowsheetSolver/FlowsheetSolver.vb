@@ -918,7 +918,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
     ''' <param name="mode">0 = Main Thread, 1 = Background Thread, 2 = Background Parallel Threads, 3 = Azure Service Bus, 4 = Network Computer</param>
     ''' <param name="ts">CancellationTokenSource instance from main flowsheet when calculating subflowsheets.</param>
     ''' <remarks></remarks>
-    Public Shared Function SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False) As List(Of Exception)
+    Public Shared Function SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing,
+                                          Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False,
+                                          Optional ByVal FinishSuccess As Action = Nothing,
+                                          Optional ByVal FinishWithErrors As Action = Nothing,
+                                          Optional ByVal FinishAny As Action = Nothing) As List(Of Exception)
 
         Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
 
@@ -1411,13 +1415,19 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             IObj?.Close()
 
+            FinishAny?.Invoke()
+
             If age Is Nothing Then
+                FinishSuccess?.Invoke()
                 Return New List(Of Exception)
             Else
+                FinishWithErrors?.Invoke()
                 Return age.InnerExceptions.ToList()
             End If
 
         Else
+
+            FinishAny?.Invoke()
 
             Return New List(Of Exception)
 
