@@ -216,7 +216,7 @@ namespace DWSIM.UI.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error saving file", ex.ToString(), MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                    MessageBox.Show(ex.ToString(),"Error saving file", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
                 }
             };
 

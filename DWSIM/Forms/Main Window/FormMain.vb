@@ -2782,7 +2782,7 @@ Label_00CC:
                         Try
                             'SaveF(form2.Options.FilePath, form2)
                         Catch ex As Exception
-                            MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageBox.Show(DWSIM.App.GetLocalString("Erro"), ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Finally
                             'Me.ToolStripStatusLabel1.Text = ""
                         End Try

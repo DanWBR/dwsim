@@ -54,9 +54,8 @@
     <Reference Include="Eto.WinForms, Version=2.4.6782.27851, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Windows.2.5.0-build1496\lib\net45\Eto.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.CAPEOPEN110">
       <HintPath>..\DWSIM\References\Interop.CAPEOPEN110.dll</HintPath>
