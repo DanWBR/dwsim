@@ -6994,7 +6994,32 @@ Final3:
 
         Public Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
-            Return SimpsonIntegrator.Integrate(Function(x) AUX_CPi(subst, x), T1, T2, 0.01)
+            If Settings.EnableParallelProcessing Then
+
+                Dim nsteps As Integer = Math.Abs(T2 - T1) / 20
+
+                If nsteps < 20 Then nsteps = 20
+
+                Dim deltaT As Double = (T2 - T1) / nsteps
+
+                Dim Ti As Double
+
+                Ti = T1 + deltaT / 2
+
+                Dim integrals(nsteps - 1) As Double
+                Parallel.For(0, nsteps, Sub(ii)
+                                            integrals(ii) = AUX_CPi(subst, Ti + ii * deltaT)
+                                        End Sub)
+
+                Dim outval = integrals.SumY * deltaT
+
+                Return outval
+
+            Else
+
+                Return SimpsonIntegrator.Integrate(Function(x) AUX_CPi(subst, x), T1, T2, 0.01)
+
+            End If
 
         End Function
 
@@ -7023,7 +7048,32 @@ Final3:
 
         Public Function AUX_INT_CPDT_Ti(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
-            Return SimpsonIntegrator.Integrate(Function(x) AUX_CPi(subst, x) / x, T1, T2, 0.01)
+            If Settings.EnableParallelProcessing Then
+
+                Dim nsteps As Integer = Math.Abs(T2 - T1) / 20
+
+                If nsteps < 20 Then nsteps = 20
+
+                Dim deltaT As Double = (T2 - T1) / nsteps
+
+                Dim Ti As Double
+
+                Ti = T1 + deltaT / 2
+
+                Dim integrals(nsteps - 1) As Double
+                Parallel.For(0, nsteps, Sub(ii)
+                                            integrals(ii) = AUX_CPi(subst, Ti + ii * deltaT) / (Ti + ii * deltaT)
+                                        End Sub)
+
+                Dim outval = integrals.SumY * deltaT
+
+                Return outval
+
+            Else
+
+                Return SimpsonIntegrator.Integrate(Function(x) AUX_CPi(subst, x) / x, T1, T2, 0.01)
+
+            End If
 
         End Function
 
@@ -7372,31 +7422,13 @@ Final3:
 
         Public Function RET_VMOL(ByVal Phase As Phase) As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val(i) = subst.MoleFraction.GetValueOrDefault
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
 
         End Function
 
         Public Function RET_VMM() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.Molar_Weight
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Molar_Weight).ToArray
 
         End Function
 
@@ -7423,104 +7455,43 @@ Final3:
 
         Public Function RET_VTC() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.Critical_Temperature
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Critical_Temperature).ToArray
 
         End Function
 
         Public Function RET_VTF() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.TemperatureOfFusion
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.TemperatureOfFusion).ToArray
 
         End Function
 
         Public Function RET_VHF() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.EnthalpyOfFusionAtTf
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.EnthalpyOfFusionAtTf).ToArray
 
         End Function
 
         Public Function RET_VTB() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.Normal_Boiling_Point
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Normal_Boiling_Point).ToArray
 
         End Function
 
         Public Function RET_VPC() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Critical_Pressure).ToArray
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.Critical_Pressure
-                i += 1
-            Next
-
-            Return val
         End Function
 
         Public Function RET_VZC() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.Critical_Compressibility
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Critical_Compressibility).ToArray
 
         End Function
 
         Public Function RET_VZRa() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.Z_Rackett
-                i += 1
-            Next
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Z_Rackett).ToArray
 
         End Function
 
@@ -7545,16 +7516,7 @@ Final3:
 
         Public Function RET_VW() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As Interfaces.ICompound
-            Dim i As Integer = 0
-
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = subst.ConstantProperties.Acentric_Factor
-                i += 1
-            Next
-
-            Return val
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Acentric_Factor).ToArray
 
         End Function
 

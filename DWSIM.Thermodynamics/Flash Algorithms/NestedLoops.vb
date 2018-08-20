@@ -2211,12 +2211,28 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             _Hl = 0.0#
 
             Dim mmg, mml As Double
-            IObj?.SetCurrent()
-            If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
-            IObj?.SetCurrent()
-            If L > 0 Then _Hl = PP.DW_CalcEnthalpy(Vx, T, P, State.Liquid)
+
             mmg = PP.AUX_MMM(Vy)
             mml = PP.AUX_MMM(Vx)
+
+            If Settings.EnableParallelProcessing Then
+
+                Dim t1 = Task.Factory.StartNew(Sub() If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor))
+
+                Dim t2 = Task.Factory.StartNew(Sub() If L > 0 Then _Hl = PP.DW_CalcEnthalpy(Vx, T, P, State.Liquid))
+
+                Task.WaitAll(t1, t2)
+
+            Else
+
+                IObj?.SetCurrent()
+
+                If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
+
+                IObj?.SetCurrent()
+                If L > 0 Then _Hl = PP.DW_CalcEnthalpy(Vx, T, P, State.Liquid)
+
+            End If
 
             Dim herr As Double = Hf - (mmg * V / (mmg * V + mml * L)) * _Hv - (mml * L / (mmg * V + mml * L)) * _Hl
             OBJ_FUNC_PH_FLASH = {herr, T, V, L, Vy, Vx}
@@ -2266,10 +2282,25 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             _Sl = 0.0#
             Dim mmg, mml As Double
 
-            If V > 0 Then _Sv = PP.DW_CalcEntropy(Vy, T, P, State.Vapor)
-            If L > 0 Then _Sl = PP.DW_CalcEntropy(Vx, T, P, State.Liquid)
             mmg = PP.AUX_MMM(Vy)
             mml = PP.AUX_MMM(Vx)
+
+            If Settings.EnableParallelProcessing Then
+
+                Dim t1 = Task.Factory.StartNew(Sub() If V > 0 Then _Sv = PP.DW_CalcEntropy(Vy, T, P, State.Vapor))
+
+                Dim t2 = Task.Factory.StartNew(Sub() If L > 0 Then _Sl = PP.DW_CalcEntropy(Vx, T, P, State.Liquid))
+
+                Task.WaitAll(t1, t2)
+
+            Else
+
+                IObj?.SetCurrent()
+                If V > 0 Then _Sv = PP.DW_CalcEntropy(Vy, T, P, State.Vapor)
+                IObj?.SetCurrent()
+                If L > 0 Then _Sl = PP.DW_CalcEntropy(Vx, T, P, State.Liquid)
+
+            End If
 
             Dim serr As Double = Sf - (mmg * V / (mmg * V + mml * L)) * _Sv - (mml * L / (mmg * V + mml * L)) * _Sl
             OBJ_FUNC_PS_FLASH = {serr, T, V, L, Vy, Vx}

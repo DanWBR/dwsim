@@ -192,7 +192,7 @@ Namespace GraphicObjects
 
         End Sub
 
-        Public Sub DrawRoundRect(ByVal g As Graphics, ByVal p As Pen, ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer, ByVal radius As Integer, ByVal myBrush As Brush)
+        Public Sub DrawRoundRect(ByVal g As Graphics, ByVal p As Pen, ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer, ByVal radius As Single, ByVal myBrush As Brush)
 
             If width / 2 < radius Then
                 radius = width / 2 - 2
