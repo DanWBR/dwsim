@@ -842,7 +842,6 @@ Namespace UnitOperations
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = myuo
                     Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, IFlowsheet.MessageType.Warning)
-                    Throw
                 End Try
                 UpdateParams()
                 UpdatePorts()
