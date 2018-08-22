@@ -18,33 +18,23 @@
 'Imports DWSIM.SimulationObjects
 Imports System.ComponentModel
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports System.Runtime.Serialization.Formatters
-Imports System.Runtime.Serialization
 Imports System.IO
 Imports System.Linq
-Imports ICSharpCode.SharpZipLib.Core
-Imports ICSharpCode.SharpZipLib.Zip
 Imports WeifenLuo.WinFormsUI.Docking
-Imports WeifenLuo.WinFormsUI
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Runtime.Serialization.Formatters.Binary
-Imports DWSIM.DrawingTools
-Imports Infralution.Localization
 Imports System.Globalization
 Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 Imports System.Threading.Tasks
-Imports System.Xml.Serialization
-Imports System.Xml
 Imports System.Reflection
 Imports Microsoft.Win32
 Imports System.Text
-Imports System.Xml.Linq
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports System.Net
 Imports DWSIM.GraphicObjects
 Imports DWSIM.SharedClasses.Extras
 Imports System.Dynamic
 Imports DWSIM.SharedClasses.Flowsheet.Optimization
+Imports ICSharpCode.SharpZipLib.Zip
 
 Public Class FormMain
 
@@ -73,6 +63,9 @@ Public Class FormMain
 
     Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
     Public WithEvents timer1 As New Timer
+
+    Public calculatorassembly, unitopassembly As Assembly
+    Public aTypeList As New List(Of Type)
 
 #Region "    Form Events"
 
@@ -193,6 +186,12 @@ Public Class FormMain
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         If GlobalSettings.Settings.OldUI Then
+
+            calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+            unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
+
+            aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
             My.Application.MainThreadId = Threading.Thread.CurrentThread.ManagedThreadId
 
@@ -1336,18 +1335,6 @@ Public Class FormMain
             xdoc = XDocument.Load(fstr)
         End Using
 
-        'For Each xel1 As XElement In xdoc.Descendants
-        '    SharedClasses.Utility.UpdateElement(xel1)
-        '    SharedClasses.Utility.UpdateElementFromNewUI(xel1)
-        'Next
-
-        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                               SharedClasses.Utility.UpdateElement(xel1)
-                                               SharedClasses.Utility.UpdateElementFromNewUI(xel1)
-                                           End Sub)
-
-        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
-
         Try
             If My.Settings.SimulationUpgradeWarning Then
                 Dim versiontext = xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value
@@ -1359,6 +1346,38 @@ Public Class FormMain
             End If
         Catch ex As Exception
         End Try
+
+        'check version
+
+        Dim sver = New Version("1.0.0.0")
+
+        Try
+            sver = New Version(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value)
+        Catch ex As Exception
+        End Try
+
+        If sver < New Version("5.0.0.0") Then
+            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                   SharedClasses.Utility.UpdateElement(xel1)
+                                               End Sub)
+        End If
+
+        'check saved from Classic UI
+
+        Dim savedfromclui As Boolean = False
+
+        Try
+            savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
+        Catch ex As Exception
+        End Try
+
+        If Not savedfromclui Then
+            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                   SharedClasses.Utility.UpdateElementFromNewUI(xel1)
+                                               End Sub)
+        End If
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
         Dim form As FormFlowsheet = New FormFlowsheet()
         Settings.CAPEOPENMode = False
@@ -1972,6 +1991,7 @@ Public Class FormMain
         xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
         xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
         xel.Add(New XElement("SavedOn", Date.Now))
+        xel.Add(New XElement("SavedFromClassicUI", True))
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")

@@ -22,7 +22,6 @@ Imports System.Linq
 Imports System.IO
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.Flowsheet
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Globalization
 Imports DWSIM.DrawingTools
@@ -182,14 +181,7 @@ Public Class FormFlowsheet
 
         If Not Me.m_IsLoadedFromFile Then
 
-            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
-            Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
-
-            Dim aTypeList As New List(Of Type)
-            aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-
-            For Each item In aTypeList.OrderBy(Function(x) x.Name)
+            For Each item In FormMain.aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
                     Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                     obj.SetFlowsheet(Me)

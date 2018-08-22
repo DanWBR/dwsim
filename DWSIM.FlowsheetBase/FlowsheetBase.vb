@@ -1008,19 +1008,39 @@ Imports System.Dynamic
 
     Public Sub LoadFromXML(xdoc As XDocument) Implements IFlowsheet.LoadFromXML
 
-        'For Each xel1 As XElement In xdoc.Descendants
-        '    SharedClasses.Utility.UpdateElement(xel1)
-        '    SharedClasses.Utility.UpdateElementForNewUI(xel1)
-        'Next
-
-        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                               SharedClasses.Utility.UpdateElement(xel1)
-                                               SharedClasses.Utility.UpdateElementForNewUI(xel1)
-                                           End Sub)
-
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
         Dim excs As New Concurrent.ConcurrentBag(Of Exception)
+
+        'check version
+
+        Dim sver = New Version("1.0.0.0")
+
+        Try
+            sver = New Version(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value)
+        Catch ex As Exception
+        End Try
+
+        If sver < New Version("5.0.0.0") Then
+            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                   SharedClasses.Utility.UpdateElement(xel1)
+                                               End Sub)
+        End If
+
+        'check saved from Classic UI
+
+        Dim savedfromclui As Boolean = False
+
+        Try
+            savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
+        Catch ex As Exception
+        End Try
+
+        If savedfromclui Then
+            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                   SharedClasses.Utility.UpdateElementForNewUI(xel1)
+                                               End Sub)
+        End If
 
         Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
 
@@ -1303,6 +1323,7 @@ Imports System.Dynamic
             xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
         End If
         xel.Add(New XElement("SavedOn", Date.Now))
+        xel.Add(New XElement("SavedFromClassicUI", False))
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
