@@ -202,7 +202,7 @@ Namespace Streams
                         Next
                     End If
                 Else
-                    _ppid = _pp.UniqueID
+                    _ppid = _pp?.UniqueID
                     Return _pp
                 End If
                 Return Nothing
