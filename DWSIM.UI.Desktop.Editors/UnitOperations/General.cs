@@ -848,7 +848,7 @@ namespace DWSIM.UI.Desktop.Editors
                            }
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
-                                                 SimObject.GetPropertyDescription("HK Mole Fraction in Bottoms"));
+                                                 SimObject.GetPropertyDescription("HK Mole Fraction in Distillate"));
                     s.CreateAndAddTextBoxRow(container, nf, "Reflux Ratio", sc.m_refluxratio,
                        (TextBox arg3, EventArgs ev) =>
                        {

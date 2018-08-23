@@ -28,28 +28,32 @@ namespace DWSIM.UI.Desktop
 
             Settings.LoadSettings("dwsim_newui.ini");
 
-            // initialize gpu if enabled
-            try {
-                //set CUDA params
-                CudafyModes.Compiler = eGPUCompiler.All;
-                CudafyModes.Target = (eGPUType)Settings.CudafyTarget;
-                Cudafy.Translator.CudafyTranslator.GenerateDebug = false;
-                if (GlobalSettings.Settings.EnableGPUProcessing) DWSIM.Thermodynamics.Calculator.InitComputeDevice();
-                Console.WriteLine("GPU initialized successfully: " + Settings.SelectedGPU + "(" + CudafyModes.Target.ToString() +")");
-            }
-            catch (Exception ex)
+            if (GlobalSettings.Settings.EnableGPUProcessing)
             {
-                Console.WriteLine("GPU initialization failed: " + ex.ToString());
-                var ex1 = ex;
-                while (ex1.InnerException != null)
+                // initialize gpu if enabled
+                try
                 {
-                    Console.WriteLine("GPU initialization failed (IEX): " + ex1.InnerException.ToString());
-                    if (ex1.InnerException is ReflectionTypeLoadException)
+                    //set CUDA params
+                    CudafyModes.Compiler = eGPUCompiler.All;
+                    CudafyModes.Target = (eGPUType)Settings.CudafyTarget;
+                    Cudafy.Translator.CudafyTranslator.GenerateDebug = false;
+                    DWSIM.Thermodynamics.Calculator.InitComputeDevice();
+                    Console.WriteLine("GPU initialized successfully: " + Settings.SelectedGPU + "(" + CudafyModes.Target.ToString() + ")");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("GPU initialization failed: " + ex.ToString());
+                    var ex1 = ex;
+                    while (ex1.InnerException != null)
                     {
-                        foreach (var tlex in ((ReflectionTypeLoadException)(ex1.InnerException)).LoaderExceptions)
-                        { Console.WriteLine("GPU initialization failed (TLEX): " + tlex.Message); }
+                        Console.WriteLine("GPU initialization failed (IEX): " + ex1.InnerException.ToString());
+                        if (ex1.InnerException is ReflectionTypeLoadException)
+                        {
+                            foreach (var tlex in ((ReflectionTypeLoadException)(ex1.InnerException)).LoaderExceptions)
+                            { Console.WriteLine("GPU initialization failed (TLEX): " + tlex.Message); }
+                        }
+                        ex1 = ex1.InnerException;
                     }
-                    ex1 = ex1.InnerException;
                 }
             }
 

@@ -153,7 +153,7 @@ Namespace UnitOperations
             K = feed.PropertyPackage.DW_CalcKvalue(z, T, P)
 
             For i = 0 To n
-                If Double.IsInfinity(K(i)) Then K(i) = 1.0E+20
+                If Double.IsInfinity(K(i)) Then K(i) = Double.MaxValue
             Next
 
             i = 0
@@ -273,11 +273,11 @@ restart:    B = F - D
                 i = 0
                 Do
                     If i = 0 Then
-                        teta(i) = brentsolver.BrentOpt(alpha(lki), alpha(indexes(i)), 10, 0.0001, 100, New Object() {alpha, z, q, n})
+                        teta(i) = brentsolver.BrentOpt(alpha(lki), alpha(indexes(i)), 10, 1.0E-20, 100, New Object() {alpha, z, q, n})
                     ElseIf i = count Then
-                        teta(i) = brentsolver.BrentOpt(alpha(indexes(i - 1)), alpha(hki), 10, 0.0001, 100, New Object() {alpha, z, q, n})
+                        teta(i) = brentsolver.BrentOpt(alpha(indexes(i - 1)), alpha(hki), 10, 1.0E-20, 100, New Object() {alpha, z, q, n})
                     Else
-                        teta(i) = brentsolver.BrentOpt(alpha(indexes(i - 1)), alpha(indexes(i)), 10, 0.0001, 100, New Object() {alpha, z, q, n})
+                        teta(i) = brentsolver.BrentOpt(alpha(indexes(i - 1)), alpha(indexes(i)), 10, 1.0E-20, 100, New Object() {alpha, z, q, n})
                     End If
                     i = i + 1
                 Loop Until i = count + 1
