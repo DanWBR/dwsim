@@ -415,45 +415,45 @@ Partial Class EditingForm_Flowsheet_Editor
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents dgvOutputLinks As System.Windows.Forms.DataGridView
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents dgvInputLinks As System.Windows.Forms.DataGridView
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents btnInitialize As System.Windows.Forms.Button
-    Friend WithEvents lblInit As System.Windows.Forms.Label
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Public WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Public WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Public WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents dgvOutputLinks As System.Windows.Forms.DataGridView
+    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents dgvInputLinks As System.Windows.Forms.DataGridView
+    Public WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Public WithEvents btnInitialize As System.Windows.Forms.Button
+    Public WithEvents lblInit As System.Windows.Forms.Label
+    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Public WithEvents ToolStrip2 As System.Windows.Forms.ToolStrip
     Public WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents dgvInputPars As System.Windows.Forms.DataGridView
-    Friend WithEvents dgvOutputPars As System.Windows.Forms.DataGridView
+    Public WithEvents dgvInputPars As System.Windows.Forms.DataGridView
+    Public WithEvents dgvOutputPars As System.Windows.Forms.DataGridView
     Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Public WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents cbMassTransferMode As System.Windows.Forms.ComboBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents ToolStripButton6 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents dgmap As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn1 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn2 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn4 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents id1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents id2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col2 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Public WithEvents cbMassTransferMode As System.Windows.Forms.ComboBox
+    Public WithEvents Label1 As System.Windows.Forms.Label
+    Public WithEvents Label2 As System.Windows.Forms.Label
+    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Public WithEvents ToolStripButton6 As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
+    Public WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Public WithEvents dgmap As System.Windows.Forms.DataGridView
+    Public WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents DataGridViewComboBoxColumn1 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Public WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents DataGridViewComboBoxColumn2 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Public WithEvents DataGridViewComboBoxColumn4 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Public WithEvents DataGridViewComboBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Public WithEvents id1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents col1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents id2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents col2 As System.Windows.Forms.DataGridViewComboBoxColumn
 End Class

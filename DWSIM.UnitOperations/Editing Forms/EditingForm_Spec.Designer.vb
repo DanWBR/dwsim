@@ -234,29 +234,29 @@ Partial Class EditingForm_Spec
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents chkActive As System.Windows.Forms.CheckBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents tbExpression As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents cbSourceProp As System.Windows.Forms.ComboBox
-    Friend WithEvents cbSourceObj As System.Windows.Forms.ComboBox
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents lblTag As System.Windows.Forms.TextBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents cbTargetProp As System.Windows.Forms.ComboBox
-    Friend WithEvents cbTargetObj As System.Windows.Forms.ComboBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents lblTargetVal As System.Windows.Forms.Label
-    Friend WithEvents lblSourceVal As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents lblResult As System.Windows.Forms.Label
+    Public WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Public WithEvents chkActive As System.Windows.Forms.CheckBox
+    Public WithEvents Label11 As System.Windows.Forms.Label
+    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
+    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents tbExpression As System.Windows.Forms.TextBox
+    Public WithEvents Label3 As System.Windows.Forms.Label
+    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents Label7 As System.Windows.Forms.Label
+    Public WithEvents cbSourceProp As System.Windows.Forms.ComboBox
+    Public WithEvents cbSourceObj As System.Windows.Forms.ComboBox
+    Public WithEvents Label19 As System.Windows.Forms.Label
+    Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Public WithEvents lblTag As System.Windows.Forms.TextBox
+    Public WithEvents Label1 As System.Windows.Forms.Label
+    Public WithEvents Label2 As System.Windows.Forms.Label
+    Public WithEvents cbTargetProp As System.Windows.Forms.ComboBox
+    Public WithEvents cbTargetObj As System.Windows.Forms.ComboBox
+    Public WithEvents Label4 As System.Windows.Forms.Label
+    Public WithEvents lblTargetVal As System.Windows.Forms.Label
+    Public WithEvents lblSourceVal As System.Windows.Forms.Label
+    Public WithEvents Label6 As System.Windows.Forms.Label
+    Public WithEvents Label5 As System.Windows.Forms.Label
+    Public WithEvents lblResult As System.Windows.Forms.Label
 End Class

@@ -343,16 +343,16 @@ Partial Class EditingForm_CustomUO_ScriptEditor
     Public WithEvents pd1 As System.Windows.Forms.PrintDialog
     Public WithEvents treeViewItems As System.Windows.Forms.TreeView
     Public WithEvents imageList1 As System.Windows.Forms.ImageList
-    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents APIHelptsbutton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents APIHelptsbutton As System.Windows.Forms.ToolStripButton
+    Public WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
     Public WithEvents btnDebug As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents txtScript As ScintillaNET.Scintilla
-    Friend WithEvents btnHighlightSpaces As System.Windows.Forms.ToolStripButton
-    Friend WithEvents btnUndo As System.Windows.Forms.ToolStripButton
-    Friend WithEvents btnRedo As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents txtScript As ScintillaNET.Scintilla
+    Public WithEvents btnHighlightSpaces As System.Windows.Forms.ToolStripButton
+    Public WithEvents btnUndo As System.Windows.Forms.ToolStripButton
+    Public WithEvents btnRedo As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents PrintToolStripButton As System.Windows.Forms.ToolStripButton
 End Class

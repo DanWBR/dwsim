@@ -66,5 +66,5 @@ Partial Class FormLS
 
     Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Public WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 End Class

@@ -266,29 +266,29 @@ Partial Class EditingForm_EnergyRecycle
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents chkActive As System.Windows.Forms.CheckBox
-    Friend WithEvents lblConnectedTo As System.Windows.Forms.Label
-    Friend WithEvents lblStatus As System.Windows.Forms.Label
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
-    Friend WithEvents cbE As System.Windows.Forms.ComboBox
-    Friend WithEvents tbET As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
-    Friend WithEvents btnDisconnect1 As System.Windows.Forms.Button
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents cbOutlet1 As System.Windows.Forms.ComboBox
-    Friend WithEvents cbInlet1 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents lblTag As System.Windows.Forms.TextBox
-    Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
-    Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents tbEE As System.Windows.Forms.TextBox
+    Public WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Public WithEvents chkActive As System.Windows.Forms.CheckBox
+    Public WithEvents lblConnectedTo As System.Windows.Forms.Label
+    Public WithEvents lblStatus As System.Windows.Forms.Label
+    Public WithEvents Label13 As System.Windows.Forms.Label
+    Public WithEvents Label12 As System.Windows.Forms.Label
+    Public WithEvents Label11 As System.Windows.Forms.Label
+    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
+    Public WithEvents cbE As System.Windows.Forms.ComboBox
+    Public WithEvents tbET As System.Windows.Forms.TextBox
+    Public WithEvents Label3 As System.Windows.Forms.Label
+    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
+    Public WithEvents btnDisconnect1 As System.Windows.Forms.Button
+    Public WithEvents Label7 As System.Windows.Forms.Label
+    Public WithEvents cbOutlet1 As System.Windows.Forms.ComboBox
+    Public WithEvents cbInlet1 As System.Windows.Forms.ComboBox
+    Public WithEvents Label19 As System.Windows.Forms.Label
+    Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Public WithEvents lblTag As System.Windows.Forms.TextBox
+    Public WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
+    Public WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
+    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Public WithEvents tbEE As System.Windows.Forms.TextBox
 End Class

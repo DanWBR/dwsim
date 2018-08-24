@@ -155,8 +155,8 @@ Partial Class EditingForm_Column_Stages
     Public WithEvents dgv1 As System.Windows.Forms.DataGridView
     Public WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

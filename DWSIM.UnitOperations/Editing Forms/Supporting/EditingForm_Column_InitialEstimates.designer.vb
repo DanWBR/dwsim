@@ -801,5 +801,5 @@ Partial Class EditingForm_Column_InitialEstimates
     Public WithEvents ToolStripButton28 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton27 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton26 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
 End Class

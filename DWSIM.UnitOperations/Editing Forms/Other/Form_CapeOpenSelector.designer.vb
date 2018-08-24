@@ -157,23 +157,23 @@ Partial Class Form_CapeOpenSelector
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents lblName As System.Windows.Forms.Label
-    Friend WithEvents lblVersion As System.Windows.Forms.Label
-    Friend WithEvents lblAuthorURL As System.Windows.Forms.LinkLabel
-    Friend WithEvents lblHelpURL As System.Windows.Forms.LinkLabel
-    Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents lblCOversion As System.Windows.Forms.Label
-    Friend WithEvents txtDesc As System.Windows.Forms.TextBox
-    Friend WithEvents txtAbout As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Public WithEvents ListBox1 As System.Windows.Forms.ListBox
+    Public WithEvents Label1 As System.Windows.Forms.Label
+    Public WithEvents Label2 As System.Windows.Forms.Label
+    Public WithEvents Label3 As System.Windows.Forms.Label
+    Public WithEvents Label4 As System.Windows.Forms.Label
+    Public WithEvents Label5 As System.Windows.Forms.Label
+    Public WithEvents Label6 As System.Windows.Forms.Label
+    Public WithEvents lblName As System.Windows.Forms.Label
+    Public WithEvents lblVersion As System.Windows.Forms.Label
+    Public WithEvents lblAuthorURL As System.Windows.Forms.LinkLabel
+    Public WithEvents lblHelpURL As System.Windows.Forms.LinkLabel
+    Public WithEvents btnOK As System.Windows.Forms.Button
+    Public WithEvents btnCancel As System.Windows.Forms.Button
+    Public WithEvents Label7 As System.Windows.Forms.Label
+    Public WithEvents lblCOversion As System.Windows.Forms.Label
+    Public WithEvents txtDesc As System.Windows.Forms.TextBox
+    Public WithEvents txtAbout As System.Windows.Forms.TextBox
+    Public WithEvents Label8 As System.Windows.Forms.Label
+    Public WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class

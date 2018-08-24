@@ -402,15 +402,15 @@ Partial Class EditingForm_Adjust_ControlPanel
     Public WithEvents tbMin As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
     Public WithEvents KryptonLabel1 As System.Windows.Forms.Label
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents tsbDockingLeft As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingLeftAutoHide As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingRightAutoHide As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingRight As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingTop As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingBottom As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingDocument As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbClose As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Public WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Public WithEvents tsbDockingLeft As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbDockingLeftAutoHide As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbDockingRightAutoHide As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbDockingRight As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbDockingTop As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbDockingBottom As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbDockingDocument As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
+    Public WithEvents tsbClose As System.Windows.Forms.ToolStripButton
 End Class

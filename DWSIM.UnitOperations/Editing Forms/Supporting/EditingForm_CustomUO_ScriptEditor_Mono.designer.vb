@@ -303,14 +303,14 @@ Partial Class EditingForm_CustomUO_ScriptEditor_Mono
     Public WithEvents ofd2 As System.Windows.Forms.OpenFileDialog
     Public WithEvents pd1 As System.Windows.Forms.PrintDialog
     Public WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents APIHelptsbutton As System.Windows.Forms.ToolStripButton
+    Public WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
+    Public WithEvents APIHelptsbutton As System.Windows.Forms.ToolStripButton
     Public WithEvents FaTabStrip2 As FarsiLibrary.Win.FATabStrip
     Public WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem
-    Friend WithEvents txtScript As System.Windows.Forms.TextBox
-    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Public WithEvents txtScript As System.Windows.Forms.TextBox
+    Public WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Public WithEvents FaTabStripItem4 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents ListBox1 As System.Windows.Forms.ListBox
-    Friend WithEvents tsl1 As System.Windows.Forms.ToolStripStatusLabel
+    Public WithEvents tsl1 As System.Windows.Forms.ToolStripStatusLabel
     Public WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
 End Class

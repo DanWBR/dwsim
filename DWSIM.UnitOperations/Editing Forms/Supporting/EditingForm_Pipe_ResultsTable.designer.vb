@@ -214,18 +214,18 @@ Partial Class EditingForm_Pipe_ResultsTable
 
     End Sub
     Public WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column14 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column10 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column12 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column13 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

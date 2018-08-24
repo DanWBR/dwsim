@@ -61,20 +61,20 @@ Imports System.Drawing
     Public PipeOp As UnitOperations.Pipe
 
     Private Units As SharedClasses.SystemsOfUnits.Units
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents ColBase As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Public WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Public WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
+    Public WithEvents ColBase As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Public WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Public WithEvents TabPage2 As System.Windows.Forms.TabPage
     Public WithEvents KryptonRadioButton2 As System.Windows.Forms.RadioButton
     Public WithEvents KryptonRadioButton1 As System.Windows.Forms.RadioButton
     Public WithEvents GraphControl As ZedGraph.ZedGraphControl

@@ -113,5 +113,5 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
     Public WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
+    Public WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
 End Class

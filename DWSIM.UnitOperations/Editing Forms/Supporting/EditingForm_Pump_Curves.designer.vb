@@ -964,30 +964,30 @@ Partial Class EditingForm_Pump_Curves
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents vap As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents temp As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents TSCBTypes As System.Windows.Forms.ToolStripComboBox
-    Friend WithEvents TSBtnSaveToDB As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TSBtnDeletePump As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents TsTBDatabase As System.Windows.Forms.ToolStripTextBox
-    Friend WithEvents TSBtnConnectDB As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TSBtnDisconnectDB As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TSBtnNewDB As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents TSTBStatus As System.Windows.Forms.ToolStripTextBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents TBImpellerSpeed As System.Windows.Forms.TextBox
-    Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents TBImpellerDiam As System.Windows.Forms.TextBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Public WithEvents vap As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents temp As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Public WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Public WithEvents TSCBTypes As System.Windows.Forms.ToolStripComboBox
+    Public WithEvents TSBtnSaveToDB As System.Windows.Forms.ToolStripButton
+    Public WithEvents TSBtnDeletePump As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
+    Public WithEvents TsTBDatabase As System.Windows.Forms.ToolStripTextBox
+    Public WithEvents TSBtnConnectDB As System.Windows.Forms.ToolStripButton
+    Public WithEvents TSBtnDisconnectDB As System.Windows.Forms.ToolStripButton
+    Public WithEvents TSBtnNewDB As System.Windows.Forms.ToolStripButton
+    Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents TSTBStatus As System.Windows.Forms.ToolStripTextBox
+    Public WithEvents Panel1 As System.Windows.Forms.Panel
+    Public WithEvents Label22 As System.Windows.Forms.Label
+    Public WithEvents TBImpellerSpeed As System.Windows.Forms.TextBox
+    Public WithEvents Label21 As System.Windows.Forms.Label
+    Public WithEvents TBImpellerDiam As System.Windows.Forms.TextBox
+    Public WithEvents Label20 As System.Windows.Forms.Label
+    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents CBDiameterUnit As System.Windows.Forms.ComboBox
 End Class

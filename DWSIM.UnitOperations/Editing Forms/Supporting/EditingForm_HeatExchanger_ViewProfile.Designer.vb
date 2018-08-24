@@ -138,7 +138,7 @@ Partial Class EditingForm_HeatExchanger_ViewProfile
     Public WithEvents GraphControl As ZedGraph.ZedGraphControl
     Public WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents Grid1 As System.Windows.Forms.DataGridView
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
