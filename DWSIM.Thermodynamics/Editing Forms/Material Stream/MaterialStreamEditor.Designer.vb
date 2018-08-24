@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MaterialStreamEditor
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,27 +20,27 @@ Partial Class MaterialStreamEditor
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MaterialStreamEditor))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnUtils = New System.Windows.Forms.Button()
         Me.lblTag = New System.Windows.Forms.TextBox()
@@ -209,6 +209,7 @@ Partial Class MaterialStreamEditor
         Me.TabPageResultsPane = New System.Windows.Forms.TabPage()
         Me.TabPageAnnotations = New System.Windows.Forms.TabPage()
         Me.TabPageFloatingTables = New System.Windows.Forms.TabPage()
+        Me.ToolTip1 = New SharedClasses.CustomTooltip(components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -496,8 +497,8 @@ Partial Class MaterialStreamEditor
         '
         'gridInputComposition
         '
-        resources.ApplyResources(Me.gridInputComposition, "gridInputComposition")
         Me.gridInputComposition.AllowUserToAddRows = False
+        resources.ApplyResources(Me.gridInputComposition, "gridInputComposition")
         Me.gridInputComposition.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridInputComposition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridInputComposition.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.compname, Me.compamount})
@@ -513,8 +514,8 @@ Partial Class MaterialStreamEditor
         '
         'compamount
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.compamount.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.compamount.DefaultCellStyle = DataGridViewCellStyle18
         Me.compamount.FillWeight = 30.0!
         resources.ApplyResources(Me.compamount, "compamount")
         Me.compamount.Name = "compamount"
@@ -673,53 +674,53 @@ Partial Class MaterialStreamEditor
         '
         'UtilitiesCtxMenu
         '
-        resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
         Me.UtilitiesCtxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI})
         Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
+        resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
         '
         'AddUtilityTSMI
         '
-        resources.ApplyResources(Me.AddUtilityTSMI, "AddUtilityTSMI")
         Me.AddUtilityTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DiagramaDeFasesToolStripMenuItem, Me.BinaryTSMI, Me.TernaryTSMI, Me.PetroleumPropsTSMI, Me.HydratesTSMI, Me.TCPTSMI})
         Me.AddUtilityTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.add
         Me.AddUtilityTSMI.Name = "AddUtilityTSMI"
+        resources.ApplyResources(Me.AddUtilityTSMI, "AddUtilityTSMI")
         '
         'DiagramaDeFasesToolStripMenuItem
         '
-        resources.ApplyResources(Me.DiagramaDeFasesToolStripMenuItem, "DiagramaDeFasesToolStripMenuItem")
         Me.DiagramaDeFasesToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.DiagramaDeFasesToolStripMenuItem.Name = "DiagramaDeFasesToolStripMenuItem"
+        resources.ApplyResources(Me.DiagramaDeFasesToolStripMenuItem, "DiagramaDeFasesToolStripMenuItem")
         '
         'BinaryTSMI
         '
-        resources.ApplyResources(Me.BinaryTSMI, "BinaryTSMI")
         Me.BinaryTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.BinaryTSMI.Name = "BinaryTSMI"
+        resources.ApplyResources(Me.BinaryTSMI, "BinaryTSMI")
         '
         'TernaryTSMI
         '
-        resources.ApplyResources(Me.TernaryTSMI, "TernaryTSMI")
         Me.TernaryTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.TernaryTSMI.Name = "TernaryTSMI"
+        resources.ApplyResources(Me.TernaryTSMI, "TernaryTSMI")
         '
         'PetroleumPropsTSMI
         '
-        resources.ApplyResources(Me.PetroleumPropsTSMI, "PetroleumPropsTSMI")
         Me.PetroleumPropsTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.PetroleumPropsTSMI.Name = "PetroleumPropsTSMI"
+        resources.ApplyResources(Me.PetroleumPropsTSMI, "PetroleumPropsTSMI")
         '
         'HydratesTSMI
         '
-        resources.ApplyResources(Me.HydratesTSMI, "HydratesTSMI")
         Me.HydratesTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.HydratesTSMI.Name = "HydratesTSMI"
+        resources.ApplyResources(Me.HydratesTSMI, "HydratesTSMI")
         '
         'TCPTSMI
         '
-        resources.ApplyResources(Me.TCPTSMI, "TCPTSMI")
         Me.TCPTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.TCPTSMI.Name = "TCPTSMI"
+        resources.ApplyResources(Me.TCPTSMI, "TCPTSMI")
         '
         'rtbAnnotations
         '
@@ -729,33 +730,34 @@ Partial Class MaterialStreamEditor
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowOpen = False
         Me.rtbAnnotations.ShowSave = False
+        Me.rtbAnnotations.ToolbarVisible = False
         '
         'TabPhaseProps
         '
-        resources.ApplyResources(Me.TabPhaseProps, "TabPhaseProps")
         Me.TabPhaseProps.Controls.Add(Me.tabPropsMix)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsVapor)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsLiqMix)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsLiq1)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsLiq2)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsSolid)
+        resources.ApplyResources(Me.TabPhaseProps, "TabPhaseProps")
         Me.TabPhaseProps.Name = "TabPhaseProps"
         Me.TabPhaseProps.SelectedIndex = 0
         '
         'tabPropsMix
         '
-        resources.ApplyResources(Me.tabPropsMix, "tabPropsMix")
         Me.tabPropsMix.Controls.Add(Me.gridPropertiesMixture)
+        resources.ApplyResources(Me.tabPropsMix, "tabPropsMix")
         Me.tabPropsMix.Name = "tabPropsMix"
         Me.tabPropsMix.UseVisualStyleBackColor = True
         '
         'gridPropertiesMixture
         '
-        resources.ApplyResources(Me.gridPropertiesMixture, "gridPropertiesMixture")
         Me.gridPropertiesMixture.AllowUserToAddRows = False
         Me.gridPropertiesMixture.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesMixture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesMixture.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column1})
+        resources.ApplyResources(Me.gridPropertiesMixture, "gridPropertiesMixture")
         Me.gridPropertiesMixture.Name = "gridPropertiesMixture"
         Me.gridPropertiesMixture.RowHeadersVisible = False
         '
@@ -767,8 +769,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle19
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -781,18 +783,18 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsVapor
         '
-        resources.ApplyResources(Me.tabPropsVapor, "tabPropsVapor")
         Me.tabPropsVapor.Controls.Add(Me.gridPropertiesVapor)
+        resources.ApplyResources(Me.tabPropsVapor, "tabPropsVapor")
         Me.tabPropsVapor.Name = "tabPropsVapor"
         Me.tabPropsVapor.UseVisualStyleBackColor = True
         '
         'gridPropertiesVapor
         '
-        resources.ApplyResources(Me.gridPropertiesVapor, "gridPropertiesVapor")
         Me.gridPropertiesVapor.AllowUserToAddRows = False
         Me.gridPropertiesVapor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesVapor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesVapor.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
+        resources.ApplyResources(Me.gridPropertiesVapor, "gridPropertiesVapor")
         Me.gridPropertiesVapor.Name = "gridPropertiesVapor"
         Me.gridPropertiesVapor.RowHeadersVisible = False
         '
@@ -804,8 +806,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle20
         Me.DataGridViewTextBoxColumn4.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
@@ -818,18 +820,18 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsLiqMix
         '
-        resources.ApplyResources(Me.tabPropsLiqMix, "tabPropsLiqMix")
         Me.tabPropsLiqMix.Controls.Add(Me.gridPropertiesLiqMix)
+        resources.ApplyResources(Me.tabPropsLiqMix, "tabPropsLiqMix")
         Me.tabPropsLiqMix.Name = "tabPropsLiqMix"
         Me.tabPropsLiqMix.UseVisualStyleBackColor = True
         '
         'gridPropertiesLiqMix
         '
-        resources.ApplyResources(Me.gridPropertiesLiqMix, "gridPropertiesLiqMix")
         Me.gridPropertiesLiqMix.AllowUserToAddRows = False
         Me.gridPropertiesLiqMix.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesLiqMix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesLiqMix.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
+        resources.ApplyResources(Me.gridPropertiesLiqMix, "gridPropertiesLiqMix")
         Me.gridPropertiesLiqMix.Name = "gridPropertiesLiqMix"
         Me.gridPropertiesLiqMix.RowHeadersVisible = False
         '
@@ -841,8 +843,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle21
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn7, "DataGridViewTextBoxColumn7")
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -855,18 +857,18 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsLiq1
         '
-        resources.ApplyResources(Me.tabPropsLiq1, "tabPropsLiq1")
         Me.tabPropsLiq1.Controls.Add(Me.gridPropertiesLiq1)
+        resources.ApplyResources(Me.tabPropsLiq1, "tabPropsLiq1")
         Me.tabPropsLiq1.Name = "tabPropsLiq1"
         Me.tabPropsLiq1.UseVisualStyleBackColor = True
         '
         'gridPropertiesLiq1
         '
-        resources.ApplyResources(Me.gridPropertiesLiq1, "gridPropertiesLiq1")
         Me.gridPropertiesLiq1.AllowUserToAddRows = False
         Me.gridPropertiesLiq1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesLiq1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesLiq1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11})
+        resources.ApplyResources(Me.gridPropertiesLiq1, "gridPropertiesLiq1")
         Me.gridPropertiesLiq1.Name = "gridPropertiesLiq1"
         Me.gridPropertiesLiq1.RowHeadersVisible = False
         '
@@ -878,8 +880,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn10
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle22
         Me.DataGridViewTextBoxColumn10.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn10, "DataGridViewTextBoxColumn10")
         Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
@@ -892,18 +894,18 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsLiq2
         '
-        resources.ApplyResources(Me.tabPropsLiq2, "tabPropsLiq2")
         Me.tabPropsLiq2.Controls.Add(Me.gridPropertiesLiq2)
+        resources.ApplyResources(Me.tabPropsLiq2, "tabPropsLiq2")
         Me.tabPropsLiq2.Name = "tabPropsLiq2"
         Me.tabPropsLiq2.UseVisualStyleBackColor = True
         '
         'gridPropertiesLiq2
         '
-        resources.ApplyResources(Me.gridPropertiesLiq2, "gridPropertiesLiq2")
         Me.gridPropertiesLiq2.AllowUserToAddRows = False
         Me.gridPropertiesLiq2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesLiq2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesLiq2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14})
+        resources.ApplyResources(Me.gridPropertiesLiq2, "gridPropertiesLiq2")
         Me.gridPropertiesLiq2.Name = "gridPropertiesLiq2"
         Me.gridPropertiesLiq2.RowHeadersVisible = False
         '
@@ -915,8 +917,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn13
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle23
         Me.DataGridViewTextBoxColumn13.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn13, "DataGridViewTextBoxColumn13")
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
@@ -929,18 +931,18 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsSolid
         '
-        resources.ApplyResources(Me.tabPropsSolid, "tabPropsSolid")
         Me.tabPropsSolid.Controls.Add(Me.gridPropertiesSolid)
+        resources.ApplyResources(Me.tabPropsSolid, "tabPropsSolid")
         Me.tabPropsSolid.Name = "tabPropsSolid"
         Me.tabPropsSolid.UseVisualStyleBackColor = True
         '
         'gridPropertiesSolid
         '
-        resources.ApplyResources(Me.gridPropertiesSolid, "gridPropertiesSolid")
         Me.gridPropertiesSolid.AllowUserToAddRows = False
         Me.gridPropertiesSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17})
+        resources.ApplyResources(Me.gridPropertiesSolid, "gridPropertiesSolid")
         Me.gridPropertiesSolid.Name = "gridPropertiesSolid"
         Me.gridPropertiesSolid.RowHeadersVisible = False
         '
@@ -952,8 +954,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn16
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle24
         Me.DataGridViewTextBoxColumn16.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn16, "DataGridViewTextBoxColumn16")
         Me.DataGridViewTextBoxColumn16.Name = "DataGridViewTextBoxColumn16"
@@ -996,18 +998,18 @@ Partial Class MaterialStreamEditor
         '
         'tabCompMix
         '
-        resources.ApplyResources(Me.tabCompMix, "tabCompMix")
         Me.tabCompMix.Controls.Add(Me.gridCompMixture)
+        resources.ApplyResources(Me.tabCompMix, "tabCompMix")
         Me.tabCompMix.Name = "tabCompMix"
         Me.tabCompMix.UseVisualStyleBackColor = True
         '
         'gridCompMixture
         '
-        resources.ApplyResources(Me.gridCompMixture, "gridCompMixture")
         Me.gridCompMixture.AllowUserToAddRows = False
         Me.gridCompMixture.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompMixture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompMixture.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn18, Me.DataGridViewTextBoxColumn19})
+        resources.ApplyResources(Me.gridCompMixture, "gridCompMixture")
         Me.gridCompMixture.Name = "gridCompMixture"
         Me.gridCompMixture.RowHeadersVisible = False
         '
@@ -1019,26 +1021,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn19
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle25
         Me.DataGridViewTextBoxColumn19.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn19, "DataGridViewTextBoxColumn19")
         Me.DataGridViewTextBoxColumn19.Name = "DataGridViewTextBoxColumn19"
         '
         'tabCompVapor
         '
-        resources.ApplyResources(Me.tabCompVapor, "tabCompVapor")
         Me.tabCompVapor.Controls.Add(Me.gridCompVapor)
+        resources.ApplyResources(Me.tabCompVapor, "tabCompVapor")
         Me.tabCompVapor.Name = "tabCompVapor"
         Me.tabCompVapor.UseVisualStyleBackColor = True
         '
         'gridCompVapor
         '
-        resources.ApplyResources(Me.gridCompVapor, "gridCompVapor")
         Me.gridCompVapor.AllowUserToAddRows = False
         Me.gridCompVapor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompVapor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompVapor.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21})
+        resources.ApplyResources(Me.gridCompVapor, "gridCompVapor")
         Me.gridCompVapor.Name = "gridCompVapor"
         Me.gridCompVapor.RowHeadersVisible = False
         '
@@ -1050,26 +1052,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn21
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn21.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn21.DefaultCellStyle = DataGridViewCellStyle26
         Me.DataGridViewTextBoxColumn21.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn21, "DataGridViewTextBoxColumn21")
         Me.DataGridViewTextBoxColumn21.Name = "DataGridViewTextBoxColumn21"
         '
         'tabCompLiqMix
         '
-        resources.ApplyResources(Me.tabCompLiqMix, "tabCompLiqMix")
         Me.tabCompLiqMix.Controls.Add(Me.gridCompLiqMix)
+        resources.ApplyResources(Me.tabCompLiqMix, "tabCompLiqMix")
         Me.tabCompLiqMix.Name = "tabCompLiqMix"
         Me.tabCompLiqMix.UseVisualStyleBackColor = True
         '
         'gridCompLiqMix
         '
-        resources.ApplyResources(Me.gridCompLiqMix, "gridCompLiqMix")
         Me.gridCompLiqMix.AllowUserToAddRows = False
         Me.gridCompLiqMix.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompLiqMix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompLiqMix.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn22, Me.DataGridViewTextBoxColumn23})
+        resources.ApplyResources(Me.gridCompLiqMix, "gridCompLiqMix")
         Me.gridCompLiqMix.Name = "gridCompLiqMix"
         Me.gridCompLiqMix.RowHeadersVisible = False
         '
@@ -1081,26 +1083,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn23
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle27
         Me.DataGridViewTextBoxColumn23.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn23, "DataGridViewTextBoxColumn23")
         Me.DataGridViewTextBoxColumn23.Name = "DataGridViewTextBoxColumn23"
         '
         'tabCompLiq1
         '
-        resources.ApplyResources(Me.tabCompLiq1, "tabCompLiq1")
         Me.tabCompLiq1.Controls.Add(Me.gridCompLiq1)
+        resources.ApplyResources(Me.tabCompLiq1, "tabCompLiq1")
         Me.tabCompLiq1.Name = "tabCompLiq1"
         Me.tabCompLiq1.UseVisualStyleBackColor = True
         '
         'gridCompLiq1
         '
-        resources.ApplyResources(Me.gridCompLiq1, "gridCompLiq1")
         Me.gridCompLiq1.AllowUserToAddRows = False
         Me.gridCompLiq1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompLiq1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompLiq1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25})
+        resources.ApplyResources(Me.gridCompLiq1, "gridCompLiq1")
         Me.gridCompLiq1.Name = "gridCompLiq1"
         Me.gridCompLiq1.RowHeadersVisible = False
         '
@@ -1112,26 +1114,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn25
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle28
         Me.DataGridViewTextBoxColumn25.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn25, "DataGridViewTextBoxColumn25")
         Me.DataGridViewTextBoxColumn25.Name = "DataGridViewTextBoxColumn25"
         '
         'tabCompLiq2
         '
-        resources.ApplyResources(Me.tabCompLiq2, "tabCompLiq2")
         Me.tabCompLiq2.Controls.Add(Me.gridCompLiq2)
+        resources.ApplyResources(Me.tabCompLiq2, "tabCompLiq2")
         Me.tabCompLiq2.Name = "tabCompLiq2"
         Me.tabCompLiq2.UseVisualStyleBackColor = True
         '
         'gridCompLiq2
         '
-        resources.ApplyResources(Me.gridCompLiq2, "gridCompLiq2")
         Me.gridCompLiq2.AllowUserToAddRows = False
         Me.gridCompLiq2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompLiq2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompLiq2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn26, Me.DataGridViewTextBoxColumn27})
+        resources.ApplyResources(Me.gridCompLiq2, "gridCompLiq2")
         Me.gridCompLiq2.Name = "gridCompLiq2"
         Me.gridCompLiq2.RowHeadersVisible = False
         '
@@ -1143,26 +1145,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn27
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle29
         Me.DataGridViewTextBoxColumn27.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn27, "DataGridViewTextBoxColumn27")
         Me.DataGridViewTextBoxColumn27.Name = "DataGridViewTextBoxColumn27"
         '
         'tabCompSolid
         '
-        resources.ApplyResources(Me.tabCompSolid, "tabCompSolid")
         Me.tabCompSolid.Controls.Add(Me.gridCompSolid)
+        resources.ApplyResources(Me.tabCompSolid, "tabCompSolid")
         Me.tabCompSolid.Name = "tabCompSolid"
         Me.tabCompSolid.UseVisualStyleBackColor = True
         '
         'gridCompSolid
         '
-        resources.ApplyResources(Me.gridCompSolid, "gridCompSolid")
         Me.gridCompSolid.AllowUserToAddRows = False
         Me.gridCompSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn28, Me.DataGridViewTextBoxColumn29})
+        resources.ApplyResources(Me.gridCompSolid, "gridCompSolid")
         Me.gridCompSolid.Name = "gridCompSolid"
         Me.gridCompSolid.RowHeadersVisible = False
         '
@@ -1174,52 +1176,52 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn29
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle30
         Me.DataGridViewTextBoxColumn29.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn29, "DataGridViewTextBoxColumn29")
         Me.DataGridViewTextBoxColumn29.Name = "DataGridViewTextBoxColumn29"
         '
         'TabControlMain
         '
-        resources.ApplyResources(Me.TabControlMain, "TabControlMain")
         Me.TabControlMain.Controls.Add(Me.TabPageResultsComp)
         Me.TabControlMain.Controls.Add(Me.TabPageResultsProps)
+        resources.ApplyResources(Me.TabControlMain, "TabControlMain")
         Me.TabControlMain.Name = "TabControlMain"
         Me.TabControlMain.SelectedIndex = 0
         '
         'TabPageResultsComp
         '
-        resources.ApplyResources(Me.TabPageResultsComp, "TabPageResultsComp")
         Me.TabPageResultsComp.Controls.Add(Me.TabControlCompound)
+        resources.ApplyResources(Me.TabPageResultsComp, "TabPageResultsComp")
         Me.TabPageResultsComp.Name = "TabPageResultsComp"
         Me.TabPageResultsComp.UseVisualStyleBackColor = True
         '
         'TabControlCompound
         '
-        resources.ApplyResources(Me.TabControlCompound, "TabControlCompound")
         Me.TabControlCompound.Controls.Add(Me.TabPage1)
         Me.TabControlCompound.Controls.Add(Me.TabPage2)
+        resources.ApplyResources(Me.TabControlCompound, "TabControlCompound")
         Me.TabControlCompound.Name = "TabControlCompound"
         Me.TabControlCompound.SelectedIndex = 0
         '
         'TabPage1
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.Label19)
         Me.TabPage1.Controls.Add(Me.TabPhaseComps)
         Me.TabPage1.Controls.Add(Me.cbCalculatedAmountsBasis)
         Me.TabPage1.Controls.Add(Me.lblAmountTotal)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Controls.Add(Me.lblCompPropUnits)
         Me.TabPage2.Controls.Add(Me.Label18)
         Me.TabPage2.Controls.Add(Me.TabCompoundPhaseProps)
         Me.TabPage2.Controls.Add(Me.cbCompoundPhaseProperties)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
@@ -1245,18 +1247,18 @@ Partial Class MaterialStreamEditor
         '
         'TabCompPropVapor
         '
-        resources.ApplyResources(Me.TabCompPropVapor, "TabCompPropVapor")
         Me.TabCompPropVapor.Controls.Add(Me.gridCompPropVapor)
+        resources.ApplyResources(Me.TabCompPropVapor, "TabCompPropVapor")
         Me.TabCompPropVapor.Name = "TabCompPropVapor"
         Me.TabCompPropVapor.UseVisualStyleBackColor = True
         '
         'gridCompPropVapor
         '
-        resources.ApplyResources(Me.gridCompPropVapor, "gridCompPropVapor")
         Me.gridCompPropVapor.AllowUserToAddRows = False
         Me.gridCompPropVapor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompPropVapor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompPropVapor.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn32, Me.DataGridViewTextBoxColumn33})
+        resources.ApplyResources(Me.gridCompPropVapor, "gridCompPropVapor")
         Me.gridCompPropVapor.Name = "gridCompPropVapor"
         Me.gridCompPropVapor.RowHeadersVisible = False
         '
@@ -1268,26 +1270,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn33
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn33.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn33.DefaultCellStyle = DataGridViewCellStyle31
         Me.DataGridViewTextBoxColumn33.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn33, "DataGridViewTextBoxColumn33")
         Me.DataGridViewTextBoxColumn33.Name = "DataGridViewTextBoxColumn33"
         '
         'TabCompPropLiq1
         '
-        resources.ApplyResources(Me.TabCompPropLiq1, "TabCompPropLiq1")
         Me.TabCompPropLiq1.Controls.Add(Me.gridCompPropLiq1)
+        resources.ApplyResources(Me.TabCompPropLiq1, "TabCompPropLiq1")
         Me.TabCompPropLiq1.Name = "TabCompPropLiq1"
         Me.TabCompPropLiq1.UseVisualStyleBackColor = True
         '
         'gridCompPropLiq1
         '
-        resources.ApplyResources(Me.gridCompPropLiq1, "gridCompPropLiq1")
         Me.gridCompPropLiq1.AllowUserToAddRows = False
         Me.gridCompPropLiq1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompPropLiq1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompPropLiq1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn36, Me.DataGridViewTextBoxColumn37})
+        resources.ApplyResources(Me.gridCompPropLiq1, "gridCompPropLiq1")
         Me.gridCompPropLiq1.Name = "gridCompPropLiq1"
         Me.gridCompPropLiq1.RowHeadersVisible = False
         '
@@ -1299,26 +1301,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn37
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn37.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn37.DefaultCellStyle = DataGridViewCellStyle32
         Me.DataGridViewTextBoxColumn37.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn37, "DataGridViewTextBoxColumn37")
         Me.DataGridViewTextBoxColumn37.Name = "DataGridViewTextBoxColumn37"
         '
         'TabCompPropLiq2
         '
-        resources.ApplyResources(Me.TabCompPropLiq2, "TabCompPropLiq2")
         Me.TabCompPropLiq2.Controls.Add(Me.gridCompPropLiq2)
+        resources.ApplyResources(Me.TabCompPropLiq2, "TabCompPropLiq2")
         Me.TabCompPropLiq2.Name = "TabCompPropLiq2"
         Me.TabCompPropLiq2.UseVisualStyleBackColor = True
         '
         'gridCompPropLiq2
         '
-        resources.ApplyResources(Me.gridCompPropLiq2, "gridCompPropLiq2")
         Me.gridCompPropLiq2.AllowUserToAddRows = False
         Me.gridCompPropLiq2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompPropLiq2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompPropLiq2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn38, Me.DataGridViewTextBoxColumn39})
+        resources.ApplyResources(Me.gridCompPropLiq2, "gridCompPropLiq2")
         Me.gridCompPropLiq2.Name = "gridCompPropLiq2"
         Me.gridCompPropLiq2.RowHeadersVisible = False
         '
@@ -1330,26 +1332,26 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn39
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn39.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn39.DefaultCellStyle = DataGridViewCellStyle33
         Me.DataGridViewTextBoxColumn39.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn39, "DataGridViewTextBoxColumn39")
         Me.DataGridViewTextBoxColumn39.Name = "DataGridViewTextBoxColumn39"
         '
         'TabCompPropSolid
         '
-        resources.ApplyResources(Me.TabCompPropSolid, "TabCompPropSolid")
         Me.TabCompPropSolid.Controls.Add(Me.gridCompPropSolid)
+        resources.ApplyResources(Me.TabCompPropSolid, "TabCompPropSolid")
         Me.TabCompPropSolid.Name = "TabCompPropSolid"
         Me.TabCompPropSolid.UseVisualStyleBackColor = True
         '
         'gridCompPropSolid
         '
-        resources.ApplyResources(Me.gridCompPropSolid, "gridCompPropSolid")
         Me.gridCompPropSolid.AllowUserToAddRows = False
         Me.gridCompPropSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompPropSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompPropSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn40, Me.DataGridViewTextBoxColumn41})
+        resources.ApplyResources(Me.gridCompPropSolid, "gridCompPropSolid")
         Me.gridCompPropSolid.Name = "gridCompPropSolid"
         Me.gridCompPropSolid.RowHeadersVisible = False
         '
@@ -1361,8 +1363,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn41
         '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn41.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn41.DefaultCellStyle = DataGridViewCellStyle34
         Me.DataGridViewTextBoxColumn41.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn41, "DataGridViewTextBoxColumn41")
         Me.DataGridViewTextBoxColumn41.Name = "DataGridViewTextBoxColumn41"
@@ -1377,8 +1379,8 @@ Partial Class MaterialStreamEditor
         '
         'TabPageResultsProps
         '
-        resources.ApplyResources(Me.TabPageResultsProps, "TabPageResultsProps")
         Me.TabPageResultsProps.Controls.Add(Me.TabPhaseProps)
+        resources.ApplyResources(Me.TabPageResultsProps, "TabPageResultsProps")
         Me.TabPageResultsProps.Name = "TabPageResultsProps"
         Me.TabPageResultsProps.UseVisualStyleBackColor = True
         '
@@ -1415,22 +1417,21 @@ Partial Class MaterialStreamEditor
         '
         'TabPageInputPane
         '
-        resources.ApplyResources(Me.TabPageInputPane, "TabPageInputPane")
         Me.TabPageInputPane.Controls.Add(Me.TabControl2)
+        resources.ApplyResources(Me.TabPageInputPane, "TabPageInputPane")
         Me.TabPageInputPane.Name = "TabPageInputPane"
         Me.TabPageInputPane.UseVisualStyleBackColor = True
         '
         'TabControl2
         '
-        resources.ApplyResources(Me.TabControl2, "TabControl2")
         Me.TabControl2.Controls.Add(Me.TabPageInputConditions)
         Me.TabControl2.Controls.Add(Me.TabPageInputComposition)
+        resources.ApplyResources(Me.TabControl2, "TabControl2")
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
         '
         'TabPageInputConditions
         '
-        resources.ApplyResources(Me.TabPageInputConditions, "TabPageInputConditions")
         Me.TabPageInputConditions.Controls.Add(Me.tbFracSpec)
         Me.TabPageInputConditions.Controls.Add(Me.Label8)
         Me.TabPageInputConditions.Controls.Add(Me.cbUnitsM)
@@ -1459,12 +1460,12 @@ Partial Class MaterialStreamEditor
         Me.TabPageInputConditions.Controls.Add(Me.Label15)
         Me.TabPageInputConditions.Controls.Add(Me.tbEntr)
         Me.TabPageInputConditions.Controls.Add(Me.Label6)
+        resources.ApplyResources(Me.TabPageInputConditions, "TabPageInputConditions")
         Me.TabPageInputConditions.Name = "TabPageInputConditions"
         Me.TabPageInputConditions.UseVisualStyleBackColor = True
         '
         'TabPageInputComposition
         '
-        resources.ApplyResources(Me.TabPageInputComposition, "TabPageInputComposition")
         Me.TabPageInputComposition.Controls.Add(Me.btnCompAcceptChanges)
         Me.TabPageInputComposition.Controls.Add(Me.cbSolvent)
         Me.TabPageInputComposition.Controls.Add(Me.btnEraseInput)
@@ -1475,29 +1476,36 @@ Partial Class MaterialStreamEditor
         Me.TabPageInputComposition.Controls.Add(Me.Label16)
         Me.TabPageInputComposition.Controls.Add(Me.cbCompBasis)
         Me.TabPageInputComposition.Controls.Add(Me.gridInputComposition)
+        resources.ApplyResources(Me.TabPageInputComposition, "TabPageInputComposition")
         Me.TabPageInputComposition.Name = "TabPageInputComposition"
         Me.TabPageInputComposition.UseVisualStyleBackColor = True
         '
         'TabPageResultsPane
         '
-        resources.ApplyResources(Me.TabPageResultsPane, "TabPageResultsPane")
         Me.TabPageResultsPane.Controls.Add(Me.TabControlMain)
+        resources.ApplyResources(Me.TabPageResultsPane, "TabPageResultsPane")
         Me.TabPageResultsPane.Name = "TabPageResultsPane"
         Me.TabPageResultsPane.UseVisualStyleBackColor = True
         '
         'TabPageAnnotations
         '
-        resources.ApplyResources(Me.TabPageAnnotations, "TabPageAnnotations")
         Me.TabPageAnnotations.Controls.Add(Me.rtbAnnotations)
+        resources.ApplyResources(Me.TabPageAnnotations, "TabPageAnnotations")
         Me.TabPageAnnotations.Name = "TabPageAnnotations"
         Me.TabPageAnnotations.UseVisualStyleBackColor = True
         '
         'TabPageFloatingTables
         '
-        resources.ApplyResources(Me.TabPageFloatingTables, "TabPageFloatingTables")
         Me.TabPageFloatingTables.Controls.Add(Me.GroupBox2)
+        resources.ApplyResources(Me.TabPageFloatingTables, "TabPageFloatingTables")
         Me.TabPageFloatingTables.Name = "TabPageFloatingTables"
         Me.TabPageFloatingTables.UseVisualStyleBackColor = True
+        '
+        'ToolTip1
+        '
+        Me.ToolTip1.BackColor = System.Drawing.Color.SteelBlue
+        Me.ToolTip1.ForeColor = System.Drawing.Color.White
+        Me.ToolTip1.ShowAlways = True
         '
         'MaterialStreamEditor
         '
@@ -1745,4 +1753,5 @@ Partial Class MaterialStreamEditor
     Public WithEvents TabPageResultsPane As TabPage
     Public WithEvents TabPageAnnotations As TabPage
     Public WithEvents TabPageFloatingTables As TabPage
+    Public WithEvents ToolTip1 As SharedClasses.CustomTooltip
 End Class

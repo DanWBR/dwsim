@@ -1079,7 +1079,7 @@ Public Class MaterialStreamEditor
                                                                 .PropertyName = propname,
                                                                 .Tag = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem,
                                                                 .Name = String.Format(MatStream.FlowSheet.GetTranslatedString("UndoRedo_FlowsheetObjectPropertyChanged"), MatStream.GraphicObject.Tag, MatStream.FlowSheet.GetTranslatedString(.PropertyName), .OldValue, .NewValue)})
-        
+
         RequestCalc()
 
     End Sub
@@ -1406,7 +1406,7 @@ Public Class MaterialStreamEditor
 
     Sub UpdateCompPropBasis(cb As ComboBox, grid As DataGridView, phase As Interfaces.IPhase)
 
-       
+
         Dim W, Q As Double, suffix As String = ""
         W = phase.Properties.massflow.GetValueOrDefault
         Q = phase.Properties.molarflow.GetValueOrDefault
@@ -1499,6 +1499,43 @@ Public Class MaterialStreamEditor
         End With
 
         MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
+
+    End Sub
+
+    Dim lastX, lastY As Integer
+    Private _currentToolTipControl As Control = Nothing
+
+    Private Sub MaterialStreamEditor_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
+        If ((e.X <> Me.lastX) OrElse (e.Y <> Me.lastY)) Then
+            Me.lastX = e.X
+            Me.lastY = e.Y
+            Dim mouseloc, controlLoc, relativeloc As Drawing.Point
+            Dim control As Control = GetChildAtPoint(e.Location)
+            If Not control Is Nothing Then
+                Dim lastCrp As Control = control
+                While Not control Is Nothing
+                    lastCrp = control
+                    controlLoc = PointToScreen(control.Location)
+                    controlLoc = control.Parent?.PointToScreen(control.Location)
+                    mouseloc = PointToScreen(e.Location)
+                    relativeloc = New Drawing.Point(mouseloc.X - controlLoc.X, mouseloc.Y - controlLoc.Y)
+                    control = control.GetChildAtPoint(relativeloc)
+                End While
+                If (_currentToolTipControl IsNot Nothing AndAlso _currentToolTipControl IsNot lastCrp) Then
+                    ToolTip1.Hide(_currentToolTipControl)
+                End If
+                If Not lastCrp Is Nothing AndAlso TypeOf lastCrp Is TextBox Then
+                    Dim toolTipString As String = ToolTip1.GetToolTip(lastCrp)
+                    If toolTipString <> "" Then
+                        ToolTip1.Hide(lastCrp)
+                        ToolTip1.Show(toolTipString, lastCrp, lastCrp.Width, lastCrp.Height)
+                        _currentToolTipControl = lastCrp
+                    End If
+                Else
+                    _currentToolTipControl = Nothing
+                End If
+            End If
+        End If
 
     End Sub
 

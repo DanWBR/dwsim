@@ -50,7 +50,7 @@ Namespace Streams
 
         Implements Interfaces.IMaterialStream
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Private f As MaterialStreamEditor
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As MaterialStreamEditor
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public _pp As PropertyPackages.PropertyPackage
         Public _ppid As String = ""
