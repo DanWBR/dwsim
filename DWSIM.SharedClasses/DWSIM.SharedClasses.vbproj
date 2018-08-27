@@ -111,8 +111,8 @@
   <ItemGroup>
     <Compile Include="Base Class\FlowsheetBag.vb" />
     <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
-    <Compile Include="Controls\CustomToolTip.vb">
-      <SubType>Component</SubType>
+    <Compile Include="Editor\ObjectEditorForm.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ExceptionProcessing\ExceptionProcessing.vb" />
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
@@ -149,6 +149,9 @@
     <Compile Include="UpdateCheck\UpdateCheck.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editor\ObjectEditorForm.resx">
+      <DependentUpon>ObjectEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
