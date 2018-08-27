@@ -3,12 +3,12 @@
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Dim lastX, lastY As Integer
-    Friend WithEvents ToolTipValues As ToolTip
+    Public WithEvents ToolTipValues As New ToolTip
     Private components As System.ComponentModel.IContainer
     Private _currentToolTipControl As Control = Nothing
 
     Private Sub InitializeComponent()
-        Me.ToolTipValues = New System.Windows.Forms.ToolTip()
+
         Me.SuspendLayout()
         '
         'ObjectEditorForm
