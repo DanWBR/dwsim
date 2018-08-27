@@ -1567,6 +1567,10 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function GetDefaultProperties() As String()
+            Return New String() {"PROP_HX_0", "PROP_HX_1", "PROP_HX_2", "PROP_HX_3", "PROP_HX_4", "PROP_HX_25", "PROP_HX_26", "PROP_HX_27", "PROP_HX_28"}
+        End Function
+
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)

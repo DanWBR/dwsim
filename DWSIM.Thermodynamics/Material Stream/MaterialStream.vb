@@ -5877,7 +5877,7 @@ Namespace Streams
         End Function
 
         Public Overrides Function GetDefaultProperties() As String()
-            Return New String() {"PROP_MS_0", "PROP_MS_1", "PROP_MS_2", "PROP_MS_3", "PROP_MS_4"}
+            Return New String() {"PROP_MS_0", "PROP_MS_1", "PROP_MS_2", "PROP_MS_3", "PROP_MS_4", "PROP_MS_9", "PROP_MS_10", "PROP_MS_27", "PROP_MS_130", "PROP_MS_154"}
         End Function
 
         Public Overrides Sub CloseEditForm()
