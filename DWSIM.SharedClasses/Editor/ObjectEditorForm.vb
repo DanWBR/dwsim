@@ -20,19 +20,21 @@
 
     End Sub
 
-    Private Sub MaterialStreamEditor_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
+    Protected Sub Editor_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
         If ((e.X <> Me.lastX) OrElse (e.Y <> Me.lastY)) Then
             Me.lastX = e.X
             Me.lastY = e.Y
             Dim mouseloc, controlLoc, relativeloc As Drawing.Point
-            Dim control As Control = GetChildAtPoint(e.Location)
+            Dim eventloc As Drawing.Point = e.Location
+            If TypeOf sender Is GroupBox Then eventloc = e.Location + DirectCast(sender, GroupBox).Location
+            Dim control As Control = GetChildAtPoint(eventloc)
             If Not control Is Nothing Then
                 Dim lastCrp As Control = control
                 While Not control Is Nothing
                     lastCrp = control
                     controlLoc = PointToScreen(control.Location)
                     controlLoc = control.Parent?.PointToScreen(control.Location)
-                    mouseloc = PointToScreen(e.Location)
+                    mouseloc = PointToScreen(eventloc)
                     relativeloc = New Drawing.Point(mouseloc.X - controlLoc.X, mouseloc.Y - controlLoc.Y)
                     control = control.GetChildAtPoint(relativeloc)
                 End While

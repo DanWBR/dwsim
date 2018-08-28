@@ -674,4 +674,8 @@ Public Class EditingForm_HeatExchanger
 
     End Sub
 
+    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBox2.MouseMove
+        MyBase.Editor_MouseMove(sender, e)
+    End Sub
+
 End Class

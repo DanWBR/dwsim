@@ -549,4 +549,8 @@ Public Class EditingForm_ComprExpndr
 
     End Sub
 
+    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBox2.MouseMove
+        MyBase.Editor_MouseMove(sender, e)
+    End Sub
+
 End Class
