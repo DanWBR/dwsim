@@ -34,7 +34,7 @@ Namespace SpecialOps
 
         Implements Interfaces.IRecycle
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Recycle
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Recycle
 
         Protected m_ConvPar As Helpers.Recycle.ConvergenceParameters
         Protected m_ConvHist As IRecycleConvergenceHistory

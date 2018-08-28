@@ -45,7 +45,7 @@ Namespace UnitOperations
 
         Inherits UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_SpreadsheetUO
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_SpreadsheetUO
 
         Protected m_DQ As Nullable(Of Double)
         Protected m_FileName As String = ""

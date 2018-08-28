@@ -7,7 +7,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 
 Public Class EditingForm_SpreadsheetUO
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As UnitOperations.ExcelUO
 

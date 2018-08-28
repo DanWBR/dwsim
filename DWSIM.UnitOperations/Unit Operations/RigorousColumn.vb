@@ -1551,7 +1551,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Column
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Column
 
         Public Enum ColType
             DistillationColumn = 0

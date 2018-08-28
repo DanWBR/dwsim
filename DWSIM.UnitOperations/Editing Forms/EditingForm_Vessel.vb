@@ -5,7 +5,7 @@ Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class EditingForm_Vessel
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property VesselObject As UnitOperations.Vessel
 

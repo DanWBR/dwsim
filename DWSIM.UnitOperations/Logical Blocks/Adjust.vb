@@ -33,7 +33,7 @@ Namespace SpecialOps
 
         Implements Interfaces.IAdjust
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Adjust
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Adjust
 
         Protected m_ManipulatedObject As SharedClasses.UnitOperations.BaseClass
         Protected m_ControlledObject As SharedClasses.UnitOperations.BaseClass

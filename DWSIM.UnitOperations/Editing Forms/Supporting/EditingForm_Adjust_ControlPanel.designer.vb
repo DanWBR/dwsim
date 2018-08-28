@@ -1,6 +1,6 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class EditingForm_Adjust_ControlPanel
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _

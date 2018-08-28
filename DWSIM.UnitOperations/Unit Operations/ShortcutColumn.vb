@@ -35,7 +35,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ShortcutColumn
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ShortcutColumn
 
         Public Enum CondenserType
             TotalCond = 0

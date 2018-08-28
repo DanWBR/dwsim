@@ -41,7 +41,7 @@ Namespace Streams
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_EnergyStream
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_EnergyStream
 
         Private WithEvents m_work As CapeOpen.RealParameter
 

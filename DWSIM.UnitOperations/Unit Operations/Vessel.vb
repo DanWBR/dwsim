@@ -37,7 +37,7 @@ Namespace UnitOperations
         Dim BeH, BSGH, BSLH, AH, DH As Double
         Dim BeV, BSGV, BSLV, AV, DV As Double
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Vessel
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Vessel
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public MixedStream As MaterialStream
 

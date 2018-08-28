@@ -73,7 +73,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_HeatExchanger
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_HeatExchanger
 
         Protected m_Q As Nullable(Of Double) = 0
         Protected m_dp As Nullable(Of Double) = 0

@@ -59,7 +59,7 @@ Namespace Reactors
 
         <System.NonSerialized()> Dim ims As MaterialStream
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorPFR
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorPFR
 
         Private VolumeFraction As Double = 1.0#
 

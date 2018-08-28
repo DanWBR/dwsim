@@ -6,7 +6,7 @@ Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class EditingForm_Valve
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As UnitOperations.Valve
 

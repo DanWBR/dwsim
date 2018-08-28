@@ -45,7 +45,7 @@ Namespace UnitOperations
             PythonNET = 1
         End Enum
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CustomUO
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CustomUO
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Private engine As ScriptEngine
 

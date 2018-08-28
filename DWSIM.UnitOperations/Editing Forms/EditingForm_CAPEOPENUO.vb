@@ -8,7 +8,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.CapeOpen
 
 Public Class EditingForm_CAPEOPENUO
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As UnitOperations.CapeOpenUO
 

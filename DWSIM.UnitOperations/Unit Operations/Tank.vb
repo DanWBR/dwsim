@@ -31,7 +31,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Tank
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Tank
 
         Protected m_dp As Nullable(Of Double)
         Protected m_DQ As Nullable(Of Double)

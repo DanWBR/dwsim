@@ -5,7 +5,7 @@ Imports su = DWSIM.SharedClasses.SystemsOfUnits
 
 Public Class EditingForm_EnergyStream
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As Streams.EnergyStream
 

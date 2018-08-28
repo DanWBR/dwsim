@@ -6,7 +6,7 @@ Imports DWSIM.UnitOperations.UnitOperations
 
 Public Class EditingForm_CompoundSeparator
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As UnitOperations.ComponentSeparator
 

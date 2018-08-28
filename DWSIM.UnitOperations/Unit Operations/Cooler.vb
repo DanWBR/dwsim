@@ -31,7 +31,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_HeaterCooler
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_HeaterCooler
 
         Protected m_dp As Nullable(Of Double)
         Protected m_dt As Nullable(Of Double)

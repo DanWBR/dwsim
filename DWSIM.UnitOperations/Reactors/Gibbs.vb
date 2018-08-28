@@ -36,7 +36,7 @@ Namespace Reactors
 
         Inherits Reactor
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorConvEqGibbs
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorConvEqGibbs
 
         Public Enum SolvingMethod
 

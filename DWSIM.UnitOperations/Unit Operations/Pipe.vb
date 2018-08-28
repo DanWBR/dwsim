@@ -43,7 +43,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Pipe
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Pipe
 
         Protected m_profile As New PipeProfile
         Protected m_thermalprofile As New ThermalEditorDefinitions

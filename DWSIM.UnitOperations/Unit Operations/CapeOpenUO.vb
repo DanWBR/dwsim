@@ -47,7 +47,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CAPEOPENUO
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CAPEOPENUO
 
         <System.NonSerialized()> Private _couo As Object
         <System.NonSerialized()> Private _form As Form_CapeOpenSelector

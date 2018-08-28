@@ -30,7 +30,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Splitter
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Splitter
 
         Public Enum OpMode
             SplitRatios = 0

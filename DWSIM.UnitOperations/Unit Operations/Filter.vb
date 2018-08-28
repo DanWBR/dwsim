@@ -36,7 +36,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Filter
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Filter
 
         Protected m_ei As Double
 

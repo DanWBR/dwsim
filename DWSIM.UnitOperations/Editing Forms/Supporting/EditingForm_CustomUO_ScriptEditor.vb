@@ -27,7 +27,7 @@ Imports System.Drawing
 
 <System.Serializable()> Public Class EditingForm_CustomUO_ScriptEditor
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public ScriptUO As UnitOperations.CustomUO
 

@@ -3,7 +3,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Public Class EditingForm_Mixer
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property MixerObject As UnitOperations.Mixer
 

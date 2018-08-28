@@ -35,7 +35,7 @@ Namespace SpecialOps
 
         Implements ISpec
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Spec
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Spec
 
         Protected m_SourceObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
         Protected m_TargetObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo

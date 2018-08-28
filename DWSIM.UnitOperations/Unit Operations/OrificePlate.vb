@@ -31,7 +31,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_OrificePlate
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_OrificePlate
 
         Public Enum CalcMethod
             Homogeneous = 0

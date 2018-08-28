@@ -53,7 +53,7 @@ Namespace Reactors
 
         Dim activeAL As Integer = 0
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorCSTR
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorCSTR
 
         <System.NonSerialized()> Dim ims As MaterialStream
 

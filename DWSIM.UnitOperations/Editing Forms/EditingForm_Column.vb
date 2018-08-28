@@ -9,7 +9,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 
 Public Class EditingForm_Column
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As UnitOperations.Column
 

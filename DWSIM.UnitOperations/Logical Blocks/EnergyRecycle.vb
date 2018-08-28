@@ -32,7 +32,7 @@ Namespace SpecialOps
 
         Inherits UnitOperations.SpecialOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_EnergyRecycle
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_EnergyRecycle
 
         Protected m_ConvPar As ConvergenceParametersE
         Protected m_ConvHist As ConvergenceHistoryE

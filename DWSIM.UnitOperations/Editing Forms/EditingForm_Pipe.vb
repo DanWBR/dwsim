@@ -7,7 +7,7 @@ Imports System.Drawing
 
 Public Class EditingForm_Pipe
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As UnitOperations.Pipe
 

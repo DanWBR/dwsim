@@ -21,7 +21,7 @@ Imports System.Drawing
 
 Public Class EditingForm_Column_Results
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public dc As Column
 

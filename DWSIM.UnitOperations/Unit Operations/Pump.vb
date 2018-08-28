@@ -167,7 +167,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Pump
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Pump
 
         Public Enum CalculationMode
             Delta_P = 0

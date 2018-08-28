@@ -6,7 +6,7 @@ Imports DWSIM.UnitOperations.UnitOperations
 
 Public Class EditingForm_ReactorConvEqGibbs
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As Reactors.Reactor
 

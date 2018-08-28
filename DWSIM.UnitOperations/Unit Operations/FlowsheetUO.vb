@@ -65,7 +65,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_FlowsheetUO
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_FlowsheetUO
 
         Public Property SimulationFile As String = ""
         <System.Xml.Serialization.XmlIgnore> Public Property Initialized As Boolean = False

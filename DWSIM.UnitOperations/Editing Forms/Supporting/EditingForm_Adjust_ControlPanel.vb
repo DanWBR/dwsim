@@ -4,7 +4,7 @@ Imports System.Drawing
 
 Public Class EditingForm_Adjust_ControlPanel
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Private formC As IFlowsheet
     Public status As String = ""

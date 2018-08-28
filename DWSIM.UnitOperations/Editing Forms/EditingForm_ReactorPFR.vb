@@ -7,7 +7,7 @@ Imports System.Drawing
 
 Public Class EditingForm_ReactorPFR
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As Reactors.Reactor_PFR
 

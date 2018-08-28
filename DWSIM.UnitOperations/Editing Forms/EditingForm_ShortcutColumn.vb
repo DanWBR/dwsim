@@ -5,7 +5,7 @@ Imports su = DWSIM.SharedClasses.SystemsOfUnits
 
 Public Class EditingForm_ShortcutColumn
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits SharedClasses.ObjectEditorForm
 
     Public Property SimObject As UnitOperations.ShortcutColumn
 

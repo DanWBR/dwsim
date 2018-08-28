@@ -98,7 +98,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CompoundSeparator
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CompoundSeparator
 
         Protected m_ei As Double
         Protected _compsepspeccollection As New Dictionary(Of String, ComponentSeparationSpec)
