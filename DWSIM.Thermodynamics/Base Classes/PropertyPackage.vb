@@ -6079,7 +6079,7 @@ Final3:
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 IObj?.SetCurrent()
                 IObj?.Paragraphs.Add(String.Format("Calculating Surface Tension for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
-                If T / subst.ConstantProperties.Critical_Temperature < 1 Then
+                If T / subst.ConstantProperties.Critical_Temperature < 1.0 Then
                     With subst.ConstantProperties
                         If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
                             tmpval = Me.CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
