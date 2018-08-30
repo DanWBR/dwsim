@@ -1826,9 +1826,9 @@ Final3:     T = bbb
                             Case "Elevation"
                                 Return cv.ConvertFromSI(su.distance, Profile.Sections(skey).Elevacao)
                             Case "InternalDiameter"
-                                Return cv.Convert("In.", su.diameter, Profile.Sections(skey).DI)
+                                Return cv.Convert("in", su.diameter, Profile.Sections(skey).DI)
                             Case "ExternalDiameter"
-                                Return cv.Convert("In.", su.diameter, Profile.Sections(skey).DE)
+                                Return cv.Convert("in", su.diameter, Profile.Sections(skey).DE)
                             Case "Sections"
                                 Return Profile.Sections(skey).Incrementos
                             Case Else
@@ -1987,9 +1987,9 @@ Final3:     T = bbb
                             Case "Elevation"
                                 Profile.Sections(skey).Elevacao = cv.ConvertToSI(su.distance, propval)
                             Case "InternalDiameter"
-                                Profile.Sections(skey).DI = cv.Convert(su.diameter, "In.", propval)
+                                Profile.Sections(skey).DI = cv.Convert(su.diameter, "in", propval)
                             Case "ExternalDiameter"
-                                Profile.Sections(skey).DE = cv.Convert(su.diameter, "In.", propval)
+                                Profile.Sections(skey).DE = cv.Convert(su.diameter, "in", propval)
                             Case "Sections"
                                 Profile.Sections(skey).Incrementos = propval
                         End Select

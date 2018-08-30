@@ -221,7 +221,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.area
                     units.AddRange(New String() {"m2", "cm2", "ft2"})
                 Case Enums.UnitOfMeasure.diameter
-                    units.AddRange(New String() {"m", "mm", "cm", "in", "ft"})
+                    units.AddRange(New String() {"mm", "in"})
                 Case Enums.UnitOfMeasure.force
                     units.AddRange(New String() {"N", "dyn", "kgf", "lbf"})
                 Case Enums.UnitOfMeasure.heat_transf_coeff
@@ -309,7 +309,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.molar_volume
                 Case "m2", "cm2", "ft2"
                     Return Enums.UnitOfMeasure.area
-                Case "m", "mm", "cm", "in", "ft"
+                Case "mm", "in"
                     Return Enums.UnitOfMeasure.diameter
                 Case "N", "dyn", "kgf", "lbf"
                     Return Enums.UnitOfMeasure.force
@@ -1298,10 +1298,13 @@ Namespace SystemsOfUnits
                     Return value * 1000
                 Case "ft3/lbmol"
                     Return value / 35.3147 / 1000
+
                 Case "mm"                               'comprimento'
-                    Return value / 1000
+                    Return value
                 Case "in.", "in"
-                    Return value / 39.3701
+                    Return value / 39.3701 * 1000
+
+
                 Case "dyn"                              'forca
                     Return value / 100000
                 Case "N"
@@ -1734,10 +1737,13 @@ Namespace SystemsOfUnits
                     Return value / 1000
                 Case "ft3/lbmol"
                     Return value * 35.3147 * 1000
+
                 Case "mm"                               'comprimento'
-                    Return value * 1000
+                    Return value
                 Case "in.", "in"
-                    Return value * 39.3701
+                    Return value * 39.3701 / 1000
+
+
                 Case "dyn"                              'forca
                     Return value * 100000
                 Case "N"

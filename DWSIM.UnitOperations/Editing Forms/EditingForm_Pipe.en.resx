@@ -120,10 +120,6 @@
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
   </data>
@@ -133,29 +129,11 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="cbFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 249</value>
-  </data>
-  <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 21</value>
-  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
   </data>
-  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 222</value>
-  </data>
-  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 21</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Temperature Tolerance</value>
@@ -163,41 +141,23 @@
   <data name="Label4.ToolTip" xml:space="preserve">
     <value>Tolerance of temperature in calculation loop</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 13</value>
-  </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Pressure Tolerance</value>
   </data>
   <data name="Label5.ToolTip" xml:space="preserve">
     <value>Tolerance of pressure in calculation loop</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 93</value>
-  </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Click for more information</value>
-  </data>
-  <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 249</value>
   </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
-  <data name="chkIncludeJT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 17</value>
-  </data>
   <data name="chkIncludeJT.Text" xml:space="preserve">
     <value>Include Joule-Thomson Effect</value>
   </data>
-  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 222</value>
-  </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Calculation Mode</value>
@@ -211,29 +171,14 @@
   <data name="cbCalcMode.Items2" xml:space="preserve">
     <value>Specify Outlet Temperature</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
-  </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Outlet Temperature</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Pressure Drop Correlation</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
-  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Outlet Pressure</value>
-  </data>
-  <data name="cbPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 67</value>
-  </data>
-  <data name="cbPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 21</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>General</value>
@@ -259,9 +204,6 @@
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
-  </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Energy Stream</value>
   </data>
@@ -271,14 +213,8 @@
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Outlet Stream</value>
-  </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
