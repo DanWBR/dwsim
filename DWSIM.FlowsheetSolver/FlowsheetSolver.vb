@@ -944,7 +944,10 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
             If Not fs Is Nothing Then
-                If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then Return New List(Of Exception)
+                If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then
+                    FinishAny?.Invoke()
+                    Return New List(Of Exception)
+                End If
             End If
 
             Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
@@ -1003,6 +1006,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             If objstack.Count = 0 Then
                 GlobalSettings.Settings.CalculatorBusy = False
+                FinishAny?.Invoke()
                 Return New List(Of Exception)
             End If
 
