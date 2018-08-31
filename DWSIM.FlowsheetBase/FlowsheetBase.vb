@@ -1029,7 +1029,7 @@ Imports System.Dynamic
 
         'check saved from Classic UI
 
-        Dim savedfromclui As Boolean = False
+        Dim savedfromclui As Boolean = True
 
         Try
             savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
