@@ -1,4 +1,5 @@
-Version 5.2 Update 14
+Version 5.2 Update 15
 
-- [NEW] Added support for OpenCL GPU acceleration on macOS and Linux
-- [FIX] Fixed Classic UI Material Stream Editor
+- [CHG] Performance updates
+- [FIX] Fixed Pipe Segment UO diameter unit conversion
+- [FIX] Do not throw CAPE-OPEN UO 'Edit()' not implemented exception

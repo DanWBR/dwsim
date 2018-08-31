@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 14
+Version 5.2 Update 15
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 15
+
+- [CHG] Performance updates
+- [FIX] Fixed Pipe Segment UO diameter unit conversion
+- [FIX] Do not throw CAPE-OPEN UO 'Edit()' not implemented exception
 
 Version 5.2 Update 14
 
