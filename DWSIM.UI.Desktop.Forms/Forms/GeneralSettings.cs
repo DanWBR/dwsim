@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Cudafy;
@@ -98,7 +99,7 @@ namespace DWSIM.UI.Forms.Forms
 
             var tab2a = Common.GetDefaultContainer();
             tab2a.Tag = "Inspector";
-            
+
             tab2a.CreateAndAddCheckBoxRow("Enable Inspector Reports", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
             tab2a.CreateAndAddDescriptionRow("Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector tool to view these reports.");
             tab2a.CreateAndAddDescriptionRow("When the Inspector Reports feature is enabled and the Flowsheet Solver is called, the Parallel CPU Processing is automatically disabled. You must re-enable it manually and disable the Inspector to increase the calculation speed again.");
@@ -118,53 +119,77 @@ namespace DWSIM.UI.Forms.Forms
             tab2.CreateAndAddDescriptionRow("Enables utilization of all CPU cores during flowsheet calculations.");
             tab2.CreateAndAddCheckBoxRow("EnableCPUSIMDAccel".Localize(prefix), Settings.UseSIMDExtensions, (CheckBox sender, EventArgs obj) => { Settings.UseSIMDExtensions = sender.Checked.GetValueOrDefault(); });
             tab2.CreateAndAddDescriptionRow("Enables utilization of special CPU instructions for accelerated math calculations.");
-            
+
             tab2.CreateAndAddCheckBoxRow("BreakOnException".Localize(prefix), Settings.SolverBreakOnException, (CheckBox sender, EventArgs obj) => { Settings.SolverBreakOnException = sender.Checked.GetValueOrDefault(); });
             tab2.CreateAndAddDescriptionRow("If activated, the solver won't calculate the rest of the flowsheet if an error occurs during the calculation of an intermediate block/object.");
             tab2.CreateAndAddCheckBoxRow("EnableGPUAccel".Localize(prefix), Settings.EnableGPUProcessing, (CheckBox sender, EventArgs obj) => { Settings.EnableGPUProcessing = sender.Checked.Value; });
             TextArea tbgpucaps = null;
             var cbgpu = tab2.CreateAndAddDropDownRow("Computing Device", new List<string>(), 0, (sender, e) =>
             {
-            if (!(sender.SelectedValue == null))
-            {
-                if (sender.SelectedValue.ToString().Contains("Emulator"))
+                if (!(sender.SelectedValue == null))
                 {
-                    Settings.CudafyTarget =(int)eGPUType.Emulator;
-                }
-                else if (sender.SelectedValue.ToString().Contains("CUDA"))
-                {
-                    Settings.CudafyTarget = (int)eGPUType.Cuda;
-                }
-                else
-                {
-                    Settings.CudafyTarget = (int)eGPUType.OpenCL;
-                }
-
-                Settings.CudafyTarget = Settings.CudafyTarget;
-                try
-                {
-                    foreach (GPGPUProperties prop in CudafyHost.GetDeviceProperties((eGPUType)Settings.CudafyTarget, false))
+                    if (sender.SelectedValue.ToString().Contains("Emulator"))
                     {
-                        if (sender.SelectedValue.ToString().Split('|')[1].Contains(prop.Name))
-                        {
-                            Settings.SelectedGPU = sender.SelectedValue.ToString();
-                            Settings.CudafyDeviceID = prop.DeviceId;
-                            Application.Instance.Invoke(() => GetCUDACaps(prop, tbgpucaps));
-                            break;
-                        }
+                        Settings.CudafyTarget = (int)eGPUType.Emulator;
+                    }
+                    else if (sender.SelectedValue.ToString().Contains("CUDA"))
+                    {
+                        Settings.CudafyTarget = (int)eGPUType.Cuda;
+                    }
+                    else
+                    {
+                        Settings.CudafyTarget = (int)eGPUType.OpenCL;
+                    }
 
+                    Settings.CudafyTarget = Settings.CudafyTarget;
+                    try
+                    {
+                        foreach (GPGPUProperties prop in CudafyHost.GetDeviceProperties((eGPUType)Settings.CudafyTarget, false))
+                        {
+                            if (sender.SelectedValue.ToString().Split('|')[1].Contains(prop.Name))
+                            {
+                                Settings.SelectedGPU = sender.SelectedValue.ToString();
+                                Settings.CudafyDeviceID = prop.DeviceId;
+                                Application.Instance.Invoke(() => GetCUDACaps(prop, tbgpucaps));
+                                break;
+                            }
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    if (loaded)
+                    {
+                        if (Settings.gpu != null) Settings.gpu.Dispose();
+                        Settings.gpu = null;
+                        try
+                        {
+                            //set CUDA params
+                            CudafyModes.Compiler = eGPUCompiler.All;
+                            CudafyModes.Target = (eGPUType)Settings.CudafyTarget;
+                            Cudafy.Translator.CudafyTranslator.GenerateDebug = false;
+                            DWSIM.Thermodynamics.Calculator.InitComputeDevice();
+                            Console.WriteLine("GPU initialized successfully: " + Settings.SelectedGPU + "(" + CudafyModes.Target.ToString() + ")");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("GPU initialization failed: " + ex.ToString());
+                            var ex1 = ex;
+                            while (ex1.InnerException != null)
+                            {
+                                Console.WriteLine("GPU initialization failed (IEX): " + ex1.InnerException.ToString());
+                                if (ex1.InnerException is ReflectionTypeLoadException)
+                                {
+                                    foreach (var tlex in ((ReflectionTypeLoadException)(ex1.InnerException)).LoaderExceptions)
+                                    { Console.WriteLine("GPU initialization failed (TLEX): " + tlex.Message); }
+                                }
+                                ex1 = ex1.InnerException;
+                            }
+                        }
                     }
                 }
-                catch (Exception)
-                {
-                }
-                if (loaded)
-                {
-                    if (Settings.gpu != null) Settings.gpu.Dispose();
-                    Settings.gpu = null;
-                    Thermodynamics.Calculator.InitComputeDevice();
-                }
-            } });
+            });
             tbgpucaps = tab2.CreateAndAddMultilineMonoSpaceTextBoxRow("", 200, true, null);
 
             Task.Factory.StartNew(() =>
@@ -334,7 +359,7 @@ namespace DWSIM.UI.Forms.Forms
                 if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
             });
 
-            return Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a,tab3, tab4, tab5 });
+            return Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a, tab3, tab4, tab5 });
 
         }
 
@@ -342,24 +367,24 @@ namespace DWSIM.UI.Forms.Forms
         {
             int i = 0;
             tbGPUCaps.Text = "";
-            tbGPUCaps.Text +=((string.Format("   --- General Information for device {0} ---", i) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Name:  {0}", prop.Name) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Device Id:  {0}", prop.DeviceId) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Compute capability:  {0}.{1}", prop.Capability.Major, prop.Capability.Minor) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Clock rate: {0}", prop.ClockRate) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Simulated: {0}", prop.IsSimulated) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("   --- Memory Information for device {0} ---", i) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Total global mem:  {0}", prop.TotalMemory) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Total constant Mem:  {0}", prop.TotalConstantMemory) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Max mem pitch:  {0}", prop.MemoryPitch) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Texture Alignment:  {0}", prop.TextureAlignment) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("   --- MP Information for device {0} ---", i) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Shared mem per mp: {0}", prop.SharedMemoryPerBlock) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Registers per mp:  {0}", prop.RegistersPerBlock) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Threads in warp:  {0}", prop.WarpSize) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Max threads per block:  {0}", prop.MaxThreadsPerBlock) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Max thread dimensions:  ({0}, {1}, {2})", prop.MaxThreadsSize.x, prop.MaxThreadsSize.y, prop.MaxThreadsSize.z) + "\r\n"));
-            tbGPUCaps.Text +=((string.Format("Max grid dimensions:  ({0}, {1}, {2})", prop.MaxGridSize.x, prop.MaxGridSize.y, prop.MaxGridSize.z) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("   --- General Information for device {0} ---", i) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Name:  {0}", prop.Name) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Device Id:  {0}", prop.DeviceId) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Compute capability:  {0}.{1}", prop.Capability.Major, prop.Capability.Minor) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Clock rate: {0}", prop.ClockRate) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Simulated: {0}", prop.IsSimulated) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("   --- Memory Information for device {0} ---", i) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Total global mem:  {0}", prop.TotalMemory) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Total constant Mem:  {0}", prop.TotalConstantMemory) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Max mem pitch:  {0}", prop.MemoryPitch) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Texture Alignment:  {0}", prop.TextureAlignment) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("   --- MP Information for device {0} ---", i) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Shared mem per mp: {0}", prop.SharedMemoryPerBlock) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Registers per mp:  {0}", prop.RegistersPerBlock) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Threads in warp:  {0}", prop.WarpSize) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Max threads per block:  {0}", prop.MaxThreadsPerBlock) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Max thread dimensions:  ({0}, {1}, {2})", prop.MaxThreadsSize.x, prop.MaxThreadsSize.y, prop.MaxThreadsSize.z) + "\r\n"));
+            tbGPUCaps.Text += ((string.Format("Max grid dimensions:  ({0}, {1}, {2})", prop.MaxGridSize.x, prop.MaxGridSize.y, prop.MaxGridSize.z) + "\r\n"));
             tbGPUCaps.CaretIndex = 0;
             tbGPUCaps.SelectedText = "";
         }
