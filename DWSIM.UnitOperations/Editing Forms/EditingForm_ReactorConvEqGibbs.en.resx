@@ -117,42 +117,250 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 38</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>526, 32</value>
+  </data>
+  <data name="lblTag.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>774, 86</value>
+  </data>
+  <data name="chkActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
+  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkActive.ToolTip1" xml:space="preserve">
+    <value>Active/Inactive</value>
+  </data>
+  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 144</value>
+  </data>
+  <data name="lblConnectedTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="lblConnectedTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 26</value>
+  </data>
+  <data name="lblConnectedTo.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 94</value>
+  </data>
+  <data name="lblStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 26</value>
+  </data>
+  <data name="lblStatus.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 144</value>
+  </data>
+  <data name="Label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>100, 26</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
   </data>
+  <data name="Label13.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 94</value>
+  </data>
+  <data name="Label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 26</value>
+  </data>
+  <data name="Label12.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 44</value>
+  </data>
+  <data name="Label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 26</value>
+  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
+  </data>
+  <data name="Label11.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 12</value>
+  </data>
+  <data name="GroupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 196</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
+  <data name="GroupBox5.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rtbAnnotations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 31</value>
+  </data>
+  <data name="rtbAnnotations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>818, 295</value>
+  </data>
+  <data name="rtbAnnotations.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 1400</value>
+  </data>
+  <data name="GroupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 332</value>
+  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="GroupBox4.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>697, 106</value>
+  </data>
+  <data name="btnConfigureFlashAlg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnConfigureFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
   </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
+  <data name="btnConfigureFlashAlg.ToolTip1" xml:space="preserve">
+    <value>Configure</value>
+  </data>
+  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>697, 52</value>
+  </data>
+  <data name="btnConfigurePP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnConfigurePP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
+  </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
+  </data>
+  <data name="btnConfigurePP.ToolTip1" xml:space="preserve">
+    <value>Configure</value>
+  </data>
+  <data name="cbFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 106</value>
+  </data>
+  <data name="cbFlashAlg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 34</value>
+  </data>
+  <data name="cbFlashAlg.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 112</value>
+  </data>
+  <data name="Label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 26</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
   </data>
+  <data name="Label10.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 52</value>
+  </data>
+  <data name="cbPropPack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 34</value>
+  </data>
+  <data name="cbPropPack.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 58</value>
+  </data>
+  <data name="Label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+    <value>185, 26</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
+  <data name="Label9.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 290</value>
+  </data>
+  <data name="GroupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>755, 176</value>
+  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
+  </data>
+  <data name="GroupBox3.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbGibbsMinMode.Items" xml:space="preserve">
     <value>Calculate Reaction Extents</value>
@@ -160,23 +368,74 @@
   <data name="cbGibbsMinMode.Items1" xml:space="preserve">
     <value>Direct Gibbs Energy Minimization</value>
   </data>
+  <data name="cbGibbsMinMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 130</value>
+  </data>
+  <data name="cbGibbsMinMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbGibbsMinMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>439, 34</value>
+  </data>
+  <data name="cbGibbsMinMode.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="Label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
+    <value>137, 26</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Reaction Set</value>
   </data>
+  <data name="Label4.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 136</value>
+  </data>
+  <data name="Label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
+    <value>212, 26</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Minimization Method</value>
   </data>
+  <data name="Label6.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 82</value>
+  </data>
+  <data name="Label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>180, 26</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Calculation Mode</value>
+  </data>
+  <data name="Label2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>630, 236</value>
+  </data>
+  <data name="cbPDrop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbPDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 34</value>
+  </data>
+  <data name="cbPDrop.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbCalcMode.Items" xml:space="preserve">
     <value>Isothermic</value>
@@ -187,165 +446,833 @@
   <data name="cbCalcMode.Items2" xml:space="preserve">
     <value>Define Outlet Temperature</value>
   </data>
+  <data name="cbCalcMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 76</value>
+  </data>
+  <data name="cbCalcMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>439, 34</value>
+  </data>
+  <data name="cbCalcMode.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 238</value>
+  </data>
+  <data name="tbPDrop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbPDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 32</value>
+  </data>
+  <data name="tbPDrop.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 192</value>
+  </data>
+  <data name="Label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
+    <value>199, 26</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Outlet Temperature</value>
   </data>
+  <data name="Label3.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 244</value>
+  </data>
+  <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
+    <value>152, 26</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Pressure Drop</value>
   </data>
+  <data name="Label5.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbOutletTemperature.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 186</value>
+  </data>
+  <data name="tbOutletTemperature.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 32</value>
+  </data>
+  <data name="tbOutletTemperature.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbReacSet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 22</value>
+  </data>
+  <data name="cbReacSet.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbReacSet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>439, 34</value>
+  </data>
+  <data name="cbReacSet.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>630, 184</value>
+  </data>
+  <data name="cbTemp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 34</value>
+  </data>
+  <data name="cbTemp.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPageParams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageParams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>802, 489</value>
+  </data>
   <data name="TabPageParams.Text" xml:space="preserve">
     <value>Parameters</value>
+  </data>
+  <data name="TabPageParams.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ListViewCompounds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ListViewCompounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 466</value>
+  </data>
+  <data name="ListViewCompounds.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageCompounds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPageCompounds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageCompounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 466</value>
   </data>
   <data name="TabPageCompounds.Text" xml:space="preserve">
     <value>Compounds</value>
   </data>
+  <data name="TabPageCompounds.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageElements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPageElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageElements.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageElements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 466</value>
+  </data>
   <data name="TabPageElements.Text" xml:space="preserve">
     <value>Elements</value>
+  </data>
+  <data name="TabPageElements.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageInitialEstimates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPageInitialEstimates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageInitialEstimates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 466</value>
   </data>
   <data name="TabPageInitialEstimates.Text" xml:space="preserve">
     <value>Initial Estimates</value>
   </data>
+  <data name="TabPageInitialEstimates.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbExtLoopTol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 400</value>
+  </data>
+  <data name="tbExtLoopTol.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbExtLoopTol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbExtLoopTol.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 408</value>
+  </data>
+  <data name="Label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 26</value>
+  </data>
   <data name="Label20.Text" xml:space="preserve">
     <value>External Loop Tolerance</value>
+  </data>
+  <data name="Label20.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbIntLoopTol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 348</value>
+  </data>
+  <data name="tbIntLoopTol.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbIntLoopTol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbIntLoopTol.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 356</value>
+  </data>
+  <data name="Label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 26</value>
   </data>
   <data name="Label18.Text" xml:space="preserve">
     <value>Internal Loop Tolerance</value>
   </data>
+  <data name="Label18.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbExtLoopMaxIts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 296</value>
+  </data>
+  <data name="tbExtLoopMaxIts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbExtLoopMaxIts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbExtLoopMaxIts.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 304</value>
+  </data>
+  <data name="Label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 13</value>
+    <value>294, 26</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Max. External Loop Iterations</value>
   </data>
+  <data name="Label17.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbIntLoopMaxIts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 244</value>
+  </data>
+  <data name="tbIntLoopMaxIts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbIntLoopMaxIts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbIntLoopMaxIts.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 252</value>
+  </data>
+  <data name="Label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 13</value>
+    <value>286, 26</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Max. Internal Loop Iterations</value>
   </data>
+  <data name="Label16.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkEnableDamping.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 40</value>
+  </data>
+  <data name="chkEnableDamping.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
   <data name="chkEnableDamping.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 17</value>
+    <value>431, 30</value>
   </data>
   <data name="chkEnableDamping.Text" xml:space="preserve">
     <value>Use Damping Factor (Newton's Method)</value>
   </data>
+  <data name="chkEnableDamping.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtDampingUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 150</value>
+  </data>
+  <data name="txtDampingUpperLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="txtDampingUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="txtDampingUpperLimit.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 106</value>
+  </data>
+  <data name="Label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+    <value>124, 26</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Lower Limit</value>
   </data>
+  <data name="Label8.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 158</value>
+  </data>
+  <data name="Label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+    <value>124, 26</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Upper Limit</value>
   </data>
+  <data name="Label15.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtDampingLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 98</value>
+  </data>
+  <data name="txtDampingLowerLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="txtDampingLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="txtDampingLowerLimit.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageGibbsParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPageGibbsParams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageGibbsParams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageGibbsParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 466</value>
+  </data>
   <data name="TabPageGibbsParams.Text" xml:space="preserve">
     <value>Convergence</value>
+  </data>
+  <data name="TabPageGibbsParams.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 162</value>
+  </data>
+  <data name="Label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>728, 58</value>
   </data>
   <data name="Label26.Text" xml:space="preserve">
     <value>The extents initializer parameter will be used to calculate initial estimates, when previously calculated values are not available.</value>
   </data>
+  <data name="Label26.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbExtLoopTolEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 400</value>
+  </data>
+  <data name="tbExtLoopTolEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbExtLoopTolEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbExtLoopTolEq.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 408</value>
+  </data>
+  <data name="Label21.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 26</value>
+  </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>External Loop Tolerance</value>
+  </data>
+  <data name="Label21.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbIntLoopTolEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 348</value>
+  </data>
+  <data name="tbIntLoopTolEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbIntLoopTolEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbIntLoopTolEq.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 356</value>
+  </data>
+  <data name="Label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
+  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 26</value>
   </data>
   <data name="Label22.Text" xml:space="preserve">
     <value>Internal Loop Tolerance</value>
   </data>
+  <data name="Label22.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbIntLoopMaxItsEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 244</value>
+  </data>
+  <data name="tbIntLoopMaxItsEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbIntLoopMaxItsEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbIntLoopMaxItsEq.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 304</value>
+  </data>
+  <data name="Label23.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 13</value>
+    <value>342, 26</value>
   </data>
   <data name="Label23.Text" xml:space="preserve">
     <value>Maximum External Loop iterations</value>
   </data>
+  <data name="Label23.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbExtLoopMaxItsEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 296</value>
+  </data>
+  <data name="tbExtLoopMaxItsEq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbExtLoopMaxItsEq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
+  </data>
+  <data name="tbExtLoopMaxItsEq.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 252</value>
+  </data>
+  <data name="Label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 13</value>
+    <value>335, 26</value>
   </data>
   <data name="Label24.Text" xml:space="preserve">
     <value>Maximum Internal Loop Iterations</value>
   </data>
+  <data name="Label24.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkInitializeExtents.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 40</value>
+  </data>
+  <data name="chkInitializeExtents.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
   <data name="chkInitializeExtents.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 17</value>
+    <value>503, 30</value>
   </data>
   <data name="chkInitializeExtents.Text" xml:space="preserve">
     <value>Initialize Reaction Extents with Previous Values</value>
   </data>
+  <data name="chkInitializeExtents.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 106</value>
+  </data>
+  <data name="Label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 13</value>
+    <value>368, 26</value>
   </data>
   <data name="Label25.Text" xml:space="preserve">
     <value>Reaction Extents Initializer (0.0 - 1.0)</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Label25.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="tbExtentsInitializer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="tbExtentsInitializer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 100</value>
+  </data>
+  <data name="tbExtentsInitializer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tbExtentsInitializer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 32</value>
   </data>
   <data name="tbExtentsInitializer.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="tbExtentsInitializer.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageEqParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPageEqParams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageEqParams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPageEqParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 466</value>
+  </data>
   <data name="TabPageEqParams.Text" xml:space="preserve">
     <value>Convergence</value>
+  </data>
+  <data name="TabPageEqParams.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabControlParameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 31</value>
+  </data>
+  <data name="TabControlParameters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabControlParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>818, 537</value>
+  </data>
+  <data name="TabControlParameters.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 494</value>
+  </data>
+  <data name="GroupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 574</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
   </data>
+  <data name="GroupBox2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 208</value>
+  </data>
+  <data name="btnCreateAndConnectEnergy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnCreateAndConnectEnergy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
+  </data>
   <data name="btnCreateAndConnectEnergy.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectEnergy.ToolTip1" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 154</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
+  <data name="btnCreateAndConnectOutlet2.ToolTip1" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 100</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
+  </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 46</value>
+  </data>
+  <data name="btnCreateAndConnectInlet1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnCreateAndConnectInlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
+  <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
+  <data name="btnDisconnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>774, 154</value>
+  </data>
+  <data name="btnDisconnectOutlet2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnDisconnectOutlet2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
+  </data>
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnectOutlet2.ToolTip1" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 160</value>
+  </data>
+  <data name="Label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+    <value>165, 26</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Outlet Stream 2</value>
   </data>
+  <data name="Label1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbOutlet2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 154</value>
+  </data>
+  <data name="cbOutlet2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbOutlet2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 34</value>
+  </data>
+  <data name="cbOutlet2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnDisconnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>774, 208</value>
+  </data>
+  <data name="btnDisconnectEnergy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnDisconnectEnergy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
+  </data>
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnectEnergy.ToolTip1" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 214</value>
+  </data>
+  <data name="Label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
+    <value>158, 26</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Energy Stream</value>
   </data>
+  <data name="Label14.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbEnergy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 208</value>
+  </data>
+  <data name="cbEnergy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbEnergy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 34</value>
+  </data>
+  <data name="cbEnergy.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>774, 100</value>
+  </data>
+  <data name="btnDisconnectOutlet1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnDisconnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
+  </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>774, 46</value>
+  </data>
+  <data name="btnDisconnect1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="btnDisconnect1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 42</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 106</value>
+  </data>
+  <data name="Label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+    <value>165, 26</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Outlet Stream 1</value>
   </data>
+  <data name="Label7.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 100</value>
+  </data>
+  <data name="cbOutlet1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 34</value>
+  </data>
+  <data name="cbOutlet1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 46</value>
+  </data>
+  <data name="cbInlet1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 34</value>
+  </data>
+  <data name="cbInlet1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 52</value>
+  </data>
+  <data name="Label19.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 7, 0</value>
+  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
+    <value>130, 26</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
+  <data name="Label19.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 212</value>
+  </data>
+  <data name="GroupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 278</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
+  </data>
+  <data name="GroupBox1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -356,8 +1283,35 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gridResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 6</value>
+  </data>
+  <data name="gridResults.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>788, 235</value>
+  </data>
+  <data name="gridResults.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>802, 247</value>
+  </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="TabPage1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Reaction</value>
@@ -371,8 +1325,35 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gridReactions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 6</value>
+  </data>
+  <data name="gridReactions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>789, 234</value>
+  </data>
+  <data name="gridReactions.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 246</value>
+  </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Reactions</value>
+  </data>
+  <data name="TabPage2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -380,10 +1361,70 @@
   <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
     <value>Conversion (%)</value>
   </data>
+  <data name="gridConversions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 246</value>
+  </data>
+  <data name="gridConversions.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="TabPage3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 246</value>
+  </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Conversions</value>
   </data>
+  <data name="TabPage3.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabstrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 31</value>
+  </data>
+  <data name="tabstrip1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>818, 295</value>
+  </data>
+  <data name="tabstrip1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 1068</value>
+  </data>
+  <data name="GroupBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox6.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 332</value>
+  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Results</value>
+  </data>
+  <data name="GroupBox6.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>13, 26</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>854, 1738</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="$this.ToolTip1" xml:space="preserve">
+    <value />
   </data>
 </root>

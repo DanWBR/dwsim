@@ -128,6 +128,8 @@ Public Class EditingForm_ReactorConvEqGibbs
                 tbExtLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance
                 tbIntLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance
 
+                tbNumDeriv.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DerivativePerturbation
+
                 'key compounds
 
                 ListViewCompounds.Items.Clear()
@@ -496,7 +498,7 @@ Public Class EditingForm_ReactorConvEqGibbs
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged,
         txtDampingLowerLimit.TextChanged, txtDampingUpperLimit.TextChanged, tbExtLoopMaxIts.TextChanged, tbIntLoopMaxIts.TextChanged,
         tbExtLoopTol.TextChanged, tbIntLoopTol.TextChanged, tbExtLoopMaxItsEq.TextChanged, tbIntLoopMaxItsEq.TextChanged,
-        tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged, tbExtentsInitializer.TextChanged
+        tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged, tbExtentsInitializer.TextChanged, tbNumDeriv.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -511,7 +513,7 @@ Public Class EditingForm_ReactorConvEqGibbs
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown,
         txtDampingLowerLimit.KeyDown, txtDampingUpperLimit.KeyDown, tbExtLoopMaxIts.KeyDown, tbIntLoopMaxIts.KeyDown,
         tbExtLoopTol.KeyDown, tbIntLoopTol.KeyDown, tbExtLoopMaxItsEq.KeyDown, tbIntLoopMaxItsEq.KeyDown,
-        tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown, tbExtentsInitializer.KeyDown
+        tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown, tbExtentsInitializer.KeyDown, tbNumDeriv.KeyDown
 
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
@@ -539,6 +541,7 @@ Public Class EditingForm_ReactorConvEqGibbs
         If sender Is tbExtLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance = tbExtLoopTolEq.Text.ParseExpressionToDouble
         If sender Is tbIntLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance = tbIntLoopTolEq.Text.ParseExpressionToDouble
         If sender Is tbExtentsInitializer Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer = tbExtentsInitializer.Text.ParseExpressionToDouble
+        If sender Is tbNumDeriv Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DerivativePerturbation = tbNumDeriv.Text.ParseExpressionToDouble
 
         RequestCalc()
 

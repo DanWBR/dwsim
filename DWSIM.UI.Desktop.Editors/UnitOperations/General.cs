@@ -1516,6 +1516,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumExternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumExternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for External Convergence Loop", reactor2g.ExternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.ExternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Numerical Derivative Perturbation", reactor2g.DerivativePerturbation, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DerivativePerturbation = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;

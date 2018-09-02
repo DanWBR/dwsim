@@ -175,6 +175,8 @@ Namespace Reactors
 
         Public Property DampingUpperLimit As Double = 2.0
 
+        Public Property DerivativePerturbation As Double = 0.0001
+
         Public MaximumInternalIterations As Integer = 20000
 
         Public MaximumExternalIterations As Integer = 50
@@ -446,7 +448,7 @@ Namespace Reactors
 
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
-            Dim epsilon As Double = 0.001
+            Dim epsilon As Double = DerivativePerturbation
 
             Dim f1(), f2() As Double
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
@@ -459,7 +461,7 @@ Namespace Reactors
                         x2(j) = x(j)
                     Else
                         If x(j) = 0.0# Then
-                            x2(j) = 0.001
+                            x2(j) = DerivativePerturbation
                         Else
                             x2(j) = x(j) * (1 + epsilon)
                         End If
