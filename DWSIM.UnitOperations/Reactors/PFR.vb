@@ -784,7 +784,7 @@ Namespace Reactors
 
                     Dim vel As Double = Q / (PI * diameter ^ 2 / 4)
                     Dim L As Double = Me.dV * Me.Length
-                    Dim dp As Double = Me.CatalystParticleDiameter
+                    Dim dp As Double = Me.CatalystParticleDiameter / 1000.0
                     Dim ev As Double = Me.CatalystVoidFraction
 
                     Dim pdrop As Double = 150 * eta * L / dp ^ 2 * (1 - ev) ^ 2 / ev ^ 3 * vel + 1.75 * L * rho / dp * (1 - ev) / ev ^ 3 * vel ^ 2
