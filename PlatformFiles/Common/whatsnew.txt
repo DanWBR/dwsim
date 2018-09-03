@@ -1,3 +1,8 @@
+Version 5.2 Update 16
+
+- [NEW] Exposed Gibbs Reactor Numerical Derivative Perturbation
+- [FIX] Bug fixes (PFR, Orifice Plate)
+
 Version 5.2 Update 15
 
 - [CHG] Performance updates
