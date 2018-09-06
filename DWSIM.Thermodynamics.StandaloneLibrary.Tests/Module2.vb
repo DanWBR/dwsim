@@ -20,7 +20,7 @@ Module Module2
         Dim proppacks As String() = dtlc.GetPropPackList()
 
         'Peng-Robinson Property Package
-        Dim prpp As PropertyPackage = dtlc.GetPropPackInstance(proppacks(0))
+        Dim prpp As PropertyPackage = dtlc.GetPropPackInstance(proppacks(1))
 
         'Nested Loops VLLE Flash Algorithm
         Dim nlvlle As New NestedLoops3PV3
