@@ -1,0 +1,28 @@
+﻿# this file contains the partial list of the merged assemblies in the merge order
+# you can fill it from the obj\CONFIG\PROJECT.ilmerge generated on every build
+# and finetune merge order to your satisfaction
+
+DWSIM.Thermodynamics.dll
+DWSIM.SharedClasses.dll
+DWSIM.Interfaces.dll
+CapeOpen.dll
+DWSIM.MathOps.dll
+DWSIM.Inspector.dll
+Ciloci.Flee.dll
+DWSIM.MathOps.DotNumerics.dll
+DWSIM.MathOps.SwarmOps.dll
+Cureos.Numerics.dll
+Mapack.dll
+FileHelpers.dll
+Cudafy.NET.dll
+Newtonsoft.Json.dll
+DWSIM.Thermodynamics.CoolPropInterface.dll
+Yeppp.CLR.Bundle.dll
+ExcelDna.Integration.dll
+DWSIM.ExtensionMethods.dll
+DWSIM.GlobalSettings.dll
+DWSIM.XMLSerializer.dll
+DWSIM.MathOps.RandomOps.dll
+DWSIM.MathOps.SimpsonIntegrator.dll
+Nini.dll
+DWSIM.Thermodynamics.StandaloneLibrary.dll

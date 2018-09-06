@@ -182,6 +182,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.macOS.ClassicUILoader
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Inspector", "DWSIM.Inspector\DWSIM.Inspector.vbproj", "{E4E37BFA-063F-4DBA-A1BF-294D392C2CA4}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.StandaloneLibrary", "DWSIM.Thermodynamics.StandaloneLibrary\DWSIM.Thermodynamics.StandaloneLibrary.vbproj", "{CE1B1451-22A9-4CF3-A0FF-821B9E629696}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.StandaloneLibrary.Tests", "DWSIM.Thermodynamics.StandaloneLibrary.Tests\DWSIM.Thermodynamics.StandaloneLibrary.Tests.vbproj", "{C0261CF7-B22C-4E27-9373-B0878F3FC298}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -922,6 +926,32 @@ Global
 		{E4E37BFA-063F-4DBA-A1BF-294D392C2CA4}.Release|x64.Build.0 = Release|Any CPU
 		{E4E37BFA-063F-4DBA-A1BF-294D392C2CA4}.Release|x86.ActiveCfg = Release|Any CPU
 		{E4E37BFA-063F-4DBA-A1BF-294D392C2CA4}.Release|x86.Build.0 = Release|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Debug|x86.Build.0 = Debug|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release|x64.ActiveCfg = Release|Any CPU
+		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release|x86.ActiveCfg = Release|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Debug|x86.Build.0 = Debug|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|x64.ActiveCfg = Release|Any CPU
+		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
