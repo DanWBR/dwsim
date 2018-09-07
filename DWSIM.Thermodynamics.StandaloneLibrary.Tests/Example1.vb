@@ -1,7 +1,7 @@
 ﻿Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
 
-Module Module1
+Module Example1
 
     Sub Main()
 

@@ -1,0 +1,62 @@
+v5.2
+
+Based on DWSIM v5.2 code (https://github.com/DanWBR/dwsim5)
+
+v3.3.1
+
+Added a function to calculate the True Critical Point of a mixture using PR and SRK EOS
+
+v3.3.0
+
+Exposed Material Stream and Property Package classes
+
+v3.2.0
+
+Removed GPU calculation features
+Improved Mono compatibility
+
+v3.1.0
+
+Added Yeppp! (www.yeppp.info) library (Enable/DisableSIMDExtensions)
+Added a new generic flash calculation function (CalcEquilibrium)
+
+v3.0.0
+
+Updated code to match DWSIM 3.4 release
+
+v2.2.5/6/7
+
+- Fixes and enhancements to three-phase flash algorithms.
+
+v2.2.4
+
+- Made assembly COM-ready. Search for "regasm.exe" in the .NET 4.0 installation directory and register the library using the following commands: 
+"regasm.exe /tlb:DWSIM.Thermodynamics.tlb DWSIM.Thermodynamics.dll"
+"gacutil.exe -i DWSIM.Thermodynamics.dll"
+
+v2.2.3
+
+- Fixes and enhancements to three-phase flash algorithms.
+- Added a new function (SetParameterValue) to the Property Package class to set flash algorithm parameters.
+
+v2.2
+
+- Fixes and enhancements to three-phase flash algorithms.
+- New three-phase flash algorithm, Nested Loops (VLLE), based on the paper: http://dx.doi.org/10.1016/j.fluid.2005.11.011
+
+v2.1
+
+- Enabled GPU calculations for PR, LKP and UNIFAC Property Packages
+- Fixes for some flash algorithms
+- Updated data files
+
+v2.0.1
+
+- Added a trivial solution check to the Gibbs PT flash algorithm.
+- Added an option to define an initial estimate for temperature or pressure in PH, PS, PVF and TVF flash calculations.
+- Added properties to the Property Package class to specify compounds and severity of the liquid phase stability test on three-phase flash algorithms.
+- Bug fixes on the Steam Tables Property Package.
+
+v2.0
+
+- DTL now has the same features of the thermo package in DWSIM 3, except for temperature-dependent NRTL/UNIQUAC interaction parameters, electrolyte susystem and GPU calculation support.

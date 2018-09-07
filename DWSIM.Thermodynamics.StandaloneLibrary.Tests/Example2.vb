@@ -1,7 +1,7 @@
 ﻿Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 
-Module Module2
+Module Example2
 
     Sub Main()
 

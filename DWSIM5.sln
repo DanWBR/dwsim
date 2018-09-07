@@ -186,6 +186,12 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Standa
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.StandaloneLibrary.Tests", "DWSIM.Thermodynamics.StandaloneLibrary.Tests\DWSIM.Thermodynamics.StandaloneLibrary.Tests.vbproj", "{C0261CF7-B22C-4E27-9373-B0878F3FC298}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DTL", "DTL", "{40E0E548-532F-4C7F-B1E7-2CAED88D5552}"
+	ProjectSection(SolutionItems) = preProject
+		PlatformFiles\DTL\CHANGELOG.txt = PlatformFiles\DTL\CHANGELOG.txt
+		PlatformFiles\DTL\README.txt = PlatformFiles\DTL\README.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -958,6 +964,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A8AF483A-90B4-437C-A8BA-DF597F01441E} = {59BD7344-FE2F-4A7F-A309-FE7E090C6342}
+		{40E0E548-532F-4C7F-B1E7-2CAED88D5552} = {59BD7344-FE2F-4A7F-A309-FE7E090C6342}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01DC0FFB-80E7-4B74-BA4D-9137B9F4476F}

@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -126,6 +126,8 @@
   <Import Project="..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets" Condition="Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\DTL\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\DTL\*" "$(SolutionDir)DistPackages\DTL\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM.Thermodynamics.StandaloneLibrary.Tests\*.vb" "$(SolutionDir)DistPackages\DTL\" /Y /F /D
 del "$(SolutionDir)DistPackages\DTL\*.tmp"</PostBuildEvent>
   </PropertyGroup>
 </Project>

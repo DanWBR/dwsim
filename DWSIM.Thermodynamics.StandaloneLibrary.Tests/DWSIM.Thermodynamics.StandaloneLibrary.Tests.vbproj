@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C0261CF7-B22C-4E27-9373-B0878F3FC298}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>DWSIM.Thermodynamics.StandaloneLibrary.Tests.Module2</StartupObject>
+    <StartupObject>DWSIM.Thermodynamics.StandaloneLibrary.Tests.Example2</StartupObject>
     <RootNamespace>DWSIM.Thermodynamics.StandaloneLibrary.Tests</RootNamespace>
     <AssemblyName>DWSIM.Thermodynamics.StandaloneLibrary.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -73,8 +73,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module1.vb" />
-    <Compile Include="Module2.vb" />
+    <Compile Include="Example1.vb" />
+    <Compile Include="Example2.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
