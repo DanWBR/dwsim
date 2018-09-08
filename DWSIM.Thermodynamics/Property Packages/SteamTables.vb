@@ -70,7 +70,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Sub DW_CalcEquilibrium(ByVal spec1 As PropertyPackages.FlashSpec, ByVal spec2 As PropertyPackages.FlashSpec)
+        Public Overrides Sub DW_CalcEquilibrium(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
