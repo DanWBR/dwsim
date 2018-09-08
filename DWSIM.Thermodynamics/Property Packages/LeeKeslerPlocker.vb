@@ -340,8 +340,7 @@ Namespace PropertyPackages
 
                 If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                     Dim val As Double
-                    Dim res As Object = Me.m_lk.MixCritProp_LK(RET_VMOL(Phase), RET_VTC, RET_VPC, RET_VW, RET_VVC, RET_VKij)
-                    val = m_lk.Z_LK("L", res(0), res(1), res(3))(0)
+                    val = m_lk.Z_LK("L", T / Me.AUX_TCM(dwpl), P / Me.AUX_PCM(dwpl), Me.AUX_WM(dwpl))(0)
                     val = 1 / (8.314 * val * T / P)
                     val = val * Me.AUX_MMM(dwpl) / 1000
                     result = val
