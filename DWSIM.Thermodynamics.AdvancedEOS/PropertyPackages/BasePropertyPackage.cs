@@ -10,6 +10,7 @@ using System.IO;
 using DWSIM.Interfaces;
 using System.Threading.Tasks;
 using DWSIM.Thermodynamics.PropertyPackages;
+using DWSIM.Interfaces.Enums;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS
 {
@@ -978,6 +979,18 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public override List<System.Xml.Linq.XElement> SaveData()
         {
             return base.SaveData();
+        }
+
+        public override double AUX_Z(double[] Vx, double T, double P, PhaseName state)
+        {
+            if (state == PhaseName.Liquid)
+            {
+                return P / AUX_LIQDENS(T, Vx, P) * AUX_MMM(Vx) / 1000 / 8.314 / T;
+            }
+            else {
+                double vd = (double)CalculateProperty(ThermoProperty.Density, Vx, "V", T, P, 0, 0);
+                return P / vd * AUX_MMM(Vx) / 1000 / 8.314 / T;
+            }
         }
 
     }
