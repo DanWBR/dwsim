@@ -355,7 +355,6 @@
     <Compile Include="Models\SteamTables_IAPWS_IF97.vb" />
     <Compile Include="Models\Ideal.vb" />
     <Compile Include="Models\LIQUAC2.vb" />
-    <Compile Include="Property Packages\LIQUAC2.vb" />
     <Compile Include="Models\LeeKesler.vb" />
     <Compile Include="Models\LeeKeslerPlocker.vb" />
     <Compile Include="Property Packages\LeeKeslerPlocker.vb" />
@@ -558,7 +557,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DWSIM.Thermodynamics-AddIn.dna" />
     <None Include="Properties\ExcelDna.Build.props" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />

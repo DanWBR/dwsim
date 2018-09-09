@@ -21,12 +21,12 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.MathOps.MathEx
 Imports System.Linq
-
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
-    <System.Runtime.InteropServices.Guid(SteamTablesPropertyPackage.ClassId)> _
-<System.Serializable()> Public Class SteamTablesPropertyPackage
+    <System.Runtime.InteropServices.Guid(SteamTablesPropertyPackage.ClassId)>
+    <System.Serializable()> Public Class SteamTablesPropertyPackage
 
         Inherits PropertyPackages.PropertyPackage
 
@@ -635,9 +635,9 @@ FINAL:
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case phase.Vapor
+                Case Phase.Vapor
                     state = "V"
-                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3
+                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     state = "L"
             End Select
 
@@ -1183,6 +1183,13 @@ FINAL:
                 Return True
             End Get
         End Property
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Return 1 / (Me.m_iapws97.densW(T, P / 100000) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
+
+        End Function
+
     End Class
 
 End Namespace

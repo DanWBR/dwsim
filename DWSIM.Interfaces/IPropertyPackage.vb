@@ -48,6 +48,8 @@
 
     Function AUX_MMM(phase As Enums.PhaseLabel) As Double
 
+    Function AUX_Z(Vx As Double(), T As Double, P As Double, state As Enums.PhaseName) As Double
+
     Function Clone() As IPropertyPackage
 
     Property Flowsheet As IFlowsheet

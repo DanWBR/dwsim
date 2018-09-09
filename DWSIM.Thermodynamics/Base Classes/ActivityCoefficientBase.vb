@@ -29,6 +29,7 @@ Imports System.Xml.Serialization
 Imports System.Runtime.Serialization.Formatters
 Imports System.Threading.Tasks
 Imports DWSIM.MathOps.MathEx
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
@@ -76,10 +77,10 @@ Namespace PropertyPackages
 
             If GlobalSettings.Settings.CAPEOPENMode Then
                 Dim f As New FormConfigPropertyPackage() With {._form = Me.Flowsheet, ._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
-                                f.ShowDialog()
+                f.ShowDialog()
             Else
                 Dim f As New FormConfigPropertyPackage() With {._form = Me.Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                                f.ShowDialog()
+                f.ShowDialog()
             End If
 
         End Sub
@@ -125,16 +126,16 @@ Namespace PropertyPackages
         Public Overloads Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
             Dim pi As Integer = 0
             Select Case phase
-                Case phase.Liquid
-                Case phase.Aqueous
+                Case Phase.Liquid
+                Case Phase.Aqueous
                     pi = 6
-                Case phase.Liquid1
+                Case Phase.Liquid1
                     pi = 3
-                Case phase.Liquid2
+                Case Phase.Liquid2
                     pi = 4
-                Case phase.Liquid3
+                Case Phase.Liquid3
                     pi = 5
-                Case phase.Vapor
+                Case Phase.Vapor
                     If Not Me.Parameters.ContainsKey("PP_IDEAL_VAPOR_PHASE_FUG") Then Me.Parameters.Add("PP_IDEAL_VAPOR_PHASE_FUG", 0)
                     If Me.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = 1 Then
                         Dim vapdens = AUX_VAPDENS(T, P)
@@ -965,6 +966,36 @@ Namespace PropertyPackages
                 Return True
             End Get
         End Property
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_Z", "Compressibility Factor", "Compressibility Factor Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            Dim TCM As Double = RET_VTC().MultiplyY(Vx).Sum
+            Dim PCM As Double = RET_VPC().MultiplyY(Vx).Sum
+            Dim WM As Double = RET_VW().MultiplyY(Vx).Sum
+
+            Dim val As Double
+            If state = PhaseName.Liquid Then
+                val = m_lk.Z_LK("L", T / TCM, P / PCM, WM)(0)
+            Else
+                val = m_lk.Z_LK("V", T / TCM, P / PCM, WM)(0)
+            End If
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", val))
+
+            IObj?.Close()
+
+            Return val
+
+        End Function
+
 
     End Class
 

@@ -29,6 +29,7 @@ Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Interfaces2
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
@@ -1875,6 +1876,13 @@ Namespace PropertyPackages
                 Return False
             End Get
         End Property
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Return 0.0
+
+        End Function
+
     End Class
 
 End Namespace

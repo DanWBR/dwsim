@@ -22,11 +22,12 @@ Imports DWSIM.MathOps.MathEx
 
 Imports System.Runtime.InteropServices
 Imports System.Linq
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
 
-    <System.Runtime.InteropServices.Guid(CoolPropPropertyPackage.ClassId)> _
+    <System.Runtime.InteropServices.Guid(CoolPropPropertyPackage.ClassId)>
     <System.Serializable()> Public Class CoolPropPropertyPackage
 
         Inherits PropertyPackages.PropertyPackage
@@ -1790,13 +1791,13 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case phase.Vapor
+                Case Phase.Vapor
                     state = "V"
                     fstate = PropertyPackages.State.Vapor
-                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
+                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
                     state = "L"
                     fstate = PropertyPackages.State.Liquid
-                Case phase.Solid
+                Case Phase.Solid
                     state = "S"
                     fstate = PropertyPackages.State.Solid
             End Select
@@ -1958,6 +1959,33 @@ Namespace PropertyPackages
                 Return False
             End Get
         End Property
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_Z", "Compressibility Factor", "Compressibility Factor Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            Dim val As Double
+            If state = PhaseName.Liquid Then
+                val = P / (Me.AUX_LIQDENS(T, Vx, P) * 8.314 * T) / 1000 * AUX_MMM(Vx)
+            Else
+                val = P / (Me.AUX_VAPDENS(T, P) * 8.314 * T) / 1000 * AUX_MMM(Vx)
+            End If
+
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", Val))
+
+            IObj?.Close()
+
+            Return val
+
+        End Function
+
     End Class
 
 End Namespace

@@ -21,7 +21,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.MathOps.MathEx
 Imports System.Linq
-
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
@@ -781,6 +781,29 @@ Namespace PropertyPackages
                 Return False
             End Get
         End Property
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_Z", "Compressibility Factor", "Compressibility Factor Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            Dim bof As BlackOilFluid = CalcBOFluid(Vx, DW_GetConstantProperties())
+
+            Dim val = 1 / (bop.VaporDensity(T, P, bof.SGG) * 1000 / AUX_MMM(Vx)) / 8.314 / T * P
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", val))
+
+            IObj?.Close()
+
+            Return val
+
+        End Function
+
     End Class
 
 End Namespace

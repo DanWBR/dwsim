@@ -155,8 +155,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If TypeOf proppack Is ExUNIQUACPropertyPackage Then
                     activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
-                ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                    activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
                 End If
 
                 If activcoeff(wid) = 0.0# Then
@@ -620,8 +618,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim wden As Double = 0.0#
             If TypeOf proppack Is ExUNIQUACPropertyPackage Then
                 wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
-            ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
             End If
 
             i = 0
@@ -634,8 +630,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If TypeOf proppack Is ExUNIQUACPropertyPackage Then
                 activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vx.Clone, CompoundProperties)
-            ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_uni.GAMMA_MR(T, Vx.Clone, CompoundProperties)
             End If
 
             If IdealCalc Then

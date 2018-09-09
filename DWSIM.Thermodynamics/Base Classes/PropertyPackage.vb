@@ -43,6 +43,7 @@ Imports Microsoft.Scripting.Hosting
 
 Imports sui = DWSIM.UI.Shared.Common
 Imports DWSIM.UI.Shared
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
@@ -6496,7 +6497,15 @@ Final3:
 
         End Function
 
+        Public MustOverride Function AUX_Z(Vx As Double(), T As Double, P As Double, state As PhaseName) As Double Implements IPropertyPackage.AUX_Z
+
         Public Overridable Function AUX_LIQDENS(ByVal T As Double, Optional ByVal P As Double = 0, Optional ByVal Pvp As Double = 0, Optional ByVal phaseid As Integer = 3, Optional ByVal FORCE_EOS As Boolean = False) As Double
+
+            Return AUX_LIQDENS(T, RET_VMOL(RET_PHASECODE(phaseid)), P, Pvp, False)
+
+        End Function
+
+        Public Overridable Function AUX_LIQDENS(ByVal T As Double, ByVal Vx As Array, Optional ByVal P As Double = 0, Optional ByVal Pvp As Double = 0, Optional ByVal FORCE_EOS As Boolean = False) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -6581,327 +6590,56 @@ Final3:
 
             IObj?.Paragraphs.Add("<mi>MM</mi> Liquid phase molecular volume (kg/kmol)")
 
-            Dim val As Double
-            Dim m_pr2 As New PropertyPackages.Auxiliary.PengRobinson
-
             IObj?.Paragraphs.Add("<h2>Calculations</h2>")
 
-            If phaseid = 1 Then
+            Dim val As Double
 
+            If Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") AndAlso Me.Parameters("PP_USEEXPLIQDENS") = 1 Then
+                val = AUX_Z(Vx, T, P, PhaseName.Liquid)
+                val = (8.314 * val * T / P)
+                val = 1 / val * Me.AUX_MMM(Vx) / 1000
+                Return val
+            Else
                 If T / Me.AUX_TCM(Phase.Liquid) > 1 Then
-
                     IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
                     IObj?.SetCurrent()
-                    Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
+                    Dim Z = AUX_Z(Vx, T, P, PhaseName.Liquid)
                     val = 1 / (8.314 * Z * T / P)
                     val = val * Me.AUX_MMM(Phase.Liquid) / 1000
-
                 Else
-
-                    If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
-                            Dim i As Integer
-                            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                            i = 0
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                                IObj?.SetCurrent()
-                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                                If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
-                                        vk(i) = Me.AUX_LIQDENSi(subst, T)
-                                        IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                                    Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                    End If
-                                Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                End If
-                                vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
-                                i = i + 1
-                            Next
-                            val = 1 / MathEx.Common.Sum(vk)
-                        Else
-                            val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid), Me.AUX_PCM(Phase.Liquid), Me.AUX_WM(Phase.Liquid), Me.AUX_MMM(Phase.Liquid), Me.AUX_ZRAM(Phase.Liquid), P, Me.AUX_PVAPM(T))
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                        End If
-                    Else
-                        val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid), Me.AUX_PCM(Phase.Liquid), Me.AUX_WM(Phase.Liquid), Me.AUX_MMM(Phase.Liquid), Me.AUX_ZRAM(Phase.Liquid), P, Me.AUX_PVAPM(T))
-                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                    End If
-
-                End If
-
-            ElseIf phaseid = 2 Then
-
-                If T / Me.AUX_TCM(Phase.Vapor) > 1 Then
-
-                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
-                    IObj?.SetCurrent()
-                    Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                    val = 1 / (8.314 * Z * T / P)
-                    val = val * Me.AUX_MMM(Phase.Vapor) / 1000
-
-                Else
-
                     Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                    val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Vapor), Me.AUX_PCM(Phase.Vapor), Me.AUX_WM(Phase.Vapor), Me.AUX_MMM(Phase.Vapor), Me.AUX_ZRAM(Phase.Vapor), P, Me.AUX_PVAPM(T))
-                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-
-                End If
-
-            ElseIf phaseid = 3 Then
-
-                If T / Me.AUX_TCM(Phase.Liquid1) > 1 Then
-                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
-                    IObj?.SetCurrent()
-                    Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid1), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                    val = 1 / (8.314 * Z * T / P)
-                    val = val * Me.AUX_MMM(Phase.Liquid1) / 1000
-
-                Else
-
-                    If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
-                            Dim i As Integer
-                            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                            i = 0
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                                IObj?.SetCurrent()
-                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                                If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
-                                        If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = AUX_LIQDENSi(subst, T)
-                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                                        ElseIf T > subst.ConstantProperties.Critical_Temperature Then
-                                            vk(i) = 800
-                                        ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
-                                            vk(i) = 1.0E+20
-                                        Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                        End If
-                                    Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                    End If
-                                Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                End If
-                                vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
-                                i = i + 1
-                            Next
-                            val = 1 / MathEx.Common.Sum(vk)
+                    Dim i As Integer
+                    i = 0
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+                        IObj?.SetCurrent()
+                        IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
+                        If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
+                            If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
+                                vk(i) = AUX_LIQDENSi(subst, T)
+                                IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
+                            Else
+                                vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                                IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
+                            End If
                         Else
-                            val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid1), Me.AUX_PCM(Phase.Liquid1), Me.AUX_WM(Phase.Liquid1), Me.AUX_MMM(Phase.Liquid1), Me.AUX_ZRAM(Phase.Liquid1), P, Me.AUX_PVAPM(T))
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
+                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
                         End If
-                    Else
-                        val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid1), Me.AUX_PCM(Phase.Liquid1), Me.AUX_WM(Phase.Liquid1), Me.AUX_MMM(Phase.Liquid1), Me.AUX_ZRAM(Phase.Liquid1), P, Me.AUX_PVAPM(T))
-                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                    End If
-
-                End If
-
-            ElseIf phaseid = 4 Then
-
-                If T / Me.AUX_TCM(Phase.Liquid2) > 1 Then
-                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
-                    IObj?.SetCurrent()
-                    Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid2), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                    val = 1 / (8.314 * Z * T / P)
-                    val = val * Me.AUX_MMM(Phase.Liquid2) / 1000
-
-                Else
-
-                    If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
-                            Dim i As Integer
-                            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                            i = 0
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                                IObj?.SetCurrent()
-                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                                If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
-                                        If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = AUX_LIQDENSi(subst, T)
-                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                                        ElseIf T > subst.ConstantProperties.Critical_Temperature Then
-                                            vk(i) = 800
-                                        Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                        End If
-                                    Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                    End If
-                                Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                End If
-                                vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
-                                i = i + 1
-                            Next
-                            val = 1 / MathEx.Common.Sum(vk)
-                        Else
-                            val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid2), Me.AUX_PCM(Phase.Liquid2), Me.AUX_WM(Phase.Liquid2), Me.AUX_MMM(Phase.Liquid2), Me.AUX_ZRAM(Phase.Liquid2), P, Me.AUX_PVAPM(T))
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
+                        If T > subst.ConstantProperties.Critical_Temperature Then
+                            vk(i) = 1.0E+20
                         End If
-                    Else
-                        val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid2), Me.AUX_PCM(Phase.Liquid2), Me.AUX_WM(Phase.Liquid2), Me.AUX_MMM(Phase.Liquid2), Me.AUX_ZRAM(Phase.Liquid2), P, Me.AUX_PVAPM(T))
-                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                    End If
-
-                End If
-
-            ElseIf phaseid = 5 Then
-
-                If T / Me.AUX_TCM(Phase.Liquid3) > 1 Then
-                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
-                    IObj?.SetCurrent()
-                    Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Liquid3), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                    val = 1 / (8.314 * Z * T / P)
-                    val = val * Me.AUX_MMM(Phase.Liquid3) / 1000
-
-                Else
-
-                    If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
-                            Dim i As Integer
-                            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                            i = 0
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                                IObj?.SetCurrent()
-                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                                If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
-                                        If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = AUX_LIQDENSi(subst, T)
-                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                                        ElseIf T > subst.ConstantProperties.Critical_Temperature Then
-                                            vk(i) = 800
-                                        Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                        End If
-                                    Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                    End If
-                                Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                End If
-                                vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
-                                i = i + 1
-                            Next
-                            val = 1 / MathEx.Common.Sum(vk)
-                        Else
-                            val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid3), Me.AUX_PCM(Phase.Liquid3), Me.AUX_WM(Phase.Liquid3), Me.AUX_MMM(Phase.Liquid3), Me.AUX_ZRAM(Phase.Liquid3), P, Me.AUX_PVAPM(T))
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                        End If
-                    Else
-                        val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Liquid3), Me.AUX_PCM(Phase.Liquid3), Me.AUX_WM(Phase.Liquid3), Me.AUX_MMM(Phase.Liquid3), Me.AUX_ZRAM(Phase.Liquid3), P, Me.AUX_PVAPM(T))
-                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                    End If
-
-                End If
-
-            ElseIf phaseid = 6 Then
-
-                If T / Me.AUX_TCM(Phase.Aqueous) > 1 Then
-
-                    Dim Z = m_pr2.Z_PR(T, P, RET_VMOL(Phase.Aqueous), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                    val = 1 / (8.314 * Z * T / P)
-                    val = val * Me.AUX_MMM(Phase.Aqueous) / 1000
-
-                Else
-
-                    If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
-                            Dim i As Integer
-                            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                            i = 0
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                                IObj?.SetCurrent()
-                                IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                                If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
-                                        If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = AUX_LIQDENSi(subst, T)
-                                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                                        Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                        End If
-                                    Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                    End If
-                                Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                    IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
-                                End If
-                                vk(i) = subst.MassFraction.GetValueOrDefault / vk(i)
-                                i = i + 1
-                            Next
-                            val = 1 / MathEx.Common.Sum(vk)
-                        Else
-                            val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Aqueous), Me.AUX_PCM(Phase.Aqueous), Me.AUX_WM(Phase.Aqueous), Me.AUX_MMM(Phase.Aqueous), Me.AUX_ZRAM(Phase.Aqueous), P, Me.AUX_PVAPM(T))
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                        End If
-                    Else
-                        val = Auxiliary.PROPS.liq_dens_rackett(T, Me.AUX_Rackett_Tcm(Phase.Aqueous), Me.AUX_PCM(Phase.Aqueous), Me.AUX_WM(Phase.Aqueous), Me.AUX_MMM(Phase.Aqueous), Me.AUX_ZRAM(Phase.Aqueous), P, Me.AUX_PVAPM(T))
-                        IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
-                    End If
-
+                        If Not Double.IsNaN(vk(i)) Then vk(i) = Vx(i) / vk(i) Else vk(i) = 0.0#
+                        i = i + 1
+                    Next
+                    val = 1 / MathEx.Common.Sum(vk)
                 End If
             End If
-
-            m_pr2 = Nothing
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
 
             IObj?.Paragraphs.Add(String.Format("Liquid Phase Density: {0} kg/m3", val))
 
             IObj?.Close()
-
-            Return val
-
-        End Function
-
-        Public Overridable Function AUX_LIQDENS(ByVal T As Double, ByVal Vx As Array, Optional ByVal P As Double = 0, Optional ByVal Pvp As Double = 0, Optional ByVal FORCE_EOS As Boolean = False) As Double
-
-            Dim val As Double
-            Dim m_pr2 As New PropertyPackages.Auxiliary.PengRobinson
-
-            Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            i = 0
-            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
-                        vk(i) = AUX_LIQDENSi(subst, T)
-                    Else
-                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                    End If
-                Else
-                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                End If
-                If T > subst.ConstantProperties.Critical_Temperature Then
-                    vk(i) = 1.0E+20
-                End If
-                If Not Double.IsNaN(vk(i)) Then vk(i) = Vx(i) / vk(i) Else vk(i) = 0.0#
-                i = i + 1
-            Next
-            val = 1 / MathEx.Common.Sum(vk)
-
-            m_pr2 = Nothing
 
             Return val 'kg/m3
 

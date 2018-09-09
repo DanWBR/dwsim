@@ -19,12 +19,13 @@
 'Imports CAPEOPEN_PD.CAPEOPEN
 'Imports DWSIM.SimulationObjects
 
+Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
 
 Namespace PropertyPackages
 
-    <System.Runtime.InteropServices.Guid(ChaoSeaderPropertyPackage.ClassId)> _
+    <System.Runtime.InteropServices.Guid(ChaoSeaderPropertyPackage.ClassId)>
     <System.Serializable()> Public Class ChaoSeaderPropertyPackage
 
         Inherits PropertyPackages.PropertyPackage
@@ -223,11 +224,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case phase.Vapor
+                Case Phase.Vapor
                     state = "V"
-                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
+                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
                     state = "L"
-                Case phase.Solid
+                Case Phase.Solid
                     state = "S"
             End Select
 
@@ -530,8 +531,8 @@ Namespace PropertyPackages
 
 #Region "    Metodos Numericos"
 
-        Public Function IntegralSimpsonCp(ByVal a As Double, _
-                 ByVal b As Double, _
+        Public Function IntegralSimpsonCp(ByVal a As Double,
+                 ByVal b As Double,
                  ByVal Epsilon As Double, ByVal subst As String) As Double
 
             Dim Result As Double
@@ -577,8 +578,8 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Function IntegralSimpsonCp_T(ByVal a As Double, _
-         ByVal b As Double, _
+        Public Function IntegralSimpsonCp_T(ByVal a As Double,
+         ByVal b As Double,
          ByVal Epsilon As Double, ByVal subst As String) As Double
 
             'Cp = A + B*T + C*T^2 + D*T^3 + E*T^4 where Cp in kJ/kg-mol , T in K 
@@ -692,7 +693,7 @@ Namespace PropertyPackages
             If Not Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") Then Me.Parameters.Add("PP_USE_EOS_LIQDENS", 0)
 
             Select Case phase
-                Case phase.Liquid
+                Case Phase.Liquid
                     key = "1"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -702,7 +703,7 @@ Namespace PropertyPackages
                             partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
-                Case phase.Aqueous
+                Case Phase.Aqueous
                     key = "6"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -712,7 +713,7 @@ Namespace PropertyPackages
                             partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
-                Case phase.Liquid1
+                Case Phase.Liquid1
                     key = "3"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -722,7 +723,7 @@ Namespace PropertyPackages
                             partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
-                Case phase.Liquid2
+                Case Phase.Liquid2
                     key = "4"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -732,7 +733,7 @@ Namespace PropertyPackages
                             partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
-                Case phase.Liquid3
+                Case Phase.Liquid3
                     key = "5"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -742,7 +743,7 @@ Namespace PropertyPackages
                             partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
-                Case phase.Vapor
+                Case Phase.Vapor
                     partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.01)
                     key = "2"
                 Case PropertyPackages.Phase.Solid
@@ -827,6 +828,36 @@ Namespace PropertyPackages
                 Return True
             End Get
         End Property
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_Z", "Compressibility Factor", "Compressibility Factor Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            Dim TCM As Double = RET_VTC().MultiplyY(Vx).Sum
+            Dim PCM As Double = RET_VPC().MultiplyY(Vx).Sum
+            Dim WM As Double = RET_VW().MultiplyY(Vx).Sum
+
+            Dim val As Double
+            If state = PhaseName.Liquid Then
+                val = m_lk.Z_LK("L", T / TCM, P / PCM, WM)(0)
+            Else
+                val = m_lk.Z_LK("V", T / TCM, P / PCM, WM)(0)
+            End If
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", val))
+
+            IObj?.Close()
+
+            Return val
+
+        End Function
+
     End Class
 
 End Namespace

@@ -22,11 +22,12 @@ Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 
 Imports System.Threading.Tasks
 Imports System.Linq
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
-    <System.Runtime.InteropServices.Guid(PengRobinsonPropertyPackage.ClassId)> _
- <System.Serializable()> Public Class PengRobinsonPropertyPackage
+    <System.Runtime.InteropServices.Guid(PengRobinsonPropertyPackage.ClassId)>
+    <System.Serializable()> Public Class PengRobinsonPropertyPackage
 
         Inherits PropertyPackages.PropertyPackage
 
@@ -212,11 +213,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case phase.Vapor
+                Case Phase.Vapor
                     state = "V"
-                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
+                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
                     state = "L"
-                Case phase.Solid
+                Case Phase.Solid
                     state = "S"
             End Select
 
@@ -1081,6 +1082,37 @@ Namespace PropertyPackages
             CP.Add(New Double() {TCR, PCR, VCR, real})
 
             Return CP
+
+        End Function
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_Z", "Compressibility Factor", "Compressibility Factor Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            Dim val As Double
+            If state = PhaseName.Liquid Then
+                val = m_pr.Z_PR(T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
+            Else
+                val = m_pr.Z_PR(T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, "V")
+            End If
+
+            val = (8.314 * val * T / P)
+            If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
+                val -= Me.AUX_CM(Phase.Vapor)
+            End If
+            val = P * val / (8.314 * T)
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", val))
+
+            IObj?.Close()
+
+            Return val
 
         End Function
 

@@ -21,7 +21,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.MathOps.MathEx
 Imports System.Linq
-
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
@@ -63,10 +63,10 @@ Namespace PropertyPackages
 
             If GlobalSettings.Settings.CAPEOPENMode Then
                 Dim f As New FormConfigPropertyPackage() With {._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
-                                f.ShowDialog()
+                f.ShowDialog()
             Else
                 Dim f As New FormConfigPropertyPackage() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                                f.ShowDialog()
+                f.ShowDialog()
             End If
 
         End Sub
@@ -112,11 +112,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case phase.Vapor
+                Case Phase.Vapor
                     state = "V"
-                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
+                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
                     state = "L"
-                Case phase.Solid
+                Case Phase.Solid
                     state = "S"
             End Select
 
@@ -142,7 +142,7 @@ Namespace PropertyPackages
             Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = Me.AUX_MMM(phase)
 
             Select Case phase
-                Case phase.Vapor
+                Case Phase.Vapor
 
                     Select Case [property].ToLower
                         Case "compressibilityfactor"
@@ -155,12 +155,12 @@ Namespace PropertyPackages
                             result = Me.m_iapws97.cvW(T, P / 100000) '* 18
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                         Case "enthalpy", "enthalpynf"
-                            result = Me.DW_CalcEnthalpy(RET_VMOL(phase.Vapor), T, P, PropertyPackages.State.Vapor)
+                            result = Me.DW_CalcEnthalpy(RET_VMOL(Phase.Vapor), T, P, PropertyPackages.State.Vapor)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                         Case "entropy", "entropynf"
-                            result = Me.DW_CalcEntropy(RET_VMOL(phase.Vapor), T, P, PropertyPackages.State.Vapor)
+                            result = Me.DW_CalcEntropy(RET_VMOL(Phase.Vapor), T, P, PropertyPackages.State.Vapor)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -170,13 +170,13 @@ Namespace PropertyPackages
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEntropy = 0.0#
                         Case "enthalpyf"
                             Dim entF As Double = Me.AUX_HFm25(phase)
-                            result = Me.DW_CalcEnthalpy(RET_VMOL(phase.Vapor), T, P, PropertyPackages.State.Vapor)
+                            result = Me.DW_CalcEnthalpy(RET_VMOL(Phase.Vapor), T, P, PropertyPackages.State.Vapor)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpyF = result + entF
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpyF.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpyF = result
                         Case "entropyf"
                             Dim entF As Double = Me.AUX_SFm25(phase)
-                            result = Me.DW_CalcEntropy(RET_VMOL(phase.Vapor), T, P, PropertyPackages.State.Vapor)
+                            result = Me.DW_CalcEntropy(RET_VMOL(Phase.Vapor), T, P, PropertyPackages.State.Vapor)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF = result + entF
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
@@ -198,7 +198,7 @@ Namespace PropertyPackages
                             ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
                     End Select
 
-                Case phase.Liquid1
+                Case Phase.Liquid1
 
                     Dim salinity As Double = CalcSalinity()
 
@@ -213,12 +213,12 @@ Namespace PropertyPackages
                             result = Me.SIA.sea_cp_si(salinity, T, P) / 1000
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                         Case "enthalpy", "enthalpynf"
-                            result = Me.DW_CalcEnthalpy(RET_VMOL(phase.Liquid1), T, P, PropertyPackages.State.Liquid)
+                            result = Me.DW_CalcEnthalpy(RET_VMOL(Phase.Liquid1), T, P, PropertyPackages.State.Liquid)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                         Case "entropy", "entropynf"
-                            result = Me.DW_CalcEntropy(RET_VMOL(phase.Liquid1), T, P, PropertyPackages.State.Liquid)
+                            result = Me.DW_CalcEntropy(RET_VMOL(Phase.Liquid1), T, P, PropertyPackages.State.Liquid)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -764,6 +764,13 @@ Namespace PropertyPackages
                 Return False
             End Get
         End Property
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            Return 1 / (Me.m_iapws97.densW(T, P / 100000) * 1000 / 18) / 8.314 / T * P
+
+        End Function
+
     End Class
 
 End Namespace
