@@ -69,6 +69,7 @@ Namespace PropertyPackages
                 .Add("PP_USE_EOS_LIQDENS", 1)
                 .Add("PP_IDEAL_VAPOR_PHASE_FUG", 1)
                 .Add("PP_ENTH_CP_CALC_METHOD", 1)
+                .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
             End With
         End Sub
 

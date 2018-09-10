@@ -81,6 +81,7 @@ Namespace PropertyPackages
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_USE_EOS_LIQDENS", 1)
                 .Add("PP_USE_EOS_VOLUME_SHIFT", 1)
+                .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
             End With
         End Sub
 

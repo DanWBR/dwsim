@@ -314,6 +314,7 @@ Namespace PropertyPackages
                 .Clear()
                 .Add("PP_IDEAL_MIXRULE_LIQDENS", 0)
                 .Add("PP_USEEXPLIQDENS", 0)
+                .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
             End With
         End Sub
 
@@ -6618,6 +6619,13 @@ Final3:
                             If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                 vk(i) = AUX_LIQDENSi(subst, T)
                                 IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
+                                If Me.Parameters.ContainsKey("PP_EXP_LIQDENS_PCORRECTION") AndAlso Me.Parameters("PP_EXP_LIQDENS_PCORRECTION") = 1 Then
+                                    'pressure correction
+                                    Dim pcorr = Auxiliary.PROPS.liq_dens_pcorrection(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                                    IObj?.Paragraphs.Add(String.Format("Compressed Liquid Density Correction Factor: {0}", pcorr))
+                                    vk(i) *= pcorr
+                                    IObj?.Paragraphs.Add(String.Format("Corrected Liquid Density: {0} kg/m3", vk(i)))
+                                End If
                             Else
                                 vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
@@ -6648,20 +6656,7 @@ Final3:
 
         Public Overridable Function AUX_LIQDENSi(ByVal subst As Interfaces.ICompound, ByVal T As Double) As Double
 
-            Dim val As Double
-
-            If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                If Integer.TryParse(subst.ConstantProperties.LiquidDensityEquation, New Integer) Then
-                    val = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
-                Else
-                    val = Me.ParseEquation(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T)
-                End If
-                If subst.ConstantProperties.OriginalDB <> "CoolProp" And subst.ConstantProperties.OriginalDB <> "User" Then val = subst.ConstantProperties.Molar_Weight * val
-            Else
-                val = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, 101325, Me.AUX_PVAPi(subst.Name, T))
-            End If
-
-            Return val 'kg/m3
+            Return AUX_LIQDENSi(subst.ConstantProperties, T)
 
         End Function
 

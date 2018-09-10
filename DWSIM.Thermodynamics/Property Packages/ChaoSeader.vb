@@ -65,6 +65,7 @@ Namespace PropertyPackages
                 .Add("PP_IDEAL_MIXRULE_LIQDENS", 0)
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_USE_EOS_LIQDENS", 1)
+                .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
             End With
         End Sub
 

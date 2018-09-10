@@ -173,6 +173,73 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
+        Shared Function liq_dens_pcorrection(ByVal Tr As Double, ByVal P As Double, ByVal Pc As Double, ByVal Pvap As Double, ByVal w As Double) As Double
+
+            'compressed liquid density correction by Thomson (1982)
+            'Thomson, G.H., K. R. Brobst, and R. W. Hawkinson. AIChE Journal, 28:671 (1982)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "liq_dens_pcorrection", "Compressed Liquid Density Pressure Correction (Thomson)", "Liquid Phase Density Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("This routine corrects the experimental liquid density (temperature-dependent only) to take into account the pressure effects (compressibility) using the method devised by Thomson (1982).")
+
+            IObj?.Paragraphs.Add("Ref.: Thomson, G.H., K. R. Brobst, and R. W. Hawkinson. AIChE Journal, 28:671 (1982)")
+
+            IObj?.Paragraphs.Add("<h2>Equations</h2>")
+
+            IObj?.Paragraphs.Add("<m>\frac{\rho_{corr}}{\rho} = 1-c\ln\frac{\beta+P}{\beta+P_{sat}}</m>")
+
+            IObj?.Paragraphs.Add("<m>\frac{\beta}{P_c}=1+a(1-T_r)^{1/3}b(1-T_r)^{2/3}+d(1-T_r)+e(1-T_r)^{4/3}</m>")
+            IObj?.Paragraphs.Add("<m>e=\exp(f+g\omega+h\omega^{2})</m>")
+            IObj?.Paragraphs.Add("<m>c=j+k\omega</m>")
+
+            IObj?.Paragraphs.Add("<m>a=-9.070217</m>")
+            IObj?.Paragraphs.Add("<m>b=62.45326</m>")
+            IObj?.Paragraphs.Add("<m>d=-135.1102</m>")
+            IObj?.Paragraphs.Add("<m>f=4.79594</m>")
+            IObj?.Paragraphs.Add("<m>g=0.250047</m>")
+            IObj?.Paragraphs.Add("<m>h=1.14188</m>")
+            IObj?.Paragraphs.Add("<m>j=0.0861488</m>")
+            IObj?.Paragraphs.Add("<m>k=0.0344483</m>")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Vapor Pressure: {0} Pa", Pvap))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factor: {0}", w))
+
+            Dim a, b, c, d, e, f, g, h, j, k As Double
+
+            a = -9.070217
+            b = 62.45326
+            d = -135.1102
+            f = 4.79594
+            g = 0.250047
+            h = 1.14188
+            j = 0.0861488
+            k = 0.0344483
+
+            c = j + k * w
+            e = Math.Exp(f + g * w + h * w ^ 2)
+
+            Dim beta = Pc * (1 + a * (1 - Tr) ^ (1 / 3) + b * (1 - Tr) ^ (2 / 3) + d * (1 - Tr) + e * (1 - Tr) ^ (4 / 3))
+
+            Dim correction = 1 / (1 - c * Math.Log((beta + P) / (beta + Pvap)))
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Correction Factor: {0}", correction))
+
+            IObj?.Close()
+
+            Return correction
+
+        End Function
+
         Shared Function liq_dens_rackett(ByVal T As Double, ByVal Tc As Double, ByVal Pc As Double, ByVal w As Double, ByVal MM As Double, Optional ByVal ZRa As Double = 0, Optional ByVal P As Double = 0, Optional ByVal Pvp As Double = 0) As Double
 
             'Calculo da densidade do liquido utilizando o metodo de Rackett
