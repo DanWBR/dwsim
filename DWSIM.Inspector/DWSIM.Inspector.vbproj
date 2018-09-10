@@ -97,7 +97,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PerfAn.vb" />
     <Compile Include="Window.vb" />
   </ItemGroup>
   <ItemGroup>

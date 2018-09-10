@@ -124,12 +124,20 @@ Module Example1
         Dim compphaseprops As String() = dtlc.GetPropList()
         Dim values As Object()
         For Each prop As String In compphaseprops
-            values = dtlc.CalcProp(prpp, prop, "Mole", "Vapor", New String() {"Water", "Ethanol"}, T, P, New Double() {Double.Parse(result2(2, 0).ToString), Double.Parse(result2(3, 0).ToString)})
-            line = ""
-            For i = 0 To values.Length - 1
-                line += Double.Parse(values(i).ToString).ToString("N6") & vbTab
-            Next
-            Console.WriteLine(prop.PadRight(30) & vbTab & line)
+            Try
+                values = dtlc.CalcProp(prpp, prop, "Mole", "Vapor", New String() {"Water", "Ethanol"}, T, P, New Double() {Double.Parse(result2(2, 0).ToString), Double.Parse(result2(3, 0).ToString)})
+                line = ""
+                For i = 0 To values.Length - 1
+                    line += Double.Parse(values(i).ToString).ToString("N6") & vbTab
+                Next
+                Console.WriteLine(prop.PadRight(30) & vbTab & line)
+            Catch ex As CapeOpen.CapeThrmPropertyNotAvailableException
+                Console.WriteLine(prop.PadRight(30) & vbTab & "Property Not Available")
+            Catch ex As CapeOpen.CapeComputationException
+                Console.WriteLine(prop.PadRight(30) & vbTab & "Error Calculating Property")
+            Catch ex As Exception
+                Console.WriteLine(prop.PadRight(30) & vbTab & ex.Message)
+            End Try
         Next
 
         Console.Write(vbCrLf)
@@ -140,12 +148,20 @@ Module Example1
         Console.WriteLine("Liquid Phase Mixture Properties at T = " & T.ToString("###.##") & " K and P = " & P.ToString("#") & " Pa:" & vbCrLf)
 
         For Each prop As String In compphaseprops
-            values = dtlc.CalcProp(prpp, prop, "Mole", "Liquid", New String() {"Water", "Ethanol"}, T, P, New Double() {Double.Parse(result2(2, 1).ToString), Double.Parse(result2(3, 1).ToString)})
-            line = ""
-            For i = 0 To values.Length - 1
-                line += Double.Parse(values(i).ToString).ToString("N6") & vbTab
-            Next
-            Console.WriteLine(prop.PadRight(30) & vbTab & line)
+            Try
+                values = dtlc.CalcProp(prpp, prop, "Mole", "Liquid", New String() {"Water", "Ethanol"}, T, P, New Double() {Double.Parse(result2(2, 1).ToString), Double.Parse(result2(3, 1).ToString)})
+                line = ""
+                For i = 0 To values.Length - 1
+                    line += Double.Parse(values(i).ToString).ToString("N6") & vbTab
+                Next
+                Console.WriteLine(prop.PadRight(30) & vbTab & line)
+            Catch ex As CapeOpen.CapeThrmPropertyNotAvailableException
+                Console.WriteLine(prop.PadRight(30) & vbTab & "Property Not Available")
+            Catch ex As CapeOpen.CapeComputationException
+                Console.WriteLine(prop.PadRight(30) & vbTab & "Error Calculating Property")
+            Catch ex As Exception
+                Console.WriteLine(prop.PadRight(30) & vbTab & ex.Message)
+            End Try
         Next
 
         Console.Write(vbCrLf)
