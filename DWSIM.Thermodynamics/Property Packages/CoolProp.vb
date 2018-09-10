@@ -548,7 +548,7 @@ Namespace PropertyPackages
 
             Dim val As Double
             Dim i As Integer
-            Dim Tmin, Tmax, Tc As Double
+            Dim Tmin, Tmax, Tc, Pmin, Pmax, Tb As Double
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
@@ -557,18 +557,39 @@ Namespace PropertyPackages
                     Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                     Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                     Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
-                    If T > Tmin And T <= Tmax And T <= Tc Then
+                    Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                    Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
+                    If P > Pmin And P < Pmax Then
+                        Tb = Me.AUX_TSATi(P, i)
+                        If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
+                            Try
+                                vk(i) = CoolProp.PropsSI("D", "T", T, "P", P, GetCoolPropName(sub1))
+                            Catch ex As Exception
+                                WriteWarningMessage(ex.Message.ToString & ". Estimating value using Rackett [Fluid: " & subst.ConstantProperties.Name & "]")
+                                vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure,
+                                                           subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight)
+                            End Try
+                        Else
+                            Try
+                                vk(i) = CoolProp.PropsSI("D", "T", T, "Q", 0, GetCoolPropName(sub1))
+                            Catch ex As Exception
+                                WriteWarningMessage(ex.Message.ToString & ". Estimating value using Rackett [Fluid: " & subst.ConstantProperties.Name & "]")
+                                vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure,
+                                                           subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight)
+                            End Try
+                        End If
+                    ElseIf T > Tmin And T <= Tmax And T <= Tc Then
                         Try
                             vk(i) = CoolProp.PropsSI("D", "T", T, "Q", 0, GetCoolPropName(sub1))
                         Catch ex As Exception
                             WriteWarningMessage(ex.Message.ToString & ". Estimating value using Rackett [Fluid: " & subst.ConstantProperties.Name & "]")
                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure,
-                                                           subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight)
+                                                       subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight)
                         End Try
                     Else
                         WriteWarningMessage("CoolProp Warning: unable to calculate Liquid Phase Density for " &
-                                                                              subst.ConstantProperties.Name & " at T = " & T & " K and P = " & P &
-                                                                              " Pa. Estimating value using Rackett...")
+                                                                          subst.ConstantProperties.Name & " at T = " & T & " K and P = " & P &
+                                                                          " Pa. Estimating value using Rackett...")
                         vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure,
                                                        subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight)
                     End If
@@ -577,7 +598,7 @@ Namespace PropertyPackages
                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure,
                                                    subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight)
                 End If
-                If Vx(i) <> 0.0# Then vk(i) = Vx(i) / vk(i)
+                If Vx(i) <> 0.0# Then vk(i) = Vx(i) / vk(i) Else vk(i) = 0.0
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                 i = i + 1
             Next
@@ -932,32 +953,7 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_LIQDENS(ByVal T As Double, Optional ByVal P As Double = 0.0, Optional ByVal Pvp As Double = 0.0, Optional ByVal phaseid As Integer = 3, Optional ByVal FORCE_EOS As Boolean = False) As Double
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-            Dim routinename As String = ComponentName & String.Format(" (Liquid Density)")
-            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQDENS", routinename, "", True)
-            _IObj = IObj
-
-            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
-            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
-            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-
-            Dim val As Double
-            Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            i = 0
-            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                vk(i) = subst.MassFraction.GetValueOrDefault / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
-                If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                i = i + 1
-            Next
-            val = 1 / MathEx.Common.Sum(vk)
-
-            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
-            IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
-            IObj?.Close()
-
-
-            Return val
+            Return AUX_LIQDENS(T, RET_VMOL(RET_PHASECODE(phaseid)), P, Pvp, False)
 
         End Function
 
@@ -1978,7 +1974,7 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
 
-            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", Val))
+            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", val))
 
             IObj?.Close()
 
