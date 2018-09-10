@@ -1,10 +1,4 @@
-Version 5.2 Update 16
+Version 5.2 Update 17
 
-- [NEW] Exposed Gibbs Reactor Numerical Derivative Perturbation
-- [FIX] Bug fixes (PFR, Orifice Plate)
-
-Version 5.2 Update 15
-
-- [CHG] Performance updates
-- [FIX] Fixed Pipe Segment UO diameter unit conversion
-- [FIX] Do not throw CAPE-OPEN UO 'Edit()' not implemented exception
+- [CHG] Liquid Density calculation fixes and enhancements
+- [FIX] Minor bug fixes

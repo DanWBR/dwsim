@@ -8,11 +8,11 @@ DWSIM Standalone Thermodynamics Library is free for commercial and non-commercia
 
 Usage
 
-To use the library in your .NET projects, add a reference to the DWSIM.Thermodynamics.dll file. All calculation functions will be available in the DTL.Thermodynamics namespace, inside the 'Calculator' class.
+To use the library in your .NET projects, add a reference to the DWSIM.Thermodynamics.StandaloneLibrary.dll file. All calculation functions will be available in the DTL.Thermodynamics namespace, inside the 'Calculator' class.
 
 To use the library in other languages/ecosystems through its COM interface, you must register it with Administrator privileges using RegAsm, which can be found in your .NET 4.0 installation directory (usually C:\Windows\Microsoft.NET\Framework\v4.0.30319\). After finding the tool, open a DOS console window and run the following command:
 
-"RegAsm.exe /tlb:DWSIM.Thermodynamics.tlb DWSIM.Thermodynamics.dll"
+"RegAsm.exe /tlb:DWSIM.Thermodynamics.StandaloneLibrary.tlb DWSIM.Thermodynamics.StandaloneLibrary.dll"
 
 This will create and register the type library automatically, making it callable through COM.
 
