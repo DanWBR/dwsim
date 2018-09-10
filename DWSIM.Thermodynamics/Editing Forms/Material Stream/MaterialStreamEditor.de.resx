@@ -117,16 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnUtils.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 19</value>
-  </data>
-  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 20</value>
-  </data>
-  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 43</value>
-  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Aktivieren/Deaktivieren</value>
   </data>
@@ -136,21 +126,16 @@
   <data name="lblStatus.Text" xml:space="preserve">
     <value>Objekt</value>
   </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
-  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Verbunden mit</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Objekt</value>
   </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>346, 98</value>
-  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Allgemeine Informationen</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnDisconnectO.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
@@ -168,9 +153,6 @@
         OFvYi+NZRoSJmhByRoe9UQ+cdOM+0xk4MUX9ZqF8EOdvPsfhS62ekHhSciD2kSAoWs1j9kw37udL9MKJ
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="btnDisconnectO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 49</value>
   </data>
   <data name="btnDisconnectI.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -190,128 +172,47 @@
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnDisconnectI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 23</value>
-  </data>
-  <data name="cbOutlet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Downstream</value>
-  </data>
-  <data name="cbInlet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Upstream</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>346, 86</value>
-  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Verbindungen</value>
-  </data>
-  <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 53</value>
-  </data>
-  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 26</value>
-  </data>
-  <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 21</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flashalgorithmus</value>
   </data>
-  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 21</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
-  </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>346, 88</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Konfiguration Property Package</value>
   </data>
-  <data name="tbFracSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
-  </data>
-  <data name="rbSpecSolid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 243</value>
-  </data>
-  <data name="rbSpecSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 17</value>
-  </data>
   <data name="rbSpecSolid.Text" xml:space="preserve">
     <value>Feststoff</value>
-  </data>
-  <data name="rbSpecLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 220</value>
-  </data>
-  <data name="rbSpecLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 17</value>
   </data>
   <data name="rbSpecLiquid.Text" xml:space="preserve">
     <value>Flüssig</value>
   </data>
-  <data name="rbSpecVapor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 220</value>
-  </data>
-  <data name="rbSpecVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 17</value>
-  </data>
   <data name="rbSpecVapor.Text" xml:space="preserve">
     <value>Dampf</value>
-  </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Molfraktion</value>
   </data>
-  <data name="cbSolvent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 21</value>
-  </data>
-  <data name="lblSolvent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
   <data name="lblSolvent.Text" xml:space="preserve">
     <value>Lösungsmittel</value>
-  </data>
-  <data name="btnCompAcceptChanges.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 149</value>
   </data>
   <data name="btnCompAcceptChanges.ToolTip" xml:space="preserve">
     <value>Änderungen übernehmen</value>
   </data>
-  <data name="btnEraseInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 122</value>
-  </data>
   <data name="btnEraseInput.ToolTip" xml:space="preserve">
     <value>Löschen</value>
   </data>
-  <data name="btnEqualizeInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 95</value>
-  </data>
   <data name="btnEqualizeInput.ToolTip" xml:space="preserve">
     <value>Egalisieren</value>
-  </data>
-  <data name="btnNormalizeInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 68</value>
   </data>
   <data name="btnNormalizeInput.ToolTip" xml:space="preserve">
     <value>Normalisiere</value>
@@ -321,9 +222,6 @@
   </data>
   <data name="compamount.HeaderText" xml:space="preserve">
     <value>Menge</value>
-  </data>
-  <data name="gridInputComposition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 179</value>
   </data>
   <data name="cbCompBasis.Items" xml:space="preserve">
     <value>Molfraktion</value>
@@ -346,80 +244,29 @@
   <data name="cbCompBasis.Items6" xml:space="preserve">
     <value>Molalität</value>
   </data>
-  <data name="cbCompBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 21</value>
-  </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
-  </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Basis</value>
-  </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 277</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Zusammensetzung</value>
   </data>
-  <data name="tbEntr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
-  </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Spez. Entropie</value>
-  </data>
-  <data name="tbEnth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Spez. Enthalpie</value>
   </data>
-  <data name="tbVolFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="tbMoleFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="tbMassFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="tbPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Volumenstrom</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Molenstrom</value>
   </data>
-  <data name="tbTemp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
-  </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Massenstrom</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 13</value>
-  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Druck</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Temperatur</value>
@@ -442,56 +289,29 @@
   <data name="cbSpec.Items5" xml:space="preserve">
     <value>Druck und Feststoffanteil (PSF)</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 13</value>
-  </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Spezifikation</value>
-  </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
   </data>
   <data name="DiagramaDeFasesToolStripMenuItem.Text" xml:space="preserve">
     <value>Phasendiagramm</value>
   </data>
-  <data name="BinaryTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
-  </data>
   <data name="BinaryTSMI.Text" xml:space="preserve">
     <value>Binäres Phasendiagramm (VLE/VLLE/SLE)</value>
-  </data>
-  <data name="TernaryTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
   </data>
   <data name="TernaryTSMI.Text" xml:space="preserve">
     <value>Ternäres Phasendiagramm (LLE)</value>
   </data>
-  <data name="PetroleumPropsTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
-  </data>
   <data name="PetroleumPropsTSMI.Text" xml:space="preserve">
     <value>Petroleum Eigenschaften</value>
-  </data>
-  <data name="HydratesTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
   </data>
   <data name="HydratesTSMI.Text" xml:space="preserve">
     <value>Gashydrate</value>
   </data>
-  <data name="TCPTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
-  </data>
   <data name="TCPTSMI.Text" xml:space="preserve">
     <value>Wahrer Kritischer Punkt</value>
   </data>
-  <data name="AddUtilityTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
   <data name="AddUtilityTSMI.Text" xml:space="preserve">
     <value>Werkzeug hinzufügen</value>
-  </data>
-  <data name="UtilitiesCtxMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 26</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Eigenschaft</value>
@@ -565,9 +385,6 @@
   <data name="tabPropsSolid.Text" xml:space="preserve">
     <value>Feststoff</value>
   </data>
-  <data name="lblAmountTotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 15</value>
-  </data>
   <data name="cbCalculatedAmountsBasis.Items" xml:space="preserve">
     <value>Molfraktion</value>
   </data>
@@ -588,12 +405,6 @@
   </data>
   <data name="cbCalculatedAmountsBasis.Items6" xml:space="preserve">
     <value>Molalität</value>
-  </data>
-  <data name="cbCalculatedAmountsBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 21</value>
-  </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Basis</value>
@@ -658,17 +469,8 @@
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Mengen</value>
   </data>
-  <data name="lblCompPropUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 15</value>
-  </data>
-  <data name="lblCompPropUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 13</value>
-  </data>
   <data name="lblCompPropUnits.Text" xml:space="preserve">
     <value>Unit</value>
-  </data>
-  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
   </data>
   <data name="Label18.Text" xml:space="preserve">
     <value>Eigenschaft</value>
@@ -679,12 +481,6 @@
   <data name="DataGridViewTextBoxColumn33.HeaderText" xml:space="preserve">
     <value>Eigenschaft</value>
   </data>
-  <data name="gridCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
-  </data>
-  <data name="TabCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
-  </data>
   <data name="TabCompPropVapor.Text" xml:space="preserve">
     <value>Dampf</value>
   </data>
@@ -693,12 +489,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn37.HeaderText" xml:space="preserve">
     <value>Eigenschaft</value>
-  </data>
-  <data name="gridCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
-  </data>
-  <data name="TabCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
   </data>
   <data name="TabCompPropLiq1.Text" xml:space="preserve">
     <value>Flüssigkeit 1</value>
@@ -709,12 +499,6 @@
   <data name="DataGridViewTextBoxColumn39.HeaderText" xml:space="preserve">
     <value>Eigenschaft</value>
   </data>
-  <data name="gridCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
-  </data>
-  <data name="TabCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
-  </data>
   <data name="TabCompPropLiq2.Text" xml:space="preserve">
     <value>Flüssigkeit 2</value>
   </data>
@@ -724,17 +508,8 @@
   <data name="DataGridViewTextBoxColumn41.HeaderText" xml:space="preserve">
     <value>Eigenschaft</value>
   </data>
-  <data name="gridCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
-  </data>
-  <data name="TabCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 447</value>
-  </data>
   <data name="TabCompPropSolid.Text" xml:space="preserve">
     <value>Feststoff</value>
-  </data>
-  <data name="TabCompoundPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 473</value>
   </data>
   <data name="cbCompoundPhaseProperties.Items" xml:space="preserve">
     <value>Fugazitätskoeffizienten</value>
@@ -753,9 +528,6 @@
   </data>
   <data name="cbCompoundPhaseProperties.Items5" xml:space="preserve">
     <value>Diffusionskoeffizient unendl. Verdünnung</value>
-  </data>
-  <data name="cbCompoundPhaseProperties.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 21</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Eigenschaften</value>

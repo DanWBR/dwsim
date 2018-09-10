@@ -6594,18 +6594,19 @@ Final3:
 
             Dim val As Double
 
-            If Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") AndAlso Me.Parameters("PP_USEEXPLIQDENS") = 1 Then
+            If Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") AndAlso Me.Parameters("PP_USE_EOS_LIQDENS") = 1 Then
+                IObj?.Paragraphs.Add("Using EOS to calculate compressibility factor -> density.")
+                IObj?.SetCurrent()
                 val = AUX_Z(Vx, T, P, PhaseName.Liquid)
                 val = (8.314 * val * T / P)
                 val = 1 / val * Me.AUX_MMM(Vx) / 1000
-                Return val
             Else
-                If T / Me.AUX_TCM(Phase.Liquid) > 1 Then
+                If T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
                     IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
                     IObj?.SetCurrent()
                     Dim Z = AUX_Z(Vx, T, P, PhaseName.Liquid)
                     val = 1 / (8.314 * Z * T / P)
-                    val = val * Me.AUX_MMM(Phase.Liquid) / 1000
+                    val = val * Me.AUX_MMM(Vx) / 1000
                 Else
                     Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                     Dim i As Integer
