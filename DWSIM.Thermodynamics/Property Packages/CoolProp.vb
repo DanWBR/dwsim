@@ -603,6 +603,7 @@ Namespace PropertyPackages
                 i = i + 1
             Next
             val = 1 / MathEx.Common.Sum(vk)
+            If Double.IsNaN(val) Or Double.IsInfinity(val) Then val = 0.0#
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
             IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
