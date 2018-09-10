@@ -1035,7 +1035,7 @@ Namespace PropertyPackages
 
             val = (8.314 * val * T / P)
             If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
-                val -= Me.AUX_CM(Phase.Vapor)
+                val -= Me.AUX_CM(Vx)
             End If
             val = P * val / (8.314 * T)
 

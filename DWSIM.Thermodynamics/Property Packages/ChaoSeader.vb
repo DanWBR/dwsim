@@ -379,11 +379,7 @@ Namespace PropertyPackages
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
-                If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
-                    result = Me.AUX_LIQDENS(T, P, , , True)
-                Else
-                    result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
-                End If
+                result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
 
                 result = Me.m_lk.H_LK_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, dwpl))

@@ -407,18 +407,7 @@ Namespace PropertyPackages
                     tasks(5) = Task.Factory.StartNew(Sub() tc = Me.AUX_CONDTL(T))
                     tasks(6) = Task.Factory.StartNew(Sub() visc = Me.AUX_LIQVISCm(T))
                     tasks(7) = Task.Factory.StartNew(Sub()
-                                                         If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
-                                                             Dim val As Double
-                                                             val = m_pr.Z_PR(T, P, RET_VMOL(Phase), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                                                             val = (8.314 * val * T / P)
-                                                             If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
-                                                                 val -= Me.AUX_CM(Phase)
-                                                             End If
-                                                             val = 1 / val * Me.AUX_MMM(dwpl) / 1000
-                                                             dens = val
-                                                         Else
-                                                             dens = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
-                                                         End If
+                                                         dens = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
                                                      End Sub)
 
                     Task.WaitAll(tasks)
@@ -448,18 +437,7 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = mw
 
                     IObj?.SetCurrent
-                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
-                        Dim val As Double
-                        val = m_pr.Z_PR(T, P, RET_VMOL(Phase), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                        val = (8.314 * val * T / P)
-                        If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
-                            val -= Me.AUX_CM(Phase)
-                        End If
-                        val = 1 / val * Me.AUX_MMM(dwpl) / 1000
-                        dens = val
-                    Else
-                        dens = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
-                    End If
+                    dens = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
 
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = dens
 
@@ -1102,7 +1080,7 @@ Namespace PropertyPackages
 
             val = (8.314 * val * T / P)
             If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
-                val -= Me.AUX_CM(Phase.Vapor)
+                val -= Me.AUX_CM(Vx)
             End If
             val = P * val / (8.314 * T)
 

@@ -303,15 +303,7 @@ Namespace PropertyPackages
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
-                If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
-                    Dim val As Double
-                    val = m_pr.Z_PR(T, P, RET_VMOL(Phase), RET_VKij(), RET_VKij2, RET_KAPPA1, RET_KAPPA2, RET_KAPPA3, RET_VTC, RET_VPC, RET_VW, "L")
-                    val = 1 / (8.314 * val * T / P)
-                    val = val * Me.AUX_MMM(dwpl) / 1000
-                    result = val
-                Else
-                    result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
-                End If
+                result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
 
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
 
