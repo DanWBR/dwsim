@@ -153,7 +153,60 @@ Namespace PropertyPackages.Auxiliary
 
             Dim e As Double = 0.176 * (Tc / (MM ^ 3 * Pc ^ 4)) ^ (1 / 6)
 
-            viscl_letsti = (e0 + e1) / e / 1000 'Pa.s
+            viscl_letsti = (e0 + e1 * w) / e / 1000 'Pa.s
+
+        End Function
+
+        Shared Function viscl_pcorrection_lucas(ByVal Tr As Double, P As Double, Pc As Double, Pvap As Double, w As Double) As Double
+
+            'high pressure liquid viscosity correction by Lucas (1981)
+            'Lucas, K.: Cheng. Ing. Tech., 53:959 (1981)
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "viscl_pcorrection_lucas", "High Pressure Liquid Viscosity Correction (Lucas)", "Liquid Phase Viscosity Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("This routine corrects the liquid viscosity (temperature-dependent only) to take into account the pressure effects (compressibility) using the method devised by Lucas (1981).")
+
+            IObj?.Paragraphs.Add("Ref.: Lucas, K.: Cheng. Ing. Tech., 53:959 (1981)")
+
+            IObj?.Paragraphs.Add("<h2>Equations</h2>")
+
+            IObj?.Paragraphs.Add("<m>\frac{\eta_{corr}}{\eta}=\frac{1 + D * (\delta P_r / 2.118) ^ A}{1 + C * w * \delta P_r}</m>")
+            IObj?.Paragraphs.Add("<m>\delta P_r = \frac{P - P_{sat}}{Pc}</m>")
+
+            IObj?.Paragraphs.Add("<m>A = 0.9991 - (0.0004674 / (1.0523 Tr ^ {-0.03877} - 1.0513))</m>")
+            IObj?.Paragraphs.Add("<m>D = (0.3257 / (1.0039 - Tr^{2.573})^{0.2906})-0.2086</m>")
+            IObj?.Paragraphs.Add("<m>C = -0.07921 + 2.1616 Tr - 13.404  Tr ^ 2 + 44.1706 Tr ^ 3 - 84.8291 Tr ^ 4 + 96.1209 Tr ^ 5 - 59.8127 Tr ^ 6 + 15.6719 Tr ^ 7</m>")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressure: {0} Pa", Pc))
+            IObj?.Paragraphs.Add(String.Format("Vapor Pressure: {0} Pa", Pvap))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factor: {0}", w))
+
+            Dim A, C, D, DPr As Double
+
+            DPr = (P - Pvap) / Pc
+
+            A = 0.9991 - (0.0004674 / (1.0523 * Tr ^ -0.03877 - 1.0513))
+            D = (0.3257 / (1.0039 - Tr ^ 2.573) ^ 0.2906) - 0.2086
+            C = -0.07921 + 2.1616 * Tr - 13.404 * Tr ^ 2 + 44.1706 * Tr ^ 3 - 84.8291 * Tr ^ 4 +
+                96.1209 * Tr ^ 5 - 59.8127 * Tr ^ 6 + 15.6719 * Tr ^ 7
+
+            Dim correction = (1 + D * (DPr / 2.118) ^ A) / (1 + C * w * DPr)
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Correction Factor: {0}", correction))
+
+            IObj?.Close()
+
+            Return correction
 
         End Function
 

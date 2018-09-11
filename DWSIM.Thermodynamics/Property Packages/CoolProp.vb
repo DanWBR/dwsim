@@ -690,7 +690,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQVISCi(sub1 As String, T As Double) As Object
+        Public Overrides Function AUX_LIQVISCi(sub1 As String, T As Double, P As Double) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
             Dim routinename As String = ComponentName & String.Format(" (Liquid Viscosity - {0})", sub1)
@@ -700,25 +700,34 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
 
-            Dim Tmin, Tmax, Tc, val As Double
+            Dim Tmin, Tmax, Tc, Pmin, Pmax, Tb, val As Double
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
-                If T > Tmin And T <= Tmax And T <= Tc Then
-                    Try
-                        val = CoolProp.PropsSI("V", "T", T, "Q", 0, GetCoolPropName(sub1))
-                    Catch ex As Exception
-                        WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
-                        val = MyBase.AUX_LIQVISCi(sub1, T)
-                    End Try
-                Else
-                    WriteWarningMessage("CoolProp Warning: unable to calculate Liquid Viscosity for " & sub1 & " at T = " & T & " K. Estimating value...")
-                    val = MyBase.AUX_LIQVISCi(sub1, T)
+                Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
+                If P > Pmin And P < Pmax Then
+                    Tb = Me.AUX_TSATi(P, sub1)
+                    If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
+                        Try
+                            val = CoolProp.PropsSI("V", "T", T, "P", P, GetCoolPropName(sub1))
+                        Catch ex As Exception
+                            WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
+                            val = MyBase.AUX_LIQVISCi(sub1, T, P)
+                        End Try
+                    Else
+                        Try
+                            val = CoolProp.PropsSI("V", "T", T, "Q", 0, GetCoolPropName(sub1))
+                        Catch ex As Exception
+                            WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
+                            val = MyBase.AUX_LIQVISCi(sub1, T, P)
+                        End Try
+                    End If
                 End If
             Else
                 WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Viscosity value...")
-                val = MyBase.AUX_LIQVISCi(sub1, T)
+                val = MyBase.AUX_LIQVISCi(sub1, T, P)
             End If
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
@@ -1700,7 +1709,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
                 IObj?.SetCurrent
-                result = Me.AUX_LIQVISCm(T)
+                result = Me.AUX_LIQVISCm(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
 
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
@@ -1857,7 +1866,7 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
                 Case "viscosity"
                     If state = "L" Then
-                        result = Me.AUX_LIQVISCm(T)
+                        result = Me.AUX_LIQVISCm(T, P)
                     Else
                         result = Me.AUX_VAPVISCMIX(T, P, Me.AUX_MMM(phase))
                     End If
@@ -1911,7 +1920,7 @@ Namespace PropertyPackages
         Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
             If Phase1 = Phase.Liquid Then
-                Return Me.AUX_LIQVISCm(T)
+                Return Me.AUX_LIQVISCm(T, P)
             ElseIf Phase1 = Phase.Vapor Then
                 Return Me.AUX_VAPVISCm(T, Me.AUX_VAPDENS(T, P), Me.AUX_MMM(Phase.Vapor))
             End If

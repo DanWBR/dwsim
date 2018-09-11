@@ -417,7 +417,7 @@ Public Class FormPureComp
             If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
-                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, pp.AUX_LIQVISCi(constprop.Name, T))
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, pp.AUX_LIQVISCi(constprop.Name, T, 101325))
                     vxVisc.Add(TD)
                     vyVisc.Add(VD)
                     Me.DataTableLiquid.Item(8, Row).Value = Format(TD, nf)

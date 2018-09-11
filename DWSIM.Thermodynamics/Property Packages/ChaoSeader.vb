@@ -66,6 +66,7 @@ Namespace PropertyPackages
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_USE_EOS_LIQDENS", 1)
                 .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
+                .Add("PP_LIQVISC_PCORRECTION", 1)
             End With
         End Sub
 
@@ -294,7 +295,7 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
                 Case "viscosity"
                     If state = "L" Then
-                        result = Me.AUX_LIQVISCm(T)
+                        result = Me.AUX_LIQVISCm(T, P)
                     Else
                         result = Me.AUX_VAPVISCm(T, Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault, Me.AUX_MMM(phase))
                     End If
@@ -401,7 +402,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
                 result = Me.AUX_CONDTL(T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
-                result = Me.AUX_LIQVISCm(T)
+                result = Me.AUX_LIQVISCm(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
 
@@ -469,7 +470,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
             If Phase1 = Phase.Liquid Then
-                Return Me.AUX_LIQVISCm(T)
+                Return Me.AUX_LIQVISCm(T, P)
             ElseIf Phase1 = Phase.Vapor Then
                 Return Me.AUX_VAPVISCm(T, Me.AUX_VAPDENS(T, P), Me.AUX_MMM(Phase.Vapor))
             End If

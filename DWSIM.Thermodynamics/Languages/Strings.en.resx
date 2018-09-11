@@ -374,4 +374,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PP_EXP_LIQDENS_PCORRECTION" xml:space="preserve">
     <value>Use Compressed Experimental Liquid Density Correction</value>
   </data>
+  <data name="PP_LIQVISC_PCORRECTION" xml:space="preserve">
+    <value>Use Compressed Liquid Viscosity Correction</value>
+  </data>
 </root>

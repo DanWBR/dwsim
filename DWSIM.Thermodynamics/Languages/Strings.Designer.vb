@@ -460,6 +460,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Corrigir Viscosidade do Líquido com Pressão.
+        '''</summary>
+        Friend Shared ReadOnly Property PP_LIQVISC_PCORRECTION() As String
+            Get
+                Return ResourceManager.GetString("PP_LIQVISC_PCORRECTION", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Flash PH - Tolerância do Loop Externo.
         '''</summary>
         Friend Shared ReadOnly Property PP_PHFELT() As String

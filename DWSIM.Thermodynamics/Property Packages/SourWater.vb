@@ -79,6 +79,7 @@ Namespace PropertyPackages
                 .Add("PP_IDEAL_VAPOR_PHASE_FUG", 1)
                 .Add("PP_ENTH_CP_CALC_METHOD", 0)
                 .Add("PP_IGNORE_VAPOR_FRACTION_LIMIT", 0)
+                .Add("PP_LIQVISC_PCORRECTION", 1)
             End With
         End Sub
 

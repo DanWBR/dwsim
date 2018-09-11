@@ -349,7 +349,6 @@
     <Compile Include="Models\ChaoSeader.vb" />
     <Compile Include="Models\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\ExtendedUNIQUAC.vb" />
-    <Compile Include="Models\FPROPS.vb" />
     <Compile Include="Property Packages\GraysonStreed.vb" />
     <Compile Include="Models\GraysonStreed.vb" />
     <Compile Include="Models\SteamTables_IAPWS_IF97.vb" />

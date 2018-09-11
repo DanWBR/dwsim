@@ -576,7 +576,7 @@ namespace DWSIM.UI.Desktop.Editors
                         try
                         {
                             TD = cv.ConvertFromSI(su.temperature, T);
-                            VD = cv.ConvertFromSI(su.viscosity, (double)pp.AUX_LIQVISCi(compound.Name, T));
+                            VD = cv.ConvertFromSI(su.viscosity, (double)pp.AUX_LIQVISCi(compound.Name, T, 101325));
                             vxVisc.Add(TD);
                             vyVisc.Add(VD);
                         }

@@ -315,6 +315,7 @@ Namespace PropertyPackages
                 .Add("PP_IDEAL_MIXRULE_LIQDENS", 0)
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
+                .Add("PP_LIQVISC_PCORRECTION", 1)
             End With
         End Sub
 
@@ -5915,7 +5916,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_LIQVISCi(ByVal sub1 As String, ByVal T As Double)
+        Public Overridable Function AUX_LIQVISCi(ByVal sub1 As String, ByVal T As Double, ByVal P As Double) As Double
 
             If T / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature < 1 Then
 
@@ -5999,7 +6000,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_LIQVISCm(ByVal T As Double, Optional ByVal phaseid As Integer = 3) As Double
+        Public Function AUX_LIQVISCm(ByVal T As Double, P As Double, Optional ByVal phaseid As Integer = 3) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -6026,10 +6027,18 @@ Final3:
             val = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 IObj?.SetCurrent()
-                sval = Me.AUX_LIQVISCi(subst.Name, T)
+                sval = Me.AUX_LIQVISCi(subst.Name, T, P)
                 IObj?.Paragraphs.Add(String.Format("Calculating Liquid Viscosity for {0}... {1} Pa.s (xi = {2})", subst.Name, sval, subst.MoleFraction.GetValueOrDefault))
                 lval = Log(sval)
                 If sval = 0 Then lval = 0.0
+                IObj?.Paragraphs.Add(String.Format("Liquid Viscosity : {0} Pa.s", Exp(lval)))
+                If Me.Parameters.ContainsKey("PP_LIQVISC_PCORRECTION") AndAlso Me.Parameters("PP_LIQVISC_PCORRECTION") = 1 Then
+                    'pressure correction
+                    Dim pcorr = Auxiliary.PROPS.viscl_pcorrection_lucas(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                    IObj?.Paragraphs.Add(String.Format("Compressed Liquid Viscosity Correction Factor: {0}", pcorr))
+                    lval = Log(Exp(lval) * pcorr)
+                    IObj?.Paragraphs.Add(String.Format("Corrected Liquid Viscosity : {0} Pa.s", Exp(lval)))
+                End If
                 val += subst.MoleFraction.GetValueOrDefault * lval
             Next
 
@@ -8583,7 +8592,7 @@ Final3:
                         Case "vaporpressure"
                             vals.Add(Me.AUX_PVAPi(c, temperature))
                         Case "viscosityofliquid"
-                            vals.Add(Me.AUX_LIQVISCi(c, temperature))
+                            vals.Add(Me.AUX_LIQVISCi(c, temperature, 101325))
                         Case "heatcapacityofliquid"
                             vals.Add(Me.AUX_LIQ_Cpi(Me.CurrentMaterialStream.Phases(0).Compounds(c).ConstantProperties, temperature) * Me.CurrentMaterialStream.Phases(0).Compounds(c).ConstantProperties.Molar_Weight)
                         Case "heatcapacityofsolid"

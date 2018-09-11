@@ -219,7 +219,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
             If Phase1 = Phase.Liquid Then
-                Return Me.AUX_LIQVISCm(T)
+                Return Me.AUX_LIQVISCm(T, P)
             ElseIf Phase1 = Phase.Vapor Then
                 Return Me.AUX_VAPVISCm(T, Me.AUX_VAPDENS(T, P), Me.AUX_MMM(Phase.Vapor))
             End If
