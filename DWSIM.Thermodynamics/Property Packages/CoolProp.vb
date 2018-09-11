@@ -614,41 +614,8 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_LIQDENSi(subst As Interfaces.ICompound, T As Double) As Double
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-            Dim routinename As String = ComponentName & String.Format(" (Liquid Density - {0})", subst.Name)
-            Inspector.Host.CheckAndAdd(IObj, "", "AUX_LIQDENSi", routinename, "", True)
-            _IObj = IObj
+            Return AUX_LIQDENSi(subst.ConstantProperties, T)
 
-            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
-            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
-
-            Dim sub1 = subst.ConstantProperties.Name
-            Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
-                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
-                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
-                If T > Tmin And T <= Tmax And T <= Tc Then
-                    Try
-                        val = CoolProp.PropsSI("D", "T", T, "Q", 0, GetCoolPropName(sub1)) / 1000
-                    Catch ex As Exception
-                        WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
-                        val = MyBase.AUX_LIQDENSi(subst, T)
-                    End Try
-                Else
-                    WriteWarningMessage("CoolProp Warning: unable to calculate Liquid Density for " & sub1 & " at T = " & T & " K. Estimating value...")
-                    val = MyBase.AUX_LIQDENSi(subst, T)
-                End If
-            Else
-                WriteWarningMessage("CoolProp Warning: compound " & sub1 & " not supported. Estimating Liquid Density value...")
-                val = MyBase.AUX_LIQDENSi(subst, T)
-            End If
-
-            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
-            IObj?.Paragraphs.Add(String.Format("Density: {0} kg/m3", val))
-            IObj?.Close()
-
-            Return val
         End Function
 
         Public Overrides Function AUX_LIQTHERMCONDi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
