@@ -2677,7 +2677,7 @@ Namespace CalculatorInterface
         ''' Calculates Phase Equilibria for a given mixture at specified conditions.
         ''' </summary>
         ''' <param name="flashtype">The type of the flash algorithm to calculate</param>
-        ''' <param name="flashalg">The flash algorithm to use</param>
+        ''' <param name="flashalg">The flash algorithm to use (set to -1 to use the current instance)</param>
         ''' <param name="val1">Value of the first flash state specification (P in Pa, T in K, H in kJ/kg, S in kJ/[kg.K], VAP/SF in mole fraction from 0 to 1)</param>
         ''' <param name="val2">Value of the second flash state specification (P in Pa, T in K, H in kJ/kg, S in kJ/[kg.K], VAP/SF in mole fraction from 0 to 1)</param>
         ''' <param name="pp">Property Package instance</param>
