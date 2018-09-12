@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 17
+Version 5.2 Update 18
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.2 Update 18
+
+- [NEW] Liquid Viscosity Pressure Correction
+- [FIX] Fixed Letsou-Stiel Liquid Viscosity estimation
 
 Version 5.2 Update 17
 

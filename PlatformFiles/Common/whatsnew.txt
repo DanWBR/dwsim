@@ -1,4 +1,4 @@
-Version 5.2 Update 17
+Version 5.2 Update 18
 
-- [CHG] Liquid Density calculation fixes and enhancements
-- [FIX] Minor bug fixes
+- [NEW] Liquid Viscosity Pressure Correction
+- [FIX] Fixed Letsou-Stiel Liquid Viscosity estimation
