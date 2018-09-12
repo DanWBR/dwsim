@@ -52,7 +52,6 @@ Namespace PropertyPackages
             m_par = New System.Collections.Generic.Dictionary(Of String, Double)
             With Me.Parameters
                 .Clear()
-                .Add("PP_IDEAL_MIXRULE_LIQDENS", 1)
                 .Add("PP_USEEXPLIQDENS", 1)
                 .Add("PP_USE_EOS_LIQDENS", 0)
                 .Add("PP_EXP_LIQDENS_PCORRECTION", 1)

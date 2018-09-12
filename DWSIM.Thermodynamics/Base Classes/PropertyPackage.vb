@@ -312,7 +312,6 @@ Namespace PropertyPackages
             m_par = New System.Collections.Generic.Dictionary(Of String, Double)
             With Me.Parameters
                 .Clear()
-                .Add("PP_IDEAL_MIXRULE_LIQDENS", 0)
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
                 .Add("PP_LIQVISC_PCORRECTION", 1)
@@ -6038,6 +6037,7 @@ Final3:
                     IObj?.Paragraphs.Add(String.Format("Compressed Liquid Viscosity Correction Factor: {0}", pcorr))
                     lval = Log(Exp(lval) * pcorr)
                     IObj?.Paragraphs.Add(String.Format("Corrected Liquid Viscosity : {0} Pa.s", Exp(lval)))
+                    If Double.IsNaN(lval) Or Double.IsInfinity(lval) Then lval = 0.0
                 End If
                 val += subst.MoleFraction.GetValueOrDefault * lval
             Next

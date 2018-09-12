@@ -50,7 +50,6 @@ Namespace PropertyPackages
             GetListOfSupportedCompounds()
 
             With Me.Parameters
-                .Item("PP_IDEAL_MIXRULE_LIQDENS") = 1
                 .Item("PP_USEEXPLIQDENS") = 1
             End With
 
