@@ -802,9 +802,9 @@ FINAL:
 
                     result = Me.m_iapws97.densW(T, P / 100000)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
-                    result = DW_CalcEnthalpy(RET_VMOL(Phase), T, P, State.Vapor)
+                    result = DW_CalcEnthalpy(RET_VMOL(Phase), T, P, State.Liquid)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                    result = DW_CalcEntropy(RET_VMOL(Phase), T, P, State.Vapor)
+                    result = DW_CalcEntropy(RET_VMOL(Phase), T, P, State.Liquid)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = 1 / (Me.m_iapws97.densW(T, P / 100000) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
