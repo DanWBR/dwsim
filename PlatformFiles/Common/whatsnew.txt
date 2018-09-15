@@ -1,4 +1,3 @@
-Version 5.2 Update 18
+Version 5.2 Update 19
 
-- [NEW] Liquid Viscosity Pressure Correction
-- [FIX] Fixed Letsou-Stiel Liquid Viscosity estimation
+- [FIX] Fixed a regression in Steam Tables Property Package
