@@ -53,6 +53,8 @@ Namespace CalculatorInterface
             ''load DWSIM XML database
             'Me.LoadDWSIMDB()
 
+            GlobalSettings.Settings.InspectorEnabled = False
+
         End Sub
 
         ''' <summary>
