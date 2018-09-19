@@ -233,7 +233,7 @@ namespace DWSIM.UI.Desktop.Editors
                         StreamID = id,
                         ID = id,
                         StreamType = StreamInformation.Type.Material,
-                        StreamBehavior = StreamInformation.Behavior.Distillate
+                        StreamBehavior = StreamInformation.Behavior.OverheadVapor
                     });
                 }
             }

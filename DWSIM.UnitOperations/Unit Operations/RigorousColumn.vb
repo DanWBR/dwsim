@@ -3379,9 +3379,7 @@ Namespace UnitOperations
                             End If
                     End Select
                 Case ColType.AbsorptionColumn
-                    If Not feedok Or Not rmok Or Not cmvok Then
-                        Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                    ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
+                    If Not feedok Or Not rmok Or Not (cmvok Or cmok) Then
                         Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                     End If
                 Case ColType.ReboiledAbsorber
