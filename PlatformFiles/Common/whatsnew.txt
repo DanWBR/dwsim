@@ -1,3 +1,3 @@
-Version 5.2 Update 20
+Version 5.2 Update 21
 
-- [FIX] Fixed Absorption Column setup on Cross-Platform UI
+- [FIX] Fixed a regression in Heat Exchanger model
