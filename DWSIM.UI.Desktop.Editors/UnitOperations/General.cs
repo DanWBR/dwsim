@@ -103,8 +103,7 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             s.CreateAndAddLabelRow(container, "Object Properties");
-
-            double val;
+            
             switch (SimObject.GraphicObject.ObjectType)
             {
                 case ObjectType.SolidSeparator:

@@ -1111,10 +1111,10 @@ Namespace UnitOperations
                         rs = Me.STProperties.Shell_Fouling
                         rt = Me.STProperties.Tube_Fouling
                         Nc = STProperties.Shell_NumberOfShellsInSeries
-                        de = STProperties.Tube_De
-                        di = STProperties.Tube_Di
+                        de = STProperties.Tube_De / 1000
+                        di = STProperties.Tube_Di / 1000
                         L = STProperties.Tube_Length
-                        pitch = STProperties.Tube_Pitch
+                        pitch = STProperties.Tube_Pitch / 1000
                         n = STProperties.Tube_NumberPerShell
                         nt = n / STProperties.Tube_PassesPerShell
                         A = n * Math.PI * de * (L - 2 * de)
@@ -1146,7 +1146,7 @@ Namespace UnitOperations
                         'tube
                         dpt = 0.0#
                         Dim fric As Double = 0
-                        Dim epsilon As Double = STProperties.Tube_Roughness
+                        Dim epsilon As Double = STProperties.Tube_Roughness / 1000
                         If Ret > 3250 Then
                             Dim a1 = Math.Log(((epsilon / di) ^ 1.1096) / 2.8257 + (7.149 / Ret) ^ 0.8961) / Math.Log(10.0#)
                             Dim b1 = -2 * Math.Log((epsilon / di) / 3.7065 - 5.0452 * a1 / Ret) / Math.Log(10.0#)
@@ -1185,13 +1185,13 @@ Namespace UnitOperations
                                 nsc = 1.19 * n ^ 0.5
                         End Select
                         Dsf = (nsc - 1) * pitch + de
-                        Dsi = STProperties.Shell_Di 'Dsf / 1.075
+                        Dsi = STProperties.Shell_Di / 1000 'Dsf / 1.075
                         'Dsf = Dsi / 1.075 * Dsi
                         HDi = STProperties.Shell_BaffleCut / 100
-                        Nb = L / STProperties.Shell_BaffleSpacing + 1 'review (l1, l2)
+                        Nb = L / (STProperties.Shell_BaffleSpacing / 1000) + 1 'review (l1, l2)
                         'shell pressure drop
                         Dim Gsf, Np, Fp, Ss, Ssf, fs, Cb, Ca, Res, Prs, jh, aa, bb, cc, xx, yy, Nh, Y As Double
-                        xx = Dsi / STProperties.Shell_BaffleSpacing
+                        xx = Dsi / (STProperties.Shell_BaffleSpacing / 1000)
                         yy = pitch / de
                         Select Case STProperties.Tube_Layout
                             Case 0, 1
@@ -1242,7 +1242,7 @@ Namespace UnitOperations
                                 Cb = 1.37
                         End Select
                         Ca = Cb * (pitch - de) / pitch
-                        Ss = Ca * STProperties.Shell_BaffleSpacing * Dsf
+                        Ss = Ca * STProperties.Shell_BaffleSpacing / 1000 * Dsf
                         Ssf = Ss / Fp
                         'Ssf = Math.PI / 4 * (Dsi ^ 2 - nt * de ^ 2)
                         If STProperties.Shell_Fluid = 0 Then
@@ -1349,8 +1349,6 @@ Namespace UnitOperations
                                 End If
                         End Select
 
-
-
                         'Cx
                         Dim Cx As Double = 0
                         Select Case STProperties.Tube_Layout
@@ -1374,7 +1372,7 @@ Namespace UnitOperations
                         'shell htc
 
                         Dim M As Double = 0.96#
-                        dis = STProperties.Shell_Di
+                        dis = STProperties.Shell_Di / 1000
                         Fh = 1 / (1 + Nh * (dis / pitch) ^ 0.5)
                         Ssh = Ss * M / Fh
                         'Ssh = Math.PI / 4 * (Dsi ^ 2 - nt * de ^ 2)
@@ -1405,8 +1403,8 @@ Namespace UnitOperations
                         Else
                             he = jh * kh * Prs ^ 0.34 / de
                         End If
-                        lb = STProperties.Shell_BaffleSpacing * (Nb - 1)
-                        Ec = lb + (L - lb) * (2 * STProperties.Shell_BaffleSpacing / (L - lb)) ^ 0.6 / L
+                        lb = STProperties.Shell_BaffleSpacing / 1000 * (Nb - 1)
+                        Ec = lb + (L - lb) * (2 * STProperties.Shell_BaffleSpacing / 1000 / (L - lb)) ^ 0.6 / L
                         If Double.IsNaN(Ec) Then Ec = 1
                         he *= Ec
 

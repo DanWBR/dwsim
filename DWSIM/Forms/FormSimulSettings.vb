@@ -22,7 +22,6 @@ Imports System.Runtime.Serialization.Formatters
 Imports System.IO
 Imports DWSIM.FlowsheetSolver
 Imports System.Linq
-Imports DWSIM.DWSIM.Flowsheet
 Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormSimulSettings

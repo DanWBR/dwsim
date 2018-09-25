@@ -16,7 +16,6 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Runtime.Serialization.Formatters.Binary
-Imports DWSIM.DWSIM.Flowsheet
 
 
 Public Class FormUnitGen

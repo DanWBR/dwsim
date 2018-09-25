@@ -71,9 +71,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Initialize()
         {
-
-            double dummy = 0.0f;
-
+            
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
 
