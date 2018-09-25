@@ -2012,8 +2012,8 @@ Namespace UnitOperations.Auxiliary.HeatExchanger
         Public Shell_NumberOfShellsInSeries As Integer = 1
         'number of shell passes, integer
         Public Shell_NumberOfPasses As Integer = 2
-        'shell internal diameter in m
-        Public Shell_Di As Double = 0.5
+        'shell internal diameter in mm
+        Public Shell_Di As Double = 500.0
         'shell fouling in K.m2/W
         Public Shell_Fouling As Double = 0.0#
         'baffle type: 0 = single, 1 = double, 2 = triple, 3 = grid
@@ -2022,16 +2022,16 @@ Namespace UnitOperations.Auxiliary.HeatExchanger
         Public Shell_BaffleOrientation As Integer = 1
         'baffle cut in % diameter
         Public Shell_BaffleCut As Double = 20
-        'baffle spacing in m
-        Public Shell_BaffleSpacing As Double = 0.25
+        'baffle spacing in mm
+        Public Shell_BaffleSpacing As Double = 250.0
         'fluid in shell: 0 = cold, 1 = hot
         Public Shell_Fluid As Integer = 1
-        'tube internal diameter in m
-        Public Tube_Di As Double = 0.05
-        'tube external diameter in m
-        Public Tube_De As Double = 0.06
+        'tube internal diameter in mm
+        Public Tube_Di As Double = 50.0
+        'tube external diameter in mm
+        Public Tube_De As Double = 60.0
         'tube length in m
-        Public Tube_Length As Double = 5
+        Public Tube_Length As Double = 5.0
         'tube fouling in K.m2/W
         Public Tube_Fouling As Double = 0.0#
         'number of tube passes per shell, integer
@@ -2040,14 +2040,14 @@ Namespace UnitOperations.Auxiliary.HeatExchanger
         Public Tube_NumberPerShell As Integer = 160
         'tube layout: 0 = triangular, 1 = triangular rotated, 2 = square, 2 = square rotated
         Public Tube_Layout As Integer = 0
-        'tube pitch in m
-        Public Tube_Pitch As Double = 0.04
+        'tube pitch in mm
+        Public Tube_Pitch As Double = 40.0
         'fluid in tubes: 0 = cold, 1 = hot
         Public Tube_Fluid As Integer = 0
-        'tube material roughness in m
-        Public Tube_Roughness As Double = 0.000045
-        'shell material roughness in m
-        Public Shell_Roughness As Double = 0.000045
+        'tube material roughness in mm
+        Public Tube_Roughness As Double = 0.000045 * 1000
+        'shell material roughness in mm
+        Public Shell_Roughness As Double = 0.000045 * 1000
         'tube scaling friction factor correction
         Public Tube_Scaling_FricCorrFactor As Double = 1.2#
         'tube thermal conductivity
