@@ -144,30 +144,46 @@ Public Class FormReacHeterog
             'build reaction equation
             'scan for reactants
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(4).Value < 0 And row.Cells(2).Value = True Then
-                    If row.Cells(4).Value = -1 Then
-                        eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
-                    Else
-                        eq += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                If row.Cells(4).Value IsNot Nothing AndAlso row.Cells(4).Value.ToString.IsValidDouble Then
+                    If row.Cells(4).Value < 0 And row.Cells(2).Value = True Then
+                        If row.Cells(4).Value = -1 Then
+                            eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                        Else
+                            If row.Cells(4).Value = 1 Then
+                                eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            Else
+                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            End If
+                        End If
+                        hr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                        br += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                        gr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
                     End If
-                    hr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    br += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    gr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                Else
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
                 End If
             Next
             If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
             eq += "<--> "
             'scan for products
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(4).Value > 0 And row.Cells(2).Value = True Then
-                    If row.Cells(4).Value = 1 Then
-                        eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
-                    Else
-                        eq += Math.Abs(Convert.ToInt32(row.Cells(4).Value)) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                If row.Cells(4).Value IsNot Nothing AndAlso row.Cells(4).Value.ToString.IsValidDouble Then
+                    If row.Cells(4).Value > 0 And row.Cells(2).Value = True Then
+                        If row.Cells(4).Value = 1 Then
+                            eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                        Else
+                            If row.Cells(4).Value = 1 Then
+                                eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            Else
+                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            End If
+                        End If
+                        hp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                        bp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                        gp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
                     End If
-                    hp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    bp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    gp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                Else
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
                 End If
             Next
             eq = eq.Remove(eq.Length - 2, 2)
@@ -189,8 +205,12 @@ Public Class FormReacHeterog
 
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
                 If row.Cells(3).Value = True Then
-                    brsc = Math.Abs(Convert.ToDouble(row.Cells(4).Value))
-                    Exit For
+                    If row.Cells(4).Value IsNot Nothing And row.Cells(4).Value.ToString.IsValidDouble Then
+                        brsc = Math.Abs(Convert.ToDouble(row.Cells(4).Value))
+                        Exit For
+                    Else
+                        brsc = 1.0
+                    End If
                 End If
             Next
             Me.tbReacHeat.Text = Format((hp - hr) / brsc, nf)
