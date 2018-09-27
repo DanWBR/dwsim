@@ -1,3 +1,4 @@
-Version 5.2 Update 21
+Version 5.2 Update 22
 
-- [FIX] Fixed a regression in Heat Exchanger model
+- [CHG] Improved font rendering on Cross-Platform UI PFD Designer
+- [FIX] Fixed stoichiometric coefficient input on reaction editor (Classic UI)
