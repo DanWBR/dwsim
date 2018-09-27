@@ -95,13 +95,22 @@ Namespace GraphicObjects.Tables
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            Dim tpaint As New SKPaint()
+            Dim tpaint, tpaint2 As New SKPaint()
 
             With tpaint
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = TextColor
                 .IsStroke = False
+                .Typeface = DefaultTypeFace
+            End With
+
+            With tpaint2
+                .TextSize = FontSize
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Color = TextColor
+                .IsStroke = False
+                .Typeface = RegularTypeFace
             End With
 
             Dim bpaint As New SKPaint()
@@ -166,7 +175,7 @@ Namespace GraphicObjects.Tables
                         If size.Width > maxL1 Then maxL1 = size.Width
                         If size.Height > maxH Then maxH = size.Height
 
-                        size = MeasureString(propval, tpaint)
+                        size = MeasureString(propval, tpaint2)
                         If size.Width > maxL2 Then maxL2 = size.Width
                         If size.Height > maxH Then maxH = size.Height
 
@@ -220,7 +229,7 @@ Namespace GraphicObjects.Tables
                         propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 
                         canvas.DrawText(propstring, X + maxL0 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                        canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1 - Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                        canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1 - Padding, Y + n * maxH + Padding + size.Height, tpaint2)
                         canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
                         canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
 

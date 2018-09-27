@@ -39,6 +39,8 @@ Namespace GraphicObjects
 
         Public Property DefaultTypeFace As SKTypeface
 
+        Public Property RegularTypeFace As SKTypeface
+
         Public Property SemiTransparent As Boolean = False
 
         Public Overridable Property LineWidth As Integer = 1
@@ -166,7 +168,17 @@ Namespace GraphicObjects
 
             MyBase.New()
 
-            Me.DefaultTypeFace = SKTypeface.FromFamilyName("Sans", SKTypefaceStyle.Bold)
+            Select Case GlobalSettings.Settings.RunningPlatform
+                Case GlobalSettings.Settings.Platform.Windows
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
+                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Normal)
+                Case GlobalSettings.Settings.Platform.Linux
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
+                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Normal)
+                Case GlobalSettings.Settings.Platform.Mac
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
+                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Normal)
+            End Select
 
         End Sub
 

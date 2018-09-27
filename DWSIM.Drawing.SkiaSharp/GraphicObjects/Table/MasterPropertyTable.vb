@@ -363,13 +363,22 @@ Namespace GraphicObjects.Tables
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            Dim tpaint As New SKPaint()
+            Dim tpaint, tpaint2 As New SKPaint()
 
             With tpaint
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = TextColor
                 .IsStroke = False
+                .Typeface = DefaultTypeFace
+            End With
+
+            With tpaint2
+                .TextSize = FontSize
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Color = TextColor
+                .IsStroke = False
+                .Typeface = RegularTypeFace
             End With
 
             Dim bpaint As New SKPaint()
@@ -481,7 +490,11 @@ Namespace GraphicObjects.Tables
                                     If i = 0 Then
                                         canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
                                     End If
-                                    canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If n = 1 Then
+                                        canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
+                                    Else
+                                        canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, Y + n * maxH + Padding + size.Height, tpaint2)
+                                    End If
                                     If i = m_items.Count - 1 Then
                                         canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
                                     End If
@@ -500,7 +513,11 @@ Namespace GraphicObjects.Tables
                                     If i = 0 Then
                                         canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
                                     End If
-                                    canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If n = 1 Then
+                                        canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
+                                    Else
+                                        canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding + size.Height, tpaint2)
+                                    End If
                                     If i = m_items.Count - 1 Then
                                         canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
                                     End If
