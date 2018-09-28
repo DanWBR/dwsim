@@ -98,7 +98,7 @@ Namespace GraphicObjects.Shapes
 
             Dim myPen3 As New SKPaint()
             With myPen3
-                .Color = SKColors.White
+                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.Black, SKColors.White)
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .IsStroke = False
             End With

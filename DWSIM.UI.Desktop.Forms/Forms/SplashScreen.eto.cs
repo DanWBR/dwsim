@@ -124,7 +124,7 @@ namespace DWSIM.UI.Forms
         {
             Task.Factory.StartNew(() =>
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 PerformExtraTasks();
             }).ContinueWith((t) => Application.Instance.Invoke(() =>
             {

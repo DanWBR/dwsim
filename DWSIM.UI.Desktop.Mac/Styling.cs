@@ -9,10 +9,10 @@ namespace DWSIM.UI.Desktop.Mac
 
     public static class StyleSetter
     {
-
+    
         public static void SetStyles()
         {
-
+            
             Eto.Style.Add<Eto.Forms.Panel>("transparent-form", control =>
             {
                 System.Console.WriteLine(control.ControlObject.GetType().ToString());
@@ -46,6 +46,7 @@ namespace DWSIM.UI.Desktop.Mac
 
         public static void BeginLaunching()
         {
+            
             var dmset = NSUserDefaults.StandardUserDefaults["AppleInterfaceStyle"];
             if (dmset != null)
             {

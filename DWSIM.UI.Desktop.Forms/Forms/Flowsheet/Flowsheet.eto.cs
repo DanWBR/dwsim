@@ -908,7 +908,7 @@ namespace DWSIM.UI.Forms
 
         void Flowsheet_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show(this, "ConfirmFlowsheetExit".Localize(), "FlowsheetExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.No)
+            if (MessageBox.Show(this, "ConfirmFlowsheetExit".Localize(), "FlowsheetExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
             {
                 e.Cancel = true;
             }
