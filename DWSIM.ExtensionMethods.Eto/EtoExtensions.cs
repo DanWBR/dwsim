@@ -391,7 +391,14 @@ namespace DWSIM.UI.Shared
 
             var edittext = new TextArea { Text = text, ReadOnly = ro, Height = height };
 
-            edittext.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                edittext.Font = new Font("Menlo", GlobalSettings.Settings.ResultsReportFontSize);
+            }
+            else
+            {
+                edittext.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+            }
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
 

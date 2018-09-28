@@ -1260,7 +1260,7 @@ namespace DWSIM.UI.Forms
         {
             var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
             if (obj == null) return;
-            var txt = new TextArea { ReadOnly = true, Wrap = true, Font = Fonts.Monospace(SystemFonts.Default().Size) };
+            var txt = new TextArea { ReadOnly = true, Wrap = true, Font = s.RunningPlatform() == s.Platform.Mac ? new Font("Menlo", s.ResultsReportFontSize) : Fonts.Monospace(s.ResultsReportFontSize) };
             txt.Text = "Please wait, debugging object...";
             var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 500, 600);
             Task.Factory.StartNew(() => { return obj.GetDebugReport(); }).ContinueWith(t => { Application.Instance.Invoke(() => { txt.Text = t.Result; }); }, TaskContinuationOptions.ExecuteSynchronously);

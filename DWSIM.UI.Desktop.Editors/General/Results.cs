@@ -26,6 +26,7 @@ using OxyPlot.Axes;
 
 using DWSIM.ExtensionMethods;
 using System.IO;
+using DWSIM.UI.Shared;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -241,8 +242,8 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             var txtcontrol = new TextArea { ReadOnly = true };
-            txtcontrol.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
-           
+            txtcontrol.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", GlobalSettings.Settings.ResultsReportFontSize) : Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+
             container.Rows.Add(new TableRow(txtcontrol));
 
             var obj = (ISimulationObject)SimObject;
