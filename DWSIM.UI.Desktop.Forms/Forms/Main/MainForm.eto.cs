@@ -14,6 +14,7 @@ using DWSIM.Thermodynamics.BaseClasses;
 using DWSIM.Interfaces;
 using System.Reflection;
 using System.Text;
+using s = DWSIM.GlobalSettings.Settings;
 
 namespace DWSIM.UI
 {
@@ -61,6 +62,8 @@ namespace DWSIM.UI
 
             var bgcolor = new Color(0.051f, 0.447f, 0.651f);
 
+            if (s.DarkMode) bgcolor = SystemColors.ControlBackground;
+
             Eto.Style.Add<Button>("main", button =>
             {
                 button.BackgroundColor = bgcolor;
@@ -72,9 +75,9 @@ namespace DWSIM.UI
 
             Eto.Style.Add<Button>("donate", button =>
             {
-                button.BackgroundColor = Colors.LightYellow;
+                button.BackgroundColor = !s.DarkMode ? Colors.LightYellow : SystemColors.ControlBackground;
                 button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
-                button.TextColor = bgcolor;
+                button.TextColor = !s.DarkMode ? bgcolor : Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
                 button.Width = 230;
             });
@@ -320,7 +323,7 @@ namespace DWSIM.UI
         {
             if (OpenForms > 0)
             {
-                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
+                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.No)
                 {
                     e.Cancel = true;
                 }

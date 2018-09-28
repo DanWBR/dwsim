@@ -2,6 +2,7 @@ Imports Interfaces = DWSIM.Interfaces
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports s = DWSIM.GlobalSettings.Settings
 
 Namespace GraphicObjects
 
@@ -86,9 +87,9 @@ Namespace GraphicObjects
 
 #End Region
 
-        Public Sub UpdateStatus2(ByVal ConnPen As SKPaint, ByVal Conn As ConnectorGraphic)
+        Public Sub UpdateStatus2(ByRef ConnPen As SKPaint, ByVal Conn As ConnectorGraphic)
 
-            ConnPen = New SKPaint()
+            ConnPen.Color = If(s.DarkMode, SKColors.White, SKColors.Black)
 
             If Conn.AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And Conn.AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
                 ConnPen.Color = SKColors.SteelBlue
@@ -732,14 +733,14 @@ Namespace GraphicObjects
 
             Dim myPen As New SKPaint
 
-            UpdateStatus2(myPen, Me)
-
             With myPen
                 .IsStroke = True
-                .StrokeWidth = LineWidth
+                .StrokeWidth = 1.0
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .PathEffect = SKPathEffect.CreateCorner(6.0F)
             End With
+
+            UpdateStatus2(myPen, Me)
 
             Dim myPen2 As New SKPaint
 
@@ -760,7 +761,8 @@ Namespace GraphicObjects
                 path.LineTo(points(i).X, points(i).Y)
             Next
 
-            canvas.DrawPath(path, myPen2)
+            If Not s.DarkMode Then canvas.DrawPath(path, myPen2)
+
             canvas.DrawPath(path, myPen)
 
         End Sub

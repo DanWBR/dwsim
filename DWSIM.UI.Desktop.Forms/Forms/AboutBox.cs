@@ -98,6 +98,7 @@ namespace DWSIM.UI.Forms.Forms
                     case "16.7.0.0": osinfo = "macOS Sierra (v10.12.6)"; break;
                     case "17.0.0.0": osinfo = "macOS High Sierra (v10.13.0)"; break;
                     case "17.4.0.0": osinfo = "macOS High Sierra (v10.13.3)"; break;
+                    case "18.0.0.0": osinfo = "macOS Mojave (v10.14.0)"; break;
                     default: osinfo = "macOS (v" + osversion + ")"; break;
                 }
             }

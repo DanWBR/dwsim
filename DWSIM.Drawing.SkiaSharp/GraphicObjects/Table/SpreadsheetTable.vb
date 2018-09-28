@@ -75,6 +75,10 @@ Namespace GraphicObjects.Tables
 
         Public Property BorderColor As SKColor = SKColors.Black
 
+        Public Property TextColorDark As SKColor = SKColors.SteelBlue
+
+        Public Property BorderColorDark As SKColor = SKColors.SteelBlue
+
 #End Region
 
         Public Overrides Sub Draw(ByVal g As Object)
@@ -86,7 +90,11 @@ Namespace GraphicObjects.Tables
             With tpaint
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = TextColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = TextColorDark
+                Else
+                    .Color = TextColor
+                End If
                 .IsStroke = False
             End With
 
@@ -94,7 +102,11 @@ Namespace GraphicObjects.Tables
 
             With bpaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = BorderColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = BorderColorDark
+                Else
+                    .Color = BorderColor
+                End If
                 .IsStroke = True
                 .StrokeWidth = LineWidth
             End With

@@ -136,6 +136,7 @@ namespace DWSIM.UI.Desktop
                         case Settings.MacOSPlatformRenderer.MonoMac:
                             DWSIM.UI.Desktop.Mac.StyleSetter.SetStyles();
                             platform = new Eto.Mac.Platform();
+                            DWSIM.UI.Desktop.Mac.StyleSetter.BeginLaunching();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
                             platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new Mac.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Mac.PlotHandler());
@@ -168,7 +169,6 @@ namespace DWSIM.UI.Desktop
                             if (GlobalSettings.Settings.MacOSRenderer == Settings.MacOSPlatformRenderer.MonoMac)
                             {
                                 DWSIM.UI.Desktop.Mac.StyleSetter.FinishedLaunching();
-                                Console.WriteLine("FinishedLaunching");
                             }
                         }
                     };

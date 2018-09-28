@@ -33,6 +33,10 @@ Namespace GraphicObjects.Tables
 
         Public Property BorderColor As SKColor = SKColors.Black
 
+        Public Property TextColorDark As SKColor = SKColors.SteelBlue
+
+        Public Property BorderColorDark As SKColor = SKColors.SteelBlue
+
         Public Property HeaderText As String = "PROPERTIES TABLE"
 
         Public Property ClipboardData As String = ""
@@ -100,7 +104,11 @@ Namespace GraphicObjects.Tables
             With tpaint
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = TextColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = TextColorDark
+                Else
+                    .Color = TextColor
+                End If
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With
@@ -108,7 +116,11 @@ Namespace GraphicObjects.Tables
             With tpaint2
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = TextColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = TextColorDark
+                Else
+                    .Color = TextColor
+                End If
                 .IsStroke = False
                 .Typeface = RegularTypeFace
             End With
@@ -117,7 +129,11 @@ Namespace GraphicObjects.Tables
 
             With bpaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = BorderColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = BorderColorDark
+                Else
+                    .Color = BorderColor
+                End If
                 .IsStroke = True
                 .StrokeWidth = 1
             End With

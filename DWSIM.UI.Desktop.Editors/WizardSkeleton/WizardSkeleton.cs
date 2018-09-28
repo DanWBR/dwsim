@@ -15,6 +15,8 @@ using DWSIM.UI.Desktop.Shared;
 using DWSIM.ExtensionMethods;
 using System.IO;
 
+using s = DWSIM.GlobalSettings.Settings;
+
 namespace DWSIM.UI.Desktop.Editors
 {
     public class WizardPage : Form
@@ -60,7 +62,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var topcontainer = new TableLayout();
 
-            topcontainer.BackgroundColor = Colors.White;
+            topcontainer.BackgroundColor = s.DarkMode ? SystemColors.ControlBackground : Colors.White;
 
             if (HeaderTitle != "") topcontainer.Rows.Add(new TableRow(new Label { Text = HeaderTitle, Font = SystemFonts.Bold() }));
             if (HeaderDescription != "") topcontainer.Rows.Add(new TableRow(new Label { Text = HeaderDescription }));
@@ -69,7 +71,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var footercontainer = new TableLayout();
 
-            footercontainer.BackgroundColor = Colors.White;
+            footercontainer.BackgroundColor = s.DarkMode ? SystemColors.ControlBackground : Colors.White;
 
             topcontainer.Padding = new Padding(15);
             topcontainer.Spacing = new Size(10, 10);

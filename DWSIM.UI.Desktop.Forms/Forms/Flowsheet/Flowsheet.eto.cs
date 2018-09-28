@@ -17,6 +17,7 @@ using System.Timers;
 using System.Diagnostics;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts;
 using System.Reflection;
+using s = DWSIM.GlobalSettings.Settings;
 
 namespace DWSIM.UI.Forms
 {
@@ -29,7 +30,7 @@ namespace DWSIM.UI.Forms
 
         private DocumentControl EditorHolder;
 
-        public static Color BGColor = new Color(0.051f, 0.447f, 0.651f);
+        public Color BGColor = new Color(0.051f, 0.447f, 0.651f);
 
         private TableLayout SpreadsheetControl;
 
@@ -59,6 +60,8 @@ namespace DWSIM.UI.Forms
 
         void InitializeComponent()
         {
+
+            if (s.DarkMode) BGColor = SystemColors.ControlBackground;
 
             if (Application.Instance.Platform.IsWpf)
             {
@@ -361,7 +364,7 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-            FlowsheetControl.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
+            FlowsheetControl.FlowsheetSurface.BackgroundColor = s.DarkMode ? SkiaSharp.SKColors.Black : SkiaSharp.SKColors.White;
             FlowsheetControl.KeyDown += (sender, e) =>
             {
                 if (e.Key == Keys.Delete) DeleteObject();
@@ -625,7 +628,7 @@ namespace DWSIM.UI.Forms
             var PanelEditorsDescription = new Label { Text = "  " + "Object Editing Panels will appear here.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
             PanelEditorsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var PanelEditors = new TableLayout { Rows = { PanelEditorsLabel, PanelEditorsDescription, EditorHolder }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
+            var PanelEditors = new TableLayout { Rows = { PanelEditorsLabel, PanelEditorsDescription, EditorHolder }, Spacing = new Size(5, 5), BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground };
 
             SplitterFlowsheet.Panel1 = PanelEditors;
 
@@ -641,7 +644,7 @@ namespace DWSIM.UI.Forms
 
             split0.Panel1 = SplitterFlowsheet;
 
-            var objcontainer = new StackLayout();
+            var objcontainer = new StackLayout() { BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
             foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
             {
@@ -679,7 +682,8 @@ namespace DWSIM.UI.Forms
             var PanelObjectsDescription = new Label { Text = "  " + "Drag and drop items to add them to the Flowsheet.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
             PanelObjectsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, PanelObjectsDescription, new Scrollable() { Content = objcontainer, BackgroundColor = Colors.White } }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
+            var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, PanelObjectsDescription, new Scrollable() { Content = objcontainer } }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
+            PanelObjects.BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground;
 
             split0.Panel2 = PanelObjects;
             split0.Orientation = Orientation.Horizontal;
@@ -904,7 +908,7 @@ namespace DWSIM.UI.Forms
 
         void Flowsheet_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show(this, "ConfirmFlowsheetExit".Localize(), "FlowsheetExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
+            if (MessageBox.Show(this, "ConfirmFlowsheetExit".Localize(), "FlowsheetExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.No)
             {
                 e.Cancel = true;
             }

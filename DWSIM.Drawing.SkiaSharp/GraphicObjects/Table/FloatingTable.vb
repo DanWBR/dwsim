@@ -23,6 +23,7 @@ Imports DWSIM.SharedClasses.Extras
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.DrawingTools.Point
 Imports DWSIM.ExtensionMethods
+Imports s = DWSIM.GlobalSettings.Settings
 
 Namespace GraphicObjects.Tables
 
@@ -83,8 +84,9 @@ Namespace GraphicObjects.Tables
             With tpaint
                 .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.White
+                .Color = If(s.DarkMode, SKColors.Black, SKColors.SteelBlue)
                 .IsStroke = False
+                .Typeface = RegularTypeFace
             End With
 
             Dim tbpaint As New SKPaint()
@@ -92,17 +94,32 @@ Namespace GraphicObjects.Tables
             With tbpaint
                 .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.White
+                .Color = If(s.DarkMode, SKColors.Black, SKColors.SteelBlue)
                 .IsStroke = False
-                .Typeface = SKTypeface.FromTypeface(DefaultTypeFace, SKTypefaceStyle.Bold)
+                .Typeface = DefaultTypeFace
             End With
 
-            Dim bpaint As New SKPaint()
+            Dim bpaint, bpaint2 As New SKPaint()
 
             With bpaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.SteelBlue
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = SKColors.DarkGray
+                Else
+                    .Color = SKColors.SteelBlue
+                End If
                 .IsStroke = False
+                .StrokeWidth = LineWidth
+            End With
+
+            With bpaint2
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = SKColors.DarkSlateGray
+                Else
+                    .Color = SKColors.SteelBlue
+                End If
+                .IsStroke = True
                 .StrokeWidth = LineWidth
             End With
 
@@ -213,12 +230,17 @@ Namespace GraphicObjects.Tables
 
                         'draw shadow
 
-                        Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
+                        If Not s.DarkMode Then
+                            Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
+                        End If
                         Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
 
                         Dim rect As SKRect = GetRect(X, Y, Width, Height)
 
                         DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint)
+                        If s.DarkMode Then
+                            DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint2)
+                        End If
 
                         size = MeasureString("MEASURE", tpaint)
 
@@ -238,7 +260,7 @@ Namespace GraphicObjects.Tables
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
                             canvas.DrawText(propstring, X + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             n += 1
                         Next
 
@@ -407,7 +429,11 @@ Namespace GraphicObjects.Tables
 
                         'draw shadow
 
-                        DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
+                        If Not s.DarkMode Then
+                            DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
+                        Else
+                            DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint2)
+                        End If
                         DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint)
 
                         size = MeasureString("MEASURE", tpaint)
@@ -428,7 +454,7 @@ Namespace GraphicObjects.Tables
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
                             canvas.DrawText(propstring, X + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             n += 1
                         Next
 
@@ -441,7 +467,11 @@ Namespace GraphicObjects.Tables
 
                             'draw shadow
 
-                            DrawRoundRect(g, X + 4 / zoom, Y + DeltaY + 4 / zoom - size.Height, Width2, Height2, 5 / zoom, spaint)
+                            If Not s.DarkMode Then
+                                DrawRoundRect(g, X + 4 / zoom, Y + DeltaY + 4 / zoom - size.Height, Width2, Height2, 5 / zoom, spaint)
+                            Else
+                                DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 5 / zoom, bpaint2)
+                            End If
                             DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 5 / zoom, bpaint)
 
                             Dim atext As String = ""

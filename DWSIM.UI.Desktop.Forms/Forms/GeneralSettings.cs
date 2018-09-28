@@ -66,6 +66,9 @@ namespace DWSIM.UI.Forms.Forms
             tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\nWindows: WPF (Windows Presentation Foundation)\nLinux: GTK 2\nmacOS: MonoMac");
             tab1.CreateAndAddDescriptionRow("Changes to this setting will have effect upon application restart.");
 
+            var check1 = tab1.CreateAndAddCheckBoxRow("Enable Dark Mode (macOS Mojave only)", Settings.DarkMode, (CheckBox sender, EventArgs obj) => { Settings.DarkMode = sender.Checked.Value; });
+            check1.Enabled = false;
+            
             tab1.CreateAndAddLabelRow("Flowsheet Designer");
 
             tab1.CreateAndAddDropDownRow("Flowsheet Renderer", new List<string>() { "Software (CPU)", "Hardware (OpenGL)" }, (int)Settings.FlowsheetRenderer, (sender, e) =>

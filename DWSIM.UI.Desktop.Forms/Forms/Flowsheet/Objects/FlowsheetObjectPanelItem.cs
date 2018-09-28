@@ -37,18 +37,33 @@ namespace DWSIM.UI.Forms
 
             MouseLeave += FlowsheetObjectPanelItem_MouseLeave;
 
-            BackgroundColor = Colors.White;
-
+            if (!GlobalSettings.Settings.DarkMode) BackgroundColor = Colors.White; else BackgroundColor = Colors.Black;
+            
         }
 
         private void FlowsheetObjectPanelItem_MouseLeave(object sender, MouseEventArgs e)
         {
-            BackgroundColor = Colors.White;
+            if (!GlobalSettings.Settings.DarkMode)
+            {
+                BackgroundColor = Colors.White;
+            }
+            else
+            {
+                BackgroundColor = Colors.Black;
+            }
         }
 
         private void FlowsheetObjectPanelItem_MouseEnter(object sender, MouseEventArgs e)
         {
-            BackgroundColor = Colors.LightSteelBlue;
+            if (!GlobalSettings.Settings.DarkMode)
+            {
+                BackgroundColor = Colors.LightGrey;
+            }
+            else
+            {
+                BackgroundColor = Colors.LightSteelBlue;
+            }
+           
         }
     }
 }

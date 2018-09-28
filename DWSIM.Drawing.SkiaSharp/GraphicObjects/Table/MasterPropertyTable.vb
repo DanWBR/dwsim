@@ -125,7 +125,10 @@ Namespace GraphicObjects.Tables
 
         Public Property TextColor As SKColor = SKColors.Black
 
+        Public Property TextColorDark As SKColor = SKColors.SteelBlue
+
         Public Property BorderColor As SKColor = SKColors.Black
+        Public Property BorderColorDark As SKColor = SKColors.SteelBlue
 
         Public Property SortBy() As String
             Get
@@ -368,7 +371,11 @@ Namespace GraphicObjects.Tables
             With tpaint
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = TextColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = TextColorDark
+                Else
+                    .Color = TextColor
+                End If
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With
@@ -376,7 +383,11 @@ Namespace GraphicObjects.Tables
             With tpaint2
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = TextColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = TextColorDark
+                Else
+                    .Color = TextColor
+                End If
                 .IsStroke = False
                 .Typeface = RegularTypeFace
             End With
@@ -385,7 +396,11 @@ Namespace GraphicObjects.Tables
 
             With bpaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = BorderColor
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = BorderColorDark
+                Else
+                    .Color = BorderColor
+                End If
                 .IsStroke = True
                 .StrokeWidth = LineWidth
             End With

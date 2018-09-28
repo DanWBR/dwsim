@@ -1,4 +1,5 @@
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports s = DWSIM.GlobalSettings.Settings
 
 Namespace GraphicObjects
 
@@ -49,9 +50,13 @@ Namespace GraphicObjects
 
         Public Overridable Property LineColor As SKColor = SKColors.Black
 
+        Public Overridable Property LineColorDark As SKColor = SKColors.SteelBlue
+
         Public Overridable Property Fill As Boolean = False
 
         Public Overridable Property FillColor As SKColor = SKColors.LightGray
+
+        Public Overridable Property FillColorDark As SKColor = SKColors.Black
 
         Public Overridable Property GradientColor1 As SKColor = SKColors.LightGray
 
@@ -74,7 +79,7 @@ Namespace GraphicObjects
             With tpaint
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = LineColor
+                .Color = If(s.DarkMode, LineColorDark, LineColor)
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With
@@ -89,7 +94,7 @@ Namespace GraphicObjects
 
             With bpaint
                 .IsAntialias = False
-                .Color = SKColors.White.WithAlpha(200)
+                .Color = If(s.DarkMode, SKColors.Transparent, SKColors.White.WithAlpha(200))
                 .IsStroke = False
             End With
 
@@ -114,7 +119,7 @@ Namespace GraphicObjects
 
             Dim myPen As New SKPaint()
             With myPen
-                .Color = LineColor
+                .Color = If(s.DarkMode, LineColorDark, LineColor)
                 .StrokeWidth = LineWidth
                 .IsStroke = Not Fill
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -133,7 +138,7 @@ Namespace GraphicObjects
             With tPen
                 .TextSize = FontSize
                 .TextEncoding = SKTextEncoding.Utf8
-                .Color = LineColor
+                .Color = If(s.DarkMode, LineColorDark, LineColor)
                 .Typeface = DefaultTypeFace
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With

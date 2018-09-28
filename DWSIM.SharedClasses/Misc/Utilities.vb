@@ -566,7 +566,7 @@ Public Class Utility
 
             If GlobalSettings.Settings.RunningPlatform = GlobalSettings.Settings.Platform.Mac Then
 
-                Return "Xamarin.Mac (CLR v" & Environment.Version.ToString() & ")"
+                Return "Xamarin.Mac (v4.8.0.22)"
 
             Else
 

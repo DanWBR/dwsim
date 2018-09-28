@@ -1,5 +1,8 @@
 ﻿using AppKit;
+using Eto.Mac.Forms;
+using Eto.Mac.Forms.Controls;
 using Foundation;
+using System;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -9,7 +12,7 @@ namespace DWSIM.UI.Desktop.Mac
 
         public static void SetStyles()
         {
-            
+
             Eto.Style.Add<Eto.Forms.Panel>("transparent-form", control =>
             {
                 System.Console.WriteLine(control.ControlObject.GetType().ToString());
@@ -25,7 +28,7 @@ namespace DWSIM.UI.Desktop.Mac
                 var tbox = (NSTextField)control.ControlObject;
                 tbox.Alignment = NSTextAlignment.Right;
             });
-
+            
         }
 
         public static void FinishedLaunching()
@@ -38,6 +41,15 @@ namespace DWSIM.UI.Desktop.Mac
                 }
                 catch
                 {}
+            }
+        }
+
+        public static void BeginLaunching()
+        {
+            var dmset = NSUserDefaults.StandardUserDefaults["AppleInterfaceStyle"];
+            if (dmset != null)
+            {
+                GlobalSettings.Settings.DarkMode = (dmset.ToString() == "Dark");
             }
         }
 

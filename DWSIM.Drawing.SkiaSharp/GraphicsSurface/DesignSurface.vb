@@ -59,6 +59,19 @@ Public Class GraphicsSurface
 
     Public InvalidateCallback As Action
 
+    Public Property DefaultTypeFace As SKTypeface
+
+    Public Sub New()
+        Select Case GlobalSettings.Settings.RunningPlatform
+            Case GlobalSettings.Settings.Platform.Windows
+                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
+            Case GlobalSettings.Settings.Platform.Linux
+                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
+            Case GlobalSettings.Settings.Platform.Mac
+                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
+        End Select
+    End Sub
+
     Public Enum AlignDirection
         Lefts
         Centers
@@ -276,6 +289,7 @@ Public Class GraphicsSurface
             .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             .Color = SKColors.LightSlateGray
             .IsStroke = False
+            .Typeface = DefaultTypeFace
         End With
 
         Dim lines = text.ToString().Split(vbLf)
