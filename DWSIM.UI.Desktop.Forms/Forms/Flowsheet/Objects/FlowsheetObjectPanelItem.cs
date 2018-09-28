@@ -55,9 +55,9 @@ namespace DWSIM.UI.Forms
 
         private void FlowsheetObjectPanelItem_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (!GlobalSettings.Settings.DarkMode)
+            if (GlobalSettings.Settings.DarkMode)
             {
-                BackgroundColor = Colors.LightGrey;
+                BackgroundColor = Colors.DarkGray;
             }
             else
             {
