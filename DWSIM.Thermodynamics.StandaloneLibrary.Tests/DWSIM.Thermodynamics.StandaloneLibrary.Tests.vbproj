@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C0261CF7-B22C-4E27-9373-B0878F3FC298}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>DWSIM.Thermodynamics.StandaloneLibrary.Tests.Example1</StartupObject>
+    <StartupObject>DWSIM.Thermodynamics.StandaloneLibrary.Tests.Example2</StartupObject>
     <RootNamespace>DWSIM.Thermodynamics.StandaloneLibrary.Tests</RootNamespace>
     <AssemblyName>DWSIM.Thermodynamics.StandaloneLibrary.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -24,6 +24,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>DWSIM.Thermodynamics.StandaloneLibrary.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
