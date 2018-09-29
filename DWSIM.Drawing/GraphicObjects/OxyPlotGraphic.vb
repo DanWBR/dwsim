@@ -2,7 +2,6 @@
 Imports System.Drawing.Drawing2D
 Imports OxyPlot
 Imports DWSIM.Interfaces
-Imports DWSIM.extensionmethods
 Imports OxyPlot.Series
 
 Namespace GraphicObjects
