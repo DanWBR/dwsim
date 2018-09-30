@@ -86,10 +86,10 @@ namespace DWSIM.UI.Forms
             var layout = new PixelLayout();
 
             var img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash.png") };
-
-            img.Width = Width;
-            img.Height = Height;
-
+            
+            img.Width = w;
+            img.Height = h;
+            
             layout.Add(img, (int)(sf *( 0 - dx)), (int)(sf * (0 - dy)));
             layout.Add(lblMessage, (int)(sf * (101 - dx)), (int)(sf * (185 - dy)));
             layout.Add(lbl1, (int)(sf * (101 - dx)), (int)(sf * (381 - dy)));

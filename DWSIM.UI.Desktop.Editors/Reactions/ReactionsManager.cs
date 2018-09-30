@@ -64,6 +64,7 @@ namespace DWSIM.UI.Desktop.Editors
                 });
                 myview.CreateAndAddEmptySpace();
                 myview.CreateAndAddEmptySpace();
+                alert.Shown += (s1,e1) => alert.Height = myview.Height;
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -85,6 +86,7 @@ namespace DWSIM.UI.Desktop.Editors
                 });
                 myview.CreateAndAddEmptySpace();
                 myview.CreateAndAddEmptySpace();
+                alert.Shown += (s1, e1) => alert.Height = myview.Height;
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -106,6 +108,7 @@ namespace DWSIM.UI.Desktop.Editors
                 });
                 myview.CreateAndAddEmptySpace();
                 myview.CreateAndAddEmptySpace();
+                alert.Shown += (s1, e1) => alert.Height = myview.Height;
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -127,6 +130,7 @@ namespace DWSIM.UI.Desktop.Editors
                 });
                 myview.CreateAndAddEmptySpace();
                 myview.CreateAndAddEmptySpace();
+                alert.Shown += (s1, e1) => alert.Height = myview.Height;
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -192,6 +196,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 });
                                 myview.CreateAndAddEmptySpace();
                                 myview.CreateAndAddEmptySpace();
+                                alert.Shown += (s1, e1) => alert.Height = myview.Height;
                                 alert.Topmost = true;
                                 alert.Show();
                                 break;
@@ -208,6 +213,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 });
                                 myview2.CreateAndAddEmptySpace();
                                 myview2.CreateAndAddEmptySpace();
+                                alert2.Shown += (s1, e1) => alert2.Height = myview2.Height;
                                 alert2.Topmost = true;
                                 alert2.Show();
                                 break;
@@ -224,6 +230,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 });
                                 myview3.CreateAndAddEmptySpace();
                                 myview3.CreateAndAddEmptySpace();
+                                alert3.Shown += (s1, e1) => alert3.Height = myview3.Height;
                                 alert3.Topmost = true;
                                 alert3.Show();
                                 break;
@@ -240,6 +247,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 });
                                 myview4.CreateAndAddEmptySpace();
                                 myview4.CreateAndAddEmptySpace();
+                                alert4.Shown += (s1, e1) => alert4.Height = myview4.Height;
                                 alert4.Topmost = true;
                                 alert4.Show();
                                 break;

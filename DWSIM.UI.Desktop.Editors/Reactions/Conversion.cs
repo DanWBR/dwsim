@@ -18,6 +18,8 @@ namespace DWSIM.UI.Desktop.Editors
     public class ConversionReaction
     {
 
+        private static double sf = GlobalSettings.Settings.UIScalingFactor;
+
         public IFlowsheet flowsheet;
         public DynamicLayout container;
         public IReaction rx, rx0;
@@ -64,7 +66,7 @@ namespace DWSIM.UI.Desktop.Editors
                     UpdateEquation();
                 };
 
-                var sc = new TextBox() {Width = 50, Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
+                var sc = new TextBox() {Width = (int)(sf*50), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
 
                 sc.TextChanged += (sender, e) =>
                 {

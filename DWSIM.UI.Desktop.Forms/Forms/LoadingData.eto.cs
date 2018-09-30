@@ -10,6 +10,8 @@ namespace DWSIM.UI.Forms.Forms
 
         public Label loadingtext;
 
+        private double sf = GlobalSettings.Settings.UIScalingFactor;
+
         void InitializeComponent()
         {
 
@@ -19,7 +21,7 @@ namespace DWSIM.UI.Forms.Forms
 
             Title = "Loading...";
 
-            var progressSpinner = new Spinner { Width = 80, Height = 80, Enabled = true };
+            var progressSpinner = new Spinner { Width = (int)(sf*80), Height = (int)(sf * 80), Enabled = true };
 
             loadingtext = new Label { Text = "Please wait, loading data..." };
 
@@ -40,8 +42,8 @@ namespace DWSIM.UI.Forms.Forms
             Maximizable = false;
             Minimizable = false;
 
-            int w = 400;
-            int h = 160;
+            int w = (int)(sf * 400);
+            int h = (int)(sf * 160);
 
             var center = Screen.PrimaryScreen.WorkingArea.Center;
             center.X -= w / 2;

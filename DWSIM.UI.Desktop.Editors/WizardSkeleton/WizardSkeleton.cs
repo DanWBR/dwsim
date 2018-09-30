@@ -50,6 +50,9 @@ namespace DWSIM.UI.Desktop.Editors
         public void Init(int width, int height)
         {
 
+            Width = (int)(s.UIScalingFactor * width);
+            Height = (int)(s.UIScalingFactor * height);
+
             string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
@@ -109,7 +112,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var tr = new TableRow();
 
-            footerSpinner = new Spinner {Visible = false, Size = new Size(20, 20) };
+            footerSpinner = new Spinner {Visible = false, Size = new Size((int)(s.UIScalingFactor * 20), (int)(s.UIScalingFactor*20)) };
             tr.Cells.Add(footerSpinner);
 
             footerLabel = new Label { Text = FooterText, VerticalAlignment = VerticalAlignment.Center }; 
@@ -119,15 +122,16 @@ namespace DWSIM.UI.Desktop.Editors
             
             foreach (var btn in buttons)
             {
-                if (Application.Instance.Platform.IsWinForms) btn.Height = 30;
+                if (Application.Instance.Platform.IsWinForms) btn.Height = (int)(s.UIScalingFactor * 30);
                 tr.Cells.Add(btn);
             }
 
             footercontainer.Rows.Add(tr);
             footercontainer.Padding = new Padding(15);
             footercontainer.Spacing = new Size(10, 10);
-            if (Application.Instance.Platform.IsWinForms) footercontainer.Height = 60;
-            
+            if (Application.Instance.Platform.IsWinForms) footercontainer.Height = (int)(s.UIScalingFactor * 60);
+            if (Application.Instance.Platform.IsGtk) footercontainer.Height = (int)(s.UIScalingFactor * 30);
+
             container.Rows.Add(new TableRow(topcontainer));
             container.Rows.Add(new TableRow(middlecontainer));
             if (Application.Instance.Platform.IsWinForms) container.Rows.Add(null);
@@ -140,8 +144,8 @@ namespace DWSIM.UI.Desktop.Editors
             ContentContainer = middlecontainer;
             
             var center = Screen.PrimaryScreen.WorkingArea.Center;
-            center.X -= width / 2;
-            center.Y -= (height + 150) / 2;
+            center.X -= (int)(s.UIScalingFactor * width) / 2;
+            center.Y -= ((int)(s.UIScalingFactor * height) + (int)(s.UIScalingFactor*150)) / 2;
 
             Location = new Point(center);
 

@@ -19,6 +19,8 @@ namespace DWSIM.UI.Desktop.Editors
     public class KineticReaction
     {
 
+        private static double sf = GlobalSettings.Settings.UIScalingFactor;
+
         public IFlowsheet flowsheet;
         public DynamicLayout container;
         public IReaction rx, rx0;
@@ -65,7 +67,7 @@ namespace DWSIM.UI.Desktop.Editors
                     UpdateEquation();
                 };
 
-                var sc = new TextBox() { Width = 30, Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
+                var sc = new TextBox() { Width = (int)(sf * 30), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
 
                 sc.TextChanged += (sender, e) =>
                 {
@@ -88,7 +90,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 };
 
-                var txtdo = new TextBox() { Width = 30, Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].DirectOrder.ToString() : 0.0f.ToString()) };
+                var txtdo = new TextBox() { Width = (int)(sf * 30), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].DirectOrder.ToString() : 0.0f.ToString()) };
 
                 txtdo.TextChanged += (sender, e) =>
                 {
@@ -111,7 +113,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 };
 
-                var txtro = new TextBox() { Width = 30, Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].ReverseOrder.ToString() : 0.0f.ToString()) };
+                var txtro = new TextBox() { Width = (int)(sf * 30), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].ReverseOrder.ToString() : 0.0f.ToString()) };
 
                 txtro.TextChanged += (sender, e) =>
                 {
