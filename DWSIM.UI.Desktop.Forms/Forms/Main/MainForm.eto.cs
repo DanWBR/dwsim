@@ -36,6 +36,8 @@ namespace DWSIM.UI
 
             //exception handling
 
+            var sf = s.UIScalingFactor;
+
             Application.Instance.UnhandledException += (sender, e) =>
             {
                 new DWSIM.UI.Desktop.Editors.UnhandledExceptionView((Exception)e.ExceptionObject).ShowModalAsync();
@@ -48,13 +50,13 @@ namespace DWSIM.UI
             switch (GlobalSettings.Settings.RunningPlatform())
             {
                 case GlobalSettings.Settings.Platform.Windows:
-                    ClientSize = new Size(690, 420);
+                    ClientSize = new Size((int)(690*sf), (int)(420*sf));
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
-                    ClientSize = new Size(690, 370);
+                    ClientSize = new Size((int)(690*sf), (int)(370*sf));
                     break;
                 case GlobalSettings.Settings.Platform.Mac:
-                    ClientSize = new Size(690, 350);
+                    ClientSize = new Size((int)(690 * sf), (int)(350*sf));
                     break;
             }
 
@@ -70,7 +72,7 @@ namespace DWSIM.UI
                 button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
                 button.TextColor = Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
-                button.Width = 230;
+                button.Width = (int)(230*sf);
             });
 
             Eto.Style.Add<Button>("donate", button =>
@@ -79,17 +81,17 @@ namespace DWSIM.UI
                 button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
                 button.TextColor = !s.DarkMode ? bgcolor : Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
-                button.Width = 230;
+                button.Width = (int)(sf * 230);
             });
 
-            var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn3 = new Button() { Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn6 = new Button() { Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn8 = new Button() { Style = "donate", Text = "Donate ", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "PayPal_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "VerticalSettingsMixer_100px.png"), 40, 40, ImageInterpolation.Default) };
+            var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf*40), ImageInterpolation.Default) };
+            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn3 = new Button() { Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn6 = new Button() { Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn8 = new Button() { Style = "donate", Text = "Donate ", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "PayPal_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "VerticalSettingsMixer_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
 
             btn9.Click += (sender, e) =>
             {
@@ -144,9 +146,9 @@ namespace DWSIM.UI
             tableright.Padding = new Padding(5, 5, 5, 5);
             tableright.Spacing = new Size(10, 10);
 
-            MostRecentList = new ListBox { BackgroundColor = bgcolor, Height = 330 };
-            SampleList = new ListBox { BackgroundColor = bgcolor, Height = 330 };
-            FoldersList = new ListBox { BackgroundColor = bgcolor, Height = 330 };
+            MostRecentList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
+            SampleList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
+            FoldersList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
 
             if (Application.Instance.Platform.IsGtk &&
                 GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
@@ -338,7 +340,7 @@ namespace DWSIM.UI
                 switch (GlobalSettings.Settings.RunningPlatform())
                 {
                     case GlobalSettings.Settings.Platform.Windows:
-                        ClientSize = new Size(700, 400);
+                        ClientSize = new Size((int)(s.UIScalingFactor * 700), (int)(s.UIScalingFactor * 400));
                         break;
                 }
                 var splash = new SplashScreen { MainFrm = this };

@@ -13,6 +13,8 @@ namespace DWSIM.UI.Shared
     public static class Common
     {
 
+        static double sf = GlobalSettings.Settings.UIScalingFactor;
+
         static string imgprefix = "DWSIM.ExtensionMethods.Eto.Resources.Icons.";
 
         public static byte[] ImageToByte(System.Drawing.Bitmap img)
@@ -51,7 +53,7 @@ namespace DWSIM.UI.Shared
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                 Title = title,
-                ClientSize = new Size(width, height)
+                ClientSize = new Size((int)(sf*width), (int)(sf * height))
                 //ShowInTaskbar = false,
                 //Maximizable = true,
                 //Minimizable = false,
@@ -66,7 +68,7 @@ namespace DWSIM.UI.Shared
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Title = title,
-                ClientSize = new Size(width, height),
+                ClientSize = new Size((int)(sf * width), (int)(sf * height)),
                 ShowInTaskbar = true
             };
             if (scrollable)
@@ -86,7 +88,7 @@ namespace DWSIM.UI.Shared
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Title = title,
-                ClientSize = new Size(width, height),
+                ClientSize = new Size((int)(sf * width), (int)(sf * height)),
                 ShowInTaskbar = true
             };
             if (scrollable)
@@ -120,7 +122,7 @@ namespace DWSIM.UI.Shared
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Title = title,
-                ClientSize = new Size(width, height),
+                ClientSize = new Size((int)(sf * width), (int)(sf * height)),
                 ShowInTaskbar = true
                 //Maximizable = false,
                 //Minimizable = false,
@@ -144,8 +146,8 @@ namespace DWSIM.UI.Shared
         {
             var alert = new Eto.Forms.Dialog();
             alert.Content = content;
-            if (height != 0) alert.Height = height;
-            if (width != 0) alert.Width = width;
+            if (height != 0) alert.Height = (int)(sf * height);
+            if (width != 0) alert.Width = (int)(sf * width);
             alert.Title = title;
             alert.Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
             return alert;
@@ -168,7 +170,7 @@ namespace DWSIM.UI.Shared
             drop.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (!Eto.Forms.Application.Instance.Platform.IsGtk)
             {
-                if (GlobalSettings.Settings.EditorTextBoxFixedSize) drop.Width = 140;
+                if (GlobalSettings.Settings.EditorTextBoxFixedSize) drop.Width = (int)(sf * 140);
             }
 
             foreach (var item in options)
@@ -251,7 +253,7 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
 
             if (text.Contains("(") && text.Contains(")"))
             {
@@ -294,7 +296,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var editor = new ColorPicker { Value = currval };
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * 140);
 
             if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((ColorPicker)sender, e);
 
@@ -314,7 +316,7 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var editor = new NumericStepper { Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
             editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * 140);
 
             if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((NumericStepper)sender, e);
 
@@ -335,7 +337,7 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -353,8 +355,8 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            var edittext = new TextBox { Text = currval1, Width = 100 };
-            var edittext2 = new TextBox { Text = currval2.ToString(numberformat), Width = 100 };
+            var edittext = new TextBox { Text = currval1, Width = (int)(sf * 100) };
+            var edittext2 = new TextBox { Text = currval2.ToString(numberformat), Width = (int)(sf * 100) };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             edittext2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
@@ -438,9 +440,9 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            var edittext = new TextBox { Text = currval, Width = 140 };
+            var edittext = new TextBox { Text = currval, Width = (int)(sf * 140) };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
             if (keypress != null) edittext.KeyUp += (sender, e) => { if (e.Key == Keys.Enter) keypress.Invoke(); };
@@ -459,7 +461,7 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            var txt2 = new Label { Text = text2, Width = 140, VerticalAlignment = VerticalAlignment.Center };
+            var txt2 = new Label { Text = text2, Width = (int)(sf * 140), VerticalAlignment = VerticalAlignment.Center };
             txt2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             var tr = new TableRow(txt, null, txt2);
@@ -476,7 +478,7 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center, Font = SystemFonts.Bold(null, FontDecoration.None) };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            var txt2 = new Label { Text = text2, Width = 350, VerticalAlignment = VerticalAlignment.Center };
+            var txt2 = new Label { Text = text2, Width = (int)(sf * 350), VerticalAlignment = VerticalAlignment.Center };
             txt2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
             var tr = new TableRow(txt, null, txt2);
@@ -511,7 +513,7 @@ namespace DWSIM.UI.Shared
         {
             var h = 8 * GetEditorFontSize() / (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
 
-            container.AddRow(new TableRow(new Label { Text = "", Height = h }));
+            container.AddRow(new TableRow(new Label { Text = "", Height = (int)(sf * h) }));
         }
 
         public static TextBox CreateAndAddFullTextBoxRow(this DynamicLayout container, String text, Action<TextBox, EventArgs> command)
@@ -538,7 +540,7 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var btn = new Button { Text = buttonlabel };
             btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 140);
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
@@ -559,7 +561,7 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) control.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) control.Width = (int)(sf * 140);
 
             var tr = new TableRow(txt, null, control);
 
@@ -574,7 +576,7 @@ namespace DWSIM.UI.Shared
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center, Font = SystemFonts.Bold() };
             txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var btn = new Button { Text = buttonlabel };
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 140);
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
@@ -624,13 +626,13 @@ namespace DWSIM.UI.Shared
         public static TableRow CreateAndAddTextBoxAndTwoButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
         {
 
-            var txt = new TextBox { Width = 250, Text = label };
+            var txt = new TextBox { Width = (int)(sf * 250), Text = label };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            var btn = new Button { Width = 100, Text = buttonlabel };
-            var btn2 = new Button { Width = 100, Text = buttonlabel2 };
+            var btn = new Button { Width = (int)(sf * 100), Text = buttonlabel };
+            var btn2 = new Button { Width = (int)(sf * 100), Text = buttonlabel2 };
 
-            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
-            if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), 22, 22, ImageInterpolation.Default);
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
 
             if (command0 != null) txt.TextChanged += (sender, e) => command0.Invoke((TextBox)sender, e);
             if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
@@ -646,15 +648,15 @@ namespace DWSIM.UI.Shared
         public static TableRow CreateAndAddTextBoxAndThreeButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, String buttonlabel3, String imageResID3, Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, Action<Button, EventArgs> command2, Action<Button, EventArgs> command3)
         {
 
-            var txt = new TextBox { Width = 300, Text = label };
+            var txt = new TextBox { Width = (int)(sf * 300), Text = label };
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            var btn = new Button { Width = 100, Text = buttonlabel };
-            var btn2 = new Button { Width = 100, Text = buttonlabel2 };
-            var btn3 = new Button { Width = 100, Text = buttonlabel3 };
+            var btn = new Button { Width = (int)(sf * 100), Text = buttonlabel };
+            var btn2 = new Button { Width = (int)(sf * 100), Text = buttonlabel2 };
+            var btn3 = new Button { Width = (int)(sf * 100), Text = buttonlabel3 };
 
-            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
-            if (imageResID2 != null) btn2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), 22, 22, ImageInterpolation.Default);
-            if (imageResID3 != null) btn3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID3), 22, 22, ImageInterpolation.Default);
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID2 != null) btn2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID3 != null) btn3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID3), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
 
             if (command0 != null) txt.TextChanged += (sender, e) => command0.Invoke((TextBox)sender, e);
             if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
@@ -664,7 +666,7 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(txt, GetPlaceHolderLabel(), null, btn, GetPlaceHolderLabel(), btn2, GetPlaceHolderLabel(), btn3);
             if (Application.Instance.Platform.IsMac)
             {
-                txt.Height = 28;
+                txt.Height = (int)(sf * 28);
             }
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
@@ -675,13 +677,13 @@ namespace DWSIM.UI.Shared
         public static TableRow CreateAndAddTwoButtonsRow(this DynamicLayout container, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
         {
 
-            var btn = new Button { Width = 100, Text = buttonlabel };
-            var btn2 = new Button { Width = 100, Text = buttonlabel2 };
+            var btn = new Button { Width = (int)(sf * 100), Text = buttonlabel };
+            var btn2 = new Button { Width = (int)(sf * 100), Text = buttonlabel2 };
             btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
             btn2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
-            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
-            if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), 22, 22, ImageInterpolation.Default);
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
 
             if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
             if (command2 != null) btn2.Click += (sender, e) => command2.Invoke((Button)sender, e);
@@ -702,13 +704,13 @@ namespace DWSIM.UI.Shared
             var btn2 = new Button { Text = buttonlabel2 };
 
             btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = 100;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 100);
 
             btn2.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn2.Width = 100;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn2.Width = (int)(sf * 100);
 
-            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
-            if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), 22, 22, ImageInterpolation.Default);
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
 
             if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
             if (command2 != null) btn2.Click += (sender, e) => command2.Invoke((Button)sender, e);
@@ -725,9 +727,9 @@ namespace DWSIM.UI.Shared
 
             var btn = new Button { Text = buttonlabel };
             btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = 140;
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 140);
 
-            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
 
             if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
 

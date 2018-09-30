@@ -14,6 +14,8 @@ namespace DWSIM.UI.Forms
     partial class SplashScreen : Form
     {
 
+        private double sf = GlobalSettings.Settings.UIScalingFactor;
+
         public MainForm MainFrm;
 
         private Label lblMessage;
@@ -33,8 +35,8 @@ namespace DWSIM.UI.Forms
 
             if (Application.Instance.Platform.IsGtk)
             {
-                w = 916;
-                h = 426;
+                w = (int)(sf * 916);
+                h = (int)(sf * 426);
                 dx = 83;
                 dy = 32;
             }
@@ -70,8 +72,8 @@ namespace DWSIM.UI.Forms
             lbl1a.TextColor = new Color(0.051f, 0.447f, 0.651f);
             lbl3.TextColor = new Color(0.051f, 0.447f, 0.651f);
 
-            lbl3.Width = 576;
-            lbl3.Height = 40;
+            lbl3.Width = (int)(sf * 576);
+            lbl3.Height = (int)(sf * 40);
 
             lblMessage = new Label { Style = "splashlabels2", Text = "LoadingComponents".Localize() };
 
@@ -85,13 +87,16 @@ namespace DWSIM.UI.Forms
 
             var img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash.png") };
 
-            layout.Add(img, 0 - dx, 0 - dy);
-            layout.Add(lblMessage, 101 - dx, 185 - dy);
-            layout.Add(lbl1, 101 - dx, 381 - dy);
-            layout.Add(lbl2, 101 - dx, 403 - dy);
-            layout.Add(lbl1a, 419 - dx, 185 - dy);
-            layout.Add(lbl5, 419 - dx, 213 - dy);
-            layout.Add(lbl3, 419 - dx, 381 - dy);
+            img.Width = Width;
+            img.Height = Height;
+
+            layout.Add(img, (int)(sf *( 0 - dx)), (int)(sf * (0 - dy)));
+            layout.Add(lblMessage, (int)(sf * (101 - dx)), (int)(sf * (185 - dy)));
+            layout.Add(lbl1, (int)(sf * (101 - dx)), (int)(sf * (381 - dy)));
+            layout.Add(lbl2, (int)(sf * (101 - dx)), (int)(sf * (403 - dy)));
+            layout.Add(lbl1a, (int)(sf * (419 - dx)), (int)(sf * (185 - dy)));
+            layout.Add(lbl5, (int)(sf * (419 - dx)), (int)(sf * (213 - dy)));
+            layout.Add(lbl3, (int)(sf * (419 - dx)), (int)(sf * (381 - dy)));
 
             Content = layout;
 

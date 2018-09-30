@@ -68,6 +68,8 @@ namespace DWSIM.UI.Forms.Forms
 
             var check1 = tab1.CreateAndAddCheckBoxRow("Enable Dark Mode (macOS Mojave only)", Settings.DarkMode, (CheckBox sender, EventArgs obj) => { Settings.DarkMode = sender.Checked.Value; });
             check1.Enabled = false;
+
+            tab1.CreateAndAddNumericEditorRow("Scaling Factor", Settings.UIScalingFactor, 0.2, 3.0, 2, (sender, e) => Settings.UIScalingFactor = sender.Value);
             
             tab1.CreateAndAddLabelRow("Flowsheet Designer");
 

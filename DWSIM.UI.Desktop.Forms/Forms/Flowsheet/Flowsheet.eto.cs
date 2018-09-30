@@ -58,6 +58,8 @@ namespace DWSIM.UI.Forms
 
         public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActSimultAdjustSolver, ActInspector;
 
+        private double sf = s.UIScalingFactor; 
+
         void InitializeComponent()
         {
 
@@ -108,7 +110,7 @@ namespace DWSIM.UI.Forms
                 });
             });
 
-            ClientSize = new Size(1024, 768);
+            ClientSize = new Size((int)(sf * 1024), (int)(sf * 768));
 
             // toolbar
 
@@ -170,7 +172,7 @@ namespace DWSIM.UI.Forms
                 var cont2 = new Desktop.Editors.CompoundTools(FlowsheetObject);
                 cont2.Tag = "Compound Tools";
 
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 920, 500, new Control[] { cont, cont2 });
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", (int)(sf * 920), (int)(sf * 500), new Control[] { cont, cont2 });
                 form.Show();
             };
 
@@ -182,7 +184,7 @@ namespace DWSIM.UI.Forms
                 var cont2 = UI.Shared.Common.GetDefaultContainer();
                 cont2.Tag = "Reactions";
                 new DWSIM.UI.Desktop.Editors.ReactionsManager(FlowsheetObject, cont2);
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Simulation Basis", 800, 600, new[] { cont1, cont2 });
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Simulation Basis", (int)(sf * 800), (int)(sf * 600), new[] { cont1, cont2 });
                 form.Show();
                 form.Width += 10;
             };
@@ -194,7 +196,7 @@ namespace DWSIM.UI.Forms
                 cont.Tag = "Settings";
                 var cont2 = new UI.Desktop.Editors.FloatingTablesView(FlowsheetObject);
                 cont2.Tag = "Visible Properties";
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Flowsheet Settings", 800, 600, new[] { cont, cont2 });
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Flowsheet Settings", (int)(sf * 800), (int)(sf * 600), new[] { cont, cont2 });
                 form.Show();
                 form.Width += 1;
             };
@@ -258,7 +260,7 @@ namespace DWSIM.UI.Forms
             ActInspector = () =>
             {
                 var iwindow = DWSIM.Inspector.Window.GetInspectorWindow();
-                var iform = Common.GetDefaultEditorForm("DWSIM - Solution Inspector", 1024, 768, iwindow, false);
+                var iform = Common.GetDefaultEditorForm("DWSIM - Solution Inspector", (int)(sf * 1024), (int)(sf * 768), iwindow, false);
                 iform.WindowState = WindowState.Maximized;
                 iform.Show();
             };
@@ -311,21 +313,21 @@ namespace DWSIM.UI.Forms
             btnUtilities_TrueCriticalPoint.Click += (sender, e) =>
             {
                 var tcp = new Desktop.Editors.Utilities.TrueCriticalPointView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("True Critical Point", 500, 250, tcp);
+                var form = Common.GetDefaultEditorForm("True Critical Point", (int)(sf * 500), (int)(sf * 250), tcp);
                 form.Show();
             };
 
             btnUtilities_BinaryEnvelope.Click += (sender, e) =>
             {
                 var bpe = new Desktop.Editors.Utilities.BinaryEnvelopeView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Binary Phase Envelope", 500, 750, bpe);
+                var form = Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 500), (int)(sf * 750), bpe);
                 form.Show();
             };
 
             btnUtilities_PhaseEnvelope.Click += (sender, e) =>
             {
                 var pe = new Desktop.Editors.Utilities.PhaseEnvelopeView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Phase Envelope", 500, 650, pe);
+                var form = Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 500), (int)(sf * 650), pe);
                 form.Show();
             };
 
@@ -353,14 +355,14 @@ namespace DWSIM.UI.Forms
             btnSensAnalysis.Click += (sender, e) =>
             {
                 var saeditor = new Desktop.Editors.SensAnalysisView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Sensitivity Analysis", 500, 700, saeditor);
+                var form = Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 500), (int)(sf * 700), saeditor);
                 form.Show();
             };
 
             btnOptimization.Click += (sender, e) =>
             {
                 var foeditor = new Desktop.Editors.OptimizerView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Flowsheet Optimizer", 500, 700, foeditor);
+                var form = Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 500), (int)(sf * 700), foeditor);
                 form.Show();
             };
 
@@ -622,17 +624,17 @@ namespace DWSIM.UI.Forms
 
             EditorHolder = new DocumentControl() { AllowReordering = true, BackgroundColor = SystemColors.ControlBackground };
 
-            var PanelEditorsLabel = new Label { Text = "  " + "Object Editors", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            var PanelEditorsLabel = new Label { Text = "  " + "Object Editors", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
             PanelEditorsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var PanelEditorsDescription = new Label { Text = "  " + "Object Editing Panels will appear here.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            var PanelEditorsDescription = new Label { Text = "  " + "Object Editing Panels will appear here.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
             PanelEditorsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var PanelEditors = new TableLayout { Rows = { PanelEditorsLabel, PanelEditorsDescription, EditorHolder }, Spacing = new Size(5, 5), BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground };
 
             SplitterFlowsheet.Panel1 = PanelEditors;
 
-            SplitterFlowsheet.Panel1.Width = 300;
+            SplitterFlowsheet.Panel1.Width = (int)(sf * 300);
             SplitterFlowsheet.Panel1.Visible = true;
 
             btnShowHideObjectEditorPanel.Click += (sender, e) =>
@@ -676,10 +678,10 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
             PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var PanelObjectsDescription = new Label { Text = "  " + "Drag and drop items to add them to the Flowsheet.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            var PanelObjectsDescription = new Label { Text = "  " + "Drag and drop items to add them to the Flowsheet.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
             PanelObjectsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, PanelObjectsDescription, new Scrollable() { Content = objcontainer } }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
@@ -708,7 +710,7 @@ namespace DWSIM.UI.Forms
             split.Panel2 = SetupLogWindow();
             split.Orientation = Orientation.Vertical;
             split.FixedPanel = SplitterFixedPanel.Panel2;
-            split.Panel2.Height = 100;
+            split.Panel2.Height = (int)(sf * 100);
 
             // main container
 
@@ -1018,7 +1020,7 @@ namespace DWSIM.UI.Forms
         Eto.Forms.Container SetupLogWindow()
         {
 
-            var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = 20 };
+            var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf*20) };
             label.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};

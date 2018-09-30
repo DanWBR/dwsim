@@ -63,6 +63,8 @@ Namespace GraphicObjects.Tables
 
         Public Overrides Sub Draw(ByVal g As Object)
 
+            Dim sf = GlobalSettings.Settings.UIScalingFactor
+
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             If GlobalSettings.Settings.EditorFontSize = -1 Then
@@ -71,13 +73,13 @@ Namespace GraphicObjects.Tables
                 FontSize = GlobalSettings.Settings.EditorFontSize + 1.0
             End If
 
-            FontSize *= GlobalSettings.Settings.DpiScale
+            FontSize *= GlobalSettings.Settings.DpiScale * sf
 
             Dim zoom As Single = AdditionalInfo
 
             If zoom = 0.0 Then Exit Sub
 
-            Padding = 4 / zoom * GlobalSettings.Settings.DpiScale
+            Padding = 4 / zoom * GlobalSettings.Settings.DpiScale * sf
 
             Dim tpaint As New SKPaint()
 

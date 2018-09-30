@@ -16,6 +16,8 @@ namespace DWSIM.UI.Forms.Forms
     class AboutBox: Form
     {
 
+        private double sf = GlobalSettings.Settings.UIScalingFactor;
+
         private ObservableCollection<ComponentInfo> components = new ObservableCollection<ComponentInfo>();
 
         public AboutBox(): base()
@@ -26,8 +28,8 @@ namespace DWSIM.UI.Forms.Forms
         public void Init()
         {
 
-            int w = 640;
-            int h = 480;
+            int w = (int)(sf * 640);
+            int h = (int)(sf * 480);
 
             var center = Screen.PrimaryScreen.WorkingArea.Center;
             center.X -= w / 2;
@@ -68,10 +70,10 @@ namespace DWSIM.UI.Forms.Forms
             
             string crtext = Shared.AssemblyCopyright;
 
-            layout.Add(new ImageView { Size = new Size(100, 100), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 0, 0);
-            layout.Add(new Label { Text = "DWSIM Simulator (Cross-Platform User Interface)", TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 110, 0);
-            layout.Add(new Label { Text = vtext, TextAlignment = TextAlignment.Left}, 110, 20);
-            layout.Add(new Label { Text = crtext, TextAlignment = TextAlignment.Left}, 110, 40);
+            layout.Add(new ImageView { Size = new Size((int)(sf * 100), (int)(sf * 100)), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 0, 0);
+            layout.Add(new Label { Text = "DWSIM Simulator (Cross-Platform User Interface)", TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, (int)(sf * 110), 0);
+            layout.Add(new Label { Text = vtext, TextAlignment = TextAlignment.Left}, (int)(sf * 110), (int)(sf * 20));
+            layout.Add(new Label { Text = crtext, TextAlignment = TextAlignment.Left}, (int)(sf * 110), (int)(sf * 40));
 
             string osinfo = "", clrinfo = "", meminfo = "";
 
@@ -120,7 +122,7 @@ namespace DWSIM.UI.Forms.Forms
             container1.CreateAndAddTwoLabelsRow2("Memory Usage:", meminfo);
             container1.CreateAndAddLabelRow("DWSIM is released under the terms of the GNU General Public License (GPL) version 3.");
             
-            var listcontainer = new GridView { DataStore = components, RowHeight = 20 };
+            var listcontainer = new GridView { DataStore = components, RowHeight = (int)(sf * 20) };
 
             var col1 = new GridColumn
             {

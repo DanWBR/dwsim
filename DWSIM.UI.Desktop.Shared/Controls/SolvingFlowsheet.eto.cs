@@ -11,21 +11,23 @@ namespace DWSIM.UI.Desktop.Shared.Forms
         public Spinner progressSpinner;
         public Label lblMessage;
         public Button btnAbort;
+
+        private double sf = GlobalSettings.Settings.UIScalingFactor;
                 
         void InitializeComponent()
         {
             
-            progressSpinner = new Spinner { Width = 80, Height = 80, Enabled = true };
+            progressSpinner = new Spinner { Width = (int)(sf*80), Height = (int)(sf * 80), Enabled = true };
 
-            lblMessage = new Label { Text = "Solving flowsheet, please wait...\n", Height = 50};
+            lblMessage = new Label { Text = "Solving flowsheet, please wait...\n", Height = (int)(sf * 50)};
 
             lblMessage.VerticalAlignment = VerticalAlignment.Center;
             lblMessage.TextAlignment = TextAlignment.Center;
 
-            btnAbort = new Button { Text = "Abort", Height = 30};
+            btnAbort = new Button { Text = "Abort", Height = (int)(sf * 30)};
 
             var row1 = new TableLayout { Rows = { new TableRow(null, progressSpinner, null), null } };
-            var container = new TableLayout { Rows = { row1, lblMessage, btnAbort, null }, Spacing = new Size(5, 5), Padding = new Padding(25, 10, 25, 10) };
+            var container = new TableLayout { Rows = { row1, lblMessage, btnAbort, null }, Spacing = new Size(5, 5), Padding = new Padding((int)(sf * 25), (int)(sf * 10), (int)(sf * 25), (int)(sf * 10)) };
 
             Content = container;
 

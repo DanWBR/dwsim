@@ -10,28 +10,28 @@ namespace DWSIM.UI.Forms
         public ImageView imgIcon;
         public Label txtName, txtDescription;
 
-        public static int width = 300;
+        public static int width = (int)(GlobalSettings.Settings.UIScalingFactor * 300);
 
         public FlowsheetObjectPanelItem()
         {
 
-            int padding = 5;
-            int height = 70;
+            int padding = (int)(GlobalSettings.Settings.UIScalingFactor * 5);
+            int height = (int)(GlobalSettings.Settings.UIScalingFactor * 70);
 
-            int iconsize = height-6*padding;
+            int iconsize = height- (int)(GlobalSettings.Settings.UIScalingFactor * 6) * padding;
 
             Size = new Size(width, height);
 
             imgIcon = new ImageView() { Size = new Eto.Drawing.Size(iconsize, iconsize) };
             txtName = new Label() { Text = "Name", Font = SystemFonts.Bold() };
-            txtDescription = new Label() { Text = "Description", Size = new Size(padding + width - 10 - iconsize, height - 20)};
+            txtDescription = new Label() { Text = "Description", Size = new Size(padding + width - (int)(GlobalSettings.Settings.UIScalingFactor * 10) - iconsize, height - (int)(GlobalSettings.Settings.UIScalingFactor * 20)) };
 
             txtName.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
             txtDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             Add(imgIcon, padding, 3*padding);
-            Add(txtName, padding+iconsize + 6, padding);
-            Add(txtDescription, padding+iconsize + 6, padding+16);
+            Add(txtName, padding+iconsize + (int)(GlobalSettings.Settings.UIScalingFactor * 6), padding);
+            Add(txtDescription, padding+iconsize + (int)(GlobalSettings.Settings.UIScalingFactor * 6), padding+ (int)(GlobalSettings.Settings.UIScalingFactor * 16));
 
             MouseEnter += FlowsheetObjectPanelItem_MouseEnter;
 
