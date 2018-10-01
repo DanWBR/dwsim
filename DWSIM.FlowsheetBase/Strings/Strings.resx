@@ -2695,10 +2695,10 @@
     <value>PT/PV Flash - Maximum Internal Iterations</value>
   </data>
   <data name="PP_RIG_BUB_DEW_FLASH_INIT" xml:space="preserve">
-    <value>Use Rigorous Bubble and Dew Points for TP Flash Vapor Fraction Initialization (0 = Disable, 1 = Enable)</value>
+    <value>Use Rigorous Bubble and Dew Points for TP Flash Vapor Fraction Initialization (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_USE_EOS_LIQDENS" xml:space="preserve">
-    <value>Use EOS for Liquid Density (0 = Disable, 1 = Enable)</value>
+    <value>Use EOS for Liquid Density (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PPmodificado" xml:space="preserve">
     <value>PP modified</value>
@@ -4165,7 +4165,7 @@
     <value>Edit Element Matrix</value>
   </data>
   <data name="PP_IDEAL_MIXRULE_LIQDENS" xml:space="preserve">
-    <value>Use Ideal Mixing Rule for Liquid Phase Density (0 = Disable, 1 = Enable)</value>
+    <value>Use Ideal Mixing Rule for Liquid Phase Density (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="CalculandoFatordeAjuste" xml:space="preserve">
     <value>Calculating Adjustment Factor</value>
@@ -4324,10 +4324,10 @@
     <value>Fouling Factor</value>
   </data>
   <data name="PP_USEEXPLIQDENS" xml:space="preserve">
-    <value>Use Experimental Liquid Density Data (0 = Disable, 1 = Enable)</value>
+    <value>Use Experimental Liquid Density Data (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_USEEXPLIQTHERMALCOND" xml:space="preserve">
-    <value>Use Experimental Liquid Thermal Conductivity Data (0 = Disable, 1 = Enable)</value>
+    <value>Use Experimental Liquid Thermal Conductivity Data (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="Cordofundo" xml:space="preserve">
     <value>Background color</value>
@@ -4465,7 +4465,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Simulation state saved successfully.</value>
   </data>
   <data name="PP_USE_EOS_VOLUME_SHIFT" xml:space="preserve">
-    <value>Use Peneloux Volume Translation correction (0 = Disable, 1 = Enable)</value>
+    <value>Use Peneloux Volume Translation correction (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="SimultaneousAdjust" xml:space="preserve">
     <value>Simultaneous Adjust</value>
@@ -4615,7 +4615,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>The Cake Filter model doesn't support a vapor phase in the inlet stream.</value>
   </data>
   <data name="PP_IDEAL_VAPOR_PHASE_FUG" xml:space="preserve">
-    <value>Use Ideal Vapor Phase Fugacity Model (0 = Disable, 1 = Enable)</value>
+    <value>Use Ideal Vapor Phase Fugacity Model (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="LiquidDensity" xml:space="preserve">
     <value>Liquid Density</value>
@@ -4939,7 +4939,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Last successful calculation on</value>
   </data>
   <data name="PP_FLASHALGORITHMFASTMODE" xml:space="preserve">
-    <value>Enable Flash Algorithm Fast Mode</value>
+    <value>Enable Flash Algorithm Fast Mode (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="RecycleStreamNotCalculated" xml:space="preserve">
     <value>The Recycle Inlet Stream is not calculated or not at equilibrium.</value>
@@ -5056,7 +5056,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>PSF Flash is not supported.</value>
   </data>
   <data name="PP_FLASHALGORITHMIDEALKFALLBACK" xml:space="preserve">
-    <value>Fallback to ideal K on trivial solution</value>
+    <value>Fallback to ideal K on trivial solution (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="DescSEAPP" xml:space="preserve">
     <value>This Property Package contains routines to calculate seawater properties using the procedures of the IAPWS-08 specification ("Release on the IAPWS Formulation 2008 for the Thermodynamic Properties of Seawater").</value>
@@ -5068,7 +5068,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Salinity (kg/kg)</value>
   </data>
   <data name="PP_IGNORE_SALINITY_LIMIT" xml:space="preserve">
-    <value>Ignore maximum salinity limit</value>
+    <value>Ignore maximum salinity limit (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="BlackOil_BSW" xml:space="preserve">
     <value>[Black Oil] BSW (%)</value>
@@ -5277,7 +5277,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Material Stream</value>
   </data>
   <data name="PP_IGNORE_VAPOR_FRACTION_LIMIT" xml:space="preserve">
-    <value>Ignore Vapor Fraction bounds (0 &lt;= VF &lt;= 1) on flash calculations</value>
+    <value>Ignore Vapor Fraction bounds (0 &lt;= VF &lt;= 1) on flash calculations (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_POYNTING" xml:space="preserve">
     <value>Use Poynting Correction Factor for liquid phase compound fugacities (0 = Disable, 1 = Enable)</value>
@@ -5325,9 +5325,12 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>User Defined</value>
   </data>
   <data name="PP_EXP_LIQDENS_PCORRECTION" xml:space="preserve">
-    <value>Use Compressed Experimental Liquid Density Correction</value>
+    <value>Use Compressed Experimental Liquid Density Correction (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_LIQVISC_PCORRECTION" xml:space="preserve">
-    <value>Use Compressed Liquid Viscosity Correction</value>
+    <value>Use Compressed Liquid Viscosity Correction (0 = Disabled, 1 = Enabled)</value>
+  </data>
+  <data name="PP_IGNORE_MISSING_IPS" xml:space="preserve">
+    <value>Ignore Missing Interaction Parameters (0 = Disabled, 1 = Enabled)</value>
   </data>
 </root>

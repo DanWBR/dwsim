@@ -33,7 +33,7 @@ Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
-    <System.Serializable> Public Class ActivityCoefficientPropertyPackage
+    <System.Serializable> Public MustInherit Class ActivityCoefficientPropertyPackage
 
         Inherits PropertyPackage
 
@@ -59,6 +59,7 @@ Namespace PropertyPackages
                 .Add("PP_ENTH_CP_CALC_METHOD", 1)
                 .Add("PP_POYNTING", 1)
                 .Add("PP_LIQVISC_PCORRECTION", 1)
+                .Add("PP_IGNORE_MISSING_IPS", 0)
             End With
         End Sub
 
@@ -492,7 +493,6 @@ Namespace PropertyPackages
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
-
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcFugCoeff", "Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
@@ -506,6 +506,14 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add(String.Format("Compounds: {0}", RET_VNAMES.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", DirectCast(Vx, Double()).ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", [Enum].GetName(st.GetType, st)))
+
+            If Not Me.Parameters.ContainsKey("PP_IGNORE_MISSING_IPS") Then
+                Me.Parameters.Add("PP_IGNORE_MISSING_IPS", 0)
+            End If
+
+            If Me.Parameters("PP_IGNORE_MISSING_IPS") = 0 Then
+                CheckMissingInteractionParameters()
+            End If
 
             Dim n As Integer = Vx.Length - 1
             Dim lnfug(n), ativ(n) As Double
@@ -997,6 +1005,7 @@ Namespace PropertyPackages
 
         End Function
 
+        Public MustOverride Function CheckMissingInteractionParameters() As Boolean
 
     End Class
 

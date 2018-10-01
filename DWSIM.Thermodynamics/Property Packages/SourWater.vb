@@ -299,6 +299,11 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Function CheckMissingInteractionParameters() As Boolean
+
+            Return False
+
+        End Function
 
     End Class
 

@@ -27,8 +27,10 @@ namespace DWSIM.UI.Desktop.Editors
 
         public IFlowsheet flowsheet;
 
-        private int Width = 800;
-        private int Height = 500;
+        private static double sf = GlobalSettings.Settings.UIScalingFactor;
+
+        private int Width = (int)(800 * sf);
+        private int Height = (int)(500 * sf);
 
         private bool hasLowPressure = false;
         private bool hasHC = false;

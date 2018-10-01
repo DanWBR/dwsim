@@ -1,5 +1,5 @@
 DWSIM Standalone Thermodynamics Library
-Version 5.2.x
+Version 5.3
 Copyright 2016-2018 Daniel Medeiros
 
 The DWSIM Standalone Thermodynamics Library is a .NET/Mono managed dynamic link library (DLL) that exposes DWSIM’s thermodynamics engine to external applications using a simple programming interface, with no dependency on external components. 

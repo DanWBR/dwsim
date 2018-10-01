@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.2 Update 22
+Version 5.3
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -60,7 +60,15 @@ Disk space:
 VERSION HISTORY / CHANGELOG
 ==================================================
 
-The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.3
+
+- [NEW] Support for Dark Mode on macOS Mojave (10.14)
+- [NEW] Support for High DPI displays on Linux with configurable Scaling Factor (Cross-Platform UI)
+- [NEW] Configurable warning for missing interaction parameters on Activity Coefficient-based Models
+- [CHG] Now requires Mono v5.14 or newer on Linux, which fixes many Classic UI (Windows Forms) glitches on this platform
+- [FIX] Minor bug fixes
 
 Version 5.2 Update 22
 

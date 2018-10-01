@@ -1,3 +1,7 @@
+v5.3
+
+Based on DWSIM v5.3 code (https://github.com/DanWBR/dwsim5)
+
 v5.2
 
 Based on DWSIM v5.2 code (https://github.com/DanWBR/dwsim5)

@@ -93,6 +93,26 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides Function CheckMissingInteractionParameters() As Boolean
+
+            Dim ipdata(1, 8) As Object
+
+            For Each c In CurrentMaterialStream.Phases(0).Compounds.Values
+                For Each c2 In CurrentMaterialStream.Phases(0).Compounds.Values
+                    If c.Name <> c2.Name Then
+                        ipdata = ExcelAddIn.ExcelIntegration.GetInteractionParameterSet(Me, "UNIQUAC", c.Name, c2.Name)
+                        Dim i As Integer, sum As Double
+                        sum = 0
+                        For i = 2 To 8
+                            If ipdata(1, i) IsNot Nothing Then sum += ipdata(1, i)
+                        Next
+                        If sum = 0.0 Then Throw New Exception(String.Format("UNIQUAC error: missing interaction parameters for binary pair {0}/{1}.", c.Name, c2.Name))
+                    End If
+                Next
+            Next
+
+        End Function
+
 #End Region
 
     End Class

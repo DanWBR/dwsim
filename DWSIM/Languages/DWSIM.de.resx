@@ -5471,4 +5471,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="VolumetricFraction" xml:space="preserve">
     <value>Volumetric Fraction</value>
   </data>
+  <data name="PP_IGNORE_MISSING_IPS" xml:space="preserve">
+    <value>Ignore Missing Interaction Parameters (0 = Disabled, 1 = Enabled)</value>
+  </data>
 </root>

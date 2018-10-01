@@ -234,10 +234,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE)</value>
   </data>
   <data name="PP_FLASHALGORITHMFASTMODE" xml:space="preserve">
-    <value>Enable Flash Algorithm Fast Mode</value>
+    <value>Enable Flash Algorithm Fast Mode (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_FLASHALGORITHMIDEALKFALLBACK" xml:space="preserve">
-    <value>Fallback to ideal K on trivial solution</value>
+    <value>Fallback to ideal K on trivial solution (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_IDEAL_MIXRULE_LIQDENS" xml:space="preserve">
     <value>Use Ideal Mixing Rule for Liquid Phase Density (0 = Disable, 1 = Enable)</value>
@@ -246,7 +246,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Use Ideal Vapor Phase Fugacity Model (0 = Disable, 1 = Enable)</value>
   </data>
   <data name="PP_IGNORE_SALINITY_LIMIT" xml:space="preserve">
-    <value>Ignore maximum salinity limit</value>
+    <value>Ignore maximum salinity limit (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_PHFELT" xml:space="preserve">
     <value>PH Flash - External Loop Tolerance</value>
@@ -288,16 +288,16 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Use Rigorous Bubble and Dew Points for TP Flash Vapor Fraction Initialization (0 = Disable, 1 = Enable)</value>
   </data>
   <data name="PP_USEEXPLIQDENS" xml:space="preserve">
-    <value>Use Experimental Liquid Density Data (0 = Disable, 1 = Enable)</value>
+    <value>Use Experimental Liquid Density Data (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_USEEXPLIQTHERMALCOND" xml:space="preserve">
-    <value>Use Experimental Liquid Thermal Conductivity Data (0 = Disable, 1 = Enable)</value>
+    <value>Use Experimental Liquid Thermal Conductivity Data (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_USE_EOS_LIQDENS" xml:space="preserve">
-    <value>Use EOS for Liquid Density (0 = Disable, 1 = Enable)</value>
+    <value>Use EOS for Liquid Density (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_USE_EOS_VOLUME_SHIFT" xml:space="preserve">
-    <value>Use Peneloux Volume Translation correction (0 = Disable, 1 = Enable)</value>
+    <value>Use Peneloux Volume Translation correction (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="ParallelPInvokeError" xml:space="preserve">
     <value>The CPU Parallel Processing feature has been automatically disabled so that a native C++ library can be used by DWSIM. Please try to perform the calculation again. To re-enable the CPU Parallel Processing feature, go to 'DWSIM Launcher' window, 'File'/'DWSIM'&gt; 'Global Settings'&gt; 'Solver' in the new interface or 'Edit'&gt; 'General Settings'&gt; 'Solver' in the classic interface.</value>
@@ -360,7 +360,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>One or more flash specification values are invalid. Please check the associated Unit Operation or Material Stream for incorrect specifications or miscalculated values.</value>
   </data>
   <data name="PP_IGNORE_VAPOR_FRACTION_LIMIT" xml:space="preserve">
-    <value>Ignore Vapor Fraction bounds (0 &lt;= VF &lt;= 1) on flash calculations</value>
+    <value>Ignore Vapor Fraction bounds (0 &lt;= VF &lt;= 1) on flash calculations (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="MSTR_Desc" xml:space="preserve">
     <value>Contains information about compounds flowing at specified state conditions</value>
@@ -372,9 +372,12 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Use Poynting Correction Factor for liquid phase compound fugacities (0 = Disable, 1 = Enable)</value>
   </data>
   <data name="PP_EXP_LIQDENS_PCORRECTION" xml:space="preserve">
-    <value>Use Compressed Experimental Liquid Density Correction</value>
+    <value>Use Compressed Experimental Liquid Density Correction (0 = Disabled, 1 = Enabled)</value>
   </data>
   <data name="PP_LIQVISC_PCORRECTION" xml:space="preserve">
-    <value>Use Compressed Liquid Viscosity Correction</value>
+    <value>Use Compressed Liquid Viscosity Correction (0 = Disabled, 1 = Enabled)</value>
+  </data>
+  <data name="PP_IGNORE_MISSING_IPS" xml:space="preserve">
+    <value>Ignore Missing Interaction Parameters (0 = Disabled, 1 = Enabled)</value>
   </data>
 </root>

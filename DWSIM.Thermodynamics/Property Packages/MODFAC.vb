@@ -115,6 +115,10 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides Function CheckMissingInteractionParameters() As Boolean
+            Return False
+        End Function
+
 #End Region
 
     End Class

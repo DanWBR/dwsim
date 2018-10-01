@@ -29,8 +29,10 @@ namespace DWSIM.UI.Desktop.Editors
         private DWSIM.Thermodynamics.Utilities.Hypos.Methods.Joback joback = new Thermodynamics.Utilities.Hypos.Methods.Joback();
         private DWSIM.Thermodynamics.BaseClasses.ConstantProperties comp = new ConstantProperties();
 
-        private int Width = 800;
-        private int Height = 500;
+        private static double sf = GlobalSettings.Settings.UIScalingFactor;
+
+        private int Width = (int)(800*sf);
+        private int Height = (int)(500 * sf);
 
         private int comptype = 0;
         private bool estimatefromunifac = true;

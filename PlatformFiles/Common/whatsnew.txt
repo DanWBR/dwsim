@@ -1,4 +1,7 @@
-Version 5.2 Update 22
+Version 5.3
 
-- [CHG] Improved font rendering on Cross-Platform UI PFD Designer
-- [FIX] Fixed stoichiometric coefficient input on reaction editor (Classic UI)
+- [NEW] Support for Dark Mode on macOS Mojave (10.14)
+- [NEW] Support for High DPI displays on Linux with configurable Scaling Factor (Cross-Platform UI)
+- [NEW] Configurable warning for missing interaction parameters on Activity Coefficient-based Models
+- [CHG] Now requires Mono v5.14 or newer on Linux, which fixes many Classic UI (Windows Forms) glitches on this platform
+- [FIX] Minor bug fixes

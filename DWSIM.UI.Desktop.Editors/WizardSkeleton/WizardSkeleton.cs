@@ -50,8 +50,8 @@ namespace DWSIM.UI.Desktop.Editors
         public void Init(int width, int height)
         {
 
-            Width = (int)(s.UIScalingFactor * width);
-            Height = (int)(s.UIScalingFactor * height);
+            //Width = (int)(s.UIScalingFactor * width);
+            //Height = (int)(s.UIScalingFactor * height);
 
             string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
 
@@ -130,7 +130,7 @@ namespace DWSIM.UI.Desktop.Editors
             footercontainer.Padding = new Padding(15);
             footercontainer.Spacing = new Size(10, 10);
             if (Application.Instance.Platform.IsWinForms) footercontainer.Height = (int)(s.UIScalingFactor * 60);
-            if (Application.Instance.Platform.IsGtk) footercontainer.Height = (int)(s.UIScalingFactor * 30);
+            //if (Application.Instance.Platform.IsGtk) footercontainer.Height = (int)(s.UIScalingFactor * 30);
 
             container.Rows.Add(new TableRow(topcontainer));
             container.Rows.Add(new TableRow(middlecontainer));
