@@ -120,21 +120,21 @@ namespace DWSIM.UI.Desktop.Shared
 
                         Application.Instance.AsyncInvoke(() =>
                         {
-                                //surface.BackgroundColor = SkiaSharp.SKColors.White;
-                                FlowsheetForm.Enabled = true;
-                                    FlowsheetControl.Invalidate();
-                                    solvform.Close();
-                                    IsFormDisposed = true;
-                                });
-                            GlobalSettings.Settings.CalculatorStopRequested = true;
-                            if (GlobalSettings.Settings.TaskCancellationTokenSource != null)
+                            //surface.BackgroundColor = SkiaSharp.SKColors.White;
+                            if (!Application.Instance.Platform.IsMac) FlowsheetForm.Enabled = true;
+                            FlowsheetControl.Invalidate();
+                            solvform.Close();
+                            IsFormDisposed = true;
+                        });
+                        GlobalSettings.Settings.CalculatorStopRequested = true;
+                        if (GlobalSettings.Settings.TaskCancellationTokenSource != null)
+                        {
+                            try
                             {
-                                try
-                                {
-                                    GlobalSettings.Settings.TaskCancellationTokenSource.Cancel();
-                                }
-                                catch (Exception) { }
+                                GlobalSettings.Settings.TaskCancellationTokenSource.Cancel();
                             }
+                            catch (Exception) { }
+                        }
                     };
                 }
             });
@@ -166,7 +166,7 @@ namespace DWSIM.UI.Desktop.Shared
                     Application.Instance.AsyncInvoke(() =>
                     {
                         //surface.BackgroundColor = SkiaSharp.SKColors.White;
-                        FlowsheetForm.Enabled = true;
+                        if (!Application.Instance.Platform.IsMac) FlowsheetForm.Enabled = true;
                         FlowsheetControl.Invalidate();
                         if (solvform != null)
                         {
@@ -220,7 +220,7 @@ namespace DWSIM.UI.Desktop.Shared
                 {
                     Application.Instance.AsyncInvoke(() =>
                     {
-                        FlowsheetForm.Enabled = false;
+                        if (!Application.Instance.Platform.IsMac) FlowsheetForm.Enabled = false;
                         FlowsheetControl.Invalidate();
                         FlowsheetForm.Invalidate();
                         if (solvform != null && !IsFormDisposed)

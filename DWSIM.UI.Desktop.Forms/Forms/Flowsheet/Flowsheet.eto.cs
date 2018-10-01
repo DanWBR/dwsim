@@ -1023,8 +1023,11 @@ namespace DWSIM.UI.Forms
             var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf*20) };
             label.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
+            //var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
+            var outtxt = new RichTextArea(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
             outtxt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            outtxt.ReadOnly = true;
+            outtxt.SelectionBold = true;
 
             var container = new TableLayout { Rows = { label, outtxt }, Spacing = new Size(5, 5) };
 
@@ -1036,20 +1039,11 @@ namespace DWSIM.UI.Forms
 
             menuitem0.Click += (sender, e) =>
             {
-                outtxt.Items.Clear();
+                outtxt.Text = "";
             };
 
             ctxmenu0.Items.Add(menuitem0);
-
-            var menuitem00 = new ButtonMenuItem { Text = "Copy Item Text to Clipboard" };
-
-            menuitem00.Click += (sender, e) =>
-            {
-                new Clipboard().Text = outtxt.Items[outtxt.SelectedIndex].Text;
-            };
-
-            ctxmenu0.Items.Add(menuitem00);
-
+            
             outtxt.MouseUp += (sender, e) =>
             {
                 if (e.Buttons == MouseButtons.Alternate)
@@ -1062,33 +1056,47 @@ namespace DWSIM.UI.Forms
             {
                 Application.Instance.AsyncInvoke(() =>
                 {
-
-                    var item = new ListItem { Text = "[" + DateTime.Now.ToString() + "] " + text };
-                    switch (mtype)
-                    {
-                        case Interfaces.IFlowsheet.MessageType.Information:
-                            item.Text = "[INFO] " + item.Text;
-                            break;
-                        case Interfaces.IFlowsheet.MessageType.GeneralError:
-                            item.Text = "[ERROR] " + item.Text;
-                            break;
-                        case Interfaces.IFlowsheet.MessageType.Warning:
-                            item.Text = "[WARNING] " + item.Text;
-                            break;
-                        case Interfaces.IFlowsheet.MessageType.Tip:
-                            item.Text = "[TIP] " + item.Text;
-                            break;
-                        case Interfaces.IFlowsheet.MessageType.Other:
-                            item.Text = "[OTHER] " + item.Text;
-                            break;
-                        default:
-                            break;
-                    }
-
+                    var item = "[" + DateTime.Now.ToString() + "] " + text;
                     try
                     {
-                        outtxt.Items.Add(item);
-                        outtxt.SelectedIndex = outtxt.Items.Count - 1;
+                        outtxt.Append(item, true);
+                        outtxt.Selection = new Range<int>(outtxt.Text.Length - item.Length, outtxt.Text.Length -1);
+                        switch (mtype)
+                        {
+                            case Interfaces.IFlowsheet.MessageType.Information:
+                                outtxt.SelectionForeground = Colors.Blue;
+                                break;
+                            case Interfaces.IFlowsheet.MessageType.GeneralError:
+                                outtxt.SelectionForeground = Colors.Red;
+                                break;
+                            case Interfaces.IFlowsheet.MessageType.Warning:
+                                outtxt.SelectionForeground = Colors.DarkOrange;
+                                break;
+                            case Interfaces.IFlowsheet.MessageType.Tip:
+                                if (s.DarkMode)
+                                {
+                                    outtxt.SelectionForeground = Colors.White;
+                                }
+                                else
+                                {
+                                    outtxt.SelectionForeground = Colors.Black;
+                                }
+                                break;
+                            case Interfaces.IFlowsheet.MessageType.Other:
+                                if (s.DarkMode)
+                                {
+                                    outtxt.SelectionForeground = Colors.White;
+                                }
+                                else
+                                {
+                                    outtxt.SelectionForeground = Colors.Black;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        outtxt.Append("\n", true);
+                        outtxt.Selection = new Range<int>(outtxt.Text.Length);
                     }
                     catch { }
 
