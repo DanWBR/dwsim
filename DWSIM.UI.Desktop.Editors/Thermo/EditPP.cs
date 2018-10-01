@@ -94,6 +94,58 @@ namespace DWSIM.UI.Desktop.Editors
                                          arg3.TextColor = (Colors.Red);
                                      }
                                  });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " B12", ip.B12,
+                                 (arg3, arg2) =>
+                                 {
+                                     if (Double.TryParse(arg3.Text.ToString(), out val))
+                                     {
+                                         arg3.TextColor = (Colors.White);
+                                         ip.B12 = Double.Parse(arg3.Text);
+                                     }
+                                     else
+                                     {
+                                         arg3.TextColor = (Colors.Red);
+                                     }
+                                 });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " B21", ip.B21,
+                                 (arg3, arg2) =>
+                                 {
+                                     if (Double.TryParse(arg3.Text.ToString(), out val))
+                                     {
+                                         arg3.TextColor = (Colors.White);
+                                         ip.B21 = Double.Parse(arg3.Text);
+                                     }
+                                     else
+                                     {
+                                         arg3.TextColor = (Colors.Red);
+                                     }
+                                 });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " C12", ip.C12,
+                                 (arg3, arg2) =>
+                                 {
+                                     if (Double.TryParse(arg3.Text.ToString(), out val))
+                                     {
+                                         arg3.TextColor = (Colors.White);
+                                         ip.C12 = Double.Parse(arg3.Text);
+                                     }
+                                     else
+                                     {
+                                         arg3.TextColor = (Colors.Red);
+                                     }
+                                 });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " C21", ip.C21,
+                                 (arg3, arg2) =>
+                                 {
+                                     if (Double.TryParse(arg3.Text.ToString(), out val))
+                                     {
+                                         arg3.TextColor = (Colors.White);
+                                         ip.C21 = Double.Parse(arg3.Text);
+                                     }
+                                     else
+                                     {
+                                         arg3.TextColor = (Colors.Red);
+                                     }
+                                 });
                                 s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " alpha12", ip.alpha12,
                                  (arg3, arg2) =>
                                  {
@@ -157,6 +209,58 @@ namespace DWSIM.UI.Desktop.Editors
                                      {
                                          arg3.TextColor = (Colors.White);
                                          ip.A21 = Double.Parse(arg3.Text);
+                                     }
+                                     else
+                                     {
+                                         arg3.TextColor = (Colors.Red);
+                                     }
+                                 });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " B12", ip.B12,
+                               (arg3, arg2) =>
+                               {
+                                   if (Double.TryParse(arg3.Text.ToString(), out val))
+                                   {
+                                       arg3.TextColor = (Colors.White);
+                                       ip.B12 = Double.Parse(arg3.Text);
+                                   }
+                                   else
+                                   {
+                                       arg3.TextColor = (Colors.Red);
+                                   }
+                               });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " B21", ip.B21,
+                                 (arg3, arg2) =>
+                                 {
+                                     if (Double.TryParse(arg3.Text.ToString(), out val))
+                                     {
+                                         arg3.TextColor = (Colors.White);
+                                         ip.B21 = Double.Parse(arg3.Text);
+                                     }
+                                     else
+                                     {
+                                         arg3.TextColor = (Colors.Red);
+                                     }
+                                 });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " C12", ip.C12,
+                                 (arg3, arg2) =>
+                                 {
+                                     if (Double.TryParse(arg3.Text.ToString(), out val))
+                                     {
+                                         arg3.TextColor = (Colors.White);
+                                         ip.C12 = Double.Parse(arg3.Text);
+                                     }
+                                     else
+                                     {
+                                         arg3.TextColor = (Colors.Red);
+                                     }
+                                 });
+                                s.CreateAndAddTextBoxRow(this, nf, c1 + "/" + c2 + " C21", ip.C21,
+                                 (arg3, arg2) =>
+                                 {
+                                     if (Double.TryParse(arg3.Text.ToString(), out val))
+                                     {
+                                         arg3.TextColor = (Colors.White);
+                                         ip.C21 = Double.Parse(arg3.Text);
                                      }
                                      else
                                      {
