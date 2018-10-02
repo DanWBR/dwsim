@@ -75,7 +75,6 @@ Public Class EditingForm_Column_InitialEstimates
             End If
         End If
 
-
         i = 0
         Dim ob(CInt(j.ToString)) As Object
         For Each st As Stage In dc.Stages

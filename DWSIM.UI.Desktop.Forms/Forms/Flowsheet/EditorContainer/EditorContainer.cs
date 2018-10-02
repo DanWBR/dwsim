@@ -36,7 +36,7 @@ namespace DWSIM.UI.Forms
             loaded = false;
 
             Pages.Clear();
-            
+
             // connections
 
             if (obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream &&
@@ -61,7 +61,7 @@ namespace DWSIM.UI.Forms
                 Pages.Add(tab1);
 
             }
-            
+
             // properties
 
             var tab2 = new TabPage();
@@ -72,7 +72,7 @@ namespace DWSIM.UI.Forms
             var cont = UI.Shared.Common.GetDefaultContainer();
 
             cont.Width = this.Width - 30;
-                        
+
             if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
             {
                 new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
@@ -106,7 +106,7 @@ namespace DWSIM.UI.Forms
                 new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
             }
 
-            tab2.Content = new Scrollable() { Content = cont, Width = this.Width-30 };
+            tab2.Content = new Scrollable() { Content = cont, Width = this.Width - 30 };
 
             if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Pipe)
             {
@@ -145,6 +145,14 @@ namespace DWSIM.UI.Forms
                 var dyn1 = new UI.Desktop.Editors.ShellAndTubePropertiesView(obj);
                 dyn1.Width = this.Width - 30;
                 Pages.Add(new TabPage(new Scrollable() { Content = dyn1, Width = this.Width - 30 }) { Text = "Shell and Tube Properties" });
+            }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn ||
+                    obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
+            {
+                tab2.Text = "General";
+                var dyn2 = UI.Desktop.Editors.RigorousColumnShared.GetInitialEstimatesEditor((Column)obj);
+                dyn2.Width = this.Width - 30;
+                Pages.Add(new TabPage(new Scrollable() { Content = dyn2, Width = this.Width - 30 }) { Text = "Initial Estimates" });
             }
 
             PageEditor = tab2;
@@ -233,7 +241,7 @@ namespace DWSIM.UI.Forms
                 PageEditor.Content = new Scrollable() { Content = cont, Width = this.Width - 30 };
 
             }
-            
+
             var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
             var container = new TableLayout();
             new DWSIM.UI.Desktop.Editors.Results(obj, container);

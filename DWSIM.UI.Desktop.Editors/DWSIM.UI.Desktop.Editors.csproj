@@ -131,6 +131,7 @@
     <Compile Include="Reactions\ReactionsManager.cs" />
     <Compile Include="General\Results.cs" />
     <Compile Include="General\SimulationSettings.cs" />
+    <Compile Include="UnitOperations\RigorousColumnShared.cs" />
     <Compile Include="UnitOperations\ShellAndTubeProperties.cs" />
     <Compile Include="Utilities\BinaryEnvelope.cs" />
     <Compile Include="Utilities\PhaseEnvelope.cs" />

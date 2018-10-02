@@ -212,8 +212,9 @@ namespace DWSIM.UI.Shared
             return lbl;
         }
 
-        public static void CreateAndAddDescriptionRow(this DynamicLayout container, String text, bool forceLabel = false)
+        public static Label CreateAndAddDescriptionRow(this DynamicLayout container, String text, bool forceLabel = false)
         {
+            var label = new Label();
             if (Application.Instance.Platform.IsWinForms && !forceLabel)
             {
                 var textarea = new TextArea
@@ -230,12 +231,13 @@ namespace DWSIM.UI.Shared
             }
             else
             {
-                var label = new Label { Text = text, Wrap = WrapMode.Word };
+                label = new Label { Text = text, Wrap = WrapMode.Word };
                 label.Font = new Font(SystemFont.Default, GetEditorFontSize() - 2);
                 container.AddRow(new TableRow(label));
             }
             container.CreateAndAddEmptySpace();
             container.CreateAndAddEmptySpace();
+            return label;
         }
 
         public static TableRow CreateAndAddControlRow(this DynamicLayout container, Control control)

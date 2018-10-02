@@ -81,6 +81,9 @@
     <Reference Include="FileHelpers">
       <HintPath>..\DWSIM\References\FileHelpers.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.8.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -88,6 +91,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -118,6 +122,7 @@
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />
     <Compile Include="Flowsheet\SensitivityAnalysis.vb" />
+    <Compile Include="FOSSEEFlowsheets.vb" />
     <Compile Include="Misc\AssayClass.vb" />
     <Compile Include="Misc\Crypto.vb" />
     <Compile Include="Misc\CapeOpenObjInfo.vb" />

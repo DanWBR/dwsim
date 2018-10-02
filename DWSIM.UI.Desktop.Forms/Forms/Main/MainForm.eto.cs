@@ -225,12 +225,16 @@ namespace DWSIM.UI
                 };
             };
 
+            SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets();
+
             var tabview = new TabControl();
             var tab1 = new TabPage(MostRecentList) { Text = "Recent Files" }; ;
             var tab2 = new TabPage(SampleList) { Text = "Samples" }; ;
+            var tab2a = new TabPage() { Text = "FOSSEE Flowsheets" }; ;
             var tab3 = new TabPage(FoldersList) { Text = "Recent Folders" }; ;
             tabview.Pages.Add(tab1);
             tabview.Pages.Add(tab2);
+            tabview.Pages.Add(tab2a);
             tabview.Pages.Add(tab3);
 
             tableright.Rows.Add(new TableRow(tabview));
