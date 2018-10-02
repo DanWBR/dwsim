@@ -118,189 +118,68 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 38</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>677, 32</value>
+    <value>366, 20</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>925, 86</value>
-  </data>
-  <data name="chkActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 42</value>
+    <value>478, 43</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
-  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 144</value>
-  </data>
-  <data name="lblConnectedTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
-  <data name="lblConnectedTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 26</value>
-  </data>
-  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 94</value>
-  </data>
-  <data name="lblStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
-  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 26</value>
-  </data>
-  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 144</value>
-  </data>
-  <data name="Label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 26</value>
+    <value>51, 13</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
   </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 94</value>
-  </data>
-  <data name="Label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 26</value>
-  </data>
-  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 44</value>
-  </data>
-  <data name="Label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 26</value>
-  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
-  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 12</value>
-  </data>
-  <data name="GroupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="GroupBox5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>983, 196</value>
+    <value>505, 98</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
   <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>857, 474</value>
-  </data>
-  <data name="btnConfigureFlashAlg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="btnConfigureFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 42</value>
+    <value>447, 237</value>
   </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>857, 420</value>
-  </data>
-  <data name="btnConfigurePP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="btnConfigurePP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 42</value>
+    <value>447, 210</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
-  <data name="cbFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 472</value>
-  </data>
-  <data name="cbFlashAlg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 34</value>
-  </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 478</value>
-  </data>
-  <data name="Label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 26</value>
+    <value>296, 21</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
   </data>
-  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 418</value>
-  </data>
-  <data name="cbPropPack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 34</value>
-  </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 424</value>
-  </data>
-  <data name="Label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>296, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 26</value>
+    <value>92, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
   <data name="lblTemperatureUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>850, 356</value>
-  </data>
-  <data name="lblTemperatureUnit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
-  <data name="lblTemperatureUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 26</value>
-  </data>
-  <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 356</value>
-  </data>
-  <data name="Label30.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>444, 178</value>
   </data>
   <data name="Label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 26</value>
+    <value>154, 13</value>
   </data>
   <data name="Label30.Text" xml:space="preserve">
     <value>Maximum Temperature Change</value>
   </data>
-  <data name="tbMaxTChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 350</value>
-  </data>
-  <data name="tbMaxTChange.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="tbMaxTChange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 32</value>
+    <value>197, 20</value>
   </data>
   <data name="cbSolverScheme.Items" xml:space="preserve">
     <value>Direct Rigorous</value>
@@ -314,74 +193,29 @@
   <data name="cbSolverScheme.Items3" xml:space="preserve">
     <value>Ideal K+H first, then Rigorous</value>
   </data>
-  <data name="cbSolverScheme.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 192</value>
-  </data>
-  <data name="cbSolverScheme.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="cbSolverScheme.Size" type="System.Drawing.Size, System.Drawing">
-    <value>583, 34</value>
-  </data>
-  <data name="Label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 200</value>
-  </data>
-  <data name="Label27.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>323, 21</value>
   </data>
   <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 26</value>
+    <value>84, 13</value>
   </data>
   <data name="Label27.Text" xml:space="preserve">
     <value>Solving Scheme</value>
   </data>
-  <data name="cbSolvingMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 138</value>
-  </data>
-  <data name="cbSolvingMethod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="cbSolvingMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>583, 34</value>
-  </data>
-  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 148</value>
-  </data>
-  <data name="Label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
-  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 26</value>
-  </data>
-  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 304</value>
-  </data>
-  <data name="Label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>323, 21</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 26</value>
+    <value>122, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Convergence Tolerance</value>
   </data>
-  <data name="tbConvTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>364, 298</value>
-  </data>
-  <data name="tbConvTol.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="tbConvTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 32</value>
-  </data>
-  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 252</value>
-  </data>
-  <data name="Label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>266, 20</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 26</value>
+    <value>149, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Maximum Number of Iterations</value>
@@ -392,92 +226,38 @@
   <data name="cbAbsorberMode.Items1" xml:space="preserve">
     <value>Liquid-Liquid Extractor</value>
   </data>
-  <data name="cbAbsorberMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 20</value>
-  </data>
-  <data name="cbAbsorberMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="cbAbsorberMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>583, 34</value>
-  </data>
-  <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>364, 244</value>
-  </data>
-  <data name="tbMaxIt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>323, 21</value>
   </data>
   <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 32</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 26</value>
-  </data>
-  <data name="Label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>266, 20</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 26</value>
+    <value>128, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Absorber Operating Mode</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 80</value>
-  </data>
-  <data name="Label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
+    <value>92, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Number of Stages</value>
   </data>
-  <data name="tbNStages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 74</value>
-  </data>
-  <data name="tbNStages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="tbNStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>583, 32</value>
-  </data>
-  <data name="TabGeneral.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabGeneral.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="TabGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>323, 20</value>
   </data>
   <data name="TabGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>953, 549</value>
+    <value>491, 272</value>
   </data>
   <data name="TabGeneral.Text" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 238</value>
-  </data>
-  <data name="Label19.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 26</value>
+    <value>58, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Compound</value>
-  </data>
-  <data name="cbCondComp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 232</value>
-  </data>
-  <data name="cbCondComp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbCondComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 34</value>
   </data>
   <data name="cbCondType.Items1" xml:space="preserve">
     <value>Partial</value>
@@ -485,83 +265,20 @@
   <data name="cbCondType.Items2" xml:space="preserve">
     <value>Full Reflux</value>
   </data>
-  <data name="cbCondType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 20</value>
-  </data>
-  <data name="cbCondType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbCondType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 34</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 28</value>
-  </data>
-  <data name="Label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 26</value>
+    <value>85, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Condenser Type</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 380</value>
-  </data>
-  <data name="Label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 26</value>
+    <value>126, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Vapor Product Flow Rate</value>
   </data>
-  <data name="cbCondVapFlowUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 372</value>
-  </data>
-  <data name="cbCondVapFlowUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbCondVapFlowUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 34</value>
-  </data>
-  <data name="tbCondVapFlow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 374</value>
-  </data>
-  <data name="tbCondVapFlow.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tbCondVapFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 32</value>
-  </data>
-  <data name="cbCondSpecUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 290</value>
-  </data>
-  <data name="cbCondSpecUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbCondSpecUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 34</value>
-  </data>
-  <data name="tbCondSpec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 290</value>
-  </data>
-  <data name="tbCondSpec.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tbCondSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 32</value>
-  </data>
-  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 184</value>
-  </data>
-  <data name="Label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 26</value>
+    <value>68, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Specification</value>
@@ -593,137 +310,32 @@
   <data name="cbCondSpec.Items8" xml:space="preserve">
     <value>Temperature</value>
   </data>
-  <data name="cbCondSpec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 178</value>
-  </data>
-  <data name="cbCondSpec.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbCondSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 34</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 132</value>
-  </data>
-  <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
+    <value>128, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Condenser Pressure Drop</value>
   </data>
-  <data name="cbCondPDropUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 124</value>
-  </data>
-  <data name="cbCondPDropUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbCondPDropUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 34</value>
-  </data>
-  <data name="tbCondPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 126</value>
-  </data>
-  <data name="tbCondPDrop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tbCondPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 32</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 80</value>
-  </data>
-  <data name="Label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 26</value>
+    <value>102, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Condenser Pressure</value>
   </data>
-  <data name="cbCondPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 74</value>
-  </data>
-  <data name="cbCondPressureUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbCondPressureUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 34</value>
-  </data>
-  <data name="tbCondPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 74</value>
-  </data>
-  <data name="tbCondPressure.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tbCondPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 32</value>
-  </data>
-  <data name="TabCondenser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabCondenser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="TabCondenser.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>922, 526</value>
+    <value>428, 272</value>
   </data>
   <data name="TabCondenser.Text" xml:space="preserve">
     <value>Condenser</value>
   </data>
-  <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 190</value>
-  </data>
-  <data name="Label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 26</value>
+    <value>58, 13</value>
   </data>
   <data name="Label24.Text" xml:space="preserve">
     <value>Compound</value>
   </data>
-  <data name="cbRebComp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 184</value>
-  </data>
-  <data name="cbRebComp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbRebComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 34</value>
-  </data>
-  <data name="cbRebSpecUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 238</value>
-  </data>
-  <data name="cbRebSpecUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbRebSpecUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 34</value>
-  </data>
-  <data name="tbRebSpecValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 238</value>
-  </data>
-  <data name="tbRebSpecValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tbRebSpecValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 32</value>
-  </data>
-  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 136</value>
-  </data>
-  <data name="Label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 26</value>
+    <value>68, 13</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Specification</value>
@@ -755,140 +367,53 @@
   <data name="cbRebSpec.Items8" xml:space="preserve">
     <value>Temperature</value>
   </data>
-  <data name="cbRebSpec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 130</value>
-  </data>
-  <data name="cbRebSpec.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbRebSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 34</value>
-  </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 38</value>
-  </data>
-  <data name="Label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>90, 13</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Reboiler Pressure</value>
   </data>
-  <data name="cbRebPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 32</value>
-  </data>
-  <data name="cbRebPressure.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="cbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 34</value>
-  </data>
-  <data name="tbRebPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 32</value>
-  </data>
-  <data name="tbRebPressure.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 32</value>
-  </data>
-  <data name="TabReboiler.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabReboiler.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>922, 526</value>
+    <value>428, 272</value>
   </data>
   <data name="TabReboiler.Text" xml:space="preserve">
     <value>Reboiler</value>
   </data>
-  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 31</value>
-  </data>
-  <data name="TabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>969, 597</value>
-  </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 214</value>
-  </data>
-  <data name="GroupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="GroupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>499, 298</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>983, 634</value>
+    <value>505, 317</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Column Specs</value>
   </data>
-  <data name="TabConnections.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabConnections.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="TabConnections.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>953, 661</value>
+    <value>491, 328</value>
   </data>
   <data name="TabConnections.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
-  <data name="TabStages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabStages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="TabStages.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 638</value>
+    <value>428, 328</value>
   </data>
   <data name="TabStages.Text" xml:space="preserve">
     <value>Stages</value>
   </data>
-  <data name="InitialEstimatesPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 6</value>
-  </data>
-  <data name="InitialEstimatesPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="InitialEstimatesPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>914, 656</value>
+    <value>425, 284</value>
   </data>
   <data name="chkUseIE_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 678</value>
-  </data>
-  <data name="chkUseIE_C.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="chkUseIE_C.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 30</value>
+    <value>133, 295</value>
   </data>
   <data name="chkUseIE_C.ToolTip" xml:space="preserve">
     <value>Use initial estimates for stage mixture molar compositions</value>
   </data>
   <data name="chkUseIE_VF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 678</value>
-  </data>
-  <data name="chkUseIE_VF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>89, 295</value>
   </data>
   <data name="chkUseIE_VF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 30</value>
+    <value>39, 17</value>
   </data>
   <data name="chkUseIE_VF.Text" xml:space="preserve">
     <value>VF</value>
@@ -897,13 +422,10 @@
     <value>Use initial estimates for stage vapor interflows</value>
   </data>
   <data name="chkUseIE_LF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 678</value>
-  </data>
-  <data name="chkUseIE_LF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>44, 295</value>
   </data>
   <data name="chkUseIE_LF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 30</value>
+    <value>38, 17</value>
   </data>
   <data name="chkUseIE_LF.Text" xml:space="preserve">
     <value>LF</value>
@@ -912,313 +434,139 @@
     <value>Use initial estimates for stage liquid interflows</value>
   </data>
   <data name="chkUseIE_T.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 678</value>
-  </data>
-  <data name="chkUseIE_T.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="chkUseIE_T.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 30</value>
+    <value>5, 295</value>
   </data>
   <data name="chkUseIE_T.ToolTip" xml:space="preserve">
     <value>Use initial estimates for stage temperature</value>
   </data>
-  <data name="TabInitialEstimates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabInitialEstimates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 638</value>
+    <value>428, 328</value>
   </data>
   <data name="TabInitialEstimates.Text" xml:space="preserve">
     <value>Initial Estimates</value>
   </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 44</value>
-  </data>
-  <data name="Label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 26</value>
+    <value>92, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Stop at Iteration #</value>
   </data>
   <data name="tbBPStopAtIter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>492, 38</value>
-  </data>
-  <data name="tbBPStopAtIter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>227, 19</value>
   </data>
   <data name="tbBPStopAtIter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 32</value>
-  </data>
-  <data name="TabSolverBP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabSolverBP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>148, 20</value>
   </data>
   <data name="TabSolverBP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 638</value>
+    <value>428, 328</value>
   </data>
   <data name="tb_NS_NumDeriv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 186</value>
-  </data>
-  <data name="tb_NS_NumDeriv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tb_NS_NumDeriv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 32</value>
-  </data>
-  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 194</value>
-  </data>
-  <data name="Label28.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>243, 93</value>
   </data>
   <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 26</value>
+    <value>165, 13</value>
   </data>
   <data name="Label28.Text" xml:space="preserve">
     <value>Numerical Derivative Perturbation</value>
   </data>
-  <data name="cbMinMethodNS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 28</value>
-  </data>
-  <data name="cbMinMethodNS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="cbMinMethodNS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>435, 34</value>
-  </data>
-  <data name="Label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 34</value>
-  </data>
-  <data name="Label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>203, 21</value>
   </data>
   <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 26</value>
+    <value>97, 13</value>
   </data>
   <data name="Label25.Text" xml:space="preserve">
     <value>Optimization Solver</value>
   </data>
   <data name="tb_NS_UpperBound.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 134</value>
-  </data>
-  <data name="tb_NS_UpperBound.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tb_NS_UpperBound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 32</value>
+    <value>243, 67</value>
   </data>
   <data name="tb_NS_LowerBound.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 82</value>
-  </data>
-  <data name="tb_NS_LowerBound.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tb_NS_LowerBound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 32</value>
-  </data>
-  <data name="cbNSPreconditioning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 250</value>
-  </data>
-  <data name="cbNSPreconditioning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>243, 41</value>
   </data>
   <data name="cbNSPreconditioning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 30</value>
+    <value>176, 17</value>
   </data>
   <data name="cbNSPreconditioning.Text" xml:space="preserve">
     <value>Enable Variable Preconditioning</value>
   </data>
-  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 140</value>
-  </data>
-  <data name="Label21.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 26</value>
+    <value>111, 13</value>
   </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Variable Upper Bound</value>
   </data>
-  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 88</value>
-  </data>
-  <data name="Label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 26</value>
+    <value>111, 13</value>
   </data>
   <data name="Label20.Text" xml:space="preserve">
     <value>Variable Lower Bound</value>
   </data>
-  <data name="TabSolverNS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabSolverNS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabSolverNS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 638</value>
+    <value>428, 328</value>
   </data>
   <data name="tb_IO_NumDeriv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>542, 186</value>
-  </data>
-  <data name="tb_IO_NumDeriv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tb_IO_NumDeriv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 32</value>
-  </data>
-  <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 192</value>
-  </data>
-  <data name="Label29.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>250, 93</value>
   </data>
   <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 26</value>
+    <value>165, 13</value>
   </data>
   <data name="Label29.Text" xml:space="preserve">
     <value>Numerical Derivative Perturbation</value>
   </data>
-  <data name="cbMinMethodIO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 28</value>
-  </data>
-  <data name="cbMinMethodIO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="cbMinMethodIO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 34</value>
-  </data>
-  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 34</value>
-  </data>
-  <data name="Label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>210, 21</value>
   </data>
   <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 26</value>
+    <value>97, 13</value>
   </data>
   <data name="Label26.Text" xml:space="preserve">
     <value>Optimization Solver</value>
   </data>
   <data name="tb_IO_UpperBound.Location" type="System.Drawing.Point, System.Drawing">
-    <value>542, 134</value>
-  </data>
-  <data name="tb_IO_UpperBound.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tb_IO_UpperBound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 32</value>
+    <value>250, 67</value>
   </data>
   <data name="tb_IO_LowerBound.Location" type="System.Drawing.Point, System.Drawing">
-    <value>542, 82</value>
-  </data>
-  <data name="tb_IO_LowerBound.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="tb_IO_LowerBound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 32</value>
-  </data>
-  <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 140</value>
-  </data>
-  <data name="Label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
+    <value>250, 41</value>
   </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 26</value>
+    <value>111, 13</value>
   </data>
   <data name="Label22.Text" xml:space="preserve">
     <value>Variable Upper Bound</value>
   </data>
-  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 88</value>
-  </data>
-  <data name="Label23.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 7, 0</value>
-  </data>
   <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 26</value>
+    <value>111, 13</value>
   </data>
   <data name="Label23.Text" xml:space="preserve">
     <value>Variable Lower Bound</value>
   </data>
-  <data name="chkIOAverageKb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 300</value>
-  </data>
-  <data name="chkIOAverageKb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="chkIOAverageKb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 30</value>
+    <value>192, 17</value>
   </data>
   <data name="chkIOAverageKb.Text" xml:space="preserve">
     <value>Calculate Kb by Weighted Average</value>
   </data>
-  <data name="chkIOAdjustSb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 248</value>
-  </data>
-  <data name="chkIOAdjustSb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="chkIOAdjustSb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 30</value>
+    <value>142, 17</value>
   </data>
   <data name="chkIOAdjustSb.Text" xml:space="preserve">
     <value>Adjust Sb Scaling Factor</value>
   </data>
-  <data name="TabSolverIO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabSolverIO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="TabSolverIO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 638</value>
-  </data>
-  <data name="TabControl2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 31</value>
-  </data>
-  <data name="TabControl2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>428, 328</value>
   </data>
   <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>969, 709</value>
-  </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 860</value>
-  </data>
-  <data name="GroupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="GroupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>499, 354</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>983, 746</value>
+    <value>505, 373</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Column Configuration</value>
   </data>
-  <data name="btnResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 243</value>
-  </data>
-  <data name="btnResults.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="btnResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>945, 60</value>
+    <value>488, 30</value>
   </data>
   <data name="btnResults.Text" xml:space="preserve">
     <value>View Temperature, Pressure and Composition Profiles</value>
@@ -1232,61 +580,29 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 6</value>
-  </data>
   <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>945, 227</value>
-  </data>
-  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>488, 114</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>959, 309</value>
+    <value>494, 152</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="tabstrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 31</value>
-  </data>
-  <data name="tabstrip1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
   <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 357</value>
-  </data>
-  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 1618</value>
-  </data>
-  <data name="GroupBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="GroupBox6.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>502, 178</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>989, 394</value>
+    <value>508, 197</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>13, 26</value>
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1012, 2046</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>514, 440</value>
   </data>
 </root>
