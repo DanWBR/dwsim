@@ -202,6 +202,15 @@ namespace DWSIM.UI.Shared
             return label;
         }
 
+        public static Label CreateAndAddLabelRow3(this DynamicLayout container, String text)
+        {
+            var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
+            label.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            container.AddRow(new TableRow(label));
+            container.CreateAndAddEmptySpace();
+            return label;
+        }
+
         public static Label CreateAndAddLabelRow2(this DynamicLayout container, String text)
         {
             var lbl = new Label { Text = text, Wrap = WrapMode.Word };

@@ -85,7 +85,6 @@ namespace DWSIM.UI.Desktop.WPF
                 wpfgrid.UpdateLayout();
             });
 
-
         }
 
         /// <summary>

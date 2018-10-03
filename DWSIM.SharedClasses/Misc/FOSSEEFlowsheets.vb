@@ -156,6 +156,15 @@ label0:
 
         Dim wc As New WebClient()
 
+        Dim siteUri As Uri = New Uri(address)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj As New WebProxy(proxyUri)
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            wc.Proxy = proxyObj
+        End If
+
         Dim fpath = Path.GetTempFileName()
 
         AddHandler wc.DownloadProgressChanged, Sub(sender, e)

@@ -354,4 +354,11 @@ Public Class FormWelcome
         End If
     End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Process.Start("https://dwsim.fossee.in/flowsheeting-project")
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Process.Start("https://fossee.in/")
+    End Sub
 End Class
