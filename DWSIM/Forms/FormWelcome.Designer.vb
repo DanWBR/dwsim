@@ -310,7 +310,6 @@ Partial Class FormWelcome
         Me.FOSSEEList.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.FOSSEEList.AutoArrange = False
         Me.FOSSEEList.BackColor = System.Drawing.Color.White
-        Me.FOSSEEList.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.FOSSEEList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
         Me.FOSSEEList.ForeColor = System.Drawing.Color.SteelBlue
         Me.FOSSEEList.FullRowSelect = True

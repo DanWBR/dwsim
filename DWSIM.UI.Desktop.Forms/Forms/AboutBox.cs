@@ -59,6 +59,8 @@ namespace DWSIM.UI.Forms.Forms
 
             string vtext = "Version".Localize() + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
 
+            vtext += " (" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ")";
+
             var updfile = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "version.info";
 
             if (File.Exists(updfile))

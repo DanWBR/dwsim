@@ -47,30 +47,30 @@ namespace DWSIM.UI.Forms.Forms
                     break;
             }
 
-            tab1.CreateAndAddDropDownRow("Platform Renderer", renderers, currentrenderer, (sender, e) =>
-            {
-                switch (GlobalSettings.Settings.RunningPlatform())
-                {
-                    case Settings.Platform.Windows:
-                        Settings.WindowsRenderer = (Settings.WindowsPlatformRenderer)sender.SelectedIndex;
-                        break;
-                    case Settings.Platform.Linux:
-                        Settings.LinuxRenderer = (Settings.LinuxPlatformRenderer)sender.SelectedIndex;
-                        break;
-                    case Settings.Platform.Mac:
-                        Settings.MacOSRenderer = (Settings.MacOSPlatformRenderer)sender.SelectedIndex;
-                        break;
-                }
-            });
+            //tab1.CreateAndAddDropDownRow("Platform Renderer", renderers, currentrenderer, (sender, e) =>
+            //{
+            //    switch (GlobalSettings.Settings.RunningPlatform())
+            //    {
+            //        case Settings.Platform.Windows:
+            //            Settings.WindowsRenderer = (Settings.WindowsPlatformRenderer)sender.SelectedIndex;
+            //            break;
+            //        case Settings.Platform.Linux:
+            //            Settings.LinuxRenderer = (Settings.LinuxPlatformRenderer)sender.SelectedIndex;
+            //            break;
+            //        case Settings.Platform.Mac:
+            //            Settings.MacOSRenderer = (Settings.MacOSPlatformRenderer)sender.SelectedIndex;
+            //            break;
+            //    }
+            //});
 
-            tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\nWindows: WPF (Windows Presentation Foundation)\nLinux: GTK 2\nmacOS: MonoMac");
-            tab1.CreateAndAddDescriptionRow("Changes to this setting will have effect upon application restart.");
+            //tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\nWindows: WPF (Windows Presentation Foundation)\nLinux: GTK 2\nmacOS: MonoMac");
+            //tab1.CreateAndAddDescriptionRow("Changes to this setting will have effect upon application restart.");
 
-            if (Settings.RunningPlatform() == Settings.Platform.Mac)
-            {
-                var check1 = tab1.CreateAndAddCheckBoxRow("Enable Dark Mode (macOS Mojave only)", Settings.DarkMode, (CheckBox sender, EventArgs obj) => { Settings.DarkMode = sender.Checked.Value; });
-                check1.Enabled = false;
-            }
+            //if (Settings.RunningPlatform() == Settings.Platform.Mac)
+            //{
+            //    var check1 = tab1.CreateAndAddCheckBoxRow("Enable Dark Mode (macOS Mojave only)", Settings.DarkMode, (CheckBox sender, EventArgs obj) => { Settings.DarkMode = sender.Checked.Value; });
+            //    check1.Enabled = false;
+            //}
 
             tab1.CreateAndAddNumericEditorRow("Scaling Factor", Settings.UIScalingFactor, 0.2, 3.0, 2, (sender, e) => Settings.UIScalingFactor = sender.Value);
             tab1.CreateAndAddDescriptionRow("Sets the Scaling Factor for controls (windows, panels, buttons, lists, etc). Useful on Linux when used in conjunction with Font Scaling on High DPI displays.");
