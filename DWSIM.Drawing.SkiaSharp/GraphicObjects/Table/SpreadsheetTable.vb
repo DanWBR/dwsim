@@ -96,6 +96,7 @@ Namespace GraphicObjects.Tables
                     .Color = TextColor
                 End If
                 .IsStroke = False
+                .Typeface = DefaultTypeFace
             End With
 
             Dim bpaint As New SKPaint()
