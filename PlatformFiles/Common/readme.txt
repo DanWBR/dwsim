@@ -34,7 +34,7 @@ macOS: 10.7 (OS X Lion) or newer
 Software:
 
 Microsoft .NET Framework 4.7.1 or newer (Windows) 
-Mono Framework 5.8.0 or newer (Linux)
+Mono Framework 5.14.0 or newer (Linux)
 
 CPU:			
 
@@ -66,8 +66,11 @@ Version 5.3
 
 - [NEW] Support for Dark Mode on macOS Mojave (10.14)
 - [NEW] Support for High DPI displays on Linux with configurable Scaling Factor (Cross-Platform UI)
+- [NEW] Download and Open FOSSEE Flowsheets directly from DWSIM
 - [NEW] Configurable warning for missing interaction parameters on Activity Coefficient-based Models
+- [NEW] Cross-Platform UI users can now edit initial estimates for Distillation and Absorption Columns
 - [CHG] Now requires Mono v5.14 or newer on Linux, which fixes many Classic UI (Windows Forms) glitches on this platform
+- [CHG] Prevented unreliable UNIQUAC interaction parameters from loading
 - [FIX] Minor bug fixes
 
 Version 5.2 Update 22
