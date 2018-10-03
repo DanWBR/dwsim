@@ -106,6 +106,9 @@ namespace DWSIM.UI.Desktop.Editors
             
             switch (SimObject.GraphicObject.ObjectType)
             {
+                case ObjectType.CapeOpenUO:
+                    s.CreateAndAddDescriptionRow(container, "CAPE-OPEN Unit Operations are supported on the Classic User Interface (Classic UI) running on Windows only.");
+                    break;
                 case ObjectType.SolidSeparator:
                     var ss = (SolidsSeparator)SimObject;
                     s.CreateAndAddTextBoxRow(container, nf, "Solids Separation Efficiency", ss.SeparationEfficiency,

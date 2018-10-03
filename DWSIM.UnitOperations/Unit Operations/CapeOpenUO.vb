@@ -118,44 +118,7 @@ Namespace UnitOperations
 
             Else
 
-                ShowFormMono()
-
-                If Not _seluo Is Nothing Then
-
-                    'Try
-
-                    Dim myt As Type = Nothing
-
-                    If Not File.Exists(_seluo.Location) Then
-                        ShowFormMono()
-                    End If
-
-                    myt = GetManagedUnitType(_seluo.Location)
-
-                    _couo = Activator.CreateInstance(myt)
-
-                    Try
-                        With _seluo
-                            .Name = CType(_couo, ICapeIdentification).ComponentName
-                            .Description = CType(_couo, ICapeIdentification).ComponentDescription
-                            .TypeName = myt.Name
-                            .Version = myt.Module.Assembly.GetName.Version.ToString
-                        End With
-                    Catch ex As Exception
-
-                    End Try
-
-                    InitNew()
-                    Init()
-                    GetPorts()
-                    GetParams()
-                    CreateConnectors()
-
-                    'Catch ex As Exception
-                    '    Me.FlowSheet.ShowMessage("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, IFlowsheet.MessageType.GeneralError)
-                    'End Try
-
-                End If
+                FlowSheet.ShowMessage("CAPE-OPEN Unit Operations are not supported on macOS and Linux. They will run in read-only bypass mode on these systems.", IFlowsheet.MessageType.Warning)
 
             End If
 
@@ -190,20 +153,7 @@ Namespace UnitOperations
 
             Else
 
-                If Not _seluo Is Nothing Then
-                    Dim myt As Type = Nothing
-                    If Not File.Exists(_seluo.Location) Then
-                        ShowFormMono()
-                    End If
-                    myt = GetManagedUnitType(_seluo.Location)
-                    Try
-                        _couo = Activator.CreateInstance(myt)
-                    Catch ex As Exception
-                        Dim ecu As CapeOpen.ECapeUser = _couo
-                        MessageBox.Show(Me.ComponentName + ": error loading CAPE-OPEN Unit Operation - " + ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        MessageBox.Show(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description)
-                    End Try
-                End If
+                FlowSheet.ShowMessage("CAPE-OPEN Unit Operations are not supported on macOS and Linux. They will run in read-only bypass mode on these systems.", IFlowsheet.MessageType.Warning)
 
             End If
 
@@ -309,26 +259,6 @@ Namespace UnitOperations
             _form = New Form_CapeOpenSelector
             _form.ShowDialog(Me.FlowSheet)
             Me._seluo = _form._seluo
-
-        End Sub
-
-        Sub ShowFormMono()
-
-            Dim ofd As New OpenFileDialog
-
-            With ofd
-                .Title = "Insert Managed CAPE-OPEN Unit Operation"
-                .Filter = "Managed Assemblies (*.exe, *.dll)|*.EXE;*.DLL;*.exe;*.dll"
-                .Multiselect = False
-            End With
-
-            If ofd.ShowDialog = DialogResult.OK Then
-                Dim assmpath As String = ofd.FileName
-                Me._seluo = New Auxiliary.CapeOpen.CapeOpenUnitOpInfo
-                With Me._seluo
-                    .Location = assmpath
-                End With
-            End If
 
         End Sub
 
@@ -897,45 +827,14 @@ Namespace UnitOperations
 
                 If Not _seluo Is Nothing Then
 
-                    Dim myt As Type = Nothing
-
-                    If Not File.Exists(_seluo.Location) Then
-                        ShowFormMono()
-                    End If
-
-                    myt = GetManagedUnitType(_seluo.Location)
-
-                    _couo = Activator.CreateInstance(myt)
-
-                    Try
-                        With _seluo
-                            .Name = CType(_couo, ICapeIdentification).ComponentName
-                            .Description = CType(_couo, ICapeIdentification).ComponentDescription
-                            .TypeName = myt.Name
-                            .Version = myt.Module.Assembly.GetName.Version.ToString
-                        End With
-                    Catch ex As Exception
-
-                    End Try
-
-                    InitNew()
-                    Init()
-
-                    Dim pdata As XElement = (From el As XElement In data Select el Where el.Name = "PersistedData").SingleOrDefault
-                    _istr = New Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata.Value)))
-                    PersistLoad(Nothing)
-
-                    Dim paramdata As XElement = (From el As XElement In data Select el Where el.Name = "ParameterData").SingleOrDefault
-                    Dim b As New BinaryFormatter, m As New MemoryStream()
-                    _params = b.Deserialize(New MemoryStream(Convert.FromBase64String(paramdata.Value)))
-
-                    RestoreParams()
-                    GetPorts()
+                    FlowSheet.ShowMessage("CAPE-OPEN Unit Operations are not supported on macOS and Linux. They will run in read-only bypass mode on these systems.", IFlowsheet.MessageType.Warning)
 
                 End If
 
             End If
+
             Return True
+
         End Function
 
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
@@ -1019,109 +918,113 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            If Not Calculator.IsRunningOnMono Then
 
-            Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+                Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            IObj?.SetCurrent()
+                Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
 
-            'If Not CreatedWithThreadID = Thread.CurrentThread.ManagedThreadId Then
-            '    disposedValue = False
-            '    Me.Dispose(True)
-            '    'load current configuration from temporary data and re-instantiate the COM object using the current thread.
-            '    'this is called only when solving the object with a background thread.
-            '    Me.LoadData(_tempdata)
-            '    CreatedWithThreadID = Thread.CurrentThread.ManagedThreadId
-            'End If
+                IObj?.SetCurrent()
 
-            UpdatePortsFromConnectors()
+                'If Not CreatedWithThreadID = Thread.CurrentThread.ManagedThreadId Then
+                '    disposedValue = False
+                '    Me.Dispose(True)
+                '    'load current configuration from temporary data and re-instantiate the COM object using the current thread.
+                '    'this is called only when solving the object with a background thread.
+                '    Me.LoadData(_tempdata)
+                '    CreatedWithThreadID = Thread.CurrentThread.ManagedThreadId
+                'End If
 
-            If Not _couo Is Nothing Then
-                For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.InputConnectors
-                    If c.IsAttached And c.Type = ConType.ConIn Then
-                        Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedFrom.Name)
-                        mat.SetFlowsheet(Me.FlowSheet)
-                    End If
-                Next
-                Dim myuo As CapeOpen.ICapeUnit = _couo
-                Dim msg As String = ""
-                Try
-                    'set reaction set, if supported
-                    If Not TryCast(_couo, CAPEOPEN110.ICapeKineticReactionContext) Is Nothing Then
-                        Me.FlowSheet.ReactionSets(Me.ReactionSetID).simulationContext = Me.FlowSheet
-                        Dim myset = DirectCast(Me.FlowSheet.ReactionSets(Me.ReactionSetID), ReactionSet)
-                        Dim myruo As CAPEOPEN110.ICapeKineticReactionContext = _couo
-                        myruo.SetReactionObject(myset)
-                    End If
-                Catch ex As Exception
-                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                        If c.Type = ConType.ConEn Then
-                            If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
+                UpdatePortsFromConnectors()
+
+                If Not _couo Is Nothing Then
+                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.InputConnectors
+                        If c.IsAttached And c.Type = ConType.ConIn Then
+                            Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedFrom.Name)
+                            mat.SetFlowsheet(Me.FlowSheet)
                         End If
                     Next
-                    Dim ecu As CapeOpen.ECapeUser = myuo
-                    Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
-                End Try
-
-                For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                    If c.IsAttached And c.Type = ConType.ConOut Then
-                        Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
-                        mat.ClearAllProps()
-                    End If
-                Next
-
-                RestorePorts()
-
-                Try
-                    myuo.Validate(msg)
-                    If Not myuo.ValStatus = CapeValidationStatus.CAPE_VALID Then
-                        Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": CAPE-OPEN Unit Operation not validated. Reason: " + msg, IFlowsheet.MessageType.GeneralError)
+                    Dim myuo As CapeOpen.ICapeUnit = _couo
+                    Dim msg As String = ""
+                    Try
+                        'set reaction set, if supported
+                        If Not TryCast(_couo, CAPEOPEN110.ICapeKineticReactionContext) Is Nothing Then
+                            Me.FlowSheet.ReactionSets(Me.ReactionSetID).simulationContext = Me.FlowSheet
+                            Dim myset = DirectCast(Me.FlowSheet.ReactionSets(Me.ReactionSetID), ReactionSet)
+                            Dim myruo As CAPEOPEN110.ICapeKineticReactionContext = _couo
+                            myruo.SetReactionObject(myset)
+                        End If
+                    Catch ex As Exception
                         For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.Type = ConType.ConEn Then
                                 If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
                             End If
                         Next
-                        Throw New Exception("CAPE-OPEN Unit Operation not validated. Reason: " + msg)
-                    End If
-                    myuo.Calculate()
-                    UpdateParams()
+                        Dim ecu As CapeOpen.ECapeUser = myuo
+                        Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
+                    End Try
+
                     For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                         If c.IsAttached And c.Type = ConType.ConOut Then
                             Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
-                            mat.PropertyPackage.CurrentMaterialStream = mat
-                            For Each subst As Compound In mat.Phases(0).Compounds.Values
-                                subst.MassFraction = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                            mat.ClearAllProps()
+                        End If
+                    Next
+
+                    RestorePorts()
+
+                    Try
+                        myuo.Validate(msg)
+                        If Not myuo.ValStatus = CapeValidationStatus.CAPE_VALID Then
+                            Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": CAPE-OPEN Unit Operation not validated. Reason: " + msg, IFlowsheet.MessageType.GeneralError)
+                            For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                                If c.Type = ConType.ConEn Then
+                                    If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
+                                End If
+                            Next
+                            Throw New Exception("CAPE-OPEN Unit Operation not validated. Reason: " + msg)
+                        End If
+                        myuo.Calculate()
+                        UpdateParams()
+                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                            If c.IsAttached And c.Type = ConType.ConOut Then
+                                Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
+                                mat.PropertyPackage.CurrentMaterialStream = mat
+                                For Each subst As Compound In mat.Phases(0).Compounds.Values
+                                    subst.MassFraction = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                                Next
+                            End If
+                        Next
+                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                            If c.Type = ConType.ConEn And c.IsAttached Then
+                                c.AttachedConnector.AttachedTo.Calculated = True
+                            End If
+                        Next
+                        Dim ur As CapeOpen.ICapeUnitReport = _couo
+                        If Not ur Is Nothing Then
+                            Dim reps As String() = ur.reports
+                            For Each r As String In reps
+                                ur.selectedReport = r
+                                Dim msg2 As String = ""
+                                ur.ProduceReport(msg2)
+                                IObj?.Paragraphs.Add("</p><pre>" + msg2 + "</pre><p>")
                             Next
                         End If
-                    Next
-                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                        If c.Type = ConType.ConEn And c.IsAttached Then
-                            c.AttachedConnector.AttachedTo.Calculated = True
-                        End If
-                    Next
-                    Dim ur As CapeOpen.ICapeUnitReport = _couo
-                    If Not ur Is Nothing Then
-                        Dim reps As String() = ur.reports
-                        For Each r As String In reps
-                            ur.selectedReport = r
-                            Dim msg2 As String = ""
-                            ur.ProduceReport(msg2)
-                            IObj?.Paragraphs.Add("</p><pre>" + msg2 + "</pre><p>")
+                    Catch ex As Exception
+                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                            If c.Type = ConType.ConEn Then
+                                If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
+                            End If
                         Next
-                    End If
-                Catch ex As Exception
-                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                        If c.Type = ConType.ConEn Then
-                            If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
-                        End If
-                    Next
-                    Dim ecu As CapeOpen.ECapeUser = myuo
-                    Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
-                    Throw ex
-                End Try
-            End If
+                        Dim ecu As CapeOpen.ECapeUser = myuo
+                        Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
+                        Throw ex
+                    End Try
+                End If
 
-            IObj?.Close()
+                IObj?.Close()
+
+            End If
 
         End Sub
 

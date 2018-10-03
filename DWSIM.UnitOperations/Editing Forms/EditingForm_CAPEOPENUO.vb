@@ -62,6 +62,11 @@ Public Class EditingForm_CAPEOPENUO
                 End If
             End If
 
+            If Settings.IsRunningOnMono Then
+                lblStatus.Text = "macOS/Linux Read-Only Bypass Mode"
+                lblStatus.ForeColor = Drawing.Color.Green
+            End If
+
             lblConnectedTo.Text = ""
 
             If .IsSpecAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedSpecId).GraphicObject.Tag
@@ -261,8 +266,10 @@ Public Class EditingForm_CAPEOPENUO
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        SimObject.Edit()
-        UpdateInfo()
+        If Not Settings.IsRunningOnMono Then
+            SimObject.Edit()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub dgvinputvars_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvinputvars.CellValueChanged
