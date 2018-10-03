@@ -71,6 +71,7 @@ Version 5.3
 - [NEW] Cross-Platform UI users can now edit initial estimates for Distillation and Absorption Columns
 - [CHG] Now requires Mono v5.14 or newer on Linux, which fixes many Classic UI (Windows Forms) glitches on this platform
 - [CHG] Prevented unreliable UNIQUAC interaction parameters from loading
+- [CHG] Bypass CAPE-OPEN Unit Operations on macOS and Linux
 - [FIX] Minor bug fixes
 
 Version 5.2 Update 22
