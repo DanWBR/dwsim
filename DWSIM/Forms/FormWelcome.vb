@@ -337,9 +337,9 @@ Public Class FormWelcome
                                                                                              floading.Show()
                                                                                              Application.DoEvents()
                                                                                              Try
-                                                                                                 FormMain.LoadXML(xdoc, Sub(x)
-                                                                                                                            Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                                                                                        End Sub)
+                                                                                                 FormMain.LoadXML2(xdoc, Sub(x)
+                                                                                                                             Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                                                         End Sub)
                                                                                                  Me.Close()
                                                                                              Catch ex As Exception
                                                                                                  MessageBox.Show(tk.Exception, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
