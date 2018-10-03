@@ -156,12 +156,12 @@ Public Class FormOptions
         Select Case My.Settings.CultureInfo
             Case "pt-BR"
                 Me.ComboBoxUILanguage.SelectedIndex = 0
-            Case "en"
+            Case "en", "en-US"
                 Me.ComboBoxUILanguage.SelectedIndex = 1
             Case "de"
-                Me.ComboBoxUILanguage.SelectedIndex = 2
+                Me.ComboBoxUILanguage.SelectedIndex = 1
             Case "es"
-                Me.ComboBoxUILanguage.SelectedIndex = 3
+                Me.ComboBoxUILanguage.SelectedIndex = 1
         End Select
 
     End Sub

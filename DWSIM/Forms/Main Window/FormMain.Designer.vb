@@ -686,6 +686,10 @@ Partial Class FormMain
 
                 'loads the current language
 
+                If My.Settings.CultureInfo = "de" Or My.Settings.CultureInfo = "es" Or My.Settings.CultureInfo = "en-US" Then
+                    My.Settings.CultureInfo = "en"
+                End If
+
                 My.Application.ChangeUICulture(My.Settings.CultureInfo)
 
             Else
