@@ -1064,13 +1064,34 @@ namespace DWSIM.UI.Forms
                         switch (mtype)
                         {
                             case Interfaces.IFlowsheet.MessageType.Information:
-                                outtxt.SelectionForeground = Colors.Blue;
+                                if (s.DarkMode)
+                                {
+                                    outtxt.SelectionForeground = Colors.SteelBlue;
+                                }
+                                else
+                                {
+                                    outtxt.SelectionForeground = Colors.Blue;
+                                }
                                 break;
                             case Interfaces.IFlowsheet.MessageType.GeneralError:
-                                outtxt.SelectionForeground = Colors.Red;
+                                if (s.DarkMode)
+                                {
+                                    outtxt.SelectionForeground = Colors.Salmon;
+                                }
+                                else
+                                {
+                                    outtxt.SelectionForeground = Colors.Red;
+                                }
                                 break;
                             case Interfaces.IFlowsheet.MessageType.Warning:
-                                outtxt.SelectionForeground = Colors.DarkOrange;
+                                if (s.DarkMode)
+                                {
+                                    outtxt.SelectionForeground = Colors.Orange;
+                                }
+                                else
+                                {
+                                    outtxt.SelectionForeground = Colors.DarkOrange;
+                                }
                                 break;
                             case Interfaces.IFlowsheet.MessageType.Tip:
                                 if (s.DarkMode)
