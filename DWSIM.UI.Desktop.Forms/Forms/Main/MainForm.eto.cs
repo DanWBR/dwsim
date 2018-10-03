@@ -27,7 +27,7 @@ namespace DWSIM.UI
 
         public List<IUtilityPlugin5> plugins = new List<IUtilityPlugin5>();
 
-        ListBox MostRecentList, SampleList, FoldersList;
+        ListBox MostRecentList, SampleList, FoldersList, FOSSEEList;
 
         private TableLayout TableContainer;
 
@@ -50,13 +50,13 @@ namespace DWSIM.UI
             switch (GlobalSettings.Settings.RunningPlatform())
             {
                 case GlobalSettings.Settings.Platform.Windows:
-                    ClientSize = new Size((int)(690*sf), (int)(420*sf));
+                    ClientSize = new Size((int)(690 * sf), (int)(420 * sf));
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
-                    ClientSize = new Size((int)(690*sf), (int)(370*sf));
+                    ClientSize = new Size((int)(690 * sf), (int)(370 * sf));
                     break;
                 case GlobalSettings.Settings.Platform.Mac:
-                    ClientSize = new Size((int)(690 * sf), (int)(350*sf));
+                    ClientSize = new Size((int)(690 * sf), (int)(350 * sf));
                     break;
             }
 
@@ -72,7 +72,7 @@ namespace DWSIM.UI
                 button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
                 button.TextColor = Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
-                button.Width = (int)(230*sf);
+                button.Width = (int)(230 * sf);
             });
 
             Eto.Style.Add<Button>("donate", button =>
@@ -84,7 +84,7 @@ namespace DWSIM.UI
                 button.Width = (int)(sf * 230);
             });
 
-            var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf*40), ImageInterpolation.Default) };
+            var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn3 = new Button() { Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
@@ -149,6 +149,7 @@ namespace DWSIM.UI
             MostRecentList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
             SampleList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
             FoldersList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
+            FOSSEEList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
 
             if (Application.Instance.Platform.IsGtk &&
                 GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
@@ -156,12 +157,14 @@ namespace DWSIM.UI
                 MostRecentList.TextColor = bgcolor;
                 SampleList.TextColor = bgcolor;
                 FoldersList.TextColor = bgcolor;
+                FOSSEEList.TextColor = bgcolor;
             }
             else
             {
                 MostRecentList.TextColor = Colors.White;
                 SampleList.TextColor = Colors.White;
                 FoldersList.TextColor = Colors.White;
+                FOSSEEList.TextColor = Colors.White;
             }
 
             var invertedlist = new List<string>(GlobalSettings.Settings.MostRecentFiles);
@@ -190,6 +193,33 @@ namespace DWSIM.UI
                 }
             }
 
+            FOSSEEList.Items.Add(new ListItem { Text = "Downloading flowsheet list, please wait...", Key = "" });
+
+            Dictionary<string, SharedClasses.FOSSEEFlowsheet> fslist = new Dictionary<string, SharedClasses.FOSSEEFlowsheet>();
+
+            Task.Factory.StartNew(() =>
+            {
+                return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets();
+            }).ContinueWith((t) =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    FOSSEEList.Items.Clear();
+                    if (t.Exception != null)
+                    {
+                        FOSSEEList.Items.Add(new ListItem { Text = "Error loading flowsheet list. Check your internet connection.", Key = "" });
+                    }
+                    else
+                    {
+                        foreach (var item in t.Result)
+                        {
+                            fslist.Add(item.DownloadLink, item);
+                            FOSSEEList.Items.Add(new ListItem { Text = item.Title, Key = item.DownloadLink });
+                        }
+                    }
+                });
+            });
+            
             FoldersList.SelectedIndexChanged += (sender, e) =>
             {
                 if (FoldersList.SelectedIndex >= 0)
@@ -225,12 +255,50 @@ namespace DWSIM.UI
                 };
             };
 
-            SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets();
+            FOSSEEList.SelectedIndexChanged += (sender, e) =>
+            {
+                if (FOSSEEList.SelectedIndex >= 0 && FOSSEEList.SelectedKey != "")
+                {
+                    var item = fslist[FOSSEEList.SelectedKey];
+                    var sb = new StringBuilder();
+                    sb.AppendLine("Title: " + item.Title);
+                    sb.AppendLine("Author: " + item.ProposerName);
+                    sb.AppendLine("Institution: " + item.Institution);
+                    sb.AppendLine("Created with: " + item.DWSIMVersion);
+                    sb.AppendLine("Reference: " + item.Reference);
+                    sb.AppendLine();
+                    sb.AppendLine("Click 'Yes' to download and open this flowsheet.");
+
+                    if (MessageBox.Show(sb.ToString(), "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
+                    {
+                        var loadingdialog = new LoadingData();
+                        loadingdialog.loadingtext.Text = "Please wait, downloading file...\n(" + FOSSEEList.SelectedKey + ")";
+                        loadingdialog.Show();
+                        var address = FOSSEEList.SelectedKey;
+                        Task.Factory.StartNew(() =>
+                        {
+                            return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(address);
+                        }).ContinueWith((t) =>
+                        {
+                            Application.Instance.Invoke(() => loadingdialog.Close());
+                            if (t.Exception != null)
+                            {
+                                MessageBox.Show(t.Exception.Message, "Error downloading file", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                            }
+                            else
+                            {
+                                Application.Instance.Invoke(() => LoadSimulation(SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(t.Result)));
+                            }
+                        });
+                    }
+                    FOSSEEList.SelectedIndex = -1;
+                };
+            };
 
             var tabview = new TabControl();
             var tab1 = new TabPage(MostRecentList) { Text = "Recent Files" }; ;
             var tab2 = new TabPage(SampleList) { Text = "Samples" }; ;
-            var tab2a = new TabPage() { Text = "FOSSEE Flowsheets" }; ;
+            var tab2a = new TabPage(FOSSEEList) { Text = "FOSSEE Flowsheets" }; ;
             var tab3 = new TabPage(FoldersList) { Text = "Recent Folders" }; ;
             tabview.Pages.Add(tab1);
             tabview.Pages.Add(tab2);
@@ -407,6 +475,49 @@ namespace DWSIM.UI
                         MostRecentList.Items.Add(new ListItem { Text = path, Key = path });
                         GlobalSettings.Settings.MostRecentFiles.Add(path);
                     }
+                    form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
+                });
+            });
+        }
+
+        void LoadSimulation(XDocument xdoc)
+        {
+
+            Forms.Flowsheet form = null;
+
+            Application.Instance.Invoke(() =>
+            {
+                form = new Forms.Flowsheet();
+            });
+
+            OpenForms += 1;
+            form.Closed += (sender2, e2) =>
+            {
+                OpenForms -= 1;
+            };
+
+            AddUserCompounds(form.FlowsheetObject);
+
+            var loadingdialog = new LoadingData();
+            loadingdialog.loadingtext.Text = "Please wait, loading data...";
+            loadingdialog.Show();
+
+            Task.Factory.StartNew(() =>
+            {
+                form.FlowsheetObject.LoadFromXML(xdoc);
+                form.FlowsheetObject.FilePath = "";
+                form.FlowsheetObject.FlowsheetOptions.FilePath = "";
+            }).ContinueWith((t) =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    loadingdialog.Close();
+                    var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
+                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    form.FlowsheetObject.UpdateInterface();
+                    form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
+                    form.Show();
                     form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
                 });
             });
