@@ -985,6 +985,7 @@ will converge to this solution.")
                 isStable = True
 
                 Return New Object() {isStable, Nothing}
+
             End If
 
         End Function

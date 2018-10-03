@@ -164,7 +164,7 @@ label0:
 
         Dim t = wc.DownloadFileTaskAsync(New Uri(address), fpath)
 
-        While Not t.IsCompleted OrElse t.IsFaulted
+        While Not t.IsCompleted
             Thread.Sleep(100)
         End While
 
