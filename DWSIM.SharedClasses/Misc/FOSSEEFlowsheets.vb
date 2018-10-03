@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Net.Http
 Imports System.Text
+Imports System.Threading
 Imports HtmlAgilityPack
 Imports ICSharpCode.SharpZipLib.Zip
 
@@ -19,7 +20,7 @@ End Class
 
 Public Class FOSSEEFlowsheets
 
-    Public Shared Function GetFOSSEEFlowsheets() As List(Of FOSSEEFlowsheet)
+    Public Shared Function GetFOSSEEFlowsheets(progress As Action(Of Integer)) As List(Of FOSSEEFlowsheet)
 
         Dim website As String = "http://dwsim.fossee.in/flowsheeting-project/completed-flowsheet"
 
@@ -48,6 +49,7 @@ Public Class FOSSEEFlowsheets
 
         Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
 
+        Dim sum As Integer = 0
         Dim list As New Concurrent.ConcurrentBag(Of FOSSEEFlowsheet)
         Parallel.ForEach(rows, Sub(r)
 
@@ -86,6 +88,8 @@ Public Class FOSSEEFlowsheets
                                        .Title = details(1).InnerText.Split(":")(1).Trim()
                                    End With
                                    list.Add(fs)
+                                   Interlocked.Add(sum, 1)
+                                   progress.Invoke(Convert.ToInt32(sum / rows.Count * 100))
                                End Sub)
 
         Return list.Where(Function(x) Not x.ProposerName.Contains("Daniel Medeiros")).OrderBy(Of String)(Function(y) y.Title).ToList
@@ -148,13 +152,21 @@ label0:
 
     End Function
 
-    Public Shared Function DownloadFlowsheet(address As String) As String
+    Public Shared Function DownloadFlowsheet(address As String, pa As Action(Of Integer)) As String
 
         Dim wc As New WebClient()
 
         Dim fpath = Path.GetTempFileName()
 
-        wc.DownloadFile(address, fpath)
+        AddHandler wc.DownloadProgressChanged, Sub(sender, e)
+                                                   pa.Invoke(e.ProgressPercentage)
+                                               End Sub
+
+        Dim t = wc.DownloadFileTaskAsync(New Uri(address), fpath)
+
+        While Not t.IsCompleted OrElse t.IsFaulted
+            Thread.Sleep(100)
+        End While
 
         Return fpath
 

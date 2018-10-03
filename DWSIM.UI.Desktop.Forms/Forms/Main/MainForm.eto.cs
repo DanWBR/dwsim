@@ -199,7 +199,13 @@ namespace DWSIM.UI
 
             Task.Factory.StartNew(() =>
             {
-                return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets();
+                return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets((p) => {
+                    Application.Instance.AsyncInvoke(() =>
+                    {
+                        FOSSEEList.Items.Clear();
+                        FOSSEEList.Items.Add(new ListItem { Text = "Downloading flowsheet list, please wait... (" + p + "%)" });
+                    });
+                });
             }).ContinueWith((t) =>
             {
                 Application.Instance.Invoke(() =>
@@ -277,7 +283,9 @@ namespace DWSIM.UI
                         var address = FOSSEEList.SelectedKey;
                         Task.Factory.StartNew(() =>
                         {
-                            return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(address);
+                            return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(address, (p) => {
+                                Application.Instance.Invoke(() => loadingdialog.loadingtext.Text = "Please wait, downloading file... (" + p + "%)\n(" + address + ")");
+                            });
                         }).ContinueWith((t) =>
                         {
                             Application.Instance.Invoke(() => loadingdialog.Close());

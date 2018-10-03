@@ -11,10 +11,20 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            MyBase.New()
+
+            Select Case GlobalSettings.Settings.RunningPlatform
+                Case GlobalSettings.Settings.Platform.Windows
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
+                Case GlobalSettings.Settings.Platform.Linux
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
+                Case GlobalSettings.Settings.Platform.Mac
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
+            End Select
+
             Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.GO_Text
             Me.Height = 20
             Me.Width = 50
+
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint, ByVal text As String)
@@ -35,6 +45,8 @@ Namespace GraphicObjects
 
         Public Property Color() As SKColor = SKColors.Black
 
+        Public Property DefaultTypeFace As SKTypeface
+
         Public Overrides Sub Draw(ByVal g As Object)
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
@@ -46,6 +58,7 @@ Namespace GraphicObjects
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = Color
                 .IsStroke = False
+                .Typeface = DefaultTypeFace
             End With
 
             Dim lines = Text.Split(vbLf)
