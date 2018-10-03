@@ -307,7 +307,7 @@ namespace DWSIM.UI
             var fosseecontainer = c.GetDefaultContainer();
             fosseecontainer.BackgroundColor = bgcolor;
             var l1 = c.CreateAndAddLabelRow3(fosseecontainer, "About the Project");
-            var l2 = c.CreateAndAddDescriptionRow(fosseecontainer, "FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM through the following steps and get honoraria and certificates.");
+            var l2 = c.CreateAndAddDescriptionRow(fosseecontainer, "FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.");
             var bu1 = c.CreateAndAddButtonRow(fosseecontainer, "Submit a Flowsheet", null, (b1, e1) => Process.Start("https://dwsim.fossee.in/flowsheeting-project"));
             var bu2 = c.CreateAndAddButtonRow(fosseecontainer, "About FOSSEE", null, (b2, e2) => Process.Start("https://fossee.in/"));
             var l3 = c.CreateAndAddLabelRow3(fosseecontainer, "Completed Flowsheets");

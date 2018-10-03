@@ -135,7 +135,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAbgBAgG4AQIBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAcgBAgHIAQIBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -276,22 +276,25 @@
     <value>Samples</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 123</value>
+    <value>6, 112</value>
   </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 91</value>
+    <value>194, 77</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 91</value>
+    <value>9, 77</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 65</value>
+    <value>387, 48</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.</value>
   </data>
   <data name="FOSSEEList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 142</value>
+    <value>0, 137</value>
   </data>
   <data name="FOSSEEList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 212</value>
+    <value>387, 217</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>387, 354</value>
