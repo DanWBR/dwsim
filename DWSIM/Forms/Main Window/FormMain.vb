@@ -1075,7 +1075,6 @@ Public Class FormMain
 
     End Sub
 
-
     Function AssemblyResolver(arg1 As Assembly, arg2 As String, arg3 As Boolean) As Type
 
         Return Nothing
@@ -1749,6 +1748,493 @@ Public Class FormMain
 
             Dim mypath As String = simulationfilename
             If mypath = "" Then mypath = [path]
+            If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
+                My.Settings.MostRecentFiles.Add(mypath)
+                Me.UpdateMRUList()
+            End If
+
+            My.Application.ActiveSimulation = form
+
+            form.MdiParent = Me
+            form.Show()
+            form.Activate()
+
+            If xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView") IsNot Nothing Then
+                Try
+                    Dim flsconfig As String = xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView").Value
+                    If flsconfig <> "" Then
+                        form.FormSurface.FlowsheetDesignSurface.Zoom = Single.Parse(flsconfig.Split(";")(0), ci)
+                        form.FormSurface.TSTBZoom.Text = Format(form.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
+                        form.FormSurface.FlowsheetDesignSurface.Invalidate()
+                        Dim vsval, hsval, vsmax, hsmax As Integer
+                        vsval = Integer.Parse(flsconfig.Split(";")(1))
+                        hsval = Integer.Parse(flsconfig.Split(";")(2))
+                        vsmax = form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Maximum
+                        hsmax = form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Maximum
+                        If vsval < vsmax Then form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value = vsval
+                        If hsval < hsmax Then form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value = hsval
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Restoring Flowsheet Zoom Information", ex))
+                End Try
+            End If
+
+        End If
+
+        form.FrmStSim1.Init(True)
+
+        Try
+            form.FormSpreadsheet.EvaluateAll()
+            form.FormSpreadsheet.EvaluateAll()
+        Catch ex As Exception
+            excs.Add(New Exception("Error Updating Spreadsheet Variables", ex))
+        End Try
+
+        form.FormSurface.FlowsheetDesignSurface.Invalidate()
+
+        If excs.Count > 0 Then
+            form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
+            For Each ex As Exception In excs
+                form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
+            Next
+        Else
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+        End If
+
+        form.UpdateFormText()
+
+        'Me.ToolStripStatusLabel1.Text = ""
+
+        My.Application.PushUndoRedoAction = True
+
+        Application.DoEvents()
+
+        Return form
+
+    End Function
+
+    Public Function LoadXML(xdoc As XDocument, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
+
+        My.Application.PushUndoRedoAction = False
+
+        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+
+        Dim excs As New Concurrent.ConcurrentBag(Of Exception)
+
+        Try
+            If My.Settings.SimulationUpgradeWarning Then
+                Dim versiontext = xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value
+                If versiontext.StartsWith("3") Then
+                    Dim fw As New FormUpgradeWarning()
+                    fw.LabelVersion.Text += versiontext & "."
+                    fw.ShowDialog(Me)
+                End If
+            End If
+        Catch ex As Exception
+        End Try
+
+        'check version
+
+        Dim sver = New Version("1.0.0.0")
+
+        Try
+            sver = New Version(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value)
+        Catch ex As Exception
+        End Try
+
+        If sver < New Version("5.0.0.0") Then
+            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                   SharedClasses.Utility.UpdateElement(xel1)
+                                               End Sub)
+        End If
+
+        'check saved from Classic UI
+
+        Dim savedfromclui As Boolean = False
+
+        Try
+            savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
+        Catch ex As Exception
+        End Try
+
+        If Not savedfromclui Then
+            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                   SharedClasses.Utility.UpdateElementFromNewUI(xel1)
+                                               End Sub)
+        End If
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
+
+        Dim form As FormFlowsheet = New FormFlowsheet()
+        Settings.CAPEOPENMode = False
+        My.Application.ActiveSimulation = form
+
+        Application.DoEvents()
+
+        Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
+
+        Try
+            form.Options.LoadData(data)
+        Catch ex As Exception
+            excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
+        End Try
+
+        Try
+            form.Options.FlashAlgorithms.Clear()
+
+            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "FlashAlgorithms").SingleOrDefault
+
+            If Not el Is Nothing Then
+                For Each xel As XElement In el.Elements
+                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = CType(New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
+                    obj.LoadData(xel.Elements.ToList)
+                    form.Options.FlashAlgorithms.Add(obj)
+                Next
+            Else
+                form.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
+            End If
+        Catch ex As Exception
+            excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
+        End Try
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
+
+        'If simulationfilename <> "" Then Me.filename = simulationfilename Else Me.filename = Path
+
+        form.FilePath = Me.filename
+        form.Options.FilePath = Me.filename
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
+
+        AddGraphicObjects(form, data, excs)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(25)
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New ConstantProperties
+                obj.LoadData(xel.Elements.ToList)
+                If My.Settings.IgnoreCompoundPropertiesOnLoad AndAlso AvailableComponents.ContainsKey(obj.Name) Then
+                    form.Options.SelectedComponents.Add(obj.Name, AvailableComponents(obj.Name))
+                Else
+                    form.Options.SelectedComponents.Add(obj.Name, obj)
+                End If
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Compound Information", ex))
+            End Try
+        Next
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(35)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties").Elements.ToList
+
+            Try
+
+                form.ExtraProperties = New ExpandoObject
+
+                If Not data Is Nothing Then
+                    For Each xel As XElement In data
+                        Try
+                            Dim propname = xel.Element("Name").Value
+                            Dim proptype = xel.Element("PropertyType").Value
+                            Dim ptype As Type = Type.GetType(proptype)
+                            Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                            DirectCast(form.ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                        Catch ex As Exception
+                        End Try
+                    Next
+                End If
+
+            Catch ex As Exception
+
+                excs.Add(New Exception("Error Loading Dynamic Properties", ex))
+
+            End Try
+
+        End If
+
+        Dim pp As New RaoultPropertyPackage
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
+                Dim obj As PropertyPackage = Nothing
+                If xel.Element("Type").Value.Contains("AdvancedEOS") Then
+                    Dim adveoskey As String = "PC-SAFT (with Association Support)"
+                    If PropertyPackages.ContainsKey(adveoskey) Then
+                        obj = PropertyPackages(adveoskey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("Advanced EOS Property Package library not found. Please download and install it in order to run this simulation.")
+                    End If
+                ElseIf xel.Element("Type").Value.Contains("ThermoC") Then
+                    Dim thermockey As String = "ThermoC Bridge"
+                    If PropertyPackages.ContainsKey(thermockey) Then
+                        obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
+                    End If
+                ElseIf xel.Element("Type").Value.Contains("COSMO_RS") Then
+                    Dim crskey As String = "COSMO-RS (BC)"
+                    If PropertyPackages.ContainsKey(crskey) Then
+                        obj = PropertyPackages(crskey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("The COSMO-RS library was not found. Please download and install it in order to run this simulation.")
+                    End If
+                Else
+                    obj = pp.ReturnInstance(xel.Element("Type").Value)
+                End If
+                obj.LoadData(xel.Elements.ToList)
+                Dim newID As String = Guid.NewGuid.ToString
+                If form.Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
+                obj.Flowsheet = form
+                form.Options.PropertyPackages.Add(obj.UniqueID, obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Property Package Information", ex))
+            End Try
+        Next
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(65)
+
+        My.Application.ActiveSimulation = form
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
+
+        Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
+
+        Dim fsuocount = (From go As GraphicObject In form.Collections.GraphicObjectCollection.Values Where go.ObjectType = ObjectType.FlowsheetUO).Count
+
+        For Each xel In data
+            Try
+                Dim id As String = xel.<Name>.Value
+                Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
+                If xel.Element("Type").Value.Contains("MaterialStream") Then
+                    obj = pp.ReturnInstance(xel.Element("Type").Value)
+                Else
+                    obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                End If
+                Dim gobj As GraphicObject = (From go As GraphicObject In
+                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                obj.GraphicObject = gobj
+                gobj.Owner = obj
+                obj.SetFlowsheet(form)
+                If Not gobj Is Nothing Then
+                    obj.LoadData(xel.Elements.ToList)
+                    If TypeOf obj Is Streams.MaterialStream Then
+                        For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                            For Each c As ConstantProperties In form.Options.SelectedComponents.Values
+                                phase.Compounds(c.Name).ConstantProperties = c
+                            Next
+                        Next
+                    End If
+                End If
+                objlist.Add(obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Unit Operation Information", ex))
+            End Try
+        Next
+
+        AddSimulationObjects(form, objlist, excs)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
+
+        form.Options.ReactionSets.Clear()
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New ReactionSet()
+                obj.LoadData(xel.Elements.ToList)
+                form.Options.ReactionSets.Add(obj.ID, obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Reaction Set Information", ex))
+            End Try
+        Next
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New Reaction()
+                obj.LoadData(xel.Elements.ToList)
+                form.Options.Reactions.Add(obj.ID, obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Reaction Information", ex))
+            End Try
+        Next
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New OptimizationCase
+                obj.LoadData(xel.Elements.ToList)
+                form.Collections.OPT_OptimizationCollection.Add(obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Optimization Case Information", ex))
+            End Try
+        Next
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New SensitivityAnalysisCase
+                obj.LoadData(xel.Elements.ToList)
+                form.Collections.OPT_SensAnalysisCollection.Add(obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Sensitivity Analysis Case Information", ex))
+            End Try
+        Next
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("PetroleumAssays") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("PetroleumAssays").Elements.ToList
+
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New Utilities.PetroleumCharacterization.Assay.Assay()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.Options.PetroleumAssays.Add(obj.Name, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Petroleum Assay Information", ex))
+                End Try
+            Next
+
+        End If
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(85)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("WatchItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("WatchItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New WatchItem
+                    obj.LoadData(xel.Elements.ToList)
+                    form.FormWatch.items.Add(i, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Watch Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+            form.FormWatch.PopulateList()
+
+        End If
+
+        form.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New Script()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.ScriptCollection.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Script Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
+
+        Try
+            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New SpreadsheetForm()
+            Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
+            Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
+            If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
+            If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
+            form.FormSpreadsheet.UpdateColors()
+            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet.UISpreadsheetEditorForm_Load(Me, New EventArgs)
+        Catch ex As Exception
+            excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
+        End Try
+
+        For Each obj In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
+            If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
+                DirectCast(obj, SpreadsheetTableGraphic).SetSpreadsheet(form.FormSpreadsheet)
+            End If
+        Next
+
+        form.Options.NotSelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+
+        Dim tmpc As BaseClasses.ConstantProperties
+        For Each tmpc In Me.AvailableComponents.Values
+            Dim newc As New BaseClasses.ConstantProperties
+            newc = tmpc
+            If Not form.Options.SelectedComponents.ContainsKey(tmpc.Name) Then
+                form.Options.NotSelectedComponents.Add(tmpc.Name, newc)
+            End If
+        Next
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(100)
+
+        If Not forcommandline Then
+
+            My.Application.ActiveSimulation = form
+
+            m_childcount += 1
+
+            form.m_IsLoadedFromFile = True
+
+            ' Set DockPanel properties
+            form.dckPanel.ActiveAutoHideContent = Nothing
+            form.dckPanel.Parent = form
+
+            Me.tmpform2 = form
+            'form.dckPanel.SuspendLayout(True)
+            form.FormLog.DockPanel = Nothing
+            form.FormMatList.DockPanel = Nothing
+            form.FormSpreadsheet.DockPanel = Nothing
+            form.FormWatch.DockPanel = Nothing
+            form.FormSurface.DockPanel = Nothing
+            form.FormObjects.DockPanel = Nothing
+
+            If Not My.Computer.Keyboard.ShiftKeyDown Then
+                Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
+                Try
+                    Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
+                    File.WriteAllText(myfile, pnl)
+                    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
+                Catch ex As Exception
+                    'excs.Add(New Exception("Error Restoring Window Layout", ex))
+                Finally
+                    File.Delete(myfile)
+                End Try
+            End If
+
+            Try
+                form.FormLog.DockPanel = form.dckPanel
+                form.FormSpreadsheet.Show(form.dckPanel)
+                form.FormMatList.Show(form.dckPanel)
+                form.FormSurface.Show(form.dckPanel)
+                form.FormObjects.Show(form.dckPanel)
+                form.dckPanel.BringToFront()
+                form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Restoring Window Layout", ex))
+            End Try
+
+            Me.Invalidate()
+            Application.DoEvents()
+
+            Dim mypath As String = simulationfilename
+            'If mypath = "" Then mypath = [Path]
             If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
                 My.Settings.MostRecentFiles.Add(mypath)
                 Me.UpdateMRUList()

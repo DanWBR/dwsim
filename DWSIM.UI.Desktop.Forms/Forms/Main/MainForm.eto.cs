@@ -275,7 +275,7 @@ namespace DWSIM.UI
                     sb.AppendLine();
                     sb.AppendLine("Click 'Yes' to download and open this flowsheet.");
 
-                    if (MessageBox.Show(sb.ToString(), "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
+                    if (MessageBox.Show(sb.ToString(), "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
                     {
                         var loadingdialog = new LoadingData();
                         loadingdialog.loadingtext.Text = "Please wait, downloading file...\n(" + FOSSEEList.SelectedKey + ")";
@@ -298,8 +298,8 @@ namespace DWSIM.UI
                                 Application.Instance.Invoke(() => LoadSimulation(SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(t.Result)));
                             }
                         });
+                        FOSSEEList.SelectedIndex = -1;
                     }
-                    FOSSEEList.SelectedIndex = -1;
                 };
             };
 
@@ -513,8 +513,6 @@ namespace DWSIM.UI
             Task.Factory.StartNew(() =>
             {
                 form.FlowsheetObject.LoadFromXML(xdoc);
-                form.FlowsheetObject.FilePath = "";
-                form.FlowsheetObject.FlowsheetOptions.FilePath = "";
             }).ContinueWith((t) =>
             {
                 Application.Instance.Invoke(() =>

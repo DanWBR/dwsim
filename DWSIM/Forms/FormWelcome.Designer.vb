@@ -41,10 +41,13 @@ Partial Class FormWelcome
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.lvsamples = New System.Windows.Forms.ListView()
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.FOSSEEList = New System.Windows.Forms.ListView()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.LinkLabel5 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel4 = New System.Windows.Forms.LinkLabel()
@@ -62,8 +65,9 @@ Partial Class FormWelcome
         Me.Button2 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -202,8 +206,9 @@ Partial Class FormWelcome
         '
         resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -214,13 +219,6 @@ Partial Class FormWelcome
         Me.TabPage1.Controls.Add(Me.lvlatest)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'TabPage3
-        '
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Controls.Add(Me.lvlatestfolders)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -253,6 +251,45 @@ Partial Class FormWelcome
         'ColumnHeader2
         '
         resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
+        '
+        'TabPage5
+        '
+        resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Controls.Add(Me.FOSSEEList)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'FOSSEEList
+        '
+        resources.ApplyResources(Me.FOSSEEList, "FOSSEEList")
+        Me.FOSSEEList.Activation = System.Windows.Forms.ItemActivation.OneClick
+        Me.FOSSEEList.AutoArrange = False
+        Me.FOSSEEList.BackColor = System.Drawing.Color.White
+        Me.FOSSEEList.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.FOSSEEList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
+        Me.FOSSEEList.ForeColor = System.Drawing.Color.SteelBlue
+        Me.FOSSEEList.FullRowSelect = True
+        Me.FOSSEEList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.FOSSEEList.HoverSelection = True
+        Me.FOSSEEList.LargeImageList = Me.ImageList1
+        Me.FOSSEEList.MultiSelect = False
+        Me.FOSSEEList.Name = "FOSSEEList"
+        Me.FOSSEEList.ShowGroups = False
+        Me.FOSSEEList.SmallImageList = Me.ImageList1
+        Me.FOSSEEList.TileSize = New System.Drawing.Size(320, 20)
+        Me.FOSSEEList.UseCompatibleStateImageBehavior = False
+        Me.FOSSEEList.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader4
+        '
+        resources.ApplyResources(Me.ColumnHeader4, "ColumnHeader4")
+        '
+        'TabPage3
+        '
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.lvlatestfolders)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
         '
         'TabPage4
         '
@@ -425,8 +462,9 @@ Partial Class FormWelcome
         Me.ShowInTaskbar = False
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
+        Me.TabPage5.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -470,4 +508,7 @@ Partial Class FormWelcome
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
     Friend WithEvents Panel1 As Panel
     Public WithEvents Button8 As Button
+    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents FOSSEEList As ListView
+    Friend WithEvents ColumnHeader4 As ColumnHeader
 End Class

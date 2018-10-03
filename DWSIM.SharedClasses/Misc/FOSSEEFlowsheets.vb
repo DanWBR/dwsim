@@ -159,7 +159,7 @@ label0:
         Dim fpath = Path.GetTempFileName()
 
         AddHandler wc.DownloadProgressChanged, Sub(sender, e)
-                                                   pa.Invoke(e.ProgressPercentage)
+                                                   If pa IsNot Nothing Then pa.Invoke(e.ProgressPercentage)
                                                End Sub
 
         Dim t = wc.DownloadFileTaskAsync(New Uri(address), fpath)

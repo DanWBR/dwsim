@@ -1,6 +1,8 @@
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Linq
+Imports System.Threading.Tasks
+Imports System.Text
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
@@ -22,6 +24,8 @@ Imports System.Linq
 Public Class FormWelcome
 
     Dim index As Integer = 0
+
+    Dim fslist As New Dictionary(Of String, SharedClasses.FOSSEEFlowsheet)
 
     Private Sub FormTips_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -76,6 +80,31 @@ Public Class FormWelcome
                     lvi.ImageIndex = 3
             End Select
         Next
+
+        FOSSEEList.Items.Add(New ListViewItem("Downloading flowsheet list, please wait...", 1) With {.Tag = ""})
+
+        Task.Factory.StartNew(Function()
+                                  Return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets(Sub(px)
+                                                                                                Me.UIThreadInvoke(Sub()
+                                                                                                                      FOSSEEList.Items.Clear()
+                                                                                                                      FOSSEEList.Items.Add(New ListViewItem("Downloading flowsheet list, please wait... (" & px & "%)", 1) With {.Tag = ""})
+                                                                                                                  End Sub)
+
+                                                                                            End Sub)
+                              End Function).ContinueWith(Sub(t)
+                                                             Me.UIThreadInvoke(Sub()
+                                                                                   FOSSEEList.Items.Clear()
+                                                                                   If (t.Exception IsNot Nothing) Then
+                                                                                       FOSSEEList.Items.Add(New ListViewItem("Error loading flowsheet list. Check your internet connection.", 1) With {.Tag = ""})
+                                                                                   Else
+                                                                                       For Each item As FOSSEEFlowsheet In t.Result
+                                                                                           fslist.Add(item.DownloadLink, item)
+                                                                                           FOSSEEList.Items.Add(New ListViewItem(item.Title, 1) With {.Tag = item.DownloadLink})
+                                                                                       Next
+                                                                                   End If
+                                                                               End Sub)
+                                                         End Sub)
+
 
         If DWSIM.App.IsRunningOnMono Then
             Me.lvlatest.View = View.List
@@ -270,4 +299,59 @@ Public Class FormWelcome
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
         Process.Start("http://dwsim.fossee.in/flowsheeting-project/completed-flowsheet")
     End Sub
+
+    Private Sub fosseeselected(sender As Object, e As EventArgs) Handles FOSSEEList.ItemActivate
+        If FOSSEEList.SelectedIndices.Count > 0 Then
+            If ((FOSSEEList.SelectedIndices(0) >= 0) _
+                AndAlso (FOSSEEList.SelectedItems(0).Tag <> "")) Then
+                Dim item = fslist(FOSSEEList.SelectedItems(0).Tag)
+                Dim sb = New StringBuilder
+                sb.AppendLine(("Title: " + item.Title))
+                sb.AppendLine(("Author: " + item.ProposerName))
+                sb.AppendLine(("Institution: " + item.Institution))
+                sb.AppendLine(("Created with: " + item.DWSIMVersion))
+                sb.AppendLine(("Reference: " + item.Reference))
+                sb.AppendLine()
+                sb.AppendLine("Click 'Yes' to download and open this flowsheet.")
+                If MessageBox.Show(sb.ToString, "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+                    Dim floading As New FormLoadingSimulation
+                    Dim fdlding As New FormLoadingSimulation
+                    fdlding.Label1.Text = "Downloading file..." & vbCrLf & "(" & item.Title & ")"
+                    fdlding.Show()
+                    Application.DoEvents()
+                    Task.Factory.StartNew(Function()
+                                              Return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(item.DownloadLink, Sub(px)
+                                                                                                                             Me.UIThread(Sub()
+                                                                                                                                             fdlding.Label1.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
+                                                                                                                                             fdlding.ProgressBar1.Value = px
+                                                                                                                                         End Sub)
+                                                                                                                         End Sub)
+                                          End Function).ContinueWith(Sub(tk)
+                                                                         Me.UIThread(Sub() fdlding.Close())
+                                                                         If tk.Exception IsNot Nothing Then
+                                                                             MessageBox.Show(tk.Exception, "Error downloading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                                         Else
+                                                                             Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
+                                                                             Me.UIThread(Sub()
+                                                                                             floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
+                                                                                             floading.Show()
+                                                                                             Application.DoEvents()
+                                                                                             Try
+                                                                                                 FormMain.LoadXML(xdoc, Sub(x)
+                                                                                                                            Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                                                        End Sub)
+                                                                                                 Me.Close()
+                                                                                             Catch ex As Exception
+                                                                                                 MessageBox.Show(tk.Exception, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                                                             Finally
+                                                                                                 floading.Close()
+                                                                                             End Try
+                                                                                         End Sub)
+                                                                         End If
+                                                                     End Sub)
+                End If
+            End If
+        End If
+    End Sub
+
 End Class
