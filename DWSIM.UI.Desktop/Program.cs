@@ -177,6 +177,11 @@ namespace DWSIM.UI.Desktop
             }
             catch (Exception ex)
             {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("APP CRASH!!!");
+                Console.WriteLine();
+                Console.WriteLine(ex.ToString());
                 string configfiledir = "";
                 if (GlobalSettings.Settings.RunningPlatform() == Settings.Platform.Mac)
                 {

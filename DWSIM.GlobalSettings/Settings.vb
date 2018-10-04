@@ -296,14 +296,19 @@ Public Class Settings
         Return Not Type.GetType("Mono.Runtime") Is Nothing
     End Function
 
-    Shared Sub LoadSettings(Optional ByVal configfile As String = "")
-
+    Shared Function GetConfigFileDir() As String
         Dim configfiledir As String = ""
         If Settings.RunningPlatform = Platform.Mac Then
             configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data") & Path.DirectorySeparatorChar
         Else
             configfiledir = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
         End If
+        Return configfiledir
+    End Function
+
+    Shared Sub LoadSettings(Optional ByVal configfile As String = "")
+
+        Dim configfiledir = GetConfigFileDir()
 
         If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
 
@@ -442,13 +447,7 @@ Public Class Settings
 
     Shared Sub SaveSettings(Optional ByVal configfile As String = "")
 
-        Dim configfiledir As String = ""
-
-        If Settings.RunningPlatform = Platform.Mac Then
-            configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data") & Path.DirectorySeparatorChar
-        Else
-            configfiledir = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
-        End If
+        Dim configfiledir = GetConfigFileDir()
 
         If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
 

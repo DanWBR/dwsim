@@ -102,6 +102,11 @@ Public Class FOSSEEFlowsheets
         Directory.CreateDirectory(fpath2)
         Dim simname As String = ""
 
+        Dim pdffiledir = GlobalSettings.Settings.GetConfigFileDir() + "FOSSEE"
+        If Not Directory.Exists(pdffiledir) Then Directory.CreateDirectory(pdffiledir)
+        Dim abstractfile As String = ""
+        Dim abstractfile0 As String = ""
+
         Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(fpath))
             stream.Password = Nothing
             Dim entry As ZipEntry
@@ -118,6 +123,8 @@ label0:
                             If (count <= 0) Then
                                 If Path.GetExtension(entry.Name).ToLower = ".dwxmz" Or Path.GetExtension(entry.Name).ToLower = ".dwxml" Then
                                     simname = Path.Combine(fpath2, Path.GetFileName(entry.Name))
+                                ElseIf Path.GetExtension(entry.Name).ToLower = ".pdf" Then
+                                    abstractfile0 = Path.Combine(fpath2, Path.GetFileName(entry.Name))
                                 End If
                                 GoTo label0
                             End If
@@ -137,6 +144,15 @@ label0:
             xdoc = XDocument.Load(simname)
         End If
 
+        If abstractfile0 <> "" Then
+            Try
+                File.Copy(abstractfile0, Path.Combine(pdffiledir, Path.GetFileName(abstractfile0)))
+                abstractfile = Path.Combine(pdffiledir, Path.GetFileName(abstractfile0))
+            Catch ex As Exception
+                Console.WriteLine("Error copying " & abstractfile0 & ": " & ex.ToString)
+            End Try
+        End If
+
         Try
             File.Delete(fpath)
         Catch ex As Exception
@@ -147,6 +163,23 @@ label0:
         Catch ex As Exception
             Console.WriteLine("Error deleting " & fpath2 & ": " & ex.ToString)
         End Try
+
+        If abstractfile <> "" Then
+            Task.Factory.StartNew(Sub()
+                                      Dim p = Process.Start(abstractfile)
+                                      While Not p.HasExited
+                                          Thread.Sleep(500)
+                                      End While
+                                      If MessageBox.Show(String.Format("Delete Abstract File '{0}'?", abstractfile), "Delete Abstract File", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                                          Try
+                                              File.Delete(abstractfile)
+                                              MessageBox.Show("Abstract File deleted successfully.", "DWSIM")
+                                          Catch ex As Exception
+                                              MessageBox.Show(ex.Message, "Error deleting Abstract File")
+                                          End Try
+                                      End If
+                                  End Sub)
+        End If
 
         Return xdoc
 
