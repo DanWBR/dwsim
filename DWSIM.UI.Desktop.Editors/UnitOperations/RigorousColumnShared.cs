@@ -112,7 +112,7 @@ namespace DWSIM.UI.Desktop.Editors
             for (i = 0; i < n; i++)
             {
                 sb.Append((i + 1).ToString());
-                foreach (var value in ie.LiqCompositions[0].Values)
+                foreach (var value in ie.LiqCompositions[i].Values)
                 {
                     sb.Append("\t" + value.Value.ToString(nff));
                 }
@@ -164,7 +164,7 @@ namespace DWSIM.UI.Desktop.Editors
             for (i = 0; i < n; i++)
             {
                 sb.Append((i + 1).ToString());
-                foreach (var value in ie.VapCompositions[0].Values)
+                foreach (var value in ie.VapCompositions[i].Values)
                 {
                     sb.Append("\t" + value.Value.ToString(nff));
                 }
@@ -236,7 +236,7 @@ namespace DWSIM.UI.Desktop.Editors
                 for (i = 0; i < n; i++)
                 {
                     sb.Append((i + 1).ToString());
-                    foreach (var value in ie.LiqCompositions[0].Values)
+                    foreach (var value in ie.LiqCompositions[i].Values)
                     {
                         sb.Append("\t" + value.Value.ToString(nff));
                     }
@@ -255,7 +255,7 @@ namespace DWSIM.UI.Desktop.Editors
                 for (i = 0; i < n; i++)
                 {
                     sb.Append((i + 1).ToString());
-                    foreach (var value in ie.VapCompositions[0].Values)
+                    foreach (var value in ie.VapCompositions[i].Values)
                     {
                         sb.Append("\t" + value.Value.ToString(nff));
                     }
