@@ -178,11 +178,11 @@ Partial Class FormOptions
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox18)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox7)
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         '
         'GroupBox18
@@ -298,9 +298,9 @@ Partial Class FormOptions
         '
         'GroupBoxAzureConfig
         '
+        resources.ApplyResources(Me.GroupBoxAzureConfig, "GroupBoxAzureConfig")
         Me.GroupBoxAzureConfig.Controls.Add(Me.tbServiceBusNamespace)
         Me.GroupBoxAzureConfig.Controls.Add(Me.Label8)
-        resources.ApplyResources(Me.GroupBoxAzureConfig, "GroupBoxAzureConfig")
         Me.GroupBoxAzureConfig.Name = "GroupBoxAzureConfig"
         Me.GroupBoxAzureConfig.TabStop = False
         '
@@ -316,11 +316,11 @@ Partial Class FormOptions
         '
         'GroupBoxNetworkComputerConfig
         '
+        resources.ApplyResources(Me.GroupBoxNetworkComputerConfig, "GroupBoxNetworkComputerConfig")
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.tbServerPort)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.tbServerIP)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.Label15)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.Label16)
-        resources.ApplyResources(Me.GroupBoxNetworkComputerConfig, "GroupBoxNetworkComputerConfig")
         Me.GroupBoxNetworkComputerConfig.Name = "GroupBoxNetworkComputerConfig"
         Me.GroupBoxNetworkComputerConfig.TabStop = False
         '
@@ -395,9 +395,9 @@ Partial Class FormOptions
         '
         'cbParallelism
         '
+        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
         Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbParallelism.FormattingEnabled = True
-        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
         Me.cbParallelism.Name = "cbParallelism"
         '
         'Label6
@@ -412,10 +412,10 @@ Partial Class FormOptions
         '
         'TabPage1
         '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.GroupBox5)
         Me.TabPage1.Controls.Add(Me.GroupBox12)
         Me.TabPage1.Controls.Add(Me.GroupBox11)
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
@@ -502,10 +502,10 @@ Partial Class FormOptions
         '
         'FaTabStripItem3
         '
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox10)
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
         '
         'GroupBox4
@@ -525,11 +525,11 @@ Partial Class FormOptions
         '
         'dgvdb
         '
+        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AllowUserToAddRows = False
         Me.dgvdb.AllowUserToDeleteRows = False
         Me.dgvdb.AllowUserToResizeColumns = False
         Me.dgvdb.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvdb.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvdb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -621,11 +621,11 @@ Partial Class FormOptions
         '
         'dgvIPDB
         '
+        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AllowUserToAddRows = False
         Me.dgvIPDB.AllowUserToDeleteRows = False
         Me.dgvIPDB.AllowUserToResizeColumns = False
         Me.dgvIPDB.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvIPDB.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvIPDB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -684,9 +684,9 @@ Partial Class FormOptions
         '
         'FaTabStripItem2
         '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox3)
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
         '
         'GroupBox3
@@ -757,6 +757,7 @@ Partial Class FormOptions
         '
         'FaTabStripItem7
         '
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
@@ -765,7 +766,6 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         '
         'GroupBox17
@@ -846,8 +846,8 @@ Partial Class FormOptions
         '
         'GroupBox15
         '
-        Me.GroupBox15.Controls.Add(Me.chkIgnoreCompConstData)
         resources.ApplyResources(Me.GroupBox15, "GroupBox15")
+        Me.GroupBox15.Controls.Add(Me.chkIgnoreCompConstData)
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.TabStop = False
         '
@@ -911,10 +911,10 @@ Partial Class FormOptions
         '
         'cbDebugLevel
         '
+        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDebugLevel.FormattingEnabled = True
         Me.cbDebugLevel.Items.AddRange(New Object() {resources.GetString("cbDebugLevel.Items"), resources.GetString("cbDebugLevel.Items1"), resources.GetString("cbDebugLevel.Items2"), resources.GetString("cbDebugLevel.Items3")})
-        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.Name = "cbDebugLevel"
         '
         'Label13
