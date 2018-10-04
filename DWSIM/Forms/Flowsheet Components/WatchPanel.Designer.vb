@@ -53,42 +53,42 @@ Partial Class WatchPanel
         '
         'ToolStrip1
         '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAdd, Me.btnRemove, Me.ToolStripButton1})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ToolStrip1.Stretch = True
         '
         'btnAdd
         '
-        resources.ApplyResources(Me.btnAdd, "btnAdd")
         Me.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnAdd.Image = Global.DWSIM.My.Resources.Resources.add
+        resources.ApplyResources(Me.btnAdd, "btnAdd")
         Me.btnAdd.Name = "btnAdd"
         '
         'btnRemove
         '
-        resources.ApplyResources(Me.btnRemove, "btnRemove")
         Me.btnRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnRemove.Image = Global.DWSIM.My.Resources.Resources.delete
+        resources.ApplyResources(Me.btnRemove, "btnRemove")
         Me.btnRemove.Name = "btnRemove"
         '
         'ToolStripButton1
         '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.arrow_refresh
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'dgv
         '
-        resources.ApplyResources(Me.dgv, "dgv")
         Me.dgv.AllowUserToAddRows = False
         Me.dgv.AllowUserToDeleteRows = False
         Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colid, Me.col0, Me.col1, Me.col2, Me.col3, Me.col4, Me.col5})
+        resources.ApplyResources(Me.dgv, "dgv")
         Me.dgv.Name = "dgv"
         Me.dgv.RowHeadersVisible = False
         Me.dgv.RowTemplate.Height = 20
@@ -141,59 +141,59 @@ Partial Class WatchPanel
         '
         'dckMenu
         '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         '
         'DockLeftToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         '
         'DockRightToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         '
         'DockTopToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         '
         'DockBottomToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         '
         'DocumentToolStripMenuItem
         '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         '
         'WatchPanel
         '

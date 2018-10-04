@@ -222,11 +222,15 @@ Public Class FormFlowsheet
             FormSurface.DockPanel = Nothing
             FormObjects.DockPanel = Nothing
 
+            Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
+            dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
+
+            FormLog.Show(dckPanel)
             FormSurface.Show(dckPanel)
             FormMatList.Show(FormSurface.Pane, Nothing)
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormObjects.Show(dckPanel)
-            FormLog.Show(FormSurface.Pane, DockAlignment.Bottom, 0.2)
+            FormWatch.Show(dckPanel)
 
             FormSurface.Activate()
 
@@ -256,6 +260,23 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Function ReturnForm(ByVal str As String) As IDockContent
+        Select Case str
+            Case "DWSIM.SimulationObjectsPanel", "DWSIM.frmObjListView"
+                Return Me.FormObjects
+            Case "DWSIM.LogPanel", "DWSIM.frmLog"
+                Return Me.FormLog
+            Case "DWSIM.MaterialStreamPanel", "DWSIM.frmMatList"
+                Return Me.FormMatList
+            Case "DWSIM.FlowsheetSurface", "DWSIM.frmSurface"
+                Return Me.FormSurface
+            Case "DWSIM.SpreadsheetForm"
+                Return Me.FormSpreadsheet
+            Case "DWSIM.WatchPanel", "DWSIM.frmWatch"
+                Return Me.FormWatch
+        End Select
+        Return Nothing
+    End Function
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
         If Not Me.m_IsLoadedFromFile Then

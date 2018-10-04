@@ -16,15 +16,17 @@ Public Class SimulationObjectsPanel
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
         Dim availableTypes As New List(Of Type)()
+        Dim availableTypes2 As New List(Of Type)()
 
         availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-        availableTypes.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+        availableTypes2.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
         Dim add As Boolean = True
 
         Dim litems As New List(Of ListItem)
+        Dim litems2 As New List(Of ListItem)
 
-        For Each item In availableTypes.OrderBy(Function(x) x.Name)
+        For Each item In availableTypes
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                 If Not Flowsheet.MobileCompatibilityMode Then
@@ -46,7 +48,30 @@ Public Class SimulationObjectsPanel
             End If
         Next
 
-        Me.PanelItems.Controls.AddRange(litems.OrderBy(Function(x) x.lblName.Text).ToArray)
+        For Each item In availableTypes2
+            If Not item.IsAbstract Then
+                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
+                If Not Flowsheet.MobileCompatibilityMode Then
+                    add = obj.GetType.GetProperty("Visible").GetValue(obj)
+                Else
+                    add = obj.MobileCompatible
+                End If
+                If add Then
+                    ObjectList.Add(obj)
+                    obj.SetFlowsheet(Flowsheet)
+                    Dim li As New ListItem
+                    li.lblName.Text = obj.GetDisplayName
+                    li.lblDescription.Text = obj.GetDisplayDescription
+                    li.Image.Image = obj.GetIconBitmap
+                    li.ObjectTypeInfo = obj.GetType
+                    litems2.Add(li)
+                    obj = Nothing
+                End If
+            End If
+        Next
+
+        Me.PanelItems.Controls.AddRange(litems.OrderByDescending(Function(x) x.lblName.Text).ToArray)
+        Me.PanelItems.Controls.AddRange(litems2.OrderBy(Function(x) x.lblName.Text).ToArray)
 
     End Sub
 

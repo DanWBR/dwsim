@@ -189,6 +189,9 @@
   <data name="PanelItems.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="PanelItems.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;PanelItems.Name" xml:space="preserve">
     <value>PanelItems</value>
   </data>
