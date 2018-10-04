@@ -1613,6 +1613,12 @@ Namespace PropertyPackages
 
         Public Overrides Sub SetMaterial(ByVal material As Object)
             CType(_copp, ICapeThermoMaterialContext).SetMaterial(material)
+            Dim mcompounds As Integer = CType(material, ICapeThermoCompounds).GetNumCompounds
+            Dim pcompounds As Integer = CType(_copp, ICapeThermoCompounds).GetNumCompounds
+            If mcompounds <> pcompounds Then
+                Flowsheet.ShowMessage("The compounds in DWSIM and CAPE-OPEN Property Package don't match. Please check the compound associations in the Property Package Settings in DWSIM.", IFlowsheet.MessageType.GeneralError)
+                Throw New Exception("The compounds in DWSIM and CAPE-OPEN Property Package don't match. Please check the compound associations in the Property Package Settings in DWSIM.")
+            End If
         End Sub
 
         Public Overrides Sub UnsetMaterial()
