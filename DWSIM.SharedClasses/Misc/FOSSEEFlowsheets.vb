@@ -146,7 +146,7 @@ label0:
 
         If abstractfile0 <> "" Then
             Try
-                File.Copy(abstractfile0, Path.Combine(pdffiledir, Path.GetFileName(abstractfile0)))
+                File.Copy(abstractfile0, Path.Combine(pdffiledir, Path.GetFileName(abstractfile0)), True)
                 abstractfile = Path.Combine(pdffiledir, Path.GetFileName(abstractfile0))
             Catch ex As Exception
                 Console.WriteLine("Error copying " & abstractfile0 & ": " & ex.ToString)
@@ -167,9 +167,7 @@ label0:
         If abstractfile <> "" Then
             Task.Factory.StartNew(Sub()
                                       Dim p = Process.Start(abstractfile)
-                                      While Not p.HasExited
-                                          Thread.Sleep(500)
-                                      End While
+                                      p.WaitForExit()
                                       If MessageBox.Show(String.Format("Delete Abstract File '{0}'?", abstractfile), "Delete Abstract File", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                                           Try
                                               File.Delete(abstractfile)

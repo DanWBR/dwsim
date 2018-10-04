@@ -1023,8 +1023,7 @@ namespace DWSIM.UI.Forms
             var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf*20) };
             label.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            //var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
-            var outtxt = new RichTextArea(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
+            var outtxt = new RichTextArea();
             outtxt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             outtxt.ReadOnly = true;
             outtxt.SelectionBold = true;
@@ -1116,6 +1115,7 @@ namespace DWSIM.UI.Forms
                             default:
                                 break;
                         }
+                        outtxt.SelectionBold = true;
                         outtxt.Append("\n", true);
                         outtxt.Selection = new Range<int>(outtxt.Text.Length);
                     }
