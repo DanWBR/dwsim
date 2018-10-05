@@ -84,13 +84,7 @@ Public Class FormWelcome
         FOSSEEList.Items.Add(New ListViewItem("Downloading flowsheet list, please wait...", 1) With {.Tag = ""})
 
         Task.Factory.StartNew(Function()
-                                  Return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets(Sub(px)
-                                                                                                Me.UIThreadInvoke(Sub()
-                                                                                                                      FOSSEEList.Items.Clear()
-                                                                                                                      FOSSEEList.Items.Add(New ListViewItem("Downloading flowsheet list, please wait... (" & px & "%)", 1) With {.Tag = ""})
-                                                                                                                  End Sub)
-
-                                                                                            End Sub)
+                                  Return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets()
                               End Function).ContinueWith(Sub(t)
                                                              Me.UIThreadInvoke(Sub()
                                                                                    FOSSEEList.Items.Clear()
@@ -309,8 +303,6 @@ Public Class FormWelcome
                 sb.AppendLine(("Title: " + item.Title))
                 sb.AppendLine(("Author: " + item.ProposerName))
                 sb.AppendLine(("Institution: " + item.Institution))
-                sb.AppendLine(("Created with: " + item.DWSIMVersion))
-                sb.AppendLine(("Reference: " + item.Reference))
                 sb.AppendLine()
                 sb.AppendLine("Click 'Yes' to download and open this flowsheet.")
                 If MessageBox.Show(sb.ToString, "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then

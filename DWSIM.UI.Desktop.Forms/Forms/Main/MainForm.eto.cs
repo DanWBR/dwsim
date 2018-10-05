@@ -200,13 +200,7 @@ namespace DWSIM.UI
 
             Task.Factory.StartNew(() =>
             {
-                return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets((p) => {
-                    Application.Instance.AsyncInvoke(() =>
-                    {
-                        FOSSEEList.Items.Clear();
-                        FOSSEEList.Items.Add(new ListItem { Text = "Downloading flowsheet list, please wait... (" + p + "%)" });
-                    });
-                });
+                return SharedClasses.FOSSEEFlowsheets.GetFOSSEEFlowsheets();
             }).ContinueWith((t) =>
             {
                 Application.Instance.Invoke(() =>
@@ -271,8 +265,6 @@ namespace DWSIM.UI
                     sb.AppendLine("Title: " + item.Title);
                     sb.AppendLine("Author: " + item.ProposerName);
                     sb.AppendLine("Institution: " + item.Institution);
-                    sb.AppendLine("Created with: " + item.DWSIMVersion);
-                    sb.AppendLine("Reference: " + item.Reference);
                     sb.AppendLine();
                     sb.AppendLine("Click 'Yes' to download and open this flowsheet.");
 

@@ -20,7 +20,7 @@ End Class
 
 Public Class FOSSEEFlowsheets
 
-    Public Shared Function GetFOSSEEFlowsheets(progress As Action(Of Integer)) As List(Of FOSSEEFlowsheet)
+    Public Shared Function GetFOSSEEFlowsheets() As List(Of FOSSEEFlowsheet)
 
         Dim website As String = "http://dwsim.fossee.in/flowsheeting-project/completed-flowsheet"
 
@@ -49,50 +49,70 @@ Public Class FOSSEEFlowsheets
 
         Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
 
-        Dim sum As Integer = 0
         Dim list As New Concurrent.ConcurrentBag(Of FOSSEEFlowsheet)
-        Parallel.ForEach(rows, Sub(r)
+        For Each r In rows
 
-                                   Dim fs As New FOSSEEFlowsheet
+            Dim fs As New FOSSEEFlowsheet
 
-                                   fs.Address = "http://dwsim.fossee.in" & r.ChildNodes(1).ChildNodes(0).Attributes(0).Value
+            fs.Address = "http://dwsim.fossee.in" & r.ChildNodes(1).ChildNodes(0).Attributes(0).Value
 
-                                   Dim handler2 As New HttpClientHandler()
+            With fs
+                .Institution = r.ChildNodes(3).ChildNodes(0).InnerText
+                .ProposerName = r.ChildNodes(2).ChildNodes(0).InnerText
+                .Title = r.ChildNodes(1).ChildNodes(0).InnerText
+                .DownloadLink = fs.Address.Replace("dwsim-flowsheet-run", "full-download/project")
+            End With
+            list.Add(fs)
 
-                                   If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
-                                       Dim proxyObj2 As New WebProxy(proxyUri)
-                                       proxyObj2.Credentials = CredentialCache.DefaultCredentials
-                                       handler2.Proxy = proxyObj2
-                                   End If
-
-                                   Dim http2 As New HttpClient(handler2)
-
-                                   Dim response2 = http2.GetByteArrayAsync(fs.Address)
-                                   response2.Wait()
-
-                                   Dim source2 As [String] = Encoding.GetEncoding("utf-8").GetString(response2.Result, 0, response2.Result.Length - 1)
-                                   source2 = WebUtility.HtmlDecode(source2)
-
-                                   Dim htmlpage2 As New HtmlDocument()
-
-                                   htmlpage2.LoadHtml(source2)
-
-                                   Dim details = htmlpage2.DocumentNode.Descendants("div").Where(Function(x) x.Attributes.Contains("id") AndAlso x.Attributes("id").Value = "ajax_flowsheet_details").FirstOrDefault.ChildNodes.Descendants("li").ToList
-
-                                   With fs
-                                       .DownloadLink = "http://dwsim.fossee.in" & htmlpage2.DocumentNode.Descendants("a").Where(Function(x) x.InnerText = "Download Flowsheet").SingleOrDefault.Attributes("href").Value
-                                       .DWSIMVersion = details(3).InnerText.Split(":")(1).Trim()
-                                       .Institution = details(2).InnerText.Split(":")(1).Trim()
-                                       .ProposerName = details(0).InnerText.Split(":")(1).Trim()
-                                       .Reference = details(4).InnerText.Remove(0, 11)
-                                       .Title = details(1).InnerText.Split(":")(1).Trim()
-                                   End With
-                                   list.Add(fs)
-                                   Interlocked.Add(sum, 1)
-                                   progress.Invoke(Convert.ToInt32(sum / rows.Count * 100))
-                               End Sub)
+        Next
 
         Return list.Where(Function(x) Not x.ProposerName.Contains("Daniel Medeiros")).OrderBy(Of String)(Function(y) y.Title).ToList
+
+    End Function
+
+    Public Shared Function GetFOSSEEFlowsheetInfo(address As String) As FOSSEEFlowsheet
+
+        Dim website As String = "http://dwsim.fossee.in/flowsheeting-project/completed-flowsheet"
+
+        Dim siteUri As Uri = New Uri(website)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
+
+        Dim fs As New FOSSEEFlowsheet
+
+        fs.Address = address
+
+        Dim handler2 As New HttpClientHandler()
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj2 As New WebProxy(proxyUri)
+            proxyObj2.Credentials = CredentialCache.DefaultCredentials
+            handler2.Proxy = proxyObj2
+        End If
+
+        Dim http2 As New HttpClient(handler2)
+
+        Dim response2 = http2.GetByteArrayAsync(fs.Address)
+        response2.Wait()
+
+        Dim source2 As [String] = Encoding.GetEncoding("utf-8").GetString(response2.Result, 0, response2.Result.Length - 1)
+        source2 = WebUtility.HtmlDecode(source2)
+
+        Dim htmlpage2 As New HtmlDocument()
+
+        htmlpage2.LoadHtml(source2)
+
+        Dim details = htmlpage2.DocumentNode.Descendants("div").Where(Function(x) x.Attributes.Contains("id") AndAlso x.Attributes("id").Value = "ajax_flowsheet_details").FirstOrDefault.ChildNodes.Descendants("li").ToList
+
+        With fs
+            .DownloadLink = "http://dwsim.fossee.in" & htmlpage2.DocumentNode.Descendants("a").Where(Function(x) x.InnerText = "Download Flowsheet").SingleOrDefault.Attributes("href").Value
+            .DWSIMVersion = details(3).InnerText.Split(":")(1).Trim()
+            .Institution = details(2).InnerText.Split(":")(1).Trim()
+            .ProposerName = details(0).InnerText.Split(":")(1).Trim()
+            .Reference = details(4).InnerText.Remove(0, 11)
+            .Title = details(1).InnerText.Split(":")(1).Trim()
+        End With
+
+        Return fs
 
     End Function
 
