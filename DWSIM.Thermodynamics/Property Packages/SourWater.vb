@@ -299,7 +299,7 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Function CheckMissingInteractionParameters() As Boolean
+        Public Overrides Function CheckMissingInteractionParameters(Vx As Double()) As Boolean
 
             Return False
 
