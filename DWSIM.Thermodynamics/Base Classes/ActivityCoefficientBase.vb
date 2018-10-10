@@ -512,7 +512,7 @@ Namespace PropertyPackages
             End If
 
             If Me.Parameters("PP_IGNORE_MISSING_IPS") = 0 Then
-                CheckMissingInteractionParameters()
+                CheckMissingInteractionParameters(Vx)
             End If
 
             Dim n As Integer = Vx.Length - 1
@@ -1005,7 +1005,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public MustOverride Function CheckMissingInteractionParameters() As Boolean
+        Public MustOverride Function CheckMissingInteractionParameters(Vx As Double()) As Boolean
 
     End Class
 
