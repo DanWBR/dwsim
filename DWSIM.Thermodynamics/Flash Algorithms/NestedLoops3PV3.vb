@@ -407,6 +407,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Paragraphs.Add("The two-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
 
+            Dim g2 = Gibbs(PP, T, P, L1, 0.0, Vy, Vx, PP.RET_NullVector)
+
+            IObj?.Paragraphs.Add(String.Format("Gibbs Energy Value: {0}", g2))
+
             IObj?.Paragraphs.Add(String.Format("Final two-phase converged values for K: {0}", Ki.ToMathArrayString))
 
 out:
@@ -873,7 +877,7 @@ out:
 
                 IObj2?.Paragraphs.Add(String.Format("Current phase fraction error: {0}", e3))
 
-                If (Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e3) + Math.Abs(e2) + Math.Abs(L1ant - L1) + Math.Abs(L2ant - L2)) < etol Then
+                If (Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e3) + Math.Abs(e2) + Math.Abs(L1ant - L1) + Math.Abs(L2ant - L2)) < 0.0000000001 Then
 
                     Exit Do
 
@@ -922,8 +926,13 @@ out:
                     L1ant = L1
                     Vant = V
 
-                    L1 += -dL1
-                    L2 += -dL2
+                    Dim df = MinimizeGibbs(PP, T, P, L1, L2, dL1, dL2, Vy, Vx1, Vx2)
+
+                    L1 += -dL1 * df
+                    L2 += -dL2 * df
+
+                    If L1 < 0 Then L1 = 0.0
+                    If L2 < 0 Then L2 = 0.0
 
                     V = 1 - L1 - L2
 
@@ -972,7 +981,11 @@ out:
                 nbp2 += Vx2(i) * VNBP(i)
             Next
 
+            Dim g3 = Gibbs(PP, T, P, L1, L2, Vy, Vx1, Vx2)
+
             IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations.")
+
+            IObj?.Paragraphs.Add(String.Format("Gibbs Energy Value: {0}", g3))
 
             IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Fraction (V): {0}", V))
             IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
@@ -992,7 +1005,85 @@ out:
 
         End Function
 
-            Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+        Private Function MinimizeGibbs(pp As PropertyPackage, T As Double, P As Double, _L1 As Double, _L2 As Double, dL1 As Double, dl2 As Double, _Vy As Double(), _Vx1 As Double(), _Vx2 As Double()) As Double
+
+            Dim fcv(n), fcl(n), fcl2(n), Gm, Gv, Gl1, Gl2, _V As Double
+
+            Dim brent As New BrentOpt.BrentMinimize
+
+            brent.DefineFuncDelegate(Function(x)
+                                         If Settings.EnableParallelProcessing Then
+                                             Dim task1 As Task = New Task(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
+                                             Dim task2 As Task = New Task(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
+                                             Dim task3 As Task = New Task(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
+                                             task1.Start()
+                                             task2.Start()
+                                             task3.Start()
+                                             Task.WaitAll(task1, task2, task3)
+                                         Else
+                                             fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor)
+                                             fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid)
+                                             fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid)
+                                         End If
+                                         Gv = 0
+                                         Gl1 = 0
+                                         Gl2 = 0
+                                         _L1 = _L1 - x * dL1
+                                         If _L1 < 0 Then _L1 = 0.0
+                                         _L2 = _L2 - x * dl2
+                                         If _L2 < 0 Then _L2 = 0.0
+                                         _V = 1 - _L1 - _L2
+                                         If _V < 0 Then _V = 0.0
+                                         For i = 0 To n
+                                             If _Vy(i) <> 0 Then Gv += _Vy(i) * _V * Log(fcv(i) * _Vy(i))
+                                             If _Vx1(i) <> 0 Then Gl1 += _Vx1(i) * _L1 * Log(fcl(i) * _Vx1(i))
+                                             If _Vx2(i) <> 0 Then Gl2 += _Vx2(i) * _L2 * Log(fcl2(i) * _Vx2(i))
+                                         Next
+                                         Gm = Gv + Gl1 + Gl2
+                                         Return Gm
+                                     End Function)
+
+            Dim df As Double
+
+            Dim gmin As Double = brent.brentoptimize(0.1, 1.0, 0.0001, df)
+
+            Return df
+
+        End Function
+
+        Private Function Gibbs(pp As PropertyPackage, T As Double, P As Double, _L1 As Double, _L2 As Double, _Vy As Double(), _Vx1 As Double(), _Vx2 As Double()) As Double
+
+            Dim fcv(n), fcl(n), fcl2(n), Gm, Gv, Gl1, Gl2, _V As Double
+
+            If Settings.EnableParallelProcessing Then
+                Dim task1 As Task = New Task(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
+                Dim task2 As Task = New Task(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
+                Dim task3 As Task = New Task(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
+                task1.Start()
+                task2.Start()
+                task3.Start()
+                Task.WaitAll(task1, task2, task3)
+            Else
+                fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor)
+                fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid)
+                fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid)
+            End If
+            Gv = 0
+            Gl1 = 0
+            Gl2 = 0
+            _V = 1 - _L1 - _L2
+            For i = 0 To n
+                If _Vy(i) <> 0 Then Gv += _Vy(i) * _V * Log(fcv(i) * _Vy(i))
+                If _Vx1(i) <> 0 Then Gl1 += _Vx1(i) * _L1 * Log(fcl(i) * _Vx1(i))
+                If _Vx2(i) <> 0 Then Gl2 += _Vx2(i) * _L2 * Log(fcl2(i) * _Vx2(i))
+            Next
+            Gm = Gv + Gl1 + Gl2
+
+            Return Gm
+
+        End Function
+
+        Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 

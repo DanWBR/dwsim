@@ -105,6 +105,7 @@ Partial Class FlashAlgorithmConfig
         '
         'TabControl1
         '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPageGeneral)
         Me.TabControl1.Controls.Add(Me.TabPageConvPars)
         Me.TabControl1.Controls.Add(Me.TabPageNL)
@@ -112,14 +113,13 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1.Controls.Add(Me.TabPageGM)
         Me.TabControl1.Controls.Add(Me.TabPageVLLE)
         Me.TabControl1.Controls.Add(Me.TabPageCOES)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPageGeneral
         '
-        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
+        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         Me.TabPageGeneral.Name = "TabPageGeneral"
         Me.TabPageGeneral.UseVisualStyleBackColor = True
         '
@@ -173,8 +173,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageConvPars
         '
-        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
+        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         Me.TabPageConvPars.Name = "TabPageConvPars"
         Me.TabPageConvPars.UseVisualStyleBackColor = True
         '
@@ -282,8 +282,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageNL
         '
-        Me.TabPageNL.Controls.Add(Me.GroupBox2)
         resources.ApplyResources(Me.TabPageNL, "TabPageNL")
+        Me.TabPageNL.Controls.Add(Me.GroupBox2)
         Me.TabPageNL.Name = "TabPageNL"
         Me.TabPageNL.UseVisualStyleBackColor = True
         '
@@ -302,8 +302,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageIO
         '
-        Me.TabPageIO.Controls.Add(Me.GroupBox5)
         resources.ApplyResources(Me.TabPageIO, "TabPageIO")
+        Me.TabPageIO.Controls.Add(Me.GroupBox5)
         Me.TabPageIO.Name = "TabPageIO"
         Me.TabPageIO.UseVisualStyleBackColor = True
         '
@@ -322,8 +322,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageGM
         '
-        Me.TabPageGM.Controls.Add(Me.GroupBox3)
         resources.ApplyResources(Me.TabPageGM, "TabPageGM")
+        Me.TabPageGM.Controls.Add(Me.GroupBox3)
         Me.TabPageGM.Name = "TabPageGM"
         Me.TabPageGM.UseVisualStyleBackColor = True
         '
@@ -350,8 +350,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageVLLE
         '
-        Me.TabPageVLLE.Controls.Add(Me.GroupBox11)
         resources.ApplyResources(Me.TabPageVLLE, "TabPageVLLE")
+        Me.TabPageVLLE.Controls.Add(Me.GroupBox11)
         Me.TabPageVLLE.Name = "TabPageVLLE"
         Me.TabPageVLLE.UseVisualStyleBackColor = True
         '
@@ -408,8 +408,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageCOES
         '
-        Me.TabPageCOES.Controls.Add(Me.GroupBox6)
         resources.ApplyResources(Me.TabPageCOES, "TabPageCOES")
+        Me.TabPageCOES.Controls.Add(Me.GroupBox6)
         Me.TabPageCOES.Name = "TabPageCOES"
         Me.TabPageCOES.UseVisualStyleBackColor = True
         '

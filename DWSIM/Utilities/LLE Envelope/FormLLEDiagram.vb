@@ -279,7 +279,9 @@ Public Class FormLLEDiagram
         Try
             mat.CalcEquilibrium("tp", Nothing)
         Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "Error", MessageBoxButtons.OK)
+            Dim euid As String = Guid.NewGuid().ToString()
+            SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
+            mat.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError, euid)
         Finally
             If My.Settings.EnableGPUProcessing Then
                 Settings.gpu.DisableMultithreading()
