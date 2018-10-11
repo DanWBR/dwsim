@@ -47,6 +47,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim fastmode As Boolean
         Sub New()
             MyBase.New()
+            Order = 7
         End Sub
 
         Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod

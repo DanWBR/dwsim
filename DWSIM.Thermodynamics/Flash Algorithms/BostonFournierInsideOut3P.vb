@@ -45,6 +45,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim tmpdx, refx, currx As Object
         Sub New()
             MyBase.New()
+            Order = 8
         End Sub
 
 

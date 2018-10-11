@@ -43,6 +43,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
+            Order = 1
         End Sub
 
         Public Property LimitVaporFraction As Boolean = True

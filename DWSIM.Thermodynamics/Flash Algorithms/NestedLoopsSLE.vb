@@ -48,6 +48,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
+            Order = 3
         End Sub
 
         Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod

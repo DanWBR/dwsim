@@ -63,6 +63,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Ki1(n) As Double
         Sub New()
             MyBase.New()
+            Order = 5
         End Sub
 
         Public Property Solver As OptimizationMethod = OptimizationMethod.IPOPT

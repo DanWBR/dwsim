@@ -35,6 +35,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Implements Interfaces.IFlashAlgorithm, Interfaces.ICustomXMLSerialization
 
+        Public Property Order As Integer = 1000 Implements Interfaces.IFlashAlgorithm.Order
+
         Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String) Implements Interfaces.IFlashAlgorithm.FlashSettings
 
         Public Property StabSearchSeverity As Integer

@@ -45,6 +45,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
+            Order = 6
         End Sub
 
         Public Overrides ReadOnly Property InternalUseOnly As Boolean

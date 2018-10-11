@@ -49,8 +49,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Pb, Pd, Pmin, Pmax, Px, soma_x, soma_x1, soma_y, soma_x2 As Double
         Dim proppack As PropertyPackages.PropertyPackage
 
+        Dim prevres As PreviousResults
+
+        Private Class PreviousResults
+            Property V As Double
+            Property L1 As Double
+            Property L2 As Double
+            Property Vy As Double()
+            Property Vx1 As Double()
+            Property Vx2 As Double()
+        End Class
+
         Sub New()
             MyBase.New()
+            Order = 2
         End Sub
 
         Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
@@ -140,7 +152,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If Not ReuseKI Then
                 i = 0
                 Do
-                    'Vp(i) = PP.AUX_PVAPi(Vn(i), T)
                     Vp(i) = Vpc(i) * Exp(5.37 * (1 + Vw(i)) * (1 - VTc(i) / T))
                     Ki(i) = Vp(i) / P
                     i += 1
@@ -205,79 +216,114 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
 
-            Dim Vmin, Vmax, g As Double
-            Vmin = 1.0#
-            Vmax = 0.0#
-            For i = 0 To n
-                If (Ki(i) * Vz(i) - 1) / (Ki(i) - 1) < Vmin Then Vmin = (Ki(i) * Vz(i) - 1) / (Ki(i) - 1)
-                If (1 - Vz(i)) / (1 - Ki(i)) > Vmax Then Vmax = (1 - Vz(i)) / (1 - Ki(i))
-            Next
+            Dim result As Object = Nothing
 
-            If Vmin < 0.0# Then Vmin = 0.0#
-            If Vmin = 1.0# Then Vmin = 0.0#
-            If Vmax = 0.0# Then Vmax = 1.0#
-            If Vmax > 1.0# Then Vmax = 1.0#
+            If Not prevres Is Nothing AndAlso prevres.L2 = 0.0 Then
 
-            V = (Vmin + Vmax) / 2
+                V = prevres.V
+                L = prevres.L1
+                Vy = prevres.Vy
+                Vx = prevres.Vx1
 
-            g = 0.0#
-            For i = 0 To n
-                g += Vz(i) * (Ki(i) - 1) / (V + (1 - V) * Ki(i))
-            Next
+            Else
 
-            If g > 0 Then Vmin = V Else Vmax = V
+                If Not prevres Is Nothing Then
 
-            V = Vmin + (Vmax - Vmin) / 4
+                    'jump to 3pflash
 
-            L = 1 - V
+                    IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
+
+                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Fraction (V): {0}", prevres.V))
+                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", prevres.L1))
+                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", prevres.L2))
+
+                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", prevres.Vy.ToMathArrayString))
+                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Composition: {0}", prevres.Vx1.ToMathArrayString))
+                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", prevres.Vx2.ToMathArrayString))
+
+                    IObj?.SetCurrent
+
+                    result = Flash_PT_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, T, PP)
+
+                    GoTo out2
+
+                End If
+
+                Dim Vmin, Vmax, g As Double
+                Vmin = 1.0#
+                Vmax = 0.0#
+                For i = 0 To n
+                    If (Ki(i) * Vz(i) - 1) / (Ki(i) - 1) < Vmin Then Vmin = (Ki(i) * Vz(i) - 1) / (Ki(i) - 1)
+                    If (1 - Vz(i)) / (1 - Ki(i)) > Vmax Then Vmax = (1 - Vz(i)) / (1 - Ki(i))
+                Next
+
+                If Vmin < 0.0# Then Vmin = 0.0#
+                If Vmin = 1.0# Then Vmin = 0.0#
+                If Vmax = 0.0# Then Vmax = 1.0#
+                If Vmax > 1.0# Then Vmax = 1.0#
+
+                V = (Vmin + Vmax) / 2
+
+                g = 0.0#
+                For i = 0 To n
+                    g += Vz(i) * (Ki(i) - 1) / (V + (1 - V) * Ki(i))
+                Next
+
+                If g > 0 Then Vmin = V Else Vmax = V
+
+                V = Vmin + (Vmax - Vmin) / 2
+
+                L = 1 - V
+
+                If n = 0 Then
+                    If Vp(0) <= P Then
+                        L = 1
+                        V = 0
+                    Else
+                        L = 0
+                        V = 1
+                    End If
+                End If
+
+                i = 0
+                Do
+                    If Vz(i) <> 0 Then
+                        Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
+                        Vx(i) = Vy(i) / Ki(i)
+                        If Vy(i) < 0 Then Vy(i) = 0
+                        If Vx(i) < 0 Then Vx(i) = 0
+                    Else
+                        Vy(i) = 0
+                        Vx(i) = 0
+                    End If
+                    i += 1
+                Loop Until i = n + 1
+
+                i = 0
+                soma_x = 0
+                soma_y = 0
+                Do
+                    soma_x = soma_x + Vx(i)
+                    soma_y = soma_y + Vy(i)
+                    i = i + 1
+                Loop Until i = n + 1
+                i = 0
+                Do
+                    Vx(i) = Vx(i) / soma_x
+                    Vy(i) = Vy(i) / soma_y
+                    i = i + 1
+                Loop Until i = n + 1
+
+            End If
 
             IObj?.Paragraphs.Add(String.Format("Initial estimate for V: {0}", V))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for L (1-V): {0}", L))
 
-            If n = 0 Then
-                If Vp(0) <= P Then
-                    L = 1
-                    V = 0
-                Else
-                    L = 0
-                    V = 1
-                End If
-            End If
-
-            i = 0
-            Do
-                If Vz(i) <> 0 Then
-                    Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
-                    Vx(i) = Vy(i) / Ki(i)
-                    If Vy(i) < 0 Then Vy(i) = 0
-                    If Vx(i) < 0 Then Vx(i) = 0
-                Else
-                    Vy(i) = 0
-                    Vx(i) = 0
-                End If
-                i += 1
-            Loop Until i = n + 1
-
-            i = 0
-            soma_x = 0
-            soma_y = 0
-            Do
-                soma_x = soma_x + Vx(i)
-                soma_y = soma_y + Vy(i)
-                i = i + 1
-            Loop Until i = n + 1
-            i = 0
-            Do
-                Vx(i) = Vx(i) / soma_x
-                Vy(i) = Vy(i) / soma_y
-                i = i + 1
-            Loop Until i = n + 1
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for y: {0}", Vy.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimate for x: {0}", Vx.ToMathArrayString))
 
             ecount = 0
             Dim convergiu = 0
-
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for y: {0}", Vy.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for x: {0}", Vx.ToMathArrayString))
 
             Do
 
@@ -415,7 +461,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 out:
 
-            Dim result As Object = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            prevres = New PreviousResults With {.L1 = L1, .L2 = 0, .V = V, .Vy = Vy, .Vx1 = Vx, .Vx2 = PP.RET_NullVector}
+
+            result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
             ' check if there is a liquid phase
 
@@ -559,7 +607,7 @@ out:
 
             End If
 
-            d2 = Date.Now
+out2:       d2 = Date.Now
 
             dt = d2 - d1
 
@@ -778,7 +826,6 @@ out:
 
             Do
 
-
                 IObj?.SetCurrent()
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -926,7 +973,19 @@ out:
                     L1ant = L1
                     Vant = V
 
-                    Dim df = MinimizeGibbs(PP, T, P, L1, L2, dL1, dL2, Vy, Vx1, Vx2)
+                    Dim df, dfmin As Double
+
+                    If ecount = 0 Then
+                        dfmin = 0.1
+                    ElseIf ecount = 1 Then
+                        dfmin = 0.3
+                    ElseIf ecount = 2 Then
+                        dfmin = 0.5
+                    Else
+                        dfmin = 0.7
+                    End If
+
+                    df = MinimizeGibbs(dfmin, PP, T, P, L1, L2, dL1, dL2, Vy, Vx1, Vx2)
 
                     L1 += -dL1 * df
                     L2 += -dL2 * df
@@ -970,6 +1029,7 @@ out:
             Loop
 
 out:
+
             'order liquid phases by mixture NBP
 
             Dim VNBP = PP.RET_VTB()
@@ -997,15 +1057,18 @@ out:
 
             IObj?.Close()
 
+
             If nbp1 >= nbp2 Then
+                prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
                 Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
             Else
+                prevres = New PreviousResults With {.L1 = L2, .L2 = L1, .V = V, .Vy = Vy, .Vx1 = Vx2, .Vx2 = Vx1}
                 Return New Object() {L2, V, Vx2, Vy, ecount, L1, Vx1, 0.0#, PP.RET_NullVector}
             End If
 
         End Function
 
-        Private Function MinimizeGibbs(pp As PropertyPackage, T As Double, P As Double, _L1 As Double, _L2 As Double, dL1 As Double, dl2 As Double, _Vy As Double(), _Vx1 As Double(), _Vx2 As Double()) As Double
+        Private Function MinimizeGibbs(ByVal dfmin As Double, pp As PropertyPackage, T As Double, P As Double, _L1 As Double, _L2 As Double, dL1 As Double, dl2 As Double, _Vy As Double(), _Vx1 As Double(), _Vx2 As Double()) As Double
 
             Dim fcv(n), fcl(n), fcl2(n), Gm, Gv, Gl1, Gl2, _V As Double
 
@@ -1045,7 +1108,7 @@ out:
 
             Dim df As Double
 
-            Dim gmin As Double = brent.brentoptimize(0.1, 1.0, 0.0001, df)
+            Dim gmin As Double = brent.brentoptimize(dfmin, 1.0, 0.0001, df)
 
             Return df
 
@@ -1085,6 +1148,8 @@ out:
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            prevres = Nothing
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash)", "Pressure-Enthalpy Flash Algorithm Routine")
@@ -1116,16 +1181,14 @@ out:
             Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance).ToDoubleFromInvariant
 
-            Dim Tmin, Tmax, epsilon(4) As Double
+            Dim Tmin, Tmax, epsilon(2) As Double
 
             Tmax = 10000.0#
             Tmin = 20.0#
 
-            epsilon(0) = 0.001
-            epsilon(1) = 0.01
-            epsilon(2) = 0.1
-            epsilon(3) = 1
-            epsilon(4) = 10
+            epsilon(0) = 0.1
+            epsilon(1) = 1
+            epsilon(2) = 10
 
             Dim fx, fx2, dfdx, x1, dx As Double
 
@@ -1141,7 +1204,7 @@ out:
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", T))
 
-            For j = 0 To 4
+            For j = 0 To 1
 
                 cnt = 0
                 x1 = Tref
@@ -1156,28 +1219,10 @@ out:
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
-                    If Settings.EnableParallelProcessing Then
-
-                        Try
-                            Dim task1 As Task = New Task(Sub()
-                                                             fx = Herror(x1, {P, Vz, PP})
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            Task.WaitAll(task1, task2)
-                        Catch ae As AggregateException
-                            Throw ae.Flatten().InnerException
-                        End Try
-
-                    Else
-                        IObj2?.SetCurrent()
-                        fx = Herror(x1, {P, Vz, PP})
-                        IObj2?.SetCurrent()
-                        fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
-                    End If
+                    IObj2?.SetCurrent()
+                    fx = Herror(x1, {P, Vz, PP})
+                    IObj2?.SetCurrent()
+                    fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
 
                     IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
 
@@ -1185,6 +1230,8 @@ out:
 
                     dfdx = (fx2 - fx) / epsilon(j)
                     dx = fx / dfdx
+
+                    'If Abs(dx) > 10.0 Then dx = Sign(dx) * 10.0
 
                     x1 = x1 - dx
 
@@ -1249,6 +1296,8 @@ alt:
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            prevres = Nothing
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1321,24 +1370,10 @@ alt:
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
-                    If Settings.EnableParallelProcessing Then
-
-                        Dim task1 As Task = New Task(Sub()
-                                                         fx = Serror(x1, {P, Vz, PP})
-                                                     End Sub)
-                        Dim task2 As Task = New Task(Sub()
-                                                         fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
-                                                     End Sub)
-                        task1.Start()
-                        task2.Start()
-                        Task.WaitAll(task1, task2)
-
-                    Else
-                        IObj2?.SetCurrent()
-                        fx = Serror(x1, {P, Vz, PP})
-                        IObj2?.SetCurrent()
-                        fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
-                    End If
+                    IObj2?.SetCurrent()
+                    fx = Serror(x1, {P, Vz, PP})
+                    IObj2?.SetCurrent()
+                    fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
 
                     IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
 
@@ -1346,6 +1381,8 @@ alt:
 
                     dfdx = (fx2 - fx) / epsilon(j)
                     dx = fx / dfdx
+
+                    'If Abs(dx) > 10.0 Then dx = Sign(dx) * 10.0
 
                     x1 = x1 - dx
 
@@ -1512,7 +1549,7 @@ alt:
         End Function
 
         Function Herror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            Return OBJ_FUNC_PH_FLASH(Tt, Sf, Pf, fi)
+            Return OBJ_FUNC_PH_FLASH(Tt, Hf, Pf, fi)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double

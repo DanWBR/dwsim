@@ -152,7 +152,7 @@ Public Class FormSimulSettings
 
             'flash algorithms
             Me.dgvAvailableFlashAlgos.Rows.Clear()
-            For Each fa In FormMain.FlashAlgorithms.Values
+            For Each fa In FormMain.FlashAlgorithms.Values.OrderBy(Function(x) x.Order)
                 If Not FrmChild.MobileCompatibilityMode Then
                     addobj = True
                 Else
