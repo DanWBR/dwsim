@@ -1,25 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DWSIM_Simulation_Data>
   <GeneralInfo>
-    <BuildVersion>5.2.6820.19375</BuildVersion>
-    <BuildDate>2018-09-03T10:45:50</BuildDate>
+    <BuildVersion>5.3.6858.20432</BuildVersion>
+    <BuildDate>2018-10-11T11:21:04</BuildDate>
     <OSInfo>Microsoft Windows 7 Enterprise , Version 6.1.7601.65536, Win32NT Platform</OSInfo>
-    <SavedOn>2018-09-03T10:47:23.7783082-04:00</SavedOn>
+    <SavedOn>2018-10-11T13:01:59.0699709-04:00</SavedOn>
     <SavedFromClassicUI>true</SavedFromClassicUI>
   </GeneralInfo>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.UnitOperations.Streams.EnergyStream</Type>
-      <ComponentDescription>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</ComponentDescription>
-      <ComponentName>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</ComponentName>
-      <EnergyFlow>1221.80893332588</EnergyFlow>
-      <MobileCompatible>true</MobileCompatible>
-      <Name2>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</Name2>
+      <Type>DWSIM.Thermodynamics.Streams.MaterialStream</Type>
+      <AtEquilibrium>true</AtEquilibrium>
+      <ComponentDescription>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</ComponentDescription>
+      <ComponentName>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</ComponentName>
+      <Name2>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</Name2>
       <code>0</code>
+      <IsElectrolyteStream>false</IsElectrolyteStream>
+      <ReferenceSolvent>Methane</ReferenceSolvent>
+      <SpecType>Temperature_and_Pressure</SpecType>
+      <CompositionBasis>Molar_Flows</CompositionBasis>
+      <EditorState>{}</EditorState>
+      <MobileCompatible>true</MobileCompatible>
+      <FloatingTableAmountBasis>DefaultBasis</FloatingTableAmountBasis>
       <Visible>true</Visible>
       <PreferredFlashAlgorithmTag></PreferredFlashAlgorithmTag>
       <Calculated>true</Calculated>
       <DebugMode>false</DebugMode>
+      <ErrorMessage></ErrorMessage>
       <Annotation></Annotation>
       <IsAdjustAttached>false</IsAdjustAttached>
       <AttachedAdjustId></AttachedAdjustId>
@@ -27,9 +34,1148 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>None</SpecVarType>
-      <Name>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</Name>
+      <Name>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</Name>
       <DynamicProperties />
       <AttachedUtilities />
+      <PropertyPackage>PP-938ce079-8219-43f7-b4c5-37020707b002</PropertyPackage>
+      <Phases>
+        <Phase>
+          <ID>0</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0.470770738940274</MassFraction>
+              <MoleFraction>0.497512437810945</MoleFraction>
+              <Molarity>6.06325221194395</Molarity>
+              <Molality>62.3324814560868</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>NaN</Kvalue>
+              <lnKvalue>NaN</lnKvalue>
+              <MassFlow>0.0445638888888889</MassFlow>
+              <MolarFlow>2.77777777777778</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0.227989373755689</VolumetricFlow>
+              <VolumetricFraction>0.497648546900603</VolumetricFraction>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0.000591546043268042</MassFraction>
+              <MoleFraction>0.00497512437810945</MoleFraction>
+              <Molarity>0.0606325221194395</Molarity>
+              <Molality>0.623324814560868</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>NaN</Kvalue>
+              <lnKvalue>NaN</lnKvalue>
+              <MassFlow>5.59966666666667E-05</MassFlow>
+              <MolarFlow>0.0277777777777778</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0.00227990672164537</VolumetricFlow>
+              <VolumetricFraction>0.00497651381029519</VolumetricFraction>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0.528637715016458</MassFraction>
+              <MoleFraction>0.497512437810945</MoleFraction>
+              <Molarity>6.06325221194395</Molarity>
+              <Molality>62.3324814560868</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>NaN</Kvalue>
+              <lnKvalue>NaN</lnKvalue>
+              <MassFlow>0.0500416666666667</MassFlow>
+              <MolarFlow>2.77777777777778</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0.227864024996229</VolumetricFlow>
+              <VolumetricFraction>0.497374939289103</VolumetricFraction>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>NaN</Kvalue>
+              <lnKvalue>NaN</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>NaN</Kvalue>
+              <lnKvalue>NaN</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Mixture</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Mixture</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <density>0.206624471723077</density>
+            <enthalpy>1893.44074620248</enthalpy>
+            <entropy>3.55121520580315</entropy>
+            <heatCapacityCp>3.35153256037007</heatCapacityCp>
+            <heatCapacityCv>2.86063138743499</heatCapacityCv>
+            <massflow>0.0946615522222222</massflow>
+            <molar_enthalpy>32101.9773271037</molar_enthalpy>
+            <molar_entropy>60.2083958787733</molar_entropy>
+            <molarflow>5.58333333333333</molarflow>
+            <molecularWeight>16.9543078606965</molecularWeight>
+            <pressure>101325</pressure>
+            <surfaceTension>NaN</surfaceTension>
+            <temperature>1000</temperature>
+            <thermalConductivity>0.134474780705241</thermalConductivity>
+            <volumetric_flow>0.458133305473563</volumetric_flow>
+            <gibbs_free_energy>-1657.77445960068</gibbs_free_energy>
+            <helmholtz_energy>-492040.153444207</helmholtz_energy>
+            <internal_energy>-488488.938238403</internal_energy>
+            <molar_gibbs_free_energy>-28106.4185516696</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>-8342200.24131743</molar_helmholtz_energy>
+            <molar_internal_energy>-8281991.84543865</molar_internal_energy>
+          </Properties>
+        </Phase>
+        <Phase>
+          <ID>1</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>NaN</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>NaN</MassFraction>
+              <MoleFraction>NaN</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>NaN</MassFlow>
+              <MolarFlow>NaN</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>3.56445077136499E-05</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>NaN</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>NaN</MassFraction>
+              <MoleFraction>NaN</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>NaN</MassFlow>
+              <MolarFlow>NaN</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>2.55002235074774E-05</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>NaN</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>NaN</MassFraction>
+              <MoleFraction>NaN</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>NaN</MassFlow>
+              <MolarFlow>NaN</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>1.73065043772808E-05</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>NaN</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>NaN</MassFraction>
+              <MoleFraction>NaN</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>NaN</MassFlow>
+              <MolarFlow>NaN</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>3.17966074325363E-05</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>NaN</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>NaN</MassFraction>
+              <MoleFraction>NaN</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>NaN</MassFlow>
+              <MolarFlow>NaN</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>3.35833885975888E-05</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Overall Liquid</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Overall Liquid</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <compressibilityFactor>0</compressibilityFactor>
+            <density>NaN</density>
+            <enthalpy>0</enthalpy>
+            <entropy>0</entropy>
+            <heatCapacityCp>0</heatCapacityCp>
+            <heatCapacityCv>0</heatCapacityCv>
+            <jouleThomsonCoefficient>0</jouleThomsonCoefficient>
+            <kinematic_viscosity>NaN</kinematic_viscosity>
+            <massflow>0</massflow>
+            <massfraction>0</massfraction>
+            <molar_enthalpy>NaN</molar_enthalpy>
+            <molar_entropy>NaN</molar_entropy>
+            <molarflow>0</molarflow>
+            <molarfraction>0</molarfraction>
+            <molecularWeight>NaN</molecularWeight>
+            <speedOfSound>NaN</speedOfSound>
+            <thermalConductivity>0</thermalConductivity>
+            <viscosity>0</viscosity>
+            <volumetric_flow>0</volumetric_flow>
+            <bulk_modulus>0</bulk_modulus>
+            <gibbs_free_energy>0</gibbs_free_energy>
+            <helmholtz_energy>0</helmholtz_energy>
+            <internal_energy>0</internal_energy>
+            <isothermal_compressibility>0</isothermal_compressibility>
+            <molar_gibbs_free_energy>NaN</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>NaN</molar_helmholtz_energy>
+            <molar_internal_energy>NaN</molar_internal_energy>
+          </Properties>
+        </Phase>
+        <Phase>
+          <ID>2</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>1.07715145356669E-15</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0.470770738940274</MassFraction>
+              <MoleFraction>0.497512437810945</MoleFraction>
+              <Molarity>6.06325221194395</Molarity>
+              <Molality>62.3324814560868</Molality>
+              <FugacityCoeff>1.00028482908172</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0.0445638888888889</MassFlow>
+              <MolarFlow>2.77777777777778</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>50410.447761194</PartialPressure>
+              <PartialVolume>82.0761707149842</PartialVolume>
+              <VolumetricFlow>0.227989373755689</VolumetricFlow>
+              <VolumetricFraction>0.497648546900602</VolumetricFraction>
+              <DiffusionCoefficient>Infinity</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>1.25610500627626E-142</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0.000591546043268042</MassFraction>
+              <MoleFraction>0.00497512437810945</MoleFraction>
+              <Molarity>0.0606325221194395</Molarity>
+              <Molality>0.623324814560868</Molality>
+              <FugacityCoeff>1.00029064523872</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>5.59966666666666E-05</MassFlow>
+              <MolarFlow>0.0277777777777778</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>504.10447761194</PartialPressure>
+              <PartialVolume>82.0766381421478</PartialVolume>
+              <VolumetricFlow>0.00227990672164537</VolumetricFlow>
+              <VolumetricFraction>0.00497651381029519</VolumetricFraction>
+              <DiffusionCoefficient>Infinity</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0.000182073277681191</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0.528637715016458</MassFraction>
+              <MoleFraction>0.497512437810945</MoleFraction>
+              <Molarity>6.06325221194395</Molarity>
+              <Molality>62.3324814560868</Molality>
+              <FugacityCoeff>0.999734795829196</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0.0500416666666666</MassFlow>
+              <MolarFlow>2.77777777777778</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>50410.447761194</PartialPressure>
+              <PartialVolume>82.0310451636885</PartialVolume>
+              <VolumetricFlow>0.227864024996229</VolumetricFlow>
+              <VolumetricFraction>0.497374939289103</VolumetricFraction>
+              <DiffusionCoefficient>Infinity</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>5.05789793846436E-12</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>1.00023521272335</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>NaN</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>3.4071878870233E-28</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>1.00045485453423</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>NaN</DiffusionCoefficient>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Vapor</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Vapor</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <compressibilityFactor>1.00001128491289</compressibilityFactor>
+            <density>0.206624471723077</density>
+            <enthalpy>1893.44074620248</enthalpy>
+            <entropy>3.55121520580315</entropy>
+            <heatCapacityCp>3.35153256037007</heatCapacityCp>
+            <heatCapacityCv>2.86063138743499</heatCapacityCv>
+            <jouleThomsonCoefficient>1.02358238252822E-05</jouleThomsonCoefficient>
+            <kinematic_viscosity>0.000160275200474877</kinematic_viscosity>
+            <massflow>0.0946615522222222</massflow>
+            <massfraction>1</massfraction>
+            <molar_enthalpy>32101.9773271037</molar_enthalpy>
+            <molar_entropy>60.2083958787734</molar_entropy>
+            <molarflow>5.58333333333333</molarflow>
+            <molarfraction>1</molarfraction>
+            <molecularWeight>16.9543078606965</molecularWeight>
+            <speedOfSound>NaN</speedOfSound>
+            <thermalConductivity>0.134474780705241</thermalConductivity>
+            <viscosity>3.31167786284317E-05</viscosity>
+            <volumetric_flow>0.458133305473563</volumetric_flow>
+            <bulk_modulus>-17146538.5693245</bulk_modulus>
+            <gibbs_free_energy>-1657.77445960068</gibbs_free_energy>
+            <helmholtz_energy>-492040.153444207</helmholtz_energy>
+            <internal_energy>-488488.938238403</internal_energy>
+            <isothermal_compressibility>-5.83208089467701E-08</isothermal_compressibility>
+            <molar_gibbs_free_energy>-28106.4185516696</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>-8342200.24131743</molar_helmholtz_energy>
+            <molar_internal_energy>-8281991.84543865</molar_internal_energy>
+          </Properties>
+        </Phase>
+        <Phase>
+          <ID>3</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Liquid 1</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Liquid 1</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <jouleThomsonCoefficient>0</jouleThomsonCoefficient>
+            <speedOfSound>NaN</speedOfSound>
+            <bulk_modulus>0</bulk_modulus>
+            <gibbs_free_energy>0</gibbs_free_energy>
+            <helmholtz_energy>0</helmholtz_energy>
+            <internal_energy>0</internal_energy>
+            <isothermal_compressibility>0</isothermal_compressibility>
+            <molar_gibbs_free_energy>0</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>0</molar_helmholtz_energy>
+            <molar_internal_energy>0</molar_internal_energy>
+          </Properties>
+        </Phase>
+        <Phase>
+          <ID>4</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Liquid 2</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Liquid 2</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <jouleThomsonCoefficient>0</jouleThomsonCoefficient>
+            <speedOfSound>NaN</speedOfSound>
+            <bulk_modulus>0</bulk_modulus>
+            <gibbs_free_energy>0</gibbs_free_energy>
+            <helmholtz_energy>0</helmholtz_energy>
+            <internal_energy>0</internal_energy>
+            <isothermal_compressibility>0</isothermal_compressibility>
+            <molar_gibbs_free_energy>0</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>0</molar_helmholtz_energy>
+            <molar_internal_energy>0</molar_internal_energy>
+          </Properties>
+        </Phase>
+        <Phase>
+          <ID>5</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Liquid 3</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Liquid 3</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <jouleThomsonCoefficient>0</jouleThomsonCoefficient>
+            <speedOfSound>NaN</speedOfSound>
+            <bulk_modulus>0</bulk_modulus>
+            <gibbs_free_energy>0</gibbs_free_energy>
+            <helmholtz_energy>0</helmholtz_energy>
+            <internal_energy>0</internal_energy>
+            <isothermal_compressibility>0</isothermal_compressibility>
+            <molar_gibbs_free_energy>0</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>0</molar_helmholtz_energy>
+            <molar_internal_energy>0</molar_internal_energy>
+          </Properties>
+        </Phase>
+        <Phase>
+          <ID>6</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>0</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Aqueous</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Aqueous</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <jouleThomsonCoefficient>NaN</jouleThomsonCoefficient>
+            <speedOfSound>Infinity</speedOfSound>
+            <bulk_modulus>2620109259.06432</bulk_modulus>
+            <gibbs_free_energy>0</gibbs_free_energy>
+            <helmholtz_energy>0</helmholtz_energy>
+            <internal_energy>0</internal_energy>
+            <isothermal_compressibility>3.81663473208409E-10</isothermal_compressibility>
+            <molar_gibbs_free_energy>0</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>0</molar_helmholtz_energy>
+            <molar_internal_energy>0</molar_internal_energy>
+          </Properties>
+        </Phase>
+        <Phase>
+          <ID>7</ID>
+          <Compounds>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Methane</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Hydrogen</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Water</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon dioxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+            <Compound>
+              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <ComponentDescription></ComponentDescription>
+              <ComponentName></ComponentName>
+              <ActivityCoeff>0</ActivityCoeff>
+              <PetroleumFraction>false</PetroleumFraction>
+              <MassFraction>0</MassFraction>
+              <MoleFraction>0</MoleFraction>
+              <Molarity>0</Molarity>
+              <Molality>0</Molality>
+              <FugacityCoeff>NaN</FugacityCoeff>
+              <Kvalue>0</Kvalue>
+              <lnKvalue>0</lnKvalue>
+              <MassFlow>0</MassFlow>
+              <MolarFlow>0</MolarFlow>
+              <Name>Carbon monoxide</Name>
+              <PartialPressure>0</PartialPressure>
+              <PartialVolume>0</PartialVolume>
+              <VolumetricFlow>0</VolumetricFlow>
+              <VolumetricFraction>0</VolumetricFraction>
+              <DiffusionCoefficient>0</DiffusionCoefficient>
+            </Compound>
+          </Compounds>
+          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
+          <ComponentDescription></ComponentDescription>
+          <ComponentName>Solid</ComponentName>
+          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
+          <Name>Solid</Name>
+          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
+          <Properties>
+            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
+            <jouleThomsonCoefficient>0</jouleThomsonCoefficient>
+            <speedOfSound>NaN</speedOfSound>
+            <bulk_modulus>0</bulk_modulus>
+            <gibbs_free_energy>0</gibbs_free_energy>
+            <helmholtz_energy>0</helmholtz_energy>
+            <internal_energy>0</internal_energy>
+            <isothermal_compressibility>0</isothermal_compressibility>
+            <molar_gibbs_free_energy>0</molar_gibbs_free_energy>
+            <molar_helmholtz_energy>0</molar_helmholtz_energy>
+            <molar_internal_energy>0</molar_internal_energy>
+          </Properties>
+        </Phase>
+      </Phases>
+    </SimulationObject>
+    <SimulationObject>
+      <Type>DWSIM.UnitOperations.Reactors.Reactor_PFR</Type>
+      <Length>1</Length>
+      <Volume>1</Volume>
+      <dV>0.05</dV>
+      <CatalystLoading>0.386</CatalystLoading>
+      <CatalystVoidFraction>0.4</CatalystVoidFraction>
+      <CatalystParticleDiameter>2</CatalystParticleDiameter>
+      <ResidenceTime>2.18277079629982</ResidenceTime>
+      <MobileCompatible>true</MobileCompatible>
+      <OutletTemperature>298.15</OutletTemperature>
+      <ReactorOperationMode>Isothermic</ReactorOperationMode>
+      <ReactionSetID>DefaultSet</ReactionSetID>
+      <ReactionSetName></ReactionSetName>
+      <DeltaP>584.435409531521</DeltaP>
+      <DeltaT>0</DeltaT>
+      <DeltaQ>1221.80951271173</DeltaQ>
+      <ComponentDescription>ReatorPFR</ComponentDescription>
+      <ComponentName>PFR-5f3ea195-7284-4d1d-b2be-f1a347522946</ComponentName>
+      <Visible>true</Visible>
+      <PreferredFlashAlgorithmTag></PreferredFlashAlgorithmTag>
+      <Calculated>true</Calculated>
+      <DebugMode>false</DebugMode>
+      <ErrorMessage></ErrorMessage>
+      <Annotation></Annotation>
+      <IsAdjustAttached>false</IsAdjustAttached>
+      <AttachedAdjustId></AttachedAdjustId>
+      <AdjustVarType>None</AdjustVarType>
+      <IsSpecAttached>false</IsSpecAttached>
+      <AttachedSpecId></AttachedSpecId>
+      <SpecVarType>None</SpecVarType>
+      <Name>PFR-5f3ea195-7284-4d1d-b2be-f1a347522946</Name>
+      <DynamicProperties />
+      <AttachedUtilities />
+      <PropertyPackage>PP-938ce079-8219-43f7-b4c5-37020707b002</PropertyPackage>
+      <ReactionConversions />
+      <CompoundConversions>
+        <Compound ID="Methane">0.753184130979676</Compound>
+        <Compound ID="Hydrogen">-234.149182282315</Compound>
+        <Compound ID="Water">0.835123560864096</Compound>
+        <Compound ID="Carbon dioxide">-2276095274.56712</Compound>
+        <Compound ID="Carbon monoxide">-18645686141.5335</Compound>
+      </CompoundConversions>
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.Thermodynamics.Streams.MaterialStream</Type>
@@ -71,20 +1217,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>0</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.116194507379145</MassFraction>
-              <MoleFraction>0.0701905632823944</MoleFraction>
-              <Molarity>0.850334753167395</Molarity>
+              <MassFraction>0.116194507379162</MassFraction>
+              <MoleFraction>0.0701905632824038</MoleFraction>
+              <Molarity>0.85033475316751</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>0</FugacityCoeff>
               <Kvalue>NaN</Kvalue>
               <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0.0109990749630356</MassFlow>
-              <MolarFlow>0.685599636167522</MolarFlow>
+              <MassFlow>0.0109990749630363</MassFlow>
+              <MolarFlow>0.685599636167566</MolarFlow>
               <Name>Methane</Name>
               <PartialPressure>0</PartialPressure>
               <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.0565957665939213</VolumetricFlow>
-              <VolumetricFraction>0.0694173701682306</VolumetricFraction>
+              <VolumetricFlow>0.0565957667872205</VolumetricFlow>
+              <VolumetricFraction>0.0701945345979902</VolumetricFraction>
             </Compound>
             <Compound>
               <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
@@ -92,20 +1238,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>0</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.139102548032555</MassFraction>
-              <MoleFraction>0.66872740498032</MoleFraction>
-              <Molarity>8.10140460851441</Molarity>
+              <MassFraction>0.139102548032557</MassFraction>
+              <MoleFraction>0.668727404980321</MoleFraction>
+              <Molarity>8.10140460851443</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>0</FugacityCoeff>
               <Kvalue>NaN</Kvalue>
               <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0.013167570377203</MassFlow>
-              <MolarFlow>6.53192173006476</MolarFlow>
+              <MassFlow>0.0131675703772021</MassFlow>
+              <MolarFlow>6.53192173006432</MolarFlow>
               <Name>Hydrogen</Name>
               <PartialPressure>0</PartialPressure>
               <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.539163300092679</VolumetricFlow>
-              <VolumetricFraction>0.661309151481274</VolumetricFraction>
+              <VolumetricFlow>0.539163301934085</VolumetricFlow>
+              <VolumetricFraction>0.668712859636077</VolumetricFraction>
             </Compound>
             <Compound>
               <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
@@ -113,20 +1259,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>0</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.0871605179016581</MassFraction>
-              <MoleFraction>0.0468882741652001</MoleFraction>
-              <Molarity>0.568035461950925</Molarity>
+              <MassFraction>0.0871605179016519</MassFraction>
+              <MoleFraction>0.0468882741651961</MoleFraction>
+              <Molarity>0.568035461950878</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>0</FugacityCoeff>
               <Kvalue>NaN</Kvalue>
               <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0.00825069180842714</MassFlow>
-              <MolarFlow>0.457990108710915</MolarFlow>
+              <MassFlow>0.00825069180842586</MassFlow>
+              <MolarFlow>0.457990108710844</MolarFlow>
               <Name>Water</Name>
               <PartialPressure>0</PartialPressure>
               <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.0377965173443992</VolumetricFlow>
-              <VolumetricFraction>0.0463592065885704</VolumetricFraction>
+              <VolumetricFlow>0.0377965174734825</VolumetricFlow>
+              <VolumetricFraction>0.0468782225965881</VolumetricFraction>
             </Compound>
             <Compound>
               <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
@@ -134,20 +1280,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>0</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.105819647113932</MassFraction>
-              <MoleFraction>0.0233022891274466</MoleFraction>
-              <Molarity>0.282299291340673</Molarity>
+              <MassFraction>0.105819647113924</MassFraction>
+              <MoleFraction>0.0233022891274446</MoleFraction>
+              <Molarity>0.282299291340648</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>0</FugacityCoeff>
               <Kvalue>NaN</Kvalue>
               <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0.0100169815030087</MassFlow>
-              <MolarFlow>0.227609527556747</MolarFlow>
+              <MassFlow>0.0100169815030071</MassFlow>
+              <MolarFlow>0.227609527556712</MolarFlow>
               <Name>Carbon dioxide</Name>
               <PartialPressure>0</PartialPressure>
               <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.018788479283029</VolumetricFlow>
-              <VolumetricFraction>0.0230449537091037</VolumetricFraction>
+              <VolumetricFlow>0.0187884793471956</VolumetricFlow>
+              <VolumetricFraction>0.0233029542392939</VolumetricFraction>
             </Compound>
             <Compound>
               <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
@@ -155,20 +1301,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>0</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.55172277957271</MassFraction>
-              <MoleFraction>0.190891468444639</MoleFraction>
-              <Molarity>2.31258508424519</Molarity>
+              <MassFraction>0.551722779572705</MassFraction>
+              <MoleFraction>0.190891468444635</MoleFraction>
+              <Molarity>2.31258508424515</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>0</FugacityCoeff>
               <Kvalue>NaN</Kvalue>
               <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0.0522265668852412</MassFlow>
-              <MolarFlow>1.86456861425352</MolarFlow>
+              <MassFlow>0.0522265668852364</MassFlow>
+              <MolarFlow>1.86456861425335</MolarFlow>
               <Name>Carbon monoxide</Name>
               <PartialPressure>0</PartialPressure>
               <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.153926212731664</VolumetricFlow>
-              <VolumetricFraction>0.188797741082906</VolumetricFraction>
+              <VolumetricFlow>0.153926210503653</VolumetricFlow>
+              <VolumetricFraction>0.19091142892998</VolumetricFraction>
             </Compound>
           </Compounds>
           <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
@@ -179,26 +1325,26 @@
           <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
           <Properties>
             <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-            <density>0.117405897686288</density>
-            <enthalpy>2341.22698475716</enthalpy>
-            <entropy>5.36240266408426</entropy>
-            <heatCapacityCp>3.58670313201617</heatCapacityCp>
-            <heatCapacityCv>2.72868002782832</heatCapacityCv>
-            <massflow>0.0946608855369155</massflow>
+            <density>0.117405897686286</density>
+            <enthalpy>2341.2269847572</enthalpy>
+            <entropy>5.36240266408433</entropy>
+            <heatCapacityCp>3.58670313201625</heatCapacityCp>
+            <heatCapacityCv>2.72868002782838</heatCapacityCv>
+            <massflow>0.0946608855369077</massflow>
             <massfraction>1</massfraction>
-            <molar_enthalpy>22689.3593383547</molar_enthalpy>
+            <molar_enthalpy>22689.3593383548</molar_enthalpy>
             <molar_entropy>51.9682550023992</molar_entropy>
-            <molarflow>9.76768961675347</molarflow>
-            <molecularWeight>9.69122579146596</molecularWeight>
+            <molarflow>9.76768961675279</molarflow>
+            <molecularWeight>9.69122579146584</molecularWeight>
             <pressure>100740.564590468</pressure>
             <surfaceTension>NaN</surfaceTension>
             <temperature>1000</temperature>
-            <thermalConductivity>0.331998782968392</thermalConductivity>
-            <volumetric_flow>0.806270276045693</volumetric_flow>
-            <gibbs_free_energy>-3021.1756793271</gibbs_free_energy>
-            <helmholtz_energy>-861074.872944608</helmholtz_energy>
-            <internal_energy>-855712.470280524</internal_energy>
-            <molar_gibbs_free_energy>-29278.8956640445</molar_gibbs_free_energy>
+            <thermalConductivity>0.331998782968393</thermalConductivity>
+            <volumetric_flow>0.806270276045636</volumetric_flow>
+            <gibbs_free_energy>-3021.17567932713</gibbs_free_energy>
+            <helmholtz_energy>-861074.872944619</helmholtz_energy>
+            <internal_energy>-855712.470280534</internal_energy>
+            <molar_gibbs_free_energy>-29278.8956640444</molar_gibbs_free_energy>
             <molar_helmholtz_energy>-8344871.01706406</molar_helmholtz_energy>
             <molar_internal_energy>-8292902.76206166</molar_internal_energy>
           </Properties>
@@ -363,20 +1509,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>1.07089917435121E-15</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.116194507379145</MassFraction>
-              <MoleFraction>0.0701905632823944</MoleFraction>
-              <Molarity>0.850334753167395</Molarity>
+              <MassFraction>0.116194507379162</MassFraction>
+              <MoleFraction>0.0701905632824038</MoleFraction>
+              <Molarity>0.85033475316751</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>1.00024807881373</FugacityCoeff>
               <Kvalue>0</Kvalue>
               <lnKvalue>0</lnKvalue>
-              <MassFlow>0.0109990749630356</MassFlow>
-              <MolarFlow>0.685599636167522</MolarFlow>
+              <MassFlow>0.0109990749630363</MassFlow>
+              <MolarFlow>0.685599636167566</MolarFlow>
               <Name>Methane</Name>
-              <PartialPressure>7071.03697399142</PartialPressure>
+              <PartialPressure>7071.03697399237</PartialPressure>
               <PartialVolume>82.549291185785</PartialVolume>
-              <VolumetricFlow>0.0565957665939213</VolumetricFlow>
-              <VolumetricFraction>0.0701945343582454</VolumetricFraction>
+              <VolumetricFlow>0.0565957667872205</VolumetricFlow>
+              <VolumetricFraction>0.0701945345979951</VolumetricFraction>
               <DiffusionCoefficient>Infinity</DiffusionCoefficient>
             </Compound>
             <Compound>
@@ -385,20 +1531,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>1.24870893852869E-142</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.139102548032555</MassFraction>
-              <MoleFraction>0.66872740498032</MoleFraction>
-              <Molarity>8.10140460851441</Molarity>
+              <MassFraction>0.139102548032557</MassFraction>
+              <MoleFraction>0.668727404980321</MoleFraction>
+              <Molarity>8.10140460851443</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>1.00016974530171</FugacityCoeff>
               <Kvalue>0</Kvalue>
               <lnKvalue>0</lnKvalue>
-              <MassFlow>0.013167570377203</MassFlow>
-              <MolarFlow>6.53192173006476</MolarFlow>
+              <MassFlow>0.0131675703772021</MassFlow>
+              <MolarFlow>6.53192173006432</MolarFlow>
               <Name>Hydrogen</Name>
-              <PartialPressure>67367.9763348362</PartialPressure>
+              <PartialPressure>67367.9763348364</PartialPressure>
               <PartialVolume>82.5428254792371</PartialVolume>
-              <VolumetricFlow>0.539163300092679</VolumetricFlow>
-              <VolumetricFraction>0.668712857352221</VolumetricFraction>
+              <VolumetricFlow>0.539163301934085</VolumetricFlow>
+              <VolumetricFraction>0.668712859636124</VolumetricFraction>
               <DiffusionCoefficient>Infinity</DiffusionCoefficient>
             </Compound>
             <Compound>
@@ -407,42 +1553,42 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>0.000181066943811461</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.0871605179016581</MassFraction>
-              <MoleFraction>0.0468882741652001</MoleFraction>
-              <Molarity>0.568035461950925</Molarity>
+              <MassFraction>0.0871605179016519</MassFraction>
+              <MoleFraction>0.0468882741651961</MoleFraction>
+              <Molarity>0.568035461950878</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>0.999976976233059</FugacityCoeff>
               <Kvalue>0</Kvalue>
               <lnKvalue>0</lnKvalue>
-              <MassFlow>0.00825069180842714</MassFlow>
-              <MolarFlow>0.457990108710915</MolarFlow>
+              <MassFlow>0.00825069180842586</MassFlow>
+              <MolarFlow>0.457990108710844</MolarFlow>
               <Name>Water</Name>
-              <PartialPressure>4723.55121207493</PartialPressure>
+              <PartialPressure>4723.55121207454</PartialPressure>
               <PartialVolume>82.5269255713579</PartialVolume>
-              <VolumetricFlow>0.0377965173443992</VolumetricFlow>
-              <VolumetricFraction>0.0468782224364888</VolumetricFraction>
+              <VolumetricFlow>0.0377965174734825</VolumetricFlow>
+              <VolumetricFraction>0.0468782225965914</VolumetricFraction>
               <DiffusionCoefficient>Infinity</DiffusionCoefficient>
             </Compound>
             <Compound>
               <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <ComponentDescription></ComponentDescription>
               <ComponentName></ComponentName>
-              <ActivityCoeff>5.02864796225879E-12</ActivityCoeff>
+              <ActivityCoeff>5.0286479622588E-12</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.105819647113932</MassFraction>
-              <MoleFraction>0.0233022891274466</MoleFraction>
-              <Molarity>0.282299291340673</Molarity>
+              <MassFraction>0.105819647113924</MassFraction>
+              <MoleFraction>0.0233022891274446</MoleFraction>
+              <Molarity>0.282299291340648</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>1.00022002044246</FugacityCoeff>
               <Kvalue>0</Kvalue>
               <lnKvalue>0</lnKvalue>
-              <MassFlow>0.0100169815030087</MassFlow>
-              <MolarFlow>0.227609527556747</MolarFlow>
+              <MassFlow>0.0100169815030071</MassFlow>
+              <MolarFlow>0.227609527556712</MolarFlow>
               <Name>Carbon dioxide</Name>
-              <PartialPressure>2347.4857629493</PartialPressure>
+              <PartialPressure>2347.4857629491</PartialPressure>
               <PartialVolume>82.5469769413445</PartialVolume>
-              <VolumetricFlow>0.018788479283029</VolumetricFlow>
-              <VolumetricFraction>0.0233029541597093</VolumetricFraction>
+              <VolumetricFlow>0.0187884793471956</VolumetricFlow>
+              <VolumetricFraction>0.0233029542392956</VolumetricFraction>
               <DiffusionCoefficient>Infinity</DiffusionCoefficient>
             </Compound>
             <Compound>
@@ -451,20 +1597,20 @@
               <ComponentName></ComponentName>
               <ActivityCoeff>3.38699803079605E-28</ActivityCoeff>
               <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.55172277957271</MassFraction>
-              <MoleFraction>0.190891468444639</MoleFraction>
-              <Molarity>2.31258508424519</Molarity>
+              <MassFraction>0.551722779572705</MassFraction>
+              <MoleFraction>0.190891468444635</MoleFraction>
+              <Molarity>2.31258508424515</Molarity>
               <Molality>0</Molality>
               <FugacityCoeff>1.00029613066399</FugacityCoeff>
               <Kvalue>0</Kvalue>
               <lnKvalue>0</lnKvalue>
-              <MassFlow>0.0522265668852412</MassFlow>
-              <MolarFlow>1.86456861425352</MolarFlow>
+              <MassFlow>0.0522265668852364</MassFlow>
+              <MolarFlow>1.86456861425335</MolarFlow>
               <Name>Carbon monoxide</Name>
-              <PartialPressure>19230.5143066165</PartialPressure>
-              <PartialVolume>82.5532536094187</PartialVolume>
-              <VolumetricFlow>0.153926212731664</VolumetricFlow>
-              <VolumetricFraction>0.190911431693336</VolumetricFraction>
+              <PartialPressure>19230.5143066161</PartialPressure>
+              <PartialVolume>82.5532521325556</PartialVolume>
+              <VolumetricFlow>0.153926210503653</VolumetricFlow>
+              <VolumetricFraction>0.190911428929993</VolumetricFraction>
               <DiffusionCoefficient>Infinity</DiffusionCoefficient>
             </Compound>
           </Compounds>
@@ -477,30 +1623,30 @@
           <Properties>
             <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
             <compressibilityFactor>1.00019149884532</compressibilityFactor>
-            <density>0.117405897686288</density>
-            <enthalpy>2341.22698475716</enthalpy>
-            <entropy>5.36240266408426</entropy>
-            <heatCapacityCp>3.58670313201617</heatCapacityCp>
-            <heatCapacityCv>2.72868002782832</heatCapacityCv>
-            <jouleThomsonCoefficient>8.69448695146088E-07</jouleThomsonCoefficient>
-            <kinematic_viscosity>0.000222739629688441</kinematic_viscosity>
-            <massflow>0.0946608855369155</massflow>
+            <density>0.117405897686286</density>
+            <enthalpy>2341.2269847572</enthalpy>
+            <entropy>5.36240266408433</entropy>
+            <heatCapacityCp>3.58670313201625</heatCapacityCp>
+            <heatCapacityCv>2.72868002782838</heatCapacityCv>
+            <jouleThomsonCoefficient>8.69448695146081E-07</jouleThomsonCoefficient>
+            <kinematic_viscosity>0.000222739629688442</kinematic_viscosity>
+            <massflow>0.0946608855369077</massflow>
             <massfraction>1</massfraction>
-            <molar_enthalpy>22689.3593383547</molar_enthalpy>
+            <molar_enthalpy>22689.3593383548</molar_enthalpy>
             <molar_entropy>51.9682550023992</molar_entropy>
-            <molarflow>9.76768961675347</molarflow>
+            <molarflow>9.76768961675279</molarflow>
             <molarfraction>1</molarfraction>
-            <molecularWeight>9.69122579146596</molecularWeight>
+            <molecularWeight>9.69122579146584</molecularWeight>
             <speedOfSound>NaN</speedOfSound>
-            <thermalConductivity>0.331998782968392</thermalConductivity>
-            <viscosity>2.61509461738827E-05</viscosity>
-            <volumetric_flow>0.806270276045693</volumetric_flow>
-            <bulk_modulus>-7010390128.13626</bulk_modulus>
-            <gibbs_free_energy>-3021.1756793271</gibbs_free_energy>
-            <helmholtz_energy>-861074.872944608</helmholtz_energy>
-            <internal_energy>-855712.470280524</internal_energy>
-            <isothermal_compressibility>-1.42645413696235E-10</isothermal_compressibility>
-            <molar_gibbs_free_energy>-29278.8956640445</molar_gibbs_free_energy>
+            <thermalConductivity>0.331998782968393</thermalConductivity>
+            <viscosity>2.61509461738826E-05</viscosity>
+            <volumetric_flow>0.806270276045636</volumetric_flow>
+            <bulk_modulus>-7010390128.13632</bulk_modulus>
+            <gibbs_free_energy>-3021.17567932713</gibbs_free_energy>
+            <helmholtz_energy>-861074.872944619</helmholtz_energy>
+            <internal_energy>-855712.470280534</internal_energy>
+            <isothermal_compressibility>-1.42645413696234E-10</isothermal_compressibility>
+            <molar_gibbs_free_energy>-29278.8956640444</molar_gibbs_free_energy>
             <molar_helmholtz_energy>-8344871.01706406</molar_helmholtz_energy>
             <molar_internal_energy>-8292902.76206166</molar_internal_energy>
           </Properties>
@@ -1011,7 +2157,7 @@
             <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
             <jouleThomsonCoefficient>NaN</jouleThomsonCoefficient>
             <speedOfSound>Infinity</speedOfSound>
-            <bulk_modulus>2604996654.79253</bulk_modulus>
+            <bulk_modulus>2604996654.79254</bulk_modulus>
             <gibbs_free_energy>0</gibbs_free_energy>
             <helmholtz_energy>0</helmholtz_energy>
             <internal_energy>0</internal_energy>
@@ -1158,24 +2304,13 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.UnitOperations.Reactors.Reactor_PFR</Type>
-      <Length>1</Length>
-      <Volume>1</Volume>
-      <dV>0.05</dV>
-      <CatalystLoading>0.386</CatalystLoading>
-      <CatalystVoidFraction>0.4</CatalystVoidFraction>
-      <CatalystParticleDiameter>2</CatalystParticleDiameter>
-      <ResidenceTime>2.18277079629982</ResidenceTime>
+      <Type>DWSIM.UnitOperations.Streams.EnergyStream</Type>
+      <ComponentDescription>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</ComponentDescription>
+      <ComponentName>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</ComponentName>
+      <EnergyFlow>1221.80951271173</EnergyFlow>
       <MobileCompatible>true</MobileCompatible>
-      <OutletTemperature>298.15</OutletTemperature>
-      <ReactorOperationMode>Isothermic</ReactorOperationMode>
-      <ReactionSetID>DefaultSet</ReactionSetID>
-      <ReactionSetName></ReactionSetName>
-      <DeltaP>584.435409531608</DeltaP>
-      <DeltaT>0</DeltaT>
-      <DeltaQ>1221.80893332588</DeltaQ>
-      <ComponentDescription>ReatorPFR</ComponentDescription>
-      <ComponentName>PFR-5f3ea195-7284-4d1d-b2be-f1a347522946</ComponentName>
+      <Name2>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</Name2>
+      <code>0</code>
       <Visible>true</Visible>
       <PreferredFlashAlgorithmTag></PreferredFlashAlgorithmTag>
       <Calculated>true</Calculated>
@@ -1188,1051 +2323,9 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>None</SpecVarType>
-      <Name>PFR-5f3ea195-7284-4d1d-b2be-f1a347522946</Name>
+      <Name>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</Name>
       <DynamicProperties />
       <AttachedUtilities />
-      <PropertyPackage>PP-938ce079-8219-43f7-b4c5-37020707b002</PropertyPackage>
-      <ReactionConversions />
-      <CompoundConversions>
-        <Compound ID="Methane">0.753184130979692</Compound>
-        <Compound ID="Hydrogen">-234.149182282331</Compound>
-        <Compound ID="Water">0.835123560864071</Compound>
-        <Compound ID="Carbon dioxide">-2276095274.56747</Compound>
-        <Compound ID="Carbon monoxide">-18645686141.5352</Compound>
-      </CompoundConversions>
-    </SimulationObject>
-    <SimulationObject>
-      <Type>DWSIM.Thermodynamics.Streams.MaterialStream</Type>
-      <AtEquilibrium>true</AtEquilibrium>
-      <ComponentDescription>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</ComponentDescription>
-      <ComponentName>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</ComponentName>
-      <Name2>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</Name2>
-      <code>0</code>
-      <IsElectrolyteStream>false</IsElectrolyteStream>
-      <ReferenceSolvent>Methane</ReferenceSolvent>
-      <SpecType>Temperature_and_Pressure</SpecType>
-      <CompositionBasis>Molar_Flows</CompositionBasis>
-      <EditorState>{}</EditorState>
-      <MobileCompatible>true</MobileCompatible>
-      <FloatingTableAmountBasis>DefaultBasis</FloatingTableAmountBasis>
-      <Visible>true</Visible>
-      <PreferredFlashAlgorithmTag></PreferredFlashAlgorithmTag>
-      <Calculated>true</Calculated>
-      <DebugMode>false</DebugMode>
-      <Annotation></Annotation>
-      <IsAdjustAttached>false</IsAdjustAttached>
-      <AttachedAdjustId></AttachedAdjustId>
-      <AdjustVarType>None</AdjustVarType>
-      <IsSpecAttached>false</IsSpecAttached>
-      <AttachedSpecId></AttachedSpecId>
-      <SpecVarType>None</SpecVarType>
-      <Name>MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98</Name>
-      <DynamicProperties />
-      <AttachedUtilities />
-      <PropertyPackage>PP-938ce079-8219-43f7-b4c5-37020707b002</PropertyPackage>
-      <Phases>
-        <Phase>
-          <ID>0</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.470770738940274</MassFraction>
-              <MoleFraction>0.497512437810945</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>NaN</Kvalue>
-              <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0.0445638888888889</MassFlow>
-              <MolarFlow>2.77777777777778</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.227989373755689</VolumetricFlow>
-              <VolumetricFraction>0.0803312386652584</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.000591546043268042</MassFraction>
-              <MoleFraction>0.00497512437810945</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>NaN</Kvalue>
-              <lnKvalue>NaN</lnKvalue>
-              <MassFlow>5.59966666666667E-05</MassFlow>
-              <MolarFlow>0.0277777777777778</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.00227990672164537</VolumetricFlow>
-              <VolumetricFraction>0.000803316961549623</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.528637715016458</MassFraction>
-              <MoleFraction>0.497512437810945</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>NaN</Kvalue>
-              <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0.0500416666666667</MassFlow>
-              <MolarFlow>2.77777777777778</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0.227864024996229</VolumetricFlow>
-              <VolumetricFraction>0.0802870724791479</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>NaN</Kvalue>
-              <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>NaN</Kvalue>
-              <lnKvalue>NaN</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Mixture</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Mixture</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-            <density>0.206624471723077</density>
-            <enthalpy>1893.44686680684</enthalpy>
-            <entropy>3.58053762708231</entropy>
-            <heatCapacityCp>3.35153256037007</heatCapacityCp>
-            <heatCapacityCv>2.86063138743499</heatCapacityCv>
-            <massflow>0.0946615522222222</massflow>
-            <molar_enthalpy>32102.0810977144</molar_enthalpy>
-            <molar_entropy>60.7055372363612</molar_entropy>
-            <molarflow>5.58333333333333</molarflow>
-            <molecularWeight>16.9543078606965</molecularWeight>
-            <pressure>101325</pressure>
-            <surfaceTension>NaN</surfaceTension>
-            <temperature>1000</temperature>
-            <thermalConductivity>0.134474780705241</thermalConductivity>
-            <volumetric_flow>0.458133305473563</volumetric_flow>
-          </Properties>
-        </Phase>
-        <Phase>
-          <ID>1</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>NaN</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>NaN</MassFraction>
-              <MoleFraction>NaN</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>NaN</MassFlow>
-              <MolarFlow>NaN</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>3.56445077136499E-05</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>NaN</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>NaN</MassFraction>
-              <MoleFraction>NaN</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>NaN</MassFlow>
-              <MolarFlow>NaN</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>2.55002235074774E-05</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>NaN</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>NaN</MassFraction>
-              <MoleFraction>NaN</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>NaN</MassFlow>
-              <MolarFlow>NaN</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>1.73065043772808E-05</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>NaN</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>NaN</MassFraction>
-              <MoleFraction>NaN</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>NaN</MassFlow>
-              <MolarFlow>NaN</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>3.17966074325363E-05</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>NaN</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>NaN</MassFraction>
-              <MoleFraction>NaN</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>NaN</MassFlow>
-              <MolarFlow>NaN</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>3.35833885975888E-05</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Overall Liquid</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Overall Liquid</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-            <compressibilityFactor>0</compressibilityFactor>
-            <density>NaN</density>
-            <enthalpy>0</enthalpy>
-            <entropy>0</entropy>
-            <heatCapacityCp>0</heatCapacityCp>
-            <heatCapacityCv>0</heatCapacityCv>
-            <kinematic_viscosity>NaN</kinematic_viscosity>
-            <massflow>0</massflow>
-            <massfraction>0</massfraction>
-            <molar_enthalpy>NaN</molar_enthalpy>
-            <molar_entropy>NaN</molar_entropy>
-            <molarflow>0</molarflow>
-            <molarfraction>0</molarfraction>
-            <molecularWeight>NaN</molecularWeight>
-            <thermalConductivity>0</thermalConductivity>
-            <viscosity>0</viscosity>
-            <volumetric_flow>0</volumetric_flow>
-          </Properties>
-        </Phase>
-        <Phase>
-          <ID>2</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>1.07715145356669E-15</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.470770738940274</MassFraction>
-              <MoleFraction>0.497512437810945</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>1.00028482908172</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0.0445638888888889</MassFlow>
-              <MolarFlow>2.77777777777778</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0.0820761707149842</PartialVolume>
-              <VolumetricFlow>0.227989373755689</VolumetricFlow>
-              <VolumetricFraction>0.497648546900602</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>1.25610500627626E-142</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.000591546043268042</MassFraction>
-              <MoleFraction>0.00497512437810945</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>1.00029064523872</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>5.59966666666667E-05</MassFlow>
-              <MolarFlow>0.0277777777777778</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0.0820766381421478</PartialVolume>
-              <VolumetricFlow>0.00227990672164537</VolumetricFlow>
-              <VolumetricFraction>0.00497651381029519</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0.000182073277681191</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0.528637715016458</MassFraction>
-              <MoleFraction>0.497512437810945</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0.999734795829196</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0.0500416666666667</MassFlow>
-              <MolarFlow>2.77777777777778</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0.0820310451636885</PartialVolume>
-              <VolumetricFlow>0.227864024996229</VolumetricFlow>
-              <VolumetricFraction>0.497374939289103</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>5.05804457969683E-12</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>1.00026421206777</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>3.4071878870233E-28</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>1.00045485453423</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Vapor</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Vapor</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-            <compressibilityFactor>1.00001128491289</compressibilityFactor>
-            <density>0.206624471723077</density>
-            <enthalpy>1893.44686680684</enthalpy>
-            <entropy>3.58053762708231</entropy>
-            <heatCapacityCp>3.35153256037007</heatCapacityCp>
-            <heatCapacityCv>2.860631387435</heatCapacityCv>
-            <kinematic_viscosity>0.000160292951527462</kinematic_viscosity>
-            <massflow>0.0946615522222222</massflow>
-            <massfraction>1</massfraction>
-            <molar_enthalpy>32102.0810977144</molar_enthalpy>
-            <molar_entropy>60.7055372363612</molar_entropy>
-            <molarflow>5.58333333333333</molarflow>
-            <molarfraction>1</molarfraction>
-            <molecularWeight>16.9543078606965</molecularWeight>
-            <thermalConductivity>0.134474780705241</thermalConductivity>
-            <viscosity>3.31204464302946E-05</viscosity>
-            <volumetric_flow>0.458133305473563</volumetric_flow>
-          </Properties>
-        </Phase>
-        <Phase>
-          <ID>3</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Liquid 1</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Liquid 1</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-          </Properties>
-        </Phase>
-        <Phase>
-          <ID>4</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Liquid 2</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Liquid 2</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-          </Properties>
-        </Phase>
-        <Phase>
-          <ID>5</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Liquid 3</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Liquid 3</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-          </Properties>
-        </Phase>
-        <Phase>
-          <ID>6</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>0</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Aqueous</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Aqueous</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-          </Properties>
-        </Phase>
-        <Phase>
-          <ID>7</ID>
-          <Compounds>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Methane</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Hydrogen</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Water</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon dioxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-            <Compound>
-              <Type>DWSIM.Thermodynamics.BaseClasses.Compound</Type>
-              <ComponentDescription></ComponentDescription>
-              <ComponentName></ComponentName>
-              <ActivityCoeff>0</ActivityCoeff>
-              <PetroleumFraction>false</PetroleumFraction>
-              <MassFraction>0</MassFraction>
-              <MoleFraction>0</MoleFraction>
-              <Molarity>0</Molarity>
-              <Molality>0</Molality>
-              <FugacityCoeff>NaN</FugacityCoeff>
-              <Kvalue>0</Kvalue>
-              <lnKvalue>0</lnKvalue>
-              <MassFlow>0</MassFlow>
-              <MolarFlow>0</MolarFlow>
-              <Name>Carbon monoxide</Name>
-              <PartialPressure>0</PartialPressure>
-              <PartialVolume>0</PartialVolume>
-              <VolumetricFlow>0</VolumetricFlow>
-              <VolumetricFraction>0</VolumetricFraction>
-            </Compound>
-          </Compounds>
-          <Properties>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties>
-          <ComponentDescription></ComponentDescription>
-          <ComponentName>Solid</ComponentName>
-          <Compounds>System.Collections.Generic.Dictionary`2[System.String,DWSIM.Interfaces.ICompound]</Compounds>
-          <Name>Solid</Name>
-          <Properties1>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Properties1>
-          <Properties>
-            <Type>DWSIM.Thermodynamics.BaseClasses.PhaseProperties</Type>
-          </Properties>
-        </Phase>
-      </Phases>
     </SimulationObject>
   </SimulationObjects>
   <Settings>
@@ -2252,10 +2345,12 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       <ForcedSolids>[]</ForcedSolids>
       <PropertyOverrides>{}</PropertyOverrides>
       <Parameters>
-        <Parameter ID="PP_IDEAL_MIXRULE_LIQDENS" Value="0" />
         <Parameter ID="PP_USEEXPLIQDENS" Value="0" />
         <Parameter ID="PP_USE_EOS_LIQDENS" Value="0" />
         <Parameter ID="PP_USE_EOS_VOLUME_SHIFT" Value="0" />
+        <Parameter ID="PP_EXP_LIQDENS_PCORRECTION" Value="1" />
+        <Parameter ID="PP_LIQVISC_PCORRECTION" Value="1" />
+        <Parameter ID="PP_IDEAL_MIXRULE_LIQDENS" Value="0" />
         <Parameter ID="PP_PHFILT" Value="0.001" />
         <Parameter ID="PP_PSFILT" Value="0.001" />
         <Parameter ID="PP_PHFELT" Value="0.001" />
@@ -2274,7 +2369,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       <InteractionParameters />
     </SelectedPropertyPackage>
     <SimulationMode></SimulationMode>
-    <BackupFileName>90615245.dwbcs</BackupFileName>
+    <BackupFileName>27806273.dwbcs</BackupFileName>
     <FilePath>C:\Users\ptc0\Source\Repos\dwsim5\DWSIM\bin\Debug\samples\Hydrogen production through Methane Catalytic Steam Reforming.dwxml</FilePath>
     <FlowsheetQuickConnect>false</FlowsheetQuickConnect>
     <FlowsheetShowCalculationQueue>false</FlowsheetShowCalculationQueue>
@@ -2283,7 +2378,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
     <FlowsheetShowWatchWindow>false</FlowsheetShowWatchWindow>
     <FlowsheetSnapToGrid>false</FlowsheetSnapToGrid>
     <FractionNumberFormat>#0.0######</FractionNumberFormat>
-    <Key>92601B88A509EC722CB388D598DA6B8C1808E925</Key>
+    <Key>C5D56E35113103677E044A66EAE1ECBAC3F9C89E</Key>
     <NumberFormat>#0.0####</NumberFormat>
     <Password></Password>
     <SimulationAuthor>Daniel-PC\Daniel</SimulationAuthor>
@@ -2619,6 +2714,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
         <Description>Default Flash Algorithm, based on the Rachford-Rice VLE equations.</Description>
         <Name>Nested Loops (VLE)</Name>
         <MobileCompatible>true</MobileCompatible>
+        <Order>1</Order>
         <StabSearchSeverity>0</StabSearchSeverity>
         <InternalUseOnly>false</InternalUseOnly>
         <Tag>Nested Loops (VLE)</Tag>
@@ -2717,7 +2813,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       <Width>70</Width>
       <X>5222</X>
       <Y>3740</Y>
-      <Selected>true</Selected>
+      <Selected>false</Selected>
       <InputConnectors>
         <Connector IsAttached="True" ConnType="ConIn" AttachedFromObjID="MAT-407b6ae5-849b-4b85-aaa5-ce2ec4806f98" AttachedFromConnIndex="0" AttachedFromEnergyConn="False" />
         <Connector IsAttached="True" ConnType="ConEn" AttachedFromObjID="EN-bfaa2be1-1e89-4683-b51b-ef145653d863" AttachedFromConnIndex="0" AttachedFromEnergyConn="True" />
@@ -2842,8 +2938,39 @@ Based on the following document: http://www.chem.mtu.edu/~jmkeith/fuel_cell_curr
       <Name>TEXT-17bdf760-af84-495b-9cf6-3971e88db753</Name>
       <Tag>TEXT1</Tag>
       <Width>568</Width>
-      <X>5134</X>
-      <Y>3588</Y>
+      <X>5043</X>
+      <Y>3552</Y>
+      <Selected>false</Selected>
+      <InputConnectors />
+      <OutputConnectors />
+      <EnergyConnector>
+        <Connector IsAttached="False" />
+      </EnergyConnector>
+      <SpecialConnectors />
+    </GraphicObject>
+    <GraphicObject>
+      <Type>DWSIM.DrawingTools.GraphicObjects.OxyPlotGraphic</Type>
+      <OwnerID>PFR-5f3ea195-7284-4d1d-b2be-f1a347522946</OwnerID>
+      <ModelName>Concentration Profile</ModelName>
+      <Calculated>false</Calculated>
+      <Rotation>0</Rotation>
+      <Active>true</Active>
+      <Description>Chart Object</Description>
+      <FlippedH>false</FlippedH>
+      <FlippedV>false</FlippedV>
+      <IsEnergyStream>false</IsEnergyStream>
+      <ObjectType>GO_Chart</ObjectType>
+      <Shape>0</Shape>
+      <ShapeOverride>DefaultShape</ShapeOverride>
+      <Status>NotCalculated</Status>
+      <AutoSize>false</AutoSize>
+      <Height>400</Height>
+      <IsConnector>false</IsConnector>
+      <Name>CHART-60f19781-2b35-4057-9f43-b60960483134</Name>
+      <Tag>CHART1</Tag>
+      <Width>500</Width>
+      <X>5630</X>
+      <Y>3547</Y>
       <Selected>false</Selected>
       <InputConnectors />
       <OutputConnectors />
@@ -2870,10 +2997,12 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       <ForcedSolids>[]</ForcedSolids>
       <PropertyOverrides>{}</PropertyOverrides>
       <Parameters>
-        <Parameter ID="PP_IDEAL_MIXRULE_LIQDENS" Value="0" />
         <Parameter ID="PP_USEEXPLIQDENS" Value="0" />
         <Parameter ID="PP_USE_EOS_LIQDENS" Value="0" />
         <Parameter ID="PP_USE_EOS_VOLUME_SHIFT" Value="0" />
+        <Parameter ID="PP_EXP_LIQDENS_PCORRECTION" Value="1" />
+        <Parameter ID="PP_LIQVISC_PCORRECTION" Value="1" />
+        <Parameter ID="PP_IDEAL_MIXRULE_LIQDENS" Value="0" />
         <Parameter ID="PP_PHFILT" Value="0.001" />
         <Parameter ID="PP_PSFILT" Value="0.001" />
         <Parameter ID="PP_PHFELT" Value="0.001" />
@@ -3941,16 +4070,15 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
   <PanelLayout>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;!--DockPanel configuration file. Author: Weifen Luo, all rights reserved.--&gt;
 &lt;!--!!! AUTOMATICALLY GENERATED FILE. DO NOT MODIFY !!!--&gt;
-&lt;DockPanel FormatVersion="1.0" DockLeftPortion="371" DockRightPortion="0.25" DockTopPortion="0.25" DockBottomPortion="0.25" ActiveDocumentPane="2" ActivePane="3"&gt;
-  &lt;Contents Count="6"&gt;
+&lt;DockPanel FormatVersion="1.0" DockLeftPortion="371" DockRightPortion="0.25" DockTopPortion="0.25" DockBottomPortion="0.25" ActiveDocumentPane="2" ActivePane="-1"&gt;
+  &lt;Contents Count="5"&gt;
     &lt;Content ID="0" PersistString="DWSIM.LogPanel" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" /&gt;
     &lt;Content ID="1" PersistString="DWSIM.SimulationObjectsPanel" AutoHidePortion="580" IsHidden="False" IsFloat="False" /&gt;
     &lt;Content ID="2" PersistString="DWSIM.MaterialStreamPanel" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" /&gt;
     &lt;Content ID="3" PersistString="DWSIM.SpreadsheetForm" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" /&gt;
     &lt;Content ID="4" PersistString="DWSIM.FlowsheetSurface" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" /&gt;
-    &lt;Content ID="5" PersistString="DWSIM.UnitOperations.EditingForm_ReactorPFR" AutoHidePortion="371" IsHidden="False" IsFloat="False" /&gt;
   &lt;/Contents&gt;
-  &lt;Panes Count="4"&gt;
+  &lt;Panes Count="3"&gt;
     &lt;Pane ID="0" DockState="DockBottom" ActiveContent="0"&gt;
       &lt;Contents Count="1"&gt;
         &lt;Content ID="0" RefID="0" /&gt;
@@ -3968,11 +4096,6 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
         &lt;Content ID="2" RefID="4" /&gt;
       &lt;/Contents&gt;
     &lt;/Pane&gt;
-    &lt;Pane ID="3" DockState="DockLeft" ActiveContent="5"&gt;
-      &lt;Contents Count="1"&gt;
-        &lt;Content ID="0" RefID="5" /&gt;
-      &lt;/Contents&gt;
-    &lt;/Pane&gt;
   &lt;/Panes&gt;
   &lt;DockWindows&gt;
     &lt;DockWindow ID="0" DockState="Document" ZOrderIndex="1"&gt;
@@ -3981,9 +4104,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       &lt;/NestedPanes&gt;
     &lt;/DockWindow&gt;
     &lt;DockWindow ID="1" DockState="DockLeft" ZOrderIndex="4"&gt;
-      &lt;NestedPanes Count="1"&gt;
-        &lt;Pane ID="0" RefID="3" PrevPane="-1" Alignment="Bottom" Proportion="0.5" /&gt;
-      &lt;/NestedPanes&gt;
+      &lt;NestedPanes Count="0" /&gt;
     &lt;/DockWindow&gt;
     &lt;DockWindow ID="2" DockState="DockRight" ZOrderIndex="3"&gt;
       &lt;NestedPanes Count="1"&gt;
