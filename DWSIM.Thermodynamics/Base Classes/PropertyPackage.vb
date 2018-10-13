@@ -393,10 +393,10 @@ Namespace PropertyPackages
                             If Flowsheet.FlowsheetOptions.FlashAlgorithms.Count > 0 Then
                                 Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
                             Else
-                                Return New NestedLoops()
+                                Return New NestedLoopsSVLLE()
                             End If
                         Else
-                            Return New NestedLoops()
+                            Return New NestedLoopsSVLLE()
                         End If
                     End If
 
