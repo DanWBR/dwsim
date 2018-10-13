@@ -49,9 +49,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Pb, Pd, Pmin, Pmax, Px, soma_x, soma_x1, soma_y, soma_x2 As Double
         Dim proppack As PropertyPackages.PropertyPackage
 
-        Dim prevres As PreviousResults
+        Public prevres As PreviousResults
 
-        Private Class PreviousResults
+        Public Class PreviousResults
             Property V As Double
             Property L1 As Double
             Property L2 As Double

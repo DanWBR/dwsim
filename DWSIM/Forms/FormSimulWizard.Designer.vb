@@ -67,13 +67,6 @@ Partial Class FormSimulWizard
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.WizardPage4 = New AeroWizard.WizardPage()
-        Me.lblFlashAlgoDesc = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.ListBoxPP = New System.Windows.Forms.ListBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.WizardPage5 = New AeroWizard.WizardPage()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -94,7 +87,6 @@ Partial Class FormSimulWizard
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.WizardPage4.SuspendLayout()
         Me.WizardPage5.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -106,7 +98,6 @@ Partial Class FormSimulWizard
         Me.StepWizardControl1.Pages.Add(Me.WizardPage1)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage2)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage3)
-        Me.StepWizardControl1.Pages.Add(Me.WizardPage4)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage5)
         Me.StepWizardControl1.ShowProgressInTaskbarIcon = True
         '
@@ -323,7 +314,6 @@ Partial Class FormSimulWizard
         Me.WizardPage3.Controls.Add(Me.GroupBox12)
         Me.WizardPage3.Controls.Add(Me.Label4)
         Me.WizardPage3.Name = "WizardPage3"
-        Me.WizardPage3.NextPage = Me.WizardPage4
         resources.ApplyResources(Me.WizardPage3, "WizardPage3")
         '
         'LinkLabel2
@@ -423,52 +413,6 @@ Partial Class FormSimulWizard
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
-        '
-        'WizardPage4
-        '
-        Me.WizardPage4.Controls.Add(Me.lblFlashAlgoDesc)
-        Me.WizardPage4.Controls.Add(Me.Label9)
-        Me.WizardPage4.Controls.Add(Me.ListBoxPP)
-        Me.WizardPage4.Controls.Add(Me.Label6)
-        Me.WizardPage4.Controls.Add(Me.LinkLabel1)
-        Me.WizardPage4.Controls.Add(Me.Label5)
-        Me.WizardPage4.Name = "WizardPage4"
-        Me.WizardPage4.NextPage = Me.WizardPage5
-        resources.ApplyResources(Me.WizardPage4, "WizardPage4")
-        '
-        'lblFlashAlgoDesc
-        '
-        resources.ApplyResources(Me.lblFlashAlgoDesc, "lblFlashAlgoDesc")
-        Me.lblFlashAlgoDesc.Name = "lblFlashAlgoDesc"
-        '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Name = "Label9"
-        '
-        'ListBoxPP
-        '
-        Me.ListBoxPP.FormattingEnabled = True
-        resources.ApplyResources(Me.ListBoxPP, "ListBoxPP")
-        Me.ListBoxPP.Items.AddRange(New Object() {resources.GetString("ListBoxPP.Items"), resources.GetString("ListBoxPP.Items1"), resources.GetString("ListBoxPP.Items2"), resources.GetString("ListBoxPP.Items3"), resources.GetString("ListBoxPP.Items4"), resources.GetString("ListBoxPP.Items5"), resources.GetString("ListBoxPP.Items6"), resources.GetString("ListBoxPP.Items7"), resources.GetString("ListBoxPP.Items8")})
-        Me.ListBoxPP.Name = "ListBoxPP"
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        '
-        'LinkLabel1
-        '
-        resources.ApplyResources(Me.LinkLabel1, "LinkLabel1")
-        Me.LinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.TabStop = True
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
         '
         'WizardPage5
         '
@@ -582,8 +526,6 @@ Partial Class FormSimulWizard
         Me.GroupBox6.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.WizardPage4.ResumeLayout(False)
-        Me.WizardPage4.PerformLayout()
         Me.WizardPage5.ResumeLayout(False)
         Me.WizardPage5.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -595,7 +537,6 @@ Partial Class FormSimulWizard
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents WizardPage2 As AeroWizard.WizardPage
     Friend WithEvents WizardPage3 As AeroWizard.WizardPage
-    Friend WithEvents WizardPage4 As AeroWizard.WizardPage
     Friend WithEvents WizardPage5 As AeroWizard.WizardPage
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
@@ -614,10 +555,6 @@ Partial Class FormSimulWizard
     Public WithEvents ListViewPP As System.Windows.Forms.ListView
     Public WithEvents GroupBox12 As System.Windows.Forms.GroupBox
     Public WithEvents dgvpp As System.Windows.Forms.DataGridView
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
-    Friend WithEvents ListBoxPP As System.Windows.Forms.ListBox
-    Public WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Public WithEvents ComboBox2 As System.Windows.Forms.ComboBox
@@ -631,8 +568,6 @@ Partial Class FormSimulWizard
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents lblFlashAlgoDesc As System.Windows.Forms.Label
-    Public WithEvents Label9 As System.Windows.Forms.Label
     Public WithEvents btnInfoRight As System.Windows.Forms.Button
     Public WithEvents btnInfoLeft As System.Windows.Forms.Button
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel

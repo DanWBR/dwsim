@@ -912,204 +912,50 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="lblFlashAlgoDesc.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="WizardPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 404</value>
   </data>
-  <data name="lblFlashAlgoDesc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 319</value>
-  </data>
-  <data name="lblFlashAlgoDesc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 48</value>
-  </data>
-  <data name="lblFlashAlgoDesc.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="lblFlashAlgoDesc.Text" xml:space="preserve">
-    <value>Descrição do Algoritmo</value>
-  </data>
-  <data name="&gt;&gt;lblFlashAlgoDesc.Name" xml:space="preserve">
-    <value>lblFlashAlgoDesc</value>
-  </data>
-  <data name="&gt;&gt;lblFlashAlgoDesc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFlashAlgoDesc.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
-  </data>
-  <data name="&gt;&gt;lblFlashAlgoDesc.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 319</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 15</value>
-  </data>
-  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Descrição do Algoritmo</value>
-  </data>
-  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
-    <value>Label9</value>
-  </data>
-  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
-  </data>
-  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ListBoxPP.ItemHeight" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="ListBoxPP.Items" xml:space="preserve">
-    <value>Loops Aninhados (Equilíbrio Líquido-Vapor)</value>
-  </data>
-  <data name="ListBoxPP.Items1" xml:space="preserve">
-    <value>Loops Aninhados (Equilíbrio Líquido-Líquido-Vapor)</value>
-  </data>
-  <data name="ListBoxPP.Items2" xml:space="preserve">
-    <value>Inside-Out (Equilíbrio Líquido-Vapor)</value>
-  </data>
-  <data name="ListBoxPP.Items3" xml:space="preserve">
-    <value>Inside-Out (Equilíbrio Líquido-Líquido-Vapor)</value>
-  </data>
-  <data name="ListBoxPP.Items4" xml:space="preserve">
-    <value>Minimização da EnergyFlow Livre de Gibbs (Equilíbrio Líquido-Vapor)</value>
-  </data>
-  <data name="ListBoxPP.Items5" xml:space="preserve">
-    <value>Minimização da EnergyFlow Livre de Gibbs (Equilíbrio Líquido-Líquido-Vapor)</value>
-  </data>
-  <data name="ListBoxPP.Items6" xml:space="preserve">
-    <value>Loops Aninhados (Equilíbrio Sólido-Líquido - Sistemas Eutéticos)</value>
-  </data>
-  <data name="ListBoxPP.Items7" xml:space="preserve">
-    <value>Loops Aninhados (Equilíbrio Sólido-Líquido - Solução Sólida)</value>
-  </data>
-  <data name="ListBoxPP.Items8" xml:space="preserve">
-    <value>Loops Aninhados (Equilíbrio Líquido-Líquido-Vapor, Phases Líquidas Completamente Imiscíveis)</value>
-  </data>
-  <data name="ListBoxPP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 164</value>
-  </data>
-  <data name="ListBoxPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 139</value>
-  </data>
-  <data name="ListBoxPP.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;ListBoxPP.Name" xml:space="preserve">
-    <value>ListBoxPP</value>
-  </data>
-  <data name="&gt;&gt;ListBoxPP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ListBoxPP.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
-  </data>
-  <data name="&gt;&gt;ListBoxPP.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 164</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 15</value>
-  </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Algoritmo Flash Padrão</value>
-  </data>
-  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
-    <value>Label6</value>
-  </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
-  </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LinkLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 373</value>
-  </data>
-  <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 15</value>
-  </data>
-  <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="LinkLabel1.Text" xml:space="preserve">
-    <value>Clique aqui para saber mais detalhes e os limites de aplicabilidade de cada algoritmo.</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel1.Name" xml:space="preserve">
-    <value>LinkLabel1</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel1.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
+  <data name="WizardPage3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="WizardPage3.Text" xml:space="preserve">
+    <value>Pacote de Propriedades</value>
   </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
+  <data name="&gt;&gt;WizardPage3.Name" xml:space="preserve">
+    <value>WizardPage3</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>709, 146</value>
+  <data name="&gt;&gt;WizardPage3.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+  <data name="WizardPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 404</value>
+  </data>
+  <data name="WizardPage2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>O Algoritmo Flash é responsável por determinar as fases em equilíbrio, suas quantidades (e distribuição dos componentes nestas fases) nas diversas condições do processo simulado.
-
-Selecione um Algoritmo Flash Padrão, adequado para a sua simulação. Se seu sistema pode apresentar instabilidades na Phase líquida (sistemas imiscíveis), selecione um algoritmo capaz de prever o equilíbrio entre três Phases (ELLV). Para calcular equilíbrio incluindo uma Phase sólida, selecione o algoritmo correspondente. Para sistemas complexos, utilize o algoritmo de minimização de Gibbs mais adequado (duas ou três Phases).
-
-Clique em "Próximo" para continuar.</value>
+  <data name="WizardPage2.Text" xml:space="preserve">
+    <value>Componentes</value>
   </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
+  <data name="&gt;&gt;WizardPage2.Name" xml:space="preserve">
+    <value>WizardPage2</value>
   </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;WizardPage2.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
+  <data name="WizardPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 404</value>
   </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="WizardPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="WizardPage1.Text" xml:space="preserve">
+    <value>Introdução</value>
+  </data>
+  <data name="&gt;&gt;WizardPage1.Name" xml:space="preserve">
+    <value>WizardPage1</value>
+  </data>
+  <data name="&gt;&gt;WizardPage1.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1250,66 +1096,6 @@ Clique em "Próximo" para continuar.</value>
     <value>WizardPage5</value>
   </data>
   <data name="&gt;&gt;WizardPage5.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="WizardPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>715, 404</value>
-  </data>
-  <data name="WizardPage4.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="WizardPage4.Text" xml:space="preserve">
-    <value>Algoritmo Flash</value>
-  </data>
-  <data name="&gt;&gt;WizardPage4.Name" xml:space="preserve">
-    <value>WizardPage4</value>
-  </data>
-  <data name="&gt;&gt;WizardPage4.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="WizardPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>715, 404</value>
-  </data>
-  <data name="WizardPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="WizardPage3.Text" xml:space="preserve">
-    <value>Pacote de Propriedades</value>
-  </data>
-  <data name="&gt;&gt;WizardPage3.Name" xml:space="preserve">
-    <value>WizardPage3</value>
-  </data>
-  <data name="&gt;&gt;WizardPage3.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="WizardPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>715, 404</value>
-  </data>
-  <data name="WizardPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="WizardPage2.Text" xml:space="preserve">
-    <value>Componentes</value>
-  </data>
-  <data name="&gt;&gt;WizardPage2.Name" xml:space="preserve">
-    <value>WizardPage2</value>
-  </data>
-  <data name="&gt;&gt;WizardPage2.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="WizardPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>715, 404</value>
-  </data>
-  <data name="WizardPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="WizardPage1.Text" xml:space="preserve">
-    <value>Introdução</value>
-  </data>
-  <data name="&gt;&gt;WizardPage1.Name" xml:space="preserve">
-    <value>WizardPage1</value>
-  </data>
-  <data name="&gt;&gt;WizardPage1.Type" xml:space="preserve">
     <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="StepWizardControl1.Size" type="System.Drawing.Size, System.Drawing">

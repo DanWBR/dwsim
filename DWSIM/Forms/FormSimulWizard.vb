@@ -147,8 +147,6 @@ Public Class FormSimulWizard
 
         ComboBox2.SelectedIndex = 0
 
-        ListBoxPP.SelectedIndex = 0
-
         Me.loaded = True
 
     End Sub
@@ -198,7 +196,7 @@ Public Class FormSimulWizard
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
-    Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+    Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Excel_Add-In_for_Thermodynamic_Calculations#Flash_Algorithms_and_Results_Validation")
     End Sub
 
@@ -372,31 +370,6 @@ Public Class FormSimulWizard
         Else
             Me.Button8.Enabled = False
         End If
-    End Sub
-
-    Private Sub ListBoxPP_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ListBoxPP.SelectedIndexChanged
-        Me.FrmChild.Options.FlashAlgorithms.Clear()
-        Select Case ListBoxPP.SelectedIndex
-            Case 0
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name & " (1)"})
-            Case 1
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3() With {.Tag = .Name & " (1)"})
-            Case 2
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonBrittInsideOut() With {.Tag = .Name & " (1)"})
-            Case 3
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P() With {.Tag = .Name & " (1)"})
-            Case 4
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = True, .Tag = .Name & " (1)"})
-            Case 5
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = False, .Tag = .Name & " (1)"})
-            Case 6
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.Tag = .Name & " (1)"})
-            Case 7
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.SolidSolution = True, .Tag = .Name & " (1)"})
-            Case 8
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsImmiscible With {.Tag = .Name & " (1)"})
-        End Select
-        lblFlashAlgoDesc.Text = Me.FrmChild.Options.FlashAlgorithms(0).Description
     End Sub
 
     Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError

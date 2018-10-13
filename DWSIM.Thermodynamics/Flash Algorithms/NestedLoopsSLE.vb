@@ -364,10 +364,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             IObj?.Paragraphs.Add(String.Format("Fusion Temperatures: {0} K", Tf.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Fusion Enthalpies: {0} kJ/mol", Hf.ToMathArrayString))
 
-            If Vz.MaxY = 1.0# Then 'only a single component
+            If Vz.MaxY >= 0.999999 Then 'only a single component
                 ecount = 0
                 For i = 0 To n
-                    If Vz(i) = 1 Then
+                    If Vz(i) >= 0.999999 Then
                         If T > Tf(i) Then
                             'above melting temperature, only liquid
                             L = 1

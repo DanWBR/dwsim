@@ -280,6 +280,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Flash Algorithms\CAPEOPEN_Equilibrium_Server.vb" />
+    <Compile Include="Flash Algorithms\NestedLoopsSVLLE.vb" />
     <Compile Include="Flash Algorithms\SteamTables.vb" />
     <Compile Include="Helper Classes\ConsoleRedirection.vb" />
     <Compile Include="Helper Classes\PhaseEnvelopeSettings.vb" />

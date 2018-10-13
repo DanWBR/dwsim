@@ -208,6 +208,7 @@ Namespace Enums
         SourWater = 14
         CAPE_OPEN_Equilibrium_Server = 15
         SteamTables = 16
+        Nested_Loops_SVLLE = 17
     End Enum
 
     Public Enum FlashSetting
