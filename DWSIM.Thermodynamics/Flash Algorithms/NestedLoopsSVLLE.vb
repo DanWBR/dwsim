@@ -75,6 +75,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim result As Object = nl1.Flash_PT(Vz, P, T, PP)
 
+            IObj?.SetCurrent
+
             L1 = result(0)
             V = result(1)
             Vx1 = result(2)
@@ -86,11 +88,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Dim stresult = StabTest(T, P, Vx1, PP.RET_VTC, PP)
 
+                IObj?.SetCurrent
+
                 If stresult(0) = False Then
 
                     nl2.prevres = New NestedLoops3PV3.PreviousResults With {.V = V, .L1 = L1, .Vx1 = Vx1, .Vy = Vy}
 
                     result = nl2.Flash_PT(Vz, P, T, PP)
+
+                    IObj?.SetCurrent
 
                     L1 = result(0)
                     V = result(1)
@@ -103,6 +109,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 result = nl3.Flash_SL(Vx1, P, T, PP)
 
+                IObj?.SetCurrent
+
                 'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
 
                 S = result(1) * L1
@@ -114,6 +122,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If L2 > 0 Then
 
                     result = nl3.Flash_SL(Vx2, P, T, PP)
+
+                    IObj?.SetCurrent
 
                     'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
 
@@ -131,6 +141,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
                 result = nl3.Flash_PT(Vz, P, T, PP)
+
+                IObj?.SetCurrent
 
                 L1 = result(0)
                 V = result(1)
