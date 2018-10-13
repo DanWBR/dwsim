@@ -354,6 +354,15 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Hf = PP.RET_VHF 'Enthalpy of fusion
             Tc = PP.RET_VTC 'Critical Temperature
 
+            If Tf.Sum = 0.0 AndAlso PP.ForcedSolids.Count = 0 Then
+                'impossible to calculate solids. return liquid solution only.
+                L = 1
+                L_old = L
+                Vx = Vz.Clone
+                Vs = PP.RET_NullVector
+                GoTo out
+            End If
+
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))

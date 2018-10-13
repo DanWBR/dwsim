@@ -572,16 +572,16 @@ Partial Class FormSimulSettings
         resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
-        Me.ogc1.AllowUserToResizeRows = False
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
         Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.ogc1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5})
         Me.ogc1.MultiSelect = False
         Me.ogc1.Name = "ogc1"
         Me.ogc1.ReadOnly = True
         Me.ogc1.RowHeadersVisible = False
+        Me.ogc1.RowTemplate.Height = 30
         Me.ogc1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.ogc1.ShowCellErrors = False
         Me.ogc1.ShowEditingIcon = False

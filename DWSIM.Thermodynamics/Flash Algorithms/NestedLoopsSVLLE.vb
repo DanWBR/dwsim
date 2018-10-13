@@ -112,6 +112,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 End If
 
+                IObj?.SetCurrent
+
                 result = nl3.Flash_SL(Vx1, P, T, PP)
 
                 IObj?.SetCurrent
@@ -142,6 +144,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 
             Else
+
+                IObj?.SetCurrent
 
                 'Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
@@ -183,7 +187,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.SetCurrent()
 
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim i, j, n, ecount As Integer
+            Dim j, n, ecount As Integer
 
             d1 = Date.Now
 
@@ -268,6 +272,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.SetCurrent()
 
+            Dim V, L1, L2, Vy(), Vx1(), Vx2(), Vs(), Ki(), S As Double
+            Dim tmp As Object = Flash_PT(Vz, P, T, PP)
+            'Return New Object() {L1, V, Vx1, Vy, 0, L2, Vx2, S, Vs}
+
+            V = tmp(1)
+            L1 = tmp(0)
+            L2 = tmp(5)
+            S = tmp(7)
+            Vy = tmp(3)
+            Vx1 = tmp(2)
+            Vx2 = tmp(6)
+            Vs = tmp(8)
+            ecount = tmp(4)
+
+            Ki = Vy.DivideY(Vx1)
+
             d2 = Date.Now
 
             dt = d2 - d1
@@ -278,7 +298,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Close()
 
-            Return Flash_PT(Vz, P, T, PP)
+            Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki, L2, Vx2, S, Vs}
 
         End Function
 
@@ -379,6 +399,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Double.IsNaN(T) Or cnt > maxitEXT Then Throw New Exception("PS Flash [NL-3PV3]: Invalid result: Temperature did not converge.")
 
+            IObj?.SetCurrent()
+
+            Dim V, L1, L2, Vy(), Vx1(), Vx2(), Vs(), Ki(), Ss As Double
+            Dim tmp As Object = Flash_PT(Vz, P, T, PP)
+            'Return New Object() {L1, V, Vx1, Vy, 0, L2, Vx2, S, Vs}
+
+            V = tmp(1)
+            L1 = tmp(0)
+            L2 = tmp(5)
+            Ss = tmp(7)
+            Vy = tmp(3)
+            Vx1 = tmp(2)
+            Vx2 = tmp(6)
+            Vs = tmp(8)
+            ecount = tmp(4)
+
+            Ki = Vy.DivideY(Vx1)
+
             d2 = Date.Now
 
             dt = d2 - d1
@@ -389,7 +427,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Close()
 
-            Return Flash_PT(Vz, P, T, PP)
+            Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki, L2, Vx2, Ss, Vs}
 
         End Function
 
