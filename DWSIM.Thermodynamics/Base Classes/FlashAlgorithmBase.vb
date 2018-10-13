@@ -475,7 +475,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 #Region "Liquid Phase Stability Check"
 
-        Public Function StabTest(ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal pp As PropertyPackage, Optional ByVal VzArray(,) As Double = Nothing, Optional ByVal searchseverity As Integer = 0)
+        Public Function StabTest(ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VTc As Double(), ByVal pp As PropertyPackage)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -568,8 +568,6 @@ will converge to this solution.")
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
             IObj?.Paragraphs.Add(String.Format("Compounds: {0}", pp.RET_VNAMES.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Trial Phase Compositions: {0}", VzArray.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Search Severity: {0}", searchseverity))
 
             WriteDebugInfo("Starting Liquid Phase Stability Test @ T = " & T & " K & P = " & P & " Pa for the following trial phases:")
 
@@ -577,43 +575,43 @@ will converge to this solution.")
 
             Dim i, j, c, n, o, l, nt, maxits As Integer
             n = Vz.Length - 1
-            nt = UBound(VzArray, 1)
+            nt = n
 
-            Dim Y, K As Double(,), tol As Double
-            Dim fcv(n), fcl(n) As Double
+            Dim Vtrials As New List(Of Double())
+            Dim Vestimates As New List(Of Double())
+            Dim idx(nt) As Integer
 
-            Select Case searchseverity
-                Case 0
-                    ReDim Y(nt, n)
-                    tol = 0.0001
-                    maxits = 100
-                Case 1
-                    ReDim Y(nt + 1, n)
-                    tol = 0.00001
-                    maxits = 100
-                Case Else
-                    ReDim Y(nt + 2, n)
-                    tol = 0.000001
-                    maxits = 200
-            End Select
+            'For j = 0 To n
+            '    If Vz(j) > 0 And T < VTc(i) Then Vtrials.Add(pp.RET_NullVector)
+            'Next
 
-            For i = 0 To nt
-                Dim text As String = "{"
-                For j = 0 To n
-                    Y(i, j) = VzArray(i, j)
-                    text += VzArray(i, j).ToString & vbTab
-                Next
-                text.TrimEnd(New Char() {vbTab})
-                text += "}"
-                WriteDebugInfo(text)
-                IObj?.Paragraphs.Add(text)
+            For j = 0 To n
+                Vtrials.Add(pp.RET_NullVector)
             Next
 
-            ReDim K(0, n)
+            For Each vector In Vtrials
+                For i = 0 To n
+                    vector(i) = 0.000001
+                Next
+            Next
 
-            Dim m As Integer = UBound(Y, 1)
+            For j = 0 To Vtrials.Count - 1
+                Vtrials(j)(j) = 1.0
+            Next
 
-            Dim h(n), lnfi_z(n), Y_ant(m, n) As Double
+            'For j = 0 To n
+            '    If T < VTc(j) Then Vtrials.RemoveAt(j)
+            'Next
+
+            Dim Y(n), K(n) As Double, tol As Double
+            Dim fcv(n), fcl(n) As Double
+
+            tol = 0.000001
+            maxits = 200
+
+            Dim m As Integer = Vtrials.Count - 1 + 2
+
+            Dim h(n), lnfi_z(n), Y_ant(n) As Double
 
             Dim gl, gv As Double
 
@@ -663,87 +661,46 @@ will converge to this solution.")
                 i = i + 1
             Loop Until i = n + 1
 
-            If Not VzArray Is Nothing Then
-                If searchseverity = 1 Then
-                    Dim sum0(n) As Double
-                    i = 0
-                    Do
-                        sum0(i) = 0
-                        j = 0
-                        Do
-                            sum0(i) += VzArray(j, i)
-                            j = j + 1
-                        Loop Until j = UBound(VzArray, 1) + 1
-                        i = i + 1
-                    Loop Until i = n + 1
-                    i = 0
-                    Do
-                        If Vz(i) <> 0.0# Then
-                            Y(nt + 1, i) = sum0(i) / UBound(VzArray, 1)
-                        Else
-                            Y(nt + 1, i) = 0.0#
-                        End If
-                        i = i + 1
-                    Loop Until i = n + 1
-                End If
-                If searchseverity = 2 Then
-                    Dim sum0(n) As Double
-                    i = 0
-                    Do
-                        sum0(i) = 0
-                        j = 0
-                        Do
-                            sum0(i) += VzArray(j, i)
-                            j = j + 1
-                        Loop Until j = UBound(VzArray, 1) + 1
-                        i = i + 1
-                    Loop Until i = n + 1
-                    i = 0
-                    Do
-                        If Vz(i) <> 0.0# Then
-                            Y(nt + 1, i) = sum0(i) / UBound(VzArray, 1)
-                            Y(nt + 2, i) = Exp(h(i))
-                        Else
-                            Y(nt + 1, i) = 0.0#
-                            Y(nt + 2, i) = 0.0#
-                        End If
-                        i = i + 1
-                    Loop Until i = n + 1
-                End If
-            Else
-                i = 0
-                Do
-                    If Vz(i) <> 0.0# Then
-                        Y(n + 1, i) = Exp(h(i))
-                    Else
-                        Y(n + 1, i) = 0.0#
-                    End If
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+            Vtrials.Add(pp.RET_NullVector)
+            Vtrials.Add(pp.RET_NullVector)
 
-            Dim lnfi(m, n), beta(m), r(m), r_ant(m) As Double
+            i = 0
+            Do
+                If Vz(i) <> 0.0# Then
+                    Vtrials(n + 1)(i) = Exp(h(i))
+                Else
+                    Vtrials(n + 1)(i) = 0.0#
+                End If
+                Vtrials(n + 2)(i) = 1.0 / (n + 1)
+                i = i + 1
+            Loop Until i = n + 1
+
+            Dim lnfi(n), beta(m), r(m), r_ant(m) As Double
             Dim currcomp(n) As Double
-            Dim dgdY(m, n), g_(m), tmpfug(n), dY(m, n), sum3 As Double
+            Dim dgdY(n), g_(m), tmpfug(n), dY(n), sum3 As Double
             Dim excidx As New ArrayList
             Dim finish As Boolean = True
 
-            c = 0
-            Do
 
-                'start stability test for each one of the initial estimate vectors
-                i = 0
+            'start stability test for each one of the initial estimate vectors
+            i = 0
+            For Each vector In Vtrials
+
+                Y = vector.Clone
+
+                c = 0
                 Do
+
                     If Not excidx.Contains(i) Then
                         j = 0
                         sum3 = 0
                         Do
-                            If Y(i, j) > 0 Then sum3 += Y(i, j)
+                            If Y(j) > 0 Then sum3 += Y(j)
                             j = j + 1
                         Loop Until j = n + 1
                         j = 0
                         Do
-                            If Y(i, j) > 0 Then currcomp(j) = Y(i, j) / sum3 Else currcomp(j) = 0
+                            If Y(j) > 0 Then currcomp(j) = Y(j) / sum3 Else currcomp(j) = 0
                             j = j + 1
                         Loop Until j = n + 1
 
@@ -785,107 +742,100 @@ will converge to this solution.")
 
                         j = 0
                         Do
-                            lnfi(i, j) = Log(tmpfug(j))
+                            lnfi(j) = Log(tmpfug(j))
                             j = j + 1
                         Loop Until j = n + 1
                         j = 0
                         Do
-                            dgdY(i, j) = Log(Y(i, j)) + lnfi(i, j) - h(j)
+                            dgdY(j) = Log(Y(j)) + lnfi(j) - h(j)
                             j = j + 1
                         Loop Until j = n + 1
                         j = 0
                         beta(i) = 0
                         Do
-                            beta(i) += (Y(i, j) - Vz(j)) * dgdY(i, j)
+                            beta(i) += (Y(j) - Vz(j)) * dgdY(j)
                             j = j + 1
                         Loop Until j = n + 1
                         g_(i) = 1
                         j = 0
                         Do
-                            g_(i) += Y(i, j) * (Log(Y(i, j)) + lnfi(i, j) - h(j) - 1)
+                            g_(i) += Y(j) * (Log(Y(j)) + lnfi(j) - h(j) - 1)
                             j = j + 1
                         Loop Until j = n + 1
                         If i > 0 Then r_ant(i) = r(i) Else r_ant(i) = 0
                         r(i) = 2 * g_(i) / beta(i)
                     End If
-                    i = i + 1
-                Loop Until i = m + 1
 
-                i = 0
-                Do
-                    If (Abs(g_(i)) < 0.0000000001 And r(i) > 0.9 And r(i) < 1.1) Then
-                        If Not excidx.Contains(i) Then excidx.Add(i)
-                        'ElseIf c > 4 And r(i) > r_ant(i) Then
-                        '    If Not excidx.Contains(i) Then excidx.Add(i)
-                    End If
-                    i = i + 1
-                Loop Until i = m + 1
+                    j = 0
+                    Do
+                        Y_ant(j) = Y(j)
+                        Y(j) = Exp(h(j) - lnfi(j))
+                        dY(j) = Y(j) - Y_ant(j)
+                        If Y(j) < 0 Then Y(j) = 0
+                        j = j + 1
+                    Loop Until j = n + 1
 
-                i = 0
-                Do
-                    If Not excidx.Contains(i) Then
-                        j = 0
-                        Do
-                            Y_ant(i, j) = Y(i, j)
-                            Y(i, j) = Exp(h(j) - lnfi(i, j))
-                            dY(i, j) = Y(i, j) - Y_ant(i, j)
-                            If Y(i, j) < 0 Then Y(i, j) = 0
-                            j = j + 1
-                        Loop Until j = n + 1
-                    End If
-                    i = i + 1
-                Loop Until i = m + 1
+                    'check convergence
 
-                'check convergence
+                    finish = True
+                    j = 0
+                    Do
+                        If Abs(dY(j)) > tol Then
+                            finish = False
+                        End If
+                        j = j + 1
+                    Loop Until j = n + 1
 
-                finish = True
-                i = 0
-                Do
-                    If Not excidx.Contains(i) Then
-                        j = 0
-                        Do
-                            If Abs(dY(i, j)) > tol Then finish = False
-                            j = j + 1
-                        Loop Until j = n + 1
-                    End If
-                    i = i + 1
-                Loop Until i = m + 1
+                    c = c + 1
 
-                c = c + 1
+                    If c > maxits Then Exit Do
 
-                If c > maxits Then Throw New Exception("Liquid Phase Stability Test: Maximum Iterations Reached.")
+                    If finish Then Vestimates.Add(Y)
 
-            Loop Until finish = True
+                Loop Until finish = True
+
+                i += 1
+
+            Next
 
             ' search for trivial solutions
 
-            Dim sum As Double
             i = 0
             Do
+                If (Abs(g_(i)) < 0.0000000001 And r(i) > 0.9 And r(i) < 1.1) Then
+                    If Not excidx.Contains(i) Then excidx.Add(i)
+                End If
+                i = i + 1
+            Loop Until i = m + 1
+
+
+            Dim sum As Double
+            i = 0
+            For Each vector In Vestimates
                 If Not excidx.Contains(i) Then
                     j = 0
                     sum = 0
                     Do
-                        sum += Abs(Y(i, j) - Vz(j))
+                        sum += Abs(vector(j) - Vz(j))
                         j = j + 1
                     Loop Until j = n + 1
                     If sum < 0.001 Then
                         If Not excidx.Contains(i) Then excidx.Add(i)
                     End If
                 End If
-                i = i + 1
-            Loop Until i = m + 1
+                i += 1
+            Next
 
             ' search for trivial solutions
 
             Dim sum5 As Double
             i = 0
-            Do
+            For Each vector In Vestimates
                 If Not excidx.Contains(i) Then
                     j = 0
                     sum5 = 0
                     Do
-                        sum5 += Y(i, j)
+                        sum5 += vector(j)
                         j = j + 1
                     Loop Until j = n + 1
                     If Abs(sum5 - 1) < 0.001 Then
@@ -894,14 +844,14 @@ will converge to this solution.")
                     End If
                 End If
                 i = i + 1
-            Loop Until i = m + 1
+            Next
 
             ' join similar solutions
 
             Dim similar As Boolean
 
             i = 0
-            Do
+            For Each vector In Vestimates
                 If Not excidx.Contains(i) Then
                     o = 0
                     Do
@@ -909,7 +859,7 @@ will converge to this solution.")
                             similar = True
                             j = 0
                             Do
-                                If Abs(Y(i, j) - Y(o, j)) > 0.00001 Then
+                                If Abs(vector(j) - Vestimates(o)(j)) > 0.00001 Then
                                     similar = False
                                 End If
                                 j = j + 1
@@ -920,14 +870,16 @@ will converge to this solution.")
                             End If
                         End If
                         o = o + 1
-                    Loop Until o = m + 1
+                    Loop Until o = Vestimates.Count - 1
                 End If
                 i = i + 1
-            Loop Until i = m + 1
+            Next
 
             l = excidx.Count
             Dim sum2 As Double
             Dim isStable As Boolean
+
+            m = Vestimates.Count - 1
 
             If m + 1 - l > 0 Then
 
@@ -942,12 +894,6 @@ will converge to this solution.")
 
                 WriteDebugInfo("Liquid Phase Stability Test finished. Phase is NOT stable. Initial estimates for incipient liquid phase composition:")
 
-                For i = 0 To nt
-                    For j = 0 To n
-                        Y(i, j) = VzArray(i, j)
-                    Next
-                Next
-
                 Dim inest(m - l, n) As Double
                 i = 0
                 l = 0
@@ -957,12 +903,12 @@ will converge to this solution.")
                         j = 0
                         sum2 = 0
                         Do
-                            sum2 += Y(i, j)
+                            sum2 += Vestimates(i)(j)
                             j = j + 1
                         Loop Until j = n + 1
                         j = 0
                         Do
-                            inest(l, j) = Y(i, j) / sum2
+                            inest(l, j) = Vestimates(i)(j) / sum2
                             text += inest(l, j).ToString & vbTab
                             j = j + 1
                         Loop Until j = n + 1

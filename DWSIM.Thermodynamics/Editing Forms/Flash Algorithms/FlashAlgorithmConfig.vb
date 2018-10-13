@@ -35,7 +35,6 @@ Public Class FlashAlgorithmConfig
                 Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
-                    TabControl1.TabPages.Remove(TabPageVLLE)
                     TabControl1.TabPages.Remove(TabPageCOES)
                 Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE, Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
@@ -44,7 +43,6 @@ Public Class FlashAlgorithmConfig
                 Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLE
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
-                    TabControl1.TabPages.Remove(TabPageVLLE)
                     TabControl1.TabPages.Remove(TabPageCOES)
                 Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
                     TabControl1.TabPages.Remove(TabPageNL)
@@ -53,7 +51,6 @@ Public Class FlashAlgorithmConfig
                 Case Interfaces.Enums.FlashMethod.Inside_Out_VLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
-                    TabControl1.TabPages.Remove(TabPageVLLE)
                     TabControl1.TabPages.Remove(TabPageCOES)
                 Case Interfaces.Enums.FlashMethod.Inside_Out_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
@@ -63,14 +60,12 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
-                    TabControl1.TabPages.Remove(TabPageVLLE)
                     TabControl1.TabPages.Remove(TabPageCOES)
                 Case Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server
                     TabControl1.TabPages.Remove(TabPageConvPars)
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
-                    TabControl1.TabPages.Remove(TabPageVLLE)
             End Select
 
         Else
@@ -79,7 +74,6 @@ Public Class FlashAlgorithmConfig
 
             TabControl1.TabPages.Remove(TabPageCOES)
             TabControl1.TabPages.Remove(TabPageGeneral)
-            TabControl1.TabPages.Remove(TabPageVLLE)
 
         End If
 
@@ -139,17 +133,6 @@ Public Class FlashAlgorithmConfig
 
             cbMinMethodGM.SelectedItem = Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod)
 
-            Select Case Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity)
-                Case 0
-                    rbLow.Checked = True
-                Case 1
-                    rbMedium.Checked = True
-                Case 2
-                    rbHigh.Checked = True
-            End Select
-
-            If Not ExcelMode Then SetupKeyCompounds()
-
         End If
 
     End Sub
@@ -184,48 +167,11 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod) = cbMinMethodGM.SelectedItem
 
-            If Not ExcelMode Then
-
-                If rbLow.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 0
-                If rbMedium.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 1
-                If rbHigh.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
-
-                Dim comps As String = ""
-
-                For Each lvi As ListViewItem In lvKeyComp.Items
-                    If lvi.Checked Then comps += lvi.Text + ","
-                Next
-
-                Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps
-
-            End If
-
         Catch ex As Exception
 
             MessageBox.Show("Error parsing input. Some settings may not have been updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
-
-    End Sub
-
-    Private Sub SetupKeyCompounds()
-
-        Dim selected As Array
-
-        selected = Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(ci, Type.GetType("System.String"))
-
-        Me.lvKeyComp.Items.Clear()
-
-        For i As Integer = 0 To AvailableCompounds.Count - 1
-            With Me.lvKeyComp.Items.Add(AvailableCompounds(i))
-                For Each s As String In selected
-                    If s = AvailableCompounds(i) Then
-                        .Checked = True
-                        Exit For
-                    End If
-                Next
-            End With
-        Next
 
     End Sub
 

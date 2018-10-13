@@ -127,7 +127,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ' do a stability test in the liquid phase
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
@@ -261,7 +261,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vtrials(j, idx(j)) = 1
                 Next
 
-                Dim stresult As Object = StabTest(result(4), P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(result(4), P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
@@ -353,71 +353,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If result(0) > 0 Then
 
-                Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = Vz.Length - 1
-
-                If nt = -1 Then nt = nc
-
-                Dim Vtrials(nt, nc) As Double
-                Dim idx(nt) As Integer
-
-                For i = 0 To nt
-                    If Me.StabSearchCompIDs.Length = 0 Then
-                        idx(i) = i
-                    Else
-                        j = 0
-                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                            If subst.Name = Me.StabSearchCompIDs(i) Then
-                                idx(i) = j
-                                Exit For
-                            End If
-                            j += 1
-                        Next
-                    End If
-                Next
-
-                For i = 0 To nt
-                    For j = 0 To nc
-                        Vtrials(i, j) = 0.00001
-                    Next
-                Next
-                For j = 0 To nt
-                    Vtrials(j, idx(j)) = 1
-                Next
-
-                Dim stresult As Object = StabTest(result(4), P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(result(4), P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
-                    Dim vx2est(nc), fcl(nc), fcv(nc) As Double
-                    Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
+                    Dim vx2est(n) As Double
 
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To nc
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            fcl = PP.DW_CalcFugCoeff(vx2est, result(4), P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To nc
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
-                    Else
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-                    End If
-
+                    For i = 0 To n
+                        vx2est(i) = stresult(1)(0, i)
+                    Next
 
                     Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
 
@@ -440,11 +384,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Next
 
                     Dim sumvx2 = 0.0#
-                    For i = 0 To nc
+                    For i = 0 To n
                         sumvx2 += Abs(vx1e(i))
                     Next
 
-                    For i = 0 To nc
+                    For i = 0 To n
                         vx1e(i) = Abs(vx1e(i)) / sumvx2
                     Next
 
@@ -511,38 +455,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vtrials(j, idx(j)) = 1
                 Next
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
-                    Dim vx2est(nc), fcl(nc), fcv(nc) As Double
-                    Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
+                    Dim vx2est(nc) As Double
 
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To nc
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To nc
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
-                    Else
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-                    End If
+                    For i = 0 To nc
+                        vx2est(i) = stresult(1)(0, i)
+                    Next
 
                     'do a simple LLE calculation to get initial estimates.
                     Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
@@ -616,39 +537,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vtrials(j, idx(j)) = 1
                 Next
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
-                    Dim vx2est(nc), fcl(nc), fcv(nc) As Double
-                    Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
-
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To nc
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To nc
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
-                    Else
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-                    End If
-
+                    Dim vx2est(nc) As Double
+                    For i = 0 To n
+                        vx2est(i) = stresult(1)(0, i)
+                    Next
 
                     'do a simple LLE calculation to get initial estimates.
                     Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}

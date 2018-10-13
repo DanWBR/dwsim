@@ -473,50 +473,13 @@ out:
 
                 IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
 
-                Dim nt As Integer = -1
-                Dim nc As Integer = Vz.Length - 1
-                Dim ff As Integer
-
-                i = 0
-                For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                    ff = Array.IndexOf(StabSearchCompIDs, subst.Name)
-                    If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then nt += 1
-                    i += 1
-                Next
-                If nt = -1 Then nt = nc
-
-                Dim Vtrials(nt, nc) As Double
-                Dim idx(nt) As Integer
-
-                i = 0
-                j = 0
-                For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                    ff = Array.IndexOf(StabSearchCompIDs, subst.Name)
-                    If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then
-                        idx(j) = i
-                        j += 1
-                    End If
-                    i += 1
-                Next
-
-                For i = 0 To nt
-                    For j = 0 To nc
-                        If Vz(j) > 0 Then Vtrials(i, j) = 0.00001
-                    Next
-                Next
-                For j = 0 To nt
-                    Vtrials(j, idx(j)) = 1
-                Next
-
                 IObj?.Paragraphs.Add("Calling Liquid Phase Stability Test algorithm...")
-
-                IObj?.Paragraphs.Add(String.Format("Tentative compositions for the second (incipient) liquid phase: {0}", Vtrials.ToMathArrayString))
 
                 ' do a stability test in the liquid phase
 
                 IObj?.SetCurrent
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
@@ -531,13 +494,13 @@ out:
                     If StabSearchSeverity = 2 Then
                         gli = 0
                         For j = 0 To m
-                            For i = 0 To nc
+                            For i = 0 To n
                                 vx2est(i) = stresult(1)(j, i)
                             Next
                             IObj?.SetCurrent
                             fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
                             gl = 0.0#
-                            For i = 0 To nc
+                            For i = 0 To n
                                 If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
                             Next
                             If gl <= gli Then
@@ -1619,7 +1582,7 @@ alt:
                 Next
 
                 IObj?.SetCurrent
-                Dim stresult As Object = StabTest(T, P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
@@ -1751,7 +1714,7 @@ alt:
                 Next
 
                 IObj?.SetCurrent
-                Dim stresult As Object = StabTest(T, P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 

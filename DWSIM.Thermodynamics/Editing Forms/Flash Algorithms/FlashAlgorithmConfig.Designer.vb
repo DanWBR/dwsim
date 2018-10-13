@@ -61,14 +61,6 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.cbMinMethodGM = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TabPageVLLE = New System.Windows.Forms.TabPage()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.rbHigh = New System.Windows.Forms.RadioButton()
-        Me.rbMedium = New System.Windows.Forms.RadioButton()
-        Me.rbLow = New System.Windows.Forms.RadioButton()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.lvKeyComp = New System.Windows.Forms.ListView()
         Me.TabPageCOES = New System.Windows.Forms.TabPage()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -97,8 +89,6 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox5.SuspendLayout()
         Me.TabPageGM.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.TabPageVLLE.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
         Me.TabPageCOES.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
@@ -111,7 +101,6 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1.Controls.Add(Me.TabPageNL)
         Me.TabControl1.Controls.Add(Me.TabPageIO)
         Me.TabControl1.Controls.Add(Me.TabPageGM)
-        Me.TabControl1.Controls.Add(Me.TabPageVLLE)
         Me.TabControl1.Controls.Add(Me.TabPageCOES)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -348,64 +337,6 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
-        'TabPageVLLE
-        '
-        resources.ApplyResources(Me.TabPageVLLE, "TabPageVLLE")
-        Me.TabPageVLLE.Controls.Add(Me.GroupBox11)
-        Me.TabPageVLLE.Name = "TabPageVLLE"
-        Me.TabPageVLLE.UseVisualStyleBackColor = True
-        '
-        'GroupBox11
-        '
-        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
-        Me.GroupBox11.Controls.Add(Me.rbHigh)
-        Me.GroupBox11.Controls.Add(Me.rbMedium)
-        Me.GroupBox11.Controls.Add(Me.rbLow)
-        Me.GroupBox11.Controls.Add(Me.Label10)
-        Me.GroupBox11.Controls.Add(Me.Label11)
-        Me.GroupBox11.Controls.Add(Me.lvKeyComp)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.TabStop = False
-        '
-        'rbHigh
-        '
-        resources.ApplyResources(Me.rbHigh, "rbHigh")
-        Me.rbHigh.Name = "rbHigh"
-        Me.rbHigh.TabStop = True
-        Me.rbHigh.UseVisualStyleBackColor = True
-        '
-        'rbMedium
-        '
-        resources.ApplyResources(Me.rbMedium, "rbMedium")
-        Me.rbMedium.Name = "rbMedium"
-        Me.rbMedium.TabStop = True
-        Me.rbMedium.UseVisualStyleBackColor = True
-        '
-        'rbLow
-        '
-        resources.ApplyResources(Me.rbLow, "rbLow")
-        Me.rbLow.Name = "rbLow"
-        Me.rbLow.TabStop = True
-        Me.rbLow.UseVisualStyleBackColor = True
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        '
-        'Label11
-        '
-        resources.ApplyResources(Me.Label11, "Label11")
-        Me.Label11.Name = "Label11"
-        '
-        'lvKeyComp
-        '
-        resources.ApplyResources(Me.lvKeyComp, "lvKeyComp")
-        Me.lvKeyComp.CheckBoxes = True
-        Me.lvKeyComp.Name = "lvKeyComp"
-        Me.lvKeyComp.UseCompatibleStateImageBehavior = False
-        Me.lvKeyComp.View = System.Windows.Forms.View.List
-        '
         'TabPageCOES
         '
         resources.ApplyResources(Me.TabPageCOES, "TabPageCOES")
@@ -537,9 +468,6 @@ Partial Class FlashAlgorithmConfig
         Me.TabPageGM.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.TabPageVLLE.ResumeLayout(False)
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox11.PerformLayout()
         Me.TabPageCOES.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
@@ -551,7 +479,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents TabPageNL As System.Windows.Forms.TabPage
     Friend WithEvents TabPageIO As System.Windows.Forms.TabPage
     Friend WithEvents TabPageGM As System.Windows.Forms.TabPage
-    Friend WithEvents TabPageVLLE As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents tbPHExtMaxIt As System.Windows.Forms.TextBox
     Friend WithEvents tbPHIntMaxIt As System.Windows.Forms.TextBox
@@ -574,13 +501,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents cbMinMethodGM As System.Windows.Forms.ComboBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
-    Friend WithEvents rbHigh As System.Windows.Forms.RadioButton
-    Friend WithEvents rbMedium As System.Windows.Forms.RadioButton
-    Friend WithEvents rbLow As System.Windows.Forms.RadioButton
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents lvKeyComp As System.Windows.Forms.ListView
     Friend WithEvents TabPageGeneral As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Public WithEvents chkReplaceFlashPT As System.Windows.Forms.CheckBox

@@ -549,7 +549,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     IObj?.SetCurrent
 
-                    Dim stresult As Object = StabTest(T, P, result(2), PP, Vtrials, Me.StabSearchSeverity)
+                    Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                     If stresult(0) = False Then
 
