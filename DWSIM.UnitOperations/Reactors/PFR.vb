@@ -405,6 +405,9 @@ Namespace Reactors
 
             For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 rxn = FlowSheet.Reactions(rxnsb.ReactionID)
+                If Not rxn.Components.ContainsKey(rxn.BaseReactant) Then
+                    Throw New Exception("No base reactant defined for reaction '" + rxn.Name + "'.")
+                End If
                 If rxn.ReactionType = ReactionType.Kinetic And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
                     If rxp = PhaseName.Mixture Then rxp = rxn.ReactionPhase

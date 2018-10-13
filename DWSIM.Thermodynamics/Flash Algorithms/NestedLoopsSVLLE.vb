@@ -148,8 +148,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 V = result(1)
                 Vx1 = result(2)
                 Vy = result(3)
-                Vs = result(7)
-                S = result(8)
+                Vs = result(8)
+                S = result(7)
 
             End If
 

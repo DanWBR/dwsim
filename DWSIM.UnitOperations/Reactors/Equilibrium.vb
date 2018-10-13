@@ -572,6 +572,9 @@ Namespace Reactors
             i = 0
             For Each rxid As String In Me.Reactions
                 rx = FlowSheet.Reactions(rxid)
+                If Not rx.Components.ContainsKey(rx.BaseReactant) Then
+                    Throw New Exception("No base reactant defined for reaction '" + rx.Name + "'.")
+                End If
                 j = 0
                 For Each comp As ReactionStoichBase In rx.Components.Values
                     If Not Me.ComponentIDs.Contains(comp.CompName) Then

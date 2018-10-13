@@ -368,6 +368,9 @@ Namespace Reactors
             ErrCode = "No kinetic Or catalytic reaction found"
             For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 rxn = FlowSheet.Reactions(rxnsb.ReactionID)
+                If Not rxn.Components.ContainsKey(rxn.BaseReactant) Then
+                    Throw New Exception("No base reactant defined for reaction '" + rxn.Name + "'.")
+                End If
                 If (rxn.ReactionType = ReactionType.Kinetic Or rxn.ReactionType = ReactionType.Heterogeneous_Catalytic) And rxnsb.IsActive Then
                     BC = rxn.BaseReactant
                     If BC = "" Then
