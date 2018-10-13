@@ -57,9 +57,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Overrides ReadOnly Property Description As String
             Get
                 If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                    Return "Algoritmo Flash padrão, baseado na equação de Rachford e Rice."
+                    Return "Algoritmo Flash para equilíbrio Líquido-Vapor, baseado na equação de Rachford e Rice."
                 Else
-                    Return "Default Flash Algorithm, based on the Rachford-Rice VLE equations."
+                    Return "Flash Algorithm for Vapor-Liquid Equilibria based on the Rachford-Rice VLE equations."
                 End If
             End Get
         End Property

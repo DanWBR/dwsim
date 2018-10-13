@@ -36,7 +36,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides ReadOnly Property Description As String
             Get
-                Return "Global Flash Algorithm, can calculate equilibria between one solid, one vapor and two liquid phases (SVLLE)."
+                Return "Global Equilibrium Flash Algorithm, can calculate equilibria between one solid, one vapor and two liquid phases (SVLLE)."
             End Get
         End Property
 
