@@ -144,13 +144,7 @@ Public Class MaterialStreamEditor
             tbEnth.Text = su.Converter.ConvertFromSI(units.enthalpy, .Phases(0).Properties.enthalpy.GetValueOrDefault).ToString(nf)
             tbEntr.Text = su.Converter.ConvertFromSI(units.entropy, .Phases(0).Properties.entropy.GetValueOrDefault).ToString(nf)
 
-            If rbSpecVapor.Checked Then
-                tbFracSpec.Text = .Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf)
-            ElseIf rbSpecLiquid.Checked Then
-                tbFracSpec.Text = .Phases(1).Properties.molarfraction.GetValueOrDefault.ToString(nf)
-            Else
-                tbFracSpec.Text = .Phases(7).Properties.molarfraction.GetValueOrDefault.ToString(nf)
-            End If
+            tbFracSpec.Text = .Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf)
 
             'reference solvent
 
@@ -329,12 +323,15 @@ Public Class MaterialStreamEditor
 
             If .GraphicObject.InputConnectors(0).IsAttached Then
                 If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
-                    TabPageInputPane.Enabled = True
+                    TabPageInputConditions.Enabled = True
+                    TabPageInputComposition.Enabled = True
                 Else
-                    TabPageInputPane.Enabled = False
+                    TabPageInputConditions.Enabled = False
+                    TabPageInputComposition.Enabled = False
                 End If
             Else
-                TabPageInputPane.Enabled = True
+                TabPageInputConditions.Enabled = True
+                TabPageInputComposition.Enabled = True
             End If
 
         End With
@@ -572,9 +569,6 @@ Public Class MaterialStreamEditor
         tbEnth.Enabled = False
         tbEntr.Enabled = False
         tbFracSpec.Enabled = False
-        rbSpecVapor.Enabled = False
-        rbSpecLiquid.Enabled = False
-        rbSpecSolid.Enabled = False
 
         MatStream.SpecType = cbSpec.SelectedIndex
 
@@ -591,20 +585,12 @@ Public Class MaterialStreamEditor
             Case 3
                 tbPressure.Enabled = True
                 tbFracSpec.Enabled = True
-                rbSpecVapor.Checked = True
-                rbSpecVapor.Enabled = True
-                rbSpecLiquid.Enabled = True
             Case 4
                 tbTemp.Enabled = True
                 tbFracSpec.Enabled = True
-                rbSpecVapor.Checked = True
-                rbSpecVapor.Enabled = True
-                rbSpecLiquid.Enabled = True
             Case 5
                 tbPressure.Enabled = True
                 tbFracSpec.Enabled = True
-                rbSpecSolid.Checked = True
-                rbSpecSolid.Enabled = True
         End Select
 
         If Loaded Then RequestCalc()
@@ -1055,21 +1041,11 @@ Public Class MaterialStreamEditor
 
         End With
 
-        If sender Is tbFracSpec And rbSpecVapor.Checked Then
+        If sender Is tbFracSpec Then
             oldvalue = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             MatStream.Phases(2).Properties.molarfraction = tbFracSpec.Text.ParseExpressionToDouble
             newvalue = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             propname = "PROP_MS_27"
-        ElseIf sender Is tbFracSpec And rbSpecLiquid.Checked Then
-            oldvalue = 1.0# - MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
-            MatStream.Phases(2).Properties.molarfraction = 1.0# - tbFracSpec.Text.ParseExpressionToDouble
-            newvalue = 1.0# - MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
-            propname = "PROP_MS_27"
-        ElseIf sender Is tbFracSpec And rbSpecSolid.Checked Then
-            oldvalue = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault
-            MatStream.Phases(7).Properties.molarfraction = tbFracSpec.Text.ParseExpressionToDouble
-            newvalue = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault
-            propname = "PROP_MS_146"
         End If
 
         MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,
@@ -1377,16 +1353,10 @@ Public Class MaterialStreamEditor
         If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(gridInputComposition)
     End Sub
 
-    Private Sub rbSpecVapor_CheckedChanged(sender As Object, e As EventArgs) Handles rbSpecVapor.CheckedChanged, rbSpecLiquid.CheckedChanged, rbSpecSolid.CheckedChanged
+    Private Sub rbSpecVapor_CheckedChanged(sender As Object, e As EventArgs)
 
         If Loaded Then
-            If rbSpecVapor.Checked Then
-                tbFracSpec.Text = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf)
-            ElseIf rbSpecLiquid.Checked Then
-                tbFracSpec.Text = MatStream.Phases(1).Properties.molarfraction.GetValueOrDefault.ToString(nf)
-            Else
-                tbFracSpec.Text = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault.ToString(nf)
-            End If
+            tbFracSpec.Text = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf)
         End If
 
     End Sub

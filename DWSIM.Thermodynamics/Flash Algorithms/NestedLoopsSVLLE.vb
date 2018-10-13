@@ -1,5 +1,21 @@
-﻿Imports DWSIM.Interfaces.Enums
-Imports DWSIM.MathOps.MathEx
+﻿'    DWSIM Nested Loops Global Flash Algorithm (SVLLE)
+'    Copyright 2018 Daniel Wagner O. de Medeiros
+'
+'    This file is part of DWSIM.
+'
+'    DWSIM is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 3 of the License, or
+'    (at your option) any later version.
+'
+'    DWSIM is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+'
+'    You should have received a copy of the GNU General Public License
+'    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports System.Math
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -20,7 +36,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides ReadOnly Property Description As String
             Get
-                Return "Nested Loops SVLLE"
+                Return "Global Flash Algorithm, can calculate equilibria between one solid, one vapor and two liquid phases (SVLLE)."
             End Get
         End Property
 
@@ -38,7 +54,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim V, L1, L2, S, Vy(), Vx1(), Vx2(), Vs(), L, Vx() As Double
+            Dim d1, d2 As Date, dt As TimeSpan
+
+            d1 = Date.Now
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+
+            Dim V, L1, L2, S, Vy(), Vx1(), Vx2(), Vs() As Double
 
             'Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
@@ -109,6 +140,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 S = result(8)
 
             End If
+
+            d2 = Date.Now
+
+            dt = d2 - d1
+
+            IObj?.Paragraphs.Add("PT Flash [NL-SVLLE]: Converged successfully. Time taken: " & dt.TotalMilliseconds & " ms")
+
+            IObj?.Close()
 
             Return New Object() {L1, V, Vx1, Vy, 0, L2, Vx2, S, Vs}
 
@@ -216,7 +255,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             dt = d2 - d1
 
-            WriteDebugInfo("PH Flash [NL3P]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
+            WriteDebugInfo("PH Flash [NL-SVLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
@@ -327,7 +366,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             dt = d2 - d1
 
-            WriteDebugInfo("PS Flash [NL-3PV3]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
+            WriteDebugInfo("PS Flash [NL-SVLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
