@@ -32,7 +32,7 @@ Public Class FlashAlgorithmConfig
             Me.Text += " - " & FlashAlgo.Tag
 
             Select Case FlashAlgo.AlgoType
-                Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE
+                Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE, Interfaces.Enums.FlashMethod.Nested_Loops_SVLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)

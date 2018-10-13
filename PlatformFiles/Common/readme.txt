@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.3
+Version 5.4
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.4
+
+- [NEW] Global Flash Algorithm supports one solid, one vapor and two liquid phases, is now the default one
+- [NEW] Updated Inspector Window for Classic UI
+- [CHG] Enhanced reliability of the liquid phase stability test, removes the need for stability search key compound selection
+- [CHG] Missing NRTL/UNIQUAC Interaction Parameters warning only for non-zero compound amounts
+- [FIX] Fixed broken sample simulations
 
 Version 5.3
 

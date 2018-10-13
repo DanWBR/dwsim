@@ -28,6 +28,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim nl2 As New NestedLoops3PV3
         Dim nl3 As New NestedLoopsSLE With {.SolidSolution = False}
 
+        Public Sub New()
+            MyBase.New
+            Order = 0
+        End Sub
+
         Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
             Get
                 Return Interfaces.Enums.FlashMethod.Nested_Loops_SVLLE
