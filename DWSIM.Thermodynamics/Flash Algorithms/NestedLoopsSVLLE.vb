@@ -114,31 +114,39 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 IObj?.SetCurrent
 
-                result = nl3.Flash_SL(Vx1, P, T, PP)
+                If PP.RET_VTF.SumY > 0.0 OrElse PP.ForcedSolids.Count > 0 Then
 
-                IObj?.SetCurrent
-
-                'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
-
-                S = result(1) * L1
-                L1 = result(0) * L1
-
-                Vx1 = result(3)
-                Vs = result(4)
-
-                If L2 > 0 Then
-
-                    result = nl3.Flash_SL(Vx2, P, T, PP)
+                    result = nl3.Flash_SL(Vx1, P, T, PP)
 
                     IObj?.SetCurrent
 
                     'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
 
-                    Vx2 = result(3)
-                    Vs = Vs.MultiplyConstY(S).AddY(DirectCast(result(4), Double()).MultiplyConstY(result(1))).NormalizeY()
+                    S = result(1) * L1
+                    L1 = result(0) * L1
 
-                    S = S + result(1) * L2
-                    L2 = result(0) * L2
+                    Vx1 = result(3)
+                    Vs = result(4)
+
+                End If
+
+                If L2 > 0 Then
+
+                    If PP.RET_VTF.SumY > 0.0 OrElse PP.ForcedSolids.Count > 0 Then
+
+                        result = nl3.Flash_SL(Vx2, P, T, PP)
+
+                        IObj?.SetCurrent
+
+                        'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
+
+                        Vx2 = result(3)
+                        Vs = Vs.MultiplyConstY(S).AddY(DirectCast(result(4), Double()).MultiplyConstY(result(1))).NormalizeY()
+
+                        S = S + result(1) * L2
+                        L2 = result(0) * L2
+
+                    End If
 
                 End If
 

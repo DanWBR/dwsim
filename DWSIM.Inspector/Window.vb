@@ -19,25 +19,28 @@ Public Class Window
         AddHandler SetsBox.SelectedIndexChanged,
             Sub(sender, e)
 
-                Dim f As New NotifyIcon
+                Dim f As New Loading
 
                 With f
 
-                    .BalloonTipTitle = "DWSIM"
-                    .BalloonTipText = "Loading reports..."
-                    .BalloonTipIcon = ToolTipIcon.Info
+                    .Label1.Text = "Loading reports..."
+                    .ProgressBar1.Value = 0
 
                 End With
 
                 Me.Enabled = False
 
-                f.ShowBalloonTip(1000)
+                f.Show()
 
                 Dim sitems = Host.Items.Where(Function(x) x.SolutionID = Date.Parse(SetsBox.SelectedItem.ToString).ToBinary).ToList
 
                 Dim tvc As New List(Of TreeNode)
 
                 Dim ct As New Threading.CancellationTokenSource
+
+                AddHandler f.btnCancel.Click, Sub()
+                                                  ct.Cancel()
+                                              End Sub
 
                 Dim allitems As New List(Of InspectorItem)
 
@@ -53,10 +56,10 @@ Public Class Window
                                               Dim titem = New TreeNode() With {.Text = item.Name + " (" + timetaken + ")", .Tag = item.ID}
                                               tvc.Add(titem)
                                               Me.UIThread(Sub()
-                                                              f.BalloonTipText = String.Format("Loading reports... ({0}/{1})", i, allitems.Count)
-                                                              f.ShowBalloonTip(1000)
+                                                              f.Label1.Text = String.Format("Loading reports... ({0}/{1})", i, allitems.Count)
+                                                              f.ProgressBar1.Value = CDbl(i / allitems.Count) * 100
+                                                              i += 1
                                                           End Sub)
-                                              i += 1
                                               Dim nesteditems = GetItems(item)
                                               For Each item2 In nesteditems
                                                   Dim parent = GetAllTreeItems(tvc).Where(Function(x) DirectCast(x, TreeNode).Tag = item2.ParentID).FirstOrDefault
@@ -70,10 +73,10 @@ Public Class Window
                                                       DirectCast(parent, TreeNode).Nodes.Add(titem2)
                                                   End If
                                                   Me.UIThread(Sub()
-                                                                  f.BalloonTipText = String.Format("Loading reports... ({0}/{1})", i, allitems.Count)
-                                                                  f.ShowBalloonTip(1000)
+                                                                  f.Label1.Text = String.Format("Loading reports... ({0}/{1})", i, allitems.Count)
+                                                                  f.ProgressBar1.Value = CDbl(i / allitems.Count) * 100
+                                                                  i += 1
                                                               End Sub)
-                                                  i += 1
                                                   If ct.IsCancellationRequested Then Throw New TaskCanceledException()
                                               Next
                                           Next
@@ -81,6 +84,7 @@ Public Class Window
                                                                           Me.UIThread(Sub()
                                                                                           itemSelector.Nodes.AddRange(tvc.ToArray)
                                                                                           Me.Enabled = True
+                                                                                          f.Close()
                                                                                       End Sub)
                                                                       End Sub)
 

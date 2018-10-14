@@ -38,6 +38,7 @@ Partial Class Window
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -47,6 +48,7 @@ Partial Class Window
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -146,7 +148,7 @@ Partial Class Window
         '
         Me.TableLayoutPanel3.ColumnCount = 1
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.currentItemViewer, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel3, 0, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Panel2, 0, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
@@ -160,11 +162,11 @@ Partial Class Window
         'currentItemViewer
         '
         Me.currentItemViewer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.currentItemViewer.Location = New System.Drawing.Point(3, 30)
+        Me.currentItemViewer.Location = New System.Drawing.Point(0, 0)
         Me.currentItemViewer.MinimumSize = New System.Drawing.Size(20, 20)
         Me.currentItemViewer.Name = "currentItemViewer"
         Me.currentItemViewer.ScriptErrorsSuppressed = True
-        Me.currentItemViewer.Size = New System.Drawing.Size(454, 378)
+        Me.currentItemViewer.Size = New System.Drawing.Size(452, 376)
         Me.currentItemViewer.TabIndex = 0
         '
         'Panel2
@@ -224,6 +226,16 @@ Partial Class Window
         Me.SaveFileDialog1.Filter = "HTML File|*.html"
         Me.SaveFileDialog1.Title = "Save Report to HTML File"
         '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.currentItemViewer)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 30)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(454, 378)
+        Me.Panel3.TabIndex = 3
+        '
         'Window
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -232,7 +244,9 @@ Partial Class Window
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Window"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "DWSIM - Solution Inspector"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -244,6 +258,7 @@ Partial Class Window
         Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -263,4 +278,5 @@ Partial Class Window
     Friend WithEvents Panel2 As Windows.Forms.Panel
     Friend WithEvents Button1 As Windows.Forms.Button
     Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
+    Friend WithEvents Panel3 As Windows.Forms.Panel
 End Class
