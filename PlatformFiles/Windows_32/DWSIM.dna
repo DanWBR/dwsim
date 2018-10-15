@@ -1,0 +1,100 @@
+<DnaLibrary Name="DWSIM" Description="DWSIM Excel Add-In for Thermodynamic Calculations" RuntimeVersion="v4.0">
+	<ExternalLibrary ExplicitExports="true" Path="DWSIM.Thermodynamics.dll"/>
+	<Reference Path="DWSIM.Thermodynamics.dll"/>
+	<Reference Path="DWSIM.GlobalSettings.dll"/>
+	<Reference Path="System.Windows.Forms.dll"/>
+	<![CDATA[
+		  Imports System.Runtime.InteropServices
+		  Imports Microsoft.Office.Core
+		  Imports ExcelDna.Integration.CustomUI
+		  Imports System.IO
+		  Imports DWSIM.Thermodynamics
+		  Imports DWSIM.GlobalSettings
+		  Imports System.Diagnostics
+		  
+		  <ComVisible(True)> _
+		  Public Class MyRibbon
+		    Inherits ExcelRibbon
+		    
+		    Public Sub  ShowOptions(control as IRibbonControl)
+				Dim f as New SettingsForm()
+				f.ShowDialog()
+		    End Sub
+		    
+		    Public Sub  ShowHelp(control as IRibbonControl)
+				Dim helpFilePath As String = Path.Combine(Path.GetDirectoryName(ExcelDnaUtil.XllPath), "ExcelAddInHelp.chm")
+				System.Diagnostics.Process.Start(helpFilePath)
+		    End Sub
+		    
+		    Public Sub  ShowSample(control as IRibbonControl)
+				Dim sampleFilePath As String = Path.GetDirectoryName(ExcelDnaUtil.XllPath) & "\samples\DWSIM Add-In Sample.xlsx"
+				System.Diagnostics.Process.Start("Excel.exe", Chr(34) & sampleFilePath & Chr(34))
+		    End Sub
+		    
+		    Public Sub  ShowAbout(control as IRibbonControl)
+				Dim f as New AboutForm()
+				f.ShowDialog()
+		    End Sub
+			    
+		    Public Sub  ShowLogWindow(control as IRibbonControl)
+				If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then 
+					Settings.DebugLevel = 3
+					Calculator.ExcelLogForm = New LogForm
+					Dim txtwriter = New ConsoleRedirection.TextBoxStreamWriter(Calculator.ExcelLogForm.TextBox1)
+					Console.SetOut(txtwriter)
+				End If
+				Calculator.ExcelLogForm.Show()
+		    End Sub
+		    
+		    Public Sub Donate(control as IRibbonControl)
+				Process.Start("https://sourceforge.net/p/dwsim/donate/")
+		    End Sub
+
+		  End Class
+	]]>
+	<Image Name="Settings" Path="appbar.settings.png" />
+	<Image Name="Help" Path="appbar.question.png" />
+	<Image Name="About" Path="appbar.information.circle.png" />
+	<Image Name="Sample" Path="appbar.office.excel.png" />
+	<Image Name="Log" Path="appbar.app.png" />
+	<Image Name="Donate" Path="appbar.paypal.png" />
+	<CustomUI>
+		<!-- Inside here is the exact RibbonX xml passed to Excel -->
+		<!-- This will only be loaded for Excel 2010 because of the namespace -->
+		<customUI xmlns='http://schemas.microsoft.com/office/2009/07/customui' loadImage='LoadImage'>
+		<ribbon>
+		  <tabs>
+		    <tab id='CustomTab' label='DWSIM'>
+			<group id='Group1' label='DWSIM'>
+			  <button id='Button1' label='Options' image='Settings' size='large' onAction='ShowOptions' />
+			  <button id='Button4' label='Open Sample Sheet' image='Sample' size='large' onAction='ShowSample' />
+			  <button id='Button5' label='Show Log Window' image='Log' size='large' onAction='ShowLogWindow' />
+			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
+			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
+			  <button id='Button6' label='Donate' image='Donate' size='large' onAction='Donate' />
+			</group >
+		    </tab>
+		  </tabs>
+		</ribbon>
+	    </customUI>
+	 </CustomUI>
+	<CustomUI>
+	    <!-- Inside here is the RibbonX xml passed to Excel -->
+	    <!-- This can also be loaded by Excel 2007 because of the namespace -->
+	    <customUI xmlns='http://schemas.microsoft.com/office/2006/01/customui' loadImage='LoadImage'>
+		<ribbon>
+		  <tabs>
+		    <tab id='CustomTab' label='DWSIM'>
+			<group id='Group1' label='DWSIM'>
+			  <button id='Button1' label='Options' image='Settings' size='large' onAction='ShowOptions' />
+			  <button id='Button4' label='Open Sample Sheet' image='Sample' size='large' onAction='ShowSample' />
+			  <button id='Button5' label='Show Log Window' image='Log' size='large' onAction='ShowLogWindow' />
+			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
+			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
+			</group >
+		    </tab>
+		  </tabs>
+		</ribbon>
+	    </customUI>
+	 </CustomUI>
+</DnaLibrary>
