@@ -382,6 +382,46 @@ Namespace GraphicObjects.Tables
 
                         Next
 
+                        p = MSObj.GetPhase("Mixture")
+
+                        bpval = p.Properties.molarfraction
+
+                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
+                        If size.Width > maxL5 Then maxL5 = size.Width
+                        If size.Height > maxH2 Then maxH2 = size.Height
+
+                        p = MSObj.GetPhase("Vapor")
+
+                        bpval = p.Properties.molarfraction
+
+                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
+                        If size.Width > maxL6 Then maxL6 = size.Width
+                        If size.Height > maxH2 Then maxH2 = size.Height
+
+                        p = MSObj.GetPhase("Liquid1")
+
+                        bpval = p.Properties.molarfraction
+
+                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
+                        If size.Width > maxL7 Then maxL7 = size.Width
+                        If size.Height > maxH2 Then maxH2 = size.Height
+
+                        p = MSObj.GetPhase("Liquid2")
+
+                        bpval = p.Properties.molarfraction
+
+                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
+                        If size.Width > maxL8 Then maxL8 = size.Width
+                        If size.Height > maxH2 Then maxH2 = size.Height
+
+                        p = MSObj.GetPhase("Solid")
+
+                        bpval = p.Properties.molarfraction
+
+                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
+                        If size.Width > maxL9 Then maxL9 = size.Width
+                        If size.Height > maxH2 Then maxH2 = size.Height
+
                         Dim sumL = maxL1 + maxL2 + maxL3
                         Dim sumL2 = maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9
 
