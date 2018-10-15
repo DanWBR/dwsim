@@ -734,64 +734,6 @@ out2:       d2 = Date.Now
                 i += 1
             Loop Until i = n + 1
 
-            i = 0
-            soma_x1 = 0
-            soma_x2 = 0
-            soma_y = 0
-            Do
-                soma_x1 = soma_x1 + Vx1(i)
-                soma_x2 = soma_x2 + Vx2(i)
-                soma_y = soma_y + Vy(i)
-                i = i + 1
-            Loop Until i = n + 1
-            i = 0
-            Do
-                Vx1(i) = Vx1(i) / soma_x1
-                Vx2(i) = Vx2(i) / soma_x2
-                Vy(i) = Vy(i) / soma_y
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            Do
-                b1(i) = 1 - Ki1(i) ^ -1
-                b2(i) = 1 - Ki2(i) ^ -1
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            Do
-                If Vz(i) <> 0 Then
-                    Vy(i) = Vz(i) / (1 - b1(i) * L1 - b2(i) * L2)
-                    Vx1(i) = Vy(i) / Ki1(i)
-                    Vx2(i) = Vy(i) / Ki2(i)
-                Else
-                    Vy(i) = 0
-                    Vx1(i) = 0
-                    Vx2(i) = 0
-                End If
-                i += 1
-            Loop Until i = n + 1
-
-            i = 0
-            soma_x1 = 0
-            soma_x2 = 0
-            soma_y = 0
-            Do
-                soma_x1 = soma_x1 + Vx1(i)
-                soma_x2 = soma_x2 + Vx2(i)
-                soma_y = soma_y + Vy(i)
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            Do
-                Vx1(i) = Vx1(i) / soma_x1
-                Vx2(i) = Vx2(i) / soma_x2
-                Vy(i) = Vy(i) / soma_y
-                i = i + 1
-            Loop Until i = n + 1
-
             Vant = 0.0#
             L1ant = 0.0#
             L2ant = 0.0#
