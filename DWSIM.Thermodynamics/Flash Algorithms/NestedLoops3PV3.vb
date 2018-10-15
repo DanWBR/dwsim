@@ -937,7 +937,11 @@ out2:       d2 = Date.Now
                     MB(0, 0) = -F1
                     MB(1, 0) = -F2
 
-                    MX = MA.Solve(MB)
+                    Try
+                        MX = MA.Solve(MB)
+                    Catch ex As Exception
+                        Throw New Exception("PT Flash: error calculating liquid phase fractions. Please try another flash algorithm.")
+                    End Try
                     dL1 = MX(0, 0)
                     dL2 = MX(1, 0)
 
