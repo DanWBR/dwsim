@@ -4467,7 +4467,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 And
                             Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.GibbsMinimization3P And
-                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P Then
+                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P And
+                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSVLLE Then
 
                             Throw New Exception(Calculator.GetLocalString("UnsuitableFlashAlgorithmSelected"))
 
