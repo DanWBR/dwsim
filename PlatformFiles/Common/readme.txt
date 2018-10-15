@@ -64,7 +64,7 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.4
 
-- [NEW] Global Flash Algorithm supports one solid, one vapor and two liquid phases, is now the default one
+- [NEW] A new Global Flash Algorithm supporting one solid, one vapor and two liquid phases, is now the default one
 - [NEW] Updated Inspector Window for Classic UI
 - [CHG] Enhanced reliability of the liquid phase stability test, removes the need for stability search key compound selection
 - [CHG] Missing NRTL/UNIQUAC Interaction Parameters warning only for non-zero compound amounts
