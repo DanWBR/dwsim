@@ -97,9 +97,72 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If stresult(0) = False Then
 
-                    nl2.prevres = New NestedLoops3PV3.PreviousResults With {.V = V, .L1 = L1, .Vx1 = Vx1, .Vy = Vy}
+                    ' liquid phase NOT stable. proceed to three-phase flash.
 
-                    result = nl2.Flash_PT(Vz, P, T, PP)
+                    Dim n As Integer = Vz.Length - 1
+                    Dim k As Integer = 0
+
+                    Dim vx2est(n), fcl(n), fcv(n) As Double
+                    Dim m As Double = UBound(stresult(1), 1)
+                    Dim gl, gli As Double
+
+                    gli = 0
+                    For j = 0 To m
+                        For i = 0 To n
+                            vx2est(i) = stresult(1)(j, i)
+                        Next
+                        IObj?.SetCurrent
+                        fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
+                        gl = 0.0#
+                        For i = 0 To n
+                            If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
+                        Next
+                        If gl <= gli Then
+                            gli = gl
+                            k = j
+                        End If
+                    Next
+                    For i = 0 To Vz.Length - 1
+                        vx2est(i) = stresult(1)(k, i)
+                    Next
+
+                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+
+                    Dim maxl As Double = MathEx.Common.Max(vx2est)
+                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+
+                    V = result(1)
+                    L2 = result(3)(imaxl)
+                    L1 = 1 - L2 - V
+
+                    If L1 < 0.0# Then
+                        L1 = Abs(L1)
+                        L2 = 1 - L1 - V
+                    End If
+
+                    If L2 < 0.0# Then
+                        V += L2
+                        L2 = Abs(L2)
+                    End If
+
+                    For i = 0 To n
+                        If i <> imaxl Then
+                            vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
+                        Else
+                            vx1e(i) = Vz(i) * L2
+                        End If
+                    Next
+
+                    Dim sumvx2 As Double
+                    For i = 0 To n
+                        sumvx2 += Abs(vx1e(i))
+                    Next
+
+                    For i = 0 To n
+                        vx1e(i) = Abs(vx1e(i)) / sumvx2
+                    Next
+
+                    result = nl2.Flash_PT_3P(Vz, V, L1, L2, Vy, vx1e, vx2est, P, T, PP)
 
                     IObj?.SetCurrent
 
@@ -109,6 +172,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vy = result(3)
                     L2 = result(5)
                     Vx2 = result(6)
+
+                    If L1 = 0.0 And L2 > 0.0 Then
+                        L1 = L2
+                        L2 = 0.0
+                        Vx1 = Vx2
+                        Vx2 = PP.RET_NullVector
+                    End If
 
                 End If
 

@@ -6,7 +6,7 @@ Public Class Window
         SetupInspectorWindow()
     End Sub
 
-    Public Function SetupInspectorWindow()
+    Public Sub SetupInspectorWindow()
 
         'Events
 
@@ -106,7 +106,7 @@ Public Class Window
 
             End Sub
 
-    End Function
+    End Sub
 
     Public Shared Function GetItems(ByVal list As List(Of InspectorItem)) As List(Of InspectorItem)
         Dim myItems As List(Of InspectorItem) = New List(Of InspectorItem)()

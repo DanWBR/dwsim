@@ -391,6 +391,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 ElseIf Math.Abs(e3) < itol And (e1 + e2) < itol And ecount > 0 Then
+
                     convergiu = 1
 
                     Exit Do
@@ -412,7 +413,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     IObj2?.Paragraphs.Add(String.Format("Current value of the Rachford-Rice error function: {0}", F))
 
-                    V = -F / dF + V
+                    If Abs(F) < etol Then Exit Do
+
+                    Dim af, dfmin As Double
+
+                    If ecount = 0 Then
+                        dfmin = 0.1
+                    ElseIf ecount = 1 Then
+                        dfmin = 0.3
+                    ElseIf ecount = 2 Then
+                        dfmin = 0.5
+                    Else
+                        dfmin = 0.7
+                    End If
+
+                    af = MinimizeGibbs(dfmin, PP, T, P, L, 0, F / dF, 0, Vy, Vx, PP.RET_NullVector)
+
+                    V = -F / dF * af + V
 
                     IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
 
@@ -808,21 +825,13 @@ out2:       d2 = Date.Now
                 IObj2?.SetCurrent()
 
                 If Settings.EnableParallelProcessing Then
-
-                    Dim task1 As Task = New Task(Sub()
-                                                     CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid)
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     CFL2 = proppack.DW_CalcFugCoeff(Vx2, T, P, State.Liquid)
-                                                 End Sub)
-                    Dim task3 As Task = New Task(Sub()
-                                                     CFV = proppack.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                                                 End Sub)
+                    Dim task1 As Task = New Task(Sub() CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid))
+                    Dim task2 As Task = New Task(Sub() CFL2 = proppack.DW_CalcFugCoeff(Vx2, T, P, State.Liquid))
+                    Dim task3 As Task = New Task(Sub() CFV = proppack.DW_CalcFugCoeff(Vy, T, P, State.Vapor))
                     task1.Start()
                     task2.Start()
                     task3.Start()
                     Task.WaitAll(task1, task2, task3)
-
                 Else
                     IObj2?.SetCurrent()
                     CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid)
@@ -915,7 +924,7 @@ out2:       d2 = Date.Now
                     IObj2?.Paragraphs.Add(String.Format("Equilibrium Equation 1 error: {0}", F1))
                     IObj2?.Paragraphs.Add(String.Format("Equilibrium Equation 2 error: {0}", F2))
 
-                    If Abs(F1) + Abs(F2) < etol Then Exit Do
+                    If Abs(L1 * F1) + Abs(L2 * F2) < etol Then Exit Do
 
                     Dim MA As Mapack.Matrix = New Mapack.Matrix(2, 2)
                     Dim MB As Mapack.Matrix = New Mapack.Matrix(2, 1)
@@ -938,14 +947,14 @@ out2:       d2 = Date.Now
 
                     Dim df, dfmin As Double
 
-                    If ecount = 0 Then
+                    If ecount < 5 Then
+                        dfmin = 0.0
+                    ElseIf ecount < 10 Then
                         dfmin = 0.1
-                    ElseIf ecount = 1 Then
+                    ElseIf ecount < 15 Then
                         dfmin = 0.3
-                    ElseIf ecount = 2 Then
-                        dfmin = 0.5
                     Else
-                        dfmin = 0.7
+                        dfmin = 0.5
                     End If
 
                     df = MinimizeGibbs(dfmin, PP, T, P, L1, L2, dL1, dL2, Vy, Vx1, Vx2)

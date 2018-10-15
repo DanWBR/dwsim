@@ -573,12 +573,12 @@ will converge to this solution.")
 
             IObj?.Paragraphs.Add("Starting Liquid Phase Stability Test @ T = " & T & " K & P = " & P & " Pa for the following trial phases:")
 
-            Dim i, j, c, n, o, l, nt, maxits As Integer
+            Dim i, j, n, o, l, nt, maxits As Integer
             n = Vz.Length - 1
             nt = n
 
             Dim Vtrials As New List(Of Double())
-            Dim Vestimates As New List(Of Double())
+            Dim Vestimates As New Concurrent.ConcurrentBag(Of Double())
             Dim idx(nt) As Integer
 
             'For j = 0 To n
@@ -603,7 +603,7 @@ will converge to this solution.")
             '    If T < VTc(j) Then Vtrials.RemoveAt(j)
             'Next
 
-            Dim Y(n), K(n) As Double, tol As Double
+            Dim tol As Double
             Dim fcv(n), fcl(n) As Double
 
             tol = 0.000001
@@ -611,7 +611,7 @@ will converge to this solution.")
 
             Dim m As Integer = Vtrials.Count - 1 + 2
 
-            Dim h(n), lnfi_z(n), Y_ant(n) As Double
+            Dim h(n), lnfi_z(n) As Double
 
             Dim gl, gv As Double
 
@@ -675,128 +675,119 @@ will converge to this solution.")
                 i = i + 1
             Loop Until i = n + 1
 
-            Dim lnfi(n), beta(m), r(m), r_ant(m) As Double
-            Dim currcomp(n) As Double
-            Dim dgdY(n), g_(m), tmpfug(n), dY(n), sum3 As Double
-            Dim excidx As New ArrayList
-            Dim finish As Boolean = True
+            Dim g_(m), beta(m), r(m), r_ant(m) As Double
+            Dim excidx As New Concurrent.ConcurrentBag(Of Integer)
 
+            Dim prevstatus = GlobalSettings.Settings.InspectorEnabled
+
+            GlobalSettings.Settings.InspectorEnabled = False
 
             'start stability test for each one of the initial estimate vectors
-            i = 0
-            For Each vector In Vtrials
+            Parallel.For(0, n + 1, Sub(xi)
 
-                Y = vector.Clone
+                                       Dim jj, cc As Integer
+                                       Dim vector = Vtrials(xi)
 
-                c = 0
-                Do
+                                       Dim lnfi(n), Y(n), Y_ant(n) As Double
+                                       Dim currcomp(n) As Double
+                                       Dim dgdY(n), tmpfug(n), dY(n), sum3, ffcv(), ffcl(), ttmpfug() As Double
+                                       Dim finish As Boolean = True
 
-                    If Not excidx.Contains(i) Then
-                        j = 0
-                        sum3 = 0
-                        Do
-                            If Y(j) > 0 Then sum3 += Y(j)
-                            j = j + 1
-                        Loop Until j = n + 1
-                        j = 0
-                        Do
-                            If Y(j) > 0 Then currcomp(j) = Y(j) / sum3 Else currcomp(j) = 0
-                            j = j + 1
-                        Loop Until j = n + 1
+                                       Y = vector.Clone
 
-                        If Settings.EnableParallelProcessing Then
+                                       cc = 0
+                                       Do
 
-                            Dim task1 = Task.Factory.StartNew(Sub()
-                                                                  fcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
-                                                              End Sub,
-                                                                  Settings.TaskCancellationTokenSource.Token,
-                                                                  TaskCreationOptions.None,
-                                                                 Settings.AppTaskScheduler)
-                            Dim task2 = Task.Factory.StartNew(Sub()
-                                                                  fcl = pp.DW_CalcFugCoeff(currcomp, T, P, State.Liquid)
-                                                              End Sub,
-                                                              Settings.TaskCancellationTokenSource.Token,
-                                                              TaskCreationOptions.None,
-                                                             Settings.AppTaskScheduler)
-                            Task.WaitAll(task1, task2)
+                                           If Not excidx.Contains(xi) Then
+                                               jj = 0
+                                               sum3 = 0
+                                               Do
+                                                   If Y(jj) > 0 Then sum3 += Y(jj)
+                                                   jj = jj + 1
+                                               Loop Until jj = n + 1
+                                               jj = 0
+                                               Do
+                                                   If Y(jj) > 0 Then currcomp(jj) = Y(jj) / sum3 Else currcomp(jj) = 0
+                                                   jj = jj + 1
+                                               Loop Until jj = n + 1
 
-                        Else
-                            IObj?.SetCurrent
-                            fcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
-                            IObj?.SetCurrent
-                            fcl = pp.DW_CalcFugCoeff(currcomp, T, P, State.Liquid)
-                        End If
+                                               ffcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
+                                               ffcl = pp.DW_CalcFugCoeff(currcomp, T, P, State.Liquid)
 
-                        gv = 0.0#
-                        gl = 0.0#
-                        For j = 0 To n
-                            If currcomp(j) <> 0.0# Then gv += currcomp(j) * Log(fcv(j) * currcomp(j))
-                            If currcomp(j) <> 0.0# Then gl += currcomp(j) * Log(fcl(j) * currcomp(j))
-                        Next
+                                               Dim ggv As Double = 0.0#
+                                               Dim ggl As Double = 0.0#
+                                               For jj = 0 To n
+                                                   If currcomp(jj) <> 0.0# Then ggv += currcomp(jj) * Log(ffcv(jj) * currcomp(jj))
+                                                   If currcomp(jj) <> 0.0# Then ggl += currcomp(jj) * Log(ffcl(jj) * currcomp(jj))
+                                               Next
 
-                        If gl <= gv Then
-                            tmpfug = fcl
-                        Else
-                            tmpfug = fcv
-                        End If
+                                               If ggl <= ggv Then
+                                                   ttmpfug = ffcl
+                                               Else
+                                                   ttmpfug = ffcv
+                                               End If
 
-                        j = 0
-                        Do
-                            lnfi(j) = Log(tmpfug(j))
-                            j = j + 1
-                        Loop Until j = n + 1
-                        j = 0
-                        Do
-                            dgdY(j) = Log(Y(j)) + lnfi(j) - h(j)
-                            j = j + 1
-                        Loop Until j = n + 1
-                        j = 0
-                        beta(i) = 0
-                        Do
-                            beta(i) += (Y(j) - Vz(j)) * dgdY(j)
-                            j = j + 1
-                        Loop Until j = n + 1
-                        g_(i) = 1
-                        j = 0
-                        Do
-                            g_(i) += Y(j) * (Log(Y(j)) + lnfi(j) - h(j) - 1)
-                            j = j + 1
-                        Loop Until j = n + 1
-                        If i > 0 Then r_ant(i) = r(i) Else r_ant(i) = 0
-                        r(i) = 2 * g_(i) / beta(i)
-                    End If
+                                               jj = 0
+                                               Do
+                                                   lnfi(jj) = Log(ttmpfug(jj))
+                                                   jj = jj + 1
+                                               Loop Until jj = n + 1
+                                               jj = 0
+                                               Do
+                                                   dgdY(jj) = Log(Y(jj)) + lnfi(jj) - h(jj)
+                                                   jj = jj + 1
+                                               Loop Until jj = n + 1
+                                               jj = 0
+                                               beta(xi) = 0
+                                               Do
+                                                   beta(xi) += (Y(jj) - Vz(jj)) * dgdY(jj)
+                                                   jj = jj + 1
+                                               Loop Until jj = n + 1
+                                               g_(xi) = 1
+                                               jj = 0
+                                               Do
+                                                   g_(xi) += Y(jj) * (Log(Y(jj)) + lnfi(jj) - h(jj) - 1)
+                                                   jj = jj + 1
+                                               Loop Until jj = n + 1
+                                               If xi > 0 Then r_ant(xi) = r(xi) Else r_ant(xi) = 0
+                                               r(xi) = 2 * g_(xi) / beta(xi)
+                                           End If
 
-                    j = 0
-                    Do
-                        Y_ant(j) = Y(j)
-                        Y(j) = Exp(h(j) - lnfi(j))
-                        dY(j) = Y(j) - Y_ant(j)
-                        If Y(j) < 0 Then Y(j) = 0
-                        j = j + 1
-                    Loop Until j = n + 1
+                                           jj = 0
+                                           Do
+                                               Y_ant(jj) = Y(jj)
+                                               Y(jj) = Exp(h(jj) - lnfi(jj))
+                                               dY(jj) = Y(jj) - Y_ant(jj)
+                                               If Y(jj) < 0 Then Y(jj) = 0
+                                               jj = jj + 1
+                                           Loop Until jj = n + 1
 
-                    'check convergence
+                                           'check convergence
 
-                    finish = True
-                    j = 0
-                    Do
-                        If Abs(dY(j)) > tol Then
-                            finish = False
-                        End If
-                        j = j + 1
-                    Loop Until j = n + 1
+                                           finish = True
+                                           jj = 0
+                                           Do
+                                               If Abs(dY(jj)) > tol Then
+                                                   finish = False
+                                               End If
+                                               jj = jj + 1
+                                           Loop Until jj = n + 1
 
-                    c = c + 1
+                                           cc = cc + 1
 
-                    If c > maxits Then Exit Do
+                                           If cc > maxits Then Exit Do
 
-                    If finish Then Vestimates.Add(Y)
+                                           If finish Then Vestimates.Add(Y)
 
-                Loop Until finish = True
+                                           If Double.IsNaN(Y.SumY) Then Exit Do
 
-                i += 1
+                                       Loop Until finish = True
 
-            Next
+                                   End Sub)
+
+            GlobalSettings.Settings.InspectorEnabled = prevstatus
+
+            IObj?.SetCurrent
 
             ' search for trivial solutions
 
