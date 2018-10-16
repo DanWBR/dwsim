@@ -1,4 +1,4 @@
-Version 5.4
+Version 5.4 + Update 1
 
 - [NEW] A new Global Flash Algorithm supporting one solid, one vapor and two liquid phases, is now the default one
 - [NEW] Updated Inspector Window for Classic UI

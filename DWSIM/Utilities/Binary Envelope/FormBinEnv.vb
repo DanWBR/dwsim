@@ -262,7 +262,7 @@ Public Class FormBinEnv
 
         Me.GraphControl.GraphPane.CurveList.Clear()
 
-        If e.Error IsNot Nothing Then Throw e.Error
+        If e.Error IsNot Nothing Then Flowsheet.ShowMessage(e.Error.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
 
         Dim c(1) As String
         c(0) = cbComp1.SelectedItem.ToString

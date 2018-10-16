@@ -125,6 +125,11 @@ Public Class FormFlowsheet
 
         Options.ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))
 
+        Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSVLLE()
+        fa.Tag = fa.Name & " (1)"
+
+        Options.FlashAlgorithms.Add(fa)
+
     End Sub
 
     Private Sub FormChild_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
