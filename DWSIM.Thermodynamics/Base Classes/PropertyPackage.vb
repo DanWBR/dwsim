@@ -7125,6 +7125,26 @@ Final3:
 
         End Function
 
+        Public Function DW_CalcSolidFugCoeff(phil() As Double, T As Double, P As Double) As Double()
+
+            Dim Tf = RET_VTF()
+            Dim Hf = RET_VHF()
+
+            Dim i, n As Integer
+
+            n = phil.Length - 1
+
+            Dim phis(n) As Double
+
+            For i = 0 To n
+                phis(i) = phil(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) - 1
+                If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
+            Next
+
+            Return phis
+
+        End Function
+
         Public Overridable Function DW_CalcSolidHeatCapacityCp(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
             Dim n As Integer = Vx.Length - 1
