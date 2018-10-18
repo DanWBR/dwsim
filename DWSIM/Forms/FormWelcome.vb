@@ -252,7 +252,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
     End Sub
 
-    Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
+    Private Sub Button8_Click(sender As System.Object, e As System.EventArgs)
         Process.Start("https://sourceforge.net/p/dwsim/donate/?source=navbar")
     End Sub
 
@@ -352,6 +352,10 @@ Public Class FormWelcome
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Process.Start("https://fossee.in/")
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Process.Start("https://gumroad.com/products/PTljX")
     End Sub
 
 End Class

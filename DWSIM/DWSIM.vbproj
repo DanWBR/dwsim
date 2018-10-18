@@ -1978,6 +1978,11 @@
     <None Include="Resources\python-logo.png" />
     <None Include="Resources\icons8-spy_filled.png" />
     <None Include="Resources\PayPal-Donate-Button-PNG-HD.png" />
+    <None Include="Resources\icon_phone_ticket.png" />
+    <None Include="Resources\icon_phone_ticket2.png" />
+    <None Include="Resources\icon_phone_ticket21.png" />
+    <None Include="Resources\icon_phone_ticket22.png" />
+    <None Include="Resources\icon_phone_ticket23.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

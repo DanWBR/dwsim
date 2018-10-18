@@ -46,10 +46,10 @@ Partial Class FormWelcome
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.FOSSEEList = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TabPage3 = New System.Windows.Forms.TabPage()
@@ -60,8 +60,7 @@ Partial Class FormWelcome
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -74,7 +73,6 @@ Partial Class FormWelcome
         Me.TabPage5.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label11
@@ -261,10 +259,10 @@ Partial Class FormWelcome
         '
         resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Controls.Add(Me.Label8)
-        Me.TabPage5.Controls.Add(Me.Button6)
-        Me.TabPage5.Controls.Add(Me.Button4)
         Me.TabPage5.Controls.Add(Me.Label5)
         Me.TabPage5.Controls.Add(Me.Label13)
+        Me.TabPage5.Controls.Add(Me.Button6)
+        Me.TabPage5.Controls.Add(Me.Button4)
         Me.TabPage5.Controls.Add(Me.FOSSEEList)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -275,20 +273,6 @@ Partial Class FormWelcome
         Me.Label8.BackColor = System.Drawing.Color.Transparent
         Me.Label8.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label8.Name = "Label8"
-        '
-        'Button6
-        '
-        resources.ApplyResources(Me.Button6, "Button6")
-        Me.Button6.Image = Global.DWSIM.My.Resources.Resources.information
-        Me.Button6.Name = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -303,6 +287,20 @@ Partial Class FormWelcome
         Me.Label13.BackColor = System.Drawing.Color.Transparent
         Me.Label13.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label13.Name = "Label13"
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Image = Global.DWSIM.My.Resources.Resources.information
+        Me.Button6.Name = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'FOSSEEList
         '
@@ -398,21 +396,11 @@ Partial Class FormWelcome
         Me.Label2.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label2.Name = "Label2"
         '
-        'Panel1
+        'Button7
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.BackColor = System.Drawing.Color.SteelBlue
-        Me.Panel1.Controls.Add(Me.Button8)
-        Me.Panel1.Name = "Panel1"
-        '
-        'Button8
-        '
-        resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.BackgroundImage = Global.DWSIM.My.Resources.Resources.PayPal_Donate_Button_PNG_HD
-        Me.Button8.FlatAppearance.BorderSize = 0
-        Me.Button8.ForeColor = System.Drawing.Color.Black
-        Me.Button8.Name = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.Button7, "Button7")
+        Me.Button7.Name = "Button7"
+        Me.Button7.UseVisualStyleBackColor = True
         '
         'Button11
         '
@@ -479,7 +467,7 @@ Partial Class FormWelcome
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Label14)
@@ -512,7 +500,6 @@ Partial Class FormWelcome
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -551,8 +538,6 @@ Partial Class FormWelcome
     Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
-    Friend WithEvents Panel1 As Panel
-    Public WithEvents Button8 As Button
     Friend WithEvents TabPage5 As TabPage
     Friend WithEvents FOSSEEList As ListView
     Friend WithEvents ColumnHeader4 As ColumnHeader
@@ -561,4 +546,5 @@ Partial Class FormWelcome
     Friend WithEvents Button4 As Button
     Public WithEvents Label5 As Label
     Public WithEvents Label13 As Label
+    Friend WithEvents Button7 As Button
 End Class

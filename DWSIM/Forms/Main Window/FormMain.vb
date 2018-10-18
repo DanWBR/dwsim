@@ -3479,7 +3479,7 @@ Label_00CC:
     End Sub
 
     Private Sub DonateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DonateToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://sourceforge.net/p/dwsim/donate/")
+        System.Diagnostics.Process.Start("https://gumroad.com/products/PTljX")
     End Sub
 
     Private Sub MostrarBarraDeFerramentasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MostrarBarraDeFerramentasToolStripMenuItem.Click

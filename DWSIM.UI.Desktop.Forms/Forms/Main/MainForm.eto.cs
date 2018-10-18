@@ -73,7 +73,7 @@ namespace DWSIM.UI
                 button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
                 button.TextColor = Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
-                button.Width = (int)(230 * sf);
+                button.Width = (int)(sf * 250);
             });
 
             Eto.Style.Add<Button>("donate", button =>
@@ -82,7 +82,7 @@ namespace DWSIM.UI
                 button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
                 button.TextColor = !s.DarkMode ? bgcolor : Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
-                button.Width = (int)(sf * 230);
+                button.Width = (int)(sf * 250);
             });
 
             var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
@@ -91,7 +91,7 @@ namespace DWSIM.UI
             var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn6 = new Button() { Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn8 = new Button() { Style = "donate", Text = "Donate ", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "PayPal_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn8 = new Button() { Style = "donate", Text = "Purchase Support Ticket", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icon_phone_ticket2.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "VerticalSettingsMixer_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
 
             btn9.Click += (sender, e) =>
@@ -133,7 +133,7 @@ namespace DWSIM.UI
             };
 
             btn7.Click += (sender, e) => new AboutBox().Show();
-            btn8.Click += (sender, e) => Process.Start("http://sourceforge.net/p/dwsim/donate/");
+            btn8.Click += (sender, e) => Process.Start("https://gumroad.com/products/PTljX");
 
             var stack = new StackLayout { Orientation = Orientation.Vertical, Spacing = 5 };
             stack.Items.Add(btn1);
