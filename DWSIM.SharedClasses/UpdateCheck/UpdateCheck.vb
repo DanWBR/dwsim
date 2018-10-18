@@ -13,7 +13,11 @@ Public Class UpdateCheck
             latestversion = WebClient.DownloadString(url)
             Console.WriteLine("Latest Version: " & latestversion)
             If latestversion = "" Then Return False
-            If latestversion <> GlobalSettings.Settings.CurrentRunningVersion Then
+            Dim currver = New Version(GlobalSettings.Settings.CurrentRunningVersion)
+            Dim latver = New Version(latestversion)
+            Console.WriteLine("Current Version: " & currver.ToString)
+            Console.WriteLine("Latest Version: " & latver.ToString)
+            If latver > currver Then
                 Return True
             Else
                 Return False

@@ -1,7 +1,4 @@
-Version 5.4 + Update 1
+Version 5.4 Update 2
 
-- [NEW] A new Global Flash Algorithm supporting one solid, one vapor and two liquid phases, is now the default one
-- [NEW] Updated Inspector Window for Classic UI
-- [CHG] Enhanced reliability of the liquid phase stability test, removes the need for stability search key compound selection
-- [CHG] Missing NRTL/UNIQUAC Interaction Parameters warning only for non-zero compound amounts
-- [FIX] Fixed broken sample simulations
+- [FIX] Fixed handling of solids by the Gibbs reactor
+- [FIX] Other bug fixes
