@@ -749,7 +749,7 @@ Namespace Reactors
 
                 Me.points.Add(tmparr)
 
-                Dim Qvin, Qlin, eta_v, eta_l, rho_v, rho_l, tens, rho, eta As Double
+                Dim Qvin, Qlin, eta_v, eta_l, rho_v, rho_l, tens, rho, eta, xv, xl As Double
 
                 With ims
                     rho = .Phases(0).Properties.density.GetValueOrDefault
@@ -761,7 +761,11 @@ Namespace Reactors
                     Qvin = .Phases(2).Properties.volumetric_flow.GetValueOrDefault
                     rho_v = .Phases(2).Properties.density.GetValueOrDefault
                     eta_v = .Phases(2).Properties.viscosity.GetValueOrDefault
+                    xv = .Phases(2).Properties.massfraction.GetValueOrDefault
+                    xl = .Phases(1).Properties.massfraction.GetValueOrDefault
                 End With
+
+                eta = eta_l * xl + eta_v * xv
 
                 Dim diameter As Double = (4 * Me.Volume / PI / Me.Length) ^ 0.5
 
