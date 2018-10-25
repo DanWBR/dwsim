@@ -50,6 +50,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
+            FlashSettings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = True
         End Sub
 
         Public Property LimitVaporFraction As Boolean = True

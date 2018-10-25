@@ -1828,13 +1828,13 @@ Namespace PropertyPackages
                 Case Interfaces.Enums.FlashCalculationType.PressureVaporFraction
                     Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureEnthalpy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureEntropy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureSolidFraction
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureVaporFraction
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Else
                     Throw New NotImplementedException
             End Select
