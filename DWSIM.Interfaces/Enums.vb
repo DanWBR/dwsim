@@ -209,6 +209,8 @@ Namespace Enums
         CAPE_OPEN_Equilibrium_Server = 15
         SteamTables = 16
         Nested_Loops_SVLLE = 17
+        CoolProp_Incompressibles = 18
+        CoolProp_IncompressibleMixtures = 18
     End Enum
 
     Public Enum FlashSetting

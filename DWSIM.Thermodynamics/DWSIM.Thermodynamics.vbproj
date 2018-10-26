@@ -280,6 +280,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Flash Algorithms\CAPEOPEN_Equilibrium_Server.vb" />
+    <Compile Include="Flash Algorithms\CoolPropIncompressibleMixture.vb" />
+    <Compile Include="Flash Algorithms\CoolPropIncompressiblePure.vb" />
     <Compile Include="Flash Algorithms\NestedLoopsSVLLE.vb" />
     <Compile Include="Flash Algorithms\SteamTables.vb" />
     <Compile Include="Helper Classes\ConsoleRedirection.vb" />
@@ -348,6 +350,8 @@
     <Compile Include="Property Packages\CoolProp.vb" />
     <Compile Include="Models\ChaoSeader.vb" />
     <Compile Include="Models\ExtendedUNIQUAC.vb" />
+    <Compile Include="Property Packages\CoolPropIncompressibleMixture.vb" />
+    <Compile Include="Property Packages\CoolPropIncompressiblePure.vb" />
     <Compile Include="Property Packages\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\GraysonStreed.vb" />
     <Compile Include="Models\GraysonStreed.vb" />
@@ -712,6 +716,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Databases\coolprop.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\CoolPropIncompMixtures.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

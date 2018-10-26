@@ -454,6 +454,16 @@ Public Class FormMain
         CPPP.ComponentDescription = DWSIM.App.GetLocalString("DescCPPP")
         PropertyPackages.Add(CPPP.ComponentName.ToString, CPPP)
 
+        Dim CPIPP As New CoolPropIncompressiblePurePropertyPackage()
+        CPIPP.ComponentName = "CoolProp (Incompressible Fluids)"
+        CPIPP.ComponentDescription = "CoolProp (Incompressible Fluids)"
+        PropertyPackages.Add(CPIPP.ComponentName.ToString, CPIPP)
+
+        Dim CPIMPP As New CoolPropIncompressibleMixturePropertyPackage()
+        CPIMPP.ComponentName = "CoolProp (Incompressible Mixtures)"
+        CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
+        PropertyPackages.Add(CPIMPP.ComponentName.ToString, CPIMPP)
+
         Dim SWPP As New SourWaterPropertyPackage()
         SWPP.ComponentName = DWSIM.App.GetLocalString("SourWaterPP")
         SWPP.ComponentDescription = DWSIM.App.GetLocalString("DescSourWaterPP")

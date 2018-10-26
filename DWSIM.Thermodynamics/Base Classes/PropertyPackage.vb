@@ -7538,6 +7538,19 @@ Final3:
 
         End Function
 
+        Public Function RET_UnitaryVector() As Double()
+
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+            Dim subst As Interfaces.ICompound
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val(i) = 1.0#
+                i += 1
+            Next
+            Return val
+
+        End Function
+
         Public Function RET_PHASECODE(ByVal phaseID As Integer) As PropertyPackages.Phase
             Select Case phaseID
                 Case 0
