@@ -191,9 +191,24 @@ Namespace PropertyPackages
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
             If st = State.Liquid Then
-                Return CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x)) / 1000
+                Try
+                    Return CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x)) / 1000
+                Catch ex As Exception
+                    Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0, SolventCompound)
+                    Return CoolProp.PropsSI("H", "P", P * 1.01, "T", Tsat, SolventCompound) / 1000
+                End Try
             Else
-                Return CoolProp.PropsSI("H", "T", T, "P", P, SolventCompound) / 1000
+                Dim Hvap, Hl, Hv, Hb As Double
+                Hl = CoolProp.PropsSI("H", "P", P, "Q", 0.0, SolventCompound) / 1000
+                Hv = CoolProp.PropsSI("H", "P", P, "Q", 1.0, SolventCompound) / 1000
+                Hvap = Hv - Hl
+                Try
+                    Hb = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x)) / 1000
+                Catch ex As Exception
+                    Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0, SolventCompound)
+                    Hb = CoolProp.PropsSI("H", "P", P * 1.01, "T", Tsat, SolventCompound) / 1000
+                End Try
+                Return Hb + Hvap
             End If
 
         End Function
@@ -212,7 +227,11 @@ Namespace PropertyPackages
             If st = State.Liquid Then
                 Return CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(x)) / 1000
             Else
-                Return CoolProp.PropsSI("S", "T", T, "P", P, SolventCompound) / 1000
+                Dim Svap, Sl, Sv As Double
+                Sl = CoolProp.PropsSI("S", "P", P, "Q", 0.0, SolventCompound) / 1000
+                Sv = CoolProp.PropsSI("S", "P", P, "Q", 1.0, SolventCompound) / 1000
+                Svap = Sv - Sl
+                Return CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(x)) / 1000 + Svap
             End If
 
         End Function

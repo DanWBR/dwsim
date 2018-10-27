@@ -78,7 +78,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim vf, lf, T, Tmin, Tmax, Hl, Hv, Hsat As Double
+            Dim vf, lf, T, Tmin, Tmax, Tant, Hl, Hv, mwl, mwv As Double
 
             spp = PP
 
@@ -91,40 +91,59 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vz)
             Dim x = Vxw(si)
 
-            Dim brentsolverT As New BrentOpt.Brent
-            brentsolverT.DefineFuncDelegate(AddressOf spp.EnthalpyTx)
-
             Dim Vx = Vz.Clone
             Dim Vy = spp.RET_NullVector
 
             With spp
 
                 T = Tref
-                Hl = .EnthalpySatLiqP(P, T, x)
-                Hv = .EnthalpySatVapP(P, T, x)
-
-                If H < Hl Then
-                    vf = 0.0#
-                ElseIf H > Hv Then
-                    vf = 1.0#
-                Else
-                    vf = (H - Hl) / (Hv - Hl)
-                End If
-
-                lf = 1 - vf
 
                 Vy(nsi) = 1.0
-                Vx(nsi) = (Vz(nsi) - vf) / lf
+                Vx(nsi) = Vz(nsi)
                 Vx(si) = 1.0 - Vx(nsi)
 
-                If vf <> 0.0# And vf <> 1.0# Then
-                    T = CoolProp.PropsSI("T", "P", P, "H", Hl, spp.GetCoolPropName(Vx(si)))
-                Else
-                    .LoopVarF = H
-                    .LoopVarP = P
-                    .LoopVarX = x
-                    T = brentsolverT.BrentOpt(Tmin, Tmax, 100, 0.0001, 1000, Nothing)
-                End If
+                Do
+
+                    Hl = spp.DW_CalcEnthalpy(Vx, T, P, State.Liquid)
+                    Hv = spp.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
+
+                    If H < Hl Then
+                        vf = 0.0#
+                    ElseIf H > Hv Then
+                        vf = 1.0#
+                    Else
+                        vf = (H - Hl) / (Hv - Hl)
+                    End If
+
+                    lf = 1 - vf
+
+                    Vy(nsi) = 1.0
+                    Vx(nsi) = (Vz(nsi) - vf) / lf
+                    Vx(si) = 1.0 - Vx(nsi)
+
+                    mwv = spp.AUX_MMM(Vy)
+                    mwl = spp.AUX_MMM(Vx)
+
+                    Tant = T
+                    If vf <> 0.0# And vf <> 1.0# Then
+                        Dim bs As New BrentOpt.BrentMinimize
+                        bs.DefineFuncDelegate(Function(tx)
+                                                  Hl = spp.DW_CalcEnthalpy(Vx, tx, P, State.Liquid)
+                                                  Hv = spp.DW_CalcEnthalpy(Vy, tx, P, State.Vapor)
+                                                  Return (H - vf * mwv / (vf * mwv + lf * mwl) * Hv - lf * mwl / (vf * mwv + lf * mwl) * Hl) ^ 2
+                                              End Function)
+                        Dim fmin As Double
+                        fmin = bs.brentoptimize(Tmin, Tmax, 0.0001, T)
+                    Else
+                        Dim brentsolverT As New BrentOpt.Brent
+                        brentsolverT.DefineFuncDelegate(AddressOf spp.EnthalpyTx)
+                        .LoopVarF = H
+                        .LoopVarP = P
+                        .LoopVarX = x
+                        T = brentsolverT.BrentOpt(Tmin, Tmax, 100, 0.0001, 1000, Nothing)
+                    End If
+
+                Loop Until Math.Abs(T - Tant) < 0.01
 
             End With
 
