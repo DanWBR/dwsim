@@ -78,7 +78,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim vf, lf, T, Tmin, Tmax, Tant, Hl, Hv, mwl, mwv As Double
+            Dim vf, vfant, lf, T, Tmin, Tmax, Tsat, Hl, Hv As Double
 
             spp = PP
 
@@ -93,57 +93,57 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Vx = Vz.Clone
             Dim Vy = spp.RET_NullVector
+            Vy(nsi) = 1.0
 
             With spp
 
-                T = Tref
-
-                Vy(nsi) = 1.0
-                Vx(nsi) = Vz(nsi)
-                Vx(si) = 1.0 - Vx(nsi)
+                vf = -1.0
 
                 Do
 
-                    Hl = spp.DW_CalcEnthalpy(Vx, T, P, State.Liquid)
-                    Hv = spp.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
+                    Tsat = spp.AUX_TSAT(P, x)
+
+                    Hl = spp.DW_CalcEnthalpy(Vz, Tsat, P, State.Liquid)
+                    Hv = spp.DW_CalcEnthalpy(Vz, Tsat, P, State.Vapor)
+
+                    vfant = vf
 
                     If H < Hl Then
                         vf = 0.0#
-                    ElseIf H > Hv Then
-                        vf = 1.0#
-                    Else
-                        vf = (H - Hl) / (Hv - Hl)
-                    End If
-
-                    lf = 1 - vf
-
-                    Vy(nsi) = 1.0
-                    Vx(nsi) = (Vz(nsi) - vf) / lf
-                    Vx(si) = 1.0 - Vx(nsi)
-
-                    mwv = spp.AUX_MMM(Vy)
-                    mwl = spp.AUX_MMM(Vx)
-
-                    Tant = T
-                    If vf <> 0.0# And vf <> 1.0# Then
+                        lf = 1 - vf
+                        Vx = Vz.Clone
+                        Vy = PP.RET_NullVector
                         Dim bs As New BrentOpt.BrentMinimize
                         bs.DefineFuncDelegate(Function(tx)
                                                   Hl = spp.DW_CalcEnthalpy(Vx, tx, P, State.Liquid)
-                                                  Hv = spp.DW_CalcEnthalpy(Vy, tx, P, State.Vapor)
-                                                  Return (H - vf * mwv / (vf * mwv + lf * mwl) * Hv - lf * mwl / (vf * mwv + lf * mwl) * Hl) ^ 2
+                                                  Return (H - Hl) ^ 2
                                               End Function)
                         Dim fmin As Double
-                        fmin = bs.brentoptimize(Tmin, Tmax, 0.0001, T)
+                        fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                    ElseIf H > Hv Then
+                        vf = 1.0#
+                        lf = 1 - vf
+                        Vy = Vz.Clone
+                        Vx = PP.RET_NullVector
+                        Dim bs As New BrentOpt.BrentMinimize
+                        bs.DefineFuncDelegate(Function(tx)
+                                                  Hv = spp.DW_CalcEnthalpy(Vy, tx, P, State.Vapor)
+                                                  Return (H - Hv) ^ 2
+                                              End Function)
+                        Dim fmin As Double
+                        fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
                     Else
-                        Dim brentsolverT As New BrentOpt.Brent
-                        brentsolverT.DefineFuncDelegate(AddressOf spp.EnthalpyTx)
-                        .LoopVarF = H
-                        .LoopVarP = P
-                        .LoopVarX = x
-                        T = brentsolverT.BrentOpt(Tmin, Tmax, 100, 0.0001, 1000, Nothing)
+                        vf = (H * spp.AUX_MMM(Vz) - Hl * spp.AUX_MMM(Vx)) / (Hv * spp.AUX_MMM(Vy) - Hl * spp.AUX_MMM(Vx))
+                        lf = 1 - vf
+                        Vy(nsi) = 1.0
+                        Vx(nsi) = (Vz(nsi) - vf) / lf
+                        Vx(si) = 1.0 - Vx(nsi)
+                        Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vx)
+                        x = Vxw(si)
+                        T = spp.AUX_TSAT(P, x)
                     End If
 
-                Loop Until Math.Abs(T - Tant) < 0.01
+                Loop Until Math.Abs(vf - vfant) < 0.0000000001
 
             End With
 
@@ -153,7 +153,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim vf, lf, T, Tmin, Tmax, Sl, Sv As Double
+            Dim vf, vfant, lf, T, Tmin, Tmax, Tsat, Sl, Sv As Double
 
             spp = PP
 
@@ -166,42 +166,61 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vz)
             Dim x = Vxw(si)
 
-            Dim brentsolverT As New BrentOpt.Brent
-            brentsolverT.DefineFuncDelegate(AddressOf spp.EntropyTx)
+            Dim Vx = Vz.Clone
+            Dim Vy = spp.RET_NullVector
+            Vy(nsi) = 1.0
 
             With spp
 
-                T = Tref
-                Sl = .EntropySatLiqP(P, T, x)
-                Sv = .EntropySatVapP(P, T, x)
+                vf = -1.0
 
-                If S < Sl Then
-                    vf = 0.0#
-                ElseIf S > Sv Then
-                    vf = 1.0#
-                Else
-                    vf = (S - Sl) / (Sv - Sl)
-                End If
+                Do
 
-                If vf <> 0.0# And vf <> 1.0# Then
-                    T = CoolProp.PropsSI("T", "P", P, "S", S * 1000, spp.GetCoolPropName(x))
-                Else
-                    .LoopVarF = S
-                    .LoopVarP = P
-                    .LoopVarX = x
-                    T = brentsolverT.BrentOpt(Tmin, Tmax, 100, 0.0001, 1000, Nothing)
-                End If
+                    Tsat = spp.AUX_TSAT(P, x)
+
+                    Sl = spp.DW_CalcEntropy(Vz, Tsat, P, State.Liquid)
+                    Sv = spp.DW_CalcEntropy(Vz, Tsat, P, State.Vapor)
+
+                    vfant = vf
+
+                    If S < Sl Then
+                        vf = 0.0#
+                        lf = 1 - vf
+                        Vx = Vz.Clone
+                        Vy = PP.RET_NullVector
+                        Dim bs As New BrentOpt.BrentMinimize
+                        bs.DefineFuncDelegate(Function(tx)
+                                                  Sl = spp.DW_CalcEntropy(Vx, tx, P, State.Liquid)
+                                                  Return (S - Sl) ^ 2
+                                              End Function)
+                        Dim fmin As Double
+                        fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                    ElseIf S > Sv Then
+                        vf = 1.0#
+                        lf = 1 - vf
+                        Vy = Vz.Clone
+                        Vx = PP.RET_NullVector
+                        Dim bs As New BrentOpt.BrentMinimize
+                        bs.DefineFuncDelegate(Function(tx)
+                                                  Sv = spp.DW_CalcEntropy(Vy, tx, P, State.Vapor)
+                                                  Return (S - Sv) ^ 2
+                                              End Function)
+                        Dim fmin As Double
+                        fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                    Else
+                        vf = (S * spp.AUX_MMM(Vz) - Sl * spp.AUX_MMM(Vx)) / (Sv * spp.AUX_MMM(Vy) - Sl * spp.AUX_MMM(Vx))
+                        lf = 1 - vf
+                        Vy(nsi) = 1.0
+                        Vx(nsi) = (Vz(nsi) - vf) / lf
+                        Vx(si) = 1.0 - Vx(nsi)
+                        Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vx)
+                        x = Vxw(si)
+                        T = spp.AUX_TSAT(P, x)
+                    End If
+
+                Loop Until Math.Abs(vf - vfant) < 0.0000000001
 
             End With
-
-            lf = 1 - vf
-
-            Dim Vx = Vz.Clone
-            Dim Vy = spp.RET_NullVector
-
-            Vy(si) = 1.0
-            Vx(si) = (Vz(si) - vf) / lf
-            Vx(nsi) = 1 - Vx(si)
 
             Return New Object() {lf, vf, Vx, Vy, T, 0.0#, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 

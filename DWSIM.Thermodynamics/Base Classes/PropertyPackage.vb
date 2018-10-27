@@ -2390,7 +2390,7 @@ Namespace PropertyPackages
                             If Not T.IsValid Or Not H.IsValid Then Throw New ArgumentException("PH Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
                             'If Not T.IsPositive Then Throw New ArgumentException("PH Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
 
-                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Me.ComponentName <> "FPROPS" Then
+                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Not Me.ComponentName.Contains("Incompressible") Then
 
                                 Dim brentsolverT As New BrentOpt.Brent
                                 brentsolverT.DefineFuncDelegate(AddressOf EnthalpyTx)
@@ -7695,7 +7695,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_IS_SINGLECOMP(ByVal Phase As Phase) As Boolean
+        Public Overridable Function AUX_IS_SINGLECOMP(ByVal Phase As Phase) As Boolean
 
             Dim c As Integer, bo As Boolean
 

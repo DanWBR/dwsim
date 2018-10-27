@@ -20,6 +20,7 @@ Imports System.IO
 Imports System.Linq
 Imports System.Reflection
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.MathOps.MathEx
 
 Namespace PropertyPackages
 
@@ -104,15 +105,35 @@ Namespace PropertyPackages
             End Select
         End Sub
 
-        Public Overrides Function AUX_CONDTG(T As Double, P As Double) As Double
-
-            Return 0.0
-
+        Public Overrides Function AUX_IS_SINGLECOMP(Phase As Phase) As Boolean
+            Return True
         End Function
 
-        Public Overrides Function AUX_MMM(Phase As Phase) As Double
+        Public Overrides Function AUX_CONDTG(T As Double, P As Double) As Double
 
-            Return 1.0
+            Dim Tb As Double
+            Dim Tmin = CoolProp.Props1SI(SolventCompound, "TMIN")
+            Dim Tmax = CoolProp.Props1SI(SolventCompound, "TMAX")
+            Dim Pmin = CoolProp.Props1SI(SolventCompound, "PMIN")
+            Dim Pmax = CoolProp.Props1SI(SolventCompound, "PMAX")
+            Dim Tc = CoolProp.Props1SI(SolventCompound, "TCRIT")
+            If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, SolventCompound) Else Tb = Tc
+            If T > Tb And Math.Abs(T - Tb) > 0.01 Then
+                Return CoolProp.PropsSI("L", "T", T, "P", P, SolventCompound)
+            Else
+                Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                x1 = Tb + (Tmax - Tb) * 0.2
+                x2 = Tb + (Tmax - Tb) * 0.4
+                x3 = Tb + (Tmax - Tb) * 0.6
+                x4 = Tb + (Tmax - Tb) * 0.8
+                x5 = Tb + (Tmax - Tb) * 0.9
+                p1 = CoolProp.PropsSI("L", "T", x1, "P", P, SolventCompound)
+                p2 = CoolProp.PropsSI("L", "T", x2, "P", P, SolventCompound)
+                p3 = CoolProp.PropsSI("L", "T", x3, "P", P, SolventCompound)
+                p4 = CoolProp.PropsSI("L", "T", x4, "P", P, SolventCompound)
+                p5 = CoolProp.PropsSI("L", "T", x5, "P", P, SolventCompound)
+                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+            End If
 
         End Function
 
@@ -122,11 +143,34 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function AUX_CONDTL(T As Double, Optional phaseid As Integer = 3) As Double
+        Public Function AUX_TSAT(P As Double, x As Double) As Double
+
+            Dim bs As New MathEx.BrentOpt.BrentMinimize
+            bs.DefineFuncDelegate(Function(t)
+                                      Return (P - CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x))) ^ 2
+                                  End Function)
+
+            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(0.0), "TMIN")
+            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(0.0), "TMAX")
+
+            Dim Tsat As Double = 0.0
+            Dim fval As Double
+
+            fval = bs.brentoptimize(Tmin, Tmax, 0.0001, Tsat)
+
+            Return Tsat
+
+        End Function
+
+        Public Function AUX_CONDTL2(T As Double, P As Double, phaseid As Integer) As Double
 
             Dim x = CurrentMaterialStream.Phases(phaseid).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
 
-            Return CoolProp.PropsSI("L", "T", T, "P", 101325, GetCoolPropName(x))
+            Try
+                Return CoolProp.PropsSI("L", "T", T, "P", P * 1.001, GetCoolPropName(x))
+            Catch ex As Exception
+                Return 0.0
+            End Try
 
         End Function
 
@@ -134,7 +178,11 @@ Namespace PropertyPackages
 
             Dim x = CurrentMaterialStream.Phases(3).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
 
-            Return CoolProp.PropsSI("D", "T", T, "P", P, GetCoolPropName(x))
+            Try
+                Return CoolProp.PropsSI("D", "T", T, "P", P * 1.001, GetCoolPropName(x))
+            Catch ex As Exception
+                Return 0.0
+            End Try
 
         End Function
 
@@ -151,13 +199,69 @@ Namespace PropertyPackages
 
         Public Function AUX_VAPVISCMIX(T As Double, P As Double, MM As Double) As Double
 
-            Return 0.0
+            Dim Tb As Double
+            Dim Tmin = CoolProp.Props1SI(SolventCompound, "TMIN")
+            Dim Tmax = CoolProp.Props1SI(SolventCompound, "TMAX")
+            Dim Pmin = CoolProp.Props1SI(SolventCompound, "PMIN")
+            Dim Pmax = CoolProp.Props1SI(SolventCompound, "PMAX")
+            Dim Tc = CoolProp.Props1SI(SolventCompound, "TCRIT")
+            If T < Tc Then Tb = CoolProp.PropsSI("V", "P", P, "Q", 1, SolventCompound) Else Tb = Tc
+            If T > Tb And Math.Abs(T - Tb) > 0.01 Then
+                Return CoolProp.PropsSI("V", "T", T, "P", P, SolventCompound)
+            Else
+                Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                x1 = Tb + (Tmax - Tb) * 0.2
+                x2 = Tb + (Tmax - Tb) * 0.4
+                x3 = Tb + (Tmax - Tb) * 0.6
+                x4 = Tb + (Tmax - Tb) * 0.8
+                x5 = Tb + (Tmax - Tb) * 0.9
+                p1 = CoolProp.PropsSI("V", "T", x1, "P", P, SolventCompound)
+                p2 = CoolProp.PropsSI("V", "T", x2, "P", P, SolventCompound)
+                p3 = CoolProp.PropsSI("V", "T", x3, "P", P, SolventCompound)
+                p4 = CoolProp.PropsSI("V", "T", x4, "P", P, SolventCompound)
+                p5 = CoolProp.PropsSI("V", "T", x5, "P", P, SolventCompound)
+                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+            End If
+
+        End Function
+
+        Public Function AUX_LIQVISCMIX(T As Double, P As Double, phaseid As Integer) As Double
+
+            Dim x = CurrentMaterialStream.Phases(phaseid).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
+
+            Try
+                Return CoolProp.PropsSI("V", "T", T, "P", P * 1.001, GetCoolPropName(x))
+            Catch ex As Exception
+                Return 0.0
+            End Try
 
         End Function
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
-            Return 0.0
+            Dim Tb As Double
+            Dim Tmin = CoolProp.Props1SI(SolventCompound, "TMIN")
+            Dim Tmax = CoolProp.Props1SI(SolventCompound, "TMAX")
+            Dim Pmin = CoolProp.Props1SI(SolventCompound, "PMIN")
+            Dim Pmax = CoolProp.Props1SI(SolventCompound, "PMAX")
+            Dim Tc = CoolProp.Props1SI(SolventCompound, "TCRIT")
+            If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, SolventCompound) Else Tb = Tc
+            If T > Tb And Math.Abs(T - Tb) > 0.01 Then
+                Return CoolProp.PropsSI("D", "T", T, "P", P, SolventCompound)
+            Else
+                Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                x1 = Tb + (Tmax - Tb) * 0.2
+                x2 = Tb + (Tmax - Tb) * 0.4
+                x3 = Tb + (Tmax - Tb) * 0.6
+                x4 = Tb + (Tmax - Tb) * 0.8
+                x5 = Tb + (Tmax - Tb) * 0.9
+                p1 = CoolProp.PropsSI("D", "T", x1, "P", P, SolventCompound)
+                p2 = CoolProp.PropsSI("D", "T", x2, "P", P, SolventCompound)
+                p3 = CoolProp.PropsSI("D", "T", x3, "P", P, SolventCompound)
+                p4 = CoolProp.PropsSI("D", "T", x4, "P", P, SolventCompound)
+                p5 = CoolProp.PropsSI("D", "T", x5, "P", P, SolventCompound)
+                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+            End If
 
         End Function
 
@@ -171,17 +275,45 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Dim x = CurrentMaterialStream.Phases(3).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
+            If Phase1 = Phase.Vapor Then
+                Dim Tb As Double
+                Dim Tmin = CoolProp.Props1SI(SolventCompound, "TMIN")
+                Dim Tmax = CoolProp.Props1SI(SolventCompound, "TMAX")
+                Dim Pmin = CoolProp.Props1SI(SolventCompound, "PMIN")
+                Dim Pmax = CoolProp.Props1SI(SolventCompound, "PMAX")
+                Dim Tc = CoolProp.Props1SI(SolventCompound, "TCRIT")
+                If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, SolventCompound) Else Tb = Tc
+                If T > Tb And Math.Abs(T - Tb) > 0.01 Then
+                    Return CoolProp.PropsSI("C", "T", T, "P", P, SolventCompound) / 1000
+                Else
+                    Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                    x1 = Tb + (Tmax - Tb) * 0.2
+                    x2 = Tb + (Tmax - Tb) * 0.4
+                    x3 = Tb + (Tmax - Tb) * 0.6
+                    x4 = Tb + (Tmax - Tb) * 0.8
+                    x5 = Tb + (Tmax - Tb) * 0.9
+                    p1 = CoolProp.PropsSI("C", "T", x1, "P", P, SolventCompound) / 1000
+                    p2 = CoolProp.PropsSI("C", "T", x2, "P", P, SolventCompound) / 1000
+                    p3 = CoolProp.PropsSI("C", "T", x3, "P", P, SolventCompound) / 1000
+                    p4 = CoolProp.PropsSI("C", "T", x4, "P", P, SolventCompound) / 1000
+                    p5 = CoolProp.PropsSI("C", "T", x5, "P", P, SolventCompound) / 1000
+                    Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                End If
+            Else
+                Dim x = CurrentMaterialStream.Phases(3).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
+                Try
+                    Return CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(x)) / 1000
+                Catch ex As Exception
+                    Return CoolProp.PropsSI("C", "T", T, "P", P * 1.01, GetCoolPropName(x)) / 1000
+                End Try
+            End If
 
-            Return CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(x)) / 1000
 
         End Function
 
         Public Overrides Function DW_CalcCv_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Dim x = CurrentMaterialStream.Phases(3).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
-
-            Return CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(x)) / 1000
+            Return DW_CalcCp_ISOL(Phase1, T, P)
 
         End Function
 
@@ -194,21 +326,20 @@ Namespace PropertyPackages
                 Try
                     Return CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x)) / 1000
                 Catch ex As Exception
-                    Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0, SolventCompound)
-                    Return CoolProp.PropsSI("H", "P", P * 1.01, "T", Tsat, SolventCompound) / 1000
+                    Dim Tsat = AUX_TSAT(P, x)
+                    If T > Tsat Then
+                        Return CoolProp.PropsSI("H", "T", Tsat, "P", P * 1.01, GetCoolPropName(x)) / 1000
+                    Else
+                        Return CoolProp.PropsSI("H", "T", T, "P", P * 1.01, GetCoolPropName(x)) / 1000
+                    End If
                 End Try
             Else
-                Dim Hvap, Hl, Hv, Hb As Double
-                Hl = CoolProp.PropsSI("H", "P", P, "Q", 0.0, SolventCompound) / 1000
-                Hv = CoolProp.PropsSI("H", "P", P, "Q", 1.0, SolventCompound) / 1000
-                Hvap = Hv - Hl
-                Try
-                    Hb = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x)) / 1000
-                Catch ex As Exception
-                    Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0, SolventCompound)
-                    Hb = CoolProp.PropsSI("H", "P", P * 1.01, "T", Tsat, SolventCompound) / 1000
-                End Try
-                Return Hb + Hvap
+                Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 1.0, SolventCompound)
+                If T > Tsat Then
+                    Return CoolProp.PropsSI("H", "T", T, "P", P, SolventCompound) / 1000
+                Else
+                    Return CoolProp.PropsSI("H", "P", P, "Q", 1.0, SolventCompound) / 1000
+                End If
             End If
 
         End Function
@@ -225,13 +356,23 @@ Namespace PropertyPackages
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
             If st = State.Liquid Then
-                Return CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(x)) / 1000
+                Try
+                    Return CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(x)) / 1000
+                Catch ex As Exception
+                    Dim Tsat = AUX_TSAT(P, x)
+                    If T > Tsat Then
+                        Return CoolProp.PropsSI("S", "T", Tsat, "P", P * 1.01, GetCoolPropName(x)) / 1000
+                    Else
+                        Return CoolProp.PropsSI("S", "T", T, "P", P * 1.01, GetCoolPropName(x)) / 1000
+                    End If
+                End Try
             Else
-                Dim Svap, Sl, Sv As Double
-                Sl = CoolProp.PropsSI("S", "P", P, "Q", 0.0, SolventCompound) / 1000
-                Sv = CoolProp.PropsSI("S", "P", P, "Q", 1.0, SolventCompound) / 1000
-                Svap = Sv - Sl
-                Return CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(x)) / 1000 + Svap
+                Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 1.0, SolventCompound)
+                If T > Tsat Then
+                    Return CoolProp.PropsSI("S", "T", T, "P", P, SolventCompound) / 1000
+                Else
+                    Return CoolProp.PropsSI("S", "P", P, "Q", 1.0, SolventCompound) / 1000
+                End If
             End If
 
         End Function
@@ -240,68 +381,6 @@ Namespace PropertyPackages
 
             Return DW_CalcEntropy(Vx, T, P, st)
 
-        End Function
-
-        Friend LoopVarF As Double = 0
-        Friend LoopVarX As Double = 0
-        Friend LoopVarP As Double = 0
-
-        Public Function EnthalpyTx(T As Double, otherargs As Object) As Double
-            Return LoopVarF - CoolProp.PropsSI("H", "T", T, "P", LoopVarP, GetCoolPropName(LoopVarX)) / 1000
-        End Function
-
-        Public Function EntropyTx(T As Double, otherargs As Object) As Double
-            Return LoopVarF - CoolProp.PropsSI("S", "T", T, "P", LoopVarP, GetCoolPropName(LoopVarX)) / 1000
-        End Function
-
-        Public Function EnthalpySatLiqP(P As Double, T As Double, x As Double) As Double
-            Dim Tsat As Double
-            Try
-                Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0.0, GetCoolPropName(x))
-            Catch ex As Exception
-                Tsat = T
-            End Try
-            Return CoolProp.PropsSI("H", "P", P, "T", Tsat, GetCoolPropName(x)) / 1000
-        End Function
-
-        Public Function EntropySatLiqP(P As Double, T As Double, x As Double) As Double
-            Dim Tsat As Double
-            Try
-                Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0.0, GetCoolPropName(x))
-            Catch ex As Exception
-                Tsat = T
-            End Try
-            Return CoolProp.PropsSI("S", "P", P, "T", Tsat, GetCoolPropName(x)) / 1000
-        End Function
-
-        Public Function EnthalpySatVapP(P As Double, T As Double, x As Double) As Double
-            Dim Tsat As Double
-            Try
-                Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0.0, GetCoolPropName(x))
-            Catch ex As Exception
-                Tsat = T
-            End Try
-            Dim xmax = SolutionDataList(SoluteName).xmax
-            Dim Hvap, Hl, Hv As Double
-            Hl = CoolProp.PropsSI("H", "P", P, "Q", 0.0, SolventCompound) / 1000
-            Hv = CoolProp.PropsSI("H", "P", P, "Q", 1.0, SolventCompound) / 1000
-            Hvap = Hv - Hl
-            Return CoolProp.PropsSI("H", "P", P, "T", Tsat, GetCoolPropName(xmax)) / 1000 + Hvap
-        End Function
-
-        Public Function EntropySatVapP(P As Double, T As Double, x As Double) As Double
-            Dim Tsat As Double
-            Try
-                Tsat = CoolProp.PropsSI("T", "P", P, "Q", 0.0, GetCoolPropName(x))
-            Catch ex As Exception
-                Tsat = T
-            End Try
-            Dim xmax = SolutionDataList(SoluteName).xmax
-            Dim Svap, Sl, Sv As Double
-            Sl = CoolProp.PropsSI("S", "P", P, "Q", 0.0, SolventCompound) / 1000
-            Sv = CoolProp.PropsSI("S", "P", P, "Q", 1.0, SolventCompound) / 1000
-            Svap = Sv - Sl
-            Return CoolProp.PropsSI("S", "P", P, "T", Tsat, GetCoolPropName(xmax)) / 1000 + Svap
         End Function
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
@@ -432,11 +511,11 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
 
                 IObj?.SetCurrent
-                result = Me.AUX_CONDTL(T)
+                result = Me.AUX_CONDTL2(T, P, phaseID)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
                 IObj?.SetCurrent
-                result = Me.AUX_LIQVISCm(T, P)
+                result = Me.AUX_LIQVISCMIX(T, P, phaseID)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
 
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
