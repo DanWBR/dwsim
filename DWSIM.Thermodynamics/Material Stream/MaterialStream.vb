@@ -956,6 +956,18 @@ Namespace Streams
 
         End Sub
 
+        Public Function GetPhaseComposition(phs As Integer) As Double() Implements IMaterialStream.GetPhaseComposition
+
+            Return Phases(phs).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
+
+        End Function
+
+        Public Function GetOverallComposition() As Double() Implements IMaterialStream.GetOverallComposition
+
+            Return Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
+
+        End Function
+
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)

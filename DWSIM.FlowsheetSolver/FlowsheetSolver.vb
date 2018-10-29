@@ -1061,23 +1061,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 rechess(i, i) = 1
             Next
 
-            'set all objects' status to 'not calculated' (red) in the list
-
-            For Each o In objstack
-                obj = fbag.SimulationObjects(o)
-                With obj
-                    .Calculated = False
-                    If Not obj.GraphicObject Is Nothing Then
-                        If obj.GraphicObject.Active Then
-                            obj.GraphicObject.Calculated = False
-                        Else
-                            fgui.ShowMessage(obj.GraphicObject.Tag & ": " & fgui.GetTranslatedString("ObjDeactivated"), IFlowsheet.MessageType.Warning)
-                            obj.GraphicObject.Status = Status.Inactive
-                        End If
-                    End If
-                End With
-            Next
-
             'initialize GPU if option enabled
 
             If Settings.EnableGPUProcessing Then Settings.gpu.EnableMultithreading()
@@ -1127,6 +1110,23 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                      For Each o In fbag.SimulationObjects.Values
                                                          o.SetFlowsheet(fobj)
+                                                     Next
+
+                                                     'set all objects' status to 'not calculated' (red) in the list
+
+                                                     For Each o In objstack
+                                                         obj = fbag.SimulationObjects(o)
+                                                         With obj
+                                                             .Calculated = False
+                                                             If Not obj.GraphicObject Is Nothing Then
+                                                                 If obj.GraphicObject.Active Then
+                                                                     obj.GraphicObject.Calculated = False
+                                                                 Else
+                                                                     fgui.ShowMessage(obj.GraphicObject.Tag & ": " & fgui.GetTranslatedString("ObjDeactivated"), IFlowsheet.MessageType.Warning)
+                                                                     obj.GraphicObject.Status = Status.Inactive
+                                                                 End If
+                                                             End If
+                                                         End With
                                                      Next
 
                                                      If mode = 0 Then

@@ -43,6 +43,10 @@
 
     Sub SetOverallComposition(Vx As Array)
 
+    Function GetPhaseComposition(phs As Integer) As Double()
+
+    Function GetOverallComposition() As Double()
+
     Function Clone() As IMaterialStream
 
     ReadOnly Property Flowsheet As IFlowsheet
