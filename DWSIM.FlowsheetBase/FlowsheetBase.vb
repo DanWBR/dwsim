@@ -1865,12 +1865,12 @@ Label_00CC:
         Dim CPIPP As New CoolPropIncompressiblePurePropertyPackage()
         CPIPP.ComponentName = "CoolProp (Incompressible Fluids)"
         CPIPP.ComponentDescription = "CoolProp (Incompressible Fluids)"
-        PropertyPackages.Add(CPIPP.ComponentName.ToString, CPIPP)
+        AvailablePropertyPackages.Add(CPIPP.ComponentName.ToString, CPIPP)
 
         Dim CPIMPP As New CoolPropIncompressibleMixturePropertyPackage()
         CPIMPP.ComponentName = "CoolProp (Incompressible Mixtures)"
         CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
-        PropertyPackages.Add(CPIMPP.ComponentName.ToString, CPIMPP)
+        AvailablePropertyPackages.Add(CPIMPP.ComponentName.ToString, CPIMPP)
 
         Dim SWPP As New SourWaterPropertyPackage()
         SWPP.ComponentName = "Sour Water"

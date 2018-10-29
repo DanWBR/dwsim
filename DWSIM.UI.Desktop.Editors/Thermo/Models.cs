@@ -198,22 +198,17 @@ namespace DWSIM.UI.Desktop.Editors
                                                                 },
                                                                 (arg1, arg2) =>
                                                                 {
-                                                                    //var supported = new string[] { "NRTL", "UNIQUAC", "Peng-Robinson (PR)", "Soave-Redlich-Kwong (SRK)", "Lee-Kesler-Plöcker" };
-                                                                    //if (supported.Contains(pp.ComponentName))
-                                                                    //{
-                                                                    //    var cont = new PropertyPackageSettingsView(flowsheet, pp);
-                                                                    //    var form = s.GetDefaultEditorForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, cont);
-                                                                    //    form.Show();
-                                                                    //}
-                                                                    //else
-                                                                    //{
-                                                                        //if (Application.Instance.Platform.IsMac)
-                                                                        //{
-                                                                        //    flowsheet.ShowMessage("Sorry, editing this Property Package is not yet possible on the macOS platform.", IFlowsheet.MessageType.GeneralError);
-                                                                        //    return;
-                                                                        //}
+                                                                    var supported = new string[] { "NRTL", "UNIQUAC", "Peng-Robinson (PR)", "Soave-Redlich-Kwong (SRK)", "Lee-Kesler-Plöcker" };
+                                                                    if (supported.Contains(pp.ComponentName))
+                                                                    {
+                                                                        var cont = new PropertyPackageSettingsView(flowsheet, pp);
+                                                                        var form = s.GetDefaultEditorForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, cont);
+                                                                        form.Show();
+                                                                    }
+                                                                    else
+                                                                    {
                                                                         Application.Instance.Invoke(() => { pp.DisplayEditingForm(); });
-                                                                    //}
+                                                                    }
                                                                 },
                                                                 (arg1, arg2) =>
                                                                 {
