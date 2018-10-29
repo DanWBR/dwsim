@@ -1,0 +1,60 @@
+﻿AS10	Aspen Temper -10, Potassium acetate/formate	[7][5]	-10.00	30.00	273.15
+AS20	Aspen Temper -20, Potassium acetate/formate	[7][5]	-20.00	30.00	273.15
+AS30	Aspen Temper -30, Potassium acetate/formate	[7][5]	-30.00	30.00	273.15
+AS40	Aspen Temper -40, Potassium acetate/formate	[7][5]	-40.00	30.00	273.15
+AS55	Aspen Temper -55, Potassium acetate/formate	[7][5]	-55.00	30.00	273.15
+DEB	Diethylbenzene mixture - Dowtherm J	[4]	-80.00	100.00	0.00
+DSF	Dynalene SF	[Dynalene][ Inc.]	0.00	315.00	430.65
+DowJ	DowthermJ	[8]	-80.00	345.00	405.65
+DowJ2	Dowtherm J, Diethylbenzene mixture	[8][5]	-73.00	315.00	394.15
+DowQ	DowthermQ	[8]	-35.00	360.00	435.65
+DowQ2	Dowtherm Q, Diphenylethane/alkylated aromatics	[8][5]	-35.00	330.00	420.65
+HC10	Dynalene HC10	[9]	-10.00	218.00	377.15
+HC20	Dynalene HC20	[9]	-20.00	210.00	368.15
+HC30	Dynalene HC30	[9]	-30.00	210.00	363.15
+HC40	Dynalene HC40	[9]	-40.00	200.00	353.15
+HC50	Dynalene HC50	[9]	-50.00	210.00	353.15
+HCB	Hydrocarbon blend - Dynalene MV	[4]	-80.00	100.00	0.00
+HCM	Hydrocarbon mixture - Gilotherm D12	[4]	-80.00	100.00	0.00
+HFE	Hydrofluoroether - HFE-7100 3M Novec	[4]	-80.00	100.00	0.00
+HFE2	HFE-7100, Hydrofluoroether	[10][5]	-80.33	64.27	265.12
+HY20	HYCOOL 20, Potassium formate	[11]	-20.00	50.00	273.15
+HY30	HyCool 30, Potassium formate	[11]	-30.00	50.00	273.15
+HY40	HyCool 40, Potassium formate	[11]	-40.00	20.00	273.15
+HY45	HyCool 45, Potassium formate	[11]	-45.00	20.00	273.15
+HY50	HyCool 50, Potassium formate	[11]	-50.00	20.00	273.15
+NBS	NBS, Water	[12][5]	1.00	100.00	323.65
+NaK	Nitrate salt, 0.6 NaNO3 and 0.4 KNO3	[13]	300.00	600.00	273.15
+PBB	Pirobloc HTF-BASIC	[http://www.fluidotermico.com]	50.00	300.00	448.15
+PCL	Paracryol, Aliphatic Hydrocarbon	[14][5]	-40.00	180.00	343.15
+PCR	Paratherm CR	[15]	-100.00	220.00	333.15
+PGLT	Paratherm GLT	[15]	-15.00	315.00	423.15
+PHE	Paratherm HE	[15]	0.00	330.00	438.15
+PHR	Paratherm HR	[15]	-15.00	370.00	450.65
+PLR	Paratherm LR	[15]	-85.00	230.00	345.65
+PMR	Paratherm MR	[15]	-40.00	315.00	410.65
+PMS1	Polydimethylsiloxan 1 - Baysilone KT3	[4]	-80.00	100.00	0.00
+PMS2	Polydimethylsiloxan 2 - Syltherm XLT	[4]	-80.00	100.00	0.00
+PNF	Paratherm NF	[15]	-10.00	315.00	425.65
+PNF2	Paratherm NF, Hydrotreated mineral oil	[15][5]	-10.00	320.00	428.15
+S800	Syltherm 800	[Dow Chemical Company - FLUIDFILE Software accessed May 2017]	-40.00	398.00	452.15
+SAB	Synthetic alkyl benzene - Marlotherm X	[4]	-80.00	100.00	0.00
+T66	Therminol66	[16]	0.00	380.00	463.15
+T72	Therminol72	[16]	-10.00	380.00	458.15
+TCO	Citrus oil terpene - d-Limonene	[4]	-80.00	100.00	0.00
+TD12	TherminolD12	[16]	-85.00	230.00	345.65
+TVP1	TherminolVP1	[16]	12.00	397.00	477.65
+TVP1869	Thermogen VP 1869	[17][5]	-80.00	20.00	273.15
+TX22	Texatherm22	[18]	0.00	350.00	448.15
+TY10	Tyfoxit 1.10, Potassium Acetate	[19][5]	-10.00	40.00	288.15
+TY15	Tyfoxit 1.15, Potassium Acetate	[19][5]	-20.00	40.00	283.15
+TY20	Tyfoxit 1.20, Potassium Acetate	[19][5]	-40.00	40.00	273.15
+TY24	Tyfoxit 1.24, Potassium Acetate	[19][5]	-55.00	40.00	265.65
+Water	Fit of EOS from 1 bar to 100 bar	[20][ Huber-JPCRD-2009]	0.00	200.00	373.15
+XLT	SylthermXLT	[8]	-100.00	260.00	353.15
+XLT2	Syltherm XLT, Polydimethylsiloxan	[8][5]	-100.00	260.00	353.15
+ZS10	Zitrec S10, Potassium formate/Sodium propionate	[21][5]	-8.00	90.00	314.15
+ZS25	Zitrec S25, Potassium formate/Sodium propionate	[21][5]	-23.00	90.00	306.65
+ZS40	Zitrec S40, Potassium formate/Sodium propionate	[21][5]	-38.00	90.00	299.15
+ZS45	Zitrec S45, Potassium formate/Sodium propionate	[21][5]	-43.00	90.00	296.65
+ZS55	Zitrec S55, Potassium formate/Sodium propionate	[21][5]	-55.00	90.00	290.65

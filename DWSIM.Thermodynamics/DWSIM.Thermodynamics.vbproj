@@ -231,6 +231,18 @@
     <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.Designer.vb">
+      <DependentUpon>FormConfigCoolPropIncompMixture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.Designer.vb">
+      <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.designer.vb">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </Compile>
@@ -460,6 +472,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.resx">
       <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.en.resx">
+      <DependentUpon>FormConfigCoolPropIncompMixture.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.resx">
+      <DependentUpon>FormConfigCoolPropIncompMixture.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.en.resx">
+      <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.resx">
+      <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.de.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
@@ -719,6 +743,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Databases\CoolPropIncompMixtures.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\CoolPropIncompPure.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

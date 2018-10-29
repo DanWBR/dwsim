@@ -34,7 +34,7 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "1F5B0263-E936-40d5-BA5B-FFAB11595E53"
 
-        Public FluidName As String = "AS10"
+        Public Property FluidName As String = "AS10"
 
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
@@ -48,6 +48,23 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
+
+        Public Overrides Sub DisplayEditingForm()
+            Dim f As New FormConfigCoolPropIncompFluid
+            f.pp = Me
+            f.ShowDialog()
+        End Sub
+
+        Public Overrides Function SaveData() As List(Of XElement)
+            Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)
+            elements.AddRange(MyBase.SaveData)
+            Return elements
+        End Function
+
+        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
+            MyBase.LoadData(data)
+        End Function
 
         Function GetCoolPropName() As String
             Return "INCOMP::" & FluidName

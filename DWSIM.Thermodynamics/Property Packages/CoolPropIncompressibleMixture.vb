@@ -32,11 +32,11 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "1F5B0263-E936-40d5-BA5B-FFAB11595E54"
 
-        Public SoluteName As String = "LiBr"
+        Public Property SoluteName As String = "LiBr"
 
-        Public SoluteCompound As String = "Lithium Bromide"
+        Public Property SoluteCompound As String = "Lithium Bromide"
 
-        Public SolventCompound As String = "Water"
+        Public Property SolventCompound As String = "Water"
 
         Public SolutionDataList As New Dictionary(Of String, SolutionData)
 
@@ -57,6 +57,23 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
             ReadData()
         End Sub
+
+        Public Overrides Sub DisplayEditingForm()
+            Dim f As New FormConfigCoolPropIncompMixture
+            f.pp = Me
+            f.ShowDialog()
+        End Sub
+
+        Public Overrides Function SaveData() As List(Of XElement)
+            Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)
+            elements.AddRange(MyBase.SaveData)
+            Return elements
+        End Function
+
+        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
+            MyBase.LoadData(data)
+        End Function
 
         Sub ReadData()
             Dim contents As String = ""
