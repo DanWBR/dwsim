@@ -58,9 +58,7 @@ namespace DWSIM.UI.Forms.Forms
             var layout = new PixelLayout();
 
             string vtext = "Version".Localize() + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
-
-            vtext += " (" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ")";
-
+            
             var updfile = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "version.info";
 
             if (File.Exists(updfile))
@@ -69,7 +67,9 @@ namespace DWSIM.UI.Forms.Forms
                 int.TryParse(File.ReadAllText(updfile), out vinfo);
                 if (vinfo > 0) vtext += " Update " + vinfo;
             }
-            
+
+            vtext += " (" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ")";
+
             string crtext = Shared.AssemblyCopyright;
 
             layout.Add(new ImageView { Size = new Size((int)(sf * 100), (int)(sf * 100)), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 0, 0);
