@@ -95,16 +95,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vy = spp.RET_NullVector
             Vy(nsi) = 1.0
 
+            T = spp.AUX_TSAT(P, x)
+
             With spp
 
                 vf = -1.0
 
                 Do
 
-                    Tsat = spp.AUX_TSAT(P, x)
+                    Tsat = T
 
-                    Hl = spp.DW_CalcEnthalpy(Vz, Tsat, P, State.Liquid)
-                    Hv = spp.DW_CalcEnthalpy(Vz, Tsat, P, State.Vapor)
+                    Hl = spp.DW_CalcEnthalpy(Vx, Tsat, P, State.Liquid)
+                    Hv = spp.DW_CalcEnthalpy(Vy, Tsat, P, State.Vapor)
 
                     vfant = vf
 
@@ -143,7 +145,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         T = spp.AUX_TSAT(P, x)
                     End If
 
-                Loop Until Math.Abs(vf - vfant) < 0.0000000001
+                Loop Until Math.Abs(vf - vfant) + Math.Abs(T - Tsat) < 0.0001
 
             End With
 
@@ -170,16 +172,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vy = spp.RET_NullVector
             Vy(nsi) = 1.0
 
+            T = spp.AUX_TSAT(P, x)
+
             With spp
 
                 vf = -1.0
 
                 Do
 
-                    Tsat = spp.AUX_TSAT(P, x)
+                    Tsat = T
 
-                    Sl = spp.DW_CalcEntropy(Vz, Tsat, P, State.Liquid)
-                    Sv = spp.DW_CalcEntropy(Vz, Tsat, P, State.Vapor)
+                    Sl = spp.DW_CalcEntropy(Vx, Tsat, P, State.Liquid)
+                    Sv = spp.DW_CalcEntropy(Vy, Tsat, P, State.Vapor)
 
                     vfant = vf
 
@@ -218,7 +222,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         T = spp.AUX_TSAT(P, x)
                     End If
 
-                Loop Until Math.Abs(vf - vfant) < 0.0000000001
+                Loop Until Math.Abs(vf - vfant) < 0.0001
 
             End With
 
@@ -269,7 +273,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vz)
             Dim x = Vxw(si)
 
-            T = CoolProp.PropsSI("T", "P", P, "Q", vf, spp.GetCoolPropName(x))
+            T = spp.AUX_TSAT(P, x)
 
             lf = 1 - vf
 
