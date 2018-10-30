@@ -84,6 +84,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim si = Array.IndexOf(spp.RET_VNAMES(), spp.SoluteCompound)
             Dim nsi = Array.IndexOf(spp.RET_VNAMES(), spp.SolventCompound)
+            Dim xmax = spp.SolutionDataList(spp.SoluteName).xmax
 
             Tmin = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMIN")
             Tmax = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMAX")
@@ -102,6 +103,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             With spp
 
                 vf = -1.0
+
+                Dim ecount As Integer = 0
 
                 Do
 
@@ -123,7 +126,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                   Return (H - Hl) ^ 2
                                               End Function)
                         Dim fmin As Double
-                        fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                        fmin = bs.brentoptimize(Tmin, Tmax, 0.0001, T)
                     ElseIf Math.Abs(H - Hv) < 0.01 Then
                         vf = 1.0#
                         lf = 1 - vf
@@ -168,7 +171,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
-                Loop Until Math.Abs(vf - vfant) + Math.Abs(T - Tant) < 0.0001
+                    ecount += 1
+
+                    If ecount > 100 Then Throw New Exception("PH Flash: maximum iterations reached.")
+
+                Loop Until Math.Abs(vf - vfant) + Math.Abs(T - Tant) ^ 2 < 0.0001
 
             End With
 
@@ -202,6 +209,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             With spp
 
                 vf = -1.0
+
+                Dim ecount As Integer = 0
 
                 Do
 
@@ -268,7 +277,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
-                Loop Until Math.Abs(vf - vfant) + Math.Abs(T - Tant) < 0.0001
+                    ecount += 1
+
+                    If ecount > 100 Then Throw New Exception("PS Flash: maximum iterations reached.")
+
+                Loop Until Math.Abs(vf - vfant) + Math.Abs(T - Tant) ^ 2 < 0.0001
 
             End With
 

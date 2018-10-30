@@ -1391,12 +1391,16 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         Next
                     Else
                         baseexception = ex
-                        While baseexception.InnerException.InnerException IsNot Nothing
-                            baseexception = baseexception.InnerException
-                        End While
+                        If baseexception.InnerException IsNot Nothing Then
+                            While baseexception.InnerException.InnerException IsNot Nothing
+                                baseexception = baseexception.InnerException
+                                If baseexception Is Nothing Then Exit While
+                                If baseexception.InnerException Is Nothing Then Exit While
+                            End While
+                        End If
                         fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
                         IObj?.Paragraphs.Add(baseexception.Message)
-                    End If
+                        End If
                 Next
 
                 fs.Solved = False
