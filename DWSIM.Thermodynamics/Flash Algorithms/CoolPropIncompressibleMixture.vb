@@ -78,7 +78,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim vf, vfant, lf, T, Tmin, Tmax, Tant, Hl, Hv As Double
+            Dim vf, vfant, lf, T, Tmin, Tmax, Tmaxs, Tant, Hl, Hv As Double
 
             spp = PP
 
@@ -88,6 +88,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Tmin = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMIN")
             Tmax = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMAX")
+            Tmaxs = CoolProp.Props1SI(spp.SolventCompound, "TMAX")
 
             Dim Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vz)
             Dim x = Vxw(si)
@@ -139,7 +140,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                   Return (H - Hv) ^ 2
                                               End Function)
                         Dim fmin As Double
-                        fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                        fmin = bs.brentoptimize(Tmin, Tmaxs, 0.01, T)
                     Else
                         vf = (H * spp.AUX_MMM(Vz) - Hl * spp.AUX_MMM(Vx)) / (Hv * spp.AUX_MMM(Vy) - Hl * spp.AUX_MMM(Vx))
                         lf = 1 - vf
@@ -156,7 +157,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                       Return (H - Hv) ^ 2
                                                   End Function)
                             Dim fmin As Double
-                            fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                            fmin = bs.brentoptimize(Tmin, Tmaxs, 0.01, T)
                         Else
                             T = spp.AUX_TSAT(P, x)
                         End If
@@ -185,7 +186,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim vf, vfant, lf, T, Tmin, Tmax, Tant, Sl, Sv As Double
+            Dim vf, vfant, lf, T, Tmin, Tmax, Tmaxs, Tant, Sl, Sv As Double
 
             spp = PP
 
@@ -194,6 +195,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Tmin = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMIN")
             Tmax = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMAX")
+            Tmaxs = CoolProp.Props1SI(spp.SolventCompound, "TMAX")
 
             Dim Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vz)
             Dim x = Vxw(si)
@@ -245,7 +247,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                   Return (S - Sv) ^ 2
                                               End Function)
                         Dim fmin As Double
-                        fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                        fmin = bs.brentoptimize(Tmin, Tmaxs, 0.01, T)
                     Else
                         vf = (S * spp.AUX_MMM(Vz) - Sl * spp.AUX_MMM(Vx)) / (Sv * spp.AUX_MMM(Vy) - Sl * spp.AUX_MMM(Vx))
                         lf = 1 - vf
@@ -262,7 +264,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                       Return (S - Sv) ^ 2
                                                   End Function)
                             Dim fmin As Double
-                            fmin = bs.brentoptimize(Tmin, Tmax, 0.01, T)
+                            fmin = bs.brentoptimize(Tmin, Tmaxs, 0.01, T)
                         Else
                             T = spp.AUX_TSAT(P, x)
                         End If

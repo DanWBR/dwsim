@@ -1,4 +1,5 @@
-Version 5.4 Update 2
+Version 5.4 Update 3
 
-- [FIX] Fixed handling of solids by the Gibbs reactor
-- [FIX] Other bug fixes
+- [NEW] New Property Packages for CoolProp Incompressible Fluids & Mixtures
+- [FIX] Fixed PFR viscosity calculation
+- [FIX] Fixed a bug with Tx flashes
