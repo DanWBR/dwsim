@@ -84,7 +84,7 @@ Namespace PropertyPackages
             End Using
             For Each l As String In contents.Split(New Char() {vbLf, vbCr, vbCrLf})
                 If l <> "" Then SolutionDataList.Add(l.Split(vbTab)(0), New SolutionData With {.Name = l.Split(vbTab)(0), .Description = l.Split(vbTab)(1),
-                                                                .Tmin = l.Split(vbTab)(3), .Tmax = l.Split(vbTab)(4),
+                                                                .Tmin = l.Split(vbTab)(3) + 273.15, .Tmax = l.Split(vbTab)(4) + 273.15,
                                                                 .Tbase = l.Split(vbTab)(5), .xmin = l.Split(vbTab)(6),
                                                                 .xmax = l.Split(vbTab)(7)})
             Next

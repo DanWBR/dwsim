@@ -23,6 +23,8 @@ Imports DWSIM.MathOps.MathEx
 Imports System.Runtime.InteropServices
 Imports System.Linq
 Imports DWSIM.Interfaces.Enums
+Imports System.IO
+Imports System.Reflection
 
 Namespace PropertyPackages
 
@@ -36,8 +38,17 @@ Namespace PropertyPackages
 
         Public Property FluidName As String = "AS10"
 
+        Public FluidDataList As New Dictionary(Of String, FluidData)
+
+        Public Class FluidData
+            Public Name As String
+            Public Description As String
+            Public Tmin, Tmax, Tbase As Double
+        End Class
+
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
+            ReadData()
         End Sub
 
         Public Sub New()
@@ -47,6 +58,22 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
+            ReadData()
+
+        End Sub
+
+        Sub ReadData()
+            Dim contents As String = ""
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.CoolPropIncompPure.txt")
+                Using t As New StreamReader(filestr)
+                    contents = t.ReadToEnd()
+                End Using
+            End Using
+            For Each l As String In contents.Split(New Char() {vbLf, vbCr, vbCrLf})
+                If l <> "" Then FluidDataList.Add(l.Split(vbTab)(0), New FluidData With {.Name = l.Split(vbTab)(0), .Description = l.Split(vbTab)(1),
+                                                                .Tmin = l.Split(vbTab)(3) + 273.15, .Tmax = l.Split(vbTab)(4) + 273.15,
+                                                                .Tbase = l.Split(vbTab)(5)})
+            Next
         End Sub
 
         Public Overrides Sub DisplayEditingForm()
@@ -97,6 +124,25 @@ Namespace PropertyPackages
                     Console.WriteLine(message)
             End Select
         End Sub
+
+        Public Function AUX_TSAT(P As Double) As Double
+
+            Dim bs As New MathEx.BrentOpt.BrentMinimize
+            bs.DefineFuncDelegate(Function(t)
+                                      Return (P - CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName())) ^ 2
+                                  End Function)
+
+            Dim Tmin = FluidDataList(FluidName).Tmin
+            Dim Tmax = FluidDataList(FluidName).Tmax
+
+            Dim Tsat As Double = 0.0
+            Dim fval As Double
+
+            fval = bs.brentoptimize(Tmin, Tmax, 0.0001, Tsat)
+
+            Return Tsat
+
+        End Function
 
         Public Overrides Function AUX_CONDTG(T As Double, P As Double) As Double
 
@@ -172,8 +218,31 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+            Dim Tmin = FluidDataList(FluidName).Tmin
+            Dim Tmax = FluidDataList(FluidName).Tmax
+
             If st = State.Liquid Then
-                Return CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName()) / 1000
+                Try
+                    Return CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName()) / 1000
+                Catch ex As Exception
+                    Dim Tsat = AUX_TSAT(P)
+                    If T > Tsat Then
+                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                        x1 = Tmin + (Tsat - Tmin) * 0.9
+                        x2 = Tmin + (Tsat - Tmin) * 0.8
+                        x3 = Tmin + (Tsat - Tmin) * 0.7
+                        x4 = Tmin + (Tsat - Tmin) * 0.6
+                        x5 = Tmin + (Tsat - Tmin) * 0.5
+                        p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName()) / 1000
+                        p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName()) / 1000
+                        p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName()) / 1000
+                        p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName()) / 1000
+                        p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName()) / 1000
+                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    Else
+                        Return CoolProp.PropsSI("H", "T", T, "P", P * 1.01, GetCoolPropName()) / 1000
+                    End If
+                End Try
             Else
                 Return 0.0
             End If
@@ -188,8 +257,31 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+            Dim Tmin = FluidDataList(FluidName).Tmin
+            Dim Tmax = FluidDataList(FluidName).Tmax
+
             If st = State.Liquid Then
-                Return CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName()) / 1000
+                Try
+                    Return CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName()) / 1000
+                Catch ex As Exception
+                    Dim Tsat = AUX_TSAT(P)
+                    If T > Tsat Then
+                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                        x1 = Tmin + (Tsat - Tmin) * 0.9
+                        x2 = Tmin + (Tsat - Tmin) * 0.8
+                        x3 = Tmin + (Tsat - Tmin) * 0.7
+                        x4 = Tmin + (Tsat - Tmin) * 0.6
+                        x5 = Tmin + (Tsat - Tmin) * 0.5
+                        p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName()) / 1000
+                        p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName()) / 1000
+                        p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName()) / 1000
+                        p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName()) / 1000
+                        p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName()) / 1000
+                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    Else
+                        Return CoolProp.PropsSI("S", "T", T, "P", P * 1.01, GetCoolPropName()) / 1000
+                    End If
+                End Try
             Else
                 Return 0.0
             End If
@@ -203,19 +295,19 @@ Namespace PropertyPackages
         End Function
 
         Friend LoopVarF As Double = 0
-        Friend LoopVarX As Double = 0
+        Friend LoopVarP As Double = 0
 
         Public Function EnthalpyTx(T As Double, otherargs As Object) As Double
-            Return LoopVarF - CoolProp.PropsSI("H", "T", T, "P", LoopVarX, GetCoolPropName()) / 1000
+            Return LoopVarF - DW_CalcEnthalpy(RET_UnitaryVector, T, LoopVarP, State.Liquid)
         End Function
 
         Public Function EntropyTx(T As Double, otherargs As Object) As Double
-            Return LoopVarF - CoolProp.PropsSI("S", "T", T, "P", LoopVarX, GetCoolPropName()) / 1000
+            Return LoopVarF - DW_CalcEntropy(RET_UnitaryVector, T, LoopVarP, State.Liquid)
         End Function
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-            Return New Double() {1.0}
+            Return RET_UnitaryVector()
 
         End Function
 

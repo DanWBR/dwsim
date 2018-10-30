@@ -65,14 +65,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             spp = PP
 
-            Tmin = CoolProp.Props1SI(spp.FluidName, "TMIN")
-            Tmax = CoolProp.Props1SI(spp.FluidName, "TMAX")
+            Tmin = spp.FluidDataList(spp.FluidName).Tmin
+            Tmax = spp.FluidDataList(spp.FluidName).Tmax
 
             Dim brentsolverT As New BrentOpt.Brent
             brentsolverT.DefineFuncDelegate(AddressOf spp.EnthalpyTx)
 
             spp.LoopVarF = H
-            spp.LoopVarX = P
+            spp.LoopVarP = P
             T = brentsolverT.BrentOpt(Tmin, Tmax, 100, 0.0001, 1000, Nothing)
 
             Return New Object() {1.0, 0.0, Vz.Clone, Vz.Clone, T, 0.0#, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
@@ -85,14 +85,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             spp = PP
 
-            Tmin = CoolProp.Props1SI(spp.FluidName, "TMIN")
-            Tmax = CoolProp.Props1SI(spp.FluidName, "TMAX")
+            Tmin = spp.FluidDataList(spp.FluidName).Tmin
+            Tmax = spp.FluidDataList(spp.FluidName).Tmax
 
             Dim brentsolverT As New BrentOpt.Brent
             brentsolverT.DefineFuncDelegate(AddressOf spp.EntropyTx)
 
             spp.LoopVarF = S
-            spp.LoopVarX = P
+            spp.LoopVarP = P
             T = brentsolverT.BrentOpt(Tmin, Tmax, 100, 0.0001, 1000, Nothing)
 
             Return New Object() {1.0, 0.0, Vz.Clone, Vz.Clone, T, 0.0#, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
