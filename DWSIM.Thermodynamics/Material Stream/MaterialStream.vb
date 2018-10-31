@@ -219,7 +219,23 @@ Namespace Streams
         End Property
 
         Public Sub New()
+
             MyBase.New()
+
+            Me.Phases.Add(0, New BaseClasses.Phase("Mixture", ""))
+            Me.Phases.Add(1, New BaseClasses.Phase(("OverallLiquid"), ""))
+            Me.Phases.Add(2, New BaseClasses.Phase(("Vapor"), ""))
+            Me.Phases.Add(3, New BaseClasses.Phase(("Liquid1"), ""))
+            Me.Phases.Add(4, New BaseClasses.Phase(("Liquid2"), ""))
+            Me.Phases.Add(5, New BaseClasses.Phase(("Liquid3"), ""))
+            Me.Phases.Add(6, New BaseClasses.Phase(("Aqueous"), ""))
+            Me.Phases.Add(7, New BaseClasses.Phase(("Solid"), ""))
+
+            'assign default values for temperature, pressure and mass flow
+            Me.Phases(0).Properties.temperature = 298.15
+            Me.Phases(0).Properties.pressure = 101325
+            Me.Phases(0).Properties.massflow = 1
+
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String, ByVal flowsheet As IFlowsheet, ByVal proppack As PropertyPackages.PropertyPackage)
@@ -265,11 +281,6 @@ Namespace Streams
             Me.Phases.Add(5, New BaseClasses.Phase(("Liquid3"), ""))
             Me.Phases.Add(6, New BaseClasses.Phase(("Aqueous"), ""))
             Me.Phases.Add(7, New BaseClasses.Phase(("Solid"), ""))
-
-            If Not Settings.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
-
-
-            End If
 
             'assign default values for temperature, pressure and mass flow
             Me.Phases(0).Properties.temperature = 298.15
