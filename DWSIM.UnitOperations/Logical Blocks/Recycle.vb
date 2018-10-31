@@ -454,9 +454,10 @@ Namespace SpecialOps
                 End If
 
                 msto = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                Dim prevspec = msto.SpecType
                 msto.Assign(msfrom)
                 msto.AssignProps(msfrom)
-
+                msto.SpecType = prevspec
 
             End If
 
