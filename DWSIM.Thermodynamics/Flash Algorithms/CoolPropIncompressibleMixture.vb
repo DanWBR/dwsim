@@ -174,7 +174,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     ecount += 1
 
-                    If ecount > 100 Then Throw New Exception("PH Flash: maximum iterations reached.")
+                    If ecount > 5000 Then Throw New Exception("PH Flash: maximum iterations reached.")
 
                 Loop Until Math.Abs(vf - vfant) + Math.Abs(T - Tant) ^ 2 < 0.0001
 
@@ -281,7 +281,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     ecount += 1
 
-                    If ecount > 100 Then Throw New Exception("PS Flash: maximum iterations reached.")
+                    If ecount > 5000 Then Throw New Exception("PS Flash: maximum iterations reached.")
 
                 Loop Until Math.Abs(vf - vfant) + Math.Abs(T - Tant) ^ 2 < 0.0001
 
