@@ -92,7 +92,7 @@ Namespace PropertyPackages
         End Sub
 
         Function GetCoolPropName(massfraction As Double) As String
-            Return "INCOMP::" & SoluteName & "[" & massfraction.ToString() & "]"
+            Return "INCOMP::" & SoluteName & "[" & massfraction.ToString(Globalization.CultureInfo.InvariantCulture) & "]"
         End Function
 
         Function GetXmax() As Double
