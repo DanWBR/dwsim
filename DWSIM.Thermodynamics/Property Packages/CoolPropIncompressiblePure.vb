@@ -64,6 +64,7 @@ Namespace PropertyPackages
 
         Sub ReadData()
             Dim contents As String = ""
+            Dim ic = Globalization.CultureInfo.InvariantCulture
             Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.CoolPropIncompPure.txt")
                 Using t As New StreamReader(filestr)
                     contents = t.ReadToEnd()
@@ -71,8 +72,8 @@ Namespace PropertyPackages
             End Using
             For Each l As String In contents.Split(New Char() {vbLf, vbCr, vbCrLf})
                 If l <> "" Then FluidDataList.Add(l.Split(vbTab)(0), New FluidData With {.Name = l.Split(vbTab)(0), .Description = l.Split(vbTab)(1),
-                                                                .Tmin = l.Split(vbTab)(3) + 273.15, .Tmax = l.Split(vbTab)(4) + 273.15,
-                                                                .Tbase = l.Split(vbTab)(5)})
+                                                                .Tmin = Double.Parse(l.Split(vbTab)(3), ic) + 273.15, .Tmax = Double.Parse(l.Split(vbTab)(4), ic) + 273.15,
+                                                                .Tbase = Double.Parse(l.Split(vbTab)(5), ic)})
             Next
         End Sub
 
