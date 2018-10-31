@@ -45,6 +45,8 @@ Namespace GraphicObjects
 
         Public Property Color() As SKColor = SKColors.Black
 
+        Public Property ColorDark As SKColor = SKColors.SteelBlue
+
         Public Property DefaultTypeFace As SKTypeface
 
         Public Overrides Sub Draw(ByVal g As Object)
@@ -56,7 +58,11 @@ Namespace GraphicObjects
             With tpaint
                 .TextSize = Size
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = Color
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = ColorDark
+                Else
+                    .Color = Color
+                End If
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With
