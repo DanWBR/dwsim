@@ -41,13 +41,25 @@ Public Class QualityCheck
 
     Sub DoQualityCheck()
 
+        GetQualityCheckReport()
+
+    End Sub
+
+    Function GetQualityCheckReport() As String
+
         _compounds = _ms.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties).ToList
 
         _report.Clear()
         _report.AppendLine("Petroleum Assay Characterization Quality Check")
         _report.AppendLine()
 
-        Dim su = _ms.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        Dim su As Interfaces.IUnitsOfMeasure
+
+        If Not _ms.FlowSheet Is Nothing Then
+            su = _ms.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        Else
+            su = New SharedClasses.SystemsOfUnits.SI
+        End If
 
         Dim pp = _ms.PropertyPackage
 
@@ -227,7 +239,9 @@ Public Class QualityCheck
 
         End If
 
-    End Sub
+        Return _report.ToString
+
+    End Function
 
     Function DisplayForm(displaycompoundviewer As Action(Of ConstantProperties), positiveanswer As Action) As DialogResult
 
