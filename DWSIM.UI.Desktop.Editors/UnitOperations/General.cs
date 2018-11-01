@@ -83,7 +83,7 @@ namespace DWSIM.UI.Desktop.Editors
                 s.CreateAndAddDropDownRow(container, "Property Package", proppacks, proppacks.IndexOf(selectedpp), (DropDown arg1, EventArgs ev) =>
                 {
                     SimObject.PropertyPackage = (IPropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
-                }, () => CallSolverIfNeeded() );
+                }, () => CallSolverIfNeeded());
             }
 
             var flashalgos = SimObject.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
@@ -103,7 +103,7 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             s.CreateAndAddLabelRow(container, "Object Properties");
-            
+
             switch (SimObject.GraphicObject.ObjectType)
             {
                 case ObjectType.CapeOpenUO:
@@ -597,9 +597,10 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
 
-                    btn1 = s.CreateAndAddLabelAndButtonRow(container, "Pump Performance Curves", "Edit Curves", null, (sender, e) => {
+                    btn1 = s.CreateAndAddLabelAndButtonRow(container, "Pump Performance Curves", "Edit Curves", null, (sender, e) =>
+                    {
                         var editor = new DWSIM.UnitOperations.EditingForm_Pump_Curves { selectedpump = pump };
-                        editor.ShowDialog();                    
+                        editor.ShowDialog();
                     });
                     btn1.Enabled = drop1.SelectedIndex == 4;
 
@@ -1514,7 +1515,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Maximum Value", reactor2g.DampingUpperLimit, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DampingUpperLimit = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
                     s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations  = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumExternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumExternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for External Convergence Loop", reactor2g.ExternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.ExternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
@@ -2108,6 +2109,95 @@ namespace DWSIM.UI.Desktop.Editors
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
                     s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
+                    s.CreateAndAddLabelRow(container, "Script Variables");
+                    var tabc = new TabControl { Height = 400 };
+                    var tab1 = new TabPage { Text = "Input Vars" };
+                    var tab2 = new TabPage { Text = "Input Strings" };
+                    var tab3 = new TabPage { Text = "Output Vars" };
+                    tabc.Pages.Add(tab1);
+                    tabc.Pages.Add(tab2);
+                    tabc.Pages.Add(tab3);
+
+                    int is1 = 0;
+
+                    var c1 = s.GetDefaultContainer();
+                    string t1 = "";
+                    foreach (var obj in scriptuo.InputVariables)
+                    {
+                        t1 += obj.Key + "\t" + obj.Value.ToString() + "\n";
+                    }
+                    s.CreateAndAddDescriptionRow(c1, "Enter one variable per line, separating its name (no spaces) from its value with a tab.");
+                    s.CreateAndAddMultilineMonoSpaceTextBoxRow(c1, t1, 300, false, (s, e) =>
+                    {
+                        if (s.Text == "") {
+                            scriptuo.InputVariables.Clear();
+                            return;
+                        }
+                        var col = new Dictionary<string, double>();
+                        is1 = 0;
+                        foreach (string line in s.Text.Split('\n'))
+                        {
+                            try
+                            {
+                                var val = line.Trim().Split(new[] { ' ', '\t' });
+                                col.Add(val[0], val[1].ToDoubleFromCurrent());
+                                scriptuo.FlowSheet.ShowMessage(String.Format("Variable '{0}' parsed successfully.", val[0]), IFlowsheet.MessageType.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                scriptuo.FlowSheet.ShowMessage(String.Format("Error parsing variable at line {0}: " + ex.Message.ToString(),is1), IFlowsheet.MessageType.Information);
+                            }
+                            is1 += 1;
+                        }
+                        scriptuo.InputVariables = col;
+                    });
+
+                    var c2 = s.GetDefaultContainer();
+                    string t2 = "";
+                    foreach (var obj in scriptuo.InputStringVariables)
+                    {
+                        t2 += obj.Key + "\t" + obj.Value + "\n";
+                    }
+                    s.CreateAndAddDescriptionRow(c2, "Enter one variable per line, separating its name (no spaces) from its value with a tab.");
+                    s.CreateAndAddMultilineMonoSpaceTextBoxRow(c2, t2, 300, false, (s, e) =>
+                    {
+                        if (s.Text == "")
+                        {
+                            scriptuo.InputStringVariables.Clear();
+                            return;
+                        }
+                        var col = new Dictionary<string, string>();
+                        is1 = 0;
+                        foreach (string line in s.Text.Split('\n'))
+                        {
+                            try
+                            {
+                                var val = line.Trim().Split(new[] { ' ', '\t' });
+                                col.Add(val[0], val[1]);
+                                scriptuo.FlowSheet.ShowMessage(String.Format("Variable '{0}' parsed successfully.", val[0]), IFlowsheet.MessageType.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                scriptuo.FlowSheet.ShowMessage(String.Format("Error parsing variable at line {0}: " + ex.Message.ToString(), is1), IFlowsheet.MessageType.Information);
+                            }
+                            is1 += 1;
+                        }
+                        scriptuo.InputStringVariables = col;
+                    });
+
+                    var c3 = s.GetDefaultContainer();
+                    string t3 = "";
+                    foreach (var obj in scriptuo.OutputVariables)
+                    {
+                        t3 += obj.Key + "\t" + obj.Value.ToString() + "\n";
+                    }
+                    s.CreateAndAddMultilineMonoSpaceTextBoxRow(c3, t3, 300, true, null);
+
+                    tab1.Content = c1;
+                    tab2.Content = c2;
+                    tab3.Content = c3;
+
+                    s.CreateAndAddControlRow(container, tabc);
                     break;
                 case ObjectType.ExcelUO:
                     var exceluo = (ExcelUO)SimObject;
@@ -2227,16 +2317,20 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.OrificePlate:
                     var op = (OrificePlate)SimObject;
-                    s.CreateAndAddDropDownRow(container, "Pressure Tappings", new List<string>() { "Corner", "Flange", "Radius" }, (int)op.OrifType, (sender, e) => {
+                    s.CreateAndAddDropDownRow(container, "Pressure Tappings", new List<string>() { "Corner", "Flange", "Radius" }, (int)op.OrifType, (sender, e) =>
+                    {
                         op.OrifType = (UnitOperations.UnitOperations.OrificePlate.OrificeType)sender.SelectedIndex;
                     }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Orifice Diameter (" + su.diameter + ")", op.OrificeDiameter, (sender, e) => {
+                    s.CreateAndAddTextBoxRow(container, nf, "Orifice Diameter (" + su.diameter + ")", op.OrificeDiameter, (sender, e) =>
+                    {
                         if (sender.Text.IsValidDoubleExpression()) op.OrificeDiameter = sender.Text.ParseExpressionToDouble();
                     }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Internal Pipe Diameter (" + su.diameter + ")", op.InternalPipeDiameter, (sender, e) => {
+                    s.CreateAndAddTextBoxRow(container, nf, "Internal Pipe Diameter (" + su.diameter + ")", op.InternalPipeDiameter, (sender, e) =>
+                    {
                         if (sender.Text.IsValidDoubleExpression()) op.InternalPipeDiameter = sender.Text.ParseExpressionToDouble();
                     }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Correction Factor", op.CorrectionFactor, (sender, e) => {
+                    s.CreateAndAddTextBoxRow(container, nf, "Correction Factor", op.CorrectionFactor, (sender, e) =>
+                    {
                         if (sender.Text.IsValidDoubleExpression()) op.CorrectionFactor = sender.Text.ParseExpressionToDouble();
                     }, () => CallSolverIfNeeded());
                     break;

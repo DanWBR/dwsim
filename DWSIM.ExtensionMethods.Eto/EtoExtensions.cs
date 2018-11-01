@@ -382,6 +382,7 @@ namespace DWSIM.UI.Shared
             return edittext2;
 
         }
+     
         public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, bool autosized, Action<TextArea, EventArgs> command)
         {
 
