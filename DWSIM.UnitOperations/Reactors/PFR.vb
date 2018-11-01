@@ -604,7 +604,7 @@ Namespace Reactors
                     i = 0
                     For Each sb As KeyValuePair(Of String, Double) In C0
                         If vc(i) < 0.0# Then
-                            vc(i) = 0.0#
+                            Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
                         End If
                         C(sb.Key) = vc(i) / Qf
                         i = i + 1
@@ -789,7 +789,7 @@ Namespace Reactors
 
                     'has catalyst, use Ergun equation for pressure drop in reactor beds
 
-                    Dim vel As Double = Q / (PI * diameter ^ 2 / 4)
+                    Dim vel As Double = (Qlin + Qvin) / (PI * diameter ^ 2 / 4)
                     Dim L As Double = Me.dV * Me.Length
                     Dim dp As Double = Me.CatalystParticleDiameter / 1000.0
                     Dim ev As Double = Me.CatalystVoidFraction
