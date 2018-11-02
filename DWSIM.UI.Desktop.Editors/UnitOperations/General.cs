@@ -2126,7 +2126,7 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         t1 += obj.Key + "\t" + obj.Value.ToString() + "\n";
                     }
-                    s.CreateAndAddDescriptionRow(c1, "Enter one variable per line, separating its name (no spaces) from its value with a tab.");
+                    s.CreateAndAddDescriptionRow(c1, "Enter one variable per line, separating its name (no special characters or spaces) from its value with a tab or a single space.");
                     s.CreateAndAddMultilineMonoSpaceTextBoxRow(c1, t1, 300, false, (s, e) =>
                     {
                         if (s.Text == "") {
@@ -2158,7 +2158,7 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         t2 += obj.Key + "\t" + obj.Value + "\n";
                     }
-                    s.CreateAndAddDescriptionRow(c2, "Enter one variable per line, separating its name (no spaces) from its value with a tab.");
+                    s.CreateAndAddDescriptionRow(c2, "Enter one variable per line, separating its name (no special characters or spaces) from its value with a tab or a single space.");
                     s.CreateAndAddMultilineMonoSpaceTextBoxRow(c2, t2, 300, false, (s, e) =>
                     {
                         if (s.Text == "")
