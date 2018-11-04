@@ -117,23 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 62</value>
-  </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector tool to view these reports.
 
 When the Inspector Reports feature is enabled and the Flowsheet Solver is called, the Parallel CPU Processing is automatically disabled and the Solver Mode is changed to 'Background Thread'. You must re-enable it manually and disable the Inspector to increase the calculation speed again.</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkEnableInspector.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 17</value>
   </data>
   <data name="chkEnableInspector.Text" xml:space="preserve">
     <value>Enable Inspector Reports</value>
-  </data>
-  <data name="GroupBox18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 131</value>
   </data>
   <data name="GroupBox18.Text" xml:space="preserve">
     <value>Solution Inspector</value>
@@ -303,17 +297,36 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkEnableMultipleEditors.Text" xml:space="preserve">
     <value>Enable multiple editors</value>
   </data>
+  <data name="chkCloseFormsOnDeselect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 17</value>
+  </data>
+  <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
+    <value>Close editors on deselecting</value>
+  </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Default initial placement</value>
   </data>
-  <data name="chkCloseFormsOnDeselect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 17</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbEditorStyle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
-    <value>Close editors on deselecting</value>
+  <data name="cbEditorStyle.Items" xml:space="preserve">
+    <value>Individual Editor Panels (DWSIM v4.x/v5.x)</value>
+  </data>
+  <data name="cbEditorStyle.Items1" xml:space="preserve">
+    <value>Legacy Property Grid (DWSIM v3.x)</value>
+  </data>
+  <data name="cbEditorStyle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 20</value>
+  </data>
+  <data name="cbEditorStyle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 21</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 25</value>
   </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Flowsheet Object Editors</value>
@@ -483,15 +496,6 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkHideSolidPhaseCO.Text" xml:space="preserve">
     <value>Remove Solid Phase from the list of present phases for external components (requires restart)</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>UI Language</value>
-  </data>
   <data name="KryptonCheckBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
   </data>
@@ -530,7 +534,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAXQBCQF0AQkBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAYQBCQGEAQkBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

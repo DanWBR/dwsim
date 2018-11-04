@@ -723,6 +723,61 @@ Namespace GraphicObjects
 
         End Sub
 
+        Public Sub PopulateGrid(ByRef pgrid As PropertyGridEx.PropertyGridEx, ByRef form As FormFlowsheet)
+
+            With pgrid
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("MT_ObjectFamily"), Me, "ObjectFamily", False, "1. " & DWSIM.App.GetLocalString("MT_ObjectFamily"), "", True)
+
+                For Each obj In form.SimulationObjects.Values
+                    If obj.GraphicObject.TipoObjeto = Me.ObjectFamily Then
+                        If m_objectlist.ContainsKey(obj.GraphicObject.Tag) Then
+                            .Item.Add(obj.GraphicObject.Tag, m_objectlist(obj.GraphicObject.Tag), False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)
+                        Else
+                            .Item.Add(obj.GraphicObject.Tag, False, False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)
+                        End If
+                        .Item(.Item.Count - 1).DefaultType = Type.GetType("System.Boolean")
+                        .Item(.Item.Count - 1).Tag = "Object|" & obj.Nome
+                    End If
+                Next
+
+                Dim props() As String = Nothing
+
+                If m_objectlist.Count > 0 Then
+                    For Each s As String In m_objectlist.Keys
+                        props = form.GetFlowsheetSimulationObject(s).GetProperties(PropertyType.ALL)
+                        Exit For
+                    Next
+                    For Each p As String In props
+                        If m_propertylist.ContainsKey(p) Then
+                            .Item.Add(DWSIM.App.GetPropertyName(p), m_propertylist(p), False, "4. " & DWSIM.App.GetLocalString("MT_PropertiesToShow"), "", True)
+                        Else
+                            .Item.Add(DWSIM.App.GetPropertyName(p), False, False, "4. " & DWSIM.App.GetLocalString("MT_PropertiesToShow"), "", True)
+                        End If
+                        .Item(.Item.Count - 1).DefaultType = Type.GetType("System.Boolean")
+                        .Item(.Item.Count - 1).Tag = p
+                    Next
+                End If
+
+                .Item.Add(DWSIM.App.GetLocalString("MT_SortObjectsBy"), Me, "SortBy", False, "3. " & DWSIM.App.GetLocalString("MT_Sorting"), "", True)
+                .Item(.Item.Count - 1).Choices = New PropertyGridEx.CustomChoices(Me.SortableItems, False)
+
+                If Me.SortBy = "Custom" Then
+                    .Item.Add(DWSIM.App.GetLocalString("MT_CustomSortList"), Me, "SortedList", False, "3. " & DWSIM.App.GetLocalString("MT_Sorting"), "", True)
+                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.MasterTable.UIMTableObjectOrderEditor
+                    .Item(.Item.Count - 1).IsBrowsable = False
+                    .Item(.Item.Count - 1).BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                End If
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+        End Sub
+
     End Class
 
     <Serializable()> Public Class TableGraphic
@@ -1167,6 +1222,19 @@ Namespace GraphicObjects
 
         End Sub
 
+        Public Sub PopulateGrid(ByRef pgrid As PropertyGridEx.PropertyGridEx)
+
+            With pgrid
+
+                .Item.Clear()
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+        End Sub
+
     End Class
 
     <Serializable()> Public Class QuickTableGraphic
@@ -1445,6 +1513,9 @@ Namespace GraphicObjects
 
                 If Me.Owner.GetFlowsheet IsNot Nothing Then
 
+                    Dim su = Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
+                    Dim nfo = Owner.GetFlowsheet.FlowsheetOptions.NumberFormat
+
                     Me.Opacity = 240
 
                     Dim gContainer As System.Drawing.Drawing2D.GraphicsContainer
@@ -1453,7 +1524,7 @@ Namespace GraphicObjects
                     SetQuality(g)
                     myMatrix = g.Transform()
 
-                    Dim maxL1, maxL2, maxL3, count As Integer
+                    Dim maxL1, maxL2, maxL3, maxL2a, maxL3a, count As Integer
                     Dim maxH As Integer
 
                     Dim dpiscale = g.DpiX / 96.0
@@ -1479,6 +1550,10 @@ Namespace GraphicObjects
                     Dim fs = Owner.GetFlowsheet
                     Dim props = fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
 
+                    Dim units As New List(Of String), unitspair As New Dictionary(Of String, List(Of String))
+
+                    su = Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
+
                     If TypeOf Owner Is CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
 
                     Dim propstoremove As New List(Of String)
@@ -1501,11 +1576,14 @@ Namespace GraphicObjects
                         pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
                         If pval0 Is Nothing Then Exit For
                         If TypeOf pval0 Is Double Then
-                            propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
+                            propval = Convert.ToDouble(pval0).ToString(nfo)
                         Else
                             propval = pval0.ToString
                         End If
-                        propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                        propunit = Owner.GetPropertyUnit(prop, su)
+                        units = su.GetUnitSet(su.GetUnitType(propunit))
+                        units.Remove(propunit)
+                        unitspair.Add(propstring, units.OrderBy(Of Guid)(Function(x) Guid.NewGuid).Take(2).ToList)
                         size = g.MeasureString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
                         If size.Width > maxL1 Then maxL1 = size.Width
                         If size.Height > maxH Then maxH = size.Height
@@ -1515,6 +1593,14 @@ Namespace GraphicObjects
                         size = g.MeasureString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
                         If size.Width > maxL3 Then maxL3 = size.Width
                         If size.Height > maxH Then maxH = size.Height
+                        If unitspair(propstring).Count = 2 Then
+                            size = g.MeasureString(Convert.ToDouble(pval0).ConvertUnits(propunit, unitspair(propstring)(0)).ToString(nfo), New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                            If size.Width > maxL2a Then maxL2a = size.Width
+                            If size.Height > maxH Then maxH = size.Height
+                            size = g.MeasureString(unitspair(propstring)(0), New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                            If size.Width > maxL3a Then maxL3a = size.Width
+                            If size.Height > maxH Then maxH = size.Height
+                        End If
                         count += 1
                     Next
 
@@ -1532,21 +1618,23 @@ Namespace GraphicObjects
                             If size.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
                                 Me.Width = 2 * Me.Padding + size.Width
                             Else
-                                Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
+                                Me.Width = 8 * Me.Padding + maxL1 + maxL2 + maxL3 + maxL2a + maxL3a
                             End If
                         Else
-                            If size2.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
+                            If size2.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3 + maxL2a + maxL3a) Then
                                 Me.Width = 2 * Me.Padding + size2.Width
                             Else
-                                Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
+                                Me.Width = 8 * Me.Padding + maxL1 + maxL2 + maxL3 + maxL2a + maxL3a
                             End If
                         End If
 
-                        Me.Width += 6
+                        Me.Width += 8
 
                         maxL1 = maxL1 + 2 * Padding
                         maxL2 = maxL2 + 2 * Padding
                         maxL3 = maxL3 + 2 * Padding
+                        maxL2a = maxL2a + 2 * Padding
+                        maxL3a = maxL3a + 2 * Padding
 
                         maxH = maxH + 2 * Padding
 
@@ -1590,7 +1678,10 @@ Namespace GraphicObjects
                             g.DrawString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + (n + 1) * maxH + Padding)
                             g.DrawString(propval, Me.HeaderFont, New SolidBrush(FontColor), X + maxL1 + maxL2 + 3, Y + (n + 1) * maxH + Padding, format1)
                             g.DrawString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding)
-                            'g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+                            If unitspair(propstring).Count = 2 Then
+                                g.DrawString(Convert.ToDouble(propval).ConvertUnits(propunit, unitspair(propstring)(0)).ToString(nfo), Me.HeaderFont, New SolidBrush(FontColor), X + maxL1 + maxL2 + maxL3 + maxL2a + 3, Y + (n + 1) * maxH + Padding, format1)
+                                g.DrawString(unitspair(propstring)(0), New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + maxL1 + maxL2 + maxL3 + maxL2a + Padding + 3, Y + (n + 1) * maxH + Padding)
+                            End If
                             n += 1
                         Next
 
@@ -1635,8 +1726,6 @@ Namespace GraphicObjects
 
                         size = g.MeasureString(MSObj.Flowsheet.GetTranslatedString("Solid"), New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
                         If size.Width > maxL9 Then maxL9 = size.Width
-
-                        Dim su = MSObj.Flowsheet.FlowsheetOptions.SelectedUnitSystem
 
                         Dim bprop As String = ""
 
@@ -1752,8 +1841,8 @@ Namespace GraphicObjects
                         If size.Width > maxL9 Then maxL9 = size.Width
                         If size.Height > maxH2 Then maxH2 = size.Height
 
-                        Dim sumL = maxL1 + maxL2 + maxL3
-                        Dim sumL2 = maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9
+                        Dim sumL = maxL1 + maxL2 + maxL3 + maxL2a + maxL3a
+						Dim sumL2 = maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9
 
                         If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
 
@@ -1770,17 +1859,17 @@ Namespace GraphicObjects
                             If size.Width > (2 * Me.Padding + sumL) Then
                                 Me.Width = 2 * Me.Padding + size.Width
                             Else
-                                Me.Width = 6 * Me.Padding + sumL
+                                Me.Width = 8 * Me.Padding + sumL
                             End If
                         Else
                             If size2.Width > (2 * Me.Padding + sumL) Then
                                 Me.Width = 2 * Me.Padding + size2.Width
                             Else
-                                Me.Width = 6 * Me.Padding + sumL
+                                Me.Width = 8 * Me.Padding + sumL
                             End If
                         End If
 
-                        Me.Width += 6
+                        Me.Width += 8
 
                         Dim Width2 = 16 * Me.Padding + sumL2 + 6
 
@@ -1789,6 +1878,8 @@ Namespace GraphicObjects
                         maxL1 += delta
                         maxL2 += delta
                         maxL3 += delta
+                        maxL2a += delta
+                        maxL3a += delta
                         maxL4 += delta
                         maxL5 += delta
                         maxL6 += delta
@@ -1836,7 +1927,10 @@ Namespace GraphicObjects
                             g.DrawString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + (n + 1) * maxH + Padding)
                             g.DrawString(propval, Me.HeaderFont, New SolidBrush(FontColor), X + maxL1 + maxL2 + 3, Y + (n + 1) * maxH + Padding, format1)
                             g.DrawString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding)
-                            'g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+                            If unitspair(propstring).Count = 2 Then
+                                g.DrawString(Convert.ToDouble(propval).ConvertUnits(propunit, unitspair(propstring)(0)).ToString(nfo), Me.HeaderFont, New SolidBrush(FontColor), X + maxL1 + maxL2 + maxL3 + maxL2a + 3, Y + (n + 1) * maxH + Padding, format1)
+                                g.DrawString(unitspair(propstring)(0), New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + maxL1 + maxL2 + maxL3 + maxL2a + Padding + 3, Y + (n + 1) * maxH + Padding)
+                            End If
                             n += 1
                         Next
 
@@ -2428,6 +2522,21 @@ Namespace GraphicObjects
             End If
 
             g.EndContainer(gContainer)
+
+        End Sub
+
+        Public Sub PopulateGrid(ByRef pgrid As PropertyGridEx.PropertyGridEx)
+
+            With pgrid
+
+                .Item.Clear()
+
+                .Item.Add("Range", Me, "SpreadsheetCellRange", False, "", "", True)
+
+                .PropertySort = PropertySort.Alphabetical
+                .ShowCustomProperties = True
+
+            End With
 
         End Sub
 

@@ -46,6 +46,8 @@ Public Class FormOptions
             Me.cbParallelism.SelectedIndex = Me.cbParallelism.Items.Count - 1
         End If
 
+        cbEditorStyle.SelectedIndex = My.Settings.ObjectEditor
+
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
         Me.chkEnableGPUProcessing.Checked = My.Settings.EnableGPUProcessing
         Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
@@ -152,17 +154,6 @@ Public Class FormOptions
                                                              End If
                                                              loaded = True
                                                          End Sub, TaskScheduler.FromCurrentSynchronizationContext)
-
-        Select Case My.Settings.CultureInfo
-            Case "pt-BR"
-                Me.ComboBoxUILanguage.SelectedIndex = 0
-            Case "en", "en-US"
-                Me.ComboBoxUILanguage.SelectedIndex = 1
-            Case "de"
-                Me.ComboBoxUILanguage.SelectedIndex = 1
-            Case "es"
-                Me.ComboBoxUILanguage.SelectedIndex = 1
-        End Select
 
     End Sub
 
@@ -566,25 +557,6 @@ Public Class FormOptions
         End Select
 
     End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxUILanguage.SelectedIndexChanged
-        If loaded Then
-            Select Case Me.ComboBoxUILanguage.SelectedIndex
-                Case 0
-                    My.Settings.CultureInfo = "pt-BR"
-                Case 1
-                    My.Settings.CultureInfo = "en"
-                Case 2
-                    My.Settings.CultureInfo = "de"
-                Case 3
-                    My.Settings.CultureInfo = "es"
-            End Select
-            If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
-            My.Application.ChangeUICulture(My.Settings.CultureInfo)
-            MessageBox.Show(DWSIM.App.GetLocalString("NextStartupOnly"))
-        End If
-    End Sub
-
     Private Sub chkSolverBreak_CheckedChanged(sender As Object, e As EventArgs) Handles chkSolverBreak.CheckedChanged
         My.Settings.SolverBreakOnException = chkSolverBreak.Checked
         Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
@@ -684,4 +656,9 @@ Public Class FormOptions
         My.Settings.InspectorEnabled = chkEnableInspector.Checked
         Settings.InspectorEnabled = My.Settings.InspectorEnabled
     End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEditorStyle.SelectedIndexChanged
+        My.Settings.ObjectEditor = cbEditorStyle.SelectedIndex
+    End Sub
+
 End Class

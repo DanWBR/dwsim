@@ -5518,9 +5518,84 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="ThermCond" xml:space="preserve">
     <value>Thermal Cond.</value>
+  <data name="FracaoMolar3" xml:space="preserve">
+    <value>Molar Fraction - </value>
   </data>
-  <data name="UserDefined" xml:space="preserve">
-    <value>User Defined</value>
+  <data name="Fraesdascorrentes21" xml:space="preserve">
+    <value>2. Stream Fractions</value>
+  </data>
+  <data name="FraodeLquido1" xml:space="preserve">
+    <value>Liquid Fraction</value>
+  </data>
+  <data name="FraoMolar11" xml:space="preserve">
+    <value>Molar Fraction</value>
+  </data>
+  <data name="FraoMolar21" xml:space="preserve">
+    <value>Cumulative Molar Fraction</value>
+  </data>
+  <data name="FraoMolar3" xml:space="preserve">
+    <value>Molar Fraction -</value>
+  </data>
+  </data>
+  <data name="Fraomolardafase" xml:space="preserve">
+    <value>Phase Molar Fraction</value>
+  </data>
+  <data name="FraomolardafaseFaseL" xml:space="preserve">
+    <value>Phase molar fraction (Liquid Phase)</value>
+  </data>
+  <data name="FraomolardafaseFaseV" xml:space="preserve">
+    <value>Phase molar fraction (Vapor Phase)</value>
+  </data>
+  <data name="Fraomolardafasenamis" xml:space="preserve">
+    <value>Phase molar fraction in the mixture</value>
+  </data>
+  <data name="FraomolarnaFaseLquid" xml:space="preserve">
+    <value>Liquid Phase Molar Fraction</value>
+  </data>
+  <data name="FraomolarnaFaseVapor" xml:space="preserve">
+    <value>Vapor Phase Molar Fraction</value>
+  </data>
+  <data name="FraomolarnaMistura1" xml:space="preserve">
+    <value>Mixture Molar Fraction</value>
+  </data>
+  <data name="FraoMolarx11" xml:space="preserve">
+    <value>Molar Fraction (x) -</value>
+  </data>
+  <data name="FraoMolarx2" xml:space="preserve">
+    <value>Molar Fraction (x) -</value>
+  </data>
+  <data name="FraoMolary1" xml:space="preserve">
+    <value>Molar Fraction (y) -</value>
+  </data>
+  <data name="FraoMssica1" xml:space="preserve">
+    <value>Mass Fraction</value>
+  </data>
+  <data name="Fraomssicadafase" xml:space="preserve">
+    <value>Phase Mass Fraction</value>
+  </data>
+  <data name="FraomssicadafaseFase" xml:space="preserve">
+    <value>Phase mass fraction (Vapor Phase)</value>
+  </data>
+  <data name="FraomssicadafaseFase2" xml:space="preserve">
+    <value>Phase mass fraction (Liquid Phase)</value>
+  </data>
+  <data name="FraomssicadafaseFase3" xml:space="preserve">
+    <value>Phase mass fraction (Phase Steam)</value>
+  </data>
+  <data name="FraomssicadafaseFase4" xml:space="preserve">
+    <value>Phase mass fraction (Liquid Phase)</value>
+  </data>
+  <data name="Fraomssicadafasenami" xml:space="preserve">
+    <value>Phase mass fraction in the mixture</value>
+  </data>
+  <data name="FraomssicanaFaseLqui" xml:space="preserve">
+    <value>Liquid Phase Mass Fraction</value>
+  </data>
+  <data name="FraomssicanaFaseVapo" xml:space="preserve">
+    <value>Vapor Phase Mass Fraction</value>
+  </data>
+  <data name="FraomssicanaMistura1" xml:space="preserve">
+    <value>Mass Fraction in the mixture</value>
   </data>
   <data name="CellUnitLocked" xml:space="preserve">
     <value>This cell contains the units used to read or write the value at the cell on the left.</value>

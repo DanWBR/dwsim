@@ -1727,6 +1727,7 @@ Public Class FormMain
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
             form.FormObjects.DockPanel = Nothing
+            form.FormProps.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
@@ -1747,11 +1748,16 @@ Public Class FormMain
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.FormObjects.Show(form.dckPanel)
+                form.FormProps.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception
                 excs.Add(New Exception("Error Restoring Window Layout", ex))
             End Try
+
+            If form.FormProps.Width > form.Width / 3 Then
+                form.dckPanel.DockLeftPortion = form.Width / 3
+            End If
 
             Me.Invalidate()
             Application.DoEvents()
@@ -2833,9 +2839,25 @@ Label_00CC:
                     NewMDIChild.Show()
                     Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
+                    x.Binder = New VersionDeserializationBinder
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
                     objStreamReader.Close()
+                    NewMDIChild.WriteData()
+                    If GlobalSettings.Settings.OldUI Then
+                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
+                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
+                            Me.UpdateMRUList()
+                        End If
+                    End If
+                    NewMDIChild.Activate()
+                Case ".dwcsd2"
+                    Application.DoEvents()
+                    Dim NewMDIChild As New FormCompoundCreator()
+                    NewMDIChild.MdiParent = Me
+                    NewMDIChild.Show()
+                    NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(File.ReadAllText(Me.OpenFileDialog1.FileName))
+                    NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
                     NewMDIChild.WriteData()
                     If GlobalSettings.Settings.OldUI Then
                         If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
@@ -2851,9 +2873,25 @@ Label_00CC:
                     NewMDIChild.Show()
                     Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
+                    x.Binder = New VersionDeserializationBinder
                     NewMDIChild.currcase = x.Deserialize(objStreamReader)
                     NewMDIChild.currcase.filename = Me.OpenFileDialog1.FileName
                     objStreamReader.Close()
+                    NewMDIChild.LoadCase(NewMDIChild.currcase, False)
+                    If GlobalSettings.Settings.OldUI Then
+                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
+                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
+                            Me.UpdateMRUList()
+                        End If
+                    End If
+                    NewMDIChild.Activate()
+                Case ".dwrsd2"
+                    Application.DoEvents()
+                    Dim NewMDIChild As New FormDataRegression()
+                    NewMDIChild.MdiParent = Me
+                    NewMDIChild.Show()
+                    NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(File.ReadAllText(Me.OpenFileDialog1.FileName))
+                    NewMDIChild.currcase.filename = Me.OpenFileDialog1.FileName
                     NewMDIChild.LoadCase(NewMDIChild.currcase, False)
                     If GlobalSettings.Settings.OldUI Then
                         If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
@@ -2940,7 +2978,6 @@ Label_00CC:
                 Dim x As New BinaryFormatter
                 x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormCompoundCreator).mycase)
                 objStreamWriter.Close()
-                CType(Me.ActiveMdiChild, FormCompoundCreator).SetCompCreatorSaveStatus(True)
                 Me.filename = Me.SaveStudyDlg.FileName
                 Me.ActiveMdiChild.Text = Me.filename
             End If
@@ -3249,7 +3286,6 @@ Label_00CC:
                                 Dim x As New BinaryFormatter
                                 x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormCompoundCreator).mycase)
                                 objStreamWriter.Close()
-                                CType(Me.ActiveMdiChild, FormCompoundCreator).SetCompCreatorSaveStatus(True)
                             End If
                         Else
                             SaveBackup(filename)
@@ -3258,7 +3294,6 @@ Label_00CC:
                             Dim x As New BinaryFormatter
                             x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormCompoundCreator).mycase)
                             objStreamWriter.Close()
-                            CType(Me.ActiveMdiChild, FormCompoundCreator).SetCompCreatorSaveStatus(True)
                         End If
                     ElseIf TypeOf form0 Is FormDataRegression Then
                         If Me.SaveRegStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
@@ -3380,32 +3415,22 @@ Label_00CC:
                         SaveBackup(Me.SaveStudyDlg.FileName)
                         CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename = Me.SaveStudyDlg.FileName
                         CType(Me.ActiveMdiChild, FormCompoundCreator).StoreData()
-                        Dim objStreamWriter As New FileStream(Me.SaveStudyDlg.FileName, FileMode.OpenOrCreate)
-                        Dim x As New BinaryFormatter
-                        x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormCompoundCreator).mycase)
-                        objStreamWriter.Close()
-                        CType(Me.ActiveMdiChild, FormCompoundCreator).SetCompCreatorSaveStatus(True)
+                        File.WriteAllText(Me.SaveStudyDlg.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(CType(Me.ActiveMdiChild, FormCompoundCreator).mycase, Newtonsoft.Json.Formatting.Indented))
                         Me.filename = Me.SaveStudyDlg.FileName
                         Me.ActiveMdiChild.Text = Me.filename
                     End If
                 Else
+                    filename = Path.ChangeExtension(filename, "dwcsd2")
                     SaveBackup(filename)
                     CType(Me.ActiveMdiChild, FormCompoundCreator).StoreData()
-                    Dim objStreamWriter As New FileStream(filename, FileMode.OpenOrCreate)
-                    Dim x As New BinaryFormatter
-                    x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormCompoundCreator).mycase)
-                    objStreamWriter.Close()
-                    CType(Me.ActiveMdiChild, FormCompoundCreator).SetCompCreatorSaveStatus(True)
+                    File.WriteAllText(filename, Newtonsoft.Json.JsonConvert.SerializeObject(CType(Me.ActiveMdiChild, FormCompoundCreator).mycase, Newtonsoft.Json.Formatting.Indented))
                     Me.filename = filename
                     Me.ActiveMdiChild.Text = filename
                 End If
             ElseIf TypeOf Me.ActiveMdiChild Is FormDataRegression Then
                 If Me.SaveRegStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     SaveBackup(Me.SaveRegStudyDlg.FileName)
-                    Dim objStreamWriter As New FileStream(Me.SaveRegStudyDlg.FileName, FileMode.OpenOrCreate)
-                    Dim x As New BinaryFormatter
-                    x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormDataRegression).StoreCase())
-                    objStreamWriter.Close()
+                    File.WriteAllText(Me.SaveRegStudyDlg.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(CType(Me.ActiveMdiChild, FormDataRegression).StoreCase(), Newtonsoft.Json.Formatting.Indented))
                     Me.filename = Me.SaveRegStudyDlg.FileName
                     Me.ActiveMdiChild.Text = Me.filename
                 End If

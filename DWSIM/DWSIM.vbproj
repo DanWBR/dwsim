@@ -222,6 +222,9 @@
       <HintPath>References\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="GenericDictionaryEditor">
+      <HintPath>References\GenericDictionaryEditor.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -293,6 +296,10 @@
     <Reference Include="Python.Runtime, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Python.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\RichTextBoxExtended.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -384,6 +391,7 @@
     <Compile Include="Forms\Data Regression\FormSearchKDBVLE.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\EditorTooltips\EditorTooltips.vb" />
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </Compile>
@@ -540,6 +548,99 @@
     <Compile Include="Forms\FormUpgradeWarning.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\LegacyEditors\Extensions.vb" />
+    <Compile Include="Forms\LegacyEditors\frmProps.Designer.vb">
+      <DependentUpon>frmProps.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\frmProps.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\PropertyEditors\PropertyChanged.vb" />
+    <Compile Include="Forms\LegacyEditors\PropertyEditors\PropertyGridEditors.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\ComboBoxTemplates\Templates.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\DummyClass\DummyClass.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIResults\UIResults.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\Results\PFR\UIFormGraphPFR.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\Results\Pipe\UIFormGraph.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\Results\Pipe\UIFormTable.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.Designer.vb">
+      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\UIAnnotationEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIComponentSelector\UIComponentSelector.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.Designer.vb">
+      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\UICompositionEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.Designer.vb">
+      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\UICSepSpecEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.Designer.vb">
+      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\UIElementMatrixEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.Designer.vb">
+      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\UIExcelUOEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFASelector\UIFASelector.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFlowsheetUOEditor\UIFlowsheetEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFlowsheetUOViewer\UIFlowsheetUOViewer.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsComponentSelector\UIGibbsComponentSelector.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.Designer.vb">
+      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\UIGibbsInitialEstimatesEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIMTableObjectOrderEditor\UIMTableObjectOrder.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPipeEditor\UIPipeEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPPSelector\UIPPSelector.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.Designer.vb">
+      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\UIPumpCurvesEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIReactionSetSelector\UIReactionSetSelector.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.Designer.vb">
+      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.Designer.vb">
+      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\UIScriptEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UISSelector\UISSelector.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UISTHXEditor\UISTHXEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIThermalProfileEditor\UIThermalProfileEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIUnitConverter\UIUnitConverter.vb" />
     <Compile Include="Languages\DWSIM1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -609,6 +710,7 @@
     <Compile Include="Forms\FormScript.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Objects\Classes\AssemblyResolver\AssemblyResolver1.vb" />
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Objects\Classes\General\TableGraphic.vb" />
@@ -1091,6 +1193,126 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.de.resx">
+      <DependentUpon>frmProps.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.en.resx">
+      <DependentUpon>frmProps.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.es.resx">
+      <DependentUpon>frmProps.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.resx">
+      <DependentUpon>frmProps.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.de.resx">
+      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.en.resx">
+      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.es.resx">
+      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.resx">
+      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.de.resx">
+      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.en.resx">
+      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.es.resx">
+      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.resx">
+      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.de.resx">
+      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.en.resx">
+      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.es.resx">
+      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.resx">
+      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.de.resx">
+      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.en.resx">
+      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.es.resx">
+      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.resx">
+      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.de.resx">
+      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.en.resx">
+      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.es.resx">
+      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.resx">
+      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.de.resx">
+      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.en.resx">
+      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.es.resx">
+      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.resx">
+      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.de.resx">
+      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.en.resx">
+      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.es.resx">
+      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.resx">
+      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.de.resx">
+      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.en.resx">
+      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.es.resx">
+      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.resx">
+      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.de.resx">
+      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.en.resx">
+      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.es.resx">
+      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.resx">
+      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main Window\FormMain.resx">
       <SubType>Designer</SubType>

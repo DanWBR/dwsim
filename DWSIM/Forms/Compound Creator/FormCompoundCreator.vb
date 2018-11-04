@@ -56,7 +56,7 @@ Public Class FormCompoundCreator
 
         Dim pathsep = System.IO.Path.DirectorySeparatorChar
         Dim picpath As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac" & pathsep
-   
+
         Dim i As Integer
         Dim ID, GroupType, GroupName, S, TT As String
         Dim L As Boolean = True
@@ -82,8 +82,8 @@ Public Class FormCompoundCreator
                 .Item(.Count - 1).HeaderCell.Value = "ID " & UNIFAClines(i).Split(",")(1) 'SubGroup
                 .Item(.Count - 1).Cells(0).Value = UNIFAClines(i).Split(",")(2) 'MainGroup
                 .Item(.Count - 1).Cells(1).Value = UNIFAClines(i).Split(",")(3) 'SubGroup
-                TT = "Rk / Qk: " & UNIFAClines(i).Split(",")(4) & " / " & UNIFAClines(i).Split(",")(5) & vbCrLf & _
-                                                         "Example Compound: " & UNIFAClines(i).Split(",")(6) & vbCrLf & _
+                TT = "Rk / Qk: " & UNIFAClines(i).Split(",")(4) & " / " & UNIFAClines(i).Split(",")(5) & vbCrLf &
+                                                         "Example Compound: " & UNIFAClines(i).Split(",")(6) & vbCrLf &
                                                          "Joback subgroups: " & UNIFAClines(i).Split(",")(8)
                 .Item(.Count - 1).Cells(3).Tag = {S, TT, UNIFAClines(i).Split(",")(1)}
 
@@ -136,7 +136,7 @@ Public Class FormCompoundCreator
                         .Item(.Count - 1).Cells(0).Value = fields(1)
                         .Item(.Count - 1).Cells(1).Value = fields(2)
                         .Item(.Count - 1).Cells(2).Value = 0
-                        TT = "Rk / Qk: " & fields(4) & " / " & fields(5) & vbCrLf & _
+                        TT = "Rk / Qk: " & fields(4) & " / " & fields(5) & vbCrLf &
                                                                  "Example Compound: " & fields(6) & vbCrLf & fields(7)
 
                         .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(3)}
@@ -164,7 +164,7 @@ Public Class FormCompoundCreator
                 End While
             End Using
         End Using
- 
+
         delimiter = vbTab
         Me.GridNISTMODFAC.Rows.Clear()
 
@@ -190,7 +190,7 @@ Public Class FormCompoundCreator
                             .Item(.Count - 1).Cells(0).Value = mainname
                             .Item(.Count - 1).Cells(1).Value = fields(1)
                             .Item(.Count - 1).Cells(2).Value = 0
-                            TT = "Rk / Qk: " & fields(2) & " / " & fields(3) & vbCrLf & _
+                            TT = "Rk / Qk: " & fields(2) & " / " & fields(3) & vbCrLf &
                                                                      "Example Compound: " & fields(4) & vbCrLf & fields(5)
                             .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(0)}
 
@@ -260,7 +260,7 @@ Public Class FormCompoundCreator
             For i = 1 To ElementLines.Count - 1
                 .Add(New Object())
                 .Item(.Count - 1).Cells(0).Value = ElementLines(i).Split(";")(2)
-                .Item(.Count - 1).Cells(0).ToolTipText = "Element # " & ElementLines(i).Split(";")(0) & vbCrLf & _
+                .Item(.Count - 1).Cells(0).ToolTipText = "Element # " & ElementLines(i).Split(";")(0) & vbCrLf &
                                     ElementLines(i).Split(";")(1) & vbCrLf & "MW: " & ElementLines(i).Split(";")(3)
             Next
         End With
@@ -271,6 +271,7 @@ Public Class FormCompoundCreator
             .cp.LiquidHeatCapacityEquation = 0
             .cp.LiquidDensityEquation = 0
             .cp.LiquidViscosityEquation = 0
+            .cp.LiquidThermalConductivityEquation = 0
         End With
 
         cbEqPVAP.SelectedIndex = 0
@@ -280,6 +281,7 @@ Public Class FormCompoundCreator
         cbEqLIQVISC.SelectedIndex = 0
         cbEqSolidDENS.SelectedIndex = 0
         cbEqCpS.SelectedIndex = 0
+        cbEqTCLiquid.SelectedIndex = 0
 
         Me.cbUnits.Items.Clear()
 
@@ -289,12 +291,7 @@ Public Class FormCompoundCreator
 
         Me.cbUnits.SelectedIndex = 0
 
-        Me.RadioButton1.Checked = True
-
         Me.TextBoxID.Text = New Random().Next(100000)
-
-        SetCompCreatorSaveStatus(True)
-        SetUserDBSaveStatus(True)
 
         UpdateUnits()
 
@@ -329,27 +326,6 @@ Public Class FormCompoundCreator
             End If
         End If
     End Sub
-    Sub SetCompCreatorSaveStatus(ByVal Status As Boolean)
-        isDWSimSaved = Status
-        If isDWSimSaved Then
-            ToolStripStatusDWSIM.Text = DWSIM.App.GetLocalString("Saved")
-            ToolStripStatusDWSIM.BackColor = Color.Green
-
-        Else
-            ToolStripStatusDWSIM.Text = DWSIM.App.GetLocalString("Modified")
-            ToolStripStatusDWSIM.BackColor = Color.Red
-        End If
-    End Sub
-    Sub SetUserDBSaveStatus(ByVal Status As Boolean)
-        isUserDBSaved = Status
-        If isUserDBSaved Then
-            ToolStripStatusUserDB.Text = DWSIM.App.GetLocalString("Saved")
-            ToolStripStatusUserDB.BackColor = Color.Green
-        Else
-            ToolStripStatusUserDB.Text = DWSIM.App.GetLocalString("Modified")
-            ToolStripStatusUserDB.BackColor = Color.Red
-        End If
-    End Sub
 
     Sub WriteData()
 
@@ -381,347 +357,312 @@ Public Class FormCompoundCreator
 
             UpdateUnits()
 
+            tsmiIgnoreUnsupportedGroups.Checked = .IgnoreUnsupportedGroups
+
             TextBoxID.Text = .cp.ID
             TextBoxName.Text = .cp.Name
             TextBoxComments.Text = .cp.Comments
 
-            If .cp.IsBlackOil Then
+            CheckBoxMW.Checked = .CalcMW
+            CheckBoxNBP.Checked = .CalcNBP
+            CheckBoxAF.Checked = .CalcAF
+            CheckBoxCSAF.Checked = .CalcCSAF
+            CheckBoxCSLV.Checked = .CalcCSMV
+            CheckBoxCSSP.Checked = .CalcCSSP
+            CheckBoxTc.Checked = .CalcTC
+            CheckBoxPc.Checked = .CalcPC
+            CheckBoxZc.Checked = .CalcZC
+            CheckBoxZRa.Checked = .CalcZRA
+            CheckBoxDHF.Checked = .CalcHF
+            CheckBoxDGF.Checked = .CalcGF
+            CheckBoxMeltingTemp.Checked = .CalcMP
+            CheckBoxEnthOfFusion.Checked = .CalcEM
 
-                RadioButton2.Checked = True
+            'tbDBPath.Text = .database
+            TextBoxAF.Text = .cp.Acentric_Factor
+            TextBoxCAS.Text = .cp.CAS_Number
+            TextBoxCSAF.Text = .cp.Chao_Seader_Acentricity
+            TextBoxCSLV.Text = .cp.Chao_Seader_Liquid_Molar_Volume
+            TextBoxCSSP.Text = .cp.Chao_Seader_Solubility_Parameter
+            TextBoxDGF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Gibbs_Energy_of_Formation_25C)
+            TextBoxDHF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Enthalpy_of_Formation_25C)
+            TextBoxFormula.Text = .cp.Formula
+            TextBoxMW.Text = .cp.Molar_Weight
+            TextBoxNBP.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.Normal_Boiling_Point)
+            TextBoxPc.Text = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, .cp.Critical_Pressure)
+            TextBoxUNIQUAC_Q.Text = .cp.UNIQUAC_Q
+            TextBoxUNIQUAC_R.Text = .cp.UNIQUAC_R
+            TextBoxTc.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.Critical_Temperature)
+            TextBoxVTCPR.Text = .cp.PR_Volume_Translation_Coefficient
+            TextBoxVTCSRK.Text = .cp.SRK_Volume_Translation_Coefficient
+            TextBoxZc.Text = .cp.Critical_Compressibility
+            TextBoxZRa.Text = .cp.Z_Rackett
+            TextBoxMeltingTemp.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.TemperatureOfFusion)
+            TextBoxEnthOfFusion.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.EnthalpyOfFusionAtTf)
+            TextBoxSMILES.Text = .cp.SMILES
 
-                tbBOGOR.Text = SystemsOfUnits.Converter.ConvertFromSI(su.gor, .cp.BO_GOR)
-                tbBOBSW.Text = .cp.BO_BSW
-                tbBOSGG.Text = .cp.BO_SGG
-                tbBOSGO.Text = .cp.BO_SGO
-
-                tbBOV1.Text = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, .cp.BO_OilVisc1)
-                tbBOV2.Text = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, .cp.BO_OilVisc2)
-                tbBOT1.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.BO_OilViscTemp1)
-                tbBOT2.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.BO_OilViscTemp2)
-
-                tbBOPNAP.Text = .cp.BO_PNA_P
-                tbBOPNAN.Text = .cp.BO_PNA_N
-                tbBOPNAA.Text = .cp.BO_PNA_A
-
-            ElseIf .cp.IsIon Or .cp.IsSalt Or .cp.IsHydratedSalt Then
-
-                'electrolyte
-
-                RadioButton3.Checked = True
-
-                .cp.IsBlackOil = False
-
-                TextBoxCAS.Text = .cp.CAS_Number
-                TextBoxFormula.Text = .cp.Formula
-                TextBoxMW.Text = .cp.Molar_Weight
-                TextBoxSMILES.Text = .cp.SMILES
-
-                If Not .cp.SMILES = "" Then
-                    RenderSMILES()
-                End If
-
-                rbIon.Checked = .cp.IsIon
-                rbSalt.Checked = .cp.IsSalt
-                rbHydratedSalt.Checked = .cp.IsHydratedSalt
-                tbPositiveIonFormula.Text = .cp.PositiveIon
-                tbNegativeIonFormula.Text = .cp.NegativeIon
-                tbEsteqCoeffPosIon.Text = .cp.PositiveIonStoichCoeff
-                tbEsteqCoeffNegIon.Text = .cp.NegativeIonStoichCoeff
-                tbElecIonCharge.Text = .cp.Charge
-                tbHydrNumber.Text = .cp.HydrationNumber
-
-                tbElecGibbsEnergyForm.Text = .cp.Electrolyte_DelGF
-                tbElecEnthForm.Text = .cp.Electrolyte_DelHF
-                tbElecHeatCapacityForm.Text = .cp.Electrolyte_Cp0
-
-                tbElecSolidDensT.Text = .cp.SolidTs
-                tbElecSolidDens.Text = .cp.SolidDensityAtTs
-                tbElecSolidTf.Text = .cp.TemperatureOfFusion
-                tbElecEnthFusion.Text = .cp.EnthalpyOfFusionAtTf
-
-            Else
-
-                RadioButton1.Checked = True
-
-                CheckBoxMW.Checked = .CalcMW
-                CheckBoxNBP.Checked = .CalcNBP
-                CheckBoxAF.Checked = .CalcAF
-                CheckBoxCSAF.Checked = .CalcCSAF
-                CheckBoxCSLV.Checked = .CalcCSMV
-                CheckBoxCSSP.Checked = .CalcCSSP
-                CheckBoxTc.Checked = .CalcTC
-                CheckBoxPc.Checked = .CalcPC
-                CheckBoxZc.Checked = .CalcZC
-                CheckBoxZRa.Checked = .CalcZRA
-                CheckBoxDHF.Checked = .CalcHF
-                CheckBoxDGF.Checked = .CalcGF
-                CheckBoxMeltingTemp.Checked = .CalcMP
-                CheckBoxEnthOfFusion.Checked = .CalcEM
-
-                'tbDBPath.Text = .database
-                TextBoxAF.Text = .cp.Acentric_Factor
-                TextBoxCAS.Text = .cp.CAS_Number
-                TextBoxCSAF.Text = .cp.Chao_Seader_Acentricity
-                TextBoxCSLV.Text = .cp.Chao_Seader_Liquid_Molar_Volume
-                TextBoxCSSP.Text = .cp.Chao_Seader_Solubility_Parameter
-                TextBoxDGF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Gibbs_Energy_of_Formation_25C)
-                TextBoxDHF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Enthalpy_of_Formation_25C)
-                TextBoxFormula.Text = .cp.Formula
-                TextBoxMW.Text = .cp.Molar_Weight
-                TextBoxNBP.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.Normal_Boiling_Point)
-                TextBoxPc.Text = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, .cp.Critical_Pressure)
-                TextBoxPCSAFTEpsilon.Text = .cp.PC_SAFT_epsilon_k
-                TextBoxPCSAFTm.Text = .cp.PC_SAFT_m
-                TextBoxPCSAFTSigma.Text = .cp.PC_SAFT_sigma
-                TextBoxUNIQUAC_Q.Text = .cp.UNIQUAC_Q
-                TextBoxUNIQUAC_R.Text = .cp.UNIQUAC_R
-                TextBoxTc.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.Critical_Temperature)
-                TextBoxVTCPR.Text = .cp.PR_Volume_Translation_Coefficient
-                TextBoxVTCSRK.Text = .cp.SRK_Volume_Translation_Coefficient
-                TextBoxZc.Text = .cp.Critical_Compressibility
-                TextBoxZRa.Text = .cp.Z_Rackett
-                TextBoxMeltingTemp.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.TemperatureOfFusion)
-                TextBoxEnthOfFusion.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.EnthalpyOfFusionAtTf)
-                TextBoxSMILES.Text = .cp.SMILES
-
-                If Not .cp.SMILES = "" Then
-                    RenderSMILES()
-                End If
-
-                If .RegressPVAP Then rbRegressPVAP.Checked = True
-                If .RegressCPIG Then rbRegressCPIG.Checked = True
-                If .RegressCPLiquid Then rbRegressCPLiquid.Checked = True
-                If .RegressLDENS Then rbRegressLIQDENS.Checked = True
-                If .RegressLVISC Then rbRegressLIQVISC.Checked = True
-                If .RegressCpS Then rbRegressSolidCp.Checked = True
-                If .RegressRoS Then rbRegressSolidDens.Checked = True
-
-                If .EqPVAP Then rbCoeffPVAP.Checked = True
-                If .EqCPIG Then rbCoeffCPIG.Checked = True
-                If .EqCPLiquid Then rbCoeffCPLiquid.Checked = True
-                If .EqLDENS Then rbCoeffLIQDENS.Checked = True
-                If .EqLVISC Then rbCoeffLIQVISC.Checked = True
-                If .EqCpS Then rbCoeffSolidCp.Checked = True
-                If .EqSDens Then rbCoeffSolidDens.Checked = True
-
-                AtomDataGrid.Rows.Clear()
-                For i = 0 To .cp.Elements.Count - 1
-                    AtomDataGrid.Rows.Add(New Object() {.cp.Elements.GetKey(i), .cp.Elements.GetByIndex(i)})
-                Next
-
-                If Integer.TryParse(.cp.VaporPressureEquation, New Integer) Then
-                    For Each it As Object In cbEqPVAP.Items
-                        If it.ToString.Split(":")(0) = .cp.VaporPressureEquation Then
-                            cbEqPVAP.SelectedIndex = cbEqPVAP.Items.IndexOf(it)
-                            Exit For
-                        End If
-                    Next
-                Else
-                    cbEqPVAP.SelectedIndex = cbEqPVAP.Items.Count - 1
-                    tbUserDefEqPVAP.Text = .cp.VaporPressureEquation
-                End If
-
-                If Integer.TryParse(.cp.IdealgasCpEquation, New Integer) Then
-                    For Each it As Object In cbEqCPIG.Items
-                        If it.ToString.Split(":")(0) = .cp.IdealgasCpEquation Then
-                            cbEqCPIG.SelectedIndex = cbEqCPIG.Items.IndexOf(it)
-                            Exit For
-                        End If
-                    Next
-                Else
-                    cbEqCPIG.SelectedIndex = cbEqCPIG.Items.Count - 1
-                    tbUserDefCPIGEq.Text = .cp.IdealgasCpEquation
-                End If
-
-                If Integer.TryParse(.cp.LiquidHeatCapacityEquation, New Integer) Then
-                    For Each it As Object In cbEqCPLiquid.Items
-                        If it.ToString.Split(":")(0) = .cp.LiquidHeatCapacityEquation Then
-                            cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.IndexOf(it)
-                            Exit For
-                        End If
-                    Next
-                Else
-                    cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.Count - 1
-                    tbUserDefCPLEq.Text = .cp.LiquidHeatCapacityEquation
-                End If
-
-                If Integer.TryParse(.cp.LiquidDensityEquation, New Integer) Then
-                    For Each it As Object In cbEqLIQDENS.Items
-                        If it.ToString.Split(":")(0) = .cp.LiquidDensityEquation Then
-                            cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.IndexOf(it)
-                            Exit For
-                        End If
-                    Next
-                Else
-                    cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.Count - 1
-                    tbUserDefDensLiqEq.Text = .cp.LiquidDensityEquation
-                End If
-
-                If Integer.TryParse(.cp.LiquidViscosityEquation, New Integer) Then
-                    For Each it As Object In cbEqLIQVISC.Items
-                        If it.ToString.Split(":")(0) = .cp.LiquidViscosityEquation Then
-                            cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.IndexOf(it)
-                            Exit For
-                        End If
-                    Next
-                Else
-                    cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.Count - 1
-                    tbUserDefLiqViscEq.Text = .cp.LiquidViscosityEquation
-                End If
-
-                For Each it As Object In cbEqCpS.Items
-                    If it.ToString.Split(":")(0) = .cp.SolidHeatCapacityEquation Then
-                        cbEqCpS.SelectedIndex = cbEqCpS.Items.IndexOf(it)
-                        Exit For
-                    End If
-                Next
-
-                For Each it As Object In cbEqSolidDENS.Items
-                    If it.ToString.Split(":")(0) = .cp.SolidDensityEquation Then
-                        cbEqSolidDENS.SelectedIndex = cbEqSolidDENS.Items.IndexOf(it)
-                        Exit For
-                    End If
-                Next
-
-                tbCpS_A.Text = .cp.Solid_Heat_Capacity_Const_A
-                tbCpS_B.Text = .cp.Solid_Heat_Capacity_Const_B
-                tbCpS_C.Text = .cp.Solid_Heat_Capacity_Const_C
-                tbCpS_D.Text = .cp.Solid_Heat_Capacity_Const_D
-                tbCpS_E.Text = .cp.Solid_Heat_Capacity_Const_E
-
-                tbRoS_A.Text = .cp.Solid_Density_Const_A
-                tbRoS_B.Text = .cp.Solid_Density_Const_B
-                tbRoS_C.Text = .cp.Solid_Density_Const_C
-                tbRoS_D.Text = .cp.Solid_Density_Const_D
-                tbRoS_E.Text = .cp.Solid_Density_Const_E
-
-                tbPVAP_A.Text = .cp.Vapor_Pressure_Constant_A
-                tbPVAP_B.Text = .cp.Vapor_Pressure_Constant_B
-                tbPVAP_C.Text = .cp.Vapor_Pressure_Constant_C
-                tbPVAP_D.Text = .cp.Vapor_Pressure_Constant_D
-                tbPVAP_E.Text = .cp.Vapor_Pressure_Constant_E
-
-                tbCPIG_A.Text = .cp.Ideal_Gas_Heat_Capacity_Const_A
-                tbCPIG_B.Text = .cp.Ideal_Gas_Heat_Capacity_Const_B
-                tbCPIG_C.Text = .cp.Ideal_Gas_Heat_Capacity_Const_C
-                tbCPIG_D.Text = .cp.Ideal_Gas_Heat_Capacity_Const_D
-                tbCPIG_E.Text = .cp.Ideal_Gas_Heat_Capacity_Const_E
-
-                tbCPLiquid_A.Text = .cp.Liquid_Heat_Capacity_Const_A
-                tbCPLiquid_B.Text = .cp.Liquid_Heat_Capacity_Const_B
-                tbCPLiquid_C.Text = .cp.Liquid_Heat_Capacity_Const_C
-                tbCPLiquid_D.Text = .cp.Liquid_Heat_Capacity_Const_D
-                tbCPLiquid_E.Text = .cp.Liquid_Heat_Capacity_Const_E
-
-                tbLIQDENS_A.Text = .cp.Liquid_Density_Const_A
-                tbLIQDENS_B.Text = .cp.Liquid_Density_Const_B
-                tbLIQDENS_C.Text = .cp.Liquid_Density_Const_C
-                tbLIQDENS_D.Text = .cp.Liquid_Density_Const_D
-                tbLIQDENS_E.Text = .cp.Liquid_Density_Const_E
-
-                tbLIQVISC_A.Text = .cp.Liquid_Viscosity_Const_A
-                tbLIQVISC_B.Text = .cp.Liquid_Viscosity_Const_B
-                tbLIQVISC_C.Text = .cp.Liquid_Viscosity_Const_C
-                tbLIQVISC_D.Text = .cp.Liquid_Viscosity_Const_D
-                tbLIQVISC_E.Text = .cp.Liquid_Viscosity_Const_E
-
-                populating = True
-                For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
-                    If .cp.UNIFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
-                    If .cp.UNIFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
-
-                    If r.Cells(2).Value > 0 Then
-                        r.Cells(2).Style.BackColor = Color.PaleGreen
-                    Else
-                        r.Cells(2).Style.BackColor = Color.White
-                    End If
-
-                Next
-                For Each r As DataGridViewRow In Me.GridMODFAC.Rows
-                    If .cp.MODFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.MODFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
-                    If .cp.MODFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.MODFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
-
-                    If r.Cells(2).Value > 0 Then
-                        r.Cells(2).Style.BackColor = Color.PaleGreen
-                    Else
-                        r.Cells(2).Style.BackColor = Color.White
-                    End If
-                Next
-
-                If .cp.NISTMODFACGroups Is Nothing Then
-                    .cp.NISTMODFACGroups = New SortedList
-                End If
-
-                For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
-                    If .cp.NISTMODFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
-                    If .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
-
-                    If r.Cells(2).Value > 0 Then
-                        r.Cells(2).Style.BackColor = Color.PaleGreen
-                    Else
-                        r.Cells(2).Style.BackColor = Color.White
-                    End If
-                Next
-
-                FillUnifacSubGroups()
-
-                'check for updated elements when loading older files and create them if not existing
-                If .JobackGroups Is Nothing Then .JobackGroups = New ArrayList()
-                If .AdditionalAtoms Is Nothing Then .AdditionalAtoms = New ArrayList
-                If .DataRoS Is Nothing Then .DataRoS = New ArrayList
-                If .DataCpS Is Nothing Then .DataCpS = New ArrayList
-                If .DataCPLiquid Is Nothing Then .DataCPLiquid = New ArrayList
-
-                'populating Joback Grid with additional Joback groups
-                For i = 0 To .JobackGroups.Count - 1
-                    Me.GridJoback.Rows.Item(.JobackGroups.Item(i)(0)).Cells(3).Value = .JobackGroups.Item(i)(1)
-                    If .JobackGroups.Item(i)(1) > 0 Then PureUNIFACCompound = False
-                Next
-
-                'populating AtomGrid with additional Atoms
-                For i = 0 To .AdditionalAtoms.Count - 1
-                    Me.AddAtomDataGrid.Rows(.AdditionalAtoms.Item(i)(0)).Cells(1).Value = .AdditionalAtoms.Item(i)(1)
-                Next
-
-                populating = False
-
-                Me.GridExpDataPVAP.Rows.Clear()
-                For i = 0 To .DataPVAP.Count - 1
-                    Me.GridExpDataPVAP.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataPVAP(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.pressure, .DataPVAP(i)(1))})
-                Next
-                Me.GridExpDataCPIG.Rows.Clear()
-                For i = 0 To .DataCPIG.Count - 1
-                    Me.GridExpDataCPIG.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataCPIG(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, .DataCPIG(i)(1))})
-                Next
-                Me.GridExpDataCPLiquid.Rows.Clear()
-                For i = 0 To .DataCPLiquid.Count - 1
-                    Me.GridExpDataCPLiquid.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataCPLiquid(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, .DataCPLiquid(i)(1))})
-                Next
-                Me.GridExpDataLIQDENS.Rows.Clear()
-                For i = 0 To .DataLDENS.Count - 1
-                    Me.GridExpDataLIQDENS.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataLDENS(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.density, .DataLDENS(i)(1))})
-                Next
-                Me.GridExpDataLIQVISC.Rows.Clear()
-                For i = 0 To .DataLVISC.Count - 1
-                    Me.GridExpDataLIQVISC.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataLVISC(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, .DataLVISC(i)(1))})
-                Next
-                Me.GridExpDataRoS.Rows.Clear()
-                For i = 0 To .DataRoS.Count - 1
-                    Me.GridExpDataRoS.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataRoS(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.density, .DataRoS(i)(1)) * .cp.Molar_Weight})
-                Next
-                Me.GridExpDataCpS.Rows.Clear()
-                For i = 0 To .DataCpS.Count - 1
-                    Me.GridExpDataCpS.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataCpS(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, .DataCpS(i)(1)) / .cp.Molar_Weight})
-                Next
-                If .RegressOKPVAP Then tbStatusPVAP.Text = "OK" Else tbStatusPVAP.Text = .ErrorMsgPVAP
-                If .RegressOKCPIG Then tbStatusCPIG.Text = "OK" Else tbStatusCPIG.Text = .ErrorMsgCPIG
-                If .RegressOKCPLiquid Then tbStatusCPLiquid.Text = "OK" Else tbStatusCPLiquid.Text = .ErrorMsgCPLiquid
-                If .RegressOKLDENS Then tbStatusLIQDENS.Text = "OK" Else tbStatusLIQDENS.Text = .ErrorMsgLDENS
-                If .RegressOKLVISC Then tbStatusLIQVISC.Text = "OK" Else tbStatusLIQVISC.Text = .ErrorMsgLVISC
-                If .RegressOKRoS Then tbStatusSolidDens.Text = "OK" Else tbStatusSolidDens.Text = .ErrorMsgRoS
-                If .RegressOKCpS Then tbStatusSolidCp.Text = "OK" Else tbStatusSolidCp.Text = .ErrorMsgCpS
-
+            If Not .cp.SMILES = "" Then
+                RenderSMILES()
             End If
+
+            If .RegressPVAP Then rbRegressPVAP.Checked = True
+            If .RegressCPIG Then rbRegressCPIG.Checked = True
+            If .RegressCPLiquid Then rbRegressCPLiquid.Checked = True
+            If .RegressLDENS Then rbRegressLIQDENS.Checked = True
+            If .RegressLVISC Then rbRegressLIQVISC.Checked = True
+            If .RegressCpS Then rbRegressSolidCp.Checked = True
+            If .RegressRoS Then rbRegressSolidDens.Checked = True
+            If .RegressLTC Then rbRegressTCLiquid.Checked = True
+
+            If .EqPVAP Then rbCoeffPVAP.Checked = True
+            If .EqCPIG Then rbCoeffCPIG.Checked = True
+            If .EqCPLiquid Then rbCoeffCPLiquid.Checked = True
+            If .EqLDENS Then rbCoeffLIQDENS.Checked = True
+            If .EqLVISC Then rbCoeffLIQVISC.Checked = True
+            If .EqCpS Then rbCoeffSolidCp.Checked = True
+            If .EqSDens Then rbCoeffSolidDens.Checked = True
+            If .EqLTC Then rbCoeffTCLiquid.Checked = True
+
+            AtomDataGrid.Rows.Clear()
+            For i = 0 To .cp.Elements.Count - 1
+                AtomDataGrid.Rows.Add(New Object() { .cp.Elements.GetKey(i), .cp.Elements.GetByIndex(i)})
+            Next
+
+            If Integer.TryParse(.cp.VaporPressureEquation, New Integer) Then
+                For Each it As Object In cbEqPVAP.Items
+                    If it.ToString.Split(":")(0) = .cp.VaporPressureEquation Then
+                        cbEqPVAP.SelectedIndex = cbEqPVAP.Items.IndexOf(it)
+                        Exit For
+                    End If
+                Next
+            Else
+                cbEqPVAP.SelectedIndex = cbEqPVAP.Items.Count - 1
+                tbUserDefEqPVAP.Text = .cp.VaporPressureEquation
+            End If
+
+            If Integer.TryParse(.cp.IdealgasCpEquation, New Integer) Then
+                For Each it As Object In cbEqCPIG.Items
+                    If it.ToString.Split(":")(0) = .cp.IdealgasCpEquation Then
+                        cbEqCPIG.SelectedIndex = cbEqCPIG.Items.IndexOf(it)
+                        Exit For
+                    End If
+                Next
+            Else
+                cbEqCPIG.SelectedIndex = cbEqCPIG.Items.Count - 1
+                tbUserDefCPIGEq.Text = .cp.IdealgasCpEquation
+            End If
+
+            If Integer.TryParse(.cp.LiquidHeatCapacityEquation, New Integer) Then
+                For Each it As Object In cbEqCPLiquid.Items
+                    If it.ToString.Split(":")(0) = .cp.LiquidHeatCapacityEquation Then
+                        cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.IndexOf(it)
+                        Exit For
+                    End If
+                Next
+            Else
+                cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.Count - 1
+                tbUserDefCPLEq.Text = .cp.LiquidHeatCapacityEquation
+            End If
+
+            If Integer.TryParse(.cp.LiquidDensityEquation, New Integer) Then
+                For Each it As Object In cbEqLIQDENS.Items
+                    If it.ToString.Split(":")(0) = .cp.LiquidDensityEquation Then
+                        cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.IndexOf(it)
+                        Exit For
+                    End If
+                Next
+            Else
+                cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.Count - 1
+                tbUserDefDensLiqEq.Text = .cp.LiquidDensityEquation
+            End If
+
+            If Integer.TryParse(.cp.LiquidViscosityEquation, New Integer) Then
+                For Each it As Object In cbEqLIQVISC.Items
+                    If it.ToString.Split(":")(0) = .cp.LiquidViscosityEquation Then
+                        cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.IndexOf(it)
+                        Exit For
+                    End If
+                Next
+            Else
+                cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.Count - 1
+                tbUserDefLiqViscEq.Text = .cp.LiquidViscosityEquation
+            End If
+
+            If Integer.TryParse(.cp.LiquidThermalConductivityEquation, New Integer) Then
+                For Each it As Object In cbEqTCLiquid.Items
+                    If it.ToString.Split(":")(0) = .cp.LiquidThermalConductivityEquation Then
+                        cbEqTCLiquid.SelectedIndex = cbEqTCLiquid.Items.IndexOf(it)
+                        Exit For
+                    End If
+                Next
+            Else
+                cbEqTCLiquid.SelectedIndex = cbEqTCLiquid.Items.Count - 1
+                tbUserDefTCEq.Text = .cp.LiquidThermalConductivityEquation
+            End If
+
+            For Each it As Object In cbEqCpS.Items
+                If it.ToString.Split(":")(0) = .cp.SolidHeatCapacityEquation Then
+                    cbEqCpS.SelectedIndex = cbEqCpS.Items.IndexOf(it)
+                    Exit For
+                End If
+            Next
+
+            For Each it As Object In cbEqSolidDENS.Items
+                If it.ToString.Split(":")(0) = .cp.SolidDensityEquation Then
+                    cbEqSolidDENS.SelectedIndex = cbEqSolidDENS.Items.IndexOf(it)
+                    Exit For
+                End If
+            Next
+
+            tbCpS_A.Text = .cp.Solid_Heat_Capacity_Const_A
+            tbCpS_B.Text = .cp.Solid_Heat_Capacity_Const_B
+            tbCpS_C.Text = .cp.Solid_Heat_Capacity_Const_C
+            tbCpS_D.Text = .cp.Solid_Heat_Capacity_Const_D
+            tbCpS_E.Text = .cp.Solid_Heat_Capacity_Const_E
+
+            tbRoS_A.Text = .cp.Solid_Density_Const_A
+            tbRoS_B.Text = .cp.Solid_Density_Const_B
+            tbRoS_C.Text = .cp.Solid_Density_Const_C
+            tbRoS_D.Text = .cp.Solid_Density_Const_D
+            tbRoS_E.Text = .cp.Solid_Density_Const_E
+
+            tbPVAP_A.Text = .cp.Vapor_Pressure_Constant_A
+            tbPVAP_B.Text = .cp.Vapor_Pressure_Constant_B
+            tbPVAP_C.Text = .cp.Vapor_Pressure_Constant_C
+            tbPVAP_D.Text = .cp.Vapor_Pressure_Constant_D
+            tbPVAP_E.Text = .cp.Vapor_Pressure_Constant_E
+
+            tbCPIG_A.Text = .cp.Ideal_Gas_Heat_Capacity_Const_A
+            tbCPIG_B.Text = .cp.Ideal_Gas_Heat_Capacity_Const_B
+            tbCPIG_C.Text = .cp.Ideal_Gas_Heat_Capacity_Const_C
+            tbCPIG_D.Text = .cp.Ideal_Gas_Heat_Capacity_Const_D
+            tbCPIG_E.Text = .cp.Ideal_Gas_Heat_Capacity_Const_E
+
+            tbCPLiquid_A.Text = .cp.Liquid_Heat_Capacity_Const_A
+            tbCPLiquid_B.Text = .cp.Liquid_Heat_Capacity_Const_B
+            tbCPLiquid_C.Text = .cp.Liquid_Heat_Capacity_Const_C
+            tbCPLiquid_D.Text = .cp.Liquid_Heat_Capacity_Const_D
+            tbCPLiquid_E.Text = .cp.Liquid_Heat_Capacity_Const_E
+
+            tbLIQDENS_A.Text = .cp.Liquid_Density_Const_A
+            tbLIQDENS_B.Text = .cp.Liquid_Density_Const_B
+            tbLIQDENS_C.Text = .cp.Liquid_Density_Const_C
+            tbLIQDENS_D.Text = .cp.Liquid_Density_Const_D
+            tbLIQDENS_E.Text = .cp.Liquid_Density_Const_E
+
+            tbLIQVISC_A.Text = .cp.Liquid_Viscosity_Const_A
+            tbLIQVISC_B.Text = .cp.Liquid_Viscosity_Const_B
+            tbLIQVISC_C.Text = .cp.Liquid_Viscosity_Const_C
+            tbLIQVISC_D.Text = .cp.Liquid_Viscosity_Const_D
+            tbLIQVISC_E.Text = .cp.Liquid_Viscosity_Const_E
+
+            tbTCLiquid_A.Text = .cp.Liquid_Thermal_Conductivity_Const_A
+            tbTCLiquid_B.Text = .cp.Liquid_Thermal_Conductivity_Const_B
+            tbTCLiquid_C.Text = .cp.Liquid_Thermal_Conductivity_Const_C
+            tbTCLiquid_D.Text = .cp.Liquid_Thermal_Conductivity_Const_D
+            tbTCLiquid_E.Text = .cp.Liquid_Thermal_Conductivity_Const_E
+
+            populating = True
+            For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
+                If .cp.UNIFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
+                If .cp.UNIFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
+
+                If r.Cells(2).Value > 0 Then
+                    r.Cells(2).Style.BackColor = Color.PaleGreen
+                Else
+                    r.Cells(2).Style.BackColor = Color.White
+                End If
+
+            Next
+            For Each r As DataGridViewRow In Me.GridMODFAC.Rows
+                If .cp.MODFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.MODFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
+                If .cp.MODFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.MODFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
+
+                If r.Cells(2).Value > 0 Then
+                    r.Cells(2).Style.BackColor = Color.PaleGreen
+                Else
+                    r.Cells(2).Style.BackColor = Color.White
+                End If
+            Next
+
+            If .cp.NISTMODFACGroups Is Nothing Then
+                .cp.NISTMODFACGroups = New SortedList
+            End If
+
+            For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
+                If .cp.NISTMODFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
+                If .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
+
+                If r.Cells(2).Value > 0 Then
+                    r.Cells(2).Style.BackColor = Color.PaleGreen
+                Else
+                    r.Cells(2).Style.BackColor = Color.White
+                End If
+            Next
+
+            FillUnifacSubGroups()
+
+            'check for updated elements when loading older files and create them if not existing
+            If .JobackGroups Is Nothing Then .JobackGroups = New ArrayList()
+            If .AdditionalAtoms Is Nothing Then .AdditionalAtoms = New ArrayList
+            If .DataRoS Is Nothing Then .DataRoS = New ArrayList
+            If .DataCpS Is Nothing Then .DataCpS = New ArrayList
+            If .DataCPLiquid Is Nothing Then .DataCPLiquid = New ArrayList
+            If .DataLTC Is Nothing Then .DataLTC = New ArrayList
+
+            'populating Joback Grid with additional Joback groups
+            For i = 0 To .JobackGroups.Count - 1
+                Me.GridJoback.Rows.Item(.JobackGroups.Item(i)(0)).Cells(3).Value = .JobackGroups.Item(i)(1)
+                If .JobackGroups.Item(i)(1) > 0 Then PureUNIFACCompound = False
+            Next
+
+            'populating AtomGrid with additional Atoms
+            For i = 0 To .AdditionalAtoms.Count - 1
+                Me.AddAtomDataGrid.Rows(.AdditionalAtoms.Item(i)(0)).Cells(1).Value = .AdditionalAtoms.Item(i)(1)
+            Next
+
+            populating = False
+
+            Me.GridExpDataPVAP.Rows.Clear()
+            For i = 0 To .DataPVAP.Count - 1
+                Me.GridExpDataPVAP.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataPVAP(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.pressure, .DataPVAP(i)(1))})
+            Next
+            Me.GridExpDataCPIG.Rows.Clear()
+            For i = 0 To .DataCPIG.Count - 1
+                Me.GridExpDataCPIG.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataCPIG(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, .DataCPIG(i)(1))})
+            Next
+            Me.GridExpDataCPLiquid.Rows.Clear()
+            For i = 0 To .DataCPLiquid.Count - 1
+                Me.GridExpDataCPLiquid.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataCPLiquid(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, .DataCPLiquid(i)(1))})
+            Next
+            Me.GridExpDataLIQDENS.Rows.Clear()
+            For i = 0 To .DataLDENS.Count - 1
+                Me.GridExpDataLIQDENS.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataLDENS(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.density, .DataLDENS(i)(1))})
+            Next
+            Me.GridExpDataLIQVISC.Rows.Clear()
+            For i = 0 To .DataLVISC.Count - 1
+                Me.GridExpDataLIQVISC.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataLVISC(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, .DataLVISC(i)(1))})
+            Next
+            Me.GridExpDataTCLiquid.Rows.Clear()
+            For i = 0 To .DataLTC.Count - 1
+                Me.GridExpDataTCLiquid.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataLTC(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, .DataLTC(i)(1))})
+            Next
+            Me.GridExpDataRoS.Rows.Clear()
+            For i = 0 To .DataRoS.Count - 1
+                Me.GridExpDataRoS.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataRoS(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.density, .DataRoS(i)(1)) * .cp.Molar_Weight})
+            Next
+            Me.GridExpDataCpS.Rows.Clear()
+            For i = 0 To .DataCpS.Count - 1
+                Me.GridExpDataCpS.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .DataCpS(i)(0)), SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, .DataCpS(i)(1)) / .cp.Molar_Weight})
+            Next
+            If .RegressOKPVAP Then tbStatusPVAP.Text = "OK" Else tbStatusPVAP.Text = .ErrorMsgPVAP
+            If .RegressOKCPIG Then tbStatusCPIG.Text = "OK" Else tbStatusCPIG.Text = .ErrorMsgCPIG
+            If .RegressOKCPLiquid Then tbStatusCPLiquid.Text = "OK" Else tbStatusCPLiquid.Text = .ErrorMsgCPLiquid
+            If .RegressOKLDENS Then tbStatusLIQDENS.Text = "OK" Else tbStatusLIQDENS.Text = .ErrorMsgLDENS
+            If .RegressOKLVISC Then tbStatusLIQVISC.Text = "OK" Else tbStatusLIQVISC.Text = .ErrorMsgLVISC
+            If .RegressOKRoS Then tbStatusSolidDens.Text = "OK" Else tbStatusSolidDens.Text = .ErrorMsgRoS
+            If .RegressOKCpS Then tbStatusSolidCp.Text = "OK" Else tbStatusSolidCp.Text = .ErrorMsgCpS
+            If .RegressOKLTC Then tbStatusTCLiquid.Text = "OK" Else tbStatusTCLiquid.Text = .ErrorMsgLTC
 
         End With
 
@@ -765,255 +706,212 @@ Public Class FormCompoundCreator
             .cp.Name = TextBoxName.Text
             .cp.Comments = TextBoxComments.Text
 
-            If RadioButton1.Checked Then
+            .cp.IsBlackOil = False
 
-                .cp.IsBlackOil = False
+            .cp.Acentric_Factor = CheckEmptyTextBox(TextBoxAF)
+            .cp.CAS_Number = TextBoxCAS.Text
+            .cp.CompCreatorStudyFile = .Filename
+            .cp.Chao_Seader_Acentricity = CheckEmptyTextBox(TextBoxCSAF)
+            .cp.Chao_Seader_Liquid_Molar_Volume = CheckEmptyTextBox(TextBoxCSLV)
+            .cp.Chao_Seader_Solubility_Parameter = CheckEmptyTextBox(TextBoxCSSP)
+            .cp.IG_Gibbs_Energy_of_Formation_25C = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxDGF))
+            .cp.IG_Enthalpy_of_Formation_25C = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxDHF))
+            .cp.Formula = TextBoxFormula.Text
+            .cp.Molar_Weight = CheckEmptyTextBox(TextBoxMW)
+            .cp.Normal_Boiling_Point = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxNBP))
+            .cp.Critical_Pressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, CheckEmptyTextBox(TextBoxPc))
+            .cp.UNIQUAC_Q = CheckEmptyTextBox(TextBoxUNIQUAC_Q)
+            .cp.UNIQUAC_R = CheckEmptyTextBox(TextBoxUNIQUAC_R)
+            .cp.Critical_Temperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxTc))
+            .cp.PR_Volume_Translation_Coefficient = CheckEmptyTextBox(TextBoxVTCPR)
+            .cp.SRK_Volume_Translation_Coefficient = CheckEmptyTextBox(TextBoxVTCSRK)
+            .cp.Critical_Compressibility = CheckEmptyTextBox(TextBoxZc)
+            .cp.Z_Rackett = CheckEmptyTextBox(TextBoxZRa)
+            .cp.SMILES = TextBoxSMILES.Text
+            .cp.TemperatureOfFusion = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxMeltingTemp))
+            .cp.EnthalpyOfFusionAtTf = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxEnthOfFusion))
 
-                .cp.Acentric_Factor = CheckEmptyTextBox(TextBoxAF)
-                .cp.CAS_Number = TextBoxCAS.Text
-                .cp.CompCreatorStudyFile = .Filename
-                .cp.Chao_Seader_Acentricity = CheckEmptyTextBox(TextBoxCSAF)
-                .cp.Chao_Seader_Liquid_Molar_Volume = CheckEmptyTextBox(TextBoxCSLV)
-                .cp.Chao_Seader_Solubility_Parameter = CheckEmptyTextBox(TextBoxCSSP)
-                .cp.IG_Gibbs_Energy_of_Formation_25C = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxDGF))
-                .cp.IG_Enthalpy_of_Formation_25C = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxDHF))
-                .cp.Formula = TextBoxFormula.Text
-                .cp.Molar_Weight = CheckEmptyTextBox(TextBoxMW)
-                .cp.Normal_Boiling_Point = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxNBP))
-                .cp.Critical_Pressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, CheckEmptyTextBox(TextBoxPc))
-                .cp.PC_SAFT_epsilon_k = CheckEmptyTextBox(TextBoxPCSAFTEpsilon)
-                .cp.PC_SAFT_m = CheckEmptyTextBox(TextBoxPCSAFTm)
-                .cp.PC_SAFT_sigma = CheckEmptyTextBox(TextBoxPCSAFTSigma)
-                .cp.UNIQUAC_Q = CheckEmptyTextBox(TextBoxUNIQUAC_Q)
-                .cp.UNIQUAC_R = CheckEmptyTextBox(TextBoxUNIQUAC_R)
-                .cp.Critical_Temperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxTc))
-                .cp.PR_Volume_Translation_Coefficient = CheckEmptyTextBox(TextBoxVTCPR)
-                .cp.SRK_Volume_Translation_Coefficient = CheckEmptyTextBox(TextBoxVTCSRK)
-                .cp.Critical_Compressibility = CheckEmptyTextBox(TextBoxZc)
-                .cp.Z_Rackett = CheckEmptyTextBox(TextBoxZRa)
-                .cp.SMILES = TextBoxSMILES.Text
-                .cp.TemperatureOfFusion = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxMeltingTemp))
-                .cp.EnthalpyOfFusionAtTf = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxEnthOfFusion))
+            .RegressPVAP = rbRegressPVAP.Checked
+            .RegressCPIG = rbRegressCPIG.Checked
+            .RegressCPLiquid = rbRegressCPLiquid.Checked
+            .RegressLDENS = rbRegressLIQDENS.Checked
+            .RegressLVISC = rbRegressLIQVISC.Checked
+            .RegressRoS = rbRegressSolidDens.Checked
+            .RegressCpS = rbRegressSolidCp.Checked
+            .RegressLTC = rbRegressTCLiquid.Checked
 
-                .RegressPVAP = rbRegressPVAP.Checked
-                .RegressCPIG = rbRegressCPIG.Checked
-                .RegressCPLiquid = rbRegressCPLiquid.Checked
-                .RegressLDENS = rbRegressLIQDENS.Checked
-                .RegressLVISC = rbRegressLIQVISC.Checked
-                .RegressRoS = rbRegressSolidDens.Checked
-                .RegressCpS = rbRegressSolidCp.Checked
+            .EqPVAP = rbCoeffPVAP.Checked
+            .EqCPIG = rbCoeffCPIG.Checked
+            .EqCPLiquid = rbCoeffCPLiquid.Checked
+            .EqLDENS = rbCoeffLIQDENS.Checked
+            .EqLVISC = rbCoeffLIQVISC.Checked
+            .EqSDens = rbCoeffSolidDens.Checked
+            .EqCpS = rbCoeffSolidCp.Checked
+            .EqLTC = rbCoeffTCLiquid.Checked
 
-                .EqPVAP = rbCoeffPVAP.Checked
-                .EqCPIG = rbCoeffCPIG.Checked
-                .EqCPLiquid = rbCoeffCPLiquid.Checked
-                .EqLDENS = rbCoeffLIQDENS.Checked
-                .EqLVISC = rbCoeffLIQVISC.Checked
-                .EqSDens = rbCoeffSolidDens.Checked
-                .EqCpS = rbCoeffSolidCp.Checked
+            .CalcMW = CheckBoxMW.Checked
+            .CalcNBP = CheckBoxNBP.Checked
+            .CalcAF = CheckBoxAF.Checked
+            .CalcCSAF = CheckBoxCSAF.Checked
+            .CalcCSMV = CheckBoxCSLV.Checked
+            .CalcCSSP = CheckBoxCSSP.Checked
+            .CalcTC = CheckBoxTc.Checked
+            .CalcPC = CheckBoxPc.Checked
+            .CalcZC = CheckBoxZc.Checked
+            .CalcZRA = CheckBoxZRa.Checked
+            .CalcHF = CheckBoxDHF.Checked
+            .CalcGF = CheckBoxDGF.Checked
+            .CalcMP = CheckBoxMeltingTemp.Checked
+            .CalcEM = CheckBoxEnthOfFusion.Checked
 
-                .CalcMW = CheckBoxMW.Checked
-                .CalcNBP = CheckBoxNBP.Checked
-                .CalcAF = CheckBoxAF.Checked
-                .CalcCSAF = CheckBoxCSAF.Checked
-                .CalcCSMV = CheckBoxCSLV.Checked
-                .CalcCSSP = CheckBoxCSSP.Checked
-                .CalcTC = CheckBoxTc.Checked
-                .CalcPC = CheckBoxPc.Checked
-                .CalcZC = CheckBoxZc.Checked
-                .CalcZRA = CheckBoxZRa.Checked
-                .CalcHF = CheckBoxDHF.Checked
-                .CalcGF = CheckBoxDGF.Checked
-                .CalcMP = CheckBoxMeltingTemp.Checked
-                .CalcEM = CheckBoxEnthOfFusion.Checked
+            .cp.VaporPressureEquation = cbEqPVAP.SelectedItem.ToString.Split(":")(0)
+            If .cp.VaporPressureEquation = "1000" Then .cp.VaporPressureEquation = tbUserDefEqPVAP.Text
 
-                .cp.VaporPressureEquation = cbEqPVAP.SelectedItem.ToString.Split(":")(0)
-                If .cp.VaporPressureEquation = "1000" Then .cp.VaporPressureEquation = tbUserDefEqPVAP.Text
+            .cp.LiquidDensityEquation = cbEqLIQDENS.SelectedItem.ToString.Split(":")(0)
+            If .cp.LiquidDensityEquation = "1000" Then .cp.LiquidDensityEquation = tbUserDefDensLiqEq.Text
 
-                .cp.LiquidDensityEquation = cbEqLIQDENS.SelectedItem.ToString.Split(":")(0)
-                If .cp.LiquidDensityEquation = "1000" Then .cp.LiquidDensityEquation = tbUserDefDensLiqEq.Text
+            .cp.LiquidViscosityEquation = cbEqLIQVISC.SelectedItem.ToString.Split(":")(0)
+            If .cp.LiquidViscosityEquation = "1000" Then .cp.LiquidViscosityEquation = tbUserDefLiqViscEq.Text
 
-                .cp.LiquidViscosityEquation = cbEqLIQVISC.SelectedItem.ToString.Split(":")(0)
-                If .cp.LiquidViscosityEquation = "1000" Then .cp.LiquidViscosityEquation = tbUserDefLiqViscEq.Text
+            .cp.SolidHeatCapacityEquation = cbEqCpS.SelectedIndex.ToString.Split(":")(0)
+            .cp.SolidDensityEquation = cbEqSolidDENS.SelectedIndex.ToString.Split(":")(0)
 
-                .cp.SolidHeatCapacityEquation = cbEqCpS.SelectedIndex.ToString.Split(":")(0)
-                .cp.SolidDensityEquation = cbEqSolidDENS.SelectedIndex.ToString.Split(":")(0)
+            .cp.IdealgasCpEquation = cbEqCPIG.SelectedItem.ToString.Split(":")(0)
+            If .cp.IdealgasCpEquation = "1000" Then .cp.IdealgasCpEquation = tbUserDefCPIGEq.Text
 
-                .cp.IdealgasCpEquation = cbEqCPIG.SelectedItem.ToString.Split(":")(0)
-                If .cp.IdealgasCpEquation = "1000" Then .cp.IdealgasCpEquation = tbUserDefCPIGEq.Text
+            .cp.LiquidHeatCapacityEquation = cbEqCPLiquid.SelectedItem.ToString.Split(":")(0)
+            If .cp.LiquidHeatCapacityEquation = "1000" Then .cp.LiquidHeatCapacityEquation = tbUserDefCPLEq.Text
 
-                .cp.LiquidHeatCapacityEquation = cbEqCPLiquid.SelectedItem.ToString.Split(":")(0)
-                If .cp.LiquidHeatCapacityEquation = "1000" Then .cp.LiquidHeatCapacityEquation = tbUserDefCPLEq.Text
+            .cp.LiquidThermalConductivityEquation = cbEqTCLiquid.SelectedItem.ToString.Split(":")(0)
+            If .cp.LiquidThermalConductivityEquation = "1000" Then .cp.LiquidThermalConductivityEquation = tbUserDefTCEq.Text
 
-                .cp.Solid_Heat_Capacity_Const_A = CheckEmptyCell(tbCpS_A.Text)
-                .cp.Solid_Heat_Capacity_Const_B = CheckEmptyCell(tbCpS_B.Text)
-                .cp.Solid_Heat_Capacity_Const_C = CheckEmptyCell(tbCpS_C.Text)
-                .cp.Solid_Heat_Capacity_Const_D = CheckEmptyCell(tbCpS_D.Text)
-                .cp.Solid_Heat_Capacity_Const_E = CheckEmptyCell(tbCpS_E.Text)
-                .cp.Solid_Heat_Capacity_Tmin = 0
-                .cp.Solid_Heat_Capacity_Tmax = .cp.TemperatureOfFusion
+            .cp.Solid_Heat_Capacity_Const_A = CheckEmptyCell(tbCpS_A.Text)
+            .cp.Solid_Heat_Capacity_Const_B = CheckEmptyCell(tbCpS_B.Text)
+            .cp.Solid_Heat_Capacity_Const_C = CheckEmptyCell(tbCpS_C.Text)
+            .cp.Solid_Heat_Capacity_Const_D = CheckEmptyCell(tbCpS_D.Text)
+            .cp.Solid_Heat_Capacity_Const_E = CheckEmptyCell(tbCpS_E.Text)
+            .cp.Solid_Heat_Capacity_Tmin = 0
+            .cp.Solid_Heat_Capacity_Tmax = .cp.TemperatureOfFusion
 
-                .cp.Solid_Density_Const_A = CheckEmptyCell(tbRoS_A.Text)
-                .cp.Solid_Density_Const_B = CheckEmptyCell(tbRoS_B.Text)
-                .cp.Solid_Density_Const_C = CheckEmptyCell(tbRoS_C.Text)
-                .cp.Solid_Density_Const_D = CheckEmptyCell(tbRoS_D.Text)
-                .cp.Solid_Density_Const_E = CheckEmptyCell(tbRoS_E.Text)
-                .cp.Solid_Density_Tmin = 0
-                .cp.Solid_Density_Tmax = .cp.TemperatureOfFusion
+            .cp.Solid_Density_Const_A = CheckEmptyCell(tbRoS_A.Text)
+            .cp.Solid_Density_Const_B = CheckEmptyCell(tbRoS_B.Text)
+            .cp.Solid_Density_Const_C = CheckEmptyCell(tbRoS_C.Text)
+            .cp.Solid_Density_Const_D = CheckEmptyCell(tbRoS_D.Text)
+            .cp.Solid_Density_Const_E = CheckEmptyCell(tbRoS_E.Text)
+            .cp.Solid_Density_Tmin = 0
+            .cp.Solid_Density_Tmax = .cp.TemperatureOfFusion
 
-                .cp.Vapor_Pressure_Constant_A = CheckEmptyCell(tbPVAP_A.Text)
-                .cp.Vapor_Pressure_Constant_B = CheckEmptyCell(tbPVAP_B.Text)
-                .cp.Vapor_Pressure_Constant_C = CheckEmptyCell(tbPVAP_C.Text)
-                .cp.Vapor_Pressure_Constant_D = CheckEmptyCell(tbPVAP_D.Text)
-                .cp.Vapor_Pressure_Constant_E = CheckEmptyCell(tbPVAP_E.Text)
+            .cp.Vapor_Pressure_Constant_A = CheckEmptyCell(tbPVAP_A.Text)
+            .cp.Vapor_Pressure_Constant_B = CheckEmptyCell(tbPVAP_B.Text)
+            .cp.Vapor_Pressure_Constant_C = CheckEmptyCell(tbPVAP_C.Text)
+            .cp.Vapor_Pressure_Constant_D = CheckEmptyCell(tbPVAP_D.Text)
+            .cp.Vapor_Pressure_Constant_E = CheckEmptyCell(tbPVAP_E.Text)
 
-                .cp.Ideal_Gas_Heat_Capacity_Const_A = CheckEmptyCell(tbCPIG_A.Text)
-                .cp.Ideal_Gas_Heat_Capacity_Const_B = CheckEmptyCell(tbCPIG_B.Text)
-                .cp.Ideal_Gas_Heat_Capacity_Const_C = CheckEmptyCell(tbCPIG_C.Text)
-                .cp.Ideal_Gas_Heat_Capacity_Const_D = CheckEmptyCell(tbCPIG_D.Text)
-                .cp.Ideal_Gas_Heat_Capacity_Const_E = CheckEmptyCell(tbCPIG_E.Text)
+            .cp.Ideal_Gas_Heat_Capacity_Const_A = CheckEmptyCell(tbCPIG_A.Text)
+            .cp.Ideal_Gas_Heat_Capacity_Const_B = CheckEmptyCell(tbCPIG_B.Text)
+            .cp.Ideal_Gas_Heat_Capacity_Const_C = CheckEmptyCell(tbCPIG_C.Text)
+            .cp.Ideal_Gas_Heat_Capacity_Const_D = CheckEmptyCell(tbCPIG_D.Text)
+            .cp.Ideal_Gas_Heat_Capacity_Const_E = CheckEmptyCell(tbCPIG_E.Text)
 
-                .cp.Liquid_Heat_Capacity_Const_A = CheckEmptyCell(tbCPLiquid_A.Text)
-                .cp.Liquid_Heat_Capacity_Const_B = CheckEmptyCell(tbCPLiquid_B.Text)
-                .cp.Liquid_Heat_Capacity_Const_C = CheckEmptyCell(tbCPLiquid_C.Text)
-                .cp.Liquid_Heat_Capacity_Const_D = CheckEmptyCell(tbCPLiquid_D.Text)
-                .cp.Liquid_Heat_Capacity_Const_E = CheckEmptyCell(tbCPLiquid_E.Text)
+            .cp.Liquid_Heat_Capacity_Const_A = CheckEmptyCell(tbCPLiquid_A.Text)
+            .cp.Liquid_Heat_Capacity_Const_B = CheckEmptyCell(tbCPLiquid_B.Text)
+            .cp.Liquid_Heat_Capacity_Const_C = CheckEmptyCell(tbCPLiquid_C.Text)
+            .cp.Liquid_Heat_Capacity_Const_D = CheckEmptyCell(tbCPLiquid_D.Text)
+            .cp.Liquid_Heat_Capacity_Const_E = CheckEmptyCell(tbCPLiquid_E.Text)
 
-                .cp.Liquid_Density_Const_A = CheckEmptyCell(tbLIQDENS_A.Text)
-                .cp.Liquid_Density_Const_B = CheckEmptyCell(tbLIQDENS_B.Text)
-                .cp.Liquid_Density_Const_C = CheckEmptyCell(tbLIQDENS_C.Text)
-                .cp.Liquid_Density_Const_D = CheckEmptyCell(tbLIQDENS_D.Text)
-                .cp.Liquid_Density_Const_E = CheckEmptyCell(tbLIQDENS_E.Text)
+            .cp.Liquid_Density_Const_A = CheckEmptyCell(tbLIQDENS_A.Text)
+            .cp.Liquid_Density_Const_B = CheckEmptyCell(tbLIQDENS_B.Text)
+            .cp.Liquid_Density_Const_C = CheckEmptyCell(tbLIQDENS_C.Text)
+            .cp.Liquid_Density_Const_D = CheckEmptyCell(tbLIQDENS_D.Text)
+            .cp.Liquid_Density_Const_E = CheckEmptyCell(tbLIQDENS_E.Text)
 
-                .cp.Liquid_Viscosity_Const_A = CheckEmptyCell(tbLIQVISC_A.Text)
-                .cp.Liquid_Viscosity_Const_B = CheckEmptyCell(tbLIQVISC_B.Text)
-                .cp.Liquid_Viscosity_Const_C = CheckEmptyCell(tbLIQVISC_C.Text)
-                .cp.Liquid_Viscosity_Const_D = CheckEmptyCell(tbLIQVISC_D.Text)
-                .cp.Liquid_Viscosity_Const_E = CheckEmptyCell(tbLIQVISC_E.Text)
+            .cp.Liquid_Viscosity_Const_A = CheckEmptyCell(tbLIQVISC_A.Text)
+            .cp.Liquid_Viscosity_Const_B = CheckEmptyCell(tbLIQVISC_B.Text)
+            .cp.Liquid_Viscosity_Const_C = CheckEmptyCell(tbLIQVISC_C.Text)
+            .cp.Liquid_Viscosity_Const_D = CheckEmptyCell(tbLIQVISC_D.Text)
+            .cp.Liquid_Viscosity_Const_E = CheckEmptyCell(tbLIQVISC_E.Text)
 
-                .cp.UNIFACGroups.Clear()
-                For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
-                    If CInt(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
-                Next
+            .cp.Liquid_Thermal_Conductivity_Const_A = CheckEmptyCell(tbTCLiquid_A.Text)
+            .cp.Liquid_Thermal_Conductivity_Const_B = CheckEmptyCell(tbTCLiquid_B.Text)
+            .cp.Liquid_Thermal_Conductivity_Const_C = CheckEmptyCell(tbTCLiquid_C.Text)
+            .cp.Liquid_Thermal_Conductivity_Const_D = CheckEmptyCell(tbTCLiquid_D.Text)
+            .cp.Liquid_Thermal_Conductivity_Const_E = CheckEmptyCell(tbTCLiquid_E.Text)
 
-                .cp.MODFACGroups.Clear()
-                For Each r As DataGridViewRow In Me.GridMODFAC.Rows
-                    If CInt(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
-                Next
+            .cp.UNIFACGroups.Clear()
+            For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
+                If CInt(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
+            Next
 
-                .cp.NISTMODFACGroups.Clear()
-                For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
-                    If CInt(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
-                Next
+            .cp.MODFACGroups.Clear()
+            For Each r As DataGridViewRow In Me.GridMODFAC.Rows
+                If CInt(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
+            Next
 
-                Dim JC As Integer
-                If mycase.JobackGroups Is Nothing Then .JobackGroups = New ArrayList 'for old file versions where field was not defined
-                .JobackGroups.Clear()
-                For Each r As DataGridViewRow In Me.GridJoback.Rows
-                    JC = r.Cells(3).Value
-                    If JC > 0 Then .JobackGroups.Add(New Integer() {r.Index, JC})
-                Next
+            .cp.NISTMODFACGroups.Clear()
+            For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
+                If CInt(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
+            Next
 
-                If mycase.AdditionalAtoms Is Nothing Then .AdditionalAtoms = New ArrayList
-                .AdditionalAtoms.Clear()
-                For Each r As DataGridViewRow In AddAtomDataGrid.Rows
-                    JC = r.Cells(1).Value
-                    If JC > 0 Then .AdditionalAtoms.Add(New Integer() {r.Index, JC})
-                Next
+            Dim JC As Integer
+            If mycase.JobackGroups Is Nothing Then .JobackGroups = New ArrayList 'for old file versions where field was not defined
+            .JobackGroups.Clear()
+            For Each r As DataGridViewRow In Me.GridJoback.Rows
+                JC = r.Cells(3).Value
+                If JC > 0 Then .JobackGroups.Add(New Integer() {r.Index, JC})
+            Next
 
-                .cp.Elements.Clear()
-                For Each r As DataGridViewRow In Me.AtomDataGrid.Rows
-                    .cp.Elements.Add(r.Cells(0).Value, r.Cells(1).Value)
-                Next
+            If mycase.AdditionalAtoms Is Nothing Then .AdditionalAtoms = New ArrayList
+            .AdditionalAtoms.Clear()
+            For Each r As DataGridViewRow In AddAtomDataGrid.Rows
+                JC = r.Cells(1).Value
+                If JC > 0 Then .AdditionalAtoms.Add(New Integer() {r.Index, JC})
+            Next
+
+            .cp.Elements.Clear()
+            For Each r As DataGridViewRow In Me.AtomDataGrid.Rows
+                .cp.Elements.Add(r.Cells(0).Value, r.Cells(1).Value)
+            Next
 
 
-                mycase.DataPVAP.Clear()
-                For Each row As DataGridViewRow In Me.GridExpDataPVAP.Rows
-                    If row.Index < Me.GridExpDataPVAP.Rows.Count - 1 Then mycase.DataPVAP.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.pressure, row.Cells(1).Value)})
-                Next
+            mycase.DataPVAP.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataPVAP.Rows
+                If row.Index < Me.GridExpDataPVAP.Rows.Count - 1 Then mycase.DataPVAP.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.pressure, row.Cells(1).Value)})
+            Next
 
-                mycase.DataCPIG.Clear()
-                For Each row As DataGridViewRow In Me.GridExpDataCPIG.Rows
-                    If row.Index < Me.GridExpDataCPIG.Rows.Count - 1 Then mycase.DataCPIG.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value)})
-                Next
+            mycase.DataCPIG.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataCPIG.Rows
+                If row.Index < Me.GridExpDataCPIG.Rows.Count - 1 Then mycase.DataCPIG.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value)})
+            Next
 
-                mycase.DataCPLiquid.Clear()
-                For Each row As DataGridViewRow In Me.GridExpDataCPLiquid.Rows
-                    If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value)})
-                Next
+            mycase.DataCPLiquid.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataCPLiquid.Rows
+                If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value)})
+            Next
 
-                mycase.DataLDENS.Clear()
-                For Each row As DataGridViewRow In Me.GridExpDataLIQDENS.Rows
-                    If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.density, row.Cells(1).Value)})
-                Next
+            mycase.DataLDENS.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataLIQDENS.Rows
+                If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.density, row.Cells(1).Value)})
+            Next
 
-                mycase.DataLVISC.Clear()
-                For Each row As DataGridViewRow In Me.GridExpDataLIQVISC.Rows
-                    If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then mycase.DataLVISC.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.viscosity, row.Cells(1).Value)})
-                Next
+            mycase.DataLVISC.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataLIQVISC.Rows
+                If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then mycase.DataLVISC.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.viscosity, row.Cells(1).Value)})
+            Next
 
-                mycase.DataRoS.Clear()
-                For Each row As DataGridViewRow In Me.GridExpDataRoS.Rows
-                    If row.Index < Me.GridExpDataRoS.Rows.Count - 1 Then mycase.DataRoS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.density, row.Cells(1).Value) / .cp.Molar_Weight})
-                Next
+            mycase.DataRoS.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataRoS.Rows
+                If row.Index < Me.GridExpDataRoS.Rows.Count - 1 Then mycase.DataRoS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.density, row.Cells(1).Value) / .cp.Molar_Weight})
+            Next
 
-                mycase.DataCpS.Clear()
-                For Each row As DataGridViewRow In Me.GridExpDataCpS.Rows
-                    If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then mycase.DataCpS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * .cp.Molar_Weight})
-                Next
+            mycase.DataCpS.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataCpS.Rows
+                If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then mycase.DataCpS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * .cp.Molar_Weight})
+            Next
 
-            ElseIf RadioButton2.Checked Then
-
-                .cp.IsBlackOil = True
-
-                .cp.CompCreatorStudyFile = .Filename
-
-                .cp.BO_GOR = SystemsOfUnits.Converter.ConvertToSI(su.gor, CheckEmptyTextBox(tbBOGOR))
-                .cp.BO_BSW = CheckEmptyTextBox(tbBOBSW)
-                .cp.BO_SGG = CheckEmptyTextBox(tbBOSGG)
-                .cp.BO_SGO = CheckEmptyTextBox(tbBOSGO)
-
-                .cp.BO_OilVisc1 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, CheckEmptyTextBox(tbBOV1))
-                .cp.BO_OilVisc2 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, CheckEmptyTextBox(tbBOV2))
-                .cp.BO_OilViscTemp1 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(tbBOT1))
-                .cp.BO_OilViscTemp2 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(tbBOT2))
-
-                .cp.BO_PNA_P = CheckEmptyTextBox(tbBOPNAP)
-                .cp.BO_PNA_N = CheckEmptyTextBox(tbBOPNAN)
-                .cp.BO_PNA_A = CheckEmptyTextBox(tbBOPNAA)
-
-            Else
-
-                'electrolyte
-
-                .cp.IsBlackOil = False
-
-                .cp.CAS_Number = TextBoxCAS.Text
-                .cp.CompCreatorStudyFile = .Filename
-                .cp.Formula = TextBoxFormula.Text
-                .cp.Molar_Weight = CheckEmptyTextBox(TextBoxMW)
-                .cp.SMILES = TextBoxSMILES.Text
-
-                .cp.IsIon = rbIon.Checked
-                .cp.IsSalt = rbSalt.Checked
-                .cp.IsHydratedSalt = rbHydratedSalt.Checked
-                .cp.PositiveIon = tbPositiveIonFormula.Text
-                .cp.NegativeIon = tbNegativeIonFormula.Text
-                .cp.PositiveIonStoichCoeff = CheckEmptyTextBox(tbEsteqCoeffPosIon)
-                .cp.NegativeIonStoichCoeff = CheckEmptyTextBox(tbEsteqCoeffNegIon)
-                .cp.Charge = CheckEmptyTextBox(tbElecIonCharge)
-                .cp.HydrationNumber = CheckEmptyTextBox(tbHydrNumber)
-                .cp.StoichSum = .cp.PositiveIonStoichCoeff + .cp.NegativeIonStoichCoeff
-
-                .cp.Electrolyte_DelGF = CheckEmptyTextBox(tbElecGibbsEnergyForm)
-                .cp.Electrolyte_DelHF = CheckEmptyTextBox(tbElecEnthForm)
-                .cp.Electrolyte_Cp0 = CheckEmptyTextBox(tbElecHeatCapacityForm)
-
-                .cp.SolidTs = CheckEmptyTextBox(tbElecSolidDensT)
-                .cp.SolidDensityAtTs = CheckEmptyTextBox(tbElecSolidDens)
-                .cp.TemperatureOfFusion = CheckEmptyTextBox(tbElecSolidTf)
-                .cp.EnthalpyOfFusionAtTf = CheckEmptyTextBox(tbElecEnthFusion)
-
-            End If
+            mycase.DataLTC.Clear()
+            For Each row As DataGridViewRow In Me.GridExpDataTCLiquid.Rows
+                If row.Index < Me.GridExpDataTCLiquid.Rows.Count - 1 Then mycase.DataLTC.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.thermalConductivity, row.Cells(1).Value)})
+            Next
 
         End With
 
@@ -1149,6 +1047,8 @@ Public Class FormCompoundCreator
             Else
                 If CheckBoxMW.Checked Then Me.TextBoxMW.Text = ""
             End If
+
+            If mycase.IgnoreUnsupportedGroups Then SpecialDefinition = False
 
             If GC > 0 And Not SpecialDefinition Then
 
@@ -1318,7 +1218,6 @@ Public Class FormCompoundCreator
             loaded = True
             CalcJobackParams()
         End If
-        BothSaveStatusModified(sender, e)
     End Sub
     Private Sub GridMODFAC_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridMODFAC.CellValueChanged
         If loaded Then
@@ -1329,7 +1228,6 @@ Public Class FormCompoundCreator
                 c.Style.BackColor = Color.White
             End If
 
-            BothSaveStatusModified(sender, e)
         End If
     End Sub
     Private Sub GridNISTMODFAC_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles GridNISTMODFAC.CellValueChanged
@@ -1341,13 +1239,11 @@ Public Class FormCompoundCreator
                 c.Style.BackColor = Color.White
             End If
 
-            BothSaveStatusModified(sender, e)
         End If
     End Sub
     Private Sub Grid_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridJoback.CellValueChanged, AddAtomDataGrid.CellValueChanged
         If loaded Then
             CalcJobackParams()
-            BothSaveStatusModified(sender, e)
         End If
     End Sub
 
@@ -1364,12 +1260,6 @@ Public Class FormCompoundCreator
             lblMeltingTemp.Text = .temperature
             lblEnthOfFusion.Text = .enthalpy
 
-            lblBORGO.Text = .gor
-            lblBOT1.Text = .temperature
-            lblBOT2.Text = .temperature
-            lblBOVisc1.Text = .cinematic_viscosity
-            lblBOVisc2.Text = .cinematic_viscosity
-
             Me.GridExpDataPVAP.Columns(0).HeaderText = "T [" & su.temperature & "]"
             Me.GridExpDataCPIG.Columns(0).HeaderText = "T [" & su.temperature & "]"
             Me.GridExpDataCPLiquid.Columns(0).HeaderText = "T [" & su.temperature & "]"
@@ -1377,6 +1267,7 @@ Public Class FormCompoundCreator
             Me.GridExpDataLIQVISC.Columns(0).HeaderText = "T [" & su.temperature & "]"
             Me.GridExpDataCpS.Columns(0).HeaderText = "T [" & su.temperature & "]"
             Me.GridExpDataRoS.Columns(0).HeaderText = "T [" & su.temperature & "]"
+            Me.GridExpDataTCLiquid.Columns(0).HeaderText = "T [" & su.temperature & "]"
 
             Me.GridExpDataPVAP.Columns(1).HeaderText = "Pvap [" & su.pressure & "]"
             Me.GridExpDataCPIG.Columns(1).HeaderText = "Cpig [" & su.heatCapacityCp & "]"
@@ -1384,7 +1275,9 @@ Public Class FormCompoundCreator
             Me.GridExpDataLIQDENS.Columns(1).HeaderText = "Dens [" & su.density & "]"
             Me.GridExpDataLIQVISC.Columns(1).HeaderText = "Visc [" & su.viscosity & "]"
             Me.GridExpDataCpS.Columns(1).HeaderText = "CpS [" & su.heatCapacityCp & "]"
-            Me.GridExpDataRoS.Columns(1).HeaderText = "DensS [" & su.density & "]"
+            Me.GridExpDataTCLiquid.Columns(1).HeaderText = "DensS [" & su.density & "]"
+            Me.GridExpDataRoS.Columns(1).HeaderText = "LiqTC [" & su.thermalConductivity & "]"
+
         End With
     End Sub
 
@@ -1523,9 +1416,9 @@ Public Class FormCompoundCreator
                 c_scp = obj(0)
                 r_scp = obj(2)
                 n_scp = obj(3)
-            Case 6
+            Case 6, 7
                 'regressão dos dados - liquid heat capacity
-                obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCPLiquid, 0), CopyToVector(mycase.DataCPLiquid, 1), c_cpl, Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLTC, 0), CopyToVector(mycase.DataLTC, 1), c_cpl, Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_cpl = obj(0)
                 r_cpl = obj(2)
                 n_cpl = obj(3)
@@ -1545,6 +1438,8 @@ Public Class FormCompoundCreator
             Case 5
                 Return New Object() {c_scp, r_scp, n_scp, obj(1)}
             Case 6
+                Return New Object() {c_cpl, r_cpl, n_cpl, obj(1)}
+            Case 7
                 Return New Object() {c_cpl, r_cpl, n_cpl, obj(1)}
             Case Else
                 Return Nothing
@@ -1595,10 +1490,12 @@ Public Class FormCompoundCreator
             tbPVAP_C.Text = .Vapor_Pressure_Constant_C
             tbPVAP_D.Text = .Vapor_Pressure_Constant_D
             tbPVAP_E.Text = .Vapor_Pressure_Constant_E
+
         End With
+
         rbRegressPVAP.Checked = True
         loaded = True
-        BothSaveStatusModified(sender, e)
+
     End Sub
 
     Sub StoreSolidCpData()
@@ -1648,7 +1545,6 @@ Public Class FormCompoundCreator
         End With
         rbRegressSolidCp.Checked = True
         loaded = True
-        BothSaveStatusModified(sender, e)
     End Sub
 
     Sub StoreSolidDensData()
@@ -1700,7 +1596,6 @@ Public Class FormCompoundCreator
         End With
         rbRegressSolidDens.Checked = True
         loaded = True
-        BothSaveStatusModified(sender, e)
     End Sub
 
     Sub StoreCPIGData()
@@ -1723,7 +1618,7 @@ Public Class FormCompoundCreator
 
         StoreCPIGData()
 
-       
+
         Dim result As Object = RegressData(1, False)
 
         tbStatusCPIG.Text = GetInfo(result(3))
@@ -1753,7 +1648,6 @@ Public Class FormCompoundCreator
         End With
         rbRegressCPIG.Checked = True
         loaded = True
-        BothSaveStatusModified(sender, e)
     End Sub
 
     Sub StoreLiqDensData()
@@ -1803,7 +1697,56 @@ Public Class FormCompoundCreator
         End With
         rbRegressLIQDENS.Checked = True
         loaded = True
-        BothSaveStatusModified(sender, e)
+    End Sub
+
+    Sub StoreLiqTCData()
+
+        mycase.DataLTC.Clear()
+        For Each row As DataGridViewRow In Me.GridExpDataTCLiquid.Rows
+            Try
+                If row.Index < Me.GridExpDataTCLiquid.Rows.Count - 1 Then mycase.DataLTC.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.thermalConductivity, row.Cells(1).Value)})
+            Catch ex As Exception
+            End Try
+        Next
+
+    End Sub
+
+    Private Sub btnRegressTCLiquid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressTCLiquid.Click
+
+        loaded = False
+
+        StoreLiqTCData()
+
+        Dim result As Object = RegressData(7, False)
+
+        tbStatusTCLiquid.Text = GetInfo(result(3))
+
+        With mycase.cp
+            .LiquidHeatCapacityEquation = 5
+
+            For Each it As Object In cbEqTCLiquid.Items
+                If it.ToString.Split(":")(0) = .LiquidThermalConductivityEquation Then
+                    cbEqTCLiquid.SelectedIndex = cbEqTCLiquid.Items.IndexOf(it)
+                    Exit For
+                End If
+            Next
+
+            .Liquid_Thermal_Conductivity_Const_A = result(0)(0)
+            .Liquid_Thermal_Conductivity_Const_B = result(0)(1)
+            .Liquid_Thermal_Conductivity_Const_C = result(0)(2)
+            .Liquid_Thermal_Conductivity_Const_D = result(0)(3)
+            .Liquid_Thermal_Conductivity_Const_E = result(0)(4)
+
+            tbTCLiquid_A.Text = .Liquid_Thermal_Conductivity_Const_A
+            tbTCLiquid_B.Text = .Liquid_Thermal_Conductivity_Const_B
+            tbTCLiquid_C.Text = .Liquid_Thermal_Conductivity_Const_C
+            tbTCLiquid_D.Text = .Liquid_Thermal_Conductivity_Const_D
+            tbTCLiquid_E.Text = .Liquid_Thermal_Conductivity_Const_E
+
+        End With
+        rbRegressTCLiquid.Checked = True
+        loaded = True
+
     End Sub
 
     Sub StoreLIQVData()
@@ -1856,7 +1799,6 @@ Public Class FormCompoundCreator
         End With
         rbRegressLIQVISC.Checked = True
         loaded = True
-        BothSaveStatusModified(sender, e)
     End Sub
 
 
@@ -1899,7 +1841,6 @@ Public Class FormCompoundCreator
                 tbStatusCPIG.Text = "OK"
                 CalcJobackParams()
             End If
-            BothSaveStatusModified(sender, e)
         End If
     End Sub
 
@@ -1910,7 +1851,16 @@ Public Class FormCompoundCreator
                 tbStatusLIQDENS.Text = "OK"
                 CalcJobackParams()
             End If
-            BothSaveStatusModified(sender, e)
+        End If
+    End Sub
+
+    Private Sub rbEstimateLiquidTC_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbEstimateLiquidTC.CheckedChanged
+        If loaded Then
+            If rbEstimateLiquidTC.Checked Then
+                mycase.cp.LiquidThermalConductivityEquation = 0
+                tbStatusTCLiquid.Text = "OK"
+                CalcJobackParams()
+            End If
         End If
     End Sub
 
@@ -1921,7 +1871,6 @@ Public Class FormCompoundCreator
                 tbStatusLIQVISC.Text = "OK"
                 CalcJobackParams()
             End If
-            BothSaveStatusModified(sender, e)
         End If
     End Sub
     Private Sub rbEstimateSolidDens_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles rbEstimateSolidDens.CheckedChanged
@@ -1929,7 +1878,6 @@ Public Class FormCompoundCreator
             If rbEstimateSolidDens.Checked Then
                 CalcJobackParams()
             End If
-            BothSaveStatusModified(sender, e)
         End If
     End Sub
     Private Sub btnViewPVAP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnViewPVAP.Click
@@ -2152,7 +2100,7 @@ Public Class FormCompoundCreator
             Catch ex As Exception
                 y = 0.0#
             End Try
-   
+
             Select Case CurveCount
                 Case 0
                     py1.Add(y)
@@ -2228,6 +2176,7 @@ Public Class FormCompoundCreator
             .ShowDialog(Me)
         End With
     End Sub
+
     Private Sub btnViewSolidCp_Click(sender As System.Object, e As System.EventArgs) Handles btnViewSolidCp.Click
 
         Dim mytext As New System.Text.StringBuilder
@@ -2587,17 +2536,9 @@ Public Class FormCompoundCreator
     End Sub
     Private Sub cbEqCpS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqCpS.SelectedIndexChanged
         If mycase.EqCpS Then mycase.cp.SolidHeatCapacityEquation = cbEqCpS.SelectedItem.ToString.Split(":")(0)
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
-        End If
     End Sub
     Private Sub cbEqSolidDENS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqSolidDENS.SelectedIndexChanged
         If mycase.EqSDens Then mycase.cp.SolidDensityEquation = cbEqSolidDENS.SelectedItem.ToString.Split(":")(0)
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
-        End If
     End Sub
     Private Sub cbEqPVAP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqPVAP.SelectedIndexChanged
         If mycase.EqPVAP Then
@@ -2607,10 +2548,6 @@ Public Class FormCompoundCreator
             Else
                 tbUserDefEqPVAP.Enabled = False
             End If
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
         End If
     End Sub
 
@@ -2623,18 +2560,10 @@ Public Class FormCompoundCreator
                 tbUserDefCPIGEq.Enabled = False
             End If
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
-        End If
     End Sub
 
     Private Sub cbEqCPLiquid_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbEqCPLiquid.SelectedIndexChanged
         If mycase.EqCPLiquid Then mycase.cp.LiquidHeatCapacityEquation = cbEqCPLiquid.SelectedItem.ToString.Split(":")(0)
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
-        End If
     End Sub
 
     Private Sub cbEqLIQDENS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqLIQDENS.SelectedIndexChanged
@@ -2645,10 +2574,6 @@ Public Class FormCompoundCreator
             Else
                 tbUserDefDensLiqEq.Enabled = False
             End If
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
         End If
     End Sub
 
@@ -2661,10 +2586,6 @@ Public Class FormCompoundCreator
                 tbUserDefLiqViscEq.Enabled = False
             End If
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
-        End If
     End Sub
 
     Private Sub CheckBoxTc_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxTc.CheckedChanged
@@ -2673,9 +2594,6 @@ Public Class FormCompoundCreator
             CalcJobackParams()
         Else
             TextBoxTc.Enabled = True
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2686,9 +2604,6 @@ Public Class FormCompoundCreator
         Else
             TextBoxPc.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
 
     Private Sub CheckBoxZc_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxZc.CheckedChanged
@@ -2697,9 +2612,6 @@ Public Class FormCompoundCreator
             CalcJobackParams()
         Else
             TextBoxZc.Enabled = True
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2710,9 +2622,6 @@ Public Class FormCompoundCreator
         Else
             TextBoxZRa.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
 
     Private Sub CheckBoxAF_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxAF.CheckedChanged
@@ -2721,9 +2630,6 @@ Public Class FormCompoundCreator
             CalcJobackParams()
         Else
             TextBoxAF.Enabled = True
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2734,9 +2640,6 @@ Public Class FormCompoundCreator
         Else
             TextBoxMW.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
 
     Private Sub CheckBoxDHF_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxDHF.CheckedChanged
@@ -2745,9 +2648,6 @@ Public Class FormCompoundCreator
             CalcJobackParams()
         Else
             TextBoxDHF.Enabled = True
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2758,9 +2658,6 @@ Public Class FormCompoundCreator
         Else
             TextBoxDGF.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
 
     Private Sub CheckBoxNBP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxNBP.CheckedChanged
@@ -2769,9 +2666,6 @@ Public Class FormCompoundCreator
             CalcJobackParams()
         Else
             TextBoxNBP.Enabled = True
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2782,9 +2676,6 @@ Public Class FormCompoundCreator
         Else
             TextBoxCSAF.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
 
     Private Sub CheckBoxCSSP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxCSSP.CheckedChanged
@@ -2793,9 +2684,6 @@ Public Class FormCompoundCreator
             CalcJobackParams()
         Else
             TextBoxCSSP.Enabled = True
-        End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2806,43 +2694,31 @@ Public Class FormCompoundCreator
         Else
             TextBoxCSLV.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
 
-    Private Sub CheckBoxMeltingTemp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxMeltingTemp.CheckedChanged
+    Private Sub CheckBoxMeltingTemp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If CheckBoxMeltingTemp.Checked = True Then
             TextBoxMeltingTemp.Enabled = False
             CalcJobackParams()
         Else
             TextBoxMeltingTemp.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
-    Private Sub CheckBoxEnthOfFusion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxEnthOfFusion.CheckedChanged
+    Private Sub CheckBoxEnthOfFusion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If CheckBoxEnthOfFusion.Checked = True Then
             TextBoxEnthOfFusion.Enabled = False
             CalcJobackParams()
         Else
             TextBoxEnthOfFusion.Enabled = True
         End If
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
     End Sub
 
-    Private Sub rb_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbCoeffLIQDENS.CheckedChanged, _
-                                    rbRegressLIQVISC.CheckedChanged, rbRegressLIQDENS.CheckedChanged, _
-                                    rbCoeffLIQVISC.CheckedChanged, rbRegressPVAP.CheckedChanged, _
+    Private Sub rb_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbCoeffLIQDENS.CheckedChanged,
+                                    rbRegressLIQVISC.CheckedChanged, rbRegressLIQDENS.CheckedChanged,
+                                    rbCoeffLIQVISC.CheckedChanged, rbRegressPVAP.CheckedChanged,
                                     rbCoeffPVAP.CheckedChanged, rbRegressCPLiquid.CheckedChanged, rbRegressCPIG.CheckedChanged, rbCoeffCPLiquid.CheckedChanged, rbCoeffCPIG.CheckedChanged
-
         If loaded Then
             StoreData()
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
         End If
     End Sub
 
@@ -2865,7 +2741,6 @@ Public Class FormCompoundCreator
             mycase.su = su
             UpdateUnits()
             WriteData()
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2929,10 +2804,6 @@ Public Class FormCompoundCreator
 
     Private Sub TextBoxSMILES_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxSMILES.TextChanged
         btnRenderSMILES.Enabled = True
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
-        End If
     End Sub
 
     Private Sub btnRenderSMILES_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenderSMILES.Click
@@ -2943,35 +2814,7 @@ Public Class FormCompoundCreator
         End If
     End Sub
 
-    Private Sub chkReplaceComps_CheckStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-        End If
-    End Sub
-    Private Sub BothSaveStatusModified(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxMeltingTemp.TextChanged, _
-                TextBoxUNIQUAC_R.TextChanged, TextBoxUNIQUAC_Q.TextChanged, TextBoxZRa.TextChanged, TextBoxZc.TextChanged, TextBoxPCSAFTSigma.TextChanged, _
-                TextBoxPCSAFTm.TextChanged, TextBoxPCSAFTEpsilon.TextChanged, TextBoxDHF.TextChanged, TextBoxDGF.TextChanged, _
-                TextBoxVTCSRK.TextChanged, TextBoxVTCPR.TextChanged, TextBoxCSSP.TextChanged, TextBoxCSLV.TextChanged, TextBoxCSAF.TextChanged, TextBoxName.TextChanged, _
-                 TextBoxID.TextChanged, TextBoxFormula.TextChanged, TextBoxCAS.TextChanged, tbPVAP_D.TextChanged, tbPVAP_C.TextChanged, _
-                tbPVAP_B.TextChanged, tbPVAP_A.TextChanged, tbPVAP_E.TextChanged, _
-                 tbLIQVISC_E.TextChanged, tbLIQVISC_D.TextChanged, tbLIQVISC_C.TextChanged, tbLIQVISC_B.TextChanged, tbLIQVISC_A.TextChanged, _
-                tbLIQDENS_E.TextChanged, tbLIQDENS_D.TextChanged, tbLIQDENS_C.TextChanged, tbLIQDENS_B.TextChanged, tbLIQDENS_A.TextChanged, _
-                tbRoS_A.TextChanged, tbRoS_E.TextChanged, tbRoS_D.TextChanged, tbRoS_C.TextChanged, tbRoS_B.TextChanged, tbCpS_E.TextChanged,
-                tbCpS_D.TextChanged, tbCpS_C.TextChanged, tbCpS_B.TextChanged, tbCpS_A.TextChanged, cbEqSolidDENS.SelectedIndexChanged, cbEqCpS.SelectedIndexChanged,
-                tbCPLiquid_E.TextChanged, tbCPLiquid_D.TextChanged, tbCPLiquid_C.TextChanged, tbCPLiquid_B.TextChanged, tbCPLiquid_A.TextChanged, tbCPIG_E.TextChanged,
-                tbCPIG_D.TextChanged, tbCPIG_C.TextChanged, tbCPIG_B.TextChanged, tbCPIG_A.TextChanged,
-                tbElecEnthForm.TextChanged, tbElecEnthFusion.TextChanged, tbElecGibbsEnergyForm.TextChanged, tbElecHeatCapacityForm.TextChanged,
-                tbElecIonCharge.TextChanged, tbElecSolidDens.TextChanged, tbElecSolidDensT.TextChanged, tbElecSolidTf.TextChanged,
-                tbPositiveIonFormula.TextChanged, tbNegativeIonFormula.TextChanged, tbEsteqCoeffNegIon.TextChanged, tbEsteqCoeffPosIon.TextChanged,
-                tbHydrNumber.TextChanged
-
-        If loaded Then
-            SetCompCreatorSaveStatus(False)
-            SetUserDBSaveStatus(False)
-        End If
-    End Sub
-
-    Private Sub GridExpData_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridExpDataPVAP.CellValueChanged, _
+    Private Sub GridExpData_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridExpDataPVAP.CellValueChanged,
                 GridExpDataLIQVISC.CellValueChanged, GridExpDataLIQDENS.CellValueChanged, GridExpDataRoS.CellValueChanged, GridExpDataCpS.CellValueChanged, GridExpDataCPLiquid.CellValueChanged, GridExpDataCPIG.CellValueChanged
         If loaded Then
             Try
@@ -2984,7 +2827,6 @@ Public Class FormCompoundCreator
                 StoreSolidDensData()
             Catch ex As Exception
             End Try
-            SetCompCreatorSaveStatus(False)
         End If
     End Sub
 
@@ -2994,12 +2836,10 @@ Public Class FormCompoundCreator
         Catch ex As Exception
             TextBoxEnthOfFusion2.Text = ""
         End Try
-        BothSaveStatusModified(sender, e)
     End Sub
 
     Private Sub TextBoxChanged_recalc(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxNBP.TextChanged, TextBoxMW.TextChanged, TextBoxTc.TextChanged, TextBoxPc.TextChanged, TextBoxAF.TextChanged
         CalcJobackParams()
-        BothSaveStatusModified(sender, e)
     End Sub
 
     Private Sub LinkPubChem_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkPubChem.LinkClicked
@@ -3013,7 +2853,7 @@ Public Class FormCompoundCreator
     Private Sub LinkLabel2_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked, LinkLabel4.LinkClicked
         System.Diagnostics.Process.Start("http://www.ddbst.com/unifacga.html")
     End Sub
-    Private Sub LinkLabel3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+    Private Sub LinkLabel3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
         System.Diagnostics.Process.Start("http://chemeo.com/")
     End Sub
 
@@ -3078,6 +2918,67 @@ Public Class FormCompoundCreator
         End With
     End Sub
 
+    Private Sub btnVieTCLiquid_Click(sender As System.Object, e As System.EventArgs) Handles btnViewTCLiquid.Click
+
+        Dim mytext As New System.Text.StringBuilder
+        Dim px, py1, py2 As New ArrayList, x, y1, y2, T As Double
+        Dim pp As New PropertyPackages.RaoultPropertyPackage(False)
+        Dim frc As New FormChart
+        StoreData()
+        ' in case of missing experimental data - draw only calculated curve
+        If mycase.DataLTC.Count = 0 Then
+            mytext.AppendLine("T" & vbTab & "yCALC")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.thermalConductivity & "]")
+            For T = 200 To 1500 Step 25
+                x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                px.Add(x)
+                y1 = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, pp.CalcCSTDepProp(cbEqTCLiquid.SelectedItem.Split(":")(0), tbTCLiquid_A.Text, tbTCLiquid_B.Text, tbTCLiquid_C.Text, tbTCLiquid_D.Text, tbTCLiquid_E.Text, T, 0))
+                py1.Add(y1)
+                mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2))
+            Next
+
+            With frc
+                .px = px
+                .py1 = py1
+                .ycurvetypes = New ArrayList(New Integer() {3})
+                .y1ctitle = "Formula"
+                .title = "Liquid Thermal Conductivity Estimation Results"
+            End With
+        Else
+            mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.thermalConductivity & "]" & vbTab & "[" & su.thermalConductivity & "]")
+            For Each d As Double() In mycase.DataCPLiquid
+                x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0))
+                px.Add(x)
+                y1 = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, d(1))
+                py1.Add(y1)
+                T = d(0)
+                y2 = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, pp.CalcCSTDepProp(cbEqTCLiquid.SelectedItem.Split(":")(0), tbTCLiquid_A.Text, tbTCLiquid_B.Text, tbTCLiquid_C.Text, tbTCLiquid_D.Text, tbTCLiquid_E.Text, T, 0))
+                py2.Add(y2)
+                mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2) & vbTab & vbTab & FormatNumber(y2, 2))
+            Next
+            With frc
+                .px = px
+                .py1 = py1
+                .py2 = py2
+                .ycurvetypes = New ArrayList(New Integer() {1, 3})
+                .y1ctitle = "Experiment"
+                .y2ctitle = "Formula"
+                .title = "Liquid Thermal Conductivity Calculation Results"
+            End With
+        End If
+
+        With frc
+            .tbtext = mytext.ToString
+            .xformat = 1
+            .yformat = 1
+            .ytitle = "TC Liquid [" & su.thermalConductivity & "]"
+            .xtitle = "T [" & su.temperature & "]"
+            .title = "Liquid Thermal Conductivity Fitting Results"
+            .ShowDialog(Me)
+        End With
+    End Sub
+
     Sub StoreCPLData()
 
         mycase.DataCPLiquid.Clear()
@@ -3092,9 +2993,9 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub btnRegressCPLiquid_Click(sender As System.Object, e As System.EventArgs) Handles btnRegressCPLiquid.Click
-       
+
         loaded = False
-        
+
         StoreCPLData()
 
         Dim result As Object = RegressData(6, False)
@@ -3126,22 +3027,6 @@ Public Class FormCompoundCreator
         End With
         rbRegressCPLiquid.Checked = True
         loaded = True
-        BothSaveStatusModified(sender, e)
-    End Sub
-
-    Private Sub FormCompoundCreator_HelpRequested(sender As System.Object, hlpevent As System.Windows.Forms.HelpEventArgs) Handles MyBase.HelpRequested
-        Select Case FaTabStrip2.SelectedItem.Name
-            Case "FaTabStripItem1"
-                DWSIM.App.HelpRequested("Component Creator 1.htm") 'Component definition
-            Case "FaTabStripItem2"
-                DWSIM.App.HelpRequested("Component Creator 2.htm") 'UNIFAC definition
-            Case "FaTabStripItem3"
-                DWSIM.App.HelpRequested("Component Creator 3.htm") 'Joback definition
-
-            Case Else
-                DWSIM.App.HelpRequested("Component Creator.htm")
-        End Select
-
     End Sub
 
     Private Sub GridMODFAC_CellMouseEnter(sender As Object, e As DataGridViewCellEventArgs) Handles GridMODFAC.CellMouseEnter
@@ -3183,72 +3068,6 @@ Public Class FormCompoundCreator
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-
-    End Sub
-
-    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged, RadioButton2.CheckedChanged, RadioButton3.CheckedChanged
-
-        If RadioButton1.Checked Then
-            Me.FaTabStripItem1.Visible = True
-            Me.FaTabStripItem2.Visible = True
-            Me.FaTabStripItem3.Visible = True
-            Me.FaTabStripItem4.Visible = True
-            Me.FaTabStripItem5.Visible = True
-            Me.FaTabStripItem6.Visible = True
-            Me.FaTabStripItem7.Visible = True
-            Me.FaTabStripItem8.Visible = True
-            Me.FaTabStripItem9.Visible = True
-            Me.FaTabStripItem10.Visible = True
-            Me.FaTabStripItem11.Visible = True
-            Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
-            Me.FaTabStripItem1.Selected = True
-            Me.FaTabStripItemBO.Visible = False
-            Me.FaTabStripItemEL.Visible = False
-        ElseIf RadioButton2.Checked Then
-            Me.FaTabStripItem1.Visible = False
-            Me.FaTabStripItem2.Visible = False
-            Me.FaTabStripItem3.Visible = False
-            Me.FaTabStripItem4.Visible = False
-            Me.FaTabStripItem5.Visible = False
-            Me.FaTabStripItem6.Visible = False
-            Me.FaTabStripItem7.Visible = False
-            Me.FaTabStripItem8.Visible = False
-            Me.FaTabStripItem9.Visible = False
-            Me.FaTabStripItem10.Visible = False
-            Me.FaTabStripItem11.Visible = False
-            Me.FaTabStripItemBO.Visible = True
-            Me.FaTabStrip2.SelectedItem = Me.FaTabStripItemBO
-            Me.FaTabStripItemBO.Selected = True
-            Me.FaTabStripItemEL.Visible = False
-        Else
-            Me.FaTabStripItem1.Visible = True
-            Me.FaTabStripItem2.Visible = False
-            Me.FaTabStripItem3.Visible = False
-            Me.FaTabStripItem4.Visible = False
-            Me.FaTabStripItem5.Visible = False
-            Me.FaTabStripItem6.Visible = False
-            Me.FaTabStripItem7.Visible = False
-            Me.FaTabStripItem8.Visible = False
-            Me.FaTabStripItem9.Visible = False
-            Me.FaTabStripItem10.Visible = False
-            Me.FaTabStripItem11.Visible = False
-            Me.FaTabStripItemBO.Visible = False
-            Me.FaTabStripItemEL.Visible = True
-            Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
-        End If
-
-        Me.FaTabStrip2.Refresh()
-
-    End Sub
-
-    Private Sub rbIon_CheckedChanged(sender As Object, e As EventArgs) Handles rbIon.CheckedChanged, rbSalt.CheckedChanged, rbHydratedSalt.CheckedChanged
-
-        tbHydrNumber.Enabled = rbHydratedSalt.Checked
-        tbPositiveIonFormula.Enabled = Not rbIon.Checked
-        tbNegativeIonFormula.Enabled = Not rbIon.Checked
-        tbEsteqCoeffNegIon.Enabled = Not rbIon.Checked
-        tbEsteqCoeffPosIon.Enabled = Not rbIon.Checked
-        tbElecIonCharge.Enabled = rbIon.Checked
 
     End Sub
 
@@ -3326,8 +3145,6 @@ Public Class FormCompoundCreator
 
                 Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, SaveFileDialog2.FileName, True)
 
-                SetUserDBSaveStatus(True)
-
             Catch ex As Exception
 
                 MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -3365,6 +3182,26 @@ Public Class FormCompoundCreator
 
     Private Sub DBOpenDlg_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles DBOpenDlg.FileOk
 
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim f As New FormPureComp() With {.Flowsheet = Nothing, .Added = False, .MyCompound = mycase.cp}
+        f.ShowDialog(Me)
+    End Sub
+
+    Private Sub tsmiIgnoreUnsupportedGroups_Click(sender As Object, e As EventArgs) Handles tsmiIgnoreUnsupportedGroups.Click
+        mycase.IgnoreUnsupportedGroups = tsmiIgnoreUnsupportedGroups.Checked
+    End Sub
+
+    Private Sub cbEqTCLiquid_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEqTCLiquid.SelectedIndexChanged
+        If mycase.EqLTC Then
+            mycase.cp.LiquidThermalConductivityEquation = cbEqTCLiquid.SelectedItem.ToString.Split(":")(0)
+            If mycase.cp.LiquidThermalConductivityEquation = "1000" Then
+                tbUserDefTCEq.Enabled = True
+            Else
+                tbUserDefTCEq.Enabled = False
+            End If
+        End If
     End Sub
 
     Private Sub BancoDeDadosChemeoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BancoDeDadosChemeoToolStripMenuItem.Click
@@ -3425,6 +3262,8 @@ End Class
     Public database As String = ""
     Public su As SystemsOfUnits.Units
 
+    Public IgnoreUnsupportedGroups As Boolean = False
+
     Public nf As String = My.Computer.Info.InstalledUICulture.NumberFormat.ToString
 
     Public CalcMW As Boolean = True
@@ -3447,6 +3286,7 @@ End Class
     Public RegressCPLiquid As Boolean = False
     Public RegressLVISC As Boolean = False
     Public RegressLDENS As Boolean = False
+    Public RegressLTC As Boolean = False
     Public RegressCpS As Boolean = False
     Public RegressRoS As Boolean = False
 
@@ -3455,6 +3295,7 @@ End Class
     Public EqCPLiquid As Boolean = False
     Public EqLVISC As Boolean = False
     Public EqLDENS As Boolean = False
+    Public EqLTC As Boolean = False
     Public EqCpS As Boolean = False
     Public EqSDens As Boolean = False
 
@@ -3463,6 +3304,7 @@ End Class
     Public RegressOKCPLiquid As Boolean = False
     Public RegressOKLVISC As Boolean = False
     Public RegressOKLDENS As Boolean = False
+    Public RegressOKLTC As Boolean = False
     Public RegressOKCpS As Boolean = False
     Public RegressOKRoS As Boolean = False
 
@@ -3471,6 +3313,7 @@ End Class
     Public ErrorMsgCPLiquid As String = ""
     Public ErrorMsgLVISC As String = ""
     Public ErrorMsgLDENS As String = ""
+    Public ErrorMsgLTC As String = ""
     Public ErrorMsgCpS As String = ""
     Public ErrorMsgRoS As String = ""
 
@@ -3481,6 +3324,7 @@ End Class
     Public DataCPLiquid As New ArrayList
     Public DataLVISC As New ArrayList
     Public DataLDENS As New ArrayList
+    Public DataLTC As New ArrayList
     Public DataCpS As New ArrayList
     Public DataRoS As New ArrayList
     Public AdditionalAtoms As ArrayList

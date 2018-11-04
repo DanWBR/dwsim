@@ -51,9 +51,9 @@ Public Class FormWelcome
                         lvi.ImageIndex = 0
                     Case ".dwxml", ".dwxmz"
                         lvi.ImageIndex = 1
-                    Case ".dwcsd"
+                    Case ".dwcsd", ".dwcsd2"
                         lvi.ImageIndex = 2
-                    Case ".dwrsd"
+                    Case ".dwrsd", ".dwrsd2"
                         lvi.ImageIndex = 3
                 End Select
                 If Not Me.lvlatestfolders.Items.ContainsKey(Path.GetDirectoryName(f)) Then
@@ -74,9 +74,9 @@ Public Class FormWelcome
                     lvi.ImageIndex = 0
                 Case ".dwxml", ".dwxmz"
                     lvi.ImageIndex = 1
-                Case ".dwcsd"
+                Case ".dwcsd", ".dwcsd2"
                     lvi.ImageIndex = 2
-                Case ".dwrsd"
+                Case ".dwrsd", ".dwrsd2"
                     lvi.ImageIndex = 3
             End Select
         Next
@@ -173,9 +173,17 @@ Public Class FormWelcome
                     NewMDIChild.Show()
                     Dim objStreamReader As New FileStream(lview.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
+                    x.Binder = New VersionDeserializationBinder
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = lview.SelectedItems(0).Tag
                     objStreamReader.Close()
+                    NewMDIChild.WriteData()
+                    NewMDIChild.Activate()
+                Case ".dwcsd2"
+                    Dim NewMDIChild As New FormCompoundCreator()
+                    NewMDIChild.MdiParent = FormMain
+                    NewMDIChild.Show()
+                    NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(File.ReadAllText(lview.SelectedItems(0).Tag))
                     NewMDIChild.WriteData()
                     NewMDIChild.Activate()
                 Case ".dwrsd"
@@ -184,9 +192,18 @@ Public Class FormWelcome
                     NewMDIChild.Show()
                     Dim objStreamReader As New FileStream(lview.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
+                    x.Binder = New VersionDeserializationBinder
                     NewMDIChild.currcase = x.Deserialize(objStreamReader)
                     NewMDIChild.currcase.filename = lview.SelectedItems(0).Tag
                     objStreamReader.Close()
+                    NewMDIChild.LoadCase(NewMDIChild.currcase, False)
+                    NewMDIChild.Activate()
+                Case ".dwrsd2"
+                    Dim NewMDIChild As New FormDataRegression()
+                    NewMDIChild.MdiParent = Me.Owner
+                    NewMDIChild.Show()
+                    NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(File.ReadAllText(lview.SelectedItems(0).Tag))
+                    NewMDIChild.currcase.filename = lview.SelectedItems(0).Tag
                     NewMDIChild.LoadCase(NewMDIChild.currcase, False)
                     NewMDIChild.Activate()
                 Case ".dwruf"
@@ -195,6 +212,7 @@ Public Class FormWelcome
                     NewMDIChild.Show()
                     Dim objStreamReader As New FileStream(lview.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
+                    x.Binder = New VersionDeserializationBinder
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = lview.SelectedItems(0).Tag
                     objStreamReader.Close()

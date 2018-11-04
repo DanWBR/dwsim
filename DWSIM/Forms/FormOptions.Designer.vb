@@ -71,10 +71,13 @@ Partial Class FormOptions
         Me.ComboBoxCompoundCopyMode = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkEnableMultipleEditors = New System.Windows.Forms.CheckBox()
-        Me.cbDefaultLocation = New System.Windows.Forms.ComboBox()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.chkCloseFormsOnDeselect = New System.Windows.Forms.CheckBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cbDefaultLocation = New System.Windows.Forms.ComboBox()
+        Me.cbEditorStyle = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.CheckBoxUndoRedoRecalc = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem3 = New System.Windows.Forms.TabPage()
@@ -122,9 +125,6 @@ Partial Class FormOptions
         Me.chkIgnoreCompConstData = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.chkHideSolidPhaseCO = New System.Windows.Forms.CheckBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ComboBoxUILanguage = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.KryptonCheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
@@ -146,6 +146,7 @@ Partial Class FormOptions
         Me.TabPage1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -160,7 +161,6 @@ Partial Class FormOptions
         Me.GroupBox16.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
@@ -458,17 +458,36 @@ Partial Class FormOptions
         'GroupBox12
         '
         resources.ApplyResources(Me.GroupBox12, "GroupBox12")
-        Me.GroupBox12.Controls.Add(Me.chkEnableMultipleEditors)
-        Me.GroupBox12.Controls.Add(Me.cbDefaultLocation)
-        Me.GroupBox12.Controls.Add(Me.Label14)
-        Me.GroupBox12.Controls.Add(Me.chkCloseFormsOnDeselect)
+        Me.GroupBox12.Controls.Add(Me.GroupBox1)
+        Me.GroupBox12.Controls.Add(Me.cbEditorStyle)
+        Me.GroupBox12.Controls.Add(Me.Label3)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.TabStop = False
+        '
+        'GroupBox1
+        '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.chkEnableMultipleEditors)
+        Me.GroupBox1.Controls.Add(Me.chkCloseFormsOnDeselect)
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.cbDefaultLocation)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
         '
         'chkEnableMultipleEditors
         '
         resources.ApplyResources(Me.chkEnableMultipleEditors, "chkEnableMultipleEditors")
         Me.chkEnableMultipleEditors.Name = "chkEnableMultipleEditors"
+        '
+        'chkCloseFormsOnDeselect
+        '
+        resources.ApplyResources(Me.chkCloseFormsOnDeselect, "chkCloseFormsOnDeselect")
+        Me.chkCloseFormsOnDeselect.Name = "chkCloseFormsOnDeselect"
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
         '
         'cbDefaultLocation
         '
@@ -478,15 +497,18 @@ Partial Class FormOptions
         Me.cbDefaultLocation.Items.AddRange(New Object() {resources.GetString("cbDefaultLocation.Items"), resources.GetString("cbDefaultLocation.Items1")})
         Me.cbDefaultLocation.Name = "cbDefaultLocation"
         '
-        'Label14
+        'cbEditorStyle
         '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.Name = "Label14"
+        resources.ApplyResources(Me.cbEditorStyle, "cbEditorStyle")
+        Me.cbEditorStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEditorStyle.FormattingEnabled = True
+        Me.cbEditorStyle.Items.AddRange(New Object() {resources.GetString("cbEditorStyle.Items"), resources.GetString("cbEditorStyle.Items1")})
+        Me.cbEditorStyle.Name = "cbEditorStyle"
         '
-        'chkCloseFormsOnDeselect
+        'Label3
         '
-        resources.ApplyResources(Me.chkCloseFormsOnDeselect, "chkCloseFormsOnDeselect")
-        Me.chkCloseFormsOnDeselect.Name = "chkCloseFormsOnDeselect"
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
         '
         'GroupBox11
         '
@@ -763,7 +785,6 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
@@ -868,27 +889,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.chkHideSolidPhaseCO, "chkHideSolidPhaseCO")
         Me.chkHideSolidPhaseCO.Name = "chkHideSolidPhaseCO"
         '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.ComboBoxUILanguage)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'ComboBoxUILanguage
-        '
-        resources.ApplyResources(Me.ComboBoxUILanguage, "ComboBoxUILanguage")
-        Me.ComboBoxUILanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxUILanguage.FormattingEnabled = True
-        Me.ComboBoxUILanguage.Items.AddRange(New Object() {resources.GetString("ComboBoxUILanguage.Items"), resources.GetString("ComboBoxUILanguage.Items1")})
-        Me.ComboBoxUILanguage.Name = "ComboBoxUILanguage"
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
         'GroupBox9
         '
         resources.ApplyResources(Me.GroupBox9, "GroupBox9")
@@ -981,6 +981,8 @@ Partial Class FormOptions
         Me.GroupBox5.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
         Me.GroupBox12.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
         Me.FaTabStripItem3.ResumeLayout(False)
@@ -1000,8 +1002,6 @@ Partial Class FormOptions
         Me.GroupBox16.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -1029,9 +1029,7 @@ Partial Class FormOptions
     Public WithEvents dgvdb As System.Windows.Forms.DataGridView
     Public WithEvents ofdcs As System.Windows.Forms.OpenFileDialog
     Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Public WithEvents ImageList1 As System.Windows.Forms.ImageList
-    Public WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Public WithEvents chkEnableParallelCalcs As System.Windows.Forms.CheckBox
@@ -1064,7 +1062,6 @@ Partial Class FormOptions
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Friend WithEvents ComboBoxUILanguage As System.Windows.Forms.ComboBox
     Public WithEvents chkSolverBreak As System.Windows.Forms.CheckBox
     Public WithEvents chkStorePreviousSolutions As System.Windows.Forms.CheckBox
     Public WithEvents chkSaveBackupFile As System.Windows.Forms.CheckBox
@@ -1116,4 +1113,7 @@ Partial Class FormOptions
     Friend WithEvents GroupBox18 As GroupBox
     Public WithEvents chkEnableInspector As CheckBox
     Friend WithEvents Label21 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents cbEditorStyle As ComboBox
+    Public WithEvents Label3 As Label
 End Class

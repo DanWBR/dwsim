@@ -85,12 +85,27 @@ Public Class FlowsheetSurface
     End Sub
 
     Public Sub UpdateSelectedObject()
+        If My.Settings.ObjectEditor = 0 Then
+            'new
+            UpdateSelectedObject_New()
+        ElseIf My.Settings.ObjectEditor = 1 Then
+            'legacy
+            UpdateSelectedObject_Legacy()
+        Else
+            'cpui
+        End If
+    End Sub
+
+    Public Sub UpdateSelectedObject_New()
 
         If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
             If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
-                Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).UpdateEditForm()
+                Dim obj = Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name)
+
+                obj.UpdateEditForm()
+                EditorTooltips.Update(obj, Flowsheet)
 
             End If
 
@@ -175,7 +190,7 @@ Public Class FlowsheetSurface
 
     End Sub
 
-    Private Sub FlowsheetDesignSurface_SelectionChanged(ByVal sender As Object, _
+    Private Sub FlowsheetDesignSurface_SelectionChanged_New(ByVal sender As Object,
             ByVal e As DrawingTools.SelectionChangedEventArgs) Handles FlowsheetDesignSurface.SelectionChanged
 
         If Not e.SelectedObject Is Nothing Then
@@ -418,10 +433,14 @@ Public Class FlowsheetSurface
 
                 If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
-                    If Not My.Settings.EnableMultipleObjectEditors Then
-                        For Each obj In Me.Flowsheet.SimulationObjects.Values
-                            obj.CloseEditForm()
-                        Next
+                    If My.Settings.ObjectEditor = 0 Then
+                        If Not My.Settings.EnableMultipleObjectEditors Then
+                            For Each obj In Me.Flowsheet.SimulationObjects.Values
+                                obj.CloseEditForm()
+                            Next
+                        End If
+                        Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
+                        EditorTooltips.Update(Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name), Flowsheet)
                     End If
 
                     Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
@@ -2660,6 +2679,7 @@ Public Class FlowsheetSurface
             Me.FlowsheetDesignSurface.Invalidate()
             For Each obj In Me.Flowsheet.SimulationObjects.Values
                 obj.UpdateEditForm()
+                EditorTooltips.Update(obj, Flowsheet)
             Next
             If TypeOf gObj.Owner Is Thermodynamics.Streams.MaterialStream Then
                 gObj.CreateConnectors(1, 1)
@@ -3614,4 +3634,488 @@ Public Class FlowsheetSurface
     Private Sub ToolStripButton19_Click(sender As Object, e As EventArgs) Handles ToolStripButton19.Click
         Flowsheet.ToolStripButton19_Click(sender, e)
     End Sub
+
+    Public Sub UpdateSelectedObject_Legacy()
+
+        If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+
+            Flowsheet.FormProps.SuspendLayout()
+            If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Table Then
+                Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("Tabela")
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("TabeladeDados")
+                Flowsheet.FormProps.LblStatusObj.Text = "-"
+                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+            ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_MasterTable Then
+                Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("MasterTable")
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("MasterTable")
+                Flowsheet.FormProps.LblStatusObj.Text = "-"
+                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+            ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_SpreadsheetTable Then
+                Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("SpreadsheetTable")
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("SpreadsheetTable")
+                Flowsheet.FormProps.LblStatusObj.Text = "-"
+                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+            ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Image Then
+                Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("Figura")
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("ImagemBitmap")
+                Flowsheet.FormProps.LblStatusObj.Text = "-"
+                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+            ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Text Then
+                Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("Texto")
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("CaixadeTexto")
+                Flowsheet.FormProps.LblStatusObj.Text = "-"
+                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+            Else
+                Flowsheet.FormProps.LblNameObj.Text = Me.FlowsheetDesignSurface.SelectedObject.Tag
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString(Flowsheet.SimulationObjects.Item(Me.FlowsheetDesignSurface.SelectedObject.Name).GetDisplayName)
+                Select Case Me.FlowsheetDesignSurface.SelectedObject.Status
+                    Case Status.Calculated
+                        Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculado")
+                        Flowsheet.FormProps.LblStatusObj.ForeColor = Color.SteelBlue
+                    Case Status.Calculating
+                        Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculando")
+                        Flowsheet.FormProps.LblStatusObj.ForeColor = Color.YellowGreen
+                    Case Status.ErrorCalculating
+                        Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("NoCalculado")
+                        Flowsheet.FormProps.LblStatusObj.ForeColor = Color.Red
+                    Case Status.Inactive
+                        Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Inativo")
+                        Flowsheet.FormProps.LblStatusObj.ForeColor = Color.Gray
+                    Case Status.Idle
+                        Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculado")
+                        Flowsheet.FormProps.LblStatusObj.ForeColor = Color.SteelBlue
+                End Select
+            End If
+            PopulatePGEx2(Me.FlowsheetDesignSurface.SelectedObject)
+            Try
+                Dim selitem As String = ""
+                If Flowsheet.FormProps.PGEx1.SelectedGridItem IsNot Nothing Then selitem = Flowsheet.FormProps.PGEx1.SelectedGridItem.Label
+                Dim selitem2 As String = ""
+                If Flowsheet.FormProps.PGEx2.SelectedGridItem IsNot Nothing Then selitem2 = Flowsheet.FormProps.PGEx2.SelectedGridItem.Label
+                If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Table Then
+                    CType(Me.FlowsheetDesignSurface.SelectedObject, GraphicObjects.TableGraphic).PopulateGrid(Flowsheet.FormProps.PGEx1)
+                ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_MasterTable Then
+                    CType(Me.FlowsheetDesignSurface.SelectedObject, GraphicObjects.MasterTableGraphic).PopulateGrid(Flowsheet.FormProps.PGEx1, Flowsheet)
+                ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_SpreadsheetTable Then
+                    CType(Me.FlowsheetDesignSurface.SelectedObject, GraphicObjects.SpreadsheetTableGraphic).PopulateGrid(Flowsheet.FormProps.PGEx1)
+                Else
+                    Dim obj = Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name)
+                    PropertyGridEditors.PopulatePropertyGrid(Flowsheet.FormProps.PGEx1, DirectCast(obj, Object))
+                End If
+                Flowsheet.FormProps.PGEx1.Refresh()
+                Flowsheet.FormProps.PGEx2.Refresh()
+                If selitem <> "" Then
+                    Try
+                        Flowsheet.FormProps.PGEx1.EnumerateAllItems().Where(Function(x) x.Label = selitem)(0).Select()
+                    Catch ex As Exception
+                    End Try
+                End If
+                If selitem2 <> "" Then
+                    Try
+                        Flowsheet.FormProps.PGEx2.EnumerateAllItems().Where(Function(x) x.Label = selitem2)(0).Select()
+                    Catch ex As Exception
+                    End Try
+                End If
+                Flowsheet.FormProps.ResumeLayout()
+            Catch ex As Exception
+                Flowsheet.FormProps.PGEx1.SelectedObject = Nothing
+                MessageBox.Show(ex.Message & " - " & ex.StackTrace, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+
+        Else
+
+            If Not Flowsheet.FormProps.PGEx2 Is Nothing Then Flowsheet.FormProps.PGEx2.SelectedObject = Nothing
+            If Not Flowsheet.FormProps.PGEx1 Is Nothing Then Flowsheet.FormProps.PGEx1.SelectedObject = Nothing
+
+        End If
+
+    End Sub
+
+    Private Sub FlowsheetDesignSurface_SelectionChanged(ByVal sender As Object, ByVal e As DrawingTools.SelectionChangedEventArgs) Handles FlowsheetDesignSurface.SelectionChanged
+        If My.Settings.ObjectEditor = 0 Then
+            Flowsheet.FormProps.Hide()
+            'new
+            FlowsheetDesignSurface_SelectionChanged_New(sender, e)
+        ElseIf My.Settings.ObjectEditor = 1 Then
+            Flowsheet.FormProps.Show()
+            'legacy
+            FlowsheetDesignSurface_SelectionChanged_Legacy(sender, e)
+        Else
+            'cpui
+        End If
+    End Sub
+
+    Private Sub FlowsheetDesignSurface_SelectionChanged_Legacy(ByVal sender As Object, ByVal e As DrawingTools.SelectionChangedEventArgs)
+
+        If Not e.SelectedObject Is Nothing Then
+
+            If Not e.SelectedObject.IsConnector Then
+                If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Table Then
+                    Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("Tabela")
+                    Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("TabeladeDados")
+                    Flowsheet.FormProps.LblStatusObj.Text = "-"
+                    Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+                ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_MasterTable Then
+                    Flowsheet.FormProps.LblNameObj.Text = "MasterTable"
+                    Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("MasterTable")
+                    Flowsheet.FormProps.LblStatusObj.Text = "-"
+                    Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+                ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_SpreadsheetTable Then
+                    Flowsheet.FormProps.LblNameObj.Text = "SpreadsheetTable"
+                    Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("SpreadsheetTable")
+                    Flowsheet.FormProps.LblStatusObj.Text = "-"
+                    Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+                ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Image Then
+                    Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("Figura")
+                    Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("ImagemBitmap")
+                    Flowsheet.FormProps.LblStatusObj.Text = "-"
+                    Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+                ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Text Then
+                    Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("Texto")
+                    Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString("CaixadeTexto")
+                    Flowsheet.FormProps.LblStatusObj.Text = "-"
+                    Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+                ElseIf Not Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_FloatingTable Then
+                    Flowsheet.FormProps.LblNameObj.Text = e.SelectedObject.Tag
+                    Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString(e.SelectedObject.Description)
+                    If e.SelectedObject.Active = False Then
+                        Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Inativo")
+                        Flowsheet.FormProps.LblStatusObj.ForeColor = Color.DimGray
+                    Else
+                        Select Case Me.FlowsheetDesignSurface.SelectedObject.Status
+                            Case Status.Calculated
+                                Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculado")
+                                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.SteelBlue
+                            Case Status.Calculating
+                                Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculando")
+                                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.YellowGreen
+                            Case Status.ErrorCalculating
+                                Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("NoCalculado")
+                                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.Red
+                            Case Status.Inactive
+                                Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Inativo")
+                                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.Gray
+                            Case Status.Idle
+                                Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculado")
+                                Flowsheet.FormProps.LblStatusObj.ForeColor = Color.SteelBlue
+                        End Select
+                    End If
+                End If
+                If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+                    If Me.FlowsheetDesignSurface.SelectedObject.IsConnector = False Then
+                        PopulatePGEx2(Me.FlowsheetDesignSurface.SelectedObject)
+                        Try
+                            If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Table Then
+                                CType(Me.FlowsheetDesignSurface.SelectedObject, GraphicObjects.TableGraphic).PopulateGrid(Flowsheet.FormProps.PGEx1)
+                            ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_MasterTable Then
+                                CType(Me.FlowsheetDesignSurface.SelectedObject, GraphicObjects.MasterTableGraphic).PopulateGrid(Flowsheet.FormProps.PGEx1, Flowsheet)
+                            ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_SpreadsheetTable Then
+                                CType(Me.FlowsheetDesignSurface.SelectedObject, GraphicObjects.SpreadsheetTableGraphic).PopulateGrid(Flowsheet.FormProps.PGEx1)
+                            ElseIf Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
+                                Dim obj = Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name)
+                                PropertyGridEditors.PopulatePropertyGrid(Flowsheet.FormProps.PGEx1, DirectCast(obj, Object))
+                            End If
+                            'Flowsheet.FormProps.ResumeLayout()
+                        Catch ex As Exception
+                            Flowsheet.WriteToLog("Error: " & ex.ToString, Color.Red, MessageType.GeneralError)
+                        Finally
+                            Flowsheet.FormSurface.Select()
+                        End Try
+                    Else
+                        Me.FlowsheetDesignSurface.SelectedObject = Nothing
+                    End If
+                Else
+                    Flowsheet.FormProps.PGEx2.SelectedObject = Nothing
+                    Flowsheet.FormProps.PGEx1.SelectedObject = Nothing
+                End If
+                Flowsheet.FormProps.PGEx2.Refresh()
+                Flowsheet.FormProps.PGEx1.Refresh()
+
+                Flowsheet.ChangeEditMenuStatus(True)
+
+            Else
+
+                Me.FlowsheetDesignSurface.SelectedObject = Nothing
+
+            End If
+
+        Else
+
+            Flowsheet.FormProps.PGEx2.SelectedObject = Nothing
+            Flowsheet.FormProps.PGEx1.SelectedObject = Nothing
+
+            Flowsheet.ChangeEditMenuStatus(False)
+
+        End If
+
+        If Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+
+            Flowsheet.FormProps.LblNameObj.Text = DWSIM.App.GetLocalString("Nenhumselecionado")
+            Flowsheet.FormProps.LblTipoObj.Text = "-"
+            Flowsheet.FormProps.LblStatusObj.Text = "-"
+            Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+
+        End If
+
+    End Sub
+
+    Public Function PopulatePGEx2(ByRef gobj As GraphicObject)
+
+        If gobj.ObjectType = ObjectType.GO_Table Then
+
+            Dim gobj2 As GraphicObjects.TableGraphic = gobj
+
+            With Flowsheet.FormProps.PGEx2
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "LineColor", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Cordotextodatabela"), True)
+                .Item(.Item.Count - 1).Tag2 = "LineColor"
+                .Item.Add(DWSIM.App.GetLocalString("Cabealho"), gobj2, "HeaderFont", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodocabeal"), True)
+                .Item(.Item.Count - 1).Tag2 = "HeaderFont"
+                .Item.Add(DWSIM.App.GetLocalString("Coluna1Fonte"), gobj2, "FontCol1", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna"), True)
+                .Item(.Item.Count - 1).Tag2 = "FontCol1"
+                .Item.Add(DWSIM.App.GetLocalString("Coluna2Fonte"), gobj2, "FontCol2", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna2"), True)
+                .Item(.Item.Count - 1).Tag2 = "FontCol2"
+                .Item.Add(DWSIM.App.GetLocalString("Coluna3Fonte"), gobj2, "FontCol3", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna3"), True)
+                .Item(.Item.Count - 1).Tag2 = "FontCol3"
+                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
+                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
+                .Item.Add(DWSIM.App.GetLocalString("Estilodaborda"), gobj2, "BorderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Estilodabordatraceja"), True)
+                .Item(.Item.Count - 1).Tag2 = "BorderStyle"
+                .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj2, "BorderColor", False, DWSIM.App.GetLocalString("Aparncia2"), "", True)
+                .Item(.Item.Count - 1).Tag2 = "BorderColor"
+                .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj2, "Padding", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
+                .Item(.Item.Count - 1).Tag2 = "Padding"
+                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
+                .Item(.Item.Count - 1).Tag2 = "Rotation"
+                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj2, "IsGradientBackground", False, DWSIM.App.GetLocalString("Fundo"), "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
+                .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
+                .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj2, "FillColor", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Corsemgradiente"), True)
+                .Item(.Item.Count - 1).Tag2 = "FillColor"
+                .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj2, "BackgroundGradientColor1", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
+                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
+                .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj2, "BackgroundGradientColor2", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
+                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
+                .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj2, "Opacity", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
+                .Item(.Item.Count - 1).Tag2 = "Opacity"
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+            gobj2 = Nothing
+            Flowsheet.FormProps.FTSProps.SelectedItem = Flowsheet.FormProps.TSProps
+
+        ElseIf gobj.ObjectType = ObjectType.GO_MasterTable Then
+
+            Dim gobj2 As GraphicObjects.MasterTableGraphic = CType(gobj, GraphicObjects.MasterTableGraphic)
+
+            With Flowsheet.FormProps.PGEx2
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "LineColor", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Cordotextodatabela"), True)
+                .Item(.Item.Count - 1).Tag2 = "LineColor"
+                .Item.Add(DWSIM.App.GetLocalString("Cabealho"), gobj2, "HeaderFont", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodocabeal"), True)
+                .Item(.Item.Count - 1).Tag2 = "HeaderFont"
+                .Item.Add(DWSIM.App.GetLocalString("Coluna1Fonte"), gobj2, "FontCol1", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna"), True)
+                .Item(.Item.Count - 1).Tag2 = "FontCol1"
+                .Item.Add(DWSIM.App.GetLocalString("Coluna2Fonte"), gobj2, "FontCol2", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna2"), True)
+                .Item(.Item.Count - 1).Tag2 = "FontCol2"
+                .Item.Add(DWSIM.App.GetLocalString("Coluna3Fonte"), gobj2, "FontCol3", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna3"), True)
+                .Item(.Item.Count - 1).Tag2 = "FontCol3"
+                .Item.Add(DWSIM.App.GetLocalString("HeaderText"), gobj2, "HeaderText", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString(""), True)
+                .Item(.Item.Count - 1).Tag2 = "HeaderText"
+                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
+                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
+                .Item.Add(DWSIM.App.GetLocalString("Estilodaborda"), gobj2, "BorderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Estilodabordatraceja"), True)
+                .Item(.Item.Count - 1).Tag2 = "BorderStyle"
+                .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj2, "BorderColor", False, DWSIM.App.GetLocalString("Aparncia2"), "", True)
+                .Item(.Item.Count - 1).Tag2 = "BorderColor"
+                .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj2, "Padding", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
+                .Item(.Item.Count - 1).Tag2 = "Padding"
+                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
+                .Item(.Item.Count - 1).Tag2 = "Rotation"
+                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj2, "IsGradientBackground", False, DWSIM.App.GetLocalString("Fundo"), "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
+                .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
+                .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj2, "FillColor", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Corsemgradiente"), True)
+                .Item(.Item.Count - 1).Tag2 = "FillColor"
+                .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj2, "BackgroundGradientColor1", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
+                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
+                .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj2, "BackgroundGradientColor2", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
+                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
+                .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj2, "Opacity", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
+                .Item(.Item.Count - 1).Tag2 = "Opacity"
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+            gobj2 = Nothing
+            Flowsheet.FormProps.FTSProps.SelectedItem = Flowsheet.FormProps.TSProps
+
+        ElseIf gobj.ObjectType = ObjectType.GO_SpreadsheetTable Then
+
+            Dim gobj2 As GraphicObjects.SpreadsheetTableGraphic = CType(gobj, GraphicObjects.SpreadsheetTableGraphic)
+
+            With Flowsheet.FormProps.PGEx2
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "LineColor", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Cordotextodatabela"), True)
+                .Item(.Item.Count - 1).Tag2 = "LineColor"
+                .Item.Add(DWSIM.App.GetLocalString("Coluna1Fonte"), gobj2, "FontCol1", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna"), True)
+                .Item(.Item.Count - 1).Tag2 = "FontCol1"
+                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
+                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
+                .Item.Add(DWSIM.App.GetLocalString("Estilodaborda"), gobj2, "BorderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Estilodabordatraceja"), True)
+                .Item(.Item.Count - 1).Tag2 = "BorderStyle"
+                .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj2, "BorderColor", False, DWSIM.App.GetLocalString("Aparncia2"), "", True)
+                .Item(.Item.Count - 1).Tag2 = "BorderColor"
+                .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj2, "Padding", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
+                .Item(.Item.Count - 1).Tag2 = "Padding"
+                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
+                .Item(.Item.Count - 1).Tag2 = "Rotation"
+                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj2, "IsGradientBackground", False, DWSIM.App.GetLocalString("Fundo"), "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
+                .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
+                .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj2, "FillColor", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Corsemgradiente"), True)
+                .Item(.Item.Count - 1).Tag2 = "FillColor"
+                .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj2, "BackgroundGradientColor1", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
+                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
+                .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj2, "BackgroundGradientColor2", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
+                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
+                .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj2, "Opacity", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
+                .Item(.Item.Count - 1).Tag2 = "Opacity"
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+            gobj2 = Nothing
+            Flowsheet.FormProps.FTSProps.SelectedItem = Flowsheet.FormProps.TSProps
+
+        ElseIf gobj.ObjectType = ObjectType.GO_Text Then
+
+            Dim gobj2 As TextGraphic = CType(gobj, TextGraphic)
+
+            With Flowsheet.FormProps.PGEx2
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("Nome"), gobj.Tag, False, DWSIM.App.GetLocalString("Descrio1"), DWSIM.App.GetLocalString("Nomedoobjeto"), True)
+                .Item(.Item.Count - 1).Tag2 = "Tag"
+                .Item.Add(DWSIM.App.GetLocalString("Texto"), gobj2, "Text", False, "", DWSIM.App.GetLocalString("Textoaserexibidonaca"), True)
+                .Item(.Item.Count - 1).Tag2 = "Text"
+                .Item(.Item.Count - 1).CustomEditor = New System.ComponentModel.Design.MultilineStringEditor
+                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
+                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
+                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "Color", False, "", DWSIM.App.GetLocalString("Cordotexto"), True)
+                .Item(.Item.Count - 1).Tag2 = "Color"
+                .Item.Add(DWSIM.App.GetLocalString("Fonte"), gobj2, "Font", False, "", DWSIM.App.GetLocalString("Fontedotexto"), True)
+                .Item(.Item.Count - 1).Tag2 = "Font"
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+            gobj2 = Nothing
+            Flowsheet.FormProps.FTSProps.SelectedItem = Flowsheet.FormProps.TSObj
+
+        ElseIf gobj.ObjectType = ObjectType.GO_Image Then
+
+            Dim gobj2 As EmbeddedImageGraphic = CType(gobj, EmbeddedImageGraphic)
+
+            With Flowsheet.FormProps.PGEx2
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("Autodimensionar"), gobj2, "AutoSize", False, "", DWSIM.App.GetLocalString("SelecioLiquidrueparaque"), True)
+                .Item(.Item.Count - 1).Tag2 = "AutoSize"
+                .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj2, "Height", False, "", DWSIM.App.GetLocalString("Alturadafiguraempixe"), True)
+                .Item(.Item.Count - 1).Tag2 = "Height"
+                .Item.Add(DWSIM.App.GetLocalString("Largura"), gobj2, "Width", False, "", DWSIM.App.GetLocalString("Larguradafiguraempix"), True)
+                .Item(.Item.Count - 1).Tag2 = "Width"
+                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, "", DWSIM.App.GetLocalString("Rotaodafigurade0a360"), True)
+                .Item(.Item.Count - 1).Tag2 = "Rotation"
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+            gobj2 = Nothing
+            Flowsheet.FormProps.FTSProps.SelectedItem = Flowsheet.FormProps.TSObj
+
+        ElseIf gobj.ObjectType = ObjectType.GO_Animation Then
+
+            Dim gobj2 As EmbeddedAnimationGraphic = CType(gobj, EmbeddedAnimationGraphic)
+
+            With Flowsheet.FormProps.PGEx2
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("Autodimensionar"), gobj2, "AutoSize", False, "", DWSIM.App.GetLocalString("SelecioLiquidrueparaque"), True)
+                .Item(.Item.Count - 1).Tag2 = "AutoSize"
+                .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj2, "Height", False, "", DWSIM.App.GetLocalString("Alturadafiguraempixe"), True)
+                .Item(.Item.Count - 1).Tag2 = "Height"
+                .Item.Add(DWSIM.App.GetLocalString("Largura"), gobj2, "Width", False, "", DWSIM.App.GetLocalString("Larguradafiguraempix"), True)
+                .Item(.Item.Count - 1).Tag2 = "Width"
+                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, "", DWSIM.App.GetLocalString("Rotaodafigurade0a360"), True)
+                .Item(.Item.Count - 1).Tag2 = "Rotation"
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+            gobj2 = Nothing
+            Flowsheet.FormProps.FTSProps.SelectedItem = Flowsheet.FormProps.TSObj
+
+        Else
+
+            With Flowsheet.FormProps.PGEx2
+
+                .Item.Clear()
+
+                .Item.Add(DWSIM.App.GetLocalString("Nome"), gobj, "Tag", False, DWSIM.App.GetLocalString("Descrio1"), DWSIM.App.GetLocalString("Nomedoobjeto"), True)
+                .Item(.Item.Count - 1).Tag2 = "Tag"
+                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj, "GradientMode", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("SelecioLiquidrueparaapl"), True)
+                .Item(.Item.Count - 1).Tag2 = "GradientMode"
+                .Item.Add(DWSIM.App.GetLocalString("Gradiente_Cor1"), gobj, "GradientColor1", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Cor1dogradienteseapl"), True)
+                .Item(.Item.Count - 1).Tag2 = "GradientColor1"
+                .Item.Add(DWSIM.App.GetLocalString("Gradiente_Cor2"), gobj, "GradientColor2", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Cor2dogradienteseapl"), True)
+                .Item(.Item.Count - 1).Tag2 = "GradientColor2"
+                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "FillColor", False, DWSIM.App.GetLocalString("Aparncia2"), "Cor de fundo, caso o modo de gradiente não esteja ativado", True)
+                .Item(.Item.Count - 1).Tag2 = "FillColor"
+                .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
+                .Item(.Item.Count - 1).Tag2 = "LineWidth"
+                .Item.Add(DWSIM.App.GetLocalString("Comprimento"), gobj, "Width", False, DWSIM.App.GetLocalString("Tamanho3"), DWSIM.App.GetLocalString("Comprimentodoobjetoe"), True)
+                .Item(.Item.Count - 1).Tag2 = "Width"
+                .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj, "Height", False, DWSIM.App.GetLocalString("Tamanho3"), DWSIM.App.GetLocalString("Alturadoobjetoempixe"), True)
+                .Item(.Item.Count - 1).Tag2 = "Height"
+                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj, "Rotation", False, DWSIM.App.GetLocalString("Tamanho3"), DWSIM.App.GetLocalString("Rotaodoobjetode0a360"), True)
+                .Item(.Item.Count - 1).Tag2 = "Rotation"
+                .Item.Add("X", gobj, "X", False, DWSIM.App.GetLocalString("Coordenadas4"), DWSIM.App.GetLocalString("Coordenadahorizontal"), True)
+                .Item(.Item.Count - 1).Tag2 = "X"
+                .Item.Add("Y", gobj, "Y", False, DWSIM.App.GetLocalString("Coordenadas4"), DWSIM.App.GetLocalString("Coordenadaverticaldo"), True)
+                .Item(.Item.Count - 1).Tag2 = "Y"
+
+                .PropertySort = PropertySort.Categorized
+                .ShowCustomProperties = True
+
+            End With
+
+            Flowsheet.FormProps.FTSProps.SelectedItem = Flowsheet.FormProps.TSProps
+
+        End If
+
+        Return 1
+
+    End Function
+
 End Class

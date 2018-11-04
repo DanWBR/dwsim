@@ -73,6 +73,8 @@ Public Class FormFlowsheet
     Public FormSpreadsheet As New SpreadsheetForm
     Public FormObjects As New SimulationObjectsPanel With {.Flowsheet = Me}
 
+    Public FormProps As New frmProps
+
     Public FormCOReports As New COReportsPanel
     Public FormWatch As New WatchPanel
 
@@ -236,6 +238,7 @@ Public Class FormFlowsheet
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormObjects.Show(dckPanel)
             FormWatch.Show(dckPanel)
+			FormProps.Show(dckPanel, DockState.DockLeft)
 
             FormSurface.Activate()
 
@@ -279,6 +282,8 @@ Public Class FormFlowsheet
                 Return Me.FormSpreadsheet
             Case "DWSIM.WatchPanel", "DWSIM.frmWatch"
                 Return Me.FormWatch
+            Case "DWSIM.frmProps"
+                Return Me.FormProps
         End Select
         Return Nothing
     End Function
@@ -2798,6 +2803,7 @@ Public Class FormFlowsheet
         Me.UIThreadInvoke(Sub()
                               For Each obj In SimulationObjects.Values
                                   obj.UpdateEditForm()
+                                  EditorTooltips.Update(obj, Me)
                                   obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
                               Next
                           End Sub)
@@ -3141,7 +3147,15 @@ Public Class FormFlowsheet
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
+        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+                                                        Sub()
+                                                            If My.Settings.ObjectEditor = 1 Then
+                                                                Me.UIThread(Sub()
+                                                                                Me.FormSurface.Flowsheet = Me
+                                                                                Me.FormSurface.UpdateSelectedObject()
+                                                                            End Sub)
+                                                            End If
+                                                        End Sub)
     End Sub
 
     Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged

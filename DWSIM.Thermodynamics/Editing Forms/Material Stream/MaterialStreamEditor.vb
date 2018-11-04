@@ -323,14 +323,23 @@ Public Class MaterialStreamEditor
 
             If .GraphicObject.InputConnectors(0).IsAttached Then
                 If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
-                    TabPageInputConditions.Enabled = True
+                    UpdateEditableStatus()
+                    tbMassFlow.Enabled = True
+                    tbMoleFlow.Enabled = True
+                    tbVolFlow.Enabled = True
                     TabPageInputComposition.Enabled = True
                 Else
-                    TabPageInputConditions.Enabled = False
+                    DisableEditableStatus()
+                    tbMassFlow.Enabled = False
+                    tbMoleFlow.Enabled = False
+                    tbVolFlow.Enabled = False
                     TabPageInputComposition.Enabled = False
                 End If
             Else
-                TabPageInputConditions.Enabled = True
+                UpdateEditableStatus()
+                tbMassFlow.Enabled = True
+                tbMoleFlow.Enabled = True
+                tbVolFlow.Enabled = True
                 TabPageInputComposition.Enabled = True
             End If
 
@@ -562,13 +571,19 @@ Public Class MaterialStreamEditor
         lblTag.SelectionLength = 0
     End Sub
 
-    Private Sub cbSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSpec.SelectedIndexChanged
+    Public Sub DisableEditableStatus()
 
         tbTemp.Enabled = False
         tbPressure.Enabled = False
         tbEnth.Enabled = False
         tbEntr.Enabled = False
         tbFracSpec.Enabled = False
+
+    End Sub
+
+    Public Sub UpdateEditableStatus()
+
+        DisableEditableStatus()
 
         MatStream.SpecType = cbSpec.SelectedIndex
 
@@ -592,6 +607,13 @@ Public Class MaterialStreamEditor
                 tbPressure.Enabled = True
                 tbFracSpec.Enabled = True
         End Select
+
+    End Sub
+
+
+    Private Sub cbSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSpec.SelectedIndexChanged
+
+        UpdateEditableStatus()
 
         If Loaded Then RequestCalc()
 
@@ -1449,6 +1471,10 @@ Public Class MaterialStreamEditor
 
     Private Sub cbFloatingTableCompoundAmountBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFloatingTableCompoundAmountBasis.SelectedIndexChanged
         MatStream.FloatingTableAmountBasis = cbFloatingTableCompoundAmountBasis.SelectedIndex
+    End Sub
+
+    Private Sub TabPageInputConditions_MouseMove(sender As Object, e As MouseEventArgs) Handles TabPageInputConditions.MouseMove
+        Me.Editor_MouseMove(sender, e)
     End Sub
 
     Private Sub SaveViewState()

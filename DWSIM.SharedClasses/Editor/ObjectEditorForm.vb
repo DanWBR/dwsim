@@ -27,7 +27,12 @@
             Dim mouseloc, controlLoc, relativeloc As Drawing.Point
             Dim eventloc As Drawing.Point = e.Location
             If TypeOf sender Is GroupBox Then eventloc = e.Location + DirectCast(sender, GroupBox).Location
-            Dim control As Control = GetChildAtPoint(eventloc)
+            Dim control As Control
+            If TypeOf sender Is TabPage Then
+                control = sender.GetChildAtPoint(eventloc)
+            Else
+                control = GetChildAtPoint(eventloc)
+            End If
             If Not control Is Nothing Then
                 Dim lastCrp As Control = control
                 While Not control Is Nothing
