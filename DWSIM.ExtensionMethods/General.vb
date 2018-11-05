@@ -471,7 +471,7 @@ Public Module General
 
         Dim retstr As String = "{ "
         For Each d In vector
-            retstr += d.ToString + ", "
+            If Not d Is Nothing Then retstr += d.ToString + ", "
         Next
         retstr.TrimEnd(",")
         retstr += "}"
@@ -485,7 +485,7 @@ Public Module General
 
         Dim retstr As String = "{ "
         For Each d In vector
-            retstr += d.ToString + ", "
+            If Not d Is Nothing Then retstr += d.ToString + ", "
         Next
         retstr.TrimEnd(",")
         retstr += "}"
