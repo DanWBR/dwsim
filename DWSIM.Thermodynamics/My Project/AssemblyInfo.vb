@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("DWSIM Thermodynamics Library")>
 <Assembly: AssemblyDescription("DWSIM Simulator Thermodynamics Library")>
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.Thermodynamics")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016-2017 DWSIM Project")> 
+<Assembly: AssemblyProduct("DWSIM.Thermodynamics")>
+<Assembly: AssemblyCopyright("Copyright ©  2016-2018 DWSIM Project")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
