@@ -3185,7 +3185,7 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim f As New FormPureComp() With {.Flowsheet = Nothing, .Added = False, .MyCompound = mycase.cp}
+        Dim f As New FormPureComp() With {.Flowsheet = Nothing, .Added = False, .MyCompound = mycase.cp, .SUnits = su}
         f.ShowDialog(Me)
     End Sub
 

@@ -30,6 +30,7 @@ Public Class FormPureComp
     Dim MatStream As Streams.MaterialStream
 
     Public Flowsheet As FormFlowsheet
+    Public SUnits As SystemsOfUnits.Units
 
     Public MyCompound As ConstantProperties
 
@@ -52,10 +53,15 @@ Public Class FormPureComp
 
     Sub Populate()
 
-        Dim su As SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
+        Dim su As SystemsOfUnits.Units = SUnits
         Dim cv As New SystemsOfUnits.Converter
-        Dim nf As String = Flowsheet.Options.NumberFormat
+        Dim nf As String = "G6"
         Dim pp As New PropertyPackages.RaoultPropertyPackage(False)
+
+        If Flowsheet IsNot Nothing Then
+            su = Flowsheet.Options.SelectedUnitSystem
+            nf = Flowsheet.Options.NumberFormat
+        End If
 
         Me.MatStream = New MaterialStream("", "", Flowsheet, pp)
 
