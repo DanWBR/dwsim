@@ -1191,7 +1191,7 @@ Public Class PropertyGridEditors
                 If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), ms.FlowSheet.Options.NumberFormat)
                 pm.Add(FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Condutividadetrmicad"), True)
 
-                If ms.FlowSheet.Options.CalculateBubbleAndDewPoints Then
+                If ms.PropertyPackage.FlashBase.FlashSettings(FlashSetting.CalculateBubbleAndDewPoints) = True Then
                     refval = ms.Phases(0).Properties.bubblePressure.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), ms.FlowSheet.Options.NumberFormat)
                     pm.Add(FT(DWSIM.App.GetLocalString("BubblePress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubblePress"), True)

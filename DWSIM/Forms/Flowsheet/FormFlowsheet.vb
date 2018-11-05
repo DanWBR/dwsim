@@ -266,6 +266,8 @@ Public Class FormFlowsheet
 
         loaded = True
 
+        If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
+
     End Sub
 
     Function ReturnForm(ByVal str As String) As IDockContent

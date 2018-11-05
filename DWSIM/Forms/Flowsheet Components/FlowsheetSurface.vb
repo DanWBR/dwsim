@@ -13,6 +13,7 @@ Imports DWSIM.UnitOperations
 Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 
 Public Class FlowsheetSurface
+
     Inherits DockContent
 
     Private m_connecting As Boolean = False
@@ -443,8 +444,6 @@ Public Class FlowsheetSurface
                         EditorTooltips.Update(Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name), Flowsheet)
                     End If
 
-                    Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
-
                     Me.FlowsheetDesignSurface.Focus()
 
                 Else
@@ -453,6 +452,14 @@ Public Class FlowsheetSurface
 
                 End If
 
+            End If
+
+            If My.Settings.ObjectEditor = 0 Then
+                'new
+                FlowsheetDesignSurface_SelectionChanged_New(sender, New DrawingTools.SelectionChangedEventArgs(Me.FlowsheetDesignSurface.SelectedObject))
+            ElseIf My.Settings.ObjectEditor = 1 Then
+                'legacy
+                FlowsheetDesignSurface_SelectionChanged_Legacy(sender, New DrawingTools.SelectionChangedEventArgs(Me.FlowsheetDesignSurface.SelectedObject))
             End If
 
         ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
@@ -3732,17 +3739,7 @@ Public Class FlowsheetSurface
     End Sub
 
     Private Sub FlowsheetDesignSurface_SelectionChanged(ByVal sender As Object, ByVal e As DrawingTools.SelectionChangedEventArgs) Handles FlowsheetDesignSurface.SelectionChanged
-        If My.Settings.ObjectEditor = 0 Then
-            Flowsheet.FormProps.Hide()
-            'new
-            FlowsheetDesignSurface_SelectionChanged_New(sender, e)
-        ElseIf My.Settings.ObjectEditor = 1 Then
-            Flowsheet.FormProps.Show()
-            'legacy
-            FlowsheetDesignSurface_SelectionChanged_Legacy(sender, e)
-        Else
-            'cpui
-        End If
+
     End Sub
 
     Private Sub FlowsheetDesignSurface_SelectionChanged_Legacy(ByVal sender As Object, ByVal e As DrawingTools.SelectionChangedEventArgs)
