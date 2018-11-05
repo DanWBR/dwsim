@@ -157,7 +157,7 @@ Public Class FormReacKinetic
                             If row.Cells(4).Value = 1 Then
                                 eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
                             Else
-                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
                             End If
                         End If
                         hr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
@@ -165,7 +165,7 @@ Public Class FormReacKinetic
                         gr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
                     End If
                 Else
-                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
                 End If
             Next
             If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
@@ -178,9 +178,9 @@ Public Class FormReacKinetic
                             eq += fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
                         Else
                             If row.Cells(4).Value = 1 Then
-                                eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                                eq += fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
                             Else
-                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
                             End If
                         End If
                         hp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
