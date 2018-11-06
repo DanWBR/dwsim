@@ -298,33 +298,20 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub FormCompoundCreator_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        If Not forceclose Then
-            'CompoundCeator case file
-            If Not isDWSimSaved Then
-                Dim x = MessageBox.Show(DWSIM.App.GetLocalString("Desejasalvarasaltera") & Chr(13) & " " & Me.Text, DWSIM.App.GetLocalString("Fechando"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
-                If x = MsgBoxResult.Yes Then
-                    FormMain.SaveStudyDlg.FileName = mycase.Filename
-                    FormMain.SaveFileDialog()
-                ElseIf x = MsgBoxResult.Cancel Then
-                    e.Cancel = True
-                End If
-            End If
 
-            'User database
-            If Not isUserDBSaved Then
-                Dim y = MessageBox.Show(DWSIM.App.GetLocalString("DesejaSalvaroUserDB"), DWSIM.App.GetLocalString("Fechando") & " " & DWSIM.App.GetLocalString("BancodeDados"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
-                If y = MsgBoxResult.Yes Then
-                    SalvarNoBancoDeDadosToolStripMenuItem_Click(sender, e)
-                ElseIf y = MsgBoxResult.Cancel Then
-                    e.Cancel = True
-                End If
-            End If
+        Dim x = MessageBox.Show(DWSIM.App.GetLocalString("Desejasalvarasaltera"), DWSIM.App.GetLocalString("Fechando") & " " & Me.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
-            If Not e.Cancel Then
-                forceclose = True
-                Me.Close()
-            End If
+        If x = MsgBoxResult.Yes Then
+
+            FormMain.SaveFile(False)
+
+        ElseIf x = MsgBoxResult.Cancel Then
+
+            FormMain.CancelClosing = True
+            e.Cancel = True
+
         End If
+
     End Sub
 
     Sub WriteData()
@@ -707,6 +694,9 @@ Public Class FormCompoundCreator
             .cp.ID = TextBoxID.Text
             .cp.Name = TextBoxName.Text
             .cp.Comments = TextBoxComments.Text
+
+            .cp.OriginalDB = "User"
+            .cp.CurrentDB = "User"
 
             .cp.IsBlackOil = False
 
@@ -3181,7 +3171,9 @@ Public Class FormCompoundCreator
             mycase.CalcHF = False
             mycase.CalcGF = False
 
+            loaded = False
             WriteData()
+            loaded = True
 
         End If
 
@@ -3226,7 +3218,9 @@ Public Class FormCompoundCreator
             mycase.CalcHF = False
             mycase.CalcGF = False
 
+            loaded = False
             WriteData()
+            loaded = True
 
         End If
 
@@ -3263,7 +3257,9 @@ Public Class FormCompoundCreator
         f.BaseCompound = mycase.cp
         f.tbSearchString.Text = TextBoxCAS.Text
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            loaded = False
             WriteData()
+            loaded = True
         End If
     End Sub
 

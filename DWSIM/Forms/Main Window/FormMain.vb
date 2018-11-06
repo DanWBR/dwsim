@@ -2970,27 +2970,8 @@ Label_00CC:
                     End If
                 End If
             End If
-        ElseIf TypeOf Me.ActiveMdiChild Is FormCompoundCreator Then
-            If Me.SaveStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                SaveBackup(Me.SaveStudyDlg.FileName)
-                CType(Me.ActiveMdiChild, FormCompoundCreator).StoreData()
-                Dim objStreamWriter As New FileStream(Me.SaveStudyDlg.FileName, FileMode.OpenOrCreate)
-                Dim x As New BinaryFormatter
-                x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormCompoundCreator).mycase)
-                objStreamWriter.Close()
-                Me.filename = Me.SaveStudyDlg.FileName
-                Me.ActiveMdiChild.Text = Me.filename
-            End If
-        ElseIf TypeOf Me.ActiveMdiChild Is FormDataRegression Then
-            If Me.SaveRegStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                SaveBackup(Me.SaveRegStudyDlg.FileName)
-                Dim objStreamWriter As New FileStream(Me.SaveRegStudyDlg.FileName, FileMode.OpenOrCreate)
-                Dim x As New BinaryFormatter
-                x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormDataRegression).StoreCase())
-                objStreamWriter.Close()
-                Me.filename = Me.SaveRegStudyDlg.FileName
-                Me.ActiveMdiChild.Text = Me.filename
-            End If
+        Else
+            SaveFile(False)
         End If
 
     End Sub
