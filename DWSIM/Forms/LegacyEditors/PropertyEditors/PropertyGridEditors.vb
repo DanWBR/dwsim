@@ -5266,5 +5266,858 @@ Public Class PropertyGridEditors
 
     End Sub
 
+    Public Shared Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal uo As Reactor_Conversion)
+
+        Dim su = uo.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+        With pgrid
+
+            .PropertySort = PropertySort.Categorized
+            .ShowCustomProperties = True
+            .Item.Clear()
+
+            Dim ent, saida1, saida2, energ As String
+            If uo.GraphicObject.InputConnectors(0).IsAttached = True Then
+                ent = uo.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
+            Else
+                ent = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(0).IsAttached = True Then
+                saida1 = uo.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+            Else
+                saida1 = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(1).IsAttached = True Then
+                saida2 = uo.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
+            Else
+                saida2 = ""
+            End If
+            If uo.GraphicObject.InputConnectors(1).IsAttached = True Then
+                energ = uo.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            Else
+                energ = ""
+            End If
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeentrada"), ent, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Saidadevapor"), saida1, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Saidadelquido"), saida2, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
+            End With
+
+            If Not uo.FlowSheet.Options.ReactionSets.ContainsKey(uo.ReactionSetID) Then uo.ReactionSetID = "DefaultSet"
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem1"), uo.FlowSheet.Options.ReactionSets(uo.ReactionSetID).Nauo, False, DWSIM.App.GetLocalString("Paruotrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem1Help"), True)
+            With .Item(.Item.Count - 1)
+                .CustomEditor = New DWSIM.Editors.Reactors.UIReactionSetSelector
+                .IsDropdownResizable = True
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem2"), uo, "ReactorOperationMode", False, DWSIM.App.GetLocalString("Paruotrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem2Help"), True)
+            With .Item(.Item.Count - 1)
+                .IsBrowsable = False
+            End With
+
+            Dim valor As Double
+
+            If uo.ReactorOperationMode = OperationMode.OutletTemperature Then
+                valor = Format(Converter.ConvertFromSI(su.temperature, uo.OutletTemperature), uo.FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Paruotrosdeclculo2"), "", True)
+                With .Item(.Item.Count - 1)
+                    .Tag = New Object() {uo.FlowSheet.Options.NumberFormat, su.temperature, "T"}
+                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
+                End With
+            End If
+
+            valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Paruotrosdeclculo2"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .DefaultType = GetType(Nullable(Of Double))
+            End With
+
+            If uo.GraphicObject.Calculated Then
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                'CustomPropertyCollection
+                Dim m As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.Conversions
+                    valor = Format(dbl.Value * 100, uo.FlowSheet.Options.NumberFormat)
+                    m.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Nauo, valor, False, DWSIM.App.GetLocalString("ReacoesConversoes"), DWSIM.App.GetLocalString("RConvPGridItem4Help"), True)
+                    m.Item(m.Count - 1).IsReadOnly = True
+                    m.Item(m.Count - 1).DefaultValue = Nothing
+                    m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(DWSIM.App.GetLocalString("ReacoesConversoes"), m, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RConvPGridItem3Help"), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+            End If
+
+            BasePopulatePropertyGrid(pgrid, uo)
+
+            .ExpandAllGridItems()
+
+        End With
+
+    End Sub
+
+    Public Shared Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal uo As Reactor_CSTR)
+
+        Dim su = uo.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+        With pgrid
+
+            .PropertySort = PropertySort.Categorized
+            .ShowCustomProperties = True
+            .Item.Clear()
+
+            Dim ent, saida, energ As String
+            If uo.GraphicObject.InputConnectors(0).IsAttached = True Then
+                ent = uo.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
+            Else
+                ent = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(0).IsAttached = True Then
+                saida = uo.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+            Else
+                saida = ""
+            End If
+
+            If uo.GraphicObject.InputConnectors(1).IsAttached = True Then
+                energ = uo.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            Else
+                energ = ""
+            End If
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeentrada"), ent, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedesada"), saida, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
+            End With
+
+            If Not uo.FlowSheet.Options.ReactionSets.ContainsKey(uo.ReactionSetID) Then uo.ReactionSetID = "DefaultSet"
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem1"), uo.FlowSheet.Options.ReactionSets(uo.ReactionSetID).Name, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem1Help"), True)
+            With .Item(.Item.Count - 1)
+                .CustomEditor = New DWSIM.Editors.Reactors.UIReactionSetSelector
+                .IsDropdownResizable = True
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem2"), uo, "ReactorOperationMode", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem2Help"), True)
+            With .Item(.Item.Count - 1)
+                .IsBrowsable = False
+            End With
+
+            Dim valor As Double
+
+            If uo.ReactorOperationMode = OperationMode.OutletTemperature Then
+                valor = Format(Converter.ConvertFromSI(su.temperature, uo.OutletTemperature), uo.FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
+                With .Item(.Item.Count - 1)
+                    .Tag = New Object() {uo.FlowSheet.Options.NumberFormat, su.temperature, "T"}
+                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
+                End With
+            End If
+
+            If uo.ReactorOperationMode = OperationMode.Isothermic Then
+                valor = Format(Converter.ConvertFromSI(su.temperature, uo.IsothermalTemperature), uo.FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("RSCTRIsothermalTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RCSTRPGridItem1Help"), True)
+            End If
+
+            valor = Format(Converter.ConvertFromSI(su.mass, uo.CatalystAmount), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("CSTRCatalystAmount"), su.mass), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("CSTRCatalystAmountDesc"), True)
+
+            valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .DefaultType = GetType(Nullable(Of Double))
+            End With
+
+            valor = Format(Converter.ConvertFromSI(su.volume, uo.Volume), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("RCSTRPGridItem1"), su.volume), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RCSTRPGridItem1Help"), True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .DefaultType = GetType(Nullable(Of Double))
+            End With
+
+            If uo.GraphicObject.Calculated Then
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("TKResTime"), su.time), Format(Converter.ConvertFromSI(su.time, uo.ResidenceTimeL), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("TKResTime"), True)
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                'CustomPropertyCollection
+                Dim m As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.ComponentConversions
+                    valor = Format(dbl.Value * 100, uo.FlowSheet.Options.NumberFormat)
+                    If dbl.Value >= 0 Then
+                        m.Add(dbl.Key, valor, False, DWSIM.App.GetLocalString("ComponentesConversoes"), DWSIM.App.GetLocalString("RCSTRPGridItem3Help"), True)
+                        m.Item(m.Count - 1).IsReadOnly = True
+                        m.Item(m.Count - 1).DefaultValue = Nothing
+                        m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                    End If
+                Next
+
+                .Item.Add(DWSIM.App.GetLocalString("ComponentesConversoes") & " (%)", m, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RCSTRPGridItem2Help"), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                'CustomPropertyCollection
+                Dim m2 As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.RxiT
+                    m2.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, dbl.Value, False, DWSIM.App.GetLocalString("ReactionExtents"), DWSIM.App.GetLocalString(""), True)
+                    m2.Item(m2.Count - 1).IsReadOnly = True
+                    m2.Item(m2.Count - 1).DefaultValue = Nothing
+                    m2.Item(m2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("ReactionExtents"), su.molarflow), m2, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString(""), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                'CustomPropertyCollection
+                Dim m3 As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.RxiT
+                    m3.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, dbl.Value / uo.Volume, False, DWSIM.App.GetLocalString("ReactionExtents"), DWSIM.App.GetLocalString(""), True)
+                    m3.Item(m3.Count - 1).IsReadOnly = True
+                    m3.Item(m3.Count - 1).DefaultValue = Nothing
+                    m3.Item(m3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("ReactionRates"), su.reac_rate), m3, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString(""), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                'CustomPropertyCollection
+                Dim m4 As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.DHRi
+                    m4.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, Converter.ConvertFromSI(su.heatflow, dbl.Value), False, DWSIM.App.GetLocalString("ReactionHeats"), DWSIM.App.GetLocalString(""), True)
+                    m4.Item(m4.Count - 1).IsReadOnly = True
+                    m4.Item(m4.Count - 1).DefaultValue = Nothing
+                    m4.Item(m4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("ReactionHeats"), su.heatflow), m4, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString(""), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+            End If
+
+            BasePopulatePropertyGrid(pgrid, uo)
+
+            .ExpandAllGridItems()
+
+        End With
+
+    End Sub
+
+    Public Shared Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal uo As Reactor_Equilibrium)
+
+        Dim su = uo.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+        With pgrid
+
+            .PropertySort = PropertySort.Categorized
+            .ShowCustomProperties = True
+            .Item.Clear()
+
+            Dim ent, saida1, saida2, energ As String
+            If uo.GraphicObject.InputConnectors(0).IsAttached = True Then
+                ent = uo.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
+            Else
+                ent = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(0).IsAttached = True Then
+                saida1 = uo.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+            Else
+                saida1 = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(1).IsAttached = True Then
+                saida2 = uo.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
+            Else
+                saida2 = ""
+            End If
+            If uo.GraphicObject.InputConnectors(1).IsAttached = True Then
+                energ = uo.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            Else
+                energ = ""
+            End If
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeentrada"), ent, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Saidadevapor"), saida1, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Saidadelquido"), saida2, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
+            End With
+
+            If Not uo.FlowSheet.Options.ReactionSets.ContainsKey(uo.ReactionSetID) Then uo.ReactionSetID = "DefaultSet"
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem1"), uo.FlowSheet.Options.ReactionSets(uo.ReactionSetID).Name, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem1Help"), True)
+            With .Item(.Item.Count - 1)
+                .CustomEditor = New DWSIM.Editors.Reactors.UIReactionSetSelector
+                .IsDropdownResizable = True
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem2"), uo, "ReactorOperationMode", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem2Help"), True)
+            With .Item(.Item.Count - 1)
+                .IsBrowsable = False
+            End With
+
+            Dim valor As Double
+
+            If uo.ReactorOperationMode = OperationMode.OutletTemperature Then
+                valor = Format(Converter.ConvertFromSI(su.temperature, uo.OutletTemperature), uo.FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
+                With .Item(.Item.Count - 1)
+                    .Tag = New Object() {uo.FlowSheet.Options.NumberFormat, su.temperature, "T"}
+                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
+                End With
+            End If
+
+            valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .DefaultType = GetType(Nullable(Of Double))
+            End With
+
+            If uo.GraphicObject.Calculated Then
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("RGInitialG"), su.heatflow), Format(Converter.ConvertFromSI(su.molar_enthalpy, uo.InitialGibbsEnergy), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RGInitialG_description"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("RGFinalG"), su.heatflow), Format(Converter.ConvertFromSI(su.molar_enthalpy, uo.FinalGibbsEnergy), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RGFinalG_description"), True)
+
+                'CustomPropertyCollection
+                Dim m As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.ComponentConversions
+                    valor = Format(dbl.Value * 100, uo.FlowSheet.Options.NumberFormat)
+                    m.Add((dbl.Key), valor, False, DWSIM.App.GetLocalString("ComponentesConversoes"), DWSIM.App.GetLocalString("RCSTRPGridItem3Help"), True)
+                    m.Item(m.Count - 1).IsReadOnly = True
+                    m.Item(m.Count - 1).DefaultValue = Nothing
+                    m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(DWSIM.App.GetLocalString("ComponentesConversoes"), m, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RCSTRPGridItem2Help"), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                'CustomPropertyCollection
+                Dim m2 As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.ReactionExtents
+                    valor = Format(dbl.Value, uo.FlowSheet.Options.NumberFormat)
+                    m2.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, valor, False, DWSIM.App.GetLocalString("CoordenadasReacoes"), DWSIM.App.GetLocalString("REqPGridItem1Help"), True)
+                    m2.Item(m2.Count - 1).IsReadOnly = True
+                    m2.Item(m2.Count - 1).DefaultValue = Nothing
+                    m2.Item(m2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(DWSIM.App.GetLocalString("CoordenadasReacoes"), m2, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("REqPGridItem2Help"), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+            End If
+
+            BasePopulatePropertyGrid(pgrid, uo)
+
+            .ExpandAllGridItems()
+
+        End With
+
+    End Sub
+
+    Public Shared Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal uo As Reactor_PFR)
+
+        Dim su = uo.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+        With pgrid
+
+            .PropertySort = PropertySort.Categorized
+            .ShowCustomProperties = True
+            .Item.Clear()
+
+            Dim ent, saida, energ As String
+            If uo.GraphicObject.InputConnectors(0).IsAttached = True Then
+                ent = uo.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
+            Else
+                ent = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(0).IsAttached = True Then
+                saida = uo.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+            Else
+                saida = ""
+            End If
+
+            If uo.GraphicObject.InputConnectors(1).IsAttached = True Then
+                energ = uo.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            Else
+                energ = ""
+            End If
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeentrada"), ent, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedesada"), saida, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
+            End With
+
+            If Not uo.FlowSheet.Options.ReactionSets.ContainsKey(uo.ReactionSetID) Then uo.ReactionSetID = "DefaultSet"
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem1"), uo.FlowSheet.Options.ReactionSets(uo.ReactionSetID).Name, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem1Help"), True)
+            With .Item(.Item.Count - 1)
+                .CustomEditor = New DWSIM.Editors.Reactors.UIReactionSetSelector
+                .IsDropdownResizable = True
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem2"), uo, "ReactorOperationMode", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem2Help"), True)
+            With .Item(.Item.Count - 1)
+                .IsBrowsable = False
+            End With
+
+            Dim valor As Double
+
+            If uo.ReactorOperationMode = OperationMode.OutletTemperature Then
+                valor = Format(Converter.ConvertFromSI(su.temperature, uo.OutletTemperature), uo.FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
+                With .Item(.Item.Count - 1)
+                    .Tag = New Object() {uo.FlowSheet.Options.NumberFormat, su.temperature, "T"}
+                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
+                End With
+            End If
+
+            valor = Format(Converter.ConvertFromSI(su.volume, uo.Volume), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("RCSTRPGridItem1"), su.volume), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RCSTRPGridItem1Help"), True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .DefaultType = GetType(Nullable(Of Double))
+            End With
+
+            valor = Format(Converter.ConvertFromSI(su.distance, uo.Length), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("PFRLength"), su.distance), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRLengthDesc"), True)
+
+            valor = Format(Converter.ConvertFromSI(su.density, uo.CatalystLoading), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("PFRCatalystLoading"), su.density), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRCatalystLoadingDesc"), True)
+
+            valor = Format(Converter.ConvertFromSI(su.diameter, uo.CatalystParticleDiameter), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("PFRCatalystParticleDiameter"), su.diameter), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRCatalystParticleDiameterDesc"), True)
+
+            .Item.Add(DWSIM.App.GetLocalString("PFRCatalystVoidFraction"), uo, "CatalystVoidFraction", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRCatalystVoidFractionDesc"), True)
+
+            If uo.GraphicObject.Calculated Then
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("TKResTime"), su.time), Format(Converter.ConvertFromSI(su.time, uo.ResidenceTime), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("TKResTime"), True)
+
+                valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                'CustomPropertyCollection
+                Dim m As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.ComponentConversions
+                    valor = Format(dbl.Value * 100, uo.FlowSheet.Options.NumberFormat)
+                    If dbl.Value >= 0 Then
+                        m.Add((dbl.Key), valor, False, DWSIM.App.GetLocalString("ComponentesConversoes"), DWSIM.App.GetLocalString("RCSTRPGridItem3Help"), True)
+                        m.Item(m.Count - 1).IsReadOnly = True
+                        m.Item(m.Count - 1).DefaultValue = Nothing
+                        m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                    End If
+                Next
+
+                .Item.Add(DWSIM.App.GetLocalString("ComponentesConversoes") & " (%)", m, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RCSTRPGridItem2Help"), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                'CustomPropertyCollection
+                Dim m2 As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.RxiT
+                    Dim value = dbl.Value
+                    m2.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, value, False, DWSIM.App.GetLocalString("ReactionExtents"), DWSIM.App.GetLocalString(""), True)
+                    m2.Item(m2.Count - 1).IsReadOnly = True
+                    m2.Item(m2.Count - 1).DefaultValue = Nothing
+                    m2.Item(m2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("ReactionExtents"), su.molarflow), m2, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString(""), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                'CustomPropertyCollection
+                Dim m3 As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.RxiT
+                    m3.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, dbl.Value / uo.Volume, False, DWSIM.App.GetLocalString("ReactionExtents"), DWSIM.App.GetLocalString(""), True)
+                    m3.Item(m3.Count - 1).IsReadOnly = True
+                    m3.Item(m3.Count - 1).DefaultValue = Nothing
+                    m3.Item(m3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("ReactionRates"), su.reac_rate), m3, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString(""), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                'CustomPropertyCollection
+                Dim m4 As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.DHRi
+                    m4.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, Converter.ConvertFromSI(su.heatflow, dbl.Value), False, DWSIM.App.GetLocalString("ReactionHeats"), DWSIM.App.GetLocalString(""), True)
+                    m4.Item(m4.Count - 1).IsReadOnly = True
+                    m4.Item(m4.Count - 1).DefaultValue = Nothing
+                    m4.Item(m4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("ReactionHeats"), su.heatflow), m4, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString(""), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                .Item.Add(DWSIM.App.GetLocalString("RPFRPGridItem2"), uo, "points", False, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RPFRPGridItem2Help"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultType = GetType(Global.DWSIM.DWSIM.Editors.PipeEditor.ThermalEditorDefinitions)
+                    .CustomEditor = New DWSIM.Editors.Results.UIFormGraphPFR
+                End With
+
+            End If
+
+            BasePopulatePropertyGrid(pgrid, uo)
+
+            .ExpandAllGridItems()
+
+        End With
+
+    End Sub
+
+    Public Shared Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal uo As Reactor_Gibbs)
+
+        Dim su = uo.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+        With pgrid
+
+            .PropertySort = PropertySort.Categorized
+            .ShowCustomProperties = True
+            .Item.Clear()
+
+            Dim ent, saida1, saida2, energ As String
+            If uo.GraphicObject.InputConnectors(0).IsAttached = True Then
+                ent = uo.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
+            Else
+                ent = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(0).IsAttached = True Then
+                saida1 = uo.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+            Else
+                saida1 = ""
+            End If
+            If uo.GraphicObject.OutputConnectors(1).IsAttached = True Then
+                saida2 = uo.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
+            Else
+                saida2 = ""
+            End If
+            If uo.GraphicObject.InputConnectors(1).IsAttached = True Then
+                energ = uo.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            Else
+                energ = ""
+            End If
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeentrada"), ent, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Saidadevapor"), saida1, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Saidadelquido"), saida2, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
+            End With
+
+            .Item.Add(DWSIM.App.GetLocalString("RGCalcMode"), uo, "SolvMethod", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RGCalcMode_description"), True)
+
+            If uo.SolvMethod = Reactor_Gibbs.SolvingMethod.DirectMinimization Then
+
+                .Item.Add(DWSIM.App.GetLocalString("RGComponents"), uo, "ComponentIDs", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RGComponents_description"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .IsBrowsable = False
+                    .CustomEditor = New DWSIM.Editors.Reactors.UIGibbsComponentSelector
+                End With
+
+                .Item.Add(DWSIM.App.GetLocalString("RGInitialEstimates"), uo, "InitialEstimates", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RGInitialEstimates_description"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .IsBrowsable = False
+                    .CustomEditor = New DWSIM.Editors.Reactors.UIGibbsInitialEstimatesEditor
+                End With
+
+                .Item.Add(DWSIM.App.GetLocalString("RGElementMatrix"), uo, "ElementMatrix", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RGElementMatrix_description"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .IsBrowsable = False
+                    .CustomEditor = New DWSIM.Editors.Reactors.UIElementMatrixEditor
+                End With
+
+            Else
+
+                If Not uo.FlowSheet.Options.ReactionSets.ContainsKey(uo.ReactionSetID) Then uo.ReactionSetID = "DefaultSet"
+                .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem1"), uo.FlowSheet.Options.ReactionSets(uo.ReactionSetID).Name, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem1Help"), True)
+                With .Item(.Item.Count - 1)
+                    .CustomEditor = New DWSIM.Editors.Reactors.UIReactionSetSelector
+                    .IsDropdownResizable = True
+                End With
+
+            End If
+
+            .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem2"), uo, "ReactorOperationMode", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem2Help"), True)
+            With .Item(.Item.Count - 1)
+                .IsBrowsable = False
+            End With
+
+            Dim valor As Double
+
+            If uo.ReactorOperationMode = OperationMode.OutletTemperature Then
+                valor = Format(Converter.ConvertFromSI(su.temperature, uo.OutletTemperature), uo.FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
+                With .Item(.Item.Count - 1)
+                    .Tag = New Object() {uo.FlowSheet.Options.NumberFormat, su.temperature, "T"}
+                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
+                End With
+            End If
+
+            valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
+            With .Item(.Item.Count - 1)
+                .DefaultValue = Nothing
+                .DefaultType = GetType(Nullable(Of Double))
+            End With
+
+            If uo.GraphicObject.Calculated Then
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                With .Item(.Item.Count - 1)
+                    .DefaultValue = Nothing
+                    .DefaultType = GetType(Nullable(Of Double))
+                End With
+
+                .Item.Add(FT(DWSIM.App.GetLocalString("RGInitialG"), su.heatflow), Format(Converter.ConvertFromSI(su.molar_enthalpy, uo.InitialGibbsEnergy), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RGInitialG_description"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("RGFinalG"), su.heatflow), Format(Converter.ConvertFromSI(su.molar_enthalpy, uo.FinalGibbsEnergy), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RGFinalG_description"), True)
+
+                'CustomPropertyCollection
+                Dim m As New PropertyGridEx.CustomPropertyCollection()
+                For Each dbl As KeyValuePair(Of String, Double) In uo.ComponentConversions
+                    valor = Format(dbl.Value * 100, uo.FlowSheet.Options.NumberFormat)
+                    m.Add((dbl.Key), valor, False, DWSIM.App.GetLocalString("ComponentesConversoes"), DWSIM.App.GetLocalString("RCSTRPGridItem3Help"), True)
+                    m.Item(m.Count - 1).IsReadOnly = True
+                    m.Item(m.Count - 1).DefaultValue = Nothing
+                    m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                Next
+
+                .Item.Add(DWSIM.App.GetLocalString("ComponentesConversoes"), m, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RCSTRPGridItem2Help"), True)
+                With .Item(.Item.Count - 1)
+                    .IsReadOnly = True
+                    .IsBrowsable = True
+                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    .CustomEditor = New System.Drawing.Design.UITypeEditor
+                End With
+
+                If uo.SolvMethod = Reactor_Gibbs.SolvingMethod.DirectMinimization Then
+
+                    .Item.Add(DWSIM.App.GetLocalString("RGElementBalance"), uo.ElementBalance, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RGElementBalance_description"), True)
+
+                Else
+
+                    If Not uo.ReactionExtents Is Nothing Then
+
+                        'CustomPropertyCollection
+                        Dim m2 As New PropertyGridEx.CustomPropertyCollection()
+
+                        For Each dbl As KeyValuePair(Of String, Double) In uo.ReactionExtents
+                            valor = Format(dbl.Value, uo.FlowSheet.Options.NumberFormat)
+                            m2.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, valor, False, DWSIM.App.GetLocalString("CoordenadasReacoes"), DWSIM.App.GetLocalString("REqPGridItem1Help"), True)
+                            m2.Item(m2.Count - 1).IsReadOnly = True
+                            m2.Item(m2.Count - 1).DefaultValue = Nothing
+                            m2.Item(m2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+
+                        .Item.Add(DWSIM.App.GetLocalString("CoordenadasReacoes"), m2, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("REqPGridItem2Help"), True)
+                        With .Item(.Item.Count - 1)
+                            .IsReadOnly = True
+                            .IsBrowsable = True
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        End With
+
+                    End If
+
+                End If
+
+            End If
+
+            BasePopulatePropertyGrid(pgrid, uo)
+
+            .ExpandAllGridItems()
+
+        End With
+
+    End Sub
 
 End Class

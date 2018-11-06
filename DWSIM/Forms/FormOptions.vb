@@ -659,6 +659,7 @@ Public Class FormOptions
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEditorStyle.SelectedIndexChanged
         My.Settings.ObjectEditor = cbEditorStyle.SelectedIndex
+        GroupBox1.Enabled = If(cbEditorStyle.SelectedIndex = 0, True, False)
     End Sub
 
 End Class
