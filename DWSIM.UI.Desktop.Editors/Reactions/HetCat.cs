@@ -137,14 +137,14 @@ namespace DWSIM.UI.Desktop.Editors
 
             switch (rx.ReactionPhase)
             {
+                case Interfaces.Enums.PhaseName.Mixture:
+                    rxphaseselector.SelectedIndex = 0;
+                    break;
                 case Interfaces.Enums.PhaseName.Vapor:
-                    rxphaseselector.SelectedIndex = (0);
+                    rxphaseselector.SelectedIndex = 1;
                     break;
                 case Interfaces.Enums.PhaseName.Liquid:
-                    rxphaseselector.SelectedIndex = (1);
-                    break;
-                case Interfaces.Enums.PhaseName.Mixture:
-                    rxphaseselector.SelectedIndex = (2);
+                    rxphaseselector.SelectedIndex = 2;
                     break;
             }
 
@@ -153,13 +153,13 @@ namespace DWSIM.UI.Desktop.Editors
                 switch (rxphaseselector.SelectedIndex)
                 {
                     case 0:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Vapor;
+                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Mixture;
                         break;
                     case 1:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Liquid;
+                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Vapor;
                         break;
                     case 2:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Mixture;
+                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Liquid;
                         break;
                 }
             };
@@ -171,25 +171,25 @@ namespace DWSIM.UI.Desktop.Editors
             switch (rx.ReactionBasis)
             {
                 case Interfaces.Enums.ReactionBasis.Activity:
-                    rxphaseselector.SelectedIndex = (0);
+                    rxbasisselector.SelectedIndex = (0);
                     break;
                 case Interfaces.Enums.ReactionBasis.Fugacity:
-                    rxphaseselector.SelectedIndex = (1);
+                    rxbasisselector.SelectedIndex = (1);
                     break;
                 case Interfaces.Enums.ReactionBasis.MassConc:
-                    rxphaseselector.SelectedIndex = (2);
+                    rxbasisselector.SelectedIndex = (2);
                     break;
                 case Interfaces.Enums.ReactionBasis.MassFrac:
-                    rxphaseselector.SelectedIndex = (3);
+                    rxbasisselector.SelectedIndex = (3);
                     break;
                 case Interfaces.Enums.ReactionBasis.MolarConc:
-                    rxphaseselector.SelectedIndex = (4);
+                    rxbasisselector.SelectedIndex = (4);
                     break;
                 case Interfaces.Enums.ReactionBasis.MolarFrac:
-                    rxphaseselector.SelectedIndex = (5);
+                    rxbasisselector.SelectedIndex = (5);
                     break;
                 case Interfaces.Enums.ReactionBasis.PartialPress:
-                    rxphaseselector.SelectedIndex = (6);
+                    rxbasisselector.SelectedIndex = (6);
                     break;
             }
 

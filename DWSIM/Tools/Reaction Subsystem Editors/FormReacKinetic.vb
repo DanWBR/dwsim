@@ -329,4 +329,18 @@ Public Class FormReacKinetic
 
     End Sub
 
+    Private Sub KryptonButton2_Click(sender As Object, e As EventArgs) Handles KryptonButton2.Click
+
+        Dim sum As Double = 0.0
+        For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
+            If row.Cells(2).Value = True AndAlso (row.Cells(4).Value Is Nothing OrElse row.Cells(4).Value.ToString.ToDoubleFromCurrent = 0.0) Then
+                If tbStoich.Text.IsValidDouble Then
+                    row.Cells(4).Value = (-tbStoich.Text.ToDoubleFromCurrent / fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight).ToString(nf)
+                    Exit For
+                End If
+            End If
+        Next
+
+    End Sub
+
 End Class

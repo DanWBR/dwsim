@@ -135,13 +135,13 @@ namespace DWSIM.UI.Desktop.Editors
 
             switch (rx.ReactionPhase)
             {
-                case Interfaces.Enums.PhaseName.Vapor:
+                case Interfaces.Enums.PhaseName.Mixture:
                     rxphaseselector.SelectedIndex = (0);
                     break;
-                case Interfaces.Enums.PhaseName.Liquid:
+                case Interfaces.Enums.PhaseName.Vapor:
                     rxphaseselector.SelectedIndex = (1);
                     break;
-                case Interfaces.Enums.PhaseName.Mixture:
+                case Interfaces.Enums.PhaseName.Liquid:
                     rxphaseselector.SelectedIndex = (2);
                     break;
             }
@@ -151,13 +151,13 @@ namespace DWSIM.UI.Desktop.Editors
                 switch (rxphaseselector.SelectedIndex)
                 {
                     case 0:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Vapor;
+                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Mixture;
                         break;
                     case 1:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Liquid;
+                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Vapor;
                         break;
                     case 2:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Mixture;
+                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Liquid;
                         break;
                 }
             };

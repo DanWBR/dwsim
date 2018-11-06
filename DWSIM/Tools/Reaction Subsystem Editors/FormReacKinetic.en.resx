@@ -223,6 +223,12 @@
   <data name="cbBase.Items6" xml:space="preserve">
     <value>Partial Pressures</value>
   </data>
+  <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="KryptonLabel6.Text" xml:space="preserve">
+    <value>Phase</value>
+  </data>
   <data name="tbPhase.Items1" xml:space="preserve">
     <value>Liquid</value>
   </data>

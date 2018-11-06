@@ -92,20 +92,6 @@ Public Class FormReacConv
 
     End Sub
 
-    Private Sub KryptonContextMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-        'Dim kmi As ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem = CType(sender, ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem)
-
-        'Dim sp As Integer = kmi.Text.IndexOf("(")
-
-        'Dim substr As String = kmi.Text.Substring(sp + 1, kmi.Text.Length - sp - 2)
-
-        'tbExp.Text += substr
-        'tbExp.SelectionStart = tbExp.Text.Length
-        'tbExp.ScrollToCaret()
-
-    End Sub
-
     Private Sub KryptonDataGridView1_CellValidated(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellValueChanged
 
         If e.ColumnIndex = 3 Then
@@ -272,6 +258,20 @@ Public Class FormReacConv
 
     Private Sub KryptonButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton3.Click
         Me.Close()
+    End Sub
+
+    Private Sub KryptonButton2_Click(sender As Object, e As EventArgs) Handles KryptonButton2.Click
+
+        Dim sum As Double = 0.0
+        For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
+            If row.Cells(2).Value = True AndAlso (row.Cells(4).Value Is Nothing OrElse row.Cells(4).Value.ToString.ToDoubleFromCurrent = 0.0) Then
+                If tbStoich.Text.IsValidDouble Then
+                    row.Cells(4).Value = (-tbStoich.Text.ToDoubleFromCurrent / fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight).ToString(nf)
+                    Exit For
+                End If
+            End If
+        Next
+
     End Sub
 
 End Class

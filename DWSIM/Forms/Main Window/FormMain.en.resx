@@ -515,7 +515,7 @@
     <value>1092, 25</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>Steady-State Simulation (XML) (*.dwxml)|*.dwxml|Steady-State Simulation (Compressed XML) (*.dwxmz)|*.dwxmz|Steady-State Simulation (Android/iOS) (*.xml)|*.xml|Compound Creator Study (*.dwcsd)|*.dwcsd|Data Regression Study (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Study (*.dwruf)|*.dwruf|All DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf;*.xml</value>
+    <value>Steady-State Simulation (XML)|*.dwxml|Steady-State Simulation (Compressed XML)|*.dwxmz|Steady-State Simulation (Android/iOS)|*.xml|Compound Creator Study|*.dwcsd;*.dwcsd2|Data Regression Study|*.dwrsd;*.dwrsd2|UNIFAC IPs Regression Study|*.dwruf|All DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwcsd2;*.dwrsd;*.dwrsd2;*.dwruf;*.xml</value>
   </data>
   <data name="OpenFileDialog1.Title" xml:space="preserve">
     <value>Open existing simulation</value>
@@ -2089,15 +2089,11 @@
         AAA=
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
   <data name="SaveStudyDlg.Filter" xml:space="preserve">
-    <value>Compound Creator Study|*.dwcsd</value>
+    <value>Compound Creator Study|*.dwcsd2</value>
   </data>
   <data name="SaveRegStudyDlg.Filter" xml:space="preserve">
-    <value>Data Regression Study|*.dwrsd</value>
+    <value>Data Regression Study|*.dwrsd2</value>
   </data>
   <data name="SaveRegStudyDlg.Title" xml:space="preserve">
     <value>Save Study</value>
