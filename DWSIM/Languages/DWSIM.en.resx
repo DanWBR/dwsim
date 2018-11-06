@@ -822,7 +822,7 @@
   <data name="Corrente1" xml:space="preserve">
     <value>Stream</value>
   </data>
-  <data name="CorrentedeEnergia" xml:space="preserve">
+  <data name="Correntedeenergia" xml:space="preserve">
     <value>Energy Stream</value>
   </data>
   <data name="Correntedeentrada" xml:space="preserve">
@@ -5517,8 +5517,6 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Rugosity</value>
   </data>
   <data name="ThermCond" xml:space="preserve">
-    <value>Thermal Cond.</value>
-  <data name="FracaoMolar3" xml:space="preserve">
     <value>Molar Fraction - </value>
   </data>
   <data name="Fraesdascorrentes21" xml:space="preserve">
@@ -5535,7 +5533,6 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="FraoMolar3" xml:space="preserve">
     <value>Molar Fraction -</value>
-  </data>
   </data>
   <data name="Fraomolardafase" xml:space="preserve">
     <value>Phase Molar Fraction</value>
@@ -5602,5 +5599,8 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="PP_IGNORE_MISSING_IPS" xml:space="preserve">
     <value>Ignore Missing Interaction Parameters (0 = Disabled, 1 = Enabled)</value>
+  </data>
+  <data name="Headspace" xml:space="preserve">
+    <value>Headspace</value>
   </data>
 </root>

@@ -762,7 +762,7 @@
   <data name="Corrente1" xml:space="preserve">
     <value>Corrente</value>
   </data>
-  <data name="CorrentedeEnergia" xml:space="preserve">
+  <data name="Correntedeenergia" xml:space="preserve">
     <value>Corrente de Energia</value>
   </data>
   <data name="Correntedeentrada" xml:space="preserve">
@@ -5543,5 +5543,8 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="PP_IGNORE_MISSING_IPS" xml:space="preserve">
     <value>Ignorar ausência de parâmetros de interação binária (0 = Desativado, 1 = Ativado)</value>
+  </data>
+  <data name="Headspace" xml:space="preserve">
+    <value>Espaço livre</value>
   </data>
 </root>

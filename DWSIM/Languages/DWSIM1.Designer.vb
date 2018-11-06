@@ -2812,9 +2812,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Corrente de Energia.
         '''</summary>
-        Friend Shared ReadOnly Property CorrentedeEnergia() As String
+        Friend Shared ReadOnly Property Correntedeenergia() As String
             Get
-                Return ResourceManager.GetString("CorrentedeEnergia", resourceCulture)
+                Return ResourceManager.GetString("Correntedeenergia", resourceCulture)
             End Get
         End Property
         
@@ -7512,6 +7512,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property HeaderText() As String
             Get
                 Return ResourceManager.GetString("HeaderText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Espaço livre.
+        '''</summary>
+        Friend Shared ReadOnly Property Headspace() As String
+            Get
+                Return ResourceManager.GetString("Headspace", resourceCulture)
             End Get
         End Property
         

@@ -5480,10 +5480,9 @@ Public Class PropertyGridEditors
 
             valor = Format(Converter.ConvertFromSI(su.volume, uo.Volume), uo.FlowSheet.Options.NumberFormat)
             .Item.Add(FT(DWSIM.App.GetLocalString("RCSTRPGridItem1"), su.volume), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RCSTRPGridItem1Help"), True)
-            With .Item(.Item.Count - 1)
-                .DefaultValue = Nothing
-                .DefaultType = GetType(Nullable(Of Double))
-            End With
+
+            valor = Format(Converter.ConvertFromSI(su.volume, uo.Headspace), uo.FlowSheet.Options.NumberFormat)
+            .Item.Add(FT(DWSIM.App.GetLocalString("Headspace"), su.volume), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
 
             If uo.GraphicObject.Calculated Then
 

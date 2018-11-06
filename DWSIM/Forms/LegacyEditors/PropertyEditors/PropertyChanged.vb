@@ -2918,6 +2918,15 @@ Public Class PropertyChanged
                         bb.Volume = Converter.ConvertToSI(Flowsheet.Options.SelectedUnitSystem.volume, e.ChangedItem.Value)
                     End If
 
+                ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Headspace")) Then
+
+                    If Convert.ToDouble(e.ChangedItem.Value) < 0.0# Then Throw New InvalidCastException(DWSIM.App.GetLocalString("Ovalorinformadonovli"))
+                    If units <> "" Then
+                        bb.Headspace = Converter.ConvertToSI(units, value)
+                    Else
+                        bb.Headspace = Converter.ConvertToSI(Flowsheet.Options.SelectedUnitSystem.volume, e.ChangedItem.Value)
+                    End If
+
                 End If
 
                 If Settings.CalculatorActivated Then
