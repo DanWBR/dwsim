@@ -58,7 +58,7 @@ namespace DWSIM.UI.Forms
 
         public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActSimultAdjustSolver, ActInspector;
 
-        private double sf = s.UIScalingFactor; 
+        private double sf = s.UIScalingFactor;
 
         void InitializeComponent()
         {
@@ -221,7 +221,7 @@ namespace DWSIM.UI.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString(),"Error saving file", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                    MessageBox.Show(ex.ToString(), "Error saving file", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
                 }
             };
 
@@ -652,20 +652,47 @@ namespace DWSIM.UI.Forms
             {
                 if ((Boolean)(obj.GetType().GetProperty("Visible").GetValue(obj)))
                 {
-                    var pitem = new FlowsheetObjectPanelItem();
-                    var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
-                    pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
-                    pitem.txtName.Text = obj.GetDisplayName();
-                    pitem.txtDescription.Text = obj.GetDisplayDescription();
-                    pitem.MouseDown += (sender, e) =>
+                    if (obj.GetDisplayName().Contains("Stream"))
                     {
-                        var dobj = new DataObject();
-                        dobj.Image = pitem.imgIcon.Image;
-                        dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                        pitem.DoDragDrop(dobj, DragEffects.All);
-                        e.Handled = true;
-                    };
-                    objcontainer.Items.Add(pitem);
+                        var pitem = new FlowsheetObjectPanelItem();
+                        var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
+                        pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
+                        pitem.txtName.Text = obj.GetDisplayName();
+                        pitem.txtDescription.Text = obj.GetDisplayDescription();
+                        pitem.MouseDown += (sender, e) =>
+                        {
+                            var dobj = new DataObject();
+                            dobj.Image = pitem.imgIcon.Image;
+                            dobj.SetString(obj.GetDisplayName(), "ObjectName");
+                            pitem.DoDragDrop(dobj, DragEffects.All);
+                            e.Handled = true;
+                        };
+                        objcontainer.Items.Add(pitem);
+                    }
+                }
+            }
+
+            foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
+            {
+                if ((Boolean)(obj.GetType().GetProperty("Visible").GetValue(obj)))
+                {
+                    if (!obj.GetDisplayName().Contains("Stream"))
+                    {
+                        var pitem = new FlowsheetObjectPanelItem();
+                        var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
+                        pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
+                        pitem.txtName.Text = obj.GetDisplayName();
+                        pitem.txtDescription.Text = obj.GetDisplayDescription();
+                        pitem.MouseDown += (sender, e) =>
+                        {
+                            var dobj = new DataObject();
+                            dobj.Image = pitem.imgIcon.Image;
+                            dobj.SetString(obj.GetDisplayName(), "ObjectName");
+                            pitem.DoDragDrop(dobj, DragEffects.All);
+                            e.Handled = true;
+                        };
+                        objcontainer.Items.Add(pitem);
+                    }
                 }
             }
 
@@ -1020,7 +1047,7 @@ namespace DWSIM.UI.Forms
         Eto.Forms.Container SetupLogWindow()
         {
 
-            var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf*20) };
+            var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
             label.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var outtxt = new RichTextArea();
@@ -1042,7 +1069,7 @@ namespace DWSIM.UI.Forms
             };
 
             ctxmenu0.Items.Add(menuitem0);
-            
+
             outtxt.MouseUp += (sender, e) =>
             {
                 if (e.Buttons == MouseButtons.Alternate)
@@ -1059,7 +1086,7 @@ namespace DWSIM.UI.Forms
                     try
                     {
                         outtxt.Append(item, true);
-                        outtxt.Selection = new Range<int>(outtxt.Text.Length - item.Length, outtxt.Text.Length -1);
+                        outtxt.Selection = new Range<int>(outtxt.Text.Length - item.Length, outtxt.Text.Length - 1);
                         switch (mtype)
                         {
                             case Interfaces.IFlowsheet.MessageType.Information:
