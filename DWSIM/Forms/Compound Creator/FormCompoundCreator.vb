@@ -664,6 +664,8 @@ Public Class FormCompoundCreator
             If .RegressOKCpS Then tbStatusSolidCp.Text = "OK" Else tbStatusSolidCp.Text = .ErrorMsgCpS
             If .RegressOKLTC Then tbStatusTCLiquid.Text = "OK" Else tbStatusTCLiquid.Text = .ErrorMsgLTC
 
+            CheckDataStatus()
+
         End With
 
     End Sub
@@ -914,7 +916,6 @@ Public Class FormCompoundCreator
             Next
 
         End With
-
 
     End Sub
 
@@ -1217,6 +1218,7 @@ Public Class FormCompoundCreator
             FillUnifacSubGroups()
             loaded = True
             CalcJobackParams()
+            CheckDataStatus()
         End If
     End Sub
     Private Sub GridMODFAC_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridMODFAC.CellValueChanged
@@ -1490,6 +1492,8 @@ Public Class FormCompoundCreator
             tbPVAP_C.Text = .Vapor_Pressure_Constant_C
             tbPVAP_D.Text = .Vapor_Pressure_Constant_D
             tbPVAP_E.Text = .Vapor_Pressure_Constant_E
+
+            CheckDataStatus()
 
         End With
 
@@ -2825,21 +2829,24 @@ Public Class FormCompoundCreator
                 StorePVAPData()
                 StoreSolidCpData()
                 StoreSolidDensData()
+                CheckDataStatus()
             Catch ex As Exception
             End Try
         End If
     End Sub
 
-    Private Sub TextBoxEnthOfFusion_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxEnthOfFusion.TextChanged
+    Private Sub TextBoxEnthOfFusion_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             TextBoxEnthOfFusion2.Text = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, TextBoxEnthOfFusion.Text) / Me.TextBoxMW.Text * 1000
+            CheckDataStatus()
         Catch ex As Exception
             TextBoxEnthOfFusion2.Text = ""
         End Try
     End Sub
 
-    Private Sub TextBoxChanged_recalc(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxNBP.TextChanged, TextBoxMW.TextChanged, TextBoxTc.TextChanged, TextBoxPc.TextChanged, TextBoxAF.TextChanged
+    Private Sub TextBoxChanged_recalc(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxMW.TextChanged
         CalcJobackParams()
+        CheckDataStatus()
     End Sub
 
     Private Sub LinkPubChem_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkPubChem.LinkClicked
@@ -3225,6 +3232,18 @@ Public Class FormCompoundCreator
 
     End Sub
 
+    Private Sub TextBoxDHF_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTc.TextChanged, TextBoxPc.TextChanged, TextBoxNBP.TextChanged, TextBoxMeltingTemp.TextChanged, TextBoxEnthOfFusion.TextChanged, TextBoxDHF.TextChanged, TextBoxDGF.TextChanged, TextBoxAF.TextChanged
+        CheckDataStatus()
+    End Sub
+
+    Private Sub TextBoxUNIQUAC_Q_TextChanged(sender As Object, e As EventArgs) Handles TextBoxUNIQUAC_R.TextChanged, TextBoxUNIQUAC_Q.TextChanged
+        CheckDataStatus()
+    End Sub
+
+    Private Sub TextBoxName_TextChanged(sender As Object, e As EventArgs) Handles TextBoxName.TextChanged
+        mycase.cp.Name = TextBoxName.Text
+    End Sub
+
     Private Sub ExportarDadosParaArquivoJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarDadosParaArquivoJSONToolStripMenuItem.Click
         If Me.SaveFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
@@ -3247,6 +3266,70 @@ Public Class FormCompoundCreator
             WriteData()
         End If
     End Sub
+
+    Sub CheckDataStatus()
+
+        If loaded Then StoreData()
+
+        Dim sb As New Text.StringBuilder
+
+        sb.Append("")
+
+        With mycase.cp
+
+            If .Molar_Weight = 0.0 Then sb.Append("Undefined Molecular Weight; ")
+            If .Normal_Boiling_Point = 0.0 Then sb.Append("No Normal Boiling Point defined; ")
+            If .UNIFACGroups.Count = 0.0 Then sb.Append("No UNIFAC structure defined, won't work with UNIFAC-based models; ")
+            If .IdealgasCpEquation = "" Then sb.Append("Ideal gas Cp: no equation or UNIFAC structure defined; ")
+            If .UNIQUAC_Q = 0.0 And .UNIQUAC_R = 0.0 Then sb.Append("No UNIQUAC parameters defined, won't work with UNIQUAC model; ")
+            If .Critical_Pressure = 0.0 And .Critical_Temperature = 0.0 And .Acentric_Factor = 0.0 Then
+                sb.Append("No Tc/Pc/w defined, EOS models won't work with this compound; ")
+                If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
+            ElseIf .Critical_Pressure = 0.0 And .Critical_Temperature = 0.0 And .Acentric_Factor > 0.0 Then
+                sb.Append("No Tc/Pc defined, EOS models won't work with this compound; ")
+                If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
+            ElseIf .Critical_Pressure = 0.0 And .Critical_Temperature > 0.0 And .Acentric_Factor = 0.0 Then
+                sb.Append("No Pc/w defined, EOS models won't work with this compound; ")
+                If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
+            ElseIf .Critical_Pressure > 0.0 And .Critical_Temperature = 0.0 And .Acentric_Factor = 0.0 Then
+                sb.Append("No Tc/w defined, EOS models won't work with this compound; ")
+                If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
+            ElseIf .Critical_Pressure > 0.0 And .Critical_Temperature > 0.0 And .Acentric_Factor = 0.0 Then
+                sb.Append("No Acentric Factor defined, EOS models won't work with this compound; ")
+                If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
+            ElseIf .Critical_Pressure = 0.0 And .Critical_Temperature > 0.0 And .Acentric_Factor > 0.0 Then
+                sb.Append("No Critical Pressure defined, EOS models won't work with this compound; ")
+                If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
+            ElseIf .Critical_Pressure > 0.0 And .Critical_Temperature = 0.0 And .Acentric_Factor > 0.0 Then
+                sb.Append("No Critical Temperature defined, EOS models won't work with this compound; ")
+                If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
+            End If
+            If .EnthalpyOfFusionAtTf = 0.0 And .TemperatureOfFusion = 0.0 Then
+                sb.Append("No solid phase data defined (Tf/Hf), won't be able to calculate SLE; ")
+            End If
+            If .IG_Enthalpy_of_Formation_25C = 0.0 And .IG_Gibbs_Energy_of_Formation_25C Then
+                sb.Append("No formation data defined (DHf/DGf), won't be able to reaction heat balances; ")
+            End If
+
+            Dim text = sb.ToString
+
+            If text = "" Then text = "All OK!"
+
+            tbStatus.Text = text
+
+        End With
+
+
+    End Sub
+
+    Private Sub TextBoxID_TextChanged(sender As Object, e As EventArgs) Handles TextBoxID.TextChanged
+        Try
+            mycase.cp.ID = Integer.Parse(TextBoxID.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 End Class
 
 <System.Serializable()> Public Class CompoundGeneratorCase
@@ -3329,7 +3412,4 @@ End Class
     Public DataRoS As New ArrayList
     Public AdditionalAtoms As ArrayList
 
-    Protected Overrides Sub Finalize()
-        MyBase.Finalize()
-    End Sub
 End Class

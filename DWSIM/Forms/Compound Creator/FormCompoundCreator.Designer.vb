@@ -416,7 +416,7 @@ Partial Class FormCompoundCreator
         Me.rbRegressTCLiquid = New System.Windows.Forms.RadioButton()
         Me.tbTCLiquid_C = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.tbStatus = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog2 = New System.Windows.Forms.SaveFileDialog()
@@ -3350,12 +3350,12 @@ Partial Class FormCompoundCreator
         Me.Label15.Name = "Label15"
         Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
-        'TextBox2
+        'tbStatus
         '
-        resources.ApplyResources(Me.TextBox2, "TextBox2")
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.TextBox2, resources.GetString("TextBox2.ToolTip"))
+        resources.ApplyResources(Me.tbStatus, "tbStatus")
+        Me.tbStatus.Name = "tbStatus"
+        Me.tbStatus.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.tbStatus, resources.GetString("tbStatus.ToolTip"))
         '
         'Button1
         '
@@ -3382,7 +3382,7 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.tbStatus)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
@@ -3778,7 +3778,7 @@ Partial Class FormCompoundCreator
     Friend WithEvents CheckBoxEnthOfFusion As CheckBox
     Public WithEvents Label1 As Label
     Friend WithEvents Label15 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents tbStatus As TextBox
     Friend WithEvents Button1 As Button
     Public WithEvents LabelWithDivider7 As LabelWithDivider
     Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
