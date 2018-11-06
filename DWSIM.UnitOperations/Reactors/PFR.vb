@@ -604,7 +604,8 @@ Namespace Reactors
                     i = 0
                     For Each sb As KeyValuePair(Of String, Double) In C0
                         If vc(i) < 0.0# Then
-                            Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
+                            Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError") &
+                                                String.Format(" Error details: ODE solver calculated negative molar flows at volume step {0}/{1} m3.", currvol, Volume))
                         End If
                         C(sb.Key) = vc(i) / Qf
                         i = i + 1
