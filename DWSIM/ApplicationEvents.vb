@@ -106,9 +106,8 @@ Namespace My
 
             For Each s As String In My.Application.CommandLineArgs
                 If s.ToLower = "-commandline" Then
-                    'Stop the start form from loading.
+                    My.Application.CommandLineMode = True
                     e.Cancel = True
-                    CommandLineMode = True
                 End If
                 If s.ToLower = "-locale" Then
                     Dim clcult As String = My.Application.CommandLineArgs(My.Application.CommandLineArgs.IndexOf(s) + 1)
@@ -121,6 +120,15 @@ Namespace My
 
             If My.Settings.PythonPath <> "" Then
                 SetDllDirectory(My.Settings.PythonPath)
+            End If
+
+            If e.Cancel Then
+                'command line processor
+                AttachConsole(ATTACH_PARENT_PROCESS)
+                Dim standardOutput As New StreamWriter(Console.OpenStandardOutput())
+                standardOutput.AutoFlush = True
+                Console.SetOut(standardOutput)
+                Dim f1 As New FormMain
             End If
 
         End Sub

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.4 Update 3
+Version 5.5
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,20 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.5
+
+- [NEW] Added an option to use legacy property editors
+- [NEW] Unit tooltips on property editors
+- [NEW] Random property units on floating tables
+- [NEW] Added more Flash functions to Excel interface
+- [NEW] Restored Command Line funcionality
+- [CHG] Redesigned Compound Creator
+- [FIX] Fixed PFR bugs
+- [FIX] Exposing Script UO variables (CPUI)
+- [FIX] Fixed reaction editors
+- [FIX] Fixed Excel interface
+- [FIX] Other bug fixes and enhancements
 
 Version 5.4 Update 3
 

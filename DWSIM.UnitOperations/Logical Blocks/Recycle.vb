@@ -299,8 +299,8 @@ Namespace SpecialOps
                 Me.ConvergenceHistory.PressaoE0 = Me.ConvergenceHistory.PressaoE
                 Me.ConvergenceHistory.VazaoMassicaE0 = Me.ConvergenceHistory.VazaoMassicaE
 
-                Me.ConvergenceHistory.TemperaturaE = .temperature.GetValueOrDefault - Me.ConvergenceHistory.Temperatura
-                Me.ConvergenceHistory.PressaoE = .pressure.GetValueOrDefault - Me.ConvergenceHistory.Pressao
+                Me.ConvergenceHistory.TemperaturaE = .temperature.GetValueOrDefault - oms.Phases(0).Properties.temperature.GetValueOrDefault
+                Me.ConvergenceHistory.PressaoE = .pressure.GetValueOrDefault - oms.Phases(0).Properties.pressure.GetValueOrDefault
                 Me.ConvergenceHistory.VazaoMassicaE = Werr
 
                 Me.ConvergenceHistory.Temperatura0 = Me.ConvergenceHistory.Temperatura

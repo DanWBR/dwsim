@@ -1795,9 +1795,11 @@ Public Class FormMain
                 End Try
             End If
 
-        End If
+            form.FrmStSim1.Init(True)
 
-        form.FrmStSim1.Init(True)
+            form.FormSurface.FlowsheetDesignSurface.Invalidate()
+
+        End If
 
         Try
             form.FormSpreadsheet.EvaluateAll()
@@ -1805,8 +1807,6 @@ Public Class FormMain
         Catch ex As Exception
             excs.Add(New Exception("Error Updating Spreadsheet Variables", ex))
         End Try
-
-        form.FormSurface.FlowsheetDesignSurface.Invalidate()
 
         If excs.Count > 0 Then
             form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
@@ -2728,7 +2728,7 @@ Label_00CC:
             fs.Options.FilePath = caminho
             Return fs
         Catch ex As Exception
-            MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(ex.ToString, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return Nothing
         End Try
 

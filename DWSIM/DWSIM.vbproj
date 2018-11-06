@@ -305,6 +305,9 @@
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SpinningProgress">
+      <HintPath>References\SpinningProgress.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -349,6 +352,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLineProcessor.vb" />
     <Compile Include="Controls\ListItem.Designer.vb">
       <DependentUpon>ListItem.vb</DependentUpon>
     </Compile>
@@ -408,6 +412,12 @@
       <DependentUpon>FormAddUtility.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormAddUtility.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCLM.designer.vb">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCLM.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormConfigureChartObject.Designer.vb">
@@ -1050,6 +1060,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormCompoundCreator.es.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.de.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.en.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.es.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureChartObject.en.resx">
       <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
