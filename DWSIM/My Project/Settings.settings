@@ -160,7 +160,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="HideSolidPhase_CO" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="IgnoreCompoundPropertiesOnLoad" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
