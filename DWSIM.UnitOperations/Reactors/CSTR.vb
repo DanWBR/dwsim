@@ -379,10 +379,12 @@ Namespace Reactors
                     End If
 
                     'Check if reaction has a volume 
-                    If (rxn.ReactionPhase = PhaseName.Liquid And Volume <= 0) Or
-                        (rxn.ReactionPhase = PhaseName.Vapor And Headspace <= 0) Or
-                        (rxn.ReactionPhase = PhaseName.Mixture And Volume + Headspace <= 0) Then
+                    If (rxn.ReactionPhase = PhaseName.Liquid And Volume <= 0) Then
                         ErrCode = "No reactor volume defined"
+                    ElseIf (rxn.ReactionPhase = PhaseName.Vapor And Headspace <= 0) Then
+                        ErrCode = "No reactor headspace defined"
+                    ElseIf (rxn.ReactionPhase = PhaseName.Mixture And Volume + Headspace <= 0) Then
+                        ErrCode = "No reactor volume and headspace defined"
                     Else
                         ErrCode = ""
                     End If

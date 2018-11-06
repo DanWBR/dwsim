@@ -1602,6 +1602,21 @@ namespace DWSIM.UI.Desktop.Editors
                                }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reactor Volume"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Reactor Headspace (" + su.volume + ")", cv.ConvertFromSI(su.volume, reactor3.Headspace),
+                              (TextBox arg3, EventArgs ev) =>
+                              {
+                                  if (arg3.Text.IsValidDoubleExpression())
+                                  {
+                                      arg3.TextColor = (SystemColors.ControlText);
+                                      reactor3.Headspace = cv.ConvertToSI(su.volume, arg3.Text.ToString().ParseExpressionToDouble());
+                                  }
+                                  else
+                                  {
+                                      arg3.TextColor = (Colors.Red);
+                                  }
+                              }, () => CallSolverIfNeeded());
+                    s.CreateAndAddDescriptionRow(container,
+                                                 SimObject.GetPropertyDescription("Reactor Headspace"));
                     s.CreateAndAddTextBoxRow(container, nf, "Catalyst Amount (" + su.mass + ")", cv.ConvertFromSI(su.mass, reactor3.CatalystAmount),
                                (TextBox arg3, EventArgs ev) =>
                                {
