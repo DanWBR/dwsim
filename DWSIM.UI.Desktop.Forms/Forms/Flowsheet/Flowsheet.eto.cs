@@ -615,12 +615,9 @@ namespace DWSIM.UI.Forms
 
             LoadObjects();
 
-            var split0 = new Eto.Forms.Splitter();
-
-            SplitterFlowsheet = new Eto.Forms.Splitter();
-
-            SplitterFlowsheet.Orientation = Orientation.Horizontal;
-            SplitterFlowsheet.FixedPanel = SplitterFixedPanel.Panel1;
+            var Split1 = new Eto.Forms.Splitter { Orientation = Orientation.Horizontal, FixedPanel = SplitterFixedPanel.Panel1  };
+            var Split2 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
+            var Split3 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
 
             EditorHolder = new DocumentControl() { AllowReordering = true, BackgroundColor = SystemColors.ControlBackground };
 
@@ -632,33 +629,51 @@ namespace DWSIM.UI.Forms
 
             var PanelEditors = new TableLayout { Rows = { PanelEditorsLabel, PanelEditorsDescription, EditorHolder }, Spacing = new Size(5, 5), BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground };
 
-            SplitterFlowsheet.Panel1 = PanelEditors;
+            Split1.Panel1 = PanelEditors;
 
-            SplitterFlowsheet.Panel1.Width = (int)(sf * 300);
-            SplitterFlowsheet.Panel1.Visible = true;
+            Split1.Panel1.Width = (int)(sf * 360);
+            Split1.Panel1.Visible = true;
 
             btnShowHideObjectEditorPanel.Click += (sender, e) =>
             {
-                SplitterFlowsheet.Panel1.Visible = !SplitterFlowsheet.Panel1.Visible;
+                Split1.Panel1.Visible = !Split1.Panel1.Visible;
             };
+            
+            // obj containers
 
-            SplitterFlowsheet.Panel2 = FlowsheetControl;
+            var panelstreams = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelpressurechangers = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelseparators = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelmixers = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelexchangers = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelcolumns = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelreactors = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelsolids = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var paneluser = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panellogical = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelother = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
-            split0.Panel1 = SplitterFlowsheet;
-
-            var objcontainer = new StackLayout() { BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var objcontainer = new TabControl();
+            objcontainer.Pages.Add(new TabPage(panelstreams) { Text = "Streams" });
+            objcontainer.Pages.Add(new TabPage(panelpressurechangers) { Text = "Pressure Changers" });
+            objcontainer.Pages.Add(new TabPage(panelseparators) { Text = "Separators" });
+            objcontainer.Pages.Add(new TabPage(panelmixers) { Text = "Mixers/Splitters" });
+            objcontainer.Pages.Add(new TabPage(panelexchangers) { Text = "Exchangers" });
+            objcontainer.Pages.Add(new TabPage(panelcolumns) { Text = "Columns" });
+            objcontainer.Pages.Add(new TabPage(panelreactors) { Text = "Reactors" });
+            objcontainer.Pages.Add(new TabPage(panelsolids) { Text = "Solids" });
+            objcontainer.Pages.Add(new TabPage(paneluser) { Text = "User Models" });
+            objcontainer.Pages.Add(new TabPage(panellogical) { Text = "Logical Ops" });
+            objcontainer.Pages.Add(new TabPage(panelother) { Text = "Other" });
 
             foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
             {
                 if ((Boolean)(obj.GetType().GetProperty("Visible").GetValue(obj)))
                 {
-                    if (obj.GetDisplayName().Contains("Stream"))
-                    {
                         var pitem = new FlowsheetObjectPanelItem();
                         var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
                         pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
                         pitem.txtName.Text = obj.GetDisplayName();
-                        pitem.txtDescription.Text = obj.GetDisplayDescription();
                         pitem.MouseDown += (sender, e) =>
                         {
                             var dobj = new DataObject();
@@ -667,31 +682,43 @@ namespace DWSIM.UI.Forms
                             pitem.DoDragDrop(dobj, DragEffects.All);
                             e.Handled = true;
                         };
-                        objcontainer.Items.Add(pitem);
-                    }
-                }
-            }
-
-            foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
-            {
-                if ((Boolean)(obj.GetType().GetProperty("Visible").GetValue(obj)))
-                {
-                    if (!obj.GetDisplayName().Contains("Stream"))
+                    switch (obj.ObjectClass)
                     {
-                        var pitem = new FlowsheetObjectPanelItem();
-                        var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
-                        pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
-                        pitem.txtName.Text = obj.GetDisplayName();
-                        pitem.txtDescription.Text = obj.GetDisplayDescription();
-                        pitem.MouseDown += (sender, e) =>
-                        {
-                            var dobj = new DataObject();
-                            dobj.Image = pitem.imgIcon.Image;
-                            dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                            pitem.DoDragDrop(dobj, DragEffects.All);
-                            e.Handled = true;
-                        };
-                        objcontainer.Items.Add(pitem);
+                        case Interfaces.Enums.SimulationObjectClass.CAPEOPEN:
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Columns:
+                            panelcolumns.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Exchangers:
+                            panelexchangers.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Logical:
+                            panellogical.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.MixersSplitters:
+                            panelmixers.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Other:
+                            panelother.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.PressureChangers:
+                            panelpressurechangers.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Reactors:
+                            panelreactors.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Separators:
+                            panelseparators.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Solids:
+                            panelsolids.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Streams:
+                            panelstreams.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.UserModels:
+                            paneluser.Items.Add(pitem);
+                            break;
                     }
                 }
             }
@@ -708,40 +735,37 @@ namespace DWSIM.UI.Forms
             var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
             PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var PanelObjectsDescription = new Label { Text = "  " + "Drag and drop items to add them to the Flowsheet.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
-            PanelObjectsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
-            var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, PanelObjectsDescription, new Scrollable() { Content = objcontainer } }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
+            var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, objcontainer }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
             PanelObjects.BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground;
 
-            split0.Panel2 = PanelObjects;
-            split0.Orientation = Orientation.Horizontal;
-            split0.FixedPanel = SplitterFixedPanel.Panel2;
-            split0.Panel2.Width = FlowsheetObjectPanelItem.width + 25;
+            Split2.Panel1 = FlowsheetControl;
+            Split2.Panel2 = PanelObjects;
+            Split2.Panel2.Height = 120;
+
+            SplitterFlowsheet = Split2;
+
+            Split3.Panel1 = Split2;
+            Split3.Panel2 = SetupLogWindow();
+            Split3.Panel2.Height = (int)(sf * 100);
+
+            Split1.Panel2 = Split3;
 
             btnShowHideObjectPalette.Click += (sender, e) =>
             {
-                split0.Panel2.Visible = !split0.Panel2.Visible;
+                Split2.Panel2.Visible = !Split2.Panel2.Visible;
             };
 
             TabContainer = new TabControl();
             TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };
-            TabContainer.Pages.Add(new TabPage { Content = split0, Text = "Flowsheet" });
+            TabContainer.Pages.Add(new TabPage { Content = Split1, Text = "Flowsheet" });
             TabContainer.Pages.Add(new TabPage { Content = MaterialStreamListControl, Text = "Material Streams" });
             TabContainer.Pages.Add(TabPageSpreadsheet);
             TabContainer.Pages.Add(new TabPage { Content = ScriptListControl, Text = "Scripts" });
             TabContainer.Pages.Add(new TabPage { Content = ResultsControl, Text = "Results" });
 
-            var split = new Eto.Forms.Splitter();
-            split.Panel1 = TabContainer;
-            split.Panel2 = SetupLogWindow();
-            split.Orientation = Orientation.Vertical;
-            split.FixedPanel = SplitterFixedPanel.Panel2;
-            split.Panel2.Height = (int)(sf * 100);
-
             // main container
 
-            Content = split;
+            Content = TabContainer;
 
             // context menus
 

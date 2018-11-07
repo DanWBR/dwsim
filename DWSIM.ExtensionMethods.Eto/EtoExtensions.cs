@@ -523,7 +523,7 @@ namespace DWSIM.UI.Shared
 
         public static void CreateAndAddEmptySpace(this DynamicLayout container)
         {
-            var h = 8 * GetEditorFontSize() / (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
+            var h = 5 * GetEditorFontSize() / (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
 
             container.AddRow(new TableRow(new Label { Text = "", Height = (int)(sf * h) }));
         }

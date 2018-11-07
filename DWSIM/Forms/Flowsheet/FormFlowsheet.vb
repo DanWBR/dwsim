@@ -3187,7 +3187,7 @@ Public Class FormFlowsheet
     End Sub
 
     Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
-        Return FormSurface.SplitContainer1.Panel2.Width
+        Return FormSurface.SplitContainer1.Panel1.Width
     End Function
 
     Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
@@ -3205,6 +3205,6 @@ Public Class FormFlowsheet
     End Sub
 
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
-        Return FormSurface.SplitContainer1.Panel2.Height
+        Return FormSurface.SplitContainer1.Panel1.Height
     End Function
 End Class

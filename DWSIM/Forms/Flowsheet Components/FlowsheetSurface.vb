@@ -85,7 +85,7 @@ Public Class FlowsheetSurface
 
         SimObjPanel = New SimulationObjectsPanel() With {.Dock = DockStyle.Fill, .Flowsheet = Flowsheet}
 
-        SplitContainer1.Panel1.Controls.Add(SimObjPanel)
+        SplitContainer1.Panel2.Controls.Add(SimObjPanel)
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 

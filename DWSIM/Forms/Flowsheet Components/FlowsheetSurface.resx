@@ -133,7 +133,7 @@
     <value>0, 0</value>
   </data>
   <data name="FlowsheetDesignSurface.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 421</value>
+    <value>800, 413</value>
   </data>
   <data name="FlowsheetDesignSurface.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -145,7 +145,7 @@
     <value>DWSIM.DrawingTools.GraphicsSurface, DWSIM.DrawingTools, Version=5.5.6885.16233, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FlowsheetDesignSurface.Parent" xml:space="preserve">
-    <value>SplitContainer1.Panel2</value>
+    <value>SplitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;FlowsheetDesignSurface.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1168,6 +1168,9 @@
   <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 25</value>
   </data>
+  <data name="SplitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
   <data name="SplitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
@@ -1195,14 +1198,17 @@
   <data name="&gt;&gt;SplitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="SplitContainer1.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>96</value>
+  </data>
   <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>800, 512</value>
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>86</value>
+    <value>413</value>
   </data>
   <data name="SplitContainer1.SplitterWidth" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="SplitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

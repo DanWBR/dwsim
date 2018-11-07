@@ -1,4 +1,6 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Imports DWSIM.DrawingTools
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FlowsheetSurface
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -21,7 +23,7 @@ Partial Class FlowsheetSurface
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FlowsheetSurface))
-        Me.FlowsheetDesignSurface = New Global.DWSIM.DrawingTools.GraphicsSurface()
+        Me.FlowsheetDesignSurface = New GraphicsSurface()
         Me.CMS_NoSel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -137,7 +139,7 @@ Partial Class FlowsheetSurface
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.ToolStripFlowsheet.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -812,11 +814,12 @@ Partial Class FlowsheetSurface
         'SplitContainer1
         '
         resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+        Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
         Me.SplitContainer1.Name = "SplitContainer1"
         '
-        'SplitContainer1.Panel2
+        'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.FlowsheetDesignSurface)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.FlowsheetDesignSurface)
         '
         'FlowsheetSurface
         '
@@ -841,7 +844,7 @@ Partial Class FlowsheetSurface
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.ToolStripFlowsheet.ResumeLayout(False)
         Me.ToolStripFlowsheet.PerformLayout()
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.ResumeLayout(False)
