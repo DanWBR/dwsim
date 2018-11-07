@@ -32,6 +32,7 @@ Imports DWSIM.SharedClasses
 Imports System.Windows.Forms
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.SharedClasses.UnitOperations
+Imports DWSIM.Interfaces.Enums
 
 Namespace UnitOperations.Auxiliary
 
@@ -64,6 +65,8 @@ Namespace UnitOperations
     <System.Serializable()> Public Class Flowsheet
 
         Inherits UnitOperations.UnitOpBaseClass
+
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.UserModels
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_FlowsheetUO
 

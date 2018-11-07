@@ -1412,7 +1412,7 @@ Partial Class FormSimulSettings
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HideOnClose = True
         Me.Name = "FormSimulSettings"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

@@ -517,7 +517,7 @@ Partial Class MaterialStreamEditor
         '
         'compname
         '
-        Me.compname.FillWeight = 60.0!
+        Me.compname.FillWeight = 50.0!
         resources.ApplyResources(Me.compname, "compname")
         Me.compname.Name = "compname"
         Me.compname.ReadOnly = True
@@ -526,7 +526,7 @@ Partial Class MaterialStreamEditor
         '
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.compamount.DefaultCellStyle = DataGridViewCellStyle1
-        Me.compamount.FillWeight = 30.0!
+        Me.compamount.FillWeight = 50.0!
         resources.ApplyResources(Me.compamount, "compamount")
         Me.compamount.Name = "compamount"
         '
@@ -1816,8 +1816,6 @@ Partial Class MaterialStreamEditor
     Public WithEvents lblCompPropUnits As System.Windows.Forms.Label
     Public WithEvents cbSolvent As System.Windows.Forms.ComboBox
     Public WithEvents lblSolvent As System.Windows.Forms.Label
-    Public WithEvents compname As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents compamount As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn32 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn33 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn36 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1837,4 +1835,6 @@ Partial Class MaterialStreamEditor
     Public WithEvents TabPageResultsPane As TabPage
     Public WithEvents TabPageAnnotations As TabPage
     Public WithEvents TabPageFloatingTables As TabPage
+    Friend WithEvents compname As DataGridViewTextBoxColumn
+    Friend WithEvents compamount As DataGridViewTextBoxColumn
 End Class

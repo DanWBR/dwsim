@@ -31,6 +31,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class Vessel
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Separators
 
         Dim rhol, rhov, ql, qv, qe, rhoe, wl, wv As Double
         Dim C, VGI, VMAX, K As Double

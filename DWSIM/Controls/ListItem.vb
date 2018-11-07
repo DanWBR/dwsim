@@ -19,11 +19,11 @@
         End If
     End Sub
 
-    Private Sub ListItem_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown, lblDescription.MouseDown, lblName.MouseDown, Image.MouseDown
+    Private Sub ListItem_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown, lblName.MouseDown, Image.MouseDown
         Me.DoDragDrop(ObjectTypeInfo, DragDropEffects.All)
     End Sub
 
-    Private Sub ListItem_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp, lblDescription.MouseUp, lblName.MouseUp, Image.MouseUp
+    Private Sub ListItem_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp, lblName.MouseUp, Image.MouseUp
         'Me.BackColor = Color.White
     End Sub
 

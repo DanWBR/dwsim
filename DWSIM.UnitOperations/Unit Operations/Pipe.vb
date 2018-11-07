@@ -42,6 +42,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class Pipe
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.PressureChangers
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Pipe
 

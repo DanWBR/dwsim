@@ -21,12 +21,15 @@ Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
 Imports System.Windows.Forms
+Imports DWSIM.Interfaces.Enums
 
 Namespace UnitOperations
 
     <System.Serializable()> Public Class Mixer
 
         Inherits UnitOperations.UnitOpBaseClass
+
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.MixersSplitters
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Mixer
 

@@ -30,6 +30,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class Tank
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Separators
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Tank
 

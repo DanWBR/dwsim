@@ -807,6 +807,8 @@ Namespace UnitOperations
             End Get
         End Property
 
+        Public Overridable Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Other Implements ISimulationObject.ObjectClass
+
 #End Region
 
 

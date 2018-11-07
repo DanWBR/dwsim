@@ -71,7 +71,6 @@ Public Class FormFlowsheet
     Public FormLog As New LogPanel
     Public FormMatList As New MaterialStreamPanel
     Public FormSpreadsheet As New SpreadsheetForm
-    Public FormObjects As New SimulationObjectsPanel With {.Flowsheet = Me}
 
     Public FormProps As New frmProps
 
@@ -227,7 +226,6 @@ Public Class FormFlowsheet
             FormSpreadsheet.DockPanel = Nothing
             FormWatch.DockPanel = Nothing
             FormSurface.DockPanel = Nothing
-            FormObjects.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -236,7 +234,6 @@ Public Class FormFlowsheet
             FormSurface.Show(dckPanel)
             FormMatList.Show(FormSurface.Pane, Nothing)
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
-            FormObjects.Show(dckPanel)
             FormWatch.Show(dckPanel)
 			FormProps.Show(dckPanel, DockState.DockLeft)
 
@@ -272,8 +269,6 @@ Public Class FormFlowsheet
 
     Function ReturnForm(ByVal str As String) As IDockContent
         Select Case str
-            Case "DWSIM.SimulationObjectsPanel", "DWSIM.frmObjListView"
-                Return Me.FormObjects
             Case "DWSIM.LogPanel", "DWSIM.frmLog"
                 Return Me.FormLog
             Case "DWSIM.MaterialStreamPanel", "DWSIM.frmMatList"
@@ -3192,10 +3187,24 @@ Public Class FormFlowsheet
     End Sub
 
     Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
-        Return FormSurface.FlowsheetDesignSurface.Width
+        Return FormSurface.SplitContainer1.Panel2.Width
     End Function
 
+    Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
+        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+        GlobalSettings.Settings.CalculatorBusy = False
+        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+                                                        Sub()
+                                                            If My.Settings.ObjectEditor = 1 Then
+                                                                Me.UIThread(Sub()
+                                                                                Me.FormSurface.Flowsheet = Me
+                                                                                Me.FormSurface.UpdateSelectedObject()
+                                                                            End Sub)
+                                                            End If
+                                                        End Sub)
+    End Sub
+
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
-        Return FormSurface.FlowsheetDesignSurface.Height
+        Return FormSurface.SplitContainer1.Panel2.Height
     End Function
 End Class

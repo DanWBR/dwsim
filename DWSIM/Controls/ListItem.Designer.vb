@@ -22,17 +22,18 @@ Partial Class ListItem
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Image = New System.Windows.Forms.PictureBox()
         Me.lblName = New System.Windows.Forms.Label()
-        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.Image, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Image
         '
-        Me.Image.Location = New System.Drawing.Point(3, 3)
+        Me.Image.Location = New System.Drawing.Point(32, 3)
         Me.Image.Name = "Image"
-        Me.Image.Size = New System.Drawing.Size(50, 50)
+        Me.Image.Size = New System.Drawing.Size(32, 32)
         Me.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.Image.TabIndex = 0
         Me.Image.TabStop = False
@@ -41,42 +42,30 @@ Partial Class ListItem
         '
         Me.lblName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblName.Location = New System.Drawing.Point(59, 3)
+        Me.lblName.Font = New System.Drawing.Font("Arial", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblName.Location = New System.Drawing.Point(6, 40)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(201, 19)
+        Me.lblName.Size = New System.Drawing.Size(86, 24)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Label1"
-        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblDescription
-        '
-        Me.lblDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblDescription.Location = New System.Drawing.Point(59, 22)
-        Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(201, 31)
-        Me.lblDescription.TabIndex = 2
-        Me.lblDescription.Text = "Label2"
+        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ListItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.Image)
         Me.DoubleBuffered = True
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ListItem"
-        Me.Size = New System.Drawing.Size(263, 57)
+        Me.Size = New System.Drawing.Size(95, 69)
         CType(Me.Image, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents Image As System.Windows.Forms.PictureBox
     Public WithEvents lblName As System.Windows.Forms.Label
-    Public WithEvents lblDescription As System.Windows.Forms.Label
-
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

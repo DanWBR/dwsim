@@ -59,6 +59,8 @@ Namespace Streams
 
         <System.NonSerialized()> Private _flowsheet As Interfaces.IFlowsheet
 
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Streams
+
 #Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean

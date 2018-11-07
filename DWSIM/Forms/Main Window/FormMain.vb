@@ -873,8 +873,6 @@ Public Class FormMain
 
     Function ReturnForm(ByVal str As String) As IDockContent
         Select Case str
-            Case "DWSIM.SimulationObjectsPanel", "DWSIM.frmObjListView"
-                Return Me.tmpform2.FormObjects
             Case "DWSIM.LogPanel", "DWSIM.frmLog"
                 Return Me.tmpform2.FormLog
             Case "DWSIM.MaterialStreamPanel", "DWSIM.frmMatList"
@@ -1278,13 +1276,11 @@ Public Class FormMain
         form.FormSpreadsheet.DockPanel = Nothing
         form.FormWatch.DockPanel = Nothing
         form.FormSurface.DockPanel = Nothing
-        form.FormObjects.DockPanel = Nothing
 
         Try
             form.FormSpreadsheet.Show(form.dckPanel)
             form.FormMatList.Show(form.dckPanel)
             form.FormSurface.Show(form.dckPanel)
-            form.FormObjects.Show(form.dckPanel)
             form.FormLog.Show(form.dckPanel)
             form.dckPanel.BringToFront()
             form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
@@ -1726,7 +1722,6 @@ Public Class FormMain
             form.FormSpreadsheet.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
-            form.FormObjects.DockPanel = Nothing
             form.FormProps.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -1747,7 +1742,6 @@ Public Class FormMain
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
-                form.FormObjects.Show(form.dckPanel)
                 form.FormProps.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
@@ -2219,7 +2213,6 @@ Public Class FormMain
             form.FormSpreadsheet.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
-            form.FormObjects.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
@@ -2239,7 +2232,6 @@ Public Class FormMain
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
-                form.FormObjects.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception

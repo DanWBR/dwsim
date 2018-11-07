@@ -29,6 +29,8 @@ Public Class FlowsheetSurface
 
     Public Event ObjectSelected(ByVal sender As FormFlowsheet)
 
+    Public SimObjPanel As SimulationObjectsPanel
+
     Public Function ReturnForm(ByVal str As String) As IDockContent
 
         If str = Me.ToString Then
@@ -80,6 +82,10 @@ Public Class FlowsheetSurface
         ElseIf Flowsheet Is Nothing Then
             Flowsheet = My.Application.ActiveSimulation
         End If
+
+        SimObjPanel = New SimulationObjectsPanel() With {.Dock = DockStyle.Fill, .Flowsheet = Flowsheet}
+
+        SplitContainer1.Panel1.Controls.Add(SimObjPanel)
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
@@ -3488,7 +3494,7 @@ Public Class FlowsheetSurface
         Dim currposy = Me.FlowsheetDesignSurface.PointToClient(MousePosition).Y
         AddNewTSMI.DropDownItems.Clear()
         Dim add As Boolean = True
-        For Each item In Flowsheet.FormObjects.ObjectList
+        For Each item In SimObjPanel.ObjectList
             If Flowsheet.MobileCompatibilityMode Then add = item.MobileCompatible Else add = True
             If add Then
                 AddNewTSMI.DropDownItems.Add(item.GetDisplayName, item.GetIconBitmap, Sub()

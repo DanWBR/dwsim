@@ -30,6 +30,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class Heater
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Exchangers
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_HeaterCooler
 

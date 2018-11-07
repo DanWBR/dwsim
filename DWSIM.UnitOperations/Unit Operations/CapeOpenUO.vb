@@ -67,6 +67,8 @@ Namespace UnitOperations
         Private _restorefromcollections As Boolean = False
         Private _recalculateoutputstreams As Boolean = True
 
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.CAPEOPEN
+
         Public Sub New()
             MyBase.New()
             _ports = New List(Of ICapeUnitPort)

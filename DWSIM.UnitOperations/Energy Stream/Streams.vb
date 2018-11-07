@@ -47,6 +47,8 @@ Namespace Streams
 
         Private initialized As Boolean = False
 
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Streams
+
 #Region "   CAPE-OPEN ICapeIdentification"
 
         Public Overrides Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription

@@ -50,7 +50,7 @@ Public Class FormSimulSettings
             If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
                 Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
                 If Not floatWin Is Nothing Then
-                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y, 820, 550)
+                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y, 900, 600)
                 End If
             End If
 
@@ -65,15 +65,7 @@ Public Class FormSimulSettings
 
     Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        '818; 483
-
         Me.TabText = Me.Text
-
-        If DWSIM.App.IsRunningOnMono Then
-            Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
-        Else
-            Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
-        End If
 
         initialized = True
 

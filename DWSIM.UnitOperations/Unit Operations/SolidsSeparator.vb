@@ -30,6 +30,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class SolidsSeparator
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Solids
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_SolidsSep
 

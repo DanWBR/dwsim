@@ -46,6 +46,8 @@ Namespace Reactors
         Protected m_dt As Nullable(Of Double)
         Protected m_DQ As Nullable(Of Double)
 
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Reactors
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)

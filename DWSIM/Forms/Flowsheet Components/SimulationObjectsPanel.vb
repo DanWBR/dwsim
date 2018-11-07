@@ -3,7 +3,7 @@ Imports System.Linq
 
 Public Class SimulationObjectsPanel
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits UserControl
 
     Public Flowsheet As Interfaces.IFlowsheet
 
@@ -11,20 +11,16 @@ Public Class SimulationObjectsPanel
 
     Private Sub Simulation_Objects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.AutoHidePortion = 580
-
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
         Dim availableTypes As New List(Of Type)()
-        Dim availableTypes2 As New List(Of Type)()
 
         availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-        availableTypes2.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+        availableTypes.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
         Dim add As Boolean = True
 
         Dim litems As New List(Of ListItem)
-        Dim litems2 As New List(Of ListItem)
 
         For Each item In availableTypes
             If Not item.IsAbstract Then
@@ -39,52 +35,46 @@ Public Class SimulationObjectsPanel
                     obj.SetFlowsheet(Flowsheet)
                     Dim li As New ListItem
                     li.lblName.Text = obj.GetDisplayName
-                    li.lblDescription.Text = obj.GetDisplayDescription
+                    li.ToolTip1.SetToolTip(li.lblName, obj.GetDisplayDescription)
                     li.Image.Image = obj.GetIconBitmap
+                    li.ToolTip1.SetToolTip(li.Image, obj.GetDisplayDescription)
                     li.ObjectTypeInfo = obj.GetType
+                    li.Tag = obj.ObjectClass
                     litems.Add(li)
                     obj = Nothing
                 End If
             End If
         Next
 
-        For Each item In availableTypes2
-            If Not item.IsAbstract Then
-                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
-                If Not Flowsheet.MobileCompatibilityMode Then
-                    add = obj.GetType.GetProperty("Visible").GetValue(obj)
-                Else
-                    add = obj.MobileCompatible
-                End If
-                If add Then
-                    ObjectList.Add(obj)
-                    obj.SetFlowsheet(Flowsheet)
-                    Dim li As New ListItem
-                    li.lblName.Text = obj.GetDisplayName
-                    li.lblDescription.Text = obj.GetDisplayDescription
-                    li.Image.Image = obj.GetIconBitmap
-                    li.ObjectTypeInfo = obj.GetType
-                    litems2.Add(li)
-                    obj = Nothing
-                End If
-            End If
+        For Each item In litems
+            Select Case DirectCast(item.Tag, Interfaces.Enums.SimulationObjectClass)
+                Case SimulationObjectClass.CAPEOPEN
+                    Me.PanelCO.Controls.Add(item)
+                Case SimulationObjectClass.Columns
+                    Me.PanelColumns.Controls.Add(item)
+                Case SimulationObjectClass.Exchangers
+                    Me.PanelExchangers.Controls.Add(item)
+                Case SimulationObjectClass.Logical
+                    Me.PanelLogical.Controls.Add(item)
+                Case SimulationObjectClass.MixersSplitters
+                    Me.PanelMixers.Controls.Add(item)
+                Case SimulationObjectClass.Other
+                    Me.PanelOther.Controls.Add(item)
+                Case SimulationObjectClass.PressureChangers
+                    Me.PanelPressure.Controls.Add(item)
+                Case SimulationObjectClass.Reactors
+                    Me.PanelReactors.Controls.Add(item)
+                Case SimulationObjectClass.Separators
+                    Me.PanelSeparators.Controls.Add(item)
+                Case SimulationObjectClass.Solids
+                    Me.PanelSolids.Controls.Add(item)
+                Case SimulationObjectClass.Streams
+                    Me.PanelStreams.Controls.Add(item)
+                Case SimulationObjectClass.UserModels
+                    Me.PanelUser.Controls.Add(item)
+            End Select
         Next
 
-        Me.PanelItems.Controls.AddRange(litems.OrderByDescending(Function(x) x.lblName.Text).ToArray)
-        Me.PanelItems.Controls.AddRange(litems2.OrderBy(Function(x) x.lblName.Text).ToArray)
-
-    End Sub
-
-    Private Sub tbFilterList_TextChanged(sender As Object, e As EventArgs) Handles tbFilterList.TextChanged
-        If tbFilterList.Text = "" Then
-            For Each item As ListItem In Me.PanelItems.Controls
-                item.Visible = True
-            Next
-        Else
-            For Each item As ListItem In Me.PanelItems.Controls
-                item.Visible = item.lblName.Text.ToLower.Contains(tbFilterList.Text.ToLower) Or item.lblDescription.Text.ToLower.Contains(tbFilterList.Text.ToLower)
-            Next
-        End If
     End Sub
 
 End Class

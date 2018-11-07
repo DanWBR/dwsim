@@ -39,6 +39,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class CustomUO
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.UserModels
 
         Public Enum PythonExecutionEngine
             IronPython = 0

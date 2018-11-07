@@ -29,6 +29,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class Splitter
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.MixersSplitters
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Splitter
 

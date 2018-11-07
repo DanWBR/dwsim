@@ -41,6 +41,7 @@ Namespace UnitOperations.Auxiliary
         Private _specvalue As Double = 0
         Private _specunit As String = ""
 
+
         Public Property ComponentID() As String
             Get
                 Return _compID
@@ -99,6 +100,8 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CompoundSeparator
+
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Separators
 
         Protected m_ei As Double
         Protected _compsepspeccollection As New Dictionary(Of String, ComponentSeparationSpec)

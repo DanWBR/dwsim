@@ -1550,6 +1550,7 @@ Namespace UnitOperations
     <System.Serializable()> Public MustInherit Class Column
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Columns
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Column
 

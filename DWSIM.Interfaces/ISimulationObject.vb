@@ -51,6 +51,8 @@
 
     ReadOnly Property MobileCompatible As Boolean
 
+    Property ObjectClass As Enums.SimulationObjectClass
+
     Sub Validate()
 
     ''' <summary>

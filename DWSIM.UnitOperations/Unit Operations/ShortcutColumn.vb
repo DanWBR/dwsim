@@ -34,6 +34,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class ShortcutColumn
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Columns
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ShortcutColumn
 

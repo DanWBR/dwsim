@@ -180,6 +180,8 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.BaseClass
 
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Logical
+
         Public Sub New()
             MyBase.CreateNew()
         End Sub

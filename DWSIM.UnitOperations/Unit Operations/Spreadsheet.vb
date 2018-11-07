@@ -44,6 +44,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class ExcelUO
 
         Inherits UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.UserModels
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_SpreadsheetUO
 

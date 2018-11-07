@@ -354,6 +354,24 @@ Namespace Enums
         LeftTop = 7
     End Enum
 
+    Public Enum SimulationObjectClass
+
+        Streams = 0
+        PressureChangers = 1
+        Separators = 2
+        MixersSplitters = 3
+        Exchangers = 4
+        Reactors = 5
+        Columns = 6
+        Solids = 7
+        CAPEOPEN = 8
+        UserModels = 9
+        Logical = 10
+        Other = 11
+
+    End Enum
+
+
 End Namespace
 
 Namespace Enums.GraphicObjects

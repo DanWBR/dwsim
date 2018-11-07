@@ -35,6 +35,7 @@ Namespace UnitOperations
     <System.Serializable()> Public Class Filter
 
         Inherits UnitOperations.UnitOpBaseClass
+        Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Solids
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Filter
 
