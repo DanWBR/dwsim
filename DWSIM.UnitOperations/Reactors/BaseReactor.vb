@@ -90,7 +90,7 @@ Namespace Reactors
             Dim P As Double = ims.Phases(0).Properties.pressure.GetValueOrDefault
             Dim T As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
             Dim amounts As New Dictionary(Of String, Double)
-            Dim val1, val2, val3 As Double
+            Dim val1, val2, val3, Z As Double
 
             For Each sb As ReactionStoichBase In rxn.Components.Values
 
@@ -106,7 +106,8 @@ Namespace Reactors
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Vapor
                                 val1 = ims.Phases(2).Compounds(sb.CompName).FugacityCoeff.GetValueOrDefault
-                                amounts(sb.CompName) = val1 * 8.314 * T
+                                Z = ims.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
+                                amounts(sb.CompName) = val1 * Z * 8.314 * T
                             Case PhaseName.Liquid
                                 val1 = ims.Phases(3).Compounds(sb.CompName).FugacityCoeff.GetValueOrDefault
                                 val2 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
@@ -134,7 +135,8 @@ Namespace Reactors
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Vapor
                                 val1 = ims.Phases(2).Properties.molecularWeight.GetValueOrDefault
-                                amounts(sb.CompName) = 8.314 * T / P * 1000 / val1
+                                Z = ims.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
+                                amounts(sb.CompName) = Z * 8.314 * T / P * 1000 / val1
                             Case PhaseName.Liquid
                                 val1 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
                                 val2 = ims.Phases(3).Properties.density.GetValueOrDefault
@@ -149,7 +151,8 @@ Namespace Reactors
                     Case ReactionBasis.MolarFrac
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Vapor
-                                amounts(sb.CompName) = 8.314 * T / P
+                                Z = ims.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
+                                amounts(sb.CompName) = Z * 8.314 * T / P
                             Case PhaseName.Liquid
                                 val1 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
                                 val2 = ims.Phases(3).Properties.density.GetValueOrDefault
@@ -160,7 +163,8 @@ Namespace Reactors
                                 amounts(sb.CompName) = val1 / val2
                         End Select
                     Case ReactionBasis.PartialPress
-                        amounts(sb.CompName) = 8.314 * T
+                        Z = ims.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
+                        amounts(sb.CompName) = Z * 8.314 * T
                 End Select
 
                 amounts(sb.CompName) = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(rxn.ConcUnit, amounts(sb.CompName))

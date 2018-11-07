@@ -65,6 +65,8 @@ Namespace Reactors
 
         Public Property Length As Double = 1.0#
 
+        Public Property CalcStep As Integer = 0
+
         Public Property Volume() As Double
             Get
                 Return m_vol
@@ -167,7 +169,7 @@ Namespace Reactors
                 If y(j) < 0 Then
                     C(s) = 0.0#
                 Else
-                    C(s) = y(j) / Qf
+                    C(s) = y(j) / (dV * Volume)
                 End If
                 j = j + 1
             Next
@@ -209,6 +211,8 @@ Namespace Reactors
 
                 convfactors = Me.GetConvFactors(rxn, ims)
 
+                Dim cvar As Double
+
                 If rxn.ReactionType = ReactionType.Kinetic Then
 
                     Dim kxf As Double = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
@@ -225,8 +229,9 @@ Namespace Reactors
                     'kinetic expression
 
                     For Each sb As ReactionStoichBase In rxn.Components.Values
-                        rxf *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.DirectOrder
-                        rxr *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.ReverseOrder
+                        cvar = C(sb.CompName) * convfactors(sb.CompName)
+                        rxf *= cvar ^ sb.DirectOrder
+                        rxr *= cvar ^ sb.ReverseOrder
                     Next
 
                     rx = kxf * rxf - kxr * rxr
@@ -260,17 +265,18 @@ Namespace Reactors
                         Dim ine As Integer = 1
 
                         For Each sb As ReactionStoichBase In rxn.Components.Values
+                            cvar = C(sb.CompName) * convfactors(sb.CompName)
                             If sb.StoichCoeff < 0 Then
-                                IObj2?.Paragraphs.Add(String.Format("R{0} ({1}): {2} {3}", ir.ToString, sb.CompName, C(sb.CompName) * convfactors(sb.CompName), rxn.ConcUnit))
-                                rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                IObj2?.Paragraphs.Add(String.Format("R{0} ({1}): {2} {3}", ir.ToString, sb.CompName, cvar, rxn.ConcUnit))
+                                rxn.ExpContext.Variables.Add("R" & ir.ToString, cvar)
                                 ir += 1
                             ElseIf sb.StoichCoeff > 0 Then
-                                IObj2?.Paragraphs.Add(String.Format("P{0} ({1}): {2} {3}", ip.ToString, sb.CompName, C(sb.CompName) * convfactors(sb.CompName), rxn.ConcUnit))
-                                rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                IObj2?.Paragraphs.Add(String.Format("P{0} ({1}): {2} {3}", ip.ToString, sb.CompName, cvar, rxn.ConcUnit))
+                                rxn.ExpContext.Variables.Add("P" & ip.ToString, cvar)
                                 ip += 1
                             Else
-                                IObj2?.Paragraphs.Add(String.Format("N{0} ({1}): {2} {3}", ine.ToString, sb.CompName, C(sb.CompName) * convfactors(sb.CompName), rxn.ConcUnit))
-                                rxn.ExpContext.Variables.Add("N" & ine.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                IObj2?.Paragraphs.Add(String.Format("N{0} ({1}): {2} {3}", ine.ToString, sb.CompName, cvar, rxn.ConcUnit))
+                                rxn.ExpContext.Variables.Add("N" & ine.ToString, cvar)
                                 ine += 1
                             End If
                         Next
@@ -319,8 +325,6 @@ Namespace Reactors
                 dy(j) = -kv.Value
                 j += 1
             Next
-
-            FlowSheet.CheckStatus()
 
             IObj2?.Paragraphs.Add("<h2>Results</h2>")
 
@@ -473,6 +477,8 @@ Namespace Reactors
 
             Dim counter As Integer = 0
 
+            CalcStep = 0
+
             Do
 
                 IObj?.SetCurrent
@@ -582,21 +588,11 @@ Namespace Reactors
                     Next
 
                     Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
-                    odesolver.RelTol = 0.000001
-                    odesolver.AbsTol = 0.0000000001
-                    odesolver.InitializeODEs(AddressOf ODEFunc, N.Count)
+                    odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
                     IObj2?.SetCurrent
-                    odesolver.Solve(vc, 0.0#, 0.1 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
+                    odesolver.Solve(vc, 0.0#, 0.01 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
 
-                    'Dim vec = MathNet.Numerics.LinearAlgebra.CreateVector.DenseOfArray(Of Double)(vc)
-
-                    'Dim result = MathNet.Numerics.OdeSolvers.RungeKutta.FourthOrder(vec, 0.0#, dV * Volume, 10,
-                    '                                                                Function(x As Double, v As MathNet.Numerics.LinearAlgebra.Vector(Of Double))
-                    '                                                                    Dim res = ODEFunc(x, v.ToArray)
-                    '                                                                    Return MathNet.Numerics.LinearAlgebra.CreateVector.DenseOfArray(Of Double)(res)
-                    '                                                                End Function)
-
-                    'vc = result.Last.ToArray
+                    ODEFunc(0, vc)
 
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
@@ -641,17 +637,12 @@ Namespace Reactors
                     Do
 
                         'process reaction i
+
                         rxn = FlowSheet.Reactions(ar(i))
 
                         'Heat released (or absorbed) (kJ/s = kW)
 
-                        If rxn.ReactionType = ReactionType.Kinetic Then
-                            DHr += rxn.ReactionHeat * Abs(Rxi(rxn.ID)) / 1000 * dV * Volume
-                        ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-                            DHr += rxn.ReactionHeat * Abs(Rxi(rxn.ID)) / 1000 * CatalystLoading * dV * Volume
-                        End If
-
-                        'If Ri.Values.Sum = 0.0# Then DHr = 0.0#
+                        DHr += rxn.ReactionHeat * (N(rxn.BaseReactant) - N0(rxn.BaseReactant)) / 1000
 
                         i += 1
 
@@ -702,11 +693,12 @@ Namespace Reactors
                             Me.DeltaQ = 0.0#
 
                             'Products Enthalpy (kJ/kg * kg/s = kW)
-                            Hp = Hr - DHr
+                            Hp = Hr + DHr
 
                             IObj?.SetCurrent()
+
                             tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
-                            Dim Tout As Double = tmp.CalculatedTemperature
+                            Dim Tout As Double = tmp.CalculatedTemperature.GetValueOrDefault
 
                             Me.DeltaT = Me.DeltaT.GetValueOrDefault + Tout - T
                             ims.Phases(0).Properties.temperature = Tout
@@ -809,6 +801,10 @@ Namespace Reactors
                 currvol += dV * Volume
 
                 counter += 1
+
+                CalcStep = counter
+
+                FlowSheet.CheckStatus()
 
             Loop Until counter > nloops
 

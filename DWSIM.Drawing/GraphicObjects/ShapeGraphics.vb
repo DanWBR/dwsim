@@ -5442,12 +5442,17 @@ Namespace GraphicObjects
             End If
 
             Dim myPen As New Pen(Me.LineColor, Me.LineWidth)
+            Dim myPen2 As New Pen(Color.SteelBlue, Me.LineWidth)
 
             g.DrawRectangle(myPen, rect)
 
             Dim rec1 As New Rectangle(X + 0.1 * Width, Y, 0.8 * Width, Height)
             g.FillRectangle(New HatchBrush(HatchStyle.SmallCheckerBoard, Me.LineColor, Color.Transparent), rec1)
             g.DrawRectangle(myPen, rec1)
+
+            Dim rec2 As New Rectangle(X + 0.1 * Width, Y, Owner.CalcStep / 100 * 0.8 * Width, Height)
+            g.FillRectangle(New HatchBrush(HatchStyle.SmallCheckerBoard, Color.SteelBlue, Color.Transparent), rec2)
+            g.DrawRectangle(myPen2, rec2)
 
             DrawTag(g, myMatrix)
 
