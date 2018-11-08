@@ -169,7 +169,7 @@ Namespace Reactors
                 If y(j) < 0 Then
                     C(s) = 0.0#
                 Else
-                    C(s) = y(j) / (dV * Volume)
+                    C(s) = y(j) / Qf
                 End If
                 j = j + 1
             Next
@@ -477,6 +477,8 @@ Namespace Reactors
 
             Dim counter As Integer = 0
 
+            Dim Tant As Double
+
             CalcStep = 0
 
             Do
@@ -587,145 +589,161 @@ Namespace Reactors
                         i = i + 1
                     Next
 
-                    Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
-                    odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
-                    IObj2?.SetCurrent
-                    odesolver.Solve(vc, 0.0#, 0.01 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
+                    'converge temperature
 
-                    ODEFunc(0, vc)
-
-                    If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
-
-                    C.Clear()
-                    i = 0
-                    For Each sb As KeyValuePair(Of String, Double) In C0
-                        If vc(i) < 0.0# Then
-                            Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError") &
-                                                String.Format(" Error details: ODE solver calculated negative molar flows at volume step {0}/{1} m3.", currvol, Volume))
-                        End If
-                        C(sb.Key) = vc(i) / Qf
-                        i = i + 1
-                    Next
-
-                    i = 0
                     Do
 
-                        'process reaction i
-                        rxn = FlowSheet.Reactions(ar(i))
+                        Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
+                        odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
+                        IObj2?.SetCurrent
+                        odesolver.Solve(vc0, 0.0#, 0.01 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
 
-                        For Each sb As ReactionStoichBase In rxn.Components.Values
+                        ODEFunc(0, vc)
 
-                            ''comp. conversions
-                            If Not Me.ComponentConversions.ContainsKey(sb.CompName) Then
-                                Me.ComponentConversions.Add(sb.CompName, 0)
+                        If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
+
+                        C.Clear()
+                        i = 0
+                        For Each sb As KeyValuePair(Of String, Double) In C0
+                            If vc(i) < 0.0# Then
+                                Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError") &
+                                                String.Format(" Error details: ODE solver calculated negative molar flows at volume step {0}/{1} m3.", currvol, Volume))
                             End If
-
+                            C(sb.Key) = vc(i) / Qf
+                            i = i + 1
                         Next
 
-                        i += 1
+                        i = 0
+                        Do
 
-                    Loop Until i = ar.Count
+                            'process reaction i
+                            rxn = FlowSheet.Reactions(ar(i))
 
-                    i = 0
-                    For Each sb As String In Me.ComponentConversions.Keys
-                        N(sb) = vc(i)
-                        i += 1
-                    Next
+                            For Each sb As ReactionStoichBase In rxn.Components.Values
 
-                    i = 0
-                    DHr = 0.0#
-                    Do
+                                ''comp. conversions
+                                If Not Me.ComponentConversions.ContainsKey(sb.CompName) Then
+                                    Me.ComponentConversions.Add(sb.CompName, 0)
+                                End If
 
-                        'process reaction i
+                            Next
 
-                        rxn = FlowSheet.Reactions(ar(i))
+                            i += 1
 
-                        'Heat released (or absorbed) (kJ/s = kW)
+                        Loop Until i = ar.Count
 
-                        DHr += rxn.ReactionHeat * (N(rxn.BaseReactant) - N0(rxn.BaseReactant)) / 1000
+                        i = 0
+                        For Each sb As String In Me.ComponentConversions.Keys
+                            N(sb) = vc(i)
+                            i += 1
+                        Next
 
-                        i += 1
+                        i = 0
+                        DHr = 0.0#
+                        Do
 
-                    Loop Until i = ar.Count
+                            'process reaction i
 
-                    'update mole flows/fractions
-                    Dim Nsum As Double = 0.0#
-                    'compute new mole flows
-                    For Each s2 As Compound In ims.Phases(0).Compounds.Values
-                        If N.ContainsKey(s2.Name) Then
-                            Nsum += N(s2.Name) + Nnr(s2.Name)
-                        Else
-                            Nsum += s2.MolarFlow.GetValueOrDefault
-                        End If
-                    Next
-                    For Each s2 As Compound In ims.Phases(0).Compounds.Values
-                        If N.ContainsKey(s2.Name) Then
-                            s2.MoleFraction = (N(s2.Name) + Nnr(s2.Name)) / Nsum
-                            s2.MolarFlow = N(s2.Name) + Nnr(s2.Name)
-                        Else
-                            s2.MoleFraction = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault / Nsum
-                            s2.MolarFlow = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault
-                        End If
-                    Next
+                            rxn = FlowSheet.Reactions(ar(i))
 
-                    ims.Phases(0).Properties.massflow = Nothing
-                    ims.Phases(0).Properties.molarflow = Nsum
+                            'Heat released (or absorbed) (kJ/s = kW)
 
-                    Dim mmm As Double = 0
-                    Dim mf As Double = 0
-                    For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                        mmm += s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight
-                    Next
-                    For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                        s3.MassFraction = s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight / mmm
-                        s3.MassFlow = s3.MassFraction.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
-                        mf += s3.MassFlow.GetValueOrDefault
-                    Next
+                            'DHr += rxn.ReactionHeat * (N(rxn.BaseReactant) - N0(rxn.BaseReactant)) / 1000
+                            If rxn.ReactionType = ReactionType.Kinetic Then
+                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * dV * Volume
+                            ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
+                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * CatalystLoading * dV * Volume
+                            End If
 
-                    'do a flash calc (calculate final temperature/enthalpy)
+                            i += 1
 
-                    PropertyPackage.CurrentMaterialStream = ims
+                        Loop Until i = ar.Count
 
-                    Select Case Me.ReactorOperationMode
+                        'update mole flows/fractions
+                        Dim Nsum As Double = 0.0#
+                        'compute new mole flows
+                        For Each s2 As Compound In ims.Phases(0).Compounds.Values
+                            If N.ContainsKey(s2.Name) Then
+                                Nsum += N(s2.Name) + Nnr(s2.Name)
+                            Else
+                                Nsum += s2.MolarFlow.GetValueOrDefault
+                            End If
+                        Next
+                        For Each s2 As Compound In ims.Phases(0).Compounds.Values
+                            If N.ContainsKey(s2.Name) Then
+                                s2.MoleFraction = (N(s2.Name) + Nnr(s2.Name)) / Nsum
+                                s2.MolarFlow = N(s2.Name) + Nnr(s2.Name)
+                            Else
+                                s2.MoleFraction = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault / Nsum
+                                s2.MolarFlow = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault
+                            End If
+                        Next
 
-                        Case OperationMode.Adiabatic
+                        ims.Phases(0).Properties.massflow = Nothing
+                        ims.Phases(0).Properties.molarflow = Nsum
 
-                            Me.DeltaQ = 0.0#
+                        Dim mmm As Double = 0
+                        Dim mf As Double = 0
+                        For Each s3 As Compound In ims.Phases(0).Compounds.Values
+                            mmm += s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight
+                        Next
+                        For Each s3 As Compound In ims.Phases(0).Compounds.Values
+                            s3.MassFraction = s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight / mmm
+                            s3.MassFlow = s3.MassFraction.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+                            mf += s3.MassFlow.GetValueOrDefault
+                        Next
 
-                            'Products Enthalpy (kJ/kg * kg/s = kW)
-                            Hp = Hr + DHr
+                        'do a flash calc (calculate final temperature/enthalpy)
 
-                            IObj?.SetCurrent()
+                        PropertyPackage.CurrentMaterialStream = ims
 
-                            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
-                            Dim Tout As Double = tmp.CalculatedTemperature.GetValueOrDefault
+                        Tant = T
 
-                            Me.DeltaT = Me.DeltaT.GetValueOrDefault + Tout - T
-                            ims.Phases(0).Properties.temperature = Tout
-                            ims.Phases(0).Properties.enthalpy = Hp / W
-                            T = Tout
+                        Select Case Me.ReactorOperationMode
 
-                            ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+                            Case OperationMode.Adiabatic
 
-                        Case OperationMode.Isothermic
+                                Me.DeltaQ = 0.0#
 
-                            ims.SpecType = StreamSpec.Temperature_and_Pressure
+                                'Products Enthalpy (kJ/kg * kg/s = kW)
 
-                        Case OperationMode.OutletTemperature
+                                Hp = Hr - DHr
 
-                            DeltaT = OutletTemperature - T0
+                                IObj?.SetCurrent()
 
-                            ims.Phases(0).Properties.temperature += DeltaT * dV
+                                tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
+                                Dim Tout As Double = tmp.CalculatedTemperature.GetValueOrDefault
 
-                            T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                                Me.DeltaT = Me.DeltaT.GetValueOrDefault + Tout - T
 
-                            ims.SpecType = StreamSpec.Temperature_and_Pressure
+                                ims.Phases(0).Properties.temperature = Tout
+                                ims.Phases(0).Properties.enthalpy = Hp / W
 
-                    End Select
+                                T = Tout
 
-                    IObj?.SetCurrent()
-                    ims.PropertyPackage.CurrentMaterialStream = ims
-                    ims.Calculate(True, True)
+                                ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+                            Case OperationMode.Isothermic
+
+                                ims.SpecType = StreamSpec.Temperature_and_Pressure
+
+                            Case OperationMode.OutletTemperature
+
+                                DeltaT = OutletTemperature - T0
+
+                                ims.Phases(0).Properties.temperature += DeltaT * dV
+
+                                T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+
+                                ims.SpecType = StreamSpec.Temperature_and_Pressure
+
+                        End Select
+
+                        IObj?.SetCurrent()
+                        ims.PropertyPackage.CurrentMaterialStream = ims
+                        ims.Calculate(True, True)
+
+                    Loop Until Abs(T - Tant) < 0.01
 
                 Next
 
@@ -802,7 +820,7 @@ Namespace Reactors
 
                 counter += 1
 
-                CalcStep = counter
+                CalcStep = Convert.ToInt32(counter / nloops * 100)
 
                 FlowSheet.CheckStatus()
 

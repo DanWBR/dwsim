@@ -3143,6 +3143,7 @@ Public Class FormFlowsheet
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+        My.Application.ActiveSimulation = Me
         If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
                                                         Sub()
@@ -3193,6 +3194,7 @@ Public Class FormFlowsheet
     Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         GlobalSettings.Settings.CalculatorBusy = False
+        My.Application.ActiveSimulation = Me
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
