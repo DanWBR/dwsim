@@ -615,7 +615,7 @@ namespace DWSIM.UI.Forms
 
             LoadObjects();
 
-            var Split1 = new Eto.Forms.Splitter { Orientation = Orientation.Horizontal, FixedPanel = SplitterFixedPanel.Panel1  };
+            var Split1 = new Eto.Forms.Splitter { Orientation = Orientation.Horizontal, FixedPanel = SplitterFixedPanel.Panel1 };
             var Split2 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
             var Split3 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
 
@@ -638,50 +638,90 @@ namespace DWSIM.UI.Forms
             {
                 Split1.Panel1.Visible = !Split1.Panel1.Visible;
             };
-            
+
             // obj containers
 
-            var panelstreams = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelpressurechangers = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelseparators = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelmixers = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelexchangers = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelcolumns = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelreactors = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelsolids = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var paneluser = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panellogical = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
-            var panelother = new StackLayout() { Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelstreams = new StackLayout() {Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelpressurechangers = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelseparators = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelmixers = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelexchangers = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelcolumns = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelreactors = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelsolids = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var paneluser = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panellogical = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelother = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
-            var objcontainer = new TabControl();
-            objcontainer.Pages.Add(new TabPage(panelstreams) { Text = "Streams" });
-            objcontainer.Pages.Add(new TabPage(panelpressurechangers) { Text = "Pressure Changers" });
-            objcontainer.Pages.Add(new TabPage(panelseparators) { Text = "Separators" });
-            objcontainer.Pages.Add(new TabPage(panelmixers) { Text = "Mixers/Splitters" });
-            objcontainer.Pages.Add(new TabPage(panelexchangers) { Text = "Exchangers" });
-            objcontainer.Pages.Add(new TabPage(panelcolumns) { Text = "Columns" });
-            objcontainer.Pages.Add(new TabPage(panelreactors) { Text = "Reactors" });
-            objcontainer.Pages.Add(new TabPage(panelsolids) { Text = "Solids" });
-            objcontainer.Pages.Add(new TabPage(paneluser) { Text = "User Models" });
-            objcontainer.Pages.Add(new TabPage(panellogical) { Text = "Logical Ops" });
-            objcontainer.Pages.Add(new TabPage(panelother) { Text = "Other" });
+            if (GlobalSettings.Settings.RunningPlatform() == s.Platform.Mac)
+            {
+
+                var objcontainer = new DocumentControl { AllowReordering = true };
+                objcontainer.Style = "drop";
+                objcontainer.Pages.Add(new DocumentPage(panelstreams) { Closable = false, Text = "Streams" });
+                objcontainer.Pages.Add(new DocumentPage(panelpressurechangers) { Closable = false, Text = "Pressure Changers" });
+                objcontainer.Pages.Add(new DocumentPage(panelseparators) { Closable = false, Text = "Separators" });
+                objcontainer.Pages.Add(new DocumentPage(panelmixers) { Closable = false, Text = "Mixers/Splitters" });
+                objcontainer.Pages.Add(new DocumentPage(panelexchangers) { Closable = false, Text = "Exchangers" });
+                objcontainer.Pages.Add(new DocumentPage(panelcolumns) { Closable = false, Text = "Columns" });
+                objcontainer.Pages.Add(new DocumentPage(panelreactors) { Closable = false, Text = "Reactors" });
+                objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
+                objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
+                objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Ops" });
+                objcontainer.Pages.Add(new DocumentPage(panelother) { Closable = false, Text = "Other" });
+
+                var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
+                PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
+                var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, objcontainer }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
+                PanelObjects.BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground;
+
+                Split2.Panel2 = PanelObjects;
+                Split2.Panel2.Height = 120;
+
+            }
+            else {
+
+                var objcontainer = new TabControl();
+                objcontainer.Pages.Add(new TabPage(panelstreams) { Text = "Streams" });
+                objcontainer.Pages.Add(new TabPage(panelpressurechangers) { Text = "Pressure Changers" });
+                objcontainer.Pages.Add(new TabPage(panelseparators) { Text = "Separators" });
+                objcontainer.Pages.Add(new TabPage(panelmixers) { Text = "Mixers/Splitters" });
+                objcontainer.Pages.Add(new TabPage(panelexchangers) { Text = "Exchangers" });
+                objcontainer.Pages.Add(new TabPage(panelcolumns) { Text = "Columns" });
+                objcontainer.Pages.Add(new TabPage(panelreactors) { Text = "Reactors" });
+                objcontainer.Pages.Add(new TabPage(panelsolids) { Text = "Solids" });
+                objcontainer.Pages.Add(new TabPage(paneluser) { Text = "User Models" });
+                objcontainer.Pages.Add(new TabPage(panellogical) { Text = "Logical Ops" });
+                objcontainer.Pages.Add(new TabPage(panelother) { Text = "Other" });
+
+                var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
+                PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
+                var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, objcontainer }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
+                PanelObjects.BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground;
+
+                Split2.Panel2 = PanelObjects;
+                Split2.Panel2.Height = 120;
+
+            }
 
             foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
             {
                 if ((Boolean)(obj.GetType().GetProperty("Visible").GetValue(obj)))
                 {
-                        var pitem = new FlowsheetObjectPanelItem();
-                        var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
-                        pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
-                        pitem.txtName.Text = obj.GetDisplayName();
-                        pitem.MouseDown += (sender, e) =>
-                        {
-                            var dobj = new DataObject();
-                            dobj.Image = pitem.imgIcon.Image;
-                            dobj.SetString(obj.GetDisplayName(), "ObjectName");
-                            pitem.DoDragDrop(dobj, DragEffects.All);
-                            e.Handled = true;
-                        };
+                    var pitem = new FlowsheetObjectPanelItem();
+                    var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
+                    pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
+                    pitem.txtName.Text = obj.GetDisplayName();
+                    pitem.MouseDown += (sender, e) =>
+                    {
+                        var dobj = new DataObject();
+                        dobj.Image = pitem.imgIcon.Image;
+                        dobj.SetString(obj.GetDisplayName(), "ObjectName");
+                        pitem.DoDragDrop(dobj, DragEffects.All);
+                        e.Handled = true;
+                    };
                     switch (obj.ObjectClass)
                     {
                         case Interfaces.Enums.SimulationObjectClass.CAPEOPEN:
@@ -732,15 +772,7 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
-            PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
-            var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, objcontainer }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
-            PanelObjects.BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground;
-
             Split2.Panel1 = FlowsheetControl;
-            Split2.Panel2 = PanelObjects;
-            Split2.Panel2.Height = 120;
 
             SplitterFlowsheet = Split2;
 

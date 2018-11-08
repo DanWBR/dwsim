@@ -98,6 +98,8 @@ Public Class FormOptions
         chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
         chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
 
+
+
         'databases
 
         Me.PopulateDBGrid()
@@ -659,6 +661,7 @@ Public Class FormOptions
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEditorStyle.SelectedIndexChanged
         My.Settings.ObjectEditor = cbEditorStyle.SelectedIndex
+        GlobalSettings.Settings.ObjectEditor = My.Settings.ObjectEditor
         GroupBox1.Enabled = If(cbEditorStyle.SelectedIndex = 0, True, False)
     End Sub
 

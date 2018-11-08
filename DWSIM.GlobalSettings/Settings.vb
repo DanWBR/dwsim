@@ -146,6 +146,8 @@ Public Class Settings
 
     Public Shared Property UIScalingFactor As Double = 1.0
 
+    Public Shared Property ObjectEditor As Integer = 0
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
@@ -404,7 +406,9 @@ Public Class Settings
 
         CallSolverOnEditorPropertyChanged = source.Configs("Misc").GetBoolean("CallSolverOnEditorPropertyChanged", False)
 
-        UIScalingFactor = source.Configs("Misc").Get("UIScalingFactor", 1.0)
+        UIScalingFactor = source.Configs("Misc").GetDouble("UIScalingFactor", 1.0)
+
+        ObjectEditor = source.Configs("Misc").GetInt("ObjectEditor", 0)
 
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
@@ -523,6 +527,8 @@ Public Class Settings
         source.Configs("Misc").Set("CallSolverOnEditorPropertyChanged", CallSolverOnEditorPropertyChanged)
 
         source.Configs("Misc").Set("UIScalingFactor", UIScalingFactor)
+
+        source.Configs("Misc").Set("ObjectEditor", ObjectEditor)
 
         'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
         'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)

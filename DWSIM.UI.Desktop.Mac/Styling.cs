@@ -28,7 +28,7 @@ namespace DWSIM.UI.Desktop.Mac
                 var tbox = (NSTextField)control.ControlObject;
                 tbox.Alignment = NSTextAlignment.Right;
             });
-            
+
         }
 
         public static void FinishedLaunching()

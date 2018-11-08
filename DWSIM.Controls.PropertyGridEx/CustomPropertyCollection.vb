@@ -102,81 +102,86 @@ Namespace PropertyGridEx
         Public Function GetProperties(ByVal attributes() As System.Attribute) As System.ComponentModel.PropertyDescriptorCollection Implements System.ComponentModel.ICustomTypeDescriptor.GetProperties
 
             Dim Properties As New PropertyDescriptorCollection(Nothing)
-            Dim CustomProp As CustomProperty
-            For Each CustomProp In MyBase.List
-                If CustomProp.Visible Then
-                    Dim attrs As ArrayList = New ArrayList()
+            Try
+                Dim CustomProp As CustomProperty
+                For Each CustomProp In MyBase.List
+                    If CustomProp.Visible Then
+                        Dim attrs As ArrayList = New ArrayList()
 
-                    ' Expandable Object Converter
-                    If CustomProp.IsBrowsable Then
-                        attrs.Add(New TypeConverterAttribute(GetType(BrowsableTypeConverter)))
-                    End If
-
-                    ' The Filename Editor
-                    If CustomProp.UseFileNameEditor = True Then
-                        attrs.Add(New EditorAttribute(GetType(UIFilenameEditor), GetType(UITypeEditor)))
-                    End If
-
-                    ' Custom Choices Type Converter
-                    If CustomProp.Choices IsNot Nothing Then
-                        attrs.Add(New TypeConverterAttribute(GetType(CustomChoices.CustomChoicesTypeConverter)))
-                    End If
-
-                    ' Password Property
-                    If CustomProp.IsPassword Then
-                        attrs.Add(New PasswordPropertyTextAttribute(True))
-                    End If
-
-                    ' Parenthesize Property
-                    If CustomProp.Parenthesize Then
-                        attrs.Add(New ParenthesizePropertyNameAttribute(True))
-                    End If
-
-                    ' Datasource
-                    If CustomProp.Datasource IsNot Nothing Then
-                        attrs.Add(New EditorAttribute(GetType(UIListboxEditor), GetType(UITypeEditor)))
-                    End If
-
-                    ' Custom Editor
-                    If CustomProp.CustomEditor IsNot Nothing Then
-                        attrs.Add(New EditorAttribute(CustomProp.CustomEditor.GetType, GetType(UITypeEditor)))
-                    End If
-
-                    ' Custom Type Converter
-                    If CustomProp.CustomTypeConverter IsNot Nothing Then
-                        attrs.Add(New TypeConverterAttribute(CustomProp.CustomTypeConverter.GetType))
-                    End If
-
-                    ' Is Percentage
-                    If CustomProp.IsPercentage Then
-                        attrs.Add(New TypeConverterAttribute(GetType(OpacityConverter)))
-                    End If
-
-                    ' 3-dots button event delegate
-                    If CustomProp.OnClick IsNot Nothing Then
-                        attrs.Add(New EditorAttribute(GetType(UICustomEventEditor), GetType(UITypeEditor)))
-                    End If
-
-                    ' Default value attribute
-                    If CustomProp.DefaultValue IsNot Nothing Then
-                        attrs.Add(New DefaultValueAttribute(CustomProp.Type, CustomProp.Value.ToString))
-                    Else
-                        ' Default type attribute
-                        If CustomProp.DefaultType IsNot Nothing Then
-                            attrs.Add(New DefaultValueAttribute(CustomProp.DefaultType, Nothing))
+                        ' Expandable Object Converter
+                        If CustomProp.IsBrowsable Then
+                            attrs.Add(New TypeConverterAttribute(GetType(BrowsableTypeConverter)))
                         End If
-                    End If
 
-                    ' Extra Attributes
-                    If CustomProp.Attributes IsNot Nothing Then
-                        attrs.AddRange(CustomProp.Attributes)
-                    End If
+                        ' The Filename Editor
+                        If CustomProp.UseFileNameEditor = True Then
+                            attrs.Add(New EditorAttribute(GetType(UIFilenameEditor), GetType(UITypeEditor)))
+                        End If
 
-                    ' Add my own attributes
-                    Dim attrArray As Attribute() = attrs.ToArray(GetType(Attribute))
-                    Properties.Add(New CustomProperty.CustomPropertyDescriptor(CustomProp, attrArray))
-                End If
-            Next
+                        ' Custom Choices Type Converter
+                        If CustomProp.Choices IsNot Nothing Then
+                            attrs.Add(New TypeConverterAttribute(GetType(CustomChoices.CustomChoicesTypeConverter)))
+                        End If
+
+                        ' Password Property
+                        If CustomProp.IsPassword Then
+                            attrs.Add(New PasswordPropertyTextAttribute(True))
+                        End If
+
+                        ' Parenthesize Property
+                        If CustomProp.Parenthesize Then
+                            attrs.Add(New ParenthesizePropertyNameAttribute(True))
+                        End If
+
+                        ' Datasource
+                        If CustomProp.Datasource IsNot Nothing Then
+                            attrs.Add(New EditorAttribute(GetType(UIListboxEditor), GetType(UITypeEditor)))
+                        End If
+
+                        ' Custom Editor
+                        If CustomProp.CustomEditor IsNot Nothing Then
+                            attrs.Add(New EditorAttribute(CustomProp.CustomEditor.GetType, GetType(UITypeEditor)))
+                        End If
+
+                        ' Custom Type Converter
+                        If CustomProp.CustomTypeConverter IsNot Nothing Then
+                            attrs.Add(New TypeConverterAttribute(CustomProp.CustomTypeConverter.GetType))
+                        End If
+
+                        ' Is Percentage
+                        If CustomProp.IsPercentage Then
+                            attrs.Add(New TypeConverterAttribute(GetType(OpacityConverter)))
+                        End If
+
+                        ' 3-dots button event delegate
+                        If CustomProp.OnClick IsNot Nothing Then
+                            attrs.Add(New EditorAttribute(GetType(UICustomEventEditor), GetType(UITypeEditor)))
+                        End If
+
+                        ' Default value attribute
+                        If CustomProp.DefaultValue IsNot Nothing Then
+                            attrs.Add(New DefaultValueAttribute(CustomProp.Type, CustomProp.Value.ToString))
+                        Else
+                            ' Default type attribute
+                            If CustomProp.DefaultType IsNot Nothing Then
+                                attrs.Add(New DefaultValueAttribute(CustomProp.DefaultType, Nothing))
+                            End If
+                        End If
+
+                        ' Extra Attributes
+                        If CustomProp.Attributes IsNot Nothing Then
+                            attrs.AddRange(CustomProp.Attributes)
+                        End If
+
+                        ' Add my own attributes
+                        Dim attrArray As Attribute() = attrs.ToArray(GetType(Attribute))
+                        Properties.Add(New CustomProperty.CustomPropertyDescriptor(CustomProp, attrArray))
+                    End If
+                Next
+
+            Catch ex As Exception
+
+            End Try
             Return Properties
         End Function
 

@@ -4,7 +4,7 @@ using Eto.Drawing;
 
 namespace DWSIM.UI.Forms
 {
-    public class FlowsheetObjectPanelItem: TableLayout  
+    public class FlowsheetObjectPanelItem : TableLayout
     {
 
         public ImageView imgIcon;
@@ -14,8 +14,7 @@ namespace DWSIM.UI.Forms
 
         public FlowsheetObjectPanelItem()
         {
-
-            int padding = (int)(GlobalSettings.Settings.UIScalingFactor * 2);
+            
             int height = (int)(GlobalSettings.Settings.UIScalingFactor * 70);
 
             int iconsize = (int)(GlobalSettings.Settings.UIScalingFactor * 32);
@@ -23,9 +22,8 @@ namespace DWSIM.UI.Forms
             Size = new Size(width, height);
 
             imgIcon = new ImageView() { Size = new Eto.Drawing.Size(iconsize, iconsize) };
-            txtName = new Label() { Text = "Name", Width = width, Font = SystemFonts.Bold(), TextAlignment = TextAlignment.Center  };
-
-            txtName.Font = new Font(SystemFont.Bold, 7);
+            txtName = new Label() { Text = "Name", Width = width, Font = SystemFonts.Bold(), TextAlignment = TextAlignment.Center };
+            txtName.Font = new Font(SystemFont.Bold, 9);
 
             Rows.Add(imgIcon);
             Rows.Add(txtName);
@@ -33,21 +31,12 @@ namespace DWSIM.UI.Forms
             MouseEnter += FlowsheetObjectPanelItem_MouseEnter;
 
             MouseLeave += FlowsheetObjectPanelItem_MouseLeave;
-
-            if (!GlobalSettings.Settings.DarkMode) BackgroundColor = Colors.White; else BackgroundColor = Colors.Black;
             
         }
 
         private void FlowsheetObjectPanelItem_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (!GlobalSettings.Settings.DarkMode)
-            {
-                BackgroundColor = Colors.White;
-            }
-            else
-            {
-                BackgroundColor = Colors.Black;
-            }
+            BackgroundColor = SystemColors.ControlBackground;
         }
 
         private void FlowsheetObjectPanelItem_MouseEnter(object sender, MouseEventArgs e)
@@ -60,7 +49,7 @@ namespace DWSIM.UI.Forms
             {
                 BackgroundColor = Colors.LightSteelBlue;
             }
-           
+
         }
     }
 }

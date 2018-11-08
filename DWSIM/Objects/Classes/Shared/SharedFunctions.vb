@@ -77,6 +77,7 @@ Namespace DWSIM
             GlobalSettings.Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
             GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
             GlobalSettings.Settings.DefaultEditFormLocation = My.Settings.DefaultEditorLocation
+            GlobalSettings.Settings.ObjectEditor = My.Settings.ObjectEditor
 
             GlobalSettings.Settings.InspectorEnabled = My.Settings.InspectorEnabled
 
@@ -376,6 +377,7 @@ Namespace DWSIM
             My.Settings.UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", True)
 
             My.Settings.CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
+            My.Settings.ObjectEditor = source.Configs("Misc").GetInt("ObjectEditor", 0)
 
             My.Settings.AutomaticUpdates = source.Configs("Misc").GetBoolean("AutoUpdate", True)
 
@@ -471,6 +473,7 @@ Namespace DWSIM
             source.Configs("Misc").Set("UseSIMDExtensions", My.Settings.UseSIMDExtensions)
             source.Configs("Misc").Set("CloseFormsOnDeselecting", My.Settings.CloseFormsOnDeselecting)
             source.Configs("Misc").Set("AutoUpdate", My.Settings.AutomaticUpdates)
+            source.Configs("Misc").Set("ObjectEditor", My.Settings.ObjectEditor)
 
             source.Configs("Misc").Set("DefaultEditorLocation", My.Settings.DefaultEditorLocation)
             source.Configs("Misc").Set("EnableMultipleObjectEditors", My.Settings.EnableMultipleObjectEditors)
