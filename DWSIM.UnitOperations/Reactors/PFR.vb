@@ -734,6 +734,7 @@ Namespace Reactors
                                 ims.Phases(0).Properties.temperature += DeltaT * dV
 
                                 T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                                Tant = T
 
                                 ims.SpecType = StreamSpec.Temperature_and_Pressure
 
