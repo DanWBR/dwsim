@@ -234,6 +234,8 @@ Public Class FormMain
 
         Me.Text = DWSIM.App.GetLocalString("FormParent_FormText")
 
+        GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
+
     End Sub
 
     Sub SearchCOMOs()
