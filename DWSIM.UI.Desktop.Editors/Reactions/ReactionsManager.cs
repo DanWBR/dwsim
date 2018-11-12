@@ -36,8 +36,8 @@ namespace DWSIM.UI.Desktop.Editors
             rxcontainer = new DynamicLayout();
             rscontainer = new DynamicLayout();
 
-            rxcontainer.BackgroundColor = Colors.White;
-            rscontainer.BackgroundColor = Colors.White;
+            //rxcontainer.BackgroundColor = Colors.White;
+            //rscontainer.BackgroundColor = Colors.White;
 
             if (flowsheet.ReactionSets.Count == 0) { flowsheet.ReactionSets.Add("DefaultSet", new ReactionSet("DefaultSet", "Default Set", "")); }
 

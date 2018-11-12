@@ -1,3 +1,8 @@
+Version 5.5 Update 1
+
+- [CHG] Updated ChemSep database
+- [FIX] Bug fixes
+
 Version 5.5
 
 - [NEW] Added an option to use legacy property editors
