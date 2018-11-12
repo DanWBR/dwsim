@@ -19,7 +19,7 @@ namespace DWSIM.UI.Forms
 
         private bool loaded = false;
 
-        private TabPage PageResults, PageEditor;
+        private TabPage PageResults, PageEditor, PageConnections;
 
         public ObjectEditorContainer(ISimulationObject sobj) : base()
         {
@@ -59,6 +59,8 @@ namespace DWSIM.UI.Forms
                 tab1.Content = scr1;
 
                 Pages.Add(tab1);
+
+                PageConnections = tab1;
 
             }
 
@@ -183,6 +185,40 @@ namespace DWSIM.UI.Forms
             if (SelectedPanel >= 0) SelectedIndex = SelectedPanel;
 
             loaded = true;
+
+        }
+
+        public void UpdateConnections()
+        {
+
+            if ( PageConnections != null)
+            {
+
+                PageConnections.Content = null;
+
+                // connections
+
+                if (obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream &&
+                    obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream &&
+                    obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust &&
+                    obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
+                {
+
+                    var tab1 = new TabPage();
+                    tab1.Text = "Connections";
+
+                    var cont0 = UI.Shared.Common.GetDefaultContainer();
+
+                    UI.Shared.Common.CreateAndAddDescriptionRow(cont0, "ConnectorsEditorDescription".Localize());
+                    new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont0);
+
+                    cont0.Width = this.Width - 30;
+                    
+                    PageConnections.Content = new Scrollable() { Content = cont0, Width = this.Width - 30 };
+
+                }
+                
+            }
 
         }
 

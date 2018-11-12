@@ -51,7 +51,6 @@ Namespace DWSIM.Editors.CustomUO
                     If ctx.CustomProperty.Tag Is Nothing Then
                         With form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                             selectionControl.scripttext = .ScriptText
-                            selectionControl.language = .Language
                             selectionControl.fontname = .FontName
                             selectionControl.fontsize = .FontSize
                             selectionControl.includes = .Includes
@@ -60,7 +59,6 @@ Namespace DWSIM.Editors.CustomUO
                     Else
                         If ctx.CustomProperty.Tag = "B" Then selectionControl.scripttext = obj.ScriptExt_ScriptTextB
                         If ctx.CustomProperty.Tag = "A" Then selectionControl.scripttext = obj.ScriptExt_ScriptTextA
-                        selectionControl.language = obj.ScriptExt_Language
                         selectionControl.fontname = obj.ScriptExt_FontName
                         selectionControl.fontsize = obj.ScriptExt_FontSize
                         selectionControl.includes = obj.ScriptExt_Includes

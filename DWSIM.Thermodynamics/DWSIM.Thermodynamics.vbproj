@@ -747,6 +747,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\Databases\CoolPropIncompPure.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\chemsep2.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -349,7 +349,7 @@ namespace DWSIM.UI.Forms
             {
                 var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl.Height };
                 insform.ShowModal(this);
-
+                UpdateEditorConnectionsPanel();
             };
 
             btnSensAnalysis.Click += (sender, e) =>
@@ -769,6 +769,7 @@ namespace DWSIM.UI.Forms
                 if (e.Data.GetString("ObjectName") != null)
                 {
                     FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y / FlowsheetControl.FlowsheetSurface.Zoom));
+                    UpdateEditorConnectionsPanel();
                 }
             };
 
@@ -1399,6 +1400,7 @@ namespace DWSIM.UI.Forms
                     var z = FlowsheetControl.FlowsheetSurface.Zoom;
                     FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
                     FlowsheetControl.Invalidate();
+                    UpdateEditorConnectionsPanel();
                 };
                 item0.Items.Add(menuitem);
             }
@@ -1630,6 +1632,14 @@ namespace DWSIM.UI.Forms
             foreach (DocumentPage item in EditorHolder.Pages)
             {
                 ((ObjectEditorContainer)item.Content).Update();
+            }
+        }
+
+        private void UpdateEditorConnectionsPanel()
+        {
+            foreach (DocumentPage item in EditorHolder.Pages)
+            {
+                ((ObjectEditorContainer)item.Content).UpdateConnections();
             }
         }
 

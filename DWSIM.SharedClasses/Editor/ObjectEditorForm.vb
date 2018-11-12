@@ -30,6 +30,7 @@
             Dim control As Control
             If TypeOf sender Is TabPage Then
                 control = sender.GetChildAtPoint(eventloc)
+                If control Is Nothing Then control = sender
             Else
                 control = GetChildAtPoint(eventloc)
             End If

@@ -53,6 +53,7 @@ Namespace Databases
 
         Private _ids As System.Collections.Generic.Dictionary(Of Integer, ChemSepNameIDPair)
         Private xmldoc As XmlDocument
+        Private xmldoc2 As XmlDocument
 
         Public ReadOnly Property IDs() As System.Collections.Generic.Dictionary(Of Integer, ChemSepNameIDPair)
             Get
@@ -121,14 +122,33 @@ Namespace Databases
             xmldoc = New XmlDocument
             xmldoc.LoadXml(mytxt)
 
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.chemsep2.xml")
+                Using t As New StreamReader(filestr)
+                    mytxt = t.ReadToEnd()
+                End Using
+            End Using
+
+            xmldoc2 = New XmlDocument
+            xmldoc2.LoadXml(mytxt)
+
             mytxt = Nothing
 
         End Sub
 
         Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
+            cpa = GetComps(xmldoc)
+            cpa.AddRange(GetComps(xmldoc2))
+
+            Return cpa.ToArray()
+
+        End Function
+
+        Private Function GetComps(xmldoc As XmlDocument, Optional ByVal CompName As String = "") As List(Of Thermodynamics.BaseClasses.ConstantProperties)
+
+            Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
+            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
@@ -494,7 +514,7 @@ Namespace Databases
 
             Next
 
-            Return cpa.ToArray()
+            Return cpa
 
         End Function
 

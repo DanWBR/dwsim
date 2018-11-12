@@ -2491,7 +2491,7 @@ Public Class PropertyGridEditors
                 .DefaultValue = Nothing
                 .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
             End With
-            .Item.Add(DWSIM.App.GetLocalString("CorrentedeenergiaE"), ent4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlowE"), ent4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
             With .Item(.Item.Count - 1)
                 .DefaultValue = Nothing
                 .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
@@ -2527,13 +2527,13 @@ Public Class PropertyGridEditors
                 .DefaultValue = Nothing
                 .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
             End With
-            .Item.Add(DWSIM.App.GetLocalString("CorrentedeenergiaS"), saida4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+            .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlowS"), saida4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
             With .Item(.Item.Count - 1)
                 .DefaultValue = Nothing
                 .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
             End With
 
-            .Item.Add(DWSIM.App.GetLocalString("CUO_ScriptLanguage"), uo, "Language", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
+            .Item.Add(DWSIM.App.GetLocalString("CUO_ScriptLanguage"), uo, "ExecutionEngine", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
 
             .Item.Add(DWSIM.App.GetLocalString("InputVariables"), uo, "InputVariables", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
             With .Item(.Item.Count - 1)
