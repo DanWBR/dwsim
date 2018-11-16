@@ -117,7 +117,6 @@ namespace DWSIM.UI.Desktop.Shared
                     solvform.lblMessage.Text = "Solving flowsheet model, please wait...";
                     solvform.btnAbort.Click += (sender, e) =>
                     {
-
                         Application.Instance.AsyncInvoke(() =>
                         {
                             //surface.BackgroundColor = SkiaSharp.SKColors.White;
