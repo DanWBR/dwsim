@@ -19,6 +19,7 @@
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports DWSIM.GraphicObjects
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
 Namespace DWSIM.Editors.MasterTable
 
@@ -120,7 +121,7 @@ Namespace DWSIM.Editors.MasterTable
 
                 form = My.Application.ActiveSimulation
 
-                Dim mt As MasterTableGraphic = form.FormSurface.FlowsheetDesignSurface.SelectedObject
+                Dim mt As MasterTableGraphic = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject
 
                 Me.ListView2.Items.Clear()
                 If mt.SortedList.Count = 0 Then

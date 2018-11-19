@@ -127,6 +127,33 @@ Namespace GraphicObjects
 
             Dim rect As New SKRect(X, Y, Width, Height)
 
+            If GradientMode Then
+
+                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+
+                Dim radius2 = 0.8F * Math.Min(Width, Height)
+                Dim center = New SKPoint(r0.MidX, r0.MidY)
+                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+
+                Dim gradPen As New SKPaint()
+                With gradPen
+                    .Color = LineColor
+                    .StrokeWidth = LineWidth
+                    .IsStroke = False
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Shader = SKShader.CreateTwoPointConicalGradient(
+                                    offCenter, 1, center, radius2,
+                                    New SKColor() {SKColors.White, LineColor},
+                                    Nothing, SKShaderTileMode.Clamp)
+                End With
+
+                g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, gradPen)
+                g.DrawRect(rect2, gradPen)
+                g.DrawRect(rect3, gradPen)
+                g.DrawRect(rect4, gradPen)
+
+            End If
+
             g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, myPen)
             g.DrawRect(rect2, myPen)
             g.DrawRect(rect3, myPen)
@@ -173,17 +200,9 @@ Namespace GraphicObjects
 
             MyBase.New()
 
-            Select Case GlobalSettings.Settings.RunningPlatform
-                Case GlobalSettings.Settings.Platform.Windows
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Linux
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Mac
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Normal)
-            End Select
+            Me.DefaultTypeFace = SKTypeface.FromFamilyName("Arial", SKTypefaceStyle.Bold)
+            Me.RegularTypeFace = SKTypeface.FromFamilyName("Arial", SKTypefaceStyle.Normal)
+
 
         End Sub
 

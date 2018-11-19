@@ -47,13 +47,13 @@ Namespace DWSIM.Editors.Pump
 
                 If context.PropertyDescriptor.DisplayName = DWSIM.App.GetLocalString("PumpSetupCurves") Then
                     selectionControl.curveeditorshowmode = 0
-                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("PumpSetupCurves")
+                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("PumpSetupCurves")
                 Else
                     selectionControl.curveeditorshowmode = 1
-                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("PumpViewCurves")
+                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("PumpViewCurves")
                 End If
 
-                Dim myPump As UnitOperations.UnitOperations.Pump = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                Dim myPump As UnitOperations.UnitOperations.Pump = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
 
                 selectionControl.selectedpump = myPump
 

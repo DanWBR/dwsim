@@ -21,6 +21,8 @@ Imports System.Linq
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
+Imports DWSIM.DrawingTools
 
 Public Class EditingForm_Column_Connections
 
@@ -458,7 +460,7 @@ Public Class EditingForm_Column_Connections
                         If Not id = "" Then
                             Try
                                 Dim idx As Integer = form.SimulationObjects(id).GraphicObject.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
-                               dc.GraphicObject.InputConnectors.RemoveAt(idx)
+                                dc.GraphicObject.InputConnectors.RemoveAt(idx)
                                 form.DisconnectObjects(form.SimulationObjects(id).GraphicObject, dc.GraphicObject)
                             Catch ex As Exception
                             End Try
@@ -472,9 +474,9 @@ Public Class EditingForm_Column_Connections
                             fidx = 0
                             tidx = .InputConnectors.Count - 1
                             If dc.GraphicObject.FlippedH Then
-                                .InputConnectors(.InputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .InputConnectors(.InputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             Else
-                                .InputConnectors(.InputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .InputConnectors(.InputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             End If
                             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamID = sid
                             form.ConnectObjects(form.SimulationObjects(sid).GraphicObject, dc.GraphicObject, fidx, tidx)
@@ -529,9 +531,9 @@ Public Class EditingForm_Column_Connections
                             tidx = 0
                             .OutputConnectors(.OutputConnectors.Count - 1).Type = ConType.ConOut
                             If dc.GraphicObject.FlippedH Then
-                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             Else
-                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             End If
                             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamID = sid
                             form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
@@ -593,25 +595,25 @@ Public Class EditingForm_Column_Connections
                             .OutputConnectors(.OutputConnectors.Count - 1).Type = ConType.ConOut
                             fidx = .OutputConnectors.Count - 1
                             tidx = 0
-                            Dim pos As Point = New Point
+                            Dim pos As Point.Point = New Point.Point
                             Select Case dc.MaterialStreams(id).StreamBehavior
                                 Case StreamInformation.Behavior.OverheadVapor
                                     If Not dc.GraphicObject.FlippedH Then
-                                        pos = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
+                                        pos = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
                                     Else
-                                        pos = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
+                                        pos = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
                                     End If
                                 Case StreamInformation.Behavior.Distillate
                                     If Not dc.GraphicObject.FlippedH Then
-                                        pos = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
+                                        pos = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
                                     Else
-                                        pos = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
+                                        pos = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
                                     End If
                                 Case StreamInformation.Behavior.BottomsLiquid
                                     If Not dc.GraphicObject.FlippedH Then
-                                        pos = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
+                                        pos = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
                                     Else
-                                        pos = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
+                                        pos = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
                                     End If
                             End Select
                             .OutputConnectors(.OutputConnectors.Count - 1).Position = pos
@@ -660,7 +662,7 @@ Public Class EditingForm_Column_Connections
                         If Not id = "" Then
                             Try
                                 Dim idx As Integer = form.SimulationObjects(id).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                 dc.GraphicObject.OutputConnectors.RemoveAt(idx)
+                                dc.GraphicObject.OutputConnectors.RemoveAt(idx)
                                 form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(id).GraphicObject)
                             Catch ex As Exception
                             End Try
@@ -676,9 +678,9 @@ Public Class EditingForm_Column_Connections
                                     fidx = .OutputConnectors.Count - 1
                                     tidx = 0
                                     If dc.GraphicObject.FlippedH Then
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
                                     Else
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
                                     End If
                                 Case StreamInformation.Behavior.BottomsLiquid
                                     .OutputConnectors.Add(New ConnectionPoint())
@@ -686,9 +688,9 @@ Public Class EditingForm_Column_Connections
                                     fidx = .OutputConnectors.Count - 1
                                     tidx = 0
                                     If dc.GraphicObject.FlippedH Then
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
                                     Else
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
                                     End If
                                 Case StreamInformation.Behavior.InterExchanger
                                     .OutputConnectors.Add(New ConnectionPoint())
@@ -696,9 +698,9 @@ Public Class EditingForm_Column_Connections
                                     fidx = .OutputConnectors.Count - 1
                                     tidx = 0
                                     If dc.GraphicObject.FlippedH Then
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                                     Else
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                                     End If
                             End Select
                             If dc.EnergyStreams.ContainsKey(id) Then dc.EnergyStreams(id).StreamID = sid

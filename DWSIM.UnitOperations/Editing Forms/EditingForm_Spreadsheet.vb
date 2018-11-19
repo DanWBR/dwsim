@@ -42,21 +42,21 @@ Public Class EditingForm_SpreadsheetUO
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
                 lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
-                lblStatus.ForeColor = Drawing.Color.Blue
+                lblStatus.ForeColor = System.Drawing.Color.Blue
             Else
                 If Not .GraphicObject.Active Then
                     lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
-                    lblStatus.ForeColor = Drawing.Color.Gray
+                    lblStatus.ForeColor = System.Drawing.Color.Gray
                 ElseIf .ErrorMessage <> "" Then
                     If .ErrorMessage.Length > 50 Then
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
                     Else
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
                     End If
-                    lblStatus.ForeColor = Drawing.Color.Red
+                    lblStatus.ForeColor = System.Drawing.Color.Red
                 Else
                     lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")
-                    lblStatus.ForeColor = Drawing.Color.Black
+                    lblStatus.ForeColor = System.Drawing.Color.Black
                 End If
             End If
 

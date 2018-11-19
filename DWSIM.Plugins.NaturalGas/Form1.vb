@@ -9,7 +9,6 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.SharedClasses.SystemsOfUnits
-Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.Thermodynamics
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums.GraphicObjects
@@ -26,9 +25,9 @@ Public Class Form1
 
         'remove SelectedObjectChanged event handler
 
-        Dim eventhandler As DWSIM.FlowsheetSurface.ObjectSelectedEventHandler = AddressOf SelectedObjectChanged
+        Dim eventhandler As DWSIM.Drawing.SkiaSharp.GraphicsSurface.SelectionChangedEventHandler = AddressOf SelectedObjectChanged
 
-        RemoveHandler fsheet.FormSurface.ObjectSelected, eventhandler
+        RemoveHandler fsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectionChanged, eventhandler
 
         'For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
         '    If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
@@ -44,9 +43,9 @@ Public Class Form1
 
         'add SelectedObjectChanged event handler
 
-        Dim eventhandler As DWSIM.FlowsheetSurface.ObjectSelectedEventHandler = AddressOf SelectedObjectChanged
+        Dim eventhandler As DWSIM.Drawing.SkiaSharp.GraphicsSurface.SelectionChangedEventHandler = AddressOf SelectedObjectChanged
 
-        AddHandler fsheet.FormSurface.ObjectSelected, eventhandler
+        AddHandler fsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectionChanged, eventhandler
 
         'For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
         '    If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
@@ -56,7 +55,7 @@ Public Class Form1
 
     End Sub
 
-    Sub SelectedObjectChanged(ByVal sender As FormFlowsheet)
+    Sub SelectedObjectChanged(ByVal sender As Object, ByVal e As DWSIM.Drawing.SkiaSharp.SelectionChangedEventArgs)
 
         Me.lblStream.Text = ""
         Me.lblCalcd.Text = ""
@@ -65,12 +64,10 @@ Public Class Form1
         Me.Invalidate()
 
         'check if we have a selected object.
-        If Not fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+        If Not fsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
 
             Dim p As New Populate()
             p.Populate(fsheet, Me)
-
-            fsheet.FormSurface.FlowsheetDesignSurface.Focus()
 
         End If
 

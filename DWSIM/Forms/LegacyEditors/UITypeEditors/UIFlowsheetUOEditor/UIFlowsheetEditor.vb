@@ -46,9 +46,9 @@ Namespace DWSIM.Editors.FlowsheetUO
 
                 Dim selectionControl As New EditingForm_Flowsheet_Editor
 
-                selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
+                selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
 
-                selectionControl.fsuo = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                selectionControl.fsuo = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
 
                 editorService.ShowDialog(selectionControl)
 

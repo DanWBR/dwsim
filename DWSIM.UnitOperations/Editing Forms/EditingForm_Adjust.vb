@@ -153,7 +153,7 @@ Public Class EditingForm_Adjust
             Next
 
             SimObject.ManipulatedObject = SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
-            DirectCast(SimObject.GraphicObject, DrawingTools.GraphicObjects.AdjustGraphic).ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
+            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AdjustGraphic).ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
 
         End If
 
@@ -200,7 +200,7 @@ Public Class EditingForm_Adjust
             Next
 
             SimObject.ControlledObject = SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
-            DirectCast(SimObject.GraphicObject, DrawingTools.GraphicObjects.AdjustGraphic).ConnectedToCv = SimObject.ControlledObject.GraphicObject
+            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AdjustGraphic).ConnectedToCv = SimObject.ControlledObject.GraphicObject
 
         End If
 
@@ -287,9 +287,9 @@ Public Class EditingForm_Adjust
         Dim tbox = DirectCast(sender, TextBox)
 
         If tbox.Text.IsValidDoubleExpression Then
-            tbox.ForeColor = Drawing.Color.Blue
+            tbox.ForeColor = System.Drawing.Color.Blue
         Else
-            tbox.ForeColor = Drawing.Color.Red
+            tbox.ForeColor = System.Drawing.Color.Red
         End If
 
     End Sub

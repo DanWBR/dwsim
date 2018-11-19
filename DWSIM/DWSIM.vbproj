@@ -305,6 +305,18 @@
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SkiaSharp, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.1.60.0\lib\net45\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Desktop, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\net45\SkiaSharp.Views.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Gtk, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\net45\SkiaSharp.Views.Gtk.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.WPF, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\net45\SkiaSharp.Views.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="SpinningProgress">
       <HintPath>References\SpinningProgress.dll</HintPath>
     </Reference>
@@ -396,6 +408,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\EditorTooltips\EditorTooltips.vb" />
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurfaceControl.designer.vb">
+      <DependentUpon>FlowsheetSurfaceControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurfaceControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.designer.vb">
+      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </Compile>
@@ -723,7 +747,6 @@
     <Compile Include="Objects\Classes\AssemblyResolver\AssemblyResolver1.vb" />
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Objects\Classes\General\TableGraphic.vb" />
     <Compile Include="Forms\Flowsheet Components\MaterialStreamPanel.Designer.vb">
       <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </Compile>
@@ -752,12 +775,6 @@
       <DependentUpon>LogPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\LogPanel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.Designer.vb">
-      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Flowsheet\FormFlowsheet.Designer.vb">
@@ -1014,6 +1031,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.de.resx">
+      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.en.resx">
+      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.resx">
+      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.de.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
@@ -1438,6 +1464,18 @@
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
+      <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
+      <Name>DWSIM.DrawingTools.SkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DrawingTools.Point\DWSIM.DrawingTools.Point.vbproj">
+      <Project>{0f6737eb-db5a-4872-bef8-5ef10b4f1c1c}</Project>
+      <Name>DWSIM.DrawingTools.Point</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DrawingTools.SkiaSharp.Extended\DWSIM.DrawingTools.SkiaSharp.Extended.csproj">
+      <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
+      <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
       <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
       <Name>DWSIM.ExtensionMethods.Eto</Name>
@@ -1457,10 +1495,6 @@
     <ProjectReference Include="..\DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
       <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
       <Name>DWSIM.MathOps.DotNumerics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
-      <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
-      <Name>DWSIM.DrawingTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
@@ -1602,10 +1636,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main Window\FormMain.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
@@ -1645,10 +1675,6 @@
     <EmbeddedResource Include="Forms\Flowsheet Components\LogPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LogPanel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
@@ -2320,9 +2346,6 @@
     <EmbeddedResource Include="Forms\Flowsheet Components\MaterialStreamPanel.es.resx">
       <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.de.resx">
-      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Analysis\FormOptimization.de.resx">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </EmbeddedResource>
@@ -2690,6 +2713,7 @@ del "$(SolutionDir)DistPackages\Windows_32\*.tmp"
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\Eto.Forms.2.5.0-ci-10045\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.5.0-ci-10045\build\Eto.Forms.targets'))" />
+    <Error Condition="!Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -2711,4 +2735,5 @@ del "$(SolutionDir)DistPackages\Windows_32\*.tmp"
     <Message Importance="normal" Text="Adding back DesignTimeFacades from ReferencePath now that SGen has run." />
   </Target>
   <Import Project="..\packages\Eto.Forms.2.5.0-ci-10045\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.5.0-ci-10045\build\Eto.Forms.targets')" />
+  <Import Project="..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" />
 </Project>

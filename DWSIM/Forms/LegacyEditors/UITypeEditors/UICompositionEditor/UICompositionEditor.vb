@@ -43,23 +43,23 @@ Namespace DWSIM.Editors.Composition
             If (editorService IsNot Nothing) Then
 
                 Dim selectionControl As New CompositionEditorForm
-                selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & DWSIM.App.GetLocalString("EditComp")
+                selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & DWSIM.App.GetLocalString("EditComp")
                 selectionControl.Componentes = value
                 selectionControl.NF = form.Options.NumberFormat
                 selectionControl.SU = form.Options.SelectedUnitSystem
-                selectionControl.Q = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow
-                selectionControl.W = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow
-                selectionControl.Solvent = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent
-                selectionControl.InitialComposition = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition
-                selectionControl.Stream = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
-                selectionControl.tbTag.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
+                selectionControl.Q = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).Phases(0).Properties.molarflow
+                selectionControl.W = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).Phases(0).Properties.massflow
+                selectionControl.Solvent = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).ReferenceSolvent
+                selectionControl.InitialComposition = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).InputComposition
+                selectionControl.Stream = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+                selectionControl.tbTag.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
 
                 editorService.ShowDialog(selectionControl)
 
-                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow = selectionControl.Q
-                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow = selectionControl.W
-                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent = selectionControl.Solvent
-                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition = selectionControl.InitialComposition
+                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).Phases(0).Properties.molarflow = selectionControl.Q
+                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).Phases(0).Properties.massflow = selectionControl.W
+                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).ReferenceSolvent = selectionControl.Solvent
+                form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).InputComposition = selectionControl.InitialComposition
 
                 value = selectionControl.Componentes
 

@@ -33,6 +33,8 @@ Imports System.Windows.Forms
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.SharedClasses.UnitOperations
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 
 Namespace UnitOperations.Auxiliary
 
@@ -409,7 +411,7 @@ Label_00CC:
                     Dim obj As GraphicObject = Nothing
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                     If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-                    If obj Is Nothing Then obj = DrawingTools.GraphicObjects.GraphicObject.ReturnInstance(xel.Element("Type").Value)
+                    'If obj Is Nothing Then obj = GraphicObject.ReturnInstance(xel.Element("Type").Value)
                     If Not obj Is Nothing Then
                         obj.LoadData(xel.Elements.ToList)
                         obj.Name = pkey & obj.Name
@@ -417,11 +419,10 @@ Label_00CC:
                         obj.Y += shift
                         If pkey <> "" Then
                             searchtext = obj.Tag.Split("(")(0).Trim()
-                            objcount = (From go As GraphicObject In fs.GraphicObjects.Values Select go Where go.Tag.Equals(obj.Tag)).Count
+                            objcount = (From go As IGraphicObject In fs.GraphicObjects.Values Select go Where go.Tag.Equals(obj.Tag)).Count
                             If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                         End If
-                        If TypeOf obj Is DistillationColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or
-                            TypeOf obj Is RefluxedAbsorberGraphic Or TypeOf obj Is ReboiledAbsorberGraphic Or TypeOf obj Is CapeOpenUOGraphic Then
+                        If TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
                             obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
                         Else
                             If obj.Name = "" Then obj.Name = obj.Tag

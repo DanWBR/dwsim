@@ -120,10 +120,10 @@ Public Class EditingForm_Spec
 
         Try
             lblResult.Text = "Y = " & SimObject.ParseExpression() & " " & SimObject.FlowSheet.SimulationObjects(SimObject.TargetObjectData.ID).GetPropertyUnit(SimObject.TargetObjectData.PropertyName, units)
-            tbox.ForeColor = Drawing.Color.Blue
+            tbox.ForeColor = System.Drawing.Color.Blue
         Catch ex As Exception
             lblResult.Text = "Error"
-            tbox.ForeColor = Drawing.Color.Red
+            tbox.ForeColor = System.Drawing.Color.Red
         End Try
 
     End Sub
@@ -161,9 +161,9 @@ Public Class EditingForm_Spec
                 Next
 
                 SimObject.SourceObject = SimObject.FlowSheet.SimulationObjects(SimObject.SourceObjectData.ID)
-                DirectCast(SimObject.GraphicObject, DrawingTools.GraphicObjects.SpecGraphic).ConnectedToSv = SimObject.SourceObject.GraphicObject
-           
-            End If
+            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.SpecGraphic).ConnectedToSv = SimObject.SourceObject.GraphicObject
+
+        End If
 
     End Sub
 
@@ -208,9 +208,9 @@ Public Class EditingForm_Spec
                 Next
 
                 SimObject.TargetObject = SimObject.FlowSheet.SimulationObjects(SimObject.TargetObjectData.ID)
-                DirectCast(SimObject.GraphicObject, DrawingTools.GraphicObjects.SpecGraphic).ConnectedToTv = SimObject.TargetObject.GraphicObject
-       
-            End If
+            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.SpecGraphic).ConnectedToTv = SimObject.TargetObject.GraphicObject
+
+        End If
 
     End Sub
 

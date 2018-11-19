@@ -141,8 +141,7 @@ Public Class FormAddFlowsheetObject
                 tobj = ObjectType.FlowsheetUO
         End Select
 
-        Flowsheet.AddObject(tobj, -Flowsheet.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Flowsheet.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
-            -Flowsheet.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Flowsheet.FormSurface.FlowsheetDesignSurface.Zoom + 30, "")
+        Flowsheet.AddObject(tobj, 30, 30, "")
 
         Me.Close()
 

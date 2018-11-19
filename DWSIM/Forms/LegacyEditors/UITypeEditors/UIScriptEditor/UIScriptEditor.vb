@@ -47,9 +47,9 @@ Namespace DWSIM.Editors.CustomUO
                 If Not DWSIM.App.IsRunningOnMono Then
                     Dim selectionControl As New ScriptEditorForm
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
-                    Dim obj = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim obj = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        With form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                        With form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
                             selectionControl.scripttext = .ScriptText
                             selectionControl.fontname = .FontName
                             selectionControl.fontsize = .FontSize
@@ -63,10 +63,10 @@ Namespace DWSIM.Editors.CustomUO
                         selectionControl.fontsize = obj.ScriptExt_FontSize
                         selectionControl.includes = obj.ScriptExt_Includes
                     End If
-                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
+                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
                     editorService.ShowDialog(selectionControl)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        With form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                        With form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
                             .FontName = selectionControl.tscb1.SelectedItem
                             .FontSize = selectionControl.tscb2.SelectedItem
                             .Includes = selectionControl.includes
@@ -82,13 +82,13 @@ Namespace DWSIM.Editors.CustomUO
                 Else
                     Dim selectionControl As New ScriptEditorFormMono
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
-                    Dim obj = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim obj = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        selectionControl.scripttext = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ScriptText
-                        selectionControl.language = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Language
-                        selectionControl.fontname = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontName
-                        selectionControl.fontsize = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontSize
-                        selectionControl.includes = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Includes
+                        selectionControl.scripttext = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).ScriptText
+                        selectionControl.language = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).Language
+                        selectionControl.fontname = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).FontName
+                        selectionControl.fontsize = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).FontSize
+                        selectionControl.includes = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).Includes
                     Else
                         If ctx.CustomProperty.Tag = "B" Then selectionControl.scripttext = obj.ScriptExt_ScriptTextB
                         If ctx.CustomProperty.Tag = "A" Then selectionControl.scripttext = obj.ScriptExt_ScriptTextA
@@ -97,12 +97,12 @@ Namespace DWSIM.Editors.CustomUO
                         selectionControl.fontsize = obj.ScriptExt_FontSize
                         selectionControl.includes = obj.ScriptExt_Includes
                     End If
-                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
+                    selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
                     editorService.ShowDialog(selectionControl)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontName = selectionControl.tscb1.SelectedItem
-                        form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontSize = selectionControl.tscb2.SelectedItem
-                        form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Includes = selectionControl.includes
+                        form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).FontName = selectionControl.tscb1.SelectedItem
+                        form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).FontSize = selectionControl.tscb2.SelectedItem
+                        form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).Includes = selectionControl.includes
                     Else
                         obj.ScriptExt_FontName = selectionControl.tscb1.SelectedItem
                         obj.ScriptExt_FontSize = selectionControl.tscb2.SelectedItem

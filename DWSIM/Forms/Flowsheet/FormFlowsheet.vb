@@ -15,7 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DrawingTools.GraphicObjects
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports System.ComponentModel
 Imports WeifenLuo.WinFormsUI
 Imports System.Linq
@@ -31,6 +31,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports System.Runtime.InteropServices
 Imports System.Dynamic
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -67,7 +68,7 @@ Public Class FormFlowsheet
     Public m_IsLoadedFromFile As Boolean = False
     Public m_overrideCloseQuestion As Boolean = False
 
-    Public FormSurface As New FlowsheetSurface
+    Public FormSurface As New FlowsheetSurface_SkiaSharp
     Public FormLog As New LogPanel
     Public FormMatList As New MaterialStreamPanel
     Public FormSpreadsheet As New SpreadsheetForm
@@ -167,7 +168,7 @@ Public Class FormFlowsheet
 
         Me.CalculationQueue = New Generic.Queue(Of ICalculationArgs)
 
-        Me.FormSurface.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
+        Me.FormSurface.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.Zoom, "#%")
 
         If GlobalSettings.Settings.CalculatorActivated Then
             Me.tsbAtivar.Checked = True
@@ -178,7 +179,7 @@ Public Class FormFlowsheet
         Me.tsbSimultAdjustSolver.Checked = Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled
 
         Me.FormSurface.ToolStripButton16.Checked = Me.Options.FlowsheetSnapToGrid
-        Me.FormSurface.FlowsheetDesignSurface.SnapToGrid = Me.Options.FlowsheetSnapToGrid
+        'Me.FormSurface.FlowsheetDesignSurface.SnapToGrid = Me.Options.FlowsheetSnapToGrid
         Me.FormSurface.ToolStripButton17.Checked = Me.Options.FlowsheetQuickConnect
 
         If Me.ScriptCollection Is Nothing Then Me.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
@@ -244,15 +245,6 @@ Public Class FormFlowsheet
 
             Me.Invalidate()
             Application.DoEvents()
-
-            Me.FormSurface.FlowsheetDesignSurface.Zoom = 1
-            Me.FormSurface.FlowsheetDesignSurface.VerticalScroll.Maximum = 7000
-            Me.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Maximum = 10000
-            Try
-                Me.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value = 3500
-                Me.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value = 5000
-            Catch ex As Exception
-            End Try
 
         End If
 
@@ -336,8 +328,12 @@ Public Class FormFlowsheet
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
-        FormSurface.FlowsheetDesignSurface.DrawFloatingTables = Options.DisplayFloatingPropertyTables
-        FormSurface.FlowsheetDesignSurface.DrawPropertyLists = Options.DisplayCornerPropertyList
+        FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
+        FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
+
+        Dim fs = FormSurface.FlowsheetDesignSurface
+        fs.FlowsheetSurface.ZoomAll(fs.Width, fs.Height)
+        fs.FlowsheetSurface.ZoomAll(fs.Width, fs.Height)
 
     End Sub
 
@@ -513,7 +509,7 @@ Public Class FormFlowsheet
         Tag
     End Enum
 
-    Public Shared Function SearchSurfaceObjectsByName(ByVal Name As String, ByVal Surface As GraphicsSurface) As GraphicObject
+    Public Shared Function SearchSurfaceObjectsByName(ByVal Name As String, ByVal Surface As Drawing.SkiaSharp.GraphicsSurface) As GraphicObject
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
@@ -527,7 +523,7 @@ Public Class FormFlowsheet
 
     End Function
 
-    Public Shared Function SearchSurfaceObjectsByTag(ByVal Name As String, ByVal Surface As GraphicsSurface) As GraphicObject
+    Public Shared Function SearchSurfaceObjectsByTag(ByVal Name As String, ByVal Surface As Drawing.SkiaSharp.GraphicsSurface) As GraphicObject
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
@@ -545,7 +541,7 @@ Public Class FormFlowsheet
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
-        For Each gObj In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects
+        For Each gObj In Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects
             If gObj.Tag.ToString = tag Then
                 gObj2 = gObj
                 Exit For
@@ -566,13 +562,6 @@ Public Class FormFlowsheet
 
         Return Nothing
 
-    End Function
-
-    Public Function gscTogoc(ByVal X As Integer, ByVal Y As Integer) As Drawing.Point
-        Dim myNewPoint As Drawing.Point
-        myNewPoint.X = Convert.ToInt32((X - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
-        myNewPoint.Y = Convert.ToInt32((Y - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
-        Return myNewPoint
     End Function
 
     Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As SharedClasses.DWSIM.Flowsheet.MessageType, Optional ByVal exceptionID As String = "")
@@ -701,7 +690,7 @@ Public Class FormFlowsheet
 
     Private Sub FormFlowsheet_HelpRequested(sender As System.Object, hlpevent As System.Windows.Forms.HelpEventArgs) Handles MyBase.HelpRequested
 
-        Dim obj As GraphicObject = Me.FormSurface.FlowsheetDesignSurface.SelectedObject
+        Dim obj As GraphicObject = Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject
 
         If obj Is Nothing Then
             DWSIM.App.HelpRequested("Frame.htm")
@@ -794,7 +783,7 @@ Public Class FormFlowsheet
 
     Sub UpdateToolstripItemVisibility()
 
-        Dim isenabled As Boolean = Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Count > 0
+        Dim isenabled As Boolean = Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Count > 0
 
         tsmiCut.Enabled = isenabled
         tsmiCopy.Enabled = isenabled
@@ -827,11 +816,11 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub tsmiRemoveSelected_Click(sender As Object, e As EventArgs) Handles tsmiRemoveSelected.Click
-        Dim n As Integer = Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Count
+        Dim n As Integer = Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Count
         If n > 1 Then
             If MessageBox.Show("Delete " & n & " objects?", "Mass delete", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
                 Dim indexes As New ArrayList
-                For Each gobj As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Values
+                For Each gobj As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values
                     indexes.Add(gobj.Tag)
                 Next
                 For Each s As String In indexes
@@ -839,26 +828,24 @@ Public Class FormFlowsheet
                     gobj = GetFlowsheetGraphicObject(s)
                     If Not gobj Is Nothing Then
                         DeleteSelectedObject(sender, e, gobj, False)
-                        Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Remove(gobj.Name)
+                        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Remove(gobj.Name)
                     End If
                 Next
             End If
         ElseIf n = 1 Then
-            DeleteSelectedObject(sender, e, Me.FormSurface.FlowsheetDesignSurface.SelectedObject)
+            DeleteSelectedObject(sender, e, Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject)
         End If
     End Sub
 
     Public Sub tsmiCloneSelected_Click(sender As Object, e As EventArgs) Handles tsmiCloneSelected.Click
-        For Each obj In Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Values
-            FormSurface.CloneObject(obj)
-        Next
+        FormSurface.CloneObject(FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject)
     End Sub
 
     Public Sub tsmiRecalc_Click(sender As Object, e As EventArgs) Handles tsmiRecalc.Click
 
-        If Not Me.FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+        If Not Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
 
-            Dim obj As SharedClasses.UnitOperations.BaseClass = Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+            Dim obj As SharedClasses.UnitOperations.BaseClass = Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
 
             'Call function to calculate flowsheet
             Dim objargs As New CalculationArgs
@@ -881,17 +868,17 @@ Public Class FormFlowsheet
     Public Sub tsmiExportData_Click(sender As Object, e As EventArgs) Handles tsmiExportData.Click
         'copy all simulation properties from the selected object to clipboard
         Try
-            Select Case Me.FormSurface.FlowsheetDesignSurface.SelectedObject.ObjectType
+            Select Case Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType
                 Case ObjectType.GO_MasterTable
-                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, MasterTableGraphic).CopyToClipboard()
+                    Clipboard.SetText(DirectCast(Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Tables.MasterTableGraphic).ClipboardData)
                 Case ObjectType.GO_SpreadsheetTable
-                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, SpreadsheetTableGraphic).CopyToClipboard()
+                    Clipboard.SetText(DirectCast(Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Tables.SpreadsheetTableGraphic).ClipboardData)
                 Case ObjectType.GO_Table
-                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, TableGraphic).CopyToClipboard()
+                    Clipboard.SetText(DirectCast(Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Tables.TableGraphic).ClipboardData)
                 Case ObjectType.GO_Chart
-                    Clipboard.SetText(DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, OxyPlotGraphic).CopyToClipboard())
+                    Clipboard.SetText(DirectCast(Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Charts.OxyPlotGraphic).ClipboardData)
                 Case Else
-                    Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).CopyDataToClipboard(Options.SelectedUnitSystem, Options.NumberFormat)
+                    Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).CopyDataToClipboard(Options.SelectedUnitSystem, Options.NumberFormat)
             End Select
         Catch ex As Exception
             WriteToLog("Error copying data to clipboard: " & ex.ToString, Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
@@ -899,40 +886,33 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub TSBTexto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextoToolStripMenuItem.Click
-        Dim myTextObject As New TextGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
-            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
-            DWSIM.App.GetLocalString("caixa_de_texto"),
-            System.Drawing.SystemFonts.DefaultFont,
-            Color.Black)
+        Dim myTextObject As New TextGraphic(30, 30,
+            DWSIM.App.GetLocalString("caixa_de_texto"))
         Dim gObj As GraphicObject = Nothing
         gObj = myTextObject
         gObj.Name = "TEXT-" & Guid.NewGuid.ToString
-        gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
+        gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_Text
-        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
 
     End Sub
 
     Public Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabelaDePropriedatesMestraToolStripMenuItem.Click
-        Dim myMasterTable As New MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
-           -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
+        Dim myMasterTable As New Drawing.SkiaSharp.GraphicObjects.Tables.MasterTableGraphic(30, 30)
         Dim gObj As GraphicObject = Nothing
         myMasterTable.Flowsheet = Me
         gObj = myMasterTable
         gObj.Name = "MASTERTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_MasterTable
-        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
     Public Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesPlanilhaToolStripMenuItem.Click
-        Dim mySpreadsheetTable As New SpreadsheetTableGraphic(
-            Me.FormSpreadsheet,
-            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
-            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
+        Dim mySpreadsheetTable As New SpreadsheetTableGraphic(30, 30)
         Dim gObj As GraphicObject = Nothing
         mySpreadsheetTable.Flowsheet = Me
         gObj = mySpreadsheetTable
@@ -940,35 +920,8 @@ Public Class FormFlowsheet
         gObj.Tag = "Spreadsheet Table"
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_SpreadsheetTable
-        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
-
-    Public Sub TSBtabela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FiguraToolStripMenuItem.Click
-        With Me.OpenFileName
-            .CheckFileExists = True
-            .CheckPathExists = True
-            .Title = DWSIM.App.GetLocalString("Adicionarfigura")
-            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
-            .AddExtension = True
-            .Multiselect = False
-            .RestoreDirectory = True
-            Dim res As DialogResult = .ShowDialog
-            If res = Windows.Forms.DialogResult.OK Then
-                Dim img = System.Drawing.Image.FromFile(.FileName)
-                Dim gObj As GraphicObject = Nothing
-                If Not img Is Nothing Then
-                    Dim myEmbeddedImage As New EmbeddedImageGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom,
-                                    -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom, img)
-                    gObj = myEmbeddedImage
-                    gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
-                    gObj.AutoSize = True
-                End If
-                Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
-                Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-            End If
-        End With
-        FormSurface.TSBtabela.Checked = False
     End Sub
 
     Private Sub FecharSimulacaoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click
@@ -1118,26 +1071,14 @@ Public Class FormFlowsheet
 
 
     Public Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesToolStripMenuItem.Click
-        Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
-         -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
+        Dim myPropertyTable As New TableGraphic(30, 30)
         Dim gObj As GraphicObject = Nothing
         myPropertyTable.Flowsheet = Me
         gObj = myPropertyTable
         gObj.Name = "PROPERTYTABLE-" & Guid.NewGuid.ToString
         gObj.Tag = "PROPERTYTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
-        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
-        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
-
-    Public Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
-        Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
-          -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
-        myobj.Name = "RECT-" & Guid.NewGuid.ToString
-        myobj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Rectangle).Count + 1).ToString
-        myobj.Height = 200
-        myobj.Width = 200
-        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myobj)
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
@@ -1214,26 +1155,26 @@ Public Class FormFlowsheet
                         Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
                         Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                         Me.Collections.GraphicObjectCollection.Remove(namesel)
-                        Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
 
                     Else
 
                         If SelectedObj.ObjectType = ObjectType.GO_Image Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Rectangle Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_FloatingTable Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_SpreadsheetTable Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Chart Then
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         Else
 
                             Dim obj As SharedClasses.UnitOperations.BaseClass = Me.Collections.FlowsheetObjectCollection(SelectedObj.Name)
@@ -1299,7 +1240,7 @@ Public Class FormFlowsheet
                             Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                             Me.Collections.GraphicObjectCollection.Remove(namesel)
 
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
 
                         End If
 
@@ -1322,7 +1263,7 @@ Public Class FormFlowsheet
         Dim gobj As GraphicObject = Me.GetFlowsheetGraphicObject(tag)
 
         If Not gobj Is Nothing Then
-            Me.FormSurface.FlowsheetDesignSurface.SelectedObject = gobj
+            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject = gobj
             Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
         End If
 
@@ -1351,9 +1292,9 @@ Public Class FormFlowsheet
                             gobj2 = gObjFrom
                             conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).IsAttached = False
                             conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).AttachedConnector = Nothing
-                            Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Clear()
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Clear()
                             conptObj.IsAttached = False
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(conptObj.AttachedConnector)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(conptObj.AttachedConnector)
                         End If
                     End If
                 End If
@@ -1369,7 +1310,7 @@ Public Class FormFlowsheet
                             conptObj.AttachedConnector.AttachedTo.InputConnectors(conptObj.AttachedConnector.AttachedToConnectorIndex).IsAttached = False
                             conptObj.AttachedConnector.AttachedTo.InputConnectors(conptObj.AttachedConnector.AttachedToConnectorIndex).AttachedConnector = Nothing
                             conptObj.IsAttached = False
-                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(conptObj.AttachedConnector)
+                            Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(conptObj.AttachedConnector)
                         End If
                     End If
                 End If
@@ -1383,7 +1324,7 @@ Public Class FormFlowsheet
                     SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).IsAttached = False
                     SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).AttachedConnector = Nothing
                     SelObj.EnergyConnector.IsAttached = False
-                    Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(SelObj.EnergyConnector.AttachedConnector)
+                    Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DeleteSelectedObject(SelObj.EnergyConnector.AttachedConnector)
                 End If
             End If
         End If
@@ -1403,208 +1344,7 @@ Public Class FormFlowsheet
 
         Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
-        If gObjFrom.ObjectType <> ObjectType.GO_Image And gObjFrom.ObjectType <> ObjectType.GO_Table And
-        gObjFrom.ObjectType <> ObjectType.GO_Table And gObjFrom.ObjectType <> ObjectType.GO_FloatingTable And
-        gObjFrom.ObjectType <> ObjectType.Nenhum And
-        gObjTo.ObjectType <> ObjectType.GO_Image And gObjTo.ObjectType <> ObjectType.GO_Table And
-        gObjTo.ObjectType <> ObjectType.GO_Table And gObjTo.ObjectType <> ObjectType.GO_FloatingTable And
-        gObjTo.ObjectType <> ObjectType.Nenhum And gObjTo.ObjectType <> ObjectType.GO_MasterTable Then
-
-            Dim con1OK As Boolean = False
-            Dim con2OK As Boolean = False
-
-            'posicionar pontos nos primeiros slots livres
-            Dim StartPos, EndPos As New Drawing.Point
-            Dim InConSlot, OutConSlot As New ConnectionPoint
-            If Not gObjFrom Is Nothing Then
-                If Not gObjTo Is Nothing Then
-                    If gObjFrom.ObjectType = ObjectType.MaterialStream And gObjTo.ObjectType = ObjectType.MaterialStream Then
-                        Throw New Exception(DWSIM.App.GetLocalString("Nopossvelrealizaress"))
-                    ElseIf gObjFrom.ObjectType = ObjectType.EnergyStream And gObjTo.ObjectType = ObjectType.EnergyStream Then
-                        Throw New Exception(DWSIM.App.GetLocalString("Nopossvelrealizaress"))
-                    ElseIf Not gObjFrom.ObjectType = ObjectType.MaterialStream And Not gObjFrom.ObjectType = ObjectType.EnergyStream Then
-                        If Not gObjTo.ObjectType = ObjectType.EnergyStream And Not gObjTo.ObjectType = ObjectType.MaterialStream Then
-                            Throw New Exception(DWSIM.App.GetLocalString("Nopossvelrealizaress"))
-                        End If
-                    ElseIf gObjFrom.ObjectType = ObjectType.MaterialStream And gObjTo.ObjectType = ObjectType.EnergyStream Then
-                        Throw New Exception(DWSIM.App.GetLocalString("Nopossvelrealizaress"))
-                    ElseIf gObjFrom.ObjectType = ObjectType.EnergyStream And gObjTo.ObjectType = ObjectType.MaterialStream Then
-                        Throw New Exception(DWSIM.App.GetLocalString("Nopossvelrealizaress"))
-                    End If
-                    If gObjTo.IsEnergyStream = False Then
-                        If Not gObjFrom.IsEnergyStream Then
-                            If tidx = -1 Then
-                                For Each InConSlot In gObjTo.InputConnectors
-                                    If Not InConSlot.IsAttached And InConSlot.Type = ConType.ConIn Then
-                                        EndPos.X = InConSlot.Position.X
-                                        EndPos.Y = InConSlot.Position.Y
-                                        InConSlot.IsAttached = True
-                                        con2OK = True
-                                        Exit For
-                                    End If
-                                Next
-                            Else
-                                If Not gObjTo.InputConnectors(tidx).IsAttached And gObjTo.InputConnectors(tidx).Type = ConType.ConIn Then
-                                    InConSlot = gObjTo.InputConnectors(tidx)
-                                    EndPos.X = InConSlot.Position.X
-                                    EndPos.Y = InConSlot.Position.Y
-                                    InConSlot.IsAttached = True
-                                    con2OK = True
-                                End If
-                            End If
-                        Else
-                            If tidx = -1 Then
-                                For Each InConSlot In gObjTo.InputConnectors
-                                    If Not InConSlot.IsAttached And InConSlot.Type = ConType.ConEn Then
-                                        EndPos.X = InConSlot.Position.X
-                                        EndPos.Y = InConSlot.Position.Y
-                                        InConSlot.IsAttached = True
-                                        con2OK = True
-                                        Exit For
-                                    End If
-                                Next
-                            Else
-                                If Not gObjTo.InputConnectors(tidx).IsAttached And gObjTo.InputConnectors(tidx).Type = ConType.ConEn Then
-                                    InConSlot = gObjTo.InputConnectors(tidx)
-                                    EndPos.X = InConSlot.Position.X
-                                    EndPos.Y = InConSlot.Position.Y
-                                    InConSlot.IsAttached = True
-                                    con2OK = True
-                                End If
-                            End If
-                            If Not con2OK Then
-                                Throw New Exception(DWSIM.App.GetLocalString("CorrentesdeEnergyFlowsp"))
-                                Exit Sub
-                            End If
-                        End If
-                        If fidx = -1 Then
-                            For Each OutConSlot In gObjFrom.OutputConnectors
-                                If Not OutConSlot.IsAttached Then
-                                    StartPos.X = OutConSlot.Position.X
-                                    StartPos.Y = OutConSlot.Position.Y
-                                    OutConSlot.IsAttached = True
-                                    If con2OK Then con1OK = True
-                                    Exit For
-                                End If
-                            Next
-                        Else
-                            If Not gObjFrom.OutputConnectors(fidx).IsAttached Then
-                                OutConSlot = gObjFrom.OutputConnectors(fidx)
-                                StartPos.X = OutConSlot.Position.X
-                                StartPos.Y = OutConSlot.Position.Y
-                                OutConSlot.IsAttached = True
-                                If con2OK Then con1OK = True
-                            End If
-                        End If
-                    Else
-                        Select Case gObjFrom.ObjectType
-                            Case ObjectType.Cooler, ObjectType.Pipe, ObjectType.Expander, ObjectType.ShortcutColumn, ObjectType.DistillationColumn, ObjectType.AbsorptionColumn,
-                                ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber, ObjectType.OT_EnergyRecycle, ObjectType.ComponentSeparator, ObjectType.SolidSeparator,
-                                ObjectType.Filter, ObjectType.CustomUO, ObjectType.CapeOpenUO, ObjectType.FlowsheetUO
-                                GoTo 100
-                            Case Else
-                                Throw New Exception(DWSIM.App.GetLocalString("CorrentesdeEnergyFlowsp2") & DWSIM.App.GetLocalString("TubulaesTurbinaseRes"))
-                        End Select
-100:                    If gObjFrom.ObjectType <> ObjectType.CapeOpenUO And gObjFrom.ObjectType <> ObjectType.CustomUO And gObjFrom.ObjectType <> ObjectType.DistillationColumn _
-                            And gObjFrom.ObjectType <> ObjectType.AbsorptionColumn And gObjFrom.ObjectType <> ObjectType.OT_EnergyRecycle _
-                            And gObjFrom.ObjectType <> ObjectType.RefluxedAbsorber And gObjFrom.ObjectType <> ObjectType.ReboiledAbsorber Then
-                            If Not gObjFrom.EnergyConnector.IsAttached Then
-                                StartPos.X = gObjFrom.EnergyConnector.Position.X
-                                StartPos.Y = gObjFrom.EnergyConnector.Position.Y
-                                gObjFrom.EnergyConnector.IsAttached = True
-                                con1OK = True
-                                OutConSlot = gObjFrom.EnergyConnector
-                                EndPos.X = gObjTo.InputConnectors(0).Position.X
-                                EndPos.Y = gObjTo.InputConnectors(0).Position.Y
-                                gObjTo.InputConnectors(0).IsAttached = True
-                                con2OK = True
-                                InConSlot = gObjTo.InputConnectors(0)
-                            End If
-                        Else
-                            If tidx = -1 Then
-                                For Each InConSlot In gObjTo.InputConnectors
-                                    If Not InConSlot.IsAttached And InConSlot.Type = ConType.ConIn Then
-                                        EndPos.X = InConSlot.Position.X
-                                        EndPos.Y = InConSlot.Position.Y
-                                        InConSlot.IsAttached = True
-                                        con2OK = True
-                                        Exit For
-                                    End If
-                                Next
-                            Else
-                                If Not gObjTo.InputConnectors(tidx).IsAttached And gObjTo.InputConnectors(tidx).Type = ConType.ConIn Then
-                                    InConSlot = gObjTo.InputConnectors(tidx)
-                                    EndPos.X = InConSlot.Position.X
-                                    EndPos.Y = InConSlot.Position.Y
-                                    InConSlot.IsAttached = True
-                                    con2OK = True
-                                End If
-                            End If
-                            If fidx = -1 Then
-                                For Each OutConSlot In gObjFrom.OutputConnectors
-                                    If Not OutConSlot.IsAttached And OutConSlot.Type = ConType.ConEn Then
-                                        StartPos.X = OutConSlot.Position.X
-                                        StartPos.Y = OutConSlot.Position.Y
-                                        OutConSlot.IsAttached = True
-                                        If con2OK Then con1OK = True
-                                        Exit For
-                                    End If
-                                Next
-                            Else
-                                If Not gObjFrom.OutputConnectors(fidx).IsAttached Then
-                                    OutConSlot = gObjFrom.OutputConnectors(fidx)
-                                    StartPos.X = OutConSlot.Position.X
-                                    StartPos.Y = OutConSlot.Position.Y
-                                    OutConSlot.IsAttached = True
-                                    If con2OK Then con1OK = True
-                                End If
-                            End If
-                        End If
-                    End If
-                Else
-                    Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
-                    Exit Sub
-                End If
-            Else
-                Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
-                Exit Sub
-            End If
-            If con1OK = True And con2OK = True Then
-                'desenhar conector
-                Dim myCon As New ConnectorGraphic(StartPos.X, StartPos.Y, EndPos.X, EndPos.Y, 1, Color.DarkRed)
-                OutConSlot.AttachedConnector = myCon
-                InConSlot.AttachedConnector = myCon
-                With myCon
-                    .IsConnector = True
-                    .AttachedFrom = gObjFrom
-                    If gObjFrom.IsEnergyStream Then
-                        .AttachedFromEnergy = True
-                    End If
-                    .AttachedFromConnectorIndex = gObjFrom.OutputConnectors.IndexOf(OutConSlot)
-                    .AttachedTo = gObjTo
-                    If gObjTo.IsEnergyStream Then
-                        .AttachedToEnergy = True
-                    End If
-                    .AttachedToConnectorIndex = gObjTo.InputConnectors.IndexOf(InConSlot)
-                    If Not myCon Is Nothing Then
-                        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myCon)
-                        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-                    End If
-                End With
-                If My.Application.PushUndoRedoAction Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.FlowsheetObjectConnected,
-                                                     .ObjID = gObjFrom.Name,
-                                                     .ObjID2 = gObjTo.Name,
-                                                     .OldValue = fidx,
-                                                     .NewValue = tidx,
-                                                     .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectConnected"), gObjFrom.Tag, gObjTo.Tag)})
-            Else
-                Throw New Exception(DWSIM.App.GetLocalString("Todasasconexespossve"))
-            End If
-
-        Else
-
-
-        End If
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.ConnectObject(gObjFrom, gObjTo, fidx, tidx)
 
     End Sub
 
@@ -1891,11 +1631,11 @@ Public Class FormFlowsheet
 
         If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CutObjects,
                                      .NewValue = Clipboard.GetText,
-                                     .OldValue = Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Values.ToList,
+                                     .OldValue = Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.ToList,
                                      .Name = DWSIM.App.GetLocalString("UndoRedo_Cut")})
 
         Dim indexes As New ArrayList
-        For Each gobj As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Values
+        For Each gobj As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values
             indexes.Add(gobj.Tag)
         Next
         For Each s As String In indexes
@@ -1903,7 +1643,7 @@ Public Class FormFlowsheet
             gobj = Me.GetFlowsheetGraphicObject(s)
             If Not gobj Is Nothing Then
                 Me.DeleteSelectedObject(Me, New EventArgs(), gobj, False)
-                Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Remove(gobj.Name)
+                Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Remove(gobj.Name)
             End If
         Next
 
@@ -1943,7 +1683,7 @@ Public Class FormFlowsheet
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As GraphicObject In FormSurface.FlowsheetDesignSurface.DrawingObjects
+        For Each go As GraphicObject In FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects
             If Not go.IsConnector And go.Selected Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
         Next
 
@@ -2046,8 +1786,8 @@ Public Class FormFlowsheet
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
 
-        FormSurface.FlowsheetDesignSurface.SelectedObject = Nothing
-        FormSurface.FlowsheetDesignSurface.SelectedObjects.Clear()
+        FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject = Nothing
+        FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Clear()
 
         Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
 
@@ -2062,7 +1802,7 @@ Public Class FormFlowsheet
                 obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
             End If
             Dim gobj As GraphicObject = (From go As GraphicObject In
-                                FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                                FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
             obj.GraphicObject = gobj
             obj.SetFlowsheet(Me)
             If Not gobj Is Nothing Then
@@ -2113,13 +1853,13 @@ Public Class FormFlowsheet
         FormMain.AddSimulationObjects(Me, objlist, excs, pkey)
 
         For Each obj In objlist
-            If FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then FormSurface.FlowsheetDesignSurface.SelectedObject = obj.GraphicObject
-            FormSurface.FlowsheetDesignSurface.SelectedObjects.Add(obj.Name, obj.GraphicObject)
+            If FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject = obj.GraphicObject
+            FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Add(obj.Name, obj.GraphicObject)
         Next
 
         If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PasteObjects,
                                      .OldValue = Clipboard.GetText,
-                                     .NewValue = Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Values.ToList,
+                                     .NewValue = Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.ToList,
                                      .Name = DWSIM.App.GetLocalString("UndoRedo_Paste")})
 
         My.Application.PushUndoRedoAction = True
@@ -2159,7 +1899,7 @@ Public Class FormFlowsheet
 
                 Case UndoRedoActionType.FlowsheetObjectPropertyChanged
 
-                    Dim gobj = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID)
+                    Dim gobj = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID, FormSurface.FlowsheetDesignSurface.FlowsheetSurface)
 
                     'Property not listed, set using Reflection
                     Dim method As FieldInfo = gobj.GetType().GetField(act.PropertyName)
@@ -2201,7 +1941,7 @@ Public Class FormFlowsheet
 
                     If undo Then
                         Collections.FlowsheetObjectCollection(FormSurface.AddObjectToSurface(gobj1.ObjectType, gobj1.X, gobj1.Y, gobj1.Tag, gobj1.Name)).LoadData(act.OldValue)
-                        FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(gobj1.Name).LoadData(gobj1.SaveData)
+                        FormFlowsheet.SearchSurfaceObjectsByName(gobj1.Name, Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface).LoadData(gobj1.SaveData)
                         If gobj1.ObjectType = ObjectType.MaterialStream Then
                             For Each phase As BaseClasses.Phase In DirectCast(Collections.FlowsheetObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In Options.SelectedComponents.Values
@@ -2215,8 +1955,8 @@ Public Class FormFlowsheet
 
                 Case UndoRedoActionType.FlowsheetObjectConnected
 
-                    Dim gobj1 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID)
-                    Dim gobj2 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID2)
+                    Dim gobj1 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID, FormSurface.FlowsheetDesignSurface.FlowsheetSurface)
+                    Dim gobj2 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID2, FormSurface.FlowsheetDesignSurface.FlowsheetSurface)
 
                     If undo Then
                         DisconnectObject(gobj1, gobj2)
@@ -2226,8 +1966,8 @@ Public Class FormFlowsheet
 
                 Case UndoRedoActionType.FlowsheetObjectDisconnected
 
-                    Dim gobj1 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID)
-                    Dim gobj2 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID2)
+                    Dim gobj1 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID, FormSurface.FlowsheetDesignSurface.FlowsheetSurface)
+                    Dim gobj2 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID2, FormSurface.FlowsheetDesignSurface.FlowsheetSurface)
 
                     If undo Then
                         ConnectObject(gobj1, gobj2, act.OldValue, act.NewValue)
@@ -2685,7 +2425,7 @@ Public Class FormFlowsheet
     End Property
 
     Public Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetSelectedFlowsheetSimulationObject
-        Dim selobj = Me.FormSurface.FlowsheetDesignSurface.SelectedObject
+        Dim selobj = Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject
         If selobj Is Nothing Then
             Return Nothing
         Else
@@ -2818,7 +2558,7 @@ Public Class FormFlowsheet
     End Function
 
     Public Sub AddGraphicObject(obj As IGraphicObject) Implements IFlowsheet.AddGraphicObject
-        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(obj)
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(obj)
         Me.Collections.GraphicObjectCollection.Add(obj.Name, obj)
     End Sub
 
@@ -3093,14 +2833,13 @@ Public Class FormFlowsheet
     End Function
 
     Private Sub GraficoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraficoToolStripMenuItem.Click
-        Dim myobj As New OxyPlotGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
-         -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), "Chart Object")
+        Dim myobj As New Charts.OxyPlotGraphic(30, 30)
         myobj.Name = "CHART-" & Guid.NewGuid.ToString
-        myobj.Tag = "CHART" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Chart).Count + 1).ToString
+        myobj.Tag = "CHART" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Chart).Count + 1).ToString
         myobj.Height = 400
         myobj.Width = 500
         myobj.Flowsheet = Me
-        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myobj)
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.AddObject(myobj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
@@ -3127,7 +2866,7 @@ Public Class FormFlowsheet
 
     Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
 
-        Dim iform = New Inspector.Window
+        Dim iform As New Inspector.Window
         iform.Show()
 
     End Sub

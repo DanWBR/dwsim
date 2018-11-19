@@ -1,18 +1,3 @@
-Version 5.5 Update 1
+Version 5.6
 
-- [CHG] Updated ChemSep database
-- [FIX] Bug fixes
-
-Version 5.5
-
-- [NEW] Added an option to use legacy property editors
-- [NEW] Unit tooltips on property editors
-- [NEW] Random property units on floating tables
-- [NEW] Added more Flash functions to Excel interface
-- [NEW] Restored Command Line funcionality
-- [CHG] Redesigned Compound Creator
-- [FIX] Fixed PFR bugs
-- [FIX] Exposing Script UO variables (CPUI)
-- [FIX] Fixed reaction editors
-- [FIX] Fixed Excel interface
-- [FIX] Other bug fixes and enhancements
+- [NEW] Unified Process Flowsheet Drawing interface

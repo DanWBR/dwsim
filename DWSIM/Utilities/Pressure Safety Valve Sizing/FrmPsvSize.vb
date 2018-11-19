@@ -159,7 +159,7 @@ Public Class FrmPsvSize
     Private Sub Calculate()
 
 
-        Dim gobj As DrawingTools.GraphicObjects.GraphicObject = AttachedTo.GraphicObject
+        Dim gobj As Drawing.SkiaSharp.GraphicObjects.GraphicObject = AttachedTo.GraphicObject
         Me.valve = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
         Me.entmat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
         Me.saimat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)

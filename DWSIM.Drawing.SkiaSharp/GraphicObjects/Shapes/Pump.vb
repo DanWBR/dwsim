@@ -141,8 +141,6 @@ Namespace GraphicObjects.Shapes
 
             gp.Close()
 
-            canvas.DrawPath(gp, myPen)
-
             Dim gp2 As New SKPath()
 
             gp2.MoveTo(pt9.X, pt9.Y)
@@ -153,11 +151,43 @@ Namespace GraphicObjects.Shapes
 
             gp.Close()
 
-            canvas.DrawPath(gp2, myPen)
-
             Dim rect As New SKRect(X, Y, X + Width, Y + Height)
 
-            canvas.DrawOval(rect, myPen2)
+            Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+
+            Dim radius2 = 0.8F * Math.Min(Width, Height)
+            Dim center = New SKPoint(r0.MidX, r0.MidY)
+            Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+
+            Dim gradPen As New SKPaint()
+            With gradPen
+                .Color = LineColor
+                .StrokeWidth = LineWidth
+                .IsStroke = False
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Shader = SKShader.CreateTwoPointConicalGradient(
+                                    offCenter, 1, center, radius2,
+                                    New SKColor() {SKColors.White, LineColor},
+                                    Nothing, SKShaderTileMode.Clamp)
+            End With
+
+            If GradientMode Then
+
+                canvas.DrawPath(gp, gradPen)
+                canvas.DrawPath(gp2, gradPen)
+                canvas.DrawOval(rect, gradPen)
+
+            Else
+
+                canvas.DrawOval(rect, myPen2)
+
+            End If
+
+            canvas.DrawPath(gp, myPen)
+            canvas.DrawPath(gp2, myPen)
+            If GradientMode Then
+                canvas.DrawOval(rect, gradPen)
+            End If
             canvas.DrawOval(rect, myPen)
 
         End Sub

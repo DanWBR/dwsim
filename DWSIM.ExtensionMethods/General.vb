@@ -230,10 +230,10 @@ Public Module General
         End If
     End Sub
 
-    <System.Runtime.CompilerServices.Extension()> _
-    Public Function ToDTPoint(pt As System.Drawing.Point) As DrawingTools.Point
-        Return New DrawingTools.Point(pt.X, pt.Y)
-    End Function
+    '<System.Runtime.CompilerServices.Extension()> _
+    'Public Function ToDTPoint(pt As System.Drawing.Point) As DrawingTools.Point
+    '    Return New DrawingTools.Point(pt.X, pt.Y)
+    'End Function
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function GetUnits(control As System.Windows.Forms.GridItem) As String

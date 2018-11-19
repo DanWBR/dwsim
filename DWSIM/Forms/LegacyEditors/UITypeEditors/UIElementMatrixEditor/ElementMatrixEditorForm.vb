@@ -26,7 +26,7 @@ Public Class ElementMatrixEditorForm
     Private Sub ElementMatrixEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         form = My.Application.ActiveSimulation
-        gr = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        gr = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
 
         Dim i, j, e_, c As Integer
 

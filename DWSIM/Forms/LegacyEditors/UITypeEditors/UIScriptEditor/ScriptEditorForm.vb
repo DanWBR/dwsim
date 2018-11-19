@@ -175,7 +175,7 @@ Imports System.Linq
     End Sub
 
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
-        Dim mycuo As UnitOperations.UnitOperations.CustomUO = My.Application.ActiveSimulation.SimulationObjects(My.Application.ActiveSimulation.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        Dim mycuo As UnitOperations.UnitOperations.CustomUO = My.Application.ActiveSimulation.SimulationObjects(My.Application.ActiveSimulation.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
         mycuo.Includes = includes
         mycuo.ScriptText = Me.txtScript.Text
         FlowsheetSolver.FlowsheetSolver.CalculateObject(My.Application.ActiveSimulation, mycuo.Name)

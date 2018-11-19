@@ -947,15 +947,15 @@ Imports System.Drawing
 
         If statuscode = PipeEditorStatus.Erro Then
             'Label1.Text = "Erro"
-            ToolStripLabel2.ForeColor = Drawing.Color.Red
+            ToolStripLabel2.ForeColor = System.Drawing.Color.Red
             PipeOp.Profile.Status = PipeEditorStatus.Definir
         ElseIf statuscode = PipeEditorStatus.Definir Then
             ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Indefinido")
-            ToolStripLabel2.ForeColor = Drawing.Color.Red
+            ToolStripLabel2.ForeColor = System.Drawing.Color.Red
             PipeOp.Profile.Status = PipeEditorStatus.Definir
         ElseIf statuscode = PipeEditorStatus.OK Then
             ToolStripLabel2.Text = "OK"
-            ToolStripLabel2.ForeColor = Drawing.Color.Green
+            ToolStripLabel2.ForeColor = System.Drawing.Color.Green
             PipeOp.Profile.Status = PipeEditorStatus.OK
         End If
 
@@ -1295,7 +1295,7 @@ Imports System.Drawing
                 Me.ConvertProfileToGrid(PipeOp.Profile)
                 Me.GridMalha.Columns.RemoveAt(Me.GridMalha.Columns.Count - 1)
                 ToolStripLabel2.Text = "OK"
-                ToolStripLabel2.ForeColor = Drawing.Color.Green
+                ToolStripLabel2.ForeColor = System.Drawing.Color.Green
                 PipeOp.Profile.Status = PipeEditorStatus.OK
             End If
             Me.PipeEditor1_StatusChanged(e, PipeEditorStatus.OK)

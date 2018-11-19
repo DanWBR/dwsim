@@ -1,8 +1,9 @@
-﻿Imports DWSIM.ExtensionMethods
+﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
+Imports DWSIM.ExtensionMethods
 
 Public Class FormConfigureChartObject
 
-    Public Chart As Global.DWSIM.DrawingTools.GraphicObjects.OxyPlotGraphic
+    Public Chart As OxyPlotGraphic
 
     Private Loaded As Boolean = False
 

@@ -53,7 +53,7 @@ Namespace GraphicObjects.Tables
 
 #End Region
 
-        Property Padding As Integer = 4
+        Property Padding As Integer = 6
 
         Public Property TextColor As SKColor = SKColors.Black
 
@@ -67,11 +67,7 @@ Namespace GraphicObjects.Tables
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            If GlobalSettings.Settings.EditorFontSize = -1 Then
-                FontSize = New SKPaint().TextSize
-            Else
-                FontSize = GlobalSettings.Settings.EditorFontSize + 1.0
-            End If
+            FontSize = 11.0
 
             FontSize *= GlobalSettings.Settings.DpiScale * sf
 
@@ -79,14 +75,14 @@ Namespace GraphicObjects.Tables
 
             If zoom = 0.0 Then Exit Sub
 
-            Padding = 4 / zoom * GlobalSettings.Settings.DpiScale * sf
+            Padding = 7 / zoom * GlobalSettings.Settings.DpiScale * sf
 
             Dim tpaint As New SKPaint()
 
             With tpaint
                 .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = If(s.DarkMode, SKColors.Black, SKColors.White)
+                .Color = SKColors.SteelBlue
                 .IsStroke = False
                 .Typeface = RegularTypeFace
             End With
@@ -96,7 +92,7 @@ Namespace GraphicObjects.Tables
             With tbpaint
                 .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = If(s.DarkMode, SKColors.Black, SKColors.White)
+                .Color = SKColors.SteelBlue
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With
@@ -105,22 +101,14 @@ Namespace GraphicObjects.Tables
 
             With bpaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = SKColors.DarkGray
-                Else
-                    .Color = SKColors.SteelBlue
-                End If
+                .Color = SKColors.White.WithAlpha(240)
                 .IsStroke = False
                 .StrokeWidth = LineWidth
             End With
 
             With bpaint2
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = SKColors.DarkSlateGray
-                Else
-                    .Color = SKColors.SteelBlue
-                End If
+                .Color = SKColors.SteelBlue
                 .IsStroke = True
                 .StrokeWidth = LineWidth
             End With
@@ -219,7 +207,7 @@ Namespace GraphicObjects.Tables
                             End If
                         End If
 
-                        Me.Width += 6
+                        Me.Width += 10
 
                         maxL1 = maxL1 + 2 * Padding
                         maxL2 = maxL2 + 2 * Padding
@@ -227,22 +215,22 @@ Namespace GraphicObjects.Tables
 
                         maxH = maxH + 2 * Padding
 
-                        If Width > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth * 2 / 3 Then Exit Sub
-                        If Height > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight * 2 / 3 Then Exit Sub
+                        'If Width > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth * 2 / 3 Then Exit Sub
+                        'If Height > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight * 2 / 3 Then Exit Sub
 
                         'draw shadow
 
                         If Not s.DarkMode Then
-                            Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
+                            Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
                         End If
                         Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
 
                         Dim rect As SKRect = GetRect(X, Y, Width, Height)
 
-                        DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint)
-                        If s.DarkMode Then
-                            DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint2)
-                        End If
+                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
+                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
+
+                        canvas.DrawLine(X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding, bpaint2)
 
                         size = MeasureString("MEASURE", tpaint)
 
@@ -382,46 +370,6 @@ Namespace GraphicObjects.Tables
 
                         Next
 
-                        p = MSObj.GetPhase("Mixture")
-
-                        bpval = p.Properties.molarfraction
-
-                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
-                        If size.Width > maxL5 Then maxL5 = size.Width
-                        If size.Height > maxH2 Then maxH2 = size.Height
-
-                        p = MSObj.GetPhase("Vapor")
-
-                        bpval = p.Properties.molarfraction
-
-                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
-                        If size.Width > maxL6 Then maxL6 = size.Width
-                        If size.Height > maxH2 Then maxH2 = size.Height
-
-                        p = MSObj.GetPhase("Liquid1")
-
-                        bpval = p.Properties.molarfraction
-
-                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
-                        If size.Width > maxL7 Then maxL7 = size.Width
-                        If size.Height > maxH2 Then maxH2 = size.Height
-
-                        p = MSObj.GetPhase("Liquid2")
-
-                        bpval = p.Properties.molarfraction
-
-                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
-                        If size.Width > maxL8 Then maxL8 = size.Width
-                        If size.Height > maxH2 Then maxH2 = size.Height
-
-                        p = MSObj.GetPhase("Solid")
-
-                        bpval = p.Properties.molarfraction
-
-                        size = MeasureString(bpval.GetValueOrDefault.ToString(nf), tpaint)
-                        If size.Width > maxL9 Then maxL9 = size.Width
-                        If size.Height > maxH2 Then maxH2 = size.Height
-
                         Dim sumL = maxL1 + maxL2 + maxL3
                         Dim sumL2 = maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + maxL9
 
@@ -450,7 +398,7 @@ Namespace GraphicObjects.Tables
                             End If
                         End If
 
-                        Me.Width += 6
+                        Me.Width += 10
 
                         Dim Width2 = 16 * Me.Padding + sumL2 + 6
 
@@ -471,12 +419,11 @@ Namespace GraphicObjects.Tables
 
                         'draw shadow
 
-                        If Not s.DarkMode Then
-                            DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
-                        Else
-                            DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint2)
-                        End If
-                        DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint)
+                        DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
+                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
+                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
+
+                        canvas.DrawLine(X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding, bpaint2)
 
                         size = MeasureString("MEASURE", tpaint)
 
@@ -509,12 +456,11 @@ Namespace GraphicObjects.Tables
 
                             'draw shadow
 
-                            If Not s.DarkMode Then
-                                DrawRoundRect(g, X + 4 / zoom, Y + DeltaY + 4 / zoom - size.Height, Width2, Height2, 5 / zoom, spaint)
-                            Else
-                                DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 5 / zoom, bpaint2)
-                            End If
-                            DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 5 / zoom, bpaint)
+                            DrawRoundRect(g, X + 4 / zoom, Y + DeltaY + 4 / zoom - size.Height, Width2, Height2, 2 / zoom, spaint)
+                            DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint)
+                            DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint2)
+
+                            canvas.DrawLine(X + Padding + 3, Y + 3 * maxH2 - 2 * Padding + DeltaY, X + Width2 - Padding - 3, Y + 3 * maxH2 - 2 * Padding + DeltaY, bpaint2)
 
                             Dim atext As String = ""
 

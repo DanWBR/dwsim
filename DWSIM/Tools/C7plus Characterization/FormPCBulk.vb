@@ -705,7 +705,7 @@ Public Class FormPCBulk
         Dim corr As String = Me.TextBox1.Text
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim subst As BaseClasses.Compound
-        Dim gObj As DrawingTools.GraphicObjects.GraphicObject = Nothing
+        Dim gObj As Drawing.SkiaSharp.GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
         Dim myassay As SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay =
@@ -749,11 +749,9 @@ Public Class FormPCBulk
                                frm.FrmStSim1.AddCompToSimulation(idx)
                            Next
 
-                           Dim myMStr As New DrawingTools.GraphicObjects.MaterialStreamGraphic(frm.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value + 100, frm.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value + 100, 20, 20, 0)
+                           Dim myMStr As New Drawing.SkiaSharp.GraphicObjects.Shapes.MaterialStreamGraphic(100, 100, 20, 20)
                            myMStr.LineWidth = 2
                            myMStr.Fill = True
-                           myMStr.FillColor = Color.WhiteSmoke
-                           myMStr.LineColor = Color.Red
                            myMStr.Tag = corr
                            gObj = myMStr
                            gObj.Name = "MAT-" & Guid.NewGuid.ToString

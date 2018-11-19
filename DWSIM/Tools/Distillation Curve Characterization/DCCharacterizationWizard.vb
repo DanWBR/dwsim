@@ -715,7 +715,7 @@ Public Class DCCharacterizationWizard
         Dim corr As String = Me.TextBoxStreamName.Text
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim subst As BaseClasses.Compound
-        Dim gObj As DrawingTools.GraphicObjects.GraphicObject = Nothing
+        Dim gObj As Drawing.SkiaSharp.GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
         If Not form.FrmStSim1.initialized Then form.FrmStSim1.Init()
@@ -753,11 +753,9 @@ Public Class DCCharacterizationWizard
                            f.ShowDialog()
                        End Sub,
                        Sub()
-                           Dim myMStr As New DrawingTools.GraphicObjects.MaterialStreamGraphic(form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value + 100, form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value + 100, 20, 20, 0)
+                           Dim myMStr As New Drawing.SkiaSharp.GraphicObjects.Shapes.MaterialStreamGraphic(100, 100, 20, 20)
                            myMStr.LineWidth = 2
                            myMStr.Fill = True
-                           myMStr.FillColor = Color.WhiteSmoke
-                           myMStr.LineColor = Color.Red
                            myMStr.Tag = corr
                            gObj = myMStr
                            gObj.Name = "MAT-" & Guid.NewGuid.ToString

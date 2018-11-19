@@ -41,21 +41,21 @@ Public Class EditingForm_Filter
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
                 lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
-                lblStatus.ForeColor = Drawing.Color.Blue
+                lblStatus.ForeColor = System.Drawing.Color.Blue
             Else
                 If Not .GraphicObject.Active Then
                     lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
-                    lblStatus.ForeColor = Drawing.Color.Gray
+                    lblStatus.ForeColor = System.Drawing.Color.Gray
                 ElseIf .ErrorMessage <> "" Then
                     If .ErrorMessage.Length > 50 Then
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
                     Else
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
                     End If
-                    lblStatus.ForeColor = Drawing.Color.Red
+                    lblStatus.ForeColor = System.Drawing.Color.Red
                 Else
                     lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")
-                    lblStatus.ForeColor = Drawing.Color.Black
+                    lblStatus.ForeColor = System.Drawing.Color.Black
                 End If
             End If
 
@@ -384,9 +384,9 @@ Public Class EditingForm_Filter
         Dim tbox = DirectCast(sender, TextBox)
 
         If tbox.Text.IsValidDoubleExpression Then
-            tbox.ForeColor = Drawing.Color.Blue
+            tbox.ForeColor = System.Drawing.Color.Blue
         Else
-            tbox.ForeColor = Drawing.Color.Red
+            tbox.ForeColor = System.Drawing.Color.Red
         End If
 
     End Sub
@@ -394,7 +394,7 @@ Public Class EditingForm_Filter
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbPressureDrop.KeyDown, tbCakeRelativeHumidity.KeyDown, tbCakeResistance.KeyDown,
                                                                         tbCycleTime.KeyDown, tbFilterMediumResistance.KeyDown, tbSubmergedArea.KeyDown, tbTotalArea.KeyDown
 
-        If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
+        If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
             UpdateProps(sender)
 

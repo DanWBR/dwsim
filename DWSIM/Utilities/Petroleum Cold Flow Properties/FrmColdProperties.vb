@@ -19,7 +19,7 @@
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Math
 Imports DWSIM.DrawingTools
-Imports DWSIM.DrawingTools.GraphicObjects
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 
 Public Class FrmColdProperties
 
@@ -62,7 +62,7 @@ Public Class FrmColdProperties
 
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
-            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, frm.FormSurface.FlowsheetDesignSurface)
+            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, frm.FormSurface.FlowsheetDesignSurface.FlowsheetSurface)
             Me.mat = frm.Collections.FlowsheetObjectCollection(gobj.Name).Clone
 
             Dim pp As PropertyPackages.PropertyPackage = frm.Options.SelectedPropertyPackage

@@ -1,6 +1,8 @@
-﻿Public Class FormConfigureSpreadsheetTable
+﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
-    Public Table As GraphicObjects.SpreadsheetTableGraphic
+Public Class FormConfigureSpreadsheetTable
+
+    Public Table As SpreadsheetTableGraphic
 
     Private Sub FormConfigureSpreadsheetTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

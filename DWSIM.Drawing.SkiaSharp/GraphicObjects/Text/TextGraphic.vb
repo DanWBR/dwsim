@@ -12,14 +12,7 @@ Namespace GraphicObjects
 
         Public Sub New()
 
-            Select Case GlobalSettings.Settings.RunningPlatform
-                Case GlobalSettings.Settings.Platform.Windows
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
-                Case GlobalSettings.Settings.Platform.Linux
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
-                Case GlobalSettings.Settings.Platform.Mac
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
-            End Select
+            Me.DefaultTypeFace = SKTypeface.FromFamilyName("Arial", SKTypefaceStyle.Bold)
 
             Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.GO_Text
             Me.Height = 20
@@ -45,8 +38,6 @@ Namespace GraphicObjects
 
         Public Property Color() As SKColor = SKColors.Black
 
-        Public Property ColorDark As SKColor = SKColors.SteelBlue
-
         Public Property DefaultTypeFace As SKTypeface
 
         Public Overrides Sub Draw(ByVal g As Object)
@@ -58,11 +49,7 @@ Namespace GraphicObjects
             With tpaint
                 .TextSize = Size
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = ColorDark
-                Else
-                    .Color = Color
-                End If
+                .Color = Color
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With

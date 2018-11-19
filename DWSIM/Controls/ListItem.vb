@@ -8,12 +8,12 @@
         Else
             e.UseDefaultCursors = False
             Dim bmp As New Bitmap(Me.Image.Width + 30, Me.Image.Height + 30)
-            Me.Image.DrawToBitmap(bmp, New Rectangle(New Drawing.Point(30, 30), bmp.Size))
+            Me.Image.DrawToBitmap(bmp, New Rectangle(New System.Drawing.Point(30, 30), bmp.Size))
             bmp.MakeTransparent(Color.White)
             Dim g = Graphics.FromImage(bmp)
             g.CompositingMode = Drawing2D.CompositingMode.SourceOver
             Dim arrow As Bitmap = My.Resources.cursor
-            g.DrawImage(arrow, New Drawing.Point(25, 25))
+            g.DrawImage(arrow, New System.Drawing.Point(25, 25))
             Dim cur As New Cursor(bmp.GetHicon())
             Cursor.Current = cur
         End If

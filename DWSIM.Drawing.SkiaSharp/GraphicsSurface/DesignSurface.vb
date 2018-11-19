@@ -143,7 +143,7 @@ Public Class GraphicsSurface
 
         Dim objects = DrawingObjects.ToArray
 
-        If objects.Count = 0 Then DrawInstructions(DrawingCanvas)
+        If objects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then DrawInstructions(DrawingCanvas)
 
         If DrawAddedAnimation Then
             Dim tstep = (Date.Now - AnimationStart).TotalMilliseconds
@@ -182,7 +182,11 @@ Public Class GraphicsSurface
 
             If Not TypeOf dobj Is ConnectorGraphic Then
 
-                If TypeOf dobj Is ShapeGraphic Then DirectCast(dobj, ShapeGraphic).UpdateStatus()
+                If TypeOf dobj Is ShapeGraphic Then
+                    DirectCast(dobj, ShapeGraphic).Fill = False
+                    DirectCast(dobj, ShapeGraphic).LineWidth = 1
+                    DirectCast(dobj, ShapeGraphic).UpdateStatus()
+                End If
 
                 If dobj Is SelectedObject Then
 
@@ -212,14 +216,16 @@ Public Class GraphicsSurface
                         DrawingCanvas.Save()
 
                         If dobj.FlippedV And Not dobj.FlippedH Then
-                            DrawingCanvas.Scale(-1, 1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
-                        ElseIf dobj.FlippedH And Not dobj.FlippedV Then
                             DrawingCanvas.Scale(1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                        ElseIf dobj.FlippedH And Not dobj.FlippedV Then
+                            DrawingCanvas.Scale(-1, 1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
                         ElseIf dobj.FlippedH And dobj.FlippedV Then
                             DrawingCanvas.Scale(-1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
                         End If
 
-                        If dobj.Rotation <> 0 Then DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+                        If dobj.Rotation <> 0.0 Then
+                            DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+                        End If
 
                         dobj.Draw(DrawingCanvas)
 

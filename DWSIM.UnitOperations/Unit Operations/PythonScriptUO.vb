@@ -33,6 +33,8 @@ Imports System.ComponentModel
 Imports System.Drawing.Design
 Imports Microsoft.Scripting.Hosting
 Imports Python.Runtime
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
+Imports DWSIM.Drawing.SkiaSharp
 
 Namespace UnitOperations
 

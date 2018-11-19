@@ -1,9 +1,12 @@
-﻿Public Class FormEditGraphicObject
+﻿Imports DWSIM.Drawing.SkiaSharp
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
+
+Public Class FormEditGraphicObject
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Public gobj As DrawingTools.GraphicObjects.GraphicObject
-    Public fs As DrawingTools.GraphicsSurface
+    Public gobj As GraphicObject
+    Public fs As GraphicsSurface
     Public flowsheet As Interfaces.IFlowsheet
 
     Private _origtext As String = ""
@@ -370,10 +373,6 @@
     End Sub
 
     Private Sub PGEx2_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PGEx2.PropertyValueChanged
-        fs.Invalidate()
-        For Each obj In fs.DrawingObjects
-            obj.Draw(Graphics.FromHwnd(fs.Handle))
-        Next
         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Nome")) Then
             If Not gobj Is Nothing Then
                 Me.Text = gobj.Tag + " - " + _origtext

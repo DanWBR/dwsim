@@ -1,6 +1,8 @@
-﻿Public Class FormConfigurePropertyTable
+﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
-    Public Table As GraphicObjects.TableGraphic
+Public Class FormConfigurePropertyTable
+
+    Public Table As TableGraphic
 
     Private loaded As Boolean = False
 

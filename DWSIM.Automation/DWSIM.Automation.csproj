@@ -78,11 +78,6 @@
       <Name>DWSIM.XMLSerializer</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
-      <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
-      <Name>DWSIM.DrawingTools</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>

@@ -18,6 +18,8 @@ Public Class EditingForm_Column
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
+    Friend tab1, tab2 As Integer
+
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
@@ -48,21 +50,21 @@ Public Class EditingForm_Column
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
                 lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
-                lblStatus.ForeColor = Drawing.Color.Blue
+                lblStatus.ForeColor = System.Drawing.Color.Blue
             Else
                 If Not .GraphicObject.Active Then
                     lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
-                    lblStatus.ForeColor = Drawing.Color.Gray
+                    lblStatus.ForeColor = System.Drawing.Color.Gray
                 ElseIf .ErrorMessage <> "" Then
                     If .ErrorMessage.Length > 50 Then
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
                     Else
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
                     End If
-                    lblStatus.ForeColor = Drawing.Color.Red
+                    lblStatus.ForeColor = System.Drawing.Color.Red
                 Else
                     lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")
-                    lblStatus.ForeColor = Drawing.Color.Black
+                    lblStatus.ForeColor = System.Drawing.Color.Black
                 End If
             End If
 
@@ -272,9 +274,10 @@ Public Class EditingForm_Column
             TabStages.Controls.Add(seditor)
 
             TabConnections.Controls.Clear()
-            Dim ceditor As New EditingForm_Column_Connections With {.dc = Me.SimObject}
+            Dim ceditor As New EditingForm_Column_Connections_New With {.rc = Me.SimObject, .ownerform = Me}
             ceditor.Dock = DockStyle.Fill
             TabConnections.Controls.Add(ceditor)
+            ceditor.UpdateInfo()
 
             InitialEstimatesPanel.Controls.Clear()
             Dim ieditor As New EditingForm_Column_InitialEstimates With {.dc = Me.SimObject}
@@ -367,16 +370,16 @@ Public Class EditingForm_Column
         Dim tbox = DirectCast(sender, TextBox)
 
         If tbox.Text.IsValidDoubleExpression Then
-            tbox.ForeColor = Drawing.Color.Blue
+            tbox.ForeColor = System.Drawing.Color.Blue
         Else
-            tbox.ForeColor = Drawing.Color.Red
+            tbox.ForeColor = System.Drawing.Color.Red
         End If
 
     End Sub
 
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbNStages.KeyDown
 
-        If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
+        If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
             UpdateProps(sender)
 

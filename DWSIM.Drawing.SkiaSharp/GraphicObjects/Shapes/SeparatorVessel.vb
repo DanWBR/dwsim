@@ -154,7 +154,6 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-
             Dim myPen As New SKPaint()
             With myPen
                 .Color = LineColor
@@ -163,31 +162,41 @@ Namespace GraphicObjects.Shapes
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
 
+            Dim rect As New SKRect(X + 0.25 * Width, Y, X + 0.7 * Width, Y + Height)
             Dim rect3 As New SKRect(X + 0.7 * Width, Y + 0.1 * Height, X + 0.827 * Width, Y + 0.227 * Height)
             Dim rect4 As New SKRect(X + 0.7 * Width, Y + 0.773 * Height, X + 0.827 * Width, Y + (0.773 + 0.127) * Height)
 
+            If GradientMode Then
+
+                Dim radius2 = 0.8F * Math.Min(Width, Height)
+                Dim center = New SKPoint(rect.MidX, rect.MidY)
+                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+
+                Dim gradPen As New SKPaint()
+                With gradPen
+                    .Color = LineColor
+                    .StrokeWidth = LineWidth
+                    .IsStroke = False
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Shader = SKShader.CreateTwoPointConicalGradient(
+                                    offCenter,
+                                    1,
+                                    center,
+                                    radius2,
+                                    New SKColor() {SKColors.White, LineColor},
+                                    Nothing,
+                                    SKShaderTileMode.Clamp)
+                End With
+
+                canvas.DrawRoundRect(rect, 6, 6, gradPen)
+                canvas.DrawRoundRect(rect3, 2, 2, gradPen)
+                canvas.DrawRoundRect(rect4, 2, 2, gradPen)
+
+            End If
+
+            canvas.DrawRoundRect(rect, 6, 6, myPen)
             canvas.DrawRoundRect(rect3, 2, 2, myPen)
             canvas.DrawRoundRect(rect4, 2, 2, myPen)
-
-            Dim radius As Integer = 2
-
-            Dim gp As New SKPath()
-
-            gp.MoveTo(X + radius, Y)
-
-            gp.LineTo(X + Width - radius, Y)
-            gp.AddArc(New SKRect(X + Width - radius, Y, X + Width, Y + radius), 270, 90)
-            gp.LineTo(X + Width, Y + Height - radius)
-            gp.AddArc(New SKRect(X + Width - radius, Y + Height - radius, X + Width, Y + radius), 0, 90)
-            gp.LineTo(X + radius, Y + Height)
-            gp.AddArc(New SKRect(X, Y + Height - radius, X + Width, Y + radius), 90, 90)
-            gp.LineTo(X, Y + radius)
-            gp.AddArc(New SKRect(X, Y, X + radius, Y + radius), 180, 90)
-
-            gp.Close()
-
-
-            canvas.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.7 * Width, Y + Height), 6, 6, myPen)
 
         End Sub
 

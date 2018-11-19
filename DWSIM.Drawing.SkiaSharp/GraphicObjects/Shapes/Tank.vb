@@ -110,20 +110,49 @@ Namespace GraphicObjects.Shapes
             'bottom
             Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.8 * Height + 0.2 * Height)
 
+            If GradientMode Then
+
+                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+
+                Dim radius2 = 0.8F * Math.Min(Width, Height)
+                Dim center = New SKPoint(r0.MidX, r0.MidY)
+                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+
+                Dim gradPen As New SKPaint()
+                With gradPen
+                    .Color = LineColor
+                    .StrokeWidth = LineWidth
+                    .IsStroke = False
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Shader = SKShader.CreateTwoPointConicalGradient(
+                                    offCenter, 1, center, radius2,
+                                    New SKColor() {SKColors.White, LineColor},
+                                    Nothing, SKShaderTileMode.Clamp)
+                End With
+
+                canvas.DrawOval(rect3, gradPen)
+                canvas.DrawRect(rect1, gradPen)
+                canvas.DrawOval(rect2, gradPen)
+
+                canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), gradPen)
+                canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), gradPen)
+
+            End If
+
             canvas.DrawRect(rect1, myPen2)
-            canvas.DrawRect(rect1, myPen3)
+            If Not GradientMode Then canvas.DrawRect(rect1, myPen3)
 
-            canvas.DrawOval(rect2, myPen3)
+            If Not GradientMode Then canvas.DrawOval(rect2, myPen3)
 
-            canvas.DrawOval(rect2, myPen3)
+            If Not GradientMode Then canvas.DrawOval(rect2, myPen3)
             canvas.DrawOval(rect2, myPen2)
 
-            canvas.DrawOval(rect3, myPen3)
+            If Not GradientMode Then canvas.DrawOval(rect3, myPen3)
             canvas.DrawOval(rect3, myPen2)
 
             Dim rect4 As New SKRect(X + 0.1 * Width, Y + 0.5 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
 
-            canvas.DrawRect(rect4, myPen3)
+            If Not GradientMode Then canvas.DrawRect(rect4, myPen3)
 
         End Sub
 

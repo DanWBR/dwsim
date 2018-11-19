@@ -71,7 +71,7 @@ Public Class FormOptions
         Me.cbudb.Checked = My.Settings.ReplaceComps
 
         cbDefaultLocation.Items.Clear()
-        cbDefaultLocation.Items.AddRange([Enum].GetNames(FlowsheetSurface.DockState.GetType))
+        cbDefaultLocation.Items.AddRange([Enum].GetNames(FlowsheetSurface_SkiaSharp.DockState.GetType))
         cbDefaultLocation.SelectedIndex = My.Settings.DefaultEditorLocation
 
         If TrackBar1.Value = 1 Then

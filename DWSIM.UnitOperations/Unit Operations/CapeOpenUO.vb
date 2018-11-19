@@ -40,6 +40,7 @@ Imports DWSIM.SharedClasses
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.UnitOperations.UnitOperations
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 
 Namespace UnitOperations
 
@@ -261,6 +262,11 @@ Namespace UnitOperations
             _form = New Form_CapeOpenSelector
             _form.ShowDialog(Me.FlowSheet)
             Me._seluo = _form._seluo
+            If _seluo.Name.ToLower.Contains("chemsep") Then
+                GraphicObject.ChemSep = True
+                GraphicObject.Width = 144
+                GraphicObject.Height = 180
+            End If
 
         End Sub
 
@@ -485,7 +491,7 @@ Namespace UnitOperations
                                 Case CapePortType.CAPE_MATERIAL
                                     .Type = ConType.ConIn
                             End Select
-                            .Position = New Point(Me.GraphicObject.X, Me.GraphicObject.Y + (Me.GraphicObject.InputConnectors.Count) / (nip - 1) * Me.GraphicObject.Height / 2)
+                            .Position = New Point.Point(Me.GraphicObject.X, Me.GraphicObject.Y + (Me.GraphicObject.InputConnectors.Count) / (nip - 1) * Me.GraphicObject.Height / 2)
                             .ConnectorName = p.ComponentName
                         End With
                     Case CapePortDirection.CAPE_OUTLET
@@ -497,7 +503,7 @@ Namespace UnitOperations
                                 Case CapePortType.CAPE_MATERIAL
                                     .Type = ConType.ConOut
                             End Select
-                            .Position = New Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + +(Me.GraphicObject.InputConnectors.Count) / (nip - 1) * Me.GraphicObject.Height / 2)
+                            .Position = New Point.Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + +(Me.GraphicObject.InputConnectors.Count) / (nip - 1) * Me.GraphicObject.Height / 2)
                             .ConnectorName = p.ComponentName
                         End With
                 End Select
@@ -555,7 +561,7 @@ Namespace UnitOperations
                                         Case CapePortType.CAPE_MATERIAL
                                             .Type = ConType.ConIn
                                     End Select
-                                    .Position = New Point(Me.GraphicObject.X, Me.GraphicObject.Y + (Me.GraphicObject.InputConnectors.Count) / (nip - 1) * Me.GraphicObject.Height / 2)
+                                    .Position = New Point.Point(Me.GraphicObject.X, Me.GraphicObject.Y + (Me.GraphicObject.InputConnectors.Count) / (nip - 1) * Me.GraphicObject.Height / 2)
                                     .ConnectorName = id.ComponentName
                                 End With
                                 Try
@@ -584,7 +590,7 @@ Namespace UnitOperations
                                         Case CapePortType.CAPE_MATERIAL
                                             .Type = ConType.ConOut
                                     End Select
-                                    .Position = New Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + (Me.GraphicObject.OutputConnectors.Count) / (nop - 1) * Me.GraphicObject.Height / 2)
+                                    .Position = New Point.Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + (Me.GraphicObject.OutputConnectors.Count) / (nop - 1) * Me.GraphicObject.Height / 2)
                                     .ConnectorName = id.ComponentName
                                 End With
                                 Try
@@ -648,7 +654,7 @@ Namespace UnitOperations
                                         Case CapePortType.CAPE_MATERIAL
                                             .Type = ConType.ConIn
                                     End Select
-                                    .Position = New Point(Me.GraphicObject.X, Me.GraphicObject.Y + (Me.GraphicObject.InputConnectors.Count) / (nip) * Me.GraphicObject.Height / 2)
+                                    .Position = New Point.Point(Me.GraphicObject.X, Me.GraphicObject.Y + (Me.GraphicObject.InputConnectors.Count) / (nip) * Me.GraphicObject.Height / 2)
                                     .ConnectorName = id.ComponentName
                                 End With
                                 Dim gobj As IGraphicObject = Me.GraphicObject.InputConnectors(ic).AttachedConnector.AttachedFrom
@@ -662,7 +668,7 @@ Namespace UnitOperations
                                         Case CapePortType.CAPE_MATERIAL
                                             .Type = ConType.ConOut
                                     End Select
-                                    .Position = New Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + (Me.GraphicObject.OutputConnectors.Count) / (nop) * Me.GraphicObject.Height / 2)
+                                    .Position = New Point.Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + (Me.GraphicObject.OutputConnectors.Count) / (nop) * Me.GraphicObject.Height / 2)
                                     .ConnectorName = id.ComponentName
                                 End With
                                 Dim gobj As IGraphicObject = Me.GraphicObject.OutputConnectors(oc).AttachedConnector.AttachedTo

@@ -123,13 +123,13 @@ Namespace GraphicObjects
 
             'posicionar pontos nos primeiros slots livres
 
-            Dim StartPos, EndPos As IPoint
+            Dim StartPos, EndPos As New Point
 
             Dim StartDir, EndDir As ConDir
 
             If Me.AttachedFrom.ObjectType = ObjectType.EnergyStream Then
-                If Me.AttachedTo.ObjectType = ObjectType.ShortcutColumn Or _
-                Me.AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Or _
+                If Me.AttachedTo.ObjectType = ObjectType.ShortcutColumn Or
+                Me.AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Or
                 Me.AttachedTo.ObjectType = ObjectType.Vessel Then
                     StartPos = Me.AttachedFrom.OutputConnectors(0).Position
                     EndPos = Me.AttachedTo.InputConnectors(Me.AttachedToConnectorIndex).Position
@@ -189,6 +189,7 @@ Namespace GraphicObjects
             LeftTop2.Y = Me.AttachedTo.Y
             RightBottom2.X = Me.AttachedTo.X + Me.AttachedTo.Width
             RightBottom2.Y = Me.AttachedTo.Y + Me.AttachedTo.Height
+
 
             'Check Rotation
 
@@ -277,28 +278,28 @@ Namespace GraphicObjects
 
             'Check Flipping
 
-            If Me.AttachedFrom.FlippedH Then
+            If Me.AttachedFrom.FlippedV Then
                 Dim center As New Point(Me.AttachedFrom.X + Me.AttachedFrom.Width / 2, Me.AttachedFrom.Y + Me.AttachedFrom.Height / 2)
                 Dim y As Double = StartPos.Y - center.Y
                 StartPos.Y = center.Y - y
                 If StartDir = ConDir.Down Then StartDir = ConDir.Up
                 If StartDir = ConDir.Up Then StartDir = ConDir.Down
             End If
-            If Me.AttachedFrom.FlippedV Then
+            If Me.AttachedFrom.FlippedH Then
                 Dim center As New Point(Me.AttachedFrom.X + Me.AttachedFrom.Width / 2, Me.AttachedFrom.Y + Me.AttachedFrom.Height / 2)
                 Dim x As Double = StartPos.X - center.X
                 StartPos.X = center.X - x
                 If StartDir = ConDir.Left Then StartDir = ConDir.Right
                 If StartDir = ConDir.Right Then StartDir = ConDir.Left
             End If
-            If Me.AttachedTo.FlippedH Then
+            If Me.AttachedTo.FlippedV Then
                 Dim center As New Point(Me.AttachedTo.X + Me.AttachedTo.Width / 2, Me.AttachedTo.Y + Me.AttachedTo.Height / 2)
                 Dim y As Double = EndPos.Y - center.Y
                 EndPos.Y = center.Y - y
                 If EndDir = ConDir.Down Then EndDir = ConDir.Up
                 If EndDir = ConDir.Up Then EndDir = ConDir.Down
             End If
-            If Me.AttachedTo.FlippedV Then
+            If Me.AttachedTo.FlippedH Then
                 Dim center As New Point(Me.AttachedTo.X + Me.AttachedTo.Width / 2, Me.AttachedTo.Y + Me.AttachedTo.Height / 2)
                 Dim x As Double = EndPos.X - center.X
                 EndPos.X = center.X - x
@@ -307,7 +308,6 @@ Namespace GraphicObjects
             End If
 
             'Construct path of stream
-
             PointList.Add(New Point(StartPos.X, StartPos.Y))
 
             '================== EndDir Right =======================
@@ -733,14 +733,14 @@ Namespace GraphicObjects
 
             Dim myPen As New SKPaint
 
+            UpdateStatus2(myPen, Me)
+
             With myPen
                 .IsStroke = True
-                .StrokeWidth = 1.0
+                .StrokeWidth = LineWidth
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .PathEffect = SKPathEffect.CreateCorner(6.0F)
             End With
-
-            UpdateStatus2(myPen, Me)
 
             Dim myPen2 As New SKPaint
 
@@ -754,15 +754,14 @@ Namespace GraphicObjects
 
             Dim path As New SKPath()
 
-            Dim points() As Point = PointList.Select(Function(x) x).ToArray
+            Dim points() As SKPoint = PointList.Select(Function(x) New SKPoint(x.X, x.Y)).ToArray
 
             path.MoveTo(points(0).X, points(0).Y)
             For i As Integer = 1 To points.Length - 1
                 path.LineTo(points(i).X, points(i).Y)
             Next
 
-            If Not s.DarkMode Then canvas.DrawPath(path, myPen2)
-
+            canvas.DrawPath(path, myPen2)
             canvas.DrawPath(path, myPen)
 
         End Sub

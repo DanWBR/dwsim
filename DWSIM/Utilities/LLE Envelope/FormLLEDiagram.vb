@@ -43,9 +43,9 @@ Public Class FormLLEDiagram
 
     Private Property loaded As Boolean = False
 
-    Private Function Transform(ByVal G As Graphics, ByVal X As Double, ByVal Y As Double) As Drawing.Point
+    Private Function Transform(ByVal G As Graphics, ByVal X As Double, ByVal Y As Double) As Point
 
-        Dim R As New Drawing.Point
+        Dim R As New Point
         Dim Size, Shift As Double
         Size = Math.Min(G.VisibleClipBounds.Width - DiagMargins.Left - DiagMargins.Right, G.VisibleClipBounds.Height - DiagMargins.Top - DiagMargins.Bottom)
         Shift = (G.VisibleClipBounds.Width - Size - DiagMargins.Left - DiagMargins.Right) / 2 'shift diagram to horizontal center
@@ -59,7 +59,7 @@ Public Class FormLLEDiagram
 
     Private Sub DrawDiagram(ByVal G As Graphics)
 
-        Dim pt1, pt2 As Drawing.Point
+        Dim pt1, pt2 As System.Drawing.Point
         Dim P As PointF
         Dim MyPen As Pen
         Dim MyBrush As Brush
@@ -109,12 +109,12 @@ Public Class FormLLEDiagram
         MyBrush = New SolidBrush(Color.Snow)
 
         pt1 = Transform(G, 0, 0)
-        Dim point1 As New Drawing.Point(pt1.X, pt1.Y)
+        Dim point1 As New System.Drawing.Point(pt1.X, pt1.Y)
         pt1 = Transform(G, 1, 0)
-        Dim point2 As New Drawing.Point(pt1.X, pt1.Y)
+        Dim point2 As New System.Drawing.Point(pt1.X, pt1.Y)
         pt1 = Transform(G, 0, 1)
-        Dim point3 As New Drawing.Point(pt1.X, pt1.Y)
-        Dim curvePoints As Drawing.Point() = {point1, point2, point3}
+        Dim point3 As New System.Drawing.Point(pt1.X, pt1.Y)
+        Dim curvePoints As System.Drawing.Point() = {point1, point2, point3}
         G.FillPolygon(MyBrush, curvePoints)
 
         '===================================
@@ -123,7 +123,7 @@ Public Class FormLLEDiagram
         MyBrush.Dispose()
         MyBrush = New SolidBrush(Color.SkyBlue)
         If LLECurve.Count > 1 Then
-            Dim MiscGap(2 * LLECurve.Count - 1) As Drawing.Point
+            Dim MiscGap(2 * LLECurve.Count - 1) As System.Drawing.Point
 
             For k = 0 To LLECurve.Count - 1
                 Ko1 = LLECurve(k)

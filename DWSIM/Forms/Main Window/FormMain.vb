@@ -29,12 +29,15 @@ Imports System.Threading.Tasks
 Imports System.Reflection
 Imports Microsoft.Win32
 Imports System.Text
-Imports DWSIM.DrawingTools.GraphicObjects
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.GraphicObjects
 Imports DWSIM.SharedClasses.Extras
 Imports System.Dynamic
 Imports DWSIM.SharedClasses.Flowsheet.Optimization
 Imports ICSharpCode.SharpZipLib.Zip
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
 Public Class FormMain
 
@@ -928,7 +931,7 @@ Public Class FormMain
                     obj.Y += shift
                     If pkey <> "" Then
                         searchtext = obj.Tag.Split("(")(0).Trim()
-                        objcount = (From go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
+                        objcount = (From go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
                         If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     End If
                     If TypeOf obj Is TableGraphic Then
@@ -939,14 +942,14 @@ Public Class FormMain
                         DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = form
                     ElseIf TypeOf obj Is OxyPlotGraphic Then
                         DirectCast(obj, OxyPlotGraphic).Flowsheet = form
-                    ElseIf TypeOf obj Is DistillationColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or
-                        TypeOf obj Is RefluxedAbsorberGraphic Or TypeOf obj Is ReboiledAbsorberGraphic Or TypeOf obj Is CapeOpenUOGraphic Then
+                    ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CapeOpenGraphic Then
                         obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
+                        obj.PositionConnectors()
                     Else
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
                     End If
-                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(obj)
+                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(obj)
                     form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
                 End If
             Catch ex As Exception
@@ -959,9 +962,9 @@ Public Class FormMain
                 Dim id As String = pkey & xel.Element("Name").Value
                 If id <> "" Then
                     Dim obj As GraphicObject = (From go As GraphicObject In
-                                                            form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                                                            form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                     If obj Is Nothing Then obj = (From go As GraphicObject In
-                                                                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
+                                                                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
                     If Not obj Is Nothing Then
                         Dim i As Integer = 0
                         For Each xel2 As XElement In xel.Element("InputConnectors").Elements
@@ -970,7 +973,7 @@ Public Class FormMain
                                 obj.InputConnectors(i).Type = [Enum].Parse(obj.InputConnectors(i).Type.GetType, xel2.@ConnType)
                                 If reconnectinlets Then
                                     Dim objFrom As GraphicObject = (From go As GraphicObject In
-                                                                                   form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = xel2.@AttachedFromObjID).SingleOrDefault
+                                                                                   form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedFromObjID).SingleOrDefault
                                     If Not objFrom Is Nothing Then
                                         If Not objFrom.OutputConnectors(xel2.@AttachedFromConnIndex).IsAttached Then
                                             form.ConnectObject(objFrom, obj, xel2.@AttachedFromConnIndex, xel2.@AttachedToConnIndex)
@@ -992,16 +995,16 @@ Public Class FormMain
                 Dim id As String = pkey & xel.Element("Name").Value
                 If id <> "" Then
                     Dim obj As GraphicObject = (From go As GraphicObject In
-                                                            form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                                                            form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                     If Not obj Is Nothing Then
                         For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
                             If xel2.@IsAttached = True Then
                                 Dim objToID = pkey & xel2.@AttachedToObjID
                                 If objToID <> "" Then
                                     Dim objTo As GraphicObject = (From go As GraphicObject In
-                                                                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
+                                                                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
                                     If objTo Is Nothing Then objTo = (From go As GraphicObject In
-                                                                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
+                                                                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
                                     Dim fromidx As Integer = -1
                                     Dim cp As ConnectionPoint = (From cp2 As ConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = obj.Name).SingleOrDefault
                                     If cp Is Nothing Then cp = (From cp2 As ConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = xel2.@AttachedToObjID).SingleOrDefault
@@ -1017,9 +1020,9 @@ Public Class FormMain
                                 Dim objToID = pkey & xel2.@AttachedToObjID
                                 If objToID <> "" Then
                                     Dim objTo As GraphicObject = (From go As GraphicObject In
-                                                                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
+                                                                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
                                     If objTo Is Nothing Then obj = (From go As GraphicObject In
-                                                                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
+                                                                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
                                     If Not obj Is Nothing And Not objTo Is Nothing Then form.ConnectObject(obj, objTo, -1, xel2.@AttachedToConnIndex)
                                 End If
                             End If
@@ -1183,7 +1186,7 @@ Public Class FormMain
                     obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                 End If
                 Dim gobj As GraphicObject = (From go As GraphicObject In
-                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
                 gobj.Owner = obj
                 obj.SetFlowsheet(form)
@@ -1369,20 +1372,9 @@ Public Class FormMain
                                                End Sub)
         End If
 
-        'check saved from Classic UI
-
-        Dim savedfromclui As Boolean = False
-
-        Try
-            savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
-        Catch ex As Exception
-        End Try
-
-        If Not savedfromclui Then
-            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                                   SharedClasses.Utility.UpdateElementFromNewUI(xel1)
-                                               End Sub)
-        End If
+        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                               SharedClasses.Utility.UpdateElementForNewUI(xel1)
+                                           End Sub)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
@@ -1540,7 +1532,7 @@ Public Class FormMain
                     obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                 End If
                 Dim gobj As GraphicObject = (From go As GraphicObject In
-                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
                 gobj.Owner = obj
                 obj.SetFlowsheet(form)
@@ -1552,6 +1544,14 @@ Public Class FormMain
                                 phase.Compounds(c.Name).ConstantProperties = c
                             Next
                         Next
+                    ElseIf TypeOf obj Is CapeOpenUO Then
+                        If DirectCast(obj, CapeOpenUO)._seluo.Name.ToLower.Contains("chemsep") Then
+                            DirectCast(gobj, CAPEOPENGraphic).ChemSep = True
+                            If gobj.Height = 40 And gobj.Width = 40 Then
+                                gobj.Width = 144
+                                gobj.Height = 180
+                            End If
+                        End If
                     End If
                 End If
                 objlist.Add(obj)
@@ -1686,9 +1686,9 @@ Public Class FormMain
             excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
         End Try
 
-        For Each obj In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
+        For Each obj In form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects
             If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
-                DirectCast(obj, SpreadsheetTableGraphic).SetSpreadsheet(form.FormSpreadsheet)
+                DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = form
             End If
         Next
 
@@ -1770,26 +1770,6 @@ Public Class FormMain
             form.MdiParent = Me
             form.Show()
             form.Activate()
-
-            If xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView") IsNot Nothing Then
-                Try
-                    Dim flsconfig As String = xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView").Value
-                    If flsconfig <> "" Then
-                        form.FormSurface.FlowsheetDesignSurface.Zoom = Single.Parse(flsconfig.Split(";")(0), ci)
-                        form.FormSurface.TSTBZoom.Text = Format(form.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
-                        form.FormSurface.FlowsheetDesignSurface.Invalidate()
-                        Dim vsval, hsval, vsmax, hsmax As Integer
-                        vsval = Integer.Parse(flsconfig.Split(";")(1))
-                        hsval = Integer.Parse(flsconfig.Split(";")(2))
-                        vsmax = form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Maximum
-                        hsmax = form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Maximum
-                        If vsval < vsmax Then form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value = vsval
-                        If hsval < hsmax Then form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value = hsval
-                    End If
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Restoring Flowsheet Zoom Information", ex))
-                End Try
-            End If
 
             form.FrmStSim1.Init(True)
 
@@ -2031,7 +2011,7 @@ Public Class FormMain
                     obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                 End If
                 Dim gobj As GraphicObject = (From go As GraphicObject In
-                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                                    form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
                 gobj.Owner = obj
                 obj.SetFlowsheet(form)
@@ -2177,9 +2157,9 @@ Public Class FormMain
             excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
         End Try
 
-        For Each obj In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
+        For Each obj In form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects
             If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
-                DirectCast(obj, SpreadsheetTableGraphic).SetSpreadsheet(form.FormSpreadsheet)
+                DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = form
             End If
         Next
 
@@ -2255,26 +2235,6 @@ Public Class FormMain
             form.MdiParent = Me
             form.Show()
             form.Activate()
-
-            If xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView") IsNot Nothing Then
-                Try
-                    Dim flsconfig As String = xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView").Value
-                    If flsconfig <> "" Then
-                        form.FormSurface.FlowsheetDesignSurface.Zoom = Single.Parse(flsconfig.Split(";")(0), ci)
-                        form.FormSurface.TSTBZoom.Text = Format(form.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
-                        form.FormSurface.FlowsheetDesignSurface.Invalidate()
-                        Dim vsval, hsval, vsmax, hsmax As Integer
-                        vsval = Integer.Parse(flsconfig.Split(";")(1))
-                        hsval = Integer.Parse(flsconfig.Split(";")(2))
-                        vsmax = form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Maximum
-                        hsmax = form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Maximum
-                        If vsval < vsmax Then form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value = vsval
-                        If hsval < hsmax Then form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value = hsval
-                    End If
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Restoring Flowsheet Zoom Information", ex))
-                End Try
-            End If
 
         End If
 
@@ -2375,7 +2335,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
+        For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects
             If TypeOf go Is ShapeGraphic Then DirectCast(go, ShapeGraphic).Fill = False
             Dim xdata As New XElement("GraphicObject", go.SaveData().ToArray())
             If TypeOf go Is ShapeGraphic Then DirectCast(go, ShapeGraphic).Fill = True
@@ -2533,7 +2493,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
+        For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects
             If Not go.IsConnector And Not go.ObjectType = ObjectType.GO_FloatingTable Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
         Next
 
@@ -2621,19 +2581,6 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("Data2"))
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = form.FormSpreadsheet.CopyDT1ToString()
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = form.FormSpreadsheet.CopyDT2ToString()
-
-        Dim flsconfig As New StringBuilder()
-
-        With flsconfig
-            .Append(form.FormSurface.FlowsheetDesignSurface.Zoom.ToString(ci) & ";")
-            .Append(form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value & ";")
-            .Append(form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value)
-        End With
-
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("FlowsheetView"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView")
-
-        xel.Add(flsconfig.ToString)
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PanelLayout"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout")

@@ -39,21 +39,21 @@ Public Class EditingForm_Valve
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
                 lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
-                lblStatus.ForeColor = Drawing.Color.Blue
+                lblStatus.ForeColor = System.Drawing.Color.Blue
             Else
                 If Not .GraphicObject.Active Then
                     lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
-                    lblStatus.ForeColor = Drawing.Color.Gray
+                    lblStatus.ForeColor = System.Drawing.Color.Gray
                 ElseIf .ErrorMessage <> "" Then
                     If .ErrorMessage.Length > 50 Then
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
                     Else
                         lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
                     End If
-                    lblStatus.ForeColor = Drawing.Color.Red
+                    lblStatus.ForeColor = System.Drawing.Color.Red
                 Else
                     lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")
-                    lblStatus.ForeColor = Drawing.Color.Black
+                    lblStatus.ForeColor = System.Drawing.Color.Black
                 End If
             End If
 
@@ -280,16 +280,16 @@ Public Class EditingForm_Valve
         Dim tbox = DirectCast(sender, TextBox)
 
         If tbox.Text.IsValidDoubleExpression Then
-            tbox.ForeColor = Drawing.Color.Blue
+            tbox.ForeColor = System.Drawing.Color.Blue
         Else
-            tbox.ForeColor = Drawing.Color.Red
+            tbox.ForeColor = System.Drawing.Color.Red
         End If
 
     End Sub
 
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbPressureDrop.KeyDown, tbOutletPressure.KeyDown, tbKv.KeyDown, tbOp.KeyDown
 
-        If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
+        If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
             UpdateProps(sender)
 
@@ -414,7 +414,7 @@ Public Class EditingForm_Valve
 
     End Sub
     Private Sub btnUtils_Click(sender As Object, e As EventArgs) Handles btnUtils.Click
-        UtilitiesCtxMenu.Show(btnUtils, New Drawing.Point(20, 0))
+        UtilitiesCtxMenu.Show(btnUtils, New System.Drawing.Point(20, 0))
     End Sub
 
     Private Sub sizingtsmi_Click(sender As Object, e As EventArgs) Handles sizingtsmi.Click

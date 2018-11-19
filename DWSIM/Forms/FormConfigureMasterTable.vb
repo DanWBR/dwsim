@@ -1,6 +1,8 @@
-﻿Public Class FormConfigureMasterTable
+﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
-    Public Table As GraphicObjects.MasterTableGraphic
+Public Class FormConfigureMasterTable
+
+    Public Table As MasterTableGraphic
 
     Private Loaded As Boolean = False
 
