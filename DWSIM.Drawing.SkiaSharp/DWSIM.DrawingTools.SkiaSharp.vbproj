@@ -143,6 +143,7 @@
     <Compile Include="GraphicObjects\Base\ShapeGraphic.vb" />
     <Compile Include="GraphicObjects\Connector\ConnectorClass.vb" />
     <Compile Include="GraphicObjects\ExtensionBase\GraphicObjectExtension.vb" />
+    <Compile Include="GraphicObjects\Other\RectangleGraphic.vb" />
     <Compile Include="GraphicObjects\Shapes\AbsorptionColumn.vb" />
     <Compile Include="GraphicObjects\Shapes\Adjust.vb" />
     <Compile Include="GraphicObjects\Shapes\CapeOpen.vb" />

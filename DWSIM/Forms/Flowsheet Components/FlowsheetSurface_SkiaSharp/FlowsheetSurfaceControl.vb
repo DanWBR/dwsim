@@ -17,7 +17,9 @@ Public Class FlowsheetSurfaceControl
         ' Add any initialization after the InitializeComponent() call.
         AllowDrop = True
 
-
+        FlowsheetSurface.InvalidateCallback = Sub()
+                                                  FlowsheetObject.UpdateInterface()
+                                              End Sub
 
     End Sub
 

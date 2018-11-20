@@ -160,6 +160,12 @@ Public Class GraphicsSurface
         End If
 
         For Each dobj In objects
+            If TypeOf dobj Is Shapes.RectangleGraphic Then
+                dobj.Draw(DrawingCanvas)
+            End If
+        Next
+
+        For Each dobj In objects
             If TypeOf dobj Is ConnectorGraphic Then
                 dobj.Draw(DrawingCanvas)
             End If
@@ -180,7 +186,7 @@ Public Class GraphicsSurface
 
         For Each dobj In objects
 
-            If Not TypeOf dobj Is ConnectorGraphic Then
+            If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic Then
 
                 If TypeOf dobj Is ShapeGraphic Then
                     DirectCast(dobj, ShapeGraphic).Fill = False
@@ -243,6 +249,7 @@ Public Class GraphicsSurface
                         dobj.ObjectType <> ObjectType.GO_Table And
                         dobj.ObjectType <> ObjectType.GO_Animation And
                         dobj.ObjectType <> ObjectType.GO_Chart And
+                        dobj.ObjectType <> ObjectType.GO_Rectangle And
                         dobj.ObjectType <> ObjectType.GO_Image And
                         dobj.ObjectType <> ObjectType.GO_Text And
                         dobj.ObjectType <> ObjectType.GO_FloatingTable Then
@@ -1064,7 +1071,7 @@ Public Class GraphicsSurface
 
         If objlist.Count > 1 Then
             For Each obj In objlist
-                Return obj
+                If obj.ObjectType <> ObjectType.GO_Rectangle Then Return obj
             Next
         ElseIf objlist.Count = 1 Then
             Return objlist(0)

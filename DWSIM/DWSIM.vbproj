@@ -677,6 +677,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\UIScriptEditor.vb" />
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UISKColorEditor\UISKColorEditor.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UISSelector\UISSelector.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UISTHXEditor\UISTHXEditor.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIThermalProfileEditor\UIThermalProfileEditor.vb" />

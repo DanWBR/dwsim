@@ -93,13 +93,18 @@ Namespace GraphicObjects
             Dim bpaint As New SKPaint()
 
             With bpaint
-                .IsAntialias = False
+                .TextSize = FontSize
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Typeface = DefaultTypeFace
                 .Color = If(s.DarkMode, SKColors.Transparent, SKColors.White.WithAlpha(200))
-                .IsStroke = False
+                .IsStroke = True
+                .StrokeWidth = 2
+                .BlendMode = SKBlendMode.Overlay
             End With
 
-            g.DrawRect(New SKRect(X + strx - 2, Y + Height + 20 - trect.Height - 2, X + strx + trect.Width + 2, Y + Height + 20 + 2), bpaint)
+            'g.DrawRect(New SKRect(X + strx - 2, Y + Height + 20 - trect.Height - 2, X + strx + trect.Width + 2, Y + Height + 20 + 2), bpaint)
 
+            g.DrawText(Me.Tag, X + strx, Y + Height + 20, bpaint)
             g.DrawText(Me.Tag, X + strx, Y + Height + 20, tpaint)
 
         End Sub

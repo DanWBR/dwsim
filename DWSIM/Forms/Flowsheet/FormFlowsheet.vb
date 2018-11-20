@@ -257,6 +257,10 @@ Public Class FormFlowsheet
 
         If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
 
+        Me.WindowState = FormWindowState.Normal
+        Me.MdiParent = FormMain
+        Me.WindowState = FormWindowState.Maximized
+
     End Sub
 
     Function ReturnForm(ByVal str As String) As IDockContent
@@ -2943,6 +2947,17 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub)
+    End Sub
+
+    Private Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
+        Dim myTextObject As New Shapes.RectangleGraphic(New SkiaSharp.SKPoint(10, 10), "TEXT")
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "RECT-" & Guid.NewGuid.ToString
+        gObj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
+        gObj.ObjectType = ObjectType.GO_Rectangle
+        Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight

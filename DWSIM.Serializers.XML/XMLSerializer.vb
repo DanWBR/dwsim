@@ -124,6 +124,15 @@ Public Class XMLSerializer
                                     Dim val As Color = ColorTranslator.FromHtml(xel.Value)
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is SkiaSharp.SKColor Then
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                If Not xel Is Nothing Then
+                                    Try
+                                        Dim val As SkiaSharp.SKColor = SkiaSharp.SKColor.Parse(xel.Value)
+                                        obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                    Catch ex As Exception
+                                    End Try
+                                End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As ArrayList = StringToArray(xel.Value, ci)
@@ -221,6 +230,13 @@ Public Class XMLSerializer
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             Dim val As Color = ColorTranslator.FromHtml(xel.Value)
                             obj.GetType.GetField(prop.Name).SetValue(obj, val)
+                        ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is SkiaSharp.SKColor Then
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                            Try
+                                Dim val As SkiaSharp.SKColor = SkiaSharp.SKColor.Parse(xel.Value)
+                                obj.GetType.GetField(prop.Name).SetValue(obj, val)
+                            Catch ex As Exception
+                            End Try
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ArrayList Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             Dim val As ArrayList = StringToArray(xel.Value, ci)
@@ -302,6 +318,8 @@ Public Class XMLSerializer
                                 .Add(New XElement(prop.Name, New FontConverter().ConvertToInvariantString(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing))))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Color Then
                                 .Add(New XElement(prop.Name, ColorTranslator.ToHtml(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing))))
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is SkiaSharp.SKColor Then
+                                .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), SkiaSharp.SKColor).ToString))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Byte Then
                                 .Add(New XElement(prop.Name, obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Date Then
@@ -350,6 +368,8 @@ Public Class XMLSerializer
                             .Add(New XElement(prop.Name, New FontConverter().ConvertToInvariantString(obj.GetType.GetField(prop.Name).GetValue(obj))))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Color Then
                             .Add(New XElement(prop.Name, ColorTranslator.ToHtml(obj.GetType.GetField(prop.Name).GetValue(obj))))
+                        ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is SkiaSharp.SKColor Then
+                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), SkiaSharp.SKColor).ToString))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Byte Then
                             .Add(New XElement(prop.Name, obj.GetType.GetField(prop.Name).GetValue(obj)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Date Then
