@@ -3065,6 +3065,21 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
     End Sub
 
+    Private Sub CopyAsImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAsImageToolStripMenuItem.Click
+        Using bmp As New SKBitmap(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
+            Using canvas As New SKCanvas(bmp)
+                FlowsheetDesignSurface.FlowsheetSurface.UpdateCanvas(canvas)
+                Dim d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
+                Using str As New IO.MemoryStream
+                    d.SaveTo(str)
+                    Clipboard.SetImage(Image.FromStream(str))
+                    Flowsheet.ShowMessage("The flowsheet was copied as an image to the clipboard.", Interfaces.IFlowsheet.MessageType.Information)
+                End Using
+            End Using
+        End Using
+
+    End Sub
+
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
 
         If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor Is Nothing OrElse DirectCast(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor, Form).IsDisposed Then

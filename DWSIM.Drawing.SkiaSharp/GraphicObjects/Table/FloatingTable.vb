@@ -75,7 +75,7 @@ Namespace GraphicObjects.Tables
 
             If zoom = 0.0 Then Exit Sub
 
-            Padding = 7 / zoom * GlobalSettings.Settings.DpiScale * sf
+            Padding = 5 / zoom * GlobalSettings.Settings.DpiScale * sf
 
             Dim tpaint As New SKPaint()
 

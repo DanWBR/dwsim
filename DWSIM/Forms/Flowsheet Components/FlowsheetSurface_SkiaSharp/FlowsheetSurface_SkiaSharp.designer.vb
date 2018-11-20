@@ -122,6 +122,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbAlignVertical = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignHorizontal = New System.Windows.Forms.ToolStripButton()
+        Me.CopyAsImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.SuspendLayout()
         Me.CMS_NoSel.SuspendLayout()
@@ -149,7 +150,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'CMS_NoSel
         '
         resources.ApplyResources(Me.CMS_NoSel, "CMS_NoSel")
-        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem})
+        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem, Me.CopyAsImageToolStripMenuItem})
         Me.CMS_NoSel.Name = "ContextMenuStrip1"
         '
         'ToolStripMenuItem3
@@ -733,6 +734,12 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsbAlignHorizontal.Image = Global.DWSIM.My.Resources.Resources.shape_align_middle1
         Me.tsbAlignHorizontal.Name = "tsbAlignHorizontal"
         '
+        'CopyAsImageToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CopyAsImageToolStripMenuItem, "CopyAsImageToolStripMenuItem")
+        Me.CopyAsImageToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
+        Me.CopyAsImageToolStripMenuItem.Name = "CopyAsImageToolStripMenuItem"
+        '
         'FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me, "$this")
@@ -861,4 +868,5 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tsbAlignHorizontal As System.Windows.Forms.ToolStripButton
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents EditAppearanceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CopyAsImageToolStripMenuItem As ToolStripMenuItem
 End Class

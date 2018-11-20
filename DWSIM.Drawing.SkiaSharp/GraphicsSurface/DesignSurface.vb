@@ -9,7 +9,7 @@ Imports DWSIM.DrawingTools.Point
 
 Public Class GraphicsSurface
 
-    Public DrawingCanvas As SKCanvas
+    'Public DrawingCanvas As SKCanvas
 
 #Region "Events"
 
@@ -129,9 +129,7 @@ Public Class GraphicsSurface
 
     Public Property SelectedObjects() As New Generic.Dictionary(Of String, IGraphicObject)
 
-    Public Sub UpdateSurface(surface As SKSurface)
-
-        DrawingCanvas = surface.Canvas
+    Public Sub UpdateCanvas(DrawingCanvas As SKCanvas)
 
         'draw the actual objects onto the page, on top of the grid
 
@@ -269,6 +267,13 @@ Public Class GraphicsSurface
                 If dobj.Calculated Then DrawPropertyListBlock(DrawingCanvas, dobj)
             Next
         End If
+
+    End Sub
+
+
+    Public Sub UpdateSurface(surface As SKSurface)
+
+        UpdateCanvas(surface.Canvas)
 
     End Sub
 
