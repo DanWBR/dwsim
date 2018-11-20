@@ -12,7 +12,14 @@ Namespace GraphicObjects
 
         Public Sub New()
 
-            Me.DefaultTypeFace = SKTypeface.FromFamilyName("Arial", SKTypefaceStyle.Bold)
+            Select Case GlobalSettings.Settings.RunningPlatform
+                Case GlobalSettings.Settings.Platform.Windows
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
+                Case GlobalSettings.Settings.Platform.Linux
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
+                Case GlobalSettings.Settings.Platform.Mac
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
+            End Select
 
             Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.GO_Text
             Me.Height = 20
@@ -32,7 +39,7 @@ Namespace GraphicObjects
 
 #End Region
 
-        Public Property Text() As String = "TEXT (dOuble-click to edit)"
+        Public Property Text() As String = "TEXT (double-click to edit)"
 
         Public Property Size() As Double = 14.0#
 
