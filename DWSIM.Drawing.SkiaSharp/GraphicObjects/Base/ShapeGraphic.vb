@@ -200,9 +200,17 @@ Namespace GraphicObjects
 
             MyBase.New()
 
-            Me.DefaultTypeFace = SKTypeface.FromFamilyName("Arial", SKTypefaceStyle.Bold)
-            Me.RegularTypeFace = SKTypeface.FromFamilyName("Arial", SKTypefaceStyle.Normal)
-
+            Select Case GlobalSettings.Settings.RunningPlatform
+                Case GlobalSettings.Settings.Platform.Windows
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
+                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Normal)
+                Case GlobalSettings.Settings.Platform.Linux
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
+                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Normal)
+                Case GlobalSettings.Settings.Platform.Mac
+                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
+                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Normal)
+            End Select
 
         End Sub
 

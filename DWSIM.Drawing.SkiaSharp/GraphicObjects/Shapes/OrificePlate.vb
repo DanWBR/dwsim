@@ -104,6 +104,34 @@ Namespace GraphicObjects.Shapes
             canvas.DrawOval(rect2, myPen2)
             canvas.DrawRect(rect3, myPen2)
 
+            If GradientMode Then
+
+                Dim gradPen As New SKPaint()
+                With gradPen
+                    .Color = LineColor
+                    .StrokeWidth = LineWidth
+                    .IsStroke = False
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Shader = SKShader.CreateLinearGradient(New SKPoint(X, Y), New SKPoint(X, Y + Height),
+                                    New SKColor() {SKColors.White, LineColor},
+                                    New Single() {0.0, 1.0}, SKShaderTileMode.Clamp)
+                End With
+
+                canvas.DrawOval(rect, gradPen)
+                canvas.DrawRect(rect3, gradPen)
+
+                Dim bgpen As New SKPaint()
+                With bgpen
+                    .Color = If(GlobalSettings.Settings.DarkMode, SKColors.Black, SKColors.White)
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .IsStroke = False
+                End With
+
+                canvas.DrawOval(rect2, bgpen)
+                canvas.DrawOval(rect2, myPen2)
+
+            End If
+
         End Sub
 
     End Class

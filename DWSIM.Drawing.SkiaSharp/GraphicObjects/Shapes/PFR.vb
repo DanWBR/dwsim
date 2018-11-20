@@ -100,13 +100,6 @@ Namespace GraphicObjects.Shapes
             lattice.ScaleX = 20.0#
             lattice.ScaleY = 20.0#
 
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = LineColor
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .IsStroke = False
-                .Shader = SKShader.CreatePerlinNoiseFractalNoise(0.05F, 0.05F, 4, 0.0F)
-            End With
             Dim myPen2 As New SKPaint()
             With myPen2
                 .Color = LineColor
@@ -116,9 +109,39 @@ Namespace GraphicObjects.Shapes
             End With
 
             Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
+            Dim rect0 As New SKRect(X, Y, X + 0.2 * Width, Y + Height)
+            Dim rect2 As New SKRect(X + 0.8 * Width, Y, X + Width, Y + Height)
 
-            canvas.DrawRect(rect1, myPen)
             canvas.DrawRect(rect1, myPen2)
+            canvas.DrawOval(rect0, myPen2)
+            canvas.DrawOval(rect2, myPen2)
+
+            If GradientMode Then
+
+                Dim gradPen As New SKPaint()
+                With gradPen
+                    .Color = LineColor
+                    .StrokeWidth = LineWidth
+                    .IsStroke = False
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Shader = SKShader.CreateLinearGradient(New SKPoint(X, Y), New SKPoint(X, Y + Height),
+                                    New SKColor() {SKColors.White, LineColor},
+                                    New Single() {0.0, 1.0}, SKShaderTileMode.Clamp)
+                End With
+
+                canvas.DrawRect(rect1, gradPen)
+                canvas.DrawOval(rect0, gradPen)
+                canvas.DrawOval(rect2, gradPen)
+                canvas.DrawOval(rect0, myPen2)
+
+            End If
+
+            For i As Integer = 2 To 14
+                Dim p As New SKPath
+                Dim r As New SKRect(X + i / 20 * Width, Y, X + (0.2 + i / 20) * Width, Y + Height)
+                p.AddArc(r, -90, 180)
+                canvas.DrawPath(p, myPen2)
+            Next
 
         End Sub
 

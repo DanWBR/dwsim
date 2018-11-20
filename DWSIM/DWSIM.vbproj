@@ -291,6 +291,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Nini.dll</HintPath>
     </Reference>
+    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Python.Runtime, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -412,7 +418,7 @@
       <DependentUpon>FlowsheetSurfaceControl.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurfaceControl.vb">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.designer.vb">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
@@ -1419,6 +1425,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Report Files\report_en-US.mr6" />
     <EmbeddedResource Include="Report Files\report_pt-BR.mr6" />
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Resources\node_in copy.png" />
   </ItemGroup>

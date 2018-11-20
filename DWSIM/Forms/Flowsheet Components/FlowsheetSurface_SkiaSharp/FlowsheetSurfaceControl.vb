@@ -3,7 +3,7 @@ Imports SkiaSharp.Views.Desktop
 
 Public Class FlowsheetSurfaceControl
 
-    Inherits SkiaSharp.Views.Desktop.SKControl
+    Inherits SkiaSharp.Views.Desktop.SKGLControl
 
     Public WithEvents FlowsheetSurface As New Drawing.SkiaSharp.GraphicsSurface
 
@@ -17,9 +17,13 @@ Public Class FlowsheetSurfaceControl
         ' Add any initialization after the InitializeComponent() call.
         AllowDrop = True
 
+
+
     End Sub
 
-    Protected Overrides Sub OnPaintSurface(e As SKPaintSurfaceEventArgs)
+    Protected Overrides Sub OnPaintSurface(e As SKPaintGLSurfaceEventArgs)
+
+        MyBase.OnPaintSurface(e)
 
         If FlowsheetSurface IsNot Nothing Then FlowsheetSurface.UpdateSurface(e.Surface)
 

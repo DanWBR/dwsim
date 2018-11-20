@@ -1,7 +1,7 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FlowsheetSurfaceControl
 
-    Inherits SkiaSharp.Views.Desktop.SKControl
+    Inherits SkiaSharp.Views.Desktop.SKGLControl
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
