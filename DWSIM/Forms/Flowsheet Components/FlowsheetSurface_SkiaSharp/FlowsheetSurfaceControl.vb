@@ -44,9 +44,16 @@ Public Class FlowsheetSurfaceControl
     End Sub
 
     Private Sub FlowsheetSurfaceControl_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
+
+        If My.Settings.DisplayPFDTip Then
+            MessageBox.Show(DWSIM.App.GetLocalString("PFDTip"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            My.Settings.DisplayPFDTip = False
+        End If
+
         FlowsheetSurface.InputPress(e.X, e.Y)
         Invalidate()
         Invalidate()
+
     End Sub
 
     Private Sub FlowsheetSurfaceControl_DragEnter(sender As Object, e As DragEventArgs) Handles Me.DragEnter

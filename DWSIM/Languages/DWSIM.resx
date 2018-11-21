@@ -5547,4 +5547,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="Headspace" xml:space="preserve">
     <value>Espaço livre</value>
   </data>
+  <data name="PFDTip" xml:space="preserve">
+    <value>Se o modo de multiseleção estiver ativado (verifique a barra de ferramentas), pressione Shift enquanto arrasta o mouse sob o fluxograma para alterar a visualização.</value>
+  </data>
 </root>

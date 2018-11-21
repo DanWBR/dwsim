@@ -5603,4 +5603,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="Headspace" xml:space="preserve">
     <value>Headspace</value>
   </data>
+  <data name="PFDTip" xml:space="preserve">
+    <value>If MultiSelect mode is enabled (check the flowsheet toolbar), press and hold SHIFT while dragging the left mouse button over the flowsheet drawing area to change the current view position.</value>
+  </data>
 </root>

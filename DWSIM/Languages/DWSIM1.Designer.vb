@@ -10909,6 +10909,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Se o modo de multiseleção estiver ativado (verifique a barra de ferramentas), pressione Shift enquanto arrasta o mouse sob o fluxograma para alterar a visualização..
+        '''</summary>
+        Friend Shared ReadOnly Property PFDTip() As String
+            Get
+                Return ResourceManager.GetString("PFDTip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Carga de catalisador.
         '''</summary>
         Friend Shared ReadOnly Property PFRCatalystLoading() As String
