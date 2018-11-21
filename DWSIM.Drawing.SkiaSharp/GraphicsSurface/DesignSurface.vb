@@ -95,6 +95,8 @@ Public Class GraphicsSurface
 
     Public Property SnapToGrid As Boolean = True
 
+    Public Property SelectRectangle() As Boolean
+
     Public Property SurfaceMargins As SKRect
 
     Public Property Zoom() As Single = 1.0F
@@ -147,6 +149,40 @@ Public Class GraphicsSurface
             canvas.DrawLine(i, 0, i, 10000, gpaint)
             canvas.DrawLine(0, i, 10000, i, gpaint)
         Next
+
+    End Sub
+
+    Private Sub DrawSelectionRectangle(DrawingCanvas As SKCanvas, ByVal selectionRect As SKRect)
+
+        Dim spaint As New SKPaint
+        With spaint
+            .IsStroke = False
+            .Color = SKColors.LightSalmon.WithAlpha(25)
+        End With
+
+        Dim normalizedRectangle As New SKRect
+
+        'make sure the rectangle's upper left point is
+        'up and to the left relative to the other points of the rectangle by
+        'ensuring that it has a positive width and height.
+
+        normalizedRectangle.Left = selectionRect.Left
+        normalizedRectangle.Right = selectionRect.Right
+        normalizedRectangle.Top = selectionRect.Top
+        normalizedRectangle.Bottom = selectionRect.Bottom
+        If selectionRect.Width < 0 Then
+            normalizedRectangle.Left = selectionRect.Left - normalizedRectangle.Width
+        Else
+            normalizedRectangle.Left = selectionRect.Left
+        End If
+
+        If selectionRect.Height < 0 Then
+            normalizedRectangle.Top = selectionRect.Top - normalizedRectangle.Height
+        Else
+            normalizedRectangle.Top = selectionRect.Top
+        End If
+
+        DrawingCanvas.DrawRect(normalizedRectangle, spaint)
 
     End Sub
 
@@ -205,6 +241,24 @@ Public Class GraphicsSurface
             .StrokeWidth = 2
         End With
 
+        For Each dobj As GraphicObject In Me.SelectedObjects.Values
+            dobj.Selected = True
+            If dobj.Rotation <> 0 Then
+                DrawingCanvas.Save()
+                DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
+                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
+                DrawingCanvas.Restore()
+            Else
+                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
+                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
+            End If
+        Next
+
+        For Each gr As GraphicObject In Me.DrawingObjects
+            If Not Me.SelectedObjects.ContainsKey(gr.Name) Then gr.Selected = False
+        Next
+
         For Each dobj In objects
 
             If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic Then
@@ -213,21 +267,6 @@ Public Class GraphicsSurface
                     DirectCast(dobj, ShapeGraphic).Fill = False
                     DirectCast(dobj, ShapeGraphic).LineWidth = 1
                     DirectCast(dobj, ShapeGraphic).UpdateStatus()
-                End If
-
-                If dobj Is SelectedObject Then
-
-                    If dobj.Rotation <> 0 Then
-                        DrawingCanvas.Save()
-                        DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
-                        DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
-                        DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
-                        DrawingCanvas.Restore()
-                    Else
-                        DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
-                        DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
-                    End If
-
                 End If
 
                 If dobj.DrawOverride IsNot Nothing Then
@@ -289,6 +328,12 @@ Public Class GraphicsSurface
             For Each dobj In objects
                 If dobj.Calculated Then DrawPropertyListBlock(DrawingCanvas, dobj)
             Next
+        End If
+
+        'draw selection rectangle (click and drag to select interface)
+        'on top of everything else, but transparent
+        If selectionDragging Then
+            DrawSelectionRectangle(DrawingCanvas, selectionRect)
         End If
 
     End Sub
@@ -579,10 +624,10 @@ Public Class GraphicsSurface
 
                         Dim x0, y0, x1, y1 As Integer
 
-                        x0 = rectp0.X
-                        y0 = rectp0.Y
-                        x1 = dragPoint.X * Me.Zoom
-                        y1 = dragPoint.Y * Me.Zoom
+                        x0 = rectp0.X / Zoom
+                        y0 = rectp0.Y / Zoom
+                        x1 = dragPoint.X / Zoom
+                        y1 = dragPoint.Y / Zoom
 
                         If x1 > x0 Then
                             selectionRect.Left = x0
@@ -725,7 +770,7 @@ Public Class GraphicsSurface
 
             If selectionDragging Then
 
-                Dim zoomedSelection As SKRect = DeZoomRectangle(selectionRect)
+                Dim zoomedSelection As SKRect = selectionRect
                 Dim graphicObj As IGraphicObject
 
                 For Each graphicObj In Me.DrawingObjects
@@ -758,6 +803,12 @@ Public Class GraphicsSurface
 
     Public Sub InputPress(x As Integer, y As Integer)
 
+        If MultiSelectMode Then
+            SelectRectangle = Not My.Computer.Keyboard.ShiftKeyDown
+        Else
+            SelectRectangle = My.Computer.Keyboard.ShiftKeyDown
+        End If
+
         Dim mousePT As New SKPoint(x, y)
 
         dragStart = New SKPoint(x, y)
@@ -768,22 +819,41 @@ Public Class GraphicsSurface
 
         If Not ResizingMode Then
 
-            If SelectedObject Is Nothing Then
+            If Me.SelectedObject Is Nothing Then
                 Me.SelectedObjects.Clear()
                 justselected = False
-                draggingfs = True
+                draggingfs = Not SelectRectangle
             Else
-                If Not justselected Then Me.SelectedObjects.Clear()
-                If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
-                    Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
+                If My.Computer.Keyboard.CtrlKeyDown And MultiSelectMode Then
+                    If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
+                        Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
+                    Else
+                        Me.SelectedObjects.Remove(Me.SelectedObject.Name)
+                    End If
+                    justselected = True
+                Else
+                    If Not justselected Then Me.SelectedObjects.Clear()
+                    If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
+                        Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
+                    End If
+                    justselected = False
                 End If
-                justselected = False
             End If
 
             If Not SelectedObject Is Nothing Then
                 dragging = True
                 dragOffset.X = SelectedObject.X - mousePT.X
                 dragOffset.Y = SelectedObject.Y - mousePT.Y
+            Else
+                If Me.SelectRectangle Then
+                    selectionDragging = True
+                    rectp0.X = mousePT.X
+                    rectp0.Y = mousePT.Y
+                    selectionRect.Left = mousePT.X
+                    selectionRect.Top = mousePT.Y
+                    selectionRect.Right = mousePT.X + 1
+                    selectionRect.Bottom = mousePT.Y + 1
+                End If
             End If
 
         End If

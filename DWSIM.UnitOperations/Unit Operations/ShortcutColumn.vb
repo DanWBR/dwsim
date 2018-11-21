@@ -18,7 +18,7 @@
 '
 
 Imports System.Collections.Generic
-Imports DWSIM.DrawingTools.GraphicObjects
+
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses

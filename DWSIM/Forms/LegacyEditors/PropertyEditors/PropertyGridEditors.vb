@@ -9,7 +9,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.CapeOpen
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.UnitOperations.UnitOperations.Column
-Imports DWSIM.DrawingTools.GraphicObjects
+
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 
 Public Class PropertyGridEditors

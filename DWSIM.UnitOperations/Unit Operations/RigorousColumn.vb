@@ -19,7 +19,7 @@
 Imports DWSIM.MathOps.MathEx
 Imports System.Math
 Imports Mapack
-Imports DWSIM.DrawingTools.GraphicObjects
+
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses

@@ -110,6 +110,37 @@ Public Class FlowsheetSurface_SkiaSharp
             Flowsheet.tsmiRemoveSelected_Click(Me, New EventArgs)
         End If
 
+        If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
+            For Each go As GraphicObject In Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values
+                If e.KeyCode = Keys.Up Then
+                    If e.Modifiers = Keys.Control Then
+                        go.Y = go.Y - 1
+                    Else
+                        go.Y = go.Y - 5
+                    End If
+                ElseIf e.KeyCode = Keys.Down Then
+                    If e.Modifiers = Keys.Control Then
+                        go.Y = go.Y + 1
+                    Else
+                        go.Y = go.Y + 5
+                    End If
+                ElseIf e.KeyCode = Keys.Left Then
+                    If e.Modifiers = Keys.Control Then
+                        go.X = go.X - 1
+                    Else
+                        go.X = go.X - 5
+                    End If
+                ElseIf e.KeyCode = Keys.Right Then
+                    If e.Modifiers = Keys.Control Then
+                        go.X = go.X + 1
+                    Else
+                        go.X = go.X + 5
+                    End If
+                End If
+            Next
+            Me.FlowsheetDesignSurface.Invalidate()
+        End If
+
     End Sub
 
     Private Sub CMS_Sel_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles CMS_Sel.Opened
@@ -2846,10 +2877,12 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub tsbCutObj_Click(sender As Object, e As EventArgs) Handles tsbCutObj.Click
         Flowsheet.CutObjects()
+        tsbPasteObj.Enabled = True
     End Sub
 
     Private Sub tsbCopyObj_Click(sender As Object, e As EventArgs) Handles tsbCopyObj.Click
         Flowsheet.CopyObjects()
+        tsbPasteObj.Enabled = True
     End Sub
 
     Private Sub tsbPasteObj_Click(sender As Object, e As EventArgs) Handles tsbPasteObj.Click
@@ -3098,12 +3131,47 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub tsbMultiSelectMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbMultiSelectMode.CheckedChanged
         FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = tsbMultiSelectMode.Checked
+        tsbAlignTops.Enabled = tsbMultiSelectMode.Checked
         tsbAlignBottoms.Enabled = tsbMultiSelectMode.Checked
         tsbAlignCenters.Enabled = tsbMultiSelectMode.Checked
         tsbAlignHorizontal.Enabled = tsbMultiSelectMode.Checked
+        tsbAlignVertical.Enabled = tsbMultiSelectMode.Checked
         tsbAlignLefts.Enabled = tsbMultiSelectMode.Checked
         tsbAlignMiddles.Enabled = tsbMultiSelectMode.Checked
         tsbAlignRights.Enabled = tsbMultiSelectMode.Checked
+    End Sub
+
+    Private Sub tsbAlign_Click(sender As Object, e As EventArgs) Handles tsbAlignBottoms.Click, tsbAlignCenters.Click, tsbAlignHorizontal.Click,
+                                                                        tsbAlignLefts.Click, tsbAlignMiddles.Click, tsbAlignRights.Click,
+                                                                        tsbAlignTops.Click, tsbAlignVertical.Click
+
+        Dim tsb As ToolStripButton = DirectCast(sender, ToolStripButton)
+
+        Dim direction As Drawing.SkiaSharp.GraphicsSurface.AlignDirection
+
+        If tsb.Name.Contains("Lefts") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Lefts
+        ElseIf tsb.Name.Contains("Centers") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers
+        ElseIf tsb.Name.Contains("Rights") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Rights
+        ElseIf tsb.Name.Contains("Tops") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Tops
+        ElseIf tsb.Name.Contains("Middles") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Middles
+        ElseIf tsb.Name.Contains("Bottoms") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Bottoms
+        ElseIf tsb.Name.Contains("Vertical") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeVertical
+        ElseIf tsb.Name.Contains("Horizontal") Then
+            direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeHorizontal
+        End If
+
+        FlowsheetDesignSurface.FlowsheetSurface.AlignSelectedObjects(direction)
+
+        FlowsheetDesignSurface.Invalidate()
+        FlowsheetDesignSurface.Invalidate()
+
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click

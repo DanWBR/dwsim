@@ -464,6 +464,9 @@
   <data name="tsbSnapObjectsToGrid.Text" xml:space="preserve">
     <value>Snap Objects to Grid</value>
   </data>
+  <data name="tsbSnapObjectsToGrid.ToolTipText" xml:space="preserve">
+    <value>Snap Objects to Grid</value>
+  </data>
   <data name="ToolStripButton17.Text" xml:space="preserve">
     <value>Quick Connect Mode</value>
   </data>

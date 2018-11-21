@@ -20,18 +20,16 @@ Imports System.ComponentModel
 Imports WeifenLuo.WinFormsUI
 Imports System.Linq
 Imports System.IO
-Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
-Imports DWSIM.Thermodynamics.BaseClasses
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Globalization
-Imports DWSIM.DrawingTools
 Imports System.Reflection
-Imports DWSIM.GraphicObjects
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports System.Runtime.InteropServices
 Imports System.Dynamic
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
+Imports DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -236,7 +234,7 @@ Public Class FormFlowsheet
             FormMatList.Show(FormSurface.Pane, Nothing)
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormWatch.Show(dckPanel)
-			FormProps.Show(dckPanel, DockState.DockLeft)
+            FormProps.Show(dckPanel, DockState.DockLeft)
 
             FormSurface.Activate()
 
@@ -2958,6 +2956,34 @@ Public Class FormFlowsheet
         gObj.ObjectType = ObjectType.GO_Rectangle
         Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+    End Sub
+
+    Private Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
+        With Me.OpenFileName
+            .CheckFileExists = True
+            .CheckPathExists = True
+            .Title = DWSIM.App.GetLocalString("Adicionarfigura")
+            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
+            .AddExtension = True
+            .Multiselect = False
+            .RestoreDirectory = True
+            Dim res As DialogResult = .ShowDialog
+            If res = Windows.Forms.DialogResult.OK Then
+                Dim img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(Bitmap.FromFile(.FileName))
+                Dim gObj As GraphicObject = Nothing
+                If Not img Is Nothing Then
+                    Dim myEmbeddedImage As New Shapes.EmbeddedImageGraphic(100, 100, img)
+                    gObj = myEmbeddedImage
+                    gObj.Width = img.Width
+                    gObj.Height = img.Height
+                    gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
+                    gObj.AutoSize = True
+                End If
+                Me.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+                Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+            End If
+        End With
+        FormSurface.TSBtabela.Checked = False
     End Sub
 
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight

@@ -18,7 +18,7 @@
 Imports DWSIM.UnitOperations.UnitOperations
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports System.Linq
-Imports DWSIM.DrawingTools.GraphicObjects
+
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
