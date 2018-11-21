@@ -828,7 +828,7 @@ FINAL:
 
             ElseIf phaseID = 2 Then
 
-                If T <= Tsat Then
+                If Math.Abs(T - Tsat) < 0.01 Then
 
                     result = Me.m_iapws97.densSatVapTW(T)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
@@ -1022,7 +1022,7 @@ FINAL:
                         p4 = Me.m_iapws97.enthalpySatLiqTW(x4)
                         p5 = Me.m_iapws97.enthalpySatLiqTW(x5)
                         Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
-                    ElseIf Math.Abs(T - Tsat) < 0.001 Then
+                    ElseIf Math.Abs(T - Tsat) < 0.01 Then
                         Return Me.m_iapws97.enthalpySatLiqTW(T)
                     Else
                         Return Me.m_iapws97.enthalpyW(T, P / 100000)
@@ -1042,10 +1042,10 @@ FINAL:
                         p4 = Me.m_iapws97.enthalpyW(x4, P / 100000)
                         p5 = Me.m_iapws97.enthalpyW(x5, P / 100000)
                         Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    ElseIf Math.Abs(T - Tsat) < 0.01 Then
+                        Return Me.m_iapws97.enthalpySatVapTW(T)
                     ElseIf T > Tsat Then
                         Return Me.m_iapws97.enthalpyW(T, P / 100000)
-                    ElseIf Math.Abs(T - Tsat) < 0.001 Then
-                        Return Me.m_iapws97.enthalpySatVapTW(T)
                     Else
                         Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
                         x1 = Tsat + (Tcrit - Tsat) * 0.2
@@ -1144,7 +1144,7 @@ FINAL:
                         p4 = Me.m_iapws97.entropySatLiqTW(x4)
                         p5 = Me.m_iapws97.entropySatLiqTW(x5)
                         Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
-                    ElseIf Math.Abs(T - Tsat) < 0.001 Then
+                    ElseIf Math.Abs(T - Tsat) < 0.01 Then
                         Return Me.m_iapws97.entropySatLiqTW(T)
                     Else
                         Return Me.m_iapws97.entropyW(T, P / 100000)
@@ -1164,10 +1164,10 @@ FINAL:
                         p4 = Me.m_iapws97.entropyW(x4, P / 100000)
                         p5 = Me.m_iapws97.entropyW(x5, P / 100000)
                         Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    ElseIf Math.Abs(T - Tsat) < 0.01 Then
+                        Return Me.m_iapws97.entropySatVapTW(T)
                     ElseIf T > Tsat Then
                         Return Me.m_iapws97.entropyW(T, P / 100000)
-                    ElseIf Math.Abs(T - Tsat) < 0.001 Then
-                        Return Me.m_iapws97.entropySatVapTW(T)
                     Else
                         Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
                         x1 = Tsat + (Tcrit - Tsat) * 0.2
