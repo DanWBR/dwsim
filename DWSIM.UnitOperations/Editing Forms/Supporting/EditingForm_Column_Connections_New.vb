@@ -1,4 +1,5 @@
 ﻿Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.UnitOperations.UnitOperations
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 
 Public Class EditingForm_Column_Connections_New
@@ -31,7 +32,7 @@ Public Class EditingForm_Column_Connections_New
 
         Dim istrs = rc.GraphicObject.InputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Feed"))).Select(Function(x2) x2.AttachedConnector.AttachedFrom.Name).ToList
         Dim ostrs = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Side"))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
-        Dim dist = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Distillate"))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
+        Dim dist = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso (x.ConnectorName.Contains("Distillate") Or x.ConnectorName.Contains("Top")))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
         Dim bottoms = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Bottoms"))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
         Dim rduty = rc.GraphicObject.InputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Reboiler"))).Select(Function(x2) x2.AttachedConnector.AttachedFrom.Name).ToList
         Dim cduty = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Condenser"))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
@@ -60,13 +61,23 @@ Public Class EditingForm_Column_Connections_New
         Next
         For Each id In dist
             If (rc.MaterialStreams.Values.Where(Function(x) (x.StreamID = id)).Count = 0) Then
-                rc.MaterialStreams.Add(id, New StreamInformation With
+                If TypeOf rc Is DistillationColumn Then
+                    rc.MaterialStreams.Add(id, New StreamInformation With
                     {
                         .StreamID = id,
                         .ID = id,
                         .StreamType = StreamInformation.Type.Material,
                         .StreamBehavior = StreamInformation.Behavior.Distillate
                     })
+                ElseIf TypeOf rc Is AbsorptionColumn Then
+                    rc.MaterialStreams.Add(id, New StreamInformation With
+                    {
+                        .StreamID = id,
+                        .ID = id,
+                        .StreamType = StreamInformation.Type.Material,
+                        .StreamBehavior = StreamInformation.Behavior.OverheadVapor
+                    })
+                End If
             End If
         Next
         For Each id In bottoms
@@ -202,9 +213,14 @@ Public Class EditingForm_Column_Connections_New
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.Sidedraw) Then
                 gridAssociations.Rows.Add(New Object() {si.ID, "Side Draw", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.Distillate) Then
+                If stage = "" Then stage = stageNames(1)
                 gridAssociations.Rows.Add(New Object() {si.ID, "Distillate", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
+            ElseIf (si.StreamBehavior = StreamInformation.Behavior.OverheadVapor) Then
+                If stage = "" Then stage = stageNames(1)
+                gridAssociations.Rows.Add(New Object() {si.ID, "Top Product", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.BottomsLiquid) Then
-                gridAssociations.Rows.Add(New Object() {si.ID, "Bottoms", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
+                If stage = "" Then stage = stageNames.Last
+                gridAssociations.Rows.Add(New Object() {si.ID, "Bottoms Product", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             End If
 
         Next

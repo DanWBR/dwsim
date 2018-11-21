@@ -362,6 +362,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Dim newobj As SharedClasses.UnitOperations.BaseClass = obj.Clone
 
         newobj.GraphicObject = gobj.Clone
+        newobj.GraphicObject.Owner = newobj
 
         Dim searchtext As String = gobj.Tag.Split("(")(0).Trim()
 

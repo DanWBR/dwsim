@@ -369,7 +369,9 @@ Namespace GraphicObjects
         End Function
 
         Public Function Clone() As IGraphicObject Implements IGraphicObject.Clone
-            Return Nothing
+            Dim newobj = Activator.CreateInstance(Me.GetType)
+            DirectCast(newobj, ICustomXMLSerialization).LoadData(Me.SaveData)
+            Return newobj
         End Function
 
         Public Property Editor As Object Implements IGraphicObject.Editor

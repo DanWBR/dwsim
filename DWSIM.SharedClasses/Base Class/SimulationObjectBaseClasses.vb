@@ -46,7 +46,7 @@ Namespace UnitOperations
 
         Public Overridable Property Visible As Boolean = True
 
-        <System.NonSerialized()> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
+        <System.NonSerialized()> <Xml.Serialization.XmlIgnore> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
 
 #Region "    Constructors"
 
