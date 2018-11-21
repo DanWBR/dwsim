@@ -9,8 +9,6 @@ Imports DWSIM.DrawingTools.Point
 
 Public Class GraphicsSurface
 
-    'Public DrawingCanvas As SKCanvas
-
 #Region "Events"
 
     Public Event SelectionChanged(ByVal sender As Object, ByVal e As SelectionChangedEventArgs)
@@ -61,6 +59,8 @@ Public Class GraphicsSurface
 
     Public Property DefaultTypeFace As SKTypeface
 
+    Public Property DisplayGrid As Boolean = True
+
     Public Sub New()
         Select Case GlobalSettings.Settings.RunningPlatform
             Case GlobalSettings.Settings.Platform.Windows
@@ -93,7 +93,7 @@ Public Class GraphicsSurface
 
     Public Property SurfaceBounds As SKRect
 
-    Public Property SnapToGrid As Boolean = False
+    Public Property SnapToGrid As Boolean = True
 
     Public Property SurfaceMargins As SKRect
 
@@ -105,7 +105,7 @@ Public Class GraphicsSurface
 
     Public Overridable Property GridLineWidth() As Integer
 
-    Public Overridable Property GridSize() As Single
+    Public Overridable Property GridSize() As Integer = 20
 
     Public Property Size As SKSize = New SKSize(1024, 768)
 
@@ -129,6 +129,27 @@ Public Class GraphicsSurface
 
     Public Property SelectedObjects() As New Generic.Dictionary(Of String, IGraphicObject)
 
+    Public Property MultiSelectMode As Boolean = False
+
+    Private Sub DrawGrid(canvas As SKCanvas)
+
+        Dim gpaint As New SKPaint
+
+        With gpaint
+            .Color = SKColors.LightSteelBlue.WithAlpha(50)
+            .StrokeWidth = 1
+            .IsStroke = True
+            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+        End With
+
+        Dim i As Integer
+        For i = 0 To 10000 Step GridSize
+            canvas.DrawLine(i, 0, i, 10000, gpaint)
+            canvas.DrawLine(0, i, 10000, i, gpaint)
+        Next
+
+    End Sub
+
     Public Sub UpdateCanvas(DrawingCanvas As SKCanvas)
 
         'draw the actual objects onto the page, on top of the grid
@@ -136,6 +157,8 @@ Public Class GraphicsSurface
         If Me.SelectedObject Is Nothing Then Me.SelectedObjects.Clear()
 
         DrawingCanvas.Clear(BackgroundColor)
+
+        If DisplayGrid Then DrawGrid(DrawingCanvas)
 
         DrawingCanvas.Scale(Me.Zoom, Me.Zoom)
 
@@ -686,6 +709,18 @@ Public Class GraphicsSurface
         If Not ResizingMode Then
 
             draggingfs = False
+
+            If dragging And SnapToGrid Then
+                Dim oc As SKPoint
+                Dim snapx, snapy As Integer
+                For Each go As GraphicObject In Me.SelectedObjects.Values
+                    oc = New SKPoint(go.X + go.Width / 2, go.Y + go.Height / 2)
+                    snapx = Math.Round(oc.X / GridSize) * GridSize - go.Width / 2
+                    snapy = Math.Round(oc.Y / GridSize) * GridSize - go.Height / 2
+                    go.SetPosition(New SKPoint(snapx, snapy))
+                Next
+            End If
+
             dragging = False
 
             If selectionDragging Then

@@ -170,7 +170,11 @@ Namespace DWSIM.Flowsheet
 
         Public Property FlowsheetShowWatchWindow As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetShowWatchWindow
 
+        Public Property FlowsheetMultiSelectMode As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetMultiSelectMode
+
         Public Property FlowsheetSnapToGrid As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetSnapToGrid
+
+        Public Property FlowsheetDisplayGrid As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetDisplayGrid
 
         Public Property FractionNumberFormat As String = "G8" Implements Interfaces.IFlowsheetOptions.FractionNumberFormat
 

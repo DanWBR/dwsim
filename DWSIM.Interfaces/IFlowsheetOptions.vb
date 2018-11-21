@@ -38,6 +38,7 @@
     <Xml.Serialization.XmlIgnore> Property UsePassword As Boolean
 
     Property FlowsheetSnapToGrid As Boolean
+    Property FlowsheetDisplayGrid As Boolean
     Property FlowsheetQuickConnect As Boolean
     Property FlowsheetShowConsoleWindow As Boolean
     Property FlowsheetShowCOReportsWindow As Boolean
@@ -83,5 +84,5 @@
     Property DefaultFloatingTableCompoundAmountBasis As Enums.CompositionBasis
 
     Property DisplayFloatingTableCompoundAmounts As Boolean
-
+    Property FlowsheetMultiSelectMode As Boolean
 End Interface

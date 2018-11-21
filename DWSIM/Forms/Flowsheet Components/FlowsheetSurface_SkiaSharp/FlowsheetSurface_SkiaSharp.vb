@@ -2768,7 +2768,7 @@ Public Class FlowsheetSurface_SkiaSharp
         FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton18.Click
+    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSaveAsImage.Click
 
         If Flowsheet.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
             Dim rect As Rectangle = New Rectangle(0, 0, FlowsheetDesignSurface.Width - 14, FlowsheetDesignSurface.Height - 14)
@@ -2874,6 +2874,12 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub FlowsheetSurface_SkiaSharp_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
+        FlowsheetDesignSurface.FlowsheetSurface.DisplayGrid = Flowsheet.Options.FlowsheetDisplayGrid
+        FlowsheetDesignSurface.FlowsheetSurface.SnapToGrid = Flowsheet.Options.FlowsheetSnapToGrid
+        FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = Flowsheet.Options.FlowsheetMultiSelectMode
+        tsbDisplayGrid.Checked = Flowsheet.Options.FlowsheetDisplayGrid
+        tsbSnapObjectsToGrid.Checked = Flowsheet.Options.FlowsheetSnapToGrid
+        tsbMultiSelectMode.Checked = Flowsheet.Options.FlowsheetSnapToGrid
     End Sub
 
     Public Sub FlowsheetDesignSurface_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseUp
@@ -3078,6 +3084,26 @@ Public Class FlowsheetSurface_SkiaSharp
             End Using
         End Using
 
+    End Sub
+
+    Private Sub tsbSnapObjectsToGrid_Click(sender As Object, e As EventArgs) Handles tsbSnapObjectsToGrid.CheckedChanged
+        FlowsheetDesignSurface.FlowsheetSurface.SnapToGrid = tsbSnapObjectsToGrid.Checked
+        Flowsheet.Options.FlowsheetSnapToGrid = tsbSnapObjectsToGrid.Checked
+    End Sub
+
+    Private Sub tsbDisplayGrid_Click(sender As Object, e As EventArgs) Handles tsbDisplayGrid.CheckedChanged
+        FlowsheetDesignSurface.FlowsheetSurface.DisplayGrid = tsbDisplayGrid.Checked
+        Flowsheet.Options.FlowsheetDisplayGrid = tsbDisplayGrid.Checked
+    End Sub
+
+    Private Sub tsbMultiSelectMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbMultiSelectMode.CheckedChanged
+        FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = tsbMultiSelectMode.Checked
+        tsbAlignBottoms.Enabled = tsbMultiSelectMode.Checked
+        tsbAlignCenters.Enabled = tsbMultiSelectMode.Checked
+        tsbAlignHorizontal.Enabled = tsbMultiSelectMode.Checked
+        tsbAlignLefts.Enabled = tsbMultiSelectMode.Checked
+        tsbAlignMiddles.Enabled = tsbMultiSelectMode.Checked
+        tsbAlignRights.Enabled = tsbMultiSelectMode.Checked
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click

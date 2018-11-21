@@ -30,6 +30,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ExibirTudoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ZoomPadrao100ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CentralizarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyAsImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CMS_Sel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.TSMI_Label = New System.Windows.Forms.ToolStripMenuItem()
         Me.AtivadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -105,14 +106,16 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsbResizeMode = New System.Windows.Forms.ToolStripButton()
         Me.tsbResizeModeKeepAR = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton16 = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDisplayGrid = New System.Windows.Forms.ToolStripButton()
+        Me.tsbSnapObjectsToGrid = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton17 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton18 = New System.Windows.Forms.ToolStripButton()
+        Me.tsbSaveAsImage = New System.Windows.Forms.ToolStripButton()
         Me.tsbConfigPage = New System.Windows.Forms.ToolStripButton()
         Me.tsbConfigPrinter = New System.Windows.Forms.ToolStripButton()
         Me.tsbPrint = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbMultiSelectMode = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignLefts = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignCenters = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignRights = New System.Windows.Forms.ToolStripButton()
@@ -122,7 +125,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbAlignVertical = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignHorizontal = New System.Windows.Forms.ToolStripButton()
-        Me.CopyAsImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.SuspendLayout()
         Me.CMS_NoSel.SuspendLayout()
@@ -180,6 +182,12 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.CentralizarToolStripMenuItem, "CentralizarToolStripMenuItem")
         Me.CentralizarToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.zoom
         Me.CentralizarToolStripMenuItem.Name = "CentralizarToolStripMenuItem"
+        '
+        'CopyAsImageToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CopyAsImageToolStripMenuItem, "CopyAsImageToolStripMenuItem")
+        Me.CopyAsImageToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
+        Me.CopyAsImageToolStripMenuItem.Name = "CopyAsImageToolStripMenuItem"
         '
         'CMS_Sel
         '
@@ -480,7 +488,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'ToolStripFlowsheet
         '
         resources.ApplyResources(Me.ToolStripFlowsheet, "ToolStripFlowsheet")
-        Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator10, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator11, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator13, Me.ToolStripButton16, Me.ToolStripButton17, Me.ToolStripSeparator14, Me.ToolStripButton18, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator15, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator16, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
+        Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator10, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator11, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator13, Me.tsbDisplayGrid, Me.tsbSnapObjectsToGrid, Me.ToolStripButton17, Me.ToolStripSeparator14, Me.tsbSaveAsImage, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator15, Me.tsbMultiSelectMode, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator16, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
         Me.ToolStripFlowsheet.Name = "ToolStripFlowsheet"
         '
         'tsbCutObj
@@ -619,13 +627,22 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.ToolStripSeparator13, "ToolStripSeparator13")
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
         '
-        'ToolStripButton16
+        'tsbDisplayGrid
         '
-        resources.ApplyResources(Me.ToolStripButton16, "ToolStripButton16")
-        Me.ToolStripButton16.CheckOnClick = True
-        Me.ToolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton16.Image = Global.DWSIM.My.Resources.Resources.shading
-        Me.ToolStripButton16.Name = "ToolStripButton16"
+        resources.ApplyResources(Me.tsbDisplayGrid, "tsbDisplayGrid")
+        Me.tsbDisplayGrid.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.tsbDisplayGrid.CheckOnClick = True
+        Me.tsbDisplayGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDisplayGrid.Image = Global.DWSIM.My.Resources.Resources.shading
+        Me.tsbDisplayGrid.Name = "tsbDisplayGrid"
+        '
+        'tsbSnapObjectsToGrid
+        '
+        resources.ApplyResources(Me.tsbSnapObjectsToGrid, "tsbSnapObjectsToGrid")
+        Me.tsbSnapObjectsToGrid.CheckOnClick = True
+        Me.tsbSnapObjectsToGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbSnapObjectsToGrid.Image = Global.DWSIM.My.Resources.Resources.shading
+        Me.tsbSnapObjectsToGrid.Name = "tsbSnapObjectsToGrid"
         '
         'ToolStripButton17
         '
@@ -640,12 +657,12 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.ToolStripSeparator14, "ToolStripSeparator14")
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
         '
-        'ToolStripButton18
+        'tsbSaveAsImage
         '
-        resources.ApplyResources(Me.ToolStripButton18, "ToolStripButton18")
-        Me.ToolStripButton18.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton18.Image = Global.DWSIM.My.Resources.Resources.images
-        Me.ToolStripButton18.Name = "ToolStripButton18"
+        resources.ApplyResources(Me.tsbSaveAsImage, "tsbSaveAsImage")
+        Me.tsbSaveAsImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbSaveAsImage.Image = Global.DWSIM.My.Resources.Resources.images
+        Me.tsbSaveAsImage.Name = "tsbSaveAsImage"
         '
         'tsbConfigPage
         '
@@ -672,6 +689,14 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.ToolStripSeparator15, "ToolStripSeparator15")
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
+        '
+        'tsbMultiSelectMode
+        '
+        resources.ApplyResources(Me.tsbMultiSelectMode, "tsbMultiSelectMode")
+        Me.tsbMultiSelectMode.CheckOnClick = True
+        Me.tsbMultiSelectMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbMultiSelectMode.Image = Global.DWSIM.My.Resources.Resources.shape_group
+        Me.tsbMultiSelectMode.Name = "tsbMultiSelectMode"
         '
         'tsbAlignLefts
         '
@@ -733,12 +758,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsbAlignHorizontal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbAlignHorizontal.Image = Global.DWSIM.My.Resources.Resources.shape_align_middle1
         Me.tsbAlignHorizontal.Name = "tsbAlignHorizontal"
-        '
-        'CopyAsImageToolStripMenuItem
-        '
-        resources.ApplyResources(Me.CopyAsImageToolStripMenuItem, "CopyAsImageToolStripMenuItem")
-        Me.CopyAsImageToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
-        Me.CopyAsImageToolStripMenuItem.Name = "CopyAsImageToolStripMenuItem"
         '
         'FlowsheetSurface_SkiaSharp
         '
@@ -849,10 +868,10 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tsbResizeMode As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbResizeModeKeepAR As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator13 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton16 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbSnapObjectsToGrid As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton17 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator14 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton18 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbSaveAsImage As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbConfigPage As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbConfigPrinter As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbPrint As System.Windows.Forms.ToolStripButton
@@ -869,4 +888,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents EditAppearanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CopyAsImageToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsbDisplayGrid As ToolStripButton
+    Friend WithEvents tsbMultiSelectMode As ToolStripButton
 End Class
