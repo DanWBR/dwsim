@@ -59,7 +59,7 @@ Public Class GraphicsSurface
 
     Public Property DefaultTypeFace As SKTypeface
 
-    Public Property DisplayGrid As Boolean = True
+    Public Property DisplayGrid As Boolean = False
 
     Public Sub New()
         Select Case GlobalSettings.Settings.RunningPlatform
@@ -93,9 +93,9 @@ Public Class GraphicsSurface
 
     Public Property SurfaceBounds As SKRect
 
-    Public Property SnapToGrid As Boolean = True
+    Public Property SnapToGrid As Boolean = False
 
-    Public Property SelectRectangle() As Boolean
+    Public Property SelectRectangle() As Boolean = False
 
     Public Property SurfaceMargins As SKRect
 
