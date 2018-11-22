@@ -302,6 +302,26 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\icon_phone_ticket2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-100_filled.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-align_top_filled.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-bring_to_front_filled.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-grid.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-grid_filled.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-zoom_to_actual_size_filled.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-zoom_to_extents.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_bottom.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_center.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_center1.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_left.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_middle.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_middle1.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_right.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_align_top.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_flip_horizontal.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_flip_vertical.png" />
+    <EmbeddedResource Include="Resources\Icons\shape_group.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

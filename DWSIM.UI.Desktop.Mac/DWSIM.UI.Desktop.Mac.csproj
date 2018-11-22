@@ -153,6 +153,23 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\Checked_96px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\icons8-grid.png" />
+    <EmbeddedResource Include="Icons\icons8-grid_filled.png" />
+    <EmbeddedResource Include="Icons\icons8-zoom_to_actual_size_filled.png" />
+    <EmbeddedResource Include="Icons\icons8-zoom_to_extents.png" />
+    <EmbeddedResource Include="Icons\shape_align_bottom.png" />
+    <EmbeddedResource Include="Icons\shape_align_center.png" />
+    <EmbeddedResource Include="Icons\shape_align_center1.png" />
+    <EmbeddedResource Include="Icons\shape_align_left.png" />
+    <EmbeddedResource Include="Icons\shape_align_middle.png" />
+    <EmbeddedResource Include="Icons\shape_align_middle1.png" />
+    <EmbeddedResource Include="Icons\shape_align_right.png" />
+    <EmbeddedResource Include="Icons\shape_align_top.png" />
+    <EmbeddedResource Include="Icons\shape_flip_horizontal.png" />
+    <EmbeddedResource Include="Icons\shape_flip_vertical.png" />
+    <EmbeddedResource Include="Icons\shape_group.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -59,8 +59,6 @@ Public Class GraphicsSurface
 
     Public Property DefaultTypeFace As SKTypeface
 
-    Public Property DisplayGrid As Boolean = False
-
     Public Sub New()
         Select Case GlobalSettings.Settings.RunningPlatform
             Case GlobalSettings.Settings.Platform.Windows
@@ -194,7 +192,7 @@ Public Class GraphicsSurface
 
         DrawingCanvas.Clear(BackgroundColor)
 
-        If DisplayGrid Then DrawGrid(DrawingCanvas)
+        If ShowGrid Then DrawGrid(DrawingCanvas)
 
         DrawingCanvas.Scale(Me.Zoom, Me.Zoom)
 

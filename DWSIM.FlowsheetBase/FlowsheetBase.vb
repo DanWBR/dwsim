@@ -1453,7 +1453,7 @@ Imports System.Dynamic
                 If Not t Is Nothing Then obj = CType(Activator.CreateInstance(t), GraphicObject)
                 If obj Is Nothing Then
                     If xel.Element("Type").Value.Contains("OxyPlotGraphic") Then
-                        obj = CType(Extended.Shared.ReturnInstance(xel.Element("Type").Value), GraphicObject)
+                        obj = CType(Extended.Shared.ReturnInstance(xel.Element("Type").Value.Replace("Shapes", "Charts")), GraphicObject)
                     Else
                         obj = CType(GraphicObject.ReturnInstance(xel.Element("Type").Value), GraphicObject)
                     End If

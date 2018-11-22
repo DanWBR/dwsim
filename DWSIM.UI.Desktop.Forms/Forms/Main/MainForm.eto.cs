@@ -339,7 +339,16 @@ namespace DWSIM.UI
             Content = TableContainer;
 
             var quitCommand = new Command { MenuText = "Quit".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
-            quitCommand.Executed += (sender, e) => Application.Instance.Quit();
+            quitCommand.Executed += (sender, e) =>
+            {
+                DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
+                {
+                    if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                    {
+                        Application.Instance.Quit();
+                    }
+                }
+            };
 
             var aboutCommand = new Command { MenuText = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "information.png")) };
             aboutCommand.Executed += (sender, e) => new AboutBox().Show();
@@ -413,14 +422,13 @@ namespace DWSIM.UI
 
         void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (OpenForms > 0)
+            DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
             {
-                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.No)
+                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.Yes)
                 {
-                    e.Cancel = true;
+                    Application.Instance.Quit();
                 }
             }
-            DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
         }
 
         void MainForm_Shown(object sender, EventArgs e)

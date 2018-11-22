@@ -240,7 +240,7 @@ namespace DWSIM.UI.Desktop.Mac
                 Delegate = new FlowsheetTouchBarDelegate() { Flowsheet = fbase },
             };
 
-            bar.DefaultItemIdentifiers = new string[] { "0", "1", "2", "3" };
+            bar.DefaultItemIdentifiers = new string[] { "0", "1", "2", "3", "4", "5" };
             return bar;
         }
 

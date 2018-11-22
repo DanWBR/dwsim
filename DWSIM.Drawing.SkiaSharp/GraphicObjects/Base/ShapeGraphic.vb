@@ -21,7 +21,7 @@ Namespace GraphicObjects
                         Case Status.Calculating
                             LineColor = SKColors.YellowGreen
                         Case Status.ErrorCalculating
-                            LineColor = SKColors.Red
+                            LineColor = SKColors.Salmon
                         Case Status.Idle
                             LineColor = SKColors.SteelBlue
                         Case Status.Inactive

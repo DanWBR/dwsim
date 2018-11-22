@@ -141,7 +141,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                             {
                                 using (var bmpcanvas = new SKCanvas(bmp))
                                 {
-                                    bmpcanvas.Clear(SKColors.White);
+                                    bmpcanvas.Clear(GlobalSettings.Settings.DarkMode ? SKColors.Black : SKColors.White);
                                     bmpcanvas.Scale(2.0f);
                                     renderer.SetTarget(bmpcanvas);
                                     model.Update(true);
@@ -149,6 +149,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                                     var paint = GetPaint(SKColors.Black);
                                     paint.FilterQuality = SKFilterQuality.High;
                                     paint.IsAutohinted = true;
+                                    paint.IsAntialias = true;
                                     canvas.DrawBitmap(bmp, new SKRect(X, Y, X + Width, Y + Height), paint);
                                     canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
                                 }
@@ -180,7 +181,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
         private void PaintInstructions(SKCanvas canvas, string text)
         {
 
-            var tpaint = GetPaint(SKColors.Black);
+            var tpaint = GetPaint(GlobalSettings.Settings.DarkMode ? LineColorDark : LineColor);
 
             var size = this.MeasureString(text, tpaint);
 
@@ -189,7 +190,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
             canvas.DrawText(text, X + (Width - width) / 2, Y + (Height - height) / 2, tpaint);
 
-            canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
+            canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(GlobalSettings.Settings.DarkMode ? LineColorDark : LineColor, 1.0f));
 
         }
 

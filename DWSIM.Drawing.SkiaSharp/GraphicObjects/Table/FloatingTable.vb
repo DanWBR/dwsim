@@ -103,14 +103,14 @@ Namespace GraphicObjects.Tables
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.White.WithAlpha(240)
                 .IsStroke = False
-                .StrokeWidth = LineWidth
+                .StrokeWidth = LineWidth / zoom
             End With
 
             With bpaint2
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.SteelBlue
                 .IsStroke = True
-                .StrokeWidth = LineWidth
+                .StrokeWidth = LineWidth / zoom
             End With
 
             Dim spaint As New SKPaint()
@@ -187,7 +187,7 @@ Namespace GraphicObjects.Tables
 
                     If Not Me.Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
 
-                        If maxH = 0 Then maxH = 20
+                        If maxH = 0 Then maxH = 20 / zoom
 
                         Me.Height = (count + 1) * (maxH + 2 * Me.Padding)
                         size = MeasureString(Me.HeaderText, tpaint)
@@ -207,7 +207,7 @@ Namespace GraphicObjects.Tables
                             End If
                         End If
 
-                        Me.Width += 10
+                        Me.Width += 10 / zoom
 
                         maxL1 = maxL1 + 2 * Padding
                         maxL2 = maxL2 + 2 * Padding
@@ -230,13 +230,13 @@ Namespace GraphicObjects.Tables
                         DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
                         DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
 
-                        canvas.DrawLine(X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding, bpaint2)
+                        canvas.DrawLine(X + Padding + 3 / zoom, Y + 2 * maxH - Padding, X + Width - Padding - 3 / zoom, Y + 2 * maxH - Padding, bpaint2)
 
                         size = MeasureString("MEASURE", tpaint)
 
                         'desenhar textos e retangulos
-                        canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3, Y + Padding + size.Height, tbpaint)
-                        canvas.DrawText(Owner.GetFlowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3, Y + maxH + size.Height, tpaint)
+                        canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3 / zoom, Y + Padding + size.Height, tbpaint)
+                        canvas.DrawText(Owner.GetFlowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3 / zoom, Y + maxH + size.Height, tpaint)
                         Dim n As Integer = 1
                         For Each prop In props
                             propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
@@ -248,9 +248,9 @@ Namespace GraphicObjects.Tables
                                 propval = pval0.ToString
                             End If
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            canvas.DrawText(propstring, X + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
-                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propstring, X + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             n += 1
                         Next
 
@@ -375,7 +375,7 @@ Namespace GraphicObjects.Tables
 
                         'If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
 
-                        If maxH = 0 Then maxH = 20.0
+                        If maxH = 0 Then maxH = 20.0 / zoom
 
                         Me.Height = (count + 1) * (maxH + 2 * Me.Padding)
 
@@ -398,9 +398,9 @@ Namespace GraphicObjects.Tables
                             End If
                         End If
 
-                        Me.Width += 10
+                        Me.Width += 10 / zoom
 
-                        Dim Width2 = 16 * Me.Padding + sumL2 + 6
+                        Dim Width2 = 16 * Me.Padding + sumL2 + 6 / zoom
 
                         Dim delta = 2 * Padding
 
@@ -423,13 +423,13 @@ Namespace GraphicObjects.Tables
                         DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
                         DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
 
-                        canvas.DrawLine(X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding, bpaint2)
+                        canvas.DrawLine(X + Padding + 3 / zoom, Y + 2 * maxH - Padding, X + Width - Padding - 3 / zoom, Y + 2 * maxH - Padding, bpaint2)
 
                         size = MeasureString("MEASURE", tpaint)
 
                         'desenhar textos e retangulos
-                        canvas.DrawText(Me.Owner.GraphicObject.Tag, X + Padding + 3, Y + Padding + size.Height, tbpaint)
-                        canvas.DrawText(MSObj.Flowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3, Y + maxH + size.Height, tpaint)
+                        canvas.DrawText(Me.Owner.GraphicObject.Tag, X + Padding + 3 / zoom, Y + Padding + size.Height, tbpaint)
+                        canvas.DrawText(MSObj.Flowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3 / zoom, Y + maxH + size.Height, tpaint)
                         Dim n As Integer = 1
                         For Each prop In props
                             propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
@@ -441,9 +441,9 @@ Namespace GraphicObjects.Tables
                                 propval = pval0.ToString
                             End If
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            canvas.DrawText(propstring, X + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propstring, X + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             n += 1
                         Next
 
@@ -460,7 +460,7 @@ Namespace GraphicObjects.Tables
                             DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint)
                             DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint2)
 
-                            canvas.DrawLine(X + Padding + 3, Y + 3 * maxH2 - 2 * Padding + DeltaY, X + Width2 - Padding - 3, Y + 3 * maxH2 - 2 * Padding + DeltaY, bpaint2)
+                            canvas.DrawLine(X + Padding + 3 / zoom, Y + 3 * maxH2 - 2 * Padding + DeltaY, X + Width2 - Padding - 3 / zoom, Y + 3 * maxH2 - 2 * Padding + DeltaY, bpaint2)
 
                             Dim atext As String = ""
 
@@ -479,157 +479,157 @@ Namespace GraphicObjects.Tables
                                     atext = MSObj.Flowsheet.GetTranslatedString("VolumetricFraction")
                             End Select
 
-                            canvas.DrawText(Me.HeaderText, X + Padding + 3, Y + Padding + DeltaY, tbpaint)
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("CompoundAmounts") + atext, X + Padding + 3, Y + maxH2 + DeltaY, tpaint)
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("CompoundsPhases"), X + Padding + 3, Y + 2 * maxH2 + DeltaY, tbpaint)
+                            canvas.DrawText(Me.HeaderText, X + Padding + 3 / zoom, Y + Padding + DeltaY, tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("CompoundAmounts") + atext, X + Padding + 3 / zoom, Y + maxH2 + DeltaY, tpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("CompoundsPhases"), X + Padding + 3 / zoom, Y + 2 * maxH2 + DeltaY, tbpaint)
 
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Overall"), New SKPoint(X + maxL4 + (maxL5 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Overall"), tpaint).Width) + Padding + 3, Y + 2 * maxH2 + DeltaY), tbpaint)
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Vapor"), New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Vapor"), tpaint).Width) + Padding + 3, Y + 2 * maxH2 + DeltaY), tbpaint)
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Liquid1"), New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Liquid1"), tpaint).Width) + Padding + 3, Y + 2 * maxH2 + DeltaY), tbpaint)
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Liquid2"), New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Liquid2"), tpaint).Width) + Padding + 3, Y + 2 * maxH2 + DeltaY), tbpaint)
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Solid"), New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Solid"), tpaint).Width) + Padding + 3, Y + 2 * maxH2 + DeltaY), tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Overall"), New SKPoint(X + maxL4 + (maxL5 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Overall"), tpaint).Width) + Padding + 3 / zoom, Y + 2 * maxH2 + DeltaY), tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Vapor"), New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Vapor"), tpaint).Width) + Padding + 3 / zoom, Y + 2 * maxH2 + DeltaY), tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Liquid1"), New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Liquid1"), tpaint).Width) + Padding + 3 / zoom, Y + 2 * maxH2 + DeltaY), tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Liquid2"), New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Liquid2"), tpaint).Width) + Padding + 3 / zoom, Y + 2 * maxH2 + DeltaY), tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Solid"), New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(MSObj.Flowsheet.GetTranslatedString("Solid"), tpaint).Width) + Padding + 3 / zoom, Y + 2 * maxH2 + DeltaY), tbpaint)
 
                             Dim bpval2 As String = ""
 
                             n = 1
                             For Each c In compounds
 
-                                canvas.DrawText(c, New SKPoint(X + Padding + 3, Y + (n + 2) * maxH2 + Padding + DeltaY), tbpaint)
+                                canvas.DrawText(c, New SKPoint(X + Padding + 3 / zoom, Y + (n + 2) * maxH2 + Padding + DeltaY), tbpaint)
 
                                 p = MSObj.GetPhase("Mixture")
 
                                 bpval = p.Compounds(c).GetType.GetProperty(bprop).GetValue(p.Compounds(c))
                                 bpval2 = bpval.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
 
-                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
+                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
 
                                 p = MSObj.GetPhase("Vapor")
 
                                 bpval = p.Compounds(c).GetType.GetProperty(bprop).GetValue(p.Compounds(c))
                                 bpval2 = bpval.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
 
-                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
+                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
 
                                 p = MSObj.GetPhase("Liquid1")
 
                                 bpval = p.Compounds(c).GetType.GetProperty(bprop).GetValue(p.Compounds(c))
                                 bpval2 = bpval.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
 
-                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
+                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
 
                                 p = MSObj.GetPhase("Liquid2")
 
                                 bpval = p.Compounds(c).GetType.GetProperty(bprop).GetValue(p.Compounds(c))
                                 bpval2 = bpval.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
 
-                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
+                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
 
                                 p = MSObj.GetPhase("Solid")
 
                                 bpval = p.Compounds(c).GetType.GetProperty(bprop).GetValue(p.Compounds(c))
                                 bpval2 = bpval.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
 
-                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
+                                canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 2) * maxH2 + Padding + DeltaY), tpaint)
 
                                 n += 1
 
                             Next
 
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Fraction"), X + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY, tbpaint)
-                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Total"), X + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY, tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Fraction"), X + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY, tbpaint)
+                            canvas.DrawText(MSObj.Flowsheet.GetTranslatedString("Total"), X + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY, tbpaint)
 
                             Select Case ABasis
                                 Case CompositionBasis.Mass_Flows
                                     p = MSObj.GetPhase("Overall")
                                     bpval2 = p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Vapor")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid1")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid2")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Solid")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.massflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                 Case CompositionBasis.Mass_Fractions
                                     atext = MSObj.Flowsheet.GetTranslatedString("FraoMssica")
                                     p = MSObj.GetPhase("Vapor")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid1")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid2")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Solid")
                                     bpval2 = p.Properties.massfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                 Case CompositionBasis.Molar_Flows
                                     p = MSObj.GetPhase("Overall")
                                     bpval2 = p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Vapor")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid1")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid2")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Solid")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     bpval2 = p.Properties.molarflow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                 Case CompositionBasis.Molar_Fractions
                                     p = MSObj.GetPhase("Vapor")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid1")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid2")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Solid")
                                     bpval2 = p.Properties.molarfraction.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 3) * maxH2 + Padding + DeltaY), tpaint)
                                 Case CompositionBasis.Volumetric_Flows
                                     p = MSObj.GetPhase("Overall")
                                     bpval2 = p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + (maxL5 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Vapor")
                                     bpval2 = p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + (maxL6 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid1")
                                     bpval2 = p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + (maxL7 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Liquid2")
                                     bpval2 = p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + (maxL8 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                     p = MSObj.GetPhase("Solid")
                                     bpval2 = p.Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(convertfrom).ToString(nf)
-                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
+                                    canvas.DrawText(bpval2, New SKPoint(X + maxL4 + maxL5 + maxL6 + maxL7 + maxL8 + (maxL9 - MeasureString(bpval2, tpaint).Width) + Padding + 3 / zoom, Y + (n + 4) * maxH2 + Padding + DeltaY), tpaint)
                                 Case CompositionBasis.Volumetric_Fractions
                             End Select
 

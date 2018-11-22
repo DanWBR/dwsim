@@ -2908,7 +2908,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub FlowsheetSurface_SkiaSharp_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
-        FlowsheetDesignSurface.FlowsheetSurface.DisplayGrid = Flowsheet.Options.FlowsheetDisplayGrid
+        FlowsheetDesignSurface.FlowsheetSurface.ShowGrid = Flowsheet.Options.FlowsheetDisplayGrid
         FlowsheetDesignSurface.FlowsheetSurface.SnapToGrid = Flowsheet.Options.FlowsheetSnapToGrid
         FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = Flowsheet.Options.FlowsheetMultiSelectMode
         tsbDisplayGrid.Checked = Flowsheet.Options.FlowsheetDisplayGrid
@@ -3126,7 +3126,7 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub tsbDisplayGrid_Click(sender As Object, e As EventArgs) Handles tsbDisplayGrid.CheckedChanged
-        FlowsheetDesignSurface.FlowsheetSurface.DisplayGrid = tsbDisplayGrid.Checked
+        FlowsheetDesignSurface.FlowsheetSurface.ShowGrid = tsbDisplayGrid.Checked
         Flowsheet.Options.FlowsheetDisplayGrid = tsbDisplayGrid.Checked
     End Sub
 

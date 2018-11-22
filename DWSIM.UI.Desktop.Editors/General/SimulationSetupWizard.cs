@@ -35,13 +35,10 @@ namespace DWSIM.UI.Desktop.Editors
         private bool hasLowPressure = false;
         private bool hasHC = false;
         private bool hasHCW = false;
-        private bool hasHCWI = false;
         private bool hasPolarChemicals = false;
         private bool hasRefrigeration = false;
         private bool hasSingleCompoundWater = false;
         private bool hasElectrolytes = false;
-        private bool hasTwoLiquids = false;
-        private bool hasSolids = false;
 
         public SimulationSetupWizard(IFlowsheet fs)
             : base()

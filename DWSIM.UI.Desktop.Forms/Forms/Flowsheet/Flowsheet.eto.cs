@@ -56,9 +56,12 @@ namespace DWSIM.UI.Forms
 
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
 
-        public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActSimultAdjustSolver, ActInspector;
+        public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActZoomDefault, ActSimultAdjustSolver, ActInspector;
+        public Action ActDrawGrid, ActSnapToGrid, ActMultiSelect, ActAlignLefts, ActAlignCenters, ActAlignRights, ActAlignTops, ActAlignMiddles, ActAlignBottoms, ActHorizAlign, ActVertAlign;
 
         private double sf = s.UIScalingFactor;
+
+        private CheckToolItem btnmSnapToGrid, btnmDrawGrid, btnmMultiSelect;
 
         void InitializeComponent()
         {
@@ -125,9 +128,24 @@ namespace DWSIM.UI.Forms
 
             var btnmZoomIn = new ButtonToolItem { ToolTip = "Zoom In", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_in_filled.png")) };
             var btnmZoomOut = new ButtonToolItem { ToolTip = "Zoom Out", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_out_filled.png")) };
-            var btnmZoomFit = new ButtonToolItem { ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-fit_to_page_filled.png")) };
+            var btnmZoomFit = new ButtonToolItem { ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")) };
+            var btnmZoomDefault = new ButtonToolItem { ToolTip = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")) };
 
             var btnmInspector = new ButtonToolItem { ToolTip = "Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
+
+            btnmDrawGrid = new CheckToolItem { ToolTip = "Draw Grid", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-grid.png")) };
+            btnmSnapToGrid = new CheckToolItem { ToolTip = "Snap to Grid", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-grid_filled.png")) };
+
+            btnmMultiSelect = new CheckToolItem { ToolTip = "MultiSelect Mode", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_group.png")) };
+
+            var btnmAlignLefts = new ButtonToolItem { ToolTip = "Align Lefts", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_left.png")) };
+            var btnmAlignCenters = new ButtonToolItem { ToolTip = "Align Centers", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center.png")) };
+            var btnmAlignRights = new ButtonToolItem { ToolTip = "Align Rights", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_right.png")) };
+            var btnmAlignTops = new ButtonToolItem { ToolTip = "Align Tops", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_top.png")) };
+            var btnmAlignMiddles = new ButtonToolItem { ToolTip = "Align Middles", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle.png")) };
+            var btnmAlignBottoms = new ButtonToolItem { ToolTip = "Align Bottoms", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_bottom.png")) };
+            var btnmEqHoriz = new ButtonToolItem { ToolTip = "Equalize Horizontally", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle1.png")) };
+            var btnmEqVert = new ButtonToolItem { ToolTip = "Equalize Vertically", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center1.png")) };
 
             if (Application.Instance.Platform.IsMac)
             {
@@ -140,14 +158,31 @@ namespace DWSIM.UI.Forms
                 btnmZoomIn.Text = "Zoom In";
                 btnmZoomOut.Text = "Zoom Out";
                 btnmZoomFit.Text = "Zoom to Fit";
+                btnmZoomDefault.Text = "Default Zoom";
                 btnmInspector.Text = "Inspector";
+                btnmDrawGrid.Text = "Draw Grid";
+                btnmSnapToGrid.Text = "Snap to Grid";
+                btnmMultiSelect.Text = "MultiSelect";
+                btnmAlignLefts.Text = "Align Lefts";
+                btnmAlignCenters.Text = "Align Centers";
+                btnmAlignRights.Text = "Align Rights";
+                btnmAlignTops.Text = "Align Tops";
+                btnmAlignMiddles.Text = "Align Middles";
+                btnmAlignBottoms.Text = "Align Bottoms";
+                btnmEqHoriz.Text = "Eq. Horizontally";
+                btnmEqVert.Text = "Eq. Vertically";
             }
 
             ToolBar = new ToolBar
             {
                 Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmSolve, btnmSimultSolve, new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
-                    btnmZoomOut, btnmZoomIn, btnmZoomFit,new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmInspector }
+                btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault,
+                new SeparatorToolItem{ Type = SeparatorToolItemType.Space},
+                btnmDrawGrid, btnmSnapToGrid,new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
+                btnmMultiSelect, btnmAlignLefts, btnmAlignCenters, btnmAlignRights, btnmAlignTops, btnmAlignMiddles, btnmAlignBottoms,btnmEqHoriz, btnmEqVert,
+                new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmInspector
+                }
             };
 
             // menu items
@@ -257,6 +292,12 @@ namespace DWSIM.UI.Forms
                 FlowsheetControl.Invalidate();
             };
 
+            ActZoomDefault = () =>
+            {
+                FlowsheetControl.FlowsheetSurface.Zoom = 1.0f;
+                FlowsheetControl.Invalidate();
+            };
+
             ActInspector = () =>
             {
                 var iwindow = DWSIM.Inspector.Window_Eto.GetInspectorWindow();
@@ -264,6 +305,36 @@ namespace DWSIM.UI.Forms
                 iform.WindowState = WindowState.Maximized;
                 iform.Show();
             };
+
+            ActDrawGrid = () =>
+            {
+                FlowsheetObject.Options.FlowsheetDisplayGrid = !FlowsheetObject.Options.FlowsheetDisplayGrid;
+                btnmDrawGrid.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
+                FlowsheetControl.FlowsheetSurface.ShowGrid = btnmDrawGrid.Checked;
+            };
+
+            ActSnapToGrid = () =>
+            {
+                FlowsheetObject.Options.FlowsheetSnapToGrid = !FlowsheetObject.Options.FlowsheetSnapToGrid;
+                btnmSnapToGrid.Checked = FlowsheetObject.FlowsheetOptions.FlowsheetSnapToGrid;
+                FlowsheetControl.FlowsheetSurface.SnapToGrid = btnmSnapToGrid.Checked;
+            };
+
+            ActMultiSelect = () =>
+            {
+                FlowsheetObject.Options.FlowsheetMultiSelectMode = !FlowsheetObject.Options.FlowsheetMultiSelectMode;
+                btnmMultiSelect.Checked = FlowsheetObject.FlowsheetOptions.FlowsheetMultiSelectMode;
+                FlowsheetControl.FlowsheetSurface.MultiSelectMode = btnmMultiSelect.Checked;
+            };
+
+            ActAlignLefts = () => { AlignObjects(btnmAlignLefts); };
+            ActAlignCenters = () => { AlignObjects(btnmAlignCenters); };
+            ActAlignRights = () => { AlignObjects(btnmAlignRights); };
+            ActAlignTops = () => { AlignObjects(btnmAlignTops); };
+            ActAlignMiddles = () => { AlignObjects(btnmAlignMiddles); };
+            ActAlignBottoms = () => { AlignObjects(btnmAlignBottoms); };
+            ActVertAlign = () => { AlignObjects(btnmEqVert); };
+            ActHorizAlign = () => { AlignObjects(btnmEqHoriz); };
 
             FlowsheetObject.ActBasis = ActBasis;
             FlowsheetObject.ActComps = ActComps;
@@ -274,6 +345,18 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.ActZoomFit = ActZoomFit;
             FlowsheetObject.ActZoomIn = ActZoomIn;
             FlowsheetObject.ActZoomOut = ActZoomOut;
+            FlowsheetObject.ActZoomDefault = ActZoomDefault;
+            FlowsheetObject.ActDrawGrid = ActDrawGrid;
+            FlowsheetObject.ActSnapToGrid = ActSnapToGrid;
+            FlowsheetObject.ActMultiSelect = ActMultiSelect;
+            FlowsheetObject.ActAlignLefts = ActAlignLefts;
+            FlowsheetObject.ActAlignCenters = ActAlignCenters;
+            FlowsheetObject.ActAlignRights = ActAlignRights;
+            FlowsheetObject.ActAlignTops = ActAlignTops;
+            FlowsheetObject.ActAlignMiddles = ActAlignMiddles;
+            FlowsheetObject.ActAlignBottoms = ActAlignBottoms;
+            FlowsheetObject.ActVertAlign = ActVertAlign;
+            FlowsheetObject.ActHorizAlign = ActHorizAlign;
 
             // button click events
 
@@ -301,10 +384,22 @@ namespace DWSIM.UI.Forms
             btnSaveAs.Click += (sender, e) => ActSaveAs.Invoke();
 
             btnmZoomOut.Click += (sender, e) => ActZoomOut.Invoke();
-
             btnmZoomIn.Click += (sender, e) => ActZoomIn.Invoke();
-
             btnmZoomFit.Click += (sender, e) => ActZoomFit.Invoke();
+            btnmZoomDefault.Click += (sender, e) => ActZoomDefault.Invoke();
+
+            btnmDrawGrid.CheckedChanged += (sender, e) => ActDrawGrid.Invoke();
+            btnmSnapToGrid.CheckedChanged += (sender, e) => ActSnapToGrid.Invoke();
+            btnmMultiSelect.CheckedChanged += (sender, e) => ActMultiSelect.Invoke();
+
+            btnmAlignBottoms.Click += (sender, e) => ActAlignBottoms.Invoke();
+            btnmAlignCenters.Click += (sender, e) => ActAlignCenters.Invoke();
+            btnmAlignTops.Click += (sender, e) => ActAlignTops.Invoke();
+            btnmAlignLefts.Click += (sender, e) => ActAlignLefts.Invoke();
+            btnmAlignMiddles.Click += (sender, e) => ActAlignMiddles.Invoke();
+            btnmAlignRights.Click += (sender, e) => ActAlignRights.Invoke();
+            btnmEqHoriz.Click += (sender, e) => ActHorizAlign.Invoke();
+            btnmEqVert.Click += (sender, e) => ActVertAlign.Invoke();
 
             var btnUtilities_TrueCriticalPoint = new ButtonMenuItem { Text = "True Critical Point", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
@@ -641,7 +736,7 @@ namespace DWSIM.UI.Forms
 
             // obj containers
 
-            var panelstreams = new StackLayout() {Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelstreams = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelpressurechangers = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelseparators = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelmixers = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
@@ -680,7 +775,8 @@ namespace DWSIM.UI.Forms
                 Split2.Panel2.Height = 120;
 
             }
-            else {
+            else
+            {
 
                 var objcontainer = new TabControl();
                 objcontainer.Pages.Add(new TabPage(panelstreams) { Text = "Streams" });
@@ -953,6 +1049,10 @@ namespace DWSIM.UI.Forms
 
         void Flowsheet_Shown(object sender, EventArgs e)
         {
+
+            btnmDrawGrid.Checked = FlowsheetObject.Options.FlowsheetDisplayGrid;
+            btnmSnapToGrid.Checked = FlowsheetObject.Options.FlowsheetSnapToGrid;
+            btnmMultiSelect.Checked = FlowsheetObject.Options.FlowsheetMultiSelectMode;
 
             FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
             FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
@@ -1641,6 +1741,54 @@ namespace DWSIM.UI.Forms
             {
                 ((ObjectEditorContainer)item.Content).UpdateConnections();
             }
+        }
+
+        public void AlignObjects(ToolItem tsb)
+        {
+            Drawing.SkiaSharp.GraphicsSurface.AlignDirection direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers;
+            string text = "";
+            if (GlobalSettings.Settings.RunningPlatform() == s.Platform.Mac)
+            {
+                text = tsb.Text;
+            }
+            else
+            {
+                text = tsb.ToolTip;
+            }
+            if (text.Contains("Lefts"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Lefts;
+            }
+            else if (text.Contains("Centers"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers;
+            }
+            else if (text.Contains("Rights"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Rights;
+            }
+            else if (text.Contains("Tops"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Tops;
+            }
+            else if (text.Contains("Middles"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Middles;
+            }
+            else if (text.Contains("Bottoms"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Bottoms;
+            }
+            else if (text.Contains("Vertical"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeVertical;
+            }
+            else if (text.Contains("Horizontal"))
+            {
+                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeHorizontal;
+            }
+
+            FlowsheetControl.FlowsheetSurface.AlignSelectedObjects(direction);
         }
 
     }

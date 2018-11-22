@@ -18,7 +18,6 @@
 
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
-Imports DWSIM.GraphicObjects
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
 Namespace DWSIM.Editors.MasterTable

@@ -30,7 +30,6 @@ Imports System.Reflection
 Imports Microsoft.Win32
 Imports System.Text
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
-Imports DWSIM.GraphicObjects
 Imports DWSIM.SharedClasses.Extras
 Imports System.Dynamic
 Imports DWSIM.SharedClasses.Flowsheet.Optimization
@@ -923,7 +922,13 @@ Public Class FormMain
                 Dim obj As GraphicObject = Nothing
                 Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                 If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-                If obj Is Nothing Then obj = GraphicObject.ReturnInstance(xel.Element("Type").Value)
+                If obj Is Nothing Then
+                    If xel.Element("Type").Value.Contains("OxyPlotGraphic") Then
+                        obj = CType(Drawing.SkiaSharp.Extended.Shared.ReturnInstance(xel.Element("Type").Value.Replace("Shapes", "Charts")), GraphicObject)
+                    Else
+                        obj = CType(GraphicObject.ReturnInstance(xel.Element("Type").Value), GraphicObject)
+                    End If
+                End If
                 If Not obj Is Nothing Then
                     obj.LoadData(xel.Elements.ToList)
                     obj.Name = pkey & obj.Name

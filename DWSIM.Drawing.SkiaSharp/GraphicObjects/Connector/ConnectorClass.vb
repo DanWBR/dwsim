@@ -761,7 +761,7 @@ Namespace GraphicObjects
                 path.LineTo(points(i).X, points(i).Y)
             Next
 
-            canvas.DrawPath(path, myPen2)
+            If Not GlobalSettings.Settings.DarkMode Then canvas.DrawPath(path, myPen2)
             canvas.DrawPath(path, myPen)
 
         End Sub

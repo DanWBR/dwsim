@@ -92,7 +92,6 @@ namespace DWSIM.Drawing.SkiaSharp.Renderers
         /// </summary>
         private void Reset()
         {
-            this.paint.Color = new SKColor(0, 0, 0);
             this.paint.Style = SKPaintStyle.Fill;
             this.paint.StrokeCap = SKStrokeCap.Butt;
             this.paint.StrokeJoin = SKStrokeJoin.Miter;
@@ -109,6 +108,19 @@ namespace DWSIM.Drawing.SkiaSharp.Renderers
             this.paint.PathEffect = null;
             this.paint.MaskFilter = null;
             this.paint.HintingLevel = SKPaintHinting.Normal;
+            switch (GlobalSettings.Settings.RunningPlatform())
+            {
+                case GlobalSettings.Settings.Platform.Windows:
+                    this.paint.Typeface = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold);
+                    break;
+                case GlobalSettings.Settings.Platform.Linux:
+                    this.paint.Typeface = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold);
+                    break;
+                case GlobalSettings.Settings.Platform.Mac:
+                    this.paint.Typeface = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold);
+                    break;
+            }
+            this.paint.Color = GlobalSettings.Settings.DarkMode ? SKColors.White : SKColors.Black;
         }
 
         /// <summary>
@@ -548,6 +560,7 @@ namespace DWSIM.Drawing.SkiaSharp.Renderers
         {
             this.paint.Style = SKPaintStyle.Fill;
             this.paint.Color = fill.ToSKColor();
+            if (this.paint.Color == SKColors.Black && GlobalSettings.Settings.DarkMode) this.paint.Color = SKColors.White;
             this.paint.IsAntialias = true;
         }
 
@@ -563,6 +576,7 @@ namespace DWSIM.Drawing.SkiaSharp.Renderers
         {
             this.paint.Style = SKPaintStyle.Stroke;
             this.paint.Color = stroke.ToSKColor();
+            if (this.paint.Color == SKColors.Black && GlobalSettings.Settings.DarkMode) this.paint.Color = SKColors.White;
             this.paint.StrokeWidth = this.Convert(thickness);
             this.paint.StrokeJoin = lineJoin.Convert();
             if (dashArray != null)
