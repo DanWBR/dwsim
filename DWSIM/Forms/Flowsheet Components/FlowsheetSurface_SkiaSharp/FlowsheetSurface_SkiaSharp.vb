@@ -3175,6 +3175,14 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click
+        Flowsheet.RectangleToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub TSBtabela_Click(sender As Object, e As EventArgs) Handles TSBtabela.Click
+        Flowsheet.FiguraToolStripMenuItem_Click(sender, e)
+    End Sub
+
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
 
         If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor Is Nothing OrElse DirectCast(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor, Form).IsDisposed Then

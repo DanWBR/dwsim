@@ -135,7 +135,7 @@
     <value>None</value>
   </data>
   <data name="tsmiUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiUndo.Text" xml:space="preserve">
     <value>Undo</value>
@@ -144,61 +144,61 @@
     <value>None</value>
   </data>
   <data name="tsmiRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiRedo.Text" xml:space="preserve">
     <value>Redo</value>
   </data>
   <data name="ToolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
+    <value>263, 6</value>
   </data>
   <data name="tsmiCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiCut.Text" xml:space="preserve">
     <value>Cut selected objects</value>
   </data>
   <data name="tsmiCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiCopy.Text" xml:space="preserve">
     <value>Copy selected objects</value>
   </data>
   <data name="tsmiPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiPaste.Text" xml:space="preserve">
     <value>Paste objects</value>
   </data>
   <data name="tsmiRemoveSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiRemoveSelected.Text" xml:space="preserve">
     <value>Remove selected objects</value>
   </data>
   <data name="tsmiCloneSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiCloneSelected.Text" xml:space="preserve">
     <value>Clone selected objects</value>
   </data>
   <data name="tsmiRecalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiRecalc.Text" xml:space="preserve">
     <value>Recalculate object</value>
   </data>
   <data name="tsmiExportData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiExportData.Text" xml:space="preserve">
     <value>Export data to Clipboard</value>
   </data>
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
+    <value>263, 6</value>
   </data>
   <data name="tsmiConfigSimulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 26</value>
+    <value>266, 22</value>
   </data>
   <data name="tsmiConfigSimulation.Text" xml:space="preserve">
     <value>Simulation Settings</value>
@@ -210,7 +210,7 @@
     <value>E&amp;dit</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Flowsheet Object</value>
@@ -220,43 +220,43 @@
     <value>False</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Text" xml:space="preserve">
     <value>Property Table</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Text" xml:space="preserve">
     <value>Master Property Table</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Text" xml:space="preserve">
     <value>Linked Spreadsheet Table</value>
   </data>
   <data name="FiguraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="FiguraToolStripMenuItem.Text" xml:space="preserve">
     <value>Image</value>
   </data>
   <data name="TextoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="TextoToolStripMenuItem.Text" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="RectangleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="RectangleToolStripMenuItem.Text" xml:space="preserve">
     <value>Rectangle</value>
   </data>
   <data name="GraficoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 26</value>
+    <value>208, 22</value>
   </data>
   <data name="GraficoToolStripMenuItem.Text" xml:space="preserve">
     <value>Chart</value>
@@ -376,55 +376,55 @@
     <value>CAPE-OPEN Plugins</value>
   </data>
   <data name="ExibirListaDeItensACalcularToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="ExibirListaDeItensACalcularToolStripMenuItem.Text" xml:space="preserve">
     <value>Calculation Queue</value>
   </data>
   <data name="varpaneltsmi.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="varpaneltsmi.Text" xml:space="preserve">
     <value>Watch Panel</value>
   </data>
   <data name="COObjTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="COObjTSMI.Text" xml:space="preserve">
     <value>CAPE-OPEN Object Reports</value>
   </data>
   <data name="ConsoleOutputTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="ConsoleOutputTSMI.Text" xml:space="preserve">
     <value>Console Output</value>
   </data>
   <data name="ToolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 6</value>
+    <value>262, 6</value>
   </data>
   <data name="showflowsheettoolstripmenuitem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="showflowsheettoolstripmenuitem.Text" xml:space="preserve">
     <value>Flowsheet Toolstrip</value>
   </data>
   <data name="showunitstoolstripmenuitem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="showunitstoolstripmenuitem.Text" xml:space="preserve">
     <value>Unit Systems Toolstrip</value>
   </data>
   <data name="ToolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 6</value>
+    <value>262, 6</value>
   </data>
   <data name="RestoreLayoutTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="RestoreLayoutTSMI.Text" xml:space="preserve">
-    <value>Restore Docking Panels' Layout</value>
+    <value>Restore Layout of all Docking Panels</value>
   </data>
   <data name="tsmiCloseOpenedEditors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
+    <value>265, 22</value>
   </data>
   <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
     <value>Close Opened Object Editors</value>

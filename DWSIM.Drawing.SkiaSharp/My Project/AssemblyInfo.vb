@@ -10,14 +10,14 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM.Drawing.SkiaSharp")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyTitle("DWSIM.Drawing.SkiaSharp")>
+<Assembly: AssemblyDescription("DWSIM Process Flowsheet Drawing Interface (SkiaSharp-based)")>
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.Drawing.SkiaSharp")> 
-<Assembly: AssemblyCopyright("Copyright ©  2017 Daniel Medeiros")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyProduct("DWSIM.Drawing.SkiaSharp")>
+<Assembly: AssemblyCopyright("Copyright ©  2017-2018 Daniel Medeiros")>
+<Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(False)> 
+<Assembly: ComVisible(True)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("f1c891c7-5459-4958-a73b-2b7c44cc1c2d")>

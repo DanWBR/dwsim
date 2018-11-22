@@ -2947,7 +2947,7 @@ Public Class FormFlowsheet
                                                         End Sub)
     End Sub
 
-    Private Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
+    Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
         Dim myTextObject As New Shapes.RectangleGraphic(New SkiaSharp.SKPoint(10, 10), "TEXT")
         Dim gObj As GraphicObject = Nothing
         gObj = myTextObject
@@ -2958,7 +2958,7 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
+    Public Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
         With Me.OpenFileName
             .CheckFileExists = True
             .CheckPathExists = True
