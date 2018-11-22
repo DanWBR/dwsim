@@ -1502,25 +1502,27 @@ Imports System.Dynamic
                     If obj Is Nothing Then obj = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
                     If Not obj Is Nothing Then
-                        Dim i As Integer = 0
-                        For Each xel2 As XElement In xel.Element("InputConnectors").Elements
-                            If CBool(xel2.@IsAttached) = True Then
-                                obj.InputConnectors(i).ConnectorName = pkey & xel2.@AttachedFromObjID & "|" & xel2.@AttachedFromConnIndex
-                                obj.InputConnectors(i).Type = CType([Enum].Parse(obj.InputConnectors(i).Type.GetType, xel2.@ConnType), ConType)
-                                If reconnectinlets Then
-                                    Dim objFrom As IGraphicObject = (From go As IGraphicObject In
+                        If xel.Element("InputConnectors") IsNot Nothing Then
+                            Dim i As Integer = 0
+                            For Each xel2 As XElement In xel.Element("InputConnectors").Elements
+                                If CBool(xel2.@IsAttached) = True Then
+                                    obj.InputConnectors(i).ConnectorName = pkey & xel2.@AttachedFromObjID & "|" & xel2.@AttachedFromConnIndex
+                                    obj.InputConnectors(i).Type = CType([Enum].Parse(obj.InputConnectors(i).Type.GetType, xel2.@ConnType), ConType)
+                                    If reconnectinlets Then
+                                        Dim objFrom As IGraphicObject = (From go As IGraphicObject In
                                                                                    FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedFromObjID).SingleOrDefault
-                                    If Not objFrom Is Nothing Then
-                                        If Not objFrom.OutputConnectors(CInt(xel2.@AttachedFromConnIndex)).IsAttached Then
-                                            FlowsheetSurface.ConnectObject(CType(objFrom, GraphicObject), CType(obj, GraphicObject), CInt(xel2.@AttachedFromConnIndex), CInt(xel2.@AttachedToConnIndex))
+                                        If Not objFrom Is Nothing Then
+                                            If Not objFrom.OutputConnectors(CInt(xel2.@AttachedFromConnIndex)).IsAttached Then
+                                                FlowsheetSurface.ConnectObject(CType(objFrom, GraphicObject), CType(obj, GraphicObject), CInt(xel2.@AttachedFromConnIndex), CInt(xel2.@AttachedToConnIndex))
+                                            End If
                                         End If
                                     End If
                                 End If
-                            End If
-                            i += 1
-                        Next
+                                i += 1
+                            Next
+                        End If
                     End If
-                End If
+                    End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
             End Try
@@ -1533,36 +1535,40 @@ Imports System.Dynamic
                     Dim obj As IGraphicObject = (From go As IGraphicObject In
                                                             FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                     If Not obj Is Nothing Then
-                        For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
-                            If CBool(xel2.@IsAttached) = True Then
-                                Dim objToID = pkey & xel2.@AttachedToObjID
-                                If objToID <> "" Then
-                                    Dim objTo As IGraphicObject = (From go As IGraphicObject In
+                        If xel.Element("OutputConnectors") IsNot Nothing Then
+                            For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
+                                If CBool(xel2.@IsAttached) = True Then
+                                    Dim objToID = pkey & xel2.@AttachedToObjID
+                                    If objToID <> "" Then
+                                        Dim objTo As IGraphicObject = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
-                                    If objTo Is Nothing Then objTo = (From go As IGraphicObject In
+                                        If objTo Is Nothing Then objTo = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
-                                    Dim fromidx As Integer = -1
-                                    Dim cp As IConnectionPoint = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|"c)(0) = obj.Name).SingleOrDefault
-                                    If cp Is Nothing Then cp = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|"c)(0) = xel2.@AttachedToObjID).SingleOrDefault
-                                    If Not cp Is Nothing Then
-                                        fromidx = CInt(cp.ConnectorName.Split("|"c)(1))
+                                        Dim fromidx As Integer = -1
+                                        Dim cp As IConnectionPoint = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|"c)(0) = obj.Name).SingleOrDefault
+                                        If cp Is Nothing Then cp = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|"c)(0) = xel2.@AttachedToObjID).SingleOrDefault
+                                        If Not cp Is Nothing Then
+                                            fromidx = CInt(cp.ConnectorName.Split("|"c)(1))
+                                        End If
+                                        If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(CType(obj, GraphicObject), CType(objTo, GraphicObject), fromidx, CInt(xel2.@AttachedToConnIndex))
                                     End If
-                                    If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(CType(obj, GraphicObject), CType(objTo, GraphicObject), fromidx, CInt(xel2.@AttachedToConnIndex))
                                 End If
-                            End If
-                        Next
-                        For Each xel2 As XElement In xel.Element("EnergyConnector").Elements
-                            If CBool(xel2.@IsAttached) = True Then
-                                Dim objToID = pkey & xel2.@AttachedToObjID
-                                If objToID <> "" Then
-                                    Dim objTo As IGraphicObject = (From go As IGraphicObject In
+                            Next
+                        End If
+                        If xel.Element("EnergyConnector") IsNot Nothing Then
+                            For Each xel2 As XElement In xel.Element("EnergyConnector").Elements
+                                If CBool(xel2.@IsAttached) = True Then
+                                    Dim objToID = pkey & xel2.@AttachedToObjID
+                                    If objToID <> "" Then
+                                        Dim objTo As IGraphicObject = (From go As IGraphicObject In
                                                                                    FlowsheetSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
-                                    If objTo Is Nothing Then obj = (From go As IGraphicObject In
+                                        If objTo Is Nothing Then obj = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
-                                    If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(CType(obj, GraphicObject), CType(objTo, GraphicObject), -1, CInt(xel2.@AttachedToConnIndex))
+                                        If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(CType(obj, GraphicObject), CType(objTo, GraphicObject), -1, CInt(xel2.@AttachedToConnIndex))
+                                    End If
                                 End If
-                            End If
-                        Next
+                            Next
+                        End If
                     End If
                 End If
             Catch ex As Exception
