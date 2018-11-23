@@ -424,9 +424,9 @@ namespace DWSIM.UI
         {
             DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
             {
-                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.No)
                 {
-                    Application.Instance.Quit();
+                    e.Cancel = true;
                 }
             }
         }

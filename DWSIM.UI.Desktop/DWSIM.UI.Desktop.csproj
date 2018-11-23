@@ -369,6 +369,8 @@ del "$(SolutionDir)DistPackages\Linux\*vshost*"
 del "$(SolutionDir)DistPackages\Raspberry\*vshost*"
 del "$(SolutionDir)DistPackages\macOS\*vshost*"
 
+del "$(SolutionDir)DistPackages\Linux\*-sharp.*"
+
 ) else if "$(PlatformName)" == "x86" (
 
 xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D

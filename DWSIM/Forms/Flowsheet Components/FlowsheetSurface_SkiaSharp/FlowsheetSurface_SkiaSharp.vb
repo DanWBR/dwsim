@@ -2907,13 +2907,16 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub FlowsheetSurface_SkiaSharp_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        Me.FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
-        FlowsheetDesignSurface.FlowsheetSurface.ShowGrid = Flowsheet.Options.FlowsheetDisplayGrid
-        FlowsheetDesignSurface.FlowsheetSurface.SnapToGrid = Flowsheet.Options.FlowsheetSnapToGrid
-        FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = Flowsheet.Options.FlowsheetMultiSelectMode
-        tsbDisplayGrid.Checked = Flowsheet.Options.FlowsheetDisplayGrid
-        tsbSnapObjectsToGrid.Checked = Flowsheet.Options.FlowsheetSnapToGrid
-        tsbMultiSelectMode.Checked = Flowsheet.Options.FlowsheetSnapToGrid
+        Try
+            Me.FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
+            FlowsheetDesignSurface.FlowsheetSurface.ShowGrid = Flowsheet.Options.FlowsheetDisplayGrid
+            FlowsheetDesignSurface.FlowsheetSurface.SnapToGrid = Flowsheet.Options.FlowsheetSnapToGrid
+            FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = Flowsheet.Options.FlowsheetMultiSelectMode
+            tsbDisplayGrid.Checked = Flowsheet.Options.FlowsheetDisplayGrid
+            tsbSnapObjectsToGrid.Checked = Flowsheet.Options.FlowsheetSnapToGrid
+            tsbMultiSelectMode.Checked = Flowsheet.Options.FlowsheetSnapToGrid
+        Catch ex As Exception
+        End Try
     End Sub
 
     Public Sub FlowsheetDesignSurface_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseUp

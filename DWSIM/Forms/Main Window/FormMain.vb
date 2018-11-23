@@ -887,6 +887,8 @@ Public Class FormMain
                 Return Me.tmpform2.FormSpreadsheet
             Case "DWSIM.WatchPanel", "DWSIM.frmWatch"
                 Return Me.tmpform2.FormWatch
+            Case "DWSIM.frmProps"
+                Return Me.tmpform2.FormProps
         End Select
         Return Nothing
     End Function
@@ -1738,19 +1740,24 @@ Public Class FormMain
             form.FormProps.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
+                'If Not Settings.IsRunningOnMono Then
                 Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
-                Try
-                    Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
-                    File.WriteAllText(myfile, pnl)
-                    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
-                Catch ex As Exception
-                    'excs.Add(New Exception("Error Restoring Window Layout", ex))
-                Finally
-                    File.Delete(myfile)
-                End Try
+                    Try
+                        Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
+                        File.WriteAllText(myfile, pnl)
+                        form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
+                    Catch ex As Exception
+                        'excs.Add(New Exception("Error Restoring Window Layout", ex))
+                    Finally
+                        File.Delete(myfile)
+                    End Try
+                'Else
+                '    Dim myfile As String = IO.Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
+                '    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
+                'End If
             End If
 
-            Try
+        Try
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)

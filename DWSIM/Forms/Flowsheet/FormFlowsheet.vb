@@ -138,12 +138,13 @@ Public Class FormFlowsheet
 
     Private Sub FormChild_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Me.MdiParent = FormMain
         If DWSIM.App.IsRunningOnMono Then
             'Me.FlowLayoutPanel1.AutoSize = False
             'Me.FlowLayoutPanel1.Height = 50
             Me.MenuStrip1.Visible = False
             Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Visible = False
-            Me.WindowState = FormWindowState.Maximized
+            'Me.WindowState = FormWindowState.Maximized
         Else
             'FormObjList = New frmObjList
             Me.MenuStrip1.Visible = False
@@ -254,10 +255,6 @@ Public Class FormFlowsheet
         loaded = True
 
         If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
-
-        Me.WindowState = FormWindowState.Normal
-        Me.MdiParent = FormMain
-        Me.WindowState = FormWindowState.Maximized
 
     End Sub
 
