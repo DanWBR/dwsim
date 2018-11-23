@@ -1380,14 +1380,14 @@ Public Class FormMain
         End Try
 
         If sver < New Version("5.0.0.0") Then
-            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                                   SharedClasses.Utility.UpdateElement(xel1)
-                                               End Sub)
+            For Each xel1 In xdoc.Descendants
+                SharedClasses.Utility.UpdateElement(xel1)
+            Next
         End If
 
-        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                               SharedClasses.Utility.UpdateElementForNewUI(xel1)
-                                           End Sub)
+        For Each xel1 In xdoc.Descendants
+            SharedClasses.Utility.UpdateElementForNewUI(xel1)
+        Next
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 

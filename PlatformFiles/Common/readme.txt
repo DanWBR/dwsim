@@ -67,6 +67,7 @@ Version 5.6
 - [NEW] Unified Process Flowsheet Drawing interface
 - [CHG] Redesigned Distillation/Absorption Column connection editor
 - [FIX] Fixed Steam Tables Enthalpy/Entropy calculation near saturation points
+- [FIX] Fixed a regression in Nested Loops VLE Flash
 - [FIX] Minor bug fixes and enhancements
 
 Version 5.5 Update 1

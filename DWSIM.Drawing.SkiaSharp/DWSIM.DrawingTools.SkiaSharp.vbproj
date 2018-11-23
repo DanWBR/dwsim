@@ -107,8 +107,8 @@
     <Reference Include="SkiaSharp, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.60.0\lib\net45\SkiaSharp.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp.Extended, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.Extended.1.59.0\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.Extended.dll</HintPath>
+    <Reference Include="SkiaSharp.Extended, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Extended.1.60.0\lib\portable-net45+win8+wp8+wpa81\SkiaSharp.Extended.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.Desktop, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\net45\SkiaSharp.Views.Desktop.dll</HintPath>
