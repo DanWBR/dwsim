@@ -309,7 +309,6 @@ namespace DWSIM.UI.Forms
             ActDrawGrid = () =>
             {
                 FlowsheetObject.Options.FlowsheetDisplayGrid = !FlowsheetObject.Options.FlowsheetDisplayGrid;
-                btnmDrawGrid.Checked = FlowsheetObject.Options.FlowsheetDisplayGrid;
                 FlowsheetControl.FlowsheetSurface.ShowGrid = btnmDrawGrid.Checked;
                 FlowsheetControl.Invalidate();
             };
@@ -317,7 +316,6 @@ namespace DWSIM.UI.Forms
             ActSnapToGrid = () =>
             {
                 FlowsheetObject.Options.FlowsheetSnapToGrid = !FlowsheetObject.Options.FlowsheetSnapToGrid;
-                btnmSnapToGrid.Checked = FlowsheetObject.FlowsheetOptions.FlowsheetSnapToGrid;
                 FlowsheetControl.FlowsheetSurface.SnapToGrid = btnmSnapToGrid.Checked;
                 FlowsheetControl.Invalidate();
             };
@@ -325,7 +323,6 @@ namespace DWSIM.UI.Forms
             ActMultiSelect = () =>
             {
                 FlowsheetObject.Options.FlowsheetMultiSelectMode = !FlowsheetObject.Options.FlowsheetMultiSelectMode;
-                btnmMultiSelect.Checked = FlowsheetObject.FlowsheetOptions.FlowsheetMultiSelectMode;
                 FlowsheetControl.FlowsheetSurface.MultiSelectMode = btnmMultiSelect.Checked;
                 FlowsheetControl.Invalidate();
             };
