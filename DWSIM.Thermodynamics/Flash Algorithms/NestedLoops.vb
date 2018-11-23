@@ -188,8 +188,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Abs(Pb - Pd) / Pb < 0.0000001 Then
                 'one comp only
-                IObj?.SetCurrent()
+                For i = 0 To n
+                    IObj?.SetCurrent()
+                    Vp(i) = PP.AUX_PVAPi(i, T)
+                Next
                 Px = Vp.MultiplyY(Vz).Sum
+                'Px = PP.AUX_PVAPM(T)
                 If Px <= P Then
                     L = 1
                     V = 0
