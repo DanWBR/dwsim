@@ -309,7 +309,7 @@ namespace DWSIM.UI.Forms
             ActDrawGrid = () =>
             {
                 FlowsheetObject.Options.FlowsheetDisplayGrid = !FlowsheetObject.Options.FlowsheetDisplayGrid;
-                btnmDrawGrid.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
+                btnmDrawGrid.Checked = FlowsheetObject.Options.FlowsheetDisplayGrid;
                 FlowsheetControl.FlowsheetSurface.ShowGrid = btnmDrawGrid.Checked;
             };
 
