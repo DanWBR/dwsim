@@ -311,6 +311,7 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.Options.FlowsheetDisplayGrid = !FlowsheetObject.Options.FlowsheetDisplayGrid;
                 btnmDrawGrid.Checked = FlowsheetObject.Options.FlowsheetDisplayGrid;
                 FlowsheetControl.FlowsheetSurface.ShowGrid = btnmDrawGrid.Checked;
+                FlowsheetControl.Invalidate();
             };
 
             ActSnapToGrid = () =>
@@ -318,6 +319,7 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.Options.FlowsheetSnapToGrid = !FlowsheetObject.Options.FlowsheetSnapToGrid;
                 btnmSnapToGrid.Checked = FlowsheetObject.FlowsheetOptions.FlowsheetSnapToGrid;
                 FlowsheetControl.FlowsheetSurface.SnapToGrid = btnmSnapToGrid.Checked;
+                FlowsheetControl.Invalidate();
             };
 
             ActMultiSelect = () =>
@@ -325,6 +327,7 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.Options.FlowsheetMultiSelectMode = !FlowsheetObject.Options.FlowsheetMultiSelectMode;
                 btnmMultiSelect.Checked = FlowsheetObject.FlowsheetOptions.FlowsheetMultiSelectMode;
                 FlowsheetControl.FlowsheetSurface.MultiSelectMode = btnmMultiSelect.Checked;
+                FlowsheetControl.Invalidate();
             };
 
             ActAlignLefts = () => { AlignObjects(btnmAlignLefts); };
@@ -391,6 +394,13 @@ namespace DWSIM.UI.Forms
             btnmDrawGrid.CheckedChanged += (sender, e) => ActDrawGrid.Invoke();
             btnmSnapToGrid.CheckedChanged += (sender, e) => ActSnapToGrid.Invoke();
             btnmMultiSelect.CheckedChanged += (sender, e) => ActMultiSelect.Invoke();
+
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnmDrawGrid.Click += (sender, e) => ActDrawGrid.Invoke();
+                btnmSnapToGrid.Click += (sender, e) => ActSnapToGrid.Invoke();
+                btnmMultiSelect.Click += (sender, e) => ActMultiSelect.Invoke();
+            }
 
             btnmAlignBottoms.Click += (sender, e) => ActAlignBottoms.Invoke();
             btnmAlignCenters.Click += (sender, e) => ActAlignCenters.Invoke();
@@ -1789,6 +1799,8 @@ namespace DWSIM.UI.Forms
             }
 
             FlowsheetControl.FlowsheetSurface.AlignSelectedObjects(direction);
+            FlowsheetControl.Invalidate();
+
         }
 
     }
