@@ -45,11 +45,11 @@ Namespace GraphicObjects.Shapes
 
             Dim myIC1 As New ConnectionPoint
             myIC1.Position = New Point(X, Y + 0.5 * Height)
-            myIC1.Type = ConType.ConIn
+            myIC1.Type = ConType.ConEn
 
             Dim myOC1 As New ConnectionPoint
             myOC1.Position = New Point(X + Width, Y + 0.5 * Height)
-            myOC1.Type = ConType.ConOut
+            myOC1.Type = ConType.ConEn
 
             Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
             Me.EnergyConnector.Type = ConType.ConEn
@@ -104,7 +104,7 @@ Namespace GraphicObjects.Shapes
 
             Dim myPen2 As New SKPaint()
             With myPen2
-                .Color = SKColors.Yellow
+                .Color = LineColor
                 .StrokeWidth = LineWidth
                 .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -117,7 +117,7 @@ Namespace GraphicObjects.Shapes
             With tpaint
                 .TextSize = 18.0#
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.Yellow
+                .Color = LineColor
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With
