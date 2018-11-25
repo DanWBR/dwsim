@@ -48,7 +48,7 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddLabelRow("Reaction Active in Set / Reaction Name / Sequence #)");
 
             var compcontainer = new DynamicLayout();
-            compcontainer.BackgroundColor = Colors.White;
+            //compcontainer.BackgroundColor = Colors.White;
 
             Double val;
 

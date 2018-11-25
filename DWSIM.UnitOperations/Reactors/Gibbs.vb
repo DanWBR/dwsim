@@ -1214,9 +1214,37 @@ Namespace Reactors
 
                     IObj?.Paragraphs.Add(String.Format("Initial Mole Amounts {0}", N0.Values.ToArray.ToMathArrayString))
 
-                    'lagrange multipliers
+                    'estimate lagrange multipliers
 
                     Dim lagrm(e) As Double
+
+                    Dim mymat As New Mapack.Matrix(e + 1, e + 1)
+                    Dim mypot As New Mapack.Matrix(e + 1, 1)
+                    Dim mylags As New Mapack.Matrix(e + 1, 1)
+
+                    Dim k As Integer = 0
+
+                    For i = 0 To e
+                        k = 0
+                        For j = 0 To c
+                            If resc2(j) > 0.0# Then
+                                mymat(i, k) = Me.ElementMatrix(i, j)
+                                mypot(k, 0) = igge(j)
+                                k += 1
+                            End If
+                        Next
+                    Next
+
+                    Try
+                        mylags = mymat.Solve(mypot.Multiply(-1))
+                        For i = 0 To e
+                            lagrm(i) = mylags(i, 0)
+                        Next
+                    Catch ex As Exception
+                        For i = 0 To e
+                            lagrm(i) = igge(i) + 0.01
+                        Next
+                    End Try
 
                     Dim g0, g1, result(c + e + 1) As Double
 

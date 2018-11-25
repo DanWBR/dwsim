@@ -47,7 +47,7 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Stoich. Coeff. / Direct Order Exponent / Reverse Order Exponent)");
 
             var compcontainer = new DynamicLayout();
-            compcontainer.BackgroundColor = Colors.White;
+            //compcontainer.BackgroundColor = Colors.White;
 
             Double val;
 

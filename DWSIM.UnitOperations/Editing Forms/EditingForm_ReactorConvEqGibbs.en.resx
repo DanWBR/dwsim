@@ -122,10 +122,10 @@
     <value>133, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 20</value>
+    <value>211, 20</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 43</value>
+    <value>323, 43</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -173,7 +173,7 @@
     <value>6, 6</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 98</value>
+    <value>350, 98</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
@@ -182,19 +182,19 @@
     <value>7, 19</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 141</value>
+    <value>336, 141</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 700</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 166</value>
+    <value>350, 166</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 53</value>
+    <value>288, 53</value>
   </data>
   <data name="btnConfigureFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -203,7 +203,7 @@
     <value>Configure</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 26</value>
+    <value>288, 26</value>
   </data>
   <data name="btnConfigurePP.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -215,7 +215,7 @@
     <value>147, 53</value>
   </data>
   <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
+    <value>135, 21</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 56</value>
@@ -230,7 +230,7 @@
     <value>147, 26</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
+    <value>135, 21</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 29</value>
@@ -245,7 +245,7 @@
     <value>11, 145</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 88</value>
+    <value>314, 88</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
@@ -260,7 +260,7 @@
     <value>151, 65</value>
   </data>
   <data name="cbGibbsMinMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>171, 21</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 14</value>
@@ -290,7 +290,7 @@
     <value>Calculation Mode</value>
   </data>
   <data name="cbPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 118</value>
+    <value>257, 118</value>
   </data>
   <data name="cbPDrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 21</value>
@@ -308,13 +308,13 @@
     <value>151, 38</value>
   </data>
   <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>171, 21</value>
   </data>
   <data name="tbPDrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 119</value>
   </data>
   <data name="tbPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 96</value>
@@ -338,16 +338,16 @@
     <value>151, 93</value>
   </data>
   <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="cbReacSet.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 11</value>
   </data>
   <data name="cbReacSet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>171, 21</value>
   </data>
   <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 92</value>
+    <value>257, 92</value>
   </data>
   <data name="cbTemp.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 21</value>
@@ -360,7 +360,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPageParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 236</value>
+    <value>328, 236</value>
   </data>
   <data name="TabPageParams.Text" xml:space="preserve">
     <value>Parameters</value>
@@ -642,19 +642,19 @@
     <value>7, 19</value>
   </data>
   <data name="TabControlParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 262</value>
+    <value>336, 262</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 247</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 287</value>
+    <value>350, 287</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 104</value>
+    <value>296, 104</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -663,7 +663,7 @@
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 77</value>
+    <value>296, 77</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -672,7 +672,7 @@
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 50</value>
+    <value>296, 50</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -681,7 +681,7 @@
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 23</value>
+    <value>296, 23</value>
   </data>
   <data name="btnCreateAndConnectInlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -690,7 +690,7 @@
     <value>Create and Connect</value>
   </data>
   <data name="btnDisconnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 77</value>
+    <value>323, 77</value>
   </data>
   <data name="btnDisconnectOutlet2.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -711,10 +711,10 @@
     <value>147, 77</value>
   </data>
   <data name="cbOutlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 21</value>
+    <value>143, 21</value>
   </data>
   <data name="btnDisconnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 104</value>
+    <value>323, 104</value>
   </data>
   <data name="btnDisconnectEnergy.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -735,10 +735,10 @@
     <value>147, 104</value>
   </data>
   <data name="cbEnergy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 21</value>
+    <value>143, 21</value>
   </data>
   <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 50</value>
+    <value>323, 50</value>
   </data>
   <data name="btnDisconnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -747,7 +747,7 @@
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 23</value>
+    <value>323, 23</value>
   </data>
   <data name="btnDisconnect1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -768,13 +768,13 @@
     <value>147, 50</value>
   </data>
   <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 21</value>
+    <value>143, 21</value>
   </data>
   <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 23</value>
   </data>
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 21</value>
+    <value>143, 21</value>
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 26</value>
@@ -789,7 +789,7 @@
     <value>6, 106</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 139</value>
+    <value>350, 139</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
@@ -807,7 +807,7 @@
     <value>3, 3</value>
   </data>
   <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 109</value>
+    <value>322, 109</value>
   </data>
   <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -816,7 +816,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 115</value>
+    <value>328, 115</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>General</value>
@@ -837,7 +837,7 @@
     <value>3, 3</value>
   </data>
   <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 115</value>
+    <value>339, 109</value>
   </data>
   <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -846,7 +846,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 121</value>
+    <value>345, 115</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Reactions</value>
@@ -858,13 +858,13 @@
     <value>Conversion (%)</value>
   </data>
   <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 121</value>
+    <value>345, 115</value>
   </data>
   <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 121</value>
+    <value>345, 115</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Conversions</value>
@@ -873,13 +873,13 @@
     <value>7, 19</value>
   </data>
   <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 141</value>
+    <value>336, 141</value>
   </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 534</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 166</value>
+    <value>350, 166</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Results</value>

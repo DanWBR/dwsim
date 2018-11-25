@@ -82,7 +82,7 @@ Namespace GraphicObjects.Tables
             With tpaint
                 .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.SteelBlue
+                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.SandyBrown, SKColors.SteelBlue)
                 .IsStroke = False
                 .Typeface = RegularTypeFace
             End With
@@ -92,7 +92,7 @@ Namespace GraphicObjects.Tables
             With tbpaint
                 .TextSize = FontSize / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.SteelBlue
+                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.SandyBrown, SKColors.SteelBlue)
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With
@@ -101,7 +101,7 @@ Namespace GraphicObjects.Tables
 
             With bpaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.White.WithAlpha(240)
+                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.Black.WithAlpha(240), SKColors.White.WithAlpha(240))
                 .IsStroke = False
                 .StrokeWidth = LineWidth / zoom
             End With

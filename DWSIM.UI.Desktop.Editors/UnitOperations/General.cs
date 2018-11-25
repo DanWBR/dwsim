@@ -1413,13 +1413,19 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     int i, j;
-                    string elmatrix, elements;
+                    string elmatrix, elements, ie;
                     elements = "";
                     for (i = 0; i < reactor2g.Elements.Count(); i++)
                     {
                         elements += reactor2g.Elements[i] + " ";
                     }
                     elements = elements.TrimEnd(' ');
+                    ie = "";
+                    for (i = 0; i < reactor2g.InitialEstimates.Count(); i++)
+                    {
+                        ie += cv.ConvertFromSI(su.molarflow, reactor2g.InitialEstimates[i]).ToString(nf) + "\n";
+                    }
+                    ie = ie.TrimEnd('\n');
                     elmatrix = "";
                     for (i = 0; i < reactor2g.ComponentIDs.Count; i++)
                     {
@@ -1508,6 +1514,25 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     });
                     s.CreateAndAddDescriptionRow(container, "Enter the matrix of element amounts, separated by spaces, one line for each compound");
+                    s.CreateAndAddLabelRow(container, "Initial Estimates");
+                    s.CreateAndAddDescriptionRow(container, String.Format("Initial estimates for the final compound amounts (in {0}) in the following order: ", su.molarflow) + comptext);
+                    var txtie = s.CreateAndAddMultilineTextBoxRow(container, ie, false, true, (TextArea arg3, EventArgs ev) =>
+                    {
+                        try
+                        {
+                            reactor2g.InitialEstimates = new List<double>();
+                            var ell = arg3.Text.Split('\n');
+                            foreach (string line in ell)
+                            {
+                                if (s.IsValidDouble(line)) { reactor2g.InitialEstimates.Add(cv.ConvertToSI(su.molarflow, line.ToDoubleFromCurrent())); }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            SimObject.GetFlowsheet().ShowMessage("Error parsing initial estimates: " + ex.Message, IFlowsheet.MessageType.GeneralError);
+                        }
+                    });
+                    s.CreateAndAddDescriptionRow(container, "Enter the initial estimate for the final amount of compound mole flows, one line for each compound");
                     s.CreateAndAddLabelRow(container, "Damping Factor");
                     s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
                     s.CreateAndAddCheckBoxRow(container, "Use Damping Factor", reactor2g.EnableDamping, (sender, e) => reactor2g.EnableDamping = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
