@@ -168,6 +168,9 @@
   <data name="FLSH007" xml:space="preserve">
     <value>After finishing updating the object connections, call the flowsheet solver by pressing the F5 key.</value>
   </data>
+  <data name="FLSH008" xml:space="preserve">
+    <value>If some windows are missing, click on 'View' &gt; 'Restore Layout'.</value>
+  </data>
   <data name="FOPT001" xml:space="preserve">
     <value>The optimizer window can also be freely repositioned just like the flowsheet sub-windows.</value>
   </data>

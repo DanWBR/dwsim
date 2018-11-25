@@ -326,6 +326,7 @@ Public Class FormFlowsheet
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH008"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList

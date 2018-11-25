@@ -168,6 +168,9 @@
   <data name="FLSH007" xml:space="preserve">
     <value>Após finalizar as modificações nas conexões, recalcule o fluxograma por completo (F5).</value>
   </data>
+  <data name="FLSH008" xml:space="preserve">
+    <value>Se algumas janelas nao forem exibidas corretamente, clique em Exibir &gt; Restaurar Layout.</value>
+  </data>
   <data name="FOPT001" xml:space="preserve">
     <value>A janela do otimizador também pode ser reposicionada livremente como as principais janelas da simulação.</value>
   </data>

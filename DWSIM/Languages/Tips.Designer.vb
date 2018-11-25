@@ -218,6 +218,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Se algumas janelas nao forem exibidas corretamente, clique em Exibir &gt; Restaurar Layout..
+        '''</summary>
+        Friend Shared ReadOnly Property FLSH008() As String
+            Get
+                Return ResourceManager.GetString("FLSH008", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to A janela do otimizador também pode ser reposicionada livremente como as principais janelas da simulação..
         '''</summary>
         Friend Shared ReadOnly Property FOPT001() As String

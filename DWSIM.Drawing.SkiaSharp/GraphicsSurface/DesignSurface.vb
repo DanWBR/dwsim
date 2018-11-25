@@ -1296,7 +1296,11 @@ Public Class GraphicsSurface
             .IsStroke = False
             Dim colors = New SKColors()
             Try
-                .Color = colors.GetType().GetField(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontColor).GetValue(colors)
+                If GlobalSettings.Settings.DarkMode Then
+                    .Color = SKColors.DimGray
+                Else
+                    .Color = colors.GetType().GetField(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontColor).GetValue(colors)
+                End If
                 .Typeface = SKTypeface.FromFamilyName(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName, SKFontStyleWeight.Bold, SKFontStyleWidth.Condensed, SKFontStyleSlant.Upright)
             Catch ex As Exception
                 .Color = SKColors.DimGray
@@ -1309,7 +1313,11 @@ Public Class GraphicsSurface
         Dim bgpaint As New SKPaint()
 
         With bgpaint
-            .Color = SKColors.White.WithAlpha(100)
+            If GlobalSettings.Settings.DarkMode Then
+                .Color = SKColors.Black.WithAlpha(100)
+            Else
+                .Color = SKColors.White.WithAlpha(100)
+            End If
             .IsStroke = False
         End With
 
