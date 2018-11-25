@@ -259,7 +259,8 @@ Public Class GraphicsSurface
 
         For Each dobj In objects
 
-            If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic Then
+            If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic And
+               Not TypeOf dobj Is Tables.FloatingTableGraphic Then
 
                 If TypeOf dobj Is ShapeGraphic Then
                     DirectCast(dobj, ShapeGraphic).Fill = False
@@ -327,6 +328,10 @@ Public Class GraphicsSurface
                 If dobj.Calculated Then DrawPropertyListBlock(DrawingCanvas, dobj)
             Next
         End If
+
+        For Each dobj As GraphicObject In Me.DrawingObjects
+            If TypeOf dobj Is Tables.FloatingTableGraphic Then dobj.Draw(DrawingCanvas)
+        Next
 
         'draw selection rectangle (click and drag to select interface)
         'on top of everything else, but transparent

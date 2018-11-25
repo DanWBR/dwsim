@@ -630,23 +630,20 @@ Namespace Reactors
 
             Dim lbound(Me.ReactionExtents.Count - 1) As Double
             Dim ubound(Me.ReactionExtents.Count - 1) As Double
-            Dim var1 As Double
+            Dim nvars As New List(Of Double)
+            Dim pvars As New List(Of Double)
 
             i = 0
             For Each rxid As String In Me.Reactions
+                nvars.Clear()
+                pvars.Clear()
                 rx = FlowSheet.Reactions(rxid)
-                j = 0
                 For Each comp As ReactionStoichBase In rx.Components.Values
-                    var1 = -N0(comp.CompName) / comp.StoichCoeff
-                    If j = 0 Then
-                        lbound(i) = var1
-                        ubound(i) = var1
-                    Else
-                        If var1 < lbound(i) Then lbound(i) = var1
-                        If var1 > ubound(i) Then ubound(i) = var1
-                    End If
-                    j += 1
+                    If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                    If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
                 Next
+                lbound(i) = nvars.Max
+                ubound(i) = pvars.Min
                 i += 1
             Next
 
@@ -765,6 +762,11 @@ Namespace Reactors
                 Loop Until niter >= InternalLoopMaximumIterations
 
                 If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+
+                For i = 0 To r
+                    If REx(i) > ubound(i) Then REx(i) = ubound(i)
+                    If REx(i) < lbound(i) Then REx(i) = lbound(i)
+                Next
 
                 'reevaluate function
 
