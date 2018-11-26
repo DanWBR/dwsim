@@ -71,6 +71,9 @@ Namespace Reactors
 
         Public Property InternalLoopMaximumIterations As Integer = 250
         Public Property ExternalLoopMaximumIterations As Integer = 50
+        Public Property DerivativePerturbation As Double = 0.0001
+
+        Public Property AlternateBoundsInitializer As Boolean = False
 
 #End Region
 
@@ -273,7 +276,7 @@ Namespace Reactors
 
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
-            Dim epsilon As Double = 0.0001
+            Dim epsilon As Double = DerivativePerturbation
 
             Dim f1(), f2() As Double
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
@@ -523,6 +526,19 @@ Namespace Reactors
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
+            For Each comp In ims.Phases(0).Compounds.Values
+                If comp.ConstantProperties.IG_Enthalpy_of_Formation_25C = 0.0 And comp.ConstantProperties.OriginalDB <> "ChemSep" Then
+                    If FlowSheet IsNot Nothing Then
+                        FlowSheet.ShowMessage(String.Format("Enthalpy of Formation data for compound '{0}' is missing or equal to 0, may impact equilibrium/composition calculations.", comp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                End If
+                If comp.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C = 0.0 And comp.ConstantProperties.OriginalDB <> "ChemSep" Then
+                    If FlowSheet IsNot Nothing Then
+                        FlowSheet.ShowMessage(String.Format("Gibbs Energy of Formation data for compound '{0}' is missing or equal to 0, may impact equilibrium/composition calculations.", comp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                End If
+            Next
+
             'Reactants Enthalpy (kJ/kg * kg/s = kW) (ISOTHERMIC)
             Dim Hr0 As Double
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
@@ -630,22 +646,50 @@ Namespace Reactors
 
             Dim lbound(Me.ReactionExtents.Count - 1) As Double
             Dim ubound(Me.ReactionExtents.Count - 1) As Double
-            Dim nvars As New List(Of Double)
-            Dim pvars As New List(Of Double)
+            Dim var1 As Double
 
-            i = 0
-            For Each rxid As String In Me.Reactions
-                nvars.Clear()
-                pvars.Clear()
-                rx = FlowSheet.Reactions(rxid)
-                For Each comp As ReactionStoichBase In rx.Components.Values
-                    If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+            If Not AlternateBoundsInitializer Then
+
+                i = 0
+                For Each rxid As String In Me.Reactions
+                    rx = FlowSheet.Reactions(rxid)
+                    j = 0
+                    For Each comp As ReactionStoichBase In rx.Components.Values
+                        var1 = -N0(comp.CompName) / comp.StoichCoeff
+                        If j = 0 Then
+                            lbound(i) = var1
+                            ubound(i) = var1
+                        Else
+                            If var1 < lbound(i) Then lbound(i) = var1
+                            If var1 > ubound(i) Then ubound(i) = var1
+                        End If
+                        j += 1
+                    Next
+                    i += 1
                 Next
-                lbound(i) = nvars.Max
-                ubound(i) = pvars.Min
-                i += 1
-            Next
+
+            Else
+
+                Dim nvars As New List(Of Double)
+                Dim pvars As New List(Of Double)
+
+                i = 0
+                For Each rxid As String In Me.Reactions
+                    nvars.Clear()
+                    pvars.Clear()
+                    rx = FlowSheet.Reactions(rxid)
+                    For Each comp As ReactionStoichBase In rx.Components.Values
+                        If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                        If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                    Next
+                    lbound(i) = nvars.Max
+                    ubound(i) = pvars.Min
+                    i += 1
+                Next
+
+            End If
+
+            Dim m As Integer = 0
 
             Dim REx(r) As Double
 
@@ -763,10 +807,14 @@ Namespace Reactors
 
                 If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
-                For i = 0 To r
-                    If REx(i) > ubound(i) Then REx(i) = ubound(i)
-                    If REx(i) < lbound(i) Then REx(i) = lbound(i)
-                Next
+                If ReturnPenaltyValue() > 0 Then
+
+                    'recalculate extents to fix mass balance
+
+                    Throw New Exception("Invalid solution, mass balance residue > 0.")
+
+                End If
+
 
                 'reevaluate function
 

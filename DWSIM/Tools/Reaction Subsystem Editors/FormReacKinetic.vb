@@ -46,7 +46,7 @@ Public Class FormReacKinetic
         'populate datagrid
         For Each subs As ConstantProperties In fc.Options.SelectedComponents.Values
             With Me.KryptonDataGridView1
-                .Rows.Add(New Object() {(subs.Name), Format(subs.Molar_Weight, nf), False, False, 0, 0, 0, subs.Name})
+                .Rows.Add(New Object() {(subs.Name), Format(subs.Molar_Weight, nf), Format(subs.IG_Enthalpy_of_Formation_25C, nf), False, False, 0, 0, 0, subs.Name})
             End With
         Next
 
@@ -59,12 +59,12 @@ Public Class FormReacKinetic
         End Select
 
         For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-            If rc.Components.ContainsKey(row.Cells(7).Value) Then
-                row.Cells(2).Value = True
-                row.Cells(3).Value = rc.Components(row.Cells(7).Value).IsBaseReactant
-                row.Cells(4).Value = rc.Components(row.Cells(7).Value).StoichCoeff
-                row.Cells(5).Value = rc.Components(row.Cells(7).Value).DirectOrder
-                row.Cells(6).Value = rc.Components(row.Cells(7).Value).ReverseOrder
+            If rc.Components.ContainsKey(row.Cells(8).Value) Then
+                row.Cells(3).Value = True
+                row.Cells(4).Value = rc.Components(row.Cells(8).Value).IsBaseReactant
+                row.Cells(5).Value = rc.Components(row.Cells(8).Value).StoichCoeff
+                row.Cells(6).Value = rc.Components(row.Cells(8).Value).DirectOrder
+                row.Cells(7).Value = rc.Components(row.Cells(8).Value).ReverseOrder
             End If
         Next
 
@@ -133,8 +133,8 @@ Public Class FormReacKinetic
 
         If e.ColumnIndex = 3 Then
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(3).Value = True Then
-                    rc.BaseReactant = row.Cells(7).Value
+                If row.Cells(4).Value = True Then
+                    rc.BaseReactant = row.Cells(8).Value
                     Me.tbCompBase.Text = (rc.BaseReactant)
                     Exit For
                 End If
@@ -149,46 +149,46 @@ Public Class FormReacKinetic
             'build reaction equation
             'scan for reactants
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(4).Value IsNot Nothing AndAlso row.Cells(4).Value.ToString.IsValidDouble Then
-                    If row.Cells(4).Value < 0 And row.Cells(2).Value = True Then
-                        If row.Cells(4).Value = -1 Then
-                            eq += fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
+                If row.Cells(5).Value IsNot Nothing AndAlso row.Cells(5).Value.ToString.IsValidDouble Then
+                    If row.Cells(5).Value < 0 And row.Cells(3).Value = True Then
+                        If row.Cells(5).Value = -1 Then
+                            eq += fc.Options.SelectedComponents(row.Cells(8).Value).Formula & " + "
                         Else
-                            If row.Cells(4).Value = 1 Then
-                                eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            If row.Cells(5).Value = 1 Then
+                                eq += fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                             Else
-                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
+                                eq += Math.Abs(row.Cells(5).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(8).Value).Formula & " + "
                             End If
                         End If
-                        hr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
-                        br += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
-                        gr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
+                        hr += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(8).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight
+                        br += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight
+                        gr += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(8).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight
                     End If
                 Else
-                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(8).Value).Formula & " + "
                 End If
             Next
             If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
             eq += "<--> "
             'scan for products
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(4).Value IsNot Nothing AndAlso row.Cells(4).Value.ToString.IsValidDouble Then
-                    If row.Cells(4).Value > 0 And row.Cells(2).Value = True Then
-                        If row.Cells(4).Value = 1 Then
-                            eq += fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
+                If row.Cells(5).Value IsNot Nothing AndAlso row.Cells(5).Value.ToString.IsValidDouble Then
+                    If row.Cells(5).Value > 0 And row.Cells(3).Value = True Then
+                        If row.Cells(5).Value = 1 Then
+                            eq += fc.Options.SelectedComponents(row.Cells(8).Value).Formula & " + "
                         Else
-                            If row.Cells(4).Value = 1 Then
-                                eq += fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
+                            If row.Cells(5).Value = 1 Then
+                                eq += fc.Options.SelectedComponents(row.Cells(8).Value).Formula & " + "
                             Else
-                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(7).Value).Formula & " + "
+                                eq += Math.Abs(row.Cells(5).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(8).Value).Formula & " + "
                             End If
                         End If
-                        hp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
-                        bp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
-                        gp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(7).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight
+                        hp += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(8).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight
+                        bp += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight
+                        gp += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(8).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight
                     End If
                 Else
-                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                 End If
             Next
             eq = eq.Remove(eq.Length - 2, 2)
@@ -196,9 +196,9 @@ Public Class FormReacKinetic
             Me.tbEquation.Text = eq
 
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(3).Value = True Then
-                    If row.Cells(4).Value IsNot Nothing And row.Cells(4).Value.ToString.IsValidDouble Then
-                        brsc = Math.Abs(Convert.ToDouble(row.Cells(4).Value))
+                If row.Cells(4).Value = True Then
+                    If row.Cells(5).Value IsNot Nothing And row.Cells(5).Value.ToString.IsValidDouble Then
+                        brsc = Math.Abs(Convert.ToDouble(row.Cells(5).Value))
                         Exit For
                     Else
                         brsc = 1.0
@@ -229,8 +229,8 @@ Public Class FormReacKinetic
             'Components, stoichiometry and reaction orders
             rc._Components.Clear()
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(2).Value = True Then
-                    rc._Components.Add(row.Cells(7).Value, New ReactionStoichBase(row.Cells(7).Value, row.Cells(4).Value, row.Cells(3).Value, row.Cells(5).Value, row.Cells(6).Value))
+                If row.Cells(3).Value = True Then
+                    rc._Components.Add(row.Cells(8).Value, New ReactionStoichBase(row.Cells(8).Value, row.Cells(5).Value, row.Cells(4).Value, row.Cells(6).Value, row.Cells(7).Value))
                 End If
             Next
 
@@ -278,8 +278,8 @@ Public Class FormReacKinetic
             rc.VelUnit = Me.cbVelUnit.SelectedItem
 
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(3).Value = True Then
-                    rc.BaseReactant = row.Cells(7).Value
+                If row.Cells(4).Value = True Then
+                    rc.BaseReactant = row.Cells(8).Value
                     Exit For
                 End If
             Next
@@ -333,9 +333,9 @@ Public Class FormReacKinetic
 
         Dim sum As Double = 0.0
         For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-            If row.Cells(2).Value = True AndAlso (row.Cells(4).Value Is Nothing OrElse row.Cells(4).Value.ToString.ToDoubleFromCurrent = 0.0) Then
+            If row.Cells(3).Value = True AndAlso (row.Cells(5).Value Is Nothing OrElse row.Cells(5).Value.ToString.ToDoubleFromCurrent = 0.0) Then
                 If tbStoich.Text.IsValidDouble Then
-                    row.Cells(4).Value = (-tbStoich.Text.ToDoubleFromCurrent / fc.Options.SelectedComponents(row.Cells(7).Value).Molar_Weight).ToString(nf)
+                    row.Cells(5).Value = (-tbStoich.Text.ToDoubleFromCurrent / fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight).ToString(nf)
                     Exit For
                 End If
             End If

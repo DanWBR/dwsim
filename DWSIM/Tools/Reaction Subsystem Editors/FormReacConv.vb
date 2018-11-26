@@ -42,7 +42,7 @@ Public Class FormReacConv
         'populate datagrid
         For Each subs As ConstantProperties In fc.Options.SelectedComponents.Values
             With Me.KryptonDataGridView1
-                .Rows.Add(New Object() {subs.Name, Format(subs.Molar_Weight, nf), False, False, 0, subs.Name})
+                .Rows.Add(New Object() {subs.Name, Format(subs.Molar_Weight, nf), Format(subs.IG_Enthalpy_of_Formation_25C, nf), False, False, 0, subs.Name})
             End With
         Next
 
@@ -55,10 +55,10 @@ Public Class FormReacConv
         End Select
 
         For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-            If rc.Components.ContainsKey(row.Cells(5).Value) Then
-                row.Cells(2).Value = True
-                row.Cells(3).Value = rc.Components(row.Cells(5).Value).IsBaseReactant
-                row.Cells(4).Value = rc.Components(row.Cells(5).Value).StoichCoeff
+            If rc.Components.ContainsKey(row.Cells(6).Value) Then
+                row.Cells(3).Value = True
+                row.Cells(4).Value = rc.Components(row.Cells(6).Value).IsBaseReactant
+                row.Cells(5).Value = rc.Components(row.Cells(6).Value).StoichCoeff
             End If
         Next
 
@@ -112,40 +112,40 @@ Public Class FormReacConv
             'build reaction equation
             'scan for reactants
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(4).Value IsNot Nothing AndAlso row.Cells(4).Value.ToString.IsValidDouble Then
-                    If row.Cells(4).Value < 0 And row.Cells(2).Value = True Then
+                If row.Cells(5).Value IsNot Nothing AndAlso row.Cells(5).Value.ToString.IsValidDouble Then
+                    If row.Cells(5).Value < 0 And row.Cells(3).Value = True Then
                         If row.Cells(4).Value = -1 Then
-                            eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            eq += fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                         Else
-                            If row.Cells(4).Value = 1 Then
-                                eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            If row.Cells(5).Value = 1 Then
+                                eq += fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                             Else
-                                eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                                eq += Math.Abs(row.Cells(5).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                             End If
                         End If
-                        hr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                        br += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                        hr += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(6).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(6).Value).Molar_Weight
+                        br += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(6).Value).Molar_Weight
                     End If
                 Else
-                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                 End If
             Next
             If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
             eq += "--> "
             'scan for products
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(4).Value IsNot Nothing AndAlso row.Cells(4).Value.ToString.IsValidDouble Then
-                    If row.Cells(4).Value > 0 And row.Cells(2).Value = True Then
-                        If row.Cells(4).Value = 1 Then
-                            eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                If row.Cells(5).Value IsNot Nothing AndAlso row.Cells(5).Value.ToString.IsValidDouble Then
+                    If row.Cells(5).Value > 0 And row.Cells(3).Value = True Then
+                        If row.Cells(5).Value = 1 Then
+                            eq += fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                         Else
-                            eq += Math.Abs(row.Cells(4).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                            eq += Math.Abs(row.Cells(5).Value.ToString.ToDoubleFromCurrent) & fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                         End If
-                        hp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                        bp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                        hp += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(6).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(6).Value).Molar_Weight
+                        bp += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(6).Value).Molar_Weight
                     End If
                 Else
-                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                 End If
             Next
             eq = eq.Remove(eq.Length - 2, 2)
@@ -153,9 +153,9 @@ Public Class FormReacConv
             Me.tbEquation.Text = eq
 
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(3).Value = True Then
-                    If row.Cells(4).Value IsNot Nothing And row.Cells(4).Value.ToString.IsValidDouble Then
-                        brsc = Math.Abs(Convert.ToDouble(row.Cells(4).Value))
+                If row.Cells(4).Value = True Then
+                    If row.Cells(5).Value IsNot Nothing And row.Cells(5).Value.ToString.IsValidDouble Then
+                        brsc = Math.Abs(Convert.ToDouble(row.Cells(5).Value))
                         Exit For
                     Else
                         brsc = 1.0
@@ -213,8 +213,8 @@ Public Class FormReacConv
             'Components and stoichiometry
             rc._Components.Clear()
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(2).Value = True Then
-                    rc._Components.Add(row.Cells(5).Value, New ReactionStoichBase(row.Cells(5).Value, row.Cells(4).Value, row.Cells(3).Value, 0, 0))
+                If row.Cells(3).Value = True Then
+                    rc._Components.Add(row.Cells(6).Value, New ReactionStoichBase(row.Cells(6).Value, row.Cells(5).Value, row.Cells(4).Value, 0, 0))
                 End If
             Next
 
@@ -233,8 +233,8 @@ Public Class FormReacConv
             rc.Equation = Me.tbEquation.Text
             rc.StoichBalance = 0
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(3).Value = True Then
-                    rc.BaseReactant = row.Cells(5).Value
+                If row.Cells(4).Value = True Then
+                    rc.BaseReactant = row.Cells(6).Value
                     Exit For
                 End If
             Next
@@ -264,9 +264,9 @@ Public Class FormReacConv
 
         Dim sum As Double = 0.0
         For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-            If row.Cells(2).Value = True AndAlso (row.Cells(4).Value Is Nothing OrElse row.Cells(4).Value.ToString.ToDoubleFromCurrent = 0.0) Then
+            If row.Cells(3).Value = True AndAlso (row.Cells(5).Value Is Nothing OrElse row.Cells(5).Value.ToString.ToDoubleFromCurrent = 0.0) Then
                 If tbStoich.Text.IsValidDouble Then
-                    row.Cells(4).Value = (-tbStoich.Text.ToDoubleFromCurrent / fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight).ToString(nf)
+                    row.Cells(5).Value = (-tbStoich.Text.ToDoubleFromCurrent / fc.Options.SelectedComponents(row.Cells(6).Value).Molar_Weight).ToString(nf)
                     Exit For
                 End If
             End If
