@@ -182,6 +182,7 @@ namespace DWSIM.UI.Desktop.Editors
             var istrs = column.GraphicObject.InputConnectors.Where((x) => x.IsAttached && x.ConnectorName.Contains("Feed")).Select((x2) => x2.AttachedConnector.AttachedFrom.Name).ToList();
             var ostrs = column.GraphicObject.OutputConnectors.Where((x) => x.IsAttached && x.ConnectorName.Contains("Side")).Select((x2) => x2.AttachedConnector.AttachedTo.Name).ToList();
             var dist = column.GraphicObject.OutputConnectors.Where((x) => x.IsAttached && x.ConnectorName.Contains("Distillate")).Select((x2) => x2.AttachedConnector.AttachedTo.Name).ToList();
+            var ov = column.GraphicObject.OutputConnectors.Where((x) => x.IsAttached && x.ConnectorName.Contains("Overhead")).Select((x2) => x2.AttachedConnector.AttachedTo.Name).ToList();
             var bottoms = column.GraphicObject.OutputConnectors.Where((x) => x.IsAttached && x.ConnectorName.Contains("Bottoms")).Select((x2) => x2.AttachedConnector.AttachedTo.Name).ToList();
             var rduty = column.GraphicObject.InputConnectors.Where((x) => x.IsAttached && x.ConnectorName.Contains("Reboiler")).Select((x2) => x2.AttachedConnector.AttachedFrom.Name).ToList();
             var cduty = column.GraphicObject.OutputConnectors.Where((x) => x.IsAttached && x.ConnectorName.Contains("Condenser")).Select((x2) => x2.AttachedConnector.AttachedTo.Name).ToList();
@@ -225,6 +226,19 @@ namespace DWSIM.UI.Desktop.Editors
                     });
                 }
             }
+            foreach (var id in ov)
+            {
+                if (column.MaterialStreams.Values.Where(x => x.StreamID == id).Count() == 0)
+                {
+                    column.MaterialStreams.Add(id, new StreamInformation()
+                    {
+                        StreamID = id,
+                        ID = id,
+                        StreamType = StreamInformation.Type.Material,
+                        StreamBehavior = StreamInformation.Behavior.OverheadVapor
+                    });
+                }
+            }
             foreach (var id in bottoms)
             {
                 if (column.MaterialStreams.Values.Where(x => x.StreamID == id).Count() == 0)
@@ -241,7 +255,7 @@ namespace DWSIM.UI.Desktop.Editors
             List<string> remove = new List<string>();
             foreach (var si in column.MaterialStreams.Values)
             {
-                if (!istrs.Contains(si.StreamID) && !ostrs.Contains(si.StreamID) && !dist.Contains(si.StreamID) && !bottoms.Contains(si.StreamID)) { remove.Add(si.ID); }
+                if (!istrs.Contains(si.StreamID) && !ostrs.Contains(si.StreamID) && !ov.Contains(si.StreamID) && !dist.Contains(si.StreamID) && !bottoms.Contains(si.StreamID)) { remove.Add(si.ID); }
                 if (!column.GetFlowsheet().SimulationObjects.ContainsKey(si.StreamID)) { remove.Add(si.ID); }
             }
             foreach (var id in remove)
@@ -306,6 +320,14 @@ namespace DWSIM.UI.Desktop.Editors
                 else if (si.StreamBehavior == StreamInformation.Behavior.Sidedraw)
                 {
                     s.CreateAndAddDropDownRow(container, "[SIDEDRAW] " + column.GetFlowsheet().SimulationObjects[si.StreamID].GraphicObject.Tag,
+                                         stageNames, stageIDs.IndexOf(si.AssociatedStage), (arg1, arg2) =>
+                                         {
+                                             si.AssociatedStage = stageIDs[arg1.SelectedIndex];
+                                         });
+                }
+                else if (si.StreamBehavior == StreamInformation.Behavior.OverheadVapor)
+                {
+                    s.CreateAndAddDropDownRow(container, "[OVH_VAPOR] " + column.GetFlowsheet().SimulationObjects[si.StreamID].GraphicObject.Tag,
                                          stageNames, stageIDs.IndexOf(si.AssociatedStage), (arg1, arg2) =>
                                          {
                                              si.AssociatedStage = stageIDs[arg1.SelectedIndex];

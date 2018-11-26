@@ -89,10 +89,14 @@ Namespace GraphicObjects.Shapes
                 .Item(1).Position = New Point(X + Width, Y + 0.98 * Height)
                 .Item(0).ConnectorName = "Distillate"
                 .Item(1).ConnectorName = "Bottoms"
-                For i As Integer = 2 To OutCount - 2
+                For i As Integer = 2 To OutCount - 3
                     .Item(i).Position = New Point(X, Y + (i + 1) / OutCount * Height)
                     .Item(i).ConnectorName = "Side Draw #" & (i - 1)
                 Next
+                .Item(9).Position = New Point(X + Width, Y + 0.02 * Height)
+                .Item(9).ConnectorName = "Overhead Vapor"
+                .Item(9).Direction = ConDir.Right
+                .Item(9).Type = ConType.ConOut
                 .Item(10).Position = New Point(X + Width, Y + 0.175 * Height)
                 .Item(10).ConnectorName = "Condenser Duty"
                 .Item(10).Direction = ConDir.Right
@@ -178,7 +182,6 @@ Namespace GraphicObjects.Shapes
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.6 * Height), (X + 0.31 * Width), (Y + 0.6 * Height), gradPen)
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.7 * Height), (X + 0.31 * Width), (Y + 0.7 * Height), gradPen)
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.8 * Height), (X + 0.31 * Width), (Y + 0.8 * Height), gradPen)
-
 
             End If
 

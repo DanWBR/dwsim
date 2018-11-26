@@ -33,6 +33,7 @@ Public Class EditingForm_Column_Connections_New
         Dim istrs = rc.GraphicObject.InputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Feed"))).Select(Function(x2) x2.AttachedConnector.AttachedFrom.Name).ToList
         Dim ostrs = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Side"))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
         Dim dist = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso (x.ConnectorName.Contains("Distillate") Or x.ConnectorName.Contains("Top")))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
+        Dim ov = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso (x.ConnectorName.Contains("Overhead")))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
         Dim bottoms = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Bottoms"))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
         Dim rduty = rc.GraphicObject.InputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Reboiler"))).Select(Function(x2) x2.AttachedConnector.AttachedFrom.Name).ToList
         Dim cduty = rc.GraphicObject.OutputConnectors.Where(Function(x) (x.IsAttached AndAlso x.ConnectorName.Contains("Condenser"))).Select(Function(x2) x2.AttachedConnector.AttachedTo.Name).ToList
@@ -56,6 +57,17 @@ Public Class EditingForm_Column_Connections_New
                         .ID = id,
                         .StreamType = StreamInformation.Type.Material,
                         .StreamBehavior = StreamInformation.Behavior.Sidedraw
+                    })
+            End If
+        Next
+        For Each id In ov
+            If (rc.MaterialStreams.Values.Where(Function(x) (x.StreamID = id)).Count = 0) Then
+                rc.MaterialStreams.Add(id, New StreamInformation With
+                    {
+                        .StreamID = id,
+                        .ID = id,
+                        .StreamType = StreamInformation.Type.Material,
+                        .StreamBehavior = StreamInformation.Behavior.OverheadVapor
                     })
             End If
         Next
@@ -95,9 +107,10 @@ Public Class EditingForm_Column_Connections_New
         Dim remove As List(Of String) = New List(Of String)
         For Each si In rc.MaterialStreams
             If (Not istrs.Contains(si.Value.StreamID) _
+                        AndAlso (Not ov.Contains(si.Value.StreamID) _
                         AndAlso (Not ostrs.Contains(si.Value.StreamID) _
                         AndAlso (Not dist.Contains(si.Value.StreamID) _
-                        AndAlso Not bottoms.Contains(si.Value.StreamID)))) Then
+                        AndAlso Not bottoms.Contains(si.Value.StreamID))))) Then
                 If si.Value.ID <> "" Then remove.Add(si.Value.ID) Else remove.Add(si.Key)
             End If
             If Not rc.GetFlowsheet.SimulationObjects.ContainsKey(si.Value.StreamID) Then
@@ -215,6 +228,9 @@ Public Class EditingForm_Column_Connections_New
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.Distillate) Then
                 If stage = "" Then stage = stageNames(1)
                 gridAssociations.Rows.Add(New Object() {si.ID, "Distillate", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
+            ElseIf (si.StreamBehavior = StreamInformation.Behavior.OverheadVapor) Then
+                If stage = "" Then stage = stageNames(1)
+                gridAssociations.Rows.Add(New Object() {si.ID, "Overhead Vapor", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.OverheadVapor) Then
                 If stage = "" Then stage = stageNames(1)
                 gridAssociations.Rows.Add(New Object() {si.ID, "Top Product", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
