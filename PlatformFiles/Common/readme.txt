@@ -62,6 +62,13 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
 
+Version 5.6 Update 1
+
+- [FIX] Fixed bugs in Gibbs and Equilibrium reactors
+- [FIX] Fixed Energy Recycle connection
+- [FIX] Fixed some drawing issues
+- [FIX] Minor bug fixes and enhancements
+
 Version 5.6
 
 - [NEW] Unified Process Flowsheet Drawing interface
