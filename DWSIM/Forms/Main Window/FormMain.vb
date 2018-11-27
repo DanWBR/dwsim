@@ -949,7 +949,7 @@ Public Class FormMain
                         DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = form
                     ElseIf TypeOf obj Is OxyPlotGraphic Then
                         DirectCast(obj, OxyPlotGraphic).Flowsheet = form
-                    ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CapeOpenGraphic Then
+                    ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
                         obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
                         obj.PositionConnectors()
                     Else
@@ -993,7 +993,7 @@ Public Class FormMain
                             Next
                         End If
                     End If
-                    End If
+                End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
             End Try
@@ -1389,6 +1389,15 @@ Public Class FormMain
             SharedClasses.Utility.UpdateElementForNewUI(xel1)
         Next
 
+        'check saved from Classic UI
+
+        Dim savedfromclui As Boolean = True
+
+        Try
+            savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
+        Catch ex As Exception
+        End Try
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
         Dim form As FormFlowsheet = New FormFlowsheet()
@@ -1740,24 +1749,23 @@ Public Class FormMain
             form.FormProps.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
-                'If Not Settings.IsRunningOnMono Then
-                Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
+                If savedfromclui Then
+                    Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
                     Try
                         Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
                         File.WriteAllText(myfile, pnl)
                         form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
                     Catch ex As Exception
-                        'excs.Add(New Exception("Error Restoring Window Layout", ex))
                     Finally
                         File.Delete(myfile)
                     End Try
-                'Else
-                '    Dim myfile As String = IO.Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
-                '    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
-                'End If
+                Else
+                    Dim myfile As String = IO.Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
+                    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
+                End If
             End If
 
-        Try
+            Try
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)

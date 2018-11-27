@@ -44,7 +44,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddStringEditorRow2("Name", "", rx.Name, (sender, e) => { rx.Name = sender.Text; });
 
-            container.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Stoich. Coeff. / Direct Order Exponent / Reverse Order Exponent)");
+            container.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff. / Direct Order Exponent / Reverse Order Exponent)");
 
             var compcontainer = new DynamicLayout();
             //compcontainer.BackgroundColor = Colors.White;
@@ -136,7 +136,9 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 };
 
-                compcontainer.Add(new TableRow(chk, null, sc, txtdo, txtro));
+                var hf = new TextBox() { Width = (int)(sf * 100), Text = comp.IG_Enthalpy_of_Formation_25C.ToString("N2") };
+
+                compcontainer.Add(new TableRow(chk, hf, null, sc, txtdo, txtro));
             }
 
             container.CreateAndAddControlRow(compcontainer);

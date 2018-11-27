@@ -27,6 +27,7 @@ Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.Thermodynamics
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
+Imports DotNumerics.Optimization
 
 Namespace Reactors
 
@@ -74,6 +75,8 @@ Namespace Reactors
         Public Property DerivativePerturbation As Double = 0.0001
 
         Public Property AlternateBoundsInitializer As Boolean = False
+
+        Private NoPenVal As Boolean = False
 
 #End Region
 
@@ -197,7 +200,7 @@ Namespace Reactors
                 Next
             Next
 
-            Dim pen_val As Double = ReturnPenaltyValue()
+            Dim pen_val As Double = If(NoPenVal, 0.0, ReturnPenaltyValue())
 
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
@@ -738,6 +741,7 @@ Namespace Reactors
 
                 x = REx
                 niter = 0
+                NoPenVal = False
                 Do
 
                     IObj2?.SetCurrent
@@ -807,20 +811,47 @@ Namespace Reactors
 
                 If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
+                IObj2?.SetCurrent
+
+                _IObj = IObj2
+
                 If ReturnPenaltyValue() > 0 Then
 
                     'recalculate extents to fix mass balance
 
-                    Throw New Exception("Invalid solution, mass balance residue > 0.")
+                    Dim ref(r), dni(r) As Double
+                    Dim vars As New List(Of OptSimplexBoundVariable)
+
+                    i = 0
+                    Do
+                        vars.Add(New OptSimplexBoundVariable(REx(i), -N0.Values.Sum, N0.Values.Sum))
+                        i += 1
+                    Loop Until i = r + 1
+
+                    Dim splex As New Simplex()
+
+                    splex.MaxFunEvaluations = 100000
+                    splex.Tolerance = 1.0E-20
+
+                    NoPenVal = True
+
+                    ref = splex.ComputeMin(Function(xi)
+
+                                               Return FunctionValue2N(xi).AbsSqrSumY
+
+                                           End Function, vars.ToArray)
+
+                    REx = ref
+
+                    If ReturnPenaltyValue() > 0 Then
+
+                        Throw New Exception("Invalid solution: mass balance residue > 0.")
+
+                    End If
 
                 End If
 
-
                 'reevaluate function
-
-                IObj2?.SetCurrent
-
-                _IObj = IObj2
 
                 tms.Phases(0).Properties.temperature = T
 

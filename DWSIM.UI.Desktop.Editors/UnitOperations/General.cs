@@ -1341,6 +1341,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
                     s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
+                    s.CreateAndAddDescriptionRow(container, "Parameters which have the highest impact on convergence: Reaction Extents initializer, Alternate Initialization and Numerical Derivative Perturbation.");
                     s.CreateAndAddCheckBoxRow(container, "Initialize Reaction Extents with Previous Values", reactor2.UsePreviousReactionExtents, (sender, e) => reactor2.UsePreviousReactionExtents = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container, "This will use the reaction extents from a previous solution to initialize the next calculation.");
                     s.CreateAndAddCheckBoxRow(container, "Alternate Initialization", reactor2.AlternateBoundsInitializer, (sender, e) => reactor2.AlternateBoundsInitializer = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
@@ -1537,6 +1538,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container, "Enter the initial estimate for the final amount of compound mole flows, one line for each compound");
                     s.CreateAndAddLabelRow(container, "Damping Factor");
                     s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
+                    s.CreateAndAddDescriptionRow(container, "Parameters which have the highest impact on convergence: Damping Factor (Enable, Minimum Value = 1E-20),  Internal Convergence Loop Tolerance and Numerical Derivative Perturbation.");
                     s.CreateAndAddCheckBoxRow(container, "Use Damping Factor", reactor2g.EnableDamping, (sender, e) => reactor2g.EnableDamping = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Minimum Value", reactor2g.DampingLowerLimit, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DampingLowerLimit = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Maximum Value", reactor2g.DampingUpperLimit, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DampingUpperLimit = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
