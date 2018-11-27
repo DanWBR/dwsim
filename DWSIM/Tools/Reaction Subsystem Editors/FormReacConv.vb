@@ -94,10 +94,10 @@ Public Class FormReacConv
 
     Private Sub KryptonDataGridView1_CellValidated(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellValueChanged
 
-        If e.ColumnIndex = 3 Then
+        If e.ColumnIndex = 4 Then
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(3).Value = True Then
-                    rc.BaseReactant = row.Cells(5).Value
+                If row.Cells(4).Value = True Then
+                    rc.BaseReactant = row.Cells(6).Value
                     Me.tbCompBase.Text = rc.BaseReactant
                     Exit For
                 End If
@@ -114,7 +114,7 @@ Public Class FormReacConv
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
                 If row.Cells(5).Value IsNot Nothing AndAlso row.Cells(5).Value.ToString.IsValidDouble Then
                     If row.Cells(5).Value < 0 And row.Cells(3).Value = True Then
-                        If row.Cells(4).Value = -1 Then
+                        If row.Cells(5).Value = -1 Then
                             eq += fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
                         Else
                             If row.Cells(5).Value = 1 Then
