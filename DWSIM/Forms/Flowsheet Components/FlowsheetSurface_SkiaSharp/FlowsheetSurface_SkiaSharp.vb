@@ -2796,6 +2796,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
         FlowsheetDesignSurface.FlowsheetSurface.Zoom -= 0.05
+        If FlowsheetDesignSurface.FlowsheetSurface.Zoom < 0.05 Then FlowsheetDesignSurface.FlowsheetSurface.Zoom = 0.05
         Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.FlowsheetSurface.Zoom, "#%")
         FlowsheetDesignSurface.Invalidate()
     End Sub
