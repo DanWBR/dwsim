@@ -73,8 +73,9 @@ Public Class FlowsheetSurfaceControl
 
     Private Sub FlowsheetSurfaceControl_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
         FlowsheetSurface.Zoom += e.Delta / 4 / 100.0
+        If FlowsheetSurface.Zoom < 0.05 Then FlowsheetSurface.Zoom = 0.05
         FlowsheetObject.FormSurface.TSTBZoom.Text = FlowsheetSurface.Zoom.ToString("###%")
-        Invalidate()
+            Invalidate()
         Invalidate()
     End Sub
 

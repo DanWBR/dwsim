@@ -762,6 +762,7 @@ Public Class DCCharacterizationWizard
 
                            Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
                            myCOMS.GraphicObject = myMStr
+                           myMStr.Owner = myCOMS
                            form.AddComponentsRows(myCOMS)
                            If form.Options.PropertyPackages.Count > 0 Then
                                myCOMS.PropertyPackage = form.Options.SelectedPropertyPackage

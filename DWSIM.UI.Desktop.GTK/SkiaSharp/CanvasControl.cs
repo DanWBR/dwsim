@@ -116,6 +116,7 @@ namespace DWSIM.UI.Desktop.GTK
             {
                 fsurface.Zoom += 5 / 100f;
             }
+            if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
             this.QueueDraw();
         }
 

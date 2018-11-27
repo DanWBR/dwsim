@@ -758,6 +758,7 @@ Public Class FormPCBulk
                            'OBJETO DWSIM
                            Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
                            myCOMS.GraphicObject = myMStr
+                           myMStr.Owner = myCOMS
                            frm.AddComponentsRows(myCOMS)
                            If frm.Options.PropertyPackages.Count > 0 Then
                                myCOMS.PropertyPackage = frm.Options.SelectedPropertyPackage

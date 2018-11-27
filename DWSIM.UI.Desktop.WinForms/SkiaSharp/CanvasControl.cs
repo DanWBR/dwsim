@@ -164,6 +164,7 @@ namespace DWSIM.UI.Desktop.WinForms
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             fsurface.Zoom += e.Delta / 4 / 100.0f;
+            if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
             this.Invalidate();
         }
 

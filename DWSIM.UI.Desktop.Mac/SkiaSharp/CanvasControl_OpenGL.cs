@@ -247,6 +247,7 @@ namespace DWSIM.UI.Desktop.Mac
         {
             var scroll = theEvent.ScrollingDeltaX;
             fsurface.Zoom += (float)scroll / 100.0f;
+            if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
             this.NeedsDisplay = true;
         }
 
