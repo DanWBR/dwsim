@@ -112,12 +112,18 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 20</value>
   </data>
@@ -127,17 +133,20 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Configure</value>
   </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Unit</value>
+  <data name="KryptonButton1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 424</value>
   </data>
   <data name="KryptonButton1.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="KryptonButton2.Text" xml:space="preserve">
-    <value>Create</value>
+  <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 424</value>
+  </data>
+  <data name="btnAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 25</value>
+  </data>
+  <data name="btnAdd.Text" xml:space="preserve">
+    <value>Create and Add</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Create Custom System of Units</value>

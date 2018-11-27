@@ -116,7 +116,7 @@ namespace DWSIM.UI.Forms.Forms
 
             var container1 = new DynamicLayout() { Padding = new Padding(10) };
 
-            container1.CreateAndAddTwoLabelsRow2("Main Developer:", "Daniel Medeiros (dwsim@inforside.com.br)");
+            container1.CreateAndAddTwoLabelsRow2("Developer/Mantainer:", "Daniel Medeiros (dwsim@inforside.com.br)");
             container1.CreateAndAddTwoLabelsRow2("Contributors:", "Gregor Reichert, Gustavo León and others");
             container1.CreateAndAddTwoLabelsRow2("Splash Screen Design:", "Wendel Marcus (www.behance.net/wendelmarcus)");
             container1.CreateAndAddTwoLabelsRow2("OS Info:", osinfo);

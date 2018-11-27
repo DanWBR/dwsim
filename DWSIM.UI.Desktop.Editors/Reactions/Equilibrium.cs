@@ -89,9 +89,9 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 };
 
-                var hf = new TextBox() { Width = (int)(sf * 100), Text = comp.IG_Enthalpy_of_Formation_25C.ToString("N2") };
+                var hf = new TextBox() { Enabled = false, Width = (int)(sf * 100), Text = comp.IG_Enthalpy_of_Formation_25C.ToString("N2") };
 
-                compcontainer.Add(new TableRow(chk, hf, null, sc));
+                compcontainer.Add(new TableRow(chk, null, hf, sc));
             }
 
             container.CreateAndAddControlRow(compcontainer);

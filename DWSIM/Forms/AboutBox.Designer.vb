@@ -32,7 +32,6 @@ Partial Class AboutBox
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.LabelLicense = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -83,6 +82,7 @@ Partial Class AboutBox
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.AssemblyNamesComboBox = New System.Windows.Forms.ComboBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -144,12 +144,6 @@ Partial Class AboutBox
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Name = "Label5"
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Name = "Label6"
         '
         'LabelLicense
         '
@@ -225,6 +219,7 @@ Partial Class AboutBox
         'FaTabStripItem1
         '
         Me.FaTabStripItem1.CanClose = False
+        Me.FaTabStripItem1.Controls.Add(Me.Label6)
         Me.FaTabStripItem1.Controls.Add(Me.lblGPGPUinfo)
         Me.FaTabStripItem1.Controls.Add(Me.Label14)
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpusimd)
@@ -242,7 +237,6 @@ Partial Class AboutBox
         Me.FaTabStripItem1.Controls.Add(Me.Label3)
         Me.FaTabStripItem1.Controls.Add(Me.Label5)
         Me.FaTabStripItem1.Controls.Add(Me.LblCLRInfo)
-        Me.FaTabStripItem1.Controls.Add(Me.Label6)
         Me.FaTabStripItem1.Controls.Add(Me.Label4)
         Me.FaTabStripItem1.Controls.Add(Me.LabelLicense)
         Me.FaTabStripItem1.Controls.Add(Me.LblOSInfo)
@@ -522,6 +516,12 @@ Partial Class AboutBox
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Name = "Label6"
+        '
         'AboutBox
         '
         resources.ApplyResources(Me, "$this")
@@ -563,7 +563,6 @@ Partial Class AboutBox
     Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Public WithEvents Label5 As System.Windows.Forms.Label
-    Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents LabelLicense As System.Windows.Forms.Label
     Public WithEvents TextBox1 As System.Windows.Forms.TextBox
     Public WithEvents Label7 As System.Windows.Forms.Label
@@ -614,4 +613,5 @@ Partial Class AboutBox
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewLinkColumn
+    Public WithEvents Label6 As Label
 End Class

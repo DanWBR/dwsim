@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.6 Update 1
+Version 5.6 Update 2
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.6 Update 2
+
+- [FIX] Fixed bugs in Gibbs and Equilibrium reactors
+- [FIX] Fixed Oveerhead Vapor connection (Rig Dist Column)
+- [FIX] Minor bug fixes and enhancements
 
 Version 5.6 Update 1
 
