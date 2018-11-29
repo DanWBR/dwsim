@@ -215,7 +215,7 @@ namespace DWSIM.UI
                         foreach (var item in t.Result)
                         {
                             fslist.Add(item.DownloadLink, item);
-                            FOSSEEList.Items.Add(new ListItem { Text = item.Title, Key = item.DownloadLink });
+                            FOSSEEList.Items.Add(new ListItem { Text = item.DisplayName, Key = item.DownloadLink });
                         }
                     }
                 });

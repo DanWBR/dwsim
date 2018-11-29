@@ -15,6 +15,7 @@ Public Class FOSSEEFlowsheet
     Public Property DWSIMVersion As String = ""
     Public Property Reference As String = ""
     Public Property DownloadLink As String = ""
+    Public Property DisplayName As String = ""
 
 End Class
 
@@ -49,7 +50,8 @@ Public Class FOSSEEFlowsheets
 
         Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
 
-        Dim list As New Concurrent.ConcurrentBag(Of FOSSEEFlowsheet)
+        Dim list As New List(Of FOSSEEFlowsheet)
+        Dim i As Integer = 1
         For Each r In rows
 
             Dim fs As New FOSSEEFlowsheet
@@ -61,12 +63,13 @@ Public Class FOSSEEFlowsheets
                 .ProposerName = r.ChildNodes(2).ChildNodes(0).InnerText
                 .Title = r.ChildNodes(1).ChildNodes(0).InnerText
                 .DownloadLink = fs.Address.Replace("dwsim-flowsheet-run", "full-download/project")
+                .DisplayName = i.ToString("000") + ". " + .Title
             End With
             list.Add(fs)
-
+            i += 1
         Next
 
-        Return list.Where(Function(x) Not x.ProposerName.Contains("Daniel Medeiros")).OrderBy(Of String)(Function(y) y.Title).ToList
+        Return list.Where(Function(x) Not x.ProposerName.Contains("Daniel Medeiros")).ToList
 
     End Function
 

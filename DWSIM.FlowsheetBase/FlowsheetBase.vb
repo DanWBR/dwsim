@@ -1186,6 +1186,14 @@ Imports System.Dynamic
                                 phase.Compounds(c.Name).ConstantProperties = c
                             Next
                         Next
+                    ElseIf TypeOf obj Is CapeOpenUO Then
+                        If DirectCast(obj, CapeOpenUO)._seluo.Name.ToLower.Contains("chemsep") Then
+                            DirectCast(gobj, CAPEOPENGraphic).ChemSep = True
+                            If gobj.Height = 40 And gobj.Width = 40 Then
+                                gobj.Width = 144
+                                gobj.Height = 180
+                            End If
+                        End If
                     End If
                 End If
                 objlist.Add(obj)

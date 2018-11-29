@@ -1866,20 +1866,9 @@ Public Class FormMain
                                                End Sub)
         End If
 
-        'check saved from Classic UI
-
-        Dim savedfromclui As Boolean = False
-
-        Try
-            savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
-        Catch ex As Exception
-        End Try
-
-        If Not savedfromclui Then
-            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                                   SharedClasses.Utility.UpdateElementFromNewUI(xel1)
-                                               End Sub)
-        End If
+        For Each xel1 In xdoc.Descendants
+            SharedClasses.Utility.UpdateElementForNewUI(xel1)
+        Next
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
@@ -2049,6 +2038,14 @@ Public Class FormMain
                                 phase.Compounds(c.Name).ConstantProperties = c
                             Next
                         Next
+                    ElseIf TypeOf obj Is CapeOpenUO Then
+                        If DirectCast(obj, CapeOpenUO)._seluo.Name.ToLower.Contains("chemsep") Then
+                            DirectCast(gobj, CAPEOPENGraphic).ChemSep = True
+                            If gobj.Height = 40 And gobj.Width = 40 Then
+                                gobj.Width = 144
+                                gobj.Height = 180
+                            End If
+                        End If
                     End If
                 End If
                 objlist.Add(obj)

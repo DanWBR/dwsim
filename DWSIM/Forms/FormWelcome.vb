@@ -93,7 +93,7 @@ Public Class FormWelcome
                                                                                    Else
                                                                                        For Each item As FOSSEEFlowsheet In t.Result
                                                                                            fslist.Add(item.DownloadLink, item)
-                                                                                           FOSSEEList.Items.Add(New ListViewItem(item.Title, 1) With {.Tag = item.DownloadLink})
+                                                                                           FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 1) With {.Tag = item.DownloadLink})
                                                                                        Next
                                                                                    End If
                                                                                End Sub)

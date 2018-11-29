@@ -1,7 +1,3 @@
-Version 5.6 Update 3
+Version 5.6 Update 4
 
-- [FIX] Fixed Flowsheet Zoom
-- [FIX] Fixed Petroleum Characterization
-- [FIX] Fixed bugs in Gibbs and Equilibrium reactors
-- [FIX] Fixed Oveerhead Vapor connection (Rig Dist Column)
-- [FIX] Minor bug fixes and enhancements
+- [FIX] Fixed loading of FOSSEE Flowsheets
