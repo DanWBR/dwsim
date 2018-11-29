@@ -127,14 +127,21 @@ Public Class XMLSerializer
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is SkiaSharp.SKColor Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
-                                    Try
-                                        Dim val As SkiaSharp.SKColor = SkiaSharp.SKColor.Parse(xel.Value)
+                                    Dim val As SkiaSharp.SKColor = SkiaSharp.SKColors.Black
+                                    If SkiaSharp.SKColor.TryParse(xel.Value, val) Then
+                                        val = SkiaSharp.SKColor.Parse(xel.Value)
+                                    Else
+                                        Dim val2 As Color
+                                        Try
+                                            val2 = Color.FromName(xel.Value)
+                                            val = New SkiaSharp.SKColor(val2.R, val2.G, val2.B, val2.A)
+                                        Catch ex As Exception
+                                        End Try
                                         obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
-                                    Catch ex As Exception
-                                    End Try
+                                    End If
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As ArrayList = StringToArray(xel.Value, ci)
                                 If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Byte Then
@@ -232,11 +239,20 @@ Public Class XMLSerializer
                             obj.GetType.GetField(prop.Name).SetValue(obj, val)
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is SkiaSharp.SKColor Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
-                            Try
-                                Dim val As SkiaSharp.SKColor = SkiaSharp.SKColor.Parse(xel.Value)
-                                obj.GetType.GetField(prop.Name).SetValue(obj, val)
-                            Catch ex As Exception
-                            End Try
+                            If Not xel Is Nothing Then
+                                Dim val As SkiaSharp.SKColor = SkiaSharp.SKColors.Black
+                                If SkiaSharp.SKColor.TryParse(xel.Value, val) Then
+                                    val = SkiaSharp.SKColor.Parse(xel.Value)
+                                Else
+                                    Dim val2 As Color
+                                    Try
+                                        val2 = Color.FromName(xel.Value)
+                                        val = New SkiaSharp.SKColor(val2.R, val2.G, val2.B, val2.A)
+                                    Catch ex As Exception
+                                    End Try
+                                    obj.GetType.GetField(prop.Name).SetValue(obj, val)
+                                End If
+                            End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ArrayList Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             Dim val As ArrayList = StringToArray(xel.Value, ci)
