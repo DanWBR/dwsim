@@ -7,22 +7,36 @@ Public Class SimulationObjectsPanel
 
     Public Flowsheet As Interfaces.IFlowsheet
 
-    Public ObjectList As New List(Of Interfaces.ISimulationObject)
+    'Public ObjectList As New List(Of Interfaces.ISimulationObject)
 
     Private Sub Simulation_Objects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
-        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
-        Dim availableTypes As New List(Of Type)()
-
-        availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-        availableTypes.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
         Dim add As Boolean = True
 
         Dim litems As New List(Of ListItem)
 
-        For Each item In availableTypes
+        'add chemsep model
+
+        Dim csmodel = FormMain.aTypeList.Where(Function(x) x.FullName.ToLower.Contains("distillationcolumn")).SingleOrDefault
+        Dim comodel = FormMain.aTypeList.Where(Function(x) x.FullName.ToLower.Contains("capeopenuo")).SingleOrDefault
+        Dim csobj = DirectCast(Activator.CreateInstance(csmodel), Interfaces.ISimulationObject)
+        Dim coobj = DirectCast(Activator.CreateInstance(comodel), Interfaces.ISimulationObject)
+        If Not Flowsheet.MobileCompatibilityMode Then
+            Dim li As New ListItem
+            li.lblName.Text = "ChemSep Column"
+            li.ToolTip1.SetToolTip(li.lblName, "ChemSep Rigorous Separation Column (CAPE-OPEN)")
+            li.Image.Image = csobj.GetIconBitmap
+            li.ToolTip1.SetToolTip(li.Image, "ChemSep Rigorous Separation Column (CAPE-OPEN)")
+            li.ObjectTypeInfo = coobj.GetType
+            li.Tag = csobj.ObjectClass
+            Me.PanelColumns.Controls.Add(li)
+            csobj = Nothing
+            coobj = Nothing
+        End If
+
+        'add other models
+
+        For Each item In FormMain.aTypeList
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                 If Not Flowsheet.MobileCompatibilityMode Then
@@ -31,7 +45,6 @@ Public Class SimulationObjectsPanel
                     add = obj.MobileCompatible
                 End If
                 If add Then
-                    ObjectList.Add(obj)
                     obj.SetFlowsheet(Flowsheet)
                     Dim li As New ListItem
                     li.lblName.Text = obj.GetDisplayName

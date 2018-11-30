@@ -20,7 +20,7 @@
     End Sub
 
     Private Sub ListItem_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown, lblName.MouseDown, Image.MouseDown
-        Me.DoDragDrop(ObjectTypeInfo, DragDropEffects.All)
+        Me.DoDragDrop(New Object() {ObjectTypeInfo, Tag}, DragDropEffects.All)
     End Sub
 
     Private Sub ListItem_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp, lblName.MouseUp, Image.MouseUp

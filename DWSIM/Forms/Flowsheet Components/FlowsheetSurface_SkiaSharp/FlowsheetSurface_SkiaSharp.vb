@@ -1,13 +1,7 @@
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
-Imports System.Collections.Generic
-Imports System.ComponentModel
 Imports WeifenLuo.WinFormsUI.Docking
-
-Imports DWSIM.FlowsheetSolver
-Imports System.Drawing.Drawing2D
 Imports System.Linq
 Imports System.Threading.Tasks
-Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations
 Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
@@ -1505,7 +1499,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Call Me.Flowsheet.DeleteSelectedObject(sender, e, Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject)
     End Sub
 
-    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "") As String
+    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, chemsep As Boolean, Optional ByVal tag As String = "", Optional ByVal id As String = "") As String
 
         Flowsheet = My.Application.ActiveSimulation
 
@@ -2148,7 +2142,12 @@ Public Class FlowsheetSurface_SkiaSharp
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCUO)
                 'OBJETO DWSIM
-                Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj)
+                If chemsep Then
+                    DirectCast(gObj, CAPEOPENGraphic).ChemSep = True
+                    gObj.Width = 144
+                    gObj.Height = 180
+                End If
+                Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj, chemsep)
                 myCOCUO.GraphicObject = myCUO
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCUO.Name, myCOCUO)
 
@@ -2182,19 +2181,13 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Function
 
-    Private Sub FlowsheetDesignSurface_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
-        Dim i As Integer
-        For i = 0 To e.Data.GetFormats().Length - 1
-            Dim format = e.Data.GetFormats()(i)
-            If format.Equals("System.RuntimeType") Or format.Equals("System.MonoType") Then
-                e.Effect = DragDropEffects.All
-            End If
-        Next
-    End Sub
-
-    Sub AddObject(objname As String, x As Integer, y As Integer)
+    Sub AddObject(objname As String, x As Integer, y As Integer, Optional ByVal cl As Interfaces.Enums.SimulationObjectClass = SimulationObjectClass.Other)
 
         Dim tobj As ObjectType = ObjectType.Nenhum
+
+        Dim chemsep As Boolean = False
+
+        If objname = "CapeOpenUO" And cl = SimulationObjectClass.Columns Then chemsep = True
 
         Select Case objname
             Case "Adjust"
@@ -2271,7 +2264,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 tobj = ObjectType.FlowsheetUO
         End Select
 
-        AddObjectToSurface(tobj, x, y)
+        AddObjectToSurface(tobj, x, y, chemsep)
 
     End Sub
 
@@ -3011,16 +3004,23 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub FlowsheetDesignSurface_DragDrop(sender As Object, e As DragEventArgs) Handles FlowsheetDesignSurface.DragDrop
+
         If e.Effect = DragDropEffects.All Then
 
-            Dim obj As Type = Nothing
-            obj = e.Data.GetData("System.RuntimeType")
+            Dim obj As Object() = Nothing
+            obj = e.Data.GetData("System.Object[]")
 
-            Console.WriteLine(obj.Name)
+            Dim t As Type = Nothing
+            Dim c As Interfaces.Enums.SimulationObjectClass
+
+            t = obj(0)
+            c = obj(1)
+
+            Console.WriteLine(t.Name)
 
             Dim pt = FlowsheetDesignSurface.PointToClient(New Point(e.X, e.Y))
 
-            Flowsheet.FormSurface.AddObject(obj.Name, pt.X / FlowsheetDesignSurface.FlowsheetSurface.Zoom, pt.Y / FlowsheetDesignSurface.FlowsheetSurface.Zoom)
+            Flowsheet.FormSurface.AddObject(t.Name, pt.X / FlowsheetDesignSurface.FlowsheetSurface.Zoom, pt.Y / FlowsheetDesignSurface.FlowsheetSurface.Zoom, c)
 
         End If
     End Sub

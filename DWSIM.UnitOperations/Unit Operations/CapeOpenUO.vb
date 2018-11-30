@@ -92,7 +92,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Sub New(ByVal name As String, ByVal description As String, ByVal gobj As IGraphicObject)
+        Public Sub New(ByVal name As String, ByVal description As String, ByVal gobj As IGraphicObject, Optional ByVal chemsep As Boolean = False)
 
             Me.New()
 
@@ -103,20 +103,36 @@ Namespace UnitOperations
 
             If Type.GetType("Mono.Runtime") Is Nothing Then
 
-                ShowForm()
+                If Not chemsep Then
 
-                If Not _seluo Is Nothing Then
-                    Try
-                        Dim t As Type = Type.GetTypeFromProgID(_seluo.TypeName)
-                        _couo = Activator.CreateInstance(t)
-                        InitNew()
-                        Init()
-                        GetPorts()
-                        GetParams()
-                        CreateConnectors()
-                    Catch ex As Exception
-                        Me.FlowSheet.ShowMessage("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, IFlowsheet.MessageType.GeneralError)
-                    End Try
+                    ShowForm()
+                    Instantiate(False)
+
+                Else
+
+                    Dim frmwait As New FormLS
+
+                    frmwait.Text = "Add ChemSep Column"
+                    frmwait.Label1.Text = "Scanning Registry for ChemSep's Location..."
+                    frmwait.StartPosition = FormStartPosition.CenterScreen
+                    frmwait.Opacity = 1.0#
+
+                    Application.DoEvents()
+
+                    frmwait.Show()
+
+                    Task.Factory.StartNew(Sub()
+                                              Dim colist = Form_CapeOpenSelector.SearchCOUOS(True)
+                                              Dim cs = colist.Where(Function(x) x.Name.ToLower.Contains("chemsep")).SingleOrDefault
+                                              If Not cs Is Nothing Then
+                                                  _seluo = cs
+                                              Else
+                                                  Me.FlowSheet.ShowMessage("Error creating ChemSep column: ChemSep is not installed or cannot be accessed by DWSIM.", IFlowsheet.MessageType.GeneralError)
+                                              End If
+                                          End Sub).ContinueWith(Sub()
+                                                                    frmwait.UIThreadInvoke(Sub() frmwait.Close())
+                                                                    Instantiate(True)
+                                                                End Sub)
                 End If
 
             Else
@@ -125,8 +141,23 @@ Namespace UnitOperations
 
             End If
 
+        End Sub
 
-
+        Private Sub Instantiate(chemsep As Boolean)
+            If Not _seluo Is Nothing Then
+                Try
+                    Dim t As Type = Type.GetTypeFromProgID(_seluo.TypeName)
+                    _couo = Activator.CreateInstance(t)
+                    InitNew()
+                    Init()
+                    GetPorts()
+                    GetParams()
+                    CreateConnectors()
+                    If chemsep Then Edit()
+                Catch ex As Exception
+                    Me.FlowSheet.ShowMessage("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, IFlowsheet.MessageType.GeneralError)
+                End Try
+            End If
         End Sub
 
         Public Overrides Function CloneXML() As Object

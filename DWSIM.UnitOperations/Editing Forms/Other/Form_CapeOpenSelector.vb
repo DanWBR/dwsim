@@ -42,9 +42,9 @@ Public Class Form_CapeOpenSelector
 
     End Sub
 
+    Shared Function SearchCOUOS(ByVal chemseponly As Boolean) As List(Of UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
 
-
-    Sub SearchCOUOS()
+        Dim clist As New List(Of UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
 
         Dim keys As String() = My.Computer.Registry.ClassesRoot.OpenSubKey("CLSID", False).GetSubKeyNames()
 
@@ -75,7 +75,10 @@ Public Class Form_CapeOpenSelector
                                     .Location = mykey.OpenSubKey("LocalServer32").GetValue("")
                                 End Try
                             End With
-                            _couos.Add(myuo)
+                            clist.Add(myuo)
+                            If chemseponly And myuo.Name.ToLower.Contains("chemsep") Then
+                                Return clist
+                            End If
                         End If
                     Next
                 End If
@@ -83,9 +86,9 @@ Public Class Form_CapeOpenSelector
             mykey.Close()
         Next
 
-        _couos = _couos.OrderBy(Function(x) x.Name).ToList()
+        Return clist.OrderBy(Function(x) x.Name).ToList()
 
-    End Sub
+    End Function
 
     Private Sub ListBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox1.SelectedIndexChanged
         With Me._couos(ListBox1.SelectedIndex)
@@ -109,7 +112,7 @@ Public Class Form_CapeOpenSelector
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        SearchCOUOS()
+        _couos = SearchCOUOS(False)
     End Sub
 
 End Class
