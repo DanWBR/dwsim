@@ -1,3 +1,6 @@
-Version 5.6 Update 4
+Version 5.6 Update 5
 
-- [FIX] Fixed loading of FOSSEE Flowsheets
+- [NEW] Load FOSSEE Flowsheets and Samples from the File menu (Classic UI)
+- [NEW] Customize Systems of Units on Simulation Settings Wizard (Classic UI)
+- [NEW] Added ChemSep Column directly from the Object Palette
+- [FIX] Other bug fixes and enhancements
