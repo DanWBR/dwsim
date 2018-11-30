@@ -36,7 +36,8 @@ Partial Class FormMain
         Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoRegressaoUNIFACIPs = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiFOSSEE = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -124,7 +125,7 @@ Partial Class FormMain
         'FileToolStripMenuItem
         '
         resources.ApplyResources(Me.FileToolStripMenuItem, "FileToolStripMenuItem")
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.ToolStripMenuItem1, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
@@ -158,11 +159,17 @@ Partial Class FormMain
         Me.OpenToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.folder_page_white
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         '
-        'ToolStripMenuItem1
+        'tsmiFOSSEE
         '
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
-        Me.ToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.folder_page_white
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        resources.ApplyResources(Me.tsmiFOSSEE, "tsmiFOSSEE")
+        Me.tsmiFOSSEE.Image = Global.DWSIM.My.Resources.Resources.folder_page_white
+        Me.tsmiFOSSEE.Name = "tsmiFOSSEE"
+        '
+        'tsmiSamples
+        '
+        resources.ApplyResources(Me.tsmiSamples, "tsmiSamples")
+        Me.tsmiSamples.Image = Global.DWSIM.My.Resources.Resources.folder_page_white
+        Me.tsmiSamples.Name = "tsmiSamples"
         '
         'toolStripSeparator
         '
@@ -826,7 +833,7 @@ Partial Class FormMain
     Friend WithEvents NovoEstudoDoCriadorDeComponentesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveStudyDlg As System.Windows.Forms.SaveFileDialog
     Friend WithEvents SaveRegStudyDlg As System.Windows.Forms.SaveFileDialog
-    Public WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents tsmiSamples As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoRegressaoUNIFACIPs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveUnifacIPRegrDlg As System.Windows.Forms.SaveFileDialog
     Friend WithEvents DocumentacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -846,4 +853,5 @@ Partial Class FormMain
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents ErrorBox_Label1 As System.Windows.Forms.Label
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents tsmiFOSSEE As ToolStripMenuItem
 End Class

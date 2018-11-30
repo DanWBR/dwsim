@@ -69,6 +69,9 @@ Public Class FormMain
     Public calculatorassembly, unitopassembly As Assembly
     Public aTypeList As New List(Of Type)
 
+    Public SampleList As New List(Of String)
+    Public FOSSEEList As New List(Of FOSSEEFlowsheet)
+
 #Region "    Form Events"
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
@@ -736,7 +739,83 @@ Public Class FormMain
             frmw.ShowDialog(Me)
         End If
 
+        UpdateFlowsheetLinks()
+
         CheckForUpdates()
+
+    End Sub
+
+
+    Sub UpdateFlowsheetLinks()
+
+        For Each item In SampleList
+            If File.Exists(item) Then
+                Dim tsmi As New ToolStripMenuItem
+                With tsmi
+                    .Text = Path.GetFileNameWithoutExtension(item)
+                    .Tag = item
+                    .DisplayStyle = ToolStripItemDisplayStyle.Text
+                End With
+                Me.tsmiSamples.DropDownItems.Add(tsmi)
+                AddHandler tsmi.Click, Sub()
+                                           Me.UIThreadInvoke(Sub() LoadFile(item))
+                                       End Sub
+            End If
+        Next
+
+        For Each item In FOSSEEList
+            Dim tsmi As New ToolStripMenuItem
+            With tsmi
+                .Text = item.DisplayName
+                .Tag = item.DownloadLink
+                .DisplayStyle = ToolStripItemDisplayStyle.Text
+            End With
+            Me.tsmiFOSSEE.DropDownItems.Add(tsmi)
+            AddHandler tsmi.Click, Sub()
+                                       Dim sb = New StringBuilder
+                                       sb.AppendLine(("Title: " + item.Title))
+                                       sb.AppendLine(("Author: " + item.ProposerName))
+                                       sb.AppendLine(("Institution: " + item.Institution))
+                                       sb.AppendLine()
+                                       sb.AppendLine("Click 'Yes' to download and open this flowsheet.")
+                                       If MessageBox.Show(sb.ToString, "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+                                           Dim floading As New FormLoadingSimulation
+                                           Dim fdlding As New FormLoadingSimulation
+                                           fdlding.Label1.Text = "Downloading file..." & vbCrLf & "(" & item.Title & ")"
+                                           fdlding.Show()
+                                           Application.DoEvents()
+                                           Task.Factory.StartNew(Function()
+                                                                     Return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(item.DownloadLink, Sub(px)
+                                                                                                                                                    Me.UIThread(Sub()
+                                                                                                                                                                    fdlding.Label1.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
+                                                                                                                                                                    fdlding.ProgressBar1.Value = px
+                                                                                                                                                                End Sub)
+                                                                                                                                                End Sub)
+                                                                 End Function).ContinueWith(Sub(tk)
+                                                                                                Me.UIThread(Sub() fdlding.Close())
+                                                                                                If tk.Exception IsNot Nothing Then
+                                                                                                    MessageBox.Show(tk.Exception, "Error downloading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                                                                Else
+                                                                                                    Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
+                                                                                                    Me.UIThread(Sub()
+                                                                                                                    floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
+                                                                                                                    floading.Show()
+                                                                                                                    Application.DoEvents()
+                                                                                                                    Try
+                                                                                                                        LoadXML2(xdoc, Sub(x)
+                                                                                                                                           Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                                                                       End Sub)
+                                                                                                                    Catch ex As Exception
+                                                                                                                        MessageBox.Show(tk.Exception, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                                                                                    Finally
+                                                                                                                        floading.Close()
+                                                                                                                    End Try
+                                                                                                                End Sub)
+                                                                                                End If
+                                                                                            End Sub)
+                                       End If
+                                   End Sub
+        Next
 
     End Sub
 
@@ -2748,145 +2827,151 @@ Label_00CC:
 
         If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
 
-            Dim floading As New FormLoadingSimulation
-
-            floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & Me.OpenFileDialog1.FileName & ")"
-            floading.Show()
-
-            Application.DoEvents()
-
-            Select Case Path.GetExtension(OpenFileDialog1.FileName).ToLower()
-                Case ".dwxml"
-                    Dim myStream As System.IO.FileStream
-                    myStream = File.OpenRead(OpenFileDialog1.FileName)
-                    If Not (myStream Is Nothing) Then
-                        Dim nome = myStream.Name
-                        myStream.Close()
-                        Me.filename = nome
-                        'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
-                        Application.DoEvents()
-                        Application.DoEvents()
-                        Me.LoadXML(Me.filename, Sub(x)
-                                                    Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                End Sub)
-                    End If
-                Case ".dwxmz"
-                    Dim myStream As System.IO.FileStream
-                    myStream = File.OpenRead(OpenFileDialog1.FileName)
-                    If Not (myStream Is Nothing) Then
-                        Dim nome = myStream.Name
-                        myStream.Close()
-                        Me.filename = nome
-                        'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
-                        Application.DoEvents()
-                        Application.DoEvents()
-                        Me.LoadAndExtractXMLZIP(Me.filename, Sub(x)
-                                                                 Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                             End Sub)
-                    End If
-                Case ".xml"
-                    Dim myStream As System.IO.FileStream
-                    myStream = File.OpenRead(OpenFileDialog1.FileName)
-                    If Not (myStream Is Nothing) Then
-                        Dim nome = myStream.Name
-                        myStream.Close()
-                        Me.filename = nome
-                        'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
-                        Application.DoEvents()
-                        Application.DoEvents()
-                        Me.LoadMobileXML(Me.filename)
-                    End If
-                Case ".dwcsd"
-                    Application.DoEvents()
-                    Dim NewMDIChild As New FormCompoundCreator()
-                    NewMDIChild.MdiParent = Me
-                    NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
-                    Dim x As New BinaryFormatter()
-                    x.Binder = New VersionDeserializationBinder
-                    NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                    NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
-                    objStreamReader.Close()
-                    NewMDIChild.WriteData()
-                    If GlobalSettings.Settings.OldUI Then
-                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                            Me.UpdateMRUList()
-                        End If
-                    End If
-                    NewMDIChild.Activate()
-                Case ".dwcsd2"
-                    Application.DoEvents()
-                    Dim NewMDIChild As New FormCompoundCreator()
-                    NewMDIChild.MdiParent = Me
-                    NewMDIChild.Show()
-                    NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(File.ReadAllText(Me.OpenFileDialog1.FileName))
-                    NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
-                    NewMDIChild.WriteData()
-                    If GlobalSettings.Settings.OldUI Then
-                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                            Me.UpdateMRUList()
-                        End If
-                    End If
-                    NewMDIChild.Activate()
-                Case ".dwrsd"
-                    Application.DoEvents()
-                    Dim NewMDIChild As New FormDataRegression()
-                    NewMDIChild.MdiParent = Me
-                    NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
-                    Dim x As New BinaryFormatter()
-                    x.Binder = New VersionDeserializationBinder
-                    NewMDIChild.currcase = x.Deserialize(objStreamReader)
-                    NewMDIChild.currcase.filename = Me.OpenFileDialog1.FileName
-                    objStreamReader.Close()
-                    NewMDIChild.LoadCase(NewMDIChild.currcase, False)
-                    If GlobalSettings.Settings.OldUI Then
-                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                            Me.UpdateMRUList()
-                        End If
-                    End If
-                    NewMDIChild.Activate()
-                Case ".dwrsd2"
-                    Application.DoEvents()
-                    Dim NewMDIChild As New FormDataRegression()
-                    NewMDIChild.MdiParent = Me
-                    NewMDIChild.Show()
-                    NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(File.ReadAllText(Me.OpenFileDialog1.FileName))
-                    NewMDIChild.currcase.filename = Me.OpenFileDialog1.FileName
-                    NewMDIChild.LoadCase(NewMDIChild.currcase, False)
-                    If GlobalSettings.Settings.OldUI Then
-                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                            Me.UpdateMRUList()
-                        End If
-                    End If
-                    NewMDIChild.Activate()
-                Case ".dwruf"
-                    Application.DoEvents()
-                    Dim NewMDIChild As New FormUNIFACRegression()
-                    NewMDIChild.MdiParent = Me
-                    NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
-                    Dim x As New BinaryFormatter()
-                    NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                    NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
-                    objStreamReader.Close()
-                    NewMDIChild.LoadCase(NewMDIChild.mycase, False)
-                    If GlobalSettings.Settings.OldUI Then
-                        If Not My.Settings.MostRecentFiles.Contains(Me.OpenFileDialog1.FileName) Then
-                            My.Settings.MostRecentFiles.Add(Me.OpenFileDialog1.FileName)
-                            Me.UpdateMRUList()
-                        End If
-                    End If
-                    NewMDIChild.Activate()
-            End Select
-
-            floading.Close()
+            LoadFile(OpenFileDialog1.FileName)
 
         End If
+
+    End Sub
+
+    Sub LoadFile(fpath As String)
+
+        Dim floading As New FormLoadingSimulation
+
+        floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & fpath & ")"
+        floading.Show()
+
+        Application.DoEvents()
+
+        Select Case Path.GetExtension(fpath).ToLower()
+            Case ".dwxml"
+                Dim myStream As System.IO.FileStream
+                myStream = File.OpenRead(fpath)
+                If Not (myStream Is Nothing) Then
+                    Dim nome = myStream.Name
+                    myStream.Close()
+                    Me.filename = nome
+                    'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
+                    Application.DoEvents()
+                    Application.DoEvents()
+                    Me.LoadXML(Me.filename, Sub(x)
+                                                Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                            End Sub)
+                End If
+            Case ".dwxmz"
+                Dim myStream As System.IO.FileStream
+                myStream = File.OpenRead(fpath)
+                If Not (myStream Is Nothing) Then
+                    Dim nome = myStream.Name
+                    myStream.Close()
+                    Me.filename = nome
+                    'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
+                    Application.DoEvents()
+                    Application.DoEvents()
+                    Me.LoadAndExtractXMLZIP(Me.filename, Sub(x)
+                                                             Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                         End Sub)
+                End If
+            Case ".xml"
+                Dim myStream As System.IO.FileStream
+                myStream = File.OpenRead(fpath)
+                If Not (myStream Is Nothing) Then
+                    Dim nome = myStream.Name
+                    myStream.Close()
+                    Me.filename = nome
+                    'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
+                    Application.DoEvents()
+                    Application.DoEvents()
+                    Me.LoadMobileXML(Me.filename)
+                End If
+            Case ".dwcsd"
+                Application.DoEvents()
+                Dim NewMDIChild As New FormCompoundCreator()
+                NewMDIChild.MdiParent = Me
+                NewMDIChild.Show()
+                Dim objStreamReader As New FileStream(fpath, FileMode.Open, FileAccess.Read)
+                Dim x As New BinaryFormatter()
+                x.Binder = New VersionDeserializationBinder
+                NewMDIChild.mycase = x.Deserialize(objStreamReader)
+                NewMDIChild.mycase.Filename = fpath
+                objStreamReader.Close()
+                NewMDIChild.WriteData()
+                If GlobalSettings.Settings.OldUI Then
+                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
+                        My.Settings.MostRecentFiles.Add(fpath)
+                        Me.UpdateMRUList()
+                    End If
+                End If
+                NewMDIChild.Activate()
+            Case ".dwcsd2"
+                Application.DoEvents()
+                Dim NewMDIChild As New FormCompoundCreator()
+                NewMDIChild.MdiParent = Me
+                NewMDIChild.Show()
+                NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(File.ReadAllText(fpath))
+                NewMDIChild.mycase.Filename = fpath
+                NewMDIChild.WriteData()
+                If GlobalSettings.Settings.OldUI Then
+                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
+                        My.Settings.MostRecentFiles.Add(fpath)
+                        Me.UpdateMRUList()
+                    End If
+                End If
+                NewMDIChild.Activate()
+            Case ".dwrsd"
+                Application.DoEvents()
+                Dim NewMDIChild As New FormDataRegression()
+                NewMDIChild.MdiParent = Me
+                NewMDIChild.Show()
+                Dim objStreamReader As New FileStream(fpath, FileMode.Open, FileAccess.Read)
+                Dim x As New BinaryFormatter()
+                x.Binder = New VersionDeserializationBinder
+                NewMDIChild.currcase = x.Deserialize(objStreamReader)
+                NewMDIChild.currcase.filename = fpath
+                objStreamReader.Close()
+                NewMDIChild.LoadCase(NewMDIChild.currcase, False)
+                If GlobalSettings.Settings.OldUI Then
+                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
+                        My.Settings.MostRecentFiles.Add(fpath)
+                        Me.UpdateMRUList()
+                    End If
+                End If
+                NewMDIChild.Activate()
+            Case ".dwrsd2"
+                Application.DoEvents()
+                Dim NewMDIChild As New FormDataRegression()
+                NewMDIChild.MdiParent = Me
+                NewMDIChild.Show()
+                NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(File.ReadAllText(fpath))
+                NewMDIChild.currcase.filename = fpath
+                NewMDIChild.LoadCase(NewMDIChild.currcase, False)
+                If GlobalSettings.Settings.OldUI Then
+                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
+                        My.Settings.MostRecentFiles.Add(fpath)
+                        Me.UpdateMRUList()
+                    End If
+                End If
+                NewMDIChild.Activate()
+            Case ".dwruf"
+                Application.DoEvents()
+                Dim NewMDIChild As New FormUNIFACRegression()
+                NewMDIChild.MdiParent = Me
+                NewMDIChild.Show()
+                Dim objStreamReader As New FileStream(fpath, FileMode.Open, FileAccess.Read)
+                Dim x As New BinaryFormatter()
+                NewMDIChild.mycase = x.Deserialize(objStreamReader)
+                NewMDIChild.mycase.Filename = fpath
+                objStreamReader.Close()
+                NewMDIChild.LoadCase(NewMDIChild.mycase, False)
+                If GlobalSettings.Settings.OldUI Then
+                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
+                        My.Settings.MostRecentFiles.Add(fpath)
+                        Me.UpdateMRUList()
+                    End If
+                End If
+                NewMDIChild.Activate()
+        End Select
+
+        floading.Close()
 
     End Sub
 
@@ -2965,11 +3050,6 @@ Label_00CC:
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonClose.Click
         Me.SettingsPanel.Visible = False
         If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
-    End Sub
-
-    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
-        Me.OpenFileDialog1.InitialDirectory = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "samples"
-        LoadFileDialog()
     End Sub
 
     Private Sub LR1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)

@@ -66,6 +66,7 @@ Public Class FormWelcome
         Dim samples = Directory.EnumerateFiles(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "samples", "*.dw*", SearchOption.TopDirectoryOnly)
 
         For Each f As String In samples
+            FormMain.SampleList.Add(f)
             Me.lvsamples.Items.Add(Path.GetFileName(f), 0).Tag = f
             Dim lvi = Me.lvsamples.Items(Me.lvsamples.Items.Count - 1)
             lvi.ToolTipText = f
@@ -94,6 +95,7 @@ Public Class FormWelcome
                                                                                        For Each item As FOSSEEFlowsheet In t.Result
                                                                                            fslist.Add(item.DownloadLink, item)
                                                                                            FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 1) With {.Tag = item.DownloadLink})
+                                                                                           FormMain.FOSSEEList.Add(item)
                                                                                        Next
                                                                                    End If
                                                                                End Sub)
