@@ -130,8 +130,10 @@ Namespace UnitOperations
                                                   Me.FlowSheet.ShowMessage("Error creating ChemSep column: ChemSep is not installed or cannot be accessed by DWSIM.", IFlowsheet.MessageType.GeneralError)
                                               End If
                                           End Sub).ContinueWith(Sub()
-                                                                    frmwait.UIThreadInvoke(Sub() frmwait.Close())
-                                                                    Instantiate(True)
+                                                                    frmwait.UIThreadInvoke(Sub()
+                                                                                               frmwait.Close()
+                                                                                               Instantiate(True)
+                                                                                           End Sub)
                                                                 End Sub)
                 End If
 

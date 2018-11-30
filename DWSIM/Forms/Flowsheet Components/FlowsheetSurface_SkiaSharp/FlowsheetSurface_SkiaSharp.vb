@@ -2143,6 +2143,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCUO)
                 'OBJETO DWSIM
                 If chemsep Then
+                    gObj.Tag = "CSCOL-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                     DirectCast(gObj, CAPEOPENGraphic).ChemSep = True
                     gObj.Width = 144
                     gObj.Height = 180
