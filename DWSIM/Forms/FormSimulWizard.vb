@@ -356,7 +356,486 @@ Public Class FormSimulWizard
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
         End With
 
+        If ComboBox2.SelectedIndex <= 2 Then
+            Me.DataGridView1.Columns(1).ReadOnly = True
+            Me.DataGridView1.Columns(3).ReadOnly = True
+        Else
+            Me.DataGridView1.Columns(1).ReadOnly = False
+            Me.DataGridView1.Columns(3).ReadOnly = False
+        End If
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Temperatura")})
+        With DirectCast(Me.DataGridView1.Rows.Item(0).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"K", "R", "C", "F"})
+            .Style.Tag = 1
+            .Value = su.temperature
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Presso")})
+        With DirectCast(Me.DataGridView1.Rows.Item(0).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
+            .Style.Tag = 2
+            .Value = su.pressure
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Vazomssica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(1).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"})
+            .Style.Tag = 3
+            .Value = su.massflow
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Vazomolar")})
+        With DirectCast(Me.DataGridView1.Rows.Item(1).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"})
+            .Value = su.molarflow
+            .Style.Tag = 4
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Vazovolumtrica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(2).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
+            .Value = su.volumetricFlow
+            .Style.Tag = 5
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("EntalpiaEspecfica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(2).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"})
+            .Value = su.enthalpy
+            .Style.Tag = 6
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("EntropiaEspecfica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(3).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
+            .Value = su.entropy
+            .Style.Tag = 7
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Massamolar")})
+        With DirectCast(Me.DataGridView1.Rows.Item(3).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kg/kmol", "g/mol", "lbm/lbmol"})
+            .Value = su.molecularWeight
+            .Style.Tag = 8
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Massaespecfica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(4).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kg/m3", "g/cm3", "lbm/ft3"})
+            .Value = su.density
+            .Style.Tag = 10
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Tensosuperficial")})
+        With DirectCast(Me.DataGridView1.Rows.Item(4).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"N/m", "dyn/cm", "lbf/in"})
+            .Value = su.surfaceTension
+            .Style.Tag = 9
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("CapacidadeCalorfica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(5).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
+            .Value = su.heatCapacityCp
+            .Style.Tag = 11
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Condutividadetrmica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(5).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"})
+            .Value = su.thermalConductivity
+            .Style.Tag = 12
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Viscosidadecinemtica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(6).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m2/s", "cSt", "ft2/s", "mm2/s"})
+            .Value = su.cinematic_viscosity
+            .Style.Tag = 13
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("ViscosidadeDinmica1")})
+        With DirectCast(Me.DataGridView1.Rows.Item(6).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
+            .Value = su.viscosity
+            .Style.Tag = 14
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("DeltaP")})
+        With DirectCast(Me.DataGridView1.Rows.Item(7).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"})
+            .Value = su.deltaP
+            .Style.Tag = 15
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("DeltaT2")})
+        With DirectCast(Me.DataGridView1.Rows.Item(7).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"C.", "K.", "F.", "R."})
+            .Value = su.deltaT
+            .Style.Tag = 16
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead")})
+        With DirectCast(Me.DataGridView1.Rows.Item(8).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m", "ft", "cm"})
+            .Value = su.head
+            .Style.Tag = 17
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("FluxodeEnergyFlow")})
+        With DirectCast(Me.DataGridView1.Rows.Item(8).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"})
+            .Value = su.heatflow
+            .Style.Tag = 18
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Tempo")})
+        With DirectCast(Me.DataGridView1.Rows.Item(9).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"s", "min.", "h"})
+            .Value = su.time
+            .Style.Tag = 19
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Volume")})
+        With DirectCast(Me.DataGridView1.Rows.Item(9).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m3", "cm3", "L", "ft3"})
+            .Value = su.volume
+            .Style.Tag = 20
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("VolumeMolar")})
+        With DirectCast(Me.DataGridView1.Rows.Item(10).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {DWSIM.App.GetLocalString("m3kmol"), "cm3/mmol", "ft3/lbmol"})
+            .Value = su.molar_volume
+            .Style.Tag = 21
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("rea")})
+        With DirectCast(Me.DataGridView1.Rows.Item(10).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m2", "cm2", "ft2"})
+            .Value = su.area
+            .Style.Tag = 22
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("DimetroEspessura")})
+        With DirectCast(Me.DataGridView1.Rows.Item(11).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m", "mm", "cm", "in", "ft"})
+            .Value = su.diameter
+            .Style.Tag = 23
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Fora")})
+        With DirectCast(Me.DataGridView1.Rows.Item(11).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {DWSIM.App.GetLocalString("N"), "dyn", "kgf", "lbf"})
+            .Value = su.force
+            .Style.Tag = 24
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("CoefdeTransfdeCalor")})
+        With DirectCast(Me.DataGridView1.Rows.Item(12).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"W/[m2.K]", "cal/[cm2.s.C]", "BTU/[ft2.h.R]"})
+            .Value = su.heat_transf_coeff
+            .Style.Tag = 25
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Aceleracao")})
+        With DirectCast(Me.DataGridView1.Rows.Item(12).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m/s2", "cm/s2", "ft/s2"})
+            .Value = su.accel
+            .Style.Tag = 26
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("ConcentraoMolar")})
+        With DirectCast(Me.DataGridView1.Rows.Item(13).Cells(1), DataGridViewComboBoxCell)
+            .Items.AddRange(New String() {"kmol/m3", "mol/m3", "mol/L", "mol/cm3", "mol/mL", "lbmol/ft3"})
+            .Value = su.molar_conc
+            .Style.Tag = 28
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("ConcentraoMssica")})
+        With DirectCast(Me.DataGridView1.Rows.Item(13).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
+            .Value = su.mass_conc
+            .Style.Tag = 29
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("TaxadeReao")})
+        With DirectCast(Me.DataGridView1.Rows.Item(14).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"})
+            .Value = su.reac_rate
+            .Style.Tag = 30
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("VolumeEspecfico")})
+        With DirectCast(Me.DataGridView1.Rows.Item(14).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m3/kg", "cm3/g", "ft3/lbm"})
+            .Value = su.spec_vol
+            .Style.Tag = 27
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("MolarEnthalpy")})
+        With DirectCast(Me.DataGridView1.Rows.Item(15).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol"})
+            .Value = su.molar_enthalpy
+            .Style.Tag = 31
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("MolarEntropy")})
+        With DirectCast(Me.DataGridView1.Rows.Item(15).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"kJ/[kmol.K]", "cal/[mol.C]", "BTU/[lbmol.R]"})
+            .Value = su.molar_entropy
+            .Style.Tag = 32
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("Velocity")})
+        With DirectCast(Me.DataGridView1.Rows.Item(16).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m/s", "cm/s", "mm/s", "km/h", "ft/h", "ft/min", "ft/s", "in/s"})
+            .Value = su.velocity
+            .Style.Tag = 33
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("HXFoulingFactor")})
+        With DirectCast(Me.DataGridView1.Rows.Item(16).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"K.m2/W", "C.cm2.s/cal", "ft2.h.F/BTU"})
+            .Value = su.foulingfactor
+            .Style.Tag = 34
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance")})
+        With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m/kg", "ft/lbm", "cm/g"})
+            .Value = su.cakeresistance
+            .Style.Tag = 35
+        End With
+
+        '.Add(New Object() {DWSIM.App.GetLocalString("FilterMediumResistance")})
+        With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(New String() {"m-1", "cm-1", "ft-1"})
+            .Value = su.mediumresistance
+            .Style.Tag = 36
+        End With
+
+        With DirectCast(Me.DataGridView1.Rows.Item(18).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.compressibility).ToArray)
+            .Value = su.compressibility
+            .Style.Tag = 37
+        End With
+
+        With DirectCast(Me.DataGridView1.Rows.Item(18).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient).ToArray)
+            .Value = su.jouleThomsonCoefficient
+            .Style.Tag = 38
+        End With
+
     End Sub
+
+    Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
+
+        If loaded Then
+
+            Dim cell As DataGridViewCell = Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex)
+            Dim oldvalue As String = ""
+            Dim member As String = ""
+
+            Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+
+            Select Case cell.Style.Tag
+                Case 1
+                    member = "spmp_temperature"
+                    oldvalue = su.temperature
+                    su.temperature = cell.Value
+                Case 2
+                    member = "spmp_pressure"
+                    oldvalue = su.pressure
+                    su.pressure = cell.Value
+                Case 3
+                    member = "spmp_massflow"
+                    oldvalue = su.massflow
+                    su.massflow = cell.Value
+                Case 4
+                    member = "spmp_molarflow"
+                    oldvalue = su.molarflow
+                    su.molarflow = cell.Value
+                Case 5
+                    member = "spmp_volumetricFlow"
+                    oldvalue = su.volumetricFlow
+                    su.volumetricFlow = cell.Value
+                Case 6
+                    member = "spmp_enthalpy"
+                    oldvalue = su.enthalpy
+                    su.enthalpy = cell.Value
+                Case 7
+                    member = "spmp_entropy"
+                    oldvalue = su.entropy
+                    su.entropy = cell.Value
+                Case 8
+                    member = "spmp_molecularWeight"
+                    oldvalue = su.molecularWeight
+                    su.molecularWeight = cell.Value
+                Case 9
+                    member = "tdp_surfaceTension"
+                    oldvalue = su.surfaceTension
+                    su.surfaceTension = cell.Value
+                Case 10
+                    member = "spmp_density"
+                    oldvalue = su.density
+                    su.density = cell.Value
+                Case 11
+                    member = "spmp_heatCapacityCp"
+                    oldvalue = su.heatCapacityCp
+                    su.heatCapacityCp = cell.Value
+                Case 12
+                    member = "spmp_thermalConductivity"
+                    oldvalue = su.thermalConductivity
+                    su.thermalConductivity = cell.Value
+                Case 13
+                    member = "spmp_cinematic_viscosity"
+                    oldvalue = su.cinematic_viscosity
+                    su.cinematic_viscosity = cell.Value
+                Case 14
+                    member = "spmp_viscosity"
+                    oldvalue = su.viscosity
+                    su.viscosity = cell.Value
+                Case 15
+                    member = "spmp_deltaP"
+                    oldvalue = su.deltaP
+                    su.deltaP = cell.Value
+                Case 16
+                    member = "spmp_deltaT"
+                    oldvalue = su.deltaT
+                    su.deltaT = cell.Value
+                Case 17
+                    member = "spmp_head"
+                    oldvalue = su.head
+                    su.head = cell.Value
+                Case 18
+                    member = "spmp_heatflow"
+                    oldvalue = su.heatflow
+                    su.heatflow = cell.Value
+                Case 19
+                    member = "time"
+                    oldvalue = su.time
+                    su.time = cell.Value
+                Case 20
+                    member = "volume"
+                    oldvalue = su.volume
+                    su.volume = cell.Value
+                Case 21
+                    member = "molar_volume"
+                    oldvalue = su.molar_volume
+                    su.molar_volume = cell.Value
+                Case 22
+                    member = "area"
+                    oldvalue = su.area
+                    su.area = cell.Value
+                Case 23
+                    member = "diameter"
+                    oldvalue = su.diameter
+                    su.diameter = cell.Value
+                Case 24
+                    member = "force"
+                    oldvalue = su.force
+                    su.force = cell.Value
+                Case 25
+                    member = "heat_transf_coeff"
+                    oldvalue = su.heat_transf_coeff
+                    su.heat_transf_coeff = cell.Value
+                Case 26
+                    member = "accel"
+                    oldvalue = su.accel
+                    su.accel = cell.Value
+                Case 27
+                    member = "spec_vol"
+                    oldvalue = su.spec_vol
+                    su.spec_vol = cell.Value
+                Case 28
+                    member = "molar_conc"
+                    oldvalue = su.molar_conc
+                    su.molar_conc = cell.Value
+                Case 29
+                    member = "mass_conc"
+                    oldvalue = su.mass_conc
+                    su.mass_conc = cell.Value
+                Case 30
+                    member = "reac_rate"
+                    oldvalue = su.reac_rate
+                    su.reac_rate = cell.Value
+                Case 31
+                    member = "molar_enthalpy"
+                    oldvalue = su.molar_enthalpy
+                    su.molar_enthalpy = cell.Value
+                Case 32
+                    member = "molar_entropy"
+                    oldvalue = su.molar_entropy
+                    su.molar_entropy = cell.Value
+                Case 33
+                    member = "velocity"
+                    oldvalue = su.velocity
+                    su.velocity = cell.Value
+                Case 34
+                    member = "foulingfactor"
+                    oldvalue = su.foulingfactor
+                    su.foulingfactor = cell.Value
+                Case 35
+                    member = "cakeresistance"
+                    oldvalue = su.cakeresistance
+                    su.cakeresistance = cell.Value
+                Case 36
+                    member = "mediumresistance"
+                    oldvalue = su.mediumresistance
+                    su.mediumresistance = cell.Value
+                Case 37
+                    member = "compressibility"
+                    oldvalue = su.compressibility
+                    su.compressibility = cell.Value
+                Case 38
+                    member = "jouleThomsonCoefficient"
+                    oldvalue = su.jouleThomsonCoefficient
+                    su.jouleThomsonCoefficient = cell.Value
+            End Select
+
+        End If
+
+    End Sub
+
 
     Private Sub ListViewPP_DoubleClick(sender As Object, e As EventArgs) Handles ListViewPP.DoubleClick
         If ListViewPP.SelectedItems.Count = 1 Then
@@ -521,6 +1000,31 @@ Public Class FormSimulWizard
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
+        End If
+    End Sub
+
+    Private Sub btnCloneUnits_Click(sender As Object, e As EventArgs) Handles btnCloneUnits.Click
+
+        Dim newsu = New SystemsOfUnits.Units
+
+        newsu = Newtonsoft.Json.JsonConvert.DeserializeObject(Of SharedClasses.SystemsOfUnits.Units)(Newtonsoft.Json.JsonConvert.SerializeObject(FrmChild.Options.SelectedUnitSystem))
+        newsu.Name = newsu.Name + "_" + (FormMain.AvailableUnitSystems.Count + 1).ToString
+
+        If Not My.Application.UserUnitSystems.ContainsKey(newsu.Name) Then
+            My.Application.UserUnitSystems.Add(newsu.Name, newsu)
+            FormMain.AvailableUnitSystems.Add(newsu.Name, newsu)
+            ComboBox2.Items.Add(newsu.Name)
+            ComboBox2.SelectedIndex = ComboBox2.Items.Count - 1
+        End If
+
+    End Sub
+
+    Private Sub btnCreateNewUnits_Click(sender As Object, e As EventArgs) Handles btnCreateNewUnits.Click
+        Dim frmUnit As New FormUnitGen
+        frmUnit.Wizard = True
+        If frmUnit.ShowDialog(Me) = DialogResult.Yes Then
+            ComboBox2.Items.Add(frmUnit.SuName)
+            ComboBox2.SelectedIndex = ComboBox2.Items.Count - 1
         End If
     End Sub
 End Class

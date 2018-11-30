@@ -25,6 +25,8 @@ Public Class FormUnitGen
     Dim frm As FormFlowsheet
 
     Public EditMode As Boolean = False
+    Friend Wizard As Boolean = False
+    Friend SuName As String = ""
 
     Private Sub FormUnitGen_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -267,6 +269,7 @@ Public Class FormUnitGen
     End Sub
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
+        DialogResult = DialogResult.No
         Me.Close()
     End Sub
 
@@ -347,19 +350,32 @@ Public Class FormUnitGen
                 .foulingfactor = Me.DataGridView1.Rows(33).Cells(1).Value
             End With
 
-            If Not EditMode Then
+            If Not Wizard Then
+                If Not EditMode Then
+                    If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
+                        MessageBox.Show(DWSIM.App.GetLocalString("JexisteumSistemadeUn") & vbCrLf & DWSIM.App.GetLocalString("Porfavormodifiqueoet"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        frm.AddUnitSystem(su)
+                        frm.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
+                                             .NewValue = su,
+                                             .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), su.Name)})
+                        Me.Close()
+                    End If
+                Else
+                    frm.UpdateOpenEditForms()
+                    Me.Close()
+                End If
+
+            Else
                 If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
                     MessageBox.Show(DWSIM.App.GetLocalString("JexisteumSistemadeUn") & vbCrLf & DWSIM.App.GetLocalString("Porfavormodifiqueoet"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    frm.AddUnitSystem(su)
-                    frm.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
-                                             .NewValue = su,
-                                             .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), su.Name)})
+                    My.Application.UserUnitSystems.Add(su.Name, su)
+                    FormMain.AvailableUnitSystems.Add(su.Name, su)
+                    DialogResult = DialogResult.Yes
+                    SuName = su.Name
                     Me.Close()
                 End If
-            Else
-                frm.UpdateOpenEditForms()
-                Me.Close()
             End If
 
         Else
