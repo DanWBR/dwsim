@@ -120,53 +120,67 @@ Namespace GraphicObjects.Tables
 
             If SpreadsheetCellRange <> "" Then
 
-                SpreadsheetData = Flowsheet.GetSpreadsheetData(SpreadsheetCellRange)
+                Try
 
-                'determinar comprimento das colunas e altura das linhas
+                    SpreadsheetData = Flowsheet.GetSpreadsheetData(SpreadsheetCellRange)
 
-                Dim i, j, k, itemheight, n, m, leftmargin As Integer
-                Dim size As SKSize
+                    'determinar comprimento das colunas e altura das linhas
 
-                k = 0
-                For j = 0 To SpreadsheetData(0).Count - 1
-                    maxW.Add(1)
-                    For i = 0 To SpreadsheetData.Count - 1
-                        size = MeasureString(SpreadsheetData(i)(j), tpaint)
-                        If size.Width > maxW(k) Then maxW(k) = size.Width
+                    Dim i, j, k, itemheight, n, m, leftmargin As Integer
+                    Dim size As SKSize
+
+                    k = 0
+                    For j = 0 To SpreadsheetData(0).Count - 1
+                        maxW.Add(1)
+                        For i = 0 To SpreadsheetData.Count - 1
+                            size = MeasureString(SpreadsheetData(i)(j), tpaint)
+                            If size.Width > maxW(k) Then maxW(k) = size.Width
+                        Next
+                        maxW(k) += 4 * Padding
+                        k += 1
                     Next
-                    maxW(k) += 4 * Padding
-                    k += 1
-                Next
 
-                itemheight = MeasureString("AAA", tpaint).Height + 2 * Me.Padding
+                    itemheight = MeasureString("AAA", tpaint).Height + 2 * Me.Padding
 
-                Me.Height = (SpreadsheetData.Count) * itemheight
-                Me.Width = maxW.Sum
+                    Me.Height = (SpreadsheetData.Count) * itemheight
+                    Me.Width = maxW.Sum
 
-                'Dim rect As SKRect = GetRect(X, Y, Width, Height)
-                'canvas.DrawRect(rect, GetPaint(SKColors.White))
+                    'Dim rect As SKRect = GetRect(X, Y, Width, Height)
+                    'canvas.DrawRect(rect, GetPaint(SKColors.White))
 
-                size = MeasureString("MEASURE", tpaint)
+                    size = MeasureString("MEASURE", tpaint)
 
-                ClipboardData = ""
+                    ClipboardData = ""
 
-                n = 0
-                leftmargin = 0
-                For j = 0 To SpreadsheetData(0).Count - 1
-                    m = 0
-                    For i = 0 To SpreadsheetData.Count - 1
-                        canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
-                        ClipboardData += SpreadsheetData(i)(j) + vbTab
-                        If i < SpreadsheetData.Count - 1 Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
-                        m += 1
+                    n = 0
+                    leftmargin = 0
+                    For j = 0 To SpreadsheetData(0).Count - 1
+                        m = 0
+                        For i = 0 To SpreadsheetData.Count - 1
+                            canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                            ClipboardData += SpreadsheetData(i)(j) + vbTab
+                            If i < SpreadsheetData.Count - 1 Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
+                            m += 1
+                        Next
+                        ClipboardData += vbCrLf
+                        leftmargin += maxW(n)
+                        If j < SpreadsheetData(0).Count - 1 Then canvas.DrawLine(X + leftmargin, Y, X + leftmargin, Y + (SpreadsheetData.Count) * itemheight, bpaint)
+                        n += 1
                     Next
-                    ClipboardData += vbCrLf
-                    leftmargin += maxW(n)
-                    If j < SpreadsheetData(0).Count - 1 Then canvas.DrawLine(X + leftmargin, Y, X + leftmargin, Y + (SpreadsheetData.Count) * itemheight, bpaint)
-                    n += 1
-                Next
 
-                canvas.DrawRect(GetRect(Me.X, Me.Y, Me.Width, Me.Height), bpaint)
+                    canvas.DrawRect(GetRect(Me.X, Me.Y, Me.Width, Me.Height), bpaint)
+
+                Catch ex As Exception
+
+                    Dim Size = MeasureString("Error: " + ex.ToString, tpaint)
+                    canvas.DrawText("Error: " + ex.ToString, X + 10, Y + 40, tpaint)
+
+                    Me.Width = 20 + Size.Width
+                    Me.Height = 80 + Size.Height
+
+                    canvas.DrawRect(GetRect(X, Y, Width, Height), bpaint)
+
+                End Try
 
             Else
 
