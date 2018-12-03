@@ -1360,11 +1360,13 @@ restart:    Do
                 i = 0
                 T = 0
                 Do
-                    If Vz(i) > 0 Then
-                        T += Vz(i) * PP.AUX_TSATi(P, i)
-                        Vp(i) = PP.AUX_PVAPi(Vn(i), T)
-                        Ki(i) = Vp(i) / P
-                    End If
+                    T += Vz(i) * PP.AUX_TSATi(P, i)
+                    i += 1
+                Loop Until i = n + 1
+                i = 0
+                Do
+                    Vp(i) = PP.AUX_PVAPi(Vn(i), T)
+                    Ki(i) = Vp(i) / P
                     i += 1
                 Loop Until i = n + 1
                 Vx = Vz

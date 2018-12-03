@@ -4355,17 +4355,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         ''' <remarks></remarks>
         Public Overridable Function DW_ReturnBinaryEnvelope(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            If Not Settings.CAPEOPENMode Then
-                Try
-                    Me._tpseverity = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestSeverity)
-                    Me._tpcompids = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
-                Catch ex As Exception
-                    Me._tpseverity = 0
-                    Me._tpcompids = New String() {}
-                Finally
-                End Try
-            End If
-
             If Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             Dim n, i As Integer
@@ -4379,6 +4368,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim P, T As Double
             Dim calcP, calcT As Double
             Dim VLE, SLE, LLE, Critical, SolidSolution As Boolean
+            Dim prevkib As Double() = Nothing, prevkid As Double() = Nothing
 
             tipocalc = parameters(0)
             P = parameters(1)
@@ -4388,6 +4378,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             SLE = parameters(5)
             Critical = parameters(6)
             SolidSolution = parameters(7)
+            Try
+                dx = parameters(10)
+            Catch ex As Exception
+            End Try
+
+            Dim MyFlash As IFlashAlgorithm = FlashBase.Clone
+
+            If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
+                DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
+            End If
 
             Select Case tipocalc
 
@@ -4408,7 +4408,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         Do
 
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/41)")
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/" + (1 / dx).ToString("#") + ")")
 
                             x = i * dx
 
@@ -4416,34 +4416,38 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                             If i = 0 Then
                                 Try
-                                    tmp1 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, 0.0#, Me)
+                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, 0.0#, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
+                                    prevkib = tmp1(6)
                                     py1.Add(Test1)
                                 Catch ex As Exception
                                     py1.Add(Double.NaN)
                                 End Try
                                 Try
-                                    tmp2 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, 0.0#, Me)
+                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, 0.0#, Me)
                                     y2 = tmp2(4)
                                     Test2 = y2
+                                    prevkid = tmp1(6)
                                     py2.Add(Test2)
                                 Catch ex As Exception
                                     py2.Add(Double.NaN)
                                 End Try
                             Else
                                 Try
-                                    tmp1 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, Test1, Me)
+                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, Test1, Me, True, prevkib)
                                     calcT = tmp1(4)
                                     Test1 = calcT
+                                    prevkib = tmp1(6)
                                     py1.Add(calcT)
                                 Catch ex As Exception
                                     py1.Add(Double.NaN)
                                 End Try
                                 Try
-                                    tmp2 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me)
+                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me)
                                     calcT = tmp2(4)
                                     Test2 = calcT
+                                    prevkid = tmp1(6)
                                     py2.Add(calcT)
                                 Catch ex As Exception
                                     py2.Add(Double.NaN)
@@ -4463,18 +4467,27 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Loop Until (i - 1) * dx >= 1
                     End If
 
-                    If LLE And Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
+                    If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
+                        DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
+                    End If
 
-                        If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 And
-                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.GibbsMinimization3P And
-                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P And
-                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSVLLE Then
+                    If LLE And Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
+
+                        If Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 And
+                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.GibbsMinimization3P And
+                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P And
+                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoopsSVLLE Then
 
                             Throw New Exception(Calculator.GetLocalString("UnsuitableFlashAlgorithmSelected"))
 
                         End If
 
+                        If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
+                            DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
+                        End If
+
                         If unstable Then
+
                             Dim ti, tf, uim, tit As Double
                             ti = (ut(0) + ut(ut.Count - 1)) / 2
                             uim = (ui(0) + ui(ui.Count - 1)) / 2
@@ -4483,9 +4496,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                             For i = 0 To 25
                                 tit = tf + (ti - tf) / 25 * i
-                                If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/26)")
+                                If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/25)")
                                 Try
-                                    result = Me.FlashBase.Flash_PT(New Double() {uim * dx, 1 - uim * dx}, P, tit, Me)
+                                    result = MyFlash.Flash_PT(New Double() {uim * dx, 1 - uim * dx}, P, tit, Me)
                                     If result(5) > 0.0# Then
                                         If Abs(result(2)(0) - result(6)(0)) > 0.01 Then
                                             px1l1.Add(result(2)(0))
@@ -4496,7 +4509,13 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Catch ex As Exception
                                 End Try
                             Next
+
+                            If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
+                                DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
+                            End If
+
                         End If
+
                     End If
 
                     If SLE Then
@@ -4800,7 +4819,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
                         Dim gobj = DirectCast(CurrentMaterialStream, MaterialStream).GraphicObject
                         If gobj IsNot Nothing Then
-                            Throw New Exception("[" & Tag & " / " & gobj.Tag & "] Error calculating overriden property '" & item.Key & "': " & ops.FormatException(ex).ToString)
+                            Throw New Exception("[" & Tag & " / " & gobj.Tag & "] Error calculating overriden Property '" & item.Key & "': " & ops.FormatException(ex).ToString)
                         Else
                             Throw New Exception("[" & Tag & "] Error calculating overriden property '" & item.Key & "': " & ops.FormatException(ex).ToString)
                         End If

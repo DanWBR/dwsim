@@ -19,6 +19,7 @@
 
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.Streams
+Imports DWSIM.ExtensionMethods
 
 Public Class FormBinEnv
 
@@ -79,6 +80,7 @@ Public Class FormBinEnv
         Me.lblP.Text = su.pressure
         Me.lblT.Text = su.temperature
 
+
         Me.GridExpData.Columns(1).HeaderText = "x1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
         Me.GridExpData.Columns(2).HeaderText = "y1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
         Me.GridExpData.Columns(3).HeaderText = "T (" & su.temperature & ")"
@@ -103,6 +105,7 @@ Public Class FormBinEnv
 
             Me.tbP.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, 101325), nf)
             Me.tbT.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 298.15), nf)
+            Me.tbdx.Text = 0.025.ToString(nf)
 
             Me.GraphControl.IsShowPointValues = True
 
@@ -190,7 +193,7 @@ Public Class FormBinEnv
                 Settings.gpu.EnableMultithreading()
             End If
 
-            Me.BackgroundWorker1.RunWorkerAsync(New Object() {tipocalc, P, T, chkVLE.Checked, lle, chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked, chkCompareModels.Checked, cbPropPack.SelectedIndex})
+            Me.BackgroundWorker1.RunWorkerAsync(New Object() {tipocalc, P, T, chkVLE.Checked, lle, chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked, chkCompareModels.Checked, cbPropPack.SelectedIndex, tbdx.Text.ToDoubleFromCurrent})
 
             Me.bw = Me.BackgroundWorker1
 
@@ -471,7 +474,7 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c14", "[" & ppname & "] " & "CRIT T (" & su.temperature & ")")
                 End With
 
-                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(100)
+                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(px.Count)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
                     co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -479,7 +482,7 @@ Public Class FormBinEnv
                     co.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 Next
                 Dim j, k As Integer
-                Dim data(13, 100) As String
+                Dim data(13, 1000) As String
                 j = 0
                 For Each d As Double In vx1
                     data(0, j) = vx1(j)
@@ -535,7 +538,7 @@ Public Class FormBinEnv
                             j = j + 1
                         Loop Until j = 14
                         k = k + 1
-                    Loop Until k = 100
+                    Loop Until k = px.Count
                 End With
 
                 With Me.GraphControl.GraphPane
@@ -653,7 +656,7 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c4", "[" & ppname & "] " & "Pdew (" & su.pressure & ")")
                 End With
 
-                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(100)
+                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(Math.Max(vx1.Count, vx2.Count))
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
                     co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -753,7 +756,7 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "y (" & c(0) & ")")
                 End With
 
-                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(100)
+                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(vx.Count)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
                     co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -836,7 +839,7 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "y (" & c(0) & ")")
                 End With
 
-                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(100)
+                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(vx.Count)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
                     co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -919,7 +922,7 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & DWSIM.App.GetLocalString("DeltaGRT"))
                 End With
 
-                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(100)
+                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(vx.Count)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
                     co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -1134,7 +1137,7 @@ Public Class FormBinEnv
     Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
-        Return New List(Of String)(New String() {"Name", "AutoUpdate", "Comp1", "Comp2", "Type", "VLE", "LLE", "SLE", "SLE_SS", "CRIT", "XAxisBase", "P", "T", "PP", "CompareModels", "ExpX", "ExpY", "ExpT", "ExpP"})
+        Return New List(Of String)(New String() {"Name", "AutoUpdate", "Comp1", "Comp2", "Type", "VLE", "LLE", "SLE", "SLE_SS", "CRIT", "XAxisBase", "P", "T", "dx", "PP", "CompareModels", "ExpX", "ExpY", "ExpT", "ExpP"})
     End Function
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
@@ -1172,6 +1175,8 @@ Public Class FormBinEnv
                 Return Double.Parse(tbP.Text)
             Case "T"
                 Return Double.Parse(tbT.Text)
+            Case "dx"
+                Return Double.Parse(tbdx.Text)
             Case "PP"
                 Return cbPropPack.SelectedIndex
             Case "CompareModels"
@@ -1261,6 +1266,8 @@ Public Class FormBinEnv
                 tbP.Text = pvalue
             Case "T"
                 tbT.Text = pvalue
+            Case "dx"
+                tbdx.Text = pvalue
             Case "PP"
                 cbPropPack.SelectedIndex = pvalue
             Case "CompareModels"

@@ -60,6 +60,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Property Vx2 As Double()
         End Class
 
+        Public Sub ClearEstimates()
+            prevres = Nothing
+        End Sub
+
         Sub New()
             MyBase.New()
             Order = 2
@@ -1490,7 +1494,9 @@ alt:
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
 
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim i, j, ff, k As Integer
+            Dim i As Integer
+
+            n = Vz.Length - 1
 
             d1 = Date.Now
 
@@ -1502,87 +1508,75 @@ alt:
 
             If result(0) > 0 Then
 
-                Dim nt As Integer = -1
-                Dim nc As Integer = Vz.Length - 1
-
-                i = 0
-                For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                    ff = Array.IndexOf(StabSearchCompIDs, subst.Name)
-                    If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then nt += 1
-                    i += 1
-                Next
-                If nt = -1 Then nt = nc
-
-                Dim Vtrials(nt, nc) As Double
-                Dim idx(nt) As Integer
-
-                i = 0
-                j = 0
-                For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                    ff = Array.IndexOf(StabSearchCompIDs, subst.Name)
-                    If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then
-                        idx(j) = i
-                        j += 1
-                    End If
-                    i += 1
-                Next
-
-                For i = 0 To nt
-                    For j = 0 To nc
-                        If Vz(j) > 0 Then Vtrials(i, j) = 0.00001
-                    Next
-                Next
-                For j = 0 To nt
-                    Vtrials(j, idx(j)) = 1
-                Next
-
                 IObj?.SetCurrent
                 Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
-                    Dim vx2est(nc), fcl(nc), fcv(nc) As Double
-                    Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
+                    If Not prevres Is Nothing Then
 
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To nc
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            IObj?.SetCurrent
-                            fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To nc
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
+                        result = Flash_TV_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, T, V, P, PP)
+
                     Else
+
+                        Dim vx2est(n), fcl(n), fcv(n) As Double
+                        Dim m As Double = UBound(stresult(1), 1)
+
                         For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(m, i)
                         Next
+
+                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+
+                        Dim maxl As Double = MathEx.Common.Max(vx2est)
+                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+
+                        F = 1
+                        V = result(1)
+                        L2 = F * result(3)(imaxl)
+                        L1 = F - L2 - V
+
+                        If L1 < 0.0# Then
+                            L1 = Abs(L1)
+                            L2 = F - L1 - V
+                        End If
+
+                        If L2 < 0.0# Then
+                            V += L2
+                            L2 = Abs(L2)
+                        End If
+
+                        For i = 0 To n
+                            If i <> imaxl Then
+                                vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
+                            Else
+                                vx1e(i) = Vz(i) * L2
+                            End If
+                        Next
+
+                        Dim sumvx2 As Double
+                        For i = 0 To n
+                            sumvx2 += Abs(vx1e(i))
+                        Next
+
+                        For i = 0 To n
+                            vx1e(i) = Abs(vx1e(i)) / sumvx2
+                        Next
+
+                        'do a simple LLE calculation to get initial estimates.
+                        Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                        IObj?.SetCurrent
+                        Dim resultL As Object = slle.Flash_PT(result(2), P, T, PP)
+
+                        L1 = resultL(0)
+                        L2 = resultL(5)
+                        Vx1 = resultL(2)
+                        Vx2 = resultL(6)
+
+                        IObj?.SetCurrent
+                        result = Flash_TV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, T, V, result(4), PP)
+
                     End If
-
-                    'do a simple LLE calculation to get initial estimates.
-                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
-                    IObj?.SetCurrent
-                    Dim resultL As Object = slle.Flash_PT(result(2), P, T, PP)
-
-                    L1 = resultL(0)
-                    L2 = resultL(5)
-                    Vx1 = resultL(2)
-                    Vx2 = resultL(6)
-
-                    IObj?.SetCurrent
-                    result = Flash_TV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, T, V, result(4), PP)
 
                 End If
 
@@ -1620,8 +1614,9 @@ alt:
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
 
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim i, j, k As Integer
-            Dim ff As Integer
+            Dim i As Integer
+
+            n = Vz.Length - 1
 
             d1 = Date.Now
 
@@ -1632,88 +1627,76 @@ alt:
 
             T = result(4)
 
-            If result(0) >= 0 Then
-
-                Dim nt As Integer = -1
-                Dim nc As Integer = Vz.Length - 1
-
-                i = 0
-                For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                    ff = Array.IndexOf(StabSearchCompIDs, subst.Name)
-                    If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then nt += 1
-                    i += 1
-                Next
-                If nt = -1 Then nt = nc
-
-                Dim Vtrials(nt, nc) As Double
-                Dim idx(nt) As Integer
-
-                i = 0
-                j = 0
-                For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                    ff = Array.IndexOf(StabSearchCompIDs, subst.Name)
-                    If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then
-                        idx(j) = i
-                        j += 1
-                    End If
-                    i += 1
-                Next
-
-                For i = 0 To nt
-                    For j = 0 To nc
-                        If Vz(j) > 0 Then Vtrials(i, j) = 0.00001
-                    Next
-                Next
-                For j = 0 To nt
-                    Vtrials(j, idx(j)) = 1
-                Next
+            If result(0) > 0.0 Then
 
                 IObj?.SetCurrent
                 Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
 
-                    Dim vx2est(nc), fcl(nc), fcv(nc) As Double
-                    Dim m As Integer = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
+                    If Not prevres Is Nothing Then
 
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To nc
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            IObj?.SetCurrent
-                            fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To nc
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
+                        result = Flash_PV_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, V, T, PP)
+
                     Else
+
+                        Dim vx2est(n), fcl(n), fcv(n) As Double
+                        Dim m As Double = UBound(stresult(1), 1)
+
                         For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(m, i)
                         Next
+
+                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+
+                        Dim maxl As Double = MathEx.Common.Max(vx2est)
+                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+
+                        F = 1
+                        V = result(1)
+                        L2 = F * result(3)(imaxl)
+                        L1 = F - L2 - V
+
+                        If L1 < 0.0# Then
+                            L1 = Abs(L1)
+                            L2 = F - L1 - V
+                        End If
+
+                        If L2 < 0.0# Then
+                            V += L2
+                            L2 = Abs(L2)
+                        End If
+
+                        For i = 0 To n
+                            If i <> imaxl Then
+                                vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
+                            Else
+                                vx1e(i) = Vz(i) * L2
+                            End If
+                        Next
+
+                        Dim sumvx2 As Double
+                        For i = 0 To n
+                            sumvx2 += Abs(vx1e(i))
+                        Next
+
+                        For i = 0 To n
+                            vx1e(i) = Abs(vx1e(i)) / sumvx2
+                        Next
+
+                        'do a simple LLE calculation to get initial estimates.
+                        Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                        IObj?.SetCurrent
+                        Dim resultL As Object = slle.Flash_PT(result(2), P, T, PP)
+
+                        L1 = resultL(0)
+                        L2 = resultL(5)
+                        Vx1 = resultL(2)
+                        Vx2 = resultL(6)
+                        IObj?.SetCurrent
+                        result = Flash_PV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, P, V, T, PP)
+
                     End If
-
-                    'do a simple LLE calculation to get initial estimates.
-                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
-                    IObj?.SetCurrent
-                    Dim resultL As Object = slle.Flash_PT(result(2), P, T, PP)
-
-                    L1 = resultL(0)
-                    L2 = resultL(5)
-                    Vx1 = resultL(2)
-                    Vx2 = resultL(6)
-                    IObj?.SetCurrent
-                    result = Flash_PV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, P, V, T, PP)
 
                 End If
 
@@ -1735,6 +1718,7 @@ alt:
 
         End Function
         Public Function Flash_PV_3P(ByVal Vz() As Double, ByVal Vest As Double, ByVal L1est As Double, ByVal L2est As Double, ByVal VyEST As Double(), ByVal Vx1EST As Double(), ByVal Vx2EST As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
+
             Dim i As Integer
 
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
@@ -1892,7 +1876,10 @@ out:        L1 = L1 * (1 - V) 'calculate global phase fractions
 
             WriteDebugInfo("PV Flash [NL-3PV3]: Iteration #" & ecount & ", VF = " & V & ", L1 = " & L1 & ", T = " & T)
 
+            prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+
             Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, PP.RET_NullVector}
+
         End Function
 
         Public Function Flash_TV_3P(ByVal Vz() As Double, ByVal Vest As Double, ByVal L1est As Double, ByVal L2est As Double, ByVal VyEST As Double(), ByVal Vx1EST As Double(), ByVal Vx2EST As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackage) As Object
@@ -1996,6 +1983,8 @@ out:        L1 = L1 * (1 - V) 'calculate global phase fractions
             L2 = L2 * (1 - V)
 
             WriteDebugInfo("TV Flash [NL-3PV3]: Iteration #" & ecount & ", VF = " & V & ", L1 = " & L1 & ", P = " & P)
+
+            prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
 
             Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, PP.RET_NullVector}
 

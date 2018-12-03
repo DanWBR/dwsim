@@ -32,6 +32,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             MyBase.New
             Order = 0
         End Sub
+        Public Sub ClearEstimates()
+            nl2?.ClearEstimates()
+        End Sub
 
         Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
             Get

@@ -1986,9 +1986,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent
                     K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
                     IObj?.SetCurrent
-                    K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
+                    K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.1, P)
 
-                    dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.01)
+                    dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.1)
 
                     IObj2?.Paragraphs.Add(String.Format("K: {0}", Ki.ToMathArrayString))
 

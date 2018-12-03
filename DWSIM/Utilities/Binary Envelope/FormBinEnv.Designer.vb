@@ -28,6 +28,9 @@ Partial Class FormBinEnv
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.tbdx = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.PanelCalc = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.LabelStatus = New System.Windows.Forms.Label()
@@ -57,7 +60,6 @@ Partial Class FormBinEnv
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.cbComp1 = New System.Windows.Forms.ComboBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -110,6 +112,8 @@ Partial Class FormBinEnv
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
+        Me.GroupBox6.Controls.Add(Me.tbdx)
+        Me.GroupBox6.Controls.Add(Me.Label8)
         Me.GroupBox6.Controls.Add(Me.Button1)
         Me.GroupBox6.Controls.Add(Me.PanelCalc)
         Me.GroupBox6.Controls.Add(Me.chkCompareModels)
@@ -139,6 +143,21 @@ Partial Class FormBinEnv
         Me.GroupBox6.Controls.Add(Me.Label23)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        '
+        'tbdx
+        '
+        resources.ApplyResources(Me.tbdx, "tbdx")
+        Me.tbdx.Name = "tbdx"
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
         '
         'PanelCalc
         '
@@ -216,9 +235,9 @@ Partial Class FormBinEnv
         '
         'cbPropPack
         '
+        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.DropDownWidth = 222
-        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.Items.AddRange(New Object() {resources.GetString("cbPropPack.Items"), resources.GetString("cbPropPack.Items1"), resources.GetString("cbPropPack.Items2"), resources.GetString("cbPropPack.Items3")})
         Me.cbPropPack.Name = "cbPropPack"
         '
@@ -259,9 +278,9 @@ Partial Class FormBinEnv
         '
         'cbXAxisBasis
         '
+        resources.ApplyResources(Me.cbXAxisBasis, "cbXAxisBasis")
         Me.cbXAxisBasis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbXAxisBasis.DropDownWidth = 222
-        resources.ApplyResources(Me.cbXAxisBasis, "cbXAxisBasis")
         Me.cbXAxisBasis.Items.AddRange(New Object() {resources.GetString("cbXAxisBasis.Items"), resources.GetString("cbXAxisBasis.Items1"), resources.GetString("cbXAxisBasis.Items2"), resources.GetString("cbXAxisBasis.Items3")})
         Me.cbXAxisBasis.Name = "cbXAxisBasis"
         '
@@ -272,9 +291,9 @@ Partial Class FormBinEnv
         '
         'cbComp2
         '
+        resources.ApplyResources(Me.cbComp2, "cbComp2")
         Me.cbComp2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp2.DropDownWidth = 222
-        resources.ApplyResources(Me.cbComp2, "cbComp2")
         Me.cbComp2.Name = "cbComp2"
         '
         'Label2
@@ -299,8 +318,8 @@ Partial Class FormBinEnv
         '
         'RadioButton1
         '
-        Me.RadioButton1.Checked = True
         resources.ApplyResources(Me.RadioButton1, "RadioButton1")
+        Me.RadioButton1.Checked = True
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.TabStop = True
         '
@@ -309,16 +328,11 @@ Partial Class FormBinEnv
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
         '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        '
         'cbComp1
         '
+        resources.ApplyResources(Me.cbComp1, "cbComp1")
         Me.cbComp1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp1.DropDownWidth = 222
-        resources.ApplyResources(Me.cbComp1, "cbComp1")
         Me.cbComp1.Name = "cbComp1"
         '
         'Label23
@@ -335,55 +349,55 @@ Partial Class FormBinEnv
         '
         'FaTabStrip1
         '
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem3, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GraphControl)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GraphControl
         '
+        resources.ApplyResources(Me.GraphControl, "GraphControl")
         Me.GraphControl.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GraphControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.GraphControl, "GraphControl")
         Me.GraphControl.IsAntiAlias = True
         Me.GraphControl.IsAutoScrollRange = True
         Me.GraphControl.IsShowCopyMessage = False
         Me.GraphControl.Name = "GraphControl"
-        Me.GraphControl.ScrollGrace = 0.0R
-        Me.GraphControl.ScrollMaxX = 0.0R
-        Me.GraphControl.ScrollMaxY = 0.0R
-        Me.GraphControl.ScrollMaxY2 = 0.0R
-        Me.GraphControl.ScrollMinX = 0.0R
-        Me.GraphControl.ScrollMinY = 0.0R
-        Me.GraphControl.ScrollMinY2 = 0.0R
+        Me.GraphControl.ScrollGrace = 0R
+        Me.GraphControl.ScrollMaxX = 0R
+        Me.GraphControl.ScrollMaxY = 0R
+        Me.GraphControl.ScrollMaxY2 = 0R
+        Me.GraphControl.ScrollMinX = 0R
+        Me.GraphControl.ScrollMinY = 0R
+        Me.GraphControl.ScrollMinY2 = 0R
         '
         'FaTabStripItem3
         '
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.CanClose = False
         Me.FaTabStripItem3.Controls.Add(Me.GridExpData)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'GridExpData
         '
+        resources.ApplyResources(Me.GridExpData, "GridExpData")
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpData.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.GridExpData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.check, Me.colx1, Me.coly1, Me.colT, Me.colP})
-        resources.ApplyResources(Me.GridExpData, "GridExpData")
         Me.GridExpData.Name = "GridExpData"
         Me.GridExpData.RowHeadersVisible = False
         '
@@ -424,14 +438,15 @@ Partial Class FormBinEnv
         '
         'FaTabStripItem2
         '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.Grid1)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'Grid1
         '
+        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.AllowUserToAddRows = False
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AllowUserToOrderColumns = True
@@ -441,7 +456,6 @@ Partial Class FormBinEnv
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.Grid1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.Name = "Grid1"
         Me.Grid1.ReadOnly = True
         Me.Grid1.RowHeadersVisible = False
@@ -460,37 +474,37 @@ Partial Class FormBinEnv
         '
         'TSB_Print
         '
+        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Print.Image = Global.DWSIM.My.Resources.Resources.printer
-        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.Name = "TSB_Print"
         '
         'TSB_PrinterSetup
         '
+        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_PrinterSetup.Image = Global.DWSIM.My.Resources.Resources.printer_add
-        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.Name = "TSB_PrinterSetup"
         '
         'TSB_PageSetup
         '
+        resources.ApplyResources(Me.TSB_PageSetup, "TSB_PageSetup")
         Me.TSB_PageSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_PageSetup.Image = Global.DWSIM.My.Resources.Resources.page_white_gear
-        resources.ApplyResources(Me.TSB_PageSetup, "TSB_PageSetup")
         Me.TSB_PageSetup.Name = "TSB_PageSetup"
         '
         'TSB_Preview
         '
+        resources.ApplyResources(Me.TSB_Preview, "TSB_Preview")
         Me.TSB_Preview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Preview.Image = Global.DWSIM.My.Resources.Resources.page_white_magnify
-        resources.ApplyResources(Me.TSB_Preview, "TSB_Preview")
         Me.TSB_Preview.Name = "TSB_Preview"
         '
         'TSB_Copy
         '
+        resources.ApplyResources(Me.TSB_Copy, "TSB_Copy")
         Me.TSB_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Copy.Image = Global.DWSIM.My.Resources.Resources.copy
-        resources.ApplyResources(Me.TSB_Copy, "TSB_Copy")
         Me.TSB_Copy.Name = "TSB_Copy"
         '
         'PrintDialog1
@@ -499,59 +513,59 @@ Partial Class FormBinEnv
         '
         'dckMenu
         '
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
+        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         '
         'DockLeftToolStripMenuItem
         '
-        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
+        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         '
         'DockRightToolStripMenuItem
         '
-        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
+        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         '
         'DockTopToolStripMenuItem
         '
-        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
+        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         '
         'DockBottomToolStripMenuItem
         '
-        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
+        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
+        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
+        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
+        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
+        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         '
         'DocumentToolStripMenuItem
         '
-        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
+        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         '
         'FormBinEnv
         '
@@ -646,4 +660,6 @@ Partial Class FormBinEnv
     Friend WithEvents PanelCalc As System.Windows.Forms.Panel
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents LabelStatus As System.Windows.Forms.Label
+    Friend WithEvents tbdx As TextBox
+    Public WithEvents Label8 As Label
 End Class
