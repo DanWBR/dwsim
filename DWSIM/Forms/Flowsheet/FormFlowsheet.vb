@@ -2825,7 +2825,40 @@ Public Class FormFlowsheet
     End Property
 
     Public Function GetSpreadsheetData(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetData
-        Throw New NotImplementedException
+
+        Dim firstcolumn, firstrow, lastcolumn, lastrow As Integer
+        Dim firstcell, lastcell As String
+
+        firstcell = range.Split(":")(0)
+        lastcell = range.Split(":")(1)
+
+        firstrow = FormSpreadsheet.GetCellValue(firstcell).RowIndex
+        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).ColumnIndex
+
+        lastrow = FormSpreadsheet.GetCellValue(lastcell).RowIndex
+        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).ColumnIndex
+
+        Dim data As New List(Of String())
+
+        Dim i, j As Integer
+
+        Dim grid = FormSpreadsheet.DataGridView1
+
+        For i = firstrow To lastrow
+            Dim sublist = New List(Of String)
+            For j = firstcolumn To lastcolumn
+                Dim val = grid.Rows(i).Cells(j).Value
+                If val Is Nothing Then
+                    sublist.Add("")
+                Else
+                    sublist.Add(val.ToString())
+                End If
+            Next
+            data.Add(sublist.ToArray)
+        Next
+
+        Return data
+
     End Function
 
     Public Function GetApplicationObject() As Object Implements IFlowsheet.GetApplicationObject

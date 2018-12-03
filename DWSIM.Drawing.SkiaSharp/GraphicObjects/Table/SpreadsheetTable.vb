@@ -112,8 +112,6 @@ Namespace GraphicObjects.Tables
                 .StrokeWidth = LineWidth
             End With
 
-            Padding = 4
-
             Dim maxW As New List(Of Integer)
 
             'find number of rows and columns by range

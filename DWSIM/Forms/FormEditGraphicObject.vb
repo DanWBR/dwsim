@@ -83,29 +83,18 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
-                    .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "LineColor", False, "", DWSIM.App.GetLocalString("Cordotextodatabela"), True)
-                    .Item(.Item.Count - 1).Tag2 = "LineColor"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj, "BorderColor", False, "", "", True)
+                    .Item.Add(DWSIM.App.GetLocalString("Size"), gobj, "FontSize", False, "", DWSIM.App.GetLocalString("Size"), True)
+                    .Item(.Item.Count - 1).Tag2 = "FontSize"
+                    .Item.Add("Border Color", gobj, "BorderColor", False, "", "", True)
                     .Item(.Item.Count - 1).Tag2 = "BorderColor"
+                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
+                    .Item.Add("Text Color", gobj, "TextColor", False, "", "", True)
+                    .Item(.Item.Count - 1).Tag2 = "TextColor"
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
                     .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj, "Padding", False, "", DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
                     .Item(.Item.Count - 1).Tag2 = "Padding"
-                    .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj, "Rotation", False, "", DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
-                    .Item(.Item.Count - 1).Tag2 = "Rotation"
-                    .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj, "IsGradientBackground", False, "", "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
-                    .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
-                    .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj, "FillColor", False, "", DWSIM.App.GetLocalString("Corsemgradiente"), True)
-                    .Item(.Item.Count - 1).Tag2 = "FillColor"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj, "BackgroundGradientColor1", False, "", DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
-                    .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj, "BackgroundGradientColor2", False, "", DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
-                    .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj, "Opacity", False, "", DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
-                    .Item(.Item.Count - 1).Tag2 = "Opacity"
+                    .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, "", DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
+                    .Item(.Item.Count - 1).Tag2 = "LineWidth"
 
                     .PropertySort = PropertySort.Categorized
                     .ShowCustomProperties = True
@@ -118,28 +107,18 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
-                    .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "LineColor", False, "", DWSIM.App.GetLocalString("Cordotextodatabela"), True)
-                    .Item(.Item.Count - 1).Tag2 = "LineColor"
-                    .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj, "BorderColor", False, "", "", True)
+                    .Item.Add(DWSIM.App.GetLocalString("Size"), gobj, "FontSize", False, "", DWSIM.App.GetLocalString("Size"), True)
+                    .Item(.Item.Count - 1).Tag2 = "FontSize"
+                    .Item.Add("Border Color", gobj, "BorderColor", False, "", "", True)
                     .Item(.Item.Count - 1).Tag2 = "BorderColor"
+                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
+                    .Item.Add("Text Color", gobj, "TextColor", False, "", "", True)
+                    .Item(.Item.Count - 1).Tag2 = "TextColor"
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
                     .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj, "Padding", False, "", DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
                     .Item(.Item.Count - 1).Tag2 = "Padding"
-                    .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj, "Rotation", False, "", DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
-                    .Item(.Item.Count - 1).Tag2 = "Rotation"
-                    .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj, "IsGradientBackground", False, "", "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
-                    .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
-                    .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj, "FillColor", False, "", DWSIM.App.GetLocalString("Corsemgradiente"), True)
-                    .Item(.Item.Count - 1).Tag2 = "FillColor"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj, "BackgroundGradientColor1", False, "", DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
-                    .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj, "BackgroundGradientColor2", False, "", DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
-                    .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
-                    .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj, "Opacity", False, "", DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item(.Item.Count - 1).Tag2 = "Opacity"
+                    .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, "", DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
+                    .Item(.Item.Count - 1).Tag2 = "LineWidth"
 
                     .PropertySort = PropertySort.Categorized
                     .ShowCustomProperties = True
@@ -152,27 +131,18 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
-                    .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj, "BorderColor", False, "", "", True)
+                    .Item.Add(DWSIM.App.GetLocalString("Size"), gobj, "FontSize", False, "", DWSIM.App.GetLocalString("Size"), True)
+                    .Item(.Item.Count - 1).Tag2 = "FontSize"
+                    .Item.Add("Border Color", gobj, "BorderColor", False, "", "", True)
                     .Item(.Item.Count - 1).Tag2 = "BorderColor"
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
+                    .Item.Add("Text Color", gobj, "TextColor", False, "", "", True)
+                    .Item(.Item.Count - 1).Tag2 = "TextColor"
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
                     .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj, "Padding", False, "", DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
                     .Item(.Item.Count - 1).Tag2 = "Padding"
-                    .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj, "Rotation", False, "", DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
-                    .Item(.Item.Count - 1).Tag2 = "Rotation"
-                    .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj, "IsGradientBackground", False, "", "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
-                    .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
-                    .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj, "FillColor", False, "", DWSIM.App.GetLocalString("Corsemgradiente"), True)
-                    .Item(.Item.Count - 1).Tag2 = "FillColor"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj, "BackgroundGradientColor1", False, "", DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
-                    .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj, "BackgroundGradientColor2", False, "", DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
-                    .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj, "Opacity", False, "", DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
-                    .Item(.Item.Count - 1).Tag2 = "Opacity"
+                    .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, "", DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
+                    .Item(.Item.Count - 1).Tag2 = "LineWidth"
 
                     .PropertySort = PropertySort.Categorized
                     .ShowCustomProperties = True
