@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.6 Update 5
+Version 5.6 Update 6
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.6 Update 6
+
+- [NEW] Select Classic UI Flowsheet Renderer (CPU or OpenGL)
+- [CHG] Added ChEDL compound database to Classic UI
+- [FIX] Fixed Spreadsheet Table crash
+- [FIX] Fixes to some flash algorithms
+- [FIX] Other fixes and enhancements
 
 Version 5.6 Update 5
 

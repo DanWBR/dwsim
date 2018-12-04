@@ -27,7 +27,7 @@ Public Class Form1
 
         Dim eventhandler As DWSIM.Drawing.SkiaSharp.GraphicsSurface.SelectionChangedEventHandler = AddressOf SelectedObjectChanged
 
-        RemoveHandler fsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectionChanged, eventhandler
+        RemoveHandler fsheet.FormSurface.FlowsheetSurface.SelectionChanged, eventhandler
 
         'For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
         '    If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
@@ -45,7 +45,7 @@ Public Class Form1
 
         Dim eventhandler As DWSIM.Drawing.SkiaSharp.GraphicsSurface.SelectionChangedEventHandler = AddressOf SelectedObjectChanged
 
-        AddHandler fsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectionChanged, eventhandler
+        AddHandler fsheet.FormSurface.FlowsheetSurface.SelectionChanged, eventhandler
 
         'For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
         '    If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
@@ -64,7 +64,7 @@ Public Class Form1
         Me.Invalidate()
 
         'check if we have a selected object.
-        If Not fsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
+        If Not fsheet.FormSurface.FlowsheetSurface.SelectedObject Is Nothing Then
 
             Dim p As New Populate()
             p.Populate(fsheet, Me)

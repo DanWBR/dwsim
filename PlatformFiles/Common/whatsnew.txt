@@ -1,6 +1,7 @@
-Version 5.6 Update 5
+Version 5.6 Update 6
 
-- [NEW] Load FOSSEE Flowsheets and Samples from the File menu (Classic UI)
-- [NEW] Customize Systems of Units on Simulation Settings Wizard (Classic UI)
-- [NEW] Added ChemSep Column directly from the Object Palette
-- [FIX] Other bug fixes and enhancements
+- [NEW] Select Classic UI Flowsheet Renderer (CPU or OpenGL)
+- [CHG] Added ChEDL compound database to Classic UI
+- [FIX] Fixed Spreadsheet Table crash
+- [FIX] Fixes to some flash algorithms
+- [FIX] Other fixes and enhancements
