@@ -82,8 +82,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Libraries.PythonLink", "DWSIM.Libraries.PythonLink\DWSIM.Libraries.PythonLink.csproj", "{3A73164C-C190-4D33-AE6C-A3BC69873E73}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Databases.ChEDLThermoLink", "DWSIM.Thermodynamics.Databases.ChEDLThermoLink\DWSIM.Thermodynamics.Databases.ChEDLThermoLink.vbproj", "{77A58441-0CF0-4DEA-B1F7-7723368F693F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3214CDEB-5764-4DA2-B4CB-D923463D0386}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -677,21 +675,6 @@ Global
 		{3A73164C-C190-4D33-AE6C-A3BC69873E73}.Release|x64.Build.0 = Release|Any CPU
 		{3A73164C-C190-4D33-AE6C-A3BC69873E73}.Release|x86.ActiveCfg = Release|Any CPU
 		{3A73164C-C190-4D33-AE6C-A3BC69873E73}.Release|x86.Build.0 = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Debug|x64.Build.0 = Debug|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|x64.ActiveCfg = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|x64.Build.0 = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|x86.ActiveCfg = Release|Any CPU
-		{77A58441-0CF0-4DEA-B1F7-7723368F693F}.Release|x86.Build.0 = Release|Any CPU
 		{766C669B-91BD-4C62-A2AF-D3FB9C939715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{766C669B-91BD-4C62-A2AF-D3FB9C939715}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{766C669B-91BD-4C62-A2AF-D3FB9C939715}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU

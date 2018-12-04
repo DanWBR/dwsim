@@ -834,6 +834,9 @@ Public Class FormMain
         'load CoolProp database
         Me.LoadCPDB()
 
+        'load ChEDL database
+        Me.LoadCheDLDB()
+
         'load Electrolyte XML database
         Me.LoadEDB()
 
@@ -948,6 +951,19 @@ Public Class FormMain
             Next
         Catch ex As Exception
         End Try
+    End Sub
+
+    Public Sub LoadCheDLDB()
+
+        Dim chedl As New Databases.ChEDL_Thermo
+        Dim cpa() As BaseClasses.ConstantProperties
+        chedl.Load()
+        cpa = chedl.Transfer().ToArray()
+        Dim addedcomps = AvailableComponents.Keys.Select(Function(x) x.ToLower).ToList()
+        For Each cp As ConstantProperties In cpa
+            If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableComponents.ContainsKey(cp.Name) Then AvailableComponents.Add(cp.Name, cp)
+        Next
+
     End Sub
 
 #End Region

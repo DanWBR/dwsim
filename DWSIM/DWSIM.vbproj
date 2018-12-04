@@ -489,12 +489,6 @@
     <Compile Include="Forms\FormEventDescription.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormImportCompoundChEDLThermo.Designer.vb">
-      <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormImportCompoundChEDLThermo.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\FormImportCompoundOnline.Designer.vb">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </Compile>
@@ -1166,12 +1160,6 @@
     <EmbeddedResource Include="Forms\FormEventDescription.resx">
       <DependentUpon>FormEventDescription.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.en.resx">
-      <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.resx">
-      <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundOnline.en.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </EmbeddedResource>
@@ -1537,10 +1525,6 @@
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChEDLThermoLink\DWSIM.Thermodynamics.Databases.ChEDLThermoLink.vbproj">
-      <Project>{77a58441-0cf0-4dea-b1f7-7723368f693f}</Project>
-      <Name>DWSIM.Thermodynamics.Databases.ChEDLThermoLink</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
       <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
