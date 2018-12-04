@@ -62,7 +62,7 @@ Public Class FrmColdProperties
 
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
-            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, frm.FormSurface.FlowsheetDesignSurface.FlowsheetSurface)
+            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, frm.FormSurface.FlowsheetSurface)
             Me.mat = frm.Collections.FlowsheetObjectCollection(gobj.Name).Clone
 
             Dim pp As PropertyPackages.PropertyPackage = frm.Options.SelectedPropertyPackage

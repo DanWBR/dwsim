@@ -3,9 +3,9 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.UnitOperations
 Imports SkiaSharp.Views.Desktop
 
-Public Class FlowsheetSurfaceControl
+Public Class FlowsheetSurfaceGLControl
 
-    Inherits SkiaSharp.Views.Desktop.SKControl
+    Inherits SkiaSharp.Views.Desktop.SKGLControl
 
     Public WithEvents FlowsheetSurface As New Drawing.SkiaSharp.GraphicsSurface
 
@@ -27,7 +27,7 @@ Public Class FlowsheetSurfaceControl
 
     End Sub
 
-    Protected Overrides Sub OnPaintSurface(e As SKPaintSurfaceEventArgs)
+    Protected Overrides Sub OnPaintSurface(e As SKPaintGLSurfaceEventArgs)
 
         MyBase.OnPaintSurface(e)
 

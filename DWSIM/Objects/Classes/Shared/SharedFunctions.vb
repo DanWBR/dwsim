@@ -117,6 +117,9 @@ Namespace DWSIM
                 MessageBox.Show("GPU initialization failed: " & ex.Message)
             End Try
 
+            GlobalSettings.Settings.FlowsheetRenderer = My.Settings.FlowsheetRenderer
+            GlobalSettings.Settings.DrawingAntiAlias = My.Settings.FlowsheetAntiAliasing
+
         End Sub
 
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)

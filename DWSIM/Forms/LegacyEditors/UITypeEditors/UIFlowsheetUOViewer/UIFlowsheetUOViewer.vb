@@ -43,10 +43,10 @@ Namespace DWSIM.Editors.FlowsheetUO
 
             Dim selectionControl As New UnitOperations.EditingForm_Flowsheet_Viewer
 
-            selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
-            selectionControl.TabText = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
+            selectionControl.Text = form.FormSurface.FlowsheetSurface.SelectedObject.Tag
+            selectionControl.TabText = form.FormSurface.FlowsheetSurface.SelectedObject.Tag
 
-            selectionControl.fsuo = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+            selectionControl.fsuo = form.SimulationObjects(form.FormSurface.FlowsheetSurface.SelectedObject.Name)
 
             selectionControl.Show(form.dckPanel)
 

@@ -142,7 +142,7 @@ Public Class frmProps
                     End If
                 Next
             End Try
-            Flowsheet.FormSurface.FlowsheetDesignSurface.Invalidate()
+            Flowsheet.FormSurface.Invalidate()
         End If
     End Sub
 

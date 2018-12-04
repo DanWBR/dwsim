@@ -54,7 +54,7 @@ Namespace DWSIM.Editors.Reactors
             If (editorService IsNot Nothing) Then
 
                 form = My.Application.ActiveSimulation
-                gr = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+                gr = form.SimulationObjects(form.FormSurface.FlowsheetSurface.SelectedObject.Name)
 
                 Me.ListView2 = New System.Windows.Forms.ListView
                 Me.ColumnHeader3 = New System.Windows.Forms.ColumnHeader

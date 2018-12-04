@@ -1635,12 +1635,12 @@ Public Class FormSimulSettings
 
     Private Sub chkShowFloatingTables_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowFloatingTables.CheckedChanged
         FrmChild.Options.DisplayFloatingPropertyTables = chkShowFloatingTables.Checked
-        FrmChild.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawFloatingTable = chkShowFloatingTables.Checked
+        FrmChild.FormSurface.FlowsheetSurface.DrawFloatingTable = chkShowFloatingTables.Checked
     End Sub
 
     Private Sub chkShowAnchoredPropertyLists_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowAnchoredPropertyLists.CheckedChanged
         FrmChild.Options.DisplayCornerPropertyList = chkShowAnchoredPropertyLists.Checked
-        FrmChild.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.DrawPropertyList = chkShowAnchoredPropertyLists.Checked
+        FrmChild.FormSurface.FlowsheetSurface.DrawPropertyList = chkShowAnchoredPropertyLists.Checked
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click

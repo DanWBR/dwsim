@@ -423,6 +423,12 @@
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurfaceControl.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurfaceGLControl.Designer.vb">
+      <DependentUpon>FlowsheetSurfaceGLControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurfaceGLControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.designer.vb">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </Compile>

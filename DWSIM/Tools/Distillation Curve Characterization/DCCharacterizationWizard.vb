@@ -789,7 +789,7 @@ Public Class DCCharacterizationWizard
                            myCOMS.SetFlowsheet(form)
                            form.AddSimulationObject(myCOMS)
                            form.AddGraphicObject(gObj)
-                           form.FormSurface.FlowsheetDesignSurface.Invalidate()
+                           form.FormSurface.Invalidate()
 
                            Me.Close()
                        End Sub)

@@ -19,21 +19,32 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public ticks As Integer
 
-    Public Event ObjectSelected(ByVal sender As FormFlowsheet)
-
     Public SimObjPanel As SimulationObjectsPanel
 
-    Public WithEvents FlowsheetDesignSurface As New FlowsheetSurfaceControl
+    Public FlowsheetSurface As Drawing.SkiaSharp.GraphicsSurface
 
-    Public Function ReturnForm(ByVal str As String) As IDockContent
+    Public FControl As Control
 
-        If str = Me.ToString Then
-            Return Me
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        If My.Settings.FlowsheetRenderer = 0 Then
+            Dim fscontrol As New FlowsheetSurfaceControl
+            fscontrol.Dock = DockStyle.Fill
+            fscontrol.FlowsheetObject = Flowsheet
+            FlowsheetSurface = fscontrol.FlowsheetSurface
+            FControl = fscontrol
         Else
-            Return Nothing
+            Dim fscontrol As New FlowsheetSurfaceGLControl
+            fscontrol.Dock = DockStyle.Fill
+            fscontrol.FlowsheetObject = Flowsheet
+            FlowsheetSurface = fscontrol.FlowsheetSurface
+            FControl = fscontrol
         End If
 
-    End Function
+    End Sub
 
     Private Sub frmSurface_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -45,9 +56,19 @@ Public Class FlowsheetSurface_SkiaSharp
             Flowsheet = My.Application.ActiveSimulation
         End If
 
-        FlowsheetDesignSurface.FlowsheetObject = Flowsheet
+        If TypeOf Me.ParentForm Is FormFlowsheet Then
+            Flowsheet = Me.ParentForm
+        ElseIf Flowsheet Is Nothing Then
+            Flowsheet = My.Application.ActiveSimulation
+        End If
 
-        SplitContainer1.Panel1.Controls.Add(FlowsheetDesignSurface)
+        If My.Settings.FlowsheetRenderer = 0 Then
+            DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetObject = Flowsheet
+        Else
+            DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetObject = Flowsheet
+        End If
+
+        SplitContainer1.Panel1.Controls.Add(FControl)
 
         SimObjPanel = New SimulationObjectsPanel() With {.Dock = DockStyle.Fill, .Flowsheet = Flowsheet}
 
@@ -57,6 +78,16 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Public Function ReturnForm(ByVal str As String) As IDockContent
+
+        If str = Me.ToString Then
+            Return Me
+        Else
+            Return Nothing
+        End If
+
+    End Function
+
     Public Sub UpdateSelectedObject()
 
         UpdateSelectedObject_New()
@@ -65,11 +96,11 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Sub UpdateSelectedObject_New()
 
-        If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
+        If Not FlowsheetSurface.SelectedObject Is Nothing Then
 
-            If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name) Then
+            If Flowsheet.SimulationObjects.ContainsKey(FlowsheetSurface.SelectedObject.Name) Then
 
-                Dim obj = Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+                Dim obj = Flowsheet.SimulationObjects(FlowsheetSurface.SelectedObject.Name)
 
                 obj.UpdateEditForm()
                 EditorTooltips.Update(obj, Flowsheet)
@@ -80,62 +111,6 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
-    Private Sub FlowsheetDesignSurface_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles FlowsheetDesignSurface.KeyDown
-
-        If e.KeyCode = Keys.E And e.Control Then
-
-        ElseIf e.KeyCode = Keys.F5 Then
-            Flowsheet.tsbCalc_Click(sender, e)
-        ElseIf e.KeyCode = Keys.F6 Then
-            Flowsheet.tsbAtivar.Checked = Not Flowsheet.tsbAtivar.Checked
-            Flowsheet.tsbAtivar_CheckedChanged(sender, e)
-        ElseIf e.KeyCode = Keys.F7 Then
-            Flowsheet.tsbSimultAdjustSolver.Checked = Not Flowsheet.tsbSimultAdjustSolver.Checked
-            Flowsheet.tsbSimultAdjustSolver_CheckedChanged(sender, e)
-        ElseIf e.KeyCode = Keys.Pause Then
-            Flowsheet.tsbAbortCalc_Click(sender, e)
-        ElseIf e.KeyCode = Keys.X And e.Control Then
-            Flowsheet.tsmiCut_Click(Me, New EventArgs)
-        ElseIf e.KeyCode = Keys.C And e.Control Then
-            Flowsheet.tsmiCopy_Click(Me, New EventArgs)
-        ElseIf e.KeyCode = Keys.V And e.Control Then
-            Flowsheet.tsmiPaste_Click(Me, New EventArgs)
-        ElseIf e.KeyCode = Keys.Delete Then
-            Flowsheet.tsmiRemoveSelected_Click(Me, New EventArgs)
-        End If
-
-        If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
-            For Each go As GraphicObject In Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values
-                If e.KeyCode = Keys.Up Then
-                    If e.Modifiers = Keys.Control Then
-                        go.Y = go.Y - 1
-                    Else
-                        go.Y = go.Y - 5
-                    End If
-                ElseIf e.KeyCode = Keys.Down Then
-                    If e.Modifiers = Keys.Control Then
-                        go.Y = go.Y + 1
-                    Else
-                        go.Y = go.Y + 5
-                    End If
-                ElseIf e.KeyCode = Keys.Left Then
-                    If e.Modifiers = Keys.Control Then
-                        go.X = go.X - 1
-                    Else
-                        go.X = go.X - 5
-                    End If
-                ElseIf e.KeyCode = Keys.Right Then
-                    If e.Modifiers = Keys.Control Then
-                        go.X = go.X + 1
-                    Else
-                        go.X = go.X + 5
-                    End If
-                End If
-            Next
-            Me.FlowsheetDesignSurface.Invalidate()
-        End If
-
-    End Sub
 
     Private Sub CMS_Sel_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles CMS_Sel.Opened
 
@@ -154,7 +129,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Me.SplitToolStripMenuItem.Visible = False
         Me.MergeStreamsToolStripMenuItem.Visible = False
 
-        Me.AtivadoToolStripMenuItem.Checked = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Active
+        Me.AtivadoToolStripMenuItem.Checked = FlowsheetSurface.SelectedObject.Active
 
         If AtivadoToolStripMenuItem.Checked Then
             AtivadoToolStripMenuItem.Text = DWSIM.App.GetLocalString("ObjectIsActive")
@@ -162,20 +137,20 @@ Public Class FlowsheetSurface_SkiaSharp
             AtivadoToolStripMenuItem.Text = DWSIM.App.GetLocalString("ObjectIsInactive")
         End If
 
-        DepurarObjetoToolStripMenuItem.Visible = Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+        DepurarObjetoToolStripMenuItem.Visible = Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(FlowsheetSurface.SelectedObject.Name)
 
-        If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Image And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Table And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_MasterTable And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_SpreadsheetTable And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_FloatingTable And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.DistillationColumn And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.AbsorptionColumn And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.ReboiledAbsorber And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.RefluxedAbsorber And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Rectangle And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Chart And
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Text Then
+        If FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Image And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Table And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_MasterTable And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_SpreadsheetTable And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_FloatingTable And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.DistillationColumn And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.AbsorptionColumn And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.ReboiledAbsorber And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.RefluxedAbsorber And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Rectangle And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Chart And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Text Then
 
             Me.RecalcularToolStripMenuItem.Visible = True
             Me.ToolStripSeparator6.Visible = True
@@ -185,25 +160,25 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Try
 
-                If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Count = 2 AndAlso
-                    Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Count = 2 Or
-                    Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Count = 2 Then
+                If FlowsheetSurface.SelectedObjects.Count = 2 AndAlso
+                    FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Count = 2 Or
+                    FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Count = 2 Then
 
                     Me.ToolStripSeparator8.Visible = True
                     Me.MergeStreamsToolStripMenuItem.Visible = True
 
                 End If
 
-                If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Count = 1 AndAlso
-                    Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Count = 1 Or
-                    Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Count = 1 Then
+                If FlowsheetSurface.SelectedObjects.Count = 1 AndAlso
+                    FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Count = 1 Or
+                    FlowsheetSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Count = 1 Then
 
                     Me.ToolStripSeparator8.Visible = True
                     Me.SplitToolStripMenuItem.Visible = True
 
                 End If
 
-                Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+                Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(FlowsheetSurface.SelectedObject.Name)
 
                 If Me.IsObjectDownstreamConnectable(obj.GraphicObject.Tag) Then
                     Dim arr As ArrayList = Me.ReturnDownstreamConnectibles(obj.GraphicObject.Tag)
@@ -255,7 +230,7 @@ Public Class FlowsheetSurface_SkiaSharp
                     Me.HorizontalmenteToolStripMenuItem.Checked = False
                 End If
 
-                If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
+                If FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
 
                     Dim cancopy As Boolean
 
@@ -285,10 +260,10 @@ Public Class FlowsheetSurface_SkiaSharp
                 CMS_Sel.Hide()
             End Try
 
-        ElseIf Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType = ObjectType.AbsorptionColumn Or
-        Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType = ObjectType.DistillationColumn Or
-        Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType = ObjectType.ReboiledAbsorber Or
-        Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType = ObjectType.RefluxedAbsorber Then
+        ElseIf FlowsheetSurface.SelectedObject.ObjectType = ObjectType.AbsorptionColumn Or
+        FlowsheetSurface.SelectedObject.ObjectType = ObjectType.DistillationColumn Or
+        FlowsheetSurface.SelectedObject.ObjectType = ObjectType.ReboiledAbsorber Or
+        FlowsheetSurface.SelectedObject.ObjectType = ObjectType.RefluxedAbsorber Then
 
             Me.RecalcularToolStripMenuItem.Visible = True
             Me.ToolStripSeparator6.Visible = True
@@ -298,7 +273,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Me.ClonarToolStripMenuItem.Visible = True
             Me.ExcluirToolStripMenuItem.Visible = True
             Me.HorizontalmenteToolStripMenuItem.Visible = True
-            Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+            Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(FlowsheetSurface.SelectedObject.Name)
 
             If obj.GraphicObject.FlippedH Then
                 Me.HorizontalmenteToolStripMenuItem.Checked = True
@@ -322,7 +297,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Sub MaterialStreamClickHandler(ByVal sender As System.Object, ByVal e As ToolStripItemClickedEventArgs)
 
-        Dim obj1 As Thermodynamics.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+        Dim obj1 As Thermodynamics.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(FlowsheetSurface.SelectedObject.Name)
 
         Dim obj2 As Thermodynamics.Streams.MaterialStream = Flowsheet.GetFlowsheetSimulationObject(e.ClickedItem.Text)
 
@@ -345,7 +320,7 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Public Sub ClonarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClonarToolStripMenuItem.Click
-        CloneObject(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject)
+        CloneObject(FlowsheetSurface.SelectedObject)
     End Sub
 
     Public Function CloneObject(gobj As GraphicObject) As GraphicObject
@@ -360,12 +335,12 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Dim searchtext As String = gobj.Tag.Split("(")(0).Trim()
 
-        Dim objcount As Integer = (From go As GraphicObject In Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects Select go Where go.Tag.Contains(searchtext)).Count
+        Dim objcount As Integer = (From go As GraphicObject In FlowsheetSurface.DrawingObjects Select go Where go.Tag.Contains(searchtext)).Count
 
-        Dim mpx = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.X + Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Width * 1.1
-        Dim mpy = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Y + Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Height * 1.1
+        Dim mpx = FlowsheetSurface.SelectedObject.X + FlowsheetSurface.SelectedObject.Width * 1.1
+        Dim mpy = FlowsheetSurface.SelectedObject.Y + FlowsheetSurface.SelectedObject.Height * 1.1
 
-        Select Case Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType
+        Select Case FlowsheetSurface.SelectedObject.ObjectType
 
             Case ObjectType.OT_Adjust
                 Dim myDWOBJ As Adjust = CType(newobj, Adjust)
@@ -395,7 +370,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_Spec
                 Dim myDWOBJ As Spec = CType(newobj, Spec)
                 With myDWOBJ.GraphicObject
@@ -424,7 +399,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_Recycle
                 Dim myDWOBJ As Recycle = CType(newobj, Recycle)
                 With myDWOBJ.GraphicObject
@@ -453,7 +428,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_EnergyRecycle
                 Dim myDWOBJ As EnergyRecycle = CType(newobj, EnergyRecycle)
                 With myDWOBJ.GraphicObject
@@ -482,7 +457,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.NodeIn
                 Dim myDWOBJ As Mixer = CType(newobj, Mixer)
                 With myDWOBJ.GraphicObject
@@ -511,7 +486,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.NodeOut
                 Dim myDWOBJ As UnitOperations.UnitOperations.Splitter = CType(newobj, UnitOperations.UnitOperations.Splitter)
                 With myDWOBJ.GraphicObject
@@ -540,7 +515,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Pump
                 Dim myDWOBJ As Pump = CType(newobj, Pump)
                 With myDWOBJ.GraphicObject
@@ -569,7 +544,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Tank
                 Dim myDWOBJ As Tank = CType(newobj, Tank)
                 With myDWOBJ.GraphicObject
@@ -598,7 +573,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Vessel
                 Dim myDWOBJ As Vessel = CType(newobj, Vessel)
                 With myDWOBJ.GraphicObject
@@ -627,7 +602,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.MaterialStream
                 Dim myDWOBJ As Thermodynamics.Streams.MaterialStream = CType(newobj, Thermodynamics.Streams.MaterialStream)
                 With myDWOBJ.GraphicObject
@@ -656,7 +631,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.EnergyStream
                 Dim myDWOBJ As EnergyStream = CType(newobj, Streams.EnergyStream)
                 With myDWOBJ.GraphicObject
@@ -685,7 +660,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Compressor
                 Dim myDWOBJ As Compressor = CType(newobj, Compressor)
                 With myDWOBJ.GraphicObject
@@ -714,7 +689,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Expander
                 Dim myDWOBJ As Expander = CType(newobj, Expander)
                 With myDWOBJ.GraphicObject
@@ -743,7 +718,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Cooler
                 Dim myDWOBJ As Cooler = CType(newobj, Cooler)
                 With myDWOBJ.GraphicObject
@@ -772,7 +747,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Heater
                 Dim myDWOBJ As Heater = CType(newobj, Heater)
                 With myDWOBJ.GraphicObject
@@ -801,7 +776,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Pipe
                 Dim myDWOBJ As Pipe = CType(newobj, Pipe)
                 With myDWOBJ.GraphicObject
@@ -830,7 +805,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Valve
                 Dim myDWOBJ As Valve = CType(newobj, Valve)
                 With myDWOBJ.GraphicObject
@@ -859,7 +834,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Conversion
                 Dim myDWOBJ As Reactor_Conversion = CType(newobj, Reactor_Conversion)
                 With myDWOBJ.GraphicObject
@@ -888,7 +863,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Equilibrium
                 Dim myDWOBJ As Reactor_Equilibrium = CType(newobj, Reactor_Equilibrium)
                 With myDWOBJ.GraphicObject
@@ -917,7 +892,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Gibbs
                 Dim myDWOBJ As Reactor_Gibbs = CType(newobj, Reactor_Gibbs)
                 With myDWOBJ.GraphicObject
@@ -946,7 +921,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_CSTR
                 Dim myDWOBJ As Reactor_CSTR = CType(newobj, Reactor_CSTR)
                 With myDWOBJ.GraphicObject
@@ -975,7 +950,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_PFR
                 Dim myDWOBJ As Reactor_PFR = CType(newobj, Reactor_PFR)
                 With myDWOBJ.GraphicObject
@@ -1004,7 +979,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.HeatExchanger
                 Dim myDWOBJ As HeatExchanger = CType(newobj, HeatExchanger)
                 With myDWOBJ.GraphicObject
@@ -1033,7 +1008,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ShortcutColumn
                 Dim myDWOBJ As ShortcutColumn = CType(newobj, ShortcutColumn)
                 With myDWOBJ.GraphicObject
@@ -1062,7 +1037,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.DistillationColumn
                 Dim myDWOBJ As DistillationColumn = CType(newobj, DistillationColumn)
                 With myDWOBJ.GraphicObject
@@ -1091,7 +1066,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.AbsorptionColumn
                 Dim myDWOBJ As AbsorptionColumn = CType(newobj, AbsorptionColumn)
                 With myDWOBJ.GraphicObject
@@ -1120,7 +1095,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ReboiledAbsorber
                 Dim myDWOBJ As ReboiledAbsorber = CType(newobj, ReboiledAbsorber)
                 With myDWOBJ.GraphicObject
@@ -1149,7 +1124,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RefluxedAbsorber
                 Dim myDWOBJ As RefluxedAbsorber = CType(newobj, RefluxedAbsorber)
                 With myDWOBJ.GraphicObject
@@ -1178,7 +1153,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ComponentSeparator
                 Dim myDWOBJ As ComponentSeparator = CType(newobj, ComponentSeparator)
                 With myDWOBJ.GraphicObject
@@ -1207,7 +1182,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.SolidSeparator
                 Dim myDWOBJ As SolidsSeparator = CType(newobj, SolidsSeparator)
                 With myDWOBJ.GraphicObject
@@ -1236,7 +1211,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Filter
                 Dim myDWOBJ As Filter = CType(newobj, Filter)
                 With myDWOBJ.GraphicObject
@@ -1265,7 +1240,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OrificePlate
                 Dim myDWOBJ As OrificePlate = CType(newobj, OrificePlate)
                 With myDWOBJ.GraphicObject
@@ -1294,7 +1269,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.CustomUO
                 Dim myDWOBJ As CustomUO = CType(newobj, CustomUO)
                 With myDWOBJ.GraphicObject
@@ -1323,12 +1298,12 @@ Public Class FlowsheetSurface_SkiaSharp
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.CapeOpenUO, ObjectType.FlowsheetUO
                 MessageBox.Show("Cloning is not supported by CAPE-OPEN/Flowsheet Unit Operations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Select
 
-        Me.FlowsheetDesignSurface.Invalidate()
+        SplitContainer1.Panel1.Invalidate()
 
         newobj.SetFlowsheet(Flowsheet)
 
@@ -1338,19 +1313,19 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub CMS_ItemsToDisconnect_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles CMS_ItemsToDisconnect.ItemClicked
 
-        Me.Flowsheet.DisconnectObject(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, Me.FlowsheetDesignSurface.FlowsheetSurface), True)
+        Me.Flowsheet.DisconnectObject(FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, FlowsheetSurface), True)
 
     End Sub
 
     Private Sub CMS_ItemsToConnect_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles CMS_ItemsToConnect.ItemClicked
 
-        Call Me.Flowsheet.ConnectObject(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, Me.FlowsheetDesignSurface.FlowsheetSurface))
+        Call Me.Flowsheet.ConnectObject(FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, FlowsheetSurface))
 
     End Sub
 
     Function IsObjectDownstreamConnectable(ByVal objTag As String) As Boolean
 
-        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, Me.FlowsheetDesignSurface.FlowsheetSurface)
+        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, FlowsheetSurface)
 
         If Not obj Is Nothing Then
 
@@ -1367,7 +1342,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Function IsObjectUpstreamConnectable(ByVal objTag As String) As Boolean
 
-        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, Me.FlowsheetDesignSurface.FlowsheetSurface)
+        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, FlowsheetSurface)
 
         If Not obj Is Nothing Then
 
@@ -1384,7 +1359,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Function ReturnDownstreamConnectibles(ByVal objtag As String)
 
-        Dim refobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objtag, Me.FlowsheetDesignSurface.FlowsheetSurface)
+        Dim refobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objtag, FlowsheetSurface)
 
         Dim obj As SharedClasses.UnitOperations.BaseClass
         Dim cp As ConnectionPoint
@@ -1454,7 +1429,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Function ReturnDownstreamDisconnectables(ByVal objTag As String) As ArrayList
 
-        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, Me.FlowsheetDesignSurface.FlowsheetSurface)
+        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, FlowsheetSurface)
 
         Dim conables As New ArrayList
 
@@ -1475,7 +1450,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Function ReturnUpstreamDisconnectables(ByVal objTag As String) As ArrayList
 
-        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, Me.FlowsheetDesignSurface.FlowsheetSurface)
+        Dim obj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(objTag, FlowsheetSurface)
 
         Dim conables As New ArrayList
 
@@ -1496,7 +1471,7 @@ Public Class FlowsheetSurface_SkiaSharp
     End Function
 
     Private Sub ExcluirToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExcluirToolStripMenuItem.Click
-        Call Me.Flowsheet.DeleteSelectedObject(sender, e, Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject)
+        Call Me.Flowsheet.DeleteSelectedObject(sender, e, FlowsheetSurface.SelectedObject)
     End Sub
 
     Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, chemsep As Boolean, Optional ByVal tag As String = "", Optional ByVal id As String = "") As String
@@ -2159,8 +2134,8 @@ Public Class FlowsheetSurface_SkiaSharp
         If Not gObj Is Nothing Then
             gObj.Owner = Me.Flowsheet.SimulationObjects(gObj.Name)
             Me.Flowsheet.SimulationObjects(gObj.Name).SetFlowsheet(Flowsheet)
-            Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
-            Me.FlowsheetDesignSurface.Invalidate()
+            FlowsheetSurface.DrawingObjects.Add(gObj)
+            SplitContainer1.Panel1.Invalidate()
             For Each obj In Me.Flowsheet.SimulationObjects.Values
                 obj.UpdateEditForm()
                 EditorTooltips.Update(obj, Flowsheet)
@@ -2176,7 +2151,7 @@ Public Class FlowsheetSurface_SkiaSharp
                                      .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectAdded"), gObj.Tag)})
         End If
 
-        Me.FlowsheetDesignSurface.Cursor = Cursors.Arrow
+        SplitContainer1.Panel1.Cursor = Cursors.Arrow
 
         Return gObj.Name
 
@@ -2277,27 +2252,18 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
-    Public Sub New()
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        FlowsheetDesignSurface = New FlowsheetSurfaceControl With {.Dock = DockStyle.Fill}
-
-    End Sub
-
     'Private Sub FlowsheetDesignSurface_MouseDoubleClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseDoubleClick
 
-    '    If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
-    '        Select Case Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType
+    '    If Not FlowsheetSurface.SelectedObject Is Nothing Then
+    '        Select Case FlowsheetSurface.SelectedObject.ObjectType
     '            Case ObjectType.MaterialStream
 
     '            Case ObjectType.FlowsheetUO
-    '                Dim myobj As UnitOperations.UnitOperations.Flowsheet = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As UnitOperations.UnitOperations.Flowsheet = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                If My.Computer.Keyboard.ShiftKeyDown Then
     '                    Dim viewform As New FlowsheetUOEditorForm
     '                    With viewform
-    '                        .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
+    '                        .Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag
     '                        .fsuo = myobj
     '                        .ShowDialog()
     '                        .Dispose()
@@ -2307,14 +2273,14 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    If myobj.Initialized Then
     '                        Dim viewform As New FlowsheetUOViewerForm
     '                        With viewform
-    '                            .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
+    '                            .Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag
     '                            .fsuo = myobj
     '                            .Show(Flowsheet.dckPanel)
     '                        End With
     '                    Else
     '                        Dim viewform As New FlowsheetUOEditorForm
     '                        With viewform
-    '                            .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
+    '                            .Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag
     '                            .fsuo = myobj
     '                            .ShowDialog()
     '                            .Dispose()
@@ -2323,13 +2289,13 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    End If
     '                End If
     '            Case ObjectType.CapeOpenUO
-    '                Dim myobj As CapeOpenUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As CapeOpenUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                myobj.Edit(Me, New EventArgs)
     '            Case ObjectType.ExcelUO
-    '                Dim myobj As ExcelUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As ExcelUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                If My.Computer.Keyboard.ShiftKeyDown Then
     '                    Dim selectionControl As New ExcelUOEditorForm
-    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & " - " & "Excel UO Specification"
+    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag & " - " & "Excel UO Specification"
     '                    selectionControl.TbFileName.Text = myobj.Filename
     '                    selectionControl.ShowDialog()
     '                    myobj.Filename = selectionControl.TbFileName.Text
@@ -2354,7 +2320,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    End If
     '                End If
     '            Case ObjectType.CustomUO
-    '                Dim myobj As CustomUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As CustomUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                If Not DWSIM.App.IsRunningOnMono Then
     '                    Dim selectionControl As New ScriptEditorForm
     '                    selectionControl.scripttext = myobj.ScriptText
@@ -2362,7 +2328,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    selectionControl.fontsize = myobj.FontSize
     '                    selectionControl.includes = myobj.Includes
     '                    selectionControl.highlightspaces = myobj.HighlightSpaces
-    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
+    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
     '                    selectionControl.ShowDialog(Me)
     '                    myobj.FontName = selectionControl.tscb1.SelectedItem
     '                    myobj.FontSize = selectionControl.tscb2.SelectedItem
@@ -2377,7 +2343,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    selectionControl.fontname = myobj.FontName
     '                    selectionControl.fontsize = myobj.FontSize
     '                    selectionControl.includes = myobj.Includes
-    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
+    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
     '                    selectionControl.ShowDialog()
     '                    myobj.FontName = selectionControl.tscb1.SelectedItem
     '                    myobj.FontSize = selectionControl.tscb2.SelectedItem
@@ -2397,7 +2363,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                selectionControl.Dispose()
     '                selectionControl = Nothing
     '            Case ObjectType.AbsorptionColumn, ObjectType.DistillationColumn, ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber
-    '                Dim myobj As Column = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As Column = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                If My.Computer.Keyboard.ShiftKeyDown Then
     '                    Dim selectionControl As New UIConnectionsEditorForm
     '                    selectionControl.ShowDialog()
@@ -2423,7 +2389,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    End If
     '                End If
     '            Case ObjectType.Pipe
-    '                Dim myobj As Pipe = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As Pipe = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                If My.Computer.Keyboard.ShiftKeyDown Then
     '                    Dim selectionControl As New ThermalProfileEditorForm
     '                    selectionControl.ThermalProfile = myobj.ThermalProfile
@@ -2458,7 +2424,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    selectionControl = Nothing
     '                End If
     '            Case ObjectType.RCT_PFR
-    '                Dim myobj As Reactor_PFR = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As Reactor_PFR = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                If myobj.Calculated Then
     '                    Dim selectionControl As New FormGraphPFR
     '                    selectionControl.form = myobj.FlowSheet
@@ -2468,7 +2434,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                    selectionControl = Nothing
     '                End If
     '            Case ObjectType.RCT_Gibbs
-    '                Dim myobj As Reactor_Gibbs = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '                Dim myobj As Reactor_Gibbs = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
     '                If My.Computer.Keyboard.ShiftKeyDown Then
     '                    Dim selectionControl As New ElementMatrixEditorForm
     '                    selectionControl.elmat = myobj.ElementMatrix
@@ -2513,11 +2479,11 @@ Public Class FlowsheetSurface_SkiaSharp
 
     'Private Sub RestoreTSMI_Click(sender As Object, e As EventArgs) Handles RestoreTSMI.Click
 
-    '    If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
+    '    If Not FlowsheetSurface.SelectedObject Is Nothing Then
 
-    '        If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
+    '        If FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
 
-    '            Dim mystr As DWSIM.Thermodynamics.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+    '            Dim mystr As DWSIM.Thermodynamics.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
 
     '            If Not mystr.GraphicObject.InputConnectors(0).IsAttached Then
 
@@ -2533,7 +2499,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                Application.DoEvents()
     '                Call Flowsheet.FormSurface.UpdateSelectedObject()
     '                Application.DoEvents()
-    '                Call Flowsheet.FormSurface.FlowsheetDesignSurface.Invalidate()
+    '                Call Flowsheet.FormSurface.Invalidate()
     '                Application.DoEvents()
     '                ProcessCalculationQueue(Flowsheet)
     '                Application.DoEvents()
@@ -2552,7 +2518,7 @@ Public Class FlowsheetSurface_SkiaSharp
     '                Application.DoEvents()
     '                Call Flowsheet.FormSurface.UpdateSelectedObject()
     '                Application.DoEvents()
-    '                Call Flowsheet.FormSurface.FlowsheetDesignSurface.Invalidate()
+    '                Call Flowsheet.FormSurface.Invalidate()
     '                Application.DoEvents()
     '                ProcessCalculationQueue(Flowsheet)
     '                Application.DoEvents()
@@ -2568,18 +2534,18 @@ Public Class FlowsheetSurface_SkiaSharp
     'End Sub
 
     Private Sub ExibirTudoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExibirTudoToolStripMenuItem.Click
-        Me.FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
-        Me.FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
         Me.Invalidate()
     End Sub
 
     Private Sub ZoomPadrao100ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZoomPadrao100ToolStripMenuItem.Click
-        Me.FlowsheetDesignSurface.FlowsheetSurface.Zoom = 1
+        FlowsheetSurface.Zoom = 1
         Me.Invalidate()
     End Sub
 
     Private Sub CentralizarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CentralizarToolStripMenuItem.Click
-        Me.FlowsheetDesignSurface.FlowsheetSurface.Center()
+        FlowsheetSurface.Center()
         Me.Invalidate()
     End Sub
 
@@ -2623,9 +2589,9 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub DepurarObjetoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DepurarObjetoToolStripMenuItem.Click
-        If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
-            If Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name) Then
-                Dim myobj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+        If Not FlowsheetSurface.SelectedObject Is Nothing Then
+            If Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name) Then
+                Dim myobj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
                 Dim frm As New FormTextBox
                 With frm
                     .TextBox1.Text = "Please wait, debugging object..."
@@ -2651,68 +2617,6 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
     End Sub
 
-    Private Sub FlowsheetDesignSurface_MouseDoubleClick(sender As Object, e As Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseDoubleClick
-        If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
-            Select Case Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.ObjectType
-                Case ObjectType.GO_Table
-                    Dim f As New FormConfigurePropertyTable() With {.Table = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject}
-                    f.ShowDialog(Me)
-                Case ObjectType.GO_SpreadsheetTable
-                    Dim f As New FormConfigureSpreadsheetTable() With {.Table = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject}
-                    f.ShowDialog(Me)
-                Case ObjectType.GO_MasterTable
-                    Dim f As New FormConfigureMasterTable() With {.Table = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject}
-                    f.ShowDialog(Me)
-                Case ObjectType.GO_Chart
-                    Dim f As New FormConfigureChartObject() With {.Chart = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject}
-                    f.ShowDialog(Me)
-                Case ObjectType.FlowsheetUO
-                    Dim myobj As UnitOperations.UnitOperations.Flowsheet = Flowsheet.SimulationObjects(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
-                    If My.Computer.Keyboard.ShiftKeyDown Then
-                        Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
-                        With viewform
-                            .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
-                            .fsuo = myobj
-                            .ShowDialog()
-                            .Dispose()
-                        End With
-                        viewform = Nothing
-                    Else
-                        If myobj.Initialized Then
-                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
-                            With viewform
-                                .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
-                                .fsuo = myobj
-                                .Show(Flowsheet.dckPanel)
-                            End With
-                        Else
-                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Editor
-                            With viewform
-                                .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
-                                .fsuo = myobj
-                                .ShowDialog()
-                                .Dispose()
-                            End With
-                            viewform = Nothing
-                        End If
-                    End If
-                Case ObjectType.CapeOpenUO
-                    Dim myobj As CapeOpenUO = Flowsheet.SimulationObjects(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
-                    myobj.Edit()
-                Case ObjectType.CustomUO
-                    Dim myobj As CustomUO = Flowsheet.SimulationObjects(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
-                    If Not DWSIM.App.IsRunningOnMono Then
-                        Dim f As New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = myobj}
-                        myobj.FlowSheet.DisplayForm(f)
-                    Else
-                        Dim f As New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = myobj}
-                        myobj.FlowSheet.DisplayForm(f)
-                    End If
-            End Select
-        End If
-
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Me.PanelSearch.Width = 36 Then
             Me.PanelSearch.Width = 299
@@ -2724,12 +2628,12 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub tbSearch_MouseClick(sender As Object, e As MouseEventArgs) Handles tbSearch.MouseClick
         Dim acsc As New AutoCompleteStringCollection()
-        acsc.AddRange(Me.FlowsheetDesignSurface.FlowsheetSurface.DrawingObjects.ToArray.Select(Function(x) x.Tag).ToArray)
+        acsc.AddRange(FlowsheetSurface.DrawingObjects.ToArray.Select(Function(x) x.Tag).ToArray)
         tbSearch.AutoCompleteCustomSource = acsc
     End Sub
 
     Private Sub AtivadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AtivadoToolStripMenuItem.Click
-        Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Active = Me.AtivadoToolStripMenuItem.Checked
+        FlowsheetSurface.SelectedObject.Active = Me.AtivadoToolStripMenuItem.Checked
         Me.Flowsheet.UpdateOpenEditForms()
     End Sub
 
@@ -2737,7 +2641,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Try
             My.Application.PushUndoRedoAction = False
-            Dim stream = FlowsheetDesignSurface.FlowsheetSurface.SelectedObject
+            Dim stream = FlowsheetSurface.SelectedObject
             Dim newstream = CloneObject(stream)
             newstream.Status = stream.Status
 
@@ -2759,12 +2663,12 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Try
             My.Application.PushUndoRedoAction = False
-            Dim stream1 = FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.ElementAt(0)
-            Dim stream2 = FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.ElementAt(1)
+            Dim stream1 = FlowsheetSurface.SelectedObjects.Values.ElementAt(0)
+            Dim stream2 = FlowsheetSurface.SelectedObjects.Values.ElementAt(1)
 
             If stream1.OutputConnectors(0).IsAttached Then
-                stream1 = FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.ElementAt(1)
-                stream2 = FlowsheetDesignSurface.FlowsheetSurface.SelectedObjects.Values.ElementAt(0)
+                stream1 = FlowsheetSurface.SelectedObjects.Values.ElementAt(1)
+                stream2 = FlowsheetSurface.SelectedObjects.Values.ElementAt(0)
             End If
 
             Dim objto As GraphicObject, toidx As Integer
@@ -2783,24 +2687,24 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        Me.FlowsheetDesignSurface.FlowsheetSurface.Zoom += 0.05
-        Me.TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.Zoom, "#%")
-        FlowsheetDesignSurface.Invalidate()
+        FlowsheetSurface.Zoom += 0.05
+        Me.TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetSurface.Zoom, "#%")
+        SplitContainer1.Panel1.Invalidate()
     End Sub
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
-        FlowsheetDesignSurface.FlowsheetSurface.Zoom -= 0.05
-        If FlowsheetDesignSurface.FlowsheetSurface.Zoom < 0.05 Then FlowsheetDesignSurface.FlowsheetSurface.Zoom = 0.05
-        Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.FlowsheetSurface.Zoom, "#%")
-        FlowsheetDesignSurface.Invalidate()
+        FlowsheetSurface.Zoom -= 0.05
+        If FlowsheetSurface.Zoom < 0.05 Then FlowsheetSurface.Zoom = 0.05
+        Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
+        SplitContainer1.Panel1.Invalidate()
     End Sub
 
     Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSaveAsImage.Click
 
         If Flowsheet.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Dim rect As Rectangle = New Rectangle(0, 0, FlowsheetDesignSurface.Width - 14, FlowsheetDesignSurface.Height - 14)
+            Dim rect As Rectangle = New Rectangle(0, 0, SplitContainer1.Panel1.Width - 14, SplitContainer1.Panel1.Height - 14)
             Dim img As Image = New Bitmap(rect.Width, rect.Height)
-            FlowsheetDesignSurface.DrawToBitmap(img, FlowsheetDesignSurface.Bounds)
+            SplitContainer1.Panel1.DrawToBitmap(img, SplitContainer1.Panel1.Bounds)
             img.Save(Flowsheet.SaveFileDialog1.FileName, Imaging.ImageFormat.Png)
             img.Dispose()
         End If
@@ -2808,24 +2712,24 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
-        FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(Width, Height)
+        FlowsheetSurface.ZoomAll(Width, Height)
         Application.DoEvents()
-        FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(Width, Height)
+        FlowsheetSurface.ZoomAll(Width, Height)
         Application.DoEvents()
-        Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.FlowsheetSurface.Zoom, "#%")
+        Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton3.Click
-        FlowsheetDesignSurface.FlowsheetSurface.Zoom = 1
-        Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.FlowsheetSurface.Zoom, "#%")
-        FlowsheetDesignSurface.Invalidate()
+        FlowsheetSurface.Zoom = 1
+        Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
+        SplitContainer1.Panel1.Invalidate()
     End Sub
 
     Private Sub TSTBZoom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TSTBZoom.KeyDown
         If e.KeyCode = Keys.Enter Then
-            FlowsheetDesignSurface.FlowsheetSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
-            Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.FlowsheetSurface.Zoom, "#%")
-            FlowsheetDesignSurface.Invalidate()
+            FlowsheetSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
+            Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
+            SplitContainer1.Panel1.Invalidate()
         End If
     End Sub
 
@@ -2903,10 +2807,10 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub FlowsheetSurface_SkiaSharp_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Try
-            Me.FlowsheetDesignSurface.FlowsheetSurface.ZoomAll(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
-            FlowsheetDesignSurface.FlowsheetSurface.ShowGrid = Flowsheet.Options.FlowsheetDisplayGrid
-            FlowsheetDesignSurface.FlowsheetSurface.SnapToGrid = Flowsheet.Options.FlowsheetSnapToGrid
-            FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = Flowsheet.Options.FlowsheetMultiSelectMode
+            FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+            FlowsheetSurface.ShowGrid = Flowsheet.Options.FlowsheetDisplayGrid
+            FlowsheetSurface.SnapToGrid = Flowsheet.Options.FlowsheetSnapToGrid
+            FlowsheetSurface.MultiSelectMode = Flowsheet.Options.FlowsheetMultiSelectMode
             tsbDisplayGrid.Checked = Flowsheet.Options.FlowsheetDisplayGrid
             tsbSnapObjectsToGrid.Checked = Flowsheet.Options.FlowsheetSnapToGrid
             tsbMultiSelectMode.Checked = Flowsheet.Options.FlowsheetSnapToGrid
@@ -2914,75 +2818,17 @@ Public Class FlowsheetSurface_SkiaSharp
         End Try
     End Sub
 
-    Public Sub FlowsheetDesignSurface_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseUp
+    Public Sub FlowsheetDesignSurface_SelectionChanged_New(ByVal sender As Object, ByVal e As EventArgs)
 
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+        If Not FlowsheetSurface.SelectedObject Is Nothing Then
 
-            If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
+            If Not FlowsheetSurface.SelectedObject.IsConnector Then
 
-                If My.Settings.CloseFormsOnDeselecting Then
-                    For Each obj In Flowsheet.SimulationObjects.Values
-                        If Not obj.GraphicObject Is FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Then
-                            obj.CloseEditForm()
-                        End If
-                    Next
-                End If
+                If Not FlowsheetSurface.SelectedObject Is Nothing Then
 
-                If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name) Then
+                    If FlowsheetSurface.SelectedObject.IsConnector Then
 
-                    If My.Settings.ObjectEditor = 0 Then
-                        If Not My.Settings.EnableMultipleObjectEditors Then
-                            For Each obj In Me.Flowsheet.SimulationObjects.Values
-                                obj.CloseEditForm()
-                            Next
-                        End If
-                        Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
-                        EditorTooltips.Update(Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name), Flowsheet)
-                    End If
-
-                    Me.FlowsheetDesignSurface.Focus()
-
-                Else
-
-                    'Me.FlowsheetDesignSurface.SelectedObject = Nothing
-
-                End If
-
-            End If
-
-            'new
-            FlowsheetDesignSurface_SelectionChanged_New(sender, New EventArgs)
-
-        ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
-
-            If Not Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
-
-                Me.CMS_Sel.Items("TSMI_Label").Text = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Tag
-                Me.CMS_Sel.Show(MousePosition)
-
-            Else
-
-                Me.CMS_NoSel.Show(MousePosition)
-
-            End If
-
-        End If
-
-        RaiseEvent ObjectSelected(Flowsheet)
-
-    End Sub
-
-    Private Sub FlowsheetDesignSurface_SelectionChanged_New(ByVal sender As Object, ByVal e As EventArgs)
-
-        If Not FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
-
-            If Not FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.IsConnector Then
-
-                If Not FlowsheetDesignSurface.FlowsheetSurface.SelectedObject Is Nothing Then
-
-                    If FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.IsConnector Then
-
-                        FlowsheetDesignSurface.FlowsheetSurface.SelectedObject = Nothing
+                        FlowsheetSurface.SelectedObject = Nothing
 
                     End If
 
@@ -2992,7 +2838,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Else
 
-                FlowsheetDesignSurface.FlowsheetSurface.SelectedObject = Nothing
+                FlowsheetSurface.SelectedObject = Nothing
 
             End If
 
@@ -3004,38 +2850,16 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
-    Private Sub FlowsheetDesignSurface_DragDrop(sender As Object, e As DragEventArgs) Handles FlowsheetDesignSurface.DragDrop
-
-        If e.Effect = DragDropEffects.All Then
-
-            Dim obj As Object() = Nothing
-            obj = e.Data.GetData("System.Object[]")
-
-            Dim t As Type = Nothing
-            Dim c As Interfaces.Enums.SimulationObjectClass
-
-            t = obj(0)
-            c = obj(1)
-
-            Console.WriteLine(t.Name)
-
-            Dim pt = FlowsheetDesignSurface.PointToClient(New Point(e.X, e.Y))
-
-            Flowsheet.FormSurface.AddObject(t.Name, pt.X / FlowsheetDesignSurface.FlowsheetSurface.Zoom, pt.Y / FlowsheetDesignSurface.FlowsheetSurface.Zoom, c)
-
-        End If
-    End Sub
-
     Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem6.Click
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 90 >= 360 Then
-                Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 90) / 360)
+            If FlowsheetSurface.SelectedObject.Rotation + 90 >= 360 Then
+                FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((FlowsheetSurface.SelectedObject.Rotation + 90) / 360)
             Else
-                Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 90
+                FlowsheetSurface.SelectedObject.Rotation = FlowsheetSurface.SelectedObject.Rotation + 90
             End If
-            Me.FlowsheetDesignSurface.Invalidate()
+            SplitContainer1.Panel1.Invalidate()
         End If
     End Sub
 
@@ -3043,12 +2867,12 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 180 >= 360 Then
-                Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 180) / 360)
+            If FlowsheetSurface.SelectedObject.Rotation + 180 >= 360 Then
+                FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((FlowsheetSurface.SelectedObject.Rotation + 180) / 360)
             Else
-                Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 180
+                FlowsheetSurface.SelectedObject.Rotation = FlowsheetSurface.SelectedObject.Rotation + 180
             End If
-            Me.FlowsheetDesignSurface.Invalidate()
+            SplitContainer1.Panel1.Invalidate()
         End If
     End Sub
 
@@ -3056,12 +2880,12 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 270 >= 360 Then
-                Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 270) / 360)
+            If FlowsheetSurface.SelectedObject.Rotation + 270 >= 360 Then
+                FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((FlowsheetSurface.SelectedObject.Rotation + 270) / 360)
             Else
-                Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation + 270
+                FlowsheetSurface.SelectedObject.Rotation = FlowsheetSurface.SelectedObject.Rotation + 270
             End If
-            Me.FlowsheetDesignSurface.Invalidate()
+            SplitContainer1.Panel1.Invalidate()
         End If
     End Sub
 
@@ -3069,7 +2893,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = 0
+            FlowsheetSurface.SelectedObject.Rotation = 0
             Me.Invalidate()
         End If
     End Sub
@@ -3078,7 +2902,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = 90
+            FlowsheetSurface.SelectedObject.Rotation = 90
             Me.Invalidate()
         End If
     End Sub
@@ -3087,33 +2911,33 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = 180
+            FlowsheetSurface.SelectedObject.Rotation = 180
             Me.Invalidate()
         End If
     End Sub
 
     Private Sub HorizontalmenteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HorizontalmenteToolStripMenuItem.Click
         If Me.HorizontalmenteToolStripMenuItem.Checked Then
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.FlippedH = True
+            FlowsheetSurface.SelectedObject.FlippedH = True
         Else
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.FlippedH = False
+            FlowsheetSurface.SelectedObject.FlippedH = False
         End If
-        Me.FlowsheetDesignSurface.Invalidate()
+        SplitContainer1.Panel1.Invalidate()
     End Sub
 
     Private Sub ToolStripMenuItem14_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem14.Click
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Rotation = 270
+            FlowsheetSurface.SelectedObject.Rotation = 270
             Me.Invalidate()
         End If
     End Sub
 
     Private Sub CopyAsImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAsImageToolStripMenuItem.Click
-        Using bmp As New SKBitmap(FlowsheetDesignSurface.Width, FlowsheetDesignSurface.Height)
+        Using bmp As New SKBitmap(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
             Using canvas As New SKCanvas(bmp)
-                FlowsheetDesignSurface.FlowsheetSurface.UpdateCanvas(canvas)
+                FlowsheetSurface.UpdateCanvas(canvas)
                 Dim d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
                 Using str As New IO.MemoryStream
                     d.SaveTo(str)
@@ -3126,17 +2950,17 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub tsbSnapObjectsToGrid_Click(sender As Object, e As EventArgs) Handles tsbSnapObjectsToGrid.CheckedChanged
-        FlowsheetDesignSurface.FlowsheetSurface.SnapToGrid = tsbSnapObjectsToGrid.Checked
+        FlowsheetSurface.SnapToGrid = tsbSnapObjectsToGrid.Checked
         Flowsheet.Options.FlowsheetSnapToGrid = tsbSnapObjectsToGrid.Checked
     End Sub
 
     Private Sub tsbDisplayGrid_Click(sender As Object, e As EventArgs) Handles tsbDisplayGrid.CheckedChanged
-        FlowsheetDesignSurface.FlowsheetSurface.ShowGrid = tsbDisplayGrid.Checked
+        FlowsheetSurface.ShowGrid = tsbDisplayGrid.Checked
         Flowsheet.Options.FlowsheetDisplayGrid = tsbDisplayGrid.Checked
     End Sub
 
     Private Sub tsbMultiSelectMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbMultiSelectMode.CheckedChanged
-        FlowsheetDesignSurface.FlowsheetSurface.MultiSelectMode = tsbMultiSelectMode.Checked
+        FlowsheetSurface.MultiSelectMode = tsbMultiSelectMode.Checked
         tsbAlignTops.Enabled = tsbMultiSelectMode.Checked
         tsbAlignBottoms.Enabled = tsbMultiSelectMode.Checked
         tsbAlignCenters.Enabled = tsbMultiSelectMode.Checked
@@ -3173,10 +2997,10 @@ Public Class FlowsheetSurface_SkiaSharp
             direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeHorizontal
         End If
 
-        FlowsheetDesignSurface.FlowsheetSurface.AlignSelectedObjects(direction)
+        FlowsheetSurface.AlignSelectedObjects(direction)
 
-        FlowsheetDesignSurface.Invalidate()
-        FlowsheetDesignSurface.Invalidate()
+        SplitContainer1.Panel1.Invalidate()
+        SplitContainer1.Panel1.Invalidate()
 
     End Sub
 
@@ -3190,12 +3014,12 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
 
-        If Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor Is Nothing OrElse DirectCast(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor, Form).IsDisposed Then
-            Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject, .fs = FlowsheetDesignSurface.FlowsheetSurface, .flowsheet = Me.Flowsheet}
-            Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor = f
+        If FlowsheetSurface.SelectedObject.Editor Is Nothing OrElse DirectCast(FlowsheetSurface.SelectedObject.Editor, Form).IsDisposed Then
+            Dim f As New FormEditGraphicObject() With {.gobj = FlowsheetSurface.SelectedObject, .fs = FlowsheetSurface, .flowsheet = Me.Flowsheet}
+            FlowsheetSurface.SelectedObject.Editor = f
             f.Show(Flowsheet.dckPanel)
         Else
-            DirectCast(Me.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Editor, Form).Activate()
+            DirectCast(FlowsheetSurface.SelectedObject.Editor, Form).Activate()
         End If
 
     End Sub

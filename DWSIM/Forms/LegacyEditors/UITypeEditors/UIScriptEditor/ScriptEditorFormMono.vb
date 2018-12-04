@@ -155,7 +155,7 @@ Imports System.Drawing.Text
     End Sub
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDebug.Click
-        Dim mycuo As CustomUO = My.Application.ActiveSimulation.SimulationObjects(My.Application.ActiveSimulation.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+        Dim mycuo As CustomUO = My.Application.ActiveSimulation.SimulationObjects(My.Application.ActiveSimulation.FormSurface.FlowsheetSurface.SelectedObject.Name)
         mycuo.Includes = includes
         mycuo.ScriptText = Me.txtScript.Text
         mycuo.Solve()

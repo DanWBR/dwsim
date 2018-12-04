@@ -58,7 +58,7 @@ Namespace DWSIM.Editors.Distillation
             Dim dc As Column
             Dim form As FormFlowsheet
             form = My.Application.ActiveSimulation
-            dc = form.SimulationObjects(form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject.Name)
+            dc = form.SimulationObjects(form.FormSurface.FlowsheetSurface.SelectedObject.Name)
             Application.DoEvents()
             'dc.CheckCalc2()
 

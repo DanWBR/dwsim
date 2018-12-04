@@ -81,8 +81,11 @@ Public Class FormOptions
         End If
 
         cbDebugLevel.SelectedIndex = My.Settings.DebugLevel
-        
+
         chkHideSolidPhaseCO.Checked = My.Settings.HideSolidPhase_CO
+
+        cbRenderer.SelectedIndex = My.Settings.FlowsheetRenderer
+        chkAA.Checked = My.Settings.FlowsheetAntiAliasing
 
         'solver
 
@@ -97,8 +100,6 @@ Public Class FormOptions
 
         chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
         chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
-
-
 
         'databases
 
@@ -665,4 +666,13 @@ Public Class FormOptions
         GroupBox1.Enabled = If(cbEditorStyle.SelectedIndex = 0, True, False)
     End Sub
 
+    Private Sub cbRenderer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRenderer.SelectedIndexChanged
+        My.Settings.FlowsheetRenderer = cbRenderer.SelectedIndex
+        GlobalSettings.Settings.FlowsheetRenderer = Settings.SkiaCanvasRenderer.CPU
+    End Sub
+
+    Private Sub chkAA_CheckedChanged(sender As Object, e As EventArgs) Handles chkAA.CheckedChanged
+        My.Settings.FlowsheetAntiAliasing = chkAA.Checked
+        GlobalSettings.Settings.DrawingAntiAlias = chkAA.Checked
+    End Sub
 End Class

@@ -785,7 +785,7 @@ Public Class FormPCBulk
                            myCOMS.SetFlowsheet(frm)
                            frm.AddSimulationObject(myCOMS)
                            frm.AddGraphicObject(gObj)
-                           frm.FormSurface.FlowsheetDesignSurface.Invalidate()
+                           frm.FormSurface.Invalidate()
 
                            Me.Close()
 

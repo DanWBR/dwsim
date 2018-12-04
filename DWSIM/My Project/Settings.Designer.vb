@@ -802,6 +802,30 @@ Namespace My
                 Me("DisplayPFDTip") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property FlowsheetRenderer() As Integer
+            Get
+                Return CType(Me("FlowsheetRenderer"),Integer)
+            End Get
+            Set
+                Me("FlowsheetRenderer") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property FlowsheetAntiAliasing() As Boolean
+            Get
+                Return CType(Me("FlowsheetAntiAliasing"),Boolean)
+            End Get
+            Set
+                Me("FlowsheetAntiAliasing") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -120,7 +120,7 @@ Namespace DWSIM.Editors.MasterTable
 
                 form = My.Application.ActiveSimulation
 
-                Dim mt As MasterTableGraphic = form.FormSurface.FlowsheetDesignSurface.FlowsheetSurface.SelectedObject
+                Dim mt As MasterTableGraphic = form.FormSurface.FlowsheetSurface.SelectedObject
 
                 Me.ListView2.Items.Clear()
                 If mt.SortedList.Count = 0 Then
