@@ -1,6 +1,5 @@
-﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
-Imports DWSIM.Interfaces.Enums.GraphicObjects
-Imports DWSIM.DrawingTools.Point
+﻿Imports PortableFlowsheetDrawing.GraphicObjects
+Imports PortableInterfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects.Shapes
 
@@ -119,6 +118,30 @@ Namespace GraphicObjects.Shapes
             gp.Close()
 
             canvas.DrawPath(gp, myPen)
+
+			If GradientMode Then
+
+                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+
+                Dim radius2 = 0.8F * Math.Min(Width, Height)
+                Dim center = New SKPoint(r0.MidX, r0.MidY)
+                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+
+                Dim gradPen As New SKPaint()
+                With gradPen
+                    .Color = LineColor
+                    .StrokeWidth = LineWidth
+                    .IsStroke = False
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Shader = SKShader.CreateTwoPointConicalGradient(
+                                    offCenter, 1, center, radius2,
+                                    New SKColor() {SKColors.White, LineColor},
+                                    Nothing, SKShaderTileMode.Clamp)
+                End With
+
+                canvas.DrawPath(gp, gradPen)
+
+            End If
 
             Dim tpaint As New SKPaint()
 
