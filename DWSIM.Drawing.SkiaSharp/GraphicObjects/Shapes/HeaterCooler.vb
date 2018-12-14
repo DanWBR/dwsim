@@ -1,5 +1,5 @@
-﻿Imports PortableFlowsheetDrawing.GraphicObjects
-Imports PortableInterfaces.Enums.GraphicObjects
+﻿Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects.Shapes
 
@@ -119,7 +119,7 @@ Namespace GraphicObjects.Shapes
 
             canvas.DrawPath(gp, myPen)
 
-			If GradientMode Then
+            If GradientMode Then
 
                 Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 

@@ -71,7 +71,9 @@ Namespace Reactors
         Public Property ExternalLoopTolerance As Double = 0.5
 
         Public Property InternalLoopMaximumIterations As Integer = 250
+
         Public Property ExternalLoopMaximumIterations As Integer = 50
+
         Public Property DerivativePerturbation As Double = 0.0001
 
         Public Property AlternateBoundsInitializer As Boolean = False
