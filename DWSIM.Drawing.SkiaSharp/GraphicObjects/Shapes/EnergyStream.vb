@@ -18,6 +18,7 @@ Namespace GraphicObjects.Shapes
 
         Public Sub New(ByVal graphicPosition As SKPoint)
             Me.New()
+            CreateConnectors(1, 1)
             Me.SetPosition(graphicPosition)
         End Sub
 

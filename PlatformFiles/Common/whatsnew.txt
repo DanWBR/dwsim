@@ -1,7 +1,4 @@
-Version 5.6 Update 6
+Version 5.6 Update 7
 
-- [NEW] Select Classic UI Flowsheet Renderer (CPU or OpenGL)
-- [CHG] Added ChEDL compound database to Classic UI
-- [FIX] Fixed Spreadsheet Table crash
-- [FIX] Fixes to some flash algorithms
-- [FIX] Other fixes and enhancements
+- [FIX] Fixed 'Create and Connect' buttons (Classic UI)
+- [FIX] Fixed Heater/Cooler report (New UI)

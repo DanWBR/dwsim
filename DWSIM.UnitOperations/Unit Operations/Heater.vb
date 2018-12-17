@@ -228,6 +228,8 @@ Namespace UnitOperations
 
                     OutletTemperature = T2
 
+                    OutletVaporFraction = tmp.GetVaporPhaseMoleFraction
+
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
                     'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
@@ -261,6 +263,8 @@ Namespace UnitOperations
                     CheckSpec(H2, False, "outlet enthalpy")
                     Me.DeltaT = T2 - Ti
                     Me.DeltaQ = (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
+
+                    OutletVaporFraction = tmp.GetVaporPhaseMoleFraction
 
                     IObj?.Paragraphs.Add(String.Format("<mi>\Delta T</mi>: {0} K", DeltaT))
                     IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
@@ -301,6 +305,8 @@ Namespace UnitOperations
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")
                     Me.DeltaQ = (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
+
+                    OutletVaporFraction = tmp.GetVaporPhaseMoleFraction
 
                     IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
                     IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
@@ -349,6 +355,8 @@ Namespace UnitOperations
                     IObj?.Paragraphs.Add(String.Format("<mi>\Delta T</mi>: {0} K", DeltaT))
 
                     OutletTemperature = T2
+
+                    OutletVaporFraction = tmp.GetVaporPhaseMoleFraction
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
@@ -677,9 +685,9 @@ Namespace UnitOperations
             str.AppendLine("    Calculation mode: " & CalcMode.ToString)
             Select Case Me.CalcMode
                 Case CalculationMode.HeatAdded
-                    str.AppendLine("    Heat added: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ).ToString(numberformat, ci) & " " & su.heatflow)
+                    str.AppendLine("    Heat added: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
                 Case CalculationMode.OutletTemperature
-                    str.AppendLine("    Outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
                 Case CalculationMode.OutletVaporFraction
                     str.AppendLine("    Outlet vapor mole fraction: " & Me.OutletVaporFraction.GetValueOrDefault.ToString(numberformat, ci))
             End Select
@@ -690,7 +698,7 @@ Namespace UnitOperations
             str.AppendLine()
             Select Case Me.CalcMode
                 Case CalculationMode.HeatAdded
-                    str.AppendLine("    Outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
                     str.AppendLine("    Outlet vapor mole fraction: " & Me.OutletVaporFraction.GetValueOrDefault.ToString(numberformat, ci))
                 Case CalculationMode.OutletTemperature
                     str.AppendLine("    Outlet vapor mole fraction: " & Me.OutletVaporFraction.GetValueOrDefault.ToString(numberformat, ci))
