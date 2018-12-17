@@ -2496,8 +2496,8 @@ Public Class FormFlowsheet
 
     Public Function AddObject(t As ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As Interfaces.ISimulationObject Implements IFlowsheet.AddObject
         Dim id = Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, False, tag)
-        Me.FormSurface.Invalidate()
-        Me.FormSurface.Invalidate()
+        FormSurface.FControl.Refresh()
+        FormSurface.FControl.Refresh()
         Return Me.SimulationObjects(id)
     End Function
 
@@ -2574,7 +2574,7 @@ Public Class FormFlowsheet
     Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface, IFlowsheet.UpdateInterface
 
         Me.UIThread(Sub()
-                        Me.FormSurface.Invalidate()
+                        Me.FormSurface.Refresh()
                     End Sub)
     End Sub
 
