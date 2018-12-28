@@ -2781,10 +2781,11 @@ Label_00CC:
                     entry = stream.GetNextEntry
                 Loop
             End Using
-            Dim fs As Interfaces.IFlowsheet = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline)
-            File.Delete(fullname)
+            Dim fs As Interfaces.IFlowsheet
+            fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline)
             fs.FilePath = caminho
             fs.Options.FilePath = caminho
+            File.Delete(fullname)
             Return fs
         Catch ex As Exception
             MessageBox.Show(ex.ToString, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)

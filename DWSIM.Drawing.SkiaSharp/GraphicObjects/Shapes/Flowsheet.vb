@@ -41,27 +41,27 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-            Dim myIC1 As New ConnectionPoint With {.Position = New Point(X, Y + 0.1 * Height), .Type = ConType.ConIn}
-            Dim myIC2 As New ConnectionPoint With {.Position = New Point(X, Y + 0.2 * Height), .Type = ConType.ConIn}
-            Dim myIC3 As New ConnectionPoint With {.Position = New Point(X, Y + 0.3 * Height), .Type = ConType.ConIn}
-            Dim myIC4 As New ConnectionPoint With {.Position = New Point(X, Y + 0.4 * Height), .Type = ConType.ConIn}
-            Dim myIC5 As New ConnectionPoint With {.Position = New Point(X, Y + 0.5 * Height), .Type = ConType.ConIn}
-            Dim myIC6 As New ConnectionPoint With {.Position = New Point(X, Y + 0.6 * Height), .Type = ConType.ConIn}
-            Dim myIC7 As New ConnectionPoint With {.Position = New Point(X, Y + 0.7 * Height), .Type = ConType.ConIn}
-            Dim myIC8 As New ConnectionPoint With {.Position = New Point(X, Y + 0.8 * Height), .Type = ConType.ConIn}
-            Dim myIC9 As New ConnectionPoint With {.Position = New Point(X, Y + 0.9 * Height), .Type = ConType.ConIn}
-            Dim myIC10 As New ConnectionPoint With {.Position = New Point(X, Y + 1.0 * Height), .Type = ConType.ConIn}
+            Dim myIC1 As New ConnectionPoint With {.ConnectorName = "Inlet Port #1", .Position = New Point(X, Y + 0.1 * Height), .Type = ConType.ConIn}
+            Dim myIC2 As New ConnectionPoint With {.ConnectorName = "Inlet Port #2", .Position = New Point(X, Y + 0.2 * Height), .Type = ConType.ConIn}
+            Dim myIC3 As New ConnectionPoint With {.ConnectorName = "Inlet Port #3", .Position = New Point(X, Y + 0.3 * Height), .Type = ConType.ConIn}
+            Dim myIC4 As New ConnectionPoint With {.ConnectorName = "Inlet Port #4", .Position = New Point(X, Y + 0.4 * Height), .Type = ConType.ConIn}
+            Dim myIC5 As New ConnectionPoint With {.ConnectorName = "Inlet Port #5", .Position = New Point(X, Y + 0.5 * Height), .Type = ConType.ConIn}
+            Dim myIC6 As New ConnectionPoint With {.ConnectorName = "Inlet Port #6", .Position = New Point(X, Y + 0.6 * Height), .Type = ConType.ConIn}
+            Dim myIC7 As New ConnectionPoint With {.ConnectorName = "Inlet Port #7", .Position = New Point(X, Y + 0.7 * Height), .Type = ConType.ConIn}
+            Dim myIC8 As New ConnectionPoint With {.ConnectorName = "Inlet Port #8", .Position = New Point(X, Y + 0.8 * Height), .Type = ConType.ConIn}
+            Dim myIC9 As New ConnectionPoint With {.ConnectorName = "Inlet Port #9", .Position = New Point(X, Y + 0.9 * Height), .Type = ConType.ConIn}
+            Dim myIC10 As New ConnectionPoint With {.ConnectorName = "Inlet Port #10", .Position = New Point(X, Y + 1.0 * Height), .Type = ConType.ConIn}
 
-            Dim myOC1 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.1 * Height), .Type = ConType.ConOut}
-            Dim myOC2 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.2 * Height), .Type = ConType.ConOut}
-            Dim myOC3 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.3 * Height), .Type = ConType.ConOut}
-            Dim myOC4 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.4 * Height), .Type = ConType.ConOut}
-            Dim myOC5 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.5 * Height), .Type = ConType.ConOut}
-            Dim myOC6 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.6 * Height), .Type = ConType.ConOut}
-            Dim myOC7 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.7 * Height), .Type = ConType.ConOut}
-            Dim myOC8 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.8 * Height), .Type = ConType.ConOut}
-            Dim myOC9 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 0.9 * Height), .Type = ConType.ConOut}
-            Dim myOC10 As New ConnectionPoint With {.Position = New Point(X + Width, Y + 1.0 * Height), .Type = ConType.ConOut}
+            Dim myOC1 As New ConnectionPoint With {.ConnectorName = "Outlet Port #1", .Position = New Point(X + Width, Y + 0.1 * Height), .Type = ConType.ConOut}
+            Dim myOC2 As New ConnectionPoint With {.ConnectorName = "Outlet Port #2", .Position = New Point(X + Width, Y + 0.2 * Height), .Type = ConType.ConOut}
+            Dim myOC3 As New ConnectionPoint With {.ConnectorName = "Outlet Port #3", .Position = New Point(X + Width, Y + 0.3 * Height), .Type = ConType.ConOut}
+            Dim myOC4 As New ConnectionPoint With {.ConnectorName = "Outlet Port #4", .Position = New Point(X + Width, Y + 0.4 * Height), .Type = ConType.ConOut}
+            Dim myOC5 As New ConnectionPoint With {.ConnectorName = "Outlet Port #5", .Position = New Point(X + Width, Y + 0.5 * Height), .Type = ConType.ConOut}
+            Dim myOC6 As New ConnectionPoint With {.ConnectorName = "Outlet Port #6", .Position = New Point(X + Width, Y + 0.6 * Height), .Type = ConType.ConOut}
+            Dim myOC7 As New ConnectionPoint With {.ConnectorName = "Outlet Port #7", .Position = New Point(X + Width, Y + 0.7 * Height), .Type = ConType.ConOut}
+            Dim myOC8 As New ConnectionPoint With {.ConnectorName = "Outlet Port #8", .Position = New Point(X + Width, Y + 0.8 * Height), .Type = ConType.ConOut}
+            Dim myOC9 As New ConnectionPoint With {.ConnectorName = "Outlet Port #9", .Position = New Point(X + Width, Y + 0.9 * Height), .Type = ConType.ConOut}
+            Dim myOC10 As New ConnectionPoint With {.ConnectorName = "Outlet Port #10", .Position = New Point(X + Width, Y + 1.0 * Height), .Type = ConType.ConOut}
 
             With InputConnectors
 

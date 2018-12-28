@@ -1846,9 +1846,9 @@ Label_00CC:
 
         Dim xdoc = XDocument.Load(fullname)
         LoadFromXML(xdoc)
-        File.Delete(fullname)
         FilePath = pathtofile
         Options.FilePath = pathtofile
+        File.Delete(fullname)
 
         Return xdoc
 

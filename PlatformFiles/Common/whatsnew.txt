@@ -1,4 +1,4 @@
-Version 5.6 Update 7
+Version 5.6 Update 8
 
-- [FIX] Fixed 'Create and Connect' buttons (Classic UI)
-- [FIX] Fixed Heater/Cooler report (New UI)
+- [FIX] Fixed Flowsheet Unit Operation block
+- [FIX] Fixed Spreadsheet mass/mole fraction writing

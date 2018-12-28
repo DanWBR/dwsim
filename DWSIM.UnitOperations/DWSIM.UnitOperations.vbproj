@@ -1099,6 +1099,10 @@
       <Project>{0F6737EB-DB5A-4872-BEF8-5EF10B4F1C1C}</Project>
       <Name>DWSIM.DrawingTools.Point</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DrawingTools.SkiaSharp.Extended\DWSIM.DrawingTools.SkiaSharp.Extended.csproj">
+      <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
+      <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
       <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
       <Name>DWSIM.Inspector</Name>

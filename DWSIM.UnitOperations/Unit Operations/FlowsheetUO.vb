@@ -35,6 +35,8 @@ Imports DWSIM.SharedClasses.UnitOperations
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
 Namespace UnitOperations.Auxiliary
 
@@ -153,7 +155,7 @@ Namespace UnitOperations
             If Not IO.File.Exists(SimulationFile) Then
                 'look at the current simulation location to see if the file is there.
                 Dim fname As String = IO.Path.GetFileName(SimulationFile)
-                Dim currpath As String = IO.Path.GetDirectoryName(FlowSheet.FilePath)
+                Dim currpath As String = IO.Path.GetDirectoryName(FlowSheet.FlowsheetOptions.FilePath)
                 Dim newpath As String = IO.Path.Combine(currpath, fname)
                 If IO.File.Exists(newpath) Then SimulationFile = newpath
             End If
@@ -225,18 +227,22 @@ Label_00CC:
 
         Private Shared Function InitializeFlowsheetInternal(xdoc As XDocument, fs As IFlowsheet)
 
-            'For Each xel1 As XElement In xdoc.Descendants
-            '    SharedClasses.Utility.UpdateElement(xel1)
-            'Next
+            Dim sver = New Version("1.0.0.0")
 
-            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                                   SharedClasses.Utility.UpdateElement(xel1)
-                                                   If GlobalSettings.Settings.OldUI Then
-                                                       SharedClasses.Utility.UpdateElementFromNewUI(xel1)
-                                                   Else
-                                                       SharedClasses.Utility.UpdateElementForNewUI(xel1)
-                                                   End If
-                                               End Sub)
+            Try
+                sver = New Version(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value)
+            Catch ex As Exception
+            End Try
+
+            If sver < New Version("5.0.0.0") Then
+                For Each xel1 In xdoc.Descendants
+                    SharedClasses.Utility.UpdateElement(xel1)
+                Next
+            End If
+
+            For Each xel1 In xdoc.Descendants
+                SharedClasses.Utility.UpdateElementForNewUI(xel1)
+            Next
 
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
@@ -306,6 +312,7 @@ Label_00CC:
                     End If
                     Dim gobj As IGraphicObject = fs.GraphicObjects(id)
                     obj.GraphicObject = gobj
+                    obj.GraphicObject.Owner = obj
                     obj.SetFlowsheet(fs)
                     If Not gobj Is Nothing Then
                         obj.LoadData(xel.Elements.ToList)
@@ -411,7 +418,13 @@ Label_00CC:
                     Dim obj As GraphicObject = Nothing
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                     If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-                    'If obj Is Nothing Then obj = GraphicObject.ReturnInstance(xel.Element("Type").Value)
+                    If obj Is Nothing Then
+                        If xel.Element("Type").Value.Contains("OxyPlotGraphic") Then
+                            obj = CType(Drawing.SkiaSharp.Extended.Shared.ReturnInstance(xel.Element("Type").Value.Replace("Shapes", "Charts")), GraphicObject)
+                        Else
+                            obj = CType(DWSIM.Drawing.SkiaSharp.GraphicObjects.GraphicObject.ReturnInstance(xel.Element("Type").Value), GraphicObject)
+                        End If
+                    End If
                     If Not obj Is Nothing Then
                         obj.LoadData(xel.Elements.ToList)
                         obj.Name = pkey & obj.Name
@@ -422,8 +435,17 @@ Label_00CC:
                             objcount = (From go As IGraphicObject In fs.GraphicObjects.Values Select go Where go.Tag.Equals(obj.Tag)).Count
                             If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                         End If
-                        If TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
+                        If TypeOf obj Is TableGraphic Then
+                            DirectCast(obj, TableGraphic).Flowsheet = fs
+                        ElseIf TypeOf obj Is MasterTableGraphic Then
+                            DirectCast(obj, MasterTableGraphic).Flowsheet = fs
+                        ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
+                            DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = fs
+                        ElseIf TypeOf obj Is OxyPlotGraphic Then
+                            DirectCast(obj, OxyPlotGraphic).Flowsheet = fs
+                        ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
                             obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
+                            obj.PositionConnectors()
                         Else
                             If obj.Name = "" Then obj.Name = obj.Tag
                             obj.CreateConnectors(0, 0)
@@ -1134,42 +1156,49 @@ Label_00CC:
 
         Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 
+            If Initialized Then
 
-            Dim str As New Text.StringBuilder
+                Dim str As New Text.StringBuilder
 
-            Dim istr, ostr As MaterialStream
-            istr = Me.GetInletMaterialStream(0)
-            ostr = Me.GetOutletMaterialStream(0)
+                Dim istr, ostr As MaterialStream
+                istr = Me.GetInletMaterialStream(0)
+                ostr = Me.GetOutletMaterialStream(0)
 
-            istr.PropertyPackage.CurrentMaterialStream = istr
+                istr.PropertyPackage.CurrentMaterialStream = istr
 
-            str.AppendLine("Flowsheet Block: " & Me.GraphicObject.Tag)
-            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
-            str.AppendLine()
-            str.AppendLine("Calculation parameters")
-            str.AppendLine()
-            str.AppendLine("    Flowsheet Path: " & SimulationFile)
-            str.AppendLine("    Mass Transfer Option: " & MassTransferMode.ToString)
-            str.AppendLine()
-            str.AppendLine("Linked Input Variables")
-            str.AppendLine()
-            For Each par In InputParams.Values
-                str.AppendLine("    " + Fsheet.SimulationObjects(par.ObjectID).GraphicObject.Tag + ", " +
+                str.AppendLine("Flowsheet Block: " & Me.GraphicObject.Tag)
+                str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+                str.AppendLine()
+                str.AppendLine("Calculation parameters")
+                str.AppendLine()
+                str.AppendLine("    Flowsheet Path: " & SimulationFile)
+                str.AppendLine("    Mass Transfer Option: " & MassTransferMode.ToString)
+                str.AppendLine()
+                str.AppendLine("Linked Input Variables")
+                str.AppendLine()
+                For Each par In InputParams.Values
+                    str.AppendLine("    " + Fsheet.SimulationObjects(par.ObjectID).GraphicObject.Tag + ", " +
                 FlowSheet.GetTranslatedString(par.ObjectProperty) + ": " +
                 Fsheet.SimulationObjects(par.ObjectID).GetPropertyValue(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem).ToString() + " " +
                 Fsheet.SimulationObjects(par.ObjectID).GetPropertyUnit(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem))
-            Next
-            str.AppendLine()
-            str.AppendLine("Linked Output Variables")
-            str.AppendLine()
-            For Each par In OutputParams.Values
-                str.AppendLine("    " + Fsheet.SimulationObjects(par.ObjectID).GraphicObject.Tag + ", " +
+                Next
+                str.AppendLine()
+                str.AppendLine("Linked Output Variables")
+                str.AppendLine()
+                For Each par In OutputParams.Values
+                    str.AppendLine("    " + Fsheet.SimulationObjects(par.ObjectID).GraphicObject.Tag + ", " +
                 FlowSheet.GetTranslatedString(par.ObjectProperty) + ": " +
                 Fsheet.SimulationObjects(par.ObjectID).GetPropertyValue(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem).ToString() + " " +
                 Fsheet.SimulationObjects(par.ObjectID).GetPropertyUnit(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem))
-            Next
+                Next
 
-            Return str.ToString
+                Return str.ToString
+
+            Else
+
+                Return "Flowsheet not Initialized."
+
+            End If
 
         End Function
 

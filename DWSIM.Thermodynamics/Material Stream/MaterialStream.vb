@@ -2105,7 +2105,7 @@ Namespace Streams
                         Me.Phases(2).Properties.molarfraction = propval
                     Case 102
                         If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                            Me.Phases(0).Compounds(sname).MoleFraction = propval
+                            Me.Phases(0).Compounds(sname).MoleFraction = Convert.ToDouble(propval)
                             Dim mtotal As Double = 0
                             Me.PropertyPackage.DW_CalcCompMolarFlow(0)
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
@@ -2118,7 +2118,7 @@ Namespace Streams
                         End If
                     Case 103
                         If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                            Me.Phases(0).Compounds(sname).MassFraction = propval
+                            Me.Phases(0).Compounds(sname).MassFraction = Convert.ToDouble(propval)
                             Dim mtotal As Double = 0
                             Me.PropertyPackage.DW_CalcCompMassFlow(0)
                             For Each comp As Compound In Me.Phases(0).Compounds.Values

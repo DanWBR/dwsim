@@ -2316,7 +2316,9 @@ namespace DWSIM.UI.Desktop.Editors
                     TextBox tbox2 = null;
                     tbox2 = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Flowsheet Path", fsuo.SimulationFile, "Search", null, (sender, e) => fsuo.SimulationFile = sender.Text, (sender, e) =>
                     {
-                        var searchdialog = new OpenFileDialog() { Title = "Search", FileName = fsuo.SimulationFile, MultiSelect = false };
+                        var fpath = fsuo.SimulationFile;
+                        if (fpath == "") fpath = System.Environment.CurrentDirectory;
+                        var searchdialog = new OpenFileDialog() { Title = "Search", FileName = fpath, MultiSelect = false };
                         if (searchdialog.ShowDialog(container) == DialogResult.Ok)
                         {
                             tbox2.Text = searchdialog.FileName;
