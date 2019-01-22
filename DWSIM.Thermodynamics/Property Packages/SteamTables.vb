@@ -663,6 +663,8 @@ FINAL:
             Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = Me.AUX_MMM(phase)
 
             Select Case [property].ToLower
+                Case "isothermalcompressibility", "bulkmodulus", "joulethomsoncoefficient", "speedofsound", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                    CalcAdditionalPhaseProperties(phaseID)
                 Case "compressibilityfactor"
                     result = 1 / (Me.m_iapws97.densW(T, P / 100000) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result

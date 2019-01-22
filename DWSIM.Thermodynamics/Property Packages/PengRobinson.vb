@@ -123,20 +123,30 @@ Namespace PropertyPackages
                 Case "Mixture"
                     Return 0.0#
                 Case "Vapor"
+                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Vapor)
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Vapor)
                     Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Vapor), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
                                       p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
                 Case "OverallLiquid"
                     Return 0.0#
                 Case "Liquid1"
+                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Liquid1)
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid1)
                     Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid1), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
                                       p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
                 Case "Liquid2"
+                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Liquid2)
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid2)
                     Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid2), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
                                       p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
                 Case "Liquid3"
+                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Liquid3)
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid3)
                     Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid3), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
                             p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
                 Case "Aqueous"
+                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Aqueous)
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Aqueous)
                     Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Aqueous), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
                   p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
                 Case "Solid"
@@ -244,6 +254,8 @@ Namespace PropertyPackages
             Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = Me.AUX_MMM(phase)
 
             Select Case [property].ToLower
+                Case "isothermalcompressibility", "bulkmodulus", "joulethomsoncoefficient", "speedofsound", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                    CalcAdditionalPhaseProperties(phaseID)
                 Case "compressibilityfactor"
                     result = m_pr.Z_PR(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC, RET_VPC, RET_VW, state)
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then

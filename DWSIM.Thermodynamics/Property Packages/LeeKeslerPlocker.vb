@@ -215,6 +215,8 @@ Namespace PropertyPackages
             Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = Me.AUX_MMM(phase)
 
             Select Case [property].ToLower
+                Case "isothermalcompressibility", "bulkmodulus", "joulethomsoncoefficient", "speedofsound", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                    CalcAdditionalPhaseProperties(phaseID)
                 Case "compressibilityfactor"
                     result = Me.m_lk.Z_LK(state, T / Me.AUX_TCM(phase), P / Me.AUX_PCM(phase), Me.AUX_WM(phase))(0)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result

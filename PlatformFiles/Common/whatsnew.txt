@@ -1,4 +1,5 @@
-Version 5.6 Update 8
+Version 5.6 Update 9
 
-- [FIX] Fixed Flowsheet Unit Operation block
-- [FIX] Fixed Spreadsheet mass/mole fraction writing
+- [NEW] New Excel Add-In 'GetPropUnits' function (Windows only)
+- [FIX] Fixed calculation of special properties (Excel Add-In)
+- [FIX] Fixed Pipe Segment's Outlet P/T spec mode

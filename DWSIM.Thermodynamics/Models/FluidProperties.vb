@@ -348,13 +348,13 @@ Namespace PropertyPackages.Auxiliary
         Shared Function JT_Goldzberg(ByVal T As Double, ByVal Tpc As Double, ByVal Ppc As Double, ByVal Cp As Double, ByVal fluido As String, ByVal SG As Double)
 
             'T em °F
-            T = 5 / 9 * (T + 459.7)
+            T = T * 9 / 5 - 459.7
             'Tpc em °F
-            Tpc = 5 / 9 * (Tpc + 459.7)
+            Tpc = T * 9 / 5 - 459.7
             'Ppc em lbf/in.2
             Ppc = Ppc / 6894.76
             'Cp em J/kg°F
-            Cp = Cp * 1.8 / 1000
+            Cp = Cp / 1.8 * 1000
             'tipo como "V" ou "L"
             'SG = densidade absoluta ou densidade do liquido em lbm/ft3
 
@@ -371,7 +371,7 @@ Namespace PropertyPackages.Auxiliary
 
             If fluido = "L" Then eta = -1 / (SG * Cp)
 
-            JT_Goldzberg = eta / 1.8 / 6894.76 '(K/Pa)
+            JT_Goldzberg = eta * 1.8 / 6894.76 '(K/Pa)
 
         End Function
 

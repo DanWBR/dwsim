@@ -145,6 +145,8 @@ Namespace PropertyPackages
                 Case Phase.Vapor
 
                     Select Case [property].ToLower
+                        Case "isothermalcompressibility", "bulkmodulus", "joulethomsoncoefficient", "speedofsound", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                            CalcAdditionalPhaseProperties(phaseID)
                         Case "compressibilityfactor"
                             result = 1 / (Me.m_iapws97.densW(T, P / 100000) * 1000 / 18) / 8.314 / T * P
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -203,6 +205,8 @@ Namespace PropertyPackages
                     Dim salinity As Double = CalcSalinity()
 
                     Select Case [property].ToLower
+                        Case "isothermalcompressibility", "bulkmodulus", "joulethomsoncoefficient", "speedofsound", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                            CalcAdditionalPhaseProperties(phaseID)
                         Case "compressibilityfactor"
                             result = 1 / (Me.SIA.sea_density_si(salinity, T, P) * 1000 / 18) / 8.314 / T * P
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result

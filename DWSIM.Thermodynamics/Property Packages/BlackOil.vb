@@ -144,6 +144,8 @@ Namespace PropertyPackages
                     Dim bof As BlackOilFluid = CalcBOFluid(RET_VMOL(Phase.Vapor), DW_GetConstantProperties())
 
                     Select Case [property].ToLower
+                        Case "isothermalcompressibility", "bulkmodulus", "joulethomsoncoefficient", "speedofsound", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                            CalcAdditionalPhaseProperties(phaseID)
                         Case "compressibilityfactor"
                             result = 1 / (bop.VaporDensity(T, P, bof.SGG) * 1000 / bop.VaporMolecularWeight(bof.SGG)) / 8.314 / T * P
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -196,6 +198,8 @@ Namespace PropertyPackages
                     Dim bof As BlackOilFluid = CalcBOFluid(RET_VMOL(Phase.Liquid1), DW_GetConstantProperties())
 
                     Select Case [property].ToLower
+                        Case "isothermalcompressibility", "bulkmodulus", "joulethomsoncoefficient", "speedofsound"
+                            CalcAdditionalPhaseProperties(phaseID)
                         Case "compressibilityfactor"
                             result = 1 / (bop.LiquidDensity(T, P, bof.SGO, bof.SGG, bof.GOR, bof.BSW) * 1000 / bop.LiquidMolecularWeight(bof.SGO, bof.BSW)) / 8.314 / T * P
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result

@@ -68,15 +68,15 @@ Partial Class AboutForm
         '
         'PictureBox1
         '
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.DWSIM4_icon
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
         'lblGPGPUinfo
         '
-        resources.ApplyResources(Me.lblGPGPUinfo, "lblGPGPUinfo")
         Me.lblGPGPUinfo.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblGPGPUinfo, "lblGPGPUinfo")
         Me.lblGPGPUinfo.Name = "lblGPGPUinfo"
         '
         'Label14
@@ -87,14 +87,14 @@ Partial Class AboutForm
         '
         'Lblcpusimd
         '
-        resources.ApplyResources(Me.Lblcpusimd, "Lblcpusimd")
         Me.Lblcpusimd.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.Lblcpusimd, "Lblcpusimd")
         Me.Lblcpusimd.Name = "Lblcpusimd"
         '
         'Lblcpuinfo
         '
-        resources.ApplyResources(Me.Lblcpuinfo, "Lblcpuinfo")
         Me.Lblcpuinfo.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.Lblcpuinfo, "Lblcpuinfo")
         Me.Lblcpuinfo.Name = "Lblcpuinfo"
         '
         'Label13
@@ -168,8 +168,8 @@ Partial Class AboutForm
         '
         'TextBox1
         '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         '
@@ -188,7 +188,7 @@ Partial Class AboutForm
         'AboutForm
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblGPGPUinfo)
         Me.Controls.Add(Me.Label14)
@@ -211,6 +211,7 @@ Partial Class AboutForm
         Me.Controls.Add(Me.Copyright)
         Me.Controls.Add(Me.Version)
         Me.Controls.Add(Me.Label1)
+        Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "AboutForm"
         Me.ShowIcon = False

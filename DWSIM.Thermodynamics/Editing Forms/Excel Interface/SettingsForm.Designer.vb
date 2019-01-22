@@ -124,7 +124,7 @@ Partial Class SettingsForm
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox3.TabIndex = 11
         Me.PictureBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " & _
+        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " &
         "a GPGPU device.")
         '
         'PictureBox2
@@ -147,7 +147,7 @@ Partial Class SettingsForm
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 9
         Me.PictureBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" & _
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" &
         " cores to be used at the same time.")
         '
         'GroupBox8
@@ -551,9 +551,11 @@ Partial Class SettingsForm
         '
         'SettingsForm
         '
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(596, 298)
         Me.Controls.Add(Me.TabControl1)
+        Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "SettingsForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

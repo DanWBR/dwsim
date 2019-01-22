@@ -32,7 +32,6 @@ Imports OxyPlot.Axes
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Namespace UnitOperations
-
     Public Enum FlowPackage
         Beggs_Brill
         Lockhart_Martinelli
@@ -287,7 +286,9 @@ Namespace UnitOperations
                 If Me.Profile.Sections.Count > 1 Then
                     Throw New Exception(FlowSheet.GetTranslatedString("PipeOutletPressureRestriction"))
                 ElseIf Me.Profile.Sections.Count = 1 Then
-                    If Me.Profile.Sections(1).TipoSegmento <> "Tubulaosimples" Then
+                    If Me.Profile.Sections(1).TipoSegmento <> "Tubulaosimples" And
+                        Me.Profile.Sections(1).TipoSegmento <> "Straight Tube Section" And
+                        Me.Profile.Sections(1).TipoSegmento <> "" Then
                         Throw New Exception(FlowSheet.GetTranslatedString("PipeOutletPressureRestriction"))
                     End If
                 End If

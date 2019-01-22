@@ -1111,6 +1111,57 @@ Namespace ExcelAddIn
 
         End Function
 
+        <ExcelFunction(Description:="Returns the default units for a given property.", HelpTopic:="ExcelAddInHelp.chm!11")>
+        Public Shared Function GetPropUnits(
+        <ExcelArgument("The property to get units for.")> ByVal prop As String,
+        <ExcelArgument("The returning basis of the propertiy: Mole, Mass or UNDEFINED.")> ByVal basis As String) As String
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {prop, basis})
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                Dim units = ms.GetSinglePhasePropDefaultUnits(prop, basis)
+
+                ms.Dispose()
+                ms = Nothing
+
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), units)
+
+                Return units
+
+            Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return ex.Message
+                    Case 1
+                        Return ex.ToString
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return "Ërror"
+                End Select
+
+            End Try
+
+
+        End Function
+
+
 #End Region
 
 #Region "Flash Calculation Routines, v1"

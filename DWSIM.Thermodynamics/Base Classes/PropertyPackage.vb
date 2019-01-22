@@ -615,6 +615,28 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Sub CalcAdditionalPhaseProperties(phaseID As Integer)
+
+            Dim p = Me.CurrentMaterialStream.Phases(phaseID)
+
+            If p.Name <> "Mixture" And p.Name <> "OverallLiquid" Then
+
+                With p.Properties
+                    .isothermal_compressibility = CalcIsothermalCompressibility(p)
+                    If .isothermal_compressibility <> 0.0# Then .bulk_modulus = 1 / .isothermal_compressibility Else .bulk_modulus = 0.0#
+                    .speedOfSound = CalcSpeedOfSound(p)
+                    .jouleThomsonCoefficient = CalcJouleThomsonCoefficient(p)
+                End With
+
+                CalcInternalEnergy(p)
+                CalcGibbsFreeEnergy(p)
+                CalcHelmholtzEnergy(p)
+                CalcDiffusionCoefficients(p)
+
+            End If
+
+        End Sub
+
         Public Overridable Function CalcIsothermalCompressibility(p As IPhase) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -630,6 +652,7 @@ Namespace PropertyPackages
             Dim cms0, cmst As MaterialStream
 
             cms0 = CurrentMaterialStream
+
             cmst = DirectCast(CurrentMaterialStream, MaterialStream).ShallowClone
 
             CurrentMaterialStream = cmst
@@ -707,20 +730,25 @@ Namespace PropertyPackages
                     Return 0.0#
                 Case "Vapor"
                     Dim SG = p.Properties.molecularWeight.GetValueOrDefault / 28.97
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Vapor)
                     Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Vapor), AUX_PCM(Phase.Vapor), p.Properties.heatCapacityCp.GetValueOrDefault,
                                                      "V", SG)
                 Case "OverallLiquid"
                     Return 0.0#
                 Case "Liquid1"
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid1)
                     Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Liquid1), AUX_PCM(Phase.Liquid1), p.Properties.heatCapacityCp.GetValueOrDefault,
                                                      "L", p.Properties.density.GetValueOrDefault)
                 Case "Liquid2"
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid2)
                     Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Liquid2), AUX_PCM(Phase.Liquid2), p.Properties.heatCapacityCp.GetValueOrDefault,
                                                      "L", p.Properties.density.GetValueOrDefault)
                 Case "Liquid3"
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid3)
                     Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Liquid3), AUX_PCM(Phase.Liquid3), p.Properties.heatCapacityCp.GetValueOrDefault,
                                                      "L", p.Properties.density.GetValueOrDefault)
                 Case "Aqueous"
+                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Aqueous)
                     Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Aqueous), AUX_PCM(Phase.Aqueous), p.Properties.heatCapacityCp.GetValueOrDefault,
                                                      "L", p.Properties.density.GetValueOrDefault)
                 Case "Solid"
@@ -9094,6 +9122,16 @@ Final3:
                     Select Case [property].ToLower
                         Case "compressibilityfactor"
                             res.Add(Me.CurrentMaterialStream.Phases(f).Properties.compressibilityFactor.GetValueOrDefault)
+                        Case "isothermalcompressibility"
+                            res.Add(Me.CurrentMaterialStream.Phases(f).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case "bulkmodulus"
+                            res.Add(Me.CurrentMaterialStream.Phases(f).Properties.bulk_modulus.GetValueOrDefault)
+                        Case "joulethomsoncoefficient"
+                            res.Add(Me.CurrentMaterialStream.Phases(f).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case "speedofsound"
+                            res.Add(Me.CurrentMaterialStream.Phases(f).Properties.speedOfSound.GetValueOrDefault)
+                        Case "compressibilityfactor"
+                            res.Add(Me.CurrentMaterialStream.Phases(f).Properties.compressibilityFactor.GetValueOrDefault)
                             basis = ""
                         Case "heatofvaporization"
                         Case "heatcapacity", "heatcapacitycp"
@@ -9223,6 +9261,39 @@ Final3:
                                 Case "Mass", "mass"
                                     res.Add(Me.CurrentMaterialStream.Phases(f).Properties.entropy.GetValueOrDefault * 1000)
                             End Select
+                        Case "internalenergy"
+                            If basis.Equals("mole") Then
+                                Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                                If val = 0.0# Then
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
+                                Else
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
+                                End If
+                            Else
+                                res.Add(Me.CurrentMaterialStream.Phases(f).Properties.internal_energy.GetValueOrDefault)
+                            End If
+                        Case "gibbsenergy"
+                            If basis.Equals("mole") Then
+                                Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                                If val = 0.0# Then
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                                Else
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
+                                End If
+                            Else
+                                res.Add(Me.CurrentMaterialStream.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault)
+                            End If
+                        Case "helmholtzenergy"
+                            If basis.Equals("mole") Then
+                                Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                                If val = 0.0# Then
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                                Else
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
+                                End If
+                            Else
+                                res.Add(Me.CurrentMaterialStream.Phases(f).Properties.helmholtz_energy.GetValueOrDefault)
+                            End If
                         Case "moles"
                             res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molarflow.GetValueOrDefault)
                             basis = ""

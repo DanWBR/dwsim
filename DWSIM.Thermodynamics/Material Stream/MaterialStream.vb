@@ -4596,6 +4596,70 @@ Namespace Streams
             results = arr
         End Sub
 
+        Public Function GetSinglePhasePropDefaultUnits(ByVal [property] As String, ByVal basis As String) As String
+
+            Dim units As String = ""
+
+            Select Case [property].ToLower
+                Case "isothermalcompressibility"
+                    units = "1/Pa"
+                Case "bulkmodulus"
+                    units = "Pa"
+                Case "joulethomsoncoefficient"
+                    units = "K/Pa"
+                Case "speedofsound"
+                    units = "m/s"
+                Case "heatofvaporization"
+                    units = "kJ/mol"
+                Case "heatcapacity", "heatcapacitycp", "heatcapacitycv", "idealgasheatcapacity", "idealgasenthalpy",
+                     "excessenthalpy", "excessentropy", "enthalpy", "enthalpynf", "entropy", "entropynf", "enthalpyf",
+                     "entropyf", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            units = "J/mol"
+                        Case "Mass", "mass"
+                            units = "J/kg"
+                    End Select
+                Case "viscosity"
+                    units = "Pa.s"
+                Case "thermalconductivity"
+                    units = "W/[m.K]"
+                Case "fugacity"
+                    units = "Pa"
+                Case "activity"
+                    units = "Pa"
+                Case "volume"
+                    units = "m3/mol"
+                Case "density"
+                    units = "kg/m3"
+                Case "moles"
+                    units = "mol"
+                Case "mass"
+                    units = "kg"
+                Case "molecularweight"
+                    units = "kg/kmol"
+                Case "temperature"
+                    units = "K"
+                Case "pressure"
+                    units = "Pa"
+                Case "flow", "totalflow"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                        Case "Mass", "mass"
+                    End Select
+                Case "concentration"
+                    units = "kg/m3"
+                Case "molarity"
+                    units = "mol/m3"
+                Case Else
+                    units = ""
+            End Select
+
+            Return units
+
+        End Function
+
+
         ''' <summary>
         ''' Retrieves temperature, pressure and composition for a Phase.
         ''' </summary>
@@ -4889,6 +4953,16 @@ Namespace Streams
             Select Case [property].ToLower
                 Case "compressibilityfactor"
                     Me.Phases(f).Properties.compressibilityFactor = values(0)
+                Case "isothermalcompressibility"
+                    Me.Phases(f).Properties.isothermal_compressibility = values(0)
+                Case "bulkmodulus"
+                    Me.Phases(f).Properties.bulk_modulus = values(0)
+                Case "joulethomsoncoefficient"
+                    Me.Phases(f).Properties.jouleThomsonCoefficient = values(0)
+                Case "speedofsound"
+                    Me.Phases(f).Properties.speedOfSound = values(0)
+                Case "compressibilityfactor"
+                    Me.Phases(f).Properties.compressibilityFactor = values(0)
                 Case "heatcapacity", "heatcapacitycp"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
@@ -4999,6 +5073,36 @@ Namespace Streams
                         Case "Mass", "mass"
                             Me.Phases(f).Properties.entropyF = values(0) / 1000
                             Me.Phases(f).Properties.molar_entropyF = values(0) * Me.PropertyPackage.AUX_MMM(phs)
+                    End Select
+                Case "internalenergy"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            Me.Phases(f).Properties.molar_internal_energy = values(0)
+                            Dim val = Me.PropertyPackage.AUX_MMM(phs)
+                            If val <> 0.0# Then Me.Phases(f).Properties.internal_energy = values(0) / val
+                        Case "Mass", "mass"
+                            Me.Phases(f).Properties.internal_energy = values(0) / 1000
+                            Me.Phases(f).Properties.molar_internal_energy = values(0) * Me.PropertyPackage.AUX_MMM(phs)
+                    End Select
+                Case "gibbslenergy"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            Me.Phases(f).Properties.molar_gibbs_free_energy = values(0)
+                            Dim val = Me.PropertyPackage.AUX_MMM(phs)
+                            If val <> 0.0# Then Me.Phases(f).Properties.gibbs_free_energy = values(0) / val
+                        Case "Mass", "mass"
+                            Me.Phases(f).Properties.gibbs_free_energy = values(0) / 1000
+                            Me.Phases(f).Properties.molar_gibbs_free_energy = values(0) * Me.PropertyPackage.AUX_MMM(phs)
+                    End Select
+                Case "helmholtzenergy"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            Me.Phases(f).Properties.molar_helmholtz_energy = values(0)
+                            Dim val = Me.PropertyPackage.AUX_MMM(phs)
+                            If val <> 0.0# Then Me.Phases(f).Properties.helmholtz_energy = values(0) / val
+                        Case "Mass", "mass"
+                            Me.Phases(f).Properties.helmholtz_energy = values(0) / 1000
+                            Me.Phases(f).Properties.molar_helmholtz_energy = values(0) * Me.PropertyPackage.AUX_MMM(phs)
                     End Select
                 Case "moles"
                     Me.Phases(f).Properties.molarflow = values(0)
@@ -5841,7 +5945,18 @@ Namespace Streams
         Public Function ShallowClone() As Streams.MaterialStream
 
             Dim ms As New MaterialStream("", "", FlowSheet, PropertyPackage)
-            FlowSheet.AddCompoundsToMaterialStream(ms)
+            If Not FlowSheet Is Nothing Then
+                FlowSheet.AddCompoundsToMaterialStream(ms)
+            Else
+                For Each phase As IPhase In ms.Phases.Values
+                    For Each comp In Me.Phases(0).Compounds.Values
+                        With phase
+                            .Compounds.Add(comp.Name, New Compound(comp.Name, ""))
+                            .Compounds(comp.Name).ConstantProperties = comp.ConstantProperties
+                        End With
+                    Next
+                Next
+            End If
             ms.Assign(Me)
             ms.AssignProps(Me)
 
