@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("XML Serializer")>
 <Assembly: AssemblyDescription("DWSIM Simulator Custom XML Serializer Library")>
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("CustomXMLSerializer")> 
-<Assembly: AssemblyCopyright("Copyright ©  2012-2017 Daniel Medeiros")> 
+<Assembly: AssemblyProduct("CustomXMLSerializer")>
+<Assembly: AssemblyCopyright("Copyright © 2012-2019 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(True)>

@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("DWSIM.FlowsheetBase")> 
 <Assembly: AssemblyDescription("DWSIM Flowsheet Base Class")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.FlowsheetBase")> 
-<Assembly: AssemblyCopyright("Copyright © 2017 Daniel Medeiros")> 
+<Assembly: AssemblyProduct("DWSIM.FlowsheetBase")>
+<Assembly: AssemblyCopyright("Copyright © 2017-2019 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

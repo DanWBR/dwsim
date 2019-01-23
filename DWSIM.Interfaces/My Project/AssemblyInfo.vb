@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("DWSIM Interface Definitions")>
 <Assembly: AssemblyDescription("DWSIM Simulator Interface Definitions Library")>
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.Interfaces")> 
-<Assembly: AssemblyCopyright("Copyright ©  2017 DWSIM Project")> 
+<Assembly: AssemblyProduct("DWSIM.Interfaces")>
+<Assembly: AssemblyCopyright("Copyright © 2017-2019 DWSIM Project")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(True)>

@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("DWSIM Shared Class Definitions")>
 <Assembly: AssemblyDescription("DWSIM Simulator Shared Class Library")>
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.SharedClasses")> 
-<Assembly: AssemblyCopyright("Copyright ©  2017 DWSIM Project")> 
+<Assembly: AssemblyProduct("DWSIM.SharedClasses")>
+<Assembly: AssemblyCopyright("Copyright © 2017-2019 DWSIM Project")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
