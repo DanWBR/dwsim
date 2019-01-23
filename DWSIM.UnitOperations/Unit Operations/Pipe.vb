@@ -287,6 +287,7 @@ Namespace UnitOperations
                     Throw New Exception(FlowSheet.GetTranslatedString("PipeOutletPressureRestriction"))
                 ElseIf Me.Profile.Sections.Count = 1 Then
                     If Me.Profile.Sections(1).TipoSegmento <> "Tubulaosimples" And
+                        Me.Profile.Sections(1).TipoSegmento <> "Straight Tube" And
                         Me.Profile.Sections(1).TipoSegmento <> "Straight Tube Section" And
                         Me.Profile.Sections(1).TipoSegmento <> "" Then
                         Throw New Exception(FlowSheet.GetTranslatedString("PipeOutletPressureRestriction"))
@@ -403,7 +404,7 @@ Namespace UnitOperations
 
                         IObj3?.Paragraphs.Add(String.Format("Calculating segment {0} ({1}/{2})...", segmento.Indice, iq, segmento.Quantidade))
 
-                        If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Then
+                        If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Or segmento.TipoSegmento = "Straight Tube" Then
 
                             IObj3?.Paragraphs.Add(String.Format("Segment type: {0}", segmento.TipoSegmento))
                             IObj3?.Paragraphs.Add(String.Format("Segment increments: {0}", segmento.Incrementos))
@@ -1756,7 +1757,7 @@ Final3:     T = bbb
                     Case 8
                         Dim tval As Double = 0
                         For Each section In Profile.Sections.Values
-                            If section.TipoSegmento = "" Or section.TipoSegmento = "Straight Tube" Or section.TipoSegmento = "Tubulaosimples" Then
+                            If section.TipoSegmento = "" Or section.TipoSegmento.Contains("Straight Tube") Or section.TipoSegmento = "Tubulaosimples" Then
                                 tval += section.Comprimento
                             End If
                         Next
@@ -1764,7 +1765,7 @@ Final3:     T = bbb
                     Case 9
                         Dim tval As Double = 0
                         For Each section In Profile.Sections.Values
-                            If section.TipoSegmento = "" Or section.TipoSegmento = "Straight Tube" Or section.TipoSegmento = "Tubulaosimples" Then
+                            If section.TipoSegmento = "" Or section.TipoSegmento.Contains("Straight Tube") Or section.TipoSegmento = "Tubulaosimples" Then
                                 tval += section.Elevacao
                             End If
                         Next
