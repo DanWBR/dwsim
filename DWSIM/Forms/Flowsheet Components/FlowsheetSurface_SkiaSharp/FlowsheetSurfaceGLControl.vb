@@ -66,8 +66,8 @@ Public Class FlowsheetSurfaceGLControl
     Private Sub FlowsheetSurfaceControl_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Me.MouseDoubleClick
         Dim obj = FlowsheetSurface.SelectedObject
         If (obj Is Nothing) Then
-            FlowsheetSurface.ZoomAll((Width * GlobalSettings.Settings.DpiScale), (Height * GlobalSettings.Settings.DpiScale))
-            FlowsheetSurface.ZoomAll((Width * GlobalSettings.Settings.DpiScale), (Height * GlobalSettings.Settings.DpiScale))
+            FlowsheetSurface.ZoomAll(Width, Height)
+            FlowsheetSurface.ZoomAll(Width, Height)
             FlowsheetObject.FormSurface.TSTBZoom.Text = FlowsheetSurface.Zoom.ToString("###%")
             Invalidate()
             Invalidate()

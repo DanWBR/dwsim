@@ -74,6 +74,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         SplitContainer1.Panel2.Controls.Add(SimObjPanel)
 
+        SplitContainer1.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
     End Sub

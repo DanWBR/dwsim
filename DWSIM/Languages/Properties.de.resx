@@ -1351,6 +1351,12 @@
   <data name="PROP_PS_7" xml:space="preserve">
     <value>Gradient Umgebungstemperatur</value>
   </data>
+  <data name="PROP_PS_8" xml:space="preserve">
+    <value>Total Length (Straight Tubes)</value>
+  </data>
+  <data name="PROP_PS_9" xml:space="preserve">
+    <value>Total Elevation (Straight Tubes)</value>
+  </data>
   <data name="PROP_PU_0" xml:space="preserve">
     <value>Druckerhöhung (Höhe)</value>
     <comment>1</comment>

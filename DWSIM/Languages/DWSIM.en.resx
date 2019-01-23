@@ -5517,7 +5517,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Rugosity</value>
   </data>
   <data name="ThermCond" xml:space="preserve">
-    <value>Molar Fraction - </value>
+    <value>Therm. Conduct.</value>
   </data>
   <data name="Fraesdascorrentes21" xml:space="preserve">
     <value>2. Stream Fractions</value>

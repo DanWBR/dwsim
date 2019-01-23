@@ -1753,6 +1753,22 @@ Final3:     T = bbb
                         value = cv.ConvertFromSI(su.temperature, Me.ThermalProfile.Temp_amb_definir)
                     Case 7
                         value = cv.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient) / cv.ConvertFromSI(su.distance, 1.0#)
+                    Case 8
+                        Dim tval As Double = 0
+                        For Each section In Profile.Sections.Values
+                            If section.TipoSegmento = "" Or section.TipoSegmento = "Straight Tube" Or section.TipoSegmento = "Tubulaosimples" Then
+                                tval += section.Comprimento
+                            End If
+                        Next
+                        value = cv.ConvertFromSI(su.distance, tval)
+                    Case 9
+                        Dim tval As Double = 0
+                        For Each section In Profile.Sections.Values
+                            If section.TipoSegmento = "" Or section.TipoSegmento = "Straight Tube" Or section.TipoSegmento = "Tubulaosimples" Then
+                                tval += section.Elevacao
+                            End If
+                        Next
+                        value = cv.ConvertFromSI(su.distance, tval)
                 End Select
                 Return value
             Else
@@ -1883,7 +1899,7 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function GetDefaultProperties() As String()
-            Return New String() {"PROP_PS_0", "PROP_PS_1", "PROP_PS_2"}
+            Return New String() {"PROP_PS_0", "PROP_PS_1", "PROP_PS_2", "PROP_PS_8", "PROP_PS_9"}
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
@@ -1891,7 +1907,7 @@ Final3:     T = bbb
             Dim proplist As New ArrayList
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
-            For i = 0 To 7
+            For i = 0 To 9
                 proplist.Add("PROP_PS_" + CStr(i))
             Next
             For Each ps In Profile.Sections
@@ -2066,6 +2082,10 @@ Final3:     T = bbb
                         value = su.temperature
                     Case 7
                         value = su.deltaT & "/" & su.distance
+                    Case 8
+                        value = su.distance
+                    Case 9
+                        value = su.distance
                 End Select
                 Return value
             Else

@@ -1575,4 +1575,10 @@
   <data name="PROP_VA_5" xml:space="preserve">
     <value>Abertura</value>
   </data>
+  <data name="PROP_PS_8" xml:space="preserve">
+    <value>Comprimento Total</value>
+  </data>
+  <data name="PROP_PS_9" xml:space="preserve">
+    <value>Elevação Total</value>
+  </data>
 </root>

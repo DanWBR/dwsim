@@ -67,6 +67,7 @@ Version 5.6 Update 9
 - [NEW] New Excel Add-In 'GetPropUnits' function (Windows only)
 - [FIX] Fixed calculation of special properties (Excel Add-In)
 - [FIX] Fixed Pipe Segment's Outlet P/T spec mode
+- [FIX] Fixed some Classic UI issues with High-DPI displays
 
 Version 5.6 Update 8
 
