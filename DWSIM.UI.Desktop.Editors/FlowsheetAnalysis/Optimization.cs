@@ -133,7 +133,7 @@ namespace DWSIM.UI.Desktop.Editors
             proplist2.Add("");
 
             var container = new DynamicLayout { Padding = new Padding(5), Width = 300 };
-            container.BackgroundColor = Eto.Drawing.Colors.White;
+            //container.BackgroundColor = Eto.Drawing.Colors.White;
             container.Tag = new Random().Next() + mycase.variables.Count + 1;
 
             var slcontainer = new StackLayoutItem(container);
