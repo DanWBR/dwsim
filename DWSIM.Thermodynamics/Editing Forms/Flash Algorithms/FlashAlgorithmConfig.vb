@@ -36,7 +36,13 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
-                Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE, Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
+                    TabControl1.TabPages.Remove(TabPageIM)
+                Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageIM)
+                Case Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
@@ -44,28 +50,34 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageIM)
                 Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageIM)
                 Case Interfaces.Enums.FlashMethod.Inside_Out_VLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageIM)
                 Case Interfaces.Enums.FlashMethod.Inside_Out_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageIM)
                 Case Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic, Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution, Interfaces.Enums.FlashMethod.Simple_LLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageIM)
                 Case Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server
                     TabControl1.TabPages.Remove(TabPageConvPars)
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageIM)
             End Select
 
         Else
@@ -133,7 +145,29 @@ Public Class FlashAlgorithmConfig
 
             cbMinMethodGM.SelectedItem = Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod)
 
+            If Not ExcelMode Then SetupKeyCompounds()
+
         End If
+
+    End Sub
+
+    Private Sub SetupKeyCompounds()
+
+        Dim selected As Array
+
+        selected = Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(ci, Type.GetType("System.String"))
+
+        Me.cbImmiscible.Items.Clear()
+
+        For i As Integer = 0 To AvailableCompounds.Count - 1
+            Me.cbImmiscible.Items.Add(AvailableCompounds(i))
+            For Each s As String In selected
+                If s = AvailableCompounds(i) Then
+                    Me.cbImmiscible.SelectedIndex = i
+                    Exit For
+                End If
+            Next
+        Next
 
     End Sub
 
@@ -166,6 +200,12 @@ Public Class FlashAlgorithmConfig
             Settings(Interfaces.Enums.FlashSetting.IO_FastMode) = chkUseBroydenIO.Checked
 
             Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod) = cbMinMethodGM.SelectedItem
+
+            If Not ExcelMode Then
+
+                Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = cbImmiscible.SelectedItem.ToString + ","
+
+            End If
 
         Catch ex As Exception
 

@@ -75,7 +75,7 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddTextBoxRow(this, nf, "Maximum Iterations", (double)mycase.maxits, (arg3, arg2) => { mycase.maxits = (int)arg3.Text.ToDoubleFromCurrent(); });
             s.CreateAndAddTextBoxRow(this, nf, "Absolute Tolerance", mycase.tolerance, (arg3, arg2) => { mycase.tolerance = arg3.Text.ToDoubleFromCurrent(); });
 
-            var varcontainer = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10, BackgroundColor = Colors.White };
+            var varcontainer = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10 };
 
             s.CreateAndAddBoldLabelAndButtonRow(this, "Variables", "Add Variable", null, (arg1, arg2) =>
             {

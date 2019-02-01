@@ -77,6 +77,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If CompoundProperties Is Nothing Then CompoundProperties = PP.DW_GetConstantProperties
 
+            Dim keycomps As String() = FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.InvariantCulture, Type.GetType("System.String"))
+
+            If keycomps.Count = 0 Then
+                Throw New Exception("Immiscible VLLE Flash Algorithm error: you must select an immiscible compound for liquid phase splitting.")
+            End If
+
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
             Dim L, V As Double
@@ -101,7 +107,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = True Then
 
                 For i = 0 To n
-                    If CompoundProperties(i).Name = Me.StabSearchCompIDs(0) Then
+                    If CompoundProperties(i).Name = keycomps(0) Then
                         wid = i
                         nwm = fi(i)
                         fi(i) = 0
@@ -138,7 +144,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Else
 
                 For i = 0 To n
-                    If CompoundProperties(i).Name = Me.StabSearchCompIDs(0) Then
+                    If CompoundProperties(i).Name = keycomps(0) Then
                         wid = i
                         nwm = fi(i)
                     End If

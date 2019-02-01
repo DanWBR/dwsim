@@ -388,6 +388,24 @@
   <data name="TabPageCOES.Text" xml:space="preserve">
     <value>CAPE-OPEN Equilbrium Server</value>
   </data>
+  <data name="cbImmiscible.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 21</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>Immiscible Compound</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Liquid-Liquid Immiscibility</value>
+  </data>
+  <data name="TabPageIM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageIM.Text" xml:space="preserve">
+    <value>Immiscibility</value>
+  </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>641, 322</value>
   </data>

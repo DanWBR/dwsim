@@ -143,7 +143,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var btnAddDepVar = s.CreateAndAddBoldLabelAndButtonRow(this, "Dependent Variables", "Add New", null, null);
            
-            var ll = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10, BackgroundColor = Colors.White };
+            var ll = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10 };
             ll.RemoveAll();
 
             s.CreateAndAddControlRow(this, new Scrollable { Border = BorderType.None, Content = ll });

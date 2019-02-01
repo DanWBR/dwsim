@@ -78,6 +78,10 @@ Partial Class FlashAlgorithmConfig
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.btnEditThermoServer = New System.Windows.Forms.Button()
+        Me.TabPageIM = New System.Windows.Forms.TabPage()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.cbImmiscible = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPageGeneral.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -91,6 +95,8 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox3.SuspendLayout()
         Me.TabPageCOES.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.TabPageIM.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -102,6 +108,7 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1.Controls.Add(Me.TabPageIO)
         Me.TabControl1.Controls.Add(Me.TabPageGM)
         Me.TabControl1.Controls.Add(Me.TabPageCOES)
+        Me.TabControl1.Controls.Add(Me.TabPageIM)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
@@ -444,6 +451,34 @@ Partial Class FlashAlgorithmConfig
         Me.btnEditThermoServer.Name = "btnEditThermoServer"
         Me.btnEditThermoServer.UseVisualStyleBackColor = True
         '
+        'TabPageIM
+        '
+        resources.ApplyResources(Me.TabPageIM, "TabPageIM")
+        Me.TabPageIM.Controls.Add(Me.GroupBox7)
+        Me.TabPageIM.Name = "TabPageIM"
+        Me.TabPageIM.UseVisualStyleBackColor = True
+        '
+        'GroupBox7
+        '
+        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
+        Me.GroupBox7.Controls.Add(Me.cbImmiscible)
+        Me.GroupBox7.Controls.Add(Me.Label10)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.TabStop = False
+        '
+        'cbImmiscible
+        '
+        resources.ApplyResources(Me.cbImmiscible, "cbImmiscible")
+        Me.cbImmiscible.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbImmiscible.FormattingEnabled = True
+        Me.cbImmiscible.Items.AddRange(New Object() {resources.GetString("cbImmiscible.Items"), resources.GetString("cbImmiscible.Items1"), resources.GetString("cbImmiscible.Items2"), resources.GetString("cbImmiscible.Items3"), resources.GetString("cbImmiscible.Items4"), resources.GetString("cbImmiscible.Items5"), resources.GetString("cbImmiscible.Items6"), resources.GetString("cbImmiscible.Items7"), resources.GetString("cbImmiscible.Items8"), resources.GetString("cbImmiscible.Items9"), resources.GetString("cbImmiscible.Items10")})
+        Me.cbImmiscible.Name = "cbImmiscible"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        '
         'FlashAlgorithmConfig
         '
         resources.ApplyResources(Me, "$this")
@@ -471,6 +506,9 @@ Partial Class FlashAlgorithmConfig
         Me.TabPageCOES.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        Me.TabPageIM.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -529,4 +567,8 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents tbSelectedES As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents TabPageIM As TabPage
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents cbImmiscible As ComboBox
+    Friend WithEvents Label10 As Label
 End Class
