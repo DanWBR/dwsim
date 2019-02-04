@@ -201,7 +201,7 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod) = cbMinMethodGM.SelectedItem
 
-            If Not ExcelMode Then
+            If Not ExcelMode AndAlso FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE Then
 
                 Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = cbImmiscible.SelectedItem.ToString + ","
 
