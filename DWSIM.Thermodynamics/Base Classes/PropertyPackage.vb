@@ -10793,6 +10793,16 @@ Final3:
             Catch ex As Exception
             End Try
 
+            Try
+                OverrideEnthalpyCalculation = (From el As XElement In data Select el Where el.Name = "OverrideEnthalpyCalculation").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                OverrideEntropyCalculation = (From el As XElement In data Select el Where el.Name = "OverrideEntropyCalculation").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
             Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
             Try
@@ -11110,6 +11120,8 @@ Final3:
                 .Add(New XElement("TPSeverity", _tpseverity))
                 .Add(New XElement("TPCompIDs", XMLSerializer.XMLSerializer.ArrayToString2(_tpcompids, ci)))
                 .Add(New XElement("OverrideKvalFugCoeff", OverrideKvalFugCoeff))
+                .Add(New XElement("OverrideEnthalpyCalculation", OverrideEnthalpyCalculation))
+                .Add(New XElement("OverrideEntropyCalculation", OverrideEntropyCalculation))
 
                 Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
