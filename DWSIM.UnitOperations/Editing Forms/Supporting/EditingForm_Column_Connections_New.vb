@@ -285,8 +285,8 @@ Public Class EditingForm_Column_Connections_New
 
     Private Sub gridSideDrawSpecs_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridSideDrawSpecs.CellValueChanged
         If loaded Then
-            Dim id = gridSideDraws.Rows(e.RowIndex).Cells(0).Value
-            Dim value = gridSideDraws.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+            Dim id = gridSideDrawSpecs.Rows(e.RowIndex).Cells(0).Value
+            Dim value = gridSideDrawSpecs.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             If rc.MaterialStreams.ContainsKey(id) Then
                 If e.ColumnIndex = 3 Then
                     Dim su = rc.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem

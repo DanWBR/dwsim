@@ -2932,6 +2932,7 @@ Public Class FormFlowsheet
     Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
         GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
         tsbCalc.Enabled = tsbAtivar.Checked
+        tsbCalcF.Enabled = tsbAtivar.Checked
         tsbAbortCalc.Enabled = tsbAtivar.Checked
         tsbSimultAdjustSolver.Enabled = tsbAtivar.Checked
     End Sub

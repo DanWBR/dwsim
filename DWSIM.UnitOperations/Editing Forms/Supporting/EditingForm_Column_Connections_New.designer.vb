@@ -371,7 +371,6 @@ Partial Class EditingForm_Column_Connections_New
         '
         Me.DataGridViewTextBoxColumn6.HeaderText = "Molar Flow"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.ReadOnly = True
         '
         'EditingForm_Column_Connections_New
         '
