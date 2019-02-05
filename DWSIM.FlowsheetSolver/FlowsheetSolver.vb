@@ -996,6 +996,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Dim filteredlist As Dictionary(Of Integer, List(Of String)) = objl(2)
             Dim objstack As List(Of String) = objl(0)
 
+            If My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown Then
+                If mode = 0 Or mode = 1 Then
+                    objstack = fgui.ChangeCalculationOrder(objstack)
+                End If
+            End If
+
             IObj?.Paragraphs.Add("The objects which will be calculated are (in this order): ")
 
             If IObj IsNot Nothing Then

@@ -44,10 +44,10 @@ Public Class FormFlowsheet
 
     'DWSIM IFlowsheet interface
     Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI, Interfaces.IFlowsheetCalculationQueue
+
     Public Shadows Const ClassId As String = "0294AA84-9269-46CE-A854-BEF64539287B"
     Public Shadows Const InterfaceId As String = "F405F679-7C8F-4737-BE58-738624220B7D"
     Public Shadows Const EventsId As String = "5E0BA6EE-9025-4C33-A896-E061F32E93BF"
-
 
 #Region "    Variable Declarations "
 
@@ -3022,4 +3022,16 @@ Public Class FormFlowsheet
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
         Return FormSurface.SplitContainer1.Panel1.Height
     End Function
+
+    Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder
+
+        Dim frm As New FormCustomCalcOrder
+        frm.Flowsheet = Me
+        frm.ItemList = objects
+        frm.ShowDialog(Me)
+
+        Return frm.NewItemList
+
+    End Function
+
 End Class

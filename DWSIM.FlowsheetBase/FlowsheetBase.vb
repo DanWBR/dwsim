@@ -2224,5 +2224,9 @@ Label_00CC:
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
         Return FlowsheetSurface.Size.Height
     End Function
+
+    Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder
+        Return objects
+    End Function
 End Class
 

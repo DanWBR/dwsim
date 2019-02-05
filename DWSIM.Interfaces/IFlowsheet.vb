@@ -152,6 +152,8 @@
 
     Function GetFlowsheetSurfaceHeight() As Integer
 
+    Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String)
+
 End Interface
 
 ''' <summary>
@@ -213,7 +215,6 @@ End Interface
     Sub UpdateInterface()
 
     Sub UpdateInformation()
-
 
 End Interface
 
