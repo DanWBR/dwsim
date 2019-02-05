@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.6 Update 10
+Version 5.6 Update 11
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.6 Update 11
+
+- [NEW] Added the possibility to change the calculation order on Classic UI (hold Ctrl+Alt before solving the flowsheet)
+- [NEW] User can now override K-value Fugacity, Enthalpy and Entropy calculations at Property Package level using Python Scripts
+- [FIX] Fixed Side Draw flowrate input (Classic UI)
 
 Version 5.6 Update 10
 

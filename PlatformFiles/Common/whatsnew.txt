@@ -1,4 +1,5 @@
-Version 5.6 Update 10
+Version 5.6 Update 11
 
-- [FIX] Fixed white background on Dark Mode (macOS)
-- [FIX] Immiscible VLLE Flash fixes, restored missing compound selection
+- [NEW] Added the possibility to change the calculation order on Classic UI (hold Ctrl+Alt before solving the flowsheet)
+- [NEW] User can now override K-value Fugacity, Enthalpy and Entropy calculations at Property Package level using Python Scripts
+- [FIX] Fixed Side Draw flowrate input (Classic UI)
