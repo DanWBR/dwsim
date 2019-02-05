@@ -269,12 +269,12 @@ Namespace PropertyPackages
                     resultObj = Auxiliary.PROPS.CpCvR(state, T, P, RET_VMOL(phase), RET_VKij(), RET_VMAS(phase), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = resultObj(2)
                 Case "enthalpy", "enthalpynf"
-                    result = Me.m_pr.H_PR_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, phase))
+                    result = DW_CalcEnthalpy(RET_VMOL(phase), T, P, state)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 Case "entropy", "entropynf"
-                    result = Me.m_pr.S_PR_MIX(state, T, P, RET_VMOL(phase), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, phase))
+                    result = DW_CalcEntropy(RET_VMOL(phase), T, P, state)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -412,12 +412,12 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = dens
 
                 IObj?.SetCurrent
-                h = Me.m_pr.H_PR_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, dwpl))
+                h = DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = h
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = h * mw
 
                 IObj?.SetCurrent
-                s = Me.m_pr.S_PR_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, dwpl))
+                s = DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = s
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = s * mw
 
@@ -452,12 +452,12 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = dens
 
                 IObj?.SetCurrent
-                h = Me.m_pr.H_PR_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, Phase.Vapor))
+                h = DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = h
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = h * mw
 
                 IObj?.SetCurrent
-                s = Me.m_pr.S_PR_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor))
+                s = DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = s
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = s * mw
 
@@ -655,29 +655,37 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            If OverrideEnthalpyCalculation Then
 
-            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEnthalpy", "Peng-Robinson EOS Enthalpy", "Property Package Enthalpy Calculation Routine")
+                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st)
 
-            IObj?.SetCurrent()
+            Else
 
-            Dim H As Double
+                Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Dim Hid As Double = Me.RET_Hid(298.15, T, Vx)
+                Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEnthalpy", "Peng-Robinson EOS Enthalpy", "Property Package Enthalpy Calculation Routine")
 
-            IObj?.SetCurrent()
+                IObj?.SetCurrent()
 
-            If st = State.Liquid Then
-                H = Me.m_pr.H_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid)
-            ElseIf st = State.Vapor Then
-                H = Me.m_pr.H_PR_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid)
-            ElseIf st = State.Solid Then
-                H = Me.m_pr.H_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                Dim H As Double
+
+                Dim Hid As Double = Me.RET_Hid(298.15, T, Vx)
+
+                IObj?.SetCurrent()
+
+                If st = State.Liquid Then
+                    H = Me.m_pr.H_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid)
+                ElseIf st = State.Vapor Then
+                    H = Me.m_pr.H_PR_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid)
+                ElseIf st = State.Solid Then
+                    H = Me.m_pr.H_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Hid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                End If
+
+                IObj?.Close()
+
+                Return H
+
             End If
-
-            IObj?.Close()
-
-            Return H
 
         End Function
 
@@ -699,29 +707,37 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            If OverrideEntropyCalculation Then
 
-            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEntropy", "Peng-Robinson EOS Entropy", "Property Package Entropy Calculation Routine")
+                Return EntropyCalculationOverride.Invoke(Vx, T, P, st)
 
-            IObj?.SetCurrent()
+            Else
 
-            Dim S As Double
+                Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Dim Sid As Double = Me.RET_Sid(298.15, T, P, Vx)
+                Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEntropy", "Peng-Robinson EOS Entropy", "Property Package Entropy Calculation Routine")
 
-            IObj?.SetCurrent()
+                IObj?.SetCurrent()
 
-            If st = State.Liquid Then
-                S = Me.m_pr.S_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid)
-            ElseIf st = State.Vapor Then
-                S = Me.m_pr.S_PR_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid)
-            ElseIf st = State.Solid Then
-                S = Me.m_pr.S_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                Dim S As Double
+
+                Dim Sid As Double = Me.RET_Sid(298.15, T, P, Vx)
+
+                IObj?.SetCurrent()
+
+                If st = State.Liquid Then
+                    S = Me.m_pr.S_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid)
+                ElseIf st = State.Vapor Then
+                    S = Me.m_pr.S_PR_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid)
+                ElseIf st = State.Solid Then
+                    S = Me.m_pr.S_PR_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Sid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                End If
+
+                IObj?.Close()
+
+                Return S
+
             End If
-
-            IObj?.Close()
-
-            Return S
 
         End Function
 

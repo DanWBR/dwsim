@@ -26,6 +26,7 @@ Partial Class FormCustomCalcOrder
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.ListView1 = New Controls.ListViewEx()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'Label1
@@ -61,13 +62,19 @@ Partial Class FormCustomCalcOrder
         '
         Me.ListView1.AllowDrop = True
         Me.ListView1.AllowRowReorder = True
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.Location = New System.Drawing.Point(16, 38)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(301, 328)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.List
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Flowsheet Object"
+        Me.ColumnHeader1.Width = 300
         '
         'FormCustomCalcOrder
         '
@@ -95,4 +102,5 @@ Partial Class FormCustomCalcOrder
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents ListView1 As Controls.ListViewEx
+    Friend WithEvents ColumnHeader1 As ColumnHeader
 End Class

@@ -333,52 +333,60 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            If OverrideEnthalpyCalculation Then
 
-            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEnthalpy", "Enthalpy", "Property Package Enthalpy Calculation Routine")
+                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st)
 
-            IObj?.SetCurrent()
+            Else
 
-            Dim H As Double
+                Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            If st = State.Liquid Then
-                Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
-                    Case 0 'LK
-                        H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx))
-                    Case 1 'Ideal
-                        H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) + P / 1000 / Me.AUX_LIQDENS(T, Vx)
-                    Case 2 'Excess
-                        H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                    Case 3 'Experimental Liquid
-                        H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx)
-                End Select
-            ElseIf st = State.Vapor Then
-                Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
-                    Case 0 'LK
-                        H = Me.m_lk.H_LK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx))
-                    Case 1 'Ideal
-                        H = Me.RET_Hid(298.15, T, Vx)
-                    Case 2 'Excess
-                        H = Me.RET_Hid(298.15, T, Vx)
-                    Case 3 'Experimental Liquid
-                        H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                End Select
-            ElseIf st = State.Solid Then
-                Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
-                    Case 0 'LK
-                        H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx)) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                    Case 1 'Ideal
-                        H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                    Case 2 'Excess
-                        H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                    Case 3 'Experimental Liquid
-                        H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                End Select
+                Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEnthalpy", "Enthalpy", "Property Package Enthalpy Calculation Routine")
+
+                IObj?.SetCurrent()
+
+                Dim H As Double
+
+                If st = State.Liquid Then
+                    Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
+                        Case 0 'LK
+                            H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx))
+                        Case 1 'Ideal
+                            H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) + P / 1000 / Me.AUX_LIQDENS(T, Vx)
+                        Case 2 'Excess
+                            H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                        Case 3 'Experimental Liquid
+                            H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx)
+                    End Select
+                ElseIf st = State.Vapor Then
+                    Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
+                        Case 0 'LK
+                            H = Me.m_lk.H_LK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx))
+                        Case 1 'Ideal
+                            H = Me.RET_Hid(298.15, T, Vx)
+                        Case 2 'Excess
+                            H = Me.RET_Hid(298.15, T, Vx)
+                        Case 3 'Experimental Liquid
+                            H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    End Select
+                ElseIf st = State.Solid Then
+                    Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
+                        Case 0 'LK
+                            H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx)) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                        Case 1 'Ideal
+                            H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                        Case 2 'Excess
+                            H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                        Case 3 'Experimental Liquid
+                            H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    End Select
+                End If
+
+                IObj?.Close()
+
+                Return H
+
             End If
-
-            IObj?.Close()
-
-            Return H
 
         End Function
 
@@ -411,52 +419,60 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            If OverrideEntropyCalculation Then
 
-            Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEntropy", "Entropy", "Entropy Calculation Routine")
+                Return EntropyCalculationOverride.Invoke(Vx, T, P, st)
 
-            IObj?.SetCurrent()
+            Else
 
-            Dim S As Double
+                Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            If st = State.Liquid Then
-                Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
-                    Case 0 'LK
-                        S = Me.m_lk.S_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx))
-                    Case 1 'Ideal
-                        S = Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
-                    Case 2 'Excess
-                        S = Me.RET_Sid(298.15, T, P, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
-                    Case 3 'Experimental Liquid
-                        S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
-                End Select
-            ElseIf st = State.Vapor Then
-                Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
-                    Case 0 'LK
-                        S = Me.m_lk.S_LK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx))
-                    Case 1 'Ideal
-                        S = Me.RET_Sid(298.15, T, P, Vx)
-                    Case 2 'Excess
-                        S = Me.RET_Sid(298.15, T, P, Vx)
-                    Case 3 'Experimental Liquid
-                        S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
-                End Select
-            ElseIf st = State.Solid Then
-                Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
-                    Case 0 'LK
-                        S = Me.m_lk.S_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx)) - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
-                    Case 1 'Ideal
-                        S = Me.RET_Sid(298.15, T, P, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
-                    Case 2 'Excess
-                        S = Me.RET_Sid(298.15, T, P, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
-                    Case 3 'Experimental Liquid
-                        S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
-                End Select
+                Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcEntropy", "Entropy", "Entropy Calculation Routine")
+
+                IObj?.SetCurrent()
+
+                Dim S As Double
+
+                If st = State.Liquid Then
+                    Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
+                        Case 0 'LK
+                            S = Me.m_lk.S_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx))
+                        Case 1 'Ideal
+                            S = Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
+                        Case 2 'Excess
+                            S = Me.RET_Sid(298.15, T, P, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                        Case 3 'Experimental Liquid
+                            S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
+                    End Select
+                ElseIf st = State.Vapor Then
+                    Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
+                        Case 0 'LK
+                            S = Me.m_lk.S_LK_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx))
+                        Case 1 'Ideal
+                            S = Me.RET_Sid(298.15, T, P, Vx)
+                        Case 2 'Excess
+                            S = Me.RET_Sid(298.15, T, P, Vx)
+                        Case 3 'Experimental Liquid
+                            S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
+                    End Select
+                ElseIf st = State.Solid Then
+                    Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
+                        Case 0 'LK
+                            S = Me.m_lk.S_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx)) - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                        Case 1 'Ideal
+                            S = Me.RET_Sid(298.15, T, P, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                        Case 2 'Excess
+                            S = Me.RET_Sid(298.15, T, P, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                        Case 3 'Experimental Liquid
+                            S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T
+                    End Select
+                End If
+
+                IObj?.Close()
+
+                Return S
+
             End If
-
-            IObj?.Close()
-
-            Return S
 
         End Function
 

@@ -344,6 +344,18 @@ Namespace PropertyPackages
 
 #Region "   Properties"
 
+        Public Property OverrideKvalFugCoeff As Boolean = False
+
+        Public KvalFugacityCoefficientOverride As Func(Of Double(), Double, Double, State, Double())
+
+        Public Property OverrideEnthalpyCalculation As Boolean = False
+
+        Public EnthalpyCalculationOverride As Func(Of Double(), Double, Double, State, Double)
+
+        Public Property OverrideEntropyCalculation As Boolean = False
+
+        Public EntropyCalculationOverride As Func(Of Double(), Double, Double, State, Double)
+
         Public Property ForceNewFlashAlgorithmInstance As Boolean = False
 
         Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
@@ -1016,36 +1028,52 @@ Namespace PropertyPackages
             Dim fugvap As Double() = Nothing
             Dim fugliq As Double() = Nothing
 
-            If Settings.EnableParallelProcessing Then
+            If OverrideKvalFugCoeff Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
-                                                  End Sub,
+                IObj?.Paragraphs.Add(String.Format("Fugacity coefficient calculation overriden by user. Calling user-defined functions..."))
+
+                fugliq = KvalFugacityCoefficientOverride.Invoke(Vx, T, P, State.Liquid)
+                If type = "LV" Then
+                    fugvap = KvalFugacityCoefficientOverride.Invoke(Vy, T, P, State.Vapor)
+                Else ' LL
+                    fugvap = KvalFugacityCoefficientOverride.Invoke(Vy, T, P, State.Liquid)
+                End If
+
+            Else
+
+                If Settings.EnableParallelProcessing Then
+
+                    Dim task1 = Task.Factory.StartNew(Sub()
+                                                          fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                                                      End Sub,
                                                         Settings.TaskCancellationTokenSource.Token,
                                                         TaskCreationOptions.None,
                                                        Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      If type = "LV" Then
-                                                          fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                                                      Else ' LL
-                                                          fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
-                                                      End If
-                                                  End Sub,
+                    Dim task2 = Task.Factory.StartNew(Sub()
+                                                          If type = "LV" Then
+                                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                                                          Else ' LL
+                                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                                                          End If
+                                                      End Sub,
                                                     Settings.TaskCancellationTokenSource.Token,
                                                     TaskCreationOptions.None,
                                                    Settings.AppTaskScheduler)
-                Task.WaitAll(task1, task2)
+                    Task.WaitAll(task1, task2)
 
-            Else
-                IObj?.SetCurrent()
-                fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
-                IObj?.SetCurrent()
-                If type = "LV" Then
-                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                Else ' LL
-                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                Else
+                    IObj?.SetCurrent()
+                    fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                    IObj?.SetCurrent()
+                    If type = "LV" Then
+                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                    Else ' LL
+                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                    End If
                 End If
+
             End If
+
 
             IObj?.Paragraphs.Add(String.Format("<h2>Intermediate Calculated Parameters</h2>"))
 
@@ -10760,6 +10788,11 @@ Final3:
             Catch ex As Exception
             End Try
 
+            Try
+                OverrideKvalFugCoeff = (From el As XElement In data Select el Where el.Name = "OverrideKvalFugCoeff").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
             Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
             Try
@@ -11076,6 +11109,7 @@ Final3:
                 .Add(New XElement("Tag", Tag))
                 .Add(New XElement("TPSeverity", _tpseverity))
                 .Add(New XElement("TPCompIDs", XMLSerializer.XMLSerializer.ArrayToString2(_tpcompids, ci)))
+                .Add(New XElement("OverrideKvalFugCoeff", OverrideKvalFugCoeff))
 
                 Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
