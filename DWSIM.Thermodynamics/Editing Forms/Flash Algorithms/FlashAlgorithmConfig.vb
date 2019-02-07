@@ -37,47 +37,63 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLE
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Inside_Out_VLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Inside_Out_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic, Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution, Interfaces.Enums.FlashMethod.Simple_LLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server
                     TabControl1.TabPages.Remove(TabPageConvPars)
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
+                Case Interfaces.Enums.FlashMethod.UserDefined
+                    TabControl1.TabPages.Remove(TabPageConvPars)
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageNL)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageCOES)
             End Select
 
         Else
@@ -146,6 +162,42 @@ Public Class FlashAlgorithmConfig
             cbMinMethodGM.SelectedItem = Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod)
 
             If Not ExcelMode Then SetupKeyCompounds()
+
+            If FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.UserDefined Then
+
+                Dim udfa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
+
+                If udfa.PTFlash IsNot Nothing Then
+                    PBPTFlash.Image = My.Resources.accept
+                    lblPTFlash.Text = "Defined"
+                    btnTestPTFlash.Enabled = True
+                End If
+
+                If udfa.PHFlash IsNot Nothing Then
+                    PBPHFlash.Image = My.Resources.accept
+                    lblPHFlash.Text = "Defined"
+                    btnTestPHFlash.Enabled = True
+                End If
+
+                If udfa.PSFlash IsNot Nothing Then
+                    PBPSFlash.Image = My.Resources.accept
+                    lblPSFlash.Text = "Defined"
+                    btnTestPSFlash.Enabled = True
+                End If
+
+                If udfa.PVFlash IsNot Nothing Then
+                    PBPVFFlash.Image = My.Resources.accept
+                    lblPVFFlash.Text = "Defined"
+                    btnTestPVFFlash.Enabled = True
+                End If
+
+                If udfa.TVFlash IsNot Nothing Then
+                    PBTVFFlash.Image = My.Resources.accept
+                    lblTVFFlash.Text = "Defined"
+                    btnTestTVFFlash.Enabled = True
+                End If
+
+            End If
 
         End If
 
@@ -468,6 +520,136 @@ Public Class FlashAlgorithmConfig
             End If
 
         End If
+
+    End Sub
+
+    Private Sub btnTestPTFlash_Click(sender As Object, e As EventArgs) Handles btnTestPTFlash.Click
+
+        Dim fa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
+
+        Dim dtlc As New DWSIM.Thermodynamics.CalculatorInterface.Calculator
+
+        dtlc.Initialize()
+
+        Dim pp = dtlc.GetPropPackInstance("Raoult's Law")
+
+        dtlc.SetupPropertyPackage(pp, New String() {"Methane", "Ethane"}, New Double() {0.5, 0.5})
+
+        Try
+            Dim result = fa.PTFlash.Invoke(New Double() {0.5, 0.5}, 1013250, 200, pp)
+            If result.ResultException IsNot Nothing Then Throw result.ResultException
+            MessageBox.Show("Flash Calculation Routine Tested Successfully.")
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        Finally
+            dtlc = Nothing
+            pp.Dispose()
+            pp = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub btnTestPHFlash_Click(sender As Object, e As EventArgs) Handles btnTestPHFlash.Click
+
+        Dim fa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
+
+        Dim dtlc As New DWSIM.Thermodynamics.CalculatorInterface.Calculator
+
+        dtlc.Initialize()
+
+        Dim pp = dtlc.GetPropPackInstance("Raoult's Law")
+
+        dtlc.SetupPropertyPackage(pp, New String() {"Methane", "Ethane"}, New Double() {0.5, 0.5})
+
+        Try
+            Dim result = fa.PHFlash.Invoke(New Double() {0.5, 0.5}, 1013250, 0.0, 280, pp)
+            If result.ResultException IsNot Nothing Then Throw result.ResultException
+            MessageBox.Show("Flash Calculation Routine Tested Successfully.")
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        Finally
+            dtlc = Nothing
+            pp.Dispose()
+            pp = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub btnTestPSFlash_Click(sender As Object, e As EventArgs) Handles btnTestPSFlash.Click
+
+        Dim fa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
+
+        Dim dtlc As New DWSIM.Thermodynamics.CalculatorInterface.Calculator
+
+        dtlc.Initialize()
+
+        Dim pp = dtlc.GetPropPackInstance("Raoult's Law")
+
+        dtlc.SetupPropertyPackage(pp, New String() {"Methane", "Ethane"}, New Double() {0.5, 0.5})
+
+        Try
+            Dim result = fa.PSFlash.Invoke(New Double() {0.5, 0.5}, 1013250, 0.0, 280, pp)
+            If result.ResultException IsNot Nothing Then Throw result.ResultException
+            MessageBox.Show("Flash Calculation Routine Tested Successfully.")
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        Finally
+            dtlc = Nothing
+            pp.Dispose()
+            pp = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub btnTestPVFFlash_Click(sender As Object, e As EventArgs) Handles btnTestPVFFlash.Click
+
+        Dim fa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
+
+        Dim dtlc As New DWSIM.Thermodynamics.CalculatorInterface.Calculator
+
+        dtlc.Initialize()
+
+        Dim pp = dtlc.GetPropPackInstance("Raoult's Law")
+
+        dtlc.SetupPropertyPackage(pp, New String() {"Methane", "Ethane"}, New Double() {0.5, 0.5})
+
+        Try
+            Dim result = fa.PVFlash.Invoke(New Double() {0.5, 0.5}, 1013250, 1.0, 280, pp)
+            If result.ResultException IsNot Nothing Then Throw result.ResultException
+            MessageBox.Show("Flash Calculation Routine Tested Successfully.")
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        Finally
+            dtlc = Nothing
+            pp.Dispose()
+            pp = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub btnTestTVFFlash_Click(sender As Object, e As EventArgs) Handles btnTestTVFFlash.Click
+
+        Dim fa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
+
+        Dim dtlc As New DWSIM.Thermodynamics.CalculatorInterface.Calculator
+
+        dtlc.Initialize()
+
+        Dim pp = dtlc.GetPropPackInstance("Raoult's Law")
+
+        dtlc.SetupPropertyPackage(pp, New String() {"Methane", "Ethane"}, New Double() {0.5, 0.5})
+
+        Try
+            Dim result = fa.TVFlash.Invoke(New Double() {0.5, 0.5}, 200, 1.0, 101325, pp)
+            If result.ResultException IsNot Nothing Then Throw result.ResultException
+            MessageBox.Show("Flash Calculation Routine Tested Successfully.")
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        Finally
+            dtlc = Nothing
+            pp.Dispose()
+            pp = Nothing
+        End Try
 
     End Sub
 

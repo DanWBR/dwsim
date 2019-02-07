@@ -296,6 +296,7 @@
     <Compile Include="Flash Algorithms\CoolPropIncompressiblePure.vb" />
     <Compile Include="Flash Algorithms\NestedLoopsSVLLE.vb" />
     <Compile Include="Flash Algorithms\SteamTables.vb" />
+    <Compile Include="Flash Algorithms\UserDefined.vb" />
     <Compile Include="Helper Classes\ConsoleRedirection.vb" />
     <Compile Include="Helper Classes\PhaseEnvelopeSettings.vb" />
     <Compile Include="Interfaces\ShortcutUtilities.vb" />
@@ -749,6 +750,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Databases\chemsep2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\accept.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

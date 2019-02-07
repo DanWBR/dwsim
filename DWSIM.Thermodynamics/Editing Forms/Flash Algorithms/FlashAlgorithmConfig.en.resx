@@ -118,6 +118,64 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageGeneral.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="TabPageConvPars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageConvPars.Text" xml:space="preserve">
+    <value>Convergence</value>
+  </data>
+  <data name="TabPageNL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageNL.Text" xml:space="preserve">
+    <value>Nested Loops</value>
+  </data>
+  <data name="TabPageIO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageGM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageGM.Text" xml:space="preserve">
+    <value>Gibbs Minimization</value>
+  </data>
+  <data name="TabPageCOES.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageCOES.Text" xml:space="preserve">
+    <value>CAPE-OPEN Equilbrium Server</value>
+  </data>
+  <data name="TabPageIM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageIM.Text" xml:space="preserve">
+    <value>Immiscibility</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabPageUD.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPageUD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageUD.Text" xml:space="preserve">
+    <value>User-Defined Functions</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>641, 322</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>613, 282</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
   <data name="chkReplaceFlashPT.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 17</value>
   </data>
@@ -148,17 +206,11 @@
   <data name="Label12.Text" xml:space="preserve">
     <value>Gibbs Free Energy variation tolerance</value>
   </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>613, 282</value>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>617, 282</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="TabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 296</value>
-  </data>
-  <data name="TabPageGeneral.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Convergence loops</value>
   </data>
   <data name="tbPHExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>489, 205</value>
@@ -256,17 +308,11 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Flash PT/PV - internal loop convergence tolerance (absolute)</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>617, 282</value>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>619, 64</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Convergence loops</value>
-  </data>
-  <data name="TabPageConvPars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 296</value>
-  </data>
-  <data name="TabPageConvPars.Text" xml:space="preserve">
-    <value>Convergence</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>General options</value>
   </data>
   <data name="chkFastModeNL.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 17</value>
@@ -274,17 +320,11 @@
   <data name="chkFastModeNL.Text" xml:space="preserve">
     <value>Enable fast mode for PH/PS Flash</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>619, 64</value>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>617, 60</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
+  <data name="GroupBox5.Text" xml:space="preserve">
     <value>General options</value>
-  </data>
-  <data name="TabPageNL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 296</value>
-  </data>
-  <data name="TabPageNL.Text" xml:space="preserve">
-    <value>Nested Loops</value>
   </data>
   <data name="chkUseBroydenIO.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 17</value>
@@ -292,14 +332,11 @@
   <data name="chkUseBroydenIO.Text" xml:space="preserve">
     <value>Enable Broyden convergence acceleration</value>
   </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>617, 60</value>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>617, 64</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
+  <data name="GroupBox3.Text" xml:space="preserve">
     <value>General options</value>
-  </data>
-  <data name="TabPageIO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 296</value>
   </data>
   <data name="cbMinMethodGM.Location" type="System.Drawing.Point, System.Drawing">
     <value>153, 21</value>
@@ -313,17 +350,8 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Gibbs minimization method</value>
   </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>617, 64</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>General options</value>
-  </data>
-  <data name="TabPageGM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 296</value>
-  </data>
-  <data name="TabPageGM.Text" xml:space="preserve">
-    <value>Gibbs Minimization</value>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>617, 283</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>526, 16</value>
@@ -379,14 +407,8 @@
   <data name="btnEditThermoServer.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>617, 283</value>
-  </data>
-  <data name="TabPageCOES.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 296</value>
-  </data>
-  <data name="TabPageCOES.Text" xml:space="preserve">
-    <value>CAPE-OPEN Equilbrium Server</value>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Liquid-Liquid Immiscibility</value>
   </data>
   <data name="cbImmiscible.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 21</value>
@@ -396,18 +418,6 @@
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Immiscible Compound</value>
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Liquid-Liquid Immiscibility</value>
-  </data>
-  <data name="TabPageIM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 296</value>
-  </data>
-  <data name="TabPageIM.Text" xml:space="preserve">
-    <value>Immiscibility</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>641, 322</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>641, 322</value>

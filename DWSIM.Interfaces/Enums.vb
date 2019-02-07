@@ -210,7 +210,8 @@ Namespace Enums
         SteamTables = 16
         Nested_Loops_SVLLE = 17
         CoolProp_Incompressibles = 18
-        CoolProp_IncompressibleMixtures = 18
+        CoolProp_IncompressibleMixtures = 19
+        UserDefined = 20
     End Enum
 
     Public Enum FlashSetting

@@ -48,6 +48,10 @@ Namespace UnitOperations
 
         <System.NonSerialized()> <Xml.Serialization.XmlIgnore> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
 
+        Public Property OverrideCalculationRoutine As Boolean = False
+
+        <System.NonSerialized()> <Xml.Serialization.XmlIgnore> Public CalculationRoutineOverride As Action
+
 #Region "    Constructors"
 
         Public Sub New()
@@ -226,7 +230,11 @@ Namespace UnitOperations
 
         Public Sub Solve() Implements ISimulationObject.Solve
             Calculated = False
-            Calculate()
+            If OverrideCalculationRoutine Then
+                CalculationRoutineOverride.Invoke()
+            Else
+                Calculate()
+            End If
             Calculated = True
             PerformPostCalcValidation()
         End Sub
