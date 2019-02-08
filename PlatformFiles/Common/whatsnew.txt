@@ -1,5 +1,5 @@
-Version 5.6 Update 11
+Version 5.6 Update 12
 
-- [NEW] Added the possibility to change the calculation order on Classic UI (hold Ctrl+Alt before solving the flowsheet)
-- [NEW] User can now override K-value Fugacity, Enthalpy and Entropy calculations at Property Package level using Python Scripts
-- [FIX] Fixed Side Draw flowrate input (Classic UI)
+- [NEW] Change calculation order (Cross-Platform UI)
+- [NEW] User-Defined (Python) Flash Algorithm
+- [NEW] User can now override Unit Operation and Material Stream calculation routines using Python Scripts
