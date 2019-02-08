@@ -298,12 +298,12 @@ Imports System.Dynamic
 
     Public Property RedirectMessages As Boolean Implements IFlowsheet.RedirectMessages
 
-    Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing) Implements IFlowsheet.RequestCalculation
+    Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional ChangeCalculationOrder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
         If Not sender Is Nothing Then
             FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
         Else
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode, ChangeCalcOrder:=ChangeCalculationOrder)
         End If
 
     End Sub
@@ -2226,7 +2226,20 @@ Label_00CC:
     End Function
 
     Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder
-        Return objects
+
+        Dim olist As List(Of String) = objects
+
+        RunCodeOnUIThread(Sub()
+                              Dim frm As New SharedClasses.FormCustomCalcOrder
+                              frm.Flowsheet = Me
+                              frm.ItemList = objects
+                              frm.ShowDialog()
+                              olist = frm.NewItemList
+                          End Sub)
+
+        Return olist
+
     End Function
+
 End Class
 

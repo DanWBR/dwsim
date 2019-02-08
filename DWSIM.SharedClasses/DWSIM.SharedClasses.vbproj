@@ -118,6 +118,18 @@
   <ItemGroup>
     <Compile Include="Base Class\FlowsheetBag.vb" />
     <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
+    <Compile Include="Editor\FormCustomCalcOrder.designer.vb">
+      <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\FormCustomCalcOrder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\ListViewWithReordering.designer.vb">
+      <DependentUpon>ListViewWithReordering.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\ListViewWithReordering.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Editor\ObjectEditorForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +169,9 @@
     <Compile Include="UpdateCheck\UpdateCheck.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editor\FormCustomCalcOrder.resx">
+      <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\ObjectEditorForm.resx">
       <DependentUpon>ObjectEditorForm.vb</DependentUpon>
     </EmbeddedResource>

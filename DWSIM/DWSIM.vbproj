@@ -380,12 +380,6 @@
     <Compile Include="Controls\ListItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ListViewWithReordering.Designer.vb">
-      <DependentUpon>ListViewWithReordering.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ListViewWithReordering.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\ScriptEditorControl.designer.vb">
       <DependentUpon>ScriptEditorControl.vb</DependentUpon>
     </Compile>
@@ -487,12 +481,6 @@
       <DependentUpon>FormCORegistration.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormCORegistration.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormCustomCalcOrder.Designer.vb">
-      <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormCustomCalcOrder.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
@@ -1159,9 +1147,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCORegistration.resx">
       <DependentUpon>FormCORegistration.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCustomCalcOrder.resx">
-      <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDBManager.de.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>

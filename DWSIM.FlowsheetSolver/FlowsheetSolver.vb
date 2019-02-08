@@ -922,7 +922,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                           Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False,
                                           Optional ByVal FinishSuccess As Action = Nothing,
                                           Optional ByVal FinishWithErrors As Action = Nothing,
-                                          Optional ByVal FinishAny As Action = Nothing) As List(Of Exception)
+                                          Optional ByVal FinishAny As Action = Nothing,
+                                          Optional ByVal ChangeCalcOrder As Boolean = False) As List(Of Exception)
 
         Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
 
@@ -996,7 +997,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Dim filteredlist As Dictionary(Of Integer, List(Of String)) = objl(2)
             Dim objstack As List(Of String) = objl(0)
 
-            If My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown Then
+            If ChangeCalcOrder Then
                 If mode = 0 Or mode = 1 Then
                     objstack = fgui.ChangeCalculationOrder(objstack)
                 End If

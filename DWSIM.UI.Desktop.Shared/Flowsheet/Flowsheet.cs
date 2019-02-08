@@ -87,7 +87,7 @@ namespace DWSIM.UI.Desktop.Shared
             return Application.Instance;
         }
 
-        public void SolveFlowsheet(bool wait, ISimulationObject gobj = null)
+        public void SolveFlowsheet(bool wait, ISimulationObject gobj = null, bool changecalcorder = false)
         {
 
             //var surface = ((DWSIM.Drawing.SkiaSharp.GraphicsSurface)this.GetSurface());
@@ -155,7 +155,7 @@ namespace DWSIM.UI.Desktop.Shared
                         });
                     };
                 }
-                RequestCalculation(gobj);
+                RequestCalculation(gobj, changecalcorder);
                 Task.Delay(1000).Wait();
             });
 

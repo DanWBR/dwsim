@@ -25,8 +25,10 @@ Partial Class FormCustomCalcOrder
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.ListView1 = New Controls.ListViewEx()
+        Me.ListView1 = New SharedClasses.Controls.ListViewEx()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -34,14 +36,14 @@ Partial Class FormCustomCalcOrder
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(13, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(155, 13)
+        Me.Label1.Size = New System.Drawing.Size(263, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Drag and Drop items to reorder."
+        Me.Label1.Text = "Drag and Drop items or click on the buttons to reorder."
         '
         'Button1
         '
         Me.Button1.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Button1.Location = New System.Drawing.Point(242, 374)
+        Me.Button1.Location = New System.Drawing.Point(280, 374)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 1
@@ -51,7 +53,7 @@ Partial Class FormCustomCalcOrder
         'Button2
         '
         Me.Button2.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Button2.Location = New System.Drawing.Point(161, 374)
+        Me.Button2.Location = New System.Drawing.Point(199, 374)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 3
@@ -65,8 +67,9 @@ Partial Class FormCustomCalcOrder
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.Location = New System.Drawing.Point(16, 38)
+        Me.ListView1.MultiSelect = False
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(301, 328)
+        Me.ListView1.Size = New System.Drawing.Size(339, 328)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -74,7 +77,25 @@ Partial Class FormCustomCalcOrder
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Flowsheet Object"
-        Me.ColumnHeader1.Width = 300
+        Me.ColumnHeader1.Width = 320
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(16, 374)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(63, 23)
+        Me.Button3.TabIndex = 4
+        Me.Button3.Text = "Move Up"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(85, 374)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(78, 23)
+        Me.Button4.TabIndex = 5
+        Me.Button4.Text = "Move Down"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'FormCustomCalcOrder
         '
@@ -82,7 +103,9 @@ Partial Class FormCustomCalcOrder
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Button2
-        Me.ClientSize = New System.Drawing.Size(332, 409)
+        Me.ClientSize = New System.Drawing.Size(367, 409)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.Button1)
@@ -103,4 +126,6 @@ Partial Class FormCustomCalcOrder
     Friend WithEvents Button2 As Button
     Friend WithEvents ListView1 As Controls.ListViewEx
     Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
 End Class

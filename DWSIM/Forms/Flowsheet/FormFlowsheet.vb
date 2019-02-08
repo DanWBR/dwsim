@@ -937,7 +937,11 @@ Public Class FormFlowsheet
     Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
+        If My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown Then
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, ChangeCalcOrder:=True)
+        Else
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
+        End If
     End Sub
 
     Private Sub AnaliseDeSensibilidadeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AnaliseDeSensibilidadeToolStripMenuItem.Click
@@ -2501,7 +2505,7 @@ Public Class FormFlowsheet
         Return Me.SimulationObjects(id)
     End Function
 
-    Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing) Implements IFlowsheet.RequestCalculation
+    Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional changecalcorder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
         If Not sender Is Nothing Then
             FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
@@ -3025,7 +3029,7 @@ Public Class FormFlowsheet
 
     Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder
 
-        Dim frm As New FormCustomCalcOrder
+        Dim frm As New SharedClasses.FormCustomCalcOrder
         frm.Flowsheet = Me
         frm.ItemList = objects
         frm.ShowDialog(Me)
