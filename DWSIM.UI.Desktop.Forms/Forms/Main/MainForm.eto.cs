@@ -160,6 +160,17 @@ namespace DWSIM.UI
                 FoldersList.TextColor = bgcolor;
                 FOSSEEList.TextColor = bgcolor;
             }
+            else if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                MostRecentList.BackgroundColor = SystemColors.ControlBackground;
+                SampleList.BackgroundColor = SystemColors.ControlBackground;
+                FoldersList.BackgroundColor = SystemColors.ControlBackground;
+                FOSSEEList.BackgroundColor = SystemColors.ControlBackground;
+                MostRecentList.TextColor = SystemColors.ControlText;
+                SampleList.TextColor = SystemColors.ControlText;
+                FoldersList.TextColor = SystemColors.ControlText;
+                FOSSEEList.TextColor = SystemColors.ControlText;
+            }
             else
             {
                 MostRecentList.TextColor = Colors.White;
@@ -189,7 +200,10 @@ namespace DWSIM.UI
                 {
                     if (FoldersList.Items.Where((x) => x.Text == Path.GetDirectoryName(f)).Count() == 0)
                     {
-                        FoldersList.Items.Add(new ListItem { Text = Path.GetDirectoryName(f), Key = Path.GetDirectoryName(f) });
+                        if (Directory.Exists(Path.GetDirectoryName(f)))
+                        {
+                            FoldersList.Items.Add(new ListItem { Text = Path.GetDirectoryName(f), Key = Path.GetDirectoryName(f) });
+                        }
                     }
                 }
             }
@@ -297,19 +311,26 @@ namespace DWSIM.UI
             };
 
             var fosseecontainer = c.GetDefaultContainer();
-            fosseecontainer.BackgroundColor = bgcolor;
             var l1 = c.CreateAndAddLabelRow3(fosseecontainer, "About the Project");
             var l2 = c.CreateAndAddDescriptionRow(fosseecontainer, "FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.");
             var bu1 = c.CreateAndAddButtonRow(fosseecontainer, "Submit a Flowsheet", null, (b1, e1) => Process.Start("https://dwsim.fossee.in/flowsheeting-project"));
             var bu2 = c.CreateAndAddButtonRow(fosseecontainer, "About FOSSEE", null, (b2, e2) => Process.Start("https://fossee.in/"));
             var l3 = c.CreateAndAddLabelRow3(fosseecontainer, "Completed Flowsheets");
-            l1.TextColor = Colors.White;
-            l2.TextColor = Colors.White;
-            l3.TextColor = Colors.White;
-            bu1.TextColor = Colors.White;
-            bu2.TextColor = Colors.White;
-            bu1.BackgroundColor = bgcolor;
-            bu2.BackgroundColor = bgcolor;
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                fosseecontainer.BackgroundColor = SystemColors.ControlBackground;
+            }
+            else
+            {
+                fosseecontainer.BackgroundColor = bgcolor;
+                l1.TextColor = Colors.White;
+                l2.TextColor = Colors.White;
+                l3.TextColor = Colors.White;
+                bu1.TextColor = Colors.White;
+                bu2.TextColor = Colors.White;
+                bu1.BackgroundColor = bgcolor;
+                bu2.BackgroundColor = bgcolor;
+            }
             fosseecontainer.Add(FOSSEEList);
             fosseecontainer.EndVertical();
 
@@ -332,9 +353,18 @@ namespace DWSIM.UI
             {
                 Padding = 10,
                 Spacing = new Size(5, 5),
-                Rows = { new TableRow(tl) },
-                BackgroundColor = bgcolor,
+                Rows = { new TableRow(tl) }
             };
+
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                TableContainer.BackgroundColor = SystemColors.ControlBackground;
+            }
+            else
+            {
+                TableContainer.BackgroundColor = bgcolor;
+            }
+
 
             Content = TableContainer;
 
