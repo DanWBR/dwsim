@@ -73,7 +73,7 @@ Public Class EditorTooltips
                 units.Remove(su.volumetricFlow)
 
                 For Each u In units
-                    ttQ.AppendLine(M.ConvertFromSI(u).ToString(nf) + " " + u)
+                    ttQ.AppendLine(Q.ConvertFromSI(u).ToString(nf) + " " + u)
                 Next
 
                 editor.ToolTipValues.SetToolTip(editor.tbVolFlow, ttQ.ToString)
