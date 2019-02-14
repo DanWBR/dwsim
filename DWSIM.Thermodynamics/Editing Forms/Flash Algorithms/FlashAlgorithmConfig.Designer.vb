@@ -83,27 +83,27 @@ Partial Class FlashAlgorithmConfig
         Me.cbImmiscible = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPageUD = New System.Windows.Forms.TabPage()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.lblPTFlash = New System.Windows.Forms.Label()
-        Me.lblPHFlash = New System.Windows.Forms.Label()
-        Me.lblPSFlash = New System.Windows.Forms.Label()
-        Me.lblPVFFlash = New System.Windows.Forms.Label()
-        Me.lblTVFFlash = New System.Windows.Forms.Label()
-        Me.btnTestPTFlash = New System.Windows.Forms.Button()
-        Me.btnTestPHFlash = New System.Windows.Forms.Button()
-        Me.btnTestPSFlash = New System.Windows.Forms.Button()
-        Me.btnTestPVFFlash = New System.Windows.Forms.Button()
         Me.btnTestTVFFlash = New System.Windows.Forms.Button()
-        Me.PBPTFlash = New System.Windows.Forms.PictureBox()
-        Me.PBPHFlash = New System.Windows.Forms.PictureBox()
-        Me.PBPSFlash = New System.Windows.Forms.PictureBox()
-        Me.PBPVFFlash = New System.Windows.Forms.PictureBox()
+        Me.btnTestPVFFlash = New System.Windows.Forms.Button()
+        Me.btnTestPSFlash = New System.Windows.Forms.Button()
+        Me.btnTestPHFlash = New System.Windows.Forms.Button()
+        Me.btnTestPTFlash = New System.Windows.Forms.Button()
+        Me.lblTVFFlash = New System.Windows.Forms.Label()
         Me.PBTVFFlash = New System.Windows.Forms.PictureBox()
+        Me.lblPVFFlash = New System.Windows.Forms.Label()
+        Me.PBPVFFlash = New System.Windows.Forms.PictureBox()
+        Me.lblPSFlash = New System.Windows.Forms.Label()
+        Me.PBPSFlash = New System.Windows.Forms.PictureBox()
+        Me.lblPHFlash = New System.Windows.Forms.Label()
+        Me.PBPHFlash = New System.Windows.Forms.PictureBox()
+        Me.lblPTFlash = New System.Windows.Forms.Label()
+        Me.PBPTFlash = New System.Windows.Forms.PictureBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPageGeneral.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -121,15 +121,16 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox7.SuspendLayout()
         Me.TabPageUD.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
-        CType(Me.PBPTFlash, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PBPHFlash, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PBPSFlash, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PBPVFFlash, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PBTVFFlash, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PBPVFFlash, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PBPSFlash, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PBPHFlash, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PBPTFlash, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
         '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPageGeneral)
         Me.TabControl1.Controls.Add(Me.TabPageConvPars)
         Me.TabControl1.Controls.Add(Me.TabPageNL)
@@ -138,14 +139,13 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1.Controls.Add(Me.TabPageCOES)
         Me.TabControl1.Controls.Add(Me.TabPageIM)
         Me.TabControl1.Controls.Add(Me.TabPageUD)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPageGeneral
         '
-        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
+        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         Me.TabPageGeneral.Name = "TabPageGeneral"
         Me.TabPageGeneral.UseVisualStyleBackColor = True
         '
@@ -199,8 +199,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageConvPars
         '
-        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
+        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         Me.TabPageConvPars.Name = "TabPageConvPars"
         Me.TabPageConvPars.UseVisualStyleBackColor = True
         '
@@ -308,8 +308,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageNL
         '
-        Me.TabPageNL.Controls.Add(Me.GroupBox2)
         resources.ApplyResources(Me.TabPageNL, "TabPageNL")
+        Me.TabPageNL.Controls.Add(Me.GroupBox2)
         Me.TabPageNL.Name = "TabPageNL"
         Me.TabPageNL.UseVisualStyleBackColor = True
         '
@@ -328,8 +328,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageIO
         '
-        Me.TabPageIO.Controls.Add(Me.GroupBox5)
         resources.ApplyResources(Me.TabPageIO, "TabPageIO")
+        Me.TabPageIO.Controls.Add(Me.GroupBox5)
         Me.TabPageIO.Name = "TabPageIO"
         Me.TabPageIO.UseVisualStyleBackColor = True
         '
@@ -348,8 +348,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageGM
         '
-        Me.TabPageGM.Controls.Add(Me.GroupBox3)
         resources.ApplyResources(Me.TabPageGM, "TabPageGM")
+        Me.TabPageGM.Controls.Add(Me.GroupBox3)
         Me.TabPageGM.Name = "TabPageGM"
         Me.TabPageGM.UseVisualStyleBackColor = True
         '
@@ -376,8 +376,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageCOES
         '
-        Me.TabPageCOES.Controls.Add(Me.GroupBox6)
         resources.ApplyResources(Me.TabPageCOES, "TabPageCOES")
+        Me.TabPageCOES.Controls.Add(Me.GroupBox6)
         Me.TabPageCOES.Name = "TabPageCOES"
         Me.TabPageCOES.UseVisualStyleBackColor = True
         '
@@ -483,8 +483,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageIM
         '
-        Me.TabPageIM.Controls.Add(Me.GroupBox7)
         resources.ApplyResources(Me.TabPageIM, "TabPageIM")
+        Me.TabPageIM.Controls.Add(Me.GroupBox7)
         Me.TabPageIM.Name = "TabPageIM"
         Me.TabPageIM.UseVisualStyleBackColor = True
         '
@@ -511,15 +511,10 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageUD
         '
-        Me.TabPageUD.Controls.Add(Me.GroupBox8)
         resources.ApplyResources(Me.TabPageUD, "TabPageUD")
+        Me.TabPageUD.Controls.Add(Me.GroupBox8)
         Me.TabPageUD.Name = "TabPageUD"
         Me.TabPageUD.UseVisualStyleBackColor = True
-        '
-        'Label11
-        '
-        resources.ApplyResources(Me.Label11, "Label11")
-        Me.Label11.Name = "Label11"
         '
         'GroupBox8
         '
@@ -547,68 +542,11 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.TabStop = False
         '
-        'Label14
+        'btnTestTVFFlash
         '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.Name = "Label14"
-        '
-        'Label21
-        '
-        resources.ApplyResources(Me.Label21, "Label21")
-        Me.Label21.Name = "Label21"
-        '
-        'Label22
-        '
-        resources.ApplyResources(Me.Label22, "Label22")
-        Me.Label22.Name = "Label22"
-        '
-        'Label23
-        '
-        resources.ApplyResources(Me.Label23, "Label23")
-        Me.Label23.Name = "Label23"
-        '
-        'lblPTFlash
-        '
-        resources.ApplyResources(Me.lblPTFlash, "lblPTFlash")
-        Me.lblPTFlash.Name = "lblPTFlash"
-        '
-        'lblPHFlash
-        '
-        resources.ApplyResources(Me.lblPHFlash, "lblPHFlash")
-        Me.lblPHFlash.Name = "lblPHFlash"
-        '
-        'lblPSFlash
-        '
-        resources.ApplyResources(Me.lblPSFlash, "lblPSFlash")
-        Me.lblPSFlash.Name = "lblPSFlash"
-        '
-        'lblPVFFlash
-        '
-        resources.ApplyResources(Me.lblPVFFlash, "lblPVFFlash")
-        Me.lblPVFFlash.Name = "lblPVFFlash"
-        '
-        'lblTVFFlash
-        '
-        resources.ApplyResources(Me.lblTVFFlash, "lblTVFFlash")
-        Me.lblTVFFlash.Name = "lblTVFFlash"
-        '
-        'btnTestPTFlash
-        '
-        resources.ApplyResources(Me.btnTestPTFlash, "btnTestPTFlash")
-        Me.btnTestPTFlash.Name = "btnTestPTFlash"
-        Me.btnTestPTFlash.UseVisualStyleBackColor = True
-        '
-        'btnTestPHFlash
-        '
-        resources.ApplyResources(Me.btnTestPHFlash, "btnTestPHFlash")
-        Me.btnTestPHFlash.Name = "btnTestPHFlash"
-        Me.btnTestPHFlash.UseVisualStyleBackColor = True
-        '
-        'btnTestPSFlash
-        '
-        resources.ApplyResources(Me.btnTestPSFlash, "btnTestPSFlash")
-        Me.btnTestPSFlash.Name = "btnTestPSFlash"
-        Me.btnTestPSFlash.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnTestTVFFlash, "btnTestTVFFlash")
+        Me.btnTestTVFFlash.Name = "btnTestTVFFlash"
+        Me.btnTestTVFFlash.UseVisualStyleBackColor = True
         '
         'btnTestPVFFlash
         '
@@ -616,46 +554,108 @@ Partial Class FlashAlgorithmConfig
         Me.btnTestPVFFlash.Name = "btnTestPVFFlash"
         Me.btnTestPVFFlash.UseVisualStyleBackColor = True
         '
-        'btnTestTVFFlash
+        'btnTestPSFlash
         '
-        resources.ApplyResources(Me.btnTestTVFFlash, "btnTestTVFFlash")
-        Me.btnTestTVFFlash.Name = "btnTestTVFFlash"
-        Me.btnTestTVFFlash.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnTestPSFlash, "btnTestPSFlash")
+        Me.btnTestPSFlash.Name = "btnTestPSFlash"
+        Me.btnTestPSFlash.UseVisualStyleBackColor = True
         '
-        'PBPTFlash
+        'btnTestPHFlash
         '
-        Me.PBPTFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
-        resources.ApplyResources(Me.PBPTFlash, "PBPTFlash")
-        Me.PBPTFlash.Name = "PBPTFlash"
-        Me.PBPTFlash.TabStop = False
+        resources.ApplyResources(Me.btnTestPHFlash, "btnTestPHFlash")
+        Me.btnTestPHFlash.Name = "btnTestPHFlash"
+        Me.btnTestPHFlash.UseVisualStyleBackColor = True
         '
-        'PBPHFlash
+        'btnTestPTFlash
         '
-        Me.PBPHFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
-        resources.ApplyResources(Me.PBPHFlash, "PBPHFlash")
-        Me.PBPHFlash.Name = "PBPHFlash"
-        Me.PBPHFlash.TabStop = False
+        resources.ApplyResources(Me.btnTestPTFlash, "btnTestPTFlash")
+        Me.btnTestPTFlash.Name = "btnTestPTFlash"
+        Me.btnTestPTFlash.UseVisualStyleBackColor = True
         '
-        'PBPSFlash
+        'lblTVFFlash
         '
-        Me.PBPSFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
-        resources.ApplyResources(Me.PBPSFlash, "PBPSFlash")
-        Me.PBPSFlash.Name = "PBPSFlash"
-        Me.PBPSFlash.TabStop = False
-        '
-        'PBPVFFlash
-        '
-        Me.PBPVFFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
-        resources.ApplyResources(Me.PBPVFFlash, "PBPVFFlash")
-        Me.PBPVFFlash.Name = "PBPVFFlash"
-        Me.PBPVFFlash.TabStop = False
+        resources.ApplyResources(Me.lblTVFFlash, "lblTVFFlash")
+        Me.lblTVFFlash.Name = "lblTVFFlash"
         '
         'PBTVFFlash
         '
-        Me.PBTVFFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
         resources.ApplyResources(Me.PBTVFFlash, "PBTVFFlash")
+        Me.PBTVFFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
         Me.PBTVFFlash.Name = "PBTVFFlash"
         Me.PBTVFFlash.TabStop = False
+        '
+        'lblPVFFlash
+        '
+        resources.ApplyResources(Me.lblPVFFlash, "lblPVFFlash")
+        Me.lblPVFFlash.Name = "lblPVFFlash"
+        '
+        'PBPVFFlash
+        '
+        resources.ApplyResources(Me.PBPVFFlash, "PBPVFFlash")
+        Me.PBPVFFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
+        Me.PBPVFFlash.Name = "PBPVFFlash"
+        Me.PBPVFFlash.TabStop = False
+        '
+        'lblPSFlash
+        '
+        resources.ApplyResources(Me.lblPSFlash, "lblPSFlash")
+        Me.lblPSFlash.Name = "lblPSFlash"
+        '
+        'PBPSFlash
+        '
+        resources.ApplyResources(Me.PBPSFlash, "PBPSFlash")
+        Me.PBPSFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
+        Me.PBPSFlash.Name = "PBPSFlash"
+        Me.PBPSFlash.TabStop = False
+        '
+        'lblPHFlash
+        '
+        resources.ApplyResources(Me.lblPHFlash, "lblPHFlash")
+        Me.lblPHFlash.Name = "lblPHFlash"
+        '
+        'PBPHFlash
+        '
+        resources.ApplyResources(Me.PBPHFlash, "PBPHFlash")
+        Me.PBPHFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
+        Me.PBPHFlash.Name = "PBPHFlash"
+        Me.PBPHFlash.TabStop = False
+        '
+        'lblPTFlash
+        '
+        resources.ApplyResources(Me.lblPTFlash, "lblPTFlash")
+        Me.lblPTFlash.Name = "lblPTFlash"
+        '
+        'PBPTFlash
+        '
+        resources.ApplyResources(Me.PBPTFlash, "PBPTFlash")
+        Me.PBPTFlash.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
+        Me.PBPTFlash.Name = "PBPTFlash"
+        Me.PBPTFlash.TabStop = False
+        '
+        'Label23
+        '
+        resources.ApplyResources(Me.Label23, "Label23")
+        Me.Label23.Name = "Label23"
+        '
+        'Label22
+        '
+        resources.ApplyResources(Me.Label22, "Label22")
+        Me.Label22.Name = "Label22"
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
         '
         'FlashAlgorithmConfig
         '
@@ -690,11 +690,11 @@ Partial Class FlashAlgorithmConfig
         Me.TabPageUD.ResumeLayout(False)
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
-        CType(Me.PBPTFlash, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PBPHFlash, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PBPSFlash, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PBPVFFlash, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PBTVFFlash, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PBPVFFlash, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PBPSFlash, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PBPHFlash, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PBPTFlash, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
