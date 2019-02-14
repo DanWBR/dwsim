@@ -176,6 +176,15 @@ xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\W
 xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
+del "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
+del "$(SolutionDir)DistPackages\Windows\*.tmp"
+del "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*"
+del "$(SolutionDir)DistPackages\Windows_32\*.tmp"
+del "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
+del "$(SolutionDir)DistPackages\Linux\*.tmp"
+del "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*"
+del "$(SolutionDir)DistPackages\macOS\*.tmp"
+
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
