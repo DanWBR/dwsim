@@ -2691,14 +2691,14 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
         FlowsheetSurface.Zoom += 0.05
         Me.TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetSurface.Zoom, "#%")
-        SplitContainer1.Panel1.Invalidate()
+        SplitContainer1.Panel1.Refresh()
     End Sub
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
         FlowsheetSurface.Zoom -= 0.05
         If FlowsheetSurface.Zoom < 0.05 Then FlowsheetSurface.Zoom = 0.05
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
-        SplitContainer1.Panel1.Invalidate()
+        SplitContainer1.Panel1.Refresh()
     End Sub
 
     Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSaveAsImage.Click
@@ -2714,24 +2714,25 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
-        FlowsheetSurface.ZoomAll(Width, Height)
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width - 14, SplitContainer1.Panel1.Height - 14)
         Application.DoEvents()
-        FlowsheetSurface.ZoomAll(Width, Height)
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width - 14, SplitContainer1.Panel1.Height - 14)
         Application.DoEvents()
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
+        SplitContainer1.Panel1.Refresh()
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton3.Click
         FlowsheetSurface.Zoom = 1
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
-        SplitContainer1.Panel1.Invalidate()
+        SplitContainer1.Panel1.Refresh()
     End Sub
 
     Private Sub TSTBZoom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TSTBZoom.KeyDown
         If e.KeyCode = Keys.Enter Then
             FlowsheetSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
             Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
-            SplitContainer1.Panel1.Invalidate()
+            SplitContainer1.Panel1.Refresh()
         End If
     End Sub
 

@@ -501,38 +501,20 @@
   <data name="tsbAlignCenters.Text" xml:space="preserve">
     <value>Align centers</value>
   </data>
-  <data name="tsbAlignRights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbAlignRights.Text" xml:space="preserve">
     <value>Align rights</value>
-  </data>
-  <data name="tsbAlignTops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbAlignTops.Text" xml:space="preserve">
     <value>Align tops</value>
   </data>
-  <data name="tsbAlignMiddles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbAlignMiddles.Text" xml:space="preserve">
     <value>Align middles</value>
-  </data>
-  <data name="tsbAlignBottoms.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbAlignBottoms.Text" xml:space="preserve">
     <value>Align bottoms</value>
   </data>
-  <data name="tsbAlignVertical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbAlignVertical.Text" xml:space="preserve">
     <value>Make vertical spacing equal</value>
-  </data>
-  <data name="tsbAlignHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
