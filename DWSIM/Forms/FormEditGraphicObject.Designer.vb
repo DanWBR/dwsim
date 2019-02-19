@@ -1,5 +1,4 @@
 ﻿Imports DWSIM.Controls
-Imports PropertyGridEx.PropertyGridEx
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormEditGraphicObject

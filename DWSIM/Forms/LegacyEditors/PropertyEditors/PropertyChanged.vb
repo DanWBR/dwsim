@@ -7,7 +7,6 @@ Imports DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
-Imports PropertyGridEx
 Imports System.Linq
 
 Public Class PropertyChanged

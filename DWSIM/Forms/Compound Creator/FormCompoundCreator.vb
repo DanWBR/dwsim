@@ -1267,8 +1267,8 @@ Public Class FormCompoundCreator
             Me.GridExpDataLIQDENS.Columns(1).HeaderText = "Dens [" & su.density & "]"
             Me.GridExpDataLIQVISC.Columns(1).HeaderText = "Visc [" & su.viscosity & "]"
             Me.GridExpDataCpS.Columns(1).HeaderText = "CpS [" & su.heatCapacityCp & "]"
-            Me.GridExpDataTCLiquid.Columns(1).HeaderText = "DensS [" & su.density & "]"
-            Me.GridExpDataRoS.Columns(1).HeaderText = "LiqTC [" & su.thermalConductivity & "]"
+            Me.GridExpDataRoS.Columns(1).HeaderText = "DensS [" & su.density & "]"
+            Me.GridExpDataTCLiquid.Columns(1).HeaderText = "LiqTC [" & su.thermalConductivity & "]"
 
         End With
     End Sub
@@ -3250,7 +3250,6 @@ Public Class FormCompoundCreator
             End Try
         End If
     End Sub
-
     Private Sub EstruturaUNIFACMODFACDDBToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EstruturaUNIFACMODFACDDBToolStripMenuItem.Click
         Dim f As New FormImportCompoundDataDDB
         StoreData()
