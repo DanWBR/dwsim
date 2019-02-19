@@ -20,6 +20,7 @@ Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports System.ComponentModel
 Imports DWSIM.DWSIM.SimulationObjects
+Imports DWSIM.Controls
 
 Namespace DWSIM.Editors.CustomUO
 
@@ -36,7 +37,7 @@ Namespace DWSIM.Editors.CustomUO
         Public Overrides Function EditValue(ByVal context As System.ComponentModel.ITypeDescriptorContext, ByVal provider As IServiceProvider, ByVal value As Object) As Object
 
             If (provider IsNot Nothing) Then
-                editorService = CType(provider.GetService(GetType(IWindowsFormsEditorService)),  _
+                editorService = CType(provider.GetService(GetType(IWindowsFormsEditorService)),
                 IWindowsFormsEditorService)
             End If
 

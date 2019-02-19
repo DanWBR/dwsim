@@ -117,29 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PGEx1.SelectedObject" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAEVQcm9wZXJ0eUdyaWRFeCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwFAQAAACdQcm9wZXJ0eUdyaWRFeC5DdXN0b21Q
-        cm9wZXJ0eUNvbGxlY3Rpb24BAAAAE0NvbGxlY3Rpb25CYXNlK2xpc3QDHFN5c3RlbS5Db2xsZWN0aW9u
-        cy5BcnJheUxpc3QCAAAACQMAAAAEAwAAABxTeXN0ZW0uQ29sbGVjdGlvbnMuQXJyYXlMaXN0AwAAAAZf
-        aXRlbXMFX3NpemUIX3ZlcnNpb24FAAAICAkEAAAAAAAAAAAAAAAQBAAAAAAAAAAL
-</value>
-  </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Guardar nombres y valores de las propiedades en un archivo de texto</value>
   </data>
   <data name="TSProps.Title" xml:space="preserve">
     <value>Propiedades</value>
-  </data>
-  <data name="PGEx2.SelectedObject" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAEVQcm9wZXJ0eUdyaWRFeCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwFAQAAACdQcm9wZXJ0eUdyaWRFeC5DdXN0b21Q
-        cm9wZXJ0eUNvbGxlY3Rpb24BAAAAE0NvbGxlY3Rpb25CYXNlK2xpc3QDHFN5c3RlbS5Db2xsZWN0aW9u
-        cy5BcnJheUxpc3QCAAAACQMAAAAEAwAAABxTeXN0ZW0uQ29sbGVjdGlvbnMuQXJyYXlMaXN0AwAAAAZf
-        aXRlbXMFX3NpemUIX3ZlcnNpb24FAAAICAkEAAAAAAAAAAAAAAAQBAAAAAAAAAAL
-</value>
   </data>
   <data name="TSObj.Title" xml:space="preserve">
     <value>Apariencia</value>

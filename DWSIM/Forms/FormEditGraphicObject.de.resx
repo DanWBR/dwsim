@@ -228,15 +228,6 @@
   <data name="PGEx2.DocCommentTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
   </data>
-  <data name="PGEx2.SelectedObject" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAEVQcm9wZXJ0eUdyaWRFeCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwFAQAAACdQcm9wZXJ0eUdyaWRFeC5DdXN0b21Q
-        cm9wZXJ0eUNvbGxlY3Rpb24BAAAAE0NvbGxlY3Rpb25CYXNlK2xpc3QDHFN5c3RlbS5Db2xsZWN0aW9u
-        cy5BcnJheUxpc3QCAAAACQMAAAAEAwAAABxTeXN0ZW0uQ29sbGVjdGlvbnMuQXJyYXlMaXN0AwAAAAZf
-        aXRlbXMFX3NpemUIX3ZlcnNpb24FAAAICAkEAAAAAAAAAAAAAAAQBAAAAAAAAAAL
-</value>
-  </data>
   <data name="PGEx2.ToolStrip.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>

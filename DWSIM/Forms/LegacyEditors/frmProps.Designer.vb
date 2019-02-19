@@ -1,4 +1,6 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Imports DWSIM.Controls
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmProps
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 

@@ -73,6 +73,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
+      <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
+      <Name>DWSIM.Controls.PropertyGridEx</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>

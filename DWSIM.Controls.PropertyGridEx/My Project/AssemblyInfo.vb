@@ -13,9 +13,9 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("PropertyGridEx")> 
 <Assembly: AssemblyCopyright("Copyright ©  2006")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(True)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("c86de857-9741-41a6-b534-43556fb7ceb5")> 

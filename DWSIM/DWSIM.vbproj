@@ -297,7 +297,6 @@
     </Reference>
     <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -319,15 +318,7 @@
     </Reference>
     <Reference Include="SkiaSharp.Extended, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.Extended.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.Desktop, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\net45\SkiaSharp.Views.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.Gtk, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\net45\SkiaSharp.Views.Gtk.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.WPF, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\net45\SkiaSharp.Views.WPF.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="SpinningProgress">
       <HintPath>References\SpinningProgress.dll</HintPath>
@@ -1156,12 +1147,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.en.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventDescription.en.resx">
       <DependentUpon>FormEventDescription.vb</DependentUpon>
@@ -1254,15 +1248,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\frmProps.de.resx">
       <DependentUpon>frmProps.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\frmProps.en.resx">
       <DependentUpon>frmProps.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\frmProps.es.resx">
       <DependentUpon>frmProps.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\frmProps.resx">
       <DependentUpon>frmProps.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.de.resx">
       <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
@@ -1534,6 +1532,10 @@
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SkiaSharp.Views.Desktop\DWSIM.SkiaSharp.Views.Desktop.csproj">
+      <Project>{f4e6f3e7-532c-4091-a82f-1dd7d191a13b}</Project>
+      <Name>DWSIM.SkiaSharp.Views.Desktop</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
       <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
@@ -2697,12 +2699,14 @@ xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
 del "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
 del "$(SolutionDir)DistPackages\Windows\*.tmp"
+del "$(SolutionDir)DistPackages\Windows\*.dylib"
 
 del "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*"
 del "$(SolutionDir)DistPackages\macOS\*.tmp"
 
 del "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
 del "$(SolutionDir)DistPackages\Linux\*.tmp"
+del "$(SolutionDir)DistPackages\Linux\*.dylib"
 
 ) else if "$(PlatformName)"=="x86" (
 
@@ -2710,6 +2714,7 @@ xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
 del "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*"
 del "$(SolutionDir)DistPackages\Windows_32\*.tmp"
+del "$(SolutionDir)DistPackages\Windows_32\*.dylib"
 
 )</PostBuildEvent>
   </PropertyGroup>

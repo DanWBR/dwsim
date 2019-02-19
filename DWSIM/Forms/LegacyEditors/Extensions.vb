@@ -1,4 +1,6 @@
-﻿Module Extensions
+﻿Imports DWSIM.Controls
+
+Module Extensions
 
     <System.Runtime.CompilerServices.Extension>
     Public Function EnumerateAllItems(grid As PropertyGrid) As IEnumerable(Of GridItem)
