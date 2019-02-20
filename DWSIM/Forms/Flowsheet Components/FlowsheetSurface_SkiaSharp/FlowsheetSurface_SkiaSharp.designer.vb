@@ -31,6 +31,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ZoomPadrao100ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CentralizarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyAsImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarComoImagem200ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarComoImagem300ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CMS_Sel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.TSMI_Label = New System.Windows.Forms.ToolStripMenuItem()
         Me.AtivadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -152,7 +154,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'CMS_NoSel
         '
         resources.ApplyResources(Me.CMS_NoSel, "CMS_NoSel")
-        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem, Me.CopyAsImageToolStripMenuItem})
+        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem, Me.CopyAsImageToolStripMenuItem, Me.CopiarComoImagem200ToolStripMenuItem, Me.CopiarComoImagem300ToolStripMenuItem})
         Me.CMS_NoSel.Name = "ContextMenuStrip1"
         '
         'ToolStripMenuItem3
@@ -188,6 +190,18 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.CopyAsImageToolStripMenuItem, "CopyAsImageToolStripMenuItem")
         Me.CopyAsImageToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
         Me.CopyAsImageToolStripMenuItem.Name = "CopyAsImageToolStripMenuItem"
+        '
+        'CopiarComoImagem200ToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CopiarComoImagem200ToolStripMenuItem, "CopiarComoImagem200ToolStripMenuItem")
+        Me.CopiarComoImagem200ToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
+        Me.CopiarComoImagem200ToolStripMenuItem.Name = "CopiarComoImagem200ToolStripMenuItem"
+        '
+        'CopiarComoImagem300ToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CopiarComoImagem300ToolStripMenuItem, "CopiarComoImagem300ToolStripMenuItem")
+        Me.CopiarComoImagem300ToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
+        Me.CopiarComoImagem300ToolStripMenuItem.Name = "CopiarComoImagem300ToolStripMenuItem"
         '
         'CMS_Sel
         '
@@ -890,4 +904,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tsbDisplayGrid As ToolStripButton
     Friend WithEvents tsbMultiSelectMode As ToolStripButton
     Public WithEvents ToolStripSeparator9 As ToolStripSeparator
+    Friend WithEvents CopiarComoImagem200ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CopiarComoImagem300ToolStripMenuItem As ToolStripMenuItem
 End Class

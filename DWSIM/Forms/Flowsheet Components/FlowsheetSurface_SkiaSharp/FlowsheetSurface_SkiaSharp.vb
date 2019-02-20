@@ -2938,8 +2938,14 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub CopyAsImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAsImageToolStripMenuItem.Click
-        Using bmp As New SKBitmap(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        CopyAsImage(1)
+    End Sub
+
+    Sub CopyAsImage(Zoom As Integer)
+
+        Using bmp As New SKBitmap(SplitContainer1.Panel1.Width * Zoom, SplitContainer1.Panel1.Height * Zoom)
             Using canvas As New SKCanvas(bmp)
+                canvas.Scale(Zoom)
                 FlowsheetSurface.UpdateCanvas(canvas)
                 Dim d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
                 Using str As New IO.MemoryStream
@@ -3013,6 +3019,14 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub TSBtabela_Click(sender As Object, e As EventArgs) Handles TSBtabela.Click
         Flowsheet.FiguraToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub CopiarComoImagem200ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarComoImagem200ToolStripMenuItem.Click
+        CopyAsImage(2)
+    End Sub
+
+    Private Sub CopiarComoImagem300ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarComoImagem300ToolStripMenuItem.Click
+        CopyAsImage(3)
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
