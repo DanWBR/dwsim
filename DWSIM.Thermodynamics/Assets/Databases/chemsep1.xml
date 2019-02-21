@@ -1002,7 +1002,7 @@
 <compound>
 <LibraryIndex name="Index"  value="909" />
 <CompoundID name="Name"  value="Carbon dioxide" />
-<StructureFormula name="Structure"  value="OCO" />
+<StructureFormula name="Structure"  value="CO2" />
 <Family name="Family"  value="24" />
 <CriticalTemperature name="Critical temperature"  units="K"  value="304.21" />
 <CriticalPressure name="Critical pressure"  units="Pa"  value="7383000" />
@@ -2855,7 +2855,7 @@
 <compound>
 <LibraryIndex name="Index"  value="1922" />
 <CompoundID name="Name"  value="Hydrogen sulfide" />
-<StructureFormula name="Structure"  value="HSH" />
+<StructureFormula name="Structure"  value="H2S" />
 <Family name="Family"  value="24" />
 <CriticalTemperature name="Critical temperature"  units="K"  value="373.53" />
 <CriticalPressure name="Critical pressure"  units="Pa"  value="8962910" />

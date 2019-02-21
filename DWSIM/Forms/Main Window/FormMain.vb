@@ -578,6 +578,11 @@ Public Class FormMain
 
         PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
 
+        Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+        ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+
+        PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
+
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
         BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")

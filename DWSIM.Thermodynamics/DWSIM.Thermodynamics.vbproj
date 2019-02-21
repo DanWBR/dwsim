@@ -308,6 +308,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Material Stream\MaterialStream.vb" />
+    <Compile Include="Models\ElectrolyteNRTL.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
@@ -365,6 +366,7 @@
     <Compile Include="Models\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\CoolPropIncompressibleMixture.vb" />
     <Compile Include="Property Packages\CoolPropIncompressiblePure.vb" />
+    <Compile Include="Property Packages\ElectrolyteNRTL.vb" />
     <Compile Include="Property Packages\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\GraysonStreed.vb" />
     <Compile Include="Models\GraysonStreed.vb" />
@@ -753,6 +755,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\eNRTL\table1.txt" />
+    <EmbeddedResource Include="Assets\eNRTL\table2.txt" />
+    <EmbeddedResource Include="Assets\eNRTL\table3.txt" />
+    <EmbeddedResource Include="Assets\eNRTL\table4.txt" />
+    <EmbeddedResource Include="Assets\eNRTL\table5.txt" />
+    <EmbeddedResource Include="Assets\eNRTL\table6.txt" />
+    <EmbeddedResource Include="Assets\eNRTL\table9a.txt" />
+    <EmbeddedResource Include="Assets\eNRTL\table9b.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
