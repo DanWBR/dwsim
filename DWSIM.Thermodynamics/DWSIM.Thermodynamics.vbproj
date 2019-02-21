@@ -382,7 +382,6 @@
     <Compile Include="Property Packages\NISTMFAC.vb" />
     <Compile Include="Models\NRTL.vb" />
     <Compile Include="Property Packages\NRTL.vb" />
-    <Compile Include="Models\PCSAFT.vb" />
     <Compile Include="Models\PengRobinson.vb" />
     <Compile Include="Property Packages\PengRobinson.vb" />
     <Compile Include="Models\PengRobinson2.vb" />

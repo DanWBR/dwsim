@@ -76,7 +76,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            Dim t1, t3, t4, t5, t6, t9a As String, i As Integer
+            Dim t1, t3, t6, t9a As String, i As Integer
 
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table1.txt")
                 Using t As New IO.StreamReader(filestr)
@@ -124,43 +124,43 @@ Namespace PropertyPackages.Auxiliary
                 InteractionParameters(ip.ID1).Add(ip.ID2, ip)
             Next
 
-            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table4.txt")
-                Using t As New IO.StreamReader(filestr)
-                    t4 = t.ReadToEnd
-                End Using
-            End Using
+            'Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table4.txt")
+            '    Using t As New IO.StreamReader(filestr)
+            '        t4 = t.ReadToEnd
+            '    End Using
+            'End Using
 
-            lines = t4.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
+            'lines = t4.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
 
-            For i = 2 To 2
-                Dim ip As New ElectrolyteNRTL_IPData
-                ip.ID1 = "NaOH"
-                ip.ID2 = "H2O"
-                ip.A12 = Double.Parse(lines(i).Split(vbTab)(1), ci)
-                ip.A21 = Double.Parse(lines(i).Split(vbTab)(2), ci)
-                ip.alpha12 = 0.2
-                If Not InteractionParameters.ContainsKey(ip.ID1) Then InteractionParameters.Add(ip.ID1, New Dictionary(Of String, ElectrolyteNRTL_IPData))
-                InteractionParameters(ip.ID1).Add(ip.ID2, ip)
-            Next
+            'For i = 2 To 2
+            '    Dim ip As New ElectrolyteNRTL_IPData
+            '    ip.ID1 = "NaOH"
+            '    ip.ID2 = "H2O"
+            '    ip.A12 = Double.Parse(lines(i).Split(vbTab)(1), ci)
+            '    ip.A21 = Double.Parse(lines(i).Split(vbTab)(2), ci)
+            '    ip.alpha12 = 0.2
+            '    If Not InteractionParameters.ContainsKey(ip.ID1) Then InteractionParameters.Add(ip.ID1, New Dictionary(Of String, ElectrolyteNRTL_IPData))
+            '    InteractionParameters(ip.ID1).Add(ip.ID2, ip)
+            'Next
 
-            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table5.txt")
-                Using t As New IO.StreamReader(filestr)
-                    t5 = t.ReadToEnd
-                End Using
-            End Using
+            'Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table5.txt")
+            '    Using t As New IO.StreamReader(filestr)
+            '        t5 = t.ReadToEnd
+            '    End Using
+            'End Using
 
-            lines = t5.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
+            'lines = t5.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
 
-            For i = 5 To 5
-                Dim ip As New ElectrolyteNRTL_IPData
-                ip.ID1 = "HCl"
-                ip.ID2 = "H2O"
-                ip.A12 = Double.Parse(lines(i).Split(vbTab)(1), ci)
-                ip.A21 = Double.Parse(lines(i).Split(vbTab)(2), ci)
-                ip.alpha12 = 0.2
-                If Not InteractionParameters.ContainsKey(ip.ID1) Then InteractionParameters.Add(ip.ID1, New Dictionary(Of String, ElectrolyteNRTL_IPData))
-                InteractionParameters(ip.ID1).Add(ip.ID2, ip)
-            Next
+            'For i = 5 To 5
+            '    Dim ip As New ElectrolyteNRTL_IPData
+            '    ip.ID1 = "HCl"
+            '    ip.ID2 = "H2O"
+            '    ip.A12 = Double.Parse(lines(i).Split(vbTab)(1), ci)
+            '    ip.A21 = Double.Parse(lines(i).Split(vbTab)(2), ci)
+            '    ip.alpha12 = 0.2
+            '    If Not InteractionParameters.ContainsKey(ip.ID1) Then InteractionParameters.Add(ip.ID1, New Dictionary(Of String, ElectrolyteNRTL_IPData))
+            '    InteractionParameters(ip.ID1).Add(ip.ID2, ip)
+            'Next
 
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table6.txt")
                 Using t As New IO.StreamReader(filestr)
@@ -218,6 +218,10 @@ Namespace PropertyPackages.Auxiliary
                 End Using
             End Using
 
+            For Each exuniquacdc In exuniquacdcc
+                Me.DielectricConstants.Add(exuniquacdc.Name, exuniquacdc.Clone)
+            Next
+
             exuniquacdc = Nothing
             exuniquacdcc = Nothing
             fh4 = Nothing
@@ -235,6 +239,7 @@ Namespace PropertyPackages.Auxiliary
             Dim n As Integer = Vx.Length - 1
 
             Dim X(n) As Double
+
             Dim G As New Dictionary(Of String, Dictionary(Of String, Double))
             Dim tau As New Dictionary(Of String, Dictionary(Of String, Double))
             Dim alpha12 As New Dictionary(Of String, Dictionary(Of String, Double))
@@ -242,17 +247,19 @@ Namespace PropertyPackages.Auxiliary
             Dim i, j, k, m1, a, a1, c, c1, wi As Integer
 
             Dim Vids(n) As String, vsolv(n), charge(n), molality(n), solvdensity(n), solvvfrac(n), solvmfrac(n) As Double
-            Dim Msolv, DCsolv, dsolv, Xsolv, Im, A0, b, Bij(n, n), Bref(n, n), dBdIm(n, n) As Double
-            Dim teta(n), fi(n), S(n), lngc(n), lngr(n), lnglr(n), lngsr(n), lng(n), sum1(n), sigma As Double
+            Dim Msolv, DCsolv, dsolv, Xsolv, Im, A0 As Double
+            Dim lnglr(n), lngb(n), lngsr(n), lng(n) As Double
 
             i = 0
             Do
+                Vids(i) = cprops(i).Formula
+                If Vids(i) = "HOH" Then Vids(i) = "H2O"
+                If Vids(i) = "OCO" Then Vids(i) = "CO2"
+                If Vids(i) = "HSH" Then Vids(i) = "H2S"
                 If cprops(i).IsIon Then
-                    Vids(i) = cprops(i).Formula
                     charge(i) = cprops(i).Charge
                     If Vx(i) = 0.0# Then Vx(i) = 1.0E-20
                 Else
-                    Vids(i) = cprops(i).Name
                     charge(i) = 0.0#
                     solvdensity(i) = cprops(i).Molar_Weight / cprops(i).Chao_Seader_Liquid_Molar_Volume * 1000
                 End If
@@ -318,41 +325,39 @@ Namespace PropertyPackages.Auxiliary
                 i += 1
             Loop Until i = n + 1
 
-            i = 0
             Im = 0.0#
-            Do
-                Im += cprops(i).Charge ^ 2 * molality(i) / 2
-                i += 1
-            Loop Until i = n + 1
+            For i = 0 To n
+                Im += 0.5 * cprops(i).Charge ^ 2 * Vx(i)
+            Next
 
-            A0 = 132775.7 * dsolv ^ 0.5 / (DCsolv * T) ^ (1.5)
-            b = 6.359696 * dsolv ^ 0.5 / (DCsolv * T) ^ 0.5
+            A0 = -61.44534 * Exp((T - 273.15) / 273.15) + 2.864468 * (Exp((T - 273.15) / 273.15)) ^ 2 + 183.5379 * Log(T / 273.15) - 0.6820223 * (T - 273.15) + 0.0007875695 * (T ^ 2 - 273.15 ^ 2) + 58.95788 * 273.15 / T
 
             'long range term (Debye-Huckel)
 
             For i = 0 To n
                 With cprops(i)
-                    If .IsIon Then
-                        lnglr(i) = -A0 * .Charge ^ 2 * Im ^ 0.5 / (1 + b * Im ^ 0.5)
-                    ElseIf .Name = "Water" Then
-                        sigma = 3 / Vx(i) ^ 3 * (1 + Vx(i) - 1 / (1 + Vx(i)) - 2 * Log(1 + Vx(i)))
-                        lnglr(i) = 2 / 3 * A0 * .Molar_Weight / 1000 * Im ^ (3 / 2) * sigma * (b * Im ^ 0.5)
-                    Else
-                        lnglr(i) = 0.0#
-                    End If
+                    lnglr(i) = -A0 / (.Molar_Weight / 1000) ^ 0.5 * ((2 * .Charge ^ 2 / 14.9) * Log(1 + 14.9 * Im ^ 0.5) + (.Charge ^ 2 * Im ^ 0.5 - 2 * Im ^ 1.5) / (1 + 14.9 * Im ^ 0.5))
+                End With
+            Next
+
+            'Born term
+
+            For i = 0 To n
+                With cprops(i)
+                    lngb(i) = 0.0
                 End With
             Next
 
             'short range term (eNRTL)
 
+            'initialize tau and alpha12
+
             For i = 0 To n
                 tau.Add(Vids(i), New Dictionary(Of String, Double))
                 alpha12.Add(Vids(i), New Dictionary(Of String, Double))
                 For j = 0 To n
-                    If j <> i Then
-                        tau(Vids(i)).Add(Vids(j), 0.0)
-                        alpha12(Vids(i)).Add(Vids(j), 0.2)
-                    End If
+                    tau(Vids(i)).Add(Vids(j), 0.0)
+                    alpha12(Vids(i)).Add(Vids(j), 0.2)
                 Next
             Next
 
@@ -387,6 +392,27 @@ Namespace PropertyPackages.Auxiliary
             Loop Until i = n + 1
 
             For i = 0 To n
+                If cprops(i).IsIon Then
+                    For m1 = 0 To n
+                        If Not cprops(m1).IsSalt And cprops(m1).Charge = 0.0 Then
+                            'i = ion
+                            'm1 = molecule
+                            For j = 0 To n
+                                If cprops(j).PositiveIon <> "" Then
+                                    If cprops(j).PositiveIon = cprops(i).Formula Or cprops(j).NegativeIon = cprops(i).Formula Then
+                                        tau(Vids(i))(Vids(m1)) = tau(Vids(j))(Vids(m1))
+                                        tau(Vids(m1))(Vids(i)) = tau(Vids(m1))(Vids(j))
+                                    End If
+                                End If
+                            Next
+                        End If
+                    Next
+                End If
+            Next
+
+            'local concentrations
+
+            For i = 0 To n
                 If cprops(i).Charge <> 0 Then
                     X(i) = Vx(i) * Abs(cprops(i).Charge)
                 Else
@@ -399,6 +425,8 @@ Namespace PropertyPackages.Auxiliary
                 For j = 0 To n
                     If j <> i Then
                         G(Vids(i)).Add(Vids(j), Exp(-alpha12(Vids(i))(Vids(j)) * tau(Vids(i))(Vids(j))))
+                    Else
+                        G(Vids(i)).Add(Vids(j), 0.0)
                     End If
                 Next
             Next
@@ -462,7 +490,7 @@ Namespace PropertyPackages.Auxiliary
                 End If
             Next
 
-            'molecules
+            'summation terms
 
             Dim s0(n), s0t(n) As Double
 
@@ -477,42 +505,51 @@ Namespace PropertyPackages.Auxiliary
 
             Dim s1(n)(), s1t(n)() As Double
 
-            Array.Resize(s1(i), n + 1)
-            Array.Resize(s1t(i), n + 1)
+            For i = 0 To n
+                Array.Resize(s1(i), n + 1)
+                Array.Resize(s1t(i), n + 1)
+            Next
 
-            For a1 = 0 To n
-                s1(c)(a1) = 0
-                s1t(c)(a1) = 0
-                For c = 0 To n
-                    If cprops(i).Charge > 0 Then
-                        For k = 0 To n
-                            id2 = GetSaltFormula(cprops, cprops(k).Formula, cprops(c).Formula)
-                            If k <> c Then
-                                s1(c)(a1) += X(k) * G(Vids(k))(Vids(id2))
-                                s1t(c)(a1) += X(k) * G(Vids(k))(Vids(id2)) * tau(Vids(k))(Vids(id2))
-                            End If
-                        Next
+            For c = 0 To n
+                For a1 = 0 To n
+                    If cprops(a1).Charge < 0 Then
+                        s1(c)(a1) = 0
+                        s1t(c)(a1) = 0
+                        If cprops(c).Charge > 0 Then
+                            For k = 0 To n
+                                id2 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a1).Formula)
+                                If k <> c Then
+                                    s1(c)(a1) += X(k) * G(Vids(k))(id2)
+                                    s1t(c)(a1) += X(k) * G(Vids(k))(id2) * tau(Vids(k))(id2)
+                                End If
+                            Next
+                        End If
                     End If
                 Next
             Next
 
             Dim s2(n)(), s2t(n)() As Double
 
-            Array.Resize(s2(i), n + 1)
-            Array.Resize(s2t(i), n + 1)
+            For i = 0 To n
+                Array.Resize(s2(i), n + 1)
+                Array.Resize(s2t(i), n + 1)
+            Next
 
-            For c1 = 0 To n
-                s2(c)(a1) = 0
-                s2t(c)(a1) = 0
-                For a = 0 To n
-                    If cprops(i).Charge < 0 Then
-                        For k = 0 To n
-                            id2 = GetSaltFormula(cprops, cprops(k).Formula, cprops(a).Formula)
-                            If k <> a Then
-                                s2(a)(c1) += X(k) * G(Vids(k))(Vids(id2))
-                                s2t(a)(c1) += X(k) * G(Vids(k))(Vids(id2)) * tau(Vids(k))(Vids(id2))
-                            End If
-                        Next
+
+            For a = 0 To n
+                For c1 = 0 To n
+                    If cprops(c1).Charge > 0 Then
+                        s2(a)(c1) = 0
+                        s2t(a)(c1) = 0
+                        If cprops(a).Charge < 0 Then
+                            For k = 0 To n
+                                id2 = GetSaltFormula(cprops, cprops(c1).Formula, cprops(a).Formula)
+                                If k <> a Then
+                                    s2(a)(c1) += X(k) * G(Vids(k))(id2)
+                                    s2t(a)(c1) += X(k) * G(Vids(k))(id2) * tau(Vids(k))(id2)
+                                End If
+                            Next
+                        End If
                     End If
                 Next
             Next
@@ -531,7 +568,7 @@ Namespace PropertyPackages.Auxiliary
                         For a1 = 0 To n
                             If cprops(a1).Charge < 0 Then
                                 'anion
-                                id1 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a).Formula)
+                                id1 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a1).Formula)
                                 sm2(m) += xa0(a1) * X(c) * G(Vids(m))(id1) / s1(c)(a1) * (tau(Vids(m))(id1) - s1t(c)(a1) / s1(c)(a1))
                             End If
                         Next
@@ -544,7 +581,7 @@ Namespace PropertyPackages.Auxiliary
                         For c1 = 0 To n
                             If cprops(c1).Charge > 0 Then
                                 'cation
-                                id1 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a).Formula)
+                                id1 = GetSaltFormula(cprops, cprops(c1).Formula, cprops(a).Formula)
                                 sm3(m) += xc0(c1) * X(a) * G(Vids(m))(id1) / s2(a)(c1) * (tau(Vids(m))(id1) - s2t(a)(c1) / s2(a)(c1))
                             End If
                         Next
@@ -552,51 +589,59 @@ Namespace PropertyPackages.Auxiliary
                 Next
             Next
 
-            'cations
+            'sum for cations
 
             Dim sa1 As Double = 0.0
 
             For a1 = 0 To n
                 If cprops(a1).Charge < 0 Then
-                    sa1 += xc0(a1) * s1(a1).SumY / s1t(a1).SumY
+                    For c = 0 To n
+                        If cprops(c).Charge > 0 Then
+                            sa1 += xa0(a1) * s1(c)(a1) / s1t(c)(a1)
+                        End If
+                    Next
                 End If
             Next
 
-            'anions
+            'sum for anions
 
             Dim sc1 As Double = 0.0
 
             For c1 = 0 To n
                 If cprops(c1).Charge > 0 Then
-                    sc1 += xc0(c1) * s2(c1).SumY / s2t(c1).SumY
+                    For a = 0 To n
+                        If cprops(a).Charge < 0 Then
+                            sc1 += xc0(c1) * s2(a)(c1) / s2t(a)(c1)
+                        End If
+                    Next
                 End If
             Next
 
-            'overall
+            'short range contribution
 
             For i = 0 To n
                 If cprops(i).IsIon Then
                     If cprops(i).Charge > 0 Then
                         'cation
-                        lngr(i) = sa1 + sm1(i) + sm3(i)
-                        lngr(i) *= Abs(cprops(i).Charge)
+                        lngsr(i) = sa1 + sm1(i) + sm3(i)
+                        lngsr(i) *= Abs(cprops(i).Charge)
                     ElseIf cprops(i).Charge < 0 Then
                         'anion
-                        lngr(i) = sc1 + sm1(i) + sm2(i)
-                        lngr(i) *= Abs(cprops(i).Charge)
+                        lngsr(i) = sc1 + sm1(i) + sm2(i)
+                        lngsr(i) *= Abs(cprops(i).Charge)
                     End If
                 ElseIf cprops(i).IsSalt Then
                     'salt
                 Else
                     'molecule
-                    lngr(i) = s0(i) / s0t(i) + sm1(i) + sm2(i) + sm3(i)
+                    lngsr(i) = s0(i) / s0t(i) + sm1(i) + sm2(i) + sm3(i)
                 End If
             Next
 
             'final activity coefficients
 
             For i = 0 To n
-                lng(i) = lngsr(i) + lnglr(i)
+                lng(i) = lngsr(i) + lngb(i) + lnglr(i)
             Next
 
             'calculate mean molal activity coefficient
