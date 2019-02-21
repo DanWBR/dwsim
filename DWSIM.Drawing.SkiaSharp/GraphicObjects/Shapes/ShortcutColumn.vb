@@ -226,7 +226,31 @@ Namespace GraphicObjects.Shapes
                 .Typeface = DefaultTypeFace
             End With
 
-            canvas.DrawText("SC", X + 0.5 * Width, Y + 0.5 * Height, tpaint)
+            If FlippedH Or FlippedV Or Rotation <> 0 Then
+
+                Dim currmat = canvas.TotalMatrix
+
+                canvas.Save()
+
+                If FlippedV And Not FlippedH Then
+                    canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
+                ElseIf FlippedH And Not FlippedV Then
+                    canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
+                ElseIf FlippedH And FlippedV Then
+                    canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
+                End If
+
+                If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
+
+                canvas.DrawText("SC", X + 0.5 * Width, Y + 0.5 * Height, tpaint)
+
+                canvas.SetMatrix(currmat)
+
+            Else
+
+                canvas.DrawText("SC", X + 0.5 * Width, Y + 0.5 * Height, tpaint)
+
+            End If
 
         End Sub
 

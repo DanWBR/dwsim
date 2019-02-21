@@ -112,7 +112,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsbSnapObjectsToGrid = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton17 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbSaveAsImage = New System.Windows.Forms.ToolStripButton()
         Me.tsbConfigPage = New System.Windows.Forms.ToolStripButton()
         Me.tsbConfigPrinter = New System.Windows.Forms.ToolStripButton()
         Me.tsbPrint = New System.Windows.Forms.ToolStripButton()
@@ -395,12 +394,17 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         'pageSetup
         '
+        Me.pageSetup.AllowPrinter = False
         Me.pageSetup.Document = Me.designSurfacePrintDocument
+        Me.pageSetup.ShowHelp = True
+        Me.pageSetup.ShowNetwork = False
         '
         'setupPrint
         '
         Me.setupPrint.AllowCurrentPage = True
+        Me.setupPrint.AllowSomePages = True
         Me.setupPrint.Document = Me.designSurfacePrintDocument
+        Me.setupPrint.PrintToFile = True
         Me.setupPrint.UseEXDialog = True
         '
         'Timer1
@@ -502,7 +506,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'ToolStripFlowsheet
         '
         resources.ApplyResources(Me.ToolStripFlowsheet, "ToolStripFlowsheet")
-        Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator10, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator9, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator13, Me.tsbDisplayGrid, Me.tsbSnapObjectsToGrid, Me.ToolStripButton17, Me.ToolStripSeparator14, Me.tsbSaveAsImage, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator11, Me.tsbMultiSelectMode, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator16, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
+        Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator10, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator9, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator13, Me.tsbDisplayGrid, Me.tsbSnapObjectsToGrid, Me.ToolStripButton17, Me.ToolStripSeparator14, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator11, Me.tsbMultiSelectMode, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator16, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
         Me.ToolStripFlowsheet.Name = "ToolStripFlowsheet"
         '
         'tsbCutObj
@@ -670,13 +674,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.ToolStripSeparator14, "ToolStripSeparator14")
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        '
-        'tsbSaveAsImage
-        '
-        resources.ApplyResources(Me.tsbSaveAsImage, "tsbSaveAsImage")
-        Me.tsbSaveAsImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbSaveAsImage.Image = Global.DWSIM.My.Resources.Resources.images
-        Me.tsbSaveAsImage.Name = "tsbSaveAsImage"
         '
         'tsbConfigPage
         '
@@ -885,7 +882,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tsbSnapObjectsToGrid As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton17 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator14 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsbSaveAsImage As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbConfigPage As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbConfigPrinter As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbPrint As System.Windows.Forms.ToolStripButton

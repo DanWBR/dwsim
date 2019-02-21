@@ -2254,286 +2254,11 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
-    'Private Sub FlowsheetDesignSurface_MouseDoubleClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseDoubleClick
-
-    '    If Not FlowsheetSurface.SelectedObject Is Nothing Then
-    '        Select Case FlowsheetSurface.SelectedObject.ObjectType
-    '            Case ObjectType.MaterialStream
-
-    '            Case ObjectType.FlowsheetUO
-    '                Dim myobj As UnitOperations.UnitOperations.Flowsheet = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                If My.Computer.Keyboard.ShiftKeyDown Then
-    '                    Dim viewform As New FlowsheetUOEditorForm
-    '                    With viewform
-    '                        .Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag
-    '                        .fsuo = myobj
-    '                        .ShowDialog()
-    '                        .Dispose()
-    '                    End With
-    '                    viewform = Nothing
-    '                Else
-    '                    If myobj.Initialized Then
-    '                        Dim viewform As New FlowsheetUOViewerForm
-    '                        With viewform
-    '                            .Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag
-    '                            .fsuo = myobj
-    '                            .Show(Flowsheet.dckPanel)
-    '                        End With
-    '                    Else
-    '                        Dim viewform As New FlowsheetUOEditorForm
-    '                        With viewform
-    '                            .Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag
-    '                            .fsuo = myobj
-    '                            .ShowDialog()
-    '                            .Dispose()
-    '                        End With
-    '                        viewform = Nothing
-    '                    End If
-    '                End If
-    '            Case ObjectType.CapeOpenUO
-    '                Dim myobj As CapeOpenUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                myobj.Edit(Me, New EventArgs)
-    '            Case ObjectType.ExcelUO
-    '                Dim myobj As ExcelUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                If My.Computer.Keyboard.ShiftKeyDown Then
-    '                    Dim selectionControl As New ExcelUOEditorForm
-    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag & " - " & "Excel UO Specification"
-    '                    selectionControl.TbFileName.Text = myobj.Filename
-    '                    selectionControl.ShowDialog()
-    '                    myobj.Filename = selectionControl.TbFileName.Text
-    '                Else
-    '                    If myobj.Filename <> "" Then
-    '                        If My.Computer.FileSystem.FileExists(myobj.Filename) Then
-    '                            If Not DWSIM.App.IsRunningOnMono Then
-    '                                Try
-    '                                    Process.Start(myobj.Filename)
-    '                                Catch ex As Exception
-    '                                End Try
-    '                            Else
-    '                                Try
-    '                                    Process.Start(New ProcessStartInfo("xdg-open", myobj.Filename) With {.UseShellExecute = False})
-    '                                Catch ex As Exception
-
-    '                                End Try
-    '                            End If
-    '                        Else
-    '                            MessageBox.Show(DWSIM.App.GetLocalString("Oarquivonoexisteoufo"), DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '                        End If
-    '                    End If
-    '                End If
-    '            Case ObjectType.CustomUO
-    '                Dim myobj As CustomUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                If Not DWSIM.App.IsRunningOnMono Then
-    '                    Dim selectionControl As New ScriptEditorForm
-    '                    selectionControl.scripttext = myobj.ScriptText
-    '                    selectionControl.fontname = myobj.FontName
-    '                    selectionControl.fontsize = myobj.FontSize
-    '                    selectionControl.includes = myobj.Includes
-    '                    selectionControl.highlightspaces = myobj.HighlightSpaces
-    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
-    '                    selectionControl.ShowDialog(Me)
-    '                    myobj.FontName = selectionControl.tscb1.SelectedItem
-    '                    myobj.FontSize = selectionControl.tscb2.SelectedItem
-    '                    myobj.Includes = selectionControl.includes
-    '                    myobj.ScriptText = selectionControl.scripttext
-    '                    myobj.HighlightSpaces = selectionControl.highlightspaces
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                Else
-    '                    Dim selectionControl As New ScriptEditorFormMono
-    '                    selectionControl.scripttext = myobj.ScriptText
-    '                    selectionControl.fontname = myobj.FontName
-    '                    selectionControl.fontsize = myobj.FontSize
-    '                    selectionControl.includes = myobj.Includes
-    '                    selectionControl.Text = Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
-    '                    selectionControl.ShowDialog()
-    '                    myobj.FontName = selectionControl.tscb1.SelectedItem
-    '                    myobj.FontSize = selectionControl.tscb2.SelectedItem
-    '                    myobj.Includes = selectionControl.includes
-    '                    myobj.ScriptText = selectionControl.txtScript.Text
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                End If
-    '            Case ObjectType.OT_Adjust
-    '                Dim selectionControl As New UI_AdjControlPanelForm
-    '                selectionControl.ShowDialog()
-    '                selectionControl.Dispose()
-    '                selectionControl = Nothing
-    '            Case ObjectType.OT_Spec
-    '                Dim selectionControl As New UI_SpecControlPanelForm
-    '                selectionControl.ShowDialog()
-    '                selectionControl.Dispose()
-    '                selectionControl = Nothing
-    '            Case ObjectType.AbsorptionColumn, ObjectType.DistillationColumn, ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber
-    '                Dim myobj As Column = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                If My.Computer.Keyboard.ShiftKeyDown Then
-    '                    Dim selectionControl As New UIConnectionsEditorForm
-    '                    selectionControl.ShowDialog()
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                ElseIf My.Computer.Keyboard.CtrlKeyDown Then
-    '                    Dim selectionControl As New UIInitialEstimatesEditorForm
-    '                    selectionControl.ShowDialog()
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                ElseIf My.Computer.Keyboard.AltKeyDown Then
-    '                    Dim selectionControl As New UIStagesEditorForm
-    '                    selectionControl.ShowDialog()
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                Else
-    '                    If myobj.Calculated Then
-    '                        Dim selectionControl As New UIResultsForm
-    '                        selectionControl.form = myobj.FlowSheet
-    '                        selectionControl.ShowDialog()
-    '                        selectionControl.Dispose()
-    '                        selectionControl = Nothing
-    '                    End If
-    '                End If
-    '            Case ObjectType.Pipe
-    '                Dim myobj As Pipe = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                If My.Computer.Keyboard.ShiftKeyDown Then
-    '                    Dim selectionControl As New ThermalProfileEditorForm
-    '                    selectionControl.ThermalProfile = myobj.ThermalProfile
-    '                    selectionControl.ShowDialog()
-    '                    myobj.ThermalProfile = selectionControl.ThermalProfile
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                ElseIf My.Computer.Keyboard.CtrlKeyDown Then
-    '                    If myobj.Calculated Then
-    '                        Dim selectionControl As New FormGraph
-    '                        selectionControl.Profile = myobj.Profile
-    '                        selectionControl.ShowDialog()
-    '                        selectionControl.Dispose()
-    '                        selectionControl = Nothing
-    '                    End If
-    '                ElseIf My.Computer.Keyboard.AltKeyDown Then
-    '                    If myobj.Calculated Then
-    '                        Dim selectionControl As New FormTable
-    '                        selectionControl.Profile = myobj.Profile
-    '                        selectionControl.ShowDialog()
-    '                        selectionControl.Dispose()
-    '                        selectionControl = Nothing
-    '                    End If
-    '                Else
-    '                    Dim selectionControl As New PipeEditorForm
-    '                    selectionControl.PipeEditor1.SystemOfUnits = My.Application.ActiveSimulation.Options.SelectedUnitSystem
-    '                    selectionControl.PipeEditor1.NumberFormat = My.Application.ActiveSimulation.Options.NumberFormat
-    '                    selectionControl.PipeEditor1.Profile = myobj.Profile
-    '                    selectionControl.ShowDialog()
-    '                    myobj.Profile = selectionControl.PipeEditor1.Profile
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                End If
-    '            Case ObjectType.RCT_PFR
-    '                Dim myobj As Reactor_PFR = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                If myobj.Calculated Then
-    '                    Dim selectionControl As New FormGraphPFR
-    '                    selectionControl.form = myobj.FlowSheet
-    '                    selectionControl.Points = myobj.points
-    '                    selectionControl.ShowDialog()
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                End If
-    '            Case ObjectType.RCT_Gibbs
-    '                Dim myobj As Reactor_Gibbs = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-    '                If My.Computer.Keyboard.ShiftKeyDown Then
-    '                    Dim selectionControl As New ElementMatrixEditorForm
-    '                    selectionControl.elmat = myobj.ElementMatrix
-    '                    selectionControl.Text = myobj.GraphicObject.Tag & " - " & DWSIM.App.GetLocalString("RGEditElementMatrix")
-    '                    selectionControl.ShowDialog()
-    '                    myobj.ElementMatrix = selectionControl.elmat
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                Else
-    '                    Dim selectionControl As New GibbsInitialEstimatesEditorForm
-    '                    selectionControl.ie = myobj.InitialEstimates
-    '                    selectionControl.gr = myobj
-    '                    selectionControl.Text = myobj.GraphicObject.Tag & " - " & selectionControl.Text
-    '                    selectionControl.form = myobj.FlowSheet
-    '                    If selectionControl.gr.GraphicObject.InputConnectors(0).IsAttached Then
-    '                        selectionControl.inlet = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-    '                    End If
-    '                    If selectionControl.gr.GraphicObject.InputConnectors(0).IsAttached Then
-    '                        selectionControl.inlet = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-    '                    End If
-    '                    If selectionControl.gr.GraphicObject.OutputConnectors(0).IsAttached Then
-    '                        selectionControl.outletv = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-    '                    End If
-    '                    If selectionControl.gr.GraphicObject.OutputConnectors(1).IsAttached Then
-    '                        selectionControl.outletl = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
-    '                    End If
-    '                    selectionControl.ShowDialog()
-    '                    myobj.InitialEstimates = selectionControl.ie
-    '                    selectionControl.Dispose()
-    '                    selectionControl = Nothing
-    '                End If
-    '        End Select
-    '    End If
-
-    'End Sub
-
     Private Sub CopiarDadosParaareaDeTransferenciaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Click
 
         Me.Flowsheet.tsmiExportData_Click(sender, e)
 
     End Sub
-
-    'Private Sub RestoreTSMI_Click(sender As Object, e As EventArgs) Handles RestoreTSMI.Click
-
-    '    If Not FlowsheetSurface.SelectedObject Is Nothing Then
-
-    '        If FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
-
-    '            Dim mystr As DWSIM.Thermodynamics.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
-
-    '            If Not mystr.GraphicObject.InputConnectors(0).IsAttached Then
-
-    '                'assign default values for temperature, pressure and mass flow
-    '                mystr.Phases(0).Properties.temperature = 298.15
-    '                mystr.Phases(0).Properties.pressure = 101325
-    '                mystr.Phases(0).Properties.massflow = 1
-
-    '                mystr.EqualizeOverallComposition()
-
-    '                Application.DoEvents()
-    '                CalculateMaterialStream(Flowsheet, mystr)
-    '                Application.DoEvents()
-    '                Call Flowsheet.FormSurface.UpdateSelectedObject()
-    '                Application.DoEvents()
-    '                Call Flowsheet.FormSurface.Invalidate()
-    '                Application.DoEvents()
-    '                ProcessCalculationQueue(Flowsheet)
-    '                Application.DoEvents()
-
-    '            ElseIf mystr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
-
-    '                'assign default values for temperature, pressure and mass flow
-    '                mystr.Phases(0).Properties.temperature = 298.15
-    '                mystr.Phases(0).Properties.pressure = 101325
-    '                mystr.Phases(0).Properties.massflow = 1
-
-    '                mystr.EqualizeOverallComposition()
-
-    '                Application.DoEvents()
-    '                CalculateMaterialStream(Flowsheet, mystr)
-    '                Application.DoEvents()
-    '                Call Flowsheet.FormSurface.UpdateSelectedObject()
-    '                Application.DoEvents()
-    '                Call Flowsheet.FormSurface.Invalidate()
-    '                Application.DoEvents()
-    '                ProcessCalculationQueue(Flowsheet)
-    '                Application.DoEvents()
-
-    '            Else
-
-    '                MessageBox.Show("The selected Material Stream is read-only.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-    '            End If
-
-    '        End If
-    '    End If
-    'End Sub
 
     Private Sub ExibirTudoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExibirTudoToolStripMenuItem.Click
         FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
@@ -2701,7 +2426,7 @@ Public Class FlowsheetSurface_SkiaSharp
         SplitContainer1.Panel1.Refresh()
     End Sub
 
-    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSaveAsImage.Click
+    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         If Flowsheet.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
             Dim rect As Rectangle = New Rectangle(0, 0, SplitContainer1.Panel1.Width - 14, SplitContainer1.Panel1.Height - 14)
@@ -2747,36 +2472,6 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub ToolStripButton11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbConfigPrinter.Click
         setupPrint.ShowDialog()
     End Sub
-
-    'Private Sub tsbAlign_Click(sender As Object, e As EventArgs) Handles tsbAlignBottoms.Click, tsbAlignCenters.Click, tsbAlignHorizontal.Click,
-    '                                                                    tsbAlignLefts.Click, tsbAlignMiddles.Click, tsbAlignRights.Click,
-    '                                                                    tsbAlignTops.Click, tsbAlignVertical.Click
-
-    '    Dim tsb As ToolStripButton = DirectCast(sender, ToolStripButton)
-
-    '    Dim direction As Drawing.SkiaSharp.GraphicsSurface.AlignDirection
-
-    '    If tsb.Name.Contains("Lefts") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Lefts
-    '    ElseIf tsb.Name.Contains("Centers") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers
-    '    ElseIf tsb.Name.Contains("Rights") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Rights
-    '    ElseIf tsb.Name.Contains("Tops") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Tops
-    '    ElseIf tsb.Name.Contains("Middles") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Middles
-    '    ElseIf tsb.Name.Contains("Bottoms") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Bottoms
-    '    ElseIf tsb.Name.Contains("Vertical") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeVertical
-    '    ElseIf tsb.Name.Contains("Horizontal") Then
-    '        direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeHorizontal
-    '    End If
-
-    '    FlowsheetDesignSurface.AlignSelectedObjects(direction)
-
-    'End Sub
 
     Private Sub tsbCutObj_Click(sender As Object, e As EventArgs) Handles tsbCutObj.Click
         Flowsheet.CutObjects()
@@ -3027,6 +2722,26 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub CopiarComoImagem300ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarComoImagem300ToolStripMenuItem.Click
         CopyAsImage(3)
+    End Sub
+
+    Private Sub designSurfacePrintDocument_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles designSurfacePrintDocument.PrintPage
+        e.Graphics.PageUnit = GraphicsUnit.Pixel
+        Dim bounds = designSurfacePrintDocument.PrinterSettings.DefaultPageSettings.Bounds
+        Dim prevzoom = FlowsheetSurface.Zoom
+        Using bmp As New SKBitmap(bounds.Width, bounds.Height)
+            Using canvas As New SKCanvas(bmp)
+                FlowsheetSurface.ZoomAll(bounds.Width * 0.95, bounds.Height)
+                FlowsheetSurface.ZoomAll(bounds.Width * 0.95, bounds.Height)
+                FlowsheetSurface.UpdateCanvas(canvas)
+                FlowsheetSurface.UpdateCanvas(canvas)
+                Dim d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
+                Using str As New IO.MemoryStream
+                    d.SaveTo(str)
+                    e.Graphics.DrawImage(New Bitmap(str), 0, 0)
+                End Using
+            End Using
+        End Using
+        FlowsheetSurface.Zoom = prevzoom
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click

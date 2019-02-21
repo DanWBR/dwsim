@@ -188,7 +188,31 @@ Namespace GraphicObjects
                 ay = Me.Y + Me.Height * 0.8 - size.Height
             End If
 
-            g.DrawText(TypeName, ax, ay, tPen)
+            If FlippedH Or FlippedV Or Rotation <> 0 Then
+
+                Dim currmat = g.TotalMatrix
+
+                g.Save()
+
+                If FlippedV And Not FlippedH Then
+                    g.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
+                ElseIf FlippedH And Not FlippedV Then
+                    g.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
+                ElseIf FlippedH And FlippedV Then
+                    g.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
+                End If
+
+                If Rotation <> 0.0 Then g.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
+
+                g.DrawText(TypeName, ax, ay, tPen)
+
+                g.SetMatrix(currmat)
+
+            Else
+
+                g.DrawText(TypeName, ax, ay, tPen)
+
+            End If
 
             'Draw interior packing
 

@@ -161,7 +161,31 @@ Namespace GraphicObjects.Shapes
             ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
             ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
-            canvas.DrawText("H", ax, ay, tpaint)
+            If FlippedH Or FlippedV Or Rotation <> 0 Then
+
+                Dim currmat = canvas.TotalMatrix
+
+                canvas.Save()
+
+                If FlippedV And Not FlippedH Then
+                    canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
+                ElseIf FlippedH And Not FlippedV Then
+                    canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
+                ElseIf FlippedH And FlippedV Then
+                    canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
+                End If
+
+                If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
+
+                canvas.DrawText("H", ax, ay, tpaint)
+
+                canvas.SetMatrix(currmat)
+
+            Else
+
+                canvas.DrawText("H", ax, ay, tpaint)
+
+            End If
 
         End Sub
 
