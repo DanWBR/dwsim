@@ -1637,4 +1637,22 @@
   <DenS_T_C>25</DenS_T_C>
   <DenS_g_mL>2.13</DenS_g_mL>
 </compound>
+  <compound>
+    <Name>Protonated Monoethanolamine (ion)</Name>
+    <Formula>HOCH2CH2NH3+</Formula>
+    <MW>62.0831</MW>
+    <Ion>True</Ion>
+    <Salt>False</Salt>
+    <HydratedSalt>False</HydratedSalt>
+    <Charge>1</Charge>
+  </compound>
+  <compound>
+    <Name>Protonated Diethanolamine (ion)</Name>
+    <Formula>(HOCH2CH2)2NH2+</Formula>
+    <MW>106.136</MW>
+    <Ion>True</Ion>
+    <Salt>False</Salt>
+    <HydratedSalt>False</HydratedSalt>
+    <Charge>1</Charge>
+  </compound>
 </compounds>

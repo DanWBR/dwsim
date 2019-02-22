@@ -31,6 +31,8 @@ Namespace PropertyPackages.Auxiliary
         Public ID2 As String = ""
         Public A12 As Double = 0
         Public A21 As Double = 0
+        Public B12 As Double = 0
+        Public B21 As Double = 0
         Public alpha12 As Double = 0.2
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
@@ -41,6 +43,8 @@ Namespace PropertyPackages.Auxiliary
                 .ID2 = Me.ID2
                 .A12 = Me.A12
                 .A21 = Me.A21
+                .B12 = Me.B12
+                .B21 = Me.B21
                 .alpha12 = Me.alpha12
             End With
             Return newclass
@@ -54,6 +58,14 @@ Namespace PropertyPackages.Auxiliary
 
         Private _ip As Dictionary(Of String, Dictionary(Of String, ElectrolyteNRTL_IPData))
         Private _dc As Dictionary(Of String, DielectricConstants)
+
+        Private T_NaOH As New List(Of Double)
+        Private tau_NaOH_A12 As New List(Of Double)
+        Private tau_NaOH_A21 As New List(Of Double)
+
+        Private T_HCl As New List(Of Double)
+        Private tau_HCl_A12 As New List(Of Double)
+        Private tau_HCl_A21 As New List(Of Double)
 
         Public Property InteractionParameters() As Dictionary(Of String, Dictionary(Of String, ElectrolyteNRTL_IPData))
             Get
@@ -76,7 +88,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            Dim t1, t3, t6, t9a As String, i As Integer
+            Dim t1, t3, t4, t4a, t5, t6, t9a As String, i As Integer
 
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table1.txt")
                 Using t As New IO.StreamReader(filestr)
@@ -99,12 +111,6 @@ Namespace PropertyPackages.Auxiliary
                 InteractionParameters(ip.ID1).Add(ip.ID2, ip)
             Next
 
-            'Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table2.txt")
-            '    Using t As New IO.StreamReader(filestr)
-            '        t2 = t.ReadToEnd
-            '    End Using
-            'End Using
-
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table3.txt")
                 Using t As New IO.StreamReader(filestr)
                     t3 = t.ReadToEnd
@@ -124,43 +130,33 @@ Namespace PropertyPackages.Auxiliary
                 InteractionParameters(ip.ID1).Add(ip.ID2, ip)
             Next
 
-            'Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table4.txt")
-            '    Using t As New IO.StreamReader(filestr)
-            '        t4 = t.ReadToEnd
-            '    End Using
-            'End Using
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table4.txt")
+                Using t As New IO.StreamReader(filestr)
+                    t4 = t.ReadToEnd
+                End Using
+            End Using
 
-            'lines = t4.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
+            lines = t4.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
 
-            'For i = 2 To 2
-            '    Dim ip As New ElectrolyteNRTL_IPData
-            '    ip.ID1 = "NaOH"
-            '    ip.ID2 = "H2O"
-            '    ip.A12 = Double.Parse(lines(i).Split(vbTab)(1), ci)
-            '    ip.A21 = Double.Parse(lines(i).Split(vbTab)(2), ci)
-            '    ip.alpha12 = 0.2
-            '    If Not InteractionParameters.ContainsKey(ip.ID1) Then InteractionParameters.Add(ip.ID1, New Dictionary(Of String, ElectrolyteNRTL_IPData))
-            '    InteractionParameters(ip.ID1).Add(ip.ID2, ip)
-            'Next
+            For i = 2 To 7
+                T_NaOH.Add(Double.Parse(lines(i).Split(vbTab)(0), ci))
+                tau_NaOH_A12.Add(Double.Parse(lines(i).Split(vbTab)(1), ci))
+                tau_NaOH_A21.Add(Double.Parse(lines(i).Split(vbTab)(2), ci))
+            Next
 
-            'Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table5.txt")
-            '    Using t As New IO.StreamReader(filestr)
-            '        t5 = t.ReadToEnd
-            '    End Using
-            'End Using
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table5.txt")
+                Using t As New IO.StreamReader(filestr)
+                    t5 = t.ReadToEnd
+                End Using
+            End Using
 
-            'lines = t5.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
+            lines = t5.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
 
-            'For i = 5 To 5
-            '    Dim ip As New ElectrolyteNRTL_IPData
-            '    ip.ID1 = "HCl"
-            '    ip.ID2 = "H2O"
-            '    ip.A12 = Double.Parse(lines(i).Split(vbTab)(1), ci)
-            '    ip.A21 = Double.Parse(lines(i).Split(vbTab)(2), ci)
-            '    ip.alpha12 = 0.2
-            '    If Not InteractionParameters.ContainsKey(ip.ID1) Then InteractionParameters.Add(ip.ID1, New Dictionary(Of String, ElectrolyteNRTL_IPData))
-            '    InteractionParameters(ip.ID1).Add(ip.ID2, ip)
-            'Next
+            For i = 2 To 8
+                T_HCl.Add(Double.Parse(lines(i).Split(vbTab)(0), ci))
+                tau_HCl_A12.Add(Double.Parse(lines(i).Split(vbTab)(1), ci))
+                tau_HCl_A21.Add(Double.Parse(lines(i).Split(vbTab)(2), ci))
+            Next
 
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table6.txt")
                 Using t As New IO.StreamReader(filestr)
@@ -206,6 +202,25 @@ Namespace PropertyPackages.Auxiliary
             '    End Using
             'End Using
 
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.table4_amines.txt")
+                Using t As New IO.StreamReader(filestr)
+                    t4a = t.ReadToEnd
+                End Using
+            End Using
+
+            lines = t4a.Split(New Char() {vbCrLf, vbLf, vbCr}, StringSplitOptions.RemoveEmptyEntries)
+
+            For i = 2 To lines.Count - 1
+                Dim ip As New ElectrolyteNRTL_IPData
+                ip.ID1 = lines(i).Split(vbTab)(0)
+                ip.ID2 = lines(i).Split(vbTab)(1)
+                ip.A12 = Double.Parse(lines(i).Split(vbTab)(2), ci)
+                ip.B12 = Double.Parse(lines(i).Split(vbTab)(3), ci)
+                ip.alpha12 = 0.2
+                If Not InteractionParameters.ContainsKey(ip.ID1) Then InteractionParameters.Add(ip.ID1, New Dictionary(Of String, ElectrolyteNRTL_IPData))
+                InteractionParameters(ip.ID1).Add(ip.ID2, ip)
+            Next
+
             _dc = New Dictionary(Of String, DielectricConstants)
 
             Dim exuniquacdc As DielectricConstants
@@ -227,6 +242,34 @@ Namespace PropertyPackages.Auxiliary
             fh4 = Nothing
 
         End Sub
+
+        Function GetNaOH_A12(T As Double) As Double
+
+            Dim ip As New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(T_NaOH.ToArray, tau_NaOH_A12.ToArray)
+            Return ip.Interpolate(T)
+
+        End Function
+
+        Function GetNaOH_A21(T As Double) As Double
+
+            Dim ip As New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(T_NaOH.ToArray, tau_NaOH_A21.ToArray)
+            Return ip.Interpolate(T)
+
+        End Function
+
+        Function GetHCl_A12(T As Double) As Double
+
+            Dim ip As New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(T_HCl.ToArray, tau_HCl_A12.ToArray)
+            Return ip.Interpolate(T)
+
+        End Function
+
+        Function GetHCl_A21(T As Double) As Double
+
+            Dim ip As New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(T_HCl.ToArray, tau_HCl_A21.ToArray)
+            Return ip.Interpolate(T)
+
+        End Function
 
         Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double()
 
@@ -250,6 +293,10 @@ Namespace PropertyPackages.Auxiliary
                 If Vids(i) = "HOH" Then Vids(i) = "H2O"
                 If Vids(i) = "OCO" Then Vids(i) = "CO2"
                 If Vids(i) = "HSH" Then Vids(i) = "H2S"
+                If Vids(i) = "HOCH2CH2NH2" Then Vids(i) = "RNH2" 'MEA
+                If Vids(i) = "(HOCH2CH2)2NH" Then Vids(i) = "R2NH" 'DEA
+                If Vids(i) = "HOCH2CH2NH3+" Then Vids(i) = "RNH3+" 'Protonated MEA
+                If Vids(i) = "(HOCH2CH2)2NH2+" Then Vids(i) = "R2NH2+" 'Protonated DEA
                 If cprops(i).IsIon Then
                     charge(i) = cprops(i).Charge
                     If Vx(i) = 0.0# Then Vx(i) = 1.0E-20
@@ -279,7 +326,8 @@ Namespace PropertyPackages.Auxiliary
             Do
                 molality(i) = Vx(i) / wtotal
                 'salt-free mole fractions
-                If cprops(i).Name <> "Water" And cprops(i).Name <> "Methanol" Then
+                If cprops(i).Charge = 0 And Not cprops(i).IsSalt Then
+                    'solvents
                     Xsolv -= Vx(i)
                 End If
                 i += 1
@@ -289,15 +337,17 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                If cprops(i).Name = "Water" Then
-                    sumvfrac = Vx(i) / Xsolv * cprops(i).Chao_Seader_Liquid_Molar_Volume / 1000000.0
+                If cprops(i).Charge = 0 And Not cprops(i).IsSalt Then
+                    'solvents
+                    sumvfrac += Vx(i) / Xsolv * cprops(i).Chao_Seader_Liquid_Molar_Volume / 1000000.0
                 End If
                 i += 1
             Loop Until i = n + 1
 
             i = 0
             Do
-                If cprops(i).Name = "Water" Then
+                If cprops(i).Charge = 0 And Not cprops(i).IsSalt Then
+                    'solvents
                     solvmfrac(i) = Vx(i) / Xsolv
                     solvvfrac(i) = Vx(i) / Xsolv * cprops(i).Chao_Seader_Liquid_Molar_Volume / 1000000.0 / sumvfrac
                 End If
@@ -315,6 +365,12 @@ Namespace PropertyPackages.Auxiliary
                         DCsolv += solvvfrac(i) * (.a + .b * T + .c * T ^ 2 + .d * T ^ 3 + .e * T ^ 4)
                     End With
                     dsolv += solvvfrac(i) * solvdensity(i)
+                ElseIf cprops(i).Name = "Monoethanolamine" Then
+                    Msolv += Vx(i) / Xsolv * cprops(i).Molar_Weight / 1000
+                    dsolv += solvvfrac(i) * (35.76 + 14836 * (1 / T - 1 / 273.15))
+                ElseIf cprops(i).Name = "Diethanolamine" Then
+                    Msolv += Vx(i) / Xsolv * cprops(i).Molar_Weight / 1000
+                    dsolv += solvvfrac(i) * (28.01 + 9277 * (1 / T - 1 / 273.15))
                 End If
                 i += 1
             Loop Until i = n + 1
@@ -361,22 +417,22 @@ Namespace PropertyPackages.Auxiliary
                 Do
                     If Me.InteractionParameters.ContainsKey(Vids(i)) Then
                         If Me.InteractionParameters(Vids(i)).ContainsKey(Vids(j)) Then
-                            tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(i))(Vids(j)).A12
-                            tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(i))(Vids(j)).A21
+                            tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(i))(Vids(j)).A12 + Me.InteractionParameters(Vids(i))(Vids(j)).B12 / T
+                            tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(i))(Vids(j)).A21 + Me.InteractionParameters(Vids(i))(Vids(j)).B21 / T
                             alpha12(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(i))(Vids(j)).alpha12
                         Else
                             If Me.InteractionParameters.ContainsKey(Vids(j)) Then
                                 If Me.InteractionParameters(Vids(j)).ContainsKey(Vids(i)) Then
-                                    tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).A21
-                                    tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(j))(Vids(i)).A12
+                                    tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).A21 + Me.InteractionParameters(Vids(i))(Vids(j)).B21 / T
+                                    tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(j))(Vids(i)).A12 + Me.InteractionParameters(Vids(i))(Vids(j)).B12 / T
                                     alpha12(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).alpha12
                                 End If
                             End If
                         End If
                     ElseIf Me.InteractionParameters.ContainsKey(Vids(j)) Then
                         If Me.InteractionParameters(Vids(j)).ContainsKey(Vids(i)) Then
-                            tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).A21
-                            tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(j))(Vids(i)).A12
+                            tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).A21 + Me.InteractionParameters(Vids(i))(Vids(j)).B21 / T
+                            tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(j))(Vids(i)).A12 + Me.InteractionParameters(Vids(i))(Vids(j)).B12 / T
                             alpha12(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).alpha12
                         End If
                     End If
@@ -384,6 +440,25 @@ Namespace PropertyPackages.Auxiliary
                 Loop Until j = n + 1
                 i = i + 1
             Loop Until i = n + 1
+
+            For i = 0 To n
+                For j = 0 To n
+                    If Vids(i) = "H2O" Then
+                        If Vids(j) = "NaOH" Or Vids(j) = "Na+" Or Vids(j) = "OH-" Then
+                            tau(Vids(i))(Vids(j)) = GetNaOH_A21(T)
+                            tau(Vids(j))(Vids(i)) = GetNaOH_A12(T)
+                            alpha12(Vids(i))(Vids(j)) = 0.03
+                            alpha12(Vids(j))(Vids(i)) = 0.03
+                        End If
+                        If Vids(j) = "HCl" Or Vids(j) = "H+" Or Vids(j) = "Cl-" Then
+                            tau(Vids(i))(Vids(j)) = GetHCl_A21(T)
+                            tau(Vids(j))(Vids(i)) = GetHCl_A12(T)
+                            alpha12(Vids(i))(Vids(j)) = 0.03
+                            alpha12(Vids(j))(Vids(i)) = 0.03
+                        End If
+                    End If
+                Next
+            Next
 
             For i = 0 To n
                 If cprops(i).IsIon Then

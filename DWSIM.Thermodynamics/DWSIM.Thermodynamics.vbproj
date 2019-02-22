@@ -765,6 +765,9 @@
     <EmbeddedResource Include="Assets\eNRTL\table9a.txt" />
     <EmbeddedResource Include="Assets\eNRTL\table9b.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\eNRTL\table4_amines.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>
