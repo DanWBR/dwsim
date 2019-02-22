@@ -228,12 +228,6 @@ Namespace PropertyPackages.Auxiliary
 
         End Sub
 
-        Function GetSaltFormula(cprops As List(Of Interfaces.ICompoundConstantProperties), cation As String, anion As String) As String
-
-            Return cprops.Where(Function(x) x.PositiveIon = cation And x.NegativeIon = anion).FirstOrDefault.Formula
-
-        End Function
-
         Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double()
 
             Dim n As Integer = Vx.Length - 1
@@ -423,16 +417,11 @@ Namespace PropertyPackages.Auxiliary
             For i = 0 To n
                 G.Add(Vids(i), New Dictionary(Of String, Double))
                 For j = 0 To n
-                    If j <> i Then
-                        G(Vids(i)).Add(Vids(j), Exp(-alpha12(Vids(i))(Vids(j)) * tau(Vids(i))(Vids(j))))
-                    Else
-                        G(Vids(i)).Add(Vids(j), 0.0)
-                    End If
+                    G(Vids(i)).Add(Vids(j), Exp(-alpha12(Vids(i))(Vids(j)) * tau(Vids(i))(Vids(j))))
                 Next
             Next
 
-            Dim id1, id2 As String
-            Dim sa, sc, sa2, sc2 As Double
+            Dim sa, sc As Double
 
             sa = 0.0
             sc = 0.0
@@ -440,53 +429,21 @@ Namespace PropertyPackages.Auxiliary
                 If cprops(i).Charge > 0 Then
                     'cation
                     sc += X(i)
-                Else
+                ElseIf cprops(i).Charge < 0 Then
                     'anion
                     sa += X(i)
                 End If
             Next
 
-            For c = 0 To n
-                For m = 0 To n
-                    If cprops(c).Charge > 0 Then
-                        'cation
-                        sc2 = 0.0
-                        For a = 0 To n
-                            If cprops(a).Charge < 0 Then
-                                id1 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a).Formula)
-                                sc2 += X(a) * G(id1)(Vids(m))
-                            End If
-                        Next
-                        G(Vids(c))(Vids(m)) = sc2 / sa
-                    End If
-                Next
-            Next
-
-            For a = 0 To n
-                For m = 0 To n
-                    If cprops(a).Charge < 0 Then
-                        'anion
-                        sa2 = 0.0
-                        For c = 0 To n
-                            If cprops(c).Charge > 0 Then
-                                id1 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a).Formula)
-                                sc2 += X(c) * G(id1)(Vids(m))
-                            End If
-                        Next
-                        G(Vids(a))(Vids(m)) = sa2 / sc
-                    End If
-                Next
-            Next
-
-            Dim xa0(n), xc0(n) As Double
+            Dim x0(n) As Double
 
             For i = 0 To n
                 If cprops(i).Charge < 0 Then
                     'anion
-                    xa0(i) = X(i) / sa
+                    x0(i) = X(i) / sa
                 ElseIf cprops(i).Charge > 0 Then
                     'cation
-                    xc0(i) = X(i) / sc
+                    x0(i) = X(i) / sc
                 End If
             Next
 
@@ -512,19 +469,14 @@ Namespace PropertyPackages.Auxiliary
 
             For c = 0 To n
                 For a1 = 0 To n
-                    If cprops(a1).Charge < 0 Then
-                        s1(c)(a1) = 0
-                        s1t(c)(a1) = 0
-                        If cprops(c).Charge > 0 Then
-                            For k = 0 To n
-                                id2 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a1).Formula)
-                                If k <> c Then
-                                    s1(c)(a1) += X(k) * G(Vids(k))(id2)
-                                    s1t(c)(a1) += X(k) * G(Vids(k))(id2) * tau(Vids(k))(id2)
-                                End If
-                            Next
+                    s1(c)(a1) = 0
+                    s1t(c)(a1) = 0
+                    For k = 0 To n
+                        If k <> c Then
+                            s1(c)(a1) += X(k) * G(Vids(k))(Vids(c))
+                            s1t(c)(a1) += X(k) * G(Vids(k))(Vids(c)) * tau(Vids(k))(Vids(c))
                         End If
-                    End If
+                    Next
                 Next
             Next
 
@@ -535,86 +487,96 @@ Namespace PropertyPackages.Auxiliary
                 Array.Resize(s2t(i), n + 1)
             Next
 
-
             For a = 0 To n
                 For c1 = 0 To n
-                    If cprops(c1).Charge > 0 Then
-                        s2(a)(c1) = 0
-                        s2t(a)(c1) = 0
-                        If cprops(a).Charge < 0 Then
-                            For k = 0 To n
-                                id2 = GetSaltFormula(cprops, cprops(c1).Formula, cprops(a).Formula)
-                                If k <> a Then
-                                    s2(a)(c1) += X(k) * G(Vids(k))(id2)
-                                    s2t(a)(c1) += X(k) * G(Vids(k))(id2) * tau(Vids(k))(id2)
-                                End If
-                            Next
+                    s2(a)(c1) = 0
+                    s2t(a)(c1) = 0
+                    For k = 0 To n
+                        If k <> a Then
+                            s2(a)(c1) += X(k) * G(Vids(k))(Vids(a))
+                            s2t(a)(c1) += X(k) * G(Vids(k))(Vids(a)) * tau(Vids(k))(Vids(a))
                         End If
-                    End If
+                    Next
                 Next
             Next
 
-            Dim sm1(n), sm2(n), sm3(n), sm4(n), sm5(n) As Double
+            Dim sm1(n), sm2(n), sm3(n), sma1(n), sma2(n), sma3(n), smc1(n), smc2(n), smc3(n) As Double
 
             For m = 0 To n
                 sm1(m) = 0.0
                 For m1 = 0 To n
-                    sm1(m) += X(m1) * G(Vids(m))(Vids(m1)) / s0(m1) * (tau(Vids(m))(Vids(m1)) - s0t(m1) / s0(m1))
+                    If cprops(m1).Charge = 0 Then
+                        sm1(m) += X(m1) * G(Vids(m))(Vids(m1)) / s0(m1) * (tau(Vids(m))(Vids(m1)) - s0t(m1) / s0(m1))
+                    End If
+                Next
+                sma1(m) = 0.0
+                For c1 = 0 To n
+                    For k = 0 To n
+                        If k <> m And cprops(m).Charge < 0 And cprops(c1).Charge > 0 Then
+                            sma1(m) += x0(c1) * X(k) * G(Vids(k))(Vids(c1)) * tau(Vids(k))(Vids(c1)) / s2(m)(c1)
+                        End If
+                    Next
+                Next
+                smc1(m) = 0.0
+                For a1 = 0 To n
+                    For k = 0 To n
+                        If k <> m And cprops(m).Charge > 0 And cprops(a1).Charge < 0 Then
+                            smc1(m) += x0(a1) * X(k) * G(Vids(k))(Vids(a1)) * tau(Vids(k))(Vids(a1)) / s2(m)(a1)
+                        End If
+                    Next
                 Next
                 sm2(m) = 0.0
                 For c = 0 To n
                     If cprops(c).Charge > 0 Then
-                        'cation
                         For a1 = 0 To n
                             If cprops(a1).Charge < 0 Then
-                                'anion
-                                id1 = GetSaltFormula(cprops, cprops(c).Formula, cprops(a1).Formula)
-                                sm2(m) += xa0(a1) * X(c) * G(Vids(m))(id1) / s1(c)(a1) * (tau(Vids(m))(id1) - s1t(c)(a1) / s1(c)(a1))
+                                sm2(m) += x0(a1) * X(c) * G(Vids(m))(Vids(a1)) / s1(c)(a1) * (tau(Vids(m))(Vids(a1)) - s1t(c)(a1) / s1(c)(a1))
                             End If
                         Next
+                    End If
+                Next
+                sma2(m) = 0.0
+                For m1 = 0 To n
+                    If cprops(m).Charge < 0 And cprops(m1).Charge = 0 Then
+                        sma2(m) += X(m1) * G(Vids(m))(Vids(m1)) / s0(m1) * (tau(Vids(m))(Vids(m1)) - s0t(m1) / s0(m1))
+                    End If
+                Next
+                smc2(m) = 0.0
+                For m1 = 0 To n
+                    If cprops(m).Charge > 0 And cprops(m1).Charge = 0 Then
+                        smc2(m) += X(m1) * G(Vids(m))(Vids(m1)) / s0(m1) * (tau(Vids(m))(Vids(m1)) - s0t(m1) / s0(m1))
                     End If
                 Next
                 sm3(m) = 0.0
                 For a = 0 To n
                     If cprops(a).Charge < 0 Then
-                        'anion
                         For c1 = 0 To n
                             If cprops(c1).Charge > 0 Then
-                                'cation
-                                id1 = GetSaltFormula(cprops, cprops(c1).Formula, cprops(a).Formula)
-                                sm3(m) += xc0(c1) * X(a) * G(Vids(m))(id1) / s2(a)(c1) * (tau(Vids(m))(id1) - s2t(a)(c1) / s2(a)(c1))
+                                sm3(m) += x0(c1) * X(a) * G(Vids(m))(Vids(c1)) / s2(a)(c1) * (tau(Vids(m))(Vids(c1)) - s2t(a)(c1) / s2(a)(c1))
                             End If
                         Next
                     End If
                 Next
-            Next
-
-            'sum for cations
-
-            Dim sa1 As Double = 0.0
-
-            For a1 = 0 To n
-                If cprops(a1).Charge < 0 Then
-                    For c = 0 To n
-                        If cprops(c).Charge > 0 Then
-                            sa1 += xa0(a1) * s1(c)(a1) / s1t(c)(a1)
-                        End If
-                    Next
-                End If
-            Next
-
-            'sum for anions
-
-            Dim sc1 As Double = 0.0
-
-            For c1 = 0 To n
-                If cprops(c1).Charge > 0 Then
-                    For a = 0 To n
-                        If cprops(a).Charge < 0 Then
-                            sc1 += xc0(c1) * s2(a)(c1) / s2t(a)(c1)
-                        End If
-                    Next
-                End If
+                sma3(m) = 0.0
+                For c = 0 To n
+                    If cprops(c).Charge > 0 Then
+                        For a1 = 0 To n
+                            If cprops(a1).Charge < 0 Then
+                                sma3(m) += x0(a1) * X(c) * G(Vids(c))(Vids(a1)) / s2(c)(a1) * (tau(Vids(c))(Vids(a1)) - s2t(c)(a1) / s2(c)(a1))
+                            End If
+                        Next
+                    End If
+                Next
+                smc3(m) = 0.0
+                For a = 0 To n
+                    If cprops(a).Charge < 0 Then
+                        For c1 = 0 To n
+                            If cprops(c1).Charge > 0 Then
+                                smc3(m) += x0(c1) * X(a) * G(Vids(a))(Vids(c1)) / s2(a)(c1) * (tau(Vids(a))(Vids(c1)) - s2t(a)(c1) / s2(a)(c1))
+                            End If
+                        Next
+                    End If
+                Next
             Next
 
             'short range contribution
@@ -623,18 +585,18 @@ Namespace PropertyPackages.Auxiliary
                 If cprops(i).IsIon Then
                     If cprops(i).Charge > 0 Then
                         'cation
-                        lngsr(i) = sa1 + sm1(i) + sm3(i)
+                        lngsr(i) = smc1(i) + smc2(i) + smc3(i)
                         lngsr(i) *= Abs(cprops(i).Charge)
                     ElseIf cprops(i).Charge < 0 Then
                         'anion
-                        lngsr(i) = sc1 + sm1(i) + sm2(i)
+                        lngsr(i) = sma1(i) + sma2(i) + smc3(i)
                         lngsr(i) *= Abs(cprops(i).Charge)
                     End If
                 ElseIf cprops(i).IsSalt Then
-                    'salt
+                    'salt, will be calculated by mean molal average
                 Else
                     'molecule
-                    lngsr(i) = s0(i) / s0t(i) + sm1(i) + sm2(i) + sm3(i)
+                    lngsr(i) = s0t(i) / s0(i) + sm1(i) + sm2(i) + sm3(i)
                 End If
             Next
 
