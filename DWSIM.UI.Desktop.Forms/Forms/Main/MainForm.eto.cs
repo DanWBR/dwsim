@@ -389,12 +389,6 @@ namespace DWSIM.UI
                 new Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
-            var aitem2 = new ButtonMenuItem { Text = "Open Classic UI", Shortcut = Keys.Alt | Keys.C };
-            aitem2.Click += (sender, e) =>
-            {
-                DWSIM.macOS.ClassicUILoader.Loader.Load();
-            };
-
             var hitem1 = new ButtonMenuItem { Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem1.Click += (sender, e) =>
             {
@@ -422,7 +416,7 @@ namespace DWSIM.UI
             // create menu
             Menu = new MenuBar
             {
-                ApplicationItems = { aitem1, aitem2 },
+                ApplicationItems = { aitem1 },
                 QuitItem = quitCommand,
                 HelpItems = { hitem1, hitem4, hitem2, hitem3 },
                 AboutItem = aboutCommand

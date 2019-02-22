@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.6 Update 12
+Version 5.7
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7
+
+- [NEW] Electrolyte NRTL model for Sour Gas and Amine systems
+- [NEW] Copy Flowsheet as image to clipboard
+- [CHG] Restored 'print flowsheet' function (Classic UI)
+- [FIX] Fixed mirrored characters on flowsheet objects
+- [FIX] Bug fixes
 
 Version 5.6 Update 12
 

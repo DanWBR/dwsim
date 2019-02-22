@@ -1,5 +1,7 @@
-Version 5.6 Update 12
+Version 5.7
 
-- [NEW] Change calculation order (Cross-Platform UI)
-- [NEW] User-Defined (Python) Flash Algorithm
-- [NEW] User can now override Unit Operation and Material Stream calculation routines using Python Scripts
+- [NEW] Electrolyte NRTL model for Sour Gas and Amine systems
+- [NEW] Copy Flowsheet as image to clipboard
+- [CHG] Restored 'print flowsheet' function (Classic UI)
+- [FIX] Fixed mirrored characters on flowsheet objects
+- [FIX] Bug fixes
