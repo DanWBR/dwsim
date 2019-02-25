@@ -20,6 +20,7 @@
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.ExtensionMethods
+Imports System.Linq
 
 Public Class FormBinEnv
 
@@ -457,6 +458,8 @@ Public Class FormBinEnv
                     Loop Until i = pxc.Count
                 End If
 
+                Dim n As Integer = New List(Of Integer)({vx1.Count, vx2.Count, vy1.Count, vy2.Count, vx1l1.Count, vy3.Count, vxs1.Count, vxc.Count}).Max
+
                 With Me.Grid1.Columns
                     .Add("[" & ppname & "] ""c1", "[" & ppname & "] " & "VLE x (" & c(0) & ")")
                     .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "VLE Tbub (" & su.temperature & ")")
@@ -474,7 +477,7 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c14", "[" & ppname & "] " & "CRIT T (" & su.temperature & ")")
                 End With
 
-                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(px.Count)
+                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(n)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
                     co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -482,7 +485,7 @@ Public Class FormBinEnv
                     co.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 Next
                 Dim j, k As Integer
-                Dim data(13, 1000) As String
+                Dim data(13, n) As String
                 j = 0
                 For Each d As Double In vx1
                     data(0, j) = vx1(j)
@@ -538,7 +541,7 @@ Public Class FormBinEnv
                             j = j + 1
                         Loop Until j = 14
                         k = k + 1
-                    Loop Until k = px.Count
+                    Loop Until k = n
                 End With
 
                 With Me.GraphControl.GraphPane
@@ -656,7 +659,9 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c4", "[" & ppname & "] " & "Pdew (" & su.pressure & ")")
                 End With
 
-                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(Math.Max(vx1.Count, vx2.Count))
+                Dim n As Integer = New List(Of Integer)({vx1.Count, vx2.Count, vy1.Count, vy2.Count, vx1l1.Count, vy3.Count}).Max
+
+                If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(n)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
                     co.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -690,7 +695,7 @@ Public Class FormBinEnv
                             j = j + 1
                         Loop Until j = 4
                         k = k + 1
-                    Loop Until k = Math.Max(vx1.Count, vx2.Count)
+                    Loop Until k = n
                 End With
 
                 With Me.GraphControl.GraphPane
