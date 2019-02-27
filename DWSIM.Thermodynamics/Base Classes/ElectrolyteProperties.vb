@@ -169,7 +169,11 @@ Namespace PropertyPackages.Auxiliary
                 MW += Vx(i) * cprops(i).Molar_Weight
             Next
 
-            Return HS / MW 'kJ/kg
+            If MW = 0.0 Then
+                Return 0.0
+            Else
+                Return HS / MW 'kJ/kg
+            End If
 
         End Function
 
@@ -203,7 +207,11 @@ Namespace PropertyPackages.Auxiliary
                 Next
             End If
 
-            If ExcessOnly Then Return Hex / MW Else Return H + Hex / MW 'kJ/kg
+            If MW = 0.0 Then
+                Return 0.0
+            Else
+                If ExcessOnly Then Return Hex / MW Else Return H + Hex / MW 'kJ/kg
+            End If
 
         End Function
 
@@ -234,7 +242,7 @@ Namespace PropertyPackages.Auxiliary
                 End If
             Next
 
-            Return Cp / MW 'kJ/kg
+            If MW = 0.0 Then Return 0.0 Else Return Cp / MW 'kJ/kg
 
         End Function
 
@@ -294,7 +302,7 @@ Namespace PropertyPackages.Auxiliary
                 MW += Vx(i) * cprops(i).Molar_Weight
             Next
 
-            Return MW / vol 'kg/m3
+            If MW = 0.0 Then Return 0.0 Else Return MW / vol 'kJ/kg
 
         End Function
 

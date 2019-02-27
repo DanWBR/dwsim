@@ -67,6 +67,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property CalculateChemicalEquilibria As Boolean = True
 
+        Public Property OptimizeInitialEstimates As Boolean = True
+
+        Public Property UseIPOPTSolver As Boolean = True
+
         Private Vx0 As Double()
 
         Private LoopVarF, LoopVarX As Double, LoopVarVz As Double(), LoopVarState As State
@@ -486,13 +490,35 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     IdealCalc = False
 
-                    Dim solver As New Simplex
-                    solver.Tolerance = Tolerance
-                    solver.MaxFunEvaluations = MaximumIterations
-                    x = solver.ComputeMin(AddressOf FunctionValue2N, variables)
+                    If UseIPOPTSolver Then
 
-                    If solver.FunEvaluations >= solver.MaxFunEvaluations Then
-                        Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
+                        Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
+
+                        Using problem As New Ipopt(iest.Length, lbound, ubound, 0, Nothing, Nothing,
+                           0, 0, AddressOf eval_f, AddressOf eval_g,
+                           AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                            problem.AddOption("tol", Tolerance)
+                            problem.AddOption("max_iter", MaximumIterations)
+                            problem.AddOption("mu_strategy", "adaptive")
+                            problem.AddOption("hessian_approximation", "limited-memory")
+                            status = problem.SolveProblem(iest, fx, Nothing, Nothing, Nothing, Nothing)
+                        End Using
+
+                        If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
+                            Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
+                        End If
+
+                    Else
+
+                        Dim solver As New Simplex
+                        solver.Tolerance = Tolerance
+                        solver.MaxFunEvaluations = MaximumIterations
+                        x = solver.ComputeMin(AddressOf FunctionValue2N, variables)
+
+                        If solver.FunEvaluations >= solver.MaxFunEvaluations Then
+                            Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
+                        End If
+
                     End If
 
                     ' check objective function value
@@ -544,6 +570,58 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
+        'IPOPT
+
+        Public Function eval_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef obj_value As Double) As Boolean
+            Dim fval As Double = FunctionValue2N(x)
+            obj_value = fval
+            Return True
+        End Function
+
+        Public Function eval_grad_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef grad_f As Double()) As Boolean
+            Dim g As Double() = FunctionGradient(x)
+            grad_f = g
+            Return True
+        End Function
+
+        Public Function eval_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByRef g As Double()) As Boolean
+            Return True
+        End Function
+
+        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(),
+         ByRef jCol As Integer(), ByRef values As Double()) As Boolean
+
+            Dim k As Integer
+
+            If values Is Nothing Then
+
+                Dim row(nele_jac - 1), col(nele_jac - 1) As Integer
+
+                k = 0
+                For i = 0 To m - 1
+                    row(i) = i
+                    row(i + m) = i
+                    col(i) = i
+                    col(i + m) = i + m
+                Next
+
+                iRow = row
+                jCol = col
+
+            Else
+
+                Dim res(nele_jac - 1) As Double
+
+                For i = 0 To nele_jac - 1
+                    res(i) = -1
+                Next
+
+                values = res
+
+            End If
+            Return True
+        End Function
+
         Private Function FunctionValue2N(ByVal x() As Double) As Double
 
             Dim i, j, nc As Integer
@@ -579,7 +657,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To N.Count - 1
                 For j = 0 To nc
                     If CompoundProperties(j).Name = ComponentIDs(i) Then
-                        Vx(j) = N(ComponentIDs(i))
+                        Vx(j) = N(ComponentIDs(i)) / N.Values.Sum
                         Exit For
                     End If
                 Next
@@ -618,6 +696,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim wden As Double = 0.0#
             If TypeOf proppack Is ExUNIQUACPropertyPackage Then
                 wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
+            ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
+                wden = CType(proppack, ElectrolyteNRTLPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
             End If
 
             i = 0
@@ -630,6 +710,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If TypeOf proppack Is ExUNIQUACPropertyPackage Then
                 activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vx.Clone, CompoundProperties)
+            ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
+                activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vx.Clone, CompoundProperties)
             End If
 
             If IdealCalc Then
@@ -675,40 +757,99 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End With
             Next
 
-            'If Double.IsNaN(f2) Or Double.IsInfinity(f2) Then f2 = Log(1000000.0)
+            If Double.IsNaN(f2) Or Double.IsInfinity(f2) Then
 
-            Dim fval As Double = (f1 - f2) ^ 2 + pen_val
+                Dim fval As Double = pen_val
 
-            ObjectiveFunctionHistory.Add(fval)
+                ObjectiveFunctionHistory.Add(fval)
 
-            Return fval
+                Return fval
+
+            Else
+
+                Dim fval As Double = (f1 - f2) ^ 2 + pen_val
+
+                ObjectiveFunctionHistory.Add(fval)
+
+                Return fval
+
+            End If
 
         End Function
 
-        Private Function FunctionGradient2N(ByVal x() As Double) As Double()
+        Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = Log(0.1)
+            Dim epsilon As Double = 0.0001
 
             Dim f1, f2 As Double
             Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
-            Dim i, j As Integer
+            Dim j, k As Integer
 
-            For i = 0 To x.Length - 1
-                For j = 0 To x.Length - 1
-                    If i <> j Then
-                        x1(j) = x(j)
-                        x2(j) = x(j)
-                    Else
-                        x1(j) = x(j) * (1 - epsilon)
-                        x2(j) = x(j) * (1 + epsilon)
-                    End If
+            For j = 0 To x.Length - 1
+                For k = 0 To x.Length - 1
+                    x1(k) = x(k)
+                    x2(k) = x(k)
                 Next
+                If x(j) <> 0.0# Then
+                    x1(j) = x(j) * (1.0# + epsilon)
+                    x2(j) = x(j) * (1.0# - epsilon)
+                Else
+                    x1(j) = x(j) + epsilon
+                    x2(j) = x(j) - epsilon
+                End If
                 f1 = FunctionValue2N(x1)
                 f2 = FunctionValue2N(x2)
-                g(i) = (f2 - f1) / (x2(i) - x1(i))
+                g(j) = (f2 - f1) / (x2(j) - x1(j))
             Next
 
             Return g
+
+        End Function
+
+        Private Function FunctionHessian(ByVal x() As Double) As Double()
+
+            Dim epsilon As Double = 0.001
+
+            Dim f2() As Double = Nothing
+            Dim f3() As Double = Nothing
+            Dim h((x.Length) * (x.Length) - 1), x2(x.Length - 1), x3(x.Length - 1) As Double
+            Dim m, k As Integer
+
+            m = 0
+            For i = 0 To x.Length - 1
+                For j = 0 To x.Length - 1
+                    If i <> j Then
+                        x2(j) = x(j)
+                        x3(j) = x(j)
+                    Else
+                        x2(j) = x(j) * (1 + epsilon)
+                        x3(j) = x(j) * (1 - epsilon)
+                    End If
+                Next
+                If Settings.EnableParallelProcessing Then
+
+                    Dim task1 As Task = New Task(Sub()
+                                                     f2 = FunctionGradient(x2)
+                                                 End Sub)
+                    Dim task2 As Task = New Task(Sub()
+                                                     f3 = FunctionGradient(x3)
+                                                 End Sub)
+                    task1.Start()
+                    task2.Start()
+                    Task.WaitAll(task1, task2)
+
+                Else
+                    f2 = FunctionGradient(x2)
+                    f3 = FunctionGradient(x3)
+                End If
+                For k2 = 0 To x.Length - 1
+                    h(m) = (f2(k2) - f3(k)) / (x2(i) - x3(i))
+                    If Double.IsNaN(h(m)) Then h(m) = 0.0#
+                    m += 1
+                Next
+            Next
+
+            Return h
 
         End Function
 

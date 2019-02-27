@@ -115,9 +115,16 @@ Namespace PropertyPackages.Auxiliary
             Dim Cp_Cv2 = Cp / Cv
 
             Dim tmp(2) As Double
-            tmp(0) = Cp_Cv2
-            tmp(1) = Cp / MMm
-            tmp(2) = Cv / MMm
+
+            If MMm > 0.0 Then
+                tmp(0) = Cp_Cv2
+                tmp(1) = Cp / MMm
+                tmp(2) = Cv / MMm
+            Else
+                tmp(0) = 0.0
+                tmp(1) = 0.0
+                tmp(2) = 0.0
+            End If
 
             CpCv = tmp
 
