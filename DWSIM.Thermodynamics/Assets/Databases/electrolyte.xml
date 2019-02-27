@@ -1655,4 +1655,22 @@
     <HydratedSalt>False</HydratedSalt>
     <Charge>1</Charge>
   </compound>
+  <compound>
+    <Name>Monoethanolamine Carbamate (ion)</Name>
+    <Formula>HOCH2CH2NHCOO-</Formula>
+    <MW>104.0846</MW>
+    <Ion>True</Ion>
+    <Salt>False</Salt>
+    <HydratedSalt>False</HydratedSalt>
+    <Charge>-1</Charge>
+  </compound>
+  <compound>
+    <Name>Diethanolamine Carbamate (ion)</Name>
+    <Formula>(HOCH2CH2)2NCOO-</Formula>
+    <MW>148.1372</MW>
+    <Ion>True</Ion>
+    <Salt>False</Salt>
+    <HydratedSalt>False</HydratedSalt>
+    <Charge>-1</Charge>
+  </compound>
 </compounds>
