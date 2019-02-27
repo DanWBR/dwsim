@@ -67,6 +67,20 @@ Namespace PropertyPackages.Auxiliary
         Private tau_HCl_A12 As New List(Of Double)
         Private tau_HCl_A21 As New List(Of Double)
 
+        Public Class ENRTLData
+
+            Property ConstantProperties As List(Of Interfaces.ICompoundConstantProperties)
+
+            Property Vz As Double()
+
+            Property Vids As String()
+
+            Property T As Double
+
+            Property X As Double()
+
+        End Class
+
         Public Property InteractionParameters() As Dictionary(Of String, Dictionary(Of String, ElectrolyteNRTL_IPData))
             Get
                 Return _ip
@@ -243,6 +257,57 @@ Namespace PropertyPackages.Auxiliary
 
         End Sub
 
+        Function GetSaltFormula(cprops As List(Of Interfaces.ICompoundConstantProperties), cation As String, anion As String) As String
+
+            Dim formula = ""
+
+            For i As Integer = 0 To cprops.Count - 1
+                If cprops(i).PositiveIon = cation And cprops(i).NegativeIon = anion Then
+                    formula = cprops(i).Formula
+                    Exit For
+                End If
+            Next
+
+            Return formula
+
+        End Function
+
+        Function IsSalt(data As ENRTLData, i As Integer) As Boolean
+
+            Return data.ConstantProperties(i).IsSalt
+
+        End Function
+
+        Function IsIon(data As ENRTLData, i As Integer) As Boolean
+
+            Return data.ConstantProperties(i).Charge <> 0
+
+        End Function
+
+        Function IsCation(data As ENRTLData, i As Integer) As Boolean
+
+            Return data.ConstantProperties(i).Charge > 0
+
+        End Function
+
+        Function IsAnion(data As ENRTLData, i As Integer) As Boolean
+
+            Return data.ConstantProperties(i).Charge < 0
+
+        End Function
+
+        Function IsMolecule(data As ENRTLData, i As Integer) As Boolean
+
+            If Not data.ConstantProperties(i).IsSalt And
+                Not data.ConstantProperties(i).IsHydratedSalt And
+                Not data.ConstantProperties(i).IsIon Then
+                Return True
+            Else
+                Return False
+            End If
+
+        End Function
+
         Function GetNaOH_A12(T As Double) As Double
 
             Dim ip As New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(T_NaOH.ToArray, tau_NaOH_A12.ToArray)
@@ -271,15 +336,512 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
+        Function TAU_k_m(data As ENRTLData, k As String, m As String) As Double
+
+            If k = m Then Return 0.0
+
+            Dim tau As Double = 0.0
+
+            Dim Vids As String() = data.Vids
+
+            Dim T As Double = data.T
+
+            If IsIon(data, Vids.ToList.IndexOf(k)) And IsMolecule(data, Vids.ToList.IndexOf(m)) Then
+                'calculate tau[a/c]m
+                Dim i As Integer = 0
+                Dim sum1 As Double = 0
+                Dim sum2 As Double = 0
+                For i = 0 To data.ConstantProperties.Count - 1
+                    If IsCation(data, Vids.ToList.IndexOf(k)) Then
+                        If IsAnion(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, k, Vids(i))
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey((m)) Then
+                                    tau = Me.InteractionParameters(s1)((m)).A12 + Me.InteractionParameters(s1)((m)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey((m)) Then
+                                        If Me.InteractionParameters((m)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters((m))(s1).A21 + Me.InteractionParameters((m))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey((m)) Then
+                                If Me.InteractionParameters((m)).ContainsKey((k)) Then
+                                    tau = Me.InteractionParameters((m))(s1).A21 + Me.InteractionParameters((m))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    ElseIf IsAnion(data, Vids.ToList.IndexOf(k)) Then
+                        If IsCation(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, Vids(i), k)
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey((m)) Then
+                                    tau = Me.InteractionParameters(s1)((m)).A12 + Me.InteractionParameters(s1)((m)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey((m)) Then
+                                        If Me.InteractionParameters((m)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters((m))(s1).A21 + Me.InteractionParameters((m))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey((m)) Then
+                                If Me.InteractionParameters((m)).ContainsKey((k)) Then
+                                    tau = Me.InteractionParameters((m))(s1).A21 + Me.InteractionParameters((m))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    End If
+                Next
+                tau = sum1 / sum2
+            ElseIf IsIon(data, Vids.ToList.IndexOf(m)) And IsMolecule(data, Vids.ToList.IndexOf(k)) Then
+                'calculate tau[c/a]
+                Dim i As Integer = 0
+                Dim sum1 As Double = 0
+                Dim sum2 As Double = 0
+                For i = 0 To data.ConstantProperties.Count - 1
+                    If IsCation(data, Vids.ToList.IndexOf(m)) Then
+                        If IsAnion(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, m, i)
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey((k)) Then
+                                    tau = Me.InteractionParameters(s1)((k)).A12 + Me.InteractionParameters(s1)((k)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey((k)) Then
+                                        If Me.InteractionParameters((k)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters((k))(s1).A21 + Me.InteractionParameters((k))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey((k)) Then
+                                If Me.InteractionParameters((k)).ContainsKey(s1) Then
+                                    tau = Me.InteractionParameters((k))(s1).A21 + Me.InteractionParameters((k))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    ElseIf IsAnion(data, Vids.ToList.IndexOf(m)) Then
+                        If IsCation(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, i, m)
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey((k)) Then
+                                    tau = Me.InteractionParameters(s1)((k)).A12 + Me.InteractionParameters(s1)((k)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey((k)) Then
+                                        If Me.InteractionParameters((k)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters((k))(s1).A21 + Me.InteractionParameters((k))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey((k)) Then
+                                If Me.InteractionParameters((k)).ContainsKey(s1) Then
+                                    tau = Me.InteractionParameters((k))(s1).A21 + Me.InteractionParameters((k))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    End If
+                Next
+                tau = sum1 / sum2
+            Else
+                If Me.InteractionParameters.ContainsKey((k)) Then
+                    If Me.InteractionParameters((k)).ContainsKey((m)) Then
+                        tau = Me.InteractionParameters((k))((m)).A12 + Me.InteractionParameters((k))((m)).B12 / T
+                    Else
+                        If Me.InteractionParameters.ContainsKey((m)) Then
+                            If Me.InteractionParameters((m)).ContainsKey((k)) Then
+                                tau = Me.InteractionParameters((m))((k)).A21 + Me.InteractionParameters((m))((k)).B21 / T
+                            End If
+                        End If
+                    End If
+                ElseIf Me.InteractionParameters.ContainsKey((m)) Then
+                    If Me.InteractionParameters((m)).ContainsKey((k)) Then
+                        tau = Me.InteractionParameters((m))((k)).A21 + Me.InteractionParameters((m))((k)).B21 / T
+                    End If
+                End If
+            End If
+
+            If (k) = "H2O" Then
+                If (m) = "NaOH" Or (m) = "Na+" Or (m) = "OH-" Then
+                    tau = GetNaOH_A12(T)
+                End If
+                If (m) = "HCl" Or (m) = "H+" Or (m) = "Cl-" Then
+                    tau = GetHCl_A12(T)
+                End If
+            End If
+            If (m) = "H2O" Then
+                If (k) = "NaOH" Or (k) = "Na+" Or (k) = "OH-" Then
+                    tau = GetNaOH_A21(T)
+                End If
+                If (k) = "HCl" Or (k) = "H+" Or (k) = "Cl-" Then
+                    tau = GetHCl_A21(T)
+                End If
+            End If
+
+            Return tau
+
+        End Function
+
+        Function TAU_k_m(data As ENRTLData, k As Integer, m As Integer) As Double
+
+            If k = m Then Return 0.0
+
+            Dim tau As Double = 0.0
+
+            Dim Vids As String() = data.Vids
+
+            Dim T As Double = data.T
+
+            If IsIon(data, k) And IsMolecule(data, m) Then
+                'calculate tau[a/c]m
+                Dim i As Integer = 0
+                Dim sum1 As Double = 0
+                Dim sum2 As Double = 0
+                For i = 0 To data.ConstantProperties.Count - 1
+                    If IsCation(data, k) Then
+                        If IsAnion(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(k), data.Vids(i))
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey(Vids(m)) Then
+                                    tau = Me.InteractionParameters(s1)(Vids(m)).A12 + Me.InteractionParameters(s1)(Vids(m)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                                        If Me.InteractionParameters(Vids(m)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters(Vids(m))(s1).A21 + Me.InteractionParameters(Vids(m))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                                If Me.InteractionParameters(Vids(m)).ContainsKey(Vids(k)) Then
+                                    tau = Me.InteractionParameters(Vids(m))(s1).A21 + Me.InteractionParameters(Vids(m))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    ElseIf IsAnion(data, k) Then
+                        If IsCation(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(i), data.Vids(k))
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey(Vids(m)) Then
+                                    tau = Me.InteractionParameters(s1)(Vids(m)).A12 + Me.InteractionParameters(s1)(Vids(m)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                                        If Me.InteractionParameters(Vids(m)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters(Vids(m))(s1).A21 + Me.InteractionParameters(Vids(m))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                                If Me.InteractionParameters(Vids(m)).ContainsKey(Vids(k)) Then
+                                    tau = Me.InteractionParameters(Vids(m))(s1).A21 + Me.InteractionParameters(Vids(m))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    End If
+                Next
+                tau = sum1 / sum2
+            ElseIf IsIon(data, m) And IsMolecule(data, k) Then
+                'calculate tau[c/a]
+                Dim i As Integer = 0
+                Dim sum1 As Double = 0
+                Dim sum2 As Double = 0
+                For i = 0 To data.ConstantProperties.Count - 1
+                    If IsCation(data, m) Then
+                        If IsAnion(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(m), data.Vids(i))
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey(Vids(k)) Then
+                                    tau = Me.InteractionParameters(s1)(Vids(k)).A12 + Me.InteractionParameters(s1)(Vids(k)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey(Vids(k)) Then
+                                        If Me.InteractionParameters(Vids(k)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters(Vids(k))(s1).A21 + Me.InteractionParameters(Vids(k))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey(Vids(k)) Then
+                                If Me.InteractionParameters(Vids(k)).ContainsKey(s1) Then
+                                    tau = Me.InteractionParameters(Vids(k))(s1).A21 + Me.InteractionParameters(Vids(k))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    ElseIf IsAnion(data, m) Then
+                        If IsCation(data, i) Then
+                            Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(i), data.Vids(m))
+                            If Me.InteractionParameters.ContainsKey(s1) Then
+                                If Me.InteractionParameters(s1).ContainsKey(Vids(k)) Then
+                                    tau = Me.InteractionParameters(s1)(Vids(k)).A12 + Me.InteractionParameters(s1)(Vids(k)).B12 / T
+                                Else
+                                    If Me.InteractionParameters.ContainsKey(Vids(k)) Then
+                                        If Me.InteractionParameters(Vids(k)).ContainsKey(s1) Then
+                                            tau = Me.InteractionParameters(Vids(k))(s1).A21 + Me.InteractionParameters(Vids(k))(s1).B21 / T
+                                        End If
+                                    End If
+                                End If
+                            ElseIf Me.InteractionParameters.ContainsKey(Vids(k)) Then
+                                If Me.InteractionParameters(Vids(k)).ContainsKey(s1) Then
+                                    tau = Me.InteractionParameters(Vids(k))(s1).A21 + Me.InteractionParameters(Vids(k))(s1).B21 / T
+                                End If
+                            End If
+                            sum1 += data.X(i) * tau
+                            sum2 += data.X(i)
+                        End If
+                    End If
+                Next
+                tau = sum1 / sum2
+            Else
+                If Me.InteractionParameters.ContainsKey(Vids(k)) Then
+                    If Me.InteractionParameters(Vids(k)).ContainsKey(Vids(m)) Then
+                        tau = Me.InteractionParameters(Vids(k))(Vids(m)).A12 + Me.InteractionParameters(Vids(k))(Vids(m)).B12 / T
+                    Else
+                        If Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                            If Me.InteractionParameters(Vids(m)).ContainsKey(Vids(k)) Then
+                                tau = Me.InteractionParameters(Vids(m))(Vids(k)).A21 + Me.InteractionParameters(Vids(m))(Vids(k)).B21 / T
+                            End If
+                        End If
+                    End If
+                ElseIf Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                    If Me.InteractionParameters(Vids(m)).ContainsKey(Vids(k)) Then
+                        tau = Me.InteractionParameters(Vids(m))(Vids(k)).A21 + Me.InteractionParameters(Vids(m))(Vids(k)).B21 / T
+                    End If
+                End If
+            End If
+
+            If Vids(k) = "H2O" Then
+                If Vids(m) = "NaOH" Or Vids(m) = "Na+" Or Vids(m) = "OH-" Then
+                    tau = GetNaOH_A12(T)
+                End If
+                If Vids(m) = "HCl" Or Vids(m) = "H+" Or Vids(m) = "Cl-" Then
+                    tau = GetHCl_A12(T)
+                End If
+            End If
+            If Vids(m) = "H2O" Then
+                If Vids(k) = "NaOH" Or Vids(k) = "Na+" Or Vids(k) = "OH-" Then
+                    tau = GetNaOH_A21(T)
+                End If
+                If Vids(k) = "HCl" Or Vids(k) = "H+" Or Vids(k) = "Cl-" Then
+                    tau = GetHCl_A21(T)
+                End If
+            End If
+
+            Return tau
+
+        End Function
+
+        Function TAU_ki_ji(data As ENRTLData, k As Integer, i As Integer, j As Integer) As Double
+
+            Return TAU_k_m(data, i, k) - TAU_ca_m(data, k, j, i) + TAU_m_ca(data, k, j, i)
+
+        End Function
+
+        Function TAU_m_ca(data As ENRTLData, m As Integer, c As Integer, a As Integer) As Double
+
+            If IsAnion(data, a) And IsCation(data, c) Then
+
+                Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(c), data.Vids(a))
+
+                If s1 = "" Then
+                    Return TAU_k_m(data, data.Vids(m), data.Vids(c) + "," + data.Vids(a))
+                Else
+                    Return TAU_k_m(data, data.Vids(m), s1)
+                End If
+
+            ElseIf IsCation(data, a) And IsAnion(data, c) Then
+
+                Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(a), data.Vids(c))
+
+                If s1 = "" Then
+                    Return TAU_k_m(data, data.Vids(m), data.Vids(a) + "," + data.Vids(c))
+                Else
+                    Return TAU_k_m(data, data.Vids(m), s1)
+                End If
+
+            Else
+
+                'undefined
+
+                Return 0.0
+
+            End If
+
+        End Function
+
+        Function TAU_ca_m(data As ENRTLData, m As Integer, c As Integer, a As Integer) As Double
+
+            If IsAnion(data, a) And IsCation(data, c) Then
+
+                Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(c), data.Vids(a))
+
+                If s1 = "" Then
+                    Return TAU_k_m(data, data.Vids(c) + "," + data.Vids(a), data.Vids(m))
+                Else
+                    Return TAU_k_m(data, s1, data.Vids(m))
+                End If
+
+            ElseIf IsCation(data, a) And IsAnion(data, c) Then
+
+                Dim s1 = GetSaltFormula(data.ConstantProperties, data.Vids(a), data.Vids(c))
+
+                If s1 = "" Then
+                    Return TAU_k_m(data, data.Vids(a) + "," + data.Vids(c), data.Vids(m))
+                Else
+                    Return TAU_k_m(data, s1, data.Vids(m))
+                End If
+
+            Else
+
+                'undefined
+
+                Return 0.0
+
+            End If
+
+        End Function
+
+        Function alpha_k_m(data As ENRTLData, k As Integer, m As Integer) As Double
+
+            If k = m Then Return 0.0
+
+            Dim alpha12 As Double = 0.0
+
+            Dim Vids As String() = data.Vids
+
+            If Me.InteractionParameters.ContainsKey(Vids(k)) Then
+                If Me.InteractionParameters(Vids(k)).ContainsKey(Vids(m)) Then
+                    alpha12 = Me.InteractionParameters(Vids(k))(Vids(m)).alpha12
+                Else
+                    If Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                        If Me.InteractionParameters(Vids(m)).ContainsKey(Vids(k)) Then
+                            alpha12 = Me.InteractionParameters(Vids(m))(Vids(k)).alpha12
+                        End If
+                    End If
+                End If
+            ElseIf Me.InteractionParameters.ContainsKey(Vids(m)) Then
+                If Me.InteractionParameters(Vids(m)).ContainsKey(Vids(k)) Then
+                    alpha12 = Me.InteractionParameters(Vids(m))(Vids(k)).alpha12
+                End If
+            End If
+
+            If Vids(k) = "H2O" Then
+                If Vids(m) = "NaOH" Or Vids(m) = "Na+" Or Vids(m) = "OH-" Then
+                    alpha12 = 0.03
+                End If
+                If Vids(m) = "HCl" Or Vids(m) = "H+" Or Vids(m) = "Cl-" Then
+                    alpha12 = 0.03
+                End If
+            End If
+            If Vids(m) = "H2O" Then
+                If Vids(k) = "NaOH" Or Vids(k) = "Na+" Or Vids(k) = "OH-" Then
+                    alpha12 = 0.03
+                End If
+                If Vids(k) = "HCl" Or Vids(k) = "H+" Or Vids(k) = "Cl-" Then
+                    alpha12 = 0.03
+                End If
+            End If
+
+            Return alpha12
+
+        End Function
+
+        Function alpha_ki_ji(data As ENRTLData, k As Integer, i As Integer, j As Integer) As Double
+
+            Return 0.2
+
+        End Function
+
+        Function alpha_m_ca(data As ENRTLData, m As Integer, c As Integer, a As Integer) As Double
+
+            Return 0.2
+
+        End Function
+
+        Function alpha_ca_m(data As ENRTLData, m As Integer, c As Integer, a As Integer) As Double
+
+            Return 0.2
+
+        End Function
+
+        Function G_k_m(data As ENRTLData, k As Integer, m As Integer) As Double
+
+            If k = m Then Return 1.0
+
+            If IsIon(data, k) And IsMolecule(data, m) Then
+                'calculate G[a/c]m
+                Dim i As Integer = 0
+                Dim sum1 As Double = 0
+                Dim sum2 As Double = 0
+                For i = 0 To data.ConstantProperties.Count - 1
+                    If IsCation(data, k) Then
+                        If IsAnion(data, i) Then
+                            sum1 += data.X(i) * G_ca_m(data, m, k, i)
+                            sum2 += data.X(i)
+                        End If
+                    ElseIf IsAnion(data, k) Then
+                        If IsCation(data, i) Then
+                            sum1 += data.X(i) * G_ca_m(data, m, i, k)
+                            sum2 += data.X(i)
+                        End If
+                    End If
+                Next
+                Return sum1 / sum2
+            ElseIf IsIon(data, m) And IsMolecule(data, k) Then
+                'calculate Gm[c/a]
+                Dim i As Integer = 0
+                Dim sum1 As Double = 0
+                Dim sum2 As Double = 0
+                For i = 0 To data.ConstantProperties.Count - 1
+                    If IsCation(data, m) Then
+                        If IsAnion(data, i) Then
+                            sum1 += data.X(i) * G_ca_m(data, k, m, i)
+                            sum2 += data.X(i)
+                        End If
+                    ElseIf IsAnion(data, m) Then
+                        If IsCation(data, i) Then
+                            sum1 += data.X(i) * G_ca_m(data, k, i, m)
+                            sum2 += data.X(i)
+                        End If
+                    End If
+                Next
+                Return sum1 / sum2
+            Else
+                Return Exp(-alpha_k_m(data, k, m) * TAU_k_m(data, k, m))
+            End If
+
+        End Function
+
+        Function G_ki_ji(data As ENRTLData, k As Integer, i As Integer, j As Integer) As Double
+
+            Return Exp(-alpha_ki_ji(data, k, i, j) * TAU_ki_ji(data, k, i, j))
+
+        End Function
+
+        Function G_m_ca(data As ENRTLData, m As Integer, c As Integer, a As Integer) As Double
+
+            Return Exp(-alpha_m_ca(data, m, c, a) * TAU_m_ca(data, m, c, a))
+
+        End Function
+
+        Function G_ca_m(data As ENRTLData, m As Integer, c As Integer, a As Integer) As Double
+
+            Return Exp(-alpha_ca_m(data, m, c, a) * TAU_ca_m(data, m, c, a))
+
+        End Function
+
         Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double()
 
             Dim n As Integer = Vx.Length - 1
 
             Dim X(n) As Double
-
-            Dim G As New Dictionary(Of String, Dictionary(Of String, Double))
-            Dim tau As New Dictionary(Of String, Dictionary(Of String, Double))
-            Dim alpha12 As New Dictionary(Of String, Dictionary(Of String, Double))
 
             Dim i, j, k, m1, a, a1, c, c1, wi As Integer
 
@@ -400,85 +962,6 @@ Namespace PropertyPackages.Auxiliary
 
             'short range term (eNRTL)
 
-            'initialize tau and alpha12
-
-            For i = 0 To n
-                tau.Add(Vids(i), New Dictionary(Of String, Double))
-                alpha12.Add(Vids(i), New Dictionary(Of String, Double))
-                For j = 0 To n
-                    tau(Vids(i)).Add(Vids(j), 0.0)
-                    alpha12(Vids(i)).Add(Vids(j), 0.2)
-                Next
-            Next
-
-            i = 0
-            Do
-                j = 0
-                Do
-                    If Me.InteractionParameters.ContainsKey(Vids(i)) Then
-                        If Me.InteractionParameters(Vids(i)).ContainsKey(Vids(j)) Then
-                            tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(i))(Vids(j)).A12 + Me.InteractionParameters(Vids(i))(Vids(j)).B12 / T
-                            tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(i))(Vids(j)).A21 + Me.InteractionParameters(Vids(i))(Vids(j)).B21 / T
-                            alpha12(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(i))(Vids(j)).alpha12
-                        Else
-                            If Me.InteractionParameters.ContainsKey(Vids(j)) Then
-                                If Me.InteractionParameters(Vids(j)).ContainsKey(Vids(i)) Then
-                                    tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).A21 + Me.InteractionParameters(Vids(i))(Vids(j)).B21 / T
-                                    tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(j))(Vids(i)).A12 + Me.InteractionParameters(Vids(i))(Vids(j)).B12 / T
-                                    alpha12(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).alpha12
-                                End If
-                            End If
-                        End If
-                    ElseIf Me.InteractionParameters.ContainsKey(Vids(j)) Then
-                        If Me.InteractionParameters(Vids(j)).ContainsKey(Vids(i)) Then
-                            tau(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).A21 + Me.InteractionParameters(Vids(i))(Vids(j)).B21 / T
-                            tau(Vids(j))(Vids(i)) = Me.InteractionParameters(Vids(j))(Vids(i)).A12 + Me.InteractionParameters(Vids(i))(Vids(j)).B12 / T
-                            alpha12(Vids(i))(Vids(j)) = Me.InteractionParameters(Vids(j))(Vids(i)).alpha12
-                        End If
-                    End If
-                    j = j + 1
-                Loop Until j = n + 1
-                i = i + 1
-            Loop Until i = n + 1
-
-            For i = 0 To n
-                For j = 0 To n
-                    If Vids(i) = "H2O" Then
-                        If Vids(j) = "NaOH" Or Vids(j) = "Na+" Or Vids(j) = "OH-" Then
-                            tau(Vids(i))(Vids(j)) = GetNaOH_A21(T)
-                            tau(Vids(j))(Vids(i)) = GetNaOH_A12(T)
-                            alpha12(Vids(i))(Vids(j)) = 0.03
-                            alpha12(Vids(j))(Vids(i)) = 0.03
-                        End If
-                        If Vids(j) = "HCl" Or Vids(j) = "H+" Or Vids(j) = "Cl-" Then
-                            tau(Vids(i))(Vids(j)) = GetHCl_A21(T)
-                            tau(Vids(j))(Vids(i)) = GetHCl_A12(T)
-                            alpha12(Vids(i))(Vids(j)) = 0.03
-                            alpha12(Vids(j))(Vids(i)) = 0.03
-                        End If
-                    End If
-                Next
-            Next
-
-            For i = 0 To n
-                If cprops(i).IsIon Then
-                    For m1 = 0 To n
-                        If Not cprops(m1).IsSalt And cprops(m1).Charge = 0.0 Then
-                            'i = ion
-                            'm1 = molecule
-                            For j = 0 To n
-                                If cprops(j).PositiveIon <> "" Then
-                                    If cprops(j).PositiveIon = cprops(i).Formula Or cprops(j).NegativeIon = cprops(i).Formula Then
-                                        tau(Vids(i))(Vids(m1)) = tau(Vids(j))(Vids(m1))
-                                        tau(Vids(m1))(Vids(i)) = tau(Vids(m1))(Vids(j))
-                                    End If
-                                End If
-                            Next
-                        End If
-                    Next
-                End If
-            Next
-
             'local concentrations
 
             For i = 0 To n
@@ -489,12 +972,11 @@ Namespace PropertyPackages.Auxiliary
                 End If
             Next
 
-            For i = 0 To n
-                G.Add(Vids(i), New Dictionary(Of String, Double))
-                For j = 0 To n
-                    G(Vids(i)).Add(Vids(j), Exp(-alpha12(Vids(i))(Vids(j)) * tau(Vids(i))(Vids(j))))
-                Next
-            Next
+            'mixture data
+
+            Dim edata As New ENRTLData With {.ConstantProperties = cprops, .Vz = Vx, .X = X, .Vids = Vids, .T = T}
+
+            'c/a sums
 
             Dim sa, sc As Double
 
@@ -530,8 +1012,8 @@ Namespace PropertyPackages.Auxiliary
                 s0(m1) = 0
                 s0t(m1) = 0
                 For k = 0 To n
-                    s0(m1) += X(k) * G(Vids(k))(Vids(m1))
-                    s0t(m1) += X(k) * G(Vids(k))(Vids(m1)) * tau(Vids(k))(Vids(m1))
+                    s0(m1) += X(k) * G_k_m(edata, k, m1)
+                    s0t(m1) += X(k) * G_k_m(edata, k, m1) * TAU_k_m(edata, k, m1)
                 Next
             Next
 
@@ -548,8 +1030,8 @@ Namespace PropertyPackages.Auxiliary
                     s1t(c)(a1) = 0
                     For k = 0 To n
                         If k <> c Then
-                            s1(c)(a1) += X(k) * G(Vids(k))(Vids(c))
-                            s1t(c)(a1) += X(k) * G(Vids(k))(Vids(c)) * tau(Vids(k))(Vids(c))
+                            s1(c)(a1) += X(k) * G_ki_ji(edata, k, c, a1)
+                            s1t(c)(a1) += X(k) * G_ki_ji(edata, k, c, a1) * TAU_ki_ji(edata, k, c, a1)
                         End If
                     Next
                 Next
@@ -568,8 +1050,8 @@ Namespace PropertyPackages.Auxiliary
                     s2t(a)(c1) = 0
                     For k = 0 To n
                         If k <> a Then
-                            s2(a)(c1) += X(k) * G(Vids(k))(Vids(a))
-                            s2t(a)(c1) += X(k) * G(Vids(k))(Vids(a)) * tau(Vids(k))(Vids(a))
+                            s2(a)(c1) += X(k) * G_ki_ji(edata, k, a, c1)
+                            s2t(a)(c1) += X(k) * G_ki_ji(edata, k, a, c1) * TAU_ki_ji(edata, k, a, c1)
                         End If
                     Next
                 Next
@@ -581,14 +1063,14 @@ Namespace PropertyPackages.Auxiliary
                 sm1(m) = 0.0
                 For m1 = 0 To n
                     If cprops(m1).Charge = 0 Then
-                        sm1(m) += X(m1) * G(Vids(m))(Vids(m1)) / s0(m1) * (tau(Vids(m))(Vids(m1)) - s0t(m1) / s0(m1))
+                        sm1(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
                     End If
                 Next
                 sma1(m) = 0.0
                 For c1 = 0 To n
                     For k = 0 To n
                         If k <> m And cprops(m).Charge < 0 And cprops(c1).Charge > 0 Then
-                            sma1(m) += x0(c1) * X(k) * G(Vids(k))(Vids(c1)) * tau(Vids(k))(Vids(c1)) / s2(m)(c1)
+                            sma1(m) += x0(c1) * X(k) * G_ki_ji(edata, k, c1, m) * TAU_ki_ji(edata, k, c1, m) / s2(m)(c1)
                         End If
                     Next
                 Next
@@ -596,7 +1078,7 @@ Namespace PropertyPackages.Auxiliary
                 For a1 = 0 To n
                     For k = 0 To n
                         If k <> m And cprops(m).Charge > 0 And cprops(a1).Charge < 0 Then
-                            smc1(m) += x0(a1) * X(k) * G(Vids(k))(Vids(a1)) * tau(Vids(k))(Vids(a1)) / s2(m)(a1)
+                            smc1(m) += x0(a1) * X(k) * G_ki_ji(edata, k, a1, m) * TAU_ki_ji(edata, k, a1, m) / s2(m)(a1)
                         End If
                     Next
                 Next
@@ -605,7 +1087,7 @@ Namespace PropertyPackages.Auxiliary
                     If cprops(c).Charge > 0 Then
                         For a1 = 0 To n
                             If cprops(a1).Charge < 0 Then
-                                sm2(m) += x0(a1) * X(c) * G(Vids(m))(Vids(a1)) / s1(c)(a1) * (tau(Vids(m))(Vids(a1)) - s1t(c)(a1) / s1(c)(a1))
+                                sm2(m) += x0(a1) * X(c) * G_ki_ji(edata, m, c, a1) / s1(c)(a1) * (TAU_ki_ji(edata, m, c, a1) - s1t(c)(a1) / s1(c)(a1))
                             End If
                         Next
                     End If
@@ -613,13 +1095,13 @@ Namespace PropertyPackages.Auxiliary
                 sma2(m) = 0.0
                 For m1 = 0 To n
                     If cprops(m).Charge < 0 And cprops(m1).Charge = 0 Then
-                        sma2(m) += X(m1) * G(Vids(m))(Vids(m1)) / s0(m1) * (tau(Vids(m))(Vids(m1)) - s0t(m1) / s0(m1))
+                        sma2(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
                     End If
                 Next
                 smc2(m) = 0.0
                 For m1 = 0 To n
                     If cprops(m).Charge > 0 And cprops(m1).Charge = 0 Then
-                        smc2(m) += X(m1) * G(Vids(m))(Vids(m1)) / s0(m1) * (tau(Vids(m))(Vids(m1)) - s0t(m1) / s0(m1))
+                        smc2(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
                     End If
                 Next
                 sm3(m) = 0.0
@@ -627,7 +1109,7 @@ Namespace PropertyPackages.Auxiliary
                     If cprops(a).Charge < 0 Then
                         For c1 = 0 To n
                             If cprops(c1).Charge > 0 Then
-                                sm3(m) += x0(c1) * X(a) * G(Vids(m))(Vids(c1)) / s2(a)(c1) * (tau(Vids(m))(Vids(c1)) - s2t(a)(c1) / s2(a)(c1))
+                                sm3(m) += x0(c1) * X(a) * G_ki_ji(edata, m, c1, a) / s2(a)(c1) * (TAU_ki_ji(edata, m, c1, a) - s2t(a)(c1) / s2(a)(c1))
                             End If
                         Next
                     End If
@@ -637,7 +1119,7 @@ Namespace PropertyPackages.Auxiliary
                     If cprops(c).Charge > 0 Then
                         For a1 = 0 To n
                             If cprops(a1).Charge < 0 Then
-                                sma3(m) += x0(a1) * X(c) * G(Vids(c))(Vids(a1)) / s2(c)(a1) * (tau(Vids(c))(Vids(a1)) - s2t(c)(a1) / s2(c)(a1))
+                                sma3(m) += x0(a1) * X(c) * G_ki_ji(edata, m, c, a1) / s2(c)(a1) * (TAU_ki_ji(edata, m, c, a1) - s2t(c)(a1) / s2(c)(a1))
                             End If
                         Next
                     End If
@@ -647,7 +1129,7 @@ Namespace PropertyPackages.Auxiliary
                     If cprops(a).Charge < 0 Then
                         For c1 = 0 To n
                             If cprops(c1).Charge > 0 Then
-                                smc3(m) += x0(c1) * X(a) * G(Vids(a))(Vids(c1)) / s2(a)(c1) * (tau(Vids(a))(Vids(c1)) - s2t(a)(c1) / s2(a)(c1))
+                                smc3(m) += x0(c1) * X(a) * G_ki_ji(edata, m, c1, a) / s2(a)(c1) * (TAU_ki_ji(edata, m, c1, a) - s2t(a)(c1) / s2(a)(c1))
                             End If
                         Next
                     End If
