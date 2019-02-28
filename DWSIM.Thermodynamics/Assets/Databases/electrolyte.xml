@@ -1535,6 +1535,21 @@
   <CpAq_b>0</CpAq_b>
   <CpAq_c>0</CpAq_c>
 </compound>
+  <compound>
+    <Name>Hydronium</Name>
+    <Formula>H3O+</Formula>
+    <MW>19.02</MW>
+    <Ion>True</Ion>
+    <Salt>False</Salt>
+    <HydratedSalt>False</HydratedSalt>
+    <Charge>+1</Charge>
+    <DelGF_kJ_mol>0</DelGF_kJ_mol>
+    <DelHf_kJ_mol>0</DelHf_kJ_mol>
+    <Cp_J_mol_K>0</Cp_J_mol_K>
+    <CpAq_a>0</CpAq_a>
+    <CpAq_b>0</CpAq_b>
+    <CpAq_c>0</CpAq_c>
+  </compound>
 <compound>
   <Name>Hydroxide</Name>
   <Formula>OH-</Formula>
@@ -1640,7 +1655,7 @@
   <compound>
     <Name>Protonated Monoethanolamine (ion)</Name>
     <Formula>HOCH2CH2NH3+</Formula>
-    <MW>62.0831</MW>
+    <MW>62.09</MW>
     <Ion>True</Ion>
     <Salt>False</Salt>
     <HydratedSalt>False</HydratedSalt>
@@ -1649,14 +1664,14 @@
   <compound>
     <Name>Protonated Diethanolamine (ion)</Name>
     <Formula>(HOCH2CH2)2NH2+</Formula>
-    <MW>106.136</MW>
+    <MW>106.14</MW>
     <Ion>True</Ion>
     <Salt>False</Salt>
     <HydratedSalt>False</HydratedSalt>
     <Charge>1</Charge>
   </compound>
   <compound>
-    <Name>Monoethanolamine Carbamate (ion)</Name>
+    <Name>Ethanolamine Carbamate (ion)</Name>
     <Formula>HOCH2CH2NHCOO-</Formula>
     <MW>104.0846</MW>
     <Ion>True</Ion>

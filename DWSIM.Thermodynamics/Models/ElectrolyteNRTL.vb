@@ -268,6 +268,9 @@ Namespace PropertyPackages.Auxiliary
                 End If
             Next
 
+            If formula = "" And cation = "H3O+" And anion = "OH-" Then formula = "H2O"
+            If formula = "" And cation = "H+" And anion = "OH-" Then formula = "H2O"
+
             Return formula
 
         End Function
