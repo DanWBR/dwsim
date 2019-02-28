@@ -315,6 +315,7 @@
     </Compile>
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\ElectrolyteNRTL.vb" />
+    <Compile Include="Models\PCSAFT.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
