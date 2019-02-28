@@ -248,9 +248,9 @@ Namespace GraphicObjects.Tables
                                 propval = pval0.ToString
                             End If
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            canvas.DrawText(propstring, X + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
-                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propstring, X + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             n += 1
                         Next
 
@@ -441,9 +441,9 @@ Namespace GraphicObjects.Tables
                                 propval = pval0.ToString
                             End If
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            canvas.DrawText(propstring, X + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
-                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propstring, X + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             n += 1
                         Next
 

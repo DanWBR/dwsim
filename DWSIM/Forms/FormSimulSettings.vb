@@ -75,6 +75,10 @@ Public Class FormSimulSettings
             Me.dgvpp.SelectionMode = DataGridViewSelectionMode.CellSelect
         End If
 
+        Dim rm As New FormReacManager
+        rm.Dock = DockStyle.Fill
+        TabPageReactions.Controls.Add(rm)
+
         Init()
 
     End Sub
@@ -906,11 +910,6 @@ Public Class FormSimulSettings
             End If
         End If
 
-    End Sub
-
-    Private Sub KryptonButton7_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim rm As New FormReacManager
-        rm.Show(Me.FrmChild.dckPanel)
     End Sub
 
     Private Sub ogc1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles ogc1.CellValueChanged

@@ -243,6 +243,12 @@
     <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigENRTL.designer.vb">
+      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigENRTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.designer.vb">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </Compile>
@@ -486,6 +492,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.resx">
       <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.de.resx">
+      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.en.resx">
+      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.es.resx">
+      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.resx">
+      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.de.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>

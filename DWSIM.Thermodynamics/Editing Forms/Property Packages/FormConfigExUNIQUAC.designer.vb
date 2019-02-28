@@ -34,9 +34,6 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.dgvu1 = New System.Windows.Forms.DataGridView()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,6 +44,8 @@ Partial Class FormConfigExUNIQUAC
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkOptimize = New System.Windows.Forms.CheckBox()
+        Me.chkIPOPT = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tbTol = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -80,7 +79,7 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2, Me.FaTabStripItem1})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem2
         '
         'FaTabStripItem3
         '
@@ -89,36 +88,14 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        Me.FaTabStripItem3.Selected = True
         '
         'GroupBox3
         '
         resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.Button5)
-        Me.GroupBox3.Controls.Add(Me.Button2)
-        Me.GroupBox3.Controls.Add(Me.Button1)
         Me.GroupBox3.Controls.Add(Me.dgvu1)
         Me.GroupBox3.Controls.Add(Me.LabelWithDivider3)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
-        '
-        'Button5
-        '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'dgvu1
         '
@@ -184,6 +161,7 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        Me.FaTabStripItem2.Selected = True
         '
         'GroupBox4
         '
@@ -201,6 +179,8 @@ Partial Class FormConfigExUNIQUAC
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.chkOptimize)
+        Me.GroupBox2.Controls.Add(Me.chkIPOPT)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.tbTol)
         Me.GroupBox2.Controls.Add(Me.Label2)
@@ -210,6 +190,18 @@ Partial Class FormConfigExUNIQUAC
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'chkOptimize
+        '
+        resources.ApplyResources(Me.chkOptimize, "chkOptimize")
+        Me.chkOptimize.Name = "chkOptimize"
+        Me.chkOptimize.UseVisualStyleBackColor = True
+        '
+        'chkIPOPT
+        '
+        resources.ApplyResources(Me.chkIPOPT, "chkIPOPT")
+        Me.chkIPOPT.Name = "chkIPOPT"
+        Me.chkIPOPT.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -335,9 +327,6 @@ Partial Class FormConfigExUNIQUAC
     Public WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Button2 As System.Windows.Forms.Button
-    Public WithEvents Button1 As System.Windows.Forms.Button
-    Public WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -353,4 +342,6 @@ Partial Class FormConfigExUNIQUAC
     Friend WithEvents tbMaxIts As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents chkOptimize As CheckBox
+    Friend WithEvents chkIPOPT As CheckBox
 End Class

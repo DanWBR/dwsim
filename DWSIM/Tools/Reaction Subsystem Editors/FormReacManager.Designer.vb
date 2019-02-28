@@ -1,6 +1,7 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FormReacManager
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+
+    Inherits UserControl
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -64,17 +65,7 @@ Partial Class FormReacManager
         Me.DockTopAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DockBottomAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbDockingLeft = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingLeftAutoHide = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingRightAutoHide = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingRight = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingTop = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingBottom = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingDocument = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingFloat = New System.Windows.Forms.ToolStripButton()
-        Me.tsbClose = New System.Windows.Forms.ToolStripButton()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.GroupBox2.SuspendLayout()
         CType(Me.GridRSets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip2.SuspendLayout()
@@ -82,26 +73,29 @@ Partial Class FormReacManager
         CType(Me.GridRxns, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         Me.dckMenu.SuspendLayout()
-        Me.ToolStrip3.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.GridRSets)
         Me.GroupBox2.Controls.Add(Me.ToolStrip2)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
         'GridRSets
         '
-        resources.ApplyResources(Me.GridRSets, "GridRSets")
         Me.GridRSets.AllowUserToAddRows = False
         Me.GridRSets.AllowUserToDeleteRows = False
         Me.GridRSets.AllowUserToResizeRows = False
         Me.GridRSets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridRSets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridRSets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column3, Me.Column2})
+        resources.ApplyResources(Me.GridRSets, "GridRSets")
         Me.GridRSets.MultiSelect = False
         Me.GridRSets.Name = "GridRSets"
         Me.GridRSets.ReadOnly = True
@@ -130,56 +124,56 @@ Partial Class FormReacManager
         '
         'ToolStrip2
         '
-        resources.ApplyResources(Me.ToolStrip2, "ToolStrip2")
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton2})
+        resources.ApplyResources(Me.ToolStrip2, "ToolStrip2")
         Me.ToolStrip2.Name = "ToolStrip2"
         '
         'ToolStripButton1
         '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.add
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton3
         '
-        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton3.Image = Global.DWSIM.My.Resources.Resources.page_white_gear
+        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton5
         '
-        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton5.Image = Global.DWSIM.My.Resources.Resources.copy
+        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.Name = "ToolStripButton5"
         '
         'ToolStripButton2
         '
-        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.delete1
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'GroupBox4
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.GridRxns)
         Me.GroupBox4.Controls.Add(Me.ToolStrip1)
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
         'GridRxns
         '
-        resources.ApplyResources(Me.GridRxns, "GridRxns")
         Me.GridRxns.AllowUserToAddRows = False
         Me.GridRxns.AllowUserToDeleteRows = False
         Me.GridRxns.AllowUserToResizeRows = False
         Me.GridRxns.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridRxns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridRxns.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.ColumnID})
+        resources.ApplyResources(Me.GridRxns, "GridRxns")
         Me.GridRxns.Name = "GridRxns"
         Me.GridRxns.ReadOnly = True
         Me.GridRxns.RowHeadersVisible = False
@@ -213,77 +207,77 @@ Partial Class FormReacManager
         '
         'ToolStrip1
         '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripButton4, Me.ToolStripButton9})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripDropDownButton1
         '
-        resources.ApplyResources(Me.ToolStripDropDownButton1, "ToolStripDropDownButton1")
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConversaoToolStripMenuItem, Me.EquilibrioToolStripMenuItem, Me.CineticaToolStripMenuItem, Me.HeterogeneaCataliticaToolStripMenuItem})
         Me.ToolStripDropDownButton1.Image = Global.DWSIM.My.Resources.Resources.add
+        resources.ApplyResources(Me.ToolStripDropDownButton1, "ToolStripDropDownButton1")
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
         Me.ToolStripDropDownButton1.ShowDropDownArrow = False
         '
         'ConversaoToolStripMenuItem
         '
-        resources.ApplyResources(Me.ConversaoToolStripMenuItem, "ConversaoToolStripMenuItem")
         Me.ConversaoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
         Me.ConversaoToolStripMenuItem.Name = "ConversaoToolStripMenuItem"
+        resources.ApplyResources(Me.ConversaoToolStripMenuItem, "ConversaoToolStripMenuItem")
         '
         'EquilibrioToolStripMenuItem
         '
-        resources.ApplyResources(Me.EquilibrioToolStripMenuItem, "EquilibrioToolStripMenuItem")
         Me.EquilibrioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
         Me.EquilibrioToolStripMenuItem.Name = "EquilibrioToolStripMenuItem"
+        resources.ApplyResources(Me.EquilibrioToolStripMenuItem, "EquilibrioToolStripMenuItem")
         '
         'CineticaToolStripMenuItem
         '
-        resources.ApplyResources(Me.CineticaToolStripMenuItem, "CineticaToolStripMenuItem")
         Me.CineticaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
         Me.CineticaToolStripMenuItem.Name = "CineticaToolStripMenuItem"
+        resources.ApplyResources(Me.CineticaToolStripMenuItem, "CineticaToolStripMenuItem")
         '
         'HeterogeneaCataliticaToolStripMenuItem
         '
-        resources.ApplyResources(Me.HeterogeneaCataliticaToolStripMenuItem, "HeterogeneaCataliticaToolStripMenuItem")
         Me.HeterogeneaCataliticaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
         Me.HeterogeneaCataliticaToolStripMenuItem.Name = "HeterogeneaCataliticaToolStripMenuItem"
+        resources.ApplyResources(Me.HeterogeneaCataliticaToolStripMenuItem, "HeterogeneaCataliticaToolStripMenuItem")
         '
         'ToolStripButton6
         '
-        resources.ApplyResources(Me.ToolStripButton6, "ToolStripButton6")
         Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton6.Image = Global.DWSIM.My.Resources.Resources.page_white_gear
+        resources.ApplyResources(Me.ToolStripButton6, "ToolStripButton6")
         Me.ToolStripButton6.Name = "ToolStripButton6"
         '
         'ToolStripButton7
         '
-        resources.ApplyResources(Me.ToolStripButton7, "ToolStripButton7")
         Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton7.Image = Global.DWSIM.My.Resources.Resources.copy
+        resources.ApplyResources(Me.ToolStripButton7, "ToolStripButton7")
         Me.ToolStripButton7.Name = "ToolStripButton7"
         '
         'ToolStripButton8
         '
-        resources.ApplyResources(Me.ToolStripButton8, "ToolStripButton8")
         Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton8.Image = Global.DWSIM.My.Resources.Resources.delete1
+        resources.ApplyResources(Me.ToolStripButton8, "ToolStripButton8")
         Me.ToolStripButton8.Name = "ToolStripButton8"
         '
         'ToolStripButton4
         '
-        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton4.Image = Global.DWSIM.My.Resources.Resources.arrow_left1
+        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'ToolStripButton9
         '
-        resources.ApplyResources(Me.ToolStripButton9, "ToolStripButton9")
         Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton9.Image = Global.DWSIM.My.Resources.Resources.arrow_right
+        resources.ApplyResources(Me.ToolStripButton9, "ToolStripButton9")
         Me.ToolStripButton9.Name = "ToolStripButton9"
         '
         'OpenFileDialog1
@@ -302,153 +296,79 @@ Partial Class FormReacManager
         '
         'dckMenu
         '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         '
         'DockLeftToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         '
         'DockRightToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         '
         'DockTopToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         '
         'DockBottomToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         '
         'DocumentToolStripMenuItem
         '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         '
-        'ToolStrip3
+        'SplitContainer1
         '
-        resources.ApplyResources(Me.ToolStrip3, "ToolStrip3")
-        Me.ToolStrip3.BackColor = System.Drawing.Color.SteelBlue
-        Me.ToolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.tsbDockingLeft, Me.tsbDockingLeftAutoHide, Me.tsbDockingRightAutoHide, Me.tsbDockingRight, Me.tsbDockingTop, Me.tsbDockingBottom, Me.tsbDockingDocument, Me.tsbDockingFloat, Me.tsbClose})
-        Me.ToolStrip3.Name = "ToolStrip3"
-        Me.ToolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+        Me.SplitContainer1.Name = "SplitContainer1"
         '
-        'ToolStripLabel1
+        'SplitContainer1.Panel1
         '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
-        Me.ToolStripLabel1.ForeColor = System.Drawing.Color.White
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox2)
         '
-        'tsbDockingLeft
+        'SplitContainer1.Panel2
         '
-        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
-        Me.tsbDockingLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingLeft.Image = Global.DWSIM.My.Resources.Resources.arrow_left1
-        Me.tsbDockingLeft.Name = "tsbDockingLeft"
-        '
-        'tsbDockingLeftAutoHide
-        '
-        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
-        Me.tsbDockingLeftAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingLeftAutoHide.Image = Global.DWSIM.My.Resources.Resources.rewind
-        Me.tsbDockingLeftAutoHide.Name = "tsbDockingLeftAutoHide"
-        '
-        'tsbDockingRightAutoHide
-        '
-        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
-        Me.tsbDockingRightAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingRightAutoHide.Image = Global.DWSIM.My.Resources.Resources.fast_forward
-        Me.tsbDockingRightAutoHide.Name = "tsbDockingRightAutoHide"
-        '
-        'tsbDockingRight
-        '
-        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
-        Me.tsbDockingRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingRight.Image = Global.DWSIM.My.Resources.Resources.arrow_right
-        Me.tsbDockingRight.Name = "tsbDockingRight"
-        '
-        'tsbDockingTop
-        '
-        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
-        Me.tsbDockingTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingTop.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
-        Me.tsbDockingTop.Name = "tsbDockingTop"
-        '
-        'tsbDockingBottom
-        '
-        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
-        Me.tsbDockingBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingBottom.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
-        Me.tsbDockingBottom.Name = "tsbDockingBottom"
-        '
-        'tsbDockingDocument
-        '
-        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
-        Me.tsbDockingDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingDocument.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
-        Me.tsbDockingDocument.Name = "tsbDockingDocument"
-        '
-        'tsbDockingFloat
-        '
-        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
-        Me.tsbDockingFloat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingFloat.Image = Global.DWSIM.My.Resources.Resources._new
-        Me.tsbDockingFloat.Name = "tsbDockingFloat"
-        '
-        'tsbClose
-        '
-        resources.ApplyResources(Me.tsbClose, "tsbClose")
-        Me.tsbClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.tsbClose.ForeColor = System.Drawing.Color.White
-        Me.tsbClose.Image = Global.DWSIM.My.Resources.Resources.no
-        Me.tsbClose.Name = "tsbClose"
+        Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox4)
         '
         'FormReacManager
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ToolStrip3)
-        Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.SplitContainer1)
         Me.DoubleBuffered = True
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FormReacManager"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-        Me.ShowIcon = False
-        Me.ShowInTaskbar = False
-        Me.TabPageContextMenuStrip = Me.dckMenu
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.GridRSets, System.ComponentModel.ISupportInitialize).EndInit()
@@ -460,8 +380,10 @@ Partial Class FormReacManager
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.dckMenu.ResumeLayout(False)
-        Me.ToolStrip3.ResumeLayout(False)
-        Me.ToolStrip3.PerformLayout()
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -505,15 +427,5 @@ Partial Class FormReacManager
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColumnID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToolStrip3 As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents tsbDockingLeft As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingLeftAutoHide As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingRightAutoHide As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingRight As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingTop As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingBottom As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingDocument As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbClose As System.Windows.Forms.ToolStripButton
+    Friend WithEvents SplitContainer1 As SplitContainer
 End Class

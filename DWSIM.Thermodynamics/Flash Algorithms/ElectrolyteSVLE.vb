@@ -440,38 +440,48 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If ubound.ExpY.SumY > 0.0# Then
 
-                    'optimize initial estimates
+                    If OptimizeInitialEstimates Then
 
-                    Dim extvars(r) As OptBoundVariable
-                    For i = 0 To r
-                        extvars(i) = New OptBoundVariable("ex" & CStr(i + 1), Log(REx(i)), False, lbound(i), ubound(i))
-                    Next
+                        'optimize initial estimates
 
-                    Dim extsolver As New Simplex
-                    extsolver.Tolerance = 0.001
-                    extsolver.MaxFunEvaluations = 1000
-                    iest = extsolver.ComputeMin(Function(xvar() As Double)
+                        Dim extvars(r) As OptBoundVariable
+                        For i = 0 To r
+                            extvars(i) = New OptBoundVariable("ex" & CStr(i + 1), Log(REx(i)), False, lbound(i), ubound(i))
+                        Next
 
-                                                    ObjectiveFunctionHistory.Clear()
+                        Dim extsolver As New Simplex
+                        extsolver.Tolerance = 0.001
+                        extsolver.MaxFunEvaluations = 1000
+                        iest = extsolver.ComputeMin(Function(xvar() As Double)
 
-                                                    IdealCalc = True
+                                                        ObjectiveFunctionHistory.Clear()
 
-                                                    Dim intvars(r) As OptBoundVariable
-                                                    For i = 0 To r
-                                                        intvars(i) = New OptBoundVariable("x" & CStr(i + 1), xvar(i), False, lbound(i), ubound(i))
-                                                    Next
-                                                    Dim intsolver As New Simplex
-                                                    intsolver.Tolerance = Tolerance
-                                                    intsolver.MaxFunEvaluations = MaximumIterations
-                                                    x = intsolver.ComputeMin(AddressOf FunctionValue2N, intvars)
+                                                        IdealCalc = True
 
-                                                    intsolver = Nothing
+                                                        Dim intvars(r) As OptBoundVariable
+                                                        For i = 0 To r
+                                                            intvars(i) = New OptBoundVariable("x" & CStr(i + 1), xvar(i), False, lbound(i), ubound(i))
+                                                        Next
+                                                        Dim intsolver As New Simplex
+                                                        intsolver.Tolerance = Tolerance
+                                                        intsolver.MaxFunEvaluations = MaximumIterations
+                                                        x = intsolver.ComputeMin(AddressOf FunctionValue2N, intvars)
 
-                                                    fx = Me.FunctionValue2N(x)
+                                                        intsolver = Nothing
 
-                                                    Return fx
+                                                        fx = Me.FunctionValue2N(x)
 
-                                                End Function, extvars)
+                                                        Return fx
+
+                                                    End Function, extvars)
+
+                    Else
+
+                        For i = 0 To r
+                            iest(i) = Log(REx(i))
+                        Next
+
+                    End If
 
                     'use the best set of initial estimates for the reaction extents
 

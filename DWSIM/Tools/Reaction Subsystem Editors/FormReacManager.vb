@@ -24,7 +24,7 @@ Imports DWSIM.Interfaces.Enums
 
 Public Class FormReacManager
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits UserControl
 
     Protected frmchild As FormFlowsheet
     Public col As BaseClasses.ReactionsCollection
@@ -33,9 +33,6 @@ Public Class FormReacManager
 
         ' This call is required by the designer.
         InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        If DWSIM.App.IsRunningOnMono Then Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
 
     End Sub
 
@@ -54,18 +51,6 @@ Public Class FormReacManager
                 .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
             Next
         End With
-
-        Me.TabText = Me.Text
-
-        If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then
-            ' set the bounds of this form's FloatWindow to our desired position and size
-            If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
-                Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
-                If Not floatWin Is Nothing Then
-                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y, 440, 490)
-                End If
-            End If
-        End If
 
     End Sub
 
@@ -417,74 +402,6 @@ Public Class FormReacManager
 
     Private Sub GridRSets_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles GridRSets.CellDoubleClick
         KryptonButton6_Click(sender, e)
-    End Sub
-
-    Private Sub FloatToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FloatToolStripMenuItem.Click, DocumentToolStripMenuItem.Click,
-                                                           DockLeftToolStripMenuItem.Click, DockLeftAutoHideToolStripMenuItem.Click,
-                                                           DockRightAutoHideToolStripMenuItem.Click, DockRightToolStripMenuItem.Click,
-                                                           DockTopAutoHideToolStripMenuItem.Click, DockTopToolStripMenuItem.Click,
-                                                           DockBottomAutoHideToolStripMenuItem.Click, DockBottomToolStripMenuItem.Click
-
-        For Each ts As ToolStripMenuItem In dckMenu.Items
-            ts.Checked = False
-        Next
-
-        sender.Checked = True
-
-        Select Case sender.Name
-            Case "FloatToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float
-            Case "DocumentToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Document
-            Case "DockLeftToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-            Case "DockLeftAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide
-            Case "DockRightAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide
-            Case "DockRightToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-            Case "DockBottomAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottomAutoHide
-            Case "DockBottomToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
-            Case "DockTopAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockTopAutoHide
-            Case "DockTopToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockTop
-            Case "HiddenToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Hidden
-        End Select
-
-    End Sub
-
-
-    Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
-        Me.Close()
-    End Sub
-
-    Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,
-                                                                        tsbDockingFloat.Click, tsbDockingLeftAutoHide.Click, tsbDockingRight.Click,
-                                                                        tsbDockingRightAutoHide.Click, tsbDockingTop.Click
-
-        If sender Is tsbDockingLeft Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-        ElseIf sender Is tsbDockingLeftAutoHide Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide
-        ElseIf sender Is tsbDockingRight Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-        ElseIf sender Is tsbDockingRightAutoHide Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide
-        ElseIf sender Is tsbDockingTop Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockTop
-        ElseIf sender Is tsbDockingBottom Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
-        ElseIf sender Is tsbDockingDocument Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Document
-        ElseIf sender Is tsbDockingFloat Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float
-        End If
-
     End Sub
 
 End Class

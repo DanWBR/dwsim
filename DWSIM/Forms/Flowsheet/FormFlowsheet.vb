@@ -954,15 +954,6 @@ Public Class FormFlowsheet
         Me.FormOptimization0.Show(Me.dckPanel)
     End Sub
 
-    Private Sub GerenciadorDeReacoesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeReacoesToolStripMenuItem.Click
-        If FrmReacMan Is Nothing OrElse FrmReacMan.IsDisposed Then
-            FrmReacMan = New FormReacManager
-            FrmReacMan.Show(Me.dckPanel)
-        Else
-            FrmReacMan.Activate()
-        End If
-    End Sub
-
     Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
         Me.FrmPCBulk.ShowDialog(Me)
     End Sub
@@ -2768,15 +2759,6 @@ Public Class FormFlowsheet
             Me.FrmStSim1.Show(Me.dckPanel)
         End If
         Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage2
-    End Sub
-
-    Private Sub tsbmiReactions_Click(sender As Object, e As EventArgs)
-        If FrmReacMan Is Nothing OrElse FrmReacMan.IsDisposed Then
-            FrmReacMan = New FormReacManager
-            FrmReacMan.Show(Me.dckPanel)
-        Else
-            FrmReacMan.Activate()
-        End If
     End Sub
 
     Private Sub AjudaToolStripMenuItem_Click(sender As Object, e As EventArgs)

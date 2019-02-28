@@ -49,7 +49,7 @@ Namespace PropertyPackages
             If GlobalSettings.Settings.CAPEOPENMode Then
 
             Else
-                Dim f As New FormConfigExUNIQUAC() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                Dim f As New FormConfigENRTL() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
                 f.ShowDialog()
             End If
 

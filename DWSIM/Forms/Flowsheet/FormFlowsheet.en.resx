@@ -268,49 +268,43 @@
     <value>&amp;Insert</value>
   </data>
   <data name="InspectorTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="InspectorTSMI.Text" xml:space="preserve">
     <value>Solution Inspector</value>
   </data>
   <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Text" xml:space="preserve">
     <value>Petroleum Characterization (Bulk C7+)</value>
   </data>
   <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Petroleum Characterization (Distillation Curves)</value>
   </data>
   <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Text" xml:space="preserve">
     <value>Petroleum Assay Manager</value>
   </data>
-  <data name="GerenciadorDeReacoesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
-  </data>
-  <data name="GerenciadorDeReacoesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reactions Manager</value>
-  </data>
   <data name="PropriedadesDasSubstânciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="PropriedadesDasSubstânciasToolStripMenuItem.Text" xml:space="preserve">
     <value>Pure Compound Property Viewer/Editor</value>
   </data>
   <data name="AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem.Text" xml:space="preserve">
     <value>Compound Creator Wizard</value>
   </data>
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 6</value>
+    <value>325, 6</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 20</value>
