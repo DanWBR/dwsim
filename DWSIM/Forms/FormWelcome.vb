@@ -286,11 +286,11 @@ Public Class FormWelcome
 
     'End Sub
 
-    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+    Private Sub Button12_Click(sender As Object, e As EventArgs)
         Process.Start("https://itunes.apple.com/us/app/dwsim-simulator/id1162110266?ls=1&mt=8")
     End Sub
 
-    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+    Private Sub Button11_Click(sender As Object, e As EventArgs)
         Process.Start("https://play.google.com/store/apps/details?id=com.danielmedeiros.dwsim_simulator")
     End Sub
 
@@ -378,4 +378,7 @@ Public Class FormWelcome
         Process.Start("https://gumroad.com/products/PTljX")
     End Sub
 
+    Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
+        Process.Start("https://patreon.com/dwsim")
+    End Sub
 End Class

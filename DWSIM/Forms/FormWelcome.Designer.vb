@@ -38,7 +38,6 @@ Partial Class FormWelcome
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lvlatestfolders = New System.Windows.Forms.ListView()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -60,9 +59,8 @@ Partial Class FormWelcome
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -197,13 +195,6 @@ Partial Class FormWelcome
         'ColumnHeader3
         '
         resources.ApplyResources(Me.ColumnHeader3, "ColumnHeader3")
-        '
-        'Label14
-        '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.BackColor = System.Drawing.Color.Transparent
-        Me.Label14.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label14.Name = "Label14"
         '
         'TabControl1
         '
@@ -396,31 +387,18 @@ Partial Class FormWelcome
         Me.Label2.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label2.Name = "Label2"
         '
+        'Button8
+        '
+        resources.ApplyResources(Me.Button8, "Button8")
+        Me.Button8.Image = Global.DWSIM.My.Resources.Resources.DWSIM_ico_64
+        Me.Button8.Name = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'Button7
         '
         resources.ApplyResources(Me.Button7, "Button7")
         Me.Button7.Name = "Button7"
         Me.Button7.UseVisualStyleBackColor = True
-        '
-        'Button11
-        '
-        resources.ApplyResources(Me.Button11, "Button11")
-        Me.Button11.BackColor = System.Drawing.Color.Black
-        Me.Button11.BackgroundImage = Global.DWSIM.My.Resources.Resources.En_play_badge
-        Me.Button11.FlatAppearance.BorderSize = 0
-        Me.Button11.ForeColor = System.Drawing.Color.Black
-        Me.Button11.Name = "Button11"
-        Me.Button11.UseVisualStyleBackColor = False
-        '
-        'Button12
-        '
-        resources.ApplyResources(Me.Button12, "Button12")
-        Me.Button12.BackColor = System.Drawing.Color.Black
-        Me.Button12.BackgroundImage = Global.DWSIM.My.Resources.Resources.DownloadFromAppStore
-        Me.Button12.FlatAppearance.BorderSize = 0
-        Me.Button12.ForeColor = System.Drawing.Color.Black
-        Me.Button12.Name = "Button12"
-        Me.Button12.UseVisualStyleBackColor = False
         '
         'Button1
         '
@@ -467,12 +445,10 @@ Partial Class FormWelcome
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.Button11)
-        Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button3)
@@ -520,11 +496,8 @@ Partial Class FormWelcome
     Public WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lvlatestfolders As System.Windows.Forms.ListView
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
-    Public WithEvents Button11 As System.Windows.Forms.Button
-    Public WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Public WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
@@ -547,4 +520,5 @@ Partial Class FormWelcome
     Public WithEvents Label5 As Label
     Public WithEvents Label13 As Label
     Friend WithEvents Button7 As Button
+    Friend WithEvents Button8 As Button
 End Class

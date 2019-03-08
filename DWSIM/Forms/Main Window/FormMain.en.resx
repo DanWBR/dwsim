@@ -364,6 +364,12 @@
   <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
     <value>Support</value>
   </data>
+  <data name="PatronToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="PatronToolStripMenuItem.Text" xml:space="preserve">
+    <value>Become a Patron</value>
+  </data>
   <data name="DonateToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAAK/INwWK6QAAACBjSFJNAAB6

@@ -3715,6 +3715,10 @@ Label_00CC:
         End If
     End Sub
 
+    Private Sub PatronToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatronToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://patreon.com/dwsim")
+    End Sub
+
     Private Sub bgSaveBackup_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgSaveBackup.RunWorkerCompleted
         If Not (e.Error Is Nothing) Then
             ' There was an error during the operation.
