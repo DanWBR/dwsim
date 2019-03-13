@@ -148,6 +148,7 @@ Namespace Reactors
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
             pp.CurrentMaterialStream = ims
+            ims.PropertyPackage = pp
 
             Dim DN As New Dictionary(Of String, Double)
             Dim N0 As New Dictionary(Of String, Double)

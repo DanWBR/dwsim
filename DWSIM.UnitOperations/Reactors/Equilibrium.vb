@@ -530,6 +530,7 @@ Namespace Reactors
 
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
+            ims.SetPropertyPackage(PropertyPackage)
 
             For Each comp In ims.Phases(0).Compounds.Values
                 If comp.ConstantProperties.IG_Enthalpy_of_Formation_25C = 0.0 And comp.ConstantProperties.OriginalDB <> "ChemSep" Then

@@ -123,7 +123,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ClipboardCopyMode_PropertyPackages" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="UndoRedo_RecalculateFlowsheet" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
