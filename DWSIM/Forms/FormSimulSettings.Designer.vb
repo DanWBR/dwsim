@@ -60,7 +60,6 @@ Partial Class FormSimulSettings
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button14 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnInfoRight = New System.Windows.Forms.Button()
@@ -431,7 +430,6 @@ Partial Class FormSimulSettings
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Button14)
         Me.GroupBox2.Controls.Add(Me.Button13)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.btnInfoRight)
@@ -449,13 +447,6 @@ Partial Class FormSimulSettings
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        '
-        'Button14
-        '
-        resources.ApplyResources(Me.Button14, "Button14")
-        Me.Button14.Name = "Button14"
-        Me.ToolTip1.SetToolTip(Me.Button14, resources.GetString("Button14.ToolTip"))
-        Me.Button14.UseVisualStyleBackColor = True
         '
         'Button13
         '
@@ -1590,7 +1581,6 @@ Partial Class FormSimulSettings
     Public WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog3 As System.Windows.Forms.OpenFileDialog
     Public WithEvents Button13 As System.Windows.Forms.Button
-    Public WithEvents Button14 As System.Windows.Forms.Button
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox16 As System.Windows.Forms.GroupBox
     Friend WithEvents Label6 As System.Windows.Forms.Label

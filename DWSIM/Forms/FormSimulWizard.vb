@@ -1002,4 +1002,5 @@ Public Class FormSimulWizard
             ComboBox2.SelectedIndex = ComboBox2.Items.Count - 1
         End If
     End Sub
+
 End Class

@@ -33,7 +33,6 @@ Partial Class FormSimulWizard
         Me.Label1 = New System.Windows.Forms.Label()
         Me.WizardPage2 = New AeroWizard.WizardPage()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnInfoRight = New System.Windows.Forms.Button()
@@ -126,7 +125,6 @@ Partial Class FormSimulWizard
         'WizardPage2
         '
         Me.WizardPage2.Controls.Add(Me.TextBox1)
-        Me.WizardPage2.Controls.Add(Me.Button4)
         Me.WizardPage2.Controls.Add(Me.Button3)
         Me.WizardPage2.Controls.Add(Me.Button2)
         Me.WizardPage2.Controls.Add(Me.btnInfoRight)
@@ -148,13 +146,6 @@ Partial Class FormSimulWizard
         Me.TextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
-        '
-        'Button4
-        '
-        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.python_icon
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -584,7 +575,6 @@ Partial Class FormSimulWizard
     Public WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents Button3 As System.Windows.Forms.Button
-    Public WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents casno As System.Windows.Forms.DataGridViewTextBoxColumn
