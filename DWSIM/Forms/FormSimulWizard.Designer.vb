@@ -35,24 +35,18 @@ Partial Class FormSimulWizard
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnInfoRight = New System.Windows.Forms.Button()
         Me.btnInfoLeft = New System.Windows.Forms.Button()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.ListViewA = New System.Windows.Forms.ListView()
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button11 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Button10 = New System.Windows.Forms.Button()
         Me.ogc1 = New System.Windows.Forms.DataGridView()
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdd = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.casno = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Button7 = New System.Windows.Forms.Button()
         Me.WizardPage3 = New AeroWizard.WizardPage()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
@@ -82,7 +76,6 @@ Partial Class FormSimulWizard
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage1.SuspendLayout()
         Me.WizardPage2.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -127,15 +120,10 @@ Partial Class FormSimulWizard
         Me.WizardPage2.Controls.Add(Me.TextBox1)
         Me.WizardPage2.Controls.Add(Me.Button3)
         Me.WizardPage2.Controls.Add(Me.Button2)
-        Me.WizardPage2.Controls.Add(Me.btnInfoRight)
         Me.WizardPage2.Controls.Add(Me.btnInfoLeft)
-        Me.WizardPage2.Controls.Add(Me.GroupBox4)
         Me.WizardPage2.Controls.Add(Me.Label2)
-        Me.WizardPage2.Controls.Add(Me.Button11)
         Me.WizardPage2.Controls.Add(Me.Label3)
-        Me.WizardPage2.Controls.Add(Me.Button10)
         Me.WizardPage2.Controls.Add(Me.ogc1)
-        Me.WizardPage2.Controls.Add(Me.Button7)
         Me.WizardPage2.Name = "WizardPage2"
         Me.WizardPage2.NextPage = Me.WizardPage3
         resources.ApplyResources(Me.WizardPage2, "WizardPage2")
@@ -149,77 +137,35 @@ Partial Class FormSimulWizard
         '
         'Button3
         '
-        Me.Button3.Image = Global.DWSIM.My.Resources.Resources.world_go
         resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Image = Global.DWSIM.My.Resources.Resources.world_go
         Me.Button3.Name = "Button3"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.card_export
         resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.card_export
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'btnInfoRight
-        '
-        resources.ApplyResources(Me.btnInfoRight, "btnInfoRight")
-        Me.btnInfoRight.Name = "btnInfoRight"
-        Me.ToolTip1.SetToolTip(Me.btnInfoRight, resources.GetString("btnInfoRight.ToolTip"))
-        Me.btnInfoRight.UseVisualStyleBackColor = True
         '
         'btnInfoLeft
         '
         resources.ApplyResources(Me.btnInfoLeft, "btnInfoLeft")
+        Me.btnInfoLeft.Image = Global.DWSIM.My.Resources.Resources.information
         Me.btnInfoLeft.Name = "btnInfoLeft"
         Me.ToolTip1.SetToolTip(Me.btnInfoLeft, resources.GetString("btnInfoLeft.ToolTip"))
         Me.btnInfoLeft.UseVisualStyleBackColor = True
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.ListViewA)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        '
-        'ListViewA
-        '
-        Me.ListViewA.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
-        resources.ApplyResources(Me.ListViewA, "ListViewA")
-        Me.ListViewA.FullRowSelect = True
-        Me.ListViewA.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        Me.ListViewA.HideSelection = False
-        Me.ListViewA.Name = "ListViewA"
-        Me.ListViewA.ShowGroups = False
-        Me.ListViewA.TileSize = New System.Drawing.Size(184, 16)
-        Me.ListViewA.UseCompatibleStateImageBehavior = False
-        Me.ListViewA.View = System.Windows.Forms.View.List
-        '
-        'ColumnHeader3
-        '
-        resources.ApplyResources(Me.ColumnHeader3, "ColumnHeader3")
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         '
-        'Button11
-        '
-        resources.ApplyResources(Me.Button11, "Button11")
-        Me.Button11.Name = "Button11"
-        Me.Button11.UseVisualStyleBackColor = True
-        '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        '
-        'Button10
-        '
-        resources.ApplyResources(Me.Button10, "Button10")
-        Me.Button10.Name = "Button10"
-        Me.Button10.UseVisualStyleBackColor = True
         '
         'ogc1
         '
@@ -230,10 +176,9 @@ Partial Class FormSimulWizard
         Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5})
+        Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.colAdd, Me.Column6, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5})
         resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.Name = "ogc1"
-        Me.ogc1.ReadOnly = True
         Me.ogc1.RowHeadersVisible = False
         Me.ogc1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.ogc1.ShowCellErrors = False
@@ -246,6 +191,14 @@ Partial Class FormSimulWizard
         resources.ApplyResources(Me.Column11, "Column11")
         Me.Column11.Name = "Column11"
         Me.Column11.ReadOnly = True
+        '
+        'colAdd
+        '
+        Me.colAdd.FalseValue = "False"
+        Me.colAdd.FillWeight = 15.0!
+        resources.ApplyResources(Me.colAdd, "colAdd")
+        Me.colAdd.Name = "colAdd"
+        Me.colAdd.TrueValue = "True"
         '
         'Column6
         '
@@ -277,7 +230,7 @@ Partial Class FormSimulWizard
         '
         'Column7
         '
-        Me.Column7.FillWeight = 30.0!
+        Me.Column7.FillWeight = 25.0!
         resources.ApplyResources(Me.Column7, "Column7")
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
@@ -292,12 +245,6 @@ Partial Class FormSimulWizard
         Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.Column5.TrueValue = "True"
-        '
-        'Button7
-        '
-        resources.ApplyResources(Me.Button7, "Button7")
-        Me.Button7.Name = "Button7"
-        Me.Button7.UseVisualStyleBackColor = True
         '
         'WizardPage3
         '
@@ -522,7 +469,6 @@ Partial Class FormSimulWizard
         Me.WizardPage1.ResumeLayout(False)
         Me.WizardPage2.ResumeLayout(False)
         Me.WizardPage2.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage3.ResumeLayout(False)
         Me.WizardPage3.PerformLayout()
@@ -543,14 +489,8 @@ Partial Class FormSimulWizard
     Friend WithEvents WizardPage3 As AeroWizard.WizardPage
     Friend WithEvents WizardPage5 As AeroWizard.WizardPage
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Public WithEvents ListViewA As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Public WithEvents Button11 As System.Windows.Forms.Button
     Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents Button10 As System.Windows.Forms.Button
     Public WithEvents ogc1 As System.Windows.Forms.DataGridView
-    Public WithEvents Button7 As System.Windows.Forms.Button
     Public WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents LinkLabelPropertyMethods As System.Windows.Forms.LinkLabel
@@ -568,24 +508,24 @@ Partial Class FormSimulWizard
     Friend WithEvents Column16 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column17 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column12 As System.Windows.Forms.DataGridViewButtonColumn
-    Public WithEvents btnInfoRight As System.Windows.Forms.Button
     Public WithEvents btnInfoLeft As System.Windows.Forms.Button
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents casno As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewComboBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewComboBoxColumn
     Friend WithEvents btnCreateNewUnits As Button
     Friend WithEvents btnCloneUnits As Button
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents colAdd As DataGridViewCheckBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents casno As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewCheckBoxColumn
 End Class

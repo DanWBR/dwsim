@@ -973,6 +973,7 @@ Public Class FormSimulSettings
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
         ogc1.ClearSelection()
+        ogc1.SuspendLayout()
         Dim needselecting As Boolean = True
         For Each r As DataGridViewRow In ogc1.Rows
             If Not r.Cells(1).Value Is Nothing Then
@@ -1001,7 +1002,7 @@ Public Class FormSimulSettings
                 r.Visible = True
             Next
         End If
-
+        ogc1.ResumeLayout()
     End Sub
 
     Private Sub btnConfigPP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConfigPP.Click

@@ -195,7 +195,7 @@ Clique em "Próximo" para continuar.</value>
     <value>62, 42</value>
   </data>
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 23</value>
+    <value>643, 23</value>
   </data>
   <data name="TextBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -212,6 +212,12 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;TextBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Button3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Button3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="Button3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
@@ -219,10 +225,10 @@ Clique em "Próximo" para continuar.</value>
     <value>NoControl</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 302</value>
+    <value>203, 372</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 43</value>
+    <value>125, 25</value>
   </data>
   <data name="Button3.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -231,7 +237,7 @@ Clique em "Próximo" para continuar.</value>
     <value>Importar (Online)</value>
   </data>
   <data name="Button3.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageAboveText</value>
+    <value>ImageBeforeText</value>
   </data>
   <data name="&gt;&gt;Button3.Name" xml:space="preserve">
     <value>Button3</value>
@@ -245,6 +251,12 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="Button2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Button2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="Button2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
@@ -252,10 +264,10 @@ Clique em "Próximo" para continuar.</value>
     <value>NoControl</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 351</value>
+    <value>334, 372</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 44</value>
+    <value>118, 25</value>
   </data>
   <data name="Button2.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -264,7 +276,7 @@ Clique em "Próximo" para continuar.</value>
     <value>Importar (JSON)</value>
   </data>
   <data name="Button2.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageAboveText</value>
+    <value>ImageBeforeText</value>
   </data>
   <data name="&gt;&gt;Button2.Name" xml:space="preserve">
     <value>Button2</value>
@@ -278,44 +290,11 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnInfoRight.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="btnInfoLeft.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="btnInfoRight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnInfoRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 187</value>
-  </data>
-  <data name="btnInfoRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="btnInfoRight.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="btnInfoRight.Text" xml:space="preserve">
-    <value> Ver Dados &gt;&gt;&gt;</value>
-  </data>
-  <data name="btnInfoRight.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="btnInfoRight.ToolTip" xml:space="preserve">
-    <value>Clique para visualizar informações sobre o componente selecionado na lista à direita.</value>
-  </data>
-  <data name="&gt;&gt;btnInfoRight.Name" xml:space="preserve">
-    <value>btnInfoRight</value>
-  </data>
-  <data name="&gt;&gt;btnInfoRight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnInfoRight.Parent" xml:space="preserve">
-    <value>WizardPage2</value>
-  </data>
-  <data name="&gt;&gt;btnInfoRight.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="btnInfoLeft.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="btnInfoLeft.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -324,20 +303,23 @@ Clique em "Próximo" para continuar.</value>
     <value>NoControl</value>
   </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 158</value>
+    <value>7, 372</value>
   </data>
   <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
+    <value>190, 25</value>
   </data>
   <data name="btnInfoLeft.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
   <data name="btnInfoLeft.Text" xml:space="preserve">
-    <value>&lt;&lt;&lt; Ver Dados</value>
+    <value>Ver Componente Selecionado</value>
   </data>
   <data name="btnInfoLeft.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>TextBeforeImage</value>
+    <value>ImageBeforeText</value>
   </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="btnInfoLeft.ToolTip" xml:space="preserve">
     <value>Clique para visualizar informações sobre o componente selecionado na lista à esquerda.</value>
   </data>
@@ -351,61 +333,7 @@ Clique em "Próximo" para continuar.</value>
     <value>WizardPage2</value>
   </data>
   <data name="&gt;&gt;btnInfoLeft.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
-    <value>182</value>
-  </data>
-  <data name="ListViewA.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ListViewA.LabelWrap" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ListViewA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 19</value>
-  </data>
-  <data name="ListViewA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 339</value>
-  </data>
-  <data name="ListViewA.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ListViewA.Name" xml:space="preserve">
-    <value>ListViewA</value>
-  </data>
-  <data name="&gt;&gt;ListViewA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ListViewA.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
-  </data>
-  <data name="&gt;&gt;ListViewA.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 34</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 361</value>
-  </data>
-  <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Adicionados</value>
-  </data>
-  <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
-    <value>GroupBox4</value>
-  </data>
-  <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
-    <value>WizardPage2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -432,34 +360,7 @@ Clique em "Próximo" para continuar.</value>
     <value>WizardPage2</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="Button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 129</value>
-  </data>
-  <data name="Button11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="Button11.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Button11.Text" xml:space="preserve">
-    <value>Limpar Lista</value>
-  </data>
-  <data name="&gt;&gt;Button11.Name" xml:space="preserve">
-    <value>Button11</value>
-  </data>
-  <data name="&gt;&gt;Button11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button11.Parent" xml:space="preserve">
-    <value>WizardPage2</value>
-  </data>
-  <data name="&gt;&gt;Button11.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -489,34 +390,7 @@ Clique em "Próximo" para continuar.</value>
     <value>WizardPage2</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="Button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 100</value>
-  </data>
-  <data name="Button10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="Button10.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="Button10.Text" xml:space="preserve">
-    <value>&lt; Remover</value>
-  </data>
-  <data name="&gt;&gt;Button10.Name" xml:space="preserve">
-    <value>Button10</value>
-  </data>
-  <data name="&gt;&gt;Button10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
-    <value>WizardPage2</value>
-  </data>
-  <data name="&gt;&gt;Button10.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
   <metadata name="Column11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -526,6 +400,12 @@ Clique em "Próximo" para continuar.</value>
   </data>
   <data name="Column11.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <metadata name="colAdd.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colAdd.HeaderText" xml:space="preserve">
+    <value>Adicionado</value>
   </data>
   <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -576,7 +456,7 @@ Clique em "Próximo" para continuar.</value>
     <value>Vertical</value>
   </data>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>426, 324</value>
+    <value>698, 295</value>
   </data>
   <data name="ogc1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -591,34 +471,7 @@ Clique em "Próximo" para continuar.</value>
     <value>WizardPage2</value>
   </data>
   <data name="&gt;&gt;ogc1.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="Button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 71</value>
-  </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Adicionar &gt;</value>
-  </data>
-  <data name="&gt;&gt;Button7.Name" xml:space="preserve">
-    <value>Button7</value>
-  </data>
-  <data name="&gt;&gt;Button7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button7.Parent" xml:space="preserve">
-    <value>WizardPage2</value>
-  </data>
-  <data name="&gt;&gt;Button7.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>6</value>
   </data>
   <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1288,17 +1141,17 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="$this.Text" xml:space="preserve">
     <value>FormConfigWizard</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader3.Name" xml:space="preserve">
-    <value>ColumnHeader3</value>
-  </data>
-  <data name="&gt;&gt;ColumnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Column11.Name" xml:space="preserve">
     <value>Column11</value>
   </data>
   <data name="&gt;&gt;Column11.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colAdd.Name" xml:space="preserve">
+    <value>colAdd</value>
+  </data>
+  <data name="&gt;&gt;colAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column6.Name" xml:space="preserve">
     <value>Column6</value>

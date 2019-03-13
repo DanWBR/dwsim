@@ -58,7 +58,7 @@ Public Class FormMain
 
     Private tmpform2 As FormFlowsheet
 
-    Public AvailableComponents As New Dictionary(Of String, BaseClasses.ConstantProperties)
+    Public AvailableComponents As New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
     Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
     Public FlashAlgorithms As New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)

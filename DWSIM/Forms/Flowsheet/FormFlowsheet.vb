@@ -2714,10 +2714,10 @@ Public Class FormFlowsheet
 
     Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
         Get
-            Return Options.NotSelectedComponents
+            Return FormMain.AvailableComponents
         End Get
         Set(value As Dictionary(Of String, ICompoundConstantProperties))
-            Options.NotSelectedComponents = value
+            FormMain.AvailableComponents = value
         End Set
     End Property
 
