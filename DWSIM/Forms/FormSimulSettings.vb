@@ -70,7 +70,6 @@ Public Class FormSimulSettings
         initialized = True
 
         If DWSIM.App.IsRunningOnMono Then
-            Me.ListViewA.View = View.List
             Me.ogc1.SelectionMode = DataGridViewSelectionMode.CellSelect
             Me.dgvpp.SelectionMode = DataGridViewSelectionMode.CellSelect
         End If
@@ -113,22 +112,19 @@ Public Class FormSimulSettings
 
             ACSC1 = New AutoCompleteStringCollection
 
-            Me.ListViewA.Items.Clear()
             For Each comp In Me.FrmChild.Options.SelectedComponents.Values
-                Me.ListViewA.Items.Add(comp.Name, comp.Name & " (" & comp.OriginalDB & ")", 0).Tag = comp.Name
+                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
             Next
             For Each comp In Me.FrmChild.Options.NotSelectedComponents.Values
-                Dim idx As Integer = Me.AddCompToGrid(comp)
-                If Not idx = -1 Then
-                    For Each c As DataGridViewCell In Me.ogc1.Rows(idx).Cells
-                        If comp.OriginalDB <> "Electrolytes" Then
-                            If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
-                                c.Style.ForeColor = Color.Red
-                                c.ToolTipText = DWSIM.App.GetLocalString("CompMissingData")
-                            End If
-                        End If
-                    Next
-                End If
+                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                'For Each c As DataGridViewCell In Me.ogc1.Rows(idx).Cells
+                '    If comp.OriginalDB <> "Electrolytes" Then
+                '        If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
+                '            c.Style.ForeColor = Color.Red
+                '            c.ToolTipText = DWSIM.App.GetLocalString("CompMissingData")
+                '        End If
+                '    End If
+                'Next
             Next
 
             'Me.TextBox1.AutoCompleteCustomSource = ACSC1
@@ -912,10 +908,6 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Private Sub ogc1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles ogc1.CellValueChanged
-
-    End Sub
-
     Public Function AddCompToGrid(ByRef comp As BaseClasses.ConstantProperties) As Integer
 
 
@@ -1101,7 +1093,7 @@ Public Class FormSimulSettings
         frmdc.ShowDialog(Me)
     End Sub
 
-    Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             If Me.ogc1.SelectedCells.Count > 0 Then
                 Me.AddCompToSimulation(Me.ogc1.SelectedCells(0).RowIndex)
@@ -1118,15 +1110,15 @@ Public Class FormSimulSettings
         'End If
     End Sub
 
-    Sub AddCompToSimulation(ByVal index As Integer)
+    Sub AddCompToSimulation(ByVal compid As String)
 
         ' TODO Add code to check that index is within range. If it is out of range, don't do anything.
         If Me.loaded Then
 
-            If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
+            If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(compid) Then
 
                 Dim tmpcomp As New BaseClasses.ConstantProperties
-                tmpcomp = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(index).Cells(0).Value)
+                tmpcomp = Me.FrmChild.Options.NotSelectedComponents(compid)
 
                 Me.FrmChild.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
                 Me.FrmChild.Options.NotSelectedComponents.Remove(tmpcomp.Name)
@@ -1137,10 +1129,6 @@ Public Class FormSimulSettings
                         phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
                     Next
                 Next
-
-                Me.ListViewA.Items.Add(tmpcomp.Name, tmpcomp.Name & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
-
-                If Not DWSIM.App.IsRunningOnMono Then Me.ogc1.Rows.RemoveAt(index)
 
                 FrmChild.UpdateOpenEditForms()
 
@@ -1156,25 +1144,12 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Sub AddCompToSimulation(ByVal id As String)
-
-        For Each r As DataGridViewRow In Me.FrmChild.FrmStSim1.ogc1.Rows
-            If r.Cells(0).Value = id Then
-                AddCompToSimulation(r.Index)
-                Exit For
-            End If
-        Next
-
-    End Sub
-
-
     Sub RemoveCompFromSimulation(ByVal compid As String)
 
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = Me.FrmChild.Options.SelectedComponents(nm)
         Me.FrmChild.Options.SelectedComponents.Remove(tmpcomp.Name)
-        Me.ListViewA.Items.RemoveByKey(tmpcomp.Name)
         Me.FrmChild.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
         Me.AddCompToGrid(tmpcomp)
         Dim ms As Streams.MaterialStream
@@ -1210,24 +1185,6 @@ Public Class FormSimulSettings
           .ObjID = tmpcomp.Name,
           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundRemoved"), tmpcomp.Name)})
 
-    End Sub
-
-    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
-        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-            If Me.ListViewA.SelectedItems.Count > 0 Then
-                For Each lvi As ListViewItem In Me.ListViewA.SelectedItems
-                    Me.RemoveCompFromSimulation(lvi.Tag)
-                Next
-            End If
-        End If
-    End Sub
-
-    Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
-        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-            For Each lvi As ListViewItem In Me.ListViewA.Items
-                Me.RemoveCompFromSimulation(lvi.Tag)
-            Next
-        End If
     End Sub
 
     Private Sub ogc1_DataError(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles ogc1.DataError
@@ -1312,48 +1269,7 @@ Public Class FormSimulSettings
         End If
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-
-        If Me.loaded Then
-
-            If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-
-                Dim tmpsubst As New BaseClasses.Compound("", "")
-                Dim toreplace As BaseClasses.ConstantProperties = Nothing
-
-                If DWSIM.App.IsRunningOnMono Then
-                    If Me.ogc1.SelectedCells.Count > 0 Then
-                        toreplace = FrmChild.Options.NotSelectedComponents(ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value)
-                    End If
-                Else
-                    If Me.ogc1.SelectedRows.Count > 0 Then
-                        toreplace = FrmChild.Options.NotSelectedComponents(ogc1.Rows(ogc1.SelectedRows(0).Index).Cells(0).Value)
-                    End If
-                End If
-
-                Dim proplist As New ArrayList
-                For Each mstr In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
-                    For Each phase As BaseClasses.Phase In mstr.Phases.Values
-                        tmpsubst = phase.Compounds(Me.ListViewA.SelectedItems(0).Tag)
-                        phase.Compounds.Remove(Me.ListViewA.SelectedItems(0).Tag)
-                        tmpsubst.ConstantProperties = toreplace
-                        tmpsubst.Name = toreplace.Name
-                        phase.Compounds.Add(tmpsubst.Name, tmpsubst)
-                    Next
-                    proplist.Clear()
-                Next
-                If Not DWSIM.App.IsRunningOnMono Then Me.ogc1.Rows.RemoveAt(Me.ogc1.SelectedRows(0).Index)
-                Me.FrmChild.Options.NotSelectedComponents.Add(Me.ListViewA.SelectedItems(0).Tag, Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag))
-                Me.FrmChild.Options.SelectedComponents.Remove(Me.ListViewA.SelectedItems(0).Tag)
-                Me.FrmChild.Options.SelectedComponents.Add(toreplace.Name, toreplace)
-                Me.ListViewA.SelectedItems(0).Tag = toreplace.Name
-                Me.ListViewA.SelectedItems(0).Text = DWSIM.App.GetLocalString(toreplace.Name)
-            End If
-        End If
-
-    End Sub
-
-    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+    Private Sub Button12_Click(sender As Object, e As EventArgs)
         TextBox1.Text = ""
     End Sub
 
@@ -1472,10 +1388,10 @@ Public Class FormSimulSettings
 
         Else
 
-        f.ShowDialog(Me)
-        fa.FlashSettings = f.Settings
-        f.Dispose()
-        f = Nothing
+            f.ShowDialog(Me)
+            fa.FlashSettings = f.Settings
+            f.Dispose()
+            f = Nothing
 
         End If
 
@@ -1541,17 +1457,12 @@ Public Class FormSimulSettings
 
     Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
         If DWSIM.App.IsRunningOnMono Then
-            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value)}
+            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.AvailableCompounds(ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value)}
             FrmChild.DisplayForm(f)
         Else
-            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.NotSelectedComponents(ogc1.SelectedRows(0).Cells(0).Value)}
+            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.AvailableCompounds(ogc1.SelectedRows(0).Cells(0).Value)}
             FrmChild.DisplayForm(f)
         End If
-    End Sub
-
-    Private Sub btnInfoRight_Click(sender As Object, e As EventArgs) Handles btnInfoRight.Click
-        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = True, .MyCompound = Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag)}
-        FrmChild.DisplayForm(f)
     End Sub
 
     Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
@@ -1581,7 +1492,7 @@ Public Class FormSimulSettings
                                 phase.Compounds(comp.Name).ConstantProperties = comp
                             Next
                         Next
-                        Me.ListViewA.Items.Add(comp.Name, comp.Name & " (" & comp.OriginalDB & ")", 0).Tag = comp.Name
+                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                     Else
                         MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
@@ -1607,7 +1518,7 @@ Public Class FormSimulSettings
                             phase.Compounds(comp.Name).ConstantProperties = comp
                         Next
                     Next
-                    Me.ListViewA.Items.Add(comp.Name, comp.Name & " (" & comp.OriginalDB & ")", 0).Tag = comp.Name
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -1681,6 +1592,34 @@ Public Class FormSimulSettings
 
         'start dispatcher for WPF Interop
         If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
+
+    End Sub
+
+    Private Sub ogc1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles ogc1.CellValueChanged
+
+        If loaded Then
+
+            If ((e.ColumnIndex = colAdd.Index) AndAlso (e.RowIndex <> -1)) Then
+
+                If ogc1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = True Then
+                    'add
+                    AddCompToSimulation(ogc1.Rows(e.RowIndex).Cells(0).Value)
+                Else
+                    'remove
+                    RemoveCompFromSimulation(ogc1.Rows(e.RowIndex).Cells(0).Value)
+                End If
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub ogc1_OnCellMouseUp(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles ogc1.CellMouseUp
+
+        If ((e.ColumnIndex = colAdd.Index) AndAlso (e.RowIndex <> -1)) Then
+            ogc1.EndEdit()
+        End If
 
     End Sub
 

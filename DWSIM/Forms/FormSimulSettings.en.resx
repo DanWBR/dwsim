@@ -231,7 +231,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAcABCwHAAQsBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAdABCwHQAQsBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -445,85 +445,43 @@
 </value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>472, 52</value>
+    <value>461, 52</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Open Assay Manager</value>
   </data>
-  <data name="Button13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 333</value>
-  </data>
-  <data name="Button13.Text" xml:space="preserve">
-    <value>Import (Online) &gt;</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 365</value>
-  </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Import (JSON) &gt;</value>
-  </data>
-  <data name="btnInfoRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 216</value>
-  </data>
-  <data name="btnInfoRight.ToolTip" xml:space="preserve">
-    <value>Click to view information about the compound selected on the right-hand list.</value>
-  </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 187</value>
+    <value>6, 371</value>
+  </data>
+  <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 26</value>
+  </data>
+  <data name="btnInfoLeft.Text" xml:space="preserve">
+    <value>View Selected Compound</value>
+  </data>
+  <data name="btnInfoLeft.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="btnInfoLeft.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the left-hand list.</value>
   </data>
-  <data name="Button12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 14</value>
+  <data name="Button13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 371</value>
   </data>
-  <data name="Button12.Text" xml:space="preserve">
-    <value>x Clear</value>
+  <data name="Button13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 26</value>
   </data>
-  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 158</value>
+  <data name="Button13.Text" xml:space="preserve">
+    <value>Import from Online Sources</value>
   </data>
-  <data name="Button5.Text" xml:space="preserve">
-    <value>Replace &gt;&gt;</value>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>359, 371</value>
   </data>
-  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 129</value>
-  </data>
-  <data name="Button6.Text" xml:space="preserve">
-    <value>Ungroup</value>
-  </data>
-  <data name="ListViewA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 365</value>
-  </data>
-  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 9</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 384</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Added</value>
-  </data>
-  <data name="Button11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 100</value>
-  </data>
-  <data name="Button11.Text" xml:space="preserve">
-    <value>Clear List</value>
-  </data>
-  <data name="Button10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 71</value>
-  </data>
-  <data name="Button10.Text" xml:space="preserve">
-    <value>&lt; Remove</value>
-  </data>
-  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 42</value>
-  </data>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Add &gt;</value>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Import from JSON File</value>
   </data>
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 20</value>
+    <value>822, 20</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -531,11 +489,14 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="colAdd.HeaderText" xml:space="preserve">
+    <value>Added</value>
+  </data>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="casno.HeaderText" xml:space="preserve">
-    <value>CAS #</value>
+    <value>CAS Number</value>
   </data>
   <data name="Column8.HeaderText" xml:space="preserve">
     <value>Type</value>
@@ -546,11 +507,14 @@
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Database</value>
   </data>
+  <data name="ogc1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 351</value>
+    <value>875, 323</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>898, 399</value>
+    <value>887, 405</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Components / Compounds</value>
@@ -560,10 +524,6 @@
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Search:</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ListBox3.ItemHeight" type="System.Int32, mscorlib">
-    <value>16</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Components Selected</value>
@@ -585,9 +545,6 @@
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Options</value>
-  </data>
-  <data name="ListBox4.ItemHeight" type="System.Int32, mscorlib">
-    <value>16</value>
   </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>Components</value>
@@ -655,6 +612,7 @@
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Description</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
     <value>85</value>
   </data>
@@ -788,10 +746,10 @@
     <value>Load Database ChemSep (XML)</value>
   </data>
   <data name="GroupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 408</value>
+    <value>6, 417</value>
   </data>
   <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>898, 85</value>
+    <value>887, 85</value>
   </data>
   <data name="GroupBox10.Text" xml:space="preserve">
     <value>Petroleum Fractions</value>

@@ -446,13 +446,13 @@ Partial Class FormPureComp
         Me.GraphLiqCp.IsShowCopyMessage = False
         Me.GraphLiqCp.IsShowPointValues = True
         Me.GraphLiqCp.Name = "GraphLiqCp"
-        Me.GraphLiqCp.ScrollGrace = 0.0R
-        Me.GraphLiqCp.ScrollMaxX = 0.0R
-        Me.GraphLiqCp.ScrollMaxY = 0.0R
-        Me.GraphLiqCp.ScrollMaxY2 = 0.0R
-        Me.GraphLiqCp.ScrollMinX = 0.0R
-        Me.GraphLiqCp.ScrollMinY = 0.0R
-        Me.GraphLiqCp.ScrollMinY2 = 0.0R
+        Me.GraphLiqCp.ScrollGrace = 0R
+        Me.GraphLiqCp.ScrollMaxX = 0R
+        Me.GraphLiqCp.ScrollMaxY = 0R
+        Me.GraphLiqCp.ScrollMaxY2 = 0R
+        Me.GraphLiqCp.ScrollMinX = 0R
+        Me.GraphLiqCp.ScrollMinY = 0R
+        Me.GraphLiqCp.ScrollMinY2 = 0R
         '
         'FaTabStripItemHVAP
         '
@@ -471,13 +471,13 @@ Partial Class FormPureComp
         Me.GraphDHVAP.IsShowCopyMessage = False
         Me.GraphDHVAP.IsShowPointValues = True
         Me.GraphDHVAP.Name = "GraphDHVAP"
-        Me.GraphDHVAP.ScrollGrace = 0.0R
-        Me.GraphDHVAP.ScrollMaxX = 0.0R
-        Me.GraphDHVAP.ScrollMaxY = 0.0R
-        Me.GraphDHVAP.ScrollMaxY2 = 0.0R
-        Me.GraphDHVAP.ScrollMinX = 0.0R
-        Me.GraphDHVAP.ScrollMinY = 0.0R
-        Me.GraphDHVAP.ScrollMinY2 = 0.0R
+        Me.GraphDHVAP.ScrollGrace = 0R
+        Me.GraphDHVAP.ScrollMaxX = 0R
+        Me.GraphDHVAP.ScrollMaxY = 0R
+        Me.GraphDHVAP.ScrollMaxY2 = 0R
+        Me.GraphDHVAP.ScrollMinX = 0R
+        Me.GraphDHVAP.ScrollMinY = 0R
+        Me.GraphDHVAP.ScrollMinY2 = 0R
         '
         'FaTabStripItemPVAP
         '
@@ -496,13 +496,13 @@ Partial Class FormPureComp
         Me.GraphPvap.IsShowCopyMessage = False
         Me.GraphPvap.IsShowPointValues = True
         Me.GraphPvap.Name = "GraphPvap"
-        Me.GraphPvap.ScrollGrace = 0.0R
-        Me.GraphPvap.ScrollMaxX = 0.0R
-        Me.GraphPvap.ScrollMaxY = 0.0R
-        Me.GraphPvap.ScrollMaxY2 = 0.0R
-        Me.GraphPvap.ScrollMinX = 0.0R
-        Me.GraphPvap.ScrollMinY = 0.0R
-        Me.GraphPvap.ScrollMinY2 = 0.0R
+        Me.GraphPvap.ScrollGrace = 0R
+        Me.GraphPvap.ScrollMaxX = 0R
+        Me.GraphPvap.ScrollMaxY = 0R
+        Me.GraphPvap.ScrollMaxY2 = 0R
+        Me.GraphPvap.ScrollMinX = 0R
+        Me.GraphPvap.ScrollMinY = 0R
+        Me.GraphPvap.ScrollMinY2 = 0R
         '
         'FaTabStripItemSURFT
         '
@@ -521,13 +521,13 @@ Partial Class FormPureComp
         Me.GraphSurfT.IsShowCopyMessage = False
         Me.GraphSurfT.IsShowPointValues = True
         Me.GraphSurfT.Name = "GraphSurfT"
-        Me.GraphSurfT.ScrollGrace = 0.0R
-        Me.GraphSurfT.ScrollMaxX = 0.0R
-        Me.GraphSurfT.ScrollMaxY = 0.0R
-        Me.GraphSurfT.ScrollMaxY2 = 0.0R
-        Me.GraphSurfT.ScrollMinX = 0.0R
-        Me.GraphSurfT.ScrollMinY = 0.0R
-        Me.GraphSurfT.ScrollMinY2 = 0.0R
+        Me.GraphSurfT.ScrollGrace = 0R
+        Me.GraphSurfT.ScrollMaxX = 0R
+        Me.GraphSurfT.ScrollMaxY = 0R
+        Me.GraphSurfT.ScrollMaxY2 = 0R
+        Me.GraphSurfT.ScrollMinX = 0R
+        Me.GraphSurfT.ScrollMinY = 0R
+        Me.GraphSurfT.ScrollMinY2 = 0R
         '
         'FaTabStripItemLIQVISC
         '
@@ -546,13 +546,13 @@ Partial Class FormPureComp
         Me.GraphVisc.IsShowCopyMessage = False
         Me.GraphVisc.IsShowPointValues = True
         Me.GraphVisc.Name = "GraphVisc"
-        Me.GraphVisc.ScrollGrace = 0.0R
-        Me.GraphVisc.ScrollMaxX = 0.0R
-        Me.GraphVisc.ScrollMaxY = 0.0R
-        Me.GraphVisc.ScrollMaxY2 = 0.0R
-        Me.GraphVisc.ScrollMinX = 0.0R
-        Me.GraphVisc.ScrollMinY = 0.0R
-        Me.GraphVisc.ScrollMinY2 = 0.0R
+        Me.GraphVisc.ScrollGrace = 0R
+        Me.GraphVisc.ScrollMaxX = 0R
+        Me.GraphVisc.ScrollMaxY = 0R
+        Me.GraphVisc.ScrollMaxY2 = 0R
+        Me.GraphVisc.ScrollMinX = 0R
+        Me.GraphVisc.ScrollMinY = 0R
+        Me.GraphVisc.ScrollMinY2 = 0R
         '
         'FaTabStripItemLIQDENS
         '
@@ -571,13 +571,13 @@ Partial Class FormPureComp
         Me.GraphLiqDens.IsShowCopyMessage = False
         Me.GraphLiqDens.IsShowPointValues = True
         Me.GraphLiqDens.Name = "GraphLiqDens"
-        Me.GraphLiqDens.ScrollGrace = 0.0R
-        Me.GraphLiqDens.ScrollMaxX = 0.0R
-        Me.GraphLiqDens.ScrollMaxY = 0.0R
-        Me.GraphLiqDens.ScrollMaxY2 = 0.0R
-        Me.GraphLiqDens.ScrollMinX = 0.0R
-        Me.GraphLiqDens.ScrollMinY = 0.0R
-        Me.GraphLiqDens.ScrollMinY2 = 0.0R
+        Me.GraphLiqDens.ScrollGrace = 0R
+        Me.GraphLiqDens.ScrollMaxX = 0R
+        Me.GraphLiqDens.ScrollMaxY = 0R
+        Me.GraphLiqDens.ScrollMaxY2 = 0R
+        Me.GraphLiqDens.ScrollMinX = 0R
+        Me.GraphLiqDens.ScrollMinY = 0R
+        Me.GraphLiqDens.ScrollMinY2 = 0R
         '
         'FaTabStripItemLIQTCOND
         '
@@ -596,13 +596,13 @@ Partial Class FormPureComp
         Me.GraphLiqThermCond.IsShowCopyMessage = False
         Me.GraphLiqThermCond.IsShowPointValues = True
         Me.GraphLiqThermCond.Name = "GraphLiqThermCond"
-        Me.GraphLiqThermCond.ScrollGrace = 0.0R
-        Me.GraphLiqThermCond.ScrollMaxX = 0.0R
-        Me.GraphLiqThermCond.ScrollMaxY = 0.0R
-        Me.GraphLiqThermCond.ScrollMaxY2 = 0.0R
-        Me.GraphLiqThermCond.ScrollMinX = 0.0R
-        Me.GraphLiqThermCond.ScrollMinY = 0.0R
-        Me.GraphLiqThermCond.ScrollMinY2 = 0.0R
+        Me.GraphLiqThermCond.ScrollGrace = 0R
+        Me.GraphLiqThermCond.ScrollMaxX = 0R
+        Me.GraphLiqThermCond.ScrollMaxY = 0R
+        Me.GraphLiqThermCond.ScrollMaxY2 = 0R
+        Me.GraphLiqThermCond.ScrollMinX = 0R
+        Me.GraphLiqThermCond.ScrollMinY = 0R
+        Me.GraphLiqThermCond.ScrollMinY2 = 0R
         '
         'FaTabStripItemTabLiq
         '
@@ -811,13 +811,13 @@ Partial Class FormPureComp
         Me.GraphCp.IsShowPointValues = True
         Me.GraphCp.IsZoomOnMouseCenter = True
         Me.GraphCp.Name = "GraphCp"
-        Me.GraphCp.ScrollGrace = 0.0R
-        Me.GraphCp.ScrollMaxX = 0.0R
-        Me.GraphCp.ScrollMaxY = 0.0R
-        Me.GraphCp.ScrollMaxY2 = 0.0R
-        Me.GraphCp.ScrollMinX = 0.0R
-        Me.GraphCp.ScrollMinY = 0.0R
-        Me.GraphCp.ScrollMinY2 = 0.0R
+        Me.GraphCp.ScrollGrace = 0R
+        Me.GraphCp.ScrollMaxX = 0R
+        Me.GraphCp.ScrollMaxY = 0R
+        Me.GraphCp.ScrollMaxY2 = 0R
+        Me.GraphCp.ScrollMinX = 0R
+        Me.GraphCp.ScrollMinY = 0R
+        Me.GraphCp.ScrollMinY2 = 0R
         '
         'FaTabStripItemVAPVISC
         '
@@ -838,13 +838,13 @@ Partial Class FormPureComp
         Me.GraphVapVisc.IsShowPointValues = True
         Me.GraphVapVisc.IsZoomOnMouseCenter = True
         Me.GraphVapVisc.Name = "GraphVapVisc"
-        Me.GraphVapVisc.ScrollGrace = 0.0R
-        Me.GraphVapVisc.ScrollMaxX = 0.0R
-        Me.GraphVapVisc.ScrollMaxY = 0.0R
-        Me.GraphVapVisc.ScrollMaxY2 = 0.0R
-        Me.GraphVapVisc.ScrollMinX = 0.0R
-        Me.GraphVapVisc.ScrollMinY = 0.0R
-        Me.GraphVapVisc.ScrollMinY2 = 0.0R
+        Me.GraphVapVisc.ScrollGrace = 0R
+        Me.GraphVapVisc.ScrollMaxX = 0R
+        Me.GraphVapVisc.ScrollMaxY = 0R
+        Me.GraphVapVisc.ScrollMaxY2 = 0R
+        Me.GraphVapVisc.ScrollMinX = 0R
+        Me.GraphVapVisc.ScrollMinY = 0R
+        Me.GraphVapVisc.ScrollMinY2 = 0R
         '
         'FaTabStripItemVAPTCOND
         '
@@ -865,13 +865,13 @@ Partial Class FormPureComp
         Me.GraphVapThermCond.IsShowPointValues = True
         Me.GraphVapThermCond.IsZoomOnMouseCenter = True
         Me.GraphVapThermCond.Name = "GraphVapThermCond"
-        Me.GraphVapThermCond.ScrollGrace = 0.0R
-        Me.GraphVapThermCond.ScrollMaxX = 0.0R
-        Me.GraphVapThermCond.ScrollMaxY = 0.0R
-        Me.GraphVapThermCond.ScrollMaxY2 = 0.0R
-        Me.GraphVapThermCond.ScrollMinX = 0.0R
-        Me.GraphVapThermCond.ScrollMinY = 0.0R
-        Me.GraphVapThermCond.ScrollMinY2 = 0.0R
+        Me.GraphVapThermCond.ScrollGrace = 0R
+        Me.GraphVapThermCond.ScrollMaxX = 0R
+        Me.GraphVapThermCond.ScrollMaxY = 0R
+        Me.GraphVapThermCond.ScrollMaxY2 = 0R
+        Me.GraphVapThermCond.ScrollMinX = 0R
+        Me.GraphVapThermCond.ScrollMinY = 0R
+        Me.GraphVapThermCond.ScrollMinY2 = 0R
         '
         'FaTabStripItemDataTab
         '
@@ -997,13 +997,13 @@ Partial Class FormPureComp
         Me.GraphCpSolid.IsShowCopyMessage = False
         Me.GraphCpSolid.IsShowPointValues = True
         Me.GraphCpSolid.Name = "GraphCpSolid"
-        Me.GraphCpSolid.ScrollGrace = 0.0R
-        Me.GraphCpSolid.ScrollMaxX = 0.0R
-        Me.GraphCpSolid.ScrollMaxY = 0.0R
-        Me.GraphCpSolid.ScrollMaxY2 = 0.0R
-        Me.GraphCpSolid.ScrollMinX = 0.0R
-        Me.GraphCpSolid.ScrollMinY = 0.0R
-        Me.GraphCpSolid.ScrollMinY2 = 0.0R
+        Me.GraphCpSolid.ScrollGrace = 0R
+        Me.GraphCpSolid.ScrollMaxX = 0R
+        Me.GraphCpSolid.ScrollMaxY = 0R
+        Me.GraphCpSolid.ScrollMaxY2 = 0R
+        Me.GraphCpSolid.ScrollMinX = 0R
+        Me.GraphCpSolid.ScrollMinY = 0R
+        Me.GraphCpSolid.ScrollMinY2 = 0R
         '
         'FaTabStripItemSOLIDDENS
         '
@@ -1022,13 +1022,13 @@ Partial Class FormPureComp
         Me.GraphSolidDens.IsShowCopyMessage = False
         Me.GraphSolidDens.IsShowPointValues = True
         Me.GraphSolidDens.Name = "GraphSolidDens"
-        Me.GraphSolidDens.ScrollGrace = 0.0R
-        Me.GraphSolidDens.ScrollMaxX = 0.0R
-        Me.GraphSolidDens.ScrollMaxY = 0.0R
-        Me.GraphSolidDens.ScrollMaxY2 = 0.0R
-        Me.GraphSolidDens.ScrollMinX = 0.0R
-        Me.GraphSolidDens.ScrollMinY = 0.0R
-        Me.GraphSolidDens.ScrollMinY2 = 0.0R
+        Me.GraphSolidDens.ScrollGrace = 0R
+        Me.GraphSolidDens.ScrollMaxX = 0R
+        Me.GraphSolidDens.ScrollMaxY = 0R
+        Me.GraphSolidDens.ScrollMaxY2 = 0R
+        Me.GraphSolidDens.ScrollMinX = 0R
+        Me.GraphSolidDens.ScrollMinY = 0R
+        Me.GraphSolidDens.ScrollMinY2 = 0R
         '
         'FaTabStripItemTabela
         '
@@ -1125,6 +1125,7 @@ Partial Class FormPureComp
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormPureComp"
         Me.ShowIcon = False
+        Me.TopMost = True
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()

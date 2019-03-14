@@ -306,7 +306,7 @@ Clique em "Próximo" para continuar.</value>
     <value>7, 372</value>
   </data>
   <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 25</value>
+    <value>189, 25</value>
   </data>
   <data name="btnInfoLeft.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
