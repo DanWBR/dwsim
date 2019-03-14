@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using DWSIM.Thermodynamics.PropertyPackages.Auxiliary;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS
@@ -15,6 +16,16 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             ReadParameters();
 
+        }
+
+        public override List<XElement> SaveData()
+        {
+            return base.SaveData();
+        }
+
+        public override bool LoadData(List<XElement> data)
+        {
+            return base.LoadData(data);
         }
 
     }

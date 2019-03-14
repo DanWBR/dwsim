@@ -379,12 +379,26 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
         public override double DW_CalcCp_ISOL(PropertyPackages.Phase Phase1, double T, double P)
         {
-            throw new NotImplementedException();
+            if (Phase1 == Phase.Vapor)
+            {
+                return CalcCp(RET_VMOL(Phase1), T, P, State.Vapor);
+            }
+            else
+            {
+                return CalcCp(RET_VMOL(Phase1), T, P, State.Liquid);
+            }
         }
 
         public override double DW_CalcCv_ISOL(PropertyPackages.Phase Phase1, double T, double P)
         {
-            throw new NotImplementedException();
+            if (Phase1 == Phase.Vapor)
+            {
+                return CalcCp(RET_VMOL(Phase1), T, P, State.Vapor);
+            }
+            else
+            {
+                return CalcCp(RET_VMOL(Phase1), T, P, State.Liquid);
+            }
         }
 
         public override double DW_CalcK_ISOL(PropertyPackages.Phase Phase1, double T, double P)
@@ -416,6 +430,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         {
             throw new NotImplementedException();
         }
+
+
 
 
         #endregion

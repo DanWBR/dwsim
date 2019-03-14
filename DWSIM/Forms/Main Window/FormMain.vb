@@ -1630,7 +1630,7 @@ Public Class FormMain
                 Else
                     obj = pp.ReturnInstance(xel.Element("Type").Value)
                 End If
-                obj.LoadData(xel.Elements.ToList)
+                DirectCast(obj, Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
                 If form.Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
                 obj.Flowsheet = form
@@ -2102,7 +2102,7 @@ Public Class FormMain
                 Else
                     obj = pp.ReturnInstance(xel.Element("Type").Value)
                 End If
-                obj.LoadData(xel.Elements.ToList)
+                DirectCast(obj, Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
                 If form.Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
                 obj.Flowsheet = form
@@ -2638,7 +2638,7 @@ Public Class FormMain
                 createdms = True
             End If
             xel.Add(New XElement("PropertyPackage", {New XElement("ID", pp.Key),
-                                                     pp.Value.SaveData().ToArray()}))
+                                                     DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
             If createdms Then pp.Value.CurrentMaterialStream = Nothing
         Next
 

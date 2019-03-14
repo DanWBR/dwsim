@@ -60,12 +60,14 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                                 {
                                     if (!PP.InteractionParameters[cp2.Name].ContainsKey(cp.Name))
                                     {
-                                        PP.InteractionParameters[cp.Name].Add(cp2.Name, new PHSC_IP());
-                                        double a12 = PP.InteractionParameters[cp.Name][cp2.Name].kij;
+                                        var ip = new PHSC_IP();
+                                        ip.Compound1 = cp.Name;
+                                        ip.Compound2 = cp2.Name;
+                                        PP.InteractionParameters[cp.CAS_Number].Add(cp2.CAS_Number, ip);
                                         dgvkij.Rows.Add(new object[] {
 								            cp.Name,
 								            cp2.Name,
-								            a12
+								            ip.kij
 							            });
                                     }
                                 }

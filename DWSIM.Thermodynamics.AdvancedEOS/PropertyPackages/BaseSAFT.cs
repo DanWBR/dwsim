@@ -123,7 +123,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     contents.WriteLine(cname + ".EoSParam(3) = " + CompoundParameters[c.ConstantProperties.CAS_Number].epsilon.ToString(ci) + ";");
                     if (CompoundParameters[c.ConstantProperties.CAS_Number].associationparams != "")
                     {
-                        string[] split = new string[] { "\n" };
+                        string[] split = new string[] { "\n", System.Environment.NewLine };
                         contents.WriteLine(cname + ".EoSParam(4) = " + CompoundParameters[c.ConstantProperties.CAS_Number].associationparams.Split(split, System.StringSplitOptions.RemoveEmptyEntries)[0] + ";");
                         contents.WriteLine(cname + ".EoSParam(5) = " + CompoundParameters[c.ConstantProperties.CAS_Number].associationparams.Split(split, System.StringSplitOptions.RemoveEmptyEntries)[1] + ";");
                         contents.WriteLine(cname + ".EoSParam(6) = " + CompoundParameters[c.ConstantProperties.CAS_Number].associationparams.Split(split, System.StringSplitOptions.RemoveEmptyEntries)[2] + ";");
@@ -171,6 +171,13 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         {
             var data = base.SaveData();
 
+            var casnos = new List<string>();
+
+            if ((this.CurrentMaterialStream != null))
+            {
+                casnos = this.CurrentMaterialStream.Phases[0].Compounds.Values.Select(x => x.ConstantProperties.CAS_Number).ToList();
+            }
+
             System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.InvariantCulture;
 
             data.Add(new XElement("InteractionParameters"));
@@ -180,7 +187,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                 {
                     if ((this.CurrentMaterialStream != null))
                     {
-                        if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key) & this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp2.Key))
+                        if (casnos.Contains(kvp.Key) & casnos.Contains(kvp2.Key))
                         {
                             data[data.Count - 1].Add(new XElement("InteractionParameter",
                                 new XAttribute("Compound1", kvp2.Value.compound1),
@@ -197,7 +204,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 if ((this.CurrentMaterialStream != null))
                 {
-                    if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key))
+                    if (casnos.Contains(kvp.Key))
                     {
                         data[data.Count - 1].Add(new XElement("CompoundParameterSet",
                                 new XAttribute("Compound", kvp.Value.compound),

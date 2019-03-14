@@ -57,12 +57,16 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                                 {
                                     if (!PP.InteractionParameters[cp2.CAS_Number].ContainsKey(cp.CAS_Number))
                                     {
-                                        PP.InteractionParameters[cp.CAS_Number].Add(cp2.CAS_Number, new PCSIP());
-                                        double a12 = PP.InteractionParameters[cp.CAS_Number][cp2.CAS_Number].kij;
+                                        var ip = new PCSIP();
+                                        ip.casno1 = cp.CAS_Number;
+                                        ip.casno2 = cp2.CAS_Number;
+                                        ip.compound1 = cp.Name;
+                                        ip.compound2 = cp2.Name;
+                                        PP.InteractionParameters[cp.CAS_Number].Add(cp2.CAS_Number, ip);
                                         dgvkij.Rows.Add(new object[] {
 								            cp.Name,
 								            cp2.Name,
-								            a12
+								            ip.kij
 							            });
                                         dgvkij.Rows[dgvkij.Rows.Count - 1].Cells[0].Tag = cp.CAS_Number;
                                         dgvkij.Rows[dgvkij.Rows.Count - 1].Cells[1].Tag = cp2.CAS_Number;
@@ -105,7 +109,6 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                     dgvparams.Rows.Add(new object[] {
 			                    cp.Name,
 			                    cp.CAS_Number,
-			                    mw,
 			                    m,
 			                    sigma,
 			                    epsilon
@@ -118,7 +121,11 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                 }
                 else
                 {
-                    PP.CompoundParameters.Add(cp.CAS_Number, new PCSParam());
+                    var par = new PCSParam();
+                    par.compound = cp.Name;
+                    par.casno = cp.CAS_Number;
+                    par.mw = cp.Molar_Weight;
+                    PP.CompoundParameters.Add(cp.CAS_Number, par);
                     goto gt1;
                 }
             }
@@ -155,13 +162,13 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                 string id = dgvparams.Rows[e.RowIndex].Cells[1].Value.ToString();
                 switch (e.ColumnIndex)
                 {
-                    case 3:
+                    case 2:
                         PP.CompoundParameters[id].m = value;
                         break;
-                    case 4:
+                    case 3:
                         PP.CompoundParameters[id].sigma = value;
                         break;
-                    case 5:
+                    case 4:
                         PP.CompoundParameters[id].epsilon = value;
                         break;
                 }
@@ -172,14 +179,18 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
         {
             if (Loaded)
             {
-                string value = dgvparama.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                string id = dgvparama.Rows[e.RowIndex].Cells[0].Tag.ToString();
-                switch (e.ColumnIndex)
+                string value = "";
+                if (dgvparama.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
-                    case 1:
-                        PP.CompoundParameters[id].associationparams = value;
-                        break;
+                    value = dgvparama.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                string id = dgvparama.Rows[e.RowIndex].Cells[0].Tag.ToString();
+                    switch (e.ColumnIndex)
+                    {
+                        case 1:
+                            PP.CompoundParameters[id].associationparams = value;
+                            break;
+                    }
             }
         }
 

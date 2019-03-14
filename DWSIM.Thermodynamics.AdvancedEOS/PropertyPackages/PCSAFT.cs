@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using FileHelpers;
 using DWSIM.Thermodynamics.AdvancedEOS.EditingForms;
+using System.Xml.Linq;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS
 {
@@ -21,6 +22,16 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             ReadParameters();
 
+        }
+
+        public override List<XElement> SaveData()
+        {
+            return base.SaveData();
+        }
+
+        public override bool LoadData(List<XElement> data)
+        {
+            return base.LoadData(data);
         }
 
     }

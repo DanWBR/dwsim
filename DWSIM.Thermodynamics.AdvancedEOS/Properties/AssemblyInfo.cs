@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DWSIM.Thermodynamics.AdvancedEOS")]
-[assembly: AssemblyCopyright("Copyright © 2017 DWSIM Project")]
+[assembly: AssemblyCopyright("Copyright © 2017-2019 DWSIM Project")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,5 +33,5 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("5.7.*")]
 [assembly: NeutralResourcesLanguageAttribute("en")]
