@@ -5336,4 +5336,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="GibbsLocalEquilibrium" xml:space="preserve">
     <value>System is at local equilibrium - reactions may not be spontaneous at the given temperature and pressure.</value>
   </data>
+  <data name="DescENPP" xml:space="preserve">
+    <value>Extended NRTL model for electrolyte solutions</value>
+  </data>
 </root>

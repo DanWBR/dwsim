@@ -91,7 +91,7 @@ namespace DWSIM.UI
             var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn6 = new Button() { Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn8 = new Button() { Style = "donate", Text = "Purchase Support Ticket", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icon_phone_ticket2.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn8 = new Button() { Style = "donate", Text = "Become a Patron", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-patreon.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "VerticalSettingsMixer_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
 
             btn9.Click += (sender, e) =>
@@ -133,7 +133,7 @@ namespace DWSIM.UI
             };
 
             btn7.Click += (sender, e) => new AboutBox().Show();
-            btn8.Click += (sender, e) => Process.Start("https://gumroad.com/products/PTljX");
+            btn8.Click += (sender, e) => Process.Start("https://patreon.com/dwsim");
 
             var stack = new StackLayout { Orientation = Orientation.Vertical, Spacing = 5 };
             stack.Items.Add(btn1);

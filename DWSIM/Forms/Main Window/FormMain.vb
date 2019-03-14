@@ -580,6 +580,7 @@ Public Class FormMain
 
         Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
         ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+        ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
 
         PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
 
@@ -3566,7 +3567,7 @@ Label_00CC:
         System.Diagnostics.Process.Start("https://sourceforge.net/p/dwsim/tickets/")
     End Sub
 
-    Private Sub DonateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DonateToolStripMenuItem.Click
+    Private Sub DonateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         System.Diagnostics.Process.Start("https://gumroad.com/products/PTljX")
     End Sub
 

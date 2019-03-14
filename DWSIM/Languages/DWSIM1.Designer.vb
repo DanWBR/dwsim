@@ -4259,6 +4259,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Modelo NRTL estendido para soluções eletrolíticas.
+        '''</summary>
+        Friend Shared ReadOnly Property DescENPP() As String
+            Get
+                Return ResourceManager.GetString("DescENPP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to This model is a combination of the extended UNIQUAC model for electrolytes and the Soave–Redlich–Kwong cubic equation of state. The model has been applied to aqueous systems containing ammonia and/or carbon dioxide along with various salts. Model parameters valid in the temperature range 0–110°C, the pressure range from 0–100 bar, and the concentration range up to approximately 80 molal ammonia are given. The model parameters were evaluated on the basis of more than 7000 experimental data points..
         '''</summary>
         Friend Shared ReadOnly Property DescEUPP() As String

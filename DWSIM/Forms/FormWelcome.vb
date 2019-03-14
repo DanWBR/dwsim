@@ -374,7 +374,7 @@ Public Class FormWelcome
         Process.Start("https://fossee.in/")
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(sender As Object, e As EventArgs)
         Process.Start("https://gumroad.com/products/PTljX")
     End Sub
 
