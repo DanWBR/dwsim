@@ -133,7 +133,7 @@ Public Class FormSimulSettings
 
             'property packages
             Me.DataGridViewPP.Rows.Clear()
-            For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values
+            For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values.OrderBy(Function(x) x.ComponentName)
                 If Not FrmChild.MobileCompatibilityMode Then
                     addobj = True
                 Else

@@ -950,8 +950,10 @@ Public Class FormMain
             Dim addedcomps = AvailableComponents.Keys.Select(Function(x) x.ToLower).ToList()
             For Each cp As BaseClasses.ConstantProperties In cpa
                 If Not addedcomps.Contains(cp.Name.ToLower) Then
-                    Me.AvailableComponents.Add(cp.Name, cp)
-                    Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
+                    If AvailableComponents.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
+                        Me.AvailableComponents.Add(cp.Name, cp)
+                        Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
+                    End If
                 End If
             Next
         Catch ex As Exception
@@ -966,7 +968,11 @@ Public Class FormMain
         cpa = chedl.Transfer().ToArray()
         Dim addedcomps = AvailableComponents.Keys.Select(Function(x) x.ToLower).ToList()
         For Each cp As ConstantProperties In cpa
-            If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableComponents.ContainsKey(cp.Name) Then AvailableComponents.Add(cp.Name, cp)
+            If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableComponents.ContainsKey(cp.Name) Then
+                If AvailableComponents.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
+                    AvailableComponents.Add(cp.Name, cp)
+                End If
+            End If
         Next
 
     End Sub

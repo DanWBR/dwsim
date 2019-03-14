@@ -1710,7 +1710,11 @@ Imports System.Dynamic
                                   cpa = chedl.Transfer().ToArray()
                                   addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
                                   For Each cp As ConstantProperties In cpa
-                                      If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                      If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then
+                                          If AvailableCompounds.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
+                                              AvailableCompounds.Add(cp.Name, cp)
+                                          End If
+                                      End If
                                   Next
                                   Dim elec As New Databases.Electrolyte
                                   elec.Load()

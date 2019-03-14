@@ -17,7 +17,7 @@
 
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
-Imports DWSIM.FlowsheetSolver
+Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormSimulWizard
@@ -35,8 +35,6 @@ Public Class FormSimulWizard
     Private StillTyping As Boolean = False
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
-
-        Me.ListViewPP.View = View.List
 
         Me.StepWizardControl1.FinishButtonText = DWSIM.App.GetLocalString("FinishText")
         Me.StepWizardControl1.CancelButtonText = DWSIM.App.GetLocalString("CancelText")
@@ -76,7 +74,7 @@ Public Class FormSimulWizard
 
             'property packages
             Me.ListViewPP.Items.Clear()
-            For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values
+            For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values.OrderBy(Function(x) x.ComponentName)
                 Select Case pp2.PackageType
                     Case PropertyPackages.PackageType.EOS
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
@@ -167,11 +165,10 @@ Public Class FormSimulWizard
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
 
+        ogc1.ClearSelection()
         ogc1.SuspendLayout()
 
         Dim needselecting As Boolean = True
-
-        ogc1.Enabled = False
 
         For Each r As DataGridViewRow In ogc1.Rows
             If Not r.Cells(1).Value Is Nothing Then
