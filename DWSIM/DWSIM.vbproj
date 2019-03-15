@@ -2151,6 +2151,7 @@
     <None Include="Resources\209x48-doar-azul-assina.gif" />
     <None Include="Resources\card_export.png" />
     <Content Include="DWSIM_ico.ico" />
+    <None Include="Resources\become_a_patron_button%402x.jpg" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />

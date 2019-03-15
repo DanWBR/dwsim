@@ -389,7 +389,8 @@ Partial Class FormWelcome
         'Button8
         '
         resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.Image = Global.DWSIM.My.Resources.Resources.patreon1
+        Me.Button8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(249, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(85, Byte), Integer))
+        Me.Button8.Image = Global.DWSIM.My.Resources.Resources.become_a_patron_button_2x
         Me.Button8.Name = "Button8"
         Me.Button8.UseVisualStyleBackColor = False
         '
