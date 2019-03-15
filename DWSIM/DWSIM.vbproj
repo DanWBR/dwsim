@@ -2263,6 +2263,8 @@
     <None Include="Resources\icon_phone_ticket21.png" />
     <None Include="Resources\icon_phone_ticket22.png" />
     <None Include="Resources\icon_phone_ticket23.png" />
+    <None Include="Resources\patreon.png" />
+    <None Include="Resources\patreon.jpg" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
