@@ -532,7 +532,7 @@ Namespace PropertyPackages
 
                 i = 0
                 Do
-                    If constprops(i).Name = "Water" Then
+                    If constprops(i).Name = "Water" Or constprops(i).Name = "Monoethanolamine" Or constprops(i).Name = "Diethanolamine" Then
                         wtotal += Vx(i) * constprops(i).Molar_Weight / 1000
                     End If
                     mtotal += Vx(i)
@@ -556,7 +556,13 @@ Namespace PropertyPackages
                         fugcoeff(i) = molality(i) * ativ(i)
                     Else
                         If T / Tc(i) >= 1 Then
-                            fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
+                            If constprops(i).Name = "Hydrogen sulfide" Then
+                                fugcoeff(i) = Exp(358.138 - 13236.8 / T - 55.0551 * Log(T) + 0.059565 * T) / P
+                            ElseIf constprops(i).Name = "Carbon dioxide" Then
+                                fugcoeff(i) = Exp(170.7126 - 8477.711 / T - 21.95743 * Log(T) + 0.005781 * T) / P
+                            Else
+                                fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
+                            End If
                         Else
                             fugcoeff(i) = ativ(i) * Me.AUX_PVAPi(i, T) / (P)
                         End If
