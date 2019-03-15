@@ -979,6 +979,12 @@ Namespace PropertyPackages
             Dim xel3 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_MaximumIterations").SingleOrDefault
             If Not xel3 Is Nothing Then Me.ElectrolyteFlash.MaximumIterations = xel3.Value
 
+            Dim xel4 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_UseIPOPT").SingleOrDefault
+            If Not xel4 Is Nothing Then Me.ElectrolyteFlash.UseIPOPTSolver = xel4.Value
+
+            Dim xel5 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_OptimizeInitialEstimates").SingleOrDefault
+            If Not xel5 Is Nothing Then Me.ElectrolyteFlash.OptimizeInitialEstimates = xel5.Value
+
         End Function
 
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
@@ -991,6 +997,8 @@ Namespace PropertyPackages
                 .Add(New XElement("ElectrolyteFlash_CalculateChemicalEquilibria", Me.ElectrolyteFlash.CalculateChemicalEquilibria))
                 .Add(New XElement("ElectrolyteFlash_Tolerance", Me.ElectrolyteFlash.Tolerance))
                 .Add(New XElement("ElectrolyteFlash_MaximumIterations", Me.ElectrolyteFlash.MaximumIterations))
+                .Add(New XElement("ElectrolyteFlash_UseIPOPT", Me.ElectrolyteFlash.UseIPOPTSolver))
+                .Add(New XElement("ElectrolyteFlash_OptimizeInitialEstimates", Me.ElectrolyteFlash.OptimizeInitialEstimates))
             End With
 
             Return elements

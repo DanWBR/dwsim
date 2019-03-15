@@ -159,6 +159,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If TypeOf proppack Is ExUNIQUACPropertyPackage Then
                     activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
+                ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
+                    activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
                 End If
 
                 If activcoeff(wid) = 0.0# Then
@@ -463,8 +465,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                             intvars(i) = New OptBoundVariable("x" & CStr(i + 1), xvar(i), False, lbound(i), ubound(i))
                                                         Next
                                                         Dim intsolver As New Simplex
-                                                        intsolver.Tolerance = Tolerance
-                                                        intsolver.MaxFunEvaluations = MaximumIterations
+                                                        intsolver.Tolerance = 0.01
+                                                        intsolver.MaxFunEvaluations = 100
                                                         x = intsolver.ComputeMin(AddressOf FunctionValue2N, intvars)
 
                                                         intsolver = Nothing
@@ -502,6 +504,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If UseIPOPTSolver Then
 
+                        Calculator.CheckParallelPInvoke()
+
                         Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
 
                         Using problem As New Ipopt(iest.Length, lbound, ubound, 0, Nothing, Nothing,
@@ -511,12 +515,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             problem.AddOption("max_iter", MaximumIterations)
                             problem.AddOption("mu_strategy", "adaptive")
                             problem.AddOption("hessian_approximation", "limited-memory")
+                            problem.SetIntermediateCallback(AddressOf intermediate)
                             status = problem.SolveProblem(iest, fx, Nothing, Nothing, Nothing, Nothing)
                         End Using
 
                         If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
                             Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
                         End If
+
+                        x = iest.Clone
 
                     Else
 
@@ -632,6 +639,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Return True
         End Function
 
+        Public Function intermediate(ByVal alg_mod As IpoptAlgorithmMode, ByVal iter_count As Integer, ByVal obj_value As Double,
+                         ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
+                         ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
+                         ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
+            If obj_value < Tolerance Then Return False Else Return True
+        End Function
+
         Private Function FunctionValue2N(ByVal x() As Double) As Double
 
             Dim i, j, nc As Integer
@@ -668,6 +682,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 For j = 0 To nc
                     If CompoundProperties(j).Name = ComponentIDs(i) Then
                         Vx(j) = N(ComponentIDs(i)) / N.Values.Sum
+                        If Vx(i) < 0 Then Vx(i) = Abs(Vx(i))
                         Exit For
                     End If
                 Next
@@ -701,7 +716,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
             Next
 
-            Vxns = Vxns.NormalizeY
+            'Vxns = Vxns.NormalizeY
 
             Dim wden As Double = 0.0#
             If TypeOf proppack Is ExUNIQUACPropertyPackage Then
@@ -751,7 +766,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         If .Components.ContainsKey(s) Then
                             For j = 0 To nc
                                 If CompoundProperties(j).Name = s And Not CompoundProperties(j).IsSalt Then
-                                    prod(i) *= CP(j) ^ .Components(s).StoichCoeff
+                                    If CP(j) <> 0.0 Then
+                                        prod(i) *= CP(j) ^ .Components(s).StoichCoeff
+                                    End If
                                     Exit For
                                 End If
                             Next
@@ -836,22 +853,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         x3(j) = x(j) * (1 - epsilon)
                     End If
                 Next
-                If Settings.EnableParallelProcessing Then
-
-                    Dim task1 As Task = New Task(Sub()
-                                                     f2 = FunctionGradient(x2)
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     f3 = FunctionGradient(x3)
-                                                 End Sub)
-                    task1.Start()
-                    task2.Start()
-                    Task.WaitAll(task1, task2)
-
-                Else
-                    f2 = FunctionGradient(x2)
-                    f3 = FunctionGradient(x3)
-                End If
+                f2 = FunctionGradient(x2)
+                f3 = FunctionGradient(x3)
                 For k2 = 0 To x.Length - 1
                     h(m) = (f2(k2) - f3(k)) / (x2(i) - x3(i))
                     If Double.IsNaN(h(m)) Then h(m) = 0.0#
@@ -1295,6 +1298,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Return False
             End Get
         End Property
+
     End Class
 
 End Namespace

@@ -347,6 +347,8 @@ Namespace PropertyPackages.Auxiliary
 
             Dim Vids As String() = data.Vids
 
+            If Not Vids.ToList.Contains(k) Or Not Vids.ToList.Contains(m) Then Return tau
+
             Dim T As Double = data.T
 
             If IsIon(data, Vids.ToList.IndexOf(k)) And IsMolecule(data, Vids.ToList.IndexOf(m)) Then
