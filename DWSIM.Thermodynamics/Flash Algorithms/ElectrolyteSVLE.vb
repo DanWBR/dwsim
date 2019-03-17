@@ -93,7 +93,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             'Vxv = vapor phase molar fractions
             'Vxs = solid phase molar fractions
             'V, S, L = phase molar amounts (F = 1 = V + S + L)
-            Dim K(n), Vnf(n), Vnl(n), Vnl_ant(n), Vxl(n), Vns(n), Vxs(n), Vnv(n), Vxv(n), Vf(n), V, S, L, Vp(n), err As Double
+            Dim K(n), Vnf(n), Vnl(n), Vnl_ant(n), Vxl(n), Vns(n), Vxs(n), Vnv(n), Vxv(n), Vxv_ant(n), Vf(n), V, S, L, Vp(n), err, dV As Double
             Dim sumN As Double = 0
 
             'get water index in the array.
@@ -156,7 +156,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         If int_count > 0 Then
                             For i = 0 To rext.Count - 1
-                                rext(i) = 1.0E-20
+                                rext(i) = 0.0000000001
                             Next
                         End If
 
@@ -234,11 +234,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     K = proppack.DW_CalcKvalue(Vxl, Vxv, T, P)
 
-                    Vxv = K.MultiplyY(Vxl)
-                    Vnv = Vxv.MultiplyConstY(V)
+                    Vxv_ant = Vxv.Clone
+
+                    Vxv = K.MultiplyY(Vxl).NormalizeY
 
                     V_ant = V
-                    V = 1 - L - S
+
+                    dV = Vxv.SubtractY(Vxv_ant).MultiplyConstY(V).SumY
+
+                    V = V_ant + dV
+
+                    Vnv = Vxv.MultiplyConstY(V)
 
                     sumN = 0
                     For i = 0 To n
@@ -297,7 +303,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Private Function SolveChemicalEquilibria(ByVal Vxl As Array, ByVal T As Double, ByVal P As Double, ByVal ids As List(Of String), Optional ByVal prevx As Double() = Nothing) As Array
+        Private Function SolveChemicalEquilibria(ByVal Vnl As Array, ByVal T As Double, ByVal P As Double, ByVal ids As List(Of String), Optional ByVal prevx As Double() = Nothing) As Array
 
             Dim i, j As Integer
 
@@ -401,9 +407,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 N.Clear()
 
                 For Each cname As String In Me.ComponentIDs
-                    N0.Add(cname, Vxl(ids.IndexOf(cname)))
+                    N0.Add(cname, Vnl(ids.IndexOf(cname)))
                     DN.Add(cname, 0)
-                    N.Add(cname, Vxl(ids.IndexOf(cname)))
+                    N.Add(cname, Vnl(ids.IndexOf(cname)))
                 Next
 
                 N0.Values.CopyTo(fm0, 0)
@@ -583,28 +589,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ' return equilibrium molar amounts in the liquid phase.
 
-                Dim Vx2 As Double() = Vxl.Clone
+                Dim Vnl2 As Double() = Vnl.Clone
 
                 For Each s As String In N.Keys
-                    Vx2(ids.IndexOf(s)) = Abs(N(s))
+                    Vnl2(ids.IndexOf(s)) = Abs(N(s))
                 Next
 
-                Dim nc As Integer = Vxl.Length - 1
+                Dim nc As Integer = Vnl.Length - 1
 
                 Dim mtot As Double = 0
                 For i = 0 To nc
-                    mtot += Vx2(i)
+                    mtot += Vnl2(i)
                 Next
 
                 'For i = 0 To nc
                 '    Vx(i) = Vx(i) '/ mtot
                 'Next
 
-                Return New Object() {Vx2, x.ExpY}
+                Return New Object() {Vnl2, x.ExpY}
 
             Else
 
-                Return New Object() {Vxl, Nothing}
+                Return New Object() {Vnl, Nothing}
 
             End If
 
@@ -666,12 +672,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                          ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
                          ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                          ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
+
             If obj_value < Tolerance Then Return False Else Return True
+
         End Function
 
         Private Function FunctionValue2N(ByVal x() As Double) As Double
 
-            Dim i, j, nc As Integer
+            Dim i, j, nc, wid As Integer
 
             nc = Me.CompoundProperties.Count - 1
 
@@ -712,20 +720,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Next
 
             Dim val1, val2 As Double
-
-            val1 = Vxl0.SumY * proppack.AUX_MMM(Vxl0)
-            val2 = Vxl.SumY * proppack.AUX_MMM(Vxl)
-
-            Dim pen_val As Double = 0 '(val1 - val2) ^ 2
+            Dim pen_val As Double = 0.0
 
             i = 0
             Do
                 If CompoundProperties(i).Name = "Water" Then
+                    wid = i
+                    If Vxl(i) < 0.6 Then pen_val = (0.6 - Vxl(i)) * 10000.0
                     wtotal += Vxl(i) * CompoundProperties(i).Molar_Weight / 1000
                 End If
                 mtotal += Vxl(i)
                 i += 1
             Loop Until i = nc + 1
+
+            val1 = Vxl0.SumY * proppack.AUX_MMM(Vxl0)
+            val2 = Vxl.SumY * proppack.AUX_MMM(Vxl)
+
+            'pen_val += (val1 - val2) ^ 2
 
             Dim Xsolv As Double = 1
 
@@ -774,7 +785,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             For i = 0 To nc
                 If CompoundProperties(i).IsIon Then
-                    CP(i) = molality(i) * activcoeff(i)
+                    'CP(i) = molality(i) * activcoeff(i)
+                    CP(i) = Vxl(i) * activcoeff(i)
                 ElseIf CompoundProperties(i).IsSalt Then
                     CP(i) = 1.0#
                 Else
