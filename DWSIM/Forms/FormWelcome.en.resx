@@ -117,25 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 14</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Opens a new Data Regression Utility window.</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 16</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Create a New Data Regression Study</value>
-  </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAARgBAwEYAQMBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAASwBAwEsAQMBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -206,110 +193,82 @@
         AQMBwAEDCP8L
 </value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lvlatest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 360</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 14</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Opens a new Compound Creator Utility window.</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 16</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Create a New Compound</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 14</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>Creates a new steady-state simulation.</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 14</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Opens an existing simulation, compound or regression case.</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 16</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Create New Simulation</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 16</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Open File</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 19</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Tasks</value>
+    <value>380, 386</value>
   </data>
   <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 350</value>
-  </data>
-  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>356, 40</value>
+    <value>325, 386</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 392</value>
+    <value>394, 418</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 366</value>
+    <value>386, 392</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Recent Files</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 356</value>
+    <value>331, 119</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Samples</value>
   </data>
   <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 350</value>
+    <value>325, 113</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 356</value>
+    <value>331, 392</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>FOSSEE Flowsheets</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 112</value>
+    <value>6, 130</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 48</value>
+    <value>331, 72</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 77</value>
+    <value>164, 98</value>
+  </data>
+  <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 26</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 77</value>
+    <value>4, 98</value>
+  </data>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 26</value>
+  </data>
+  <data name="FOSSEEList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="FOSSEEList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="FOSSEEList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 139</value>
+    <value>0, 154</value>
   </data>
   <data name="FOSSEEList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 217</value>
+    <value>331, 238</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 356</value>
+    <value>331, 392</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Recent Folders</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 356</value>
+    <value>386, 392</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Resources</value>
@@ -326,12 +285,6 @@
   <data name="LinkLabel4.Text" xml:space="preserve">
     <value>Official Page</value>
   </data>
-  <data name="LinkLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 19</value>
-  </data>
-  <data name="LinkLabel3.Text" xml:space="preserve">
-    <value>Completed Flowsheets (FOSSEE)</value>
-  </data>
   <data name="LinkLabel2.Text" xml:space="preserve">
     <value>Tutorials</value>
   </data>
@@ -341,8 +294,46 @@
   <data name="LinkLabel1.Text" xml:space="preserve">
     <value>Official YouTube Channel</value>
   </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>361, 9</value>
+  <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 604</value>
+  </data>
+  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 163</value>
+  </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>
+Become a DWSIM Patron and get unlimited 24/7 e-mail support and early access to updated versions. You may also get exclusive resources, such as full version unnlock keys for mobile versions, exclusive plug-ins and additional features. You can also participate on development polls to decide what's next on DWSIM.
+Click for more details!</value>
+  </data>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 25</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 25</value>
+  </data>
+  <data name="Button5.Text" xml:space="preserve">
+    <value>New Data Regression Study</value>
+  </data>
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 25</value>
+  </data>
+  <data name="Button3.Text" xml:space="preserve">
+    <value>Create New Compound</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 25</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>New Steady-State Simulation</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 19</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Tasks</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 19</value>
@@ -350,25 +341,7 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Quick Access</value>
   </data>
-  <data name="Button8.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 186</value>
-  </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>
-Become a DWSIM Patron and get unlimited 24/7 e-mail support and early access to updated versions. You may also get exclusive resources, such as full version unnlock keys for mobile versions, exclusive plug-ins and additional features. You can also participate on development polls to decide what's next on DWSIM.
-Click for more details!</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>770, 445</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Welcome to DWSIM</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 772</value>
   </data>
 </root>

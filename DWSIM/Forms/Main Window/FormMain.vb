@@ -49,6 +49,7 @@ Public Class FormMain
     Public pathsep As Char
 
     Public FrmOptions As FormOptions
+    Public FrmWelcome As FormWelcome
     Public FrmRec As FormRecoverFiles
 
     Private dropdownlist As ArrayList
@@ -234,6 +235,12 @@ Public Class FormMain
             Me.FrmOptions.Dock = DockStyle.Fill
             Me.SettingsPanel.Controls.Add(Me.FrmOptions)
             Me.ButtonClose.BringToFront()
+
+            Me.FrmWelcome = New FormWelcome
+            Me.FrmWelcome.Owner = Me
+            Me.FrmWelcome.Dock = DockStyle.Fill
+            Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
+            Me.ButtonClose2.BringToFront()
 
         End If
 
@@ -734,15 +741,11 @@ Public Class FormMain
 
     Sub OpenWelcomeScreen()
 
+        Me.WelcomePanel.Visible = True
+
         If GlobalSettings.Settings.OldUI AndAlso My.Settings.BackupFiles.Count > 0 Then
             Me.FrmRec = New FormRecoverFiles
-            If Me.FrmRec.ShowDialog(Me) = Windows.Forms.DialogResult.Ignore Then
-                Dim frmw As New FormWelcome
-                frmw.ShowDialog(Me)
-            End If
-        Else
-            Dim frmw As New FormWelcome
-            frmw.ShowDialog(Me)
+            Me.FrmRec.ShowDialog(Me)
         End If
 
         UpdateFlowsheetLinks()
@@ -3724,6 +3727,19 @@ Label_00CC:
 
     Private Sub PatronToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatronToolStripMenuItem.Click
         System.Diagnostics.Process.Start("https://patreon.com/dwsim")
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles ButtonClose2.Click
+        Me.WelcomePanel.Visible = False
+        Me.PainelDeBoasvindasToolStripMenuItem.Checked = False
+    End Sub
+
+    Private Sub PainelDeBoasvindasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PainelDeBoasvindasToolStripMenuItem.Click
+        If Me.PainelDeBoasvindasToolStripMenuItem.Checked Then
+            Me.WelcomePanel.Visible = True
+        Else
+            Me.WelcomePanel.Visible = False
+        End If
     End Sub
 
     Private Sub bgSaveBackup_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgSaveBackup.RunWorkerCompleted

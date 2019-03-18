@@ -23,9 +23,13 @@ Imports System.Text
 
 Public Class FormWelcome
 
+    Inherits UserControl
+
     Dim index As Integer = 0
 
     Dim fslist As New Dictionary(Of String, SharedClasses.FOSSEEFlowsheet)
+
+    Public Property Owner As FormMain
 
     Private Sub FormTips_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -111,8 +115,6 @@ Public Class FormWelcome
 
     Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
 
-        Me.Hide()
-        Me.Close()
         Application.DoEvents()
         Application.DoEvents()
         FormMain.NewToolStripButton_Click(sender, e)
@@ -120,8 +122,6 @@ Public Class FormWelcome
     End Sub
 
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Me.Hide()
-        Me.Close()
         Application.DoEvents()
         Application.DoEvents()
         Call FormMain.LoadFileDialog()
@@ -131,10 +131,7 @@ Public Class FormWelcome
 
         Dim lview = DirectCast(sender, ListView)
 
-
         If File.Exists(lview.SelectedItems(0).Tag) Then
-
-            Me.Hide()
 
             Dim floading As New FormLoadingSimulation
 
@@ -224,8 +221,6 @@ Public Class FormWelcome
 
             floading.Close()
 
-            Me.Close()
-
         Else
 
             Throw New FileNotFoundException("File not found.", lview.SelectedItems(0).Tag.ToString)
@@ -236,7 +231,6 @@ Public Class FormWelcome
 
     Private Sub lvlatestfolders_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatestfolders.ItemActivate
 
-        Me.Close()
         Application.DoEvents()
         Application.DoEvents()
         FormMain.OpenFileDialog1.InitialDirectory = Me.lvlatestfolders.SelectedItems(0).Tag
@@ -250,8 +244,6 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "CompoundCreator" & FormMain.m_childcount
-        Me.Hide()
-        Me.Close()
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
@@ -264,8 +256,6 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "DataRegression" & FormMain.m_childcount
-        Me.Hide()
-        Me.Close()
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
@@ -310,7 +300,7 @@ Public Class FormWelcome
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Category:Tutorials")
     End Sub
 
-    Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+    Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("http://dwsim.fossee.in/flowsheeting-project/completed-flowsheet")
     End Sub
 
@@ -352,7 +342,6 @@ Public Class FormWelcome
                                                                                                  FormMain.LoadXML2(xdoc, Sub(x)
                                                                                                                              Me.Invoke(Sub() floading.ProgressBar1.Value = x)
                                                                                                                          End Sub)
-                                                                                                 Me.Close()
                                                                                              Catch ex As Exception
                                                                                                  MessageBox.Show(tk.Exception, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                                                                              Finally
@@ -381,4 +370,5 @@ Public Class FormWelcome
     Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
         Process.Start("https://patreon.com/dwsim")
     End Sub
+
 End Class

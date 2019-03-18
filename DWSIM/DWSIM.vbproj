@@ -740,7 +740,7 @@
       <DependentUpon>FormWelcome.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormWelcome.vb">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\FormScript.Designer.vb">
       <DependentUpon>FormScript.vb</DependentUpon>
@@ -2057,6 +2057,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\texteditor.png" />
     <None Include="Resources\textfield_rename.png" />
     <None Include="Resources\text_letter_omega.png" />
     <None Include="Resources\Zoom Out.png" />
@@ -2266,6 +2267,7 @@
     <None Include="Resources\icon_phone_ticket23.png" />
     <None Include="Resources\patreon.png" />
     <None Include="Resources\patreon.jpg" />
+    <None Include="Resources\labicon.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

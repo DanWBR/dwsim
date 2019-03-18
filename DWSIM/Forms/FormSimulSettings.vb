@@ -993,6 +993,7 @@ Public Class FormSimulSettings
                 r.Selected = False
                 r.Visible = True
             Next
+            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
         End If
         ogc1.ResumeLayout()
     End Sub

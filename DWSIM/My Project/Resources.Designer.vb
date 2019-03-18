@@ -1803,6 +1803,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property labicon() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("labicon", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property layers() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("layers", resourceCulture)
@@ -3033,6 +3043,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property texteditor() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("texteditor", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property textfield_rename() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("textfield_rename", resourceCulture)
@@ -3426,6 +3446,16 @@ Namespace My.Resources
         Friend ReadOnly Property Widgets_Alt_Badge() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Widgets Alt Badge", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property wizardbg1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("wizardbg1", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
