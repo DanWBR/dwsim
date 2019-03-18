@@ -117,36 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>Electrolyte NRTL</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Advanced Settings</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>General Options</value>
-  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Interaction Parameters</value>
-  </data>
-  <data name="Column5.HeaderText" xml:space="preserve">
-    <value>A12</value>
-  </data>
-  <data name="Column6.HeaderText" xml:space="preserve">
-    <value>A21</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Debug</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Copy Objective Function History from Last Chemical Equilibrium Calculation</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Chemical Equilibrium</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Debug</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkRigEnBal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 17</value>
+  </data>
+  <data name="chkRigEnBal.Text" xml:space="preserve">
+    <value>Rigorous Energy Balance</value>
+  </data>
+  <data name="chkAlternInit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 200</value>
+  </data>
+  <data name="chkAlternInit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 17</value>
+  </data>
+  <data name="chkAlternInit.Text" xml:space="preserve">
+    <value>Alternate Initialization (Reaction Extents)</value>
+  </data>
   <data name="chkOptimize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 172</value>
+    <value>12, 171</value>
   </data>
   <data name="chkOptimize.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 17</value>
@@ -208,14 +205,23 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Reaction Set</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>General Options</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Chemical Equilibrium</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Advanced Settings</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Parameter</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Value</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>General Options</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>General Options</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Electrolyte NRTL Property Package</value>

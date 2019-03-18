@@ -122,12 +122,16 @@ gt1:            If ppu.m_enrtl.InteractionParameters.ContainsKey(id1) Then
         chkCalcChemEq.Checked = ppu.ElectrolyteFlash.CalculateChemicalEquilibria
         chkIPOPT.Checked = ppu.ElectrolyteFlash.UseIPOPTSolver
         chkOptimize.Checked = ppu.ElectrolyteFlash.OptimizeInitialEstimates
+        chkAlternInit.Checked = ppu.ElectrolyteFlash.AlternateBoundsInitializer
+        chkRigEnBal.Checked = ppu.ElectrolyteFlash.RigorousEnergyBalance
 
         cbReacSets.Enabled = chkCalcChemEq.Checked
         tbMaxIts.Enabled = chkCalcChemEq.Checked
         tbTol.Enabled = chkCalcChemEq.Checked
         chkIPOPT.Enabled = chkCalcChemEq.Checked
         chkOptimize.Enabled = chkCalcChemEq.Checked
+        chkAlternInit.Enabled = chkCalcChemEq.Checked
+        chkRigEnBal.Enabled = chkCalcChemEq.Checked
 
         Try
             Dim reacsetname As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.ID = ppu.ElectrolyteFlash.ReactionSet).FirstOrDefault.Name
@@ -224,6 +228,8 @@ gt1:            If ppu.m_enrtl.InteractionParameters.ContainsKey(id1) Then
             tbTol.Enabled = chkCalcChemEq.Checked
             chkIPOPT.Enabled = chkCalcChemEq.Checked
             chkOptimize.Enabled = chkCalcChemEq.Checked
+            chkAlternInit.Enabled = chkCalcChemEq.Checked
+            chkRigEnBal.Enabled = chkCalcChemEq.Checked
         End If
     End Sub
 
@@ -255,6 +261,20 @@ gt1:            If ppu.m_enrtl.InteractionParameters.ContainsKey(id1) Then
         If Loaded Then
             Dim ppu As PropertyPackages.ElectrolyteNRTLPropertyPackage = _pp
             ppu.ElectrolyteFlash.OptimizeInitialEstimates = chkOptimize.Checked
+        End If
+    End Sub
+
+    Private Sub chkAlternInit_CheckedChanged(sender As Object, e As EventArgs) Handles chkAlternInit.CheckedChanged
+        If Loaded Then
+            Dim ppu As PropertyPackages.ElectrolyteNRTLPropertyPackage = _pp
+            ppu.ElectrolyteFlash.AlternateBoundsInitializer = chkAlternInit.Checked
+        End If
+    End Sub
+
+    Private Sub chkRigEnBal_CheckedChanged(sender As Object, e As EventArgs) Handles chkRigEnBal.CheckedChanged
+        If Loaded Then
+            Dim ppu As PropertyPackages.ElectrolyteNRTLPropertyPackage = _pp
+            ppu.ElectrolyteFlash.RigorousEnergyBalance = chkRigEnBal.Checked
         End If
     End Sub
 End Class

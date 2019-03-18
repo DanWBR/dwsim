@@ -320,12 +320,12 @@
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
     <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
-    <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
+    <Compile Include="Property Packages\ActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ElectrolyteProperties.vb" />
-    <Compile Include="Base Classes\ElectrolyteBase.vb" />
+    <Compile Include="Property Packages\ElectrolyteBase.vb" />
     <Compile Include="Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />
-    <Compile Include="Base Classes\PropertyPackage.vb" />
+    <Compile Include="Property Packages\PropertyPackage.vb" />
     <Compile Include="Models\FluidProperties.vb" />
     <Compile Include="Base Classes\FlashAlgorithmBase.vb" />
     <Compile Include="Flash Algorithms\BlackOil.vb" />

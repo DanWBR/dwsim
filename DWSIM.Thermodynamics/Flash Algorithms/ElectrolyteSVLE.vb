@@ -43,6 +43,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public proppack As PropertyPackage
 
+        Dim nl3 As New NestedLoopsSLE With {.SolidSolution = False}
+
         Dim tmpx As Double(), tmpdx As Double()
 
         Dim N0 As New Dictionary(Of String, Double)
@@ -60,8 +62,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
         Public Property ComponentConversions As Dictionary(Of String, Double)
 
-        Public Property MaximumIterations As Integer = 10000
-        Public Property Tolerance As Double = 1.0E-30
+        Public Property MaximumIterations As Integer = 100
+        Public Property Tolerance As Double = 0.0000000001
 
         Public Property ObjectiveFunctionHistory As New List(Of Double)
 
@@ -70,6 +72,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property OptimizeInitialEstimates As Boolean = True
 
         Public Property UseIPOPTSolver As Boolean = True
+
+        Public Property AlternateBoundsInitializer As Boolean = False
+
+        Public Property RigorousEnergyBalance As Boolean = True
 
         Private Vxl0, Vf0 As Double()
 
@@ -93,7 +99,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             'Vxv = vapor phase molar fractions
             'Vxs = solid phase molar fractions
             'V, S, L = phase molar amounts (F = 1 = V + S + L)
-            Dim K(n), Vnf(n), Vnl(n), Vnl_ant(n), Vxl(n), Vns(n), Vxs(n), Vnv(n), Vxv(n), Vxv_ant(n), Vf(n), V, S, L, Vp(n), err, dV As Double
+            Dim K(n), Vnf(n), Vnl(n), Vnl_ant(n), Vxl(n), Vns(n), Vxs(n), Vnv(n), Vxv(n), Vxv_ant(n), Vf(n), V, S, L, Vp(n) As Double
             Dim sumN As Double = 0
 
             'get water index in the array.
@@ -132,6 +138,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim int_count As Integer = 0
             Dim L_ant As Double = 0.0#
             Dim V_ant As Double = 0.0#
+            Dim Lerr As Double = 0.0
 
             Dim rext As Double() = Nothing
             Dim result As Object
@@ -156,7 +163,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         If int_count > 0 Then
                             For i = 0 To rext.Count - 1
-                                rext(i) = 0.0000000001
+                                rext(i) = 0.0
                             Next
                         End If
 
@@ -172,118 +179,56 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Vxl(i) = Vnl(i) / Vnl.Sum()
                     Next
 
-                    'calculate activity coefficients.
+                    Vnf = Vnl.AddY(Vnv)
 
-                    If TypeOf proppack Is ExUNIQUACPropertyPackage Then
-                        activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
-                    ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
-                        activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
-                    End If
+                    sumN = Vnf.Sum
 
-                    If activcoeff(wid) = 0.0# Then
-                        'possibly only solids in this stream. will make arrangements so the maximum solubility is very small.
-                        For i = 0 To n
-                            activcoeff(i) = 10000000000.0
-                        Next
-                    End If
-
-                    Dim Vxlmax(n) As Double
-
-                    'calculate maximum solubilities for solids/precipitates.
-
-                    For i = 0 To n
-                        If CompoundProperties(i).IsSalt Then
-                            Vxlmax(i) = 0.0#
-                        ElseIf CompoundProperties(i).TemperatureOfFusion <> 0.0# And i <> wid Then
-                            Vxlmax(i) = (1 / activcoeff(i)) * Exp(-CompoundProperties(i).EnthalpyOfFusionAtTf / (0.00831447 * T) * (1 - T / CompoundProperties(i).TemperatureOfFusion))
-                            If Vxlmax(i) > 1 Then Vxlmax(i) = 1.0#
-                        Else
-                            If CompoundProperties(i).IsHydratedSalt Then
-                                Vxlmax(i) = 0.0# 'in the absence of enthalpy/temperature of fusion, I'll assume that the hydrated salt will always precipitate, if present.
-                            Else
-                                Vxlmax(i) = 1.0#
-                            End If
-                        End If
-                        If Double.IsNaN(Vxlmax(i)) Then Vxlmax(i) = 1.0#
-                    Next
-
-                    'mass/solids balance.
-
-                    For i = 0 To n
-                        Vnl_ant(i) = Vnl(i)
-                        If Vnl(i) > Vxlmax(i) * L Then
-                            Vnl(i) = Vxlmax(i) * L
-                            Vns(i) = Vnl_ant(i) - Vxlmax(i) * L
-                        Else
-                            Vns(i) = 0
-                        End If
-                        If Vns(i) < 0.0# Then Vns(i) = 0.0#
-                    Next
-
-                    'liquid mole amounts
+                    Vf = Vnf.NormalizeY
 
                     L_ant = L
-                    L = Vnl.Sum()
-                    S = Vns.Sum()
 
-                    For i = 0 To n
-                        If Sum(Vnl) <> 0.0# Then Vxl(i) = Vnl(i) / Sum(Vnl) Else Vxl(i) = 0.0#
-                        If Sum(Vns) <> 0.0# Then Vxs(i) = Vns(i) / Sum(Vns) Else Vxs(i) = 0.0#
-                        If Sum(Vnv) <> 0.0# Then Vxv(i) = Vnv(i) / Sum(Vnv) Else Vxv(i) = 0.0#
-                    Next
+                    flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, proppack, Vf, Nothing, 0.0#)
+                    If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
 
-                    K = proppack.DW_CalcKvalue(Vxl, Vxv, T, P)
+                    V = flashresult.GetVaporPhaseMoleFraction
+                    L = flashresult.GetLiquidPhase1MoleFraction
+                    S = 0.0#
 
-                    Vxv_ant = Vxv.Clone
+                    Vnv = flashresult.VaporPhaseMoleAmounts.ToArray
+                    Vnl = flashresult.LiquidPhase1MoleAmounts.ToArray
 
-                    Vxv = K.MultiplyY(Vxl).NormalizeY
+                    Vxl = flashresult.GetLiquidPhase1MoleFractions
+                    Vxv = flashresult.GetVaporPhaseMoleFractions
 
-                    V_ant = V
+                    If L > 0 Then
 
-                    dV = Vxv.SubtractY(Vxv_ant).MultiplyConstY(V).SumY
+                        If proppack.RET_VTF.SumY > 0.0 OrElse proppack.ForcedSolids.Count > 0 Then
 
-                    V = V_ant + dV
+                            result = nl3.Flash_SL(Vxl, P, T, proppack)
 
-                    Vnv = Vxv.MultiplyConstY(V)
+                            S = result(1) * L
+                            L = result(0) * L
 
-                    sumN = 0
-                    For i = 0 To n
-                        sumN += Vnv(i) + Vnl(i) + Vns(i)
-                    Next
+                            Vxl = result(3)
+                            Vxs = result(4)
 
-                    err = 0
-                    For i = 0 To n
-                        err += Abs(Vnl(i) - Vnl_ant(i)) ^ 2
-                    Next
-                    err += (L - L_ant) ^ 2 + (V - V_ant) ^ 2
+                        End If
 
-                    If err < Tolerance And int_count > 0 Then Exit Do
+                    End If
+
+                    Lerr = Abs(L - L_ant) ^ 2
+
+                    If Lerr < 0.001 Then Exit Do
+
+                    If int_count > MaximumIterations Then Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of external iterations without converging.")
 
                     int_count += 1
 
-                    If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    proppack.CurrentMaterialStream.Flowsheet?.CheckStatus()
 
                 Loop Until int_count > MaximumIterations
 
             End If
-
-            If int_count > MaximumIterations Then
-                Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of external iterations without converging.")
-            End If
-
-            L = Vnl.Sum()
-            S = Vns.Sum()
-            V = Vnv.Sum()
-
-            For i = 0 To n
-                If Sum(Vnl) <> 0.0# Then Vxl(i) = Vnl(i) / Sum(Vnl) Else Vxl(i) = 0.0#
-                If Sum(Vns) <> 0.0# Then Vxs(i) = Vns(i) / Sum(Vns) Else Vxs(i) = 0.0#
-                If Sum(Vnv) <> 0.0# Then Vxv(i) = Vnv(i) / Sum(Vnv) Else Vxv(i) = 0.0#
-            Next
-
-            L = L / sumN
-            S = S / sumN
-            V = V / sumN
 
             'return flash calculation results.
 
@@ -423,23 +368,46 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim ubound(Me.ReactionExtents.Count - 1) As Double
                 Dim var1 As Double
 
-                i = 0
-                For Each rxid As String In Me.Reactions
-                    rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
-                    j = 0
-                    For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
-                        var1 = -N0(comp.CompName) / comp.StoichCoeff
-                        If j = 0 Then
-                            lbound(i) = Log(1.0E-40)
-                            ubound(i) = Log(var1)
-                        Else
-                            If Log(var1) < lbound(i) Then lbound(i) = Log(1.0E-40)
-                            If Log(var1) > ubound(i) Then ubound(i) = Log(var1)
-                        End If
-                        j += 1
+                If Not AlternateBoundsInitializer Then
+
+                    i = 0
+                    For Each rxid As String In Me.Reactions
+                        rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
+                        j = 0
+                        For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
+                            var1 = -N0(comp.CompName) / comp.StoichCoeff
+                            If j = 0 Then
+                                lbound(i) = var1
+                                ubound(i) = var1
+                            Else
+                                If var1 < lbound(i) Then lbound(i) = var1
+                                If var1 > ubound(i) Then ubound(i) = var1
+                            End If
+                            j += 1
+                        Next
+                        i += 1
                     Next
-                    i += 1
-                Next
+
+                Else
+
+                    Dim nvars As New List(Of Double)
+                    Dim pvars As New List(Of Double)
+
+                    i = 0
+                    For Each rxid As String In Me.Reactions
+                        nvars.Clear()
+                        pvars.Clear()
+                        rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
+                        For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
+                            If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                            If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                        Next
+                        lbound(i) = nvars.Max
+                        ubound(i) = pvars.Min
+                        i += 1
+                    Next
+
+                End If
 
                 Me.T = T
                 Me.P = P
@@ -450,18 +418,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Not prevx Is Nothing Then
                     For i = 0 To r
-                        REx(i) = prevx(i) * 0.9
+                        REx(i) = prevx(i) * 0.99
                     Next
                 Else
                     i = 0
                     For Each rxnsb As Interfaces.IReactionSetBase In proppack.CurrentMaterialStream.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
                         If proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
                             rxn = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID)
-                            If rxn.ConstantKeqValue < 1 Then
-                                REx(i) = 1.0E-20
-                            Else
-                                REx(i) = Exp(ubound(i)) * 0.9
-                            End If
+                            REx(i) = 0.0 'lbound(i) + 0.5 * (ubound(i) - lbound(i))
                             i += 1
                         End If
                     Next
@@ -469,7 +433,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 'check if there is enough reactant to proceeed with chemical equilibrium calculation
 
-                If ubound.ExpY.SumY > 0.0# Then
+                If ubound.SumY > 0.0# Then
 
                     If OptimizeInitialEstimates Then
 
@@ -477,7 +441,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         Dim extvars(r) As OptBoundVariable
                         For i = 0 To r
-                            extvars(i) = New OptBoundVariable("ex" & CStr(i + 1), Log(REx(i)), False, lbound(i), ubound(i))
+                            extvars(i) = New OptBoundVariable("ex" & CStr(i + 1), REx(i), False, lbound(i), ubound(i))
                         Next
 
                         Dim extsolver As New Simplex
@@ -509,7 +473,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Else
 
                         For i = 0 To r
-                            iest(i) = Log(REx(i))
+                            iest(i) = REx(i)
                         Next
 
                     End If
@@ -606,7 +570,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 '    Vx(i) = Vx(i) '/ mtot
                 'Next
 
-                Return New Object() {Vnl2, x.ExpY}
+                Return New Object() {Vnl2, x}
 
             Else
 
@@ -673,6 +637,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                          ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                          ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
 
+            proppack.CurrentMaterialStream.Flowsheet?.ShowMessage("Chemical Equilibrium Error = " & obj_value & " (Acceptable Value = " & Tolerance & ")", Interfaces.IFlowsheet.MessageType.Information)
+
             If obj_value < Tolerance Then Return False Else Return True
 
         End Function
@@ -687,7 +653,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For Each s As String In N.Keys
                 DN(s) = 0
                 For j = 0 To r
-                    DN(s) += E(i, j) * Exp(x(j))
+                    DN(s) += E(i, j) * x(j)
                 Next
                 i += 1
             Next
@@ -736,7 +702,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val1 = Vxl0.SumY * proppack.AUX_MMM(Vxl0)
             val2 = Vxl.SumY * proppack.AUX_MMM(Vxl)
 
-            'pen_val += (val1 - val2) ^ 2
+            pen_val += 0 '(val1 - val2) ^ 2
 
             Dim Xsolv As Double = 1
 
@@ -800,7 +766,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                         If .Components.ContainsKey(s) Then
                             For j = 0 To nc
-                                If CompoundProperties(j).Name = s And Not CompoundProperties(j).IsSalt Then
+                                If CompoundProperties(j).Name = s Then
                                     If CP(j) <> 0.0 Then
                                         prod(i) *= CP(j) ^ .Components(s).StoichCoeff
                                     End If
@@ -818,6 +784,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     f2 += Log(prod(i))
                 End With
             Next
+
+            proppack.CurrentMaterialStream.Flowsheet?.CheckStatus()
 
             If Double.IsNaN(f2) Or Double.IsInfinity(f2) Then
 
@@ -868,42 +836,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Private Function FunctionHessian(ByVal x() As Double) As Double()
-
-            Dim epsilon As Double = 0.001
-
-            Dim f2() As Double = Nothing
-            Dim f3() As Double = Nothing
-            Dim h((x.Length) * (x.Length) - 1), x2(x.Length - 1), x3(x.Length - 1) As Double
-            Dim m, k As Integer
-
-            m = 0
-            For i = 0 To x.Length - 1
-                For j = 0 To x.Length - 1
-                    If i <> j Then
-                        x2(j) = x(j)
-                        x3(j) = x(j)
-                    Else
-                        x2(j) = x(j) * (1 + epsilon)
-                        x3(j) = x(j) * (1 - epsilon)
-                    End If
-                Next
-                f2 = FunctionGradient(x2)
-                f3 = FunctionGradient(x3)
-                For k2 = 0 To x.Length - 1
-                    h(m) = (f2(k2) - f3(k)) / (x2(i) - x3(i))
-                    If Double.IsNaN(h(m)) Then h(m) = 0.0#
-                    m += 1
-                Next
-            Next
-
-            Return h
-
-        End Function
-
         Public Overloads Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double) As Dictionary(Of String, Object)
-
-            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim n, ecount As Integer
@@ -921,36 +854,57 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n)
 
-            Dim Tmin, Tmax, epsilon(4), maxDT As Double
-
-            Tmax = 2000.0#
-            Tmin = 50.0#
-            maxDT = 5.0#
-
-            epsilon(0) = 0.1
-            epsilon(1) = 0.01
-            epsilon(2) = 0.001
-            epsilon(3) = 0.0001
-            epsilon(4) = 0.00001
-
-            Dim fx As Double
             If Tref = 0.0# Then Tref = 298.15
             If Double.IsNaN(Tref) Then Tref = 298.15
 
             Me.P = P
 
-            Dim tvar As New OptBoundVariable(Tref, 273.15, 1000)
+            Dim cnt As Integer = 0
 
-            Dim solver As New Simplex
-            solver.Tolerance = Tolerance
-            solver.MaxFunEvaluations = MaximumIterations
-            T = solver.ComputeMin(AddressOf Herror, New OptBoundVariable() {tvar})(0)
+            Dim fx, fx2, dfdx, x1, x0, dx As Double
 
-            fx = Herror({T})
+            x1 = Tref
 
-            If Double.IsNaN(T) Or solver.FunEvaluations > MaximumIterations Then
-                Throw New Exception("PH Flash [Electrolyte]: Invalid result: Temperature did not converge.")
-            End If
+            Dim prevset = CalculateChemicalEquilibria
+
+            CalculateChemicalEquilibria = RigorousEnergyBalance
+
+            Do
+
+                If cnt < 2 Then
+
+                    fx = Herror({x1})
+                    fx2 = Herror({x1 + 0.1})
+
+                    dfdx = (fx2 - fx) / 0.1
+
+                Else
+
+                    fx2 = fx
+                    fx = Herror({x1})
+
+                    dfdx = (fx - fx2) / (x1 - x0)
+
+                End If
+
+                If Abs(fx) <= 0.01 Then Exit Do
+
+                dx = fx / dfdx
+
+                x0 = x1
+                x1 = x1 - dx
+
+                If Double.IsNaN(x1) Or cnt > 25 Then
+                    Throw New Exception("PH Flash [Electrolyte]: Invalid result: Temperature did not converge.")
+                End If
+
+                cnt += 1
+
+            Loop
+
+            CalculateChemicalEquilibria = prevset
+
+            T = x1
 
             Dim tmp As Object = Flash_PT(Vz, T, P)
 
@@ -997,7 +951,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim tmp As Dictionary(Of String, Object) = Flash_PT(Vz, T, P)
 
-            Dim L, V, S, Vx(), Vy(), Vs(), sumN, _Hv, _Hl, _Hs As Double
+            Dim FW0, FW, L, V, S, Vx(), Vy(), Vs(), sumN, _Hv, _Hl, _Hs As Double
 
             Dim n = Vz.Length - 1
 
@@ -1008,25 +962,29 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vx = tmp("LiquidPhaseMolarComposition")
             Vy = tmp("VaporPhaseMolarComposition")
             Vs = tmp("SolidPhaseMolarComposition")
-            'Vz = tmp("MixtureMoleFlows")
 
             _Hv = 0
             _Hl = 0
             _Hs = 0
 
-            Dim mmg, mml, mms As Double
+            Dim mmm, mmg, mml, mms As Double
+
             If V > 0.0# Then _Hv = proppack.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
             If L > 0.0# Then _Hl = proppack.DW_CalcEnthalpy(Vx, T, P, State.Liquid)
             If S > 0.0# Then _Hs = proppack.DW_CalcSolidEnthalpy(T, Vs, CompoundProperties)
+
             mmg = proppack.AUX_MMM(Vy)
             mml = proppack.AUX_MMM(Vx)
             mms = proppack.AUX_MMM(Vs)
 
-            Dim herr As Double = Hf - ((mmg * V / (mmg * V + mml * L + mms * S)) * _Hv + (mml * L / (mmg * V + mml * L + mms * S)) * _Hl + (mms * S / (mmg * V + mml * L + mms * S)) * _Hs)
+            mmm = V * mmg + L * mml + S * mml
 
-            If Double.IsNaN(herr) Then herr = 10000000000.0
+            FW0 = 0.001 * proppack.AUX_MMM(Vz) 'kg
+            FW = 0.001 * sumN * mmm 'kg
 
-            Return herr ^ 2
+            Dim herr As Double = FW0 * Hf - FW * (((mmg * V / (mmg * V + mml * L + mms * S)) * _Hv + (mml * L / (mmg * V + mml * L + mms * S)) * _Hl + (mms * S / (mmg * V + mml * L + mms * S)) * _Hs))
+
+            Return herr
 
             WriteDebugInfo("PH Flash [Electrolyte]: Current T = " & T & ", Current H Error = " & herr)
 
@@ -1292,7 +1250,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PS(Vz() As Double, P As Double, S As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
-            Throw New NotImplementedException
+            Throw New NotImplementedException("Pressure-Entropy Flash Not Implemented")
         End Function
 
         Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
