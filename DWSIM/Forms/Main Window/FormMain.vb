@@ -242,6 +242,11 @@ Public Class FormMain
             Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
             Me.ButtonClose2.BringToFront()
 
+            Dim frmweb As New FormWebPanel
+            frmweb.Dock = DockStyle.Fill
+            WebPanel.Controls.Add(frmweb)
+            Me.ButtonCloseWeb.BringToFront()
+
         End If
 
         Me.Text = DWSIM.App.GetLocalString("FormParent_FormText")
@@ -3739,6 +3744,19 @@ Label_00CC:
             Me.WelcomePanel.Visible = True
         Else
             Me.WelcomePanel.Visible = False
+        End If
+    End Sub
+
+    Private Sub ButtonCloseWeb_Click(sender As Object, e As EventArgs) Handles ButtonCloseWeb.Click
+        Me.WebPanel.Visible = False
+        Me.PainelDaWebToolStripMenuItem.Checked = False
+    End Sub
+
+    Private Sub PainelDaWebToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PainelDaWebToolStripMenuItem.Click
+        If Me.PainelDaWebToolStripMenuItem.Checked Then
+            Me.WebPanel.Visible = True
+        Else
+            Me.WebPanel.Visible = False
         End If
     End Sub
 
