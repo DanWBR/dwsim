@@ -66,6 +66,14 @@ Partial Class FormSimulSettings
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ogc1 = New System.Windows.Forms.DataGridView()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdd = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.casno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -148,28 +156,9 @@ Partial Class FormSimulSettings
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cbObjectType = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbDockingLeft = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingLeftAutoHide = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingRightAutoHide = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingRight = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingTop = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingBottom = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingDocument = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingFloat = New System.Windows.Forms.ToolStripButton()
-        Me.tsbClose = New System.Windows.Forms.ToolStripButton()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colAdd = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.casno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -201,7 +190,6 @@ Partial Class FormSimulSettings
         Me.GroupBox3.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button9
@@ -486,6 +474,65 @@ Partial Class FormSimulSettings
         Me.ogc1.ShowEditingIcon = False
         Me.ogc1.ShowRowErrors = False
         Me.ToolTip1.SetToolTip(Me.ogc1, resources.GetString("ogc1.ToolTip"))
+        '
+        'Column11
+        '
+        Me.Column11.FillWeight = 5.0!
+        resources.ApplyResources(Me.Column11, "Column11")
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        '
+        'colAdd
+        '
+        Me.colAdd.FillWeight = 20.0!
+        resources.ApplyResources(Me.colAdd, "colAdd")
+        Me.colAdd.Name = "colAdd"
+        '
+        'Column6
+        '
+        Me.Column6.FillWeight = 83.31126!
+        resources.ApplyResources(Me.Column6, "Column6")
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'casno
+        '
+        Me.casno.FillWeight = 44.0!
+        resources.ApplyResources(Me.casno, "casno")
+        Me.casno.Name = "casno"
+        Me.casno.ReadOnly = True
+        '
+        'Column8
+        '
+        Me.Column8.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column8, "Column8")
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        '
+        'Column9
+        '
+        Me.Column9.FillWeight = 41.65563!
+        resources.ApplyResources(Me.Column9, "Column9")
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        '
+        'Column7
+        '
+        Me.Column7.FillWeight = 30.0!
+        resources.ApplyResources(Me.Column7, "Column7")
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        '
+        'Column5
+        '
+        Me.Column5.FalseValue = "False"
+        Me.Column5.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column5.TrueValue = "True"
         '
         'Label8
         '
@@ -889,8 +936,8 @@ Partial Class FormSimulSettings
         Me.TabControl1.Controls.Add(Me.TabPageReactions)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage6)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
@@ -1160,87 +1207,6 @@ Partial Class FormSimulSettings
         Me.Label14.Name = "Label14"
         Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
-        'ToolStrip1
-        '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.BackColor = System.Drawing.Color.SteelBlue
-        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.tsbDockingLeft, Me.tsbDockingLeftAutoHide, Me.tsbDockingRightAutoHide, Me.tsbDockingRight, Me.tsbDockingTop, Me.tsbDockingBottom, Me.tsbDockingDocument, Me.tsbDockingFloat, Me.tsbClose})
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolTip1.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip"))
-        '
-        'ToolStripLabel1
-        '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
-        Me.ToolStripLabel1.ForeColor = System.Drawing.Color.White
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        '
-        'tsbDockingLeft
-        '
-        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
-        Me.tsbDockingLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingLeft.Image = Global.DWSIM.My.Resources.Resources.arrow_left1
-        Me.tsbDockingLeft.Name = "tsbDockingLeft"
-        '
-        'tsbDockingLeftAutoHide
-        '
-        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
-        Me.tsbDockingLeftAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingLeftAutoHide.Image = Global.DWSIM.My.Resources.Resources.rewind
-        Me.tsbDockingLeftAutoHide.Name = "tsbDockingLeftAutoHide"
-        '
-        'tsbDockingRightAutoHide
-        '
-        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
-        Me.tsbDockingRightAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingRightAutoHide.Image = Global.DWSIM.My.Resources.Resources.fast_forward
-        Me.tsbDockingRightAutoHide.Name = "tsbDockingRightAutoHide"
-        '
-        'tsbDockingRight
-        '
-        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
-        Me.tsbDockingRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingRight.Image = Global.DWSIM.My.Resources.Resources.arrow_right
-        Me.tsbDockingRight.Name = "tsbDockingRight"
-        '
-        'tsbDockingTop
-        '
-        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
-        Me.tsbDockingTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingTop.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
-        Me.tsbDockingTop.Name = "tsbDockingTop"
-        '
-        'tsbDockingBottom
-        '
-        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
-        Me.tsbDockingBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingBottom.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
-        Me.tsbDockingBottom.Name = "tsbDockingBottom"
-        '
-        'tsbDockingDocument
-        '
-        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
-        Me.tsbDockingDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingDocument.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
-        Me.tsbDockingDocument.Name = "tsbDockingDocument"
-        '
-        'tsbDockingFloat
-        '
-        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
-        Me.tsbDockingFloat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingFloat.Image = Global.DWSIM.My.Resources.Resources._new
-        Me.tsbDockingFloat.Name = "tsbDockingFloat"
-        '
-        'tsbClose
-        '
-        resources.ApplyResources(Me.tsbClose, "tsbClose")
-        Me.tsbClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.tsbClose.ForeColor = System.Drawing.Color.White
-        Me.tsbClose.Image = Global.DWSIM.My.Resources.Resources.no
-        Me.tsbClose.Name = "tsbClose"
-        '
         'ToolTip1
         '
         Me.ToolTip1.IsBalloon = True
@@ -1256,70 +1222,10 @@ Partial Class FormSimulSettings
         '
         Me.FontDialog1.ShowColor = True
         '
-        'Column11
-        '
-        Me.Column11.FillWeight = 5.0!
-        resources.ApplyResources(Me.Column11, "Column11")
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        '
-        'colAdd
-        '
-        Me.colAdd.FillWeight = 20.0!
-        resources.ApplyResources(Me.colAdd, "colAdd")
-        Me.colAdd.Name = "colAdd"
-        '
-        'Column6
-        '
-        Me.Column6.FillWeight = 83.31126!
-        resources.ApplyResources(Me.Column6, "Column6")
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        '
-        'casno
-        '
-        Me.casno.FillWeight = 44.0!
-        resources.ApplyResources(Me.casno, "casno")
-        Me.casno.Name = "casno"
-        Me.casno.ReadOnly = True
-        '
-        'Column8
-        '
-        Me.Column8.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column8, "Column8")
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        '
-        'Column9
-        '
-        Me.Column9.FillWeight = 41.65563!
-        resources.ApplyResources(Me.Column9, "Column9")
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        '
-        'Column7
-        '
-        Me.Column7.FillWeight = 30.0!
-        resources.ApplyResources(Me.Column7, "Column7")
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        '
-        'Column5
-        '
-        Me.Column5.FalseValue = "False"
-        Me.Column5.FillWeight = 10.0!
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column5.TrueValue = "True"
-        '
         'FormSimulSettings
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.TabControl1)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -1367,8 +1273,6 @@ Partial Class FormSimulSettings
         Me.TabPage6.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox14.PerformLayout()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1447,17 +1351,6 @@ Partial Class FormSimulSettings
     Public WithEvents cbObjectType As System.Windows.Forms.ComboBox
     Public WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents PropertyListView As System.Windows.Forms.ListView
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents tsbDockingLeft As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingLeftAutoHide As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingRightAutoHide As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingRight As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingTop As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingBottom As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingDocument As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbClose As System.Windows.Forms.ToolStripButton
     Public WithEvents GroupBox13 As System.Windows.Forms.GroupBox
     Public WithEvents btnDeleteFA As System.Windows.Forms.Button
     Public WithEvents btnConfigFA As System.Windows.Forms.Button

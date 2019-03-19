@@ -1005,7 +1005,7 @@ Public Class FormSimulSettings
         Else
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
         End If
-        Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
+        Dim pp As PropertyPackages.PropertyPackage = FrmChild.PropertyPackages(ppid)
         pp.DisplayEditingForm()
     End Sub
 
@@ -1302,7 +1302,7 @@ Public Class FormSimulSettings
         End If
     End Sub
 
-    Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
+    Private Sub tsbClose_Click(sender As Object, e As EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             Me.Close()
         Else
@@ -1310,9 +1310,7 @@ Public Class FormSimulSettings
         End If
     End Sub
 
-    Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,
-                                                                        tsbDockingFloat.Click, tsbDockingLeftAutoHide.Click, tsbDockingRight.Click,
-                                                                        tsbDockingRightAutoHide.Click, tsbDockingTop.Click
+    Public Sub DockingHandler(sender As Object, e As EventArgs)
 
         If sender Is tsbDockingLeft Then
             Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft

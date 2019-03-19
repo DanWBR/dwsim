@@ -66,7 +66,7 @@ Namespace DWSIM.Flowsheet
 
         Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
 
-        Public PropertyPackages As Dictionary(Of String, IPropertyPackage)
+        <Xml.Serialization.XmlIgnore()> Public PropertyPackages As Dictionary(Of String, IPropertyPackage)
 
         Public ReadOnly Property SelectedPropertyPackage() As IPropertyPackage
             Get

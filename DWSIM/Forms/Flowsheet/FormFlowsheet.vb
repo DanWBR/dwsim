@@ -2400,7 +2400,7 @@ Public Class FormFlowsheet
 
     Public Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.PropertyPackages, IFlowsheetBag.PropertyPackages
         Get
-            Return Options.PropertyPackages.ToDictionary(Of String, IPropertyPackage)(Function(k) k.Key, Function(k) k.Value)
+            Return Options.PropertyPackages
         End Get
         Set(value As Dictionary(Of String, IPropertyPackage))
 
