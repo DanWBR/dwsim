@@ -119,7 +119,7 @@ Public Class FormWelcome
 
         Application.DoEvents()
         Application.DoEvents()
-        Me.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = Not chkAutoClose.Checked
         FormMain.NewToolStripButton_Click(sender, e)
 
     End Sub
@@ -127,13 +127,13 @@ Public Class FormWelcome
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Application.DoEvents()
         Application.DoEvents()
-        Me.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = Not chkAutoClose.Checked
         Call FormMain.LoadFileDialog()
     End Sub
 
     Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
 
-        Me.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = Not chkAutoClose.Checked
 
         Dim lview = DirectCast(sender, ListView)
 
@@ -239,7 +239,7 @@ Public Class FormWelcome
 
         Application.DoEvents()
         Application.DoEvents()
-        Me.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = Not chkAutoClose.Checked
         FormMain.OpenFileDialog1.InitialDirectory = Me.lvlatestfolders.SelectedItems(0).Tag
         Call FormMain.LoadFileDialog()
 
@@ -251,7 +251,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "CompoundCreator" & FormMain.m_childcount
-        Me.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = Not chkAutoClose.Checked
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
@@ -264,7 +264,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "DataRegression" & FormMain.m_childcount
-        Me.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = Not chkAutoClose.Checked
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
@@ -287,19 +287,19 @@ Public Class FormWelcome
         Process.Start("https://play.google.com/store/apps/details?id=com.danielmedeiros.dwsim_simulator")
     End Sub
 
-    Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
+    Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Main_Page")
     End Sub
 
-    Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
+    Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("https://sourceforge.net/p/dwsim/discussion/?source=navbar")
     End Sub
 
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q")
     End Sub
 
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Category:Tutorials")
     End Sub
 
@@ -338,7 +338,7 @@ Public Class FormWelcome
                                                                          Else
                                                                              Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
                                                                              Me.UIThread(Sub()
-                                                                                             Me.Visible = Not chkAutoClose.Checked
+                                                                                             Me.Parent.Visible = Not chkAutoClose.Checked
                                                                                              floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
                                                                                              floading.Show()
                                                                                              Application.DoEvents()
