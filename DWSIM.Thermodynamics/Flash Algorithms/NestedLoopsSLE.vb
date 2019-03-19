@@ -410,6 +410,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             'Calculate max activities for solubility of solids
             For i = 0 To n
                 MaxAct(i) = Exp(-Hf(i) * 1000 / 8.31446 / T * (1 - T / Tf(i)) - dCp(i) / 8.31446 * ((T - Tf(i)) / T + Log(Tf(i) / T)))
+                If Double.IsNaN(MaxAct(i)) Then MaxAct(i) = 1000.0
                 IObj?.SetCurrent
                 Vp(i) = PP.AUX_PVAPi(i, T)
             Next
@@ -424,11 +425,20 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                 IObj?.Paragraphs.Add(String.Format("<h3>Loop {0}</h3>", ecount))
 
                 IObj?.SetCurrent
-                ActCoeff = PP.DW_CalcFugCoeff(Vx, T, P, State.Liquid).MultiplyConstY(P).DivideY(Vp)
+                If TypeOf PP Is ElectrolyteNRTLPropertyPackage Then
+                    ActCoeff = CType(PP, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vx, CompoundProperties)
+                ElseIf TypeOf PP Is ElectrolyteNRTLPropertyPackage Then
+                    ActCoeff = CType(PP, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vx, CompoundProperties)
+                Else
+                    ActCoeff = PP.DW_CalcFugCoeff(Vx, T, P, State.Liquid).MultiplyConstY(P).DivideY(Vp)
+                End If
                 MaxX = MaxAct.DivideY(ActCoeff)
                 For i = 0 To n
+                    'check if ion
+                    constprop = PP.CurrentMaterialStream.Phases(0).Compounds(Vn(i)).ConstantProperties
+                    If constprop.IsIon Then MaxX(i) = 1.0
                     'Supercritical gases are put to liquid phase
-                    If T > Tc(i) Then MaxX(i) = 1
+                    If T > Tc(i) Then MaxX(i) = 1.0
                     'If compound is in forced solids list, put it in solid phase
                     If PP.ForcedSolids.Contains(Vn(i)) Then MaxX(i) = 0.0
                 Next

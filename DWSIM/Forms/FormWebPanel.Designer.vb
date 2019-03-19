@@ -31,6 +31,7 @@ Partial Class FormWebPanel
         Me.TabPageA = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageE = New System.Windows.Forms.TabPage()
+        Me.chkDoNotShow = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -82,11 +83,19 @@ Partial Class FormWebPanel
         Me.TabPageE.Name = "TabPageE"
         Me.TabPageE.UseVisualStyleBackColor = True
         '
+        'chkDoNotShow
+        '
+        resources.ApplyResources(Me.chkDoNotShow, "chkDoNotShow")
+        Me.chkDoNotShow.ForeColor = System.Drawing.Color.White
+        Me.chkDoNotShow.Name = "chkDoNotShow"
+        Me.chkDoNotShow.UseVisualStyleBackColor = True
+        '
         'FormWebPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
+        Me.Controls.Add(Me.chkDoNotShow)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "FormWebPanel"
@@ -103,4 +112,5 @@ Partial Class FormWebPanel
     Friend WithEvents TabPageA As TabPage
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPageE As TabPage
+    Friend WithEvents chkDoNotShow As CheckBox
 End Class

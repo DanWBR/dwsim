@@ -112,6 +112,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim nl As New NestedLoops() With {.LimitVaporFraction = True}
 
+            nl3.CompoundProperties = CompoundProperties
+
             Dim flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, proppack, Vx, Nothing, 0.0#)
             If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
 
@@ -121,8 +123,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Vnv = flashresult.VaporPhaseMoleAmounts.ToArray
             Vnl = flashresult.LiquidPhase1MoleAmounts.ToArray
-
-            'calculate SLE.
 
             Dim ids As New List(Of String)
             For i = 0 To n
@@ -194,9 +194,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     L = flashresult.GetLiquidPhase1MoleFraction
                     S = 0.0#
 
-                    Vnv = flashresult.VaporPhaseMoleAmounts.ToArray
-                    Vnl = flashresult.LiquidPhase1MoleAmounts.ToArray
-
                     Vxl = flashresult.GetLiquidPhase1MoleFractions
                     Vxv = flashresult.GetVaporPhaseMoleFractions
 
@@ -216,6 +213,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     End If
 
+                    Vnv = Vxv.MultiplyConstY(V * sumN)
+                    Vnl = Vxl.MultiplyConstY(L * sumN)
+                    Vns = Vxl.MultiplyConstY(S * sumN)
+
                     Lerr = Abs(L - L_ant) ^ 2
 
                     If Lerr < 0.001 Then Exit Do
@@ -234,7 +235,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim results As New Dictionary(Of String, Object)
 
-            results.Add("MixtureMoleFlows", Vf)
+            results.Add("MixtureMoleFlows", Vnf)
             results.Add("VaporPhaseMoleFraction", V)
             results.Add("LiquidPhaseMoleFraction", L)
             results.Add("SolidPhaseMoleFraction", S)
@@ -908,7 +909,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim tmp As Object = Flash_PT(Vz, T, P)
 
-            Dim S, Vs(), sumN As Double
+            Dim S, Vs(), Vnf(), sumN As Double
 
             sumN = tmp("MoleSum")
             L = tmp("LiquidPhaseMoleFraction")
@@ -917,6 +918,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vx = tmp("LiquidPhaseMolarComposition")
             Vy = tmp("VaporPhaseMolarComposition")
             Vs = tmp("SolidPhaseMolarComposition")
+            Vnf = tmp("MixtureMoleFlows")
 
             d2 = Date.Now
 
@@ -928,7 +930,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim results As New Dictionary(Of String, Object)
 
-            results.Add("MixtureMoleFlows", Vz)
+            results.Add("MixtureMoleFlows", Vnf)
             results.Add("VaporPhaseMoleFraction", V)
             results.Add("LiquidPhaseMoleFraction", L)
             results.Add("SolidPhaseMoleFraction", S)

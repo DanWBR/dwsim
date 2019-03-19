@@ -133,10 +133,25 @@
   <data name="TabPageB.Text" xml:space="preserve">
     <value>Official Forums</value>
   </data>
+  <data name="TabPageA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>760, 355</value>
+  </data>
   <data name="TabPageA.Text" xml:space="preserve">
     <value>Patreon Page</value>
   </data>
   <data name="TabPageE.Text" xml:space="preserve">
     <value>Download Stats</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>768, 381</value>
+  </data>
+  <data name="chkDoNotShow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 427</value>
+  </data>
+  <data name="chkDoNotShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 17</value>
+  </data>
+  <data name="chkDoNotShow.Text" xml:space="preserve">
+    <value>Do not show on the next startup</value>
   </data>
 </root>

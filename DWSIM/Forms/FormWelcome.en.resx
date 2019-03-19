@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAASwBAwEsAQMBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAATwBAwE8AQMBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -195,47 +195,40 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lvlatest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 386</value>
+    <value>380, 363</value>
   </data>
   <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 386</value>
+    <value>380, 363</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 418</value>
+    <value>394, 395</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 392</value>
+    <value>386, 369</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Recent Files</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 119</value>
+    <value>386, 369</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Samples</value>
   </data>
   <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 113</value>
+    <value>380, 363</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 392</value>
+    <value>386, 369</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>FOSSEE Flowsheets</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 130</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 72</value>
+    <value>386, 72</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
   </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 98</value>
@@ -249,12 +242,6 @@
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 26</value>
   </data>
-  <data name="FOSSEEList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="FOSSEEList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="FOSSEEList.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 154</value>
   </data>
@@ -262,40 +249,13 @@
     <value>331, 238</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 392</value>
+    <value>386, 369</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Recent Folders</value>
   </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 392</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Resources</value>
-  </data>
-  <data name="LinkLabel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 19</value>
-  </data>
-  <data name="LinkLabel5.Text" xml:space="preserve">
-    <value>Discussion Forums</value>
-  </data>
-  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 19</value>
-  </data>
-  <data name="LinkLabel4.Text" xml:space="preserve">
-    <value>Official Page</value>
-  </data>
-  <data name="LinkLabel2.Text" xml:space="preserve">
-    <value>Tutorials</value>
-  </data>
-  <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 19</value>
-  </data>
-  <data name="LinkLabel1.Text" xml:space="preserve">
-    <value>Official YouTube Channel</value>
-  </data>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 604</value>
+    <value>8, 581</value>
   </data>
   <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
     <value>394, 163</value>
@@ -340,6 +300,19 @@ Click for more details!</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Quick Access</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkAutoClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="chkAutoClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 749</value>
+  </data>
+  <data name="chkAutoClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 17</value>
+  </data>
+  <data name="chkAutoClose.Text" xml:space="preserve">
+    <value>Close automatically</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>409, 772</value>

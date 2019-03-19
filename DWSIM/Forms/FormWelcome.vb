@@ -33,6 +33,8 @@ Public Class FormWelcome
 
     Private Sub FormTips_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        chkAutoClose.Checked = My.Settings.AutoCloseWelcomePanel
+
         If DWSIM.App.IsRunningOnMono Then Me.BackgroundImageLayout = ImageLayout.Stretch
 
         Dim existingfiles As New List(Of String)
@@ -117,6 +119,7 @@ Public Class FormWelcome
 
         Application.DoEvents()
         Application.DoEvents()
+        Me.Visible = Not chkAutoClose.Checked
         FormMain.NewToolStripButton_Click(sender, e)
 
     End Sub
@@ -124,10 +127,13 @@ Public Class FormWelcome
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Application.DoEvents()
         Application.DoEvents()
+        Me.Visible = Not chkAutoClose.Checked
         Call FormMain.LoadFileDialog()
     End Sub
 
     Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
+
+        Me.Visible = Not chkAutoClose.Checked
 
         Dim lview = DirectCast(sender, ListView)
 
@@ -233,6 +239,7 @@ Public Class FormWelcome
 
         Application.DoEvents()
         Application.DoEvents()
+        Me.Visible = Not chkAutoClose.Checked
         FormMain.OpenFileDialog1.InitialDirectory = Me.lvlatestfolders.SelectedItems(0).Tag
         Call FormMain.LoadFileDialog()
 
@@ -244,6 +251,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "CompoundCreator" & FormMain.m_childcount
+        Me.Visible = Not chkAutoClose.Checked
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
@@ -256,6 +264,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "DataRegression" & FormMain.m_childcount
+        Me.Visible = Not chkAutoClose.Checked
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
@@ -269,12 +278,6 @@ Public Class FormWelcome
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
         ' Do nothing here!
     End Sub
-
-    'Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
-
-    '    pevent.Graphics.DrawImage(My.Resources.splashWelcome_Background, New Rectangle(0, 0, Me.Width, Me.Height))
-
-    'End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs)
         Process.Start("https://itunes.apple.com/us/app/dwsim-simulator/id1162110266?ls=1&mt=8")
@@ -335,6 +338,7 @@ Public Class FormWelcome
                                                                          Else
                                                                              Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
                                                                              Me.UIThread(Sub()
+                                                                                             Me.Visible = Not chkAutoClose.Checked
                                                                                              floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
                                                                                              floading.Show()
                                                                                              Application.DoEvents()
@@ -371,4 +375,7 @@ Public Class FormWelcome
         Process.Start("https://patreon.com/dwsim")
     End Sub
 
+    Private Sub chkAutoClose_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoClose.CheckedChanged
+        My.Settings.AutoCloseWelcomePanel = chkAutoClose.Checked
+    End Sub
 End Class

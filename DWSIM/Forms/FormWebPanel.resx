@@ -124,12 +124,15 @@
   <data name="TabPageB.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;TabPageD.Name" xml:space="preserve">
-    <value>TabPageD</value>
+  <data name="&gt;&gt;TabPageB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt, style=Bold</value>
+  </data>
   <data name="TabPageD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>760, 371</value>
+    <value>760, 351</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormWebPanel</value>
@@ -138,8 +141,8 @@
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="TabPageB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>760, 371</value>
+  <data name="chkDoNotShow.TabIndex" type="System.Int32, mscorlib">
+    <value>96</value>
   </data>
   <data name="TabPageD.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -147,11 +150,14 @@
   <data name="&gt;&gt;TabPageB.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TabPageA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>760, 371</value>
+  <data name="&gt;&gt;chkDoNotShow.Name" xml:space="preserve">
+    <value>chkDoNotShow</value>
+  </data>
+  <data name="&gt;&gt;TabPageA.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="TabPageC.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -164,6 +170,9 @@
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
+  </data>
+  <data name="chkDoNotShow.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;TabPageA.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -180,11 +189,14 @@
   <data name="&gt;&gt;TabPageA.Name" xml:space="preserve">
     <value>TabPageA</value>
   </data>
-  <data name="&gt;&gt;TabPageB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPageB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>760, 351</value>
   </data>
   <data name="&gt;&gt;TabPageC.Name" xml:space="preserve">
     <value>TabPageC</value>
+  </data>
+  <data name="chkDoNotShow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="TabPageC.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -192,11 +204,17 @@
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="chkDoNotShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 17</value>
+  </data>
   <data name="&gt;&gt;TabPageD.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
   <data name="TabPageB.Text" xml:space="preserve">
     <value>Fóruns Oficiais</value>
+  </data>
+  <data name="&gt;&gt;chkDoNotShow.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;TabPageA.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -219,9 +237,6 @@
   <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabPageE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>DWSIM na Web</value>
   </data>
@@ -238,13 +253,22 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPageE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>760, 371</value>
+    <value>760, 351</value>
   </data>
   <data name="TabPageE.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="chkDoNotShow.Text" xml:space="preserve">
+    <value>Não mostrar novamente na próxima inicialização</value>
+  </data>
+  <data name="&gt;&gt;chkDoNotShow.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 40</value>
+  </data>
+  <data name="&gt;&gt;TabPageD.Name" xml:space="preserve">
+    <value>TabPageD</value>
   </data>
   <data name="TabPageC.Text" xml:space="preserve">
     <value>Fóruns FOSSEE</value>
@@ -253,10 +277,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 397</value>
-  </data>
-  <data name="&gt;&gt;TabPageA.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+    <value>768, 377</value>
   </data>
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
@@ -268,25 +289,28 @@
     <value>12, 9</value>
   </data>
   <data name="TabPageC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>760, 371</value>
+    <value>760, 351</value>
   </data>
   <data name="&gt;&gt;TabPageC.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 12pt, style=Bold</value>
+  <data name="chkDoNotShow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 423</value>
+  </data>
+  <data name="&gt;&gt;TabPageE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPageE.Text" xml:space="preserve">
     <value>Estatísticas</value>
   </data>
+  <data name="TabPageA.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;TabPageE.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>800, 450</value>
@@ -297,6 +321,9 @@
   <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>95</value>
   </data>
+  <data name="&gt;&gt;chkDoNotShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 19</value>
   </data>
@@ -306,11 +333,14 @@
   <data name="TabPageD.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;TabPageD.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="TabPageA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>760, 351</value>
   </data>
-  <data name="TabPageA.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="&gt;&gt;TabPageE.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="chkDoNotShow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -320,6 +350,9 @@
   </data>
   <data name="TabPageD.Text" xml:space="preserve">
     <value>Vídeos</value>
+  </data>
+  <data name="&gt;&gt;TabPageD.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

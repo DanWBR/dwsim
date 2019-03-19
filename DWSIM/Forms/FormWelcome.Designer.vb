@@ -51,6 +51,7 @@ Partial Class FormWelcome
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.chkAutoClose = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -308,11 +309,19 @@ Partial Class FormWelcome
         Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Name = "Label2"
         '
+        'chkAutoClose
+        '
+        resources.ApplyResources(Me.chkAutoClose, "chkAutoClose")
+        Me.chkAutoClose.ForeColor = System.Drawing.Color.White
+        Me.chkAutoClose.Name = "chkAutoClose"
+        Me.chkAutoClose.UseVisualStyleBackColor = True
+        '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
+        Me.Controls.Add(Me.chkAutoClose)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button8)
@@ -358,4 +367,5 @@ Partial Class FormWelcome
     Friend WithEvents Button8 As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents chkAutoClose As CheckBox
 End Class
