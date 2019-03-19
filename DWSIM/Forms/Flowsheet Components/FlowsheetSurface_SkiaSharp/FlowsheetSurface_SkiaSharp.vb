@@ -2725,14 +2725,13 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub designSurfacePrintDocument_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles designSurfacePrintDocument.PrintPage
-        e.Graphics.PageUnit = GraphicsUnit.Pixel
+        Dim dpi As Double = Me.CreateGraphics.DpiX
         Dim bounds = designSurfacePrintDocument.PrinterSettings.DefaultPageSettings.Bounds
+        Dim margins = designSurfacePrintDocument.PrinterSettings.DefaultPageSettings.Margins
         Dim prevzoom = FlowsheetSurface.Zoom
-        Using bmp As New SKBitmap(bounds.Width, bounds.Height)
+        Using bmp As New SKBitmap(CDbl(bounds.Width), CDbl(bounds.Height))
             Using canvas As New SKCanvas(bmp)
-                FlowsheetSurface.ZoomAll(bounds.Width * 0.95, bounds.Height)
-                FlowsheetSurface.ZoomAll(bounds.Width * 0.95, bounds.Height)
-                FlowsheetSurface.UpdateCanvas(canvas)
+                FlowsheetSurface.ZoomAll(bounds.Width * 0.9, bounds.Height * 0.9)
                 FlowsheetSurface.UpdateCanvas(canvas)
                 Dim d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
                 Using str As New IO.MemoryStream

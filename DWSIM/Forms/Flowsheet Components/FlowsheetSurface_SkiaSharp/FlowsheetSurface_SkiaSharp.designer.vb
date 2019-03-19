@@ -380,7 +380,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         'designSurfacePrintDocument
         '
-        Me.designSurfacePrintDocument.DocumentName = "documento"
+        Me.designSurfacePrintDocument.DocumentName = "Document"
         '
         'CMS_ItemsToConnect
         '
@@ -396,15 +396,17 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         Me.pageSetup.AllowPrinter = False
         Me.pageSetup.Document = Me.designSurfacePrintDocument
+        Me.pageSetup.EnableMetric = True
         Me.pageSetup.ShowHelp = True
         Me.pageSetup.ShowNetwork = False
         '
         'setupPrint
         '
         Me.setupPrint.AllowCurrentPage = True
+        Me.setupPrint.AllowPrintToFile = False
         Me.setupPrint.AllowSomePages = True
         Me.setupPrint.Document = Me.designSurfacePrintDocument
-        Me.setupPrint.PrintToFile = True
+        Me.setupPrint.ShowNetwork = False
         Me.setupPrint.UseEXDialog = True
         '
         'Timer1
