@@ -63,7 +63,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property ComponentConversions As Dictionary(Of String, Double)
 
         Public Property MaximumIterations As Integer = 100
-        Public Property Tolerance As Double = 0.0000000001
+        Public Property Tolerance As Double = 0.001
 
         Public Property ObjectiveFunctionHistory As New List(Of Double)
 
@@ -693,17 +693,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Do
                 If CompoundProperties(i).Name = "Water" Then
                     wid = i
-                    If Vxl(i) < 0.6 Then pen_val = (0.6 - Vxl(i)) * 10000.0
                     wtotal += Vxl(i) * CompoundProperties(i).Molar_Weight / 1000
                 End If
                 mtotal += Vxl(i)
                 i += 1
             Loop Until i = nc + 1
 
-            val1 = Vxl0.SumY * proppack.AUX_MMM(Vxl0)
-            val2 = Vxl.SumY * proppack.AUX_MMM(Vxl)
+            val1 = N0.Values.ToArray.SumY * proppack.AUX_MMM(Vxl0)
+            val2 = N.Values.ToArray.SumY * proppack.AUX_MMM(Vxl)
 
-            pen_val += 0 '(val1 - val2) ^ 2
+            pen_val += (val1 - val2) ^ 2
+
+            For Each s As String In N.Keys
+                If N(s) < 0.0# Then pen_val += (N(s) * 100) ^ 2
+            Next
 
             Dim Xsolv As Double = 1
 
@@ -779,10 +782,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
             Next
 
+            Dim fval As Double = 0
+
             For i = 0 To Me.Reactions.Count - 1
                 With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                     f1 += Log(.ConstantKeqValue)
                     f2 += Log(prod(i))
+                    fval += (f1 - f2) ^ 2
                 End With
             Next
 
@@ -790,7 +796,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Double.IsNaN(f2) Or Double.IsInfinity(f2) Then
 
-                Dim fval As Double = pen_val
+                fval = pen_val
 
                 ObjectiveFunctionHistory.Add(fval)
 
@@ -798,7 +804,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Else
 
-                Dim fval As Double = (f1 - f2) ^ 2 + pen_val
+                fval += pen_val
 
                 ObjectiveFunctionHistory.Add(fval)
 
@@ -810,7 +816,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.0001
+            Dim epsilon As Double = 0.1
 
             Dim f1, f2 As Double
             Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
@@ -1211,7 +1217,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(),
          ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
 
             If values Is Nothing Then
