@@ -31,6 +31,7 @@ Partial Class Window
         Me.itemSelector = New System.Windows.Forms.TreeView()
         Me.SetsBox = New System.Windows.Forms.ListBox()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.currentItemViewer = New System.Windows.Forms.WebBrowser()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -38,7 +39,7 @@ Partial Class Window
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.lblDisabled = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -46,9 +47,9 @@ Partial Class Window
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -159,6 +160,16 @@ Partial Class Window
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(460, 411)
         Me.TableLayoutPanel3.TabIndex = 1
         '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.currentItemViewer)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 30)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(454, 378)
+        Me.Panel3.TabIndex = 3
+        '
         'currentItemViewer
         '
         Me.currentItemViewer.Dock = System.Windows.Forms.DockStyle.Fill
@@ -203,6 +214,7 @@ Partial Class Window
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.lblDisabled)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
@@ -226,15 +238,18 @@ Partial Class Window
         Me.SaveFileDialog1.Filter = "HTML File|*.html"
         Me.SaveFileDialog1.Title = "Save Report to HTML File"
         '
-        'Panel3
+        'lblDisabled
         '
-        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.currentItemViewer)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 30)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(454, 378)
-        Me.Panel3.TabIndex = 3
+        Me.lblDisabled.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lblDisabled.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDisabled.ForeColor = System.Drawing.Color.Red
+        Me.lblDisabled.Location = New System.Drawing.Point(559, 0)
+        Me.lblDisabled.Name = "lblDisabled"
+        Me.lblDisabled.Size = New System.Drawing.Size(136, 29)
+        Me.lblDisabled.TabIndex = 1
+        Me.lblDisabled.Text = "Inspector is Disabled."
+        Me.lblDisabled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblDisabled.Visible = False
         '
         'Window
         '
@@ -255,10 +270,10 @@ Partial Class Window
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
         Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -279,4 +294,5 @@ Partial Class Window
     Friend WithEvents Button1 As Windows.Forms.Button
     Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
     Friend WithEvents Panel3 As Windows.Forms.Panel
+    Friend WithEvents lblDisabled As Windows.Forms.Label
 End Class

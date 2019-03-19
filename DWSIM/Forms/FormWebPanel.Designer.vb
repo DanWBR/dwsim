@@ -25,15 +25,12 @@ Partial Class FormWebPanel
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormWebPanel))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPageD = New System.Windows.Forms.TabPage()
+        Me.TabPageC = New System.Windows.Forms.TabPage()
+        Me.TabPageB = New System.Windows.Forms.TabPage()
+        Me.TabPageA = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage3.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.TabPageE = New System.Windows.Forms.TabPage()
         Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,40 +41,46 @@ Partial Class FormWebPanel
         Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Name = "Label1"
         '
-        'TabPage3
+        'TabPageD
         '
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageD, "TabPageD")
+        Me.TabPageD.Name = "TabPageD"
+        Me.TabPageD.UseVisualStyleBackColor = True
         '
-        'TabPage4
+        'TabPageC
         '
-        resources.ApplyResources(Me.TabPage4, "TabPage4")
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageC, "TabPageC")
+        Me.TabPageC.Name = "TabPageC"
+        Me.TabPageC.UseVisualStyleBackColor = True
         '
-        'TabPage1
+        'TabPageB
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageB, "TabPageB")
+        Me.TabPageB.Name = "TabPageB"
+        Me.TabPageB.UseVisualStyleBackColor = True
         '
-        'TabPage2
-
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        'TabPageA
+        '
+        resources.ApplyResources(Me.TabPageA, "TabPageA")
+        Me.TabPageA.Name = "TabPageA"
+        Me.TabPageA.UseVisualStyleBackColor = True
         '
         'TabControl1
         '
         resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPageA)
+        Me.TabControl1.Controls.Add(Me.TabPageB)
+        Me.TabControl1.Controls.Add(Me.TabPageC)
+        Me.TabControl1.Controls.Add(Me.TabPageD)
+        Me.TabControl1.Controls.Add(Me.TabPageE)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
+        'TabPageE
+        '
+        resources.ApplyResources(Me.TabPageE, "TabPageE")
+        Me.TabPageE.Name = "TabPageE"
+        Me.TabPageE.UseVisualStyleBackColor = True
         '
         'FormWebPanel
         '
@@ -87,10 +90,6 @@ Partial Class FormWebPanel
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "FormWebPanel"
-        Me.TabPage3.ResumeLayout(False)
-        Me.TabPage4.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -98,10 +97,10 @@ Partial Class FormWebPanel
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents TabPage4 As TabPage
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPageD As TabPage
+    Friend WithEvents TabPageC As TabPage
+    Friend WithEvents TabPageB As TabPage
+    Friend WithEvents TabPageA As TabPage
     Friend WithEvents TabControl1 As TabControl
-
+    Friend WithEvents TabPageE As TabPage
 End Class

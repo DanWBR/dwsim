@@ -8,6 +8,8 @@ Public Class Window
 
     Public Sub SetupInspectorWindow()
 
+        lblDisabled.Visible = Not GlobalSettings.Settings.InspectorEnabled
+
         'Events
 
         Dim avsol As List(Of String) = Host.Items.Select(Of String)(Function(x) x.SolutionID).Distinct().ToList

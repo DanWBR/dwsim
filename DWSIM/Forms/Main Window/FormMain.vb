@@ -38,6 +38,8 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
+Imports Cefsharp.Winforms
+
 Public Class FormMain
 
     Inherits Form
@@ -74,6 +76,12 @@ Public Class FormMain
     Public FOSSEEList As New List(Of FOSSEEFlowsheet)
 
 #Region "    Form Events"
+
+    Public Sub InitializeChromium()
+        Dim settings As CefSettings = New CefSettings
+        ' Initialize cef with the provided settings
+        CefSharp.Cef.Initialize(settings)
+    End Sub
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -163,6 +171,8 @@ Public Class FormMain
             Catch ex As Exception
             End Try
 
+            CefSharp.Cef.Shutdown()
+
         End If
 
     End Sub
@@ -242,10 +252,39 @@ Public Class FormMain
             Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
             Me.ButtonClose2.BringToFront()
 
-            Dim frmweb As New FormWebPanel
-            frmweb.Dock = DockStyle.Fill
-            WebPanel.Controls.Add(frmweb)
-            Me.ButtonCloseWeb.BringToFront()
+            If My.Settings.ShowWebPanel Then
+
+                Dim frmweb As New FormWebPanel
+                frmweb.Dock = DockStyle.Fill
+
+                If DWSIM.App.IsRunningOnMono Then
+
+                    frmweb.TabPageA.Controls.Add(New WebBrowser() With {.Url = New Uri("https://www.patreon.com/dwsim/posts"), .Dock = DockStyle.Fill})
+                    frmweb.TabPageB.Controls.Add(New WebBrowser() With {.Url = New Uri("https://sourceforge.net/p/dwsim/discussion/"), .Dock = DockStyle.Fill})
+                    frmweb.TabPageC.Controls.Add(New WebBrowser() With {.Url = New Uri("https://dwsim.fossee.in/forum"), .Dock = DockStyle.Fill})
+                    frmweb.TabPageD.Controls.Add(New WebBrowser() With {.Url = New Uri("https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"), .Dock = DockStyle.Fill})
+                    frmweb.TabPageE.Controls.Add(New WebBrowser() With {.Url = New Uri("https://pernaletec.shinyapps.io/dwsim/"), .Dock = DockStyle.Fill})
+
+                Else
+
+                    frmweb.TabPageA.Controls.Add(New ChromiumWebBrowser("https://www.patreon.com/dwsim/posts") With {.Dock = DockStyle.Fill})
+                    frmweb.TabPageB.Controls.Add(New ChromiumWebBrowser("https://sourceforge.net/p/dwsim/discussion/") With {.Dock = DockStyle.Fill})
+                    frmweb.TabPageC.Controls.Add(New ChromiumWebBrowser("https://dwsim.fossee.in/forum") With {.Dock = DockStyle.Fill})
+                    frmweb.TabPageD.Controls.Add(New ChromiumWebBrowser("https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid") With {.Dock = DockStyle.Fill})
+                    frmweb.TabPageE.Controls.Add(New ChromiumWebBrowser("https://pernaletec.shinyapps.io/dwsim/") With {.Dock = DockStyle.Fill})
+
+                End If
+
+
+                WebPanel.Controls.Add(frmweb)
+                Me.ButtonCloseWeb.BringToFront()
+
+            Else
+
+                WebPanel.Visible = False
+
+            End If
+
 
         End If
 
@@ -649,6 +688,10 @@ Public Class FormMain
 
     Private Sub FormParent_MdiChildActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MdiChildActivate
         If Me.MdiChildren.Length >= 1 Then
+
+            Me.WebPanel.Visible = False
+            Me.PainelDaWebToolStripMenuItem.Checked = False
+
             Me.ToolStripButton1.Enabled = True
             Me.SaveAllToolStripButton.Enabled = True
             Me.SaveToolStripButton.Enabled = True

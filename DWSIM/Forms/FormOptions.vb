@@ -101,6 +101,8 @@ Public Class FormOptions
         chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
         chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
 
+        chkShowWebPanel.Checked = My.Settings.ShowWebPanel
+
         'databases
 
         Me.PopulateDBGrid()
@@ -674,5 +676,9 @@ Public Class FormOptions
     Private Sub chkAA_CheckedChanged(sender As Object, e As EventArgs) Handles chkAA.CheckedChanged
         My.Settings.FlowsheetAntiAliasing = chkAA.Checked
         GlobalSettings.Settings.DrawingAntiAlias = chkAA.Checked
+    End Sub
+
+    Private Sub chkShowWebPanel_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowWebPanel.CheckedChanged
+        My.Settings.ShowWebPanel = chkShowWebPanel.Checked
     End Sub
 End Class

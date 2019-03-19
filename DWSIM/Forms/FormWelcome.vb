@@ -284,19 +284,19 @@ Public Class FormWelcome
         Process.Start("https://play.google.com/store/apps/details?id=com.danielmedeiros.dwsim_simulator")
     End Sub
 
-    Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel4.LinkClicked
+    Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Main_Page")
     End Sub
 
-    Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel5.LinkClicked
+    Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
         Process.Start("https://sourceforge.net/p/dwsim/discussion/?source=navbar")
     End Sub
 
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
         Process.Start("https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q")
     End Sub
 
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Category:Tutorials")
     End Sub
 

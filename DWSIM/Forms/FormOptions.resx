@@ -249,6 +249,9 @@
   <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="chkShowWebPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkAA.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
   </data>
@@ -650,6 +653,9 @@
   <data name="&gt;&gt;KryptonLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="chkShowWebPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 23</value>
+  </data>
   <data name="tbServiceBusNamespace.Location" type="System.Drawing.Point, System.Drawing">
     <value>114, 26</value>
   </data>
@@ -760,6 +766,9 @@
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Modo de depuração</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1063,6 +1072,9 @@
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 51</value>
+  </data>
+  <data name="&gt;&gt;chkShowWebPanel.Parent" xml:space="preserve">
+    <value>GroupBox9</value>
   </data>
   <data name="&gt;&gt;cbDebugLevel.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -1481,6 +1493,9 @@
   <data name="&gt;&gt;GroupBoxAzureConfig.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
+  <data name="&gt;&gt;chkShowWebPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Database</value>
   </data>
@@ -1633,6 +1648,9 @@
   </data>
   <data name="&gt;&gt;KryptonLabel1.Name" xml:space="preserve">
     <value>KryptonLabel1</value>
+  </data>
+  <data name="chkShowWebPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
   </data>
   <data name="chkEnableGPUProcessing.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1826,6 +1844,9 @@
   <data name="tbServiceBusNamespace.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chkShowWebPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="chkSolverBreak.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
@@ -1904,7 +1925,7 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;KryptonCheckBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tbPythonTimeout.Parent" xml:space="preserve">
     <value>GroupBox17</value>
@@ -2160,6 +2181,9 @@
   </data>
   <data name="Button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;chkShowWebPanel.Name" xml:space="preserve">
+    <value>chkShowWebPanel</value>
   </data>
   <data name="&gt;&gt;GroupBoxNetworkComputerConfig.Name" xml:space="preserve">
     <value>GroupBoxNetworkComputerConfig</value>
@@ -2612,7 +2636,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAaABCQGkAQkBEAEAARABAAT/ARkBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAbABCQG0AQkBEAEAARABAAT/ARkBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
@@ -2916,8 +2940,8 @@
   <data name="&gt;&gt;cbDefaultLocation.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Modo de depuração</value>
+  <data name="&gt;&gt;chkShowWebPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -3105,6 +3129,9 @@
   <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 56</value>
   </data>
+  <data name="chkShowWebPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;cbGPU.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -3233,6 +3260,9 @@
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkShowWebPanel.Text" xml:space="preserve">
+    <value>Mostrar Painel da Web</value>
   </data>
   <data name="GroupBox17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
