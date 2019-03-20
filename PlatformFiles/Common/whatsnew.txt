@@ -2,6 +2,13 @@ Version 5.7
 
 - [NEW] Electrolyte NRTL model for Sour Gas and Amine systems
 - [NEW] Copy Flowsheet as image to clipboard
+- [NEW] New Web Panel (Classic UI)
+- [CHG] Redesigned Welcome Screen (Classic UI)
+- [CHG] Redesigned Compound Selector (Classic UI)
+- [CHG] Updated ChEDL Compound Database
 - [CHG] Restored 'print flowsheet' function (Classic UI)
+- [FIX] Fixed object cloning
+- [FIX] Fixed SLE flash
+- [FIX] Fixed english dynamic viscosity units
 - [FIX] Fixed mirrored characters on flowsheet objects
 - [FIX] Bug fixes
