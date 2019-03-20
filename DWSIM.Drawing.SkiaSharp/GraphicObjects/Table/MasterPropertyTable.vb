@@ -157,6 +157,12 @@ Namespace GraphicObjects.Tables
             End Get
         End Property
 
+        Public ReadOnly Property NodeItems As Dictionary(Of String, List(Of NodeItem))
+            Get
+                Return m_items
+            End Get
+        End Property
+
         Public ReadOnly Property PropertyList() As Dictionary(Of String, Boolean)
             Get
                 Return m_propertylist
