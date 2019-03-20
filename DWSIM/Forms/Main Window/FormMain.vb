@@ -270,11 +270,30 @@ Public Class FormMain
 
                 If DWSIM.App.IsRunningOnMono Then
 
-                    frmweb.TabPageA.Controls.Add(New WebBrowser() With {.Url = New Uri("https://www.patreon.com/dwsim/posts"), .Dock = DockStyle.Fill})
-                    frmweb.TabPageB.Controls.Add(New WebBrowser() With {.Url = New Uri("https://sourceforge.net/p/dwsim/discussion/"), .Dock = DockStyle.Fill})
-                    frmweb.TabPageC.Controls.Add(New WebBrowser() With {.Url = New Uri("https://dwsim.fossee.in/forum"), .Dock = DockStyle.Fill})
-                    frmweb.TabPageD.Controls.Add(New WebBrowser() With {.Url = New Uri("https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"), .Dock = DockStyle.Fill})
-                    frmweb.TabPageE.Controls.Add(New WebBrowser() With {.Url = New Uri("https://pernaletec.shinyapps.io/dwsim/"), .Dock = DockStyle.Fill})
+                    Try
+                        Dim c1, c2, c3, c4, c5 As WebBrowser
+                        Dim a1, a2, a3, a4, a5 As String
+
+                        a1 = "https://www.patreon.com/dwsim/posts"
+                        a2 = "https://sourceforge.net/p/dwsim/discussion/"
+                        a3 = "https://dwsim.fossee.in/forum"
+                        a4 = "https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"
+                        a5 = "https://pernaletec.shinyapps.io/dwsim/"
+
+                        c1 = New WebBrowser() With {.Url = New Uri(a1), .Dock = DockStyle.Fill}
+                        c2 = New WebBrowser() With {.Url = New Uri(a2), .Dock = DockStyle.Fill}
+                        c3 = New WebBrowser() With {.Url = New Uri(a3), .Dock = DockStyle.Fill}
+                        c4 = New WebBrowser() With {.Url = New Uri(a4), .Dock = DockStyle.Fill}
+                        c5 = New WebBrowser() With {.Url = New Uri(a5), .Dock = DockStyle.Fill}
+
+                        frmweb.TabPageA.Controls.Add(c1)
+                        frmweb.TabPageB.Controls.Add(c2)
+                        frmweb.TabPageC.Controls.Add(c3)
+                        frmweb.TabPageD.Controls.Add(c4)
+                        frmweb.TabPageE.Controls.Add(c5)
+                    Catch ex As Exception
+
+                    End Try
 
                 Else
 
