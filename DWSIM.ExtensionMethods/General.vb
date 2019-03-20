@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports System.Globalization
+Imports DWSIM.Interfaces.Enums
 
 Public Module General
 
@@ -679,6 +680,96 @@ Public Module General
         Return twoDimensionalArray
 
     End Function
+
+    <System.Runtime.CompilerServices.Extension> Function GetObjName(objtype As DWSIM.Interfaces.Enums.GraphicObjects.ObjectType) As String
+
+        Select Case objtype
+            Case GraphicObjects.ObjectType.AbsorptionColumn
+                Return "Absorption Columns"
+            Case GraphicObjects.ObjectType.CapeOpenUO
+                Return "CAPE-OPEN Blocks"
+            Case GraphicObjects.ObjectType.ComponentSeparator
+                Return "Compound Separators"
+            Case GraphicObjects.ObjectType.Compressor
+                Return "Adiabatic Compressors"
+            Case GraphicObjects.ObjectType.CompressorExpander
+                Return "Adiabatic Compressors/Expanders"
+            Case GraphicObjects.ObjectType.Cooler
+                Return "Coolers"
+            Case GraphicObjects.ObjectType.CustomUO
+                Return "Python Script Blocks"
+            Case GraphicObjects.ObjectType.DistillationColumn
+                Return "Distillation Columns"
+            Case GraphicObjects.ObjectType.EnergyStream
+                Return "Energy Streams"
+            Case GraphicObjects.ObjectType.ExcelUO
+                Return "Spreadsheet Blocks"
+            Case GraphicObjects.ObjectType.Expander
+                Return "Adiabatic Expanders"
+            Case GraphicObjects.ObjectType.Filter
+                Return "Filters"
+            Case GraphicObjects.ObjectType.FlowsheetUO
+                Return "Sub-Flowsheet Blocks"
+            Case GraphicObjects.ObjectType.Heater
+                Return "Heaters"
+            Case GraphicObjects.ObjectType.HeaterCooler
+                Return "Heaters/Coolers"
+            Case GraphicObjects.ObjectType.HeatExchanger
+                Return "Heat Exchangers"
+            Case GraphicObjects.ObjectType.MaterialStream
+                Return "Material Streams"
+            Case GraphicObjects.ObjectType.NodeEn
+                Return "Energy Stream Mixers"
+            Case GraphicObjects.ObjectType.NodeIn
+                Return "Material Stream Mixers"
+            Case GraphicObjects.ObjectType.NodeOut
+                Return "Material Stream Splitters"
+            Case GraphicObjects.ObjectType.OrificePlate
+                Return "Orifice Plates"
+            Case GraphicObjects.ObjectType.OT_Adjust
+                Return "Adjust (Controller) Blocks"
+            Case GraphicObjects.ObjectType.OT_EnergyRecycle
+                Return "Energy Recycle Blocks"
+            Case GraphicObjects.ObjectType.OT_Recycle
+                Return "Recycle Blocks"
+            Case GraphicObjects.ObjectType.OT_Spec
+                Return "Secification Blocks"
+            Case GraphicObjects.ObjectType.Pipe
+                Return "Pipe Segment Blocks"
+            Case GraphicObjects.ObjectType.Pump
+                Return "Adiabatic Pumps"
+            Case GraphicObjects.ObjectType.RCT_Conversion
+                Return "Conversion Reactors"
+            Case GraphicObjects.ObjectType.RCT_CSTR
+                Return "CSTRs"
+            Case GraphicObjects.ObjectType.RCT_Equilibrium
+                Return "Equilibrium Reactors"
+            Case GraphicObjects.ObjectType.RCT_Gibbs
+                Return "Gibbs Reactors"
+            Case GraphicObjects.ObjectType.RCT_PFR
+                Return "PFRs"
+            Case GraphicObjects.ObjectType.ReboiledAbsorber
+                Return "Reboiled Absorbers"
+            Case GraphicObjects.ObjectType.RefluxedAbsorber
+                Return "Refluxed Absorbers"
+            Case GraphicObjects.ObjectType.ShortcutColumn
+                Return "Shortcut Columns"
+            Case GraphicObjects.ObjectType.SolidSeparator
+                Return "Solids Separators"
+            Case GraphicObjects.ObjectType.Tank
+                Return "Tanks"
+            Case GraphicObjects.ObjectType.TPVessel
+                Return "Three-Phase Gas-Liquid Separators"
+            Case GraphicObjects.ObjectType.Valve
+                Return "Valves"
+            Case GraphicObjects.ObjectType.Vessel
+                Return "Gas-Liquid Separators"
+            Case Else
+                Return "N/A"
+        End Select
+
+    End Function
+
 
 End Module
 

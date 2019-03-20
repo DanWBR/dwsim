@@ -78,15 +78,17 @@ Public Class FormMain
 #Region "    Form Events"
 
     Public Sub InitializeChromium()
-        Try
-            Dim settings As CefSettings = New CefSettings
-            settings.IgnoreCertificateErrors = True
-            settings.PersistUserPreferences = True
-            settings.PersistSessionCookies = True
-            settings.CachePath = Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "BrowserDataCache")
-            CefSharp.Cef.Initialize(settings)
-        Catch ex As Exception
-        End Try
+        If My.Settings.ShowWebPanel And Not DWSIM.App.IsRunningOnMono Then
+            Try
+                Dim settings As CefSettings = New CefSettings
+                settings.IgnoreCertificateErrors = True
+                settings.PersistUserPreferences = True
+                settings.PersistSessionCookies = True
+                settings.CachePath = Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "BrowserDataCache")
+                CefSharp.Cef.Initialize(settings)
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
@@ -177,7 +179,10 @@ Public Class FormMain
             Catch ex As Exception
             End Try
 
-            CefSharp.Cef.Shutdown()
+            Try
+                CefSharp.Cef.Shutdown()
+            Catch ex As Exception
+            End Try
 
         End If
 
