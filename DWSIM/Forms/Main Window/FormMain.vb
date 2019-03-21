@@ -180,7 +180,7 @@ Public Class FormMain
             End Try
 
             Try
-                CefSharp.Cef.Shutdown()
+                If Not DWSIM.App.IsRunningOnMono Then CefSharp.Cef.Shutdown()
             Catch ex As Exception
             End Try
 
@@ -265,37 +265,40 @@ Public Class FormMain
 
             If My.Settings.ShowWebPanel Then
 
-                Dim frmweb As New FormWebPanel
-                frmweb.Dock = DockStyle.Fill
-
                 If DWSIM.App.IsRunningOnMono Then
 
-                    Try
-                        Dim c1, c2, c3, c4, c5 As WebBrowser
-                        Dim a1, a2, a3, a4, a5 As String
+                    WebPanel.Visible = False
 
-                        a1 = "https://www.patreon.com/dwsim/posts"
-                        a2 = "https://sourceforge.net/p/dwsim/discussion/"
-                        a3 = "https://dwsim.fossee.in/forum"
-                        a4 = "https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"
-                        a5 = "https://pernaletec.shinyapps.io/dwsim/"
+                    'Try
+                    '    Dim c1, c2, c3, c4, c5 As WebBrowser
+                    '    Dim a1, a2, a3, a4, a5 As String
 
-                        c1 = New WebBrowser() With {.Url = New Uri(a1), .Dock = DockStyle.Fill}
-                        c2 = New WebBrowser() With {.Url = New Uri(a2), .Dock = DockStyle.Fill}
-                        c3 = New WebBrowser() With {.Url = New Uri(a3), .Dock = DockStyle.Fill}
-                        c4 = New WebBrowser() With {.Url = New Uri(a4), .Dock = DockStyle.Fill}
-                        c5 = New WebBrowser() With {.Url = New Uri(a5), .Dock = DockStyle.Fill}
+                    '    a1 = "https://www.patreon.com/dwsim/posts"
+                    '    a2 = "https://sourceforge.net/p/dwsim/discussion/"
+                    '    a3 = "https://dwsim.fossee.in/forum"
+                    '    a4 = "https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"
+                    '    a5 = "https://pernaletec.shinyapps.io/dwsim/"
 
-                        frmweb.TabPageA.Controls.Add(c1)
-                        frmweb.TabPageB.Controls.Add(c2)
-                        frmweb.TabPageC.Controls.Add(c3)
-                        frmweb.TabPageD.Controls.Add(c4)
-                        frmweb.TabPageE.Controls.Add(c5)
-                    Catch ex As Exception
+                    '    c1 = New WebBrowser() With {.Url = New Uri(a1), .Dock = DockStyle.Fill}
+                    '    c2 = New WebBrowser() With {.Url = New Uri(a2), .Dock = DockStyle.Fill}
+                    '    c3 = New WebBrowser() With {.Url = New Uri(a3), .Dock = DockStyle.Fill}
+                    '    c4 = New WebBrowser() With {.Url = New Uri(a4), .Dock = DockStyle.Fill}
+                    '    c5 = New WebBrowser() With {.Url = New Uri(a5), .Dock = DockStyle.Fill}
 
-                    End Try
+                    '    frmweb.TabPageA.Controls.Add(c1)
+                    '    frmweb.TabPageB.Controls.Add(c2)
+                    '    frmweb.TabPageC.Controls.Add(c3)
+                    '    frmweb.TabPageD.Controls.Add(c4)
+                    '    frmweb.TabPageE.Controls.Add(c5)
+
+                    'Catch ex As Exception
+
+                    'End Try
 
                 Else
+
+                    Dim frmweb As New FormWebPanel
+                    frmweb.Dock = DockStyle.Fill
 
                     Try
 
@@ -376,11 +379,10 @@ Public Class FormMain
 
                     End Try
 
+                    WebPanel.Controls.Add(frmweb)
+                    Me.ButtonCloseWeb.BringToFront()
+
                 End If
-
-
-                WebPanel.Controls.Add(frmweb)
-                Me.ButtonCloseWeb.BringToFront()
 
             Else
 
