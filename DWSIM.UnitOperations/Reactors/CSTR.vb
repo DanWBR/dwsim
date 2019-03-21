@@ -694,7 +694,7 @@ Namespace Reactors
 
                 'Accelerate calculations by increasing time step up to residence time as maximum
 
-                MaxChange = -TR.MinY
+                MaxChange = -TR.Min
                 If MaxChange < 0.3 Then
                     dT *= 1.2
                 End If
