@@ -223,9 +223,30 @@ Namespace PropertyPackages
 
             Me.LoadCPDB()
 
+            'load chedl database
+
+            Me.LoadCheDLDB()
+
             'load User databases
 
             Me.LoadUserDBs()
+
+        End Sub
+
+        Public Sub LoadCheDLDB()
+
+            Dim chedl As New Databases.ChEDL_Thermo
+            Dim cpa() As BaseClasses.ConstantProperties
+            chedl.Load()
+            cpa = chedl.Transfer().ToArray()
+            Dim addedcomps = _availablecomps.Keys.Select(Function(x) x.ToLower).ToList()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not _availablecomps.ContainsKey(cp.Name) Then
+                    If _availablecomps.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
+                        _availablecomps.Add(cp.Name, cp)
+                    End If
+                End If
+            Next
 
         End Sub
 
@@ -276,9 +297,8 @@ Namespace PropertyPackages
             Try
                 cpa = cpdb.Transfer()
                 For Each cp As BaseClasses.ConstantProperties In cpa
-                    If Not _availablecomps.ContainsKey(cp.Name) Then
+                    If _availablecomps.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
                         _availablecomps.Add(cp.Name, cp)
-                    Else
                         _availablecomps(cp.Name).IsCOOLPROPSupported = True
                     End If
                 Next

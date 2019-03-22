@@ -94,6 +94,12 @@ Public Class CAPEOPENManager
             Case "Sour Water"
                 pp = New SourWaterPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescSourWaterPP")
+            Case "Extended UNIQUAC"
+                pp = New ExUNIQUACPropertyPackage(True)
+                pp.ComponentDescription = ""
+            Case "Electrolyte NRTL"
+                pp = New ElectrolyteNRTLPropertyPackage(True)
+                pp.ComponentDescription = ""
             Case Else
                 Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
                 Dim p0 = otherpps.Where(Function(x) DirectCast(x, ICapeIdentification).ComponentName = PackageName)
