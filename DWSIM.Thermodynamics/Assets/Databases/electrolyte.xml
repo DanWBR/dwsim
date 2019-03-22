@@ -1527,7 +1527,7 @@
   <Ion>True</Ion>
   <Salt>False</Salt>
   <HydratedSalt>False</HydratedSalt>
-  <Charge>+1</Charge>
+  <Charge>1</Charge>
   <DelGF_kJ_mol>0</DelGF_kJ_mol>
   <DelHf_kJ_mol>0</DelHf_kJ_mol>
   <Cp_J_mol_K>0</Cp_J_mol_K>
@@ -1542,7 +1542,7 @@
     <Ion>True</Ion>
     <Salt>False</Salt>
     <HydratedSalt>False</HydratedSalt>
-    <Charge>+1</Charge>
+    <Charge>1</Charge>
     <DelGF_kJ_mol>0</DelGF_kJ_mol>
     <DelHf_kJ_mol>0</DelHf_kJ_mol>
     <Cp_J_mol_K>0</Cp_J_mol_K>
