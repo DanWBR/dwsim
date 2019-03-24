@@ -556,7 +556,7 @@ Namespace Reactors
             pp.CurrentMaterialStream = ims
 
             T0 = ims.Phases(0).Properties.temperature.GetValueOrDefault
-            P = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            P = ims.Phases(0).Properties.pressure.GetValueOrDefault - DeltaP.GetValueOrDefault
             P0 = 101325
 
             Select Case Me.ReactorOperationMode
@@ -1011,6 +1011,13 @@ Namespace Reactors
 
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
+            Me.ReactionExtents.Clear()
+
+            For Each rxid As String In Me.Reactions
+                rx = FlowSheet.Reactions(rxid)
+                ReactionExtents.Add(rx.ID, (N(rx.BaseReactant) - N0(rx.BaseReactant)) / rx.Components(rx.BaseReactant).StoichCoeff)
+            Next
+
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             pp.CurrentMaterialStream = ims
@@ -1175,18 +1182,61 @@ Namespace Reactors
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("_") Then
 
-                    Case 0
-                        'PROP_HT_0	Pressure Drop
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                End Select
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_HT_0	Pressure Drop
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+
+                    End Select
+
+                Else
+
+                    Select Case prop
+                        Case "Calculation Mode"
+                            Select Case ReactorOperationMode
+                                Case OperationMode.Adiabatic
+                                    Return "Adiabatic"
+                                Case OperationMode.Isothermic
+                                    Return "Isothermic"
+                                Case OperationMode.OutletTemperature
+                                    Return "Defined Temperature"
+                            End Select
+                        Case "Initial Gibbs Energy"
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.InitialGibbsEnergy)
+                        Case "Final Gibbs Energy"
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.FinalGibbsEnergy)
+                        Case Else
+                            If prop.Contains("Conversion") Then
+                                Dim comp = prop.Split(": ")(0)
+                                If ComponentConversions.ContainsKey(comp) Then
+                                    value = ComponentConversions(comp) * 100
+                                Else
+                                    value = 0.0
+                                End If
+                            End If
+                            If prop.Contains("Extent") Then
+                                Dim rx = prop.Split(": ")(0)
+                                Dim rx2 = FlowSheet.Reactions.Values.Where(Function(x) x.Name = rx).FirstOrDefault
+                                If rx2 IsNot Nothing AndAlso ReactionExtents.ContainsKey(rx2.ID) Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, ReactionExtents(rx2.ID))
+                                Else
+                                    value = 0.0
+                                End If
+                            End If
+                    End Select
+
+                End If
 
                 Return value
+
             End If
+
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
@@ -1206,6 +1256,16 @@ Namespace Reactors
                 Case PropertyType.ALL
                     For i = 0 To 0
                         proplist.Add("PROP_EQ_" + CStr(i))
+                    Next
+                    proplist.Add("Calculation Mode")
+                    proplist.Add("Initial Gibbs Energy")
+                    proplist.Add("Final Gibbs Energy")
+                    For Each item In ComponentConversions
+                        proplist.Add(item.Key + ": Conversion")
+                    Next
+                    For Each item In ReactionExtents
+                        Dim rx = FlowSheet.Reactions(item.Key)
+                        proplist.Add(rx.Name + ": Extent")
                     Next
             End Select
             Return proplist.ToArray(GetType(System.String))
@@ -1239,18 +1299,49 @@ Namespace Reactors
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As String = ""
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("_") Then
 
-                    Case 0
-                        'PROP_HT_0	Pressure Drop
-                        value = su.deltaP
+                    Try
 
-                End Select
+                        Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Return value
+                        Select Case propidx
+
+                            Case 0
+                                'PROP_HT_0	Pressure Drop
+                                value = su.deltaP
+
+                        End Select
+
+                        Return value
+
+                    Catch ex As Exception
+
+                        Return ""
+
+                    End Try
+
+                Else
+
+                    Select Case prop
+                        Case "Calculation Mode"
+                            Return ""
+                        Case "Initial Gibbs Energy"
+                            value = su.heatflow
+                        Case "Final Gibbs Energy"
+                            value = su.heatflow
+                        Case Else
+                            If prop.Contains("Conversion") Then value = "%"
+                            If prop.Contains("Extent") Then value = su.molarflow
+                    End Select
+
+                    Return value
+
+                End If
+
             End If
+
         End Function
 
         Public Overrides Sub DisplayEditForm()

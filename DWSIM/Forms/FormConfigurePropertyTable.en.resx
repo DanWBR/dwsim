@@ -122,13 +122,13 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ColumnHeader2.Width" type="System.Int32, mscorlib">
-    <value>266</value>
+    <value>270</value>
   </data>
   <data name="ColumnHeader1.Text" xml:space="preserve">
     <value>Object</value>
   </data>
   <data name="ColumnHeader1.Width" type="System.Int32, mscorlib">
-    <value>154</value>
+    <value>160</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
@@ -142,6 +142,15 @@
   </data>
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>448, 20</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Select Default</value>
+  </data>
+  <data name="Button3.Text" xml:space="preserve">
+    <value>Clear Selection</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Property Table</value>

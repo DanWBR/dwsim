@@ -61,12 +61,12 @@ Partial Class FormWelcome
         '
         'lvlatest
         '
+        resources.ApplyResources(Me.lvlatest, "lvlatest")
         Me.lvlatest.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lvlatest.AutoArrange = False
         Me.lvlatest.BackColor = System.Drawing.Color.White
         Me.lvlatest.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvlatest.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
-        resources.ApplyResources(Me.lvlatest, "lvlatest")
         Me.lvlatest.ForeColor = System.Drawing.Color.SteelBlue
         Me.lvlatest.FullRowSelect = True
         Me.lvlatest.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -96,12 +96,12 @@ Partial Class FormWelcome
         '
         'lvlatestfolders
         '
+        resources.ApplyResources(Me.lvlatestfolders, "lvlatestfolders")
         Me.lvlatestfolders.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lvlatestfolders.AutoArrange = False
         Me.lvlatestfolders.BackColor = System.Drawing.Color.White
         Me.lvlatestfolders.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvlatestfolders.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
-        resources.ApplyResources(Me.lvlatestfolders, "lvlatestfolders")
         Me.lvlatestfolders.ForeColor = System.Drawing.Color.SteelBlue
         Me.lvlatestfolders.FullRowSelect = True
         Me.lvlatestfolders.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -131,26 +131,26 @@ Partial Class FormWelcome
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.lvlatest)
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.lvlatest)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.lvsamples)
         resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.lvsamples)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'lvsamples
         '
+        resources.ApplyResources(Me.lvsamples, "lvsamples")
         Me.lvsamples.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lvsamples.AutoArrange = False
         Me.lvsamples.BackColor = System.Drawing.Color.White
         Me.lvsamples.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvsamples.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
-        resources.ApplyResources(Me.lvsamples, "lvsamples")
         Me.lvsamples.ForeColor = System.Drawing.Color.SteelBlue
         Me.lvsamples.FullRowSelect = True
         Me.lvsamples.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -170,13 +170,13 @@ Partial Class FormWelcome
         '
         'TabPage5
         '
+        resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Controls.Add(Me.Label8)
         Me.TabPage5.Controls.Add(Me.Label5)
         Me.TabPage5.Controls.Add(Me.Label13)
         Me.TabPage5.Controls.Add(Me.Button6)
         Me.TabPage5.Controls.Add(Me.Button4)
         Me.TabPage5.Controls.Add(Me.FOSSEEList)
-        resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
@@ -189,8 +189,8 @@ Partial Class FormWelcome
         '
         'Label5
         '
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label5.Name = "Label5"
         '
@@ -210,15 +210,15 @@ Partial Class FormWelcome
         '
         'Button4
         '
-        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
         resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
         Me.Button4.Name = "Button4"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'FOSSEEList
         '
-        Me.FOSSEEList.Activation = System.Windows.Forms.ItemActivation.OneClick
         resources.ApplyResources(Me.FOSSEEList, "FOSSEEList")
+        Me.FOSSEEList.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.FOSSEEList.AutoArrange = False
         Me.FOSSEEList.BackColor = System.Drawing.Color.White
         Me.FOSSEEList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
@@ -241,8 +241,8 @@ Partial Class FormWelcome
         '
         'TabPage3
         '
-        Me.TabPage3.Controls.Add(Me.lvlatestfolders)
         resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.lvlatestfolders)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '

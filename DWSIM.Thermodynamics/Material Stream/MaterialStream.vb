@@ -1601,7 +1601,7 @@ Namespace Streams
                                 value = "Mixed"
                             End If
                         Case 153
-                            value = Me.Phases(3).Properties.pH
+                            value = Me.Phases(3).Properties.pH.GetValueOrDefault
                         Case 154
                             'total energy flow
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)

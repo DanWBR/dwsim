@@ -1,4 +1,5 @@
-﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
+﻿Imports System.Linq
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
 Public Class FormConfigureMasterTable
 
@@ -177,5 +178,46 @@ Public Class FormConfigureMasterTable
                 Me.lvObjects.Items(index + 1).Selected = True
             End If
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        For Each obj In lvObjects.Items
+            DirectCast(obj, ListViewItem).Checked = True
+        Next
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        For Each obj In lvProps.Items
+            DirectCast(obj, ListViewItem).Checked = True
+        Next
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim props() As String = Nothing
+
+        If Table.ObjectList.Count > 0 Then
+            For Each s As String In Table.ObjectList.Keys
+                props = Table.Flowsheet.GetFlowsheetSimulationObject(s).GetDefaultProperties
+                Exit For
+            Next
+            For Each lvi As ListViewItem In lvProps.Items
+                lvi.Checked = False
+            Next
+            For Each lvi As ListViewItem In lvProps.Items
+                If props.Contains(lvi.Tag) Then lvi.Checked = True
+            Next
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        For Each obj In lvObjects.Items
+            DirectCast(obj, ListViewItem).Checked = False
+        Next
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        For Each obj In lvProps.Items
+            DirectCast(obj, ListViewItem).Checked = False
+        Next
     End Sub
 End Class

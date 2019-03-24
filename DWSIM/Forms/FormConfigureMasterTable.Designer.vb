@@ -37,6 +37,11 @@ Partial Class FormConfigureMasterTable
         Me.btnOrderUp = New System.Windows.Forms.Button()
         Me.btnOrderDown = New System.Windows.Forms.Button()
         Me.lblOrder = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -46,9 +51,9 @@ Partial Class FormConfigureMasterTable
         '
         'cbObjectType
         '
+        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjectType.FormattingEnabled = True
-        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.Name = "cbObjectType"
         '
         'Label2
@@ -58,10 +63,10 @@ Partial Class FormConfigureMasterTable
         '
         'lvProps
         '
+        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
-        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -77,18 +82,18 @@ Partial Class FormConfigureMasterTable
         '
         'cbOrderBy
         '
+        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOrderBy.FormattingEnabled = True
-        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.Name = "cbOrderBy"
         '
         'lvObjects
         '
+        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.CheckBoxes = True
         Me.lvObjects.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvObjects.FullRowSelect = True
         Me.lvObjects.HideSelection = False
-        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.MultiSelect = False
         Me.lvObjects.Name = "lvObjects"
         Me.lvObjects.ShowGroups = False
@@ -126,10 +131,45 @@ Partial Class FormConfigureMasterTable
         resources.ApplyResources(Me.lblOrder, "lblOrder")
         Me.lblOrder.Name = "lblOrder"
         '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Name = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblOrder)
         Me.Controls.Add(Me.btnOrderDown)
         Me.Controls.Add(Me.btnOrderUp)
@@ -162,4 +202,9 @@ Partial Class FormConfigureMasterTable
     Friend WithEvents btnOrderUp As System.Windows.Forms.Button
     Friend WithEvents btnOrderDown As System.Windows.Forms.Button
     Friend WithEvents lblOrder As System.Windows.Forms.Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
 End Class

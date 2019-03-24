@@ -738,17 +738,55 @@ Namespace Reactors
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("_") Then
 
-                    Case 0
-                        'PROP_HT_0    Pressure Drop
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                End Select
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_HT_0    Pressure Drop
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+
+                    End Select
+
+                Else
+
+                    Select Case prop
+                        Case "Calculation Mode"
+                            Select Case ReactorOperationMode
+                                Case OperationMode.Adiabatic
+                                    Return "Adiabatic"
+                                Case OperationMode.Isothermic
+                                    Return "Isothermic"
+                                Case OperationMode.OutletTemperature
+                                    Return "Defined Temperature"
+                            End Select
+                        Case Else
+                            If prop.Contains("Conversion") Then
+                                Dim comp = prop.Split(": ")(0)
+                                If ComponentConversions.ContainsKey(comp) Then
+                                    value = ComponentConversions(comp) * 100
+                                Else
+                                    value = 0.0
+                                End If
+                            End If
+                            If prop.Contains("Extent") Then
+                                Dim rx = prop.Split(": ")(0)
+                                Dim rx2 = FlowSheet.Reactions.Values.Where(Function(x) x.Name = rx).FirstOrDefault
+                                If rx2 IsNot Nothing AndAlso Conversions.ContainsKey(rx2.ID) Then
+                                    value = Conversions(rx2.ID) * 100
+                                Else
+                                    value = 0.0
+                                End If
+                            End If
+                    End Select
+
+                End If
 
                 Return value
+
             End If
 
         End Function
@@ -770,6 +808,13 @@ Namespace Reactors
                 Case PropertyType.ALL
                     For i = 0 To 0
                         proplist.Add("PROP_CR_" + CStr(i))
+                    Next
+                    proplist.Add("Calculation Mode")
+                    For Each item In Conversions
+                        proplist.Add(item.Key + ": Extent")
+                    Next
+                    For Each item In ComponentConversions
+                        proplist.Add(item.Key + ": Conversion")
                     Next
             End Select
             Return proplist.ToArray(GetType(System.String))
@@ -803,17 +848,33 @@ Namespace Reactors
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As String = ""
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("_") Then
 
-                    Case 0
-                        'PROP_HT_0	Pressure Drop
-                        value = su.deltaP
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                End Select
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_HT_0	Pressure Drop
+                            value = su.deltaP
+
+                    End Select
+
+                Else
+
+                    Select Case prop
+                        Case "Calculation Mode"
+                            Return ""
+                        Case Else
+                            If prop.Contains("Conversion") Then value = "%"
+                            If prop.Contains("Extent") Then value = "%"
+                    End Select
+
+                End If
 
                 Return value
+
             End If
         End Function
 

@@ -1092,7 +1092,7 @@ Namespace Reactors
 
             ims.Phases(0).Properties.temperature = T
 
-            P = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            P = ims.Phases(0).Properties.pressure.GetValueOrDefault - DeltaP.GetValueOrDefault
             P0 = 101325
 
             'now check the selected solving method
@@ -2168,19 +2168,55 @@ Namespace Reactors
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
-                    Case 0
-                        'PROP_GR_0	Pressure Drop
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-                    Case 0
-                        'PROP_GR_1	Outlet Temperature
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
-                End Select
+                If prop.Contains("_") Then
+
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                    Select Case propidx
+                        Case 0
+                            'PROP_GR_0	Pressure Drop
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                        Case 0
+                            'PROP_GR_1	Outlet Temperature
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
+                    End Select
+
+                Else
+
+                    Select Case prop
+                        Case "Calculation Mode"
+                            Select Case ReactorOperationMode
+                                Case OperationMode.Adiabatic
+                                    Return "Adiabatic"
+                                Case OperationMode.Isothermic
+                                    Return "Isothermic"
+                                Case OperationMode.OutletTemperature
+                                    Return "Defined Temperature"
+                            End Select
+                        Case "Initial Gibbs Energy"
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.InitialGibbsEnergy)
+                        Case "Final Gibbs Energy"
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.FinalGibbsEnergy)
+                        Case "Element Balance Residue"
+                            value = ElementBalance
+                        Case Else
+                            If prop.Contains("Conversion") Then
+                                Dim comp = prop.Split(": ")(0)
+                                If ComponentConversions.ContainsKey(comp) Then
+                                    value = ComponentConversions(comp) * 100
+                                Else
+                                    value = 0.0
+                                End If
+                            End If
+                    End Select
+
+                End If
 
                 Return value
+
             End If
+
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
@@ -2201,7 +2237,15 @@ Namespace Reactors
                     For i = 0 To 1
                         proplist.Add("PROP_GR_" + CStr(i))
                     Next
+                    proplist.Add("Calculation Mode")
+                    proplist.Add("Initial Gibbs Energy")
+                    proplist.Add("Final Gibbs Energy")
+                    proplist.Add("Element Balance Residue")
+                    For Each item In ComponentConversions
+                        proplist.Add(item.Key + ": Conversion")
+                    Next
             End Select
+
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
@@ -2236,20 +2280,42 @@ Namespace Reactors
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As String = ""
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("_") Then
 
-                    Case 0
-                        'PROP_GR_0	Pressure Drop
-                        value = su.deltaP
-                    Case 1
-                        'PROP_GR_1	Outlet Temperature
-                        value = su.temperature
-                End Select
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_GR_0	Pressure Drop
+                            value = su.deltaP
+                        Case 1
+                            'PROP_GR_1	Outlet Temperature
+                            value = su.temperature
+                    End Select
+
+                Else
+
+                    Select Case prop
+                        Case "Calculation Mode"
+                            Return ""
+                        Case "Initial Gibbs Energy"
+                            value = su.heatflow
+                        Case "Final Gibbs Energy"
+                            value = su.heatflow
+                        Case "Element Balance Residue"
+                            value = ""
+                        Case Else
+                            If prop.Contains("Conversion") Then value = "%"
+                    End Select
+
+                End If
 
                 Return value
+
             End If
+
         End Function
 
         Public Overrides Sub DisplayEditForm()

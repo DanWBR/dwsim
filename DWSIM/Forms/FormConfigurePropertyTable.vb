@@ -1,4 +1,5 @@
-﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
+﻿Imports System.Linq
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
 Public Class FormConfigurePropertyTable
 
@@ -61,5 +62,29 @@ Public Class FormConfigurePropertyTable
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         If loaded Then Table.HeaderText = TextBox1.Text
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        For Each obj In lvProps.Items
+            DirectCast(obj, ListViewItem).Checked = True
+        Next
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        For Each obj In lvProps.Items
+            DirectCast(obj, ListViewItem).Checked = False
+        Next
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim props() As String = Nothing
+
+        props = Table.Flowsheet.SimulationObjects(lvObjects.SelectedItems(0).Tag).GetDefaultProperties
+        For Each lvi As ListViewItem In lvProps.Items
+            lvi.Checked = False
+        Next
+        For Each lvi As ListViewItem In lvProps.Items
+            If props.Contains(lvi.Tag) Then lvi.Checked = True
+        Next
     End Sub
 End Class

@@ -124,11 +124,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Object type</value>
   </data>
-  <data name="cbObjectType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 44</value>
-  </data>
   <data name="cbObjectType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 21</value>
+    <value>161, 21</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 13</value>
@@ -154,12 +151,6 @@
   <data name="cbOrderBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 21</value>
   </data>
-  <data name="lvObjects.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 75</value>
-  </data>
-  <data name="lvObjects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 281</value>
-  </data>
   <data name="ColumnHeader1.Text" xml:space="preserve">
     <value>Object</value>
   </data>
@@ -173,23 +164,26 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 9</value>
-  </data>
-  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>491, 20</value>
-  </data>
-  <data name="btnOrderUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 332</value>
-  </data>
-  <data name="btnOrderDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 332</value>
-  </data>
   <data name="lblOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
   </data>
   <data name="lblOrder.Text" xml:space="preserve">
     <value>Order</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Select All Objects</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Select All Properties</value>
+  </data>
+  <data name="Button3.Text" xml:space="preserve">
+    <value>Default Properties Only</value>
+  </data>
+  <data name="Button4.Text" xml:space="preserve">
+    <value>Deselect Properties</value>
+  </data>
+  <data name="Button5.Text" xml:space="preserve">
+    <value>Deselect Objects</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Master Property Table</value>
