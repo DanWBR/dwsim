@@ -1,3 +1,9 @@
+Version 5.7 Update 1
+
+- [NEW] Exposing additional reactor properties to tables and analysis tools
+- [NEW] Shortcut selection buttons on table editors (Classic UI)
+- [FIX] Fixed Electrolyte DB
+
 Version 5.7
 
 - [NEW] Electrolyte NRTL model for Sour Gas and Amine systems
