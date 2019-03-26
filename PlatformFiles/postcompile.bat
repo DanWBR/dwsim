@@ -35,3 +35,5 @@ del ..\DistPackages\Linux\plugins\*Skia*
 del ..\DistPackages\Linux\plugins\*Eto*
 rmdir /s /q ..\DistPackages\Linux\plugins\x86
 rmdir /s /q ..\DistPackages\Linux\plugins\x64
+
+pause

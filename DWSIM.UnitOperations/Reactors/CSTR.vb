@@ -1482,13 +1482,13 @@ out:        Dim ms1, ms2 As MaterialStream
                         proplist.Add(item.Key + " Conversion")
                     Next
                     For Each dbl As KeyValuePair(Of String, Double) In RxiT
-                        proplist.Add(FlowSheet.Reactions(dbl.Key).Name + " Extent")
+                        proplist.Add(FlowSheet.Reactions(dbl.Key).Name + ": Extent")
                     Next
                     For Each dbl As KeyValuePair(Of String, Double) In RxiT
-                        proplist.Add(FlowSheet.Reactions(dbl.Key).Name + " Rate")
+                        proplist.Add(FlowSheet.Reactions(dbl.Key).Name + ": Rate")
                     Next
                     For Each dbl As KeyValuePair(Of String, Double) In DHRi
-                        proplist.Add(FlowSheet.Reactions(dbl.Key).Name + " Heat")
+                        proplist.Add(FlowSheet.Reactions(dbl.Key).Name + ": Heat")
                     Next
             End Select
             Return proplist.ToArray(GetType(System.String))
