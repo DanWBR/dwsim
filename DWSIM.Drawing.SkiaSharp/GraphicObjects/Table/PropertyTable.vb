@@ -209,7 +209,7 @@ Namespace GraphicObjects.Tables
                 If size.Height > maxH Then maxH = size.Height
 
                 Me.Height = (count) * (maxH + 2 * Me.Padding)
-                Me.Width = 8 * Me.Padding + maxL0 + maxL1 + maxL2 + maxL3
+                Me.Width = 10 * Me.Padding + maxL0 + maxL1 + maxL2 + maxL3
 
                 maxL0 = maxL0 + 2 * Padding
                 maxL1 = maxL1 + 2 * Padding
@@ -245,8 +245,8 @@ Namespace GraphicObjects.Tables
                         propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 
                         canvas.DrawText(propstring, X + maxL0 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                        canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1 - Padding, Y + n * maxH + Padding + size.Height, tpaint2)
-                        canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                        canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1, Y + n * maxH + Padding + size.Height, tpaint2)
+                        canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + 2 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
                         canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
 
                         ClipboardData += Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag + vbTab + propstring + vbTab + propval + vbTab + propunit + vbCrLf
@@ -259,7 +259,7 @@ Namespace GraphicObjects.Tables
                 canvas.DrawRect(New SKRect(X, Y, X + Width, Y + Height), bpaint)
                 canvas.DrawLine(X + maxL0, Y + maxH, X + maxL0, Y + Height, bpaint)
                 canvas.DrawLine(X + maxL0 + maxL1, Y + maxH, X + maxL0 + maxL1, Y + Height, bpaint)
-                canvas.DrawLine(X + maxL0 + maxL1 + maxL2, Y + maxH, X + maxL0 + maxL1 + maxL2, Y + Height, bpaint)
+                canvas.DrawLine(X + maxL0 + maxL1 + maxL2 + Padding, Y + maxH, X + maxL0 + maxL1 + maxL2 + Padding, Y + Height, bpaint)
 
             Else
 

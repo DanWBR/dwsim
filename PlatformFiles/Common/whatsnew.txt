@@ -3,6 +3,7 @@ Version 5.7 Update 1
 - [NEW] Exposing additional reactor properties to tables and analysis tools
 - [NEW] Shortcut selection buttons on table editors (Classic UI)
 - [FIX] Fixed Electrolyte DB
+- [FIX] Fixed pressure drop on Gibbs and Equilibrium reactors
 
 Version 5.7
 

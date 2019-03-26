@@ -811,7 +811,7 @@ Namespace Reactors
                     Next
                     proplist.Add("Calculation Mode")
                     For Each item In Conversions
-                        proplist.Add(item.Key + ": Extent")
+                        proplist.Add(FlowSheet.Reactions(item.Key).Name + ": Extent")
                     Next
                     For Each item In ComponentConversions
                         proplist.Add(item.Key + ": Conversion")
