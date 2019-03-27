@@ -27,6 +27,7 @@ Imports System.Linq
 Imports System.Reflection
 Imports System.Globalization
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Interfaces
 
 Namespace BaseClasses
 
@@ -179,7 +180,7 @@ Namespace BaseClasses
     End Class
 
 
-    <System.Serializable()> <XmlRoot(ElementName:="Reaction")> _
+    <System.Serializable()> <XmlRoot(ElementName:="Reaction")>
     Public Class Reaction
 
         Implements ICloneable, Interfaces.ICustomXMLSerialization
@@ -372,6 +373,14 @@ Namespace BaseClasses
         Public Property Tmin As Double = 0.0 Implements Interfaces.IReaction.Tmin
 
         Public Property VelUnit As String = "" Implements Interfaces.IReaction.VelUnit
+
+        Public Property ReactionKinFwdType As ReactionKineticType = ReactionKineticType.Arrhenius Implements IReaction.ReactionKinFwdType
+
+        Public Property ReactionKinRevType As ReactionKineticType = ReactionKineticType.Arrhenius Implements IReaction.ReactionKinRevType
+
+        Public Property ReactionKinFwdExpression As String = "" Implements IReaction.ReactionKinFwdExpression
+
+        Public Property ReactionKinRevExpression As String = "" Implements IReaction.ReactionKinRevExpression
 
         Public Function EvaluateK1(T As Double, PP As Interfaces.IPropertyPackage) As Double Implements Interfaces.IReaction.EvaluateK
             Return EvaluateK(T, PP)

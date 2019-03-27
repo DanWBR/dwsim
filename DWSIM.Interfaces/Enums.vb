@@ -332,6 +332,11 @@ Namespace Enums
         PartialPress
     End Enum
 
+    Public Enum ReactionKineticType
+        Arrhenius = 0
+        UserDefined = 1
+    End Enum
+
     Public Enum KOpt
         Gibbs
         Expression

@@ -81,6 +81,25 @@ Public Class FormReacKinetic
         Me.tbRevA.Text = rc.A_Reverse
         Me.tbRevE.Text = rc.E_Reverse
 
+        If rc.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
+            rdFwdArr.Checked = True
+            rdFwdUD.Checked = False
+        Else
+            rdFwdArr.Checked = False
+            rdFwdUD.Checked = True
+        End If
+
+        If rc.ReactionKinRevType = ReactionKineticType.Arrhenius Then
+            rdRevArr.Checked = True
+            rdRevUD.Checked = False
+        Else
+            rdRevArr.Checked = False
+            rdRevUD.Checked = True
+        End If
+
+        tbFwdUE.Text = rc.ReactionKinFwdExpression
+        tbRevUE.Text = rc.ReactionKinRevExpression
+
         Select Case rc.ReactionPhase
             Case PhaseName.Vapor
                 Me.tbPhase.SelectedIndex = 0
@@ -274,6 +293,21 @@ Public Class FormReacKinetic
             rc.E_Forward = Me.tbFwdE.Text
             rc.E_Reverse = Me.tbRevE.Text
 
+            rc.ReactionKinFwdExpression = tbFwdUE.Text
+            rc.ReactionKinRevExpression = tbRevUE.Text
+
+            If rdFwdArr.Checked Then
+                rc.ReactionKinFwdType = ReactionKineticType.Arrhenius
+            Else
+                rc.ReactionKinFwdType = ReactionKineticType.UserDefined
+            End If
+
+            If rdRevArr.Checked Then
+                rc.ReactionKinRevType = ReactionKineticType.Arrhenius
+            Else
+                rc.ReactionKinRevType = ReactionKineticType.UserDefined
+            End If
+
             rc.ConcUnit = Me.cbConcUnit.SelectedItem.ToString
             rc.VelUnit = Me.cbVelUnit.SelectedItem
 
@@ -340,6 +374,22 @@ Public Class FormReacKinetic
                 End If
             End If
         Next
+
+    End Sub
+
+    Private Sub rdFwdArr_CheckedChanged(sender As Object, e As EventArgs) Handles rdFwdArr.CheckedChanged
+
+        tbFwdA.Enabled = rdFwdArr.Checked
+        tbFwdE.Enabled = rdFwdArr.Checked
+        tbFwdUE.Enabled = Not rdFwdArr.Checked
+
+    End Sub
+
+    Private Sub rdRevArr_CheckedChanged(sender As Object, e As EventArgs) Handles rdRevArr.CheckedChanged
+
+        tbRevA.Enabled = rdRevArr.Checked
+        tbRevE.Enabled = rdRevArr.Checked
+        tbRevUE.Enabled = Not rdRevArr.Checked
 
     End Sub
 

@@ -215,8 +215,47 @@ Namespace Reactors
 
                 If rxn.ReactionType = ReactionType.Kinetic Then
 
-                    Dim kxf As Double = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
-                    Dim kxr As Double = rxn.A_Reverse * Exp(-rxn.E_Reverse / (8.314 * T))
+                    'calculate reaction constants
+
+                    Dim kxf, kxr As Double
+
+                    If rxn.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
+
+                        kxf = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
+
+                    Else
+
+                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+
+                        rxn.ExpContext.Variables.Clear()
+                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+
+                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinFwdExpression)
+
+                        kxf = rxn.Expr.Evaluate
+
+                    End If
+
+                    If rxn.ReactionKinRevType = ReactionKineticType.Arrhenius Then
+
+                        kxr = rxn.A_Reverse * Exp(-rxn.E_Reverse / (8.314 * T))
+
+                    Else
+
+                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+
+                        rxn.ExpContext.Variables.Clear()
+                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+
+                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinRevExpression)
+
+                        kxr = rxn.Expr.Evaluate
+
+                    End If
 
                     If T < rxn.Tmin Or T > rxn.Tmax Then
                         kxf = 0.0#

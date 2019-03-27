@@ -75,6 +75,14 @@
 
     Property E_Reverse() As Double
 
+    Property ReactionKinFwdType As Enums.ReactionKineticType
+
+    Property ReactionKinRevType As Enums.ReactionKineticType
+
+    Property ReactionKinFwdExpression As String
+
+    Property ReactionKinRevExpression As String
+
     'Heterogeneous
     Property RateEquationNumerator As String
 

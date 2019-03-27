@@ -120,10 +120,28 @@
   <data name="KryptonButton3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rdRevUD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
+  </data>
+  <data name="rdRevUD.Text" xml:space="preserve">
+    <value>User-Defined: f(T)</value>
+  </data>
+  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 46</value>
+  </data>
+  <data name="rdFwdUD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
+  </data>
+  <data name="rdFwdUD.Text" xml:space="preserve">
+    <value>User-Defined: f(T)</value>
+  </data>
+  <data name="FlowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 46</value>
+  </data>
   <data name="KryptonLabel18.ImageKey" xml:space="preserve">
     <value>(none)</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="KryptonLabel18.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
   </data>
@@ -152,49 +170,52 @@
     <value>A '</value>
   </data>
   <data name="KryptonLabel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 13</value>
+    <value>70, 13</value>
   </data>
   <data name="KryptonLabel11.Text" xml:space="preserve">
-    <value>Amount Unit</value>
+    <value>Amount Units</value>
   </data>
   <data name="cbConcUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 69</value>
+    <value>82, 126</value>
   </data>
   <data name="cbConcUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 21</value>
+    <value>250, 21</value>
   </data>
   <data name="KryptonLabel12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>71, 13</value>
   </data>
   <data name="KryptonLabel12.Text" xml:space="preserve">
-    <value>Velocity Unit</value>
+    <value>Velocity Units</value>
   </data>
   <data name="cbVelUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 69</value>
+    <value>420, 126</value>
   </data>
   <data name="cbVelUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 21</value>
+    <value>233, 21</value>
   </data>
   <data name="KryptonLabel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 13</value>
+    <value>93, 13</value>
   </data>
   <data name="KryptonLabel10.Text" xml:space="preserve">
-    <value>Reverse Reaction [k' = A' exp(-E'/RT)]</value>
+    <value>Reverse Reaction</value>
   </data>
   <data name="KryptonLabel5.ImageKey" xml:space="preserve">
     <value>(none)</value>
   </data>
   <data name="KryptonLabel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 13</value>
+    <value>81, 13</value>
   </data>
   <data name="KryptonLabel5.Text" xml:space="preserve">
-    <value>Direct Reaction [k = A exp(-E/RT)]</value>
+    <value>Direct Reaction</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Direct and Reverse Reactions Velocity Constant (k and k')</value>
   </data>
   <data name="KryptonLabel9.Text" xml:space="preserve">
     <value>Base Component</value>
+  </data>
+  <data name="KryptonLabel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 20</value>
   </data>
   <data name="KryptonLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -223,6 +244,12 @@
   <data name="cbBase.Items6" xml:space="preserve">
     <value>Partial Pressures</value>
   </data>
+  <data name="cbBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 16</value>
+  </data>
+  <data name="KryptonLabel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 45</value>
+  </data>
   <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
@@ -236,19 +263,22 @@
     <value>Mixture</value>
   </data>
   <data name="tbPhase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 17</value>
-  </data>
-  <data name="tbPhase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 21</value>
+    <value>326, 41</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Kinetic Reaction Parameters</value>
+  </data>
+  <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
   </data>
   <data name="KryptonLabel3.Text" xml:space="preserve">
     <value>Equation</value>
   </data>
   <data name="KryptonButton2.Text" xml:space="preserve">
     <value>Balance</value>
+  </data>
+  <data name="KryptonLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 13</value>
   </data>
   <data name="KryptonLabel2.Text" xml:space="preserve">
     <value>Heat of Reaction (kJ/kmol_BC)</value>
@@ -283,18 +313,14 @@
   <data name="Column8.ToolTipText" xml:space="preserve">
     <value>Reverse Order</value>
   </data>
+  <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
   <data name="KryptonLabel1.Text" xml:space="preserve">
     <value>Stoichiometry</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Components, Stoichiometry and Reaction Orders</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="KryptonLabel19.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="KryptonLabel19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
   </data>
   <data name="KryptonLabel19.Text" xml:space="preserve">
     <value>Description</value>

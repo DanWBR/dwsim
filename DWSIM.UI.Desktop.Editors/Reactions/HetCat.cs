@@ -12,6 +12,7 @@ using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
 using DWSIM.UI.Shared;
 using Eto.Drawing;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -222,6 +223,14 @@ namespace DWSIM.UI.Desktop.Editors
                         break;
                 }
             };
+            
+            container.CreateAndAddLabelRow("Temperature Limits");
+
+            var nf = flowsheet.FlowsheetOptions.NumberFormat;
+            var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
+
+            container.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
+            container.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
 
             container.CreateAndAddLabelRow("Rate Expressions");
 

@@ -96,7 +96,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var _rx = new Reaction("NewKinReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Kinetic };
                 var myview = s.GetDefaultContainer();
                 var cre = new KineticReaction(flowsheet, _rx, myview);
-                var alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 500, 400, myview);
+                var alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 850, 650, myview);
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
@@ -106,8 +106,6 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                myview.CreateAndAddEmptySpace();
-                myview.CreateAndAddEmptySpace();
                 alert.Shown += (s1, e1) => alert.Height = myview.Height;
                 alert.Topmost = true;
                 alert.Show();
@@ -220,7 +218,7 @@ namespace DWSIM.UI.Desktop.Editors
                             case Interfaces.Enums.ReactionType.Kinetic:
                                 var myview3 = s.GetDefaultContainer();
                                 var cre3 = new KineticReaction(flowsheet, rx, myview3);
-                                var alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 500, 400, myview3);
+                                var alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 850, 650, myview3);
                                 myview3.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert3.Close(),
                                 (sender2, e2) =>
                                 {
@@ -228,8 +226,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert3.Close();
                                 });
-                                myview3.CreateAndAddEmptySpace();
-                                myview3.CreateAndAddEmptySpace();
+                                //myview3.CreateAndAddEmptySpace();
+                                //myview3.CreateAndAddEmptySpace();
                                 alert3.Shown += (s1, e1) => alert3.Height = myview3.Height;
                                 alert3.Topmost = true;
                                 alert3.Show();

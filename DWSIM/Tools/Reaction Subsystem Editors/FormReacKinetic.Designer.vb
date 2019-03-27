@@ -27,6 +27,14 @@ Partial Class FormReacKinetic
         Me.KryptonButton3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.tbRevUE = New System.Windows.Forms.TextBox()
+        Me.tbFwdUE = New System.Windows.Forms.TextBox()
+        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.rdRevArr = New System.Windows.Forms.RadioButton()
+        Me.rdRevUD = New System.Windows.Forms.RadioButton()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.rdFwdArr = New System.Windows.Forms.RadioButton()
+        Me.rdFwdUD = New System.Windows.Forms.RadioButton()
         Me.KryptonLabel18 = New System.Windows.Forms.Label()
         Me.KryptonLabel17 = New System.Windows.Forms.Label()
         Me.tbRevE = New System.Windows.Forms.TextBox()
@@ -61,12 +69,6 @@ Partial Class FormReacKinetic
         Me.KryptonLabel2 = New System.Windows.Forms.Label()
         Me.tbStoich = New System.Windows.Forms.TextBox()
         Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.KryptonLabel1 = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.KryptonLabel19 = New System.Windows.Forms.Label()
-        Me.KryptonLabel20 = New System.Windows.Forms.Label()
-        Me.tbName = New System.Windows.Forms.TextBox()
-        Me.tbDesc = New System.Windows.Forms.TextBox()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,8 +78,16 @@ Partial Class FormReacKinetic
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KryptonLabel1 = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.KryptonLabel19 = New System.Windows.Forms.Label()
+        Me.KryptonLabel20 = New System.Windows.Forms.Label()
+        Me.tbName = New System.Windows.Forms.TextBox()
+        Me.tbDesc = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.FlowLayoutPanel2.SuspendLayout()
+        Me.FlowLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
@@ -95,6 +105,7 @@ Partial Class FormReacKinetic
         '
         'GroupBox2
         '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.Controls.Add(Me.tbCompBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel9)
@@ -106,12 +117,16 @@ Partial Class FormReacKinetic
         Me.GroupBox2.Controls.Add(Me.cbBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel6)
         Me.GroupBox2.Controls.Add(Me.tbPhase)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
         'GroupBox3
         '
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
+        Me.GroupBox3.Controls.Add(Me.tbRevUE)
+        Me.GroupBox3.Controls.Add(Me.tbFwdUE)
+        Me.GroupBox3.Controls.Add(Me.FlowLayoutPanel2)
+        Me.GroupBox3.Controls.Add(Me.FlowLayoutPanel1)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel18)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel17)
         Me.GroupBox3.Controls.Add(Me.tbRevE)
@@ -128,9 +143,60 @@ Partial Class FormReacKinetic
         Me.GroupBox3.Controls.Add(Me.cbVelUnit)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel10)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel5)
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        '
+        'tbRevUE
+        '
+        resources.ApplyResources(Me.tbRevUE, "tbRevUE")
+        Me.tbRevUE.Name = "tbRevUE"
+        '
+        'tbFwdUE
+        '
+        resources.ApplyResources(Me.tbFwdUE, "tbFwdUE")
+        Me.tbFwdUE.Name = "tbFwdUE"
+        '
+        'FlowLayoutPanel2
+        '
+        resources.ApplyResources(Me.FlowLayoutPanel2, "FlowLayoutPanel2")
+        Me.FlowLayoutPanel2.Controls.Add(Me.rdRevArr)
+        Me.FlowLayoutPanel2.Controls.Add(Me.rdRevUD)
+        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
+        '
+        'rdRevArr
+        '
+        resources.ApplyResources(Me.rdRevArr, "rdRevArr")
+        Me.rdRevArr.Name = "rdRevArr"
+        Me.rdRevArr.TabStop = True
+        Me.rdRevArr.UseVisualStyleBackColor = True
+        '
+        'rdRevUD
+        '
+        resources.ApplyResources(Me.rdRevUD, "rdRevUD")
+        Me.rdRevUD.Name = "rdRevUD"
+        Me.rdRevUD.TabStop = True
+        Me.rdRevUD.UseVisualStyleBackColor = True
+        '
+        'FlowLayoutPanel1
+        '
+        resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
+        Me.FlowLayoutPanel1.Controls.Add(Me.rdFwdArr)
+        Me.FlowLayoutPanel1.Controls.Add(Me.rdFwdUD)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        '
+        'rdFwdArr
+        '
+        resources.ApplyResources(Me.rdFwdArr, "rdFwdArr")
+        Me.rdFwdArr.Name = "rdFwdArr"
+        Me.rdFwdArr.TabStop = True
+        Me.rdFwdArr.UseVisualStyleBackColor = True
+        '
+        'rdFwdUD
+        '
+        resources.ApplyResources(Me.rdFwdUD, "rdFwdUD")
+        Me.rdFwdUD.Name = "rdFwdUD"
+        Me.rdFwdUD.TabStop = True
+        Me.rdFwdUD.UseVisualStyleBackColor = True
         '
         'KryptonLabel18
         '
@@ -189,9 +255,9 @@ Partial Class FormReacKinetic
         '
         'cbConcUnit
         '
+        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
         Me.cbConcUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbConcUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
         Me.cbConcUnit.Name = "cbConcUnit"
         '
         'KryptonLabel12
@@ -201,9 +267,9 @@ Partial Class FormReacKinetic
         '
         'cbVelUnit
         '
+        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
         Me.cbVelUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbVelUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
         Me.cbVelUnit.Name = "cbVelUnit"
         '
         'KryptonLabel10
@@ -254,9 +320,9 @@ Partial Class FormReacKinetic
         '
         'cbBase
         '
+        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbBase.DropDownWidth = 121
-        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.Items.AddRange(New Object() {resources.GetString("cbBase.Items"), resources.GetString("cbBase.Items1"), resources.GetString("cbBase.Items2"), resources.GetString("cbBase.Items3"), resources.GetString("cbBase.Items4"), resources.GetString("cbBase.Items5"), resources.GetString("cbBase.Items6")})
         Me.cbBase.Name = "cbBase"
         '
@@ -267,14 +333,15 @@ Partial Class FormReacKinetic
         '
         'tbPhase
         '
+        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tbPhase.DropDownWidth = 121
         Me.tbPhase.Items.AddRange(New Object() {resources.GetString("tbPhase.Items"), resources.GetString("tbPhase.Items1"), resources.GetString("tbPhase.Items2")})
-        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.Name = "tbPhase"
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.tbEquation)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel3)
         Me.GroupBox1.Controls.Add(Me.KryptonButton2)
@@ -283,7 +350,6 @@ Partial Class FormReacKinetic
         Me.GroupBox1.Controls.Add(Me.tbStoich)
         Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -322,52 +388,17 @@ Partial Class FormReacKinetic
         '
         'KryptonDataGridView1
         '
+        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.AllowUserToAddRows = False
         Me.KryptonDataGridView1.AllowUserToDeleteRows = False
         Me.KryptonDataGridView1.AllowUserToResizeRows = False
         Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column3, Me.Column9, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column1})
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.MultiSelect = False
         Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
         Me.KryptonDataGridView1.RowHeadersVisible = False
         Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'KryptonLabel1
-        '
-        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
-        Me.KryptonLabel1.Name = "KryptonLabel1"
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel19)
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel20)
-        Me.GroupBox4.Controls.Add(Me.tbName)
-        Me.GroupBox4.Controls.Add(Me.tbDesc)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        '
-        'KryptonLabel19
-        '
-        resources.ApplyResources(Me.KryptonLabel19, "KryptonLabel19")
-        Me.KryptonLabel19.Name = "KryptonLabel19"
-        '
-        'KryptonLabel20
-        '
-        resources.ApplyResources(Me.KryptonLabel20, "KryptonLabel20")
-        Me.KryptonLabel20.Name = "KryptonLabel20"
-        '
-        'tbName
-        '
-        resources.ApplyResources(Me.tbName, "tbName")
-        Me.tbName.Name = "tbName"
-        '
-        'tbDesc
-        '
-        resources.ApplyResources(Me.tbDesc, "tbDesc")
-        Me.tbDesc.Name = "tbDesc"
         '
         'Column2
         '
@@ -426,6 +457,41 @@ Partial Class FormReacKinetic
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
+        'KryptonLabel1
+        '
+        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
+        Me.KryptonLabel1.Name = "KryptonLabel1"
+        '
+        'GroupBox4
+        '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel19)
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel20)
+        Me.GroupBox4.Controls.Add(Me.tbName)
+        Me.GroupBox4.Controls.Add(Me.tbDesc)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        '
+        'KryptonLabel19
+        '
+        resources.ApplyResources(Me.KryptonLabel19, "KryptonLabel19")
+        Me.KryptonLabel19.Name = "KryptonLabel19"
+        '
+        'KryptonLabel20
+        '
+        resources.ApplyResources(Me.KryptonLabel20, "KryptonLabel20")
+        Me.KryptonLabel20.Name = "KryptonLabel20"
+        '
+        'tbName
+        '
+        resources.ApplyResources(Me.tbName, "tbName")
+        Me.tbName.Name = "tbName"
+        '
+        'tbDesc
+        '
+        resources.ApplyResources(Me.tbDesc, "tbDesc")
+        Me.tbDesc.Name = "tbDesc"
+        '
         'FormReacKinetic
         '
         resources.ApplyResources(Me, "$this")
@@ -444,6 +510,10 @@ Partial Class FormReacKinetic
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.FlowLayoutPanel2.ResumeLayout(False)
+        Me.FlowLayoutPanel2.PerformLayout()
+        Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.FlowLayoutPanel1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -505,4 +575,12 @@ Partial Class FormReacKinetic
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents rdFwdArr As RadioButton
+    Friend WithEvents rdFwdUD As RadioButton
+    Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
+    Friend WithEvents rdRevArr As RadioButton
+    Friend WithEvents rdRevUD As RadioButton
+    Public WithEvents tbRevUE As TextBox
+    Public WithEvents tbFwdUE As TextBox
 End Class
