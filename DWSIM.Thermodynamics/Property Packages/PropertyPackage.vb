@@ -614,7 +614,7 @@ Namespace PropertyPackages
 
             For Each p As IPhase In Me.CurrentMaterialStream.Phases.Values
                 IObj?.Paragraphs.Add(String.Format("<h3>{0}</h3>", p.Name))
-                If p.Name <> "Mixture" And p.Name <> "OverallLiquid" Then
+                If p.Name <> "Mixture" And p.Name <> "OverallLiquid" And p.Properties.molarfraction.HasValue Then
 
                     With p.Properties
                         IObj?.SetCurrent
@@ -651,7 +651,7 @@ Namespace PropertyPackages
 
             Dim p = Me.CurrentMaterialStream.Phases(phaseID)
 
-            If p.Name <> "Mixture" And p.Name <> "OverallLiquid" Then
+            If p.Name <> "Mixture" And p.Name <> "OverallLiquid" And p.Properties.molarfraction.HasValue Then
 
                 With p.Properties
                     .isothermal_compressibility = CalcIsothermalCompressibility(p)
@@ -667,15 +667,18 @@ Namespace PropertyPackages
 
             End If
 
+
         End Sub
 
         Public Overridable Function CalcIsothermalCompressibility(p As IPhase) As Double
 
+            Dim Z, P0, T, Z1, x As Double
+
+            If Not p.Properties.molarfraction.HasValue Then Return 0.0
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "CalcIsothermalCompressibility", ComponentName & " (Isothermal Compressibility)", "")
-
-            Dim Z, P0, T, Z1 As Double
 
             T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
             P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
@@ -747,6 +750,8 @@ Namespace PropertyPackages
         End Function
 
         Public Overridable Function CalcJouleThomsonCoefficient(p As IPhase) As Double
+
+            If Not p.Properties.molarfraction.HasValue Then Return 0.0
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1790,6 +1795,8 @@ Namespace PropertyPackages
 
             hl = hl1 * wl1 + hl2 * wl2 + hl3 * wl3 + hw * ww
 
+            If Double.IsNaN(hl) Then hl = 0.0
+
             Me.CurrentMaterialStream.Phases(1).Properties.enthalpy = hl / wl
 
             sl1 = Me.CurrentMaterialStream.Phases(3).Properties.entropy.GetValueOrDefault
@@ -1798,6 +1805,8 @@ Namespace PropertyPackages
             sw = Me.CurrentMaterialStream.Phases(6).Properties.entropy.GetValueOrDefault
 
             sl = sl1 * wl1 + sl2 * wl2 + sl3 * wl3 + sw * ww
+
+            If Double.IsNaN(sl) Then sl = 0.0
 
             Me.CurrentMaterialStream.Phases(1).Properties.entropy = sl / wl
 
@@ -1808,6 +1817,8 @@ Namespace PropertyPackages
 
             ul = ul1 * wl1 + ul2 * ul2 + ul3 * ul3 + uw * ww
 
+            If Double.IsNaN(ul) Then ul = 0.0
+
             Me.CurrentMaterialStream.Phases(1).Properties.internal_energy = ul / wl
 
             gl1 = Me.CurrentMaterialStream.Phases(3).Properties.gibbs_free_energy.GetValueOrDefault
@@ -1816,6 +1827,8 @@ Namespace PropertyPackages
             gw = Me.CurrentMaterialStream.Phases(6).Properties.gibbs_free_energy.GetValueOrDefault
 
             gl = gl1 * wl1 + gl2 * wl2 + gl3 * wl3 + gw * ww
+
+            If Double.IsNaN(gl) Then gl = 0.0
 
             Me.CurrentMaterialStream.Phases(1).Properties.gibbs_free_energy = gl / wl
 
@@ -1826,6 +1839,8 @@ Namespace PropertyPackages
 
             al = al1 * wl1 + al2 * wl2 + al3 * wl3 + aw * ww
 
+            If Double.IsNaN(al) Then al = 0.0
+
             Me.CurrentMaterialStream.Phases(1).Properties.helmholtz_energy = al / wl
 
             cpl1 = Me.CurrentMaterialStream.Phases(3).Properties.heatCapacityCp.GetValueOrDefault
@@ -1835,6 +1850,8 @@ Namespace PropertyPackages
 
             cpl = cpl1 * wl1 + cpl2 * wl2 + cpl3 * wl3 + cpw * ww
 
+            If Double.IsNaN(cpl) Then cpl = 0.0
+
             Me.CurrentMaterialStream.Phases(1).Properties.heatCapacityCp = cpl / wl
 
             cvl1 = Me.CurrentMaterialStream.Phases(3).Properties.heatCapacityCv.GetValueOrDefault
@@ -1843,6 +1860,8 @@ Namespace PropertyPackages
             cvw = Me.CurrentMaterialStream.Phases(6).Properties.heatCapacityCv.GetValueOrDefault
 
             cvl = cvl1 * wl1 + cvl2 * wl2 + cvl3 * wl3 + cvw * ww
+
+            If Double.IsNaN(cvl) Then cvl = 0.0
 
             Me.CurrentMaterialStream.Phases(1).Properties.heatCapacityCv = cvl / wl
 
@@ -1873,6 +1892,8 @@ Namespace PropertyPackages
 
             kl = kl1 * wl1 + kl2 * wl2 + kl3 * kl3 + kw * ww
 
+            If Double.IsNaN(kl) Then kl = 0.0
+
             Me.CurrentMaterialStream.Phases(1).Properties.thermalConductivity = kl / wl
 
             vil1 = Me.CurrentMaterialStream.Phases(3).Properties.viscosity.GetValueOrDefault
@@ -1881,6 +1902,8 @@ Namespace PropertyPackages
             viw = Me.CurrentMaterialStream.Phases(6).Properties.viscosity.GetValueOrDefault
 
             vil = vil1 * wl1 + vil2 * vil2 + kl3 * vil3 + viw * ww
+
+            If Double.IsNaN(vil) Then vil = 0.0
 
             Me.CurrentMaterialStream.Phases(1).Properties.viscosity = vil / wl
 

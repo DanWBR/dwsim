@@ -317,19 +317,19 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Material Stream\MaterialStream.vb" />
-    <Compile Include="Models\ElectrolyteNRTL.vb" />
-    <Compile Include="Models\PCSAFT.vb" />
-    <Compile Include="Models\TrueCriticalPoint.vb" />
+    <Compile Include="Property Packages\Models\ElectrolyteNRTL.vb" />
+    <Compile Include="Property Packages\Models\PCSAFT.vb" />
+    <Compile Include="Property Packages\Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
     <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
     <Compile Include="Property Packages\ActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ElectrolyteProperties.vb" />
     <Compile Include="Property Packages\ElectrolyteBase.vb" />
-    <Compile Include="Models\Hypotheticals.vb" />
+    <Compile Include="Property Packages\Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />
     <Compile Include="Property Packages\PropertyPackage.vb" />
-    <Compile Include="Models\FluidProperties.vb" />
+    <Compile Include="Property Packages\Models\FluidProperties.vb" />
     <Compile Include="Base Classes\FlashAlgorithmBase.vb" />
     <Compile Include="Flash Algorithms\BlackOil.vb" />
     <Compile Include="Flash Algorithms\BostonBrittInsideOut.vb" />
@@ -358,7 +358,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Models\BlackOilProperties.vb" />
+    <Compile Include="Property Packages\Models\BlackOilProperties.vb" />
     <Compile Include="PetroleumCharacterization\CurveConversion.vb" />
     <Compile Include="PetroleumCharacterization\Fitting.vb" />
     <Compile Include="PetroleumCharacterization\GenerateCompounds.vb" />
@@ -372,47 +372,47 @@
     <Compile Include="Property Packages\CAPEOPENSocket.vb" />
     <Compile Include="Property Packages\ChaoSeader.vb" />
     <Compile Include="Property Packages\CoolProp.vb" />
-    <Compile Include="Models\ChaoSeader.vb" />
-    <Compile Include="Models\ExtendedUNIQUAC.vb" />
+    <Compile Include="Property Packages\Models\ChaoSeader.vb" />
+    <Compile Include="Property Packages\Models\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\CoolPropIncompressibleMixture.vb" />
     <Compile Include="Property Packages\CoolPropIncompressiblePure.vb" />
     <Compile Include="Property Packages\ElectrolyteNRTL.vb" />
     <Compile Include="Property Packages\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\GraysonStreed.vb" />
-    <Compile Include="Models\GraysonStreed.vb" />
-    <Compile Include="Models\SteamTables_IAPWS_IF97.vb" />
-    <Compile Include="Models\Ideal.vb" />
-    <Compile Include="Models\LIQUAC2.vb" />
-    <Compile Include="Models\LeeKesler.vb" />
-    <Compile Include="Models\LeeKeslerPlocker.vb" />
+    <Compile Include="Property Packages\Models\GraysonStreed.vb" />
+    <Compile Include="Property Packages\Models\SteamTables_IAPWS_IF97.vb" />
+    <Compile Include="Property Packages\Models\Ideal.vb" />
+    <Compile Include="Property Packages\Models\LIQUAC2.vb" />
+    <Compile Include="Property Packages\Models\LeeKesler.vb" />
+    <Compile Include="Property Packages\Models\LeeKeslerPlocker.vb" />
     <Compile Include="Property Packages\LeeKeslerPlocker.vb" />
-    <Compile Include="Models\MODFAC.vb" />
+    <Compile Include="Property Packages\Models\MODFAC.vb" />
     <Compile Include="Property Packages\MODFAC.vb" />
-    <Compile Include="Models\NISTMFAC.vb" />
+    <Compile Include="Property Packages\Models\NISTMFAC.vb" />
     <Compile Include="Property Packages\NISTMFAC.vb" />
-    <Compile Include="Models\NRTL.vb" />
+    <Compile Include="Property Packages\Models\NRTL.vb" />
     <Compile Include="Property Packages\NRTL.vb" />
-    <Compile Include="Models\PengRobinson.vb" />
+    <Compile Include="Property Packages\Models\PengRobinson.vb" />
     <Compile Include="Property Packages\PengRobinson.vb" />
-    <Compile Include="Models\PengRobinson2.vb" />
+    <Compile Include="Property Packages\Models\PengRobinson2.vb" />
     <Compile Include="Property Packages\PengRobinsonLeeKesler.vb" />
-    <Compile Include="Models\PRSV2-VL.vb" />
-    <Compile Include="Models\PRSV2.vb" />
+    <Compile Include="Property Packages\Models\PRSV2-VL.vb" />
+    <Compile Include="Property Packages\Models\PRSV2.vb" />
     <Compile Include="Property Packages\PengRobinsonStryjekVera2.vb" />
     <Compile Include="Property Packages\PengRobinsonStryjekVera2VL.vb" />
     <Compile Include="Property Packages\Ideal.vb" />
-    <Compile Include="Models\Seawater.vb" />
+    <Compile Include="Property Packages\Models\Seawater.vb" />
     <Compile Include="Property Packages\SeaWater.vb" />
     <Compile Include="Property Packages\SourWater.vb" />
-    <Compile Include="Models\SoaveRedlichKwong.vb" />
-    <Compile Include="Models\SoaveRedlichKwong2.vb" />
+    <Compile Include="Property Packages\Models\SoaveRedlichKwong.vb" />
+    <Compile Include="Property Packages\Models\SoaveRedlichKwong2.vb" />
     <Compile Include="Property Packages\SoaveRedlichKwong.vb" />
-    <Compile Include="Models\Steam67.vb" />
+    <Compile Include="Property Packages\Models\Steam67.vb" />
     <Compile Include="Property Packages\SteamTables.vb" />
-    <Compile Include="Models\UNIFAC.vb" />
+    <Compile Include="Property Packages\Models\UNIFAC.vb" />
     <Compile Include="Property Packages\UNIFACLL.vb" />
     <Compile Include="Property Packages\UNIFAC.vb" />
-    <Compile Include="Models\UNIQUAC.vb" />
+    <Compile Include="Property Packages\Models\UNIQUAC.vb" />
     <Compile Include="Property Packages\UNIQUAC.vb" />
   </ItemGroup>
   <ItemGroup>
