@@ -41,7 +41,17 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Init()
         {
+            
+            DynamicLayout p1, p2;
 
+            StackLayout t1;
+
+            p1 = UI.Shared.Common.GetDefaultContainer();
+            p2 = UI.Shared.Common.GetDefaultContainer();
+
+            t1 = new StackLayout(p1, p2);
+            t1.Orientation = Orientation.Horizontal;
+            
             Padding = new Padding(10);
 
             if (flowsheet.SensAnalysisCollection.Count == 0)
@@ -54,22 +64,24 @@ namespace DWSIM.UI.Desktop.Editors
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
 
-            s.CreateAndAddDescriptionRow(this, "Use the Sensitivity Analysis tool to study/analyze the influence of a process variable on other variables in the flowsheet.");
-           
-            s.CreateAndAddLabelRow(this, "Case ID");
-            s.CreateAndAddFullTextBoxRow(this, mycase.name, (arg3, arg2) => { mycase.name = arg3.Text; });
+            s.CreateAndAddLabelRow2(this, "Use the Sensitivity Analysis tool to study/analyze the influence of a process variable on other variables in the flowsheet.");
+            
+            this.Add(t1);
 
-            s.CreateAndAddLabelRow(this, "Case Description");
-            s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
+            s.CreateAndAddLabelRow(p1, "Case ID");
+            s.CreateAndAddFullTextBoxRow(p1, mycase.name, (arg3, arg2) => { mycase.name = arg3.Text; });
 
-            s.CreateAndAddLabelRow(this, "Independent Variable");
+            s.CreateAndAddLabelRow(p1, "Case Description");
+            s.CreateAndAddFullTextBoxRow(p1, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
+
+            s.CreateAndAddLabelRow(p1, "Independent Variable");
 
             var objlist = flowsheet.SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
             objlist.Insert(0, "");
 
-            var spinner = s.CreateAndAddDropDownRow(this, "Object", objlist, 0, null);
+            var spinner = s.CreateAndAddDropDownRow(p1, "Object", objlist, 0, null);
 
-            var spinner2 = s.CreateAndAddDropDownRow(this, "Property", new List<string>(), 0, null);
+            var spinner2 = s.CreateAndAddDropDownRow(p1, "Property", new List<string>(), 0, null);
 
             List<string> proplist = new List<string>();
 
@@ -95,15 +107,15 @@ namespace DWSIM.UI.Desktop.Editors
                 spinner.SelectedIndex = (objlist.IndexOf(flowsheet.SimulationObjects[mycase.iv1.objectID].GraphicObject.Tag));
             }
 
-            var txtLowerLimit = s.CreateAndAddTextBoxRow(this, nf, "Initial Value", 0, null);
-            var txtUpperLimit = s.CreateAndAddTextBoxRow(this, nf, "Final Value", 0, null);
-            var txtSteps = s.CreateAndAddTextBoxRow(this, "0", "Number of Steps", 0, null);
+            var txtLowerLimit = s.CreateAndAddTextBoxRow(p1, nf, "Initial Value", 0, null);
+            var txtUpperLimit = s.CreateAndAddTextBoxRow(p1, nf, "Final Value", 0, null);
+            var txtSteps = s.CreateAndAddTextBoxRow(p1, "0", "Number of Steps", 0, null);
 
             txtLowerLimit.Text = mycase.iv1.lowerlimit.GetValueOrDefault().ToString(nf);
             txtUpperLimit.Text = mycase.iv1.upperlimit.GetValueOrDefault().ToString(nf);
             txtSteps.Text = mycase.iv1.points.ToString();
 
-            var labelUnits = s.CreateAndAddTwoLabelsRow(this, "Property Units", "");
+            var labelUnits = s.CreateAndAddTwoLabelsRow(p1, "Property Units", "");
 
             spinner2.SelectedIndexChanged += (sender, e) =>
             {
@@ -141,12 +153,32 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            var btnAddDepVar = s.CreateAndAddBoldLabelAndButtonRow(this, "Dependent Variables", "Add New", null, null);
+            s.CreateAndAddEmptySpace(p1);
+            s.CreateAndAddEmptySpace(p1);
+            s.CreateAndAddEmptySpace(p1);
+            s.CreateAndAddEmptySpace(p1);
+            s.CreateAndAddEmptySpace(p1);
+            s.CreateAndAddEmptySpace(p1);
+
+            var btnAddDepVar = s.CreateAndAddBoldLabelAndButtonRow(p2, "Dependent Variables", "Add New", null, null);
            
-            var ll = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10 };
+            var ll = new StackLayout { Orientation = Orientation.Vertical, Padding = new Eto.Drawing.Padding(2), Spacing = 10 };
             ll.RemoveAll();
 
-            s.CreateAndAddControlRow(this, new Scrollable { Border = BorderType.None, Content = ll });
+            var sc = new Scrollable { Border = BorderType.None, Content = ll };
+
+            s.CreateAndAddControlRow(p2, sc);
+
+            t1.SizeChanged += (sender, e) => {
+                p1.Width = (int)(p1.Parent.Width / 2);
+                p2.Width = (int)(p2.Parent.Width / 2);
+                p2.Height = p1.Height;
+                sc.Height = p2.Height - btnAddDepVar.Height - 30;
+                foreach (var item in ll.Items)
+                {
+                    item.Control.Width = sc.Width - 25;
+                }
+            };
 
             foreach (var dvar in mycase.depvariables.Values)
             {
@@ -373,9 +405,9 @@ namespace DWSIM.UI.Desktop.Editors
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
 
             List<string> proplist2 = new List<string>();
-            var myview = new DynamicLayout { Padding = new Padding(5), Width = 300 };
-            //myview.BackgroundColor = Eto.Drawing.Colors.White;
+            var myview = new DynamicLayout { Padding = new Padding(5), Width = container.Width - 25};
             var slcontainer = new StackLayoutItem(myview);
+            s.CreateAndAddLabelRow(myview, "Dependent Variable #" + (container.Items.Count + 1).ToString());
             var spinobj = s.CreateAndAddDropDownRow(myview, "Object", objlist, 0, null);
             var spinprop = s.CreateAndAddDropDownRow(myview, "Property", new List<string>(), 0, null);
 

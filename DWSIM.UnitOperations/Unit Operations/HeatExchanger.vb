@@ -1968,6 +1968,218 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String()))
+
+            Dim su As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            Dim list As New List(Of Tuple(Of ReportItemType, String()))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results Report for Heat Exchanger '" & Me.GraphicObject.Tag + "'"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Calculated successfully on " & LastUpdated.ToString}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Calculation Parameters"}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {"Exchanger Mode",
+                    FlowDir.ToString}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {"Calculation Mode",
+                    CalcMode.ToString}))
+
+            Select Case Me.CalculationMode
+                Case HeatExchangerCalcMode.CalcTempColdOut
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Hot Fluid Outlet Temperature",
+                            HotSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                            su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Exchange Area",
+                            Area.GetValueOrDefault.ConvertFromSI(su.area).ToString(nf),
+                            su.area}))
+                Case HeatExchangerCalcMode.CalcTempHotOut
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Cold Fluid Outlet Temperature",
+                           ColdSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                           su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Exchange Area",
+                            Area.GetValueOrDefault.ConvertFromSI(su.area).ToString(nf),
+                            su.area}))
+                Case HeatExchangerCalcMode.CalcBothTemp
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Heat Exchanged",
+                           Q.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Exchange Area",
+                            Area.GetValueOrDefault.ConvertFromSI(su.area).ToString(nf),
+                            su.area}))
+                Case HeatExchangerCalcMode.CalcArea
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Overall Heat Transfer Coefficient",
+                            OverallCoefficient.GetValueOrDefault.ConvertFromSI(su.heat_transf_coeff).ToString(nf),
+                            su.heat_transf_coeff}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Hot Fluid Outlet Temperature",
+                            HotSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                            su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Cold Fluid Outlet Temperature",
+                           ColdSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                           su.temperature}))
+                Case HeatExchangerCalcMode.CalcBothTemp_UA
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Heat Exchanged",
+                           Q.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Exchange Area",
+                            Area.GetValueOrDefault.ConvertFromSI(su.area).ToString(nf),
+                            su.area}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Overall Heat Transfer Coefficient",
+                           OverallCoefficient.GetValueOrDefault.ConvertFromSI(su.heat_transf_coeff).ToString(nf),
+                           su.heat_transf_coeff}))
+            End Select
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Heat Loss",
+                           HeatLoss.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results"}))
+
+            Select Case Me.CalculationMode
+                Case HeatExchangerCalcMode.CalcTempColdOut
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Hot Fluid Pressure Drop",
+                           HotSidePressureDrop.ConvertFromSI(su.deltaP).ToString(nf),
+                           su.deltaP}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Cold Fluid Pressure Drop",
+                           ColdSidePressureDrop.ConvertFromSI(su.deltaP).ToString(nf),
+                           su.deltaP}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Cold Fluid Outlet Temperature",
+                           ColdSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                           su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Overall Heat Transfer Coefficient",
+                           OverallCoefficient.GetValueOrDefault.ConvertFromSI(su.heat_transf_coeff).ToString(nf),
+                           su.heat_transf_coeff}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Heat Exchanged",
+                           Q.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+                Case HeatExchangerCalcMode.CalcTempHotOut
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Hot Fluid Pressure Drop",
+                           HotSidePressureDrop.ConvertFromSI(su.deltaP).ToString(nf),
+                           su.deltaP}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Cold Fluid Pressure Drop",
+                           ColdSidePressureDrop.ConvertFromSI(su.deltaP).ToString(nf),
+                           su.deltaP}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Hot Fluid Outlet Temperature",
+                            HotSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                            su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Overall Heat Transfer Coefficient",
+                           OverallCoefficient.GetValueOrDefault.ConvertFromSI(su.heat_transf_coeff).ToString(nf),
+                           su.heat_transf_coeff}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Heat Exchanged",
+                           Q.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+                Case HeatExchangerCalcMode.CalcBothTemp
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Hot Fluid Outlet Temperature",
+                           HotSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                           su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Cold Fluid Pressure Drop",
+                           ColdSidePressureDrop.ConvertFromSI(su.deltaP).ToString(nf),
+                           su.deltaP}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Overall Heat Transfer Coefficient",
+                           OverallCoefficient.GetValueOrDefault.ConvertFromSI(su.heat_transf_coeff).ToString(nf),
+                           su.heat_transf_coeff}))
+                Case HeatExchangerCalcMode.CalcArea
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Heat Exchanged",
+                           Q.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Exchange Area",
+                            Area.GetValueOrDefault.ConvertFromSI(su.area).ToString(nf),
+                            su.area}))
+                Case HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor, HeatExchangerCalcMode.ShellandTube_Rating
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Reynolds Number (Shell)",
+                           STProperties.ReS.ToString(nf),
+                           ""}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Reynolds Number (Tube)",
+                           STProperties.ReT.ToString(nf),
+                           ""}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"F (Shell)",
+                           STProperties.Fs.ToString(nf),
+                           ""}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"F (Tube)",
+                           STProperties.Ft.ToString(nf),
+                           ""}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"F (Pipe)",
+                           STProperties.Fc.ToString(nf),
+                           ""}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"F (Fouling)",
+                           STProperties.Ff.ToString(nf),
+                           ""}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Heat Exchanged",
+                           Q.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Exchange Area",
+                            Area.GetValueOrDefault.ConvertFromSI(su.area).ToString(nf),
+                            su.area}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Cold Fluid Pressure Drop",
+                           ColdSidePressureDrop.ConvertFromSI(su.deltaP).ToString(nf),
+                           su.deltaP}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Hot Fluid Outlet Temperature",
+                            HotSideOutletTemperature.ConvertFromSI(su.temperature).ToString(nf),
+                            su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Overall Heat Transfer Coefficient",
+                           OverallCoefficient.GetValueOrDefault.ConvertFromSI(su.heat_transf_coeff).ToString(nf),
+                           su.heat_transf_coeff}))
+            End Select
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Log Mean Temperature Difference (LMTD)",
+                            LMTD.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Maximum Possible Heat Exchange",
+                           MaxHeatExchange.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Thermal Efficiency (%)",
+                           ThermalEfficiency.ToString(nf),
+                           "%"}))
+
+            Return list
+
+        End Function
+
         Public Overrides Function GetPropertyDescription(p As String) As String
             If p.Equals("Calculation Mode") Then
                 Return "Select the Heat Exchanger calculation mode."

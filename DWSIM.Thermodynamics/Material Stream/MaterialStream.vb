@@ -6449,6 +6449,486 @@ Namespace Streams
 
         End Function
 
+        Public Overrides Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String()))
+
+            Dim list As New List(Of Tuple(Of ReportItemType, String()))
+
+            PropertyPackage.CurrentMaterialStream = Me
+
+            Dim props As String() = PropertyPackage.GetSinglePhasePropList()
+            Dim overallprops As String() = PropertyPackage.GetOverallPropList()
+            Dim comps As String() = PropertyPackage.RET_VNAMES()
+
+            Dim units As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+            Dim nff = GetFlowsheet().FlowsheetOptions.FractionNumberFormat
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results Report for Material Stream '" & Me.GraphicObject.Tag + "'"}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Calculated successfully on " & LastUpdated.ToString}))
+
+            Select Case Me.SpecType
+                Case Enums.StreamSpec.Temperature_and_Pressure
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Specification: Temperature and Pressure"}))
+                Case Enums.StreamSpec.Pressure_and_Enthalpy
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Specification: Pressure and Enthalpy"}))
+                Case Enums.StreamSpec.Pressure_and_Entropy
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Specification: Pressure and Entropy"}))
+                Case Enums.StreamSpec.Pressure_and_VaporFraction
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Specification: Pressure and Vapor Fraction"}))
+                Case Enums.StreamSpec.Temperature_and_VaporFraction
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Specification: Temperature and Vapor Fraction"}))
+            End Select
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Property Package: " & Me.PropertyPackage.ComponentName}))
+
+            Dim ny, nl1, nl2, ns, vz(), wz(), vnz(), wnz() As Double, i As Integer
+
+            ny = Phases(2).Properties.molarfraction.GetValueOrDefault
+            nl1 = Phases(3).Properties.molarfraction.GetValueOrDefault
+            nl2 = Phases(4).Properties.molarfraction.GetValueOrDefault
+            ns = Phases(7).Properties.molarfraction.GetValueOrDefault
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Main Properties"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Stream Temperature",
+                     Me.Phases(0).Properties.temperature.GetValueOrDefault.ConvertFromSI(units.temperature).ToString(nf),
+                     units.temperature}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Stream Pressure",
+                     Me.Phases(0).Properties.pressure.GetValueOrDefault.ConvertFromSI(units.pressure).ToString(nf),
+                     units.pressure}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Mixture Enthalpy",
+                     Me.Phases(0).Properties.enthalpy.GetValueOrDefault.ConvertFromSI(units.enthalpy).ToString(nf),
+                     units.enthalpy}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Mixture Entropy",
+                     Me.Phases(0).Properties.entropy.GetValueOrDefault.ConvertFromSI(units.entropy).ToString(nf),
+                     units.entropy}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Vapor Phase Mole Fraction",
+                     Me.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Phase Mole Fractions"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Vapor",
+                     ny.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Liquid 1",
+                     nl1.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Liquid 2",
+                     nl2.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Solid",
+                     ns.ToString(nf),
+                     ""}))
+
+            If (ny > 0.0000000001# And ny < 0.9999999999#) OrElse nl2 > 0.000000001# OrElse ns > 0.0# Then
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Overall (Mixture) Flows"}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Mass Flow",
+                     Me.Phases(0).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow).ToString(nf),
+                     units.massflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Molar Flow",
+                     Me.Phases(0).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow).ToString(nf),
+                     units.molarflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Volumetric Flow",
+                     Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow).ToString(nf),
+                     units.volumetricFlow}))
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Overall").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Overall").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Overall").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Overall").ConvertFromSI(units.massflow).ToArray
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Overall (Mixture) Compound Mole Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Overall (Mixture) Compound Mass Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Overall (Mixture) Compound Mole Flows (" + units.molarflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Overall (Mixture) Compound Mass Flows (" + units.massflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Overall (Mixture) Properties"}))
+
+                For Each p As String In overallprops
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Overall")
+                    If propval.Count = 1 Then
+                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                            propval(0) /= 1000
+                        End If
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                    New String() {propname,
+                    propval(0).ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                    GetPropUnits(p, "mass", units)}))
+                    End If
+                Next
+
+            End If
+
+            If ny > 0.00001# Then
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Vapor Phase Flows"}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Mass Flow",
+                     Me.Phases(2).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow).ToString(nf),
+                     units.massflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Molar Flow",
+                     Me.Phases(2).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow).ToString(nf),
+                     units.molarflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Volumetric Flow",
+                     Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow).ToString(nf),
+                     units.volumetricFlow}))
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Vapor").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Vapor").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Vapor").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Vapor").ConvertFromSI(units.massflow).ToArray
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Vapor Phase Compound Mole Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Vapor Phase Compound Mass Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Vapor Phase Compound Mole Flows (" + units.molarflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Vapor Phase Compound Mass Flows (" + units.massflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Vapor Phase Properties"}))
+
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Vapor")
+                    If propval.Count = 1 Then
+                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                            propval(0) /= 1000
+                        End If
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                    New String() {propname,
+                    propval(0).ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                    GetPropUnits(p, "mass", units)}))
+                    End If
+
+                Next
+
+            End If
+
+            If nl1 > 0.00001# Then
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 1 Flows"}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Mass Flow",
+                     Me.Phases(3).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow).ToString(nf),
+                     units.massflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Molar Flow",
+                     Me.Phases(3).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow).ToString(nf),
+                     units.molarflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Volumetric Flow",
+                     Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow).ToString(nf),
+                     units.volumetricFlow}))
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Liquid").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Liquid").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Liquid").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Liquid").ConvertFromSI(units.massflow).ToArray
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 1 Compound Mole Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 1 Compound Mass Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 1 Compound Mole Flows (" + units.molarflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 1 Compound Mass Flows (" + units.massflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 1 Properties"}))
+
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Liquid")
+                    If propval.Count = 1 Then
+                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                            propval(0) /= 1000
+                        End If
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                    New String() {propname,
+                    propval(0).ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                    GetPropUnits(p, "mass", units)}))
+                    End If
+                Next
+
+            End If
+
+
+            If nl2 > 0.00001# Then
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 2 Flows"}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Mass Flow",
+                     Me.Phases(4).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow).ToString(nf),
+                     units.massflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Molar Flow",
+                     Me.Phases(4).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow).ToString(nf),
+                     units.molarflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Volumetric Flow",
+                     Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow).ToString(nf),
+                     units.volumetricFlow}))
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Liquid2").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Liquid2").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Liquid2").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Liquid2").ConvertFromSI(units.massflow).ToArray
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 2 Compound Mole Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 2 Compound Mass Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 2 Compound Mole Flows (" + units.molarflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 2 Compound Mass Flows (" + units.massflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Liquid Phase 2 Properties"}))
+
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Liquid2")
+                    If propval.Count = 1 Then
+                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                            propval(0) /= 1000
+                        End If
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                    New String() {propname,
+                    propval(0).ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                    GetPropUnits(p, "mass", units)}))
+                    End If
+                Next
+
+            End If
+
+            If ns > 0.00001# Then
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Solid Phase Flows"}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Mass Flow",
+                     Me.Phases(7).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow).ToString(nf),
+                     units.massflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Molar Flow",
+                     Me.Phases(7).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow).ToString(nf),
+                     units.molarflow}))
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Volumetric Flow",
+                     Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow).ToString(nf),
+                     units.volumetricFlow}))
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Solid").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Solid").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Solid").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Solid").ConvertFromSI(units.massflow).ToArray
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Solid Phase Compound Mole Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Solid Phase Compound Mass Fractions"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Solid Phase Compound Mole Flows (" + units.molarflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    vnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Solid Phase Compound Mass Flows (" + units.massflow + ")"}))
+
+                i = 0
+                For Each comp As String In comps
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {comp,
+                    wnz(i).ToString(nff)}))
+                    i += 1
+                Next
+
+                list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Solid Phase Properties"}))
+
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Solid")
+                    If propval.Count = 1 Then
+                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                            propval(0) /= 1000
+                        End If
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                    New String() {propname,
+                    propval(0).ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                    GetPropUnits(p, "mass", units)}))
+                    End If
+                Next
+
+            End If
+
+            Return list
+
+        End Function
+
         Public Function GetSinglePhaseProp2(ByVal prop As String, ByVal basis As String, ByVal phaseLabel As String) As List(Of Double)
             Dim results As Object = Nothing
             Me.GetSinglePhaseProp(prop, phaseLabel, basis, results)

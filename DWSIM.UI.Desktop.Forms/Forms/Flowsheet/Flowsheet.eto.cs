@@ -459,14 +459,14 @@ namespace DWSIM.UI.Forms
             btnSensAnalysis.Click += (sender, e) =>
             {
                 var saeditor = new Desktop.Editors.SensAnalysisView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 500), (int)(sf * 700), saeditor);
+                var form = Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 750), (int)(sf * 520), saeditor);
                 form.Show();
             };
 
             btnOptimization.Click += (sender, e) =>
             {
                 var foeditor = new Desktop.Editors.OptimizerView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 500), (int)(sf * 700), foeditor);
+                var form = Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 800), (int)(sf * 600), foeditor);
                 form.Show();
             };
 

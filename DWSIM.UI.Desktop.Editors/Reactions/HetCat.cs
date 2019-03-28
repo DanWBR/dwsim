@@ -44,7 +44,26 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddStringEditorRow2("Name", "", rx.Name, (sender, e) => { rx.Name = sender.Text; });
 
-            container.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff.)");
+            DynamicLayout p1, p2;
+
+            StackLayout t1;
+
+            p1 = UI.Shared.Common.GetDefaultContainer();
+            p2 = UI.Shared.Common.GetDefaultContainer();
+
+            t1 = new StackLayout(p1, p2);
+            t1.Orientation = Orientation.Horizontal;
+
+            t1.SizeChanged += (sender, e) => {
+                p1.Width = (int)(p1.Parent.Width / 2);
+                p2.Width = (int)(p2.Parent.Width / 2);
+                p1.Height = p1.ParentWindow.Height - 170;
+                p2.Height = p1.ParentWindow.Height - 170;
+            };
+
+            container.Add(t1);
+
+            p1.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff.)");
 
             var compcontainer = new DynamicLayout();
             //compcontainer.BackgroundColor = Colors.White;
@@ -96,15 +115,15 @@ namespace DWSIM.UI.Desktop.Editors
                 compcontainer.Add(new TableRow(chk, null, hf, sc));
             }
 
-            container.CreateAndAddControlRow(compcontainer);
-            container.CreateAndAddEmptySpace();
+            p1.CreateAndAddControlRow(compcontainer);
+            p1.CreateAndAddEmptySpace();
 
             var comps = flowsheet.SelectedCompounds.Values.Select((x) => x.Name).ToList();
             comps.Insert(0, "");
 
-            container.CreateAndAddLabelRow("Base Compound");
+            p1.CreateAndAddLabelRow("Base Compound");
 
-            var basecompselector = container.CreateAndAddDropDownRow("Base Compound", comps, 0, null);
+            var basecompselector = p1.CreateAndAddDropDownRow("Base Compound", comps, 0, null);
 
             var basecomp = rx.Components.Values.Where((x) => x.IsBaseReactant).FirstOrDefault();
 
@@ -130,13 +149,13 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            container.CreateAndAddLabelRow("Reaction Balance");
+            p1.CreateAndAddLabelRow("Reaction Balance");
 
-            txtEquation = container.CreateAndAddLabelRow2("");
+            txtEquation = p1.CreateAndAddLabelRow2("");
 
-            container.CreateAndAddLabelRow("Reaction Phase");
+            p1.CreateAndAddLabelRow("Reaction Phase");
 
-            var rxphaseselector = container.CreateAndAddDropDownRow("Reaction Phase", Shared.StringArrays.reactionphase().ToList(), 0, null);
+            var rxphaseselector = p1.CreateAndAddDropDownRow("Reaction Phase", Shared.StringArrays.reactionphase().ToList(), 0, null);
 
             switch (rx.ReactionPhase)
             {
@@ -167,9 +186,9 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            container.CreateAndAddLabelRow("Reaction Basis");
+            p1.CreateAndAddLabelRow("Reaction Basis");
 
-            var rxbasisselector = container.CreateAndAddDropDownRow("Reaction Basis", Shared.StringArrays.reactionbasis().ToList(), 0, null);
+            var rxbasisselector = p1.CreateAndAddDropDownRow("Reaction Basis", Shared.StringArrays.reactionbasis().ToList(), 0, null);
 
             switch (rx.ReactionBasis)
             {
@@ -224,29 +243,29 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
             
-            container.CreateAndAddLabelRow("Temperature Limits");
+            p2.CreateAndAddLabelRow("Temperature Limits");
 
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
 
-            container.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
-            container.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
+            p2.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
+            p2.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
 
-            container.CreateAndAddLabelRow("Rate Expressions");
+            p2.CreateAndAddLabelRow("Rate Expressions");
 
-            container.CreateAndAddLabelRow2("Reaction Rate Numerator Expression:");
+            p2.CreateAndAddLabelRow2("Reaction Rate Numerator Expression:");
 
-            container.CreateAndAddMultilineTextBoxRow(rx.RateEquationNumerator, false, false, (sender, e) => rx.RateEquationNumerator = sender.Text);
+            p2.CreateAndAddMultilineTextBoxRow(rx.RateEquationNumerator, false, false, (sender, e) => rx.RateEquationNumerator = sender.Text);
 
-            container.CreateAndAddLabelRow2("Reaction Rate Denominator Expression:");
+            p2.CreateAndAddLabelRow2("Reaction Rate Denominator Expression:");
 
-            container.CreateAndAddMultilineTextBoxRow(rx.RateEquationDenominator, false, false, (sender, e) => rx.RateEquationDenominator = sender.Text);
+            p2.CreateAndAddMultilineTextBoxRow(rx.RateEquationDenominator, false, false, (sender, e) => rx.RateEquationDenominator = sender.Text);
 
-            container.CreateAndAddDescriptionRow("Reaction Rate (r) = f(T, Ri, Pi) = Numerator / Denominator");
+            p2.CreateAndAddDescriptionRow("Reaction Rate (r) = f(T, Ri, Pi) = Numerator / Denominator");
 
-            container.CreateAndAddDescriptionRow("Expression Variables: Temperature (T) in K, reactant amounts (R1, R2, ..., Rn) and product amounts (P1, P2, ..., Pn in the selected amount units, Reaction Rate (r) in the selected velocity units.");
+            p2.CreateAndAddDescriptionRow("Expression Variables: Temperature (T) in K, reactant amounts (R1, R2, ..., Rn) and product amounts (P1, P2, ..., Pn in the selected amount units, Reaction Rate (r) in the selected velocity units.");
 
-            container.CreateAndAddLabelRow("Units");
+            p2.CreateAndAddLabelRow("Units");
 
             var us = new DWSIM.SharedClasses.SystemsOfUnits.Units();
             var units = us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molar_conc);
@@ -254,12 +273,12 @@ namespace DWSIM.UI.Desktop.Editors
             units.AddRange(us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure));
             units.Insert(0, "");
 
-            container.CreateAndAddDropDownRow("Amount Units", units, units.IndexOf(rx.ConcUnit), (sender, e) => rx.ConcUnit = sender.SelectedValue.ToString());
+            p2.CreateAndAddDropDownRow("Amount Units", units, units.IndexOf(rx.ConcUnit), (sender, e) => rx.ConcUnit = sender.SelectedValue.ToString());
 
             var units2 = us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.reac_rate_heterog);
             units2.Insert(0, "");
 
-            container.CreateAndAddDropDownRow("Velocity Units", units2, units2.IndexOf(rx.VelUnit), (sender, e) => rx.VelUnit = sender.SelectedValue.ToString());
+            p2.CreateAndAddDropDownRow("Velocity Units", units2, units2.IndexOf(rx.VelUnit), (sender, e) => rx.VelUnit = sender.SelectedValue.ToString());
 
             UpdateEquation();
 

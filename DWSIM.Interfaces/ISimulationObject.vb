@@ -176,6 +176,8 @@
 
     Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 
+    Function GetStructuredReport() As List(Of Tuple(Of Enums.ReportItemType, String()))
+
     Function GetChartModel(name As String) As Object
 
     Function GetChartModelNames() As List(Of String)

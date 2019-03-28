@@ -47,6 +47,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddControlRow(rxcontainer);
 
+            container.CreateAndAddLabelRow("Add a Reaction");
+
             var btnAddConv = container.CreateAndAddLabelAndButtonRow("Add New Conversion Reaction", "New Conversion Reaction", null, (sender, e) =>
             {
                 var _rx = new Reaction("NewConvReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Conversion };
@@ -116,7 +118,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var _rx = new Reaction("NewHetCatReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Heterogeneous_Catalytic };
                 var myview = s.GetDefaultContainer();
                 var cre = new HetCatReaction(flowsheet, _rx, myview);
-                var alert = s.GetDefaultEditorForm("Add Heterogeneous Catalytic Reaction", 500, 400, myview);
+                var alert = s.GetDefaultEditorForm("Add Heterogeneous Catalytic Reaction", 850, 650, myview);
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
@@ -138,6 +140,8 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddLabelRow("Reaction Sets");
 
             container.CreateAndAddControlRow(rscontainer);
+
+            container.CreateAndAddLabelRow("Add a Reaction Set");
 
             container.CreateAndAddLabelAndButtonRow("Add New Reaction Set", "New Reaction Set", null, (sender, e) =>
             {
@@ -235,7 +239,7 @@ namespace DWSIM.UI.Desktop.Editors
                             case Interfaces.Enums.ReactionType.Heterogeneous_Catalytic:
                                 var myview4 = s.GetDefaultContainer();
                                 var cre4 = new HetCatReaction(flowsheet, rx, myview4);
-                                var alert4 = s.GetDefaultEditorForm("Edit Heterogeneous Reaction", 500, 400, myview4);
+                                var alert4 = s.GetDefaultEditorForm("Edit Heterogeneous Reaction", 850, 650, myview4);
                                 myview4.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert4.Close(),
                                 (sender2, e2) =>
                                 {

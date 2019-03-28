@@ -278,11 +278,49 @@ namespace DWSIM.UI.Forms
 
             }
 
-            var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
-            var container = new TableLayout();
-            new DWSIM.UI.Desktop.Editors.Results(obj, container);
-            PageResults.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
+            PageResults.Content = null;
 
+            var structreport = obj.GetStructuredReport();
+            if (structreport.Count > 0)
+            {
+
+                var prevspacing = GlobalSettings.Settings.CrossPlatformUIItemSpacing;
+                GlobalSettings.Settings.CrossPlatformUIItemSpacing = 3;
+
+                var container = new TableLayout();
+                var containerd = UI.Shared.Common.GetDefaultContainer();
+                container.Rows.Add(new TableRow(containerd));
+                foreach (var item in structreport)
+                {
+                    switch (item.Item1)
+                    {
+                        case Interfaces.Enums.ReportItemType.Label:
+                            containerd.CreateAndAddLabelRow(item.Item2[0]);
+                            break;
+                        case Interfaces.Enums.ReportItemType.Description:
+                            containerd.CreateAndAddDescriptionRow(item.Item2[0]);
+                            break;
+                        case Interfaces.Enums.ReportItemType.SingleColumn:
+                            containerd.CreateAndAddLabelRow2(item.Item2[0]);
+                            break;
+                        case Interfaces.Enums.ReportItemType.DoubleColumn:
+                            containerd.CreateAndAddThreeLabelsRow(item.Item2[0], item.Item2[1], "");
+                            break;
+                        case Interfaces.Enums.ReportItemType.TripleColumn:
+                            containerd.CreateAndAddThreeLabelsRow(item.Item2[0], item.Item2[1], item.Item2[2]);
+                            break;
+                    }
+                }
+                GlobalSettings.Settings.CrossPlatformUIItemSpacing = prevspacing;
+                new DWSIM.UI.Desktop.Editors.Results(obj, container);
+                PageResults.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
+            }
+            else {
+                var report = obj.GetReport(obj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, obj.GetFlowsheet().FlowsheetOptions.NumberFormat);
+                var container = new TableLayout();
+                new DWSIM.UI.Desktop.Editors.Results(obj, container);
+                PageResults.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
+            }
         }
     }
 }

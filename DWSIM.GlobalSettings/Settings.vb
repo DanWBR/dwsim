@@ -148,6 +148,8 @@ Public Class Settings
 
     Public Shared Property ObjectEditor As Integer = 0
 
+    Public Shared Property CrossPlatformUIItemSpacing As Integer = 5
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

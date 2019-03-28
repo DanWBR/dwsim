@@ -46,6 +46,16 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
+            DynamicLayout p1, p2;
+
+            StackLayout t1;
+
+            p1 = UI.Shared.Common.GetDefaultContainer();
+            p2 = UI.Shared.Common.GetDefaultContainer();
+
+            t1 = new StackLayout(p1, p2);
+            t1.Orientation = Orientation.Horizontal;
+
             Padding = new Padding(10);
 
             if (flowsheet.OptimizationCollection.Count == 0)
@@ -61,23 +71,25 @@ namespace DWSIM.UI.Desktop.Editors
             var objlist = flowsheet.SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
             objlist.Insert(0, "");
 
-            s.CreateAndAddDescriptionRow(this, "Use the optimizer to bring the flowsheet to a new 'state' regarding the maximum or minimum or value of a user-defined parameter.");
+            s.CreateAndAddLabelRow2(this, "Use the optimizer to bring the flowsheet to a new 'state' regarding the maximum or minimum or value of a user-defined parameter.");
 
-            s.CreateAndAddLabelRow(this, "Case ID");
-            s.CreateAndAddFullTextBoxRow(this, mycase.name, (arg3, arg2) => { mycase.name = arg3.Text; });
+            this.Add(t1);
 
-            s.CreateAndAddLabelRow(this, "Case Description");
-            s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
+            s.CreateAndAddLabelRow(p1, "Case ID");
+            s.CreateAndAddFullTextBoxRow(p1, mycase.name, (arg3, arg2) => { mycase.name = arg3.Text; });
 
-            s.CreateAndAddDropDownRow(this, "Optimization Type", new[] { "Minimization", "Maximization" }.ToList(), (int)mycase.type, (arg3, arg2) => { mycase.type = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTType)arg3.SelectedIndex; });
-            s.CreateAndAddDropDownRow(this, "Objective Function", new[] { "Variable", "Expression" }.ToList(), (int)mycase.objfunctype, (arg3, arg2) => { mycase.objfunctype = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTObjectiveFunctionType)arg3.SelectedIndex; });
+            s.CreateAndAddLabelRow(p1, "Case Description");
+            s.CreateAndAddFullTextBoxRow(p1, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
 
-            s.CreateAndAddTextBoxRow(this, nf, "Maximum Iterations", (double)mycase.maxits, (arg3, arg2) => { mycase.maxits = (int)arg3.Text.ToDoubleFromCurrent(); });
-            s.CreateAndAddTextBoxRow(this, nf, "Absolute Tolerance", mycase.tolerance, (arg3, arg2) => { mycase.tolerance = arg3.Text.ToDoubleFromCurrent(); });
+            s.CreateAndAddDropDownRow(p1, "Optimization Type", new[] { "Minimization", "Maximization" }.ToList(), (int)mycase.type, (arg3, arg2) => { mycase.type = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTType)arg3.SelectedIndex; });
+            s.CreateAndAddDropDownRow(p1, "Objective Function", new[] { "Variable", "Expression" }.ToList(), (int)mycase.objfunctype, (arg3, arg2) => { mycase.objfunctype = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTObjectiveFunctionType)arg3.SelectedIndex; });
 
-            var varcontainer = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10 };
+            s.CreateAndAddTextBoxRow(p1, nf, "Maximum Iterations", (double)mycase.maxits, (arg3, arg2) => { mycase.maxits = (int)arg3.Text.ToDoubleFromCurrent(); });
+            s.CreateAndAddTextBoxRow(p1, nf, "Absolute Tolerance", mycase.tolerance, (arg3, arg2) => { mycase.tolerance = arg3.Text.ToDoubleFromCurrent(); });
 
-            s.CreateAndAddBoldLabelAndButtonRow(this, "Variables", "Add Variable", null, (arg1, arg2) =>
+            var varcontainer = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(0), Spacing = 10 };
+
+            var btnAddVar = s.CreateAndAddBoldLabelAndButtonRow(p2, "Variables", "Add Variable", null, (arg1, arg2) =>
             {
 
                 var newiv = new DWSIM.SharedClasses.Flowsheet.Optimization.OPTVariable();
@@ -88,28 +100,45 @@ namespace DWSIM.UI.Desktop.Editors
                 AddVariable(newiv, varcontainer, objlist);
 
             });
-            s.CreateAndAddDescriptionRow(this, "Variables can be 'INDependent' (actual variables), 'AUXiliary' " +
+
+            var desclbl = s.CreateAndAddDescriptionRow(p2, "Variables can be 'INDependent' (actual variables), 'AUXiliary' " +
                                          "(for usage as a parameter in the objective function expression, if applicable), " +
                                          "'DEPendent' (the parameter to be minimized/maximized, if applicable) or CONstraint, " +
                                          "if you don want it to go beyond the defined limits at the solution.");
 
-            s.CreateAndAddControlRow(this, new Scrollable { Border = BorderType.None, Content = varcontainer });
+            var sc = new Scrollable { Border = BorderType.None, Content = varcontainer };
+
+            s.CreateAndAddControlRow(p2, sc);
+
+            t1.SizeChanged += (sender, e) => {
+                p1.Width = (int)(p1.Parent.Width / 2);
+                p2.Width = (int)(p2.Parent.Width / 2);
+                p2.Height = p1.Height;
+                sc.Height = p2.Height - btnAddVar.Height - 35 - desclbl.Height;
+                foreach (var item in varcontainer.Items)
+                {
+                    item.Control.Width = sc.Width - 25;
+                }
+            };
+
 
             foreach (var item in mycase.variables.Values)
             {
                 AddVariable(item, varcontainer, objlist);
             }
 
-            s.CreateAndAddLabelRow(this, "Expression");
-            s.CreateAndAddDescriptionRow(this, "Enter an expression to be minimized or maximized using IND and AUX variables as parameters, if the Objective Function is defined as 'Expression'.");
-            s.CreateAndAddFullTextBoxRow(this, mycase.expression, (arg3, arg2) => { mycase.expression = arg3.Text; });
+            s.CreateAndAddLabelRow(p1, "Expression");
+            s.CreateAndAddDescriptionRow(p1, "Enter an expression to be minimized or maximized using IND and AUX variables as parameters, if the Objective Function is defined as 'Expression'.");
+            s.CreateAndAddFullTextBoxRow(p1, mycase.expression, (arg3, arg2) => { mycase.expression = arg3.Text; });
 
-            s.CreateAndAddLabelRow(this, "Optimization Control");
+            s.CreateAndAddLabelRow(p1, "Optimization Control");
             int solvm = ((int)mycase.solvm - 5);
             if (solvm < 0) solvm = 0;
-            s.CreateAndAddDropDownRow(this, "Method", new[] { "Simplex", "LBFGS", "Truncated Newton", "Simplex (Bounded)", "LBFGS (Bounded)", "Truncated Newton (Bounded)" }.ToList(), solvm, (arg3, arg2) => { mycase.solvm = (DWSIM.SharedClasses.Flowsheet.Optimization.OptimizationCase.SolvingMethod)(arg3.SelectedIndex + 5); });
-            s.CreateAndAddTextBoxRow(this, "R", "Numerical derivative step", mycase.epsilon, (arg3, arg2) => { mycase.epsilon = arg3.Text.ToDoubleFromCurrent(); });
-            s.CreateAndAddTextBoxRow(this, "R", "Barrier multiplier", mycase.barriermultiplier, (arg3, arg2) => { mycase.barriermultiplier = arg3.Text.ToDoubleFromCurrent(); });
+            s.CreateAndAddDropDownRow(p1, "Method", new[] { "Simplex", "LBFGS", "Truncated Newton", "Simplex (Bounded)", "LBFGS (Bounded)", "Truncated Newton (Bounded)" }.ToList(), solvm, (arg3, arg2) => { mycase.solvm = (DWSIM.SharedClasses.Flowsheet.Optimization.OptimizationCase.SolvingMethod)(arg3.SelectedIndex + 5); });
+            s.CreateAndAddTextBoxRow(p1, "R", "Numerical derivative step", mycase.epsilon, (arg3, arg2) => { mycase.epsilon = arg3.Text.ToDoubleFromCurrent(); });
+            s.CreateAndAddTextBoxRow(p1, "R", "Barrier multiplier", mycase.barriermultiplier, (arg3, arg2) => { mycase.barriermultiplier = arg3.Text.ToDoubleFromCurrent(); });
+
+            s.CreateAndAddControlRow(p1, new Panel { Height = 100 });
 
             s.CreateAndAddButtonRow(this, "Run Optimization", null, (arg3, arg2) =>
             {
@@ -138,7 +167,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var slcontainer = new StackLayoutItem(container);
 
-            s.CreateAndAddLabelRow(container, "Optimization Variable");
+            s.CreateAndAddLabelRow(container, "Optimization Variable #" + (ivcontainer.Items.Count+1).ToString());
 
             var btnremove = s.CreateAndAddButtonRow(container, "Remove Variable", null, (arg1a, arg2a) =>
             {

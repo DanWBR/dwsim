@@ -799,6 +799,10 @@ Namespace UnitOperations
             m_flowsheet = flowsheet
         End Sub
 
+        Public Overridable Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String())) Implements ISimulationObject.GetStructuredReport
+            Return New List(Of Tuple(Of ReportItemType, String()))
+        End Function
+
         ''' <summary>
         ''' Gets the current flowsheet where this object is located.
         ''' </summary>

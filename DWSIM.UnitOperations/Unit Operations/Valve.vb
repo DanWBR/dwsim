@@ -576,6 +576,74 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String()))
+
+            Dim su As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            Dim list As New List(Of Tuple(Of ReportItemType, String()))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results Report for Adiabatic Valve '" & Me.GraphicObject.Tag + "'"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Calculated successfully on " & LastUpdated.ToString}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Calculation Parameters"}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {"Calculation Mode",
+                    CalcMode.ToString}))
+
+            Select Case CalcMode
+                Case CalculationMode.DeltaP
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Pressure Increase",
+                            Me.DeltaP.GetValueOrDefault.ConvertFromSI(su.deltaP).ToString(nf),
+                            su.deltaP}))
+                Case CalculationMode.OutletPressure
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Pressure",
+                            Me.OutletPressure.GetValueOrDefault.ConvertFromSI(su.pressure).ToString(nf),
+                            su.pressure}))
+                Case Else
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Kv (max)",
+                            Me.Kv.ToString(nf),
+                            ""}))
+            End Select
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results"}))
+
+            Select Case CalcMode
+                Case CalculationMode.DeltaP
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Pressure",
+                            Me.OutletPressure.GetValueOrDefault.ConvertFromSI(su.pressure).ToString(nf),
+                            su.pressure}))
+                Case CalculationMode.OutletPressure
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Pressure Increase",
+                            Me.DeltaP.GetValueOrDefault.ConvertFromSI(su.deltaP).ToString(nf),
+                            su.deltaP}))
+            End Select
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Temperature Change",
+                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Inlet Enthalpy",
+                            Me.Hinlet.ConvertFromSI(su.enthalpy).ToString(nf),
+                            su.enthalpy}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Enthalpy",
+                            Me.Houtlet.ConvertFromSI(su.enthalpy).ToString(nf),
+                            su.enthalpy}))
+
+            Return list
+
+        End Function
+
         Public Overrides Function GetPropertyDescription(p As String) As String
             If p.Equals("Calculation Mode") Then
                 Return "Select the calculation mode of this valve."

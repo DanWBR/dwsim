@@ -53,7 +53,7 @@ namespace DWSIM.UI.Shared
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                 Title = title,
-                ClientSize = new Size((int)(sf*width), (int)(sf * height))
+                ClientSize = new Size((int)(sf * width), (int)(sf * height))
                 //ShowInTaskbar = false,
                 //Maximizable = true,
                 //Minimizable = false,
@@ -256,7 +256,7 @@ namespace DWSIM.UI.Shared
             container.CreateAndAddEmptySpace();
             return tr;
         }
-        
+
         public static TextBox CreateAndAddTextBoxRow(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command, Action keypress = null)
         {
 
@@ -280,15 +280,17 @@ namespace DWSIM.UI.Shared
                         mi.Click += (sender, e) => { edittext.Text = SharedClasses.SystemsOfUnits.Converter.Convert(item, extractedunits, edittext.Text.ParseExpressionToDouble()).ToString(); };
                         ctxmenu.Items.Add(mi);
                     }
-                    edittext.KeyUp += (sender, e) => {
-                        if (e.Key == Keys.Space) {
+                    edittext.KeyUp += (sender, e) =>
+                    {
+                        if (e.Key == Keys.Space)
+                        {
                             edittext.Text = edittext.Text.Replace(" ", "");
                             ctxmenu.Show(edittext);
                         }
                     };
                 }
             }
-            
+
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
             if (keypress != null) edittext.KeyUp += (sender, e) => { if (e.Key == Keys.Enter) keypress.Invoke(); };
 
@@ -382,7 +384,7 @@ namespace DWSIM.UI.Shared
             return edittext2;
 
         }
-     
+
         public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, bool autosized, Action<TextArea, EventArgs> command)
         {
 
@@ -485,6 +487,25 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static Label CreateAndAddThreeLabelsRow(this DynamicLayout container, String text1, String text2, String text3)
+        {
+
+            var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var txt2 = new Label { Text = text2, Width = (int)(sf * 140), VerticalAlignment = VerticalAlignment.Center, TextAlignment = TextAlignment.Right };
+            txt2.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var txt3 = new Label { Text = text3, Width = (int)(sf * 140), VerticalAlignment = VerticalAlignment.Center };
+            txt3.Font = new Font(SystemFont.Default, GetEditorFontSize());
+
+            var tr = new TableRow(txt, null, txt2, new Label {Text = " " }, txt3);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return txt2;
+
+        }
+
         public static Label CreateAndAddTwoLabelsRow2(this DynamicLayout container, String text1, String text2)
         {
 
@@ -523,7 +544,10 @@ namespace DWSIM.UI.Shared
 
         public static void CreateAndAddEmptySpace(this DynamicLayout container)
         {
-            var h = 5 * GetEditorFontSize() / (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
+
+            var height = GlobalSettings.Settings.CrossPlatformUIItemSpacing;
+
+            var h = height * GetEditorFontSize() / (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
 
             container.AddRow(new TableRow(new Label { Text = "", Height = (int)(sf * h) }));
         }

@@ -275,6 +275,26 @@ Namespace Streams
 
         End Function
 
+        Public Overrides Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String()))
+
+            Dim su As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            Dim list As New List(Of Tuple(Of ReportItemType, String()))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results Report for Energy Stream '" & Me.GraphicObject.Tag + "'"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Calculated successfully on " & LastUpdated.ToString}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Energy Flow",
+                            EnergyFlow.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                            su.heatflow}))
+
+            Return list
+
+        End Function
+
+
         Public Overrides Function GetPropertyDescription(p As String) As String
             Return "Amount of heat flow carried by this stream."
         End Function

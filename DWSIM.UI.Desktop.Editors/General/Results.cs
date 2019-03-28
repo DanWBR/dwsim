@@ -241,40 +241,77 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
-            var txtcontrol = new TextArea { ReadOnly = true };
-            txtcontrol.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", GlobalSettings.Settings.ResultsReportFontSize) : Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
-
-            container.Rows.Add(new TableRow(txtcontrol));
-
             var obj = (ISimulationObject)SimObject;
 
-            try
+            var structreport = obj.GetStructuredReport();
+            if (structreport.Count > 0)
             {
-                if (obj.Calculated)
+
+                var prevspacing = GlobalSettings.Settings.CrossPlatformUIItemSpacing;
+                GlobalSettings.Settings.CrossPlatformUIItemSpacing = 3;
+
+                var containerd = UI.Shared.Common.GetDefaultContainer();
+                container.Rows.Add(new TableRow(containerd));
+                foreach (var item in structreport)
                 {
-                    txtcontrol.Text = "Object successfully calculated on " + obj.LastUpdated.ToString() + "\n\n";
-                    txtcontrol.Text += obj.GetReport(SimObject.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem,
-                                               System.Globalization.CultureInfo.InvariantCulture,
-                                                SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat);
-                }
-                else
-                {
-                    if (obj.ErrorMessage != "")
+                    switch (item.Item1)
                     {
-                        txtcontrol.Text = "An error occured during the calculation of this object. Details:\n\n" + obj.ErrorMessage;
+                        case Interfaces.Enums.ReportItemType.Label:
+                            containerd.CreateAndAddLabelRow(item.Item2[0]);
+                            break;
+                        case Interfaces.Enums.ReportItemType.Description:
+                            containerd.CreateAndAddDescriptionRow(item.Item2[0]);
+                            break;
+                        case Interfaces.Enums.ReportItemType.SingleColumn:
+                            containerd.CreateAndAddLabelRow2(item.Item2[0]);
+                            break;
+                        case Interfaces.Enums.ReportItemType.DoubleColumn:
+                            containerd.CreateAndAddThreeLabelsRow(item.Item2[0], item.Item2[1], "");
+                            break;
+                        case Interfaces.Enums.ReportItemType.TripleColumn:
+                            containerd.CreateAndAddThreeLabelsRow(item.Item2[0], item.Item2[1], item.Item2[2]);
+                            break;
+                    }
+                }
+
+                GlobalSettings.Settings.CrossPlatformUIItemSpacing = prevspacing;
+
+            }
+            else
+            {
+                var txtcontrol = new TextArea { ReadOnly = true };
+                txtcontrol.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", GlobalSettings.Settings.ResultsReportFontSize) : Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+
+                container.Rows.Add(new TableRow(txtcontrol));
+
+                try
+                {
+                    if (obj.Calculated)
+                    {
+                        txtcontrol.Text = "Object successfully calculated on " + obj.LastUpdated.ToString() + "\n\n";
+                        txtcontrol.Text += obj.GetReport(SimObject.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem,
+                                                   System.Globalization.CultureInfo.InvariantCulture,
+                                                    SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat);
                     }
                     else
                     {
-                        txtcontrol.Text = "This object hasn't been calculated yet.";
+                        if (obj.ErrorMessage != "")
+                        {
+                            txtcontrol.Text = "An error occured during the calculation of this object. Details:\n\n" + obj.ErrorMessage;
+                        }
+                        else
+                        {
+                            txtcontrol.Text = "This object hasn't been calculated yet.";
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                txtcontrol.Text = "Report generation failed. Please recalculate the flowsheet and try again.";
-                txtcontrol.Text += "\n\nError details: " + ex.ToString();
-            }
+                catch (Exception ex)
+                {
+                    txtcontrol.Text = "Report generation failed. Please recalculate the flowsheet and try again.";
+                    txtcontrol.Text += "\n\nError details: " + ex.ToString();
+                }
 
+            }
         }
 
         List<double> PopulateData(Pipe pipe, int position)

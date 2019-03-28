@@ -377,6 +377,23 @@ Namespace Enums
 
     End Enum
 
+    Public Enum ReportItemType
+
+        Label = 0
+        Description = 1
+        TripleColumn = 2
+        DoubleColumn = 3
+        SingleColumn = 4
+
+    End Enum
+
+    Public Enum ReportType
+
+        PlainText = 0
+        RichText = 1
+        Structured = 2
+
+    End Enum
 
 End Namespace
 

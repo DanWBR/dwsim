@@ -667,6 +667,106 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String()))
+
+            Dim su As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            Dim list As New List(Of Tuple(Of ReportItemType, String()))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results Report for Cooler '" & Me.GraphicObject.Tag + "'"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Calculated successfully on " & LastUpdated.ToString}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Calculation Parameters"}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {"Calculation Mode",
+                    CalcMode.ToString}))
+
+            Select Case CalcMode
+                Case CalculationMode.HeatRemoved
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Heat Removed",
+                            Me.DeltaQ.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                            su.heatflow}))
+                Case CalculationMode.OutletTemperature
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Temperature",
+                            Me.OutletTemperature.GetValueOrDefault.ConvertFromSI(su.temperature).ToString(nf),
+                            su.temperature}))
+                Case CalculationMode.OutletVaporFraction
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Vapor Fraction",
+                            Me.OutletVaporFraction.ToString(nf),
+                            ""}))
+                Case CalculationMode.TemperatureChange
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Temperature",
+                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+            End Select
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results"}))
+
+            Select Case CalcMode
+                Case CalculationMode.HeatRemoved
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Temperature Change",
+                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Temperature",
+                            Me.OutletTemperature.GetValueOrDefault.ConvertFromSI(su.temperature).ToString(nf),
+                            su.temperature}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Vapor Fraction",
+                            Me.OutletVaporFraction.ToString(nf),
+                            ""}))
+                Case CalculationMode.OutletTemperature
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Temperature Change",
+                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Heat Removed",
+                            Me.DeltaQ.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                            su.heatflow}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Pressure",
+                            Me.OutletTemperature.GetValueOrDefault.ConvertFromSI(su.temperature).ToString(nf),
+                            su.temperature}))
+                Case CalculationMode.OutletVaporFraction
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Heat Removed",
+                            Me.DeltaQ.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                            su.heatflow}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Temperature",
+                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Temperature Change",
+                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+                Case CalculationMode.TemperatureChange
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Heat Removed",
+                            Me.DeltaQ.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                            su.heatflow}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Vapor Fraction",
+                            Me.OutletVaporFraction.ToString(nf),
+                            ""}))
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Outlet Temperature",
+                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            su.deltaT}))
+            End Select
+
+            Return list
+
+        End Function
+
         Public Overrides Function GetPropertyDescription(p As String) As String
             If p.Equals("Calculation Mode") Then
                 Return "Select the calculation mode of the Heater/Cooler. This will define which variables you need to specify."
