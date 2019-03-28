@@ -6685,6 +6685,23 @@ Namespace Streams
 
                 Next
 
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Vapor")
+                    If propval.Count > 1 Then
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn,
+                            New String() {propname}))
+                        i = 0
+                        For Each item In propval
+                            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {comps(i),
+                            item.ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                            GetPropUnits(p, "mass", units)}))
+                            i += 1
+                        Next
+                    End If
+                Next
+
             End If
 
             If nl1 > 0.00001# Then
@@ -6761,6 +6778,23 @@ Namespace Streams
                     New String() {propname,
                     propval(0).ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
                     GetPropUnits(p, "mass", units)}))
+                    End If
+                Next
+
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Liquid")
+                    If propval.Count > 1 Then
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn,
+                            New String() {propname}))
+                        i = 0
+                        For Each item In propval
+                            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {comps(i),
+                            item.ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                            GetPropUnits(p, "mass", units)}))
+                            i += 1
+                        Next
                     End If
                 Next
 
@@ -6844,6 +6878,23 @@ Namespace Streams
                     End If
                 Next
 
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Liquid2")
+                    If propval.Count > 1 Then
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn,
+                            New String() {propname}))
+                        i = 0
+                        For Each item In propval
+                            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {comps(i),
+                            item.ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                            GetPropUnits(p, "mass", units)}))
+                            i += 1
+                        Next
+                    End If
+                Next
+
             End If
 
             If ns > 0.00001# Then
@@ -6920,6 +6971,23 @@ Namespace Streams
                     New String() {propname,
                     propval(0).ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
                     GetPropUnits(p, "mass", units)}))
+                    End If
+                Next
+
+                For Each p As String In props
+                    Dim propname = TranslateString(p)
+                    Dim propval = GetSinglePhaseProp2(p, "mass", "Solid")
+                    If propval.Count > 1 Then
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn,
+                            New String() {propname}))
+                        i = 0
+                        For Each item In propval
+                            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {comps(i),
+                            item.ConvertFromSI(GetPropUnits(p, "mass", units)).ToString(nf),
+                            GetPropUnits(p, "mass", units)}))
+                            i += 1
+                        Next
                     End If
                 Next
 
