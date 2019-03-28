@@ -87,6 +87,11 @@ Namespace GraphicObjects.Shapes
             End With
 
         End Sub
+        Public Overrides Sub PositionConnectors()
+
+            CreateConnectors(0, 0)
+
+        End Sub
 
         Public Overrides Sub Draw(ByVal g As Object)
 

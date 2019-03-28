@@ -39,6 +39,12 @@ Namespace GraphicObjects.Shapes
 
 #End Region
 
+        Public Overrides Sub PositionConnectors()
+
+            CreateConnectors(0, 0)
+
+        End Sub
+
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
             Dim myIC1 As New ConnectionPoint

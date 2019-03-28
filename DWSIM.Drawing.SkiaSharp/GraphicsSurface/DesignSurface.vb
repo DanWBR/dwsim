@@ -221,6 +221,15 @@ Public Class GraphicsSurface
         Next
 
         For Each dobj In objects
+            If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic And
+               Not TypeOf dobj Is Tables.FloatingTableGraphic Then
+                If TypeOf dobj Is ShapeGraphic Then
+                    DirectCast(dobj, ShapeGraphic).PositionConnectors()
+                End If
+            End If
+        Next
+
+        For Each dobj In objects
             If TypeOf dobj Is ConnectorGraphic Then
                 dobj.Draw(DrawingCanvas)
             End If
@@ -477,6 +486,8 @@ Public Class GraphicsSurface
 
     Public Sub OffsetAll(deltax As Integer, deltay As Integer)
 
+        If deltax > 10000000000.0 Or deltay > 10000000000.0 Then Exit Sub
+
         For Each gobj As IGraphicObject In Me.DrawingObjects
             If Not gobj.IsConnector Then
                 gobj.X += deltax
@@ -487,6 +498,8 @@ Public Class GraphicsSurface
     End Sub
 
     Public Sub ZoomAll(viewwidth As Integer, viewheight As Integer)
+
+		If Me.DrawingObjects.Count = 0 Then Exit Sub
 
         Size = New SKSize(viewwidth, viewheight)
 

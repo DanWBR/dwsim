@@ -144,6 +144,12 @@ Namespace GraphicObjects.Shapes
 
         End Sub
 
+        Public Overrides Sub PositionConnectors()
+
+            CreateConnectors(0, 0)
+
+        End Sub
+
     End Class
 
 End Namespace

@@ -98,6 +98,12 @@ Namespace GraphicObjects.Shapes
 
         End Sub
 
+        Public Overrides Sub PositionConnectors()
+
+            CreateConnectors(10, 10)
+
+        End Sub
+
         Public Overrides Sub Draw(ByVal g As Object)
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)

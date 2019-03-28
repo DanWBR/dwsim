@@ -52,6 +52,9 @@ Namespace GraphicObjects
 
         Implements Interfaces.IConnectorGraphicObject
 
+        <Xml.Serialization.XmlIgnore> Public Property PointList As New List(Of Point)
+
+
 #Region "Constructors"
 
         Public Sub New()
@@ -119,9 +122,11 @@ Namespace GraphicObjects
             Height = Value.Y - Me.Y
         End Sub
 
-        Public Overrides Sub Draw(ByVal g As Object)
+        Public Sub SetupPositioning()
 
             'posicionar pontos nos primeiros slots livres
+
+            PointList = New List(Of Point)
 
             Dim StartPos, EndPos As New Point
 
@@ -178,7 +183,6 @@ Namespace GraphicObjects
             DeltaY = 10
 
             Dim XM, YM As Double
-            Dim PointList As New List(Of Point)
 
             Dim LeftTop1, RightBottom1, LeftTop2, RightBottom2 As New Point
             LeftTop1.X = Me.AttachedFrom.X
@@ -729,17 +733,26 @@ Namespace GraphicObjects
 
             PointList.Add(New Point(EndPos.X, EndPos.Y))
 
+        End Sub
+
+        Public Overrides Sub Draw(ByVal g As Object)
+
+            SetupPositioning()
+
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             Dim myPen As New SKPaint
-
-            UpdateStatus2(myPen, Me)
 
             With myPen
                 .IsStroke = True
                 .StrokeWidth = LineWidth
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .PathEffect = SKPathEffect.CreateCorner(6.0F)
+                If AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
+                    .Color = SKColors.SteelBlue
+                Else
+                    .Color = SKColors.Salmon
+                End If
             End With
 
             Dim myPen2 As New SKPaint

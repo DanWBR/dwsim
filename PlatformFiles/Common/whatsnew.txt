@@ -1,21 +1,14 @@
+Version 5.7 Update 2
+
+- [NEW] Structured object result reports (New UI)
+- [NEW] User-defined expressions for velocity constants (Kinetic Reactions)
+- [CHG] Redesigned reaction editors (New UI)
+- [CHG] Redesigned flowsheet analysis tools (New UI)
+- [FIX] Fixed PFD delayed connector drawing
+
 Version 5.7 Update 1
 
 - [NEW] Exposing additional reactor properties to tables and analysis tools
 - [NEW] Shortcut selection buttons on table editors (Classic UI)
 - [FIX] Fixed Electrolyte DB
 - [FIX] Fixed pressure drop on Gibbs and Equilibrium reactors
-
-Version 5.7
-
-- [NEW] Electrolyte NRTL model for Sour Gas and Amine systems
-- [NEW] Copy Flowsheet as image to clipboard
-- [NEW] New Web Panel (Classic UI)
-- [CHG] Redesigned Welcome Screen (Classic UI)
-- [CHG] Redesigned Compound Selector (Classic UI)
-- [CHG] Updated ChEDL Compound Database
-- [CHG] Restored 'print flowsheet' function (Classic UI)
-- [FIX] Fixed object cloning
-- [FIX] Fixed SLE flash
-- [FIX] Fixed english dynamic viscosity units
-- [FIX] Fixed mirrored characters on flowsheet objects
-- [FIX] Bug fixes

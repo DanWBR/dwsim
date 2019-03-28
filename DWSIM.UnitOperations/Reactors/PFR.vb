@@ -1395,7 +1395,7 @@ Namespace Reactors
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Compound Conversions"}))
             For Each dbl As KeyValuePair(Of String, Double) In Me.ComponentConversions
-                If dbl.Value > 0 Then list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                If dbl.Value >= 0 Then list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {dbl.Key,
                             (dbl.Value * 100).ToString(nf), "%"}))
             Next

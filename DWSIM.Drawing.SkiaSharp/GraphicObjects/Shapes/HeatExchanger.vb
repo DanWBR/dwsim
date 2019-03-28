@@ -40,13 +40,19 @@ Namespace GraphicObjects.Shapes
 
 #End Region
 
+        Public Overrides Sub PositionConnectors()
+
+            CreateConnectors(0, 0)
+
+        End Sub
+
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
             'Creates all the connection points.
 
             If InputConnectors.Count = 0 Then
 
-                For I As Integer = 1 To InCount
+                For I As Integer = 1 To 2
 
                     Dim Con As New ConnectionPoint
                     Con.Type = ConType.ConIn
@@ -58,7 +64,7 @@ Namespace GraphicObjects.Shapes
 
             If OutputConnectors.Count = 0 Then
 
-                For I As Integer = 1 To OutCount
+                For I As Integer = 1 To 2
 
                     Dim Con As New ConnectionPoint
                     Con.Type = ConType.ConOut
