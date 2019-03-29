@@ -40,12 +40,12 @@ namespace DWSIM.UI.Shared
 
         public static Form GetDefaultEditorForm(string title, int width, int height, DynamicLayout content)
         {
-            content.CreateAndAddEmptySpace();
-            content.CreateAndAddEmptySpace();
-            content.CreateAndAddEmptySpace();
-            content.CreateAndAddEmptySpace();
-            content.CreateAndAddEmptySpace();
-            content.EndVertical();
+            //content.CreateAndAddEmptySpace();
+            //content.CreateAndAddEmptySpace();
+            //content.CreateAndAddEmptySpace();
+            //content.CreateAndAddEmptySpace();
+            //content.CreateAndAddEmptySpace();
+            //content.EndVertical();
             content.Width = width - content.Padding.Value.Left * 2 - content.Padding.Value.Right * 2;
             height += 10;
             return new Form()

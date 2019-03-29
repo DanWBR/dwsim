@@ -51,14 +51,20 @@ namespace DWSIM.UI.Desktop.Editors
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
 
+            p1.Width = 420;
+            p2.Width = 420;
+
             t1 = new StackLayout(p1, p2);
             t1.Orientation = Orientation.Horizontal;
 
-            t1.SizeChanged += (sender, e) => {
-                p1.Width = (int)(p1.Parent.Width / 2);
-                p2.Width = (int)(p2.Parent.Width / 2);
-                p1.Height = p1.ParentWindow.Height - 170;
-                p2.Height = p1.ParentWindow.Height - 170;
+            container.SizeChanged += (sender, e) => {
+                if (p1.ParentWindow != null)
+                {
+                    p1.Width = (int)(p1.ParentWindow.Width / 2 - 15);
+                    p2.Width = (int)(p2.ParentWindow.Width / 2 - 15);
+                    p1.Height = p1.ParentWindow.Height - 170;
+                    p2.Height = p1.ParentWindow.Height - 170;
+                }
             };
 
             container.Add(t1);

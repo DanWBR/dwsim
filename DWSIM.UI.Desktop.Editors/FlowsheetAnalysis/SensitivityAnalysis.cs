@@ -49,6 +49,9 @@ namespace DWSIM.UI.Desktop.Editors
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
 
+            p1.Width = 380;
+            p2.Width = 380;
+
             t1 = new StackLayout(p1, p2);
             t1.Orientation = Orientation.Horizontal;
             
@@ -170,13 +173,17 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddControlRow(p2, sc);
 
             t1.SizeChanged += (sender, e) => {
-                p1.Width = (int)(p1.Parent.Width / 2);
-                p2.Width = (int)(p2.Parent.Width / 2);
-                p2.Height = p1.Height;
-                sc.Height = p2.Height - btnAddDepVar.Height - 30;
-                foreach (var item in ll.Items)
+                if (p1.ParentWindow != null)
                 {
-                    item.Control.Width = sc.Width - 25;
+                    p1.Width = (int)(p1.ParentWindow.Width / 2 - 10);
+                    p2.Width = (int)(p2.ParentWindow.Width / 2 - 10);
+                    p1.Height = p1.ParentWindow.Height - 170;
+                    p2.Height = p1.Height;
+                    sc.Height = p2.Height - btnAddDepVar.Height - 30;
+                    foreach (var item in ll.Items)
+                    {
+                        item.Control.Width = sc.Width - 25;
+                    }
                 }
             };
 

@@ -49,9 +49,12 @@ namespace DWSIM.UI.Desktop.Editors
             DynamicLayout p1, p2;
 
             StackLayout t1;
-
+            
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
+
+            p1.Width = 380;
+            p2.Width = 380;
 
             t1 = new StackLayout(p1, p2);
             t1.Orientation = Orientation.Horizontal;
@@ -110,17 +113,21 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddControlRow(p2, sc);
 
-            t1.SizeChanged += (sender, e) => {
-                p1.Width = (int)(p1.Parent.Width / 2);
-                p2.Width = (int)(p2.Parent.Width / 2);
-                p2.Height = p1.Height;
-                sc.Height = p2.Height - btnAddVar.Height - 35 - desclbl.Height;
-                foreach (var item in varcontainer.Items)
+            t1.SizeChanged += (sender, e) =>
+            {
+                if (p1.ParentWindow != null)
                 {
-                    item.Control.Width = sc.Width - 25;
+                    p1.Width = (int)(p1.ParentWindow.Width / 2 - 10);
+                    p2.Width = (int)(p2.ParentWindow.Width / 2 - 10);
+                    p1.Height = p1.ParentWindow.Height - 170;
+                    p2.Height = p1.Height;
+                    sc.Height = p2.Height - btnAddVar.Height - 35 - desclbl.Height;
+                    foreach (var item in varcontainer.Items)
+                    {
+                        item.Control.Width = sc.Width - 25;
+                    }
                 }
             };
-
 
             foreach (var item in mycase.variables.Values)
             {
@@ -144,7 +151,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 StartTask();
             });
-            
+
         }
 
         void AddVariable(DWSIM.SharedClasses.Flowsheet.Optimization.OPTVariable newiv, StackLayout ivcontainer, List<string> objs)
@@ -167,7 +174,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var slcontainer = new StackLayoutItem(container);
 
-            s.CreateAndAddLabelRow(container, "Optimization Variable #" + (ivcontainer.Items.Count+1).ToString());
+            s.CreateAndAddLabelRow(container, "Optimization Variable #" + (ivcontainer.Items.Count + 1).ToString());
 
             var btnremove = s.CreateAndAddButtonRow(container, "Remove Variable", null, (arg1a, arg2a) =>
             {

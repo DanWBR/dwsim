@@ -246,10 +246,7 @@ namespace DWSIM.UI.Desktop.Editors
             var structreport = obj.GetStructuredReport();
             if (structreport.Count > 0)
             {
-
-                var prevspacing = GlobalSettings.Settings.CrossPlatformUIItemSpacing;
-                GlobalSettings.Settings.CrossPlatformUIItemSpacing = 3;
-
+                
                 var containerd = UI.Shared.Common.GetDefaultContainer();
                 container.Rows.Add(new TableRow(containerd));
                 foreach (var item in structreport)
@@ -273,9 +270,6 @@ namespace DWSIM.UI.Desktop.Editors
                             break;
                     }
                 }
-
-                GlobalSettings.Settings.CrossPlatformUIItemSpacing = prevspacing;
-
             }
             else
             {

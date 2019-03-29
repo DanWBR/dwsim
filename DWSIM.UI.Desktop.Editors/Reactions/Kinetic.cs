@@ -51,14 +51,21 @@ namespace DWSIM.UI.Desktop.Editors
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
 
+            p1.Width = 390;
+            p2.Width = 440;
+
             t1 = new StackLayout(p1, p2);
             t1.Orientation = Orientation.Horizontal;
 
-            t1.SizeChanged += (sender, e) =>{
-                p1.Width = (int)(p1.Parent.Width / 2);
-                p2.Width = (int)(p2.Parent.Width / 2);
-                p1.Height = p1.ParentWindow.Height - 170;
-                p2.Height = p1.ParentWindow.Height - 170;
+            container.SizeChanged += (sender, e) =>
+            {
+                if (p1.ParentWindow != null)
+                {
+                    p1.Width = (int)(p1.ParentWindow.Width / 2 - 15);
+                    p2.Width = (int)(p2.ParentWindow.Width / 2 - 15);
+                    p1.Height = p1.ParentWindow.Height - 170;
+                    p2.Height = p1.ParentWindow.Height - 170;
+                }
             };
 
             container.Add(t1);
@@ -297,7 +304,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             p2.CreateAndAddLabelRow("Velocity Constant for Forward Reactions");
 
-            p2.CreateAndAddDropDownRow("Equation Type for Forward Reactions", new List<string>() { "Arrhenius (k = A*exp(-E/RT))", "User-Defined Expression" }, (int)rx.ReactionKinFwdType, (sender, e) => {
+            p2.CreateAndAddDropDownRow("Equation Type for Forward Reactions", new List<string>() { "Arrhenius (k = A*exp(-E/RT))", "User-Defined Expression" }, (int)rx.ReactionKinFwdType, (sender, e) =>
+            {
                 switch (sender.SelectedIndex)
                 {
                     case 0:
@@ -309,7 +317,8 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             });
 
-            p2.CreateAndAddStringEditorRow2("A", "", rx.A_Forward.ToString(), (sender, e) => {
+            p2.CreateAndAddStringEditorRow2("A", "", rx.A_Forward.ToString(), (sender, e) =>
+            {
                 if (Double.TryParse(sender.Text.ToString(), out val))
                 {
                     sender.TextColor = SystemColors.ControlText;
@@ -335,7 +344,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             p2.CreateAndAddLabelRow("Velocity Constant for Reverse Reactions");
 
-            p2.CreateAndAddDropDownRow("Equation Type for Reverse Reactions", new List<string>() { "Arrhenius (k = A*exp(-E/RT))", "User-Defined Expression" }, (int)rx.ReactionKinRevType, (sender, e) => {
+            p2.CreateAndAddDropDownRow("Equation Type for Reverse Reactions", new List<string>() { "Arrhenius (k = A*exp(-E/RT))", "User-Defined Expression" }, (int)rx.ReactionKinRevType, (sender, e) =>
+            {
                 switch (sender.SelectedIndex)
                 {
                     case 0:
@@ -369,16 +379,16 @@ namespace DWSIM.UI.Desktop.Editors
 
             p2.CreateAndAddStringEditorRow2("User Expression - f(T)", "", rx.ReactionKinRevExpression, (sender, e) =>
             {
-                    rx.ReactionKinRevExpression = sender.Text;
+                rx.ReactionKinRevExpression = sender.Text;
             });
 
             p2.CreateAndAddLabelRow("Units");
 
             var us = new DWSIM.SharedClasses.SystemsOfUnits.Units();
-			var units = us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molar_conc);
-			units.AddRange(us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.mass_conc));
-			units.AddRange(us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure));
-			units.Insert(0, "");
+            var units = us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molar_conc);
+            units.AddRange(us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.mass_conc));
+            units.AddRange(us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure));
+            units.Insert(0, "");
 
             p2.CreateAndAddDropDownRow("Basis Units (Base Compound)", units, units.IndexOf(rx.ConcUnit), (sender, e) => rx.ConcUnit = sender.SelectedValue.ToString());
 
