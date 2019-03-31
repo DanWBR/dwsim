@@ -24,8 +24,8 @@ Partial Class SpreadsheetForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SpreadsheetForm))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.A = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.B = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -70,25 +70,52 @@ Partial Class SpreadsheetForm
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.chkUpdate = New System.Windows.Forms.CheckBox()
-        Me.dckMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.FloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockLeftToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockRightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockBottomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockLeftAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockRightAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockTopAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockBottomAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.chkUseRegionalSeparator = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkEnableUnitLocking = New System.Windows.Forms.CheckBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.tsbAlignment = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
+        Me.btnFont = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel7 = New System.Windows.Forms.ToolStripLabel()
+        Me.tsbFormat = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem14 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem15 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel6 = New System.Windows.Forms.ToolStripLabel()
+        Me.txtPadding = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel4 = New System.Windows.Forms.ToolStripLabel()
+        Me.btnForeColor = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel5 = New System.Windows.Forms.ToolStripLabel()
+        Me.btnBackColor = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnWordWrap = New System.Windows.Forms.ToolStripButton()
+        Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+        Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
-        Me.dckMenu.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -96,17 +123,16 @@ Partial Class SpreadsheetForm
         resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.A, Me.B, Me.C, Me.D, Me.E, Me.F, Me.G, Me.H, Me.I, Me.J, Me.K, Me.L, Me.M, Me.N, Me.O, Me.P, Me.Q, Me.R, Me.S, Me.T, Me.U, Me.V, Me.W, Me.X, Me.Y, Me.Z})
         Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip1
@@ -378,63 +404,6 @@ Partial Class SpreadsheetForm
         Me.chkUpdate.Name = "chkUpdate"
         Me.chkUpdate.UseVisualStyleBackColor = True
         '
-        'dckMenu
-        '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
-        Me.dckMenu.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
-        Me.dckMenu.Name = "dckMenu"
-        '
-        'FloatToolStripMenuItem
-        '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
-        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
-        '
-        'DockLeftToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
-        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
-        '
-        'DockRightToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
-        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
-        '
-        'DockTopToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
-        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
-        '
-        'DockBottomToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
-        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
-        '
-        'DockLeftAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
-        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
-        '
-        'DockRightAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
-        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
-        '
-        'DockTopAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
-        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
-        '
-        'DockBottomAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
-        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
-        '
-        'DocumentToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
-        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
-        '
         'Button4
         '
         resources.ApplyResources(Me.Button4, "Button4")
@@ -468,12 +437,210 @@ Partial Class SpreadsheetForm
         Me.chkEnableUnitLocking.Name = "chkEnableUnitLocking"
         Me.chkEnableUnitLocking.UseVisualStyleBackColor = True
         '
+        'ToolStrip1
+        '
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripLabel2, Me.tsbAlignment, Me.ToolStripSeparator6, Me.ToolStripLabel3, Me.btnFont, Me.ToolStripSeparator5, Me.ToolStripLabel7, Me.tsbFormat, Me.ToolStripSeparator7, Me.ToolStripLabel6, Me.txtPadding, Me.ToolStripSeparator8, Me.ToolStripLabel4, Me.btnForeColor, Me.ToolStripSeparator4, Me.ToolStripLabel5, Me.btnBackColor, Me.ToolStripSeparator3, Me.btnWordWrap})
+        Me.ToolStrip1.Name = "ToolStrip1"
+        '
+        'ToolStripLabel1
+        '
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        '
+        'ToolStripLabel2
+        '
+        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        '
+        'tsbAlignment
+        '
+        resources.ApplyResources(Me.tsbAlignment, "tsbAlignment")
+        Me.tsbAlignment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsbAlignment.Name = "tsbAlignment"
+        '
+        'ToolStripSeparator6
+        '
+        resources.ApplyResources(Me.ToolStripSeparator6, "ToolStripSeparator6")
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        '
+        'ToolStripLabel3
+        '
+        resources.ApplyResources(Me.ToolStripLabel3, "ToolStripLabel3")
+        Me.ToolStripLabel3.Name = "ToolStripLabel3"
+        '
+        'btnFont
+        '
+        resources.ApplyResources(Me.btnFont, "btnFont")
+        Me.btnFont.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnFont.Name = "btnFont"
+        '
+        'ToolStripSeparator5
+        '
+        resources.ApplyResources(Me.ToolStripSeparator5, "ToolStripSeparator5")
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        '
+        'ToolStripLabel7
+        '
+        resources.ApplyResources(Me.ToolStripLabel7, "ToolStripLabel7")
+        Me.ToolStripLabel7.Name = "ToolStripLabel7"
+        '
+        'tsbFormat
+        '
+        resources.ApplyResources(Me.tsbFormat, "tsbFormat")
+        Me.tsbFormat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsbFormat.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ToolStripMenuItem12, Me.ToolStripMenuItem13, Me.ToolStripMenuItem14, Me.ToolStripMenuItem15})
+        Me.tsbFormat.Name = "tsbFormat"
+        '
+        'ToolStripMenuItem1
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        '
+        'ToolStripMenuItem2
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        '
+        'ToolStripMenuItem3
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        '
+        'ToolStripMenuItem4
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem4, "ToolStripMenuItem4")
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        '
+        'ToolStripMenuItem5
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem5, "ToolStripMenuItem5")
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        '
+        'ToolStripMenuItem6
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem6, "ToolStripMenuItem6")
+        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
+        '
+        'ToolStripMenuItem7
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem7, "ToolStripMenuItem7")
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        '
+        'ToolStripMenuItem8
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem8, "ToolStripMenuItem8")
+        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
+        '
+        'ToolStripMenuItem9
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem9, "ToolStripMenuItem9")
+        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
+        '
+        'ToolStripMenuItem10
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem10, "ToolStripMenuItem10")
+        Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
+        '
+        'ToolStripMenuItem11
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem11, "ToolStripMenuItem11")
+        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
+        '
+        'ToolStripMenuItem12
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem12, "ToolStripMenuItem12")
+        Me.ToolStripMenuItem12.Name = "ToolStripMenuItem12"
+        '
+        'ToolStripMenuItem13
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem13, "ToolStripMenuItem13")
+        Me.ToolStripMenuItem13.Name = "ToolStripMenuItem13"
+        '
+        'ToolStripMenuItem14
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem14, "ToolStripMenuItem14")
+        Me.ToolStripMenuItem14.Name = "ToolStripMenuItem14"
+        '
+        'ToolStripMenuItem15
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem15, "ToolStripMenuItem15")
+        Me.ToolStripMenuItem15.Name = "ToolStripMenuItem15"
+        '
+        'ToolStripSeparator7
+        '
+        resources.ApplyResources(Me.ToolStripSeparator7, "ToolStripSeparator7")
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        '
+        'ToolStripLabel6
+        '
+        resources.ApplyResources(Me.ToolStripLabel6, "ToolStripLabel6")
+        Me.ToolStripLabel6.Name = "ToolStripLabel6"
+        '
+        'txtPadding
+        '
+        resources.ApplyResources(Me.txtPadding, "txtPadding")
+        Me.txtPadding.Name = "txtPadding"
+        '
+        'ToolStripSeparator8
+        '
+        resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        '
+        'ToolStripLabel4
+        '
+        resources.ApplyResources(Me.ToolStripLabel4, "ToolStripLabel4")
+        Me.ToolStripLabel4.Name = "ToolStripLabel4"
+        '
+        'btnForeColor
+        '
+        resources.ApplyResources(Me.btnForeColor, "btnForeColor")
+        Me.btnForeColor.BackColor = System.Drawing.Color.Maroon
+        Me.btnForeColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None
+        Me.btnForeColor.Name = "btnForeColor"
+        '
+        'ToolStripSeparator4
+        '
+        resources.ApplyResources(Me.ToolStripSeparator4, "ToolStripSeparator4")
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        '
+        'ToolStripLabel5
+        '
+        resources.ApplyResources(Me.ToolStripLabel5, "ToolStripLabel5")
+        Me.ToolStripLabel5.Name = "ToolStripLabel5"
+        '
+        'btnBackColor
+        '
+        resources.ApplyResources(Me.btnBackColor, "btnBackColor")
+        Me.btnBackColor.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnBackColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None
+        Me.btnBackColor.Name = "btnBackColor"
+        '
+        'ToolStripSeparator3
+        '
+        resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        '
+        'btnWordWrap
+        '
+        resources.ApplyResources(Me.btnWordWrap, "btnWordWrap")
+        Me.btnWordWrap.Checked = True
+        Me.btnWordWrap.CheckOnClick = True
+        Me.btnWordWrap.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.btnWordWrap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnWordWrap.Name = "btnWordWrap"
+        '
+        'ColorDialog1
+        '
+        Me.ColorDialog1.FullOpen = True
+        '
         'SpreadsheetForm
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CloseButton = False
         Me.CloseButtonVisible = False
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
@@ -486,12 +653,12 @@ Partial Class SpreadsheetForm
         Me.HideOnClose = True
         Me.Name = "SpreadsheetForm"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
-        Me.TabPageContextMenuStrip = Me.dckMenu
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.dckMenu.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -540,19 +707,46 @@ Partial Class SpreadsheetForm
     Public WithEvents X As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Y As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Z As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents dckMenu As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents FloatToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockLeftToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockRightToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockTopToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockBottomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockLeftAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockRightAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockTopAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockBottomAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DocumentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents chkUseRegionalSeparator As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox1 As GroupBox
     Public WithEvents chkEnableUnitLocking As CheckBox
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents ToolStripLabel2 As ToolStripLabel
+    Friend WithEvents tsbAlignment As ToolStripDropDownButton
+    Friend WithEvents ToolStripLabel3 As ToolStripLabel
+    Friend WithEvents btnFont As ToolStripButton
+    Friend WithEvents ToolStripLabel4 As ToolStripLabel
+    Friend WithEvents btnForeColor As ToolStripButton
+    Friend WithEvents ToolStripLabel5 As ToolStripLabel
+    Friend WithEvents btnBackColor As ToolStripButton
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel6 As ToolStripLabel
+    Friend WithEvents txtPadding As ToolStripTextBox
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents btnWordWrap As ToolStripButton
+    Friend WithEvents ColorDialog1 As ColorDialog
+    Friend WithEvents FontDialog1 As FontDialog
+    Friend WithEvents ToolStripLabel7 As ToolStripLabel
+    Friend WithEvents tsbFormat As ToolStripDropDownButton
+    Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem6 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem7 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem8 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem9 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem10 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem11 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem12 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem13 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem14 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem15 As ToolStripMenuItem
 End Class
