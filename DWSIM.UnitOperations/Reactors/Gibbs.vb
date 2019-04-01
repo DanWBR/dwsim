@@ -1092,7 +1092,8 @@ Namespace Reactors
 
             ims.Phases(0).Properties.temperature = T
 
-            P = ims.Phases(0).Properties.pressure.GetValueOrDefault - DeltaP.GetValueOrDefault
+            ims.Phases(0).Properties.pressure -= DeltaP.GetValueOrDefault
+            P = ims.Phases(0).Properties.pressure.GetValueOrDefault
             P0 = 101325
 
             'now check the selected solving method

@@ -298,7 +298,8 @@ Public Class SpreadsheetForm
     End Sub
 
     Private Sub DataGridView1_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DataGridView1.SelectionChanged
-        If Me.DataGridView1.SelectedCells.Count > 0 Then
+
+        If Me.DataGridView1.SelectedCells.Count > 0 And loaded Then
 
             Me.tbCell.Text = Me.GetCellString(Me.DataGridView1.SelectedCells(0))
             ccparams = Me.DataGridView1.SelectedCells(0).Tag
@@ -339,6 +340,7 @@ Public Class SpreadsheetForm
             End If
 
         End If
+
     End Sub
 
     ''' <summary>

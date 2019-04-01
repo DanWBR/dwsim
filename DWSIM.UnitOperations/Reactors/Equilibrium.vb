@@ -556,7 +556,8 @@ Namespace Reactors
             pp.CurrentMaterialStream = ims
 
             T0 = ims.Phases(0).Properties.temperature.GetValueOrDefault
-            P = ims.Phases(0).Properties.pressure.GetValueOrDefault - DeltaP.GetValueOrDefault
+            ims.Phases(0).Properties.pressure -= DeltaP.GetValueOrDefault
+            P = ims.Phases(0).Properties.pressure.GetValueOrDefault
             P0 = 101325
 
             Select Case Me.ReactorOperationMode
@@ -870,6 +871,8 @@ Namespace Reactors
                     'process reaction i
 
                     rx = FlowSheet.Reactions(r)
+
+                    If rx.Tmax = 0 Then rx.Tmax = 2000
 
                     If T >= rx.Tmin And T <= rx.Tmax Then
                         ReactionExtents(r) = REx(i)
