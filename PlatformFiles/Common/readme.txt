@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 2
+Version 5.7 Update 3
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 3
+
+- [NEW] Spreadsheet cell formatting tools (Classic UI)
+- [FIX] Fixed importing of property units to spreadsheet (Classic UI)
+- [FIX] Fixed pressure drop on Gibbs and Equilibrium reactors
 
 Version 5.7 Update 2
 

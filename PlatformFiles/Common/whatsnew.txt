@@ -1,3 +1,9 @@
+Version 5.7 Update 3
+
+- [NEW] Spreadsheet cell formatting tools (Classic UI)
+- [FIX] Fixed importing of property units to spreadsheet (Classic UI)
+- [FIX] Fixed pressure drop on Gibbs and Equilibrium reactors
+
 Version 5.7 Update 2
 
 - [NEW] Structured object result reports (New UI)
@@ -5,10 +11,3 @@ Version 5.7 Update 2
 - [CHG] Redesigned reaction editors (New UI)
 - [CHG] Redesigned flowsheet analysis tools (New UI)
 - [FIX] Fixed PFD delayed connector drawing
-
-Version 5.7 Update 1
-
-- [NEW] Exposing additional reactor properties to tables and analysis tools
-- [NEW] Shortcut selection buttons on table editors (Classic UI)
-- [FIX] Fixed Electrolyte DB
-- [FIX] Fixed pressure drop on Gibbs and Equilibrium reactors
