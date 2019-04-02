@@ -199,16 +199,21 @@ namespace DWSIM.UI.Forms
 
             // actions
 
+            FlowsheetObject.UpdateEditorPanels = () => UpdateEditorPanels();
+
             ActComps = () =>
             {
                 var cont = new TableLayout();
-                new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
+                var editor = new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
                 cont.Tag = "Simulation Compounds";
 
                 var cont2 = new Desktop.Editors.CompoundTools(FlowsheetObject);
                 cont2.Tag = "Compound Tools";
 
                 var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", (int)(sf * 920), (int)(sf * 500), new Control[] { cont, cont2 });
+
+                editor.listcontainer.CellEdited += (sender, e) => UpdateEditorPanels();
+
                 form.Show();
             };
 
@@ -1774,7 +1779,7 @@ namespace DWSIM.UI.Forms
 
         }
 
-        private void UpdateEditorPanels()
+        public void UpdateEditorPanels()
         {
             foreach (DocumentPage item in EditorHolder.Pages)
             {
@@ -1782,7 +1787,7 @@ namespace DWSIM.UI.Forms
             }
         }
 
-        private void UpdateEditorConnectionsPanel()
+        public void UpdateEditorConnectionsPanel()
         {
             foreach (DocumentPage item in EditorHolder.Pages)
             {

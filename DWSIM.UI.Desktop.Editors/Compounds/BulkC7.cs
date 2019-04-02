@@ -26,7 +26,7 @@ namespace DWSIM.UI.Desktop.Editors
     public class BulkC7PCharacterization : DynamicLayout
     {
 
-        public IFlowsheet flowsheet;
+        public Flowsheet flowsheet;
 
         private String assayname;
 
@@ -38,7 +38,7 @@ namespace DWSIM.UI.Desktop.Editors
         Nullable<double> mw, sg, nbp;
 
 
-        public BulkC7PCharacterization(IFlowsheet fs) : base()
+        public BulkC7PCharacterization(Flowsheet fs) : base()
         {
             flowsheet = fs;
             Init();
@@ -243,6 +243,7 @@ namespace DWSIM.UI.Desktop.Editors
                             Application.Instance.Invoke(() =>
                             {
                                 flowsheet.UpdateInterface();
+                                flowsheet.UpdateEditorPanels.Invoke();
                                 flowsheet.ShowMessage("Material Stream '" + assayname + "' added successfully. " + ncomps.ToString() + " compounds created.", IFlowsheet.MessageType.Information);
 
                                 if (MessageBox.Show("Do you want to export the created compounds to a XML database?", "Petroleum C7+ Characterization", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)

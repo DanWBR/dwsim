@@ -22,7 +22,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         private ObservableCollection<CompoundItem> obslist = new ObservableCollection<CompoundItem>();
 
-        GridView listcontainer;
+        public GridView listcontainer;
 
         public Compounds(IFlowsheet fs, TableLayout layout)
         {
@@ -45,8 +45,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Rows.Add(new TableRow(new Label { Text = "Simulation Compounds", Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())}));
 
-            container.Rows.Add(new TableRow(new Label { Text = "Check compounds to add them to the simulation, uncheck to remove. You may have to double-click on the checkbox in order to change its state (checked/unchecked).", Font = SystemFonts.Label(DWSIM.UI.Shared.Common.GetEditorFontSize() - 2.0f) }));
-
+            container.Rows.Add(new TableRow(new Label { Text = "Check compounds to add them to the simulation, uncheck to remove.", Font = SystemFonts.Label(DWSIM.UI.Shared.Common.GetEditorFontSize() - 2.0f) }));
+            if (Application.Instance.Platform.IsWpf)
+            {
+                container.Rows.Add(new TableRow(new Label { Text = "To commit the changes, select another table cell or press ENTER after checking/unchecking the compound. You may have to double-click on the checkbox in order to change its state (checked/unchecked).", Font = SystemFonts.Label(DWSIM.UI.Shared.Common.GetEditorFontSize() - 2.0f) }));
+            }
             container.Rows.Add(new TableRow(new Label { Text = "Number of compounds available: " + complist.Count().ToString(), Font = SystemFonts.Label(DWSIM.UI.Shared.Common.GetEditorFontSize() - 2.0f) }));
 
             var searchcontainer = new DynamicLayout();

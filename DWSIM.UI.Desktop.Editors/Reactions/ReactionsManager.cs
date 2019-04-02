@@ -12,18 +12,19 @@ using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
 using DWSIM.UI.Shared;
 using Eto.Drawing;
+using DWSIM.UI.Desktop.Shared;
 
 namespace DWSIM.UI.Desktop.Editors
 {
     public class ReactionsManager
     {
 
-        public IFlowsheet flowsheet;
+        public Flowsheet flowsheet;
         public DynamicLayout container;
 
         private DynamicLayout rxcontainer, rscontainer;
 
-        public ReactionsManager(IFlowsheet fs, DynamicLayout layout)
+        public ReactionsManager(Flowsheet fs, DynamicLayout layout)
         {
             flowsheet = fs;
             container = layout;
@@ -35,10 +36,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             rxcontainer = new DynamicLayout();
             rscontainer = new DynamicLayout();
-
-            //rxcontainer.BackgroundColor = Colors.White;
-            //rscontainer.BackgroundColor = Colors.White;
-
+            
             if (flowsheet.ReactionSets.Count == 0) { flowsheet.ReactionSets.Add("DefaultSet", new ReactionSet("DefaultSet", "Default Set", "")); }
 
             container.CreateAndAddLabelRow("Reactions");
@@ -147,6 +145,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 var rsid = Guid.NewGuid().ToString();
                 flowsheet.ReactionSets.Add(rsid, new ReactionSet(rsid, "NewReactionSet", ""));
+                flowsheet.UpdateEditorPanels.Invoke();
                 CreateReactionSetsList();
             });
 
@@ -298,7 +297,7 @@ namespace DWSIM.UI.Desktop.Editors
                         });
                         alert.Topmost = true;
                         alert.Show();
-
+                        flowsheet.UpdateEditorPanels.Invoke();
                     },
                     (sender, e) =>
                     {

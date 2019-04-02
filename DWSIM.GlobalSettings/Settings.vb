@@ -43,9 +43,11 @@ Public Class Settings
     Public Shared Property FlowsheetRenderer As SkiaCanvasRenderer = SkiaCanvasRenderer.CPU
 
     Public Shared Property AppTaskScheduler As TaskScheduler = Tasks.TaskScheduler.Default
+
     Public Shared Property gpu As Cudafy.Host.GPGPU
     Public Shared Property gpumod As CudafyModule
     Public Shared Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
+
     Private Shared _tcks As CancellationTokenSource
     Public Shared Property TaskCancellationTokenSource As CancellationTokenSource
         Get
@@ -93,7 +95,7 @@ Public Class Settings
 
     Public Shared Property DrawingAntiAlias As Boolean = True
 
-    Public Shared Property AutomationMode As Boolean
+    Public Shared Property AutomationMode As Boolean = False
 
     Public Shared Property OctavePath As String = ""
 
@@ -104,12 +106,15 @@ Public Class Settings
     Public Shared Property CurrentPlatform As String = "Windows"
 
     Public Shared Property PythonPath As String = ""
+
     Public Shared Property PythonTimeoutInMinutes As Double = 1
 
     Public Shared Property PythonInitialized As Boolean = False
 
     Public Shared Property EnableBackupCopies As Boolean = True
+
     Public Shared Property SaveExistingFile As Boolean = True
+
     Public Shared Property BackupInterval As Integer = 5
 
     Public Shared Property UserUnits As String = "{ }"
@@ -120,9 +125,12 @@ Public Class Settings
 
     Public Shared Property OldUI As Boolean = True
 
+
     Public Shared AutomaticUpdates As Boolean = True
 
+
     Public Shared CurrentVersion As String = ""
+
 
     Public Shared CurrentRunningVersion As String = ""
 
@@ -136,9 +144,9 @@ Public Class Settings
 
     Public Shared Property EditorTextBoxFixedSize As Boolean = True
 
-    Public Shared Property EditOnSelect As Boolean = False
+    Public Shared Property EditOnSelect As Boolean = True
 
-    Public Shared Property CallSolverOnEditorPropertyChanged As Boolean = False
+    Public Shared Property CallSolverOnEditorPropertyChanged As Boolean = True
 
     Public Shared Property DpiScale As Double = 1.0
 

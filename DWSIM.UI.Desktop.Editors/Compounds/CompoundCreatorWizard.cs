@@ -907,6 +907,10 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     }
                     flowsheet.ShowMessage("Compound '" + comp.Name + "' added to the simulation.", IFlowsheet.MessageType.Information);
+                    if (flowsheet is Flowsheet)
+                    {
+                        ((Flowsheet)flowsheet).UpdateEditorPanels.Invoke();
+                    }
                 }
             });
             dl.CreateAndAddLabelRow2("Adds the compound to the current simulation.");

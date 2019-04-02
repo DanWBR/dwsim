@@ -8,6 +8,7 @@ using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.Thermodynamics.BaseClasses;
 using DWSIM.Thermodynamics.PropertyPackages;
+using DWSIM.UI.Desktop.Shared;
 using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
 
@@ -17,12 +18,12 @@ namespace DWSIM.UI.Desktop.Editors
     public class Models
     {
         
-        public IFlowsheet flowsheet;
+        public Flowsheet flowsheet;
         public DynamicLayout container;
 
         private DynamicLayout ppcontainer, facontainer;
 
-        public Models(IFlowsheet fs, DynamicLayout layout)
+        public Models(Flowsheet fs, DynamicLayout layout)
         {
             flowsheet = fs;
             container = layout;
@@ -58,6 +59,7 @@ namespace DWSIM.UI.Desktop.Editors
                     Application.Instance.AsyncInvoke(() =>
                     {
                         AddPropPackItem(pp);
+                        flowsheet.UpdateEditorPanels.Invoke();
                         ppcontainer.Create();
                         ppcontainer.Invalidate();
                     });
@@ -100,6 +102,7 @@ namespace DWSIM.UI.Desktop.Editors
                     Application.Instance.AsyncInvoke(() =>
                     {
                         AddFlashAlgorithmItem(fa);
+                        flowsheet.UpdateEditorPanels.Invoke();
                         facontainer.Create();
                         facontainer.Invalidate();
                     });
@@ -183,6 +186,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                                    {
                                                                        facontainer.Remove(tr);
                                                                        flowsheet.FlowsheetOptions.FlashAlgorithms.Remove(fa);
+                                                                       flowsheet.UpdateEditorPanels.Invoke();
                                                                    }
                                                                });
         }
@@ -222,6 +226,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                                    {
                                                                        ppcontainer.Remove(tr);
                                                                        flowsheet.PropertyPackages.Remove(pp.UniqueID);
+                                                                       flowsheet.UpdateEditorPanels.Invoke();
                                                                    }
                                                                });
         }

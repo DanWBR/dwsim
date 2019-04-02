@@ -19,6 +19,8 @@ namespace DWSIM.UI.Desktop.Shared
         public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActZoomDefault, ActSimultAdjustSolver;
         public Action ActDrawGrid, ActSnapToGrid, ActMultiSelect, ActAlignLefts, ActAlignCenters, ActAlignRights, ActAlignTops, ActAlignMiddles, ActAlignBottoms, ActHorizAlign, ActVertAlign;
 
+        public Action UpdateEditorPanels;
+
         public bool optimizing = false;
         public bool SupressMessages = false;
         private bool eventattached = false;
@@ -54,7 +56,6 @@ namespace DWSIM.UI.Desktop.Shared
                 Application.Instance.AsyncInvoke(() => { if (FlowsheetForm != null) FlowsheetForm.Invalidate(); });
             }
         }
-
         public override void ShowDebugInfo(string text, int level)
         {
             Console.WriteLine(text);

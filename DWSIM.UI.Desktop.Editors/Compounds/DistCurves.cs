@@ -41,7 +41,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         List<tmpcomp> tccol = new List<tmpcomp>();
 
-        public IFlowsheet flowsheet;
+        public Flowsheet flowsheet;
 
         private String assayname;
 
@@ -57,7 +57,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         string decsep1, decsep2;
 
-        public DistCurvePCharacterization(IFlowsheet fs)
+        public DistCurvePCharacterization(Flowsheet fs)
             : base()
         {
             flowsheet = fs;
@@ -289,6 +289,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 Application.Instance.Invoke(() =>
                                 {
                                     flowsheet.UpdateInterface();
+                                    flowsheet.UpdateEditorPanels.Invoke();
                                     flowsheet.ShowMessage("Material Stream '" + assayname + "' added successfully. " + ncomps.ToString() + " compounds created.", IFlowsheet.MessageType.Information);
 
                                     if (MessageBox.Show("Do you want to export the created compounds to a XML database?", "Petroleum C7+ Characterization", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
