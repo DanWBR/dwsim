@@ -83,15 +83,15 @@ Public Class FormPropSelection
                     Next
                 Case 3
                     For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
+                        If obj.ObjectType = NodeOut Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 4
                     For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
+                        If obj.ObjectType = Pipe Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 5
                     For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
+                        If obj.ObjectType = Valve Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 6
                     For Each obj In formC.Collections.GraphicObjectCollection.Values
