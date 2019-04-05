@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 3
+Version 5.7 Update 4
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 4
+
+- [NEW] New syntax-highlighting script editors on macOS and Linux (New UI)
+- [FIX] Fixed editors not updating on Compound and Property Package/Flash Algorithm changes (New UI)
+- [FIX] SLE-only Fixed binary envelope (Classic UI)
 
 Version 5.7 Update 3
 

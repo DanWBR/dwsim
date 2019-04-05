@@ -69,6 +69,9 @@
       <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable0956\lib\net45\OxyPlot.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Scintilla.Eto.Shared">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="SkiaSharp, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.60.0\lib\net45\SkiaSharp.dll</HintPath>
     </Reference>
@@ -95,10 +98,11 @@
     <Compile Include="General\UnhandledException.cs" />
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
     <Compile Include="Results\ResultsViewer.cs" />
+    <Compile Include="ScriptManager\GTK\ScriptItem.cs" />
     <Compile Include="ScriptManager\MonoMac\ScriptItem.cs" />
     <Compile Include="ScriptManager\MonoMac\ScriptManager.cs" />
-    <Compile Include="ScriptManager\Default\ScriptItem.cs" />
-    <Compile Include="ScriptManager\Default\ScriptManager.cs" />
+    <Compile Include="ScriptManager\WPF\ScriptItem.cs" />
+    <Compile Include="ScriptManager\ScriptManager.cs" />
     <Compile Include="ScriptManager\ScriptManagerBase.cs" />
     <Compile Include="Spreadsheet\PropSelection.cs" />
     <Compile Include="Spreadsheet\Spreadsheet.cs" />

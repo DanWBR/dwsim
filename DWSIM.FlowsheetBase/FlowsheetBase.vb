@@ -52,6 +52,10 @@ Imports System.Dynamic
 
     Public RetrieveSpreadsheetData As Func(Of String, List(Of String()))
 
+    Public Property ScriptKeywordsF As String = ""
+
+    Public Property ScriptKeywordsU As String = ""
+
     Public Sub AddCompoundsToMaterialStream(ms As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         For Each phase As IPhase In ms.Phases.Values
             For Each comp In Me.Options.SelectedComponents.Values

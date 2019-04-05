@@ -477,6 +477,11 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c14", "[" & ppname & "] " & "CRIT T (" & su.temperature & ")")
                 End With
 
+                If n = 0 Then
+                    MessageBox.Show("No points were generated for the selected diagram. Please check your thermo setup.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+
                 If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(n)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
@@ -661,6 +666,11 @@ Public Class FormBinEnv
 
                 Dim n As Integer = New List(Of Integer)({vx1.Count, vx2.Count, vy1.Count, vy2.Count, vx1l1.Count, vy3.Count}).Max
 
+                If n = 0 Then
+                    MessageBox.Show("No points were generated for the selected diagram. Please check your thermo setup.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+
                 If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(n)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
@@ -761,6 +771,11 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "y (" & c(0) & ")")
                 End With
 
+                If vx.Count = 0 Then
+                    MessageBox.Show("No points were generated for the selected diagram. Please check your thermo setup.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+
                 If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(vx.Count)
 
                 For Each co As DataGridViewColumn In Me.Grid1.Columns
@@ -843,6 +858,11 @@ Public Class FormBinEnv
                     .Add("[" & ppname & "] ""c1", "[" & ppname & "] " & "x (" & c(0) & ")")
                     .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "y (" & c(0) & ")")
                 End With
+
+                If vx.Count = 0 Then
+                    MessageBox.Show("No points were generated for the selected diagram. Please check your thermo setup.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
 
                 If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(vx.Count)
 

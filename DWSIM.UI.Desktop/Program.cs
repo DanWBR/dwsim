@@ -3,7 +3,6 @@ using System.IO;
 using DWSIM.UI.Controls;
 using Eto.Forms;
 using DWSIM.GlobalSettings;
-using Eto.Forms.Controls.SkiaSharp.Shared;
 using Cudafy;
 using System.Reflection;
 
@@ -67,18 +66,9 @@ namespace DWSIM.UI.Desktop
                     {
                         case Settings.WindowsPlatformRenderer.WinForms:
                             DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
-                            platform = new Eto.Direct2D.Platform();
-                            platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
-                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WinForms.FlowsheetSurfaceControlHandler_OpenGL());
-                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
-                            platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
-                            platform.Add<SKControl.ISKControl>(() => new Eto.Forms.Controls.SkiaSharp.WinForms.SKControlHandler());
-                            platform.Add<SKGLControl.ISKGLControl>(() => new Eto.Forms.Controls.SkiaSharp.WinForms.SKGLControlHandler());
-                            break;
-                        case Settings.WindowsPlatformRenderer.WinForms_Direct2D:
-                            DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
                             platform = new Eto.WinForms.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WinForms.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
                             break;
@@ -90,8 +80,6 @@ namespace DWSIM.UI.Desktop
                             platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WPF.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Wpf.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WPF.CodeEditorControlHandler());
-                            platform.Add<SKControl.ISKControl>(() => new Eto.Forms.Controls.SkiaSharp.WPF.SKControlHandler());
-                            platform.Add<SKGLControl.ISKGLControl>(() => new Eto.Forms.Controls.SkiaSharp.WPF.SKGLControlHandler());
                             break;
                         case Settings.WindowsPlatformRenderer.Gtk2:
                             DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
@@ -115,8 +103,7 @@ namespace DWSIM.UI.Desktop
                             platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new GTK.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
-                            platform.Add<SKControl.ISKControl>(() => new Eto.Forms.Controls.SkiaSharp.GTK.SKControlHandler());
-                            platform.Add<SKGLControl.ISKGLControl>(() => new Eto.Forms.Controls.SkiaSharp.GTK.SKGLControlHandler());
+                            platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.GTK.ScintillaControlHandler());
                             break;
                         case Settings.LinuxPlatformRenderer.WinForms:
                             DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
@@ -141,8 +128,7 @@ namespace DWSIM.UI.Desktop
                             platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new Mac.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Mac.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new Mac.CodeEditorControlHandler());
-                            platform.Add<SKControl.ISKControl>(() => new Eto.Forms.Controls.SkiaSharp.Mac.SKControlHandler());
-                            platform.Add<SKGLControl.ISKGLControl>(() => new Eto.Forms.Controls.SkiaSharp.Mac.SKGLControlHandler());
+                            platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.Mac.ScintillaControlHandler());
                             break;
                         case Settings.MacOSPlatformRenderer.Gtk2:
                             DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();

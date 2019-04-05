@@ -38,12 +38,15 @@ namespace DWSIM.UI.Desktop.Editors
 
         public CheckBox chkLink;
         public DropDown cbLinkedObject, cbLinkedEvent, cbPythonInt;
-        public DWSIM.UI.Controls.CodeEditorControl txtScript;
+        public Eto.Forms.Controls.Scintilla.Shared.ScintillaControl txtScript;
         public TextBox txtName;
         public Button btnRun, btnUpdate, btnRunAsync;
 
-        public ScriptItem_Mac()
+        private FlowsheetBase.FlowsheetBase flowsheet;
+
+        public ScriptItem_Mac(FlowsheetBase.FlowsheetBase fs)
         {
+            flowsheet = fs;
             Init();
         }
 
@@ -134,7 +137,8 @@ namespace DWSIM.UI.Desktop.Editors
                 cbLinkedEvent.SelectedIndex = 0;
             };
 
-            txtScript = new Controls.CodeEditorControl();
+            txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
+            txtScript.SetKeywords(1, flowsheet.ScriptKeywordsF);
 
             var tr3 = new TableRow(txtScript);
             var tb3 = new TableLayout { Spacing = new Size(5, 5) };

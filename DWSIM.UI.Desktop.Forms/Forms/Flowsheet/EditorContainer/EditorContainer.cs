@@ -130,15 +130,31 @@ namespace DWSIM.UI.Forms
                 var cont2 = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
                 cont2.Tag = "Python Script";
                 cont2.Width = this.Width - 30;
-                var scripteditor = new DWSIM.UI.Controls.CodeEditorControl() { Text = ((CustomUO)obj).ScriptText };
-                var dyn1 = new DynamicLayout();
-                dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
+                if (Application.Instance.Platform.IsWpf)
                 {
-                    ((CustomUO)obj).ScriptText = scripteditor.Text;
-                });
-                dyn1.Width = this.Width - 30;
-                cont2.Rows.Add(new TableRow(dyn1));
-                cont2.Rows.Add(new TableRow(scripteditor));
+                    var scripteditor = new DWSIM.UI.Controls.CodeEditorControl() { Text = ((CustomUO)obj).ScriptText };
+                    var dyn1 = new DynamicLayout();
+                    dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
+                    {
+                        ((CustomUO)obj).ScriptText = scripteditor.Text;
+                    });
+                    dyn1.Width = this.Width - 30;
+                    cont2.Rows.Add(new TableRow(dyn1));
+                    cont2.Rows.Add(new TableRow(scripteditor));
+                }
+                else if (Application.Instance.Platform.IsMac || Application.Instance.Platform.IsGtk)
+                {
+                    var scripteditor = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl() { ScriptText = ((CustomUO)obj).ScriptText };
+                    scripteditor.SetKeywords(1, ((FlowsheetBase.FlowsheetBase)obj.GetFlowsheet()).ScriptKeywordsU);
+                    var dyn1 = new DynamicLayout();
+                    dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
+                    {
+                        ((CustomUO)obj).ScriptText = scripteditor.ScriptText;
+                    });
+                    dyn1.Width = this.Width - 30;
+                    cont2.Rows.Add(new TableRow(dyn1));
+                    cont2.Rows.Add(new TableRow(scripteditor));
+                }
                 Pages.Add(new TabPage(new Scrollable() { Content = cont2, Width = this.Width - 30 }) { Text = "Python Script" });
             }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.HeatExchanger)

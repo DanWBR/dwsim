@@ -45,7 +45,7 @@ namespace DWSIM.UI.Desktop.Editors
             var leftcontainer = new TableLayout();
             var rightcontainer = new TableLayout();
 
-            ScriptEditor = new ScriptItem_Mac();
+            ScriptEditor = new ScriptItem_Mac(Flowsheet);
 
             var btnNew = new Button { Text = "New Script" };
             btnNew.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
@@ -64,7 +64,7 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     if (lbScripts.SelectedIndex < 0) return;
 
-                    if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.Text;
+                    if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
 
                     selscript = Flowsheet.Scripts[lbScripts.SelectedKey];
 
@@ -83,7 +83,7 @@ namespace DWSIM.UI.Desktop.Editors
                     adding = false;
 
                     ScriptEditor.txtName.Text = selscript.Title;
-                    ScriptEditor.txtScript.Text = selscript.ScriptText;
+                    ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
 
                     ScriptEditor.chkLink.Checked = selscript.Linked;
 
@@ -171,7 +171,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.ShowMessage("Running script '" + Flowsheet.Scripts[lbScripts.SelectedKey].Title + "'...", IFlowsheet.MessageType.Information);
-                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
                 Flowsheet.RunScript(lbScripts.SelectedKey);
             };
 
@@ -179,14 +179,14 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.ShowMessage("Running script '" + Flowsheet.Scripts[lbScripts.SelectedKey].Title + "' asynchronously...", IFlowsheet.MessageType.Information);
-                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
                 Flowsheet.RunScriptAsync(lbScripts.SelectedKey);
             };
 
             ScriptEditor.btnUpdate.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
-                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
             };
 
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = SystemFonts.Bold() });
@@ -334,7 +334,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
             if (lbScripts.SelectedIndex < 0) return; 
             Flowsheet.ShowMessage("Storing updated scripts for saving...", IFlowsheet.MessageType.Information);
-            Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+            Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
         }
 
     }

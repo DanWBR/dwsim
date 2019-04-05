@@ -62,7 +62,7 @@ namespace DWSIM.UI.Forms
         private double sf = s.UIScalingFactor;
 
         private CheckToolItem btnmSnapToGrid, btnmDrawGrid, btnmMultiSelect;
-
+        
         void InitializeComponent()
         {
 
@@ -1197,6 +1197,7 @@ namespace DWSIM.UI.Forms
 
             var calculatorassembly = System.Reflection.Assembly.LoadFile(Path.Combine(dir, "DWSIM.Thermodynamics.dll"));
             var unitopassembly = System.Reflection.Assembly.LoadFile(Path.Combine(dir, "DWSIM.UnitOperations.dll"));
+            var fsolverassembly = System.Reflection.Assembly.LoadFile(Path.Combine(dir, "DWSIM.FlowsheetSolver.dll"));
             List<Type> availableTypes = new List<Type>();
 
             availableTypes.AddRange(calculatorassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
@@ -1213,6 +1214,73 @@ namespace DWSIM.UI.Forms
                 }
             }
 
+            string netprops = "";
+
+            PropertyInfo[] props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties();
+
+            foreach (var p in props)
+            {
+                netprops = (netprops + (p.Name + " "));
+            }
+
+            MethodInfo[] methods = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMethods();
+            foreach (var m in methods)
+            {
+                netprops = (netprops + (m.Name + " "));
+            }
+
+            props = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetProperties();
+            foreach (var p in props)
+            {
+                netprops = (netprops + (p.Name + " "));
+            }
+
+            methods = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMethods();
+            foreach (var m in methods)
+            {
+                netprops = (netprops + (m.Name + " "));
+            }
+
+            props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties();
+            foreach (var p in props)
+            {
+                if ((p.PropertyType.Namespace != "System.Windows.Forms"))
+                {
+                    netprops = (netprops + (p.Name + " "));
+                }
+            }
+
+            methods = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMethods();
+            foreach (var m in methods)
+            {
+                netprops = (netprops + (m.Name + " "));
+            }
+
+            string objects = "";
+
+            objects = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM";
+
+            this.FlowsheetObject.ScriptKeywordsU = netprops + objects;
+
+            // editor is being used at flowsheet level.
+            props = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetProperties();
+            foreach (var p in props)
+            {
+                if ((p.PropertyType.Namespace != "System.Windows.Forms"))
+                {
+                    netprops = (netprops + (p.Name + " "));
+                }
+            }
+
+            methods = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMethods();
+            foreach (var m in methods)
+            {
+                netprops = (netprops + (m.Name + " "));
+            }
+
+            objects = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Plugins Solver DWSIM";
+
+            this.FlowsheetObject.ScriptKeywordsF = netprops + objects;
         }
 
         Eto.Forms.Container SetupLogWindow()
@@ -1518,15 +1586,17 @@ namespace DWSIM.UI.Forms
                 };
                 item0.Items.Add(menuitem);
             }
-            
+
             var item1 = new ButtonMenuItem { Text = "Zoom All", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")) };
             var item2 = new ButtonMenuItem { Text = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")) };
 
-            item1.Click += (sender, e) => {
+            item1.Click += (sender, e) =>
+            {
                 ActZoomFit.Invoke();
             };
 
-            item2.Click += (sender, e) => {
+            item2.Click += (sender, e) =>
+            {
                 ActZoomDefault.Invoke();
             };
 

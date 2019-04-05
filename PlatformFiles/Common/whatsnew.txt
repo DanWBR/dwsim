@@ -1,13 +1,5 @@
-Version 5.7 Update 3
+Version 5.7 Update 4
 
-- [NEW] Spreadsheet cell formatting tools (Classic UI)
-- [FIX] Fixed importing of property units to spreadsheet (Classic UI)
-- [FIX] Fixed pressure drop on Gibbs and Equilibrium reactors
-
-Version 5.7 Update 2
-
-- [NEW] Structured object result reports (New UI)
-- [NEW] User-defined expressions for velocity constants (Kinetic Reactions)
-- [CHG] Redesigned reaction editors (New UI)
-- [CHG] Redesigned flowsheet analysis tools (New UI)
-- [FIX] Fixed PFD delayed connector drawing
+- [NEW] New syntax-highlighting script editors on macOS and Linux (New UI)
+- [FIX] Fixed editors not updating on Compound and Property Package/Flash Algorithm changes (New UI)
+- [FIX] SLE-only Fixed binary envelope (Classic UI)

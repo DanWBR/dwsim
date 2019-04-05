@@ -90,21 +90,6 @@
     <Reference Include="Eto.Direct2D, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Direct2D.2.5.0-ci-10123\lib\net45\Eto.Direct2D.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.GTK">
-      <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.GTK.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.Mac">
-      <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.Mac.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.Shared">
-      <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.WinForms">
-      <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.WPF">
-      <HintPath>..\DWSIM\References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="Eto.Gtk2, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Gtk2.2.5.0-ci-10123\lib\net45\Eto.Gtk2.dll</HintPath>
     </Reference>
@@ -179,6 +164,15 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Scintilla.Eto.GTK">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.GTK.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.Mac">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.Mac.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.Shared">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.4.0.1\lib\net45\SharpDX.dll</HintPath>
