@@ -26,6 +26,14 @@ namespace DWSIM.UI.Forms.Forms
             var tab1 = Common.GetDefaultContainer();
             tab1.Tag = "Interface";
 
+            if (Application.Instance.Platform.IsMac)
+            {
+                tab1.CreateAndAddLabelRow("TouchBar");
+
+                tab1.CreateAndAddCheckBoxRow("Enable Custom TouchBar Buttons", Settings.EnableCustomTouchBar, (CheckBox sender, EventArgs obj) => { Settings.EnableCustomTouchBar = sender.Checked.Value; });
+                tab1.CreateAndAddDescriptionRow("Enables/disables custom TouchBar buttons on supported MacBook Pro models + macOS versions.");
+            }
+
             tab1.CreateAndAddLabelRow("Renderer");
 
             int currentrenderer = 0;
@@ -71,14 +79,6 @@ namespace DWSIM.UI.Forms.Forms
             //    var check1 = tab1.CreateAndAddCheckBoxRow("Enable Dark Mode (macOS Mojave only)", Settings.DarkMode, (CheckBox sender, EventArgs obj) => { Settings.DarkMode = sender.Checked.Value; });
             //    check1.Enabled = false;
             //}
-
-            if (Application.Instance.Platform.IsMac)
-            {
-                tab1.CreateAndAddLabelRow("TouchBar");
-
-                tab1.CreateAndAddCheckBoxRow("Enable Custom TouchBar Buttons", Settings.EnableCustomTouchBar, (CheckBox sender, EventArgs obj) => { Settings.EnableCustomTouchBar = sender.Checked.Value; });
-                tab1.CreateAndAddDescriptionRow("Enables/disables custom TouchBar buttons on supported MacBook Pro models + macOS versions.");
-            }
             
             tab1.CreateAndAddNumericEditorRow("Scaling Factor", Settings.UIScalingFactor, 0.2, 3.0, 2, (sender, e) => Settings.UIScalingFactor = sender.Value);
             tab1.CreateAndAddDescriptionRow("Sets the Scaling Factor for controls (windows, panels, buttons, lists, etc). Useful on Linux when used in conjunction with Font Scaling on High DPI displays.");
