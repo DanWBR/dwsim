@@ -76,7 +76,7 @@ namespace DWSIM.UI.Forms.Forms
             {
                 tab1.CreateAndAddLabelRow("TouchBar");
 
-                tab1.CreateAndAddCheckBoxRow("Enable Custom TouchBar Buttons", Settings.EditOnSelect, (CheckBox sender, EventArgs obj) => { Settings.EnableCustomTouchBar = sender.Checked.Value; });
+                tab1.CreateAndAddCheckBoxRow("Enable Custom TouchBar Buttons", Settings.EnableCustomTouchBar, (CheckBox sender, EventArgs obj) => { Settings.EnableCustomTouchBar = sender.Checked.Value; });
                 tab1.CreateAndAddDescriptionRow("Enables/disables custom TouchBar buttons on supported MacBook Pro models + macOS versions.");
             }
             
