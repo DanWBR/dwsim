@@ -158,6 +158,8 @@ Public Class Settings
 
     Public Shared Property CrossPlatformUIItemSpacing As Integer = 5
 
+    Public Shared Property EnableCustomTouchBar As Boolean = True
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
@@ -420,6 +422,8 @@ Public Class Settings
 
         ObjectEditor = source.Configs("Misc").GetInt("ObjectEditor", 0)
 
+        EnableCustomTouchBar = source.Configs("Misc").GetBoolean("EnableCustomTouchBar", True)
+
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
         'autom = source.Configs("Misc").GetBoolean("AutoUpdate", True)
@@ -539,6 +543,8 @@ Public Class Settings
         source.Configs("Misc").Set("UIScalingFactor", UIScalingFactor)
 
         source.Configs("Misc").Set("ObjectEditor", ObjectEditor)
+
+        source.Configs("Misc").Set("EnableCustomTouchBar", EnableCustomTouchBar)
 
         'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
         'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)

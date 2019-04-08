@@ -9,10 +9,10 @@ namespace DWSIM.UI.Desktop.Mac
 
     public static class StyleSetter
     {
-    
+
         public static void SetStyles()
         {
-            
+
             Eto.Style.Add<Eto.Forms.Panel>("transparent-form", control =>
             {
                 System.Console.WriteLine(control.ControlObject.GetType().ToString());
@@ -33,20 +33,23 @@ namespace DWSIM.UI.Desktop.Mac
 
         public static void FinishedLaunching()
         {
-            if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(10, 12, 2)))
+            if (GlobalSettings.Settings.EnableCustomTouchBar)
             {
-                try
+                if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(10, 12, 2)))
                 {
-                    NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+                    try
+                    {
+                        NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+                    }
+                    catch
+                    { }
                 }
-                catch
-                {}
             }
         }
 
         public static void BeginLaunching()
         {
-            
+
             var dmset = NSUserDefaults.StandardUserDefaults["AppleInterfaceStyle"];
             if (dmset != null)
             {
