@@ -85,6 +85,7 @@ Public Class FormMain
                 settings.PersistUserPreferences = True
                 settings.PersistSessionCookies = True
                 settings.CachePath = Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "BrowserDataCache")
+                CefSharp.CefSharpSettings.SubprocessExitIfParentProcessClosed = True
                 CefSharp.Cef.Initialize(settings)
             Catch ex As Exception
             End Try
