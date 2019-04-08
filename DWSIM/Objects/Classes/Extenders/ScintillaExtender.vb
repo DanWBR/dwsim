@@ -63,7 +63,7 @@ Module scintillaExtender
         scintilla.SetProperty("tab.timmy.whinge.level", "1")
         scintilla.SetProperty("fold", "1")
 
-        scintilla.Margins(0).Width = 20
+        scintilla.Margins(0).Width = 30
 
         ' Use margin 2 for fold markers
 

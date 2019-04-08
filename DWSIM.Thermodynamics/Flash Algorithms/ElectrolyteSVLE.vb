@@ -440,36 +440,65 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         'optimize initial estimates
 
-                        Dim extvars(r) As OptBoundVariable
-                        For i = 0 To r
-                            extvars(i) = New OptBoundVariable("ex" & CStr(i + 1), REx(i), False, lbound(i), ubound(i))
-                        Next
+                        If UseIPOPTSolver Then
 
-                        Dim extsolver As New Simplex
-                        extsolver.Tolerance = 0.001
-                        extsolver.MaxFunEvaluations = 1000
-                        iest = extsolver.ComputeMin(Function(xvar() As Double)
+                            Calculator.CheckParallelPInvoke()
 
-                                                        ObjectiveFunctionHistory.Clear()
+                            IdealCalc = True
 
-                                                        IdealCalc = True
+                            Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
 
-                                                        Dim intvars(r) As OptBoundVariable
-                                                        For i = 0 To r
-                                                            intvars(i) = New OptBoundVariable("x" & CStr(i + 1), xvar(i), False, lbound(i), ubound(i))
-                                                        Next
-                                                        Dim intsolver As New Simplex
-                                                        intsolver.Tolerance = 0.01
-                                                        intsolver.MaxFunEvaluations = 100
-                                                        x = intsolver.ComputeMin(AddressOf FunctionValue2N, intvars)
+                            Using problem As New Ipopt(iest.Length, lbound, ubound, 0, Nothing, Nothing,
+                           0, 0, AddressOf eval_f, AddressOf eval_g,
+                           AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                                problem.AddOption("tol", Tolerance)
+                                problem.AddOption("max_iter", MaximumIterations)
+                                problem.AddOption("mu_strategy", "adaptive")
+                                problem.AddOption("hessian_approximation", "limited-memory")
+                                problem.SetIntermediateCallback(AddressOf intermediate)
+                                status = problem.SolveProblem(REx, fx, Nothing, Nothing, Nothing, Nothing)
+                            End Using
 
-                                                        intsolver = Nothing
+                            If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
+                                Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
+                            End If
 
-                                                        fx = Me.FunctionValue2N(x)
+                            iest = REx.Clone
 
-                                                        Return fx
+                        Else
 
-                                                    End Function, extvars)
+                            Dim extvars(r) As OptBoundVariable
+                            For i = 0 To r
+                                extvars(i) = New OptBoundVariable("ex" & CStr(i + 1), REx(i), False, lbound(i), ubound(i))
+                            Next
+
+                            Dim extsolver As New Simplex
+                            extsolver.Tolerance = 0.001
+                            extsolver.MaxFunEvaluations = 1000
+                            iest = extsolver.ComputeMin(Function(xvar() As Double)
+
+                                                            ObjectiveFunctionHistory.Clear()
+
+                                                            IdealCalc = True
+
+                                                            Dim intvars(r) As OptBoundVariable
+                                                            For i = 0 To r
+                                                                intvars(i) = New OptBoundVariable("x" & CStr(i + 1), xvar(i), False, lbound(i), ubound(i))
+                                                            Next
+                                                            Dim intsolver As New Simplex
+                                                            intsolver.Tolerance = 0.01
+                                                            intsolver.MaxFunEvaluations = 100
+                                                            x = intsolver.ComputeMin(AddressOf FunctionValue2N, intvars)
+
+                                                            intsolver = Nothing
+
+                                                            fx = Me.FunctionValue2N(x)
+
+                                                            Return fx
+
+                                                        End Function, extvars)
+
+                        End If
 
                     Else
 
@@ -702,7 +731,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val1 = N0.Values.ToArray.SumY * proppack.AUX_MMM(Vxl0)
             val2 = N.Values.ToArray.SumY * proppack.AUX_MMM(Vxl)
 
-            pen_val += (val1 - val2) ^ 2
+            pen_val += 100000 * (val1 - val2) ^ 2
 
             For Each s As String In N.Keys
                 If N(s) < 0.0# Then pen_val += (N(s) * 100) ^ 2
@@ -737,16 +766,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim activcoeff(nc) As Double
 
-            If TypeOf proppack Is ExUNIQUACPropertyPackage Then
-                activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
-            ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
-                activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
-            End If
-
             If IdealCalc Then
                 For i = 0 To nc
                     activcoeff(i) = 1.0#
                 Next
+            Else
+                If TypeOf proppack Is ExUNIQUACPropertyPackage Then
+                    activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
+                ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
+                    activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
+                End If
             End If
 
             Dim CP(nc) As Double

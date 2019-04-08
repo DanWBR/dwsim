@@ -81,7 +81,7 @@ namespace DWSIM.UI.Desktop.WinForms
             }
         }
 
-        private void SetEditorStyle(ScintillaNET.Scintilla scintilla)
+        public static void SetEditorStyle(ScintillaNET.Scintilla scintilla)
         {
             scintilla.StyleResetDefault();
             scintilla.Styles[Style.Default].Font = "Consolas";
@@ -97,7 +97,7 @@ namespace DWSIM.UI.Desktop.WinForms
             scintilla.SetProperty("tab.timmy.whinge.level", "1");
             scintilla.SetProperty("fold", "1");
 
-            scintilla.Margins[0].Width = 20;
+            scintilla.Margins[0].Width = 30;
 
             // Use margin 2 for fold markers
 
