@@ -672,7 +672,7 @@ Namespace PropertyPackages
 
         Public Overridable Function CalcIsothermalCompressibility(p As IPhase) As Double
 
-            Dim Z, P0, T, Z1, x As Double
+            Dim Z, P0, T, Z1 As Double
 
             If Not p.Properties.molarfraction.HasValue Then Return 0.0
 
