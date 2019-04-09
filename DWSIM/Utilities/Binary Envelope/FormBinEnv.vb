@@ -106,7 +106,7 @@ Public Class FormBinEnv
 
             Me.tbP.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, 101325), nf)
             Me.tbT.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 298.15), nf)
-            Me.tbdx.Text = 0.025.ToString(nf)
+            Me.tbdx.Text = (0.025).ToString()
 
             Me.GraphControl.IsShowPointValues = True
 

@@ -402,7 +402,7 @@ Public Module General
     <System.Runtime.CompilerServices.Extension()>
     Public Function ToDoubleFromCurrent(s As String) As Double
 
-        Dim ci As CultureInfo = CultureInfo.CurrentUICulture
+        Dim ci As CultureInfo = CultureInfo.CurrentCulture
 
         If Double.TryParse(s, NumberStyles.Any, ci, New Double) Then
             Return Double.Parse(s, ci)

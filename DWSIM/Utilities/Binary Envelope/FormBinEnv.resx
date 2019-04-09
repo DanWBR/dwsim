@@ -121,24 +121,15 @@
   <data name="chkVLE.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 103</value>
   </data>
-  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.24692, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;TSB_Copy.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DockLeftAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TSB_Preview.Name" xml:space="preserve">
-    <value>TSB_Preview</value>
   </data>
   <data name="&gt;&gt;GroupBox6.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;colT.Name" xml:space="preserve">
-    <value>colT</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 13</value>
@@ -164,23 +155,20 @@
   <data name="TSB_PrinterSetup.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="&gt;&gt;chkCritical.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.31226, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="&gt;&gt;Label23.Name" xml:space="preserve">
-    <value>Label23</value>
+  <data name="cbComp2.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="&gt;&gt;RadioButton3.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="TSB_PageSetup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
   </data>
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Name" xml:space="preserve">
     <value>DockBottomToolStripMenuItem</value>
-  </data>
-  <data name="FlowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 127</value>
   </data>
   <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -191,11 +179,15 @@
   <data name="GridExpData.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
+  <data name="&gt;&gt;tbP.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
   <data name="&gt;&gt;RadioButton4.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
-  <data name="&gt;&gt;DockTopToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="rbEutectic.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -206,8 +198,8 @@
   <data name="Label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="PanelCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 26</value>
+  <data name="&gt;&gt;Grid1.Name" xml:space="preserve">
+    <value>Grid1</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 262</value>
@@ -218,17 +210,11 @@
   <data name="&gt;&gt;RadioButton4.Name" xml:space="preserve">
     <value>RadioButton4</value>
   </data>
-  <data name="GraphControl.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8.25pt</value>
-  </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;cbComp1.Name" xml:space="preserve">
-    <value>cbComp1</value>
-  </data>
-  <data name="chkSLE.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
+    <value>ToolStrip1</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Pacote de Propriedades</value>
@@ -236,11 +222,17 @@
   <data name="&gt;&gt;colP.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Temperatura</value>
+  </data>
   <data name="&gt;&gt;chkSLE.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Button2.Text" xml:space="preserve">
-    <value>Cancelar</value>
+  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="chkSLE.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
   <data name="&gt;&gt;colx1.Name" xml:space="preserve">
     <value>colx1</value>
@@ -256,9 +248,6 @@
   </data>
   <data name="&gt;&gt;RadioButton1.Name" xml:space="preserve">
     <value>RadioButton1</value>
-  </data>
-  <data name="LabelStatus.Text" xml:space="preserve">
-    <value>Tipo de diagrama</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -287,17 +276,23 @@
   <data name="DockBottomAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;PanelCalc.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Left</value>
   </data>
   <data name="&gt;&gt;RadioButton1.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
+  <data name="DocumentToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 224</value>
   </data>
-  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Base do Eixo X</value>
+  </data>
+  <data name="&gt;&gt;FlowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockRightAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -308,30 +303,26 @@
   <data name="RadioButton1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tbT.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
-  </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="cbXAxisBasis.Items1" xml:space="preserve">
+    <value>Fração Mássica</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FlowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
   <data name="lblP.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;Label23.ZOrder" xml:space="preserve">
-    <value>28</value>
+  <data name="DockBottomToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;TSB_PrinterSetup.Name" xml:space="preserve">
     <value>TSB_PrinterSetup</value>
-  </data>
-  <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -360,8 +351,8 @@
   <data name="&gt;&gt;LabelStatus.Parent" xml:space="preserve">
     <value>PanelCalc</value>
   </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PanelCalc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 352</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Bottom Auto-Hide</value>
@@ -372,17 +363,20 @@
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="cbComp2.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 47</value>
+  </data>
+  <data name="cbComp1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 19</value>
   </data>
   <data name="TSB_Copy.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
   <data name="GridExpData.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
-    <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -402,16 +396,19 @@
   <data name="tbT.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
-  <data name="check.HeaderText" xml:space="preserve">
-    <value> </value>
+  <data name="&gt;&gt;cbComp2.Name" xml:space="preserve">
+    <value>cbComp2</value>
   </data>
   <data name="chkVLE.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="&gt;&gt;FlowLayoutPanel1.Name" xml:space="preserve">
-    <value>FlowLayoutPanel1</value>
-  </data>
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblP.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
@@ -423,8 +420,8 @@
   <data name="&gt;&gt;TSB_PrinterSetup.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TSB_PageSetup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -435,20 +432,17 @@
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 209</value>
   </data>
+  <data name="&gt;&gt;FlowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
-  <data name="&gt;&gt;coly1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rbEutectic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 3</value>
+  <data name="check.ToolTipText" xml:space="preserve">
+    <value>Include</value>
   </data>
   <data name="&gt;&gt;DockLeftToolStripMenuItem.Name" xml:space="preserve">
     <value>DockLeftToolStripMenuItem</value>
-  </data>
-  <data name="chkCompareModels.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -456,26 +450,17 @@
   <data name="&gt;&gt;chkLLE.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DockTopToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockTopToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;TSB_PageSetup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;PanelCalc.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;PrintDialog1.Name" xml:space="preserve">
-    <value>PrintDialog1</value>
+  <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
   <data name="chkLLE.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
-  </data>
-  <data name="check.ToolTipText" xml:space="preserve">
-    <value>Include</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -492,14 +477,11 @@
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
   </data>
-  <data name="TSB_PrinterSetup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+  <data name="&gt;&gt;rbEutectic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rbEutectic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;colP.Name" xml:space="preserve">
     <value>colP</value>
@@ -507,11 +489,11 @@
   <data name="chkLLE.Location" type="System.Drawing.Point, System.Drawing">
     <value>195, 103</value>
   </data>
-  <data name="lblP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+  <data name="ToolStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
-    <value>Label4</value>
+  <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 104</value>
@@ -519,14 +501,11 @@
   <data name="RadioButton1.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 19</value>
   </data>
-  <data name="tbdx.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="colT.HeaderText" xml:space="preserve">
+    <value>T</value>
   </data>
   <data name="&gt;&gt;DockRightToolStripMenuItem.Name" xml:space="preserve">
     <value>DockRightToolStripMenuItem</value>
-  </data>
-  <data name="TSB_Copy.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="lblT.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 237</value>
@@ -534,14 +513,17 @@
   <data name="&gt;&gt;tbdx.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="DockTopAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Top Auto-Hide</value>
+  <data name="&gt;&gt;Label23.Name" xml:space="preserve">
+    <value>Label23</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Base do Eixo X</value>
+  <data name="&gt;&gt;chkSLE.Parent" xml:space="preserve">
+    <value>FlowLayoutPanel1</value>
   </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="FaTabStripItem3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;chkCompareModels.Name" xml:space="preserve">
     <value>chkCompareModels</value>
@@ -576,8 +558,11 @@
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
   </data>
-  <data name="PanelCalc.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+  <data name="RadioButton4.Text" xml:space="preserve">
+    <value>(P) x-y</value>
+  </data>
+  <data name="chkLLE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -585,14 +570,11 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkLLE.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;chkVLE.Name" xml:space="preserve">
     <value>chkVLE</value>
   </data>
-  <data name="PanelCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 352</value>
+  <data name="cbComp2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 21</value>
   </data>
   <data name="&gt;&gt;tbP.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -612,9 +594,6 @@
   <data name="chkSLE.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 19</value>
   </data>
-  <data name="tbP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 207</value>
-  </data>
   <data name="FlowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
@@ -627,14 +606,11 @@
   <data name="Label23.Text" xml:space="preserve">
     <value>Componente 1</value>
   </data>
-  <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="tbP.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
-  <data name="TSB_PageSetup.Text" xml:space="preserve">
-    <value>Page Setup</value>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 51</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -642,14 +618,14 @@
   <data name="FlowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="TSB_Preview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+  <data name="&gt;&gt;check.Name" xml:space="preserve">
+    <value>check</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;TSB_Print.Name" xml:space="preserve">
-    <value>TSB_Print</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -672,14 +648,17 @@
   <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockBottomAutoHideToolStripMenuItem</value>
   </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>613, 488</value>
+  </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 27</value>
   </data>
   <data name="DockTopToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Top</value>
   </data>
-  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>611, 467</value>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 289</value>
   </data>
   <data name="&gt;&gt;GraphControl.Name" xml:space="preserve">
     <value>GraphControl</value>
@@ -689,9 +668,6 @@
   </data>
   <data name="RadioButton2.Text" xml:space="preserve">
     <value>P-x-y</value>
-  </data>
-  <data name="&gt;&gt;Grid1.Name" xml:space="preserve">
-    <value>Grid1</value>
   </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -708,6 +684,9 @@
   <data name="&gt;&gt;colx1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Gráfico</value>
+  </data>
   <data name="cbXAxisBasis.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 179</value>
   </data>
@@ -717,8 +696,8 @@
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 182</value>
   </data>
-  <data name="&gt;&gt;lblP.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;DockTopToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="RadioButton1.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 75</value>
@@ -729,23 +708,17 @@
   <data name="rbSolidSolution.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Left</value>
-  </data>
   <data name="DockBottomToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Bottom</value>
   </data>
   <data name="RadioButton4.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 19</value>
   </data>
-  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockRightAutoHideToolStripMenuItem</value>
-  </data>
   <data name="&gt;&gt;tbP.Name" xml:space="preserve">
     <value>tbP</value>
   </data>
-  <data name="FaTabStripItem3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="lblP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 210</value>
   </data>
   <data name="cbComp1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -768,6 +741,9 @@
   <data name="tbT.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="FlowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 25</value>
   </data>
@@ -780,14 +756,8 @@
   <data name="&gt;&gt;tbdx.Name" xml:space="preserve">
     <value>tbdx</value>
   </data>
-  <data name="lblT.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="LabelStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="DockBottomToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -798,8 +768,11 @@
   <data name="chkCritical.Text" xml:space="preserve">
     <value>Pontos Críticos</value>
   </data>
-  <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Right</value>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;coly1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LabelStatus.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -807,8 +780,11 @@
   <data name="&gt;&gt;GridExpData.Parent" xml:space="preserve">
     <value>FaTabStripItem3</value>
   </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbComp2.ZOrder" xml:space="preserve">
+    <value>20</value>
   </data>
   <data name="chkLLE.Text" xml:space="preserve">
     <value>ELL</value>
@@ -816,14 +792,17 @@
   <data name="RadioButton3.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 19</value>
   </data>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
   <data name="&gt;&gt;chkCompareModels.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="chkCritical.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 157</value>
   </data>
-  <data name="&gt;&gt;tbdx.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbT.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -837,20 +816,20 @@
   <data name="TSB_PageSetup.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+    <value>Label4</value>
+  </data>
   <data name="chkVLE.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
-  <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="GroupBox6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
-  <data name="PanelCalc.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 23</value>
@@ -870,14 +849,11 @@
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>389, 26</value>
+  <data name="chkCompareModels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;check.Name" xml:space="preserve">
-    <value>check</value>
-  </data>
-  <data name="cbComp2.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="&gt;&gt;chkVLE.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;BackgroundWorker1.Name" xml:space="preserve">
     <value>BackgroundWorker1</value>
@@ -933,14 +909,14 @@
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockTopAutoHideToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="LabelStatus.Text" xml:space="preserve">
+    <value>Tipo de diagrama</value>
   </data>
   <data name="chkCritical.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 17</value>
   </data>
-  <data name="chkLLE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;colT.Name" xml:space="preserve">
+    <value>colT</value>
   </data>
   <data name="&gt;&gt;chkVLE.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -951,8 +927,8 @@
   <data name="&gt;&gt;tbT.Name" xml:space="preserve">
     <value>tbT</value>
   </data>
-  <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;RadioButton1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RadioButton3.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -969,17 +945,17 @@
   <data name="&gt;&gt;rbEutectic.Name" xml:space="preserve">
     <value>rbEutectic</value>
   </data>
-  <data name="GridExpData.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 51</value>
+  <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
+    <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 23</value>
+  </data>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 13</value>
@@ -993,14 +969,14 @@
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
+  <data name="&gt;&gt;Label7.Name" xml:space="preserve">
+    <value>Label7</value>
+  </data>
   <data name="&gt;&gt;cbXAxisBasis.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="&gt;&gt;TSB_Copy.Name" xml:space="preserve">
     <value>TSB_Copy</value>
-  </data>
-  <data name="chkSLE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
   </data>
   <data name="chkVLE.Text" xml:space="preserve">
     <value>ELV</value>
@@ -1008,11 +984,11 @@
   <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
     <value>FaTabStripItem2</value>
   </data>
-  <data name="&gt;&gt;chkSLE.Parent" xml:space="preserve">
-    <value>FlowLayoutPanel1</value>
+  <data name="GridExpData.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="&gt;&gt;FloatToolStripMenuItem.Name" xml:space="preserve">
-    <value>FloatToolStripMenuItem</value>
+  <data name="PanelCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>364, 26</value>
   </data>
   <data name="&gt;&gt;rbEutectic.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1020,8 +996,11 @@
   <data name="&gt;&gt;chkCompareModels.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>21</value>
+  <data name="&gt;&gt;GraphControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>389, 26</value>
   </data>
   <data name="tbdx.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -1041,14 +1020,14 @@
   <data name="cbXAxisBasis.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
+  <data name="PanelCalc.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
   </data>
   <data name="&gt;&gt;BackgroundWorker1.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Tabela</value>
@@ -1065,26 +1044,20 @@
   <data name="rbSolidSolution.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 3</value>
   </data>
-  <data name="colT.HeaderText" xml:space="preserve">
-    <value>T</value>
+  <data name="&gt;&gt;tbdx.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="RadioButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 19</value>
   </data>
-  <data name="cbComp2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 21</value>
-  </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Left Auto-Hide</value>
-  </data>
-  <data name="ToolStrip1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="lblP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
   </data>
   <data name="colx1.ToolTipText" xml:space="preserve">
     <value>Compound 1 Mole Fraction in Liquid Phase 1</value>
   </data>
-  <data name="&gt;&gt;cbComp2.Name" xml:space="preserve">
-    <value>cbComp2</value>
+  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Left Auto-Hide</value>
   </data>
   <data name="cbPropPack.Items" xml:space="preserve">
     <value>Fração Molar</value>
@@ -1092,8 +1065,8 @@
   <data name="GraphControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;cbComp2.ZOrder" xml:space="preserve">
-    <value>20</value>
+  <data name="DockLeftAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="TSB_PrinterSetup.Text" xml:space="preserve">
     <value>Printer Setup</value>
@@ -1101,11 +1074,14 @@
   <data name="lblT.Text" xml:space="preserve">
     <value>Pressão</value>
   </data>
-  <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="&gt;&gt;Label23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RadioButton2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1113,8 +1089,8 @@
   <data name="LabelStatus.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;GraphControl.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;TSB_Print.Name" xml:space="preserve">
+    <value>TSB_Print</value>
   </data>
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1122,8 +1098,8 @@
   <data name="&gt;&gt;cbPropPack.Name" xml:space="preserve">
     <value>cbPropPack</value>
   </data>
-  <data name="&gt;&gt;RadioButton2.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="chkCompareModels.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Pressão</value>
@@ -1137,11 +1113,8 @@
   <data name="&gt;&gt;cbComp1.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="chkCompareModels.Text" xml:space="preserve">
-    <value>Comparar Modelos</value>
-  </data>
-  <data name="&gt;&gt;check.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dckMenu.Name" xml:space="preserve">
     <value>dckMenu</value>
@@ -1151,6 +1124,9 @@
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormBinEnv</value>
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 506</value>
   </data>
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1165,13 +1141,13 @@
     <value>20</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6904.24691, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7037.31226, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;rbEutectic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="FlowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 127</value>
   </data>
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1182,11 +1158,11 @@
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
-    <value>ToolStrip1</value>
-  </data>
   <data name="&gt;&gt;GridExpData.Name" xml:space="preserve">
     <value>GridExpData</value>
+  </data>
+  <data name="&gt;&gt;cbComp1.ZOrder" xml:space="preserve">
+    <value>27</value>
   </data>
   <data name="chkCritical.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1197,17 +1173,20 @@
   <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 289</value>
+  <data name="check.HeaderText" xml:space="preserve">
+    <value> </value>
   </data>
   <data name="&gt;&gt;chkLLE.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 78</value>
+  </data>
   <data name="RadioButton4.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 75</value>
   </data>
-  <data name="chkSLE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="rbEutectic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 3</value>
   </data>
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1216,7 +1195,7 @@
     <value>Pressão</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6904.24691, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7037.31226, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockLeftAutoHideToolStripMenuItem</value>
@@ -1224,14 +1203,17 @@
   <data name="chkSLE.Text" xml:space="preserve">
     <value>ESL</value>
   </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>613, 488</value>
+  <data name="&gt;&gt;TSB_Preview.Name" xml:space="preserve">
+    <value>TSB_Preview</value>
+  </data>
+  <data name="&gt;&gt;chkCritical.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;cbXAxisBasis.Name" xml:space="preserve">
     <value>cbXAxisBasis</value>
   </data>
-  <data name="&gt;&gt;tbP.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="tbdx.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="&gt;&gt;chkCritical.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1242,9 +1224,6 @@
   <data name="TSB_Print.Text" xml:space="preserve">
     <value>Print</value>
   </data>
-  <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
   <data name="RadioButton2.Location" type="System.Drawing.Point, System.Drawing">
     <value>195, 75</value>
   </data>
@@ -1254,29 +1233,29 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Tipo de diagrama</value>
   </data>
+  <data name="&gt;&gt;PanelCalc.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
+  </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6904.24691, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7037.31226, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="TSB_Print.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6904.24691, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;cbComp2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="DocumentToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 13</value>
   </data>
-  <data name="GridExpData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>611, 467</value>
+  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockRightAutoHideToolStripMenuItem</value>
   </data>
-  <data name="PanelCalc.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="GraphControl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8.25pt</value>
   </data>
   <data name="&gt;&gt;lblT.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -1293,8 +1272,11 @@
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Seleção de Objeto e Configurações</value>
   </data>
-  <data name="&gt;&gt;Label7.Name" xml:space="preserve">
-    <value>Label7</value>
+  <data name="TSB_Preview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1302,8 +1284,8 @@
   <data name="lblT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cbXAxisBasis.Items1" xml:space="preserve">
-    <value>Fração Mássica</value>
+  <data name="TSB_PrinterSetup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 13</value>
@@ -1311,29 +1293,26 @@
   <data name="GraphControl.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
   <data name="&gt;&gt;DockLeftToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>611, 467</value>
   </data>
-  <data name="&gt;&gt;RadioButton2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PanelCalc.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="RadioButton3.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+  <data name="&gt;&gt;cbComp1.Name" xml:space="preserve">
+    <value>cbComp1</value>
   </data>
   <data name="&gt;&gt;chkVLE.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbComp1.ZOrder" xml:space="preserve">
-    <value>27</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;lblT.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -1350,20 +1329,17 @@
   <data name="coly1.HeaderText" xml:space="preserve">
     <value>y1</value>
   </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 506</value>
+  <data name="&gt;&gt;FloatToolStripMenuItem.Name" xml:space="preserve">
+    <value>FloatToolStripMenuItem</value>
   </data>
-  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;RadioButton4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkCompareModels.Text" xml:space="preserve">
+    <value>Comparar Modelos</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 13</value>
   </data>
-  <data name="TSB_PageSetup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+  <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="LabelStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1395,20 +1371,14 @@
   <data name="&gt;&gt;colT.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1013, 538</value>
   </data>
-  <data name="&gt;&gt;cbXAxisBasis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
-  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="chkSLE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="TSB_Preview.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1428,11 +1398,11 @@
   <data name="Button2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+  <data name="rbEutectic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;RadioButton3.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="cbXAxisBasis.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 21</value>
@@ -1446,20 +1416,23 @@
   <data name="&gt;&gt;RadioButton2.Name" xml:space="preserve">
     <value>RadioButton2</value>
   </data>
-  <data name="Button2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Right</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
     <value>FaTabStripItem1</value>
   </data>
+  <data name="rbSolidSolution.Text" xml:space="preserve">
+    <value>Solução Sólida</value>
+  </data>
   <data name="DockLeftToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;chkVLE.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="DockTopAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Top Auto-Hide</value>
   </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="RadioButton4.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1467,8 +1440,8 @@
   <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="ToolStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Passo na Fração Molar</value>
@@ -1479,40 +1452,49 @@
   <data name="&gt;&gt;tbT.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tbdx.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="TSB_PageSetup.Text" xml:space="preserve">
+    <value>Page Setup</value>
   </data>
   <data name="TSB_Print.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="colP.HeaderText" xml:space="preserve">
-    <value>P</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
   </data>
   <data name="&gt;&gt;chkSLE.Name" xml:space="preserve">
     <value>chkSLE</value>
   </data>
-  <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="colP.HeaderText" xml:space="preserve">
+    <value>P</value>
   </data>
-  <data name="&gt;&gt;RadioButton1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStrip1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="lblP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 210</value>
+  <data name="&gt;&gt;DockTopToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockTopToolStripMenuItem</value>
   </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Gráfico</value>
+  <data name="&gt;&gt;PrintDialog1.Name" xml:space="preserve">
+    <value>PrintDialog1</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 78</value>
+  <data name="lblT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
   <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>611, 467</value>
+  </data>
+  <data name="GridExpData.Size" type="System.Drawing.Size, System.Drawing">
     <value>611, 467</value>
   </data>
   <data name="cbXAxisBasis.Items2" xml:space="preserve">
@@ -1521,8 +1503,8 @@
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
   </data>
-  <data name="&gt;&gt;FlowLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="coly1.ToolTipText" xml:space="preserve">
     <value>Compound 1 Mole Fraction in Vapor Phase</value>
@@ -1530,14 +1512,17 @@
   <data name="&gt;&gt;chkLLE.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 313</value>
+  </data>
+  <data name="&gt;&gt;check.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkCritical.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="&gt;&gt;cbComp1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -1545,8 +1530,8 @@
   <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
     <value>FaTabStripItem2</value>
   </data>
-  <data name="RadioButton2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7037.31226, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -1557,8 +1542,8 @@
   <data name="&gt;&gt;FlowLayoutPanel1.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="rbSolidSolution.Text" xml:space="preserve">
-    <value>Solução Sólida</value>
+  <data name="PanelCalc.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="lblP.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1569,8 +1554,8 @@
   <data name="tbT.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="tbP.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1578,17 +1563,26 @@
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RadioButton2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="TSB_Copy.Text" xml:space="preserve">
     <value>Copy Chart to Clipboard</value>
   </data>
   <data name="&gt;&gt;RadioButton4.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="RadioButton4.Text" xml:space="preserve">
-    <value>(P) x-y</value>
+  <data name="&gt;&gt;FlowLayoutPanel1.Name" xml:space="preserve">
+    <value>FlowLayoutPanel1</value>
   </data>
-  <data name="chkCompareModels.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label23.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;RadioButton2.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>679, 394</value>
@@ -1602,17 +1596,17 @@
   <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FlowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="TSB_Copy.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="rbEutectic.Text" xml:space="preserve">
     <value>Eutético</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Temperatura</value>
+  <data name="chkLLE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="RadioButton3.Text" xml:space="preserve">
-    <value>(T) x-y</value>
+  <data name="chkSLE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -1623,11 +1617,14 @@
   <data name="&gt;&gt;GroupBox6.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;RadioButton4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbPropPack.Parent" xml:space="preserve">
     <value>GroupBox6</value>
+  </data>
+  <data name="&gt;&gt;cbXAxisBasis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblT.Name" xml:space="preserve">
     <value>lblT</value>
@@ -1635,20 +1632,23 @@
   <data name="TSB_Preview.Text" xml:space="preserve">
     <value>Preview</value>
   </data>
+  <data name="&gt;&gt;cbComp1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
   <data name="RadioButton1.Text" xml:space="preserve">
     <value>T-x-y</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 313</value>
+  <data name="tbP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 207</value>
   </data>
   <data name="ToolStrip1.Text" xml:space="preserve">
     <value>ToolStrip1</value>
   </data>
-  <data name="cbComp1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 19</value>
+  <data name="RadioButton3.Text" xml:space="preserve">
+    <value>(T) x-y</value>
   </data>
   <data name="ToolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
