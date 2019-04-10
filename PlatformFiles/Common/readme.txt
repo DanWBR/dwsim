@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 4
+Version 5.7 Update 5
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 5
+
+- [NEW] Added Python standard libraries
+- [NEW] Enable/disable custom Touch Bar controls on macOS
+- [CHG] Electrolyte flash enhancements
+- [FIX] Fixed double conversion from string
+- [FIX] Fixed remaining CefSharp processes after shutdown (Classic UI)
+- [FIX] Fixed compound issues on Classic UI
 
 Version 5.7 Update 4
 

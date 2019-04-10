@@ -1,3 +1,12 @@
+Version 5.7 Update 5
+
+- [NEW] Added Python standard libraries
+- [NEW] Enable/disable custom Touch Bar controls on macOS
+- [CHG] Electrolyte flash enhancements
+- [FIX] Fixed double conversion from string
+- [FIX] Fixed remaining CefSharp processes after shutdown (Classic UI)
+- [FIX] Fixed compound issues on Classic UI
+
 Version 5.7 Update 4
 
 - [NEW] New syntax-highlighting script editors on macOS and Linux (New UI)
