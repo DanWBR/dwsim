@@ -724,7 +724,7 @@ Public Class DCCharacterizationWizard
             tmpcomp = subst.ConstantProperties
             form.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
             idx = form.FrmStSim1.AddCompToGrid(tmpcomp)
-            form.FrmStSim1.AddCompToSimulation(idx)
+            form.FrmStSim1.AddCompToSimulation(tmpcomp.Name)
         Next
 
         Dim ms As New Streams.MaterialStream("", "")

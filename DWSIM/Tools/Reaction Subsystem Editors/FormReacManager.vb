@@ -199,7 +199,7 @@ Public Class FormReacManager
                     Dim str As String = DWSIM.App.GetLocalString("Vocedeveadicionar") & vbCrLf & vbCrLf
                     Dim str2 As String = ""
                     Dim str3 As String = vbCrLf & DWSIM.App.GetLocalString("Vocedeveadicionar1")
-                    Dim i As Integer = 0, idx As Integer
+                    Dim i As Integer = 0
                     Do
                         str2 += "- " & (CStr(carray(i))) & vbCrLf
                         i += 1
@@ -215,13 +215,7 @@ Public Class FormReacManager
                                     MessageBox.Show("Component " & carray(i) & " is absent from the list of available components.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Else
                                     tmpcomp = Me.frmchild.Options.NotSelectedComponents(carray(i))
-                                    For Each r As DataGridViewRow In Me.frmchild.FrmStSim1.ogc1.Rows
-                                        If r.Cells(0).Value = tmpcomp.Name Then
-                                            idx = r.Index
-                                            Exit For
-                                        End If
-                                    Next
-                                    Me.frmchild.FrmStSim1.AddCompToSimulation(idx)
+                                    Me.frmchild.FrmStSim1.AddCompToSimulation(tmpcomp.Name)
                                 End If
                             End If
                             i += 1

@@ -40,8 +40,6 @@ Public Class FormSimulSettings
     Private prevsort As System.ComponentModel.ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
     Private prevcol As Integer = 1
 
-    Dim ACSC1 As AutoCompleteStringCollection
-
     Dim vdPP, vdSR As MessageBox()
 
     Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
@@ -110,24 +108,12 @@ Public Class FormSimulSettings
 
         If Not loaded Or reset Then
 
-            ACSC1 = New AutoCompleteStringCollection
-
             For Each comp In Me.FrmChild.Options.SelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
             Next
             For Each comp In Me.FrmChild.Options.NotSelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-                'For Each c As DataGridViewCell In Me.ogc1.Rows(idx).Cells
-                '    If comp.OriginalDB <> "Electrolytes" Then
-                '        If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
-                '            c.Style.ForeColor = Color.Red
-                '            c.ToolTipText = DWSIM.App.GetLocalString("CompMissingData")
-                '        End If
-                '    End If
-                'Next
             Next
-
-            'Me.TextBox1.AutoCompleteCustomSource = ACSC1
 
             Dim addobj As Boolean = True
 
@@ -910,14 +896,6 @@ Public Class FormSimulSettings
 
     Public Function AddCompToGrid(ByRef comp As BaseClasses.ConstantProperties) As Integer
 
-
-
-        'If Not initialized Then
-        '    Me.Visible = False
-        '    Me.Show()
-        '    Me.Visible = False
-        'End If
-
         Dim contains As Boolean = False
         Dim index As Integer = -1
         For Each r As DataGridViewRow In ogc1.Rows
@@ -933,18 +911,12 @@ Public Class FormSimulSettings
             Try
                 Dim r As New DataGridViewRow
                 translatedname = comp.Name
-                r.CreateCells(ogc1, New Object() {comp.Name, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                r.CreateCells(ogc1, New Object() {comp.Name, True, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                 ogc1.Rows.Add(r)
                 Return ogc1.Rows.Count - 1
             Catch ex As Exception
                 Console.WriteLine(ex.ToString)
                 Return -1
-            Finally
-                If ACSC1 Is Nothing Then ACSC1 = New AutoCompleteStringCollection
-                ACSC1.Add(translatedname)
-                ACSC1.Add(comp.CAS_Number)
-                ACSC1.Add(comp.Formula)
-                'Me.TextBox1.AutoCompleteCustomSource = ACSC1
             End Try
         Else
             Return index
@@ -1097,18 +1069,13 @@ Public Class FormSimulSettings
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             If Me.ogc1.SelectedCells.Count > 0 Then
-                Me.AddCompToSimulation(Me.ogc1.SelectedCells(0).RowIndex)
+                Me.AddCompToSimulation(Me.ogc1.Rows(Me.ogc1.SelectedCells(0).RowIndex).Cells(0).Value)
             End If
         Else
             If Me.ogc1.SelectedRows.Count > 0 Then
-                Me.AddCompToSimulation(Me.ogc1.SelectedRows(0).Index)
+                Me.AddCompToSimulation(Me.ogc1.SelectedRows(0).Cells(0).Value)
             End If
         End If
-        'If Me.ogc1.SelectedRows.Count > 0 Then
-        '    For Each r As DataGridViewRow In Me.ogc1.SelectedRows
-        '        Me.AddCompToSimulation(r.Index)
-        '    Next
-        'End If
     End Sub
 
     Sub AddCompToSimulation(ByVal compid As String)
@@ -1434,13 +1401,22 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
+        Dim compound As Interfaces.ICompoundConstantProperties
+        Dim compID As String = ""
         If DWSIM.App.IsRunningOnMono Then
-            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.AvailableCompounds(ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value)}
-            FrmChild.DisplayForm(f)
+            compID = ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value
         Else
-            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.AvailableCompounds(ogc1.SelectedRows(0).Cells(0).Value)}
-            FrmChild.DisplayForm(f)
+            compID = ogc1.SelectedRows(0).Cells(0).Value
         End If
+        If FrmChild.AvailableCompounds.ContainsKey(compID) Then
+            compound = Me.FrmChild.AvailableCompounds(compID)
+        ElseIf FrmChild.Options.SelectedComponents.ContainsKey(compID) Then
+            compound = Me.FrmChild.Options.SelectedComponents(compID)
+        ElseIf FrmChild.Options.NotSelectedComponents.ContainsKey(compID) Then
+            compound = Me.FrmChild.Options.NotSelectedComponents(compID)
+        End If
+        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = compound}
+        FrmChild.DisplayForm(f)
     End Sub
 
     Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
@@ -1598,6 +1574,12 @@ Public Class FormSimulSettings
         If ((e.ColumnIndex = colAdd.Index) AndAlso (e.RowIndex <> -1)) Then
             ogc1.EndEdit()
         End If
+
+    End Sub
+
+    Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        ogc1.Sort(ogc1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
 
     End Sub
 

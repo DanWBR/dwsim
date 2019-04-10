@@ -1754,7 +1754,7 @@ Public Class FormFlowsheet
                             End If
                         Next
                     End If
-                    Me.FrmStSim1.AddCompToSimulation(idx)
+                    Me.FrmStSim1.AddCompToSimulation(comp.Name)
                 End If
             Next
 

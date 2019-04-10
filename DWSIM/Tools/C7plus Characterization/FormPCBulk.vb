@@ -746,7 +746,7 @@ Public Class FormPCBulk
                                tmpcomp = subst.ConstantProperties
                                frm.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
                                idx = frm.FrmStSim1.AddCompToGrid(tmpcomp)
-                               frm.FrmStSim1.AddCompToSimulation(idx)
+                               frm.FrmStSim1.AddCompToSimulation(tmpcomp.Name)
                            Next
 
                            Dim myMStr As New Drawing.SkiaSharp.GraphicObjects.Shapes.MaterialStreamGraphic(100, 100, 20, 20)
