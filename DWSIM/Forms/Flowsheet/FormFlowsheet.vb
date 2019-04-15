@@ -2914,7 +2914,7 @@ Public Class FormFlowsheet
                                                                                 Me.FormSurface.UpdateSelectedObject()
                                                                             End Sub)
                                                             End If
-                                                        End Sub)
+                                                        End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
     End Sub
 
     Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
@@ -2965,7 +2965,7 @@ Public Class FormFlowsheet
                                                                                 Me.FormSurface.UpdateSelectedObject()
                                                                             End Sub)
                                                             End If
-                                                        End Sub)
+                                                        End Sub, My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.AltKeyDown)
     End Sub
 
     Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
