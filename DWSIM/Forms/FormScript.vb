@@ -119,17 +119,23 @@ Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 
         Dim opts As New Dictionary(Of String, Object)()
         opts("Frames") = Microsoft.Scripting.Runtime.ScriptingRuntimeHelpers.True
+        opts("Debug") = Microsoft.Scripting.Runtime.ScriptingRuntimeHelpers.True
+
         engine = IronPython.Hosting.Python.CreateEngine(opts)
+
         Dim paths(My.Settings.ScriptPaths.Count - 1) As String
+
         My.Settings.ScriptPaths.CopyTo(paths, 0)
         Try
             engine.SetSearchPaths(paths)
         Catch ex As Exception
         End Try
+
         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
         engine.Runtime.LoadAssembly(GetType(Thermodynamics.BaseClasses.ConstantProperties).Assembly)
         engine.Runtime.LoadAssembly(GetType(Drawing.SkiaSharp.GraphicObjects.GraphicObject).Assembly)
         engine.Runtime.LoadAssembly(GetType(Drawing.SkiaSharp.GraphicsSurface).Assembly)
+
         If My.Application.CommandLineMode Then
             engine.Runtime.IO.SetOutput(Console.OpenStandardOutput, Console.OutputEncoding)
         Else
@@ -139,13 +145,24 @@ Imports DWSIM.SharedClasses.DWSIM.Flowsheet
         scope.SetVariable("Plugins", My.Application.UtilityPlugins)
         scope.SetVariable("Flowsheet", fsheet)
         scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
+
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
+
         scope.SetVariable("Solver", Solver)
         For Each obj As SharedClasses.UnitOperations.BaseClass In fsheet.Collections.FlowsheetObjectCollection.Values
             scope.SetVariable(obj.GraphicObject.Tag.Replace("-", "_"), obj)
         Next
+
         Dim txtcode As String = scripttext
+
         Dim source As Microsoft.Scripting.Hosting.ScriptSource = engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
+
+        IronPython.Hosting.Python.SetTrace(engine, Function(frame As IronPython.Runtime.Exceptions.TraceBackFrame, result As String, payload As Object)
+
+                                                       Return Nothing
+
+                                                   End Function)
+
         Try
             source.Execute(scope)
         Catch ex As Exception

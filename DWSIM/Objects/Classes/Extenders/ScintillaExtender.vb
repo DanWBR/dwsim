@@ -64,13 +64,51 @@ Module scintillaExtender
         scintilla.SetProperty("fold", "1")
 
         scintilla.Margins(0).Width = 30
+        scintilla.Margins(0).Sensitive = False
+        scintilla.Margins(0).Type = MarginType.Number
+
+        scintilla.Margins(1).Width = 16
+        scintilla.Margins(1).Sensitive = True
+        scintilla.Margins(1).Type = MarginType.Symbol
+        scintilla.Margins(1).Mask = Not Marker.MaskFolders
+        scintilla.Margins(1).Cursor = MarginCursor.Arrow
+
+        Dim marker1 = scintilla.Markers(3)
+        marker1.Symbol = MarkerSymbol.Circle
+        marker1.SetBackColor(Color.DeepSkyBlue)
+        marker1.SetForeColor(Color.DeepSkyBlue)
+
+        AddHandler scintilla.MarginClick, Sub(sender, e)
+
+                                              If (e.Margin = 1) Then
+
+                                                  ' Do we have a marker for this line?
+                                                  Const mask As UInteger = (1 << 3)
+
+                                                  Dim line = scintilla.Lines(scintilla.LineFromPosition(e.Position))
+
+                                                  If ((line.MarkerGet And mask) > 0) Then
+                                                      ' Remove existing bookmark
+                                                      line.MarkerDelete(3)
+                                                  Else
+                                                      ' Add bookmark
+                                                      line.MarkerAdd(3)
+                                                  End If
+
+                                              End If
+
+                                          End Sub
 
         ' Use margin 2 for fold markers
 
-        scintilla.Margins(1).Type = MarginType.Symbol
-        scintilla.Margins(1).Mask = Marker.MaskFolders
-        scintilla.Margins(1).Sensitive = True
-        scintilla.Margins(1).Width = 20
+        scintilla.Margins(2).Type = MarginType.Symbol
+        scintilla.Margins(2).Mask = Marker.MaskFolders
+        scintilla.Margins(2).Sensitive = True
+        scintilla.Margins(2).Width = 20
+
+        ' Enable automatic folding
+
+        scintilla.AutomaticFold = (AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change)
 
         ' Reset folder markers
 
@@ -90,10 +128,6 @@ Module scintillaExtender
         scintilla.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
         scintilla.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
         scintilla.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
-
-        ' Enable automatic folding
-
-        scintilla.AutomaticFold = (AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change)
 
         ' Set the styles
 
