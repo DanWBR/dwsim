@@ -122,25 +122,55 @@ Public Class AboutBox
             .Add(New Object() {"IPOPT", "3.9.2", "2011", "COIN-OR", "https://projects.coin-or.org/Ipopt", "Eclipse Public License", "http://www.eclipse.org/legal/epl-v10.html"})
             .Add(New Object() {"lp_solve", "5.5", "2009", "Michel Berkelaar, Kjell Eikland, Peter Notebaert", "http://lpsolve.sourceforge.net", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"CoolProp", "6.0.0", "2016-2018", "Ian H. Bell", "http://wwww.coolprop.org", "MIT-style License", "https://github.com/ibell/coolprop/blob/master/LICENSE"})
-            .Add(New Object() {"ChemSep Database", "7.30", "2018", "Harry Kooijman, Ross Taylor", "http://www.chemsep.org", "Perl Artistic License v2", "http://www.perlfoundation.org/artistic_license_2_0"})
+            .Add(New Object() {"ChemSep Database", "8.01", "2018", "Harry Kooijman, Ross Taylor", "http://www.chemsep.org", "Perl Artistic License v2", "http://www.perlfoundation.org/artistic_license_2_0"})
             .Add(New Object() {"Flee", "0.9.14", "2009", "Eugene Ciloci", "https://flee.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"CUDAfy", "1.25.4963.10126", "2013", "Hybrid DSP", "https://cudafy.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"DotNumerics", "1.0", "2009", "Jose Antonio De Santiago Castillo", "http://www.dotnumerics.com", "GPLv3", "http://www.gnu.org/licenses/gpl.html"})
             .Add(New Object() {"CSIPOPT", "1.0", "2012", "Anders Gustafsson, Cureos AB", "https://github.com/cureos/csipopt", "Eclipse Public License", "http://www.eclipse.org/legal/epl-v10.html"})
             .Add(New Object() {"NetOffice", "1.6", "2011", "Sebastian Lange", "https://netoffice.codeplex.com/", "MIT License", "https://netoffice.codeplex.com/license"})
             .Add(New Object() {"GemBox.Spreadsheet", "39.3.30.1037", "2015", "GemBox Software", "http://www.gemboxsoftware.com/spreadsheet/overview", "EULA", "http://www.gemboxsoftware.com/Spreadsheet/Eula.rtf"})
-            .Add(New Object() {"FileHelpers", "3.2.4", "2018", "Marcos Meli", "https://sourceforge.net/projects/filehelpers", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
-            .Add(New Object() {"SharpZipLib", "0.85.4.369", "2010", "IC#Code", "http://www.icsharpcode.net/OpenSource/SharpZipLib", "GPLv2", "http://www.gnu.org/licenses/gpl.html"})
             .Add(New Object() {"Indigo", "1.1", "2013", "GGA Software Services LLC", "http://www.ggasoftware.com/opensource/indigo", "GPLv3", "http://www.gnu.org/licenses/gpl.html"})
             .Add(New Object() {"Nini", "1.1", "2010", "Brent R. Matzelle", "https://sourceforge.net/projects/nini", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
-            .Add(New Object() {"SyntaxBox", "1.4.10.17492", "2010", "Roger Alsing", "https://syntaxbox.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
-            .Add(New Object() {"scintillaNET", "3.5.1.0", "2015", "Jacob Slusser", "https://github.com/jacobslusser/scintillaNET", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"Jolt.NET", "0.4", "2009", "Steve Guidi", "https://github.com/jacobslusser/scintillaNET", "New BSD License (BSD)", "http://jolt.codeplex.com/license"})
             .Add(New Object() {"Yeppp!", "1.0.0.1", "2014", "Marat Dukhan", "http://www.yeppp.info", "Yeppp! License", "http://www.yeppp.info/resources/yeppp-license.txt"})
             .Add(New Object() {"ExcelDNA", "0.34", "2017", "Govert van Drimmelen", "http://excel-dna.net/", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"AODL", "1.4.0.3", "2011", "Chris Constantin", "https://bitbucket.org/chrisc/aodl", "Apache License v2", "https://wiki.openoffice.org/wiki/OpenOffice.org_Wiki:Copyrights"})
         End With
         Me.DataGridView1.Sort(Me.DataGridView1.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+
+        With Me.DataGridView2.Rows
+            .Clear()
+            .Add(New Object() {"cef.redist.x64", "3.3497.1841", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"})
+            .Add(New Object() {"cef.redist.x86", "3.3497.1841", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"})
+            .Add(New Object() {"CefSharp.Common", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"})
+            .Add(New Object() {"CefSharp.WinForms", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"})
+            .Add(New Object() {"DynamicLanguageRuntime", "1.2.2", "https://github.com/IronLanguages/dlr/blob/master/LICENSE"})
+            .Add(New Object() {"Eto.Forms", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"})
+            .Add(New Object() {"Eto.OxyPlot", "1.2.0-beta", ""})
+            .Add(New Object() {"Eto.OxyPlot.Wpf", "1.2.0-beta", ""})
+            .Add(New Object() {"Eto.Platform.Gtk2", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"})
+            .Add(New Object() {"Eto.Platform.Windows", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"})
+            .Add(New Object() {"Eto.Platform.Wpf", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"})
+            .Add(New Object() {"Eto.Platform.XamMac2", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"})
+            .Add(New Object() {"IronPython", "2.7.9", "https://github.com/IronLanguages/ironpython2/blob/master/LICENSE"})
+            .Add(New Object() {"IronPython.StdLib", "2.7.9", "http://docs.python.org/license.html"})
+            .Add(New Object() {"jacobslusser.ScintillaNET", "3.6.3", ""})
+            .Add(New Object() {"MathNet.Numerics", "4.7.0", "https://numerics.mathdotnet.com/License.html"})
+            .Add(New Object() {"Newtonsoft.Json", "8.0.3", "https://raw.github.com/JamesNK/Newtonsoft.Json/master/LICENSE.md"})
+            .Add(New Object() {"OpenTK", "3.0.", "https://github.com/opentk/opentk/blob/master/License.txt"})
+            .Add(New Object() {"OpenTK.GLControl", "3.0.1", "http://github.com/opentk/opentk/blob/master/License.txt"})
+            .Add(New Object() {"OxyPlot.Core", "2.0.0-unstable0956", "https://raw.githubusercontent.com/oxyplot/oxyplot/master/LICENSE"})
+            .Add(New Object() {"OxyPlot.Wpf", "2.0.0-unstable0956", "https://raw.githubusercontent.com/oxyplot/oxyplot/master/LICENSE"})
+            .Add(New Object() {"SharpDX", "4.0.1", "http://sharpdx.org/License.txt"})
+            .Add(New Object() {"SharpDX.Direct2D1", "4.0.1", "http://sharpdx.org/License.txt"})
+            .Add(New Object() {"SharpDX.DXGI", "4.0.1", "http://sharpdx.org/License.txt"})
+            .Add(New Object() {"SharpDX.Mathematics", "4.0.1", "http://sharpdx.org/License.txt"})
+            .Add(New Object() {"SharpZipLib", "1.1.0", "https://github.com/icsharpcode/SharpZipLib/blob/master/LICENSE.txt"})
+            .Add(New Object() {"SkiaSharp", "1.6.", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"})
+            .Add(New Object() {"SkiaSharp.Extended", "1.6.", "https://github.com/mono/SkiaSharp.Extended/blob/master/LICENSE"})
+            .Add(New Object() {"System.ComponentModel", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"})
+            .Add(New Object() {"System.Runtime.Serialization.Primitives", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"})
+        End With
 
         'get DWSIM components' versions
 
@@ -417,7 +447,7 @@ Public Class AboutBox
     ''' <param name="a">Assembly to get build date for</param>
     ''' <param name="ForceFileDate">Don't attempt to use the build number to calculate the date</param>
     ''' <returns>DateTime this assembly was last built</returns>
-    Private Shared Function AssemblyBuildDate(ByVal a As System.Reflection.Assembly, _
+    Private Shared Function AssemblyBuildDate(ByVal a As System.Reflection.Assembly,
         Optional ByVal ForceFileDate As Boolean = False) As DateTime
 
         Dim AssemblyVersion As System.Version = a.GetName.Version
@@ -426,8 +456,8 @@ Public Class AboutBox
         If ForceFileDate Then
             dt = AssemblyLastWriteTime(a)
         Else
-            dt = CType("01/01/2000", DateTime). _
-                AddDays(AssemblyVersion.Build). _
+            dt = CType("01/01/2000", DateTime).
+                AddDays(AssemblyVersion.Build).
                 AddSeconds(AssemblyVersion.Revision * 2)
             If TimeZone.IsDaylightSavingTime(dt, TimeZone.CurrentTimeZone.GetDaylightChanges(dt.Year)) Then
                 dt = dt.AddHours(1)

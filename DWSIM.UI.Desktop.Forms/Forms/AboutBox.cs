@@ -19,6 +19,7 @@ namespace DWSIM.UI.Forms.Forms
         private double sf = GlobalSettings.Settings.UIScalingFactor;
 
         private ObservableCollection<ComponentInfo> components = new ObservableCollection<ComponentInfo>();
+        private ObservableCollection<ComponentInfo> componentsn = new ObservableCollection<ComponentInfo>();
 
         public AboutBox(): base()
         {
@@ -48,6 +49,7 @@ namespace DWSIM.UI.Forms.Forms
             ShowInTaskbar = false;
 
             AddComponentInfo();
+            AddComponentInfoN();
 
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
@@ -103,6 +105,8 @@ namespace DWSIM.UI.Forms.Forms
                     case "17.0.0.0": osinfo = "macOS High Sierra (v10.13.0)"; break;
                     case "17.4.0.0": osinfo = "macOS High Sierra (v10.13.3)"; break;
                     case "18.0.0.0": osinfo = "macOS Mojave (v10.14.0)"; break;
+                    case "18.2.0.0": osinfo = "macOS Mojave (v10.14.1-3)"; break;
+                    case "18.5.0.0": osinfo = "macOS Mojave (v10.14.4)"; break;
                     default: osinfo = "macOS (v" + osversion + ")"; break;
                 }
             }
@@ -125,6 +129,7 @@ namespace DWSIM.UI.Forms.Forms
             container1.CreateAndAddLabelRow("DWSIM is released under the terms of the GNU General Public License (GPL) version 3.");
             
             var listcontainer = new GridView { DataStore = components, RowHeight = (int)(sf * 20) };
+            var listcontainern = new GridView { DataStore = componentsn, RowHeight = (int)(sf * 20) };
 
             var col1 = new GridColumn
             {
@@ -176,6 +181,29 @@ namespace DWSIM.UI.Forms.Forms
             col1f.AutoSize = true;
             listcontainer.Columns.Add(col1f);
 
+
+            var col1n = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<ComponentInfo, string>(r => r.Name) },
+                HeaderText = "Name"
+            };
+            col1n.AutoSize = true;
+            listcontainern.Columns.Add(col1n);
+            var col1an = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<ComponentInfo, string>(r => r.Version) },
+                HeaderText = "Version"
+            };
+            col1an.AutoSize = true;
+            listcontainern.Columns.Add(col1an);
+            var col1fn = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<ComponentInfo, string>(r => r.LicenseText) },
+                HeaderText = "License Text"
+            };
+            col1fn.AutoSize = true;
+            listcontainern.Columns.Add(col1fn);
+            
             string gpltext;
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.UI.Forms.Resources.TextFiles.gpl-3.0.txt"))
             using (StreamReader reader = new StreamReader(stream))
@@ -183,18 +211,20 @@ namespace DWSIM.UI.Forms.Forms
                 gpltext = reader.ReadToEnd();
             }
 
-            var txt1 = new TextArea { Text = gpltext, ReadOnly = true };
+            var txt1 = new TextArea { Text = gpltext, ReadOnly = true, Font = Fonts.Monospace(10.0f) };
 
             var t1 = new TableLayout(new TableRow(txt1));
 
             var tab1 = new TabPage { Content = container1, Text = "General Information" };
             var tab2 = new TabPage { Content = new Scrollable { Content = t1 }, Text = "DWSIM License" };
             var tab3 = new TabPage { Content = new Scrollable { Content = listcontainer }, Text = "External Components" };
+            var tab4 = new TabPage { Content = new Scrollable { Content = listcontainern }, Text = "NuGet Packages" };
 
             var tabc = new TabControl();
             tabc.Pages.Add(tab1);
             tabc.Pages.Add(tab2);
             tabc.Pages.Add(tab3);
+            tabc.Pages.Add(tab4);
 
             var tablecontainer = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
 
@@ -223,6 +253,42 @@ namespace DWSIM.UI.Forms.Forms
             components.Add(new ComponentInfo("SkiaSharp", "1.56.0", "2018", "Xamarin team", "https://github.com/mono/SkiaSharp/", "MIT License", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
         }
 
+        private void AddComponentInfoN()
+        {
+           
+            componentsn.Add(new ComponentInfo("cef.redist.x64", "3.3497.1841", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("cef.redist.x86", "3.3497.1841", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("CefSharp.Common", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("CefSharp.WinForms", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("DynamicLanguageRuntime", "1.2.2", "https://github.com/IronLanguages/dlr/blob/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("Eto.Forms", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("Eto.OxyPlot", "1.2.0-beta", ""));
+            componentsn.Add(new ComponentInfo("Eto.OxyPlot.Wpf", "1.2.0-beta", ""));
+            componentsn.Add(new ComponentInfo("Eto.Platform.Gtk2", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("Eto.Platform.Windows", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("Eto.Platform.Wpf", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("Eto.Platform.XamMac2", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("IronPython", "2.7.9", "https://github.com/IronLanguages/ironpython2/blob/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("IronPython.StdLib", "2.7.9", "http://docs.python.org/license.html"));
+            componentsn.Add(new ComponentInfo("jacobslusser.ScintillaNET", "3.6.3", ""));
+            componentsn.Add(new ComponentInfo("MathNet.Numerics", "4.7.0", "https://numerics.mathdotnet.com/License.html"));
+            componentsn.Add(new ComponentInfo("Newtonsoft.Json", "8.0.3", "https://raw.github.com/JamesNK/Newtonsoft.Json/master/LICENSE.md"));
+            componentsn.Add(new ComponentInfo("OpenTK", "3.0.", "http://github.com/opentk/opentk/blob/master/License.txt"));
+            componentsn.Add(new ComponentInfo("OpenTK.GLControl", "3.0.1", "http://github.com/opentk/opentk/blob/master/License.txt"));
+            componentsn.Add(new ComponentInfo("OxyPlot.Core", "2.0.0-unstable0956", "https://raw.githubusercontent.com/oxyplot/oxyplot/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("OxyPlot.Wpf", "2.0.0-unstable0956", "https://raw.githubusercontent.com/oxyplot/oxyplot/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("SharpDX", "4.0.1", "http://sharpdx.org/License.txt"));
+            componentsn.Add(new ComponentInfo("SharpDX.Direct2D1", "4.0.1", "http://sharpdx.org/License.txt"));
+            componentsn.Add(new ComponentInfo("SharpDX.DXGI", "4.0.1", "http://sharpdx.org/License.txt"));
+            componentsn.Add(new ComponentInfo("SharpDX.Mathematics", "4.0.1", "http://sharpdx.org/License.txt"));
+            componentsn.Add(new ComponentInfo("SharpZipLib", "1.1.0", "https://github.com/icsharpcode/SharpZipLib/blob/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("SkiaSharp", "1.6.", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
+            componentsn.Add(new ComponentInfo("SkiaSharp.Extended", "1.6.", "https://github.com/mono/SkiaSharp.Extended/blob/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("System.ComponentModel", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
+            componentsn.Add(new ComponentInfo("System.Runtime.Serialization.Primitives", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
+
+        }
+
         public class ComponentInfo
         {
             public ComponentInfo(string name, string version, string year, string copyright, string website, string license, string licensetext)
@@ -235,7 +301,14 @@ namespace DWSIM.UI.Forms.Forms
                 License = license;
                 LicenseText = licensetext;
             }
-    
+
+            public ComponentInfo(string name, string version, string licensetext)
+            {
+                Name = name;
+                Version = version;
+                LicenseText = licensetext;
+            }
+
             public string Name { get; set; }
 
             public string Version { get; set; }
