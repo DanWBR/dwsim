@@ -11593,6 +11593,16 @@ Final3:
             Return arr2
         End Function
 
+        Public Overrides Function ToString() As String
+
+            If ComponentName <> "" Then
+                Return ComponentName
+            Else
+                Return MyBase.ToString
+            End If
+
+        End Function
+
     End Class
 
     ''' <summary>

@@ -456,7 +456,7 @@ Public Class FormFlowsheet
                                         End If
                                     End If
                                     If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
-                                        FormScript.RunScript_IronPython(scr.ScriptText, Me)
+                                        FormScript.RunScript_IronPython(scr.ScriptText, Me, Nothing, Nothing)
                                     Else
                                         FormScript.RunScript_PythonNET(scr.ScriptText, Me)
                                     End If

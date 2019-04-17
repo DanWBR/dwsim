@@ -184,6 +184,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AeroWizard.dll</HintPath>
     </Reference>
+    <Reference Include="Aga.Controls">
+      <HintPath>References\Aga.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="AODL, Version=1.2.0.1, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AODL.dll</HintPath>
@@ -229,6 +232,9 @@
     </Reference>
     <Reference Include="GenericDictionaryEditor">
       <HintPath>References\GenericDictionaryEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.8.14.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.14\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -830,6 +836,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
+    <Compile Include="Objects\Classes\TreeViewModels\BaseItem.vb" />
+    <Compile Include="Objects\Classes\TreeViewModels\TreeModel.vb" />
     <Compile Include="Tools\Assay Manager\FormAssayManager.Designer.vb">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </Compile>
@@ -2078,6 +2086,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\tag.png" />
     <None Include="Resources\texteditor.png" />
     <None Include="Resources\textfield_rename.png" />
     <None Include="Resources\text_letter_omega.png" />
@@ -2690,6 +2699,15 @@
     <Content Include="Lib\_weakrefset.py" />
     <Content Include="Lib\__future__.py" />
     <Content Include="Lib\__phello__.foo.py" />
+    <None Include="Resources\bullet_black.png" />
+    <None Include="Resources\bullet_blue.png" />
+    <None Include="Resources\bullet_green.png" />
+    <None Include="Resources\bullet_orange.png" />
+    <None Include="Resources\bullet_pink.png" />
+    <None Include="Resources\bullet_purple.png" />
+    <None Include="Resources\bullet_red.png" />
+    <None Include="Resources\bullet_yellow.png" />
+    <EmbeddedResource Include="References\WebKI.xml" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -2805,6 +2823,7 @@
     <None Include="Resources\patreon.png" />
     <None Include="Resources\patreon.jpg" />
     <None Include="Resources\labicon.png" />
+    <None Include="Resources\play_blue.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

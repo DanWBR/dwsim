@@ -72,6 +72,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Sub
 
+        Public Overrides Function ToString() As String
+            If Name <> "" Then
+                Return Name
+            Else
+                Return MyBase.ToString()
+            End If
+        End Function
+
         Public Shared Function GetDefaultSettings() As Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
