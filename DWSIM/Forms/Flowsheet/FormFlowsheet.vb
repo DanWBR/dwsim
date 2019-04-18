@@ -104,6 +104,8 @@ Public Class FormFlowsheet
 
     Private listeningaction As Action(Of String, Interfaces.IFlowsheet.MessageType)
 
+    Public Property SupressMessages As Boolean = False
+
 #End Region
 
 #Region "    Form Event Handlers "
@@ -565,7 +567,9 @@ Public Class FormFlowsheet
 
     Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As SharedClasses.DWSIM.Flowsheet.MessageType, Optional ByVal exceptionID As String = "")
 
-        If texto.Trim <> "" Then
+        If Not SupressMessages Then
+
+            If texto.Trim <> "" Then
 
             Dim frsht As FormFlowsheet
             If Not Me.MasterFlowsheet Is Nothing And Me.RedirectMessages Then
@@ -629,6 +633,8 @@ Public Class FormFlowsheet
                                                  End Sub))
 
             End If
+
+        End If
 
         End If
 
@@ -2917,6 +2923,12 @@ Public Class FormFlowsheet
                                                         End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
     End Sub
 
+    Public Sub SolveFlowsheet2()
+
+        tsbCalcF_Click(Me, New EventArgs)
+
+    End Sub
+
     Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
         GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
         tsbCalc.Enabled = tsbAtivar.Checked
@@ -2930,10 +2942,6 @@ Public Class FormFlowsheet
         If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
             GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
         End If
-    End Sub
-
-    Private Sub tsbSimultAdjustSolver_Click(sender As Object, e As EventArgs)
-
     End Sub
 
     Public Sub tsbSimultAdjustSolver_CheckedChanged(sender As Object, e As EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
