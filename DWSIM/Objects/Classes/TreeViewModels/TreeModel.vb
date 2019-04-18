@@ -127,7 +127,35 @@ Public Class TypeBrowserModel
 
                     Try
 
-                        If TryCast(parent.ItemObject, IList) IsNot Nothing Then
+                        If TryCast(parent.ItemObject, System.Dynamic.ExpandoObject) IsNot Nothing Then
+
+                            Dim col = DirectCast(parent.ItemObject, System.Dynamic.ExpandoObject)
+
+                            For Each item In col
+
+                                If item.Value IsNot Nothing Then
+
+                                    Dim nitem = New TreeNodeItem(item.Key, parent, Me)
+
+                                    With nitem
+
+                                        .ItemOwnerObject = parent.ItemObject
+                                        .ItemMemberInfo = parent.ItemMemberInfo
+                                        .ItemObject = item.Value
+                                        .ItemValue = item.Value.ToString
+                                        .ItemType = item.Value.GetType.ToString
+
+                                    End With
+
+                                    items.Add(nitem)
+
+                                End If
+
+                            Next
+
+                            items = items.OrderBy(Function(x) x.ItemName).ToList
+
+                        ElseIf TryCast(parent.ItemObject, IList) IsNot Nothing Then
 
                             Dim col = DirectCast(parent.ItemObject, IList)
 

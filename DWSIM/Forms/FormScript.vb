@@ -99,7 +99,7 @@ Imports IronPython.Hosting
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    RunScript_IronPython(script, fc, Nothing, Nothing)
+                    RunScript_IronPython(script, fc, Nothing)
                 Else
                     RunScript_PythonNET(script, fc)
                 End If
@@ -107,7 +107,7 @@ Imports IronPython.Hosting
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    RunScript_IronPython(script, fc, Nothing, Nothing)
+                    RunScript_IronPython(script, fc, Nothing)
                 Else
                     RunScript_PythonNET(script, fc)
                 End If
@@ -116,7 +116,7 @@ Imports IronPython.Hosting
 
     End Sub
 
-    Public Shared Sub RunScript_IronPython(scripttext As String, fsheet As FormFlowsheet, breakpoints As List(Of Integer), debuggingstep As Action(Of IronPython.Runtime.Exceptions.TraceBackFrame))
+    Public Shared Sub RunScript_IronPython(scripttext As String, fsheet As FormFlowsheet, debuggingstep As Action(Of IronPython.Runtime.Exceptions.TraceBackFrame))
 
         Dim scope As Microsoft.Scripting.Hosting.ScriptScope
         Dim engine As Microsoft.Scripting.Hosting.ScriptEngine
@@ -788,7 +788,7 @@ Imports IronPython.Hosting
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing, Nothing))
+                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing))
                 Else
                     Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
                 End If
@@ -796,7 +796,7 @@ Imports IronPython.Hosting
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing, Nothing))
+                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing))
                 Else
                     Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
                 End If
@@ -821,8 +821,6 @@ Imports IronPython.Hosting
 
             If interp = 0 Then
 
-                Dim breakpoints As List(Of Integer) = scripteditor.txtScript.GetBookmarks
-
                 Dim tv = scripteditor.tvVariables
 
                 scripteditor.SplitContainer1.Panel2Collapsed = False
@@ -830,47 +828,51 @@ Imports IronPython.Hosting
                 CurrentlyDebugging = True
                 btnRunDebug.ToolTipText = "Continue Debugging"
 
-                Dim t = Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, breakpoints, Sub(frame)
+                Dim t = Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Sub(frame)
 
-                                                                                                      If breakpoints.Contains(frame.f_lineno) Then
+                                                                                         Dim breakpoints As New List(Of Integer)
 
-                                                                                                          DebuggingPaused = True
+                                                                                         Me.UIThreadInvoke(Sub() breakpoints = scripteditor.txtScript.GetBookmarks)
 
-                                                                                                          Me.UIThreadInvoke(Sub()
+                                                                                         If breakpoints.Contains(frame.f_lineno) Then
 
-                                                                                                                                scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(4)
-                                                                                                                                scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(5)
-                                                                                                                                scripteditor.txtScript.Lines(frame.f_lineno - 1).Goto()
+                                                                                             DebuggingPaused = True
 
-                                                                                                                                Dim vars As New List(Of Object)
-                                                                                                                                Dim names As New List(Of String)
-                                                                                                                                For Each item In frame.f_globals
-                                                                                                                                    names.Add(item.Key)
-                                                                                                                                    vars.Add(item.Value)
-                                                                                                                                Next
+                                                                                             Me.UIThreadInvoke(Sub()
 
-                                                                                                                                tv.Model = New TypeBrowserModel(vars, names)
+                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(4)
+                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(5)
+                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).Goto()
 
-                                                                                                                            End Sub)
+                                                                                                                   Dim vars As New List(Of Object)
+                                                                                                                   Dim names As New List(Of String)
+                                                                                                                   For Each item In frame.f_globals
+                                                                                                                       names.Add(item.Key)
+                                                                                                                       vars.Add(item.Value)
+                                                                                                                   Next
 
-                                                                                                          While DebuggingPaused
+                                                                                                                   tv.Model = New TypeBrowserModel(vars, names)
 
-                                                                                                              Thread.Sleep(100)
+                                                                                                               End Sub)
 
-                                                                                                          End While
+                                                                                             While DebuggingPaused
 
-                                                                                                          Me.UIThreadInvoke(Sub()
+                                                                                                 Thread.Sleep(100)
 
-                                                                                                                                scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
-                                                                                                                                scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
+                                                                                             End While
 
-                                                                                                                                tv.Model = Nothing
+                                                                                             Me.UIThreadInvoke(Sub()
 
-                                                                                                                            End Sub)
+                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
+                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
 
-                                                                                                      End If
+                                                                                                                   tv.Model = Nothing
 
-                                                                                                  End Sub))
+                                                                                                               End Sub)
+
+                                                                                         End If
+
+                                                                                     End Sub))
 
                 t.ContinueWith(Sub()
                                    UIThread(Sub()
