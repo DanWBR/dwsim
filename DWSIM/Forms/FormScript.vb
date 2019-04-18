@@ -116,7 +116,7 @@ Imports IronPython.Hosting
 
     End Sub
 
-    Public Shared Sub RunScript_IronPython(scripttext As String, fsheet As FormFlowsheet, breakpoints As List(Of Integer), debuggingstep As Action(Of IronPython.Runtime.Exceptions.TraceBackFrame, List(Of Object), List(Of String)))
+    Public Shared Sub RunScript_IronPython(scripttext As String, fsheet As FormFlowsheet, breakpoints As List(Of Integer), debuggingstep As Action(Of IronPython.Runtime.Exceptions.TraceBackFrame))
 
         Dim scope As Microsoft.Scripting.Hosting.ScriptScope
         Dim engine As Microsoft.Scripting.Hosting.ScriptEngine
@@ -181,7 +181,7 @@ Imports IronPython.Hosting
 
             var = Function(frame As IronPython.Runtime.Exceptions.TraceBackFrame, result As String, payload As Object)
 
-                      debuggingstep.Invoke(frame, vars, names)
+                      debuggingstep.Invoke(frame)
 
                       Return var
 
@@ -830,7 +830,7 @@ Imports IronPython.Hosting
                 CurrentlyDebugging = True
                 btnRunDebug.ToolTipText = "Continue Debugging"
 
-                Dim t = Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, breakpoints, Sub(frame, vars, names)
+                Dim t = Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, breakpoints, Sub(frame)
 
                                                                                                       If breakpoints.Contains(frame.f_lineno) Then
 
@@ -841,6 +841,13 @@ Imports IronPython.Hosting
                                                                                                                                 scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(4)
                                                                                                                                 scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(5)
                                                                                                                                 scripteditor.txtScript.Lines(frame.f_lineno - 1).Goto()
+
+                                                                                                                                Dim vars As New List(Of Object)
+                                                                                                                                Dim names As New List(Of String)
+                                                                                                                                For Each item In frame.f_globals
+                                                                                                                                    names.Add(item.Key)
+                                                                                                                                    vars.Add(item.Value)
+                                                                                                                                Next
 
                                                                                                                                 tv.Model = New TypeBrowserModel(vars, names)
 
@@ -866,8 +873,11 @@ Imports IronPython.Hosting
                                                                                                   End Sub))
 
                 t.ContinueWith(Sub()
-                                   CurrentlyDebugging = False
-                                   btnRunDebug.ToolTipText = "Debug Script (Async)"
+                                   UIThread(Sub()
+                                                CurrentlyDebugging = False
+                                                btnRunDebug.ToolTipText = "Debug Script (Async)"
+                                                scripteditor.SplitContainer1.Panel2Collapsed = True
+                                            End Sub)
                                End Sub)
 
             Else

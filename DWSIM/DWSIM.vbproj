@@ -2708,6 +2708,8 @@
     <None Include="Resources\bullet_red.png" />
     <None Include="Resources\bullet_yellow.png" />
     <EmbeddedResource Include="References\WebKI.xml" />
+    <None Include="Resources\beer_48.png" />
+    <None Include="Resources\app_48.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -2760,6 +2762,7 @@
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />
     <None Include="Resources\fast_forward.png" />
+    <None Include="Resources\folder_add_48.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -2824,6 +2827,7 @@
     <None Include="Resources\patreon.jpg" />
     <None Include="Resources\labicon.png" />
     <None Include="Resources\play_blue.png" />
+    <None Include="Resources\paper&amp;pencil_48.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
@@ -2996,9 +3000,6 @@
     <EmbeddedResource Include="Forms\FormSimulSettings.es.resx">
       <DependentUpon>FormSimulSettings.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWelcome.de.resx">
-      <DependentUpon>FormWelcome.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUnhandledException.de.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>

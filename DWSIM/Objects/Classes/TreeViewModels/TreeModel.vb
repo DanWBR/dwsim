@@ -1,7 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports Aga.Controls.Tree
-Imports System.Windows.Forms
+Imports System.Linq
 
 Public Class TypeBrowserModel
 
@@ -107,6 +107,8 @@ Public Class TypeBrowserModel
                     i += 1
                 Next
 
+                items = items.OrderBy(Function(x) x.ItemName).ToList
+
             End If
 
         Else
@@ -124,8 +126,6 @@ Public Class TypeBrowserModel
                     items = New List(Of BaseNodeItem)
 
                     Try
-
-
 
                         If TryCast(parent.ItemObject, IList) IsNot Nothing Then
 
@@ -149,27 +149,35 @@ Public Class TypeBrowserModel
 
                             Next
 
+                            items = items.OrderBy(Function(x) x.ItemName).ToList
+
                         ElseIf TryCast(parent.ItemObject, IDictionary) IsNot Nothing Then
 
                             Dim col = DirectCast(parent.ItemObject, IDictionary)
 
                             For Each item As DictionaryEntry In col
 
-                                Dim nitem = New TreeNodeItem(item.Value.GetType.Name, parent, Me)
+                                If item.Value IsNot Nothing Then
 
-                                With nitem
+                                    Dim nitem = New TreeNodeItem(item.Value.GetType.Name, parent, Me)
 
-                                    .ItemOwnerObject = parent.ItemObject
-                                    .ItemMemberInfo = parent.ItemMemberInfo
-                                    .ItemObject = item.Value
-                                    .ItemValue = item.Key.ToString
-                                    .ItemType = item.GetType.ToString
+                                    With nitem
 
-                                End With
+                                        .ItemOwnerObject = parent.ItemObject
+                                        .ItemMemberInfo = parent.ItemMemberInfo
+                                        .ItemObject = item.Value
+                                        .ItemValue = item.Key.ToString
+                                        .ItemType = item.GetType.ToString
 
-                                items.Add(nitem)
+                                    End With
+
+                                    items.Add(nitem)
+
+                                End If
 
                             Next
+
+                            items = items.OrderBy(Function(x) x.ItemName).ToList
 
                         Else
 
@@ -249,6 +257,8 @@ Public Class TypeBrowserModel
                                 End If
 
                             Next
+
+                            items = items.OrderBy(Function(x) x.ItemName).ToList
 
                         End If
 
