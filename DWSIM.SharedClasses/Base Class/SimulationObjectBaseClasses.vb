@@ -68,6 +68,16 @@ Namespace UnitOperations
 
         Public Overridable Property ComponentName() As String = ""
 
+        Public Overrides Function ToString() As String
+
+            If GraphicObject IsNot Nothing Then
+                Return GraphicObject.Tag
+            Else
+                Return MyBase.ToString()
+            End If
+
+        End Function
+
 #Region "    ISimulationObject"
 
         Public Overridable Function GetChartModel(name As String) As Object Implements ISimulationObject.GetChartModel

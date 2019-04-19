@@ -27,6 +27,23 @@ Imports System.Linq
 ''' <remarks>(c) 2015 Daniel Medeiros</remarks>
 Module scintillaExtender
 
+    <System.Runtime.CompilerServices.Extension()> Function GetBookmarks(scintilla As ScintillaNET.Scintilla) As List(Of Integer)
+
+        Dim bookmarks As New List(Of Integer)
+
+        ' Do we have a marker for this line?
+        Const mask As UInteger = (1 << 3)
+
+        For Each l In scintilla.Lines
+            If ((l.MarkerGet And mask) > 0) Then
+                bookmarks.Add(l.Index + 1)
+            End If
+        Next
+
+        Return bookmarks
+
+    End Function
+
     ''' <summary>
     ''' Sets the editor style for Python language.
     ''' </summary>
@@ -63,24 +80,35 @@ Module scintillaExtender
         scintilla.SetProperty("tab.timmy.whinge.level", "1")
         scintilla.SetProperty("fold", "1")
 
-        scintilla.Margins(0).Width = 30
-        scintilla.Margins(0).Sensitive = False
-        scintilla.Margins(0).Type = MarginType.Number
+        scintilla.Margins(1).Width = 30
+        scintilla.Margins(1).Sensitive = False
+        scintilla.Margins(1).Type = MarginType.Number
+        scintilla.Margins(1).Mask = Not Marker.MaskAll
 
-        scintilla.Margins(1).Width = 16
-        scintilla.Margins(1).Sensitive = True
-        scintilla.Margins(1).Type = MarginType.Symbol
-        scintilla.Margins(1).Mask = Not Marker.MaskFolders
-        scintilla.Margins(1).Cursor = MarginCursor.Arrow
+        scintilla.Margins(0).Width = 16
+        scintilla.Margins(0).Sensitive = True
+        scintilla.Margins(0).Type = MarginType.Symbol
+        scintilla.Margins(0).Mask = Not Marker.MaskFolders
+        scintilla.Margins(0).Cursor = MarginCursor.Arrow
 
         Dim marker1 = scintilla.Markers(3)
         marker1.Symbol = MarkerSymbol.Circle
-        marker1.SetBackColor(Color.DeepSkyBlue)
-        marker1.SetForeColor(Color.DeepSkyBlue)
+        marker1.SetBackColor(Color.DarkRed)
+        marker1.SetForeColor(Color.DarkRed)
+
+        Dim marker2 = scintilla.Markers(4)
+        marker2.Symbol = MarkerSymbol.Background
+        marker2.SetBackColor(Color.Yellow)
+        marker2.SetForeColor(Color.DarkRed)
+
+        Dim marker3 = scintilla.Markers(5)
+        marker3.Symbol = MarkerSymbol.Arrow
+        marker3.SetBackColor(Color.Yellow)
+        marker3.SetForeColor(Color.Yellow)
 
         AddHandler scintilla.MarginClick, Sub(sender, e)
 
-                                              If (e.Margin = 1) Then
+                                              If (e.Margin = 0) Then
 
                                                   ' Do we have a marker for this line?
                                                   Const mask As UInteger = (1 << 3)
@@ -259,7 +287,7 @@ Module scintillaExtender
         Dim maxLineNumberCharLength = scintilla.Lines.Count.ToString().Length
 
         Const padding As Integer = 2
-        scintilla.Margins(0).Width = scintilla.TextWidth(Style.LineNumber, New String("9"c, maxLineNumberCharLength + 1)) + padding
+        scintilla.Margins(1).Width = scintilla.TextWidth(Style.LineNumber, New String("9"c, maxLineNumberCharLength + 1)) + padding
 
     End Sub
 
