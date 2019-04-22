@@ -473,6 +473,7 @@ Public Class DCCharacterizationWizard
                 .NBP = tc.tbpm
 
                 .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
+                .CAS_Number = id.ToString() & .NBP.GetValueOrDefault().ToString("N0")
 
             End With
 
@@ -564,6 +565,8 @@ Public Class DCCharacterizationWizard
                 .IG_Enthalpy_of_Formation_25C = tmp(0)
                 .IG_Entropy_of_Formation_25C = tmp(1)
                 .IG_Gibbs_Energy_of_Formation_25C = tmp(0) - 298.15 * tmp(1)
+
+                .Formula = "C" & CDbl(tmp(2)).ToString("N2") & "H" & CDbl(tmp(3)).ToString("N2")
 
                 Dim methods As New Utilities.Hypos.Methods.HYP
 

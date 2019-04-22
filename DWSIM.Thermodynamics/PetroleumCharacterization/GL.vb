@@ -114,8 +114,8 @@ Namespace Utilities.PetroleumCharacterization.Methods
             Hf = Hf / M
             Sf = Sf / M
 
-            If Not Integer.TryParse(Nc, New Integer) Then Nc = 0
-            If Not Integer.TryParse(Nh, New Integer) Then Nh = 0
+            If Double.IsNaN(Nc) Then Nc = 0.0
+            If Double.IsNaN(Nh) Then Nh = 0.0
 
             Return New Double() {Hf, Sf, Nc, Nh}
 

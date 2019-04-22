@@ -74,6 +74,21 @@ Public Class FormPCBulk
         SG0 = Double.Parse(Me.TextBoxSG0.Text)
         TB0 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTB0.Text))
 
+        If (SG > 0.0 And SG <= SG0) Then
+            MessageBox.Show("Specified value for Specific Gravity is less than the minimum value. Check inputs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If (MW > 0.0 And MW <= MW0) Then
+            MessageBox.Show("Specified value for Molar Weight is less than the minimum value. Check inputs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If (TB > 0.0 And TB <= TB0) Then
+            MessageBox.Show("Specified value for Molar Weight is less than the minimum value. Check inputs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         'Dim dMF(n), dMW(n), dSG(n), dTB(n), dMW_(n), dSG_(n), dTB_(n), dVA(n), dVB(n), dV1(n), dV2(n), dV1_(n), dV2_(n), q(n) As Double()
         Array.Resize(dMF, n + 1)
         Array.Resize(dMW, n + 1)
@@ -348,6 +363,7 @@ Public Class FormPCBulk
                 .IsPF = 1
 
                 .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
+                .CAS_Number = id.ToString() & .NBP.GetValueOrDefault().ToString("N0")
 
                 .PF_Watson_K = (1.8 * .NBP.GetValueOrDefault) ^ (1 / 3) / .PF_SG.GetValueOrDefault
                 .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)
@@ -360,6 +376,8 @@ Public Class FormPCBulk
                 .IG_Enthalpy_of_Formation_25C = tmp(0)
                 .IG_Entropy_of_Formation_25C = tmp(1)
                 .IG_Gibbs_Energy_of_Formation_25C = tmp(0) - 298.15 * tmp(1)
+
+                .Formula = "C" & CDbl(tmp(2)).ToString("N2") & "H" & CDbl(tmp(3)).ToString("N2")
 
                 Dim methods2 As New Thermodynamics.PropertyPackages.Auxiliary.PROPS
                 Dim methods As New Utilities.Hypos.Methods.HYP
