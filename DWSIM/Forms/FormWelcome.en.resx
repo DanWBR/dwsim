@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAVABBAFQAQQBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAVgBBAFYAQQBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -200,20 +200,29 @@
   <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
     <value>408, 255</value>
   </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>422, 287</value>
+  </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>414, 261</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Recent Files</value>
   </data>
-  <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 255</value>
-  </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>414, 261</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Samples</value>
+  </data>
+  <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 255</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 261</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>FOSSEE Flowsheets</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 106</value>
@@ -242,20 +251,11 @@
   <data name="FOSSEEList.Size" type="System.Drawing.Size, System.Drawing">
     <value>398, 131</value>
   </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 261</value>
-  </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>FOSSEE Flowsheets</value>
-  </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>414, 261</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Recent Folders</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 287</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 19</value>
@@ -293,7 +293,7 @@ Click for more details!</value>
     <value>227, 93</value>
   </data>
   <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 59</value>
+    <value>205, 59</value>
   </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>New Data Regression Study</value>
@@ -302,7 +302,7 @@ Click for more details!</value>
     <value>227, 29</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 59</value>
+    <value>205, 59</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Create New Compound</value>

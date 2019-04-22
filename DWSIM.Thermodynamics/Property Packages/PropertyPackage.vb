@@ -425,10 +425,10 @@ Namespace PropertyPackages
                             If Flowsheet.FlowsheetOptions.FlashAlgorithms.Count > 0 Then
                                 Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
                             Else
-                                Return New NestedLoopsSVLLE()
+                                Return New NestedLoops()
                             End If
                         Else
-                            Return New NestedLoopsSVLLE()
+                            Return New NestedLoops()
                         End If
                     End If
 
@@ -485,6 +485,16 @@ Namespace PropertyPackages
                 Return m_ss
             End Get
         End Property
+
+        Public Overrides Function ToString() As String
+
+            If ComponentName <> "" Then
+                Return ComponentName
+            Else
+                Return MyBase.ToString
+            End If
+
+        End Function
 
 #End Region
 
@@ -11431,6 +11441,8 @@ Final3:
 
 #End Region
 
+#Region "   DWSIM IPropertyPackage implementation"
+
         Public Function AUX_CPm1(phase As Enums.PhaseLabel, Ti As Double) As Double Implements IPropertyPackage.AUX_CPm
 
             Select Case phase
@@ -11593,15 +11605,7 @@ Final3:
             Return arr2
         End Function
 
-        Public Overrides Function ToString() As String
-
-            If ComponentName <> "" Then
-                Return ComponentName
-            Else
-                Return MyBase.ToString
-            End If
-
-        End Function
+#End Region
 
     End Class
 

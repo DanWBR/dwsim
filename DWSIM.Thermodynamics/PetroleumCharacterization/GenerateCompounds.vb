@@ -317,8 +317,11 @@ Namespace Utilities.PetroleumCharacterization
 
                     .Molar_Weight = dMW(i)
                     .IsPF = 1
+
                     Dim trimchars As Char() = New Char() {" "c, "_"c, ","c, ";"c, ":"c}
-                    .Name = prefix.Trim(trimchars) + "_NBP" + .NBP.GetValueOrDefault.ToString("N0")
+
+                    .Name = prefix.Trim(trimchars) + "_NBP_" + (.NBP.GetValueOrDefault - 273.15).ToString("N0")
+
                     .PF_Watson_K = (1.8 * .NBP.GetValueOrDefault) ^ (1 / 3) / .PF_SG.GetValueOrDefault
                     .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)
                     .Critical_Volume = 8314 * .Critical_Compressibility * .Critical_Temperature / .Critical_Pressure

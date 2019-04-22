@@ -127,7 +127,7 @@ Public Class FormFlowsheet
 
         Options.ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))
 
-        Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSVLLE()
+        Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops()
         fa.Tag = fa.Name & " (1)"
 
         Options.FlashAlgorithms.Add(fa)
@@ -432,6 +432,12 @@ Public Class FormFlowsheet
 
 #Region "    Functions "
 
+    Public Sub SolveFlowsheet2()
+
+        tsbCalcF_Click(Me, New EventArgs)
+
+    End Sub
+
     Sub UpdateFormText()
         If File.Exists(Me.Options.FilePath) Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
@@ -659,6 +665,153 @@ Public Class FormFlowsheet
 #End Region
 
 #Region "    Click Event Handlers "
+
+    Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
+        GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
+        tsbCalc.Enabled = tsbAtivar.Checked
+        tsbCalcF.Enabled = tsbAtivar.Checked
+        tsbAbortCalc.Enabled = tsbAtivar.Checked
+        tsbSimultAdjustSolver.Enabled = tsbAtivar.Checked
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsbAbortCalc.Click
+        GlobalSettings.Settings.CalculatorStopRequested = True
+        If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
+            GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
+        End If
+    End Sub
+
+    Public Sub tsbSimultAdjustSolver_CheckedChanged(sender As Object, e As EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
+        Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled = tsbSimultAdjustSolver.Checked
+    End Sub
+
+    Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click
+        If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then
+            Calculator.ExcelLogForm = New LogForm
+            Dim txtwriter = New ConsoleRedirection.TextBoxStreamWriter(Calculator.ExcelLogForm.TextBox1)
+            Console.SetOut(txtwriter)
+        End If
+        Calculator.ExcelLogForm.Show()
+    End Sub
+
+    Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
+        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+        GlobalSettings.Settings.CalculatorBusy = False
+        My.Application.ActiveSimulation = Me
+        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+                                                        Sub()
+                                                            If My.Settings.ObjectEditor = 1 Then
+                                                                Me.UIThread(Sub()
+                                                                                Me.FormSurface.Flowsheet = Me
+                                                                                Me.FormSurface.UpdateSelectedObject()
+                                                                            End Sub)
+                                                            End If
+                                                        End Sub, My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.AltKeyDown)
+    End Sub
+
+    Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
+        Dim myTextObject As New Shapes.RectangleGraphic(New SkiaSharp.SKPoint(10, 10), "TEXT")
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "RECT-" & Guid.NewGuid.ToString
+        gObj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
+        gObj.ObjectType = ObjectType.GO_Rectangle
+        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.Invalidate()
+    End Sub
+
+    Public Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
+        With Me.OpenFileName
+            .CheckFileExists = True
+            .CheckPathExists = True
+            .Title = DWSIM.App.GetLocalString("Adicionarfigura")
+            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
+            .AddExtension = True
+            .Multiselect = False
+            .RestoreDirectory = True
+            Dim res As DialogResult = .ShowDialog
+            If res = Windows.Forms.DialogResult.OK Then
+                Dim img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(Bitmap.FromFile(.FileName))
+                Dim gObj As GraphicObject = Nothing
+                If Not img Is Nothing Then
+                    Dim myEmbeddedImage As New Shapes.EmbeddedImageGraphic(100, 100, img)
+                    gObj = myEmbeddedImage
+                    gObj.Width = img.Width
+                    gObj.Height = img.Height
+                    gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
+                    gObj.AutoSize = True
+                End If
+                Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+                Me.FormSurface.Invalidate()
+            End If
+        End With
+
+        FormSurface.TSBtabela.Checked = False
+
+    End Sub
+
+    Private Sub GraficoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraficoToolStripMenuItem.Click
+        Dim myobj As New Charts.OxyPlotGraphic(30, 30)
+        myobj.Name = "CHART-" & Guid.NewGuid.ToString
+        myobj.Tag = "CHART" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Chart).Count + 1).ToString
+        myobj.Height = 400
+        myobj.Width = 500
+        myobj.Flowsheet = Me
+        Me.FormSurface.FlowsheetSurface.AddObject(myobj)
+        Me.FormSurface.Invalidate()
+    End Sub
+
+    Private Sub AssistenteDeCriacaoDeSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompoundCreatorWizardTSMI.Click
+
+        FrmStSim1.loaded = False
+
+        Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
+        wform.SetupAndDisplayPage(1)
+
+        'start dispatcher for WPF Interop
+        If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
+
+    End Sub
+
+    Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs)
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
+    End Sub
+
+    Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
+
+        Dim iform As New Inspector.Window
+        iform.Show()
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
+        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+        My.Application.ActiveSimulation = Me
+        If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
+        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+                                                        Sub()
+                                                            If My.Settings.ObjectEditor = 1 Then
+                                                                Me.UIThread(Sub()
+                                                                                Me.FormSurface.Flowsheet = Me
+                                                                                Me.FormSurface.UpdateSelectedObject()
+                                                                            End Sub)
+                                                            End If
+                                                        End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+    End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Mobile_Compatibility_Mode")
@@ -2320,6 +2473,103 @@ Public Class FormFlowsheet
     Private Event NewMessageSent As NewMessageSentEventHandler
     Public Event StatusChanged()
 
+    Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
+        Return FormSurface.SplitContainer1.Panel1.Width
+    End Function
+
+
+    Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
+        Return FormSurface.SplitContainer1.Panel1.Height
+    End Function
+
+    Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder
+
+        Dim frm As New SharedClasses.FormCustomCalcOrder
+        frm.Flowsheet = Me
+        frm.ItemList = objects
+        frm.ShowDialog(Me)
+
+        Return frm.NewItemList
+
+    End Function
+
+    Public Property AvailableFlashAlgorithms As Dictionary(Of String, IFlashAlgorithm) Implements IFlowsheet.AvailableFlashAlgorithms
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Dictionary(Of String, IFlashAlgorithm))
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
+    Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Dictionary(Of String, IPropertyPackage))
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
+    Public Property AvailableSystemsOfUnits As List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
+        Get
+            Return FormMain.AvailableUnitSystems.Values.Select(Function(x) DirectCast(x, IUnitsOfMeasure)).ToList()
+        End Get
+        Set(value As List(Of IUnitsOfMeasure))
+            Throw New NotImplementedException
+        End Set
+    End Property
+
+    Public Property Scripts As Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
+        Get
+            Return ScriptCollection
+        End Get
+        Set(value As Dictionary(Of String, IScript))
+            ScriptCollection = value
+        End Set
+    End Property
+
+    Public Function GetSpreadsheetData(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetData
+
+        Dim firstcolumn, firstrow, lastcolumn, lastrow As Integer
+        Dim firstcell, lastcell As String
+
+        firstcell = range.Split(":")(0)
+        lastcell = range.Split(":")(1)
+
+        firstrow = FormSpreadsheet.GetCellValue(firstcell).RowIndex
+        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).ColumnIndex
+
+        lastrow = FormSpreadsheet.GetCellValue(lastcell).RowIndex
+        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).ColumnIndex
+
+        Dim data As New List(Of String())
+
+        Dim i, j As Integer
+
+        Dim grid = FormSpreadsheet.DataGridView1
+
+        For i = firstrow To lastrow
+            Dim sublist = New List(Of String)
+            For j = firstcolumn To lastcolumn
+                Dim val = grid.Rows(i).Cells(j).Value
+                If val Is Nothing Then
+                    sublist.Add("")
+                Else
+                    sublist.Add(val.ToString())
+                End If
+            Next
+            data.Add(sublist.ToArray)
+        Next
+
+        Return data
+
+    End Function
+
+    Public Function GetApplicationObject() As Object Implements IFlowsheet.GetApplicationObject
+        Return My.Application
+    End Function
+
     Public Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
             Return Collections.GraphicObjectCollection.ToDictionary(Of String, IGraphicObject)(Function(k) k.Key, Function(k) k.Value)
@@ -2748,286 +2998,5 @@ Public Class FormFlowsheet
     End Function
 
 #End Region
-
-    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs)
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
-        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage1
-    End Sub
-
-    Private Sub tsbmiModels_Click(sender As Object, e As EventArgs)
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
-        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage2
-    End Sub
-
-    Private Sub AjudaToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Process.Start("https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx")
-    End Sub
-
-    Private Sub EditarSelecionadoToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Dim frmUnit As New FormUnitGen With {.EditMode = True}
-        frmUnit.ShowDialog(Me)
-    End Sub
-
-    Private Sub AdicionarToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Dim frmUnit As New FormUnitGen
-        frmUnit.ShowDialog(Me)
-    End Sub
-
-    Public Property AvailableFlashAlgorithms As Dictionary(Of String, IFlashAlgorithm) Implements IFlowsheet.AvailableFlashAlgorithms
-        Get
-            Throw New NotImplementedException()
-        End Get
-        Set(value As Dictionary(Of String, IFlashAlgorithm))
-            Throw New NotImplementedException()
-        End Set
-    End Property
-
-    Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
-        Get
-            Throw New NotImplementedException()
-        End Get
-        Set(value As Dictionary(Of String, IPropertyPackage))
-            Throw New NotImplementedException()
-        End Set
-    End Property
-
-    Public Property AvailableSystemsOfUnits As List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
-        Get
-            Return FormMain.AvailableUnitSystems.Values.Select(Function(x) DirectCast(x, IUnitsOfMeasure)).ToList()
-        End Get
-        Set(value As List(Of IUnitsOfMeasure))
-            Throw New NotImplementedException
-        End Set
-    End Property
-
-    Public Property Scripts As Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
-        Get
-            Return ScriptCollection
-        End Get
-        Set(value As Dictionary(Of String, IScript))
-            ScriptCollection = value
-        End Set
-    End Property
-
-    Public Function GetSpreadsheetData(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetData
-
-        Dim firstcolumn, firstrow, lastcolumn, lastrow As Integer
-        Dim firstcell, lastcell As String
-
-        firstcell = range.Split(":")(0)
-        lastcell = range.Split(":")(1)
-
-        firstrow = FormSpreadsheet.GetCellValue(firstcell).RowIndex
-        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).ColumnIndex
-
-        lastrow = FormSpreadsheet.GetCellValue(lastcell).RowIndex
-        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).ColumnIndex
-
-        Dim data As New List(Of String())
-
-        Dim i, j As Integer
-
-        Dim grid = FormSpreadsheet.DataGridView1
-
-        For i = firstrow To lastrow
-            Dim sublist = New List(Of String)
-            For j = firstcolumn To lastcolumn
-                Dim val = grid.Rows(i).Cells(j).Value
-                If val Is Nothing Then
-                    sublist.Add("")
-                Else
-                    sublist.Add(val.ToString())
-                End If
-            Next
-            data.Add(sublist.ToArray)
-        Next
-
-        Return data
-
-    End Function
-
-    Public Function GetApplicationObject() As Object Implements IFlowsheet.GetApplicationObject
-        Return My.Application
-    End Function
-
-    Private Sub GraficoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraficoToolStripMenuItem.Click
-        Dim myobj As New Charts.OxyPlotGraphic(30, 30)
-        myobj.Name = "CHART-" & Guid.NewGuid.ToString
-        myobj.Tag = "CHART" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Chart).Count + 1).ToString
-        myobj.Height = 400
-        myobj.Width = 500
-        myobj.Flowsheet = Me
-        Me.FormSurface.FlowsheetSurface.AddObject(myobj)
-        Me.FormSurface.Invalidate()
-    End Sub
-
-    Private Sub AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem.Click
-
-        FrmStSim1.loaded = False
-
-        Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
-        wform.SetupAndDisplayPage(1)
-
-        'start dispatcher for WPF Interop
-        If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
-
-    End Sub
-
-    Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs)
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
-    End Sub
-
-    Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
-
-        Dim iform As New Inspector.Window
-        iform.Show()
-
-    End Sub
-
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
-    End Sub
-
-    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
-        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
-        My.Application.ActiveSimulation = Me
-        If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
-                                                        Sub()
-                                                            If My.Settings.ObjectEditor = 1 Then
-                                                                Me.UIThread(Sub()
-                                                                                Me.FormSurface.Flowsheet = Me
-                                                                                Me.FormSurface.UpdateSelectedObject()
-                                                                            End Sub)
-                                                            End If
-                                                        End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
-    End Sub
-
-    Public Sub SolveFlowsheet2()
-
-        tsbCalcF_Click(Me, New EventArgs)
-
-    End Sub
-
-    Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
-        GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
-        tsbCalc.Enabled = tsbAtivar.Checked
-        tsbCalcF.Enabled = tsbAtivar.Checked
-        tsbAbortCalc.Enabled = tsbAtivar.Checked
-        tsbSimultAdjustSolver.Enabled = tsbAtivar.Checked
-    End Sub
-
-    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsbAbortCalc.Click
-        GlobalSettings.Settings.CalculatorStopRequested = True
-        If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
-            GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
-        End If
-    End Sub
-
-    Public Sub tsbSimultAdjustSolver_CheckedChanged(sender As Object, e As EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
-        Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled = tsbSimultAdjustSolver.Checked
-    End Sub
-
-    Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click
-        If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then
-            Calculator.ExcelLogForm = New LogForm
-            Dim txtwriter = New ConsoleRedirection.TextBoxStreamWriter(Calculator.ExcelLogForm.TextBox1)
-            Console.SetOut(txtwriter)
-        End If
-        Calculator.ExcelLogForm.Show()
-    End Sub
-
-    Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
-        Return FormSurface.SplitContainer1.Panel1.Width
-    End Function
-
-    Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
-        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
-        GlobalSettings.Settings.CalculatorBusy = False
-        My.Application.ActiveSimulation = Me
-        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
-                                                        Sub()
-                                                            If My.Settings.ObjectEditor = 1 Then
-                                                                Me.UIThread(Sub()
-                                                                                Me.FormSurface.Flowsheet = Me
-                                                                                Me.FormSurface.UpdateSelectedObject()
-                                                                            End Sub)
-                                                            End If
-                                                        End Sub, My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.AltKeyDown)
-    End Sub
-
-    Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
-        Dim myTextObject As New Shapes.RectangleGraphic(New SkiaSharp.SKPoint(10, 10), "TEXT")
-        Dim gObj As GraphicObject = Nothing
-        gObj = myTextObject
-        gObj.Name = "RECT-" & Guid.NewGuid.ToString
-        gObj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
-        gObj.ObjectType = ObjectType.GO_Rectangle
-        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
-        Me.FormSurface.Invalidate()
-    End Sub
-
-    Public Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
-        With Me.OpenFileName
-            .CheckFileExists = True
-            .CheckPathExists = True
-            .Title = DWSIM.App.GetLocalString("Adicionarfigura")
-            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
-            .AddExtension = True
-            .Multiselect = False
-            .RestoreDirectory = True
-            Dim res As DialogResult = .ShowDialog
-            If res = Windows.Forms.DialogResult.OK Then
-                Dim img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(Bitmap.FromFile(.FileName))
-                Dim gObj As GraphicObject = Nothing
-                If Not img Is Nothing Then
-                    Dim myEmbeddedImage As New Shapes.EmbeddedImageGraphic(100, 100, img)
-                    gObj = myEmbeddedImage
-                    gObj.Width = img.Width
-                    gObj.Height = img.Height
-                    gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
-                    gObj.AutoSize = True
-                End If
-                Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
-                Me.FormSurface.Invalidate()
-            End If
-        End With
-        FormSurface.TSBtabela.Checked = False
-    End Sub
-
-    Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
-        Return FormSurface.SplitContainer1.Panel1.Height
-    End Function
-
-    Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder
-
-        Dim frm As New SharedClasses.FormCustomCalcOrder
-        frm.Flowsheet = Me
-        frm.ItemList = objects
-        frm.ShowDialog(Me)
-
-        Return frm.NewItemList
-
-    End Function
 
 End Class

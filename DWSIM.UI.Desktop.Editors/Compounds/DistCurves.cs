@@ -343,6 +343,8 @@ namespace DWSIM.UI.Desktop.Editors
         Dictionary<string, Compound> GenerateCompounds(IUnitsOfMeasure su)
         {
 
+            var id = new Random().Next(1000, 9999);
+
             //generate pseudos from number or temperature cuts
 
             int i = 0;
@@ -552,7 +554,6 @@ namespace DWSIM.UI.Desktop.Editors
                 cprops.NBP = tc.tbpm;
                 cprops.OriginalDB = "Petroleum Assay: " + assayname;
                 cprops.CurrentDB = "Petroleum Assay: " + assayname;
-                cprops.Name = assayname + "_" + (i + 1).ToString();
 
                 //SG
                 if (!hassgc)
@@ -717,6 +718,10 @@ namespace DWSIM.UI.Desktop.Editors
                 }
 
                 cprops.Normal_Boiling_Point = cprops.NBP.GetValueOrDefault();
+
+                cprops.Name = "C" + id.ToString() + "_NBP_" + (cprops.NBP.GetValueOrDefault() - 273.15).ToString("N0");
+
+                subst.Name = cprops.Name;
 
                 cprops.IsPF = 1;
                 cprops.PF_Watson_K = Math.Pow((1.8 * cprops.NBP.GetValueOrDefault()), (1 / 3)) / cprops.PF_SG.GetValueOrDefault();

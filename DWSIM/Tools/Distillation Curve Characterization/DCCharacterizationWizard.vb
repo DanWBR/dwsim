@@ -395,7 +395,6 @@ Public Class DCCharacterizationWizard
 
                 .NBP = tc.tbpm
                 .OriginalDB = "DWSIM"
-                .Name = "PSE_" & id & "_" & i + 1
 
                 'VISC
                 If Not Me.ComboBoxViscM.Enabled Then
@@ -471,6 +470,10 @@ Public Class DCCharacterizationWizard
 
                 .Molar_Weight = .PF_MM
 
+                .NBP = tc.tbpm
+
+                .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
+
             End With
 
             i += 1
@@ -512,15 +515,13 @@ Public Class DCCharacterizationWizard
         End If
 
         i = 0
+
         For Each subst As Compound In ccol.Values
 
             Dim cprops As ConstantProperties = subst.ConstantProperties
 
             With cprops
 
-                Dim tc As tmpcomp = tccol(i)
-
-                .NBP = tc.tbpm
                 .OriginalDB = "DWSIM"
 
                 'Tc
@@ -677,11 +678,12 @@ Public Class DCCharacterizationWizard
         nbpfit = Nothing
         tms = Nothing
 
-        Me.TextBoxStreamName.Text = "OIL_" & rnd.Next(1000, 9999)
+        Me.TextBoxStreamName.Text = "OIL_" & id
 
         Dim nm, fm, nbp, sg, mm, ct, cp, af, visc1, visc2, prvs, srkvs As String
 
         Me.DataGridView2.Rows.Clear()
+
         For Each subst As Compound In ccol.Values
             With subst
                 nm = .Name

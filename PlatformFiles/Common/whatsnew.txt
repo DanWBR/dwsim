@@ -1,14 +1,7 @@
-Version 5.7 Update 5
+Version 5.7 Update 6
 
-- [NEW] Added Python standard libraries
-- [NEW] Enable/disable custom Touch Bar controls on macOS
-- [CHG] Electrolyte flash enhancements
-- [FIX] Fixed double conversion from string
-- [FIX] Fixed remaining CefSharp processes after shutdown (Classic UI)
-- [FIX] Fixed compound issues on Classic UI
-
-Version 5.7 Update 4
-
-- [NEW] New syntax-highlighting script editors on macOS and Linux (New UI)
-- [FIX] Fixed editors not updating on Compound and Property Package/Flash Algorithm changes (New UI)
-- [FIX] SLE-only Fixed binary envelope (Classic UI)
+- [NEW] IronPython Script Debugging (Classic UI)
+- [CHG] Updated components info in about boxes
+- [FIX] Fixed Custom Calculation Order not working (Classic UI)
+- [FIX] Fixed Pressure units in Valve's Kv calculation mode
+- [FIX] Other minor bug fixes

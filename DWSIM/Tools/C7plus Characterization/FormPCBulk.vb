@@ -22,9 +22,10 @@ Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.PetroleumCharacterization.Methods
 
-
 Public Class FormPCBulk
+
     Inherits System.Windows.Forms.Form
+
     Public Shared Vf_l(,)
 
     Public su As New SystemsOfUnits.Units
@@ -50,6 +51,8 @@ Public Class FormPCBulk
     Dim w As Double()
 
     Dim n As Integer
+
+    Dim id As Integer
 
     Public m_comps As New System.Collections.Generic.Dictionary(Of String, BaseClasses.Compound)
 
@@ -280,8 +283,6 @@ Public Class FormPCBulk
 
         Dim prop As New Thermodynamics.PropertyPackages.Auxiliary.PROPS
         Dim prop2 As New Utilities.PetroleumCharacterization.Methods.GL
-        Dim rnd As New Random
-        Dim id = rnd.Next(1000, 9999)
 
         ccol = New Dictionary(Of String, Compound)
         ccol.Clear()
@@ -345,7 +346,9 @@ Public Class FormPCBulk
 
                 .Molar_Weight = dMW(i)
                 .IsPF = 1
-                .Name = "PSE_" & id & "_" & i + 1
+
+                .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
+
                 .PF_Watson_K = (1.8 * .NBP.GetValueOrDefault) ^ (1 / 3) / .PF_SG.GetValueOrDefault
                 .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)
                 .Critical_Volume = 8314 * .Critical_Compressibility * .Critical_Temperature / .Critical_Pressure
@@ -658,7 +661,10 @@ Public Class FormPCBulk
         Me.nf = frm.Options.NumberFormat
 
         Dim rd As New Random
-        Me.TextBox1.Text = "OIL_" & rd.Next(1000, 9999)
+
+        id = rd.Next(1000, 9999)
+
+        Me.TextBox1.Text = "OIL_" & id
 
         Me.ComboBox1.SelectedIndex = 9
 

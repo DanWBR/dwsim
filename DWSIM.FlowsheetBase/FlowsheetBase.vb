@@ -1680,7 +1680,7 @@ Imports System.Dynamic
         AddPropPacks()
         AddFlashAlgorithms()
 
-        Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSVLLE()
+        Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops()
         fa.Tag = fa.Name & " (1)"
 
         Options.FlashAlgorithms.Add(fa)
