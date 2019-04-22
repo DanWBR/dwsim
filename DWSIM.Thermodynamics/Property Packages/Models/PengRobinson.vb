@@ -446,7 +446,7 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add("For the PR EOS, Enthalpy is calculated by a departure function, which represents the difference between the current state and the ideal gas state.")
 
-            IObj?.Paragraphs.Add("<math>\frac{H-H^{id}}{RT}=Z-1-\frac{1}{2^{1.5}bRT}[a-T\frac{da}{dT}]\ln[\frac{V+2.414b}{V+0.414b}]</math>")
+            IObj?.Paragraphs.Add("<math>\frac{H-H^{id}}{RT}=Z-1-\frac{1}{2^{1.5}bRT}[a-T\frac{da}{dT}]\ln[\frac{V+2.414b}{V-0.414b}]</math>")
 
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
 
