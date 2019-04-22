@@ -21,6 +21,7 @@ Imports IronPython.Hosting
 
     Private CurrentlyDebugging As Boolean = False
     Private DebuggingPaused As Boolean = False
+    Private CancelDebugToken As CancellationTokenSource
 
     Private Sub FormVBScript_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -827,6 +828,9 @@ Imports IronPython.Hosting
 
                 CurrentlyDebugging = True
                 btnRunDebug.ToolTipText = "Continue Debugging"
+                btnStopDebug.Enabled = True
+
+                CancelDebugToken = New CancellationTokenSource()
 
                 Dim t = Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Sub(frame)
 
@@ -857,6 +861,21 @@ Imports IronPython.Hosting
 
                                                                                              While DebuggingPaused
 
+                                                                                                 If CancelDebugToken.IsCancellationRequested Then
+
+                                                                                                     Me.UIThreadInvoke(Sub()
+
+                                                                                                                           scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
+                                                                                                                           scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
+
+                                                                                                                           tv.Model = Nothing
+
+                                                                                                                       End Sub)
+
+                                                                                                     Throw New TaskCanceledException()
+
+                                                                                                 End If
+
                                                                                                  Thread.Sleep(100)
 
                                                                                              End While
@@ -872,13 +891,14 @@ Imports IronPython.Hosting
 
                                                                                          End If
 
-                                                                                     End Sub))
+                                                                                     End Sub), CancelDebugToken)
 
                 t.ContinueWith(Sub()
                                    UIThread(Sub()
                                                 CurrentlyDebugging = False
                                                 btnRunDebug.ToolTipText = "Debug Script (Async)"
                                                 scripteditor.SplitContainer1.Panel2Collapsed = True
+                                                btnStopDebug.Enabled = False
                                             End Sub)
                                End Sub)
 
@@ -890,6 +910,12 @@ Imports IronPython.Hosting
 
         End If
 
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnStopDebug.Click
+
+        CancelDebugToken.Cancel()
 
     End Sub
 

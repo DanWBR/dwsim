@@ -2086,6 +2086,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\stop1.png" />
     <None Include="Resources\tag.png" />
     <None Include="Resources\texteditor.png" />
     <None Include="Resources\textfield_rename.png" />
