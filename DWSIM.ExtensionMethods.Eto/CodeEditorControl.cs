@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Eto.Forms;
 namespace DWSIM.UI.Controls
 {
@@ -20,8 +21,9 @@ namespace DWSIM.UI.Controls
 
             string Text { get; set; }
 
-        }
+            List<int> GetBookmarks();
 
+        }
 
     }
 }

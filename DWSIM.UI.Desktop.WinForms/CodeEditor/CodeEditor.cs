@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using ScintillaNET;
 using System.Drawing;
 using System;
+using System.Collections.Generic;
 
 namespace DWSIM.UI.Desktop.WinForms
 {
@@ -52,6 +53,12 @@ namespace DWSIM.UI.Desktop.WinForms
             {
                 return;
             }
+        }
+
+        public List<int> GetBookmarks()
+        {
+            List<int> bookmarks = new List<int>();
+            return bookmarks;
         }
 
         public override string Text

@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SkiaSharp;
-using SkiaSharp.Views.Desktop;
+﻿using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows;
-using DWSIM.Drawing.SkiaSharp;
-using DWSIM.Interfaces;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using System.Windows.Input;
 using DWSIM.UI.Controls;
-using Eto.Drawing;
 using ScintillaNET;
 
 namespace DWSIM.UI.Desktop.WPF
@@ -54,6 +42,21 @@ namespace DWSIM.UI.Desktop.WPF
             {
                 te.WinFormsControl.Text = value;
             }
+        }
+
+        public List<int> GetBookmarks()
+        {
+            List<int> bookmarks = new List<int>();
+            const System.UInt32 mask = (1 << 3);
+            foreach (var l in te.WinFormsControl.Lines)
+            {
+                if (((l.MarkerGet() & mask) > 0))
+                {
+                    bookmarks.Add((l.Index + 1));
+                }
+
+            }
+            return bookmarks;
         }
     }
 
@@ -112,17 +115,62 @@ namespace DWSIM.UI.Desktop.WPF
 
             // Some properties we like
 
+            //  Some properties we like
             scintilla.SetProperty("tab.timmy.whinge.level", "1");
             scintilla.SetProperty("fold", "1");
 
-            scintilla.Margins[0].Width = 30;
+            scintilla.Margins[1].Width = 30;
+            scintilla.Margins[1].Sensitive = false;
+            scintilla.Margins[1].Type = MarginType.Number;
+            scintilla.Margins[1].Mask = ~Marker.MaskAll;
+            scintilla.Margins[0].Width = 16;
+            scintilla.Margins[0].Sensitive = true;
+            scintilla.Margins[0].Type = MarginType.Symbol;
+            scintilla.Margins[0].Mask = ~Marker.MaskFolders;
+            scintilla.Margins[0].Cursor = MarginCursor.Arrow;
+
+            Marker marker1 = scintilla.Markers[3];
+            marker1.Symbol = MarkerSymbol.Circle;
+            marker1.SetBackColor(System.Drawing.Color.DarkRed);
+            marker1.SetForeColor(System.Drawing.Color.DarkRed);
+
+            Marker marker2 = scintilla.Markers[4];
+            marker2.Symbol = MarkerSymbol.Background;
+            marker2.SetBackColor(System.Drawing.Color.Yellow);
+            marker2.SetForeColor(System.Drawing.Color.DarkRed);
+
+            Marker marker3 = scintilla.Markers[5];
+            marker3.Symbol = MarkerSymbol.Arrow;
+            marker3.SetBackColor(System.Drawing.Color.Yellow);
+            marker3.SetForeColor(System.Drawing.Color.Yellow);
+
+            scintilla.MarginClick += (sender, e) => {
+
+                if ((e.Margin == 0))
+                {
+                    //  Do we have a marker for this line?
+                    const System.UInt32 mask = (1 << 3);
+                    Line line = scintilla.Lines[scintilla.LineFromPosition(e.Position)];
+                    if (((line.MarkerGet() & mask) > 0))
+                    {
+                        //  Remove existing bookmark
+                        line.MarkerDelete(3);
+                    }
+                    else
+                    {
+                        //  Add bookmark
+                        line.MarkerAdd(3);
+                    }
+                }
+
+            };
 
             // Use margin 2 for fold markers
 
-            scintilla.Margins[1].Type = MarginType.Symbol;
-            scintilla.Margins[1].Mask = Marker.MaskFolders;
-            scintilla.Margins[1].Sensitive = true;
-            scintilla.Margins[1].Width = 20;
+            scintilla.Margins[2].Type = MarginType.Symbol;
+            scintilla.Margins[2].Mask = Marker.MaskFolders;
+            scintilla.Margins[2].Sensitive = true;
+            scintilla.Margins[2].Width = 20;
 
             // Reset folder markers
 

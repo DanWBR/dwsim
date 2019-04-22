@@ -1,4 +1,5 @@
 ﻿using DWSIM.UI.Controls;
+using System.Collections.Generic;
 
 namespace DWSIM.UI.Desktop.GTK
 {
@@ -16,6 +17,12 @@ namespace DWSIM.UI.Desktop.GTK
             scroll.BorderWidth = 1;
             scroll.Add(te);
             this.Control = scroll;
+        }
+
+        public List<int> GetBookmarks()
+        {
+            List<int> bookmarks = new List<int>();
+            return bookmarks;
         }
 
         public override string Text
