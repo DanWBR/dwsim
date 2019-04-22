@@ -4,7 +4,6 @@ using CoreGraphics;
 using SkiaSharp;
 using System;
 using DWSIM.UI.Controls;
-using System.Collections.Generic;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -55,11 +54,20 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override bool Enabled { get; set; }
 
-        public List<int> GetBookmarks()
-        {
-            List<int> bookmarks = new List<int>();
-            return bookmarks;
-        }
+        //public string Text
+        //{
+        //    get
+        //    {
+        //        if (te != null) { return te.Text; } else { return ""; }
+        //    }
+        //    set
+        //    {
+        //        if (te != null) {
+        //            te.Text = "";
+        //            te.Text = value;
+        //        }
+        //    }
+        //}
 
         public string Text
         {
