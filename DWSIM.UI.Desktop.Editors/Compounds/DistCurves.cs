@@ -603,6 +603,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                 cprops.Molar_Weight = cprops.PF_MM.GetValueOrDefault();
 
+                char[] trimchars = new char[] { ' ', '_', ',', ';', ':' };
+
+                cprops.Name = "C" + assayname.Trim(trimchars).ToString() + "_NBP_" + (cprops.NBP.GetValueOrDefault() - 273.15).ToString("N0");
+
+                cprops.CAS_Number = assayname.Trim(trimchars) + "-" + cprops.NBP.GetValueOrDefault().ToString("N0");
+
                 i += 1;
 
                 Compound subst = new Compound(cprops.Name, "");
@@ -719,10 +725,6 @@ namespace DWSIM.UI.Desktop.Editors
 
                 cprops.Normal_Boiling_Point = cprops.NBP.GetValueOrDefault();
 
-                cprops.Name = "C" + id.ToString() + "_NBP_" + (cprops.NBP.GetValueOrDefault() - 273.15).ToString("N0");
-
-                subst.Name = cprops.Name;
-
                 cprops.IsPF = 1;
                 cprops.PF_Watson_K = Math.Pow((1.8 * cprops.NBP.GetValueOrDefault()), (1 / 3)) / cprops.PF_SG.GetValueOrDefault();
 
@@ -731,6 +733,8 @@ namespace DWSIM.UI.Desktop.Editors
                 cprops.IG_Enthalpy_of_Formation_25C = tmp[0];
                 cprops.IG_Entropy_of_Formation_25C = tmp[1];
                 cprops.IG_Gibbs_Energy_of_Formation_25C = tmp[0] - 298.15 * tmp[1];
+
+                cprops.Formula = "C" + Convert.ToDouble(tmp[2]).ToString("N2") + "H" + Convert.ToDouble(tmp[3]).ToString("N2");
 
                 DWSIM.Thermodynamics.Utilities.Hypos.Methods.HYP methods = new DWSIM.Thermodynamics.Utilities.Hypos.Methods.HYP();
 

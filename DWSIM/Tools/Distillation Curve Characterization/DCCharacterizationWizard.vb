@@ -473,7 +473,7 @@ Public Class DCCharacterizationWizard
                 .NBP = tc.tbpm
 
                 .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
-                .CAS_Number = id.ToString() & .NBP.GetValueOrDefault().ToString("N0")
+                .CAS_Number = id.ToString() & "-" & .NBP.GetValueOrDefault().ToString("N0")
 
             End With
 

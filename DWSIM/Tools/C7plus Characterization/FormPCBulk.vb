@@ -363,7 +363,7 @@ Public Class FormPCBulk
                 .IsPF = 1
 
                 .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
-                .CAS_Number = id.ToString() & .NBP.GetValueOrDefault().ToString("N0")
+                .CAS_Number = id.ToString() & "-" & .NBP.GetValueOrDefault().ToString("N0")
 
                 .PF_Watson_K = (1.8 * .NBP.GetValueOrDefault) ^ (1 / 3) / .PF_SG.GetValueOrDefault
                 .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)
