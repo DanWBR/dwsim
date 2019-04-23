@@ -101,7 +101,7 @@ Namespace PropertyPackages
             Dim result As Double = 0.0#
             Dim resultObj As Object = Nothing
             Dim phaseID As Integer = -1
-            Dim state As String = ""
+            Dim state As String = "", pstate As State
 
             Dim T, P As Double
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
@@ -110,10 +110,13 @@ Namespace PropertyPackages
             Select Case phase
                 Case Phase.Vapor
                     state = "V"
+                    pstate = PropertyPackages.State.Vapor
                 Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
                     state = "L"
+                    pstate = PropertyPackages.State.Liquid
                 Case Phase.Solid
                     state = "S"
+                    pstate = PropertyPackages.State.Solid
             End Select
 
             Select Case phase
@@ -158,12 +161,12 @@ Namespace PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                 Case "enthalpy", "enthalpynf"
-                    result = DW_CalcEnthalpy(RET_VMOL(phase), T, P, state)
+                    result = DW_CalcEnthalpy(RET_VMOL(phase), T, P, pstate)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 Case "entropy", "entropynf"
-                    result = DW_CalcEntropy(RET_VMOL(phase), T, P, state)
+                    result = DW_CalcEntropy(RET_VMOL(phase), T, P, pstate)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
