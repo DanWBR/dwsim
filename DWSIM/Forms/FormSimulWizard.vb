@@ -158,8 +158,15 @@ Public Class FormSimulWizard
 
     Private Sub TextBox1_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Call Button7_Click(sender, e)
-            Me.TextBox1.Text = ""
+            If DWSIM.App.IsRunningOnMono Then
+                If Me.ogc1.SelectedCells.Count > 0 Then
+                    Me.ogc1.Rows(Me.ogc1.SelectedCells(0).RowIndex).Cells(1).Value = Not Me.ogc1.Rows(Me.ogc1.SelectedCells(0).RowIndex).Cells(1).Value
+                End If
+            Else
+                If Me.ogc1.SelectedRows.Count > 0 Then
+                    Me.ogc1.SelectedRows(0).Cells(1).Value = Not Me.ogc1.SelectedRows(0).Cells(1).Value
+                End If
+            End If
         End If
     End Sub
 

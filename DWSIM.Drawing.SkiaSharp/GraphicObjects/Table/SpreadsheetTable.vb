@@ -170,8 +170,8 @@ Namespace GraphicObjects.Tables
 
                 Catch ex As Exception
 
-                    Dim Size = MeasureString("Error: " + ex.ToString, tpaint)
-                    canvas.DrawText("Error: " + ex.ToString, X + 10, Y + 40, tpaint)
+                    Dim Size = MeasureString("Error: " + ex.Message.ToString, tpaint)
+                    canvas.DrawText("Error: " + ex.Message.ToString, X + 10, Y + 40, tpaint)
 
                     Me.Width = 20 + Size.Width
                     Me.Height = 80 + Size.Height
