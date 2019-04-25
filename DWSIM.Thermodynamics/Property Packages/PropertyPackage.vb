@@ -4407,7 +4407,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     For T = Tmin To Tmax Step 5
                         TI.Add(T)
                         PI.Add(Auxiliary.FlashAlgorithms.FlashAlgorithm.CalcPIPressure(Vz, Pest, T, Me, eos))
-                        Pest = PI(PI.Count - 1)
+                        'Pest = PI(PI.Count - 1)
                     Next
                 Else
                     TI.Add(0)

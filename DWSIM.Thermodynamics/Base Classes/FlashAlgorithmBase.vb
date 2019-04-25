@@ -1072,7 +1072,7 @@ will converge to this solution.")
             Dim brent As New MathEx.BrentOpt.Brent
             brent.DefineFuncDelegate(AddressOf PIPressureF)
 
-            P = brent.BrentOpt(101325, Pest, 100, 0.001, 1000, New Object() {Vx, T, pp, eos})
+            P = brent.BrentOpt(1, Pest, 100, 0.001, 1000, New Object() {Vx, T, pp, eos})
 
             PIP = CalcPIP(Vx, P, T, pp, eos)(0)
 
