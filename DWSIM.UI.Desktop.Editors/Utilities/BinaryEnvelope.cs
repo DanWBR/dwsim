@@ -18,10 +18,11 @@ using DWSIM.ExtensionMethods;
 using DWSIM.UI.Shared;
 
 using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
+using DWSIM.UI.Desktop.Shared.Controls;
 
 namespace DWSIM.UI.Desktop.Editors.Utilities
 {
-    public class BinaryEnvelopeView : DynamicLayout
+    public class BinaryEnvelopeView : TableLayout
     {
 
         public IFlowsheet flowsheet;
@@ -36,8 +37,24 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
         void Init()
         {
 
-            Padding = new Padding(10);
+            Spacing = new Size(5, 5);
 
+            DynamicLayout p1;
+            TableLayout p2;
+            
+            p1 = UI.Shared.Common.GetDefaultContainer();
+            p2 = new TableLayout() { Spacing = new Size(5, 5), Padding = new Padding(15) };
+
+            Rows.Add(new TableRow (p1, p2));
+
+            p1.Width = 420;
+            
+            var l1 = p1.CreateAndAddLabelRow("Envelope Setup");
+
+            var tabcontainer = new TabControl();
+
+            Eto.OxyPlot.Plot chart = null;
+            
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
 
@@ -45,40 +62,49 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             complist.Insert(0, "");
 
-            this.CreateAndAddLabelRow("Setup");
+            p1.CreateAndAddDescriptionRow("The Binary Envelope utility calculates Temperature and Pressure VLE/VLLE envelopes for binary mixtures.");
 
-            this.CreateAndAddDescriptionRow("The Binary Envelope utility calculates Temperature and Pressure VLE/VLLE envelopes for binary mixtures.");
+            var spinnerComp1 = p1.CreateAndAddDropDownRow("Compound 1", complist, 0, null);
 
-            var spinnerComp1 = this.CreateAndAddDropDownRow("Compound 1", complist, 0, null);
+            var spinnerComp2 = p1.CreateAndAddDropDownRow("Compound 2", complist, 0, null);
 
-            var spinnerComp2 = this.CreateAndAddDropDownRow("Compound 2", complist, 0, null);
+            var spinnerPE = p1.CreateAndAddDropDownRow("Envelope Type", Shared.StringArrays.binaryenvelopetype().ToList(), 1, null);
 
-            var spinnerPE = this.CreateAndAddDropDownRow("Envelope Type", Shared.StringArrays.binaryenvelopetype().ToList(), 0, null);
+            var tval = p1.CreateAndAddTextBoxRow(nf, "Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, 298.15f), null);
+            var pval = p1.CreateAndAddTextBoxRow(nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, 101325.0f), null);
 
-            var tval = this.CreateAndAddTextBoxRow(nf, "Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, 298.15f), null);
-            var pval = this.CreateAndAddTextBoxRow(nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, 101325.0f), null);
+            bool vle = true, lle = false, sle = false, critical = false;
+
+            p1.CreateAndAddLabelRow("Display Options");
+
+            p1.CreateAndAddCheckBoxRow("VLE", vle, (arg1a, arg2a) => { vle = arg1a.Checked.GetValueOrDefault(); });
+            p1.CreateAndAddDescriptionRow("VLE calculation works on all diagram types.");
+            p1.CreateAndAddCheckBoxRow("LLE", lle, (arg1a, arg2a) => { lle = arg1a.Checked.GetValueOrDefault(); });
+            p1.CreateAndAddDescriptionRow("LLE calculation works on T-x/y and P-x/y diagrams if the selected Property Package is associated with a Flash Algorithm which supports Liquid-Liquid equilibria.");
+            p1.CreateAndAddCheckBoxRow("SLE", sle, (arg1a, arg2a) => { sle = arg1a.Checked.GetValueOrDefault(); });
+            p1.CreateAndAddDescriptionRow("SLE calculation works on T-x/y diagrams only.");
+            p1.CreateAndAddCheckBoxRow("Critical Line", critical, (arg1a, arg2a) => { critical = arg1a.Checked.GetValueOrDefault(); });
+            p1.CreateAndAddDescriptionRow("Critical Line calculation works on T-x/y diagrams only.");
 
             var pplist = flowsheet.PropertyPackages.Values.Select((x2) => x2.Tag).ToList();
 
             pplist.Insert(0, "");
 
-            var spinnerpp = this.CreateAndAddDropDownRow("Property Package", pplist, 0, null);
+            var spinnerpp = p1.CreateAndAddDropDownRow("Property Package", pplist, 0, null);
 
-            var button = this.CreateAndAddButtonRow("Build Envelope", null, null);
-
-            var tabcontainer = new TabControl() { Height = 400 };
-
-            var chart = new Eto.OxyPlot.Plot { BackgroundColor = Colors.White };
+            var button = p1.CreateAndAddButtonRow("Build Envelope", null, null);
+            
+            chart = new Eto.OxyPlot.Plot { BackgroundColor = Colors.White };
 
             var txtResults = new TextArea() { ReadOnly = true, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize) };
 
-            tabcontainer.Pages.Add(new TabPage(new TableRow(txtResults)) { Text = "Data" });
             tabcontainer.Pages.Add(new TabPage(new TableRow(chart)) { Text = "Chart" });
+            tabcontainer.Pages.Add(new TabPage(new TableRow(txtResults)) { Text = "Data" });
 
-            this.CreateAndAddLabelRow("Results");
+            p2.CreateAndAddLabelRow("Results");
 
-            this.CreateAndAddControlRow(tabcontainer);
-
+            p2.CreateAndAddControlRow(tabcontainer);
+            
             button.Click += (sender, e) =>
             {
 
@@ -111,6 +137,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
                     }
 
                     var calc = new DWSIM.Thermodynamics.ShortcutUtilities.Calculation(ms);
+                    calc.BinaryEnvelopeOptions = new object[] { "", 0, 0, vle, lle, sle, critical, false };
 
                     switch (spinnerPE.SelectedIndex)
                     {
@@ -124,14 +151,22 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
                     DWSIM.Thermodynamics.ShortcutUtilities.CalculationResults results = null;
 
+                    var pg = ProgressDialog.Show(this, "Please Wait", "Calculating Envelope Lines...", false);
+
                     Task.Factory.StartNew(() =>
                     {
-                        Application.Instance.Invoke(() => txtResults.Text = "Please wait...");
+                        Application.Instance.Invoke(() =>
+                        {
+                            txtResults.Text = "Please wait...";
+                
+                        });
                         results = calc.Calculate();
                     }).ContinueWith((t) =>
                     {
                         Application.Instance.Invoke(() =>
                         {
+                            pg.Close();
+                            pg = null;
                             if (results.ExceptionResult == null)
                             {
 

@@ -192,6 +192,36 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static DropDown CreateAndAddDropDownRow(this TableLayout container, String text, List<String> options, int position, Action<DropDown, EventArgs> command, Action keypress = null)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var drop = new DropDown();
+            drop.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (!Eto.Forms.Application.Instance.Platform.IsGtk)
+            {
+                if (GlobalSettings.Settings.EditorTextBoxFixedSize) drop.Width = (int)(sf * 140);
+            }
+
+            foreach (var item in options)
+            {
+                drop.Items.Add(new ListItem() { Key = item, Text = item });
+            }
+
+            drop.SelectedIndex = position;
+
+            if (command != null) drop.SelectedIndexChanged += (sender, e) => command.Invoke((DropDown)sender, e);
+            if (keypress != null) drop.SelectedIndexChanged += (sender, e) => keypress.Invoke();
+
+            var tr = new TableRow(txt, null, drop);
+
+            container.Rows.Add(tr);
+
+            return drop;
+
+        }
+
         public static Label CreateAndAddLabelRow(this DynamicLayout container, String text)
         {
             var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
@@ -199,6 +229,14 @@ namespace DWSIM.UI.Shared
             container.CreateAndAddEmptySpace();
             container.AddRow(new TableRow(label));
             container.CreateAndAddEmptySpace();
+            return label;
+        }
+
+        public static Label CreateAndAddLabelRow(this TableLayout container, String text)
+        {
+            var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
+            label.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            container.Rows.Add(new TableRow(label));
             return label;
         }
 
@@ -211,6 +249,14 @@ namespace DWSIM.UI.Shared
             return label;
         }
 
+        public static Label CreateAndAddLabelRow3(this TableLayout container, String text)
+        {
+            var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
+            label.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            container.Rows.Add(new TableRow(label));
+            return label;
+        }
+
         public static Label CreateAndAddLabelRow2(this DynamicLayout container, String text)
         {
             var lbl = new Label { Text = text, Wrap = WrapMode.Word };
@@ -218,6 +264,14 @@ namespace DWSIM.UI.Shared
             container.CreateAndAddEmptySpace();
             container.AddRow(new TableRow(lbl));
             container.CreateAndAddEmptySpace();
+            return lbl;
+        }
+
+        public static Label CreateAndAddLabelRow2(this TableLayout container, String text)
+        {
+            var lbl = new Label { Text = text, Wrap = WrapMode.Word };
+            lbl.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            container.Rows.Add(new TableRow(lbl));
             return lbl;
         }
 
@@ -249,11 +303,44 @@ namespace DWSIM.UI.Shared
             return label;
         }
 
+        public static Label CreateAndAddDescriptionRow(this TableLayout container, String text, bool forceLabel = false)
+        {
+            var label = new Label();
+            if (Application.Instance.Platform.IsWinForms && !forceLabel)
+            {
+                var textarea = new TextArea
+                {
+                    Text = text,
+                    ReadOnly = true,
+                    Font = SystemFonts.Label(SystemFonts.Default().Size - 0.5f),
+                    BackgroundColor = container.BackgroundColor,
+                    TextAlignment = Eto.Forms.TextAlignment.Left,
+                    Wrap = true
+                };
+                textarea.Style = "labeldescription";
+                container.Rows.Add(new TableRow(textarea));
+            }
+            else
+            {
+                label = new Label { Text = text, Wrap = WrapMode.Word };
+                label.Font = new Font(SystemFont.Default, GetEditorFontSize() - 2);
+                container.Rows.Add(new TableRow(label));
+            }
+            return label;
+        }
+
         public static TableRow CreateAndAddControlRow(this DynamicLayout container, Control control)
         {
             var tr = new TableRow(control);
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
+            return tr;
+        }
+
+        public static TableRow CreateAndAddControlRow(this TableLayout container, Control control)
+        {
+            var tr = new TableRow(control);
+            container.Rows.Add(tr);
             return tr;
         }
 
@@ -303,6 +390,51 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextBox CreateAndAddTextBoxRow(this TableLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command, Action keypress = null)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
+
+            if (text.Contains("(") && text.Contains(")"))
+            {
+                var si = new SharedClasses.SystemsOfUnits.SI();
+                string extractedunits = text.Split('(', ')')[1];
+                var unittype = si.GetUnitType(extractedunits);
+                if (unittype != Interfaces.Enums.UnitOfMeasure.none)
+                {
+                    var ctxmenu = new ContextMenu();
+                    foreach (var item in si.GetUnitSet(unittype))
+                    {
+                        var mi = new ButtonMenuItem { Text = item };
+                        mi.Click += (sender, e) => { edittext.Text = SharedClasses.SystemsOfUnits.Converter.Convert(item, extractedunits, edittext.Text.ParseExpressionToDouble()).ToString(); };
+                        ctxmenu.Items.Add(mi);
+                    }
+                    edittext.KeyUp += (sender, e) =>
+                    {
+                        if (e.Key == Keys.Space)
+                        {
+                            edittext.Text = edittext.Text.Replace(" ", "");
+                            ctxmenu.Show(edittext);
+                        }
+                    };
+                }
+            }
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+            if (keypress != null) edittext.KeyUp += (sender, e) => { if (e.Key == Keys.Enter) keypress.Invoke(); };
+
+            var tr = new TableRow(txt, null, edittext);
+
+            container.Rows.Add(tr);
+
+            return edittext;
+
+        }
+
         public static ColorPicker CreateAndAddColorPickerRow(this DynamicLayout container, String text, Color currval, Action<ColorPicker, EventArgs> command)
         {
 
@@ -342,6 +474,25 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static NumericStepper CreateAndAddNumericEditorRow(this TableLayout container, String text, double currval, double minval, double maxval, int decimalplaces, Action<NumericStepper, EventArgs> command)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var editor = new NumericStepper { Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
+            editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * 140);
+
+            if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((NumericStepper)sender, e);
+
+            var tr = new TableRow(txt, null, editor);
+
+            container.Rows.Add(tr);
+
+            return editor;
+
+        }
+
 
         public static TextBox CreateAndAddTextBoxRow2(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)
         {
@@ -358,6 +509,25 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
+
+        public static TextBox CreateAndAddTextBoxRow2(this TableLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+
+            var tr = new TableRow(txt, edittext);
+
+            container.Rows.Add(tr);
 
             return edittext;
 
@@ -385,6 +555,27 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextBox CreateAndAddDoubleTextBoxRow(this TableLayout container, String numberformat, String text, String currval1, Double currval2, Action<TextBox, EventArgs> command, Action<TextBox, EventArgs> command2)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var edittext = new TextBox { Text = currval1, Width = (int)(sf * 100) };
+            var edittext2 = new TextBox { Text = currval2.ToString(numberformat), Width = (int)(sf * 100) };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            edittext2.Font = new Font(SystemFont.Default, GetEditorFontSize());
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+            if (command2 != null) edittext2.TextChanged += (sender, e) => command2.Invoke((TextBox)sender, e);
+
+            var tr = new TableRow(txt, null, edittext, edittext2);
+
+            container.Rows.Add(tr);
+
+            return edittext2;
+
+        }
+
         public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, bool autosized, Action<TextArea, EventArgs> command)
         {
 
@@ -397,6 +588,22 @@ namespace DWSIM.UI.Shared
             tr.ScaleHeight = autosized;
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
+
+        public static TextArea CreateAndAddMultilineTextBoxRow(this TableLayout container, String text, bool ro, bool autosized, Action<TextArea, EventArgs> command)
+        {
+
+            var edittext = new TextArea { Text = text, ReadOnly = ro };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
+
+            var tr = new TableRow(edittext);
+            tr.ScaleHeight = autosized;
+            container.Rows.Add(tr);
 
             return edittext;
 
@@ -427,6 +634,30 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextArea CreateAndAddMultilineMonoSpaceTextBoxRow(this TableLayout container, String text, int height, bool ro, Action<TextArea, EventArgs> command)
+        {
+
+            var edittext = new TextArea { Text = text, ReadOnly = ro, Height = height };
+
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                edittext.Font = new Font("Menlo", GlobalSettings.Settings.ResultsReportFontSize);
+            }
+            else
+            {
+                edittext.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
+            }
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
+
+            var tr = new TableRow(edittext);
+
+            container.Rows.Add(tr);
+
+            return edittext;
+
+        }
+
         public static ListBox CreateAndAddListBoxRow(this DynamicLayout container, int height, String[] listitems, Action<ListBox, EventArgs> command)
         {
 
@@ -449,6 +680,27 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static ListBox CreateAndAddListBoxRow(this  TableLayout container, int height, String[] listitems, Action<ListBox, EventArgs> command)
+        {
+
+            var lbox = new ListBox { Height = height };
+            lbox.Font = new Font(SystemFont.Default, GetEditorFontSize());
+
+            foreach (var item in listitems)
+            {
+                lbox.Items.Add(item);
+            }
+
+            if (command != null) lbox.SelectedIndexChanged += (sender, e) => command.Invoke((ListBox)sender, e);
+
+            var tr = new TableRow(lbox);
+
+            container.Rows.Add(tr);
+
+            return lbox;
+
+        }
+
         public static TextBox CreateAndAddStringEditorRow(this DynamicLayout container, String text, String currval, Action<TextBox, EventArgs> command, Action keypress = null)
         {
 
@@ -465,6 +717,26 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
+
+        public static TextBox CreateAndAddStringEditorRow(this TableLayout container, String text, String currval, Action<TextBox, EventArgs> command, Action keypress = null)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var edittext = new TextBox { Text = currval, Width = (int)(sf * 140) };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+            if (keypress != null) edittext.KeyUp += (sender, e) => { if (e.Key == Keys.Enter) keypress.Invoke(); };
+
+            var tr = new TableRow(txt, null, edittext);
+
+            container.Rows.Add(tr);
 
             return edittext;
 
@@ -586,6 +858,28 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
+
+            return btn;
+
+
+        }
+
+        public static Button CreateAndAddLabelAndButtonRow(this TableLayout container, String label, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
+        {
+
+            var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var btn = new Button { Text = buttonlabel };
+            btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 140);
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
+
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+
+            var tr = new TableRow(txt, null, btn);
+
+            container.Rows.Add(tr);
 
             return btn;
 
@@ -779,6 +1073,25 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static Button CreateAndAddButtonRow(this TableLayout container, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
+        {
+
+            var btn = new Button { Text = buttonlabel };
+            btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 140);
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+
+            var tr = new TableRow(btn);
+
+            container.Rows.Add(tr);
+
+            return btn;
+            
+        }
+
         public static CheckBox CreateAndAddCheckBoxRow(this DynamicLayout container, String text, bool value, Action<CheckBox, EventArgs> command, Action keypress = null)
         {
 
@@ -790,6 +1103,20 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(new TableRow(check));
             container.CreateAndAddEmptySpace();
+
+            return check;
+        }
+
+        public static CheckBox CreateAndAddCheckBoxRow(this TableLayout container, String text, bool value, Action<CheckBox, EventArgs> command, Action keypress = null)
+        {
+
+            var check = new CheckBox { Text = text, Checked = value };
+            check.Font = new Font(SystemFont.Default, GetEditorFontSize());
+
+            if (command != null) check.CheckedChanged += (sender, e) => command.Invoke((CheckBox)sender, e);
+            if (keypress != null) check.CheckedChanged += (sender, e) => keypress.Invoke();
+
+            container.Rows.Add(new TableRow(check));
 
             return check;
         }

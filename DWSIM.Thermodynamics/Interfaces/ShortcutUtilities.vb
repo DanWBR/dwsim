@@ -53,6 +53,8 @@ Namespace ShortcutUtilities
 
         Public Property CalcType As CalculationType = CalculationType.CriticalPoint
         Public Property Language As String = "en"
+        Public Property PhaseEnvelopeOptions As PropertyPackages.PhaseEnvelopeOptions
+        Public Property BinaryEnvelopeOptions As Object()
 
         Private _MaterialStream As MaterialStream
 
@@ -158,275 +160,217 @@ Namespace ShortcutUtilities
 
                         Dim res As Object() = Nothing
 
-                        If FlashAlgorithm = Interfaces.Enums.FlashMethod.Nested_Loops_VLE Then
-                            res = pp.DW_ReturnBinaryEnvelope(New Object() {"T-x-y", MixPressure, MixTemperature, True, False, False, True, False})
-                        Else
-                            res = pp.DW_ReturnBinaryEnvelope(New Object() {"T-x-y", MixPressure, MixTemperature, True, True, True, True, True})
-                        End If
+                        BinaryEnvelopeOptions(0) = "T-x-y"
+                        BinaryEnvelopeOptions(1) = _MaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+                        BinaryEnvelopeOptions(2) = _MaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+                        res = pp.DW_ReturnBinaryEnvelope(BinaryEnvelopeOptions)
 
-                        results.Data.Add("px", (DirectCast(res(0), ArrayList).ToDoubleList()))
+                        results.Data.Add("px", DirectCast(res(0), ArrayList).ToDoubleList())
                         results.DataUnits.Add("px", "")
-                        results.Data.Add("py1", (DirectCast(res(1), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("py1", DirectCast(res(1), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("py1", Units.temperature)
-                        results.Data.Add("py2", (DirectCast(res(2), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("py2", DirectCast(res(2), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("py2", Units.temperature)
-                        results.Data.Add("px1l1", (DirectCast(res(3), ArrayList).ToDoubleList()))
+                        results.Data.Add("px1l1", DirectCast(res(3), ArrayList).ToDoubleList())
                         results.DataUnits.Add("px1l1", "")
-                        results.Data.Add("px1l2", (DirectCast(res(4), ArrayList).ToDoubleList()))
+                        results.Data.Add("px1l2", DirectCast(res(4), ArrayList).ToDoubleList())
                         results.DataUnits.Add("px1l2", "")
-                        results.Data.Add("py3", (DirectCast(res(5), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("py3", DirectCast(res(5), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("py3", Units.temperature)
-                        results.Data.Add("pxs1", (DirectCast(res(6), ArrayList).ToDoubleList()))
+                        results.Data.Add("pxs1", DirectCast(res(6), ArrayList).ToDoubleList())
                         results.DataUnits.Add("pxs1", "")
-                        results.Data.Add("pys1", (DirectCast(res(7), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("pys1", DirectCast(res(7), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("pys1", Units.temperature)
-                        results.Data.Add("pxs2", (DirectCast(res(8), ArrayList).ToDoubleList()))
+                        results.Data.Add("pxs2", DirectCast(res(8), ArrayList).ToDoubleList())
                         results.DataUnits.Add("pxs2", "")
-                        results.Data.Add("pys2", (DirectCast(res(9), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("pys2", DirectCast(res(9), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("pys2", Units.temperature)
-                        results.Data.Add("pxc", (DirectCast(res(10), ArrayList).ToDoubleList()))
+                        results.Data.Add("pxc", DirectCast(res(10), ArrayList).ToDoubleList())
                         results.DataUnits.Add("pxc", "")
-                        results.Data.Add("pyc", (DirectCast(res(11), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("pyc", DirectCast(res(11), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("pyc", Units.temperature)
 
-                        If results.Language.Equals("pt-BR") Then
+                        Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Binary Envelope (Txy) @ " &
+                                            MixPressure.ConvertFromSI(Units.pressure).ToString(results.NumberFormat) & " " &
+                                            Units.pressure, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                            Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama Binário (Txy) @ " &
-                                                MixPressure.ConvertFromSI(Units.pressure).ToString(results.NumberFormat) & " " &
-                                                Units.pressure, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Modelo: " & PropertyPackageName}
+                        With model1
+                            .TitleFontSize = 18
+                            .SubtitleFontSize = 14
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 16})
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                            .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
+                            .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
+                            .Series(0).Title = "Bubble Points"
+                            .Series(1).Title = "Dew Points"
+                            If results.Data("px1l1").Count > 0 Then
+                                .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
+                                .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
+                                .Series(2).Title = "Liquid-Liquid (1)"
+                                .Series(3).Title = "Liquid-Liquid (2)"
+                            End If
+                            If results.Data("pxs1").Count > 0 Then
+                                .AddLineSeries(results.Data("pxs1").ToArray, results.Data("pys1").ToArray)
+                                .Series(.Series.Count - 1).Title = "Solid-Liquid (1)"
+                                .AddLineSeries(results.Data("pxs2").ToArray, results.Data("pys2").ToArray)
+                                .Series(.Series.Count - 1).Title = "Solid-Liquid (2)"
+                            End If
+                            If results.Data("pxc").Count > 0 Then
+                                .AddLineSeries(results.Data("pxc").ToArray, results.Data("pyc").ToArray)
+                                .Series(.Series.Count - 1).Title = "Critical Line"
+                            End If
+                            .LegendFontSize = 14
+                            .LegendPosition = LegendPosition.TopCenter
+                            .LegendPlacement = LegendPlacement.Outside
+                            .LegendOrientation = LegendOrientation.Horizontal
+                            .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                        End With
 
-                            With model1
-                                .TitleFontSize = 14
-                                .SubtitleFontSize = 11
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Fração Molar - " & Compounds(0), .FontSize = 12})
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperatura (" & Units.temperature & ")", .FontSize = 12})
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
-                                ' DirectCast(.Series(0), LineSeries).Smooth = True
-                                'DirectCast(.Series(1), LineSeries).Smooth = True
-                                .Series(0).Title = "Pontos de Bolha"
-                                .Series(1).Title = "Pontos de Orvalho"
-                                If FlashAlgorithm = FlashMethod.NestedLoops3P Then
-                                    .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
-                                    .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
-                                    '.AddLineSeries(results.Data("pxs1").ToArray, results.Data("pys1").ToArray)
-                                    '.AddLineSeries(results.Data("pxs2").ToArray, results.Data("pys2").ToArray)
-                                    'DirectCast(.Series(2), LineSeries).Smooth = True
-                                    'DirectCast(.Series(3), LineSeries).Smooth = True
-                                    'DirectCast(.Series(4), LineSeries).Smooth = True
-                                    'DirectCast(.Series(5), LineSeries).Smooth = True
-                                    .Series(2).Title = "Líquido-Líquido (1)"
-                                    .Series(3).Title = "Líquido-Líquido (2)"
-                                    '.Series(4).Title = "Sólido-Líquido (1)"
-                                    '.Series(5).Title = "Sólido-Líquido (2)"
-                                End If
-                                .LegendFontSize = 11
-                                .LegendPosition = LegendPosition.TopCenter
-                                .LegendPlacement = LegendPlacement.Outside
-                                .LegendOrientation = LegendOrientation.Horizontal
-                                .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                            End With
+                        results.PlotModels.Add(model1)
 
-                            results.PlotModels.Add(model1)
-
-                            results.TextOutput += "Resultados do cálculo do Diagrama Binário @ " & MixPressure.ConvertFromSI(Units.pressure).ToString(results.NumberFormat) & " " &
-                                                Units.pressure & " para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                            results.TextOutput += "Pacote de Propriedades: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                            results.TextOutput += (Compounds(0) & " - fração molar ").PadRight(20) & ("Ponto de Bolha (" & Units.temperature & ")").PadRight(20) & "Ponto de Orvalho (" & Units.temperature & ")" & System.Environment.NewLine
-                            For i As Integer = 0 To results.Data("px").Count - 1
-                                results.TextOutput += results.Data("px")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py1")(i).ToString(results.NumberFormat).PadRight(20) &
-                                    results.Data("py2")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                        results.TextOutput += "Binary Envelope calculation results @ " & MixPressure.ConvertFromSI(Units.pressure).ToString(results.NumberFormat) & " " &
+                                            Units.pressure & " for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                        results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                        results.TextOutput += System.Environment.NewLine
+                        results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("Bubble Point (" & Units.temperature & ")").PadRight(20) & "Dew Point (" & Units.temperature & ")" & System.Environment.NewLine
+                        For i As Integer = 0 To results.Data("px").Count - 1
+                            results.TextOutput += results.Data("px")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py1")(i).ToString(results.NumberFormat).PadRight(20) &
+                                results.Data("py2")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                        Next
+                        If results.Data("px1l1").Count > 0 Then
+                            results.TextOutput += System.Environment.NewLine
+                            results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("LL Line 1 (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
+                            For i As Integer = 0 To results.Data("px1l1").Count - 1
+                                results.TextOutput += results.Data("px1l1")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py3")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
                             Next
-
-                        Else
-
-                            Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Binary Envelope (Txy) @ " &
-                                                MixPressure.ConvertFromSI(Units.pressure).ToString(results.NumberFormat) & " " &
-                                                Units.pressure, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
-
-                            With model1
-                                .TitleFontSize = 14
-                                .SubtitleFontSize = 11
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 12})
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
-                                'DirectCast(.Series(0), LineSeries).Smooth = True
-                                'DirectCast(.Series(1), LineSeries).Smooth = True
-                                .Series(0).Title = "Bubble Points"
-                                .Series(1).Title = "Dew Points"
-                                If FlashAlgorithm = FlashMethod.NestedLoops3P Then
-                                    .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
-                                    .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
-                                    '.AddLineSeries(results.Data("pxs1").ToArray, results.Data("pys1").ToArray)
-                                    '.AddLineSeries(results.Data("pxs2").ToArray, results.Data("pys2").ToArray)
-                                    'DirectCast(.Series(2), LineSeries).Smooth = True
-                                    'DirectCast(.Series(3), LineSeries).Smooth = True
-                                    'DirectCast(.Series(4), LineSeries).Smooth = True
-                                    'DirectCast(.Series(5), LineSeries).Smooth = True
-                                    .Series(2).Title = "Liquid-Liquid (1)"
-                                    .Series(3).Title = "Liquid-Liquid (2)"
-                                    ' .Series(4).Title = "Solid-Liquid (1)"
-                                    '.Series(5).Title = "Solid-Liquid (2)"
-                                End If
-                                .LegendFontSize = 11
-                                .LegendPosition = LegendPosition.TopCenter
-                                .LegendPlacement = LegendPlacement.Outside
-                                .LegendOrientation = LegendOrientation.Horizontal
-                                .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                            End With
-
-                            results.PlotModels.Add(model1)
-
-                            results.TextOutput += "Binary Envelope calculation results @ " & MixPressure.ConvertFromSI(Units.pressure).ToString(results.NumberFormat) & " " &
-                                                Units.pressure & " for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                            results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                            results.TextOutput += (Compounds(0) & " mole fraction").PadRight(20) & ("bubble point (" & Units.temperature & ")").PadRight(20) & "dew point (" & Units.temperature & ")" & System.Environment.NewLine
-                            For i As Integer = 0 To results.Data("px").Count - 1
-                                results.TextOutput += results.Data("px")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py1")(i).ToString(results.NumberFormat).PadRight(20) &
-                                    results.Data("py2")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                            results.TextOutput += System.Environment.NewLine
+                            results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("LL Line 2 (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
+                            For i As Integer = 0 To results.Data("px1l2").Count - 1
+                                results.TextOutput += results.Data("px1l2")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py3")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
                             Next
-
+                        End If
+                        If results.Data("pxs1").Count > 0 Then
+                            results.TextOutput += System.Environment.NewLine
+                            results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("SL Line 1 (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
+                            For i As Integer = 0 To results.Data("pxs1").Count - 1
+                                results.TextOutput += results.Data("pxs1")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("pys1")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                            Next
+                            results.TextOutput += System.Environment.NewLine
+                            results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("SL Line 2 (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
+                            For i As Integer = 0 To results.Data("pxs2").Count - 1
+                                results.TextOutput += results.Data("pxs2")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("pys2")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                            Next
+                        End If
+                        If results.Data("pxc").Count > 0 Then
+                            results.TextOutput += System.Environment.NewLine
+                            results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("Critical Line (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
+                            For i As Integer = 0 To results.Data("pxc").Count - 1
+                                results.TextOutput += results.Data("pxc")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("pyc")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                            Next
                         End If
 
                     Case CalculationType.BinaryEnvelopePxy
 
-                        Dim res As Object() = pp.DW_ReturnBinaryEnvelope(New Object() {"P-x-y", MixPressure, MixTemperature, True, False, False, False, False})
+                        BinaryEnvelopeOptions(0) = "P-x-y"
+                        BinaryEnvelopeOptions(1) = MixPressure
+                        BinaryEnvelopeOptions(2) = MixTemperature
+                        Dim res As Object() = pp.DW_ReturnBinaryEnvelope(BinaryEnvelopeOptions)
 
-                        results.Data.Add("px", (DirectCast(res(0), ArrayList).ToDoubleList()))
+                        results.Data.Add("px", DirectCast(res(0), ArrayList).ToDoubleList())
                         results.DataUnits.Add("px", "")
-                        results.Data.Add("py1", (DirectCast(res(1), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
+                        results.Data.Add("py1", DirectCast(res(1), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("py1", Units.pressure)
-                        results.Data.Add("py2", (DirectCast(res(2), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
+                        results.Data.Add("py2", DirectCast(res(2), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("py2", Units.pressure)
-                        results.Data.Add("px1l1", (DirectCast(res(3), ArrayList).ToDoubleList()))
+                        results.Data.Add("px1l1", DirectCast(res(3), ArrayList).ToDoubleList())
                         results.DataUnits.Add("px1l1", "")
-                        results.Data.Add("px1l2", (DirectCast(res(4), ArrayList).ToDoubleList()))
+                        results.Data.Add("px1l2", DirectCast(res(4), ArrayList).ToDoubleList())
                         results.DataUnits.Add("px1l2", "")
-                        results.Data.Add("py3", (DirectCast(res(5), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
+                        results.Data.Add("py3", DirectCast(res(5), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("py3", Units.pressure)
 
-                        If results.Language.Equals("pt-BR") Then
+                        Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Binary Envelope (Pxy) @ " &
+                                            MixTemperature.ConvertFromSI(Units.temperature).ToString(results.NumberFormat) & " " &
+                                            Units.temperature, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                            Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama Binário (Pxy) @ " &
-                                                MixTemperature.ConvertFromSI(Units.temperature).ToString(results.NumberFormat) & " " &
-                                                Units.temperature, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Modelo: " & PropertyPackageName}
+                        With model1
+                            .TitleFontSize = 18
+                            .SubtitleFontSize = 14
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 16})
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                            .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
+                            .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
+                            .Series(0).Title = "Bubble Points"
+                            .Series(1).Title = "Dew Points"
+                            If results.Data("px1l1").Count > 0 Then
+                                .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
+                                .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
+                                .Series(2).Title = "Liquid-Liquid (1)"
+                                .Series(3).Title = "Liquid-Liquid (2)"
+                            End If
+                            .LegendFontSize = 11
+                            .LegendPosition = LegendPosition.TopCenter
+                            .LegendPlacement = LegendPlacement.Outside
+                            .LegendOrientation = LegendOrientation.Horizontal
+                            .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                        End With
 
-                            With model1
-                                .TitleFontSize = 14
-                                .SubtitleFontSize = 11
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Fração Molar - " & Compounds(0), .FontSize = 12})
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressão (" & Units.pressure & ")", .FontSize = 12})
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
-                                'DirectCast(.Series(0), LineSeries).Smooth = True
-                                'DirectCast(.Series(1), LineSeries).Smooth = True
-                                .Series(0).Title = "Pontos de Bolha"
-                                .Series(1).Title = "Pontos de Orvalho"
-                                If FlashAlgorithm = FlashMethod.NestedLoops3P Then
-                                    .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
-                                    .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
-                                    'DirectCast(.Series(2), LineSeries).Smooth = True
-                                    'DirectCast(.Series(3), LineSeries).Smooth = True
-                                    .Series(2).Title = "Liquido-Liquido (1)"
-                                    .Series(3).Title = "Liquido-Liquido (2)"
-                                End If
-                                .LegendFontSize = 11
-                                .LegendPosition = LegendPosition.TopCenter
-                                .LegendPlacement = LegendPlacement.Outside
-                                .LegendOrientation = LegendOrientation.Horizontal
-                                .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                            End With
+                        results.PlotModels.Add(model1)
 
-                            results.PlotModels.Add(model1)
-
-                            results.TextOutput += "Resultados do cálculo do Diagrama Binário @ " & MixTemperature.ConvertFromSI(Units.temperature).ToString(results.NumberFormat) & " " &
-                                            Units.temperature & " para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                            results.TextOutput += "Pacote de Propriedades: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                            results.TextOutput += (Compounds(0) & " - fração molar").PadRight(20) & ("Ponto de Bolha (" & Units.pressure & ")").PadRight(20) & "Ponto de Orvalho (" & Units.pressure & ")" & System.Environment.NewLine
-                            For i As Integer = 0 To results.Data("px").Count - 1
-                                results.TextOutput += results.Data("px")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py1")(i).ToString(results.NumberFormat).PadRight(20) &
-                                    results.Data("py2")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                        results.TextOutput += "Binary Envelope calculation results @ " & MixTemperature.ConvertFromSI(Units.temperature).ToString(results.NumberFormat) & " " &
+                                        Units.temperature & " for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                        results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                        results.TextOutput += (Compounds(0) & " mole fraction").PadRight(20) & ("Bubble Point (" & Units.pressure & ")").PadRight(20) & "Dew Point (" & Units.pressure & ")" & System.Environment.NewLine
+                        For i As Integer = 0 To results.Data("px").Count - 1
+                            results.TextOutput += results.Data("px")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py1")(i).ToString(results.NumberFormat).PadRight(20) &
+                                results.Data("py2")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                        Next
+                        If results.Data("px1l1").Count > 0 Then
+                            results.TextOutput += System.Environment.NewLine
+                            results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("LL Line 1 (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                            For i As Integer = 0 To results.Data("px1l1").Count - 1
+                                results.TextOutput += results.Data("px1l1")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py3")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
                             Next
-
-                        Else
-
-                            Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Binary Envelope (Pxy) @ " &
-                                                MixTemperature.ConvertFromSI(Units.temperature).ToString(results.NumberFormat) & " " &
-                                                Units.temperature, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
-
-                            With model1
-                                .TitleFontSize = 14
-                                .SubtitleFontSize = 11
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 12})
-                                .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 12})
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
-                                .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
-                                'DirectCast(.Series(0), LineSeries).Smooth = True
-                                'DirectCast(.Series(1), LineSeries).Smooth = True
-                                .Series(0).Title = "Bubble Points"
-                                .Series(1).Title = "Dew Points"
-                                If FlashAlgorithm = FlashMethod.NestedLoops3P Then
-                                    .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
-                                    .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
-                                    'DirectCast(.Series(2), LineSeries).Smooth = True
-                                    'DirectCast(.Series(3), LineSeries).Smooth = True
-                                    .Series(2).Title = "Liquid-Liquid (1)"
-                                    .Series(3).Title = "Liquid-Liquid (2)"
-                                End If
-                                .LegendFontSize = 11
-                                .LegendPosition = LegendPosition.TopCenter
-                                .LegendPlacement = LegendPlacement.Outside
-                                .LegendOrientation = LegendOrientation.Horizontal
-                                .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                            End With
-
-                            results.PlotModels.Add(model1)
-
-                            results.TextOutput += "Binary Envelope calculation results @ " & MixTemperature.ConvertFromSI(Units.temperature).ToString(results.NumberFormat) & " " &
-                                            Units.temperature & " for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                            results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                            results.TextOutput += (Compounds(0) & " mole fraction").PadRight(20) & ("Bubble Point (" & Units.pressure & ")").PadRight(20) & "Dew Point (" & Units.pressure & ")" & System.Environment.NewLine
-                            For i As Integer = 0 To results.Data("px").Count - 1
-                                results.TextOutput += results.Data("px")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py1")(i).ToString(results.NumberFormat).PadRight(20) &
-                                    results.Data("py2")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                            results.TextOutput += System.Environment.NewLine
+                            results.TextOutput += (Compounds(0) & " Mole Fraction").PadRight(20) & ("LL Line 2 (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                            For i As Integer = 0 To results.Data("px1l2").Count - 1
+                                results.TextOutput += results.Data("px1l2")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("py3")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
                             Next
-
                         End If
 
                     Case Else
 
                         Dim res As Object()
 
-                        res = pp.DW_ReturnPhaseEnvelope(New PhaseEnvelopeOptions With {.OperatingPoint = True, .CheckLiquidInstability = True, .DewUseCustomParameters = False, .BubbleUseCustomParameters = False, .PhaseIdentificationCurve = False, .StabilityCurve = True})
+                        res = pp.DW_ReturnPhaseEnvelope(PhaseEnvelopeOptions)
 
                         '{TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, TOWF, POWF, HOWF, SOWF, VOWF}</returns>
 
-                        results.Data.Add("TB", (DirectCast(res(0), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("TB", DirectCast(res(0), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("TB", Units.temperature)
-                        results.Data.Add("PB", (DirectCast(res(1), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
+                        results.Data.Add("PB", DirectCast(res(1), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("PB", Units.pressure)
-                        results.Data.Add("HB", (DirectCast(res(2), ArrayList).ToDoubleList()).ConvertFromSI(Units.enthalpy))
+                        results.Data.Add("HB", DirectCast(res(2), ArrayList).ToDoubleList().ConvertFromSI(Units.enthalpy))
                         results.DataUnits.Add("HB", Units.enthalpy)
-                        results.Data.Add("SB", (DirectCast(res(3), ArrayList).ToDoubleList()).ConvertFromSI(Units.entropy))
+                        results.Data.Add("SB", DirectCast(res(3), ArrayList).ToDoubleList().ConvertFromSI(Units.entropy))
                         results.DataUnits.Add("SB", Units.entropy)
-                        results.Data.Add("VB", (DirectCast(res(4), ArrayList).ToDoubleList()).ConvertFromSI(Units.molar_volume))
+                        results.Data.Add("VB", DirectCast(res(4), ArrayList).ToDoubleList().ConvertFromSI(Units.molar_volume))
                         results.DataUnits.Add("VB", Units.molar_volume)
 
-                        results.Data.Add("TD", (DirectCast(res(5), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("TD", DirectCast(res(5), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("TD", Units.temperature)
-                        results.Data.Add("PD", (DirectCast(res(6), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
+                        results.Data.Add("PD", DirectCast(res(6), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("PD", Units.pressure)
-                        results.Data.Add("HD", (DirectCast(res(7), ArrayList).ToDoubleList()).ConvertFromSI(Units.enthalpy))
+                        results.Data.Add("HD", DirectCast(res(7), ArrayList).ToDoubleList().ConvertFromSI(Units.enthalpy))
                         results.DataUnits.Add("HD", Units.enthalpy)
-                        results.Data.Add("SD", (DirectCast(res(8), ArrayList).ToDoubleList()).ConvertFromSI(Units.entropy))
+                        results.Data.Add("SD", DirectCast(res(8), ArrayList).ToDoubleList().ConvertFromSI(Units.entropy))
                         results.DataUnits.Add("SD", Units.entropy)
-                        results.Data.Add("VD", (DirectCast(res(9), ArrayList).ToDoubleList()).ConvertFromSI(Units.molar_volume))
+                        results.Data.Add("VD", DirectCast(res(9), ArrayList).ToDoubleList().ConvertFromSI(Units.molar_volume))
                         results.DataUnits.Add("VD", Units.molar_volume)
 
-                        results.Data.Add("TE", (DirectCast(res(10), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("TE", DirectCast(res(10), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("TE", Units.temperature)
-                        results.Data.Add("PE", (DirectCast(res(11), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
+                        results.Data.Add("PE", DirectCast(res(11), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("PE", Units.pressure)
 
                         Dim cpdata As Object = res(15)
@@ -437,580 +381,341 @@ Namespace ShortcutUtilities
 
                         results.DataUnits.Add("CP", "")
 
-                        results.Data.Add("TQ", (DirectCast(res(16), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
+                        results.Data.Add("TQ", DirectCast(res(16), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("TQ", Units.temperature)
-                        results.Data.Add("PQ", (DirectCast(res(17), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
+                        results.Data.Add("PQ", DirectCast(res(17), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("PQ", Units.pressure)
+
+                        results.Data.Add("TI", DirectCast(res(18), ArrayList).ToDoubleList().ConvertFromSI(Units.temperature))
+                        results.DataUnits.Add("TI", Units.temperature)
+                        results.Data.Add("PI", DirectCast(res(19), ArrayList).ToDoubleList().ConvertFromSI(Units.pressure))
+                        results.DataUnits.Add("PI", Units.pressure)
 
                         Select Case CalcType
 
                             Case CalculationType.PhaseEnvelopePT
 
-                                If results.Language.Equals("pt-BR") Then
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama de Fases Pressão/Temperatura",
-                                                                                     .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Modelo: " & PropertyPackageName}
-
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperatura (" & Units.temperature & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressão (" & Units.pressure & ")"})
-                                        .AddLineSeries(results.Data("TB").ToArray, results.Data("PB").ToArray)
-                                        .AddLineSeries(results.Data("TD").ToArray, results.Data("PD").ToArray)
-                                        .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(1)})
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        'DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Pontos de Bolha"
-                                        .Series(1).Title = "Pontos de Orvalho"
-                                        .Series(2).Title = "Ponto Crítico"
-                                        .LegendFontSize = 9
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
-
-                                    results.PlotModels.Add(model1)
-
-                                    results.TextOutput += "Resultados do cálculo do diagrama de fases para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Modelo: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Temp. de Bolha (" & Units.temperature & ")").PadRight(20) &
-                                        ("Pressão de Bolha (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Temp. de Orvalho (" & Units.temperature & ")").PadRight(20) &
-                                        "Pressão de Orvalho (" & Units.pressure & ")" & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("TD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                Else
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Temperature diagram",
+                                Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Temperature diagram",
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")"})
-                                        .AddLineSeries(results.Data("TB").ToArray, results.Data("PB").ToArray)
-                                        .AddLineSeries(results.Data("TD").ToArray, results.Data("PD").ToArray)
-                                        .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(1)})
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        'DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Bubble Points"
-                                        .Series(1).Title = "Dew Points"
-                                        .Series(2).Title = "Critical Point"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
+                                With model1
+                                    .TitleFontSize = 18
+                                    .SubtitleFontSize = 14
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                                    .AddLineSeries(results.Data("TB").ToArray, results.Data("PB").ToArray)
+                                    .Series(0).Title = "Bubble Points"
+                                    .AddLineSeries(results.Data("TD").ToArray, results.Data("PD").ToArray)
+                                    .Series(1).Title = "Dew Points"
+                                    .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(1)})
+                                    DirectCast(.Series(2), ScatterSeries).MarkerSize = 3
+                                    .Series(2).Title = "Critical Point"
+                                    If PhaseEnvelopeOptions.PhaseIdentificationCurve Then
+                                        .AddLineSeries(results.Data("TI").ToArray, results.Data("PI").ToArray)
+                                        .Series(.Series.Count - 1).Title = "Phase Identification Parameter"
+                                    End If
+                                    If PhaseEnvelopeOptions.QualityLine Then
+                                        .AddLineSeries(results.Data("TQ").ToArray, results.Data("PQ").ToArray)
+                                        .Series(.Series.Count - 1).Title = "Quality Curve VF = " & PhaseEnvelopeOptions.QualityValue.ToString
+                                    End If
+                                    If PhaseEnvelopeOptions.StabilityCurve Then
+                                        .AddLineSeries(results.Data("TE").ToArray, results.Data("PE").ToArray)
+                                        .Series(.Series.Count - 1).Title = "Stability Curve"
+                                    End If
+                                    If PhaseEnvelopeOptions.OperatingPoint Then
+                                        .AddScatterSeries(New Double() {MixTemperature.ConvertFromSI(Units.temperature)}, New Double() {MixPressure.ConvertFromSI(Units.pressure)})
+                                        DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
+                                        .Series(.Series.Count - 1).Title = "Operating Point"
+                                    End If
 
-                                    results.PlotModels.Add(model1)
+                                    .LegendFontSize = 14
+                                    .LegendPosition = LegendPosition.TopCenter
+                                    .LegendPlacement = LegendPlacement.Outside
+                                    .LegendOrientation = LegendOrientation.Horizontal
+                                    .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                                End With
 
-                                    results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) &
-                                        ("Bubble Pressure (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                results.PlotModels.Add(model1)
+
+                                results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                                results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                                results.TextOutput += Environment.NewLine
+                                results.TextOutput += ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) &
+                                    ("Bubble Pressure (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PB").Count - 1
+                                    results.TextOutput += results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                Next
+                                results.TextOutput += Environment.NewLine
+                                results.TextOutput += ("Dew Temp. (" & Units.temperature & ")").PadRight(20) &
+                                    "Dew Pressure (" & Units.pressure & ")" & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PD").Count - 1
+                                    results.TextOutput += results.Data("TD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
+                                If PhaseEnvelopeOptions.PhaseIdentificationCurve Then
+                                    results.TextOutput += Environment.NewLine
+                                    results.TextOutput += ("PIP Temp. (" & Units.temperature & ")").PadRight(20) &
+                                    ("PIP Pressure (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                                    For i As Integer = 0 To results.Data("PI").Count - 1
+                                        results.TextOutput += results.Data("TI")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PI")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
                                     Next
-                                    results.TextOutput += ("Dew Temp. (" & Units.temperature & ")").PadRight(20) &
-                                        "Dew Pressure (" & Units.pressure & ")" & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("TD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                End If
+                                If PhaseEnvelopeOptions.QualityLine Then
+                                    results.TextOutput += Environment.NewLine
+                                    results.TextOutput += ("Quality Line Temp. (" & Units.temperature & ")").PadRight(20) &
+                                    ("Quality Line Pressure (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                                    For i As Integer = 0 To results.Data("PQ").Count - 1
+                                        results.TextOutput += results.Data("TQ")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PQ")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
                                     Next
-
+                                End If
+                                If PhaseEnvelopeOptions.StabilityCurve Then
+                                    results.TextOutput += Environment.NewLine
+                                    results.TextOutput += ("Stability Curve Temp. (" & Units.temperature & ")").PadRight(20) &
+                                    ("Stability Curve Pressure (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                                    For i As Integer = 0 To results.Data("PE").Count - 1
+                                        results.TextOutput += results.Data("TE")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PE")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                    Next
                                 End If
 
                             Case CalculationType.PhaseEnvelopePH
 
-                                If results.Language.Equals("pt-BR") Then
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama de Fases Pressão/Entalpia",
-                                                                                     .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Modelo: " & PropertyPackageName}
-
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entalpia (" & Units.enthalpy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressão (" & Units.pressure & ")"})
-                                        .AddLineSeries(results.Data("HB").ToArray, results.Data("PB").ToArray)
-                                        .AddLineSeries(results.Data("HD").ToArray, results.Data("PD").ToArray)
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        'DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Pontos de Bolha"
-                                        .Series(1).Title = "Pontos de Orvalho"
-                                        .LegendFontSize = 9
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
-
-                                    results.PlotModels.Add(model1)
-
-                                    results.TextOutput += "Resultados do cálculo do diagrama de fases para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Modelo: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Entalpia de Bolha (" & Units.enthalpy & ")").PadRight(20) &
-                                        ("Pressão de Bolha (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("HB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Entalpia de Orvalho (" & Units.enthalpy & ")").PadRight(20) &
-                                        "Pressão de Orvalho (" & Units.pressure & ")" & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("HD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                Else
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Enthalpy diagram",
+                                Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Enthalpy diagram",
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")"})
-                                        .AddLineSeries(results.Data("HB").ToArray, results.Data("PB").ToArray)
-                                        .AddLineSeries(results.Data("HD").ToArray, results.Data("PD").ToArray)
-                                        .Series(0).Title = "Bubble Points"
-                                        .Series(1).Title = "Dew Points"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
+                                With model1
+                                    .TitleFontSize = 18
+                                    .SubtitleFontSize = 14
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")", .FontSize = 16})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                                    .AddLineSeries(results.Data("HB").ToArray, results.Data("PB").ToArray)
+                                    .AddLineSeries(results.Data("HD").ToArray, results.Data("PD").ToArray)
+                                    .Series(0).Title = "Bubble Points"
+                                    .Series(1).Title = "Dew Points"
+                                    If PhaseEnvelopeOptions.OperatingPoint Then
+                                        .AddScatterSeries(New Double() {MixEnthalpy.ConvertFromSI(Units.enthalpy)}, New Double() {MixPressure.ConvertFromSI(Units.pressure)})
+                                        DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
+                                        .Series(.Series.Count - 1).Title = "Operating Point"
+                                    End If
+                                    .LegendFontSize = 14
+                                    .LegendPosition = LegendPosition.TopCenter
+                                    .LegendPlacement = LegendPlacement.Outside
+                                    .LegendOrientation = LegendOrientation.Horizontal
+                                    .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                                End With
 
-                                    results.PlotModels.Add(model1)
+                                results.PlotModels.Add(model1)
 
-                                    results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Bubble Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
-                                        ("Bubble Press. (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("HB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Dew Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
-                                        ("Dew Press. (" & Units.pressure & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("HD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                End If
+                                results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                                results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                                results.TextOutput += ("Bubble Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
+                                    ("Bubble Press. (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PB").Count - 1
+                                    results.TextOutput += results.Data("HB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                Next
+                                results.TextOutput += ("Dew Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
+                                    ("Dew Press. (" & Units.pressure & ")") & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PD").Count - 1
+                                    results.TextOutput += results.Data("HD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
 
                             Case CalculationType.PhaseEnvelopePS
 
-                                If results.Language.Equals("pt-BR") Then
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama de Fases Pressão/Entropia",
-                                                                                     .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Modelo: " & PropertyPackageName}
-
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropia (" & Units.entropy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressão (" & Units.pressure & ")"})
-                                        .AddLineSeries(results.Data("SB").ToArray, results.Data("PB").ToArray)
-                                        .AddLineSeries(results.Data("SD").ToArray, results.Data("PD").ToArray)
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        'DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Pontos de Bolha"
-                                        .Series(1).Title = "Pontos de Orvalho"
-                                        .LegendFontSize = 9
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
-
-                                    results.PlotModels.Add(model1)
-
-                                    results.TextOutput += "Resultados do cálculo do diagrama de fases para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Modelo: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Entropia de Bolha (" & Units.entropy & ")").PadRight(20) &
-                                        ("Pressão de Bolha (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("SB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Entropia de Orvalho (" & Units.entropy & ")").PadRight(20) & "Pressão de Orvalho (" & Units.pressure & ")" & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("SD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                Else
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Entropy diagram",
+                                Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Entropy diagram",
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")"})
-                                        .AddLineSeries(results.Data("SB").ToArray, results.Data("PB").ToArray)
-                                        .AddLineSeries(results.Data("SD").ToArray, results.Data("PD").ToArray)
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Bubble Points"
-                                        .Series(1).Title = "Dew Points"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
+                                With model1
+                                    .TitleFontSize = 18
+                                    .SubtitleFontSize = 14
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")", .FontSize = 16})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                                    .AddLineSeries(results.Data("SB").ToArray, results.Data("PB").ToArray)
+                                    .AddLineSeries(results.Data("SD").ToArray, results.Data("PD").ToArray)
+                                    .Series(0).Title = "Bubble Points"
+                                    .Series(1).Title = "Dew Points"
+                                    If PhaseEnvelopeOptions.OperatingPoint Then
+                                        .AddScatterSeries(New Double() {MixEntropy.ConvertFromSI(Units.entropy)}, New Double() {MixPressure.ConvertFromSI(Units.pressure)})
+                                        DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
+                                        .Series(.Series.Count - 1).Title = "Operating Point"
+                                    End If
+                                    .LegendFontSize = 14
+                                    .LegendPosition = LegendPosition.TopCenter
+                                    .LegendPlacement = LegendPlacement.Outside
+                                    .LegendOrientation = LegendOrientation.Horizontal
+                                    .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                                End With
 
-                                    results.PlotModels.Add(model1)
+                                results.PlotModels.Add(model1)
 
-                                    results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Bubble Entropy (" & Units.entropy & ")").PadRight(20) &
-                                        ("Bubble Press. (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("SB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Dew Entropy (" & Units.entropy & ")").PadRight(20) & ("Dew Press. (" & Units.pressure & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("SD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                End If
+                                results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                                results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                                results.TextOutput += ("Bubble Entropy (" & Units.entropy & ")").PadRight(20) &
+                                    ("Bubble Press. (" & Units.pressure & ")").PadRight(20) & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PB").Count - 1
+                                    results.TextOutput += results.Data("SB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                Next
+                                results.TextOutput += ("Dew Entropy (" & Units.entropy & ")").PadRight(20) & ("Dew Press. (" & Units.pressure & ")") & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PD").Count - 1
+                                    results.TextOutput += results.Data("SD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("PD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
 
                             Case CalculationType.PhaseEnvelopeTH
 
-                                If results.Language.Equals("pt-BR") Then
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama de Fases Temperatura/Entalpia",
-                                                                                     .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Modelo: " & PropertyPackageName}
-
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entalpia (" & Units.enthalpy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperatura (" & Units.temperature & ")"})
-                                        .AddLineSeries(results.Data("HB").ToArray, results.Data("TB").ToArray)
-                                        .AddLineSeries(results.Data("HD").ToArray, results.Data("TD").ToArray)
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Pontos de Bolha"
-                                        .Series(1).Title = "Pontos de Orvalho"
-                                        .LegendFontSize = 9
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
-
-                                    results.PlotModels.Add(model1)
-
-                                    results.TextOutput += "Resultados do cálculo do diagrama de fases para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Modelo: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Entalpia de Bolha (" & Units.enthalpy & ")").PadRight(20) &
-                                        ("Temperatura de Bolha (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("TB").Count - 1
-                                        results.TextOutput += results.Data("HB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Entalpia de Orvalho (" & Units.enthalpy & ")").PadRight(20) &
-                                      "Temperatura de Orvalho (" & Units.temperature & ")" & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("TD").Count - 1
-                                        results.TextOutput += results.Data("HD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                Else
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Temperature/Enthalpy diagram",
+                                Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Temperature/Enthalpy diagram",
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")"})
-                                        .AddLineSeries(results.Data("HB").ToArray, results.Data("TB").ToArray)
-                                        .AddLineSeries(results.Data("HD").ToArray, results.Data("TD").ToArray)
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Bubble Points"
-                                        .Series(1).Title = "Dew Points"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
+                                With model1
+                                    .TitleFontSize = 18
+                                    .SubtitleFontSize = 14
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")", .FontSize = 16})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                                    .AddLineSeries(results.Data("HB").ToArray, results.Data("TB").ToArray)
+                                    .AddLineSeries(results.Data("HD").ToArray, results.Data("TD").ToArray)
+                                    .Series(0).Title = "Bubble Points"
+                                    .Series(1).Title = "Dew Points"
+                                    If PhaseEnvelopeOptions.OperatingPoint Then
+                                        .AddScatterSeries(New Double() {MixEnthalpy.ConvertFromSI(Units.enthalpy)}, New Double() {MixTemperature.ConvertFromSI(Units.temperature)})
+                                        DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
+                                        .Series(.Series.Count - 1).Title = "Operating Point"
+                                    End If
+                                    .LegendFontSize = 14
+                                    .LegendPosition = LegendPosition.TopCenter
+                                    .LegendPlacement = LegendPlacement.Outside
+                                    .LegendOrientation = LegendOrientation.Horizontal
+                                    .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                                End With
 
-                                    results.PlotModels.Add(model1)
+                                results.PlotModels.Add(model1)
 
-                                    results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Bubble Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
-                                        ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("HB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Dew Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
-                                       ("Dew Temp. (" & Units.temperature & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("HD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                End If
+                                results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                                results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                                results.TextOutput += ("Bubble Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
+                                    ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("TD").Count - 1
+                                    results.TextOutput += results.Data("HB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
+                                results.TextOutput += ("Dew Enthalpy (" & Units.enthalpy & ")").PadRight(20) &
+                                   ("Dew Temp. (" & Units.temperature & ")") & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("TD").Count - 1
+                                    results.TextOutput += results.Data("HD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
 
                             Case CalculationType.PhaseEnvelopeTS
 
-                                If results.Language.Equals("pt-BR") Then
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama de Fases Temperatura/Entropia",
-                                                                                     .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Modelo: " & PropertyPackageName}
-
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropia (" & Units.entropy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperatura (" & Units.temperature & ")"})
-                                        .AddLineSeries(results.Data("SB").ToArray, results.Data("TB").ToArray)
-                                        .AddLineSeries(results.Data("SD").ToArray, results.Data("TD").ToArray)
-                                        'DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Pontos de Bolha"
-                                        .Series(1).Title = "Pontos de Orvalho"
-                                        .LegendFontSize = 9
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
-
-                                    results.PlotModels.Add(model1)
-
-                                    results.TextOutput += "Resultados do cálculo do diagrama de fases para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Modelo: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Entropia de Bolha (" & Units.entropy & ")").PadRight(20) &
-                                        ("Temperatura de Bolha (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("TB").Count - 1
-                                        results.TextOutput += results.Data("SB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Entropia de Orvalho (" & Units.entropy & ")").PadRight(20) &
-                                        "Temperatura de Orvalho (" & Units.temperature & ")" & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("TD").Count - 1
-                                        results.TextOutput += results.Data("SD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                Else
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Entropy diagram",
+                                Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Pressure/Entropy diagram",
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")"})
-                                        .AddLineSeries(results.Data("SB").ToArray, results.Data("TB").ToArray)
-                                        .AddLineSeries(results.Data("SD").ToArray, results.Data("TD").ToArray)
-                                        ' DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Bubble Points"
-                                        .Series(1).Title = "Dew Points"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
+                                With model1
+                                    .TitleFontSize = 18
+                                    .SubtitleFontSize = 14
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")", .FontSize = 16})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                                    .AddLineSeries(results.Data("SB").ToArray, results.Data("TB").ToArray)
+                                    .AddLineSeries(results.Data("SD").ToArray, results.Data("TD").ToArray)
+                                    .Series(0).Title = "Bubble Points"
+                                    .Series(1).Title = "Dew Points"
+                                    If PhaseEnvelopeOptions.OperatingPoint Then
+                                        .AddScatterSeries(New Double() {MixEntropy.ConvertFromSI(Units.entropy)}, New Double() {MixTemperature.ConvertFromSI(Units.temperature)})
+                                        DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
+                                        .Series(.Series.Count - 1).Title = "Operating Point"
+                                    End If
+                                    .LegendFontSize = 14
+                                    .LegendPosition = LegendPosition.TopCenter
+                                    .LegendPlacement = LegendPlacement.Outside
+                                    .LegendOrientation = LegendOrientation.Horizontal
+                                    .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                                End With
 
-                                    results.PlotModels.Add(model1)
+                                results.PlotModels.Add(model1)
 
-                                    results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Bubble Entropy (" & Units.entropy & ")").PadRight(20) &
-                                        ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PB").Count - 1
-                                        results.TextOutput += results.Data("SB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Dew Entropy (" & Units.entropy & ")").PadRight(20) &
-                                     ("Dew Temp. (" & Units.temperature & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("PD").Count - 1
-                                        results.TextOutput += results.Data("SD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                End If
+                                results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                                results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                                results.TextOutput += ("Bubble Entropy (" & Units.entropy & ")").PadRight(20) &
+                                    ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PB").Count - 1
+                                    results.TextOutput += results.Data("SB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                Next
+                                results.TextOutput += ("Dew Entropy (" & Units.entropy & ")").PadRight(20) &
+                                 ("Dew Temp. (" & Units.temperature & ")") & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("PD").Count - 1
+                                    results.TextOutput += results.Data("SD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("TD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
 
                             Case CalculationType.PhaseEnvelopeVT
 
-                                If results.Language.Equals("pt-BR") Then
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama de Fases Volume/Temperatura",
+                                Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Volume/Temperature diagram",
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperatura (" & Units.temperature & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")"})
-                                        .AddLineSeries(results.Data("TB").ToArray, results.Data("VB").ToArray)
-                                        .AddLineSeries(results.Data("TD").ToArray, results.Data("VD").ToArray)
-                                        .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(2)})
-                                        ' DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Pontos de Bolha"
-                                        .Series(1).Title = "Pontos de Orvalho"
-                                        .Series(2).Title = "Ponto Crítico"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
+                                With model1
+                                    .TitleFontSize = 18
+                                    .SubtitleFontSize = 14
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")", .FontSize = 16})
+                                    .AddLineSeries(results.Data("TB").ToArray, results.Data("VB").ToArray)
+                                    .AddLineSeries(results.Data("TD").ToArray, results.Data("VD").ToArray)
+                                    .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(2)})
+                                    .Series(0).Title = "Bubble Points"
+                                    .Series(1).Title = "Dew Points"
+                                    .Series(2).Title = "Critical Point"
+                                    .LegendFontSize = 14
+                                    .LegendPosition = LegendPosition.TopCenter
+                                    .LegendPlacement = LegendPlacement.Outside
+                                    .LegendOrientation = LegendOrientation.Horizontal
+                                    .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                                End With
 
-                                    results.PlotModels.Add(model1)
+                                results.PlotModels.Add(model1)
 
-                                    results.TextOutput += "Resultados do cálculo do diagrama de fases para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Modelo: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Temp. de Bolha. (" & Units.temperature & ")").PadRight(20) &
-                                        ("Volume de Bolha (" & Units.molar_volume & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VB").Count - 1
-                                        results.TextOutput += results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Temp. de Orvalho (" & Units.temperature & ")").PadRight(20) &
-                                   ("Volume de Orvalho (" & Units.molar_volume & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VD").Count - 1
-                                        results.TextOutput += results.Data("TD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                Else
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Volume/Temperature diagram",
-                                                                                     .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
-
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")"})
-                                        .AddLineSeries(results.Data("TB").ToArray, results.Data("VB").ToArray)
-                                        .AddLineSeries(results.Data("TD").ToArray, results.Data("VD").ToArray)
-                                        .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(2)})
-                                        ' DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Bubble Points"
-                                        .Series(1).Title = "Dew Points"
-                                        .Series(2).Title = "Critical Point"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
-
-                                    results.PlotModels.Add(model1)
-
-                                    results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) &
-                                        ("Bubble Volume (" & Units.molar_volume & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VB").Count - 1
-                                        results.TextOutput += results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Dew Temp. (" & Units.temperature & ")").PadRight(20) &
-                                     ("Dew Volume (" & Units.molar_volume & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VD").Count - 1
-                                        results.TextOutput += results.Data("TD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                End If
+                                results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                                results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                                results.TextOutput += ("Bubble Temp. (" & Units.temperature & ")").PadRight(20) &
+                                    ("Bubble Volume (" & Units.molar_volume & ")").PadRight(20) & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("VB").Count - 1
+                                    results.TextOutput += results.Data("TB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                Next
+                                results.TextOutput += ("Dew Temp. (" & Units.temperature & ")").PadRight(20) &
+                                 ("Dew Volume (" & Units.molar_volume & ")") & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("VD").Count - 1
+                                    results.TextOutput += results.Data("TD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
 
                             Case CalculationType.PhaseEnvelopeVP
 
-                                If results.Language.Equals("pt-BR") Then
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Diagrama de Fases Volume/Pressão",
+                                Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Volume/Pressure diagram",
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Pressão (" & Units.pressure & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")"})
-                                        .AddLineSeries(results.Data("PB").ToArray, results.Data("VB").ToArray)
-                                        .AddLineSeries(results.Data("PD").ToArray, results.Data("VD").ToArray)
-                                        .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(2)})
-                                        ' DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Pontos de Bolha"
-                                        .Series(1).Title = "Pontos de Orvalho"
-                                        .Series(2).Title = "Ponto Crítico"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
+                                With model1
+                                    .TitleFontSize = 18
+                                    .SubtitleFontSize = 14
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")", .FontSize = 16})
+                                    .AddLineSeries(results.Data("PB").ToArray, results.Data("VB").ToArray)
+                                    .AddLineSeries(results.Data("PD").ToArray, results.Data("VD").ToArray)
+                                    .AddScatterSeries(New Double() {results.Data("CP")(1)}, New Double() {results.Data("CP")(2)})
+                                    ' DirectCast(.Series(0), LineSeries).Smooth = True
+                                    ' DirectCast(.Series(1), LineSeries).Smooth = True
+                                    .Series(0).Title = "Bubble Points"
+                                    .Series(1).Title = "Dew Points"
+                                    .Series(2).Title = "Critical Point"
+                                    .LegendFontSize = 14
+                                    .LegendPosition = LegendPosition.TopCenter
+                                    .LegendPlacement = LegendPlacement.Outside
+                                    .LegendOrientation = LegendOrientation.Horizontal
+                                    .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+                                End With
 
-                                    results.PlotModels.Add(model1)
+                                results.PlotModels.Add(model1)
 
-                                    results.TextOutput += "Resultados do cálculo do diagrama de fases para a mistura " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Modelo: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Pressão de Bolha. (" & Units.pressure & ")").PadRight(20) &
-                                        ("Volume de Bolha (" & Units.molar_volume & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VB").Count - 1
-                                        results.TextOutput += results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Pressão de Orvalho (" & Units.pressure & ")").PadRight(20) &
-                                    ("Volume de Orvalho (" & Units.molar_volume & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VD").Count - 1
-                                        results.TextOutput += results.Data("PD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                Else
-
-                                    Dim model1 As New Global.OxyPlot.PlotModel With {.Title = "Volume/Pressure diagram",
-                                                                                     .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
-
-                                    With model1
-                                        .TitleFontSize = 14
-                                        .SubtitleFontSize = 11
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Pressure (" & Units.pressure & ")"})
-                                        .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")"})
-                                        .AddLineSeries(results.Data("PB").ToArray, results.Data("VB").ToArray)
-                                        .AddLineSeries(results.Data("PD").ToArray, results.Data("VD").ToArray)
-                                        .AddScatterSeries(New Double() {results.Data("CP")(1)}, New Double() {results.Data("CP")(2)})
-                                        ' DirectCast(.Series(0), LineSeries).Smooth = True
-                                        ' DirectCast(.Series(1), LineSeries).Smooth = True
-                                        .Series(0).Title = "Bubble Points"
-                                        .Series(1).Title = "Dew Points"
-                                        .Series(2).Title = "Critical Point"
-                                        .LegendFontSize = 11
-                                        .LegendPosition = LegendPosition.TopCenter
-                                        .LegendPlacement = LegendPlacement.Outside
-                                        .LegendOrientation = LegendOrientation.Horizontal
-                                        .TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
-                                    End With
-
-                                    results.PlotModels.Add(model1)
-
-                                    results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
-                                    results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
-                                    results.TextOutput += ("Bubble Press. (" & Units.pressure & ")").PadRight(20) &
-                                        ("Bubble Volume (" & Units.molar_volume & ")").PadRight(20) & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VB").Count - 1
-                                        results.TextOutput += results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
-                                    Next
-                                    results.TextOutput += ("Dew Press. (" & Units.pressure & ")").PadRight(20) &
-                                       ("Dew Volume (" & Units.molar_volume & ")") & System.Environment.NewLine
-                                    For i As Integer = 0 To results.Data("VD").Count - 1
-                                        results.TextOutput += results.Data("PD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
-                                    Next
-
-                                End If
+                                results.TextOutput += "Phase Envelope calculation results for " & MixName & " " & Compounds.ToArrayString & System.Environment.NewLine
+                                results.TextOutput += "Property Package: " & PropertyPackageName & System.Environment.NewLine & System.Environment.NewLine
+                                results.TextOutput += ("Bubble Press. (" & Units.pressure & ")").PadRight(20) &
+                                    ("Bubble Volume (" & Units.molar_volume & ")").PadRight(20) & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("VB").Count - 1
+                                    results.TextOutput += results.Data("PB")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VB")(i).ToString(results.NumberFormat).PadRight(20) & System.Environment.NewLine
+                                Next
+                                results.TextOutput += ("Dew Press. (" & Units.pressure & ")").PadRight(20) &
+                                   ("Dew Volume (" & Units.molar_volume & ")") & System.Environment.NewLine
+                                For i As Integer = 0 To results.Data("VD").Count - 1
+                                    results.TextOutput += results.Data("PD")(i).ToString(results.NumberFormat).PadRight(20) & results.Data("VD")(i).ToString(results.NumberFormat) & System.Environment.NewLine
+                                Next
 
                         End Select
 

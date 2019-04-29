@@ -429,14 +429,14 @@ namespace DWSIM.UI.Forms
             btnUtilities_BinaryEnvelope.Click += (sender, e) =>
             {
                 var bpe = new Desktop.Editors.Utilities.BinaryEnvelopeView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 500), (int)(sf * 750), bpe);
+                var form = Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 800), (int)(sf * 500), bpe, false);
                 form.Show();
             };
 
             btnUtilities_PhaseEnvelope.Click += (sender, e) =>
             {
                 var pe = new Desktop.Editors.Utilities.PhaseEnvelopeView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 500), (int)(sf * 650), pe);
+                var form = Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 1024), (int)(sf * 500), pe, false);
                 form.Show();
             };
 
