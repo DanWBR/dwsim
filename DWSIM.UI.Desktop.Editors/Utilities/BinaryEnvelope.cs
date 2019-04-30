@@ -174,6 +174,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
                                 {
 
                                     chart.Model = (OxyPlot.PlotModel)results.PlotModels[0];
+                                    chart.Model.Padding = new OxyPlot.OxyThickness(5, 5, 20, 5);
                                     chart.Invalidate();
 
                                     txtResults.Text = results.TextOutput;
