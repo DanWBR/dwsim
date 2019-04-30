@@ -793,6 +793,7 @@ Public Class FormMain
     End Sub
 
     Private Sub FormParent_MdiChildActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MdiChildActivate
+
         If Me.MdiChildren.Length >= 1 Then
 
             Me.WebPanel.Visible = False
@@ -814,7 +815,14 @@ Public Class FormMain
                 End If
             End If
 
+            ToolStripManager.RevertMerge(ToolStrip1)
+
+            If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
+                ToolStripManager.Merge(DirectCast(ActiveMdiChild, FormFlowsheet).ToolStrip1, ToolStrip1)
+            End If
+
         End If
+
     End Sub
 
     Private Sub FormParent_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown

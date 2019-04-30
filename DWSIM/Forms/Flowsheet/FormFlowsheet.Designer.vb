@@ -683,7 +683,7 @@ Partial Class FormFlowsheet
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tsbAtivar, Me.tsbCalcF, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver, Me.ToolStripSeparator2, Me.tsbUndo, Me.tsbRedo})
         Me.ToolStrip1.Name = "ToolStrip1"
         '

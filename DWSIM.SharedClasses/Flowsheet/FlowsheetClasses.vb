@@ -188,7 +188,7 @@ Namespace DWSIM.Flowsheet
 
         Public Property SimulationComments As String = "" Implements Interfaces.IFlowsheetOptions.SimulationComments
 
-        Public Property SimulationName As String = "" Implements Interfaces.IFlowsheetOptions.SimulationName
+        Public Property SimulationName As String = "MySimulation_" & Date.Now.Second.ToString() Implements Interfaces.IFlowsheetOptions.SimulationName
 
         Public Property UsePassword As Boolean = False Implements Interfaces.IFlowsheetOptions.UsePassword
 
