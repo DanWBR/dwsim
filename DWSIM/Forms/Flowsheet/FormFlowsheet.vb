@@ -309,8 +309,6 @@ Public Class FormFlowsheet
 
         End If
 
-        Me.FormLog.Grid1.Sort(Me.FormLog.Grid1.Columns(1), ListSortDirection.Descending)
-
         If DWSIM.App.IsRunningOnMono Then
             FormMain.ToolStripButton1.Enabled = True
             FormMain.SaveAllToolStripButton.Enabled = True
@@ -335,6 +333,8 @@ Public Class FormFlowsheet
 
         FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainer1.Panel1.Width, FormSurface.SplitContainer1.Panel1.Height)
         FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainer1.Panel1.Width, FormSurface.SplitContainer1.Panel1.Height)
+
+        Me.FormLog.Grid1.Sort(Me.FormLog.Grid1.Columns(1), ListSortDirection.Descending)
 
     End Sub
 
@@ -626,12 +626,13 @@ Public Class FormFlowsheet
                                                                  strtipo = DWSIM.App.GetLocalString("Mensagem")
                                                          End Select
 
-                                                         Dim r As Integer = frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
+                                                         frlog.Grid1.Rows.Insert(0, New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
                                                          If frlog.Grid1.Rows.Count > 0 Then
-                                                             frlog.Grid1.Rows(r).Cells("Info").Tag = exceptionID
-                                                             frlog.Grid1.Rows(r).Cells("Mensagem").Style.ForeColor = cor
-                                                             frlog.Grid1.Sort(frlog.Grid1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+                                                             frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
+                                                             frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
+                                                             frlog.Grid1.ClearSelection()
+                                                             frlog.Grid1.FirstDisplayedScrollingRowIndex = 0
                                                          End If
 
                                                      End If

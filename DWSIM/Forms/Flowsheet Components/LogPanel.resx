@@ -127,8 +127,11 @@
   <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
-  <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
+  </data>
+  <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockTopAutoHideToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -142,8 +145,8 @@
   <data name="&gt;&gt;Mensagem.Name" xml:space="preserve">
     <value>Mensagem</value>
   </data>
-  <data name="&gt;&gt;Imagem.Name" xml:space="preserve">
-    <value>Imagem</value>
+  <data name="&gt;&gt;Indice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Tipo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -154,9 +157,6 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LogPanel</value>
   </data>
-  <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Imagem.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -166,9 +166,6 @@
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FloatToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;Grid1.Name" xml:space="preserve">
     <value>Grid1</value>
@@ -193,9 +190,6 @@
   </data>
   <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Right</value>
-  </data>
-  <data name="&gt;&gt;Indice.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
     <value>Informações</value>
@@ -261,11 +255,17 @@
   <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="&gt;&gt;dckMenu.Name" xml:space="preserve">
+    <value>dckMenu</value>
+  </data>
   <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Left</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="&gt;&gt;Grid1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -273,11 +273,14 @@
   <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
-  <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockTopAutoHideToolStripMenuItem</value>
+  <data name="&gt;&gt;ContextMenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockLeftToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="Imagem.HeaderText" xml:space="preserve">
+    <value> </value>
   </data>
   <data name="DockBottomToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -306,20 +309,17 @@
   <data name="DockBottomToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Bottom</value>
   </data>
-  <data name="&gt;&gt;DockTopToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Data.Name" xml:space="preserve">
     <value>Data</value>
+  </data>
+  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Left Auto-Hide</value>
   </data>
   <data name="&gt;&gt;FloatToolStripMenuItem.Name" xml:space="preserve">
     <value>FloatToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockRightAutoHideToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;Data.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Data.Width" type="System.Int32, mscorlib">
     <value>120</value>
@@ -355,14 +355,14 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="&gt;&gt;ContextMenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Imagem.Name" xml:space="preserve">
+    <value>Imagem</value>
   </data>
   <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dckMenu.Name" xml:space="preserve">
-    <value>dckMenu</value>
+  <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -382,11 +382,8 @@
   <data name="&gt;&gt;DockLeftToolStripMenuItem.Name" xml:space="preserve">
     <value>DockLeftToolStripMenuItem</value>
   </data>
-  <data name="Imagem.HeaderText" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="DockRightAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;Data.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockLeftAutoHideToolStripMenuItem</value>
@@ -403,17 +400,20 @@
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Name" xml:space="preserve">
     <value>DockBottomToolStripMenuItem</value>
   </data>
-  <data name="Indice.Width" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;DockTopToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Tipo.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <data name="DockTopToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Top</value>
+  </data>
+  <data name="Indice.Width" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -433,8 +433,8 @@
   <data name="&gt;&gt;DocumentToolStripMenuItem.Name" xml:space="preserve">
     <value>DocumentToolStripMenuItem</value>
   </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Left Auto-Hide</value>
+  <data name="DockRightAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;Info.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -442,8 +442,8 @@
   <data name="Data.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
-  <metadata name="dckMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>118, 5</value>
+  <metadata name="Mensagem.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="Imagem.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -451,25 +451,25 @@
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>en</value>
   </metadata>
-  <metadata name="Indice.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Data.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Tipo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="ContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>220, 5</value>
   </metadata>
-  <metadata name="Tipo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="dckMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>118, 5</value>
   </metadata>
   <metadata name="Info.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Mensagem.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Indice.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>
