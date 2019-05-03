@@ -63,7 +63,7 @@ namespace DWSIM.UI.Desktop.Editors
             page1.Title = "Simulation Setup Wizard";
             page1.HeaderTitle = "Simulation Setup Wizard";
             page1.HeaderDescription = "Welcome!";
-            page1.FooterText = "";
+            page1.FooterText = "Click 'Next' to continue.";
 
             page1.Init(Width, Height);
 
@@ -97,7 +97,7 @@ namespace DWSIM.UI.Desktop.Editors
             page1.Title = "Simulation Setup Wizard";
             page1.HeaderTitle = "Step 1 - Add Compounds";
             page1.HeaderDescription = "Select the compounds to add to the simulation. If your compound is not on the list, you can create and add a new one\nusing the Compound Creator Wizard ('Setup' > 'Compounds' > 'Compound Tools' > 'Compound Creator Wizard').";
-            page1.FooterText = "";
+            page1.FooterText = "Click 'Next' to continue.";
 
             page1.Init(Width, Height);
 
@@ -127,7 +127,7 @@ namespace DWSIM.UI.Desktop.Editors
             page.Title = "Simulation Setup Wizard";
             page.HeaderTitle = "Step 2 - Process Model details";
             page.HeaderDescription = "Configure process model details.";
-            page.FooterText = "";
+            page.FooterText = "Click 'Next' to continue.";
 
             page.Init(Width, Height);
 

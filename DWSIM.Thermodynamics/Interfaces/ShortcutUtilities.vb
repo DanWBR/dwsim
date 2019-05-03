@@ -71,9 +71,11 @@ Namespace ShortcutUtilities
             pp.CurrentMaterialStream = _MaterialStream
             Dim PropertyPackageName As String = pp.ComponentName
             Dim MixName As String = ""
+
             If _MaterialStream.GraphicObject IsNot Nothing Then
                 MixName = _MaterialStream.GraphicObject.Tag
             End If
+
             Dim MixTemperature As Double = _MaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
             Dim MixPressure As Double = _MaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             Dim MixEnthalpy As Double = _MaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
@@ -161,8 +163,8 @@ Namespace ShortcutUtilities
                         Dim res As Object() = Nothing
 
                         BinaryEnvelopeOptions(0) = "T-x-y"
-                        BinaryEnvelopeOptions(1) = _MaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-                        BinaryEnvelopeOptions(2) = _MaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+                        BinaryEnvelopeOptions(1) = MixPressure
+                        BinaryEnvelopeOptions(2) = MixTemperature
                         res = pp.DW_ReturnBinaryEnvelope(BinaryEnvelopeOptions)
 
                         results.Data.Add("px", DirectCast(res(0), ArrayList).ToDoubleList())
@@ -195,10 +197,10 @@ Namespace ShortcutUtilities
                                             Units.pressure, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                         With model1
-                            .TitleFontSize = 18
-                            .SubtitleFontSize = 14
-                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 16})
-                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                            .TitleFontSize = 14
+                            .SubtitleFontSize = 10
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 12})
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
                             .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
                             .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
                             .Series(0).Title = "Bubble Points"
@@ -219,7 +221,7 @@ Namespace ShortcutUtilities
                                 .AddLineSeries(results.Data("pxc").ToArray, results.Data("pyc").ToArray)
                                 .Series(.Series.Count - 1).Title = "Critical Line"
                             End If
-                            .LegendFontSize = 14
+                            .LegendFontSize = 10
                             .LegendPosition = LegendPosition.TopCenter
                             .LegendPlacement = LegendPlacement.Outside
                             .LegendOrientation = LegendOrientation.Horizontal
@@ -294,10 +296,10 @@ Namespace ShortcutUtilities
                                             Units.temperature, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                         With model1
-                            .TitleFontSize = 18
-                            .SubtitleFontSize = 14
-                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 16})
-                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                            .TitleFontSize = 14
+                            .SubtitleFontSize = 10
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 12})
+                            .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 12})
                             .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
                             .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
                             .Series(0).Title = "Bubble Points"
@@ -308,7 +310,7 @@ Namespace ShortcutUtilities
                                 .Series(2).Title = "Liquid-Liquid (1)"
                                 .Series(3).Title = "Liquid-Liquid (2)"
                             End If
-                            .LegendFontSize = 11
+                            .LegendFontSize = 10
                             .LegendPosition = LegendPosition.TopCenter
                             .LegendPlacement = LegendPlacement.Outside
                             .LegendOrientation = LegendOrientation.Horizontal
@@ -399,10 +401,10 @@ Namespace ShortcutUtilities
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                                 With model1
-                                    .TitleFontSize = 18
-                                    .SubtitleFontSize = 14
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                                    .TitleFontSize = 14
+                                    .SubtitleFontSize = 10
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 12})
                                     .AddLineSeries(results.Data("TB").ToArray, results.Data("PB").ToArray)
                                     .Series(0).Title = "Bubble Points"
                                     .AddLineSeries(results.Data("TD").ToArray, results.Data("PD").ToArray)
@@ -428,7 +430,7 @@ Namespace ShortcutUtilities
                                         .Series(.Series.Count - 1).Title = "Operating Point"
                                     End If
 
-                                    .LegendFontSize = 14
+                                    .LegendFontSize = 10
                                     .LegendPosition = LegendPosition.TopCenter
                                     .LegendPlacement = LegendPlacement.Outside
                                     .LegendOrientation = LegendOrientation.Horizontal
@@ -482,10 +484,10 @@ Namespace ShortcutUtilities
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                                 With model1
-                                    .TitleFontSize = 18
-                                    .SubtitleFontSize = 14
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")", .FontSize = 16})
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                                    .TitleFontSize = 14
+                                    .SubtitleFontSize = 10
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")", .FontSize = 12})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 12})
                                     .AddLineSeries(results.Data("HB").ToArray, results.Data("PB").ToArray)
                                     .AddLineSeries(results.Data("HD").ToArray, results.Data("PD").ToArray)
                                     .Series(0).Title = "Bubble Points"
@@ -495,7 +497,7 @@ Namespace ShortcutUtilities
                                         DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
                                         .Series(.Series.Count - 1).Title = "Operating Point"
                                     End If
-                                    .LegendFontSize = 14
+                                    .LegendFontSize = 10
                                     .LegendPosition = LegendPosition.TopCenter
                                     .LegendPlacement = LegendPlacement.Outside
                                     .LegendOrientation = LegendOrientation.Horizontal
@@ -523,10 +525,10 @@ Namespace ShortcutUtilities
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                                 With model1
-                                    .TitleFontSize = 18
-                                    .SubtitleFontSize = 14
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")", .FontSize = 16})
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
+                                    .TitleFontSize = 14
+                                    .SubtitleFontSize = 10
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")", .FontSize = 12})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 12})
                                     .AddLineSeries(results.Data("SB").ToArray, results.Data("PB").ToArray)
                                     .AddLineSeries(results.Data("SD").ToArray, results.Data("PD").ToArray)
                                     .Series(0).Title = "Bubble Points"
@@ -536,7 +538,7 @@ Namespace ShortcutUtilities
                                         DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
                                         .Series(.Series.Count - 1).Title = "Operating Point"
                                     End If
-                                    .LegendFontSize = 14
+                                    .LegendFontSize = 10
                                     .LegendPosition = LegendPosition.TopCenter
                                     .LegendPlacement = LegendPlacement.Outside
                                     .LegendOrientation = LegendOrientation.Horizontal
@@ -563,10 +565,10 @@ Namespace ShortcutUtilities
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                                 With model1
-                                    .TitleFontSize = 18
-                                    .SubtitleFontSize = 14
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")", .FontSize = 16})
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                                    .TitleFontSize = 14
+                                    .SubtitleFontSize = 10
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Enthalpy (" & Units.enthalpy & ")", .FontSize = 12})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
                                     .AddLineSeries(results.Data("HB").ToArray, results.Data("TB").ToArray)
                                     .AddLineSeries(results.Data("HD").ToArray, results.Data("TD").ToArray)
                                     .Series(0).Title = "Bubble Points"
@@ -576,7 +578,7 @@ Namespace ShortcutUtilities
                                         DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
                                         .Series(.Series.Count - 1).Title = "Operating Point"
                                     End If
-                                    .LegendFontSize = 14
+                                    .LegendFontSize = 10
                                     .LegendPosition = LegendPosition.TopCenter
                                     .LegendPlacement = LegendPlacement.Outside
                                     .LegendOrientation = LegendOrientation.Horizontal
@@ -604,10 +606,10 @@ Namespace ShortcutUtilities
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                                 With model1
-                                    .TitleFontSize = 18
-                                    .SubtitleFontSize = 14
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")", .FontSize = 16})
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
+                                    .TitleFontSize = 14
+                                    .SubtitleFontSize = 10
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Entropy (" & Units.entropy & ")", .FontSize = 12})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
                                     .AddLineSeries(results.Data("SB").ToArray, results.Data("TB").ToArray)
                                     .AddLineSeries(results.Data("SD").ToArray, results.Data("TD").ToArray)
                                     .Series(0).Title = "Bubble Points"
@@ -617,7 +619,7 @@ Namespace ShortcutUtilities
                                         DirectCast(.Series(.Series.Count - 1), ScatterSeries).MarkerSize = 3
                                         .Series(.Series.Count - 1).Title = "Operating Point"
                                     End If
-                                    .LegendFontSize = 14
+                                    .LegendFontSize = 10
                                     .LegendPosition = LegendPosition.TopCenter
                                     .LegendPlacement = LegendPlacement.Outside
                                     .LegendOrientation = LegendOrientation.Horizontal
@@ -645,17 +647,17 @@ Namespace ShortcutUtilities
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                                 With model1
-                                    .TitleFontSize = 18
-                                    .SubtitleFontSize = 14
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 16})
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")", .FontSize = 16})
+                                    .TitleFontSize = 14
+                                    .SubtitleFontSize = 10
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")", .FontSize = 12})
                                     .AddLineSeries(results.Data("TB").ToArray, results.Data("VB").ToArray)
                                     .AddLineSeries(results.Data("TD").ToArray, results.Data("VD").ToArray)
                                     .AddScatterSeries(New Double() {results.Data("CP")(0)}, New Double() {results.Data("CP")(2)})
                                     .Series(0).Title = "Bubble Points"
                                     .Series(1).Title = "Dew Points"
                                     .Series(2).Title = "Critical Point"
-                                    .LegendFontSize = 14
+                                    .LegendFontSize = 10
                                     .LegendPosition = LegendPosition.TopCenter
                                     .LegendPlacement = LegendPlacement.Outside
                                     .LegendOrientation = LegendOrientation.Horizontal
@@ -683,10 +685,10 @@ Namespace ShortcutUtilities
                                                                                      .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                                 With model1
-                                    .TitleFontSize = 18
-                                    .SubtitleFontSize = 14
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 16})
-                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")", .FontSize = 16})
+                                    .TitleFontSize = 14
+                                    .SubtitleFontSize = 10
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Pressure (" & Units.pressure & ")", .FontSize = 12})
+                                    .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Volume (" & Units.molar_volume & ")", .FontSize = 12})
                                     .AddLineSeries(results.Data("PB").ToArray, results.Data("VB").ToArray)
                                     .AddLineSeries(results.Data("PD").ToArray, results.Data("VD").ToArray)
                                     .AddScatterSeries(New Double() {results.Data("CP")(1)}, New Double() {results.Data("CP")(2)})
@@ -695,7 +697,7 @@ Namespace ShortcutUtilities
                                     .Series(0).Title = "Bubble Points"
                                     .Series(1).Title = "Dew Points"
                                     .Series(2).Title = "Critical Point"
-                                    .LegendFontSize = 14
+                                    .LegendFontSize = 10
                                     .LegendPosition = LegendPosition.TopCenter
                                     .LegendPlacement = LegendPlacement.Outside
                                     .LegendOrientation = LegendOrientation.Horizontal

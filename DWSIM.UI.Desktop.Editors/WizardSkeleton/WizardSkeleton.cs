@@ -130,12 +130,13 @@ namespace DWSIM.UI.Desktop.Editors
             footercontainer.Padding = new Padding(15);
             footercontainer.Spacing = new Size(10, 10);
             if (Application.Instance.Platform.IsWinForms) footercontainer.Height = (int)(s.UIScalingFactor * 60);
-            //if (Application.Instance.Platform.IsGtk) footercontainer.Height = (int)(s.UIScalingFactor * 30);
 
             container.Rows.Add(new TableRow(topcontainer));
             container.Rows.Add(new TableRow(middlecontainer));
             if (Application.Instance.Platform.IsWinForms) container.Rows.Add(null);
             container.Rows.Add(new TableRow(footercontainer));
+
+            if (Application.Instance.Platform.IsGtk) container.Rows.Add(null);
 
             container.Padding = new Padding(0);
 
@@ -152,7 +153,6 @@ namespace DWSIM.UI.Desktop.Editors
             Topmost = true;
 
             Visible = true;
-
         }
 
     }

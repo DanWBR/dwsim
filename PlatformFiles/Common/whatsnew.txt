@@ -1,7 +1,7 @@
-Version 5.7 Update 6
+Version 5.7 Update 7
 
-- [NEW] IronPython Script Debugging (Classic UI)
-- [CHG] Updated components info in about boxes
-- [FIX] Fixed Custom Calculation Order not working (Classic UI)
-- [FIX] Fixed Pressure units in Valve's Kv calculation mode
-- [FIX] Other minor bug fixes
+- [NEW] Enhanced Phase/Binary Envelopes in Cross-Platform UI
+- [FIX] Fixed compound adding by pressing ENTER on the search box (Classic UI)
+- [FIX] Fixed Phase Identification Parameter in Phase Envelope
+- [FIX] Fixed merged ToolStrips in Classic UI
+- [FIX] Minor bug fixes and tweaks in Cross-Platform UI

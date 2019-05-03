@@ -93,6 +93,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ILMerge.props">
       <SubType>Designer</SubType>
     </None>

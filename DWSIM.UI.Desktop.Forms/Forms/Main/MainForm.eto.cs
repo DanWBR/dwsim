@@ -74,6 +74,7 @@ namespace DWSIM.UI
                 button.TextColor = Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
                 button.Width = (int)(sf * 250);
+                button.Height = (int)(sf * 50);
             });
 
             Eto.Style.Add<Button>("donate", button =>
@@ -83,6 +84,7 @@ namespace DWSIM.UI
                 button.TextColor = !s.DarkMode ? bgcolor : Colors.White;
                 button.ImagePosition = ButtonImagePosition.Left;
                 button.Width = (int)(sf * 250);
+                button.Height = (int)(sf * 50);
             });
 
             var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };

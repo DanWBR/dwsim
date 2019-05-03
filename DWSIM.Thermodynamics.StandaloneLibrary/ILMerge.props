@@ -63,5 +63,7 @@
 
     <!-- The version of the target framework, default 40 (works for 45 too) -->
     <ILTargetPlatform></ILTargetPlatform>
+
+    <ILMergeShouldLog>true</ILMergeShouldLog>
   </PropertyGroup>
 </Project>

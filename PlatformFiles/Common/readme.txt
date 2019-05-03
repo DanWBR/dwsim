@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 6
+Version 5.7 Update 7
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 7
+
+- [NEW] Enhanced Phase/Binary Envelopes in Cross-Platform UI
+- [FIX] Fixed compound adding by pressing ENTER on the search box (Classic UI)
+- [FIX] Fixed Phase Identification Parameter in Phase Envelope
+- [FIX] Fixed merged ToolStrips in Classic UI
+- [FIX] Minor bug fixes and tweaks in Cross-Platform UI
 
 Version 5.7 Update 6
 

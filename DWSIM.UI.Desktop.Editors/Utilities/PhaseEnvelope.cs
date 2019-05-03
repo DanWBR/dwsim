@@ -116,7 +116,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             var chart = new Eto.OxyPlot.Plot { BackgroundColor = Colors.White };
 
-            var txtResults = new TextArea() {ReadOnly = true, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize)};
+            var txtResults = new TextArea() { ReadOnly = true, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize) };
 
             tabcontainer.Pages.Add(new TabPage(new TableRow(chart)) { Text = "Chart" });
             tabcontainer.Pages.Add(new TabPage(new TableRow(txtResults)) { Text = "Data" });
@@ -162,7 +162,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
                     calc.PhaseEnvelopeOptions = EnvelopeOptions;
 
                     DWSIM.Thermodynamics.ShortcutUtilities.CalculationResults results = null;
-                    
+
                     var pg = ProgressDialog.Show(this, "Please Wait", "Calculating Envelope Lines...", false);
 
                     Task.Factory.StartNew(() =>
@@ -182,6 +182,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
                                 {
 
                                     chart.Model = (OxyPlot.PlotModel)results.PlotModels[0];
+                                    chart.Model.Padding = new OxyPlot.OxyThickness(5, 5, 20, 5);
                                     chart.Invalidate();
 
                                     txtResults.Text = results.TextOutput;

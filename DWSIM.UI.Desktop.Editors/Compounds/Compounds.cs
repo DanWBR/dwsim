@@ -80,7 +80,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var txt = new Label { Text = "Click to view properties of the selected compound", VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            var btn = new Button { Width = 200, Text = "View Properties" };
+            var btn = new Button { Width = 200, Height = 26, Text = "View Properties" };
             btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             btn.Click += (sender, e) =>
@@ -122,7 +122,7 @@ namespace DWSIM.UI.Desktop.Editors
             listcontainer.Style = "fastgrid";
 
             if (Application.Instance.Platform.IsWinForms) listcontainer.Height = 370;
-
+            
             var col2 = new GridColumn
             {
                 DataCell = new CheckBoxCell { Binding = Binding.Property<CompoundItem, bool?>(r => r.Check) },
@@ -167,7 +167,8 @@ namespace DWSIM.UI.Desktop.Editors
             col1c.AutoSize = true;
             listcontainer.Columns.Add(col1c);
 
-            container.Rows.Add(new TableRow(new Scrollable { Content = listcontainer, Border = BorderType.None }));
+            //container.Rows.Add(new TableRow(new Scrollable { Content = listcontainer, Border = BorderType.None }));
+            container.Rows.Add(new TableRow(listcontainer));
 
         }
 
