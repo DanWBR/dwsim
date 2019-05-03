@@ -112,6 +112,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = ""
 
+            settings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) = 1.0
+            settings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) = 10.0#
+            settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = 0.1
+
             Return settings
 
         End Function

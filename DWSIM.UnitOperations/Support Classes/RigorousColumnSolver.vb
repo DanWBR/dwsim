@@ -966,6 +966,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If ik Or ih Then
                 _ppr = New PropertyPackages.RaoultPropertyPackage
+                _ppr.Flowsheet = pp.Flowsheet
                 _ppr.CurrentMaterialStream = pp.CurrentMaterialStream
             End If
 
@@ -2062,6 +2063,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If IdealK Or IdealH Then
                 ppr = New PropertyPackages.RaoultPropertyPackage
+                ppr.Flowsheet = pp.Flowsheet
                 ppr.CurrentMaterialStream = pp.CurrentMaterialStream
             End If
 
@@ -2767,6 +2769,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If IdealK Or IdealH Then
                 ppr = New PropertyPackages.RaoultPropertyPackage
+                ppr.Flowsheet = pp.Flowsheet
                 ppr.CurrentMaterialStream = pp.CurrentMaterialStream
             End If
 
@@ -3889,6 +3892,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If ik Or ih Then
                 _ppr = New PropertyPackages.RaoultPropertyPackage
+                _ppr.Flowsheet = pp.Flowsheet
                 _ppr.CurrentMaterialStream = pp.CurrentMaterialStream
             End If
 

@@ -244,6 +244,10 @@ Namespace Enums
 
         NL_FastMode = 17
 
+        PVFlash_TemperatureDerivativeEpsilon = 18
+        PVFlash_MaximumTemperatureChange = 19
+        PVFlash_FixedDampingFactor = 20
+
     End Enum
 
     Public Enum FlashCalculationType

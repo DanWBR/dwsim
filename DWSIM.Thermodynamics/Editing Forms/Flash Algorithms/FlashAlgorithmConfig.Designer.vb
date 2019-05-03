@@ -53,6 +53,12 @@ Partial Class FlashAlgorithmConfig
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPageNL = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbPV_DampingFactor = New System.Windows.Forms.TextBox()
+        Me.tbPV_MaxDT = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.tbPV_EpsilonT = New System.Windows.Forms.TextBox()
+        Me.Label26 = New System.Windows.Forms.Label()
         Me.chkFastModeNL = New System.Windows.Forms.CheckBox()
         Me.TabPageIO = New System.Windows.Forms.TabPage()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -316,9 +322,45 @@ Partial Class FlashAlgorithmConfig
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbPV_DampingFactor)
+        Me.GroupBox2.Controls.Add(Me.tbPV_MaxDT)
+        Me.GroupBox2.Controls.Add(Me.Label24)
+        Me.GroupBox2.Controls.Add(Me.Label25)
+        Me.GroupBox2.Controls.Add(Me.tbPV_EpsilonT)
+        Me.GroupBox2.Controls.Add(Me.Label26)
         Me.GroupBox2.Controls.Add(Me.chkFastModeNL)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'tbPV_DampingFactor
+        '
+        resources.ApplyResources(Me.tbPV_DampingFactor, "tbPV_DampingFactor")
+        Me.tbPV_DampingFactor.Name = "tbPV_DampingFactor"
+        '
+        'tbPV_MaxDT
+        '
+        resources.ApplyResources(Me.tbPV_MaxDT, "tbPV_MaxDT")
+        Me.tbPV_MaxDT.Name = "tbPV_MaxDT"
+        '
+        'Label24
+        '
+        resources.ApplyResources(Me.Label24, "Label24")
+        Me.Label24.Name = "Label24"
+        '
+        'Label25
+        '
+        resources.ApplyResources(Me.Label25, "Label25")
+        Me.Label25.Name = "Label25"
+        '
+        'tbPV_EpsilonT
+        '
+        resources.ApplyResources(Me.tbPV_EpsilonT, "tbPV_EpsilonT")
+        Me.tbPV_EpsilonT.Name = "tbPV_EpsilonT"
+        '
+        'Label26
+        '
+        resources.ApplyResources(Me.Label26, "Label26")
+        Me.Label26.Name = "Label26"
         '
         'chkFastModeNL
         '
@@ -779,4 +821,10 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents btnTestPSFlash As Button
     Friend WithEvents btnTestPHFlash As Button
     Friend WithEvents btnTestPTFlash As Button
+    Friend WithEvents tbPV_DampingFactor As TextBox
+    Friend WithEvents tbPV_MaxDT As TextBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label25 As Label
+    Friend WithEvents tbPV_EpsilonT As TextBox
+    Friend WithEvents Label26 As Label
 End Class
