@@ -50,40 +50,49 @@ Namespace GraphicObjects.Shapes
             Dim myIC1 As New ConnectionPoint
             myIC1.Position = New Point(X, Y + 0 * Height)
             myIC1.Type = ConType.ConIn
+            myIC1.ConnectorName = "Inlet Port #1"
 
             Dim myIC2 As New ConnectionPoint
             myIC2.Position = New Point(X, Y + 0.33 * Height)
             myIC2.Type = ConType.ConIn
+            myIC2.ConnectorName = "Inlet Port #2"
 
             Dim myIC3 As New ConnectionPoint
             myIC3.Position = New Point(X, Y + 0.66 * Height)
             myIC3.Type = ConType.ConIn
+            myIC3.ConnectorName = "Inlet Port #3"
 
             Dim myIC4 As New ConnectionPoint
             myIC4.Position = New Point(X, Y + 1 * Height)
             myIC4.Type = ConType.ConIn
+            myIC4.ConnectorName = "Inlet Port #4"
 
 
             Dim myEC1 As New ConnectionPoint
             myEC1.Position = New Point(X + 0.5 * Width, Y + Height)
             myEC1.Type = ConType.ConEn
+            myEC1.ConnectorName = "I/O Energy Port"
 
 
             Dim myOC1 As New ConnectionPoint
             myOC1.Position = New Point(X + Width, Y + 0 * Height)
             myOC1.Type = ConType.ConOut
+            myOC1.ConnectorName = "Outlet Port #1"
 
             Dim myOC2 As New ConnectionPoint
             myOC2.Position = New Point(X + Width, Y + 0.33 * Height)
             myOC2.Type = ConType.ConOut
+            myOC2.ConnectorName = "Outlet Port #2"
 
             Dim myOC3 As New ConnectionPoint
             myOC3.Position = New Point(X + Width, Y + 0.66 * Height)
             myOC3.Type = ConType.ConOut
+            myOC3.ConnectorName = "Outlet Port #3"
 
             Dim myOC4 As New ConnectionPoint
             myOC4.Position = New Point(X + Width, Y + 1 * Height)
             myOC4.Type = ConType.ConOut
+            myOC4.ConnectorName = "Outlet Port #4"
 
             Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
             Me.EnergyConnector.Type = ConType.ConEn
