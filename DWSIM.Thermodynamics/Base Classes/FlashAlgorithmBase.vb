@@ -1109,6 +1109,16 @@ will converge to this solution.")
                     FlashSettings.Add(esname, xel3.@Value)
                 Next
 
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor, 1.0.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange, 10.0.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon, 0.1.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+
             End If
 
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data)

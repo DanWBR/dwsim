@@ -1409,6 +1409,8 @@ Public Class FormSimulSettings
             compound = Me.FrmChild.Options.SelectedComponents(compID)
         ElseIf FrmChild.Options.NotSelectedComponents.ContainsKey(compID) Then
             compound = Me.FrmChild.Options.NotSelectedComponents(compID)
+        Else
+            compound = Nothing
         End If
         Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = compound}
         FrmChild.DisplayForm(f)

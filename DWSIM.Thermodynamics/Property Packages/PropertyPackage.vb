@@ -4531,6 +4531,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     prevkib = tmp1(6)
                                     py1.Add(Test1)
                                 Catch ex As Exception
+                                    'extrapolate
                                     py1.Add(Double.NaN)
                                 End Try
                                 Try
@@ -4626,6 +4627,38 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         End If
 
                     End If
+
+                    'replace missing data with interpolated values
+
+                    'VLE
+
+                    Dim data As Tuple(Of Double(), Double()) = New Tuple(Of Double(), Double())(px.ToDoubleArray, py1.ToDoubleArray)
+
+                    Dim validdata = data.ReturnValidSets()
+
+                    Dim interpolator As New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(validdata.Item1, validdata.Item2)
+
+                    i = 0
+                    For Each d As Double In py1.Clone
+                        If Double.IsNaN(d) Then
+                            py1(i) = interpolator.Interpolate(px(i))
+                        End If
+                        i += 1
+                    Next
+
+                    data = New Tuple(Of Double(), Double())(px.ToDoubleArray, py2.ToDoubleArray)
+
+                    validdata = data.ReturnValidSets()
+
+                    interpolator = New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(validdata.Item1, validdata.Item2)
+
+                    i = 0
+                    For Each d As Double In py2.Clone
+                        If Double.IsNaN(d) Then
+                            py2(i) = interpolator.Interpolate(px(i))
+                        End If
+                        i += 1
+                    Next
 
                     If SLE Then
 

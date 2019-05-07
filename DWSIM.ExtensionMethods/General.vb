@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports System.Globalization
 Imports DWSIM.Interfaces.Enums
+Imports System.Linq
 
 Public Module General
 
@@ -9,6 +10,23 @@ Public Module General
         Dim collection = DirectCast(exobj, IDictionary(Of String, Object))
         If collection.ContainsKey(varname) Then collection.Remove(varname)
     End Sub
+
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function ReturnValidSets(data As Tuple(Of Double(), Double())) As Tuple(Of Double(), Double())
+
+        Dim v1, v2 As New List(Of Double)
+        For i As Integer = 0 To data.Item1.Count - 1
+            If Not Double.IsNaN(data.Item1(i)) And Not Double.IsNaN(data.Item2(i)) Then
+                v1.Add(data.Item1(i))
+                v2.Add(data.Item2(i))
+            End If
+        Next
+
+        Return New Tuple(Of Double(), Double())(v1.ToArray, v2.ToArray)
+
+    End Function
+
 
     <System.Runtime.CompilerServices.Extension()>
     Public Function ToDoubleArray(al As ArrayList) As Double()

@@ -199,12 +199,73 @@ Namespace ShortcutUtilities
                         With model1
                             .TitleFontSize = 14
                             .SubtitleFontSize = 10
+
                             .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 12})
                             .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
-                            .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray)
-                            .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray)
+
+                            'area
+
+                            .AddAreaSeries(results.Data("px").ToArray, results.Data("py1").ToArray, results.Data("py2").ToArray, OxyColors.LightGreen, "VL", True)
+                            If results.Data("pxc").Count > 0 Then
+                                .AddAreaSeriesAbove(results.Data("px").ToArray, results.Data("pyc").ToArray, results.Data("pyc").Max * 2, OxyColors.Salmon, "NC", True)
+                                .AddAreaSeries(results.Data("px").ToArray, results.Data("py2").ToArray, results.Data("pyc").ToArray, OxyColors.LightYellow, "V", True)
+                            Else
+                                Dim maxt = _MaterialStream.Phases(0).Compounds.First.Value.ConstantProperties.Critical_Temperature + _MaterialStream.Phases(0).Compounds.Last.Value.ConstantProperties.Critical_Temperature
+                                maxt /= 2
+                                .AddAreaSeriesAbove(results.Data("px").ToArray, results.Data("py2").ToArray, maxt, OxyColors.Salmon, "V", True)
+                            End If
+                            If results.Data("pxs1").Count > 0 Then
+                                .AddAreaSeries(results.Data("px").ToArray, results.Data("pxs1").ToArray, results.Data("pxs2").ToArray, OxyColors.LightYellow, "SL", True)
+                                .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("pxs1").ToArray, OxyColors.GhostWhite, "S", True)
+                                If results.Data("px1l1").Count > 0 Then
+                                    'SVLLE
+                                    Dim i As Integer
+                                    Dim p1l As New List(Of MathNet.Spatial.Euclidean.Point2D)
+                                    Dim p2l As New List(Of MathNet.Spatial.Euclidean.Point2D)
+                                    Dim p3l As New List(Of MathNet.Spatial.Euclidean.Point2D)
+                                    i = 0
+                                    For Each p In results.Data("py1")
+                                        p1l.Add(New MathNet.Spatial.Euclidean.Point2D(results.Data("px")(i), results.Data("py1")(i)))
+                                        i += 1
+                                    Next
+                                    i = 0
+                                    For Each p In results.Data("px1l1")
+                                        p2l.Add(New MathNet.Spatial.Euclidean.Point2D(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        i += 1
+                                    Next
+                                    i = 0
+                                    For Each p In results.Data("pxs2")
+                                        p3l.Add(New MathNet.Spatial.Euclidean.Point2D(results.Data("pxs2")(i), results.Data("pys2")(i)))
+                                        i += 1
+                                    Next
+                                    Dim l1 As New MathNet.Spatial.Euclidean.PolyLine2D(p1l)
+                                    Dim l2 As New MathNet.Spatial.Euclidean.PolyLine2D(p2l)
+                                    Dim l3 As New MathNet.Spatial.Euclidean.PolyLine2D(p3l)
+                                    Dim intersection1 =
+                                    Dim intersection2 = l2.Intersect(l3)
+                                    If intersection1.Count > 0 Then
+                                    End If
+                                Else
+                                    'SVLE
+                                    .AddAreaSeries(results.Data("px").ToArray, results.Data("pxs2").ToArray, results.Data("py1").ToArray, OxyColors.LightBlue, "L", True)
+                                End If
+                            Else
+                                If results.Data("px1l1").Count > 0 Then
+                                    'VLLE
+                                Else
+                                    'VLE
+                                    .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("py1").ToArray, OxyColors.LightBlue, "L", True)
+                                End If
+                            End If
+
+
+
+                            .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray, OxyColors.Blue)
+                            .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray, OxyColors.Yellow)
+
                             .Series(0).Title = "Bubble Points"
                             .Series(1).Title = "Dew Points"
+
                             If results.Data("px1l1").Count > 0 Then
                                 .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
                                 .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
