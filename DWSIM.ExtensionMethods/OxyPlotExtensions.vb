@@ -112,7 +112,38 @@ Public Module OxyPlot
         model.Series.Add(areaseries)
 
         If displaylabel Then
-            model.Annotations.Add(New Annotations.TextAnnotation() With {.TextPosition = New DataPoint(0.5, (ySeries.Average + ySeries2.Average) / 2), .Text = title, .TextColor = OxyColors.Black, .FontSize = 10, .Background = OxyColors.Transparent, .StrokeThickness = 0.0})
+            model.Annotations.Add(New Annotations.TextAnnotation() With {.TextPosition = New DataPoint((xSeries.Min + xSeries.Max) / 2, (ySeries.Average + ySeries2.Average) / 2), .Text = title, .TextColor = OxyColors.Black, .FontSize = 10, .Background = OxyColors.Transparent, .StrokeThickness = 0.0})
+        End If
+
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension>
+    Public Sub AddAreaSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), xSeries2 As IEnumerable(Of Double), ySeries2 As IEnumerable(Of Double), color As OxyColor, ByVal title As String, ByVal displaylabel As Boolean)
+
+        Dim areaseries As AreaSeries = New AreaSeries
+
+        With areaseries
+            .Fill = color
+            .StrokeThickness = 0.0
+            .Title = title
+            .LineStyle = LineStyle.None
+            '.InterpolationAlgorithm = InterpolationAlgorithms.UniformCatmullRomSpline
+            .Color = OxyColors.Transparent
+            .Color2 = OxyColors.Transparent
+            .MinimumSegmentLength = 0.01
+        End With
+
+        For i As Integer = 0 To xSeries.Count - 1
+            areaseries.Points.Add(New DataPoint(xSeries(i), ySeries(i)))
+        Next
+        For i As Integer = 0 To xSeries2.Count - 1
+            areaseries.Points2.Add(New DataPoint(xSeries2(i), ySeries2(i)))
+        Next
+
+        model.Series.Add(areaseries)
+
+        If displaylabel Then
+            model.Annotations.Add(New Annotations.TextAnnotation() With {.TextPosition = New DataPoint((xSeries.Min + xSeries.Max) / 2, (ySeries.Average + ySeries2.Average) / 2), .Text = title, .TextColor = OxyColors.Black, .FontSize = 10, .Background = OxyColors.Transparent, .StrokeThickness = 0.0})
         End If
 
     End Sub
@@ -141,7 +172,7 @@ Public Module OxyPlot
         model.Series.Add(areaseries)
 
         If displaylabel Then
-            model.Annotations.Add(New Annotations.TextAnnotation() With {.TextPosition = New DataPoint(0.5, ySeries.Average / 2), .Text = title, .TextColor = OxyColors.Black, .FontSize = 10, .Background = OxyColors.Transparent, .StrokeThickness = 0.0})
+            model.Annotations.Add(New Annotations.TextAnnotation() With {.TextPosition = New DataPoint((xSeries.Min + xSeries.Max) / 2, ySeries.Average / 2), .Text = title, .TextColor = OxyColors.Black, .FontSize = 10, .Background = OxyColors.Transparent, .StrokeThickness = 0.0})
         End If
 
     End Sub
@@ -170,7 +201,7 @@ Public Module OxyPlot
         model.Series.Add(areaseries)
 
         If displaylabel Then
-            model.Annotations.Add(New Annotations.TextAnnotation() With {.TextPosition = New DataPoint(0.5, (maxvalue + ySeries.Average) / 2), .Text = title, .TextColor = OxyColors.Black, .FontSize = 10, .Background = OxyColors.Transparent, .StrokeThickness = 0.0})
+            model.Annotations.Add(New Annotations.TextAnnotation() With {.TextPosition = New DataPoint((xSeries.Min + xSeries.Max) / 2, (maxvalue + ySeries.Average) / 2), .Text = title, .TextColor = OxyColors.Black, .FontSize = 10, .Background = OxyColors.Transparent, .StrokeThickness = 0.0})
         End If
 
     End Sub

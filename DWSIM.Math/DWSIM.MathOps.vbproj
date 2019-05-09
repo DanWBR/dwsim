@@ -103,9 +103,11 @@
     <Compile Include="GDEM.vb" />
     <Compile Include="General.vb" />
     <Compile Include="Interpolation.vb" />
+    <Compile Include="Intersection.vb" />
     <Compile Include="LBFGS.vb" />
     <Compile Include="LBFGSB.vb" />
     <Compile Include="LM.vb" />
+    <Compile Include="LMFit.vb" />
     <Compile Include="LP_Solve.vb" />
     <Compile Include="MATRIX2.vb" />
     <Compile Include="MatrixOps.vb" />
@@ -145,7 +147,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DWSIM.DrawingTools.Point\DWSIM.DrawingTools.Point.vbproj">
+      <Project>{0f6737eb-db5a-4872-bef8-5ef10b4f1c1c}</Project>
+      <Name>DWSIM.DrawingTools.Point</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

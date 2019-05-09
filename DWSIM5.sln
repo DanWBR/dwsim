@@ -197,8 +197,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DTL", "DTL", "{40E0E548-532
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.SkiaSharp.Views.Desktop", "DWSIM.SkiaSharp.Views.Desktop\DWSIM.SkiaSharp.Views.Desktop.csproj", "{F4E6F3E7-532C-4091-A82F-1DD7D191A13B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.AlgLib", "DWSIM.MathOps.AlgLib\DWSIM.MathOps.AlgLib.csproj", "{B4B1F8E7-F595-4256-B5E5-289EFE30782A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -935,22 +933,6 @@ Global
 		{F4E6F3E7-532C-4091-A82F-1DD7D191A13B}.Release|x64.Build.0 = Release|Any CPU
 		{F4E6F3E7-532C-4091-A82F-1DD7D191A13B}.Release|x86.ActiveCfg = Release|Any CPU
 		{F4E6F3E7-532C-4091-A82F-1DD7D191A13B}.Release|x86.Build.0 = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|x64.Build.0 = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Debug|x86.Build.0 = Debug|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|x64.ActiveCfg = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|x64.Build.0 = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|x86.ActiveCfg = Release|Any CPU
-		{B4B1F8E7-F595-4256-B5E5-289EFE30782A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
