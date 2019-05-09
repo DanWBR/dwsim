@@ -198,13 +198,14 @@ Namespace ShortcutUtilities
                                             Units.pressure, .Subtitle = MixName & " " & Compounds.ToArrayString() & " / " & "Model: " & PropertyPackageName}
 
                         With model1
+
                             .TitleFontSize = 14
                             .SubtitleFontSize = 10
 
                             .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Bottom, .Title = "Mole Fraction " & Compounds(0), .FontSize = 12})
                             .Axes.Add(New LinearAxis() With {.MajorGridlineStyle = LineStyle.Dash, .MinorGridlineStyle = LineStyle.Dot, .Position = AxisPosition.Left, .Title = "Temperature (" & Units.temperature & ")", .FontSize = 12})
 
-                            'area
+                            'draw areas
 
                             .AddAreaSeries(results.Data("px").ToArray, results.Data("py1").ToArray, results.Data("py2").ToArray, OxyColors.LightGreen, "V+L", True)
                             If results.Data("pxc").Count > 0 Then
@@ -215,28 +216,21 @@ Namespace ShortcutUtilities
                                 maxt /= 2
                                 .AddAreaSeriesAbove(results.Data("px").ToArray, results.Data("py2").ToArray, maxt, OxyColors.Salmon, "V", True)
                             End If
-                            If results.Data("pxs1").Count > 0 Then
-                                If results.Data("pys2").Sum > results.Data("pys1").Sum Then
-                                    .AddAreaSeries(results.Data("px").ToArray, results.Data("pys1").ToArray, results.Data("pys2").ToArray, OxyColors.LightSteelBlue, "S+L", True)
-                                    .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("pys1").ToArray, OxyColors.GhostWhite, "S", True)
-                                Else
-                                    .AddAreaSeries(results.Data("px").ToArray, results.Data("pys2").ToArray, results.Data("pys1").ToArray, OxyColors.LightSteelBlue, "S+L", True)
-                                    .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("pys2").ToArray, OxyColors.GhostWhite, "S", True)
-                                End If
-                                If results.Data("px1l1").Count > 0 Then
+                            If results.Data("px1l1").Count > 0 Then
+                                Dim i As Integer
+                                Dim minxl1, maxxl1, minxl2, maxxl2 As Double
+                                Dim curve1, curve2, curve3, curve4 As New List(Of Point.Point)
+                                For i = 0 To results.Data("px").Count - 1
+                                    curve1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                Next
+                                For i = 0 To results.Data("px1l1").Count - 1
+                                    curve2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                Next
+                                For i = 0 To results.Data("px1l2").Count - 1
+                                    curve3.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
+                                Next
+                                If results.Data("pxs1").Count > 0 Then
                                     'SVLLE
-                                    Dim i As Integer
-                                    Dim minxl1, maxxl1, minxl2, maxxl2 As Double
-                                    Dim curve1, curve2, curve3, curve4 As New List(Of Point.Point)
-                                    For i = 0 To results.Data("px").Count - 1
-                                        curve1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                    Next
-                                    For i = 0 To results.Data("px1l1").Count - 1
-                                        curve2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                    Next
-                                    For i = 0 To results.Data("px1l2").Count - 1
-                                        curve3.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
-                                    Next
                                     If results.Data("pys2").Sum > results.Data("pys1").Sum Then
                                         For i = 0 To results.Data("pxs2").Count - 1
                                             curve4.Add(New Point.Point(results.Data("pxs2")(i), results.Data("pys2")(i)))
@@ -246,197 +240,221 @@ Namespace ShortcutUtilities
                                             curve4.Add(New Point.Point(results.Data("pxs1")(i), results.Data("pys1")(i)))
                                         Next
                                     End If
-                                    minxl1 = curve2.Select(Function(_x) _x.X).Min
-                                    maxxl1 = curve2.Select(Function(_x) _x.X).Max
-                                    minxl2 = curve3.Select(Function(_x) _x.X).Min
-                                    maxxl2 = curve3.Select(Function(_x) _x.X).Max
-                                    Dim iBL1 = MathEx.Intersection.FindIntersection(curve1.Where(Function(_x) _x.X > minxl1 * 0.9 And _x.X < maxxl1 * 1.1).ToList, curve2, MathEx.LMFit.FitType.Linear, MathEx.LMFit.FitType.Linear, 1.0, 0.0, 1.0, 10000)
-                                    Dim iBL2 = MathEx.Intersection.FindIntersection(curve1.Where(Function(_x) _x.X > minxl2 * 0.9 And _x.X < maxxl2 * 1.1).ToList, curve3, MathEx.LMFit.FitType.Linear, MathEx.LMFit.FitType.Linear, 1.0, 0.0, 1.0, 10000)
-                                    Dim iSL1 = MathEx.Intersection.FindIntersection(curve4.Where(Function(_x) _x.X > minxl1 * 0.9 And _x.X < maxxl1 * 1.1).ToList, curve2, MathEx.LMFit.FitType.ThirdDegreePoly, MathEx.LMFit.FitType.Linear, 2.0, 0.0, 1.0, 10000)
-                                    Dim iSL2 = MathEx.Intersection.FindIntersection(curve4.Where(Function(_x) _x.X > minxl2 * 0.9 And _x.X < maxxl2 * 1.1).ToList, curve3, MathEx.LMFit.FitType.ThirdDegreePoly, MathEx.LMFit.FitType.Linear, 2.0, 0.0, 1.0, 10000)
-                                    If iBL1.Count > 0 And iSL1.Count > 0 Then
-                                        'L1
-                                        Dim p1, p2 As New List(Of Point.Point)
-                                        Dim i1 = iBL1(0)
-                                        Dim i2 = iSL1(0)
-                                        If i1.X > i2.X Then
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) <= i1.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                End If
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X <= i2.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            p1.Add(i1)
-                                            p2.Add(i1)
-                                        Else
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) <= i1.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                End If
-                                            Next
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X <= i2.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            p1.Add(i2)
-                                            p2.Add(i2)
-                                        End If
-                                        p1 = p1.OrderBy(Function(_p) _p.X).ToList
-                                        p2 = p2.OrderBy(Function(_p) _p.X).ToList
-                                        .AddAreaSeries(p1.Select(Function(_p) _p.X), p1.Select(Function(_p) _p.Y), p2.Select(Function(_p) _p.X), p2.Select(Function(_p) _p.Y), OxyColors.LightBlue, "L1", True)
-                                    End If
-                                    If iBL2.Count > 0 And iSL2.Count > 0 Then
-                                        'L2
-                                        Dim p1, p2 As New List(Of Point.Point)
-                                        Dim i1 = iBL2(0)
-                                        Dim i2 = iSL2(0)
-                                        If i1.X < i2.X Then
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) >= i1.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                End If
-                                            Next
-                                            For i = 0 To results.Data("px1l2").Count - 1
-                                                p2.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X >= i2.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            p1.Add(i1)
-                                            p2.Add(i1)
-                                        Else
-                                            For i = 0 To results.Data("px1l2").Count - 1
-                                                p1.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) >= i1.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                End If
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X >= i2.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            p1.Add(i2)
-                                            p2.Add(i2)
-                                        End If
-                                        p1 = p1.OrderBy(Function(_p) _p.X).ToList
-                                        p2 = p2.OrderBy(Function(_p) _p.X).ToList
-                                        .AddAreaSeries(p1.Select(Function(_p) _p.X), p1.Select(Function(_p) _p.Y), p2.Select(Function(_p) _p.X), p2.Select(Function(_p) _p.Y), OxyColors.LightBlue, "L2", True)
-                                    End If
-                                    If iBL1.Count > 0 And iSL1.Count > 0 And iBL2.Count > 0 And iSL2.Count > 0 Then
-                                        'L1+L2
-                                        Dim p1, p2 As New List(Of Point.Point)
-                                        Dim i1 = iBL1(0)
-                                        Dim i2 = iSL1(0)
-                                        Dim i3 = iBL2(0)
-                                        Dim i4 = iSL2(0)
-                                        If i1.X > i2.X And i3.X > i4.X Then
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                End If
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X > i2.X And curve4(i).X < i4.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            p1.Add(i2)
-                                            p2.Add(i2)
-                                            p1.Add(i3)
-                                            p2.Add(i3)
-                                        ElseIf i1.X > i2.X And i3.X < i4.X Then
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                End If
-                                            Next
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X > i2.X And curve4(i).X < i4.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            p1.Add(i2)
-                                            p2.Add(i2)
-                                            p1.Add(i4)
-                                            p2.Add(i4)
-                                        ElseIf i1.X < i2.X And i3.X < i4.X Then
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                End If
-                                            Next
-                                            For i = 0 To results.Data("px1l2").Count - 1
-                                                p1.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X > i2.X And curve4(i).X < i4.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            p1.Add(i1)
-                                            p2.Add(i1)
-                                            p1.Add(i4)
-                                            p2.Add(i4)
-                                        ElseIf i1.X < i2.X And i3.X > i4.X Then
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To curve4.Count - 1
-                                                If curve4(i).X > i2.X And curve4(i).X < i4.X Then
-                                                    p2.Add(curve4(i))
-                                                End If
-                                            Next
-                                            For i = 0 To results.Data("px1l1").Count - 1
-                                                p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
-                                            Next
-                                            For i = 0 To results.Data("px").Count - 1
-                                                If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
-                                                    p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
-                                                Else
-                                                    Exit For
-                                                End If
-                                            Next
-                                            p1.Add(i1)
-                                            p2.Add(i1)
-                                            p1.Add(i3)
-                                            p2.Add(i3)
-                                        End If
-                                        p1 = p1.OrderBy(Function(_p) _p.X).ToList
-                                        p2 = p2.OrderBy(Function(_p) _p.X).ToList
-                                        .AddAreaSeries(p1.Select(Function(_p) _p.X), p1.Select(Function(_p) _p.Y), p2.Select(Function(_p) _p.X), p2.Select(Function(_p) _p.Y), OxyColors.CornflowerBlue, "L1+L2", True)
-                                    End If
                                 Else
+                                    'VLLE
+                                    For i = 0 To results.Data("px").Count - 1
+                                        curve4.Add(New Point.Point(results.Data("px")(i), results.Data("py3").Min))
+                                    Next
+                                End If
+                                minxl1 = curve2.Select(Function(_x) _x.X).Min
+                                maxxl1 = curve2.Select(Function(_x) _x.X).Max
+                                minxl2 = curve3.Select(Function(_x) _x.X).Min
+                                maxxl2 = curve3.Select(Function(_x) _x.X).Max
+                                Dim iBL1, iBL2, iSL1, iSL2 As New List(Of Point.Point)
+                                iBL1 = MathEx.Intersection.FindIntersection(curve1.Where(Function(_x) _x.X > minxl1 * 0.9 And _x.X < maxxl1 * 1.1).ToList, curve2, MathEx.LMFit.FitType.Linear, MathEx.LMFit.FitType.Linear, 1.0, 0.0, 1.0, 10000)
+                                iBL2 = MathEx.Intersection.FindIntersection(curve1.Where(Function(_x) _x.X > minxl2 * 0.9 And _x.X < maxxl2 * 1.1).ToList, curve3, MathEx.LMFit.FitType.Linear, MathEx.LMFit.FitType.Linear, 1.0, 0.0, 1.0, 10000)
+                                If results.Data("pxs1").Count > 0 Then
+                                    'SVLLE
+                                    iSL1 = MathEx.Intersection.FindIntersection(curve4.Where(Function(_x) _x.X > minxl1 * 0.9 And _x.X < maxxl1 * 1.1).ToList, curve2, MathEx.LMFit.FitType.ThirdDegreePoly, MathEx.LMFit.FitType.Linear, 2.0, 0.0, 1.0, 10000)
+                                    iSL2 = MathEx.Intersection.FindIntersection(curve4.Where(Function(_x) _x.X > minxl2 * 0.9 And _x.X < maxxl2 * 1.1).ToList, curve3, MathEx.LMFit.FitType.ThirdDegreePoly, MathEx.LMFit.FitType.Linear, 2.0, 0.0, 1.0, 10000)
+                                Else
+                                    'VLLE
+                                    iSL1 = MathEx.Intersection.FindIntersection(curve4.Where(Function(_x) _x.X > minxl1 * 0.9 And _x.X < maxxl1 * 1.1).ToList, curve2, MathEx.LMFit.FitType.Linear, MathEx.LMFit.FitType.Linear, 2.0, 0.0, 1.0, 10000)
+                                    iSL2 = MathEx.Intersection.FindIntersection(curve4.Where(Function(_x) _x.X > minxl2 * 0.9 And _x.X < maxxl2 * 1.1).ToList, curve3, MathEx.LMFit.FitType.Linear, MathEx.LMFit.FitType.Linear, 2.0, 0.0, 1.0, 10000)
+                                End If
+                                If iBL1.Count > 0 And iSL1.Count > 0 Then
+                                    'L1
+                                    Dim p1, p2 As New List(Of Point.Point)
+                                    Dim i1 = iBL1(0)
+                                    Dim i2 = iSL1(0)
+                                    If i1.X > i2.X Then
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) <= i1.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            End If
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X <= i2.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        p1.Add(i1)
+                                        p2.Add(i1)
+                                    Else
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) <= i1.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            End If
+                                        Next
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X <= i2.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        p1.Add(i2)
+                                        p2.Add(i2)
+                                    End If
+                                    p1 = p1.OrderBy(Function(_p) _p.X).ToList
+                                    p2 = p2.OrderBy(Function(_p) _p.X).ToList
+                                    .AddAreaSeries(p1.Select(Function(_p) _p.X), p1.Select(Function(_p) _p.Y), p2.Select(Function(_p) _p.X), p2.Select(Function(_p) _p.Y), OxyColors.LightBlue, "L1", True)
+                                End If
+                                If iBL2.Count > 0 And iSL2.Count > 0 Then
+                                    'L2
+                                    Dim p1, p2 As New List(Of Point.Point)
+                                    Dim i1 = iBL2(0)
+                                    Dim i2 = iSL2(0)
+                                    If i1.X < i2.X Then
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) >= i1.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            End If
+                                        Next
+                                        For i = 0 To results.Data("px1l2").Count - 1
+                                            p2.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X >= i2.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        p1.Add(i1)
+                                        p2.Add(i1)
+                                    Else
+                                        For i = 0 To results.Data("px1l2").Count - 1
+                                            p1.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) >= i1.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            End If
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X >= i2.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        p1.Add(i2)
+                                        p2.Add(i2)
+                                    End If
+                                    p1 = p1.OrderBy(Function(_p) _p.X).ToList
+                                    p2 = p2.OrderBy(Function(_p) _p.X).ToList
+                                    .AddAreaSeries(p1.Select(Function(_p) _p.X), p1.Select(Function(_p) _p.Y), p2.Select(Function(_p) _p.X), p2.Select(Function(_p) _p.Y), OxyColors.LightBlue, "L2", True)
+                                End If
+                                If iBL1.Count > 0 And iSL1.Count > 0 And iBL2.Count > 0 And iSL2.Count > 0 Then
+                                    'L1+L2
+                                    Dim p1, p2 As New List(Of Point.Point)
+                                    Dim i1 = iBL1(0)
+                                    Dim i2 = iSL1(0)
+                                    Dim i3 = iBL2(0)
+                                    Dim i4 = iSL2(0)
+                                    If i1.X > i2.X And i3.X > i4.X Then
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            End If
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X > i2.X And curve4(i).X < i4.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        p1.Add(i2)
+                                        p2.Add(i2)
+                                        p1.Add(i3)
+                                        p2.Add(i3)
+                                    ElseIf i1.X > i2.X And i3.X < i4.X Then
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            End If
+                                        Next
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p1.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X > i2.X And curve4(i).X < i4.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        p1.Add(i2)
+                                        p2.Add(i2)
+                                        p1.Add(i4)
+                                        p2.Add(i4)
+                                    ElseIf i1.X < i2.X And i3.X < i4.X Then
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            End If
+                                        Next
+                                        For i = 0 To results.Data("px1l2").Count - 1
+                                            p1.Add(New Point.Point(results.Data("px1l2")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X > i2.X And curve4(i).X < i4.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        p1.Add(i1)
+                                        p2.Add(i1)
+                                        p1.Add(i4)
+                                        p2.Add(i4)
+                                    ElseIf i1.X < i2.X And i3.X > i4.X Then
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To curve4.Count - 1
+                                            If curve4(i).X > i2.X And curve4(i).X < i4.X Then
+                                                p2.Add(curve4(i))
+                                            End If
+                                        Next
+                                        For i = 0 To results.Data("px1l1").Count - 1
+                                            p2.Add(New Point.Point(results.Data("px1l1")(i), results.Data("py3")(i)))
+                                        Next
+                                        For i = 0 To results.Data("px").Count - 1
+                                            If results.Data("px")(i) > i1.X And results.Data("px")(i) < i3.X Then
+                                                p1.Add(New Point.Point(results.Data("px")(i), results.Data("py1")(i)))
+                                            Else
+                                                Exit For
+                                            End If
+                                        Next
+                                        p1.Add(i1)
+                                        p2.Add(i1)
+                                        p1.Add(i3)
+                                        p2.Add(i3)
+                                    End If
+                                    p1 = p1.OrderBy(Function(_p) _p.X).ToList
+                                    p2 = p2.OrderBy(Function(_p) _p.X).ToList
+                                    .AddAreaSeries(p1.Select(Function(_p) _p.X), p1.Select(Function(_p) _p.Y), p2.Select(Function(_p) _p.X), p2.Select(Function(_p) _p.Y), OxyColors.CornflowerBlue, "L1+L2", True)
+                                End If
+                                If results.Data("pxs1").Count > 0 Then
+                                    If results.Data("pys2").Sum > results.Data("pys1").Sum Then
+                                        .AddAreaSeries(results.Data("px").ToArray, results.Data("pys1").ToArray, results.Data("pys2").ToArray, OxyColors.LightSteelBlue, "S+L", True)
+                                        .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("pys1").ToArray, OxyColors.GhostWhite, "S", True)
+                                    Else
+                                        .AddAreaSeries(results.Data("px").ToArray, results.Data("pys2").ToArray, results.Data("pys1").ToArray, OxyColors.LightSteelBlue, "S+L", True)
+                                        .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("pys2").ToArray, OxyColors.GhostWhite, "S", True)
+                                    End If
+                                End If
+                            Else
+                                If results.Data("pxs1").Count > 0 Then
                                     'SVLE
                                     If results.Data("pys2").Sum > results.Data("pys1").Sum Then
                                         .AddAreaSeries(results.Data("px").ToArray, results.Data("pys1").ToArray, results.Data("pys2").ToArray, OxyColors.LightSteelBlue, "S+L", True)
@@ -447,10 +465,6 @@ Namespace ShortcutUtilities
                                         .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("pys2").ToArray, OxyColors.GhostWhite, "S", True)
                                         .AddAreaSeries(results.Data("px").ToArray, results.Data("pys1").ToArray, results.Data("py1").ToArray, OxyColors.LightBlue, "L", True)
                                     End If
-                                End If
-                            Else
-                                If results.Data("px1l1").Count > 0 Then
-                                    'VLLE
                                 Else
                                     'VLE
                                     .AddAreaSeriesBeyond(results.Data("px").ToArray, results.Data("py1").ToArray, OxyColors.LightBlue, "L", True)
@@ -458,16 +472,16 @@ Namespace ShortcutUtilities
                             End If
 
                             .AddLineSeries(results.Data("px").ToArray, results.Data("py1").ToArray, OxyColors.Blue)
+                            .Series(.Series.Count - 1).Title = "Bubble Points"
                             .AddLineSeries(results.Data("px").ToArray, results.Data("py2").ToArray, OxyColors.Yellow)
+                            .Series(.Series.Count - 1).Title = "Dew Points"
 
-                            .Series(0).Title = "Bubble Points"
-                            .Series(1).Title = "Dew Points"
 
                             If results.Data("px1l1").Count > 0 Then
                                 .AddLineSeries(results.Data("px1l1").ToArray, results.Data("py3").ToArray)
+                                .Series(.Series.Count - 1).Title = "Liquid-Liquid (1)"
                                 .AddLineSeries(results.Data("px1l2").ToArray, results.Data("py3").ToArray)
-                                .Series(2).Title = "Liquid-Liquid (1)"
-                                .Series(3).Title = "Liquid-Liquid (2)"
+                                .Series(.Series.Count - 1).Title = "Liquid-Liquid (2)"
                             End If
                             If results.Data("pxs1").Count > 0 Then
                                 .AddLineSeries(results.Data("pxs1").ToArray, results.Data("pys1").ToArray)
