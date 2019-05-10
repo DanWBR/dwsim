@@ -126,6 +126,41 @@ Namespace ExceptionProcessing
 
         End Function
 
+        Public Shared Sub ProcessAndDisplayException(fsheet As IFlowsheet, exc As Exception)
+
+            If TypeOf exc Is AggregateException Then
+                Dim age = DirectCast(exc, AggregateException)
+                Dim baseexception As Exception
+                For Each ex In age.Flatten().InnerExceptions
+                    Dim euid As String = Guid.NewGuid().ToString()
+                    SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
+                    If TypeOf ex Is AggregateException Then
+                        baseexception = ex.InnerException
+                        For Each iex In DirectCast(ex, AggregateException).Flatten().InnerExceptions
+                            While iex.InnerException IsNot Nothing
+                                baseexception = iex.InnerException
+                            End While
+                            fsheet?.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
+                        Next
+                    Else
+                        baseexception = ex
+                        If baseexception.InnerException IsNot Nothing Then
+                            While baseexception.InnerException.InnerException IsNot Nothing
+                                baseexception = baseexception.InnerException
+                                If baseexception Is Nothing Then Exit While
+                                If baseexception.InnerException Is Nothing Then Exit While
+                            End While
+                        End If
+                        fsheet?.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
+                    End If
+                Next
+            Else
+                Dim euid As String = Guid.NewGuid().ToString()
+                SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, exc)
+                fsheet?.ShowMessage(exc.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
+            End If
+
+        End Sub
 
     End Class
 

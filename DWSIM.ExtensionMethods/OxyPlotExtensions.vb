@@ -79,7 +79,7 @@ Public Module OxyPlot
     <System.Runtime.CompilerServices.Extension>
     Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), color As OxyColor, Optional ByVal title As String = Nothing)
 
-        Dim lineSeries As LineSeries = New LineSeries With {.Title = title}
+        Dim lineSeries As LineSeries = New LineSeries With {.Title = title, .Color = color}
 
         For i As Integer = 0 To xSeries.Count - 1
             LineSeries.Points.Add(New DataPoint(xSeries(i), ySeries(i)))

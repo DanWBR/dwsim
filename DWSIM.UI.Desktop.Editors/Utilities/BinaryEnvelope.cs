@@ -73,7 +73,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
             var tval = p1.CreateAndAddTextBoxRow(nf, "Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, 298.15f), null);
             var pval = p1.CreateAndAddTextBoxRow(nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, 101325.0f), null);
 
-            bool vle = true, lle = false, sle = false, critical = false;
+            bool vle = true, lle = false, sle = false, critical = false, areas = false;
 
             p1.CreateAndAddLabelRow("Display Options");
 
@@ -85,6 +85,8 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
             p1.CreateAndAddDescriptionRow("SLE calculation works on T-x/y diagrams only.");
             p1.CreateAndAddCheckBoxRow("Critical Line", critical, (arg1a, arg2a) => { critical = arg1a.Checked.GetValueOrDefault(); });
             p1.CreateAndAddDescriptionRow("Critical Line calculation works on T-x/y diagrams only.");
+            p1.CreateAndAddCheckBoxRow("Highlight Regions", areas, (arg1a, arg2a) => { areas = arg1a.Checked.GetValueOrDefault(); });
+            p1.CreateAndAddDescriptionRow("Highlights the different phase regions in the envelope.");
 
             var pplist = flowsheet.PropertyPackages.Values.Select((x2) => x2.Tag).ToList();
 
@@ -137,6 +139,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
                     }
 
                     var calc = new DWSIM.Thermodynamics.ShortcutUtilities.Calculation(ms);
+                    calc.DisplayEnvelopeAreas = areas;
                     calc.BinaryEnvelopeOptions = new object[] { "", 0, 0, vle, lle, sle, critical, false };
 
                     switch (spinnerPE.SelectedIndex)
@@ -151,7 +154,13 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
                     DWSIM.Thermodynamics.ShortcutUtilities.CalculationResults results = null;
 
-                    var pg = ProgressDialog.Show(this, "Please Wait", "Calculating Envelope Lines...", false);
+                    var token = new System.Threading.CancellationTokenSource();
+
+                    var pg = ProgressDialog.ShowWithAbort(this, "Please Wait", "Calculating Envelope Lines...", false, "Abort/Cancel", (s, e1) => {
+
+                        token.Cancel();
+
+                    });
 
                     Task.Factory.StartNew(() =>
                     {
@@ -161,7 +170,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
                 
                         });
                         results = calc.Calculate();
-                    }).ContinueWith((t) =>
+                    }, token.Token).ContinueWith((t) =>
                     {
                         Application.Instance.Invoke(() =>
                         {

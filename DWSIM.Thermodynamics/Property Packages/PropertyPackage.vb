@@ -4531,8 +4531,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     prevkib = tmp1(6)
                                     py1.Add(Test1)
                                 Catch ex As Exception
-                                    'extrapolate
                                     py1.Add(Double.NaN)
+                                    SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                                 Try
                                     tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, 0.0#, Me)
@@ -4542,6 +4542,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     py2.Add(Test2)
                                 Catch ex As Exception
                                     py2.Add(Double.NaN)
+                                    SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                             Else
                                 Try
@@ -4552,6 +4553,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     py1.Add(calcT)
                                 Catch ex As Exception
                                     py1.Add(Double.NaN)
+                                    SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                                 Try
                                     tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me)
@@ -4561,6 +4563,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     py2.Add(calcT)
                                 Catch ex As Exception
                                     py2.Add(Double.NaN)
+                                    SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                             End If
 
@@ -4691,6 +4694,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 pxs1.Add(x)
                                 pys1.Add(y1)
                             Catch ex As Exception
+                                SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
                         Loop Until (i - 1) * dx >= 1
@@ -4712,6 +4716,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 pxs2.Add(x)
                                 pys2.Add(y2)
                             Catch ex As Exception
+                                SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
                         Loop Until (i - 1) * dx >= 1
@@ -4768,6 +4773,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     pyc.Add(TCR)
                                 End If
                             Catch ex As Exception
+                                SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
                         Loop Until (i - 1) * dx >= 1
@@ -4822,6 +4828,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     py1(py1.Count - 1) = up(0)
                                 End If
                             Catch ex As Exception
+                                SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
                         Loop Until (i - 1) * dx >= 1

@@ -163,13 +163,19 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
                     DWSIM.Thermodynamics.ShortcutUtilities.CalculationResults results = null;
 
-                    var pg = ProgressDialog.Show(this, "Please Wait", "Calculating Envelope Lines...", false);
+                    var token = new System.Threading.CancellationTokenSource();
+
+                    var pg = ProgressDialog.ShowWithAbort(this, "Please Wait", "Calculating Envelope Lines...", false, "Abort/Cancel", (s, e1) => {
+
+                        token.Cancel();
+
+                    });
 
                     Task.Factory.StartNew(() =>
                     {
                         Application.Instance.Invoke(() => txtResults.Text = "Please wait...");
                         results = calc.Calculate();
-                    }).ContinueWith((t) =>
+                    }, token.Token).ContinueWith((t) =>
                     {
                         Application.Instance.Invoke(() =>
                         {
