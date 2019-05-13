@@ -205,5 +205,50 @@ namespace DWSIM.UI.Desktop.Mac
             // TODO
             return OxyKey.A;
         }
+
+        /// <summary>
+        /// Converts a color to a Brush.
+        /// </summary>
+        /// <param name="c">
+        /// The color.
+        /// </param>
+        /// <returns>
+        /// A SolidColorBrush.
+        /// </returns>
+        public static System.Drawing.Brush ToBrush(this OxyColor c)
+        {
+            return new System.Drawing.SolidBrush(c.ToColor());
+        }
+
+        /// <summary>
+        /// Converts an OxyColor to a Color.
+        /// </summary>
+        /// <param name="c">
+        /// The color.
+        /// </param>
+        /// <returns>
+        /// A Color.
+        /// </returns>
+        public static System.Drawing.Color ToColor(this OxyColor c)
+        {
+            return System.Drawing.Color.FromArgb(c.A, c.R, c.G, c.B);
+        }
+
+        public static OxyColor ToOxyColor(this System.Drawing.Brush brush)
+        {
+            var scb = brush as System.Drawing.SolidBrush;
+            return scb != null ? scb.Color.ToOxyColor() : OxyColors.Undefined;
+        }
+
+        /// <summary>
+        /// Converts a <see cref="T:Color" /> to an <see cref="T:OxyColor" />.
+        /// </summary>
+        /// <param name="color">The color.</param>
+        /// <returns>An <see cref="T:OxyColor" />.</returns>
+        public static OxyColor ToOxyColor(this System.Drawing.Color color)
+        {
+            return OxyColor.FromArgb(color.A, color.R, color.G, color.B);
+        }
+
     }
 }

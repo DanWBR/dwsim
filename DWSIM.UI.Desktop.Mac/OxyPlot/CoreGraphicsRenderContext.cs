@@ -11,7 +11,6 @@ namespace DWSIM.UI.Desktop.Mac
 {
     using System;
     using System.Collections.Generic;
-    using Eto.Drawing;
     using System.Linq;
 
     using global::AppKit;

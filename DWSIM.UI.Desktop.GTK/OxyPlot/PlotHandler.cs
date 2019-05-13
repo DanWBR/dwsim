@@ -1,6 +1,8 @@
 ﻿using Eto.Forms;
 using OxyPlot;
 using OxyPlot.GtkSharp;
+using System.IO;
+using System.Linq;
 
 namespace Eto.OxyPlot.Gtk
 {
@@ -14,9 +16,100 @@ namespace Eto.OxyPlot.Gtk
 
         public PlotHandler()
         {
-            Control = new global::OxyPlot.GtkSharp.PlotView()
+            Control = new global::OxyPlot.GtkSharp.PlotView();
+
+            ContextMenu cmenu = new ContextMenu();
+
+            cmenu.Items.Add(new ButtonMenuItem((sender, e) =>
             {
+
+                var sfd = new SaveFileDialog();
+
+                sfd.Title = "Save Chart to PNG";
+                sfd.Filters.Add(new FileFilter("PNG File", new string[] { ".png" }));
+                sfd.CurrentFilterIndex = 0;
+
+                if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
+                {
+
+                    var pngExporter = new PngExporter { Width = (int)Control.Width, Height = (int)Control.Height, Background = OxyColors.White };
+                    using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
+                    {
+                        pngExporter.Export(Model, sf);
+                    }
+
+                }
+                
+            })
+            { Text = "Save to File" });
+
+            cmenu.Items.Add(new ButtonMenuItem((sender, e) =>
+            {
+
+                var sfd = new SaveFileDialog();
+
+                sfd.Title = "Save Chart to PNG";
+                sfd.Filters.Add(new FileFilter("PNG File", new string[] { ".png" }));
+                sfd.CurrentFilterIndex = 0;
+
+                if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
+                {
+
+                    var pngExporter = new PngExporter { Width = (int)Control.Width*2, Height = (int)Control.Height*2, Background = OxyColors.White };
+                    using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
+                    {
+                        pngExporter.Export(Model, sf);
+                    }
+
+                }
+
+
+            })
+            { Text = "Save to File @ 2x" });
+
+            cmenu.Items.Add(new ButtonMenuItem((sender, e) =>
+            {
+
+                var sfd = new SaveFileDialog();
+
+                sfd.Title = "Save Chart to PNG";
+                sfd.Filters.Add(new FileFilter("PNG File", new string[] { ".png" }));
+                sfd.CurrentFilterIndex = 0;
+
+                if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
+                {
+
+                    var pngExporter = new PngExporter { Width = (int)Control.Width*3, Height = (int)Control.Height * 3, Background = OxyColors.White };
+
+                    using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
+                    {
+                        pngExporter.Export(Model, sf);
+                    }
+
+                }
+
+
+            })
+            { Text = "Save to File @ 3x" });
+
+            cmenu.Items.Add(new ButtonMenuItem((sender, e) =>
+            {
+
+                Control.Model.ResetAllAxes();
+                Control.Model.InvalidatePlot(false);
+
+            })
+            { Text = "Reset to Default View" });
+
+            this.EventControl.ButtonPressEvent += (sender, e) => {
+
+                if (e.Event.Type ==  Gdk.EventType.TwoButtonPress)
+                {
+                    cmenu.Show();
+                }
+
             };
+
         }
     }
 }
