@@ -827,6 +827,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             'now start processing the list at each level, until it reaches the beginning of the flowsheet.
 
+            Dim totalobjs As Integer = 0
+
             Do
                 listidx += 1
                 If lists(listidx - 1).Count > 0 Then
@@ -842,16 +844,16 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                 If c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle And
                                     c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_EnergyRecycle Then
                                     lists(listidx).Add(c.AttachedConnector.AttachedFrom.Name)
+                                    totalobjs += 1
+                                    If totalobjs > 10000 Then
+                                        Throw New Exception("Infinite loop detected while obtaining flowsheet object calculation order. Please insert recycle blocks where needed.")
+                                    End If
                                 End If
                             End If
                         Next
                     Next
                 Else
                     Exit Do
-                End If
-                If lists.Count > 10000 Then
-                    lists.Clear()
-                    Throw New Exception("Infinite loop detected while obtaining flowsheet object calculation order. Please insert recycle blocks where needed.")
                 End If
             Loop
 
