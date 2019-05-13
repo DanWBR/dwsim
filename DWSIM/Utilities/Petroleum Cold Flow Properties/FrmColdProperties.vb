@@ -34,6 +34,9 @@ Public Class FrmColdProperties
     Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
+    Private FlashPoint, PourPoint, CloudPoint, FreezingPoint, RVP, TVP, RefractionIndex, Huang_I, CetaneIndex, v1, v2, kv1 As Double
+    Private t10ASTM, t10TBP, bt, dp As Double
+
     Private Sub FrmColdProperties_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         frm = AttachedTo.GetFlowsheet
@@ -69,9 +72,6 @@ Public Class FrmColdProperties
             Dim MABP, CABP, MeABP, K, SG, API As Double
 
             pp.CurrentMaterialStream = mat
-
-            Dim FlashPoint, PourPoint, CloudPoint, FreezingPoint, RVP, TVP, RefractionIndex, Huang_I, CetaneIndex, v1, v2, kv1 As Double
-            Dim t10ASTM, t10TBP, bt, dp As Double
 
             If TypeOf pp Is PropertyPackages.BlackOilPropertyPackage Then
 
@@ -248,22 +248,77 @@ Public Class FrmColdProperties
 
     End Sub
 
-
-
     Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
-        Return New List(Of String)
-
+        Return New List(Of String)({"Flash Point", "Pour Point", "Cloud Point", "Freezing Point", "Reid Vapor Pressure @ 100 F", "True Vapor Pressure @ 100 F", "Refraction Index @ 20 C", "Cetane Index", "Viscosity @ 100 F", "Viscosity @ 210 F", "T 10% ASTM D86", "T 10% TBP"})
     End Function
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
-        Return ""
+
+        Dim su = AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
+
+        Select Case pname
+            Case "Flash Point"
+                Return su.temperature
+            Case "Pour Point"
+                Return su.temperature
+            Case "Cloud Point"
+                Return su.temperature
+            Case "Freezing Point"
+                Return su.temperature
+            Case "Reid Vapor Pressure @ 100 F"
+                Return su.pressure
+            Case "True Vapor Pressure @ 100 F"
+                Return su.pressure
+            Case "Refraction Index @ 20 C"
+                Return ""
+            Case "Cetane Index"
+                Return ""
+            Case "Viscosity @ 100 F"
+                Return su.viscosity
+            Case "Viscosity @ 210 F"
+                Return su.viscosity
+            Case "T 10% ASTM D86"
+                Return su.temperature
+            Case "T 10% TBP"
+                Return su.temperature
+            Case Else
+                Return ""
+        End Select
 
     End Function
 
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
-        Return ""
+
+        Select Case pname
+            Case "Flash Point"
+                Return FlashPoint.ConvertFromSI(su.temperature)
+            Case "Pour Point"
+                Return PourPoint.ConvertFromSI(su.temperature)
+            Case "Cloud Point"
+                Return CloudPoint.ConvertFromSI(su.temperature)
+            Case "Freezing Point"
+                Return FreezingPoint.ConvertFromSI(su.temperature)
+            Case "Reid Vapor Pressure @ 100 F"
+                Return RVP.ConvertFromSI(su.pressure)
+            Case "True Vapor Pressure @ 100 F"
+                Return TVP.ConvertFromSI(su.pressure)
+            Case "Refraction Index @ 20 C"
+                Return RefractionIndex
+            Case "Cetane Index"
+                Return CetaneIndex
+            Case "Viscosity @ 100 F"
+                Return v1.ConvertFromSI(su.viscosity)
+            Case "Viscosity @ 210 F"
+                Return v2.ConvertFromSI(su.viscosity)
+            Case "T 10% ASTM D86"
+                Return t10ASTM.ConvertFromSI(su.temperature)
+            Case "T 10% TBP"
+                Return t10TBP.ConvertFromSI(su.temperature)
+            Case Else
+                Return ""
+        End Select
 
     End Function
 
