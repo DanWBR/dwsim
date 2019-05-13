@@ -1,7 +1,8 @@
-Version 5.7 Update 7
+Version 5.7 Update 8
 
-- [NEW] Enhanced Phase/Binary Envelopes in Cross-Platform UI
-- [FIX] Fixed compound adding by pressing ENTER on the search box (Classic UI)
-- [FIX] Fixed Phase Identification Parameter in Phase Envelope
-- [FIX] Fixed merged ToolStrips in Classic UI
-- [FIX] Minor bug fixes and tweaks in Cross-Platform UI
+- [NEW] Highlight phase areas in Binary Envelope (Cross-Platform UI)
+- [NEW] New specification options for Rigorous Column + IO/SC solvers
+- [NEW] Exposing petroleum cold flow properties from utility (Classic UI)
+- [NEW] Context menu for charts (Cross-Platform UI)
+- [FIX] Fixed solver infinite loop detection
+- [FIX] Other bug fixes

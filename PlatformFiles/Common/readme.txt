@@ -66,7 +66,9 @@ Version 5.7 Update 8
 
 - [NEW] Highlight phase areas in Binary Envelope (Cross-Platform UI)
 - [NEW] New specification options for Rigorous Column + IO/SC solvers
-- [FIX] Fixed solver freezing
+- [NEW] Exposing petroleum cold flow properties from utility (Classic UI)
+- [NEW] Context menu for charts (Cross-Platform UI)
+- [FIX] Fixed solver infinite loop detection
 - [FIX] Other bug fixes
 
 Version 5.7 Update 7
