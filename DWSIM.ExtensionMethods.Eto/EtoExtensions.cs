@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Eto.Drawing;
 using Eto.Forms;
 using DWSIM.ExtensionMethods;
 using System.IO;
+using VerticalAlignment = Eto.Forms.VerticalAlignment;
 
 namespace DWSIM.UI.Shared
 {
