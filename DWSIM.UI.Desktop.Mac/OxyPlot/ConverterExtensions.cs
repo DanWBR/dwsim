@@ -10,10 +10,9 @@
 namespace DWSIM.UI.Desktop.Mac
 {
     using System;
-    using Eto.Drawing;
 
-    using global::AppKit;
-    using global::CoreGraphics;
+    using AppKit;
+    using CoreGraphics;
 
     using OxyPlot;
 
@@ -22,35 +21,20 @@ namespace DWSIM.UI.Desktop.Mac
     /// </summary>
     public static class ConverterExtensions
     {
-
-        public static ScreenPoint LocationToScreenPoint(this CGPoint p, CGRect bounds)
-        {
-            return new ScreenPoint(p.X, bounds.Height - p.Y);
-        }
-
-        public static ScreenPoint LocationToScreenPoint(this CGPoint p)
-        {
-            return new ScreenPoint(p.X, p.Y);
-        }
-
         /// <summary>
         /// Converts a <see cref="System.Drawing.PointF" /> to a <see cref="ScreenPoint" />.
         /// </summary>
         /// <param name="p">The point to convert.</param>
         /// <returns>The converted point.</returns>
-        public static ScreenPoint ToScreenPoint(this PointF p)
+        public static ScreenPoint ToScreenPoint(this CGPoint p)
         {
             return new ScreenPoint(p.X, p.Y);
         }
 
-        /// <summary>
-        /// Converts a <see cref="System.Drawing.PointF" /> to a <see cref="ScreenPoint" />.
-        /// </summary>
-        /// <param name="p">The point to convert.</param>
-        /// <returns>The converted point.</returns>
-        public static ScreenPoint LocationToScreenPoint(this PointF p, CGRect bounds)
+        public static ScreenPoint PositionAsScreenPointRelativeToPlotView(this NSEvent p, PlotView plotView)
         {
-            return new ScreenPoint(p.X, bounds.Height - p.Y);
+            var relativePoint = plotView.ConvertPointFromView(p.LocationInWindow, null);
+            return new ScreenPoint(relativePoint.X, relativePoint.Y);
         }
 
         /// <summary>
@@ -85,7 +69,7 @@ namespace DWSIM.UI.Desktop.Mac
         }
 
         /// <summary>
-        /// Converts a <see cref="ScreenPoint" /> to a <see cref="PointF" />.
+        /// Converts a <see cref="ScreenPoint" /> to a <see cref="CGPoint" />.
         /// </summary>
         /// <param name="p">The point to convert.</param>
         /// <returns>The converted point.</returns>
@@ -95,7 +79,7 @@ namespace DWSIM.UI.Desktop.Mac
         }
 
         /// <summary>
-        /// Converts a <see cref="ScreenPoint" /> to a pixel center aligned <see cref="PointF" />.
+        /// Converts a <see cref="ScreenPoint" /> to a pixel center aligned <see cref="CGPoint" />.
         /// </summary>
         /// <param name="p">The point to convert.</param>
         /// <returns>The converted point.</returns>
@@ -105,7 +89,7 @@ namespace DWSIM.UI.Desktop.Mac
         }
 
         /// <summary>
-        /// Converts a <see cref="OxyRect" /> to a pixel center aligned <see cref="RectF" />.
+        /// Converts a <see cref="OxyRect" /> to a pixel center aligned <see cref="CGRect" />.
         /// </summary>
         /// <param name="rect">The rectangle to convert.</param>
         /// <returns>The converted rectangle.</returns>
@@ -119,7 +103,7 @@ namespace DWSIM.UI.Desktop.Mac
         }
 
         /// <summary>
-        /// Converts a <see cref="OxyRect" /> to a <see cref="RectF" />.
+        /// Converts a <see cref="OxyRect" /> to a <see cref="CGRect" />.
         /// </summary>
         /// <param name="rect">The rectangle to convert.</param>
         /// <returns>The converted rectangle.</returns>
@@ -128,6 +112,11 @@ namespace DWSIM.UI.Desktop.Mac
             return new CGRect((float)rect.Left, (float)rect.Top, (float)(rect.Right - rect.Left), (float)(rect.Bottom - rect.Top));
         }
 
+        /// <summary>
+        /// Converts a <see cref="NSEventType" /> to a <see cref="OxyMouseButton" />.
+        /// </summary>
+        /// <param name="theType">The event type to convert.</param>
+        /// <returns>The converted value.</returns>
         public static OxyMouseButton ToButton(this NSEventType theType)
         {
             switch (theType)
@@ -143,6 +132,11 @@ namespace DWSIM.UI.Desktop.Mac
             }
         }
 
+        /// <summary>
+        /// Converts a <see cref="NSEventModifierMask" /> to a <see cref="OxyModifierKeys" />.
+        /// </summary>
+        /// <param name="theMask">The mask to convert.</param>
+        /// <returns>The converted value.</returns>
         public static OxyModifierKeys ToModifierKeys(this NSEventModifierMask theMask)
         {
             var keys = OxyModifierKeys.None;
@@ -160,37 +154,48 @@ namespace DWSIM.UI.Desktop.Mac
             return keys;
         }
 
-        public static OxyMouseDownEventArgs ToMouseDownEventArgs(this NSEvent theEvent, CGRect bounds)
+        public static OxyMouseDownEventArgs ToMouseDownEventArgs(this NSEvent theEvent, PlotView view)
         {
             // https://developer.apple.com/library/mac/documentation/Cocoa/Reference/ApplicationKit/Classes/NSEvent_Class/Reference/Reference.html
             return new OxyMouseDownEventArgs
             {
-                Position = theEvent.LocationInWindow.LocationToScreenPoint(bounds),
+                Position = theEvent.PositionAsScreenPointRelativeToPlotView(view),
                 ChangedButton = theEvent.Type.ToButton(),
                 ModifierKeys = theEvent.ModifierFlags.ToModifierKeys(),
                 ClickCount = (int)theEvent.ClickCount,
             };
         }
 
-        public static OxyMouseEventArgs ToMouseEventArgs(this NSEvent theEvent, CGRect bounds)
+        public static OxyMouseEventArgs ToMouseEventArgs(this NSEvent theEvent, PlotView view)
         {
             return new OxyMouseEventArgs
             {
-                Position = theEvent.LocationInWindow.LocationToScreenPoint(bounds),
+                Position = theEvent.PositionAsScreenPointRelativeToPlotView(view),
                 ModifierKeys = theEvent.ModifierFlags.ToModifierKeys(),
             };
         }
 
-        public static OxyMouseWheelEventArgs ToMouseWheelEventArgs(this NSEvent theEvent, CGRect bounds)
+        /// <summary>
+        /// Converts a <see cref="NSEvent" /> to a <see cref="OxyMouseWheelEventArgs" />.
+        /// </summary>
+        /// <param name="theEvent">The event to convert.</param>
+        /// <param name="bounds">The bounds of the window.</param> 
+        /// <returns>The converted event arguments.</returns>
+        public static OxyMouseWheelEventArgs ToMouseWheelEventArgs(this NSEvent theEvent, PlotView view)
         {
             return new OxyMouseWheelEventArgs
             {
                 Delta = (int)theEvent.ScrollingDeltaY,
-                Position = theEvent.LocationInWindow.LocationToScreenPoint(bounds),
+                Position = theEvent.PositionAsScreenPointRelativeToPlotView(view),
                 ModifierKeys = theEvent.ModifierFlags.ToModifierKeys(),
             };
         }
 
+        /// <summary>
+        /// Converts a <see cref="NSEvent" /> to a <see cref="OxyKeyEventArgs" />.
+        /// </summary>
+        /// <param name="theEvent">The event to convert.</param>
+        /// <returns>The converted event arguments.</returns>
         public static OxyKeyEventArgs ToKeyEventArgs(this NSEvent theEvent)
         {
             return new OxyKeyEventArgs
@@ -200,55 +205,15 @@ namespace DWSIM.UI.Desktop.Mac
             };
         }
 
+        /// <summary>
+        /// Converts a key code to a <see cref="OxyKey" />.
+        /// </summary>
+        /// <param name="keycode">The key code to convert.</param>
+        /// <returns>The converted key.</returns>
         public static OxyKey ToKey(this ushort keycode)
         {
             // TODO
             return OxyKey.A;
         }
-
-        /// <summary>
-        /// Converts a color to a Brush.
-        /// </summary>
-        /// <param name="c">
-        /// The color.
-        /// </param>
-        /// <returns>
-        /// A SolidColorBrush.
-        /// </returns>
-        public static System.Drawing.Brush ToBrush(this OxyColor c)
-        {
-            return new System.Drawing.SolidBrush(c.ToColor());
-        }
-
-        /// <summary>
-        /// Converts an OxyColor to a Color.
-        /// </summary>
-        /// <param name="c">
-        /// The color.
-        /// </param>
-        /// <returns>
-        /// A Color.
-        /// </returns>
-        public static System.Drawing.Color ToColor(this OxyColor c)
-        {
-            return System.Drawing.Color.FromArgb(c.A, c.R, c.G, c.B);
-        }
-
-        public static OxyColor ToOxyColor(this System.Drawing.Brush brush)
-        {
-            var scb = brush as System.Drawing.SolidBrush;
-            return scb != null ? scb.Color.ToOxyColor() : OxyColors.Undefined;
-        }
-
-        /// <summary>
-        /// Converts a <see cref="T:Color" /> to an <see cref="T:OxyColor" />.
-        /// </summary>
-        /// <param name="color">The color.</param>
-        /// <returns>An <see cref="T:OxyColor" />.</returns>
-        public static OxyColor ToOxyColor(this System.Drawing.Color color)
-        {
-            return OxyColor.FromArgb(color.A, color.R, color.G, color.B);
-        }
-
     }
 }

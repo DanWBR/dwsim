@@ -32,14 +32,14 @@ namespace Eto.OxyPlot.Gtk
                 if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                 {
 
-                    var pngExporter = new PngExporter { Width = (int)Control.Width, Height = (int)Control.Height, Background = OxyColors.White };
+                    var pngExporter = new PngExporter { Width = (int)Control.Allocation.Width, Height = (int)Control.Allocation.Height, Background = OxyColors.White };
                     using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
                     {
                         pngExporter.Export(Model, sf);
                     }
 
                 }
-                
+
             })
             { Text = "Save to File" });
 
@@ -55,7 +55,7 @@ namespace Eto.OxyPlot.Gtk
                 if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                 {
 
-                    var pngExporter = new PngExporter { Width = (int)Control.Width*2, Height = (int)Control.Height*2, Background = OxyColors.White };
+                    var pngExporter = new PngExporter { Width = (int)Control.Allocation.Width * 2, Height = (int)Control.Allocation.Height * 2, Background = OxyColors.White };
                     using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
                     {
                         pngExporter.Export(Model, sf);
@@ -79,7 +79,7 @@ namespace Eto.OxyPlot.Gtk
                 if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                 {
 
-                    var pngExporter = new PngExporter { Width = (int)Control.Width*3, Height = (int)Control.Height * 3, Background = OxyColors.White };
+                    var pngExporter = new PngExporter { Width = (int)Control.Allocation.Width * 3, Height = (int)Control.Allocation.Height * 3, Background = OxyColors.White };
 
                     using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
                     {
@@ -101,13 +101,9 @@ namespace Eto.OxyPlot.Gtk
             })
             { Text = "Reset to Default View" });
 
-            this.EventControl.ButtonPressEvent += (sender, e) => {
-
-                if (e.Event.Type ==  Gdk.EventType.TwoButtonPress)
-                {
-                    cmenu.Show();
-                }
-
+            this.EventControl.ButtonPressEvent += (sender, e) =>
+            {
+                cmenu.Show();
             };
 
         }

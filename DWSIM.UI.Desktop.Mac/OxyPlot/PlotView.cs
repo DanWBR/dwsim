@@ -7,23 +7,24 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using Eto.Drawing;
-using Foundation;
-using AppKit;
-
-using OxyPlot;
-using CoreGraphics;
-
 namespace DWSIM.UI.Desktop.Mac
 {
+    using System;
+    using Foundation;
+    using AppKit;
+
+    using OxyPlot;
+    using Eto.Mac.Forms;
 
     /// <summary>
     /// Provides a view that can show a <see cref="PlotModel" />. 
     /// </summary>
     [Register("PlotView")]
-    public class PlotView : NSControl, IPlotView, Eto.Mac.Forms.IMacControl
+    public class PlotView : NSView, IPlotView, IMacControl
     {
+
+        public Action RightMouseAction;
+
         /// <summary>
         /// The current plot model.
         /// </summary>
@@ -46,7 +47,7 @@ namespace DWSIM.UI.Desktop.Mac
         /// Initializes a new instance of the <see cref="OxyPlot.Xamarin.Mac.PlotView"/> class.
         /// </summary>
         /// <param name="frame">The initial frame.</param>
-        public PlotView(CGRect frame) : base(frame)
+        public PlotView(CoreGraphics.CGRect frame) : base(frame)
         {
             this.Initialize();
         }
@@ -56,8 +57,7 @@ namespace DWSIM.UI.Desktop.Mac
         /// </summary>
         /// <param name="coder">Coder.</param>
         [Export("initWithCoder:")]
-        public PlotView(NSCoder coder)
-            : base(coder)
+        public PlotView(NSCoder coder) : base(coder)
         {
             this.Initialize();
         }
@@ -182,6 +182,8 @@ namespace DWSIM.UI.Desktop.Mac
             }
         }
 
+        public WeakReference WeakHandler { get; set; }
+
         private PlotController CreateDefaultController()
         {
             var c = new PlotController();
@@ -219,7 +221,7 @@ namespace DWSIM.UI.Desktop.Mac
 
             if (actualModel != null && !actualModel.Background.IsUndefined())
             {
-                //this.BackgroundColor = actualModel.Background.ToUIColor();
+                // this.BackgroundColor = actualModel.Background.ToUIColor();
             }
             else
             {
@@ -243,6 +245,11 @@ namespace DWSIM.UI.Desktop.Mac
                 this.AddCursorRect(this.Bounds, cursor);
         }
 
+        /// <summary>
+        /// Convert the specified cursor type.
+        /// </summary>
+        /// <param name="cursorType">Cursor type.</param>
+        /// <returns>The converted cursor.</returns>
         public static NSCursor Convert(CursorType cursorType)
         {
             switch (cursorType)
@@ -294,18 +301,18 @@ namespace DWSIM.UI.Desktop.Mac
         /// Draws the content of the view.
         /// </summary>
         /// <param name="dirtyRect">The rectangle to draw.</param>
-        public override void DrawRect(CGRect dirtyRect)
+        public override void DrawRect(CoreGraphics.CGRect dirtyRect)
         {
             if (this.model != null)
             {
                 var context = NSGraphicsContext.CurrentContext.GraphicsPort;
                 context.SetShouldAntialias(true);
                 context.SetShouldSmoothFonts(true);
-                context.TranslateCTM(0f, dirtyRect.Height);
-                context.ScaleCTM(1f, -1f);
                 // TODO: scale font matrix??
                 context.SetFillColor(OxyPlot.OxyColors.White.ToCGColor());
                 context.FillRect(Bounds);
+                context.TranslateCTM(0f, dirtyRect.Height);
+                context.ScaleCTM(1f, -1f);
                 using (var renderer = new CoreGraphicsRenderContext(context))
                 {
                     ((IPlotModel)this.model).Render(renderer, dirtyRect.Width, dirtyRect.Height);
@@ -313,70 +320,119 @@ namespace DWSIM.UI.Desktop.Mac
             }
         }
 
+        /// <summary>
+        /// Handles the mouse down event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void MouseDown(NSEvent theEvent)
         {
             base.MouseDown(theEvent);
-            this.ActualController.HandleMouseDown(this, theEvent.ToMouseDownEventArgs(this.Bounds));
+            this.ActualController.HandleMouseDown(this, theEvent.ToMouseDownEventArgs(this));
         }
 
+        /// <summary>
+        /// Handles the mouse dragged event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void MouseDragged(NSEvent theEvent)
         {
             base.MouseDragged(theEvent);
-            this.ActualController.HandleMouseMove(this, theEvent.ToMouseEventArgs(this.Bounds));
+            this.ActualController.HandleMouseMove(this, theEvent.ToMouseEventArgs(this));
         }
 
+        /// <summary>
+        /// Handles the mouse moved event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void MouseMoved(NSEvent theEvent)
         {
             base.MouseMoved(theEvent);
-            this.ActualController.HandleMouseMove(this, theEvent.ToMouseEventArgs(this.Bounds));
+            this.ActualController.HandleMouseMove(this, theEvent.ToMouseEventArgs(this));
         }
 
+        /// <summary>
+        /// Handles the mouse up event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void MouseUp(NSEvent theEvent)
         {
             base.MouseUp(theEvent);
-            this.ActualController.HandleMouseUp(this, theEvent.ToMouseEventArgs(this.Bounds));
+            this.ActualController.HandleMouseUp(this, theEvent.ToMouseEventArgs(this));
         }
 
+        /// <summary>
+        /// Handles the mouse entered event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void MouseEntered(NSEvent theEvent)
         {
             base.MouseEntered(theEvent);
-            this.ActualController.HandleMouseEnter(this, theEvent.ToMouseEventArgs(this.Bounds));
+            this.ActualController.HandleMouseEnter(this, theEvent.ToMouseEventArgs(this));
         }
 
+        /// <summary>
+        /// Handles the mouse exited event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void MouseExited(NSEvent theEvent)
         {
             base.MouseExited(theEvent);
-            this.ActualController.HandleMouseLeave(this, theEvent.ToMouseEventArgs(this.Bounds));
+            this.ActualController.HandleMouseLeave(this, theEvent.ToMouseEventArgs(this));
         }
 
+        /// <summary>
+        /// Handles the mouse wheel event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void ScrollWheel(NSEvent theEvent)
         {
             // TODO: use scroll events to pan?
             base.ScrollWheel(theEvent);
-            this.ActualController.HandleMouseWheel(this, theEvent.ToMouseWheelEventArgs(this.Bounds));
+            this.ActualController.HandleMouseWheel(this, theEvent.ToMouseWheelEventArgs(this));
         }
 
+        /// <summary>
+        /// Handles the other mouse down event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void OtherMouseDown(NSEvent theEvent)
         {
             base.OtherMouseDown(theEvent);
         }
 
+        /// <summary>
+        /// Handles the right mouse down event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void RightMouseDown(NSEvent theEvent)
         {
             base.RightMouseDown(theEvent);
+            RightMouseAction?.Invoke();
         }
 
+        /// <summary>
+        /// Handles the key down event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void KeyDown(NSEvent theEvent)
         {
             base.KeyDown(theEvent);
             this.ActualController.HandleKeyDown(this, theEvent.ToKeyEventArgs());
         }
 
+        /// <summary>
+        /// Handles the touches began event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void TouchesBeganWithEvent(NSEvent theEvent)
         {
             base.TouchesBeganWithEvent(theEvent);
         }
 
+        /// <summary>
+        /// Handles the magnify event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void MagnifyWithEvent(NSEvent theEvent)
         {
             base.MagnifyWithEvent(theEvent);
@@ -384,17 +440,22 @@ namespace DWSIM.UI.Desktop.Mac
             // https://developer.apple.com/library/mac/documentation/cocoa/conceptual/eventoverview/HandlingTouchEvents/HandlingTouchEvents.html
         }
 
-        //public override void SmartMagnify (NSEvent withEvent)
-        //{
-        //    base.SmartMagnify (withEvent);
-        //}
+        /// <summary>
+        /// Handles the smart magnify event.
+        /// </summary>
+        /// <param name="withEvent">The event.</param>
+        public override void SmartMagnify(NSEvent withEvent)
+        {
+            base.SmartMagnify(withEvent);
+        }
 
+        /// <summary>
+        /// Handles the swipe event.
+        /// </summary>
+        /// <param name="theEvent">The event.</param>
         public override void SwipeWithEvent(NSEvent theEvent)
         {
             base.SwipeWithEvent(theEvent);
         }
-
-        public WeakReference WeakHandler { get; set; }
-
     }
 }
