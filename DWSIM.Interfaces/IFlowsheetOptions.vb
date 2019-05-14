@@ -85,4 +85,5 @@
 
     Property DisplayFloatingTableCompoundAmounts As Boolean
     Property FlowsheetMultiSelectMode As Boolean
+    Property CompoundOrderingMode As CompoundOrdering
 End Interface

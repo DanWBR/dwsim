@@ -62,6 +62,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.EditAppearanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.SplitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SplitAndInsertRecycleMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MergeStreamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreviewDialog = New System.Windows.Forms.PrintPreviewDialog()
         Me.designSurfacePrintDocument = New System.Drawing.Printing.PrintDocument()
@@ -205,7 +206,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'CMS_Sel
         '
         resources.ApplyResources(Me.CMS_Sel, "CMS_Sel")
-        Me.CMS_Sel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMI_Label, Me.AtivadoToolStripMenuItem, Me.ToolStripSeparator3, Me.RecalcularToolStripMenuItem, Me.CopyFromTSMI, Me.DepurarObjetoToolStripMenuItem, Me.ToolStripSeparator6, Me.ConectarAToolStripMenuItem, Me.DesconectarDeToolStripMenuItem, Me.ToolStripSeparator4, Me.TSMI_Girar, Me.HorizontalmenteToolStripMenuItem, Me.ToolStripSeparator2, Me.ClonarToolStripMenuItem, Me.ExcluirToolStripMenuItem, Me.ToolStripSeparator5, Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem, Me.ToolStripSeparator7, Me.EditAppearanceToolStripMenuItem, Me.ToolStripSeparator8, Me.SplitToolStripMenuItem, Me.MergeStreamsToolStripMenuItem})
+        Me.CMS_Sel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMI_Label, Me.AtivadoToolStripMenuItem, Me.ToolStripSeparator3, Me.RecalcularToolStripMenuItem, Me.CopyFromTSMI, Me.DepurarObjetoToolStripMenuItem, Me.ToolStripSeparator6, Me.ConectarAToolStripMenuItem, Me.DesconectarDeToolStripMenuItem, Me.ToolStripSeparator4, Me.TSMI_Girar, Me.HorizontalmenteToolStripMenuItem, Me.ToolStripSeparator2, Me.ClonarToolStripMenuItem, Me.ExcluirToolStripMenuItem, Me.ToolStripSeparator5, Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem, Me.ToolStripSeparator7, Me.EditAppearanceToolStripMenuItem, Me.ToolStripSeparator8, Me.SplitToolStripMenuItem, Me.SplitAndInsertRecycleMenuItem, Me.MergeStreamsToolStripMenuItem})
         Me.CMS_Sel.Name = "CMS_Sel"
         '
         'TSMI_Label
@@ -364,6 +365,12 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.SplitToolStripMenuItem, "SplitToolStripMenuItem")
         Me.SplitToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_divide
         Me.SplitToolStripMenuItem.Name = "SplitToolStripMenuItem"
+        '
+        'SplitAndInsertRecycleMenuItem
+        '
+        resources.ApplyResources(Me.SplitAndInsertRecycleMenuItem, "SplitAndInsertRecycleMenuItem")
+        Me.SplitAndInsertRecycleMenuItem.Image = Global.DWSIM.My.Resources.Resources.lo_recy_16
+        Me.SplitAndInsertRecycleMenuItem.Name = "SplitAndInsertRecycleMenuItem"
         '
         'MergeStreamsToolStripMenuItem
         '
@@ -904,4 +911,5 @@ Partial Class FlowsheetSurface_SkiaSharp
     Public WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents CopiarComoImagem200ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CopiarComoImagem300ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SplitAndInsertRecycleMenuItem As ToolStripMenuItem
 End Class

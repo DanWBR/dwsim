@@ -362,8 +362,13 @@ Public Class FormPCBulk
                 .Molar_Weight = dMW(i)
                 .IsPF = 1
 
-                .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
-                .CAS_Number = id.ToString() & "-" & .NBP.GetValueOrDefault().ToString("N0")
+                If Not Double.IsNaN(.NBP.GetValueOrDefault) Then
+                    .Name = "C_" & id & "_NBP_" & CInt(.NBP.GetValueOrDefault - 273.15).ToString
+                    .CAS_Number = id.ToString() & "-" & CInt(.NBP.GetValueOrDefault()).ToString()
+                Else
+                    .Name = "C_" & id & "_NBP_" & i.ToString()
+                    .CAS_Number = id.ToString() & "-" & i.ToString()
+                End If
 
                 .PF_Watson_K = (1.8 * .NBP.GetValueOrDefault) ^ (1 / 3) / .PF_SG.GetValueOrDefault
                 .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)

@@ -399,6 +399,20 @@ Namespace Enums
 
     End Enum
 
+    Public Enum CompoundOrdering
+
+        AsAdded = 0
+        Name_ASC = 1
+        Name_DESC = 2
+        NBP_ASC = 3
+        NBP_DESC = 4
+        MW_ASC = 5
+        MW_DESC = 6
+        CAS_ASC = 7
+        CAS_DESC = 8
+
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects

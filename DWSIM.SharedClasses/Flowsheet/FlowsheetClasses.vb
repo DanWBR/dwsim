@@ -235,6 +235,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property SpreadsheetUnitLockingMode As Boolean = True Implements IFlowsheetOptions.SpreadsheetUnitLockingMode
 
+        Public Property CompoundOrderingMode As Enums.CompoundOrdering = CompoundOrdering.MW_DESC Implements IFlowsheetOptions.CompoundOrderingMode
+
     End Class
 
 End Namespace

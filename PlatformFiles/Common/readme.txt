@@ -65,9 +65,10 @@ The full changelog, including code changes and their authors can be viewed at ht
 Version 5.7 Update 8
 
 - [NEW] Highlight phase areas in Binary Envelope (Cross-Platform UI)
-- [NEW] New specification options for Rigorous Column + IO/SC solvers
-- [NEW] Exposing petroleum cold flow properties from utility (Classic UI)
 - [NEW] Context menu for charts (Cross-Platform UI)
+- [NEW] Split Material/Energy Streams and Insert Recycles (Classic UI)
+- [NEW] Order compound lists (Classic UI)
+- [NEW] Exposing petroleum cold flow properties from utility (Classic UI)
 - [FIX] Fixed solver infinite loop detection
 - [FIX] Other bug fixes
 

@@ -320,9 +320,13 @@ Namespace Utilities.PetroleumCharacterization
 
                     Dim trimchars As Char() = New Char() {" "c, "_"c, ","c, ";"c, ":"c}
 
-                    .Name = prefix.Trim(trimchars) + "_NBP_" + (.NBP.GetValueOrDefault - 273.15).ToString("N0")
-
-                    .CAS_Number = prefix.Trim(trimchars) & "-" & .NBP.GetValueOrDefault().ToString("N0")
+                    If Not Double.IsNaN(.NBP.GetValueOrDefault) Then
+                        .Name = prefix.Trim(trimchars) + "_NBP_" + CInt(.NBP.GetValueOrDefault - 273.15).ToString()
+                        .CAS_Number = prefix.Trim(trimchars) & "-" & CInt(.NBP.GetValueOrDefault()).ToString()
+                    Else
+                        .Name = prefix.Trim(trimchars) + "_NBP_" & i.ToString()
+                        .CAS_Number = prefix.Trim(trimchars) + "-" & i.ToString()
+                    End If
 
                     .PF_Watson_K = (1.8 * .NBP.GetValueOrDefault) ^ (1 / 3) / .PF_SG.GetValueOrDefault
                     .Critical_Compressibility = PROPS.Zc1(.Acentric_Factor)

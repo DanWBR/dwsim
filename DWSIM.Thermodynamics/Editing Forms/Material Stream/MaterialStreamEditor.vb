@@ -164,7 +164,8 @@ Public Class MaterialStreamEditor
             gridInputComposition.Rows.Clear()
             gridInputComposition.Columns(1).CellTemplate.Style.Format = nff
 
-            For Each comp In .Phases(0).Compounds.Values
+            For Each cp In .FlowSheet.SelectedCompounds.Values
+                Dim comp = .Phases(0).Compounds(cp.Name)
                 gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             Next
 
@@ -354,6 +355,24 @@ Public Class MaterialStreamEditor
         grid.ReadOnly = True
         grid.Rows.Clear()
         grid.Columns(1).CellTemplate.Style.Format = nff
+        Select Case MatStream.FlowSheet.Options.CompoundOrderingMode
+            Case Interfaces.Enums.CompoundOrdering.CAS_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.CAS_Number).ToList
+            Case Interfaces.Enums.CompoundOrdering.CAS_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.CAS_Number).ToList
+            Case Interfaces.Enums.CompoundOrdering.MW_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.Molar_Weight).ToList
+            Case Interfaces.Enums.CompoundOrdering.MW_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.Molar_Weight).ToList
+            Case Interfaces.Enums.CompoundOrdering.Name_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.Name).ToList
+            Case Interfaces.Enums.CompoundOrdering.Name_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.Name).ToList
+            Case Interfaces.Enums.CompoundOrdering.NBP_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.NBP.GetValueOrDefault).ToList
+            Case Interfaces.Enums.CompoundOrdering.NBP_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.NBP.GetValueOrDefault).ToList
+        End Select
         For Each comp In complist
             grid.Rows(grid.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
         Next
@@ -365,6 +384,24 @@ Public Class MaterialStreamEditor
         grid.ReadOnly = True
         grid.Rows.Clear()
         grid.Columns(1).CellTemplate.Style.Format = nf
+        Select Case MatStream.FlowSheet.Options.CompoundOrderingMode
+            Case Interfaces.Enums.CompoundOrdering.CAS_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.CAS_Number).ToList
+            Case Interfaces.Enums.CompoundOrdering.CAS_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.CAS_Number).ToList
+            Case Interfaces.Enums.CompoundOrdering.MW_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.Molar_Weight).ToList
+            Case Interfaces.Enums.CompoundOrdering.MW_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.Molar_Weight).ToList
+            Case Interfaces.Enums.CompoundOrdering.Name_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.Name).ToList
+            Case Interfaces.Enums.CompoundOrdering.Name_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.Name).ToList
+            Case Interfaces.Enums.CompoundOrdering.NBP_ASC
+                complist = complist.OrderBy(Function(c) c.ConstantProperties.NBP.GetValueOrDefault).ToList
+            Case Interfaces.Enums.CompoundOrdering.NBP_DESC
+                complist = complist.OrderByDescending(Function(c) c.ConstantProperties.NBP.GetValueOrDefault).ToList
+        End Select
         For Each comp In complist
             grid.Rows(grid.Rows.Add(New Object() {comp.Name, 0.0#})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
         Next

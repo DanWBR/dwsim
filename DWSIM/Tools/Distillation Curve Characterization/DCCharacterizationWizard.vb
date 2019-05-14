@@ -472,8 +472,13 @@ Public Class DCCharacterizationWizard
 
                 .NBP = tc.tbpm
 
-                .Name = "C_" & id & "_NBP_" & (.NBP.GetValueOrDefault - 273.15).ToString("N0")
-                .CAS_Number = id.ToString() & "-" & .NBP.GetValueOrDefault().ToString("N0")
+                If Not Double.IsNaN(.NBP.GetValueOrDefault) Then
+                    .Name = "C_" & id & "_NBP_" & CInt(.NBP.GetValueOrDefault - 273.15).ToString
+                    .CAS_Number = id.ToString() & "-" & CInt(.NBP.GetValueOrDefault()).ToString
+                Else
+                    .Name = "C_" & id & "_NBP_" & i.ToString()
+                    .CAS_Number = id.ToString() & "-" & i.ToString()
+                End If
 
             End With
 

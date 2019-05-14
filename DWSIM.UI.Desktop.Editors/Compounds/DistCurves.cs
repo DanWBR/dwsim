@@ -605,9 +605,16 @@ namespace DWSIM.UI.Desktop.Editors
 
                 char[] trimchars = new char[] { ' ', '_', ',', ';', ':' };
 
-                cprops.Name = "C" + assayname.Trim(trimchars).ToString() + "_NBP_" + (cprops.NBP.GetValueOrDefault() - 273.15).ToString("N0");
-
-                cprops.CAS_Number = assayname.Trim(trimchars) + "-" + cprops.NBP.GetValueOrDefault().ToString("N0");
+                if (Double.IsNaN(cprops.NBP.GetValueOrDefault()))
+                {
+                    cprops.Name = "C" + assayname.Trim(trimchars).ToString() + "_NBP_" + i.ToString();
+                    cprops.CAS_Number = assayname.Trim(trimchars) + "-" + i.ToString();
+                }
+                else
+                {
+                    cprops.Name = "C" + assayname.Trim(trimchars).ToString() + "_NBP_" + Convert.ToInt32(cprops.NBP.GetValueOrDefault() - 273.15).ToString();
+                    cprops.CAS_Number = assayname.Trim(trimchars) + "-" + Convert.ToInt32(cprops.NBP.GetValueOrDefault()).ToString();
+                }
 
                 i += 1;
 

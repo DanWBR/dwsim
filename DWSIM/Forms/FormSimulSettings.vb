@@ -243,6 +243,8 @@ Public Class FormSimulSettings
         chkDisplayFloatingTableCompoundAmounts.Checked = FrmChild.Options.DisplayFloatingTableCompoundAmounts
         cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex = FrmChild.Options.DefaultFloatingTableCompoundAmountBasis
 
+        cbOrderCompoundsBy.SelectedIndex = FrmChild.Options.CompoundOrderingMode
+
         Me.loaded = True
 
     End Sub
@@ -1572,6 +1574,11 @@ Public Class FormSimulSettings
             ogc1.EndEdit()
         End If
 
+    End Sub
+
+    Private Sub cbOrderCompoundsBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOrderCompoundsBy.SelectedIndexChanged
+        FrmChild.Options.CompoundOrderingMode = cbOrderCompoundsBy.SelectedIndex
+        FrmChild.UpdateOpenEditForms()
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

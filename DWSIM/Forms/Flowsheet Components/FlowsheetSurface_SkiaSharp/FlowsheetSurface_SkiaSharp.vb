@@ -251,10 +251,35 @@ Public Class FlowsheetSurface_SkiaSharp
                         For Each mstr As Thermodynamics.Streams.MaterialStream In Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Thermodynamics.Streams.MaterialStream)
                             If mstr.GraphicObject.Tag <> obj.GraphicObject.Tag Then
                                 Dim newtsmi As New ToolStripMenuItem(mstr.GraphicObject.Tag)
-                                If mstr.GraphicObject.Calculated Then CopyFromTSMI.DropDownItems.Add(newtsmi)
+                                CopyFromTSMI.DropDownItems.Add(newtsmi)
                             End If
                         Next
                     End If
+
+                ElseIf FlowsheetSurface.SelectedObject.ObjectType = ObjectType.EnergyStream Then
+
+                    Dim cancopy As Boolean
+
+                    If Not obj.GraphicObject.InputConnectors(0).IsAttached Then
+                        cancopy = True
+                    Else
+                        If obj.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            cancopy = True
+                        Else
+                            cancopy = False
+                        End If
+                    End If
+
+                    If cancopy Then
+                        Me.CopyFromTSMI.Visible = True
+                        For Each estr As UnitOperations.Streams.EnergyStream In Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is UnitOperations.Streams.EnergyStream)
+                            If estr.GraphicObject.Tag <> obj.GraphicObject.Tag Then
+                                Dim newtsmi As New ToolStripMenuItem(estr.GraphicObject.Tag)
+                                CopyFromTSMI.DropDownItems.Add(newtsmi)
+                            End If
+                        Next
+                    End If
+
 
                 End If
 
@@ -2370,6 +2395,7 @@ Public Class FlowsheetSurface_SkiaSharp
             My.Application.PushUndoRedoAction = False
             Dim stream = FlowsheetSurface.SelectedObject
             Dim newstream = CloneObject(stream)
+            newstream.CreateConnectors(1, 1)
             newstream.Status = stream.Status
 
             Dim objfrom As GraphicObject, fromidx As Integer
@@ -2741,6 +2767,57 @@ Public Class FlowsheetSurface_SkiaSharp
             End Using
         End Using
         FlowsheetSurface.Zoom = prevzoom
+    End Sub
+
+    Private Sub SplitAndInsertRecycleMenuItem_Click(sender As Object, e As EventArgs) Handles SplitAndInsertRecycleMenuItem.Click
+
+        Try
+
+            My.Application.PushUndoRedoAction = False
+
+            Dim stream = FlowsheetSurface.SelectedObject
+            Dim newstream = CloneObject(stream)
+            newstream.CreateConnectors(1, 1)
+            newstream.Status = stream.Status
+
+            Dim x = stream.X
+            Dim y = stream.Y
+
+            Dim objfrom As GraphicObject, fromidx As Integer
+
+            If stream.InputConnectors(0).IsAttached Then
+                objfrom = stream.InputConnectors(0).AttachedConnector.AttachedFrom
+                fromidx = stream.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                Flowsheet.DisconnectObjects(objfrom, stream)
+                Flowsheet.ConnectObject(objfrom, newstream, fromidx)
+            End If
+
+            Dim id As String, obj As GraphicObject
+
+            If stream.ObjectType = ObjectType.MaterialStream Then
+                id = AddObjectToSurface(ObjectType.OT_Recycle, x, y, False)
+            Else
+                id = AddObjectToSurface(ObjectType.OT_EnergyRecycle, x, y, False)
+            End If
+            obj = Flowsheet.SimulationObjects(id).GraphicObject
+            obj.CreateConnectors(1, 1)
+            obj.Calculated = True
+            obj.Owner.Calculated = True
+
+            Flowsheet.ConnectObjects(newstream, obj, 0, 0)
+            Flowsheet.ConnectObjects(obj, stream, 0, 0)
+
+            newstream.X = x - 40
+            newstream.Y = y
+            stream.X = x + 40
+            stream.Y = y
+
+        Catch ex As Exception
+
+        Finally
+            My.Application.PushUndoRedoAction = True
+        End Try
+
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
