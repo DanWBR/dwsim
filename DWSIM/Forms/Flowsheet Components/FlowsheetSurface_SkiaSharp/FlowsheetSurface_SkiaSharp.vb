@@ -2405,6 +2405,9 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.DisconnectObjects(objfrom, stream)
                 Flowsheet.ConnectObject(objfrom, newstream, fromidx)
             End If
+
+            newstream.FlippedH = stream.FlippedH
+
         Catch ex As Exception
         Finally
             My.Application.PushUndoRedoAction = True
@@ -2807,10 +2810,19 @@ Public Class FlowsheetSurface_SkiaSharp
             Flowsheet.ConnectObjects(newstream, obj, 0, 0)
             Flowsheet.ConnectObjects(obj, stream, 0, 0)
 
-            newstream.X = x - 40
-            newstream.Y = y
-            stream.X = x + 40
-            stream.Y = y
+            If Not stream.FlippedH Then
+                newstream.X = x - 50
+                newstream.Y = y
+                stream.X = x + 50
+                stream.Y = y
+            Else
+                newstream.X = x + 50
+                newstream.Y = y
+                newstream.FlippedH = True
+                stream.X = x - 50
+                stream.Y = y
+                obj.FlippedH = True
+            End If
 
         Catch ex As Exception
 

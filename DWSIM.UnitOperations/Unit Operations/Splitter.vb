@@ -368,10 +368,12 @@ Namespace UnitOperations
             proplist.Add("PROP_SP_1")
             proplist.Add("PROP_SP_2")
 
-            OutCount = 0
-            For Each cp In GraphicObject.OutputConnectors
-                If cp.IsAttached Then OutCount += 1
-            Next
+            If GraphicObject IsNot Nothing Then
+                OutCount = 0
+                For Each cp In GraphicObject.OutputConnectors
+                    If cp.IsAttached Then OutCount += 1
+                Next
+            End If
 
             Select Case proptype
                 Case PropertyType.RW
@@ -395,10 +397,12 @@ Namespace UnitOperations
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
-            OutCount = 0
-            For Each cp In GraphicObject.OutputConnectors
-                If cp.IsAttached Then OutCount += 1
-            Next
+            If GraphicObject IsNot Nothing Then
+                OutCount = 0
+                For Each cp In GraphicObject.OutputConnectors
+                    If cp.IsAttached Then OutCount += 1
+                Next
+            End If
 
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 

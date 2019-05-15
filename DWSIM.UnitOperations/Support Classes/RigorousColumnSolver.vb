@@ -3207,6 +3207,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Close()
 
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Temperature error = " & t_error.ToString, IFlowsheet.MessageType.Information)
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Composition error = " & comperror.ToString, IFlowsheet.MessageType.Information)
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", combined Temperature/Composition error = " & (t_error + comperror).ToString, IFlowsheet.MessageType.Information)
+
             Loop Until t_error <= tol(1) And comperror <= tol(1)
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
