@@ -22,7 +22,6 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PetroleumCharacterization.Methods
 
-
 Public Class DCCharacterizationWizard
 
     Private Class tmpcomp
@@ -79,6 +78,11 @@ Public Class DCCharacterizationWizard
             .Item(8).HeaderText += " (" & su.cinematic_viscosity & ")"
             .Item(9).HeaderText += " (" & su.cinematic_viscosity & ")"
         End With
+
+        Me.TextBoxVT1.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 37.78 + 273.15).ToString(nf)
+        Me.TextBoxVT2.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 98.89 + 273.15).ToString(nf)
+
+        Label41.Text = su.temperature
 
         P0.BringToFront()
 
@@ -405,8 +409,8 @@ Public Class DCCharacterizationWizard
                     .PF_v2 = Interpolation.polinterpolation.barycentricinterpolation(pxv2.ToArray(GetType(Double)), pyv2.ToArray(GetType(Double)), w, pxv2.Count, tc.fvm)
                     If .PF_v1 < 0 Then .PF_v1 = -.PF_v1
                     If .PF_v2 < 0 Then .PF_v2 = -.PF_v2
-                    .PF_Tv1 = (Convert.ToDouble(Me.TextBoxVT1.Text) - 32) / 9 * 5 + 273.15
-                    .PF_Tv2 = (Convert.ToDouble(Me.TextBoxVT2.Text) - 32) / 9 * 5 + 273.15
+                    .PF_Tv1 = Me.TextBoxVT1.Text.ToDoubleFromCurrent.ConvertToSI(su.temperature)
+                    .PF_Tv2 = Me.TextBoxVT2.Text.ToDoubleFromCurrent.ConvertToSI(su.temperature)
                 End If
 
                 'SG
@@ -1169,8 +1173,8 @@ Public Class DCCharacterizationWizard
                     If .API = 0.0# Then TextBoxBulkD.Text = ""
                     TextBoxBulkMW.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, .MW), nf)
                     If .MW = 0.0# Then TextBoxBulkMW.Text = ""
-                    TextBoxVT1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI("F", .T1), nf)
-                    TextBoxVT2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI("F", .T2), nf)
+                    TextBoxVT1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .T1), nf)
+                    TextBoxVT2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .T2), nf)
                     TextBoxKAPI.Text = Format(.K_API, nf)
                     CheckBoxMW.Checked = .HasMWCurve
                     CheckBoxSG.Checked = .HasSGCurve
@@ -1268,8 +1272,8 @@ Public Class DCCharacterizationWizard
         k_api = TextBoxKAPI.Text
         If TextBoxBulkMW.Text <> "" Then mw = TextBoxBulkMW.Text Else mw = 0.0#
         If TextBoxBulkD.Text <> "" Then api = TextBoxBulkD.Text Else api = 0.0#
-        vt1 = SystemsOfUnits.Converter.ConvertToSI("F", TextBoxVT1.Text)
-        vt2 = SystemsOfUnits.Converter.ConvertToSI("F", TextBoxVT2.Text)
+        vt1 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxVT1.Text)
+        vt2 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxVT2.Text)
         Dim myassay As Utilities.PetroleumCharacterization.Assay.Assay = New Utilities.PetroleumCharacterization.Assay.Assay(k_api, mw, api, vt1, vt2, ComboBoxDistMethod.SelectedIndex, ComboBoxBasis.SelectedItem.ToString, pxt, pyt, pym, pyd, pyv1, pyv2)
         myassay.CurveBasis = ComboBoxBasis.SelectedItem.ToString
         myassay.Name = "NBP_ASSAY_" & New Random().Next(10000).ToString

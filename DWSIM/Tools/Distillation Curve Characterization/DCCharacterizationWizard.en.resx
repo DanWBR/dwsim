@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
   </data>
@@ -170,7 +170,7 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   <data name="Button6.Text" xml:space="preserve">
     <value>Next &gt;</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TextBoxKAPI.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -236,12 +236,6 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   </data>
   <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
     <value>275, 133</value>
-  </data>
-  <data name="Label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 13</value>
-  </data>
-  <data name="Label41.Text" xml:space="preserve">
-    <value>°F</value>
   </data>
   <data name="TextBoxVT2.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 130</value>
@@ -540,6 +534,45 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   <data name="Label27.Text" xml:space="preserve">
     <value>Methods and Correlations</value>
   </data>
+  <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Molar Fraction</value>
+  </data>
+  <data name="Column4.Width" type="System.Int32, mscorlib">
+    <value>91</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>NBP</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>SG</value>
+  </data>
+  <data name="Column3.Width" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>MW</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>Ac. Factor</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="Label37.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="Label37.Text" xml:space="preserve">
+    <value>Results</value>
+  </data>
   <data name="Label34.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
   </data>
@@ -564,44 +597,9 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   <data name="Button24.Text" xml:space="preserve">
     <value>Finalize</value>
   </data>
-  <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Molar Fraction</value>
-  </data>
-  <data name="Column4.Width" type="System.Int32, mscorlib">
-    <value>99</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>NBP</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
-    <value>54</value>
-  </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>SG</value>
-  </data>
-  <data name="Column3.Width" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>MW</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
-    <value>Ac. Factor</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
-    <value>81</value>
-  </data>
-  <data name="Label37.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
-  </data>
-  <data name="Label37.Text" xml:space="preserve">
-    <value>Results</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM - Petroleum Characterization</value>

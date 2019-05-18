@@ -24,14 +24,14 @@ Partial Class DCCharacterizationWizard
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DCCharacterizationWizard))
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.P0 = New System.Windows.Forms.Panel()
         Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -105,6 +105,7 @@ Partial Class DCCharacterizationWizard
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.GraphCurves = New ZedGraph.ZedGraphControl()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.P4 = New System.Windows.Forms.Panel()
         Me.LabelWithDivider5 = New System.Windows.Forms.LabelWithDivider()
@@ -131,6 +132,7 @@ Partial Class DCCharacterizationWizard
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.GraphComps = New ZedGraph.ZedGraphControl()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.P6 = New System.Windows.Forms.Panel()
         Me.LabelWithDivider7 = New System.Windows.Forms.LabelWithDivider()
@@ -182,8 +184,6 @@ Partial Class DCCharacterizationWizard
         Me.Button22 = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
         Me.Button24 = New System.Windows.Forms.Button()
-        Me.GraphCurves = New ZedGraph.ZedGraphControl()
-        Me.GraphComps = New ZedGraph.ZedGraphControl()
         Me.P0.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.P1.SuspendLayout()
@@ -213,20 +213,21 @@ Partial Class DCCharacterizationWizard
         '
         'P0
         '
+        resources.ApplyResources(Me.P0, "P0")
         Me.P0.Controls.Add(Me.LabelWithDivider1)
         Me.P0.Controls.Add(Me.Panel1)
         Me.P0.Controls.Add(Me.Panel0)
-        resources.ApplyResources(Me.P0, "P0")
         Me.P0.Name = "P0"
         '
         'LabelWithDivider1
         '
-        Me.LabelWithDivider1.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider1, "LabelWithDivider1")
+        Me.LabelWithDivider1.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider1.Name = "LabelWithDivider1"
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label2)
@@ -234,7 +235,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Button1)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'Label3
@@ -272,26 +272,27 @@ Partial Class DCCharacterizationWizard
         '
         'Panel0
         '
-        Me.Panel0.BackgroundImage = Global.DWSIM.My.Resources.Resources.pic21
         resources.ApplyResources(Me.Panel0, "Panel0")
+        Me.Panel0.BackgroundImage = Global.DWSIM.My.Resources.Resources.pic21
         Me.Panel0.Name = "Panel0"
         '
         'P1
         '
+        resources.ApplyResources(Me.P1, "P1")
         Me.P1.Controls.Add(Me.LabelWithDivider2)
         Me.P1.Controls.Add(Me.Panel3)
         Me.P1.Controls.Add(Me.Panel4)
-        resources.ApplyResources(Me.P1, "P1")
         Me.P1.Name = "P1"
         '
         'LabelWithDivider2
         '
-        Me.LabelWithDivider2.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
+        Me.LabelWithDivider2.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider2.Name = "LabelWithDivider2"
         '
         'Panel3
         '
+        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.BackColor = System.Drawing.Color.White
         Me.Panel3.Controls.Add(Me.Button27)
         Me.Panel3.Controls.Add(Me.Label4)
@@ -300,7 +301,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel3.Controls.Add(Me.Button4)
         Me.Panel3.Controls.Add(Me.Button5)
         Me.Panel3.Controls.Add(Me.Button6)
-        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Name = "Panel3"
         '
         'Button27
@@ -344,6 +344,7 @@ Partial Class DCCharacterizationWizard
         '
         'Panel4
         '
+        resources.ApplyResources(Me.Panel4, "Panel4")
         Me.Panel4.Controls.Add(Me.TextBoxKAPI)
         Me.Panel4.Controls.Add(Me.Label45)
         Me.Panel4.Controls.Add(Me.TextBoxBulkMW)
@@ -366,7 +367,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel4.Controls.Add(Me.CheckBoxMW)
         Me.Panel4.Controls.Add(Me.Label7)
         Me.Panel4.Controls.Add(Me.CheckBox1)
-        resources.ApplyResources(Me.Panel4, "Panel4")
         Me.Panel4.Name = "Panel4"
         '
         'TextBoxKAPI
@@ -406,10 +406,10 @@ Partial Class DCCharacterizationWizard
         '
         'ComboBoxBasis
         '
+        resources.ApplyResources(Me.ComboBoxBasis, "ComboBoxBasis")
         Me.ComboBoxBasis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxBasis.FormattingEnabled = True
         Me.ComboBoxBasis.Items.AddRange(New Object() {resources.GetString("ComboBoxBasis.Items"), resources.GetString("ComboBoxBasis.Items1"), resources.GetString("ComboBoxBasis.Items2")})
-        resources.ApplyResources(Me.ComboBoxBasis, "ComboBoxBasis")
         Me.ComboBoxBasis.Name = "ComboBoxBasis"
         '
         'Label42
@@ -458,10 +458,10 @@ Partial Class DCCharacterizationWizard
         '
         'ComboBoxDistMethod
         '
+        resources.ApplyResources(Me.ComboBoxDistMethod, "ComboBoxDistMethod")
         Me.ComboBoxDistMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxDistMethod.FormattingEnabled = True
         Me.ComboBoxDistMethod.Items.AddRange(New Object() {resources.GetString("ComboBoxDistMethod.Items"), resources.GetString("ComboBoxDistMethod.Items1"), resources.GetString("ComboBoxDistMethod.Items2"), resources.GetString("ComboBoxDistMethod.Items3")})
-        resources.ApplyResources(Me.ComboBoxDistMethod, "ComboBoxDistMethod")
         Me.ComboBoxDistMethod.Name = "ComboBoxDistMethod"
         '
         'CheckBoxVISC
@@ -497,20 +497,21 @@ Partial Class DCCharacterizationWizard
         '
         'P2
         '
+        resources.ApplyResources(Me.P2, "P2")
         Me.P2.Controls.Add(Me.LabelWithDivider3)
         Me.P2.Controls.Add(Me.Panel5)
         Me.P2.Controls.Add(Me.Panel6)
-        resources.ApplyResources(Me.P2, "P2")
         Me.P2.Name = "P2"
         '
         'LabelWithDivider3
         '
-        Me.LabelWithDivider3.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
+        Me.LabelWithDivider3.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider3.Name = "LabelWithDivider3"
         '
         'Panel5
         '
+        resources.ApplyResources(Me.Panel5, "Panel5")
         Me.Panel5.BackColor = System.Drawing.Color.White
         Me.Panel5.Controls.Add(Me.Button26)
         Me.Panel5.Controls.Add(Me.Label8)
@@ -519,7 +520,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel5.Controls.Add(Me.Button7)
         Me.Panel5.Controls.Add(Me.Button8)
         Me.Panel5.Controls.Add(Me.Button9)
-        resources.ApplyResources(Me.Panel5, "Panel5")
         Me.Panel5.Name = "Panel5"
         '
         'Button26
@@ -563,10 +563,10 @@ Partial Class DCCharacterizationWizard
         '
         'Panel6
         '
+        resources.ApplyResources(Me.Panel6, "Panel6")
         Me.Panel6.Controls.Add(Me.Button25)
         Me.Panel6.Controls.Add(Me.DataGridView1)
         Me.Panel6.Controls.Add(Me.Label11)
-        resources.ApplyResources(Me.Panel6, "Panel6")
         Me.Panel6.Name = "Panel6"
         '
         'Button25
@@ -577,41 +577,41 @@ Partial Class DCCharacterizationWizard
         '
         'DataGridView1
         '
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowDrop = True
         Me.DataGridView1.AllowUserToResizeRows = False
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.vap, Me.temp, Me.mm, Me.dens, Me.visc1, Me.visc2})
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle11
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         '
@@ -652,20 +652,21 @@ Partial Class DCCharacterizationWizard
         '
         'P3
         '
+        resources.ApplyResources(Me.P3, "P3")
         Me.P3.Controls.Add(Me.LabelWithDivider4)
         Me.P3.Controls.Add(Me.Panel7)
         Me.P3.Controls.Add(Me.Panel8)
-        resources.ApplyResources(Me.P3, "P3")
         Me.P3.Name = "P3"
         '
         'LabelWithDivider4
         '
-        Me.LabelWithDivider4.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider4, "LabelWithDivider4")
+        Me.LabelWithDivider4.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider4.Name = "LabelWithDivider4"
         '
         'Panel7
         '
+        resources.ApplyResources(Me.Panel7, "Panel7")
         Me.Panel7.BackColor = System.Drawing.Color.White
         Me.Panel7.Controls.Add(Me.Label12)
         Me.Panel7.Controls.Add(Me.Label13)
@@ -673,7 +674,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel7.Controls.Add(Me.Button10)
         Me.Panel7.Controls.Add(Me.Button11)
         Me.Panel7.Controls.Add(Me.Button12)
-        resources.ApplyResources(Me.Panel7, "Panel7")
         Me.Panel7.Name = "Panel7"
         '
         'Label12
@@ -711,10 +711,23 @@ Partial Class DCCharacterizationWizard
         '
         'Panel8
         '
+        resources.ApplyResources(Me.Panel8, "Panel8")
         Me.Panel8.Controls.Add(Me.GraphCurves)
         Me.Panel8.Controls.Add(Me.Label15)
-        resources.ApplyResources(Me.Panel8, "Panel8")
         Me.Panel8.Name = "Panel8"
+        '
+        'GraphCurves
+        '
+        resources.ApplyResources(Me.GraphCurves, "GraphCurves")
+        Me.GraphCurves.IsShowCopyMessage = False
+        Me.GraphCurves.Name = "GraphCurves"
+        Me.GraphCurves.ScrollGrace = 0R
+        Me.GraphCurves.ScrollMaxX = 0R
+        Me.GraphCurves.ScrollMaxY = 0R
+        Me.GraphCurves.ScrollMaxY2 = 0R
+        Me.GraphCurves.ScrollMinX = 0R
+        Me.GraphCurves.ScrollMinY = 0R
+        Me.GraphCurves.ScrollMinY2 = 0R
         '
         'Label15
         '
@@ -723,20 +736,21 @@ Partial Class DCCharacterizationWizard
         '
         'P4
         '
+        resources.ApplyResources(Me.P4, "P4")
         Me.P4.Controls.Add(Me.LabelWithDivider5)
         Me.P4.Controls.Add(Me.Panel9)
         Me.P4.Controls.Add(Me.Panel10)
-        resources.ApplyResources(Me.P4, "P4")
         Me.P4.Name = "P4"
         '
         'LabelWithDivider5
         '
-        Me.LabelWithDivider5.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider5, "LabelWithDivider5")
+        Me.LabelWithDivider5.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider5.Name = "LabelWithDivider5"
         '
         'Panel9
         '
+        resources.ApplyResources(Me.Panel9, "Panel9")
         Me.Panel9.BackColor = System.Drawing.Color.White
         Me.Panel9.Controls.Add(Me.Label16)
         Me.Panel9.Controls.Add(Me.Label17)
@@ -744,7 +758,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel9.Controls.Add(Me.Button13)
         Me.Panel9.Controls.Add(Me.Button14)
         Me.Panel9.Controls.Add(Me.Button15)
-        resources.ApplyResources(Me.Panel9, "Panel9")
         Me.Panel9.Name = "Panel9"
         '
         'Label16
@@ -782,12 +795,12 @@ Partial Class DCCharacterizationWizard
         '
         'Panel10
         '
+        resources.ApplyResources(Me.Panel10, "Panel10")
         Me.Panel10.Controls.Add(Me.TextBoxTempCuts)
         Me.Panel10.Controls.Add(Me.TextBoxNumberOfPseudos)
         Me.Panel10.Controls.Add(Me.RadioButtonGenOpt2)
         Me.Panel10.Controls.Add(Me.RadioButtonGenOpt1)
         Me.Panel10.Controls.Add(Me.Label19)
-        resources.ApplyResources(Me.Panel10, "Panel10")
         Me.Panel10.Name = "Panel10"
         '
         'TextBoxTempCuts
@@ -822,20 +835,21 @@ Partial Class DCCharacterizationWizard
         '
         'P5
         '
+        resources.ApplyResources(Me.P5, "P5")
         Me.P5.Controls.Add(Me.LabelWithDivider6)
         Me.P5.Controls.Add(Me.Panel11)
         Me.P5.Controls.Add(Me.Panel12)
-        resources.ApplyResources(Me.P5, "P5")
         Me.P5.Name = "P5"
         '
         'LabelWithDivider6
         '
-        Me.LabelWithDivider6.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider6, "LabelWithDivider6")
+        Me.LabelWithDivider6.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider6.Name = "LabelWithDivider6"
         '
         'Panel11
         '
+        resources.ApplyResources(Me.Panel11, "Panel11")
         Me.Panel11.BackColor = System.Drawing.Color.White
         Me.Panel11.Controls.Add(Me.Label20)
         Me.Panel11.Controls.Add(Me.Label21)
@@ -843,7 +857,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel11.Controls.Add(Me.Button16)
         Me.Panel11.Controls.Add(Me.Button17)
         Me.Panel11.Controls.Add(Me.Button18)
-        resources.ApplyResources(Me.Panel11, "Panel11")
         Me.Panel11.Name = "Panel11"
         '
         'Label20
@@ -881,10 +894,23 @@ Partial Class DCCharacterizationWizard
         '
         'Panel12
         '
+        resources.ApplyResources(Me.Panel12, "Panel12")
         Me.Panel12.Controls.Add(Me.GraphComps)
         Me.Panel12.Controls.Add(Me.Label23)
-        resources.ApplyResources(Me.Panel12, "Panel12")
         Me.Panel12.Name = "Panel12"
+        '
+        'GraphComps
+        '
+        resources.ApplyResources(Me.GraphComps, "GraphComps")
+        Me.GraphComps.IsShowCopyMessage = False
+        Me.GraphComps.Name = "GraphComps"
+        Me.GraphComps.ScrollGrace = 0R
+        Me.GraphComps.ScrollMaxX = 0R
+        Me.GraphComps.ScrollMaxY = 0R
+        Me.GraphComps.ScrollMaxY2 = 0R
+        Me.GraphComps.ScrollMinX = 0R
+        Me.GraphComps.ScrollMinY = 0R
+        Me.GraphComps.ScrollMinY2 = 0R
         '
         'Label23
         '
@@ -893,20 +919,21 @@ Partial Class DCCharacterizationWizard
         '
         'P6
         '
+        resources.ApplyResources(Me.P6, "P6")
         Me.P6.Controls.Add(Me.LabelWithDivider7)
         Me.P6.Controls.Add(Me.Panel13)
         Me.P6.Controls.Add(Me.Panel14)
-        resources.ApplyResources(Me.P6, "P6")
         Me.P6.Name = "P6"
         '
         'LabelWithDivider7
         '
-        Me.LabelWithDivider7.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider7, "LabelWithDivider7")
+        Me.LabelWithDivider7.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider7.Name = "LabelWithDivider7"
         '
         'Panel13
         '
+        resources.ApplyResources(Me.Panel13, "Panel13")
         Me.Panel13.BackColor = System.Drawing.Color.White
         Me.Panel13.Controls.Add(Me.Label24)
         Me.Panel13.Controls.Add(Me.Label25)
@@ -914,7 +941,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel13.Controls.Add(Me.Button19)
         Me.Panel13.Controls.Add(Me.Button20)
         Me.Panel13.Controls.Add(Me.Button21)
-        resources.ApplyResources(Me.Panel13, "Panel13")
         Me.Panel13.Name = "Panel13"
         '
         'Label24
@@ -952,6 +978,7 @@ Partial Class DCCharacterizationWizard
         '
         'Panel14
         '
+        resources.ApplyResources(Me.Panel14, "Panel14")
         Me.Panel14.Controls.Add(Me.CheckBoxADJZRA)
         Me.Panel14.Controls.Add(Me.CheckBoxADJAF)
         Me.Panel14.Controls.Add(Me.ComboBoxViscM)
@@ -967,7 +994,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel14.Controls.Add(Me.ComboBoxTC)
         Me.Panel14.Controls.Add(Me.Label28)
         Me.Panel14.Controls.Add(Me.Label27)
-        resources.ApplyResources(Me.Panel14, "Panel14")
         Me.Panel14.Name = "Panel14"
         '
         'CheckBoxADJZRA
@@ -986,42 +1012,42 @@ Partial Class DCCharacterizationWizard
         '
         'ComboBoxViscM
         '
+        resources.ApplyResources(Me.ComboBoxViscM, "ComboBoxViscM")
         Me.ComboBoxViscM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxViscM.FormattingEnabled = True
         Me.ComboBoxViscM.Items.AddRange(New Object() {resources.GetString("ComboBoxViscM.Items"), resources.GetString("ComboBoxViscM.Items1")})
-        resources.ApplyResources(Me.ComboBoxViscM, "ComboBoxViscM")
         Me.ComboBoxViscM.Name = "ComboBoxViscM"
         '
         'ComboBoxMW
         '
+        resources.ApplyResources(Me.ComboBoxMW, "ComboBoxMW")
         Me.ComboBoxMW.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxMW.FormattingEnabled = True
         Me.ComboBoxMW.Items.AddRange(New Object() {resources.GetString("ComboBoxMW.Items"), resources.GetString("ComboBoxMW.Items1"), resources.GetString("ComboBoxMW.Items2"), resources.GetString("ComboBoxMW.Items3")})
-        resources.ApplyResources(Me.ComboBoxMW, "ComboBoxMW")
         Me.ComboBoxMW.Name = "ComboBoxMW"
         '
         'ComboBoxSG
         '
+        resources.ApplyResources(Me.ComboBoxSG, "ComboBoxSG")
         Me.ComboBoxSG.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxSG.FormattingEnabled = True
         Me.ComboBoxSG.Items.AddRange(New Object() {resources.GetString("ComboBoxSG.Items"), resources.GetString("ComboBoxSG.Items1")})
-        resources.ApplyResources(Me.ComboBoxSG, "ComboBoxSG")
         Me.ComboBoxSG.Name = "ComboBoxSG"
         '
         'ComboBoxAF
         '
+        resources.ApplyResources(Me.ComboBoxAF, "ComboBoxAF")
         Me.ComboBoxAF.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxAF.FormattingEnabled = True
         Me.ComboBoxAF.Items.AddRange(New Object() {resources.GetString("ComboBoxAF.Items"), resources.GetString("ComboBoxAF.Items1")})
-        resources.ApplyResources(Me.ComboBoxAF, "ComboBoxAF")
         Me.ComboBoxAF.Name = "ComboBoxAF"
         '
         'ComboBoxPC
         '
+        resources.ApplyResources(Me.ComboBoxPC, "ComboBoxPC")
         Me.ComboBoxPC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxPC.FormattingEnabled = True
         Me.ComboBoxPC.Items.AddRange(New Object() {resources.GetString("ComboBoxPC.Items"), resources.GetString("ComboBoxPC.Items1"), resources.GetString("ComboBoxPC.Items2")})
-        resources.ApplyResources(Me.ComboBoxPC, "ComboBoxPC")
         Me.ComboBoxPC.Name = "ComboBoxPC"
         '
         'Label33
@@ -1051,10 +1077,10 @@ Partial Class DCCharacterizationWizard
         '
         'ComboBoxTC
         '
+        resources.ApplyResources(Me.ComboBoxTC, "ComboBoxTC")
         Me.ComboBoxTC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxTC.FormattingEnabled = True
         Me.ComboBoxTC.Items.AddRange(New Object() {resources.GetString("ComboBoxTC.Items"), resources.GetString("ComboBoxTC.Items1"), resources.GetString("ComboBoxTC.Items2"), resources.GetString("ComboBoxTC.Items3")})
-        resources.ApplyResources(Me.ComboBoxTC, "ComboBoxTC")
         Me.ComboBoxTC.Name = "ComboBoxTC"
         '
         'Label28
@@ -1069,56 +1095,56 @@ Partial Class DCCharacterizationWizard
         '
         'P7
         '
+        resources.ApplyResources(Me.P7, "P7")
         Me.P7.Controls.Add(Me.Panel16)
         Me.P7.Controls.Add(Me.LabelWithDivider8)
         Me.P7.Controls.Add(Me.Panel15)
-        resources.ApplyResources(Me.P7, "P7")
         Me.P7.Name = "P7"
         '
         'Panel16
         '
+        resources.ApplyResources(Me.Panel16, "Panel16")
         Me.Panel16.Controls.Add(Me.DataGridView2)
         Me.Panel16.Controls.Add(Me.Label37)
-        resources.ApplyResources(Me.Panel16, "Panel16")
         Me.Panel16.Name = "Panel16"
         '
         'DataGridView2
         '
+        resources.ApplyResources(Me.DataGridView2, "DataGridView2")
         Me.DataGridView2.AllowUserToAddRows = False
         Me.DataGridView2.AllowUserToDeleteRows = False
         Me.DataGridView2.AllowUserToResizeRows = False
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DataGridView2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DataGridView2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Column4, Me.DataGridViewTextBoxColumn2, Me.Column3, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.Column1, Me.Column2, Me.Column5, Me.Column6})
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle15
-        resources.ApplyResources(Me.DataGridView2, "DataGridView2")
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.ReadOnly = True
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridView2.RowHeadersVisible = False
         Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         '
@@ -1201,12 +1227,13 @@ Partial Class DCCharacterizationWizard
         '
         'LabelWithDivider8
         '
-        Me.LabelWithDivider8.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LabelWithDivider8, "LabelWithDivider8")
+        Me.LabelWithDivider8.BackColor = System.Drawing.Color.White
         Me.LabelWithDivider8.Name = "LabelWithDivider8"
         '
         'Panel15
         '
+        resources.ApplyResources(Me.Panel15, "Panel15")
         Me.Panel15.BackColor = System.Drawing.Color.White
         Me.Panel15.Controls.Add(Me.TextBoxStreamName)
         Me.Panel15.Controls.Add(Me.Label34)
@@ -1215,7 +1242,6 @@ Partial Class DCCharacterizationWizard
         Me.Panel15.Controls.Add(Me.Button22)
         Me.Panel15.Controls.Add(Me.Button23)
         Me.Panel15.Controls.Add(Me.Button24)
-        resources.ApplyResources(Me.Panel15, "Panel15")
         Me.Panel15.Name = "Panel15"
         '
         'TextBoxStreamName
@@ -1256,40 +1282,14 @@ Partial Class DCCharacterizationWizard
         Me.Button24.Name = "Button24"
         Me.Button24.UseVisualStyleBackColor = True
         '
-        'GraphCurves
-        '
-        Me.GraphCurves.IsShowCopyMessage = False
-        resources.ApplyResources(Me.GraphCurves, "GraphCurves")
-        Me.GraphCurves.Name = "GraphCurves"
-        Me.GraphCurves.ScrollGrace = 0.0R
-        Me.GraphCurves.ScrollMaxX = 0.0R
-        Me.GraphCurves.ScrollMaxY = 0.0R
-        Me.GraphCurves.ScrollMaxY2 = 0.0R
-        Me.GraphCurves.ScrollMinX = 0.0R
-        Me.GraphCurves.ScrollMinY = 0.0R
-        Me.GraphCurves.ScrollMinY2 = 0.0R
-        '
-        'GraphComps
-        '
-        Me.GraphComps.IsShowCopyMessage = False
-        resources.ApplyResources(Me.GraphComps, "GraphComps")
-        Me.GraphComps.Name = "GraphComps"
-        Me.GraphComps.ScrollGrace = 0.0R
-        Me.GraphComps.ScrollMaxX = 0.0R
-        Me.GraphComps.ScrollMaxY = 0.0R
-        Me.GraphComps.ScrollMaxY2 = 0.0R
-        Me.GraphComps.ScrollMinX = 0.0R
-        Me.GraphComps.ScrollMinY = 0.0R
-        Me.GraphComps.ScrollMinY2 = 0.0R
-        '
         'DCCharacterizationWizard
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.P1)
         Me.Controls.Add(Me.P0)
         Me.Controls.Add(Me.P7)
         Me.Controls.Add(Me.P2)
-        Me.Controls.Add(Me.P1)
         Me.Controls.Add(Me.P4)
         Me.Controls.Add(Me.P5)
         Me.Controls.Add(Me.P3)
