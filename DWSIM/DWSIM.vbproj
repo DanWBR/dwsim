@@ -211,15 +211,6 @@
     <Reference Include="Eto, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Forms.2.5.0-ci-10191\lib\netstandard1.0\Eto.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.Shared">
-      <HintPath>References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.WinForms">
-      <HintPath>References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Forms.Controls.SkiaSharp.WPF">
-      <HintPath>References\Eto.SkiaSharp\Eto.Forms.Controls.SkiaSharp.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="Eto.WinForms, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Windows.2.5.0-ci-10191\lib\net45\Eto.WinForms.dll</HintPath>
     </Reference>
