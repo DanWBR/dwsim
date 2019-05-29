@@ -11606,6 +11606,7 @@ Final3:
                                                      End Sub)
 
             Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {container1, container2})
+            form.Topmost = True
             form.Show()
 
         End Sub
