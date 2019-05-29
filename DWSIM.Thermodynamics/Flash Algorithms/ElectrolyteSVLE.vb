@@ -87,6 +87,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             'The vapor and solid phases are considered to be ideal.
             'Chemical equilibria is calculated using the reactions enabled in the default reaction set.
 
+            'currently in testing/alpha stage.
+            proppack.Flowsheet?.ShowMessage("Warning: the electrolyte flash algorithm is currently in alpha/testing stage. Results from electrolyte calculations should not be used in a production environment!", Interfaces.IFlowsheet.MessageType.Warning)
+
             Dim n As Integer = CompoundProperties.Count - 1
             Dim activcoeff(n) As Double
             Dim i As Integer
