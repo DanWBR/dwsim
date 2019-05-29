@@ -622,7 +622,7 @@ Namespace PropertyPackages.Auxiliary
                 End If
             End If
 
-            If Vids(k) = "H2O" Then
+            If Vids(k) = "H2O" And (Vids.Contains("NaOH") Or Vids.Contains("HCl")) Then
                 If Vids(m) = "NaOH" Or Vids(m) = "Na+" Or Vids(m) = "OH-" Then
                     tau = GetNaOH_A12(T)
                 End If
@@ -630,7 +630,7 @@ Namespace PropertyPackages.Auxiliary
                     tau = GetHCl_A12(T)
                 End If
             End If
-            If Vids(m) = "H2O" Then
+            If Vids(m) = "H2O" And (Vids.Contains("NaOH") Or Vids.Contains("HCl")) Then
                 If Vids(k) = "NaOH" Or Vids(k) = "Na+" Or Vids(k) = "OH-" Then
                     tau = GetNaOH_A21(T)
                 End If
@@ -1014,24 +1014,24 @@ Namespace PropertyPackages.Auxiliary
 
             Dim s0(n), s0t(n) As Double
 
-            Parallel.For(0, n + 1, Sub(m1P)
-                                       Dim kP As Integer
-                                       s0(m1P) = 0
-                                       s0t(m1P) = 0
-                                       For kp = 0 To n
-                                           s0(m1P) += X(kP) * G_k_m(edata, kP, m1P)
-                                           s0t(m1P) += X(kP) * G_k_m(edata, kP, m1P) * TAU_k_m(edata, kP, m1P)
-                                       Next
-                                   End Sub)
+            'Parallel.For(0, n + 1, Sub(m1P)
+            '                           Dim kP As Integer
+            '                           s0(m1P) = 0
+            '                           s0t(m1P) = 0
+            '                           For kp = 0 To n
+            '                               s0(m1P) += X(kP) * G_k_m(edata, kP, m1P)
+            '                               s0t(m1P) += X(kP) * G_k_m(edata, kP, m1P) * TAU_k_m(edata, kP, m1P)
+            '                           Next
+            '                       End Sub)
 
-            'For m1 = 0 To n
-            '    s0(m1) = 0
-            '    s0t(m1) = 0
-            '    For k = 0 To n
-            '        s0(m1) += X(k) * G_k_m(edata, k, m1)
-            '        s0t(m1) += X(k) * G_k_m(edata, k, m1) * TAU_k_m(edata, k, m1)
-            '    Next
-            'Next
+            For m1 = 0 To n
+                s0(m1) = 0
+                s0t(m1) = 0
+                For k = 0 To n
+                    s0(m1) += X(k) * G_k_m(edata, k, m1)
+                    s0t(m1) += X(k) * G_k_m(edata, k, m1) * TAU_k_m(edata, k, m1)
+                Next
+            Next
 
             Dim s1(n)(), s1t(n)() As Double
 
