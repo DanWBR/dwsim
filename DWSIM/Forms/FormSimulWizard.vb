@@ -203,7 +203,11 @@ Public Class FormSimulWizard
                 r.Selected = False
                 r.Visible = True
             Next
-            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+            Application.DoEvents()
+            Try
+                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+            Catch ex As Exception
+            End Try
         End If
 
         ogc1.ResumeLayout()
