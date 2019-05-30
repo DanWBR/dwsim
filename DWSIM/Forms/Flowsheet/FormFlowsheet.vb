@@ -549,7 +549,7 @@ Public Class FormFlowsheet
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
         For Each gObj In Me.FormSurface.FlowsheetSurface.DrawingObjects
-            If gObj.Tag.ToString = tag Then
+            If gObj.Tag.ToString.ToLower = tag.ToLower And Not gObj.IsConnector Then
                 gObj2 = gObj
                 Exit For
             End If

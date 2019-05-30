@@ -48,8 +48,6 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub frmSurface_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.PanelSearch.Location = New Point(Me.PanelSearch.Location.X, Me.Height - Me.PanelSearch.Height - 20)
-
         If TypeOf Me.ParentForm Is FormFlowsheet Then
             Flowsheet = Me.ParentForm
         ElseIf Flowsheet Is Nothing Then
@@ -2369,21 +2367,6 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Me.PanelSearch.Width = 36 Then
-            Me.PanelSearch.Width = 299
-        ElseIf Me.PanelSearch.Width = 299 Then
-            Me.PanelSearch.Width = 36
-        End If
-        Me.PanelSearch.Location = New Point(Me.PanelSearch.Location.X, Me.Height - Me.PanelSearch.Height - 20)
-    End Sub
-
-    Private Sub tbSearch_MouseClick(sender As Object, e As MouseEventArgs) Handles tbSearch.MouseClick
-        Dim acsc As New AutoCompleteStringCollection()
-        acsc.AddRange(FlowsheetSurface.DrawingObjects.ToArray.Select(Function(x) x.Tag).ToArray)
-        tbSearch.AutoCompleteCustomSource = acsc
-    End Sub
-
     Private Sub AtivadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AtivadoToolStripMenuItem.Click
         FlowsheetSurface.SelectedObject.Active = Me.AtivadoToolStripMenuItem.Checked
         Me.Flowsheet.UpdateOpenEditForms()
@@ -2844,4 +2827,27 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Private Sub tstbSearch_TextChanged(sender As Object, e As EventArgs) Handles tstbSearch.TextChanged
+
+        Dim obj = Flowsheet.GetFlowsheetGraphicObject(tstbSearch.Text)
+        If Not obj Is Nothing Then
+            Try
+                Dim center As Point = New Point(SplitContainer1.Panel1.Width / 2, SplitContainer1.Panel1.Height / 2)
+                FlowsheetSurface.OffsetAll(center.X / FlowsheetSurface.Zoom - obj.X, center.Y / FlowsheetSurface.Zoom - obj.Y)
+                FlowsheetSurface.SelectedObject = obj
+                FControl.Invalidate()
+                FControl.Invalidate()
+            Catch ex As Exception
+            End Try
+        End If
+
+    End Sub
+
+    Private Sub tstbSearch_GotFocus(sender As Object, e As EventArgs) Handles tstbSearch.GotFocus
+
+        tstbSearch.AutoCompleteCustomSource = New AutoCompleteStringCollection()
+        tstbSearch.AutoCompleteCustomSource.Clear()
+        tstbSearch.AutoCompleteCustomSource.AddRange(Flowsheet.GraphicObjects.Select(Function(x) x.Value.Tag).ToArray)
+
+    End Sub
 End Class
