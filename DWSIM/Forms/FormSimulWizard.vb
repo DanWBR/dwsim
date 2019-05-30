@@ -834,8 +834,14 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
-        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.AvailableCompounds(ogc1.SelectedRows(0).Cells(0).Value)}
-        f.ShowDialog(Me)
+
+        If ogc1.SelectedRows.Count > 0 Then
+            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.AvailableCompounds(ogc1.SelectedRows(0).Cells(0).Value)}
+            f.ShowDialog(Me)
+        Else
+            MessageBox.Show(DWSIM.App.GetLocalString("Error! No component selected!"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
+
     End Sub
 
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
