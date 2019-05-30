@@ -108,6 +108,11 @@ Public Class FormSimulSettings
 
         If Not loaded Or reset Then
 
+            colAdd.ValueType = True.GetType()
+            colAdd.FalseValue = False
+            colAdd.TrueValue = True
+            colAdd.IndeterminateValue = False
+
             For Each comp In Me.FrmChild.Options.SelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
             Next
@@ -962,18 +967,18 @@ Public Class FormSimulSettings
             ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
         End If
         If TextBox1.Text = "" Then
-            ogc1.FirstDisplayedScrollingRowIndex = 0
             For Each r As DataGridViewRow In ogc1.Rows
                 r.Selected = False
                 r.Visible = True
             Next
+            ogc1.ResumeLayout()
+            ogc1.FirstDisplayedScrollingRowIndex = 0
             Application.DoEvents()
-            Try
-                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-            Catch ex As Exception
-            End Try
+            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+        Else
+            ogc1.ResumeLayout()
         End If
-        ogc1.ResumeLayout()
+
     End Sub
 
     Private Sub btnConfigPP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConfigPP.Click

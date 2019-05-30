@@ -39,14 +39,6 @@ Partial Class FormSimulWizard
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ogc1 = New System.Windows.Forms.DataGridView()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colAdd = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.casno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.WizardPage3 = New AeroWizard.WizardPage()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
@@ -74,6 +66,14 @@ Partial Class FormSimulWizard
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdd = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.casno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage1.SuspendLayout()
         Me.WizardPage2.SuspendLayout()
@@ -196,67 +196,6 @@ Partial Class FormSimulWizard
         Me.ogc1.ShowEditingIcon = False
         Me.ogc1.ShowRowErrors = False
         Me.ToolTip1.SetToolTip(Me.ogc1, resources.GetString("ogc1.ToolTip"))
-        '
-        'Column11
-        '
-        Me.Column11.FillWeight = 5.0!
-        resources.ApplyResources(Me.Column11, "Column11")
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        '
-        'colAdd
-        '
-        Me.colAdd.FalseValue = "False"
-        Me.colAdd.FillWeight = 15.0!
-        resources.ApplyResources(Me.colAdd, "colAdd")
-        Me.colAdd.Name = "colAdd"
-        Me.colAdd.TrueValue = "True"
-        '
-        'Column6
-        '
-        Me.Column6.FillWeight = 40.0!
-        resources.ApplyResources(Me.Column6, "Column6")
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        '
-        'casno
-        '
-        Me.casno.FillWeight = 25.0!
-        resources.ApplyResources(Me.casno, "casno")
-        Me.casno.Name = "casno"
-        Me.casno.ReadOnly = True
-        '
-        'Column8
-        '
-        Me.Column8.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column8, "Column8")
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        '
-        'Column9
-        '
-        Me.Column9.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column9, "Column9")
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        '
-        'Column7
-        '
-        Me.Column7.FillWeight = 25.0!
-        resources.ApplyResources(Me.Column7, "Column7")
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        '
-        'Column5
-        '
-        Me.Column5.FalseValue = "False"
-        Me.Column5.FillWeight = 10.0!
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column5.TrueValue = "True"
         '
         'WizardPage3
         '
@@ -488,6 +427,69 @@ Partial Class FormSimulWizard
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.Multiselect = True
         '
+        'Column11
+        '
+        Me.Column11.FillWeight = 5.0!
+        resources.ApplyResources(Me.Column11, "Column11")
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        '
+        'colAdd
+        '
+        Me.colAdd.FalseValue = ""
+        Me.colAdd.FillWeight = 15.0!
+        resources.ApplyResources(Me.colAdd, "colAdd")
+        Me.colAdd.IndeterminateValue = ""
+        Me.colAdd.Name = "colAdd"
+        Me.colAdd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.colAdd.TrueValue = ""
+        '
+        'Column6
+        '
+        Me.Column6.FillWeight = 40.0!
+        resources.ApplyResources(Me.Column6, "Column6")
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'casno
+        '
+        Me.casno.FillWeight = 25.0!
+        resources.ApplyResources(Me.casno, "casno")
+        Me.casno.Name = "casno"
+        Me.casno.ReadOnly = True
+        '
+        'Column8
+        '
+        Me.Column8.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column8, "Column8")
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        '
+        'Column9
+        '
+        Me.Column9.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column9, "Column9")
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        '
+        'Column7
+        '
+        Me.Column7.FillWeight = 25.0!
+        resources.ApplyResources(Me.Column7, "Column7")
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        '
+        'Column5
+        '
+        Me.Column5.FalseValue = "False"
+        Me.Column5.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column5.TrueValue = "True"
+        '
         'FormSimulWizard
         '
         resources.ApplyResources(Me, "$this")
@@ -554,6 +556,7 @@ Partial Class FormSimulWizard
     Friend WithEvents Column4 As DataGridViewComboBoxColumn
     Friend WithEvents btnCreateNewUnits As Button
     Friend WithEvents btnCloneUnits As Button
+    Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents colAdd As DataGridViewCheckBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
@@ -562,5 +565,4 @@ Partial Class FormSimulWizard
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
-    Friend WithEvents ColumnHeader1 As ColumnHeader
 End Class

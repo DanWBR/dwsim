@@ -230,9 +230,6 @@
   <data name="ComboBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 58</value>
   </data>
-  <data name="btnInfoLeft.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="DataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
@@ -455,6 +452,9 @@
   </data>
   <data name="StepWizardControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;btnCloneUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1181,7 +1181,7 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Button2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="btnInfoLeft.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;StepWizardControl1.Name" xml:space="preserve">
