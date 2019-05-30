@@ -2702,6 +2702,7 @@
     <EmbeddedResource Include="References\WebKI.xml" />
     <None Include="Resources\beer_48.png" />
     <None Include="Resources\app_48.png" />
+    <None Include="Resources\become_a_patron_button.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -2820,6 +2821,17 @@
     <None Include="Resources\labicon.png" />
     <None Include="Resources\play_blue.png" />
     <None Include="Resources\paper&amp;pencil_48.png" />
+    <None Include="Resources\icons8-file.png" />
+    <None Include="Resources\icons8-opened_folder.png" />
+    <None Include="Resources\icons8-opened_folder1.png" />
+    <None Include="Resources\icons8-petrol.png" />
+    <None Include="Resources\icons8-combo_chart.png" />
+    <None Include="Resources\icons8-combo_chart1.png" />
+    <None Include="Resources\icons8-combo_chart2.png" />
+    <None Include="Resources\icons8-combo_chart3.png" />
+    <None Include="Resources\icons8-petrol1.png" />
+    <None Include="Resources\icons8-opened_folder2.png" />
+    <None Include="Resources\icons8-file1.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
