@@ -632,7 +632,10 @@ Public Class FormFlowsheet
                                                              frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
                                                              frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
                                                              frlog.Grid1.ClearSelection()
-                                                             frlog.Grid1.FirstDisplayedScrollingRowIndex = 0
+                                                             Try
+                                                                 frlog.Grid1.FirstDisplayedScrollingRowIndex = 0
+                                                             Catch ex As Exception
+                                                             End Try
                                                          End If
 
                                                      End If
