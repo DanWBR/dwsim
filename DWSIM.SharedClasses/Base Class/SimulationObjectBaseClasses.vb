@@ -137,7 +137,7 @@ Namespace UnitOperations
             Throw New NotImplementedException
         End Sub
 
-        Public Sub PerformPostCalcValidation() Implements ISimulationObject.PerformPostCalcValidation
+        Public Overridable Sub PerformPostCalcValidation() Implements ISimulationObject.PerformPostCalcValidation
 
             If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And
                 GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec Then

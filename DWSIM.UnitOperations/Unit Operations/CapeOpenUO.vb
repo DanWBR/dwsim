@@ -1259,6 +1259,98 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Sub PerformPostCalcValidation()
+
+            If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And
+                GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec Then
+
+                'calculate mass balance
+
+                Dim mb As Double = 0.0#
+                Dim eb As Double = 0.0#
+                Dim mbe As Double = 0.0#
+                Dim ebe As Double = 0.0#
+                Dim mbt As Double = 0.0#
+                Dim ebt As Double = 0.0#
+                Dim mi, hi As Double
+
+                Dim imsc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
+                Dim omsc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
+
+                For Each ims In imsc
+                    If ims.GraphicObject.Active Then
+                        mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_2"))
+                        mb += mi
+                        mbt += mi
+                        hi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_7"))
+                        eb += mi * hi 'kg/s * kJ/kg = kJ/s = kW
+                        ebt += eb
+                    End If
+                Next
+
+                For Each oms In omsc
+                    If oms.GraphicObject.Active Then
+                        mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_2"))
+                        If mi = 0.0 Then
+                            Dim ms = DirectCast(oms, MaterialStream)
+                            mi = ms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000.0 * ms.PropertyPackage.AUX_MMM(ms.GetOverallComposition())
+                        End If
+                        mb -= mi
+                        mbt += mi
+                        hi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_7"))
+                        eb -= mi * hi 'kg/s * kJ/kg = kJ/s = kW
+                        ebt += eb
+                    End If
+                Next
+
+                mbe = mb / mbt
+
+                Dim iesc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
+                Dim oesc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
+
+                For Each ies In iesc
+                    If ies.GraphicObject.Active Then
+                        eb += Convert.ToDouble(ies.GetPropertyValue("PROP_ES_0"))
+                        ebt += Convert.ToDouble(ies.GetPropertyValue("PROP_ES_0"))
+                    End If
+                Next
+
+                For Each oes In oesc
+                    If oes.GraphicObject.Active Then
+                        eb -= Convert.ToDouble(oes.GetPropertyValue("PROP_ES_0"))
+                        ebt += Convert.ToDouble(oes.GetPropertyValue("PROP_ES_0"))
+                    End If
+                Next
+
+                mbe = Math.Abs(mb / mbt)
+
+                ebe = Math.Abs(eb / ebt)
+
+                If mbe > FlowSheet.FlowsheetOptions.MassBalanceRelativeTolerance Then
+                    If FlowSheet.FlowsheetOptions.MassBalanceCheck = WarningType.RaiseError Then
+                        Throw New Exception(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("MassBalanceMessage") + " (" + mbe.ToString() + " > " + FlowSheet.FlowsheetOptions.MassBalanceRelativeTolerance.ToString + ")")
+                    ElseIf FlowSheet.FlowsheetOptions.MassBalanceCheck = WarningType.ShowWarning Then
+                        FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("MassBalanceMessage") + " (" + mbe.ToString() + " > " + FlowSheet.FlowsheetOptions.MassBalanceRelativeTolerance.ToString + ")", IFlowsheet.MessageType.Warning)
+                    End If
+                End If
+
+                If iesc.Count + oesc.Count = 0 And _seluo.Name = "ChemSep" Then
+                    'ignore energy balance (energy ports not exposed)
+                Else
+                    If ebe > FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance Then
+                        If FlowSheet.FlowsheetOptions.EnergyBalanceCheck = WarningType.RaiseError Then
+                            Throw New Exception(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("EnergyBalanceMessage") + " (" + ebe.ToString() + " > " + FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance.ToString + ")")
+                        ElseIf FlowSheet.FlowsheetOptions.EnergyBalanceCheck = WarningType.ShowWarning Then
+                            FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("EnergyBalanceMessage") + " (" + ebe.ToString() + " > " + FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance.ToString + ")", IFlowsheet.MessageType.Warning)
+                        End If
+                    End If
+                End If
+
+            End If
+
+        End Sub
+
+
     End Class
 
 End Namespace
