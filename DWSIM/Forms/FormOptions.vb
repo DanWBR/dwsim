@@ -122,6 +122,13 @@ Public Class FormOptions
         tbPythonPath.Text = My.Settings.PythonPath
         tbPythonTimeout.Text = My.Settings.PythonProcessTimeout
 
+        Select Case My.Settings.CultureInfo
+            Case "pt-BR"
+                Me.ComboBoxUILanguage.SelectedIndex = 0
+            Case "en"
+                Me.ComboBoxUILanguage.SelectedIndex = 1
+        End Select
+
         Me.cbGPU.Items.Clear()
 
         Task.Factory.StartNew(Function()
@@ -681,4 +688,19 @@ Public Class FormOptions
     Private Sub chkShowWebPanel_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowWebPanel.CheckedChanged
         My.Settings.ShowWebPanel = chkShowWebPanel.Checked
     End Sub
+
+    Private Sub ComboBoxUILanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxUILanguage.SelectedIndexChanged
+        If loaded Then
+            Select Case Me.ComboBoxUILanguage.SelectedIndex
+                Case 0
+                    My.Settings.CultureInfo = "pt-BR"
+                Case 1
+                    My.Settings.CultureInfo = "en"
+            End Select
+            If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
+            My.Application.ChangeUICulture(My.Settings.CultureInfo)
+            MessageBox.Show(DWSIM.App.GetLocalString("NextStartupOnly"), "DWSIM")
+        End If
+    End Sub
+
 End Class
