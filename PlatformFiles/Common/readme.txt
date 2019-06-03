@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 8
+Version 5.7 Update 9
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,18 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 9
+
+- [CHG] Changed Welcome Panel button icons (Classic UI)
+- [FIX] Fixed ChemSep column mass/energy balance warnings
+- [FIX] Restored GUI language selection (Classic UI)
+- [FIX] Compound search textbox crash (Classic UI)
+- [FIX] eNRTL fix
+- [FIX] Electrolyte Flash warning message
+- [FIX] Fixed Advanced Property Package Settings window not on top (Classic UI)
+- [FIX] Fixed units mismatch on assay manager (Classic UI)
+- [FIX] Other bug fixes
 
 Version 5.7 Update 8
 
