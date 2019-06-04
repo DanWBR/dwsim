@@ -209,7 +209,7 @@ Namespace UnitOperations
             End If
 
             If CalcMode = CalculationMode.Kv_Liquid Then
-                P2 = Pi / 100000.0 - 100 / rho * (Wi * 3600 / Kvc) ^ 2
+                P2 = Pi / 100000.0 - 1 / (1000.0 * rho) * (Wi * 3600 / Kvc) ^ 2
                 P2 = P2 * 100000.0
                 IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             ElseIf CalcMode = CalculationMode.Kv_Gas Then
