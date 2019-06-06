@@ -1,5 +1,5 @@
 '    CAPE-OPEN Unit Operation Wrapper Class
-'    Copyright 2011-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2011-2019 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -20,26 +20,17 @@
 Imports System.IO
 Imports CapeOpen
 Imports System.Runtime.InteropServices.ComTypes
-Imports System.Runtime.Serialization
-Imports STATSTG = System.Runtime.InteropServices.ComTypes.STATSTG
 Imports System.Runtime.InteropServices
-Imports System.Linq
-Imports System.Xml.Linq
 Imports System.Reflection
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports System.Threading
-Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.DrawingTools
-Imports System.Windows.Forms
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
-Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Interfaces.Enums
-Imports DWSIM.UnitOperations.UnitOperations
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 
 Namespace UnitOperations
@@ -161,6 +152,10 @@ Namespace UnitOperations
                 End Try
             End If
         End Sub
+
+        Public Function GetCAPEOPENObject() As Object
+            Return _couo
+        End Function
 
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New CapeOpenUO()
