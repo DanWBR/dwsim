@@ -1,11 +1,5 @@
-Version 5.7 Update 9
+Version 5.7 Update 10
 
-- [CHG] Changed Welcome Panel button icons (Classic UI)
-- [FIX] Fixed ChemSep column mass/energy balance warnings
-- [FIX] Restored GUI language selection (Classic UI)
-- [FIX] Compound search textbox crash (Classic UI)
-- [FIX] eNRTL fix
-- [FIX] Electrolyte Flash warning message
-- [FIX] Fixed Advanced Property Package Settings window not on top (Classic UI)
-- [FIX] Fixed units mismatch on assay manager (Classic UI)
-- [FIX] Other bug fixes
+- [NEW] Exposing CAPE-OPEN object on CAPE-OPEN Unit Operation ('GetCAPEOPENObject()' method)
+- [FIX] Fixed compound grid row double click (Classic UI)
+- [FIX] Fixed Valve calculation for Liquid Service Kv mode

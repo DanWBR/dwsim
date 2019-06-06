@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 9
+Version 5.7 Update 10
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 10
+
+- [NEW] Exposing CAPE-OPEN object on CAPE-OPEN Unit Operation ('GetCAPEOPENObject()' method)
+- [FIX] Fixed compound grid row double click (Classic UI)
+- [FIX] Fixed Valve calculation for Liquid Service Kv mode
 
 Version 5.7 Update 9
 
