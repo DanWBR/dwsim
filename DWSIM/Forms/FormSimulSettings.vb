@@ -1233,7 +1233,7 @@ Public Class FormSimulSettings
 
     Private Sub ogc1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles ogc1.CellDoubleClick
         If e.RowIndex > -1 Then
-            AddCompToSimulation(e.RowIndex)
+            ogc1.Rows(e.RowIndex).Cells(1).Value = Not ogc1.Rows(e.RowIndex).Cells(1).Value
         End If
     End Sub
 
