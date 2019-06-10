@@ -107,8 +107,8 @@ Public Class EditingForm_Splitter
                     TrackBar1.Value = Convert.ToDouble(.Ratios(0)) * 100
                     TrackBar2.Value = Convert.ToDouble(.Ratios(1)) * 100
 
-                    lblRatio1.Text = Convert.ToDouble(.Ratios(0)).ToString("N2")
-                    lblRatio2.Text = Convert.ToDouble(.Ratios(1)).ToString("N2")
+                    tbRatio1.Text = Convert.ToDouble(.Ratios(0)).ToString("N4")
+                    tbRatio2.Text = Convert.ToDouble(.Ratios(1)).ToString("N4")
 
                 Case UnitOperations.Splitter.OpMode.StreamMassFlowSpec
                     cbCalcMode.SelectedIndex = 1
@@ -179,6 +179,8 @@ Public Class EditingForm_Splitter
             Case 0
                 TrackBar1.Enabled = True
                 TrackBar2.Enabled = True
+                tbRatio1.Enabled = True
+                tbRatio2.Enabled = True
                 tbFlowSpec1.Enabled = False
                 tbFlowSpec2.Enabled = False
                 cbFlowSpec1.Enabled = False
@@ -187,6 +189,8 @@ Public Class EditingForm_Splitter
             Case 1
                 TrackBar1.Enabled = False
                 TrackBar2.Enabled = False
+                tbRatio1.Enabled = False
+                tbRatio2.Enabled = False
                 tbFlowSpec1.Enabled = True
                 tbFlowSpec2.Enabled = True
                 cbFlowSpec1.Enabled = True
@@ -201,6 +205,8 @@ Public Class EditingForm_Splitter
             Case 2
                 TrackBar1.Enabled = False
                 TrackBar2.Enabled = False
+                tbRatio1.Enabled = False
+                tbRatio2.Enabled = False
                 tbFlowSpec1.Enabled = True
                 tbFlowSpec2.Enabled = True
                 cbFlowSpec1.Enabled = True
@@ -257,6 +263,20 @@ Public Class EditingForm_Splitter
 
         If sender Is tbFlowSpec1 Then uobj.StreamFlowSpec = su.Converter.ConvertToSI(cbFlowSpec1.SelectedItem.ToString, tbFlowSpec1.Text.ParseExpressionToDouble)
         If sender Is tbFlowSpec2 Then uobj.Stream2FlowSpec = su.Converter.ConvertToSI(cbFlowSpec2.SelectedItem.ToString, tbFlowSpec2.Text.ParseExpressionToDouble)
+        If sender Is tbRatio1 Then
+            uobj.Ratios(0) = tbRatio1.Text.ParseExpressionToDouble()
+            uobj.Ratios(1) = 1.0 - uobj.Ratios(0)
+            tbRatio2.Text = CDbl(uobj.Ratios(1)).ToString("N4")
+            TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
+            TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+        End If
+        If sender Is tbRatio2 Then
+            uobj.Ratios(1) = tbRatio2.Text.ParseExpressionToDouble()
+            uobj.Ratios(0) = 1.0 - uobj.Ratios(1)
+            tbRatio1.Text = CDbl(uobj.Ratios(0)).ToString("N4")
+            TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
+            TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+        End If
 
         RequestCalc()
 
@@ -268,7 +288,7 @@ Public Class EditingForm_Splitter
 
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbFlowSpec1.TextChanged, tbFlowSpec2.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbFlowSpec1.TextChanged, tbFlowSpec2.TextChanged, tbRatio1.TextChanged, tbRatio2.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -280,7 +300,7 @@ Public Class EditingForm_Splitter
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbFlowSpec1.KeyDown, tbFlowSpec2.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbFlowSpec1.KeyDown, tbFlowSpec2.KeyDown, tbRatio2.KeyDown, tbRatio1.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
@@ -406,14 +426,14 @@ Public Class EditingForm_Splitter
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
         If Loaded Then
-            SimObject.Ratios(0) = TrackBar1.Value / 100
+            SimObject.Ratios(0) = TrackBar1.Value / 100.0
             If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
                 TrackBar2.Value = 100 - TrackBar1.Value
-                SimObject.Ratios(1) = TrackBar2.Value / 100
-                lblRatio2.Text = Convert.ToDouble(TrackBar2.Value / 100).ToString("N2")
+                SimObject.Ratios(1) = 1.0 - SimObject.Ratios(0)
+                tbRatio2.Text = Convert.ToDouble(SimObject.Ratios(1)).ToString("N4")
             End If
         End If
-        lblRatio1.Text = Convert.ToDouble(TrackBar1.Value / 100).ToString("N2")
+        tbRatio1.Text = Convert.ToDouble(SimObject.Ratios(0)).ToString("N4")
     End Sub
 
     Private Sub TrackBar2_Scroll(sender As Object, e As EventArgs) Handles TrackBar2.Scroll
@@ -421,11 +441,11 @@ Public Class EditingForm_Splitter
             SimObject.Ratios(1) = TrackBar2.Value / 100
             If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
                 TrackBar1.Value = 100 - TrackBar2.Value
-                SimObject.Ratios(0) = TrackBar1.Value / 100
-                lblRatio1.Text = Convert.ToDouble(TrackBar1.Value / 100).ToString("N2")
+                SimObject.Ratios(0) = 1.0 - SimObject.Ratios(1)
+                tbRatio1.Text = CDbl(SimObject.Ratios(0)).ToString("N4")
             End If
         End If
-        lblRatio2.Text = Convert.ToDouble(TrackBar2.Value / 100).ToString("N2")
+        tbRatio2.Text = CDbl(SimObject.Ratios(1)).ToString("N4")
     End Sub
 
     Private Sub btnDisconnectOutlet2_Click(sender As Object, e As EventArgs) Handles btnDisconnectOutlet2.Click
