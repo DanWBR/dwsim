@@ -103,7 +103,7 @@ namespace DWSIM.UI.Desktop.Mac
             };
 
             Control.RightMouseAction = () => {
-                cmenu.Show();
+                cmenu.Show(this.Widget);
             };
 
         }

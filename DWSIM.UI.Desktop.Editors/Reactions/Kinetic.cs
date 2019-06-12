@@ -54,7 +54,9 @@ namespace DWSIM.UI.Desktop.Editors
             p1.Width = 390;
             p2.Width = 440;
 
-            t1 = new StackLayout(p1, p2);
+            t1 = new StackLayout();
+            t1.Items.Add(new StackLayoutItem(p1));
+            t1.Items.Add(new StackLayoutItem(p2));
             t1.Orientation = Orientation.Horizontal;
 
             container.SizeChanged += (sender, e) =>

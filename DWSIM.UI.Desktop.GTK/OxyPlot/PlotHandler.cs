@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Eto.OxyPlot.Gtk
 {
-    public class PlotHandler : GtkSharp.Forms.GtkControl<global::OxyPlot.GtkSharp.PlotView, Eto.OxyPlot.Plot, Control.ICallback>, Plot.IHandler
+    public class PlotHandler : GtkSharp.Forms.GtkControl<global::OxyPlot.GtkSharp.Plot, Eto.OxyPlot.Plot, Control.ICallback>, Plot.IHandler
     {
         public PlotModel Model
         {
@@ -16,7 +16,7 @@ namespace Eto.OxyPlot.Gtk
 
         public PlotHandler()
         {
-            Control = new global::OxyPlot.GtkSharp.PlotView();
+            Control = new global::OxyPlot.GtkSharp.Plot();
 
             ContextMenu cmenu = new ContextMenu();
 
@@ -31,13 +31,7 @@ namespace Eto.OxyPlot.Gtk
 
                 if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                 {
-
-                    var pngExporter = new PngExporter { Width = (int)Control.Allocation.Width, Height = (int)Control.Allocation.Height, Background = OxyColors.White };
-                    using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
-                    {
-                        pngExporter.Export(Model, sf);
-                    }
-
+                        PngExporter.Export(Model, sfd.FileName, (int)Control.Allocation.Width, (int)Control.Allocation.Height);
                 }
 
             })
@@ -55,11 +49,11 @@ namespace Eto.OxyPlot.Gtk
                 if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                 {
 
-                    var pngExporter = new PngExporter { Width = (int)Control.Allocation.Width * 2, Height = (int)Control.Allocation.Height * 2, Background = OxyColors.White };
-                    using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
+                    if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                     {
-                        pngExporter.Export(Model, sf);
+                        PngExporter.Export(Model, sfd.FileName, (int)Control.Allocation.Width*2, (int)Control.Allocation.Height*2);
                     }
+
 
                 }
 
@@ -79,12 +73,11 @@ namespace Eto.OxyPlot.Gtk
                 if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                 {
 
-                    var pngExporter = new PngExporter { Width = (int)Control.Allocation.Width * 3, Height = (int)Control.Allocation.Height * 3, Background = OxyColors.White };
-
-                    using (var sf = new FileStream(sfd.FileName, FileMode.OpenOrCreate))
+                    if (sfd.ShowDialog(this.Widget) == DialogResult.Ok)
                     {
-                        pngExporter.Export(Model, sf);
+                        PngExporter.Export(Model, sfd.FileName, (int)Control.Allocation.Width*3, (int)Control.Allocation.Height*3);
                     }
+
 
                 }
 
@@ -94,16 +87,13 @@ namespace Eto.OxyPlot.Gtk
 
             cmenu.Items.Add(new ButtonMenuItem((sender, e) =>
             {
-
-                Control.Model.ResetAllAxes();
                 Control.Model.InvalidatePlot(false);
-
             })
             { Text = "Reset to Default View" });
 
             this.EventControl.ButtonPressEvent += (sender, e) =>
             {
-                cmenu.Show();
+                cmenu.Show(this.Widget);
             };
 
         }

@@ -52,7 +52,9 @@ namespace DWSIM.UI.Desktop.Editors
             p1.Width = 380;
             p2.Width = 380;
 
-            t1 = new StackLayout(p1, p2);
+            t1 = new StackLayout();
+            t1.Items.Add(new StackLayoutItem(p1));
+            t1.Items.Add(new StackLayoutItem(p2));
             t1.Orientation = Orientation.Horizontal;
             
             Padding = new Padding(10);
