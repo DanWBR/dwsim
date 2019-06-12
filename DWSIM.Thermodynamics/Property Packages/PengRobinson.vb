@@ -604,7 +604,7 @@ Namespace PropertyPackages
 
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vx(i) * subst.ConstantProperties.PR_Volume_Translation_Coefficient * Me.m_pr.bi(0.0778, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                val += Vx(i) * AUX_Ci(subst.ConstantProperties) * Me.m_pr.bi(0.0778, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
                 i += 1
             Next
 
@@ -618,10 +618,53 @@ Namespace PropertyPackages
             Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.PR_Volume_Translation_Coefficient * Me.m_pr.bi(0.0778, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                val += subst.MoleFraction.GetValueOrDefault * AUX_Ci(subst.ConstantProperties) * Me.m_pr.bi(0.0778, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
             Next
 
             Return val
+
+        End Function
+
+        Private Function AUX_Ci(cprop As Interfaces.ICompoundConstantProperties) As Double
+
+            If cprop.PR_Volume_Translation_Coefficient = 0.0 Then
+                Select Case cprop.Name.ToLower
+                    Case "nitrogen"
+                        Return -0.1927
+                    Case "carbon dioxide"
+                        Return -0.0817
+                    Case "hydrogen sulfide"
+                        Return -0.1288
+                    Case "methane"
+                        Return -0.1595
+                    Case "ethane"
+                        Return -0.1134
+                    Case "propane"
+                        Return -0.0863
+                    Case "isobutane"
+                        Return -0.0844
+                    Case "n-butane"
+                        Return -0.0675
+                    Case "isopentane"
+                        Return -0.0608
+                    Case "n-pentane"
+                        Return -0.039
+                    Case "n-hexane"
+                        Return -0.008
+                    Case "n-heptane"
+                        Return 0.0033
+                    Case "n-octane"
+                        Return 0.0314
+                    Case "n-nonane"
+                        Return 0.0408
+                    Case "n-decane"
+                        Return 0.0655
+                    Case Else
+                        Return 0.0
+                End Select
+            Else
+                Return cprop.PR_Volume_Translation_Coefficient
+            End If
 
         End Function
 
