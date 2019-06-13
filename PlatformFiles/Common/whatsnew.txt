@@ -1,5 +1,6 @@
-Version 5.7 Update 10
+Version 5.7 Update 11
 
-- [NEW] Exposing CAPE-OPEN object on CAPE-OPEN Unit Operation ('GetCAPEOPENObject()' method)
-- [FIX] Fixed compound grid row double click (Classic UI)
-- [FIX] Fixed Valve calculation for Liquid Service Kv mode
+- [FIX] Fixed PR/SRK volume translation correction for C1-C10, H2S, N2 and CO2
+- [FIX] Restored Eto packages to v2.4.1 for Linux compatibility
+- [FIX] Fixed splitter split ratio trackbar precision / added editable textboxes (Classic UI)
+- [FIX] Fixed Flowsheet.AddObject() not working in automation mode

@@ -1501,7 +1501,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, chemsep As Boolean, Optional ByVal tag As String = "", Optional ByVal id As String = "") As String
 
-        Flowsheet = My.Application.ActiveSimulation
+        If Flowsheet Is Nothing Then Flowsheet = My.Application.ActiveSimulation
 
         Dim gObj As GraphicObject = Nothing
         Dim fillclr As SKColor = SKColors.White
