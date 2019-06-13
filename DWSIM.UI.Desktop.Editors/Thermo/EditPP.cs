@@ -73,7 +73,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.A12 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -86,7 +86,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.A21 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -99,7 +99,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.B12 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -112,7 +112,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.B21 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -125,7 +125,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.C12 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -138,7 +138,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.C21 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -151,7 +151,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.alpha12 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -194,7 +194,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.A12 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -207,7 +207,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.A21 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -220,7 +220,7 @@ namespace DWSIM.UI.Desktop.Editors
                                {
                                    if (Double.TryParse(arg3.Text.ToString(), out val))
                                    {
-                                       arg3.TextColor = (Colors.White);
+                                       arg3.TextColor = (SystemColors.ControlText);
                                        ip.B12 = Double.Parse(arg3.Text);
                                    }
                                    else
@@ -233,7 +233,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.B21 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -246,7 +246,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.C12 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -259,7 +259,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.C21 = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -302,7 +302,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.kij = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -345,7 +345,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.kij = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -388,7 +388,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      if (Double.TryParse(arg3.Text.ToString(), out val))
                                      {
-                                         arg3.TextColor = (Colors.White);
+                                         arg3.TextColor = (SystemColors.ControlText);
                                          ip.kij = Double.Parse(arg3.Text);
                                      }
                                      else
@@ -415,7 +415,7 @@ namespace DWSIM.UI.Desktop.Editors
                          {
                              if (Double.TryParse(arg3.Text.ToString(), out val))
                              {
-                                 arg3.TextColor = (Colors.White);
+                                 arg3.TextColor = (SystemColors.ControlText);
                                  pp.Parameters[par] = Double.Parse(arg3.Text);
                              }
                              else
