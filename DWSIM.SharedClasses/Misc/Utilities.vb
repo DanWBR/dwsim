@@ -532,12 +532,18 @@ Public Class Utility
             Next
         End If
 
-        Dim creos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.COSMO-RS.dll"
-        If File.Exists(creos) Then
-            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(creos))
-            For Each pp In pplist
-                ppacks.Add(pp)
-            Next
+        Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "ppacks")
+        If Directory.Exists(ppath) Then
+            Try
+                Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+                For Each fpath In otherpps
+                    Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
+                    For Each pp In pplist
+                        ppacks.Add(pp)
+                    Next
+                Next
+            Catch ex As Exception
+            End Try
         End If
 
         Return ppacks
