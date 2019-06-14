@@ -1786,15 +1786,13 @@ Public Class FormMain
                     Else
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
                     End If
-                ElseIf xel.Element("Type").Value.Contains("COSMO_RS") Then
-                    Dim crskey As String = "COSMO-RS (BC)"
-                    If PropertyPackages.ContainsKey(crskey) Then
-                        obj = PropertyPackages(crskey).ReturnInstance(xel.Element("Type").Value)
-                    Else
-                        Throw New Exception("The COSMO-RS library was not found. Please download and install it in order to run this simulation.")
-                    End If
                 Else
-                    obj = pp.ReturnInstance(xel.Element("Type").Value)
+                    Dim ppkey As String = xel.Element("ComponentName").Value
+                    If PropertyPackages.ContainsKey(ppkey) Then
+                        obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
+                    End If
                 End If
                 DirectCast(obj, Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
@@ -2315,15 +2313,13 @@ Public Class FormMain
                     Else
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
                     End If
-                ElseIf xel.Element("Type").Value.Contains("COSMO_RS") Then
-                    Dim crskey As String = "COSMO-RS (BC)"
-                    If PropertyPackages.ContainsKey(crskey) Then
-                        obj = PropertyPackages(crskey).ReturnInstance(xel.Element("Type").Value)
-                    Else
-                        Throw New Exception("The COSMO-RS library was not found. Please download and install it in order to run this simulation.")
-                    End If
                 Else
-                    obj = pp.ReturnInstance(xel.Element("Type").Value)
+                    Dim ppkey As String = xel.Element("ComponentName").Value
+                    If PropertyPackages.ContainsKey(ppkey) Then
+                        obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("The " & ppkey & " library was not found. Please download and install it in order to run this simulation.")
+                    End If
                 End If
                 DirectCast(obj, Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString

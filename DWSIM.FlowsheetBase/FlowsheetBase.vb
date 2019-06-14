@@ -1144,15 +1144,13 @@ Imports System.Dynamic
                     Else
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
                     End If
-                ElseIf xel.Element("Type").Value.Contains("COSMO_RS") Then
-                    Dim crskey As String = "COSMO-RS (BC)"
-                    If AvailablePropertyPackages.ContainsKey(crskey) Then
-                        obj = AvailablePropertyPackages(crskey).ReturnInstance(xel.Element("Type").Value)
-                    Else
-                        Throw New Exception("The COSMO-RS library was not found. Please download and install it in order to run this simulation.")
-                    End If
                 Else
-                    obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
+                    Dim ppkey As String = xel.Element("ComponentName").Value
+                    If AvailablePropertyPackages.ContainsKey(ppkey) Then
+                        obj = AvailablePropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
+                    End If
                 End If
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
@@ -1534,7 +1532,7 @@ Imports System.Dynamic
                             Next
                         End If
                     End If
-                    End If
+                End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
             End Try
