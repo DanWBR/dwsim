@@ -82,6 +82,8 @@ Namespace PropertyPackages
                 .Add("PP_USE_EOS_VOLUME_SHIFT", 1)
                 .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
                 .Add("PP_LIQVISC_PCORRECTION", 1)
+                .Add("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC", 0)
+                .Add("PP_USE_IDEAL_SOLID_FUGACITY", 0)
             End With
         End Sub
 

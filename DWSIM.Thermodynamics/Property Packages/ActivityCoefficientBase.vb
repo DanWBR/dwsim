@@ -60,6 +60,8 @@ Namespace PropertyPackages
                 .Add("PP_POYNTING", 1)
                 .Add("PP_LIQVISC_PCORRECTION", 1)
                 .Add("PP_IGNORE_MISSING_IPS", 0)
+                .Add("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC", 0)
+                .Add("PP_USE_IDEAL_SOLID_FUGACITY", 0)
             End With
         End Sub
 

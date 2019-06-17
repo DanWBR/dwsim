@@ -387,4 +387,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PP_IGNORE_MISSING_IPS" xml:space="preserve">
     <value>Ignorar ausência de parâmetros de interação binária (0 = Desativado, 1 = Ativado)</value>
   </data>
+  <data name="PP_USE_IDEAL_SOLID_FUGACITY" xml:space="preserve">
+    <value>Usar Fugacidade Ideal para Sólidos</value>
+  </data>
 </root>

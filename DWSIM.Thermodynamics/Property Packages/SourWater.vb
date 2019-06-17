@@ -79,6 +79,8 @@ Namespace PropertyPackages
                 .Add("PP_ENTH_CP_CALC_METHOD", 0)
                 .Add("PP_IGNORE_VAPOR_FRACTION_LIMIT", 0)
                 .Add("PP_LIQVISC_PCORRECTION", 1)
+                .Add("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC", 0)
+                .Add("PP_USE_IDEAL_SOLID_FUGACITY", 0)
             End With
         End Sub
 

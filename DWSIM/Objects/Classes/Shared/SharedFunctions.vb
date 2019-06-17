@@ -1,12 +1,8 @@
 Imports System.IO
 Imports Nini.Config
-Imports System.Globalization
-Imports System.Reflection
-Imports System.Linq
 Imports Cudafy
 Imports DWSIM.UI.Controls
 Imports DWSIM.UI.Desktop
-Imports Eto.Forms.Controls.SkiaSharp.Shared
 
 '    Shared Functions
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros

@@ -5609,4 +5609,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DescENPP" xml:space="preserve">
     <value>Extended NRTL model for electrolyte solutions</value>
   </data>
+  <data name="PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC" xml:space="preserve">
+    <value>Use Ideal Liquid Fugacity for Solid Fugacity Calculation</value>
+  </data>
+  <data name="PP_USE_IDEAL_SOLID_FUGACITY" xml:space="preserve">
+    <value>Use Ideal Solid Fugacity</value>
+  </data>
 </root>

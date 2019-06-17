@@ -335,6 +335,8 @@ Namespace PropertyPackages
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
                 .Add("PP_LIQVISC_PCORRECTION", 1)
+                .Add("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC", 0)
+                .Add("PP_USE_IDEAL_SOLID_FUGACITY", 0)
             End With
         End Sub
 
@@ -7304,10 +7306,25 @@ Final3:
 
             Dim phis(n) As Double
 
-            For i = 0 To n
-                phis(i) = phil(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) - 1
-                If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
-            Next
+            If Me.Parameters.ContainsKey("PP_USE_IDEAL_SOLID_FUGACITY") AndAlso
+                Me.Parameters("PP_USE_IDEAL_SOLID_FUGACITY") = 1 Then
+                For i = 0 To n
+                    phis(i) = 1.0
+                Next
+            Else
+                If Me.Parameters.ContainsKey("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC") AndAlso
+                Me.Parameters("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC") = 1 Then
+                    For i = 0 To n
+                        phis(i) = Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) - 1
+                        If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
+                    Next
+                Else
+                    For i = 0 To n
+                        phis(i) = phil(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) - 1
+                        If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
+                    Next
+                End If
+            End If
 
             Return phis
 

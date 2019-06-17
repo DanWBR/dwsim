@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class DWSIM
@@ -11445,6 +11445,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PP_USE_EOS_VOLUME_SHIFT() As String
             Get
                 Return ResourceManager.GetString("PP_USE_EOS_VOLUME_SHIFT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Usar Fugacidade de Líquido Ideal para Cálculo de Fugacidade de Sólido.
+        '''</summary>
+        Friend Shared ReadOnly Property PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC() As String
+            Get
+                Return ResourceManager.GetString("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Usar Fugacidade Ideal para Sólidos.
+        '''</summary>
+        Friend Shared ReadOnly Property PP_USE_IDEAL_SOLID_FUGACITY() As String
+            Get
+                Return ResourceManager.GetString("PP_USE_IDEAL_SOLID_FUGACITY", resourceCulture)
             End Get
         End Property
         
