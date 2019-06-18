@@ -410,6 +410,61 @@ Namespace BaseClasses
         Public Function EvaluateK1(T As Double, PP As Interfaces.IPropertyPackage) As Double Implements Interfaces.IReaction.EvaluateK
             Return EvaluateK(T, PP)
         End Function
+
+        Public Function GetPropertyList() As String() Implements IReaction.GetPropertyList
+
+            Return New String() {"Kinetic_A_Forward", "Kinetic_A_Reverse", "Kinetic_E_Forward", "Kinetic_E_Reverse", "Tmin", "Tmax", "Equilibrium_ConstantKeqValue", "Conversion_Value"}
+
+        End Function
+
+        Public Function GetPropertyValue(prop As String) As Double Implements IReaction.GetPropertyValue
+
+            Select Case prop
+                Case "Kinetic_A_Forward"
+                    Return A_Forward
+                Case "Kinetic_A_Reverse"
+                    Return A_Reverse
+                Case "Kinetic_E_Forward"
+                    Return E_Forward
+                Case "Kinetic_E_Reverse"
+                    Return E_Reverse
+                Case "Tmin"
+                    Return Tmin
+                Case "Tmax"
+                    Return Tmax
+                Case "Equilibrium_ConstantKeqValue"
+                    Return ConstantKeqValue
+                Case "Conversion_Value"
+                    If Expression.IsValidDoubleExpression() Then Return Expression.ToDoubleFromInvariant Else Return 0.0
+                Case Else
+                    Return 0.0
+            End Select
+
+        End Function
+
+        Public Sub SetPropertyValue(prop As String, value As Double) Implements IReaction.SetPropertyValue
+
+            Select Case prop
+                Case "Kinetic_A_Forward"
+                    A_Forward = value
+                Case "Kinetic_A_Reverse"
+                    A_Reverse = value
+                Case "Kinetic_E_Forward"
+                    E_Forward = value
+                Case "Kinetic_E_Reverse"
+                    E_Reverse = value
+                Case "Tmin"
+                    Tmin = value
+                Case "Tmax"
+                    Tmax = value
+                Case "Equilibrium_ConstantKeqValue"
+                    ConstantKeqValue = value
+                Case "Conversion_Value"
+                    If value.IsValidDouble Then Expression = value.ToString(Globalization.CultureInfo.InvariantCulture)
+            End Select
+
+        End Sub
+
     End Class
 
     <Runtime.InteropServices.ComVisible(True)> <System.Serializable()> Public Class ReactionSet
