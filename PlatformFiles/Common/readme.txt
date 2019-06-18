@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 11
+Version 5.7 Update 12
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 12
+
+- [NEW] Added the ability to work with reaction parameters in optimization and sensitivity analysis tools (Classic UI)
+- [NEW] Added the ability to load external Property Packages
+- [NEW] Added solid fugacity config options to Property Packages
+- [FIX] Fixed sorting of optimizer variable properties (Classic UI)
+- [FIX] Fixed textbox text color on Property Package config editor (Cross-Platform UI)
 
 Version 5.7 Update 11
 

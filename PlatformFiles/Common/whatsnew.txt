@@ -1,6 +1,7 @@
-Version 5.7 Update 11
+Version 5.7 Update 12
 
-- [FIX] Fixed PR/SRK volume translation correction for C1-C10, H2S, N2 and CO2
-- [FIX] Restored Eto packages to v2.4.1 for Linux compatibility
-- [FIX] Fixed splitter split ratio trackbar precision / added editable textboxes (Classic UI)
-- [FIX] Fixed Flowsheet.AddObject() not working in automation mode
+- [NEW] Added the ability to work with reaction parameters in optimization and sensitivity analysis tools (Classic UI)
+- [NEW] Added the ability to load external Property Packages
+- [NEW] Added solid fugacity config options to Property Packages
+- [FIX] Fixed sorting of optimizer variable properties (Classic UI)
+- [FIX] Fixed textbox text color on Property Package config editor (Cross-Platform UI)
