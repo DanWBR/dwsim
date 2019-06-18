@@ -93,14 +93,12 @@ Public Class FormOptimization
 
         cbc2 = New DataGridViewComboBoxCell
         cbc2.Sorted = True
-        cbc2.MaxDropDownItems = 10
         cbc2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
         cbc2.Items.Add(DWSIM.App.GetLocalString("ReactionProperty"))
         For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
         cbc3 = New DataGridViewComboBoxCell
-        cbc3.MaxDropDownItems = 10
 
         Dim tbc1 As New DataGridViewTextBoxCell()
         Dim tbc2 As New DataGridViewTextBoxCell()
@@ -246,6 +244,7 @@ Public Class FormOptimization
                             Next
                         End If
                     End With
+                    cbc.Sorted = True
                 Case 4
                     If Not Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value Is Nothing Then
                         Dim objname = Me.dgVariables.Rows(e.RowIndex).Cells(3).Value.ToString
@@ -1651,7 +1650,7 @@ Public Class FormOptimization
     End Sub
 
     Private Sub dgVariables_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgVariables.DataError
-        My.Application.ActiveSimulation.WriteToLog(e.Exception.Message.ToString, Color.Red, MessageType.GeneralError)
+        'My.Application.ActiveSimulation.WriteToLog(e.Exception.Message.ToString, Color.Red, MessageType.GeneralError)
     End Sub
 
     'IPOPT
