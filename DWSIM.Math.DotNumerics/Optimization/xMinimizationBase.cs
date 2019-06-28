@@ -87,7 +87,6 @@ namespace DotNumerics.Optimization
             set 
             {
                 _Tolerance = value;
-                if (this._Tolerance < 1E-16) this._Tolerance = 1E-16;
             }
         }
 
