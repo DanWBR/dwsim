@@ -475,7 +475,7 @@ Namespace BaseClasses
         Implements CapeOpen.ICapeIdentification
         Implements CapeOpen.ICapeUtilities, CapeOpen.ICapeCollection, CapeOpen.ICapeReactionsRoutine, CapeOpen.ICapeReactionChemistry
         Implements CapeOpen.ICapeThermoContext, CapeOpen.ICapeKineticReactionContext, CapeOpen.ICapeReactionProperties
-        Implements CAPEOPEN110.ICapeThermoMaterialContext
+        Implements CapeOpen.ICapeThermoMaterialContext
 
         Implements Interfaces.IReactionSet
 
@@ -1057,7 +1057,7 @@ Namespace BaseClasses
 
         Public Property ComponentName() As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
 
-        Public Sub SetMaterial1(ByVal material As Object) Implements CAPEOPEN110.ICapeThermoMaterialContext.SetMaterial
+        Public Sub SetMaterial1(ByVal material As Object) Implements CapeOpen.ICapeThermoMaterialContext.SetMaterial
             If Not System.Runtime.InteropServices.Marshal.IsComObject(material) Then
                 Me.m_str = material
             Else
@@ -1070,7 +1070,7 @@ Namespace BaseClasses
 
         End Sub
 
-        Public Sub UnsetMaterial() Implements CAPEOPEN110.ICapeThermoMaterialContext.UnsetMaterial
+        Public Sub UnsetMaterial() Implements CapeOpen.ICapeThermoMaterialContext.UnsetMaterial
             Me.m_str = Nothing
         End Sub
 
