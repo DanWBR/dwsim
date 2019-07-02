@@ -60,6 +60,7 @@ Partial Class EditingForm_Recycle
         Me.tbWE = New System.Windows.Forms.TextBox()
         Me.tbPE = New System.Windows.Forms.TextBox()
         Me.tbTE = New System.Windows.Forms.TextBox()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -91,6 +92,7 @@ Partial Class EditingForm_Recycle
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
@@ -129,7 +131,7 @@ Partial Class EditingForm_Recycle
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -221,6 +223,7 @@ Partial Class EditingForm_Recycle
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -229,6 +232,7 @@ Partial Class EditingForm_Recycle
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet1
@@ -237,6 +241,7 @@ Partial Class EditingForm_Recycle
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnect1
@@ -245,6 +250,7 @@ Partial Class EditingForm_Recycle
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'Label7
@@ -307,6 +313,11 @@ Partial Class EditingForm_Recycle
         Me.tbTE.Name = "tbTE"
         Me.tbTE.ReadOnly = True
         '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
+        '
         'EditingForm_Recycle
         '
         resources.ApplyResources(Me, "$this")
@@ -364,4 +375,5 @@ Partial Class EditingForm_Recycle
     Public WithEvents tbWE As System.Windows.Forms.TextBox
     Public WithEvents tbPE As System.Windows.Forms.TextBox
     Public WithEvents tbTE As System.Windows.Forms.TextBox
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

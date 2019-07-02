@@ -328,12 +328,22 @@ Public Class EditingForm_Mixer
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
-        If Loaded Then MixerObject.GraphicObject.Tag = lblTag.Text
-        Me.Text = MixerObject.GetDisplayName() & ": " & MixerObject.GraphicObject.Tag
-        If Loaded Then MixerObject.FlowSheet.UpdateOpenEditForms()
-        DirectCast(MixerObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
-        lblTag.Focus()
-        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
-        lblTag.SelectionLength = 0
+
+        If Loaded Then ToolTipChangeTag.Show("Press ENTER to commit changes.", lblTag, New System.Drawing.Point(0, lblTag.Height + 3), 3000)
+
     End Sub
+
+    Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
+
+        If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then MixerObject.GraphicObject.Tag = lblTag.Text
+            If Loaded Then MixerObject.FlowSheet.UpdateOpenEditForms()
+            Me.Text = MixerObject.GraphicObject.Tag & " (" & MixerObject.GetDisplayName() & ")"
+            DirectCast(MixerObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+
+        End If
+
+    End Sub
+
 End Class

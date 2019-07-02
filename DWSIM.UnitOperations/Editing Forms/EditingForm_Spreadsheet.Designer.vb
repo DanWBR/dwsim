@@ -25,12 +25,12 @@ Partial Class EditingForm_SpreadsheetUO
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_SpreadsheetUO))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -103,6 +103,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.TbFileName = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -139,6 +140,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
@@ -184,6 +186,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
         Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
@@ -192,6 +195,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
@@ -415,15 +419,15 @@ Partial Class EditingForm_SpreadsheetUO
         Me.dgvinputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvinputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvinputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column5, Me.Column1})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.NullValue = "<empty>"
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle9.NullValue = "<empty>"
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle9
         resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
         Me.dgvinputvars.MultiSelect = False
         Me.dgvinputvars.Name = "dgvinputvars"
@@ -432,8 +436,8 @@ Partial Class EditingForm_SpreadsheetUO
         '
         'Column3
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column3.FillWeight = 40.0!
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
@@ -451,8 +455,8 @@ Partial Class EditingForm_SpreadsheetUO
         '
         'Column1
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column1.FillWeight = 20.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -474,15 +478,15 @@ Partial Class EditingForm_SpreadsheetUO
         Me.dgvoutputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvoutputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvoutputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column2})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.NullValue = "<empty>"
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle12.NullValue = "<empty>"
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle12
         resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
         Me.dgvoutputvars.MultiSelect = False
         Me.dgvoutputvars.Name = "dgvoutputvars"
@@ -492,8 +496,8 @@ Partial Class EditingForm_SpreadsheetUO
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewTextBoxColumn1.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -503,8 +507,8 @@ Partial Class EditingForm_SpreadsheetUO
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -697,6 +701,11 @@ Partial Class EditingForm_SpreadsheetUO
         Me.OpenFileDialog1.CheckPathExists = False
         Me.OpenFileDialog1.RestoreDirectory = True
         '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
+        '
         'EditingForm_SpreadsheetUO
         '
         resources.ApplyResources(Me, "$this")
@@ -796,4 +805,5 @@ Partial Class EditingForm_SpreadsheetUO
     Public WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Public WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

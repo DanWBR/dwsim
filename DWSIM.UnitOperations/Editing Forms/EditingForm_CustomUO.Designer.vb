@@ -78,16 +78,22 @@ Partial Class EditingForm_CustomUO
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgvinputvars = New System.Windows.Forms.DataGridView()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.btnAddVar = New System.Windows.Forms.ToolStripButton()
         Me.btnRemoveVar = New System.Windows.Forms.ToolStripButton()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvinputstringvars = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.btnAddInputStringVar = New System.Windows.Forms.ToolStripButton()
         Me.btnRemoveInputStringVar = New System.Windows.Forms.ToolStripButton()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvoutputvars = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.cbEnergyS = New System.Windows.Forms.ComboBox()
@@ -121,12 +127,7 @@ Partial Class EditingForm_CustomUO
         Me.cbExecEngine = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -155,13 +156,17 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip2"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
-        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip2"))
         '
         'chkActive
         '
@@ -169,6 +174,8 @@ Partial Class EditingForm_CustomUO
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip2"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
@@ -176,30 +183,40 @@ Partial Class EditingForm_CustomUO
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
         Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip2"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
         Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip2"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
         Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip2"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
         Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip2"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
         Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
         'GroupBox3
         '
@@ -212,7 +229,9 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip2"))
         '
         'btnConfigureFlashAlg
         '
@@ -220,6 +239,8 @@ Partial Class EditingForm_CustomUO
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
         Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip2"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
@@ -228,6 +249,8 @@ Partial Class EditingForm_CustomUO
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip2"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
@@ -237,12 +260,16 @@ Partial Class EditingForm_CustomUO
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
         Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip2"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
         Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
         '
         'cbPropPack
         '
@@ -251,12 +278,16 @@ Partial Class EditingForm_CustomUO
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
         Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip2"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
         '
         'btnCreateAndConnectEnergyS
         '
@@ -264,6 +295,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectEnergyS.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectEnergyS.Name = "btnCreateAndConnectEnergyS"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergyS, resources.GetString("btnCreateAndConnectEnergyS.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectEnergyS, resources.GetString("btnCreateAndConnectEnergyS.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectEnergyS, resources.GetString("btnCreateAndConnectEnergyS.ToolTip2"))
         Me.btnCreateAndConnectEnergyS.UseVisualStyleBackColor = True
         '
         'btnDisconnectEnergyS
@@ -272,6 +305,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectEnergyS.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectEnergyS.Name = "btnDisconnectEnergyS"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergyS, resources.GetString("btnDisconnectEnergyS.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectEnergyS, resources.GetString("btnDisconnectEnergyS.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectEnergyS, resources.GetString("btnDisconnectEnergyS.ToolTip2"))
         Me.btnDisconnectEnergyS.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet6
@@ -280,6 +315,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet6.Name = "btnCreateAndConnectOutlet6"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet6, resources.GetString("btnCreateAndConnectOutlet6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectOutlet6, resources.GetString("btnCreateAndConnectOutlet6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet6, resources.GetString("btnCreateAndConnectOutlet6.ToolTip2"))
         Me.btnCreateAndConnectOutlet6.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet5
@@ -288,6 +325,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet5.Name = "btnCreateAndConnectOutlet5"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet5, resources.GetString("btnCreateAndConnectOutlet5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectOutlet5, resources.GetString("btnCreateAndConnectOutlet5.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet5, resources.GetString("btnCreateAndConnectOutlet5.ToolTip2"))
         Me.btnCreateAndConnectOutlet5.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet4
@@ -296,6 +335,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet4.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet4.Name = "btnCreateAndConnectOutlet4"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet4, resources.GetString("btnCreateAndConnectOutlet4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectOutlet4, resources.GetString("btnCreateAndConnectOutlet4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet4, resources.GetString("btnCreateAndConnectOutlet4.ToolTip2"))
         Me.btnCreateAndConnectOutlet4.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet6
@@ -304,6 +345,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectOutlet6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet6.Name = "btnDisconnectOutlet6"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet6, resources.GetString("btnDisconnectOutlet6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectOutlet6, resources.GetString("btnDisconnectOutlet6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet6, resources.GetString("btnDisconnectOutlet6.ToolTip2"))
         Me.btnDisconnectOutlet6.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet5
@@ -312,6 +355,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectOutlet5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet5.Name = "btnDisconnectOutlet5"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet5, resources.GetString("btnDisconnectOutlet5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectOutlet5, resources.GetString("btnDisconnectOutlet5.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet5, resources.GetString("btnDisconnectOutlet5.ToolTip2"))
         Me.btnDisconnectOutlet5.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet4
@@ -320,6 +365,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectOutlet4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet4.Name = "btnDisconnectOutlet4"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet4, resources.GetString("btnDisconnectOutlet4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectOutlet4, resources.GetString("btnDisconnectOutlet4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet4, resources.GetString("btnDisconnectOutlet4.ToolTip2"))
         Me.btnDisconnectOutlet4.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectEnergy
@@ -328,6 +375,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip2"))
         Me.btnCreateAndConnectEnergy.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet3
@@ -336,6 +385,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet3.Name = "btnCreateAndConnectOutlet3"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet3, resources.GetString("btnCreateAndConnectOutlet3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectOutlet3, resources.GetString("btnCreateAndConnectOutlet3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet3, resources.GetString("btnCreateAndConnectOutlet3.ToolTip2"))
         Me.btnCreateAndConnectOutlet3.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet2
@@ -344,6 +395,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet2.Name = "btnCreateAndConnectOutlet2"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip2"))
         Me.btnCreateAndConnectOutlet2.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet1
@@ -352,6 +405,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip2"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet6
@@ -360,6 +415,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectInlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet6.Name = "btnCreateAndConnectInlet6"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip2"))
         Me.btnCreateAndConnectInlet6.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet5
@@ -368,6 +425,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectInlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet5.Name = "btnCreateAndConnectInlet5"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip2"))
         Me.btnCreateAndConnectInlet5.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet4
@@ -376,6 +435,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectInlet4.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet4.Name = "btnCreateAndConnectInlet4"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip2"))
         Me.btnCreateAndConnectInlet4.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet3
@@ -384,6 +445,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectInlet3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet3.Name = "btnCreateAndConnectInlet3"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip2"))
         Me.btnCreateAndConnectInlet3.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet2
@@ -392,6 +455,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectInlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet2.Name = "btnCreateAndConnectInlet2"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip2"))
         Me.btnCreateAndConnectInlet2.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -400,6 +465,8 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip2"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectEnergyE
@@ -408,6 +475,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectEnergyE.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectEnergyE.Name = "btnDisconnectEnergyE"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergyE, resources.GetString("btnDisconnectEnergyE.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectEnergyE, resources.GetString("btnDisconnectEnergyE.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectEnergyE, resources.GetString("btnDisconnectEnergyE.ToolTip2"))
         Me.btnDisconnectEnergyE.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet3
@@ -416,6 +485,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectOutlet3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet3.Name = "btnDisconnectOutlet3"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet3, resources.GetString("btnDisconnectOutlet3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectOutlet3, resources.GetString("btnDisconnectOutlet3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet3, resources.GetString("btnDisconnectOutlet3.ToolTip2"))
         Me.btnDisconnectOutlet3.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet2
@@ -424,6 +495,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectOutlet2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet2.Name = "btnDisconnectOutlet2"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip2"))
         Me.btnDisconnectOutlet2.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet1
@@ -432,6 +505,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip2"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnect6
@@ -440,6 +515,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnect6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect6.Name = "btnDisconnect6"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip2"))
         Me.btnDisconnect6.UseVisualStyleBackColor = True
         '
         'btnDisconnect5
@@ -448,6 +525,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnect5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect5.Name = "btnDisconnect5"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip2"))
         Me.btnDisconnect5.UseVisualStyleBackColor = True
         '
         'btnDisconnect4
@@ -456,6 +535,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnect4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect4.Name = "btnDisconnect4"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect4, resources.GetString("btnDisconnect4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnect4, resources.GetString("btnDisconnect4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect4, resources.GetString("btnDisconnect4.ToolTip2"))
         Me.btnDisconnect4.UseVisualStyleBackColor = True
         '
         'btnDisconnect3
@@ -464,6 +545,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnect3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect3.Name = "btnDisconnect3"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect3, resources.GetString("btnDisconnect3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnect3, resources.GetString("btnDisconnect3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect3, resources.GetString("btnDisconnect3.ToolTip2"))
         Me.btnDisconnect3.UseVisualStyleBackColor = True
         '
         'btnDisconnect2
@@ -472,6 +555,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnect2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect2.Name = "btnDisconnect2"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect2, resources.GetString("btnDisconnect2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnect2, resources.GetString("btnDisconnect2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect2, resources.GetString("btnDisconnect2.ToolTip2"))
         Me.btnDisconnect2.UseVisualStyleBackColor = True
         '
         'btnDisconnect1
@@ -480,6 +565,8 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip2"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'GroupBox6
@@ -488,7 +575,9 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox6.Controls.Add(Me.TabControl1)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip2"))
         '
         'TabControl1
         '
@@ -498,7 +587,9 @@ Partial Class EditingForm_CustomUO
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip2"))
         '
         'TabPage1
         '
@@ -506,7 +597,9 @@ Partial Class EditingForm_CustomUO
         Me.TabPage1.Controls.Add(Me.dgvinputvars)
         Me.TabPage1.Controls.Add(Me.ToolStrip2)
         Me.TabPage1.Name = "TabPage1"
-        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip2"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'dgvinputvars
@@ -532,7 +625,25 @@ Partial Class EditingForm_CustomUO
         Me.dgvinputvars.Name = "dgvinputvars"
         Me.dgvinputvars.RowHeadersVisible = False
         Me.dgvinputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.ToolTip1.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip2"))
+        '
+        'Column3
+        '
+        Me.Column3.FillWeight = 25.0!
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
+        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column5
+        '
+        Me.Column5.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'ToolStrip2
         '
@@ -540,7 +651,9 @@ Partial Class EditingForm_CustomUO
         Me.ToolStrip2.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddVar, Me.btnRemoveVar})
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolTip1.SetToolTip(Me.ToolStrip2, resources.GetString("ToolStrip2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.ToolStrip2, resources.GetString("ToolStrip2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.ToolStrip2, resources.GetString("ToolStrip2.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.ToolStrip2, resources.GetString("ToolStrip2.ToolTip2"))
         '
         'btnAddVar
         '
@@ -562,7 +675,9 @@ Partial Class EditingForm_CustomUO
         Me.TabPage3.Controls.Add(Me.dgvinputstringvars)
         Me.TabPage3.Controls.Add(Me.ToolStrip1)
         Me.TabPage3.Name = "TabPage3"
-        Me.ToolTip1.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip2"))
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'dgvinputstringvars
@@ -588,7 +703,25 @@ Partial Class EditingForm_CustomUO
         Me.dgvinputstringvars.Name = "dgvinputstringvars"
         Me.dgvinputstringvars.RowHeadersVisible = False
         Me.dgvinputstringvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.ToolTip1.SetToolTip(Me.dgvinputstringvars, resources.GetString("dgvinputstringvars.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.dgvinputstringvars, resources.GetString("dgvinputstringvars.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.dgvinputstringvars, resources.GetString("dgvinputstringvars.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.dgvinputstringvars, resources.GetString("dgvinputstringvars.ToolTip2"))
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.FillWeight = 25.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.FillWeight = 20.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'ToolStrip1
         '
@@ -596,7 +729,9 @@ Partial Class EditingForm_CustomUO
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddInputStringVar, Me.btnRemoveInputStringVar})
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolTip1.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip2"))
         '
         'btnAddInputStringVar
         '
@@ -617,7 +752,9 @@ Partial Class EditingForm_CustomUO
         resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         Me.TabPage2.Name = "TabPage2"
-        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip2"))
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'dgvoutputvars
@@ -644,7 +781,31 @@ Partial Class EditingForm_CustomUO
         Me.dgvoutputvars.ReadOnly = True
         Me.dgvoutputvars.RowHeadersVisible = False
         Me.dgvoutputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.ToolTip1.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip2"))
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'GroupBox1
         '
@@ -707,13 +868,17 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
         '
         'Label20
         '
         resources.ApplyResources(Me.Label20, "Label20")
         Me.Label20.Name = "Label20"
         Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
         '
         'cbEnergyS
         '
@@ -722,12 +887,16 @@ Partial Class EditingForm_CustomUO
         Me.cbEnergyS.FormattingEnabled = True
         Me.cbEnergyS.Name = "cbEnergyS"
         Me.ToolTip1.SetToolTip(Me.cbEnergyS, resources.GetString("cbEnergyS.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbEnergyS, resources.GetString("cbEnergyS.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbEnergyS, resources.GetString("cbEnergyS.ToolTip2"))
         '
         'Label17
         '
         resources.ApplyResources(Me.Label17, "Label17")
         Me.Label17.Name = "Label17"
         Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip2"))
         '
         'cbOutlet6
         '
@@ -736,12 +905,16 @@ Partial Class EditingForm_CustomUO
         Me.cbOutlet6.FormattingEnabled = True
         Me.cbOutlet6.Name = "cbOutlet6"
         Me.ToolTip1.SetToolTip(Me.cbOutlet6, resources.GetString("cbOutlet6.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOutlet6, resources.GetString("cbOutlet6.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOutlet6, resources.GetString("cbOutlet6.ToolTip2"))
         '
         'Label18
         '
         resources.ApplyResources(Me.Label18, "Label18")
         Me.Label18.Name = "Label18"
         Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip2"))
         '
         'cbOutlet5
         '
@@ -750,12 +923,16 @@ Partial Class EditingForm_CustomUO
         Me.cbOutlet5.FormattingEnabled = True
         Me.cbOutlet5.Name = "cbOutlet5"
         Me.ToolTip1.SetToolTip(Me.cbOutlet5, resources.GetString("cbOutlet5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOutlet5, resources.GetString("cbOutlet5.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOutlet5, resources.GetString("cbOutlet5.ToolTip2"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
         Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip2"))
         '
         'cbOutlet4
         '
@@ -764,12 +941,16 @@ Partial Class EditingForm_CustomUO
         Me.cbOutlet4.FormattingEnabled = True
         Me.cbOutlet4.Name = "cbOutlet4"
         Me.ToolTip1.SetToolTip(Me.cbOutlet4, resources.GetString("cbOutlet4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOutlet4, resources.GetString("cbOutlet4.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOutlet4, resources.GetString("cbOutlet4.ToolTip2"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
         Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip2"))
         '
         'cbEnergyE
         '
@@ -778,12 +959,16 @@ Partial Class EditingForm_CustomUO
         Me.cbEnergyE.FormattingEnabled = True
         Me.cbEnergyE.Name = "cbEnergyE"
         Me.ToolTip1.SetToolTip(Me.cbEnergyE, resources.GetString("cbEnergyE.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbEnergyE, resources.GetString("cbEnergyE.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbEnergyE, resources.GetString("cbEnergyE.ToolTip2"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
         Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip2"))
         '
         'cbOutlet3
         '
@@ -792,12 +977,16 @@ Partial Class EditingForm_CustomUO
         Me.cbOutlet3.FormattingEnabled = True
         Me.cbOutlet3.Name = "cbOutlet3"
         Me.ToolTip1.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip2"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
         Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip2"))
         '
         'cbOutlet2
         '
@@ -806,36 +995,48 @@ Partial Class EditingForm_CustomUO
         Me.cbOutlet2.FormattingEnabled = True
         Me.cbOutlet2.Name = "cbOutlet2"
         Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip2"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
         Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip2"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
         Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip2"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
         Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip2"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
         Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
         '
         'cbOutlet1
         '
@@ -844,6 +1045,8 @@ Partial Class EditingForm_CustomUO
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
         Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip2"))
         '
         'cbInlet6
         '
@@ -852,6 +1055,8 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet6.FormattingEnabled = True
         Me.cbInlet6.Name = "cbInlet6"
         Me.ToolTip1.SetToolTip(Me.cbInlet6, resources.GetString("cbInlet6.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInlet6, resources.GetString("cbInlet6.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInlet6, resources.GetString("cbInlet6.ToolTip2"))
         '
         'cbInlet5
         '
@@ -860,6 +1065,8 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet5.FormattingEnabled = True
         Me.cbInlet5.Name = "cbInlet5"
         Me.ToolTip1.SetToolTip(Me.cbInlet5, resources.GetString("cbInlet5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInlet5, resources.GetString("cbInlet5.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInlet5, resources.GetString("cbInlet5.ToolTip2"))
         '
         'cbInlet4
         '
@@ -868,6 +1075,8 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet4.FormattingEnabled = True
         Me.cbInlet4.Name = "cbInlet4"
         Me.ToolTip1.SetToolTip(Me.cbInlet4, resources.GetString("cbInlet4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInlet4, resources.GetString("cbInlet4.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInlet4, resources.GetString("cbInlet4.ToolTip2"))
         '
         'cbInlet3
         '
@@ -876,6 +1085,8 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet3.FormattingEnabled = True
         Me.cbInlet3.Name = "cbInlet3"
         Me.ToolTip1.SetToolTip(Me.cbInlet3, resources.GetString("cbInlet3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInlet3, resources.GetString("cbInlet3.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInlet3, resources.GetString("cbInlet3.ToolTip2"))
         '
         'cbInlet2
         '
@@ -884,12 +1095,16 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet2.FormattingEnabled = True
         Me.cbInlet2.Name = "cbInlet2"
         Me.ToolTip1.SetToolTip(Me.cbInlet2, resources.GetString("cbInlet2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInlet2, resources.GetString("cbInlet2.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInlet2, resources.GetString("cbInlet2.ToolTip2"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip2"))
         '
         'cbInlet1
         '
@@ -898,12 +1113,16 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
         Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip2"))
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
         Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip2"))
         '
         'GroupBox2
         '
@@ -913,7 +1132,9 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
         '
         'cbExecEngine
         '
@@ -923,73 +1144,30 @@ Partial Class EditingForm_CustomUO
         Me.cbExecEngine.Items.AddRange(New Object() {resources.GetString("cbExecEngine.Items"), resources.GetString("cbExecEngine.Items1")})
         Me.cbExecEngine.Name = "cbExecEngine"
         Me.ToolTip1.SetToolTip(Me.cbExecEngine, resources.GetString("cbExecEngine.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbExecEngine, resources.GetString("cbExecEngine.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbExecEngine, resources.GetString("cbExecEngine.ToolTip2"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
         Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip2"))
         '
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
         Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip2"))
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Column3
+        'ToolTipChangeTag
         '
-        Me.Column3.FillWeight = 25.0!
-        resources.ApplyResources(Me.Column3, "Column3")
-        Me.Column3.Name = "Column3"
-        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column5
-        '
-        Me.Column5.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.FillWeight = 25.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.FillWeight = 20.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'EditingForm_CustomUO
         '
@@ -1001,7 +1179,9 @@ Partial Class EditingForm_CustomUO
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox3)
         Me.Name = "EditingForm_CustomUO"
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -1124,4 +1304,5 @@ Partial Class EditingForm_CustomUO
     Public WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

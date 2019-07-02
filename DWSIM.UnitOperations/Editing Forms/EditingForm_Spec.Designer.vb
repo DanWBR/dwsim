@@ -50,6 +50,7 @@ Partial Class EditingForm_Spec
         Me.cbSourceObj = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -76,6 +77,7 @@ Partial Class EditingForm_Spec
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'Label11
@@ -94,7 +96,7 @@ Partial Class EditingForm_Spec
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -215,6 +217,11 @@ Partial Class EditingForm_Spec
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
         '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
+        '
         'EditingForm_Spec
         '
         resources.ApplyResources(Me, "$this")
@@ -259,4 +266,5 @@ Partial Class EditingForm_Spec
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label5 As System.Windows.Forms.Label
     Public WithEvents lblResult As System.Windows.Forms.Label
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

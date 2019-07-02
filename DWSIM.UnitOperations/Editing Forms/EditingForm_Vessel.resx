@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="ToolTipValues.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -142,9 +145,12 @@
     <value>57</value>
   </data>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>145, 17</value>
   </metadata>
   <data name="btnCreateAndConnectEnergy.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectEnergy.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectEnergy.Name" xml:space="preserve">
@@ -180,6 +186,9 @@
   <data name="btnCreateAndConnectOutlet3.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectOutlet3.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet3.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet3</value>
   </data>
@@ -211,6 +220,9 @@
     <value>55</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet2.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet2.Name" xml:space="preserve">
@@ -246,6 +258,9 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet1</value>
   </data>
@@ -277,6 +292,9 @@
     <value>53</value>
   </data>
   <data name="btnCreateAndConnectInlet6.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectInlet6.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet6.Name" xml:space="preserve">
@@ -312,6 +330,9 @@
   <data name="btnCreateAndConnectInlet5.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectInlet5.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet5.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet5</value>
   </data>
@@ -343,6 +364,9 @@
     <value>51</value>
   </data>
   <data name="btnCreateAndConnectInlet4.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectInlet4.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet4.Name" xml:space="preserve">
@@ -378,6 +402,9 @@
   <data name="btnCreateAndConnectInlet3.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectInlet3.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet3.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet3</value>
   </data>
@@ -409,6 +436,9 @@
     <value>49</value>
   </data>
   <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectInlet2.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet2.Name" xml:space="preserve">
@@ -444,6 +474,9 @@
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet1</value>
   </data>
@@ -472,6 +505,9 @@
     <value>29</value>
   </data>
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="btnDisconnectEnergy.ToolTip1" xml:space="preserve">
     <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnectEnergy.Name" xml:space="preserve">
@@ -558,6 +594,9 @@
   <data name="btnDisconnectOutlet3.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
+  <data name="btnDisconnectOutlet3.ToolTip1" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
   <data name="&gt;&gt;btnDisconnectOutlet3.Name" xml:space="preserve">
     <value>btnDisconnectOutlet3</value>
   </data>
@@ -640,6 +679,9 @@
     <value>23</value>
   </data>
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="btnDisconnectOutlet2.ToolTip1" xml:space="preserve">
     <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet2.Name" xml:space="preserve">
@@ -726,6 +768,9 @@
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
+  <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
   <data name="&gt;&gt;btnDisconnectOutlet1.Name" xml:space="preserve">
     <value>btnDisconnectOutlet1</value>
   </data>
@@ -754,6 +799,9 @@
     <value>19</value>
   </data>
   <data name="btnDisconnect6.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="btnDisconnect6.ToolTip1" xml:space="preserve">
     <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnect6.Name" xml:space="preserve">
@@ -786,6 +834,9 @@
   <data name="btnDisconnect5.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
+  <data name="btnDisconnect5.ToolTip1" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
   <data name="&gt;&gt;btnDisconnect5.Name" xml:space="preserve">
     <value>btnDisconnect5</value>
   </data>
@@ -814,6 +865,9 @@
     <value>17</value>
   </data>
   <data name="btnDisconnect4.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="btnDisconnect4.ToolTip1" xml:space="preserve">
     <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnect4.Name" xml:space="preserve">
@@ -846,6 +900,9 @@
   <data name="btnDisconnect3.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
+  <data name="btnDisconnect3.ToolTip1" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
   <data name="&gt;&gt;btnDisconnect3.Name" xml:space="preserve">
     <value>btnDisconnect3</value>
   </data>
@@ -876,6 +933,9 @@
   <data name="btnDisconnect2.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
+  <data name="btnDisconnect2.ToolTip1" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
   <data name="&gt;&gt;btnDisconnect2.Name" xml:space="preserve">
     <value>btnDisconnect2</value>
   </data>
@@ -904,6 +964,9 @@
     <value>14</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
     <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnect1.Name" xml:space="preserve">
@@ -1617,6 +1680,9 @@
   <data name="btnUtils.ToolTip" xml:space="preserve">
     <value>Adicionar/Ver Utilidades</value>
   </data>
+  <data name="btnUtils.ToolTip1" xml:space="preserve">
+    <value>Adicionar/Ver Utilidades</value>
+  </data>
   <data name="&gt;&gt;btnUtils.Name" xml:space="preserve">
     <value>btnUtils</value>
   </data>
@@ -1672,6 +1738,9 @@
     <value>21</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
+    <value>Ativo/Inativo</value>
+  </data>
+  <data name="chkActive.ToolTip1" xml:space="preserve">
     <value>Ativo/Inativo</value>
   </data>
   <data name="&gt;&gt;chkActive.Name" xml:space="preserve">
@@ -1935,6 +2004,9 @@
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configurar</value>
   </data>
+  <data name="btnConfigureFlashAlg.ToolTip1" xml:space="preserve">
+    <value>Configurar</value>
+  </data>
   <data name="&gt;&gt;btnConfigureFlashAlg.Name" xml:space="preserve">
     <value>btnConfigureFlashAlg</value>
   </data>
@@ -1966,6 +2038,9 @@
     <value>22</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
+    <value>Configurar</value>
+  </data>
+  <data name="btnConfigurePP.ToolTip1" xml:space="preserve">
     <value>Configurar</value>
   </data>
   <data name="&gt;&gt;btnConfigurePP.Name" xml:space="preserve">
@@ -2113,7 +2188,7 @@
     <value>3</value>
   </data>
   <metadata name="UtilitiesCtxMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>158, 17</value>
+    <value>244, 17</value>
   </metadata>
   <data name="sizingtsmi.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 22</value>
@@ -2136,6 +2211,9 @@
   <data name="&gt;&gt;UtilitiesCtxMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <metadata name="ToolTipChangeTag.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>385, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2157,6 +2235,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>EF_Vessel</value>
   </data>
+  <data name="&gt;&gt;ToolTipValues.Name" xml:space="preserve">
+    <value>ToolTipValues</value>
+  </data>
+  <data name="&gt;&gt;ToolTipValues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
     <value>ToolTip1</value>
   </data>
@@ -2175,10 +2259,16 @@
   <data name="&gt;&gt;sizingtsmi.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolTipChangeTag.Name" xml:space="preserve">
+    <value>ToolTipChangeTag</value>
+  </data>
+  <data name="&gt;&gt;ToolTipChangeTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_Vessel</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=5.7.7108.16983, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -26,6 +26,7 @@ Partial Class EditingForm_Tank
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Tank))
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.lblConnectedTo = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -34,6 +35,8 @@ Partial Class EditingForm_Tank
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
+        Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbFlashAlg = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
@@ -46,18 +49,16 @@ Partial Class EditingForm_Tank
         Me.tbVolume = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbOutlet1 = New System.Windows.Forms.ComboBox()
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnect1 = New System.Windows.Forms.Button()
-        Me.chkActive = New System.Windows.Forms.CheckBox()
-        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
-        Me.btnConfigurePP = New System.Windows.Forms.Button()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -77,43 +78,45 @@ Partial Class EditingForm_Tank
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
-        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        '
+        'chkActive
+        '
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        Me.chkActive.Name = "chkActive"
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
+        Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
-        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
-        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
-        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
-        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
-        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox4
         '
@@ -121,17 +124,15 @@ Partial Class EditingForm_Tank
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'rtbAnnotations
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
         '
         'GroupBox3
         '
@@ -144,7 +145,24 @@ Partial Class EditingForm_Tank
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
+        '
+        'btnConfigureFlashAlg
+        '
+        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
+        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
+        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
+        '
+        'btnConfigurePP
+        '
+        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
+        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigurePP.Name = "btnConfigurePP"
+        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
+        Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
         '
@@ -152,13 +170,11 @@ Partial Class EditingForm_Tank
         Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
-        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'cbPropPack
         '
@@ -166,13 +182,11 @@ Partial Class EditingForm_Tank
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
-        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
-        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'GroupBox2
         '
@@ -185,7 +199,6 @@ Partial Class EditingForm_Tank
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'cbResidTime
         '
@@ -194,19 +207,16 @@ Partial Class EditingForm_Tank
         Me.cbResidTime.FormattingEnabled = True
         Me.cbResidTime.Items.AddRange(New Object() {resources.GetString("cbResidTime.Items"), resources.GetString("cbResidTime.Items1"), resources.GetString("cbResidTime.Items2")})
         Me.cbResidTime.Name = "cbResidTime"
-        Me.ToolTip1.SetToolTip(Me.cbResidTime, resources.GetString("cbResidTime.ToolTip"))
         '
         'tbResidTime
         '
         resources.ApplyResources(Me.tbResidTime, "tbResidTime")
         Me.tbResidTime.Name = "tbResidTime"
-        Me.ToolTip1.SetToolTip(Me.tbResidTime, resources.GetString("tbResidTime.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'cbVolume
         '
@@ -215,19 +225,16 @@ Partial Class EditingForm_Tank
         Me.cbVolume.FormattingEnabled = True
         Me.cbVolume.Items.AddRange(New Object() {resources.GetString("cbVolume.Items"), resources.GetString("cbVolume.Items1"), resources.GetString("cbVolume.Items2")})
         Me.cbVolume.Name = "cbVolume"
-        Me.ToolTip1.SetToolTip(Me.cbVolume, resources.GetString("cbVolume.ToolTip"))
         '
         'tbVolume
         '
         resources.ApplyResources(Me.tbVolume, "tbVolume")
         Me.tbVolume.Name = "tbVolume"
-        Me.ToolTip1.SetToolTip(Me.tbVolume, resources.GetString("tbVolume.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'GroupBox1
         '
@@ -242,35 +249,6 @@ Partial Class EditingForm_Tank
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        '
-        'Label7
-        '
-        resources.ApplyResources(Me.Label7, "Label7")
-        Me.Label7.Name = "Label7"
-        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
-        '
-        'cbOutlet1
-        '
-        resources.ApplyResources(Me.cbOutlet1, "cbOutlet1")
-        Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet1.FormattingEnabled = True
-        Me.cbOutlet1.Name = "cbOutlet1"
-        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
-        '
-        'cbInlet1
-        '
-        resources.ApplyResources(Me.cbInlet1, "cbInlet1")
-        Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbInlet1.FormattingEnabled = True
-        Me.cbInlet1.Name = "cbInlet1"
-        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
-        '
-        'Label19
-        '
-        resources.ApplyResources(Me.Label19, "Label19")
-        Me.Label19.Name = "Label19"
-        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'btnCreateAndConnectOutlet1
         '
@@ -278,6 +256,7 @@ Partial Class EditingForm_Tank
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -286,6 +265,7 @@ Partial Class EditingForm_Tank
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet1
@@ -294,6 +274,7 @@ Partial Class EditingForm_Tank
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnect1
@@ -302,31 +283,37 @@ Partial Class EditingForm_Tank
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
-        'chkActive
+        'Label7
         '
-        resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
-        Me.chkActive.Name = "chkActive"
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.chkActive.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
         '
-        'btnConfigureFlashAlg
+        'cbOutlet1
         '
-        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
-        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
-        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cbOutlet1, "cbOutlet1")
+        Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet1.FormattingEnabled = True
+        Me.cbOutlet1.Name = "cbOutlet1"
         '
-        'btnConfigurePP
+        'cbInlet1
         '
-        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
-        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
-        Me.btnConfigurePP.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cbInlet1, "cbInlet1")
+        Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbInlet1.FormattingEnabled = True
+        Me.cbInlet1.Name = "cbInlet1"
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'EditingForm_Tank
         '
@@ -338,7 +325,6 @@ Partial Class EditingForm_Tank
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Tank"
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -385,4 +371,5 @@ Partial Class EditingForm_Tank
     Public WithEvents lblTag As System.Windows.Forms.TextBox
     Public WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class
