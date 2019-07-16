@@ -684,7 +684,7 @@ Namespace PropertyPackages
 
         Public Overridable Function CalcIsothermalCompressibility(p As IPhase) As Double
 
-            Dim Z, P0, T, Z1 As Double
+            Dim Z, P0, P1, T, Z1 As Double
 
             If Not p.Properties.molarfraction.HasValue Then Return 0.0
 
@@ -696,43 +696,28 @@ Namespace PropertyPackages
             P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             Z = p.Properties.compressibilityFactor.GetValueOrDefault
 
-            Dim cms0, cmst As MaterialStream
-
-            cms0 = CurrentMaterialStream
-
-            cmst = DirectCast(CurrentMaterialStream, MaterialStream).ShallowClone
-
-            CurrentMaterialStream = cmst
-
-            cmst.Phases(0).Properties.pressure = P0 + 0.0001
-
             IObj?.SetCurrent
+
+            P1 = P0 + 100
 
             Select Case p.Name
                 Case "Mixture"
-                    'DW_CalcPhaseProps(Phase.Mixture)
+                    Return 0.0#
                 Case "Vapor"
-                    DW_CalcPhaseProps(Phase.Vapor)
+                    Z1 = AUX_Z(RET_VMOL(Phase.Vapor), T, P1, PhaseName.Vapor)
                 Case "OverallLiquid"
-                    'DW_CalcPhaseProps(Phase.Liquid)
+                    Return 0.0#
                 Case "Liquid1"
-                    DW_CalcPhaseProps(Phase.Liquid1)
+                    Z1 = AUX_Z(RET_VMOL(Phase.Liquid1), T, P1, PhaseName.Liquid)
                 Case "Liquid2"
-                    DW_CalcPhaseProps(Phase.Liquid2)
+                    Z1 = AUX_Z(RET_VMOL(Phase.Liquid2), T, P1, PhaseName.Liquid)
                 Case "Liquid3"
-                    DW_CalcPhaseProps(Phase.Liquid3)
+                    Z1 = AUX_Z(RET_VMOL(Phase.Liquid3), T, P1, PhaseName.Liquid)
                 Case "Aqueous"
-                    DW_CalcPhaseProps(Phase.Aqueous)
+                    Z1 = AUX_Z(RET_VMOL(Phase.Aqueous), T, P1, PhaseName.Liquid)
                 Case "Solid"
-                    DW_CalcPhaseProps(Phase.Solid)
+                    Return 0.0#
             End Select
-
-            Z1 = cmst.GetPhase(p.Name).Properties.compressibilityFactor.GetValueOrDefault
-
-            cmst.Dispose()
-            cmst = Nothing
-
-            CurrentMaterialStream = cms0
 
             Dim K As Double = 1 / P0 - 1 / Z * (Z1 - Z) / 0.0001
 
