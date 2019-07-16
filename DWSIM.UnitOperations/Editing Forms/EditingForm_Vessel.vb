@@ -426,13 +426,9 @@ Public Class EditingForm_Vessel
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
-        If Loaded Then VesselObject.GraphicObject.Tag = lblTag.Text
-        Me.Text = VesselObject.GetDisplayName() & ": " & VesselObject.GraphicObject.Tag
-        If Loaded Then VesselObject.FlowSheet.UpdateOpenEditForms()
-        DirectCast(VesselObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
-        lblTag.Focus()
-        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
-        lblTag.SelectionLength = 0
+
+        If Loaded Then ToolTipChangeTag.Show("Press ENTER to commit changes.", lblTag, New System.Drawing.Point(0, lblTag.Height + 3), 3000)
+
     End Sub
 
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectInlet2.Click,
@@ -559,6 +555,19 @@ Public Class EditingForm_Vessel
                                                                      item.AttachedTo = Nothing
                                                                  End Sub
         Next
+
+    End Sub
+
+    Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
+
+        If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then VesselObject.GraphicObject.Tag = lblTag.Text
+            If Loaded Then VesselObject.FlowSheet.UpdateOpenEditForms()
+            Me.Text = VesselObject.GraphicObject.Tag & " (" & VesselObject.GetDisplayName() & ")"
+            DirectCast(VesselObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+
+        End If
 
     End Sub
 

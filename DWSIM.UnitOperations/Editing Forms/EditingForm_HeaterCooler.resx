@@ -168,12 +168,12 @@
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="chkActive.ToolTip" xml:space="preserve">
-    <value>Ativo/Inativo</value>
-  </data>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>145, 17</value>
   </metadata>
+  <data name="chkActive.ToolTip" xml:space="preserve">
+    <value>Ativo/Inativo</value>
+  </data>
   <data name="chkActive.ToolTip1" xml:space="preserve">
     <value>Ativo/Inativo</value>
   </data>
@@ -1593,6 +1593,9 @@
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="ToolTipChangeTag.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>244, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1626,10 +1629,16 @@
   <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolTipChangeTag.Name" xml:space="preserve">
+    <value>ToolTipChangeTag</value>
+  </data>
+  <data name="&gt;&gt;ToolTipChangeTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_HeaterCooler</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=5.2.6813.26901, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=5.7.7108.16983, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

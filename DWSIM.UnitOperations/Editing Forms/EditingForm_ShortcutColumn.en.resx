@@ -117,36 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 20</value>
-  </data>
-  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
-  </data>
   <data name="lblTag.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
-  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 77</value>
-  </data>
   <data name="lblConnectedTo.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 51</value>
-  </data>
   <data name="lblStatus.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 77</value>
-  </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 17</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
@@ -156,9 +137,6 @@
   </data>
   <data name="Label12.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 17</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
@@ -178,9 +156,6 @@
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
-  <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 25</value>
-  </data>
   <data name="cbFlashAlg.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -190,14 +165,8 @@
   <data name="Label10.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 25</value>
-  </data>
   <data name="cbPropPack.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 17</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
@@ -211,59 +180,26 @@
   <data name="GroupBox3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="rbPartialCond.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 184</value>
-  </data>
-  <data name="rbPartialCond.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 21</value>
-  </data>
   <data name="rbPartialCond.Text" xml:space="preserve">
     <value>Partial</value>
   </data>
   <data name="rbPartialCond.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="rbTotalCond.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 184</value>
-  </data>
   <data name="rbTotalCond.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="cbRebPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 246</value>
   </data>
   <data name="cbRebPressureUnits.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbRebPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 248</value>
-  </data>
-  <data name="tbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 23</value>
-  </data>
   <data name="tbRebPressure.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="cbCondPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 214</value>
   </data>
   <data name="cbCondPressureUnits.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbCondPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 216</value>
-  </data>
-  <data name="tbCondPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 23</value>
-  </data>
   <data name="tbCondPressure.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 252</value>
-  </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 17</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Reboiler Pressure</value>
@@ -271,23 +207,11 @@
   <data name="Label16.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 218</value>
-  </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 17</value>
-  </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Condenser Pressure</value>
   </data>
   <data name="Label15.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 57</value>
-  </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 17</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Heavy Key Compound (HK)</value>
@@ -295,20 +219,8 @@
   <data name="Label14.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbHKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 53</value>
-  </data>
-  <data name="cbHKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 25</value>
-  </data>
   <data name="cbHKey.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 186</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 17</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Condenser Type</value>
@@ -316,20 +228,8 @@
   <data name="Label5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbRefluxRatio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 150</value>
-  </data>
-  <data name="tbRefluxRatio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
   <data name="tbRefluxRatio.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 154</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 17</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Reflux Ratio</value>
@@ -337,20 +237,8 @@
   <data name="Label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbHKmolfrac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 118</value>
-  </data>
-  <data name="tbHKmolfrac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
   <data name="tbHKmolfrac.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 122</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 17</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>HK Mole Fraction in Distillate</value>
@@ -358,20 +246,8 @@
   <data name="Label2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbLKmolfrac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 86</value>
-  </data>
-  <data name="tbLKmolfrac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
   <data name="tbLKmolfrac.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 90</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 17</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>LK Mole Fraction in Bottoms</value>
@@ -379,20 +255,8 @@
   <data name="Label3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbLKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 20</value>
-  </data>
-  <data name="cbLKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 25</value>
-  </data>
   <data name="cbLKey.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 24</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 17</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Light Key Compound (LK)</value>
@@ -406,20 +270,11 @@
   <data name="GroupBox2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
-  </data>
   <data name="Label20.Text" xml:space="preserve">
     <value>Reboiler Duty</value>
   </data>
   <data name="Label20.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="cbEnergy2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 164</value>
-  </data>
-  <data name="cbEnergy2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 25</value>
   </data>
   <data name="cbEnergy2.ToolTip" xml:space="preserve">
     <value />
@@ -430,35 +285,17 @@
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 17</value>
-  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Condenser Duty</value>
   </data>
   <data name="Label1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbEnergy1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 130</value>
-  </data>
-  <data name="cbEnergy1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 25</value>
-  </data>
   <data name="cbEnergy1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 94</value>
-  </data>
-  <data name="cbOutlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 25</value>
-  </data>
   <data name="cbOutlet2.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 17</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Bottoms Stream</value>
@@ -475,35 +312,17 @@
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 17</value>
-  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Distillate Stream</value>
   </data>
   <data name="Label7.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 61</value>
-  </data>
-  <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 25</value>
-  </data>
   <data name="cbOutlet1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 25</value>
-  </data>
-  <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 25</value>
-  </data>
   <data name="cbInlet1.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 17</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Feed Stream</value>
@@ -534,10 +353,6 @@
   </data>
   <data name="GroupBox6.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />

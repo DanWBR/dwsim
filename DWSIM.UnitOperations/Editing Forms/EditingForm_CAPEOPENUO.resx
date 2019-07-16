@@ -123,27 +123,39 @@
   <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblStatus.Text" xml:space="preserve">
-    <value>Objeto</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 150</value>
   </data>
   <data name="&gt;&gt;GroupBox6.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;DataGridViewButtonColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
   </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Saída</value>
+  <data name="&gt;&gt;lblCODesc.Name" xml:space="preserve">
+    <value>lblCODesc</value>
   </data>
-  <data name="&gt;&gt;DataGridViewButtonColumn1.Name" xml:space="preserve">
-    <value>DataGridViewButtonColumn1</value>
+  <data name="GroupBox7.ToolTip2" xml:space="preserve">
+    <value />
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TabPage4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="GroupBox3.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;Label12.Name" xml:space="preserve">
+    <value>Label12</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Conexões</value>
+  </data>
+  <data name="TabPage3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;DataGridViewComboBoxColumn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvoutputvars.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -151,11 +163,14 @@
   <data name="&gt;&gt;dginlets.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dgenergy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;lblCOName.Name" xml:space="preserve">
+    <value>lblCOName</value>
   </data>
   <data name="&gt;&gt;lblTag.Parent" xml:space="preserve">
     <value>GroupBox5</value>
+  </data>
+  <data name="lblCOVer.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -167,18 +182,23 @@
   <data name="&gt;&gt;chkRecalc.Name" xml:space="preserve">
     <value>chkRecalc</value>
   </data>
+  <data name="&gt;&gt;DataGridViewButtonColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TabControl2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 20</value>
+  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 29</value>
+    <value>9, 22</value>
+  </data>
+  <data name="dgoutlets.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPage4.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;GroupBox7.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -189,29 +209,30 @@
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Entrada</value>
   </data>
-  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 67</value>
   </data>
   <data name="&gt;&gt;Label13.Name" xml:space="preserve">
     <value>Label13</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Nome</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Descrição</value>
+  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
+    <value>Column3</value>
   </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;cbPropPack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
     <value>TabPage2</value>
@@ -225,17 +246,17 @@
   <data name="DataGridViewButtonColumn1.ToolTipText" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="Label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="cbOverrideShape.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;DataGridViewComboBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="dginlets.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="dginlets.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="lblCOName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -249,35 +270,44 @@
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="dginlets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 193</value>
-  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Ligado a</value>
   </data>
-  <data name="TabPage3.ToolTip" xml:space="preserve">
+  <data name="dgenergy.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GroupBox1.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;chkActive.Name" xml:space="preserve">
     <value>chkActive</value>
   </data>
-  <data name="btnConfigurePP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="TabControl2.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCOVer.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;GroupBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCOName.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;btnConfigureFlashAlg.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="Column2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>GroupBox7</value>
+  <data name="&gt;&gt;btnConfigurePP.Name" xml:space="preserve">
+    <value>btnConfigurePP</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 177</value>
+    <value>312, 131</value>
   </data>
   <data name="lblCODesc.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -285,29 +315,23 @@
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>GroupBox7</value>
   </data>
-  <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Ativar/Desativar</value>
   </data>
-  <data name="TabPage3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="GroupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="lblCOVer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 84</value>
+    <value>206, 64</value>
+  </data>
+  <data name="TabPage3.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 17</value>
+    <value>121, 13</value>
   </data>
   <data name="&gt;&gt;Label13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn5</value>
+  <data name="Label12.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value />
@@ -319,7 +343,10 @@
     <value />
   </data>
   <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 61</value>
+    <value>92, 47</value>
+  </data>
+  <data name="GroupBox6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;GroupBox5.Parent" xml:space="preserve">
     <value>$this</value>
@@ -327,8 +354,8 @@
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>Nome</value>
   </data>
-  <data name="lblCOVer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>EditingForm_HeaterCooler</value>
@@ -342,20 +369,23 @@
   <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;dgoutlets.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="lblTag.ToolTip2" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;Label12.Name" xml:space="preserve">
-    <value>Label12</value>
+  <data name="dginlets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 144</value>
+  </data>
+  <data name="lblStatus.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="TabPage4.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -366,20 +396,29 @@
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Label5.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;GroupBox7.Name" xml:space="preserve">
     <value>GroupBox7</value>
   </data>
+  <data name="Label11.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 123</value>
+    <value>2, 94</value>
+  </data>
+  <data name="dgenergy.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="dgoutlets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>3, 3</value>
   </data>
-  <data name="chkRecalc.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;dginlets.Parent" xml:space="preserve">
-    <value>TabPage3</value>
+  <data name="TabPage1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -387,26 +426,23 @@
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;lblConnectedTo.Name" xml:space="preserve">
-    <value>lblConnectedTo</value>
-  </data>
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="GroupBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
   <data name="dgvinputvars.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 84</value>
+    <value>9, 64</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 201</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+    <value>335, 150</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Pacote de Propriedades</value>
@@ -414,26 +450,26 @@
   <data name="Column2.ToolTipText" xml:space="preserve">
     <value>Desconectar</value>
   </data>
-  <data name="&gt;&gt;DataGridViewButtonColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dgvinputvars.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;lblConnectedTo.Name" xml:space="preserve">
+    <value>lblConnectedTo</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Algoritmo Flash</value>
   </data>
-  <data name="lblCODesc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 56</value>
+  <data name="&gt;&gt;btnConfigureFlashAlg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 23</value>
+  <data name="Column1.ToolTipText" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="GroupBox1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="lblCODesc.ToolTip" xml:space="preserve">
     <value />
@@ -447,22 +483,31 @@
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="lblConnectedTo.Text" xml:space="preserve">
-    <value>Objeto</value>
+  <data name="lblCOVer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="dgvoutputvars.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="dgvoutputvars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>3, 3</value>
   </data>
   <data name="lblCOVer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="TabControl2.ToolTip" xml:space="preserve">
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>GroupBox7</value>
+  </data>
+  <data name="Label4.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
@@ -471,35 +516,56 @@
   <data name="btnConfigurePP.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 20</value>
+  </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
+  <data name="Label11.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
+    <value>4, 22</value>
+  </data>
+  <data name="GroupBox5.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label9.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbOverrideShape.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 34</value>
+    <value>113, 26</value>
   </data>
   <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;ToolTipValues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TabPage1.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;DataGridViewButtonColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnConfigurePP.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
   <data name="&gt;&gt;chkRecalc.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="dginlets.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label13.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;cbOverrideShape.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Label2.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCOName.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblStatus.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="DataGridViewButtonColumn4.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
@@ -511,7 +577,10 @@
     <value>14</value>
   </data>
   <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
+    <value>4, 22</value>
+  </data>
+  <data name="cbPropPack.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -519,38 +588,44 @@
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
   </data>
-  <data name="lblStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="lblConnectedTo.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 34</value>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>343, 26</value>
+  </data>
+  <data name="lblCOName.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 214</value>
+    <value>343, 163</value>
   </data>
-  <data name="btnConfigurePP.ToolTip" xml:space="preserve">
-    <value>Configurar</value>
+  <data name="cbPropPack.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="GroupBox6.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="chkRecalc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
-  <data name="&gt;&gt;lblCODesc.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="lblCOVer.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="dgvinputvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 176</value>
+  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;btnConfigurePP.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 56</value>
+    <value>314, 43</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 73</value>
+    <value>8, 56</value>
   </data>
   <data name="lblTag.ToolTip" xml:space="preserve">
     <value />
@@ -558,38 +633,44 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn1</value>
   </data>
-  <data name="lblCODesc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
   <data name="chkRecalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 21</value>
+    <value>172, 17</value>
   </data>
   <data name="&gt;&gt;Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 69</value>
+    <value>314, 53</value>
   </data>
-  <data name="btnConfigurePP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 27</value>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewComboBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPage5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
+    <value>4, 22</value>
+  </data>
+  <data name="GroupBox2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
+    <value>2, 4</value>
   </data>
   <data name="lblCOName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
+    <value>38, 13</value>
   </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="&gt;&gt;TabPage5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dginlets.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblConnectedTo.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -598,16 +679,16 @@
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolTipChangeTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnConfigureFlashAlg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="DataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Corrente</value>
   </data>
   <data name="Label11.ToolTip" xml:space="preserve">
     <value />
@@ -625,7 +706,7 @@
     <value>2</value>
   </data>
   <data name="cbOverrideShape.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 25</value>
+    <value>226, 21</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
     <value>Status</value>
@@ -645,35 +726,44 @@
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
+  <data name="chkRecalc.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;DataGridViewButtonColumn4.Name" xml:space="preserve">
     <value>DataGridViewButtonColumn4</value>
   </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 685</value>
+    <value>2, 524</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblCOName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbFlashAlg.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 20</value>
+    <value>3, 16</value>
   </data>
-  <data name="cbPropPack.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;TabPage5.Parent" xml:space="preserve">
+    <value>TabControl2</value>
   </data>
   <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
     <value>TabPage1</value>
   </data>
-  <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
-    <value>Nome</value>
-  </data>
   <data name="dgvoutputvars.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="&gt;&gt;lblCODesc.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="dgenergy.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkActive.ToolTip2" xml:space="preserve">
+    <value>Ativar/Desativar</value>
   </data>
   <data name="&gt;&gt;dgoutlets.Parent" xml:space="preserve">
     <value>TabPage4</value>
@@ -687,23 +777,35 @@
   <data name="GroupBox5.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 13</value>
+  </data>
+  <data name="dgvinputvars.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;GroupBox7.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 25</value>
+  <data name="TabPage2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="GroupBox4.ToolTip" xml:space="preserve">
+  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 19</value>
+  </data>
+  <data name="chkActive.ToolTip1" xml:space="preserve">
+    <value>Ativar/Desativar</value>
+  </data>
+  <data name="TabPage2.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Energia</value>
   </data>
-  <data name="TabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="lblCODesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
-  <data name="Label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
+    <value>TabPage4</value>
   </data>
   <data name="&gt;&gt;lblConnectedTo.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -712,16 +814,25 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 17</value>
+    <value>48, 13</value>
+  </data>
+  <data name="lblConnectedTo.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
     <value>TabControl2</value>
+  </data>
+  <data name="lblCODesc.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;Column5.Name" xml:space="preserve">
+    <value>Column5</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Configurações do Pacote de Propriedades</value>
@@ -735,20 +846,17 @@
   <data name="lblCOVer.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="GroupBox7.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="dgvinputvars.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="cbFlashAlg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
+    <value>GroupBox4</value>
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="cbOverrideShape.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;cbOverrideShape.Name" xml:space="preserve">
     <value>cbOverrideShape</value>
@@ -756,11 +864,17 @@
   <data name="GroupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="btnConfigureFlashAlg.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Saída</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=5.7.7108.16983, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="DataGridViewButtonColumn3.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
@@ -768,29 +882,29 @@
   <data name="DataGridViewButtonColumn2.HeaderText" xml:space="preserve">
     <value />
   </data>
+  <data name="$this.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 115</value>
+    <value>349, 88</value>
   </data>
   <data name="&gt;&gt;cbFlashAlg.Name" xml:space="preserve">
     <value>cbFlashAlg</value>
   </data>
-  <data name="lblConnectedTo.ToolTip" xml:space="preserve">
-    <value />
+  <data name="lblCODesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 43</value>
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 87</value>
+    <value>9, 67</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 928</value>
-  </data>
-  <data name="&gt;&gt;btnConfigureFlashAlg.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+    <value>2, 710</value>
   </data>
   <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
-    <value>GroupBox4</value>
   </data>
   <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -798,11 +912,8 @@
   <data name="cbFlashAlg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="GroupBox6.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="dgvinputvars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 131</value>
   </data>
   <data name="chkActive.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -816,8 +927,8 @@
   <data name="GroupBox6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="lblConnectedTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="TabPage5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblConnectedTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -825,23 +936,20 @@
   <data name="&gt;&gt;GroupBox6.Name" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="&gt;&gt;lblCOName.Name" xml:space="preserve">
-    <value>lblCOName</value>
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
   <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>Nome</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn3</value>
+  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;chkRecalc.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Entrada</value>
   </data>
   <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -853,7 +961,7 @@
     <value />
   </data>
   <data name="lblCOName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 29</value>
+    <value>91, 22</value>
   </data>
   <data name="GroupBox2.ToolTip" xml:space="preserve">
     <value />
@@ -861,50 +969,59 @@
   <data name="&gt;&gt;cbFlashAlg.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="TabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="Label13.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;cbPropPack.Name" xml:space="preserve">
+    <value>cbPropPack</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>349, 195</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 17</value>
+    <value>78, 13</value>
   </data>
   <data name="&gt;&gt;btnConfigureFlashAlg.Name" xml:space="preserve">
     <value>btnConfigureFlashAlg</value>
   </data>
-  <data name="Column5.HeaderText" xml:space="preserve">
-    <value>Valor</value>
+  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
+    <value>Label10</value>
   </data>
-  <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="&gt;&gt;dgvinputvars.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn4.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn4</value>
   </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 17</value>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Variáveis</value>
   </data>
   <data name="TabPage5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="GroupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="Label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
   <data name="btnConfigurePP.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
+  <data name="TabControl2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label4.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;ToolTipValues.Name" xml:space="preserve">
+    <value>ToolTipValues</value>
   </data>
   <data name="&gt;&gt;cbPropPack.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="&gt;&gt;DataGridViewButtonColumn2.Name" xml:space="preserve">
     <value>DataGridViewButtonColumn2</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewButtonColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblCOName.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -918,8 +1035,8 @@
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="lblCOVer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="lblCODesc.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -930,8 +1047,14 @@
   <data name="&gt;&gt;lblTag.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>CAPE-OPEN</value>
+  </data>
+  <data name="cbFlashAlg.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="TabControl2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -939,38 +1062,38 @@
   <data name="&gt;&gt;TabPage5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="cbPropPack.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 17</value>
+    <value>99, 13</value>
   </data>
   <data name="chkActive.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 306</value>
+    <value>2, 234</value>
   </data>
   <data name="lblConnectedTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 184</value>
+    <value>38, 13</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 38</value>
+    <value>8, 29</value>
   </data>
   <data name="&gt;&gt;TabControl2.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="GroupBox6.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="lblStatus.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;dgenergy.Name" xml:space="preserve">
-    <value>dgenergy</value>
+  <data name="btnConfigurePP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 35</value>
+  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lblCOVer.Parent" xml:space="preserve">
     <value>GroupBox7</value>
@@ -981,29 +1104,26 @@
   <data name="lblTag.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="&gt;&gt;dgoutlets.Name" xml:space="preserve">
-    <value>dgoutlets</value>
+  <data name="TabControl1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 185</value>
+    <value>318, 137</value>
   </data>
-  <data name="btnConfigurePP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Saída</value>
   </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 113</value>
+    <value>349, 86</value>
   </data>
   <data name="lblCOVer.Text" xml:space="preserve">
     <value>Objeto</value>
   </data>
-  <data name="&gt;&gt;TabControl2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;DataGridViewComboBoxColumn2.Name" xml:space="preserve">
     <value>DataGridViewComboBoxColumn2</value>
   </data>
-  <data name="DataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Corrente</value>
+  <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
     <value>ToolTip1</value>
@@ -1012,22 +1132,19 @@
     <value>14</value>
   </data>
   <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 25</value>
-  </data>
-  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="Label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>161, 21</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 564</value>
+    <value>2, 431</value>
   </data>
   <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 241</value>
+    <value>2, 184</value>
+  </data>
+  <data name="&gt;&gt;Column5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabControl2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1035,47 +1152,53 @@
   <data name="dgenergy.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;lblCOName.Parent" xml:space="preserve">
-    <value>GroupBox7</value>
+  <data name="btnConfigurePP.ToolTip1" xml:space="preserve">
+    <value>Configurar</value>
   </data>
-  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Valor</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 17</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Conexões</value>
+  <data name="dgvinputvars.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="Label9.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="lblCOVer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
+    <value>38, 13</value>
   </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 202</value>
+  <data name="TabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="GroupBox7.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="&gt;&gt;lblCOName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="chkRecalc.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;lblCOVer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 38</value>
+    <value>8, 29</value>
+  </data>
+  <data name="Button1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>Corrente</value>
   </data>
-  <data name="Label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
   <data name="dginlets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>3, 3</value>
   </data>
   <data name="&gt;&gt;dgvinputvars.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1083,23 +1206,32 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Editor</value>
   </data>
+  <data name="Label9.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="DataGridViewButtonColumn2.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="lblCOName.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 255</value>
+  <data name="Label12.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="lblCOVer.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="lblConnectedTo.Text" xml:space="preserve">
+    <value>Objeto</value>
+  </data>
+  <data name="&gt;&gt;btnConfigureFlashAlg.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="dgenergy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 194</value>
+    <value>312, 144</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Desenho do Objeto</value>
   </data>
   <data name="chkRecalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 73</value>
+    <value>11, 56</value>
   </data>
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1107,32 +1239,26 @@
   <data name="GroupBox3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 29</value>
-  </data>
   <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column5.Name" xml:space="preserve">
-    <value>Column5</value>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 150</value>
   </data>
-  <data name="&gt;&gt;cbPropPack.Name" xml:space="preserve">
-    <value>cbPropPack</value>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
-  <data name="GroupBox5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;dgenergy.Name" xml:space="preserve">
+    <value>dgenergy</value>
   </data>
-  <data name="&gt;&gt;cbPropPack.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dgenergy.ToolTip" xml:space="preserve">
+  <data name="lblCOVer.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="dgoutlets.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
   </data>
   <data name="lblConnectedTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DataGridViewButtonColumn1.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
@@ -1143,8 +1269,11 @@
   <data name="&gt;&gt;dgvinputvars.Name" xml:space="preserve">
     <value>dgvinputvars</value>
   </data>
+  <data name="Label6.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 59</value>
+    <value>349, 45</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn5.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1152,29 +1281,29 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_CAPEOPENUO</value>
   </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 238</value>
+  <data name="&gt;&gt;ToolTipChangeTag.Name" xml:space="preserve">
+    <value>ToolTipChangeTag</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
-  <data name="cbOverrideShape.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="cbPropPack.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
   <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 231</value>
+    <value>343, 176</value>
   </data>
-  <data name="Button1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
+    <value>Label9</value>
   </data>
-  <data name="cbPropPack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;lblCOName.Parent" xml:space="preserve">
+    <value>GroupBox7</value>
+  </data>
+  <data name="lblCOName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1197,11 +1326,8 @@
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="dgvoutputvars.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="dgvinputvars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Configurações Gerais</value>
@@ -1209,29 +1335,23 @@
   <data name="lblStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;cbOverrideShape.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="GroupBox1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Column2.MinimumWidth" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="Label5.ToolTip2" xml:space="preserve">
+    <value />
   </data>
-  <data name="GroupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
-    <value>Nome</value>
-  </data>
-  <data name="Label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="DataGridViewButtonColumn4.ToolTipText" xml:space="preserve">
+    <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -1239,19 +1359,25 @@
   <data name="&gt;&gt;chkRecalc.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label12.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 137</value>
   </data>
-  <data name="TabControl2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="dgvoutputvars.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Button1.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
@@ -1260,10 +1386,13 @@
   <data name="cbPropPack.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label12.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
+  <data name="chkRecalc.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="dginlets.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -1272,29 +1401,23 @@
   <data name="Label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
-  </data>
   <data name="DataGridViewComboBoxColumn2.HeaderText" xml:space="preserve">
     <value>Corrente</value>
   </data>
   <data name="dgoutlets.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="GroupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="TabControl2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 17</value>
+    <value>35, 13</value>
   </data>
   <data name="DataGridViewButtonColumn3.HeaderText" xml:space="preserve">
     <value />
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 56</value>
-  </data>
-  <data name="&gt;&gt;btnConfigurePP.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>9, 43</value>
   </data>
   <data name="dgoutlets.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1308,11 +1431,11 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="GroupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="Button1.ToolTip2" xml:space="preserve">
+    <value />
   </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 202</value>
+  <data name="&gt;&gt;DataGridViewButtonColumn1.Name" xml:space="preserve">
+    <value>DataGridViewButtonColumn1</value>
   </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1320,26 +1443,26 @@
   <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
     <value>TabPage3</value>
   </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Versão Objeto / Interface CAPE-OPEN</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Variáveis</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 20</value>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Objeto</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 61</value>
+    <value>9, 47</value>
   </data>
   <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="Label6.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 114</value>
+    <value>349, 87</value>
+  </data>
+  <data name="btnConfigureFlashAlg.ToolTip1" xml:space="preserve">
+    <value>Configurar</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
@@ -1347,8 +1470,8 @@
   <data name="&gt;&gt;TabControl2.Name" xml:space="preserve">
     <value>TabControl2</value>
   </data>
-  <data name="&gt;&gt;Column5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 22</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1356,20 +1479,20 @@
   <data name="lblStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
+  <data name="btnConfigurePP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 21</value>
   </data>
-  <data name="dgvoutputvars.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="cbFlashAlg.ToolTip" xml:space="preserve">
+  <data name="TabPage5.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="GroupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="TabPage5.ToolTip2" xml:space="preserve">
+    <value />
   </data>
-  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Valor</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn5</value>
+  </data>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>GroupBox7</value>
@@ -1377,29 +1500,23 @@
   <data name="&gt;&gt;cbOverrideShape.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;btnConfigurePP.Name" xml:space="preserve">
-    <value>btnConfigurePP</value>
+  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 26</value>
   </data>
-  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 87</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Entrada</value>
-  </data>
-  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 34</value>
+  <data name="dgoutlets.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;dgvinputvars.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>349, 182</value>
   </data>
   <data name="dginlets.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="Column1.ToolTipText" xml:space="preserve">
-    <value>Criar e Conectar</value>
+  <data name="lblCOName.Text" xml:space="preserve">
+    <value>Objeto</value>
   </data>
   <data name="&gt;&gt;dgvoutputvars.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1410,26 +1527,29 @@
   <data name="&gt;&gt;lblCODesc.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
-    <value>Label10</value>
+  <data name="&gt;&gt;btnConfigureFlashAlg.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
-  <data name="lblCODesc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
+  <data name="TabPage4.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="GroupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="TabControl1.ToolTip2" xml:space="preserve">
+    <value />
   </data>
-  <data name="GroupBox7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="lblCODesc.ToolTip2" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;GroupBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TabControl2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Abrir Editor do Objeto CAPE-OPEN</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 17</value>
+    <value>6, 13</value>
+  </data>
+  <data name="Label2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;GroupBox5.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1437,11 +1557,11 @@
   <data name="cbOverrideShape.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="GroupBox7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
   </data>
-  <data name="dgvinputvars.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 21</value>
   </data>
   <data name="&gt;&gt;dginlets.Name" xml:space="preserve">
     <value>dginlets</value>
@@ -1449,14 +1569,17 @@
   <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnConfigureFlashAlg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPage1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;dgoutlets.Name" xml:space="preserve">
+    <value>dgoutlets</value>
   </data>
   <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Desenho do Objeto</value>
+  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
@@ -1467,11 +1590,11 @@
   <data name="TabPage2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
-    <value>Column3</value>
+  <data name="&gt;&gt;btnConfigurePP.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="lblCOName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
   </data>
   <data name="&gt;&gt;lblCOVer.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1479,23 +1602,20 @@
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TabPage5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="btnConfigurePP.ToolTip2" xml:space="preserve">
+    <value>Configurar</value>
   </data>
   <data name="&gt;&gt;TabControl2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="GroupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>Valor</value>
   </data>
   <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1512,8 +1632,11 @@
   <data name="&gt;&gt;chkActive.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
+  <data name="GroupBox5.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnConfigurePP.ToolTip" xml:space="preserve">
+    <value>Configurar</value>
   </data>
   <data name="&gt;&gt;dgvoutputvars.Parent" xml:space="preserve">
     <value>TabPage2</value>
@@ -1524,11 +1647,11 @@
   <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="GroupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="dgvinputvars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+  <data name="cbFlashAlg.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
@@ -1536,14 +1659,14 @@
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="GroupBox2.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>473, 1055</value>
+    <value>355, 806</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Versão Objeto / Interface CAPE-OPEN</value>
-  </data>
-  <data name="lblCOName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>314, 26</value>
   </data>
   <data name="dginlets.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1554,23 +1677,17 @@
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="GroupBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;lblTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="cbOverrideShape.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="Label10.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;dgvoutputvars.Name" xml:space="preserve">
     <value>dgvoutputvars</value>
-  </data>
-  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1578,14 +1695,17 @@
   <data name="&gt;&gt;cbFlashAlg.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 17</value>
+  <data name="GroupBox4.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="Button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>13, 13, 13, 13</value>
+  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;TabPage5.Parent" xml:space="preserve">
-    <value>TabControl2</value>
+  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="dgvinputvars.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;DataGridViewButtonColumn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1599,26 +1719,23 @@
   <data name="chkRecalc.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 25</value>
+  <data name="btnConfigureFlashAlg.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
-  <data name="TabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="btnConfigureFlashAlg.ToolTip2" xml:space="preserve">
+    <value>Configurar</value>
   </data>
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
-    <value>Label9</value>
+  <data name="&gt;&gt;btnConfigurePP.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
-  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dginlets.ToolTip" xml:space="preserve">
+  <data name="Label10.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 27</value>
+    <value>21, 21</value>
   </data>
   <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1626,62 +1743,74 @@
   <data name="Label12.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="GroupBox4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="lblCODesc.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
+  <data name="cbFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 53</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 115</value>
+    <value>349, 88</value>
+  </data>
+  <data name="$this.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
   </data>
-  <data name="lblCOVer.ToolTip" xml:space="preserve">
+  <data name="TabPage3.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="dgenergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
-  </data>
-  <data name="TabPage5.ToolTip" xml:space="preserve">
+  <data name="DataGridViewButtonColumn1.HeaderText" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;dgoutlets.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabControl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="chkRecalc.Text" xml:space="preserve">
+    <value>Recalcular Correntes de Saída</value>
   </data>
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="TabPage4.ToolTip" xml:space="preserve">
+  <data name="lblConnectedTo.ToolTip2" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="chkRecalc.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;lblCOName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox3.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="lblTag.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="cbFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 69</value>
-  </data>
-  <data name="GroupBox6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;dginlets.Parent" xml:space="preserve">
+    <value>TabPage3</value>
   </data>
   <data name="cbFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;dgvoutputvars.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="cbPropPack.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
   </data>
   <data name="lblCODesc.Text" xml:space="preserve">
     <value>Objeto</value>
@@ -1689,50 +1818,50 @@
   <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="GroupBox4.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblTag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Descrição</value>
   </data>
   <data name="btnConfigureFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 27</value>
+    <value>21, 21</value>
   </data>
   <data name="&gt;&gt;DataGridViewButtonColumn3.Name" xml:space="preserve">
     <value>DataGridViewButtonColumn3</value>
   </data>
   <data name="dgoutlets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 194</value>
+    <value>312, 144</value>
   </data>
-  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
-    <value>TabPage4</value>
+  <data name="Label13.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="DataGridViewButtonColumn4.ToolTipText" xml:space="preserve">
-    <value>Desconectar</value>
+  <data name="&gt;&gt;GroupBox6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="dgvinputvars.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="DataGridViewButtonColumn1.HeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblCOName.Text" xml:space="preserve">
-    <value>Objeto</value>
+  <data name="dgvoutputvars.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;cbPropPack.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="&gt;&gt;lblCODesc.Name" xml:space="preserve">
-    <value>lblCODesc</value>
+  <data name="cbOverrideShape.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="lblCODesc.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="&gt;&gt;cbFlashAlg.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1740,17 +1869,14 @@
   <data name="lblCOName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;TabPage5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabPage1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;cbFlashAlg.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn2</value>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
   </data>
   <data name="&gt;&gt;lblCOVer.Name" xml:space="preserve">
     <value>lblCOVer</value>
@@ -1758,38 +1884,41 @@
   <data name="btnConfigurePP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;lblCOVer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Nome</value>
   </data>
   <data name="&gt;&gt;GroupBox5.Name" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="chkRecalc.Text" xml:space="preserve">
-    <value>Recalcular Correntes de Saída</value>
+  <data name="dgenergy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;chkRecalc.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
+  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewComboBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewComboBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewButtonColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>81</value>
+  </metadata>
+  <metadata name="DataGridViewButtonColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>145, 17</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1800,16 +1929,22 @@
   <metadata name="DataGridViewButtonColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewButtonColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="ToolTipValues.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="ToolTipChangeTag.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>244, 17</value>
+  </metadata>
   <metadata name="DataGridViewButtonColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1818,8 +1953,8 @@
   <metadata name="DataGridViewComboBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+  <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

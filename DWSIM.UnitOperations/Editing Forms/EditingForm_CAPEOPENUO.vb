@@ -232,13 +232,8 @@ Public Class EditingForm_CAPEOPENUO
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
-        If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
-        Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetDisplayName() & ")"
-        If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
-        DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
-        lblTag.Focus()
-        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
-        lblTag.SelectionLength = 0
+        If Loaded Then ToolTipChangeTag.Show("Press ENTER to commit changes.", lblTag, New System.Drawing.Point(0, lblTag.Height + 3), 3000)
+
     End Sub
 
     Sub RequestCalc()
@@ -528,6 +523,19 @@ Public Class EditingForm_CAPEOPENUO
         If Loaded Then
             SimObject.GraphicObject.ShapeOverride = cbOverrideShape.SelectedIndex
         End If
+    End Sub
+
+    Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
+
+        If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
+            If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
+            Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetDisplayName() & ")"
+            DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+
+        End If
+
     End Sub
 
 End Class

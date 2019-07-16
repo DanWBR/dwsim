@@ -599,13 +599,9 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
-        If Loaded Then MatStream.GraphicObject.Tag = lblTag.Text
-        If Loaded Then MatStream.FlowSheet.UpdateOpenEditForms()
-        Me.Text = MatStream.GraphicObject.Tag & " (" & MatStream.GetDisplayName() & ")"
-        DirectCast(MatStream.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
-        lblTag.Focus()
-        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
-        lblTag.SelectionLength = 0
+
+        If Loaded Then ToolTipChangeTag.Show("Press ENTER to commit changes.", lblTag, New Drawing.Point(0, lblTag.Height + 3), 3000)
+
     End Sub
 
     Public Sub DisableEditableStatus()
@@ -1532,6 +1528,19 @@ Public Class MaterialStreamEditor
         End With
 
         MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
+
+    End Sub
+
+    Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
+
+        If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then MatStream.GraphicObject.Tag = lblTag.Text
+            If Loaded Then MatStream.FlowSheet.UpdateOpenEditForms()
+            Me.Text = MatStream.GraphicObject.Tag & " (" & MatStream.GetDisplayName() & ")"
+            DirectCast(MatStream.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+
+        End If
 
     End Sub
 

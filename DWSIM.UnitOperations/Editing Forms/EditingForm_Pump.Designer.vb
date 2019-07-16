@@ -77,6 +77,7 @@ Partial Class EditingForm_Pump
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -108,6 +109,7 @@ Partial Class EditingForm_Pump
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
@@ -146,7 +148,7 @@ Partial Class EditingForm_Pump
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -169,6 +171,7 @@ Partial Class EditingForm_Pump
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
         Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
@@ -177,6 +180,7 @@ Partial Class EditingForm_Pump
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
@@ -378,6 +382,7 @@ Partial Class EditingForm_Pump
         Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip1"))
         Me.btnCreateAndConnectEnergy.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet1
@@ -386,6 +391,7 @@ Partial Class EditingForm_Pump
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -394,6 +400,7 @@ Partial Class EditingForm_Pump
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectEnergy
@@ -402,6 +409,7 @@ Partial Class EditingForm_Pump
         Me.btnDisconnectEnergy.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectEnergy.Name = "btnDisconnectEnergy"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip1"))
         Me.btnDisconnectEnergy.UseVisualStyleBackColor = True
         '
         'Label14
@@ -422,6 +430,7 @@ Partial Class EditingForm_Pump
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnect1
@@ -430,6 +439,7 @@ Partial Class EditingForm_Pump
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'Label7
@@ -455,6 +465,11 @@ Partial Class EditingForm_Pump
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'EditingForm_Pump
         '
@@ -531,4 +546,5 @@ Partial Class EditingForm_Pump
     Public WithEvents btnCreateAndConnectEnergy As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

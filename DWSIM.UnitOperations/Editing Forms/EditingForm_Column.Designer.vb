@@ -131,6 +131,7 @@ Partial Class EditingForm_Column
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -161,67 +162,76 @@ Partial Class EditingForm_Column
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip2"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
-        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip2"))
         '
         'chkActive
         '
         resources.ApplyResources(Me.chkActive, "chkActive")
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
-        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip2"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
-        Me.ToolTipValues.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip2"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
-        Me.ToolTipValues.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip2"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
-        Me.ToolTipValues.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip2"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
-        Me.ToolTipValues.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip2"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
-        Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
         'btnConfigureFlashAlg
         '
         resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip2"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
@@ -229,8 +239,9 @@ Partial Class EditingForm_Column
         resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip2"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
@@ -241,13 +252,15 @@ Partial Class EditingForm_Column
         Me.cbFlashAlg.Name = "cbFlashAlg"
         Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip2"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
-        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
         '
         'cbPropPack
         '
@@ -257,13 +270,15 @@ Partial Class EditingForm_Column
         Me.cbPropPack.Name = "cbPropPack"
         Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip2"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
-        Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
         '
         'GroupBox2
         '
@@ -271,8 +286,9 @@ Partial Class EditingForm_Column
         Me.GroupBox2.Controls.Add(Me.TabControl1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
         '
         'TabControl1
         '
@@ -282,8 +298,9 @@ Partial Class EditingForm_Column
         Me.TabControl1.Controls.Add(Me.TabReboiler)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.ToolTipValues.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip2"))
         '
         'TabGeneral
         '
@@ -310,30 +327,34 @@ Partial Class EditingForm_Column
         Me.TabGeneral.Controls.Add(Me.Label1)
         Me.TabGeneral.Controls.Add(Me.tbNStages)
         Me.TabGeneral.Name = "TabGeneral"
-        Me.ToolTip1.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip2"))
         Me.TabGeneral.UseVisualStyleBackColor = True
         '
         'lblTemperatureUnit
         '
         resources.ApplyResources(Me.lblTemperatureUnit, "lblTemperatureUnit")
         Me.lblTemperatureUnit.Name = "lblTemperatureUnit"
-        Me.ToolTipValues.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip2"))
         '
         'Label30
         '
         resources.ApplyResources(Me.Label30, "Label30")
         Me.Label30.Name = "Label30"
-        Me.ToolTipValues.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip2"))
         '
         'tbMaxTChange
         '
         resources.ApplyResources(Me.tbMaxTChange, "tbMaxTChange")
         Me.tbMaxTChange.Name = "tbMaxTChange"
-        Me.ToolTip1.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip2"))
         '
         'cbSolverScheme
         '
@@ -344,13 +365,15 @@ Partial Class EditingForm_Column
         Me.cbSolverScheme.Name = "cbSolverScheme"
         Me.ToolTip1.SetToolTip(Me.cbSolverScheme, resources.GetString("cbSolverScheme.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSolverScheme, resources.GetString("cbSolverScheme.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSolverScheme, resources.GetString("cbSolverScheme.ToolTip2"))
         '
         'Label27
         '
         resources.ApplyResources(Me.Label27, "Label27")
         Me.Label27.Name = "Label27"
-        Me.ToolTipValues.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip2"))
         '
         'cbSolvingMethod
         '
@@ -362,34 +385,39 @@ Partial Class EditingForm_Column
         Me.cbSolvingMethod.Name = "cbSolvingMethod"
         Me.ToolTip1.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip2"))
         '
         'Label18
         '
         resources.ApplyResources(Me.Label18, "Label18")
         Me.Label18.Name = "Label18"
-        Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip2"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
-        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip2"))
         '
         'tbConvTol
         '
         resources.ApplyResources(Me.tbConvTol, "tbConvTol")
         Me.tbConvTol.Name = "tbConvTol"
-        Me.ToolTip1.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip2"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
-        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip2"))
         '
         'cbAbsorberMode
         '
@@ -400,34 +428,39 @@ Partial Class EditingForm_Column
         Me.cbAbsorberMode.Name = "cbAbsorberMode"
         Me.ToolTip1.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip2"))
         '
         'tbMaxIt
         '
         resources.ApplyResources(Me.tbMaxIt, "tbMaxIt")
         Me.tbMaxIt.Name = "tbMaxIt"
-        Me.ToolTip1.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip2"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
-        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
-        Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip2"))
         '
         'tbNStages
         '
         resources.ApplyResources(Me.tbNStages, "tbNStages")
         Me.tbNStages.Name = "tbNStages"
-        Me.ToolTip1.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip2"))
         '
         'TabCondenser
         '
@@ -450,16 +483,18 @@ Partial Class EditingForm_Column
         Me.TabCondenser.Controls.Add(Me.cbCondPressureUnits)
         Me.TabCondenser.Controls.Add(Me.tbCondPressure)
         Me.TabCondenser.Name = "TabCondenser"
-        Me.ToolTip1.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip2"))
         Me.TabCondenser.UseVisualStyleBackColor = True
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
-        Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip2"))
         '
         'cbCondComp
         '
@@ -471,6 +506,7 @@ Partial Class EditingForm_Column
         Me.cbCondComp.Name = "cbCondComp"
         Me.ToolTip1.SetToolTip(Me.cbCondComp, resources.GetString("cbCondComp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCondComp, resources.GetString("cbCondComp.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCondComp, resources.GetString("cbCondComp.ToolTip2"))
         '
         'cbCondType
         '
@@ -481,20 +517,23 @@ Partial Class EditingForm_Column
         Me.cbCondType.Name = "cbCondType"
         Me.ToolTip1.SetToolTip(Me.cbCondType, resources.GetString("cbCondType.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCondType, resources.GetString("cbCondType.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCondType, resources.GetString("cbCondType.ToolTip2"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
-        Me.ToolTipValues.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip2"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
-        Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip2"))
         '
         'cbCondVapFlowUnits
         '
@@ -505,13 +544,15 @@ Partial Class EditingForm_Column
         Me.cbCondVapFlowUnits.Name = "cbCondVapFlowUnits"
         Me.ToolTip1.SetToolTip(Me.cbCondVapFlowUnits, resources.GetString("cbCondVapFlowUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCondVapFlowUnits, resources.GetString("cbCondVapFlowUnits.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCondVapFlowUnits, resources.GetString("cbCondVapFlowUnits.ToolTip2"))
         '
         'tbCondVapFlow
         '
         resources.ApplyResources(Me.tbCondVapFlow, "tbCondVapFlow")
         Me.tbCondVapFlow.Name = "tbCondVapFlow"
-        Me.ToolTip1.SetToolTip(Me.tbCondVapFlow, resources.GetString("tbCondVapFlow.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbCondVapFlow, resources.GetString("tbCondVapFlow.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbCondVapFlow, resources.GetString("tbCondVapFlow.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbCondVapFlow, resources.GetString("tbCondVapFlow.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbCondVapFlow, resources.GetString("tbCondVapFlow.ToolTip2"))
         '
         'cbCondSpecUnits
         '
@@ -522,20 +563,23 @@ Partial Class EditingForm_Column
         Me.cbCondSpecUnits.Name = "cbCondSpecUnits"
         Me.ToolTip1.SetToolTip(Me.cbCondSpecUnits, resources.GetString("cbCondSpecUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCondSpecUnits, resources.GetString("cbCondSpecUnits.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCondSpecUnits, resources.GetString("cbCondSpecUnits.ToolTip2"))
         '
         'tbCondSpec
         '
         resources.ApplyResources(Me.tbCondSpec, "tbCondSpec")
         Me.tbCondSpec.Name = "tbCondSpec"
-        Me.ToolTip1.SetToolTip(Me.tbCondSpec, resources.GetString("tbCondSpec.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbCondSpec, resources.GetString("tbCondSpec.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbCondSpec, resources.GetString("tbCondSpec.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbCondSpec, resources.GetString("tbCondSpec.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbCondSpec, resources.GetString("tbCondSpec.ToolTip2"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
-        Me.ToolTipValues.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip2"))
         '
         'cbCondSpec
         '
@@ -547,13 +591,15 @@ Partial Class EditingForm_Column
         Me.cbCondSpec.Name = "cbCondSpec"
         Me.ToolTip1.SetToolTip(Me.cbCondSpec, resources.GetString("cbCondSpec.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCondSpec, resources.GetString("cbCondSpec.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCondSpec, resources.GetString("cbCondSpec.ToolTip2"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
-        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip2"))
         '
         'cbCondPDropUnits
         '
@@ -564,20 +610,23 @@ Partial Class EditingForm_Column
         Me.cbCondPDropUnits.Name = "cbCondPDropUnits"
         Me.ToolTip1.SetToolTip(Me.cbCondPDropUnits, resources.GetString("cbCondPDropUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCondPDropUnits, resources.GetString("cbCondPDropUnits.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCondPDropUnits, resources.GetString("cbCondPDropUnits.ToolTip2"))
         '
         'tbCondPDrop
         '
         resources.ApplyResources(Me.tbCondPDrop, "tbCondPDrop")
         Me.tbCondPDrop.Name = "tbCondPDrop"
-        Me.ToolTip1.SetToolTip(Me.tbCondPDrop, resources.GetString("tbCondPDrop.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbCondPDrop, resources.GetString("tbCondPDrop.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbCondPDrop, resources.GetString("tbCondPDrop.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbCondPDrop, resources.GetString("tbCondPDrop.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbCondPDrop, resources.GetString("tbCondPDrop.ToolTip2"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
-        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip2"))
         '
         'cbCondPressureUnits
         '
@@ -588,13 +637,15 @@ Partial Class EditingForm_Column
         Me.cbCondPressureUnits.Name = "cbCondPressureUnits"
         Me.ToolTip1.SetToolTip(Me.cbCondPressureUnits, resources.GetString("cbCondPressureUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCondPressureUnits, resources.GetString("cbCondPressureUnits.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCondPressureUnits, resources.GetString("cbCondPressureUnits.ToolTip2"))
         '
         'tbCondPressure
         '
         resources.ApplyResources(Me.tbCondPressure, "tbCondPressure")
         Me.tbCondPressure.Name = "tbCondPressure"
-        Me.ToolTip1.SetToolTip(Me.tbCondPressure, resources.GetString("tbCondPressure.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbCondPressure, resources.GetString("tbCondPressure.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbCondPressure, resources.GetString("tbCondPressure.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbCondPressure, resources.GetString("tbCondPressure.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbCondPressure, resources.GetString("tbCondPressure.ToolTip2"))
         '
         'TabReboiler
         '
@@ -609,16 +660,18 @@ Partial Class EditingForm_Column
         Me.TabReboiler.Controls.Add(Me.cbRebPressure)
         Me.TabReboiler.Controls.Add(Me.tbRebPressure)
         Me.TabReboiler.Name = "TabReboiler"
-        Me.ToolTip1.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip2"))
         Me.TabReboiler.UseVisualStyleBackColor = True
         '
         'Label24
         '
         resources.ApplyResources(Me.Label24, "Label24")
         Me.Label24.Name = "Label24"
-        Me.ToolTipValues.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip2"))
         '
         'cbRebComp
         '
@@ -630,6 +683,7 @@ Partial Class EditingForm_Column
         Me.cbRebComp.Name = "cbRebComp"
         Me.ToolTip1.SetToolTip(Me.cbRebComp, resources.GetString("cbRebComp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbRebComp, resources.GetString("cbRebComp.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbRebComp, resources.GetString("cbRebComp.ToolTip2"))
         '
         'cbRebSpecUnits
         '
@@ -640,20 +694,23 @@ Partial Class EditingForm_Column
         Me.cbRebSpecUnits.Name = "cbRebSpecUnits"
         Me.ToolTip1.SetToolTip(Me.cbRebSpecUnits, resources.GetString("cbRebSpecUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbRebSpecUnits, resources.GetString("cbRebSpecUnits.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbRebSpecUnits, resources.GetString("cbRebSpecUnits.ToolTip2"))
         '
         'tbRebSpecValue
         '
         resources.ApplyResources(Me.tbRebSpecValue, "tbRebSpecValue")
         Me.tbRebSpecValue.Name = "tbRebSpecValue"
-        Me.ToolTip1.SetToolTip(Me.tbRebSpecValue, resources.GetString("tbRebSpecValue.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbRebSpecValue, resources.GetString("tbRebSpecValue.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbRebSpecValue, resources.GetString("tbRebSpecValue.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbRebSpecValue, resources.GetString("tbRebSpecValue.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbRebSpecValue, resources.GetString("tbRebSpecValue.ToolTip2"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
-        Me.ToolTipValues.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip2"))
         '
         'cbRebSpec
         '
@@ -665,13 +722,15 @@ Partial Class EditingForm_Column
         Me.cbRebSpec.Name = "cbRebSpec"
         Me.ToolTip1.SetToolTip(Me.cbRebSpec, resources.GetString("cbRebSpec.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbRebSpec, resources.GetString("cbRebSpec.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbRebSpec, resources.GetString("cbRebSpec.ToolTip2"))
         '
         'Label17
         '
         resources.ApplyResources(Me.Label17, "Label17")
         Me.Label17.Name = "Label17"
-        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip2"))
         '
         'cbRebPressure
         '
@@ -682,13 +741,15 @@ Partial Class EditingForm_Column
         Me.cbRebPressure.Name = "cbRebPressure"
         Me.ToolTip1.SetToolTip(Me.cbRebPressure, resources.GetString("cbRebPressure.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbRebPressure, resources.GetString("cbRebPressure.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbRebPressure, resources.GetString("cbRebPressure.ToolTip2"))
         '
         'tbRebPressure
         '
         resources.ApplyResources(Me.tbRebPressure, "tbRebPressure")
         Me.tbRebPressure.Name = "tbRebPressure"
-        Me.ToolTip1.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip2"))
         '
         'GroupBox1
         '
@@ -696,8 +757,9 @@ Partial Class EditingForm_Column
         Me.GroupBox1.Controls.Add(Me.TabControl2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
         '
         'TabControl2
         '
@@ -710,23 +772,26 @@ Partial Class EditingForm_Column
         Me.TabControl2.Controls.Add(Me.TabSolverIO)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
-        Me.ToolTipValues.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip2"))
         '
         'TabConnections
         '
         resources.ApplyResources(Me.TabConnections, "TabConnections")
         Me.TabConnections.Name = "TabConnections"
-        Me.ToolTip1.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip2"))
         Me.TabConnections.UseVisualStyleBackColor = True
         '
         'TabStages
         '
         resources.ApplyResources(Me.TabStages, "TabStages")
         Me.TabStages.Name = "TabStages"
-        Me.ToolTip1.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip2"))
         Me.TabStages.UseVisualStyleBackColor = True
         '
         'TabInitialEstimates
@@ -738,8 +803,9 @@ Partial Class EditingForm_Column
         Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_LF)
         Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_T)
         Me.TabInitialEstimates.Name = "TabInitialEstimates"
-        Me.ToolTip1.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip2"))
         Me.TabInitialEstimates.UseVisualStyleBackColor = True
         '
         'InitialEstimatesPanel
@@ -748,37 +814,42 @@ Partial Class EditingForm_Column
         Me.InitialEstimatesPanel.Name = "InitialEstimatesPanel"
         Me.ToolTip1.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip2"))
         '
         'chkUseIE_C
         '
         resources.ApplyResources(Me.chkUseIE_C, "chkUseIE_C")
         Me.chkUseIE_C.Name = "chkUseIE_C"
-        Me.ToolTipValues.SetToolTip(Me.chkUseIE_C, resources.GetString("chkUseIE_C.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkUseIE_C, resources.GetString("chkUseIE_C.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkUseIE_C, resources.GetString("chkUseIE_C.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkUseIE_C, resources.GetString("chkUseIE_C.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkUseIE_C, resources.GetString("chkUseIE_C.ToolTip2"))
         Me.chkUseIE_C.UseVisualStyleBackColor = True
         '
         'chkUseIE_VF
         '
         resources.ApplyResources(Me.chkUseIE_VF, "chkUseIE_VF")
         Me.chkUseIE_VF.Name = "chkUseIE_VF"
-        Me.ToolTipValues.SetToolTip(Me.chkUseIE_VF, resources.GetString("chkUseIE_VF.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkUseIE_VF, resources.GetString("chkUseIE_VF.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkUseIE_VF, resources.GetString("chkUseIE_VF.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkUseIE_VF, resources.GetString("chkUseIE_VF.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkUseIE_VF, resources.GetString("chkUseIE_VF.ToolTip2"))
         Me.chkUseIE_VF.UseVisualStyleBackColor = True
         '
         'chkUseIE_LF
         '
         resources.ApplyResources(Me.chkUseIE_LF, "chkUseIE_LF")
         Me.chkUseIE_LF.Name = "chkUseIE_LF"
-        Me.ToolTipValues.SetToolTip(Me.chkUseIE_LF, resources.GetString("chkUseIE_LF.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkUseIE_LF, resources.GetString("chkUseIE_LF.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkUseIE_LF, resources.GetString("chkUseIE_LF.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkUseIE_LF, resources.GetString("chkUseIE_LF.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkUseIE_LF, resources.GetString("chkUseIE_LF.ToolTip2"))
         Me.chkUseIE_LF.UseVisualStyleBackColor = True
         '
         'chkUseIE_T
         '
         resources.ApplyResources(Me.chkUseIE_T, "chkUseIE_T")
         Me.chkUseIE_T.Name = "chkUseIE_T"
-        Me.ToolTipValues.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip2"))
         Me.chkUseIE_T.UseVisualStyleBackColor = True
         '
         'TabSolverBP
@@ -787,23 +858,26 @@ Partial Class EditingForm_Column
         Me.TabSolverBP.Controls.Add(Me.Label3)
         Me.TabSolverBP.Controls.Add(Me.tbBPStopAtIter)
         Me.TabSolverBP.Name = "TabSolverBP"
-        Me.ToolTip1.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip2"))
         Me.TabSolverBP.UseVisualStyleBackColor = True
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
         '
         'tbBPStopAtIter
         '
         resources.ApplyResources(Me.tbBPStopAtIter, "tbBPStopAtIter")
         Me.tbBPStopAtIter.Name = "tbBPStopAtIter"
-        Me.ToolTip1.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip2"))
         '
         'TabSolverNS
         '
@@ -818,23 +892,26 @@ Partial Class EditingForm_Column
         Me.TabSolverNS.Controls.Add(Me.Label21)
         Me.TabSolverNS.Controls.Add(Me.Label20)
         Me.TabSolverNS.Name = "TabSolverNS"
-        Me.ToolTip1.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip2"))
         Me.TabSolverNS.UseVisualStyleBackColor = True
         '
         'tb_NS_NumDeriv
         '
         resources.ApplyResources(Me.tb_NS_NumDeriv, "tb_NS_NumDeriv")
         Me.tb_NS_NumDeriv.Name = "tb_NS_NumDeriv"
-        Me.ToolTip1.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip2"))
         '
         'Label28
         '
         resources.ApplyResources(Me.Label28, "Label28")
         Me.Label28.Name = "Label28"
-        Me.ToolTipValues.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip2"))
         '
         'cbMinMethodNS
         '
@@ -845,49 +922,56 @@ Partial Class EditingForm_Column
         Me.cbMinMethodNS.Name = "cbMinMethodNS"
         Me.ToolTip1.SetToolTip(Me.cbMinMethodNS, resources.GetString("cbMinMethodNS.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbMinMethodNS, resources.GetString("cbMinMethodNS.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbMinMethodNS, resources.GetString("cbMinMethodNS.ToolTip2"))
         '
         'Label25
         '
         resources.ApplyResources(Me.Label25, "Label25")
         Me.Label25.Name = "Label25"
-        Me.ToolTipValues.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip2"))
         '
         'tb_NS_UpperBound
         '
         resources.ApplyResources(Me.tb_NS_UpperBound, "tb_NS_UpperBound")
         Me.tb_NS_UpperBound.Name = "tb_NS_UpperBound"
-        Me.ToolTip1.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip2"))
         '
         'tb_NS_LowerBound
         '
         resources.ApplyResources(Me.tb_NS_LowerBound, "tb_NS_LowerBound")
         Me.tb_NS_LowerBound.Name = "tb_NS_LowerBound"
-        Me.ToolTip1.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip2"))
         '
         'cbNSPreconditioning
         '
         resources.ApplyResources(Me.cbNSPreconditioning, "cbNSPreconditioning")
         Me.cbNSPreconditioning.Name = "cbNSPreconditioning"
-        Me.ToolTipValues.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip2"))
         Me.cbNSPreconditioning.UseVisualStyleBackColor = True
         '
         'Label21
         '
         resources.ApplyResources(Me.Label21, "Label21")
         Me.Label21.Name = "Label21"
-        Me.ToolTipValues.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip2"))
         '
         'Label20
         '
         resources.ApplyResources(Me.Label20, "Label20")
         Me.Label20.Name = "Label20"
-        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
         '
         'TabSolverIO
         '
@@ -903,23 +987,26 @@ Partial Class EditingForm_Column
         Me.TabSolverIO.Controls.Add(Me.chkIOAverageKb)
         Me.TabSolverIO.Controls.Add(Me.chkIOAdjustSb)
         Me.TabSolverIO.Name = "TabSolverIO"
-        Me.ToolTip1.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip2"))
         Me.TabSolverIO.UseVisualStyleBackColor = True
         '
         'tb_IO_NumDeriv
         '
         resources.ApplyResources(Me.tb_IO_NumDeriv, "tb_IO_NumDeriv")
         Me.tb_IO_NumDeriv.Name = "tb_IO_NumDeriv"
-        Me.ToolTip1.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip2"))
         '
         'Label29
         '
         resources.ApplyResources(Me.Label29, "Label29")
         Me.Label29.Name = "Label29"
-        Me.ToolTipValues.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip2"))
         '
         'cbMinMethodIO
         '
@@ -930,56 +1017,64 @@ Partial Class EditingForm_Column
         Me.cbMinMethodIO.Name = "cbMinMethodIO"
         Me.ToolTip1.SetToolTip(Me.cbMinMethodIO, resources.GetString("cbMinMethodIO.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbMinMethodIO, resources.GetString("cbMinMethodIO.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbMinMethodIO, resources.GetString("cbMinMethodIO.ToolTip2"))
         '
         'Label26
         '
         resources.ApplyResources(Me.Label26, "Label26")
         Me.Label26.Name = "Label26"
-        Me.ToolTipValues.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip2"))
         '
         'tb_IO_UpperBound
         '
         resources.ApplyResources(Me.tb_IO_UpperBound, "tb_IO_UpperBound")
         Me.tb_IO_UpperBound.Name = "tb_IO_UpperBound"
-        Me.ToolTip1.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip2"))
         '
         'tb_IO_LowerBound
         '
         resources.ApplyResources(Me.tb_IO_LowerBound, "tb_IO_LowerBound")
         Me.tb_IO_LowerBound.Name = "tb_IO_LowerBound"
-        Me.ToolTip1.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip2"))
         '
         'Label22
         '
         resources.ApplyResources(Me.Label22, "Label22")
         Me.Label22.Name = "Label22"
-        Me.ToolTipValues.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip2"))
         '
         'Label23
         '
         resources.ApplyResources(Me.Label23, "Label23")
         Me.Label23.Name = "Label23"
-        Me.ToolTipValues.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip2"))
         '
         'chkIOAverageKb
         '
         resources.ApplyResources(Me.chkIOAverageKb, "chkIOAverageKb")
         Me.chkIOAverageKb.Name = "chkIOAverageKb"
-        Me.ToolTipValues.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip2"))
         Me.chkIOAverageKb.UseVisualStyleBackColor = True
         '
         'chkIOAdjustSb
         '
         resources.ApplyResources(Me.chkIOAdjustSb, "chkIOAdjustSb")
         Me.chkIOAdjustSb.Name = "chkIOAdjustSb"
-        Me.ToolTipValues.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip2"))
         Me.chkIOAdjustSb.UseVisualStyleBackColor = True
         '
         'GroupBox6
@@ -988,8 +1083,9 @@ Partial Class EditingForm_Column
         Me.GroupBox6.Controls.Add(Me.tabstrip1)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip2"))
         '
         'tabstrip1
         '
@@ -997,8 +1093,9 @@ Partial Class EditingForm_Column
         Me.tabstrip1.Controls.Add(Me.TabPage1)
         Me.tabstrip1.Name = "tabstrip1"
         Me.tabstrip1.SelectedIndex = 0
-        Me.ToolTipValues.SetToolTip(Me.tabstrip1, resources.GetString("tabstrip1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tabstrip1, resources.GetString("tabstrip1.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.tabstrip1, resources.GetString("tabstrip1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.tabstrip1, resources.GetString("tabstrip1.ToolTip2"))
         '
         'TabPage1
         '
@@ -1006,16 +1103,18 @@ Partial Class EditingForm_Column
         Me.TabPage1.Controls.Add(Me.btnResults)
         Me.TabPage1.Controls.Add(Me.gridResults)
         Me.TabPage1.Name = "TabPage1"
-        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip2"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'btnResults
         '
         resources.ApplyResources(Me.btnResults, "btnResults")
         Me.btnResults.Name = "btnResults"
-        Me.ToolTipValues.SetToolTip(Me.btnResults, resources.GetString("btnResults.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnResults, resources.GetString("btnResults.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnResults, resources.GetString("btnResults.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnResults, resources.GetString("btnResults.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnResults, resources.GetString("btnResults.ToolTip2"))
         Me.btnResults.UseVisualStyleBackColor = True
         '
         'gridResults
@@ -1029,8 +1128,9 @@ Partial Class EditingForm_Column
         Me.gridResults.Name = "gridResults"
         Me.gridResults.ReadOnly = True
         Me.gridResults.RowHeadersVisible = False
-        Me.ToolTipValues.SetToolTip(Me.gridResults, resources.GetString("gridResults.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.gridResults, resources.GetString("gridResults.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.gridResults, resources.GetString("gridResults.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.gridResults, resources.GetString("gridResults.ToolTip2"))
         '
         'DataGridViewTextBoxColumn1
         '
@@ -1059,6 +1159,11 @@ Partial Class EditingForm_Column
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
+        '
         'EditingForm_Column
         '
         resources.ApplyResources(Me, "$this")
@@ -1068,8 +1173,9 @@ Partial Class EditingForm_Column
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Column"
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1200,4 +1306,5 @@ Partial Class EditingForm_Column
     Public WithEvents lblTemperatureUnit As Label
     Public WithEvents Label30 As Label
     Public WithEvents tbMaxTChange As TextBox
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

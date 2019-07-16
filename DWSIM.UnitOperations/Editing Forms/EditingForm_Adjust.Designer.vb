@@ -53,6 +53,7 @@ Partial Class EditingForm_Adjust
         Me.cbSourceObj = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -67,13 +68,11 @@ Partial Class EditingForm_Adjust
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
-        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -81,13 +80,13 @@ Partial Class EditingForm_Adjust
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
-        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox4
         '
@@ -95,17 +94,15 @@ Partial Class EditingForm_Adjust
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'rtbAnnotations
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
         '
         'GroupBox2
         '
@@ -119,50 +116,42 @@ Partial Class EditingForm_Adjust
         Me.GroupBox2.Controls.Add(Me.chkSolveGlobal)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'tbTolerance
         '
         resources.ApplyResources(Me.tbTolerance, "tbTolerance")
         Me.tbTolerance.Name = "tbTolerance"
-        Me.ToolTip1.SetToolTip(Me.tbTolerance, resources.GetString("tbTolerance.ToolTip"))
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
-        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'lblSPUnits
         '
         resources.ApplyResources(Me.lblSPUnits, "lblSPUnits")
         Me.lblSPUnits.Name = "lblSPUnits"
-        Me.ToolTip1.SetToolTip(Me.lblSPUnits, resources.GetString("lblSPUnits.ToolTip"))
         '
         'btnOpenControlPanel
         '
         resources.ApplyResources(Me.btnOpenControlPanel, "btnOpenControlPanel")
         Me.btnOpenControlPanel.Name = "btnOpenControlPanel"
-        Me.ToolTip1.SetToolTip(Me.btnOpenControlPanel, resources.GetString("btnOpenControlPanel.ToolTip"))
         Me.btnOpenControlPanel.UseVisualStyleBackColor = True
         '
         'tbSetPoint
         '
         resources.ApplyResources(Me.tbSetPoint, "tbSetPoint")
         Me.tbSetPoint.Name = "tbSetPoint"
-        Me.ToolTip1.SetToolTip(Me.tbSetPoint, resources.GetString("tbSetPoint.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'chkSolveGlobal
         '
         resources.ApplyResources(Me.chkSolveGlobal, "chkSolveGlobal")
         Me.chkSolveGlobal.Name = "chkSolveGlobal"
-        Me.ToolTip1.SetToolTip(Me.chkSolveGlobal, resources.GetString("chkSolveGlobal.ToolTip"))
         Me.chkSolveGlobal.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -182,37 +171,31 @@ Partial Class EditingForm_Adjust
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'lblTargetVal
         '
         resources.ApplyResources(Me.lblTargetVal, "lblTargetVal")
         Me.lblTargetVal.Name = "lblTargetVal"
-        Me.ToolTip1.SetToolTip(Me.lblTargetVal, resources.GetString("lblTargetVal.ToolTip"))
         '
         'lblSourceVal
         '
         resources.ApplyResources(Me.lblSourceVal, "lblSourceVal")
         Me.lblSourceVal.Name = "lblSourceVal"
-        Me.ToolTip1.SetToolTip(Me.lblSourceVal, resources.GetString("lblSourceVal.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
-        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'cbTargetProp
         '
@@ -220,7 +203,6 @@ Partial Class EditingForm_Adjust
         Me.cbTargetProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetProp.FormattingEnabled = True
         Me.cbTargetProp.Name = "cbTargetProp"
-        Me.ToolTip1.SetToolTip(Me.cbTargetProp, resources.GetString("cbTargetProp.ToolTip"))
         '
         'cbTargetObj
         '
@@ -228,19 +210,16 @@ Partial Class EditingForm_Adjust
         Me.cbTargetObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetObj.FormattingEnabled = True
         Me.cbTargetObj.Name = "cbTargetObj"
-        Me.ToolTip1.SetToolTip(Me.cbTargetObj, resources.GetString("cbTargetObj.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
-        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
-        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'cbSourceProp
         '
@@ -248,7 +227,6 @@ Partial Class EditingForm_Adjust
         Me.cbSourceProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceProp.FormattingEnabled = True
         Me.cbSourceProp.Name = "cbSourceProp"
-        Me.ToolTip1.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip"))
         '
         'cbSourceObj
         '
@@ -256,13 +234,16 @@ Partial Class EditingForm_Adjust
         Me.cbSourceObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceObj.FormattingEnabled = True
         Me.cbSourceObj.Name = "cbSourceObj"
-        Me.ToolTip1.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
-        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'EditingForm_Adjust
         '
@@ -273,7 +254,6 @@ Partial Class EditingForm_Adjust
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Adjust"
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -312,4 +292,5 @@ Partial Class EditingForm_Adjust
     Public WithEvents lblSPUnits As System.Windows.Forms.Label
     Public WithEvents tbTolerance As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

@@ -96,6 +96,7 @@ Partial Class EditingForm_Vessel
         Me.UtilitiesCtxMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddUtilityTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.sizingtsmi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -156,6 +157,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip1"))
         Me.btnCreateAndConnectEnergy.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet3
@@ -164,6 +166,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectOutlet3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet3.Name = "btnCreateAndConnectOutlet3"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet3, resources.GetString("btnCreateAndConnectOutlet3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet3, resources.GetString("btnCreateAndConnectOutlet3.ToolTip1"))
         Me.btnCreateAndConnectOutlet3.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet2
@@ -172,6 +175,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectOutlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet2.Name = "btnCreateAndConnectOutlet2"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip1"))
         Me.btnCreateAndConnectOutlet2.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet1
@@ -180,6 +184,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet6
@@ -188,6 +193,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectInlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet6.Name = "btnCreateAndConnectInlet6"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip1"))
         Me.btnCreateAndConnectInlet6.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet5
@@ -196,6 +202,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectInlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet5.Name = "btnCreateAndConnectInlet5"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip1"))
         Me.btnCreateAndConnectInlet5.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet4
@@ -204,6 +211,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectInlet4.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet4.Name = "btnCreateAndConnectInlet4"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip1"))
         Me.btnCreateAndConnectInlet4.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet3
@@ -212,6 +220,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectInlet3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet3.Name = "btnCreateAndConnectInlet3"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip1"))
         Me.btnCreateAndConnectInlet3.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet2
@@ -220,6 +229,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectInlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet2.Name = "btnCreateAndConnectInlet2"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip1"))
         Me.btnCreateAndConnectInlet2.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -228,6 +238,7 @@ Partial Class EditingForm_Vessel
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectEnergy
@@ -236,6 +247,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnectEnergy.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectEnergy.Name = "btnDisconnectEnergy"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip1"))
         Me.btnDisconnectEnergy.UseVisualStyleBackColor = True
         '
         'Label16
@@ -256,6 +268,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnectOutlet3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet3.Name = "btnDisconnectOutlet3"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet3, resources.GetString("btnDisconnectOutlet3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet3, resources.GetString("btnDisconnectOutlet3.ToolTip1"))
         Me.btnDisconnectOutlet3.UseVisualStyleBackColor = True
         '
         'Label15
@@ -276,6 +289,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnectOutlet2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet2.Name = "btnDisconnectOutlet2"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip1"))
         Me.btnDisconnectOutlet2.UseVisualStyleBackColor = True
         '
         'Label14
@@ -296,6 +310,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnect6
@@ -304,6 +319,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnect6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect6.Name = "btnDisconnect6"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip1"))
         Me.btnDisconnect6.UseVisualStyleBackColor = True
         '
         'btnDisconnect5
@@ -312,6 +328,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnect5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect5.Name = "btnDisconnect5"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip1"))
         Me.btnDisconnect5.UseVisualStyleBackColor = True
         '
         'btnDisconnect4
@@ -320,6 +337,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnect4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect4.Name = "btnDisconnect4"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect4, resources.GetString("btnDisconnect4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect4, resources.GetString("btnDisconnect4.ToolTip1"))
         Me.btnDisconnect4.UseVisualStyleBackColor = True
         '
         'btnDisconnect3
@@ -328,6 +346,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnect3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect3.Name = "btnDisconnect3"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect3, resources.GetString("btnDisconnect3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect3, resources.GetString("btnDisconnect3.ToolTip1"))
         Me.btnDisconnect3.UseVisualStyleBackColor = True
         '
         'btnDisconnect2
@@ -336,6 +355,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnect2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect2.Name = "btnDisconnect2"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect2, resources.GetString("btnDisconnect2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect2, resources.GetString("btnDisconnect2.ToolTip1"))
         Me.btnDisconnect2.UseVisualStyleBackColor = True
         '
         'btnDisconnect1
@@ -344,6 +364,7 @@ Partial Class EditingForm_Vessel
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'Label7
@@ -515,6 +536,7 @@ Partial Class EditingForm_Vessel
         Me.btnUtils.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_sparkle
         Me.btnUtils.Name = "btnUtils"
         Me.ToolTip1.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip1"))
         Me.btnUtils.UseVisualStyleBackColor = True
         '
         'lblTag
@@ -528,6 +550,7 @@ Partial Class EditingForm_Vessel
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
@@ -566,7 +589,7 @@ Partial Class EditingForm_Vessel
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -589,6 +612,7 @@ Partial Class EditingForm_Vessel
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
         Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
@@ -597,6 +621,7 @@ Partial Class EditingForm_Vessel
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
@@ -641,6 +666,11 @@ Partial Class EditingForm_Vessel
         Me.sizingtsmi.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.sizingtsmi.Name = "sizingtsmi"
         resources.ApplyResources(Me.sizingtsmi, "sizingtsmi")
+        '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'EditingForm_Vessel
         '
@@ -738,4 +768,5 @@ Partial Class EditingForm_Vessel
     Public WithEvents UtilitiesCtxMenu As System.Windows.Forms.ContextMenuStrip
     Public WithEvents AddUtilityTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents sizingtsmi As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

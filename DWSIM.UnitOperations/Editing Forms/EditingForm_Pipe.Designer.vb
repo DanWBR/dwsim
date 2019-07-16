@@ -25,9 +25,9 @@ Partial Class EditingForm_Pipe
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Pipe))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -88,6 +88,7 @@ Partial Class EditingForm_Pipe
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -122,8 +123,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.chkActive, "chkActive")
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
-        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
@@ -225,8 +226,8 @@ Partial Class EditingForm_Pipe
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
-        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
         '
         'tbTtol
         '
@@ -245,8 +246,8 @@ Partial Class EditingForm_Pipe
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
-        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
         '
         'cbPtol
         '
@@ -266,8 +267,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.information
         Me.Button1.Name = "Button1"
-        Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip1"))
         Me.Button1.UseVisualStyleBackColor = True
         '
         'btnConfigureFlashAlg
@@ -275,8 +276,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'chkIncludeJT
@@ -290,8 +291,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbPDropModel
@@ -391,8 +392,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnCreateAndConnectEnergy, "btnCreateAndConnectEnergy")
         Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
-        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip1"))
         Me.btnCreateAndConnectEnergy.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet1
@@ -400,8 +401,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
-        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -409,8 +410,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnCreateAndConnectInlet1, "btnCreateAndConnectInlet1")
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
-        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectEnergy
@@ -418,8 +419,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnDisconnectEnergy, "btnDisconnectEnergy")
         Me.btnDisconnectEnergy.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectEnergy.Name = "btnDisconnectEnergy"
-        Me.ToolTipValues.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip1"))
         Me.btnDisconnectEnergy.UseVisualStyleBackColor = True
         '
         'Label14
@@ -439,8 +440,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnDisconnectOutlet1, "btnDisconnectOutlet1")
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
-        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnect1
@@ -448,8 +449,8 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.btnDisconnect1, "btnDisconnect1")
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect1.Name = "btnDisconnect1"
-        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'Label7
@@ -513,8 +514,8 @@ Partial Class EditingForm_Pipe
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -522,8 +523,8 @@ Partial Class EditingForm_Pipe
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -531,8 +532,8 @@ Partial Class EditingForm_Pipe
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -549,6 +550,11 @@ Partial Class EditingForm_Pipe
         resources.ApplyResources(Me.TabPage3, "TabPage3")
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'EditingForm_Pipe
         '
@@ -634,4 +640,5 @@ Partial Class EditingForm_Pipe
     Public WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToolTipChangeTag As ToolTip
 End Class
