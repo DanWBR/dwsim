@@ -36,6 +36,8 @@ Partial Class EditingForm_Recycle
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.tbMaxIts = New System.Windows.Forms.TextBox()
         Me.chkGlobalBroyden = New System.Windows.Forms.CheckBox()
         Me.cbP = New System.Windows.Forms.ComboBox()
         Me.tbPT = New System.Windows.Forms.TextBox()
@@ -80,11 +82,17 @@ Partial Class EditingForm_Recycle
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip2"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTipValues.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip2"))
         '
         'chkActive
         '
@@ -92,33 +100,49 @@ Partial Class EditingForm_Recycle
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip2"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip2"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip2"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip2"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip2"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
         'GroupBox4
         '
@@ -126,27 +150,58 @@ Partial Class EditingForm_Recycle
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip2"))
         '
         'rtbAnnotations
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
-    "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.17763}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
+        Me.ToolTipValues.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip2"))
         '
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.tbMaxIts)
         Me.GroupBox2.Controls.Add(Me.chkGlobalBroyden)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip2"))
+        '
+        'tbMaxIts
+        '
+        resources.ApplyResources(Me.tbMaxIts, "tbMaxIts")
+        Me.tbMaxIts.Name = "tbMaxIts"
+        Me.ToolTipValues.SetToolTip(Me.tbMaxIts, resources.GetString("tbMaxIts.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbMaxIts, resources.GetString("tbMaxIts.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbMaxIts, resources.GetString("tbMaxIts.ToolTip2"))
         '
         'chkGlobalBroyden
         '
         resources.ApplyResources(Me.chkGlobalBroyden, "chkGlobalBroyden")
         Me.chkGlobalBroyden.Name = "chkGlobalBroyden"
+        Me.ToolTip1.SetToolTip(Me.chkGlobalBroyden, resources.GetString("chkGlobalBroyden.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkGlobalBroyden, resources.GetString("chkGlobalBroyden.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkGlobalBroyden, resources.GetString("chkGlobalBroyden.ToolTip2"))
         Me.chkGlobalBroyden.UseVisualStyleBackColor = True
         '
         'cbP
@@ -156,16 +211,25 @@ Partial Class EditingForm_Recycle
         Me.cbP.FormattingEnabled = True
         Me.cbP.Items.AddRange(New Object() {resources.GetString("cbP.Items"), resources.GetString("cbP.Items1"), resources.GetString("cbP.Items2")})
         Me.cbP.Name = "cbP"
+        Me.ToolTip1.SetToolTip(Me.cbP, resources.GetString("cbP.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbP, resources.GetString("cbP.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbP, resources.GetString("cbP.ToolTip2"))
         '
         'tbPT
         '
         resources.ApplyResources(Me.tbPT, "tbPT")
         Me.tbPT.Name = "tbPT"
+        Me.ToolTipValues.SetToolTip(Me.tbPT, resources.GetString("tbPT.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbPT, resources.GetString("tbPT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbPT, resources.GetString("tbPT.ToolTip2"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip2"))
         '
         'cbT
         '
@@ -174,16 +238,25 @@ Partial Class EditingForm_Recycle
         Me.cbT.FormattingEnabled = True
         Me.cbT.Items.AddRange(New Object() {resources.GetString("cbT.Items"), resources.GetString("cbT.Items1"), resources.GetString("cbT.Items2")})
         Me.cbT.Name = "cbT"
+        Me.ToolTip1.SetToolTip(Me.cbT, resources.GetString("cbT.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbT, resources.GetString("cbT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbT, resources.GetString("cbT.ToolTip2"))
         '
         'tbTT
         '
         resources.ApplyResources(Me.tbTT, "tbTT")
         Me.tbTT.Name = "tbTT"
+        Me.ToolTipValues.SetToolTip(Me.tbTT, resources.GetString("tbTT.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbTT, resources.GetString("tbTT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbTT, resources.GetString("tbTT.ToolTip2"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip2"))
         '
         'cbW
         '
@@ -192,16 +265,25 @@ Partial Class EditingForm_Recycle
         Me.cbW.FormattingEnabled = True
         Me.cbW.Items.AddRange(New Object() {resources.GetString("cbW.Items"), resources.GetString("cbW.Items1"), resources.GetString("cbW.Items2")})
         Me.cbW.Name = "cbW"
+        Me.ToolTip1.SetToolTip(Me.cbW, resources.GetString("cbW.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbW, resources.GetString("cbW.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbW, resources.GetString("cbW.ToolTip2"))
         '
         'tbWT
         '
         resources.ApplyResources(Me.tbWT, "tbWT")
         Me.tbWT.Name = "tbWT"
+        Me.ToolTipValues.SetToolTip(Me.tbWT, resources.GetString("tbWT.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbWT, resources.GetString("tbWT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbWT, resources.GetString("tbWT.ToolTip2"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
         '
         'GroupBox1
         '
@@ -216,6 +298,9 @@ Partial Class EditingForm_Recycle
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
         '
         'btnCreateAndConnectOutlet1
         '
@@ -223,7 +308,8 @@ Partial Class EditingForm_Recycle
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip2"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -232,7 +318,8 @@ Partial Class EditingForm_Recycle
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip2"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet1
@@ -241,7 +328,8 @@ Partial Class EditingForm_Recycle
         Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip2"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnect1
@@ -250,13 +338,17 @@ Partial Class EditingForm_Recycle
         Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip2"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip2"))
         '
         'cbOutlet1
         '
@@ -264,6 +356,9 @@ Partial Class EditingForm_Recycle
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip2"))
         '
         'cbInlet1
         '
@@ -271,11 +366,17 @@ Partial Class EditingForm_Recycle
         Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip2"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip2"))
         '
         'GroupBox3
         '
@@ -294,24 +395,36 @@ Partial Class EditingForm_Recycle
         Me.GroupBox3.Controls.Add(Me.tbTT)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip2"))
         '
         'tbWE
         '
         resources.ApplyResources(Me.tbWE, "tbWE")
         Me.tbWE.Name = "tbWE"
         Me.tbWE.ReadOnly = True
+        Me.ToolTipValues.SetToolTip(Me.tbWE, resources.GetString("tbWE.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbWE, resources.GetString("tbWE.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbWE, resources.GetString("tbWE.ToolTip2"))
         '
         'tbPE
         '
         resources.ApplyResources(Me.tbPE, "tbPE")
         Me.tbPE.Name = "tbPE"
         Me.tbPE.ReadOnly = True
+        Me.ToolTipValues.SetToolTip(Me.tbPE, resources.GetString("tbPE.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbPE, resources.GetString("tbPE.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbPE, resources.GetString("tbPE.ToolTip2"))
         '
         'tbTE
         '
         resources.ApplyResources(Me.tbTE, "tbTE")
         Me.tbTE.Name = "tbTE"
         Me.tbTE.ReadOnly = True
+        Me.ToolTipValues.SetToolTip(Me.tbTE, resources.GetString("tbTE.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbTE, resources.GetString("tbTE.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbTE, resources.GetString("tbTE.ToolTip2"))
         '
         'ToolTipChangeTag
         '
@@ -328,6 +441,9 @@ Partial Class EditingForm_Recycle
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Recycle"
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -376,4 +492,6 @@ Partial Class EditingForm_Recycle
     Public WithEvents tbPE As System.Windows.Forms.TextBox
     Public WithEvents tbTE As System.Windows.Forms.TextBox
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Public WithEvents Label1 As Label
+    Public WithEvents tbMaxIts As TextBox
 End Class

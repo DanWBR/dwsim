@@ -4438,7 +4438,11 @@ Namespace Streams
                         res.Add(Math.Log(Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault))
                     Next
                 Case "volume"
-                    res.Add(Me.Phases(f).Properties.molecularWeight / Me.Phases(f).Properties.density / 1000)
+                    If Not GlobalSettings.Settings.CAPEOPENMode Then
+                        res.Add(Me.Phases(f).Properties.molecularWeight / Me.Phases(f).Properties.density)
+                    Else
+                        res.Add(Me.Phases(f).Properties.molecularWeight / Me.Phases(f).Properties.density / 1000)
+                    End If
                 Case "density"
                     res.Add(Me.Phases(f).Properties.density.GetValueOrDefault)
                 Case "enthalpy", "enthalpynf"

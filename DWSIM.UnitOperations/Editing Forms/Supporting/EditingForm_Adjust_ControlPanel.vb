@@ -99,7 +99,7 @@ Public Class EditingForm_Adjust_ControlPanel
         With myADJ
             If myADJ.Referenced Then
                 If Not rfVal = Nothing Then
-                    adjval = rfVal + cv.ConvertFromSI(.ControlledObject.GetPropertyUnit(.ControlledObjectData.PropertyName, su), .AdjustValue)
+                    adjval = rfVal + cv.ConvertFromSI(.ReferencedObjectData.GetPropertyUnit(.ReferencedObjectData.PropertyName, su), .AdjustValue)
                 Else
                     Me.btnIniciar.Enabled = True
                     Exit Sub
@@ -139,7 +139,7 @@ Public Class EditingForm_Adjust_ControlPanel
                 fi_ant2 = fi_ant
                 fi_ant = fi
                 fi = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
-                    adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
+                adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
 
                 Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
                 Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (cnt + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
@@ -164,7 +164,7 @@ Public Class EditingForm_Adjust_ControlPanel
                 If Me.usemaxmin Then
                     If var <= min Or var >= max Then
                         Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Avarivelmanipuladaat") _
-                                        & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"), _
+                                        & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"),
                                         formC.GetTranslatedString("Limitesdavarivelmani"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                         If msgres = MsgBoxResult.No Then
                             cancelar = True
@@ -188,7 +188,7 @@ Public Class EditingForm_Adjust_ControlPanel
 
                 If fi = fi_ant Then
                     Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Avarivelmanipuladano") _
-                                    & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"), _
+                                    & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"),
                                     formC.GetTranslatedString("Problemasnaconvergnc"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     If msgres = MsgBoxResult.No Then
                         cancelar = True
@@ -197,8 +197,8 @@ Public Class EditingForm_Adjust_ControlPanel
                 End If
 
                 If cnt >= maxit Then
-                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Onmeromximodeiteraes"), _
-                                                    formC.GetTranslatedString("Nmeromximodeiteraesa3"), _
+                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Onmeromximodeiteraes"),
+                                                    formC.GetTranslatedString("Nmeromximodeiteraesa3"),
                                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     If msgres = MsgBoxResult.No Then
                         cancelar = False
@@ -244,8 +244,8 @@ Public Class EditingForm_Adjust_ControlPanel
 
                 cvVal = Me.GetCtlVarValue()
                 f = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
-                    adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
-                Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
+                adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
+
                 Me.lblItXdeY.Text = formC.GetTranslatedString("Procurandosubinterva")
                 Me.tbErro.Text = f
                 py1.Add(adjval)
@@ -257,14 +257,14 @@ Public Class EditingForm_Adjust_ControlPanel
 
                 DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
 
+                Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
+                Me.lblItXdeY.Text = formC.GetTranslatedString("Procurandosubinterva")
                 cvVal = Me.GetCtlVarValue()
                 f_inf = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
                     adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
-                Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
-                Me.lblItXdeY.Text = formC.GetTranslatedString("Procurandosubinterva")
-                Me.tbErro.Text = f_inf
                 py1.Add(adjval)
                 py2.Add(cvVal)
+                Me.tbErro.Text = f_inf
                 AtualizaGrafico()
                 l += 1
                 If l > 5 Then
@@ -278,7 +278,7 @@ Public Class EditingForm_Adjust_ControlPanel
                 End If
                 If f = f_inf Then
                     Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Avarivelmanipuladano") _
-                                    & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"), _
+                                    & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"),
                                     formC.GetTranslatedString("Problemasnaconvergnc"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     If msgres = MsgBoxResult.No Then
                         Me.lblStatus.Text = formC.GetTranslatedString("Ajustecanceladopelou")
@@ -369,6 +369,7 @@ Public Class EditingForm_Adjust_ControlPanel
 
                 cvVal = Me.GetCtlVarValue()
                 fbb = cvVal - adjval
+
                 Me.tbErro.Text = fbb
                 iter2 += 1
 
@@ -379,8 +380,8 @@ Public Class EditingForm_Adjust_ControlPanel
                 AtualizaGrafico()
 
                 If iter2 + l - 1 >= maxit Then
-                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Onmeromximodeiteraes"), _
-                                                    formC.GetTranslatedString("Nmeromximodeiteraesa3"), _
+                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Onmeromximodeiteraes"),
+                                                    formC.GetTranslatedString("Nmeromximodeiteraesa3"),
                                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     If msgres = MsgBoxResult.No Then
                         cancelar = False
@@ -610,11 +611,19 @@ Final3:
                     .Line.IsSmooth = False
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
-                With .AddCurve(formC.GetTranslatedString("VarivelControlada") & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")", New Double() {1}, New Double() {CDbl(py2(0))}, Color.SpringGreen, ZedGraph.SymbolType.Circle)
-                    .Color = Color.SpringGreen
-                    .Line.IsSmooth = False
-                    .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                End With
+                If myADJ.Referenced Then
+                    With .AddCurve("Referenced Variable (" & myADJ.ReferenceObject.GetPropertyUnit(myADJ.ReferencedObjectData.PropertyName, Me.su) & ")", New Double() {1}, New Double() {CDbl(py2(0))}, Color.SpringGreen, ZedGraph.SymbolType.Circle)
+                        .Color = Color.SpringGreen
+                        .Line.IsSmooth = False
+                        .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                    End With
+                Else
+                    With .AddCurve(formC.GetTranslatedString("VarivelControlada") & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")", New Double() {1}, New Double() {CDbl(py2(0))}, Color.SpringGreen, ZedGraph.SymbolType.Circle)
+                        .Color = Color.SpringGreen
+                        .Line.IsSmooth = False
+                        .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                    End With
+                End If
                 With .AddCurve(formC.GetTranslatedString("VarivelManipulada") & " (" & myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, Me.su) & ")", New Double() {1}, New Double() {CDbl(px(0))}, Color.Salmon, ZedGraph.SymbolType.Circle)
                     .Color = Color.Salmon
                     .Line.IsSmooth = False

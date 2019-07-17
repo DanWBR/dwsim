@@ -47,6 +47,9 @@ Public Class EditingForm_Adjust
             cbTargetObj.Items.Clear()
             cbTargetObj.Items.AddRange(objlist)
 
+            cbRefObj.Items.Clear()
+            cbRefObj.Items.AddRange(objlist)
+
             If .ManipulatedObjectData.ID <> "" Then
                 Dim obj = .GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = .ManipulatedObjectData.ID).SingleOrDefault
                 If Not obj Is Nothing Then
@@ -69,6 +72,16 @@ Public Class EditingForm_Adjust
                     End Try
                 End If
             End If
+            If .ReferencedObjectData.ID <> "" Then
+                Dim obj2 = .GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = .ReferencedObjectData.ID).SingleOrDefault
+                If Not obj2 Is Nothing Then
+                    .ReferencedObjectData.Name = obj2.GraphicObject.Tag
+                    cbRefObj.SelectedItem = .ReferencedObjectData.Name
+                    cbRefProp.SelectedItem = .FlowSheet.GetTranslatedString(.ReferencedObjectData.PropertyName)
+                End If
+            End If
+
+            chkUseReferenced.Checked = .Referenced
 
             chkSolveGlobal.Checked = SimObject.SimultaneousAdjust
 
@@ -296,6 +309,69 @@ Public Class EditingForm_Adjust
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
             Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetDisplayName() & ")"
             DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+
+        End If
+
+    End Sub
+
+    Private Sub ChkUseReferenced_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseReferenced.CheckedChanged
+        SimObject.Referenced = chkUseReferenced.Checked
+    End Sub
+
+    Private Sub cbRefObj_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRefObj.SelectedIndexChanged
+
+        If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ReferencedObjectData.ID) Then
+            With SimObject.FlowSheet.SimulationObjects(SimObject.ReferencedObjectData.ID)
+                .IsAdjustAttached = False
+                .AttachedAdjustId = ""
+                .AdjustVarType = Enums.AdjustVarType.None
+            End With
+        End If
+
+        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbRefObj.SelectedItem.ToString).FirstOrDefault
+
+        If Not obj Is Nothing Then
+
+            With Me.SimObject.ReferencedObjectData
+                .ID = obj.Name
+                .Name = obj.GraphicObject.Tag
+            End With
+
+            With obj
+                .IsAdjustAttached = True
+                .AttachedAdjustId = SimObject.Name
+                .AdjustVarType = Enums.AdjustVarType.Controlled
+            End With
+
+            Dim props = obj.GetProperties(Enums.PropertyType.ALL)
+
+            cbRefProp.Items.Clear()
+            For Each p In props
+                cbRefProp.Items.Add(SimObject.FlowSheet.GetTranslatedString(p))
+            Next
+
+            SimObject.ReferenceObject = SimObject.FlowSheet.SimulationObjects(SimObject.ReferencedObjectData.ID)
+            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AdjustGraphic).ConnectedToRv = SimObject.ReferenceObject.GraphicObject
+
+        End If
+
+    End Sub
+
+    Private Sub cbRefProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRefProp.SelectedIndexChanged
+
+        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbRefObj.SelectedItem.ToString).FirstOrDefault
+
+        If Not obj Is Nothing Then
+
+            Dim props = obj.GetProperties(Enums.PropertyType.ALL)
+
+            For Each p In props
+                If SimObject.FlowSheet.GetTranslatedString(p) = cbRefProp.SelectedItem.ToString Then
+                    SimObject.ReferencedObjectData.PropertyName = p
+                    lblRefVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - su.Converter.ConvertFromSI(obj.GetPropertyUnit(p, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
+                    Exit For
+                End If
+            Next
 
         End If
 

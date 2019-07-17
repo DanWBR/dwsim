@@ -1955,7 +1955,7 @@ Label_00CC:
         AvailablePropertyPackages.Add(GSLKPP.ComponentName.ToString, GSLKPP)
 
         Dim RPP As RaoultPropertyPackage = New RaoultPropertyPackage()
-        RPP.ComponentName = "Ideal (Raoult's Law)"
+        RPP.ComponentName = "Raoult's Law"
         AvailablePropertyPackages.Add(RPP.ComponentName.ToString, RPP)
 
         Dim LKPPP As LKPPropertyPackage = New LKPPropertyPackage()

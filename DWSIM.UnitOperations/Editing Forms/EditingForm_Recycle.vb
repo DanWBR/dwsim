@@ -106,6 +106,8 @@ Public Class EditingForm_Recycle
 
             If .AccelerationMethod = Enums.AccelMethod.GlobalBroyden Then chkGlobalBroyden.Checked = True Else chkGlobalBroyden.Checked = False
 
+            tbMaxIts.Text = .MaximumIterations
+
         End With
 
         Loaded = True
@@ -137,6 +139,7 @@ Public Class EditingForm_Recycle
         If sender Is tbTT Then SimObject.ConvergenceParameters.Temperatura = su.Converter.ConvertToSI(cbT.SelectedItem.ToString, tbTT.Text.ParseExpressionToDouble)
         If sender Is tbWT Then SimObject.ConvergenceParameters.VazaoMassica = su.Converter.ConvertToSI(cbW.SelectedItem.ToString, tbWT.Text.ParseExpressionToDouble)
         If sender Is tbPT Then SimObject.ConvergenceParameters.Pressao = su.Converter.ConvertToSI(cbP.SelectedItem.ToString, tbPT.Text.ParseExpressionToDouble)
+        If sender Is tbMaxIts Then SimObject.MaximumIterations = Integer.Parse(tbMaxIts.Text)
 
     End Sub
 
@@ -146,7 +149,7 @@ Public Class EditingForm_Recycle
 
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbWT.TextChanged, tbTT.TextChanged, tbPT.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbWT.TextChanged, tbTT.TextChanged, tbPT.TextChanged, tbMaxIts.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -158,7 +161,7 @@ Public Class EditingForm_Recycle
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbWT.KeyDown, tbTT.KeyDown, tbPT.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbWT.KeyDown, tbTT.KeyDown, tbPT.KeyDown, tbMaxIts.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
