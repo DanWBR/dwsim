@@ -142,6 +142,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             s.CreateAndAddLabelRow(container, "Manipulated Object");
 
             DropDown spin1 = null, spin2 = null;
+            Label lblMv = null, lblCv = null, lblRv = null;
 
             spin1 = s.CreateAndAddDropDownRow(container, "Manipulated Object", objlist, 0, (sender, e) =>
             {
@@ -188,13 +189,13 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 if (sender.SelectedIndex > 0)
                 {
                     adjust.ManipulatedObjectData.PropertyName = proplist[sender.SelectedIndex];
+                    var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ManipulatedObjectData.ID];
+                    var currval = Convert.ToDouble(obj.GetPropertyValue(proplist[sender.SelectedIndex], su)).ToString(nf) + " " + obj.GetPropertyUnit(proplist[sender.SelectedIndex], su);
+                    lblMv.Text = "Current Value: " + currval;
                 }
             });
 
-            if (adjust.ManipulatedObjectData.ID != "" && adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ManipulatedObjectData.ID))
-            {
-                spin1.SelectedIndex = (objlist.IndexOf(adjust.GetFlowsheet().SimulationObjects[adjust.ManipulatedObjectData.ID].GraphicObject.Tag));
-            }
+            lblMv = s.CreateAndAddLabelRow2(container, "");
 
             List<string> proplist2 = new List<string>();
 
@@ -241,8 +242,6 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 }
             });
 
-            Label txtval = null;
-
             spin4 = s.CreateAndAddDropDownRow(container, "Controlled Property", proplist2, 0, (sender, e) =>
             {
                 if (sender.SelectedIndex > 0)
@@ -250,15 +249,19 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                     adjust.ControlledObjectData.PropertyName = proplist2[sender.SelectedIndex];
                     var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ControlledObjectData.ID];
                     var currval = Convert.ToDouble(obj.GetPropertyValue(proplist2[sender.SelectedIndex], su)).ToString(nf) + " " + obj.GetPropertyUnit(proplist2[sender.SelectedIndex], su);
-                    txtval.Text = "Current Value: " + currval;
+                    lblCv.Text = "Current Value: " + currval;
                 }
             });
+
+            lblCv = s.CreateAndAddLabelRow2(container, "");
 
             List<string> proplist3 = new List<string>();
 
             s.CreateAndAddLabelRow(container, "Referenced Object");
 
             s.CreateAndAddCheckBoxRow(container, "Use Referenced Object", adjust.Referenced, (sender, e) => { adjust.Referenced = sender.Checked.GetValueOrDefault(); });
+
+            s.CreateAndAddDescriptionRow(container, "When a Reference Object is used, the Adjust/Controller block will change the Manipulated Variable so the Controlled Variable matches the Referenced value plus/minus the defined Set-Point/Offset.");
 
             DropDown spin5 = null, spin6 = null;
 
@@ -301,18 +304,20 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 }
             });
 
-            spin4 = s.CreateAndAddDropDownRow(container, "Referenced Property", proplist3, 0, (sender, e) =>
+            spin6 = s.CreateAndAddDropDownRow(container, "Referenced Property", proplist3, 0, (sender, e) =>
             {
                 if (sender.SelectedIndex > 0)
                 {
                     adjust.ReferencedObjectData.PropertyName = proplist3[sender.SelectedIndex];
                     var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ReferencedObjectData.ID];
                     var currval = Convert.ToDouble(obj.GetPropertyValue(proplist3[sender.SelectedIndex], su)).ToString(nf) + " " + obj.GetPropertyUnit(proplist3[sender.SelectedIndex], su);
-                    if (adjust.Referenced) txtval.Text = "Current Value: " + currval;
+                    lblRv.Text = "Current Value: " + currval;
                 }
             });
 
-            txtval = s.CreateAndAddLabelRow(container, "Current Value: N/A");
+            lblRv = s.CreateAndAddLabelRow2(container, "");
+
+            s.CreateAndAddLabelRow(container, "Controller Parameters");
 
             var txtvalue = s.CreateAndAddTextBoxRow(container, nf, "Set-Point/Offset", 0.0f, (sender, e) =>
             {
@@ -321,16 +326,44 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                     var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ControlledObjectData.ID];
                     if (s.IsValidDouble(sender.Text))
                     {
-                        adjust.AdjustValue = cv.ConvertToSI(obj.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su), Double.Parse(sender.Text));
+                        if (adjust.Referenced)
+                        {
+                            obj = adjust.GetFlowsheet().SimulationObjects[adjust.ReferencedObjectData.ID];
+                            var punit = obj.GetPropertyUnit(adjust.ReferencedObjectData.PropertyName, su);
+                            if (su.GetUnitType(punit) == UnitOfMeasure.temperature)
+                            {
+                                adjust.AdjustValue = cv.ConvertToSI(punit + ".", Double.Parse(sender.Text));
+                            }
+                            else
+                            {
+                                adjust.AdjustValue = cv.ConvertToSI(punit, Double.Parse(sender.Text));
+                            }
+                        }
+                        else
+                        {
+                            adjust.AdjustValue = cv.ConvertToSI(obj.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su), Double.Parse(sender.Text));
+                        }
                     }
                 }
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)adjust.GetFlowsheet()).HighLevelSolve.Invoke(); });
+
+            if (adjust.ManipulatedObjectData.ID != "" && adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ManipulatedObjectData.ID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(adjust.GetFlowsheet().SimulationObjects[adjust.ManipulatedObjectData.ID].GraphicObject.Tag));
+            }
 
             if (adjust.ControlledObjectData.ID != "" && adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ControlledObjectData.ID))
             {
                 spin3.SelectedIndex = (objlist.IndexOf(adjust.GetFlowsheet().SimulationObjects[adjust.ControlledObjectData.ID].GraphicObject.Tag));
                 var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ControlledObjectData.ID];
                 txtvalue.Text = cv.ConvertFromSI(obj.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su), adjust.AdjustValue).ToString(nf);
+            }
+
+            if (adjust.ReferencedObjectData.ID != "" && adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ReferencedObjectData.ID))
+            {
+                spin5.SelectedIndex = (objlist.IndexOf(adjust.GetFlowsheet().SimulationObjects[adjust.ReferencedObjectData.ID].GraphicObject.Tag));
+                var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ReferencedObjectData.ID];
+                txtvalue.Text = cv.ConvertFromSI(obj.GetPropertyUnit(adjust.ReferencedObjectData.PropertyName, su), adjust.AdjustValue).ToString(nf);
             }
 
             s.CreateAndAddCheckBoxRow(container, "Run with the Simultaneous Adjust Solver", adjust.SimultaneousAdjust, (sender, e) => adjust.SimultaneousAdjust = sender.Checked.GetValueOrDefault());
