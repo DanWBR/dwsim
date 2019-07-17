@@ -70,6 +70,10 @@ Public Class EditingForm_Adjust
                         tbSetPoint.Text = su.Converter.ConvertFromSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(SimObject.AdjustValue)).ToString(nf)
                     Catch ex As Exception
                     End Try
+                    lblTargetVal.Text = Convert.ToDouble(obj2.GetPropertyValue(SimObject.ControlledObjectData.PropertyName, units)).ToString(nf) &
+                        " (" & (Convert.ToDouble(obj2.GetPropertyValue(SimObject.ControlledObjectData.PropertyName, units)) -
+                        su.Converter.ConvertFromSI(obj2.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") &
+                        ") " & obj2.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units)
                 End If
             End If
             If .ReferencedObjectData.ID <> "" Then
@@ -78,6 +82,26 @@ Public Class EditingForm_Adjust
                     .ReferencedObjectData.Name = obj2.GraphicObject.Tag
                     cbRefObj.SelectedItem = .ReferencedObjectData.Name
                     cbRefProp.SelectedItem = .FlowSheet.GetTranslatedString(.ReferencedObjectData.PropertyName)
+                    If .Referenced Then
+                        Try
+                            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+                            Dim objr = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbRefObj.SelectedItem.ToString).FirstOrDefault
+                            Dim punit = obj.GetPropertyUnit(SimObject.ReferencedObjectData.PropertyName, units)
+                            Dim value As Double = 0.0
+                            If units.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
+                                value = su.Converter.ConvertFromSI(punit & ".", Double.Parse(SimObject.AdjustValue))
+                            Else
+                                value = su.Converter.ConvertFromSI(punit, Double.Parse(SimObject.AdjustValue))
+                            End If
+                            tbSetPoint.Text = value.ToString(nf)
+                            lblTargetVal.Text = Convert.ToDouble(obj.GetPropertyValue(SimObject.ControlledObjectData.PropertyName, units)).ToString(nf) &
+                                    " (" & (Convert.ToDouble(obj.GetPropertyValue(SimObject.ControlledObjectData.PropertyName, units)) -
+                                    Convert.ToDouble(objr.GetPropertyValue(SimObject.ReferencedObjectData.PropertyName, units)) -
+                                    value).ToString("+0.####;-0.####;0") &
+                                    ") " & obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units)
+                        Catch ex As Exception
+                        End Try
+                    End If
                 End If
             End If
 
@@ -270,11 +294,24 @@ Public Class EditingForm_Adjust
 
         If e.KeyCode = Keys.Enter And Loaded Then
 
-            Try
-                Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
-                SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text.ParseExpressionToDouble))
-            Catch ex As Exception
-            End Try
+            If SimObject.Referenced Then
+                Try
+                    Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+                    Dim punit = obj.GetPropertyUnit(SimObject.ReferencedObjectData.PropertyName, units)
+                    If units.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
+                        SimObject.AdjustValue = su.Converter.ConvertToSI(punit & ".", tbSetPoint.Text.ParseExpressionToDouble)
+                    Else
+                        SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ReferencedObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text.ParseExpressionToDouble))
+                    End If
+                Catch ex As Exception
+                End Try
+            Else
+                Try
+                    Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+                    SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text.ParseExpressionToDouble))
+                Catch ex As Exception
+                End Try
+            End If
 
             Try
                 SimObject.Tolerance = Double.Parse(tbTolerance.Text.ParseExpressionToDouble)
@@ -368,7 +405,7 @@ Public Class EditingForm_Adjust
             For Each p In props
                 If SimObject.FlowSheet.GetTranslatedString(p) = cbRefProp.SelectedItem.ToString Then
                     SimObject.ReferencedObjectData.PropertyName = p
-                    lblRefVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - su.Converter.ConvertFromSI(obj.GetPropertyUnit(p, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
+                    lblRefVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " " & obj.GetPropertyUnit(p, units)
                     Exit For
                 End If
             Next

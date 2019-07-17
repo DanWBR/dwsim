@@ -1825,10 +1825,17 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
         i = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
             If adj.SimultaneousAdjust Then
-                Dim adjvalue As Double = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
+                Dim adjvalue As Double
+                Dim punit = fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem)
                 If adj.Referenced Then
+                    If fbag.FlowsheetOptions.SelectedUnitSystem.GetUnitType(punit) = UnitOfMeasure.temperature Then
+                        adjvalue = cv.ConvertFromSI(punit & ".", adj.AdjustValue)
+                    Else
+                        adjvalue = cv.ConvertFromSI(punit, adj.AdjustValue)
+                    End If
                     fx(i) = adjvalue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
                 Else
+                    adjvalue = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
                     fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
                 End If
                 i += 1
@@ -1907,14 +1914,18 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
         Dim fx(x.Length - 1) As Double
         i = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-            If adj.SimultaneousAdjust Then
-                Dim adjvalue As Double = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
-                If adj.Referenced Then
-                    fx(i) = adjvalue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
+            Dim adjvalue As Double
+            Dim punit = fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem)
+            If adj.Referenced Then
+                If fbag.FlowsheetOptions.SelectedUnitSystem.GetUnitType(punit) = UnitOfMeasure.temperature Then
+                    adjvalue = cv.ConvertFromSI(punit & ".", adj.AdjustValue)
                 Else
-                    fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
+                    adjvalue = cv.ConvertFromSI(punit, adj.AdjustValue)
                 End If
-                i += 1
+                fx(i) = adjvalue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
+            Else
+                adjvalue = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
+                fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
             End If
         Next
 
@@ -2028,10 +2039,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
-        With adj.ManipulatedObjectData
-            With adj.ControlledObjectData()
-                Return fbag.SimulationObjects(.ID).GetPropertyValue(.Name, fbag.FlowsheetOptions.SelectedUnitSystem)
-            End With
+        With adj.ReferencedObjectData
+            Return fbag.SimulationObjects(.ID).GetPropertyValue(.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem)
         End With
 
     End Function

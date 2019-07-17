@@ -99,7 +99,12 @@ Public Class EditingForm_Adjust_ControlPanel
         With myADJ
             If myADJ.Referenced Then
                 If Not rfVal = Nothing Then
-                    adjval = rfVal + cv.ConvertFromSI(.ReferencedObjectData.GetPropertyUnit(.ReferencedObjectData.PropertyName, su), .AdjustValue)
+                    Dim punit = formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GetPropertyUnit(.ReferencedObjectData.PropertyName, su)
+                    If su.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
+                        adjval = rfVal + cv.ConvertFromSI(punit & ".", .AdjustValue)
+                    Else
+                        adjval = rfVal + cv.ConvertFromSI(punit, .AdjustValue)
+                    End If
                 Else
                     Me.btnIniciar.Enabled = True
                     Exit Sub
@@ -177,6 +182,16 @@ Public Class EditingForm_Adjust_ControlPanel
 
                 DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
 
+                If myADJ.Referenced Then
+                    rfVal = Me.GetRefVarValue()
+                    Dim punit = formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GetPropertyUnit(myADJ.ReferencedObjectData.PropertyName, su)
+                    If su.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
+                        adjval = rfVal + cv.ConvertFromSI(punit & ".", myADJ.AdjustValue)
+                    Else
+                        adjval = rfVal + cv.ConvertFromSI(punit, myADJ.AdjustValue)
+                    End If
+                End If
+
                 cvVal = Me.GetCtlVarValue()
                 cnt += 1
 
@@ -241,6 +256,16 @@ Public Class EditingForm_Adjust_ControlPanel
                 Me.SetMnpVarValue(minval)
 
                 DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
+
+                If myADJ.Referenced Then
+                    rfVal = Me.GetRefVarValue()
+                    Dim punit = formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GetPropertyUnit(myADJ.ReferencedObjectData.PropertyName, su)
+                    If su.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
+                        adjval = rfVal + cv.ConvertFromSI(punit & ".", myADJ.AdjustValue)
+                    Else
+                        adjval = rfVal + cv.ConvertFromSI(punit, myADJ.AdjustValue)
+                    End If
+                End If
 
                 cvVal = Me.GetCtlVarValue()
                 f = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
@@ -366,6 +391,16 @@ Public Class EditingForm_Adjust_ControlPanel
                 Me.SetMnpVarValue(bbb)
 
                 DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
+
+                If myADJ.Referenced Then
+                    rfVal = Me.GetRefVarValue()
+                    Dim punit = formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GetPropertyUnit(myADJ.ReferencedObjectData.PropertyName, su)
+                    If su.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
+                        adjval = rfVal + cv.ConvertFromSI(punit & ".", myADJ.AdjustValue)
+                    Else
+                        adjval = rfVal + cv.ConvertFromSI(punit, myADJ.AdjustValue)
+                    End If
+                End If
 
                 cvVal = Me.GetCtlVarValue()
                 fbb = cvVal - adjval
@@ -569,10 +604,8 @@ Final3:
 
     Private Function GetRefVarValue()
 
-        With Me.myADJ.ManipulatedObjectData
-            With Me.myADJ.ControlledObjectData
-                Return formC.SimulationObjects(.ID).GetPropertyValue(.Name, su)
-            End With
+        With Me.myADJ.ReferencedObjectData
+            Return formC.SimulationObjects(.ID).GetPropertyValue(.PropertyName, su)
         End With
 
     End Function
