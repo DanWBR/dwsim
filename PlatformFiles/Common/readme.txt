@@ -66,6 +66,9 @@ Version 5.7 Update 13
 
 - [CHG] Restored Reference Object functionality to Controller/Adjust Logical Block
 - [CHG] Restored Maximum Iterations editor to Recycle Logical Block
+- [CHG] Optimized Isothermal Compressibility calculation
+- [FIX] Fixed layout of object editors (Classic UI)
+- [FIX] Fixed Thermo library registration
 - [FIX] Fixed Molar Volume value in Material Stream report
 - [FIX] Minor bug fixes
 
