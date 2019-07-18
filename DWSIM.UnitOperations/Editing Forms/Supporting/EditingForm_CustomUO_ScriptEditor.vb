@@ -115,6 +115,36 @@ Imports System.Drawing
 
         txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
 
+        Dim snippets = New SharedClasses.Scripts.IronPythonSnippets().GetSnippets()
+
+        For Each group1 In snippets.GroupBy(Function(x) x.Category1)
+
+            Dim tsmi = New ToolStripMenuItem() With {.Text = group1.Key}
+            tsbInsertSnippet.DropDownItems.Add(tsmi)
+
+            For Each group2 In group1.GroupBy(Function(x2) x2.Category2)
+
+                Dim tsmi2 = New ToolStripMenuItem() With {.Text = group2.Key}
+                tsmi.DropDownItems.Add(tsmi2)
+
+                For Each snippet In group2
+
+                    Dim tsmi3 = New ToolStripMenuItem() With {.Text = snippet.Name & " (" & snippet.Scope & ")", .Tag = snippet.Snippet}
+
+                    AddHandler tsmi3.Click, Sub()
+
+                                                txtScript.InsertText(txtScript.CurrentPosition, tsmi3.Tag.ToString)
+
+                                            End Sub
+
+                    tsmi2.DropDownItems.Add(tsmi3)
+
+                Next
+
+            Next
+
+        Next
+
         loaded = True
 
     End Sub

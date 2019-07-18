@@ -56,7 +56,7 @@ Namespace UnitOperations
 
         Private _scripttext As String = ""
         Private _includes() As String
-        Private _fontname As String = "Courier New"
+        Private _fontname As String = "Consolas"
         Private _fontsize As Integer = 10
 
         Public Property HighlightSpaces As Boolean = False

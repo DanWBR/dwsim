@@ -43,12 +43,13 @@
         Me.tscb1 = New System.Windows.Forms.ToolStripComboBox()
         Me.tscb2 = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbInsertSnippet = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnRun = New System.Windows.Forms.ToolStripButton()
         Me.btnRunAsync = New System.Windows.Forms.ToolStripButton()
         Me.btnRunDebug = New System.Windows.Forms.ToolStripButton()
         Me.btnStopDebug = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.APIHelptsbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
@@ -85,7 +86,7 @@
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.HelpToolStripButton, Me.APIHelptsbutton, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.tsTextBoxRename})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.APIHelptsbutton, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.tsTextBoxRename})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'NewToolStripButton
@@ -206,6 +207,17 @@
         resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         '
+        'tsbInsertSnippet
+        '
+        resources.ApplyResources(Me.tsbInsertSnippet, "tsbInsertSnippet")
+        Me.tsbInsertSnippet.Image = Global.DWSIM.My.Resources.Resources.script_code
+        Me.tsbInsertSnippet.Name = "tsbInsertSnippet"
+        '
+        'ToolStripSeparator7
+        '
+        resources.ApplyResources(Me.ToolStripSeparator7, "ToolStripSeparator7")
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        '
         'btnRun
         '
         resources.ApplyResources(Me.btnRun, "btnRun")
@@ -239,17 +251,11 @@
         resources.ApplyResources(Me.toolStripSeparator5, "toolStripSeparator5")
         Me.toolStripSeparator5.Name = "toolStripSeparator5"
         '
-        'HelpToolStripButton
-        '
-        resources.ApplyResources(Me.HelpToolStripButton, "HelpToolStripButton")
-        Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.HelpToolStripButton.Name = "HelpToolStripButton"
-        '
         'APIHelptsbutton
         '
         resources.ApplyResources(Me.APIHelptsbutton, "APIHelptsbutton")
         Me.APIHelptsbutton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.APIHelptsbutton.Image = Global.DWSIM.My.Resources.Resources.script_code
+        Me.APIHelptsbutton.Image = Global.DWSIM.My.Resources.Resources.help_browser1
         Me.APIHelptsbutton.Name = "APIHelptsbutton"
         '
         'ToolStripSeparator3
@@ -447,7 +453,6 @@
     Public WithEvents FaTabStripItem4 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents NewToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents toolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents tsTextBoxRename As System.Windows.Forms.ToolStripTextBox
@@ -474,4 +479,6 @@
     Public WithEvents btnRunAsync As System.Windows.Forms.ToolStripButton
     Public WithEvents btnRunDebug As ToolStripButton
     Public WithEvents btnStopDebug As ToolStripButton
+    Friend WithEvents tsbInsertSnippet As ToolStripDropDownButton
+    Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
 End Class

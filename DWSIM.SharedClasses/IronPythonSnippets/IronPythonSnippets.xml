@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <row>
+    <A>Name</A>
+    <B>Category1</B>
+    <C>Category2</C>
+    <D>Scope</D>
+    <E>Snippet</E>
+  </row>
+  <row>
+    <A>Hello World</A>
+    <B>IronPython</B>
+    <C>Basics</C>
+    <D>Flowsheet/User Model</D>
+    <E>print &quot;Hello World!&quot;</E>
+  </row>
+  <row>
+    <A>Multi-Line Statements</A>
+    <B>IronPython</B>
+    <C>Basics</C>
+    <D>Flowsheet/User Model</D>
+    <E>def add(a, b):
+    return a + b
+
+x = add(3, 2)
+print x
+
+y = add(&quot;Iron&quot;, &quot;Python&quot;)
+print y</E>
+  </row>
+  <row>
+    <A>Using the standard .NET libraries</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>import System
+
+dir(System.Environment)
+
+print System.Environment.OSVersion
+
+print System.Environment.CommandLine</E>
+  </row>
+  <row>
+    <A>Imports content of a class</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>from System.Math import *
+
+print dir()
+
+print Sin(PI/2)</E>
+  </row>
+  <row>
+    <A>Working with .NET classes</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>from System.Collections import *
+
+h = Hashtable()
+
+print dir(h)
+
+h[&quot;a&quot;] = &quot;IronPython&quot;
+
+h[&quot;b&quot;] = &quot;Tutorial&quot;
+
+print h[&quot;a&quot;]
+
+for e in h: print (e.Key + &quot;: &quot; + e.Value)</E>
+  </row>
+  <row>
+    <A>Initializing collections with Python lists</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>from System.Collections import *
+
+l = ArrayList([1,2,3])
+
+for i in l: print i
+
+s = Stack((1,2,3))
+
+while s.Count: s.Pop()</E>
+  </row>
+  <row>
+    <A>Using Generics</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>from System.Collections.Generic import *
+
+l = List[str]()
+
+l.Add(&quot;Hello&quot;)
+
+l.Add(&quot;Hi&quot;)
+
+for i in l: print i</E>
+  </row>
+  <row>
+    <A>Loading .NET libraries</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>import clr
+
+clr.AddReference(&quot;System.Xml&quot;)
+
+from System.Xml import *
+
+print dir()</E>
+  </row>
+  <row>
+    <A>Loading the Mapack library</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>import clr
+
+clr.AddReference(&quot;Mapack&quot;)
+
+from Mapack import *
+
+print dir()
+
+m = Matrix(2, 2, 1.2)
+
+n = Matrix(2,1)
+
+n[0,0] = 4
+
+print m
+
+print n
+
+print m * n
+
+print n.Transpose() * m
+
+print m * 3</E>
+  </row>
+  <row>
+    <A>Get Current Directory</A>
+    <B>IronPython</B>
+    <C>Using Python Standard Library</C>
+    <D>Flowsheet/User Model</D>
+    <E>from System.IO import Directory, Path
+
+lpath = Path.Combine(Directory.GetCurrentDirectory(), &quot;Lib&quot;)
+
+import sys
+
+sys.path.append(lpath)
+
+import os
+
+print os.getcwd()</E>
+  </row>
+  <row>
+    <A>Get Current Directory</A>
+    <B>IronPython</B>
+    <C>.NET Integration</C>
+    <D>Flowsheet/User Model</D>
+    <E>from System.IO import Directory
+
+print Directory.GetCurrentDirectory()</E>
+  </row>
+  <row>
+    <A>Using Windows.Forms</A>
+    <B>IronPython</B>
+    <C>Advanced</C>
+    <D>Flowsheet/User Model</D>
+    <E>import clr
+
+clr.AddReference(&quot;System.Windows.Forms&quot;)
+clr.AddReference(&quot;System.Drawing&quot;)
+
+from System.Windows.Forms import *
+
+from System.Drawing import *
+
+f = Form()
+
+f.Text = &quot;My First Interactive Application&quot;
+
+def click(f, a):
+    l = Label(Text = &quot;Hello&quot;)
+    l.Location = a.Location
+    f.Controls.Add(l)
+
+f.Click += click
+
+f.Show()</E>
+  </row>
+  <row>
+    <A>Use Word for Spell Checking</A>
+    <B>IronPython</B>
+    <C>Advanced</C>
+    <D>Flowsheet/User Model</D>
+    <E># Import clr module and add a reference to the Word COM interop assembly.  Also, import System so that we can use a special value from it later.
+
+import clr
+
+clr.AddReferenceByPartialName(&quot;Microsoft.Office.Interop.Word&quot;)
+from Microsoft.Office.Interop.Word import ApplicationClass
+
+import System
+
+# Start an instance of Word as a COM server running.  You won&apos;t see it show up since it is hidden, but you can see it in the Windows Task Manager by typing ctrl-shift-escape and looking 
+# for the WINWORD.EXE process.
+
+w = ApplicationClass()
+
+# Define the following function to check the spelling.  We have to build up an argument list so that we can supply the 12 optional arguments we do not care about (System.Type.Missing).  
+# We get the answer by taking the first (at index zero) of a few return values (out parameters in COM interop).  Remember to indent the lines of the function&apos;s body extra spaces, and you 
+# have to hit an extra return or enter to complete the function&apos;s definition.
+
+def check_word (word):
+   args = [word] + [System.Type.Missing]*12
+   return w.CheckSpelling(*args)
+
+print check_word(&quot;foo&quot;)
+
+print check_word(&quot;food&quot;)
+
+# You can try that out on a couple of words, but now lets define a function that will suggest corrections for us.  First, we need to add a document so that we can call GetSpellingSuggestions(), 
+# which gives a nice error message if you try to call it with no documents opened.
+
+w.Documents.Add(*[System.Type.Missing]*4)
+
+# The function we&apos;ll define builds an argument list just like check_word() did to supply several unneeded optional arguments.  The first result of several return values from GetSpellingSuggestions() 
+# is a collection of items, each of which is a correction suggestion.  We use a Python list comprehension to iterate through the COM collection object and call the Name property on each item object 
+# in the collection.  Each item&apos;s Name property is a string that Word is suggesting as a correct spelling.
+
+def suggestions (word):
+   args = [word] + [System.Type.Missing]*13
+   res_objects = w.GetSpellingSuggestions(*args)
+   return [x.Name for x in res_objects]
+
+print suggestions(&quot;foo&quot;)
+
+print suggestions(&quot;food&quot;)
+
+# Now, let&apos;s shut down Word.
+
+w.Quit(*[System.Type.Missing]*3)</E>
+  </row>
+  <row>
+    <A>Create, connect and manipulate objects</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>Flowsheet</D>
+    <E>import clr
+clr.AddReference(&apos;DWSIM.Interfaces&apos;)
+ 
+from DWSIM import Interfaces
+ 
+cooler = Flowsheet.AddObject(Interfaces.Enums.GraphicObjects.ObjectType.Cooler, 100, 100, &apos;COOLER-001&apos;)
+heat_out = Flowsheet.AddObject(Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream, 130, 150, &apos;HEAT_OUT&apos;)
+inlet = Flowsheet.AddObject(Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream, 50, 100, &apos;INLET&apos;)
+outlet = Flowsheet.AddObject(Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream, 150, 100, &apos;OUTLET&apos;)
+ 
+cooler.GraphicObject.CreateConnectors(1, 1)
+inlet.GraphicObject.CreateConnectors(1, 1)
+outlet.GraphicObject.CreateConnectors(1, 1)
+heat_out.GraphicObject.CreateConnectors(1, 1)
+ 
+Flowsheet.ConnectObjects(inlet.GraphicObject, cooler.GraphicObject, 0, 0)
+Flowsheet.ConnectObjects(cooler.GraphicObject, outlet.GraphicObject, 0, 0)
+Flowsheet.ConnectObjects(cooler.GraphicObject, heat_out.GraphicObject, 0, 0)
+ 
+# get inlet properties
+inlet_properties = inlet.GetPhase(&apos;Overall&apos;).Properties
+ 
+inlet_properties.temperature = 400 # K
+inlet_properties.pressure = 1000000 # Pa
+inlet_properties.massflow = 30 # kg/s
+ 
+# the following will define all compound mole fractions to the same value so the sum is equal to 1
+inlet.EqualizeOverallComposition()
+ 
+# set the cooler&apos;s outlet temperature to 300 K
+# http://dwsim.inforside.com.br/api_help57/html/T_DWSIM_UnitOperations_UnitOperations_Cooler.htm
+cooler.OutletTemperature = 300
+ 
+# set the cooler&apos;s calculation mode to &apos;outlet temperature&apos;
+# http://dwsim.inforside.com.br/api_help57/html/T_DWSIM_UnitOperations_UnitOperations_Cooler_CalculationMode.htm
+ 
+clr.AddReference(&apos;DWSIM.UnitOperations&apos;)
+from DWSIM import UnitOperations
+cooler.CalcMode = UnitOperations.UnitOperations.Cooler.CalculationMode.OutletTemperature
+ 
+#calculate the flowsheet
+Flowsheet.RequestCalculation(None, False)
+ 
+#get the outlet stream temperature and cooler&apos;s temperature decrease
+deltat = cooler.DeltaT
+heat_flow = heat_out.EnergyFlow
+ 
+print(&apos;Cooler Temperature Drop (K):&apos;+ str(deltat))
+print(&apos;Heat Flow (kW): &apos; + str(heat_flow))</E>
+  </row>
+  <row>
+    <A>Getting a reference to a Compound in the simulation</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>Flowsheet/User Model</D>
+    <E>mycompound = Flowsheet.SelectedCompounds[&apos;Methane&apos;]
+ 
+mycompound2 = Flowsheet.GetSimulationObject[&apos;MSTR-001&apos;].Phases[0].Compounds[&apos;Methane&apos;]</E>
+  </row>
+  <row>
+    <A>Executing a script from another tab/section</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>Flowsheet</D>
+    <E>import clr
+import System
+from System import *
+ 
+clr.AddReference(&apos;System.Core&apos;)
+clr.ImportExtensions(System.Linq)
+ 
+# get the script text from &quot;Functions&quot; using LINQ
+source = Flowsheet.Scripts.Values.Where(lambda x: x.Title == &apos;Functions&apos;).FirstOrDefault().ScriptText.replace(&apos;\r&apos;, &apos;&apos;)
+ 
+# execute the script
+exec(source)</E>
+  </row>
+  <row>
+    <A>Setting the properties of a Material Stream</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>Flowsheet/User Model</D>
+    <E>ms1 = Flowsheet.GetFlowsheetSimulationObject(&apos;MSTR-001&apos;)
+ 
+overall = ms1.GetPhase(&apos;Overall&apos;)
+overall.Properties.temperature = 200 # set temperature to 200 K
+overall.Properties.pressure = 101325 # set pressure to 101325 Pa
+overall.Properties.massflow = 14 # set mass flow to 14 kg/s</E>
+  </row>
+  <row>
+    <A>Getting Surface Tension and Diffusion Coefficients from a Material Stream</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>Flowsheet/User Model</D>
+    <E>import clr
+import System
+ 
+# get feed&apos;s interfacial tension - method 1
+ 
+mixphase = feed.GetPhase(&quot;Mixture&quot;)
+ 
+sftens = mixphase.Properties.surfaceTension
+ 
+print str(sftens) + &quot; N/m&quot;
+ 
+# get feed&apos;s interfacial tension - method 2
+ 
+sftens2 = clr.Reference[System.Object]()
+ 
+feed.GetTwoPhaseProp(&quot;surfacetension&quot;, None, &quot;&quot;, sftens2)
+ 
+print str(sftens2.Value[0]) + &quot; N/m&quot;
+ 
+# diffusion coefficients
+ 
+phase = feed.GetPhase(&quot;Vapor&quot;)
+ 
+compound = phase.Compounds[&quot;Methane&quot;]
+ 
+difc = compound.DiffusionCoefficient
+ 
+print str(difc) + &quot; m2/s&quot;</E>
+  </row>
+  <row>
+    <A>Override Mixer Model</A>
+    <B>DWSIM</B>
+    <C>Model Customization</C>
+    <D>Flowsheet</D>
+    <E># for more details, go to http://dwsim.inforside.com.br/wiki/index.php?title=Model_Customization
+
+import clr
+ 
+clr.AddReference(&apos;DWSIM.MathOps&apos;)
+clr.AddReference(&apos;DWSIM.UnitOperations&apos;)
+clr.AddReference(&apos;DWSIM.Interfaces&apos;)
+ 
+from DWSIM import *
+from DWSIM.Thermodynamics.Streams import *
+from DWSIM.UnitOperations import *
+from DWSIM.MathOps.MathEx import *
+from System import *
+from System.Collections.Generic import *
+ 
+# gets the mixer object
+ 
+mixer = Flowsheet.GetFlowsheetSimulationObject(&apos;MIX-004&apos;)
+ 
+def CalcMixer():
+ 
+    ms = MaterialStream()
+ 
+    P = 0.0
+    W = 0.0
+    H = 0.0
+     
+    i = 0
+ 
+    for cp in mixer.GraphicObject.InputConnectors:
+        if cp.IsAttached:
+            ms = Flowsheet.SimulationObjects[cp.AttachedConnector.AttachedFrom.Name]
+            ms.Validate()
+            if mixer.PressureCalculation == UnitOperations.Mixer.PressureBehavior.Minimum:
+                print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Mixer Mode: Outlet Pressure = Minimum Inlet Pressure&apos;
+                if ms.Phases[0].Properties.pressure &lt; P:
+                    P = ms.Phases[0].Properties.pressure
+                elif P == 0.0:
+                    P = ms.Phases[0].Properties.pressure
+            elif mixer.PressureCalculation == UnitOperations.Mixer.PressureBehavior.Maximum:
+                print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Mixer Mode: Outlet Pressure = Maximum Inlet Pressure&apos;
+                if ms.Phases[0].Properties.pressure &gt; P:
+                    P = ms.Phases[0].Properties.pressure
+                elif P == 0:
+                    P = ms.Phases[0].Properties.pressure
+            else:
+                print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Mixer Mode: Outlet Pressure = Inlet Average&apos;
+                P += ms.Phases[0].Properties.pressure
+                i += 1
+            We = ms.Phases[0].Properties.massflow
+            W += We
+            if not Double.IsNaN(ms.Phases[0].Properties.enthalpy): H += We * ms.Phases[0].Properties.enthalpy
+ 
+    if W != 0.0: 
+        Hs = H / W 
+    else:
+        Hs = 0.0
+ 
+    if mixer.PressureCalculation == UnitOperations.Mixer.PressureBehavior.Average: P = P / (i - 1)
+ 
+    print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Mixture Pressure (Pa): &apos; + str(P)
+    print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Mixture Mass Flow (kg/s): &apos; + str(W)
+    print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Mixture Enthalpy (kJ/kg): &apos; + str(Hs)
+ 
+    T = 0.0
+ 
+    n = Flowsheet.SelectedCompounds.Count
+    Vw = Dictionary[String, Double]()
+    for cp in mixer.GraphicObject.InputConnectors:
+        if cp.IsAttached:
+            ms = Flowsheet.SimulationObjects[cp.AttachedConnector.AttachedFrom.Name]
+            for comp in ms.Phases[0].Compounds.Values:
+                if not Vw.ContainsKey(comp.Name):
+                    Vw.Add(comp.Name, 0)
+                Vw[comp.Name] += comp.MassFraction * ms.Phases[0].Properties.massflow
+            if W != 0.0: T += ms.Phases[0].Properties.massflow / W * ms.Phases[0].Properties.temperature
+ 
+    if W == 0.0: T = 273.15
+ 
+    print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Mixture Temperature Estimate (K): &apos; + str(T)
+ 
+    omstr = Flowsheet.SimulationObjects[mixer.GraphicObject.OutputConnectors[0].AttachedConnector.AttachedTo.Name]
+    omstr.Clear()
+    omstr.ClearAllProps()
+    if W != 0.0: omstr.Phases[0].Properties.enthalpy = Hs
+    omstr.Phases[0].Properties.pressure = P
+    omstr.Phases[0].Properties.massflow = W
+    omstr.Phases[0].Properties.molarfraction = 1
+    omstr.Phases[0].Properties.massfraction = 1
+    for comp in omstr.Phases[0].Compounds.Values:
+        if W != 0.0: comp.MassFraction = Vw[comp.Name] / W
+    mass_div_mm = 0.0
+    for sub1 in omstr.Phases[0].Compounds.Values:
+        mass_div_mm += sub1.MassFraction / sub1.ConstantProperties.Molar_Weight
+    for sub1 in omstr.Phases[0].Compounds.Values:
+        if W != 0.0:
+            sub1.MoleFraction = sub1.MassFraction / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+        else:
+            sub1.MoleFraction = 0.0
+        print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + sub1.Name + &apos; outlet molar fraction: &apos; + str(sub1.MoleFraction)
+    omstr.Phases[0].Properties.temperature = T
+    omstr.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+ 
+    print &apos;[&apos; + mixer.GraphicObject.Tag + &apos;] &apos; + &apos;Outlet Stream variables set successfully.&apos;
+ 
+    return None
+ 
+mixer.OverrideCalculationRoutine = True
+ 
+mixer.CalculationRoutineOverride = CalcMixer</E>
+  </row>
+  <row>
+    <A>Override Property Package Fugacity Coefficients Calculation</A>
+    <B>DWSIM</B>
+    <C>Model Customization</C>
+    <D>Flowsheet</D>
+    <E># for more details, go to http://dwsim.inforside.com.br/wiki/index.php?title=Model_Customization
+
+import clr
+clr.AddReference(&apos;DWSIM.MathOps&apos;)
+ 
+from DWSIM import *
+from DWSIM.MathOps.MathEx import *
+from DWSIM.Thermodynamics.PropertyPackages import *
+from System import *
+ 
+# gets the first Property Package added to the the simulation
+ 
+pp = Flowsheet.PropertyPackagesArray[0]
+ 
+def calcroots(coeffs):
+ 
+    # auxiliary function
+    # calculates the roots of of a cubic polynomial and returns only the real ones 
+ 
+    a = coeffs[0]
+    b = coeffs[1]
+    c = coeffs[2]
+    d = coeffs[3]
+ 
+    # uses DWSIM&apos;s internal &apos;CalcRoots&apos; function to calculate roots
+    # https://github.com/DanWBR/dwsim5/blob/windows/DWSIM.Math/MATRIX2.vb#L29
+ 
+    res = PolySolve.CalcRoots(a, b, c, d)
+ 
+    roots = [[0] * 2 for i in range(3)]
+ 
+    roots[0][0] = res[0, 0]
+    roots[0][1] = res[0, 1]
+    roots[1][0] = res[1, 0]
+    roots[1][1] = res[1, 1]
+    roots[2][0] = res[2, 0]
+    roots[2][1] = res[2, 1]
+ 
+    # orders the roots
+ 
+    if roots[0][0] &gt; roots[1][0]:
+        tv = roots[1][0]
+        roots[1][0] = roots[0][0]
+        roots[0][0] = tv
+        tv2 = roots[1][1]
+        roots[1][1] = roots[0][1]
+        roots[0][1] = tv2
+    if roots[0][0] &gt; roots[2][0]:
+        tv = roots[2][0]
+        roots[2][0] = roots[0][0]
+        roots[0][0] = tv
+        tv2 = roots[2][1]
+        roots[2][1] = roots[0][1]
+        roots[0][1] = tv2
+    if roots[1][0] &gt; roots[2][0]:
+        tv = roots[2][0]
+        roots[2][0] = roots[1][0]
+        roots[1][0] = tv
+        tv2 = roots[2][1]
+        roots[2][1] = roots[1][1]
+        roots[1][1] = tv2
+ 
+    validroots = []
+ 
+    if roots[0][1] == 0 and roots[0][0] &gt; 0.0: validroots.append(roots[0][0])
+    if roots[1][1] == 0 and roots[1][0] &gt; 0.0: validroots.append(roots[1][0])
+    if roots[2][1] == 0 and roots[2][0] &gt; 0.0: validroots.append(roots[2][0])
+ 
+    # returns only valid real roots
+ 
+    return validroots
+ 
+def fugcoeff(Vz, T, P, state):
+ 
+    # calculates fugacity coefficients using PR EOS
+    # Vx = composition vector in molar fractions
+    # T = temperature in K
+    # P = Pressure in Pa
+    # state = mixture state (Liquid, Vapor or Solid)
+ 
+    R = 8.314
+     
+    n = len(Vz)
+     
+    Tc = pp.RET_VTC() # critical temperatures
+    Pc = pp.RET_VPC() # critical pressures
+    w = pp.RET_VW()   # acentric factors
+ 
+    alpha = [0] * n
+    ai = [0] * n
+    bi = [0] * n
+ 
+    for i in range(n):
+        alpha[i] = (1 + (0.37464 + 1.54226 * w[i] - 0.26992 * w[i] ** 2) * (1 - (T / Tc[i]) ** 0.5)) ** 2
+        ai[i] = 0.45724 * alpha[i] * R ** 2 * Tc[i] ** 2 / Pc[i]
+        bi[i] = 0.0778 * R * Tc[i] / Pc[i]
+ 
+    a = [[0] * n for i in range(n)]
+ 
+    # get binary interaction parameters (BIPs/kijs) from PR Property Package
+ 
+    kij = [[0] * n for i in range(n)] 
+ 
+    vkij = pp.RET_VKij()
+ 
+    for i in range(n):
+        for j in range(n):
+            kij[i][j] = vkij[i, j]
+            a[i][j] = (ai[i] * ai[j]) ** 0.5 * (1 - kij[i][j]) # &lt;- default mixing rule for amix
+ 
+    amix = 0.0
+    bmix = 0.0
+    amix2 = [0] * n
+     
+    for i in range(n):
+        for j in range(n):
+            amix += Vz[i] * Vz[j] * a[i][j] # &lt;- default mixing rule for amix
+            amix2[i] +=  Vz[j] * a[j][i]
+ 
+    for i in range(n):
+        bmix += Vz[i] * bi[i] # &lt;- default mixing rule - no interaction parameters for bmix
+         
+    AG = amix * P / (R * T) ** 2
+    BG = bmix * P / (R * T)
+ 
+    coeff = [0] * 4
+ 
+    coeff[0] = 1
+    coeff[1] = BG - 1
+    coeff[2] = AG - 3 * BG ** 2 - 2 * BG
+    coeff[3] = -AG * BG + BG ** 2 + BG ** 3
+ 
+    roots = calcroots(coeff) # &lt;- get the real roots of the cubic equation
+ 
+    # compressibility factor = cubic equation&apos;s root
+ 
+    if state == State.Liquid:
+        # liquid
+        Z = min(roots)
+    else:
+        # vapor
+        Z = max(roots)
+ 
+    # gets a special zeroed vector from the property package because DWSIM requires a 
+    # .NET array as the returning value, not a Python one
+ 
+    fugcoeff = pp.RET_NullVector()
+ 
+    for i in range(n):
+        t1 = bi[i] * (Z - 1) / bmix
+        t2 = -Math.Log(Z - BG)
+        t3 = AG * (2 * amix2[i] / amix - bi[i] / bmix)
+        t4 = Math.Log((Z + (1 + 2 ** 0.5) * BG) / (Z + (1 - 2 ** 0.5) * BG))
+        t5 = 2 * 2 ** 0.5 * BG
+        fugcoeff[i] = Math.Exp(t1 + t2 - (t3 * t4 / t5))
+ 
+    # returns calculated fugacity coefficients
+ 
+    print &apos;calculated fugacities = &apos; + str(fugcoeff) +  &apos; (&apos; + str(state) + &apos;)&apos;
+ 
+    return fugcoeff
+ 
+# activate fugacity calculation override on PR Property Package
+ 
+pp.OverrideKvalFugCoeff = True
+ 
+# set the function that calculates the fugacity coefficient
+ 
+pp.KvalFugacityCoefficientOverride = fugcoeff</E>
+  </row>
+  <row>
+    <A>Override Property Package Enthalpy Calculation</A>
+    <B>DWSIM</B>
+    <C>Model Customization</C>
+    <D>Flowsheet</D>
+    <E># for more details, go to http://dwsim.inforside.com.br/wiki/index.php?title=Model_Customization
+
+import clr
+clr.AddReference(&apos;DWSIM.MathOps&apos;)
+ 
+from DWSIM import *
+from DWSIM.MathOps.MathEx import *
+from DWSIM.Thermodynamics.PropertyPackages import *
+from System import *
+ 
+# gets the first Property Package added to the the simulation
+ 
+pp = Flowsheet.PropertyPackagesArray[0]
+ 
+def calcroots(coeffs):
+ 
+    # auxiliary function
+    # calculates the roots of of a cubic polynomial and returns only the real ones 
+ 
+    a = coeffs[0]
+    b = coeffs[1]
+    c = coeffs[2]
+    d = coeffs[3]
+ 
+    # uses DWSIM&apos;s internal &apos;CalcRoots&apos; function to calculate roots
+    # https://github.com/DanWBR/dwsim5/blob/windows/DWSIM.Math/MATRIX2.vb#L29
+ 
+    res = PolySolve.CalcRoots(a, b, c, d)
+ 
+    roots = [[0] * 2 for i in range(3)]
+ 
+    roots[0][0] = res[0, 0]
+    roots[0][1] = res[0, 1]
+    roots[1][0] = res[1, 0]
+    roots[1][1] = res[1, 1]
+    roots[2][0] = res[2, 0]
+    roots[2][1] = res[2, 1]
+ 
+    # orders the roots
+ 
+    if roots[0][0] &gt; roots[1][0]:
+        tv = roots[1][0]
+        roots[1][0] = roots[0][0]
+        roots[0][0] = tv
+        tv2 = roots[1][1]
+        roots[1][1] = roots[0][1]
+        roots[0][1] = tv2
+    if roots[0][0] &gt; roots[2][0]:
+        tv = roots[2][0]
+        roots[2][0] = roots[0][0]
+        roots[0][0] = tv
+        tv2 = roots[2][1]
+        roots[2][1] = roots[0][1]
+        roots[0][1] = tv2
+    if roots[1][0] &gt; roots[2][0]:
+        tv = roots[2][0]
+        roots[2][0] = roots[1][0]
+        roots[1][0] = tv
+        tv2 = roots[2][1]
+        roots[2][1] = roots[1][1]
+        roots[1][1] = tv2
+ 
+    validroots = []
+ 
+    if roots[0][1] == 0 and roots[0][0] &gt; 0.0: validroots.append(roots[0][0])
+    if roots[1][1] == 0 and roots[1][0] &gt; 0.0: validroots.append(roots[1][0])
+    if roots[2][1] == 0 and roots[2][0] &gt; 0.0: validroots.append(roots[2][0])
+ 
+    # returns only valid real roots
+ 
+    return validroots
+ 
+def enthalpy(Vz, T, P, state):
+ 
+    # calculates enthalpy using PR EOS
+    # Vx = composition vector in molar fractions
+    # T = temperature in K
+    # P = Pressure in Pa
+    # state = mixture state (Liquid, Vapor or Solid)
+ 
+    # ideal gas enthalpy contribution
+ 
+    Hid = pp.RET_Hid(298.15, T, Vz)
+ 
+    R = 8.314
+     
+    n = len(Vz)
+     
+    Tc = pp.RET_VTC() # critical temperatures
+    Pc = pp.RET_VPC() # critical pressures
+    w = pp.RET_VW()   # acentric factors
+ 
+    alpha = [0] * n
+    ai = [0] * n
+    bi = [0] * n
+    ci = [0] * n
+ 
+    for i in range(n):
+        alpha[i] = (1 + (0.37464 + 1.54226 * w[i] - 0.26992 * w[i] ** 2) * (1 - (T / Tc[i]) ** 0.5)) ** 2
+        ai[i] = 0.45724 * alpha[i] * R ** 2 * Tc[i] ** 2 / Pc[i]
+        bi[i] = 0.0778 * R * Tc[i] / Pc[i]
+        ci[i] = 0.37464 + 1.54226 * w[i] - 0.26992 * w[i] ** 2
+ 
+    a = [[0] * n for i in range(n)]
+ 
+    # get binary interaction parameters (BIPs/kijs) from PR Property Package
+ 
+    kij = [[0] * n for i in range(n)] 
+ 
+    vkij = pp.RET_VKij()
+ 
+    for i in range(n):
+        for j in range(n):
+            kij[i][j] = vkij[i, j]
+            a[i][j] = (ai[i] * ai[j]) ** 0.5 * (1 - kij[i][j]) # &lt;- default mixing rule for amix
+ 
+    amix = 0.0
+    bmix = 0.0
+    amix2 = [0] * n
+     
+    for i in range(n):
+        for j in range(n):
+            amix += Vz[i] * Vz[j] * a[i][j] # &lt;- default mixing rule for amix
+            amix2[i] +=  Vz[j] * a[j][i]
+ 
+    for i in range(n):
+        bmix += Vz[i] * bi[i] # &lt;- default mixing rule - no interaction parameters for bmix
+         
+    AG = amix * P / (R * T) ** 2
+    BG = bmix * P / (R * T)
+ 
+    coeff = [0] * 4
+ 
+    coeff[0] = 1
+    coeff[1] = BG - 1
+    coeff[2] = AG - 3 * BG ** 2 - 2 * BG
+    coeff[3] = -AG * BG + BG ** 2 + BG ** 3
+ 
+    roots = calcroots(coeff) # &lt;- get the real roots of the cubic equation
+ 
+    # compressibility factor = cubic equation&apos;s root
+ 
+    if state == State.Liquid:
+        # liquid
+        Z = min(roots)
+    else:
+        # vapor
+        Z = max(roots)
+ 
+    # amix temperature derivative
+ 
+    dadT1 = -8.314 / 2 * (0.45724 / T) ** 0.5
+    dadT2 = 0.0#
+    for i in range(n):
+        j = 0
+        for j in range(n):
+            dadT2 += Vz[i] * Vz[j] * (1 - kij[i][j]) * (ci[j] * (ai[i] * Tc[j] / Pc[j]) ** 0.5 + ci[i] * (ai[j] * Tc[i] / Pc[i]) ** 0.5)
+ 
+    dadT = dadT1 * dadT2
+ 
+    uu = 2
+    ww = -1
+ 
+    DAres = amix / (bmix * (uu ** 2 - 4 * ww) ** 0.5) * Math.Log((2 * Z + BG * (uu - (uu ** 2 - 4 * ww) ** 0.5)) / (2 * Z + BG * (uu + (uu ** 2 - 4 * ww) ** 0.5))) - R * T * Math.Log((Z - BG) / Z) - R * T * Math.Log(Z)
+    DSres = R * Math.Log((Z - BG) / Z) + R * Math.Log(Z) - 1 / (8 ** 0.5 * bmix) * dadT * Math.Log((2 * Z + BG * (2 - 8 ** 0.5)) / (2 * Z + BG * (2 + 8 ** 0.5)))
+    DHres = DAres + T * (DSres) + R * T * (Z - 1)
+ 
+    # mixture molar weight (MW)
+ 
+    MW = pp.AUX_MMM(Vz)
+ 
+    print &apos;calculated enthalpy = &apos; + str(Hid + DHres/ MW) +  &apos; kJ/kg (&apos; + str(state) + &apos;)&apos;
+ 
+    return Hid + DHres / MW # kJ/kg
+ 
+# activate enthalpy calculation override on PR Property Package
+ 
+pp.OverrideEnthalpyCalculation = True
+ 
+# set the function that calculates the enthalpy
+ 
+pp.EnthalpyCalculationOverride = enthalpy</E>
+  </row>
+  <row>
+    <A>Add a New Property to a Valve Object</A>
+    <B>DWSIM</B>
+    <C>Dynamic Properties</C>
+    <D>Flowsheet</D>
+    <E># The Dynamic Properties feature in DWSIM allows you to add new properties to flowsheet objects, which will persist between simulation file saving/opening cycles. 
+# These properties can be used by scripts to perform additional calculations, or even override the actual models.
+
+# For instance, you can add a new property to a valve object on the flowsheet called &quot;Cv&quot;, setting a value for it for later use on an additional calculation step:
+
+valve = Flowsheet.GetFlowsheetSimulationObject(&quot;FV-01&quot;)
+  
+valve.ExtraProperties.Cv = 3102.78
+
+props = valve.ExtraProperties
+  
+# Cv = 11.6 Q (SG / dp)^0.5
+# dp = SG/(Cv/11.6Q)^2
+# where
+# q = water flow (m3/hr)
+# SG = specific gravity (1 for water)
+# dp = pressure drop (kPa)
+  
+DP = valve.DeltaP / 1000
+  
+SG = inlet.Phases[0].Properties.density / 1000
+  
+Q = props.Cv / 11.6 / (SG/DP) ** 0.5 / 60 / 60 # m3/s</E>
+  </row>
+  <row>
+    <A>Create an Excel Spreadsheet</A>
+    <B>IronPython</B>
+    <C>Advanced</C>
+    <D>Flowsheet</D>
+    <E>import clr
+import sys
+  
+clr.AddReferenceByName(&apos;Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c&apos;)
+  
+from Microsoft.Office.Interop import Excel
+  
+ex = Excel.ApplicationClass()   
+  
+ex.Visible = False
+ex.DisplayAlerts = True 
+  
+workbook = ex.Workbooks.Add()
+workbook.Worksheets.Add()
+ws1 = workbook.Worksheets[1]
+  
+ws1.UsedRange.Cells[1, 1].Value2 = &quot;time&quot;
+ws1.UsedRange.Cells[1, 2].Value2 = &quot;source_level&quot;
+ws1.UsedRange.Cells[1, 3].Value2 = &quot;sink_level&quot;
+ws1.UsedRange.Cells[1, 4].Value2 = &quot;hot_water_flow&quot;
+ws1.UsedRange.Cells[1, 5].Value2 = &quot;hot_water_temp&quot;
+ws1.UsedRange.Cells[1, 6].Value2 = &quot;cooling_water_flow&quot;
+ws1.UsedRange.Cells[1, 7].Value2 = &quot;cooling_water_temp&quot;
+ws1.UsedRange.Cells[1, 8].Value2 = &quot;valve_opening&quot;
+  
+ex.Visible = True</E>
+  </row>
+  <row>
+    <A>Get Feed Stream Properties</A>
+    <B>DWSIM</B>
+    <C>Basics</C>
+    <D>User Model</D>
+    <E>import math
+from System import Array
+
+# Set the feed stream
+
+feed = ims1
+
+# Get temperature and pressure of the feed
+# Notice that the values returned are one-element vectors, not scalars
+
+T = feed.GetProp(&quot;temperature&quot;, &quot;Overall&quot;, None, &quot;&quot;, &quot;&quot;) 	# K
+P = feed.GetProp(&quot;pressure&quot;, &quot;Overall&quot;, None, &quot;&quot;, &quot;&quot;) 		# Pa
+
+# Get the number of components in the feed stream
+
+n = int(feed.GetNumCompounds())
+
+# Get compound IDs in the feed stream
+
+ids = feed.ComponentIds</E>
+  </row>
+  <row>
+    <A>Set Product Stream Properties</A>
+    <B>DWSIM</B>
+    <C>Basics</C>
+    <D>User Model</D>
+    <E># Set properties in the overflow stream (T, P, xmo, xwo, to)
+
+# CAPE-OPEN&apos;s &quot;SetProp&quot; function expects you to provide a vector containing 
+# the property values, even if it is only one value that you&apos;re trying to set. 
+# Notice the &quot;[]&quot; enclosure around the qt variable in the last SetProp call.
+
+overflow = oms1
+
+overflow.Clear()
+overflow.SetProp(&quot;temperature&quot;, &quot;Overall&quot;, None, &quot;&quot;, &quot;&quot;, T)			# K
+overflow.SetProp(&quot;pressure&quot;, &quot;Overall&quot;, None, &quot;&quot;, &quot;&quot;, P)			# Pa</E>
+  </row>
+  <row>
+    <A>Calculate Equilibrium, Get and Set Properties</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>User Model</D>
+    <E>import math
+from System import Array
+
+# Set the streams
+
+inlet1 = ims1
+inlet2 = ims2
+inlet3 = ims3
+outlet1 = oms1
+outlet2 = oms2
+outlet3 = oms3
+ 
+# Get streams&apos; enthalpies and mass flows, set specified outlet temperatures
+
+if inlet1 &lt;&gt; None:
+ mixphase = inlet1.GetPhase(&quot;Mixture&quot;)
+ Hin1 = mixphase.Properties.enthalpy
+ Win1 = mixphase.Properties.massflow
+ outlet1.CopyFromMaterial(inlet1)
+else:
+ Hin1 = 0.0
+ Win1 = 0.0
+
+if inlet2 &lt;&gt; None:
+ mixphase = inlet2.GetPhase(&quot;Mixture&quot;)
+ Hin2 = mixphase.Properties.enthalpy
+ Win2 = mixphase.Properties.massflow
+ outlet2.CopyFromMaterial(inlet2)
+ outlet2.GetPhase(&quot;Mixture&quot;).Properties.temperature = 20 + 273.15
+else:
+ Hin2 = 0.0
+ Win2 = 0.0
+
+if inlet3 &lt;&gt; None:
+ Hin3 = mixphase.Properties.enthalpy
+ Win3 = mixphase.Properties.massflow
+ outlet3.CopyFromMaterial(inlet3)
+ outlet3.GetPhase(&quot;Mixture&quot;).Properties.temperature = 13 + 273.15
+else:
+ Hin3 = 0.0
+ Win3 = 0.0
+
+if outlet2 &lt;&gt; None:
+ outlet2.CalcEquilibrium(&quot;TP&quot;,None)
+ Hout2 = outlet2.GetPhase(&quot;Mixture&quot;).Properties.enthalpy
+else:
+ Hout2 = 0.0
+
+if outlet3 &lt;&gt; None:
+ outlet3.CalcEquilibrium(&quot;TP&quot;,None)
+ Hout3 = outlet3.GetPhase(&quot;Mixture&quot;).Properties.enthalpy
+else:
+ Hout3 = 0.0</E>
+  </row>
+  <row>
+    <A>Calculate PH Flash</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>User Model</D>
+    <E> outlet1.GetPhase(&quot;Mixture&quot;).Properties.enthalpy = 0.0 # kJ/kg
+ # calculate outlet temperature
+ outlet1.CalcEquilibrium(&quot;PH&quot;,None)
+print outlet1.GetPhase(&quot;Mixture&quot;).Properties.temperature</E>
+  </row>
+  <row>
+    <A>Get Ideal Gas Heat Capacity from a Compound</A>
+    <B>DWSIM</B>
+    <C>Basics</C>
+    <D>Flowsheet/User Model</D>
+    <E>compIds = [&apos;Argon&apos;]
+props = [&apos;idealgasheatcapacity&apos;]
+values = feed.GetTDependentProperty(props, 298.15, compIds, None)
+Flowsheet.ShowMessage(str(values[0]), 0, &quot;&quot;)</E>
+  </row>
+  <row>
+    <A>Clone a Material Stream</A>
+    <B>DWSIM</B>
+    <C>Basics</C>
+    <D>Flowsheet/User Model</D>
+    <E>oms1 = ims1.Duplicate()</E>
+  </row>
+  <row>
+    <A>Copy Properties between Material Streams</A>
+    <B>DWSIM</B>
+    <C>Basics</C>
+    <D>Flowsheet/User Model</D>
+    <E>i_solid = Flowsheet.GetFlowsheetSimulationObject(&apos;i_solid&apos;)
+o_solid = Flowsheet.GetFlowsheetSimulationObject(&apos;o_solid&apos;)
+
+o_solid.Assign(i_solid)</E>
+  </row>
+  <row>
+    <A>Working with the CoolProp library</A>
+    <B>DWSIM</B>
+    <C>Basics</C>
+    <D>Flowsheet/User Model</D>
+    <E>import clr
+clr.AddReference(&quot;DWSIM.Thermodynamics.CoolPropInterface&quot;)
+
+import CoolProp
+
+tcrit = CoolProp.Props1SI(&quot;Water&quot;, &quot;TCRIT&quot;)
+
+print tcrit</E>
+  </row>
+  <row>
+    <A>Calculate Latent Heat of Vaporization</A>
+    <B>DWSIM</B>
+    <C>Advanced</C>
+    <D>Flowsheet/User Model</D>
+    <E>import clr
+import System
+import DWSIM
+from System import *
+clr.AddReference(&quot;System.Core&quot;)
+clr.ImportExtensions(System.Linq)
+
+ms = Flowsheet.GetFlowsheetSimulationObject(&quot;MSTR-000&quot;)
+
+pp = ms.PropertyPackage
+pp.CurrentMaterialStream = ms
+
+# get mixture composition
+Vz = ms.Phases[0].Compounds.Values.Select(lambda x: x.MoleFraction).Cast[Double]().ToArray()
+# get temperature
+T = ms.Phases[0].Properties.temperature
+# get pressure
+P = ms.Phases[0].Properties.pressure
+
+# calculate mixture enthalpy as vapor
+hv = pp.DW_CalcEnthalpy(Vz, T, P, DWSIM.Thermodynamics.PropertyPackages.State.Vapor) 
+# calculate mixture enthalpy as liquid
+hl = pp.DW_CalcEnthalpy(Vz, T, P, DWSIM.Thermodynamics.PropertyPackages.State.Liquid) 
+
+# enthalpy of vaporization
+hvap = hv-hl 
+
+# kJ/kg
+print str(hvap) </E>
+  </row>
+  <row>
+    <A>Get the Critical Temperature of a Compound</A>
+    <B>DWSIM</B>
+    <C>Basics</C>
+    <D>Flowsheet/User Model</D>
+    <E>air_stream = Flowsheet.GetFlowsheetSimulationObject(&apos;MSTR-000&apos;)
+
+air_compound = air_stream.GetPhase(&apos;Mixture&apos;).Compounds[&apos;Air&apos;]
+
+crit_temp = air_compound.ConstantProperties.Critical_Temperature
+
+print crit_temp</E>
+  </row>
+</root>

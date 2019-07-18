@@ -138,6 +138,7 @@
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />
     <Compile Include="Flowsheet\SensitivityAnalysis.vb" />
+    <Compile Include="IronPythonSnippets\IronPythonSnippets.vb" />
     <Compile Include="Misc\FOSSEEFlowsheets.vb" />
     <Compile Include="Misc\AssayClass.vb" />
     <Compile Include="Misc\Crypto.vb" />
@@ -220,6 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\canvas_size.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="IronPythonSnippets\IronPythonSnippets.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

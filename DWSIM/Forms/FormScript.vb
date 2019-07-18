@@ -3,8 +3,7 @@ Imports System.Text
 Imports Microsoft.Scripting.Hosting
 
 Imports System.Drawing.Text
-Imports System.Reflection
-Imports System.ComponentModel
+Imports System.Linq
 Imports FarsiLibrary.Win
 Imports System.Threading
 Imports Python.Runtime
@@ -51,6 +50,43 @@ Imports IronPython.Hosting
         For Each s As Script In fc.ScriptCollection.Values
             InsertScriptTab(s)
         Next
+
+        Dim snippets = New SharedClasses.Scripts.IronPythonSnippets().GetSnippets()
+
+        For Each group1 In snippets.GroupBy(Function(x) x.Category1)
+
+            Dim tsmi = New ToolStripMenuItem() With {.Text = group1.Key}
+            tsbInsertSnippet.DropDownItems.Add(tsmi)
+
+            For Each group2 In group1.GroupBy(Function(x2) x2.Category2)
+
+                Dim tsmi2 = New ToolStripMenuItem() With {.Text = group2.Key}
+                tsmi.DropDownItems.Add(tsmi2)
+
+                For Each snippet In group2
+
+                    Dim tsmi3 = New ToolStripMenuItem() With {.Text = snippet.Name & " (" & snippet.Scope & ")", .Tag = snippet.Snippet}
+
+                    AddHandler tsmi3.Click, Sub()
+
+                                                If Not DWSIM.App.IsRunningOnMono Then
+                                                    Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
+                                                    scontrol.txtScript.InsertText(scontrol.txtScript.CurrentPosition, tsmi3.Tag.ToString)
+                                                Else
+                                                    Dim scontrol As ScriptEditorControlMono = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono)
+                                                    scontrol.txtScript.Text = scontrol.txtScript.Text.Insert(scontrol.txtScript.SelectionStart, tsmi3.Tag.ToString)
+                                                End If
+
+                                            End Sub
+
+                    tsmi2.DropDownItems.Add(tsmi3)
+
+                Next
+
+            Next
+
+        Next
+
 
     End Sub
 
@@ -668,10 +704,6 @@ Imports IronPython.Hosting
         If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
             e.Cancel = True
         End If
-    End Sub
-
-    Private Sub HelpToolStripButton_Click(sender As Object, e As EventArgs) Handles HelpToolStripButton.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Using_the_IronPython_Script_Manager")
     End Sub
 
     Private Sub scriptcontrol_KeyDown(sender As Object, e As KeyEventArgs)

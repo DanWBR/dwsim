@@ -64,6 +64,7 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.7 Update 13
 
+- [NEW] Insert IronPython Script Snippets
 - [CHG] Restored Reference Object functionality to Controller/Adjust Logical Block
 - [CHG] Restored Maximum Iterations editor to Recycle Logical Block
 - [CHG] Optimized Isothermal Compressibility calculation

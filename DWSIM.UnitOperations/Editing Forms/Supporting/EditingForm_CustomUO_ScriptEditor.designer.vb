@@ -59,6 +59,8 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         Me.ofd2 = New System.Windows.Forms.OpenFileDialog()
         Me.pd1 = New System.Windows.Forms.PrintDialog()
         Me.treeViewItems = New System.Windows.Forms.TreeView()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbInsertSnippet = New System.Windows.Forms.ToolStripDropDownButton()
         CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip2.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
@@ -124,8 +126,7 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.tscb1, Me.tscb2, Me.btnHighlightSpaces, Me.ToolStripSeparator2, Me.btnUndo, Me.btnRedo, Me.ToolStripSeparator6, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripSeparator3, Me.btnDebug, Me.ToolStripSeparator4, Me.HelpToolStripButton, Me.APIHelptsbutton, Me.ToolStripSeparator5})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.tscb1, Me.tscb2, Me.btnHighlightSpaces, Me.ToolStripSeparator2, Me.btnUndo, Me.btnRedo, Me.ToolStripSeparator6, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripSeparator3, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnDebug, Me.ToolStripSeparator4, Me.HelpToolStripButton, Me.APIHelptsbutton, Me.ToolStripSeparator5})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         '
@@ -299,6 +300,16 @@ Partial Class EditingForm_CustomUO_ScriptEditor
         Me.treeViewItems.Name = "treeViewItems"
         Me.treeViewItems.PathSeparator = "."
         '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        resources.ApplyResources(Me.ToolStripSeparator7, "ToolStripSeparator7")
+        '
+        'tsbInsertSnippet
+        '
+        resources.ApplyResources(Me.tsbInsertSnippet, "tsbInsertSnippet")
+        Me.tsbInsertSnippet.Name = "tsbInsertSnippet"
+        '
         'EditingForm_CustomUO_ScriptEditor
         '
         resources.ApplyResources(Me, "$this")
@@ -355,4 +366,6 @@ Partial Class EditingForm_CustomUO_ScriptEditor
     Public WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents PrintToolStripButton As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbInsertSnippet As ToolStripDropDownButton
+    Public WithEvents ToolStripSeparator7 As ToolStripSeparator
 End Class
