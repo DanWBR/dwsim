@@ -63,10 +63,12 @@ Imports System.Drawing
         If Not CAPEOPEN Then
 
             Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+            Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
             Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
 
             reader.Add(New Jolt.XmlDocCommentReader(Assembly.GetExecutingAssembly()))
             reader.Add(New Jolt.XmlDocCommentReader(calculatorassembly))
+            reader.Add(New Jolt.XmlDocCommentReader(unitopassembly))
             reader.Add(New Jolt.XmlDocCommentReader(fsolverassembly))
 
         Else
