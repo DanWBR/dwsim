@@ -117,7 +117,7 @@ Public Class EditingForm_CustomUO
             cbEnergyS.Items.Clear()
             cbEnergyS.Items.AddRange(eslist)
 
-            If .GraphicObject.OutputConnectors(3).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.OutputConnectors(3).IsAttached Then cbEnergyS.SelectedItem = .GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
 
             'exec engine
 
