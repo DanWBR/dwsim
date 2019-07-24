@@ -53,7 +53,7 @@ Partial Class FormFlowsheet
         Me.GraficoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompoundCreatorWizardTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PropriedadesDasSubstânciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PropriedadesDasSubstanciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -350,7 +350,7 @@ Partial Class FormFlowsheet
         'FerramentasToolStripMenuItem
         '
         resources.ApplyResources(Me.FerramentasToolStripMenuItem, "FerramentasToolStripMenuItem")
-        Me.FerramentasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.PropriedadesDasSubstânciasToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
+        Me.FerramentasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
         Me.FerramentasToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.FerramentasToolStripMenuItem.MergeIndex = 3
         Me.FerramentasToolStripMenuItem.Name = "FerramentasToolStripMenuItem"
@@ -363,13 +363,13 @@ Partial Class FormFlowsheet
         Me.CompoundCreatorWizardTSMI.MergeIndex = 6
         Me.CompoundCreatorWizardTSMI.Name = "CompoundCreatorWizardTSMI"
         '
-        'PropriedadesDasSubstânciasToolStripMenuItem
+        'PropriedadesDasSubstanciasToolStripMenuItem
         '
-        resources.ApplyResources(Me.PropriedadesDasSubstânciasToolStripMenuItem, "PropriedadesDasSubstânciasToolStripMenuItem")
-        Me.PropriedadesDasSubstânciasToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
-        Me.PropriedadesDasSubstânciasToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.PropriedadesDasSubstânciasToolStripMenuItem.MergeIndex = 5
-        Me.PropriedadesDasSubstânciasToolStripMenuItem.Name = "PropriedadesDasSubstânciasToolStripMenuItem"
+        resources.ApplyResources(Me.PropriedadesDasSubstanciasToolStripMenuItem, "PropriedadesDasSubstanciasToolStripMenuItem")
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeIndex = 5
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.Name = "PropriedadesDasSubstanciasToolStripMenuItem"
         '
         'CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem
         '
@@ -851,7 +851,7 @@ Partial Class FormFlowsheet
     Friend WithEvents tsmiCloseOpenedEditors As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UtilitiesTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TSMIAddUtility As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PropriedadesDasSubstânciasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PropriedadesDasSubstanciasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PanelMobileCompatMode As System.Windows.Forms.Panel
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox

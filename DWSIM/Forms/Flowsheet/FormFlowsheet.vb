@@ -2880,7 +2880,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub PropriedadesDasSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropriedadesDasSubstânciasToolStripMenuItem.Click
+    Private Sub PropriedadesDasSubstanciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropriedadesDasSubstanciasToolStripMenuItem.Click
         Dim frmpc As New FormPureComp With {.Flowsheet = Me}
         frmpc.ShowDialog(Me)
     End Sub
