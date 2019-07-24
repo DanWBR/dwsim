@@ -233,6 +233,7 @@ Namespace UnitOperations
                 scope.SetVariable("Flowsheet", FlowSheet)
                 scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
                 scope.SetVariable("Me", Me)
+                scope.SetVariable("This", Me)
 
                 For Each variable In InputStringVariables
                     scope.SetVariable(variable.Key, variable.Value)
@@ -329,6 +330,7 @@ Namespace UnitOperations
                                                                                                    locals.SetItem("Flowsheet", FlowSheet.ToPython)
                                                                                                    locals.SetItem("Plugins", FlowSheet.UtilityPlugins.ToPython)
                                                                                                    locals.SetItem("Me", Me.ToPython)
+                                                                                                   locals.SetItem("This", Me.ToPython)
 
                                                                                                    For Each variable In InputStringVariables
                                                                                                        locals.SetItem(variable.Key, variable.Value.ToPython)
