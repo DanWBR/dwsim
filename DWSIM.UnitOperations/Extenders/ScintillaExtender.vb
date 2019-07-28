@@ -551,7 +551,7 @@ Module scintillaExtender
 
                 Dim xmlhelp As New XElement("comments")
                 For Each r In reader
-                    xmlhelp.Add(r.GetComments(method))
+                    If Not r Is Nothing Then xmlhelp.Add(r.GetComments(method))
                 Next
 
                 If Not xmlhelp Is Nothing AndAlso xmlhelp.Elements.Count > 0 Then
@@ -630,7 +630,7 @@ Module scintillaExtender
 
                 Dim xmlhelp As New XElement("comments")
                 For Each r In reader
-                    xmlhelp.Add(r.GetComments(prop))
+                    If Not r Is Nothing Then xmlhelp.Add(r.GetComments(prop))
                 Next
 
                 If Not xmlhelp Is Nothing AndAlso xmlhelp.Elements.Count > 0 Then

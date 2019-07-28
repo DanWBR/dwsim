@@ -25,7 +25,10 @@ Imports IronPython.Hosting
     Private Sub FormVBScript_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not DWSIM.App.IsRunningOnMono Then
-            reader = New Jolt.XmlDocCommentReader(Me.GetType.Assembly)
+            Try
+                reader = New Jolt.XmlDocCommentReader(Me.GetType.Assembly)
+            Catch ex As Exception
+            End Try
         End If
 
         ' Get the installed fonts collection.

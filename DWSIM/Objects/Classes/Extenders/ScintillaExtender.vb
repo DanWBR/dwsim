@@ -493,41 +493,47 @@ Module scintillaExtender
 
                 Dim txthelp As String = method.DeclaringType.Name & " method '" & member.Name & "'" & vbCrLf
 
-                Dim xmlhelp = reader.GetComments(method)
+                If Not reader Is Nothing Then
 
-                If Not xmlhelp Is Nothing Then
-                    Dim params = xmlhelp.Elements("param").ToList
-                    For Each p In params
-                        If p.Value.ToString.Length > 70 Then
-                            argumentdescriptions.Add(p.Attribute("name"), p.Value.ToString.Substring(0, 70).Trim(vbLf) & " [...]")
-                        Else
-                            argumentdescriptions.Add(p.Attribute("name"), p.Value.ToString.Trim(vbLf))
+                    Dim xmlhelp = reader.GetComments(method)
+
+                    If Not xmlhelp Is Nothing Then
+                        Dim params = xmlhelp.Elements("param").ToList
+                        For Each p In params
+                            If p.Value.ToString.Length > 70 Then
+                                argumentdescriptions.Add(p.Attribute("name"), p.Value.ToString.Substring(0, 70).Trim(vbLf) & " [...]")
+                            Else
+                                argumentdescriptions.Add(p.Attribute("name"), p.Value.ToString.Trim(vbLf))
+                            End If
+                        Next
+                        If method.ReturnType.Name <> "Void" Then
+                            Dim rdesc = xmlhelp.Elements("returns").FirstOrDefault
+                            If Not rdesc Is Nothing Then
+                                returndescription = rdesc.Value
+                            End If
                         End If
-                    Next
-                    If method.ReturnType.Name <> "Void" Then
-                        Dim rdesc = xmlhelp.Elements("returns").FirstOrDefault
-                        If Not rdesc Is Nothing Then
-                            returndescription = rdesc.Value
+                        Dim redesc = xmlhelp.Elements("remarks").FirstOrDefault
+                        If Not redesc Is Nothing Then
+                            If redesc.Value.Length > 1000 Then
+                                remarks = redesc.Value.Substring(0, 1000) & " [...]"
+                            Else
+                                remarks = redesc.Value
+                            End If
+                        End If
+                        redesc = xmlhelp.Elements("summary").FirstOrDefault
+                        If Not redesc Is Nothing Then
+                            summary = redesc.Value
+                            txthelp += summary & vbCrLf
                         End If
                     End If
-                    Dim redesc = xmlhelp.Elements("remarks").FirstOrDefault
-                    If Not redesc Is Nothing Then
-                        If redesc.Value.Length > 1000 Then
-                            remarks = redesc.Value.Substring(0, 1000) & " [...]"
-                        Else
-                            remarks = redesc.Value
-                        End If
-                    End If
-                    redesc = xmlhelp.Elements("summary").FirstOrDefault
-                    If Not redesc Is Nothing Then
-                        summary = redesc.Value
-                        txthelp += summary & vbCrLf
-                    End If
+
                 End If
 
                 If method.GetParameters.Count > 0 Then
+
                     txthelp += "Parameters:" & vbCrLf & vbCrLf
                     txthelp += "Type".PadRight(18) & "Name".PadRight(15) & "Description" & vbCrLf
+
                     For Each par In method.GetParameters
                         If argumentdescriptions.ContainsKey(par.Name) Then
                             txthelp += par.ParameterType.Name.PadRight(18) & par.Name.PadRight(15) & argumentdescriptions(par.Name) & vbCrLf
@@ -535,7 +541,9 @@ Module scintillaExtender
                             txthelp += par.ParameterType.Name.PadRight(18) & par.Name.PadRight(15) & vbCrLf
                         End If
                     Next
+
                     txthelp += vbCrLf
+
                 End If
 
                 txthelp += "Return Type: " & method.ReturnType.ToString
@@ -555,13 +563,17 @@ Module scintillaExtender
                 Dim txthelp As String = prop.DeclaringType.Name & " property '" & prop.Name & "'" & vbCrLf
                 txthelp += "Type: " & prop.PropertyType.ToString
 
-                Dim xmlhelp = reader.GetComments(prop)
+                If Not reader Is Nothing Then
 
-                If Not xmlhelp Is Nothing Then
-                    Dim redesc = xmlhelp.Elements("summary").FirstOrDefault
-                    If Not redesc Is Nothing Then
-                        txthelp += vbCrLf & "Description: " & redesc.Value
+                    Dim xmlhelp = reader.GetComments(prop)
+
+                    If Not xmlhelp Is Nothing Then
+                        Dim redesc = xmlhelp.Elements("summary").FirstOrDefault
+                        If Not redesc Is Nothing Then
+                            txthelp += vbCrLf & "Description: " & redesc.Value
+                        End If
                     End If
+
                 End If
 
                 Return txthelp
