@@ -1,10 +1,6 @@
-Version 5.7 Update 13
+Version 5.7 Update 14
 
-- [NEW] Insert IronPython Script Snippets (Classic UI)
-- [CHG] Restored Reference Object functionality to Controller/Adjust Logical Block
-- [CHG] Restored Maximum Iterations editor to Recycle Logical Block
-- [CHG] Optimized Isothermal Compressibility calculation
-- [FIX] Fixed layout of object editors (Classic UI)
-- [FIX] Fixed Thermo library registration
-- [FIX] Fixed Molar Volume value in Material Stream report
-- [FIX] Minor bug fixes
+- [CHG] Added 'This' to python vars (Python Script UO)
+- [FIX] Fixed flowsheet dragging while zoomed
+- [FIX] Fixed exception when launching the Script Editor (Classic UI)
+- [FIX] Fixed Energy Stream connection editors for Python Script UO (Classic UI)

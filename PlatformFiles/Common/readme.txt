@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.7 Update 13
+Version 5.7 Update 14
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.7 Update 14
+
+- [CHG] Added 'This' to python vars (Python Script UO)
+- [FIX] Fixed flowsheet dragging while zoomed
+- [FIX] Fixed exception when launching the Script Editor (Classic UI)
+- [FIX] Fixed Energy Stream connection editors for Python Script UO (Classic UI)
 
 Version 5.7 Update 13
 

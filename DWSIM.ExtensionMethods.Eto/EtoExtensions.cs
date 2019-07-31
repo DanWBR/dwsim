@@ -294,6 +294,7 @@ namespace DWSIM.UI.Shared
             {
                 label = new Label { Text = text, Wrap = WrapMode.Word };
                 label.Font = new Font(SystemFont.Default, GetEditorFontSize() - 2);
+                label.TextColor = Color.FromArgb(SystemColors.ControlText.Rb, SystemColors.ControlText.Gb, SystemColors.ControlText.Bb, 180);
                 container.AddRow(new TableRow(label));
             }
             container.CreateAndAddEmptySpace();
@@ -322,6 +323,7 @@ namespace DWSIM.UI.Shared
             {
                 label = new Label { Text = text, Wrap = WrapMode.Word };
                 label.Font = new Font(SystemFont.Default, GetEditorFontSize() - 2);
+                label.TextColor = Color.FromArgb(SystemColors.ControlText.Rb, SystemColors.ControlText.Gb, SystemColors.ControlText.Bb, 180);
                 container.Rows.Add(new TableRow(label));
             }
             return label;

@@ -596,8 +596,8 @@ Public Class GraphicsSurface
                 For Each gr As IGraphicObject In Me.DrawingObjects
                     If Not gr.IsConnector Then
                         Dim p As SKPoint = New SKPoint(gr.X, gr.Y)
-                        p.X += (x - dragStart.X) '/ Me.Zoom
-                        p.Y += (y - dragStart.Y) '/ Me.Zoom
+                        p.X += (x - dragStart.X) / Me.Zoom
+                        p.Y += (y - dragStart.Y) / Me.Zoom
                         gr.X = p.X
                         gr.Y = p.Y
                     End If
