@@ -6076,9 +6076,7 @@ Final3:
 
         Public Overridable Function AUX_LIQVISCi(ByVal sub1 As String, ByVal T As Double, ByVal P As Double) As Double
 
-            If T / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature < 1 Then
-
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
+            If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
 
                     With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
 
@@ -6150,12 +6148,6 @@ Final3:
 
                 End If
 
-            Else
-
-                Return 0
-
-            End If
-
         End Function
 
         Public Function AUX_LIQVISCm(ByVal T As Double, P As Double, Optional ByVal phaseid As Integer = 3) As Double
@@ -6187,21 +6179,26 @@ Final3:
                 IObj?.SetCurrent()
                 sval = Me.AUX_LIQVISCi(subst.Name, T, P)
                 IObj?.Paragraphs.Add(String.Format("Calculating Liquid Viscosity for {0}... {1} Pa.s (xi = {2})", subst.Name, sval, subst.MoleFraction.GetValueOrDefault))
-                lval = Log(sval)
+                lval = sval
                 If sval = 0 Then lval = 0.0
                 IObj?.Paragraphs.Add(String.Format("Liquid Viscosity : {0} Pa.s", Exp(lval)))
                 If Me.Parameters.ContainsKey("PP_LIQVISC_PCORRECTION") AndAlso Me.Parameters("PP_LIQVISC_PCORRECTION") = 1 Then
                     'pressure correction
-                    Dim pcorr = Auxiliary.PROPS.viscl_pcorrection_lucas(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                    Dim pcorr As Double = 1.0
+                    If (T / subst.ConstantProperties.Critical_Temperature) > 1.0 Then
+                        pcorr = Auxiliary.PROPS.viscl_pcorrection_lucas(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_KHenry(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                    Else
+                        pcorr = Auxiliary.PROPS.viscl_pcorrection_lucas(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                    End If
                     IObj?.Paragraphs.Add(String.Format("Compressed Liquid Viscosity Correction Factor: {0}", pcorr))
-                    lval = Log(Exp(lval) * pcorr)
+                    lval = lval * pcorr
                     IObj?.Paragraphs.Add(String.Format("Corrected Liquid Viscosity : {0} Pa.s", Exp(lval)))
                     If Double.IsNaN(lval) Or Double.IsInfinity(lval) Then lval = 0.0
                 End If
-                val += subst.MoleFraction.GetValueOrDefault * lval
+                val += subst.MassFraction.GetValueOrDefault * lval
             Next
 
-            result = Exp(val)
+            result = val
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
 

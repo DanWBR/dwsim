@@ -193,6 +193,9 @@ Namespace PropertyPackages.Auxiliary
 
             DPr = (P - Pvap) / Pc
 
+            If Tr > 1 Then Tr = 1.0
+            If DPr < 0 Then DPr = -DPr
+
             A = 0.9991 - (0.0004674 / (1.0523 * Tr ^ -0.03877 - 1.0513))
             D = (0.3257 / (1.0039 - Tr ^ 2.573) ^ 0.2906) - 0.2086
             C = -0.07921 + 2.1616 * Tr - 13.404 * Tr ^ 2 + 44.1706 * Tr ^ 3 - 84.8291 * Tr ^ 4 +
