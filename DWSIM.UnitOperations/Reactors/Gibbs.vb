@@ -2098,7 +2098,7 @@ Namespace Reactors
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             With GetInletEnergyStream(1)
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
@@ -2178,7 +2178,7 @@ Namespace Reactors
                         Case 0
                             'PROP_GR_0	Pressure Drop
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-                        Case 0
+                        Case 1
                             'PROP_GR_1	Outlet Temperature
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
                     End Select

@@ -249,7 +249,7 @@ SS:             Enew = Me.ConvergenceHistory.Energy
 
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
 
             Dim es As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 

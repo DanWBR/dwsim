@@ -493,7 +493,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                         .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow.GetValueOrDefault
                     End With
 
-                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                    'energy stream - update energy flow value (kW)
                     With esin
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -534,7 +534,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name), Streams.EnergyStream)
                     .EnergyFlow = Nothing

@@ -961,7 +961,7 @@ Namespace UnitOperations
                 .Phases(0).Properties.massflow = Me.GetInletMaterialStream(0).Phases(0).Properties.massflow.GetValueOrDefault
             End With
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             With Me.GetEnergyStream
                 .EnergyFlow = -Me.DeltaQ.Value
                 .GraphicObject.Calculated = True
@@ -1003,7 +1003,7 @@ Namespace UnitOperations
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With Me.GetEnergyStream
                     .EnergyFlow = Nothing

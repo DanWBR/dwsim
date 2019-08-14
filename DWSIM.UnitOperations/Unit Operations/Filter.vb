@@ -294,7 +294,7 @@ Namespace UnitOperations
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With GetEnergyStream()
                     .EnergyFlow = Nothing

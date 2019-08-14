@@ -1408,7 +1408,7 @@ out:        Dim ms1, ms2 As MaterialStream
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
             With estr
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault

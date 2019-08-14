@@ -25,7 +25,7 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.Thermodynamics
-Imports DWSIM.MathOps
+Imports DWSIM.ExtensionMethods
 Imports OxyPlot
 Imports OxyPlot.Axes
 
@@ -52,6 +52,7 @@ Namespace Reactors
         Public Rxi As New Dictionary(Of String, Double)
         Public RxiT As New Dictionary(Of String, Double)
         Public DHRi As New Dictionary(Of String, Double)
+        Public DHRT As New List(Of Double)
 
         Public points As ArrayList
 
@@ -406,6 +407,7 @@ Namespace Reactors
             C = New Dictionary(Of String, Double)
             Ri = New Dictionary(Of String, Double)
             DHRi = New Dictionary(Of String, Double)
+            DHRT = New List(Of Double)
             Kf = New ArrayList
             Kr = New ArrayList
             Rxi = New Dictionary(Of String, Double)
@@ -507,6 +509,7 @@ Namespace Reactors
 
             RxiT.Clear()
             DHRi.Clear()
+            DHRT.Clear()
 
             'do the calculations on each dV
             Dim currvol As Double = 0.0#
@@ -785,6 +788,8 @@ Namespace Reactors
 
                     Loop Until Abs(T - Tant) < 0.01
 
+                    DHRT.Add(DHr)
+
                 Next
 
                 'add data to array
@@ -866,6 +871,15 @@ Namespace Reactors
 
             Loop Until counter > nloops
 
+            If ReactorOperationMode = OperationMode.OutletTemperature Then
+
+                ims.Phases(0).Properties.temperature -= DeltaT * dV
+                IObj?.SetCurrent()
+                ims.PropertyPackage.CurrentMaterialStream = ims
+                ims.Calculate(True, True)
+
+            End If
+
             Me.DeltaP = P0 - P
 
             RxiT.Clear()
@@ -881,7 +895,13 @@ Namespace Reactors
 
                     rxn = FlowSheet.Reactions(ar(i))
 
-                    Dim f = Rxi(rxn.ID) / Ri(rxn.BaseReactant)
+                    'reactions with the same base compound
+
+                    Dim rset = FlowSheet.Reactions.Values.Where(Function(x) x.BaseReactant = rxn.BaseReactant).Select(Function(x2) x2.ID).ToList
+
+                    Dim totalrxi = Rxi.Where(Function(x) rset.Contains(x.Key)).Select(Function(x2) x2.Value).ToArray.AbsSumY
+
+                    Dim f = Abs(Rxi(rxn.ID)) / totalrxi
                     If Double.IsNaN(f) Or Double.IsInfinity(f) Then f = 1.0#
 
                     RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000 * f)
@@ -898,6 +918,7 @@ Namespace Reactors
                 'Products Enthalpy (kJ/kg * kg/s = kW)
                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
+                'Me.DeltaQ = DHRT.Sum + Hp - Hr0
                 Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
 
                 Me.DeltaT = 0.0#
@@ -908,6 +929,7 @@ Namespace Reactors
                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                 'Heat (kW)
+                'Me.DeltaQ = DHRT.Sum + Hp - Hr0
                 Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
 
                 Me.DeltaT = OutletTemperature - T0
@@ -957,7 +979,7 @@ Namespace Reactors
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
             With estr
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
@@ -1482,7 +1504,7 @@ Namespace Reactors
                         .Key = "temp"
                     })
 
-                    color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
+                    color = OxyColors.Blue
                     model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.distance, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.temperature, vya(ComponentConversions.Count).ToArray()), color)
                     model.Series(model.Series.Count - 1).Title = "Temperature"
                     DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "temp"
@@ -1498,7 +1520,7 @@ Namespace Reactors
                         .Key = "press"
                     })
 
-                    color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
+                    color = OxyColors.Green
                     model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.distance, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.pressure, vya(ComponentConversions.Count + 1).ToArray()), color)
                     model.Series(model.Series.Count - 1).Title = "Pressure"
                     DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "press"
@@ -1515,7 +1537,28 @@ Namespace Reactors
                     })
 
                     For j = 0 To vn.Count - 1
-                        color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
+                        Select Case j
+                            Case 0
+                                color = OxyColors.Red
+                            Case 1
+                                color = OxyColors.Blue
+                            Case 2
+                                color = OxyColors.Green
+                            Case 3
+                                color = OxyColors.Yellow
+                            Case 4
+                                color = OxyColors.Orange
+                            Case 5
+                                color = OxyColors.Salmon
+                            Case 6
+                                color = OxyColors.Brown
+                            Case 7
+                                color = OxyColors.Cyan
+                            Case 8
+                                color = OxyColors.Purple
+                            Case Else
+                                color = OxyColor.FromRgb(New Random(j).Next(0, 255), New Random(j + 100).Next(0, 255), New Random(j - 100).Next(0, 255))
+                        End Select
                         model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.distance, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.molar_conc, vya(j).ToArray()), color)
                         model.Series(model.Series.Count - 1).Title = vn(j)
                         DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "conc"

@@ -315,7 +315,7 @@ Namespace UnitOperations
 
                     Me.DeltaQ = Hout - Hin
 
-                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                    'energy stream - update energy flow value (kW)
                     With es
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -561,7 +561,7 @@ Namespace UnitOperations
 
                 Me.DeltaQ = Hout - Hin
 
-                'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                'energy stream - update energy flow value (kW)
                 With es
                     .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                     .GraphicObject.Calculated = True
@@ -625,7 +625,7 @@ Namespace UnitOperations
                 End If
             Next
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With Me.GetEnergyStream
                     .EnergyFlow = Nothing

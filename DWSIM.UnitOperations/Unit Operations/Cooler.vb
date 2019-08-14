@@ -221,7 +221,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                    'energy stream - update energy flow value (kW)
                     With esout
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -262,7 +262,7 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
 
-                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                    'energy stream - update energy flow value (kW)
                     With esout
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -306,7 +306,7 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
 
-                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                    'energy stream - update energy flow value (kW)
                     With esout
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -354,7 +354,7 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                    'energy stream - update energy flow value (kW)
                     With esout
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -412,7 +412,7 @@ Namespace UnitOperations
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+            'energy stream - update energy flow value (kW)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name), Streams.EnergyStream)
                     .EnergyFlow = Nothing
