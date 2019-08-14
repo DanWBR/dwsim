@@ -6195,7 +6195,7 @@ Final3:
                     IObj?.Paragraphs.Add(String.Format("Corrected Liquid Viscosity : {0} Pa.s", Exp(lval)))
                     If Double.IsNaN(lval) Or Double.IsInfinity(lval) Then lval = 0.0
                 End If
-                val += subst.MassFraction.GetValueOrDefault * lval
+                val += subst.MoleFraction.GetValueOrDefault * lval
             Next
 
             result = val
