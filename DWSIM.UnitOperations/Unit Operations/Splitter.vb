@@ -154,6 +154,18 @@ Namespace UnitOperations
 
                 Case OpMode.SplitRatios
 
+                    Select Case OutCount
+                        Case 1
+                            Ratios(0) = 1.0
+                            Ratios(1) = 0.0
+                            Ratios(2) = 0.0
+                        Case 2
+                            Ratios(1) = 1.0 - Ratios(0)
+                            Ratios(2) = 0.0
+                        Case 3
+                            Ratios(2) = 1.0 - Ratios(0) - Ratios(1)
+                    End Select
+
                     Dim cp As IConnectionPoint
                     For Each cp In Me.GraphicObject.OutputConnectors
                         If cp.IsAttached Then
