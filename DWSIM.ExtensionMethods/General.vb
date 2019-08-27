@@ -175,13 +175,17 @@ Public Module General
 
     <System.Runtime.CompilerServices.Extension()>
     Public Function ParseExpressionToDouble(str As String) As Double
-        If Not SharedClasses.ExpressionParser.ParserInitialized Then SharedClasses.ExpressionParser.InitializeExpressionParser()
-        Try
-            Dim Expr = SharedClasses.ExpressionParser.ExpContext.CompileGeneric(Of Double)(str)
-            Return Expr.Evaluate()
-        Catch ex As Exception
-            Return Convert.ToDouble(str)
-        End Try
+        If Double.TryParse(str, New Double) Then
+            Return Double.Parse(str)
+        Else
+            If Not SharedClasses.ExpressionParser.ParserInitialized Then SharedClasses.ExpressionParser.InitializeExpressionParser()
+            Try
+                Dim Expr = SharedClasses.ExpressionParser.ExpContext.CompileGeneric(Of Double)(str)
+                Return Expr.Evaluate()
+            Catch ex As Exception
+                Throw New Exception("Error parsing the math expression '" & str & "'. Make sure to use the dot as the decimal separator for numbers in math expressions, and refrain from using thousands separators to avoid parsing errors.", ex)
+            End Try
+        End If
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _
