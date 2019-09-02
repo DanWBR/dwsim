@@ -2900,7 +2900,7 @@ Public Class FormFlowsheet
                                 End If
                             End If
 
-                            Application.DoEvents()
+                            'Application.DoEvents()
 
                         End If
 
