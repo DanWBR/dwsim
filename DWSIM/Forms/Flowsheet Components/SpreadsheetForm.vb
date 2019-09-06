@@ -823,11 +823,11 @@ Public Class SpreadsheetForm
     Public Sub EvaluateAll(Optional ByVal cell As DataGridViewCell = Nothing)
 
         If cell Is Nothing Then
-            Try
-                If Not formc Is Nothing Then
-                    If GlobalSettings.Settings.CalculatorActivated Then
-                        For Each r As DataGridViewRow In Me.DataGridView1.Rows
-                            For Each ce As DataGridViewCell In r.Cells
+            If Not formc Is Nothing Then
+                If GlobalSettings.Settings.CalculatorActivated Then
+                    For Each r As DataGridViewRow In Me.DataGridView1.Rows
+                        For Each ce As DataGridViewCell In r.Cells
+                            Try
                                 ccparams = ce.Tag
                                 If Not ccparams Is Nothing Then
                                     If ccparams.Expression <> "" Then
@@ -836,12 +836,12 @@ Public Class SpreadsheetForm
                                         ccparams.CurrVal = ce.Value
                                     End If
                                 End If
-                            Next
+                            Catch ex As Exception
+                            End Try
                         Next
-                    End If
+                    Next
                 End If
-            Catch ex As Exception
-            End Try
+            End If
         Else
             ccparams = cell.Tag
             If Not ccparams Is Nothing Then
