@@ -406,7 +406,7 @@ Public Module General
     Public Function ToDoubleWithSeparator(s As String, sep As String) As Double
         Dim nstring As String = s.Replace(sep, ".")
         If Double.TryParse(nstring, Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, New Double) Then
-            Return Double.Parse(nstring, Globalization.CultureInfo.InvariantCulture)
+            Return Double.Parse(nstring, NumberStyles.Any - NumberStyles.AllowThousands, Globalization.CultureInfo.InvariantCulture)
         Else
             Return 0.0#
         End If
@@ -417,7 +417,7 @@ Public Module General
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
-        Return Double.Parse(s, ci)
+        Return Double.Parse(s.Replace(",", "."), NumberStyles.Any - NumberStyles.AllowThousands, ci)
 
     End Function
 
@@ -427,7 +427,7 @@ Public Module General
         Dim ci As CultureInfo = CultureInfo.CurrentCulture
 
         If Double.TryParse(s, NumberStyles.Any, ci, New Double) Then
-            Return Double.Parse(s, ci)
+            Return Double.Parse(s, NumberStyles.Any - NumberStyles.AllowThousands, ci)
         Else
             Return 0.0
         End If
