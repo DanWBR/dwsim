@@ -25,7 +25,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         private DWSIM.UI.Desktop.Shared.Flowsheet Flowsheet;
 
-        private TabControl tabScripts;
+        private DocumentControl tabScripts;
 
         public ScriptManager(DWSIM.UI.Desktop.Shared.Flowsheet fs): base()
         {
@@ -37,9 +37,8 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             var topcontainer = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(5) };
-            var contentcontainer = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(5) };
 
-            tabScripts = new TabControl();
+            tabScripts = new DocumentControl() { AllowReordering = true  };
 
             var btnNew = new Button { Text = "New Script" };
             btnNew.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
@@ -55,39 +54,10 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            var btnDelete = new Button { Text = "Remove Selected" };
-            btnDelete.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            btnDelete.Click += (sender, e) =>
-            {
-                if (tabScripts.SelectedPage != null)
-                {
-                    if (MessageBox.Show(this, "Confirm removal?", "Delete Script", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
-                    {
-                        Flowsheet.Scripts.Remove((string)tabScripts.SelectedPage.Tag);
-                        tabScripts.Pages.Remove(tabScripts.SelectedPage);
-                    }
-                }
-            };
-
-            var btnDeleteAll = new Button { Text = "Remove All" };
-            btnDeleteAll.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            btnDeleteAll.Click += (sender, e) =>
-            {
-                if (tabScripts.Pages.Count > 0)
-                {
-                    if (MessageBox.Show(this, "Confirm removal?", "Delete All Scripts", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
-                    {
-                        Flowsheet.Scripts.Clear();
-                        tabScripts.Pages.Clear();
-                    }
-                }
-            };
-
-            topcontainer.Rows.Add(new TableRow(btnNew, btnDelete, btnDeleteAll, null));
-            contentcontainer.Rows.Add(new TableRow(tabScripts));
+            topcontainer.Rows.Add(new TableRow(btnNew, null));
 
             Rows.Add(topcontainer);
-            Rows.Add(contentcontainer);
+            Rows.Add(tabScripts);
 
         }
 
@@ -96,16 +66,38 @@ namespace DWSIM.UI.Desktop.Editors
             if (Application.Instance.Platform.IsWpf)
             {
                 var si = new ScriptItem_WPF(Flowsheet, script.ID);
-                var tabc = new TabPage { Tag = script.ID, Text = script.Title };
+                var tabc = new DocumentPage { Tag = script.ID, Text = script.Title, Closable = true };
                 si.ChangeNameCallback += (s) => tabc.Text = s;
+                tabc.Closed += (sender, e) => {
+                    if (MessageBox.Show(this, "Confirm removal?", "Delete Script", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                    {
+                        Flowsheet.Scripts.Remove((string)tabScripts.SelectedPage.Tag);
+                        tabScripts.Pages.Remove(tabScripts.SelectedPage);
+                    }
+                    else {
+                        tabScripts.Pages.Insert(0, tabc);
+                    }
+                };
                 tabc.Content = si;
                 tabScripts.Pages.Add(tabc);
             }
             else
             {
                 var si = new ScriptItem_GTK(Flowsheet, script.ID);
-                var tabc = new TabPage { Tag = script.ID, Text = script.Title };
+                var tabc = new DocumentPage { Tag = script.ID, Text = script.Title, Closable = true };
                 si.ChangeNameCallback += (s) => tabc.Text = s;
+                tabc.Closed += (sender, e) =>
+                {
+                    if (MessageBox.Show(this, "Confirm removal?", "Delete Script", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                    {
+                        Flowsheet.Scripts.Remove((string)tabScripts.SelectedPage.Tag);
+                        tabScripts.Pages.Remove(tabScripts.SelectedPage);
+                    }
+                    else
+                    {
+                        tabScripts.Pages.Insert(0, tabc);
+                    }
+                };
                 tabc.Content = si;
                 tabScripts.Pages.Add(tabc);
             }

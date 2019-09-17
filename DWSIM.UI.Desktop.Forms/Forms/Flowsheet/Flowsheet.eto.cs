@@ -36,8 +36,8 @@ namespace DWSIM.UI.Forms
 
         private Eto.Forms.Splitter SplitterFlowsheet;
 
-        private TabPage TabPageSpreadsheet;
-        private TabControl TabContainer;
+        private DocumentPage DocumentPageSpreadsheet;
+        private DocumentControl DocumentContainer;
         private bool TabSwitch = true;
 
         private DWSIM.UI.Desktop.Editors.ResultsViewer ResultsControl;
@@ -713,14 +713,7 @@ namespace DWSIM.UI.Forms
 
             MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
 
-            if (Application.Instance.Platform.IsMac)
-            {
-                ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager_Mac(FlowsheetObject);
-            }
-            else
-            {
-                ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
-            }
+            ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
 
             LoadObjects();
 
@@ -730,14 +723,9 @@ namespace DWSIM.UI.Forms
 
             EditorHolder = new DocumentControl() { AllowReordering = true, BackgroundColor = SystemColors.ControlBackground };
 
-            var PanelEditorsLabel = new Label { Text = "  " + "Object Editors", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
-            PanelEditorsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
-            var PanelEditorsDescription = new Label { Text = "  " + "Object Editing Panels will appear here.", VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
-            PanelEditorsDescription.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
-            var PanelEditors = new TableLayout { Rows = { PanelEditorsLabel, PanelEditorsDescription, EditorHolder }, Spacing = new Size(5, 5), BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground };
-
+            var PanelEditors = new DocumentControl() {BackgroundColor = SystemColors.Highlight };
+            PanelEditors.Pages.Add(new DocumentPage(EditorHolder) { Text = "Object Editors", Closable = false });
+            
             Split1.Panel1 = PanelEditors;
 
             Split1.Panel1.Width = (int)(sf * 360);
@@ -779,11 +767,8 @@ namespace DWSIM.UI.Forms
                 objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Ops" });
                 objcontainer.Pages.Add(new DocumentPage(panelother) { Closable = false, Text = "Other" });
 
-                var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
-                PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
-                var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, objcontainer }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
-                PanelObjects.BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground;
+                var PanelObjects = new DocumentControl();
+                PanelObjects.Pages.Add(new DocumentPage(objcontainer) { Text = "Object Palette", Closable = false });
 
                 Split2.Panel2 = PanelObjects;
                 Split2.Panel2.Height = 120;
@@ -805,11 +790,8 @@ namespace DWSIM.UI.Forms
                 objcontainer.Pages.Add(new TabPage(panellogical) { Text = "Logical Ops" });
                 objcontainer.Pages.Add(new TabPage(panelother) { Text = "Other" });
 
-                var PanelObjectsLabel = new Label { Text = "  " + "Object Palette", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
-                PanelObjectsLabel.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
-                var PanelObjects = new TableLayout { Rows = { PanelObjectsLabel, objcontainer }, Spacing = new Size(5, 5), BackgroundColor = BGColor };
-                PanelObjects.BackgroundColor = !s.DarkMode ? BGColor : SystemColors.ControlBackground;
+                var PanelObjects = new DocumentControl();
+                PanelObjects.Pages.Add(new DocumentPage(objcontainer) {Text = "Object Palette", Closable = false });
 
                 Split2.Panel2 = PanelObjects;
                 Split2.Panel2.Height = 120;
@@ -887,7 +869,6 @@ namespace DWSIM.UI.Forms
 
             SplitterFlowsheet = Split2;
 
-            Split3.Panel1 = Split2;
             Split3.Panel2 = SetupLogWindow();
             Split3.Panel2.Height = (int)(sf * 100);
 
@@ -898,17 +879,20 @@ namespace DWSIM.UI.Forms
                 Split2.Panel2.Visible = !Split2.Panel2.Visible;
             };
 
-            TabContainer = new TabControl();
-            TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };
-            TabContainer.Pages.Add(new TabPage { Content = Split1, Text = "Flowsheet" });
-            TabContainer.Pages.Add(new TabPage { Content = MaterialStreamListControl, Text = "Material Streams" });
-            TabContainer.Pages.Add(TabPageSpreadsheet);
-            TabContainer.Pages.Add(new TabPage { Content = ScriptListControl, Text = "Scripts" });
-            TabContainer.Pages.Add(new TabPage { Content = ResultsControl, Text = "Results" });
+            DocumentPageSpreadsheet = new DocumentPage { Content = SpreadsheetControl, Text = "Spreadsheet", Closable = false };
+
+            DocumentContainer = new DocumentControl() { AllowReordering = true };
+            DocumentContainer.Pages.Add(new DocumentPage { Content = Split2, Text = "Flowsheet", Closable = false });
+            DocumentContainer.Pages.Add(new DocumentPage { Content = MaterialStreamListControl, Text = "Material Streams", Closable = false });
+            DocumentContainer.Pages.Add(DocumentPageSpreadsheet);
+            DocumentContainer.Pages.Add(new DocumentPage { Content = ScriptListControl, Text = "Script Manager", Closable = false });
+            DocumentContainer.Pages.Add(new DocumentPage { Content = ResultsControl, Text = "Results", Closable = false });
+
+            Split3.Panel1 = DocumentContainer;
 
             // main container
 
-            Content = TabContainer;
+            Content = Split1;
 
             // context menus
 
@@ -1077,7 +1061,7 @@ namespace DWSIM.UI.Forms
             if (Application.Instance.Platform.IsWpf)
             {
 
-                TabContainer.SelectedIndexChanged += (sender2, e2) =>
+                DocumentContainer.SelectedIndexChanged += (sender2, e2) =>
                 {
                     if (TabSwitch)
                     {
@@ -1086,7 +1070,7 @@ namespace DWSIM.UI.Forms
                             TabSwitch = false;
                             Application.Instance.Invoke(() =>
                             {
-                                TabContainer.SelectedIndex = 0;
+                                DocumentContainer.SelectedIndex = 0;
                                 this.Enabled = true;
                             });
                         });
@@ -1094,7 +1078,7 @@ namespace DWSIM.UI.Forms
                 };
 
                 //this.Enabled = false;
-                TabContainer.SelectedPage = TabPageSpreadsheet;
+                DocumentContainer.SelectedPage = DocumentPageSpreadsheet;
 
             }
 
@@ -1283,20 +1267,17 @@ namespace DWSIM.UI.Forms
             this.FlowsheetObject.ScriptKeywordsF = netprops + objects;
         }
 
-        Eto.Forms.Container SetupLogWindow()
+        Eto.Forms.DocumentControl SetupLogWindow()
         {
-
-            var label = new Label { Text = "  " + "Information/Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Bottom, TextColor = Colors.White, Height = (int)(sf * 20) };
-            label.Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             var outtxt = new RichTextArea();
             outtxt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             outtxt.ReadOnly = true;
             outtxt.SelectionBold = true;
 
-            var container = new TableLayout { Rows = { label, outtxt }, Spacing = new Size(5, 5) };
+            var container = new DocumentControl();
 
-            container.BackgroundColor = BGColor;
+            container.Pages.Add(new DocumentPage(outtxt) { Text = "Log Panel", Closable = false });
 
             var ctxmenu0 = new ContextMenu();
 

@@ -98,9 +98,7 @@
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
     <Compile Include="Results\ResultsViewer.cs" />
     <Compile Include="ScriptManager\GTK\ScriptItem.cs" />
-    <Compile Include="ScriptManager\MonoMac\ScriptItem.cs" />
-    <Compile Include="ScriptManager\MonoMac\ScriptManager.cs" />
-    <Compile Include="ScriptManager\WPF\ScriptItem.cs" />
+    <Compile Include="ScriptManager\ScriptItem.cs" />
     <Compile Include="ScriptManager\ScriptManager.cs" />
     <Compile Include="ScriptManager\ScriptManagerBase.cs" />
     <Compile Include="Spreadsheet\PropSelection.cs" />
