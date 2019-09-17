@@ -62,7 +62,7 @@ namespace DWSIM.UI.Forms
         private double sf = s.UIScalingFactor;
 
         private CheckToolItem btnmSnapToGrid, btnmDrawGrid, btnmMultiSelect;
-        
+
         void InitializeComponent()
         {
 
@@ -721,11 +721,11 @@ namespace DWSIM.UI.Forms
             var Split2 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
             var Split3 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
 
-            EditorHolder = new DocumentControl() { AllowReordering = true, BackgroundColor = SystemColors.ControlBackground };
+            EditorHolder = new DocumentControl() { AllowReordering = true, DisplayArrows = false };
 
-            var PanelEditors = new DocumentControl() {BackgroundColor = SystemColors.Highlight };
+            var PanelEditors = new DocumentControl() { TabBarBackgroundColor = SystemColors.Highlight };
             PanelEditors.Pages.Add(new DocumentPage(EditorHolder) { Text = "Object Editors", Closable = false });
-            
+
             Split1.Panel1 = PanelEditors;
 
             Split1.Panel1.Width = (int)(sf * 360);
@@ -750,53 +750,26 @@ namespace DWSIM.UI.Forms
             var panellogical = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelother = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
-            if (GlobalSettings.Settings.RunningPlatform() == s.Platform.Mac)
-            {
 
-                var objcontainer = new DocumentControl { AllowReordering = true };
-                objcontainer.Style = "drop";
-                objcontainer.Pages.Add(new DocumentPage(panelstreams) { Closable = false, Text = "Streams" });
-                objcontainer.Pages.Add(new DocumentPage(panelpressurechangers) { Closable = false, Text = "Pressure Changers" });
-                objcontainer.Pages.Add(new DocumentPage(panelseparators) { Closable = false, Text = "Separators" });
-                objcontainer.Pages.Add(new DocumentPage(panelmixers) { Closable = false, Text = "Mixers/Splitters" });
-                objcontainer.Pages.Add(new DocumentPage(panelexchangers) { Closable = false, Text = "Exchangers" });
-                objcontainer.Pages.Add(new DocumentPage(panelcolumns) { Closable = false, Text = "Columns" });
-                objcontainer.Pages.Add(new DocumentPage(panelreactors) { Closable = false, Text = "Reactors" });
-                objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
-                objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
-                objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Ops" });
-                objcontainer.Pages.Add(new DocumentPage(panelother) { Closable = false, Text = "Other" });
+            var objcontainer = new DocumentControl { AllowReordering = true };
+            objcontainer.Style = "drop";
+            objcontainer.Pages.Add(new DocumentPage(panelstreams) { Closable = false, Text = "Streams" });
+            objcontainer.Pages.Add(new DocumentPage(panelpressurechangers) { Closable = false, Text = "Pressure Changers" });
+            objcontainer.Pages.Add(new DocumentPage(panelseparators) { Closable = false, Text = "Separators" });
+            objcontainer.Pages.Add(new DocumentPage(panelmixers) { Closable = false, Text = "Mixers/Splitters" });
+            objcontainer.Pages.Add(new DocumentPage(panelexchangers) { Closable = false, Text = "Exchangers" });
+            objcontainer.Pages.Add(new DocumentPage(panelcolumns) { Closable = false, Text = "Columns" });
+            objcontainer.Pages.Add(new DocumentPage(panelreactors) { Closable = false, Text = "Reactors" });
+            objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
+            objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
+            objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Ops" });
+            objcontainer.Pages.Add(new DocumentPage(panelother) { Closable = false, Text = "Other" });
 
-                var PanelObjects = new DocumentControl();
-                PanelObjects.Pages.Add(new DocumentPage(objcontainer) { Text = "Object Palette", Closable = false });
+            var PanelObjects = new DocumentControl() { DisplayArrows = false, TabBarBackgroundColor = SystemColors.Highlight };
+            PanelObjects.Pages.Add(new DocumentPage(objcontainer) { Text = "Object Palette", Closable = false });
 
-                Split2.Panel2 = PanelObjects;
-                Split2.Panel2.Height = 120;
-
-            }
-            else
-            {
-
-                var objcontainer = new TabControl();
-                objcontainer.Pages.Add(new TabPage(panelstreams) { Text = "Streams" });
-                objcontainer.Pages.Add(new TabPage(panelpressurechangers) { Text = "Pressure Changers" });
-                objcontainer.Pages.Add(new TabPage(panelseparators) { Text = "Separators" });
-                objcontainer.Pages.Add(new TabPage(panelmixers) { Text = "Mixers/Splitters" });
-                objcontainer.Pages.Add(new TabPage(panelexchangers) { Text = "Exchangers" });
-                objcontainer.Pages.Add(new TabPage(panelcolumns) { Text = "Columns" });
-                objcontainer.Pages.Add(new TabPage(panelreactors) { Text = "Reactors" });
-                objcontainer.Pages.Add(new TabPage(panelsolids) { Text = "Solids" });
-                objcontainer.Pages.Add(new TabPage(paneluser) { Text = "User Models" });
-                objcontainer.Pages.Add(new TabPage(panellogical) { Text = "Logical Ops" });
-                objcontainer.Pages.Add(new TabPage(panelother) { Text = "Other" });
-
-                var PanelObjects = new DocumentControl();
-                PanelObjects.Pages.Add(new DocumentPage(objcontainer) {Text = "Object Palette", Closable = false });
-
-                Split2.Panel2 = PanelObjects;
-                Split2.Panel2.Height = 120;
-
-            }
+            Split2.Panel2 = PanelObjects;
+            Split2.Panel2.Height = 120;
 
             foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
             {
@@ -881,7 +854,7 @@ namespace DWSIM.UI.Forms
 
             DocumentPageSpreadsheet = new DocumentPage { Content = SpreadsheetControl, Text = "Spreadsheet", Closable = false };
 
-            DocumentContainer = new DocumentControl() { AllowReordering = true };
+            DocumentContainer = new DocumentControl() { AllowReordering = true, DisplayArrows = false };
             DocumentContainer.Pages.Add(new DocumentPage { Content = Split2, Text = "Flowsheet", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = MaterialStreamListControl, Text = "Material Streams", Closable = false });
             DocumentContainer.Pages.Add(DocumentPageSpreadsheet);
@@ -1275,7 +1248,7 @@ namespace DWSIM.UI.Forms
             outtxt.ReadOnly = true;
             outtxt.SelectionBold = true;
 
-            var container = new DocumentControl();
+            var container = new DocumentControl() { DisplayArrows = false, TabBarBackgroundColor = SystemColors.Highlight };
 
             container.Pages.Add(new DocumentPage(outtxt) { Text = "Log Panel", Closable = false });
 
