@@ -171,23 +171,23 @@ xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\W
 xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
-del "$(SolutionDir)DistPackages\Windows\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\Windows\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\Windows\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\Windows\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows\plugins\x64"
 
-del "$(SolutionDir)DistPackages\Windows_32\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\Windows_32\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x64"
 
-del "$(SolutionDir)DistPackages\macOS\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\macOS\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\macOS\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\macOS\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\macOS\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\macOS\plugins\x64"
 
-del "$(SolutionDir)DistPackages\Linux\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\Linux\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\Linux\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\Linux\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\Linux\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Linux\plugins\x64"
 )</PostBuildEvent>

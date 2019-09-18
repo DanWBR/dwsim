@@ -713,7 +713,14 @@ namespace DWSIM.UI.Forms
 
             MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
 
-            ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
+            if (Application.Instance.Platform.IsMac)
+            {
+                ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager_Mac(FlowsheetObject);
+            }
+            else
+            {
+                ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
+            }
 
             LoadObjects();
 

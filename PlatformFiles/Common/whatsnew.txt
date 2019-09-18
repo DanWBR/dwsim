@@ -1,6 +1,11 @@
-Version 5.7 Update 14
+Version 5.8
 
-- [CHG] Added 'This' to python vars (Python Script UO)
+- [CHG] Redesigned Spreadsheet Tool (Classic UI)
+- [CHG] Redesigned Cross-Platform UI
+- [CHG] Redesigned Property Package editors
+- [FIX] Fixed text to number conversions
 - [FIX] Fixed flowsheet dragging while zoomed
-- [FIX] Fixed exception when launching the Script Editor (Classic UI)
-- [FIX] Fixed Energy Stream connection editors for Python Script UO (Classic UI)
+- [FIX] Fixed PFR heat balance
+- [FIX] Fixed liquid phase viscosity calculation for supercritical compounds
+- [FIX] Fixed Splitter ratios calculation mode
+- [FIX] Workaround for math expression parsing errors

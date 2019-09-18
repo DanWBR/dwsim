@@ -62,6 +62,18 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
 
+Version 5.8
+
+- [CHG] Redesigned Spreadsheet Tool (Classic UI)
+- [CHG] Redesigned Cross-Platform UI
+- [CHG] Redesigned Property Package editors
+- [FIX] Fixed text to number conversions
+- [FIX] Fixed flowsheet dragging while zoomed
+- [FIX] Fixed PFR heat balance
+- [FIX] Fixed liquid phase viscosity calculation for supercritical compounds
+- [FIX] Fixed Splitter ratios calculation mode
+- [FIX] Workaround for math expression parsing errors
+
 Version 5.7 Update 14
 
 - [CHG] Added 'This' to python vars (Python Script UO)

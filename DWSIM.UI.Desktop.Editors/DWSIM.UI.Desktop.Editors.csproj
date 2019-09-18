@@ -96,6 +96,8 @@
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
     <Compile Include="Results\ResultsViewer.cs" />
     <Compile Include="ScriptManager\GTK\ScriptItem.cs" />
+    <Compile Include="ScriptManager\Mac\ScriptItem.cs" />
+    <Compile Include="ScriptManager\Mac\ScriptManager.cs" />
     <Compile Include="ScriptManager\ScriptItem.cs" />
     <Compile Include="ScriptManager\ScriptManager.cs" />
     <Compile Include="ScriptManager\ScriptManagerBase.cs" />
