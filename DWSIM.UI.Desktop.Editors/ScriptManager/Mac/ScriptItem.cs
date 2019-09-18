@@ -33,18 +33,16 @@ using System.Xml.Linq;
 namespace DWSIM.UI.Desktop.Editors
 {
 
-    public class ScriptItem_Mac : TableLayout
+    public class ScriptItem : TableLayout
     {
 
         public CheckBox chkLink;
         public DropDown cbLinkedObject, cbLinkedEvent, cbPythonInt;
-        public Eto.Forms.Controls.Scintilla.Shared.ScintillaControl txtScript;
-        public TextBox txtName;
-        public Button btnRun, btnUpdate, btnRunAsync;
+        public dynamic txtScript;
 
         private FlowsheetBase.FlowsheetBase flowsheet;
 
-        public ScriptItem_Mac(FlowsheetBase.FlowsheetBase fs)
+        public ScriptItem(FlowsheetBase.FlowsheetBase fs)
         {
             flowsheet = fs;
             Init();
@@ -64,12 +62,6 @@ namespace DWSIM.UI.Desktop.Editors
             lbl2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             lbl3.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var lbl4 = new Label { Text = "Script Name", VerticalAlignment = VerticalAlignment.Center };
-            txtName = new TextBox { Text = "Script Name", Height = 22 };
-
-            lbl4.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            txtName.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
             cbLinkedObject = new DropDown();
             cbLinkedEvent = new DropDown();
             cbPythonInt = new DropDown();
@@ -85,20 +77,7 @@ namespace DWSIM.UI.Desktop.Editors
             var tb1 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb1.Rows.Add(tr1);
             tb1.Height = 34;
-
-            btnRun = new Button { Text = "Store and Run" };
-            btnRunAsync = new Button { Text = "Store and Run Async" };
-            btnUpdate = new Button { Text = "Store Updated Script" };
-
-            btnRun.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            btnRunAsync.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            btnUpdate.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-
-            var tr2 = new TableRow(btnUpdate, btnRun, btnRunAsync, lbl4, txtName);
-            var tb2 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
-            tb2.Rows.Add(tr2);
-            tb2.Height = 34;
-
+            
             cbLinkedObject.SelectedIndexChanged += (sender, e) =>
             {
                 if (cbLinkedObject.SelectedIndex < 0) return;
@@ -137,16 +116,27 @@ namespace DWSIM.UI.Desktop.Editors
                 cbLinkedEvent.SelectedIndex = 0;
             };
 
-            txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
-            txtScript.SetKeywords(1, flowsheet.ScriptKeywordsF);
-
-            var tr3 = new TableRow(txtScript);
-            var tb3 = new TableLayout { Spacing = new Size(5, 5) };
-            tb3.Rows.Add(tr3);
-
             Rows.Add(new TableRow(tb1));
-            Rows.Add(new TableRow(tb2));
-            Rows.Add(new TableRow(tb3));
+
+            if (!Application.Instance.Platform.IsWpf)
+            {
+                txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
+                ((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript).SetKeywords(1, flowsheet.ScriptKeywordsF);
+                var tr3 = new TableRow((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript);
+                var tb3 = new TableLayout { Spacing = new Size(5, 5) };
+                tb3.Rows.Add(tr3);
+                Rows.Add(new TableRow(tb3));
+            }
+            else
+            {
+                txtScript = new DWSIM.UI.Controls.CodeEditorControl();
+                var tr3 = new TableRow((DWSIM.UI.Controls.CodeEditorControl)txtScript);
+                var tb3 = new TableLayout { Spacing = new Size(5, 5) };
+                tb3.Rows.Add(tr3);
+                Rows.Add(new TableRow(tb3));
+            }
+
+
 
         }
 

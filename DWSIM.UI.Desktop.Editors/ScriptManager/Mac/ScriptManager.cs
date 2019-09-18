@@ -23,14 +23,16 @@ namespace DWSIM.UI.Desktop.Editors
     public class ScriptManager_Mac : ScriptManagerBase
     {
 
+        string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
+
         private DWSIM.UI.Desktop.Shared.Flowsheet Flowsheet;
 
         private ListBox lbScripts;
-        private ScriptItem_Mac ScriptEditor;
+        private ScriptItem ScriptEditor;
 
         private bool adding = false;
 
-        private DWSIM.Interfaces.IScript selscript; 
+        private DWSIM.Interfaces.IScript selscript;
 
         public ScriptManager_Mac(DWSIM.UI.Desktop.Shared.Flowsheet fs)
             : base()
@@ -42,14 +44,58 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
+            var ti1 = new ButtonSegmentedItem() { ToolTip = "New Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-new.png")) };
+            var ti2 = new ButtonSegmentedItem() { ToolTip = "Update Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-approve_and_update.png")) };
+            var ti3 = new ButtonSegmentedItem() { ToolTip = "Print", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-print.png")) };
+
+            var ts1 = new SegmentedButton { Items = { ti1, ti2, ti3 } };
+
+            var ti4 = new ButtonSegmentedItem() { ToolTip = "Cut", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cut.png")) };
+            var ti5 = new ButtonSegmentedItem() { ToolTip = "Copy", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy.png")) };
+            var ti6 = new ButtonSegmentedItem() { ToolTip = "Paste", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paste.png")) };
+
+            var ts2 = new SegmentedButton { Items = { ti4, ti5, ti6 } };
+
+            var ti7 = new ButtonSegmentedItem() { ToolTip = "Undo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-undo.png")) };
+            var ti8 = new ButtonSegmentedItem() { ToolTip = "Redo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-redo.png")) };
+
+            var ts3 = new SegmentedButton { Items = { ti7, ti8 } };
+
+            var ti9 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")) };
+
+            var ti10 = new ButtonSegmentedItem() { ToolTip = "Indent Right", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "indent-right.png")) };
+            var ti11 = new ButtonSegmentedItem() { ToolTip = "Indent Left", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "left-indentation-option.png")) };
+
+            var ts4 = new SegmentedButton { Items = { ti10, ti11 } };
+
+            var ti12 = new ButtonSegmentedItem() { ToolTip = "Decrease Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-decrease_font.png")) };
+            var ti13 = new ButtonSegmentedItem() { ToolTip = "Increase Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-increase_font.png")) };
+
+            var ts5 = new SegmentedButton { Items = { ti12, ti13 } };
+
+            var ti14 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")) };
+
+            var ti15 = new ButtonSegmentedItem() { ToolTip = "Run Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+            var ti16 = new ButtonSegmentedItem() { ToolTip = "Run Script (Async)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-circled_play.png")) };
+
+            var ts6 = new SegmentedButton { Items = { ti15, ti16 } };
+
+            var ti17 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")) };
+
+            var menu = new StackLayout
+            {
+                Items = {ts1, ts2, ts3, ti9, ts4, ts5, ti14, ts6, ti17},
+                Orientation = Orientation.Horizontal,
+                Spacing = 4,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch
+            };
+
             var leftcontainer = new TableLayout();
             var rightcontainer = new TableLayout();
 
-            ScriptEditor = new ScriptItem_Mac(Flowsheet);
+            ScriptEditor = new ScriptItem(Flowsheet);
 
-            var btnNew = new Button { Text = "New Script" };
-            btnNew.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            btnNew.Click += (sender, e) =>
+            ti1.Click += (sender, e) =>
             {
                 var script = new DWSIM.FlowsheetSolver.Script { ID = Guid.NewGuid().ToString(), Title = "Script" + (Flowsheet.Scripts.Count + 1).ToString() };
                 Flowsheet.Scripts.Add(script.ID, script);
@@ -64,12 +110,19 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     if (lbScripts.SelectedIndex < 0) return;
 
-                    if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
+                    if (!Application.Instance.Platform.IsWpf)
+                    {
+                        if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
+                    }
+                    else
+                    {
+                        if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.Text;
+                    }
 
                     selscript = Flowsheet.Scripts[lbScripts.SelectedKey];
 
                     adding = true;
-                    
+
                     ScriptEditor.cbLinkedObject.Items.Clear();
 
                     ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Simulation", Key = "Simulation" });
@@ -82,8 +135,15 @@ namespace DWSIM.UI.Desktop.Editors
 
                     adding = false;
 
-                    ScriptEditor.txtName.Text = selscript.Title;
-                    ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
+                    //ScriptEditor.txtName.Text = selscript.Title;
+                    if (!Application.Instance.Platform.IsWpf)
+                    {
+                        ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
+                    }
+                    else
+                    {
+                        ScriptEditor.txtScript.Text = selscript.ScriptText;
+                    }
 
                     ScriptEditor.chkLink.Checked = selscript.Linked;
 
@@ -167,7 +227,7 @@ namespace DWSIM.UI.Desktop.Editors
                 lbScripts.Items.RemoveAt(lbScripts.SelectedIndex);
             };
 
-            ScriptEditor.btnRun.Click += (sender, e) =>
+            ti15.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.ShowMessage("Running script '" + Flowsheet.Scripts[lbScripts.SelectedKey].Title + "'...", IFlowsheet.MessageType.Information);
@@ -175,7 +235,7 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.RunScript(lbScripts.SelectedKey);
             };
 
-            ScriptEditor.btnRunAsync.Click += (sender, e) =>
+            ti16.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.ShowMessage("Running script '" + Flowsheet.Scripts[lbScripts.SelectedKey].Title + "' asynchronously...", IFlowsheet.MessageType.Information);
@@ -183,14 +243,13 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.RunScriptAsync(lbScripts.SelectedKey);
             };
 
-            ScriptEditor.btnUpdate.Click += (sender, e) =>
+            ti2.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
             };
 
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = SystemFonts.Bold() });
-            leftcontainer.Rows.Add(new TableRow(btnNew));
             leftcontainer.Rows.Add(new TableRow(btnDelete));
             leftcontainer.Rows.Add(new TableRow(lbScripts));
             leftcontainer.Padding = new Padding(5, 5, 5, 5);
@@ -203,36 +262,30 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.Scripts[lbScripts.SelectedKey].Linked = ScriptEditor.chkLink.Checked.GetValueOrDefault();
             };
 
-            //this.KeyDown += (sender, e) =>
-            //{
-            //    switch (e.Key)
-            //    {
-            //        case Keys.F5 | Keys.Shift:
-            //            btnRun.PerformClick();
-            //            break;
-            //        case Keys.S | Keys.Shift:
-            //            btnUpdate.PerformClick();
-            //            break;
-            //    }
-            //};
-
             ScriptEditor.cbLinkedObject.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;
 
             ScriptEditor.cbLinkedEvent.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;
 
-            ScriptEditor.txtName.TextChanged += (sender, e) =>
-            {
-                if (lbScripts.SelectedIndex < 0) return;
-                Flowsheet.Scripts[lbScripts.SelectedKey].Title = ScriptEditor.txtName.Text;
-                lbScripts.Items[lbScripts.SelectedIndex].Text = ScriptEditor.txtName.Text;
-            };
+            //ScriptEditor.txtName.TextChanged += (sender, e) =>
+            //{
+            //    if (lbScripts.SelectedIndex < 0) return;
+            //    Flowsheet.Scripts[lbScripts.SelectedKey].Title = ScriptEditor.txtName.Text;
+            //    lbScripts.Items[lbScripts.SelectedIndex].Text = ScriptEditor.txtName.Text;
+            //};
 
             rightcontainer.Rows.Add(new Label { Text = "Selected Script", Font = SystemFonts.Bold() });
             rightcontainer.Rows.Add(new TableRow(ScriptEditor));
             rightcontainer.Padding = new Padding(5, 5, 5, 5);
             rightcontainer.Spacing = new Size(10, 10);
 
-            Rows.Add(new TableRow(leftcontainer, rightcontainer));
+            var splitc = new Splitter() { };
+            splitc.Panel1 = leftcontainer;
+            splitc.Panel1.Width = 100;
+            splitc.Panel2 = rightcontainer;
+            splitc.SplitterWidth = 2;
+
+            Rows.Add(new TableRow(menu));
+            Rows.Add(new TableRow(splitc));
 
         }
 
@@ -332,7 +385,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public override void UpdateScripts()
         {
-            if (lbScripts.SelectedIndex < 0) return; 
+            if (lbScripts.SelectedIndex < 0) return;
             Flowsheet.ShowMessage("Storing updated scripts for saving...", IFlowsheet.MessageType.Information);
             Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
         }
