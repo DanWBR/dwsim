@@ -61,7 +61,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var ts3 = new SegmentedButton { Items = { ti7, ti8 } };
 
-            var ti9 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")) };
+            var ti9 = new Button() { Width = 30, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")) };
 
             var ti10 = new ButtonSegmentedItem() { ToolTip = "Indent Right", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "indent-right.png")) };
             var ti11 = new ButtonSegmentedItem() { ToolTip = "Indent Left", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "left-indentation-option.png")) };
@@ -73,21 +73,22 @@ namespace DWSIM.UI.Desktop.Editors
 
             var ts5 = new SegmentedButton { Items = { ti12, ti13 } };
 
-            var ti14 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")) };
+            var ti14 = new Button() { Width = 30, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "code.png")) };
 
             var ti15 = new ButtonSegmentedItem() { ToolTip = "Run Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
             var ti16 = new ButtonSegmentedItem() { ToolTip = "Run Script (Async)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-circled_play.png")) };
 
             var ts6 = new SegmentedButton { Items = { ti15, ti16 } };
 
-            var ti17 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")) };
+            var ti17 = new Button() { Width = 30, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")) };
 
             var menu = new StackLayout
             {
                 Items = {ts1, ts2, ts3, ti9, ts4, ts5, ti14, ts6, ti17},
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                Padding = 5
             };
 
             var leftcontainer = new TableLayout();
