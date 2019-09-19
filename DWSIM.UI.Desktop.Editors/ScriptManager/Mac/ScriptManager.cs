@@ -70,6 +70,10 @@ namespace DWSIM.UI.Desktop.Editors
 
             var ti17 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")) };
 
+            var l1 = new Label() { Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
+
+            var t1 = new TextBox {Width = 100 };
+
             var menu1 = new StackLayout
             {
                 Items = {ts1},
@@ -81,7 +85,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var menu2 = new StackLayout
             {
-                Items = { ts6, ts2, ts3, ti9, ts4, ts5, ti14, ti17 },
+                Items = { ts6, ts2, ts3, ti9, ts4, ts5, ti14, ti17, l1, t1 },
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
@@ -133,7 +137,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     adding = false;
 
-                    //ScriptEditor.txtName.Text = selscript.Title;
+                    t1.Text = selscript.Title;
                     if (!Application.Instance.Platform.IsWpf)
                     {
                         ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
@@ -248,7 +252,7 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
             };
 
-            leftcontainer.Rows.Add(new Label { Text = "Script List", Font = SystemFonts.Bold(), Height = 30, VerticalAlignment = VerticalAlignment.Center });
+            leftcontainer.Rows.Add(new Label { Text = "Script List", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
             leftcontainer.Rows.Add(new TableRow(menu1));
             leftcontainer.Rows.Add(new TableRow(lbScripts));
             leftcontainer.Padding = new Padding(5, 5, 5, 5);
@@ -265,14 +269,14 @@ namespace DWSIM.UI.Desktop.Editors
 
             ScriptEditor.cbLinkedEvent.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;
 
-            //ScriptEditor.txtName.TextChanged += (sender, e) =>
-            //{
-            //    if (lbScripts.SelectedIndex < 0) return;
-            //    Flowsheet.Scripts[lbScripts.SelectedKey].Title = ScriptEditor.txtName.Text;
-            //    lbScripts.Items[lbScripts.SelectedIndex].Text = ScriptEditor.txtName.Text;
-            //};
+            t1.TextChanged += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.Scripts[lbScripts.SelectedKey].Title = t1.Text;
+                lbScripts.Items[lbScripts.SelectedIndex].Text = t1.Text;
+            };
 
-            rightcontainer.Rows.Add(new Label { Text = "Selected Script", Font = SystemFonts.Bold(), Height = 30, VerticalAlignment = VerticalAlignment.Center });
+            rightcontainer.Rows.Add(new Label { Text = "Selected Script", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
             rightcontainer.Rows.Add(new TableRow(menu2));
             rightcontainer.Rows.Add(new TableRow(ScriptEditor));
             rightcontainer.Padding = new Padding(5, 5, 5, 5);

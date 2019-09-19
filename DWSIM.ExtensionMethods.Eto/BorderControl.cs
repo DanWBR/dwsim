@@ -22,8 +22,8 @@ namespace DWSIM.ExtensionMethods.Eto
             this.borderPanel.Content = this.containingPanel;
             base.Content = this.borderPanel;
 
-            this.borderPanel.BackgroundColor = Colors.Black;
-            this.containingPanel.BackgroundColor = Colors.White;
+            this.borderPanel.BackgroundColor = SystemColors.ControlText;
+            this.containingPanel.BackgroundColor = SystemColors.Control;
         }
 
         public new Color BackgroundColor

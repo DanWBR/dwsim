@@ -228,7 +228,7 @@ namespace DWSIM.UI.Shared
             container.CreateAndAddEmptySpace();
             container.AddRow(new TableRow(label));
             container.CreateAndAddEmptySpace();
-            container.AddRow(new TableRow(new Border { BorderColor = Colors.Black, BorderThickness = 1}));
+            container.AddRow(new TableRow(new Border { BorderThickness = 1}));
             container.CreateAndAddEmptySpace();
             return label;
         }
@@ -238,7 +238,7 @@ namespace DWSIM.UI.Shared
             var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
             label.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             container.Rows.Add(new TableRow(label));
-            container.Rows.Add(new TableRow(new Border { BorderColor = Colors.Black, BorderThickness = 1 }));
+            container.Rows.Add(new TableRow(new Border { BorderThickness = 1 }));
             return label;
         }
 
