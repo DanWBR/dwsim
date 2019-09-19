@@ -11,7 +11,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public CheckBox chkLink;
         public DropDown cbLinkedObject, cbLinkedEvent, cbPythonInt;
-        public dynamic txtScript;
+        public Eto.Forms.Controls.Scintilla.Shared.ScintillaControl txtScript;
 
         private FlowsheetBase.FlowsheetBase flowsheet;
 
@@ -24,10 +24,10 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
-            chkLink = new CheckBox { Text = "Link Script", Height = 22};
+            chkLink = new CheckBox { Text = "Link Script", Height = 22 };
             chkLink.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            var lbl1 = new Label { Text = "Object", VerticalAlignment = VerticalAlignment.Center};
+            var lbl1 = new Label { Text = "Object", VerticalAlignment = VerticalAlignment.Center };
             var lbl2 = new Label { Text = "Event", VerticalAlignment = VerticalAlignment.Center };
             var lbl3 = new Label { Text = "Python Interpreter", VerticalAlignment = VerticalAlignment.Center };
 
@@ -50,7 +50,7 @@ namespace DWSIM.UI.Desktop.Editors
             var tb1 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb1.Rows.Add(tr1);
             tb1.Height = 34;
-            
+
             cbLinkedObject.SelectedIndexChanged += (sender, e) =>
             {
                 if (cbLinkedObject.SelectedIndex < 0) return;
@@ -59,31 +59,31 @@ namespace DWSIM.UI.Desktop.Editors
                     case 0:
                         cbLinkedEvent.Items.Clear();
                         cbLinkedEvent.Items.AddRange(new string[] {
-			                "Simulation Opened",
-			                "Simulation Saved",
-			                "Simulation Closed",
-			                "1 min. Timer",
-			                "5 min. Timer",
-			                "15 min. Timer",
-			                "30 min. Timer",
-			                "60 min. Timer"
-		                }.Select((x) => new ListItem { Key = x, Text = x }));
+                            "Simulation Opened",
+                            "Simulation Saved",
+                            "Simulation Closed",
+                            "1 min. Timer",
+                            "5 min. Timer",
+                            "15 min. Timer",
+                            "30 min. Timer",
+                            "60 min. Timer"
+                        }.Select((x) => new ListItem { Key = x, Text = x }));
                         break;
                     case 1:
                         cbLinkedEvent.Items.Clear();
                         cbLinkedEvent.Items.AddRange(new string[] {
-			                "Solver Started",
-			                "Solver Finished",
-			                "Recycle Loop"
-		                }.Select((x) => new ListItem { Key = x, Text = x }));
+                            "Solver Started",
+                            "Solver Finished",
+                            "Recycle Loop"
+                        }.Select((x) => new ListItem { Key = x, Text = x }));
                         break;
                     default:
                         cbLinkedEvent.Items.Clear();
                         cbLinkedEvent.Items.AddRange(new string[] {
-			                "Object Calculation Started",
-			                "Object Calculation Finished",
-			                "Object Calculation Error"
-		                }.Select((x) => new ListItem { Key = x, Text = x }));
+                            "Object Calculation Started",
+                            "Object Calculation Finished",
+                            "Object Calculation Error"
+                        }.Select((x) => new ListItem { Key = x, Text = x }));
                         break;
                 }
                 cbLinkedEvent.SelectedIndex = 0;
@@ -91,25 +91,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             Rows.Add(new TableRow(tb1));
 
-            if (!Application.Instance.Platform.IsWpf)
-            {
-                txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
-                ((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript).SetKeywords(1, flowsheet.ScriptKeywordsF);
-                var tr3 = new TableRow((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript);
-                var tb3 = new TableLayout { Spacing = new Size(5, 5) };
-                tb3.Rows.Add(tr3);
-                Rows.Add(new TableRow(tb3));
-            }
-            else
-            {
-                txtScript = new DWSIM.UI.Controls.CodeEditorControl();
-                var tr3 = new TableRow((DWSIM.UI.Controls.CodeEditorControl)txtScript);
-                var tb3 = new TableLayout { Spacing = new Size(5, 5) };
-                tb3.Rows.Add(tr3);
-                Rows.Add(new TableRow(tb3));
-            }
-
-
+            txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
+            ((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript).SetKeywords(1, flowsheet.ScriptKeywordsF);
+            var tr3 = new TableRow((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript);
+            var tb3 = new TableLayout { Spacing = new Size(5, 5) };
+            tb3.Rows.Add(tr3);
+            Rows.Add(new TableRow(tb3));
 
         }
 

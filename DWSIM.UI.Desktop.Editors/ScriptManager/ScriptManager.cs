@@ -59,7 +59,7 @@ namespace DWSIM.UI.Desktop.Editors
             var ti12 = new ButtonSegmentedItem() { ToolTip = "Decrease Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-decrease_font.png")) };
             var ti13 = new ButtonSegmentedItem() { ToolTip = "Increase Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-increase_font.png")) };
 
-            var ts5 = new SegmentedButton {Height = 20, Items = { ti12, ti13 } };
+            var ts5 = new SegmentedButton { Height = 20, Items = { ti12, ti13 } };
 
             var ti14 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "code.png")) };
 
@@ -72,11 +72,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             var l1 = new Label() { Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
 
-            var t1 = new TextBox {Width = 100 };
+            var t1 = new TextBox { Width = 100 };
 
             var menu1 = new StackLayout
             {
-                Items = {ts1},
+                Items = { ts1 },
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
@@ -112,14 +112,7 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     if (lbScripts.SelectedIndex < 0) return;
 
-                    if (!Application.Instance.Platform.IsWpf)
-                    {
-                        if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
-                    }
-                    else
-                    {
-                        if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.Text;
-                    }
+                    if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
 
                     selscript = Flowsheet.Scripts[lbScripts.SelectedKey];
 
@@ -138,14 +131,8 @@ namespace DWSIM.UI.Desktop.Editors
                     adding = false;
 
                     t1.Text = selscript.Title;
-                    if (!Application.Instance.Platform.IsWpf)
-                    {
-                        ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
-                    }
-                    else
-                    {
-                        ScriptEditor.txtScript.Text = selscript.ScriptText;
-                    }
+
+                    ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
 
                     ScriptEditor.chkLink.Checked = selscript.Linked;
 

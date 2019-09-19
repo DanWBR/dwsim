@@ -96,11 +96,8 @@
     <Compile Include="General\UnhandledException.cs" />
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
     <Compile Include="Results\ResultsViewer.cs" />
-    <Compile Include="ScriptManager\GTK\ScriptItem.cs" />
-    <Compile Include="ScriptManager\Mac\ScriptItem.cs" />
-    <Compile Include="ScriptManager\Mac\ScriptManager.cs" />
-    <Compile Include="ScriptManager\WPF\ScriptItem.cs" />
-    <Compile Include="ScriptManager\WPF\ScriptManager.cs" />
+    <Compile Include="ScriptManager\ScriptItem.cs" />
+    <Compile Include="ScriptManager\ScriptManager.cs" />
     <Compile Include="ScriptManager\ScriptManagerBase.cs" />
     <Compile Include="Spreadsheet\PropSelection.cs" />
     <Compile Include="Spreadsheet\Spreadsheet.cs" />

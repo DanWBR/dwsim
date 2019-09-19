@@ -113,7 +113,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeEditor\CodeEditor.cs" />
     <Compile Include="OxyPlot\PlotHandler.cs" />
     <Compile Include="SkiaSharp\CanvasControl_OpenGL.cs" />
     <Compile Include="Styling.cs">

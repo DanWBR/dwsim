@@ -89,7 +89,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeEditor\CodeEditor.cs" />
     <Compile Include="SkiaSharp\CanvasControl_OpenGL.cs" />
     <Compile Include="SkiaSharp\OpenGL\GLES.cs" />
     <Compile Include="SkiaSharp\OpenGL\SKGLDrawable.cs" />
