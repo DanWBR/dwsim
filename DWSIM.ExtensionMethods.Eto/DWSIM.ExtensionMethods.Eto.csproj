@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BorderControl.cs" />
     <Compile Include="CodeEditorControl.cs" />
     <Compile Include="EtoExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

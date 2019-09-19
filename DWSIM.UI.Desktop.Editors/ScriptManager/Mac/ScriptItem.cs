@@ -1,34 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using DWSIM.Interfaces;
-using DWSIM.Interfaces.Enums.GraphicObjects;
-using DWSIM.UnitOperations.UnitOperations;
-using DWSIM.UnitOperations.Reactors;
-using DWSIM.UnitOperations.SpecialOps;
-using DWSIM.UnitOperations.Streams;
-using DWSIM.Thermodynamics.Streams;
-
 using Eto.Forms;
-
-using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
 using Eto.Drawing;
-
-using System.Diagnostics;
-using System.IO;
-
-using DWSIM.ExtensionMethods;
-using DWSIM.UI.Shared;
-using s = DWSIM.UI.Shared.Common;
-using System.Collections.ObjectModel;
-
-using global::DWSIM.SharedClasses.Spreadsheet;
-using Ciloci.Flee;
-using System.Globalization;
-using System.Xml.Linq;
 
 namespace DWSIM.UI.Desktop.Editors
 {

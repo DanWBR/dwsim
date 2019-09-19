@@ -572,7 +572,7 @@ Public Class Utility
 
             If GlobalSettings.Settings.RunningPlatform = GlobalSettings.Settings.Platform.Mac Then
 
-                Return "Xamarin.Mac (v5.2.1.5)"
+                Return "Xamarin.Mac (v5.14.0.110)"
 
             Else
 

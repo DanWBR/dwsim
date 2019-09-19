@@ -50,6 +50,8 @@ namespace DWSIM.UI.Forms
 
                 var cont0 = UI.Shared.Common.GetDefaultContainer();
 
+                UI.Shared.Common.CreateAndAddLabelRow(cont0, "Object Connections Editor".Localize());
+
                 UI.Shared.Common.CreateAndAddDescriptionRow(cont0, "ConnectorsEditorDescription".Localize());
                 new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont0);
 

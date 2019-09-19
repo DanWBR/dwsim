@@ -99,8 +99,8 @@
     <Compile Include="ScriptManager\GTK\ScriptItem.cs" />
     <Compile Include="ScriptManager\Mac\ScriptItem.cs" />
     <Compile Include="ScriptManager\Mac\ScriptManager.cs" />
-    <Compile Include="ScriptManager\ScriptItem.cs" />
-    <Compile Include="ScriptManager\ScriptManager.cs" />
+    <Compile Include="ScriptManager\WPF\ScriptItem.cs" />
+    <Compile Include="ScriptManager\WPF\ScriptManager.cs" />
     <Compile Include="ScriptManager\ScriptManagerBase.cs" />
     <Compile Include="Spreadsheet\PropSelection.cs" />
     <Compile Include="Spreadsheet\Spreadsheet.cs" />
@@ -239,6 +239,9 @@
     <EmbeddedResource Include="Resources\Icons\icons8-undo.png" />
     <EmbeddedResource Include="Resources\Icons\indent-right.png" />
     <EmbeddedResource Include="Resources\Icons\left-indentation-option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-filled_trash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

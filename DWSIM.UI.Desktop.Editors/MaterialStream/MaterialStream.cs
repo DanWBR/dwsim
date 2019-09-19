@@ -332,7 +332,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     Double total = 0.0f;
 
-                    var btnNormalize = s.CreateAndAddButtonRow(container2, "Normalize", null, null);
+                    var btnNormalize = new Button { Text = "Normalize" };
                     btnNormalize.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnNormalize.Click += (sender, e) =>
@@ -360,7 +360,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     };
 
-                    var btnEqualize = s.CreateAndAddButtonRow(container2, "Equalize", null, null);
+                    var btnEqualize = new Button { Text = "Equalize" };
                     btnEqualize.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnEqualize.Click += (sender, e) =>
@@ -371,7 +371,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     };
 
-                    var btnClear = s.CreateAndAddButtonRow(container2, "Clear", null, null);
+                    var btnClear = new Button { Text = "Clear" };
                     btnClear.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnClear.Click += (sender, e) =>
@@ -382,7 +382,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     };
 
-                    var btnAccept = s.CreateAndAddButtonRow(container2, "Accept/Update", null, null);
+                    var btnAccept = new Button { Text = "Accept/Update" };
                     btnAccept.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnAccept.Click += (sender, e) =>
@@ -533,6 +533,10 @@ namespace DWSIM.UI.Desktop.Editors
                         if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke();
 
                     };
+
+                    var stack = new StackLayout { HorizontalContentAlignment = HorizontalAlignment.Stretch, Orientation = Orientation.Horizontal, Items = {btnClear, btnNormalize, btnEqualize, btnAccept } };
+
+                    s.CreateAndAddControlRow(container2, stack);
 
                     s.CreateAndAddEmptySpace(container2);
                     s.CreateAndAddEmptySpace(container2);
