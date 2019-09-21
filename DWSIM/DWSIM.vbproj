@@ -315,6 +315,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\RichTextBoxExtended.dll</HintPath>
     </Reference>
+    <Reference Include="Scintilla.Eto.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WinForms">
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WPF">
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
       <Private>True</Private>

@@ -189,7 +189,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeEditor\CodeEditor.cs" />
     <Compile Include="OxyPlot\PlotHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkiaSharp\CanvasControl_OpenGL.cs" />

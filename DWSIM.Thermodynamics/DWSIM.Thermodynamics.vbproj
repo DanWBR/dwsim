@@ -156,6 +156,9 @@
     <Reference Include="RichTextBoxExtended">
       <HintPath>..\DWSIM\References\RichTextBoxExtended.dll</HintPath>
     </Reference>
+    <Reference Include="Scintilla.Eto.Shared">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />

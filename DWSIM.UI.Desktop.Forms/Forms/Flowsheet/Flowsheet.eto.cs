@@ -475,7 +475,8 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-            FlowsheetControl.FlowsheetSurface.BackgroundColor = s.DarkMode ? SkiaSharp.SKColors.Black : SkiaSharp.SKColors.White;
+            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SkiaSharp.SKColor.Parse(SystemColors.ControlBackground.ToHex());
+            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SkiaSharp.SKColor.Parse(SystemColors.ControlText.ToHex());
             FlowsheetControl.KeyDown += (sender, e) =>
             {
                 if (e.Key == Keys.Delete) DeleteObject();
@@ -713,16 +714,9 @@ namespace DWSIM.UI.Forms
 
             MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
 
-            //if (Application.Instance.Platform.IsMac)
-            //{
-                ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager_Mac(FlowsheetObject);
-            //}
-            //else
-            //{
-            //    ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
-            //}
-
             LoadObjects();
+
+            ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager_Mac(FlowsheetObject);
 
             var Split1 = new Eto.Forms.Splitter { Orientation = Orientation.Horizontal, FixedPanel = SplitterFixedPanel.Panel1 };
             var Split2 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };

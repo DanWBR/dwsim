@@ -11573,14 +11573,14 @@ Final3:
                 Next
             Next
 
-            Dim codeeditor As New UI.Controls.CodeEditorControl() With {.Height = 200}
+            Dim codeeditor As New Eto.Forms.Controls.Scintilla.Shared.ScintillaControl() With {.Height = 200}
 
             Dim dd = container2.CreateAndAddDropDownRow("Phase/Property", plist, 0,
                                                Sub(sender, e)
                                                    If PropertyOverrides.ContainsKey(sender.SelectedKey) Then
-                                                       codeeditor.Text = PropertyOverrides(sender.SelectedKey)
+                                                       codeeditor.ScriptText = PropertyOverrides(sender.SelectedKey)
                                                    Else
-                                                       codeeditor.Text = ""
+                                                       codeeditor.ScriptText = ""
                                                    End If
                                                End Sub)
 
@@ -11590,11 +11590,11 @@ Final3:
                                                  If Not PropertyOverrides.ContainsKey(dd.SelectedKey) Then
                                                      PropertyOverrides.Add(dd.SelectedKey, "")
                                                  End If
-                                                 PropertyOverrides(dd.SelectedKey) = codeeditor.Text
+                                                 PropertyOverrides(dd.SelectedKey) = codeeditor.ScriptText
                                              End Sub)
             container2.CreateAndAddLabelAndButtonRow("Clear/Remove Override Script", "Clear", Nothing,
                                              Sub(sender, e)
-                                                 codeeditor.Text = ""
+                                                 codeeditor.ScriptText = ""
                                                  If PropertyOverrides.ContainsKey(dd.SelectedKey) Then
                                                      PropertyOverrides.Remove(dd.SelectedKey)
                                                  End If

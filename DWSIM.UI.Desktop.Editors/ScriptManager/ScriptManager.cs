@@ -70,9 +70,9 @@ namespace DWSIM.UI.Desktop.Editors
 
             var ti17 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")) };
 
-            var l1 = new Label() { Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
+            var l1 = new Label() {VerticalAlignment= VerticalAlignment.Center, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
 
-            var t1 = new TextBox { Width = 100 };
+            var t1 = new TextBox { Width = 250 };
 
             var menu1 = new StackLayout
             {
@@ -237,6 +237,54 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.ScriptText;
+            };
+
+            ti3.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Print();
+            };
+
+            ti4.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Cut();
+            };
+
+            ti5.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Copy();
+            };
+
+            ti6.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Paste();
+            };
+
+            ti7.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Undo();
+            };
+
+            ti8.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Redo();
+            };
+
+            ti10.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Indent();
+            };
+
+            ti11.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.Unindent();
             };
 
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });

@@ -92,7 +92,7 @@ Namespace GraphicObjects
 
         Public Sub UpdateStatus2(ByRef ConnPen As SKPaint, ByVal Conn As ConnectorGraphic)
 
-            ConnPen.Color = If(s.DarkMode, SKColors.White, SKColors.Black)
+            ConnPen.Color = GraphicsSurface.ForegroundColor
 
             If Conn.AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And Conn.AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
                 ConnPen.Color = SKColors.SteelBlue

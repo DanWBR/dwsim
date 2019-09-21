@@ -92,7 +92,7 @@ namespace DWSIM.UI.Desktop.Editors
             Rows.Add(new TableRow(tb1));
 
             txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
-            ((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript).SetKeywords(1, flowsheet.ScriptKeywordsF);
+            txtScript.SetKeywords(1, flowsheet.ScriptKeywordsF);
             var tr3 = new TableRow((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript);
             var tb3 = new TableLayout { Spacing = new Size(5, 5) };
             tb3.Rows.Add(tr3);
