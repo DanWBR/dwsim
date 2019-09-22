@@ -163,10 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\Sine_100px.png" />
-    <EmbeddedResource Include="Resources\Icons\Workflow_100px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Icons\VerticalSettingsMixer_100px.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\DWSIM_ico.png" />

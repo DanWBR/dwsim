@@ -70,7 +70,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var ti17 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")) };
 
-            var l1 = new Label() {VerticalAlignment= VerticalAlignment.Center, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
+            var l1 = new Label() { VerticalAlignment= VerticalAlignment.Bottom, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
 
             var t1 = new TextBox { Width = 250 };
 
@@ -275,6 +275,12 @@ namespace DWSIM.UI.Desktop.Editors
                 ScriptEditor.txtScript.Redo();
             };
 
+            ti9.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.ToggleCommenting();
+            };
+
             ti10.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
@@ -285,6 +291,18 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 ScriptEditor.txtScript.Unindent();
+            };
+
+            ti12.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.DecreaseFontSize();
+            };
+
+            ti13.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                ScriptEditor.txtScript.IncreaseFontSize();
             };
 
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });

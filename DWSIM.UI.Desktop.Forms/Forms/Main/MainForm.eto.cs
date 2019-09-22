@@ -88,13 +88,13 @@ namespace DWSIM.UI
             });
 
             var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn3 = new Button() { Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn6 = new Button() { Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn8 = new Button() { Style = "donate", Text = "Become a Patron", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-patreon.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "VerticalSettingsMixer_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "ReportCard_96px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
 
             btn9.Click += (sender, e) =>
             {
