@@ -422,54 +422,59 @@ Namespace Scripts
                     For Each pitem In itemprops
 
                         itemtsmis.Items.Add(
-                        CreateMenuItem("Object Property : " & pitem.Name, Sub()
-                                                                              InsertText("# Define Object Property: " & pitem.Name)
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(String.Format("obj.{0} = value", pitem.Name))
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              If pitem.PropertyType.BaseType Is GetType([Enum]) Then
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  InsertText("# This property is an Enumeration (Enum) type.")
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  InsertText(String.Format("# Full type name: {0}", pitem.PropertyType.ToString.Replace("+", ".")))
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  InsertText("# Accepted enumeration values:")
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  For Each etype In [Enum].GetNames(pitem.PropertyType)
-                                                                                      InsertText(String.Format("# {0}.{1}", pitem.PropertyType.ToString.Replace("+", "."), etype))
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                  Next
-                                                                              End If
-                                                                          End Sub, fs))
+                        CreateMenuItem("Object Property: " & pitem.Name, Sub()
+                                                                             InsertText("# Define Object Property: " & pitem.Name)
+                                                                             InsertText(System.Environment.NewLine)
+                                                                             InsertText(System.Environment.NewLine)
+                                                                             InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                             InsertText(System.Environment.NewLine)
+                                                                             InsertText(String.Format("obj.{0} = value", pitem.Name))
+                                                                             InsertText(System.Environment.NewLine)
+                                                                             If pitem.PropertyType.BaseType Is GetType([Enum]) Then
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText("# This property is an Enumeration (Enum) type.")
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText(String.Format("# Full type name: {0}", pitem.PropertyType.ToString.Replace("+", ".")))
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText("# Accepted enumeration values:")
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 For Each etype In [Enum].GetNames(pitem.PropertyType)
+                                                                                     InsertText(String.Format("# {0}.{1}", pitem.PropertyType.ToString.Replace("+", "."), etype))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                 Next
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText("# example usage:")
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText(String.Format("# obj.{0} = {1}.{2}", pitem.Name, pitem.PropertyType.ToString.Replace("+", "."), [Enum].GetNames(pitem.PropertyType)(0)))
+                                                                             End If
+                                                                         End Sub, fs))
 
                         itemtsmig.Items.Add(
-                            CreateMenuItem("Object Property : " & pitem.Name, Sub()
-                                                                                  InsertText("# Get Object Property: " & pitem.Name)
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  InsertText(String.Format("value = obj.{0}", pitem.Name))
-                                                                                  InsertText(System.Environment.NewLine)
-                                                                                  If pitem.PropertyType.BaseType Is GetType([Enum]) Then
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText("# This property is an Enumeration (Enum) type.")
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText(String.Format("# Full type name: {0}", pitem.PropertyType.ToString.Replace("+", ".")))
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText("# Possible enumeration values:")
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      For Each etype In [Enum].GetNames(pitem.PropertyType)
-                                                                                          InsertText(String.Format("# {0}.{1}", pitem.PropertyType.ToString.Replace("+", "."), etype))
-                                                                                          InsertText(System.Environment.NewLine)
-                                                                                      Next
-                                                                                  End If
-                                                                              End Sub, fs))
+                            CreateMenuItem("Object Property: " & pitem.Name, Sub()
+                                                                                 InsertText("# Get Object Property: " & pitem.Name)
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 InsertText(String.Format("value = obj.{0}", pitem.Name))
+                                                                                 InsertText(System.Environment.NewLine)
+                                                                                 If pitem.PropertyType.BaseType Is GetType([Enum]) Then
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText("# This property is an Enumeration (Enum) type.")
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("# Full type name: {0}", pitem.PropertyType.ToString.Replace("+", ".")))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText("# Possible enumeration values:")
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     For Each etype In [Enum].GetNames(pitem.PropertyType)
+                                                                                         InsertText(String.Format("# {0}.{1}", pitem.PropertyType.ToString.Replace("+", "."), etype))
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                     Next
+                                                                                 End If
+                                                                             End Sub, fs))
 
                     Next
 
