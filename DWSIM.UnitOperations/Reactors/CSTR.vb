@@ -904,13 +904,12 @@ out:        Dim ms1, ms2 As MaterialStream
 
             'Calculate component conversions
             For i = 0 To NC - 1
-                If Nin(i) > 0 And Nin(i) > Nout(i) Then
-                    ComponentConversions(CompNames(i)) = (Nin(i) - Nout(i)) / Nin(i)
-                Else
-                    ComponentConversions(CompNames(i)) = 0
+                If Nin(i) > 0 Then
+                    ComponentConversions(CompNames(i)) = Abs(Nin(i) - Nout(i)) / Nin(i)
                 End If
-
             Next
+
+            OutletTemperature = T
 
             '====================================================
             '==== Transfer information to energy stream =========
@@ -1555,7 +1554,7 @@ out:        Dim ms1, ms2 As MaterialStream
                     Next
                     proplist.Add("Calculation Mode")
                     For Each item In ComponentConversions
-                        proplist.Add(item.Key + " Conversion")
+                        proplist.Add(item.Key + ": Conversion")
                     Next
                     For Each dbl As KeyValuePair(Of String, Double) In RxiT
                         proplist.Add(FlowSheet.Reactions(dbl.Key).Name + ": Extent")

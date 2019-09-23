@@ -923,6 +923,8 @@ Namespace Reactors
 
                 Me.DeltaT = 0.0#
 
+                OutletTemperature = T0
+
             ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
 
                 'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -944,8 +946,8 @@ Namespace Reactors
 
             ' comp. conversions
             For Each sb As Compound In ims.Phases(0).Compounds.Values
-                If Me.ComponentConversions.ContainsKey(sb.Name) Then
-                    Me.ComponentConversions(sb.Name) = (N00(sb.Name) - N(sb.Name)) / N00(sb.Name)
+                If Me.ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0 Then
+                    Me.ComponentConversions(sb.Name) = Abs(N00(sb.Name) - N(sb.Name)) / N00(sb.Name)
                 End If
             Next
 
