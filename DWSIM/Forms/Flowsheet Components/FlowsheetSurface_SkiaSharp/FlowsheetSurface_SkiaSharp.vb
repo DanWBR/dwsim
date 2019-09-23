@@ -308,10 +308,10 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Else
 
-            Me.TSMI_Label.Text = "Tabela"
+            Me.TSMI_Label.Text = DWSIM.App.GetLocalString("Tabela")
+            Me.ExcluirToolStripMenuItem.Visible = True
             Me.ClonarToolStripMenuItem.Visible = False
             Me.HorizontalmenteToolStripMenuItem.Visible = False
-            Me.ExcluirToolStripMenuItem.Visible = False
             Me.RecalcularToolStripMenuItem.Visible = False
             Me.ToolStripSeparator6.Visible = False
 

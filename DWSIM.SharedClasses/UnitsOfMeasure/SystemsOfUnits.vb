@@ -1297,7 +1297,7 @@ Namespace SystemsOfUnits
                 Case "m3/mol"
                     Return value * 1000
                 Case "ft3/lbmol"
-                    Return value / 35.3147 / 1000
+                    Return value / 35.3147 / 1000 / 2.20462
 
                 Case "mm"                               'comprimento'
                     Return value
@@ -1320,7 +1320,7 @@ Namespace SystemsOfUnits
                 Case "mol/mL"
                     Return value * 1000000.0 / 1000
                 Case "lbmol/ft3"
-                    Return value * 35.3147 * 1000
+                    Return value * 35.3147 * 1000 / 2.20462
                 Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"
@@ -1373,8 +1373,8 @@ Namespace SystemsOfUnits
                     Return value / 60 * 1000000.0
                 Case "mol/[cm3.h]"
                     Return value / 3600 * 1000000.0
-                Case "lbmol.[ft3.h]"
-                    Return value / 3600 * 35.3147 * 1000
+                Case "lbmol/[ft3.h]"
+                    Return value / 3600 * 35.3147 * 1000 / 2.20462
                 Case "°C"                               'temperatura e demais
                     Return value + 273.15
                 Case "C"                               'temperatura e demais
@@ -1738,7 +1738,7 @@ Namespace SystemsOfUnits
                 Case "m3/mol"
                     Return value / 1000
                 Case "ft3/lbmol"
-                    Return value * 35.3147 * 1000
+                    Return value * 35.3147 * 1000 * 2.20462
 
                 Case "mm"                               'comprimento'
                     Return value
@@ -1761,7 +1761,7 @@ Namespace SystemsOfUnits
                 Case "mol/mL"
                     Return value / 1000000.0 * 1000
                 Case "lbmol/ft3"
-                    Return value * 35.3147 * 1000
+                    Return value / 35.3147 / 1000 * 2.20462
                 Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"
@@ -1816,8 +1816,8 @@ Namespace SystemsOfUnits
                     Return value * 60 / 1000000.0
                 Case "mol/[cm3.h]"
                     Return value * 3600 / 1000000.0
-                Case "lbmol.[ft3.h]"
-                    Return value * 3600 / 35.3147 / 1000
+                Case "lbmol/[ft3.h]"
+                    Return value * 3600 / 35.3147 / 1000 * 2.20462
                 Case "°C"                               'temperatura e demais
                     Return value - 273.15
                 Case "C"                               'temperatura e demais
