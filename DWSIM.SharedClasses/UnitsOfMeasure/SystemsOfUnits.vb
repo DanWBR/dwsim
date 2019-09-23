@@ -235,7 +235,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.mass_conc
                     units.AddRange(New String() {"kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
                 Case Enums.UnitOfMeasure.reac_rate
-                    units.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"})
+                    units.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol/[ft3.h]"})
                 Case Enums.UnitOfMeasure.molar_enthalpy
                     units.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol", "J/mol"})
                 Case Enums.UnitOfMeasure.molar_entropy
@@ -323,7 +323,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.molar_conc
                 Case "kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"
                     Return Enums.UnitOfMeasure.mass_conc
-                Case "kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"
+                Case "kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol/[ft3.h]"
                     Return Enums.UnitOfMeasure.reac_rate
                 Case "kJ/kmol", "cal/mol", "BTU/lbmol"
                     Return Enums.UnitOfMeasure.molar_enthalpy
@@ -893,7 +893,7 @@ Namespace SystemsOfUnits
                 .mass_conc = "lbm/ft3"
                 .molar_conc = "lbmol/ft3"
                 .molar_volume = "ft3/lbmol"
-                .reac_rate = "lbmol.[ft3.h]"
+                .reac_rate = "lbmol/[ft3.h]"
                 .reac_rate_heterog = "lbmol.[lbm.h]"
                 .spec_vol = "ft3/lbm"
                 .time = "h"

@@ -296,13 +296,13 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            p2.CreateAndAddLabelRow("Kinetic Parameters");
+            p1.CreateAndAddLabelRow("Temperature Limits");
 
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
 
-            p2.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
-            p2.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
+            p1.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
+            p1.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
 
             p2.CreateAndAddLabelRow("Velocity Constant for Forward Reactions");
 
@@ -329,7 +329,7 @@ namespace DWSIM.UI.Desktop.Editors
                 else sender.TextColor = Colors.Red;
             });
 
-            p2.CreateAndAddStringEditorRow2("E (J/mol)", "", rx.E_Forward.ToString(), (sender, e) =>
+            p2.CreateAndAddStringEditorRow2("E", "", rx.E_Forward.ToString(), (sender, e) =>
             {
                 if (Double.TryParse(sender.Text.ToString(), out val))
                 {
@@ -339,7 +339,7 @@ namespace DWSIM.UI.Desktop.Editors
                 else sender.TextColor = Colors.Red;
             });
 
-            p2.CreateAndAddStringEditorRow2("User Expression - f(T)", "", rx.ReactionKinFwdExpression, (sender, e) =>
+            p2.CreateAndAddStringEditorRow2("User Expression - f(T), T in K", "", rx.ReactionKinFwdExpression, (sender, e) =>
             {
                 rx.ReactionKinFwdExpression = sender.Text;
             });
@@ -379,7 +379,7 @@ namespace DWSIM.UI.Desktop.Editors
                 else sender.TextColor = Colors.Red;
             });
 
-            p2.CreateAndAddStringEditorRow2("User Expression - f(T)", "", rx.ReactionKinRevExpression, (sender, e) =>
+            p2.CreateAndAddStringEditorRow2("User Expression - f(T), T in K", "", rx.ReactionKinRevExpression, (sender, e) =>
             {
                 rx.ReactionKinRevExpression = sender.Text;
             });
@@ -398,6 +398,15 @@ namespace DWSIM.UI.Desktop.Editors
             units2.Insert(0, "");
 
             p2.CreateAndAddDropDownRow("Velocity Units", units2, units2.IndexOf(rx.VelUnit), (sender, e) => rx.VelUnit = sender.SelectedValue.ToString());
+
+            var units3 = us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molar_enthalpy);
+            units3.Insert(0, "");
+
+            p2.CreateAndAddDropDownRow("E (Forward)", units3, units3.IndexOf(rx.E_Forward_Unit), (sender, e) => rx.E_Forward_Unit = sender.SelectedValue.ToString());
+
+            p2.CreateAndAddDropDownRow("E (Reverse)", units3, units3.IndexOf(rx.E_Reverse_Unit), (sender, e) => rx.E_Reverse_Unit = sender.SelectedValue.ToString());
+
+            UpdateEquation();
 
             UpdateEquation();
 
