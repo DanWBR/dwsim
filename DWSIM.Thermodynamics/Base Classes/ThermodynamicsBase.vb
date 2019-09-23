@@ -407,6 +407,10 @@ Namespace BaseClasses
 
         Public Property ReactionKinRevExpression As String = "" Implements IReaction.ReactionKinRevExpression
 
+        Public Property E_Forward_Unit As String = "J/mol" Implements IReaction.E_Forward_Unit
+
+        Public Property E_Reverse_Unit As String = "J/mol" Implements IReaction.E_Reverse_Unit
+
         Public Function EvaluateK1(T As Double, PP As Interfaces.IPropertyPackage) As Double Implements Interfaces.IReaction.EvaluateK
             Return EvaluateK(T, PP)
         End Function

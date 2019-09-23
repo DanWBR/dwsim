@@ -237,7 +237,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.reac_rate
                     units.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"})
                 Case Enums.UnitOfMeasure.molar_enthalpy
-                    units.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol"})
+                    units.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol", "J/mol"})
                 Case Enums.UnitOfMeasure.molar_entropy
                     units.AddRange(New String() {"kJ/[kmol.K]", "cal/[mol.C]", "BTU/[lbmol.R]"})
                 Case Enums.UnitOfMeasure.velocity, Enums.UnitOfMeasure.speedOfSound
@@ -1235,7 +1235,7 @@ Namespace SystemsOfUnits
                 Case "kcal/kg"
                     Return value / 0.238846
 
-                Case "kJ/kmol"
+                Case "kJ/kmol", "J/mol"
                     Return value
                 Case "cal/mol"
                     Return value * 0.0041868 * 1000
@@ -1676,7 +1676,7 @@ Namespace SystemsOfUnits
                 Case "kcal/kg"
                     Return value * 0.238846
 
-                Case "kJ/kmol"
+                Case "kJ/kmol", "J/mol"
                     Return value
                 Case "cal/mol"
                     Return value / 0.0041868 / 1000

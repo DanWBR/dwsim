@@ -121,41 +121,35 @@
     <value>Cancel</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tbRevUE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 95</value>
+  </data>
+  <data name="tbRevUE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 20</value>
+  </data>
+  <data name="tbFwdUE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 43</value>
+  </data>
+  <data name="tbFwdUE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 20</value>
+  </data>
   <data name="rdRevUD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 17</value>
+    <value>143, 17</value>
   </data>
   <data name="rdRevUD.Text" xml:space="preserve">
-    <value>User-Defined: f(T)</value>
+    <value>User-Defined: f(T), T in K</value>
   </data>
   <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 46</value>
+    <value>149, 46</value>
   </data>
   <data name="rdFwdUD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 17</value>
+    <value>143, 17</value>
   </data>
   <data name="rdFwdUD.Text" xml:space="preserve">
-    <value>User-Defined: f(T)</value>
+    <value>User-Defined: f(T), T in K</value>
   </data>
   <data name="FlowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 46</value>
-  </data>
-  <data name="KryptonLabel18.ImageKey" xml:space="preserve">
-    <value>(none)</value>
-  </data>
-  <data name="KryptonLabel18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
-  </data>
-  <data name="KryptonLabel18.Text" xml:space="preserve">
-    <value>E in J/mol, T in K</value>
-  </data>
-  <data name="KryptonLabel17.ImageKey" xml:space="preserve">
-    <value>(none)</value>
-  </data>
-  <data name="KryptonLabel17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
-  </data>
-  <data name="KryptonLabel17.Text" xml:space="preserve">
-    <value>E in J/mol, T in K</value>
+    <value>149, 46</value>
   </data>
   <data name="KryptonLabel15.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 13</value>
@@ -163,11 +157,29 @@
   <data name="KryptonLabel15.Text" xml:space="preserve">
     <value>E '</value>
   </data>
+  <data name="tbRevA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 70</value>
+  </data>
+  <data name="tbRevA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="KryptonLabel16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 74</value>
+  </data>
   <data name="KryptonLabel16.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 13</value>
   </data>
   <data name="KryptonLabel16.Text" xml:space="preserve">
     <value>A '</value>
+  </data>
+  <data name="tbFwdA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 18</value>
+  </data>
+  <data name="tbFwdA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="KryptonLabel13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 22</value>
   </data>
   <data name="KryptonLabel11.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>

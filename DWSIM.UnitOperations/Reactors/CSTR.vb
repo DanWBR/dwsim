@@ -183,7 +183,7 @@ Namespace Reactors
 
                     If rxn.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
 
-                        kxf = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
+                        kxf = rxn.A_Forward * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Forward_Unit, "J/mol", rxn.E_Forward) / (8.314 * T))
 
                     Else
 
@@ -202,7 +202,7 @@ Namespace Reactors
 
                     If rxn.ReactionKinRevType = ReactionKineticType.Arrhenius Then
 
-                        kxr = rxn.A_Reverse * Exp(-rxn.E_Reverse / (8.314 * T))
+                        kxr = rxn.A_Reverse * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Reverse_Unit, "J/mol", rxn.E_Reverse) / (8.314 * T))
 
                     Else
 
@@ -602,7 +602,7 @@ Namespace Reactors
 
                         If rxn.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
 
-                            kxf = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
+                            kxf = rxn.A_Forward * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Forward_Unit, "J/mol", rxn.E_Forward) / (8.314 * T))
 
                         Else
 
@@ -621,7 +621,7 @@ Namespace Reactors
 
                         If rxn.ReactionKinRevType = ReactionKineticType.Arrhenius Then
 
-                            kxr = rxn.A_Reverse * Exp(-rxn.E_Reverse / (8.314 * T))
+                            kxr = rxn.A_Reverse * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Reverse_Unit, "J/mol", rxn.E_Reverse) / (8.314 * T))
 
                         Else
 
