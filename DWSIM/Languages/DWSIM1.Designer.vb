@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class DWSIM
@@ -11049,6 +11049,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PhaseIdentificationParameter() As String
             Get
                 Return ResourceManager.GetString("PhaseIdentificationParameter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Propriedades da Fase.
+        '''</summary>
+        Friend Shared ReadOnly Property PhaseProperties() As String
+            Get
+                Return ResourceManager.GetString("PhaseProperties", resourceCulture)
             End Get
         End Property
         

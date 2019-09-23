@@ -5562,4 +5562,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ReactionProperty" xml:space="preserve">
     <value>Propriedade de Reação</value>
   </data>
+  <data name="PhaseProperties" xml:space="preserve">
+    <value>Propriedades da Fase</value>
+  </data>
 </root>

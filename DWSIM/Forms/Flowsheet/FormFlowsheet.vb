@@ -265,6 +265,12 @@ Public Class FormFlowsheet
 
         If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
 
+        Dim fs As New FormScript
+        fs.fc = Me
+        fs.Show(Me.dckPanel)
+
+        FormSurface.Activate()
+
     End Sub
 
     Function ReturnForm(ByVal str As String) As IDockContent
@@ -1131,12 +1137,6 @@ Public Class FormFlowsheet
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
         Dim frmdc As New DCCharacterizationWizard
         frmdc.ShowDialog(Me)
-    End Sub
-
-    Private Sub IronRubyToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IronRubyToolStripMenuItem.Click
-        Dim fs As New FormScript
-        fs.fc = Me
-        fs.Show(Me.dckPanel)
     End Sub
 
     Private Sub ExibirRelatoriosDosObjetosCAPEOPENToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles COObjTSMI.CheckedChanged

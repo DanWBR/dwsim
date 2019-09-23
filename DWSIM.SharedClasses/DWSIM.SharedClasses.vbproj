@@ -78,6 +78,9 @@
     <Reference Include="Ciloci.Flee">
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
+    </Reference>
     <Reference Include="FileHelpers">
       <HintPath>..\DWSIM\References\FileHelpers.dll</HintPath>
     </Reference>
@@ -196,6 +199,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
@@ -208,11 +215,6 @@
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
-      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
-      <Name>DWSIM.Interfaces</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

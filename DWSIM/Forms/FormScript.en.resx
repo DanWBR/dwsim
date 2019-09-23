@@ -235,6 +235,18 @@
   <data name="btnIdentRemove.Text" xml:space="preserve">
     <value>Remove indentation from selected lines</value>
   </data>
+  <data name="GetPropertyTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="GetPropertyTSMI.Text" xml:space="preserve">
+    <value>Get Object Property</value>
+  </data>
+  <data name="SetPropertyTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="SetPropertyTSMI.Text" xml:space="preserve">
+    <value>Set Object Property</value>
+  </data>
   <data name="tsbInsertSnippet.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 22</value>
   </data>
@@ -280,7 +292,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABs
-        CQAAAk1TRnQBSQFMAgEBBQEAAXwBAgF8AQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBBQEAAZQBAgGUAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1772,6 +1784,9 @@
         AAAAAAAAAAAAAAAAAAD8P5Ib8A8AAMADp2CAAcADgAGAAQAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAIAB
         AACAAYABwAOAAeAHwAP4H+AH
 </value>
+  </data>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Script Manager</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Script Manager</value>

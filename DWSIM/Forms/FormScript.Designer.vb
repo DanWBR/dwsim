@@ -44,6 +44,8 @@
         Me.tscb2 = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbInsertSnippet = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.GetPropertyTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetPropertyTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnRun = New System.Windows.Forms.ToolStripButton()
         Me.btnRunAsync = New System.Windows.Forms.ToolStripButton()
@@ -210,8 +212,19 @@
         'tsbInsertSnippet
         '
         resources.ApplyResources(Me.tsbInsertSnippet, "tsbInsertSnippet")
+        Me.tsbInsertSnippet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GetPropertyTSMI, Me.SetPropertyTSMI})
         Me.tsbInsertSnippet.Image = Global.DWSIM.My.Resources.Resources.script_code
         Me.tsbInsertSnippet.Name = "tsbInsertSnippet"
+        '
+        'GetPropertyTSMI
+        '
+        resources.ApplyResources(Me.GetPropertyTSMI, "GetPropertyTSMI")
+        Me.GetPropertyTSMI.Name = "GetPropertyTSMI"
+        '
+        'SetPropertyTSMI
+        '
+        resources.ApplyResources(Me.SetPropertyTSMI, "SetPropertyTSMI")
+        Me.SetPropertyTSMI.Name = "SetPropertyTSMI"
         '
         'ToolStripSeparator7
         '
@@ -411,6 +424,8 @@
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CloseButton = False
+        Me.CloseButtonVisible = False
         Me.Controls.Add(Me.TabStripScripts)
         Me.Controls.Add(Me.ToolStrip1)
         Me.DoubleBuffered = True
@@ -481,4 +496,6 @@
     Public WithEvents btnStopDebug As ToolStripButton
     Friend WithEvents tsbInsertSnippet As ToolStripDropDownButton
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
+    Friend WithEvents GetPropertyTSMI As ToolStripMenuItem
+    Friend WithEvents SetPropertyTSMI As ToolStripMenuItem
 End Class

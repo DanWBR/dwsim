@@ -273,7 +273,7 @@
   <data name="CompoundCreatorWizardTSMI.Text" xml:space="preserve">
     <value>Compound Creator Wizard</value>
   </data>
-  <data name="PropriedadesDasSubstânciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="PropriedadesDasSubstanciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>324, 22</value>
   </data>
   <data name="PropriedadesDasSubstanciasToolStripMenuItem.Text" xml:space="preserve">
@@ -307,7 +307,7 @@
     <value>321, 6</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
+    <value>46, 20</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
@@ -348,14 +348,8 @@
   <data name="OtimizaToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Optimization</value>
   </data>
-  <data name="IronRubyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
-  </data>
-  <data name="IronRubyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Script Manager</value>
-  </data>
   <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>184, 26</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
     <value>Create Report</value>

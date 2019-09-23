@@ -4,6 +4,7 @@ using Eto.Drawing;
 using DWSIM.Interfaces;
 using s = DWSIM.UI.Shared.Common;
 using DWSIM.Interfaces.Enums;
+using System.Linq;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -70,7 +71,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var ti17 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")) };
 
-            var l1 = new Label() { VerticalAlignment= VerticalAlignment.Bottom, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
+            var l1 = new Label() { VerticalAlignment = VerticalAlignment.Bottom, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
 
             var t1 = new TextBox { Width = 250 };
 
@@ -303,6 +304,38 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 ScriptEditor.txtScript.IncreaseFontSize();
+            };
+
+            ti14.Click += (sender, e) =>
+            {
+                var c1 = new ContextMenu();
+                Application.Instance.Invoke(() => {
+                    var snippets = SharedClasses.Scripts.IronPythonSnippets.GetSnippets();
+                    foreach (var group1 in snippets.GroupBy((x) => x.Category1))
+                    {
+                        ButtonMenuItem tsmi = new ButtonMenuItem() { Text = group1.Key };
+                        c1.Items.Add(tsmi);
+                        foreach (var group2 in group1.GroupBy((x2) => x2.Category2))
+                        {
+                            ButtonMenuItem tsmi2 = new ButtonMenuItem() { Text = group2.Key };
+                            tsmi.Items.Add(tsmi2);
+                            foreach (var snippet in group2)
+                            {
+                                ButtonMenuItem tsmi3 = new ButtonMenuItem() { Text = snippet.Name + " (" + snippet.Scope + ")", Tag = snippet.Snippet };
+                                tsmi3.Click += (sender2, e2) =>
+                                {
+                                    ScriptEditor.txtScript.InsertSnippet(tsmi3.Tag.ToString());
+                                };
+                                tsmi2.Items.Add(tsmi3);
+                            }
+                        }
+                    }
+                    DWSIM.SharedClasses.Scripts.IronPythonSnippets.PopulateWithDynamicSnippets(c1, Flowsheet, (text) =>
+                    {
+                        ScriptEditor.txtScript.InsertSnippet(text);
+                    });
+                    c1.Show(ti14);
+                });
             };
 
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
