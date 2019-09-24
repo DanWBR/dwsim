@@ -52,11 +52,7 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Sub ConfigParameters()
-            m_par = New System.Collections.Generic.Dictionary(Of String, Double)
-            With Me.Parameters
-                .Clear()
-                .Add("PP_IGNORE_SALINITY_LIMIT", 0)
-            End With
+
         End Sub
 
         Public Overrides Sub DisplayEditingForm()
@@ -700,7 +696,7 @@ Namespace PropertyPackages
 
             If Double.IsInfinity(salinity) Then salinity = 0.0#
 
-            If Parameters("PP_IGNORE_SALINITY_LIMIT") = 0 Then
+            If Not IgnoreSalinityLimit Then
                 If salinity > Seawater.sal_smax Then
                     If Me.CurrentMaterialStream.Flowsheet IsNot Nothing Then
                         Me.CurrentMaterialStream.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)
@@ -726,7 +722,7 @@ Namespace PropertyPackages
 
             If Double.IsInfinity(salinity) Then salinity = 0.0#
 
-            If Parameters("PP_IGNORE_SALINITY_LIMIT") = 0 Then
+            If Not IgnoreSalinityLimit Then
                 If salinity > Seawater.sal_smax Then
                     If Me.CurrentMaterialStream.Flowsheet IsNot Nothing Then
                         Me.CurrentMaterialStream.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)

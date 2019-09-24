@@ -99,6 +99,7 @@
     <Compile Include="Broyden.vb" />
     <Compile Include="BS.vb" />
     <Compile Include="cMatLib.vb" />
+    <Compile Include="Extrapolation.vb" />
     <Compile Include="GammaF.vb" />
     <Compile Include="GDEM.vb" />
     <Compile Include="General.vb" />

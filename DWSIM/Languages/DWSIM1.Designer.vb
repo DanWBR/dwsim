@@ -2558,6 +2558,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Propriedades Constantes.
+        '''</summary>
+        Friend Shared ReadOnly Property ConstantProperties() As String
+            Get
+                Return ResourceManager.GetString("ConstantProperties", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Contração Rápida d/D = 1/2.
         '''</summary>
         Friend Shared ReadOnly Property ContraoRpidadD12() As String

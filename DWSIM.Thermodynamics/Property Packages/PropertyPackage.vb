@@ -151,6 +151,82 @@ Namespace PropertyPackages
         'DWSIM IPropertyPackage
         Implements IPropertyPackage
 
+#Region "   Enums"
+
+        Public Enum LiquidDensityCalcMode
+            Rackett = 0
+            Rackett_and_ExpData = 1
+            EOS = 2
+        End Enum
+
+        Public Enum LiquidViscosityCalcMode
+            Letsou_Stiel = 0
+            ExpData = 1
+        End Enum
+
+        Public Enum LiquidViscosityMixRule
+            MoleAverage = 0
+            LogMoleAverage = 1
+            InvertedMassAverage = 2
+            InvertedLogMassAverage = 2
+        End Enum
+
+        Public Enum EnthalpyEntropyCpCvCalcMode
+            LeeKesler = 0
+            Ideal = 1
+            Excess = 2
+            ExpData = 3
+        End Enum
+
+        Public Enum VaporPhaseFugacityCalcMode
+            Ideal = 0
+            PengRobinson = 1
+        End Enum
+
+        Public Enum SolidPhaseFugacityCalcMode
+            FromLiquidFugacity = 0
+            Ideal = 1
+        End Enum
+
+#End Region
+
+#Region "   Property Calculation Settings"
+
+        Public Property LiquidDensityCalculationMode_Subcritical As LiquidDensityCalcMode = LiquidDensityCalcMode.Rackett_and_ExpData
+
+        Public Property LiquidDensityCalculationMode_Supercritical As LiquidDensityCalcMode = LiquidDensityCalcMode.Rackett_and_ExpData
+
+        Public Property LiquidDensity_UsePenelouxVolumeTranslation As Boolean = True
+
+        Public Property LiquidDensity_CorrectExpDataForPressure As Boolean = True
+
+        Public Property LiquidViscosityCalculationMode_Subcritical As LiquidViscosityCalcMode = LiquidViscosityCalcMode.ExpData
+
+        Public Property LiquidViscosityCalculationMode_Supercritical As LiquidViscosityCalcMode = LiquidViscosityCalcMode.Letsou_Stiel
+
+        Public Property LiquidViscosity_CorrectExpDataForPressure As Boolean = True
+
+        Public Property LiquidViscosity_MixingRule As LiquidViscosityMixRule = LiquidViscosityMixRule.MoleAverage
+
+        Public Property LiquidFugacity_UsePoyntingCorrectionFactor As Boolean = True
+
+        Public Property ActivityCoefficientModels_IgnoreMissingInteractionParameters As Boolean = True
+
+        Public Property VaporPhaseFugacityCalculationMode As VaporPhaseFugacityCalcMode = VaporPhaseFugacityCalcMode.Ideal
+
+        Public Property SolidPhaseFugacityCalculationMethod As SolidPhaseFugacityCalcMode = SolidPhaseFugacityCalcMode.FromLiquidFugacity
+
+        Public Property SolidPhaseFugacity_UseIdealLiquidPhaseFugacity As Boolean = False
+
+        Public Property EnthalpyEntropyCpCvCalculationMode As EnthalpyEntropyCpCvCalcMode = EnthalpyEntropyCpCvCalcMode.LeeKesler
+
+        Public Property IgnoreVaporFractionLimit As Boolean = False
+
+        Public Property IgnoreSalinityLimit As Boolean = False
+
+
+#End Region
+
 #Region "   Members"
 
         Public Const ClassId As String = ""
@@ -159,7 +235,6 @@ Namespace PropertyPackages
         Private m_ss As New System.Collections.Generic.List(Of String)
         Private m_configurable As Boolean = False
 
-        Public m_par As New System.Collections.Generic.Dictionary(Of String, Double)
         Public m_Henry As New System.Collections.Generic.Dictionary(Of String, HenryParam)
 
         <NonSerialized> Private m_ip As DataTable
@@ -329,15 +404,7 @@ Namespace PropertyPackages
         End Sub
 
         Public Overridable Sub ConfigParameters()
-            m_par = New System.Collections.Generic.Dictionary(Of String, Double)
-            With Me.Parameters
-                .Clear()
-                .Add("PP_USEEXPLIQDENS", 0)
-                .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
-                .Add("PP_LIQVISC_PCORRECTION", 1)
-                .Add("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC", 0)
-                .Add("PP_USE_IDEAL_SOLID_FUGACITY", 0)
-            End With
+
         End Sub
 
         Public Sub CreatePhaseMappings()
@@ -447,13 +514,6 @@ Namespace PropertyPackages
         Public ReadOnly Property PackageType() As PackageType
             Get
                 Return _packagetype
-            End Get
-        End Property
-
-        Public ReadOnly Property Parameters() As Dictionary(Of String, Double)
-            Get
-                If Me.m_par Is Nothing Then ConfigParameters()
-                Return Me.m_par
             End Get
         End Property
 
@@ -1148,20 +1208,19 @@ Namespace PropertyPackages
                 IObj?.Paragraphs.Add(String.Format("Trivial solution detected! Recalculating K-values..."))
 
                 Dim Pc, Tc, w As Double
-                If Not Parameters.ContainsKey("PP_FLASHALGORITHMIDEALKFALLBACK") Then Parameters.Add("PP_FLASHALGORITHMIDEALKFALLBACK", 1)
-                If Parameters("PP_FLASHALGORITHMIDEALKFALLBACK") = 1 Then
-                    Dim cprops = DW_GetConstantProperties()
-                    For i = 0 To n
-                        Pc = cprops(i).Critical_Pressure
-                        Tc = cprops(i).Critical_Temperature
-                        w = cprops(i).Acentric_Factor
-                        If type = "LV" Then
-                            K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
-                        Else
-                            K(i) = 1.0#
-                        End If
-                    Next
-                End If
+
+                Dim cprops = DW_GetConstantProperties()
+                For i = 0 To n
+                    Pc = cprops(i).Critical_Pressure
+                    Tc = cprops(i).Critical_Temperature
+                    w = cprops(i).Acentric_Factor
+                    If type = "LV" Then
+                        K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
+                    Else
+                        K(i) = 1.0#
+                    End If
+                Next
+
             End If
 
             For i = 0 To n
@@ -6078,75 +6137,75 @@ Final3:
 
             If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
 
-                    With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
+                With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
 
-                        Dim dens = AUX_LIQDENSi(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties, T)
-                        Dim visc = Auxiliary.PROPS.oilvisc_twu(T, .PF_Tv1, .PF_Tv2, .PF_v1, .PF_v2)
-                        Return visc * dens
+                    Dim dens = AUX_LIQDENSi(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties, T)
+                    Dim visc = Auxiliary.PROPS.oilvisc_twu(T, .PF_Tv1, .PF_Tv2, .PF_v1, .PF_v2)
+                    Return visc * dens
 
-                    End With
+                End With
 
-                Else
-                    If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
-                        Dim A, B, C, D, E, result As Double
-                        A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
-                        B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
-                        C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
-                        D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
-                        E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
-                        result = Math.Exp(A + B / T + C * Math.Log(T) + D * T ^ E)
-                        Return result
-                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Then
-                        Dim B, C, result As Double
-                        B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
-                        C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
-                        '[LOG(V)=B*(1/T-1/C), T(K) V(CP)]
-                        result = Exp(B * (1 / T - 1 / C)) * 0.001
-                        Return result
-                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
-                        Dim A, B, C, D, E, result As Double
-                        Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.LiquidViscosityEquation
-                        Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
-                        A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
-                        B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
-                        C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
-                        D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
-                        E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
-                        '<lvsc name="Liquid viscosity"  units="Pa.s" >
-                        If eqno = "0" Or eqno = "" Then
-                            Dim Tc, Pc, w As Double
-                            Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
-                            Pc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure
-                            w = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Acentric_Factor
-                            mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
-                            result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, mw)
-                        Else
-                            If Integer.TryParse(eqno, New Integer) Then
-                                result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa.s
-                            Else
-                                result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa.s
-                            End If
-                        End If
-                        Return result
-                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "Biodiesel" Then
-                        Dim result As Double
-                        Dim Tc, Pc, w, Mw As Double
+            Else
+                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
+                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
+                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
+                    D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
+                    E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
+                    result = Math.Exp(A + B / T + C * Math.Log(T) + D * T ^ E)
+                    Return result
+                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Then
+                    Dim B, C, result As Double
+                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
+                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
+                    '[LOG(V)=B*(1/T-1/C), T(K) V(CP)]
+                    result = Exp(B * (1 / T - 1 / C)) * 0.001
+                    Return result
+                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.LiquidViscosityEquation
+                    Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                    A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
+                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
+                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
+                    D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
+                    E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
+                    '<lvsc name="Liquid viscosity"  units="Pa.s" >
+                    If eqno = "0" Or eqno = "" Then
+                        Dim Tc, Pc, w As Double
                         Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
                         Pc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure
                         w = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Acentric_Factor
-                        Mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
-                        result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, Mw)
-                        Return result
+                        mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                        result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, mw)
                     Else
-                        Return 0
+                        If Integer.TryParse(eqno, New Integer) Then
+                            result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa.s
+                        Else
+                            result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa.s
+                        End If
                     End If
-
+                    Return result
+                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "Biodiesel" Then
+                    Dim result As Double
+                    Dim Tc, Pc, w, Mw As Double
+                    Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                    Pc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure
+                    w = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Acentric_Factor
+                    Mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                    result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, Mw)
+                    Return result
+                Else
+                    Return 0
                 End If
+
+            End If
 
         End Function
 
@@ -6182,7 +6241,7 @@ Final3:
                 lval = sval
                 If sval = 0 Then lval = 0.0
                 IObj?.Paragraphs.Add(String.Format("Liquid Viscosity : {0} Pa.s", Exp(lval)))
-                If Me.Parameters.ContainsKey("PP_LIQVISC_PCORRECTION") AndAlso Me.Parameters("PP_LIQVISC_PCORRECTION") = 1 Then
+                If LiquidViscosity_CorrectExpDataForPressure Then
                     'pressure correction
                     Dim pcorr As Double = 1.0
                     If (T / subst.ConstantProperties.Critical_Temperature) > 1.0 Then
@@ -6760,7 +6819,7 @@ Final3:
 
             Dim val As Double
 
-            If Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") AndAlso Me.Parameters("PP_USE_EOS_LIQDENS") = 1 Then
+            If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                 IObj?.Paragraphs.Add("Using EOS to calculate compressibility factor -> density.")
                 IObj?.SetCurrent()
                 val = AUX_Z(Vx, T, P, PhaseName.Liquid)
@@ -6780,20 +6839,15 @@ Final3:
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         IObj?.SetCurrent()
                         IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                        If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                            If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
-                                vk(i) = AUX_LIQDENSi(subst, T)
-                                IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                                If Me.Parameters.ContainsKey("PP_EXP_LIQDENS_PCORRECTION") AndAlso Me.Parameters("PP_EXP_LIQDENS_PCORRECTION") = 1 Then
-                                    'pressure correction
-                                    Dim pcorr = Auxiliary.PROPS.liq_dens_pcorrection(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
-                                    IObj?.Paragraphs.Add(String.Format("Compressed Liquid Density Correction Factor: {0}", pcorr))
-                                    vk(i) *= pcorr
-                                    IObj?.Paragraphs.Add(String.Format("Corrected Liquid Density: {0} kg/m3", vk(i)))
-                                End If
-                            Else
-                                vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                                IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
+                        If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.Rackett_and_ExpData Then
+                            vk(i) = AUX_LIQDENSi(subst, T)
+                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
+                            If LiquidDensity_CorrectExpDataForPressure Then
+                                'pressure correction
+                                Dim pcorr = Auxiliary.PROPS.liq_dens_pcorrection(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                                IObj?.Paragraphs.Add(String.Format("Compressed Liquid Density Correction Factor: {0}", pcorr))
+                                vk(i) *= pcorr
+                                IObj?.Paragraphs.Add(String.Format("Corrected Liquid Density: {0} kg/m3", vk(i)))
                             End If
                         Else
                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
@@ -7288,14 +7342,12 @@ Final3:
 
             Dim phis(n) As Double
 
-            If Me.Parameters.ContainsKey("PP_USE_IDEAL_SOLID_FUGACITY") AndAlso
-                Me.Parameters("PP_USE_IDEAL_SOLID_FUGACITY") = 1 Then
+            If SolidPhaseFugacityCalculationMethod = SolidPhaseFugacityCalcMode.Ideal Then
                 For i = 0 To n
                     phis(i) = 1.0
                 Next
             Else
-                If Me.Parameters.ContainsKey("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC") AndAlso
-                Me.Parameters("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC") = 1 Then
+                If SolidPhaseFugacity_UseIdealLiquidPhaseFugacity Then
                     For i = 0 To n
                         phis(i) = Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) - 1
                         If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
@@ -10483,9 +10535,6 @@ Final3:
         Public Overridable ReadOnly Property parameters1() As Object Implements CapeOpen.ICapeUtilities.parameters
             Get
                 Dim parms As New CapeOpen.ParameterCollection
-                For Each kvp As KeyValuePair(Of String, Double) In Me.Parameters
-                    parms.Add(New CapeOpen.RealParameter(kvp.Key, kvp.Key, kvp.Value, kvp.Value, Double.MinValue, Double.MaxValue, CapeParamMode.CAPE_INPUT, ""))
-                Next
                 Return parms
             End Get
         End Property
@@ -10594,7 +10643,6 @@ Final3:
                 '_ioquick = myarr(2)
                 _tpseverity = myarr(3)
                 _tpcompids = TryCast(myarr(4), String())
-                m_par = myarr(5)
 
                 Dim xmldoc = XDocument.Parse(myarr(6))
                 Dim fadata As List(Of XElement) = xmldoc.Element("Data").Elements.ToList
@@ -10670,7 +10718,7 @@ Final3:
                     .Add("")
                     .Add(_tpseverity)
                     .Add(_tpcompids)
-                    .Add(m_par)
+                    .Add(Nothing)
 
                     Dim xdata As New XDocument()
                     xdata.AddFirst(New XElement("Data"))
@@ -10895,6 +10943,86 @@ Final3:
             Catch ex As Exception
             End Try
 
+            Try
+                LiquidDensityCalculationMode_Subcritical = (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidDensityCalculationMode_Supercritical = (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidDensity_CorrectExpDataForPressure = (From el As XElement In data Select el Where el.Name = "LiquidDensity_CorrectExpDataForPressure").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidDensity_UsePenelouxVolumeTranslation = (From el As XElement In data Select el Where el.Name = "LiquidDensity_UsePenelouxVolumeTranslation").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidViscosityCalculationMode_Subcritical = (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Subcritical").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidViscosityCalculationMode_Supercritical = (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Supercritical").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidViscosity_CorrectExpDataForPressure = (From el As XElement In data Select el Where el.Name = "LiquidViscosity_CorrectExpDataForPressure").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidViscosity_MixingRule = (From el As XElement In data Select el Where el.Name = "LiquidViscosity_MixingRule").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                VaporPhaseFugacityCalculationMode = (From el As XElement In data Select el Where el.Name = "VaporPhaseFugacityCalculationMode").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                SolidPhaseFugacityCalculationMethod = (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacityCalculationMethod").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacity_UseIdealLiquidPhaseFugacity").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                EnthalpyEntropyCpCvCalculationMode = (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                LiquidFugacity_UsePoyntingCorrectionFactor = (From el As XElement In data Select el Where el.Name = "LiquidFugacity_UsePoyntingCorrectionFactor").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                ActivityCoefficientModels_IgnoreMissingInteractionParameters = (From el As XElement In data Select el Where el.Name = "ActivityCoefficientModels_IgnoreMissingInteractionParameters").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                IgnoreVaporFractionLimit = (From el As XElement In data Select el Where el.Name = "IgnoreVaporFractionLimit").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
+                IgnoreSalinityLimit = (From el As XElement In data Select el Where el.Name = "IgnoreSalinityLimit").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
             Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
             Try
@@ -10907,12 +11035,12 @@ Final3:
             Catch ex As Exception
             End Try
 
-            Try
-                For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Parameters").FirstOrDefault.Elements.ToList
-                    If m_par.ContainsKey(xel.@ID) Then m_par(xel.@ID) = Double.Parse(xel.@Value, ci) Else m_par.Add(xel.@ID, Double.Parse(xel.@Value, ci))
-                Next
-            Catch ex As Exception
-            End Try
+            'Try
+            '    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Parameters").FirstOrDefault.Elements.ToList
+            '        If m_par.ContainsKey(xel.@ID) Then m_par(xel.@ID) = Double.Parse(xel.@Value, ci) Else m_par.Add(xel.@ID, Double.Parse(xel.@Value, ci))
+            '    Next
+            'Catch ex As Exception
+            'End Try
 
             Select Case Me.ComponentName
 
@@ -11215,16 +11343,33 @@ Final3:
                 .Add(New XElement("OverrideEnthalpyCalculation", OverrideEnthalpyCalculation))
                 .Add(New XElement("OverrideEntropyCalculation", OverrideEntropyCalculation))
 
+                .Add(New XElement("LiquidDensityCalculationMode_Subcritical", LiquidDensityCalculationMode_Subcritical))
+                .Add(New XElement("LiquidDensityCalculationMode_Supercritical", LiquidDensityCalculationMode_Supercritical))
+                .Add(New XElement("LiquidDensity_CorrectExpDataForPressure", LiquidDensity_CorrectExpDataForPressure))
+                .Add(New XElement("LiquidDensity_UsePenelouxVolumeTranslation", LiquidDensity_UsePenelouxVolumeTranslation))
+                .Add(New XElement("LiquidViscosityCalculationMode_Subcritical", LiquidViscosityCalculationMode_Subcritical))
+                .Add(New XElement("LiquidViscosityCalculationMode_Supercritical", LiquidViscosityCalculationMode_Supercritical))
+                .Add(New XElement("LiquidViscosity_CorrectExpDataForPressure", LiquidViscosity_CorrectExpDataForPressure))
+                .Add(New XElement("LiquidViscosity_MixingRule", LiquidViscosity_MixingRule))
+                .Add(New XElement("VaporPhaseFugacityCalculationMode", VaporPhaseFugacityCalculationMode))
+                .Add(New XElement("SolidPhaseFugacityCalculationMethod", SolidPhaseFugacityCalculationMethod))
+                .Add(New XElement("SolidPhaseFugacity_UseIdealLiquidPhaseFugacity", SolidPhaseFugacity_UseIdealLiquidPhaseFugacity))
+                .Add(New XElement("EnthalpyEntropyCpCvCalculationMode", EnthalpyEntropyCpCvCalculationMode))
+                .Add(New XElement("LiquidFugacity_UsePoyntingCorrectionFactor", LiquidFugacity_UsePoyntingCorrectionFactor))
+                .Add(New XElement("ActivityCoefficientModels_IgnoreMissingInteractionParameters", ActivityCoefficientModels_IgnoreMissingInteractionParameters))
+                .Add(New XElement("IgnoreVaporFractionLimit", IgnoreVaporFractionLimit))
+                .Add(New XElement("IgnoreSalinityLimit", IgnoreSalinityLimit))
+
                 Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
                 .Add(New XElement("ForcedSolids", JsonConvert.SerializeObject(ForcedSolids, jsonoptions)))
                 .Add(New XElement("PropertyOverrides", JsonConvert.SerializeObject(PropertyOverrides, jsonoptions)))
 
-                .Add(New XElement("Parameters"))
+                '.Add(New XElement("Parameters"))
 
-                For Each kvp As KeyValuePair(Of String, Double) In m_par
-                    elements(elements.Count - 1).Add(New XElement("Parameter", {New XAttribute("ID", kvp.Key), New XAttribute("Value", kvp.Value.ToString(ci))}))
-                Next
+                'For Each kvp As KeyValuePair(Of String, Double) In m_par
+                '    elements(elements.Count - 1).Add(New XElement("Parameter", {New XAttribute("ID", kvp.Key), New XAttribute("Value", kvp.Value.ToString(ci))}))
+                'Next
 
                 Select Case Me.ComponentName
 

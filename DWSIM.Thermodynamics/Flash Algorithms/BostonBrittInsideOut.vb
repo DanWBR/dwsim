@@ -368,10 +368,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            If PP.Parameters.ContainsKey("PP_ENTH_CP_CALC_METHOD") Then
-                If PP.Parameters("PP_ENTH_CP_CALC_METHOD") = 1 Then
-                    Throw New Exception("Inside-Out PH Flash doesn't work with 'Ideal' Enthalpy/Cp calculation mode enabled. Please change it to 'Lee-Kesler' or 'Excess', or use another Flash Algorithm.")
-                End If
+            If PP.EnthalpyEntropyCpCvCalculationMode = PropertyPackage.EnthalpyEntropyCpCvCalcMode.Ideal Then
+                Throw New Exception("Inside-Out PH Flash doesn't work with 'Ideal' Enthalpy/Cp calculation mode enabled. Please change it to 'Lee-Kesler' or 'Excess', or use another Flash Algorithm.")
             End If
 
             Dim d1, d2 As Date, dt As TimeSpan
