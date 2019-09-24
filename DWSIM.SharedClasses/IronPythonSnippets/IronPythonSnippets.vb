@@ -353,8 +353,6 @@ Namespace Scripts
                     Dim p5 = CreateMenuItem(("Phase Properties") & " - " & ("Liquid 2"), Nothing, fs)
                     Dim p6 = CreateMenuItem(("Phase Properties") & " - " & ("Solid"), Nothing, fs)
 
-                    itemtsmig.Items.AddRange({p1, p2, p3, p4, p5, p6})
-
                     Dim pprops = GetType(IPhaseProperties).GetRuntimeProperties()
 
                     For Each pitem In pprops
@@ -412,6 +410,89 @@ Namespace Scripts
                                                                     InsertText(String.Format("value = obj.GetPhase('Solid').Properties.{0}", pitem.Name))
                                                                     InsertText(System.Environment.NewLine)
                                                                 End Sub, fs))
+                    Next
+
+                    Dim pc = CreateMenuItem("Compounds", Nothing, fs)
+
+                    itemtsmig.Items.AddRange({pc, p1, p2, p3, p4, p5, p6})
+
+                    Dim ccprops = GetType(Interfaces.ICompoundConstantProperties).GetRuntimeProperties()
+                    Dim cpprops = GetType(Interfaces.ICompound).GetRuntimeProperties()
+
+                    For Each c In fs.SelectedCompounds.Values
+                        Dim cx = CreateMenuItem(c.Name, Nothing, fs)
+                        Dim c1 = CreateMenuItem(("Constant Properties"), Nothing, fs)
+                        Dim c2 = CreateMenuItem(("Phase Properties"), Nothing, fs)
+                        pc.Items.Add(cx)
+                        cx.Items.Add(c1)
+                        cx.Items.Add(c2)
+                        For Each cc1 In ccprops
+                            c1.Items.Add(CreateMenuItem(cc1.Name, Sub()
+                                                                      InsertText("# Get Compound Constant Property: " & cc1.Name)
+                                                                      InsertText(System.Environment.NewLine)
+                                                                      InsertText(System.Environment.NewLine)
+                                                                      InsertText(String.Format("compound = Flowsheet.SelectedCompounds['{0}']", c.Name))
+                                                                      InsertText(System.Environment.NewLine)
+                                                                      InsertText(String.Format("propval = compound.{0}", cc1.Name))
+                                                                      InsertText(System.Environment.NewLine)
+                                                                  End Sub, fs))
+                        Next
+                        For Each cp1 In cpprops
+                            c2.Items.Add(CreateMenuItem(cp1.Name & " (Mixture Phase)", Sub()
+                                                                                           InsertText("# Get Compound Property in Mixture (Overall) Phase: " & cp1.Name)
+                                                                                           InsertText(System.Environment.NewLine)
+                                                                                           InsertText(System.Environment.NewLine)
+                                                                                           InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                           InsertText(System.Environment.NewLine)
+                                                                                           InsertText(String.Format("propval = obj.GetPhase('Overall').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                           InsertText(System.Environment.NewLine)
+                                                                                       End Sub, fs))
+                            c2.Items.Add(CreateMenuItem(cp1.Name & " (Vapor Phase)", Sub()
+                                                                                         InsertText("# Get Compound Property in Vapor Phase: " & cp1.Name)
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                         InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                         InsertText(String.Format("propval = obj.GetPhase('Vapor').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                     End Sub, fs))
+                            c2.Items.Add(CreateMenuItem(cp1.Name & " (Overall Liquid Phase)", Sub()
+                                                                                                  InsertText("# Get Compound Property in Overall Liquid Phase: " & cp1.Name)
+                                                                                                  InsertText(System.Environment.NewLine)
+                                                                                                  InsertText(System.Environment.NewLine)
+                                                                                                  InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                                  InsertText(System.Environment.NewLine)
+                                                                                                  InsertText(String.Format("propval = obj.GetPhase('OverallLiquid').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                                  InsertText(System.Environment.NewLine)
+                                                                                              End Sub, fs))
+                            c2.Items.Add(CreateMenuItem(cp1.Name & " (Liquid Phase 1)", Sub()
+                                                                                            InsertText("# Get Compound Property in Liquid Phase 1: " & cp1.Name)
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                            InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                            InsertText(String.Format("propval = obj.GetPhase('Liquid1').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                        End Sub, fs))
+                            c2.Items.Add(CreateMenuItem(cp1.Name & " (Liquid Phase 2)", Sub()
+                                                                                            InsertText("# Get Compound Property in Liquid Phase 2: " & cp1.Name)
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                            InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                            InsertText(String.Format("propval = obj.GetPhase('Liquid2').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                            InsertText(System.Environment.NewLine)
+                                                                                        End Sub, fs))
+                            c2.Items.Add(CreateMenuItem(cp1.Name & " (Solid Phase)", Sub()
+                                                                                         InsertText("# Get Compound Property in Solid Phase: " & cp1.Name)
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                         InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                         InsertText(String.Format("propval = obj.GetPhase('Solid').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                         InsertText(System.Environment.NewLine)
+                                                                                     End Sub, fs))
+                        Next
                     Next
 
                 Else

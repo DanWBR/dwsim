@@ -81,6 +81,7 @@ namespace DWSIM.UI.Desktop.Editors
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Bottom,
                 Padding = 5,
                 Height = 30
             };
@@ -91,6 +92,7 @@ namespace DWSIM.UI.Desktop.Editors
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Bottom,
                 Padding = 5,
                 Height = 30
             };

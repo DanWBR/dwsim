@@ -885,12 +885,14 @@ Public Class GraphicsSurface
             If Me.DrawingObjects.Contains(objectToDelete) Then
                 Me.DrawingObjects.Remove(objectToDelete)
                 Me.SelectedObject = Nothing
+                RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.ObjectDeleted, Nothing, "", Nothing, 0))
             End If
         End If
     End Sub
 
     Public Sub DeleteAllObjects()
         Me.DrawingObjects.Clear()
+        RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.ObjectDeleted, Nothing, "", Nothing, 0))
     End Sub
 
     Private Function AngleToPoint(ByVal Origin As SKPoint, _
@@ -1288,6 +1290,8 @@ Public Class GraphicsSurface
                                   End If
                               End Sub
         t.Start()
+
+        RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.ObjectAdded, AddedObject, "", Nothing, 0))
 
     End Sub
 

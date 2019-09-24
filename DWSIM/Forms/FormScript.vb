@@ -22,8 +22,13 @@ Imports IronPython.Hosting
     Private CurrentlyDebugging As Boolean = False
     Private DebuggingPaused As Boolean = False
     Private CancelDebugToken As CancellationTokenSource
+    Private ShouldUpdateSnippets As Boolean = True
 
     Private Sub FormVBScript_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        AddHandler fc.FormSurface.FlowsheetSurface.StatusUpdate, Sub(sender2, e2)
+                                                                     ShouldUpdateSnippets = True
+                                                                 End Sub
 
         If Not DWSIM.App.IsRunningOnMono Then
             Try
@@ -962,401 +967,456 @@ Imports IronPython.Hosting
         Dim gettsmi = GetPropertyTSMI
         Dim settsmi = SetPropertyTSMI
 
-        gettsmi.DropDownItems.Clear()
-        settsmi.DropDownItems.Clear()
+        If ShouldUpdateSnippets Then
 
-        For Each item In fc.SimulationObjects.Values.OrderBy(Function(x) x.GraphicObject.Tag)
+            ShouldUpdateSnippets = False
 
-            Dim itemtsmig As New ToolStripMenuItem
-            itemtsmig.Text = item.GraphicObject.Tag
+            gettsmi.DropDownItems.Clear()
+            settsmi.DropDownItems.Clear()
 
-            gettsmi.DropDownItems.Add(itemtsmig)
+            For Each item In fc.SimulationObjects.Values.OrderBy(Function(x) x.GraphicObject.Tag)
 
-            Dim itemtsmis As New ToolStripMenuItem
-            itemtsmis.Text = item.GraphicObject.Tag
+                Dim itemtsmig As New ToolStripMenuItem
+                itemtsmig.Text = item.GraphicObject.Tag
 
-            settsmi.DropDownItems.Add(itemtsmis)
+                gettsmi.DropDownItems.Add(itemtsmig)
 
-            If TypeOf item Is Streams.MaterialStream Then
+                Dim itemtsmis As New ToolStripMenuItem
+                itemtsmis.Text = item.GraphicObject.Tag
 
-                ' set overall properties
+                settsmi.DropDownItems.Add(itemtsmis)
 
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Temperature", Sub()
-                                                                      InsertText("# Define Stream Temperature")
+                If TypeOf item Is Streams.MaterialStream Then
+
+                    ' set overall properties
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Temperature", Sub()
+                                                                          InsertText("# Define Stream Temperature")
+                                                                          InsertText(System.Environment.NewLine)
+                                                                          InsertText(System.Environment.NewLine)
+                                                                          InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                          InsertText(System.Environment.NewLine)
+                                                                          InsertText(String.Format("obj.GetPhase('Overall').Properties.Temperature = value # value must be in K"))
+                                                                          InsertText(System.Environment.NewLine)
+                                                                      End Sub))
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Pressure", Sub()
+                                                                       InsertText("# Define Stream Pressure")
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("obj.GetPhase('Overall').Properties.Pressure = value # value must be in Pa"))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                   End Sub))
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Enthalpy", Sub()
+                                                                       InsertText("# Define Stream Enthalpy")
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("obj.GetPhase('Overall').Properties.enthalpy = value # value must be in kJ/kg"))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                   End Sub))
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Entropy", Sub()
+                                                                      InsertText("# Define Stream Entropy")
                                                                       InsertText(System.Environment.NewLine)
                                                                       InsertText(System.Environment.NewLine)
                                                                       InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
                                                                       InsertText(System.Environment.NewLine)
-                                                                      InsertText(String.Format("obj.GetPhase('Overall').Properties.Temperature = value # value must be in K"))
+                                                                      InsertText(String.Format("obj.GetPhase('Overall').Properties.entropy = value # value must be in kJ/[kg.K]"))
                                                                       InsertText(System.Environment.NewLine)
                                                                   End Sub))
 
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Pressure", Sub()
-                                                                   InsertText("# Define Stream Pressure")
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("obj.GetPhase('Overall').Properties.Pressure = value # value must be in Pa"))
-                                                                   InsertText(System.Environment.NewLine)
-                                                               End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Enthalpy", Sub()
-                                                                   InsertText("# Define Stream Enthalpy")
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("obj.GetPhase('Overall').Properties.enthalpy = value # value must be in kJ/kg"))
-                                                                   InsertText(System.Environment.NewLine)
-                                                               End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Entropy", Sub()
-                                                                  InsertText("# Define Stream Entropy")
-                                                                  InsertText(System.Environment.NewLine)
-                                                                  InsertText(System.Environment.NewLine)
-                                                                  InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                  InsertText(System.Environment.NewLine)
-                                                                  InsertText(String.Format("obj.GetPhase('Overall').Properties.entropy = value # value must be in kJ/[kg.K]"))
-                                                                  InsertText(System.Environment.NewLine)
-                                                              End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Mass Flow", Sub()
-                                                                    InsertText("Define Stream Mass Flow")
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(String.Format("obj.GetPhase('Overall').Properties.molarflow = None"))
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(String.Format("obj.GetPhase('Overall').Properties.volumetric_flow = None"))
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(String.Format("obj.GetPhase('Overall').Properties.massflow = value # value must be in kg/s"))
-                                                                    InsertText(System.Environment.NewLine)
-                                                                End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Molar Flow", Sub()
-                                                                     InsertText("# Define Stream Molar Flow")
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("obj.GetPhase('Overall').Properties.massflow = None"))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("obj.GetPhase('Overall').Properties.volumetric_flow = None"))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("obj.GetPhase('Overall').Properties.molarflow = value # value must be in mol/s"))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                 End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Volumetric Flow", Sub()
-                                                                          InsertText("# Define Stream Volumetric Flow")
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(String.Format("obj.GetPhase('Overall').Properties.massflow = None"))
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(String.Format("obj.GetPhase('Overall').Properties.molarflow = None"))
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(String.Format("obj.GetPhase('Overall').Properties.volumetric_flow = value # value must be in m3/s"))
-                                                                          InsertText(System.Environment.NewLine)
-                                                                      End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Vapor Molar Fraction", Sub()
-                                                                               InsertText("# Set Stream Vapor Molar Fraction")
-                                                                               InsertText(System.Environment.NewLine)
-                                                                               InsertText(System.Environment.NewLine)
-                                                                               InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                               InsertText(System.Environment.NewLine)
-                                                                               InsertText(String.Format("obj.GetPhase('Vapor').Properties.molarfraction = value # number ranging from 0.0 to 1.0"))
-                                                                               InsertText(System.Environment.NewLine)
-                                                                           End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Molar Composition", Sub()
-                                                                            InsertText("# Define Stream Molar Composition")
-                                                                            InsertText(System.Environment.NewLine)
-                                                                            InsertText(System.Environment.NewLine)
-                                                                            InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                            InsertText(System.Environment.NewLine)
-                                                                            InsertText(String.Format("value = System.Array[double]([0.1, ..., x])"))
-                                                                            InsertText(System.Environment.NewLine)
-                                                                            InsertText(String.Format("obj.SetOverallComposition(value) # value must be an array of mole fractions"))
-                                                                            InsertText(System.Environment.NewLine)
-                                                                        End Sub))
-
-                itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Flash Specification", Sub()
-                                                                              InsertText("# Define Stream Flash Specification")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(String.Format("obj.SpecType = value # number from 0 to 5"))
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# Accepted values:")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 0: Temperature_and_Pressure")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 1: Pressure_and_Enthalpy")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 2: Pressure_and_Entropy")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 3: Pressure_and_VaporFraction")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 4: Temperature_and_VaporFraction")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 5: Pressure_and_SolidFraction")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                          End Sub))
-
-                'get overall properties
-
-                itemtsmig.DropDownItems.Add(
-                   CreateToolStripMenuItem("Stream Temperature", Sub()
-                                                                     InsertText("# Get Stream Temperature")
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("value = obj.GetPhase('Overall').Properties.Temperature # in K"))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                 End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Pressure", Sub()
-                                                                   InsertText("# Get Stream Pressure")
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("value = obj.GetPhase('Overall').Properties.Pressure # in Pa"))
-                                                                   InsertText(System.Environment.NewLine)
-                                                               End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Enthalpy", Sub()
-                                                                   InsertText("# Get Stream Enthalpy")
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                   InsertText(System.Environment.NewLine)
-                                                                   InsertText(String.Format("value = obj.GetPhase('Overall').Properties.enthalpy = value # in kJ/kg"))
-                                                                   InsertText(System.Environment.NewLine)
-                                                               End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Entropy", Sub()
-                                                                  InsertText("# Get Stream Entropy")
-                                                                  InsertText(System.Environment.NewLine)
-                                                                  InsertText(System.Environment.NewLine)
-                                                                  InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                  InsertText(System.Environment.NewLine)
-                                                                  InsertText(String.Format("value = obj.GetPhase('Overall').Properties.entropy = value # in kJ/[kg.K]"))
-                                                                  InsertText(System.Environment.NewLine)
-                                                              End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Mass Flow", Sub()
-                                                                    InsertText("Get Stream Mass Flow")
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                    InsertText(System.Environment.NewLine)
-                                                                    InsertText(String.Format("value = obj.GetPhase('Overall').Properties.massflow = value # in kg/s"))
-                                                                    InsertText(System.Environment.NewLine)
-                                                                End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Molar Flow", Sub()
-                                                                     InsertText("# Get Stream Molar Flow")
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                     InsertText(String.Format("value = obj.GetPhase('Overall').Properties.molarflow # in mol/s"))
-                                                                     InsertText(System.Environment.NewLine)
-                                                                 End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Volumetric Flow", Sub()
-                                                                          InsertText("# Get Stream Volumetric Flow")
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                          InsertText(System.Environment.NewLine)
-                                                                          InsertText(String.Format("value = obj.GetPhase('Overall').Properties.volumetric_flow # in m3/s"))
-                                                                          InsertText(System.Environment.NewLine)
-                                                                      End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Vapor Molar Fraction", Sub()
-                                                                               InsertText("# Get Stream Vapor Molar Fraction")
-                                                                               InsertText(System.Environment.NewLine)
-                                                                               InsertText(System.Environment.NewLine)
-                                                                               InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                               InsertText(System.Environment.NewLine)
-                                                                               InsertText(String.Format("value = obj.GetPhase('Vapor').Properties.molarfraction # number ranging from 0.0 to 1.0"))
-                                                                               InsertText(System.Environment.NewLine)
-                                                                           End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Molar Composition", Sub()
-                                                                            InsertText("# Get Stream Molar Composition")
-                                                                            InsertText(System.Environment.NewLine)
-                                                                            InsertText(System.Environment.NewLine)
-                                                                            InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                            InsertText(System.Environment.NewLine)
-                                                                            InsertText(String.Format("value = obj.GetOverallComposition() # array of mole fractions"))
-                                                                            InsertText(System.Environment.NewLine)
-                                                                        End Sub))
-
-                itemtsmig.DropDownItems.Add(
-                    CreateToolStripMenuItem("Stream Flash Specification", Sub()
-                                                                              InsertText("# Get Stream Flash Specification")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText(String.Format("value = obj.SpecType # number from 0 to 5"))
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# Current values:")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 0: Temperature_and_Pressure")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 1: Pressure_and_Enthalpy")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 2: Pressure_and_Entropy")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 3: Pressure_and_VaporFraction")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 4: Temperature_and_VaporFraction")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                              InsertText("# 5: Pressure_and_SolidFraction")
-                                                                              InsertText(System.Environment.NewLine)
-                                                                          End Sub))
-
-                Dim p1 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Overall"), Nothing)
-                Dim p2 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Vapor"), Nothing)
-                Dim p3 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("OverallLiquid"), Nothing)
-                Dim p4 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Liquid1"), Nothing)
-                Dim p5 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Liquid2"), Nothing)
-                Dim p6 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Solid"), Nothing)
-
-                itemtsmig.DropDownItems.AddRange({p1, p2, p3, p4, p5, p6})
-
-                Dim pprops = GetType(Thermodynamics.BaseClasses.PhaseProperties).GetRuntimeProperties()
-
-                For Each pitem In pprops
-                    p1.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
-                                                                                 InsertText("# Get Stream Phase Property: " & pitem.Name)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("value = obj.GetPhase('Overall').Properties.{0}", pitem.Name))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                             End Sub))
-                    p2.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
-                                                                                 InsertText("# Get Stream Phase Property: " & pitem.Name)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("value = obj.GetPhase('Vapor').Properties.{0}", pitem.Name))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                             End Sub))
-                    p3.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
-                                                                                 InsertText("# Get Stream Phase Property: " & pitem.Name)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("value = obj.GetPhase('OverallLiquid').Properties.{0}", pitem.Name))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                             End Sub))
-                    p4.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
-                                                                                 InsertText("# Get Stream Phase Property: " & pitem.Name)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("value = obj.GetPhase('Liquid1').Properties.{0}", pitem.Name))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                             End Sub))
-                    p5.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
-                                                                                 InsertText("# Get Stream Phase Property: " & pitem.Name)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("value = obj.GetPhase('Liquid2').Properties.{0}", pitem.Name))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                             End Sub))
-                    p6.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
-                                                                                 InsertText("# Get Stream Phase Property: " & pitem.Name)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                                 InsertText(String.Format("value = obj.GetPhase('Solid').Properties.{0}", pitem.Name))
-                                                                                 InsertText(System.Environment.NewLine)
-                                                                             End Sub))
-                Next
-
-            Else
-
-                Dim itemprops = item.GetType.GetRuntimeProperties()
-                Dim itemfields = item.GetType.GetRuntimeFields()
-
-                For Each pitem In itemprops
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Mass Flow", Sub()
+                                                                        InsertText("Define Stream Mass Flow")
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(String.Format("obj.GetPhase('Overall').Properties.molarflow = None"))
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(String.Format("obj.GetPhase('Overall').Properties.volumetric_flow = None"))
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(String.Format("obj.GetPhase('Overall').Properties.massflow = value # value must be in kg/s"))
+                                                                        InsertText(System.Environment.NewLine)
+                                                                    End Sub))
 
                     itemtsmis.DropDownItems.Add(
-                    CreateToolStripMenuItem("Object Property: " & pitem.Name, Sub()
-                                                                                  InsertText("# Define Object Property: " & pitem.Name)
+                        CreateToolStripMenuItem("Stream Molar Flow", Sub()
+                                                                         InsertText("# Define Stream Molar Flow")
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("obj.GetPhase('Overall').Properties.massflow = None"))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("obj.GetPhase('Overall').Properties.volumetric_flow = None"))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("obj.GetPhase('Overall').Properties.molarflow = value # value must be in mol/s"))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                     End Sub))
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Volumetric Flow", Sub()
+                                                                              InsertText("# Define Stream Volumetric Flow")
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(String.Format("obj.GetPhase('Overall').Properties.massflow = None"))
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(String.Format("obj.GetPhase('Overall').Properties.molarflow = None"))
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(String.Format("obj.GetPhase('Overall').Properties.volumetric_flow = value # value must be in m3/s"))
+                                                                              InsertText(System.Environment.NewLine)
+                                                                          End Sub))
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Vapor Molar Fraction", Sub()
+                                                                                   InsertText("# Set Stream Vapor Molar Fraction")
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                                   InsertText(String.Format("obj.GetPhase('Vapor').Properties.molarfraction = value # number ranging from 0.0 to 1.0"))
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                               End Sub))
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Molar Composition", Sub()
+                                                                                InsertText("# Define Stream Molar Composition")
+                                                                                InsertText(System.Environment.NewLine)
+                                                                                InsertText(System.Environment.NewLine)
+                                                                                InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                InsertText(System.Environment.NewLine)
+                                                                                InsertText(String.Format("value = System.Array[double]([0.1, ..., x])"))
+                                                                                InsertText(System.Environment.NewLine)
+                                                                                InsertText(String.Format("obj.SetOverallComposition(value) # value must be an array of mole fractions"))
+                                                                                InsertText(System.Environment.NewLine)
+                                                                            End Sub))
+
+                    itemtsmis.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Flash Specification", Sub()
+                                                                                  InsertText("# Define Stream Flash Specification")
                                                                                   InsertText(System.Environment.NewLine)
                                                                                   InsertText(System.Environment.NewLine)
                                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
                                                                                   InsertText(System.Environment.NewLine)
-                                                                                  InsertText(String.Format("obj.{0} = value", pitem.Name))
+                                                                                  InsertText(String.Format("obj.SpecType = value # number from 0 to 5"))
                                                                                   InsertText(System.Environment.NewLine)
-                                                                                  If pitem.PropertyType.BaseType Is GetType([Enum]) Then
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText("# This property is an Enumeration (Enum) type.")
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText(String.Format("# Full type name: {0}", pitem.PropertyType.ToString.Replace("+", ".")))
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText("# Accepted enumeration values:")
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      For Each etype In [Enum].GetNames(pitem.PropertyType)
-                                                                                          InsertText(String.Format("# {0}.{1}", pitem.PropertyType.ToString.Replace("+", "."), etype))
-                                                                                          InsertText(System.Environment.NewLine)
-                                                                                      Next
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText("# example usage:")
-                                                                                      InsertText(System.Environment.NewLine)
-                                                                                      InsertText(String.Format("# obj.{0} = {1}.{2}", pitem.Name, pitem.PropertyType.ToString.Replace("+", "."), [Enum].GetNames(pitem.PropertyType)(0)))
-                                                                                  End If
+                                                                                  InsertText("# Accepted values:")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 0: Temperature_and_Pressure")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 1: Pressure_and_Enthalpy")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 2: Pressure_and_Entropy")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 3: Pressure_and_VaporFraction")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 4: Temperature_and_VaporFraction")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 5: Pressure_and_SolidFraction")
+                                                                                  InsertText(System.Environment.NewLine)
                                                                               End Sub))
 
+                    'get overall properties
+
                     itemtsmig.DropDownItems.Add(
+                       CreateToolStripMenuItem("Stream Temperature", Sub()
+                                                                         InsertText("# Get Stream Temperature")
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("value = obj.GetPhase('Overall').Properties.Temperature # in K"))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                     End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Pressure", Sub()
+                                                                       InsertText("# Get Stream Pressure")
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("value = obj.GetPhase('Overall').Properties.Pressure # in Pa"))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                   End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Enthalpy", Sub()
+                                                                       InsertText("# Get Stream Enthalpy")
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                       InsertText(String.Format("value = obj.GetPhase('Overall').Properties.enthalpy = value # in kJ/kg"))
+                                                                       InsertText(System.Environment.NewLine)
+                                                                   End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Entropy", Sub()
+                                                                      InsertText("# Get Stream Entropy")
+                                                                      InsertText(System.Environment.NewLine)
+                                                                      InsertText(System.Environment.NewLine)
+                                                                      InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                      InsertText(System.Environment.NewLine)
+                                                                      InsertText(String.Format("value = obj.GetPhase('Overall').Properties.entropy = value # in kJ/[kg.K]"))
+                                                                      InsertText(System.Environment.NewLine)
+                                                                  End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Mass Flow", Sub()
+                                                                        InsertText("Get Stream Mass Flow")
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                        InsertText(System.Environment.NewLine)
+                                                                        InsertText(String.Format("value = obj.GetPhase('Overall').Properties.massflow = value # in kg/s"))
+                                                                        InsertText(System.Environment.NewLine)
+                                                                    End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Molar Flow", Sub()
+                                                                         InsertText("# Get Stream Molar Flow")
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                         InsertText(String.Format("value = obj.GetPhase('Overall').Properties.molarflow # in mol/s"))
+                                                                         InsertText(System.Environment.NewLine)
+                                                                     End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Volumetric Flow", Sub()
+                                                                              InsertText("# Get Stream Volumetric Flow")
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                              InsertText(System.Environment.NewLine)
+                                                                              InsertText(String.Format("value = obj.GetPhase('Overall').Properties.volumetric_flow # in m3/s"))
+                                                                              InsertText(System.Environment.NewLine)
+                                                                          End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Vapor Molar Fraction", Sub()
+                                                                                   InsertText("# Get Stream Vapor Molar Fraction")
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                                   InsertText(String.Format("value = obj.GetPhase('Vapor').Properties.molarfraction # number ranging from 0.0 to 1.0"))
+                                                                                   InsertText(System.Environment.NewLine)
+                                                                               End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Molar Composition", Sub()
+                                                                                InsertText("# Get Stream Molar Composition")
+                                                                                InsertText(System.Environment.NewLine)
+                                                                                InsertText(System.Environment.NewLine)
+                                                                                InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                InsertText(System.Environment.NewLine)
+                                                                                InsertText(String.Format("value = obj.GetOverallComposition() # array of mole fractions"))
+                                                                                InsertText(System.Environment.NewLine)
+                                                                            End Sub))
+
+                    itemtsmig.DropDownItems.Add(
+                        CreateToolStripMenuItem("Stream Flash Specification", Sub()
+                                                                                  InsertText("# Get Stream Flash Specification")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText(String.Format("value = obj.SpecType # number from 0 to 5"))
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# Current values:")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 0: Temperature_and_Pressure")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 1: Pressure_and_Enthalpy")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 2: Pressure_and_Entropy")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 3: Pressure_and_VaporFraction")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 4: Temperature_and_VaporFraction")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                                  InsertText("# 5: Pressure_and_SolidFraction")
+                                                                                  InsertText(System.Environment.NewLine)
+                                                                              End Sub))
+
+                    Dim p1 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Overall"), Nothing)
+                    Dim p2 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Vapor"), Nothing)
+                    Dim p3 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("OverallLiquid"), Nothing)
+                    Dim p4 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Liquid1"), Nothing)
+                    Dim p5 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Liquid2"), Nothing)
+                    Dim p6 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties") & " - " & DWSIM.App.GetLocalString("Solid"), Nothing)
+
+                    Dim pprops = GetType(Thermodynamics.BaseClasses.PhaseProperties).GetRuntimeProperties()
+
+                    For Each pitem In pprops
+                        p1.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
+                                                                                     InsertText("# Get Stream Phase Property: " & pitem.Name)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("value = obj.GetPhase('Overall').Properties.{0}", pitem.Name))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                 End Sub))
+                        p2.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
+                                                                                     InsertText("# Get Stream Phase Property: " & pitem.Name)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("value = obj.GetPhase('Vapor').Properties.{0}", pitem.Name))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                 End Sub))
+                        p3.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
+                                                                                     InsertText("# Get Stream Phase Property: " & pitem.Name)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("value = obj.GetPhase('OverallLiquid').Properties.{0}", pitem.Name))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                 End Sub))
+                        p4.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
+                                                                                     InsertText("# Get Stream Phase Property: " & pitem.Name)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("value = obj.GetPhase('Liquid1').Properties.{0}", pitem.Name))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                 End Sub))
+                        p5.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
+                                                                                     InsertText("# Get Stream Phase Property: " & pitem.Name)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("value = obj.GetPhase('Liquid2').Properties.{0}", pitem.Name))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                 End Sub))
+                        p6.DropDownItems.Add(CreateToolStripMenuItem(pitem.Name, Sub()
+                                                                                     InsertText("# Get Stream Phase Property: " & pitem.Name)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                     InsertText(String.Format("value = obj.GetPhase('Solid').Properties.{0}", pitem.Name))
+                                                                                     InsertText(System.Environment.NewLine)
+                                                                                 End Sub))
+                    Next
+
+                    Dim pc = CreateToolStripMenuItem(DWSIM.App.GetLocalString("Compounds"), Nothing)
+
+                    itemtsmig.DropDownItems.AddRange({pc, p1, p2, p3, p4, p5, p6})
+
+                    Dim ccprops = GetType(Thermodynamics.BaseClasses.ConstantProperties).GetRuntimeProperties()
+                    Dim cpprops = GetType(Thermodynamics.BaseClasses.Compound).GetRuntimeProperties()
+
+                    For Each c In fc.SelectedCompounds.Values
+                        Dim cx = CreateToolStripMenuItem(c.Name, Nothing)
+                        Dim c1 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("ConstantProperties"), Nothing)
+                        Dim c2 = CreateToolStripMenuItem(DWSIM.App.GetLocalString("PhaseProperties"), Nothing)
+                        pc.DropDownItems.Add(cx)
+                        cx.DropDownItems.Add(c1)
+                        cx.DropDownItems.Add(c2)
+                        For Each cc1 In ccprops
+                            c1.DropDownItems.Add(CreateToolStripMenuItem(cc1.Name, Sub()
+                                                                                       InsertText("# Get Compound Constant Property: " & cc1.Name)
+                                                                                       InsertText(System.Environment.NewLine)
+                                                                                       InsertText(System.Environment.NewLine)
+                                                                                       InsertText(String.Format("compound = Flowsheet.SelectedCompounds['{0}']", c.Name))
+                                                                                       InsertText(System.Environment.NewLine)
+                                                                                       InsertText(String.Format("propval = compound.{0}", cc1.Name))
+                                                                                       InsertText(System.Environment.NewLine)
+                                                                                   End Sub))
+                        Next
+                        For Each cp1 In cpprops
+                            c2.DropDownItems.Add(CreateToolStripMenuItem(cp1.Name & " (Mixture Phase)", Sub()
+                                                                                                            InsertText("# Get Compound Property in Mixture (Overall) Phase: " & cp1.Name)
+                                                                                                            InsertText(System.Environment.NewLine)
+                                                                                                            InsertText(System.Environment.NewLine)
+                                                                                                            InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                                            InsertText(System.Environment.NewLine)
+                                                                                                            InsertText(String.Format("propval = obj.GetPhase('Overall').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                                            InsertText(System.Environment.NewLine)
+                                                                                                        End Sub))
+                            c2.DropDownItems.Add(CreateToolStripMenuItem(cp1.Name & " (Vapor Phase)", Sub()
+                                                                                                          InsertText("# Get Compound Property in Vapor Phase: " & cp1.Name)
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                          InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                          InsertText(String.Format("propval = obj.GetPhase('Vapor').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                      End Sub))
+                            c2.DropDownItems.Add(CreateToolStripMenuItem(cp1.Name & " (Overall Liquid Phase)", Sub()
+                                                                                                                   InsertText("# Get Compound Property in Overall Liquid Phase: " & cp1.Name)
+                                                                                                                   InsertText(System.Environment.NewLine)
+                                                                                                                   InsertText(System.Environment.NewLine)
+                                                                                                                   InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                                                   InsertText(System.Environment.NewLine)
+                                                                                                                   InsertText(String.Format("propval = obj.GetPhase('OverallLiquid').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                                                   InsertText(System.Environment.NewLine)
+                                                                                                               End Sub))
+                            c2.DropDownItems.Add(CreateToolStripMenuItem(cp1.Name & " (Liquid Phase 1)", Sub()
+                                                                                                             InsertText("# Get Compound Property in Liquid Phase 1: " & cp1.Name)
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                             InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                             InsertText(String.Format("propval = obj.GetPhase('Liquid1').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                         End Sub))
+                            c2.DropDownItems.Add(CreateToolStripMenuItem(cp1.Name & " (Liquid Phase 2)", Sub()
+                                                                                                             InsertText("# Get Compound Property in Liquid Phase 2: " & cp1.Name)
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                             InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                             InsertText(String.Format("propval = obj.GetPhase('Liquid2').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                                             InsertText(System.Environment.NewLine)
+                                                                                                         End Sub))
+                            c2.DropDownItems.Add(CreateToolStripMenuItem(cp1.Name & " (Solid Phase)", Sub()
+                                                                                                          InsertText("# Get Compound Property in Solid Phase: " & cp1.Name)
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                          InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                          InsertText(String.Format("propval = obj.GetPhase('Solid').Compounds['{0}'].{1}", c.Name, cp1.Name))
+                                                                                                          InsertText(System.Environment.NewLine)
+                                                                                                      End Sub))
+                        Next
+                    Next
+
+                Else
+
+                    Dim itemprops = item.GetType.GetRuntimeProperties()
+                    Dim itemfields = item.GetType.GetRuntimeFields()
+
+                    For Each pitem In itemprops
+
+                        itemtsmis.DropDownItems.Add(
                         CreateToolStripMenuItem("Object Property: " & pitem.Name, Sub()
-                                                                                      InsertText("# Get Object Property: " & pitem.Name)
+                                                                                      InsertText("# Define Object Property: " & pitem.Name)
                                                                                       InsertText(System.Environment.NewLine)
                                                                                       InsertText(System.Environment.NewLine)
                                                                                       InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
                                                                                       InsertText(System.Environment.NewLine)
-                                                                                      InsertText(String.Format("value = obj.{0}", pitem.Name))
+                                                                                      InsertText(String.Format("obj.{0} = value", pitem.Name))
                                                                                       InsertText(System.Environment.NewLine)
                                                                                       If pitem.PropertyType.BaseType Is GetType([Enum]) Then
                                                                                           InsertText(System.Environment.NewLine)
@@ -1365,21 +1425,52 @@ Imports IronPython.Hosting
                                                                                           InsertText(String.Format("# Full type name: {0}", pitem.PropertyType.ToString.Replace("+", ".")))
                                                                                           InsertText(System.Environment.NewLine)
                                                                                           InsertText(System.Environment.NewLine)
-                                                                                          InsertText("# Possible enumeration values:")
+                                                                                          InsertText("# Accepted enumeration values:")
                                                                                           InsertText(System.Environment.NewLine)
                                                                                           For Each etype In [Enum].GetNames(pitem.PropertyType)
                                                                                               InsertText(String.Format("# {0}.{1}", pitem.PropertyType.ToString.Replace("+", "."), etype))
                                                                                               InsertText(System.Environment.NewLine)
                                                                                           Next
+                                                                                          InsertText(System.Environment.NewLine)
+                                                                                          InsertText(System.Environment.NewLine)
+                                                                                          InsertText("# example usage:")
+                                                                                          InsertText(System.Environment.NewLine)
+                                                                                          InsertText(String.Format("# obj.{0} = {1}.{2}", pitem.Name, pitem.PropertyType.ToString.Replace("+", "."), [Enum].GetNames(pitem.PropertyType)(0)))
                                                                                       End If
                                                                                   End Sub))
 
-                Next
+                        itemtsmig.DropDownItems.Add(
+                            CreateToolStripMenuItem("Object Property: " & pitem.Name, Sub()
+                                                                                          InsertText("# Get Object Property: " & pitem.Name)
+                                                                                          InsertText(System.Environment.NewLine)
+                                                                                          InsertText(System.Environment.NewLine)
+                                                                                          InsertText(String.Format("obj = Flowsheet.GetFlowsheetSimulationObject('{0}')", item.GraphicObject.Tag))
+                                                                                          InsertText(System.Environment.NewLine)
+                                                                                          InsertText(String.Format("value = obj.{0}", pitem.Name))
+                                                                                          InsertText(System.Environment.NewLine)
+                                                                                          If pitem.PropertyType.BaseType Is GetType([Enum]) Then
+                                                                                              InsertText(System.Environment.NewLine)
+                                                                                              InsertText("# This property is an Enumeration (Enum) type.")
+                                                                                              InsertText(System.Environment.NewLine)
+                                                                                              InsertText(String.Format("# Full type name: {0}", pitem.PropertyType.ToString.Replace("+", ".")))
+                                                                                              InsertText(System.Environment.NewLine)
+                                                                                              InsertText(System.Environment.NewLine)
+                                                                                              InsertText("# Possible enumeration values:")
+                                                                                              InsertText(System.Environment.NewLine)
+                                                                                              For Each etype In [Enum].GetNames(pitem.PropertyType)
+                                                                                                  InsertText(String.Format("# {0}.{1}", pitem.PropertyType.ToString.Replace("+", "."), etype))
+                                                                                                  InsertText(System.Environment.NewLine)
+                                                                                              Next
+                                                                                          End If
+                                                                                      End Sub))
 
-            End If
+                    Next
 
-        Next
+                End If
 
+            Next
+
+        End If
 
     End Sub
 
