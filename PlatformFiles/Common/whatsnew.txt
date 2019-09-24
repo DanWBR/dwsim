@@ -1,8 +1,11 @@
 Version 5.8
 
-- [CHG] Redesigned Spreadsheet Tool (Classic UI)
+- [NEW] Dynamic Script Snippets
+- [NEW] New Spreadsheet Tool (Classic UI)
+- [NEW] Enhanced Script Editor (Cross-Platform UI)
 - [CHG] Redesigned Cross-Platform UI
 - [CHG] Redesigned Property Package editors
+- [FIX] Fixed some unit conversions for reaction basis
 - [FIX] Fixed text to number conversions
 - [FIX] Fixed flowsheet dragging while zoomed
 - [FIX] Fixed PFR heat balance

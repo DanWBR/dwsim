@@ -1107,6 +1107,7 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(new TableRow(check));
             container.CreateAndAddEmptySpace();
+            container.CreateAndAddEmptySpace();
 
             return check;
         }

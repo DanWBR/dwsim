@@ -455,12 +455,6 @@ namespace DWSIM.UI.Desktop.Editors
 
             this.CreateAndAddLabelRow("Fugacity Calculation");
 
-            var c2 = this.CreateAndAddCheckBoxRow("Liquid Phase: Use Poynting Correction Factor", pp.LiquidFugacity_UsePoyntingCorrectionFactor, (chk, e) => {
-                pp.LiquidFugacity_UsePoyntingCorrectionFactor = chk.Checked.GetValueOrDefault();
-            }, null);
-
-            c2.Enabled = pp is ActivityCoefficientPropertyPackage;
-
             var c3 = this.CreateAndAddDropDownRow("Vapor Phase Fugacity", pp.VaporPhaseFugacityCalculationMode.GetEnumNames(),
                 (int)pp.VaporPhaseFugacityCalculationMode, (dd, e) => {
                     pp.VaporPhaseFugacityCalculationMode = dd.SelectedIndex.ToEnum<PropertyPackage.VaporPhaseFugacityCalcMode>();
@@ -476,6 +470,12 @@ namespace DWSIM.UI.Desktop.Editors
             this.CreateAndAddCheckBoxRow("Solid Phase: Use Ideal Liquid Phase Fugacities", pp.LiquidViscosity_CorrectExpDataForPressure, (chk, e) => {
                 pp.LiquidViscosity_CorrectExpDataForPressure = chk.Checked.GetValueOrDefault();
             }, null);
+
+            var c2 = this.CreateAndAddCheckBoxRow("Liquid Phase: Use Poynting Correction Factor", pp.LiquidFugacity_UsePoyntingCorrectionFactor, (chk, e) => {
+                pp.LiquidFugacity_UsePoyntingCorrectionFactor = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            c2.Enabled = pp is ActivityCoefficientPropertyPackage;
 
             this.CreateAndAddLabelRow("Enthalpy, Entropy, Cp and Cv");
 

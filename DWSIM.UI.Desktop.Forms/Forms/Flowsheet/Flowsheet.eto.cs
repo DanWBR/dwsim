@@ -1284,14 +1284,7 @@ namespace DWSIM.UI.Forms
                         switch (mtype)
                         {
                             case Interfaces.IFlowsheet.MessageType.Information:
-                                if (s.DarkMode)
-                                {
-                                    outtxt.SelectionForeground = Colors.SteelBlue;
-                                }
-                                else
-                                {
-                                    outtxt.SelectionForeground = Colors.Blue;
-                                }
+                                outtxt.SelectionForeground = SystemColors.ControlText;
                                 break;
                             case Interfaces.IFlowsheet.MessageType.GeneralError:
                                 if (s.DarkMode)
@@ -1314,24 +1307,10 @@ namespace DWSIM.UI.Forms
                                 }
                                 break;
                             case Interfaces.IFlowsheet.MessageType.Tip:
-                                if (s.DarkMode)
-                                {
-                                    outtxt.SelectionForeground = Colors.White;
-                                }
-                                else
-                                {
-                                    outtxt.SelectionForeground = Colors.Black;
-                                }
+                                outtxt.SelectionForeground = SystemColors.ControlText;
                                 break;
                             case Interfaces.IFlowsheet.MessageType.Other:
-                                if (s.DarkMode)
-                                {
-                                    outtxt.SelectionForeground = Colors.White;
-                                }
-                                else
-                                {
-                                    outtxt.SelectionForeground = Colors.Black;
-                                }
+                                outtxt.SelectionForeground = SystemColors.ControlText;
                                 break;
                             default:
                                 break;
