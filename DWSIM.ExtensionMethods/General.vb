@@ -6,6 +6,27 @@ Imports System.Linq
 Public Module General
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Function GetEnumNames(obj As Object) As List(Of String)
+
+        If obj.GetType.BaseType Is GetType([Enum]) Then
+            Return [Enum].GetNames(obj.GetType).ToList()
+        Else
+            Return New List(Of String)
+        End If
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function ToEnum(Of T)(obj As Integer) As T
+
+        Dim names = [Enum].GetNames(GetType(T))
+        Dim values = New List(Of Integer)([Enum].GetValues(GetType(T)))
+        Return [Enum].Parse(GetType(T), names(values.IndexOf(obj)))
+
+    End Function
+
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Sub RemoveVariable(exobj As System.Dynamic.ExpandoObject, varname As String)
         Dim collection = DirectCast(exobj, IDictionary(Of String, Object))
         If collection.ContainsKey(varname) Then collection.Remove(varname)

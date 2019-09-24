@@ -168,7 +168,7 @@ Namespace PropertyPackages
             MoleAverage = 0
             LogMoleAverage = 1
             InvertedMassAverage = 2
-            InvertedLogMassAverage = 2
+            InvertedLogMassAverage = 3
         End Enum
 
         Public Enum EnthalpyEntropyCpCvCalcMode

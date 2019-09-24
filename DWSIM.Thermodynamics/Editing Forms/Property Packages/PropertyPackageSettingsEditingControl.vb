@@ -73,43 +73,43 @@ Public Class PropertyPackageSettingsEditingControl
                                                         End Sub
 
         AddHandler chkIgnoreIPs.CheckedChanged, Sub()
-                                                    PropPack.ActivityCoefficientModels_IgnoreMissingInteractionParameters = DirectCast(sender, CheckBox).Checked
+                                                    PropPack.ActivityCoefficientModels_IgnoreMissingInteractionParameters = chkIgnoreIPs.Checked
                                                 End Sub
 
         AddHandler chkIgnoreSalLim.CheckedChanged, Sub()
-                                                       PropPack.IgnoreSalinityLimit = DirectCast(sender, CheckBox).Checked
+                                                       PropPack.IgnoreSalinityLimit = chkIgnoreSalLim.Checked
                                                    End Sub
 
         AddHandler chkIgnoreVapFracLim.CheckedChanged, Sub()
-                                                           PropPack.IgnoreVaporFractionLimit = DirectCast(sender, CheckBox).Checked
+                                                           PropPack.IgnoreVaporFractionLimit = chkIgnoreVapFracLim.Checked
                                                        End Sub
 
         AddHandler chkLiqDensPCorr.CheckedChanged, Sub()
-                                                       PropPack.LiquidDensity_CorrectExpDataForPressure = DirectCast(sender, CheckBox).Checked
+                                                       PropPack.LiquidDensity_CorrectExpDataForPressure = chkLiqDensPCorr.Checked
                                                    End Sub
 
         AddHandler chkLiqDensPeneloux.CheckedChanged, Sub()
-                                                          PropPack.LiquidDensity_UsePenelouxVolumeTranslation = DirectCast(sender, CheckBox).Checked
+                                                          PropPack.LiquidDensity_UsePenelouxVolumeTranslation = chkLiqDensPeneloux.Checked
                                                       End Sub
 
         AddHandler chkLiqFugPoynt.CheckedChanged, Sub()
-                                                      PropPack.LiquidFugacity_UsePoyntingCorrectionFactor = DirectCast(sender, CheckBox).Checked
+                                                      PropPack.LiquidFugacity_UsePoyntingCorrectionFactor = chkLiqFugPoynt.Checked
                                                   End Sub
 
         AddHandler chkLiqViscPCorr.CheckedChanged, Sub()
-                                                       PropPack.LiquidViscosity_CorrectExpDataForPressure = DirectCast(sender, CheckBox).Checked
+                                                       PropPack.LiquidViscosity_CorrectExpDataForPressure = chkLiqViscPCorr.Checked
                                                    End Sub
 
         AddHandler chkSolidIdealLiqFug.CheckedChanged, Sub()
-                                                           PropPack.SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = DirectCast(sender, CheckBox).Checked
+                                                           PropPack.SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = chkSolidIdealLiqFug.Checked
                                                        End Sub
 
         AddHandler chkVapFugIdeal.CheckedChanged, Sub()
-                                                      PropPack.VaporPhaseFugacityCalculationMode = Not DirectCast(sender, CheckBox).Checked
+                                                      PropPack.VaporPhaseFugacityCalculationMode = Not chkVapFugIdeal.Checked
                                                   End Sub
 
         AddHandler chkSolidFugIdeal.CheckedChanged, Sub()
-                                                        PropPack.SolidPhaseFugacityCalculationMethod = DirectCast(sender, CheckBox).Checked
+                                                        PropPack.SolidPhaseFugacityCalculationMethod = chkSolidFugIdeal.Checked
                                                     End Sub
 
     End Sub

@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DWSIM.Interfaces;
-using DWSIM.Interfaces.Enums.GraphicObjects;
-using DWSIM.Thermodynamics.BaseClasses;
 using DWSIM.Thermodynamics.PropertyPackages;
 using DWSIM.Thermodynamics.PropertyPackages.Auxiliary;
 using Eto.Drawing;
 using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
-
+using DWSIM.UI.Shared;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Desktop.Editors
 {
-    public class PropertyPackageSettingsView : DynamicLayout
+    public class PropertyPackageIPView : DynamicLayout
     {
 
         public IFlowsheet flowsheet;
         public PropertyPackage pp;
 
-        public PropertyPackageSettingsView(IFlowsheet fs, PropertyPackage ppack): base()
+        public PropertyPackageIPView(IFlowsheet fs, PropertyPackage ppack): base()
         {
             flowsheet = fs;
             pp = ppack;
@@ -37,8 +33,6 @@ namespace DWSIM.UI.Desktop.Editors
             var comps = flowsheet.SelectedCompounds.Values.Select((x) => x.Name).ToList();
             var nf = "N4";
             Double val;
-
-            s.CreateAndAddLabelRow(this, "Interaction Parameters");
 
             switch (pp.ComponentName)
             {
@@ -403,6 +397,115 @@ namespace DWSIM.UI.Desktop.Editors
 
             }
             
+        }
+    }
+
+    public class PropertyPackageSettingsView : DynamicLayout
+    {
+
+        public IFlowsheet flowsheet;
+        public PropertyPackage pp;
+
+        public PropertyPackageSettingsView(IFlowsheet fs, PropertyPackage ppack) : base()
+        {
+            flowsheet = fs;
+            pp = ppack;
+            Init();
+        }
+
+        void Init()
+        {
+
+            Padding = new Padding(10);
+
+            this.CreateAndAddLabelRow("Liquid Phase Density");
+
+            this.CreateAndAddDropDownRow("Calculation Method", pp.LiquidDensityCalculationMode_Subcritical.GetEnumNames(),
+                (int)pp.LiquidDensityCalculationMode_Subcritical, (dd, e) => {
+                    pp.LiquidDensityCalculationMode_Subcritical = dd.SelectedIndex.ToEnum<PropertyPackage.LiquidDensityCalcMode>();
+                    pp.LiquidDensityCalculationMode_Supercritical = dd.SelectedIndex.ToEnum<PropertyPackage.LiquidDensityCalcMode>();
+                }, null);
+
+            this.CreateAndAddCheckBoxRow("Correct Experimental Data for Pressure", pp.LiquidDensity_CorrectExpDataForPressure, (chk, e) => {
+                pp.LiquidDensity_CorrectExpDataForPressure = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            var c1 = this.CreateAndAddCheckBoxRow("Use Peneloux Volume Translation Coefficient (PR/SRK EOS only)", pp.LiquidDensity_UsePenelouxVolumeTranslation, (chk, e) => {
+                pp.LiquidDensity_UsePenelouxVolumeTranslation = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            c1.Enabled = pp is PengRobinsonPropertyPackage || pp is SRKPropertyPackage;
+
+            this.CreateAndAddLabelRow("Liquid Phase Viscosity");
+
+            this.CreateAndAddDropDownRow("Calculation Method", pp.LiquidViscosityCalculationMode_Subcritical.GetEnumNames(),
+                (int)pp.LiquidViscosityCalculationMode_Subcritical, (dd, e) => {
+                    pp.LiquidViscosityCalculationMode_Subcritical = dd.SelectedIndex.ToEnum<PropertyPackage.LiquidViscosityCalcMode>();
+                    pp.LiquidViscosityCalculationMode_Supercritical = dd.SelectedIndex.ToEnum<PropertyPackage.LiquidViscosityCalcMode>();
+                }, null);
+
+            this.CreateAndAddDropDownRow("Mixing Rule", pp.LiquidViscosity_MixingRule.GetEnumNames(),
+                (int)pp.LiquidViscosity_MixingRule, (dd, e) => {
+                    pp.LiquidViscosity_MixingRule = dd.SelectedIndex.ToEnum<PropertyPackage.LiquidViscosityMixRule>();
+                }, null);
+
+            this.CreateAndAddCheckBoxRow("Correct Experimental Data for Pressure", pp.LiquidViscosity_CorrectExpDataForPressure, (chk, e) => {
+                pp.LiquidViscosity_CorrectExpDataForPressure = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            this.CreateAndAddLabelRow("Fugacity Calculation");
+
+            var c2 = this.CreateAndAddCheckBoxRow("Liquid Phase: Use Poynting Correction Factor", pp.LiquidFugacity_UsePoyntingCorrectionFactor, (chk, e) => {
+                pp.LiquidFugacity_UsePoyntingCorrectionFactor = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            c2.Enabled = pp is ActivityCoefficientPropertyPackage;
+
+            var c3 = this.CreateAndAddDropDownRow("Vapor Phase Fugacity", pp.VaporPhaseFugacityCalculationMode.GetEnumNames(),
+                (int)pp.VaporPhaseFugacityCalculationMode, (dd, e) => {
+                    pp.VaporPhaseFugacityCalculationMode = dd.SelectedIndex.ToEnum<PropertyPackage.VaporPhaseFugacityCalcMode>();
+                }, null);
+
+            c3.Enabled = pp is ActivityCoefficientPropertyPackage;
+
+            this.CreateAndAddDropDownRow("Solid Phase Fugacity", pp.SolidPhaseFugacityCalculationMethod.GetEnumNames(),
+                (int)pp.SolidPhaseFugacityCalculationMethod, (dd, e) => {
+                    pp.SolidPhaseFugacityCalculationMethod = dd.SelectedIndex.ToEnum<PropertyPackage.SolidPhaseFugacityCalcMode>();
+                }, null);
+
+            this.CreateAndAddCheckBoxRow("Solid Phase: Use Ideal Liquid Phase Fugacities", pp.LiquidViscosity_CorrectExpDataForPressure, (chk, e) => {
+                pp.LiquidViscosity_CorrectExpDataForPressure = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            this.CreateAndAddLabelRow("Enthalpy, Entropy, Cp and Cv");
+
+            var c4 = this.CreateAndAddDropDownRow("Calculation Method", pp.EnthalpyEntropyCpCvCalculationMode.GetEnumNames(),
+                (int)pp.EnthalpyEntropyCpCvCalculationMode, (dd, e) => {
+                    pp.EnthalpyEntropyCpCvCalculationMode = dd.SelectedIndex.ToEnum<PropertyPackage.EnthalpyEntropyCpCvCalcMode>();
+                }, null);
+
+            c4.Enabled = pp is ActivityCoefficientPropertyPackage;
+
+            this.CreateAndAddLabelRow("Other");
+
+            var c5 = this.CreateAndAddCheckBoxRow("Ignore Missing UNIQUAC/NRTL Interaction Parameters", pp.ActivityCoefficientModels_IgnoreMissingInteractionParameters, (chk, e) => {
+                pp.ActivityCoefficientModels_IgnoreMissingInteractionParameters = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            c5.Enabled = pp is UNIQUACPropertyPackage || pp is NRTLPropertyPackage;
+
+            var c6 = this.CreateAndAddCheckBoxRow("Ignore Maximum Salinity Limit (Seawater Model only)", pp.IgnoreSalinityLimit, (chk, e) => {
+                pp.IgnoreSalinityLimit = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            c6.Enabled = pp is SeawaterPropertyPackage;
+
+            var c7 = this.CreateAndAddCheckBoxRow("Ignore Vapor Fraction Bounds (Sour Water Model only)", pp.IgnoreVaporFractionLimit, (chk, e) => {
+                pp.IgnoreVaporFractionLimit = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            c7.Enabled = pp is SourWaterPropertyPackage;
+
         }
     }
 }
