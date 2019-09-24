@@ -6136,63 +6136,70 @@ Final3:
         Public Overridable Function AUX_LIQVISCi(ByVal sub1 As String, ByVal T As Double, ByVal P As Double) As Double
 
             If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
-
                 With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
-
                     Dim dens = AUX_LIQDENSi(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties, T)
                     Dim visc = Auxiliary.PROPS.oilvisc_twu(T, .PF_Tv1, .PF_Tv2, .PF_v1, .PF_v2)
                     Return visc * dens
-
                 End With
-
             Else
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
-                    Dim A, B, C, D, E, result As Double
-                    A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
-                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
-                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
-                    D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
-                    E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
-                    result = Math.Exp(A + B / T + C * Math.Log(T) + D * T ^ E)
-                    Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Then
-                    Dim B, C, result As Double
-                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
-                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
-                    '[LOG(V)=B*(1/T-1/C), T(K) V(CP)]
-                    result = Exp(B * (1 / T - 1 / C)) * 0.001
-                    Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
-                    Dim A, B, C, D, E, result As Double
-                    Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.LiquidViscosityEquation
-                    Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
-                    A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
-                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
-                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
-                    D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
-                    E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
-                    '<lvsc name="Liquid viscosity"  units="Pa.s" >
-                    If eqno = "0" Or eqno = "" Then
-                        Dim Tc, Pc, w As Double
+                If LiquidViscosityCalculationMode_Subcritical = LiquidViscosityCalcMode.ExpData Then
+                    If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
+                        Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
+                        Dim A, B, C, D, E, result As Double
+                        A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
+                        B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
+                        C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
+                        D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
+                        E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
+                        result = Math.Exp(A + B / T + C * Math.Log(T) + D * T ^ E)
+                        Return result
+                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Then
+                        Dim B, C, result As Double
+                        B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
+                        C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
+                        '[LOG(V)=B*(1/T-1/C), T(K) V(CP)]
+                        result = Exp(B * (1 / T - 1 / C)) * 0.001
+                        Return result
+                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
+                        Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
+                        Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
+                        Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
+                        Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
+                        Dim A, B, C, D, E, result As Double
+                        Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.LiquidViscosityEquation
+                        Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                        A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_A
+                        B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_B
+                        C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_C
+                        D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
+                        E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
+                        '<lvsc name="Liquid viscosity"  units="Pa.s" >
+                        If eqno = "0" Or eqno = "" Then
+                            Dim Tc, Pc, w As Double
+                            Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                            Pc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure
+                            w = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Acentric_Factor
+                            mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                            result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, mw)
+                        Else
+                            If Integer.TryParse(eqno, New Integer) Then
+                                result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa.s
+                            Else
+                                result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa.s
+                            End If
+                        End If
+                        Return result
+                    ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "Biodiesel" Then
+                        Dim result As Double
+                        Dim Tc, Pc, w, Mw As Double
                         Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
                         Pc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure
                         w = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Acentric_Factor
-                        mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
-                        result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, mw)
-                    Else
-                        If Integer.TryParse(eqno, New Integer) Then
-                            result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa.s
-                        Else
-                            result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa.s
-                        End If
+                        Mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                        result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, Mw)
+                        Return result
                     End If
-                    Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "Biodiesel" Then
+                Else
                     Dim result As Double
                     Dim Tc, Pc, w, Mw As Double
                     Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
@@ -6201,10 +6208,7 @@ Final3:
                     Mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
                     result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, Mw)
                     Return result
-                Else
-                    Return 0
                 End If
-
             End If
 
         End Function
@@ -6220,13 +6224,11 @@ Final3:
             Dim val, lval, sval, result As Double
             Dim subst As Interfaces.ICompound
 
-            IObj?.Paragraphs.Add("Liquid phase viscosity is calculated from")
+            IObj?.Paragraphs.Add("Liquid phase viscosity is calculated according to the currently selected mixing rule.")
 
-            IObj?.Paragraphs.Add("<m>\eta_{L}=\exp(\sum_{i}x_{i}\ln\eta_{i}),<m>")
+            IObj?.Paragraphs.Add("Mixing rule: " & LiquidViscosity_MixingRule.ToString)
 
-            IObj?.Paragraphs.Add("where <mi>\eta_{i}</mi> is the viscosity of each component in the phase, 
-                                which depends on the temperature and is calculated from experimental data whenever available.
-                                Dependence of viscosity with the temperature  is described in the equation")
+            IObj?.Paragraphs.Add("Dependence of individual compound viscosity with the temperature  is described in the equation")
 
             IObj?.Paragraphs.Add("<m>\eta=\exp(A+B/T+C\ln T+DT^{E}),<m>")
 
@@ -6241,7 +6243,7 @@ Final3:
                 lval = sval
                 If sval = 0 Then lval = 0.0
                 IObj?.Paragraphs.Add(String.Format("Liquid Viscosity : {0} Pa.s", Exp(lval)))
-                If LiquidViscosity_CorrectExpDataForPressure Then
+                If LiquidViscosity_CorrectExpDataForPressure And LiquidViscosityCalculationMode_Subcritical = LiquidViscosityCalcMode.ExpData Then
                     'pressure correction
                     Dim pcorr As Double = 1.0
                     If (T / subst.ConstantProperties.Critical_Temperature) > 1.0 Then
@@ -6252,12 +6254,32 @@ Final3:
                     IObj?.Paragraphs.Add(String.Format("Compressed Liquid Viscosity Correction Factor: {0}", pcorr))
                     lval = lval * pcorr
                     IObj?.Paragraphs.Add(String.Format("Corrected Liquid Viscosity : {0} Pa.s", Exp(lval)))
-                    If Double.IsNaN(lval) Or Double.IsInfinity(lval) Then lval = 0.0
+                    If Double.IsNaN(lval) Or Double.IsInfinity(lval) Then
+                        Throw New Exception(String.Format("Error calculating viscosity for '{0}'. Temperature: {1} K, Pressure: {2} Pa. Calculated value: {3}", subst.Name, T, P, lval))
+                    End If
                 End If
-                val += subst.MoleFraction.GetValueOrDefault * lval
+                Select Case LiquidViscosity_MixingRule
+                    Case LiquidViscosityMixRule.MoleAverage
+                        val += subst.MoleFraction.GetValueOrDefault * lval
+                    Case LiquidViscosityMixRule.LogMoleAverage
+                        val += subst.MoleFraction.GetValueOrDefault * Log(lval)
+                    Case LiquidViscosityMixRule.InvertedMassAverage
+                        val += subst.MassFraction.GetValueOrDefault / lval
+                    Case LiquidViscosityMixRule.InvertedLogMassAverage
+                        val += subst.MassFraction.GetValueOrDefault / Log(lval)
+                End Select
             Next
 
-            result = val
+            Select Case LiquidViscosity_MixingRule
+                Case LiquidViscosityMixRule.MoleAverage
+                    result = val
+                Case LiquidViscosityMixRule.LogMoleAverage
+                    result = Exp(val)
+                Case LiquidViscosityMixRule.InvertedMassAverage
+                    result = 1.0 / val
+                Case LiquidViscosityMixRule.InvertedLogMassAverage
+                    result = Exp(1.0 / val)
+            End Select
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
 
