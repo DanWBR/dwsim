@@ -27,8 +27,6 @@ Partial Class FormConfigLKP
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -45,19 +43,11 @@ Partial Class FormConfigLKP
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.KryptonDataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.FaTabStripItem1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FaTabStrip1
@@ -180,54 +170,9 @@ Partial Class FormConfigLKP
         'FaTabStripItem1
         '
         Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
-        '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'KryptonDataGridView1
-        '
-        Me.KryptonDataGridView1.AllowUserToAddRows = False
-        Me.KryptonDataGridView1.AllowUserToDeleteRows = False
-        Me.KryptonDataGridView1.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
-        Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Column2, Me.Column1})
-        Me.KryptonDataGridView1.MultiSelect = False
-        Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
-        Me.KryptonDataGridView1.RowHeadersVisible = False
-        Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'ID
-        '
-        resources.ApplyResources(Me.ID, "ID")
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        '
-        'Column2
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Column2.FillWeight = 149.2386!
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column1
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Column1.FillWeight = 50.76142!
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
         '
         'FormConfigLKP
         '
@@ -245,14 +190,9 @@ Partial Class FormConfigLKP
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.KryptonDataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStripItem1.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Public WithEvents KryptonDataGridView1 As System.Windows.Forms.DataGridView
     Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents KryptonDataGridView2 As System.Windows.Forms.DataGridView
@@ -264,9 +204,6 @@ Partial Class FormConfigLKP
     Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents Button2 As System.Windows.Forms.Button

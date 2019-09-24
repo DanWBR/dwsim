@@ -31,8 +31,6 @@ Partial Class FormConfigENRTL
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -45,6 +43,7 @@ Partial Class FormConfigENRTL
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
+        Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -60,12 +59,6 @@ Partial Class FormConfigENRTL
         Me.cbReacSets = New System.Windows.Forms.ComboBox()
         Me.chkCalcChemEq = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
@@ -74,9 +67,6 @@ Partial Class FormConfigENRTL
         Me.FaTabStripItem2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.FaTabStripItem1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FaTabStrip1
@@ -181,6 +171,13 @@ Partial Class FormConfigENRTL
         resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
         Me.LabelWithDivider3.Name = "LabelWithDivider3"
         '
+        'FaTabStripItem1
+        '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
+        Me.FaTabStripItem1.CanClose = False
+        Me.FaTabStripItem1.IsDrawn = True
+        Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        '
         'FaTabStripItem2
         '
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
@@ -282,57 +279,6 @@ Partial Class FormConfigENRTL
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
         '
-        'FaTabStripItem1
-        '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
-        Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.GroupBox1)
-        Me.FaTabStripItem1.IsDrawn = True
-        Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'KryptonDataGridView1
-        '
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
-        Me.KryptonDataGridView1.AllowUserToAddRows = False
-        Me.KryptonDataGridView1.AllowUserToDeleteRows = False
-        Me.KryptonDataGridView1.AllowUserToResizeRows = False
-        Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Column2, Me.Column1})
-        Me.KryptonDataGridView1.MultiSelect = False
-        Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
-        Me.KryptonDataGridView1.RowHeadersVisible = False
-        Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'ID
-        '
-        resources.ApplyResources(Me.ID, "ID")
-        Me.ID.Name = "ID"
-        '
-        'Column2
-        '
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.LightGray
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Column2.FillWeight = 149.2386!
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column1
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Column1.FillWeight = 50.76142!
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
-        '
         'FormConfigENRTL
         '
         resources.ApplyResources(Me, "$this")
@@ -352,23 +298,15 @@ Partial Class FormConfigENRTL
         Me.GroupBox4.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.FaTabStripItem1.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Private WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
     Private WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Public WithEvents KryptonDataGridView1 As System.Windows.Forms.DataGridView
     Public WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents dgvu1 As System.Windows.Forms.DataGridView
     Public WithEvents LabelWithDivider3 As System.Windows.Forms.Label
-    Public WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents cbReacSets As System.Windows.Forms.ComboBox

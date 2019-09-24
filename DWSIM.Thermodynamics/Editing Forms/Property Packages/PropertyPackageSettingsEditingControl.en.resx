@@ -117,107 +117,149 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Interaction Parameters</value>
+  <data name="cbLiqDens.Items1" xml:space="preserve">
+    <value>Rackett + Experimental Data (if available)</value>
   </data>
-  <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>Interaction Parameters</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>General Settings</value>
-  </data>
-  <data name="Button3.Text" xml:space="preserve">
-    <value>Copy Objective Function History from Last Chemical Equilibrium Calculation</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Debug</value>
+  <data name="cbLiqDens.Items2" xml:space="preserve">
+    <value>Equation of State</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chkRigEnBal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 17</value>
+  <data name="chkLiqDensPCorr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 17</value>
   </data>
-  <data name="chkRigEnBal.Text" xml:space="preserve">
-    <value>Rigorous Energy Balance</value>
-  </data>
-  <data name="chkAlternInit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 200</value>
-  </data>
-  <data name="chkAlternInit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 17</value>
-  </data>
-  <data name="chkAlternInit.Text" xml:space="preserve">
-    <value>Alternate Initialization (Reaction Extents)</value>
-  </data>
-  <data name="chkOptimize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 171</value>
-  </data>
-  <data name="chkOptimize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 17</value>
-  </data>
-  <data name="chkOptimize.Text" xml:space="preserve">
-    <value>Optimize Initial Estimates</value>
-  </data>
-  <data name="chkIPOPT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 142</value>
-  </data>
-  <data name="chkIPOPT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 17</value>
-  </data>
-  <data name="chkIPOPT.Text" xml:space="preserve">
-    <value>Use IPOPT Solver</value>
-  </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 113</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Convergence tolerance</value>
-  </data>
-  <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 110</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 84</value>
+  <data name="chkLiqDensPCorr.Text" xml:space="preserve">
+    <value>Correct Experimental Data for High Pressures</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 13</value>
+    <value>126, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Maximum number of iterations</value>
+    <value>Liquid Phase Density</value>
   </data>
-  <data name="tbMaxIts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 81</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 13</value>
   </data>
-  <data name="cbReacSets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 52</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Liquid Phase Viscosity</value>
   </data>
-  <data name="chkCalcChemEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 25</value>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 13</value>
   </data>
-  <data name="chkCalcChemEq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 17</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Fugacity Calculation</value>
   </data>
-  <data name="chkCalcChemEq.Text" xml:space="preserve">
-    <value>Calculate Chemical Equilibrium</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 13</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 55</value>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Enthalpy, Entropy, Cp and Cv</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Calculation Method</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Calculation Method</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Calculation Method</value>
+  </data>
+  <data name="chkLiqViscPCorr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 17</value>
+  </data>
+  <data name="chkLiqViscPCorr.Text" xml:space="preserve">
+    <value>Correct Experimental Data for High Pressures</value>
+  </data>
+  <data name="chkLiqDensPeneloux.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 17</value>
+  </data>
+  <data name="chkLiqDensPeneloux.Text" xml:space="preserve">
+    <value>Use Peneloux Volume Translation Coefficient (PR/SRK EOS only)</value>
+  </data>
+  <data name="cbLiqVisc.Items1" xml:space="preserve">
+    <value>Letsou-Stiel + Experimental Data (if available)</value>
+  </data>
+  <data name="cbHSCpCalcMode.Items2" xml:space="preserve">
+    <value>Excess Properties</value>
+  </data>
+  <data name="cbHSCpCalcMode.Items3" xml:space="preserve">
+    <value>Experimental Data</value>
+  </data>
+  <data name="cbLiqVIscMixRule.Items" xml:space="preserve">
+    <value>Molar Average</value>
+  </data>
+  <data name="cbLiqVIscMixRule.Items1" xml:space="preserve">
+    <value>Log Molar Average</value>
+  </data>
+  <data name="cbLiqVIscMixRule.Items2" xml:space="preserve">
+    <value>Inverse Mass Average</value>
+  </data>
+  <data name="cbLiqVIscMixRule.Items3" xml:space="preserve">
+    <value>Inverse Log Mass Average</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+    <value>62, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Reaction Set</value>
+    <value>Mixing Rule</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Chemical Equilibrium</value>
+  <data name="chkLiqFugPoynt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 17</value>
   </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Advanced Settings</value>
+  <data name="chkLiqFugPoynt.Text" xml:space="preserve">
+    <value>Liquid Phase: Use Poynting Correction Factor</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Configure Electrolyte NRTL Property Package</value>
+  <data name="chkVapFugIdeal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 17</value>
+  </data>
+  <data name="chkVapFugIdeal.Text" xml:space="preserve">
+    <value>Ideal Vapor Phase</value>
+  </data>
+  <data name="chkSolidIdealLiqFug.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 17</value>
+  </data>
+  <data name="chkSolidIdealLiqFug.Text" xml:space="preserve">
+    <value>Solid Phase: Use Ideal Liquid Phase Fugacities</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="chkIgnoreSalLim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 17</value>
+  </data>
+  <data name="chkIgnoreSalLim.Text" xml:space="preserve">
+    <value>Ignore Maximum Salinity Limit (Seawater Model only)</value>
+  </data>
+  <data name="chkIgnoreVapFracLim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 17</value>
+  </data>
+  <data name="chkIgnoreVapFracLim.Text" xml:space="preserve">
+    <value>Ignore Vapor Fraction Bounds (Sour Water Model only)</value>
+  </data>
+  <data name="chkIgnoreIPs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 17</value>
+  </data>
+  <data name="chkIgnoreIPs.Text" xml:space="preserve">
+    <value>Ignore Missing UNIQUAC/NRTL Interaction Parameters</value>
+  </data>
+  <data name="chkSolidFugIdeal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="chkSolidFugIdeal.Text" xml:space="preserve">
+    <value>Ideal Solid Phase</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>502, 617</value>
   </data>
 </root>

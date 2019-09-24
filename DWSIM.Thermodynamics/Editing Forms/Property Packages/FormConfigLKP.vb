@@ -33,6 +33,8 @@ Public Class FormConfigLKP
 
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
+        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
+
         Me.KryptonDataGridView2.DataSource = Nothing
 
         If _pp.ComponentName.ToString.Contains("Raoult") Or _

@@ -33,6 +33,8 @@ Public Class FormConfigENRTL
 
         Loaded = False
 
+        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
+
         Me.Text += " (" & _pp.Tag & ")"
 
         Dim ppu As PropertyPackages.ElectrolyteNRTLPropertyPackage = _pp
@@ -137,7 +139,7 @@ gt1:            If ppu.m_enrtl.InteractionParameters.ContainsKey(id1) Then
 
     End Sub
 
-    Private Sub KryptonDataGridView1_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs) Handles KryptonDataGridView1.CellValidating
+    Private Sub KryptonDataGridView1_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs)
 
     End Sub
 

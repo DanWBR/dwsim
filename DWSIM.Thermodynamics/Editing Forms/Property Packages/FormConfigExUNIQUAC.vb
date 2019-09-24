@@ -33,6 +33,8 @@ Public Class FormConfigExUNIQUAC
 
         Loaded = False
 
+        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
+
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
@@ -115,7 +117,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
 
     End Sub
 
-    Private Sub KryptonDataGridView1_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs) Handles KryptonDataGridView1.CellValidating
+    Private Sub KryptonDataGridView1_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs)
 
     End Sub
 

@@ -20,7 +20,6 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports System.Text
 Imports DotNumerics
-Imports System.Threading.Tasks
 
 Public Class FormConfigUNIQUAC
 
@@ -30,6 +29,8 @@ Public Class FormConfigUNIQUAC
     Public param As System.Collections.Specialized.StringDictionary
 
     Private Sub ConfigFormUNIQUAC_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
 
         Loaded = False
 
@@ -151,7 +152,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
     End Sub
 
-    Private Sub KryptonDataGridView1_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs) Handles KryptonDataGridView1.CellValidating
+    Private Sub KryptonDataGridView1_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs)
 
         'If Me.Loaded Then
         '    If e.ColumnIndex = 1 Then

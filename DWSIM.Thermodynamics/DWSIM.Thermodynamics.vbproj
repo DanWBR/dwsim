@@ -310,6 +310,12 @@
     <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.Designer.vb">
+      <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.designer.vb">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </Compile>
@@ -600,6 +606,12 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.en.resx">
+      <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.resx">
+      <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
@@ -809,6 +821,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\eNRTL\table4_amines.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

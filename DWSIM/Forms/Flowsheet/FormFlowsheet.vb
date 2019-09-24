@@ -2163,9 +2163,7 @@ Public Class FormFlowsheet
 
                     Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.Tag, Thermodynamics.PropertyPackages.PropertyPackage)
 
-                    If act.PropertyName = "PARAM" Then
-                        pp.Parameters(act.ObjID) = pval
-                    ElseIf act.PropertyName = "PR_IP" Then
+                    If act.PropertyName = "PR_IP" Then
                         Dim prip As PengRobinson = pp.GetType.GetField("m_pr").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
                     ElseIf act.PropertyName = "PRSV2_KIJ" Then

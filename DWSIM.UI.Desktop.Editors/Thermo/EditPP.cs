@@ -402,28 +402,7 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
 
             }
-
-            s.CreateAndAddLabelRow(this, "Model Configuration");
-
-            var parkeys = pp.Parameters.Keys.ToList();
-
-            foreach (var par in parkeys)
-            {
-                s.CreateAndAddTextBoxRow(this, "R",
-                                         flowsheet.GetTranslatedString(par), Double.Parse(pp.Parameters[par].ToString()),
-                         (arg3, arg2) =>
-                         {
-                             if (Double.TryParse(arg3.Text.ToString(), out val))
-                             {
-                                 arg3.TextColor = (SystemColors.ControlText);
-                                 pp.Parameters[par] = Double.Parse(arg3.Text);
-                             }
-                             else
-                             {
-                                 arg3.TextColor = (Colors.Red);
-                             }
-                         });
-            }
+            
         }
     }
 }

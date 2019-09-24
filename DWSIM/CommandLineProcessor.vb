@@ -269,13 +269,6 @@ Imports conv = DWSIM.SharedClasses.SystemsOfUnits.Converter
                                             Next
                                             For Each node4 As XmlNode In node3.ChildNodes
                                                 Select Case node4.Name
-                                                    Case "Parameter"
-                                                        For Each prop As String In pp.Parameters.Keys
-                                                            If DWSIM.App.GetLocalString(prop) = node4.Attributes("Name").Value Then
-                                                                Console.WriteLine("Setting parameter '" & prop & "' of Property Package '" & pp.Tag & "' to " & node4.Attributes("Value").Value)
-                                                                pp.Parameters(prop) = node4.Attributes("Value").Value
-                                                            End If
-                                                        Next
                                                     Case "InteractionParameters"
                                                         For Each node5 As XmlNode In node4.ChildNodes
                                                             Dim c1 As String = node5.Attributes("Comp1").Value

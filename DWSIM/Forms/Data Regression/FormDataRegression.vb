@@ -3505,9 +3505,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 proppack._availablecomps.Add(kvp.Key, kvp.Value)
             Next
 
-            If proppack.Parameters.ContainsKey("PP_IDEAL_VAPOR_PHASE_FUG") Then
-                proppack.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = Me.chkIdealVaporPhase.CheckState
-            End If
+            proppack.VaporPhaseFugacityCalculationMode = Not chkIdealVaporPhase.Checked
 
             FunctionValue(initval2)
 
@@ -3609,9 +3607,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             proppack._availablecomps.Add(kvp.Key, kvp.Value)
         Next
 
-        If proppack.Parameters.ContainsKey("PP_IDEAL_VAPOR_PHASE_FUG") Then
-            proppack.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = Me.chkIdealVaporPhase.CheckState
-        End If
+        proppack.VaporPhaseFugacityCalculationMode = Not chkIdealVaporPhase.Checked
 
         Select Case currcase.method
             Case "Limited Memory BFGS"

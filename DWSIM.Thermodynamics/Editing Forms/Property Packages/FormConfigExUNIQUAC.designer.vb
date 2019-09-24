@@ -29,8 +29,6 @@ Partial Class FormConfigExUNIQUAC
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -54,11 +52,6 @@ Partial Class FormConfigExUNIQUAC
         Me.chkCalcChemEq = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
@@ -67,9 +60,6 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStripItem2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.FaTabStripItem1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FaTabStrip1
@@ -79,7 +69,7 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2, Me.FaTabStripItem1})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem2
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
         '
         'FaTabStripItem3
         '
@@ -88,6 +78,7 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
+        Me.FaTabStripItem3.Selected = True
         '
         'GroupBox3
         '
@@ -161,7 +152,6 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        Me.FaTabStripItem2.Selected = True
         '
         'GroupBox4
         '
@@ -245,52 +235,8 @@ Partial Class FormConfigExUNIQUAC
         '
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'KryptonDataGridView1
-        '
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
-        Me.KryptonDataGridView1.AllowUserToAddRows = False
-        Me.KryptonDataGridView1.AllowUserToDeleteRows = False
-        Me.KryptonDataGridView1.AllowUserToResizeRows = False
-        Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Column2, Me.Column1})
-        Me.KryptonDataGridView1.MultiSelect = False
-        Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
-        Me.KryptonDataGridView1.RowHeadersVisible = False
-        Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'ID
-        '
-        resources.ApplyResources(Me.ID, "ID")
-        Me.ID.Name = "ID"
-        '
-        'Column2
-        '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Column2.FillWeight = 149.2386!
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column1
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Column1.FillWeight = 50.76142!
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
         '
         'FormConfigExUNIQUAC
         '
@@ -310,23 +256,15 @@ Partial Class FormConfigExUNIQUAC
         Me.GroupBox4.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.FaTabStripItem1.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Private WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
     Private WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Public WithEvents KryptonDataGridView1 As System.Windows.Forms.DataGridView
     Public WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents dgvu1 As System.Windows.Forms.DataGridView
     Public WithEvents LabelWithDivider3 As System.Windows.Forms.Label
-    Public WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
