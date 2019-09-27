@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.8
+Version 5.8 Preview 1
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -62,10 +62,9 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
 
-Version 5.8
+Version 5.8 Preview 1
 
 - [NEW] Dynamic Script Snippets
-- [NEW] New Spreadsheet Tool (Classic UI)
 - [NEW] Enhanced Script Editor (Cross-Platform UI)
 - [CHG] Redesigned Cross-Platform UI
 - [CHG] Redesigned Property Package editors
