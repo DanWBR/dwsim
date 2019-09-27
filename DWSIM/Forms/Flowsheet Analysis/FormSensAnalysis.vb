@@ -661,7 +661,7 @@ Public Class FormSensAnalysis
                 Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv1prop.Split("|")(0)).FirstOrDefault
                 iv1val0 = rx.GetPropertyValue(iv1prop.Split("|")(1))
             Else
-                iv1val0 = form.FormSpreadsheet.GetCellValue(iv1prop).Value
+                iv1val0 = form.FormSpreadsheet.GetCellValue(iv1prop).Data
             End If
             If Me.chkIndVar2.Checked Then
                 If iv2id <> "SpreadsheetCell" And iv2id <> "ReactionProperty" Then
@@ -670,7 +670,7 @@ Public Class FormSensAnalysis
                     Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv2prop.Split("|")(0)).FirstOrDefault
                     iv2val0 = rx.GetPropertyValue(iv2prop.Split("|")(1))
                 Else
-                    iv2val0 = form.FormSpreadsheet.GetCellValue(iv2prop).Value
+                    iv2val0 = form.FormSpreadsheet.GetCellValue(iv2prop).Data
                 End If
             Else
                 iv2val0 = 0.0#
@@ -711,7 +711,7 @@ Public Class FormSensAnalysis
                                 If var.objectID <> "SpreadsheetCell" Then
                                     .Variables.Add(var.name, SystemsOfUnits.Converter.ConvertFromSI(var.unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)))
                                 Else
-                                    .Variables.Add(var.name, form.FormSpreadsheet.GetCellValue(var.propID).Value)
+                                    .Variables.Add(var.name, form.FormSpreadsheet.GetCellValue(var.propID).Data)
                                 End If
                             Next
                             Me.selectedsacase.exbase = Me.selectedsacase.econtext.CompileGeneric(Of Double)(Me.selectedsacase.expression)
@@ -728,7 +728,7 @@ Public Class FormSensAnalysis
                             If var.objectID <> "SpreadsheetCell" Then
                                 var.currentvalue = form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)
                             Else
-                                var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Value
+                                var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Data
                             End If
                             currresults.Add(var.currentvalue)
                         Next

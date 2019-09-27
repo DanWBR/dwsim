@@ -1,10 +1,12 @@
-﻿Public Class FormNewSpreadsheet
+﻿Imports unvell.ReoGrid
+
+Public Class FormNewSpreadsheet
 
     Public Property SpreadsheetControl As unvell.ReoGrid.Editor.ReoGridEditor
 
     Public Property Flowsheet As FormFlowsheet
 
-    Public ReadOnly Property Spreadsheet
+    Public ReadOnly Property Spreadsheet As unvell.ReoGrid.ReoGridControl
         Get
             Return SpreadsheetControl.grid
         End Get
@@ -34,5 +36,23 @@
         Flowsheet.MenuStrip1.Items.Insert(4, SpreadsheetControl.SpreadsheetTSMI)
 
     End Sub
+
+    Public Function GetCellValue(address As String) As Cell
+        Return Spreadsheet.Worksheets(0).Cells(address)
+    End Function
+
+    Public Sub EvaluateAll()
+        Spreadsheet.Worksheets(0).Recalculate()
+    End Sub
+
+    Public Sub WriteAll()
+
+    End Sub
+
+    Public Function GetCellString() As String()
+
+        Return Spreadsheet.Worksheets(0).Max
+
+    End Function
 
 End Class

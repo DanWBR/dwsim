@@ -69,7 +69,7 @@ Public Class FormFlowsheet
     Public FormSurface As New FlowsheetSurface_SkiaSharp
     Public FormLog As New LogPanel
     Public FormMatList As New MaterialStreamPanel
-    Public FormSpreadsheet As New SpreadsheetForm
+    Public FormSpreadsheet As New FormNewSpreadsheet
 
     Public FormProps As New frmProps
 
@@ -147,7 +147,10 @@ Public Class FormFlowsheet
 
     Private Sub FormChild_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        FormSpreadsheet.Flowsheet = Me
+
         Me.MdiParent = FormMain
+
         If DWSIM.App.IsRunningOnMono Then
             'Me.FlowLayoutPanel1.AutoSize = False
             'Me.FlowLayoutPanel1.Height = 50
@@ -245,9 +248,6 @@ Public Class FormFlowsheet
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormWatch.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
-
-            Dim fs2 As New FormNewSpreadsheet With {.Flowsheet = Me}
-            fs2.Show(dckPanel)
 
             FormSurface.Activate()
 
@@ -2284,13 +2284,13 @@ Public Class FormFlowsheet
 
                     Dim cell = FormSpreadsheet.GetCellValue(act.ObjID)
                     If undo Then
-                        cell.Value = act.OldValue(0)
+                        cell.Data = act.OldValue(0)
                         cell.Tag = act.OldValue(1)
                     Else
-                        cell.Value = act.NewValue(0)
+                        cell.Data = act.NewValue(0)
                         cell.Tag = act.NewValue(1)
                     End If
-                    FormSpreadsheet.EvaluateAll(cell)
+                    FormSpreadsheet.Spreadsheet.Worksheets(0).Recalculate()
 
             End Select
 
@@ -2549,22 +2549,22 @@ Public Class FormFlowsheet
         firstcell = range.Split(":")(0)
         lastcell = range.Split(":")(1)
 
-        firstrow = FormSpreadsheet.GetCellValue(firstcell).RowIndex
-        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).ColumnIndex
+        firstrow = FormSpreadsheet.GetCellValue(firstcell).Row
+        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).Column
 
-        lastrow = FormSpreadsheet.GetCellValue(lastcell).RowIndex
-        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).ColumnIndex
+        lastrow = FormSpreadsheet.GetCellValue(lastcell).Row
+        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).Column
 
         Dim data As New List(Of String())
 
         Dim i, j As Integer
 
-        Dim grid = FormSpreadsheet.DataGridView1
+        Dim grid = FormSpreadsheet.Spreadsheet.Worksheets(0)
 
         For i = firstrow To lastrow
             Dim sublist = New List(Of String)
             For j = firstcolumn To lastcolumn
-                Dim val = grid.Rows(i).Cells(j).Value
+                Dim val = grid.Cells(i, j).Data
                 If val Is Nothing Then
                     sublist.Add("")
                 Else
@@ -2895,10 +2895,7 @@ Public Class FormFlowsheet
                             Me.FormWatch.UpdateList()
 
                             If Not Me.FormSpreadsheet Is Nothing Then
-                                If Me.FormSpreadsheet.chkUpdate.Checked Then
-                                    Me.FormSpreadsheet.EvaluateAll()
-                                    Me.FormSpreadsheet.EvaluateAll()
-                                End If
+                                Me.FormSpreadsheet.EvaluateAll()
                             End If
 
                             'Application.DoEvents()
@@ -2912,7 +2909,7 @@ Public Class FormFlowsheet
 
         Try
             Me.UIThread(Sub()
-                            If FormSpreadsheet IsNot Nothing AndAlso FormSpreadsheet.chkUpdate.Checked Then Me.FormSpreadsheet.EvaluateAll()
+                            If FormSpreadsheet IsNot Nothing Then Me.FormSpreadsheet.EvaluateAll()
                         End Sub)
         Catch ex As Exception
             WriteToLog("Error updating spreadsheet: " & ex.Message.ToString, Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
@@ -2923,7 +2920,7 @@ Public Class FormFlowsheet
     Public Sub WriteSpreadsheetVariables(act As Action) Implements IFlowsheet.WriteSpreadsheetVariables
         Me.UIThread(Sub()
                         If FormSpreadsheet IsNot Nothing Then
-                            Me.FormSpreadsheet.formc = Me
+                            Me.FormSpreadsheet.Flowsheet = Me
                             Me.FormSpreadsheet.WriteAll()
                         End If
                     End Sub)
