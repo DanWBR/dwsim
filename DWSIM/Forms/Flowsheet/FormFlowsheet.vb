@@ -246,6 +246,9 @@ Public Class FormFlowsheet
             FormWatch.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
 
+            Dim fs2 As New FormNewSpreadsheet With {.Flowsheet = Me}
+            fs2.Show(dckPanel)
+
             FormSurface.Activate()
 
             dckPanel.BringToFront()

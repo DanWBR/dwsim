@@ -188,6 +188,9 @@
     <Reference Include="Aga.Controls">
       <HintPath>References\Aga.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>References\ReoGrid.WinForms\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="AODL, Version=1.2.0.1, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AODL.dll</HintPath>
@@ -224,6 +227,9 @@
     <Reference Include="ExcelApi">
       <HintPath>References\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>References\ReoGrid.WinForms\FastColoredTextBox.dll</HintPath>
     </Reference>
     <Reference Include="GenericDictionaryEditor">
       <HintPath>References\GenericDictionaryEditor.dll</HintPath>
@@ -354,6 +360,18 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="unvell.ReoGrid">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoGridEditor">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoGridEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoScript">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoScript.EditorLib">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.EditorLib.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Yeppp.CLR.Bundle">
       <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
@@ -445,6 +463,12 @@
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormNewSpreadsheet.Designer.vb">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormNewSpreadsheet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
@@ -1073,6 +1097,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.resx">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormNewSpreadsheet.en.resx">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormNewSpreadsheet.resx">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.de.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
