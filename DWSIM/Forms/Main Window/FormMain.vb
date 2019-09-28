@@ -2022,6 +2022,7 @@ Public Class FormMain
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
             form.FormSpreadsheet.DockPanel = Nothing
+            form.FormSpreadsheet.Flowsheet = form
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
             form.FormProps.DockPanel = Nothing

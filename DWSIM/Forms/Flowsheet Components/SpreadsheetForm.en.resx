@@ -118,59 +118,59 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 170</value>
-  </data>
-  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>771, 271</value>
-  </data>
   <data name="CelulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>287, 22</value>
   </data>
   <data name="CelulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Cell</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 6</value>
+    <value>284, 6</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>287, 22</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Evaluate Formula</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>287, 22</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Import Value from Flowsheet</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>287, 22</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Export Value to Flowsheet Object</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 6</value>
+    <value>284, 6</value>
   </data>
   <data name="LimparToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>287, 22</value>
   </data>
   <data name="LimparToolStripMenuItem.Text" xml:space="preserve">
     <value>Clear</value>
   </data>
   <data name="CopiarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>287, 22</value>
   </data>
   <data name="CopiarToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="ColarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 22</value>
+    <value>287, 22</value>
   </data>
   <data name="ColarToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
+  </data>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 170</value>
+  </data>
+  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>771, 271</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -211,6 +211,12 @@
   <data name="chkUseRegionalSeparator.Text" xml:space="preserve">
     <value>Use System-Defined Decimal Separator for Expressions and Formulas</value>
   </data>
+  <data name="chkEnableUnitLocking.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 17</value>
+  </data>
+  <data name="chkEnableUnitLocking.Text" xml:space="preserve">
+    <value>Activate Unit Locking Mode</value>
+  </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 336</value>
   </data>
@@ -219,12 +225,6 @@
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Control Options</value>
-  </data>
-  <data name="chkEnableUnitLocking.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 17</value>
-  </data>
-  <data name="chkEnableUnitLocking.Text" xml:space="preserve">
-    <value>Activate Unit Locking Mode</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 22</value>
@@ -292,6 +292,51 @@
   <data name="ToolStripLabel7.Text" xml:space="preserve">
     <value>Format</value>
   </data>
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="ToolStripMenuItem15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
   <data name="tsbFormat.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -312,6 +357,9 @@
   </data>
   <data name="ToolStripLabel6.Text" xml:space="preserve">
     <value>Content Padding</value>
+  </data>
+  <data name="txtPadding.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="txtPadding.Text" xml:space="preserve">
     <value>0</value>
@@ -388,51 +436,6 @@
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>787, 25</value>
-  </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
-  </data>
-  <data name="ToolStripMenuItem15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>787, 435</value>
