@@ -200,7 +200,7 @@ Imports IronPython.Hosting
         scope = engine.CreateScope()
         scope.SetVariable("Plugins", My.Application.UtilityPlugins)
         scope.SetVariable("Flowsheet", fsheet)
-        scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
+        scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet)
 
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
 
@@ -300,7 +300,7 @@ Imports IronPython.Hosting
 
                                                                                         locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
                                                                                         locals.SetItem("Flowsheet", fsheet.ToPython)
-                                                                                        locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.ToPython)
+                                                                                        locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet.ToPython)
                                                                                         Dim Solver As New FlowsheetSolver.FlowsheetSolver
                                                                                         locals.SetItem("Solver", Solver.ToPython)
 

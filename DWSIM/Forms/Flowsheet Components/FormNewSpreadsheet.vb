@@ -121,6 +121,42 @@ Public Class FormNewSpreadsheet
                                                                                     End If
                                                                                 End Function
 
+        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("GETPROPUNITS") = Function(cell, args) As Object
+                                                                                      If args.Length = 2 Then
+                                                                                          Try
+                                                                                              Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyUnit(args(1).ToString)
+                                                                                          Catch ex As Exception
+                                                                                              Return "ERROR: " & ex.Message
+                                                                                          End Try
+                                                                                      Else
+                                                                                          Return "INVALID ARGS"
+                                                                                      End If
+                                                                                  End Function
+
+        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("GETOBJID") = Function(cell, args) As Object
+                                                                                  If args.Length = 1 Then
+                                                                                      Try
+                                                                                          Return Flowsheet.GetFlowsheetSimulationObject(args(0).ToString).Name
+                                                                                      Catch ex As Exception
+                                                                                          Return "ERROR: " & ex.Message
+                                                                                      End Try
+                                                                                  Else
+                                                                                      Return "INVALID ARGS"
+                                                                                  End If
+                                                                              End Function
+
+        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("GETOBJNAME") = Function(cell, args) As Object
+                                                                                    If args.Length = 1 Then
+                                                                                        Try
+                                                                                            Return Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag
+                                                                                        Catch ex As Exception
+                                                                                            Return "ERROR: " & ex.Message
+                                                                                        End Try
+                                                                                    Else
+                                                                                        Return "INVALID ARGS"
+                                                                                    End If
+                                                                                End Function
+
     End Sub
 
     Public Sub MoveSpreadsheetMenu()
