@@ -250,6 +250,7 @@ Public Class FormPropSelection
             Dim separator = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator
             If ssmode Then
                 Dim scell = ssheet.CurrentWorksheet.GetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
+                If scell Is Nothing Then scell = ssheet.CurrentWorksheet.CreateAndGetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
                 If mode = 0 Then
                     scell.Formula = String.Format("GETPROPVAL({3}{1}{3}{0}{3}{2}{3})",
                                                   separator,

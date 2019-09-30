@@ -202,6 +202,9 @@ namespace DWSIM.UI.Desktop.Editors
             int i, j, n1, m1, n2, m2, maxrow, maxcol;
 
             n1 = dt1.Count - 1;
+
+            if (n1 == -1) return;
+
             m1 = dt1[0].Count - 1;
 
             n2 = dt2.Count - 1;

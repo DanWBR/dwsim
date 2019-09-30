@@ -844,7 +844,7 @@ namespace DWSIM.UI.Forms
             {
                 if (e.Data.GetString("ObjectName") != null)
                 {
-                    FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y / FlowsheetControl.FlowsheetSurface.Zoom));
+                    FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom));
                     UpdateEditorConnectionsPanel();
                 }
             };

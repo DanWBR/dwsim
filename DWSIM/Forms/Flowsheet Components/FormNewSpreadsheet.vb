@@ -367,6 +367,9 @@ Public Class FormNewSpreadsheet
         Dim i, j, n1, m1, n2, m2, maxrow, maxcol As Integer
 
         n1 = dt1.Count - 1
+
+        If n1 = -1 Then Exit Sub
+
         m1 = dt1(0).Count - 1
 
         n2 = dt2.Count - 1
@@ -506,10 +509,10 @@ Public Class FormNewSpreadsheet
     End Sub
 
     Private Sub FormNewSpreadsheet_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
-        SpreadsheetControl.SpreadsheetTSMI.Enabled = True
+        If SpreadsheetControl IsNot Nothing Then SpreadsheetControl.SpreadsheetTSMI.Enabled = True
     End Sub
 
     Private Sub FormNewSpreadsheet_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
-        SpreadsheetControl.SpreadsheetTSMI.Enabled = False
+        If SpreadsheetControl IsNot Nothing Then SpreadsheetControl.SpreadsheetTSMI.Enabled = False
     End Sub
 End Class
