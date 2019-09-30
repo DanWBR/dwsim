@@ -21,6 +21,7 @@ using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
 using Cell = DWSIM.CrossPlatform.UI.Controls.ReoGrid.Cell;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid.EtoRenderer;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid.Formula;
+using DWSIM.UI.Desktop.Shared;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -34,18 +35,19 @@ namespace DWSIM.UI.Desktop.Editors
         public List<List<object>> dt1 = new List<List<object>>();
         public List<List<object>> dt2 = new List<List<object>>();
 
-        private IFlowsheet flowsheet;
+        private Flowsheet flowsheet;
 
         private ReoGridFullControl scontrol;
 
         public ReoGridControl Sheet;
 
-        public Spreadsheet(IFlowsheet fs)
+        public Spreadsheet(Flowsheet fs)
         {
             flowsheet = fs;
             scontrol = new ReoGridFullControl();
             Sheet = scontrol.GridControl;
             SetCustomFunctions();
+            flowsheet.GetSpreadsheetObject = () => { return Sheet; };
             Sheet.CurrentWorksheet.Name = "MAIN";
         }
 
@@ -349,6 +351,12 @@ namespace DWSIM.UI.Desktop.Editors
             esheet.Cells[0, 1].Data = "OBJECT";
             esheet.Cells[0, 2].Data = "PROPERTY";
             esheet.Cells[0, 3].Data = "UNITS";
+
+            esheet.Cells[0, 0].Style.Bold = true;
+            esheet.Cells[0, 1].Style.Bold = true;
+            esheet.Cells[0, 2].Style.Bold = true;
+            esheet.Cells[0, 3].Style.Bold = true;
+
             i = 1;
             foreach (var item in elist)
             {

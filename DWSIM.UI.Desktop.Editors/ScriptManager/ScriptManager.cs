@@ -32,44 +32,32 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
-            var ti1 = new ButtonSegmentedItem() { Width = 20, ToolTip = "New Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-new.png")).WithSize(16, 16) };
-            var ti2 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Update Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-approve_and_update.png")).WithSize(16, 16) };
-            var ti3 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Print", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-print.png")).WithSize(16, 16) };
-            var ti3a = new ButtonSegmentedItem() { Width = 20, ToolTip = "Remove Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-filled_trash.png")).WithSize(16, 16) };
+            var ti1 = new Button() { Height = 24, Width = 24,  ToolTip = "New Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-new.png")).WithSize(16, 16) };
+            var ti2 = new Button() { Height = 24, Width = 24,  ToolTip = "Update Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-approve_and_update.png")).WithSize(16, 16) };
+            var ti3 = new Button() { Height = 24, Width = 24,  ToolTip = "Print", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-print.png")).WithSize(16, 16) };
+            var ti3a = new Button() { Height = 24, Width = 24,  ToolTip = "Remove Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-filled_trash.png")).WithSize(16, 16) };
 
-            var ts1 = new SegmentedButton { Height = 20, Items = { ti1, ti2, ti3, ti3a } };
+            var ti4 = new Button() { Height = 24, Width = 24,  ToolTip = "Cut", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cut.png")).WithSize(16, 16) };
+            var ti5 = new Button() { Height = 24, Width = 24,  ToolTip = "Copy", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy.png")).WithSize(16, 16) };
+            var ti6 = new Button() { Height = 24, Width = 24,  ToolTip = "Paste", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paste.png")).WithSize(16, 16) };
 
-            var ti4 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Cut", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cut.png")).WithSize(16, 16) };
-            var ti5 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Copy", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy.png")).WithSize(16, 16) };
-            var ti6 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Paste", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paste.png")).WithSize(16, 16) };
+            var ti7 = new Button() { Height = 24, Width = 24,  ToolTip = "Undo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-undo.png")).WithSize(16, 16) };
+            var ti8 = new Button() { Height = 24, Width = 24,  ToolTip = "Redo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-redo.png")).WithSize(16, 16) };
 
-            var ts2 = new SegmentedButton { Height = 20, Items = { ti4, ti5, ti6 } };
+            var ti9 = new Button() { Height = 24, Width = 24, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")).WithSize(16, 16) };
 
-            var ti7 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Undo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-undo.png")).WithSize(16, 16) };
-            var ti8 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Redo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-redo.png")).WithSize(16, 16) };
+            var ti10 = new Button() { Height = 24, Width = 24,  ToolTip = "Indent Right", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "indent-right.png")).WithSize(16, 16) };
+            var ti11 = new Button() { Height = 24, Width = 24,  ToolTip = "Indent Left", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "left-indentation-option.png")).WithSize(16, 16) };
 
-            var ts3 = new SegmentedButton { Height = 20, Items = { ti7, ti8 } };
+            var ti12 = new Button() { Height = 24, Width = 24,  ToolTip = "Decrease Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-decrease_font.png")).WithSize(16, 16) };
+            var ti13 = new Button() { Height = 24, Width = 24,  ToolTip = "Increase Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-increase_font.png")).WithSize(16, 16) };
 
-            var ti9 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")).WithSize(16, 16) };
+            var ti14 = new Button() { Height = 24, Width = 24, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "code.png")).WithSize(16, 16) };
 
-            var ti10 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Indent Right", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "indent-right.png")).WithSize(16, 16) };
-            var ti11 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Indent Left", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "left-indentation-option.png")).WithSize(16, 16) };
+            var ti15 = new Button() { Height = 24, Width = 24,  ToolTip = "Run Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")).WithSize(16, 16) };
+            var ti16 = new Button() { Height = 24, Width = 24,  ToolTip = "Run Script (Async)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-circled_play.png")).WithSize(16, 16) };
 
-            var ts4 = new SegmentedButton { Height = 20, Items = { ti10, ti11 } };
-
-            var ti12 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Decrease Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-decrease_font.png")).WithSize(16, 16) };
-            var ti13 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Increase Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-increase_font.png")).WithSize(16, 16) };
-
-            var ts5 = new SegmentedButton { Height = 20, Items = { ti12, ti13 } };
-
-            var ti14 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "code.png")).WithSize(16, 16) };
-
-            var ti15 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Run Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")).WithSize(16, 16) };
-            var ti16 = new ButtonSegmentedItem() { Width = 20, ToolTip = "Run Script (Async)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-circled_play.png")).WithSize(16, 16) };
-
-            var ts6 = new SegmentedButton { Height = 20, Items = { ti15, ti16 } };
-
-            var ti17 = new Button() { Height = 20, Width = 20, ImagePosition = ButtonImagePosition.Overlay, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")).WithSize(16, 16) };
+            var ti17 = new Button() { Height = 24, Width = 24, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")).WithSize(16, 16) };
 
             var l1 = new Label() { VerticalAlignment = VerticalAlignment.Bottom, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
 
@@ -77,24 +65,30 @@ namespace DWSIM.UI.Desktop.Editors
 
             var menu1 = new StackLayout
             {
-                Items = { ts1 },
+                Items = { ti1, ti2, ti3, ti3a },
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
                 VerticalContentAlignment = VerticalAlignment.Bottom,
                 Padding = 5,
-                Height = 30
+                Height = 34
             };
 
             var menu2 = new StackLayout
             {
-                Items = { ts6, ts2, ts3, ti9, ts4, ts5, ti14, ti17, l1, t1 },
+                Items = { ti15, ti16, new Label {Text =" " },
+                    ti4, ti5, ti6, new Label {Text =" " },
+                    ti7, ti8, new Label {Text =" " },
+                    ti9, ti10, ti11, new Label {Text =" " },
+                    ti12, ti13, new Label {Text =" " },
+                    ti14, new Label {Text =" " },
+                    ti17, l1, t1 },
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
                 VerticalContentAlignment = VerticalAlignment.Bottom,
                 Padding = 5,
-                Height = 30
+                Height = 34
             };
 
             var leftcontainer = new TableLayout();

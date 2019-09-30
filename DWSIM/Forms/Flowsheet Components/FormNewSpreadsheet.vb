@@ -490,6 +490,11 @@ Public Class FormNewSpreadsheet
         esheet.Cells(0, 2).Data = "PROPERTY"
         esheet.Cells(0, 3).Data = "UNITS"
 
+        esheet.Cells(0, 0).Style.Bold = True
+        esheet.Cells(0, 1).Style.Bold = True
+        esheet.Cells(0, 2).Style.Bold = True
+        esheet.Cells(0, 3).Style.Bold = True
+
         i = 1
         For Each item In elist
             esheet.Cells(i, 0).Formula = item.Item1

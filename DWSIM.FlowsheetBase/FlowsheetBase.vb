@@ -50,6 +50,8 @@ Imports System.Dynamic
 
     Public LoadSpreadsheetData, SaveSpreadsheetData As Action(Of XDocument)
 
+    Public GetSpreadsheetObject As Func(Of Object)
+
     Public RetrieveSpreadsheetData As Func(Of String, List(Of String()))
 
     Public Property ScriptKeywordsF As String = ""
@@ -2124,7 +2126,7 @@ Label_00CC:
         scope.SetVariable("Plugins", UtilityPlugins)
         scope.SetVariable("Flowsheet", Me)
         scope.SetVariable("Application", GetApplicationObject)
-        'scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
+        scope.SetVariable("Spreadsheet", GetSpreadsheetObject.Invoke())
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
         For Each obj As ISimulationObject In SimulationObjects.Values
@@ -2187,6 +2189,10 @@ Label_00CC:
 
                                                                                  locals.SetItem("Plugins", UtilityPlugins.ToPython)
                                                                                  locals.SetItem("Flowsheet", Me.ToPython)
+                                                                                 Try
+                                                                                     locals.SetItem("Spreadsheet", (GetSpreadsheetObject.Invoke()).ToPython)
+                                                                                 Catch ex As Exception
+                                                                                 End Try
                                                                                  Dim Solver As New FlowsheetSolver.FlowsheetSolver
                                                                                  locals.SetItem("Solver", Solver.ToPython)
 
