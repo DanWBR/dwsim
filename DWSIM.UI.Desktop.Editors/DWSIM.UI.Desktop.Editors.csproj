@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
+    <Reference Include="DWSIM.CrossPlatform.UI.Controls.ReoGrid">
+      <HintPath>..\DWSIM\References\ReoGrid.Eto\DWSIM.CrossPlatform.UI.Controls.ReoGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>

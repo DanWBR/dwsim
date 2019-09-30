@@ -10,7 +10,6 @@ using ICSharpCode.SharpZipLib.Zip;
 using System.Linq;
 using System.Threading.Tasks;
 using DWSIM.UI.Desktop.Editors;
-using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables;
 using System.Timers;
@@ -25,14 +24,14 @@ namespace DWSIM.UI.Forms
     {
 
         public Desktop.Shared.Flowsheet FlowsheetObject;
-        public DWSIM.UI.Desktop.Editors.Spreadsheet Spreadsheet;
-        private DWSIM.UI.Controls.FlowsheetSurfaceControlBase FlowsheetControl;
+        public Spreadsheet Spreadsheet;
+        private Controls.FlowsheetSurfaceControlBase FlowsheetControl;
 
         private DocumentControl EditorHolder;
 
         public Color BGColor = new Color(0.051f, 0.447f, 0.651f);
 
-        private TableLayout SpreadsheetControl;
+        private PixelLayout SpreadsheetControl;
 
         private Eto.Forms.Splitter SplitterFlowsheet;
 
@@ -307,7 +306,7 @@ namespace DWSIM.UI.Forms
             ActInspector = () =>
             {
                 var iwindow = DWSIM.Inspector.Window_Eto.GetInspectorWindow();
-                var iform = Common.GetDefaultEditorForm("DWSIM - Solution Inspector", (int)(sf * 1024), (int)(sf * 768), iwindow, false);
+                var iform = DWSIM.UI.Shared.Common.GetDefaultEditorForm("DWSIM - Solution Inspector", (int)(sf * 1024), (int)(sf * 768), iwindow, false);
                 iform.WindowState = WindowState.Maximized;
                 iform.Show();
             };
@@ -422,21 +421,21 @@ namespace DWSIM.UI.Forms
             btnUtilities_TrueCriticalPoint.Click += (sender, e) =>
             {
                 var tcp = new Desktop.Editors.Utilities.TrueCriticalPointView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("True Critical Point", (int)(sf * 500), (int)(sf * 250), tcp);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("True Critical Point", (int)(sf * 500), (int)(sf * 250), tcp);
                 form.Show();
             };
 
             btnUtilities_BinaryEnvelope.Click += (sender, e) =>
             {
                 var bpe = new Desktop.Editors.Utilities.BinaryEnvelopeView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 1024), (int)(sf * 600), bpe, false);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 1024), (int)(sf * 600), bpe, false);
                 form.Show();
             };
 
             btnUtilities_PhaseEnvelope.Click += (sender, e) =>
             {
                 var pe = new Desktop.Editors.Utilities.PhaseEnvelopeView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 1024), (int)(sf * 500), pe, false);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 1024), (int)(sf * 500), pe, false);
                 form.Show();
             };
 
@@ -464,14 +463,14 @@ namespace DWSIM.UI.Forms
             btnSensAnalysis.Click += (sender, e) =>
             {
                 var saeditor = new Desktop.Editors.SensAnalysisView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 750), (int)(sf * 520), saeditor);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 750), (int)(sf * 520), saeditor);
                 form.Show();
             };
 
             btnOptimization.Click += (sender, e) =>
             {
                 var foeditor = new Desktop.Editors.OptimizerView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 800), (int)(sf * 600), foeditor);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 800), (int)(sf * 600), foeditor);
                 form.Show();
             };
 
@@ -680,27 +679,38 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.LoadSpreadsheetData = new Action<XDocument>((xdoc) =>
             {
-                if (xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis") != null)
+                if (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet") != null)
                 {
-                    string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
-                    string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
-                    if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
-                    if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
-                    Spreadsheet.CopyFromDT();
-                    Spreadsheet.EvaluateAll();
+                    var rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData");
+                    if (rgfdataelement != null)
+                    {
+                        string rgfdata = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value;
+                    }
+                    else
+                    {
+                        string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
+                        string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
+                        if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
+                        if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
+                        Application.Instance.Invoke(() => {
+                            Spreadsheet.CopyFromDT();
+                            Spreadsheet.EvaluateAll();
+                        });
+                    }
                 }
             });
 
             FlowsheetObject.SaveSpreadsheetData = new Action<XDocument>((xdoc) =>
             {
-                try { Spreadsheet.CopyToDT(); }
-                catch (Exception) { }
                 xdoc.Element("DWSIM_Simulation_Data").Add(new XElement("Spreadsheet"));
-                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data1"));
-                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data2"));
-                Spreadsheet.CopyToDT();
-                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = Spreadsheet.CopyDT1ToString();
-                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = Spreadsheet.CopyDT2ToString();
+                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("RGFData"));
+                var tmpfile = System.IO.Path.GetTempFileName();
+                Application.Instance.Invoke(() => {
+                    Spreadsheet.Sheet.Save(tmpfile, CrossPlatform.UI.Controls.ReoGrid.IO.FileFormat.ReoGridFormat);
+                    var data = File.ReadAllText(tmpfile);
+                    File.Delete(tmpfile);
+                    xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = data;
+                });
             });
 
             FlowsheetObject.RetrieveSpreadsheetData = new Func<string, List<string[]>>((range) =>
@@ -778,7 +788,7 @@ namespace DWSIM.UI.Forms
                 {
                     var pitem = new FlowsheetObjectPanelItem();
                     var bmp = (System.Drawing.Bitmap)obj.GetIconBitmap();
-                    pitem.imgIcon.Image = new Bitmap(Common.ImageToByte(bmp));
+                    pitem.imgIcon.Image = new Bitmap(DWSIM.UI.Shared.Common.ImageToByte(bmp));
                     pitem.txtName.Text = obj.GetDisplayName();
                     pitem.MouseDown += (sender, e) =>
                     {

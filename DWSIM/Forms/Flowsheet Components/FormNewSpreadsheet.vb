@@ -167,6 +167,8 @@ Public Class FormNewSpreadsheet
 
         Flowsheet.MenuStrip1.Items.Insert(4, SpreadsheetControl.SpreadsheetTSMI)
 
+        SpreadsheetControl.SpreadsheetTSMI.Enabled = False
+
     End Sub
 
 
@@ -189,6 +191,10 @@ Public Class FormNewSpreadsheet
     End Sub
 
     Public Sub WriteAll()
+
+        For Each ws In Spreadsheet.Worksheets
+            ws.Recalculate()
+        Next
 
     End Sub
 
@@ -422,21 +428,16 @@ Public Class FormNewSpreadsheet
 
         For i = 0 To Spreadsheet.Worksheets(0).RowCount - 1
             For j = 0 To Spreadsheet.Worksheets(0).ColumnCount - 1
-
                 cell = Spreadsheet.Worksheets(0).Cells(i, j)
-
-                ccparams = Cell.Tag
-
+                ccparams = cell.Tag
                 If Not ccparams Is Nothing Then
-
                     Dim expression = ccparams.Expression
-
                     Select Case ccparams.CellType
                         Case SharedClasses.Spreadsheet.VarType.Expression, SharedClasses.Spreadsheet.VarType.Read
                             If expression <> "" Then
                                 If expression.Substring(0, 1) = "=" Then
                                     cell.Formula = expression.TrimStart("=").ToUpper()
-                                    If Not ccparams.CellType = SharedClasses.Spreadsheet.VarType.Write Then Cell.Style.BackColor = Color.LightYellow
+                                    If Not ccparams.CellType = SharedClasses.Spreadsheet.VarType.Write Then cell.Style.BackColor = Color.LightYellow
                                 ElseIf expression.Substring(0, 1) = ":" Then
                                     Dim str As String()
                                     Dim obj, prop As String
@@ -457,20 +458,20 @@ Public Class FormNewSpreadsheet
                                     '" " & formc.Collections.FlowsheetObjectCollection(obj).GetPropertyUnit(prop, formc.Options.SelectedUnitSystem)
                                     cell.Style.BackColor = Color.LightGreen
                                 Else
-                                    Cell.Data = expression
+                                    cell.Data = expression
                                     If ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Write And ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Unit Then
                                         ccparams.ToolTipText = expression
                                     End If
                                 End If
                             End If
                         Case SharedClasses.Spreadsheet.VarType.Unit
-                            Cell.Style.BackColor = Color.Beige
+                            cell.Style.BackColor = Color.Beige
                         Case SharedClasses.Spreadsheet.VarType.Write
                             If expression.Substring(0, 1) = "=" Then
                                 cell.Formula = expression.TrimStart("=").ToUpper()
-                                If Not ccparams.CellType = SharedClasses.Spreadsheet.VarType.Write Then Cell.Style.BackColor = Color.LightYellow
+                                If Not ccparams.CellType = SharedClasses.Spreadsheet.VarType.Write Then cell.Style.BackColor = Color.LightYellow
                             Else
-                                Cell.Data = expression
+                                cell.Data = expression
                                 If ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Write And ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Unit Then
                                     ccparams.ToolTipText = expression
                                 End If
@@ -499,5 +500,11 @@ Public Class FormNewSpreadsheet
 
     End Sub
 
+    Private Sub FormNewSpreadsheet_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
+        SpreadsheetControl.SpreadsheetTSMI.Enabled = True
+    End Sub
 
+    Private Sub FormNewSpreadsheet_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
+        SpreadsheetControl.SpreadsheetTSMI.Enabled = False
+    End Sub
 End Class

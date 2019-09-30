@@ -140,7 +140,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             txtView.Text = textlist;
-            txtView.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", Common.GetEditorFontSize()) : Fonts.Monospace(Common.GetEditorFontSize());
+            txtView.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", DWSIM.UI.Shared.Common.GetEditorFontSize()) : Fonts.Monospace(DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             lblLastUpdate.Text = "Updated on: " + DateTime.Now.ToString();
 
