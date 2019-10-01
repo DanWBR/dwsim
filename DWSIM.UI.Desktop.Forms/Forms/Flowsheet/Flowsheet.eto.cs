@@ -684,7 +684,23 @@ namespace DWSIM.UI.Forms
                     var rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData");
                     if (rgfdataelement != null)
                     {
-                        string rgfdata = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value;
+                        Application.Instance.Invoke(() =>
+                        {
+                            string rgfdata = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value;
+                            Dictionary<string, string> sdict = new Dictionary<string, string>();
+                            sdict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(rgfdata);
+                            Spreadsheet.Sheet.RemoveWorksheet(0);
+                            foreach (var item in sdict)
+                            {
+                                var tmpfile = System.IO.Path.GetTempFileName();
+                                var sheet = Spreadsheet.Sheet.NewWorksheet(item.Key);
+                                var xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value);
+                                xmldoc.Save(tmpfile);
+                                sheet.LoadRGF(tmpfile);
+                                File.Delete(tmpfile);
+                            }
+                            Spreadsheet.Sheet.CurrentWorksheet = Spreadsheet.Sheet.Worksheets[0];
+                        });
                     }
                     else
                     {
@@ -692,7 +708,8 @@ namespace DWSIM.UI.Forms
                         string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
                         if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
                         if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
-                        Application.Instance.Invoke(() => {
+                        Application.Instance.Invoke(() =>
+                        {
                             Spreadsheet.CopyFromDT();
                             Spreadsheet.EvaluateAll();
                         });
@@ -705,11 +722,19 @@ namespace DWSIM.UI.Forms
                 xdoc.Element("DWSIM_Simulation_Data").Add(new XElement("Spreadsheet"));
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("RGFData"));
                 var tmpfile = System.IO.Path.GetTempFileName();
-                Application.Instance.Invoke(() => {
-                    Spreadsheet.Sheet.Save(tmpfile, CrossPlatform.UI.Controls.ReoGrid.IO.FileFormat.ReoGridFormat);
-                    var data = File.ReadAllText(tmpfile);
-                    File.Delete(tmpfile);
-                    xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = data;
+                Application.Instance.Invoke(() =>
+                {
+                    Dictionary<string, string> sdict = new Dictionary<string, string>();
+                    foreach (var sheet in Spreadsheet.Sheet.Worksheets)
+                    {
+                        var tmpfile2 = System.IO.Path.GetTempFileName();
+                        sheet.SaveRGF(tmpfile2);
+                        var xmldoc = new XmlDocument();
+                        xmldoc.Load(tmpfile2);
+                        sdict.Add(sheet.Name, Newtonsoft.Json.JsonConvert.SerializeXmlNode(xmldoc));
+                        File.Delete(tmpfile2);
+                    }
+                    xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict);
                 });
             });
 

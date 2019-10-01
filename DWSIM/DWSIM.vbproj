@@ -181,6 +181,42 @@
     <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <DefineConstants>LINUX</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -212,6 +248,9 @@
     <Reference Include="Cureos.Numerics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Cureos.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="DWSIM.CrossPlatform.UI.Controls.ReoGrid">
+      <HintPath>References\ReoGrid.Eto\DWSIM.CrossPlatform.UI.Controls.ReoGrid.dll</HintPath>
     </Reference>
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -3303,18 +3342,9 @@
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(TargetDir)" /E /Y /F /D
 
-) else if "$(PlatformName)"=="x64" (
+) else if "$(ConfigurationName)"=="Release Linux" (
 
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-
-del /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
-del /Q "$(SolutionDir)DistPackages\Windows\*.tmp"
-del /Q "$(SolutionDir)DistPackages\Windows\*.dylib"
-
-del /Q "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*"
-del /Q "$(SolutionDir)DistPackages\macOS\*.tmp"
 
 del /Q "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
 del /Q "$(SolutionDir)DistPackages\Linux\*.tmp"
@@ -3322,6 +3352,18 @@ del /Q "$(SolutionDir)DistPackages\Linux\*.dylib"
 del /Q "$(SolutionDir)DistPackages\Linux\libCEF.dll"
 del /Q "$(SolutionDir)DistPackages\Linux\*.pak"
 del /Q "$(SolutionDir)DistPackages\Linux\*.dat"
+
+) else if "$(PlatformName)"=="x64" (
+
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+
+del /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
+del /Q "$(SolutionDir)DistPackages\Windows\*.tmp"
+del /Q "$(SolutionDir)DistPackages\Windows\*.dylib"
+
+del /Q "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*"
+del /Q "$(SolutionDir)DistPackages\macOS\*.tmp"
 
 ) else if "$(PlatformName)"=="x86" (
 

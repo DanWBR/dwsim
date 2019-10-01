@@ -55,7 +55,6 @@ namespace DWSIM.UI.Desktop.GTK
                 tbox.Alignment = 1.0f;
             });
 
-
         }
 
     }

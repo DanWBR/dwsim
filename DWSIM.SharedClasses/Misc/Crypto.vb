@@ -15,12 +15,17 @@ Namespace EncryptString
         ' This constant determines the number of iterations for the password bytes generation function.
         Private Const DerivationIterations As Integer = 1000
 
-        Public Shared Function Encrypt(plainText As String, passPhrase As String) As String
+        Public Shared Function Encrypt(plainText As String, passPhrase As String, Optional ByVal encoding As Encoding = Nothing) As String
             ' Salt and IV is randomly generated each time, but is preprended to encrypted cipher text
             ' so that the same Salt and IV values can be used when decrypting.  
             Dim saltStringBytes = Generate256BitsOfRandomEntropy()
             Dim ivStringBytes = Generate256BitsOfRandomEntropy()
-            Dim plainTextBytes = Encoding.UTF8.GetBytes(plainText)
+            Dim plainTextBytes As Byte()
+            If encoding Is Nothing Then
+                plainTextBytes = Encoding.UTF8.GetBytes(plainText)
+            Else
+                plainTextBytes = encoding.GetBytes(plainText)
+            End If
             Using password = New Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations)
                 Dim keyBytes = password.GetBytes(Keysize / 8)
                 Using symmetricKey = New RijndaelManaged()
@@ -46,7 +51,7 @@ Namespace EncryptString
             End Using
         End Function
 
-        Public Shared Function Decrypt(cipherText As String, passPhrase As String) As String
+        Public Shared Function Decrypt(cipherText As String, passPhrase As String, Optional ByVal encoding As Encoding = Nothing) As String
             ' Get the complete stream of bytes that represent:
             ' [32 bytes of Salt] + [32 bytes of IV] + [n bytes of CipherText]
             Dim cipherTextBytesWithSaltAndIv = Convert.FromBase64String(cipherText)
@@ -70,7 +75,11 @@ Namespace EncryptString
                                 Dim decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length)
                                 memoryStream.Close()
                                 cryptoStream.Close()
-                                Return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount)
+                                If encoding Is Nothing Then
+                                    Return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount)
+                                Else
+                                    Return encoding.GetString(plainTextBytes, 0, decryptedByteCount)
+                                End If
                             End Using
                         End Using
                     End Using

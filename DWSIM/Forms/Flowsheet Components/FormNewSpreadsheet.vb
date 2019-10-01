@@ -1,6 +1,13 @@
-﻿Imports unvell.ReoGrid
-Imports System.Linq
+﻿Imports System.Linq
+#If LINUX Then
+Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid
+Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid.Formula
+Imports Eto.Forms
+Imports Cell = DWSIM.CrossPlatform.UI.Controls.ReoGrid.Cell
+#Else
+Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Formula
+#End If
 
 Public Class FormNewSpreadsheet
 
@@ -10,23 +17,43 @@ Public Class FormNewSpreadsheet
 
     Public dt2 As New List(Of List(Of Object))
 
+#If LINUX Then
+    Public Property SpreadsheetControl As ReoGridFullControl
+#Else
     Public Property SpreadsheetControl As unvell.ReoGrid.Editor.ReoGridEditor
+#End If
 
     Public Property Flowsheet As FormFlowsheet
 
     Public Property Loaded As Boolean = False
 
-
+#If LINUX Then
+    Public ReadOnly Property Spreadsheet As ReoGridControl
+        Get
+            Return SpreadsheetControl.GridControl
+        End Get
+    End Property
+#Else
     Public ReadOnly Property Spreadsheet As unvell.ReoGrid.ReoGridControl
         Get
             Return SpreadsheetControl.grid
         End Get
     End Property
+#End If
 
+    Public Sub Initialize()
 
-    Private Sub FormNewSpreadsheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+#If LINUX Then
 
-        SetCustomFunctions()
+        SpreadsheetControl = New ReoGridFullControl()
+
+        Dim nativesheet = WinFormsHelpers.ToNative(SpreadsheetControl, True)
+
+        nativesheet.Dock = DockStyle.Fill
+
+        Controls.Add(nativesheet)
+
+#Else
 
         SpreadsheetControl = New unvell.ReoGrid.Editor.ReoGridEditor()
 
@@ -49,117 +76,138 @@ Public Class FormNewSpreadsheet
 
         Controls.Add(SpreadsheetControl)
 
-        MoveSpreadsheetMenu()
+#End If
 
-        If Not Loaded Then
-            CopyFromDT()
-        End If
+        Spreadsheet.CurrentWorksheet.Name = "MAIN"
 
-        SpreadsheetControl.CurrentWorksheet.Name = "MAIN"
+#If Not LINUX Then
+
+        SpreadsheetControl.NewDocumentOnLoad = False
+
+#End If
 
         Loaded = True
 
     End Sub
 
+    Private Sub FormNewSpreadsheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If Not Loaded Then
+            Initialize()
+            CopyFromDT()
+        End If
+
+#If Not LINUX Then
+
+        MoveSpreadsheetMenu()
+
+#End If
+
+        SetCustomFunctions()
+
+    End Sub
+
     Public Sub SetCustomFunctions()
 
-        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("GETPROPVAL") = Function(cell, args) As Object
-                                                                                    If args.Length = 2 Then
-                                                                                        Try
-                                                                                            Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyValue(args(1).ToString)
-                                                                                        Catch ex As Exception
-                                                                                            Return "ERROR: " & ex.Message
-                                                                                        End Try
-                                                                                    ElseIf args.Length = 3 Then
-                                                                                        Try
-                                                                                            Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
-                                                                                            Dim val = obj.GetPropertyValue(args(1).ToString)
-                                                                                            Return ConvertUnits(Double.Parse(val), obj.GetPropertyUnit(args(1).ToString), args(2).ToString)
-                                                                                        Catch ex As Exception
-                                                                                            Return "ERROR: " & ex.Message
-                                                                                        End Try
-                                                                                    Else
-                                                                                        Return "INVALID ARGS"
-                                                                                    End If
-                                                                                End Function
+        Formula.FormulaExtension.CustomFunctions("GETPROPVAL") = Function(cell, args) As Object
+                                                                     If args.Length = 2 Then
+                                                                         Try
+                                                                             Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyValue(args(1).ToString)
+                                                                         Catch ex As Exception
+                                                                             Return "ERROR: " & ex.Message
+                                                                         End Try
+                                                                     ElseIf args.Length = 3 Then
+                                                                         Try
+                                                                             Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
+                                                                             Dim val = obj.GetPropertyValue(args(1).ToString)
+                                                                             Return ConvertUnits(Double.Parse(val), obj.GetPropertyUnit(args(1).ToString), args(2).ToString)
+                                                                         Catch ex As Exception
+                                                                             Return "ERROR: " & ex.Message
+                                                                         End Try
+                                                                     Else
+                                                                         Return "INVALID ARGS"
+                                                                     End If
+                                                                 End Function
 
-        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("SETPROPVAL") = Function(cell, args) As Object
-                                                                                    If args.Length = 3 Then
-                                                                                        Try
-                                                                                            Dim ws = cell.Worksheet
-                                                                                            Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
-                                                                                            wcell.Formula = args(2).ToString.Trim(Chr(34))
-                                                                                            Evaluator.Evaluate(wcell)
-                                                                                            Dim val = wcell.Data
-                                                                                            Flowsheet.SimulationObjects(args(0).ToString).SetPropertyValue(args(1).ToString, val)
-                                                                                            wcell.Formula = ""
-                                                                                            wcell.Data = ""
-                                                                                            Return String.Format("EXPORT OK [{0}, {1} = {2}]", Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag, args(1).ToString, val)
-                                                                                        Catch ex As Exception
-                                                                                            Return "ERROR: " & ex.Message
-                                                                                        End Try
-                                                                                    ElseIf args.Length = 4 Then
-                                                                                        Try
-                                                                                            Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
-                                                                                            Dim prop = args(1).ToString
-                                                                                            Dim ws = cell.Worksheet
-                                                                                            Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
-                                                                                            wcell.Formula = args(2).ToString.Trim(Chr(34))
-                                                                                            Evaluator.Evaluate(wcell)
-                                                                                            Dim val = wcell.Data
-                                                                                            wcell.Formula = ""
-                                                                                            wcell.Data = ""
-                                                                                            Dim units = args(3).ToString
-                                                                                            Dim newval = ConvertUnits(Double.Parse(val), units, obj.GetPropertyUnit(prop))
-                                                                                            obj.SetPropertyValue(prop, newval)
-                                                                                            Return String.Format("EXPORT OK [{0}, {1} = {2} {3}]", obj.GraphicObject.Tag, prop, val, units)
-                                                                                        Catch ex As Exception
-                                                                                            Return "ERROR: " & ex.Message
-                                                                                        End Try
-                                                                                    Else
-                                                                                        Return "INVALID ARGS"
-                                                                                    End If
-                                                                                End Function
+        Formula.FormulaExtension.CustomFunctions("SETPROPVAL") = Function(cell, args) As Object
+                                                                     If args.Length = 3 Then
+                                                                         Try
+                                                                             Dim ws = cell.Worksheet
+                                                                             Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
+                                                                             wcell.Formula = args(2).ToString.Trim(Chr(34))
+                                                                             Evaluator.Evaluate(wcell)
+                                                                             Dim val = wcell.Data
+                                                                             Flowsheet.SimulationObjects(args(0).ToString).SetPropertyValue(args(1).ToString, val)
+                                                                             wcell.Formula = ""
+                                                                             wcell.Data = ""
+                                                                             Return String.Format("EXPORT OK [{0}, {1} = {2}]", Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag, args(1).ToString, val)
+                                                                         Catch ex As Exception
+                                                                             Return "ERROR: " & ex.Message
+                                                                         End Try
+                                                                     ElseIf args.Length = 4 Then
+                                                                         Try
+                                                                             Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
+                                                                             Dim prop = args(1).ToString
+                                                                             Dim ws = cell.Worksheet
+                                                                             Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
+                                                                             wcell.Formula = args(2).ToString.Trim(Chr(34))
+                                                                             Evaluator.Evaluate(wcell)
+                                                                             Dim val = wcell.Data
+                                                                             wcell.Formula = ""
+                                                                             wcell.Data = ""
+                                                                             Dim units = args(3).ToString
+                                                                             Dim newval = ConvertUnits(Double.Parse(val), units, obj.GetPropertyUnit(prop))
+                                                                             obj.SetPropertyValue(prop, newval)
+                                                                             Return String.Format("EXPORT OK [{0}, {1} = {2} {3}]", obj.GraphicObject.Tag, prop, val, units)
+                                                                         Catch ex As Exception
+                                                                             Return "ERROR: " & ex.Message
+                                                                         End Try
+                                                                     Else
+                                                                         Return "INVALID ARGS"
+                                                                     End If
+                                                                 End Function
 
-        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("GETPROPUNITS") = Function(cell, args) As Object
-                                                                                      If args.Length = 2 Then
-                                                                                          Try
-                                                                                              Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyUnit(args(1).ToString)
-                                                                                          Catch ex As Exception
-                                                                                              Return "ERROR: " & ex.Message
-                                                                                          End Try
-                                                                                      Else
-                                                                                          Return "INVALID ARGS"
-                                                                                      End If
-                                                                                  End Function
+        Formula.FormulaExtension.CustomFunctions("GETPROPUNITS") = Function(cell, args) As Object
+                                                                       If args.Length = 2 Then
+                                                                           Try
+                                                                               Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyUnit(args(1).ToString)
+                                                                           Catch ex As Exception
+                                                                               Return "ERROR: " & ex.Message
+                                                                           End Try
+                                                                       Else
+                                                                           Return "INVALID ARGS"
+                                                                       End If
+                                                                   End Function
 
-        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("GETOBJID") = Function(cell, args) As Object
-                                                                                  If args.Length = 1 Then
-                                                                                      Try
-                                                                                          Return Flowsheet.GetFlowsheetSimulationObject(args(0).ToString).Name
-                                                                                      Catch ex As Exception
-                                                                                          Return "ERROR: " & ex.Message
-                                                                                      End Try
-                                                                                  Else
-                                                                                      Return "INVALID ARGS"
-                                                                                  End If
-                                                                              End Function
+        Formula.FormulaExtension.CustomFunctions("GETOBJID") = Function(cell, args) As Object
+                                                                   If args.Length = 1 Then
+                                                                       Try
+                                                                           Return Flowsheet.GetFlowsheetSimulationObject(args(0).ToString).Name
+                                                                       Catch ex As Exception
+                                                                           Return "ERROR: " & ex.Message
+                                                                       End Try
+                                                                   Else
+                                                                       Return "INVALID ARGS"
+                                                                   End If
+                                                               End Function
 
-        unvell.ReoGrid.Formula.FormulaExtension.CustomFunctions("GETOBJNAME") = Function(cell, args) As Object
-                                                                                    If args.Length = 1 Then
-                                                                                        Try
-                                                                                            Return Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag
-                                                                                        Catch ex As Exception
-                                                                                            Return "ERROR: " & ex.Message
-                                                                                        End Try
-                                                                                    Else
-                                                                                        Return "INVALID ARGS"
-                                                                                    End If
-                                                                                End Function
+        Formula.FormulaExtension.CustomFunctions("GETOBJNAME") = Function(cell, args) As Object
+                                                                     If args.Length = 1 Then
+                                                                         Try
+                                                                             Return Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag
+                                                                         Catch ex As Exception
+                                                                             Return "ERROR: " & ex.Message
+                                                                         End Try
+                                                                     Else
+                                                                         Return "INVALID ARGS"
+                                                                     End If
+                                                                 End Function
 
     End Sub
 
     Public Sub MoveSpreadsheetMenu()
+
+#If Not LINUX Then
 
         Dim menustrip1 As MenuStrip = SpreadsheetControl.SpreadsheetTSMI.GetCurrentParent()
 
@@ -168,6 +216,8 @@ Public Class FormNewSpreadsheet
         Flowsheet.MenuStrip1.Items.Insert(4, SpreadsheetControl.SpreadsheetTSMI)
 
         SpreadsheetControl.SpreadsheetTSMI.Enabled = False
+
+#End If
 
     End Sub
 
@@ -440,7 +490,9 @@ Public Class FormNewSpreadsheet
                             If expression <> "" Then
                                 If expression.Substring(0, 1) = "=" Then
                                     cell.Formula = expression.TrimStart("=").ToUpper()
+#If Not LINUX Then
                                     If Not ccparams.CellType = SharedClasses.Spreadsheet.VarType.Write Then cell.Style.BackColor = Color.LightYellow
+#End If
                                 ElseIf expression.Substring(0, 1) = ":" Then
                                     Dim str As String()
                                     Dim obj, prop As String
@@ -459,7 +511,9 @@ Public Class FormNewSpreadsheet
                                     'DWSIM.App.GetLocalString("Propriedade") & ": " & DWSIM.App.GetPropertyName(prop) & vbCrLf &
                                     'DWSIM.App.GetLocalString("CurrentValue") & ": " & cell.Value &
                                     '" " & formc.Collections.FlowsheetObjectCollection(obj).GetPropertyUnit(prop, formc.Options.SelectedUnitSystem)
+#If Not LINUX Then
                                     cell.Style.BackColor = Color.LightGreen
+#End If
                                 Else
                                     cell.Data = expression
                                     If ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Write And ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Unit Then
@@ -468,11 +522,15 @@ Public Class FormNewSpreadsheet
                                 End If
                             End If
                         Case SharedClasses.Spreadsheet.VarType.Unit
+#If Not LINUX Then
                             cell.Style.BackColor = Color.Beige
+#End If
                         Case SharedClasses.Spreadsheet.VarType.Write
                             If expression.Substring(0, 1) = "=" Then
                                 cell.Formula = expression.TrimStart("=").ToUpper()
+#If Not LINUX Then
                                 If Not ccparams.CellType = SharedClasses.Spreadsheet.VarType.Write Then cell.Style.BackColor = Color.LightYellow
+#End If
                             Else
                                 cell.Data = expression
                                 If ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Write And ccparams.CellType <> SharedClasses.Spreadsheet.VarType.Unit Then
@@ -481,7 +539,9 @@ Public Class FormNewSpreadsheet
                             End If
                             elist.Add(New Tuple(Of String, String, String, String)(String.Format("SETPROPVAL({4}{1}{4}{0}{4}{2}{4}{0}{4}{3}{4})", separator, ccparams.ObjectID, ccparams.PropID, "MAIN!" & cell.Address, Chr(34)),
                                                                            ccparams.ObjectID, ccparams.PropID, ccparams.PropUnit))
+#If Not LINUX Then
                             cell.Style.BackColor = Color.LightBlue
+#End If
                     End Select
 
                 End If
@@ -508,11 +568,22 @@ Public Class FormNewSpreadsheet
 
     End Sub
 
-    Private Sub FormNewSpreadsheet_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
-        If SpreadsheetControl IsNot Nothing Then SpreadsheetControl.SpreadsheetTSMI.Enabled = True
+    Private Sub FormNewSpreadsheet_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        Dim sheet = Spreadsheet.NewWorksheet("DUMMY1234567890")
+
+        Spreadsheet.CurrentWorksheet = Spreadsheet.Worksheets("DUMMY1234567890")
+
+        Spreadsheet.CurrentWorksheet = Spreadsheet.Worksheets("MAIN")
+
+        Spreadsheet.RemoveWorksheet(sheet)
+
     End Sub
 
-    Private Sub FormNewSpreadsheet_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
-        If SpreadsheetControl IsNot Nothing Then SpreadsheetControl.SpreadsheetTSMI.Enabled = False
+#If Not LINUX Then
+    Private Sub FormNewSpreadsheet_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If SpreadsheetControl IsNot Nothing Then SpreadsheetControl.SpreadsheetTSMI.Enabled = Me.Visible
     End Sub
+#End If
+
 End Class

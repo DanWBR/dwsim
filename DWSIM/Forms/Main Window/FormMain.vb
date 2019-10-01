@@ -1972,19 +1972,35 @@ Public Class FormMain
 
         Try
             If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New FormNewSpreadsheet() With {.Flowsheet = form}
-            Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
-            Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
-            If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
-            If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
-            'If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet.Load(Me, New EventArgs)
+            form.FormSpreadsheet.Initialize()
+            If (Not (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet")) Is Nothing) Then
+                Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
+                If Not (rgfdataelement) Is Nothing Then
+                    Dim rgfdata As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value
+                    Dim sdict As New Dictionary(Of String, String)
+                    sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
+                    form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
+                    For Each item In sdict
+                        Dim tmpfile = System.IO.Path.GetTempFileName
+                        Dim sheet = form.FormSpreadsheet.Spreadsheet.NewWorksheet(item.Key)
+                        Dim xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value)
+                        xmldoc.Save(tmpfile)
+                        sheet.LoadRGF(tmpfile)
+                        File.Delete(tmpfile)
+                    Next
+                    form.FormSpreadsheet.Spreadsheet.CurrentWorksheet = form.FormSpreadsheet.Spreadsheet.Worksheets(0)
+                Else
+                    Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
+                    Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
+                    If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
+                    If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
+                    form.FormSpreadsheet.CopyFromDT()
+                    form.FormSpreadsheet.EvaluateAll()
+                End If
+            End If
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
         End Try
-
-        If xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet") IsNot Nothing Then
-
-
-        End If
 
         For Each obj In form.FormSurface.FlowsheetSurface.DrawingObjects
             If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
@@ -2081,13 +2097,6 @@ Public Class FormMain
             form.FormSurface.Invalidate()
 
         End If
-
-        Try
-            form.FormSpreadsheet.EvaluateAll()
-            form.FormSpreadsheet.EvaluateAll()
-        Catch ex As Exception
-            excs.Add(New Exception("Error Updating Spreadsheet Variables", ex))
-        End Try
 
         If excs.Count > 0 Then
             form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
@@ -2451,11 +2460,31 @@ Public Class FormMain
 
         Try
             If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New FormNewSpreadsheet() With {.Flowsheet = form}
-            Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
-            Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
-            If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
-            If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
-            'If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet.UISpreadsheetEditorForm_Load(Me, New EventArgs)
+            If (Not (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet")) Is Nothing) Then
+                Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
+                If (Not (rgfdataelement) Is Nothing) Then
+                    Dim rgfdata As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value
+                    Dim sdict As New Dictionary(Of String, String)
+                    sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
+                    form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
+                    For Each item In sdict
+                        Dim tmpfile = System.IO.Path.GetTempFileName
+                        Dim sheet = form.FormSpreadsheet.Spreadsheet.NewWorksheet(item.Key)
+                        Dim xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value)
+                        xmldoc.Save(tmpfile)
+                        sheet.LoadRGF(tmpfile)
+                        File.Delete(tmpfile)
+                    Next
+                    form.FormSpreadsheet.Spreadsheet.CurrentWorksheet = form.FormSpreadsheet.Spreadsheet.Worksheets(0)
+                Else
+                    Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
+                    Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
+                    If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
+                    If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
+                    form.FormSpreadsheet.CopyFromDT()
+                    form.FormSpreadsheet.EvaluateAll()
+                End If
+            End If
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
         End Try
@@ -2874,17 +2903,18 @@ Public Class FormMain
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
         Next
 
-        Try
-            form.FormSpreadsheet.CopyToDT()
-        Catch ex As Exception
-        End Try
-
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Spreadsheet"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("Data1"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("Data2"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = form.FormSpreadsheet.CopyDT1ToString()
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = form.FormSpreadsheet.CopyDT2ToString()
-
+        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("RGFData"))
+        Dim sdict As New Dictionary(Of String, String)
+        For Each sheet In form.FormSpreadsheet.Spreadsheet.Worksheets
+            Dim tmpfile = System.IO.Path.GetTempFileName
+            sheet.SaveRGF(tmpfile)
+            Dim xmldoc = New XmlDocument()
+            xmldoc.Load(tmpfile)
+            sdict.Add(sheet.Name, Newtonsoft.Json.JsonConvert.SerializeXmlNode(xmldoc))
+            File.Delete(tmpfile)
+        Next
+        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict)
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PanelLayout"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout")
 

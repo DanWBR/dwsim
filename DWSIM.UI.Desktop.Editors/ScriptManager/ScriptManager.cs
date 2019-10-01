@@ -32,69 +32,158 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
-            var ti1 = new Button() { Height = 24, Width = 24,  ToolTip = "New Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-new.png")).WithSize(16, 16) };
-            var ti2 = new Button() { Height = 24, Width = 24,  ToolTip = "Update Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-approve_and_update.png")).WithSize(16, 16) };
-            var ti3 = new Button() { Height = 24, Width = 24,  ToolTip = "Print", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-print.png")).WithSize(16, 16) };
-            var ti3a = new Button() { Height = 24, Width = 24,  ToolTip = "Remove Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-filled_trash.png")).WithSize(16, 16) };
+            var leftcontainer = new TableLayout();
+            var rightcontainer = new TableLayout();
 
-            var ti4 = new Button() { Height = 24, Width = 24,  ToolTip = "Cut", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cut.png")).WithSize(16, 16) };
-            var ti5 = new Button() { Height = 24, Width = 24,  ToolTip = "Copy", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy.png")).WithSize(16, 16) };
-            var ti6 = new Button() { Height = 24, Width = 24,  ToolTip = "Paste", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paste.png")).WithSize(16, 16) };
+            var ti1 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "New Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-new.png")).WithSize(16, 16) };
+            var ti2 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Update Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-approve_and_update.png")).WithSize(16, 16) };
+            var ti3 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Print", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-print.png")).WithSize(16, 16) };
+            var ti3a = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-filled_trash.png")).WithSize(16, 16) };
 
-            var ti7 = new Button() { Height = 24, Width = 24,  ToolTip = "Undo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-undo.png")).WithSize(16, 16) };
-            var ti8 = new Button() { Height = 24, Width = 24,  ToolTip = "Redo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-redo.png")).WithSize(16, 16) };
+            var ti4 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Cut", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cut.png")).WithSize(16, 16) };
+            var ti5 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Copy", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy.png")).WithSize(16, 16) };
+            var ti6 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Paste", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paste.png")).WithSize(16, 16) };
 
-            var ti9 = new Button() { Height = 24, Width = 24, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")).WithSize(16, 16) };
+            var ti7 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Undo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-undo.png")).WithSize(16, 16) };
+            var ti8 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Redo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-redo.png")).WithSize(16, 16) };
 
-            var ti10 = new Button() { Height = 24, Width = 24,  ToolTip = "Indent Right", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "indent-right.png")).WithSize(16, 16) };
-            var ti11 = new Button() { Height = 24, Width = 24,  ToolTip = "Indent Left", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "left-indentation-option.png")).WithSize(16, 16) };
+            var ti9 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png")).WithSize(16, 16) };
 
-            var ti12 = new Button() { Height = 24, Width = 24,  ToolTip = "Decrease Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-decrease_font.png")).WithSize(16, 16) };
-            var ti13 = new Button() { Height = 24, Width = 24,  ToolTip = "Increase Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-increase_font.png")).WithSize(16, 16) };
+            var ti10 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Indent Right", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "indent-right.png")).WithSize(16, 16) };
+            var ti11 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Indent Left", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "left-indentation-option.png")).WithSize(16, 16) };
 
-            var ti14 = new Button() { Height = 24, Width = 24, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "code.png")).WithSize(16, 16) };
+            var ti12 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Decrease Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-decrease_font.png")).WithSize(16, 16) };
+            var ti13 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Increase Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-increase_font.png")).WithSize(16, 16) };
 
-            var ti15 = new Button() { Height = 24, Width = 24,  ToolTip = "Run Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")).WithSize(16, 16) };
-            var ti16 = new Button() { Height = 24, Width = 24,  ToolTip = "Run Script (Async)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-circled_play.png")).WithSize(16, 16) };
+            var ti14 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "code.png")).WithSize(16, 16) };
 
-            var ti17 = new Button() { Height = 24, Width = 24, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")).WithSize(16, 16) };
+            var ti15 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Run Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")).WithSize(16, 16) };
+            var ti16 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Run Script (Async)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-circled_play.png")).WithSize(16, 16) };
+
+            var ti17 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png")).WithSize(16, 16) };
 
             var l1 = new Label() { VerticalAlignment = VerticalAlignment.Bottom, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
 
             var t1 = new TextBox { Width = 250 };
 
-            var menu1 = new StackLayout
-            {
-                Items = { ti1, ti2, ti3, ti3a },
-                Orientation = Orientation.Horizontal,
-                Spacing = 4,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                VerticalContentAlignment = VerticalAlignment.Bottom,
-                Padding = 5,
-                Height = 34
-            };
+            lbScripts = new ListBox();
 
-            var menu2 = new StackLayout
+            ScriptEditor = new ScriptItem(Flowsheet);
+
+            leftcontainer.Rows.Add(new Label { Text = "Script List", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
+
+            if (!Application.Instance.Platform.IsGtk)
             {
-                Items = { ti15, ti16, new Label {Text =" " },
+                var menu1 = new StackLayout
+                {
+                    Items = { ti1, ti2, ti3, ti3a },
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Bottom,
+                    Padding = 5,
+                    Height = 34
+                };
+                leftcontainer.Rows.Add(new TableRow(menu1));
+            }
+            else
+            {
+                var menu1 = new StackLayout
+                {
+                    Items = { ti1, ti2 },
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Bottom,
+                    Padding = 5,
+                    Height = 34
+                };
+                var menu1a = new StackLayout
+                {
+                    Items = { ti3, ti3a },
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Bottom,
+                    Padding = 5,
+                    Height = 34
+                };
+                leftcontainer.Rows.Add(new TableRow(menu1));
+                leftcontainer.Rows.Add(new TableRow(menu1a));
+            }
+
+            leftcontainer.Rows.Add(new TableRow(lbScripts));
+            leftcontainer.Padding = new Padding(5, 5, 5, 5);
+            leftcontainer.Spacing = new Size(0, 0);
+            leftcontainer.Width = 250;
+
+            rightcontainer.Rows.Add(new Label { Text = "Selected Script", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
+
+            if (!Application.Instance.Platform.IsGtk)
+            {
+                var menu2 = new StackLayout
+                {
+                    Items = { ti15, ti16, new Label {Text =" " },
                     ti4, ti5, ti6, new Label {Text =" " },
                     ti7, ti8, new Label {Text =" " },
                     ti9, ti10, ti11, new Label {Text =" " },
                     ti12, ti13, new Label {Text =" " },
                     ti14, new Label {Text =" " },
                     ti17, l1, t1 },
-                Orientation = Orientation.Horizontal,
-                Spacing = 4,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                VerticalContentAlignment = VerticalAlignment.Bottom,
-                Padding = 5,
-                Height = 34
-            };
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Bottom,
+                    Padding = 5,
+                    Height = 34
+                };
+                rightcontainer.Rows.Add(new TableRow(menu2));
+            }
+            else
+            {
+                var menu2 = new StackLayout
+                {
+                    Items = { ti15, ti16, new Label {Text =" " },
+                    ti4, ti5, ti6, new Label {Text =" " },
+                    ti7, ti8, new Label {Text =" " }},
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Bottom,
+                    Padding = 5,
+                    Height = 34
+                };
+                var menu2a = new StackLayout
+                {
+                    Items = {ti9, ti10, ti11, new Label {Text =" " },
+                    ti12, ti13, new Label {Text =" " },
+                    ti14, new Label {Text =" " },
+                    ti17, l1, t1 },
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Bottom,
+                    Padding = 5,
+                    Height = 34
+                };
+                var menu2b = new StackLayout
+                {
+                    Items = {ti14, new Label {Text =" " },
+                    ti17, l1, t1 },
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Bottom,
+                    Padding = 5,
+                    Height = 34
+                };
+                rightcontainer.Rows.Add(new TableRow(menu2));
+                rightcontainer.Rows.Add(new TableRow(menu2a));
+                rightcontainer.Rows.Add(new TableRow(menu2b));
+            }
 
-            var leftcontainer = new TableLayout();
-            var rightcontainer = new TableLayout();
-
-            ScriptEditor = new ScriptItem(Flowsheet);
+            rightcontainer.Rows.Add(new TableRow(ScriptEditor));
+            rightcontainer.Padding = new Padding(5, 5, 5, 5);
 
             ti1.Click += (sender, e) =>
             {
@@ -103,107 +192,108 @@ namespace DWSIM.UI.Desktop.Editors
                 lbScripts.Items.Add(new ListItem { Key = script.ID, Text = script.Title });
             };
 
-            lbScripts = new ListBox();
-
             lbScripts.SelectedIndexChanged += (sender, e) =>
             {
-                try
+                Application.Instance.Invoke(() =>
                 {
-                    if (lbScripts.SelectedIndex < 0) return;
-
-                    if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
-
-                    selscript = Flowsheet.Scripts[lbScripts.SelectedKey];
-
-                    adding = true;
-
-                    ScriptEditor.cbLinkedObject.Items.Clear();
-
-                    ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Simulation", Key = "Simulation" });
-                    ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Solver", Key = "Solver" });
-
-                    foreach (var obj in Flowsheet.SimulationObjects.Values)
+                    try
                     {
-                        ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = obj.GraphicObject.Tag, Key = obj.Name });
-                    }
+                        if (lbScripts.SelectedIndex < 0) return;
 
-                    adding = false;
+                        if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
 
-                    t1.Text = selscript.Title;
+                        selscript = Flowsheet.Scripts[lbScripts.SelectedKey];
 
-                    ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
+                        adding = true;
 
-                    ScriptEditor.chkLink.Checked = selscript.Linked;
+                        ScriptEditor.cbLinkedObject.Items.Clear();
 
-                    if (!string.IsNullOrEmpty(selscript.LinkedObjectName))
-                    {
-                        ScriptEditor.cbLinkedObject.SelectedKey = Flowsheet.SimulationObjects[selscript.LinkedObjectName].Name;
-                    }
-                    else
-                    {
-                        switch (selscript.LinkedObjectType)
+                        ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Simulation", Key = "Simulation" });
+                        ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Solver", Key = "Solver" });
+
+                        foreach (var obj in Flowsheet.SimulationObjects.Values)
                         {
-                            case Scripts.ObjectType.Simulation:
-                                ScriptEditor.cbLinkedObject.SelectedIndex = 0;
+                            ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = obj.GraphicObject.Tag, Key = obj.Name });
+                        }
+
+                        adding = false;
+
+                        t1.Text = selscript.Title;
+
+                        ScriptEditor.txtScript.ScriptText = selscript.ScriptText;
+
+                        ScriptEditor.chkLink.Checked = selscript.Linked;
+
+                        if (!string.IsNullOrEmpty(selscript.LinkedObjectName))
+                        {
+                            ScriptEditor.cbLinkedObject.SelectedKey = Flowsheet.SimulationObjects[selscript.LinkedObjectName].Name;
+                        }
+                        else
+                        {
+                            switch (selscript.LinkedObjectType)
+                            {
+                                case Scripts.ObjectType.Simulation:
+                                    ScriptEditor.cbLinkedObject.SelectedIndex = 0;
+                                    break;
+                                case Scripts.ObjectType.Solver:
+                                    ScriptEditor.cbLinkedObject.SelectedIndex = 1;
+                                    break;
+                            }
+                        }
+
+                        switch (selscript.LinkedEventType)
+                        {
+                            case Scripts.EventType.ObjectCalculationStarted:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
                                 break;
-                            case Scripts.ObjectType.Solver:
-                                ScriptEditor.cbLinkedObject.SelectedIndex = 1;
+                            case Scripts.EventType.ObjectCalculationFinished:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
+                                break;
+                            case Scripts.EventType.ObjectCalculationError:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
+                                break;
+                            case Scripts.EventType.SimulationOpened:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
+                                break;
+                            case Scripts.EventType.SimulationSaved:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
+                                break;
+                            case Scripts.EventType.SimulationClosed:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
+                                break;
+                            case Scripts.EventType.SolverStarted:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
+                                break;
+                            case Scripts.EventType.SolverFinished:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
+                                break;
+                            case Scripts.EventType.SolverRecycleLoop:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
+                                break;
+                            case Scripts.EventType.SimulationTimer1:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 3;
+                                break;
+                            case Scripts.EventType.SimulationTimer5:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 4;
+                                break;
+                            case Scripts.EventType.SimulationTimer15:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 5;
+                                break;
+                            case Scripts.EventType.SimulationTimer30:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 6;
+                                break;
+                            case Scripts.EventType.SimulationTimer60:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 7;
                                 break;
                         }
-                    }
 
-                    switch (selscript.LinkedEventType)
+                        ScriptEditor.cbPythonInt.SelectedIndex = (int)selscript.PythonInterpreter;
+                    }
+                    catch (Exception ex)
                     {
-                        case Scripts.EventType.ObjectCalculationStarted:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
-                            break;
-                        case Scripts.EventType.ObjectCalculationFinished:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
-                            break;
-                        case Scripts.EventType.ObjectCalculationError:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
-                            break;
-                        case Scripts.EventType.SimulationOpened:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
-                            break;
-                        case Scripts.EventType.SimulationSaved:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
-                            break;
-                        case Scripts.EventType.SimulationClosed:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
-                            break;
-                        case Scripts.EventType.SolverStarted:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
-                            break;
-                        case Scripts.EventType.SolverFinished:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
-                            break;
-                        case Scripts.EventType.SolverRecycleLoop:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
-                            break;
-                        case Scripts.EventType.SimulationTimer1:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 3;
-                            break;
-                        case Scripts.EventType.SimulationTimer5:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 4;
-                            break;
-                        case Scripts.EventType.SimulationTimer15:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 5;
-                            break;
-                        case Scripts.EventType.SimulationTimer30:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 6;
-                            break;
-                        case Scripts.EventType.SimulationTimer60:
-                            ScriptEditor.cbLinkedEvent.SelectedIndex = 7;
-                            break;
+                        MessageBox.Show(ex.ToString(), MessageBoxType.Error);
                     }
-
-                    ScriptEditor.cbPythonInt.SelectedIndex = (int)selscript.PythonInterpreter;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString(), MessageBoxType.Error);
-                }
+                });
 
             };
 
@@ -307,7 +397,8 @@ namespace DWSIM.UI.Desktop.Editors
             ti14.Click += (sender, e) =>
             {
                 var c1 = new ContextMenu();
-                Application.Instance.Invoke(() => {
+                Application.Instance.Invoke(() =>
+                {
                     var snippets = SharedClasses.Scripts.IronPythonSnippets.GetSnippets();
                     foreach (var group1 in snippets.GroupBy((x) => x.Category1))
                     {
@@ -336,13 +427,6 @@ namespace DWSIM.UI.Desktop.Editors
                 });
             };
 
-            leftcontainer.Rows.Add(new Label { Text = "Script List", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
-            leftcontainer.Rows.Add(new TableRow(menu1));
-            leftcontainer.Rows.Add(new TableRow(lbScripts));
-            leftcontainer.Padding = new Padding(5, 5, 5, 5);
-            leftcontainer.Spacing = new Size(0, 0);
-            leftcontainer.Width = 250;
-
             ScriptEditor.chkLink.CheckedChanged += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
@@ -359,11 +443,6 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.Scripts[lbScripts.SelectedKey].Title = t1.Text;
                 lbScripts.Items[lbScripts.SelectedIndex].Text = t1.Text;
             };
-
-            rightcontainer.Rows.Add(new Label { Text = "Selected Script", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
-            rightcontainer.Rows.Add(new TableRow(menu2));
-            rightcontainer.Rows.Add(new TableRow(ScriptEditor));
-            rightcontainer.Padding = new Padding(5, 5, 5, 5);
 
             var splitc = new Splitter() { };
             splitc.Panel1 = leftcontainer;
