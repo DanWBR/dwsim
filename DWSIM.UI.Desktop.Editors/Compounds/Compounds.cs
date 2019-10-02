@@ -43,7 +43,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Spacing = new Size(10, 10);
 
-            container.Rows.Add(new TableRow(new Label { Text = "Simulation Compounds", Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize())}));
+            container.Rows.Add(new TableRow(new Label { Text = "Simulation Compounds", Font = new Font(SystemFont.Bold, DWSIM.UI.Shared.Common.GetEditorFontSize()) }));
 
             container.Rows.Add(new TableRow(new Label { Text = "Check compounds to add them to the simulation, uncheck to remove.", Font = SystemFonts.Label(DWSIM.UI.Shared.Common.GetEditorFontSize() - 2.0f) }));
             if (Application.Instance.Platform.IsWpf)
@@ -96,6 +96,23 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Rows.Add(cont);
 
+            var txt2 = new Label { Text = "Load and add compounds to the simulation from JSON files", VerticalAlignment = VerticalAlignment.Center };
+            txt2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            var btn2 = new Button { Width = 200, Height = 26, Text = "Load from JSON" };
+            btn2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+
+            btn2.Click += (sender, e) =>
+            {
+                Application.Instance.Invoke(() => {
+                    ImportFromJSON();
+                });
+            };
+
+            var cont2 = new DynamicLayout();
+            cont2.AddRow(new TableRow(txt2, null, btn2));
+
+            container.Rows.Add(cont2);
+
             UpdateList(complist);
 
         }
@@ -122,7 +139,7 @@ namespace DWSIM.UI.Desktop.Editors
             listcontainer.Style = "fastgrid";
 
             if (Application.Instance.Platform.IsWinForms) listcontainer.Height = 370;
-            
+
             var col2 = new GridColumn
             {
                 DataCell = new CheckBoxCell { Binding = Binding.Property<CompoundItem, bool?>(r => r.Check) },
@@ -201,7 +218,53 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
+        void ImportFromJSON()
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Title = "Load Compounds from JSON Files";
+            dialog.Filters.Add(new FileFilter("JSON File", new[] { ".json" }));
+            dialog.CurrentFilterIndex = 0;
+            dialog.MultiSelect = true;
+            if (dialog.ShowDialog(this.container) == DialogResult.Ok)
+            {
+                foreach (var fn in dialog.Filenames)
+                {
+                    try
+                    {
+                        var comp = Newtonsoft.Json.JsonConvert.DeserializeObject<Thermodynamics.BaseClasses.ConstantProperties>(System.IO.File.ReadAllText(fn));
+                        if (!flowsheet.SelectedCompounds.ContainsKey(comp.Name))
+                        {
+                            flowsheet.AvailableCompounds.Add(comp.Name, comp);
+                            flowsheet.SelectedCompounds.Add(comp.Name, comp);
+                            foreach (var obj in flowsheet.SimulationObjects.Values.Where((x) => (x is Thermodynamics.Streams.MaterialStream)))
+                            {
+                                var ms = (Thermodynamics.Streams.MaterialStream)obj;
+                                foreach (Phase phase in ms.Phases.Values)
+                                {
+                                    phase.Compounds.Add(comp.Name, new Compound(comp.Name, ""));
+                                    phase.Compounds[comp.Name].ConstantProperties = comp;
+                                }
 
+                            }
+                            UpdateList(flowsheet.AvailableCompounds.Values.ToList().OrderBy(x => x.Name).ToList());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Loaded compound already exists.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Error);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message, "DWSIM", MessageBoxButtons.OK, MessageBoxType.Error);
+                    }
+
+                }
+            }
+
+
+
+        }
 
     }
 

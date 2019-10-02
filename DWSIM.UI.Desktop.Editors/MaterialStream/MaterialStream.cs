@@ -534,9 +534,10 @@ namespace DWSIM.UI.Desktop.Editors
 
                     };
 
-                    var stack = new StackLayout { HorizontalContentAlignment = HorizontalAlignment.Stretch, Orientation = Orientation.Horizontal, Items = {btnClear, btnNormalize, btnEqualize, btnAccept } };
-
-                    s.CreateAndAddControlRow(container2, stack);
+                    s.CreateAndAddControlRow(container2, btnAccept);
+                    s.CreateAndAddControlRow(container2, btnNormalize);
+                    s.CreateAndAddControlRow(container2, btnEqualize);
+                    s.CreateAndAddControlRow(container2, btnClear);
 
                     s.CreateAndAddEmptySpace(container2);
                     s.CreateAndAddEmptySpace(container2);

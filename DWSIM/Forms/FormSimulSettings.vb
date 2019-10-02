@@ -1455,6 +1455,9 @@ Public Class FormSimulSettings
                             Next
                         Next
                         ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                        ogc1.ClearSelection()
+                        ogc1.Rows(ogc1.Rows.Count - 1).Selected = True
+                        ogc1.FirstDisplayedScrollingRowIndex = ogc1.Rows.Count - 1
                     Else
                         MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
