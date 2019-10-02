@@ -469,7 +469,8 @@ Public Class FormNewSpreadsheet
 
     Sub ParseOldData()
 
-        Dim separator = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator
+        'Dim separator = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator
+        Dim separator = ";"
 
         Dim esheet = Spreadsheet.NewWorksheet("EXPORTS")
 

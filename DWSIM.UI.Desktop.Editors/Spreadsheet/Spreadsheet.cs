@@ -264,7 +264,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         void ParseOldData()
         {
-            var separator = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator;
+            //var separator = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator;
+            var separator = ";";
             var esheet = Sheet.NewWorksheet("EXPORTS");
             List<Tuple<string, string, string, string>> elist = new List<Tuple<string, string, string, string>>();
             int i, j;
