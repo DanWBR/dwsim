@@ -15609,6 +15609,1450 @@
             Freeze to specified cell and position.
             </summary>
         </member>
+        <member name="F:DWSIM.CrossPlatform.UI.Controls.ReoGrid.PropertyPages.FormatPage.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.PropertyPages.FormatPage.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.PropertyPages.FormatPage.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:DWSIM.CrossPlatform.UI.Controls.ReoGrid.PropertyPages.PropertyForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.PropertyPages.PropertyForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.PropertyPages.PropertyForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource">
+            <summary>
+              Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.ResourceManager">
+            <summary>
+              Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Culture">
+            <summary>
+              Substitui a propriedade CurrentUICulture do thread atual para todas as
+              pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Address">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Address.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Alignment">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Alignment.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Degrees">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Degrees.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Horizontal">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Horizontal:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Indent">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Indent:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Orientation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Orientation.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Text_Alignment">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Text alignment.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Text_Control">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Text control.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Vertical">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Vertical:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AlignmentPage_Wrap_Text">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Wrap text.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.All">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a All.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Control Appearance Editor.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Export_CSharp">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Export C#.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Export_VBNET">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Export VB.NET.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Highlight">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Highlight:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Main">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Main:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Reset_To_Default">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Reset to &amp;Default.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Selection_Border_Width">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Selection Border &amp;Width:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.AppearanceEditor_Use_System_Highligh_Color">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Use &amp;System Highlight Color.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Border">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Border.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.BorderPage_Line">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Line.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.BorderPage_Presets">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Presets.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.BorderPage_Style">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Style:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Btn_Cancel">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Cancel.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Btn_Close">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Close.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Btn_Delete">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Delete.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Btn_Edit">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Edit.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Btn_New">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;New.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Btn_OK">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a OK.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CellBody">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Body.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Column">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Column.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Cell_Merge">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Merge.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Cell_Unmerge">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Unmerge.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Col_Clear_Filter">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Clear Filter.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Col_Column_Width">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Column &amp;Width....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Col_Delete_Columns">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Delete Columns.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Col_Filter">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Filter.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Col_Insert_Columns">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Insert Columns.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Col_Reset_To_Default_Width">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Reset to Default Width.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Row_Delete_Rows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Delete Rows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Row_Insert_Rows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Insert Rows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Row_Reset_to_Default_Height">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Reset to Default Height.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.CtxMenu_Row_Row_Height">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Row &amp;Height....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Currency">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Currency.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Data">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Data.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Data_Format">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Data Format.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.DateTime">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a DateTime.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Default">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Default.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.DefineNamedRange_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a New Name.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.DefineNamedRange_Comment">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Comment:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.DefineNamedRange_Name">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Name:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.DefineNamedRange_Range">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Range:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Fill">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Fill.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FillPage_Background_Color">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Background Color:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FillPage_Fill_Pattern">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Fill &amp;Pattern.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FillPage_Fill_Pattern_Color">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Fill Pattern &amp;Color.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FillPage_Fill_Pattern_Style">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Fill Pattern &amp;Style.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Filter_Export_As_CSV">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a CSV File(*.csv)|*.csv|Text file(*.txt)|*.txt|All files(*.*)|*.*.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Filter_Load_File">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a All Supported Files(*.xlsx;*.csv;*.rgf)|*.xlsx;*.csv;*.rgf|ReoGrid XML Format(*.rgf)|*.rgf|Excel 2007(*.xlsx)|*.xlsx|CSV File(*.csv)|*.csv|All Files(*.*)|*.*.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Filter_Save_File">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Excel 2007(*.xlsx)|*.xlsx|ReoGrid XML Format(*.rgf)|*.rgf|CSV File(*.csv)|*.csv|All Files(*.*)|*.*.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Format">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Format.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Format Cells.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Category">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Category:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Decimal_Places">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Decimal Places:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Locale">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Locale (location):.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Negative_Numbers">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Negative numbers:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Pattern">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Pattern:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Symbol">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Symbol:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Type">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Type:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.FormatPage_Use_1000_Separator">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Use 1000 Separator ({0}).
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Formula">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Formula.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.General">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a General.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HeaderProperty_Auto_Fit_To_Cell">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Auto &amp;fit to cell.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HeaderProperty_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Header Properties.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HeaderProperty_Default_Column_Type">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Default Column &amp;Type:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HeaderProperty_Panel_Width">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Panel &amp;Width:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HeaderProperty_Text">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Text:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HeaderProperty_Text_Color">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Text &amp;Color:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Horizontal_Alignment_Center">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Center.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Horizontal_Alignment_Distributed">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Distributed (Indent).
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Horizontal_Alignment_General">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a General.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Horizontal_Alignment_Left">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Left.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Horizontal_Alignment_Right">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Right.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HP_Homepage">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a http://reogrid.net/.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.HP_Homepage_Document">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a http://reogrid.net/document.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Inch">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a inch.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Label_Color">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Color:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Landscape">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Landscape.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Cells">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Cells.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Cells_Merge_Cells">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Merge Cells.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Cells_Unmerge_Cells">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Unmerge Cells.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Change_Cells_Type">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Change Cells &amp;Type.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Copy">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Copy.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Cut">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a C&amp;ut.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Edit.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Clear">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Clear.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Focus_Cell_Style">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Focus Cell Style.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Readonly">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Read-only.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Repeat_Last_Action">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Repeat Last &amp;Action.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Select_All">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Select &amp;All.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Selection.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Drag_To_Fill_Serial">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Drag To &amp;Fill Serial.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Drag_To_Move_Content">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Drag To Move Content.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Mode">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Selection &amp;Mode.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Mode_Cell">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Cell.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Mode_Column">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Column.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Mode_None">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a None.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Mode_Range">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Range (Default).
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Mode_Row">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Row.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Move_Direction">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Move Direction.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Move_Direction_Down">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Down.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Move_Direction_Right">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Right (Default).
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Style">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Selection S&amp;tyle.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Style_Default">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Default Solid Rectangle.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Style_Focus_Rect">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Windows Focus Rectangle.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Edit_Selection_Style_None">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a None.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;File.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Edit_RGF_XML">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Edit RGF &amp;XML....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Exit">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Exit.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Export_As_CSV">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Export As &amp;CSV....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Export_As_CSV_Current_Worksheet">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Export Current Worksheet....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Export_As_CSV_Selected_Range">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Export Selected Range....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Export_As_HTML">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Export As &amp;HTML....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_New">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;New.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_New_Window">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a New &amp;Window....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Open">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Open.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Print">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Print....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Print_Preview">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Print P&amp;review....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Print_Settings">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Print Se&amp;ttings....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Save">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Save.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_File_Save_As">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Save &amp;As....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Format_Cells">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Format Cells....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Formula.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Auto_Function">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Auto Function.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Define_Name">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Define &amp;Name....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Name_Manager">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Name &amp;Manager....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Recalculate_Worksheet">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Recalculate Worksheet.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Remove_Trace_Arrows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Remove Trace Arrows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Remove_Trace_Arrows_Remove_All_Arrows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Remove All &amp;Arrows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Remove_Trace_Arrows_Remove_Dependent_Arrows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Remove &amp;Dependent Arrows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Remove_Trace_Arrows_Remove_Precedent_Arrows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Remove &amp;Precedent Arrows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Suspend_Reference_Updates">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Suspend Reference Updates.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Trace_Dependents">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Trace &amp;Dependents.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Formula_Trace_Precedents">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Trace &amp;Precedents.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Group">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Group.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Help">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Help.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Help_About">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;About....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Help_Documents">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Documents....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Help_Homepage">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Homepage....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Hide">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Hide.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Insert_Page_Break">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Insert Page &amp;Break.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_More">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a More....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Paste">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Paste.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Property">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Property....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Redo">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Redo.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Remove_Page_Break">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Remove Page Break.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Reset_All_Page_Breaks">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Reset All Page &amp;Breaks.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Script">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Sc&amp;ript.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Script_Run_Function">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Run &amp;Function....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Script_Script_Editor">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Script &amp;Editor....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Sheet.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Clear_Filter">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Clear Filter.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Filter">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Filter.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Group">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Group.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Group_Columns">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Group &amp;Columns.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Group_Rows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Group &amp;Rows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Insert">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Insert.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Resize">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Resize....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Settings">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Settings.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Ungroup">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Ungroup.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Ungroup_All_Columns">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a All Columns.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Ungroup_All_Rows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a All Rows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Ungroup_Selection_Columns">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Selection Columns.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Sheet_Ungroup_Selection_Rows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Selection Rows.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Tools">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Tools.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Tools_Control_Appearance">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Control &amp;Appearance....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Undo">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Undo.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Ungroup">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Ungroup.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Ungroup_All">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Ungroup All.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_Unhide">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Unhide.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;View.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Components">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Components.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Components_FormulaBar">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Formula Bar.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Components_StatusBar">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Status Bar.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Components_Toolbar">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Toolbar.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Cell">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Freeze To Cell.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Freeze To &amp;Edges.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Bottom">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Bottom.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Bottom_Left">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Bottom Le&amp;ft.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Bottom_Right">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Bottom Ri&amp;ght.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Left">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Left.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Right">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Right.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Top">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Top.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Top_Left">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Top &amp;Left.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Freeze_To_Edges_Top_Right">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Top &amp;Right.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Unfreeze">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Unfreeze.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Visible.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Column_Header">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Column Header.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Column_Outline_Panel">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Column Outline &amp;Panel.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Forzen_Line">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Frozen Line.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Grid_Lines">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Grid Lines.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Horizontal_ScrollBar">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Horizontal Scrollbar.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Page_Breaks">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Page &amp;Breaks.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Row_Header">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Row Header.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Row_Outline_Panel">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Row &amp;Outline Panel.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Sheet_Tab">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Sheet Tab.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Menu_View_Visible_Vertical_ScrollBar">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Vertical Scrollbar.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Create_Named_Range_Failed">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Cannot define named range by specified name. Make sure:
+             The name does not begin with a number
+             The name does not contain spaces or any invalid characters
+             The name is not same as any address of cell and range
+             The name is not same as any built-in function names.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Create_Named_Range_Failed_Title">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Define named range failed.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Delete_Named_Range_Confirm">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Are you sure to delete selected named range?.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Delete_Named_Range_Confirm_Title">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Delete named range.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_File_Not_Found">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Specified file cannot be found: .
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Input_Name_Of_Range">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Please input the name of range..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Invalid_Address_Of_Range">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The address of range is invalid..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Load_File_Failed">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Loading file failed: .
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Load_Script_Prompt">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The document contains macro and executable script. Do you want to run the script now?.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Load_Script_Prompt_Title">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Executable Script.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Named_Range_Overwrite">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Another range with this name has already existed, are you sure to overwrite it?.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_No_Current_Worksheet">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a No worksheet contained in workbook..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Only_RGF_Edit_XML">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a XML edit only available when current file format is ReoGrid Format File (.rgf;*.xml)..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Operation_Aborted">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Operation cannot be performed..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Outline_Already_Exist">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Another outline has already exists at same position..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Outline_Intersected">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a The outline to be added intersects with another one..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Outline_Not_Found">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a No outline found at specified position..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Outline_Out_Of_Range">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Invalid range to group row or columns. Make sure that the last row or column of worksheet not grouped into any outlines..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Outline_Too_Much">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Level of outlines reached the maximum number of levels (10)..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Range_Intersection_Exception">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Operation cannot be performed, range may contains a part of another merged cell..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Save_Changes">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Do you want to save changes?.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Save_File_Immediately">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Editor will save current file, continue?.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Script_Not_Available">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Script execution is not supported by this edition..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Msg_Source_Code_Exported_Into_Clipboard">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a code exported into Clipboard..
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Name">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Name.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.NamedRangeManage_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Named Range Management.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.NamedRangeManage_Named_Ranges">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Named ranges:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.NamedRangeManage_New">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;New....
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.NoColor">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a No Color.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.None">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a None.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Number">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Number.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Paging_Order">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Paging Order.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Paper">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Paper.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Percentage">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Percentage.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Pixel">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Pixel.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Portrait">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Portrait.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Adjust_To">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Adjust_To.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Print Settings.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Down_Then_Over">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Down, then over.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Orientation">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Orientation:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Over_Then_Down">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Over, then down.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Paper_Size">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Paper Size:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Percent_Normal_Size">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a % normal size.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Setup">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Setup.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Show_Grid_Lines">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Show &amp;Grid Lines.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Show_Margins">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Show &amp;Margins.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.PrintSettings_Visible_Settings">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Visible Settings.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Protection">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Protection.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.ProtectionPage_Locked">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Locked (Read-only).
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Resize_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Resize worksheet.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Resize_Columns">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Columns:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Resize_Columns_Remark">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a (max: 32,768).
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Resize_Rows">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Rows:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Resize_Rows_Remark">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a (max: 1,048,576).
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Row">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Row.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.RunFunction_Caption">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Run Script Function.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.RunFunction_Close_This_Window_After_Running">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Close this window after running.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.RunFunction_Functions">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Functions:.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.RunFunction_Run">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a &amp;Run.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Sample">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Sample.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Scaling">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Scaling.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.SetHeaderSize_Caption_Column">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Column width.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.SetHeaderSize_Caption_Row">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Row height.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.SolidColor">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Solid.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Style">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Style.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Text">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Text.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Untitled">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Untitled.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Vertical_Alignment_Bottom">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Bottom.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Vertical_Alignment_General">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a General.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Vertical_Alignment_Middle">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Middle.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WinForm.Controls.LangResource.Vertical_Alignment_Top">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Top.
+            </summary>
+        </member>
         <member name="T:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Events.WorksheetEventArgs">
             <summary>
             Common worksheet event arguments 
@@ -17179,6 +18623,73 @@
             http://stackoverflow.com/questions/3928822/comparing-2-dictionarystring-string-instances
             </summary>
         </member>
+        <member name="E:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.ProtectionPage.Done">
+            <summary>
+            Setting dialog will be closed when this event rasied
+            </summary>
+        </member>
+        <member name="F:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.ProtectionPage.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.ProtectionPage.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.ProtectionPage.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction">
+            <summary>
+            Action to set range read-only.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction.SetToReadonly">
+            <summary>
+            The read-only value to be set.
+            </summary>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction.#ctor(DWSIM.CrossPlatform.UI.Controls.ReoGrid.RangePosition,System.Boolean)">
+            <summary>
+            Create instance of action to set range read-only value.
+            </summary>
+            <param name="range">The range to be applied.</param>
+            <param name="setToReadonly">The read-only value to be set.</param>
+        </member>
+        <member name="F:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction.readonlyBackup">
+            <summary>
+            Backup all values of read-only cell from worksheet in order to undo this operation.
+            </summary>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction.Do">
+            <summary>
+            Do this operation.
+            </summary>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction.Undo">
+            <summary>
+            Undo this operation.
+            </summary>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction.GetName">
+            <summary>
+            Returns a friendly name for this action.
+            </summary>
+            <returns>The string name.</returns>
+        </member>
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Editor.PropertyPages.SetRangeReadonlyAction.Clone(DWSIM.CrossPlatform.UI.Controls.ReoGrid.RangePosition)">
+            <summary>
+            Create a copy from this action in order to apply the operation to another range.
+            </summary>
+            <param name="range">New range where this operation will be appiled to.</param>
+            <returns>New action instance copied from this action.</returns>
+        </member>
         <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.RGUtility.GetAlphaChar(System.Int64)">
             <summary>
             Get alphabet of number (eg. A is 1 and 30 is AD)
@@ -17341,6 +18852,26 @@
         <member name="F:DWSIM.CrossPlatform.UI.Controls.ReoGrid.WorkbookSettings.View_ShowVerScroll">
             <summary>
             Determine whether or not to show vertical scroll bar
+            </summary>
+        </member>
+        <member name="T:DWSIM.CrossPlatform.UI.Controls.UIControls.ColoredListBox">
+            <summary>
+            A list box which can have colored list items, extended from a standard .NET list box.
+            </summary>
+        </member>
+        <member name="T:DWSIM.CrossPlatform.UI.Controls.UIControls.IColoredListBoxItem">
+            <summary>
+            Interface that represents colored list box items.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.UIControls.IColoredListBoxItem.TextColor">
+            <summary>
+            Get the text color for this list item.
+            </summary>
+        </member>
+        <member name="P:DWSIM.CrossPlatform.UI.Controls.UIControls.IColoredListBoxItem.BackColor">
+            <summary>
+            Get the background color for this list item.
             </summary>
         </member>
         <member name="P:Common.ActionManager.UndoStack">
