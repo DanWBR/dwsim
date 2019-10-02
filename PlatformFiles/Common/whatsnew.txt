@@ -1,7 +1,9 @@
-Version 5.8 Preview 1
+Version 5.8
 
-- [NEW] Dynamic Script Snippets
+- [NEW] Enhanced Spreadsheet Tool
+- [NEW] 2D Charts Tool
 - [NEW] Enhanced Script Editor (Cross-Platform UI)
+- [NEW] Dynamic Script Snippets
 - [CHG] Redesigned Cross-Platform UI
 - [CHG] Redesigned Property Package editors
 - [FIX] Fixed some unit conversions for reaction basis

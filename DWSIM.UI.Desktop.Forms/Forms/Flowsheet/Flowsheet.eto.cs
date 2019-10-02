@@ -690,6 +690,7 @@ namespace DWSIM.UI.Forms
                             Dictionary<string, string> sdict = new Dictionary<string, string>();
                             sdict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(rgfdata);
                             Spreadsheet.Sheet.RemoveWorksheet(0);
+                            Spreadsheet.Loaded = false;
                             foreach (var item in sdict)
                             {
                                 var tmpfile = System.IO.Path.GetTempFileName();
@@ -699,6 +700,7 @@ namespace DWSIM.UI.Forms
                                 sheet.LoadRGF(tmpfile);
                                 File.Delete(tmpfile);
                             }
+                            Spreadsheet.Loaded = true;
                             Spreadsheet.Sheet.CurrentWorksheet = Spreadsheet.Sheet.Worksheets[0];
                         });
                     }

@@ -53,6 +53,10 @@ Imports IronPython.Hosting
             tscb1.SelectedItem = "Consolas"
         ElseIf tscb1.Items.Contains("Courier New") Then
             tscb1.SelectedItem = "Courier New"
+        ElseIf tscb1.Items.Contains("Ubuntu Mono") Then
+            tscb1.SelectedItem = "Ubuntu Mono"
+        ElseIf tscb1.Items.Contains("FreeMono") Then
+            tscb1.SelectedItem = "FreeMono"
         Else
             tscb1.SelectedIndex = 0
         End If

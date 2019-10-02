@@ -2068,8 +2068,11 @@ Label_00CC:
             Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 
+            If calculatorassembly Is Nothing Then
+                calculatorassembly = AppDomain.CurrentDomain.Load("DWSIM.Thermodynamics")
+            End If
             If unitopassembly Is Nothing Then
-                AppDomain.CurrentDomain.Load("DWSIM.UnitOperations")
+                unitopassembly = AppDomain.CurrentDomain.Load("DWSIM.UnitOperations")
             End If
 
             Dim aTypeList As New List(Of Type)

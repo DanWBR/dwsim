@@ -212,6 +212,9 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
+    <Reference Include="unvell.ReoScript">
+      <HintPath>..\DWSIM\References\ReoGrid.WinForms\unvell.ReoScript.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Xamarin.Mac">
       <HintPath>..\DWSIM\References\Xamarin.Mac.dll</HintPath>

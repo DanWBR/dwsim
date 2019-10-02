@@ -41,6 +41,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         public ReoGridControl Sheet;
 
+        public bool Loaded = true;
+
         public Spreadsheet(Flowsheet fs)
         {
             flowsheet = fs;
@@ -409,15 +411,22 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     try
                     {
-                        var ws = cell.Worksheet;
-                        var wcell = ws.Cells[ws.RowCount - 1, ws.ColumnCount - 1];
-                        wcell.Formula = args[2].ToString().Trim('"');
-                        Evaluator.Evaluate(wcell);
-                        var val = wcell.Data;
-                        flowsheet.SimulationObjects[args[0].ToString()].SetPropertyValue(args[1].ToString(), val);
-                        wcell.Formula = "";
-                        wcell.Data = "";
-                        return string.Format("EXPORT OK [{0}, {1} = {2}]", flowsheet.SimulationObjects[args[0].ToString()].GraphicObject.Tag, args[1].ToString(), val);
+                        if (Loaded)
+                        {
+                            var ws = cell.Worksheet;
+                            var wcell = ws.Cells[ws.RowCount - 1, ws.ColumnCount - 1];
+                            wcell.Formula = args[2].ToString().Trim('"');
+                            Evaluator.Evaluate(wcell);
+                            var val = wcell.Data;
+                            flowsheet.SimulationObjects[args[0].ToString()].SetPropertyValue(args[1].ToString(), val);
+                            wcell.Formula = "";
+                            wcell.Data = "";
+                            return string.Format("EXPORT OK [{0}, {1} = {2}]", flowsheet.SimulationObjects[args[0].ToString()].GraphicObject.Tag, args[1].ToString(), val);
+                        }
+                        else
+                        {
+                            return "NOT READY";
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -428,19 +437,26 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     try
                     {
-                        var obj = flowsheet.SimulationObjects[args[0].ToString()];
-                        var prop = args[1].ToString();
-                        var ws = cell.Worksheet;
-                        var wcell = ws.Cells[ws.RowCount - 1, ws.ColumnCount - 1];
-                        wcell.Formula = args[2].ToString().Trim('"');
-                        Evaluator.Evaluate(wcell);
-                        var val = wcell.Data;
-                        wcell.Formula = "";
-                        wcell.Data = "";
-                        var units = args[3].ToString();
-                        var newval = General.ConvertUnits(double.Parse(val.ToString()), units, obj.GetPropertyUnit(prop));
-                        obj.SetPropertyValue(prop, newval);
-                        return string.Format("EXPORT OK [{0}, {1} = {2} {3}]", obj.GraphicObject.Tag, prop, val, units);
+                        if (Loaded)
+                        {
+                            var obj = flowsheet.SimulationObjects[args[0].ToString()];
+                            var prop = args[1].ToString();
+                            var ws = cell.Worksheet;
+                            var wcell = ws.Cells[ws.RowCount - 1, ws.ColumnCount - 1];
+                            wcell.Formula = args[2].ToString().Trim('"');
+                            Evaluator.Evaluate(wcell);
+                            var val = wcell.Data;
+                            wcell.Formula = "";
+                            wcell.Data = "";
+                            var units = args[3].ToString();
+                            var newval = General.ConvertUnits(double.Parse(val.ToString()), units, obj.GetPropertyUnit(prop));
+                            obj.SetPropertyValue(prop, newval);
+                            return string.Format("EXPORT OK [{0}, {1} = {2} {3}]", obj.GraphicObject.Tag, prop, val, units);
+                        }
+                        else
+                        {
+                            return "NOT READY";
+                        }
                     }
                     catch (Exception ex)
                     {
