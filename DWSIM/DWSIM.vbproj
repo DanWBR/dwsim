@@ -349,6 +349,12 @@
     <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable1035\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.WindowsForms.2.0.0-unstable1035\lib\net452\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Python.Runtime, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -441,6 +447,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineProcessor.vb" />
+    <Compile Include="Controls\TwoDimChartControl.Designer.vb">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TwoDimChartControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ListItem.Designer.vb">
       <DependentUpon>ListItem.vb</DependentUpon>
     </Compile>
@@ -500,6 +512,12 @@
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormCharts.Designer.vb">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormCharts.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\FormNewSpreadsheet.Designer.vb">
@@ -1054,6 +1072,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\TwoDimChartControl.en.resx">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TwoDimChartControl.resx">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ListItem.resx">
       <DependentUpon>ListItem.vb</DependentUpon>
     </EmbeddedResource>
@@ -1134,6 +1158,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.resx">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormCharts.en.resx">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormCharts.resx">
+      <DependentUpon>FormCharts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FormNewSpreadsheet.en.resx">
       <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>

@@ -1,4 +1,5 @@
-﻿Imports DWSIM.Controls
+﻿Imports Controls
+Imports DWSIM.Controls
 
 Module Extensions
 

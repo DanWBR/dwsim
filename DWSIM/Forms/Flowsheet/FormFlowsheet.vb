@@ -70,6 +70,7 @@ Public Class FormFlowsheet
     Public FormLog As New LogPanel
     Public FormMatList As New MaterialStreamPanel
     Public FormSpreadsheet As New FormNewSpreadsheet
+    Public FormCharts As New FormCharts
 
     Public FormProps As New frmProps
 
@@ -84,6 +85,8 @@ Public Class FormFlowsheet
     Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
     Public ScriptCollection As Dictionary(Of String, IScript)
+
+    Public ChartCollection As New Dictionary(Of String, IChart)
 
     Public CheckedToolstripButton As ToolStripButton
     Public ClickedToolStripMenuItem As ToolStripMenuItem
@@ -147,6 +150,7 @@ Public Class FormFlowsheet
 
     Private Sub FormChild_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        FormCharts.Flowsheet = Me
         FormSpreadsheet.Flowsheet = Me
 
         Me.MdiParent = FormMain
@@ -238,6 +242,7 @@ Public Class FormFlowsheet
             FormSpreadsheet.DockPanel = Nothing
             FormWatch.DockPanel = Nothing
             FormSurface.DockPanel = Nothing
+            FormCharts.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -246,6 +251,7 @@ Public Class FormFlowsheet
             FormSurface.Show(dckPanel)
             FormMatList.Show(FormSurface.Pane, Nothing)
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
+            FormCharts.Show(FormSurface.Pane, Nothing)
             FormWatch.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
 
@@ -290,6 +296,8 @@ Public Class FormFlowsheet
                 Return Me.FormWatch
             Case "DWSIM.frmProps"
                 Return Me.FormProps
+            Case "DWSIM.FormCharts"
+                Return Me.FormCharts
         End Select
         Return Nothing
     End Function
@@ -3002,6 +3010,16 @@ Public Class FormFlowsheet
         End Get
         Set(value As Dictionary(Of String, ICompoundConstantProperties))
             FormMain.AvailableComponents = value
+        End Set
+    End Property
+
+    Public Property Charts As Dictionary(Of String, IChart) Implements IFlowsheet.Charts
+        Get
+            If ChartCollection Is Nothing Then ChartCollection = New Dictionary(Of String, IChart)
+            Return ChartCollection
+        End Get
+        Set(value As Dictionary(Of String, IChart))
+            ChartCollection = value
         End Set
     End Property
 

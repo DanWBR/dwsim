@@ -27,10 +27,10 @@ Partial Class frmProps
         Me.LblTipoObj = New System.Windows.Forms.Label()
         Me.FTSProps = New FarsiLibrary.Win.FATabStrip()
         Me.TSProps = New FarsiLibrary.Win.FATabStripItem()
-        Me.PGEx1 = New PropertyGridEx.PropertyGridEx()
+        Me.PGEx1 = New Controls.PropertyGridEx.PropertyGridEx()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.TSObj = New FarsiLibrary.Win.FATabStripItem()
-        Me.PGEx2 = New PropertyGridEx.PropertyGridEx()
+        Me.PGEx2 = New Controls.PropertyGridEx.PropertyGridEx()
         Me.LblNameObj = New System.Windows.Forms.Label()
         Me.sfdxml1 = New System.Windows.Forms.SaveFileDialog()
         Me.dckMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -307,9 +307,9 @@ Partial Class frmProps
     Public WithEvents LblTipoObj As System.Windows.Forms.Label
     Public WithEvents FTSProps As FarsiLibrary.Win.FATabStrip
     Public WithEvents TSProps As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents PGEx1 As PropertyGridEx.PropertyGridEx
+    Public WithEvents PGEx1 As Controls.PropertyGridEx.PropertyGridEx
     Public WithEvents TSObj As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents PGEx2 As PropertyGridEx.PropertyGridEx
+    Public WithEvents PGEx2 As Controls.PropertyGridEx.PropertyGridEx
     Public WithEvents LblNameObj As System.Windows.Forms.Label
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Public WithEvents sfdxml1 As System.Windows.Forms.SaveFileDialog

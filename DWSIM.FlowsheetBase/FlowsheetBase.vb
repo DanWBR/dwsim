@@ -2100,6 +2100,15 @@ Label_00CC:
 
     Public Property Scripts As New Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
 
+    Public Property Charts As Dictionary(Of String, IChart) Implements IFlowsheet.Charts
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Dictionary(Of String, IChart))
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
         If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then

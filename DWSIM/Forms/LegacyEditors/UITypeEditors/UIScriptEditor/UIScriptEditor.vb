@@ -21,6 +21,7 @@ Imports System.Drawing.Design
 Imports System.ComponentModel
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Controls
+Imports Controls
 
 Namespace DWSIM.Editors.CustomUO
 

@@ -1968,6 +1968,26 @@ Public Class FormMain
 
         End If
 
+        form.ChartCollection = New Dictionary(Of String, Interfaces.IChart)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClasses.Charts.Chart()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.ChartCollection.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Chart Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
 
         Try
@@ -2029,6 +2049,8 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormCharts.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2042,6 +2064,7 @@ Public Class FormMain
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
             form.FormProps.DockPanel = Nothing
+            form.FormCharts.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 If savedfromclui Then
@@ -2063,6 +2086,7 @@ Public Class FormMain
             Try
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormSpreadsheet.Show(form.dckPanel)
+                form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.FormProps.Show(form.dckPanel)
@@ -2456,6 +2480,26 @@ Public Class FormMain
 
         End If
 
+        form.ChartCollection = New Dictionary(Of String, Interfaces.IChart)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClasses.Charts.Chart()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.ChartCollection.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Chart Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
 
         Try
@@ -2516,6 +2560,8 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormCharts.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2525,6 +2571,7 @@ Public Class FormMain
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
             form.FormSpreadsheet.DockPanel = Nothing
+            form.FormCharts.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
 
@@ -2544,6 +2591,7 @@ Public Class FormMain
             Try
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormSpreadsheet.Show(form.dckPanel)
+                form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
@@ -2901,6 +2949,13 @@ Public Class FormMain
 
         For Each scr As Script In form.ScriptCollection.Values
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ChartItems"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems")
+
+        For Each ch As SharedClasses.Charts.Chart In form.ChartCollection.Values
+            xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Spreadsheet"))

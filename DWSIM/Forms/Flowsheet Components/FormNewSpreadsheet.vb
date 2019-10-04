@@ -575,7 +575,7 @@ Public Class FormNewSpreadsheet
 
         Spreadsheet.CurrentWorksheet = Spreadsheet.Worksheets("DUMMY1234567890")
 
-        Spreadsheet.CurrentWorksheet = Spreadsheet.Worksheets("MAIN")
+        Spreadsheet.CurrentWorksheet = Spreadsheet.Worksheets(0)
 
         Spreadsheet.RemoveWorksheet(sheet)
 

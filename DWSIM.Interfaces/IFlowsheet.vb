@@ -64,6 +64,8 @@
 
     Property SimulationObjects As Dictionary(Of String, ISimulationObject)
 
+    Property Charts As Dictionary(Of String, IChart)
+
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType, Optional ByVal exceptionID As String = "")
 
     Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)
