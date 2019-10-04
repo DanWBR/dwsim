@@ -117,47 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PGrid1.DocCommentDescription.ImageIndex" type="System.Int32, mscorlib">
-    <value>-1</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PGrid1.DocCommentDescription.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="PGrid1.ToolStrip.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PGrid1.ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 1</value>
   </data>
   <data name="PGrid1.DocCommentDescription.ImageKey" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
+    <value>btnUpdate</value>
+  </data>
   <data name="btnExportSVG.Text" xml:space="preserve">
     <value>Exportar como Imagem (SVG)</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SplitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>SplitContainer1</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PlotView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;btnUpdate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PlotView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 475</value>
-  </data>
-  <data name="PGrid1.DocCommentDescription.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="PGrid1.ToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 25</value>
-  </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PGrid1.DocCommentTitle.ImageKey" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel2.Name" xml:space="preserve">
     <value>SplitContainer1.Panel2</value>
@@ -171,29 +165,23 @@
   <data name="PGrid1.ToolStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 1, 0</value>
   </data>
-  <data name="PGrid1.DocCommentTitle.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 23</value>
-  </data>
   <data name="&gt;&gt;SplitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PGrid1.DocCommentDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 18</value>
+  </data>
+  <data name="btnExportSVG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 23</value>
   </data>
   <data name="PGrid1.DocCommentTitle.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Inherit</value>
   </data>
-  <data name="PGrid1.DocCommentTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+  <data name="&gt;&gt;btnExportPNG.Parent" xml:space="preserve">
+    <value>SplitContainer1.Panel2</value>
   </data>
-  <data name="&gt;&gt;SaveFileDialog1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PGrid1.ToolStrip.Text" xml:space="preserve">
-    <value>PropertyGridToolBar</value>
-  </data>
-  <data name="PGrid1.DocCommentTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 406</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -201,35 +189,29 @@
   <data name="&gt;&gt;PlotView1.Type" xml:space="preserve">
     <value>OxyPlot.WindowsForms.PlotView, OxyPlot.WindowsForms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338</value>
   </data>
-  <data name="btnUpdate.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="PGrid1.DocCommentDescription.ImageIndex" type="System.Int32, mscorlib">
+    <value>-1</value>
   </data>
-  <data name="&gt;&gt;PlotView1.Name" xml:space="preserve">
-    <value>PlotView1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
-    <value>SplitContainer1</value>
-  </data>
-  <data name="PGrid1.DocCommentDescription.MaximumSize" type="System.Drawing.Size, System.Drawing">
+  <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="PGrid1.DocCommentDescription.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
   </data>
-  <data name="PGrid1.DocCommentDescription.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>709, 475</value>
   </data>
   <data name="PGrid1.DocCommentDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="&gt;&gt;btnExportPNG.Parent" xml:space="preserve">
-    <value>SplitContainer1.Panel2</value>
+  <data name="PGrid1.DocCommentDescription.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>522</value>
-  </data>
-  <data name="&gt;&gt;SplitContainer1.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="PGrid1.DocCommentDescription.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="&gt;&gt;btnExportSVG.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -240,11 +222,11 @@
   <data name="PGrid1.DocCommentTitle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="PGrid1.DocCommentTitle.ImageKey" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;PlotView1.Parent" xml:space="preserve">
+    <value>SplitContainer1.Panel1</value>
   </data>
-  <data name="PGrid1.DocCommentDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 18</value>
+  <data name="PGrid1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel2.Parent" xml:space="preserve">
     <value>SplitContainer1</value>
@@ -258,8 +240,8 @@
   <data name="PGrid1.ToolStrip.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
-    <value>btnUpdate</value>
+  <data name="PGrid1.ToolStrip.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Tile</value>
   </data>
   <data name="&gt;&gt;btnExportPNG.Name" xml:space="preserve">
     <value>btnExportPNG</value>
@@ -267,14 +249,11 @@
   <data name="&gt;&gt;btnExportSVG.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PGrid1.ToolStrip.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;PlotView1.Name" xml:space="preserve">
+    <value>PlotView1</value>
   </data>
-  <data name="PGrid1.DocCommentTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="PGrid1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;btnExportPNG.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -294,12 +273,6 @@
   <data name="PGrid1.DocCommentTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>PNG|*.png|SVG|*.svg</value>
-  </data>
-  <data name="&gt;&gt;SplitContainer1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="btnExportSVG.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
@@ -318,11 +291,11 @@
   <data name="PGrid1.ToolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="PGrid1.ToolStrip.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
   <data name="PGrid1.ToolStrip.BackgroundImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+  <data name="PGrid1.ToolStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="btnUpdate.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -330,8 +303,8 @@
   <data name="btnExportSVG.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="PGrid1.ToolStrip.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
+  <data name="PGrid1.ToolStrip.Text" xml:space="preserve">
+    <value>PropertyGridToolBar</value>
   </data>
   <data name="btnExportPNG.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -345,17 +318,20 @@
   <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>709, 475</value>
   </data>
-  <data name="&gt;&gt;btnExportPNG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SplitContainer1.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnExportSVG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 452</value>
   </data>
   <data name="PGrid1.DocCommentDescription.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Tile</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Parent" xml:space="preserve">
-    <value>SplitContainer1</value>
+  <data name="&gt;&gt;btnExportPNG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PGrid1.ToolStrip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+  <data name="PGrid1.ToolStrip.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="btnExportPNG.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 23</value>
@@ -366,11 +342,17 @@
   <data name="&gt;&gt;PGrid1.Type" xml:space="preserve">
     <value>Controls.PropertyGridEx.PropertyGridEx, DWSIM.Controls.PropertyGridEx, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;PlotView1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="btnExportSVG.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="&gt;&gt;SplitContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PGrid1.DocCommentTitle.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+  <data name="&gt;&gt;PGrid1.Name" xml:space="preserve">
+    <value>PGrid1</value>
   </data>
   <data name="PGrid1.DocCommentTitle.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -381,8 +363,8 @@
   <data name="PGrid1.DocCommentTitle.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PGrid1.DocCommentTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;PGrid1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -393,17 +375,17 @@
   <data name="PGrid1.DocCommentDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnExportPNG.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;SplitContainer1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="PGrid1.ToolStrip.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>709, 475</value>
+  <data name="PGrid1.DocCommentDescription.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="btnExportSVG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 452</value>
+  <data name="SaveFileDialog1.Filter" xml:space="preserve">
+    <value>PNG|*.png|SVG|*.svg</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>
@@ -411,44 +393,53 @@
   <data name="&gt;&gt;SaveFileDialog1.Name" xml:space="preserve">
     <value>SaveFileDialog1</value>
   </data>
-  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 406</value>
-  </data>
-  <data name="PlotView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PGrid1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;SplitContainer1.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="PGrid1.DocCommentDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 37</value>
   </data>
+  <data name="PlotView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="PGrid1.DocCommentTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="PGrid1.ToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 25</value>
+  </data>
   <data name="PGrid1.DocCommentTitle.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
+  </data>
+  <data name="SaveFileDialog1.Title" xml:space="preserve">
+    <value>Slvar Gráfico</value>
+  </data>
+  <data name="btnUpdate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="PGrid1.ToolStrip.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+  <data name="PGrid1.ToolStrip.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="PGrid1.DocCommentDescription.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
+    <value>SplitContainer1</value>
   </data>
   <data name="PGrid1.HelpVisible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="PGrid1.ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1</value>
+  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>522</value>
   </data>
   <data name="&gt;&gt;btnUpdate.Parent" xml:space="preserve">
     <value>SplitContainer1.Panel2</value>
   </data>
-  <data name="&gt;&gt;PlotView1.Parent" xml:space="preserve">
-    <value>SplitContainer1.Panel1</value>
+  <data name="&gt;&gt;SaveFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PGrid1.DocCommentTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 15</value>
@@ -468,20 +459,20 @@
   <data name="SplitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="SaveFileDialog1.Title" xml:space="preserve">
-    <value>Slvar Gráfico</value>
+  <data name="PGrid1.DocCommentTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
   </data>
-  <data name="btnExportSVG.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PGrid1.Name" xml:space="preserve">
-    <value>PGrid1</value>
+  <data name="&gt;&gt;PlotView1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="btnExportSVG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 23</value>
+  <data name="PGrid1.ToolStrip.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="PGrid1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="PGrid1.ToolStrip.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="btnExportPNG.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 429</value>
@@ -489,11 +480,20 @@
   <data name="PGrid1.ToolStrip.AccessibleName" xml:space="preserve">
     <value>ToolBar</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
+  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 23</value>
+  </data>
+  <data name="btnExportPNG.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="PGrid1.DocCommentTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

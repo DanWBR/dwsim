@@ -34,7 +34,11 @@ Public Class TwoDimChartControl
 
             If Chart.ChartSource = ChartSource.FlowsheetObject Then
 
-                Chart.PlotModel = Flowsheet.SimulationObjects(Chart.ChartSourceObjectID).GetChartModel(Chart.ChartSourceObjectChartID)
+                If Chart.ChartSourceObjectAutoUpdate Then
+
+                    Chart.PlotModel = Flowsheet.SimulationObjects(Chart.ChartSourceObjectID).GetChartModel(Chart.ChartSourceObjectChartID)
+
+                End If
 
             Else
 
@@ -169,6 +173,15 @@ Public Class TwoDimChartControl
 
     Sub UpdatePropertyGrid()
 
+        Dim pm As OxyPlot.PlotModel = Chart.PlotModel
+
+        If pm IsNot Nothing Then
+            If pm.Series.Count = Chart.SpreadsheetDataSourcesX.Count & PGrid1.Item.Count > 0 Then
+                PGrid1.Refresh()
+                Exit Sub
+            End If
+        End If
+
         With PGrid1
 
             .Item.Clear()
@@ -184,6 +197,7 @@ Public Class TwoDimChartControl
                     .Item(.Item.Count - 1).Choices = New Controls.PropertyGridEx.CustomChoices(Flowsheet.SimulationObjects.Values.Select(Function(x) x.GraphicObject.Tag).ToArray())
                     .Item.Add("Chart Type", Chart, "ChartSourceObjectChartID", False, "2. Data Source")
                     .Item(.Item.Count - 1).Choices = New Controls.PropertyGridEx.CustomChoices(sourceobj.GetChartModelNames().ToArray())
+                    .Item.Add("Auto Update Chart from Object", Chart, "ChartSourceObjectAutoUpdate", False, "2. Data Source")
                 Else
                     .Item.Add("Source Object", "", False, "2. Data Source")
                     .Item(.Item.Count - 1).Choices = New Controls.PropertyGridEx.CustomChoices(Flowsheet.SimulationObjects.Values.Select(Function(x) x.GraphicObject.Tag).ToArray())
@@ -195,9 +209,7 @@ Public Class TwoDimChartControl
                 .Item(.Item.Count - 1).CustomEditor = New StringCollectionEditor(GetType(System.String))
             End If
 
-            If Chart.PlotModel IsNot Nothing Then
-
-                Dim pm As OxyPlot.PlotModel = Chart.PlotModel
+            If pm IsNot Nothing Then
 
                 If pm.Title Is Nothing Then pm.Title = Chart.DisplayName
                 .Item.Add("Title", pm, "Title", False, "3. Plot")
@@ -265,7 +277,7 @@ Public Class TwoDimChartControl
                     .Item.Add("Line Type", series, "LineStyle", False, String.Format("Line Series #{0}", i))
 
                     .Item.Add("Line Color", series.Color, False, String.Format("Line Series #{0}", i))
-                    .Item(.Item.Count - 1).Tag = series
+                    .Item(.Item.Count - 1).Tag = i
                     .Item(.Item.Count - 1).DefaultType = GetType(OxyColor)
                     .Item(.Item.Count - 1).Choices = New Controls.PropertyGridEx.CustomChoices(ColorChoices.ToArray)
 
@@ -276,12 +288,12 @@ Public Class TwoDimChartControl
                     .Item.Add("Marker Size", series, "MarkerSize", False, String.Format("Line Series #{0}", i))
 
                     .Item.Add("Marker Fill Color", series.MarkerFill, False, String.Format("Line Series #{0}", i))
-                    .Item(.Item.Count - 1).Tag = series
+                    .Item(.Item.Count - 1).Tag = i
                     .Item(.Item.Count - 1).DefaultType = GetType(OxyColor)
                     .Item(.Item.Count - 1).Choices = New Controls.PropertyGridEx.CustomChoices(ColorChoices.ToArray)
 
                     .Item.Add("Marker Stroke Color", series.MarkerStroke, False, String.Format("Line Series #{0}", i))
-                    .Item(.Item.Count - 1).Tag = series
+                    .Item(.Item.Count - 1).Tag = i
                     .Item(.Item.Count - 1).DefaultType = GetType(OxyColor)
                     .Item(.Item.Count - 1).Choices = New Controls.PropertyGridEx.CustomChoices(ColorChoices.ToArray)
 
@@ -311,7 +323,7 @@ Public Class TwoDimChartControl
             If Chart IsNot Nothing Then PlotView1.Model = Chart.PlotModel
             PlotView1.InvalidatePlot(True)
         Catch ex As Exception
-
+            Flowsheet.ShowMessage("Chart update error: " & ex.Message, Interfaces.IFlowsheet.MessageType.GeneralError)
         End Try
 
     End Sub
@@ -321,26 +333,31 @@ Public Class TwoDimChartControl
         Try
             UpdatePropertyGrid()
             If Chart IsNot Nothing Then PlotView1.Model = Chart.PlotModel
+            UpdatePlotModelData()
             PlotView1.InvalidatePlot(True)
         Catch ex As Exception
-
+            Flowsheet.ShowMessage("Chart update error: " & ex.Message, Interfaces.IFlowsheet.MessageType.GeneralError)
         End Try
 
     End Sub
 
     Private Sub PGrid1_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PGrid1.PropertyValueChanged
 
-        If e.ChangedItem.Label.Equals("Source Object") Then
-            Chart.ChartSourceObjectID = Flowsheet.GetFlowsheetSimulationObject(e.ChangedItem.Value).Name
-        ElseIf e.ChangedItem.Label.Equals("Name") Then
-            Parent.Text = Chart.DisplayName
-        ElseIf e.ChangedItem.Label.Equals("Line Color") Then
-            DirectCast(e.ChangedItem.Tag, LineSeries).Color = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
-        ElseIf e.ChangedItem.Label.Equals("Marker Fill Color") Then
-            DirectCast(e.ChangedItem.Tag, LineSeries).MarkerFill = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
-        ElseIf e.ChangedItem.Label.Equals("Marker Stroke Color") Then
-            DirectCast(e.ChangedItem.Tag, LineSeries).MarkerStroke = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
-        End If
+        Try
+            If e.ChangedItem.Label.Equals("Source Object") Then
+                Chart.ChartSourceObjectID = Flowsheet.GetFlowsheetSimulationObject(e.ChangedItem.Value).Name
+            ElseIf e.ChangedItem.Label.Equals("Name") Then
+                Parent.Text = Chart.DisplayName
+            ElseIf e.ChangedItem.Label.Equals("Line Color") Then
+                DirectCast(Chart.PlotModel.Series(e.ChangedItem.Tag), LineSeries).Color = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
+            ElseIf e.ChangedItem.Label.Equals("Marker Fill Color") Then
+                DirectCast(Chart.PlotModel.Series(e.ChangedItem.Tag), LineSeries).MarkerFill = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
+            ElseIf e.ChangedItem.Label.Equals("Marker Stroke Color") Then
+                DirectCast(Chart.PlotModel.Series(e.ChangedItem.Tag), LineSeries).MarkerStroke = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
+            End If
+        Catch ex As Exception
+            Flowsheet.ShowMessage("Chart property update error: " & ex.Message, Interfaces.IFlowsheet.MessageType.GeneralError)
+        End Try
 
         UpdatePropertyGrid()
 
@@ -348,9 +365,37 @@ Public Class TwoDimChartControl
 
     Private Sub BtnExportPNG_Click(sender As Object, e As EventArgs) Handles btnExportPNG.Click
 
+        SaveFileDialog1.FilterIndex = 1
+        SaveFileDialog1.DefaultExt = "png"
+        SavePlot()
+
     End Sub
 
     Private Sub BtnExportSVG_Click(sender As Object, e As EventArgs) Handles btnExportSVG.Click
+
+        SaveFileDialog1.FilterIndex = 2
+        SaveFileDialog1.DefaultExt = "svg"
+        SavePlot()
+
+    End Sub
+
+    Sub SavePlot()
+
+        If (SaveFileDialog1.ShowDialog = DialogResult.OK) Then
+            If SaveFileDialog1.FilterIndex = 1 Then
+                Using st = IO.File.Create(SaveFileDialog1.FileName)
+                    Dim exporter = New OxyPlot.WindowsForms.PngExporter() With {.Background = OxyPlot.OxyColors.White, .Width = PlotView1.Width, .Height = PlotView1.Height}
+                    exporter.Export(Chart.PlotModel, st)
+                    Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, SaveFileDialog1.FileName), Interfaces.IFlowsheet.MessageType.Information)
+                End Using
+            Else
+                Using st = IO.File.Create(SaveFileDialog1.FileName)
+                    Dim exporter As New OxyPlot.SvgExporter() With {.Width = PlotView1.Width, .Height = PlotView1.Height}
+                    exporter.Export(Chart.PlotModel, st)
+                    Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, SaveFileDialog1.FileName), Interfaces.IFlowsheet.MessageType.Information)
+                End Using
+            End If
+        End If
 
     End Sub
 

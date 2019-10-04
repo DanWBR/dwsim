@@ -24,6 +24,8 @@ Namespace Charts
 
         Public Property ChartSourceObjectChartID As String = "" Implements IChart.ChartSourceObjectChartID
 
+        Public Property ChartSourceObjectAutoUpdate As Boolean = True Implements IChart.ChartSourceObjectAutoUpdate
+
         Public Property SpreadsheetDataSourcesX As List(Of String) = New List(Of String) Implements IChart.SpreadsheetDataSourcesX
 
         Public Property SpreadsheetDataSourcesY As List(Of String) = New List(Of String) Implements IChart.SpreadsheetDataSourcesY
@@ -46,12 +48,12 @@ Namespace Charts
 
             elements.Add(New XElement("PlotModel", el_model))
 
-            Dim series As New List(Of List(Of XElement))
+            Dim series As New List(Of XElement)
             For Each s In DirectCast(PlotModel, PlotModel).Series
-                series.Add(XMLSerializer.XMLSerializer.Serialize(s))
+                series.Add(New XElement("LineSeries", XMLSerializer.XMLSerializer.Serialize(s)))
             Next
 
-            elements.Add(New XElement("LineSeries", series))
+            elements.Add(New XElement("Series", series))
 
             Return elements
 
@@ -61,13 +63,14 @@ Namespace Charts
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-            XMLSerializer.XMLSerializer.Deserialize(PlotModel, data.Elements("PlotModel"))
+            XMLSerializer.XMLSerializer.Deserialize(PlotModel, data.Where(Function(e) e.Name = "PlotModel").Elements.ToList())
 
             DirectCast(PlotModel, PlotModel).Series.Clear()
 
-            For Each el In data.Elements("LineSeries").Elements
+            For Each el In data.Where(Function(e) e.Name = "Series").Elements.ToList
                 Dim ls As New OxyPlot.Series.LineSeries()
-                XMLSerializer.XMLSerializer.Deserialize(ls, el.Elements)
+                ls.Title = ""
+                XMLSerializer.XMLSerializer.Deserialize(ls, el.Elements.ToList)
                 DirectCast(PlotModel, PlotModel).Series.Add(ls)
             Next
 
@@ -99,6 +102,10 @@ Namespace Charts
             model.LegendOrientation = OxyPlot.LegendOrientation.Vertical
             model.LegendPosition = OxyPlot.LegendPosition.BottomCenter
             model.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinView
+            model.Title = ""
+            model.Subtitle = ""
+            model.SubtitleFont = "Arial"
+            model.TitleFont = "Arial"
 
             Dim lineSeries As LineSeries = New LineSeries With {.Title = ytitle, .Color = OxyPlot.OxyColors.Black}
 

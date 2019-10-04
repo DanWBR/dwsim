@@ -17,6 +17,5 @@
     Property SpreadsheetDataSourcesX As List(Of String)
 
     Property SpreadsheetDataSourcesY As List(Of String)
-
-
+    Property ChartSourceObjectAutoUpdate As Boolean
 End Interface
