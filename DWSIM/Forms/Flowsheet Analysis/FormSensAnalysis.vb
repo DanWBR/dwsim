@@ -622,6 +622,7 @@ Public Class FormSensAnalysis
         Try
             Me.btnRun.Enabled = False
             Me.btnAbort.Enabled = True
+            btnExportToNewSheet.Enabled = False
             Me.abortCalc = False
             res.Clear()
             counter = 0
@@ -794,6 +795,8 @@ Public Class FormSensAnalysis
                 btnRegressData.Enabled = True
 
             End If
+
+            btnExportToNewSheet.Enabled = True
 
             FillChartData()
         End Try
@@ -1042,6 +1045,22 @@ Public Class FormSensAnalysis
         CbCrtPar.SelectedIndex = 1
 
         graph.GraphPane.CurveList.Clear()
+    End Sub
+
+    Private Sub BtnExportToNewSheet_Click(sender As Object, e As EventArgs) Handles btnExportToNewSheet.Click
+
+        dgvResults.SelectAll()
+
+        Clipboard.SetDataObject(dgvResults.GetClipboardContent())
+
+        Dim sheet = form.FormSpreadsheet.Spreadsheet.NewWorksheet()
+
+        sheet.Paste()
+
+        form.FormSpreadsheet.Activate()
+
+        form.FormSpreadsheet.Spreadsheet.CurrentWorksheet = sheet
+
     End Sub
 
     Private Sub BtnDrawChart_Click(sender As System.Object, e As System.EventArgs) Handles BtnDrawChart.Click

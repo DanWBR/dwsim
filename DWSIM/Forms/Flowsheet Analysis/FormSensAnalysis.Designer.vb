@@ -114,6 +114,7 @@ Partial Class FormSensAnalysis
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.btnExportToNewSheet = New System.Windows.Forms.Button()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CbCrtPar = New System.Windows.Forms.ComboBox()
@@ -802,11 +803,18 @@ Partial Class FormSensAnalysis
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
         Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage4.Controls.Add(Me.btnExportToNewSheet)
         Me.TabPage4.Controls.Add(Me.btnRegressData)
         Me.TabPage4.Controls.Add(Me.GroupBox1)
         Me.TabPage4.Controls.Add(Me.btnRun)
         Me.TabPage4.Controls.Add(Me.btnAbort)
         Me.TabPage4.Name = "TabPage4"
+        '
+        'btnExportToNewSheet
+        '
+        resources.ApplyResources(Me.btnExportToNewSheet, "btnExportToNewSheet")
+        Me.btnExportToNewSheet.Name = "btnExportToNewSheet"
+        Me.btnExportToNewSheet.UseVisualStyleBackColor = True
         '
         'TabPage5
         '
@@ -1100,4 +1108,5 @@ Partial Class FormSensAnalysis
     Public WithEvents Label19 As Label
     Public WithEvents tbCurrValIndVar2 As TextBox
     Public WithEvents Label20 As Label
+    Public WithEvents btnExportToNewSheet As Button
 End Class
