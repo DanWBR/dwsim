@@ -50,6 +50,7 @@
                                    MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question) = DialogResult.Yes Then
                     Flowsheet.Charts.Remove(chart.ID)
+                    Me.TabControl1.TabPages.Remove(Me.TabControl1.SelectedTab)
                 End If
             End If
         End If

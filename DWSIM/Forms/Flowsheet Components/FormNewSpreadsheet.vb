@@ -70,6 +70,10 @@ Public Class FormNewSpreadsheet
                                                                                 frmps.ShowDialog(Me)
                                                                             End Sub
 
+        AddHandler SpreadsheetControl.create2DXYChartFromSelectionToolStripMenuItem.Click, Sub(s2, e2)
+                                                                                               CreateChartFromRange(s2, e2)
+                                                                                           End Sub
+
         SpreadsheetControl.Dock = DockStyle.Fill
 
         SpreadsheetControl.SetupUILanguage()
@@ -87,6 +91,77 @@ Public Class FormNewSpreadsheet
 #End If
 
         Loaded = True
+
+    End Sub
+
+    Sub CreateChartFromRange(sender As Object, e As EventArgs)
+
+        Dim tabpage As New TabPage
+
+        Dim chart As New Charts.Chart
+
+        Dim data = Spreadsheet.CurrentWorksheet.GetRangeData(Spreadsheet.CurrentWorksheet.SelectionRange)
+
+        Dim firstcol, lastcol, firstrow, lastrow As Integer
+
+        firstcol = Spreadsheet.CurrentWorksheet.SelectionRange.Col
+        lastcol = Spreadsheet.CurrentWorksheet.SelectionRange.EndCol
+        firstrow = Spreadsheet.CurrentWorksheet.SelectionRange.Row + 1
+        lastrow = Spreadsheet.CurrentWorksheet.SelectionRange.EndRow + 1
+
+        Dim hasheaders As Boolean = Not Double.TryParse(Spreadsheet.CurrentWorksheet.Cells(firstrow - 1, firstcol).Data, New Double)
+
+        Dim name = Spreadsheet.CurrentWorksheet.Name
+
+        Dim xcol As String = Spreadsheet.CurrentWorksheet.SelectionRange.StartPos.ToAddress().Trim(New Char() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"})
+
+        Dim ycols As New List(Of String)
+
+        For i As Integer = firstcol + 1 To lastcol
+            ycols.Add(Spreadsheet.CurrentWorksheet.Cells(0, i).Address().Trim(New Char() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}))
+        Next
+
+        If hasheaders Then
+            firstrow += 1
+        End If
+
+        For Each item In ycols
+            chart.SpreadsheetDataSourcesX.Add(name & "!" & xcol & firstrow & ":" & xcol & lastrow)
+            chart.SpreadsheetDataSourcesY.Add(name & "!" & item & firstrow & ":" & item & lastrow)
+        Next
+
+        Dim chartcontrol = New TwoDimChartControl() With {.Dock = DockStyle.Fill,
+                             .Flowsheet = Flowsheet,
+                             .Chart = chart,
+                             .Spreadsheet = Flowsheet.FormSpreadsheet.Spreadsheet}
+
+        tabpage.Controls.Add(chartcontrol)
+
+        If hasheaders Then
+            chartcontrol.UpdatePlotModelData()
+            Dim j = 0
+            For i As Integer = firstcol + 1 To lastcol
+                DirectCast(chart.PlotModel, OxyPlot.PlotModel).Series(j).Title =
+                    Spreadsheet.CurrentWorksheet.Cells(firstrow - 2, i).Data
+                j += 1
+            Next
+            DirectCast(chart.PlotModel, OxyPlot.PlotModel).Axes(0).Title =
+                    Spreadsheet.CurrentWorksheet.Cells(firstrow - 2, firstcol).Data
+            DirectCast(chart.PlotModel, OxyPlot.PlotModel).Axes(1).Title = ""
+            If DirectCast(chart.PlotModel, OxyPlot.PlotModel).Series.Count = 1 Then
+                DirectCast(chart.PlotModel, OxyPlot.PlotModel).Axes(1).Title =
+                    Spreadsheet.CurrentWorksheet.Cells(firstrow - 2, firstcol + 1).Data
+            End If
+        End If
+
+        tabpage.Text = chart.DisplayName
+
+        Flowsheet.Charts.Add(chart.ID, chart)
+
+        Flowsheet.FormCharts.TabControl1.TabPages.Add(tabpage)
+
+        Flowsheet.FormCharts.Activate()
+        Flowsheet.FormCharts.TabControl1.SelectedTab = tabpage
 
     End Sub
 
