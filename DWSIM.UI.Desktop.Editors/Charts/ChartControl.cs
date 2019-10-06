@@ -203,15 +203,13 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                     pl.CreateAndAddStringEditorRow("Title", pm.Title, (txt, e) =>
                     {
-                        pm.Title = txt.Text;
                         Application.Instance.Invoke(() =>
                         {
-                            ((DocumentPage)Parent).Text = txt.Text;
+                            pm.Title = txt.Text;
                             ChartView.Model.InvalidatePlot(true);
                             ChartView.Invalidate();
-                            txt.Focus();
                         });
-                    });
+                    }, () => Application.Instance.Invoke(() => ((DocumentPage)Parent).Text = pm.Title));
 
                     pl.CreateAndAddDropDownRow("Title Position", pm.TitleHorizontalAlignment.GetEnumNames(),
                         (int)pm.TitleHorizontalAlignment, (dd, e) =>
@@ -411,7 +409,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                     pl.CreateAndAddStringEditorRow("Title", pm.Axes[1].Title, (txt, e) =>
                     {
-                        pm.Axes[0].Title = txt.Text;
+                        pm.Axes[1].Title = txt.Text;
                         Application.Instance.Invoke(() =>
                         {
                             ChartView.Model.InvalidatePlot(true);
@@ -421,7 +419,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                     pl.CreateAndAddNumericEditorRow("Font Size", pm.Axes[1].FontSize, 4.0, 30, 1, (ns, e) =>
                     {
-                        pm.Axes[0].FontSize = ns.Value;
+                        pm.Axes[1].FontSize = ns.Value;
                         Application.Instance.Invoke(() =>
                         {
                             ChartView.Model.InvalidatePlot(true);
@@ -431,7 +429,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                     pl.CreateAndAddNumericEditorRow("Title Font Size", pm.Axes[1].TitleFontSize, 4.0, 30, 1, (ns, e) =>
                     {
-                        pm.Axes[0].TitleFontSize = ns.Value;
+                        pm.Axes[1].TitleFontSize = ns.Value;
                         Application.Instance.Invoke(() =>
                         {
                             ChartView.Model.InvalidatePlot(true);
@@ -441,7 +439,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                     pl.CreateAndAddNumericEditorRow("Title Position", pm.Axes[1].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
                     {
-                        pm.Axes[0].TitlePosition = ns.Value;
+                        pm.Axes[1].TitlePosition = ns.Value;
                         Application.Instance.Invoke(() =>
                         {
                             ChartView.Model.InvalidatePlot(true);
