@@ -1296,6 +1296,26 @@ Imports System.Dynamic
 
         End If
 
+        Charts = New Dictionary(Of String, Interfaces.IChart)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClasses.Charts.Chart()
+                    obj.LoadData(xel.Elements.ToList)
+                    Charts.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Chart Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
 
         If excs.Count > 0 Then
@@ -1444,6 +1464,13 @@ Imports System.Dynamic
 
         For Each scr As Script In Scripts.Values
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ChartItems"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems")
+
+        For Each ch As SharedClasses.Charts.Chart In Charts.Values
+            xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
         Next
 
         If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
@@ -2100,14 +2127,7 @@ Label_00CC:
 
     Public Property Scripts As New Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
 
-    Public Property Charts As Dictionary(Of String, IChart) Implements IFlowsheet.Charts
-        Get
-            Throw New NotImplementedException()
-        End Get
-        Set(value As Dictionary(Of String, IChart))
-            Throw New NotImplementedException()
-        End Set
-    End Property
+    Public Property Charts As Dictionary(Of String, IChart) = New Dictionary(Of String, IChart) Implements IFlowsheet.Charts
 
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
