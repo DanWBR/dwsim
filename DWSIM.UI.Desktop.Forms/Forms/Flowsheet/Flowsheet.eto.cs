@@ -17,6 +17,7 @@ using System.Diagnostics;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts;
 using System.Reflection;
 using s = DWSIM.GlobalSettings.Settings;
+using DWSIM.UI.Desktop.Editors.Charts;
 
 namespace DWSIM.UI.Forms
 {
@@ -40,6 +41,8 @@ namespace DWSIM.UI.Forms
         private bool TabSwitch = true;
 
         private DWSIM.UI.Desktop.Editors.ResultsViewer ResultsControl;
+
+        public ChartManager ChartsControl;
 
         private DWSIM.UI.Desktop.Editors.MaterialStreamListViewer MaterialStreamListControl;
 
@@ -747,6 +750,8 @@ namespace DWSIM.UI.Forms
 
             SpreadsheetControl = Spreadsheet.GetSpreadsheet(FlowsheetObject);
 
+            ChartsControl = new ChartManager(FlowsheetObject);
+
             ResultsControl = new DWSIM.UI.Desktop.Editors.ResultsViewer(FlowsheetObject);
 
             MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
@@ -896,6 +901,7 @@ namespace DWSIM.UI.Forms
             DocumentContainer.Pages.Add(new DocumentPage { Content = Split2, Text = "Flowsheet", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = MaterialStreamListControl, Text = "Material Streams", Closable = false });
             DocumentContainer.Pages.Add(DocumentPageSpreadsheet);
+            DocumentContainer.Pages.Add(new DocumentPage { Content = ChartsControl, Text = "Charts", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = ScriptListControl, Text = "Script Manager", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = ResultsControl, Text = "Results", Closable = false });
 

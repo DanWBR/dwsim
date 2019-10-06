@@ -36,7 +36,7 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblStream = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.pg = New PropertyGridEx.PropertyGridEx()
+        Me.pg = New Controls.PropertyGridEx.PropertyGridEx()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -241,6 +241,6 @@ Partial Class Form1
     Friend WithEvents lblVapOnly As System.Windows.Forms.Label
     Friend WithEvents lblCalcd As System.Windows.Forms.Label
     Friend WithEvents lblStream As System.Windows.Forms.Label
-    Friend WithEvents pg As PropertyGridEx.PropertyGridEx
+    Friend WithEvents pg As Controls.PropertyGridEx.PropertyGridEx
 
 End Class

@@ -88,6 +88,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Charts\ChartControl.cs" />
+    <Compile Include="Charts\ChartManager.cs" />
     <Compile Include="Charts\OxyPlotChart.cs" />
     <Compile Include="Compounds\BulkC7.cs" />
     <Compile Include="Compounds\CompoundCreator.cs" />
