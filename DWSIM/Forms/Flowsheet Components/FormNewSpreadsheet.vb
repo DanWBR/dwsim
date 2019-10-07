@@ -27,6 +27,8 @@ Public Class FormNewSpreadsheet
 
     Public Property Loaded As Boolean = False
 
+    Private Columns As New List(Of String)
+
 #If LINUX Then
     Public ReadOnly Property Spreadsheet As ReoGridControl
         Get
@@ -89,6 +91,8 @@ Public Class FormNewSpreadsheet
         SpreadsheetControl.NewDocumentOnLoad = False
 
 #End If
+
+        Columns.AddRange({"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"})
 
         Loaded = True
 
@@ -325,7 +329,15 @@ Public Class FormNewSpreadsheet
 
     Public Function GetCellString() As String()
 
-        Return Spreadsheet.Worksheets(0).Cells.Select(Function(x) x.Address).ToArray()
+        Dim celllist As New List(Of String)
+
+        For Each item In Columns
+            For i As Integer = 1 To 100
+                celllist.Add(item & i.ToString)
+            Next
+        Next
+
+        Return celllist.ToArray
 
     End Function
 

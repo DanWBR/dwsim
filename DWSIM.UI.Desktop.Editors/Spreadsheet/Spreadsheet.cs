@@ -44,8 +44,13 @@ namespace DWSIM.UI.Desktop.Editors
 
         public bool Loaded = true;
 
+        private List<string> Columns = new List<string>();
+
         public Spreadsheet(Flowsheet fs)
         {
+
+            Columns.AddRange(new []{ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"});
+
             flowsheet = fs;
             scontrol = new ReoGridFullControl();
             Sheet = scontrol.GridControl;
@@ -226,11 +231,6 @@ namespace DWSIM.UI.Desktop.Editors
         public void EvaluateAll()
         {
             WriteAll();
-        }
-
-        public string GetCellString(SpreadsheetCellParameters cell)
-        {
-            return cell.CellString;
         }
 
         public List<string[]> GetDataFromRange(string range)
