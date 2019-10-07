@@ -32,7 +32,21 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
             TabControl = new DocumentControl();
 
-            this.Shown += (sender, e) =>
+            this.Shown += (sender, e) => {
+
+                var selectedtab = TabControl.SelectedPage;
+                var chart = (ChartControl)selectedtab.Content;
+
+                Application.Instance.Invoke(() =>
+                {
+                    chart.Splitter.Position = chart.Splitter.Width - 350;
+                    chart.UpdatePlotModelData();
+                    chart.UpdatePropertiesLayout();
+                });
+
+            };
+
+            this.Load += (sender, e) =>
             {
 
                 Application.Instance.Invoke(() =>
@@ -44,18 +58,18 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                             DocumentPage tabpage = new DocumentPage();
                             var ccontrol = new ChartControl { Chart = (Chart)item.Value, Flowsheet = Flowsheet, Spreadsheet = (ReoGridControl)Flowsheet.GetSpreadsheetObject() };
                             tabpage.Content = ccontrol;
-                            ccontrol.UpdatePlotModelData();
-                            ccontrol.UpdatePropertiesLayout();
-                            tabpage.Text = item.Value.DisplayName;
                             TabControl.Pages.Add(tabpage);
+                            tabpage.Text = item.Value.DisplayName;
                             tabpage.Closed += Tabpage_Closed;
+                            //TabControl.Invalidate();
+                            //ccontrol.UpdatePlotModelData();
+                            //ccontrol.UpdatePropertiesLayout();
                         }
 
                     }
 
                     IsLoaded = true;
 
-                    this.Invalidate();
                 });
 
             };

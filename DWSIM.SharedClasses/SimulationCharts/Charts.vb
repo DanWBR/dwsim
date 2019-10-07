@@ -55,6 +55,17 @@ Namespace Charts
 
             elements.Add(New XElement("Series", series))
 
+            Dim axes As New List(Of XElement)
+            For Each s In DirectCast(PlotModel, PlotModel).Axes
+                s.AbsoluteMaximum = 1.0E+100
+                s.AbsoluteMinimum = -1.0E+100
+                s.FilterMaxValue = 1.0E+100
+                s.FilterMinValue = -1.0E+100
+                axes.Add(New XElement("Axis", XMLSerializer.XMLSerializer.Serialize(s)))
+            Next
+
+            elements.Add(New XElement("Axes", axes))
+
             Return elements
 
         End Function
@@ -72,6 +83,15 @@ Namespace Charts
                 ls.Title = ""
                 XMLSerializer.XMLSerializer.Deserialize(ls, el.Elements.ToList)
                 DirectCast(PlotModel, PlotModel).Series.Add(ls)
+            Next
+
+            DirectCast(PlotModel, PlotModel).Axes.Clear()
+
+            For Each el In data.Where(Function(e) e.Name = "Axes").Elements.ToList
+                Dim a As New OxyPlot.Axes.LinearAxis()
+                a.Title = ""
+                XMLSerializer.XMLSerializer.Deserialize(a, el.Elements.ToList)
+                DirectCast(PlotModel, PlotModel).Axes.Add(a)
             Next
 
             Return True

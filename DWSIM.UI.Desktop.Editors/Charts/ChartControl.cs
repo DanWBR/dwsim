@@ -21,7 +21,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
         public DWSIM.CrossPlatform.UI.Controls.ReoGrid.ReoGridControl Spreadsheet;
         public DWSIM.UI.Desktop.Shared.Flowsheet Flowsheet;
         private List<string> ColorChoices = new List<string>();
-        private Splitter Splitter;
+        public Splitter Splitter;
 
         public ChartControl()
         {
@@ -79,7 +79,11 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                 pl.CreateAndAddLabelRow("General");
 
-                pl.CreateAndAddStringEditorRow("Chart Name", Chart.DisplayName, (t, e) => Chart.DisplayName = t.Text);
+                pl.CreateAndAddStringEditorRow("Chart Name", Chart.DisplayName, (t, e) =>
+                {
+                    Chart.DisplayName = t.Text;
+                }, () => Application.Instance.Invoke(() => ((DocumentPage)Parent).Text = Chart.DisplayName));
+
                 pl.CreateAndAddDropDownRow("Data Source", Chart.ChartSource.GetEnumNames(), (int)Chart.ChartSource, (dd, e) =>
                 {
                     Chart.ChartSource = (ChartSource)dd.SelectedIndex;
@@ -151,7 +155,8 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                     var ml1 = pl.CreateAndAddMultilineTextBoxRow(String.Join(Environment.NewLine, Chart.SpreadsheetDataSourcesX), false, true, (txt, e) =>
                     {
                     });
-                    pl.CreateAndAddButtonRow("Update Data", null, (btn, e) => {
+                    pl.CreateAndAddButtonRow("Update Data", null, (btn, e) =>
+                    {
                         try
                         {
                             Chart.SpreadsheetDataSourcesX.Clear();
@@ -176,7 +181,8 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                     {
 
                     });
-                    pl.CreateAndAddButtonRow("Update Data", null, (btn, e) => {
+                    pl.CreateAndAddButtonRow("Update Data", null, (btn, e) =>
+                    {
                         try
                         {
                             Chart.SpreadsheetDataSourcesY.Clear();
@@ -189,7 +195,8 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                 UpdatePlotModelData();
                             });
                         }
-                        catch (Exception ex) {
+                        catch (Exception ex)
+                        {
                             MessageBox.Show("Error updating chart data: " + ex.Message, "DWSIM", MessageBoxType.Error);
                         }
                     });
@@ -209,7 +216,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                             ChartView.Model.InvalidatePlot(true);
                             ChartView.Invalidate();
                         });
-                    }, () => Application.Instance.Invoke(() => ((DocumentPage)Parent).Text = pm.Title));
+                    });
 
                     pl.CreateAndAddDropDownRow("Title Position", pm.TitleHorizontalAlignment.GetEnumNames(),
                         (int)pm.TitleHorizontalAlignment, (dd, e) =>
@@ -534,9 +541,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                         });
                     });
 
-                    pl.CreateAndAddDropDownRow("Marker Stroke Color", cchoices, 0, (dd, e) =>
+                    pl.CreateAndAddNumericEditorRow("Marker Stroke Size", series.MarkerStrokeThickness, 0.1, 10.0, 1, (ns, e) =>
                     {
-                        if (dd.SelectedIndex > 0) series.MarkerFill = (OxyColor)typeof(OxyColors).GetField(dd.SelectedValue.ToString()).GetValue(null);
+                        series.MarkerStrokeThickness = ns.Value;
                         Application.Instance.Invoke(() =>
                         {
                             ChartView.Model.InvalidatePlot(true);
@@ -544,15 +551,21 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                         });
                     });
 
+                    pl.CreateAndAddDropDownRow("Marker Stroke Color", cchoices, 0, (dd, e) =>
+                    {
+                        if (dd.SelectedIndex > 0) series.MarkerStroke = (OxyColor)typeof(OxyColors).GetField(dd.SelectedValue.ToString()).GetValue(null);
+                        Application.Instance.Invoke(() =>
+                        {
+                            ChartView.Model.InvalidatePlot(true);
+                            ChartView.Invalidate();
+                        });
+                    });
                 }
 
-
-                Splitter.Panel2 = null;
                 Splitter.Panel2 = new Scrollable { Content = pl };
                 Splitter.Panel2.Width = 350;
 
             });
-
 
         }
 
