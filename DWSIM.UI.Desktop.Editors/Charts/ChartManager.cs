@@ -32,22 +32,23 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
             TabControl = new DocumentControl();
 
-            this.Shown += (sender, e) => {
-
+            this.Shown += (sender, e) =>
+            {
                 var selectedtab = TabControl.SelectedPage;
-                var chart = (ChartControl)selectedtab.Content;
-
-                Application.Instance.Invoke(() =>
+                if (selectedtab != null)
                 {
-                    chart.Splitter.Position = chart.Splitter.Width - 350;
-                    chart.UpdatePlotModelData();
-                    chart.UpdatePropertiesLayout();
-                });
+                    var chart = (ChartControl)selectedtab.Content;
+                    Application.Instance.Invoke(() =>
+                    {
+                        chart.Splitter.Position = chart.Splitter.Width - 350;
+                        chart.UpdatePlotModelData();
+                        chart.UpdatePropertiesLayout();
+                    });
+                }
             };
 
             this.Load += (sender, e) =>
             {
-
                 Application.Instance.Invoke(() =>
                 {
                     if ((Flowsheet.Charts.Count > 0) && !IsLoaded)
@@ -60,17 +61,14 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                             TabControl.Pages.Add(tabpage);
                             tabpage.Text = item.Value.DisplayName;
                             tabpage.Closed += Tabpage_Closed;
-                            //TabControl.Invalidate();
-                            //ccontrol.UpdatePlotModelData();
-                            //ccontrol.UpdatePropertiesLayout();
+                            tabpage.Shown += (s1, e1) => {
+                                ccontrol.UpdatePlotModelData();
+                                ccontrol.UpdatePropertiesLayout();
+                            };
                         }
-
                     }
-
                     IsLoaded = true;
-
                 });
-
             };
 
             var l1 = new Label { Text = "Create and view Charts using data from Flowsheet Objects or Spreadsheet Cell Ranges." };
@@ -79,7 +77,6 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
             b1.Click += (s, e) =>
             {
-
                 Application.Instance.Invoke((Action)(() =>
                 {
                     DocumentPage tabpage = new DocumentPage();
@@ -91,8 +88,11 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                     ccontrol.UpdatePropertiesLayout();
                     TabControl.Pages.Add(tabpage);
                     tabpage.Closed += Tabpage_Closed;
+                    tabpage.Shown += (s1, e1) => {
+                        ccontrol.UpdatePlotModelData();
+                        ccontrol.UpdatePropertiesLayout();
+                    };
                 }));
-
             };
 
             var tl = new TableLayout { Spacing = new Eto.Drawing.Size(5, 5), Padding = new Eto.Drawing.Padding(5) };

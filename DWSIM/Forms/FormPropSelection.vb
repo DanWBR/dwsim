@@ -247,7 +247,7 @@ Public Class FormPropSelection
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
         If Not Me.TreeView3.SelectedNode Is Nothing Then
-            Dim separator = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ListSeparator
+            Dim separator = ";"
             If ssmode Then
                 Dim scell = ssheet.CurrentWorksheet.GetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
                 If scell Is Nothing Then scell = ssheet.CurrentWorksheet.CreateAndGetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)

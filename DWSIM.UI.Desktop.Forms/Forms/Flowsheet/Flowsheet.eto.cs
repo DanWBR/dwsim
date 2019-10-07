@@ -752,6 +752,14 @@ namespace DWSIM.UI.Forms
 
             ChartsControl = new ChartManager(FlowsheetObject);
 
+            FlowsheetObject.AddChart = (dpage) => {
+                Application.Instance.Invoke(() => {
+                    ChartsControl.TabControl.Pages.Add(dpage);
+                    DocumentContainer.SelectedIndex = 3;
+                    ChartsControl.TabControl.SelectedPage = dpage;
+                });
+            };
+
             ResultsControl = new DWSIM.UI.Desktop.Editors.ResultsViewer(FlowsheetObject);
 
             MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);

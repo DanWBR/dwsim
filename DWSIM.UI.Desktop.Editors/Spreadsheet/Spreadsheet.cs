@@ -22,6 +22,7 @@ using Cell = DWSIM.CrossPlatform.UI.Controls.ReoGrid.Cell;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid.EtoRenderer;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid.Formula;
 using DWSIM.UI.Desktop.Shared;
+using DWSIM.SharedClasses.Charts;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -51,6 +52,158 @@ namespace DWSIM.UI.Desktop.Editors
             SetCustomFunctions();
             flowsheet.GetSpreadsheetObject = () => { return Sheet; };
             Sheet.CurrentWorksheet.Name = "MAIN";
+
+            scontrol.ImportDataMenuItem.Click += (sender, e) =>
+            {
+
+                Application.Instance.Invoke(() =>
+                {
+
+                    var selector = new PropertySelector() { Flowsheet = flowsheet, ObjList = ObjList };
+
+                    selector.btnOK.Click += (sender2, e2) =>
+                    {
+
+                        Sheet.CurrentWorksheet.Cells[Sheet.CurrentWorksheet.SelectionRange.StartPos].Formula =
+                        String.Format("GETPROPVAL({3}{1}{3}{0}{3}{2}{3})",
+                                                  ';',
+                                                  selector.list2.SelectedKey,
+                                                  selector.list3.SelectedKey,
+                                                  '"');
+
+                        selector.Close();
+
+                        Sheet.CurrentWorksheet.EndEdit(EndEditReason.Cancel);
+
+                    };
+
+                    selector.ShowModal();
+
+                });
+
+            };
+
+            scontrol.ExportDataMenuItem.Click += (sender, e) =>
+            {
+
+                Application.Instance.Invoke(() =>
+                {
+
+                    var selector = new PropertySelector() { Flowsheet = flowsheet, ObjList = ObjList };
+
+                    selector.btnOK.Click += (sender2, e2) =>
+                    {
+
+                        var scell = Sheet.CurrentWorksheet.Cells[Sheet.CurrentWorksheet.SelectionRange.StartPos];
+                        var currdata = scell.Formula == null ? scell.Data : scell.Formula;
+                        scell.Formula = String.Format("SETPROPVAL({3}{1}{3}{0}{3}{2}{3}{0}{3}{4}{3})",
+                                                   ';',
+                                                   selector.list2.SelectedKey,
+                                                   selector.list3.SelectedKey,
+                                                   '"',
+                                                   currdata);
+
+                        selector.Close();
+
+                        Sheet.CurrentWorksheet.EndEdit(EndEditReason.Cancel);
+
+                    };
+
+                    selector.ShowModal();
+
+                });
+
+            };
+
+            scontrol.CreateChartMenuItem.Click += (sender, e) =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    CreateChartFromRange(sender, e);
+                });
+            };
+
+
+        }
+
+        private void CreateChartFromRange(object sender, EventArgs e)
+        {
+            DocumentPage tabpage = new DocumentPage();
+            var chart = new Chart();
+            object data = Sheet.CurrentWorksheet.GetRangeData(Sheet.CurrentWorksheet.SelectionRange);
+            int firstcol;
+            int lastcol;
+            int firstrow;
+            int lastrow;
+            firstcol = Sheet.CurrentWorksheet.SelectionRange.Col;
+            lastcol = Sheet.CurrentWorksheet.SelectionRange.EndCol;
+            firstrow = (Sheet.CurrentWorksheet.SelectionRange.Row + 1);
+            lastrow = (Sheet.CurrentWorksheet.SelectionRange.EndRow + 1);
+            double d;
+            bool hasheaders = !double.TryParse(Sheet.CurrentWorksheet.Cells[(firstrow - 1), firstcol].Data.ToString(), out d);
+            object name = Sheet.CurrentWorksheet.Name;
+            string xcol = Sheet.CurrentWorksheet.SelectionRange.StartPos.ToAddress().Trim(new char[] {
+                    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'});
+            List<string> ycols = new List<string>();
+            for (int i = (firstcol + 1); (i <= lastcol); i++)
+            {
+                ycols.Add(Sheet.CurrentWorksheet.Cells[0, i].Address.Trim(new char[] {
+                    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}));
+            }
+
+            if (hasheaders)
+            {
+                firstrow++;
+            }
+
+            foreach (var item in ycols)
+            {
+                chart.SpreadsheetDataSourcesX.Add((name + ("!"
+                                + (xcol
+                                + (firstrow + (":"
+                                + (xcol + lastrow)))))));
+                chart.SpreadsheetDataSourcesY.Add((name + ("!"
+                                + (item
+                                + (firstrow + (":"
+                                + (item + lastrow)))))));
+            }
+
+            var chartcontrol = new Charts.ChartControl();
+
+            chartcontrol.Flowsheet = this.flowsheet;
+            chartcontrol.Chart = chart;
+            chartcontrol.Spreadsheet = this.Sheet;
+
+            tabpage.Content = chartcontrol;
+
+            if (hasheaders)
+            {
+                //chartcontrol.UpdatePlotModelData();
+                var j = 0;
+                for (int i = (firstcol + 1); (i <= lastcol); i++)
+                {
+                    ((OxyPlot.PlotModel)chart.PlotModel).Series[j].Title =
+                                        Sheet.CurrentWorksheet.Cells[firstrow - 2, i].Data.ToString();
+                    j += 1;
+                }
+                ((OxyPlot.PlotModel)chart.PlotModel).Axes[0].Title =
+                    Sheet.CurrentWorksheet.Cells[firstrow - 2, firstcol].Data.ToString();
+                ((OxyPlot.PlotModel)chart.PlotModel).Axes[1].Title = "";
+                if (((OxyPlot.PlotModel)chart.PlotModel).Series.Count == 1)
+                {
+                    ((OxyPlot.PlotModel)chart.PlotModel).Axes[1].Title =
+                        Sheet.CurrentWorksheet.Cells[firstrow - 2, firstcol + 1].Data.ToString();
+                }
+            }
+
+            tabpage.Shown += (s1, e1) => {
+                chartcontrol.UpdatePlotModelData();
+                chartcontrol.UpdatePropertiesLayout();
+            };
+
+            tabpage.Text = chart.DisplayName;
+            flowsheet.Charts.Add(chart.ID, chart);
+            flowsheet.AddChart.Invoke(tabpage);
         }
 
         public PixelLayout GetSpreadsheet(IFlowsheet obj)
@@ -416,12 +569,17 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             var ws = cell.Worksheet;
                             var wcell = ws.Cells[ws.RowCount - 1, ws.ColumnCount - 1];
+                            wcell.Data = null;
                             wcell.Formula = args[2].ToString().Trim('"');
                             Evaluator.Evaluate(wcell);
                             var val = wcell.Data;
+                            if (wcell.Data == null)
+                            {
+                                val = wcell.Formula;
+                            }
                             flowsheet.SimulationObjects[args[0].ToString()].SetPropertyValue(args[1].ToString(), val);
-                            wcell.Formula = "";
-                            wcell.Data = "";
+                            wcell.Formula = null;
+                            wcell.Data = null;
                             return string.Format("EXPORT OK [{0}, {1} = {2}]", flowsheet.SimulationObjects[args[0].ToString()].GraphicObject.Tag, args[1].ToString(), val);
                         }
                         else
