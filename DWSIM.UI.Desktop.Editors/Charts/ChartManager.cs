@@ -43,7 +43,6 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                     chart.UpdatePlotModelData();
                     chart.UpdatePropertiesLayout();
                 });
-
             };
 
             this.Load += (sender, e) =>

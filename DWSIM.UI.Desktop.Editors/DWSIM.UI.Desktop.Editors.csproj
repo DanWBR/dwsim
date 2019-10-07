@@ -69,6 +69,7 @@
     </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable1035\lib\net45\OxyPlot.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Scintilla.Eto.Shared">
       <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>

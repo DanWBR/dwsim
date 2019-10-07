@@ -96,7 +96,7 @@ Public Class FormNewSpreadsheet
 
     Sub CreateChartFromRange(sender As Object, e As EventArgs)
 
-        Dim tabpage As New TabPage
+        Dim tabpage As New System.Windows.Forms.TabPage
 
         Dim chart As New Charts.Chart
 

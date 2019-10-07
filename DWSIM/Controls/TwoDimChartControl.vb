@@ -1,4 +1,7 @@
 ﻿Imports Aga.Controls
+#If LINUX Then
+Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid
+#End If
 Imports OxyPlot
 Imports OxyPlot.Series
 Imports System.Linq
@@ -9,7 +12,11 @@ Public Class TwoDimChartControl
 
     Public Property Flowsheet As FormFlowsheet
 
+#If LINUX Then
+    Public Property Spreadsheet As ReoGridControl
+#Else
     Public Property Spreadsheet As unvell.ReoGrid.ReoGridControl
+#End If
 
     Private ColorChoices As New List(Of String)
 
@@ -55,15 +62,19 @@ Public Class TwoDimChartControl
                     For Each item In Chart.SpreadsheetDataSourcesX
                         Dim xlist As New List(Of Double)
                         Dim sheet = Spreadsheet.GetWorksheetByName(item.Split("!")(0))
+#If LINUX Then
+                        Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
+#Else
                         Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
-                        If data.GetLength(0) > 1 Then
+#End If
+                        If Data.GetLength(0) > 1 Then
                             Dim j As Integer = 0
-                            For j = 0 To data.GetLength(0) - 1
+                            For j = 0 To Data.GetLength(0) - 1
                                 Dim d As Double = 0.0
-                                Double.TryParse(data(j, 0).ToString, d)
+                                Double.TryParse(Data(j, 0).ToString, d)
                                 xlist.Add(d)
                             Next
-                        ElseIf data.GetLength(1) > 1 Then
+                        ElseIf Data.GetLength(1) > 1 Then
                             Dim j As Integer = 0
                             For j = 0 To data.GetLength(1) - 1
                                 Dim d As Double = 0.0
@@ -77,7 +88,11 @@ Public Class TwoDimChartControl
                     For Each item In Chart.SpreadsheetDataSourcesY
                         Dim ylist As New List(Of Double)
                         Dim sheet = Spreadsheet.GetWorksheetByName(item.Split("!")(0))
+#If LINUX Then
+                        Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
+#Else
                         Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
+#End If
                         If data.GetLength(0) > 1 Then
                             Dim j As Integer = 0
                             For j = 0 To data.GetLength(0) - 1
@@ -110,7 +125,11 @@ Public Class TwoDimChartControl
                     For Each item In Chart.SpreadsheetDataSourcesX
                         Dim xlist As New List(Of Double)
                         Dim sheet = Spreadsheet.GetWorksheetByName(item.Split("!")(0))
+#If LINUX Then
+                        Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
+#Else
                         Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
+#End If
                         If data.GetLength(0) > 1 Then
                             Dim j As Integer = 0
                             For j = 0 To data.GetLength(0) - 1
@@ -132,7 +151,11 @@ Public Class TwoDimChartControl
                     For Each item In Chart.SpreadsheetDataSourcesY
                         Dim ylist As New List(Of Double)
                         Dim sheet = Spreadsheet.GetWorksheetByName(item.Split("!")(0))
+#If LINUX Then
+                        Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
+#Else
                         Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
+#End If
                         If data.GetLength(0) > 1 Then
                             Dim j As Integer = 0
                             For j = 0 To data.GetLength(0) - 1
@@ -383,13 +406,13 @@ Public Class TwoDimChartControl
 
         If (SaveFileDialog1.ShowDialog = DialogResult.OK) Then
             If SaveFileDialog1.FilterIndex = 1 Then
-                Using st = IO.File.Create(SaveFileDialog1.FileName)
+                Using st = System.IO.File.Create(SaveFileDialog1.FileName)
                     Dim exporter = New OxyPlot.WindowsForms.PngExporter() With {.Background = OxyPlot.OxyColors.White, .Width = PlotView1.Width, .Height = PlotView1.Height}
                     exporter.Export(Chart.PlotModel, st)
                     Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, SaveFileDialog1.FileName), Interfaces.IFlowsheet.MessageType.Information)
                 End Using
             Else
-                Using st = IO.File.Create(SaveFileDialog1.FileName)
+                Using st = System.IO.File.Create(SaveFileDialog1.FileName)
                     Dim exporter As New OxyPlot.SvgExporter() With {.Width = PlotView1.Width, .Height = PlotView1.Height}
                     exporter.Export(Chart.PlotModel, st)
                     Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, SaveFileDialog1.FileName), Interfaces.IFlowsheet.MessageType.Information)
