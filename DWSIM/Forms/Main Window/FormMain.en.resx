@@ -230,7 +230,7 @@
     <value>CAPE-OPEN Component Registration</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
+    <value>46, 20</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
@@ -289,14 +289,8 @@
   <data name="ContentsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Help</value>
   </data>
-  <data name="ManualTecnicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 22</value>
-  </data>
-  <data name="ManualTecnicoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Technical Reference Manual (PDF)</value>
-  </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Text" xml:space="preserve">
     <value>User Guide (PDF)</value>

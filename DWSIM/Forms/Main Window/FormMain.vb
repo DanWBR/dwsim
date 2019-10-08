@@ -3785,7 +3785,7 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub ManualTecnicoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManualTecnicoToolStripMenuItem.Click
+    Private Sub ManualTecnicoToolStripMenuItem_Click(sender As Object, e As EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
             With p
