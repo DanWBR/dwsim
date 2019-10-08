@@ -89,6 +89,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                     pl.CreateAndAddDropDownRow("Data Source", Chart.ChartSource.GetEnumNames(), (int)Chart.ChartSource, (dd, e) =>
                         {
                             Chart.ChartSource = (ChartSource)dd.SelectedIndex;
+                            UpdatePropertiesLayout();
                         });
 
                     if (Chart.ChartSource == ChartSource.FlowsheetObject)
@@ -113,7 +114,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                                 var obj = Flowsheet.GetFlowsheetSimulationObject(dd.SelectedValue.ToString());
                                 if (obj != null) Chart.ChartSourceObjectID = obj.Name;
-
+                                UpdatePropertiesLayout();
                             });
 
                         if (Flowsheet.SimulationObjects.ContainsKey(Chart.ChartSourceObjectID))
@@ -372,90 +373,97 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
                         }
 
-                        pl.CreateAndAddLabelRow("X Axis");
+                        if (pm.Axes.Count >= 1)
+                        {
 
-                        pl.CreateAndAddStringEditorRow("Title", pm.Axes[0].Title, (txt, e) =>
-                            {
-                                pm.Axes[0].Title = txt.Text;
-                                Application.Instance.Invoke(() =>
+                            pl.CreateAndAddLabelRow("X Axis");
+
+                            pl.CreateAndAddStringEditorRow("Title", pm.Axes[0].Title, (txt, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[0].Title = txt.Text;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
 
-                        pl.CreateAndAddNumericEditorRow("Font Size", pm.Axes[0].FontSize, 4.0, 30, 1, (ns, e) =>
-                            {
-                                pm.Axes[0].FontSize = ns.Value;
-                                Application.Instance.Invoke(() =>
+                            pl.CreateAndAddNumericEditorRow("Font Size", pm.Axes[0].FontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[0].FontSize = ns.Value;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
 
-                        pl.CreateAndAddNumericEditorRow("Title Font Size", pm.Axes[0].TitleFontSize, 4.0, 30, 1, (ns, e) =>
-                            {
-                                pm.Axes[0].TitleFontSize = ns.Value;
-                                Application.Instance.Invoke(() =>
+                            pl.CreateAndAddNumericEditorRow("Title Font Size", pm.Axes[0].TitleFontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[0].TitleFontSize = ns.Value;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
 
-                        pl.CreateAndAddNumericEditorRow("Title Position", pm.Axes[0].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
-                            {
-                                pm.Axes[0].TitlePosition = ns.Value;
-                                Application.Instance.Invoke(() =>
+                            pl.CreateAndAddNumericEditorRow("Title Position", pm.Axes[0].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[0].TitlePosition = ns.Value;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
 
-                        pl.CreateAndAddLabelRow("Y Axis");
+                        }
 
-                        pl.CreateAndAddStringEditorRow("Title", pm.Axes[1].Title, (txt, e) =>
-                            {
-                                pm.Axes[1].Title = txt.Text;
-                                Application.Instance.Invoke(() =>
+                        if (pm.Axes.Count >= 2)
+                        {
+                            pl.CreateAndAddLabelRow("Y Axis");
+
+                            pl.CreateAndAddStringEditorRow("Title", pm.Axes[1].Title, (txt, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[1].Title = txt.Text;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
 
-                        pl.CreateAndAddNumericEditorRow("Font Size", pm.Axes[1].FontSize, 4.0, 30, 1, (ns, e) =>
-                            {
-                                pm.Axes[1].FontSize = ns.Value;
-                                Application.Instance.Invoke(() =>
+                            pl.CreateAndAddNumericEditorRow("Font Size", pm.Axes[1].FontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[1].FontSize = ns.Value;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
 
-                        pl.CreateAndAddNumericEditorRow("Title Font Size", pm.Axes[1].TitleFontSize, 4.0, 30, 1, (ns, e) =>
-                            {
-                                pm.Axes[1].TitleFontSize = ns.Value;
-                                Application.Instance.Invoke(() =>
+                            pl.CreateAndAddNumericEditorRow("Title Font Size", pm.Axes[1].TitleFontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[1].TitleFontSize = ns.Value;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
 
-                        pl.CreateAndAddNumericEditorRow("Title Position", pm.Axes[1].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
-                            {
-                                pm.Axes[1].TitlePosition = ns.Value;
-                                Application.Instance.Invoke(() =>
+                            pl.CreateAndAddNumericEditorRow("Title Position", pm.Axes[1].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
                                 {
-                                    ChartView.Model.InvalidatePlot(true);
-                                    ChartView.Invalidate();
+                                    pm.Axes[1].TitlePosition = ns.Value;
+                                    Application.Instance.Invoke(() =>
+                                    {
+                                        ChartView.Model.InvalidatePlot(true);
+                                        ChartView.Invalidate();
+                                    });
                                 });
-                            });
-
+                        }
                     }
 
                     var i = 0;

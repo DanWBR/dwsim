@@ -318,13 +318,13 @@ namespace DWSIM.UI.Desktop.Editors
                             case 2:
                                 foreach (var etext in tblist)
                                 {
-                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MoleFraction.GetValueOrDefault() * Q).ToString(nff);
+                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MoleFraction.GetValueOrDefault() * Q).ConvertFromSI(su.molarflow).ToString(nff);
                                 }
                                 break;
                             case 3:
                                 foreach (var etext in tblist)
                                 {
-                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MassFraction.GetValueOrDefault() * W).ToString(nff);
+                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MassFraction.GetValueOrDefault() * W).ConvertFromSI(su.massflow).ToString(nff);
                                 }
                                 break;
                         }
