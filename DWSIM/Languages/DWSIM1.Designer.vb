@@ -2153,6 +2153,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O DWSIM não pôde recuperar os dados da substância solicitada no banco de dados online. Ou a substância não existe neste banco ou houve algum outro erro desconhecido..
+        '''</summary>
+        Friend Shared ReadOnly Property CompoundOnlineSourceError() As String
+            Get
+                Return ResourceManager.GetString("CompoundOnlineSourceError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Substâncias / Fases.
         '''</summary>
         Friend Shared ReadOnly Property CompoundsPhases() As String

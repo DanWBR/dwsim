@@ -5568,4 +5568,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ConstantProperties" xml:space="preserve">
     <value>Propriedades Constantes</value>
   </data>
+  <data name="CompoundOnlineSourceError" xml:space="preserve">
+    <value>O DWSIM não pôde recuperar os dados da substância solicitada no banco de dados online. Ou a substância não existe neste banco ou houve algum outro erro desconhecido.</value>
+  </data>
 </root>

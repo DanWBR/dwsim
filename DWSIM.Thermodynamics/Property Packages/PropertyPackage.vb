@@ -7810,6 +7810,8 @@ Final3:
                     Return Phase.Aqueous
                 Case 7
                     Return Phase.Solid
+                Case -1
+                    Return Phase.Mixture
             End Select
         End Function
 

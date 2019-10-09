@@ -74,7 +74,7 @@ Public Class FormImportCompoundDataChemeo
                                                         btnNext.Enabled = False
                                                     End If
                                                 Else
-                                                    MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundOnlineSourceError"), DWSIM.App.GetLocalString("Erro"))
                                                 End If
                                             End Sub)
                                End Sub)
