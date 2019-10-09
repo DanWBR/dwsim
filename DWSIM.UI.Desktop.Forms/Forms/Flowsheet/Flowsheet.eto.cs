@@ -603,8 +603,15 @@ namespace DWSIM.UI.Forms
                     iplugin.SetFlowsheet(this.FlowsheetObject);
                     Application.Instance.Invoke(() =>
                     {
-                        Form f = (Form)iplugin.UtilityForm;
-                        f.Show();
+                        if (iplugin.UtilityForm is Form)
+                        {
+                            Form f = (Form)iplugin.UtilityForm;
+                            f.Show();
+                        }
+                        else {
+                            System.Windows.Forms.Form f = (System.Windows.Forms.Form)iplugin.UtilityForm;
+                            f.Show();
+                        }
                     });
                 };
                 pluginbuttons.Add(tsmi);
