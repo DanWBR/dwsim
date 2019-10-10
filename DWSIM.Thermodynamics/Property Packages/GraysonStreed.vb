@@ -54,16 +54,7 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Sub ConfigParameters()
-            m_par = New System.Collections.Generic.Dictionary(Of String, Double)
-            With Me.Parameters
-                .Clear()
-                .Add("PP_USEEXPLIQDENS", 0)
-                .Add("PP_USE_EOS_LIQDENS", 1)
-                .Add("PP_EXP_LIQDENS_PCORRECTION", 1)
-                .Add("PP_LIQVISC_PCORRECTION", 1)
-                .Add("PP_USE_IDEAL_LIQUID_FUGACITY_FOR_SOLID_FUGACITY_CALC", 0)
-                .Add("PP_USE_IDEAL_SOLID_FUGACITY", 0)
-            End With
+
         End Sub
 
 #Region "    DWSIM Functions"
@@ -700,12 +691,10 @@ Namespace PropertyPackages
             Dim key As String = "0"
             Dim i As Integer = 0
 
-            If Not Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") Then Me.Parameters.Add("PP_USE_EOS_LIQDENS", 0)
-
             Select Case phase
                 Case Phase.Liquid
                     key = "1"
-                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -715,7 +704,7 @@ Namespace PropertyPackages
                     End If
                 Case Phase.Aqueous
                     key = "6"
-                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -725,7 +714,7 @@ Namespace PropertyPackages
                     End If
                 Case Phase.Liquid1
                     key = "3"
-                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -735,7 +724,7 @@ Namespace PropertyPackages
                     End If
                 Case Phase.Liquid2
                     key = "4"
-                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -745,7 +734,7 @@ Namespace PropertyPackages
                     End If
                 Case Phase.Liquid3
                     key = "5"
-                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList

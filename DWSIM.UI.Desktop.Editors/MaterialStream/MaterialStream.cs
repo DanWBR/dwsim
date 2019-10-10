@@ -86,7 +86,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var selectedpp = MatStream.PropertyPackage.Tag;
                 s.CreateAndAddDropDownRow(container, "Property Package", proppacks, proppacks.IndexOf(selectedpp), (DropDown arg1, EventArgs ev) =>
                 {
-                    MatStream.PropertyPackage = (PropertyPackage)MatStream.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
+                    if (proppacks.Count > 0) MatStream.PropertyPackage = (PropertyPackage)MatStream.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
                 }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
             }
 
@@ -318,13 +318,13 @@ namespace DWSIM.UI.Desktop.Editors
                             case 2:
                                 foreach (var etext in tblist)
                                 {
-                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MoleFraction.GetValueOrDefault() * Q).ToString(nff);
+                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MoleFraction.GetValueOrDefault() * Q).ConvertFromSI(su.molarflow).ToString(nff);
                                 }
                                 break;
                             case 3:
                                 foreach (var etext in tblist)
                                 {
-                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MassFraction.GetValueOrDefault() * W).ToString(nff);
+                                    etext.Text = (ms.Phases[0].Compounds[(String)etext.Tag].MassFraction.GetValueOrDefault() * W).ConvertFromSI(su.massflow).ToString(nff);
                                 }
                                 break;
                         }
@@ -332,7 +332,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     Double total = 0.0f;
 
-                    var btnNormalize = s.CreateAndAddButtonRow(container2, "Normalize", null, null);
+                    var btnNormalize = new Button { Text = "Normalize" };
                     btnNormalize.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnNormalize.Click += (sender, e) =>
@@ -360,7 +360,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     };
 
-                    var btnEqualize = s.CreateAndAddButtonRow(container2, "Equalize", null, null);
+                    var btnEqualize = new Button { Text = "Equalize" };
                     btnEqualize.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnEqualize.Click += (sender, e) =>
@@ -371,7 +371,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     };
 
-                    var btnClear = s.CreateAndAddButtonRow(container2, "Clear", null, null);
+                    var btnClear = new Button { Text = "Clear" };
                     btnClear.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnClear.Click += (sender, e) =>
@@ -382,7 +382,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     };
 
-                    var btnAccept = s.CreateAndAddButtonRow(container2, "Accept/Update", null, null);
+                    var btnAccept = new Button { Text = "Accept/Update" };
                     btnAccept.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
 
                     btnAccept.Click += (sender, e) =>
@@ -533,6 +533,11 @@ namespace DWSIM.UI.Desktop.Editors
                         if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke();
 
                     };
+
+                    s.CreateAndAddControlRow(container2, btnAccept);
+                    s.CreateAndAddControlRow(container2, btnNormalize);
+                    s.CreateAndAddControlRow(container2, btnEqualize);
+                    s.CreateAndAddControlRow(container2, btnClear);
 
                     s.CreateAndAddEmptySpace(container2);
                     s.CreateAndAddEmptySpace(container2);

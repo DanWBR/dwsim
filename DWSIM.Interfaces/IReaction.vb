@@ -67,13 +67,18 @@
 
     Property ConcUnit() As String
 
+
     Property A_Forward() As Double
 
     Property A_Reverse() As Double
 
     Property E_Forward() As Double
 
+    Property E_Forward_Unit() As String
+
     Property E_Reverse() As Double
+
+    Property E_Reverse_Unit() As String
 
     Property ReactionKinFwdType As Enums.ReactionKineticType
 

@@ -71,6 +71,11 @@ Partial Class AboutBox
         Me.Column5 = New System.Windows.Forms.DataGridViewLinkColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewLinkColumn()
+        Me.FaTabStripItem6 = New FarsiLibrary.Win.FATabStripItem()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewLinkColumn3 = New System.Windows.Forms.DataGridViewLinkColumn()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.AssemblyInfoListView = New System.Windows.Forms.ListView()
         Me.colAssemblyName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -83,11 +88,6 @@ Partial Class AboutBox
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.AssemblyNamesComboBox = New System.Windows.Forms.ComboBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.FaTabStripItem6 = New FarsiLibrary.Win.FATabStripItem()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewLinkColumn3 = New System.Windows.Forms.DataGridViewLinkColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -95,11 +95,11 @@ Partial Class AboutBox
         CType(Me.dgvDWSIMComponents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.FaTabStripItem6.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem3.SuspendLayout()
         Me.FaTabStripItem4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.FaTabStripItem6.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -452,89 +452,11 @@ Partial Class AboutBox
         Me.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
-        'FaTabStripItem3
-        '
-        Me.FaTabStripItem3.CanClose = False
-        Me.FaTabStripItem3.Controls.Add(Me.AssemblyInfoListView)
-        Me.FaTabStripItem3.IsDrawn = True
-        Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
-        '
-        'AssemblyInfoListView
-        '
-        Me.AssemblyInfoListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colAssemblyName, Me.colAssemblyVersion, Me.colAssemblyBuilt, Me.colAssemblyCodeBase})
-        resources.ApplyResources(Me.AssemblyInfoListView, "AssemblyInfoListView")
-        Me.AssemblyInfoListView.FullRowSelect = True
-        Me.AssemblyInfoListView.MultiSelect = False
-        Me.AssemblyInfoListView.Name = "AssemblyInfoListView"
-        Me.AssemblyInfoListView.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.AssemblyInfoListView.UseCompatibleStateImageBehavior = False
-        Me.AssemblyInfoListView.View = System.Windows.Forms.View.Details
-        '
-        'colAssemblyName
-        '
-        resources.ApplyResources(Me.colAssemblyName, "colAssemblyName")
-        '
-        'colAssemblyVersion
-        '
-        resources.ApplyResources(Me.colAssemblyVersion, "colAssemblyVersion")
-        '
-        'colAssemblyBuilt
-        '
-        resources.ApplyResources(Me.colAssemblyBuilt, "colAssemblyBuilt")
-        '
-        'colAssemblyCodeBase
-        '
-        resources.ApplyResources(Me.colAssemblyCodeBase, "colAssemblyCodeBase")
-        '
-        'FaTabStripItem4
-        '
-        Me.FaTabStripItem4.CanClose = False
-        Me.FaTabStripItem4.Controls.Add(Me.AssemblyDetailsListView)
-        Me.FaTabStripItem4.Controls.Add(Me.AssemblyNamesComboBox)
-        Me.FaTabStripItem4.IsDrawn = True
-        Me.FaTabStripItem4.Name = "FaTabStripItem4"
-        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
-        '
-        'AssemblyDetailsListView
-        '
-        Me.AssemblyDetailsListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        resources.ApplyResources(Me.AssemblyDetailsListView, "AssemblyDetailsListView")
-        Me.AssemblyDetailsListView.FullRowSelect = True
-        Me.AssemblyDetailsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.AssemblyDetailsListView.Name = "AssemblyDetailsListView"
-        Me.AssemblyDetailsListView.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.AssemblyDetailsListView.UseCompatibleStateImageBehavior = False
-        Me.AssemblyDetailsListView.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
-        '
-        'ColumnHeader2
-        '
-        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
-        '
-        'AssemblyNamesComboBox
-        '
-        resources.ApplyResources(Me.AssemblyNamesComboBox, "AssemblyNamesComboBox")
-        Me.AssemblyNamesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.AssemblyNamesComboBox.Name = "AssemblyNamesComboBox"
-        Me.AssemblyNamesComboBox.Sorted = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.DWSIM_ico
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.TabStop = False
-        '
         'FaTabStripItem6
         '
         Me.FaTabStripItem6.Controls.Add(Me.DataGridView2)
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
-        Me.FaTabStripItem6.Selected = True
         resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         '
         'DataGridView2
@@ -575,6 +497,85 @@ Partial Class AboutBox
         Me.DataGridViewLinkColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridViewLinkColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
+        'FaTabStripItem3
+        '
+        Me.FaTabStripItem3.CanClose = False
+        Me.FaTabStripItem3.Controls.Add(Me.AssemblyInfoListView)
+        Me.FaTabStripItem3.IsDrawn = True
+        Me.FaTabStripItem3.Name = "FaTabStripItem3"
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
+        '
+        'AssemblyInfoListView
+        '
+        Me.AssemblyInfoListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colAssemblyName, Me.colAssemblyVersion, Me.colAssemblyBuilt, Me.colAssemblyCodeBase})
+        resources.ApplyResources(Me.AssemblyInfoListView, "AssemblyInfoListView")
+        Me.AssemblyInfoListView.FullRowSelect = True
+        Me.AssemblyInfoListView.HideSelection = False
+        Me.AssemblyInfoListView.MultiSelect = False
+        Me.AssemblyInfoListView.Name = "AssemblyInfoListView"
+        Me.AssemblyInfoListView.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.AssemblyInfoListView.UseCompatibleStateImageBehavior = False
+        Me.AssemblyInfoListView.View = System.Windows.Forms.View.Details
+        '
+        'colAssemblyName
+        '
+        resources.ApplyResources(Me.colAssemblyName, "colAssemblyName")
+        '
+        'colAssemblyVersion
+        '
+        resources.ApplyResources(Me.colAssemblyVersion, "colAssemblyVersion")
+        '
+        'colAssemblyBuilt
+        '
+        resources.ApplyResources(Me.colAssemblyBuilt, "colAssemblyBuilt")
+        '
+        'colAssemblyCodeBase
+        '
+        resources.ApplyResources(Me.colAssemblyCodeBase, "colAssemblyCodeBase")
+        '
+        'FaTabStripItem4
+        '
+        Me.FaTabStripItem4.CanClose = False
+        Me.FaTabStripItem4.Controls.Add(Me.AssemblyDetailsListView)
+        Me.FaTabStripItem4.Controls.Add(Me.AssemblyNamesComboBox)
+        Me.FaTabStripItem4.IsDrawn = True
+        Me.FaTabStripItem4.Name = "FaTabStripItem4"
+        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
+        '
+        'AssemblyDetailsListView
+        '
+        Me.AssemblyDetailsListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        resources.ApplyResources(Me.AssemblyDetailsListView, "AssemblyDetailsListView")
+        Me.AssemblyDetailsListView.FullRowSelect = True
+        Me.AssemblyDetailsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.AssemblyDetailsListView.HideSelection = False
+        Me.AssemblyDetailsListView.Name = "AssemblyDetailsListView"
+        Me.AssemblyDetailsListView.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.AssemblyDetailsListView.UseCompatibleStateImageBehavior = False
+        Me.AssemblyDetailsListView.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
+        '
+        'ColumnHeader2
+        '
+        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
+        '
+        'AssemblyNamesComboBox
+        '
+        resources.ApplyResources(Me.AssemblyNamesComboBox, "AssemblyNamesComboBox")
+        Me.AssemblyNamesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.AssemblyNamesComboBox.Name = "AssemblyNamesComboBox"
+        Me.AssemblyNamesComboBox.Sorted = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.DWSIM_ico
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.TabStop = False
+        '
         'AboutBox
         '
         resources.ApplyResources(Me, "$this")
@@ -601,11 +602,11 @@ Partial Class AboutBox
         CType(Me.dgvDWSIMComponents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem2.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FaTabStripItem6.ResumeLayout(False)
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem3.ResumeLayout(False)
         Me.FaTabStripItem4.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStripItem6.ResumeLayout(False)
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

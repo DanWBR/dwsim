@@ -62,7 +62,7 @@ Public Class FormImportCompoundDataDDB
                                                     data = t.Result
                                                     AddPropertiesToGrid()
                                                 Else
-                                                    MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundOnlineSourceError"), DWSIM.App.GetLocalString("Erro"))
                                                 End If
 
                                             End Sub)

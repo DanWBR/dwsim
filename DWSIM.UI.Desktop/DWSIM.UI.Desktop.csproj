@@ -85,13 +85,12 @@
       <HintPath>..\DWSIM\References\Cudafy.NET.dll</HintPath>
     </Reference>
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Direct2D, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Direct2D.2.4.1\lib\net45\Eto.Direct2D.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="Eto.Gtk2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Gtk2.2.4.1\lib\net45\Eto.Gtk2.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.Gtk2.dll</HintPath>
     </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.OxyPlot.1.2.0-beta\lib\net45\Eto.OxyPlot.dll</HintPath>
@@ -102,13 +101,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Eto.WinForms, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Windows.2.4.1\lib\net45\Eto.WinForms.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Eto.Wpf, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Wpf.2.4.1\lib\net45\Eto.Wpf.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Eto.XamMac2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.XamMac2.2.4.1\lib\net45\Eto.XamMac2.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\modern\Eto.XamMac2.dll</HintPath>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -152,6 +154,7 @@
     </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable1035\lib\net45\OxyPlot.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="OxyPlot.Wpf, Version=2.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Wpf.2.0.0-unstable1035\lib\net452\OxyPlot.Wpf.dll</HintPath>
@@ -168,6 +171,18 @@
     </Reference>
     <Reference Include="Scintilla.Eto.Shared">
       <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WinForms">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WPF">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNetPrinting">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\ScintillaNetPrinting.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.4.0.1\lib\net45\SharpDX.dll</HintPath>
@@ -198,6 +213,9 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
+    <Reference Include="unvell.ReoScript">
+      <HintPath>..\DWSIM\References\ReoGrid.WinForms\unvell.ReoScript.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Xamarin.Mac">
       <HintPath>..\DWSIM\References\Xamarin.Mac.dll</HintPath>
@@ -281,8 +299,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
@@ -389,6 +405,4 @@ del "$(SolutionDir)DistPackages\Windows_32\*vshost*"
 )</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" />
-  <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
-  <Import Project="..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets" Condition="Exists('..\packages\Eto.Platform.XamMac2.2.4.1\build\Eto.Platform.XamMac2.targets')" />
 </Project>

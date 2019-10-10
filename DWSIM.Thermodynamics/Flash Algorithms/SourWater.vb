@@ -172,22 +172,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim ignorevfbounds As Boolean
-
-            If Not PP.Parameters.ContainsKey("PP_IGNORE_VAPOR_FRACTION_LIMIT") Then
-                PP.Parameters.Add("PP_IGNORE_VAPOR_FRACTION_LIMIT", 0)
-            End If
-
-            If PP.Parameters("PP_IGNORE_VAPOR_FRACTION_LIMIT") = 0 Then
-                ignorevfbounds = False
-            Else
-                ignorevfbounds = True
-            End If
-
             pH0 = Nothing
             concHCO3 = Nothing
 
-            Return Flash_PT_Internal(Vz, P, T, PP, ignorevfbounds, True)
+            Return Flash_PT_Internal(Vz, P, T, PP, PP.IgnoreVaporFractionLimit, True)
 
         End Function
 

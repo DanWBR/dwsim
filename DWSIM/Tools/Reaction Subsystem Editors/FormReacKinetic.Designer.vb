@@ -27,6 +27,8 @@ Partial Class FormReacKinetic
         Me.KryptonButton3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.cbReverseEUnits = New System.Windows.Forms.ComboBox()
+        Me.cbForwardEUnits = New System.Windows.Forms.ComboBox()
         Me.tbRevUE = New System.Windows.Forms.TextBox()
         Me.tbFwdUE = New System.Windows.Forms.TextBox()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
@@ -35,8 +37,6 @@ Partial Class FormReacKinetic
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.rdFwdArr = New System.Windows.Forms.RadioButton()
         Me.rdFwdUD = New System.Windows.Forms.RadioButton()
-        Me.KryptonLabel18 = New System.Windows.Forms.Label()
-        Me.KryptonLabel17 = New System.Windows.Forms.Label()
         Me.tbRevE = New System.Windows.Forms.TextBox()
         Me.KryptonLabel15 = New System.Windows.Forms.Label()
         Me.tbRevA = New System.Windows.Forms.TextBox()
@@ -123,12 +123,12 @@ Partial Class FormReacKinetic
         'GroupBox3
         '
         resources.ApplyResources(Me.GroupBox3, "GroupBox3")
+        Me.GroupBox3.Controls.Add(Me.cbReverseEUnits)
+        Me.GroupBox3.Controls.Add(Me.cbForwardEUnits)
         Me.GroupBox3.Controls.Add(Me.tbRevUE)
         Me.GroupBox3.Controls.Add(Me.tbFwdUE)
         Me.GroupBox3.Controls.Add(Me.FlowLayoutPanel2)
         Me.GroupBox3.Controls.Add(Me.FlowLayoutPanel1)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel18)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel17)
         Me.GroupBox3.Controls.Add(Me.tbRevE)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel15)
         Me.GroupBox3.Controls.Add(Me.tbRevA)
@@ -145,6 +145,20 @@ Partial Class FormReacKinetic
         Me.GroupBox3.Controls.Add(Me.KryptonLabel5)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        '
+        'cbReverseEUnits
+        '
+        resources.ApplyResources(Me.cbReverseEUnits, "cbReverseEUnits")
+        Me.cbReverseEUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbReverseEUnits.DropDownWidth = 121
+        Me.cbReverseEUnits.Name = "cbReverseEUnits"
+        '
+        'cbForwardEUnits
+        '
+        resources.ApplyResources(Me.cbForwardEUnits, "cbForwardEUnits")
+        Me.cbForwardEUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbForwardEUnits.DropDownWidth = 121
+        Me.cbForwardEUnits.Name = "cbForwardEUnits"
         '
         'tbRevUE
         '
@@ -197,16 +211,6 @@ Partial Class FormReacKinetic
         Me.rdFwdUD.Name = "rdFwdUD"
         Me.rdFwdUD.TabStop = True
         Me.rdFwdUD.UseVisualStyleBackColor = True
-        '
-        'KryptonLabel18
-        '
-        resources.ApplyResources(Me.KryptonLabel18, "KryptonLabel18")
-        Me.KryptonLabel18.Name = "KryptonLabel18"
-        '
-        'KryptonLabel17
-        '
-        resources.ApplyResources(Me.KryptonLabel17, "KryptonLabel17")
-        Me.KryptonLabel17.Name = "KryptonLabel17"
         '
         'tbRevE
         '
@@ -551,8 +555,6 @@ Partial Class FormReacKinetic
     Public WithEvents cbVelUnit As System.Windows.Forms.ComboBox
     Public WithEvents KryptonLabel10 As System.Windows.Forms.Label
     Public WithEvents KryptonLabel5 As System.Windows.Forms.Label
-    Public WithEvents KryptonLabel18 As System.Windows.Forms.Label
-    Public WithEvents KryptonLabel17 As System.Windows.Forms.Label
     Public WithEvents tbRevE As System.Windows.Forms.TextBox
     Public WithEvents KryptonLabel15 As System.Windows.Forms.Label
     Public WithEvents tbRevA As System.Windows.Forms.TextBox
@@ -583,4 +585,6 @@ Partial Class FormReacKinetic
     Friend WithEvents rdRevUD As RadioButton
     Public WithEvents tbRevUE As TextBox
     Public WithEvents tbFwdUE As TextBox
+    Public WithEvents cbReverseEUnits As ComboBox
+    Public WithEvents cbForwardEUnits As ComboBox
 End Class

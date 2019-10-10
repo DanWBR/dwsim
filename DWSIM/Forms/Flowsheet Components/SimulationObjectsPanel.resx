@@ -274,7 +274,7 @@
     <value>2</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
-    <value>Seapradores/Tanques</value>
+    <value>Separadores/Tanques</value>
   </data>
   <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
     <value>TabPage3</value>
@@ -804,19 +804,16 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>911, 118</value>
-  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Objetos do Fluxograma</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>911, 118</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SimulationObjectsPanel</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

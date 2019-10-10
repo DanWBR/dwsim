@@ -206,7 +206,10 @@ namespace DWSIM.UI.Desktop.Editors
                                                                     if (supported.Contains(pp.ComponentName))
                                                                     {
                                                                         var cont = new PropertyPackageSettingsView(flowsheet, pp);
-                                                                        var form = s.GetDefaultEditorForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, cont);
+                                                                        var cont2 = new PropertyPackageIPView(flowsheet, pp);
+                                                                        cont.Tag = "General Settings";
+                                                                        cont2.Tag = "Interaction Parameters";
+                                                                        var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[]{ cont2, cont});
                                                                         form.Show();
                                                                     }
                                                                     else

@@ -82,7 +82,7 @@ namespace DWSIM.UI.Desktop.Editors
                 if (pp != null) selectedpp = pp.Tag;
                 s.CreateAndAddDropDownRow(container, "Property Package", proppacks, proppacks.IndexOf(selectedpp), (DropDown arg1, EventArgs ev) =>
                 {
-                    SimObject.PropertyPackage = (IPropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
+                    if (proppacks.Count > 0) SimObject.PropertyPackage = (IPropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
                 }, () => CallSolverIfNeeded());
             }
 

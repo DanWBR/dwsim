@@ -64,8 +64,6 @@ Partial Class FormFlowsheet
         Me.OtimizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnaliseDeSensibilidadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultivariateOptimizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ScriptsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IronRubyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResultadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerarRelatorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PluginsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -167,7 +165,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.UtilitiesTSMI, Me.OtimizaToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.UtilitiesTSMI, Me.OtimizaToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
@@ -443,20 +441,6 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.MultivariateOptimizerToolStripMenuItem, "MultivariateOptimizerToolStripMenuItem")
         Me.MultivariateOptimizerToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_switch
         Me.MultivariateOptimizerToolStripMenuItem.Name = "MultivariateOptimizerToolStripMenuItem"
-        '
-        'ScriptsToolStripMenuItem
-        '
-        resources.ApplyResources(Me.ScriptsToolStripMenuItem, "ScriptsToolStripMenuItem")
-        Me.ScriptsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IronRubyToolStripMenuItem})
-        Me.ScriptsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.ScriptsToolStripMenuItem.MergeIndex = 6
-        Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
-        '
-        'IronRubyToolStripMenuItem
-        '
-        resources.ApplyResources(Me.IronRubyToolStripMenuItem, "IronRubyToolStripMenuItem")
-        Me.IronRubyToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources._280px_python_logo_2
-        Me.IronRubyToolStripMenuItem.Name = "IronRubyToolStripMenuItem"
         '
         'ResultadosToolStripMenuItem
         '
@@ -801,8 +785,6 @@ Partial Class FormFlowsheet
     Public WithEvents CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents PluginsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ScriptsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents IronRubyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExibirListaDeItensACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents COObjTSMI As System.Windows.Forms.ToolStripMenuItem

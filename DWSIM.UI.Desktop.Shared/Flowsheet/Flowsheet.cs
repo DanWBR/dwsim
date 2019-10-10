@@ -28,7 +28,9 @@ namespace DWSIM.UI.Desktop.Shared
         public Eto.Forms.Form FlowsheetForm;
         public Eto.Forms.Control FlowsheetControl;
         private Forms.SolvingFlowsheet solvform;
-        
+
+        public Action<DocumentPage> AddChart;
+
         public void SetFlowsheetForm(Eto.Forms.Form form)
         {
             FlowsheetForm = form;

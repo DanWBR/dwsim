@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DWSIM.Controls</RootNamespace>
+    <RootNamespace>Controls</RootNamespace>
     <AssemblyName>DWSIM.Controls.PropertyGridEx</AssemblyName>
     <MyType>Windows</MyType>
     <OptionStrict>Off</OptionStrict>

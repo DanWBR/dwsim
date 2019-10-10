@@ -1968,76 +1968,59 @@ Public Class FormMain
 
         End If
 
+        form.ChartCollection = New Dictionary(Of String, Interfaces.IChart)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClasses.Charts.Chart()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.ChartCollection.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Chart Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
 
         Try
-            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New SpreadsheetForm()
-            Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
-            Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
-            If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
-            If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
-            form.FormSpreadsheet.UpdateColors()
-            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet.UISpreadsheetEditorForm_Load(Me, New EventArgs)
+            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New FormNewSpreadsheet() With {.Flowsheet = form}
+            form.FormSpreadsheet.Initialize()
+            If (Not (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet")) Is Nothing) Then
+                Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
+                If Not (rgfdataelement) Is Nothing Then
+                    Dim rgfdata As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value
+                    Dim sdict As New Dictionary(Of String, String)
+                    sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
+                    form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
+                    For Each item In sdict
+                        Dim tmpfile = System.IO.Path.GetTempFileName
+                        Dim sheet = form.FormSpreadsheet.Spreadsheet.NewWorksheet(item.Key)
+                        Dim xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value)
+                        xmldoc.Save(tmpfile)
+                        sheet.LoadRGF(tmpfile)
+                        File.Delete(tmpfile)
+                    Next
+                    form.FormSpreadsheet.Spreadsheet.CurrentWorksheet = form.FormSpreadsheet.Spreadsheet.Worksheets(0)
+                Else
+                    Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
+                    Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
+                    If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
+                    If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
+                    form.FormSpreadsheet.CopyFromDT()
+                    form.FormSpreadsheet.EvaluateAll()
+                End If
+            End If
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
         End Try
-
-        If xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet") IsNot Nothing Then
-
-            If xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("CellStyles") IsNot Nothing Then
-                Try
-                    Dim value = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("CellStyles").Value
-                    value = SharedClasses.EncryptString.StringCipher.Decrypt(value, "dwsim")
-                    Dim i As Integer
-                    Dim c1x = XDocument.Parse(value)
-                    i = 0
-                    form.FormSpreadsheet.CellStyles.Clear()
-                    For Each x1 In c1x.Element("Styles").Elements
-                        form.FormSpreadsheet.CellStyles.Add(New List(Of DataGridViewCellStyle))
-                        For Each x2 In x1.Elements
-                            Dim xv = x2.Elements.ToList
-                            If xv.Count > 0 Then
-                                Dim style As New DataGridViewCellStyle
-                                style.Font = New Font(Font, Font.Size)
-                                XMLSerializer.XMLSerializer.Deserialize(style, xv)
-                                form.FormSpreadsheet.CellStyles(i).Add(style)
-                            Else
-                                form.FormSpreadsheet.CellStyles(i).Add(Nothing)
-                            End If
-                        Next
-                        i += 1
-                    Next
-                Catch ex As Exception
-                End Try
-            End If
-
-            If xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RowHeights") IsNot Nothing Then
-                Try
-                    Dim value = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RowHeights").Value
-                    value = SharedClasses.EncryptString.StringCipher.Decrypt(value, "dwsim")
-                    form.FormSpreadsheet.RowHeights = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Integer))(value)
-                Catch ex As Exception
-                End Try
-            End If
-
-            If xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("ColumnWidths") IsNot Nothing Then
-                Try
-                    Dim value = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("ColumnWidths").Value
-                    value = SharedClasses.EncryptString.StringCipher.Decrypt(value, "dwsim")
-                    form.FormSpreadsheet.ColumnWidths = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Integer))(value)
-                Catch ex As Exception
-                End Try
-            End If
-
-            If xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("NumberFormats") IsNot Nothing Then
-                Try
-                    Dim value = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("NumberFormats").Value
-                    value = SharedClasses.EncryptString.StringCipher.Decrypt(value, "dwsim")
-                    form.FormSpreadsheet.NumberFormats = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of List(Of String)))(value)
-                Catch ex As Exception
-                End Try
-            End If
-        End If
 
         For Each obj In form.FormSurface.FlowsheetSurface.DrawingObjects
             If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
@@ -2066,6 +2049,8 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormCharts.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2075,9 +2060,11 @@ Public Class FormMain
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
             form.FormSpreadsheet.DockPanel = Nothing
+            form.FormSpreadsheet.Flowsheet = form
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
             form.FormProps.DockPanel = Nothing
+            form.FormCharts.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 If savedfromclui Then
@@ -2099,6 +2086,7 @@ Public Class FormMain
             Try
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormSpreadsheet.Show(form.dckPanel)
+                form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.FormProps.Show(form.dckPanel)
@@ -2133,13 +2121,6 @@ Public Class FormMain
             form.FormSurface.Invalidate()
 
         End If
-
-        Try
-            form.FormSpreadsheet.EvaluateAll()
-            form.FormSpreadsheet.EvaluateAll()
-        Catch ex As Exception
-            excs.Add(New Exception("Error Updating Spreadsheet Variables", ex))
-        End Try
 
         If excs.Count > 0 Then
             form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
@@ -2499,16 +2480,55 @@ Public Class FormMain
 
         End If
 
+        form.ChartCollection = New Dictionary(Of String, Interfaces.IChart)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClasses.Charts.Chart()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.ChartCollection.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Chart Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
 
         Try
-            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New SpreadsheetForm()
-            Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
-            Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
-            If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
-            If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
-            form.FormSpreadsheet.UpdateColors()
-            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet.UISpreadsheetEditorForm_Load(Me, New EventArgs)
+            If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New FormNewSpreadsheet() With {.Flowsheet = form}
+            If (Not (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet")) Is Nothing) Then
+                Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
+                If (Not (rgfdataelement) Is Nothing) Then
+                    Dim rgfdata As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value
+                    Dim sdict As New Dictionary(Of String, String)
+                    sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
+                    form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
+                    For Each item In sdict
+                        Dim tmpfile = System.IO.Path.GetTempFileName
+                        Dim sheet = form.FormSpreadsheet.Spreadsheet.NewWorksheet(item.Key)
+                        Dim xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value)
+                        xmldoc.Save(tmpfile)
+                        sheet.LoadRGF(tmpfile)
+                        File.Delete(tmpfile)
+                    Next
+                    form.FormSpreadsheet.Spreadsheet.CurrentWorksheet = form.FormSpreadsheet.Spreadsheet.Worksheets(0)
+                Else
+                    Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
+                    Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
+                    If data1 <> "" Then form.FormSpreadsheet.CopyDT1FromString(data1)
+                    If data2 <> "" Then form.FormSpreadsheet.CopyDT2FromString(data2)
+                    form.FormSpreadsheet.CopyFromDT()
+                    form.FormSpreadsheet.EvaluateAll()
+                End If
+            End If
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
         End Try
@@ -2540,6 +2560,8 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormCharts.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2549,6 +2571,7 @@ Public Class FormMain
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
             form.FormSpreadsheet.DockPanel = Nothing
+            form.FormCharts.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
 
@@ -2568,6 +2591,7 @@ Public Class FormMain
             Try
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormSpreadsheet.Show(form.dckPanel)
+                form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
@@ -2927,51 +2951,25 @@ Public Class FormMain
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
         Next
 
-        Try
-            form.FormSpreadsheet.CopyToDT()
-        Catch ex As Exception
-        End Try
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ChartItems"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems")
 
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Spreadsheet"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("Data1"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("Data2"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = form.FormSpreadsheet.CopyDT1ToString()
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = form.FormSpreadsheet.CopyDT2ToString()
-
-        Dim c1x = New XDocument()
-        c1x.Add(New XElement("Styles"))
-        For Each l1 In form.FormSpreadsheet.CellStyles
-            Dim x1l As New XElement("StyleRow")
-            For Each i1 In l1
-                Dim x1 As New XElement("Style")
-                If i1 IsNot Nothing Then
-                    If i1.Font Is Nothing Then i1.Font = New Font(Font, Font.Size)
-                    x1.Add(XMLSerializer.XMLSerializer.Serialize(i1))
-                Else
-                    x1.Add(Nothing)
-                End If
-                x1l.Add(x1)
-            Next
-            c1x.Element("Styles").Add(x1l)
+        For Each ch As SharedClasses.Charts.Chart In form.ChartCollection.Values
+            xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
         Next
 
-        Dim c1 = c1x.ToString
-        Dim c2 = Newtonsoft.Json.JsonConvert.SerializeObject(form.FormSpreadsheet.RowHeights)
-        Dim c3 = Newtonsoft.Json.JsonConvert.SerializeObject(form.FormSpreadsheet.ColumnWidths)
-        Dim c4 = Newtonsoft.Json.JsonConvert.SerializeObject(form.FormSpreadsheet.NumberFormats)
-
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("CellStyles"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("CellStyles").Value = SharedClasses.EncryptString.StringCipher.Encrypt(c1, "dwsim")
-
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("RowHeights"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RowHeights").Value = SharedClasses.EncryptString.StringCipher.Encrypt(c2, "dwsim")
-
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("ColumnWidths"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("ColumnWidths").Value = SharedClasses.EncryptString.StringCipher.Encrypt(c3, "dwsim")
-
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("NumberFormats"))
-        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("NumberFormats").Value = SharedClasses.EncryptString.StringCipher.Encrypt(c4, "dwsim")
-
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Spreadsheet"))
+        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("RGFData"))
+        Dim sdict As New Dictionary(Of String, String)
+        For Each sheet In form.FormSpreadsheet.Spreadsheet.Worksheets
+            Dim tmpfile = System.IO.Path.GetTempFileName
+            sheet.SaveRGF(tmpfile)
+            Dim xmldoc = New XmlDocument()
+            xmldoc.Load(tmpfile)
+            sdict.Add(sheet.Name, Newtonsoft.Json.JsonConvert.SerializeXmlNode(xmldoc))
+            File.Delete(tmpfile)
+        Next
+        xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict)
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PanelLayout"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout")
 
@@ -3787,7 +3785,7 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub ManualTecnicoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManualTecnicoToolStripMenuItem.Click
+    Private Sub ManualTecnicoToolStripMenuItem_Click(sender As Object, e As EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
             With p

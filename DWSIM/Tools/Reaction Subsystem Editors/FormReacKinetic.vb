@@ -139,6 +139,22 @@ Public Class FormReacKinetic
             Me.cbVelUnit.SelectedItem = rc.VelUnit
         End If
 
+        cbReverseEUnits.Items.Clear()
+        cbReverseEUnits.Items.AddRange(su.GetUnitSet(UnitOfMeasure.molar_enthalpy).ToArray())
+        Try
+            cbReverseEUnits.SelectedItem = rc.E_Reverse_Unit
+        Catch ex As Exception
+            cbReverseEUnits.SelectedItem = "J/mol"
+        End Try
+
+        cbForwardEUnits.Items.Clear()
+        cbForwardEUnits.Items.AddRange(su.GetUnitSet(UnitOfMeasure.molar_enthalpy).ToArray())
+        Try
+            cbForwardEUnits.SelectedItem = rc.E_Forward_Unit
+        Catch ex As Exception
+            cbForwardEUnits.SelectedItem = "J/mol"
+        End Try
+
         loaded = True
 
         Select Case mode
@@ -292,6 +308,9 @@ Public Class FormReacKinetic
             rc.A_Reverse = Me.tbRevA.Text
             rc.E_Forward = Me.tbFwdE.Text
             rc.E_Reverse = Me.tbRevE.Text
+
+            rc.E_Forward_Unit = cbForwardEUnits.SelectedItem.ToString
+            rc.E_Reverse_Unit = cbReverseEUnits.SelectedItem.ToString
 
             rc.ReactionKinFwdExpression = tbFwdUE.Text
             rc.ReactionKinRevExpression = tbRevUE.Text

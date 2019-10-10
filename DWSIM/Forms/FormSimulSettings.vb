@@ -1455,6 +1455,9 @@ Public Class FormSimulSettings
                             Next
                         Next
                         ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                        ogc1.ClearSelection()
+                        ogc1.Rows(ogc1.Rows.Count - 1).Selected = True
+                        ogc1.FirstDisplayedScrollingRowIndex = ogc1.Rows.Count - 1
                     Else
                         MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
@@ -1588,6 +1591,25 @@ Public Class FormSimulSettings
     Private Sub cbOrderCompoundsBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOrderCompoundsBy.SelectedIndexChanged
         FrmChild.Options.CompoundOrderingMode = cbOrderCompoundsBy.SelectedIndex
         FrmChild.UpdateOpenEditForms()
+    End Sub
+
+    Private Sub BtnCloneSI_Click(sender As Object, e As EventArgs) Handles btnCloneSI.Click
+
+        Dim newsu = Newtonsoft.Json.JsonConvert.DeserializeObject(Of SystemsOfUnits.Units)(Newtonsoft.Json.JsonConvert.SerializeObject(FrmChild.Options.SelectedUnitSystem))
+
+        Dim cnt As Integer = 1
+        While FormMain.AvailableUnitSystems.ContainsKey(newsu.Name)
+            newsu.Name = FrmChild.Options.SelectedUnitSystem.Name & "_" & cnt.ToString
+            cnt += 1
+        End While
+
+        FrmChild.AddUnitSystem(newsu)
+        FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
+                                             .NewValue = newsu,
+                                             .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), newsu.Name)})
+
+        ComboBox2.SelectedIndex = ComboBox2.Items.Count - 1
+
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

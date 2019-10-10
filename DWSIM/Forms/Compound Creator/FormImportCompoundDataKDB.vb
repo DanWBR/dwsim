@@ -74,7 +74,7 @@ Public Class FormImportCompoundKDB
                                                         btnNext.Enabled = False
                                                     End If
                                                 Else
-                                                    MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundOnlineSourceError"), DWSIM.App.GetLocalString("Erro"))
                                                 End If
                                             End Sub)
                                End Sub)
@@ -123,7 +123,7 @@ Public Class FormImportCompoundKDB
                                                     compound = t.Result
                                                     AddPropertiesToGrid()
                                                 Else
-                                                    MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundOnlineSourceError"), DWSIM.App.GetLocalString("Erro"))
                                                 End If
 
                                             End Sub)

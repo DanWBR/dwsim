@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class DWSIM
@@ -2153,6 +2153,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O DWSIM não pôde recuperar os dados da substância solicitada no banco de dados online. Ou a substância não existe neste banco ou houve algum outro erro desconhecido..
+        '''</summary>
+        Friend Shared ReadOnly Property CompoundOnlineSourceError() As String
+            Get
+                Return ResourceManager.GetString("CompoundOnlineSourceError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Substâncias / Fases.
         '''</summary>
         Friend Shared ReadOnly Property CompoundsPhases() As String
@@ -2554,6 +2563,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ConfirmOperation() As String
             Get
                 Return ResourceManager.GetString("ConfirmOperation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Propriedades Constantes.
+        '''</summary>
+        Friend Shared ReadOnly Property ConstantProperties() As String
+            Get
+                Return ResourceManager.GetString("ConstantProperties", resourceCulture)
             End Get
         End Property
         
@@ -11049,6 +11067,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PhaseIdentificationParameter() As String
             Get
                 Return ResourceManager.GetString("PhaseIdentificationParameter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Propriedades da Fase.
+        '''</summary>
+        Friend Shared ReadOnly Property PhaseProperties() As String
+            Get
+                Return ResourceManager.GetString("PhaseProperties", resourceCulture)
             End Get
         End Property
         

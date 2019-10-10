@@ -64,7 +64,7 @@ namespace DWSIM.UI
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             var bgcolor = new Color(0.051f, 0.447f, 0.651f);
-            
+
             if (s.DarkMode) bgcolor = SystemColors.ControlBackground;
 
             Eto.Style.Add<Button>("main", button =>
@@ -88,13 +88,13 @@ namespace DWSIM.UI
             });
 
             var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn3 = new Button() { Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn6 = new Button() { Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn6 = new Button() { Style = "main", Text = "User Guide".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
             var btn8 = new Button() { Style = "donate", Text = "Become a Patron", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-patreon.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "VerticalSettingsMixer_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "ReportCard_96px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
 
             btn9.Click += (sender, e) =>
             {
@@ -103,7 +103,8 @@ namespace DWSIM.UI
 
             btn6.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br/docs/crossplatform/help/");
+                var basepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Process.Start(basepath + Path.DirectorySeparatorChar + "docs" + Path.DirectorySeparatorChar + "user_guide.pdf");
             };
 
             btn1.Click += (sender, e) =>
@@ -236,7 +237,7 @@ namespace DWSIM.UI
                     }
                 });
             });
-            
+
             FoldersList.SelectedIndexChanged += (sender, e) =>
             {
                 if (FoldersList.SelectedIndex >= 0)
@@ -292,7 +293,8 @@ namespace DWSIM.UI
                         var address = FOSSEEList.SelectedKey;
                         Task.Factory.StartNew(() =>
                         {
-                            return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(address, (p) => {
+                            return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(address, (p) =>
+                            {
                                 Application.Instance.Invoke(() => loadingdialog.loadingtext.Text = "Please wait, downloading file... (" + p + "%)\n(" + address + ")");
                             });
                         }).ContinueWith((t) =>
@@ -391,10 +393,11 @@ namespace DWSIM.UI
                 new Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
-            var hitem1 = new ButtonMenuItem { Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
+            var hitem1 = new ButtonMenuItem { Text = "User Guide".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem1.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br/docs/crossplatform/help/");
+                var basepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Process.Start(basepath + Path.DirectorySeparatorChar + "docs" + Path.DirectorySeparatorChar + "user_guide.pdf");
             };
 
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };

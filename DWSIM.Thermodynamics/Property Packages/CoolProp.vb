@@ -49,10 +49,6 @@ Namespace PropertyPackages
 
             GetListOfSupportedCompounds()
 
-            With Me.Parameters
-                .Item("PP_USEEXPLIQDENS") = 1
-            End With
-
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 

@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Enums.vb" />
     <Compile Include="IAttachedUtility.vb" />
+    <Compile Include="IChart.vb" />
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
     <Compile Include="ICustomXMLSerialization.vb" />

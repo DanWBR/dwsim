@@ -69,7 +69,8 @@ Public Class FormFlowsheet
     Public FormSurface As New FlowsheetSurface_SkiaSharp
     Public FormLog As New LogPanel
     Public FormMatList As New MaterialStreamPanel
-    Public FormSpreadsheet As New SpreadsheetForm
+    Public FormSpreadsheet As New FormNewSpreadsheet
+    Public FormCharts As New FormCharts
 
     Public FormProps As New frmProps
 
@@ -84,6 +85,8 @@ Public Class FormFlowsheet
     Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
     Public ScriptCollection As Dictionary(Of String, IScript)
+
+    Public ChartCollection As New Dictionary(Of String, IChart)
 
     Public CheckedToolstripButton As ToolStripButton
     Public ClickedToolStripMenuItem As ToolStripMenuItem
@@ -147,7 +150,11 @@ Public Class FormFlowsheet
 
     Private Sub FormChild_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        FormCharts.Flowsheet = Me
+        FormSpreadsheet.Flowsheet = Me
+
         Me.MdiParent = FormMain
+
         If DWSIM.App.IsRunningOnMono Then
             'Me.FlowLayoutPanel1.AutoSize = False
             'Me.FlowLayoutPanel1.Height = 50
@@ -235,6 +242,7 @@ Public Class FormFlowsheet
             FormSpreadsheet.DockPanel = Nothing
             FormWatch.DockPanel = Nothing
             FormSurface.DockPanel = Nothing
+            FormCharts.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -243,6 +251,7 @@ Public Class FormFlowsheet
             FormSurface.Show(dckPanel)
             FormMatList.Show(FormSurface.Pane, Nothing)
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
+            FormCharts.Show(FormSurface.Pane, Nothing)
             FormWatch.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
 
@@ -265,6 +274,12 @@ Public Class FormFlowsheet
 
         If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
 
+        Dim fs As New FormScript
+        fs.fc = Me
+        fs.Show(Me.dckPanel)
+
+        FormSurface.Activate()
+
     End Sub
 
     Function ReturnForm(ByVal str As String) As IDockContent
@@ -281,6 +296,8 @@ Public Class FormFlowsheet
                 Return Me.FormWatch
             Case "DWSIM.frmProps"
                 Return Me.FormProps
+            Case "DWSIM.FormCharts"
+                Return Me.FormCharts
         End Select
         Return Nothing
     End Function
@@ -1131,12 +1148,6 @@ Public Class FormFlowsheet
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
         Dim frmdc As New DCCharacterizationWizard
         frmdc.ShowDialog(Me)
-    End Sub
-
-    Private Sub IronRubyToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IronRubyToolStripMenuItem.Click
-        Dim fs As New FormScript
-        fs.fc = Me
-        fs.Show(Me.dckPanel)
     End Sub
 
     Private Sub ExibirRelatoriosDosObjetosCAPEOPENToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles COObjTSMI.CheckedChanged
@@ -2163,9 +2174,7 @@ Public Class FormFlowsheet
 
                     Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.Tag, Thermodynamics.PropertyPackages.PropertyPackage)
 
-                    If act.PropertyName = "PARAM" Then
-                        pp.Parameters(act.ObjID) = pval
-                    ElseIf act.PropertyName = "PR_IP" Then
+                    If act.PropertyName = "PR_IP" Then
                         Dim prip As PengRobinson = pp.GetType.GetField("m_pr").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
                     ElseIf act.PropertyName = "PRSV2_KIJ" Then
@@ -2283,13 +2292,13 @@ Public Class FormFlowsheet
 
                     Dim cell = FormSpreadsheet.GetCellValue(act.ObjID)
                     If undo Then
-                        cell.Value = act.OldValue(0)
+                        cell.Data = act.OldValue(0)
                         cell.Tag = act.OldValue(1)
                     Else
-                        cell.Value = act.NewValue(0)
+                        cell.Data = act.NewValue(0)
                         cell.Tag = act.NewValue(1)
                     End If
-                    FormSpreadsheet.EvaluateAll(cell)
+                    FormSpreadsheet.Spreadsheet.Worksheets(0).Recalculate()
 
             End Select
 
@@ -2548,22 +2557,22 @@ Public Class FormFlowsheet
         firstcell = range.Split(":")(0)
         lastcell = range.Split(":")(1)
 
-        firstrow = FormSpreadsheet.GetCellValue(firstcell).RowIndex
-        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).ColumnIndex
+        firstrow = FormSpreadsheet.GetCellValue(firstcell).Row
+        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).Column
 
-        lastrow = FormSpreadsheet.GetCellValue(lastcell).RowIndex
-        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).ColumnIndex
+        lastrow = FormSpreadsheet.GetCellValue(lastcell).Row
+        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).Column
 
         Dim data As New List(Of String())
 
         Dim i, j As Integer
 
-        Dim grid = FormSpreadsheet.DataGridView1
+        Dim grid = FormSpreadsheet.Spreadsheet.Worksheets(0)
 
         For i = firstrow To lastrow
             Dim sublist = New List(Of String)
             For j = firstcolumn To lastcolumn
-                Dim val = grid.Rows(i).Cells(j).Value
+                Dim val = grid.Cells(i, j).Data
                 If val Is Nothing Then
                     sublist.Add("")
                 Else
@@ -2894,10 +2903,7 @@ Public Class FormFlowsheet
                             Me.FormWatch.UpdateList()
 
                             If Not Me.FormSpreadsheet Is Nothing Then
-                                If Me.FormSpreadsheet.chkUpdate.Checked Then
-                                    Me.FormSpreadsheet.EvaluateAll()
-                                    Me.FormSpreadsheet.EvaluateAll()
-                                End If
+                                Me.FormSpreadsheet.EvaluateAll()
                             End If
 
                             'Application.DoEvents()
@@ -2911,7 +2917,7 @@ Public Class FormFlowsheet
 
         Try
             Me.UIThread(Sub()
-                            If FormSpreadsheet IsNot Nothing AndAlso FormSpreadsheet.chkUpdate.Checked Then Me.FormSpreadsheet.EvaluateAll()
+                            If FormSpreadsheet IsNot Nothing Then Me.FormSpreadsheet.EvaluateAll()
                         End Sub)
         Catch ex As Exception
             WriteToLog("Error updating spreadsheet: " & ex.Message.ToString, Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
@@ -2922,7 +2928,7 @@ Public Class FormFlowsheet
     Public Sub WriteSpreadsheetVariables(act As Action) Implements IFlowsheet.WriteSpreadsheetVariables
         Me.UIThread(Sub()
                         If FormSpreadsheet IsNot Nothing Then
-                            Me.FormSpreadsheet.formc = Me
+                            Me.FormSpreadsheet.Flowsheet = Me
                             Me.FormSpreadsheet.WriteAll()
                         End If
                     End Sub)
@@ -3004,6 +3010,16 @@ Public Class FormFlowsheet
         End Get
         Set(value As Dictionary(Of String, ICompoundConstantProperties))
             FormMain.AvailableComponents = value
+        End Set
+    End Property
+
+    Public Property Charts As Dictionary(Of String, IChart) Implements IFlowsheet.Charts
+        Get
+            If ChartCollection Is Nothing Then ChartCollection = New Dictionary(Of String, IChart)
+            Return ChartCollection
+        End Get
+        Set(value As Dictionary(Of String, IChart))
+            ChartCollection = value
         End Set
     End Property
 

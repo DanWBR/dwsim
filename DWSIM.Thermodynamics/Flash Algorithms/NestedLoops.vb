@@ -41,6 +41,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
+        Private CalculatingAzeotrope As Boolean = False
+
         Sub New()
             MyBase.New()
             Order = 1
@@ -1784,7 +1786,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim L, Lf, Vf, T, Tf, deltaT, epsilon, df, maxdT As Double
+            Dim L, Lf, Vf, T, Tf, deltaT, deltaT_ant, epsilon, df, maxdT As Double
             Dim e1 As Double
 
             d1 = Date.Now
@@ -1895,7 +1897,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             End If
 
             Dim marcador3, marcador2, marcador As Integer
-            Dim stmp4_ant, stmp4, Tant, fval As Double
+            Dim stmp4_ant, stmp4, Tant, fval, fval_ant As Double
             Dim chk As Boolean = False
 
             If V = 1.0# Or V = 0.0# Then
@@ -1998,6 +2000,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     IObj2?.Paragraphs.Add(String.Format("dK/dT: {0}", dKdT.ToMathArrayString))
 
+                    fval_ant = fval
                     fval = stmp4 - 1
 
                     ecount += 1
@@ -2014,16 +2017,28 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Loop Until i = n + 1
 
                     Tant = T
+                    deltaT_ant = deltaT
                     deltaT = -df * fval / dFdT
 
                     IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
 
                     If Abs(deltaT) < etol / 1000 And ecount > 5 Then Exit Do
 
-                    If Abs(deltaT) > maxdT Then
-                        T = T + Sign(deltaT) * maxdT
+                    If Sign(fval) <> Sign(fval_ant) And ecount > 20 And Vx.Length = 2 And Not CalculatingAzeotrope Then
+                        'azeotrope
+                        T = Flash_PV_Azeotrope_Temperature(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                        If V = 0 Then
+                            Vy = Vx.Clone
+                        Else
+                            Vx = Vy.Clone
+                        End If
+                        Exit Do
                     Else
-                        T = T + deltaT
+                        If Abs(deltaT) > maxdT Then
+                            T = T + Sign(deltaT) * maxdT
+                        Else
+                            T = T + deltaT
+                        End If
                     End If
 
                     IObj2?.Paragraphs.Add(String.Format("Updated Temperature: {0} K", T))
@@ -2186,6 +2201,36 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
+
+        Public Function Flash_PV_Azeotrope_Temperature(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Double
+
+            Dim T, dx, validdx As New List(Of Double)
+            Dim T0 As Double = Tref
+            Dim xaz As Double = Vz(0)
+
+            For i = 0 To 100 Step 10
+                dx.Add(i / 100)
+            Next
+
+            CalculatingAzeotrope = True
+
+            For Each item In dx
+                Try
+                    T.Add(Flash_PV(New Double() {item, 1 - item}, P, V, T0, PP, True, PrevKi)(4))
+                    T0 = T.Last
+                    validdx.Add(item)
+                Catch ex As Exception
+                End Try
+            Next
+
+            CalculatingAzeotrope = False
+
+            Dim Taz = DWSIM.MathOps.MathEx.Interpolation.polinterpolation.nevilleinterpolation(validdx.ToArray, T.ToArray, T.Count - 1, xaz)
+
+            Return Taz
+
+        End Function
+
 
         Function OBJ_FUNC_PH_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 

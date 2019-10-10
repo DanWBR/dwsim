@@ -96,7 +96,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var _rx = new Reaction("NewKinReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Kinetic };
                 var myview = s.GetDefaultContainer();
                 var cre = new KineticReaction(flowsheet, _rx, myview);
-                var alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 850, 650, myview);
+                var alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 850, 700, myview);
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
@@ -221,7 +221,7 @@ namespace DWSIM.UI.Desktop.Editors
                             case Interfaces.Enums.ReactionType.Kinetic:
                                 var myview3 = s.GetDefaultContainer();
                                 var cre3 = new KineticReaction(flowsheet, rx, myview3);
-                                var alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 850, 650, myview3);
+                                var alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 850, 700, myview3);
                                 myview3.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert3.Close(),
                                 (sender2, e2) =>
                                 {

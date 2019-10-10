@@ -118,7 +118,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] reactionbasis()
         {
-            return new String[] { "Activity", "Fugacity", "Molar Concentration", "Mass Concentration", "Molar Fraction", "Mass Fraction", "Partial Pressure" };
+            return new String[] { "Activity", "Fugacity", "Mass Concentration", "Mass Fraction", "Molar Concentration", "Molar Fraction", "Partial Pressure" };
         }
         public static String[] insulationmaterial()
         {

@@ -141,7 +141,7 @@ Public Class XMLSerializer
                                     End If
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
-                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As ArrayList = StringToArray(xel.Value, ci)
                                 If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Byte Then
@@ -156,6 +156,60 @@ Public Class XMLSerializer
                                     Dim val As Date = Date.Parse(xel.Value, CultureInfo.InvariantCulture)
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is OxyPlot.OxyColor Then
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                If Not xel Is Nothing Then
+                                    Dim val As OxyPlot.OxyColor = OxyPlot.OxyColor.Parse(xel.Value)
+                                    obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                End If
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is List(Of String) Then
+                                Try
+                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                    If Not xel Is Nothing Then
+                                        Dim list As New List(Of String)
+                                        For Each el In xel.Elements
+                                            list.Add(el.Value)
+                                        Next
+                                        obj.GetType.GetProperty(prop.Name).SetValue(obj, list, Nothing)
+                                    End If
+                                Catch ex As Exception
+                                End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is List(Of Double) Then
+                                Try
+                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                    If Not xel Is Nothing Then
+                                        Dim list As New List(Of Double)
+                                        For Each el In xel.Elements
+                                            list.Add(Double.Parse(el.Value, ci))
+                                        Next
+                                        obj.GetType.GetProperty(prop.Name).SetValue(obj, list, Nothing)
+                                    End If
+                                Catch ex As Exception
+                                End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Dictionary(Of String, String) Then
+                                Try
+                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                    If Not xel Is Nothing Then
+                                        Dim list As New Dictionary(Of String, String)
+                                        For Each el In xel.Elements
+                                            list.Add(el.Attribute("Key"), el.Attribute("Value"))
+                                        Next
+                                        obj.GetType.GetProperty(prop.Name).SetValue(obj, list, Nothing)
+                                    End If
+                                Catch ex As Exception
+                                End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Dictionary(Of String, Double) Then
+                                Try
+                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                    If Not xel Is Nothing Then
+                                        Dim list As New Dictionary(Of String, Double)
+                                        For Each el In xel.Elements
+                                            list.Add(el.Attribute("Key"), Double.Parse(el.Attribute("Value"), ci))
+                                        Next
+                                        obj.GetType.GetProperty(prop.Name).SetValue(obj, list, Nothing)
+                                    End If
+                                Catch ex As Exception
+                                End Try
                             End If
                         End If
                     End If
@@ -340,6 +394,44 @@ Public Class XMLSerializer
                                 .Add(New XElement(prop.Name, obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Date Then
                                 .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Date).ToString(CultureInfo.InvariantCulture)))
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is OxyPlot.OxyColor Then
+                                .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), OxyPlot.OxyColor).ToString()))
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is List(Of String) Then
+                                Try
+                                    Dim inner_elements As New List(Of XElement)
+                                    For Each item In DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), List(Of String))
+                                        inner_elements.Add(New XElement("Item", item))
+                                    Next
+                                    .Add(New XElement(prop.Name, inner_elements))
+                                Catch ex As Exception
+                                End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is List(Of Double) Then
+                                Try
+                                    Dim inner_elements As New List(Of XElement)
+                                    For Each item In DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), List(Of Double))
+                                        inner_elements.Add(New XElement("Item", item.ToString(ci)))
+                                    Next
+                                    .Add(New XElement(prop.Name, inner_elements))
+                                Catch ex As Exception
+                                End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Dictionary(Of String, String) Then
+                                Try
+                                    Dim inner_elements As New List(Of XElement)
+                                    For Each item In DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Dictionary(Of String, String))
+                                        inner_elements.Add(New XElement("Item", New XAttribute("Key", item.Key), New XAttribute("Value", item.Value)))
+                                    Next
+                                    .Add(New XElement(prop.Name, inner_elements))
+                                Catch ex As Exception
+                                End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Dictionary(Of String, Double) Then
+                                Try
+                                    Dim inner_elements As New List(Of XElement)
+                                    For Each item In DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Dictionary(Of String, Double))
+                                        inner_elements.Add(New XElement("Item", New XAttribute("Key", item.Key), New XAttribute("Value", item.Value.ToString(ci))))
+                                    Next
+                                    .Add(New XElement(prop.Name, inner_elements))
+                                Catch ex As Exception
+                                End Try
                             End If
                         End If
                     End If

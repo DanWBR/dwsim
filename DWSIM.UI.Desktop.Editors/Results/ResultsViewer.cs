@@ -83,7 +83,7 @@ namespace DWSIM.UI.Desktop.Editors
             lbObjects.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             txtResults = new TextArea { ReadOnly = true };
-            txtResults.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", Common.GetEditorFontSize()) : Fonts.Monospace(Common.GetEditorFontSize());
+            txtResults.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", DWSIM.UI.Shared.Common.GetEditorFontSize()) : Fonts.Monospace(DWSIM.UI.Shared.Common.GetEditorFontSize());
 
             centercontainer.Rows.Add(new TableRow(lbObjects, txtResults));
             centercontainer.Padding = new Padding(5, 5, 5, 5);

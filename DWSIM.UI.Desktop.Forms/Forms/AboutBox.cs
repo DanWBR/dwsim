@@ -107,6 +107,9 @@ namespace DWSIM.UI.Forms.Forms
                     case "18.0.0.0": osinfo = "macOS Mojave (v10.14.0)"; break;
                     case "18.2.0.0": osinfo = "macOS Mojave (v10.14.1-3)"; break;
                     case "18.5.0.0": osinfo = "macOS Mojave (v10.14.4)"; break;
+                    case "18.6.0.0": osinfo = "macOS Mojave (v10.14.5)"; break;
+                    case "18.7.0.0": osinfo = "macOS Mojave (v10.14.6)"; break;
+                    case "19.0.0.0": osinfo = "macOS Catalina (v10.15)"; break;
                     default: osinfo = "macOS (v" + osversion + ")"; break;
                 }
             }
@@ -122,11 +125,11 @@ namespace DWSIM.UI.Forms.Forms
 
             container1.CreateAndAddTwoLabelsRow2("Developer/Mantainer:", "Daniel Medeiros (dwsim@inforside.com.br)");
             container1.CreateAndAddTwoLabelsRow2("Contributors:", "Gregor Reichert, Gustavo León and others");
-            container1.CreateAndAddTwoLabelsRow2("Splash Screen Design:", "Wendel Marcus (www.behance.net/wendelmarcus)");
+            container1.CreateAndAddTwoLabelsRow2("Splash Screen Design:", "Wendel Azevedo (www.behance.net/wendelmarcus)");
             container1.CreateAndAddTwoLabelsRow2("OS Info:", osinfo);
             container1.CreateAndAddTwoLabelsRow2("CLR Info:", clrinfo);
             container1.CreateAndAddTwoLabelsRow2("Memory Usage:", meminfo);
-            container1.CreateAndAddLabelRow("DWSIM is released under the terms of the GNU General Public License (GPL) version 3.");
+            container1.CreateAndAddLabelRow3("DWSIM is released under the terms of the GNU General Public License (GPL) version 3.");
             
             var listcontainer = new GridView { DataStore = components, RowHeight = (int)(sf * 20) };
             var listcontainern = new GridView { DataStore = componentsn, RowHeight = (int)(sf * 20) };
@@ -251,6 +254,12 @@ namespace DWSIM.UI.Forms.Forms
             components.Add(new ComponentInfo("Eto.Forms", "2.4.1", "2018", "Curtis Wensley", "https://github.com/picoe/Eto", "BSD-3 License", "http://opensource.org/licenses/BSD-3-Clause"));
             components.Add(new ComponentInfo("OxyPlot", "2.0", "2017", "OxyPlot team", "http://www.oxyplot.org", "MIT License", "http://www.opensource.org/licenses/mit-license.html"));
             components.Add(new ComponentInfo("SkiaSharp", "1.56.0", "2018", "Xamarin team", "https://github.com/mono/SkiaSharp/", "MIT License", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
+            components.Add(new ComponentInfo("Eto.Forms", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
+            components.Add(new ComponentInfo("Eto.Platform.Gtk2", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
+            components.Add(new ComponentInfo("Eto.Platform.Windows", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
+            components.Add(new ComponentInfo("Eto.Platform.Wpf", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
+            components.Add(new ComponentInfo("Eto.Platform.XamMac2", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
+            components.Add(new ComponentInfo("ReoGrid", "custom version", "2019", "", "https://github.com/DanWBR/ReoGrid", "MIT-style License", "https://github.com/DanWBR/ReoGrid/blob/master/LICENSE"));
         }
 
         private void AddComponentInfoN()
@@ -261,13 +270,6 @@ namespace DWSIM.UI.Forms.Forms
             componentsn.Add(new ComponentInfo("CefSharp.Common", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
             componentsn.Add(new ComponentInfo("CefSharp.WinForms", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
             componentsn.Add(new ComponentInfo("DynamicLanguageRuntime", "1.2.2", "https://github.com/IronLanguages/dlr/blob/master/LICENSE"));
-            componentsn.Add(new ComponentInfo("Eto.Forms", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("Eto.OxyPlot", "1.2.0-beta", ""));
-            componentsn.Add(new ComponentInfo("Eto.OxyPlot.Wpf", "1.2.0-beta", ""));
-            componentsn.Add(new ComponentInfo("Eto.Platform.Gtk2", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("Eto.Platform.Windows", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("Eto.Platform.Wpf", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("Eto.Platform.XamMac2", "2.5.0-ci-10123", "https://github.com/picoe/Eto/raw/master/LICENSE.txt"));
             componentsn.Add(new ComponentInfo("IronPython", "2.7.9", "https://github.com/IronLanguages/ironpython2/blob/master/LICENSE"));
             componentsn.Add(new ComponentInfo("IronPython.StdLib", "2.7.9", "http://docs.python.org/license.html"));
             componentsn.Add(new ComponentInfo("jacobslusser.ScintillaNET", "3.6.3", ""));
@@ -286,7 +288,8 @@ namespace DWSIM.UI.Forms.Forms
             componentsn.Add(new ComponentInfo("SkiaSharp.Extended", "1.6.", "https://github.com/mono/SkiaSharp.Extended/blob/master/LICENSE"));
             componentsn.Add(new ComponentInfo("System.ComponentModel", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
             componentsn.Add(new ComponentInfo("System.Runtime.Serialization.Primitives", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
-
+            componentsn.Add(new ComponentInfo("Eto.OxyPlot", "1.2.0-beta", ""));
+            componentsn.Add(new ComponentInfo("Eto.OxyPlot.Wpf", "1.2.0-beta", ""));
         }
 
         public class ComponentInfo

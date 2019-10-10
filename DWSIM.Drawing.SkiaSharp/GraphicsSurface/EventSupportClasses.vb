@@ -26,6 +26,8 @@ Public Enum StatusUpdateType
     FileLoaded = 4
     FileSaved = 5
     SelectionChanged = 6
+    ObjectAdded = 7
+    ObjectRenamed = 8
 End Enum
 
 Public Class StatusUpdateEventArgs

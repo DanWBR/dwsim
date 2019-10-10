@@ -182,10 +182,6 @@
   <data name="&gt;&gt;sfd1.Name" xml:space="preserve">
     <value>sfd1</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ListBox1.HorizontalScrollbar" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;CopyToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -194,6 +190,9 @@
   </data>
   <data name="CutToolStripButton.Text" xml:space="preserve">
     <value>&amp;Recortar</value>
+  </data>
+  <data name="SetPropertyTSMI.Text" xml:space="preserve">
+    <value>Definir Propriedade</value>
   </data>
   <data name="CopyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -209,8 +208,8 @@
         bVQcay2UW9h3+FZ5wX9Cp/sJHQDnDCBJADYAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="CutToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;imageList1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -218,11 +217,15 @@
   <data name="TabStripScripts.Size" type="System.Drawing.Size, System.Drawing">
     <value>900, 412</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DockTopToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="SetPropertyTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
   </data>
   <data name="PasteToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -254,9 +257,6 @@
   <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="HelpToolStripButton.Text" xml:space="preserve">
-    <value>Ajuda</value>
-  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -265,9 +265,6 @@
   </data>
   <data name="DocumentToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="HelpToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="ToolStrip1.Text" xml:space="preserve">
     <value>ToolStrip1</value>
@@ -282,13 +279,13 @@
     <value>23, 22</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7136.32296, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7212.25780, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
     <value>ToolStrip1</value>
   </data>
-  <data name="treeViewItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 300</value>
+  <data name="CutToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="&gt;&gt;dckMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1770,20 +1767,20 @@
   <data name="DockLeftToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="&gt;&gt;GetPropertyTSMI.Name" xml:space="preserve">
+    <value>GetPropertyTSMI</value>
+  </data>
   <data name="&gt;&gt;btnStopDebug.Name" xml:space="preserve">
     <value>btnStopDebug</value>
   </data>
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockTopAutoHideToolStripMenuItem</value>
   </data>
-  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 224</value>
-  </data>
   <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7136.32296, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7212.25780, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="btnComment.Text" xml:space="preserve">
     <value>Comentar linhas</value>
@@ -1804,7 +1801,7 @@
     <value>False</value>
   </data>
   <data name="&gt;&gt;TabStripScripts.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7136.32296, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7212.25780, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnRedo.Name" xml:space="preserve">
     <value>btnRedo</value>
@@ -1830,8 +1827,8 @@
   <data name="DockBottomToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;NewToolStripButton.Name" xml:space="preserve">
-    <value>NewToolStripButton</value>
+  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dckMenu.Name" xml:space="preserve">
     <value>dckMenu</value>
@@ -1895,14 +1892,17 @@
   <data name="APIHelptsbutton.Text" xml:space="preserve">
     <value>Ajuda da API</value>
   </data>
-  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 224</value>
   </data>
   <data name="&gt;&gt;btnRunDebug.Name" xml:space="preserve">
     <value>btnRunDebug</value>
   </data>
   <data name="&gt;&gt;btnUndo.Name" xml:space="preserve">
     <value>btnUndo</value>
+  </data>
+  <data name="tsTextBoxRename.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="btnRun.Text" xml:space="preserve">
     <value>Executar Script</value>
@@ -1923,7 +1923,7 @@
     <value>196, 22</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7136.32296, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7212.25780, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DockTopToolStripMenuItem.Name" xml:space="preserve">
     <value>DockTopToolStripMenuItem</value>
@@ -1973,15 +1973,15 @@
   <data name="PrintToolStripButton.Text" xml:space="preserve">
     <value>&amp;Imprimir</value>
   </data>
-  <data name="HelpToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="ListBox1.HorizontalScrollbar" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABu
-        CQAAAk1TRnQBSQFMAgEBBQEAAWQBAwGEAQMBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBBQEAAZwBAwG8AQMBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2033,6 +2033,9 @@
   <data name="&gt;&gt;SaveToolStripButton.Name" xml:space="preserve">
     <value>SaveToolStripButton</value>
   </data>
+  <data name="GetPropertyTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
   <data name="TabStripScripts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
@@ -2074,6 +2077,9 @@
         RU5ErkJggg==
 </value>
   </data>
+  <data name="&gt;&gt;SetPropertyTSMI.Name" xml:space="preserve">
+    <value>SetPropertyTSMI</value>
+  </data>
   <data name="sfd1.Title" xml:space="preserve">
     <value>Salvar script</value>
   </data>
@@ -2107,9 +2113,6 @@
   <data name="&gt;&gt;btnComment.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbInsertSnippet.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
   <data name="tsbInsertSnippet.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 22</value>
   </data>
@@ -2131,8 +2134,8 @@
   <data name="&gt;&gt;btnComment.Name" xml:space="preserve">
     <value>btnComment</value>
   </data>
-  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 300</value>
+  <data name="&gt;&gt;NewToolStripButton.Name" xml:space="preserve">
+    <value>NewToolStripButton</value>
   </data>
   <data name="&gt;&gt;tscb2.Name" xml:space="preserve">
     <value>tscb2</value>
@@ -2167,9 +2170,6 @@
   <data name="btnIdentRemove.Text" xml:space="preserve">
     <value>Remover indentação</value>
   </data>
-  <data name="&gt;&gt;HelpToolStripButton.Name" xml:space="preserve">
-    <value>HelpToolStripButton</value>
-  </data>
   <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
     <value>ToolStripLabel1</value>
   </data>
@@ -2181,9 +2181,6 @@
   </data>
   <data name="&gt;&gt;btnRun.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;imageList1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;treeViewItems.Parent" xml:space="preserve">
     <value>FaTabStripItem5</value>
@@ -2206,8 +2203,8 @@
   <data name="tsTextBoxRename.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItem3.Name" xml:space="preserve">
-    <value>FaTabStripItem3</value>
+  <data name="tsbInsertSnippet.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -2218,8 +2215,8 @@
   <data name="&gt;&gt;btnIdentRemove.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnUndo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="treeViewItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 300</value>
   </data>
   <data name="&gt;&gt;APIHelptsbutton.Name" xml:space="preserve">
     <value>APIHelptsbutton</value>
@@ -2253,6 +2250,12 @@
   </data>
   <data name="&gt;&gt;btnRunAsync.Name" xml:space="preserve">
     <value>btnRunAsync</value>
+  </data>
+  <data name="&gt;&gt;GetPropertyTSMI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SetPropertyTSMI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Name" xml:space="preserve">
     <value>FaTabStripItem4</value>
@@ -2293,20 +2296,8 @@
   <data name="btnComment.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="HelpToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAAhVJREFUOE+1Uk1rE1EUzU/IT5ifUBRcuMrS5aANZBnBRRcqwYUEQRwKQjCoESka
-        LJ2xKjaS6mxqx2jtiLa2iHSwVmMbkmmJmjbT9OlU6YfmeO+bwFhqERceOLz73rxz7nmXifwXTMz6uFVa
-        QeZ2Db0D8+grVjDy4iM6n/fGm+oGCuMt6KVluM0tfFnfhvC3qN7ExUIZGd1B6eXSn41YfM9eg/etDdsB
-        tCFAzQTk2nYEqmttnOubxMizym4T7rz6vQ3DBmJpwLAAsQEJVwCp63wmUCOTU9knOw0m3q7j4UxLdmYx
-        X2aYU0AyF6xsFksLqgV06x3yhVehyZ3HTXwSP2TUWCqInTOBLqqVHoFUjiIQVE0gmXEwX/Vx9MxwaJC9
-        uyQHpmqBqKsnoEJMkpi722UBRbWhJGw0PB8H4ldDg/M3qzTtbRk/ENLlpKAkQWfTpj0Jo6pJq4lG8yv2
-        qZdDg/z9Gha9TXp7IFQSrmRuKDCIqg4xMFDTNsqVOrpPGKHB6ORnWI4nB8TCaIIFDj3JpbnQnsWHTEnD
-        cjFszeHCjbHQgJEdnMWC95O6dgRErmWCjlgzHHxY8XDkuL5TzBibrqM3P41qi/4F6qJqjnw3k2s+W6iv
-        Ik7RB4pTuw0Yo89rOH1pHMaj95iZW8QyTbvR9OWbOXY3ddb3Ev+O/uJrHDv7AAcT17D/8BXETw4i2//0
-        78J/RyTyC53a8qzC7E1mAAAAAElFTkSuQmCC
-</value>
+  <data name="btnUndo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="&gt;&gt;TabStripScripts.Name" xml:space="preserve">
     <value>TabStripScripts</value>
@@ -2347,11 +2338,14 @@
   <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;HelpToolStripButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
   </data>
   <data name="&gt;&gt;DockRightToolStripMenuItem.Name" xml:space="preserve">
     <value>DockRightToolStripMenuItem</value>
+  </data>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 300</value>
   </data>
   <data name="PrintToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2380,14 +2374,14 @@
   <data name="NewToolStripButton.Text" xml:space="preserve">
     <value>&amp;Novo</value>
   </data>
+  <data name="GetPropertyTSMI.Text" xml:space="preserve">
+    <value>Retornar Propriedade</value>
+  </data>
   <data name="tsTextBoxRename.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="&gt;&gt;pd1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PrintDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
   </data>
   <data name="CopyToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -2415,6 +2409,9 @@
   </data>
   <data name="&gt;&gt;treeViewItems.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem3.Name" xml:space="preserve">
+    <value>FaTabStripItem3</value>
   </data>
   <data name="btnRedo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2466,6 +2463,9 @@
   </metadata>
   <metadata name="ofd1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>119, 17</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

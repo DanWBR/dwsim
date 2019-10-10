@@ -3,6 +3,7 @@ Imports System.Text
 Imports System.Linq
 Imports DWSIM.Interfaces
 Imports DWSIM.Controls.PropertyGridEx
+Imports Controls.PropertyGridEx
 
 Public Class frmProps
 

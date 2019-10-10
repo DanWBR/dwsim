@@ -328,20 +328,35 @@
   <data name="btnAbort.Text" xml:space="preserve">
     <value>Break Calculation</value>
   </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>891, 508</value>
+  </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Sensitivity Studies</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>891, 508</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Independent Variables</value>
   </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>891, 508</value>
+  </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Dependent Variables</value>
+  </data>
+  <data name="btnExportToNewSheet.Text" xml:space="preserve">
+    <value>Send Data to New Worksheet</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Results</value>
   </data>
   <data name="BtnDrawChart.Text" xml:space="preserve">
     <value>Draw</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>891, 508</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Chart</value>

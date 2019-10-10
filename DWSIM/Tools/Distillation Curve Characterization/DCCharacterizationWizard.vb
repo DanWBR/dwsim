@@ -222,8 +222,8 @@ Public Class DCCharacterizationWizard
             tbpx = New Double() {0.05#, 0.1#, 0.3#, 0.5#, 0.7#, 0.9#, 0.95#, 1.0#}
         End If
 
-        Tmin = Common.Min(tbp)
-        Tmax = Common.Max(tbp)
+        Tmin = Global.DWSIM.MathOps.MathEx.Common.Min(tbp)
+        Tmax = Global.DWSIM.MathOps.MathEx.Common.Max(tbp)
 
         'y = 10358x5 - 15934x4 + 11822x3 - 4720,2x2 + 1398,2x + 269,23
         'R² = 1
@@ -272,7 +272,7 @@ Public Class DCCharacterizationWizard
             Dim deltaT As Double = (Tmax - Tmin) / (np)
             Dim t0, fv0 As Double
             t0 = Tmin
-            fv0 = Common.Min(tbpx)
+            fv0 = Global.DWSIM.MathOps.MathEx.Common.Min(tbpx)
             tccol.Clear()
             For i = 0 To np - 1
                 Dim tc As New tmpcomp
@@ -295,7 +295,7 @@ Public Class DCCharacterizationWizard
             Dim deltaT As Double = (Tmax - Tmin) / (np)
             Dim t0, fv0 As Double
             t0 = Tmin
-            fv0 = Common.Min(tbpx)
+            fv0 = Global.DWSIM.MathOps.MathEx.Common.Min(tbpx)
             tccol.Clear()
             For i = 0 To np - 1
                 Dim tc As New tmpcomp

@@ -774,7 +774,7 @@ FINAL:
 
             If phaseID = 3 Then
 
-                If T > Tsat Then
+                If Math.Abs(T - Tsat) < 0.01 Then
 
                     result = Me.m_iapws97.densSatLiqTW(T)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result

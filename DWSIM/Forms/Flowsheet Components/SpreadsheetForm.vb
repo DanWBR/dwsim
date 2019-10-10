@@ -806,11 +806,11 @@ Public Class SpreadsheetForm
         Next
     End Sub
 
-    Private Sub ImportarDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ImportarDadosToolStripMenuItem.Click
-        Dim frmps As New FormPropSelection
-        frmps.ssheet = Me
-        frmps.ShowDialog(Me)
-    End Sub
+    'Private Sub ImportarDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ImportarDadosToolStripMenuItem.Click
+    '    Dim frmps As New FormPropSelection
+    '    frmps.ssheet = Me
+    '    frmps.ShowDialog(Me)
+    'End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         EvaluateAll()
@@ -890,12 +890,12 @@ Public Class SpreadsheetForm
 
     End Sub
 
-    Private Sub ExportarDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExportarDadosToolStripMenuItem.Click
-        Dim frmps As New FormPropSelection
-        frmps.ssheet = Me
-        frmps.mode = 1
-        frmps.ShowDialog(Me)
-    End Sub
+    'Private Sub ExportarDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExportarDadosToolStripMenuItem.Click
+    '    Dim frmps As New FormPropSelection
+    '    frmps.ssheet = Me
+    '    frmps.mode = 1
+    '    frmps.ShowDialog(Me)
+    'End Sub
 
     Public Sub New()
 

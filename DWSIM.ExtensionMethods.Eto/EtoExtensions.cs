@@ -5,6 +5,7 @@ using Eto.Forms;
 using DWSIM.ExtensionMethods;
 using System.IO;
 using VerticalAlignment = Eto.Forms.VerticalAlignment;
+using DWSIM.ExtensionMethods.Eto;
 
 namespace DWSIM.UI.Shared
 {
@@ -163,7 +164,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var drop = new DropDown();
             drop.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (!Eto.Forms.Application.Instance.Platform.IsGtk)
@@ -194,7 +195,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var drop = new DropDown();
             drop.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (!Eto.Forms.Application.Instance.Platform.IsGtk)
@@ -227,6 +228,8 @@ namespace DWSIM.UI.Shared
             container.CreateAndAddEmptySpace();
             container.AddRow(new TableRow(label));
             container.CreateAndAddEmptySpace();
+            container.AddRow(new TableRow(new Border { BorderThickness = 1}));
+            container.CreateAndAddEmptySpace();
             return label;
         }
 
@@ -235,6 +238,7 @@ namespace DWSIM.UI.Shared
             var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
             label.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             container.Rows.Add(new TableRow(label));
+            container.Rows.Add(new TableRow(new Border { BorderThickness = 1 }));
             return label;
         }
 
@@ -348,7 +352,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
@@ -394,7 +398,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
@@ -458,7 +462,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var editor = new NumericStepper { Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
             editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * 140);
@@ -478,7 +482,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var editor = new NumericStepper { Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
             editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * 140);
@@ -498,7 +502,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
@@ -518,7 +522,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var edittext = new TextBox { Text = currval.ToString(numberformat), Style = "textbox-rightalign" };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
@@ -705,7 +709,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var edittext = new TextBox { Text = currval, Width = (int)(sf * 140) };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
@@ -726,7 +730,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var edittext = new TextBox { Text = currval, Width = (int)(sf * 140) };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) edittext.Width = (int)(sf * 140);
@@ -799,7 +803,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var edittext = new TextBox { Text = currval, PlaceholderText = placeholder };
             edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
@@ -1096,12 +1100,13 @@ namespace DWSIM.UI.Shared
         {
 
             var check = new CheckBox { Text = text, Checked = value };
-            check.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            check.Font = new Font(SystemFont.Bold, GetEditorFontSize());
 
             if (command != null) check.CheckedChanged += (sender, e) => command.Invoke((CheckBox)sender, e);
             if (keypress != null) check.CheckedChanged += (sender, e) => keypress.Invoke();
 
             container.AddRow(new TableRow(check));
+            container.CreateAndAddEmptySpace();
             container.CreateAndAddEmptySpace();
 
             return check;
@@ -1111,7 +1116,7 @@ namespace DWSIM.UI.Shared
         {
 
             var check = new CheckBox { Text = text, Checked = value };
-            check.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            check.Font = new Font(SystemFont.Bold, GetEditorFontSize());
 
             if (command != null) check.CheckedChanged += (sender, e) => command.Invoke((CheckBox)sender, e);
             if (keypress != null) check.CheckedChanged += (sender, e) => keypress.Invoke();

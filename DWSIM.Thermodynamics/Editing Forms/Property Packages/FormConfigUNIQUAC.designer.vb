@@ -36,8 +36,6 @@ Partial Class FormConfigUNIQUAC
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -68,11 +66,6 @@ Partial Class FormConfigUNIQUAC
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
@@ -82,9 +75,6 @@ Partial Class FormConfigUNIQUAC
         Me.FaTabStripItem2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.KryptonDataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.FaTabStripItem1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FaTabStrip1
@@ -341,53 +331,9 @@ Partial Class FormConfigUNIQUAC
         'FaTabStripItem1
         '
         Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
-        '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'KryptonDataGridView1
-        '
-        Me.KryptonDataGridView1.AllowUserToAddRows = False
-        Me.KryptonDataGridView1.AllowUserToDeleteRows = False
-        Me.KryptonDataGridView1.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
-        Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Column2, Me.Column1})
-        Me.KryptonDataGridView1.MultiSelect = False
-        Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
-        Me.KryptonDataGridView1.RowHeadersVisible = False
-        Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'ID
-        '
-        resources.ApplyResources(Me.ID, "ID")
-        Me.ID.Name = "ID"
-        '
-        'Column2
-        '
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.LightGray
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle13
-        Me.Column2.FillWeight = 149.2386!
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column1
-        '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle14
-        Me.Column1.FillWeight = 50.76142!
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
         '
         'BackgroundWorker1
         '
@@ -411,16 +357,11 @@ Partial Class FormConfigUNIQUAC
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.KryptonDataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStripItem1.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Private WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
     Private WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Public WithEvents KryptonDataGridView1 As System.Windows.Forms.DataGridView
     Private WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents LabelWithDivider2 As System.Windows.Forms.Label
@@ -434,9 +375,6 @@ Partial Class FormConfigUNIQUAC
     Public WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents Button1 As System.Windows.Forms.Button
     Public WithEvents Button3 As System.Windows.Forms.Button

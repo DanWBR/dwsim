@@ -168,6 +168,8 @@
     <DebugType>Full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x86|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -179,6 +181,42 @@
     <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <DefineConstants>LINUX</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -186,6 +224,9 @@
     </Reference>
     <Reference Include="Aga.Controls">
       <HintPath>References\Aga.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>References\ReoGrid.WinForms\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="AODL, Version=1.2.0.1, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -208,14 +249,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Cureos.Numerics.dll</HintPath>
     </Reference>
+    <Reference Include="DWSIM.CrossPlatform.UI.Controls.ReoGrid">
+      <HintPath>References\ReoGrid.Eto\DWSIM.CrossPlatform.UI.Controls.ReoGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Forms\Release\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="Eto.WinForms, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Windows.2.4.1\lib\net45\Eto.WinForms.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Forms\Release\net45\Eto.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Eto.Wpf, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Wpf.2.4.1\lib\net45\Eto.Wpf.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Forms\Release\net45\Eto.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ExcelApi">
       <HintPath>References\ExcelApi.dll</HintPath>
@@ -302,6 +349,12 @@
     <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable1035\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.WindowsForms.2.0.0-unstable1035\lib\net452\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Python.Runtime, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -311,6 +364,16 @@
     <Reference Include="RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\RichTextBoxExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WinForms">
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WPF">
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.WPF.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -340,6 +403,18 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="unvell.ReoGrid">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoGridEditor">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoGridEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoScript">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoScript.EditorLib">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.EditorLib.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Yeppp.CLR.Bundle">
       <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
@@ -372,6 +447,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineProcessor.vb" />
+    <Compile Include="Controls\TwoDimChartControl.Designer.vb">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TwoDimChartControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ListItem.Designer.vb">
       <DependentUpon>ListItem.vb</DependentUpon>
     </Compile>
@@ -431,6 +512,18 @@
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormCharts.Designer.vb">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormCharts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormNewSpreadsheet.Designer.vb">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormNewSpreadsheet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
@@ -979,6 +1072,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\TwoDimChartControl.en.resx">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TwoDimChartControl.resx">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ListItem.resx">
       <DependentUpon>ListItem.vb</DependentUpon>
     </EmbeddedResource>
@@ -1059,6 +1158,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface_SkiaSharp\FlowsheetSurface_SkiaSharp.resx">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormCharts.en.resx">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormCharts.resx">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormNewSpreadsheet.en.resx">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormNewSpreadsheet.resx">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.de.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
@@ -3258,33 +3369,36 @@
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(TargetDir)" /E /Y /F /D
 
+) else if "$(ConfigurationName)"=="Release Linux" (
+
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+
+del /Q "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
+del /Q "$(SolutionDir)DistPackages\Linux\*.tmp"
+del /Q "$(SolutionDir)DistPackages\Linux\*.dylib"
+del /Q "$(SolutionDir)DistPackages\Linux\libCEF.dll"
+del /Q "$(SolutionDir)DistPackages\Linux\*.pak"
+del /Q "$(SolutionDir)DistPackages\Linux\*.dat"
+
 ) else if "$(PlatformName)"=="x64" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
-del "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
-del "$(SolutionDir)DistPackages\Windows\*.tmp"
-del "$(SolutionDir)DistPackages\Windows\*.dylib"
+del /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
+del /Q "$(SolutionDir)DistPackages\Windows\*.tmp"
+del /Q "$(SolutionDir)DistPackages\Windows\*.dylib"
 
-del "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*"
-del "$(SolutionDir)DistPackages\macOS\*.tmp"
-
-del "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
-del "$(SolutionDir)DistPackages\Linux\*.tmp"
-del "$(SolutionDir)DistPackages\Linux\*.dylib"
-del "$(SolutionDir)DistPackages\Linux\libCEF.dll"
-del "$(SolutionDir)DistPackages\Linux\*.pak"
-del "$(SolutionDir)DistPackages\Linux\*.dat"
+del /Q "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*"
+del /Q "$(SolutionDir)DistPackages\macOS\*.tmp"
 
 ) else if "$(PlatformName)"=="x86" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
-del "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*"
-del "$(SolutionDir)DistPackages\Windows_32\*.tmp"
-del "$(SolutionDir)DistPackages\Windows_32\*.dylib"
+del /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*"
+del /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp"
+del /Q "$(SolutionDir)DistPackages\Windows_32\*.dylib"
 
 )</PostBuildEvent>
   </PropertyGroup>
@@ -3301,7 +3415,6 @@ del "$(SolutionDir)DistPackages\Windows_32\*.dylib"
     <Error Condition="!Exists('..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\packages\CefSharp.WinForms.69.0.0\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.69.0.0\build\CefSharp.WinForms.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.WinForms.69.0.0\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.69.0.0\build\CefSharp.WinForms.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -3325,5 +3438,4 @@ del "$(SolutionDir)DistPackages\Windows_32\*.dylib"
   <Import Project="..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" />
   <Import Project="..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.WinForms.69.0.0\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.69.0.0\build\CefSharp.WinForms.targets')" />
-  <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
 </Project>

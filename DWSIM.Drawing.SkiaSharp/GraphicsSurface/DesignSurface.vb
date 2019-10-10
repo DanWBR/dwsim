@@ -81,7 +81,8 @@ Public Class GraphicsSurface
         EqualizeVertical
     End Enum
 
-    Public Property BackgroundColor As SKColor = SKColors.White
+    Public Shared Property BackgroundColor As SKColor = SKColors.White
+    Public Shared Property ForegroundColor As SKColor = SKColors.Black
 
     Public Property ResizingMode As Boolean = False
 
@@ -884,12 +885,14 @@ Public Class GraphicsSurface
             If Me.DrawingObjects.Contains(objectToDelete) Then
                 Me.DrawingObjects.Remove(objectToDelete)
                 Me.SelectedObject = Nothing
+                RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.ObjectDeleted, Nothing, "", Nothing, 0))
             End If
         End If
     End Sub
 
     Public Sub DeleteAllObjects()
         Me.DrawingObjects.Clear()
+        RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.ObjectDeleted, Nothing, "", Nothing, 0))
     End Sub
 
     Private Function AngleToPoint(ByVal Origin As SKPoint, _
@@ -1288,6 +1291,8 @@ Public Class GraphicsSurface
                               End Sub
         t.Start()
 
+        RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.ObjectAdded, AddedObject, "", Nothing, 0))
+
     End Sub
 
     Private Sub DrawPropertyListBlock(canvas As SKCanvas, gobj As GraphicObject)
@@ -1310,7 +1315,7 @@ Public Class GraphicsSurface
             Dim colors = New SKColors()
             Try
                 If GlobalSettings.Settings.DarkMode Then
-                    .Color = SKColors.DimGray
+                    .Color = ForegroundColor
                 Else
                     .Color = colors.GetType().GetField(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontColor).GetValue(colors)
                 End If
@@ -1323,16 +1328,12 @@ Public Class GraphicsSurface
         End With
 
 
-        Dim bgpaint As New SKPaint()
+        'Dim bgpaint As New SKPaint()
 
-        With bgpaint
-            If GlobalSettings.Settings.DarkMode Then
-                .Color = SKColors.Black.WithAlpha(100)
-            Else
-                .Color = SKColors.White.WithAlpha(100)
-            End If
-            .IsStroke = False
-        End With
+        'With bgpaint
+        '    .Color = ForegroundColor.WithAlpha(100)
+        '    .IsStroke = False
+        'End With
 
         If Not gobj.Owner Is Nothing Then
 
@@ -1387,7 +1388,7 @@ Public Class GraphicsSurface
                     n += 1
                 Next
 
-                canvas.DrawRect(New SKRect(X, Y + 2 * (fsize.Height + Padding), X + Width, Y + 2 * (fsize.Height + Padding) + Height), bgpaint)
+                'canvas.DrawRect(New SKRect(X, Y + 2 * (fsize.Height + Padding), X + Width, Y + 2 * (fsize.Height + Padding) + Height), bgpaint)
 
                 n = 1
                 For Each text In texts

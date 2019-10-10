@@ -233,7 +233,7 @@ namespace DWSIM.UI.Desktop.Editors
             flowsheet.PropertyPackages.Clear();
 
             if (hasLowPressure) {
-                var pp = (PropertyPackage)flowsheet.AvailablePropertyPackages["Ideal (Raoult's Law)"].Clone();
+                var pp = (PropertyPackage)flowsheet.AvailablePropertyPackages["Raoult's Law"].Clone();
                 pp.UniqueID = Guid.NewGuid().ToString();
                 pp.Tag = pp.ComponentName + " (" + (flowsheet.PropertyPackages.Count + 1).ToString() + ")";
                 flowsheet.AddPropertyPackage(pp);

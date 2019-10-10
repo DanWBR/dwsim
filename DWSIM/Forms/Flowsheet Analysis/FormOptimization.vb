@@ -249,8 +249,8 @@ Public Class FormOptimization
                     If Not Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value Is Nothing Then
                         Dim objname = Me.dgVariables.Rows(e.RowIndex).Cells(3).Value.ToString
                         If objname = DWSIM.App.GetLocalString("SpreadsheetCell") Then
-                            Me.dgVariables.Rows(e.RowIndex).Cells(7).Value = form.FormSpreadsheet.GetCellValue(Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString).Value
-                            Me.dgVariables.Rows(e.RowIndex).Cells(8).Value = form.FormSpreadsheet.GetCellValue(Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString).Value
+                            Me.dgVariables.Rows(e.RowIndex).Cells(7).Value = form.FormSpreadsheet.GetCellValue(Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString).Data
+                            Me.dgVariables.Rows(e.RowIndex).Cells(8).Value = form.FormSpreadsheet.GetCellValue(Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString).Data
                         ElseIf objname = DWSIM.App.GetLocalString("ReactionProperty") Then
                             Dim rx = form.Reactions.Values.Where(Function(x) x.Name = Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString.Split("|")(0)).FirstOrDefault
                             Dim val = rx.GetPropertyValue(Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString.Split("|")(1))
@@ -528,7 +528,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                             .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                         Else
-                            .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                            .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                         End If
                     Next
                 Next
@@ -544,7 +544,7 @@ Public Class FormOptimization
                 Dim rx = form.Reactions.Values.Where(Function(x) x.Name = objProp.Split("|")(0)).FirstOrDefault
                 value = rx.GetPropertyValue(objProp.Split("|")(1))
             Else
-                value = form.FormSpreadsheet.GetCellValue(objProp).Value
+                value = form.FormSpreadsheet.GetCellValue(objProp).Data
             End If
         End If
 
@@ -557,7 +557,7 @@ Public Class FormOptimization
                 Dim rx = form.Reactions.Values.Where(Function(x) x.Name = var.propID.Split("|")(0)).FirstOrDefault
                 row.Cells(8).Value = Format(rx.GetPropertyValue(var.propID.Split("|")(1)), nf)
             Else
-                row.Cells(8).Value = form.FormSpreadsheet.GetCellValue(var.propID).Value
+                row.Cells(8).Value = form.FormSpreadsheet.GetCellValue(var.propID).Data
             End If
         Next
 
@@ -648,7 +648,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -663,7 +663,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f0 = rx.GetPropertyValue(FobjProp.Split("|")(1))
                         Else
-                            f0 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f0 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                 End If
@@ -691,7 +691,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -706,7 +706,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f1 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                         Else
-                            f1 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f1 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                     If objID(i) <> "SpreadsheetCell" And objID(i) <> "ReactionProperty" Then
@@ -732,7 +732,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -747,7 +747,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f2 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                         Else
-                            f2 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f2 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                 End If
@@ -776,7 +776,7 @@ Public Class FormOptimization
                                 Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                 .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                             Else
-                                .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                             End If
                         Next
                         Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -791,7 +791,7 @@ Public Class FormOptimization
                         Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                         f3 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                     Else
-                        f3 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                        f3 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                     End If
                 End If
                 If Me.selectedoptcase.numdevscheme = 4 Then
@@ -818,7 +818,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -833,7 +833,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f4 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                         Else
-                            f4 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f4 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                 End If
@@ -869,7 +869,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                             .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                         Else
-                            .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                            .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                         End If
                     Next
                     Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -887,7 +887,7 @@ Public Class FormOptimization
                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                     value = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                 Else
-                    value = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                    value = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                 End If
                 If Me.selectedoptcase.type = OPTType.Minimization Then f = value + pen_val Else f = -(value + pen_val)
             End If
@@ -972,7 +972,7 @@ Public Class FormOptimization
                 Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                 value = rx.GetPropertyValue(FobjProp.Split("|")(1))
             Else
-                value = form.FormSpreadsheet.GetCellValue(FobjProp).Value
+                value = form.FormSpreadsheet.GetCellValue(FobjProp).Data
             End If
         End If
 
@@ -1083,7 +1083,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -1098,7 +1098,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f0 = rx.GetPropertyValue(FobjProp.Split("|")(1))
                         Else
-                            f0 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f0 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                 End If
@@ -1126,7 +1126,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -1141,7 +1141,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f1 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                         Else
-                            f1 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f1 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                     If objID(i) <> "SpreadsheetCell" And objID(i) <> "ReactionProperty" Then
@@ -1167,7 +1167,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -1182,7 +1182,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f2 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                         Else
-                            f2 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f2 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                 End If
@@ -1211,7 +1211,7 @@ Public Class FormOptimization
                                 Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                 .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                             Else
-                                .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                             End If
                         Next
                         Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -1226,7 +1226,7 @@ Public Class FormOptimization
                         Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                         f3 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                     Else
-                        f3 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                        f3 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                     End If
                 End If
                 If Me.selectedoptcase.numdevscheme = 4 Then
@@ -1253,7 +1253,7 @@ Public Class FormOptimization
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                                 Else
-                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
+                                    .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data
                                 End If
                             Next
                             Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
@@ -1268,7 +1268,7 @@ Public Class FormOptimization
                             Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = FobjProp.Split("|")(0)).FirstOrDefault
                             f4 = rx.GetPropertyValue(FobjProp.Split("|")(1)) + pen_val
                         Else
-                            f4 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
+                            f4 = form.FormSpreadsheet.GetCellValue(FobjProp).Data + pen_val
                         End If
                     End If
                 End If
@@ -1307,7 +1307,7 @@ Public Class FormOptimization
                 Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = var.propID.Split("|")(0)).FirstOrDefault
                 var.currentvalue = rx.GetPropertyValue(var.propID.Split("|")(1))
             Else
-                var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Value
+                var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Data
             End If
         Next
 

@@ -48,10 +48,7 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Sub ConfigParameters()
-            m_par = New System.Collections.Generic.Dictionary(Of String, Double)
-            With Me.Parameters
-                .Clear()
-            End With
+
         End Sub
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm

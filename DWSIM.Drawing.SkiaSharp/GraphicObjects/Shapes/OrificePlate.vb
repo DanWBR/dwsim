@@ -128,7 +128,7 @@ Namespace GraphicObjects.Shapes
 
                 Dim bgpen As New SKPaint()
                 With bgpen
-                    .Color = If(GlobalSettings.Settings.DarkMode, SKColors.Black, SKColors.White)
+                    .Color = GraphicsSurface.BackgroundColor
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .IsStroke = False
                 End With

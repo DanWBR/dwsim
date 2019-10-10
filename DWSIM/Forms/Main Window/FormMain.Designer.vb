@@ -62,7 +62,6 @@ Partial Class FormMain
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ManualTecnicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.DWSIMNaInternetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -332,14 +331,8 @@ Partial Class FormMain
         'DocumentacaoToolStripMenuItem
         '
         resources.ApplyResources(Me.DocumentacaoToolStripMenuItem, "DocumentacaoToolStripMenuItem")
-        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualTecnicoToolStripMenuItem, Me.GuiaDoUsuarioToolStripMenuItem})
+        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GuiaDoUsuarioToolStripMenuItem})
         Me.DocumentacaoToolStripMenuItem.Name = "DocumentacaoToolStripMenuItem"
-        '
-        'ManualTecnicoToolStripMenuItem
-        '
-        resources.ApplyResources(Me.ManualTecnicoToolStripMenuItem, "ManualTecnicoToolStripMenuItem")
-        Me.ManualTecnicoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
-        Me.ManualTecnicoToolStripMenuItem.Name = "ManualTecnicoToolStripMenuItem"
         '
         'GuiaDoUsuarioToolStripMenuItem
         '
@@ -890,7 +883,6 @@ Partial Class FormMain
     Friend WithEvents NovoRegressaoUNIFACIPs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveUnifacIPRegrDlg As System.Windows.Forms.SaveFileDialog
     Friend WithEvents DocumentacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ManualTecnicoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GuiaDoUsuarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
     Friend WithEvents ButtonClose As System.Windows.Forms.Button

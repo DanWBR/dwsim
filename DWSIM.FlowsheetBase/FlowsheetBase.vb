@@ -50,6 +50,8 @@ Imports System.Dynamic
 
     Public LoadSpreadsheetData, SaveSpreadsheetData As Action(Of XDocument)
 
+    Public GetSpreadsheetObject As Func(Of Object)
+
     Public RetrieveSpreadsheetData As Func(Of String, List(Of String()))
 
     Public Property ScriptKeywordsF As String = ""
@@ -1294,6 +1296,26 @@ Imports System.Dynamic
 
         End If
 
+        Charts = New Dictionary(Of String, Interfaces.IChart)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClasses.Charts.Chart()
+                    obj.LoadData(xel.Elements.ToList)
+                    Charts.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Chart Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
 
         If excs.Count > 0 Then
@@ -1442,6 +1464,13 @@ Imports System.Dynamic
 
         For Each scr As Script In Scripts.Values
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ChartItems"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems")
+
+        For Each ch As SharedClasses.Charts.Chart In Charts.Values
+            xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
         Next
 
         If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
@@ -2066,6 +2095,13 @@ Label_00CC:
             Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 
+            If calculatorassembly Is Nothing Then
+                calculatorassembly = AppDomain.CurrentDomain.Load("DWSIM.Thermodynamics")
+            End If
+            If unitopassembly Is Nothing Then
+                unitopassembly = AppDomain.CurrentDomain.Load("DWSIM.UnitOperations")
+            End If
+
             Dim aTypeList As New List(Of Type)
             aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
             aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
@@ -2090,6 +2126,8 @@ Label_00CC:
     End Function
 
     Public Property Scripts As New Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
+
+    Public Property Charts As Dictionary(Of String, IChart) = New Dictionary(Of String, IChart) Implements IFlowsheet.Charts
 
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
@@ -2120,7 +2158,7 @@ Label_00CC:
         scope.SetVariable("Plugins", UtilityPlugins)
         scope.SetVariable("Flowsheet", Me)
         scope.SetVariable("Application", GetApplicationObject)
-        'scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
+        scope.SetVariable("Spreadsheet", GetSpreadsheetObject.Invoke())
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
         For Each obj As ISimulationObject In SimulationObjects.Values
@@ -2183,6 +2221,10 @@ Label_00CC:
 
                                                                                  locals.SetItem("Plugins", UtilityPlugins.ToPython)
                                                                                  locals.SetItem("Flowsheet", Me.ToPython)
+                                                                                 Try
+                                                                                     locals.SetItem("Spreadsheet", (GetSpreadsheetObject.Invoke()).ToPython)
+                                                                                 Catch ex As Exception
+                                                                                 End Try
                                                                                  Dim Solver As New FlowsheetSolver.FlowsheetSolver
                                                                                  locals.SetItem("Solver", Solver.ToPython)
 

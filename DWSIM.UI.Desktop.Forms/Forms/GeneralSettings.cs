@@ -23,7 +23,7 @@ namespace DWSIM.UI.Forms.Forms
 
             string prefix = this.GetLocalizationPrefix();
 
-            var tab1 = Common.GetDefaultContainer();
+            var tab1 = DWSIM.UI.Shared.Common.GetDefaultContainer();
             tab1.Tag = "Interface";
 
             if (Application.Instance.Platform.IsMac)
@@ -114,7 +114,7 @@ namespace DWSIM.UI.Forms.Forms
             tab1.CreateAndAddCheckBoxRow("Call Solver on Editor Property Update", Settings.CallSolverOnEditorPropertyChanged, (CheckBox sender, EventArgs obj) => { Settings.CallSolverOnEditorPropertyChanged = sender.Checked.Value; });
             tab1.CreateAndAddDescriptionRow("Requests a flowsheet calculation after an object property is changed/updated on the editor.");
 
-            var tab2a = Common.GetDefaultContainer();
+            var tab2a = DWSIM.UI.Shared.Common.GetDefaultContainer();
             tab2a.Tag = "Inspector";
 
             tab2a.CreateAndAddCheckBoxRow("Enable Inspector Reports", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
@@ -123,7 +123,7 @@ namespace DWSIM.UI.Forms.Forms
             tab2a.CreateAndAddCheckBoxRow("Clear Previous Reports on new Flowsheet Calculation Request", Settings.ClearInspectorHistoryOnNewCalculationRequest, (CheckBox sender, EventArgs obj) => { Settings.ClearInspectorHistoryOnNewCalculationRequest = sender.Checked.GetValueOrDefault(); });
             tab2a.CreateAndAddDescriptionRow("This will erase all previously stored reports when a new flowsheet calculation request is made by the user.");
 
-            var tab2 = Common.GetDefaultContainer();
+            var tab2 = DWSIM.UI.Shared.Common.GetDefaultContainer();
             tab2.Tag = "Solver".Localize(prefix);
 
             tab2.CreateAndAddTextBoxRow("N0", "Solver Timeout (s)", GlobalSettings.Settings.SolverTimeoutSeconds, (sender, e) =>
@@ -255,7 +255,7 @@ namespace DWSIM.UI.Forms.Forms
                 loaded = true;
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            var tab3 = Common.GetDefaultContainer();
+            var tab3 = DWSIM.UI.Shared.Common.GetDefaultContainer();
             tab3.Tag = "UserComps".Localize(prefix);
 
             tab3.CreateAndAddLabelRow("User-Defined Compound Datasets");
@@ -306,7 +306,7 @@ namespace DWSIM.UI.Forms.Forms
                 list2.Items.RemoveAt(list2.SelectedIndex);
             });
 
-            var tab4 = Common.GetDefaultContainer();
+            var tab4 = DWSIM.UI.Shared.Common.GetDefaultContainer();
             tab4.Tag = "Backup".Localize(prefix);
 
             tab4.CreateAndAddLabelRow("BackupCopies".Localize(prefix));
@@ -337,7 +337,7 @@ namespace DWSIM.UI.Forms.Forms
             });
             tab4.CreateAndAddEmptySpace();
 
-            var tab5 = Common.GetDefaultContainer();
+            var tab5 = DWSIM.UI.Shared.Common.GetDefaultContainer();
             tab5.Tag = "Misc".Localize(prefix);
 
             tab5.CreateAndAddLabelRow("Octave Settings");
@@ -376,7 +376,7 @@ namespace DWSIM.UI.Forms.Forms
                 if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
             });
 
-            return Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a, tab3, tab4, tab5 });
+            return DWSIM.UI.Shared.Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a, tab3, tab4, tab5 });
 
         }
 

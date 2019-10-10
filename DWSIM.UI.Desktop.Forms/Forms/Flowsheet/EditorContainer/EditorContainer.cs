@@ -50,6 +50,8 @@ namespace DWSIM.UI.Forms
 
                 var cont0 = UI.Shared.Common.GetDefaultContainer();
 
+                UI.Shared.Common.CreateAndAddLabelRow(cont0, "Object Connections Editor".Localize());
+
                 UI.Shared.Common.CreateAndAddDescriptionRow(cont0, "ConnectorsEditorDescription".Localize());
                 new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont0);
 
@@ -132,11 +134,11 @@ namespace DWSIM.UI.Forms
                 cont2.Width = this.Width - 30;
                 if (Application.Instance.Platform.IsWpf)
                 {
-                    var scripteditor = new DWSIM.UI.Controls.CodeEditorControl() { Text = ((CustomUO)obj).ScriptText };
+                    var scripteditor = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl() {  ScriptText = ((CustomUO)obj).ScriptText };
                     var dyn1 = new DynamicLayout();
                     dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
                     {
-                        ((CustomUO)obj).ScriptText = scripteditor.Text;
+                        ((CustomUO)obj).ScriptText = scripteditor.ScriptText;
                     });
                     dyn1.Width = this.Width - 30;
                     cont2.Rows.Add(new TableRow(dyn1));

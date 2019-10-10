@@ -222,7 +222,7 @@ Namespace Reactors
 
                     If rxn.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
 
-                        kxf = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
+                        kxf = rxn.A_Forward * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Forward_Unit, "J/mol", rxn.E_Forward) / (8.314 * T))
 
                     Else
 
@@ -241,7 +241,7 @@ Namespace Reactors
 
                     If rxn.ReactionKinRevType = ReactionKineticType.Arrhenius Then
 
-                        kxr = rxn.A_Reverse * Exp(-rxn.E_Reverse / (8.314 * T))
+                        kxr = rxn.A_Reverse * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Reverse_Unit, "J/mol", rxn.E_Reverse) / (8.314 * T))
 
                     Else
 
@@ -923,6 +923,8 @@ Namespace Reactors
 
                 Me.DeltaT = 0.0#
 
+                OutletTemperature = T0
+
             ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
 
                 'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -944,8 +946,8 @@ Namespace Reactors
 
             ' comp. conversions
             For Each sb As Compound In ims.Phases(0).Compounds.Values
-                If Me.ComponentConversions.ContainsKey(sb.Name) Then
-                    Me.ComponentConversions(sb.Name) = (N00(sb.Name) - N(sb.Name)) / N00(sb.Name)
+                If Me.ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0 Then
+                    Me.ComponentConversions(sb.Name) = Abs(N00(sb.Name) - N(sb.Name)) / N00(sb.Name)
                 End If
             Next
 

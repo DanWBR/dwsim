@@ -99,7 +99,8 @@
       <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="ExcelDna.Integration, Version=0.34.6373.42344, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDna.Integration.0.34.6\lib\ExcelDna.Integration.dll</HintPath>
@@ -154,6 +155,9 @@
     </Reference>
     <Reference Include="RichTextBoxExtended">
       <HintPath>..\DWSIM\References\RichTextBoxExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.Shared">
+      <HintPath>..\DWSIM\References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -305,6 +309,12 @@
     </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.Designer.vb">
+      <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.designer.vb">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
@@ -596,6 +606,12 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.en.resx">
+      <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.resx">
+      <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
@@ -806,6 +822,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\eNRTL\table4_amines.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>
@@ -817,7 +836,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -838,5 +856,4 @@
     </ItemGroup>
     <Message Importance="normal" Text="Adding back DesignTimeFacades from ReferencePath now that SGen has run." />
   </Target>
-  <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
 </Project>

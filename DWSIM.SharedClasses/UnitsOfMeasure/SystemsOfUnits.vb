@@ -235,9 +235,9 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.mass_conc
                     units.AddRange(New String() {"kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
                 Case Enums.UnitOfMeasure.reac_rate
-                    units.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"})
+                    units.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol/[ft3.h]"})
                 Case Enums.UnitOfMeasure.molar_enthalpy
-                    units.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol"})
+                    units.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol", "J/mol"})
                 Case Enums.UnitOfMeasure.molar_entropy
                     units.AddRange(New String() {"kJ/[kmol.K]", "cal/[mol.C]", "BTU/[lbmol.R]"})
                 Case Enums.UnitOfMeasure.velocity, Enums.UnitOfMeasure.speedOfSound
@@ -323,7 +323,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.molar_conc
                 Case "kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"
                     Return Enums.UnitOfMeasure.mass_conc
-                Case "kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"
+                Case "kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol/[ft3.h]"
                     Return Enums.UnitOfMeasure.reac_rate
                 Case "kJ/kmol", "cal/mol", "BTU/lbmol"
                     Return Enums.UnitOfMeasure.molar_enthalpy
@@ -893,7 +893,7 @@ Namespace SystemsOfUnits
                 .mass_conc = "lbm/ft3"
                 .molar_conc = "lbmol/ft3"
                 .molar_volume = "ft3/lbmol"
-                .reac_rate = "lbmol.[ft3.h]"
+                .reac_rate = "lbmol/[ft3.h]"
                 .reac_rate_heterog = "lbmol.[lbm.h]"
                 .spec_vol = "ft3/lbm"
                 .time = "h"
@@ -1235,7 +1235,7 @@ Namespace SystemsOfUnits
                 Case "kcal/kg"
                     Return value / 0.238846
 
-                Case "kJ/kmol"
+                Case "kJ/kmol", "J/mol"
                     Return value
                 Case "cal/mol"
                     Return value * 0.0041868 * 1000
@@ -1297,7 +1297,7 @@ Namespace SystemsOfUnits
                 Case "m3/mol"
                     Return value * 1000
                 Case "ft3/lbmol"
-                    Return value / 35.3147 / 1000
+                    Return value / 35.3147 / 1000 / 2.20462
 
                 Case "mm"                               'comprimento'
                     Return value
@@ -1320,7 +1320,7 @@ Namespace SystemsOfUnits
                 Case "mol/mL"
                     Return value * 1000000.0 / 1000
                 Case "lbmol/ft3"
-                    Return value * 35.3147 * 1000
+                    Return value * 35.3147 * 1000 / 2.20462
                 Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"
@@ -1373,8 +1373,8 @@ Namespace SystemsOfUnits
                     Return value / 60 * 1000000.0
                 Case "mol/[cm3.h]"
                     Return value / 3600 * 1000000.0
-                Case "lbmol.[ft3.h]"
-                    Return value / 3600 * 35.3147 * 1000
+                Case "lbmol/[ft3.h]"
+                    Return value / 3600 * 35.3147 * 1000 / 2.20462
                 Case "°C"                               'temperatura e demais
                     Return value + 273.15
                 Case "C"                               'temperatura e demais
@@ -1676,7 +1676,7 @@ Namespace SystemsOfUnits
                 Case "kcal/kg"
                     Return value * 0.238846
 
-                Case "kJ/kmol"
+                Case "kJ/kmol", "J/mol"
                     Return value
                 Case "cal/mol"
                     Return value / 0.0041868 / 1000
@@ -1738,7 +1738,7 @@ Namespace SystemsOfUnits
                 Case "m3/mol"
                     Return value / 1000
                 Case "ft3/lbmol"
-                    Return value * 35.3147 * 1000
+                    Return value * 35.3147 * 1000 * 2.20462
 
                 Case "mm"                               'comprimento'
                     Return value
@@ -1761,7 +1761,7 @@ Namespace SystemsOfUnits
                 Case "mol/mL"
                     Return value / 1000000.0 * 1000
                 Case "lbmol/ft3"
-                    Return value * 35.3147 * 1000
+                    Return value / 35.3147 / 1000 * 2.20462
                 Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"
@@ -1816,8 +1816,8 @@ Namespace SystemsOfUnits
                     Return value * 60 / 1000000.0
                 Case "mol/[cm3.h]"
                     Return value * 3600 / 1000000.0
-                Case "lbmol.[ft3.h]"
-                    Return value * 3600 / 35.3147 / 1000
+                Case "lbmol/[ft3.h]"
+                    Return value * 3600 / 35.3147 / 1000 * 2.20462
                 Case "°C"                               'temperatura e demais
                     Return value - 273.15
                 Case "C"                               'temperatura e demais

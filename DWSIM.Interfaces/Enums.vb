@@ -413,6 +413,22 @@ Namespace Enums
 
     End Enum
 
+    Public Enum ChartType
+
+        TwoDimensionalScatter = 0
+        Pie = 1
+        HorizontalBars = 2
+        VerticalBars = 3
+
+    End Enum
+
+    Public Enum ChartSource
+
+        SpreadsheetRange = 0
+        FlowsheetObject = 1
+
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects

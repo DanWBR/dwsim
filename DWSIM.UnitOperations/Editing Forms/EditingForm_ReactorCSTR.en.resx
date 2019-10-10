@@ -117,21 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 23</value>
-  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 17</value>
-  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 17</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
@@ -151,41 +141,23 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
   </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 17</value>
-  </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 17</value>
-  </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Catalyst Amount</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 17</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Reactor Pressure Drop</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 17</value>
-  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Reactor Volume</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 17</value>
-  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Reaction Set</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 17</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Outlet Temperature</value>
@@ -199,17 +171,11 @@
   <data name="cbCalcMode.Items2" xml:space="preserve">
     <value>Define Outlet Temperature</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 17</value>
-  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Calculation Mode</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 17</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Outlet Stream 2</value>
@@ -226,9 +192,6 @@
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
-  </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Energy Stream</value>
   </data>
@@ -238,14 +201,8 @@
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 17</value>
-  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Outlet Stream 1</value>
-  </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 17</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
@@ -277,12 +234,6 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 207</value>
-  </data>
-  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 215</value>
-  </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Reactions</value>
   </data>
@@ -291,12 +242,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
     <value>Conversion (%)</value>
-  </data>
-  <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 215</value>
-  </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 215</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Conversions</value>

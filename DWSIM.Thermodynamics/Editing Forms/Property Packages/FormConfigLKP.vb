@@ -33,12 +33,7 @@ Public Class FormConfigLKP
 
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
-        With Me.KryptonDataGridView1.Rows
-            .Clear()
-            For Each kvp As KeyValuePair(Of String, Double) In _pp.Parameters
-                .Add(New Object() {kvp.Key, Calculator.GetLocalString(kvp.Key), kvp.Value})
-            Next
-        End With
+        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
 
         Me.KryptonDataGridView2.DataSource = Nothing
 
@@ -94,22 +89,6 @@ gt1:        If ppu.m_lk.InteractionParameters.ContainsKey(cp.Name) Then
                 GoTo gt1
             End If
         Next
-
-    End Sub
-
-    Private Sub KryptonDataGridView1_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellEndEdit
-
-        Dim oldvalue = _pp.Parameters(Me.KryptonDataGridView1.Rows(e.RowIndex).Cells(0).Value)
-        Dim newvalue = Me.KryptonDataGridView1.Rows(e.RowIndex).Cells(2).Value
-        Dim parid As String = Me.KryptonDataGridView1.Rows(e.RowIndex).Cells(0).Value
-        Dim parname As String = Me.KryptonDataGridView1.Rows(e.RowIndex).Cells(1).Value
-
-        _pp.Parameters(parid) = newvalue
-        If Not _form Is Nothing Then
-            _form.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.PropertyPackagePropertyChanged,
-                                                                   .Name = String.Format(_pp.Flowsheet.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
-                                                                   .OldValue = oldvalue, .NewValue = newvalue, .Tag = _pp, .ObjID = parid, .PropertyName = "PARAM"})
-        End If
 
     End Sub
 

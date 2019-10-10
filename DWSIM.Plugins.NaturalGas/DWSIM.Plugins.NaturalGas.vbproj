@@ -115,7 +115,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.1\lib\netstandard1.0\Eto.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="FileHelpers, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
       <HintPath>..\packages\FileHelpers.3.3.0\lib\net45\FileHelpers.dll</HintPath>
@@ -268,49 +269,47 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
   </Target>
   <Import Project="..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Release" (
 
-del "$(SolutionDir)DistPackages\Windows\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\Windows\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\Windows\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\Windows\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows\plugins\x64"
 
-del "$(SolutionDir)DistPackages\Windows_32\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\Windows_32\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x64"
 
-del "$(SolutionDir)DistPackages\macOS\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\macOS\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\macOS\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\macOS\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\macOS\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\macOS\plugins\x64"
 
-del "$(SolutionDir)DistPackages\Linux\plugins\*Skia*"
-del "$(SolutionDir)DistPackages\Linux\plugins\*Eto*"
+del /Q "$(SolutionDir)DistPackages\Linux\plugins\*Skia*"
+del /Q "$(SolutionDir)DistPackages\Linux\plugins\*Eto*"
 rmdir /s /q "$(SolutionDir)DistPackages\Linux\plugins\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Linux\plugins\x64"
 
-del "$(SolutionDir)DistPackages\Windows\plugins\*.dylib"
+del /Q "$(SolutionDir)DistPackages\Windows\plugins\*.dylib"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows\x64"
 
-del "$(SolutionDir)DistPackages\Windows_32\plugins\*.dylib"
+del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*.dylib"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\x64"
 
 rmdir /s /q "$(SolutionDir)DistPackages\macOS\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\macOS\x64"
 
-del "$(SolutionDir)DistPackages\Linux\plugins\*.dylib"
+del /Q "$(SolutionDir)DistPackages\Linux\plugins\*.dylib"
 rmdir /s /q "$(SolutionDir)DistPackages\Linux\x86"
 rmdir /s /q "$(SolutionDir)DistPackages\Linux\x64"
 )</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets" Condition="Exists('..\packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
