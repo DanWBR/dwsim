@@ -183,7 +183,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             if (hasheaders)
             {
-                //chartcontrol.UpdatePlotModelData();
+                chartcontrol.UpdatePlotModelData();
                 var j = 0;
                 for (int i = (firstcol + 1); (i <= lastcol); i++)
                 {
