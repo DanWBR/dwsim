@@ -115,80 +115,9 @@ Namespace PropertyPackages
 
         Public Overloads Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
-            Dim pi As Integer = 0
             Dim i As Integer
-            Dim pid As Integer = 0
 
-            Select Case phase
-                Case Phase.Liquid
-                    pi = 1
-                    pid = PropertyPackages.Phase.Liquid
-                Case Phase.Aqueous
-                    pid = 6
-                    pid = PropertyPackages.Phase.Aqueous
-                Case Phase.Liquid1
-                    pid = 3
-                    pid = PropertyPackages.Phase.Liquid1
-                Case Phase.Liquid2
-                    pid = 4
-                    pid = PropertyPackages.Phase.Liquid2
-                Case Phase.Liquid3
-                    pid = 5
-                    pid = PropertyPackages.Phase.Liquid3
-                Case Phase.Vapor
-                    If VaporPhaseFugacityCalculationMode = VaporPhaseFugacityCalcMode.Ideal Then
-                        Dim vapdens = AUX_VAPDENS(T, P)
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                            subst.PartialVolume = subst.ConstantProperties.Molar_Weight / vapdens
-                        Next
-                    Else
-                        Dim partvol As New Object
-                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.0001)
-                        i = 0
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                            subst.PartialVolume = partvol(i)
-                            i += 1
-                        Next
-                    End If
-            End Select
-
-
-            If pi <> 0 Then
-
-                Dim Vx = RET_VMOL(pid)
-                Dim n As Integer = Vx.Length - 1
-
-                Dim constprop = DW_GetConstantProperties()
-
-                Dim ativ(n), poy1(n), poy2(n), vex(n) As Double
-
-                ativ = m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
-
-                Dim P2 As Double = P + 1
-
-                Dim Psati, vli As Double
-                For i = 0 To n
-                    vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
-                    If Double.IsNaN(vli) Then
-                        vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
-                    End If
-                    Psati = AUX_PVAPi(i, T)
-                    poy1(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
-                    poy2(i) = Math.Exp(vli * Abs(P2 - Psati) / (8314.47 * T))
-                    vex(i) = (Log(ativ(i) * poy2(i)) - Log(ativ(i) * poy1(i))) * 8.314 * T * 1000 'm3/kmol
-                Next
-
-                i = 0
-                For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(pi).Compounds.Values
-                    subst.PartialVolume = vex(i)
-                    i += 1
-                Next
-
-            End If
-
-            If phase = Phase.Mixture Then
-
-                For j As Integer = 1 To 7
+            For j As Integer = 1 To 7
 
                     If j <> 2 Then
 
@@ -241,8 +170,6 @@ Namespace PropertyPackages
                     End If
 
                 Next
-
-            End If
 
         End Sub
 
