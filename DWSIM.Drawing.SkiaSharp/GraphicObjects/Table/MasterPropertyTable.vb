@@ -45,16 +45,19 @@ Namespace GraphicObjects.Tables
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
-
+            m_objectlist.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Objects").Elements.ToList
                 m_objectlist.Add(XmlConvert.DecodeName(xel.Name.LocalName), xel.Value)
             Next
+            m_propertylist.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Properties").Elements.ToList
                 m_propertylist.Add(XmlConvert.DecodeName(xel.Name.LocalName), xel.Value)
             Next
+            m_sortableitems.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortableItems").Elements.ToList
                 m_sortableitems.Add(xel.Value)
             Next
+            m_sortedlist.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortedList").Elements.ToList
                 m_sortedlist.Add(xel.Value)
             Next
@@ -420,7 +423,8 @@ Namespace GraphicObjects.Tables
                 If bo Then k += 1
             Next
 
-            Dim maxL1, maxL2(k - 1), maxL2a, maxL3, count, i, maxH, n As Integer
+            Dim maxL1, maxL2a, maxL3, count, i, maxH, n As Integer
+            Dim maxL2 As New List(Of Integer)
 
             If SortedList.Count > 0 Then
 
@@ -434,7 +438,7 @@ Namespace GraphicObjects.Tables
                     i = 0
                     If Not m_sortedlist Is Nothing Then
                         For Each s As String In m_sortedlist
-                            maxL2(i) = 0
+                            maxL2.Add(0)
                             count = 1
                             For Each ni In m_items(s)
                                 size = MeasureString(Flowsheet.GetTranslatedString(ni.Text), tpaint)
@@ -452,7 +456,7 @@ Namespace GraphicObjects.Tables
                         Next
                     Else
                         For Each s As String In m_items.Keys
-                            maxL2(i) = 0
+                            maxL2.Add(0)
                             count = 1
                             For Each ni In m_items(s)
                                 size = MeasureString(Flowsheet.GetTranslatedString(ni.Text), tpaint)
@@ -475,7 +479,7 @@ Namespace GraphicObjects.Tables
 
                 Me.Height = (count) * (maxH + 2 * Me.Padding)
                 If Not m_items Is Nothing Then
-                    If maxL2.Length > 0 Then
+                    If maxL2.Count > 0 Then
                         maxL2a = maxL2.Max + 3 * Padding
                         Me.Width = (4 + 2 * m_items.Count) * Me.Padding + maxL1 + (k) * maxL2a + maxL3
                     Else
@@ -503,7 +507,7 @@ Namespace GraphicObjects.Tables
                 'desenhar textos e retangulos
                 canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
                 If Not m_items Is Nothing Then
-                    If maxL2.Length > 0 Then
+                    If maxL2.Count > 0 Then
                         i = 0
                         If Not m_sortedlist Is Nothing Then
                             For Each s As String In m_sortedlist
