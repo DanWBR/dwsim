@@ -199,18 +199,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.SkiaSharp.Views.Deskt
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Debug|Mixed Platforms = Debug|Mixed Platforms
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release Linux|Any CPU = Release Linux|Any CPU
-		Release Linux|Mixed Platforms = Release Linux|Mixed Platforms
-		Release Linux|x64 = Release Linux|x64
-		Release Linux|x86 = Release Linux|x86
-		Release WinMac|Any CPU = Release WinMac|Any CPU
-		Release WinMac|Mixed Platforms = Release WinMac|Mixed Platforms
 		Release WinMac|x64 = Release WinMac|x64
 		Release WinMac|x86 = Release WinMac|x86
+		Release Linux|x64 = Release Linux|x64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
