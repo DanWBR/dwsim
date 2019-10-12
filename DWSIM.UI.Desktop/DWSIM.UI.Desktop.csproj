@@ -376,10 +376,10 @@ erase /S /Q "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll" 2&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Raspberry\libSkiaSharp.dll" 2&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\macOS\libSkiaSharp.dll" 2&gt;nul
 
-erase /S /Q"$(SolutionDir)DistPackages\Windows\*vshost*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Linux\*vshost*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Raspberry\*vshost*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\macOS\*vshost*" 2&gt;nul
+erase /S /Q"$(SolutionDir)DistPackages\Windows\*vshost*.*" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*vshost*.*" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Raspberry\*vshost*.*" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\macOS\*vshost*.*" 2&gt;nul
 
 erase /S "$(SolutionDir)DistPackages\Linux\*-sharp.*" 2&gt;nul
 
