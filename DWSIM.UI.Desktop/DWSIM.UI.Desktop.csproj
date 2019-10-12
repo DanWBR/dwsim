@@ -336,41 +336,41 @@ xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPa
 xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x64"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x86"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app"
+rd /S /Q "$(SolutionDir)DistPackages\Windows\x64"
+rd /S /Q "$(SolutionDir)DistPackages\Windows\x86"
+rd /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
 
-rmdir /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Linux\x64"
-rmdir /S /Q "$(SolutionDir)DistPackages\Linux\x86"
-rmdir /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.UI.Desktop.app"
+rd /S /Q "$(SolutionDir)DistPackages\Linux\x64"
+rd /S /Q "$(SolutionDir)DistPackages\Linux\x86"
+rd /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
 
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\data\unifac"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x64"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x86"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\de"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\docs"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\es"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\help"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\de"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.UI.Desktop.app"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\data\unifac"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\x64"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\x86"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\de"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\docs"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\es"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\help"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\de"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\pt"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\ECE"
 
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\data\unifac"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\x64"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\x86"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\docs"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\es"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\help"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\pt
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\pt-BR"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\DWSIM.UI.Desktop.app"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\data\unifac"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x64"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x86"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\docs"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\es"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\help"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt-BR"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE"
 
 erase /S /Q "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll" 2&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Raspberry\libSkiaSharp.dll" 2&gt;nul
@@ -395,10 +395,10 @@ xcopy "$(SolutionDir)PlatformFiles\Windows_32\*" "$(SolutionDir)DistPackages\Win
 
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Windows_32\plugins\" /E /Y /F /D
 
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x64"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x86"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app"
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\x64"
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\x86"
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
 
 erase /S /Q "$(SolutionDir)DistPackages\Windows_32\*vshost*" 2&gt;nul
 

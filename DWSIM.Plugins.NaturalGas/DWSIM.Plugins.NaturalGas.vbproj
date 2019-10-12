@@ -276,38 +276,38 @@
 
 del /Q "$(SolutionDir)DistPackages\Windows\plugins\*Skia*" 2&gt;nul
 del /Q "$(SolutionDir)DistPackages\Windows\plugins\*Eto*" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows\plugins\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows\plugins\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows\plugins\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows\plugins\x64" 2&gt;nul
 
 del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*Skia*" 2&gt;nul
 del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*Eto*" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows_32\plugins\x64" 2&gt;nul
 
 del /Q "$(SolutionDir)DistPackages\macOS\plugins\*Skia*" 2&gt;nul
 del /Q "$(SolutionDir)DistPackages\macOS\plugins\*Eto*" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\macOS\plugins\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\macOS\plugins\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\macOS\plugins\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\macOS\plugins\x64" 2&gt;nul
 
 del /Q "$(SolutionDir)DistPackages\Linux\plugins\*Skia*" 2&gt;nul
 del /Q "$(SolutionDir)DistPackages\Linux\plugins\*Eto*" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Linux\plugins\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Linux\plugins\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Linux\plugins\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Linux\plugins\x64" 2&gt;nul
 
 del /Q "$(SolutionDir)DistPackages\Windows\plugins\*.dylib" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows\x64" 2&gt;nul
 
 del /Q "$(SolutionDir)DistPackages\Windows_32\plugins\*.dylib" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Windows_32\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows_32\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Windows_32\x64" 2&gt;nul
 
-rmdir /s /q "$(SolutionDir)DistPackages\macOS\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\macOS\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\macOS\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\macOS\x64" 2&gt;nul
 
 del /Q "$(SolutionDir)DistPackages\Linux\plugins\*.dylib" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Linux\x86" 2&gt;nul
-rmdir /s /q "$(SolutionDir)DistPackages\Linux\x64" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Linux\x86" 2&gt;nul
+rd /s /q "$(SolutionDir)DistPackages\Linux\x64" 2&gt;nul
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
