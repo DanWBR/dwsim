@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -68,7 +68,7 @@ Namespace My.Resources
         '''n-Butano	106-97-8	49.51	45.72	49.53	45.72	49.55	45.72	49.62	45.74
         '''2-Metilpropano	75-28-5	49.35	45.56	49.37	45.56	49.39	45.57	49.45	45.57
         '''n-Pentano	109-66-0	49.01	45.35	49.03	45.35	49.04	45.35	49.1	45.36
-        '''2-Metilbutano	78-78-4	48.91	45.25	48.93	45.25	48. [rest of string was truncated]&quot;;.
+        '''2-Metilbutano	78-78-4	48.91	45.25	48.93	45 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property pc_massico() As String
             Get
@@ -82,7 +82,7 @@ Namespace My.Resources
         '''Etano	74-84-0	66.07	60.43	69.79	63.76	69.69	63.75	69.63	63.74	64.91	59.39	64.88	59.39
         '''Propano	74-98-6	93.94	86.42	99.22	91.18	99.09	91.16	99.01	91.15	92.29	84.94	95.25	84.93
         '''n-Butano	106-97-8	121.79	112.4	128.66	118.61	128.48	118.57	128.37	118.56	119.66	110.47	119.62	110.47
-        '''2-Metilpropano	75-28-5	121.4	112. [rest of string was truncated]&quot;;.
+        '''2-Metilpropano	75-28-5	121.4 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property pc_volumetrico() As String
             Get
