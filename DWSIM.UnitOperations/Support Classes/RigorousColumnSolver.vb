@@ -2829,7 +2829,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 For j = 0 To nc - 1
                     K(i)(j) = Kval(i)(j)
                     IObj?.SetCurrent()
-                    If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Or K(i)(j) = 0# Then K(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
+                    If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Or K(i)(j) = 0# Then
+                        If llextr Then
+                            If i > 0 And K(i - 1).Sum > 0.0 Then
+                                K(i) = K(i - 1).Clone
+                            End If
+                        Else
+                            K(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
+                        End If
+                    End If
                 Next
             Next
 

@@ -618,10 +618,8 @@ will converge to this solution.")
             Dim tol As Double
             Dim fcv(n), fcl(n) As Double
 
-            tol = 0.000001
-            maxits = 200
-
-            Dim m As Integer = Vtrials.Count - 1 + 2
+            tol = 0.0001
+            maxits = 100
 
             Dim h(n), lnfi_z(n) As Double
 
@@ -687,6 +685,18 @@ will converge to this solution.")
                 i = i + 1
             Loop Until i = n + 1
 
+
+            For i = 0 To 20
+                Dim random As New Random(i)
+                Vtrials.Add(Enumerable.Repeat(0, n + 1).Select(Function(d) random.NextDouble()).ToArray)
+            Next
+
+            Dim m As Integer = Vtrials.Count - 1 '+ 2
+
+            For i = 0 To Vtrials.Count - 1
+                Vtrials(i) = Vtrials(i).NormalizeY()
+            Next
+
             Dim g_(m), beta(m), r(m), r_ant(m) As Double
             Dim excidx As New Concurrent.ConcurrentBag(Of Integer)
 
@@ -695,7 +705,7 @@ will converge to this solution.")
             GlobalSettings.Settings.InspectorEnabled = False
 
             'start stability test for each one of the initial estimate vectors
-            Parallel.For(0, n + 1, Sub(xi)
+            Parallel.For(0, m + 1, Sub(xi)
 
                                        Dim jj, cc As Integer
                                        Dim vector = Vtrials(xi)
