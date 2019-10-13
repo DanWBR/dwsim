@@ -33,7 +33,7 @@ macOS: 10.7 (OS X Lion) or newer
 
 Software:
 
-Microsoft .NET Framework 4.7.1 or newer (Windows) 
+Microsoft .NET Framework 4.6.1 or newer (Windows) 
 Mono Framework 5.14.0 or newer (Linux)
 
 CPU:			
