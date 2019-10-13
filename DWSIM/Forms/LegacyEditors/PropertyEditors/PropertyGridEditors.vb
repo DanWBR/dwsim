@@ -11,7 +11,6 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.UnitOperations.UnitOperations.Column
 
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
-Imports DWSIM.Controls
 Imports Controls
 
 Public Class PropertyGridEditors

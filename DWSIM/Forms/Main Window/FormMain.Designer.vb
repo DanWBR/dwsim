@@ -815,7 +815,7 @@ Partial Class FormMain
 
         pathsep = Path.DirectorySeparatorChar
 
-        If Not Settings.CAPEOPENMode AndAlso Not Settings.AutomationMode Then
+        If Not Settings.CAPEOPENMode Then
             AddPropPacks()
             AddFlashAlgorithms()
             GetComponents()

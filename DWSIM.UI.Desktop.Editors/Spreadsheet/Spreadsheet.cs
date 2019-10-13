@@ -297,7 +297,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
 
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
 
@@ -401,7 +401,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 else
                                     cellparam.CellType = SharedClasses.Spreadsheet.VarType.Expression;
                             }
-                            catch (Exception ex)
+                            catch
                             {
                             }
                             sheet.Cells[i, j].Tag = cellparam;

@@ -1,5 +1,4 @@
-﻿Imports DWSIM.Controls
-
+﻿
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormEditGraphicObject
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent

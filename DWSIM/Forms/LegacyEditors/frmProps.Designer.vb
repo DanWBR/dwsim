@@ -1,4 +1,3 @@
-Imports DWSIM.Controls
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmProps

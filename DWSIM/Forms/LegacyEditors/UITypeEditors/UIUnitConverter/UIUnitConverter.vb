@@ -19,7 +19,6 @@
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports DWSIM.SharedClasses.SystemsOfUnits
-Imports DWSIM.Controls
 Imports Controls
 
 Namespace DWSIM.Editors.Generic

@@ -1,6 +1,5 @@
 ﻿Imports CapeOpen
 Imports Controls.PropertyGridEx
-Imports DWSIM.Controls.PropertyGridEx
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Interfaces

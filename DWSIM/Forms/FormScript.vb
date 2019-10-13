@@ -66,7 +66,7 @@ Imports IronPython.Hosting
             InsertScriptTab(s)
         Next
 
-        Dim snippets = New SharedClasses.Scripts.IronPythonSnippets().GetSnippets()
+        Dim snippets = SharedClasses.Scripts.IronPythonSnippets.GetSnippets()
 
         For Each group1 In snippets.GroupBy(Function(x) x.Category1)
 

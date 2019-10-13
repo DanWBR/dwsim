@@ -83,7 +83,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\DWSIM\bin\x64\Debug\plugins\</OutputPath>
     <DocumentationFile>NaturalGas.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
     <DebugType>full</DebugType>
@@ -94,7 +94,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DebugSymbols>true</DebugSymbols>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Release\</OutputPath>
+    <OutputPath>..\DWSIM\bin\Release\plugins\</OutputPath>
     <DocumentationFile>NaturalGas.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
     <DebugType>Full</DebugType>
@@ -130,10 +130,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Runtime.Serialization.Primitives">
-      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>

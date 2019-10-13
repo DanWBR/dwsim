@@ -522,10 +522,11 @@ Public Class FormOptimization
                 .Variables.Add(objName, SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(Me.keysind(0)).unit, t))
                 For i = 1 To Me.keysaux.Count
                     For j = 1 To Me.keysaux.Count
+                        Dim j2 = j
                         If AobjID(i) <> "SpreadsheetCell" And AobjID(i) <> "ReactionProperty" Then
                             .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(Me.keysaux(i - 1)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
                         ElseIf AobjID(i) = "ReactionProperty" Then
-                            Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
+                            Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j2).Split("|")(0)).FirstOrDefault
                             .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
                         Else
                             .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Data

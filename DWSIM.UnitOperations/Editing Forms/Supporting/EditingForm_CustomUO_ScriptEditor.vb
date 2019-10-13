@@ -117,7 +117,7 @@ Imports System.Drawing
 
         txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
 
-        Dim snippets = New SharedClasses.Scripts.IronPythonSnippets().GetSnippets()
+        Dim snippets = SharedClasses.Scripts.IronPythonSnippets.GetSnippets()
 
         For Each group1 In snippets.GroupBy(Function(x) x.Category1)
 

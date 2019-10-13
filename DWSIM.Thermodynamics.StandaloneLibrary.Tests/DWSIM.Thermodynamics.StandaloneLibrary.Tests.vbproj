@@ -50,10 +50,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DWSIM.Thermodynamics.StandaloneLibrary, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DistPackages\DTL\DWSIM.Thermodynamics.StandaloneLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -112,6 +108,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.StandaloneLibrary\DWSIM.Thermodynamics.StandaloneLibrary.vbproj">
+      <Project>{ce1b1451-22a9-4cf3-a0ff-821b9e629696}</Project>
+      <Name>DWSIM.Thermodynamics.StandaloneLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
