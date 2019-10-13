@@ -130,9 +130,9 @@
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Release" (
 
-xcopy "$(SolutionDir)DWSIM.Automation\bin\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
-xcopy "$(SolutionDir)DWSIM.Automation\bin\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
-xcopy "$(SolutionDir)DWSIM.Automation\bin\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM.Automation\bin\x64\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
+xcopy "$(SolutionDir)DWSIM.Automation\bin\x86\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
+xcopy "$(SolutionDir)DWSIM.Automation\bin\x64\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
 
 )</PostBuildEvent>
   </PropertyGroup>

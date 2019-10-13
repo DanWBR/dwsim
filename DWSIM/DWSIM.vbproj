@@ -3369,32 +3369,32 @@ xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(TargetDir)" /E /Y /F /D
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
-erase /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Linux\*.tmp" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dylib" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Linux\libCEF.dll" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Linux\*.pak" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dat" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\libCEF.dll" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.pak" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dat" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x64" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
-erase /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Windows\*.tmp" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Windows\*.dylib" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Windows\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Windows\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
 
-erase /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\macOS\*.tmp" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\macOS\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x86" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
-erase /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*" 2&gt;nul
-erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp" 2&gt;nul
-erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.dylib" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
 
 )</PostBuildEvent>
   </PropertyGroup>

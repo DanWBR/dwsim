@@ -332,52 +332,52 @@ xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPa
 xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 
-rd /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app"
-rd /S /Q "$(SolutionDir)DistPackages\Windows\x64"
-rd /S /Q "$(SolutionDir)DistPackages\Windows\x86"
-rd /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Windows\x64" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Windows\x86" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Windows\ECE" 1&gt;nul 4&gt;nul
 
-rd /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.UI.Desktop.app"
-rd /S /Q "$(SolutionDir)DistPackages\Linux\x64"
-rd /S /Q "$(SolutionDir)DistPackages\Linux\x86"
-rd /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.UI.Desktop.app" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Linux\x64" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Linux\x86" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Linux\ECE" 1&gt;nul 4&gt;nul
 
-rd /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.UI.Desktop.app"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\data\unifac"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\x64"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\x86"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\de"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\docs"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\es"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\help"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\de"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\pt"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR"
-rd /S /Q "$(SolutionDir)DistPackages\macOS\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.UI.Desktop.app" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\data\unifac" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\x64" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\x86" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\de" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\docs" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\es" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\help" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\de" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\pt" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\macOS\ECE" 1&gt;nul 4&gt;nul
 
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\DWSIM.UI.Desktop.app"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\data\unifac"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x64"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x86"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\docs"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\es"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\help"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt-BR"
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\DWSIM.UI.Desktop.app" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\data\unifac" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x64" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x86" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\docs" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\es" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\help" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt-BR" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE" 1&gt;nul 4&gt;nul
 
-erase /S /Q "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Raspberry\libSkiaSharp.dll" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\macOS\libSkiaSharp.dll" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Raspberry\libSkiaSharp.dll" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\macOS\libSkiaSharp.dll" 2&gt;nul 1&gt;nul 4&gt;nul
 
-erase /S /Q"$(SolutionDir)DistPackages\Windows\*vshost*.*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Linux\*vshost*.*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Raspberry\*vshost*.*" 2&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\macOS\*vshost*.*" 2&gt;nul
+erase /S /Q"$(SolutionDir)DistPackages\Windows\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Raspberry\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\macOS\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
 
-erase /S "$(SolutionDir)DistPackages\Linux\*-sharp.*" 2&gt;nul
+erase /S "$(SolutionDir)DistPackages\Linux\*-sharp.*" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)" == "x86" (
 
@@ -391,12 +391,12 @@ xcopy "$(SolutionDir)PlatformFiles\Windows_32\*" "$(SolutionDir)DistPackages\Win
 
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Windows_32\plugins\" /E /Y /F /D
 
-rd /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app"
-rd /S /Q "$(SolutionDir)DistPackages\Windows_32\x64"
-rd /S /Q "$(SolutionDir)DistPackages\Windows_32\x86"
-rd /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\x64" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\x86" 1&gt;nul 4&gt;nul
+rd /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE" 1&gt;nul 4&gt;nul
 
-erase /S /Q "$(SolutionDir)DistPackages\Windows_32\*vshost*" 2&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Windows_32\*vshost*" 2&gt;nul 1&gt;nul 4&gt;nul
 
 )</PostBuildEvent>
   </PropertyGroup>
