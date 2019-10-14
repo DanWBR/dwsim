@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.8
+Version 5.8 Update 1
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.8 Update 1
+
+- [CHG] Changed target .NET Framework version to 4.6.1 on Windows
+- [CHG] Reduced the size of the User Guide PDF file
+- [FIX] Fixed Automation feature
+- [FIX] Fixed some issues with ReoGrid formula parsing
+- [FIX] Enhanced reliability of liquid phase instability detection
 
 Version 5.8
 

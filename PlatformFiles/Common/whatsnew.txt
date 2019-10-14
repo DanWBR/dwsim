@@ -1,15 +1,7 @@
-Version 5.8
+Version 5.8 Update 1
 
-- [NEW] Enhanced Spreadsheet Tool
-- [NEW] 2D Charts Tool
-- [NEW] Enhanced Script Editor (Cross-Platform UI)
-- [NEW] Dynamic Script Snippets
-- [CHG] Redesigned Cross-Platform UI
-- [CHG] Redesigned Property Package editors
-- [FIX] Fixed some unit conversions for reaction basis
-- [FIX] Fixed text to number conversions
-- [FIX] Fixed flowsheet dragging while zoomed
-- [FIX] Fixed PFR heat balance
-- [FIX] Fixed liquid phase viscosity calculation for supercritical compounds
-- [FIX] Fixed Splitter ratios calculation mode
-- [FIX] Workaround for math expression parsing errors
+- [CHG] Changed target .NET Framework version to 4.6.1 on Windows
+- [CHG] Reduced the size of the User Guide PDF file
+- [FIX] Fixed Automation feature
+- [FIX] Fixed some issues with ReoGrid formula parsing
+- [FIX] Enhanced reliability of liquid phase instability detection

@@ -2757,11 +2757,25 @@ Namespace UnitOperations
                     Next
                 Else
                     IObj?.SetCurrent()
-                    Dim flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
+                    Dim flashresult As Object = Nothing
                     If llextractor Then
                         Dim L1, L2, Vx1(), Vx2(), rho1, rho2 As Double
-                        L1 = flashresult(0)
-                        L2 = flashresult(5)
+                        Dim trialcomp As Double() = zm.Clone
+                        For counter As Integer = 0 To 20
+                            flashresult = pp.FlashBase.Flash_PT(trialcomp, P(i), T(i), pp)
+                            L1 = flashresult(0)
+                            L2 = flashresult(5)
+                            If L2 > 0.0 Then
+                                Exit For
+                            Else
+                                Dim rnd As New Random(counter)
+                                trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
+                                trialcomp = trialcomp.NormalizeY
+                            End If
+                        Next
+                        If L2 = 0.0 Then
+                            Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
+                        End If
                         Vx1 = flashresult(2)
                         Vx2 = flashresult(6)
                         IObj?.SetCurrent()

@@ -491,6 +491,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Function StabTest(ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VTc As Double(), ByVal pp As PropertyPackage)
 
+            If pp.AUX_IS_SINGLECOMP(Vz) Then
+                Return New Object() {True, Nothing}
+            End If
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "StabTest", Name & " (Stability Test)", "Liquid Phase Stability Test Routine", True)
@@ -620,8 +624,8 @@ will converge to this solution.")
             Dim tol As Double
             Dim fcv(n), fcl(n) As Double
 
-            tol = 0.0001
-            maxits = 100
+            tol = 0.00001
+            maxits = 200
 
             Dim h(n), lnfi_z(n) As Double
 
@@ -694,11 +698,11 @@ will converge to this solution.")
                 Vtrials.Add(Enumerable.Repeat(0, n + 1).Select(Function(d) random.NextDouble()).ToArray.MultiplyY(Vz))
             Next
 
-            Dim m As Integer = Vtrials.Count - 1 '+ 2
-
             For i = 0 To Vtrials.Count - 1
                 Vtrials(i) = Vtrials(i).NormalizeY()
             Next
+
+            Dim m As Integer = Vtrials.Count - 1 '+ 2
 
             Dim g_(m), beta(m), r(m), r_ant(m) As Double
             Dim excidx As New Concurrent.ConcurrentBag(Of Integer)
@@ -854,7 +858,7 @@ will converge to this solution.")
                         sum5 += vector(j)
                         j = j + 1
                     Loop Until j = n + 1
-                    If Abs(sum5 - 1) < 0.001 Then
+                    If Abs(sum5 - 1) < 0.001 Or Double.IsNaN(sum5) Or Double.IsInfinity(sum5) Then
                         'phase is stable
                         If Not excidx.Contains(i) Then excidx.Add(i)
                     End If

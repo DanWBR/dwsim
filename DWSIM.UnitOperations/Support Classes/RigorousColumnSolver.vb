@@ -2831,8 +2831,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     IObj?.SetCurrent()
                     If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Or K(i)(j) = 0# Then
                         If llextr Then
-                            If i > 0 And K(i - 1).Sum > 0.0 Then
-                                K(i) = K(i - 1).Clone
+                            If i > 0 Then
+                                If K(i - 1).Sum > 0.0 Then K(i) = K(i - 1).Clone
                             End If
                         Else
                             K(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
