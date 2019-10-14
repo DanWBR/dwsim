@@ -352,6 +352,21 @@
   <data name="TabPageGM.Text" xml:space="preserve">
     <value>Gibbs Minimization</value>
   </data>
+  <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 32</value>
+  </data>
+  <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 13</value>
+  </data>
+  <data name="Label27.Text" xml:space="preserve">
+    <value>Number of Random Compositions to Try</value>
+  </data>
+  <data name="TabPageST.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 296</value>
+  </data>
+  <data name="TabPageST.Text" xml:space="preserve">
+    <value>Stability Test</value>
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>526, 16</value>
   </data>

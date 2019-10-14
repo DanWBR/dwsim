@@ -116,6 +116,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             settings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) = 10.0.ToString(ci)
             settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = 0.1.ToString(ci)
 
+            settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = 20
+
             Return settings
 
         End Function
@@ -685,10 +687,11 @@ will converge to this solution.")
                 i = i + 1
             Loop Until i = n + 1
 
+            Dim ntries As Integer = FlashSettings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
 
-            For i = 0 To 20
+            For i = 0 To ntries
                 Dim random As New Random(i)
-                Vtrials.Add(Enumerable.Repeat(0, n + 1).Select(Function(d) random.NextDouble()).ToArray)
+                Vtrials.Add(Enumerable.Repeat(0, n + 1).Select(Function(d) random.NextDouble()).ToArray.MultiplyY(Vz))
             Next
 
             Dim m As Integer = Vtrials.Count - 1 '+ 2
@@ -1127,6 +1130,9 @@ will converge to this solution.")
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon, 0.1.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries, 20)
                 End If
 
             End If

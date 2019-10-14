@@ -38,6 +38,7 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
+                    TabControl1.TabPages.Remove(TabPageST)
                 Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
@@ -49,12 +50,14 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageUD)
+                    TabControl1.TabPages.Remove(TabPageST)
                 Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLE
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
+                    TabControl1.TabPages.Remove(TabPageST)
                 Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
@@ -67,6 +70,7 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
+                    TabControl1.TabPages.Remove(TabPageST)
                 Case Interfaces.Enums.FlashMethod.Inside_Out_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
@@ -80,6 +84,7 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
+                    TabControl1.TabPages.Remove(TabPageST)
                 Case Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server
                     TabControl1.TabPages.Remove(TabPageConvPars)
                     TabControl1.TabPages.Remove(TabPageGM)
@@ -87,6 +92,7 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
+                    TabControl1.TabPages.Remove(TabPageST)
                 Case Interfaces.Enums.FlashMethod.UserDefined
                     TabControl1.TabPages.Remove(TabPageConvPars)
                     TabControl1.TabPages.Remove(TabPageGM)
@@ -94,6 +100,7 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageST)
             End Select
 
         Else
@@ -164,6 +171,8 @@ Public Class FlashAlgorithmConfig
             cbMinMethodGM.Items.AddRange(minmethods)
 
             cbMinMethodGM.SelectedItem = Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod)
+
+            NumericUpDown1.Value = Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
 
             If Not ExcelMode Then SetupKeyCompounds()
 
@@ -658,6 +667,12 @@ Public Class FlashAlgorithmConfig
             pp.Dispose()
             pp = Nothing
         End Try
+
+    End Sub
+
+    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
+
+        If _loaded Then Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = NumericUpDown1.Value
 
     End Sub
 

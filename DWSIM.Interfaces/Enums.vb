@@ -248,6 +248,8 @@ Namespace Enums
         PVFlash_MaximumTemperatureChange = 19
         PVFlash_FixedDampingFactor = 20
 
+        ST_Number_of_Random_Tries = 21
+
     End Enum
 
     Public Enum FlashCalculationType

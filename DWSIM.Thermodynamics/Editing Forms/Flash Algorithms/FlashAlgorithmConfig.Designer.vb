@@ -67,6 +67,9 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.cbMinMethodGM = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.TabPageST = New System.Windows.Forms.TabPage()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.Label27 = New System.Windows.Forms.Label()
         Me.TabPageCOES = New System.Windows.Forms.TabPage()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -121,6 +124,8 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox5.SuspendLayout()
         Me.TabPageGM.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.TabPageST.SuspendLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageCOES.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.TabPageIM.SuspendLayout()
@@ -142,6 +147,7 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1.Controls.Add(Me.TabPageNL)
         Me.TabControl1.Controls.Add(Me.TabPageIO)
         Me.TabControl1.Controls.Add(Me.TabPageGM)
+        Me.TabControl1.Controls.Add(Me.TabPageST)
         Me.TabControl1.Controls.Add(Me.TabPageCOES)
         Me.TabControl1.Controls.Add(Me.TabPageIM)
         Me.TabControl1.Controls.Add(Me.TabPageUD)
@@ -415,6 +421,26 @@ Partial Class FlashAlgorithmConfig
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        '
+        'TabPageST
+        '
+        resources.ApplyResources(Me.TabPageST, "TabPageST")
+        Me.TabPageST.Controls.Add(Me.NumericUpDown1)
+        Me.TabPageST.Controls.Add(Me.Label27)
+        Me.TabPageST.Name = "TabPageST"
+        Me.TabPageST.UseVisualStyleBackColor = True
+        '
+        'NumericUpDown1
+        '
+        resources.ApplyResources(Me.NumericUpDown1, "NumericUpDown1")
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'Label27
+        '
+        resources.ApplyResources(Me.Label27, "Label27")
+        Me.Label27.Name = "Label27"
         '
         'TabPageCOES
         '
@@ -723,6 +749,9 @@ Partial Class FlashAlgorithmConfig
         Me.TabPageGM.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.TabPageST.ResumeLayout(False)
+        Me.TabPageST.PerformLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPageCOES.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
@@ -827,4 +856,7 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents Label25 As Label
     Friend WithEvents tbPV_EpsilonT As TextBox
     Friend WithEvents Label26 As Label
+    Friend WithEvents TabPageST As TabPage
+    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents Label27 As Label
 End Class
