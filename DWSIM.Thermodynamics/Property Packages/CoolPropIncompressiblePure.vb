@@ -181,7 +181,21 @@ Namespace PropertyPackages
 
         Public Function AUX_VAPVISCMIX(T As Double, P As Double, MM As Double) As Double
 
-            Return 0.0
+            Try
+                Return CoolProp.PropsSI("V", "T", T, "P", 101325, GetCoolPropName())
+            Catch ex As Exception
+                Return 0.0
+            End Try
+
+        End Function
+
+        Public Function AUX_LIQVISCMIX(T As Double, P As Double, MM As Double) As Double
+
+            Try
+                Return CoolProp.PropsSI("V", "T", T, "P", 101325, GetCoolPropName())
+            Catch ex As Exception
+                Return 0.0
+            End Try
 
         End Function
 
@@ -438,7 +452,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
                 IObj?.SetCurrent
-                result = Me.AUX_LIQVISCm(T, P)
+                result = Me.AUX_LIQVISCMIX(T, P, 0)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
 
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
@@ -597,7 +611,7 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
                 Case "viscosity"
                     If state = "L" Then
-                        result = Me.AUX_LIQVISCm(T, P)
+                        result = Me.AUX_LIQVISCMIX(T, P, 0)
                     Else
                         result = Me.AUX_VAPVISCMIX(T, P, Me.AUX_MMM(phase))
                     End If

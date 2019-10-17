@@ -6139,6 +6139,14 @@ Final3:
                 With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
                     Dim dens = AUX_LIQDENSi(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties, T)
                     Dim visc = Auxiliary.PROPS.oilvisc_twu(T, .PF_Tv1, .PF_Tv2, .PF_v1, .PF_v2)
+                    If Double.IsNaN(visc) Then
+                        Dim Tc, Pc, w, Mw As Double
+                        Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                        Pc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure
+                        w = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Acentric_Factor
+                        Mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                        visc = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, Mw)
+                    End If
                     Return visc * dens
                 End With
             Else
@@ -6254,7 +6262,7 @@ Final3:
                     IObj?.Paragraphs.Add(String.Format("Compressed Liquid Viscosity Correction Factor: {0}", pcorr))
                     lval = lval * pcorr
                     IObj?.Paragraphs.Add(String.Format("Corrected Liquid Viscosity : {0} Pa.s", Exp(lval)))
-                    If Double.IsNaN(lval) Or Double.IsInfinity(lval) Then
+                    If Double.IsNaN(lval) Or Double.IsInfinity(lval) And subst.MoleFraction.GetValueOrDefault > 0 Then
                         Throw New Exception(String.Format("Error calculating viscosity for '{0}'. Temperature: {1} K, Pressure: {2} Pa. Calculated value: {3}", subst.Name, T, P, lval))
                     End If
                 End If
