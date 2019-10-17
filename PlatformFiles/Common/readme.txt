@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.8 Update 1
+Version 5.8 Update 2
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.8 Update 2
+
+- [NEW] Added a new VLLE Flash Algorithm tweak to check for alternative liquid phase compositions on initial VLE PT Flash
+- [FIX] Fixed Rigorous Column automatic initialization
+- [FIX] Fixed number of trial compositions not changing on Flash Algorithm editor
 
 Version 5.8 Update 1
 
