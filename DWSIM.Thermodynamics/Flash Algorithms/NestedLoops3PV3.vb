@@ -486,11 +486,64 @@ out:
 
             result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
+            Dim GoneThrough As Boolean = False
+
+            If L = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
+
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+
+                If stresult(0) = False Then
+
+                    Dim nlflash As New NestedLoops()
+
+                    Dim m As Double = UBound(stresult(1), 1)
+
+                    Dim trialcomps As New List(Of Double())
+                    Dim results As New List(Of Object)
+
+                    For j = 0 To m
+                        Dim vxtrial(n) As Double
+                        For i = 0 To n
+                            vxtrial(i) = stresult(1)(j, i)
+                        Next
+                        trialcomps.Add(vxtrial)
+                    Next
+
+                    For Each tcomp In trialcomps
+                        Try
+                            Dim r2 = nlflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
+                            results.Add(r2)
+                        Catch ex As Exception
+                        End Try
+                    Next
+
+                    If results.Where(Function(r) r(0) > 0.0).Count > 0 Then
+
+                        Dim validresult = results.Where(Function(r) r(0) > 0.0).First
+
+                        L = validresult(0)
+                        V = validresult(1)
+                        Vx = validresult(2)
+                        Vy = validresult(3)
+                        ecount = validresult(4)
+
+                        prevres = New PreviousResults With {.L1 = L, .L2 = 0, .V = V, .Vy = Vy, .Vx1 = Vx, .Vx2 = PP.RET_NullVector}
+
+                        result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
+                        GoneThrough = True
+
+                    End If
+
+                End If
+
+            End If
+
             ' check if there is a liquid phase
 
             IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
 
-            If L > 0 Then ' we have a liquid phase
+            If L > 0 And Not GoneThrough Then
 
                 IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
 
@@ -912,6 +965,9 @@ out2:       d2 = Date.Now
                     L1 += -dL1 * df
                     L2 += -dL2 * df
 
+                    If Abs(dL1 * df) > 1.0 Then L1 = L1ant
+                    If Abs(dL2 * df) > 1.0 Then L2 = L2ant
+
                     If L1 < 0 Then L1 = 0.0
                     If L2 < 0 Then L2 = 0.0
 
@@ -997,6 +1053,7 @@ out:
             Dim brent As New BrentOpt.BrentMinimize
 
             brent.DefineFuncDelegate(Function(x)
+                                         Dim l1x, l2x As Double
                                          If Settings.EnableParallelProcessing Then
                                              Dim task1 As Task = New Task(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
                                              Dim task2 As Task = New Task(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
@@ -1013,12 +1070,13 @@ out:
                                          Gv = 0
                                          Gl1 = 0
                                          Gl2 = 0
-                                         _L1 = _L1 - x * dL1
-                                         If _L1 < 0 Then _L1 = 0.0
-                                         _L2 = _L2 - x * dl2
-                                         If _L2 < 0 Then _L2 = 0.0
-                                         _V = 1 - _L1 - _L2
-                                         If _V < 0 Then _V = 0.0
+                                         l1x = _L1 - x * dL1
+                                         If l1x < 0 Then l1x = 0
+                                         If l1x > 1 Then l1x = 1
+                                         l2x = _L2 - x * dl2
+                                         If l2x < 0 Then l2x = 0
+                                         If l2x > 1 Then l2x = 1 - l1x
+                                         _V = 1 - l1x - l2x
                                          For i = 0 To n
                                              If _Vy(i) <> 0 Then Gv += _Vy(i) * _V * Log(fcv(i) * _Vy(i))
                                              If _Vx1(i) <> 0 Then Gl1 += _Vx1(i) * _L1 * Log(fcl(i) * _Vx1(i))
@@ -1030,7 +1088,7 @@ out:
 
             Dim df As Double
 
-            Dim gmin As Double = brent.brentoptimize(dfmin, 1.0, 0.0001, df)
+            Dim gmin As Double = brent.brentoptimize(dfmin, 1.0, 1.0E-20, df)
 
             Return df
 

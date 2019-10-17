@@ -32,13 +32,19 @@ Public Class FlashAlgorithmConfig
             Me.Text += " - " & FlashAlgo.Tag
 
             Select Case FlashAlgo.AlgoType
-                Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE, Interfaces.Enums.FlashMethod.Nested_Loops_SVLLE
+                Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
                     TabControl1.TabPages.Remove(TabPageST)
+                Case Interfaces.Enums.FlashMethod.Nested_Loops_SVLLE
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                    TabControl1.TabPages.Remove(TabPageIM)
+                    TabControl1.TabPages.Remove(TabPageUD)
                 Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageIO)
@@ -145,8 +151,6 @@ Public Class FlashAlgorithmConfig
 
             End If
 
-            _loaded = True
-
         Else
 
             tbPHExtMaxIt.Text = Integer.Parse(Settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations), ci).ToString
@@ -173,6 +177,7 @@ Public Class FlashAlgorithmConfig
             cbMinMethodGM.SelectedItem = Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod)
 
             NumericUpDown1.Value = Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
+            chkForcePT3P.Checked = Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)
 
             If Not ExcelMode Then SetupKeyCompounds()
 
@@ -213,6 +218,8 @@ Public Class FlashAlgorithmConfig
             End If
 
         End If
+
+        _loaded = True
 
     End Sub
 
@@ -673,6 +680,14 @@ Public Class FlashAlgorithmConfig
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
 
         If _loaded Then Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = NumericUpDown1.Value
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkForcePT3P.CheckedChanged
+        Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability) = chkForcePT3P.Checked
+    End Sub
+
+    Private Sub Label28_Click(sender As Object, e As EventArgs) Handles Label28.Click
 
     End Sub
 

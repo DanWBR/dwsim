@@ -250,6 +250,8 @@ Namespace Enums
 
         ST_Number_of_Random_Tries = 21
 
+        CheckIncipientLiquidForStability = 22
+
     End Enum
 
     Public Enum FlashCalculationType

@@ -83,13 +83,58 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             ' try a two-phase flash first.
 
-            Dim _io As New BostonBrittInsideOut
+            Dim _io As New BostonBrittInsideOut With {.FlashSettings = FlashSettings}
 
             Dim result As Object = _io.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
 
+            Dim GoneThrough As Boolean = False
+
+            If L = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
+
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+
+                If stresult(0) = False Then
+
+                    Dim ioflash As New BostonBrittInsideOut With {.FlashSettings = FlashSettings}
+
+                    Dim m As Double = UBound(stresult(1), 1)
+
+                    Dim trialcomps As New List(Of Double())
+                    Dim results As New List(Of Object)
+
+                    For j = 0 To m
+                        Dim vxtrial(n) As Double
+                        For i = 0 To n
+                            vxtrial(i) = stresult(1)(j, i)
+                        Next
+                        trialcomps.Add(vxtrial)
+                    Next
+
+                    For Each tcomp In trialcomps
+                        Try
+                            Dim r2 = ioflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
+                            results.Add(r2)
+                        Catch ex As Exception
+                        End Try
+                    Next
+
+                    If results.Where(Function(r) r(0) > 0.0).Count > 0 Then
+
+                        Dim validresult = results.Where(Function(r) r(0) > 0.0).First
+
+                        result = validresult
+
+                        GoneThrough = True
+
+                    End If
+
+                End If
+
+            End If
+
             ' check if there is a liquid phase
 
-            If result(0) > 0 Then ' we have a liquid phase
+            If result(0) > 0 And Not GoneThrough Then ' we have a liquid phase
 
                 If result(1) > 0.0001 And nc = 1 Then
                     'the liquid phase cannot be unstable when there's also vapor and only two compounds in the system.

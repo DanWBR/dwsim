@@ -353,7 +353,7 @@
     <value>Gibbs Minimization</value>
   </data>
   <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 32</value>
+    <value>232, 27</value>
   </data>
   <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 13</value>
@@ -361,11 +361,32 @@
   <data name="Label27.Text" xml:space="preserve">
     <value>Number of Random Compositions to Try</value>
   </data>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Liquid Phase Stability Test</value>
+  </data>
+  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 45</value>
+  </data>
+  <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 36</value>
+  </data>
+  <data name="Label28.Text" xml:space="preserve">
+    <value>If the result of the initial VLE Flash is a single vapor phase, DWSIM will check the stability of the incipient liquid for an alternate liquid phase which may exist under such conditions. </value>
+  </data>
+  <data name="chkForcePT3P.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 17</value>
+  </data>
+  <data name="chkForcePT3P.Text" xml:space="preserve">
+    <value>Check Stability of Incipient Liquid Phase from Initial VLE PT Flash</value>
+  </data>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>General Options</value>
+  </data>
   <data name="TabPageST.Size" type="System.Drawing.Size, System.Drawing">
     <value>633, 296</value>
   </data>
   <data name="TabPageST.Text" xml:space="preserve">
-    <value>Stability Test</value>
+    <value>VLLE</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>526, 16</value>

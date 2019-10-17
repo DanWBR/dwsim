@@ -2807,6 +2807,7 @@ Namespace UnitOperations
                             End If
                         End If
                     Else
+                        flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
                         x(i) = flashresult(2)
                         y(i) = flashresult(3)
                     End If

@@ -138,6 +138,9 @@
   <data name="tbPTintMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="&gt;&gt;chkForcePT3P.Name" xml:space="preserve">
+    <value>chkForcePT3P</value>
+  </data>
   <data name="&gt;&gt;GroupBox5.Parent" xml:space="preserve">
     <value>TabPageIO</value>
   </data>
@@ -234,9 +237,6 @@
   <data name="TabPageGM.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="NumericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 20</value>
-  </data>
   <data name="&gt;&gt;TabPageIM.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
@@ -279,8 +279,8 @@
   <data name="&gt;&gt;TabPageIM.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="cbImmiscible.Items4" xml:space="preserve">
-    <value>Particle Swarm</value>
+  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label27.Name" xml:space="preserve">
     <value>Label27</value>
@@ -350,9 +350,6 @@
   </data>
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="lblTVFFlash.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 250</value>
   </data>
   <data name="btnEditThermoServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -438,8 +435,8 @@
   <data name="tbPV_DampingFactor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="lblAbout2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="NumericUpDown1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Descrição:</value>
@@ -449,9 +446,6 @@
   </data>
   <data name="chkFastModeNL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="Label22.Text" xml:space="preserve">
-    <value>Pressure-VaporFraction Flash</value>
   </data>
   <data name="btnTestPTFlash.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -464,6 +458,9 @@
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Flash PT/PV - tolerância para convergência do loop externo</value>
+  </data>
+  <data name="&gt;&gt;Label28.Name" xml:space="preserve">
+    <value>Label28</value>
   </data>
   <data name="cbMinMethodGM.Items9" xml:space="preserve">
     <value>Many Optimizing Liaisons</value>
@@ -507,6 +504,9 @@
   <data name="&gt;&gt;Label21.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="PBPHFlash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 93</value>
+  </data>
   <data name="btnTestPTFlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -519,14 +519,17 @@
   <data name="&gt;&gt;TabPageGM.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="tbFlashValidationTolerance.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
+  <data name="GroupBox10.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
+  </data>
+  <data name="lblAbout2.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
   </data>
   <data name="&gt;&gt;btnSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -555,8 +558,8 @@
   <data name="TabPageNL.Size" type="System.Drawing.Size, System.Drawing">
     <value>649, 348</value>
   </data>
-  <data name="cbImmiscible.Items" xml:space="preserve">
-    <value>Limited Memory BGFS</value>
+  <data name="chkCalcBubbleDew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tbPHExtMaxTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -618,9 +621,6 @@
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>633, 60</value>
   </data>
-  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 21</value>
-  </data>
   <data name="TabPageIM.Size" type="System.Drawing.Size, System.Drawing">
     <value>649, 348</value>
   </data>
@@ -637,7 +637,7 @@
     <value>Truncated Newton</value>
   </data>
   <data name="&gt;&gt;Label27.Parent" xml:space="preserve">
-    <value>TabPageST</value>
+    <value>GroupBox10</value>
   </data>
   <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 131</value>
@@ -680,9 +680,6 @@
   </data>
   <data name="chkDoPhaseId.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 123</value>
-  </data>
-  <data name="TabPageST.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
   </data>
   <data name="Label27.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -747,6 +744,9 @@
   <data name="btnTestPTFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>362, 37</value>
   </data>
+  <data name="&gt;&gt;btnTestPSFlash.Parent" xml:space="preserve">
+    <value>GroupBox8</value>
+  </data>
   <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 7</value>
   </data>
@@ -762,8 +762,8 @@
   <data name="&gt;&gt;GroupBox7.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PBPHFlash.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 93</value>
+  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;lblAuthorURL2.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -783,6 +783,9 @@
   <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
     <value>GroupBox8</value>
   </data>
+  <data name="Label23.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lblPVFFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
   </data>
@@ -800,6 +803,9 @@
   </data>
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="btnTestPTFlash.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="btnTestPHFlash.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -825,8 +831,8 @@
   <data name="&gt;&gt;Label16.Name" xml:space="preserve">
     <value>Label16</value>
   </data>
-  <data name="lblName2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 50</value>
+  <data name="&gt;&gt;Label28.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PBPSFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 145</value>
@@ -836,6 +842,9 @@
   </data>
   <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;chkForcePT3P.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lblDesc2.Name" xml:space="preserve">
     <value>lblDesc2</value>
@@ -861,11 +870,17 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
+  <data name="&gt;&gt;btnTestPVFFlash.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="btnTestPSFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>362, 141</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label28.Parent" xml:space="preserve">
+    <value>GroupBox9</value>
   </data>
   <data name="&gt;&gt;TabPageCOES.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -891,8 +906,11 @@
   <data name="tbSelectedES.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 20</value>
   </data>
-  <data name="TabPageUD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;GroupBox10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
+    <value>Button1</value>
   </data>
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -915,14 +933,17 @@
   <data name="Label24.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 208</value>
   </data>
   <data name="&gt;&gt;tbPV_EpsilonT.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="btnTestPVFFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 23</value>
+  </data>
+  <data name="GroupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 101</value>
   </data>
   <data name="&gt;&gt;chkValidateEqCalc.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -1020,17 +1041,26 @@
   <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
+  <data name="&gt;&gt;GroupBox10.Parent" xml:space="preserve">
+    <value>TabPageST</value>
+  </data>
   <data name="chkValidateEqCalc.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="PBTVFFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
   </data>
+  <data name="GroupBox9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="lblVersion2.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
   <data name="lblPTFlash.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 46</value>
   </data>
   <data name="Label12.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1044,8 +1074,8 @@
   <data name="&gt;&gt;chkValidateEqCalc.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;Label13.Name" xml:space="preserve">
-    <value>Label13</value>
+  <data name="TabPageST.Size" type="System.Drawing.Size, System.Drawing">
+    <value>649, 348</value>
   </data>
   <data name="&gt;&gt;btnTestPTFlash.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1083,8 +1113,8 @@
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 6</value>
   </data>
-  <data name="GroupBox7.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="btnEditThermoServer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblAuthorURL2.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -1131,8 +1161,17 @@
   <data name="GroupBox8.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;cbImmiscible.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 88</value>
+  </data>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Pressure-VaporFraction Flash</value>
+  </data>
+  <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
+    <value>609, 36</value>
+  </data>
+  <data name="&gt;&gt;chkForcePT3P.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;GroupBox8.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1157,6 +1196,9 @@
   </data>
   <data name="&gt;&gt;TabPageConvPars.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="TabPageUD.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;tbPHExtMaxIt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1200,11 +1242,17 @@
   <data name="&gt;&gt;lblTVFFlash.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;btnTestPVFFlash.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Teste de Estabilidade da Fase Líquida</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;TabPageGeneral.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblAbout2.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1215,8 +1263,8 @@
   <data name="lblPSFlash.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;btnTestPSFlash.Parent" xml:space="preserve">
-    <value>GroupBox8</value>
+  <data name="&gt;&gt;NumericUpDown1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
     <value>GroupBox8</value>
@@ -1254,9 +1302,6 @@
   <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 208</value>
-  </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Pressure-Entropy Flash</value>
   </data>
@@ -1269,17 +1314,17 @@
   <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 21</value>
   </data>
-  <data name="lblDesc2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 48</value>
+  <data name="&gt;&gt;GroupBox9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 13</value>
   </data>
-  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
-    <value>Label9</value>
+  <data name="chkDoPhaseId.Text" xml:space="preserve">
+    <value>Aplicar algoritmo de identificação de fases após o cálculo de equilíbrio</value>
   </data>
   <data name="chkValidateEqCalc.Text" xml:space="preserve">
     <value>Validar o resultado dos cálculos de equilíbrio</value>
@@ -1289,6 +1334,9 @@
   </data>
   <data name="tbPHExtMaxTol.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="&gt;&gt;chkForcePT3P.Parent" xml:space="preserve">
+    <value>GroupBox9</value>
   </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1305,8 +1353,11 @@
   <data name="&gt;&gt;chkFastModeNL.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;lblName2.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="TabPageST.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;btnTestPHFlash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblPTFlash.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -1353,6 +1404,9 @@
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="Label28.Text" xml:space="preserve">
+    <value>Se o resultado do Flash PT inicial for apenas fase vapor, verifica a estabilidade da fase líquida incipiente para uma possível fase líquida com composição diferente que possa existir.</value>
+  </data>
   <data name="&gt;&gt;chkDoPhaseId.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
@@ -1364,6 +1418,9 @@
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 6</value>
+  </data>
+  <data name="Label23.Text" xml:space="preserve">
+    <value>Temperature-VaporFraction Flash</value>
   </data>
   <data name="tbPV_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 20</value>
@@ -1383,8 +1440,8 @@
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Sobre:</value>
+  <data name="&gt;&gt;cbImmiscible.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PBPSFlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1413,6 +1470,9 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="Label28.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 13</value>
   </data>
@@ -1422,8 +1482,8 @@
   <data name="&gt;&gt;TabPageNL.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="chkCalcBubbleDew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkForcePT3P.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 17</value>
   </data>
   <data name="&gt;&gt;TabPageGeneral.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -1457,6 +1517,9 @@
   </data>
   <data name="&gt;&gt;btnTestTVFFlash.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;GroupBox9.Name" xml:space="preserve">
+    <value>GroupBox9</value>
   </data>
   <data name="&gt;&gt;tbPTExtMaxIt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1494,7 +1557,7 @@
   <data name="&gt;&gt;tbPHExtMaxTol.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="Label23.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkForcePT3P.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;lblName2.Type" xml:space="preserve">
@@ -1504,10 +1567,10 @@
     <value>GroupBox6</value>
   </data>
   <data name="TabPageST.Text" xml:space="preserve">
-    <value>Teste de Estabilidade</value>
+    <value>ELLV</value>
   </data>
-  <data name="&gt;&gt;TabPageGeneral.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 26</value>
   </data>
   <data name="tbPTintMaxIt.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1548,14 +1611,17 @@
   <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="TabPageUD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
   </data>
   <data name="Label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;btnTestPHFlash.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 13</value>
@@ -1563,14 +1629,14 @@
   <data name="&gt;&gt;btnEditThermoServer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 60</value>
   </data>
   <data name="tbPHExtMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="lblAbout2.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="GroupBox6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1587,8 +1653,8 @@
   <data name="tbPTIntTol.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 23</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="chkForcePT3P.Text" xml:space="preserve">
+    <value>Forçar Cálculo ELLV (mesmo se não for detectada fase líquida no cálculo ELV inicial)</value>
   </data>
   <data name="TabPageCOES.Text" xml:space="preserve">
     <value>Servidor de Equilíbrio CAPE-OPEN</value>
@@ -1620,9 +1686,6 @@
   <data name="TabPageConvPars.Size" type="System.Drawing.Size, System.Drawing">
     <value>649, 348</value>
   </data>
-  <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 32</value>
-  </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
@@ -1631,9 +1694,6 @@
   </data>
   <data name="chkUseBroydenIO.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="chkReplaceFlashPT.Text" xml:space="preserve">
-    <value>Substituir Flash PT por Flash PH</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1644,14 +1704,14 @@
   <data name="&gt;&gt;Label26.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Label23.Text" xml:space="preserve">
-    <value>Temperature-VaporFraction Flash</value>
+  <data name="Label27.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;TabPageST.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="btnTestPTFlash.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="chkForcePT3P.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkUseBroydenIO.Text" xml:space="preserve">
     <value>Usar método de Broyden para acelerar convergência</value>
@@ -1719,8 +1779,8 @@
   <data name="tbPV_MaxDT.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 20</value>
   </data>
-  <data name="&gt;&gt;tbFlashValidationTolerance.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
+  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
+    <value>Label9</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1733,6 +1793,9 @@
   </data>
   <data name="&gt;&gt;tbPHExtMaxTol.Name" xml:space="preserve">
     <value>tbPHExtMaxTol</value>
+  </data>
+  <data name="GroupBox10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
     <value>18</value>
@@ -1751,9 +1814,6 @@
   </data>
   <data name="&gt;&gt;TabPageNL.Name" xml:space="preserve">
     <value>TabPageNL</value>
-  </data>
-  <data name="&gt;&gt;NumericUpDown1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 13</value>
@@ -1806,11 +1866,14 @@
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="TabPageUD.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="lblName2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 50</value>
   </data>
-  <data name="&gt;&gt;lblAbout2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbFlashValidationTolerance.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
+  </data>
+  <data name="&gt;&gt;GroupBox10.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbPTExtMaxIt.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1821,8 +1884,11 @@
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Flash Calculation Routines</value>
   </data>
-  <data name="cbImmiscible.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="chkReplaceFlashPT.Text" xml:space="preserve">
+    <value>Substituir Flash PT por Flash PH</value>
+  </data>
+  <data name="chkForcePT3P.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="cbMinMethodGM.Items7" xml:space="preserve">
     <value>Differential Evolution</value>
@@ -1845,20 +1911,20 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>Pressure-Enthalpy Flash</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="TabPageCOES.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 56</value>
   </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 13</value>
+  <data name="lblDesc2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 48</value>
   </data>
   <data name="tbPV_EpsilonT.Location" type="System.Drawing.Point, System.Drawing">
     <value>459, 53</value>
+  </data>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Opções Gerais</value>
   </data>
   <data name="tbPTExtMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1884,6 +1950,9 @@
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="cbImmiscible.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="TabPageGM.Text" xml:space="preserve">
     <value>Minimização de Gibbs</value>
   </data>
@@ -1895,9 +1964,6 @@
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="NumericUpDown1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;tbPHExtMaxTol.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1992,8 +2058,11 @@
   <data name="&gt;&gt;PBPTFlash.Name" xml:space="preserve">
     <value>PBPTFlash</value>
   </data>
-  <data name="btnEditThermoServer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
+    <value>Label11</value>
+  </data>
+  <data name="lblTVFFlash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 250</value>
   </data>
   <data name="TabPageIM.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -2011,7 +2080,7 @@
     <value>18</value>
   </data>
   <data name="&gt;&gt;NumericUpDown1.Parent" xml:space="preserve">
-    <value>TabPageST</value>
+    <value>GroupBox10</value>
   </data>
   <data name="btnTestPVFFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>362, 193</value>
@@ -2028,8 +2097,8 @@
   <data name="&gt;&gt;PBPHFlash.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
-    <value>Label11</value>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Sobre:</value>
   </data>
   <data name="lblPSFlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2051,9 +2120,6 @@
   </data>
   <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 13</value>
-  </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
   </data>
   <data name="&gt;&gt;GroupBox8.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2118,8 +2184,8 @@
   <data name="tbPHintMaxTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 20</value>
   </data>
-  <data name="&gt;&gt;PBPVFFlash.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="NumericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
   </data>
   <data name="&gt;&gt;PBPTFlash.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2127,11 +2193,17 @@
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;PBPVFFlash.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="&gt;&gt;Label21.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="lblPTFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 42</value>
+  </data>
+  <data name="GroupBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="btnTestPTFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 23</value>
@@ -2150,6 +2222,9 @@
   </data>
   <data name="tbPHExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 205</value>
+  </data>
+  <data name="&gt;&gt;GroupBox10.Name" xml:space="preserve">
+    <value>GroupBox10</value>
   </data>
   <data name="Label20.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2229,8 +2304,8 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Opções Gerais</value>
   </data>
-  <data name="TabPageST.Size" type="System.Drawing.Size, System.Drawing">
-    <value>649, 348</value>
+  <data name="lblAbout2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;tbSelectedES.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2301,14 +2376,23 @@
   <data name="&gt;&gt;tbSelectedES.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cbImmiscible.Items" xml:space="preserve">
+    <value>Limited Memory BGFS</value>
+  </data>
   <data name="PBPVFFlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="TabPageIO.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
+  <data name="&gt;&gt;lblAbout2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;GroupBox9.Parent" xml:space="preserve">
+    <value>TabPageST</value>
   </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2331,8 +2415,8 @@
   <data name="&gt;&gt;lblVersion2.Name" xml:space="preserve">
     <value>lblVersion2</value>
   </data>
-  <data name="chkDoPhaseId.Text" xml:space="preserve">
-    <value>Aplicar algoritmo de identificação de fases após o cálculo de equilíbrio</value>
+  <data name="GroupBox9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 7</value>
   </data>
   <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -2342,6 +2426,9 @@
   </data>
   <data name="tbPTExtMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 20</value>
+  </data>
+  <data name="cbImmiscible.Items4" xml:space="preserve">
+    <value>Particle Swarm</value>
   </data>
   <data name="&gt;&gt;lblPSFlash.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -2374,7 +2461,7 @@
     <value>GroupBox1</value>
   </data>
   <data name="Label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 35</value>
+    <value>15, 29</value>
   </data>
   <data name="&gt;&gt;Label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2432,6 +2519,9 @@
   </data>
   <data name="&gt;&gt;chkReplaceFlashPT.Parent" xml:space="preserve">
     <value>GroupBox4</value>
+  </data>
+  <data name="&gt;&gt;Label28.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -2517,11 +2607,11 @@
   <data name="chkUseBroydenIO.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 25</value>
   </data>
-  <data name="Label27.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;GroupBox9.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="cbMinMethodGM.Items5" xml:space="preserve">
     <value>Local Unimodal Sampling</value>
@@ -2535,8 +2625,14 @@
   <data name="lblAuthorURL2.Location" type="System.Drawing.Point, System.Drawing">
     <value>99, 104</value>
   </data>
+  <data name="chkForcePT3P.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 25</value>
+  </data>
   <data name="&gt;&gt;PBPVFFlash.Parent" xml:space="preserve">
     <value>GroupBox8</value>
+  </data>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 13</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 13</value>
@@ -2553,11 +2649,17 @@
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;Label25.Name" xml:space="preserve">
     <value>Label25</value>
   </data>
   <data name="&gt;&gt;btnTestPTFlash.Parent" xml:space="preserve">
     <value>GroupBox8</value>
+  </data>
+  <data name="&gt;&gt;lblName2.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 50</value>
@@ -2567,6 +2669,9 @@
   </data>
   <data name="lblPSFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 146</value>
+  </data>
+  <data name="&gt;&gt;Label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnTestPHFlash.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -2625,8 +2730,8 @@
   <data name="lblName2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox9.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 6</value>
@@ -2660,6 +2765,9 @@
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 130</value>
+  </data>
+  <data name="&gt;&gt;Label13.Name" xml:space="preserve">
+    <value>Label13</value>
   </data>
   <data name="PBPHFlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

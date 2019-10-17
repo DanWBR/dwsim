@@ -118,6 +118,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = 20
 
+            settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability) = False
+
             Return settings
 
         End Function
@@ -1122,8 +1124,11 @@ will converge to this solution.")
                 FlashSettings.Clear()
 
                 For Each xel3 In el.Elements
-                    Dim esname = [Enum].Parse(Interfaces.Enums.Helpers.GetEnumType("DWSIM.Interfaces.Enums.FlashSetting"), xel3.@Name)
-                    FlashSettings.Add(esname, xel3.@Value)
+                    Try
+                        Dim esname = [Enum].Parse(Interfaces.Enums.Helpers.GetEnumType("DWSIM.Interfaces.Enums.FlashSetting"), xel3.@Name)
+                        FlashSettings.Add(esname, xel3.@Value)
+                    Catch ex As Exception
+                    End Try
                 Next
 
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) Then
@@ -1137,6 +1142,9 @@ will converge to this solution.")
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries, 20)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability, False)
                 End If
 
             End If

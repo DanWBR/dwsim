@@ -62,6 +62,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
+            nl1.FlashSettings = FlashSettings
+            nl2.FlashSettings = FlashSettings
+
             Dim d1, d2 As Date, dt As TimeSpan
 
             d1 = Date.Now
@@ -92,13 +95,65 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vx2 = PP.RET_NullVector
             Vs = PP.RET_NullVector
 
+            Dim GoneThrough As Boolean = False
+
+            If L1 = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
+
+                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+
+                If stresult(0) = False Then
+
+                    Dim n = Vz.Length - 1
+
+                    Dim nlflash As New NestedLoops()
+
+                    Dim m As Double = UBound(stresult(1), 1)
+
+                    Dim trialcomps As New List(Of Double())
+                    Dim results As New List(Of Object)
+
+                    For j = 0 To m
+                        Dim vxtrial(n) As Double
+                        For i = 0 To n
+                            vxtrial(i) = stresult(1)(j, i)
+                        Next
+                        trialcomps.Add(vxtrial)
+                    Next
+
+                    For Each tcomp In trialcomps
+                        Try
+                            Dim r2 = nlflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
+                            results.Add(r2)
+                        Catch ex As Exception
+                        End Try
+                    Next
+
+                    If results.Where(Function(r) r(0) > 0.0).Count > 0 Then
+
+                        Dim validresult = results.Where(Function(r) r(0) > 0.0).First
+
+                        L1 = validresult(0)
+                        V = validresult(1)
+                        Vx1 = validresult(2)
+                        Vy = validresult(3)
+
+                        result = New Object() {L1, V, Vx1, Vy, 0, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
+                        GoneThrough = True
+
+                    End If
+
+                End If
+
+            End If
+
             If L1 > 0 Then
 
                 Dim stresult = StabTest(T, P, Vx1, PP.RET_VTC, PP)
 
                 IObj?.SetCurrent
 
-                If stresult(0) = False Then
+                If stresult(0) = False And Not GoneThrough Then
 
                     ' liquid phase NOT stable. proceed to three-phase flash.
 

@@ -154,6 +154,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz() As Double, ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
+            _nl.FlashSettings = FlashSettings
+            _nl3p.FlashSettings = FlashSettings
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
@@ -498,9 +501,60 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
 
+                Dim GoneThrough As Boolean = False
+
+                If result(0) = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
+
+                    Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+
+                    If stresult(0) = False Then
+
+                        Dim gmflash As New GibbsMinimization3P() With {.ForceTwoPhaseOnly = True, .FlashSettings = FlashSettings}
+
+                        Dim m As Double = UBound(stresult(1), 1)
+
+                        Dim trialcomps As New List(Of Double())
+                        Dim results As New List(Of Object)
+
+                        For j = 0 To m
+                            Dim vxtrial(n) As Double
+                            For i = 0 To n
+                                vxtrial(i) = stresult(1)(j, i)
+                            Next
+                            trialcomps.Add(vxtrial)
+                        Next
+
+                        For Each tcomp In trialcomps
+                            Try
+                                Dim r2 = gmflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
+                                results.Add(r2)
+                            Catch ex As Exception
+                            End Try
+                        Next
+
+                        If results.Where(Function(r) r(0) > 0.0).Count > 0 Then
+
+                            Dim validresult = results.Where(Function(r) r(0) > 0.0).First
+
+                            L = validresult(0)
+                            V = validresult(1)
+                            Vx = validresult(2)
+                            Vy = validresult(3)
+                            ecount = validresult(4)
+
+                            result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
+                            GoneThrough = True
+
+                        End If
+
+                    End If
+
+                End If
+
                 ' check if there is a liquid phase
 
-                If result(0) > 0 Then ' we have a liquid phase
+                If result(0) > 0 And Not GoneThrough Then ' we have a liquid phase
 
                     IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
 

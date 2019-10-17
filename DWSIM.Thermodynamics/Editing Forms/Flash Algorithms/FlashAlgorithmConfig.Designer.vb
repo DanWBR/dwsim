@@ -68,8 +68,12 @@ Partial Class FlashAlgorithmConfig
         Me.cbMinMethodGM = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TabPageST = New System.Windows.Forms.TabPage()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.Label27 = New System.Windows.Forms.Label()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.chkForcePT3P = New System.Windows.Forms.CheckBox()
         Me.TabPageCOES = New System.Windows.Forms.TabPage()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -125,7 +129,9 @@ Partial Class FlashAlgorithmConfig
         Me.TabPageGM.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TabPageST.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox9.SuspendLayout()
         Me.TabPageCOES.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.TabPageIM.SuspendLayout()
@@ -425,10 +431,18 @@ Partial Class FlashAlgorithmConfig
         'TabPageST
         '
         resources.ApplyResources(Me.TabPageST, "TabPageST")
-        Me.TabPageST.Controls.Add(Me.NumericUpDown1)
-        Me.TabPageST.Controls.Add(Me.Label27)
+        Me.TabPageST.Controls.Add(Me.GroupBox10)
+        Me.TabPageST.Controls.Add(Me.GroupBox9)
         Me.TabPageST.Name = "TabPageST"
         Me.TabPageST.UseVisualStyleBackColor = True
+        '
+        'GroupBox10
+        '
+        resources.ApplyResources(Me.GroupBox10, "GroupBox10")
+        Me.GroupBox10.Controls.Add(Me.NumericUpDown1)
+        Me.GroupBox10.Controls.Add(Me.Label27)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.TabStop = False
         '
         'NumericUpDown1
         '
@@ -441,6 +455,25 @@ Partial Class FlashAlgorithmConfig
         '
         resources.ApplyResources(Me.Label27, "Label27")
         Me.Label27.Name = "Label27"
+        '
+        'GroupBox9
+        '
+        resources.ApplyResources(Me.GroupBox9, "GroupBox9")
+        Me.GroupBox9.Controls.Add(Me.Label28)
+        Me.GroupBox9.Controls.Add(Me.chkForcePT3P)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.TabStop = False
+        '
+        'Label28
+        '
+        resources.ApplyResources(Me.Label28, "Label28")
+        Me.Label28.Name = "Label28"
+        '
+        'chkForcePT3P
+        '
+        resources.ApplyResources(Me.chkForcePT3P, "chkForcePT3P")
+        Me.chkForcePT3P.Name = "chkForcePT3P"
+        Me.chkForcePT3P.UseVisualStyleBackColor = True
         '
         'TabPageCOES
         '
@@ -750,8 +783,11 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.TabPageST.ResumeLayout(False)
-        Me.TabPageST.PerformLayout()
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.TabPageCOES.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
@@ -859,4 +895,8 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents TabPageST As TabPage
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents Label27 As Label
+    Friend WithEvents GroupBox10 As GroupBox
+    Friend WithEvents GroupBox9 As GroupBox
+    Friend WithEvents chkForcePT3P As CheckBox
+    Friend WithEvents Label28 As Label
 End Class
