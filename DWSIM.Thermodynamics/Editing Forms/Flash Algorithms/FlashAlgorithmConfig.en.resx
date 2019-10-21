@@ -361,6 +361,9 @@
   <data name="Label27.Text" xml:space="preserve">
     <value>Number of Random Compositions to Try</value>
   </data>
+  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>617, 60</value>
+  </data>
   <data name="GroupBox10.Text" xml:space="preserve">
     <value>Liquid Phase Stability Test</value>
   </data>
@@ -368,7 +371,7 @@
     <value>15, 45</value>
   </data>
   <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 36</value>
+    <value>596, 36</value>
   </data>
   <data name="Label28.Text" xml:space="preserve">
     <value>If the result of the initial VLE Flash is a single vapor phase, DWSIM will check the stability of the incipient liquid for an alternate liquid phase which may exist under such conditions. </value>
@@ -378,6 +381,9 @@
   </data>
   <data name="chkForcePT3P.Text" xml:space="preserve">
     <value>Check Stability of Incipient Liquid Phase from Initial VLE PT Flash</value>
+  </data>
+  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>617, 88</value>
   </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>General Options</value>
