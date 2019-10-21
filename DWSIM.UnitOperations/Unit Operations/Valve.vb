@@ -219,7 +219,7 @@ Namespace UnitOperations
                 icount = 0
                 Do
                     P2ant = P2
-                    P2 = Pi - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
+                    P2 = Pi / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
                     icount += 1
                     If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
                 Loop Until Math.Abs(P2 - P2ant) < 0.0001
@@ -231,7 +231,7 @@ Namespace UnitOperations
                 Do
                     v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
                     P2ant = P2
-                    P2 = Pi - v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
+                    P2 = Pi / 100000.0 - v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
                     icount += 1
                     If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
                 Loop Until Math.Abs(P2 - P2ant) < 0.0001
