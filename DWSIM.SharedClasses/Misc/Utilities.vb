@@ -17,9 +17,16 @@ Public Class Utility
             props.Add("SavedOn", xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedOn").Value)
         Catch ex As Exception
         End Try
-
-        props.Add("SimName", xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("SimulationName").Value)
-        props.Add("SimAuthor", xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("SimulationAuthor").Value)
+        Try
+            props.Add("SimName", xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("SimulationName").Value)
+        Catch ex As Exception
+            props.Add("SimName", "")
+        End Try
+        Try
+            props.Add("SimAuthor", xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("SimulationAuthor").Value)
+        Catch ex As Exception
+            props.Add("SimAuthor", "")
+        End Try
 
         props.Add("Compounds", xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.Count)
         props.Add("PropertyPackages", xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.Count)
