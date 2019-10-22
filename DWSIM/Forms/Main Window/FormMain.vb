@@ -1393,11 +1393,13 @@ Public Class FormMain
             xdoc = XDocument.Load(fstr)
         End Using
 
-        For Each xel1 As XElement In xdoc.Descendants
-            SharedClasses.Utility.UpdateElementForMobileXMLLoading(xel1)
-        Next
+        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                               SharedClasses.Utility.UpdateElementForMobileXMLLoading_CrossPlatformUI(xel1)
+                                           End Sub)
 
         Dim form As FormFlowsheet = New FormFlowsheet() With {.MobileCompatibilityMode = True}
+        form.FormSpreadsheet = New FormNewSpreadsheet() With {.Flowsheet = form}
+        form.FormSpreadsheet.Initialize()
         form.PanelMobileCompatMode.Visible = True
 
         Settings.CAPEOPENMode = False
@@ -2779,9 +2781,9 @@ Public Class FormMain
             xel.Add(New XElement("SensitivityAnalysisCase", {pp.SaveData().ToArray()}))
         Next
 
-        For Each xel1 As XElement In xdoc.Descendants
-            SharedClasses.Utility.UpdateElementForMobileXMLSaving(xel1)
-        Next
+        Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                               SharedClasses.Utility.UpdateElementForMobileXMLSaving_CrossPlatformUI(xel1)
+                                           End Sub)
 
         xdoc.Save(path)
 

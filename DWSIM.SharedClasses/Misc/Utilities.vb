@@ -3,6 +3,33 @@ Imports System.IO
 
 Public Class Utility
 
+    Shared Function GetSimulationFileDetails(xdoc As XDocument) As Dictionary(Of String, String)
+
+        Dim props As New Dictionary(Of String, String)
+
+        'check version
+
+        Dim sver = New Version("1.0.0.0")
+
+        Try
+            props.Add("DWSIMVersion", xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value)
+            props.Add("OSInfo", xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("OSInfo").Value)
+            props.Add("SavedOn", xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedOn").Value)
+        Catch ex As Exception
+        End Try
+
+        props.Add("SimName", xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("SimulationName").Value)
+        props.Add("SimAuthor", xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("SimulationAuthor").Value)
+
+        props.Add("Compounds", xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.Count)
+        props.Add("PropertyPackages", xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.Count)
+        props.Add("SimulationObjects", xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.Count)
+        props.Add("Reactions", xdoc.Element("DWSIM_Simulation_Data").Element("Reactions").Elements.Count)
+
+        Return props
+
+    End Function
+
     Shared Sub UpdateElement(xel As XElement)
 
         If xel.Name = "TipoObjeto" Then xel.Name = "ObjectType"

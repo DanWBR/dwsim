@@ -43,7 +43,9 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override Interfaces.IFlowsheet GetNewInstance()
         {
-            return new Flowsheet();
+            var fs = new Flowsheet();
+            fs.Initialize();
+            return fs;
         }
 
         public override void UpdateInformation()

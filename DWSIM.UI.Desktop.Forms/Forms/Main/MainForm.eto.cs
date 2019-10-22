@@ -28,9 +28,13 @@ namespace DWSIM.UI
 
         public List<IUtilityPlugin5> plugins = new List<IUtilityPlugin5>();
 
-        ListBox MostRecentList, SampleList, FoldersList, FOSSEEList;
+        ListBox SampleList, FoldersList, FOSSEEList;
+
+        TreeGridView MostRecentList;
 
         private TableLayout TableContainer;
+
+        string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
         void InitializeComponent()
         {
@@ -43,8 +47,6 @@ namespace DWSIM.UI
             {
                 new DWSIM.UI.Desktop.Editors.UnhandledExceptionView((Exception)e.ExceptionObject).ShowModalAsync();
             };
-
-            string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
             Title = "DWSIMLauncher".Localize();
 
@@ -150,7 +152,7 @@ namespace DWSIM.UI
             tableright.Padding = new Padding(5, 5, 5, 5);
             tableright.Spacing = new Size(10, 10);
 
-            MostRecentList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
+            MostRecentList = new TreeGridView { Height = (int)(sf * 330) };
             SampleList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
             FoldersList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
             FOSSEEList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
@@ -158,43 +160,98 @@ namespace DWSIM.UI
             if (Application.Instance.Platform.IsGtk &&
                 GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
             {
-                MostRecentList.TextColor = bgcolor;
                 SampleList.TextColor = bgcolor;
                 FoldersList.TextColor = bgcolor;
                 FOSSEEList.TextColor = bgcolor;
             }
             else if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
             {
-                MostRecentList.BackgroundColor = SystemColors.ControlBackground;
                 SampleList.BackgroundColor = SystemColors.ControlBackground;
                 FoldersList.BackgroundColor = SystemColors.ControlBackground;
                 FOSSEEList.BackgroundColor = SystemColors.ControlBackground;
-                MostRecentList.TextColor = SystemColors.ControlText;
                 SampleList.TextColor = SystemColors.ControlText;
                 FoldersList.TextColor = SystemColors.ControlText;
                 FOSSEEList.TextColor = SystemColors.ControlText;
             }
             else
             {
-                MostRecentList.TextColor = Colors.White;
                 SampleList.TextColor = Colors.White;
                 FoldersList.TextColor = Colors.White;
                 FOSSEEList.TextColor = Colors.White;
             }
 
+            MostRecentList.AllowMultipleSelection = false;
+            MostRecentList.ShowHeader = true;
+            MostRecentList.Columns.Clear();
+            MostRecentList.Columns.Add(new GridColumn { DataCell = new ImageViewCell(0) { ImageInterpolation = ImageInterpolation.High } });
+            MostRecentList.Columns.Add(new GridColumn { DataCell = new TextBoxCell(1), HeaderText = "Name", Sortable = true });
+            MostRecentList.Columns.Add(new GridColumn { DataCell = new TextBoxCell(2), HeaderText = "Date", Sortable = true });
+            MostRecentList.Columns.Add(new GridColumn { DataCell = new TextBoxCell(3), HeaderText = "DWSIM Version", Sortable = true });
+            MostRecentList.Columns.Add(new GridColumn { DataCell = new TextBoxCell(4), HeaderText = "Operating System", Sortable = true });
+
             var invertedlist = new List<string>(GlobalSettings.Settings.MostRecentFiles);
             invertedlist.Reverse();
 
+            var tgc = new TreeGridItemCollection();
+
             foreach (var item in invertedlist)
             {
-                if (File.Exists(item)) MostRecentList.Items.Add(new ListItem { Text = Path.GetFileName(item), Key = item });
+                if (File.Exists(item))
+                {
+                    var li = new TreeGridItem();
+                    var data = new Dictionary<string, string>();
+                    if (Path.GetExtension(item).ToLower() == ".dwxmz")
+                    {
+                        data = SharedClasses.Utility.GetSimulationFileDetails(FlowsheetBase.FlowsheetBase.LoadZippedXMLDoc(item));
+                    }
+                    else
+                    {
+                        data = SharedClasses.Utility.GetSimulationFileDetails(XDocument.Load(item));
+                    }
+                    li.Tag = data;
+                    data.Add("Path", item);
+                    DateTime dt;
+                    if (data.ContainsKey("SavedOn"))
+                    {
+                        dt = DateTime.Parse(data["SavedOn"]);
+                    }
+                    else
+                    {
+                        dt = File.GetLastWriteTime(item);
+                    }
+                    string dwsimver, osver;
+                    if (data.ContainsKey("DWSIMVersion"))
+                    {
+                        dwsimver = data["DWSIMVersion"];
+                    }
+                    else
+                    {
+                        dwsimver = "N/A";
+                    }
+                    if (data.ContainsKey("OSInfo"))
+                    {
+                        osver = data["OSInfo"];
+                    }
+                    else
+                    {
+                        osver = "N/A";
+                    }
+                    li.Values = new object[] {new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")).WithSize(16, 16),
+                            System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Path.GetFileNameWithoutExtension(item)),
+                            dt, dwsimver, osver};
+                    tgc.Add(li);
+                }
             }
+
+            tgc = new TreeGridItemCollection(tgc.OrderByDescending(x => ((DateTime)((TreeGridItem)x).Values[2]).Ticks));
+
+            MostRecentList.DataStore = tgc;
 
             var samplist = Directory.EnumerateFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples"), "*.dwxm*");
 
             foreach (var item in samplist)
             {
-                if (File.Exists(item)) SampleList.Items.Add(new ListItem { Text = Path.GetFileName(item), Key = item });
+                if (File.Exists(item)) SampleList.Items.Add(new ListItem { Text = Path.GetFileNameWithoutExtension(item), Key = item });
             }
 
             foreach (String f in invertedlist)
@@ -255,12 +312,14 @@ namespace DWSIM.UI
                 }
             };
 
-            MostRecentList.SelectedIndexChanged += (sender, e) =>
+            MostRecentList.SelectedItemChanged += (sender, e) =>
             {
-                if (MostRecentList.SelectedIndex >= 0)
+                if (MostRecentList.SelectedItem != null)
                 {
-                    LoadSimulation(MostRecentList.SelectedKey);
-                    MostRecentList.SelectedIndex = -1;
+                    var si = (TreeGridItem)MostRecentList.SelectedItem;
+                    var data = (Dictionary<string, string>)si.Tag;
+                    LoadSimulation(data["Path"]);
+                    //MostRecentList.SelectedIndex = -1;
                 };
             };
 
@@ -269,7 +328,7 @@ namespace DWSIM.UI
                 if (SampleList.SelectedIndex >= 0)
                 {
                     LoadSimulation(SampleList.SelectedKey);
-                    MostRecentList.SelectedIndex = -1;
+                    //MostRecentList.SelectedIndex = -1;
                 };
             };
 
@@ -527,7 +586,49 @@ namespace DWSIM.UI
                     form.Show();
                     if (!GlobalSettings.Settings.MostRecentFiles.Contains(path))
                     {
-                        MostRecentList.Items.Add(new ListItem { Text = path, Key = path });
+                        var ds = (TreeGridItemCollection)MostRecentList.DataStore;
+                        var li = new TreeGridItem();
+                        var data = new Dictionary<string, string>();
+                        if (Path.GetExtension(path).ToLower() == ".dwxmz")
+                        {
+                            data = SharedClasses.Utility.GetSimulationFileDetails(FlowsheetBase.FlowsheetBase.LoadZippedXMLDoc(path));
+                        }
+                        else
+                        {
+                            data = SharedClasses.Utility.GetSimulationFileDetails(XDocument.Load(path));
+                        }
+                        li.Tag = data;
+                        data.Add("Path", path);
+                        DateTime dt;
+                        if (data.ContainsKey("SavedOn"))
+                        {
+                            dt = DateTime.Parse(data["SavedOn"]);
+                        }
+                        else
+                        {
+                            dt = File.GetLastWriteTime(path);
+                        }
+                        string dwsimver, osver;
+                        if (data.ContainsKey("DWSIMVersion"))
+                        {
+                            dwsimver = data["DWSIMVersion"];
+                        }
+                        else
+                        {
+                            dwsimver = "N/A";
+                        }
+                        if (data.ContainsKey("OSInfo"))
+                        {
+                            osver = data["OSInfo"];
+                        }
+                        else
+                        {
+                            osver = "N/A";
+                        }
+                        li.Values = new object[] {new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")).WithSize(16, 16),
+                            System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Path.GetFileNameWithoutExtension(path)),
+                            dt, dwsimver, osver};
+                        ds.Add(li);
                         GlobalSettings.Settings.MostRecentFiles.Add(path);
                     }
                     form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");

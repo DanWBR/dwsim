@@ -1,13 +1,11 @@
+Version 5.8 Update 3
+
+- [FIX] Fixed Valve Kv valculation mode for Gas/Steam
+- [FIX] Fixed loading of properties for some Unit Operations
+- [FIX] Other minor bug fixes
+
 Version 5.8 Update 2
 
 - [NEW] Added a new VLLE Flash Algorithm tweak to check for alternative liquid phase compositions on initial VLE PT Flash
 - [FIX] Fixed Rigorous Column automatic initialization
 - [FIX] Fixed number of trial compositions not changing on Flash Algorithm editor
-
-Version 5.8 Update 1
-
-- [CHG] Changed target .NET Framework version to 4.6.1 on Windows
-- [CHG] Reduced the size of the User Guide PDF file
-- [FIX] Fixed Automation feature
-- [FIX] Fixed some issues with ReoGrid formula parsing
-- [FIX] Enhanced reliability of liquid phase instability detection

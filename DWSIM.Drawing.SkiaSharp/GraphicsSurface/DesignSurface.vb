@@ -1339,9 +1339,14 @@ Public Class GraphicsSurface
 
             If gobj.Owner.GetFlowsheet IsNot Nothing Then
 
+                Dim fs = gobj.Owner.GetFlowsheet
+
+                If Not fs.FlowsheetOptions.VisibleProperties.ContainsKey(gobj.Owner.GetType.Name) Then
+                    Exit Sub
+                End If
+
                 Dim count As Integer
 
-                Dim fs = gobj.Owner.GetFlowsheet
                 Dim props As New List(Of String)(fs.FlowsheetOptions.VisibleProperties(gobj.Owner.GetType.Name))
                 props.AddRange(DirectCast(gobj.Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.ToArray)
 

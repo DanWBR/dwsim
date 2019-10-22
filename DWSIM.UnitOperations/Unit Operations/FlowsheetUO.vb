@@ -1053,10 +1053,13 @@ Label_00CC:
                 Me.OutputParams.Add(fp.ID, fp)
             Next
 
+            CompoundMappings.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "CompoundMappings").Elements.ToList
-                Me.CompoundMappings.Add(xel.Attribute("From").Value, xel.Attribute("To").Value)
+                If Not CompoundMappings.ContainsKey(xel.Attribute("From").Value) Then Me.CompoundMappings.Add(xel.Attribute("From").Value, xel.Attribute("To").Value)
             Next
+
             Return True
+
         End Function
 
         Public Overrides Function SaveData() As List(Of XElement)
@@ -1065,14 +1068,14 @@ Label_00CC:
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
-                .Add(New XElement("InputConnections"))
-                For Each s In InputConnections
-                    .Item(.Count - 1).Add(New XElement("InputConnection", s))
-                Next
-                .Add(New XElement("OutputConnections"))
-                For Each s In OutputConnections
-                    .Item(.Count - 1).Add(New XElement("OutputConnection", s))
-                Next
+                '.Add(New XElement("InputConnections"))
+                'For Each s In InputConnections
+                '    .Item(.Count - 1).Add(New XElement("InputConnection", s))
+                'Next
+                '.Add(New XElement("OutputConnections"))
+                'For Each s In OutputConnections
+                '    .Item(.Count - 1).Add(New XElement("OutputConnection", s))
+                'Next
                 .Add(New XElement("InputParameters"))
                 For Each p In InputParams.Values
                     .Item(.Count - 1).Add(New XElement("FlowsheetUOParameter", p.SaveData.ToArray))
@@ -1081,6 +1084,7 @@ Label_00CC:
                 For Each p In OutputParams.Values
                     .Item(.Count - 1).Add(New XElement("FlowsheetUOParameter", p.SaveData.ToArray))
                 Next
+                .Remove(.Where(Function(e) e.Name = "CompoundMappings").FirstOrDefault)
                 .Add(New XElement("CompoundMappings"))
                 For Each p In CompoundMappings
                     Dim xel As New XElement("CompoundMapping")

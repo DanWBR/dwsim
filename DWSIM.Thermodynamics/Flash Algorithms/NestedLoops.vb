@@ -150,6 +150,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     IObj?.SetCurrent()
                     Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = PrevKi(i)
+                    If Double.IsNaN(Ki(i)) Then Ki(i) = 1.0E+20
                 Next
             End If
 

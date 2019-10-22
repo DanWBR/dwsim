@@ -47,7 +47,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             try
             {
-                string baseaddress = "https://github.com/DanWBR/dwsim5/blob/master/";
+                string baseaddress = "https://github.com/DanWBR/dwsim5/blob/windows/";
                 StackTrace st = new StackTrace(exc, true);
                 StackFrame frame = st.GetFrame(0);
                 string path = frame.GetFileName().Replace(mystring, baseaddress);

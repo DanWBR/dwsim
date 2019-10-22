@@ -1011,7 +1011,6 @@ Imports System.Dynamic
 
     End Sub
 
-
     Public Sub LoadFromXML(xdoc As XDocument) Implements IFlowsheet.LoadFromXML
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
@@ -1893,6 +1892,44 @@ Label_00CC:
         Return xdoc
 
     End Function
+
+    Public Shared Function LoadZippedXMLDoc(pathtofile As String) As XDocument
+
+        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim fullname As String = ""
+
+        Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(pathtofile))
+            stream.Password = Nothing
+            Dim entry As ZipEntry
+Label_00CC:
+            entry = stream.GetNextEntry()
+            Do While (Not entry Is Nothing)
+                Dim fileName As String = Path.GetFileName(entry.Name)
+                If (fileName <> String.Empty) Then
+                    Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                        Dim count As Integer = 2048
+                        Dim buffer As Byte() = New Byte(2048) {}
+                        Do While True
+                            count = stream.Read(buffer, 0, buffer.Length)
+                            If (count <= 0) Then
+                                fullname = pathtosave + Path.GetFileName(entry.Name)
+                                GoTo Label_00CC
+                            End If
+                            stream2.Write(buffer, 0, count)
+                        Loop
+                    End Using
+                End If
+                entry = stream.GetNextEntry
+            Loop
+        End Using
+
+        Dim xdoc = XDocument.Load(fullname)
+        File.Delete(fullname)
+
+        Return xdoc
+
+    End Function
+
 
     Shared Function IsZipFilePasswordProtected(ByVal ZipFile As String) As Boolean
         Using fsIn As New FileStream(ZipFile, FileMode.Open, FileAccess.Read)

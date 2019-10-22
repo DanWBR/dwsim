@@ -38,7 +38,7 @@ Public Class FormNewSpreadsheet
 #Else
     Public ReadOnly Property Spreadsheet As unvell.ReoGrid.ReoGridControl
         Get
-            Return SpreadsheetControl.grid
+            Return SpreadsheetControl?.grid
         End Get
     End Property
 #End If
@@ -315,7 +315,7 @@ Public Class FormNewSpreadsheet
 
     Public Sub EvaluateAll()
 
-        Spreadsheet.Worksheets(0).Recalculate()
+        Spreadsheet?.Worksheets(0).Recalculate()
 
     End Sub
 

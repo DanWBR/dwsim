@@ -466,17 +466,17 @@ Namespace UnitOperations
 
             Me.InputStringVariables.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InputStringVariables").Elements.ToList
-                Me.InputStringVariables.Add(xel.@Key, xel.@Value)
+                If Not InputStringVariables.ContainsKey(xel.@Key) Then Me.InputStringVariables.Add(xel.@Key, xel.@Value)
             Next
 
             Me.InputVariables.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InputVariables").Elements.ToList
-                Me.InputVariables.Add(xel.@Key, Double.Parse(xel.@Value, ci))
+                If Not InputVariables.ContainsKey(xel.@Key) Then Me.InputVariables.Add(xel.@Key, Double.Parse(xel.@Value, ci))
             Next
 
             Me.OutputVariables.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "OutputVariables").Elements.ToList
-                Me.OutputVariables.Add(xel.@Key, Double.Parse(xel.@Value, ci))
+                If Not OutputVariables.ContainsKey(xel.@Key) Then Me.OutputVariables.Add(xel.@Key, Double.Parse(xel.@Value, ci))
             Next
             Return True
         End Function
@@ -486,20 +486,20 @@ Namespace UnitOperations
             Dim elements As List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            With elements
-                .Add(New XElement("InputStringVariables"))
-                For Each p In InputStringVariables
-                    .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value)))
-                Next
-                .Add(New XElement("InputVariables"))
-                For Each p In InputVariables
-                    .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value.ToString(ci))))
-                Next
-                .Add(New XElement("OutputVariables"))
-                For Each p In OutputVariables
-                    .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value.ToString(ci))))
-                Next
-            End With
+            'With elements
+            '    .Add(New XElement("InputStringVariables"))
+            '    For Each p In InputStringVariables
+            '        .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value)))
+            '    Next
+            '    .Add(New XElement("InputVariables"))
+            '    For Each p In InputVariables
+            '        .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value.ToString(ci))))
+            '    Next
+            '    .Add(New XElement("OutputVariables"))
+            '    For Each p In OutputVariables
+            '        .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value.ToString(ci))))
+            '    Next
+            'End With
 
             Return elements
 
