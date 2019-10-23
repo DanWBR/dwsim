@@ -434,12 +434,17 @@ namespace DWSIM.UI
             var quitCommand = new Command { MenuText = "Quit".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) =>
             {
-                DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
+                try
                 {
-                    if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.Yes)
-                    {
-                        Application.Instance.Quit();
-                    }
+                    DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, ex.Message, "Error Saving Settings to File", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                }
+                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Information, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                {
+                    Application.Instance.Quit();
                 }
             };
 
@@ -586,6 +591,7 @@ namespace DWSIM.UI
                     form.Show();
                     if (!GlobalSettings.Settings.MostRecentFiles.Contains(path))
                     {
+                        GlobalSettings.Settings.MostRecentFiles.Add(path);
                         var ds = (TreeGridItemCollection)MostRecentList.DataStore;
                         var li = new TreeGridItem();
                         var data = new Dictionary<string, string>();
@@ -629,7 +635,7 @@ namespace DWSIM.UI
                             System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Path.GetFileNameWithoutExtension(path)),
                             dt, dwsimver, osver};
                         ds.Add(li);
-                        GlobalSettings.Settings.MostRecentFiles.Add(path);
+                        MostRecentList.ReloadData();
                     }
                     form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
                 });

@@ -90,11 +90,11 @@ Namespace Reactors
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Compounds").Elements
+            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Compounds").LastOrDefault.Elements
                 _components.Add(xel2.@ID)
             Next
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "InitialEstimates").Elements
+            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "InitialEstimates").LastOrDefault.Elements
                 _initialestimates.Add(Double.Parse(xel2.@Value, ci))
             Next
 

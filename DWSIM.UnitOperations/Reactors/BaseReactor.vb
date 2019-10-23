@@ -53,14 +53,16 @@ Namespace Reactors
             MyBase.LoadData(data)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionConversions").Elements
+            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionConversions").LastOrDefault.Elements
                 m_conversions.Add(xel2.@ID, Double.Parse(xel2.Value, ci))
             Next
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "CompoundConversions").Elements
+            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "CompoundConversions").LastOrDefault.Elements
                 m_componentconversions.Add(xel2.@ID, Double.Parse(xel2.Value, ci))
             Next
+
             Return True
+
         End Function
 
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)

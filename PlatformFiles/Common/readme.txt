@@ -64,7 +64,7 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.8 Update 3
 
-- [FIX] Fixed Valve Kv valculation mode for Gas/Steam
+- [FIX] Fixed Valve Kv calculation mode for Gas/Steam
 - [FIX] Fixed loading of properties for some Unit Operations
 - [FIX] Other minor bug fixes
 

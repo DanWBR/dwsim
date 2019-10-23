@@ -1408,20 +1408,20 @@ Namespace Reactors
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "ReactionExtents").SingleOrDefault
+            Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "ReactionExtents").LastOrDefault
 
             If Not elm Is Nothing Then
                 ReactionExtents = New Dictionary(Of String, Double)
-                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionExtents").Elements
+                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionExtents").LastOrDefault.Elements
                     ReactionExtents.Add(xel2.@ID, Double.Parse(xel2.@Value, ci))
                 Next
             End If
 
-            elm = (From xel2 As XElement In data Select xel2 Where xel2.Name = "PreviousReactionExtents").SingleOrDefault
+            elm = (From xel2 As XElement In data Select xel2 Where xel2.Name = "PreviousReactionExtents").LastOrDefault
 
             If Not elm Is Nothing Then
                 PreviousReactionExtents = New Dictionary(Of String, Double)
-                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "PreviousReactionExtents").Elements
+                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "PreviousReactionExtents").LastOrDefault.Elements
                     PreviousReactionExtents.Add(xel2.@ID, Double.Parse(xel2.@Value, ci))
                 Next
             End If
@@ -1436,10 +1436,12 @@ Namespace Reactors
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
+                .Remove(.Where(Function(e) e.Name = "ReactionExtents").FirstOrDefault)
                 .Add(New XElement("ReactionExtents"))
                 For Each kvp In ReactionExtents
                     .Item(.Count - 1).Add(New XElement("ReactionExtent", New XAttribute("ID", kvp.Key), New XAttribute("Value", kvp.Value.ToString(ci))))
                 Next
+                .Remove(.Where(Function(e) e.Name = "PreviousReactionExtents").FirstOrDefault)
                 .Add(New XElement("PreviousReactionExtents"))
                 For Each kvp In ReactionExtents
                     .Item(.Count - 1).Add(New XElement("ReactionExtent", New XAttribute("ID", kvp.Key), New XAttribute("Value", kvp.Value.ToString(ci))))
