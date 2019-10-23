@@ -241,12 +241,14 @@ Public Class FormMain
                 My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
             Next
 
+#If Not WINE32 Then
             'load external property packages from 'propertypackages' folder, if there is any
             Dim epplist As List(Of PropertyPackage) = GetExternalPPs(LoadExternalPPs())
 
             For Each pp As PropertyPackage In epplist
                 PropertyPackages.Add(pp.ComponentName, pp)
             Next
+#End If
 
             'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
             'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item

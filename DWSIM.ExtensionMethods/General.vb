@@ -237,10 +237,45 @@ Public Module General
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToArray(ByVal text As String, ci As CultureInfo, arraytype As Type) As Array
 
+#If WINE32 Then
+        If Not text Is Nothing Then
+            Dim values() As String = text.Split(",")
+            If arraytype Is GetType(Double) Then
+                Dim myarr As New List(Of Double)
+                For Each s As String In values
+                    If Double.TryParse(s, New Double) Then
+                        myarr.Add(Double.Parse(s, ci))
+                    Else
+                        myarr.Add(0.0)
+                    End If
+                Next
+                Return myarr.ToArray()
+            ElseIf arraytype Is GetType(Integer) Then
+                Dim myarr As New List(Of Integer)
+                For Each s As String In values
+                    If Integer.TryParse(s, New Integer) Then
+                        myarr.Add(Integer.Parse(s, ci))
+                    Else
+                        myarr.Add(0)
+                    End If
+                Next
+                Return myarr.ToArray()
+            ElseIf arraytype Is GetType(String) Then
+                Dim myarr As New List(Of String)
+                For Each s As String In values
+                    myarr.Add(s)
+                Next
+                Return myarr.ToArray()
+            Else
+                Return New ArrayList().ToArray(arraytype)
+            End If
+        Else
+            Return New ArrayList().ToArray(arraytype)
+        End If
+#Else
         If Not text Is Nothing Then
             Dim values() As String = text.Split(",")
             Dim myarr As New ArrayList
-
             For Each s As String In values
                 If Double.TryParse(s, New Double) Then
                     myarr.Add(Double.Parse(s, ci))
@@ -248,11 +283,11 @@ Public Module General
                     myarr.Add(s)
                 End If
             Next
-
             Return myarr.ToArray(arraytype)
         Else
             Return New ArrayList().ToArray(arraytype)
         End If
+#End If
 
     End Function
 
