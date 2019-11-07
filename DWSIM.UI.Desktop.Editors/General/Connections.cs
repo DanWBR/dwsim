@@ -20,7 +20,7 @@ namespace DWSIM.UI.Desktop.Editors
         public TableLayout container;
 
         public ConnectionsEditor(ISimulationObject selectedobject, DynamicLayout layout)
-		{
+        {
             SimObject = selectedobject;
             container = new TableLayout();
             Initialize();
@@ -35,7 +35,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             mslist.Insert(0, "");
             eslist.Insert(0, "");
-            
+
             foreach (var cp in SimObject.GraphicObject.InputConnectors)
             {
                 if (cp.Type != ConType.ConEn)
@@ -68,7 +68,7 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
-            if (SimObject.GraphicObject.EnergyConnector.Active) { CreateAndAddRow("In", SimObject.GraphicObject.EnergyConnector, eslist); }
+            if (SimObject.GraphicObject.EnergyConnector.Active) { CreateAndAddRow("Out", SimObject.GraphicObject.EnergyConnector, eslist); }
 
         }
 
@@ -77,7 +77,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             DynamicLayout cont1 = new DynamicLayout();
 
-            var cbConnection = s.CreateAndAddDropDownRow(cont1, connector.ConnectorName, options.ToList(), 0, null);
+            var cbConnection = s.CreateAndAddEditableDropDownRow(cont1, connector.ConnectorName, options.ToList(), 0, null);
 
             if (connector.IsAttached)
             {
@@ -116,8 +116,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             cbConnection.Tag = false;
 
-            cbConnection.SelectedValueChanged += (sender, e) =>
+            Action<object, EventArgs> schangedaction = (sender, e) =>
             {
+
+                if (cbConnection.SelectedIndex == -1) return;
+
                 var fgui = (Interfaces.IFlowsheet)SimObject.GetFlowsheet();
 
                 if ((bool)cbConnection.Tag)
@@ -134,7 +137,9 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             try
                             {
-                                flowsheet.DisconnectObjects(connector.AttachedConnector.AttachedFrom, gobj);
+                                var objfrom = connector.AttachedConnector.AttachedFrom;
+                                flowsheet.DisconnectObjects(objfrom, gobj);
+                                flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}.", objfrom.Tag, gobj.Tag), IFlowsheet.MessageType.Information);
                             }
                             catch (Exception ex)
                             {
@@ -147,7 +152,9 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             try
                             {
-                                flowsheet.DisconnectObjects(gobj, connector.AttachedConnector.AttachedTo);
+                                var objto = connector.AttachedConnector.AttachedTo;
+                                flowsheet.DisconnectObjects(gobj, objto);
+                                flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}", gobj.Tag, objto.Tag), IFlowsheet.MessageType.Information);
                             }
                             catch (Exception ex)
                             {
@@ -169,7 +176,9 @@ namespace DWSIM.UI.Desktop.Editors
                             {
                                 try
                                 {
-                                    flowsheet.DisconnectObjects(connector.AttachedConnector.AttachedFrom, gobj);
+                                    var objfrom = connector.AttachedConnector.AttachedFrom;
+                                    flowsheet.DisconnectObjects(objfrom, gobj);
+                                    flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}.", objfrom.Tag, gobj.Tag), IFlowsheet.MessageType.Information);
                                 }
                                 catch (Exception ex)
                                 {
@@ -187,6 +196,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 try
                                 {
                                     flowsheet.ConnectObjects(gobj, gobj2, 0, 0);
+                                    flowsheet.ShowMessage(String.Format("Connected {0} to {1}.", gobj.Tag, gobj2.Tag), IFlowsheet.MessageType.Information);
                                 }
                                 catch (Exception ex)
                                 {
@@ -204,6 +214,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 try
                                 {
                                     flowsheet.ConnectObjects(gobj2, gobj, 0, gobj.InputConnectors.IndexOf(connector));
+                                    flowsheet.ShowMessage(String.Format("Connected {0} to {1}.", gobj2.Tag, gobj.Tag), IFlowsheet.MessageType.Information);
                                 }
                                 catch (Exception ex)
                                 {
@@ -223,9 +234,12 @@ namespace DWSIM.UI.Desktop.Editors
                             {
                                 if (connector.IsAttached)
                                 {
-                                    flowsheet.DisconnectObjects(gobj, connector.AttachedConnector.AttachedTo);
+                                    var objto = connector.AttachedConnector.AttachedTo;
+                                    flowsheet.DisconnectObjects(gobj, objto);
+                                    flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}", gobj.Tag, objto.Tag), IFlowsheet.MessageType.Information);
                                 }
                                 flowsheet.ConnectObjects(gobj, gobj2, gobj.OutputConnectors.IndexOf(connector), 0);
+                                flowsheet.ShowMessage(String.Format("Connected {0} to {1}.", gobj.Tag, gobj2.Tag), IFlowsheet.MessageType.Information);
                             }
                             catch (Exception ex)
                             {
@@ -237,8 +251,102 @@ namespace DWSIM.UI.Desktop.Editors
 
                     }
                 }
-                
+
             };
+
+            cbConnection.KeyUp += (sender, e) =>
+            {
+                if (e.Key == Keys.Enter)
+                {
+                    var items = cbConnection.Items.Select((x) => x.Text).ToList();
+                    if (!items.Contains(cbConnection.Text))
+                    {
+                        var gobj = SimObject.GraphicObject;
+                        var flowsheet = SimObject.GetFlowsheet();
+                        int posx, posy;
+                        if (direction == "In")
+                        {
+                            posx = gobj.X - 100;
+                            posy = gobj.Y + gobj.Height / 2;
+                        }
+                        else
+                        {
+                            posx = gobj.X + gobj.Width + 100;
+                            posy = gobj.Y + gobj.Height / 2;
+                        }
+                        ISimulationObject stream = flowsheet.GetFlowsheetSimulationObject(cbConnection.Text);
+                        if (stream == null)
+                        {
+                            if (connector.Type == ConType.ConEn)
+                            {
+                                stream = flowsheet.AddObject(ObjectType.EnergyStream, posx, posy, cbConnection.Text);
+                            }
+                            else
+                            {
+                                stream = flowsheet.AddObject(ObjectType.MaterialStream, posx, posy, cbConnection.Text);
+                            }
+                        }
+                        ((Drawing.SkiaSharp.GraphicObjects.GraphicObject)stream.GraphicObject).CreateConnectors(0, 0);
+                        if (direction == "In")
+                        {
+                            try
+                            {
+                                if (connector.IsAttached)
+                                {
+                                    var objfrom = connector.AttachedConnector.AttachedFrom;
+                                    flowsheet.DisconnectObjects(objfrom, gobj);
+                                    flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}.", objfrom.Tag, gobj.Tag), IFlowsheet.MessageType.Information);
+                                }
+                                flowsheet.ConnectObjects(stream.GraphicObject, gobj, 0, gobj.InputConnectors.IndexOf(connector));
+                                flowsheet.ShowMessage(String.Format("Connected {0} to {1}.", stream.GraphicObject.Tag, gobj.Tag), IFlowsheet.MessageType.Information);
+                                cbConnection.Items.Add(cbConnection.Text);
+                                var list = new List<string>(options);
+                                list.Add(cbConnection.Text);
+                                options = list;
+                            }
+                            catch (Exception ex)
+                            {
+                                flowsheet.ShowMessage(ex.Message.ToString(), IFlowsheet.MessageType.GeneralError);
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                if (connector.IsAttached)
+                                {
+                                    var objto = connector.AttachedConnector.AttachedTo;
+                                    flowsheet.DisconnectObjects(gobj, objto);
+                                    flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}", gobj.Tag, objto.Tag), IFlowsheet.MessageType.Information);
+                                }
+                                if (connector.IsEnergyConnector)
+                                {
+                                    flowsheet.ConnectObjects(gobj, stream.GraphicObject, 0, 0);
+                                }
+                                else
+                                {
+                                    flowsheet.ConnectObjects(gobj, stream.GraphicObject, gobj.OutputConnectors.IndexOf(connector), 0);
+                                }
+                                flowsheet.ShowMessage(String.Format("Connected {0} to {1}.", gobj.Tag, stream.GraphicObject.Tag), IFlowsheet.MessageType.Information);
+                                cbConnection.Items.Add(cbConnection.Text);
+                                var list = new List<string>(options);
+                                list.Add(cbConnection.Text);
+                                options = list;
+                            }
+                            catch (Exception ex)
+                            {
+                                flowsheet.ShowMessage(ex.Message.ToString(), IFlowsheet.MessageType.GeneralError);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        schangedaction.Invoke(cbConnection, e);
+                    }
+                }
+            };
+
+            cbConnection.SelectedValueChanged += (sender, e) => schangedaction.Invoke(sender, e);
 
             cbConnection.Tag = true;
 

@@ -1,11 +1,4 @@
-Version 5.8 Update 3
+Version 5.8 Update 4
 
-- [FIX] Fixed Valve Kv valculation mode for Gas/Steam
-- [FIX] Fixed loading of properties for some Unit Operations
-- [FIX] Other minor bug fixes
-
-Version 5.8 Update 2
-
-- [NEW] Added a new VLLE Flash Algorithm tweak to check for alternative liquid phase compositions on initial VLE PT Flash
-- [FIX] Fixed Rigorous Column automatic initialization
-- [FIX] Fixed number of trial compositions not changing on Flash Algorithm editor
+- [NEW] Enhanced object connections editor (CPUI)
+- [FIX] Fixed Compressor/Expander calculation mode selection (CPUI)

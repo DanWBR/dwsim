@@ -312,7 +312,7 @@ namespace DWSIM.UI
                 }
             };
 
-            MostRecentList.SelectedItemChanged += (sender, e) =>
+            MostRecentList.CellClick += (sender, e) =>
             {
                 if (MostRecentList.SelectedItem != null)
                 {

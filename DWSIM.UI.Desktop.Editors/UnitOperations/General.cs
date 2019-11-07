@@ -270,8 +270,11 @@ namespace DWSIM.UI.Desktop.Editors
                         case UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P:
                             pos1e = 1;
                             break;
+                        case UnitOperations.UnitOperations.Expander.CalculationMode.PowerGenerated:
+                            pos1 = 2;
+                            break;
                     }
-                    s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.comprcalcmode().ToList(), pos1e, (DropDown arg3, EventArgs ev) =>
+                    s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.expndrcalcmode().ToList(), pos1e, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)
                         {
@@ -280,6 +283,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case 1:
                                 xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P;
+                                break;
+                            case 2:
+                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.PowerGenerated;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
@@ -315,6 +321,21 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Pressure"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Power Generated (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, xe.DeltaQ.GetValueOrDefault()),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (arg3.Text.IsValidDoubleExpression())
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               xe.DeltaQ = cv.ConvertToSI(su.heatflow, arg3.Text.ToString().ParseExpressionToDouble());
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       }, () => CallSolverIfNeeded());
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Power Generated"));
                     s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", xe.EficienciaAdiabatica.GetValueOrDefault(),
                        (TextBox arg3, EventArgs ev) =>
                        {

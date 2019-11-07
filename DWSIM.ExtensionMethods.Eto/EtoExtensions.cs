@@ -160,6 +160,37 @@ namespace DWSIM.UI.Shared
             return content;
         }
 
+        public static ComboBox CreateAndAddEditableDropDownRow(this DynamicLayout container, String text, List<String> options, int position, Action<ComboBox, EventArgs> selectionchangedcommand, Action keypress = null)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            var drop = new ComboBox();
+            drop.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (!Eto.Forms.Application.Instance.Platform.IsGtk)
+            {
+                if (GlobalSettings.Settings.EditorTextBoxFixedSize) drop.Width = (int)(sf * 140);
+            }
+
+            foreach (var item in options)
+            {
+                drop.Items.Add(new ListItem() { Key = item, Text = item });
+            }
+
+            drop.SelectedIndex = position;
+
+            if (selectionchangedcommand != null) drop.SelectedIndexChanged += (sender, e) => selectionchangedcommand.Invoke((ComboBox)sender, e);
+            if (keypress != null) drop.KeyUp += (sender, e) => { if (e.Key == Keys.Enter) keypress.Invoke(); };
+
+            var tr = new TableRow(txt, null, drop);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return drop;
+
+        }
+
         public static DropDown CreateAndAddDropDownRow(this DynamicLayout container, String text, List<String> options, int position, Action<DropDown, EventArgs> command, Action keypress = null)
         {
 

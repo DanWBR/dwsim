@@ -713,6 +713,8 @@ Namespace UnitOperations
                 Return "If you chose the 'Pressure Variation' calculation mode, enter the desired value for the pressure decrease."
             ElseIf p.Equals("Outlet Pressure") Then
                 Return "If you chose the 'Outlet Pressure' calculation mode, enter the desired outlet pressure. Expansion or compression will be calculated accordingly."
+            ElseIf p.Equals("Power Generated") Then
+                Return "If you chose the 'Power Generated' calculation mode, enter the desired generated expander power."
             ElseIf p.Equals("Efficiency (%)") Then
                 Return "Enter the isentropic efficiency of the compressor. 100% efficiency means a totally isentropic process."
             Else

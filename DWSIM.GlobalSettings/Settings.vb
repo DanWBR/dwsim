@@ -414,9 +414,9 @@ Public Class Settings
 
         EditorTextBoxFixedSize = source.Configs("Misc").GetBoolean("EditorTextBoxFixedSize", True)
 
-        EditOnSelect = source.Configs("Misc").GetBoolean("EditOnSelect", False)
+        EditOnSelect = source.Configs("Misc").GetBoolean("EditOnSelect", True)
 
-        CallSolverOnEditorPropertyChanged = source.Configs("Misc").GetBoolean("CallSolverOnEditorPropertyChanged", False)
+        CallSolverOnEditorPropertyChanged = source.Configs("Misc").GetBoolean("CallSolverOnEditorPropertyChanged", True)
 
         UIScalingFactor = source.Configs("Misc").GetDouble("UIScalingFactor", 1.0)
 

@@ -74,7 +74,6 @@ Namespace PropertyPackages
 
 #Region "    DWSIM Functions"
 
-
         Public Overrides Function CalcIsothermalCompressibility(p As Interfaces.IPhase) As Double
 
             Dim T, P0 As Double
