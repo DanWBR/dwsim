@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DWSIM.ExtensionMethods;
 using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.Thermodynamics.BaseClasses;
@@ -113,6 +114,35 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Rows.Add(cont2);
 
+            List<string> orderlist = new List<string>(new []{
+                "Default(As Added)",
+                "Name(Ascending)",
+                "Name(Descending)",
+                "Normal Boiling Point(Ascending)",
+                "Normal Boiling Point(Descending)",
+                "Molar Weight(Ascending)",
+                "Molar Weight((Descending)",
+                "CAS Number (Ascending)",
+                "CAS Number (Descending)",
+                "Tag (Ascending)",
+                "Tag (Descending)"});
+
+            var dd = new DropDown();
+            dd.Items.AddRange(orderlist.Select((x) => new ListItem() {  Key = x, Text = x}));
+            dd.SelectedIndex = (int)flowsheet.Options.CompoundOrderingMode;
+            dd.SelectedIndexChanged += (sender, e) => {
+                flowsheet.Options.CompoundOrderingMode = dd.SelectedIndex.ToEnum<Interfaces.Enums.CompoundOrdering>();
+            };
+
+            var cont3 = new DynamicLayout();
+            var txt2a = new Label { Text = "Order Compounds By", VerticalAlignment = VerticalAlignment.Center };
+            txt2a.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            dd.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            dd.Width = 300;
+            cont3.AddRow(new TableRow(txt2a, null, dd));
+
+            container.Rows.Add(cont3);
+
             UpdateList(complist);
 
         }
@@ -124,21 +154,22 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (flowsheet.SelectedCompounds.ContainsKey(cp.Name))
                 {
-                    obslist.Add(new CompoundItem { Text = cp.Name, Formula = cp.Formula, CAS = cp.CAS_Number, Database = cp.OriginalDB, Check = true });
+                    cp.Tag = flowsheet.SelectedCompounds[cp.Name].Tag;
+                    obslist.Add(new CompoundItem { Text = cp.Name, Tag = cp.Tag, Formula = cp.Formula, CAS = cp.CAS_Number, Database = cp.OriginalDB, Check = true });
                 }
             }
             foreach (var cp in list)
             {
                 if (!flowsheet.SelectedCompounds.ContainsKey(cp.Name))
                 {
-                    obslist.Add(new CompoundItem { Text = cp.Name, Formula = cp.Formula, CAS = cp.CAS_Number, Database = cp.OriginalDB, Check = false });
+                    obslist.Add(new CompoundItem { Text = cp.Name, Tag = cp.Tag, Formula = cp.Formula, CAS = cp.CAS_Number, Database = cp.OriginalDB, Check = false });
                 }
             }
 
             listcontainer = new GridView { DataStore = obslist, RowHeight = 20 };
             listcontainer.Style = "fastgrid";
 
-            if (Application.Instance.Platform.IsWinForms) listcontainer.Height = 370;
+            if (Application.Instance.Platform.IsWinForms) listcontainer.Height = 300;
 
             var col2 = new GridColumn
             {
@@ -148,10 +179,6 @@ namespace DWSIM.UI.Desktop.Editors
             };
             col2.AutoSize = true;
 
-            listcontainer.CellEdited += (sender, e) =>
-            {
-                UpdateCompound(((CompoundItem)e.Item).Text);
-            };
 
             listcontainer.Columns.Add(col2);
 
@@ -162,6 +189,13 @@ namespace DWSIM.UI.Desktop.Editors
             };
             col1.AutoSize = true;
             listcontainer.Columns.Add(col1);
+            var col1aa = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.Tag) },
+                HeaderText = "Tag", Editable = true
+            };
+            col1aa.AutoSize = true;
+            listcontainer.Columns.Add(col1aa);
             var col1a = new GridColumn
             {
                 DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.Formula) },
@@ -183,6 +217,23 @@ namespace DWSIM.UI.Desktop.Editors
             };
             col1c.AutoSize = true;
             listcontainer.Columns.Add(col1c);
+
+            listcontainer.CellEdited += (sender, e) =>
+            {
+                if (e.GridColumn == col2)
+                {
+                    UpdateCompound(((CompoundItem)e.Item).Text);
+                }
+                else if (e.GridColumn == col1aa)
+                {
+                    var name = ((CompoundItem)e.Item).Text;
+                    if (flowsheet.SelectedCompounds.ContainsKey(name))
+                    {
+                        flowsheet.SelectedCompounds[name].Tag = ((CompoundItem)e.Item).Tag;
+                        flowsheet.AvailableCompounds[name].Tag = ((CompoundItem)e.Item).Tag;
+                    }
+                }
+            };
 
             //container.Rows.Add(new TableRow(new Scrollable { Content = listcontainer, Border = BorderType.None }));
             container.Rows.Add(new TableRow(listcontainer));
@@ -272,6 +323,8 @@ namespace DWSIM.UI.Desktop.Editors
     {
 
         public string Text { get; set; }
+
+        public string Tag { get; set; }
 
         public string Formula { get; set; }
 

@@ -25,7 +25,16 @@ namespace DWSIM.UI.Desktop
             Settings.EnableGPUProcessing = false;
             Settings.OldUI = false;
 
-            Settings.LoadSettings("dwsim_newui.ini");
+            Exception loadsetex = null;
+
+            try
+            {
+                Settings.LoadSettings("dwsim_newui.ini");
+            }
+            catch (Exception ex)
+            {
+                loadsetex = ex;
+            }
 
             if (GlobalSettings.Settings.EnableGPUProcessing)
             {
@@ -154,6 +163,10 @@ namespace DWSIM.UI.Desktop
                             {
                                 DWSIM.UI.Desktop.Mac.StyleSetter.FinishedLaunching();
                             }
+                        }
+                        if (loadsetex != null)
+                        {
+                            MessageBox.Show("Error loading settings from file: " + loadsetex.Message + "\nPlease fix or remove the 'dwsim_newui.ini' from the 'Documents/DWSIM Application Data' folder and try again.", "Error", MessageBoxType.Error);
                         }
                     };
                     app.Run(new MainForm());

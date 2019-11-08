@@ -1848,6 +1848,9 @@ Namespace BaseClasses
         Public Property LennardJonesEnergy As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.LennardJonesEnergy
 
         Public Property Parachor As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Parachor
+
+        Public Property Tag As String = "" Implements ICompoundConstantProperties.Tag
+
     End Class
 
     <System.Serializable()> Public Class ConstantPropertiesCollection

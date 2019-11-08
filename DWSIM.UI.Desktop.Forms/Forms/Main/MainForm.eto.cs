@@ -247,7 +247,13 @@ namespace DWSIM.UI
 
             MostRecentList.DataStore = tgc;
 
-            var samplist = Directory.EnumerateFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples"), "*.dwxm*");
+            IEnumerable<string> samplist = new List<string>();
+            try
+            {
+                samplist = Directory.EnumerateFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples"), "*.dwxm*");
+            }
+            catch
+            { }
 
             foreach (var item in samplist)
             {
@@ -312,7 +318,7 @@ namespace DWSIM.UI
                 }
             };
 
-            MostRecentList.CellClick += (sender, e) =>
+            MostRecentList.SelectedItemChanged += (sender, e) =>
             {
                 if (MostRecentList.SelectedItem != null)
                 {

@@ -7759,6 +7759,76 @@ Final3:
 
         End Function
 
+        Public Function RET_VNAMES2(order As Interfaces.Enums.CompoundOrdering) As String()
+
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
+            Dim subst As Interfaces.ICompound
+            Dim i As Integer = 0
+
+            Select Case order
+                Case CompoundOrdering.CAS_ASC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderBy(Function(c) c.ConstantProperties.CAS_Number)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.CAS_DESC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderByDescending(Function(c) c.ConstantProperties.CAS_Number)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.MW_ASC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderBy(Function(c) c.ConstantProperties.Molar_Weight)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.MW_DESC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderByDescending(Function(c) c.ConstantProperties.Molar_Weight)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.Name_ASC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderBy(Function(c) c.ConstantProperties.Name)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.Name_DESC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderByDescending(Function(c) c.ConstantProperties.Name)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.NBP_ASC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderBy(Function(c) c.ConstantProperties.Normal_Boiling_Point)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.NBP_DESC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderByDescending(Function(c) c.ConstantProperties.Normal_Boiling_Point)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.TAG_ASC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderBy(Function(c) c.ConstantProperties.Tag)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case CompoundOrdering.TAG_DESC
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values.OrderByDescending(Function(c) c.ConstantProperties.Tag)
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+                Case Else
+                    For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                        val(i) = subst.ConstantProperties.Name
+                        i += 1
+                    Next
+            End Select
+
+
+
+            Return val
+
+        End Function
+
         Public Function RET_VNAMES() As String()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String

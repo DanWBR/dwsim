@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.8 Update 3
+Version 5.8 Update 4
 Copyright (c) 2017-2019 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.8 Update 4
+
+- [NEW] Added a Tag property to compounds for custom ordering
+- [NEW] Added Compound ordering capability to Cross-Platform UI (CPUI)
+- [NEW] Enhanced object connections editor (CPUI)
+- [FIX] Fixed Compressor/Expander calculation mode selection (CPUI)
 
 Version 5.8 Update 3
 

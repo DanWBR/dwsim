@@ -289,11 +289,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                     var tblist = new List<TextBox>();
 
-                    foreach (var comp in ms.Phases[0].Compounds)
+                    foreach (var comp0 in ms.GetFlowsheet().SelectedCompounds.Values)
                     {
-                        var tbox = s.CreateAndAddTextBoxRow(container2, nf, comp.Key, comp.Value.MoleFraction.GetValueOrDefault(),
+                        var comp = ms.Phases[0].Compounds[comp0.Name];
+                        var tbox = s.CreateAndAddTextBoxRow(container2, nf, comp.Name, comp.MoleFraction.GetValueOrDefault(),
                                                (TextBox arg3, EventArgs ev) => { });
-                        tbox.Tag = comp.Key;
+                        tbox.Tag = comp.Name;
                         tblist.Add(tbox);
                     }
 
@@ -533,6 +534,32 @@ namespace DWSIM.UI.Desktop.Editors
                         if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke();
 
                     };
+
+                    s.CreateAndAddLabelAndTwoButtonsRow(container2,"Copy/Paste", "Copy Data", null, "Paste Data", null,
+                        (btn1, e1) => {
+                            string data = "";
+                            foreach (var tb in tblist)
+                            {
+                                data += tb.Tag.ToString() + "\t" + tb.Text + "\n";
+                            }
+                            Clipboard.Instance.Text = data;
+                        },
+                        (btn2, e2) => {
+                            if (Clipboard.Instance.ContainsText)
+                            {
+                                var textdata = Clipboard.Instance.Text;
+                                var data = textdata.Split(new[] { '\n', '\t', ' ' });
+                                int i = 0;
+                                foreach (var line in data)
+                                {
+                                    if (line != " " && line != "\t" && line != "\n" && i < tblist.Count)
+                                    {
+                                        tblist[i].Text = line.Trim();
+                                        i += 1;
+                                    }
+                                }
+                            }
+                        });
 
                     s.CreateAndAddControlRow(container2, btnAccept);
                     s.CreateAndAddControlRow(container2, btnNormalize);

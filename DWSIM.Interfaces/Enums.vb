@@ -414,6 +414,8 @@ Namespace Enums
         MW_DESC = 6
         CAS_ASC = 7
         CAS_DESC = 8
+        TAG_ASC = 9
+        TAG_DESC = 10
 
     End Enum
 

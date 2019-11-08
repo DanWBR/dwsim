@@ -114,10 +114,10 @@ Public Class FormSimulSettings
             colAdd.IndeterminateValue = False
 
             For Each comp In Me.FrmChild.Options.SelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
             Next
             For Each comp In Me.FrmChild.Options.NotSelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
             Next
 
             Dim addobj As Boolean = True
@@ -918,7 +918,7 @@ Public Class FormSimulSettings
             Try
                 Dim r As New DataGridViewRow
                 translatedname = comp.Name
-                r.CreateCells(ogc1, New Object() {comp.Name, True, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                r.CreateCells(ogc1, New Object() {comp.Name, True, translatedname, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                 ogc1.Rows.Add(r)
                 Return ogc1.Rows.Count - 1
             Catch ex As Exception
@@ -1454,7 +1454,7 @@ Public Class FormSimulSettings
                                 phase.Compounds(comp.Name).ConstantProperties = comp
                             Next
                         Next
-                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                         ogc1.ClearSelection()
                         ogc1.Rows(ogc1.Rows.Count - 1).Selected = True
                         ogc1.FirstDisplayedScrollingRowIndex = ogc1.Rows.Count - 1
@@ -1483,7 +1483,7 @@ Public Class FormSimulSettings
                             phase.Compounds(comp.Name).ConstantProperties = comp
                         Next
                     Next
-                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -1572,6 +1572,16 @@ Public Class FormSimulSettings
                 Else
                     'remove
                     RemoveCompFromSimulation(ogc1.Rows(e.RowIndex).Cells(0).Value)
+                End If
+
+            ElseIf ((e.ColumnIndex = colTag.Index) AndAlso (e.RowIndex <> -1)) Then
+
+                Dim cid = ogc1.Rows(e.RowIndex).Cells(0).Value.ToString
+
+                If FrmChild.Options.SelectedComponents.ContainsKey(cid) Then
+                    FrmChild.Options.SelectedComponents(cid).Tag = ogc1.Rows(e.RowIndex).Cells(colTag.Index).Value
+                Else
+                    FrmChild.Options.NotSelectedComponents(cid).Tag = ogc1.Rows(e.RowIndex).Cells(colTag.Index).Value
                 End If
 
             End If

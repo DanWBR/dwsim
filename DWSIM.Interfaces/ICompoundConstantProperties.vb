@@ -237,4 +237,7 @@
     Property Parachor As Double
     Property FullerDiffusionVolume As Double
 
+    'for custom ordering purposes
+    Property Tag As String
+
 End Interface

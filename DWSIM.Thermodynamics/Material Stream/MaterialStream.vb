@@ -6106,7 +6106,7 @@ Namespace Streams
 
             Dim props As String() = PropertyPackage.GetSinglePhasePropList()
             Dim overallprops As String() = PropertyPackage.GetOverallPropList()
-            Dim comps As String() = PropertyPackage.RET_VNAMES()
+            Dim comps As String() = PropertyPackage.RET_VNAMES2(GetFlowsheet().FlowsheetOptions.CompoundOrderingMode)
 
             Dim units As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
 
@@ -6461,7 +6461,7 @@ Namespace Streams
 
             Dim props As String() = PropertyPackage.GetSinglePhasePropList()
             Dim overallprops As String() = PropertyPackage.GetOverallPropList()
-            Dim comps As String() = PropertyPackage.RET_VNAMES()
+            Dim comps As String() = PropertyPackage.RET_VNAMES2(GetFlowsheet().FlowsheetOptions.CompoundOrderingMode)
 
             Dim units As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
             Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
