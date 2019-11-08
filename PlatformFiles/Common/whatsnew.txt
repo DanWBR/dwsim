@@ -3,4 +3,5 @@ Version 5.8 Update 4
 - [NEW] Added a Tag property to compounds for custom ordering
 - [NEW] Added Compound ordering capability to Cross-Platform UI (CPUI)
 - [NEW] Enhanced object connections editor (CPUI)
+- [FIX] Fixed Spreadsheet Copy/Paste (CPUI)
 - [FIX] Fixed Compressor/Expander calculation mode selection (CPUI)
