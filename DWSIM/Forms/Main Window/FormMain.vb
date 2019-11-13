@@ -2507,6 +2507,7 @@ Public Class FormMain
 
         Try
             If DWSIM.App.IsRunningOnMono Then form.FormSpreadsheet = New FormNewSpreadsheet() With {.Flowsheet = form}
+            form.FormSpreadsheet.Initialize()
             If (Not (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet")) Is Nothing) Then
                 Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
                 If (Not (rgfdataelement) Is Nothing) Then
@@ -2574,6 +2575,7 @@ Public Class FormMain
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
             form.FormSpreadsheet.DockPanel = Nothing
+            form.FormSpreadsheet.Flowsheet = form
             form.FormCharts.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing

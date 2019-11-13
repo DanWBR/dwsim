@@ -190,7 +190,7 @@ label0:
         If abstractfile <> "" Then
             Task.Factory.StartNew(Sub()
                                       Dim p = Process.Start(abstractfile)
-                                      p.WaitForExit()
+                                      p?.WaitForExit()
                                       If MessageBox.Show(String.Format("Delete Abstract File '{0}'?", abstractfile), "Delete Abstract File", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                                           Try
                                               File.Delete(abstractfile)
