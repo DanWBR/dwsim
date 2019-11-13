@@ -128,6 +128,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator8.Visible = False
         Me.SplitToolStripMenuItem.Visible = False
         Me.MergeStreamsToolStripMenuItem.Visible = False
+        Me.SplitAndInsertRecycleMenuItem.Visible = False
 
         Me.AtivadoToolStripMenuItem.Checked = FlowsheetSurface.SelectedObject.Active
 
@@ -175,6 +176,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
                     Me.ToolStripSeparator8.Visible = True
                     Me.SplitToolStripMenuItem.Visible = True
+                    Me.SplitAndInsertRecycleMenuItem.Visible = True
 
                 End If
 
@@ -316,7 +318,6 @@ Public Class FlowsheetSurface_SkiaSharp
             Me.ToolStripSeparator6.Visible = False
 
         End If
-        'Me.InverterToolStripMenuItem.Visible = False
 
     End Sub
 
