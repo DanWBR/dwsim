@@ -335,7 +335,7 @@ Public Class EditingForm_CustomUO
 
         End If
 
-        If oidx > 0 Then
+        If oidx >= 0 Then
 
             Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(oidx).Position.X + 30, sgobj.OutputConnectors(oidx).Position.Y, "")
 
