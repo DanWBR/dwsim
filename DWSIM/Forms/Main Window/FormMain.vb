@@ -731,17 +731,17 @@ Public Class FormMain
 
         PropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
 
-        Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-        EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-        EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
+        'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+        'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+        'EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
 
-        PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
+        'PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
 
-        Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-        ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-        ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
+        'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+        'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+        'ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
 
-        PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
+        'PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
 
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
