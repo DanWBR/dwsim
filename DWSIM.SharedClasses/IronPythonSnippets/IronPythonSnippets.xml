@@ -409,7 +409,7 @@ def CalcMixer():
     W = 0.0
     H = 0.0
      
-    i = 0
+    i = 1
  
     for cp in mixer.GraphicObject.InputConnectors:
         if cp.IsAttached:
