@@ -115,6 +115,7 @@ Public Class FlashAlgorithmConfig
 
             TabControl1.TabPages.Remove(TabPageCOES)
             TabControl1.TabPages.Remove(TabPageGeneral)
+            TabControl1.TabPages.Remove(TabPageUD)
 
         End If
 
@@ -179,40 +180,44 @@ Public Class FlashAlgorithmConfig
             NumericUpDown1.Value = Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
             chkForcePT3P.Checked = Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)
 
-            If Not ExcelMode Then SetupKeyCompounds()
+            If Not ExcelMode Then
 
-            If FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.UserDefined Then
+                SetupKeyCompounds()
 
-                Dim udfa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
+                If FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.UserDefined Then
 
-                If udfa.PTFlash IsNot Nothing Then
-                    PBPTFlash.Image = My.Resources.accept
-                    lblPTFlash.Text = "Defined"
-                    btnTestPTFlash.Enabled = True
-                End If
+                    Dim udfa = DirectCast(FlashAlgo, PropertyPackages.Auxiliary.FlashAlgorithms.UserDefined)
 
-                If udfa.PHFlash IsNot Nothing Then
-                    PBPHFlash.Image = My.Resources.accept
-                    lblPHFlash.Text = "Defined"
-                    btnTestPHFlash.Enabled = True
-                End If
+                    If udfa.PTFlash IsNot Nothing Then
+                        PBPTFlash.Image = My.Resources.accept
+                        lblPTFlash.Text = "Defined"
+                        btnTestPTFlash.Enabled = True
+                    End If
 
-                If udfa.PSFlash IsNot Nothing Then
-                    PBPSFlash.Image = My.Resources.accept
-                    lblPSFlash.Text = "Defined"
-                    btnTestPSFlash.Enabled = True
-                End If
+                    If udfa.PHFlash IsNot Nothing Then
+                        PBPHFlash.Image = My.Resources.accept
+                        lblPHFlash.Text = "Defined"
+                        btnTestPHFlash.Enabled = True
+                    End If
 
-                If udfa.PVFlash IsNot Nothing Then
-                    PBPVFFlash.Image = My.Resources.accept
-                    lblPVFFlash.Text = "Defined"
-                    btnTestPVFFlash.Enabled = True
-                End If
+                    If udfa.PSFlash IsNot Nothing Then
+                        PBPSFlash.Image = My.Resources.accept
+                        lblPSFlash.Text = "Defined"
+                        btnTestPSFlash.Enabled = True
+                    End If
 
-                If udfa.TVFlash IsNot Nothing Then
-                    PBTVFFlash.Image = My.Resources.accept
-                    lblTVFFlash.Text = "Defined"
-                    btnTestTVFFlash.Enabled = True
+                    If udfa.PVFlash IsNot Nothing Then
+                        PBPVFFlash.Image = My.Resources.accept
+                        lblPVFFlash.Text = "Defined"
+                        btnTestPVFFlash.Enabled = True
+                    End If
+
+                    If udfa.TVFlash IsNot Nothing Then
+                        PBTVFFlash.Image = My.Resources.accept
+                        lblTVFFlash.Text = "Defined"
+                        btnTestTVFFlash.Enabled = True
+                    End If
+
                 End If
 
             End If

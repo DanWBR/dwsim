@@ -36,7 +36,7 @@ Public Class SettingsForm
         Try
             GlobalSettings.Settings.LoadExcelSettings(inifile)
         Catch ex As Exception
-            MessageBox.Show("Error reading config file. Default settings will be used instead." & vbCrLf & "Error message: " & ex.ToString, "Error reading settings", MessageBoxButtons.OK)
+            'MessageBox.Show("Error reading config file. Default settings will be used instead." & vbCrLf & "Error message: " & ex.ToString, "Error reading settings", MessageBoxButtons.OK)
         End Try
 
         Me.cbErrorHandlingMode.SelectedIndex = GlobalSettings.Settings.ExcelErrorHandlingMode
