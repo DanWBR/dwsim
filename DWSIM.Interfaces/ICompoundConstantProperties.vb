@@ -21,6 +21,8 @@
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ICompoundConstantProperties
 
+    Property ExtraProperties As Dynamic.ExpandoObject
+
     Property Name As String
     Property CAS_Number As String
     Property Formula As String

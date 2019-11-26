@@ -21,6 +21,8 @@
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ICompound
 
+    Property ExtraProperties As Dynamic.ExpandoObject
+
     Property ConstantProperties As ICompoundConstantProperties
 
     Property lnKvalue() As Double

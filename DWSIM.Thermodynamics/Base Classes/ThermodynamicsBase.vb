@@ -28,6 +28,7 @@ Imports System.Reflection
 Imports System.Globalization
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces
+Imports System.Dynamic
 
 Namespace BaseClasses
 
@@ -53,12 +54,47 @@ Namespace BaseClasses
 
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
-            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
+            ExtraProperties = New ExpandoObject
+
+            Dim xel_d = (From xel2 As XElement In data Select xel2 Where xel2.Name = "DynamicProperties")
+
+            If Not xel_d Is Nothing Then
+                Dim dataDyn As List(Of XElement) = xel_d.Elements.ToList
+                For Each xel As XElement In dataDyn
+                    Try
+                        Dim propname = xel.Element("Name").Value
+                        Dim proptype = xel.Element("PropertyType").Value
+                        Dim ptype As Type = Type.GetType(proptype)
+                        Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                        DirectCast(ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
+            Return True
+
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
-            Return XMLSerializer.XMLSerializer.Serialize(Me)
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
+
+            elements.Add(New XElement("DynamicProperties"))
+            Dim extraprops = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+            For Each item In extraprops
+                Try
+                    elements.Item(elements.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
+                                                                           New XElement("PropertyType", item.Value.GetType.ToString),
+                                                                           New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
+                Catch ex As Exception
+                End Try
+            Next
+
+            Return elements
 
         End Function
 
@@ -101,6 +137,9 @@ Namespace BaseClasses
         <XmlIgnore> Public Property ConstantProperties As Interfaces.ICompoundConstantProperties = New ConstantProperties Implements Interfaces.ICompound.ConstantProperties
 
         Public Property DiffusionCoefficient As Double? Implements Interfaces.ICompound.DiffusionCoefficient
+
+        Public Property ExtraProperties As New ExpandoObject Implements ICompound.ExtraProperties
+
     End Class
 
     <System.Serializable()> Public Class Phase
@@ -1386,6 +1425,24 @@ Namespace BaseClasses
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
+            ExtraProperties = New ExpandoObject
+
+            Dim xel_d = (From xel2 As XElement In data Select xel2 Where xel2.Name = "DynamicProperties")
+
+            If Not xel_d Is Nothing Then
+                Dim dataDyn As List(Of XElement) = xel_d.Elements.ToList
+                For Each xel As XElement In dataDyn
+                    Try
+                        Dim propname = xel.Element("Name").Value
+                        Dim proptype = xel.Element("PropertyType").Value
+                        Dim ptype As Type = Type.GetType(proptype)
+                        Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                        DirectCast(ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
             Dim unif As New PropertyPackages.Auxiliary.Unifac
             Dim modf As New PropertyPackages.Auxiliary.Modfac
 
@@ -1428,6 +1485,17 @@ Namespace BaseClasses
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
             With xelements
+
+                .Add(New XElement("DynamicProperties"))
+                Dim extraprops = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+                For Each item In extraprops
+                    Try
+                        .Item(.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
+                                                                               New XElement("PropertyType", item.Value.GetType.ToString),
+                                                                               New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
+                    Catch ex As Exception
+                    End Try
+                Next
 
                 .Add(New XElement("UNIFACGroups"))
 
@@ -1850,6 +1918,8 @@ Namespace BaseClasses
         Public Property Parachor As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Parachor
 
         Public Property Tag As String = "" Implements ICompoundConstantProperties.Tag
+
+        Public Property ExtraProperties As New ExpandoObject Implements ICompoundConstantProperties.ExtraProperties
 
     End Class
 
