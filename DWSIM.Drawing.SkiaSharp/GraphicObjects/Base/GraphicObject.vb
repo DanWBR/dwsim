@@ -61,6 +61,12 @@ Namespace GraphicObjects
 
         End Function
 
+        Public Function GetDrawingRect()
+
+            Return New SKRect(X, Y, X + Width, Y + Height)
+
+        End Function
+
         Public Function MeasureString(text As String, paint As SKPaint) As SKSize
 
             Dim trect As New SKRect(0, 0, 2, 2)
@@ -147,10 +153,6 @@ Namespace GraphicObjects
 
             Return elements
 
-        End Function
-
-        Public Function GetBoundsRectangle() As SKRect
-            Return New SKRect(X, Y, Width, Height)
         End Function
 
         Public Shared Function ReturnInstance(typename As String) As IGraphicObject

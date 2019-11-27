@@ -1419,4 +1419,10 @@ Public Class GraphicsSurface
 
     End Function
 
+    Public Sub AutoArrange(Optional ByVal DistanceFactor As Double = 1.0)
+
+
+
+    End Sub
+
 End Class
