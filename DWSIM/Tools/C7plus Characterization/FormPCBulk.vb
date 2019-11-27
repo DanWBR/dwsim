@@ -32,6 +32,8 @@ Public Class FormPCBulk
     Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
+    Public frmwizard As FormSimulWizard
+
     Private frm As FormFlowsheet
     Private ps_vect(0, 10) As Object
 
@@ -775,6 +777,10 @@ Public Class FormPCBulk
                                tmpcomp = subst.ConstantProperties
                                frm.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
                                idx = frm.FrmStSim1.AddCompToGrid(tmpcomp)
+                               If frmwizard IsNot Nothing Then
+                                   frmwizard.AddCompToGrid(tmpcomp)
+                                   frmwizard.ogc1.Sort(frmwizard.colAdd, System.ComponentModel.ListSortDirection.Descending)
+                               End If
                                frm.FrmStSim1.AddCompToSimulation(tmpcomp.Name)
                            Next
 

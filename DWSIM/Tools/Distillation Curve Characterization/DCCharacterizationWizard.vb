@@ -46,6 +46,8 @@ Public Class DCCharacterizationWizard
     Dim ccol As Dictionary(Of String, Compound)
     Dim tccol As List(Of tmpcomp)
 
+    Public frmwizard As FormSimulWizard
+
     Private Sub DCCharacterizationWizard_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         form = My.Application.ActiveSimulation
@@ -738,6 +740,10 @@ Public Class DCCharacterizationWizard
             tmpcomp = subst.ConstantProperties
             form.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
             idx = form.FrmStSim1.AddCompToGrid(tmpcomp)
+            If frmwizard IsNot Nothing Then
+                frmwizard.AddCompToGrid(tmpcomp)
+                frmwizard.ogc1.Sort(frmwizard.colAdd, System.ComponentModel.ListSortDirection.Descending)
+            End If
             form.FrmStSim1.AddCompToSimulation(tmpcomp.Name)
         Next
 

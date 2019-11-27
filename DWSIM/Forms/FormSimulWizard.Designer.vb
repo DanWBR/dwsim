@@ -32,9 +32,8 @@ Partial Class FormSimulWizard
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.WizardPage2 = New AeroWizard.WizardPage()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.btnInfoLeft = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -51,8 +50,7 @@ Partial Class FormSimulWizard
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.ListViewPP = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ListViewPP = New System.Windows.Forms.ListBox()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.dgvpp = New System.Windows.Forms.DataGridView()
@@ -73,6 +71,12 @@ Partial Class FormSimulWizard
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cmsAddComps = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage1.SuspendLayout()
@@ -84,6 +88,7 @@ Partial Class FormSimulWizard
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage5.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmsAddComps.SuspendLayout()
         Me.SuspendLayout()
         '
         'StepWizardControl1
@@ -123,9 +128,8 @@ Partial Class FormSimulWizard
         'WizardPage2
         '
         resources.ApplyResources(Me.WizardPage2, "WizardPage2")
+        Me.WizardPage2.Controls.Add(Me.Button4)
         Me.WizardPage2.Controls.Add(Me.TextBox1)
-        Me.WizardPage2.Controls.Add(Me.Button3)
-        Me.WizardPage2.Controls.Add(Me.Button2)
         Me.WizardPage2.Controls.Add(Me.btnInfoLeft)
         Me.WizardPage2.Controls.Add(Me.Label2)
         Me.WizardPage2.Controls.Add(Me.Label3)
@@ -134,6 +138,13 @@ Partial Class FormSimulWizard
         Me.WizardPage2.NextPage = Me.WizardPage3
         Me.ToolTip1.SetToolTip(Me.WizardPage2, resources.GetString("WizardPage2.ToolTip"))
         '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.ToolTip1.SetToolTip(Me.Button4, resources.GetString("Button4.ToolTip"))
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'TextBox1
         '
         resources.ApplyResources(Me.TextBox1, "TextBox1")
@@ -141,22 +152,6 @@ Partial Class FormSimulWizard
         Me.TextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.TextBox1.Name = "TextBox1"
         Me.ToolTip1.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip"))
-        '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Image = Global.DWSIM.My.Resources.Resources.world_go
-        Me.Button3.Name = "Button3"
-        Me.ToolTip1.SetToolTip(Me.Button3, resources.GetString("Button3.ToolTip"))
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.card_export
-        Me.Button2.Name = "Button2"
-        Me.ToolTip1.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip"))
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'btnInfoLeft
         '
@@ -299,21 +294,9 @@ Partial Class FormSimulWizard
         'ListViewPP
         '
         resources.ApplyResources(Me.ListViewPP, "ListViewPP")
-        Me.ListViewPP.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
-        Me.ListViewPP.FullRowSelect = True
-        Me.ListViewPP.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        Me.ListViewPP.MultiSelect = False
+        Me.ListViewPP.FormattingEnabled = True
         Me.ListViewPP.Name = "ListViewPP"
-        Me.ListViewPP.ShowGroups = False
-        Me.ListViewPP.ShowItemToolTips = True
-        Me.ListViewPP.TileSize = New System.Drawing.Size(312, 16)
         Me.ToolTip1.SetToolTip(Me.ListViewPP, resources.GetString("ListViewPP.ToolTip"))
-        Me.ListViewPP.UseCompatibleStateImageBehavior = False
-        Me.ListViewPP.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
         '
         'Button8
         '
@@ -485,6 +468,39 @@ Partial Class FormSimulWizard
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTip1.ToolTipTitle = "Help"
         '
+        'cmsAddComps
+        '
+        resources.ApplyResources(Me.cmsAddComps, "cmsAddComps")
+        Me.cmsAddComps.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem})
+        Me.cmsAddComps.Name = "cmsAddComps"
+        Me.cmsAddComps.ShowImageMargin = False
+        Me.ToolTip1.SetToolTip(Me.cmsAddComps, resources.GetString("cmsAddComps.ToolTip"))
+        '
+        'ToolStripMenuItem1
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        '
+        'ToolStripMenuItem2
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        '
+        'ToolStripMenuItem3
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        '
+        'ToolStripMenuItem4
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem4, "ToolStripMenuItem4")
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        '
+        'CriarAPartirDeEstruturaUNIFACToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem, "CriarAPartirDeEstruturaUNIFACToolStripMenuItem")
+        Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem.Name = "CriarAPartirDeEstruturaUNIFACToolStripMenuItem"
+        '
         'OpenFileDialog1
         '
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
@@ -515,6 +531,7 @@ Partial Class FormSimulWizard
         Me.WizardPage5.ResumeLayout(False)
         Me.WizardPage5.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsAddComps.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -532,7 +549,6 @@ Partial Class FormSimulWizard
     Friend WithEvents LinkLabelPropertyMethods As System.Windows.Forms.LinkLabel
     Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Public WithEvents Button8 As System.Windows.Forms.Button
-    Public WithEvents ListViewPP As System.Windows.Forms.ListView
     Public WithEvents GroupBox12 As System.Windows.Forms.GroupBox
     Public WithEvents dgvpp As System.Windows.Forms.DataGridView
     Friend WithEvents Label7 As System.Windows.Forms.Label
@@ -547,16 +563,13 @@ Partial Class FormSimulWizard
     Public WithEvents btnInfoLeft As System.Windows.Forms.Button
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Public WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
-    Public WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewComboBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewComboBoxColumn
     Friend WithEvents btnCreateNewUnits As Button
     Friend WithEvents btnCloneUnits As Button
-    Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents colAdd As DataGridViewCheckBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
@@ -565,4 +578,12 @@ Partial Class FormSimulWizard
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
+    Friend WithEvents Button4 As Button
+    Friend WithEvents cmsAddComps As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents ListViewPP As ListBox
+    Friend WithEvents CriarAPartirDeEstruturaUNIFACToolStripMenuItem As ToolStripMenuItem
 End Class

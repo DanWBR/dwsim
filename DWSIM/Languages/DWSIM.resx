@@ -5571,4 +5571,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="CompoundOnlineSourceError" xml:space="preserve">
     <value>O DWSIM não pôde recuperar os dados da substância solicitada no banco de dados online. Ou a substância não existe neste banco ou houve algum outro erro desconhecido.</value>
   </data>
+  <data name="CreateFromUNIFACWarning" xml:space="preserve">
+    <value>Uma nova janela do Criador de compostos será exibida e este assistente será fechado. Após inserir todos os dados necessários, exporte o composto para um arquivo JSON, abra o painel Configurações de Simulação para esta Flowsheet e carregue o arquivo JSON salvo. Clique em 'Sim' para continuar.</value>
+  </data>
 </root>

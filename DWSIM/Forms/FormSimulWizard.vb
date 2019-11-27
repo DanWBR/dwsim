@@ -80,43 +80,44 @@ Public Class FormSimulWizard
             'property packages
             Me.ListViewPP.Items.Clear()
             For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values.OrderBy(Function(x) x.ComponentName)
-                Select Case pp2.PackageType
-                    Case PropertyPackages.PackageType.EOS
-                        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                            .Group = Me.ListViewPP.Groups("EOS")
-                            .ToolTipText = pp2.ComponentDescription
-                        End With
-                    Case PropertyPackages.PackageType.ActivityCoefficient
-                        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                            .Group = Me.ListViewPP.Groups("ACT")
-                            .ToolTipText = pp2.ComponentDescription
-                        End With
-                    Case PropertyPackages.PackageType.ChaoSeader
-                        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                            .Group = Me.ListViewPP.Groups("CS")
-                            .ToolTipText = pp2.ComponentDescription
-                        End With
-                    Case PropertyPackages.PackageType.VaporPressure
-                        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                            .Group = Me.ListViewPP.Groups("VAP")
-                            .ToolTipText = pp2.ComponentDescription
-                        End With
-                    Case PropertyPackages.PackageType.Miscelaneous
-                        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                            .Group = Me.ListViewPP.Groups("MISC")
-                            .ToolTipText = pp2.ComponentDescription
-                        End With
-                    Case PropertyPackages.PackageType.CorrespondingStates
-                        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                            .Group = Me.ListViewPP.Groups("CST")
-                            .ToolTipText = pp2.ComponentDescription
-                        End With
-                    Case PropertyPackages.PackageType.CAPEOPEN
-                        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                            .Group = Me.ListViewPP.Groups("CAP")
-                            .ToolTipText = pp2.ComponentDescription
-                        End With
-                End Select
+                Me.ListViewPP.Items.Add(pp2.ComponentName)
+                'Select Case pp2.PackageType
+                '    Case PropertyPackages.PackageType.EOS
+                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
+                '            .Group = Me.ListViewPP.Groups("EOS")
+                '            .ToolTipText = pp2.ComponentDescription
+                '        End With
+                '    Case PropertyPackages.PackageType.ActivityCoefficient
+                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
+                '            .Group = Me.ListViewPP.Groups("ACT")
+                '            .ToolTipText = pp2.ComponentDescription
+                '        End With
+                '    Case PropertyPackages.PackageType.ChaoSeader
+                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
+                '            .Group = Me.ListViewPP.Groups("CS")
+                '            .ToolTipText = pp2.ComponentDescription
+                '        End With
+                '    Case PropertyPackages.PackageType.VaporPressure
+                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
+                '            .Group = Me.ListViewPP.Groups("VAP")
+                '            .ToolTipText = pp2.ComponentDescription
+                '        End With
+                '    Case PropertyPackages.PackageType.Miscelaneous
+                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
+                '            .Group = Me.ListViewPP.Groups("MISC")
+                '            .ToolTipText = pp2.ComponentDescription
+                '        End With
+                '    Case PropertyPackages.PackageType.CorrespondingStates
+                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
+                '            .Group = Me.ListViewPP.Groups("CST")
+                '            .ToolTipText = pp2.ComponentDescription
+                '        End With
+                '    Case PropertyPackages.PackageType.CAPEOPEN
+                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
+                '            .Group = Me.ListViewPP.Groups("CAP")
+                '            .ToolTipText = pp2.ComponentDescription
+                '        End With
+                'End Select
             Next
 
         Else
@@ -157,10 +158,6 @@ Public Class FormSimulWizard
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
-    Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Excel_Add-In_for_Thermodynamic_Calculations#Flash_Algorithms_and_Results_Validation")
-    End Sub
-
     Private Sub TextBox1_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
         If e.KeyCode = Keys.Enter Then
             If DWSIM.App.IsRunningOnMono Then
@@ -178,7 +175,6 @@ Public Class FormSimulWizard
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
 
         ogc1.ClearSelection()
-        ogc1.SuspendLayout()
 
         Dim needselecting As Boolean = True
 
@@ -207,12 +203,12 @@ Public Class FormSimulWizard
                 r.Selected = False
                 r.Visible = True
             Next
-            ogc1.ResumeLayout()
             ogc1.FirstDisplayedScrollingRowIndex = 0
-            Application.DoEvents()
             ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
         Else
-            ogc1.ResumeLayout()
+            If ogc1.SelectedRows.Count > 0 Then
+                ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
+            End If
         End If
 
 
@@ -265,7 +261,7 @@ Public Class FormSimulWizard
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
         Dim pp As PropertyPackages.PropertyPackage
-        pp = FormMain.PropertyPackages(ListViewPP.SelectedItems(0).Text).Clone
+        pp = FormMain.PropertyPackages(ListViewPP.SelectedItems(0)).Clone
         With pp
             pp.Tag = pp.ComponentName + " (" + (FrmChild.PropertyPackages.Count + 1).ToString() + ")"
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
@@ -848,7 +844,7 @@ Public Class FormSimulWizard
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Package_Selection")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         If Me.OpenFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             For Each fn In Me.OpenFileDialog1.FileNames
                 Try
@@ -874,7 +870,7 @@ Public Class FormSimulWizard
         End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
 
         Dim f As New FormImportCompoundOnline
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
@@ -951,6 +947,151 @@ Public Class FormSimulWizard
 
         If ((e.ColumnIndex = colAdd.Index) AndAlso (e.RowIndex <> -1)) Then
             ogc1.EndEdit()
+        End If
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        cmsAddComps.Show(Button4, Button4.Width, 0)
+
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        Dim f As New FormImportCompoundOnline
+        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Try
+                Dim comp = f.BaseCompound
+                If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                    If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                    Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                    Dim ms As Streams.MaterialStream
+                    Dim proplist As New ArrayList
+                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                        For Each phase As BaseClasses.Phase In ms.Phases.Values
+                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                            phase.Compounds(comp.Name).ConstantProperties = comp
+                        Next
+                    Next
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                Else
+                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+        If Me.OpenFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            For Each fn In Me.OpenFileDialog1.FileNames
+                Try
+                    Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
+                    If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                        Dim ms As Streams.MaterialStream
+                        Dim proplist As New ArrayList
+                        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                            For Each phase As BaseClasses.Phase In ms.Phases.Values
+                                phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                                phase.Compounds(comp.Name).ConstantProperties = comp
+                            Next
+                        Next
+                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    Else
+                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            Next
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+
+        AddPRPropPack()
+
+        Dim frmb As New FormPCBulk
+        frmb.frmwizard = Me
+        frmb.ShowDialog(Me)
+
+    End Sub
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
+
+        AddPRPropPack()
+
+        Dim frmdc As New DCCharacterizationWizard
+        frmdc.frmwizard = Me
+        frmdc.ShowDialog(Me)
+
+    End Sub
+
+    Sub AddPRPropPack()
+
+        If FrmChild.Options.PropertyPackages.Count = 0 Then
+
+            Dim pp As New PropertyPackages.PengRobinsonPropertyPackage
+            With pp
+                pp.Tag = pp.ComponentName + " (" + (FrmChild.PropertyPackages.Count + 1).ToString() + ")"
+                pp.UniqueID = "PP-" & Guid.NewGuid.ToString
+                pp.Flowsheet = FrmChild
+            End With
+            FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
+
+            Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
+            Me.dgvpp.Rows(Me.dgvpp.Rows.Count - 1).Selected = True
+
+        End If
+
+    End Sub
+
+    Public Function AddCompToGrid(ByVal comp As BaseClasses.ConstantProperties) As Integer
+
+        Dim contains As Boolean = False
+        Dim index As Integer = -1
+        For Each r As DataGridViewRow In ogc1.Rows
+            If r.Cells(0).Value = comp.Name Then
+                contains = True
+                index = r.Index
+            End If
+        Next
+
+        Dim translatedname As String = ""
+
+        If Not contains Then
+            Try
+                Dim r As New DataGridViewRow
+                translatedname = comp.Name
+                r.CreateCells(ogc1, New Object() {comp.Name, True, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                ogc1.Rows.Add(r)
+                Return ogc1.Rows.Count - 1
+            Catch ex As Exception
+                Console.WriteLine(ex.ToString)
+                Return -1
+            End Try
+        Else
+            Return index
+        End If
+
+    End Function
+
+    Private Sub CriarAPartirDeEstruturaUNIFACToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriarAPartirDeEstruturaUNIFACToolStripMenuItem.Click
+
+        If MessageBox.Show(DWSIM.App.GetLocalString("CreateFromUNIFACWarning"), DWSIM.App.GetLocalString("Information"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Close()
+
+            Dim NewMDIChild As New FormCompoundCreator()
+            'Set the Parent Form of the Child window.
+            NewMDIChild.MdiParent = FrmChild.MdiParent
+            'Display the new form.
+            NewMDIChild.Text = "CompCreator" & FormMain.m_childcount
+            NewMDIChild.Show()
+            FormMain.m_childcount += 1
+
         End If
 
     End Sub

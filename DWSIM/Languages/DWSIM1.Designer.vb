@@ -3206,6 +3206,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Uma nova janela do Criador de compostos será exibida e este assistente será fechado. Após inserir todos os dados necessários, exporte o composto para um arquivo JSON, abra o painel Configurações de Simulação para esta Flowsheet e carregue o arquivo JSON salvo. Clique em &apos;Sim&apos; para continuar..
+        '''</summary>
+        Friend Shared ReadOnly Property CreateFromUNIFACWarning() As String
+            Get
+                Return ResourceManager.GetString("CreateFromUNIFACWarning", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Este utilitário só pode ser utilizado com os Pacotes de Propriedades &apos;Peng-Robinson&apos; e &apos;SRK&apos;..
         '''</summary>
         Friend Shared ReadOnly Property CritptPRSRKOnly() As String

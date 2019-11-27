@@ -276,6 +276,7 @@ Public Class QualityCheck
                                               End Sub)
         Next
 
+        myform.Topmost = True
         myform.Show()
 
         AddHandler myform.Closed, Sub() If _dlgresult = DialogResult.Yes Then positiveanswer.Invoke

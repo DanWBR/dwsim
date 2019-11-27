@@ -46,21 +46,21 @@ Namespace GraphicObjects.Tables
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
             m_objectlist.Clear()
-            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Objects").Elements.ToList
+            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Objects").FirstOrDefault.Elements.ToList
                 m_objectlist.Add(XmlConvert.DecodeName(xel.Name.LocalName), xel.Value)
             Next
             m_propertylist.Clear()
-            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Properties").Elements.ToList
+            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Properties").FirstOrDefault.Elements.ToList
                 m_propertylist.Add(XmlConvert.DecodeName(xel.Name.LocalName), xel.Value)
             Next
             m_sortableitems.Clear()
-            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortableItems").Elements.ToList
+            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortableItems").FirstOrDefault.Elements.ToList
                 m_sortableitems.Add(xel.Value)
             Next
-            m_sortedlist.Clear()
-            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortedList").Elements.ToList
-                m_sortedlist.Add(xel.Value)
-            Next
+            'm_sortedlist.Clear()
+            'For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SortedList").FirstOrDefault.Elements.ToList
+            '    m_sortedlist.Add(xel.Value)
+            'Next
             Return True
         End Function
 
@@ -89,11 +89,11 @@ Namespace GraphicObjects.Tables
                     elements(elements.Count - 1).Add(New XElement("SortableItem", item))
                 Next
 
-                .Add(New XElement("SortedList"))
+                '.Add(New XElement("SortedList"))
 
-                For Each item As String In m_sortedlist
-                    elements(elements.Count - 1).Add(New XElement("Object", item))
-                Next
+                'For Each item As String In m_sortedlist
+                '    elements(elements.Count - 1).Add(New XElement("Object", item))
+                'Next
 
             End With
 

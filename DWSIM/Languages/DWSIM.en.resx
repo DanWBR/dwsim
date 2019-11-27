@@ -1168,7 +1168,7 @@
     <value>Continue the process of adjustment anyway?</value>
   </data>
   <data name="Desejasalvarasaltera" xml:space="preserve">
-    <value>Save current simulation?</value>
+    <value>Save changes (if any)?</value>
   </data>
   <data name="Destino" xml:space="preserve">
     <value>Target</value>
@@ -5626,5 +5626,8 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="CompoundOnlineSourceError" xml:space="preserve">
     <value>DWSIM could not retrieve the compound data from the online source. Either the compound is not present in the source or an unknown error occurred.</value>
+  </data>
+  <data name="CreateFromUNIFACWarning" xml:space="preserve">
+    <value>A new Compound Creator window will appear and this wizard will be closed. After entering all the required data, export the compound to a JSON file, open the Simulation Settings panel for this Flowsheet and load the saved JSON file. Click 'Yes' to proceed.</value>
   </data>
 </root>
