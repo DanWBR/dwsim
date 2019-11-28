@@ -35,6 +35,10 @@
 
         Me.ComboBoxTipoVaso.SelectedIndex = 0
 
+        tbK.Text = 0.0692.ToString
+        TextBox114.Text = 1.2.ToString
+
+
     End Sub
 
     Private Sub VScrollBar1_Scroll(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ScrollEventArgs) Handles VScrollBar1.Scroll
