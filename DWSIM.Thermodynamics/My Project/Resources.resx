@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="newspaper_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newspaper_go.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="emblem-important" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emblem-important.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DWSIM4 icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DWSIM4 icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,20 +133,26 @@
   <data name="bullet_sparkle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_sparkle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DWSIM4 icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DWSIM4 icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="stream_mat_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stream_mat_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\accept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="stream_mat_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stream_mat_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stream_mat_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stream_mat_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_tick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,7 +166,7 @@
   <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\copy.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\accept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bullet_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bullet_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

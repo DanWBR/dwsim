@@ -78,6 +78,7 @@ Partial Class FormMain
         Me.SaveAllToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.tsbInspector = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
@@ -383,7 +384,7 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8})
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         '
@@ -433,6 +434,14 @@ Partial Class FormMain
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.application_edit
         Me.ToolStripButton2.Name = "ToolStripButton2"
+        '
+        'tsbInspector
+        '
+        resources.ApplyResources(Me.tsbInspector, "tsbInspector")
+        Me.tsbInspector.CheckOnClick = True
+        Me.tsbInspector.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbInspector.Image = Global.DWSIM.My.Resources.Resources.icons8_spy_male
+        Me.tsbInspector.Name = "tsbInspector"
         '
         'ToolStripSeparator4
         '
@@ -906,4 +915,5 @@ Partial Class FormMain
     Friend WithEvents WebPanel As Panel
     Friend WithEvents ButtonCloseWeb As Button
     Friend WithEvents PainelDaWebToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsbInspector As ToolStripButton
 End Class

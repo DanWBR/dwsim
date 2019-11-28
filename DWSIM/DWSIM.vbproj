@@ -2970,6 +2970,7 @@
     <None Include="Resources\icons8-petrol1.png" />
     <None Include="Resources\icons8-opened_folder2.png" />
     <None Include="Resources\icons8-file1.png" />
+    <None Include="Resources\icons8-spy_male.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

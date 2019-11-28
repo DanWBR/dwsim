@@ -8146,6 +8146,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O Inspetor está desativado..
+        '''</summary>
+        Friend Shared ReadOnly Property inspectordisabled() As String
+            Get
+                Return ResourceManager.GetString("inspectordisabled", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Intermitente.
         '''</summary>
         Friend Shared ReadOnly Property Intermitente() As String
@@ -10068,6 +10077,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property NoRegressionAvailable() As String
             Get
                 Return ResourceManager.GetString("NoRegressionAvailable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Nenhum relatório encontrado..
+        '''</summary>
+        Friend Shared ReadOnly Property noreportsavailable() As String
+            Get
+                Return ResourceManager.GetString("noreportsavailable", resourceCulture)
             End Get
         End Property
         
@@ -12750,6 +12768,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property RemoveScriptQuestion() As String
             Get
                 Return ResourceManager.GetString("RemoveScriptQuestion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {0} relatório(s) disponível(is)..
+        '''</summary>
+        Friend Shared ReadOnly Property reportsavailable() As String
+            Get
+                Return ResourceManager.GetString("reportsavailable", resourceCulture)
             End Get
         End Property
         

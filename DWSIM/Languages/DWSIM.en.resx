@@ -5630,4 +5630,13 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="CreateFromUNIFACWarning" xml:space="preserve">
     <value>A new Compound Creator window will appear and this wizard will be closed. After entering all the required data, export the compound to a JSON file, open the Simulation Settings panel for this Flowsheet and load the saved JSON file. Click 'Yes' to proceed.</value>
   </data>
+  <data name="inspectordisabled" xml:space="preserve">
+    <value>Inspector is disabled.</value>
+  </data>
+  <data name="noreportsavailable" xml:space="preserve">
+    <value>No reports found.</value>
+  </data>
+  <data name="reportsavailable" xml:space="preserve">
+    <value>{0} report(s) available.</value>
+  </data>
 </root>

@@ -260,6 +260,8 @@ Public Class FormMain
             Me.SettingsPanel.Controls.Add(Me.FrmOptions)
             Me.ButtonClose.BringToFront()
 
+            tsbInspector.Checked = GlobalSettings.Settings.InspectorEnabled
+
             Me.FrmWelcome = New FormWelcome
             Me.FrmWelcome.Owner = Me
             Me.FrmWelcome.Dock = DockStyle.Fill
@@ -4020,6 +4022,11 @@ Label_00CC:
             ' There was an error during the operation.
             Console.WriteLine("Error saving backup file: " & e.Error.Message)
         End If
+    End Sub
+
+    Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
+        GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
+        FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked
     End Sub
 
 #End Region

@@ -101,6 +101,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Window2.designer.vb">
+      <DependentUpon>Window2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Window2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Window.designer.vb">
       <DependentUpon>Window.vb</DependentUpon>
     </Compile>
@@ -118,6 +124,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window2.resx">
+      <DependentUpon>Window2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window.resx">
       <DependentUpon>Window.vb</DependentUpon>
@@ -137,6 +146,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>DWSIM.Controls.DockPanel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
       <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
       <Name>DWSIM.ExtensionMethods.Eto</Name>
@@ -148,6 +161,10 @@
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

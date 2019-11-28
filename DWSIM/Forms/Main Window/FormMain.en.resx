@@ -290,7 +290,7 @@
     <value>&amp;Show Help</value>
   </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>163, 22</value>
   </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Text" xml:space="preserve">
     <value>User Guide (PDF)</value>
@@ -408,6 +408,12 @@
   </data>
   <data name="ToolStripButton2.Text" xml:space="preserve">
     <value>General Settings</value>
+  </data>
+  <data name="tsbInspector.Text" xml:space="preserve">
+    <value>Enable/Disable Solution Inspector</value>
+  </data>
+  <data name="tsbInspector.ToolTipText" xml:space="preserve">
+    <value>Enable/Disable Solution Inspector</value>
   </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Cascade Windows</value>

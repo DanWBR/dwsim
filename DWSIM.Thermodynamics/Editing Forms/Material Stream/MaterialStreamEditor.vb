@@ -57,6 +57,19 @@ Public Class MaterialStreamEditor
 
         Loaded = False
 
+        Dim ireports = Host.Items.Where(Function(x) x.Name.Contains(MatStream.GraphicObject.Tag))
+
+        If ireports.Count > 0 Then
+            btnViewReports.Enabled = True
+            tbReports.Text = String.Format(MatStream.FlowSheet.GetTranslatedString("reportsavailable"), ireports.Count)
+        Else
+            btnViewReports.Enabled = False
+            tbReports.Text = MatStream.FlowSheet.GetTranslatedString("noreportsavailable")
+            If Not GlobalSettings.Settings.InspectorEnabled Then
+                tbReports.Text += " " + MatStream.FlowSheet.GetTranslatedString("inspectordisabled")
+            End If
+        End If
+
         With MatStream
 
             'first block
@@ -1528,6 +1541,14 @@ Public Class MaterialStreamEditor
         End With
 
         MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
+
+    End Sub
+
+    Private Sub btnViewReports_Click(sender As Object, e As EventArgs) Handles btnViewReports.Click
+
+        Dim iwindow As New Inspector.Window2
+        iwindow.SelectedObject = MatStream
+        iwindow.Show(Me.DockPanel)
 
     End Sub
 

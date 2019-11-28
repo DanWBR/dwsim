@@ -477,13 +477,7 @@
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.resx">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.de.resx">
-      <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.en.resx">
-      <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.es.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.resx">
@@ -824,6 +818,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newspaper_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_green.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
