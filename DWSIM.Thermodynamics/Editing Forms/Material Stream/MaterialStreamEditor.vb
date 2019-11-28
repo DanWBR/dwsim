@@ -57,16 +57,17 @@ Public Class MaterialStreamEditor
 
         Loaded = False
 
-        Dim ireports = Host.Items.Where(Function(x) x.Name.Contains(MatStream.GraphicObject.Tag))
-
-        If ireports.Count > 0 Then
-            btnViewReports.Enabled = True
-            tbReports.Text = String.Format(MatStream.FlowSheet.GetTranslatedString("reportsavailable"), ireports.Count)
-        Else
-            btnViewReports.Enabled = False
-            tbReports.Text = MatStream.FlowSheet.GetTranslatedString("noreportsavailable")
-            If Not GlobalSettings.Settings.InspectorEnabled Then
-                tbReports.Text += " " + MatStream.FlowSheet.GetTranslatedString("inspectordisabled")
+        If Host.Items.Where(Function(x) x.Name.Contains(MatStream.GraphicObject.Tag)).Count > 0 Then
+            If InspReportBar Is Nothing Then
+                InspReportBar = New SharedClasses.InspectorReportBar
+                InspReportBar.Dock = DockStyle.Bottom
+                AddHandler InspReportBar.Button1.Click, Sub()
+                                                            Dim iwindow As New Inspector.Window2
+                                                            iwindow.SelectedObject = MatStream
+                                                            iwindow.Show(DockPanel)
+                                                        End Sub
+                Me.Controls.Add(InspReportBar)
+                InspReportBar.BringToFront()
             End If
         End If
 
@@ -1541,14 +1542,6 @@ Public Class MaterialStreamEditor
         End With
 
         MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
-
-    End Sub
-
-    Private Sub btnViewReports_Click(sender As Object, e As EventArgs) Handles btnViewReports.Click
-
-        Dim iwindow As New Inspector.Window2
-        iwindow.SelectedObject = MatStream
-        iwindow.Show(Me.DockPanel)
 
     End Sub
 

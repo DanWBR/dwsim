@@ -7,8 +7,9 @@
     Private components As System.ComponentModel.IContainer
     Private _currentToolTipControl As Control = Nothing
 
-    Private Sub InitializeComponent()
+    Public InspReportBar As InspectorReportBar
 
+    Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
         'ObjectEditorForm

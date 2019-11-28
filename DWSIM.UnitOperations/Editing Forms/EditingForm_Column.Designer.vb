@@ -327,8 +327,8 @@ Partial Class EditingForm_Column
         Me.TabGeneral.Controls.Add(Me.Label1)
         Me.TabGeneral.Controls.Add(Me.tbNStages)
         Me.TabGeneral.Name = "TabGeneral"
-        Me.ToolTipValues.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip2"))
         Me.TabGeneral.UseVisualStyleBackColor = True
         '
@@ -483,8 +483,8 @@ Partial Class EditingForm_Column
         Me.TabCondenser.Controls.Add(Me.cbCondPressureUnits)
         Me.TabCondenser.Controls.Add(Me.tbCondPressure)
         Me.TabCondenser.Name = "TabCondenser"
-        Me.ToolTipValues.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip2"))
         Me.TabCondenser.UseVisualStyleBackColor = True
         '
@@ -660,8 +660,8 @@ Partial Class EditingForm_Column
         Me.TabReboiler.Controls.Add(Me.cbRebPressure)
         Me.TabReboiler.Controls.Add(Me.tbRebPressure)
         Me.TabReboiler.Name = "TabReboiler"
-        Me.ToolTipValues.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip2"))
         Me.TabReboiler.UseVisualStyleBackColor = True
         '
@@ -780,8 +780,8 @@ Partial Class EditingForm_Column
         '
         resources.ApplyResources(Me.TabConnections, "TabConnections")
         Me.TabConnections.Name = "TabConnections"
-        Me.ToolTipValues.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip2"))
         Me.TabConnections.UseVisualStyleBackColor = True
         '
@@ -789,8 +789,8 @@ Partial Class EditingForm_Column
         '
         resources.ApplyResources(Me.TabStages, "TabStages")
         Me.TabStages.Name = "TabStages"
-        Me.ToolTipValues.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip2"))
         Me.TabStages.UseVisualStyleBackColor = True
         '
@@ -803,8 +803,8 @@ Partial Class EditingForm_Column
         Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_LF)
         Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_T)
         Me.TabInitialEstimates.Name = "TabInitialEstimates"
-        Me.ToolTipValues.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip2"))
         Me.TabInitialEstimates.UseVisualStyleBackColor = True
         '
@@ -812,8 +812,8 @@ Partial Class EditingForm_Column
         '
         resources.ApplyResources(Me.InitialEstimatesPanel, "InitialEstimatesPanel")
         Me.InitialEstimatesPanel.Name = "InitialEstimatesPanel"
-        Me.ToolTip1.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip2"))
         '
         'chkUseIE_C
@@ -858,8 +858,8 @@ Partial Class EditingForm_Column
         Me.TabSolverBP.Controls.Add(Me.Label3)
         Me.TabSolverBP.Controls.Add(Me.tbBPStopAtIter)
         Me.TabSolverBP.Name = "TabSolverBP"
-        Me.ToolTipValues.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip2"))
         Me.TabSolverBP.UseVisualStyleBackColor = True
         '
@@ -892,8 +892,8 @@ Partial Class EditingForm_Column
         Me.TabSolverNS.Controls.Add(Me.Label21)
         Me.TabSolverNS.Controls.Add(Me.Label20)
         Me.TabSolverNS.Name = "TabSolverNS"
-        Me.ToolTipValues.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip2"))
         Me.TabSolverNS.UseVisualStyleBackColor = True
         '
@@ -987,8 +987,8 @@ Partial Class EditingForm_Column
         Me.TabSolverIO.Controls.Add(Me.chkIOAverageKb)
         Me.TabSolverIO.Controls.Add(Me.chkIOAdjustSb)
         Me.TabSolverIO.Name = "TabSolverIO"
-        Me.ToolTipValues.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip2"))
         Me.TabSolverIO.UseVisualStyleBackColor = True
         '
@@ -1103,8 +1103,8 @@ Partial Class EditingForm_Column
         Me.TabPage1.Controls.Add(Me.btnResults)
         Me.TabPage1.Controls.Add(Me.gridResults)
         Me.TabPage1.Name = "TabPage1"
-        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip2"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '

@@ -21,6 +21,20 @@ Public Class EditingForm_Mixer
 
         Loaded = False
 
+        If Host.Items.Where(Function(x) x.Name.Contains(MixerObject.GraphicObject.Tag)).Count > 0 Then
+            If InspReportBar Is Nothing Then
+                InspReportBar = New SharedClasses.InspectorReportBar
+                InspReportBar.Dock = DockStyle.Bottom
+                AddHandler InspReportBar.Button1.Click, Sub()
+                                                            Dim iwindow As New Inspector.Window2
+                                                            iwindow.SelectedObject = MixerObject
+                                                            iwindow.Show(DockPanel)
+                                                        End Sub
+                Me.Controls.Add(InspReportBar)
+                InspReportBar.BringToFront()
+            End If
+        End If
+
         With MixerObject
 
             chkActive.Checked = MixerObject.GraphicObject.Active

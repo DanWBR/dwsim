@@ -131,6 +131,12 @@
     <Compile Include="Editor\FormCustomCalcOrder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editor\InspectorReportBar.Designer.vb">
+      <DependentUpon>InspectorReportBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\InspectorReportBar.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Editor\ListViewWithReordering.designer.vb">
       <DependentUpon>ListViewWithReordering.vb</DependentUpon>
     </Compile>
@@ -181,6 +187,12 @@
     <EmbeddedResource Include="Editor\FormCustomCalcOrder.resx">
       <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editor\InspectorReportBar.en.resx">
+      <DependentUpon>InspectorReportBar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\InspectorReportBar.resx">
+      <DependentUpon>InspectorReportBar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\ObjectEditorForm.resx">
       <DependentUpon>ObjectEditorForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +242,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="IronPythonSnippets\IronPythonSnippets.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-spy_male.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
