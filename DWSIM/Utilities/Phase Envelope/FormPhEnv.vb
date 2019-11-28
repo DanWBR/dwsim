@@ -190,7 +190,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                 Settings.gpu.EnableMultithreading()
             End If
 
-            Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.tbQuality.Text, Me.chkQualityLine.Checked, Me.chkStabCurve.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.chkHydVapOnly.Checked})
+            Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.tbQuality.Value, Me.chkQualityLine.Checked, Me.chkStabCurve.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.chkHydVapOnly.Checked})
 
             Me.bw = Me.BackgroundWorker1
 
