@@ -33,6 +33,11 @@ Public Class EditingForm_Mixer
                 Me.Controls.Add(InspReportBar)
                 InspReportBar.BringToFront()
             End If
+        Else
+            If InspReportBar IsNot Nothing Then
+                Me.Controls.Remove(InspReportBar)
+                InspReportBar = Nothing
+            End If
         End If
 
         With MixerObject
