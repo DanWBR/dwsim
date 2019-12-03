@@ -52,7 +52,23 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = column.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = column.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
-            s.CreateAndAddLabelRow(container, "Object Details");
+            s.CreateAndAddLabelRow(container, "Absorption Column Editor");
+
+            s.CreateAndAddDescriptionRow(container, "Property values are updated/stored as they are changed/edited. There's no need to press ENTER to commit the changes.");
+
+            if ((Inspector.Host.Items.Where(x => x.Name.Contains(column.GraphicObject.Tag)).Count() > 0))
+            {
+                var ctn = new DynamicLayout();
+                ctn.BackgroundColor = Colors.LightGrey;
+                s.CreateAndAddLabelRow(ctn, "Inspector Reports");
+                s.CreateAndAddLabelAndButtonRow(ctn, "An Inspector Report is ready for viewing.", "View Report", null, (btn, e) => {
+                    var f = s.GetDefaultEditorForm("Inspector Report for '" + column.GraphicObject.Tag + "'", 1024, 768, Inspector.Window2_Eto.GetInspectorWindow(column), false);
+                    f.Show();
+                });
+                container.Add(ctn);
+            }
+
+            s.CreateAndAddLabelRow(container, "Column Details");
 
             s.CreateAndAddTwoLabelsRow(container, "Type", column.GetDisplayName());
 

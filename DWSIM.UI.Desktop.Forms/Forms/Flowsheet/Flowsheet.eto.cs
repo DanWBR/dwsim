@@ -133,7 +133,8 @@ namespace DWSIM.UI.Forms
             var btnmZoomFit = new ButtonToolItem { ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")) };
             var btnmZoomDefault = new ButtonToolItem { ToolTip = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")) };
 
-            var btnmInspector = new ButtonToolItem { ToolTip = "Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
+            var chkmInspector = new CheckToolItem {Checked = GlobalSettings.Settings.InspectorEnabled, ToolTip = "Enable/Disable Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_male.png")) };
+            var btnmInspector = new ButtonToolItem { ToolTip = "View Inspector Window", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
 
             btnmDrawGrid = new CheckToolItem { ToolTip = "Draw Grid", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-grid.png")) };
             btnmSnapToGrid = new CheckToolItem { ToolTip = "Snap to Grid", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-grid_filled.png")) };
@@ -161,7 +162,8 @@ namespace DWSIM.UI.Forms
                 btnmZoomOut.Text = "Zoom Out";
                 btnmZoomFit.Text = "Zoom to Fit";
                 btnmZoomDefault.Text = "Default Zoom";
-                btnmInspector.Text = "Inspector";
+                chkmInspector.Text = "Enable/Disable Inspector";
+                btnmInspector.Text = "View Inspector";
                 btnmDrawGrid.Text = "Draw Grid";
                 btnmSnapToGrid.Text = "Snap to Grid";
                 btnmMultiSelect.Text = "MultiSelect";
@@ -183,7 +185,7 @@ namespace DWSIM.UI.Forms
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space},
                 btnmDrawGrid, btnmSnapToGrid,new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
                 btnmMultiSelect, btnmAlignLefts, btnmAlignCenters, btnmAlignRights, btnmAlignTops, btnmAlignMiddles, btnmAlignBottoms,btnmEqHoriz, btnmEqVert,
-                new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmInspector
+                new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, chkmInspector, btnmInspector
                 }
             };
 
@@ -367,6 +369,8 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.ActHorizAlign = ActHorizAlign;
 
             // button click events
+
+            chkmInspector.CheckedChanged += (sender, e) => GlobalSettings.Settings.InspectorEnabled = chkmInspector.Checked;
 
             btnmInspector.Click += (sender, e) => ActInspector.Invoke();
 

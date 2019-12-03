@@ -22,6 +22,7 @@ using StringResources = DWSIM.UI.Desktop.Shared.StringArrays;
 using DWSIM.Thermodynamics.PropertyPackages;
 using DWSIM.Interfaces.Enums;
 using DWSIM.ExtensionMethods;
+using DWSIM.Inspector;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -55,6 +56,18 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddLabelRow(container, "Material Stream Property Editor");
 
             s.CreateAndAddDescriptionRow(container, "Except for compound amounts, property values are updated/stored as they are changed/edited.");
+
+            if ((Host.Items.Where(x => x.Name.Contains(MatStream.GraphicObject.Tag)).Count() > 0))
+            {
+                var ctn = new DynamicLayout();
+                ctn.BackgroundColor = Colors.LightGrey;
+                s.CreateAndAddLabelRow(ctn, "Inspector Reports");
+                s.CreateAndAddLabelAndButtonRow(ctn, "An Inspector Report is ready for viewing.", "View Report", null, (btn, e) => {
+                    var f = s.GetDefaultEditorForm("Inspector Report for '" + MatStream.GraphicObject.Tag + "'", 1024, 768, Window2_Eto.GetInspectorWindow(MatStream), false);
+                    f.Show();
+                });
+                container.Add(ctn);
+            }
 
             s.CreateAndAddLabelRow(container, "Material Stream Details");
 
