@@ -302,8 +302,10 @@ Imports System.Drawing
     End Sub
 
     Private Sub btnHighlightSpaces_Click(sender As Object, e As EventArgs) Handles btnHighlightSpaces.CheckedChanged
-        ScriptUO.HighlightSpaces = btnHighlightSpaces.Checked
-        If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, ScriptUO.HighlightSpaces, CAPEOPEN)
+        If loaded Then
+            ScriptUO.HighlightSpaces = btnHighlightSpaces.Checked
+            txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, ScriptUO.HighlightSpaces, CAPEOPEN)
+        End If
     End Sub
 
 End Class
