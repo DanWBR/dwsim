@@ -1259,7 +1259,7 @@ Namespace SystemsOfUnits
 
                 Case "m/kg"
                     Return value
-                Case "ft/lb"
+                Case "ft/lb", "ft/lbm"
                     Return value / 3.28084 * 2.20462
                 Case "cm/g"
                     Return value * 10
@@ -1700,7 +1700,7 @@ Namespace SystemsOfUnits
 
                 Case "m/kg"
                     Return value
-                Case "ft/lb"
+                Case "ft/lb", "ft/lbm"
                     Return value * 3.28084 / 2.20462
                 Case "cm/g"
                     Return value / 10
