@@ -2832,7 +2832,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Or K(i)(j) = 0# Then
                         If llextr Then
                             If i > 0 Then
-                                If K(i - 1).Sum > 0.0 Then K(i) = K(i - 1).Clone
+                                If K(i - 1).Sum > 0.0 Then
+                                    K(i) = K(i - 1).Clone
+                                End If
                             End If
                         Else
                             K(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
@@ -3015,7 +3017,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 ''''''''''''''''''''
                 Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns) As Double
 
-                Dim epsilon As Double = 0.000001
+                Dim epsilon As Double = 0.0001
 
                 If doparallel Then
 
@@ -3136,15 +3138,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Paragraphs.Add(String.Format("Calculated Temperature perturbations: {0}", xth.ToMathArrayString))
 
+                Dim deltat As Double()
+                Dim maxdt As Double = xth.Select(Function(tp) Abs(tp)).Max
+
+                If maxdt > MaxTChange Then
+                    deltat = xth.Select(Function(tp) tp / maxdt * MaxTChange).ToArray()
+                Else
+                    deltat = xth
+                End If
+
                 t_error = 0.0#
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    If Abs(xth(i)) > MaxTChange Then
-                        Tj(i) = Tj(i) + Sign(xth(i)) * MaxTChange
-                    Else
-                        Tj(i) = Tj(i) + xth(i)
-                    End If
+                    Tj(i) = Tj(i) + deltat(i)
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     If IdealK Then
                         IObj2?.SetCurrent()

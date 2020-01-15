@@ -371,9 +371,11 @@ Public Module General
     Public Function ToArrayString(vector As Double()) As String
 
         Dim retstr As String = "{ "
-        For Each d In vector
-            retstr += d.ToString + ", "
-        Next
+        If vector IsNot Nothing Then
+            For Each d In vector
+                retstr += d.ToString + ", "
+            Next
+        End If
         retstr.TrimEnd(",")
         retstr += "}"
 
@@ -385,9 +387,11 @@ Public Module General
     Public Function ToMathArrayString(vector As Double()) As String
 
         Dim retstr As String = "<math_inline>\left[{\begin{array}{}"
-        For Each d In vector
-            retstr += d.ToString + " & "
-        Next
+        If vector IsNot Nothing Then
+            For Each d In vector
+                retstr += d.ToString + " & "
+            Next
+        End If
         retstr.TrimEnd(" ")
         retstr.TrimEnd("&")
         retstr += "\end{array}}\right]</math_inline>"

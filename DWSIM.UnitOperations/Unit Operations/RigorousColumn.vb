@@ -2616,8 +2616,8 @@ Namespace UnitOperations
 
             Select Case Me.ColumnType
                 Case ColType.AbsorptionColumn
-                    T1 = MathEx.Common.WgtAvg(F, FT)
-                    T2 = T1
+                    T1 = FT.First
+                    T2 = FT.Last
                 Case ColType.ReboiledAbsorber
                     T1 = MathEx.Common.WgtAvg(F, FT)
                     T2 = T1
@@ -2774,37 +2774,37 @@ Namespace UnitOperations
                             End If
                         Next
                         If L2 = 0.0 Then
-                            Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
+                            'try simple lle
+                            trialcomp  = zm.Clone
+                            Dim slle As New PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
+                            For counter As Integer = 0 To 20
+                                flashresult = slle.Flash_PT(trialcomp, P(i), T(i), pp)
+                                L1 = flashresult(0)
+                                L2 = flashresult(5)
+                                If L2 > 0.0 Then
+                                    Exit For
+                                Else
+                                    Dim rnd As New Random(counter)
+                                    trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
+                                    trialcomp = trialcomp.NormalizeY
+                                End If
+                            Next
+                            If L2 = 0.0 Then
+                                Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
+                            End If
                         End If
                         Vx1 = flashresult(2)
                         Vx2 = flashresult(6)
-                        IObj?.SetCurrent()
-                        rho1 = pp.AUX_LIQDENS(T(i), Vx1)
-                        IObj?.SetCurrent()
-                        rho2 = pp.AUX_LIQDENS(T(i), Vx2)
-                        If rho1 > rho2 Then
-                            x(i) = Vx1
-                            y(i) = Vx2
-                        Else
-                            x(i) = Vx2
-                            y(i) = Vx1
-                        End If
+                        x(i) = Vx1
+                        y(i) = Vx2
                         If y(i).SumY = 0.0# Then
                             y(i) = x(i).Clone
                         End If
                         If Not Me.UseVaporFlowEstimates Then
-                            If rho1 > rho2 Then
-                                V(i) = F(lastF) + F(firstF) * L1
-                            Else
-                                V(i) = F(lastF) + F(firstF) * L2
-                            End If
+                            V(i) = F(lastF) + F(firstF) * L1
                         End If
                         If Not Me.UseLiquidFlowEstimates Then
-                            If rho1 > rho2 Then
-                                L(i) = F(firstF) * (1 - L1)
-                            Else
-                                L(i) = F(firstF) * (1 - L2)
-                            End If
+                            L(i) = F(firstF) * (1 - L1)
                         End If
                     Else
                         flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
@@ -3347,11 +3347,11 @@ Namespace UnitOperations
                 Else
                     Select Case sinf.StreamBehavior
                         Case StreamInformation.Behavior.Feed
-                            If Not FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Calculated Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCStreamNotCalculatedException"))
-                            Else
-                                feedok = True
-                            End If
+                            'If Not FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Calculated Then
+                            '    Throw New Exception(FlowSheet.GetTranslatedString("DCStreamNotCalculatedException"))
+                            'Else
+                            feedok = True
+                            'End If
                         Case StreamInformation.Behavior.Distillate
                             cmok = True
                         Case StreamInformation.Behavior.OverheadVapor
