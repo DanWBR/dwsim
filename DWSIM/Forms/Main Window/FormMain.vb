@@ -2681,6 +2681,23 @@ Public Class FormMain
         xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
         xel.Add(New XElement("SavedOn", Date.Now))
 
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
+
+        For Each go As GraphicObject In form.FormSurface.FlowsheetSurface.DrawingObjects
+            If TypeOf go Is ShapeGraphic Then DirectCast(go, ShapeGraphic).Fill = False
+            Dim xdata As New XElement("GraphicObject", go.SaveData().ToArray())
+            If TypeOf go Is ShapeGraphic Then DirectCast(go, ShapeGraphic).Fill = True
+            If xdata.Elements.Count > 0 Then
+                If go.ObjectType = ObjectType.Compressor Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Compressor", "CompressorExpander")
+                If go.ObjectType = ObjectType.Expander Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Expander", "CompressorExpander")
+                If go.ObjectType = ObjectType.Heater Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Heater", "HeaterCooler")
+                If go.ObjectType = ObjectType.Cooler Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Cooler", "HeaterCooler")
+            End If
+            If Not go.IsConnector Then xel.Add(xdata)
+        Next
+
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
@@ -2718,22 +2735,6 @@ Public Class FormMain
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("Settings")
 
         xel.Add(form.Options.SaveData().ToArray())
-
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
-
-        For Each go As GraphicObject In form.FormSurface.FlowsheetSurface.DrawingObjects
-            If TypeOf go Is ShapeGraphic Then DirectCast(go, ShapeGraphic).Fill = False
-            Dim xdata As New XElement("GraphicObject", go.SaveData().ToArray())
-            If TypeOf go Is ShapeGraphic Then DirectCast(go, ShapeGraphic).Fill = True
-            If xdata.Elements.Count > 0 Then
-                If go.ObjectType = ObjectType.Compressor Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Compressor", "CompressorExpander")
-                If go.ObjectType = ObjectType.Expander Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Expander", "CompressorExpander")
-                If go.ObjectType = ObjectType.Heater Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Heater", "HeaterCooler")
-                If go.ObjectType = ObjectType.Cooler Then xdata.Element("ObjectType").Value = xdata.Element("ObjectType").Value.Replace("Cooler", "HeaterCooler")
-            End If
-            If Not go.IsConnector Then xel.Add(xdata)
-        Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")

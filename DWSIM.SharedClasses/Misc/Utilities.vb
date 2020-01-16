@@ -368,6 +368,10 @@ Public Class Utility
             xel.Value = xel.Value.Replace("PortableFlowsheetDrawing.GraphicObjects.Tables", "DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables")
         End If
 
+        If xel.Value.Contains("PortableFlowsheetDrawing.GraphicObjects.TableGraphic") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("PortableFlowsheetDrawing.GraphicObjects.TableGraphic", "DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.TableGraphic")
+        End If
+
         If xel.Value.EndsWith("Streams.MaterialStream") Then xel.Value = "DWSIM.Thermodynamics.Streams.MaterialStream"
         If xel.Value.EndsWith("Streams.EnergyStream") Then xel.Value = "DWSIM.UnitOperations.Streams.EnergyStream"
 
@@ -475,12 +479,36 @@ Public Class Utility
             xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic"
         End If
 
+        If xel.Value.StartsWith("DWSIM.Thermodynamics.BaseClasses") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.Thermodynamics.BaseClasses", "PortableSharedClasses.BaseClasses")
+        End If
+
+        If xel.Value.StartsWith("DWSIM.Thermodynamics.BaseClasses.PhaseProperties") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.Thermodynamics.BaseClasses.PhaseProperties", "PortableSharedClasses.BaseClasses.PhaseProperties")
+        End If
+
         If xel.Value.StartsWith("DWSIM.Thermodynamics.PropertyPackages") And xel.Name = "Type" Then
             xel.Value = xel.Value.Replace("DWSIM.Thermodynamics.PropertyPackages", "PortableDTL.DTL.SimulationObjects.PropertyPackages")
         End If
 
-        If xel.Value.StartsWith("DWSIM.DrawingTools.GraphicObjects") And xel.Name = "Type" Then
-            xel.Value = xel.Value.Replace("DWSIM.DrawingTools.GraphicObjects", "DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes")
+        If xel.Value.Contains("DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.TableGraphic") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.TableGraphic", "PortableFlowsheetDrawing.GraphicObjects.TableGraphic")
+        End If
+
+        If xel.Value.StartsWith("DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables", "PortableFlowsheetDrawing.GraphicObjects")
+        End If
+
+        If xel.Value.StartsWith("DWSIM.Drawing.SkiaSharp") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.Drawing.SkiaSharp", "PortableFlowsheetDrawing")
+        End If
+
+        If xel.Value.StartsWith("DWSIM.DrawingTools") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.DrawingTools", "PortableFlowsheetDrawing")
+        End If
+
+        If xel.Value.StartsWith("DWSIM.SharedClasses") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.SharedClasses", "PortableSharedClasses")
         End If
 
         If xel.Value.Equals("DWSIM.Thermodynamics.Streams.MaterialStream") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Streams.MaterialStream"
@@ -502,11 +530,11 @@ Public Class Utility
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.DistillationColumn") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.DistillationColumn"
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.AbsorptionColumn") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.AbsorptionColumn"
 
-        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Conversion") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_Conversion"
-        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Equilibrium") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_Equilibrium"
-        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_PFR") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_PFR"
-        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_CSTR") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_CSTR"
-        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Gibbs") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_Gibbs"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Conversion") Then xel.Value = "PortableDTL.Reactors.Reactor_Conversion"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Equilibrium") Then xel.Value = "PortableDTL.Reactors.Reactor_Equilibrium"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_PFR") Then xel.Value = "PortableDTL.Reactors.Reactor_PFR"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_CSTR") Then xel.Value = "PortableDTL.Reactors.Reactor_CSTR"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Gibbs") Then xel.Value = "PortableDTL.DTL.Reactors.Reactor_Gibbs"
 
         If xel.Value.Equals("DWSIM.UnitOperations.SpecialOps.Adjust") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Adjust"
         If xel.Value.Equals("DWSIM.UnitOperations.SpecialOps.Recycle") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Recycle"

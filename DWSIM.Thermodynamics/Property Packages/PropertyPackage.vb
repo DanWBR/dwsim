@@ -224,6 +224,12 @@ Namespace PropertyPackages
 
         Public Property IgnoreSalinityLimit As Boolean = False
 
+        ''' <summary>
+        ''' ' For mobile compatibility only.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property ParametersXMLString = ""
+
 
 #End Region
 
@@ -11029,6 +11035,11 @@ Final3:
             End Try
 
             Try
+                Me.ParametersXMLString = (From el As XElement In data Select el Where el.Name = "Parameters").FirstOrDefault.ToString()
+            Catch ex As Exception
+            End Try
+
+            Try
                 OverrideKvalFugCoeff = (From el As XElement In data Select el Where el.Name = "OverrideKvalFugCoeff").FirstOrDefault.Value
             Catch ex As Exception
             End Try
@@ -11439,6 +11450,14 @@ Final3:
                 .Add(New XElement("Tag", Tag))
                 .Add(New XElement("TPSeverity", _tpseverity))
                 .Add(New XElement("TPCompIDs", XMLSerializer.XMLSerializer.ArrayToString2(_tpcompids, ci)))
+
+                If ParametersXMLString <> "" Then
+                    Try
+                        .Add(XElement.Parse(Me.ParametersXMLString))
+                    Catch ex As Exception
+                    End Try
+                End If
+
                 .Add(New XElement("OverrideKvalFugCoeff", OverrideKvalFugCoeff))
                 .Add(New XElement("OverrideEnthalpyCalculation", OverrideEnthalpyCalculation))
                 .Add(New XElement("OverrideEntropyCalculation", OverrideEntropyCalculation))
