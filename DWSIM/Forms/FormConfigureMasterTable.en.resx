@@ -222,10 +222,10 @@
     <value>4, 309</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>80, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Number of Lines</value>
+    <value>Grouping Rows</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Master Property Table</value>

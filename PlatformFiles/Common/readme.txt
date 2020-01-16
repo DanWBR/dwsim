@@ -64,7 +64,7 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.8 Update 6
 
-- [NEW] Define the number of rows in Master Property Table
+- [NEW] Define the number of grouping rows in Master Property Table
 - [FIX] Fixed loading and saving of simulation files in mobile version format (Android/iOS)
 - [FIX] Fixed Absorber Column in Liquid-Liquid Extraction mode
 - [FIX] Fixed the Filter property editor in Cross-Platform UI

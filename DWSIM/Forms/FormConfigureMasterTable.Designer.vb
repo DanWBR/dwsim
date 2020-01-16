@@ -54,9 +54,9 @@ Partial Class FormConfigureMasterTable
         '
         'cbObjectType
         '
-        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjectType.FormattingEnabled = True
+        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.Name = "cbObjectType"
         '
         'Label2
@@ -66,11 +66,11 @@ Partial Class FormConfigureMasterTable
         '
         'lvProps
         '
-        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
         Me.lvProps.HideSelection = False
+        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -86,18 +86,18 @@ Partial Class FormConfigureMasterTable
         '
         'cbOrderBy
         '
-        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOrderBy.FormattingEnabled = True
+        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.Name = "cbOrderBy"
         '
         'lvObjects
         '
-        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.CheckBoxes = True
         Me.lvObjects.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvObjects.FullRowSelect = True
         Me.lvObjects.HideSelection = False
+        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.MultiSelect = False
         Me.lvObjects.Name = "lvObjects"
         Me.lvObjects.ShowGroups = False

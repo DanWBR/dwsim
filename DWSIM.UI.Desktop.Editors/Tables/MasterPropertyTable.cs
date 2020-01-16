@@ -81,15 +81,15 @@ namespace DWSIM.UI.Desktop.Editors.Tables
             topcontainer2.Padding = new Padding(5, 5, 5, 5);
             topcontainer2.Spacing = new Size(10, 10);
 
-            nsNumberOfLines = new NumericStepper { MinValue = 1, MaxValue = 10, Value = Table.NumberOfLines, DecimalPlaces = 0, Increment = 1.0 };
+            nsNumberOfLines = new NumericStepper { MinValue = 1, MaxValue = 10, Value = 1, DecimalPlaces = 0, Increment = 1.0 };
 
             nsNumberOfLines.ValueChanged += (s, e) =>
             {
-                Table.NumberOfLines = (int)nsNumberOfLines.Value;
+                if (Table != null) Table.NumberOfLines = (int)nsNumberOfLines.Value;
             };
 
-            topcontainer.Rows.Add(new TableRow(new Label { Text = "Table Header", VerticalAlignment = VerticalAlignment.Center }, header));
-            topcontainer.Rows.Add(new TableRow(new Label { Text = "Number of Lines", VerticalAlignment = VerticalAlignment.Center }, nsNumberOfLines));
+            topcontainer.Rows.Add(new TableRow(new Label { Text = "Table Header", VerticalAlignment = VerticalAlignment.Center }, header, new Label { Text = "Number of Grouping Rows", VerticalAlignment = VerticalAlignment.Center }, nsNumberOfLines));
+            topcontainer.Rows[0].Cells[1].ScaleWidth = true;
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
 
@@ -267,6 +267,8 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
                 cbObjectType.SelectedIndex = names.ToList().IndexOf(Table.ObjectFamily.ToString());
                 cbOrderBy.SelectedIndex = sitems.ToList().IndexOf(Table.SortBy);
+
+                nsNumberOfLines.Value = Table.NumberOfLines;
 
             };
 
