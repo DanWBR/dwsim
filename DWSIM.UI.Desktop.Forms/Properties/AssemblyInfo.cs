@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DWSIM Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Copyright © 2017-2019 Daniel Medeiros")]
+[assembly: AssemblyCopyright("Copyright © 2017-2020 Daniel Medeiros")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

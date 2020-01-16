@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DWSIM Project")]
 [assembly: AssemblyProduct("DWSIM.Automation")]
-[assembly: AssemblyCopyright("Copyright © 2017-2019 DWSIM Project")]
+[assembly: AssemblyCopyright("Copyright © 2017-2020 DWSIM Project")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

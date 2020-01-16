@@ -1,7 +1,7 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.8 Update 5
-Copyright (c) 2017-2019 Daniel Medeiros
+Version 5.8 Update 6
+Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -61,6 +61,16 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 5.8 Update 6
+
+- [NEW] Define the number of rows in Master Property Table
+- [FIX] Fixed loading and saving of simulation files in mobile version format (Android/iOS)
+- [FIX] Fixed Absorber Column in Liquid-Liquid Extraction mode
+- [FIX] Fixed the Filter property editor in Cross-Platform UI
+- [FIX] Fixed Filter cake resistance unit conversion
+- [FIX] Fixed the Script Editor not working on Classic UI
+- [FIX] Other bug fixes
 
 Version 5.8 Update 5
 

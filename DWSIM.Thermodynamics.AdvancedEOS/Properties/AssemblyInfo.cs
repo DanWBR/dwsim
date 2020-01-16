@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DWSIM.Thermodynamics.AdvancedEOS")]
-[assembly: AssemblyCopyright("Copyright © 2017-2019 DWSIM Project")]
+[assembly: AssemblyCopyright("Copyright © 2017-2020 DWSIM Project")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

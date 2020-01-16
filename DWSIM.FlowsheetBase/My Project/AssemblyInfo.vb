@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("DWSIM Flowsheet Base Class")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.FlowsheetBase")>
-<Assembly: AssemblyCopyright("Copyright © 2017-2019 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2017-2020 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

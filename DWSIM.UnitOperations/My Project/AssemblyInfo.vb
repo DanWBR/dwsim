@@ -14,7 +14,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("DWSIM Simulator Unit Operations Library")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.UnitOperations")>
-<Assembly: AssemblyCopyright("Copyright © 2016 - 2019 DWSIM Project")>
+<Assembly: AssemblyCopyright("Copyright © 2007-2020 DWSIM Project")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
