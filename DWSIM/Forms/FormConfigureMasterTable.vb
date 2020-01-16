@@ -38,6 +38,8 @@ Public Class FormConfigureMasterTable
 
         TextBox1.Text = Table.HeaderText
 
+        nupLines.Value = Table.NumberOfLines
+
         Populate()
 
         Loaded = True
@@ -219,5 +221,9 @@ Public Class FormConfigureMasterTable
         For Each obj In lvProps.Items
             DirectCast(obj, ListViewItem).Checked = False
         Next
+    End Sub
+
+    Private Sub nupLines_ValueChanged(sender As Object, e As EventArgs) Handles nupLines.ValueChanged
+        If Loaded Then Table.NumberOfLines = nupLines.Value
     End Sub
 End Class

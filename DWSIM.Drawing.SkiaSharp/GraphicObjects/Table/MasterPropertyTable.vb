@@ -124,6 +124,8 @@ Namespace GraphicObjects.Tables
 
 #Region "Properties"
 
+        Public Property NumberOfLines As Integer = 1
+
         Property Padding As Integer = 4
 
         Public Property TextColor As SKColor = SKColors.Black
@@ -481,7 +483,7 @@ Namespace GraphicObjects.Tables
                 If Not m_items Is Nothing Then
                     If maxL2.Count > 0 Then
                         maxL2a = maxL2.Max + 3 * Padding
-                        Me.Width = (4 + 2 * m_items.Count) * Me.Padding + maxL1 + (k) * maxL2a + maxL3
+                        Me.Width = (4 + 2 * m_items.Count / NumberOfLines) * Me.Padding + maxL1 + (k) * maxL2a / NumberOfLines + maxL3
                     Else
                         Me.Width = 100
                         maxL2a = 50
@@ -495,84 +497,125 @@ Namespace GraphicObjects.Tables
                 maxL3 = maxL3 + 2 * Padding
                 maxH = maxH + 2 * Padding
 
-                'Dim rect As SKRect = GetRect(X, Y, Width, Height)
-                'canvas.DrawRect(rect, GetPaint(SKColors.White))
-
                 size = MeasureString("MEASURE", tpaint)
 
                 ClipboardData = HeaderText + vbCrLf
 
                 SetClipboardData()
 
-                'desenhar textos e retangulos
-                canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
-                If Not m_items Is Nothing Then
-                    If maxL2.Count > 0 Then
-                        i = 0
-                        If Not m_sortedlist Is Nothing Then
-                            For Each s As String In m_sortedlist
-                                canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + Padding, Y + Height, bpaint)
-                                n = 1
-                                For Each ni In m_items(s)
-                                    If i = 0 Then
-                                        canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                Dim subset, deltaH As Integer
+
+                Try
+                    'desenhar textos e retangulos
+                    canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
+                    If Not m_items Is Nothing Then
+                        If maxL2.Count > 0 Then
+                            Dim itemsperline As Integer
+                            If Not m_sortedlist Is Nothing Then
+                                itemsperline = Math.Round(Convert.ToDouble(m_sortedlist.Count) / Convert.ToDouble(NumberOfLines), MidpointRounding.AwayFromZero)
+                            Else
+                                itemsperline = Math.Round(Convert.ToDouble(m_items.Count) / Convert.ToDouble(NumberOfLines), MidpointRounding.AwayFromZero)
+                            End If
+                            If Not m_sortedlist Is Nothing Then
+                                For k = 1 To NumberOfLines
+                                    subset = itemsperline
+                                    If itemsperline > (m_sortedlist.Count - 1 - (k - 1) * itemsperline) Then
+                                        subset = m_sortedlist.Count - (k - 1) * itemsperline
                                     End If
-                                    If n = 1 Then
-                                        canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
-                                    Else
-                                        canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, Y + n * maxH + Padding + size.Height, tpaint2)
+                                    deltaH = (k - 1) * (Height - maxH)
+                                    i = 0
+                                    For Each s As String In m_sortedlist.GetRange((k - 1) * itemsperline, subset)
+                                        canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + maxH), X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + Height), bpaint)
+                                        n = 1
+                                        For Each ni In m_items(s)
+                                            If i = 0 Then
+                                                canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, deltaH + (Y + n * maxH + Padding + size.Height), tpaint)
+                                            End If
+                                            If n = 1 Then
+                                                canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, deltaH + (Y + n * maxH + Padding + size.Height), tpaint)
+                                            Else
+                                                canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, deltaH + (Y + n * maxH + Padding + size.Height), tpaint2)
+                                            End If
+                                            If i = subset - 1 Then
+                                                canvas.DrawText(ni.Unit, X + maxL1 + (itemsperline) * maxL2a + 3 * Padding, deltaH + (Y + n * maxH + Padding + size.Height), tpaint)
+                                            End If
+                                            canvas.DrawLine(X, deltaH + Y + n * maxH, X + Width, deltaH + Y + n * maxH, bpaint)
+                                            n += 1
+                                        Next
+                                        i += 1
+                                    Next
+                                    If subset <> itemsperline Then
+                                        For i = subset To itemsperline
+                                            canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + maxH), X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + Height), bpaint)
+                                        Next
                                     End If
-                                    If i = m_items.Count - 1 Then
-                                        canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                                    End If
-                                    n += 1
                                 Next
-                                i += 1
-                            Next
-                            For n = 1 To count - 1
-                                canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
-                            Next
+                            Else
+                                For k = 1 To NumberOfLines
+                                    subset = itemsperline
+                                    If itemsperline > (m_items.Count - 1 - (k - 1) * itemsperline) Then
+                                        subset = m_items.Count - (k - 1) * itemsperline
+                                    End If
+                                    deltaH = (k - 1) * (Height - maxH)
+                                    i = 0
+                                    For Each s As String In m_items.Keys.ToList.GetRange((k - 1) * itemsperline, subset)
+                                        canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + maxH), X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + Height), bpaint)
+                                        n = 1
+                                        For Each ni In m_items(s)
+                                            If i = 0 Then
+                                                canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, deltaH + (Y + n * maxH + Padding + size.Height), tpaint)
+                                            End If
+                                            If n = 1 Then
+                                                canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, deltaH + (Y + n * maxH + Padding + size.Height), tpaint)
+                                            Else
+                                                canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, deltaH + (Y + n * maxH + Padding + size.Height), tpaint2)
+                                            End If
+                                            If i = subset - 1 Then
+                                                canvas.DrawText(ni.Unit, X + maxL1 + (itemsperline) * maxL2a + 3 * Padding, deltaH + (Y + n * maxH + Padding + size.Height), tpaint)
+                                            End If
+                                            canvas.DrawLine(X, deltaH + Y + n * maxH, X + Width, deltaH + Y + n * maxH, bpaint)
+                                            n += 1
+                                        Next
+                                        i += 1
+                                    Next
+                                    If subset <> itemsperline Then
+                                        For i = subset To itemsperline
+                                            canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + maxH), X + maxL1 + (i + 1) * maxL2a + Padding, deltaH + (Y + Height), bpaint)
+                                        Next
+                                    End If
+                                Next
+                            End If
                         Else
-                            For Each s As String In m_items.Keys
-                                canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + Padding, Y + Height, bpaint)
-                                n = 2
-                                For Each ni In m_items(s)
-                                    If i = 0 Then
-                                        canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                                    End If
-                                    If n = 1 Then
-                                        canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
-                                    Else
-                                        canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding + size.Height, tpaint2)
-                                    End If
-                                    If i = m_items.Count - 1 Then
-                                        canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                                    End If
-                                    n += 1
-                                Next
-                                i += 1
-                            Next
-                            For n = 1 To count - 1
-                                canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
-                            Next
+                            Me.Height = 40
                         End If
                     Else
                         Me.Height = 40
                     End If
-                Else
-                    Me.Height = 40
-                End If
 
-                canvas.DrawRect(GetRect(Me.X, Me.Y, Me.Width, Me.Height), bpaint)
-                canvas.DrawLine(X + maxL1, Y + maxH, X + maxL1, Y + Height, bpaint)
+                    Me.Height = (Me.Height - maxH) * NumberOfLines + maxH
+
+                    canvas.DrawRect(GetRect(Me.X, Me.Y, Me.Width, Me.Height), bpaint)
+                    canvas.DrawLine(X + maxL1, Y + maxH, X + maxL1, Y + Height, bpaint)
+
+                Catch ex As Exception
+
+                    Dim s = MeasureString("Error drawing table", tpaint)
+                    canvas.DrawText("Error drawing table", X + 10, Y + 40, tpaint)
+
+                    Me.Width = 20 + s.Width
+                    Me.Height = 80 + s.Height
+
+                    canvas.DrawRect(GetRect(X, Y, Width, Height), bpaint)
+
+                End Try
 
             Else
 
-                Dim Size = MeasureString("Double-click to edit", tpaint)
+                Dim s = MeasureString("Double-click to edit", tpaint)
                 canvas.DrawText("Double-click to edit", X + 10, Y + 40, tpaint)
 
-                Me.Width = 20 + Size.Width
-                Me.Height = 80 + Size.Height
+                Me.Width = 20 + s.Width
+                Me.Height = 80 + s.Height
 
                 canvas.DrawRect(GetRect(X, Y, Width, Height), bpaint)
 

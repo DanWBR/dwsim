@@ -42,6 +42,9 @@ Partial Class FormConfigureMasterTable
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.nupLines = New System.Windows.Forms.NumericUpDown()
+        CType(Me.nupLines, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -67,6 +70,7 @@ Partial Class FormConfigureMasterTable
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
+        Me.lvProps.HideSelection = False
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -161,10 +165,25 @@ Partial Class FormConfigureMasterTable
         Me.Button5.Name = "Button5"
         Me.Button5.UseVisualStyleBackColor = True
         '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'nupLines
+        '
+        resources.ApplyResources(Me.nupLines, "nupLines")
+        Me.nupLines.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nupLines.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nupLines.Name = "nupLines"
+        Me.nupLines.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.nupLines)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button3)
@@ -184,6 +203,7 @@ Partial Class FormConfigureMasterTable
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormConfigureMasterTable"
+        CType(Me.nupLines, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -207,4 +227,6 @@ Partial Class FormConfigureMasterTable
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents nupLines As NumericUpDown
 End Class

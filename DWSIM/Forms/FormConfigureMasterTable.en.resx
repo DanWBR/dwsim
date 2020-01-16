@@ -164,26 +164,68 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="lblOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 338</value>
+  </data>
   <data name="lblOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
   </data>
   <data name="lblOrder.Text" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 124</value>
+  </data>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
+  </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Select All Objects</value>
+  </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 153</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Select All Properties</value>
   </data>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 182</value>
+  </data>
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
+  </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Default Properties Only</value>
+  </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 267</value>
+  </data>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Deselect Properties</value>
   </data>
+  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 238</value>
+  </data>
+  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
+  </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>Deselect Objects</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 309</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Number of Lines</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Master Property Table</value>
