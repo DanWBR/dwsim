@@ -136,10 +136,10 @@
     <value>Coluna de Destilação</value>
   </data>
   <data name="COMP_Desc" xml:space="preserve">
-    <value>Modelo para um compressor isentrópico</value>
+    <value>Modelo para um compressor</value>
   </data>
   <data name="COMP_Name" xml:space="preserve">
-    <value>Compressor Adiabático</value>
+    <value>Compressor</value>
   </data>
   <data name="CONV_Desc" xml:space="preserve">
     <value>Suporta reações definidas por uma taxa de conversão de reagentes</value>
@@ -214,10 +214,10 @@
     <value>Planilha</value>
   </data>
   <data name="EXP_Desc" xml:space="preserve">
-    <value>Modelo para um expansor isentrópico</value>
+    <value>Modelo para um expansor</value>
   </data>
   <data name="EXP_Name" xml:space="preserve">
-    <value>Expansor Adiabático</value>
+    <value>Expansor (Turbina)</value>
   </data>
   <data name="FILTER_Desc" xml:space="preserve">
     <value>Modelo de filtro de sólidos</value>

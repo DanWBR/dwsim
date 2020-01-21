@@ -2195,7 +2195,7 @@ Public Class PropertyGridEditors
 
             Select Case uo.CalcMode
                 Case Compressor.CalculationMode.Delta_P
-                    Dim valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+                    Dim valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP), uo.FlowSheet.Options.NumberFormat)
                     .Item.Add(FT("Delta P", su.deltaP), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                     With .Item(.Item.Count - 1)
                         .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -2204,7 +2204,7 @@ Public Class PropertyGridEditors
                         .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                     End With
                 Case Compressor.CalculationMode.OutletPressure
-                    Dim valor = Format(Converter.ConvertFromSI(su.pressure, uo.POut.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+                    Dim valor = Format(Converter.ConvertFromSI(su.pressure, uo.POut), uo.FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("Presso"), su.pressure), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Pressoajusante"), True)
                     With .Item(.Item.Count - 1)
                         .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -2226,13 +2226,13 @@ Public Class PropertyGridEditors
                 .DefaultType = GetType(Boolean)
             End With
 
-            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
             With .Item(.Item.Count - 1)
                 .DefaultValue = Nothing
                 .DefaultType = GetType(Nullable(Of Double))
             End With
 
-            .Item.Add(FT(DWSIM.App.GetLocalString("Energianecessria"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapelo"), True)
+            .Item.Add(FT(DWSIM.App.GetLocalString("Energianecessria"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapelo"), True)
             With .Item(.Item.Count - 1)
                 .Tag2 = "PROP_CO_3"
                 .DefaultValue = Nothing
@@ -4900,7 +4900,7 @@ Public Class PropertyGridEditors
 
             Select Case uo.CalcMode
                 Case Expander.CalculationMode.Delta_P
-                    Dim valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+                    Dim valor = Format(Converter.ConvertFromSI(su.deltaP, uo.DeltaP), uo.FlowSheet.Options.NumberFormat)
                     .Item.Add(FT("Delta P", su.deltaP), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                     With .Item(.Item.Count - 1)
                         .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -4909,7 +4909,7 @@ Public Class PropertyGridEditors
                         .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                     End With
                 Case Expander.CalculationMode.OutletPressure
-                    Dim valor = Format(Converter.ConvertFromSI(su.pressure, uo.POut.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
+                    Dim valor = Format(Converter.ConvertFromSI(su.pressure, uo.POut), uo.FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("Presso"), su.pressure), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Pressoajusante"), True)
                     With .Item(.Item.Count - 1)
                         .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -4931,14 +4931,14 @@ Public Class PropertyGridEditors
                 .DefaultType = GetType(Boolean)
             End With
 
-            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, uo.DeltaT), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
             With .Item(.Item.Count - 1)
                 .Tag2 = "PROP_EX_2"
                 .DefaultValue = Nothing
                 .DefaultType = GetType(Nullable(Of Double))
             End With
 
-            .Item.Add(FT(DWSIM.App.GetLocalString("Energiadisponvel"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciageradapelatur"), True)
+            .Item.Add(FT(DWSIM.App.GetLocalString("Energiadisponvel"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, uo.DeltaQ), uo.FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciageradapelatur"), True)
             With .Item(.Item.Count - 1)
                 .DefaultValue = Nothing
                 .DefaultType = GetType(Nullable(Of Double))

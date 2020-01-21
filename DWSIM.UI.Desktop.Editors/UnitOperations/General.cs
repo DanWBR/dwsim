@@ -210,7 +210,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Increase (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, ce.DeltaP.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Increase (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, ce.DeltaP),
                                    (TextBox arg3, EventArgs ev) =>
                                    {
                                        if (arg3.Text.IsValidDoubleExpression())
@@ -225,7 +225,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Pressure Increase"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ce.POut.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ce.POut),
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (arg3.Text.IsValidDoubleExpression())
@@ -240,7 +240,7 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Pressure"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Power Required (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, ce.DeltaQ.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Power Required (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, ce.DeltaQ),
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (arg3.Text.IsValidDoubleExpression())
@@ -255,13 +255,13 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Power Required"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", ce.EficienciaAdiabatica.GetValueOrDefault(),
+                    s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", ce.AdiabaticEfficiency,
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (arg3.Text.IsValidDoubleExpression())
                            {
                                arg3.TextColor = (SystemColors.ControlText);
-                               ce.EficienciaAdiabatica = arg3.Text.ToString().ParseExpressionToDouble();
+                               ce.AdiabaticEfficiency = arg3.Text.ToString().ParseExpressionToDouble();
                            }
                            else
                            {
@@ -303,7 +303,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Decrease (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, xe.DeltaP.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Decrease (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, xe.DeltaP),
                                    (TextBox arg3, EventArgs ev) =>
                                    {
                                        if (arg3.Text.IsValidDoubleExpression())
@@ -318,7 +318,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Pressure Decrease"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, xe.POut.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, xe.POut),
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (arg3.Text.IsValidDoubleExpression())
@@ -333,7 +333,7 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Pressure"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Power Generated (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, xe.DeltaQ.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Power Generated (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, xe.DeltaQ),
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (arg3.Text.IsValidDoubleExpression())
@@ -348,13 +348,13 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Power Generated"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", xe.EficienciaAdiabatica.GetValueOrDefault(),
+                    s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", xe.AdiabaticEfficiency,
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (arg3.Text.IsValidDoubleExpression())
                            {
                                arg3.TextColor = (SystemColors.ControlText);
-                               xe.EficienciaAdiabatica = arg3.Text.ToString().ParseExpressionToDouble();
+                               xe.AdiabaticEfficiency = arg3.Text.ToString().ParseExpressionToDouble();
                            }
                            else
                            {

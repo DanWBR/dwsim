@@ -219,7 +219,7 @@ Public Class EditorTooltips
                 Dim prop As Double, tb As TextBox, units As List(Of String), text As StringBuilder
 
                 tb = editor.tbPower
-                prop = uo.DeltaQ.GetValueOrDefault
+                prop = uo.DeltaQ
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.heatflow)
                 units.Remove(su.heatflow)
@@ -239,7 +239,7 @@ Public Class EditorTooltips
                 editor.ToolTipValues.SetToolTip(tb, text.ToString)
 
                 tb = editor.tbPressureDrop
-                prop = uo.DeltaP.GetValueOrDefault
+                prop = uo.DeltaP
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.deltaP)
                 units.Remove(su.deltaP)
@@ -249,7 +249,7 @@ Public Class EditorTooltips
                 editor.ToolTipValues.SetToolTip(tb, text.ToString)
 
                 tb = editor.tbOutletPressure
-                prop = uo.POut.GetValueOrDefault
+                prop = uo.POut
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.pressure)
                 units.Remove(su.pressure)
@@ -259,7 +259,7 @@ Public Class EditorTooltips
                 editor.ToolTipValues.SetToolTip(tb, text.ToString)
 
                 tb = editor.tbDeltaT
-                prop = uo.DeltaT.GetValueOrDefault
+                prop = uo.DeltaT
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.deltaT)
                 units.Remove(su.deltaT)
@@ -281,7 +281,7 @@ Public Class EditorTooltips
                 Dim prop As Double, tb As TextBox, units As List(Of String), text As StringBuilder
 
                 tb = editor.tbPower
-                prop = uo.DeltaQ.GetValueOrDefault
+                prop = uo.DeltaQ
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.heatflow)
                 units.Remove(su.heatflow)
@@ -301,7 +301,7 @@ Public Class EditorTooltips
                 editor.ToolTipValues.SetToolTip(tb, text.ToString)
 
                 tb = editor.tbPressureDrop
-                prop = uo.DeltaP.GetValueOrDefault
+                prop = uo.DeltaP
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.deltaP)
                 units.Remove(su.deltaP)
@@ -311,7 +311,7 @@ Public Class EditorTooltips
                 editor.ToolTipValues.SetToolTip(tb, text.ToString)
 
                 tb = editor.tbOutletPressure
-                prop = uo.POut.GetValueOrDefault
+                prop = uo.POut
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.pressure)
                 units.Remove(su.pressure)
@@ -321,7 +321,7 @@ Public Class EditorTooltips
                 editor.ToolTipValues.SetToolTip(tb, text.ToString)
 
                 tb = editor.tbDeltaT
-                prop = uo.DeltaT.GetValueOrDefault
+                prop = uo.DeltaT
                 text = New StringBuilder
                 units = su.GetUnitSet(UnitOfMeasure.deltaT)
                 units.Remove(su.deltaT)

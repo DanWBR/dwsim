@@ -136,10 +136,10 @@
     <value>Distillation Column</value>
   </data>
   <data name="COMP_Desc" xml:space="preserve">
-    <value>Model for an adiabatic (isentropic) compressor</value>
+    <value>Model for a compressor</value>
   </data>
   <data name="COMP_Name" xml:space="preserve">
-    <value>Adiabatic Compressor</value>
+    <value>Compressor</value>
   </data>
   <data name="CONV_Desc" xml:space="preserve">
     <value>Supports reactions defined by amounts of reactant converted as a function of temperature</value>
@@ -214,10 +214,10 @@
     <value>Spreadsheet</value>
   </data>
   <data name="EXP_Desc" xml:space="preserve">
-    <value>Model for an adiabatic (isentropic) expander</value>
+    <value>Model for an expander</value>
   </data>
   <data name="EXP_Name" xml:space="preserve">
-    <value>Adiabatic Expander</value>
+    <value>Expander (Turbine)</value>
   </data>
   <data name="FILTER_Desc" xml:space="preserve">
     <value>Solids Filter model</value>

@@ -34,52 +34,45 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ComprExpndr
 
-        Protected m_dp As Nullable(Of Double)
-        Protected m_dt As Nullable(Of Double)
-        Protected m_DQ As Nullable(Of Double)
-        Protected m_POut As Nullable(Of Double) = 101325.0#
-
-        Protected m_eta_a As Nullable(Of Double) = 75.0#
-        Protected m_eta_p As Nullable(Of Double) = Nothing
-
-        Protected m_ignorephase As Boolean = True
-
         Public Enum CalculationMode
             OutletPressure = 0
             Delta_P = 1
             PowerGenerated = 2
+            Head = 3
         End Enum
 
-        Protected m_cmode As CalculationMode = CalculationMode.Delta_P
+        Public Enum ProcessPathType
+            Adiabatic = 0
+            Polytropic = 1
+        End Enum
 
-        Public Property CalcMode() As CalculationMode
-            Get
-                Return m_cmode
-            End Get
-            Set(ByVal value As CalculationMode)
-                m_cmode = value
-            End Set
-        End Property
+        Public Property CalcMode() As CalculationMode = CalculationMode.OutletPressure
 
         Public Property OutletTemperature As Double = 0.0#
 
-        Public Property POut() As Nullable(Of Double)
-            Get
-                Return m_POut
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_POut = value
-            End Set
-        End Property
+        Public Property ProcessPath As ProcessPathType = ProcessPathType.Adiabatic
 
         Public Property IgnorePhase() As Boolean
-            Get
-                Return m_ignorephase
-            End Get
-            Set(ByVal value As Boolean)
-                m_ignorephase = value
-            End Set
-        End Property
+
+        Public Property PolytropicEfficiency() As Double = 75.0
+
+        Public Property AdiabaticEfficiency() As Double = 75.0
+
+        Public Property DeltaP As Double = 0.0
+
+        Public Property DeltaT As Double = 0.0
+
+        Public Property DeltaQ As Double = 0.0
+
+        Public Property POut() As Double = 101325.0
+
+        Public Property AdiabaticCoefficient As Double = 0.0
+
+        Public Property PolytropicCoefficient As Double = 0.0
+
+        Public Property AdiabaticHead As Double = 0.0
+
+        Public Property PolytropicHead As Double = 0.0
 
         Public Sub New()
             MyBase.New()
@@ -93,6 +86,20 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
+
+            MyBase.LoadData(data)
+
+            Dim eleff = data.Where(Function(x) x.Name = "AdiabaticEfficiency").FirstOrDefault
+
+            If eleff IsNot Nothing Then
+                AdiabaticEfficiency = eleff.Value.ToDoubleFromInvariant
+            End If
+
+            Return True
+
+        End Function
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Expander()
             obj.LoadData(Me.SaveData)
@@ -102,51 +109,6 @@ Namespace UnitOperations
         Public Overrides Function CloneJSON() As Object
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Expander)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
-
-        Public Property EficienciaPolitropica() As Nullable(Of Double)
-            Get
-                Return m_eta_p
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_eta_p = value
-            End Set
-        End Property
-
-        Public Property EficienciaAdiabatica() As Nullable(Of Double)
-            Get
-                Return m_eta_a
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_eta_a = value
-            End Set
-        End Property
-
-        Public Property DeltaP() As Nullable(Of Double)
-            Get
-                Return m_dp
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_dp = value
-            End Set
-        End Property
-
-        Public Property DeltaT() As Nullable(Of Double)
-            Get
-                Return m_dt
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_dt = value
-            End Set
-        End Property
-
-        Public Property DeltaQ() As Nullable(Of Double)
-            Get
-                Return m_DQ
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_DQ = value
-            End Set
-        End Property
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
@@ -187,9 +149,9 @@ Namespace UnitOperations
 
             ims.Validate()
 
-            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, H2, cp, cv, mw, Qi, P2i, fx, fx0, fx00, P2i0, P2i00 As Double
+            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, T2s, P2, H2, H2s, cp, cv, mw, Qi, P2i, fx, fx0, fx00, P2i0, P2i00 As Double
 
-            qli = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault.ToString
+            qli = ims.Phases(1).Properties.volumetric_flow.ToString
 
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow5"))
@@ -206,18 +168,19 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("Calculation Mode: " & CalcMode.ToString)
 
             Me.PropertyPackage.CurrentMaterialStream = ims
-            Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault.ToString
-            Pi = ims.Phases(0).Properties.pressure.GetValueOrDefault.ToString
-            rho_vi = ims.Phases(2).Properties.density.GetValueOrDefault.ToString
-            qvi = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault.ToString
-            Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault.ToString
-            Si = ims.Phases(0).Properties.entropy.GetValueOrDefault.ToString
-            Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault.ToString
+            Ti = ims.Phases(0).Properties.temperature
+            Pi = ims.Phases(0).Properties.pressure
+            rho_vi = ims.Phases(2).Properties.density
+            qvi = ims.Phases(2).Properties.volumetric_flow
+            Hi = ims.Phases(0).Properties.enthalpy
+            Si = ims.Phases(0).Properties.entropy
+            Wi = ims.Phases(0).Properties.massflow
+            Qi = ims.Phases(0).Properties.molarflow
             ei = Hi * Wi
             ein = ei
-            cp = ims.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
-            cv = ims.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
-            mw = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
+            cp = ims.Phases(0).Properties.heatCapacityCp
+            cv = ims.Phases(0).Properties.heatCapacityCv
+            mw = ims.Phases(0).Properties.molecularWeight
 
             IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
 
@@ -225,17 +188,17 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add(String.Format("<mi>P_1</mi>: {0} Pa", Pi))
             IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
             IObj?.Paragraphs.Add(String.Format("<mi>S_1</mi>: {0} kJ/[kg.K]", Si))
-            IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", EficienciaAdiabatica.GetValueOrDefault))
+            IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", AdiabaticEfficiency))
 
             If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, S = {3} kJ/[kg.K], W = {4} kg/s", Ti, Pi, Hi, Si, Wi))
 
             Select Case Me.CalcMode
                 Case CalculationMode.Delta_P
-                    P2 = Pi - Me.DeltaP.GetValueOrDefault
+                    P2 = Pi - Me.DeltaP
                     POut = P2
                 Case CalculationMode.OutletPressure
-                    P2 = Me.POut.GetValueOrDefault
+                    P2 = Me.POut
                     DeltaP = Pi - P2
             End Select
             CheckSpec(P2, True, "outlet pressure")
@@ -263,26 +226,38 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
 
-                    Me.DeltaQ = -Wi * (H2 - Hi) * (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
+                    Me.DeltaQ = -Wi * (H2 - Hi) * (Me.AdiabaticEfficiency / 100)
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated real generated power = {0} kW", DeltaQ))
 
-                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ / Wi))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ.GetValueOrDefault / Wi, T2)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ / Wi, T2)
 
                     T2 = tmp.CalculatedTemperature
 
-                Case CalculationMode.PowerGenerated
+                Case CalculationMode.PowerGenerated, CalculationMode.Head
 
-                    H2 = Hi - Me.DeltaQ / (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi
+                    If CalcMode = CalculationMode.Head Then
+                        If ProcessPath = ProcessPathType.Adiabatic Then
+                            DeltaQ = AdiabaticHead / 1000 / Wi * 9.8
+                        Else
+                            DeltaQ = PolytropicHead / 1000 / Wi * 9.8
+                        End If
+                    End If
 
                     CheckSpec(Me.DeltaQ, True, "power")
 
                     Dim k As Double = cp / cv
 
-                    P2i = Pi * ((1 - DeltaQ.GetValueOrDefault * (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+                    If ProcessPath = ProcessPathType.Adiabatic Then
+                        H2 = Hi - Me.DeltaQ / (Me.AdiabaticEfficiency / 100) / Wi
+                        P2i = Pi * ((1 - DeltaQ * (Me.AdiabaticEfficiency / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+                    Else
+                        H2 = Hi - Me.DeltaQ / (Me.PolytropicEfficiency / 100) / Wi
+                        P2i = Pi * ((1 - DeltaQ * (Me.PolytropicEfficiency / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+                    End If
 
                     Dim icnt As Integer = 0
 
@@ -292,7 +267,15 @@ Namespace UnitOperations
 
                         IObj?.SetCurrent()
                         tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
-                        Qi = -Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
+
+                        T2s = tmp.CalculatedTemperature
+                        H2s = tmp.CalculatedEnthalpy
+
+                        If ProcessPath = ProcessPathType.Adiabatic Then
+                            Qi = -Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
+                        Else
+                            Qi = -Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.PolytropicEfficiency / 100)
+                        End If
 
                         If DebugMode Then AppendDebugLine(String.Format("Qi: {0}", Qi))
 
@@ -313,11 +296,11 @@ Namespace UnitOperations
 
                         icnt += 1
 
-                    Loop Until Math.Abs((DeltaQ.GetValueOrDefault - Qi) / DeltaQ.GetValueOrDefault) < 0.001
+                    Loop Until Math.Abs((DeltaQ - Qi) / DeltaQ) < 0.001
 
                     P2 = P2i
 
-                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ / Wi))
 
                     IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2)
@@ -339,13 +322,95 @@ Namespace UnitOperations
 
             If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-            H2 = Hi - Me.DeltaQ.GetValueOrDefault / Wi
+            H2 = Hi - Me.DeltaQ / Wi
 
             OutletTemperature = T2
 
             IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
             IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
             IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
+            Dim rho1, rho2, rho2i, n_isent, n_poly, CFi, Wisent, Wpoly, Wic, Wpc, fce As Double
+            Dim tms As MaterialStream = ims.Clone()
+
+            rho1 = ims.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+            tms.PropertyPackage = PropertyPackage
+            PropertyPackage.CurrentMaterialStream = tms
+            tms.Phases(0).Properties.temperature = T2
+            tms.Phases(0).Properties.pressure = P2
+            tms.Calculate()
+
+            rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+            tms.PropertyPackage = PropertyPackage
+            PropertyPackage.CurrentMaterialStream = tms
+            tms.Phases(0).Properties.temperature = T2s
+            tms.Phases(0).Properties.pressure = P2
+            tms.Calculate()
+
+            rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+            ' volume exponent (isent)
+
+            n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
+
+            CFi = (H2s - Hi) * 1000 / (n_isent / (n_isent - 1) * (P2 / rho2i - Pi / rho1))
+
+            Wisent = Qi / 1000 * mw * n_isent / (n_isent - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
+
+            ' volume exponent (polyt)
+
+            n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
+
+            Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
+
+            fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
+
+            ' real work
+
+            If ProcessPath = ProcessPathType.Adiabatic Then
+
+                Wic = Wisent / (AdiabaticEfficiency / 100)
+
+                PolytropicEfficiency = fce * AdiabaticEfficiency
+
+                Wpc = Wpoly / (PolytropicEfficiency / 100)
+
+                If CalcMode = CalculationMode.Delta_P Or CalcMode = CalculationMode.OutletPressure Then
+
+                    Me.DeltaQ = Wic
+
+                End If
+
+            Else
+
+                Wpc = Wpoly / (PolytropicEfficiency / 100)
+
+                AdiabaticEfficiency = PolytropicEfficiency / fce
+
+                Wic = Wisent / (AdiabaticEfficiency / 100)
+
+                If CalcMode = CalculationMode.Delta_P Or CalcMode = CalculationMode.OutletPressure Then
+
+                    Me.DeltaQ = Wpc
+
+                End If
+
+            End If
+
+            ' heads
+
+            If CalcMode <> CalculationMode.Head Then
+
+                AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
+
+                PolytropicHead = Wpoly * 1000 * Wi / 9.8 ' m
+
+            End If
+
+            AdiabaticCoefficient = n_isent
+
+            PolytropicCoefficient = n_poly
 
             If Not DebugMode Then
 
@@ -362,12 +427,12 @@ Namespace UnitOperations
                         comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction
                         i += 1
                     Next
-                    .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
+                    .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow
                 End With
 
                 'energy stream - update energy flow value (kW)
                 With es
-                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                    .EnergyFlow = Me.DeltaQ
                     .GraphicObject.Calculated = True
                 End With
 
@@ -433,19 +498,19 @@ Namespace UnitOperations
 
                     Case 0
                         'PROP_CO_0	Pressure Increase (Head)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP)
                     Case 1
                         'PROP_CO_1(Efficiency)
-                        value = Me.EficienciaAdiabatica.GetValueOrDefault
+                        value = Me.AdiabaticEfficiency
                     Case 2
                         'PROP_CO_2(Delta - T)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT)
                     Case 3
                         'PROP_CO_3	Power Required
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ)
                     Case 4
                         'PROP_CO_4	Pressure Out
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.POut.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.POut)
                 End Select
 
                 Return value
@@ -497,7 +562,7 @@ Namespace UnitOperations
                     Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 Case 1
                     'PROP_CO_1(Efficiency)
-                    Me.EficienciaAdiabatica = propval
+                    Me.AdiabaticEfficiency = propval
                 Case 4
                     'PROP_CO_4(Pressure Out)
                     Me.POut = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
@@ -610,10 +675,10 @@ Namespace UnitOperations
             str.AppendLine()
             str.AppendLine("Inlet conditions")
             str.AppendLine()
-            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
-            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
-            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
-            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow).ToString(numberformat, ci) & " " & su.volumetricFlow)
             str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
             str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
             str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
@@ -623,22 +688,22 @@ Namespace UnitOperations
             str.AppendLine("    Calculation mode: " & CalcMode.ToString)
             Select Case CalcMode
                 Case CalculationMode.Delta_P
-                    str.AppendLine("    Pressure decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.deltaP)
+                    str.AppendLine("    Pressure decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
                 Case CalculationMode.OutletPressure
-                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.pressure)
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
             End Select
-            str.AppendLine("    Efficiency: " & Convert.ToDouble(EficienciaAdiabatica).ToString(numberformat, ci))
+            str.AppendLine("    Efficiency: " & Convert.ToDouble(AdiabaticEfficiency).ToString(numberformat, ci))
             str.AppendLine()
             str.AppendLine("Results")
             str.AppendLine()
             Select Case CalcMode
                 Case CalculationMode.Delta_P
-                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.pressure)
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
                 Case CalculationMode.OutletPressure
-                    str.AppendLine("    Pressure decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.deltaP)
+                    str.AppendLine("    Pressure decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
             End Select
-            str.AppendLine("    Temperature increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT.GetValueOrDefault).ToString(numberformat, ci) & " " & su.deltaT)
-            str.AppendLine("    Power generated: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Temperature increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Power generated: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ)).ToString(numberformat, ci) & " " & su.heatflow)
 
             Return str.ToString
 
@@ -664,18 +729,18 @@ Namespace UnitOperations
                 Case CalculationMode.Delta_P
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Pressure Decrease",
-                            Me.DeltaP.GetValueOrDefault.ConvertFromSI(su.deltaP).ToString(nf),
+                            Me.DeltaP.ConvertFromSI(su.deltaP).ToString(nf),
                             su.deltaP}))
                 Case CalculationMode.OutletPressure
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Outlet Pressure",
-                            Me.POut.GetValueOrDefault.ConvertFromSI(su.pressure).ToString(nf),
+                            Me.POut.ConvertFromSI(su.pressure).ToString(nf),
                             su.pressure}))
             End Select
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Adiabatic Efficiency",
-                            Me.EficienciaAdiabatica.GetValueOrDefault.ToString(nf),
+                            Me.AdiabaticEfficiency.ToString(nf),
                             "%"}))
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results"}))
@@ -684,23 +749,23 @@ Namespace UnitOperations
                 Case CalculationMode.Delta_P
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Outlet Pressure",
-                            Me.POut.GetValueOrDefault.ConvertFromSI(su.pressure).ToString(nf),
+                            Me.POut.ConvertFromSI(su.pressure).ToString(nf),
                             su.pressure}))
                 Case CalculationMode.OutletPressure
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Pressure Decrease",
-                            Me.DeltaP.GetValueOrDefault.ConvertFromSI(su.deltaP).ToString(nf),
+                            Me.DeltaP.ConvertFromSI(su.deltaP).ToString(nf),
                             su.deltaP}))
             End Select
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Temperature Change",
-                            Me.DeltaT.GetValueOrDefault.ConvertFromSI(su.deltaT).ToString(nf),
+                            Me.DeltaT.ConvertFromSI(su.deltaT).ToString(nf),
                             su.deltaT}))
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Power Generated",
-                            Me.DeltaQ.GetValueOrDefault.ConvertFromSI(su.heatflow).ToString(nf),
+                            Me.DeltaQ.ConvertFromSI(su.heatflow).ToString(nf),
                             su.heatflow}))
 
             Return list

@@ -119,7 +119,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Modelo para um compressor isentrópico.
+        '''  Looks up a localized string similar to Modelo para um compressor.
         '''</summary>
         Friend Shared ReadOnly Property COMP_Desc() As String
             Get
@@ -128,7 +128,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Compressor Adiabático.
+        '''  Looks up a localized string similar to Compressor.
         '''</summary>
         Friend Shared ReadOnly Property COMP_Name() As String
             Get
@@ -353,7 +353,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Modelo para um expansor isentrópico.
+        '''  Looks up a localized string similar to Modelo para um expansor.
         '''</summary>
         Friend Shared ReadOnly Property EXP_Desc() As String
             Get
@@ -362,7 +362,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Expansor Adiabático.
+        '''  Looks up a localized string similar to Expansor (Turbina).
         '''</summary>
         Friend Shared ReadOnly Property EXP_Name() As String
             Get

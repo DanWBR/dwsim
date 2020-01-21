@@ -149,6 +149,14 @@ Public Class EditingForm_ComprExpndr
             cbDeltaT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
             cbDeltaT.SelectedItem = units.deltaT
 
+            cbAdiabaticHead.Items.Clear()
+            cbAdiabaticHead.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.distance).ToArray)
+            cbAdiabaticHead.SelectedItem = units.distance
+
+            cbPolytropicHead.Items.Clear()
+            cbPolytropicHead.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.distance).ToArray)
+            cbPolytropicHead.SelectedItem = units.distance
+
             If TypeOf SimObject Is UnitOperations.Compressor Then
 
                 Dim uobj = DirectCast(SimObject, UnitOperations.Compressor)
@@ -162,14 +170,29 @@ Public Class EditingForm_ComprExpndr
                         cbCalcMode.SelectedIndex = 2
                     Case UnitOperations.Compressor.CalculationMode.EnergyStream
                         cbCalcMode.SelectedIndex = 3
+                    Case UnitOperations.Compressor.CalculationMode.Head
+                        cbCalcMode.SelectedIndex = 4
                 End Select
 
-                tbEfficiency.Text = uobj.EficienciaAdiabatica.GetValueOrDefault.ToString(nf)
-                tbPower.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ.GetValueOrDefault).ToString(nf)
-                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.POut.GetValueOrDefault).ToString(nf)
-                tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
+                Select Case uobj.ProcessPath
+                    Case UnitOperations.Expander.ProcessPathType.Adiabatic
+                        cbProcessPath.SelectedIndex = 0
+                    Case UnitOperations.Expander.ProcessPathType.Polytropic
+                        cbProcessPath.SelectedIndex = 1
+                End Select
+
+                tbEfficiency.Text = uobj.AdiabaticEfficiency.ToString(nf)
+                tbPower.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ).ToString(nf)
+                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.POut).ToString(nf)
+                tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP).ToString(nf)
                 tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
-                tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
+                tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT).ToString(nf)
+
+                tbPolytropicEfficiency.Text = uobj.PolytropicEfficiency.ToString(nf)
+                tbPolytropicCoeff.Text = uobj.PolytropicCoefficient.ToString(nf)
+                tbPolytropicHead.Text = su.Converter.ConvertFromSI(units.distance, uobj.PolytropicHead).ToString(nf)
+                tbAdiabaticCoeff.Text = uobj.AdiabaticCoefficient.ToString(nf)
+                tbAdiabaticHead.Text = su.Converter.ConvertFromSI(units.distance, uobj.AdiabaticHead).ToString(nf)
 
             Else
 
@@ -184,12 +207,25 @@ Public Class EditingForm_ComprExpndr
                         cbCalcMode.SelectedIndex = 2
                 End Select
 
-                tbEfficiency.Text = uobj.EficienciaAdiabatica.GetValueOrDefault.ToString(nf)
-                tbPower.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ.GetValueOrDefault).ToString(nf)
-                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.POut.GetValueOrDefault).ToString(nf)
-                tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
+                Select Case uobj.ProcessPath
+                    Case UnitOperations.Expander.ProcessPathType.Adiabatic
+                        cbProcessPath.SelectedIndex = 0
+                    Case UnitOperations.Expander.ProcessPathType.Polytropic
+                        cbProcessPath.SelectedIndex = 1
+                End Select
+
+                tbEfficiency.Text = uobj.AdiabaticEfficiency.ToString(nf)
+                tbPower.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ).ToString(nf)
+                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.POut).ToString(nf)
+                tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP).ToString(nf)
                 tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
-                tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
+                tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT).ToString(nf)
+
+                tbPolytropicEfficiency.Text = uobj.PolytropicEfficiency.ToString(nf)
+                tbPolytropicCoeff.Text = uobj.PolytropicCoefficient.ToString(nf)
+                tbPolytropicHead.Text = su.Converter.ConvertFromSI(units.distance, uobj.PolytropicHead).ToString(nf)
+                tbAdiabaticCoeff.Text = uobj.AdiabaticCoefficient.ToString(nf)
+                tbAdiabaticHead.Text = su.Converter.ConvertFromSI(units.distance, uobj.AdiabaticHead).ToString(nf)
 
             End If
 
@@ -247,11 +283,14 @@ Public Class EditingForm_ComprExpndr
         'Variação da Pressão
         'Potência Fornecida / Produzida
         'Corrente de Energia
+        'Head Conhecido
         Select Case cbCalcMode.SelectedIndex
             Case 0
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = True
                 tbPower.Enabled = False
+                tbAdiabaticHead.Enabled = False
+                tbPolytropicHead.Enabled = False
                 If TypeOf SimObject Is UnitOperations.Compressor Then
                     DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.OutletPressure
                 Else
@@ -261,6 +300,8 @@ Public Class EditingForm_ComprExpndr
                 tbPressureDrop.Enabled = True
                 tbOutletPressure.Enabled = False
                 tbPower.Enabled = False
+                tbAdiabaticHead.Enabled = False
+                tbPolytropicHead.Enabled = False
                 If TypeOf SimObject Is UnitOperations.Compressor Then
                     DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.Delta_P
                 Else
@@ -270,6 +311,8 @@ Public Class EditingForm_ComprExpndr
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
                 tbPower.Enabled = True
+                tbAdiabaticHead.Enabled = False
+                tbPolytropicHead.Enabled = False
                 If TypeOf SimObject Is UnitOperations.Compressor Then
                     DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.PowerRequired
                 Else
@@ -279,12 +322,52 @@ Public Class EditingForm_ComprExpndr
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
                 tbPower.Enabled = False
+                tbAdiabaticHead.Enabled = False
+                tbPolytropicHead.Enabled = False
+            Case 4
+                tbPressureDrop.Enabled = False
+                tbOutletPressure.Enabled = False
+                tbPower.Enabled = False
                 If TypeOf SimObject Is UnitOperations.Compressor Then
-                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.EnergyStream
+                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.Head
+                    If DirectCast(SimObject, UnitOperations.Compressor).ProcessPath = UnitOperations.Compressor.ProcessPathType.Adiabatic Then
+                        tbAdiabaticHead.Enabled = True
+                        tbPolytropicHead.Enabled = False
+                    Else
+                        tbAdiabaticHead.Enabled = False
+                        tbPolytropicHead.Enabled = True
+                    End If
                 Else
-                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.PowerGenerated
+                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.Head
+                    If DirectCast(SimObject, UnitOperations.Expander).ProcessPath = UnitOperations.Expander.ProcessPathType.Adiabatic Then
+                        tbAdiabaticHead.Enabled = True
+                        tbPolytropicHead.Enabled = False
+                    Else
+                        tbAdiabaticHead.Enabled = False
+                        tbPolytropicHead.Enabled = True
+                    End If
                 End If
-                If TypeOf SimObject Is UnitOperations.Expander Then cbCalcMode.SelectedIndex = 2
+        End Select
+    End Sub
+
+    Private Sub cbProcessPath_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProcessPath.SelectedIndexChanged
+        Select Case cbProcessPath.SelectedIndex
+            Case 0
+                tbEfficiency.Enabled = True
+                tbPolytropicEfficiency.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).ProcessPath = UnitOperations.Compressor.ProcessPathType.Adiabatic
+                Else
+                    DirectCast(SimObject, UnitOperations.Expander).ProcessPath = UnitOperations.Expander.ProcessPathType.Adiabatic
+                End If
+            Case 1
+                tbEfficiency.Enabled = False
+                tbPolytropicEfficiency.Enabled = True
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).ProcessPath = UnitOperations.Compressor.ProcessPathType.Polytropic
+                Else
+                    DirectCast(SimObject, UnitOperations.Expander).ProcessPath = UnitOperations.Expander.ProcessPathType.Polytropic
+                End If
         End Select
     End Sub
 
@@ -337,10 +420,16 @@ Public Class EditingForm_ComprExpndr
                     uobj.CalcMode = UnitOperations.Compressor.CalculationMode.EnergyStream
             End Select
 
-            If sender Is tbEfficiency Then uobj.EficienciaAdiabatica = Double.Parse(tbEfficiency.Text.ParseExpressionToDouble)
+            uobj.ProcessPath = cbProcessPath.SelectedIndex
+
+            If sender Is tbEfficiency Then uobj.AdiabaticEfficiency = Double.Parse(tbEfficiency.Text.ParseExpressionToDouble)
             If sender Is tbPower Then uobj.DeltaQ = su.Converter.ConvertToSI(cbPower.SelectedItem.ToString, tbPower.Text.ParseExpressionToDouble)
             If sender Is tbOutletPressure Then uobj.POut = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)
             If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text.ParseExpressionToDouble)
+
+            If sender Is tbPolytropicEfficiency Then uobj.PolytropicEfficiency = Double.Parse(tbPolytropicEfficiency.Text.ParseExpressionToDouble)
+            If sender Is tbAdiabaticHead Then uobj.AdiabaticHead = su.Converter.ConvertToSI(cbAdiabaticHead.SelectedItem.ToString, tbAdiabaticHead.Text.ParseExpressionToDouble)
+            If sender Is tbPolytropicHead Then uobj.PolytropicHead = su.Converter.ConvertToSI(cbPolytropicHead.SelectedItem.ToString, tbPolytropicHead.Text.ParseExpressionToDouble)
 
         Else
 
@@ -355,10 +444,16 @@ Public Class EditingForm_ComprExpndr
                     uobj.CalcMode = UnitOperations.Expander.CalculationMode.PowerGenerated
             End Select
 
-            If sender Is tbEfficiency Then uobj.EficienciaAdiabatica = Double.Parse(tbEfficiency.Text.ParseExpressionToDouble)
+            uobj.ProcessPath = cbProcessPath.SelectedIndex
+
+            If sender Is tbEfficiency Then uobj.AdiabaticEfficiency = Double.Parse(tbEfficiency.Text.ParseExpressionToDouble)
             If sender Is tbPower Then uobj.DeltaQ = su.Converter.ConvertToSI(cbPower.SelectedItem.ToString, tbPower.Text.ParseExpressionToDouble)
             If sender Is tbOutletPressure Then uobj.POut = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)
             If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text.ParseExpressionToDouble)
+
+            If sender Is tbPolytropicEfficiency Then uobj.PolytropicEfficiency = Double.Parse(tbPolytropicEfficiency.Text.ParseExpressionToDouble)
+            If sender Is tbAdiabaticHead Then uobj.AdiabaticHead = su.Converter.ConvertToSI(cbAdiabaticHead.SelectedItem.ToString, tbAdiabaticHead.Text.ParseExpressionToDouble)
+            If sender Is tbPolytropicHead Then uobj.PolytropicHead = su.Converter.ConvertToSI(cbPolytropicHead.SelectedItem.ToString, tbPolytropicHead.Text.ParseExpressionToDouble)
 
         End If
 
@@ -373,7 +468,8 @@ Public Class EditingForm_ComprExpndr
     End Sub
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbPressureDrop.TextChanged, tbOutletPressure.TextChanged,
-                                                                        tbPower.TextChanged, tbEfficiency.TextChanged
+                                                                        tbPower.TextChanged, tbEfficiency.TextChanged, tbPolytropicEfficiency.TextChanged,
+                                                                        tbPolytropicHead.TextChanged, tbAdiabaticHead.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -386,7 +482,9 @@ Public Class EditingForm_ComprExpndr
     End Sub
 
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbPressureDrop.KeyDown, tbOutletPressure.KeyDown,
-                                                                         tbPower.KeyDown, tbEfficiency.KeyDown
+                                                                         tbPower.KeyDown, tbEfficiency.KeyDown, tbAdiabaticHead.KeyDown,
+                                                                         tbPolytropicHead.KeyDown, tbPolytropicEfficiency.KeyDown
+
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
