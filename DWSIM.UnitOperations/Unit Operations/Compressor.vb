@@ -186,7 +186,7 @@ Namespace UnitOperations
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
-            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, T2s, P2, P2i, Qi, H2, H2s, cpig, cp, cv, mw, fx, fx0, fx00, P2i0, P2i00 As Double
+            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, T2s, P2, P2i, Qloop, Qi, H2, H2s, cpig, cp, cv, mw, fx, fx0, fx00, P2i0, P2i00 As Double
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
 
@@ -284,16 +284,16 @@ Namespace UnitOperations
                     H2s = tmp.CalculatedEnthalpy
 
                     If ProcessPath = ProcessPathType.Adiabatic Then
-                        Qi = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
+                        Qloop = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
                     Else
-                        Qi = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.PolytropicEfficiency / 100)
+                        Qloop = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.PolytropicEfficiency / 100)
                     End If
 
                     If DebugMode Then AppendDebugLine(String.Format("Qi: {0}", Qi))
 
                     fx00 = fx0
                     fx0 = fx
-                    fx = Qi - DeltaQ
+                    fx = Qloop - DeltaQ
 
                     P2i00 = P2i0
                     P2i0 = P2i
@@ -308,7 +308,7 @@ Namespace UnitOperations
 
                     icnt += 1
 
-                Loop Until Math.Abs((DeltaQ - Qi) / DeltaQ) < 0.001
+                Loop Until Math.Abs((DeltaQ - Qloop) / DeltaQ) < 0.001
 
                 P2 = P2i
 
@@ -411,26 +411,33 @@ Namespace UnitOperations
 
                 PolytropicCoefficient = n_poly
 
-                If CalcMode <> CalculationMode.Head Then
+                Dim CFi, Wisent, Wpoly, Wic, Wpc As Double
 
-                    Dim CFi, Wisent, Wpoly, Wic, Wpc As Double
+                ' heads
 
-                    ' heads
+                CFi = (H2s - Hi) * 1000 / (n_isent / (n_isent - 1) * (P2 / rho2i - Pi / rho1))
 
-                    CFi = (H2s - Hi) * 1000 / (n_isent / (n_isent - 1) * (P2 / rho2i - Pi / rho1))
+                Wisent = Qi / 1000 * mw * n_isent / (n_isent - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
 
-                    Wisent = Qi / 1000 * mw * n_isent / (n_isent - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
+                ' volume exponent (polyt)
 
-                    ' volume exponent (polyt)
+                Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
-                    Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
+                Wic = Wisent / (AdiabaticEfficiency / 100)
 
-                    Wic = Wisent / (AdiabaticEfficiency / 100)
+                Wpc = Wpoly / (PolytropicEfficiency / 100)
 
-                    Wpc = Wpoly / (PolytropicEfficiency / 100)
+                If CalcMode = CalculationMode.Head And ProcessPath = ProcessPathType.Adiabatic Then
+
+                    PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
+
+                ElseIf CalcMode = CalculationMode.Head And ProcessPath = ProcessPathType.Polytropic Then
 
                     AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
 
+                Else
+
+                    AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
                     PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
 
                 End If
@@ -607,7 +614,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
                 AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
 
-                PolytropicHead = Wpoly * 1000 * Wi / 9.8 ' m
+                PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
 
                 AdiabaticCoefficient = n_isent
 
