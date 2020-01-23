@@ -2605,10 +2605,10 @@ Namespace PropertyPackages
                                     xv = (H - hl) / (hv - hl)
                                 End If
                                 IObj?.SetCurrent()
-                                If Tsat > Me.AUX_TCM(Phase.Mixture) Then
-                                    xv = 1.0#
-                                    LoopVarState = State.Vapor
-                                End If
+                                'If Tsat > Me.AUX_TCM(Phase.Mixture) Then
+                                '    xv = 1.0#
+                                '    LoopVarState = State.Vapor
+                                'End If
                                 xl = 1 - xv - xs
 
                                 If xv <> 0.0# And xv <> 1.0# And xs = 0.0# Then

@@ -58,12 +58,11 @@ Module Extensions
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToArrayString(vector As String()) As String
 
-        Dim retstr As String = "{ "
+        Dim retstr As String = ""
         For Each s In vector
             retstr += s + ", "
         Next
-        retstr.TrimEnd(",")
-        retstr += "}"
+        retstr = retstr.Trim().TrimEnd(",")
 
         Return retstr
 
@@ -72,12 +71,11 @@ Module Extensions
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToArrayString(vector As Object()) As String
 
-        Dim retstr As String = "{ "
+        Dim retstr As String = ""
         For Each d In vector
             retstr += d.ToString + ", "
         Next
-        retstr.TrimEnd(",")
-        retstr += "}"
+        retstr = retstr.Trim().TrimEnd(",")
 
         Return retstr
 

@@ -699,30 +699,49 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("PROP_") Then
 
-                    Case 0
-                        'PROP_CO_0	Pressure Increase (Head)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP)
-                    Case 1
-                        'PROP_CO_1(Efficiency)
-                        value = Me.AdiabaticEfficiency
-                    Case 2
-                        'PROP_CO_2(Delta - T)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT)
-                    Case 3
-                        'PROP_CO_3	Power Required
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ)
-                    Case 4
-                        'PROP_CO_4	Pressure Out
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.POut)
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                End Select
+                    Select Case propidx
 
-                Return value
+                        Case 0
+                            'PROP_CO_0	Pressure Increase (Head)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP)
+                        Case 1
+                            'PROP_CO_1(Efficiency)
+                            value = Me.AdiabaticEfficiency
+                        Case 2
+                            'PROP_CO_2(Delta - T)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT)
+                        Case 3
+                            'PROP_CO_3	Power Required
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ)
+                        Case 4
+                            'PROP_CO_4	Pressure Out
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.POut)
 
+                    End Select
+
+                    Return value
+
+                Else
+
+                    Select Case prop
+                        Case "AdiabaticHead"
+                            Return SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.AdiabaticHead)
+                        Case "PolytropicHead"
+                            Return SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.PolytropicHead)
+                        Case "AdiabaticCoefficient"
+                            Return AdiabaticCoefficient
+                        Case "PolytropicCoefficient"
+                            Return PolytropicCoefficient
+                        Case "PolytropicEfficiency"
+                            Return PolytropicEfficiency
+                    End Select
+
+                End If
             End If
 
         End Function
@@ -737,10 +756,17 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                     For i = 2 To 3
                         proplist.Add("PROP_CO_" + CStr(i))
                     Next
+                    proplist.Add("AdiabaticCoefficient")
+                    proplist.Add("PolytropicCoefficient")
                 Case PropertyType.RW
                     For i = 0 To 4
                         proplist.Add("PROP_CO_" + CStr(i))
                     Next
+                    proplist.Add("PolytropicEfficiency")
+                    proplist.Add("AdiabaticCoefficient")
+                    proplist.Add("PolytropicCoefficient")
+                    proplist.Add("AdiabaticHead")
+                    proplist.Add("PolytropicHead")
                 Case PropertyType.WR
                     For i = 0 To 1
                         proplist.Add("PROP_CO_" + CStr(i))
@@ -750,6 +776,11 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                     For i = 0 To 4
                         proplist.Add("PROP_CO_" + CStr(i))
                     Next
+                    proplist.Add("PolytropicEfficiency")
+                    proplist.Add("AdiabaticCoefficient")
+                    proplist.Add("PolytropicCoefficient")
+                    proplist.Add("AdiabaticHead")
+                    proplist.Add("PolytropicHead")
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
@@ -761,20 +792,38 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
-                Case 0
-                    'PROP_CO_0	Pressure Increase (Head)
-                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
-                Case 1
-                    'PROP_CO_1(Efficiency)
-                    Me.AdiabaticEfficiency = propval
-                Case 4
-                    'PROP_CO_4(Pressure Out)
-                    Me.POut = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-            End Select
+            If prop.Contains("PROP_") Then
+
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Select Case propidx
+                    Case 0
+                        'PROP_CO_0	Pressure Increase (Head)
+                        Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                    Case 1
+                        'PROP_CO_1(Efficiency)
+                        Me.AdiabaticEfficiency = propval
+                    Case 4
+                        'PROP_CO_4(Pressure Out)
+                        Me.POut = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                End Select
+
+            Else
+
+                Select Case prop
+                    Case "AdiabaticHead"
+                        AdiabaticHead = SystemsOfUnits.Converter.ConvertToSI(su.distance, propval)
+                    Case "PolytropicHead"
+                        PolytropicHead = SystemsOfUnits.Converter.ConvertToSI(su.distance, propval)
+                    Case "PolytropicEfficiency"
+                        PolytropicEfficiency = propval
+                End Select
+
+            End If
+
             Return 1
+
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
@@ -786,29 +835,48 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As String = ""
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("PROP_CO") Then
 
-                    Case 0
-                        'PROP_CO_0	Pressure Increase (Head)
-                        value = su.deltaP
-                    Case 1
-                        'PROP_CO_1(Efficiency)
-                        value = ""
-                    Case 2
-                        'PROP_CO_2(Delta - T)
-                        value = su.deltaT
-                    Case 3
-                        'PROP_CO_3	Power Required
-                        value = su.heatflow
-                    Case 4
-                        'PROP_CO_4	Pressure Out
-                        value = su.pressure
-                End Select
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Return value
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_CO_0	Pressure Increase (Head)
+                            value = su.deltaP
+                        Case 1
+                            'PROP_CO_1(Efficiency)
+                            value = ""
+                        Case 2
+                            'PROP_CO_2(Delta - T)
+                            value = su.deltaT
+                        Case 3
+                            'PROP_CO_3	Power Required
+                            value = su.heatflow
+                        Case 4
+                            'PROP_CO_4	Pressure Out
+                            value = su.pressure
+                    End Select
+
+                    Return value
+
+                Else
+
+                    If prop.Contains("Head") Then
+
+                        Return su.distance
+
+                    Else
+
+                        Return ""
+
+                    End If
+
+                End If
+
             End If
+
         End Function
 
         Public Overrides Sub DisplayEditForm()
@@ -879,39 +947,52 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
             str.AppendLine("Compressor: " & Me.GraphicObject.Tag)
             str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
             str.AppendLine()
-            str.AppendLine("Inlet conditions")
+            str.AppendLine("Inlet Conditions")
             str.AppendLine()
             str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature).ToString(numberformat, ci) & " " & su.temperature)
             str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure).ToString(numberformat, ci) & " " & su.pressure)
-            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow).ToString(numberformat, ci) & " " & su.massflow)
-            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow).ToString(numberformat, ci) & " " & su.volumetricFlow)
-            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Mass Flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Volumetric Flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor Fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
             str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
-            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine("    Molar Composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
             str.AppendLine()
-            str.AppendLine("Calculation parameters")
+            str.AppendLine("Calculation Parameters")
             str.AppendLine()
-            str.AppendLine("    Calculation mode: " & CalcMode.ToString)
+            str.AppendLine("    Calculation Mode: " & CalcMode.ToString)
+            str.AppendLine("    Thermodynamic Path: " & ProcessPath.ToString)
             Select Case CalcMode
                 Case CalculationMode.Delta_P
-                    str.AppendLine("    Pressure increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
+                    str.AppendLine("    Pressure Increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
                 Case CalculationMode.OutletPressure
-                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
+                    str.AppendLine("    Outlet Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
                 Case CalculationMode.PowerRequired, CalculationMode.EnergyStream
                     str.AppendLine("   Power Required: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ)).ToString(numberformat, ci) & " " & su.heatflow)
+                Case CalculationMode.Head
+                    Select Case ProcessPath
+                        Case ProcessPathType.Adiabatic
+                            str.AppendLine("    Specified Head: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Convert.ToDouble(AdiabaticHead)).ToString(numberformat, ci) & " " & su.distance)
+                        Case ProcessPathType.Polytropic
+                            str.AppendLine("    Specified Head: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Convert.ToDouble(PolytropicHead)).ToString(numberformat, ci) & " " & su.distance)
+                    End Select
             End Select
-            str.AppendLine("    Efficiency: " & Convert.ToDouble(AdiabaticEfficiency).ToString(numberformat, ci))
+            str.AppendLine("    Adiabatic Efficiency: " & Convert.ToDouble(AdiabaticEfficiency).ToString(numberformat, ci))
+            str.AppendLine("    Polytropic Efficiency: " & Convert.ToDouble(PolytropicEfficiency).ToString(numberformat, ci))
             str.AppendLine()
             str.AppendLine("Results")
             str.AppendLine()
             Select Case CalcMode
                 Case CalculationMode.Delta_P
-                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
+                    str.AppendLine("    Outlet Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
                 Case CalculationMode.OutletPressure
-                    str.AppendLine("    Pressure increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
+                    str.AppendLine("    Pressure Increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
             End Select
-            str.AppendLine("    Temperature increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
-            str.AppendLine("    Power required: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ)).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Adiabatic Coefficient: " & Convert.ToDouble(AdiabaticCoefficient).ToString(numberformat, ci))
+            str.AppendLine("    Polytropic Coefficient: " & Convert.ToDouble(PolytropicCoefficient).ToString(numberformat, ci))
+            str.AppendLine("    Temperature Change: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Power Generated: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ)).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Adiabatic Head: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Convert.ToDouble(AdiabaticHead)).ToString(numberformat, ci) & " " & su.distance)
+            str.AppendLine("    Polytropic Head: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Convert.ToDouble(PolytropicHead)).ToString(numberformat, ci) & " " & su.distance)
 
             Return str.ToString
 
@@ -949,11 +1030,32 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                             New String() {"Power Required",
                             Me.DeltaQ.ConvertFromSI(su.heatflow).ToString(nf),
                             su.heatflow}))
+                Case CalculationMode.Head
+                    If ProcessPath = ProcessPathType.Adiabatic Then
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Compressor Head",
+                            Me.AdiabaticHead.ConvertFromSI(su.distance).ToString(nf),
+                            su.distance}))
+                    Else
+                        list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Compressor Head",
+                            Me.PolytropicHead.ConvertFromSI(su.distance).ToString(nf),
+                            su.distance}))
+                    End If
             End Select
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
+                    New String() {"Thermodynamic Path",
+                    ProcessPath.ToString}))
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Adiabatic Efficiency",
                             Me.AdiabaticEfficiency.ToString(nf),
+                            "%"}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Polytropic Efficiency",
+                            Me.PolytropicEfficiency.ToString(nf),
                             "%"}))
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results"}))
@@ -972,6 +1074,16 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
             End Select
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Adiabatic Coefficient",
+                            Me.AdiabaticCoefficient.ToString(nf),
+                            ""}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Polytropic Coefficient",
+                            Me.PolytropicCoefficient.ToString(nf),
+                            ""}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Temperature Change",
                             Me.DeltaT.ConvertFromSI(su.deltaT).ToString(nf),
                             su.deltaT}))
@@ -980,6 +1092,16 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                             New String() {"Power Required",
                             Me.DeltaQ.ConvertFromSI(su.heatflow).ToString(nf),
                             su.heatflow}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Adiabatic Head",
+                            Me.AdiabaticHead.ConvertFromSI(su.distance).ToString(nf),
+                            su.distance}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Polytropic Head",
+                            Me.PolytropicHead.ConvertFromSI(su.distance).ToString(nf),
+                            su.distance}))
 
             Return list
 
@@ -994,8 +1116,16 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 Return "If you chose the 'Outlet Pressure' calculation mode, enter the desired outlet pressure."
             ElseIf p.Equals("Power Required") Then
                 Return "If you chose the 'Power Required' calculation mode, enter the desired required compressor power."
-            ElseIf p.Equals("Efficiency (%)") Then
-                Return "Enter the isentropic efficiency of the compressor. 100% efficiency means a totally isentropic process."
+            ElseIf p.Equals("Adiabatic Efficiency (%)") Then
+                Return "Enter the isentropic efficiency of the compressor, if the Thermodynamic Path is Adiabatic."
+            ElseIf p.Equals("Polytropic Efficiency (%)") Then
+                Return "Enter the polytropic efficiency of the compressor, if the Thermodynamic Path is Polytropic."
+            ElseIf p.Equals("Adiabatic Head") Then
+                Return "If you chose the 'Known Head' calculation mode and the thermo path is Adiabatic, enter the compressor's Adiabatic Head."
+            ElseIf p.Equals("Polytropic Head") Then
+                Return "If you chose the 'Known Head' calculation mode and the thermo path is Polytropic, enter the compressor's Polytropic Head."
+            ElseIf p.Equals("Thermodynamic Path") Then
+                Return "Select the Thermodynamic Path according to the available data."
             Else
                 Return p
             End If

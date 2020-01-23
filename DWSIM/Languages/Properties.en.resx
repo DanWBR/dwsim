@@ -154,11 +154,11 @@
     <comment>0</comment>
   </data>
   <data name="PROP_CO_0" xml:space="preserve">
-    <value>Pressure Increase (Head)</value>
+    <value>Pressure Increase</value>
     <comment>1</comment>
   </data>
   <data name="PROP_CO_1" xml:space="preserve">
-    <value>Efficiency</value>
+    <value>Adiabatic Efficiency</value>
     <comment>1</comment>
   </data>
   <data name="PROP_CO_2" xml:space="preserve">
@@ -1547,7 +1547,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_TU_1" xml:space="preserve">
-    <value>Efficiency</value>
+    <value>Adiabatic Efficiency</value>
     <comment>1</comment>
   </data>
   <data name="PROP_TU_2" xml:space="preserve">

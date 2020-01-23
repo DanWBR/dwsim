@@ -140,7 +140,8 @@ Namespace UnitOperations
         Public Overridable Sub PerformPostCalcValidation() Implements ISimulationObject.PerformPostCalcValidation
 
             If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And
-                GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec Then
+                GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec And
+                GraphicObject.ObjectType <> ObjectType.OT_Recycle And GraphicObject.ObjectType <> ObjectType.OT_EnergyRecycle Then
 
                 'calculate mass balance
 
@@ -199,12 +200,12 @@ Namespace UnitOperations
                 If GraphicObject.EnergyConnector.IsAttached Then
                     Dim inobj = FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom.Name)
                     If inobj.GraphicObject.IsEnergyStream And inobj.GraphicObject.Active Then
-                        eb += Convert.ToDouble(inobj.GetPropertyValue("PROP_ES_0"))
+                        eb -= Convert.ToDouble(inobj.GetPropertyValue("PROP_ES_0"))
                         ebt += Math.Abs(Convert.ToDouble(inobj.GetPropertyValue("PROP_ES_0")))
                     End If
                     Dim outobj = FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     If outobj.GraphicObject.IsEnergyStream And outobj.GraphicObject.Active Then
-                        eb -= Convert.ToDouble(outobj.GetPropertyValue("PROP_ES_0"))
+                        eb += Convert.ToDouble(outobj.GetPropertyValue("PROP_ES_0"))
                         ebt += Math.Abs(Convert.ToDouble(outobj.GetPropertyValue("PROP_ES_0")))
                     End If
                 End If

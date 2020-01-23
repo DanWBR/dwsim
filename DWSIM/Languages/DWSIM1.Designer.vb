@@ -497,6 +497,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Coeficiente Adiabático.
+        '''</summary>
+        Friend Shared ReadOnly Property AdiabaticCoefficient() As String
+            Get
+                Return ResourceManager.GetString("AdiabaticCoefficient", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Head Adiabático.
+        '''</summary>
+        Friend Shared ReadOnly Property AdiabaticHead() As String
+            Get
+                Return ResourceManager.GetString("AdiabaticHead", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Adicionar figura.
         '''</summary>
         Friend Shared ReadOnly Property Adicionarfigura() As String
@@ -11139,6 +11157,33 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Plstico() As String
             Get
                 Return ResourceManager.GetString("Plstico", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Coeficiente Politrópico.
+        '''</summary>
+        Friend Shared ReadOnly Property PolytropicCoefficient() As String
+            Get
+                Return ResourceManager.GetString("PolytropicCoefficient", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Eficiência Politrópica.
+        '''</summary>
+        Friend Shared ReadOnly Property PolytropicEfficiency() As String
+            Get
+                Return ResourceManager.GetString("PolytropicEfficiency", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Head Politrópico.
+        '''</summary>
+        Friend Shared ReadOnly Property PolytropicHead() As String
+            Get
+                Return ResourceManager.GetString("PolytropicHead", resourceCulture)
             End Get
         End Property
         

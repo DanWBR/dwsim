@@ -5583,4 +5583,19 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="reportsavailable" xml:space="preserve">
     <value>{0} relatório(s) disponível(is).</value>
   </data>
+  <data name="AdiabaticCoefficient" xml:space="preserve">
+    <value>Coeficiente Adiabático</value>
+  </data>
+  <data name="AdiabaticHead" xml:space="preserve">
+    <value>Head Adiabático</value>
+  </data>
+  <data name="PolytropicCoefficient" xml:space="preserve">
+    <value>Coeficiente Politrópico</value>
+  </data>
+  <data name="PolytropicEfficiency" xml:space="preserve">
+    <value>Eficiência Politrópica</value>
+  </data>
+  <data name="PolytropicHead" xml:space="preserve">
+    <value>Head Politrópico</value>
+  </data>
 </root>

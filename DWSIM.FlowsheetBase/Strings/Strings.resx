@@ -5345,4 +5345,19 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PP_USE_IDEAL_SOLID_FUGACITY" xml:space="preserve">
     <value>Use Ideal Solid Fugacity</value>
   </data>
+  <data name="AdiabaticCoefficient" xml:space="preserve">
+    <value>Adiabatic Coefficient</value>
+  </data>
+  <data name="AdiabaticHead" xml:space="preserve">
+    <value>Adiabatic Head</value>
+  </data>
+  <data name="PolytropicCoefficient" xml:space="preserve">
+    <value>Polytropic Coefficient</value>
+  </data>
+  <data name="PolytropicEfficiency" xml:space="preserve">
+    <value>Polytropic Efficiency</value>
+  </data>
+  <data name="PolytropicHead" xml:space="preserve">
+    <value>Polytropic Head</value>
+  </data>
 </root>
