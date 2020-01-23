@@ -278,7 +278,7 @@ Public Class FormMain
                     '    Dim c1, c2, c3, c4, c5 As WebBrowser
                     '    Dim a1, a2, a3, a4, a5 As String
 
-                    '    a1 = "https://www.patreon.com/dwsim/posts"
+                    '    a1 = "https://www.patreon.com/dwsim"
                     '    a2 = "https://sourceforge.net/p/dwsim/discussion/"
                     '    a3 = "https://dwsim.fossee.in/forum"
                     '    a4 = "https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"
@@ -310,7 +310,7 @@ Public Class FormMain
                         Dim c1, c2, c3, c4, c5 As ChromiumWebBrowser
                         Dim a1, a2, a3, a4, a5 As String
 
-                        a1 = "https://www.patreon.com/dwsim/posts"
+                        a1 = "https://www.patreon.com/dwsim"
                         a2 = "https://sourceforge.net/p/dwsim/discussion/"
                         a3 = "https://dwsim.fossee.in/forum"
                         a4 = "https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"

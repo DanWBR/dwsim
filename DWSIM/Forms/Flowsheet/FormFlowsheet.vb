@@ -2648,7 +2648,7 @@ Public Class FormFlowsheet
 
     Public Function GetTranslatedString(text As String, locale As String) As String Implements Interfaces.IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
 
-        Return DWSIM.App.GetLocalString(text)
+        Return GetTranslatedString1(text)
 
     End Function
 

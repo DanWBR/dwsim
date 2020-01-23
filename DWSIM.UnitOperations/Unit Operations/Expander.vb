@@ -506,9 +506,10 @@ Namespace UnitOperations
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
                 If prop.Contains("PROP_") Then
+
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
                     Select Case propidx
 
