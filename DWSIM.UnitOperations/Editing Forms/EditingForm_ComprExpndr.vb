@@ -205,6 +205,8 @@ Public Class EditingForm_ComprExpndr
                         cbCalcMode.SelectedIndex = 1
                     Case UnitOperations.Expander.CalculationMode.PowerGenerated
                         cbCalcMode.SelectedIndex = 2
+                    Case UnitOperations.Expander.CalculationMode.Head
+                        cbCalcMode.SelectedIndex = 4
                 End Select
 
                 Select Case uobj.ProcessPath

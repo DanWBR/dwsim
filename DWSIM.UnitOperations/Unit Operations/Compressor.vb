@@ -371,7 +371,7 @@ Namespace UnitOperations
 
                 tms.PropertyPackage = PropertyPackage
                 PropertyPackage.CurrentMaterialStream = tms
-                tms.Phases(0).Properties.temperature = T2
+                tms.Phases(0).Properties.temperature = T2s
                 tms.Phases(0).Properties.pressure = P2
                 tms.Calculate()
 
@@ -379,7 +379,7 @@ Namespace UnitOperations
 
                 tms.PropertyPackage = PropertyPackage
                 PropertyPackage.CurrentMaterialStream = tms
-                tms.Phases(0).Properties.temperature = T2s
+                tms.Phases(0).Properties.temperature = T2
                 tms.Phases(0).Properties.pressure = P2
                 tms.Calculate()
 
@@ -411,17 +411,19 @@ Namespace UnitOperations
 
                 PolytropicCoefficient = n_poly
 
-                Dim CFi, Wisent, Wpoly, Wic, Wpc As Double
+                Dim CFi, CFp, Wisent, Wpoly, Wic, Wpc As Double
 
                 ' heads
 
                 CFi = (H2s - Hi) * 1000 / (n_isent / (n_isent - 1) * (P2 / rho2i - Pi / rho1))
 
+                CFp = (H2s - Hi) * 1000 / (n_poly / (n_poly - 1) * (P2 / rho2i - Pi / rho1))
+
                 Wisent = Qi / 1000 * mw * n_isent / (n_isent - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
 
                 ' volume exponent (polyt)
 
-                Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
+                Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFp * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
                 Wic = Wisent / (AdiabaticEfficiency / 100)
 
@@ -553,14 +555,14 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
                 IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
 
-                Dim rho1, rho2, rho2i, n_isent, n_poly, CFi, Wisent, Wpoly, Wic, Wpc, fce As Double
+                Dim rho1, rho2, rho2i, n_isent, n_poly, CFi, CFp, Wisent, Wpoly, Wic, Wpc, fce As Double
                 Dim tms As MaterialStream = msin.Clone()
 
                 rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
 
                 tms.PropertyPackage = PropertyPackage
                 PropertyPackage.CurrentMaterialStream = tms
-                tms.Phases(0).Properties.temperature = T2
+                tms.Phases(0).Properties.temperature = T2s
                 tms.Phases(0).Properties.pressure = P2
                 tms.Calculate()
 
@@ -568,7 +570,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
                 tms.PropertyPackage = PropertyPackage
                 PropertyPackage.CurrentMaterialStream = tms
-                tms.Phases(0).Properties.temperature = T2s
+                tms.Phases(0).Properties.temperature = T2
                 tms.Phases(0).Properties.pressure = P2
                 tms.Calculate()
 
@@ -586,7 +588,9 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
                 n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
 
-                Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
+                CFp = (H2s - Hi) * 1000 / (n_poly / (n_poly - 1) * (P2 / rho2i - Pi / rho1))
+
+                Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFp * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
                 fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
 
@@ -596,7 +600,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
                     Wic = Wisent / (AdiabaticEfficiency / 100)
 
-                    PolytropicEfficiency = fce * AdiabaticEfficiency
+                    PolytropicEfficiency = AdiabaticEfficiency * fce
 
                     Wpc = Wpoly / (PolytropicEfficiency / 100)
 
@@ -847,7 +851,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                             value = su.deltaP
                         Case 1
                             'PROP_CO_1(Efficiency)
-                            value = ""
+                            value = "%"
                         Case 2
                             'PROP_CO_2(Delta - T)
                             value = su.deltaT
@@ -866,6 +870,10 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                     If prop.Contains("Head") Then
 
                         Return su.distance
+
+                    ElseIf prop.Contains("Efficiency") Then
+
+                        Return "%"
 
                     Else
 

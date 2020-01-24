@@ -1,4 +1,6 @@
-﻿Public Class ObjectEditorForm
+﻿Imports System.Timers
+
+Public Class ObjectEditorForm
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -9,7 +11,14 @@
 
     Public InspReportBar As InspectorReportBar
 
+    Private WithEvents DisplayTimer As New Timers.Timer
+
+    Private DisplayTime As DateTime
+
     Private Sub InitializeComponent()
+
+        DisplayTimer.Interval = 100
+
         Me.SuspendLayout()
         '
         'ObjectEditorForm
@@ -61,6 +70,22 @@
             End If
         End If
 
+    End Sub
+
+    Private Sub ToolTipValues_Popup(sender As Object, e As PopupEventArgs) Handles ToolTipValues.Popup
+        DisplayTime = Date.Now
+        DisplayTimer.Start()
+    End Sub
+
+    Private Sub DisplayTimer_Elapsed(sender As Object, e As ElapsedEventArgs) Handles DisplayTimer.Elapsed
+        If (e.SignalTime - DisplayTime).TotalSeconds >= 10 Then
+            Try
+                ToolTipValues.Hide(_currentToolTipControl)
+            Catch ex As Exception
+            Finally
+                DisplayTimer.Stop()
+            End Try
+        End If
     End Sub
 
 End Class

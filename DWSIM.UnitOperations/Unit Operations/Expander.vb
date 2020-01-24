@@ -228,14 +228,22 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
 
-                    Me.DeltaQ = -Wi * (H2 - Hi) * (Me.AdiabaticEfficiency / 100)
+
+                    If ProcessPath = ProcessPathType.Adiabatic Then
+                        Me.DeltaQ = -Wi * (H2s - Hi) * (Me.AdiabaticEfficiency / 100)
+                        H2 = Hi - Me.DeltaQ / Wi
+                    Else
+                        Me.DeltaQ = -Wi * (H2s - Hi) * (Me.PolytropicEfficiency / 100)
+                        H2 = Hi - Me.DeltaQ / Wi
+                    End If
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated real generated power = {0} kW", DeltaQ))
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ / Wi))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ / Wi, T2)
+
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2s)
 
                     T2 = tmp.CalculatedTemperature
 
@@ -254,10 +262,8 @@ Namespace UnitOperations
                     Dim k As Double = cp / cv
 
                     If ProcessPath = ProcessPathType.Adiabatic Then
-                        H2 = Hi - Me.DeltaQ * (Me.AdiabaticEfficiency / 100) / Wi
                         P2i = Pi * ((1 - DeltaQ / (Me.AdiabaticEfficiency / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
                     Else
-                        H2 = Hi - Me.DeltaQ * (Me.PolytropicEfficiency / 100) / Wi
                         P2i = Pi * ((1 - DeltaQ / (Me.PolytropicEfficiency / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
                     End If
 
@@ -302,13 +308,6 @@ Namespace UnitOperations
 
                     P2 = P2i
 
-                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ / Wi))
-
-                    IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2)
-
-                    T2 = tmp.CalculatedTemperature
-
                     POut = P2
                     DeltaP = Pi - P2
 
@@ -318,27 +317,40 @@ Namespace UnitOperations
 
             End Select
 
+            If ProcessPath = ProcessPathType.Adiabatic Then
+                H2 = Hi + (H2s - Hi) * (Me.AdiabaticEfficiency / 100)
+            Else
+                H2 = Hi + (H2s - Hi) * (Me.PolytropicEfficiency / 100)
+            End If
+
+            If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ / Wi))
+
+            IObj?.SetCurrent()
+            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2s)
+
+            T2 = tmp.CalculatedTemperature
+
             CheckSpec(T2, True, "outlet temperature")
 
             Me.DeltaT = T2 - Ti
 
             If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-            H2 = Hi - Me.DeltaQ / Wi
-
             OutletTemperature = T2
 
             IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
             IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
             IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
-            Dim rho1, rho2, rho2i, n_isent, n_poly, CFi, Wisent, Wpoly, Wic, Wpc, fce As Double
+
+            Dim rho1, rho2, rho2i, n_isent, n_poly, CFi, CFp, Wisent, Wpoly, Wic, Wpc, fce As Double
+
             Dim tms As MaterialStream = ims.Clone()
 
             rho1 = ims.GetPhase("Mixture").Properties.density.GetValueOrDefault
 
             tms.PropertyPackage = PropertyPackage
             PropertyPackage.CurrentMaterialStream = tms
-            tms.Phases(0).Properties.temperature = T2
+            tms.Phases(0).Properties.temperature = T2s
             tms.Phases(0).Properties.pressure = P2
             tms.Calculate()
 
@@ -346,7 +358,7 @@ Namespace UnitOperations
 
             tms.PropertyPackage = PropertyPackage
             PropertyPackage.CurrentMaterialStream = tms
-            tms.Phases(0).Properties.temperature = T2s
+            tms.Phases(0).Properties.temperature = T2
             tms.Phases(0).Properties.pressure = P2
             tms.Calculate()
 
@@ -364,7 +376,9 @@ Namespace UnitOperations
 
             n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
 
-            Wpoly = -Qi / 1000 * mw * n_poly / (n_poly - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
+            CFp = (H2s - Hi) * 1000 / (n_poly / (n_poly - 1) * (P2 / rho2i - Pi / rho1))
+
+            Wpoly = -Qi / 1000 * mw * n_poly / (n_poly - 1) * CFp * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
             fce = 1 / (((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1))
 
@@ -374,7 +388,7 @@ Namespace UnitOperations
 
                 Wic = Wisent * (AdiabaticEfficiency / 100)
 
-                PolytropicEfficiency = AdiabaticEfficiency * fce
+                PolytropicEfficiency = AdiabaticEfficiency / fce
 
                 Wpc = Wpoly * (PolytropicEfficiency / 100)
 
@@ -388,7 +402,7 @@ Namespace UnitOperations
 
                 Wpc = Wpoly * (PolytropicEfficiency / 100)
 
-                AdiabaticEfficiency = PolytropicEfficiency / fce
+                AdiabaticEfficiency = PolytropicEfficiency * fce
 
                 Wic = Wisent * (AdiabaticEfficiency / 100)
 
@@ -657,7 +671,7 @@ Namespace UnitOperations
                             value = su.deltaP
                         Case 1
                             'PROP_CO_1(Efficiency)
-                            value = ""
+                            value = "%"
                         Case 2
                             'PROP_CO_2(Delta - T)
                             value = su.deltaT
@@ -676,6 +690,10 @@ Namespace UnitOperations
                     If prop.Contains("Head") Then
 
                         Return su.distance
+
+                    ElseIf prop.Contains("Efficiency") Then
+
+                        Return "%"
 
                     Else
 

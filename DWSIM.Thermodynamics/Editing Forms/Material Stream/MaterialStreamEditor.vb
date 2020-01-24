@@ -197,16 +197,22 @@ Public Class MaterialStreamEditor
 
             'property package
 
-            Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
-            cbPropPack.Items.Clear()
-            cbPropPack.Items.AddRange(proppacks)
-            cbPropPack.SelectedItem = .PropertyPackage.Tag
+            Try
+                Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
+                cbPropPack.Items.Clear()
+                cbPropPack.Items.AddRange(proppacks)
+                cbPropPack.SelectedItem = .PropertyPackage.Tag
+            Catch ex As Exception
+            End Try
 
-            Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
-            cbFlashAlg.Items.Clear()
-            cbFlashAlg.Items.Add("Default")
-            cbFlashAlg.Items.AddRange(flashalgos)
-            If .PreferredFlashAlgorithmTag <> "" Then cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag Else cbFlashAlg.SelectedIndex = 0
+            Try
+                Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
+                cbFlashAlg.Items.Clear()
+                cbFlashAlg.Items.Add("Default")
+                cbFlashAlg.Items.AddRange(flashalgos)
+                If .PreferredFlashAlgorithmTag <> "" Then cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag Else cbFlashAlg.SelectedIndex = 0
+            Catch ex As Exception
+            End Try
 
             'compound amounts floating table
 
