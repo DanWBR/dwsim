@@ -163,6 +163,15 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
   </data>
+  <data name="btnCurves.Text" xml:space="preserve">
+    <value>Edit Performance Curves</value>
+  </data>
+  <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 13</value>
+  </data>
+  <data name="Label24.Text" xml:space="preserve">
+    <value>Performance Curves</value>
+  </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 13</value>
   </data>
@@ -199,10 +208,6 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>Thermodynamic Process</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tbPolytropicEfficiency.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbPolytropicEfficiency.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -210,6 +215,7 @@
   <data name="tbPolytropicEfficiency.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 20</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbPolytropicEfficiency.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
@@ -275,6 +281,9 @@
   </data>
   <data name="cbCalcMode.Items4" xml:space="preserve">
     <value>Known Head</value>
+  </data>
+  <data name="cbCalcMode.Items5" xml:space="preserve">
+    <value>Performance Curves</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>

@@ -374,6 +374,12 @@
     <Compile Include="Editing Forms\Supporting\EditingForm_Column_Connections_New.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Compr_Curves.designer.vb">
+      <DependentUpon>EditingForm_Compr_Curves.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Compr_Curves.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.Designer.vb">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </Compile>
@@ -852,6 +858,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections_New.resx">
       <DependentUpon>EditingForm_Column_Connections_New.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Compr_Curves.en.resx">
+      <DependentUpon>EditingForm_Compr_Curves.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Compr_Curves.resx">
+      <DependentUpon>EditingForm_Compr_Curves.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.de.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>

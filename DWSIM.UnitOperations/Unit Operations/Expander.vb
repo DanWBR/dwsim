@@ -24,6 +24,7 @@ Imports System.Windows.Forms
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.MathOps.MathEx.Interpolation
 
 Namespace UnitOperations
 
@@ -39,6 +40,7 @@ Namespace UnitOperations
             Delta_P = 1
             PowerGenerated = 2
             Head = 3
+            Curves = 4
         End Enum
 
         Public Enum ProcessPathType
@@ -74,6 +76,71 @@ Namespace UnitOperations
 
         Public Property PolytropicHead As Double = 0.0
 
+
+        'curves
+
+        Public Property EquipType As String = ""
+
+        Public Property CurvesDB As String = ""
+
+        Public Property CurveFlow As Double
+
+        Public Property CurveEff As Double
+
+        Public Property CurveHead As Double
+
+        Public Property Curves As New Dictionary(Of String, PumpOps.Curve)
+
+        Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
+
+            MyBase.LoadData(data)
+
+            Curves = New Dictionary(Of String, PumpOps.Curve)
+
+            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Curves").Elements.ToList
+                Dim cv As New PumpOps.Curve()
+                cv.LoadData(xel.Elements.ToList)
+                Curves.Add(cv.Name, cv)
+            Next
+
+            If Curves.Count = 0 Then CreateCurves()
+
+            Dim eleff = data.Where(Function(x) x.Name = "EficienciaAdiabatica").FirstOrDefault
+
+            If eleff IsNot Nothing Then
+                AdiabaticEfficiency = eleff.Value.ToDoubleFromInvariant
+            End If
+
+            Return True
+
+        End Function
+
+        Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
+
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+
+            With elements
+                .Add(New XElement("Curves"))
+                For Each kvp As KeyValuePair(Of String, PumpOps.Curve) In Curves
+                    .Item(.Count - 1).Add(New XElement("Curve", New XAttribute("ID", kvp.Key), kvp.Value.SaveData.ToArray()))
+                Next
+            End With
+
+            Return elements
+
+        End Function
+
+        Sub CreateCurves()
+
+            If Not Me.Curves.ContainsKey("HEAD") Then
+                Me.Curves.Add("HEAD", New PumpOps.Curve(Guid.NewGuid().ToString, "HEAD", PumpOps.CurveType.Head))
+            End If
+            If Not Me.Curves.ContainsKey("EFF") Then
+                Me.Curves.Add("EFF", New PumpOps.Curve(Guid.NewGuid().ToString, "EFF", PumpOps.CurveType.Efficiency))
+            End If
+
+        End Sub
         Public Sub New()
             MyBase.New()
         End Sub
@@ -85,20 +152,6 @@ Namespace UnitOperations
             Me.ComponentDescription = description
 
         End Sub
-
-        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
-
-            MyBase.LoadData(data)
-
-            Dim eleff = data.Where(Function(x) x.Name = "AdiabaticEfficiency").FirstOrDefault
-
-            If eleff IsNot Nothing Then
-                AdiabaticEfficiency = eleff.Value.ToDoubleFromInvariant
-            End If
-
-            Return True
-
-        End Function
 
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Expander()
@@ -249,7 +302,7 @@ Namespace UnitOperations
 
                 Case CalculationMode.PowerGenerated, CalculationMode.Head
 
-                    If CalcMode = CalculationMode.Head Then
+Curves:             If CalcMode = CalculationMode.Head Then
                         If ProcessPath = ProcessPathType.Adiabatic Then
                             DeltaQ = AdiabaticHead / 1000 / Wi * 9.8
                         Else
@@ -314,6 +367,88 @@ Namespace UnitOperations
                     IObj?.Paragraphs.Add("<h3>Results</h3>")
 
                     IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
+
+                Case CalculationMode.Curves
+
+                    Dim chead, ceff As PumpOps.Curve
+
+                    If DebugMode Then AppendDebugLine(String.Format("Creating curves..."))
+
+                    Me.CreateCurves()
+
+                    chead = Me.Curves("HEAD")
+                    ceff = Me.Curves("EFF")
+
+                    Dim qint As Double
+
+                    If chead.xunit.Contains("@ P,T") Then
+                        'actual flow
+                        qint = ims.Phases(0).Properties.volumetric_flow
+                    Else
+                        ' molar flow
+                        qint = ims.Phases(0).Properties.molarflow
+                    End If
+
+                    Dim xhead, yhead, xeff, yeff As New ArrayList
+
+                    Dim i As Integer
+
+                    For i = 0 To chead.x.Count - 1
+                        If Double.TryParse(chead.x(i), New Double) And Double.TryParse(chead.y(i), New Double) Then
+                            xhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.xunit.Replace(" @ P,T", ""), chead.x(i)))
+                            yhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.yunit, chead.y(i)))
+                        End If
+                    Next
+                    For i = 0 To ceff.x.Count - 1
+                        If Double.TryParse(ceff.x(i), New Double) And Double.TryParse(ceff.y(i), New Double) Then
+                            xeff.Add(SystemsOfUnits.Converter.ConvertToSI(ceff.xunit.Replace(" @ P,T", ""), ceff.x(i)))
+                            If ceff.yunit = "%" Then
+                                yeff.Add(ceff.y(i) / 100)
+                            Else
+                                yeff.Add(ceff.y(i))
+                            End If
+                        End If
+                    Next
+
+                    Dim w() As Double
+
+                    If DebugMode Then AppendDebugLine(String.Format("Getting operating point..."))
+
+                    'get operating points
+                    Dim head, eff As Double
+
+                    'head
+                    ReDim w(xhead.Count)
+                    ratinterpolation.buildfloaterhormannrationalinterpolant(xhead.ToArray(GetType(Double)), xhead.Count, 0.5, w)
+                    head = polinterpolation.barycentricinterpolation(xhead.ToArray(GetType(Double)), yhead.ToArray(GetType(Double)), w, xhead.Count, qint)
+
+                    If DebugMode Then AppendDebugLine(String.Format("Head: {0} m", head))
+
+                    Me.CurveHead = head
+
+                    If ProcessPath = ProcessPathType.Adiabatic Then
+                        AdiabaticHead = head
+                    Else
+                        PolytropicHead = head
+                    End If
+
+                    'efficiency
+                    If Me.Curves("EFF").Enabled Then
+                        ReDim w(xeff.Count)
+                        ratinterpolation.buildfloaterhormannrationalinterpolant(xeff.ToArray(GetType(Double)), xeff.Count, 0.5, w)
+                        eff = polinterpolation.barycentricinterpolation(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), w, xeff.Count, qint)
+                        If ProcessPath = ProcessPathType.Adiabatic Then
+                            AdiabaticEfficiency = eff * 100
+                        Else
+                            PolytropicEfficiency = eff * 100
+                        End If
+                    End If
+
+                    If DebugMode Then AppendDebugLine(String.Format("Efficiency: {0} %", eff * 100))
+
+                    Me.CurveEff = eff * 100
+
+                    GoTo Curves
 
             End Select
 

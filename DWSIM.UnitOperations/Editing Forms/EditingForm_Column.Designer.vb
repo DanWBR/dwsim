@@ -25,9 +25,9 @@ Partial Class EditingForm_Column
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -42,7 +42,6 @@ Partial Class EditingForm_Column
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabGeneral = New System.Windows.Forms.TabPage()
         Me.lblTemperatureUnit = New System.Windows.Forms.Label()
@@ -88,7 +87,6 @@ Partial Class EditingForm_Column
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cbRebPressure = New System.Windows.Forms.ComboBox()
         Me.tbRebPressure = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabConnections = New System.Windows.Forms.TabPage()
         Me.TabStages = New System.Windows.Forms.TabPage()
@@ -123,7 +121,6 @@ Partial Class EditingForm_Column
         Me.chkIOAverageKb = New System.Windows.Forms.CheckBox()
         Me.chkIOAdjustSb = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.tabstrip1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.btnResults = New System.Windows.Forms.Button()
@@ -132,22 +129,27 @@ Partial Class EditingForm_Column
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TabControl3 = New System.Windows.Forms.TabControl()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabGeneral.SuspendLayout()
         Me.TabCondenser.SuspendLayout()
         Me.TabReboiler.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.TabControl2.SuspendLayout()
         Me.TabInitialEstimates.SuspendLayout()
         Me.TabSolverBP.SuspendLayout()
         Me.TabSolverNS.SuspendLayout()
         Me.TabSolverIO.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl3.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -279,16 +281,6 @@ Partial Class EditingForm_Column
         Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
-        '
-        'GroupBox2
-        '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.TabControl1)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
         '
         'TabControl1
         '
@@ -751,16 +743,6 @@ Partial Class EditingForm_Column
         Me.ToolTip1.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip2"))
         '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.TabControl2)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
-        '
         'TabControl2
         '
         resources.ApplyResources(Me.TabControl2, "TabControl2")
@@ -1077,16 +1059,6 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip2"))
         Me.chkIOAdjustSb.UseVisualStyleBackColor = True
         '
-        'GroupBox6
-        '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.tabstrip1)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip2"))
-        '
         'tabstrip1
         '
         resources.ApplyResources(Me.tabstrip1, "tabstrip1")
@@ -1134,8 +1106,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -1143,8 +1115,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -1152,8 +1124,8 @@ Partial Class EditingForm_Column
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -1164,21 +1136,60 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'TabControl3
+        '
+        resources.ApplyResources(Me.TabControl3, "TabControl3")
+        Me.TabControl3.Controls.Add(Me.TabPage2)
+        Me.TabControl3.Controls.Add(Me.TabPage3)
+        Me.TabControl3.Controls.Add(Me.TabPage4)
+        Me.TabControl3.Name = "TabControl3"
+        Me.TabControl3.SelectedIndex = 0
+        Me.ToolTipChangeTag.SetToolTip(Me.TabControl3, resources.GetString("TabControl3.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabControl3, resources.GetString("TabControl3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TabControl3, resources.GetString("TabControl3.ToolTip2"))
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.TabControl1)
+        Me.TabPage2.Name = "TabPage2"
+        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip2"))
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TabPage3
+        '
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.TabControl2)
+        Me.TabPage3.Name = "TabPage3"
+        Me.ToolTip1.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip2"))
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TabPage4
+        '
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.tabstrip1)
+        Me.TabPage4.Name = "TabPage4"
+        Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip2"))
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
         'EditingForm_Column
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox6)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.TabControl3)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Column"
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabGeneral.ResumeLayout(False)
         Me.TabGeneral.PerformLayout()
@@ -1186,7 +1197,6 @@ Partial Class EditingForm_Column
         Me.TabCondenser.PerformLayout()
         Me.TabReboiler.ResumeLayout(False)
         Me.TabReboiler.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
         Me.TabControl2.ResumeLayout(False)
         Me.TabInitialEstimates.ResumeLayout(False)
         Me.TabInitialEstimates.PerformLayout()
@@ -1196,10 +1206,13 @@ Partial Class EditingForm_Column
         Me.TabSolverNS.PerformLayout()
         Me.TabSolverIO.ResumeLayout(False)
         Me.TabSolverIO.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
         Me.tabstrip1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl3.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1214,13 +1227,10 @@ Partial Class EditingForm_Column
     Public WithEvents Label10 As System.Windows.Forms.Label
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents btnConfigureFlashAlg As System.Windows.Forms.Button
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents lblTag As System.Windows.Forms.TextBox
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Public WithEvents tabstrip1 As System.Windows.Forms.TabControl
     Public WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents gridResults As System.Windows.Forms.DataGridView
@@ -1307,4 +1317,8 @@ Partial Class EditingForm_Column
     Public WithEvents Label30 As Label
     Public WithEvents tbMaxTChange As TextBox
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Friend WithEvents TabControl3 As TabControl
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TabPage4 As TabPage
 End Class

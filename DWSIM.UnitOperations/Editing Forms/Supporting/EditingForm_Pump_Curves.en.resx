@@ -244,8 +244,17 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
+  <data name="chart1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>795, 307</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>801, 357</value>
+  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Graph</value>
+  </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>801, 357</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Graph</value>
@@ -268,6 +277,9 @@
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Database:</value>
   </data>
+  <data name="TsTBDatabase.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="TSBtnConnectDB.ToolTipText" xml:space="preserve">
     <value>Connect database</value>
   </data>
@@ -276,6 +288,9 @@
   </data>
   <data name="TSBtnNewDB.ToolTipText" xml:space="preserve">
     <value>Create new pump database</value>
+  </data>
+  <data name="TSTBStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="TSTBStatus.Text" xml:space="preserve">
     <value>Saved</value>

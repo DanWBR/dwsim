@@ -145,7 +145,7 @@ Partial Class EditingForm_Pump_Curves
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem2
         Me.ToolTip1.SetToolTip(Me.FaTabStrip1, resources.GetString("FaTabStrip1.ToolTip"))
         '
         'FaTabStripItem1
@@ -159,7 +159,6 @@ Partial Class EditingForm_Pump_Curves
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
         '
         'GroupBox5
@@ -629,6 +628,7 @@ Partial Class EditingForm_Pump_Curves
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        Me.FaTabStripItem2.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem2, resources.GetString("FaTabStripItem2.ToolTip"))
         '
         'GroupBox7
@@ -714,13 +714,13 @@ Partial Class EditingForm_Pump_Curves
         Me.chart1.IsAutoScrollRange = True
         Me.chart1.IsShowCopyMessage = False
         Me.chart1.Name = "chart1"
-        Me.chart1.ScrollGrace = 0.0R
-        Me.chart1.ScrollMaxX = 0.0R
-        Me.chart1.ScrollMaxY = 0.0R
-        Me.chart1.ScrollMaxY2 = 0.0R
-        Me.chart1.ScrollMinX = 0.0R
-        Me.chart1.ScrollMinY = 0.0R
-        Me.chart1.ScrollMinY2 = 0.0R
+        Me.chart1.ScrollGrace = 0R
+        Me.chart1.ScrollMaxX = 0R
+        Me.chart1.ScrollMaxY = 0R
+        Me.chart1.ScrollMaxY2 = 0R
+        Me.chart1.ScrollMinX = 0R
+        Me.chart1.ScrollMinY = 0R
+        Me.chart1.ScrollMinY2 = 0R
         Me.ToolTip1.SetToolTip(Me.chart1, resources.GetString("chart1.ToolTip"))
         '
         'ToolStrip1

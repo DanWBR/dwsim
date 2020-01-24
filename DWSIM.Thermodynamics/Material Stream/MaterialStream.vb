@@ -7371,6 +7371,91 @@ Namespace Streams
 
         End Function
 
+        ' shortcut functions
+
+        ''' <summary>
+        ''' Sets stream temperature.
+        ''' </summary>
+        ''' <param name="value">Temperature in K</param>
+        Public Sub SetTemperature(value As Double)
+            Phases(0).Properties.temperature = value
+        End Sub
+
+        ''' <summary>
+        ''' Sets stream pressure
+        ''' </summary>
+        ''' <param name="value">Pressure in Pa</param>
+        Public Sub SetPressure(value As Double)
+            Phases(0).Properties.pressure = value
+        End Sub
+
+        ''' <summary>
+        ''' Sets stream enthalpy.
+        ''' </summary>
+        ''' <param name="value">Enthalpy in kJ/kg</param>
+        Public Sub SetMassEnthalpy(value As Double)
+            Phases(0).Properties.enthalpy = value
+        End Sub
+
+        ''' <summary>
+        ''' Sets stream entropy.
+        ''' </summary>
+        ''' <param name="value">Entropy in kJ/[kg.K]</param>
+        Public Sub SetMassEntropy(value As Double)
+            Phases(0).Properties.entropy = value
+        End Sub
+
+        ''' <summary>
+        ''' Sets stream mass flow.
+        ''' </summary>
+        ''' <param name="value">Flow in kg/s</param>
+        Public Sub SetMassFlow(value As Double)
+            Phases(0).Properties.massflow = value
+            Phases(0).Properties.molarflow = Nothing
+            Phases(0).Properties.volumetric_flow = Nothing
+        End Sub
+
+        ''' <summary>
+        ''' Sets stream molar flow.
+        ''' </summary>
+        ''' <param name="value">Flow in mol/s</param>
+        Public Sub SetMolarFlow(value As Double)
+            Phases(0).Properties.massflow = Nothing
+            Phases(0).Properties.molarflow = value
+            Phases(0).Properties.volumetric_flow = Nothing
+        End Sub
+
+        ''' <summary>
+        ''' Sets stream volumetric flow.
+        ''' </summary>
+        ''' <param name="value">Flow in m3/s</param>
+        Public Sub SetVolumetricFlow(value As Double)
+            Phases(0).Properties.massflow = Nothing
+            Phases(0).Properties.molarflow = Nothing
+            Phases(0).Properties.volumetric_flow = value
+        End Sub
+
+        ''' <summary>
+        ''' Sets stream flash spec.
+        ''' </summary>
+        ''' <param name="value">Flash spec (PT, PH, PS, PVF, TVF or PSF).</param>
+        Public Sub SetFlashSpec(value As String)
+            Select Case value.ToLower
+                Case "pt", "tp"
+                    SpecType = StreamSpec.Temperature_and_Pressure
+                Case "ph"
+                    SpecType = StreamSpec.Pressure_and_Enthalpy
+                Case "ps"
+                    SpecType = StreamSpec.Pressure_and_Entropy
+                Case "pvf"
+                    SpecType = StreamSpec.Pressure_and_VaporFraction
+                Case "tvf"
+                    SpecType = StreamSpec.Temperature_and_VaporFraction
+                Case "psf"
+                    SpecType = StreamSpec.Pressure_and_SolidFraction
+            End Select
+        End Sub
+
     End Class
 
     Public Class CalculationResults

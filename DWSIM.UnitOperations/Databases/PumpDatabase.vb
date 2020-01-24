@@ -370,4 +370,348 @@ Namespace Databases
 
     End Class
 
+    <System.Serializable()> Public Class ComprExpDB
+
+        Public Shared Sub CreateNew(ByVal path As String, ByVal TopNode As String)
+
+            Dim writer As New XmlTextWriter(path, Nothing)
+
+            With writer
+                .Formatting = Formatting.Indented
+                .WriteStartDocument()
+                .WriteStartElement(TopNode)
+                .WriteEndElement()
+                .WriteEndDocument()
+                .Flush()
+                .Close()
+            End With
+
+        End Sub
+
+        Public Shared Sub AddCurve(ByVal equip As ISimulationObject, ByVal xmlpath As String, ByVal replace As Boolean)
+
+            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
+
+            Dim x, y As ArrayList
+            Dim xv, yv As Double
+
+            Dim xmldoc As XmlDocument
+            Dim reader As XmlReader = XmlReader.Create(xmlpath)
+            Try
+                reader.Read()
+            Catch ex As Exception
+                reader.Close()
+                CreateNew(xmlpath, "Curves")
+                reader = XmlReader.Create(xmlpath)
+                reader.Read()
+            End Try
+
+            xmldoc = New XmlDocument
+            xmldoc.Load(reader)
+            reader.Close()
+            reader = Nothing
+
+            If TypeOf equip Is UnitOperations.Compressor Then
+
+                Dim comp = DirectCast(equip, UnitOperations.Compressor)
+
+                Dim newnode As XmlNode = xmldoc.CreateNode(XmlNodeType.Element, comp.EquipType, "")
+                With newnode
+
+                    If comp.Curves("HEAD").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = comp.Curves("HEAD").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = comp.Curves("HEAD").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "HEAD"
+
+                            x = comp.Curves("HEAD").x
+                            y = comp.Curves("HEAD").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                    If comp.Curves("EFF").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = comp.Curves("EFF").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = comp.Curves("EFF").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "EFF"
+
+                            x = comp.Curves("EFF").x
+                            y = comp.Curves("EFF").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                End With
+
+                Dim OldNode As XmlNode = xmldoc.GetElementsByTagName(comp.EquipType).ItemOf(0)
+                If IsNothing(OldNode) Then
+                    xmldoc.ChildNodes(1).AppendChild(newnode)
+                Else
+                    xmldoc.ChildNodes(1).ReplaceChild(newnode, OldNode)
+                End If
+
+            Else
+
+                Dim comp = DirectCast(equip, UnitOperations.Expander)
+
+                Dim newnode As XmlNode = xmldoc.CreateNode(XmlNodeType.Element, comp.EquipType, "")
+                With newnode
+
+                    If comp.Curves("HEAD").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = comp.Curves("HEAD").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = comp.Curves("HEAD").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "HEAD"
+
+                            x = comp.Curves("HEAD").x
+                            y = comp.Curves("HEAD").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                    If comp.Curves("EFF").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = comp.Curves("EFF").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = comp.Curves("EFF").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "EFF"
+
+                            x = comp.Curves("EFF").x
+                            y = comp.Curves("EFF").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                End With
+
+                Dim OldNode As XmlNode = xmldoc.GetElementsByTagName(comp.EquipType).ItemOf(0)
+                If IsNothing(OldNode) Then
+                    xmldoc.ChildNodes(1).AppendChild(newnode)
+                Else
+                    xmldoc.ChildNodes(1).ReplaceChild(newnode, OldNode)
+                End If
+
+            End If
+
+            xmldoc.Save(xmlpath)
+            xmldoc = Nothing
+
+        End Sub
+
+        Public Shared Sub RemoveEquipment(ByVal xmlpath As String, ByVal EquipID As String)
+
+            Dim xmldoc As New XmlDocument
+            Dim reader As XmlReader = XmlReader.Create(xmlpath)
+            reader.Read()
+
+            xmldoc.Load(reader)
+            reader.Close()
+            reader = Nothing
+
+            Dim OldNode As XmlNode = xmldoc.GetElementsByTagName(EquipID).ItemOf(0)
+            If Not IsNothing(OldNode) Then
+                xmldoc.ChildNodes(1).RemoveChild(OldNode)
+                xmldoc.Save(xmlpath)
+            End If
+
+        End Sub
+
+        Public Shared Function ReadEquipTypes(ByVal xmlpath As String) As String()
+
+            Dim xmldoc As XmlDocument
+            Dim reader As XmlReader = XmlReader.Create(xmlpath)
+            reader.Read()
+
+            xmldoc = New XmlDocument
+            xmldoc.Load(reader)
+
+            Dim PTa As New List(Of String)
+
+            For Each node As XmlNode In xmldoc.ChildNodes(1)
+                PTa.Add(node.Name)
+            Next
+
+            reader.Close()
+            reader = Nothing
+
+            Return PTa.ToArray()
+
+        End Function
+        Public Shared Sub ReadEquipData(ByVal xmlpath As String, ByVal EquipType As String, ByVal simobj As ISimulationObject)
+
+            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
+
+            Dim xmldoc As XmlDocument
+            Dim reader As XmlReader = XmlReader.Create(xmlpath)
+            reader.Read()
+
+            xmldoc = New XmlDocument
+            xmldoc.Load(reader)
+
+            Dim Node As XmlNode = xmldoc.GetElementsByTagName(EquipType).ItemOf(0)
+
+            If TypeOf simobj Is UnitOperations.Compressor Then
+
+                Dim comp = DirectCast(simobj, UnitOperations.Compressor)
+
+                comp.Curves("HEAD").Enabled = False
+                comp.Curves("HEAD").x.Clear()
+                comp.Curves("HEAD").y.Clear()
+
+                comp.Curves("EFF").Enabled = False
+                comp.Curves("EFF").x.Clear()
+                comp.Curves("EFF").y.Clear()
+
+                For Each node2 As XmlNode In Node.ChildNodes
+                    With comp
+
+                        If node2.Name = "Curve" Then
+                            Dim T As String = node2.Attributes.GetNamedItem("Type").Value
+                            Dim XUnit As String = node2.Attributes.GetNamedItem("X").Value
+                            Dim YUnit As String = node2.Attributes.GetNamedItem("Y").Value
+                            Select Case T
+                                Case "HEAD"
+                                    comp.Curves("HEAD").Enabled = True
+                                    comp.Curves("HEAD").xunit = XUnit
+                                    comp.Curves("HEAD").yunit = YUnit
+
+                                    For i = 0 To node2.ChildNodes.Count - 1
+                                        Dim Node3 As XmlNode = node2.ChildNodes(i)
+                                        comp.Curves("HEAD").x.Add(Double.Parse(Node3.Attributes.GetNamedItem("X").Value, nf))
+                                        comp.Curves("HEAD").y.Add(Double.Parse(Node3.Attributes.GetNamedItem("Y").Value, nf))
+                                    Next
+                                Case "EFF"
+                                    comp.Curves("EFF").Enabled = True
+                                    comp.Curves("EFF").xunit = XUnit
+                                    comp.Curves("EFF").yunit = YUnit
+
+                                    For i = 0 To node2.ChildNodes.Count - 1
+                                        Dim Node3 As XmlNode = node2.ChildNodes(i)
+                                        comp.Curves("EFF").x.Add(Double.Parse(Node3.Attributes.GetNamedItem("X").Value, nf))
+                                        comp.Curves("EFF").y.Add(Double.Parse(Node3.Attributes.GetNamedItem("Y").Value, nf))
+                                    Next
+                            End Select
+                        End If
+                    End With
+                Next
+
+            Else
+
+                Dim comp = DirectCast(simobj, UnitOperations.Expander)
+
+                comp.Curves("HEAD").Enabled = False
+                comp.Curves("HEAD").x.Clear()
+                comp.Curves("HEAD").y.Clear()
+
+                comp.Curves("EFF").Enabled = False
+                comp.Curves("EFF").x.Clear()
+                comp.Curves("EFF").y.Clear()
+
+                For Each node2 As XmlNode In Node.ChildNodes
+                    With comp
+                        If node2.Name = "Curve" Then
+                            Dim T As String = node2.Attributes.GetNamedItem("Type").Value
+                            Dim XUnit As String = node2.Attributes.GetNamedItem("X").Value
+                            Dim YUnit As String = node2.Attributes.GetNamedItem("Y").Value
+                            Select Case T
+                                Case "HEAD"
+                                    comp.Curves("HEAD").Enabled = True
+                                    comp.Curves("HEAD").xunit = XUnit
+                                    comp.Curves("HEAD").yunit = YUnit
+
+                                    For i = 0 To node2.ChildNodes.Count - 1
+                                        Dim Node3 As XmlNode = node2.ChildNodes(i)
+                                        comp.Curves("HEAD").x.Add(Double.Parse(Node3.Attributes.GetNamedItem("X").Value, nf))
+                                        comp.Curves("HEAD").y.Add(Double.Parse(Node3.Attributes.GetNamedItem("Y").Value, nf))
+                                    Next
+                                Case "EFF"
+                                    comp.Curves("EFF").Enabled = True
+                                    comp.Curves("EFF").xunit = XUnit
+                                    comp.Curves("EFF").yunit = YUnit
+
+                                    For i = 0 To node2.ChildNodes.Count - 1
+                                        Dim Node3 As XmlNode = node2.ChildNodes(i)
+                                        comp.Curves("EFF").x.Add(Double.Parse(Node3.Attributes.GetNamedItem("X").Value, nf))
+                                        comp.Curves("EFF").y.Add(Double.Parse(Node3.Attributes.GetNamedItem("Y").Value, nf))
+                                    Next
+                            End Select
+                        End If
+                    End With
+                Next
+
+            End If
+
+
+            xmldoc = Nothing
+
+            reader.Close()
+            reader = Nothing
+
+        End Sub
+
+    End Class
+
+
 End Namespace

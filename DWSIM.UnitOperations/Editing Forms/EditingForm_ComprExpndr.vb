@@ -172,6 +172,8 @@ Public Class EditingForm_ComprExpndr
                         cbCalcMode.SelectedIndex = 3
                     Case UnitOperations.Compressor.CalculationMode.Head
                         cbCalcMode.SelectedIndex = 4
+                    Case UnitOperations.Compressor.CalculationMode.Curves
+                        cbCalcMode.SelectedIndex = 5
                 End Select
 
                 Select Case uobj.ProcessPath
@@ -207,6 +209,8 @@ Public Class EditingForm_ComprExpndr
                         cbCalcMode.SelectedIndex = 2
                     Case UnitOperations.Expander.CalculationMode.Head
                         cbCalcMode.SelectedIndex = 4
+                    Case UnitOperations.Expander.CalculationMode.Curves
+                        cbCalcMode.SelectedIndex = 5
                 End Select
 
                 Select Case uobj.ProcessPath
@@ -288,6 +292,7 @@ Public Class EditingForm_ComprExpndr
         'Head Conhecido
         Select Case cbCalcMode.SelectedIndex
             Case 0
+                btnCurves.Enabled = False
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = True
                 tbPower.Enabled = False
@@ -299,6 +304,7 @@ Public Class EditingForm_ComprExpndr
                     DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.OutletPressure
                 End If
             Case 1
+                btnCurves.Enabled = False
                 tbPressureDrop.Enabled = True
                 tbOutletPressure.Enabled = False
                 tbPower.Enabled = False
@@ -310,6 +316,7 @@ Public Class EditingForm_ComprExpndr
                     DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.Delta_P
                 End If
             Case 2
+                btnCurves.Enabled = False
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
                 tbPower.Enabled = True
@@ -321,12 +328,14 @@ Public Class EditingForm_ComprExpndr
                     DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.PowerGenerated
                 End If
             Case 3
+                btnCurves.Enabled = False
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
                 tbPower.Enabled = False
                 tbAdiabaticHead.Enabled = False
                 tbPolytropicHead.Enabled = False
             Case 4
+                btnCurves.Enabled = False
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
                 tbPower.Enabled = False
@@ -348,6 +357,18 @@ Public Class EditingForm_ComprExpndr
                         tbAdiabaticHead.Enabled = False
                         tbPolytropicHead.Enabled = True
                     End If
+                End If
+            Case 5
+                btnCurves.Enabled = True
+                tbPressureDrop.Enabled = False
+                tbOutletPressure.Enabled = False
+                tbPower.Enabled = False
+                tbAdiabaticHead.Enabled = False
+                tbPolytropicHead.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.Curves
+                Else
+                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.Curves
                 End If
         End Select
     End Sub
@@ -680,4 +701,10 @@ Public Class EditingForm_ComprExpndr
 
     End Sub
 
+    Private Sub btnCurves_Click(sender As Object, e As EventArgs) Handles btnCurves.Click
+
+        Dim f As New EditingForm_CompressorExpander_Curves() With {.simobj = SimObject}
+        f.ShowDialog(Me)
+
+    End Sub
 End Class
