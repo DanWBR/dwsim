@@ -193,6 +193,9 @@ namespace DWSIM.UI.Desktop.Editors
                         case Compressor.CalculationMode.Head:
                             pos1 = 4;
                             break;
+                        case Compressor.CalculationMode.Curves:
+                            pos1 = 5;
+                            break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.comprcalcmode().ToList(), pos1, (DropDown arg3, EventArgs ev) =>
                     {
@@ -213,6 +216,9 @@ namespace DWSIM.UI.Desktop.Editors
                             case 4:
                                 ce.CalcMode = Compressor.CalculationMode.Head;
                                 break;
+                            case 5:
+                                ce.CalcMode = Compressor.CalculationMode.Curves;
+                                break;
                         }
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
@@ -231,6 +237,10 @@ namespace DWSIM.UI.Desktop.Editors
                      }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Thermodynamic Path"));
+                    s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) => {
+                        var f = new UnitOperations.EditingForm_CompressorExpander_Curves {simobj = ce };
+                        f.ShowDialog();
+                    });
                     s.CreateAndAddTextBoxRow(container, nf, "Rotation Speed", ce.Speed,
                         (TextBox arg3, EventArgs ev) =>
                         {
@@ -369,6 +379,9 @@ namespace DWSIM.UI.Desktop.Editors
                         case UnitOperations.UnitOperations.Expander.CalculationMode.Head:
                             pos1 = 3;
                             break;
+                        case UnitOperations.UnitOperations.Expander.CalculationMode.Curves:
+                            pos1 = 4;
+                            break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.expndrcalcmode().ToList(), pos1e, (DropDown arg3, EventArgs ev) =>
                     {
@@ -386,10 +399,17 @@ namespace DWSIM.UI.Desktop.Editors
                             case 3:
                                 xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.Head;
                                 break;
+                            case 4:
+                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.Curves;
+                                break;
                         }
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
+                    s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) => {
+                        var f = new UnitOperations.EditingForm_CompressorExpander_Curves { simobj = xe };
+                        f.ShowDialog();
+                    });
                     s.CreateAndAddDropDownRow(container, "Thermodynamic Path", new List<string>(new[] { "Adiabatic", "Polytropic" }), (int)xe.ProcessPath, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)

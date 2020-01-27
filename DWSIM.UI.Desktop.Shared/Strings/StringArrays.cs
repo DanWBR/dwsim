@@ -70,11 +70,11 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] comprcalcmode()
         {
-            return new String[] { "Outlet Pressure", "Pressure Variation", "Power Required", "Energy Stream", "Known Head" };
+            return new String[] { "Outlet Pressure", "Pressure Variation", "Power Required", "Energy Stream", "Known Head","Performance Curves" };
         }
         public static String[] expndrcalcmode()
         {
-            return new String[] { "Outlet Pressure", "Pressure Variation", "Power Generated", "Known Head" };
+            return new String[] { "Outlet Pressure", "Pressure Variation", "Power Generated", "Known Head", "Performance Curves" };
         }
         public static String[] hxcalcmode()
         {

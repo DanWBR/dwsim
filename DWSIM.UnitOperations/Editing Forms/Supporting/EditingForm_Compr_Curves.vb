@@ -32,11 +32,11 @@ Public Class EditingForm_CompressorExpander_Curves
                 editor.Dock = DockStyle.Fill
                 editor.Populate()
 
-                Dim tab1 As New TabPage(item.Key.ToString)
+                Dim tab1 As New TabPage(item.Key.ToString & " rpm")
                 tab1.Controls.Add(editor)
 
                 AddHandler editor.tbRotation.TextChanged, Sub()
-                                                              tab1.Text = editor.tbRotation.Text
+                                                              tab1.Text = editor.tbRotation.Text & " rpm"
                                                           End Sub
 
                 TabControl1.TabPages.Add(tab1)
@@ -56,11 +56,11 @@ Public Class EditingForm_CompressorExpander_Curves
                 editor.Dock = DockStyle.Fill
                 editor.Populate()
 
-                Dim tab1 As New TabPage(item.Key.ToString)
+                Dim tab1 As New TabPage(item.Key.ToString & " rpm")
                 tab1.Controls.Add(editor)
 
                 AddHandler editor.tbRotation.TextChanged, Sub()
-                                                              tab1.Text = editor.tbRotation.Text
+                                                              tab1.Text = editor.tbRotation.Text & " rpm"
                                                           End Sub
 
                 TabControl1.TabPages.Add(tab1)
@@ -129,7 +129,7 @@ Public Class EditingForm_CompressorExpander_Curves
             editor.Dock = DockStyle.Fill
             editor.Populate()
 
-            Dim tab1 As New TabPage()
+            Dim tab1 As New TabPage(speed & " rpm")
             tab1.Controls.Add(editor)
 
             TabControl1.TabPages.Add(tab1)
@@ -149,7 +149,7 @@ Public Class EditingForm_CompressorExpander_Curves
 
             editor.Dock = DockStyle.Fill
 
-            Dim tab1 As New TabPage()
+            Dim tab1 As New TabPage(speed & " rpm")
             tab1.Controls.Add(editor)
 
             TabControl1.TabPages.Add(tab1)

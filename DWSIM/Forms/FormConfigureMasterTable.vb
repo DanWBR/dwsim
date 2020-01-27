@@ -90,7 +90,7 @@ Public Class FormConfigureMasterTable
             Next
             For Each p As String In props
                 If Not Table.PropertyList.ContainsKey(p) Then Table.PropertyList.Add(p, False)
-                Dim lvi As New ListViewItem(DWSIM.App.GetPropertyName(p))
+                Dim lvi As New ListViewItem(Table.Flowsheet.GetTranslatedString(p))
                 lvi.Tag = p
                 If Table.PropertyList.ContainsKey(p) Then
                     lvi.Checked = Table.PropertyList(p)

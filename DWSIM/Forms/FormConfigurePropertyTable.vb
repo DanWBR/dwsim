@@ -24,7 +24,7 @@ Public Class FormConfigurePropertyTable
         If e.IsSelected Then
             lvProps.Items.Clear()
             For Each item In Table.Flowsheet.SimulationObjects(e.Item.Tag).GetProperties(PropertyType.ALL)
-                Dim lvi = New ListViewItem(DWSIM.App.GetPropertyName(item))
+                Dim lvi = New ListViewItem(Table.Flowsheet.GetTranslatedString(item))
                 lvi.Tag = item
                 If Table.VisibleProperties.ContainsKey(lvObjects.SelectedItems(0).Tag) Then
                     If Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(item) Then

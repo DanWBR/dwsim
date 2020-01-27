@@ -30,11 +30,11 @@ Public Class Window
 
                 End With
 
-                Me.Enabled = False
+                Dim sitems = Host.Items.Where(Function(x) x.SolutionID = Date.Parse(SetsBox.SelectedItem.ToString).ToBinary).ToList
 
                 f.Show()
 
-                Dim sitems = Host.Items.Where(Function(x) x.SolutionID = Date.Parse(SetsBox.SelectedItem.ToString).ToBinary).ToList
+                Me.Enabled = False
 
                 Dim tvc As New List(Of TreeNode)
 
