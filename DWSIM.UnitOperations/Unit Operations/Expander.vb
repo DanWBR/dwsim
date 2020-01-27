@@ -25,6 +25,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.MathOps.MathEx.Interpolation
+Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.PumpOps
 
 Namespace UnitOperations
 
@@ -89,24 +90,33 @@ Namespace UnitOperations
 
         Public Property CurveHead As Double
 
-        Public Property Curves As New Dictionary(Of String, PumpOps.Curve)
+        Public Property CurvePower As Double
+
+        Public Property Curves As New Dictionary(Of Integer, Dictionary(Of String, PumpOps.Curve))
+
+        Public Property Speed As Integer = 1500
+
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)
 
-            Curves = New Dictionary(Of String, PumpOps.Curve)
-
-            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Curves").Elements.ToList
-                Dim cv As New PumpOps.Curve()
-                cv.LoadData(xel.Elements.ToList)
-                Curves.Add(cv.Name, cv)
-            Next
-
-            If Curves.Count = 0 Then CreateCurves()
+            Curves = New Dictionary(Of Integer, Dictionary(Of String, Curve))
+            Try
+                For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Curves").Elements.ToList
+                    Dim dict As New Dictionary(Of String, PumpOps.Curve)
+                    For Each xel2 In xel.Elements
+                        Dim cv As New PumpOps.Curve()
+                        cv.LoadData(xel2.Elements.ToList)
+                        dict.Add(xel2.Name.ToString, cv)
+                    Next
+                    Curves.Add(Integer.Parse(xel.@RotationSpeed.ToString), dict)
+                Next
+            Catch ex As Exception
+            End Try
+            If Curves.Count = 0 Then Me.Curves.Add(Speed, CreateCurves())
 
             Dim eleff = data.Where(Function(x) x.Name = "EficienciaAdiabatica").FirstOrDefault
-
             If eleff IsNot Nothing Then
                 AdiabaticEfficiency = eleff.Value.ToDoubleFromInvariant
             End If
@@ -122,8 +132,12 @@ Namespace UnitOperations
 
             With elements
                 .Add(New XElement("Curves"))
-                For Each kvp As KeyValuePair(Of String, PumpOps.Curve) In Curves
-                    .Item(.Count - 1).Add(New XElement("Curve", New XAttribute("ID", kvp.Key), kvp.Value.SaveData.ToArray()))
+                For Each kvp In Curves
+                    Dim xel As XElement = New XElement("CurveSet", New XAttribute("RotationSpeed", kvp.Key))
+                    .Item(.Count - 1).Add(xel)
+                    For Each kvp2 In kvp.Value
+                        xel.Add(New XElement(kvp2.Key.ToString, kvp2.Value.SaveData.ToArray()))
+                    Next
                 Next
             End With
 
@@ -131,16 +145,17 @@ Namespace UnitOperations
 
         End Function
 
-        Sub CreateCurves()
+        Public Function CreateCurves() As Dictionary(Of String, PumpOps.Curve)
 
-            If Not Me.Curves.ContainsKey("HEAD") Then
-                Me.Curves.Add("HEAD", New PumpOps.Curve(Guid.NewGuid().ToString, "HEAD", PumpOps.CurveType.Head))
-            End If
-            If Not Me.Curves.ContainsKey("EFF") Then
-                Me.Curves.Add("EFF", New PumpOps.Curve(Guid.NewGuid().ToString, "EFF", PumpOps.CurveType.Efficiency))
-            End If
+            Dim dict As New Dictionary(Of String, PumpOps.Curve)
+            dict.Add("HEAD", New PumpOps.Curve(Guid.NewGuid().ToString, "HEAD", PumpOps.CurveType.Head))
+            dict.Add("EFF", New PumpOps.Curve(Guid.NewGuid().ToString, "EFF", PumpOps.CurveType.Efficiency))
+            dict.Add("POWER", New PumpOps.Curve(Guid.NewGuid().ToString, "POWER", PumpOps.CurveType.Power))
 
-        End Sub
+            Return dict
+
+        End Function
+
         Public Sub New()
             MyBase.New()
         End Sub
@@ -370,83 +385,123 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
                 Case CalculationMode.Curves
 
-                    Dim chead, ceff As PumpOps.Curve
+                    Dim chead, ceff, cpower As PumpOps.Curve
 
                     If DebugMode Then AppendDebugLine(String.Format("Creating curves..."))
 
-                    Me.CreateCurves()
+                    If Me.Curves.Count = 0 Then Me.Curves.Add(Speed, CreateCurves())
 
-                    chead = Me.Curves("HEAD")
-                    ceff = Me.Curves("EFF")
+                    Dim LHeadSpeed, LHead, LPowerSpeed, LPower, LEffSpeed, LEff As New List(Of Double)
 
-                    Dim qint As Double
+                    For Each datapair In Me.Curves
 
-                    If chead.xunit.Contains("@ P,T") Then
-                        'actual flow
-                        qint = ims.Phases(0).Properties.volumetric_flow
-                    Else
-                        ' molar flow
-                        qint = ims.Phases(0).Properties.molarflow
-                    End If
+                        chead = datapair.Value("HEAD")
+                        ceff = datapair.Value("EFF")
+                        cpower = datapair.Value("POWER")
 
-                    Dim xhead, yhead, xeff, yeff As New ArrayList
+                        Dim xhead, yhead, xeff, yeff, xpower, ypower As New ArrayList
 
-                    Dim i As Integer
+                        Dim qint As Double
 
-                    For i = 0 To chead.x.Count - 1
-                        If Double.TryParse(chead.x(i), New Double) And Double.TryParse(chead.y(i), New Double) Then
-                            xhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.xunit.Replace(" @ P,T", ""), chead.x(i)))
-                            yhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.yunit, chead.y(i)))
-                        End If
-                    Next
-                    For i = 0 To ceff.x.Count - 1
-                        If Double.TryParse(ceff.x(i), New Double) And Double.TryParse(ceff.y(i), New Double) Then
-                            xeff.Add(SystemsOfUnits.Converter.ConvertToSI(ceff.xunit.Replace(" @ P,T", ""), ceff.x(i)))
-                            If ceff.yunit = "%" Then
-                                yeff.Add(ceff.y(i) / 100)
-                            Else
-                                yeff.Add(ceff.y(i))
-                            End If
-                        End If
-                    Next
-
-                    Dim w() As Double
-
-                    If DebugMode Then AppendDebugLine(String.Format("Getting operating point..."))
-
-                    'get operating points
-                    Dim head, eff As Double
-
-                    'head
-                    ReDim w(xhead.Count)
-                    ratinterpolation.buildfloaterhormannrationalinterpolant(xhead.ToArray(GetType(Double)), xhead.Count, 0.5, w)
-                    head = polinterpolation.barycentricinterpolation(xhead.ToArray(GetType(Double)), yhead.ToArray(GetType(Double)), w, xhead.Count, qint)
-
-                    If DebugMode Then AppendDebugLine(String.Format("Head: {0} m", head))
-
-                    Me.CurveHead = head
-
-                    If ProcessPath = ProcessPathType.Adiabatic Then
-                        AdiabaticHead = head
-                    Else
-                        PolytropicHead = head
-                    End If
-
-                    'efficiency
-                    If Me.Curves("EFF").Enabled Then
-                        ReDim w(xeff.Count)
-                        ratinterpolation.buildfloaterhormannrationalinterpolant(xeff.ToArray(GetType(Double)), xeff.Count, 0.5, w)
-                        eff = polinterpolation.barycentricinterpolation(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), w, xeff.Count, qint)
-                        If ProcessPath = ProcessPathType.Adiabatic Then
-                            AdiabaticEfficiency = eff * 100
+                        If chead.xunit.Contains("@ P,T") Then
+                            'actual flow
+                            qint = ims.Phases(0).Properties.volumetric_flow
                         Else
-                            PolytropicEfficiency = eff * 100
+                            ' molar flow
+                            qint = ims.Phases(0).Properties.molarflow
+                        End If
+
+                        Dim i As Integer
+
+                        For i = 0 To chead.x.Count - 1
+                            If Double.TryParse(chead.x(i), New Double) And Double.TryParse(chead.y(i), New Double) Then
+                                xhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.xunit.Replace(" @ P,T", ""), chead.x(i)))
+                                yhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.yunit, chead.y(i)))
+                            End If
+                        Next
+                        For i = 0 To cpower.x.Count - 1
+                            If Double.TryParse(cpower.x(i), New Double) And Double.TryParse(cpower.y(i), New Double) Then
+                                xpower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.xunit.Replace(" @ P,T", ""), cpower.x(i)))
+                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, chead.y(i)))
+                            End If
+                        Next
+                        For i = 0 To ceff.x.Count - 1
+                            If Double.TryParse(ceff.x(i), New Double) And Double.TryParse(ceff.y(i), New Double) Then
+                                xeff.Add(SystemsOfUnits.Converter.ConvertToSI(ceff.xunit.Replace(" @ P,T", ""), ceff.x(i)))
+                                If ceff.yunit = "%" Then
+                                    yeff.Add(ceff.y(i) / 100)
+                                Else
+                                    yeff.Add(ceff.y(i))
+                                End If
+                            End If
+                        Next
+
+                        'get operating points
+                        Dim head, eff, power As Double
+
+                        If datapair.Value("HEAD").Enabled And datapair.Value("HEAD").x.Count > 0 Then
+                            head = Interpolation.Interpolate(xhead.ToArray(GetType(Double)), yhead.ToArray(GetType(Double)), qint)
+                            LHeadSpeed.Add(datapair.Key)
+                            LHead.Add(head)
+                        End If
+
+                        If datapair.Value("POWER").Enabled And datapair.Value("POWER").x.Count > 0 Then
+                            power = Interpolation.Interpolate(xpower.ToArray(GetType(Double)), ypower.ToArray(GetType(Double)), qint)
+                            LPowerSpeed.Add(datapair.Key)
+                            LPower.Add(power)
+                        End If
+
+                        If datapair.Value("EFF").Enabled And datapair.Value("EFF").x.Count > 0 Then
+                            eff = Interpolation.Interpolate(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), qint)
+                            LEffSpeed.Add(datapair.Key)
+                            LEff.Add(eff)
+                        End If
+
+                    Next
+
+                    Dim ires As Double
+
+                    If LHead.Count > 0 Then
+                        ' head has priority over power
+                        ires = Interpolation.Interpolate(LHeadSpeed.ToArray, LHead.ToArray(), Speed)
+                        Me.CurvePower = Double.NegativeInfinity
+                        Me.CurveHead = ires
+                    Else
+                        'power
+                        ires = Interpolation.Interpolate(LPowerSpeed.ToArray, LPower.ToArray(), Speed)
+                        Me.CurveHead = Double.NegativeInfinity
+                        Me.CurvePower = ires
+                    End If
+
+                    If LEff.Count > 0 Then
+                        'efficiency
+                        ires = Interpolation.Interpolate(LEffSpeed.ToArray, LEff.ToArray(), Speed)
+                        Me.CurveEff = ires * 100
+                    Else
+                        Me.CurveEff = Double.NegativeInfinity
+                    End If
+
+                    If CurvePower = Double.NegativeInfinity Then
+                        If ProcessPath = ProcessPathType.Adiabatic Then
+                            AdiabaticHead = CurveHead
+                        Else
+                            PolytropicHead = CurveHead
+                        End If
+                    Else
+                        If ProcessPath = ProcessPathType.Adiabatic Then
+                            AdiabaticHead = CurvePower * 1000 * Wi / 9.8
+                        Else
+                            PolytropicHead = CurvePower * 1000 * Wi / 9.8
                         End If
                     End If
 
-                    If DebugMode Then AppendDebugLine(String.Format("Efficiency: {0} %", eff * 100))
-
-                    Me.CurveEff = eff * 100
+                    If Not CurveEff = Double.NegativeInfinity Then
+                        If ProcessPath = ProcessPathType.Adiabatic Then
+                            AdiabaticEfficiency = CurveEff
+                        Else
+                            PolytropicEfficiency = CurveEff
+                        End If
+                    End If
 
                     GoTo Curves
 
@@ -694,6 +749,8 @@ Curves:             If CalcMode = CalculationMode.Head Then
                             Return PolytropicCoefficient
                         Case "PolytropicEfficiency"
                             Return PolytropicEfficiency
+                        Case "RotationSpeed"
+                            Return Speed
                     End Select
 
                 End If
@@ -725,6 +782,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     proplist.Add("PolytropicCoefficient")
                     proplist.Add("AdiabaticHead")
                     proplist.Add("PolytropicHead")
+                    proplist.Add("RotationSpeed")
                 Case PropertyType.WR
                     For i = 0 To 1
                         proplist.Add("PROP_TU_" + CStr(i))
@@ -739,6 +797,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     proplist.Add("PolytropicCoefficient")
                     proplist.Add("AdiabaticHead")
                     proplist.Add("PolytropicHead")
+                    proplist.Add("RotationSpeed")
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
@@ -776,6 +835,8 @@ Curves:             If CalcMode = CalculationMode.Head Then
                         PolytropicHead = SystemsOfUnits.Converter.ConvertToSI(su.distance, propval)
                     Case "PolytropicEfficiency"
                         PolytropicEfficiency = propval
+                    Case "RotationSpeed"
+                        Speed = propval
                 End Select
 
             End If
@@ -829,6 +890,10 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     ElseIf prop.Contains("Efficiency") Then
 
                         Return "%"
+
+                    ElseIf prop.Contains("Speed") Then
+
+                        Return "rpm"
 
                     Else
 
@@ -937,18 +1002,16 @@ Curves:             If CalcMode = CalculationMode.Head Then
                         Case ProcessPathType.Polytropic
                             str.AppendLine("    Specified Head: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Convert.ToDouble(PolytropicHead)).ToString(numberformat, ci) & " " & su.distance)
                     End Select
+                Case CalculationMode.Curves
+                    str.AppendLine("    Rotation Speed: " & Convert.ToDouble(Speed).ToString(numberformat, ci))
             End Select
             str.AppendLine("    Adiabatic Efficiency: " & Convert.ToDouble(AdiabaticEfficiency).ToString(numberformat, ci))
             str.AppendLine("    Polytropic Efficiency: " & Convert.ToDouble(PolytropicEfficiency).ToString(numberformat, ci))
             str.AppendLine()
             str.AppendLine("Results")
             str.AppendLine()
-            Select Case CalcMode
-                Case CalculationMode.Delta_P
-                    str.AppendLine("    Outlet Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
-                Case CalculationMode.OutletPressure
-                    str.AppendLine("    Pressure Decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
-            End Select
+            str.AppendLine("    Outlet Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Pressure Decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
             str.AppendLine("    Adiabatic Coefficient: " & Convert.ToDouble(AdiabaticCoefficient).ToString(numberformat, ci))
             str.AppendLine("    Polytropic Coefficient: " & Convert.ToDouble(PolytropicCoefficient).ToString(numberformat, ci))
             str.AppendLine("    Temperature Change: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
@@ -1004,6 +1067,11 @@ Curves:             If CalcMode = CalculationMode.Head Then
                             Me.PolytropicHead.ConvertFromSI(su.distance).ToString(nf),
                             su.distance}))
                     End If
+                Case CalculationMode.Curves
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                                    New String() {"Rotation Speed",
+                                    Me.Speed.ToString(nf),
+                                    "rpm"}))
             End Select
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
@@ -1022,18 +1090,15 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results"}))
 
-            Select Case CalcMode
-                Case CalculationMode.Delta_P
-                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
-                            New String() {"Outlet Pressure",
-                            Me.POut.ConvertFromSI(su.pressure).ToString(nf),
-                            su.pressure}))
-                Case CalculationMode.OutletPressure
-                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                    New String() {"Outlet Pressure",
+                    Me.POut.ConvertFromSI(su.pressure).ToString(nf),
+                    su.pressure}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Pressure Decrease",
                             Me.DeltaP.ConvertFromSI(su.deltaP).ToString(nf),
                             su.deltaP}))
-            End Select
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                             New String() {"Adiabatic Coefficient",
@@ -1087,6 +1152,8 @@ Curves:             If CalcMode = CalculationMode.Head Then
                 Return "If you chose the 'Known Head' calculation mode and the thermo path is Polytropic, enter the expander's Polytropic Head."
             ElseIf p.Equals("Thermodynamic Path") Then
                 Return "Select the Thermodynamic Path according to the available data."
+            ElseIf p.Equals("Rotation Speed") Then
+                Return "Enter the Rotation Speed of the Equipment in rpm."
             Else
                 Return p
             End If

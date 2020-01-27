@@ -13087,6 +13087,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Velocidade de Rotação.
+        '''</summary>
+        Friend Shared ReadOnly Property RotationSpeed() As String
+            Get
+                Return ResourceManager.GetString("RotationSpeed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Variação no Volume (rel).
         '''</summary>
         Friend Shared ReadOnly Property RPFRPGridItem1() As String

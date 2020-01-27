@@ -34,6 +34,24 @@ Namespace MathEx.Interpolation
     'OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     '************************************************************************
 
+    Public Class Interpolation
+
+        Public Shared Function Interpolate(x() As Double, y() As Double, xint As Double) As Double
+
+            If x.Count = 1 Then
+                Return xint / x(0) * y(0)
+            ElseIf x.Count = 0 Then
+                Return 0.0
+            Else
+                Dim w(x.Count) As Double
+                ratinterpolation.buildfloaterhormannrationalinterpolant(x, x.Count, 0.5, w)
+                Return polinterpolation.barycentricinterpolation(x, y, w, x.Count, xint)
+            End If
+
+        End Function
+
+    End Class
+
     Public Class polinterpolation
 
         '************************************************************************

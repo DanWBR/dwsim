@@ -5598,4 +5598,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PolytropicHead" xml:space="preserve">
     <value>Head Politrópico</value>
   </data>
+  <data name="RotationSpeed" xml:space="preserve">
+    <value>Velocidade de Rotação</value>
+  </data>
 </root>

@@ -217,20 +217,35 @@ namespace DWSIM.UI.Desktop.Editors
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
-                    s.CreateAndAddDropDownRow(container, "Thermodynamic Path", new List<string>(new []{"Adiabatic", "Polytropic" }), (int)ce.ProcessPath, (DropDown arg3, EventArgs ev) =>
-                    {
-                        switch (arg3.SelectedIndex)
-                        {
-                            case 0:
-                                ce.ProcessPath = Compressor.ProcessPathType.Adiabatic;
-                                break;
-                            case 1:
-                                ce.ProcessPath = Compressor.ProcessPathType.Polytropic;
-                                break;
-                        }
-                    }, () => CallSolverIfNeeded());
+                    s.CreateAndAddDropDownRow(container, "Thermodynamic Path", new List<string>(new[] { "Adiabatic", "Polytropic" }), (int)ce.ProcessPath, (DropDown arg3, EventArgs ev) =>
+                     {
+                         switch (arg3.SelectedIndex)
+                         {
+                             case 0:
+                                 ce.ProcessPath = Compressor.ProcessPathType.Adiabatic;
+                                 break;
+                             case 1:
+                                 ce.ProcessPath = Compressor.ProcessPathType.Polytropic;
+                                 break;
+                         }
+                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Thermodynamic Path"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Rotation Speed", ce.Speed,
+                        (TextBox arg3, EventArgs ev) =>
+                        {
+                            if (arg3.Text.IsValidDoubleExpression())
+                            {
+                                arg3.TextColor = (SystemColors.ControlText);
+                                ce.Speed = (int)arg3.Text.ToString().ParseExpressionToDouble();
+                            }
+                            else
+                            {
+                                arg3.TextColor = (Colors.Red);
+                            }
+                        }, () => CallSolverIfNeeded());
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Rotation Speed"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Increase (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, ce.DeltaP),
                                    (TextBox arg3, EventArgs ev) =>
                                    {
@@ -389,6 +404,21 @@ namespace DWSIM.UI.Desktop.Editors
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Thermodynamic Path"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Rotation Speed", xe.Speed,
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (arg3.Text.IsValidDoubleExpression())
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               xe.Speed = (int)arg3.Text.ToString().ParseExpressionToDouble();
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       }, () => CallSolverIfNeeded());
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Rotation Speed"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Decrease (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, xe.DeltaP),
                                    (TextBox arg3, EventArgs ev) =>
                                    {

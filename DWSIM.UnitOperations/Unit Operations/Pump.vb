@@ -48,7 +48,7 @@ Namespace UnitOperations.Auxiliary.PumpOps
         Protected _type As CurveType
         Protected _id As String = ""
         Protected _name As String = ""
-        Protected _enabled As Boolean = True
+        Protected _enabled As Boolean = False
 
         Sub New(ByVal id As String, ByVal name As String, ByVal x As ArrayList, ByVal xunit As String, ByVal y As ArrayList, ByVal yunit As String, ByVal type As CurveType)
             Me.New()
