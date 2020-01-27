@@ -240,7 +240,7 @@ Public Class FormOptimization
                                 End If
                             End If
                             For Each prop As String In props
-                                .Add(DWSIM.App.GetPropertyName(prop))
+                                .Add(form.GetTranslatedString1(prop))
                             Next
                         End If
                     End With
@@ -262,7 +262,7 @@ Public Class FormOptimization
                             Dim tbc1 As DataGridViewTextBoxCell = Me.dgVariables.Rows(e.RowIndex).Cells(9)
                             Dim props As String() = Me.ReturnProperties(Me.dgVariables.Rows(e.RowIndex).Cells(3).Value, True)
                             For Each prop As String In props
-                                If DWSIM.App.GetPropertyName(prop) = Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
+                                If form.GetTranslatedString1(prop) = Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
                                     Dim obj As SharedClasses.UnitOperations.BaseClass = ReturnObject(Me.dgVariables.Rows(e.RowIndex).Cells(3).Value)
                                     tbc.Value = Format(obj.GetPropertyValue(prop, su), nf)
                                     tbc0.Value = Format(obj.GetPropertyValue(prop, su), nf)
@@ -309,7 +309,7 @@ Public Class FormOptimization
 
         Dim props As String() = form.Collections.FlowsheetObjectCollection(objectID).GetProperties(Interfaces.Enums.PropertyType.ALL)
         For Each prop As String In props
-            If DWSIM.App.GetPropertyName(prop) = propTAG Then
+            If form.GetTranslatedString1(prop) = propTAG Then
                 Return prop
             End If
         Next
@@ -1511,7 +1511,7 @@ Public Class FormOptimization
                     Else
                         If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                             dgrow.Cells(3).Value = form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag
-                            dgrow.Cells(4).Value = DWSIM.App.GetPropertyName(.propID)
+                            dgrow.Cells(4).Value = form.GetTranslatedString1(.propID)
                         End If
                     End If
                     dgrow.Cells(9).Value = .unit

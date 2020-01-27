@@ -142,12 +142,6 @@
   <data name="tsbImport.Text" xml:space="preserve">
     <value>Import Curves</value>
   </data>
-  <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>Compressor-Expander Database|*.cxml</value>
-  </data>
-  <data name="OpenFileDialog1.Title" xml:space="preserve">
-    <value>Compressor/Expander Database</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Compressor/Expander Performance Curves Editor</value>
   </data>

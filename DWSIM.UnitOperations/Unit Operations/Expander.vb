@@ -826,6 +826,9 @@ Curves:             If CalcMode = CalculationMode.Head Then
                         proplist.Add("PROP_TU_" + CStr(i))
                     Next
                     proplist.Add("PROP_TU_4")
+                    proplist.Add("AdiabaticHead")
+                    proplist.Add("PolytropicHead")
+                    proplist.Add("RotationSpeed")
                 Case PropertyType.ALL
                     For i = 0 To 4
                         proplist.Add("PROP_TU_" + CStr(i))

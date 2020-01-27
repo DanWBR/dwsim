@@ -1020,6 +1020,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         proplist.Add("PROP_CO_" + CStr(i))
                     Next
                     proplist.Add("PROP_CO_4")
+                    proplist.Add("AdiabaticHead")
+                    proplist.Add("PolytropicHead")
+                    proplist.Add("RotationSpeed")
                 Case PropertyType.ALL
                     For i = 0 To 4
                         proplist.Add("PROP_CO_" + CStr(i))

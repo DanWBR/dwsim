@@ -45,7 +45,7 @@ Public Class EditingForm_CompressorExpander_Curves
 
         Else
 
-            Dim uo = DirectCast(simobj, Compressor)
+            Dim uo = DirectCast(simobj, Expander)
 
             For Each item In uo.Curves
 
@@ -96,7 +96,7 @@ Public Class EditingForm_CompressorExpander_Curves
 
             Else
 
-                Dim uo = DirectCast(simobj, Compressor)
+                Dim uo = DirectCast(simobj, Expander)
                 uo.Curves = newcurves
 
             End If
@@ -132,11 +132,15 @@ Public Class EditingForm_CompressorExpander_Curves
             Dim tab1 As New TabPage(speed & " rpm")
             tab1.Controls.Add(editor)
 
+            AddHandler editor.tbRotation.TextChanged, Sub()
+                                                          tab1.Text = editor.tbRotation.Text & " rpm"
+                                                      End Sub
+
             TabControl1.TabPages.Add(tab1)
 
         Else
 
-            Dim uo = DirectCast(simobj, Compressor)
+            Dim uo = DirectCast(simobj, Expander)
 
             Dim curves = uo.CreateCurves
 
@@ -183,7 +187,7 @@ Public Class EditingForm_CompressorExpander_Curves
                     Dim uo = DirectCast(simobj, Compressor)
                     uo.Curves = data
                 Else
-                    Dim uo = DirectCast(simobj, Compressor)
+                    Dim uo = DirectCast(simobj, Expander)
                     uo.Curves = data
                 End If
                 Populate()
@@ -208,7 +212,7 @@ Public Class EditingForm_CompressorExpander_Curves
                     Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(uo.Curves, Newtonsoft.Json.Formatting.Indented)
                     File.WriteAllText(SaveFileDialog1.FileName, data)
                 Else
-                    Dim uo = DirectCast(simobj, Compressor)
+                    Dim uo = DirectCast(simobj, Expander)
                     Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(uo.Curves, Newtonsoft.Json.Formatting.Indented)
                     File.WriteAllText(SaveFileDialog1.FileName, data)
                 End If

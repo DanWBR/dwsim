@@ -64,7 +64,7 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.8 Update 7
 
-- [NEW] Added Polytropic Process support to Compressor and Expander
+- [NEW] Added Performance Curves and Polytropic Process support to Compressor and Expander
 - [FIX] Fixed single compound phase detection
 - [FIX] Other bug fixes
 
