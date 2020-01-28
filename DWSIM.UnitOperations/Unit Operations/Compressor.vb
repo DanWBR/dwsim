@@ -240,22 +240,6 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("• Outlet temperature: PH Flash with <mi>P_{2}</mi> and <mi>H_{2}</mi>.")
 
-            IObj?.Paragraphs.Add("Isentropic or Polytropic power is calculated from:")
-
-            IObj?.Paragraphs.Add("<mi>W = Q\times MW\times \left(\frac{n}{n-1} \right)\times f \times \left(\frac{P_1}{\rho_1} \right) \times \left[\left(\frac{P_2}{P_1} \right)^\left(\frac{n-1}{n} \right)-1 \right]</mi>")
-
-            IObj?.Paragraphs.Add("where:")
-
-            IObj?.Paragraphs.Add("<mi>Q</mi> Molar Flow")
-
-            IObj?.Paragraphs.Add("<mi>MW</mi> Molecular Weight")
-
-            IObj?.Paragraphs.Add("<mi>n</mi> Adiabatic or Polytropic Coefficient")
-
-            IObj?.Paragraphs.Add("<mi>f</mi> Correction Factor")
-
-            IObj?.Paragraphs.Add("<mi>\rho_1</mi> Inlet Gas Density")
-
             IObj?.Paragraphs.Add("Isentropic and Polytropic Coefficients are calculated from:")
 
             IObj?.Paragraphs.Add("<mi>n_i = \frac{\ln \left({P_2}/{P_1}\right) }{\ln\left(\rho_{2i}/\rho_1\right)} </mi>")
@@ -366,9 +350,6 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         IObj?.SetCurrent()
                         tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
 
-                        T2s = tmp.CalculatedTemperature
-                        H2s = tmp.CalculatedEnthalpy
-
                         If ProcessPath = ProcessPathType.Adiabatic Then
                             Qloop = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
                         Else
@@ -411,6 +392,8 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     IObj?.SetCurrent()
                     tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
+                    T2s = tmp.CalculatedTemperature
+                    H2s = tmp.CalculatedEnthalpy
 
                     IObj?.Paragraphs.Add("<h3>Results</h3>")
 
@@ -421,9 +404,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
 
                     If ProcessPath = ProcessPathType.Adiabatic Then
-                        H2 = Hi + (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
+                        H2 = Hi + (H2s - Hi) / (Me.AdiabaticEfficiency / 100)
                     Else
-                        H2 = Hi + (tmp.CalculatedEnthalpy - Hi) / (Me.PolytropicEfficiency / 100)
+                        H2 = Hi + (H2s - Hi) / (Me.PolytropicEfficiency / 100)
                     End If
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated real outlet enthalpy Hr = {0} kJ/kg", H2))
@@ -497,23 +480,11 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     PolytropicCoefficient = n_poly
 
-                    Dim CFi, CFp, Wisent, Wpoly, Wic, Wpc As Double
+                    Dim Wic, Wpc As Double
 
-                    ' heads
+                    Wic = DeltaQ / (AdiabaticEfficiency / 100)
 
-                    CFi = (H2s - Hi) * 1000 / (n_isent / (n_isent - 1) * (P2 / rho2i - Pi / rho1))
-
-                    CFp = (H2s - Hi) * 1000 / (n_poly / (n_poly - 1) * (P2 / rho2i - Pi / rho1))
-
-                    Wisent = Qi / 1000 * mw * n_isent / (n_isent - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
-
-                    ' volume exponent (polyt)
-
-                    Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFp * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
-
-                    Wic = Wisent / (AdiabaticEfficiency / 100)
-
-                    Wpc = Wpoly / (PolytropicEfficiency / 100)
+                    Wpc = DeltaQ / (PolytropicEfficiency / 100)
 
                     If CalcMode = CalculationMode.Head And ProcessPath = ProcessPathType.Adiabatic Then
 
@@ -533,14 +504,6 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     IObj?.Paragraphs.Add(String.Format("<mi>n_i</mi>: {0} ", n_isent))
 
                     IObj?.Paragraphs.Add(String.Format("<mi>n_p</mi>: {0} ", n_poly))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>f_i</mi>: {0} ", CFi))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>f_p</mi>: {0} ", CFp))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>W_i</mi>: {0} kW", Wisent))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>W_p</mi>: {0} kW", Wpoly))
 
                     IObj?.Paragraphs.Add(String.Format("<mi>\eta_i</mi>: {0} ", AdiabaticEfficiency / 100))
 
@@ -624,11 +587,11 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     If ProcessPath = ProcessPathType.Adiabatic Then
 
-                        Me.DeltaQ = Wi * (H2 - Hi) / (Me.AdiabaticEfficiency / 100)
+                        Me.DeltaQ = Wi * (H2s - Hi) / (Me.AdiabaticEfficiency / 100)
 
                     Else
 
-                        Me.DeltaQ = Wi * (H2 - Hi) / (Me.PolytropicEfficiency / 100)
+                        Me.DeltaQ = Wi * (H2s - Hi) / (Me.PolytropicEfficiency / 100)
 
                     End If
 
@@ -682,17 +645,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
 
-                    CFi = (H2s - Hi) * 1000 / (n_isent / (n_isent - 1) * (P2 / rho2i - Pi / rho1))
-
-                    Wisent = Qi / 1000 * mw * n_isent / (n_isent - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
-
                     ' volume exponent (polyt)
 
                     n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
-
-                    CFp = (H2s - Hi) * 1000 / (n_poly / (n_poly - 1) * (P2 / rho2i - Pi / rho1))
-
-                    Wpoly = Qi / 1000 * mw * n_poly / (n_poly - 1) * CFp * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
                     fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
 
@@ -700,21 +655,17 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     If ProcessPath = ProcessPathType.Adiabatic Then
 
-                        Wic = Wisent / (AdiabaticEfficiency / 100)
-
                         PolytropicEfficiency = AdiabaticEfficiency * fce
-
-                        Wpc = Wpoly / (PolytropicEfficiency / 100)
 
                     Else
 
-                        Wpc = Wpoly / (PolytropicEfficiency / 100)
-
                         AdiabaticEfficiency = PolytropicEfficiency / fce
 
-                        Wic = Wisent / (AdiabaticEfficiency / 100)
-
                     End If
+
+                    Wic = DeltaQ / (AdiabaticEfficiency / 100)
+
+                    Wpc = DeltaQ / (PolytropicEfficiency / 100)
 
                     ' heads
 
@@ -729,14 +680,6 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     IObj?.Paragraphs.Add(String.Format("<mi>n_i</mi>: {0} ", n_isent))
 
                     IObj?.Paragraphs.Add(String.Format("<mi>n_p</mi>: {0} ", n_poly))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>f_i</mi>: {0} ", CFi))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>f_p</mi>: {0} ", CFp))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>W_i</mi>: {0} kW", Wisent))
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>W_p</mi>: {0} kW", Wpoly))
 
                     IObj?.Paragraphs.Add(String.Format("<mi>\eta_i</mi>: {0} ", AdiabaticEfficiency / 100))
 

@@ -554,7 +554,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
             IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
             IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
 
-            Dim rho1, rho2, rho2i, n_isent, n_poly, CFi, CFp, Wisent, Wpoly, Wic, Wpc, fce As Double
+            Dim rho1, rho2, rho2i, n_isent, n_poly, Wic, Wpc, fce As Double
 
             Dim tms As MaterialStream = ims.Clone()
 
@@ -580,17 +580,9 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
             n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
 
-            CFi = (H2s - Hi) * 1000 / (n_isent / (n_isent - 1) * (P2 / rho2i - Pi / rho1))
-
-            Wisent = -Qi / 1000 * mw * n_isent / (n_isent - 1) * CFi * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
-
             ' volume exponent (polyt)
 
             n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
-
-            CFp = (H2s - Hi) * 1000 / (n_poly / (n_poly - 1) * (P2 / rho2i - Pi / rho1))
-
-            Wpoly = -Qi / 1000 * mw * n_poly / (n_poly - 1) * CFp * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
             fce = 1 / (((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1))
 
@@ -598,33 +590,17 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
             If ProcessPath = ProcessPathType.Adiabatic Then
 
-                Wic = Wisent * (AdiabaticEfficiency / 100)
-
                 PolytropicEfficiency = AdiabaticEfficiency / fce
-
-                Wpc = Wpoly * (PolytropicEfficiency / 100)
-
-                If CalcMode = CalculationMode.Delta_P Or CalcMode = CalculationMode.OutletPressure Then
-
-                    Me.DeltaQ = Wic
-
-                End If
 
             Else
 
-                Wpc = Wpoly * (PolytropicEfficiency / 100)
-
                 AdiabaticEfficiency = PolytropicEfficiency * fce
 
-                Wic = Wisent * (AdiabaticEfficiency / 100)
-
-                If CalcMode = CalculationMode.Delta_P Or CalcMode = CalculationMode.OutletPressure Then
-
-                    Me.DeltaQ = Wpc
-
-                End If
-
             End If
+
+            Wic = DeltaQ * (AdiabaticEfficiency / 100)
+
+            Wpc = DeltaQ * (PolytropicEfficiency / 100)
 
             ' heads
 
@@ -655,14 +631,6 @@ Curves:             If CalcMode = CalculationMode.Head Then
             IObj?.Paragraphs.Add(String.Format("<mi>n_i</mi>: {0} ", n_isent))
 
             IObj?.Paragraphs.Add(String.Format("<mi>n_p</mi>: {0} ", n_poly))
-
-            IObj?.Paragraphs.Add(String.Format("<mi>f_i</mi>: {0} ", CFi))
-
-            IObj?.Paragraphs.Add(String.Format("<mi>f_p</mi>: {0} ", CFp))
-
-            IObj?.Paragraphs.Add(String.Format("<mi>W_i</mi>: {0} kW", Wisent))
-
-            IObj?.Paragraphs.Add(String.Format("<mi>W_p</mi>: {0} kW", Wpoly))
 
             IObj?.Paragraphs.Add(String.Format("<mi>\eta_i</mi>: {0} ", AdiabaticEfficiency / 100))
 
