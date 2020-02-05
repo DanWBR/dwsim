@@ -898,7 +898,20 @@ namespace DWSIM.UI.Forms
             {
                 if (e.Data.GetString("ObjectName") != null)
                 {
-                    FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom));
+                    if (FlowsheetObject.ExternalUnitOperations.ContainsKey(e.Data.GetString("ObjectName")))
+                    {
+                        var item = ((Interfaces.ISimulationObject)FlowsheetObject.ExternalUnitOperations[e.Data.GetString("ObjectName")]);
+                        var isobj = (Interfaces.ISimulationObject)item.CloneXML();
+                        FlowsheetObject.AddObjectToSurface(Interfaces.Enums.GraphicObjects.ObjectType.External,
+                            (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
+                            (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
+                            "", "",
+                            (Interfaces.IExternalUnitOperation)isobj);
+                    }
+                    else
+                    {
+                        FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom));
+                    }
                     UpdateEditorConnectionsPanel();
                 }
             };
@@ -1441,9 +1454,9 @@ namespace DWSIM.UI.Forms
                 if (obj is Interfaces.IExternalUnitOperation)
                 {
                     isobj = (Interfaces.ISimulationObject)obj.CloneXML();
-                    FlowsheetObject.AddObjectToSurface(obj.GraphicObject.ObjectType, 
-                        obj.GraphicObject.X + 50, 
-                        obj.GraphicObject.Y + 50, 
+                    FlowsheetObject.AddObjectToSurface(obj.GraphicObject.ObjectType,
+                        obj.GraphicObject.X + 50,
+                        obj.GraphicObject.Y + 50,
                         obj.GraphicObject.Tag + "_CLONE", "",
                         (Interfaces.IExternalUnitOperation)isobj);
                 }
@@ -1597,7 +1610,18 @@ namespace DWSIM.UI.Forms
                 menuitem.Click += (sender2, e2) =>
                 {
                     var z = FlowsheetControl.FlowsheetSurface.Zoom;
-                    FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                    if (item is Interfaces.IExternalUnitOperation)
+                    {
+                        var isobj = (Interfaces.ISimulationObject)item.CloneXML();
+                        FlowsheetObject.AddObjectToSurface(Interfaces.Enums.GraphicObjects.ObjectType.External,
+                            (int)(currposx / z), (int)(currposy / z),
+                            "", "",
+                            (Interfaces.IExternalUnitOperation)isobj);
+                    }
+                    else
+                    {
+                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                    }
                     FlowsheetControl.Invalidate();
                     UpdateEditorConnectionsPanel();
                 };

@@ -38,6 +38,7 @@ Namespace UnitOperations
         End Enum
 
         Protected m_ratios As New System.Collections.ArrayList(3)
+
         Public OutCount As Integer = 0
 
         Public Property StreamFlowSpec As Double = 0.0#

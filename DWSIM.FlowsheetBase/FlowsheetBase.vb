@@ -523,9 +523,10 @@ Imports DWSIM.Interfaces.Enums
                 gObj = myNode
                 gObj.Name = Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                DirectCast(uoobj, ISimulationObject).Name = id
+                DirectCast(uoobj, ISimulationObject).Name = gObj.Name
                 GraphicObjects.Add(gObj.Name, myNode)
                 DirectCast(uoobj, ISimulationObject).GraphicObject = myNode
+                myNode.CreateConnectors(0, 0)
                 SimulationObjects.Add(myNode.Name, uoobj)
 
             Case ObjectType.OT_Adjust
