@@ -51,6 +51,8 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub Draw(ByVal g As Object)
 
+            Me.Description = TryCast(Owner, IExternalUnitOperation)?.Description
+
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             CreateConnectors(0, 0)
