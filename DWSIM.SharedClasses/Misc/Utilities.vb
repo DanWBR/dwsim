@@ -574,6 +574,28 @@ Public Class Utility
 
     End Function
 
+    Shared Function LoadAdditionalUnitOperations() As List(Of IExternalUnitOperation)
+
+        Dim euos As New List(Of IExternalUnitOperation)
+
+        Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "unitops")
+        If Directory.Exists(ppath) Then
+            Try
+                Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+                For Each fpath In otheruos
+                    Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(Assembly.LoadFile(fpath))
+                    For Each pp In pplist
+                        euos.Add(pp)
+                    Next
+                Next
+            Catch ex As Exception
+            End Try
+        End If
+
+        Return euos
+
+    End Function
+
     Shared Function LoadAdditionalPropertyPackages() As List(Of IPropertyPackage)
 
         Dim ppacks As New List(Of IPropertyPackage)
@@ -625,6 +647,22 @@ Public Class Utility
         Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
 
         Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
+
+    End Function
+
+    Shared Function GetUnitOperations(ByVal assmbly As Assembly) As List(Of Interfaces.IExternalUnitOperation)
+
+        Dim availableTypes As New List(Of Type)()
+
+        Try
+            availableTypes.AddRange(assmbly.GetTypes())
+        Catch ex As Exception
+            Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
+        End Try
+
+        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract)
+
+        Return ppList.ConvertAll(Of Interfaces.IExternalUnitOperation)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IExternalUnitOperation))
 
     End Function
 

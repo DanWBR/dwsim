@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using DWSIM.Interfaces;
+using DWSIM.Interfaces.Enums.GraphicObjects;
 using Eto.Forms;
 using iTextSharp.text;
 

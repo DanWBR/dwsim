@@ -111,7 +111,7 @@
     <Compile Include="IReactionSetBase.vb" />
     <Compile Include="IReactionStoichBase.vb" />
     <Compile Include="IScript.vb" />
-    <Compile Include="IExternalGraphicObject.vb" />
+    <Compile Include="IExternalUnitOperation.vb" />
     <Compile Include="ISpecialOps.vb" />
     <Compile Include="ISimulationObject.vb" />
     <Compile Include="IUndoRedoAction.vb" />

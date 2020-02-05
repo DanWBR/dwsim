@@ -20,8 +20,6 @@
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
-Imports System.Windows.Forms
-Imports System.Linq
 Imports DWSIM.Interfaces.Enums
 
 Namespace UnitOperations

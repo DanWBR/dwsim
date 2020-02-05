@@ -119,6 +119,9 @@ namespace DWSIM.UI.Desktop.Editors
 
             switch (SimObject.GraphicObject.ObjectType)
             {
+                case ObjectType.External:
+                    ((IExternalUnitOperation)SimObject)?.PopulateEditorPanel(container);
+                    break;
                 case ObjectType.CapeOpenUO:
                     s.CreateAndAddDescriptionRow(container, "CAPE-OPEN Unit Operations are supported on the Classic User Interface (Classic UI) running on Windows only.");
                     break;

@@ -45,6 +45,8 @@ Imports DWSIM.Interfaces.Enums
 
     Public Property AvailableSystemsOfUnits As New List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
 
+    Public Property ExternalUnitOperations As New Dictionary(Of String, IExternalUnitOperation)
+
     Private loaded As Boolean = False
 
     Private rm, prm As Resources.ResourceManager
@@ -505,13 +507,26 @@ Imports DWSIM.Interfaces.Enums
 
     End Function
 
-    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "") As String
+    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "", Optional ByVal uoobj As IExternalUnitOperation = Nothing) As String
 
         Dim gObj As IGraphicObject = Nothing
         Dim mpx = x '- SplitContainer1.SplitterDistance
         Dim mpy = y '- ToolStripContainer1.TopToolStripPanel.Height
 
         Select Case type
+
+            Case ObjectType.External
+
+                Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                myNode.Tag = uoobj.Prefix & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myNode.Tag = tag
+                gObj = myNode
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(uoobj, ISimulationObject).Name = id
+                GraphicObjects.Add(gObj.Name, myNode)
+                DirectCast(uoobj, ISimulationObject).GraphicObject = myNode
+                SimulationObjects.Add(myNode.Name, uoobj)
 
             Case ObjectType.OT_Adjust
 
@@ -1203,7 +1218,12 @@ Imports DWSIM.Interfaces.Enums
                 If xel.Element("Type").Value.Contains("MaterialStream") Then
                     obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), ISimulationObject)
                 Else
-                    obj = CType(UnitOperations.ReturnInstance(xel.Element("Type").Value), ISimulationObject)
+                    Dim uokey As String = xel.Element("ComponentName").Value
+                    If ExternalUnitOperations.ContainsKey(uokey) Then
+                        obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        obj = CType(UnitOperations.ReturnInstance(xel.Element("Type").Value), ISimulationObject)
+                    End If
                 End If
                 Dim gobj As IGraphicObject = (From go As IGraphicObject In
                                     FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
@@ -1733,6 +1753,7 @@ Imports DWSIM.Interfaces.Enums
         FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
 
         AddPropPacks()
+        AddExternalUOs()
         AddFlashAlgorithms()
 
         Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops()
@@ -2078,6 +2099,17 @@ Label_00CC:
         End If
 
     End Sub
+
+    Sub AddExternalUOs()
+
+        Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
+
+        For Each uo In otheruos
+            ExternalUnitOperations.Add(uo.Name, uo)
+        Next
+
+    End Sub
+
 
     Function GetPropertyPackages(ByVal assmbly As Assembly) As List(Of Interfaces.IPropertyPackage)
 

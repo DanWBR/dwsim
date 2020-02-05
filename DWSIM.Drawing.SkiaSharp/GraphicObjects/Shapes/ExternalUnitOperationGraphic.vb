@@ -5,7 +5,7 @@ Imports DWSIM.Interfaces
 
 Namespace GraphicObjects.Shapes
 
-    Public Class ProxyObjectGraphic
+    Public Class ExternalUnitOperationGraphic
 
         Inherits ShapeGraphic
 
@@ -15,7 +15,7 @@ Namespace GraphicObjects.Shapes
 
             Me.ObjectType = ObjectType.External
 
-            Me.Description = TryCast(Owner, IExternalGraphicObject)?.Description
+            Me.Description = TryCast(Owner, IExternalUnitOperation)?.Description
 
         End Sub
 
@@ -45,7 +45,7 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-            TryCast(Owner, IExternalGraphicObject)?.CreateConnectors()
+            TryCast(Owner, IExternalUnitOperation)?.CreateConnectors()
 
         End Sub
 
@@ -58,7 +58,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            DirectCast(Owner, IExternalGraphicObject)?.Draw(g)
+            TryCast(Owner, IExternalUnitOperation)?.Draw(g)
 
         End Sub
 
