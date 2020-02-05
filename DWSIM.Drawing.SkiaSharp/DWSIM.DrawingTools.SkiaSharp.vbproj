@@ -145,6 +145,7 @@
     <Compile Include="GraphicObjects\Shapes\ConversionReactor.vb" />
     <Compile Include="GraphicObjects\Shapes\Cooler.vb" />
     <Compile Include="GraphicObjects\Shapes\CSTR.vb" />
+    <Compile Include="GraphicObjects\Shapes\ProxyObject.vb" />
     <Compile Include="GraphicObjects\Shapes\Script.vb" />
     <Compile Include="GraphicObjects\Shapes\EnergyRecycle.vb" />
     <Compile Include="GraphicObjects\Shapes\EnergyStream.vb" />

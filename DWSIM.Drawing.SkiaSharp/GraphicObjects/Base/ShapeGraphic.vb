@@ -1,3 +1,4 @@
+Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports s = DWSIM.GlobalSettings.Settings
 
@@ -8,7 +9,6 @@ Namespace GraphicObjects
         Inherits GraphicObject
 
         Public Sub UpdateStatus()
-
             Dim alpha As Integer = 255
 
             If SemiTransparent Then alpha = 50
@@ -39,41 +39,26 @@ Namespace GraphicObjects
         End Sub
 
         Public Property DefaultTypeFace As SKTypeface
-
         Public Property RegularTypeFace As SKTypeface
-
         Public Property SemiTransparent As Boolean = False
-
         Public Overridable Property LineWidth As Integer = 1
-
         Public Overridable Property GradientMode As Boolean = True
-
         Public Overridable Property LineColor As SKColor = SKColors.Black
-
         Public Overridable Property LineColorDark As SKColor = SKColors.SteelBlue
-
         Public Overridable Property Fill As Boolean = False
-
         Public Overridable Property FillColor As SKColor = SKColors.LightGray
-
         Public Overridable Property FillColorDark As SKColor = SKColors.Black
-
         Public Overridable Property GradientColor1 As SKColor = SKColors.LightGray
-
         Public Overridable Property GradientColor2 As SKColor = SKColors.White
-
         Public Overridable Property FontSize As Double = 10.0#
-
         Public Overridable Property OverrideColors As Boolean = False
 
         Public Overrides Sub Draw(ByVal g As Object)
-
             MyBase.Draw(g)
 
         End Sub
 
         Public Overridable Sub DrawTag(ByVal g As SKCanvas)
-
             Dim tpaint As New SKPaint()
 
             With tpaint
@@ -110,7 +95,6 @@ Namespace GraphicObjects
         End Sub
 
         Public Sub DrawReactor(ByVal g As SKCanvas, ByVal TypeName As String)
-
             MyBase.Draw(g)
 
             Dim rect2 As New SKRect(X + (0.25 - 0.14) * Width, Y + (0.5 - 0.14 / 2) * Height, X + 0.25 * Width, Y + (0.5 - 0.14 / 2) * Height + 0.14 * Height)

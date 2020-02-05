@@ -510,6 +510,8 @@ Namespace Enums.GraphicObjects
         GO_Chart
         GO_InputControl
 
+        External
+
     End Enum
 
     Public Enum ShapeIcon
