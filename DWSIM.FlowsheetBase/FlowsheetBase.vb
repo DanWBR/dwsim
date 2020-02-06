@@ -1219,7 +1219,7 @@ Imports DWSIM.Interfaces.Enums
                 If xel.Element("Type").Value.Contains("MaterialStream") Then
                     obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), ISimulationObject)
                 Else
-                    Dim uokey As String = xel.Element("ComponentName").Value
+                    Dim uokey As String = xel.Element("ComponentDescription").Value
                     If ExternalUnitOperations.ContainsKey(uokey) Then
                         obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
                     Else
@@ -2106,7 +2106,7 @@ Label_00CC:
         Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
 
         For Each uo In otheruos
-            ExternalUnitOperations.Add(uo.Name, uo)
+            ExternalUnitOperations.Add(uo.Description, uo)
         Next
 
     End Sub
