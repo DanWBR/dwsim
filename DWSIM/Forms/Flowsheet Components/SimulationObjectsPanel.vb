@@ -59,6 +59,27 @@ Public Class SimulationObjectsPanel
             End If
         Next
 
+        For Each item In FormMain.ExternalUnitOperations
+            Dim obj = item.Value
+            If Not Flowsheet.MobileCompatibilityMode Then
+                add = obj.GetType.GetProperty("Visible").GetValue(obj)
+            Else
+                add = obj.MobileCompatible
+            End If
+            If add Then
+                obj.SetFlowsheet(Flowsheet)
+                Dim li As New ListItem
+                li.lblName.Text = obj.GetDisplayName
+                li.ToolTip1.SetToolTip(li.lblName, obj.GetDisplayDescription)
+                li.Image.Image = obj.GetIconBitmap
+                li.ToolTip1.SetToolTip(li.Image, obj.GetDisplayDescription)
+                li.ObjectTypeInfo = obj.GetType
+                li.Tag = obj.ObjectClass
+                litems.Add(li)
+                obj = Nothing
+            End If
+        Next
+
         For Each item In litems
             Select Case DirectCast(item.Tag, Interfaces.Enums.SimulationObjectClass)
                 Case SimulationObjectClass.CAPEOPEN

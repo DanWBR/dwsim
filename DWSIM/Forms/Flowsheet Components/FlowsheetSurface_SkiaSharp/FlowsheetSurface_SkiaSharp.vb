@@ -368,7 +368,39 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Select Case FlowsheetSurface.SelectedObject.ObjectType
 
+            Case ObjectType.External
+
+                Dim myDWOBJ As Interfaces.IExternalUnitOperation = newobj
+                With myDWOBJ.GraphicObject
+                    .Calculated = False
+                    .Name = myDWOBJ.Prefix & Guid.NewGuid.ToString
+                    .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
+                    .X = mpx
+                    .Y = mpy
+                    For Each con As ConnectionPoint In .InputConnectors
+                        con.AttachedConnector = Nothing
+                        con.IsAttached = False
+                    Next
+                    For Each con As ConnectionPoint In .OutputConnectors
+                        con.AttachedConnector = Nothing
+                        con.IsAttached = False
+                    Next
+                    If Not .SpecialConnectors Is Nothing Then
+                        For Each con As ConnectionPoint In .SpecialConnectors
+                            con.AttachedConnector = Nothing
+                            con.IsAttached = False
+                        Next
+                    End If
+                    .EnergyConnector.AttachedConnector = Nothing
+                    .EnergyConnector.IsAttached = False
+                End With
+                DirectCast(myDWOBJ, Interfaces.ISimulationObject).Name = myDWOBJ.GraphicObject.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
+                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
+
             Case ObjectType.OT_Adjust
+
                 Dim myDWOBJ As Adjust = CType(newobj, Adjust)
                 With myDWOBJ.GraphicObject
                     .Calculated = False
@@ -1500,7 +1532,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Call Me.Flowsheet.DeleteSelectedObject(sender, e, FlowsheetSurface.SelectedObject)
     End Sub
 
-    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, chemsep As Boolean, Optional ByVal tag As String = "", Optional ByVal id As String = "") As String
+    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, chemsep As Boolean, Optional ByVal tag As String = "", Optional ByVal id As String = "", Optional ByVal uoobj As Interfaces.IExternalUnitOperation = Nothing) As String
 
         If Flowsheet Is Nothing Then Flowsheet = My.Application.ActiveSimulation
 
@@ -1514,6 +1546,20 @@ Public Class FlowsheetSurface_SkiaSharp
         Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH006"), Color.Black, MessageType.Tip)
 
         Select Case type
+
+            Case ObjectType.External
+
+                Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                myNode.Tag = uoobj.Prefix & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myNode.Tag = tag
+                gObj = myNode
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(uoobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
+                DirectCast(uoobj, Interfaces.ISimulationObject).GraphicObject = myNode
+                myNode.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, uoobj)
 
             Case ObjectType.OT_Adjust
 

@@ -66,6 +66,10 @@ Namespace UnitOperations
         Public Property InputVariables As New Dictionary(Of String, Double)
         Public Property OutputVariables As New Dictionary(Of String, Double)
 
+        Public Property EmbeddedImageData As String = ""
+
+        Public Property UseEmbeddedImage As Boolean = False
+
         Public Property ExecutionEngine As PythonExecutionEngine = PythonExecutionEngine.IronPython
 
         Public Property FontName() As String

@@ -115,10 +115,10 @@ Namespace GraphicObjects.Shapes
 
         End Function
 
-        Public Function ImageToBase64(image As SKImage, format As SKEncodedImageFormat) As String
+        Public Shared Function ImageToBase64(image As SKImage, format As SKEncodedImageFormat) As String
             Using ms As New MemoryStream()
                 ' Convert Image to byte[]
-                Dim data = image.Encode(format, 100)
+                Dim data = image.Encode(format, 92)
                 data.SaveTo(ms)
                 Dim imageBytes As Byte() = ms.ToArray()
                 ' Convert byte[] to Base64 String
@@ -127,7 +127,7 @@ Namespace GraphicObjects.Shapes
             End Using
         End Function
 
-        Public Function Base64ToImage(base64String As String) As SKImage
+        Public Shared Function Base64ToImage(base64String As String) As SKImage
             ' Convert Base64 String to byte[]
             Dim imageBytes As Byte() = Convert.FromBase64String(base64String)
             Using ms As New MemoryStream(imageBytes, 0, imageBytes.Length)

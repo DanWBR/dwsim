@@ -240,8 +240,9 @@ namespace DWSIM.UI.Desktop.Editors
                      }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Thermodynamic Path"));
-                    s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) => {
-                        var f = new UnitOperations.EditingForm_CompressorExpander_Curves {simobj = ce };
+                    s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) =>
+                    {
+                        var f = new UnitOperations.EditingForm_CompressorExpander_Curves { simobj = ce };
                         f.ShowDialog();
                     });
                     s.CreateAndAddTextBoxRow(container, nf, "Rotation Speed", ce.Speed,
@@ -409,7 +410,8 @@ namespace DWSIM.UI.Desktop.Editors
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
-                    s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) => {
+                    s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) =>
+                    {
                         var f = new UnitOperations.EditingForm_CompressorExpander_Curves { simobj = xe };
                         f.ShowDialog();
                     });
@@ -2369,6 +2371,32 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
+                    s.CreateAndAddLabelAndButtonRow(container, "Embedded Image Icon", "Load File", null, (s, e) =>
+                    {
+                        var searchdialog = new OpenFileDialog() { Title = "Open Image File", MultiSelect = false };
+                        searchdialog.Filters.Add(new FileFilter("Image Files", new[] { ".png", ".jpg" }));
+                        if (searchdialog.ShowDialog(container) == DialogResult.Ok)
+                        {
+                            try
+                            {
+                                using (var bmp = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromFile(searchdialog.FileName))
+                                {
+                                    using (var img =SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp))
+                                    {
+                                        scriptuo.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png);
+                                        MessageBox.Show("Image data read successfully.", MessageBoxButtons.OK);
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error reading image data.", MessageBoxButtons.OK);
+                            }
+                        }
+                    });
+                    s.CreateAndAddCheckBoxRow(container, "Use Embedded Image Icon", scriptuo.UseEmbeddedImage, (c, e) => {
+                        scriptuo.UseEmbeddedImage = c.Checked.GetValueOrDefault();
+                    });
                     s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
                     s.CreateAndAddLabelRow(container, "Script Variables");
                     var tabc = new TabControl { Height = 400 };

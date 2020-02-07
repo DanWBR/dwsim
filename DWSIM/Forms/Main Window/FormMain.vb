@@ -65,6 +65,7 @@ Public Class FormMain
     Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
     Public FlashAlgorithms As New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
+    Public Property ExternalUnitOperations As New Dictionary(Of String, Interfaces.IExternalUnitOperation)
 
     Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
     Public WithEvents timer1 As New Timer
@@ -612,6 +613,16 @@ Public Class FormMain
         If latestfolders.Count > 0 Then
             Me.FileToolStripMenuItem.DropDownItems.Insert(Me.FileToolStripMenuItem.DropDownItems.Count - 1, New ToolStripSeparator())
         End If
+
+    End Sub
+
+    Sub AddExternalUOs()
+
+        Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
+
+        For Each uo In otheruos
+            ExternalUnitOperations.Add(uo.Description, uo)
+        Next
 
     End Sub
 
@@ -1830,7 +1841,12 @@ Public Class FormMain
                 If xel.Element("Type").Value.Contains("MaterialStream") Then
                     obj = pp.ReturnInstance(xel.Element("Type").Value)
                 Else
-                    obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                    Dim uokey As String = xel.Element("ComponentDescription").Value
+                    If ExternalUnitOperations.ContainsKey(uokey) Then
+                        obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                    End If
                 End If
                 Dim gobj As GraphicObject = (From go As GraphicObject In
                                     form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
@@ -2342,7 +2358,12 @@ Public Class FormMain
                 If xel.Element("Type").Value.Contains("MaterialStream") Then
                     obj = pp.ReturnInstance(xel.Element("Type").Value)
                 Else
-                    obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                    Dim uokey As String = xel.Element("ComponentDescription").Value
+                    If ExternalUnitOperations.ContainsKey(uokey) Then
+                        obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                    End If
                 End If
                 Dim gobj As GraphicObject = (From go As GraphicObject In
                                     form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault

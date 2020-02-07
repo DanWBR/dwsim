@@ -53,6 +53,8 @@ Public Class EditingForm_CustomUO
 
             'first block
 
+            chkUseEmbeddedImage.Checked = .UseEmbeddedImage
+
             chkActive.Checked = .GraphicObject.Active
 
             Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
@@ -611,5 +613,32 @@ Public Class EditingForm_CustomUO
 
     End Sub
 
+    Private Sub chkUseEmbeddedImage_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseEmbeddedImage.CheckedChanged
+        SimObject.UseEmbeddedImage = chkUseEmbeddedImage.Checked
+    End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        With Me.OpenFileName
+            .CheckFileExists = True
+            .CheckPathExists = True
+            .Title = SimObject.FlowSheet.GetTranslatedString("Import")
+            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
+            .AddExtension = True
+            .Multiselect = False
+            .RestoreDirectory = True
+            Dim res As DialogResult = .ShowDialog
+            If res = Windows.Forms.DialogResult.OK Then
+                Try
+                    Using bmp = CType(System.Drawing.Bitmap.FromFile(OpenFileName.FileName), System.Drawing.Bitmap)
+                        Using img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
+                            SimObject.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png)
+                            MessageBox.Show("Image data read successfully.", "DWSIM", MessageBoxButtons.OK)
+                        End Using
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
+                End Try
+            End If
+        End With
+    End Sub
 End Class
