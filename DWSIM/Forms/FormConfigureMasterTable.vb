@@ -226,4 +226,28 @@ Public Class FormConfigureMasterTable
     Private Sub nupLines_ValueChanged(sender As Object, e As EventArgs) Handles nupLines.ValueChanged
         If Loaded Then Table.NumberOfLines = nupLines.Value
     End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        cbObjectType.SelectedItem = "MaterialStream"
+
+        Button1_Click(sender, e)
+
+        Dim props() As String = Nothing
+
+        If Table.ObjectList.Count > 0 Then
+            For Each s As String In Table.ObjectList.Keys
+                props = Table.Flowsheet.GetFlowsheetSimulationObject(s).GetProcessFlowsheetProperties
+                Exit For
+            Next
+            For Each lvi As ListViewItem In lvProps.Items
+                lvi.Checked = False
+            Next
+            For Each lvi As ListViewItem In lvProps.Items
+                If props.Contains(lvi.Tag) Then lvi.Checked = True
+            Next
+        End If
+
+    End Sub
+
 End Class

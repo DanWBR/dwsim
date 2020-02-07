@@ -136,6 +136,9 @@
   <data name="ColumnHeader2.Text" xml:space="preserve">
     <value>Property</value>
   </data>
+  <data name="lvProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>290, 338</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>355, 47</value>
   </data>
@@ -158,14 +161,23 @@
   <data name="ColumnHeader1.Width" type="System.Int32, mscorlib">
     <value>164</value>
   </data>
+  <data name="lvObjects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 338</value>
+  </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 12</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="btnOrderUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 390</value>
+  </data>
+  <data name="btnOrderDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 390</value>
+  </data>
   <data name="lblOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 338</value>
+    <value>4, 396</value>
   </data>
   <data name="lblOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -174,7 +186,7 @@
     <value>Order</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 124</value>
+    <value>7, 124</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 23</value>
@@ -183,7 +195,7 @@
     <value>Select All Objects</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 153</value>
+    <value>7, 153</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 23</value>
@@ -192,7 +204,7 @@
     <value>Select All Properties</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 182</value>
+    <value>7, 182</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 23</value>
@@ -201,7 +213,7 @@
     <value>Default Properties Only</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 267</value>
+    <value>7, 306</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 23</value>
@@ -210,7 +222,7 @@
     <value>Deselect Properties</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 238</value>
+    <value>7, 277</value>
   </data>
   <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 23</value>
@@ -219,13 +231,28 @@
     <value>Deselect Objects</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 309</value>
+    <value>4, 367</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Grouping Rows</value>
+  </data>
+  <data name="nupLines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 364</value>
+  </data>
+  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 211</value>
+  </data>
+  <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
+  </data>
+  <data name="Button6.Text" xml:space="preserve">
+    <value>Process Flowsheet</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>617, 425</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Master Property Table</value>

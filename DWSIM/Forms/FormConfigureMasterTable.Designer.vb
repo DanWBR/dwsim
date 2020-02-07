@@ -44,6 +44,7 @@ Partial Class FormConfigureMasterTable
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.nupLines = New System.Windows.Forms.NumericUpDown()
+        Me.Button6 = New System.Windows.Forms.Button()
         CType(Me.nupLines, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,9 +55,9 @@ Partial Class FormConfigureMasterTable
         '
         'cbObjectType
         '
+        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjectType.FormattingEnabled = True
-        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.Name = "cbObjectType"
         '
         'Label2
@@ -66,11 +67,11 @@ Partial Class FormConfigureMasterTable
         '
         'lvProps
         '
+        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
         Me.lvProps.HideSelection = False
-        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -86,18 +87,18 @@ Partial Class FormConfigureMasterTable
         '
         'cbOrderBy
         '
+        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOrderBy.FormattingEnabled = True
-        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.Name = "cbOrderBy"
         '
         'lvObjects
         '
+        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.CheckBoxes = True
         Me.lvObjects.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvObjects.FullRowSelect = True
         Me.lvObjects.HideSelection = False
-        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.MultiSelect = False
         Me.lvObjects.Name = "lvObjects"
         Me.lvObjects.ShowGroups = False
@@ -178,10 +179,17 @@ Partial Class FormConfigureMasterTable
         Me.nupLines.Name = "nupLines"
         Me.nupLines.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Name = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.nupLines)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button4)
@@ -229,4 +237,5 @@ Partial Class FormConfigureMasterTable
     Friend WithEvents Button5 As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents nupLines As NumericUpDown
+    Friend WithEvents Button6 As Button
 End Class

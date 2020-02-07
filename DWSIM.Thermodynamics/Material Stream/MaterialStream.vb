@@ -6024,6 +6024,43 @@ Namespace Streams
             Return New String() {"PROP_MS_0", "PROP_MS_1", "PROP_MS_2", "PROP_MS_3", "PROP_MS_4", "PROP_MS_9", "PROP_MS_10", "PROP_MS_27", "PROP_MS_130", "PROP_MS_154"}
         End Function
 
+        Public Function GetProcessFlowsheetProperties() As String()
+
+            Dim prefix = "PROP_MS_"
+
+            Dim plist As New List(Of String)
+
+            plist.Add(prefix & "0")
+            plist.Add(prefix & "1")
+            plist.Add(prefix & "2")
+            plist.Add(prefix & "3")
+            plist.Add(prefix & "4")
+            plist.Add(prefix & "27")
+            plist.Add(prefix & "28")
+            plist.Add(prefix & "29")
+            plist.Add(prefix & "12")
+            plist.Add(prefix & "13")
+            plist.Add(prefix & "20")
+            plist.Add(prefix & "21")
+            plist.Add(prefix & "26")
+            For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                plist.Add("PROP_MS_106" + "/" + subst.Name)
+            Next
+            plist.Add(prefix & "63")
+            plist.Add(prefix & "64")
+            plist.Add(prefix & "65")
+            plist.Add(prefix & "48")
+            plist.Add(prefix & "49")
+            plist.Add(prefix & "56")
+            plist.Add(prefix & "57")
+            For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                plist.Add("PROP_MS_108" + "/" + subst.Name)
+            Next
+
+            Return plist.ToArray
+
+        End Function
+
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
