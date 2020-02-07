@@ -396,7 +396,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 End With
                 DirectCast(myDWOBJ, Interfaces.ISimulationObject).Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
-                Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(DirectCast(myDWOBJ, Interfaces.ISimulationObject).Name, myDWOBJ)
                 FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
 
             Case ObjectType.OT_Adjust
