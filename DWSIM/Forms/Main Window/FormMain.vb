@@ -1251,6 +1251,11 @@ Public Class FormMain
             End Try
         Next
 
+    End Sub
+
+    Sub ConnectGraphicObjects(form As FormFlowsheet, data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
+                          Optional ByVal pkey As String = "", Optional ByVal shift As Integer = 0, Optional ByVal reconnectinlets As Boolean = False)
+
         For Each xel As XElement In data
             Try
                 Dim id As String = pkey & xel.Element("Name").Value
@@ -1259,6 +1264,7 @@ Public Class FormMain
                                                             form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                     If obj Is Nothing Then obj = (From go As GraphicObject In form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
                     If Not obj Is Nothing Then
+                        If obj.ObjectType = ObjectType.External Then obj.CreateConnectors(0, 0)
                         If xel.Element("InputConnectors") IsNot Nothing Then
                             Dim i As Integer = 0
                             For Each xel2 As XElement In xel.Element("InputConnectors").Elements
@@ -1838,7 +1844,7 @@ Public Class FormMain
             Try
                 Dim id As String = xel.<Name>.Value
                 Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
-                If xel.Element("Type").Value.Contains("MaterialStream") Then
+                If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
                     obj = pp.ReturnInstance(xel.Element("Type").Value)
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
@@ -1878,6 +1884,10 @@ Public Class FormMain
         Next
 
         AddSimulationObjects(form, objlist, excs)
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
+
+        ConnectGraphicObjects(form, data, excs)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
 
@@ -2355,7 +2365,7 @@ Public Class FormMain
             Try
                 Dim id As String = xel.<Name>.Value
                 Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
-                If xel.Element("Type").Value.Contains("MaterialStream") Then
+                If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
                     obj = pp.ReturnInstance(xel.Element("Type").Value)
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
@@ -2395,6 +2405,10 @@ Public Class FormMain
         Next
 
         AddSimulationObjects(form, objlist, excs)
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
+
+        ConnectGraphicObjects(form, data, excs)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
 

@@ -5949,10 +5949,10 @@ Final3:
 
             Dim fT, fT_inf, nsub, delta_T As Double
 
-            Tinf = 10
-            Tsup = 2000
+            Tinf = 0.1
+            Tsup = 10000
 
-            nsub = 25
+            nsub = 50
 
             delta_T = (Tsup - Tinf) / nsub
 

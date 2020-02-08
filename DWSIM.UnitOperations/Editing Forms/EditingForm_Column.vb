@@ -326,7 +326,7 @@ Public Class EditingForm_Column
             Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
             cbPropPack.Items.Clear()
             cbPropPack.Items.AddRange(proppacks)
-            cbPropPack.SelectedItem = .PropertyPackage.Tag
+            cbPropPack.SelectedItem = .PropertyPackage?.Tag
 
             Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
             cbFlashAlg.Items.Clear()

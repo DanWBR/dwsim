@@ -1216,7 +1216,7 @@ Imports DWSIM.Interfaces.Enums
             Try
                 Dim id As String = xel.<Name>.Value
                 Dim obj As ISimulationObject = Nothing
-                If xel.Element("Type").Value.Contains("MaterialStream") Then
+                If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
                     obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), ISimulationObject)
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
@@ -1260,6 +1260,8 @@ Imports DWSIM.Interfaces.Enums
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
         AddTables(data, excs)
+
+        ConnectGraphicObjects(data, excs)
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
 
@@ -1581,6 +1583,12 @@ Imports DWSIM.Interfaces.Enums
             End Try
         Next
 
+    End Sub
+
+    Sub ConnectGraphicObjects(data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
+                      Optional ByVal pkey As String = "", Optional ByVal shift As Integer = 0, Optional ByVal reconnectinlets As Boolean = False)
+
+
         For Each xel As XElement In data
             Try
                 Dim id As String = pkey & xel.Element("Name").Value
@@ -1590,6 +1598,7 @@ Imports DWSIM.Interfaces.Enums
                     If obj Is Nothing Then obj = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
                     If Not obj Is Nothing Then
+                        If obj.ObjectType = ObjectType.External Then obj.CreateConnectors(0, 0)
                         If xel.Element("InputConnectors") IsNot Nothing Then
                             Dim i As Integer = 0
                             For Each xel2 As XElement In xel.Element("InputConnectors").Elements

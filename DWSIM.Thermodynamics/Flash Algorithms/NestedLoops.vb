@@ -1894,6 +1894,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     T += Vz(i) * PP.AUX_TSATi(P, i)
                 Next
                 IObj?.Close()
+                Vx = New Double() {1.0}
+                Vy = New Double() {1.0}
+                Ki = New Double() {1.0}
                 Return New Object() {L, V, Vx, Vy, T, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
             End If
 
