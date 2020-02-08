@@ -117,30 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="txtScript.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FaTabStripItem3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ListBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem4.Title" xml:space="preserve">
     <value>Includes</value>
-  </data>
-  <data name="FaTabStripItem4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FaTabStrip2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABs
-        CQAAAk1TRnQBSQFMAgEBBQEAAaQBAQGkAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBBQEAAawBAQGsAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -355,16 +340,7 @@
   <data name="APIHelptsbutton.Text" xml:space="preserve">
     <value>API Help</value>
   </data>
-  <data name="ToolStrip1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="ofd1.Filter" xml:space="preserve">
     <value>All files|*.*</value>
-  </data>
-  <data name="treeViewItems.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

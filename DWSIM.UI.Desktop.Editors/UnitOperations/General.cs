@@ -2371,6 +2371,11 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
+                    s.CreateAndAddLabelRow(container, "Python Script Repositories");
+                    s.CreateAndAddButtonRow(container, "FOSSEE's Custom Modeling Repository", null, (btn, e) => {
+                        Process.Start("https://dwsim.fossee.in/custom-model");
+                    });
+                    s.CreateAndAddLabelRow(container, "Flowsheet Object");
                     s.CreateAndAddLabelAndButtonRow(container, "Embedded Image Icon", "Load File", null, (s, e) =>
                     {
                         var searchdialog = new OpenFileDialog() { Title = "Open Image File", MultiSelect = false };
@@ -2397,6 +2402,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddCheckBoxRow(container, "Use Embedded Image Icon", scriptuo.UseEmbeddedImage, (c, e) => {
                         scriptuo.UseEmbeddedImage = c.Checked.GetValueOrDefault();
                     });
+                    s.CreateAndAddLabelRow(container, "Python Script");
                     s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
                     s.CreateAndAddLabelRow(container, "Script Variables");
                     var tabc = new TabControl { Height = 400 };

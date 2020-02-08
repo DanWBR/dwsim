@@ -1,5 +1,5 @@
-Version 5.8 Update 7
+Version 5.8 Update 8
 
-- [NEW] Added Performance Curves and Polytropic Process support to Compressor and Expander
-- [FIX] Fixed single compound phase detection
-- [FIX] Other bug fixes
+- [NEW] Added support for external Unit Operations
+- [NEW] Added the ability to load and use images as flowsheet object icons for Python Script UOs
+- [FIX] Bug fixes
