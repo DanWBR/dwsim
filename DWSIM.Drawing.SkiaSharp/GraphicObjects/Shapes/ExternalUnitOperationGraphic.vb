@@ -15,7 +15,7 @@ Namespace GraphicObjects.Shapes
 
             Me.ObjectType = ObjectType.External
 
-            Me.Description = TryCast(Owner, IExternalUnitOperation)?.Description
+            'Me.Description = TryCast(Owner, IExternalUnitOperation)?.Description
 
         End Sub
 
@@ -41,6 +41,14 @@ Namespace GraphicObjects.Shapes
             Me.New(New SKPoint(posX, posY), New SKSize(width, height))
         End Sub
 
+        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
+            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        End Function
+
+        Public Overrides Function SaveData() As List(Of XElement)
+            Return XMLSerializer.XMLSerializer.Serialize(Me)
+        End Function
+
 #End Region
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
@@ -52,6 +60,8 @@ Namespace GraphicObjects.Shapes
         Public Overrides Sub Draw(ByVal g As Object)
 
             Me.Description = TryCast(Owner, IExternalUnitOperation)?.Description
+
+            Me.AdditionalInfo = TryCast(Owner, IExternalUnitOperation)?.Name
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 

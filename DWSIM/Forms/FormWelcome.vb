@@ -103,6 +103,7 @@ Public Class FormWelcome
                                                                                            FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 1) With {.Tag = item.DownloadLink})
                                                                                            FormMain.FOSSEEList.Add(item)
                                                                                        Next
+                                                                                       Owner.UpdateFOSSEEList()
                                                                                    End If
                                                                                End Sub)
                                                          End Sub)

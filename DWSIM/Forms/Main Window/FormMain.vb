@@ -38,7 +38,7 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
-Imports Cefsharp.Winforms
+Imports CefSharp.WinForms
 
 Public Class FormMain
 
@@ -949,6 +949,10 @@ Public Class FormMain
             End If
         Next
 
+    End Sub
+
+    Sub UpdateFOSSEEList()
+
         For Each item In FOSSEEList
             Dim tsmi As New ToolStripMenuItem
             With tsmi
@@ -1002,6 +1006,7 @@ Public Class FormMain
                                        End If
                                    End Sub
         Next
+
 
     End Sub
 
@@ -1181,6 +1186,7 @@ Public Class FormMain
     End Function
 
     Private Function RandomString(ByVal size As Integer, ByVal lowerCase As Boolean) As String
+
         Dim builder As New StringBuilder()
         Dim random As New Random()
         Dim ch As Char
@@ -1193,7 +1199,8 @@ Public Class FormMain
             Return builder.ToString().ToLower()
         End If
         Return builder.ToString()
-    End Function 'RandomString 
+
+    End Function
 
     Sub AddGraphicObjects(form As FormFlowsheet, data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
                           Optional ByVal pkey As String = "", Optional ByVal shift As Integer = 0, Optional ByVal reconnectinlets As Boolean = False)
@@ -1239,6 +1246,15 @@ Public Class FormMain
                     ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
                         obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
                         obj.PositionConnectors()
+                    ElseIf TypeOf obj Is ExternalUnitOperationGraphic Then
+                        Dim euo = ExternalUnitOperations.Values.Where(Function(x) x.Description = obj.Description).FirstOrDefault
+                        If euo IsNot Nothing Then
+                            obj.Owner = euo
+                            DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = obj
+                            obj.CreateConnectors(0, 0)
+                            obj.Owner = Nothing
+                            DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = Nothing
+                        End If
                     Else
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
@@ -1251,20 +1267,13 @@ Public Class FormMain
             End Try
         Next
 
-    End Sub
-
-    Sub ConnectGraphicObjects(form As FormFlowsheet, data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
-                          Optional ByVal pkey As String = "", Optional ByVal shift As Integer = 0, Optional ByVal reconnectinlets As Boolean = False)
-
         For Each xel As XElement In data
             Try
                 Dim id As String = pkey & xel.Element("Name").Value
                 If id <> "" Then
-                    Dim obj As GraphicObject = (From go As GraphicObject In
-                                                            form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                    Dim obj As GraphicObject = (From go As GraphicObject In form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                     If obj Is Nothing Then obj = (From go As GraphicObject In form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
-                    If Not obj Is Nothing Then
-                        If obj.ObjectType = ObjectType.External Then obj.CreateConnectors(0, 0)
+                    If obj IsNot Nothing Then
                         If xel.Element("InputConnectors") IsNot Nothing Then
                             Dim i As Integer = 0
                             For Each xel2 As XElement In xel.Element("InputConnectors").Elements
@@ -1295,9 +1304,8 @@ Public Class FormMain
             Try
                 Dim id As String = pkey & xel.Element("Name").Value
                 If id <> "" Then
-                    Dim obj As GraphicObject = (From go As GraphicObject In
-                                                            form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
-                    If Not obj Is Nothing Then
+                    Dim obj As GraphicObject = (From go As GraphicObject In form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                    If obj IsNot Nothing Then
                         If xel.Element("OutputConnectors") IsNot Nothing Then
                             For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
                                 If xel2.@IsAttached = True Then
@@ -1339,6 +1347,7 @@ Public Class FormMain
             End Try
         Next
 
+
     End Sub
 
     Sub AddSimulationObjects(form As FormFlowsheet, objlist As Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass), excs As Concurrent.ConcurrentBag(Of Exception), Optional ByVal pkey As String = "")
@@ -1347,7 +1356,6 @@ Public Class FormMain
             Try
                 obj.Name = pkey & obj.Name
                 Dim id = obj.Name
-                Dim gobj = obj.GraphicObject
                 form.Collections.FlowsheetObjectCollection.Add(id, obj)
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Unit Operation Information", ex))
@@ -1885,10 +1893,6 @@ Public Class FormMain
 
         AddSimulationObjects(form, objlist, excs)
 
-        data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
-
-        ConnectGraphicObjects(form, data, excs)
-
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
@@ -2405,10 +2409,6 @@ Public Class FormMain
         Next
 
         AddSimulationObjects(form, objlist, excs)
-
-        data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
-
-        ConnectGraphicObjects(form, data, excs)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
 
@@ -3868,7 +3868,7 @@ Label_00CC:
         System.Diagnostics.Process.Start("https://sourceforge.net/p/dwsim/tickets/")
     End Sub
 
-    Private Sub DonateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
+    Private Sub DonateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         System.Diagnostics.Process.Start("https://gumroad.com/products/PTljX")
     End Sub
 
