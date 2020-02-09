@@ -46,7 +46,9 @@ Namespace GraphicObjects.Shapes
         End Function
 
         Public Overrides Function SaveData() As List(Of XElement)
-            Return XMLSerializer.XMLSerializer.Serialize(Me)
+            Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
+            data.AddRange(MyBase.SaveData)
+            Return data
         End Function
 
 #End Region
