@@ -160,7 +160,15 @@ Public Class FlowsheetSurfaceGLControl
 
             Dim pt = PointToClient(New Point(e.X, e.Y))
 
-            FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c)
+            If t.GetInterface("DWSIM.Interfaces.IExternalUnitOperation", True) Is Nothing Then
+
+                FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c)
+
+            Else
+
+                FlowsheetObject.FormSurface.AddObjectToSurface(ObjectType.External, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, False, "", "", Activator.CreateInstance(t))
+
+            End If
 
         End If
     End Sub

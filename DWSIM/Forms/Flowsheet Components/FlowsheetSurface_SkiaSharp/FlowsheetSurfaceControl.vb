@@ -162,7 +162,7 @@ Public Class FlowsheetSurfaceControl
 
             Dim pt = PointToClient(New Point(e.X, e.Y))
 
-            If TypeOf t Is Interfaces.IExternalUnitOperation Then
+            If t.GetInterface("DWSIM.Interfaces.IExternalUnitOperation", True) Is Nothing Then
 
                 FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c)
 
@@ -171,7 +171,6 @@ Public Class FlowsheetSurfaceControl
                 FlowsheetObject.FormSurface.AddObjectToSurface(ObjectType.External, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, False, "", "", Activator.CreateInstance(t))
 
             End If
-
 
         End If
     End Sub
