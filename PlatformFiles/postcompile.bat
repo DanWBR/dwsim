@@ -11,6 +11,7 @@ del ..\DistPackages\Linux\*.dylib
 del ..\DistPackages\Linux\libCEF.dll
 del ..\DistPackages\Linux\*.pak
 del ..\DistPackages\Linux\*.dat
+del ..\DistPackages\Linux\*.dat
 
 del ..\DistPackages\Windows_32\DWSIM.vshost.*
 del ..\DistPackages\Windows_32\*.tmp
@@ -35,6 +36,8 @@ del ..\DistPackages\Linux\plugins\*Skia*
 del ..\DistPackages\Linux\plugins\*Eto*
 rmdir /s /q ..\DistPackages\Linux\plugins\x86
 rmdir /s /q ..\DistPackages\Linux\plugins\x64
+rmdir /s /q ..\DistPackages\Linux\x86
+rmdir /s /q ..\DistPackages\Linux\x64
 
 pause
 
