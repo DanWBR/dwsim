@@ -39,6 +39,7 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
 Imports CefSharp.WinForms
+Imports DWSIM.Interfaces
 
 Public Class FormMain
 
@@ -2155,6 +2156,10 @@ Public Class FormMain
 
             form.FormSurface.Invalidate()
 
+        Else
+
+            form.CalculationQueue = New Queue(Of ICalculationArgs)
+
         End If
 
         If excs.Count > 0 Then
@@ -3025,17 +3030,18 @@ Public Class FormMain
 
         If IO.Path.GetExtension(simulationfilename).ToLower.Contains("dwxml") Or IO.Path.GetExtension(simulationfilename).ToLower.Contains("dwxmz") Then
             Me.UIThread(New Action(Sub()
-                                       Dim mypath As String = simulationfilename
-                                       If mypath = "" Then mypath = [path]
-                                       'process recent files list
-                                       If Not My.Settings.MostRecentFiles.Contains(mypath) Then
-                                           My.Settings.MostRecentFiles.Add(mypath)
-                                           If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
+                                       If Visible Then
+                                           Dim mypath As String = simulationfilename
+                                           If mypath = "" Then mypath = [path]
+                                           'process recent files list
+                                           If Not My.Settings.MostRecentFiles.Contains(mypath) Then
+                                               My.Settings.MostRecentFiles.Add(mypath)
+                                               If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
+                                           End If
+                                           form.Options.FilePath = Me.filename
+                                           form.UpdateFormText()
+                                           form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
                                        End If
-                                       form.Options.FilePath = Me.filename
-                                       form.UpdateFormText()
-                                       form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
-                                       'Me.ToolStripStatusLabel1.Text = ""
                                    End Sub))
         End If
 

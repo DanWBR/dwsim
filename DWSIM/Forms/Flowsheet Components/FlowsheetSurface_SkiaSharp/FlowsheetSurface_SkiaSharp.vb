@@ -2214,7 +2214,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Next
             If TypeOf gObj.Owner Is Thermodynamics.Streams.MaterialStream Then
                 gObj.CreateConnectors(1, 1)
-                FlowsheetSolver.FlowsheetSolver.CalculateObject(Me.Flowsheet, gObj.Name)
+                If Flowsheet.Visible Then FlowsheetSolver.FlowsheetSolver.CalculateObject(Me.Flowsheet, gObj.Name)
             End If
             Application.DoEvents()
             If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = UndoRedoActionType.ObjectAdded,

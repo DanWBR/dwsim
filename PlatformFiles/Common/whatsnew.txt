@@ -1,5 +1,8 @@
 Version 5.8 Update 8
 
+- [NEW] Added a Pervaporation sample
 - [NEW] Added support for external Unit Operations
 - [NEW] Added the ability to load and use images as flowsheet object icons for Python Script UOs
+- [FIX] Fixed some automation bugs
+- [FIX] Fixed Pipe insulation calculation
 - [FIX] Bug fixes

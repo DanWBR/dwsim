@@ -181,8 +181,6 @@ Public Class FormFlowsheet
 
         Me.Options.BackupFileName = str & ".dwbcs"
 
-        Me.CalculationQueue = New Generic.Queue(Of ICalculationArgs)
-
         Me.FormSurface.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetSurface.Zoom, "#%")
 
         If GlobalSettings.Settings.CalculatorActivated Then
