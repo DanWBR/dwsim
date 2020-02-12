@@ -20,6 +20,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         private bool adding = false;
 
+        private bool selecting = false;
+
         private DWSIM.Interfaces.IScript selscript;
 
         public ScriptManager_Mac(DWSIM.UI.Desktop.Shared.Flowsheet fs)
@@ -200,6 +202,8 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         if (lbScripts.SelectedIndex < 0) return;
 
+                        selecting = true;
+
                         if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.ScriptText;
 
                         selscript = Flowsheet.Scripts[lbScripts.SelectedKey];
@@ -292,6 +296,9 @@ namespace DWSIM.UI.Desktop.Editors
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.ToString(), MessageBoxType.Error);
+                    }
+                    finally {
+                        selecting = false;
                     }
                 });
 
@@ -458,6 +465,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
             if (!Loaded) return;
             if (adding) return;
+            if (selecting) return;
             if (lbScripts.SelectedIndex < 0) return;
             if (!Flowsheet.Scripts.ContainsKey(lbScripts.SelectedKey)) return;
             var scr = Flowsheet.Scripts[lbScripts.SelectedKey];
