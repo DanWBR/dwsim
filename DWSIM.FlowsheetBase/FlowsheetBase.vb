@@ -1221,7 +1221,9 @@ Imports DWSIM.Interfaces.Enums
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
                     If ExternalUnitOperations.ContainsKey(uokey) Then
-                        obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
+                        RunCodeOnUIThread(Sub()
+                                              obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
+                                          End Sub)
                     Else
                         obj = CType(UnitOperations.ReturnInstance(xel.Element("Type").Value), ISimulationObject)
                     End If

@@ -662,7 +662,16 @@ Public Class Utility
 
         Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract)
 
-        Return ppList.ConvertAll(Of Interfaces.IExternalUnitOperation)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IExternalUnitOperation))
+        Dim list As New List(Of IExternalUnitOperation)
+
+        For Each item In ppList
+            Dim obj = Activator.CreateInstance(item)
+            If TryCast(obj, IExternalUnitOperation) IsNot Nothing Then
+                list.Add(obj)
+            End If
+        Next
+
+        Return list
 
     End Function
 
