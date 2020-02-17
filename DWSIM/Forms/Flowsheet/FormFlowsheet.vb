@@ -82,7 +82,7 @@ Public Class FormFlowsheet
 
     Public WithEvents Options As New SharedClasses.DWSIM.Flowsheet.FlowsheetVariables
 
-    Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
+    Public Property CalculationQueue As New Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
     Public ScriptCollection As Dictionary(Of String, IScript)
 
@@ -212,7 +212,7 @@ Public Class FormFlowsheet
 
             For Each item In FormMain.ExternalUnitOperations.Values
                 item.SetFlowsheet(Me)
-                Me.FlowsheetOptions.VisibleProperties.Add(item.GetType.Name, item.GetDefaultProperties.ToList)
+                Me.FlowsheetOptions.VisibleProperties(item.GetType.Name) = DirectCast(item, ISimulationObject).GetDefaultProperties().ToList()
             Next
 
             If Not DWSIM.App.IsRunningOnMono Then

@@ -2217,7 +2217,7 @@ Label_00CC:
 
             For Each obj In ExternalUnitOperations.Values
                 obj.SetFlowsheet(Me)
-                Me.FlowsheetOptions.VisibleProperties(obj.GetType.Name) = obj.GetDefaultProperties.ToList
+                Me.FlowsheetOptions.VisibleProperties(obj.GetType.Name) = DirectCast(obj, ISimulationObject).GetDefaultProperties().ToList()
             Next
 
         End If
