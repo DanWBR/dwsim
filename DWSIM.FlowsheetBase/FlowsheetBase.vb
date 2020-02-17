@@ -2215,6 +2215,11 @@ Label_00CC:
                 End If
             Next
 
+            For Each obj In ExternalUnitOperations.Values
+                obj.SetFlowsheet(Me)
+                Me.FlowsheetOptions.VisibleProperties(obj.GetType.Name) = obj.GetDefaultProperties.ToList
+            Next
+
         End If
 
     End Sub

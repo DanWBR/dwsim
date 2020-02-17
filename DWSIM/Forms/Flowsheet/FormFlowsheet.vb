@@ -210,6 +210,11 @@ Public Class FormFlowsheet
                 End If
             Next
 
+            For Each item In FormMain.ExternalUnitOperations.Values
+                item.SetFlowsheet(Me)
+                Me.FlowsheetOptions.VisibleProperties.Add(item.GetType.Name, item.GetDefaultProperties.ToList)
+            Next
+
             If Not DWSIM.App.IsRunningOnMono Then
                 Me.Options.SimulationAuthor = My.User.Name
             Else

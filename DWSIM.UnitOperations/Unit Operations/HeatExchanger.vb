@@ -1187,9 +1187,11 @@ Namespace UnitOperations
                         End Select
                         Dsf = (nsc - 1) * pitch + de
                         Dsi = STProperties.Shell_Di / 1000 'Dsf / 1.075
+
                         'Dsf = Dsi / 1.075 * Dsi
                         HDi = STProperties.Shell_BaffleCut / 100
                         Nb = L / (STProperties.Shell_BaffleSpacing / 1000) + 1 'review (l1, l2)
+
                         'shell pressure drop
                         Dim Gsf, Np, Fp, Ss, Ssf, fs, Cb, Ca, Res, Prs, jh, aa, bb, cc, xx, yy, Nh, Y As Double
                         xx = Dsi / (STProperties.Shell_BaffleSpacing / 1000)
