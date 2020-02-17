@@ -433,6 +433,8 @@ Namespace CalculatorInterface
             Dim pp As New RaoultPropertyPackage(True)
             TransferComps(pp)
 
+            pp._selectedcomps.Clear()
+
             Dim ms As New Streams.MaterialStream("", "")
 
             For Each phase In ms.Phases.Values
