@@ -70,6 +70,7 @@ Partial Class FormWelcome
         Me.lvlatest.ForeColor = System.Drawing.Color.White
         Me.lvlatest.FullRowSelect = True
         Me.lvlatest.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lvlatest.HideSelection = False
         Me.lvlatest.HoverSelection = True
         Me.lvlatest.LargeImageList = Me.ImageList1
         Me.lvlatest.MultiSelect = False
@@ -105,6 +106,7 @@ Partial Class FormWelcome
         Me.lvlatestfolders.ForeColor = System.Drawing.Color.White
         Me.lvlatestfolders.FullRowSelect = True
         Me.lvlatestfolders.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lvlatestfolders.HideSelection = False
         Me.lvlatestfolders.HoverSelection = True
         Me.lvlatestfolders.LargeImageList = Me.ImageList1
         Me.lvlatestfolders.MultiSelect = False
@@ -154,6 +156,7 @@ Partial Class FormWelcome
         Me.lvsamples.ForeColor = System.Drawing.Color.White
         Me.lvsamples.FullRowSelect = True
         Me.lvsamples.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lvsamples.HideSelection = False
         Me.lvsamples.HoverSelection = True
         Me.lvsamples.LargeImageList = Me.ImageList1
         Me.lvsamples.MultiSelect = False
@@ -227,6 +230,7 @@ Partial Class FormWelcome
         Me.FOSSEEList.ForeColor = System.Drawing.Color.White
         Me.FOSSEEList.FullRowSelect = True
         Me.FOSSEEList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.FOSSEEList.HideSelection = False
         Me.FOSSEEList.HoverSelection = True
         Me.FOSSEEList.LargeImageList = Me.ImageList1
         Me.FOSSEEList.MultiSelect = False
