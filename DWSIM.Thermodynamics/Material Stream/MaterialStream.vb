@@ -239,13 +239,19 @@ Namespace Streams
             Me.Phases(0).Properties.massflow = 1
 
         End Sub
+        Function EmptyPropertyPackage() As Boolean
+            Return String.IsNullOrEmpty(Me._ppid) And _pp Is Nothing
+        End Function
 
         Public Sub New(ByVal name As String, ByVal description As String, ByVal flowsheet As IFlowsheet, ByVal proppack As PropertyPackages.PropertyPackage)
 
             MyBase.CreateNew()
 
             Me.SetFlowsheet(flowsheet)
-            If Me.PropertyPackage Is Nothing Then Me.PropertyPackage = proppack
+
+            'If Me.PropertyPackage Is Nothing Then Me.PropertyPackage = proppack
+
+            If Me.EmptyPropertyPackage Then Me.PropertyPackage = proppack
 
             Me.ComponentName = name
             Me.ComponentDescription = description
@@ -258,8 +264,6 @@ Namespace Streams
             Me.Phases.Add(5, New BaseClasses.Phase(("Liquid3"), ""))
             Me.Phases.Add(6, New BaseClasses.Phase(("Aqueous"), ""))
             Me.Phases.Add(7, New BaseClasses.Phase(("Solid"), ""))
-
-            'Me.PropertyPackage = FlowSheet.Options.PropertyPackages(0)
 
             'assign default values for temperature, pressure and mass flow
             Me.Phases(0).Properties.temperature = 298.15
