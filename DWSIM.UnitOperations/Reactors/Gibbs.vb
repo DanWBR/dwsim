@@ -90,9 +90,10 @@ Namespace Reactors
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            'For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Compounds").LastOrDefault.Elements
-            '    _components.Add(xel2.@ID)
-            'Next
+            _components = New List(Of String)
+            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Compounds").LastOrDefault.Elements
+                _components.Add(xel2.@ID)
+            Next
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "InitialEstimates").LastOrDefault.Elements
                 _initialestimates.Add(Double.Parse(xel2.@Value, ci))
@@ -136,10 +137,10 @@ Namespace Reactors
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
-                '.Add(New XElement("Compounds"))
-                'For Each s As String In _components
-                '    .Item(.Count - 1).Add(New XElement("Compound", New XAttribute("ID", s)))
-                'Next
+                .Add(New XElement("Compounds"))
+                For Each s As String In _components
+                    .Item(.Count - 1).Add(New XElement("Compound", New XAttribute("ID", s)))
+                Next
                 .Add(New XElement("InitialEstimates"))
                 For Each d As Double In _initialestimates
                     .Item(.Count - 1).Add(New XElement("Item", New XAttribute("Value", d.ToString(ci))))
