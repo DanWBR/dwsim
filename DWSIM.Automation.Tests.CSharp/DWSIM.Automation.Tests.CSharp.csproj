@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>HeatExchangerArea.HeatExchanger</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CapeOpen">
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
@@ -48,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeatExchanger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,9 +64,19 @@
       <Name>DWSIM.Automation</Name>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
