@@ -88,8 +88,8 @@ Public Class EditingForm_EnergyRecycle
             cbE.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.heatflow).ToArray)
             cbE.SelectedItem = units.heatflow
 
-            tbET.Text = su.Converter.ConvertFromSI(units.massflow, .ConvergenceParameters.Energy).ToString(nf)
-            tbEE.Text = su.Converter.ConvertFromSI(units.massflow, .ConvergenceHistory.EnergyE).ToString(nf)
+            tbET.Text = su.Converter.ConvertFromSI(units.heatflow, .ConvergenceParameters.Energy).ToString(nf)
+            tbEE.Text = su.Converter.ConvertFromSI(units.heatflow, .ConvergenceHistory.EnergyE).ToString(nf)
 
         End With
 

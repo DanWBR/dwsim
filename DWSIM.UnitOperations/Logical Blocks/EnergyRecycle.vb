@@ -39,7 +39,7 @@ Namespace SpecialOps
         Protected m_AccelMethod As AccelMethod = AccelMethod.Wegstein
         Protected m_WegPars As WegsteinParameters
 
-        Protected m_MaxIterations As Integer = 10
+        Protected m_MaxIterations As Integer = 100
         Protected m_IterationCount As Integer = 0
         Protected m_InternalCounterE As Integer = 0
         Protected m_IterationsTaken As Integer = 0
