@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;FaTabStripItem3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;chkOptimize.Name" xml:space="preserve">
     <value>chkOptimize</value>
   </data>
@@ -130,9 +133,8 @@
   <data name="&gt;&gt;LabelWithDivider3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chkOptimize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 17</value>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="chkAlternInit.Text" xml:space="preserve">
     <value>Inicialização Alternativa (Coordenadas de Reação)</value>
@@ -140,14 +142,11 @@
   <data name="&gt;&gt;dgvu1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkAlternInit.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;chkAlternInit.Name" xml:space="preserve">
     <value>chkAlternInit</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tbMaxIts.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -161,25 +160,20 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Equilíbrio Químico</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="KryptonDataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Depuração</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;chkCalcChemEq.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
-    <value>Column4</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="KryptonDataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="FaTabStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -205,7 +199,7 @@
     <value>5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -213,14 +207,14 @@
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>622, 58</value>
   </data>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>644, 353</value>
+  </data>
   <data name="&gt;&gt;tbTol.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;KryptonDataGridView1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>646, 374</value>
   </data>
   <data name="&gt;&gt;dgvu1.Parent" xml:space="preserve">
     <value>GroupBox3</value>
@@ -237,6 +231,9 @@
   <data name="LabelWithDivider3.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
+  <data name="&gt;&gt;Button3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 45</value>
   </data>
@@ -246,17 +243,20 @@
   <data name="chkRigEnBal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>646, 374</value>
+  <data name="&gt;&gt;chkCalcChemEq.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="FaTabStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tbMaxIts.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 21</value>
@@ -273,11 +273,8 @@
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Parâmetro</value>
-  </data>
-  <data name="&gt;&gt;ID.Name" xml:space="preserve">
-    <value>ID</value>
+  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Opções Gerais</value>
@@ -297,9 +294,6 @@
   <data name="LabelWithDivider3.Size" type="System.Drawing.Size, System.Drawing">
     <value>619, 10</value>
   </data>
-  <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -309,17 +303,14 @@
   <data name="chkAlternInit.Size" type="System.Drawing.Size, System.Drawing">
     <value>268, 17</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;cbReacSets.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;Column4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button3.Name" xml:space="preserve">
-    <value>Button3</value>
   </data>
   <data name="&gt;&gt;chkRigEnBal.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -342,8 +333,11 @@
   <data name="dgvu1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 48</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>633, 343</value>
+  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;chkIPOPT.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -363,14 +357,17 @@
   <data name="chkAlternInit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 272</value>
-  </data>
   <data name="chkCalcChemEq.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 17</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Opções Avançadas</value>
+  </data>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider3.Parent" xml:space="preserve">
     <value>GroupBox3</value>
@@ -378,8 +375,11 @@
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;cbReacSets.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Parâmetro</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 13</value>
@@ -390,14 +390,11 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="chkIPOPT.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;KryptonDataGridView1.Name" xml:space="preserve">
     <value>KryptonDataGridView1</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>tau12 = A12 + B12/T; tau21 = A21 + B21/T; alpha12 = 0.2 =&gt; G12 = exp(-alpha12*tau12)</value>
+  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;Column6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -405,17 +402,14 @@
   <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormConfigENRTL</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;chkRigEnBal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -432,14 +426,17 @@
   <data name="LabelWithDivider3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;chkOptimize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Tolerância para convergência</value>
   </data>
   <data name="&gt;&gt;tbTol.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbMaxIts.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 71</value>
+  </data>
+  <data name="&gt;&gt;chkOptimize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>ID1</value>
@@ -468,14 +465,11 @@
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
-  <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
+  <data name="&gt;&gt;chkRigEnBal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem3.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;dgvu1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Copiar Histórico da Função Objetivo do Último Cálculo de Equilíbrio Químico</value>
@@ -486,11 +480,8 @@
   <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormConfigENRTL</value>
-  </data>
-  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>127, 20</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -504,6 +495,9 @@
   <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
     <value>FaTabStripItem1</value>
   </data>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
   </data>
@@ -513,26 +507,26 @@
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="KryptonDataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 319</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Parâmetros de Interação</value>
+  <data name="&gt;&gt;ID.Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 23</value>
   </data>
   <data name="chkIPOPT.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 132</value>
   </data>
+  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="KryptonDataGridView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 20</value>
-  </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 6</value>
   </data>
   <data name="&gt;&gt;tbMaxIts.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -543,11 +537,14 @@
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="chkCalcChemEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 20</value>
+  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
+    <value>FaTabStripItem3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
     <value>FaTabStripItem1</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>ID2</value>
   </data>
   <data name="chkOptimize.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 162</value>
@@ -561,17 +558,20 @@
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
+    <value>FaTabStripItem2</value>
   </data>
   <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 5</value>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="tbTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
+  </data>
+  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbReacSets.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -588,8 +588,8 @@
   <data name="Button3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 5</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>377, 23</value>
@@ -600,11 +600,14 @@
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 74</value>
   </data>
-  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 353</value>
+  <data name="&gt;&gt;chkAlternInit.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="LabelWithDivider3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbMaxIts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
@@ -624,8 +627,8 @@
   <data name="KryptonDataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>ID2</value>
+  <data name="&gt;&gt;Button3.Name" xml:space="preserve">
+    <value>Button3</value>
   </data>
   <data name="dgvu1.Size" type="System.Drawing.Size, System.Drawing">
     <value>617, 291</value>
@@ -645,11 +648,11 @@
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 23</value>
+  <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=5.8.7206.25428, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=5.8.7354.17248, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="chkIPOPT.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -662,9 +665,6 @@
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Name" xml:space="preserve">
     <value>FaTabStripItem3</value>
-  </data>
-  <data name="KryptonDataGridView1.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>330</value>
   </data>
   <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 100</value>
@@ -684,20 +684,17 @@
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>644, 353</value>
   </data>
-  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>646, 374</value>
+  </data>
+  <data name="&gt;&gt;chkCalcChemEq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column6.Name" xml:space="preserve">
-    <value>Column6</value>
-  </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cbReacSets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 21</value>
+  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tbTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 21</value>
@@ -708,8 +705,8 @@
   <data name="&gt;&gt;Column8.Name" xml:space="preserve">
     <value>Column8</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Tolerância para convergência</value>
+  <data name="cbReacSets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 21</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -720,17 +717,17 @@
   <data name="&gt;&gt;chkIPOPT.Name" xml:space="preserve">
     <value>chkIPOPT</value>
   </data>
-  <data name="&gt;&gt;Button3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkOptimize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 17</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="KryptonDataGridView1.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>330</value>
   </data>
   <data name="chkRigEnBal.Text" xml:space="preserve">
     <value>Balanço de Energia Rigoroso</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -759,8 +756,8 @@
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>452, 13</value>
   </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>646, 374</value>
   </data>
   <data name="chkIPOPT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -771,23 +768,23 @@
   <data name="&gt;&gt;KryptonDataGridView1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dgvu1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Parâmetros de Interação</value>
   </data>
   <data name="ID.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="&gt;&gt;tbMaxIts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>tau12 = A12 + B12/T; tau21 = A21 + B21/T; alpha12 = 0.2 =&gt; G12 = exp(-alpha12*tau12)</value>
   </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Opções Avançadas</value>
+  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
+    <value>Column4</value>
   </data>
-  <data name="&gt;&gt;chkCalcChemEq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 343</value>
   </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
+  <data name="dgvu1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="chkRigEnBal.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -801,17 +798,17 @@
   <data name="&gt;&gt;chkRigEnBal.Name" xml:space="preserve">
     <value>chkRigEnBal</value>
   </data>
-  <data name="&gt;&gt;chkAlternInit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkCalcChemEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
   </data>
   <data name="chkCalcChemEq.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;chkIPOPT.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="chkIPOPT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 20</value>
+  <data name="&gt;&gt;Column6.Name" xml:space="preserve">
+    <value>Column6</value>
   </data>
   <data name="KryptonDataGridView1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
@@ -819,43 +816,46 @@
   <data name="&gt;&gt;Column8.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="FaTabStripItem3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;FaTabStrip1.Name" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;dgvu1.Name" xml:space="preserve">
     <value>dgvu1</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;chkOptimize.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
-    <value>FaTabStripItem3</value>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>622, 272</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dgvu1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 6</value>
   </data>
   <data name="&gt;&gt;tbTol.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="FaTabStripItem3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="KryptonDataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>618, 319</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Opções Gerais</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;chkAlternInit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ID.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -876,7 +876,7 @@
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

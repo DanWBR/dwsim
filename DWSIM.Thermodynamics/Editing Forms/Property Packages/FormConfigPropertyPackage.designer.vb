@@ -92,7 +92,7 @@ Partial Class FormConfigPropertyPackage
         Me.KryptonDataGridView2.AllowUserToResizeRows = False
         resources.ApplyResources(Me.KryptonDataGridView2, "KryptonDataGridView2")
         Me.KryptonDataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.KryptonDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.KryptonDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.KryptonDataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column4, Me.Column5})
         Me.KryptonDataGridView2.Name = "KryptonDataGridView2"
         Me.KryptonDataGridView2.RowHeadersVisible = False

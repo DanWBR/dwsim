@@ -228,6 +228,10 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Solver Options</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
   </data>
@@ -306,6 +310,9 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Cut/Copy/Paste Flowsheet Objects</value>
   </data>
+  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="chkEnableMultipleEditors.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 17</value>
   </data>
@@ -324,7 +331,6 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="Label14.Text" xml:space="preserve">
     <value>Default initial placement</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cbEditorStyle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -436,11 +442,17 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkSaveBackupFile.Text" xml:space="preserve">
     <value>Keep a copy of existing files when saving</value>
   </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 25</value>
+  </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Delete All ".dwbak" Files in Backup Folder</value>
   </data>
   <data name="KryptonLabel3.Text" xml:space="preserve">
     <value>5 minutes</value>
+  </data>
+  <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 19</value>
   </data>
   <data name="KryptonLabel2.Text" xml:space="preserve">
     <value>Interval between saves:</value>
@@ -466,6 +478,9 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
   </data>
+  <data name="tbPythonTimeout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 13</value>
   </data>
@@ -484,6 +499,9 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="GroupBox17.Text" xml:space="preserve">
     <value>Python brigde settings</value>
   </data>
+  <data name="tbOctaveTimeout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 13</value>
   </data>
@@ -501,6 +519,9 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   </data>
   <data name="GroupBox16.Text" xml:space="preserve">
     <value>Octave bridge settings</value>
+  </data>
+  <data name="GroupBox15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
     <value>Ignore compound constant properties stored in the simulation file during loading</value>
@@ -561,7 +582,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAbQBCQG0AQkBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAbwBCQG8AQkBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

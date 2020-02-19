@@ -271,7 +271,7 @@
     <value>FaTabStripItem3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -454,7 +454,7 @@
     <value>FaTabStripItem2</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -475,7 +475,7 @@
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -499,7 +499,7 @@
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7204.36461, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7354.17246, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -574,6 +574,6 @@
     <value>FormConfigPRSV2</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=5.8.7206.25428, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=5.8.7354.17248, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -3981,7 +3981,12 @@ Label_00CC:
         End If
     End Sub
     Private Sub PreferenciasDoDWSIMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PreferenciasDoDWSIMToolStripMenuItem.Click
+
+        If Settings.DpiScale > 1.0 Then
+            Me.SettingsPanel.Width = 400 * Settings.DpiScale
+        End If
         Me.SettingsPanel.Visible = True
+
     End Sub
 
     Private Sub FormMain_HelpRequested(sender As System.Object, hlpevent As System.Windows.Forms.HelpEventArgs) Handles MyBase.HelpRequested

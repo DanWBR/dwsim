@@ -8,7 +8,7 @@ using FarsiLibrary.Win.Design;
 
 namespace FarsiLibrary.Win
 {
-    [Designer(typeof (FATabStripDesigner))]
+    [Designer(typeof(FATabStripDesigner))]
     [DefaultEvent("TabStripItemSelectionChanged")]
     [DefaultProperty("Items")]
     [ToolboxItem(true)]
@@ -70,19 +70,19 @@ namespace FarsiLibrary.Win
         /// <returns></returns>
         public HitTestResult HitTest(Point pt)
         {
-            if(closeButton.Bounds.Contains(pt))
+            if (closeButton.Bounds.Contains(pt))
                 return HitTestResult.CloseButton;
-            
-            if(menuGlyph.Bounds.Contains(pt))
+
+            if (menuGlyph.Bounds.Contains(pt))
                 return HitTestResult.MenuGlyph;
 
             if (GetTabItemByPoint(pt) != null)
                 return HitTestResult.TabItem;
-            
+
             //No other result is available.
             return HitTestResult.None;
         }
-        
+
         /// <summary>
         /// Add a <see cref="FATabStripItem"/> to this control without selecting it.
         /// </summary>
@@ -91,7 +91,7 @@ namespace FarsiLibrary.Win
         {
             AddTab(tabItem, false);
         }
-        
+
         /// <summary>
         /// Add a <see cref="FATabStripItem"/> to this control.
         /// User can make the currently selected item or not.
@@ -102,7 +102,7 @@ namespace FarsiLibrary.Win
             tabItem.Dock = DockStyle.Fill;
             Items.Add(tabItem);
 
-            if ((autoSelect && tabItem.Visible) || (tabItem.Visible && Items.DrawnCount < 1 ))
+            if ((autoSelect && tabItem.Visible) || (tabItem.Visible && Items.DrawnCount < 1))
             {
                 SelectedItem = tabItem;
                 SelectItem(tabItem);
@@ -160,18 +160,18 @@ namespace FarsiLibrary.Win
         {
             FATabStripItem item = null;
             bool found = false;
-            
+
             for (int i = 0; i < Items.Count; i++)
             {
                 FATabStripItem current = Items[i];
-                
+
                 if (current.StripRect.Contains(pt) && current.Visible && current.IsDrawn)
                 {
                     item = current;
                     found = true;
                 }
-                
-                if(found)
+
+                if (found)
                     break;
             }
 
@@ -363,7 +363,7 @@ namespace FarsiLibrary.Win
                 else if (SelectedItem != null && SelectedItem.IsDrawn)
                 {
                     Point end = new Point((int)SelectedItem.StripRect.Left - 9, DEF_HEADER_HEIGHT);
-                   // e.Graphics.DrawLine(new Pen(Color.FromArgb(0, 122, 204)), new Point(0, DEF_HEADER_HEIGHT), end);
+                    // e.Graphics.DrawLine(new Pen(Color.FromArgb(0, 122, 204)), new Point(0, DEF_HEADER_HEIGHT), end);
                     e.Graphics.DrawLine(new Pen(SystemColors.ActiveCaption), new Point(0, DEF_HEADER_HEIGHT), end);
                     //end.X += (int)SelectedItem.StripRect.Width + 10;
                     e.Graphics.DrawLine(new Pen(SystemColors.ActiveCaption), end, new Point(ClientRectangle.Width, DEF_HEADER_HEIGHT));
@@ -406,11 +406,11 @@ namespace FarsiLibrary.Win
                 return;
 
             HitTestResult result = HitTest(e.Location);
-            if(result == HitTestResult.MenuGlyph)
+            if (result == HitTestResult.MenuGlyph)
             {
                 HandledEventArgs args = new HandledEventArgs(false);
                 OnMenuItemsLoading(args);
-                
+
                 if (!args.Handled)
                     OnMenuItemsLoad(EventArgs.Empty);
 
@@ -429,7 +429,7 @@ namespace FarsiLibrary.Win
                     }
                 }
             }
-            else if(result == HitTestResult.TabItem)
+            else if (result == HitTestResult.TabItem)
             {
                 FATabStripItem item = GetTabItemByPoint(e.Location);
                 if (item != null)
@@ -527,7 +527,7 @@ namespace FarsiLibrary.Win
 
         private void OnMenuItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            FATabStripItem clickedItem = (FATabStripItem) e.ClickedItem.Tag;
+            FATabStripItem clickedItem = (FATabStripItem)e.ClickedItem.Tag;
             SelectedItem = clickedItem;
         }
 
@@ -549,18 +549,18 @@ namespace FarsiLibrary.Win
 
             SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.DefaultFont, new SizeF(300, 10), sf);
             textSize.Width += 15 * (float)(dpiscale + 0.3);
-            
+
             if (RightToLeft == RightToLeft.No)
             {
                 RectangleF buttonRect = new RectangleF(DEF_START_POS - 9, 1, textSize.Width, (int)(18 * dpiscale));
                 currentItem.StripRect = buttonRect;
-                DEF_START_POS += (int) textSize.Width;
+                DEF_START_POS += (int)textSize.Width;
             }
             else
             {
                 RectangleF buttonRect = new RectangleF(DEF_START_POS - textSize.Width + 1, 3, textSize.Width - 1, (int)(18 * dpiscale));
                 currentItem.StripRect = buttonRect;
-                DEF_START_POS -= (int) textSize.Width;
+                DEF_START_POS -= (int)textSize.Width;
             }
         }
 
@@ -623,9 +623,10 @@ namespace FarsiLibrary.Win
 
                 double dpiscale = g.DpiX / 96.0;
 
-                var tmargin = 15 * (float)(dpiscale + 0.3)/2;
+                var tmargin = 15 * (float)(dpiscale + 0.3) / 2;
+                var tmargin2 = -4 * (float)(dpiscale - 1.0);
 
-                PointF textLoc = new PointF(buttonRect.Left + tmargin, buttonRect.Top + (buttonRect.Height/2) - (textSize.Height/2) - 2);
+                PointF textLoc = new PointF(buttonRect.Left + tmargin, buttonRect.Top + tmargin2 + (buttonRect.Height / 2) - (textSize.Height / 2) - 2);
                 RectangleF textRect = buttonRect;
                 textRect.Location = textLoc;
                 //textRect.Width = buttonRect.Width - (textRect.Left - buttonRect.Left) - 4;
@@ -651,17 +652,17 @@ namespace FarsiLibrary.Win
                 if (currentItem == SelectedItem || isFirstTab)
                 {
                     path.AddLine(buttonRect.Right + 10, buttonRect.Bottom - 1,
-                                 buttonRect.Right - (buttonRect.Height/2) + 4, mtop + 4);
+                                 buttonRect.Right - (buttonRect.Height / 2) + 4, mtop + 4);
                 }
                 else
                 {
                     path.AddLine(buttonRect.Right, buttonRect.Bottom - 1, buttonRect.Right,
-                                 buttonRect.Bottom - (buttonRect.Height/2) - 2);
-                    path.AddLine(buttonRect.Right, buttonRect.Bottom - (buttonRect.Height/2) - 3,
-                                 buttonRect.Right - (buttonRect.Height/2) + 4, mtop + 3);
+                                 buttonRect.Bottom - (buttonRect.Height / 2) - 2);
+                    path.AddLine(buttonRect.Right, buttonRect.Bottom - (buttonRect.Height / 2) - 3,
+                                 buttonRect.Right - (buttonRect.Height / 2) + 4, mtop + 3);
                 }
 
-                path.AddLine(buttonRect.Right - (buttonRect.Height/2) - 2, mtop, buttonRect.Left + 3, mtop);
+                path.AddLine(buttonRect.Right - (buttonRect.Height / 2) - 2, mtop, buttonRect.Left + 3, mtop);
                 path.AddLine(buttonRect.Left, mtop + 2, buttonRect.Left, buttonRect.Bottom - 1);
                 path.AddLine(buttonRect.Left + 4, buttonRect.Bottom - 1, buttonRect.Right, buttonRect.Bottom - 1);
                 path.CloseFigure();
@@ -688,11 +689,11 @@ namespace FarsiLibrary.Win
                                buttonRect.Right - buttonRect.Width + 1, buttonRect.Height + 2);
                 }
 
-                PointF textLoc = new PointF(buttonRect.Left + 2, buttonRect.Top + (buttonRect.Height/2) - (textSize.Height/2) - 2);
+                PointF textLoc = new PointF(buttonRect.Left + 2, buttonRect.Top + (buttonRect.Height / 2) - (textSize.Height / 2) - 2);
                 RectangleF textRect = buttonRect;
                 textRect.Location = textLoc;
                 textRect.Width = buttonRect.Width - (textRect.Left - buttonRect.Left) - 10;
-                textRect.Height = textSize.Height + currentFont.Size/2;
+                textRect.Height = textSize.Height + currentFont.Size / 2;
 
                 if (currentItem == SelectedItem)
                 {
@@ -743,7 +744,7 @@ namespace FarsiLibrary.Win
 
         private void OnCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            FATabStripItem itm = (FATabStripItem) e.Element;
+            FATabStripItem itm = (FATabStripItem)e.Element;
 
             if (e.Action == CollectionChangeAction.Add)
             {
@@ -775,7 +776,8 @@ namespace FarsiLibrary.Win
             BeginInit();
 
             double dpiscale = 1.0;
-            using (Graphics g = this.CreateGraphics()) {
+            using (Graphics g = this.CreateGraphics())
+            {
                 dpiscale = g.DpiX / 96.0;
             }
 
@@ -910,7 +912,7 @@ namespace FarsiLibrary.Win
             get { return items; }
         }
 
-        [DefaultValue(typeof (Size), "350,200")]
+        [DefaultValue(typeof(Size), "350,200")]
         public new Size Size
         {
             get { return base.Size; }
@@ -941,7 +943,7 @@ namespace FarsiLibrary.Win
         {
             return Font != null && !Font.Equals(defaultFont);
         }
-        
+
         public bool ShouldSerializeSelectedItem()
         {
             return true;
@@ -984,8 +986,8 @@ namespace FarsiLibrary.Win
             if (disposing)
             {
                 items.CollectionChanged -= new CollectionChangeEventHandler(OnCollectionChanged);
-                menu.ItemClicked        -= new ToolStripItemClickedEventHandler(OnMenuItemClicked);
-                menu.VisibleChanged     -= new EventHandler(OnMenuVisibleChanged);
+                menu.ItemClicked -= new ToolStripItemClickedEventHandler(OnMenuItemClicked);
+                menu.VisibleChanged -= new EventHandler(OnMenuVisibleChanged);
 
                 foreach (FATabStripItem item in items)
                 {

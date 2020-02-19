@@ -109,7 +109,7 @@ Partial Class FormConfigENRTL
         Me.dgvu1.AllowUserToResizeColumns = False
         Me.dgvu1.AllowUserToResizeRows = False
         Me.dgvu1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvu1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.dgvu1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvu1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8})
         Me.dgvu1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvu1.MultiSelect = False

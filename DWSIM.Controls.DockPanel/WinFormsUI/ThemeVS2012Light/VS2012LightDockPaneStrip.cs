@@ -12,6 +12,7 @@ namespace WeifenLuo.WinFormsUI.Docking
     {
         private class TabVS2012Light : Tab
         {
+
             public TabVS2012Light(IDockContent content)
                 : base(content)
             {
@@ -100,7 +101,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private const int _DocumentStripGapTop = 0;
         private const int _DocumentStripGapBottom = 0;
-        private const int _DocumentTabMaxWidth = 200;
+        private const int _DocumentTabMaxWidth = 500;
         private const int _DocumentButtonGapTop = 3;
         private const int _DocumentButtonGapBottom = 3;
         private const int _DocumentButtonGapBetween = 0;
@@ -626,7 +627,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             //    dpi = g.DpiX / 96.0;
             //}
 
-            return height; //* (int)dpi;
+            return height; // * (int)dpi;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -647,7 +648,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     DocumentButtonGapRight +
                     ButtonClose.Width +
                     ButtonWindowList.Width;
-            
+
             }
             else
             {
@@ -764,7 +765,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             int totalAllocatedWidth = 0;
             int averageWidth = totalWidth / countTabs;
             int remainedTabs = countTabs;
-            for (anyWidthWithinAverage = true; anyWidthWithinAverage && remainedTabs > 0; )
+            for (anyWidthWithinAverage = true; anyWidthWithinAverage && remainedTabs > 0;)
             {
                 anyWidthWithinAverage = false;
                 foreach (TabVS2012Light tab in Tabs)
@@ -958,7 +959,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 width = sizeText.Width + DocumentIconWidth + DocumentIconGapLeft + DocumentIconGapRight + DocumentTextGapRight;
             else
                 width = sizeText.Width + DocumentIconGapLeft + DocumentTextGapRight;
-            
+
             width += TAB_CLOSE_BUTTON_WIDTH;
             return width;
         }
@@ -1102,7 +1103,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             GraphicsPath.Reset();
             Rectangle rect = GetTabRectangle(Tabs.IndexOf(tab));
-            
+
             // Shorten TabOutline so it doesn't get overdrawn by icons next to it
             rect.Intersect(TabsRectangle);
             rect.Width--;
@@ -1116,8 +1117,14 @@ namespace WeifenLuo.WinFormsUI.Docking
             return GraphicsPath;
         }
 
+
+
         private void DrawTab_ToolWindow(Graphics g, TabVS2012Light tab, Rectangle rect)
         {
+
+            double dpi = 0.0;
+            dpi = g.DpiX / 96.0;
+
             rect.Y += 1;
             Rectangle rectIcon = new Rectangle(
                 rect.X + ToolWindowImageGapLeft,
@@ -1127,6 +1134,12 @@ namespace WeifenLuo.WinFormsUI.Docking
             rectText.X += rectIcon.Width + ToolWindowImageGapRight;
             rectText.Width = rect.Width - rectIcon.Width - ToolWindowImageGapLeft -
                 ToolWindowImageGapRight - ToolWindowTextGapRight;
+
+            if (dpi > 1.0)
+            {
+                rectText.Y = rectText.Y - 5 * (int)dpi;
+                rectText.Height = rectText.Height + 5 * (int)dpi;
+            }
 
             Rectangle rectTab = DrawHelper.RtlTransform(this, rect);
             rectText = DrawHelper.RtlTransform(this, rectText);
@@ -1163,6 +1176,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (tab.TabWidth == 0)
                 return;
 
+            double dpi = 0.0;
+            dpi = g.DpiX / 96.0;
+
             var rectCloseButton = GetCloseButtonRect(rect);
             Rectangle rectIcon = new Rectangle(
                 rect.X + DocumentIconGapLeft,
@@ -1179,6 +1195,12 @@ namespace WeifenLuo.WinFormsUI.Docking
             else
                 rectText.Width = rect.Width - DocumentIconGapLeft - DocumentTextGapRight - rectCloseButton.Width;
 
+            if (dpi > 1.0)
+            {
+                rectText.Y = rectText.Y - 10 * (int)dpi;
+                rectText.Height = rectText.Height + 10 * (int)dpi;
+            }
+
             Rectangle rectTab = DrawHelper.RtlTransform(this, rect);
             Rectangle rectBack = DrawHelper.RtlTransform(this, rect);
             rectBack.Width += rect.X;
@@ -1187,12 +1209,12 @@ namespace WeifenLuo.WinFormsUI.Docking
             rectText = DrawHelper.RtlTransform(this, rectText);
             rectIcon = DrawHelper.RtlTransform(this, rectIcon);
 
-            if (g.DpiY > 96)
-            {
-                rectText.Y /= (int)(g.DpiY / 96.0);
-                rectText.Y -= 4;
-                rectText.Height *= (int)(g.DpiY / 96.0);
-            }
+            //if (g.DpiY > 96)
+            //{
+            //    rectText.Y /= (int)(g.DpiY / 96.0);
+            //    rectText.Y -= 4;
+            //    rectText.Height *= (int)(g.DpiY / 96.0);
+            //}
 
             Color activeColor = DockPane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor;
             Color lostFocusColor = DockPane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor;
@@ -1318,7 +1340,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 }
             }
         }
-        
+
         private void ContextMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;

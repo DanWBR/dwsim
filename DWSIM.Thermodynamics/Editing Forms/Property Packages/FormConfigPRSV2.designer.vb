@@ -71,7 +71,7 @@ Partial Class FormConfigPRSV2
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2, Me.FaTabStripItem1})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem3
         '
@@ -79,7 +79,6 @@ Partial Class FormConfigPRSV2
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        Me.FaTabStripItem3.Selected = True
         resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'GroupBox3
@@ -104,7 +103,7 @@ Partial Class FormConfigPRSV2
         Me.dgvu1.AllowUserToResizeRows = False
         resources.ApplyResources(Me.dgvu1, "dgvu1")
         Me.dgvu1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvu1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.dgvu1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvu1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column5, Me.Column6, Me.Column7})
         Me.dgvu1.MultiSelect = False
         Me.dgvu1.Name = "dgvu1"
@@ -183,7 +182,7 @@ Partial Class FormConfigPRSV2
         Me.KryptonDataGridView2.AllowUserToResizeRows = False
         resources.ApplyResources(Me.KryptonDataGridView2, "KryptonDataGridView2")
         Me.KryptonDataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.KryptonDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.KryptonDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.KryptonDataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Column4})
         Me.KryptonDataGridView2.MultiSelect = False
         Me.KryptonDataGridView2.Name = "KryptonDataGridView2"
@@ -235,6 +234,7 @@ Partial Class FormConfigPRSV2
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'FormConfigPRSV2
