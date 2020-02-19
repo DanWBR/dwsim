@@ -5601,4 +5601,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="RotationSpeed" xml:space="preserve">
     <value>Velocidade de Rotação</value>
   </data>
+  <data name="UpdateFromJSON" xml:space="preserve">
+    <value>A substância já existe na simulação. Deseja substituir seus dados pelos do arquivo JSON?</value>
+  </data>
+  <data name="CompoundUpdated" xml:space="preserve">
+    <value>Dados da substância atualizados com sucesso.</value>
+  </data>
 </root>

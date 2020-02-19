@@ -2189,6 +2189,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Dados da substância atualizados com sucesso..
+        '''</summary>
+        Friend Shared ReadOnly Property CompoundUpdated() As String
+            Get
+                Return ResourceManager.GetString("CompoundUpdated", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Pseudo-Componente.
         '''</summary>
         Friend Shared ReadOnly Property CompPseudo() As String
@@ -15171,6 +15180,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property UpdatedVersionAvailable() As String
             Get
                 Return ResourceManager.GetString("UpdatedVersionAvailable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to A substância já existe na simulação. Deseja substituir seus dados pelos do arquivo JSON?.
+        '''</summary>
+        Friend Shared ReadOnly Property UpdateFromJSON() As String
+            Get
+                Return ResourceManager.GetString("UpdateFromJSON", resourceCulture)
             End Get
         End Property
         

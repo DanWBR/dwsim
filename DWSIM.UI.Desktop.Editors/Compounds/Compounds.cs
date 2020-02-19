@@ -104,7 +104,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             btn2.Click += (sender, e) =>
             {
-                Application.Instance.Invoke(() => {
+                Application.Instance.Invoke(() =>
+                {
                     ImportFromJSON();
                 });
             };
@@ -114,7 +115,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Rows.Add(cont2);
 
-            List<string> orderlist = new List<string>(new []{
+            List<string> orderlist = new List<string>(new[]{
                 "Default(As Added)",
                 "Name(Ascending)",
                 "Name(Descending)",
@@ -128,9 +129,10 @@ namespace DWSIM.UI.Desktop.Editors
                 "Tag (Descending)"});
 
             var dd = new DropDown();
-            dd.Items.AddRange(orderlist.Select((x) => new ListItem() {  Key = x, Text = x}));
+            dd.Items.AddRange(orderlist.Select((x) => new ListItem() { Key = x, Text = x }));
             dd.SelectedIndex = (int)flowsheet.Options.CompoundOrderingMode;
-            dd.SelectedIndexChanged += (sender, e) => {
+            dd.SelectedIndexChanged += (sender, e) =>
+            {
                 flowsheet.Options.CompoundOrderingMode = dd.SelectedIndex.ToEnum<Interfaces.Enums.CompoundOrdering>();
             };
 
@@ -192,7 +194,8 @@ namespace DWSIM.UI.Desktop.Editors
             var col1aa = new GridColumn
             {
                 DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.Tag) },
-                HeaderText = "Tag", Editable = true
+                HeaderText = "Tag",
+                Editable = true
             };
             col1aa.AutoSize = true;
             listcontainer.Columns.Add(col1aa);
@@ -301,7 +304,21 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                         else
                         {
-                            MessageBox.Show("Loaded compound already exists.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Error);
+                            if (MessageBox.Show("The compound already exists in the simulation. Do you want to update it using the data from the JSON file?", "DWSIM", MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
+                            {
+                                flowsheet.AvailableCompounds[comp.Name] = comp;
+                                flowsheet.SelectedCompounds[comp.Name] = comp;
+                                foreach (var obj in flowsheet.SimulationObjects.Values.Where((x) => (x is Thermodynamics.Streams.MaterialStream)))
+                                {
+                                    var ms = (Thermodynamics.Streams.MaterialStream)obj;
+                                    foreach (Phase phase in ms.Phases.Values)
+                                    {
+                                        phase.Compounds[comp.Name].ConstantProperties = comp;
+                                    }
+
+                                }
+                                MessageBox.Show("Compound data updated successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Information);
+                            }
                         }
 
                     }

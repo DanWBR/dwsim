@@ -1459,10 +1459,21 @@ Public Class FormSimulSettings
                         ogc1.Rows(ogc1.Rows.Count - 1).Selected = True
                         ogc1.FirstDisplayedScrollingRowIndex = ogc1.Rows.Count - 1
                     Else
-                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        'compound exists.
+                        If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                            Me.FrmChild.Options.SelectedComponents(comp.Name) = comp
+                            Dim ms As Streams.MaterialStream
+                            Dim proplist As New ArrayList
+                            For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                                    phase.Compounds(comp.Name).ConstantProperties = comp
+                                Next
+                            Next
+                            MessageBox.Show(DWSIM.App.GetLocalString("CompoundUpdated"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
                     End If
                 Catch ex As Exception
-                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
             Next
         End If
