@@ -63,6 +63,7 @@ namespace HeatExchangerArea
             c1.PropertyPackage = sim.PropertyPackages.Values.First();
 
             // set inlet stream temperature
+            // default properties: T = 298.15 K, P = 101325 Pa, Mass Flow = 1 kg/s
 
             var ms1 = (DWSIM.Thermodynamics.Streams.MaterialStream)m1;
 
