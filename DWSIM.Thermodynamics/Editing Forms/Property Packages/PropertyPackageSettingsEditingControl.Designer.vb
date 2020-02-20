@@ -46,6 +46,8 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkIgnoreVapFracLim = New System.Windows.Forms.CheckBox()
         Me.chkIgnoreIPs = New System.Windows.Forms.CheckBox()
         Me.chkSolidFugIdeal = New System.Windows.Forms.CheckBox()
+        Me.chkUseSolidCp = New System.Windows.Forms.CheckBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cbLiqDens
@@ -185,10 +187,23 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkSolidFugIdeal.Name = "chkSolidFugIdeal"
         Me.chkSolidFugIdeal.UseVisualStyleBackColor = True
         '
+        'chkUseSolidCp
+        '
+        resources.ApplyResources(Me.chkUseSolidCp, "chkUseSolidCp")
+        Me.chkUseSolidCp.Name = "chkUseSolidCp"
+        Me.chkUseSolidCp.UseVisualStyleBackColor = True
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        '
         'PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.chkUseSolidCp)
         Me.Controls.Add(Me.chkSolidFugIdeal)
         Me.Controls.Add(Me.chkIgnoreIPs)
         Me.Controls.Add(Me.chkIgnoreVapFracLim)
@@ -240,4 +255,6 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents chkIgnoreVapFracLim As CheckBox
     Friend WithEvents chkIgnoreIPs As CheckBox
     Friend WithEvents chkSolidFugIdeal As CheckBox
+    Friend WithEvents chkUseSolidCp As CheckBox
+    Friend WithEvents Label10 As Label
 End Class

@@ -218,6 +218,8 @@ Namespace PropertyPackages
 
         Public Property SolidPhaseFugacity_UseIdealLiquidPhaseFugacity As Boolean = False
 
+        Public Property SolidPhaseEnthalpy_UsesCp As Boolean = False
+
         Public Property EnthalpyEntropyCpCvCalculationMode As EnthalpyEntropyCpCvCalcMode = EnthalpyEntropyCpCvCalcMode.LeeKesler
 
         Public Property IgnoreVaporFractionLimit As Boolean = False
@@ -7302,68 +7304,74 @@ Final3:
 
             If sh = 0.0# Then
 
-                Dim n As Integer = Vx.Length - 1
-                Dim i As Integer
-                Dim HS As Double = 0.0#
-                Dim Cpi As Double
-                Dim VMF() As Double
-
-                VMF = RET_VMM().MultiplyY(Vx).NormalizeY 'calculate mass fractions
-
-                For i = 0 To n
-                    If Vx(i) > 0 Then
-                        If cprops(i).OriginalDB = "ChemSep" Or cprops(i).OriginalDB = "User" Then
-                            Dim A, B, C, D, E As Double
-                            Dim eqno As String = cprops(i).SolidHeatCapacityEquation
-                            Dim mw As Double = cprops(i).Molar_Weight
-                            A = cprops(i).Solid_Heat_Capacity_Const_A
-                            B = cprops(i).Solid_Heat_Capacity_Const_B
-                            C = cprops(i).Solid_Heat_Capacity_Const_C
-                            D = cprops(i).Solid_Heat_Capacity_Const_D
-                            E = cprops(i).Solid_Heat_Capacity_Const_E
-                            '<SolidHeatCapacityCp name="Solid heat capacity"  units="J/kmol/K" >
-                            Cpi = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
-
-                            If cprops(i).TemperatureOfFusion < 298.15 Then
-                                HS += VMF(i) * Me.AUX_INT_CPDTi_L(298.15, cprops(i).TemperatureOfFusion, cprops(i).Name)
-                                HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
-                                HS -= VMF(i) * Cpi * (cprops(i).TemperatureOfFusion - T)
-                            Else
-                                HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
-                                HS -= VMF(i) * Cpi * (298.15 - T)
-                            End If
-                        ElseIf cprops(i).OriginalDB = "ChEDL Thermo" Then
-                            Dim A, B, C, D, E As Double
-                            Dim mw As Double = cprops(i).Molar_Weight
-                            Dim eqno As String = cprops(i).SolidHeatCapacityEquation
-                            A = cprops(i).Solid_Heat_Capacity_Const_A
-                            B = cprops(i).Solid_Heat_Capacity_Const_B
-                            C = cprops(i).Solid_Heat_Capacity_Const_C
-                            D = cprops(i).Solid_Heat_Capacity_Const_D
-                            E = cprops(i).Solid_Heat_Capacity_Const_E
-                            Cpi = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
-                            If cprops(i).TemperatureOfFusion < 298.15 Then
-                                HS += VMF(i) * Me.AUX_INT_CPDTi_L(298.15, cprops(i).TemperatureOfFusion, cprops(i).Name)
-                                HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
-                                HS -= VMF(i) * Cpi * (cprops(i).TemperatureOfFusion - T)
-                            Else
-                                HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
-                                HS -= VMF(i) * Cpi * (298.15 - T)
-                            End If
-
-                        ElseIf cprops(i).TemperatureOfFusion <> 0.0# Then
-                            HS += -VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / cprops(i).Molar_Weight
-                        End If
-                    End If
-                Next
-
-                Return HS 'kJ/kg
+                Return CalcSolidEnthalpyFromCp(T, Vx, cprops)
 
             Else
 
                 Return sh
 
             End If
+
+        End Function
+
+        Public Function CalcSolidEnthalpyFromCp(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
+
+            Dim n As Integer = Vx.Length - 1
+            Dim i As Integer
+            Dim HS As Double = 0.0#
+            Dim Cpi As Double
+            Dim VMF() As Double
+
+            VMF = RET_VMM().MultiplyY(Vx).NormalizeY 'calculate mass fractions
+
+            For i = 0 To n
+                If Vx(i) > 0 Then
+                    If cprops(i).OriginalDB = "ChemSep" Or cprops(i).OriginalDB = "User" Then
+                        Dim A, B, C, D, E As Double
+                        Dim eqno As String = cprops(i).SolidHeatCapacityEquation
+                        Dim mw As Double = cprops(i).Molar_Weight
+                        A = cprops(i).Solid_Heat_Capacity_Const_A
+                        B = cprops(i).Solid_Heat_Capacity_Const_B
+                        C = cprops(i).Solid_Heat_Capacity_Const_C
+                        D = cprops(i).Solid_Heat_Capacity_Const_D
+                        E = cprops(i).Solid_Heat_Capacity_Const_E
+                        '<SolidHeatCapacityCp name="Solid heat capacity"  units="J/kmol/K" >
+                        Cpi = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
+
+                        If cprops(i).TemperatureOfFusion < 298.15 Then
+                            HS += VMF(i) * Me.AUX_INT_CPDTi_L(298.15, cprops(i).TemperatureOfFusion, cprops(i).Name)
+                            HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
+                            HS -= VMF(i) * Cpi * (cprops(i).TemperatureOfFusion - T)
+                        Else
+                            HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
+                            HS -= VMF(i) * Cpi * (298.15 - T)
+                        End If
+                    ElseIf cprops(i).OriginalDB = "ChEDL Thermo" Then
+                        Dim A, B, C, D, E As Double
+                        Dim mw As Double = cprops(i).Molar_Weight
+                        Dim eqno As String = cprops(i).SolidHeatCapacityEquation
+                        A = cprops(i).Solid_Heat_Capacity_Const_A
+                        B = cprops(i).Solid_Heat_Capacity_Const_B
+                        C = cprops(i).Solid_Heat_Capacity_Const_C
+                        D = cprops(i).Solid_Heat_Capacity_Const_D
+                        E = cprops(i).Solid_Heat_Capacity_Const_E
+                        Cpi = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                        If cprops(i).TemperatureOfFusion < 298.15 Then
+                            HS += VMF(i) * Me.AUX_INT_CPDTi_L(298.15, cprops(i).TemperatureOfFusion, cprops(i).Name)
+                            HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
+                            HS -= VMF(i) * Cpi * (cprops(i).TemperatureOfFusion - T)
+                        Else
+                            HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
+                            HS -= VMF(i) * Cpi * (298.15 - T)
+                        End If
+
+                    ElseIf cprops(i).TemperatureOfFusion <> 0.0# Then
+                        HS += -VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / cprops(i).Molar_Weight
+                    End If
+                End If
+            Next
+
+            Return HS 'kJ/kg
 
         End Function
 
@@ -11110,6 +11118,11 @@ Final3:
             End Try
 
             Try
+                SolidPhaseEnthalpy_UsesCp = (From el As XElement In data Select el Where el.Name = "SolidPhaseEnthalpy_UsesCp").FirstOrDefault.Value
+            Catch ex As Exception
+            End Try
+
+            Try
                 EnthalpyEntropyCpCvCalculationMode = (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value
             Catch ex As Exception
             End Try
@@ -11473,6 +11486,7 @@ Final3:
                 .Add(New XElement("VaporPhaseFugacityCalculationMode", VaporPhaseFugacityCalculationMode))
                 .Add(New XElement("SolidPhaseFugacityCalculationMethod", SolidPhaseFugacityCalculationMethod))
                 .Add(New XElement("SolidPhaseFugacity_UseIdealLiquidPhaseFugacity", SolidPhaseFugacity_UseIdealLiquidPhaseFugacity))
+                .Add(New XElement("SolidPhaseEnthalpy_UsesCp", SolidPhaseEnthalpy_UsesCp))
                 .Add(New XElement("EnthalpyEntropyCpCvCalculationMode", EnthalpyEntropyCpCvCalculationMode))
                 .Add(New XElement("LiquidFugacity_UsePoyntingCorrectionFactor", LiquidFugacity_UsePoyntingCorrectionFactor))
                 .Add(New XElement("ActivityCoefficientModels_IgnoreMissingInteractionParameters", ActivityCoefficientModels_IgnoreMissingInteractionParameters))

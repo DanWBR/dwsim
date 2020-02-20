@@ -49,6 +49,18 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Sub DisplayEditingForm()
+
+            If GlobalSettings.Settings.CAPEOPENMode Then
+                Dim f As New FormConfigPropertyPackage() With {._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
+                f.ShowDialog()
+            Else
+                Dim f As New FormConfigPropertyPackage() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                f.ShowDialog()
+            End If
+
+        End Sub
+
 #Region "    DWSIM Functions"
 
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
@@ -601,7 +613,11 @@ Namespace PropertyPackages
                 ElseIf st = State.Vapor Then
                     H = Me.m_id.H_RA_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx), Me.RET_VHVAP(T))
                 ElseIf st = State.Solid Then
-                    H = Me.m_id.H_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx), Me.RET_VHVAP(T)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    If SolidPhaseEnthalpy_UsesCp Then
+                        H = CalcSolidEnthalpyFromCp(T, Vx, DW_GetConstantProperties)
+                    Else
+                        H = Me.m_id.H_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx), Me.RET_VHVAP(T)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    End If
                 End If
 
                 Return H
@@ -683,7 +699,11 @@ Namespace PropertyPackages
                 ElseIf st = State.Vapor Then
                     S = Me.m_id.S_RA_MIX("V", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T))
                 ElseIf st = State.Solid Then
-                    S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                    If SolidPhaseEnthalpy_UsesCp Then
+                        S = CalcSolidEnthalpyFromCp(T, Vx, DW_GetConstantProperties) / T
+                    Else
+                        S = Me.m_id.S_RA_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx), Me.RET_VHVAP(T)) + P / 1000 / Me.AUX_LIQDENS(T, Vx) / T - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                    End If
                 End If
 
                 Return S

@@ -44,6 +44,8 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkSolidIdealLiqFug.Checked = PropPack.SolidPhaseFugacity_UseIdealLiquidPhaseFugacity
 
+        chkUseSolidCp.Checked = PropPack.SolidPhaseEnthalpy_UsesCp
+
         chkVapFugIdeal.Checked = Not PropPack.VaporPhaseFugacityCalculationMode
 
         chkSolidFugIdeal.Checked = PropPack.SolidPhaseFugacityCalculationMethod
@@ -112,6 +114,9 @@ Public Class PropertyPackageSettingsEditingControl
                                                         PropPack.SolidPhaseFugacityCalculationMethod = chkSolidFugIdeal.Checked
                                                     End Sub
 
+        AddHandler chkUseSolidCp.CheckedChanged, Sub()
+                                                     PropPack.SolidPhaseEnthalpy_UsesCp = chkUseSolidCp.Checked
+                                                 End Sub
     End Sub
 
 End Class
