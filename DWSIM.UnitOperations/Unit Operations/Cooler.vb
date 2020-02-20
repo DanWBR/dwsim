@@ -376,6 +376,12 @@ Namespace UnitOperations
                         comp.MassFraction = msin.Phases(0).Compounds(comp.Name).MassFraction
                     Next
                     .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow.GetValueOrDefault
+                    Select Case CalcMode
+                        Case CalculationMode.HeatRemoved, CalculationMode.OutletVaporFraction
+                            .SpecType = StreamSpec.Pressure_and_Enthalpy
+                        Case CalculationMode.TemperatureChange, CalculationMode.OutletTemperature
+                            .SpecType = StreamSpec.Temperature_and_Pressure
+                    End Select
                 End With
 
             Else

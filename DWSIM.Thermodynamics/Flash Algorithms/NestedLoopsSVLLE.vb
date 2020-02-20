@@ -82,22 +82,53 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim V, L1, L2, S, Vy(), Vx1(), Vx2(), Vs() As Double
 
-            'Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Dim result As Object
 
-            Dim result As Object = nl1.Flash_PT(Vz, P, T, PP)
+            Dim names = PP.RET_VNAMES
 
-            IObj?.SetCurrent
+            If PP.ForcedSolids.Count > 0 Then
 
-            L1 = result(0)
-            V = result(1)
-            Vx1 = result(2)
-            Vy = result(3)
-            Vx2 = PP.RET_NullVector
-            Vs = PP.RET_NullVector
+                'we have forced solids
+
+                Dim Vzns As Double() = Vz.Clone
+                Vs = PP.RET_NullVector
+                For Each item In PP.ForcedSolids
+                    Dim index = names.ToList.IndexOf(item)
+                    Vs(index) = Vz(index)
+                    Vzns(index) = 0.0
+                Next
+                S = Vs.Sum
+                Vzns = Vzns.NormalizeY()
+
+                IObj?.SetCurrent
+
+                result = nl1.Flash_PT(Vzns, P, T, PP)
+
+                L1 = result(0) * (1 - S)
+                V = result(1) * (1 - S)
+                Vx1 = result(2)
+                Vy = result(3)
+                L2 = result(5) * (1 - S)
+                Vx2 = result(6)
+
+            Else
+
+                IObj?.SetCurrent
+
+                result = nl1.Flash_PT(Vz, P, T, PP)
+
+                L1 = result(0)
+                V = result(1)
+                Vx1 = result(2)
+                Vy = result(3)
+                Vx2 = PP.RET_NullVector
+                Vs = PP.RET_NullVector
+
+            End If
 
             Dim GoneThrough As Boolean = False
 
-            If L1 = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
+            If L1 = 0 And S = 0.0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
 
                 Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
 
@@ -153,7 +184,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 IObj?.SetCurrent
 
-                If stresult(0) = False And Not GoneThrough Then
+                Dim nonsolids = Vz.Count - PP.ForcedSolids.Count
+
+                If stresult(0) = False And Not GoneThrough And nonsolids > 1 Then
 
                     ' liquid phase NOT stable. proceed to three-phase flash.
 
@@ -242,7 +275,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 IObj?.SetCurrent
 
-                If PP.RET_VTF.SumY > 0.0 OrElse PP.ForcedSolids.Count > 0 Then
+                If PP.RET_VTF.SumY > 0.0 And S = 0 Then
 
                     result = nl3.Flash_SL(Vx1, P, T, PP)
 
@@ -278,8 +311,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 End If
 
-
-            Else
+            ElseIf S = 0 Then
 
                 IObj?.SetCurrent
 
@@ -361,72 +393,172 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", Tref))
 
-            For j = 0 To 1
+            Dim pvmode As Boolean = False
 
-                cnt = 0
-                x1 = Tref
+            Dim pvflashresult As Object = Nothing
 
-                Do
+            Dim Vresult As Double = 0.0
 
+            If PP.ForcedSolids.Count > 0 Then
+
+                Dim Hb, Hd As Double
+
+                If Settings.EnableParallelProcessing Then
+
+                    Dim task1 = Task.Factory.StartNew(Sub()
+                                                          Hb = H_Error("PV", 0, H, P, Vz, PP)(0)
+                                                      End Sub,
+                                                      Settings.TaskCancellationTokenSource.Token,
+                                                      TaskCreationOptions.None,
+                                                     Settings.AppTaskScheduler)
+                    Dim task2 = Task.Factory.StartNew(Sub()
+                                                          Hd = H_Error("PV", 1, H, P, Vz, PP)(0)
+                                                      End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token,
+                                                  TaskCreationOptions.None,
+                                                 Settings.AppTaskScheduler)
+                    Task.WaitAll(task1, task2)
+
+                Else
                     IObj?.SetCurrent()
-
-                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-                    Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PH", "PH Flash Newton Iteration", "Pressure-Enthalpy Flash Algorithm Convergence Iteration Step")
-
-                    IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
-
-                    IObj2?.SetCurrent()
-                    fx = H_Error(x1, H, P, Vz, PP)
-                    IObj2?.SetCurrent()
-                    fx2 = H_Error(x1 + epsilon(j), H, P, Vz, PP)
-
-                    IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
-
-                    If Abs(fx) < tolEXT Then Exit Do
-
-                    dfdx = (fx2 - fx) / epsilon(j)
-                    dx = fx / dfdx
-
-                    x1 = x1 - dx
-
-                    IObj2?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", T))
-
-                    cnt += 1
-
-                    IObj2?.Close()
-
-                Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
-
-                IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, T))
-
-                T = x1
-
-                If Not Double.IsNaN(T) And Not Double.IsInfinity(T) And Not cnt > maxitEXT Then
-                    If T > Tmin And T < Tmax Then Exit For
+                    Hb = H_Error("PV", 0, H, P, Vz, PP)(0)
+                    IObj?.SetCurrent()
+                    Hd = H_Error("PV", 1, H, P, Vz, PP)(0)
                 End If
 
-            Next
+                Dim brent As New DWSIM.MathOps.MathEx.BrentOpt.Brent
+
+                If Hb > 0 And Hd < 0 Then
+
+                    pvmode = True
+
+                    'partial vaporization
+
+                    Dim H1, H2, V1, V2 As Double
+                    ecount = 0
+                    Dim Vx = 0.5
+                    Dim res As Object()
+                    H1 = Hb
+                    Do
+
+                        ecount += 1
+                        V1 = Vx
+                        If V1 < 1 Then
+                            V2 = V1 + 0.01
+                        Else
+                            V2 = V1 - 0.01
+                        End If
+                        IObj?.SetCurrent()
+                        H2 = H_Error("PV", V2, H, P, Vz, PP)(0)
+                        Vx = V1 + (V2 - V1) * (0 - H1) / (H2 - H1)
+                        If Vx < 0 Then Vx = 0.0#
+                        If Vx > 1 Then Vx = 1.0#
+                        IObj?.SetCurrent()
+                        res = H_Error("PV", Vx, H, P, Vz, PP)
+                        H1 = res(0)
+                        pvflashresult = res(1)
+                    Loop Until Abs(H1) < tolINT Or ecount > maxitEXT
+
+                Else
+
+                    brent.DefineFuncDelegate(Function(x, oa)
+                                                 Return H_Error("PT", x, H, P, Vz, PP)(0)
+                                             End Function)
+
+                    T = brent.BrentOpt(Tref * 0.3, Tref * 2, 10, tolEXT, maxitEXT, Nothing)
+
+                End If
+
+            Else
+
+                For j = 0 To 1
+
+                    cnt = 0
+                    x1 = Tref
+
+                    Do
+
+                        IObj?.SetCurrent()
+
+                        Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                        Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PH", "PH Flash Newton Iteration", "Pressure-Enthalpy Flash Algorithm Convergence Iteration Step")
+
+                        IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
+
+                        IObj2?.SetCurrent()
+                        fx = H_Error("PT", x1, H, P, Vz, PP)(0)
+                        IObj2?.SetCurrent()
+                        fx2 = H_Error("PT", x1 + epsilon(j), H, P, Vz, PP)(0)
+
+                        IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
+
+                        If Abs(fx) < tolEXT Then Exit Do
+
+                        dfdx = (fx2 - fx) / epsilon(j)
+                        dx = fx / dfdx
+
+                        x1 = x1 - dx
+
+                        IObj2?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", T))
+
+                        cnt += 1
+
+                        IObj2?.Close()
+
+                    Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
+
+                    IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, T))
+
+                    T = x1
+
+                    If Not Double.IsNaN(T) And Not Double.IsInfinity(T) And Not cnt > maxitEXT Then
+                        If T > Tmin And T < Tmax Then Exit For
+                    End If
+
+                Next
+
+            End If
 
             If Double.IsNaN(T) Or cnt > maxitEXT Then Throw New Exception("PH Flash [NL3PV3]: Invalid result: Temperature did not converge.")
 
             IObj?.SetCurrent()
 
             Dim V, L1, L2, Vy(), Vx1(), Vx2(), Vs(), Ki(), S As Double
-            Dim tmp As Object = Flash_PT(Vz, P, T, PP)
-            'Return New Object() {L1, V, Vx1, Vy, 0, L2, Vx2, S, Vs}
 
-            V = tmp(1)
-            L1 = tmp(0)
-            L2 = tmp(5)
-            S = tmp(7)
-            Vy = tmp(3)
-            Vx1 = tmp(2)
-            Vx2 = tmp(6)
-            Vs = tmp(8)
-            ecount = tmp(4)
+            If Not pvmode Then
 
-            Ki = Vy.DivideY(Vx1)
+                Dim tmp As Object = Flash_PT(Vz, P, T, PP)
+
+                V = tmp(1)
+                L1 = tmp(0)
+                L2 = tmp(5)
+                S = tmp(7)
+                Vy = tmp(3)
+                Vx1 = tmp(2)
+                Vx2 = tmp(6)
+                Vs = tmp(8)
+                ecount = tmp(4)
+
+                Ki = Vy.DivideY(Vx1)
+
+            Else
+
+                V = pvflashresult(1)
+                L1 = pvflashresult(0)
+                L2 = pvflashresult(7)
+                S = pvflashresult(9)
+                Vy = pvflashresult(3)
+                Vx1 = pvflashresult(2)
+                Vx2 = pvflashresult(8)
+                Vs = pvflashresult(10)
+                ecount = pvflashresult(5)
+
+                T = pvflashresult(4)
+
+                Ki = Vy.DivideY(Vx1)
+
+            End If
 
             d2 = Date.Now
 
@@ -575,7 +707,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Function H_Error(ByVal T As Double, ByVal H As Double, ByVal P As Double, ByVal Vz As Double(), PP As PropertyPackage) As Double
+        Function H_Error(ByVal Type As String, ByVal X As Double, ByVal H As Double, ByVal P As Double, ByVal Vz As Double(), PP As PropertyPackage) As Object()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -585,20 +717,35 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.SetCurrent()
 
-            Dim tmp = Me.Flash_PT(Vz, P, T, PP)
-
             Dim n = Vz.Length - 1
 
-            Dim L1, L2, V, Vx1(), Vx2(), Vy(), Sx, Vs() As Double
+            Dim L1, L2, V, Vx1(), Vx2(), Vy(), Sx, Vs(), T As Double
 
-            L1 = tmp(0)
-            V = tmp(1)
-            Vx1 = tmp(2)
-            Vy = tmp(3)
-            L2 = tmp(5)
-            Vx2 = tmp(6)
-            Sx = tmp(7)
-            Vs = tmp(8)
+            Dim tmp As Object = Nothing
+
+            If Type = "PT" Then
+                tmp = Me.Flash_PT(Vz, P, X, PP)
+                L1 = tmp(0)
+                V = tmp(1)
+                Vx1 = tmp(2)
+                Vy = tmp(3)
+                L2 = tmp(5)
+                Vx2 = tmp(6)
+                Sx = tmp(7)
+                Vs = tmp(8)
+                T = X
+            Else
+                tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP)
+                L1 = tmp(0)
+                V = tmp(1)
+                Vx1 = tmp(2)
+                Vy = tmp(3)
+                T = tmp(4)
+                L2 = tmp(7)
+                Vx2 = tmp(8)
+                Sx = tmp(9)
+                Vs = tmp(10)
+            End If
 
             Dim _Hv, _Hl1, _Hl2, _Hs As Double
 
@@ -628,7 +775,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PH Flash [NL-3PV3]: Current T = " & T & ", Current H Error = " & e1)
 
-            Return e1
+            Return New Object() {e1, tmp}
 
         End Function
 
@@ -690,7 +837,47 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
-            Return nl2.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+
+            If PP.ForcedSolids.Count > 0 Then
+
+                'we have forced solids
+
+                PP.Flowsheet?.ShowMessage("Warning: when compounds are marked as forced solids, partial or full vaporization calculations are done solids-free. Specified and calculated vapor fractions won't match.", Interfaces.IFlowsheet.MessageType.Warning)
+
+                Dim names = PP.RET_VNAMES
+                Dim Vs = PP.RET_NullVector
+                Dim Vzns As Double() = Vz.Clone
+                Dim S As Double = 0.0
+                For Each item In PP.ForcedSolids
+                    Dim index = names.ToList.IndexOf(item)
+                    Vs(index) = Vz(index)
+                    Vzns(index) = 0.0
+                Next
+                S = Vs.Sum
+                Vs = Vs.NormalizeY
+                Vzns = Vzns.NormalizeY
+
+                'Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
+                Dim result = nl2.Flash_PV(Vzns, P, V, Tref, PP, ReuseKI, PrevKi)
+
+                Dim T, L1, L2, Vx(), Vx2(), Vy() As Double
+
+                L1 = result(0)
+                Vx = result(2)
+                Vy = result(3)
+                T = result(4)
+                L2 = result(7)
+                Vx2 = result(8)
+
+                Return New Object() {L1 * (1 - S), V * (1 - S), Vx, Vy, T, result(5), result(6), L2 * (1 - S), Vx2, S, Vs}
+
+            Else
+
+                Return nl2.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+
+            End If
+
         End Function
 
         Public Overrides Function Flash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
