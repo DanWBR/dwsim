@@ -406,6 +406,12 @@ Namespace Streams
 
                 .CurrentMaterialStream = Me
 
+                If (PropertyPackage.ForcedSolids.Count > 0 And Not PropertyPackage.FlashBase.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE) Then
+
+                    FlowSheet?.ShowMessage("When working with forced solids, prefer the Nested Loops SVLLE Flash Algorithm for a correct calculation of the energy balance of the flowsheet.", IFlowsheet.MessageType.Information)
+
+                End If
+
                 If W.HasValue Then
                     If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Mass flow specified, will calculate molar and volumetric flow."))
                     IObj?.Paragraphs.Add("Checking flow definition... Mass Flow specified, will calculate Molar and Volumetric Flows.")
