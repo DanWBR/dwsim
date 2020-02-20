@@ -711,17 +711,19 @@ Public Class KDBParser
 
         htmlpage.LoadHtml(source)
 
-        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
-
         Dim results As New List(Of String())
 
-        For Each r In rows
-            Dim id As String = ""
-            Dim description As String = ""
-            id = r.ChildNodes(1).InnerText
-            description = r.ChildNodes(3).InnerText
-            results.Add(New String() {id, description})
-        Next
+        Try
+            Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
+            For Each r In rows
+                Dim id As String = ""
+                Dim description As String = ""
+                id = r.ChildNodes(1).InnerText
+                description = r.ChildNodes(3).InnerText
+                results.Add(New String() {id, description})
+            Next
+        Catch ex As Exception
+        End Try
 
         Return results
 

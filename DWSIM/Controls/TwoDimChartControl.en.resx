@@ -117,16 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PGrid1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 311</value>
+  </data>
+  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 311</value>
+  </data>
+  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 23</value>
+  </data>
   <data name="btnUpdate.Text" xml:space="preserve">
     <value>Update Chart Data</value>
+  </data>
+  <data name="btnExportPNG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 334</value>
+  </data>
+  <data name="btnExportPNG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 23</value>
   </data>
   <data name="btnExportPNG.Text" xml:space="preserve">
     <value>Export to PNG</value>
   </data>
+  <data name="btnExportSVG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 357</value>
+  </data>
+  <data name="btnExportSVG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 23</value>
+  </data>
   <data name="btnExportSVG.Text" xml:space="preserve">
     <value>Export to SVG</value>
   </data>
+  <data name="PlotView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>467, 380</value>
+  </data>
+  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 380</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>243</value>
+  </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Salvar Gráfico</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 380</value>
   </data>
 </root>

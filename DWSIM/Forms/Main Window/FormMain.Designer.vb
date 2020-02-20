@@ -632,7 +632,7 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me, "$this")
         Me.AllowDrop = True
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.WebPanel)
         Me.Controls.Add(Me.ErrorBox_Panel)
         Me.Controls.Add(Me.SettingsPanel)

@@ -43,12 +43,16 @@ Public Class FormSimulSettings
     Dim vdPP, vdSR As MessageBox()
 
     Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
+
         If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then
+
             ' set the bounds of this form's FloatWindow to our desired position and size
+
             If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
                 Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
                 If Not floatWin Is Nothing Then
-                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y, 900, 600)
+                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y,
+                                       900 * GlobalSettings.Settings.DpiScale, 600 * GlobalSettings.Settings.DpiScale)
                 End If
             End If
 
