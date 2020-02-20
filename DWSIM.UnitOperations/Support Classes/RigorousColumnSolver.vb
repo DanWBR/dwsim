@@ -2986,7 +2986,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Else
                         Vj(i) = -Lj(ns) + sum3(i)
                     End If
-                    If Vj(i) < 0 Then Vj(i) = 0.01 '-Vj(i)
+                    If Vj(i) < 0 Then Vj(i) = -Vj(i)
                 Next
 
                 For i = 0 To ns
@@ -3017,7 +3017,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 ''''''''''''''''''''
                 Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns) As Double
 
-                Dim epsilon As Double = 0.0001
+                Dim epsilon As Double = 0.1
 
                 If doparallel Then
 

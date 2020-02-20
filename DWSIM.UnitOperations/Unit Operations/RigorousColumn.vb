@@ -2759,7 +2759,7 @@ Namespace UnitOperations
                     IObj?.SetCurrent()
                     Dim flashresult As Object = Nothing
                     If llextractor Then
-                        Dim L1, L2, Vx1(), Vx2(), rho1, rho2 As Double
+                        Dim L1, L2, Vx1(), Vx2() As Double
                         Dim trialcomp As Double() = zm.Clone
                         For counter As Integer = 0 To 20
                             flashresult = pp.FlashBase.Flash_PT(trialcomp, P(i), T(i), pp)
@@ -2775,7 +2775,7 @@ Namespace UnitOperations
                         Next
                         If L2 = 0.0 Then
                             'try simple lle
-                            trialcomp  = zm.Clone
+                            trialcomp = zm.Clone
                             Dim slle As New PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
                             For counter As Integer = 0 To 20
                                 flashresult = slle.Flash_PT(trialcomp, P(i), T(i), pp)
@@ -2801,10 +2801,10 @@ Namespace UnitOperations
                             y(i) = x(i).Clone
                         End If
                         If Not Me.UseVaporFlowEstimates Then
-                            V(i) = F(lastF) + F(firstF) * L1
+                            V(i) = F.Sum * L2
                         End If
                         If Not Me.UseLiquidFlowEstimates Then
-                            L(i) = F(firstF) * (1 - L1)
+                            L(i) = F.Sum * L1
                         End If
                     Else
                         flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
@@ -2813,7 +2813,7 @@ Namespace UnitOperations
                     End If
                     z(i) = zm
                     For j = 0 To nc - 1
-                        Kval(i)(j) = y(i)(j) / x(i)(j)
+                        Kval(i)(j) = (y(i)(j) / x(i)(j))
                     Next
                     If llextractor And pp.AUX_CheckTrivial(Kval(i)) Then
                         Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")

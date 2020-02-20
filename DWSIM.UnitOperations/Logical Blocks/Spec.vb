@@ -425,28 +425,45 @@ Namespace SpecialOps
 
                 If Not Me.GetSourceVarValue Is Nothing And Not Me.GetTargetVarValue Is Nothing Then
 
-                    With Me
+                    Try
 
-                        .ExpContext.Variables.Add("X", Double.Parse(.GetSourceVarValue))
-                        .ExpContext.Variables.Add("Y", Double.Parse(.GetTargetVarValue))
-                        .Expr = .ExpContext.CompileGeneric(Of Double)(.Expression)
+                        With Me
 
-                        Dim val = .Expr.Evaluate
+                            .ExpContext.Variables.Add("X", Double.Parse(.GetSourceVarValue))
+                            .ExpContext.Variables.Add("Y", Double.Parse(.GetTargetVarValue))
+                            .Expr = .ExpContext.CompileGeneric(Of Double)(.Expression)
 
-                        If Not Me.MaxVal.HasValue And Not Me.MinVal.HasValue Then
-                            Me.SetTargetVarValue(val)
-                        Else
-                            If val < Me.MinVal.Value Then
-                                Me.SetTargetVarValue(Me.MinVal.Value)
-                            ElseIf val > Me.MaxVal.Value Then
-                                Me.SetTargetVarValue(Me.MaxVal.Value)
-                            Else
+                            Dim val = .Expr.Evaluate
+
+                            If Not Me.MaxVal.HasValue And Not Me.MinVal.HasValue Then
                                 Me.SetTargetVarValue(val)
+                            Else
+                                If val < Me.MinVal.Value Then
+                                    Me.SetTargetVarValue(Me.MinVal.Value)
+                                ElseIf val > Me.MaxVal.Value Then
+                                    Me.SetTargetVarValue(Me.MaxVal.Value)
+                                Else
+                                    Me.SetTargetVarValue(val)
+                                End If
+                                Exit Sub
                             End If
-                            Exit Sub
+
+                        End With
+
+                    Catch ex As Exception
+
+                        If GraphicObject IsNot Nothing Then
+
+                            Throw New Exception(GraphicObject.Tag + ": error parsing expression - " + ex.Message)
+
+                        Else
+
+                            Throw New Exception("Spec Logical Op: error parsing expression - " + ex.Message)
+
                         End If
 
-                    End With
+
+                    End Try
 
                     Me.GraphicObject.Calculated = True
 
