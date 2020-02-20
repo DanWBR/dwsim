@@ -1499,7 +1499,7 @@ Public Class FormCompoundCreator
         For Each row As DataGridViewRow In Me.GridExpDataCpS.Rows
             If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then
                 XL = SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value)
-                YL = SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW
+                YL = SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW * 1000
                 mycase.DataCpS.Add(New Double() {XL, YL})
             End If
         Next
