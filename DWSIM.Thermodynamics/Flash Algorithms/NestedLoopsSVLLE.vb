@@ -98,7 +98,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vzns(index) = 0.0
                 Next
                 S = Vs.Sum
-                Vzns = Vzns.NormalizeY()
+                Vzns = Vzns.NormalizeY
+                Vs = Vs.NormalizeY
 
                 IObj?.SetCurrent
 
