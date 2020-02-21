@@ -3,6 +3,5 @@ Version 5.8 Update 10
 - [NEW] Update compound data from JSON file while importing
 - [FIX] Updated SVLLE Flash Algorithm to handle forced solids
 - [FIX] Fixes for High DPI displaying (Classic UI)
-- [FIX] Raoult's Law/Activity Coeff. Property Packages: added an option to 
-		calculate Solid Phase Enthalpy with Solid Cp
+- [FIX] Raoult's Law/Activity Coeff. Property Packages: added an option to calculate Solid Phase Enthalpy with Solid Cp
 - [FIX] General bug fixes and minor enhancements
