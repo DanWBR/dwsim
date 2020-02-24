@@ -6438,7 +6438,7 @@ Final3:
                 IObj?.SetCurrent()
                 IObj?.Paragraphs.Add(String.Format("Calculating Thermal Conductivity for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
                 If subst.ConstantProperties.LiquidThermalConductivityEquation <> "" Then
-                    If Integer.TryParse(subst.ConstantProperties.VaporThermalConductivityEquation, New Integer) Then
+                    If Integer.TryParse(subst.ConstantProperties.LiquidThermalConductivityEquation, New Integer) Then
                         vcl(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                     Else
                         vcl(i) = Me.ParseEquation(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T)
