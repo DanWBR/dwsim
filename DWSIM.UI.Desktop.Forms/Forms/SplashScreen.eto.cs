@@ -67,6 +67,14 @@ namespace DWSIM.UI.Forms
             }
 #endif
 
+            if (Environment.Is64BitProcess)
+            {
+                lbl1a.Text += " (64-bit)";
+            }
+            else {
+                lbl1a.Text += " (32-bit)";
+            }
+
             var lbl2 = new Label { Style = "splashlabels2", Text = SharedClasses.Utility.GetRuntimeVersion() };
 
             var lbl3 = new Label { Style = "fixedwidth", Text = "GPLNotice".Localize() };

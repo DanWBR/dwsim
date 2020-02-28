@@ -29,6 +29,7 @@ Partial Class SplashScreen
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblAppVersion = New System.Windows.Forms.Label()
         Me.lblFrameworkVersion = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblVersion
@@ -77,12 +78,21 @@ Partial Class SplashScreen
         Me.lblFrameworkVersion.ForeColor = System.Drawing.Color.White
         Me.lblFrameworkVersion.Name = "lblFrameworkVersion"
         '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
+        Me.Label2.Name = "Label2"
+        '
         'SplashScreen
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.DWSIM_splash
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblFrameworkVersion)
         Me.Controls.Add(Me.lblAppVersion)
         Me.Controls.Add(Me.Label1)
@@ -105,5 +115,5 @@ Partial Class SplashScreen
     Public WithEvents Label1 As System.Windows.Forms.Label
     Public WithEvents lblAppVersion As System.Windows.Forms.Label
     Public WithEvents lblFrameworkVersion As System.Windows.Forms.Label
-
+    Public WithEvents Label2 As Label
 End Class
