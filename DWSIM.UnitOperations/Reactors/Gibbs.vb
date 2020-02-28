@@ -2049,6 +2049,8 @@ Namespace Reactors
             Dim ms As MaterialStream
             Dim cp As IConnectionPoint
 
+            Dim ids2 = ims.PropertyPackage.RET_VNAMES().ToList
+
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
@@ -2059,16 +2061,14 @@ Namespace Reactors
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H / wv
                     Dim comp As BaseClasses.Compound
-                    j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         If xv = 0.0# Then
                             comp.MoleFraction = 0.0#
                             comp.MassFraction = 0.0#
                         Else
-                            comp.MoleFraction = Vy(j)
-                            comp.MassFraction = Vwy(j)
+                            comp.MoleFraction = Vy(ids2.IndexOf(comp.Name))
+                            comp.MassFraction = Vwy(ids2.IndexOf(comp.Name))
                         End If
-                        j += 1
                     Next
                     .Phases(0).Properties.massflow = W * wv
                 End With
@@ -2084,16 +2084,14 @@ Namespace Reactors
                     .Phases(0).Properties.pressure = P
                     If wv < 1.0# Then .Phases(0).Properties.enthalpy = H / (1 - wv) Else .Phases(0).Properties.enthalpy = 0.0#
                     Dim comp As BaseClasses.Compound
-                    j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         If (1 - xv) = 0.0# Then
                             comp.MoleFraction = 0.0#
                             comp.MassFraction = 0.0#
                         Else
-                            comp.MoleFraction = (Vx(j) * xl + Vs(j) * xs) / (1 - xv)
-                            comp.MassFraction = (Vwx(j) * wl + Vws(j) * ws) / (1 - wv)
+                            comp.MoleFraction = (Vx(ids2.IndexOf(comp.Name)) * xl + Vs(ids2.IndexOf(comp.Name)) * xs) / (1 - xv)
+                            comp.MassFraction = (Vwx(ids2.IndexOf(comp.Name)) * wl + Vws(ids2.IndexOf(comp.Name)) * ws) / (1 - wv)
                         End If
-                        j += 1
                     Next
                     .Phases(0).Properties.massflow = W * (1 - wv)
                 End With

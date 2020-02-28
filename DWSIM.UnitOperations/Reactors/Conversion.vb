@@ -407,41 +407,6 @@ Namespace Reactors
                     'Ideal Gas Reactants Enthalpy (kJ/kg * kg/s = kW)
                     Hid_r += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                    'update mole flows/fractions
-                    Dim Nall(ims.Phases(0).Compounds.Count - 1), Nsum As Double
-                    For Each sb As ReactionStoichBase In rxn.Components.Values
-
-                        Nsum = 0
-                        For Each s2 As Compound In ims.Phases(0).Compounds.Values
-                            If rxn.Components.ContainsKey(s2.Name) Then
-                                Nsum += N(s2.Name)
-                            Else
-                                Nsum += ims.Phases(0).Compounds(s2.Name).MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
-                            End If
-                        Next
-
-                        For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                            If rxn.Components.ContainsKey(s3.Name) Then
-                                s3.MoleFraction = N(s3.Name) / Nsum
-                            Else
-                                s3.MoleFraction = ims.Phases(0).Compounds(s3.Name).MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
-                            End If
-                        Next
-
-                        ims.Phases(0).Properties.molarflow = Nsum
-
-                        Dim mmm As Double = 0
-
-                        For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                            mmm += s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight
-                        Next
-
-                        For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                            s3.MassFraction = s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight / mmm
-                        Next
-
-                    Next
-
                     'Ideal Gas Products Enthalpy (kJ/kg * kg/s = kW)
                     Hid_p += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
@@ -453,6 +418,37 @@ Namespace Reactors
                 Loop Until i = ar.Count
 
                 IObj2?.Paragraphs.Add(String.Format("Total Heat of Reaction: {0} kW", DHr))
+
+                'update mole flows/fractions
+
+                Dim Nsum As Double = 0
+                For Each s2 As Compound In ims.Phases(0).Compounds.Values
+                    If N.ContainsKey(s2.Name) Then
+                        Nsum += N(s2.Name)
+                    Else
+                        Nsum += s2.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
+                    End If
+                Next
+
+                For Each s3 As Compound In ims.Phases(0).Compounds.Values
+                    If N.ContainsKey(s3.Name) Then
+                        s3.MoleFraction = N(s3.Name) / Nsum
+                    Else
+                        s3.MoleFraction = s3.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
+                    End If
+                Next
+
+                ims.Phases(0).Properties.molarflow = Nsum
+
+                Dim mmm As Double = 0
+
+                For Each s3 As Compound In ims.Phases(0).Compounds.Values
+                    mmm += s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight
+                Next
+
+                For Each s3 As Compound In ims.Phases(0).Compounds.Values
+                    s3.MassFraction = s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight / mmm
+                Next
 
                 'do a flash calc (calculate final temperature/enthalpy)
 
@@ -568,6 +564,7 @@ Namespace Reactors
             Dim nc As Integer = ims.Phases(0).Compounds.Count - 1
             pp.CurrentMaterialStream = ims
             IObj?.SetCurrent()
+
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
             Dim Vx(nc), Vy(nc), Vs(nc), Vwx(nc), Vwy(nc), Vws(nc) As Double
@@ -585,7 +582,7 @@ Namespace Reactors
             Vy = tmp.GetVaporPhaseMoleFractions
             Vs = tmp.GetSolidPhaseMoleFractions
 
-            Dim j As Integer = 0
+            Dim ids = ims.PropertyPackage.RET_VNAMES().ToList
 
             Dim ms As MaterialStream
             Dim cp As IConnectionPoint
@@ -593,19 +590,15 @@ Namespace Reactors
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
                 Dim comp As BaseClasses.Compound
-                i = 0
                 For Each comp In ms.Phases(0).Compounds.Values
-                    wtotalx += Vx(i) * comp.ConstantProperties.Molar_Weight
-                    wtotaly += Vy(i) * comp.ConstantProperties.Molar_Weight
-                    wtotalS += Vs(i) * comp.ConstantProperties.Molar_Weight
-                    i += 1
+                    wtotalx += Vx(ids.IndexOf(comp.Name)) * comp.ConstantProperties.Molar_Weight
+                    wtotaly += Vy(ids.IndexOf(comp.Name)) * comp.ConstantProperties.Molar_Weight
+                    wtotalS += Vs(ids.IndexOf(comp.Name)) * comp.ConstantProperties.Molar_Weight
                 Next
-                i = 0
                 For Each comp In ms.Phases(0).Compounds.Values
-                    If wtotalx > 0 Then Vwx(i) = Vx(i) * comp.ConstantProperties.Molar_Weight / wtotalx
-                    If wtotaly > 0 Then Vwy(i) = Vy(i) * comp.ConstantProperties.Molar_Weight / wtotaly
-                    If wtotalS > 0 Then Vws(i) = Vs(i) * comp.ConstantProperties.Molar_Weight / wtotalS
-                    i += 1
+                    If wtotalx > 0 Then Vwx(ids.IndexOf(comp.Name)) = Vx(ids.IndexOf(comp.Name)) * comp.ConstantProperties.Molar_Weight / wtotalx
+                    If wtotaly > 0 Then Vwy(ids.IndexOf(comp.Name)) = Vy(ids.IndexOf(comp.Name)) * comp.ConstantProperties.Molar_Weight / wtotaly
+                    If wtotalS > 0 Then Vws(ids.IndexOf(comp.Name)) = Vs(ids.IndexOf(comp.Name)) * comp.ConstantProperties.Molar_Weight / wtotalS
                 Next
             End If
 
@@ -618,16 +611,14 @@ Namespace Reactors
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H / wv
                     Dim comp As BaseClasses.Compound
-                    j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         If xv = 0.0# Then
                             comp.MoleFraction = 0.0#
                             comp.MassFraction = 0.0#
                         Else
-                            comp.MoleFraction = Vy(j)
-                            comp.MassFraction = Vwy(j)
+                            comp.MoleFraction = Vy(ids.IndexOf(comp.Name))
+                            comp.MassFraction = Vwy(ids.IndexOf(comp.Name))
                         End If
-                        j += 1
                     Next
                     .Phases(0).Properties.massflow = W * wv
                     .Phases(0).Properties.massfraction = 1.0#
@@ -644,18 +635,15 @@ Namespace Reactors
                     .Phases(0).Properties.pressure = P
                     If wv < 1.0# Then .Phases(0).Properties.enthalpy = H / (1 - wv) Else .Phases(0).Properties.enthalpy = 0.0#
                     Dim comp As BaseClasses.Compound
-                    j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         If (xl + xs) = 0.0# Then
                             comp.MoleFraction = 0.0#
                             comp.MassFraction = 0.0#
                         Else
-                            comp.MoleFraction = (Vx(j) * xl + Vs(j) * xs) / (xl + xs)
-                            comp.MassFraction = (Vwx(j) * wtotalx + Vws(j) * wtotalS) / (wtotalx + wtotalS)
+                            comp.MoleFraction = (Vx(ids.IndexOf(comp.Name)) * xl + Vs(ids.IndexOf(comp.Name)) * xs) / (xl + xs)
+                            comp.MassFraction = (Vwx(ids.IndexOf(comp.Name)) * wtotalx + Vws(ids.IndexOf(comp.Name)) * wtotalS) / (wtotalx + wtotalS)
                         End If
-                        j += 1
                     Next
-                    j = 0
                     .Phases(0).Properties.massflow = W * (1 - wv)
                     .Phases(0).Properties.massfraction = 1.0#
                     .Phases(0).Properties.molarfraction = 1.0#
