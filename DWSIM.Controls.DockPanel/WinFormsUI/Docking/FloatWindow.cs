@@ -482,5 +482,19 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
 
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FloatWindow
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "FloatWindow";
+            this.ResumeLayout(false);
+
+        }
     }
 }

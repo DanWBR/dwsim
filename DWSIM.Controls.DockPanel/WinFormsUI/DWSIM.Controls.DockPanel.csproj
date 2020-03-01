@@ -185,6 +185,15 @@
     <Compile Include="Docking\Win32\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Docking\DockContent.resx">
+      <DependentUpon>DockContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\DockPane.resx">
+      <DependentUpon>DockPane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\FloatWindow.resx">
+      <DependentUpon>FloatWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Docking\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>

@@ -208,6 +208,9 @@ Partial Class MaterialStreamEditor
         Me.TabPageAnnotations = New System.Windows.Forms.TabPage()
         Me.TabPageFloatingTables = New System.Windows.Forms.TabPage()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -263,11 +266,13 @@ Partial Class MaterialStreamEditor
         Me.TabPageResultsPane.SuspendLayout()
         Me.TabPageAnnotations.SuspendLayout()
         Me.TabPageFloatingTables.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
         '
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Controls.Add(Me.lblStatus)
         Me.GroupBox5.Controls.Add(Me.btnUtils)
         Me.GroupBox5.Controls.Add(Me.lblTag)
@@ -276,6 +281,7 @@ Partial Class MaterialStreamEditor
         Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Controls.Add(Me.Label12)
         Me.GroupBox5.Controls.Add(Me.Label11)
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         '
@@ -326,13 +332,13 @@ Partial Class MaterialStreamEditor
         '
         'GroupBox1
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.btnDisconnectO)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectI)
         Me.GroupBox1.Controls.Add(Me.cbOutlet)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.cbInlet)
         Me.GroupBox1.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -1483,14 +1489,35 @@ Partial Class MaterialStreamEditor
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'TabControl1
+        '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.GroupBox5)
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.GroupBox1)
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
         'MaterialStreamEditor
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.TabControlMain0)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Name = "MaterialStreamEditor"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
         Me.GroupBox5.ResumeLayout(False)
@@ -1556,6 +1583,9 @@ Partial Class MaterialStreamEditor
         Me.TabPageResultsPane.ResumeLayout(False)
         Me.TabPageAnnotations.ResumeLayout(False)
         Me.TabPageFloatingTables.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1727,4 +1757,7 @@ Partial Class MaterialStreamEditor
     Friend WithEvents compamount As DataGridViewTextBoxColumn
     Friend WithEvents ToolTipChangeTag As ToolTip
     Public WithEvents lblStatus As TextBox
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TabPage4 As TabPage
 End Class
