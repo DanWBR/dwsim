@@ -114,10 +114,16 @@ namespace DWSIM.UI.Forms.Forms
             tab1.CreateAndAddCheckBoxRow("Call Solver on Editor Property Update", Settings.CallSolverOnEditorPropertyChanged, (CheckBox sender, EventArgs obj) => { Settings.CallSolverOnEditorPropertyChanged = sender.Checked.Value; });
             tab1.CreateAndAddDescriptionRow("Requests a flowsheet calculation after an object property is changed/updated on the editor.");
 
+            CheckBox chkInsp = null, chkCPUP = null;
+
             var tab2a = DWSIM.UI.Shared.Common.GetDefaultContainer();
             tab2a.Tag = "Inspector";
 
-            tab2a.CreateAndAddCheckBoxRow("Enable Inspector Reports", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => { Settings.InspectorEnabled = sender.Checked.GetValueOrDefault(); });
+            chkInsp = tab2a.CreateAndAddCheckBoxRow("Enable Inspector Reports", Settings.InspectorEnabled, (CheckBox sender, EventArgs obj) => {
+                Settings.InspectorEnabled = sender.Checked.GetValueOrDefault();
+                Settings.EnableParallelProcessing = !Settings.InspectorEnabled;
+                chkCPUP.Checked = !sender.Checked.GetValueOrDefault();
+            });
             tab2a.CreateAndAddDescriptionRow("Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector tool to view these reports.");
             tab2a.CreateAndAddDescriptionRow("When the Inspector Reports feature is enabled and the Flowsheet Solver is called, the Parallel CPU Processing is automatically disabled. You must re-enable it manually and disable the Inspector to increase the calculation speed again.");
             tab2a.CreateAndAddCheckBoxRow("Clear Previous Reports on new Flowsheet Calculation Request", Settings.ClearInspectorHistoryOnNewCalculationRequest, (CheckBox sender, EventArgs obj) => { Settings.ClearInspectorHistoryOnNewCalculationRequest = sender.Checked.GetValueOrDefault(); });
@@ -132,7 +138,11 @@ namespace DWSIM.UI.Forms.Forms
             });
             tab2.CreateAndAddDescriptionRow("Set the solver's maximum calculation (waiting) time.");
 
-            tab2.CreateAndAddCheckBoxRow("EnableCPUParallelProcessing".Localize(prefix), Settings.EnableParallelProcessing, (CheckBox sender, EventArgs obj) => { Settings.EnableParallelProcessing = sender.Checked.GetValueOrDefault(); });
+            chkCPUP = tab2.CreateAndAddCheckBoxRow("EnableCPUParallelProcessing".Localize(prefix), Settings.EnableParallelProcessing, (CheckBox sender, EventArgs obj) => { 
+                Settings.EnableParallelProcessing = sender.Checked.GetValueOrDefault();
+                Settings.InspectorEnabled = !Settings.EnableParallelProcessing;
+                chkInsp.Checked = !sender.Checked.GetValueOrDefault();
+            });
             tab2.CreateAndAddDescriptionRow("Enables utilization of all CPU cores during flowsheet calculations.");
             tab2.CreateAndAddCheckBoxRow("EnableCPUSIMDAccel".Localize(prefix), Settings.UseSIMDExtensions, (CheckBox sender, EventArgs obj) => { Settings.UseSIMDExtensions = sender.Checked.GetValueOrDefault(); });
             tab2.CreateAndAddDescriptionRow("Enables utilization of special CPU instructions for accelerated math calculations.");
