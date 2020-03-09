@@ -1551,6 +1551,16 @@
   <ItemGroup>
     <None Include="Resources\icons8-spy_male.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Indicators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Icons\analog_gauge.png" />
+    <EmbeddedResource Include="Assets\Icons\control_panel.png" />
+    <EmbeddedResource Include="Assets\Icons\digital_display.png" />
+    <EmbeddedResource Include="Assets\Icons\level_gauge.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

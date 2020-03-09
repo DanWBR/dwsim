@@ -382,6 +382,8 @@ Namespace Enums
         UserModels = 9
         Logical = 10
         Other = 11
+        Indicators = 12
+        Controllers = 13
 
     End Enum
 
@@ -511,6 +513,8 @@ Namespace Enums.GraphicObjects
         GO_InputControl
 
         External
+
+        Indicator
 
     End Enum
 
