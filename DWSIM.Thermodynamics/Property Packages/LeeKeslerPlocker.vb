@@ -47,6 +47,9 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.CorrespondingStates
 
         End Sub
+        Public Overrides Function GetModel() As Object
+            Return m_lk
+        End Function
 
         Public Overrides Sub DisplayEditingForm()
 

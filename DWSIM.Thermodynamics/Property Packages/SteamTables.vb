@@ -45,6 +45,9 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
+        Public Overrides Function GetModel() As Object
+            Return m_iapws97
+        End Function
 
         Public Overrides Sub AddDefaultCompounds(compnames() As String)
 

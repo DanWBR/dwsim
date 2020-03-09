@@ -60,6 +60,9 @@ Namespace PropertyPackages
                             f.ShowDialog()
 
         End Sub
+        Public Overrides Function GetModel() As Object
+            Return m_uni
+        End Function
 
 #Region "    Auxiliary Functions"
 

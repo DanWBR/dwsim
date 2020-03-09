@@ -7509,7 +7509,7 @@ Namespace Streams
         ''' <summary>
         ''' Sets stream flash spec.
         ''' </summary>
-        ''' <param name="value">Flash spec (PT, PH, PS, PVF, TVF or PSF).</param>
+        ''' <param name="value">Flash spec (PT, PH, PS, PVF, TVF, PSF, VT, VH or VS).</param>
         Public Sub SetFlashSpec(value As String)
             Select Case value.ToLower
                 Case "pt", "tp"
@@ -7524,6 +7524,12 @@ Namespace Streams
                     SpecType = StreamSpec.Temperature_and_VaporFraction
                 Case "psf"
                     SpecType = StreamSpec.Pressure_and_SolidFraction
+                Case "vt"
+                    SpecType = StreamSpec.Volume_and_Temperature
+                Case "vh"
+                    SpecType = StreamSpec.Volume_and_Enthalpy
+                Case "vs"
+                    SpecType = StreamSpec.Volume_and_Entropy
             End Select
         End Sub
 

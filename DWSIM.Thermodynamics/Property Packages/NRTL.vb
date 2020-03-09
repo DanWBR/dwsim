@@ -94,6 +94,10 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides Function GetModel() As Object
+            Return m_uni
+        End Function
+
     End Class
 
 End Namespace
