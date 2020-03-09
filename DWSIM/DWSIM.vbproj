@@ -803,12 +803,6 @@
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UISTHXEditor\UISTHXEditor.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIThermalProfileEditor\UIThermalProfileEditor.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIUnitConverter\UIUnitConverter.vb" />
-    <Compile Include="Forms\FormWebPanel.Designer.vb">
-      <DependentUpon>FormWebPanel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormWebPanel.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Languages\DWSIM1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1396,9 +1390,6 @@
     <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWebPanel.en.resx">
-      <DependentUpon>FormWebPanel.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\frmProps.de.resx">
       <DependentUpon>frmProps.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1547,9 +1538,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreen.de.resx">
       <DependentUpon>SplashScreen.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWebPanel.resx">
-      <DependentUpon>FormWebPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Tips.de.resx" />
     <EmbeddedResource Include="Languages\Tips.en.resx" />
@@ -2841,6 +2829,7 @@
     <None Include="Resources\beer_48.png" />
     <None Include="Resources\app_48.png" />
     <None Include="Resources\become_a_patron_button.png" />
+    <None Include="Resources\background_welcome.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -2971,6 +2960,12 @@
     <None Include="Resources\icons8-opened_folder2.png" />
     <None Include="Resources\icons8-file1.png" />
     <None Include="Resources\icons8-spy_male.png" />
+    <None Include="Resources\icons8-books.png" />
+    <None Include="Resources\icons8-chemical_plant.png" />
+    <None Include="Resources\icons8-line_chart.png" />
+    <None Include="Resources\icons8-module.png" />
+    <None Include="Resources\icons8-test_tube.png" />
+    <None Include="Resources\Patreon_Navy.jpg" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

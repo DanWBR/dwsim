@@ -271,12 +271,6 @@
   <data name="PainelDeBoasvindasToolStripMenuItem.Text" xml:space="preserve">
     <value>Welcome Panel</value>
   </data>
-  <data name="PainelDaWebToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="PainelDaWebToolStripMenuItem.Text" xml:space="preserve">
-    <value>Web Panel</value>
-  </data>
   <data name="VerToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
@@ -457,38 +451,33 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1092, 378</value>
   </data>
-  <data name="ButtonCloseWeb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 2</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="WelcomePanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="WebPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>802, 49</value>
+  <data name="WelcomePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 49</value>
   </data>
-  <data name="WebPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 299</value>
+  <data name="WelcomePanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>727, 299</value>
   </data>
   <data name="ErrorBox_Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 3</value>
+    <value>566, 3</value>
   </data>
   <data name="ErrorBox_Button1.Text" xml:space="preserve">
     <value>View Details</value>
   </data>
   <data name="ErrorBox_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>802, 348</value>
+    <value>365, 348</value>
   </data>
   <data name="ErrorBox_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 30</value>
+    <value>727, 30</value>
   </data>
   <data name="SettingsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>437, 49</value>
+    <value>0, 49</value>
   </data>
   <data name="SettingsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>365, 329</value>
-  </data>
-  <data name="ButtonClose2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 2</value>
-  </data>
-  <data name="WelcomePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>437, 329</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

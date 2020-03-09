@@ -33,8 +33,6 @@ Public Class FormWelcome
 
     Private Sub FormTips_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        chkAutoClose.Checked = My.Settings.AutoCloseWelcomePanel
-
         If DWSIM.App.IsRunningOnMono Then Me.BackgroundImageLayout = ImageLayout.Stretch
 
         Dim existingfiles As New List(Of String)
@@ -116,25 +114,25 @@ Public Class FormWelcome
 
     End Sub
 
-    Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Application.DoEvents()
         Application.DoEvents()
-        Me.Parent.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = False
         FormMain.NewToolStripButton_Click(sender, e)
 
     End Sub
 
-    Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Application.DoEvents()
         Application.DoEvents()
-        Me.Parent.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = False
         Call FormMain.LoadFileDialog()
     End Sub
 
     Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
 
-        Me.Parent.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = False
 
         Dim lview = DirectCast(sender, ListView)
 
@@ -240,32 +238,32 @@ Public Class FormWelcome
 
         Application.DoEvents()
         Application.DoEvents()
-        Me.Parent.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = False
         FormMain.OpenFileDialog1.InitialDirectory = Me.lvlatestfolders.SelectedItems(0).Tag
         Call FormMain.LoadFileDialog()
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim NewMDIChild As New FormCompoundCreator()
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "CompoundCreator" & FormMain.m_childcount
-        Me.Parent.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = False
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
         NewMDIChild.MdiParent = Me.Owner
     End Sub
 
-    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim NewMDIChild As New FormDataRegression()
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
         NewMDIChild.Text = "DataRegression" & FormMain.m_childcount
-        Me.Parent.Visible = Not chkAutoClose.Checked
+        Me.Parent.Visible = False
         Application.DoEvents()
         Application.DoEvents()
         NewMDIChild.Show()
@@ -339,7 +337,7 @@ Public Class FormWelcome
                                                                          Else
                                                                              Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
                                                                              Me.UIThread(Sub()
-                                                                                             Me.Parent.Visible = Not chkAutoClose.Checked
+                                                                                             Me.Parent.Visible = False
                                                                                              floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
                                                                                              floading.Show()
                                                                                              Application.DoEvents()
@@ -372,11 +370,87 @@ Public Class FormWelcome
         Process.Start("https://gumroad.com/products/PTljX")
     End Sub
 
-    Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
+    Private Sub Button8_Click_1(sender As Object, e As EventArgs)
         Process.Start("https://patreon.com/dwsim")
     End Sub
 
-    Private Sub chkAutoClose_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoClose.CheckedChanged
-        My.Settings.AutoCloseWelcomePanel = chkAutoClose.Checked
+    Private Sub chkAutoClose_CheckedChanged(sender As Object, e As EventArgs)
+        My.Settings.AutoCloseWelcomePanel = True
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Application.DoEvents()
+        Application.DoEvents()
+        Me.Parent.Visible = False
+        FormMain.NewToolStripButton_Click(sender, e)
+    End Sub
+
+    Private Sub LinkLabel2_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        Application.DoEvents()
+        Application.DoEvents()
+        Me.Parent.Visible = False
+        Call FormMain.LoadFileDialog()
+    End Sub
+
+    Private Sub LinkLabel4_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel4.LinkClicked
+        Dim NewMDIChild As New FormCompoundCreator()
+        'Set the Parent Form of the Child window.
+        NewMDIChild.MdiParent = Me.Owner
+        'Display the new form.
+        NewMDIChild.Text = "CompoundCreator" & FormMain.m_childcount
+        Me.Parent.Visible = False
+        Application.DoEvents()
+        Application.DoEvents()
+        NewMDIChild.Show()
+        NewMDIChild.MdiParent = Me.Owner
+    End Sub
+
+    Private Sub LinkLabel6_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel6.LinkClicked
+        Dim NewMDIChild As New FormDataRegression()
+        'Set the Parent Form of the Child window.
+        NewMDIChild.MdiParent = Me.Owner
+        'Display the new form.
+        NewMDIChild.Text = "DataRegression" & FormMain.m_childcount
+        Me.Parent.Visible = False
+        Application.DoEvents()
+        Application.DoEvents()
+        NewMDIChild.Show()
+        NewMDIChild.MdiParent = Me.Owner
+    End Sub
+
+    Private Sub LinkLabel3_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Application.DoEvents()
+        Application.DoEvents()
+        Me.Parent.Visible = False
+        Call FormMain.LoadFileDialog()
+    End Sub
+
+    Private Sub LinkLabel5_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel5.LinkClicked
+        Application.DoEvents()
+        Application.DoEvents()
+        Me.Parent.Visible = False
+        Call FormMain.LoadFileDialog()
+    End Sub
+
+    Private Sub LinkLabel9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked
+        Process.Start("https://patreon.com/dwsim")
+    End Sub
+
+    Private Sub LinkLabel8_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel8.LinkClicked
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "User_Guide.pdf"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+        End If
+    End Sub
+
+    Private Sub LinkLabel10_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel10.LinkClicked
+        System.Diagnostics.Process.Start("http://dwsim.inforside.com.br")
     End Sub
 End Class

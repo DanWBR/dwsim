@@ -268,135 +268,6 @@ Public Class FormMain
             Me.FrmWelcome.Owner = Me
             Me.FrmWelcome.Dock = DockStyle.Fill
             Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
-            Me.ButtonClose2.BringToFront()
-
-            If My.Settings.ShowWebPanel Then
-
-                If DWSIM.App.IsRunningOnMono Then
-
-                    WebPanel.Visible = False
-
-                    'Try
-                    '    Dim c1, c2, c3, c4, c5 As WebBrowser
-                    '    Dim a1, a2, a3, a4, a5 As String
-
-                    '    a1 = "https://www.patreon.com/dwsim"
-                    '    a2 = "https://sourceforge.net/p/dwsim/discussion/"
-                    '    a3 = "https://dwsim.fossee.in/forum"
-                    '    a4 = "https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"
-                    '    a5 = "https://pernaletec.shinyapps.io/dwsim/"
-
-                    '    c1 = New WebBrowser() With {.Url = New Uri(a1), .Dock = DockStyle.Fill}
-                    '    c2 = New WebBrowser() With {.Url = New Uri(a2), .Dock = DockStyle.Fill}
-                    '    c3 = New WebBrowser() With {.Url = New Uri(a3), .Dock = DockStyle.Fill}
-                    '    c4 = New WebBrowser() With {.Url = New Uri(a4), .Dock = DockStyle.Fill}
-                    '    c5 = New WebBrowser() With {.Url = New Uri(a5), .Dock = DockStyle.Fill}
-
-                    '    frmweb.TabPageA.Controls.Add(c1)
-                    '    frmweb.TabPageB.Controls.Add(c2)
-                    '    frmweb.TabPageC.Controls.Add(c3)
-                    '    frmweb.TabPageD.Controls.Add(c4)
-                    '    frmweb.TabPageE.Controls.Add(c5)
-
-                    'Catch ex As Exception
-
-                    'End Try
-
-                Else
-
-                    Dim frmweb As New FormWebPanel
-                    frmweb.Dock = DockStyle.Fill
-
-                    Try
-
-                        Dim c1, c2, c3, c4, c5 As ChromiumWebBrowser
-                        Dim a1, a2, a3, a4, a5 As String
-
-                        a1 = "https://www.patreon.com/dwsim"
-                        a2 = "https://sourceforge.net/p/dwsim/discussion/"
-                        a3 = "https://dwsim.fossee.in/forum"
-                        a4 = "https://www.youtube.com/channel/UCzzBQrycKoN5XbCeLV12y3Q/videos?view=0&sort=dd&flow=grid"
-                        a5 = "https://pernaletec.shinyapps.io/dwsim/"
-
-                        c1 = New ChromiumWebBrowser(a1) With {.Dock = DockStyle.Fill}
-                        c2 = New ChromiumWebBrowser(a2) With {.Dock = DockStyle.Fill}
-                        c3 = New ChromiumWebBrowser(a3) With {.Dock = DockStyle.Fill}
-                        c4 = New ChromiumWebBrowser(a4) With {.Dock = DockStyle.Fill}
-                        c5 = New ChromiumWebBrowser(a5) With {.Dock = DockStyle.Fill}
-
-                        frmweb.TabPageA.Controls.Add(c1)
-                        frmweb.TabPageB.Controls.Add(c2)
-                        frmweb.TabPageC.Controls.Add(c3)
-                        frmweb.TabPageD.Controls.Add(c4)
-                        frmweb.TabPageE.Controls.Add(c5)
-
-                        AddHandler WebPanel.VisibleChanged, Sub(sender2, e2)
-
-                                                                If Not WebPanel.Visible Then
-
-                                                                    Try
-                                                                        c1.GetBrowser.StopLoad()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c2.GetBrowser.StopLoad()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c3.GetBrowser.StopLoad()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c4.GetBrowser.StopLoad()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c5.GetBrowser.StopLoad()
-                                                                    Catch ex As Exception
-                                                                    End Try
-
-                                                                Else
-
-                                                                    Try
-                                                                        c1.GetBrowser.Reload()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c2.GetBrowser.Reload()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c3.GetBrowser.Reload()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c4.GetBrowser.Reload()
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                    Try
-                                                                        c5.GetBrowser.Reload()
-                                                                    Catch ex As Exception
-                                                                    End Try
-
-                                                                End If
-
-                                                            End Sub
-
-                    Catch ex As Exception
-
-                    End Try
-
-                    WebPanel.Controls.Add(frmweb)
-                    Me.ButtonCloseWeb.BringToFront()
-
-                End If
-
-            Else
-
-                WebPanel.Visible = False
-
-            End If
-
 
         End If
 
@@ -811,9 +682,6 @@ Public Class FormMain
     Private Sub FormParent_MdiChildActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MdiChildActivate
 
         If Me.MdiChildren.Length >= 1 Then
-
-            Me.WebPanel.Visible = False
-            Me.PainelDaWebToolStripMenuItem.Checked = False
 
             Me.ToolStripButton1.Enabled = True
             Me.SaveAllToolStripButton.Enabled = True
@@ -4038,29 +3906,11 @@ Label_00CC:
         System.Diagnostics.Process.Start("https://patreon.com/dwsim")
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles ButtonClose2.Click
-        Me.WelcomePanel.Visible = False
-        Me.PainelDeBoasvindasToolStripMenuItem.Checked = False
-    End Sub
-
     Private Sub PainelDeBoasvindasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PainelDeBoasvindasToolStripMenuItem.Click
         If Me.PainelDeBoasvindasToolStripMenuItem.Checked Then
             Me.WelcomePanel.Visible = True
         Else
             Me.WelcomePanel.Visible = False
-        End If
-    End Sub
-
-    Private Sub ButtonCloseWeb_Click(sender As Object, e As EventArgs) Handles ButtonCloseWeb.Click
-        Me.WebPanel.Visible = False
-        Me.PainelDaWebToolStripMenuItem.Checked = False
-    End Sub
-
-    Private Sub PainelDaWebToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PainelDaWebToolStripMenuItem.Click
-        If Me.PainelDaWebToolStripMenuItem.Checked Then
-            Me.WebPanel.Visible = True
-        Else
-            Me.WebPanel.Visible = False
         End If
     End Sub
 

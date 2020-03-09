@@ -58,7 +58,6 @@ Partial Class FormMain
         Me.VerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MostrarBarraDeFerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PainelDeBoasvindasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PainelDaWebToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -109,16 +108,11 @@ Partial Class FormMain
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ErrorBox_Label1 = New System.Windows.Forms.Label()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
-        Me.ButtonClose2 = New System.Windows.Forms.Button()
-        Me.WebPanel = New System.Windows.Forms.Panel()
-        Me.ButtonCloseWeb = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
         Me.ErrorBox_Panel.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.WelcomePanel.SuspendLayout()
-        Me.WebPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -290,7 +284,7 @@ Partial Class FormMain
         'VerToolStripMenuItem1
         '
         resources.ApplyResources(Me.VerToolStripMenuItem1, "VerToolStripMenuItem1")
-        Me.VerToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MostrarBarraDeFerramentasToolStripMenuItem, Me.PainelDeBoasvindasToolStripMenuItem, Me.PainelDaWebToolStripMenuItem})
+        Me.VerToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MostrarBarraDeFerramentasToolStripMenuItem, Me.PainelDeBoasvindasToolStripMenuItem})
         Me.VerToolStripMenuItem1.Name = "VerToolStripMenuItem1"
         '
         'MostrarBarraDeFerramentasToolStripMenuItem
@@ -308,12 +302,6 @@ Partial Class FormMain
         Me.PainelDeBoasvindasToolStripMenuItem.CheckOnClick = True
         Me.PainelDeBoasvindasToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.PainelDeBoasvindasToolStripMenuItem.Name = "PainelDeBoasvindasToolStripMenuItem"
-        '
-        'PainelDaWebToolStripMenuItem
-        '
-        resources.ApplyResources(Me.PainelDaWebToolStripMenuItem, "PainelDaWebToolStripMenuItem")
-        Me.PainelDaWebToolStripMenuItem.CheckOnClick = True
-        Me.PainelDaWebToolStripMenuItem.Name = "PainelDaWebToolStripMenuItem"
         '
         'HelpToolStripMenuItem
         '
@@ -607,36 +595,16 @@ Partial Class FormMain
         'WelcomePanel
         '
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
-        Me.WelcomePanel.Controls.Add(Me.ButtonClose2)
         Me.WelcomePanel.Name = "WelcomePanel"
-        '
-        'ButtonClose2
-        '
-        resources.ApplyResources(Me.ButtonClose2, "ButtonClose2")
-        Me.ButtonClose2.Name = "ButtonClose2"
-        Me.ButtonClose2.UseVisualStyleBackColor = True
-        '
-        'WebPanel
-        '
-        resources.ApplyResources(Me.WebPanel, "WebPanel")
-        Me.WebPanel.Controls.Add(Me.ButtonCloseWeb)
-        Me.WebPanel.Name = "WebPanel"
-        '
-        'ButtonCloseWeb
-        '
-        resources.ApplyResources(Me.ButtonCloseWeb, "ButtonCloseWeb")
-        Me.ButtonCloseWeb.Name = "ButtonCloseWeb"
-        Me.ButtonCloseWeb.UseVisualStyleBackColor = True
         '
         'FormMain
         '
         resources.ApplyResources(Me, "$this")
         Me.AllowDrop = True
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.WebPanel)
+        Me.Controls.Add(Me.WelcomePanel)
         Me.Controls.Add(Me.ErrorBox_Panel)
         Me.Controls.Add(Me.SettingsPanel)
-        Me.Controls.Add(Me.WelcomePanel)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.DoubleBuffered = True
@@ -652,8 +620,6 @@ Partial Class FormMain
         Me.ErrorBox_Panel.ResumeLayout(False)
         Me.ErrorBox_Panel.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.WelcomePanel.ResumeLayout(False)
-        Me.WebPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -911,10 +877,6 @@ Partial Class FormMain
     Friend WithEvents tsmiFOSSEE As ToolStripMenuItem
     Public WithEvents PatronToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WelcomePanel As Panel
-    Friend WithEvents ButtonClose2 As Button
     Friend WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents WebPanel As Panel
-    Friend WithEvents ButtonCloseWeb As Button
-    Friend WithEvents PainelDaWebToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsbInspector As ToolStripButton
 End Class
