@@ -7529,8 +7529,6 @@ Namespace Streams
 
         Public Sub Mix(withstream As MaterialStream)
 
-            Dim n As Integer = Me.Phases(0).Compounds.Count
-
             Dim Vw As New Dictionary(Of String, Double)
 
             Dim W1 = withstream.GetMassFlow()
@@ -7583,6 +7581,8 @@ Namespace Streams
                 Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 .Phases(0).Properties.temperature = (W0 * T0 + W1 * T1) / (W0 + W1)
                 .SpecType = StreamSpec.Pressure_and_Enthalpy
+                .PropertyPackage.CurrentMaterialStream = Me
+                .Calculate()
             End With
 
         End Sub
