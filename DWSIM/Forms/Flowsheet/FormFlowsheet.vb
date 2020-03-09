@@ -51,6 +51,8 @@ Public Class FormFlowsheet
 
 #Region "    Variable Declarations "
 
+    Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
+
     Public Property ExtraProperties As New ExpandoObject Implements IFlowsheet.ExtraProperties
 
     Public Property MasterFlowsheet As IFlowsheet = Nothing Implements IFlowsheet.MasterFlowsheet

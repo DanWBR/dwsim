@@ -1,5 +1,5 @@
 '    Flowsheet Object Base Classes 
-'    Copyright 2008-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2020 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -16,19 +16,12 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Runtime.Serialization.Formatters.Binary
-Imports System.Runtime.Serialization
 Imports System.IO
-Imports System.Linq
 Imports CapeOpen
-Imports System.Runtime.Serialization.Formatters
-Imports System.Runtime.InteropServices.Marshal
 Imports System.Runtime.InteropServices
-Imports System.Text
-Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
-Imports System.Windows.Forms
-Imports DWSIM.SharedClasses
+Imports Microsoft.Scripting.Hosting
+Imports DWSIM.Thermodynamics
 
 Namespace UnitOperations
 
@@ -39,9 +32,16 @@ Namespace UnitOperations
         Implements ICapeIdentification
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public _pp As Interfaces.IPropertyPackage
+
         Public _ppid As String = ""
 
         Protected _capeopenmode As Boolean = False
+
+        Public AccumulationStream As Thermodynamics.Streams.MaterialStream
+
+        Public DynamicModelCode As String = ""
+
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public DynamicEngine As Microsoft.Scripting.Hosting.ScriptEngine
 
         Public Sub New()
             MyBase.CreateNew()
@@ -51,10 +51,16 @@ Namespace UnitOperations
 
             MyBase.LoadData(data)
 
+            Dim ael = (From xel As XElement In data Select xel Where xel.Name = "AccumulationStream").FirstOrDefault
+
+            If Not ael Is Nothing Then
+                AccumulationStream = New Thermodynamics.Streams.MaterialStream()
+                AccumulationStream.LoadData(ael.Elements.ToList)
+            End If
+
             Try
                 Me._ppid = (From xel As XElement In data Select xel Where xel.Name = "PropertyPackage").SingleOrDefault.Value
             Catch
-
             End Try
 
             Return True
@@ -73,7 +79,12 @@ Namespace UnitOperations
             Else
                 ppid = ""
             End If
+
             elements.Add(New XElement("PropertyPackage", ppid))
+
+            If AccumulationStream IsNot Nothing Then
+                elements.Add(New XElement("AccumulationStream", AccumulationStream.SaveData()))
+            End If
 
             Return elements
 
@@ -161,6 +172,49 @@ Namespace UnitOperations
             DeCalculate()
 
             Calculated = False
+
+        End Sub
+
+        Public Sub RunDynamicModel()
+
+            If DynamicModelCode <> "" Then
+
+                If DynamicEngine Is Nothing Then
+
+                    DynamicEngine = IronPython.Hosting.Python.CreateEngine()
+                    DynamicEngine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+                    DynamicEngine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
+
+                End If
+
+                Dim scope = DynamicEngine.CreateScope()
+                scope.SetVariable("Flowsheet", FlowSheet)
+                scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
+                scope.SetVariable("Me", Me)
+                scope.SetVariable("This", Me)
+
+                For Each variable In ExtraProperties
+                    scope.SetVariable(variable.Key, variable.Value)
+                Next
+
+                Dim source As ScriptSource = DynamicEngine.CreateScriptSourceFromString(DynamicModelCode, Microsoft.Scripting.SourceCodeKind.Statements)
+
+                Try
+                    Me.ErrorMessage = ""
+                    source.Execute(scope)
+                Catch ex As Exception
+                    Dim ops As ExceptionOperations = DynamicEngine.GetService(Of ExceptionOperations)()
+                    Me.ErrorMessage = ops.FormatException(ex).ToString
+                    Me.DeCalculate()
+                    scope = Nothing
+                    source = Nothing
+                    Throw New Exception(Me.ErrorMessage, ex)
+                Finally
+                    scope = Nothing
+                    source = Nothing
+                End Try
+
+            End If
 
         End Sub
 

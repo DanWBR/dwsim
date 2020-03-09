@@ -30,6 +30,8 @@
         Other
     End Enum
 
+    Property DynamicMode As Boolean
+
     Property ExtraProperties As Dynamic.ExpandoObject
 
     Function GetApplicationObject() As Object

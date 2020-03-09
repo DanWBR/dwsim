@@ -1,5 +1,5 @@
 '    Flowsheet Object Base Classes 
-'    Copyright 2008-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2020 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -16,18 +16,10 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Runtime.Serialization.Formatters.Binary
-Imports System.Runtime.Serialization
-Imports System.IO
-Imports System.Linq
-Imports CapeOpen
-Imports System.Runtime.Serialization.Formatters
-Imports System.Runtime.InteropServices.Marshal
 Imports System.Runtime.InteropServices
 Imports System.Text
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
-Imports System.Windows.Forms
 Imports System.Dynamic
 
 Namespace UnitOperations
@@ -43,6 +35,8 @@ Namespace UnitOperations
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
         Public Property ExtraProperties As New ExpandoObject Implements ISimulationObject.ExtraProperties
+
+        Public Property ExtraPropertiesDescriptions As New ExpandoObject Implements ISimulationObject.ExtraPropertiesDescriptions
 
         Public Overridable Property Visible As Boolean = True
 
@@ -588,6 +582,24 @@ Namespace UnitOperations
                 Next
             End If
 
+            ExtraPropertiesDescriptions = New ExpandoObject
+
+            Dim xel_dd = (From xel2 As XElement In data Select xel2 Where xel2.Name = "DynamicPropertiesDescriptions")
+
+            If Not xel_dd Is Nothing Then
+                Dim dataDyn As List(Of XElement) = xel_dd.Elements.ToList
+                For Each xel As XElement In dataDyn
+                    Try
+                        Dim propname = xel.Element("Name").Value
+                        Dim proptype = xel.Element("PropertyType").Value
+                        Dim ptype As Type = Type.GetType(proptype)
+                        Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                        DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))(propname) = propval
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
             Dim xel_u = (From xel2 As XElement In data Select xel2 Where xel2.Name = "AttachedUtilities")
 
             If Not xel_u Is Nothing Then
@@ -626,6 +638,17 @@ Namespace UnitOperations
                 .Add(New XElement("DynamicProperties"))
                 Dim extraprops = DirectCast(ExtraProperties, IDictionary(Of String, Object))
                 For Each item In extraprops
+                    Try
+                        .Item(.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
+                                                                               New XElement("PropertyType", item.Value.GetType.ToString),
+                                                                               New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
+                    Catch ex As Exception
+                    End Try
+                Next
+
+                .Add(New XElement("DynamicPropertiesDescriptions"))
+                Dim extrapropsdesc = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
+                For Each item In extrapropsdesc
                     Try
                         .Item(.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
                                                                                New XElement("PropertyType", item.Value.GetType.ToString),

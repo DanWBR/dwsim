@@ -16,6 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Dynamic
 ''' <summary>
 ''' This interface defines the basic properties of Simulation Objects (Unit Operations, Material Streams and Energy Streams)
 ''' </summary>
@@ -155,7 +156,7 @@
     Sub PerformPostCalcValidation()
 
     Property PropertyPackage As IPropertyPackage
-
+    Property ExtraPropertiesDescriptions As ExpandoObject
     Sub SetFlowsheet(fobj As Object)
 
     Function GetFlowsheet() As IFlowsheet

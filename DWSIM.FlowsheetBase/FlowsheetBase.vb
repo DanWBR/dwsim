@@ -29,6 +29,8 @@ Imports DWSIM.Interfaces.Enums
 
     Implements IFlowsheet, IFlowsheetCalculationQueue
 
+    Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
+
     Public Property ExtraProperties As New ExpandoObject Implements IFlowsheet.ExtraProperties
 
     Public WithEvents Options As New SharedClasses.DWSIM.Flowsheet.FlowsheetVariables
