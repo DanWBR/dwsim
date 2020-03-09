@@ -397,6 +397,149 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public MustOverride Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+        ''' <summary>
+        ''' Volume-Temperature Flash
+        ''' </summary>
+        ''' <param name="Vz">Mole fractions</param>
+        ''' <param name="Vspec">Molar Volume (m3/mol)</param>
+        ''' <param name="T">Temperature (K)</param>
+        ''' <param name="Pref">Pressure estimate (Pa)</param>
+        ''' <param name="PP"></param>
+        ''' <param name="ReuseKI"></param>
+        ''' <param name="PrevKi"></param>
+        ''' <returns></returns>
+        Public Function FlashVT(ByVal Vz As Double(), ByVal Vspec As Double, ByVal T As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+
+            'PV = nZRT
+
+            Dim simplex As New DotNumerics.Optimization.Simplex
+
+            simplex.MaxFunEvaluations = 1000
+            simplex.Tolerance = 0.0001
+
+            Dim var As New DotNumerics.Optimization.OptSimplexBoundVariable(Pref, Pref * 0.7, Pref * 1.4)
+
+            Dim flashresult As New FlashCalculationResult
+
+            simplex.ComputeMin(Function(Pvec)
+                                   Dim P = Pvec(0)
+                                   flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
+                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
+                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
+                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
+                                   Return (Vspec - VV - VL1 - VL2) ^ 2
+                               End Function, {var})
+
+            Return flashresult
+
+        End Function
+
+        Public Function FlashVP(ByVal Vz As Double(), ByVal Vspec As Double, ByVal P As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+
+            'PV = nZRT
+
+            Dim simplex As New DotNumerics.Optimization.Simplex
+
+            simplex.MaxFunEvaluations = 1000
+            simplex.Tolerance = 0.0001
+
+            Dim var As New DotNumerics.Optimization.OptSimplexBoundVariable(Tref, Tref * 0.9, Tref * 1.1)
+
+            Dim flashresult As New FlashCalculationResult
+
+            simplex.ComputeMin(Function(Tvec)
+                                   Dim T = Tvec(0)
+                                   flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
+                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
+                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
+                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
+                                   Return (Vspec - VV - VL1 - VL2) ^ 2
+                               End Function, {var})
+
+            Return flashresult
+
+        End Function
+
+        Public Function FlashVH(ByVal Vz As Double(), ByVal Vspec As Double, ByVal H As Double, ByVal Pref As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+
+            'PV = nZRT
+
+            Dim simplex As New DotNumerics.Optimization.Simplex
+
+            simplex.MaxFunEvaluations = 1000
+            simplex.Tolerance = 0.0001
+
+            Dim var1 As New DotNumerics.Optimization.OptSimplexBoundVariable(Tref, Tref * 0.9, Tref * 1.1)
+            Dim var2 As New DotNumerics.Optimization.OptSimplexBoundVariable(Pref, Pref * 0.7, Pref * 1.4)
+
+            Dim flashresult As New FlashCalculationResult
+
+            simplex.ComputeMin(Function(vec)
+                                   Dim T = vec(0)
+                                   Dim P = vec(1)
+                                   flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
+                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
+                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
+                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
+                                   Dim HL1, HL2, HV As Double
+                                   HL1 = flashresult.GetLiquidPhase1MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase1MoleFractions, T, P, State.Liquid)
+                                   HL2 = flashresult.GetLiquidPhase2MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase2MoleFractions, T, P, State.Liquid)
+                                   HV = flashresult.GetVaporPhaseMassFraction * PP.DW_CalcEnthalpy(flashresult.GetVaporPhaseMoleFractions, T, P, State.Vapor)
+                                   Return (Vspec - VV - VL1 - VL2) ^ 2 + (H - HV - HL1 - HL2) ^ 2
+                               End Function, {var1, var2})
+
+            Return flashresult
+
+        End Function
+
+        Public Function FlashVS(ByVal Vz As Double(), ByVal Vspec As Double, ByVal S As Double, ByVal Pref As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+
+            'PV = nZRT
+
+            Dim simplex As New DotNumerics.Optimization.Simplex
+
+            simplex.MaxFunEvaluations = 1000
+            simplex.Tolerance = 0.0001
+
+            Dim var1 As New DotNumerics.Optimization.OptSimplexBoundVariable(Tref, Tref * 0.9, Tref * 1.1)
+            Dim var2 As New DotNumerics.Optimization.OptSimplexBoundVariable(Pref, Pref * 0.7, Pref * 1.4)
+
+            Dim flashresult As New FlashCalculationResult
+
+            simplex.ComputeMin(Function(vec)
+                                   Dim T = vec(0)
+                                   Dim P = vec(1)
+                                   flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
+                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
+                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
+                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
+                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
+                                   Dim SL1, SL2, SV As Double
+                                   SL1 = flashresult.GetLiquidPhase1MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase1MoleFractions, T, P, State.Liquid)
+                                   SL2 = flashresult.GetLiquidPhase2MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase2MoleFractions, T, P, State.Liquid)
+                                   SV = flashresult.GetVaporPhaseMassFraction * PP.DW_CalcEnthalpy(flashresult.GetVaporPhaseMoleFractions, T, P, State.Vapor)
+                                   Return (Vspec - VV - VL1 - VL2) ^ 2 + (S - SV - SL1 - SL2) ^ 2
+                               End Function, {var1, var2})
+
+            Return flashresult
+
+        End Function
+
 #End Region
 
 #Region "Auxiliary Functions"

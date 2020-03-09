@@ -7462,6 +7462,30 @@ Namespace Streams
             Phases(0).Properties.volumetric_flow = Nothing
         End Sub
 
+        Public Function GetEnthalpy() As Double
+            Return Phases(0).Properties.enthalpy.GetValueOrDefault
+        End Function
+
+        Public Function GetTemperature() As Double
+            Return Phases(0).Properties.temperature.GetValueOrDefault
+        End Function
+
+        Public Function GetPressure() As Double
+            Return Phases(0).Properties.pressure.GetValueOrDefault
+        End Function
+
+        Public Function GetMassFlow() As Double
+            Return Phases(0).Properties.massflow.GetValueOrDefault
+        End Function
+
+        Public Function GetMolarFlow() As Double
+            Return Phases(0).Properties.molarflow.GetValueOrDefault
+        End Function
+
+        Public Function GetVolumetricFlow() As Double
+            Return Phases(0).Properties.volumetric_flow.GetValueOrDefault
+        End Function
+
         ''' <summary>
         ''' Sets stream molar flow.
         ''' </summary>
@@ -7502,6 +7526,67 @@ Namespace Streams
                     SpecType = StreamSpec.Pressure_and_SolidFraction
             End Select
         End Sub
+
+        Public Sub Mix(withstream As MaterialStream)
+
+            Dim n As Integer = Me.Phases(0).Compounds.Count
+
+            Dim Vw As New Dictionary(Of String, Double)
+
+            Dim W1 = withstream.GetMassFlow()
+            Dim T1 = withstream.GetTemperature()
+            Dim H1 = withstream.GetEnthalpy()
+
+            Dim W0 = Me.GetMassFlow()
+            Dim T0 = Me.GetTemperature()
+            Dim H0 = Me.GetEnthalpy()
+
+            Dim comp As BaseClasses.Compound
+            For Each comp In withstream.Phases(0).Compounds.Values
+                If Not Vw.ContainsKey(comp.Name) Then
+                    Vw.Add(comp.Name, 0)
+                End If
+                Vw(comp.Name) += comp.MassFraction.GetValueOrDefault * withstream.Phases(0).Properties.massflow.GetValueOrDefault
+            Next
+
+            For Each comp In Me.Phases(0).Compounds.Values
+                If Not Vw.ContainsKey(comp.Name) Then
+                    Vw.Add(comp.Name, 0)
+                End If
+                Vw(comp.Name) += comp.MassFraction.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault
+            Next
+
+            If W1 = 0.0# Then T1 = 273.15
+
+            With Me
+                .Clear()
+                .ClearAllProps()
+                .Phases(0).Properties.enthalpy = (W0 * H0 + W1 * H1) / (W0 + W1)
+                .Phases(0).Properties.massflow = (W0 + W1)
+                .Phases(0).Properties.molarfraction = 1
+                .Phases(0).Properties.massfraction = 1
+                For Each comp In .Phases(0).Compounds.Values
+                    comp.MassFraction = Vw(comp.Name) / (W0 + W1)
+                Next
+                Dim mass_div_mm As Double = 0
+                Dim sub1 As BaseClasses.Compound
+                For Each sub1 In .Phases(0).Compounds.Values
+                    mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                Next
+                For Each sub1 In .Phases(0).Compounds.Values
+                    If W1 > 0.0# Then
+                        sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+                    Else
+                        sub1.MoleFraction = 0.0#
+                    End If
+                Next
+                Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                .Phases(0).Properties.temperature = (W0 * T0 + W1 * T1) / (W0 + W1)
+                .SpecType = StreamSpec.Pressure_and_Enthalpy
+            End With
+
+        End Sub
+
 
     End Class
 
