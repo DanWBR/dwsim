@@ -517,7 +517,11 @@ Namespace Enums.GraphicObjects
 
         External
 
-        Indicator
+        AnalogGauge
+        DigitalGauge
+        LevelGauge
+
+        Controller_PLC
 
     End Enum
 

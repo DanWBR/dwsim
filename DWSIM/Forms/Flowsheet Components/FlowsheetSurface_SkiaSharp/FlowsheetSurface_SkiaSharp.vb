@@ -1561,6 +1561,19 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.CreateConnectors(0, 0)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, uoobj)
 
+            Case ObjectType.AnalogGauge
+
+                Dim myNode As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
+                myNode.Tag = "AG-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myNode.Tag = tag
+                gObj = myNode
+                gObj.Name = "AG-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
+                Dim myADJ As AnalogGauge = New AnalogGauge(gObj.Name, "")
+                myADJ.GraphicObject = myNode
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
+
             Case ObjectType.OT_Adjust
 
                 Dim myNode As New AdjustGraphic(mpx, mpy, 20, 20)
@@ -2310,6 +2323,8 @@ Public Class FlowsheetSurface_SkiaSharp
                 tobj = ObjectType.Filter
             Case "Flowsheet"
                 tobj = ObjectType.FlowsheetUO
+            Case "AnalogGauge"
+                tobj = ObjectType.AnalogGauge
         End Select
 
         AddObjectToSurface(tobj, x, y, chemsep)

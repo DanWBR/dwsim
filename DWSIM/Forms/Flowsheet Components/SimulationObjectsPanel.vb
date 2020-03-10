@@ -106,6 +106,10 @@ Public Class SimulationObjectsPanel
                     Me.PanelStreams.Controls.Add(item)
                 Case SimulationObjectClass.UserModels
                     Me.PanelUser.Controls.Add(item)
+                Case SimulationObjectClass.Indicators
+                    Me.PanelIndicators.Controls.Add(item)
+                Case SimulationObjectClass.Controllers
+                    Me.PanelControllers.Controls.Add(item)
             End Select
         Next
 

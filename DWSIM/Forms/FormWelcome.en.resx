@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAASgBBQEoAQUBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAUABBQFAAQUBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -193,22 +193,49 @@
         AQMBwAEDCP8L
 </value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lvlatest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 725</value>
+  </data>
+  <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
+    <value>493, 725</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 731</value>
+  </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Recent Files</value>
+  </data>
+  <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>493, 725</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 731</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Samples</value>
   </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>FOSSEE Flowsheets</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 68</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.</value>
   </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 731</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>FOSSEE Flowsheets</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 731</value>
+  </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Recent Folders</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>495, 760</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 15</value>
   </data>
@@ -217,12 +244,6 @@
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Welcome to DWSIM!</value>
-  </data>
-  <data name="LinkLabel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 16</value>
-  </data>
-  <data name="LinkLabel7.Text" xml:space="preserve">
-    <value>Create New (no Wizard)</value>
   </data>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 16</value>
@@ -287,15 +308,17 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Data Regression</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PictureBox6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 74</value>
   </data>
-  <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>285, 0</value>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Become a Patron and get access to exclusive Unit Operations, Property Packages and Plugins/Add-Ins!</value>
   </data>
-  <data name="PictureBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 138</value>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 19</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Become a Patron</value>
   </data>
   <data name="LinkLabel9.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 16</value>
@@ -303,17 +326,15 @@
   <data name="LinkLabel9.Text" xml:space="preserve">
     <value>Go to Patreon.com/DWSIM</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 74</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PictureBox6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>DWSIM has a Patreon page where you can subscribe to donate a fixed, monthly amount and get exclusive rewards in return. The more you donate, the more rewards you'll get. By becoming a patron, you will support future development of DWSIM while getting access to exclusive support channels and features, including mobile version unlock keys. You can also participate on development polls and drive the path for future features.</value>
+  <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 0</value>
   </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 19</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Become a Patron</value>
+  <data name="PictureBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 138</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 19</value>

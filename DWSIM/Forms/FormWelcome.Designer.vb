@@ -47,7 +47,6 @@ Partial Class FormWelcome
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.LinkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -65,10 +64,10 @@ Partial Class FormWelcome
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.LinkLabel9 = New System.Windows.Forms.LinkLabel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.LinkLabel9 = New System.Windows.Forms.LinkLabel()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -295,21 +294,12 @@ Partial Class FormWelcome
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.LinkLabel7)
         Me.Panel1.Controls.Add(Me.LinkLabel2)
         Me.Panel1.Controls.Add(Me.LinkLabel1)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Name = "Panel1"
-        '
-        'LinkLabel7
-        '
-        resources.ApplyResources(Me.LinkLabel7, "LinkLabel7")
-        Me.LinkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel7.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.LinkLabel7.Name = "LinkLabel7"
-        Me.LinkLabel7.TabStop = True
         '
         'LinkLabel2
         '
@@ -438,27 +428,12 @@ Partial Class FormWelcome
         'Panel4
         '
         resources.ApplyResources(Me.Panel4, "Panel4")
-        Me.Panel4.Controls.Add(Me.PictureBox6)
-        Me.Panel4.Controls.Add(Me.LinkLabel9)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.Label11)
+        Me.Panel4.Controls.Add(Me.LinkLabel9)
+        Me.Panel4.Controls.Add(Me.PictureBox6)
         Me.Panel4.Controls.Add(Me.PictureBox4)
         Me.Panel4.Name = "Panel4"
-        '
-        'PictureBox6
-        '
-        resources.ApplyResources(Me.PictureBox6, "PictureBox6")
-        Me.PictureBox6.BackgroundImage = Global.DWSIM.My.Resources.Resources.Patreon_Navy
-        Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.TabStop = False
-        '
-        'LinkLabel9
-        '
-        resources.ApplyResources(Me.LinkLabel9, "LinkLabel9")
-        Me.LinkLabel9.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel9.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.LinkLabel9.Name = "LinkLabel9"
-        Me.LinkLabel9.TabStop = True
         '
         'Label2
         '
@@ -473,6 +448,21 @@ Partial Class FormWelcome
         Me.Label11.BackColor = System.Drawing.Color.Transparent
         Me.Label11.ForeColor = System.Drawing.Color.Black
         Me.Label11.Name = "Label11"
+        '
+        'LinkLabel9
+        '
+        resources.ApplyResources(Me.LinkLabel9, "LinkLabel9")
+        Me.LinkLabel9.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel9.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.LinkLabel9.Name = "LinkLabel9"
+        Me.LinkLabel9.TabStop = True
+        '
+        'PictureBox6
+        '
+        resources.ApplyResources(Me.PictureBox6, "PictureBox6")
+        Me.PictureBox6.BackgroundImage = Global.DWSIM.My.Resources.Resources.Patreon_Navy
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.TabStop = False
         '
         'PictureBox4
         '
@@ -599,7 +589,6 @@ Partial Class FormWelcome
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents LinkLabel7 As LinkLabel
     Friend WithEvents LinkLabel2 As LinkLabel
     Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents Label4 As Label

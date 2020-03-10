@@ -4,25 +4,29 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects
 
-    Public Class AnalogGauge
+    Public Class AnalogGaugeGraphic
 
         Inherits ShapeGraphic
+
 
 #Region "Constructors"
 
         Public Sub New()
 
-            Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.Indicator
+            Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.AnalogGauge
 
         End Sub
 
-        Public Sub New(ByVal graphicPosition As SKPoint, ByVal text As String)
+        Public Sub New(ByVal graphicPosition As SKPoint, ByVal w As Double, h As Double)
             Me.New()
             Me.SetPosition(graphicPosition)
+            Me.SetSize(New SKSize(w, h))
         End Sub
 
-        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal text As String)
-            Me.New(New SKPoint(posX, posY), text)
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal w As Double, h As Double)
+            Me.New()
+            Me.SetPosition(New SKPoint(posX, posY))
+            Me.SetSize(New SKSize(w, h))
         End Sub
 
 #End Region
@@ -31,36 +35,35 @@ Namespace GraphicObjects
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            Dim w = 100.0
-            Dim h = 100.0
+            Dim w = Width
+            Dim h = Height
 
-            Dim x = 100.0
-            Dim y = 100.0
-
-            Dim center = New SKPoint(x + w / 2, y + h / 2)
+            Dim center = New SKPoint(X + w / 2, Y + h / 2)
 
             Dim radius = w / 2
 
+            Dim f = Width / 100.0
+
             'draw circle
-            Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 5, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 5 * f, .IsAntialias = True}
                 canvas.DrawCircle(center.X, center.Y, radius, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Green.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Green.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
-                p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -225, 90)
+                p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -225, 90)
                 canvas.DrawPath(p, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Yellow.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Yellow.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
-                p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -135, 90)
+                p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -135, 90)
                 canvas.DrawPath(p, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Red.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Red.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
-                p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -45, 90)
+                p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -45, 90)
                 canvas.DrawPath(p, paint)
             End Using
 
@@ -72,17 +75,17 @@ Namespace GraphicObjects
             needle.Transform(SKMatrix.MakeScale(sf, sf))
             needle.GetBounds(bounds)
             needle.Offset(center)
-            needle.Offset(-bounds.Width / 2, -bounds.Height + 5)
+            needle.Offset(-bounds.Width / 2, -bounds.Height + 5 * f)
 
             Dim mintick = -135.0
             Dim maxtick = 135.0
             Dim nstep = 10
 
-            Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 2, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 2 * f, .IsAntialias = True}
                 For i As Integer = mintick To maxtick Step nstep
                     Dim angle = (i - 90) * Math.PI / 180
                     Dim p1 = New SKPoint(center.X + radius * Math.Cos(angle), center.Y + radius * Math.Sin(angle))
-                    Dim p2 = New SKPoint(center.X + (radius - 10.0) * Math.Cos(angle), center.Y + (radius - 10.0) * Math.Sin(angle))
+                    Dim p2 = New SKPoint(center.X + (radius - 10.0 * f) * Math.Cos(angle), center.Y + (radius - 10.0 * f) * Math.Sin(angle))
                     canvas.DrawLine(p1, p2, paint)
                 Next
             End Using
@@ -91,7 +94,10 @@ Namespace GraphicObjects
 
             Dim minvalue = owneri.MinimumValue
             Dim maxvalue = owneri.MaximumValue
-            Dim currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, owneri.SelectedObject.GetPropertyValue(owneri.SelectedProperty))
+            Dim currentvalue As Double
+            If owneri.SelectedObject IsNot Nothing Then
+                currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, owneri.SelectedObject.GetPropertyValue(owneri.SelectedProperty))
+            End If
 
             Dim currenttick = mintick + (currentvalue - minvalue) / (maxvalue - minvalue) * (maxtick - mintick)
 
@@ -103,7 +109,7 @@ Namespace GraphicObjects
 
             Dim valtext = currentvalue.ToString("G")
 
-            Using paint As New SKPaint With {.TextSize = 13.0, .Color = SKColors.Black, .IsAntialias = True}
+            Using paint As New SKPaint With {.TextSize = 13.0 * f, .Color = SKColors.Black, .IsAntialias = True}
                 Select Case GlobalSettings.Settings.RunningPlatform
                     Case GlobalSettings.Settings.Platform.Windows
                         paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
@@ -116,8 +122,8 @@ Namespace GraphicObjects
                 paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
                 Dim tsize As New SKSize(trect.Right - trect.Left, trect.Top - trect.Bottom)
                 Dim strx As Single = (w - paint.MeasureText(valtext)) / 2
-                Dim stry As Single = h - tsize.Height - 20.0
-                canvas.DrawText(valtext, x + strx, y + stry, paint)
+                Dim stry As Single = h - tsize.Height - 20.0 * f
+                canvas.DrawText(valtext, X + strx, Y + stry, paint)
             End Using
 
         End Sub
