@@ -1,6 +1,7 @@
 ﻿Imports SkiaSharp.Views.Desktop
 Imports SkiaSharp
 Imports SkiaSharp.Extended
+Imports DWSIM
 
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -28,19 +29,19 @@ Public Class Form1
             canvas.DrawCircle(center.X, center.Y, radius, paint)
         End Using
 
-        Using paint As New SKPaint With {.Color = SKColors.Green.WithAlpha(150), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
+        Using paint As New SKPaint With {.Color = SKColors.Green.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
             Dim p As New SKPath()
             p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -225, 90)
             canvas.DrawPath(p, paint)
         End Using
 
-        Using paint As New SKPaint With {.Color = SKColors.Yellow.WithAlpha(150), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
+        Using paint As New SKPaint With {.Color = SKColors.Yellow.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
             Dim p As New SKPath()
             p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -135, 90)
             canvas.DrawPath(p, paint)
         End Using
 
-        Using paint As New SKPaint With {.Color = SKColors.Red.WithAlpha(150), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
+        Using paint As New SKPaint With {.Color = SKColors.Red.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
             Dim p As New SKPath()
             p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -45, 90)
             canvas.DrawPath(p, paint)
@@ -84,7 +85,14 @@ Public Class Form1
         Dim valtext = currentvalue.ToString("G")
 
         Using paint As New SKPaint With {.TextSize = 13.0, .Color = SKColors.Black, .IsAntialias = True}
-            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+            Select Case GlobalSettings.Settings.RunningPlatform
+                Case GlobalSettings.Settings.Platform.Windows
+                    paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                Case GlobalSettings.Settings.Platform.Linux
+                    paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                Case GlobalSettings.Settings.Platform.Mac
+                    paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+            End Select
             Dim trect As New SKRect(0, 0, 2, 2)
             paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
             Dim tsize As New SKSize(trect.Right - trect.Left, trect.Top - trect.Bottom)

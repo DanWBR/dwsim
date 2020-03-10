@@ -83,6 +83,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Display Analógico.
+        '''</summary>
+        Friend Shared ReadOnly Property AG_Desc() As String
+            Get
+                Return ResourceManager.GetString("AG_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Display Analógico.
+        '''</summary>
+        Friend Shared ReadOnly Property AG_Name() As String
+            Get
+                Return ResourceManager.GetString("AG_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Modelo para simulação rigorosa de colunas de absorção.
         '''</summary>
         Friend Shared ReadOnly Property CABS_Desc() As String

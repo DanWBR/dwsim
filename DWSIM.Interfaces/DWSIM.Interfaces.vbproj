@@ -100,6 +100,7 @@
     <Compile Include="IFlowsheetEvents.vb" />
     <Compile Include="IFlowsheetOptions.vb" />
     <Compile Include="IGraphicObject.vb" />
+    <Compile Include="IIndicator.vb" />
     <Compile Include="IMaterialStream.vb" />
     <Compile Include="IPersistStream.vb" />
     <Compile Include="IPhase.vb" />

@@ -189,6 +189,12 @@
     <Compile Include="Base Classes\CapeOpen.vb" />
     <Compile Include="Base Classes\UnitOperations.vb" />
     <Compile Include="Databases\PumpDatabase.vb" />
+    <Compile Include="Editing Forms\EditingForm_AnalogGauge.Designer.vb">
+      <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_AnalogGauge.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.Designer.vb">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
@@ -496,6 +502,7 @@
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
     <Compile Include="Extenders\StreamListExtender.vb" />
+    <Compile Include="Indicators\AnalogGauge.vb" />
     <Compile Include="Languages\Strings.de.Designer.vb">
       <DependentUpon>Strings.de.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -583,6 +590,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_AnalogGauge.resx">
+      <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.de.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
@@ -1099,9 +1109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -1553,13 +1563,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Indicators\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Icons\analog_gauge.png" />
-    <EmbeddedResource Include="Assets\Icons\control_panel.png" />
-    <EmbeddedResource Include="Assets\Icons\digital_display.png" />
-    <EmbeddedResource Include="Assets\Icons\level_gauge.png" />
+    <None Include="Assets\Icons\analog_gauge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Icons\control_panel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Icons\digital_display.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Icons\level_gauge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

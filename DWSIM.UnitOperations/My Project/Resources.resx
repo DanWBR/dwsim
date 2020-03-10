@@ -460,4 +460,25 @@
   <data name="icons8-spy_male" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-spy_male.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="control_panel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\control_panel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="digital_display" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\digital_display.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="level_gauge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\level_gauge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="analog_gauge1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\analog_gauge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="control_panel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\control_panel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="digital_display1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\digital_display.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="level_gauge1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\level_gauge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

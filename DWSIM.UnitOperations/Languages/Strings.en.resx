@@ -123,6 +123,12 @@
   <data name="ADJ_Name" xml:space="preserve">
     <value>Controller Block</value>
   </data>
+  <data name="AG_Desc" xml:space="preserve">
+    <value>Analog Gauge</value>
+  </data>
+  <data name="AG_Name" xml:space="preserve">
+    <value>Analog Gauge</value>
+  </data>
   <data name="CABS_Desc" xml:space="preserve">
     <value>Model for rigorous simulation of absorption columns</value>
   </data>
