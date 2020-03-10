@@ -32,9 +32,11 @@ namespace DWSIM.UI
 
         TreeGridView MostRecentList;
 
-        private TableLayout TableContainer;
-
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
+
+        private int width = 1024;
+
+        private int height = 640;
 
         void InitializeComponent()
         {
@@ -43,6 +45,10 @@ namespace DWSIM.UI
 
             var sf = s.UIScalingFactor;
 
+            width = (int)(width * sf);
+
+            height = (int)(height * sf);
+
             Application.Instance.UnhandledException += (sender, e) =>
             {
                 new DWSIM.UI.Desktop.Editors.UnhandledExceptionView((Exception)e.ExceptionObject).ShowModalAsync();
@@ -50,66 +56,57 @@ namespace DWSIM.UI
 
             Title = "DWSIMLauncher".Localize();
 
-            switch (GlobalSettings.Settings.RunningPlatform())
-            {
-                case GlobalSettings.Settings.Platform.Windows:
-                    ClientSize = new Size((int)(690 * sf), (int)(420 * sf));
-                    break;
-                case GlobalSettings.Settings.Platform.Linux:
-                    ClientSize = new Size((int)(690 * sf), (int)(370 * sf));
-                    break;
-                case GlobalSettings.Settings.Platform.Mac:
-                    ClientSize = new Size((int)(690 * sf), (int)(350 * sf));
-                    break;
-            }
+            ClientSize = new Size((int)(width * sf), (int)(height * sf));
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
-            var bgcolor = new Color(0.051f, 0.447f, 0.651f);
+            var abslayout = new PixelLayout();
 
-            if (s.DarkMode) bgcolor = SystemColors.ControlBackground;
+            var background = new ImageView { Size = ClientSize, Image = new Bitmap(Bitmap.FromResource("DWSIM.UI.Forms.Resources.Bitmaps.background_welcome.png")) };
 
-            Eto.Style.Add<Button>("main", button =>
+            abslayout.Add(background, 0, 0);
+
+            int dx = (int)(15 * sf), dy = (int)(15 * sf), dx2 = (int)(10 * sf), dy2 = (int)(10 * sf);
+
+            float fsize1, fsize2;
+
+            if (GlobalSettings.Settings.RunningPlatform() == s.Platform.Mac)
             {
-                button.BackgroundColor = bgcolor;
-                button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
-                button.TextColor = Colors.White;
-                button.ImagePosition = ButtonImagePosition.Left;
-                button.Width = (int)(sf * 250);
-                button.Height = (int)(sf * 50);
-            });
-
-            Eto.Style.Add<Button>("donate", button =>
+                fsize1 = 12.0f;
+                fsize2 = 10.0f;
+            }
+            else
             {
-                button.BackgroundColor = !s.DarkMode ? Colors.LightYellow : SystemColors.ControlBackground;
-                button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
-                button.TextColor = !s.DarkMode ? bgcolor : Colors.White;
-                button.ImagePosition = ButtonImagePosition.Left;
-                button.Width = (int)(sf * 250);
-                button.Height = (int)(sf * 50);
-            });
+                fsize1 = 11.0f;
+                fsize2 = 9.0f;
+            }
 
-            var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn3 = new Button() { Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn6 = new Button() { Style = "main", Text = "User Guide".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn8 = new Button() { Style = "donate", Text = "Become a Patron", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-patreon.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
-            var btn9 = new Button() { Style = "main", Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "ReportCard_96px.png"), (int)(sf * 40), (int)(sf * 40), ImageInterpolation.Default) };
+            var boldfont = new Font(SystemFont.Bold, fsize1, FontDecoration.None);
+            var regularfont = new Font(SystemFont.Default, fsize2, FontDecoration.None);
+            var boldfont2 = new Font(SystemFont.Bold, fsize2, FontDecoration.None);
+            var bfh = (int)boldfont.LineHeight;
+            var rfh = (int)regularfont.LineHeight;
 
-            btn9.Click += (sender, e) =>
-            {
-                new Forms.Forms.GeneralSettings().GetForm().Show();
-            };
+            var psize = new Size((int)(100 * sf), (int)(100 * sf));
+            var psize2 = new Size((int)(80 * sf), (int)(80 * sf));
+            var lsize = new Size((int)(350 * sf), (int)(50 * sf));
 
-            btn6.Click += (sender, e) =>
-            {
-                var basepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                Process.Start(basepath + Path.DirectorySeparatorChar + "docs" + Path.DirectorySeparatorChar + "user_guide.pdf");
-            };
+            abslayout.Add(new Label { Text = "Welcome to DWSIM!", Width = (int)(200 * sf), Font = boldfont }, dx, dy);
+            abslayout.Add(new Label { Text = "Quick Access", Width = (int)(200 * sf), Font = boldfont }, dx * 2 + (int)(500 * sf), dy);
 
-            btn1.Click += (sender, e) =>
+            PixelLayout pfile, pccreator, pdocs, pabout, ppatreon;
+
+            pfile = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pfile.Add(new Label { Text = "Process Modeling", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
+            pfile.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Create or load chemical steady-state or dynamic process models." }, dx2, dy2 * 2 + bfh);
+            var img1 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-chemical_plant.png")) };
+            pfile.Add(img1, (int)(400 * sf), 0);
+            var link1 = new LinkButton { Text = "Create New", Width = (int)(140 * sf), Font = boldfont2 };
+            pfile.Add(link1, dx2, (int)(100 * sf - rfh - dy));
+            var link2 = new LinkButton { Text = "Open Existing", Width = (int)(200 * sf), Font = boldfont2 };
+            pfile.Add(link2, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
+
+            link2.Click += (sender, e) =>
             {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Open File".Localize();
@@ -124,7 +121,7 @@ namespace DWSIM.UI
 
             };
 
-            btn2.Click += (sender, e) =>
+            link1.Click += (sender, e) =>
             {
                 var form = new Forms.Flowsheet();
                 AddUserCompounds(form.FlowsheetObject);
@@ -137,48 +134,73 @@ namespace DWSIM.UI
                 form.Show();
             };
 
-            btn7.Click += (sender, e) => new AboutBox().Show();
-            btn8.Click += (sender, e) => Process.Start("https://patreon.com/dwsim");
+            abslayout.Add(pfile, dx, dy * 2 + bfh);
 
-            var stack = new StackLayout { Orientation = Orientation.Vertical, Spacing = 5 };
-            stack.Items.Add(btn1);
-            stack.Items.Add(btn2);
-            stack.Items.Add(btn9);
-            stack.Items.Add(btn6);
-            stack.Items.Add(btn7);
-            stack.Items.Add(btn8);
+            pccreator = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pccreator.Add(new Label { Text = "Compound Creator", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
+            pccreator.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Use this tool to create new compounds and load them in your models." }, dx2, dy2 * 2 + bfh);
+            var img2 = new ImageView { Size = psize2, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-test_tube.png")) };
+            pccreator.Add(img2, (int)(410 * sf), (int)(10 * sf));
+            var link3 = new LinkButton { Text = "Create New", Width = (int)(140 * sf), Font = boldfont2 };
+            pccreator.Add(link3, dx2, (int)(100 * sf - rfh - dy));
 
-            var tableright = new TableLayout();
-            tableright.Padding = new Padding(5, 5, 5, 5);
-            tableright.Spacing = new Size(10, 10);
+            abslayout.Add(pccreator, dx, dy * 3 + bfh + (int)(100 * sf));
 
-            MostRecentList = new TreeGridView { Height = (int)(sf * 330) };
-            SampleList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
-            FoldersList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
-            FOSSEEList = new ListBox { BackgroundColor = bgcolor, Height = (int)(sf * 330) };
+            ppatreon = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            ppatreon.Add(new Label { Text = "Become a Patron", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
+            ppatreon.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Become a Patron and get access to exclusive Unit Operations, Property Packages and Plugins/Add-Ins!" }, dx2, dy2 * 2 + bfh);
+            var img4 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "Patreon_Navy.jpg")) };
+            ppatreon.Add(img4, (int)(400 * sf), 0);
+            var link4 = new LinkButton { Text = "Go to Patreon.com/DWSIM", Width = (int)(250 * sf), Font = boldfont2 };
+            ppatreon.Add(link4, dx2, (int)(100 * sf - rfh - dy));
 
-            if (Application.Instance.Platform.IsGtk &&
-                GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            link4.Click += (sender, e) => Process.Start("https://patreon.com/dwsim");
+
+            abslayout.Add(ppatreon, dx, dy * 4 + bfh + 2 * (int)(100 * sf));
+
+            pdocs = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pdocs.Add(new Label { Text = "Documentation", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
+            pdocs.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "View DWSIM's User Guide in PDF format." }, dx2, dy2 * 2 + bfh);
+            var img5 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-books.png")) };
+            pdocs.Add(img5, (int)(400 * sf), 0);
+            var link5 = new LinkButton { Text = "View the User Guide", Width = (int)(140 * sf), Font = boldfont2 };
+            pdocs.Add(link5, dx2, (int)(100 * sf - rfh - dy));
+            var link6 = new LinkButton { Text = "Online Help", Width = (int)(140 * sf), Font = boldfont2 };
+            pdocs.Add(link6, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
+
+            link6.Click += (sender, e) => Process.Start("http://dwsim.inforside.com.br");
+
+            link5.Click += (sender, e) =>
             {
-                SampleList.TextColor = bgcolor;
-                FoldersList.TextColor = bgcolor;
-                FOSSEEList.TextColor = bgcolor;
-            }
-            else if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+                var basepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Process.Start(basepath + Path.DirectorySeparatorChar + "docs" + Path.DirectorySeparatorChar + "user_guide.pdf");
+            };
+
+            abslayout.Add(pdocs, dx, dy * 5 + bfh + 3 * (int)(100 * sf));
+
+            pabout = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pabout.Add(new Label { Text = "About DWSIM", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
+            pabout.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Adjust Global Settings and view DWSIM licensing and version information." }, dx2, dy2 * 2 + bfh);
+            var img6 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) };
+            pabout.Add(img6, (int)(400 * sf), 0);
+            var link7 = new LinkButton { Text = "Adjust Global Settings", Width = (int)(140 * sf), Font = boldfont2 };
+            pabout.Add(link7, dx2, (int)(100 * sf - rfh - dy));
+            var link8 = new LinkButton { Text = "About DWSIM", Width = (int)(140 * sf), Font = boldfont2 };
+            pabout.Add(link8, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
+
+            link7.Click += (sender, e) =>
             {
-                SampleList.BackgroundColor = SystemColors.ControlBackground;
-                FoldersList.BackgroundColor = SystemColors.ControlBackground;
-                FOSSEEList.BackgroundColor = SystemColors.ControlBackground;
-                SampleList.TextColor = SystemColors.ControlText;
-                FoldersList.TextColor = SystemColors.ControlText;
-                FOSSEEList.TextColor = SystemColors.ControlText;
-            }
-            else
-            {
-                SampleList.TextColor = Colors.White;
-                FoldersList.TextColor = Colors.White;
-                FOSSEEList.TextColor = Colors.White;
-            }
+                new Forms.Forms.GeneralSettings().GetForm().Show();
+            };
+
+            link8.Click += (sender, e) => new AboutBox().Show();
+
+            abslayout.Add(pabout, dx, dy * 6 + bfh + 4 * (int)(100 * sf));
+
+            MostRecentList = new TreeGridView();
+            SampleList = new ListBox();
+            FoldersList = new ListBox();
+            FOSSEEList = new ListBox();
 
             MostRecentList.AllowMultipleSelection = false;
             MostRecentList.ShowHeader = true;
@@ -385,21 +407,6 @@ namespace DWSIM.UI
             var bu1 = c.CreateAndAddButtonRow(fosseecontainer, "Submit a Flowsheet", null, (b1, e1) => Process.Start("https://dwsim.fossee.in/flowsheeting-project"));
             var bu2 = c.CreateAndAddButtonRow(fosseecontainer, "About FOSSEE", null, (b2, e2) => Process.Start("https://fossee.in/"));
             var l3 = c.CreateAndAddLabelRow3(fosseecontainer, "Completed Flowsheets");
-            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
-            {
-                fosseecontainer.BackgroundColor = SystemColors.ControlBackground;
-            }
-            else
-            {
-                fosseecontainer.BackgroundColor = bgcolor;
-                l1.TextColor = Colors.White;
-                l2.TextColor = Colors.White;
-                l3.TextColor = Colors.White;
-                bu1.TextColor = Colors.White;
-                bu2.TextColor = Colors.White;
-                bu1.BackgroundColor = bgcolor;
-                bu2.BackgroundColor = bgcolor;
-            }
             fosseecontainer.Add(FOSSEEList);
             fosseecontainer.EndVertical();
 
@@ -412,30 +419,11 @@ namespace DWSIM.UI
             tabview.Pages.Add(tab2);
             tabview.Pages.Add(tab2a);
             tabview.Pages.Add(tab3);
+            tabview.Size = new Size((int)(480 * sf), (int)(ClientSize.Height - dy * 4 - bfh));
 
-            tableright.Rows.Add(new TableRow(tabview));
+            abslayout.Add(tabview, dx * 2 + (int)(500 * sf), dy * 2 + bfh);
 
-            var tl = new DynamicLayout();
-            tl.Add(new TableRow(stack, tableright));
-
-            TableContainer = new TableLayout
-            {
-                Padding = 10,
-                Spacing = new Size(5, 5),
-                Rows = { new TableRow(tl) }
-            };
-
-            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
-            {
-                TableContainer.BackgroundColor = SystemColors.ControlBackground;
-            }
-            else
-            {
-                TableContainer.BackgroundColor = bgcolor;
-            }
-
-
-            Content = TableContainer;
+            Content = abslayout;
 
             var quitCommand = new Command { MenuText = "Quit".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) =>
@@ -534,12 +522,12 @@ namespace DWSIM.UI
         {
             Application.Instance.Invoke(() =>
             {
-                switch (GlobalSettings.Settings.RunningPlatform())
-                {
-                    case GlobalSettings.Settings.Platform.Windows:
-                        ClientSize = new Size((int)(s.UIScalingFactor * 700), (int)(s.UIScalingFactor * 400));
-                        break;
-                }
+                //switch (GlobalSettings.Settings.RunningPlatform())
+                //{
+                //    case GlobalSettings.Settings.Platform.Windows:
+                //        ClientSize = new Size((int)(s.UIScalingFactor * 700), (int)(s.UIScalingFactor * 400));
+                //        break;
+                //}
                 var splash = new SplashScreen { MainFrm = this };
                 splash.Show();
             });

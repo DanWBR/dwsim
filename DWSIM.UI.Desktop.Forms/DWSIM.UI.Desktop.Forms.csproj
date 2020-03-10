@@ -329,6 +329,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\icons8-spy_male.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-books.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-chemical_plant.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-line_chart.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-module.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bitmaps\background_welcome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-test_tube.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\Patreon_Navy.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
