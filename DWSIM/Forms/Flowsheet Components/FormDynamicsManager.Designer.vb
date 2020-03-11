@@ -28,6 +28,8 @@ Partial Class FormDynamicsManager
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.chkDynamics = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -35,9 +37,9 @@ Partial Class FormDynamicsManager
         '
         resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
@@ -73,17 +75,33 @@ Partial Class FormDynamicsManager
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'lblStatus
+        '
+        resources.ApplyResources(Me.lblStatus, "lblStatus")
+        Me.lblStatus.Name = "lblStatus"
+        '
+        'chkDynamics
+        '
+        resources.ApplyResources(Me.chkDynamics, "chkDynamics")
+        Me.chkDynamics.BackColor = System.Drawing.Color.DarkRed
+        Me.chkDynamics.ForeColor = System.Drawing.Color.White
+        Me.chkDynamics.Name = "chkDynamics"
+        Me.chkDynamics.UseVisualStyleBackColor = False
+        '
         'FormDynamicsManager
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CloseButton = False
         Me.CloseButtonVisible = False
+        Me.Controls.Add(Me.chkDynamics)
+        Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "FormDynamicsManager"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.TabControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -93,4 +111,6 @@ Partial Class FormDynamicsManager
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents lblStatus As Label
+    Friend WithEvents chkDynamics As CheckBox
 End Class

@@ -612,6 +612,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_AnalogGauge.en.resx">
+      <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_AnalogGauge.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>
@@ -632,6 +635,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.de.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_DigitalGauge.en.resx">
+      <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_DigitalGauge.resx">
       <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
@@ -668,6 +674,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.de.resx">
       <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_LevelGauge.en.resx">
+      <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_LevelGauge.resx">
       <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>

@@ -1589,7 +1589,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Case ObjectType.DigitalGauge
 
-                Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 70, 40)
+                Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 40, 20)
                 myGobj.Tag = "DG-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj

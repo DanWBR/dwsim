@@ -470,6 +470,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Ativar.
+        '''</summary>
+        Friend Shared ReadOnly Property Activate() As String
+            Get
+                Return ResourceManager.GetString("Activate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Coeficientes de Atividade.
         '''</summary>
         Friend Shared ReadOnly Property ActivityCoefficients() As String
@@ -4178,6 +4187,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Desativar.
+        '''</summary>
+        Friend Shared ReadOnly Property Deactivate() As String
+            Get
+                Return ResourceManager.GetString("Deactivate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Depurando objeto.
         '''</summary>
         Friend Shared ReadOnly Property Debugging() As String
@@ -4947,6 +4965,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property DWSIMUtilitriosPonto() As String
             Get
                 Return ResourceManager.GetString("DWSIMUtilitriosPonto", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O Modo Dinâmico está desativado..
+        '''</summary>
+        Friend Shared ReadOnly Property DynDisabled() As String
+            Get
+                Return ResourceManager.GetString("DynDisabled", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O Modo Dinâmico está ativado..
+        '''</summary>
+        Friend Shared ReadOnly Property DynEnabled() As String
+            Get
+                Return ResourceManager.GetString("DynEnabled", resourceCulture)
             End Get
         End Property
         

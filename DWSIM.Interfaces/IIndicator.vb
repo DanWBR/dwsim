@@ -4,7 +4,7 @@
 
     Property MaximumValue As Double
 
-    Property SelectedObject As ISimulationObject
+    Property SelectedObjectID As String
 
     Property SelectedProperty As String
 
