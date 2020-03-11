@@ -73,6 +73,7 @@ Public Class FormFlowsheet
     Public FormMatList As New MaterialStreamPanel
     Public FormSpreadsheet As New FormNewSpreadsheet
     Public FormCharts As New FormCharts
+    Public FormDynamics As New FormDynamicsManager
 
     Public FormProps As New frmProps
 
@@ -248,12 +249,14 @@ Public Class FormFlowsheet
             FormWatch.DockPanel = Nothing
             FormSurface.DockPanel = Nothing
             FormCharts.DockPanel = Nothing
+            FormDynamics.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
 
             FormLog.Show(dckPanel)
             FormSurface.Show(dckPanel)
+            FormDynamics.Show(FormSurface.Pane, Nothing)
             FormMatList.Show(FormSurface.Pane, Nothing)
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormCharts.Show(FormSurface.Pane, Nothing)
@@ -303,6 +306,8 @@ Public Class FormFlowsheet
                 Return Me.FormProps
             Case "DWSIM.FormCharts"
                 Return Me.FormCharts
+            Case "DWSIM.FormDynamics", "DWSIM.FormDynamicsManager"
+                Return Me.FormDynamics
         End Select
         Return Nothing
     End Function

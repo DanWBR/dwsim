@@ -1561,18 +1561,57 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.CreateConnectors(0, 0)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, uoobj)
 
+            Case ObjectType.Controller_PID
+
+                Dim myGobj As New PIDControllerGraphic(mpx, mpy, 50, 50)
+                myGobj.Tag = "PID-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "PID-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
+                Dim myObj As PIDController = New PIDController(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
+
+            Case ObjectType.LevelGauge
+
+                Dim myGobj As New LevelGaugeGraphic(mpx, mpy, 40, 70)
+                myGobj.Tag = "LG-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "LG-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
+                Dim myObj As LevelGauge = New LevelGauge(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
+
+            Case ObjectType.DigitalGauge
+
+                Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 70, 40)
+                myGobj.Tag = "DG-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "DG-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
+                Dim myObj As DigitalGauge = New DigitalGauge(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
+
             Case ObjectType.AnalogGauge
 
-                Dim myNode As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
-                myNode.Tag = "AG-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
-                If tag <> "" Then myNode.Tag = tag
-                gObj = myNode
+                Dim myGobj As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
+                myGobj.Tag = "AG-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
                 gObj.Name = "AG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
-                Dim myADJ As AnalogGauge = New AnalogGauge(gObj.Name, "")
-                myADJ.GraphicObject = myNode
-                Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
+                Dim myObj As AnalogGauge = New AnalogGauge(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
 
             Case ObjectType.OT_Adjust
 
@@ -2325,6 +2364,12 @@ Public Class FlowsheetSurface_SkiaSharp
                 tobj = ObjectType.FlowsheetUO
             Case "AnalogGauge"
                 tobj = ObjectType.AnalogGauge
+            Case "DigitalGauge"
+                tobj = ObjectType.DigitalGauge
+            Case "LevelGauge"
+                tobj = ObjectType.LevelGauge
+            Case "PIDController"
+                tobj = ObjectType.Controller_PID
         End Select
 
         AddObjectToSurface(tobj, x, y, chemsep)

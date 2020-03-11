@@ -12,4 +12,8 @@
 
     Property SelectedPropertyUnits As String
 
+    Property DecimalDigits As Integer
+
+    Property IntegralDigits As Integer
+
 End Interface

@@ -157,6 +157,7 @@ Imports System.Dynamic
 
     Property PropertyPackage As IPropertyPackage
     Property ExtraPropertiesDescriptions As ExpandoObject
+    Property ExtraPropertiesUnitTypes As ExpandoObject
     Sub SetFlowsheet(fobj As Object)
 
     Function GetFlowsheet() As IFlowsheet

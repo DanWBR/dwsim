@@ -1955,6 +1955,8 @@ Public Class FormMain
 
             form.FormCharts.Flowsheet = form
 
+            form.FormDynamics.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -1967,6 +1969,7 @@ Public Class FormMain
             form.FormSpreadsheet.Flowsheet = form
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
+            form.FormDynamics.DockPanel = Nothing
             form.FormProps.DockPanel = Nothing
             form.FormCharts.DockPanel = Nothing
 
@@ -1992,6 +1995,7 @@ Public Class FormMain
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
+                form.FormDynamics.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.FormProps.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
@@ -2476,6 +2480,8 @@ Public Class FormMain
 
             form.FormCharts.Flowsheet = form
 
+            form.FormDynamics.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2489,6 +2495,7 @@ Public Class FormMain
             form.FormCharts.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
+            form.FormDynamics.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
@@ -2508,6 +2515,7 @@ Public Class FormMain
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
+                form.FormDynamics.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)

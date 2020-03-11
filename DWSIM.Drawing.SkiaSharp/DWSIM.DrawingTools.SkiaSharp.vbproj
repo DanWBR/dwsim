@@ -133,8 +133,11 @@
     <Compile Include="GraphicObjects\Base\GraphicObject.vb" />
     <Compile Include="GraphicObjects\Base\ShapeGraphic.vb" />
     <Compile Include="GraphicObjects\Connector\ConnectorClass.vb" />
+    <Compile Include="GraphicObjects\Controllers\PIDControllerGraphic.vb" />
     <Compile Include="GraphicObjects\ExtensionBase\GraphicObjectExtension.vb" />
     <Compile Include="GraphicObjects\Indicators\AnalogGauge.vb" />
+    <Compile Include="GraphicObjects\Indicators\DigitalGauge.vb" />
+    <Compile Include="GraphicObjects\Indicators\LevelGauge.vb" />
     <Compile Include="GraphicObjects\Other\ImageGraphic.vb" />
     <Compile Include="GraphicObjects\Other\RectangleGraphic.vb" />
     <Compile Include="GraphicObjects\Shapes\AbsorptionColumn.vb" />
@@ -254,6 +257,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GraphicObjects\Dynamic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\control_panel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

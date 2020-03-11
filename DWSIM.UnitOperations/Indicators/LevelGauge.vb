@@ -20,7 +20,7 @@ Imports DWSIM.Interfaces.Enums
 
 Namespace UnitOperations
 
-    <System.Serializable()> Public Class AnalogGauge
+    <System.Serializable()> Public Class LevelGauge
 
         Inherits UnitOperations.UnitOpBaseClass
 
@@ -28,11 +28,11 @@ Namespace UnitOperations
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Indicators
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_AnalogGauge
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_LevelGauge
 
-        Public Property DecimalDigits As Integer = 2 Implements IIndicator.DecimalDigits
+        Public Property DecimalDigits As Integer = 0 Implements IIndicator.DecimalDigits
 
-        Public Property IntegralDigits As Integer = 4 Implements IIndicator.IntegralDigits
+        Public Property IntegralDigits As Integer = 3 Implements IIndicator.IntegralDigits
 
         Public Property MinimumValue As Double Implements IIndicator.MinimumValue
 
@@ -55,13 +55,13 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function CloneXML() As Object
-            Dim obj As ICustomXMLSerialization = New AnalogGauge()
+            Dim obj As ICustomXMLSerialization = New LevelGauge()
             obj.LoadData(Me.SaveData)
             Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object
-            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of AnalogGauge)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of LevelGauge)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
         Public Sub New()
@@ -103,13 +103,13 @@ Namespace UnitOperations
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
-                f = New EditingForm_AnalogGauge With {.SimObject = Me}
+                f = New EditingForm_LevelGauge With {.SimObject = Me}
                 f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                 f.Tag = "ObjectEditor"
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
-                    f = New EditingForm_AnalogGauge With {.SimObject = Me}
+                    f = New EditingForm_LevelGauge With {.SimObject = Me}
                     f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                     f.Tag = "ObjectEditor"
                     Me.FlowSheet.DisplayForm(f)
@@ -129,15 +129,15 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.analog_gauge1
+            Return My.Resources.level_gauge1
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return ResMan.GetLocalString("AG_Desc")
+            Return ResMan.GetLocalString("LG_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return ResMan.GetLocalString("AG_Name")
+            Return ResMan.GetLocalString("LG_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

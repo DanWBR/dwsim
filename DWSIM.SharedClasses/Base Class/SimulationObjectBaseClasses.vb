@@ -36,6 +36,8 @@ Namespace UnitOperations
 
         Public Property ExtraProperties As New ExpandoObject Implements ISimulationObject.ExtraProperties
 
+        Public Property ExtraPropertiesUnitTypes As New ExpandoObject Implements ISimulationObject.ExtraPropertiesUnitTypes
+
         Public Property ExtraPropertiesDescriptions As New ExpandoObject Implements ISimulationObject.ExtraPropertiesDescriptions
 
         Public Overridable Property Visible As Boolean = True
@@ -600,6 +602,24 @@ Namespace UnitOperations
                 Next
             End If
 
+            ExtraPropertiesUnitTypes = New ExpandoObject
+
+            Dim xel_ddt = (From xel2 As XElement In data Select xel2 Where xel2.Name = "DynamicPropertiesUnitTypes")
+
+            If Not xel_ddt Is Nothing Then
+                Dim dataDyn As List(Of XElement) = xel_ddt.Elements.ToList
+                For Each xel As XElement In dataDyn
+                    Try
+                        Dim propname = xel.Element("Name").Value
+                        Dim proptype = xel.Element("PropertyType").Value
+                        Dim ptype As Type = Type.GetType(proptype)
+                        Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                        DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))(propname) = propval
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
             Dim xel_u = (From xel2 As XElement In data Select xel2 Where xel2.Name = "AttachedUtilities")
 
             If Not xel_u Is Nothing Then
@@ -649,6 +669,17 @@ Namespace UnitOperations
                 .Add(New XElement("DynamicPropertiesDescriptions"))
                 Dim extrapropsdesc = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
                 For Each item In extrapropsdesc
+                    Try
+                        .Item(.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
+                                                                               New XElement("PropertyType", item.Value.GetType.ToString),
+                                                                               New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
+                    Catch ex As Exception
+                    End Try
+                Next
+
+                .Add(New XElement("DynamicPropertiesUnitTypes"))
+                Dim extrapropsunits = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+                For Each item In extrapropsunits
                     Try
                         .Item(.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
                                                                                New XElement("PropertyType", item.Value.GetType.ToString),

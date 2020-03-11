@@ -188,6 +188,7 @@
   <ItemGroup>
     <Compile Include="Base Classes\CapeOpen.vb" />
     <Compile Include="Base Classes\UnitOperations.vb" />
+    <Compile Include="Controllers\PIDController.vb" />
     <Compile Include="Databases\PumpDatabase.vb" />
     <Compile Include="Editing Forms\EditingForm_AnalogGauge.Designer.vb">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
@@ -199,6 +200,12 @@
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_DigitalGauge.Designer.vb">
+      <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_DigitalGauge.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_Filter.Designer.vb">
@@ -217,6 +224,18 @@
       <DependentUpon>EditingForm_Column.vb</DependentUpon>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_Column.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_LevelGauge.Designer.vb">
+      <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_LevelGauge.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_PIDController.Designer.vb">
+      <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_PIDController.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_ShortcutColumn.Designer.vb">
@@ -503,6 +522,8 @@
     <Compile Include="Extenders\ScintillaExtender.vb" />
     <Compile Include="Extenders\StreamListExtender.vb" />
     <Compile Include="Indicators\AnalogGauge.vb" />
+    <Compile Include="Indicators\DigitalGauge.vb" />
+    <Compile Include="Indicators\LevelGauge.vb" />
     <Compile Include="Languages\Strings.de.Designer.vb">
       <DependentUpon>Strings.de.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -612,6 +633,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.de.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_DigitalGauge.resx">
+      <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.de.resx">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </EmbeddedResource>
@@ -645,6 +669,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.de.resx">
       <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_LevelGauge.resx">
+      <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.de.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
@@ -653,6 +680,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.es.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_PIDController.resx">
+      <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.de.resx">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
@@ -1561,9 +1591,7 @@
   <ItemGroup>
     <None Include="Resources\icons8-spy_male.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Assets\Icons\analog_gauge.png" />
   </ItemGroup>

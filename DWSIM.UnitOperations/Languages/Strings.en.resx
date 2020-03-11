@@ -195,6 +195,12 @@
   <data name="CSTR_Name" xml:space="preserve">
     <value>Continuous Stirred Tank Reactor (CSTR)</value>
   </data>
+  <data name="DG_Desc" xml:space="preserve">
+    <value>Digital Gauge Display</value>
+  </data>
+  <data name="DG_Name" xml:space="preserve">
+    <value>Digital Gauge</value>
+  </data>
   <data name="EQUIL_Desc" xml:space="preserve">
     <value>Supports equilibrium constant-defined reactions</value>
   </data>
@@ -261,6 +267,12 @@
   <data name="IPUO_Name" xml:space="preserve">
     <value>Python Script</value>
   </data>
+  <data name="LG_Desc" xml:space="preserve">
+    <value>Level Gauge</value>
+  </data>
+  <data name="LG_Name" xml:space="preserve">
+    <value>Level Gauge</value>
+  </data>
   <data name="MIX_Desc" xml:space="preserve">
     <value>Mixes multiple Material Streams into a single one</value>
   </data>
@@ -284,6 +296,12 @@
   </data>
   <data name="PFR_Name" xml:space="preserve">
     <value>Plug-Flow Reactor (PFR)</value>
+  </data>
+  <data name="PID_Desc" xml:space="preserve">
+    <value>PID Controller</value>
+  </data>
+  <data name="PID_Name" xml:space="preserve">
+    <value>PID Controller</value>
   </data>
   <data name="PIPE_Desc" xml:space="preserve">
     <value>Defines a piping segment for pressure drop calculations</value>

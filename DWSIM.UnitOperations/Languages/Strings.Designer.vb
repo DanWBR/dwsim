@@ -299,6 +299,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Display Digital.
+        '''</summary>
+        Friend Shared ReadOnly Property DG_Desc() As String
+            Get
+                Return ResourceManager.GetString("DG_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Display Digital.
+        '''</summary>
+        Friend Shared ReadOnly Property DG_Name() As String
+            Get
+                Return ResourceManager.GetString("DG_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Suporta reações definidas por constantes de equilíbrio.
         '''</summary>
         Friend Shared ReadOnly Property EQUIL_Desc() As String
@@ -497,6 +515,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Medidor de Nível.
+        '''</summary>
+        Friend Shared ReadOnly Property LG_Desc() As String
+            Get
+                Return ResourceManager.GetString("LG_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Medidor de Nível.
+        '''</summary>
+        Friend Shared ReadOnly Property LG_Name() As String
+            Get
+                Return ResourceManager.GetString("LG_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Mistura múltiplas Correntes de Matéria em uma.
         '''</summary>
         Friend Shared ReadOnly Property MIX_Desc() As String
@@ -565,6 +601,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PFR_Name() As String
             Get
                 Return ResourceManager.GetString("PFR_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Controlador PID.
+        '''</summary>
+        Friend Shared ReadOnly Property PID_Desc() As String
+            Get
+                Return ResourceManager.GetString("PID_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Controlador PID.
+        '''</summary>
+        Friend Shared ReadOnly Property PID_Name() As String
+            Get
+                Return ResourceManager.GetString("PID_Name", resourceCulture)
             End Get
         End Property
         

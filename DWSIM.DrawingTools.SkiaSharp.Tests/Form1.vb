@@ -14,93 +14,53 @@ Public Class Form1
 
         canvas.Clear(SKColors.White)
 
-        Dim w = 100.0
-        Dim h = 100.0
+        Dim w = 20
+        Dim h = 70
 
         Dim x = 100.0
         Dim y = 100.0
 
-        Dim center = New SKPoint(x + w / 2, y + h / 2)
+        Dim origin = x + w * 0.4
 
-        Dim radius = w / 2
+        Dim minvalue = 0.0
+        Dim maxvalue = 400.0
+        Dim currentvalue = 254.0
 
-        'draw circle
-        Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 5, .IsAntialias = True}
-            canvas.DrawCircle(center.X, center.Y, radius, paint)
+        Dim minvaltext = minvalue.ToString("N0")
+        Dim maxvaltext = maxvalue.ToString("N0")
+        Dim valtext = currentvalue.ToString("N0")
+
+        Using paint2 As New SKPaint With {.Color = SKColors.LightGray, .IsStroke = False, .IsAntialias = True}
+            canvas.DrawRect(x + origin, y, w / 2, h, paint2)
         End Using
 
-        Using paint As New SKPaint With {.Color = SKColors.Green.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
-            Dim p As New SKPath()
-            p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -225, 90)
-            canvas.DrawPath(p, paint)
+        Dim currentlevel = (currentvalue - minvalue) / (maxvalue - minvalue) * h
+
+        Dim clx = x + origin + w / 2 + 6
+        Dim cly = y + (h - currentlevel)
+
+        Using paint2 As New SKPaint With {.Color = SKColors.Blue, .IsStroke = False, .IsAntialias = True}
+            canvas.DrawRect(x + origin + 2, cly + 2, w / 2 - 4, currentlevel - 4, paint2)
         End Using
 
-        Using paint As New SKPaint With {.Color = SKColors.Yellow.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
-            Dim p As New SKPath()
-            p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -135, 90)
-            canvas.DrawPath(p, paint)
+        canvas.Save()
+
+        canvas.RotateDegrees(-90, clx, cly)
+
+        Using paint2 As New SKPaint With {.Color = SKColors.Black, .IsStroke = False, .IsAntialias = True}
+            canvas.DrawTriangle(x + origin + w / 2 + 6, cly, 4, paint2)
         End Using
 
-        Using paint As New SKPaint With {.Color = SKColors.Red.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20, .IsAntialias = True}
-            Dim p As New SKPath()
-            p.AddArc(New SKRect(x + 10.0, y + 10.0, x + w - 10.0, y + h - 10.0), -45, 90)
-            canvas.DrawPath(p, paint)
-        End Using
+        canvas.Restore()
 
-        Dim needle = SKPath.ParseSvgPathData("M13.886,84.243L2.83,83.875c0,0,3.648-70.77,3.956-74.981C7.104,4.562,7.832,0,8.528,0c0.695,0,1.752,4.268,2.053,8.894C10.883,13.521,13.886,84.243,13.886,84.243z")
-        needle.AddPath(SKPath.ParseSvgPathData("M16.721,85.475c0,4.615-3.743,8.359-8.36,8.359S0,90.09,0,85.475c0-4.62,3.743-8.363,8.36-8.363S16.721,80.855,16.721,85.475z"))
-        Dim bounds As SKRect = SKRect.Empty
-        needle.GetBounds(bounds)
-        Dim sf = radius / bounds.Height * 0.9
-        needle.Transform(SKMatrix.MakeScale(sf, sf))
-        needle.GetBounds(bounds)
-        needle.Offset(center)
-        needle.Offset(-bounds.Width / 2, -bounds.Height + 5)
-
-        Dim mintick = -135.0
-        Dim maxtick = 135.0
-        Dim nstep = 10
-
-        Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 2, .IsAntialias = True}
-            For i As Integer = mintick To maxtick Step nstep
-                Dim angle = (i - 90) * Math.PI / 180
-                Dim p1 = New SKPoint(center.X + radius * Math.Cos(angle), center.Y + radius * Math.Sin(angle))
-                Dim p2 = New SKPoint(center.X + (radius - 10.0) * Math.Cos(angle), center.Y + (radius - 10.0) * Math.Sin(angle))
-                canvas.DrawLine(p1, p2, paint)
-            Next
-        End Using
-
-        Dim minvalue = -300
-        Dim maxvalue = 400
-        Dim currentvalue = -300
-
-        Dim currenttick = mintick + (currentvalue - minvalue) / (maxvalue - minvalue) * (maxtick - mintick)
-
-        needle.Transform(SKMatrix.MakeRotationDegrees(currenttick, center.X, center.Y))
-
-        Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = False, .IsAntialias = True}
-            canvas.DrawPath(needle, paint)
-        End Using
-
-        Dim valtext = currentvalue.ToString("G")
-
-        Using paint As New SKPaint With {.TextSize = 13.0, .Color = SKColors.Black, .IsAntialias = True}
-            Select Case GlobalSettings.Settings.RunningPlatform
-                Case GlobalSettings.Settings.Platform.Windows
-                    paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                Case GlobalSettings.Settings.Platform.Linux
-                    paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                Case GlobalSettings.Settings.Platform.Mac
-                    paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-            End Select
+        Using paint As New SKPaint With {.TextSize = 10.0, .Color = SKColors.Black, .IsAntialias = True}
             Dim trect As New SKRect(0, 0, 2, 2)
             paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
-            Dim tsize As New SKSize(trect.Right - trect.Left, trect.Top - trect.Bottom)
-            Dim strx As Single = (w - paint.MeasureText(valtext)) / 2
-            Dim stry As Single = h - tsize.Height - 20.0
-            canvas.DrawText(valtext, x + strx, y + stry, paint)
+            Dim stry As Single = cly + trect.Height / 2
+            canvas.DrawText(minvaltext, x + origin + w / 2 + 10, y + h, paint)
+            canvas.DrawText(maxvaltext, x + origin + w / 2 + 10, y + trect.Height / 2, paint)
+            canvas.DrawText(valtext, x + origin + w / 2 + 10, stry, paint)
         End Using
-
 
     End Sub
 

@@ -547,6 +547,12 @@
     <Compile Include="Forms\Flowsheet Components\FormCharts.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormDynamicsManager.Designer.vb">
+      <DependentUpon>FormDynamicsManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormDynamicsManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\FormNewSpreadsheet.Designer.vb">
       <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
     </Compile>
@@ -1185,6 +1191,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FormCharts.resx">
       <DependentUpon>FormCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormDynamicsManager.en.resx">
+      <DependentUpon>FormDynamicsManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormDynamicsManager.resx">
+      <DependentUpon>FormDynamicsManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FormNewSpreadsheet.en.resx">
       <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>

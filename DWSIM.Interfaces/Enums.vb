@@ -521,7 +521,7 @@ Namespace Enums.GraphicObjects
         DigitalGauge
         LevelGauge
 
-        Controller_PLC
+        Controller_PID
 
     End Enum
 
