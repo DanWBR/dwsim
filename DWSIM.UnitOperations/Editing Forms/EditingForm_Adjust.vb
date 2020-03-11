@@ -1,7 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports DWSIM.Interfaces.Enums.GraphicObjects
-Imports DWSIM.SharedClasses.UnitOperations
-Imports su = DWSIM.SharedClasses.SystemsOfUnits
+﻿Imports su = DWSIM.SharedClasses.SystemsOfUnits
 
 Public Class EditingForm_Adjust
 

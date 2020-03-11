@@ -690,6 +690,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.es.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_PIDController.en.resx">
+      <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_PIDController.resx">
       <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
     </EmbeddedResource>

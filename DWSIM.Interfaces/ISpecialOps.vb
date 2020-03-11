@@ -81,5 +81,7 @@ End Interface
     Property Name As String
     Property ID As String
     Property PropertyName As String
+    Property UnitsType As Enums.UnitOfMeasure
+    Property Units As String
 
 End Interface

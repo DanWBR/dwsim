@@ -262,6 +262,10 @@ Namespace SpecialOps.Helpers
 
         Public Property ObjectType As String = "" Implements ISpecialOpObjectInfo.Type
 
+        Public Property UnitsType As UnitOfMeasure = UnitOfMeasure.none Implements ISpecialOpObjectInfo.UnitsType
+
+        Public Property Units As String = "" Implements ISpecialOpObjectInfo.Units
+
     End Class
 
 End Namespace

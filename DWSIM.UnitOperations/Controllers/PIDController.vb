@@ -62,6 +62,11 @@ Namespace SpecialOps
         Protected m_maxVal As Nullable(Of Double) = Nothing
         Protected m_initialEstimate As Nullable(Of Double) = Nothing
 
+        Public Property Offset As Double = 0.0
+        Public Property Kp As Double = 1.0
+        Public Property Kd As Double = 0.0
+        Public Property Ki As Double = 0.0
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
             obj.LoadData(Me.SaveData)
@@ -287,6 +292,8 @@ Namespace SpecialOps
                     .Name = xel.@Name
                     .PropertyName = xel.@Property
                     .ObjectType = xel.@ObjectType
+                    .Units = xel.@PropertyUnits
+                    .UnitsType = xel.@PropertyUnitsType
                 End With
 
             End If
@@ -300,6 +307,8 @@ Namespace SpecialOps
                     .Name = xel.@Name
                     .PropertyName = xel.@Property
                     .ObjectType = xel.@ObjectType
+                    .Units = xel.@PropertyUnits
+                    .UnitsType = xel.@PropertyUnitsType
                 End With
 
             End If
@@ -313,6 +322,8 @@ Namespace SpecialOps
                     .Name = xel.@Name
                     .PropertyName = xel.@Property
                     .ObjectType = xel.@ObjectType
+                    .Units = xel.@PropertyUnits
+                    .UnitsType = xel.@PropertyUnitsType
                 End With
 
             End If
@@ -336,15 +347,21 @@ Namespace SpecialOps
                 .Add(New XElement("ManipulatedObjectData", New XAttribute("ID", m_ManipulatedObjectData.ID),
                                   New XAttribute("Name", m_ManipulatedObjectData.Name),
                                   New XAttribute("Property", m_ManipulatedObjectData.PropertyName),
-                                  New XAttribute("ObjectType", m_ManipulatedObjectData.ObjectType)))
+                                  New XAttribute("ObjectType", m_ManipulatedObjectData.ObjectType),
+                                  New XAttribute("PropertyUnitsType", m_ManipulatedObjectData.UnitsType),
+                                  New XAttribute("PropertyUnits", m_ManipulatedObjectData.Units)))
                 .Add(New XElement("ControlledObjectData", New XAttribute("ID", m_ControlledObjectData.ID),
                                   New XAttribute("Name", m_ControlledObjectData.Name),
                                   New XAttribute("Property", m_ControlledObjectData.PropertyName),
-                                  New XAttribute("ObjectType", m_ControlledObjectData.ObjectType)))
+                                  New XAttribute("ObjectType", m_ControlledObjectData.ObjectType),
+                                  New XAttribute("PropertyUnitsType", m_ManipulatedObjectData.UnitsType),
+                                  New XAttribute("PropertyUnits", m_ManipulatedObjectData.Units)))
                 .Add(New XElement("ReferencedObjectData", New XAttribute("ID", m_ReferencedObjectData.ID),
                                   New XAttribute("Name", m_ReferencedObjectData.Name),
                                   New XAttribute("Property", m_ReferencedObjectData.PropertyName),
-                                  New XAttribute("ObjectType", m_ReferencedObjectData.ObjectType)))
+                                  New XAttribute("ObjectType", m_ReferencedObjectData.ObjectType),
+                                  New XAttribute("PropertyUnitsType", m_ManipulatedObjectData.UnitsType),
+                                  New XAttribute("PropertyUnits", m_ManipulatedObjectData.Units)))
             End With
 
             Return elements
