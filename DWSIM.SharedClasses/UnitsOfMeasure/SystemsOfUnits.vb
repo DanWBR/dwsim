@@ -171,6 +171,8 @@ Namespace SystemsOfUnits
 
         Public Property diffusivity As String Implements IUnitsOfMeasure.diffusivity
 
+        Public Property conductance As String = "[kg/s]/Pa" Implements IUnitsOfMeasure.conductance
+
         Public Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String) Implements IUnitsOfMeasure.GetUnitSet
 
             Dim units As New List(Of String)
@@ -256,6 +258,8 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"})
                 Case Enums.UnitOfMeasure.reac_rate_heterog
                     units.AddRange(New String() {"kmol/[kg.s]", "kmol/[kg.min.]", "kmol/[kg.h]", "mol/[kg.s]", "mol/[kg.min.]", "mol/[kg.h]", "lbmol/[lbm.h]"})
+                Case Enums.UnitOfMeasure.jouleThomsonCoefficient
+                    units.AddRange(New String() {"[kg/s]/Pa", "[lbm/h]/psi", "[kg/h]/atm", "[kg/h]/bar", "[kg/h]/[kgf/cm2]"})
             End Select
 
             Return units
@@ -345,6 +349,8 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.compressibility
                 Case "kmol/[kg.s]", "kmol/[kg.min.]", "kmol/[kg.h]", "mol/[kg.s]", "mol/[kg.min.]", "mol/[kg.h]", "lbmol/[lbm.h]"
                     Return Enums.UnitOfMeasure.reac_rate_heterog
+                Case "[kg/s]/Pa", "[lbm/h]/psi", "[kg/h]/atm", "[kg/h]/bar", "[kg/h]/[kgf/cm2]"
+                    Return Enums.UnitOfMeasure.conductance
                 Case Else
                     Return Enums.UnitOfMeasure.none
             End Select
@@ -367,6 +373,7 @@ Namespace SystemsOfUnits
                 .diffusivity = "m2/s"
                 .accel = "m2/s"
                 .area = "m2"
+                .conductance = "[kg/s]/Pa"
                 .diameter = "mm"
                 .distance = "m"
                 .force = "N"
@@ -450,7 +457,7 @@ Namespace SystemsOfUnits
                 .Name = "C1"
                 .jouleThomsonCoefficient = "K/Pa"
                 .diffusivity = "m2/s"
-
+                .conductance = "[kg/s]/Pa"
                 .accel = "m2/s"
                 .area = "m2"
                 .diameter = "mm"
@@ -535,7 +542,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C2"
                 .jouleThomsonCoefficient = "K/Pa"
-
+                .conductance = "[kg/s]/Pa"
                 .diffusivity = "m2/s"
                 .accel = "m2/s"
                 .area = "m2"
@@ -621,7 +628,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C3"
                 .jouleThomsonCoefficient = "K/Pa"
-
+                .conductance = "[kg/s]/Pa"
                 .diffusivity = "m2/s"
                 .accel = "m/s2"
                 .area = "m2"
@@ -707,7 +714,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C4"
                 .jouleThomsonCoefficient = "K/Pa"
-
+                .conductance = "[kg/s]/Pa"
                 .diffusivity = "m2/s"
                 .accel = "m/s2"
                 .area = "m2"
@@ -792,7 +799,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "C5"
-
+                .conductance = "[kg/s]/Pa"
                 .diffusivity = "m2/s"
                 .jouleThomsonCoefficient = "K/Pa"
                 .accel = "m/s2"
@@ -878,7 +885,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "ENG"
-
+                .conductance = "[lbm/h]/psi"
                 .diffusivity = "ft2/s"
 
                 .jouleThomsonCoefficient = "F/psi"
@@ -968,7 +975,7 @@ Namespace SystemsOfUnits
 
                 .Name = "CGS"
                 .diffusivity = "cm2/s"
-
+                .conductance = "[kg/h]/atm"
                 .jouleThomsonCoefficient = "C/atm"
                 .accel = "cm/s2"
                 .area = "cm2"
@@ -1066,6 +1073,17 @@ Namespace SystemsOfUnits
 
             Select Case units
 
+                Case "[kg/s]/Pa"
+                    Return value
+                Case "[lbm/h]/psi"
+                    Return value / 7936.64 * 0.000145038
+                Case "[kg/h]/atm"
+                    Return value / 3600.0 / 101325.0
+                Case "[kg/h]/bar"
+                    Return value / 3600.0 / 10000.0
+                Case "[kg/h]/[kgf/cm2]"
+                    Return value / 3600.0 * 1.033 / 101325
+
                 Case "K/Pa"
                     Return value
                 Case "C/atm"
@@ -1144,7 +1162,7 @@ Namespace SystemsOfUnits
                     Return value / 60 / 60 / 24
                 Case "kg/min"
                     Return value / 60
-                Case "lb/h"
+                Case "lb/h", "lbm/h"
                     Return value / 7936.64
                 Case "lb/min"
                     Return value / 132.277
@@ -1505,6 +1523,17 @@ Namespace SystemsOfUnits
         Public Shared Function ConvertFromSI(ByVal units As String, ByVal value As Double) As Double
 
             Select Case units
+
+                Case "[kg/s]/Pa"
+                    Return value
+                Case "[lbm/h]/psi"
+                    Return value * 7936.64 / 0.000145038
+                Case "[kg/h]/atm"
+                    Return value * 3600.0 * 101325.0
+                Case "[kg/h]/bar"
+                    Return value * 3600.0 * 10000.0
+                Case "[kg/h]/[kgf/cm2]"
+                    Return value * 3600.0 / 1.033 * 101325
 
                 Case "K/Pa"
                     Return value

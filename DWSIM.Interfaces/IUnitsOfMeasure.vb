@@ -32,6 +32,8 @@ Imports DWSIM.Interfaces.Enums
 
     Property area As String
 
+    Property conductance As String
+
     Property distance As String
 
     Property time As String

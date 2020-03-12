@@ -139,6 +139,14 @@ Namespace GraphicObjects.Shapes
 
             canvas.DrawPath(gp, myPen)
 
+            If Owner?.GetFlowsheet.DynamicMode Then
+
+                'draw dyn spec
+
+                DrawDynSpec(canvas, Owner.DynamicsSpec)
+
+            End If
+
         End Sub
 
     End Class

@@ -58,6 +58,42 @@ Namespace GraphicObjects
 
         End Sub
 
+        Public Overridable Sub DrawDynSpec(ByVal g As SKCanvas, ByVal DynSpec As Enums.Dynamics.DynamicsSpecType)
+
+            Dim tpaint As New SKPaint()
+
+            Dim text As String = "P"
+
+            If DynSpec = Enums.Dynamics.DynamicsSpecType.Flow Then text = "F"
+
+            With tpaint
+                .TextSize = FontSize
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Color = If(DynSpec = Enums.Dynamics.DynamicsSpecType.Flow, SKColors.Brown, SKColors.Blue)
+                .IsStroke = False
+                .Typeface = DefaultTypeFace
+            End With
+
+            Dim trect As New SKRect(0, 0, 2, 2)
+            tpaint.GetTextPath(text, 0, 0).GetBounds(trect)
+            Dim tsize As New SKSize(trect.Right - trect.Left, trect.Bottom - trect.Top)
+
+            Dim strx As Single = (Me.Width - tpaint.MeasureText(text)) / 2
+
+            Dim bpaint As New SKPaint()
+
+            With bpaint
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .IsStroke = False
+                .Color = SKColors.LightGray
+            End With
+
+            g.DrawRoundRect(X - 3 + strx, Y - 8 - tsize.Height, tsize.Width + 6, tsize.Height + 6, 2, 2, bpaint)
+            g.DrawText(text, X + strx, Y - 5, tpaint)
+
+        End Sub
+
+
         Public Overridable Sub DrawTag(ByVal g As SKCanvas)
             Dim tpaint As New SKPaint()
 

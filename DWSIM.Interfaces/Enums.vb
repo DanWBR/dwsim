@@ -175,6 +175,7 @@ Namespace Enums
         volumetricFlow
         diffusivity
         none
+        conductance
 
     End Enum
 
