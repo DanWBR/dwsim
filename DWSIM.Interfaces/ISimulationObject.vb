@@ -17,6 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Dynamic
+Imports DWSIM.Interfaces.Enums
 ''' <summary>
 ''' This interface defines the basic properties of Simulation Objects (Unit Operations, Material Streams and Energy Streams)
 ''' </summary>
@@ -72,6 +73,7 @@ Imports System.Dynamic
     ''' <returns>Property value.</returns>
     ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyValue(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As Object
+    Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure, punits As String)
 
     ''' <summary>
     ''' Gets the units of a property.
@@ -81,6 +83,7 @@ Imports System.Dynamic
     ''' <returns>Property units.</returns>
     ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As String
+    Sub RemoveDynamicProperty(pname As String)
 
     ''' <summary>
     ''' Sets the value of a property.
@@ -158,6 +161,7 @@ Imports System.Dynamic
     Property PropertyPackage As IPropertyPackage
     Property ExtraPropertiesDescriptions As ExpandoObject
     Property ExtraPropertiesUnitTypes As ExpandoObject
+    Property ExtraPropertiesUnits As ExpandoObject
     Sub SetFlowsheet(fobj As Object)
 
     Function GetFlowsheet() As IFlowsheet
