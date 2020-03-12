@@ -198,7 +198,7 @@ Partial Class WatchPanel
         'WatchPanel
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CloseButton = False
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.dgv)

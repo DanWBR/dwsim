@@ -547,6 +547,12 @@
     <Compile Include="Forms\Flowsheet Components\FormCharts.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormDynamicsIntegratorControl.Designer.vb">
+      <DependentUpon>FormDynamicsIntegratorControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\FormDynamicsIntegratorControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\FormDynamicsManager.Designer.vb">
       <DependentUpon>FormDynamicsManager.vb</DependentUpon>
     </Compile>
@@ -1191,6 +1197,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FormCharts.resx">
       <DependentUpon>FormCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormDynamicsIntegratorControl.en.resx">
+      <DependentUpon>FormDynamicsIntegratorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FormDynamicsIntegratorControl.resx">
+      <DependentUpon>FormDynamicsIntegratorControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FormDynamicsManager.en.resx">
       <DependentUpon>FormDynamicsManager.vb</DependentUpon>
@@ -2978,6 +2990,9 @@
     <None Include="Resources\icons8-module.png" />
     <None Include="Resources\icons8-test_tube.png" />
     <None Include="Resources\Patreon_Navy.jpg" />
+    <None Include="Resources\icons8-pause.png" />
+    <None Include="Resources\icons8-play.png" />
+    <None Include="Resources\icons8-stop.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

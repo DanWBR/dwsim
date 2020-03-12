@@ -127,6 +127,16 @@ Namespace UnitOperations
 
         Property OutletTemperature As Double
 
+        Public Overrides Sub CreateDynamicProperties()
+
+            AddDynamicProperty("Actuator Delay", "Actuator Delay Description", 0, UnitOfMeasure.time)
+
+        End Sub
+
+        Public Overrides Sub RunDynamicModel()
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()

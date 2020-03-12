@@ -24,6 +24,7 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String)
 
+    Function GetCurrentUnits(measureID As Enums.UnitOfMeasure) As String
     Property Name As String
 
     Property mass As String

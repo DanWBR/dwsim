@@ -74,6 +74,7 @@ Public Class FormFlowsheet
     Public FormSpreadsheet As New FormNewSpreadsheet
     Public FormCharts As New FormCharts
     Public FormDynamics As New FormDynamicsManager
+    Public FormIntegratorControls As New FormDynamicsIntegratorControl
 
     Public FormProps As New frmProps
 
@@ -155,6 +156,8 @@ Public Class FormFlowsheet
 
         FormCharts.Flowsheet = Me
         FormSpreadsheet.Flowsheet = Me
+        FormDynamics.Flowsheet = Me
+        FormIntegratorControls.Flowsheet = Me
 
         Me.MdiParent = FormMain
 
@@ -250,6 +253,7 @@ Public Class FormFlowsheet
             FormSurface.DockPanel = Nothing
             FormCharts.DockPanel = Nothing
             FormDynamics.DockPanel = Nothing
+            FormIntegratorControls.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -261,6 +265,7 @@ Public Class FormFlowsheet
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormCharts.Show(FormSurface.Pane, Nothing)
             FormWatch.Show(dckPanel)
+            FormIntegratorControls.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
 
             FormSurface.Activate()
@@ -308,6 +313,8 @@ Public Class FormFlowsheet
                 Return Me.FormCharts
             Case "DWSIM.FormDynamics", "DWSIM.FormDynamicsManager"
                 Return Me.FormDynamics
+            Case "DWSIM.FormDynamicsIntegratorControl"
+                Return Me.FormIntegratorControls
         End Select
         Return Nothing
     End Function

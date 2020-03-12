@@ -33,9 +33,9 @@ Imports DWSIM.Interfaces.Enums
 
     Property ExtraPropertiesUnitTypes As ExpandoObject
 
-    Property ExtraPropertiesUnits As ExpandoObject
-
     Property AttachedUtilities As List(Of IAttachedUtility)
+
+    Sub CreateDynamicProperties()
 
     Sub DisplayEditForm()
 
@@ -87,7 +87,8 @@ Imports DWSIM.Interfaces.Enums
     ''' <returns>Property value.</returns>
     ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyValue(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As Object
-    Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure, punits As String)
+
+    Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure)
 
     ''' <summary>
     ''' Gets the units of a property.

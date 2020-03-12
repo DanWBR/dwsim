@@ -118,52 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+  <data name="lblStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 82</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Spec Type</value>
+  <data name="lblFinish.Location" type="System.Drawing.Point, System.Drawing">
+    <value>752, 82</value>
   </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 17</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 67</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Specification</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Scenario</value>
   </data>
-  <data name="rbFlow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 29</value>
+  <data name="cbScenario.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 12</value>
   </data>
-  <data name="rbFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 17</value>
+  <data name="TrackBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 44</value>
   </data>
-  <data name="rbFlow.Text" xml:space="preserve">
-    <value>Flow</value>
+  <data name="lblCurrent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 82</value>
   </data>
-  <data name="rbPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 29</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
-  <data name="rbPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 17</value>
-  </data>
-  <data name="rbPressure.Text" xml:space="preserve">
-    <value>Pressure</value>
-  </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 79</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>299, 200</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Properties</value>
-  </data>
-  <data name="PropertiesLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 181</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>319, 285</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Integrator Controls</value>
   </data>
 </root>

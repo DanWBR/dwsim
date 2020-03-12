@@ -127,14 +127,10 @@
     <value>Control Manager</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
-    <value>Runner</value>
+    <value>Integrator</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Results</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
@@ -143,12 +139,11 @@
   <data name="lblStatus.Text" xml:space="preserve">
     <value>Dynamic Mode is currently disabled.</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="chkDynamics.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
+  <data name="chkDynamics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 6</value>
   </data>
   <data name="chkDynamics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 24</value>
+    <value>110, 35</value>
   </data>
   <data name="chkDynamics.Text" xml:space="preserve">
     <value>Activate</value>

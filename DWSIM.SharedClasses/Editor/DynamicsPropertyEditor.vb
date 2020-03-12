@@ -29,18 +29,22 @@
         Dim col1 = DirectCast(SimObject.ExtraProperties, IDictionary(Of String, Object))
         Dim col2 = DirectCast(SimObject.ExtraPropertiesDescriptions, IDictionary(Of String, Object))
         Dim col3 = DirectCast(SimObject.ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
-        Dim col4 = DirectCast(SimObject.ExtraPropertiesUnits, IDictionary(Of String, Object))
 
         PropertiesLayout.Controls.Clear()
 
+        PropertiesLayout.SuspendLayout()
+
         For Each p In col1
 
-            If col2.ContainsKey(p.Key) And col3.ContainsKey(p.Key) And col4.ContainsKey(p.Key) Then
+            If col2.ContainsKey(p.Key) And col3.ContainsKey(p.Key) Then
+
+                Dim utype = DirectCast(col3(p.Key), Enums.UnitOfMeasure)
+                Dim unitsstring = units.GetCurrentUnits(utype)
 
                 Dim l As New Label With {.Text = p.Key, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
                 Dim tb As New TextBox With {.Text = p.Value.ToString, .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
-                Dim l2 As New Label With {.Text = col4(p.Key).ToString, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
-                Dim l3 As New Label With {.Text = col2(p.Key).ToString, .Dock = DockStyle.Fill, .AutoSize = False}
+                Dim l2 As New Label With {.Text = unitsstring, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
+                Dim l3 As New Label With {.Text = col2(p.Key).ToString, .Dock = DockStyle.Fill, .AutoSize = False, .Height = 46 * GlobalSettings.Settings.DpiScale, .TextAlign = Drawing.ContentAlignment.TopLeft}
 
                 AddHandler tb.TextChanged, Sub(s, e)
                                                If Double.TryParse(tb.Text, New Double) Then
@@ -59,9 +63,9 @@
                                          End If
                                      End Sub
 
-                Dim tl As New TableLayoutPanel
+                Dim tl As New TableLayoutPanel With {.Width = PropertiesLayout.Width - 10, .Height = 24 * GlobalSettings.Settings.DpiScale}
                 tl.RowStyles.Clear()
-                tl.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+                tl.RowStyles.Add(New RowStyle(SizeType.Percent, 1.0))
                 tl.ColumnStyles.Clear()
                 tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.5))
                 tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.4))
@@ -70,11 +74,12 @@
                 tl.Controls.Add(tb, 1, 0)
                 tl.Controls.Add(l2, 2, 0)
 
-                Dim tl2 As New TableLayoutPanel
+                Dim tl2 As New TableLayoutPanel With {.Width = PropertiesLayout.Width - 10, .Height = 48 * GlobalSettings.Settings.DpiScale}
                 tl2.RowStyles.Clear()
-                tl2.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+                tl2.RowStyles.Add(New RowStyle(SizeType.Percent, 1.0))
                 tl2.ColumnStyles.Clear()
                 tl2.ColumnStyles.Add(New ColumnStyle(SizeType.AutoSize))
+                tl2.Controls.Add(l3, 0, 0)
 
                 PropertiesLayout.Controls.Add(tl)
                 PropertiesLayout.Controls.Add(tl2)
@@ -82,6 +87,8 @@
             End If
 
         Next
+
+        PropertiesLayout.ResumeLayout()
 
     End Sub
 

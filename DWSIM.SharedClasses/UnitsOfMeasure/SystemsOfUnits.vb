@@ -258,8 +258,6 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"})
                 Case Enums.UnitOfMeasure.reac_rate_heterog
                     units.AddRange(New String() {"kmol/[kg.s]", "kmol/[kg.min.]", "kmol/[kg.h]", "mol/[kg.s]", "mol/[kg.min.]", "mol/[kg.h]", "lbmol/[lbm.h]"})
-                Case Enums.UnitOfMeasure.jouleThomsonCoefficient
-                    units.AddRange(New String() {"[kg/s]/Pa", "[lbm/h]/psi", "[kg/h]/atm", "[kg/h]/bar", "[kg/h]/[kgf/cm2]"})
                 Case Enums.UnitOfMeasure.conductance
                     units.AddRange(New String() {"[kg/s]/Pa", "[lbm/h]/psi", "[kg/h]/atm", "[kg/h]/bar", "[kg/h]/[kgf/cm2]"})
             End Select
@@ -359,6 +357,98 @@ Namespace SystemsOfUnits
 
         End Function
 
+        Public Function GetCurrentUnits(measureID As Enums.UnitOfMeasure) As String Implements IUnitsOfMeasure.GetCurrentUnits
+
+            Dim units As New List(Of String)
+
+            Select Case measureID
+                Case Enums.UnitOfMeasure.temperature
+                    Return temperature
+                Case Enums.UnitOfMeasure.pressure
+                    Return pressure
+                Case Enums.UnitOfMeasure.massflow
+                    Return massflow
+                Case Enums.UnitOfMeasure.molarflow
+                    Return molarflow
+                Case Enums.UnitOfMeasure.volumetricFlow
+                    Return volumetricFlow
+                Case Enums.UnitOfMeasure.enthalpy
+                    Return enthalpy
+                Case Enums.UnitOfMeasure.entropy
+                    Return entropy
+                Case Enums.UnitOfMeasure.molecularWeight
+                    Return molecularWeight
+                Case Enums.UnitOfMeasure.surfaceTension
+                    Return surfaceTension
+                Case Enums.UnitOfMeasure.density
+                    Return density
+                Case Enums.UnitOfMeasure.heatCapacityCp
+                    Return heatCapacityCp
+                Case Enums.UnitOfMeasure.thermalConductivity
+                    Return thermalConductivity
+                Case Enums.UnitOfMeasure.cinematic_viscosity, Enums.UnitOfMeasure.diffusivity
+                    Return cinematic_viscosity
+                Case Enums.UnitOfMeasure.viscosity
+                    Return viscosity
+                Case Enums.UnitOfMeasure.deltaP
+                    Return deltaP
+                Case Enums.UnitOfMeasure.deltaT
+                    Return deltaT
+                Case Enums.UnitOfMeasure.distance
+                    Return distance
+                Case Enums.UnitOfMeasure.heatflow
+                    Return heatflow
+                Case Enums.UnitOfMeasure.time
+                    Return time
+                Case Enums.UnitOfMeasure.volume
+                    Return volume
+                Case Enums.UnitOfMeasure.molar_volume
+                    Return molar_volume
+                Case Enums.UnitOfMeasure.area
+                    Return area
+                Case Enums.UnitOfMeasure.diameter
+                    Return diameter
+                Case Enums.UnitOfMeasure.force
+                    Return force
+                Case Enums.UnitOfMeasure.heat_transf_coeff
+                    Return heat_transf_coeff
+                Case Enums.UnitOfMeasure.accel
+                    Return accel
+                Case Enums.UnitOfMeasure.spec_vol
+                    Return spec_vol
+                Case Enums.UnitOfMeasure.molar_conc
+                    Return molar_conc
+                Case Enums.UnitOfMeasure.mass_conc
+                    Return mass_conc
+                Case Enums.UnitOfMeasure.reac_rate
+                    Return reac_rate
+                Case Enums.UnitOfMeasure.molar_enthalpy
+                    Return molar_enthalpy
+                Case Enums.UnitOfMeasure.molar_entropy
+                    Return molar_entropy
+                Case Enums.UnitOfMeasure.velocity, Enums.UnitOfMeasure.speedOfSound
+                    Return velocity
+                Case Enums.UnitOfMeasure.foulingfactor
+                    Return foulingfactor
+                Case Enums.UnitOfMeasure.cakeresistance
+                    Return cakeresistance
+                Case Enums.UnitOfMeasure.mediumresistance
+                    Return mediumresistance
+                Case Enums.UnitOfMeasure.mass
+                    Return mass
+                Case Enums.UnitOfMeasure.jouleThomsonCoefficient
+                    Return jouleThomsonCoefficient
+                Case Enums.UnitOfMeasure.compressibility
+                    Return compressibility
+                Case Enums.UnitOfMeasure.reac_rate_heterog
+                    Return reac_rate_heterog
+                Case Enums.UnitOfMeasure.conductance
+                    Return conductance
+                Case Else
+                    Return ""
+            End Select
+
+        End Function
 
     End Class
 
