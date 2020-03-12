@@ -18,6 +18,15 @@
 
 Namespace Enums
 
+    Public Class Dynamics
+
+        Public Enum DynamicsSpecType
+            Pressure = 0
+            Flow = 1
+        End Enum
+
+    End Class
+
     Public Class Helpers
         Public Shared Function GetEnumType(typename As String) As Type
 

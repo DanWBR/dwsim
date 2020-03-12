@@ -97,6 +97,7 @@ Public Class FlowsheetSurfaceControl
                     For Each obj In FlowsheetObject.SimulationObjects.Values
                         If Not obj.GraphicObject Is FlowsheetSurface.SelectedObject Then
                             obj.CloseEditForm()
+                            If FlowsheetObject.DynamicMode Then obj.CloseDynamicsEditForm()
                         End If
                     Next
                 End If
@@ -107,9 +108,13 @@ Public Class FlowsheetSurfaceControl
                         If Not My.Settings.EnableMultipleObjectEditors Then
                             For Each obj In FlowsheetObject.SimulationObjects.Values
                                 obj.CloseEditForm()
+                                If FlowsheetObject.DynamicMode Then obj.CloseDynamicsEditForm()
                             Next
                         End If
                         FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
+                        If FlowsheetObject.DynamicMode Then
+                            FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
+                        End If
                         EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
                     End If
 

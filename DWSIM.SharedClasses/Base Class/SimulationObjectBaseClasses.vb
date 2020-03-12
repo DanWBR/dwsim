@@ -34,6 +34,10 @@ Namespace UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
+        Public Property DynamicsSpec As Enums.Dynamics.DynamicsSpecType = Dynamics.DynamicsSpecType.Pressure Implements ISimulationObject.DynamicsSpec
+
+        Public Property DynamicsOnly As Boolean = False Implements ISimulationObject.DynamicsOnly
+
         Public Property ExtraProperties As New ExpandoObject Implements ISimulationObject.ExtraProperties
 
         Public Property ExtraPropertiesUnitTypes As New ExpandoObject Implements ISimulationObject.ExtraPropertiesUnitTypes
@@ -283,6 +287,49 @@ Namespace UnitOperations
             End If
             Calculated = True
             PerformPostCalcValidation()
+        End Sub
+
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As DynamicsPropertyEditor
+
+        Public Sub DisplayDynamicsEditForm() Implements ISimulationObject.DisplayDynamicsEditForm
+
+            If f Is Nothing Then
+                f = New DynamicsPropertyEditor With {.SimObject = Me}
+                f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+                f.Tag = "ObjectEditor"
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New DynamicsPropertyEditor With {.SimObject = Me}
+                    f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+                    f.Tag = "ObjectEditor"
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Public Sub UpdateDynamicsEditForm() Implements ISimulationObject.UpdateDynamicsEditForm
+
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UIThread(Sub() f.UpdateInfo())
+                End If
+            End If
+
+        End Sub
+
+        Public Sub CloseDynamicsEditForm() Implements ISimulationObject.CloseDynamicsEditForm
+
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
+
         End Sub
 
         Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm

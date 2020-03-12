@@ -379,6 +379,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         myobj.GraphicObject.Calculated = True
                         myobj.LastUpdated = Date.Now
                         myobj.UpdateEditForm()
+                        If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                     End If
                 Catch ex As AggregateException
                     myobj.ErrorMessage = ""
@@ -483,6 +484,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     myobj.GraphicObject.Calculated = True
                     myobj.LastUpdated = Date.Now
                     myobj.UpdateEditForm()
+                    If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                 End If
             Catch ex As AggregateException
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
@@ -589,6 +591,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                              myobj.GraphicObject.Calculated = True
                                                              myobj.LastUpdated = Date.Now
                                                              myobj.UpdateEditForm()
+                                                             If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                                                          End If
                                                      Catch ex As AggregateException
                                                          fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)

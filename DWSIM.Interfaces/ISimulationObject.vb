@@ -23,13 +23,27 @@ Imports DWSIM.Interfaces.Enums
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ISimulationObject
 
+    Property DynamicsSpec As Enums.Dynamics.DynamicsSpecType
+
+    Property DynamicsOnly As Boolean
+
     Property ExtraProperties As Dynamic.ExpandoObject
+
+    Property ExtraPropertiesDescriptions As ExpandoObject
+
+    Property ExtraPropertiesUnitTypes As ExpandoObject
+
+    Property ExtraPropertiesUnits As ExpandoObject
 
     Property AttachedUtilities As List(Of IAttachedUtility)
 
     Sub DisplayEditForm()
 
+    Sub DisplayDynamicsEditForm()
+
     Sub UpdateEditForm()
+
+    Sub UpdateDynamicsEditForm()
 
     Property PreferredFlashAlgorithmTag As String
 
@@ -159,9 +173,7 @@ Imports DWSIM.Interfaces.Enums
     Sub PerformPostCalcValidation()
 
     Property PropertyPackage As IPropertyPackage
-    Property ExtraPropertiesDescriptions As ExpandoObject
-    Property ExtraPropertiesUnitTypes As ExpandoObject
-    Property ExtraPropertiesUnits As ExpandoObject
+
     Sub SetFlowsheet(fobj As Object)
 
     Function GetFlowsheet() As IFlowsheet
@@ -171,6 +183,8 @@ Imports DWSIM.Interfaces.Enums
     Function GetDisplayName() As String
 
     Function GetDisplayDescription() As String
+
+    Sub CloseDynamicsEditForm()
 
     Sub CloseEditForm()
 

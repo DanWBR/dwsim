@@ -4969,6 +4969,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Propriedades p/ Modo Dinâmico.
+        '''</summary>
+        Friend Shared ReadOnly Property DynamicProperties() As String
+            Get
+                Return ResourceManager.GetString("DynamicProperties", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to O Modo Dinâmico está desativado..
         '''</summary>
         Friend Shared ReadOnly Property DynDisabled() As String

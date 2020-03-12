@@ -130,6 +130,8 @@ Public Class FlowsheetSurface_SkiaSharp
         Me.MergeStreamsToolStripMenuItem.Visible = False
         Me.SplitAndInsertRecycleMenuItem.Visible = False
 
+        Me.SplitAndInsertValveTSMI.Visible = False
+
         Me.AtivadoToolStripMenuItem.Checked = FlowsheetSurface.SelectedObject.Active
 
         If AtivadoToolStripMenuItem.Checked Then
@@ -233,6 +235,8 @@ Public Class FlowsheetSurface_SkiaSharp
                 End If
 
                 If FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
+
+                    Me.SplitAndInsertValveTSMI.Visible = True
 
                     Dim cancopy As Boolean
 
@@ -2947,6 +2951,80 @@ Public Class FlowsheetSurface_SkiaSharp
             Catch ex As Exception
             End Try
         End If
+
+    End Sub
+
+    Private Sub SplitAndInsertValveTSMI_Click(sender As Object, e As EventArgs) Handles SplitAndInsertValveTSMI.Click
+
+        Try
+
+            My.Application.PushUndoRedoAction = False
+
+            Dim stream = FlowsheetSurface.SelectedObject
+            Dim newstream = CloneObject(stream)
+            newstream.CreateConnectors(1, 1)
+            newstream.Status = stream.Status
+
+            Dim istream = DirectCast(Flowsheet.SimulationObjects(stream.Name), Thermodynamics.Streams.MaterialStream)
+            Dim ostream = DirectCast(Flowsheet.SimulationObjects(newstream.Name), Thermodynamics.Streams.MaterialStream)
+
+            ostream.Phases(0).Properties.pressure = istream.Phases(0).Properties.pressure.GetValueOrDefault * 0.95
+
+            Dim x = stream.X
+            Dim y = stream.Y
+
+            Dim objfrom As GraphicObject, fromidx As Integer
+
+            If stream.InputConnectors(0).IsAttached Then
+                objfrom = stream.InputConnectors(0).AttachedConnector.AttachedFrom
+                fromidx = stream.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                Flowsheet.DisconnectObjects(objfrom, stream)
+                Flowsheet.ConnectObject(objfrom, newstream, fromidx)
+            End If
+
+            Dim id As String, obj As GraphicObject
+
+            id = AddObjectToSurface(ObjectType.Valve, x, y, False)
+            Dim valve = DirectCast(Flowsheet.SimulationObjects(id), Valve)
+            If istream.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0.5 Then
+                valve.CalcMode = Valve.CalculationMode.Kv_Gas
+            Else
+                valve.CalcMode = Valve.CalculationMode.Kv_Liquid
+            End If
+            valve.Kv = 1.0
+            valve.EnableOpeningKvRelationship = True
+            valve.OpeningPct = 50
+            valve.PercentOpeningVersusPercentKvExpression = "0.02*OP"
+            valve.DynamicsOnly = True
+
+            obj = Flowsheet.SimulationObjects(id).GraphicObject
+            obj.CreateConnectors(1, 1)
+            obj.Calculated = True
+            obj.Owner.Calculated = True
+
+            Flowsheet.ConnectObjects(newstream, obj, 0, 0)
+            Flowsheet.ConnectObjects(obj, stream, 0, 0)
+
+            If Not stream.FlippedH Then
+                newstream.X = x - 50
+                newstream.Y = y
+                stream.X = x + 50
+                stream.Y = y
+            Else
+                newstream.X = x + 50
+                newstream.Y = y
+                newstream.FlippedH = True
+                stream.X = x - 50
+                stream.Y = y
+                obj.FlippedH = True
+            End If
+
+        Catch ex As Exception
+
+        Finally
+            My.Application.PushUndoRedoAction = True
+        End Try
+
 
     End Sub
 
