@@ -265,6 +265,12 @@ Public Class FormUnitGen
             .Add(New Object() {DWSIM.App.GetLocalString("DiffusionCoefficient")})
             .Item(.Count - 1).Cells(1) = cb
 
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.conductance).ToArray)
+            cb.Value = currentset.conductance
+            .Add(New Object() {DWSIM.App.GetLocalString("Conductance")})
+            .Item(.Count - 1).Cells(1) = cb
+
         End With
     End Sub
 
@@ -348,6 +354,12 @@ Public Class FormUnitGen
                 .molar_entropy = Me.DataGridView1.Rows(31).Cells(1).Value
                 .velocity = Me.DataGridView1.Rows(32).Cells(1).Value
                 .foulingfactor = Me.DataGridView1.Rows(33).Cells(1).Value
+                .cakeresistance = Me.DataGridView1.Rows(34).Cells(1).Value
+                .mediumresistance = Me.DataGridView1.Rows(35).Cells(1).Value
+                .compressibility = Me.DataGridView1.Rows(36).Cells(1).Value
+                .jouleThomsonCoefficient = Me.DataGridView1.Rows(37).Cells(1).Value
+                .diffusivity = Me.DataGridView1.Rows(38).Cells(1).Value
+                .conductance = Me.DataGridView1.Rows(39).Cells(1).Value
             End With
 
             If Not Wizard Then

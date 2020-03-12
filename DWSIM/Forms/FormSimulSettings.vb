@@ -310,6 +310,7 @@ Public Class FormSimulSettings
             .Add(New String() {DWSIM.App.GetLocalString("Velocity"), su.velocity, DWSIM.App.GetLocalString("HXFoulingFactor"), su.foulingfactor})
             .Add(New String() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
+            .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, "", ""})
         End With
 
         If ComboBox2.SelectedIndex <= 2 Then
@@ -621,6 +622,13 @@ Public Class FormSimulSettings
             .Style.Tag = 38
         End With
 
+        With DirectCast(Me.DataGridView1.Rows.Item(19).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.conductance).ToArray)
+            .Value = su.conductance
+            .Style.Tag = 39
+        End With
+
         FrmChild.UpdateOpenEditForms()
 
         My.Application.PushUndoRedoAction = True
@@ -790,6 +798,10 @@ Public Class FormSimulSettings
                     member = "jouleThomsonCoefficient"
                     oldvalue = su.jouleThomsonCoefficient
                     su.jouleThomsonCoefficient = cell.Value
+                Case 39
+                    member = "conductance"
+                    oldvalue = su.conductance
+                    su.conductance = cell.Value
             End Select
 
             If initialized And Not DWSIM.App.IsRunningOnMono And My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,

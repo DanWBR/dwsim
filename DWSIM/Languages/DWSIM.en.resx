@@ -5678,4 +5678,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DynamicProperties" xml:space="preserve">
     <value>Dynamic Mode Properties</value>
   </data>
+  <data name="Conductance" xml:space="preserve">
+    <value>Conductance</value>
+  </data>
 </root>

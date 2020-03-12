@@ -260,6 +260,8 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"kmol/[kg.s]", "kmol/[kg.min.]", "kmol/[kg.h]", "mol/[kg.s]", "mol/[kg.min.]", "mol/[kg.h]", "lbmol/[lbm.h]"})
                 Case Enums.UnitOfMeasure.jouleThomsonCoefficient
                     units.AddRange(New String() {"[kg/s]/Pa", "[lbm/h]/psi", "[kg/h]/atm", "[kg/h]/bar", "[kg/h]/[kgf/cm2]"})
+                Case Enums.UnitOfMeasure.conductance
+                    units.AddRange(New String() {"[kg/s]/Pa", "[lbm/h]/psi", "[kg/h]/atm", "[kg/h]/bar", "[kg/h]/[kgf/cm2]"})
             End Select
 
             Return units

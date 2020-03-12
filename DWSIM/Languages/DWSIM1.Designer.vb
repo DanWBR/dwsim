@@ -2396,6 +2396,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Condutância.
+        '''</summary>
+        Friend Shared ReadOnly Property Conductance() As String
+            Get
+                Return ResourceManager.GetString("Conductance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Condutividade térmica.
         '''</summary>
         Friend Shared ReadOnly Property Condutividadetrmica() As String

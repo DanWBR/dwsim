@@ -39,10 +39,6 @@ Namespace UnitOperations
 
         Public AccumulationStream As Thermodynamics.Streams.MaterialStream
 
-        Public DynamicModelCode As String = ""
-
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Public DynamicEngine As Microsoft.Scripting.Hosting.ScriptEngine
-
         Public Sub New()
             MyBase.CreateNew()
         End Sub
@@ -175,46 +171,9 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub RunDynamicModel()
+        Public Overridable Sub RunDynamicModel()
 
-            If DynamicModelCode <> "" Then
-
-                If DynamicEngine Is Nothing Then
-
-                    DynamicEngine = IronPython.Hosting.Python.CreateEngine()
-                    DynamicEngine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-                    DynamicEngine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
-
-                End If
-
-                Dim scope = DynamicEngine.CreateScope()
-                scope.SetVariable("Flowsheet", FlowSheet)
-                scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
-                scope.SetVariable("Me", Me)
-                scope.SetVariable("This", Me)
-
-                For Each variable In ExtraProperties
-                    scope.SetVariable(variable.Key, variable.Value)
-                Next
-
-                Dim source As ScriptSource = DynamicEngine.CreateScriptSourceFromString(DynamicModelCode, Microsoft.Scripting.SourceCodeKind.Statements)
-
-                Try
-                    Me.ErrorMessage = ""
-                    source.Execute(scope)
-                Catch ex As Exception
-                    Dim ops As ExceptionOperations = DynamicEngine.GetService(Of ExceptionOperations)()
-                    Me.ErrorMessage = ops.FormatException(ex).ToString
-                    Me.DeCalculate()
-                    scope = Nothing
-                    source = Nothing
-                    Throw New Exception(Me.ErrorMessage, ex)
-                Finally
-                    scope = Nothing
-                    source = Nothing
-                End Try
-
-            End If
+            Throw New Exception("This Unit Operation is not yet supported in Dynamic Mode.")
 
         End Sub
 
