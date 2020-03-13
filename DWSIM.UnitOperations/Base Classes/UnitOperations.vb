@@ -171,12 +171,6 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Overridable Sub RunDynamicModel()
-
-            Throw New Exception("This Unit Operation is not yet supported in Dynamic Mode.")
-
-        End Sub
-
 #End Region
 
 #Region "   CAPE-OPEN ICapeIdentification"

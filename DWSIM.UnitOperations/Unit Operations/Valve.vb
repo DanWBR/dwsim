@@ -20,9 +20,6 @@
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
-Imports System.Windows.Forms
-Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
-Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 
 Namespace UnitOperations
@@ -34,10 +31,10 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Valve
 
-        Protected m_dp As Nullable(Of Double)
-        Protected m_dt As Nullable(Of Double)
-        Protected m_DQ As Nullable(Of Double)
-        Protected m_Pout As Nullable(Of Double) = 101325.0#
+        Protected m_dp As Double?
+        Protected m_dt As Double?
+        Protected m_DQ As Double?
+        Protected m_Pout As Double? = 101325.0#
         Protected m_cmode As CalculationMode = CalculationMode.DeltaP
         Public Property Hinlet As Double
         Public Property Houtlet As Double
@@ -135,6 +132,190 @@ Namespace UnitOperations
 
         Public Overrides Sub RunDynamicModel()
 
+            Select Case CalcMode
+
+                Case CalculationMode.OutletPressure, CalculationMode.DeltaP
+
+                    Throw New Exception("This calculation mode is not supported on Dynamic Mode.")
+
+                Case Else
+
+                    Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
+                    Dim oms As MaterialStream = Me.GetOutletMaterialStream(0)
+
+                    Dim Ti, P1, Hi, Wi, ei, ein, P2, H2, rho, volf, rhog20, P2ant, v2, Kvc As Double
+                    Dim icount As Integer
+
+                    Me.PropertyPackage.CurrentMaterialStream = ims
+
+                    Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                    P1 = ims.Phases(0).Properties.pressure.GetValueOrDefault
+                    Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
+                    Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
+                    ei = Hi * Wi
+                    ein = ei
+                    rho = ims.Phases(0).Properties.density.GetValueOrDefault
+                    volf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+
+                    H2 = Hi
+
+                    If EnableOpeningKvRelationship Then
+                        Try
+                            Dim ExpContext As New Ciloci.Flee.ExpressionContext
+                            ExpContext.Imports.AddType(GetType(System.Math))
+                            ExpContext.Variables.Clear()
+                            ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                            ExpContext.Variables.Add("OP", OpeningPct)
+                            Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
+                            Kvc = Kv * Expr.Evaluate() / 100
+                        Catch ex As Exception
+                            Throw New Exception("Invalid expression for Kv/Opening relationship.")
+                        End Try
+                    Else
+                        Kvc = Kv
+                    End If
+
+                    If ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
+                        oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
+
+                        'not supported
+
+                        Throw New Exception("Inlet and Outlet Streams cannot be both Flow-spec'd at the same time.")
+
+                    ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure And
+                         oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
+
+                        'valid! calculate flow
+
+                        P2 = oms.GetPressure
+
+                        If CalcMode = CalculationMode.Kv_Liquid Then
+                            Wi = Kv / (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5 / 3600
+                        ElseIf CalcMode = CalculationMode.Kv_Gas Then
+                            ims.PropertyPackage.CurrentMaterialStream = ims
+                            rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
+                            Wi = 519 * Kv / (Ti / (rhog20 * (P1 - P2) / 100000.0 * P2 / 100000.0)) ^ 0.5 / 3600
+                        ElseIf CalcMode = CalculationMode.Kv_Steam Then
+                            v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
+                            Wi = Kv * 31.62 * (v2 / ((P1 - P2) / 100000.0)) ^ 0.5 / 3600
+                        End If
+
+                        ims.SetMassFlow(Wi)
+                        oms.SetMassFlow(Wi)
+
+                    ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
+                        oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
+
+                        'valid! calculate P1
+
+                        oms.SetMassFlow(Wi)
+
+                        P2 = oms.GetPressure()
+
+                        If CalcMode = CalculationMode.Kv_Liquid Then
+                            P1 = P2 / 100000.0 + 1 / (1000.0 * rho) * (Wi * 3600 / Kvc) ^ 2
+                        ElseIf CalcMode = CalculationMode.Kv_Gas Then
+                            ims.PropertyPackage.CurrentMaterialStream = ims
+                            rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
+                            P1 = P2 / 100000.0 + Ti / rhog20 / P2 * (519 * Kvc / (Wi * 3600)) ^ -2
+                        ElseIf CalcMode = CalculationMode.Kv_Steam Then
+                            v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
+                            P1 = P2 / 100000.0 + v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
+                        End If
+                        P1 = P1 * 100000.0
+
+                    ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure And
+                        oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
+
+                        Wi = oms.GetMassFlow
+
+                        ims.SetMassFlow(Wi)
+
+                        'valid! calculate P2
+
+                        If CalcMode = CalculationMode.Kv_Liquid Then
+                            P2 = P1 / 100000.0 - 1 / (1000.0 * rho) * (Wi * 3600 / Kvc) ^ 2
+                            P2 = P2 * 100000.0
+                        ElseIf CalcMode = CalculationMode.Kv_Gas Then
+                            ims.PropertyPackage.CurrentMaterialStream = ims
+                            rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
+                            P2 = P1 * 0.7 / 100000.0
+                            icount = 0
+                            Do
+                                P2ant = P2
+                                P2 = P1 / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
+                                icount += 1
+                                If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
+                            Loop Until Math.Abs(P2 - P2ant) < 0.0001
+                            P2 = P2 * 100000.0
+                        ElseIf CalcMode = CalculationMode.Kv_Steam Then
+                            P2 = P1 * 0.7 / 100000.0
+                            icount = 0
+                            Do
+                                v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
+                                P2ant = P2
+                                P2 = P1 / 100000.0 - v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
+                                icount += 1
+                                If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
+                            Loop Until Math.Abs(P2 - P2ant) < 0.0001
+                            P2 = P2 * 100000.0
+                        End If
+
+                    End If
+
+                    DeltaP = P1 - P2
+                    OutletPressure = P2
+
+                    With oms
+                        .Phases(0).Properties.temperature = Ti
+                        .Phases(0).Properties.pressure = P2
+                        .Phases(0).Properties.enthalpy = H2
+                        Dim comp As BaseClasses.Compound
+                        Dim i As Integer = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction
+                            comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction
+                            i += 1
+                        Next
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                    End With
+
+            End Select
+
+
+        End Sub
+
+        Public Sub CalculateKv()
+
+            Dim Ti, P1, Hi, Wi, ei, P2, rho, volf, rhog20, v2 As Double
+
+            Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
+            Dim oms As MaterialStream = Me.GetOutletMaterialStream(0)
+
+            Me.PropertyPackage.CurrentMaterialStream = ims
+            Me.PropertyPackage.CurrentMaterialStream.Validate()
+
+            Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            P1 = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
+            Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
+            ei = Hi * Wi
+            rho = ims.Phases(0).Properties.density.GetValueOrDefault
+            volf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+
+            P2 = oms.Phases(0).Properties.pressure.GetValueOrDefault
+
+            If CalcMode = CalculationMode.Kv_Liquid Then
+                Kv = Wi * 3600 / (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5
+            ElseIf CalcMode = CalculationMode.Kv_Gas Then
+                ims.PropertyPackage.CurrentMaterialStream = ims
+                rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
+                Kv = Wi * 3600 / 519 * (Ti / (rhog20 * (P1 - P2) / 100000.0 * P2 / 100000.0)) ^ 0.5
+            ElseIf CalcMode = CalculationMode.Kv_Steam Then
+                v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
+                Kv = Wi * 3600 / 31.62 * (v2 / ((P1 - P2) / 100000.0)) ^ 0.5
+            End If
+
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
@@ -167,10 +348,10 @@ Namespace UnitOperations
 
             Me.PropertyPackage.CurrentMaterialStream = ims
             Me.PropertyPackage.CurrentMaterialStream.Validate()
-            Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault.ToString
-            Pi = ims.Phases(0).Properties.pressure.GetValueOrDefault.ToString
-            Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault.ToString
-            Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault.ToString
+            Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            Pi = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
+            Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
             ei = Hi * Wi
             ein = ei
             rho = ims.Phases(0).Properties.density.GetValueOrDefault

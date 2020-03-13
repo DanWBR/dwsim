@@ -172,6 +172,12 @@ Namespace UnitOperations
             Throw New NotImplementedException
         End Sub
 
+        Public Overridable Sub RunDynamicModel() Implements ISimulationObject.RunDynamicModel
+
+            Throw New Exception("This Unit Operation is not yet supported in Dynamic Mode.")
+
+        End Sub
+
         Public Overridable Sub PerformPostCalcValidation() Implements ISimulationObject.PerformPostCalcValidation
 
             If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And

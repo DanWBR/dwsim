@@ -2973,13 +2973,13 @@ Public Class FlowsheetSurface_SkiaSharp
             Dim x = stream.X
             Dim y = stream.Y
 
-            Dim objfrom As GraphicObject, fromidx As Integer
+            Dim objto As GraphicObject, toidx As Integer
 
-            If stream.InputConnectors(0).IsAttached Then
-                objfrom = stream.InputConnectors(0).AttachedConnector.AttachedFrom
-                fromidx = stream.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                Flowsheet.DisconnectObjects(objfrom, stream)
-                Flowsheet.ConnectObject(objfrom, newstream, fromidx)
+            If stream.OutputConnectors(0).IsAttached Then
+                objto = stream.OutputConnectors(0).AttachedConnector.AttachedTo
+                toidx = stream.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
+                Flowsheet.DisconnectObjects(stream, objto)
+                Flowsheet.ConnectObject(newstream, objto, 0, toidx)
             End If
 
             Dim id As String, obj As GraphicObject
@@ -2991,10 +2991,10 @@ Public Class FlowsheetSurface_SkiaSharp
             Else
                 valve.CalcMode = Valve.CalculationMode.Kv_Liquid
             End If
-            valve.Kv = 1.0
+            valve.Kv = 2.0
             valve.EnableOpeningKvRelationship = True
             valve.OpeningPct = 50
-            valve.PercentOpeningVersusPercentKvExpression = "0.02*OP"
+            valve.PercentOpeningVersusPercentKvExpression = "OP"
             valve.DynamicsOnly = True
 
             obj = Flowsheet.SimulationObjects(id).GraphicObject
@@ -3002,20 +3002,22 @@ Public Class FlowsheetSurface_SkiaSharp
             obj.Calculated = True
             obj.Owner.Calculated = True
 
-            Flowsheet.ConnectObjects(newstream, obj, 0, 0)
-            Flowsheet.ConnectObjects(obj, stream, 0, 0)
+            Flowsheet.ConnectObjects(stream, obj, 0, 0)
+            Flowsheet.ConnectObjects(obj, newstream, 0, 0)
+
+            valve.CalculateKv()
 
             If Not stream.FlippedH Then
-                newstream.X = x - 50
-                newstream.Y = y
-                stream.X = x + 50
-                stream.Y = y
-            Else
-                newstream.X = x + 50
-                newstream.Y = y
-                newstream.FlippedH = True
                 stream.X = x - 50
                 stream.Y = y
+                newstream.X = x + 50
+                newstream.Y = y
+            Else
+                stream.X = x + 50
+                stream.Y = y
+                stream.FlippedH = True
+                newstream.X = x - 50
+                newstream.Y = y
                 obj.FlippedH = True
             End If
 

@@ -165,6 +165,8 @@ Imports DWSIM.Interfaces.Enums
 
     Property Annotation() As String
 
+    Sub RunDynamicModel()
+
     Sub Calculate(Optional ByVal args As Object = Nothing)
 
     Sub DeCalculate(Optional ByVal args As Object = Nothing)
