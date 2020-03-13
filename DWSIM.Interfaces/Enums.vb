@@ -25,6 +25,11 @@ Namespace Enums
             Flow = 1
         End Enum
 
+        Public Enum DynamicsEventType
+            ChangeProperty = 0
+            RunScript = 1
+        End Enum
+
     End Class
 
     Public Class Helpers

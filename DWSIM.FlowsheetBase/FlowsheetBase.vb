@@ -31,6 +31,8 @@ Imports DWSIM.Interfaces.Enums
 
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
 
+    Public Property DynamicsManager As IDynamicsManager = New DynamicsManager.Manager Implements IFlowsheet.DynamicsManager
+
     Public Property ExtraProperties As New ExpandoObject Implements IFlowsheet.ExtraProperties
 
     Public WithEvents Options As New SharedClasses.DWSIM.Flowsheet.FlowsheetVariables
@@ -1526,6 +1528,29 @@ Imports DWSIM.Interfaces.Enums
         Return xdoc
 
     End Function
+
+    Public Function GetProcessData() As List(Of XElement) Implements IFlowsheet.GetProcessData
+
+        Dim dlist As New List(Of XElement)
+
+        For Each so As SharedClasses.UnitOperations.BaseClass In SimulationObjects.Values
+            so.SetFlowsheet(Me)
+            dlist.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
+        Next
+
+        Return dlist
+
+    End Function
+
+    Public Sub LoadProcessData(data As List(Of XElement)) Implements IFlowsheet.LoadProcessData
+
+        For Each xel In data
+            Dim id As String = xel.<Name>.Value
+            Dim obj = SimulationObjects(id)
+            obj.LoadData(xel.Elements.ToList)
+        Next
+
+    End Sub
 
     Sub AddGraphicObjects(data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
                       Optional ByVal pkey As String = "", Optional ByVal shift As Integer = 0, Optional ByVal reconnectinlets As Boolean = False)

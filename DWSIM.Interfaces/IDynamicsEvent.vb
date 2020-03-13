@@ -16,28 +16,24 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-''' <summary>
-''' This interface defines the basic properties of the Dynamic Mode Integrator.
-''' </summary>
-<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IIntegrator
+Public Interface IDynamicsEvent
 
-    Property ShouldCalculateEquilibrium As Boolean
+    Property ID As String
 
-    Property ShouldCalculateMassBalance As Boolean
+    Property Description As String
 
-    Property ShouldCalculateEnergyBalance As Boolean
+    Property TimeStamp As DateTime
 
-    Property Interval As TimeSpan
+    Property EventType As Enums.Dynamics.DynamicsEventType
 
-    Property Duration As TimeSpan
+    Property SimulationObjectID As String
 
-    Property CurrentTime As DateTime
+    Property SimulationObjectProperty As String
 
-    Property StepForEquilibrium As Integer
+    Property SimulationObjectPropertyValue As String
 
-    Property StepForMassBalance As Integer
+    Property SimulationObjectPropertyUnits As String
 
-    Property StepForEnergyBalance As Integer
-
+    Property ScriptID As String
 
 End Interface

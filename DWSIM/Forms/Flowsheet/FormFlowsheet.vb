@@ -3045,12 +3045,14 @@ Public Class FormFlowsheet
         End Set
     End Property
 
-    Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
+    Public Property DynamicsManager As IDynamicsManager = New DynamicsManager.Manager Implements IFlowsheet.DynamicsManager
 
+    Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
+        DeleteSelectedObject(sender, e, gobj, confirmation, triggercalc)
     End Sub
 
     Public Sub Initialize() Implements IFlowsheet.Initialize
-        Throw New NotImplementedException()
+
     End Sub
 
     Public Sub LoadFromXML(xdoc As XDocument) Implements IFlowsheet.LoadFromXML
@@ -3064,6 +3066,29 @@ Public Class FormFlowsheet
     Public Function SaveToXML1() As XDocument Implements IFlowsheet.SaveToXML
         Throw New NotImplementedException()
     End Function
+
+    Public Function GetProcessData() As List(Of XElement) Implements IFlowsheet.GetProcessData
+
+        Dim dlist As New List(Of XElement)
+
+        For Each so As SharedClasses.UnitOperations.BaseClass In SimulationObjects.Values
+            so.SetFlowsheet(Me)
+            dlist.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
+        Next
+
+        Return dlist
+
+    End Function
+
+    Public Sub LoadProcessData(data As List(Of XElement)) Implements IFlowsheet.LoadProcessData
+
+        For Each xel In data
+            Dim id As String = xel.<Name>.Value
+            Dim obj = SimulationObjects(id)
+            obj.LoadData(xel.Elements.ToList)
+        Next
+
+    End Sub
 
 #End Region
 

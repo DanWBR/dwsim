@@ -187,6 +187,10 @@
       <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DynamicsManager\DWSIM.DynamicsManager.vbproj">
+      <Project>{654c0d60-c94b-4a0b-b34d-1d71a6a20420}</Project>
+      <Name>DWSIM.DynamicsManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>

@@ -1655,6 +1655,10 @@
       <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DynamicsManager\DWSIM.DynamicsManager.vbproj">
+      <Project>{654c0d60-c94b-4a0b-b34d-1d71a6a20420}</Project>
+      <Name>DWSIM.DynamicsManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
       <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
       <Name>DWSIM.ExtensionMethods.Eto</Name>

@@ -95,13 +95,16 @@
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
     <Compile Include="ICustomXMLSerialization.vb" />
+    <Compile Include="IDynamicsEvent.vb" />
+    <Compile Include="IDynamicsManager.vb" />
+    <Compile Include="IDynamicsSchedule.vb" />
     <Compile Include="IFlashAlgorithm.vb" />
     <Compile Include="IFlowsheet.vb" />
     <Compile Include="IFlowsheetEvents.vb" />
     <Compile Include="IFlowsheetOptions.vb" />
     <Compile Include="IGraphicObject.vb" />
     <Compile Include="IIndicator.vb" />
-    <Compile Include="IIntegrator.vb" />
+    <Compile Include="IDynamicsIntegrator.vb" />
     <Compile Include="IMaterialStream.vb" />
     <Compile Include="IPersistStream.vb" />
     <Compile Include="IPhase.vb" />

@@ -32,6 +32,8 @@
 
     Property DynamicMode As Boolean
 
+    Property DynamicsManager As IDynamicsManager
+
     Property ExtraProperties As Dynamic.ExpandoObject
 
     Function GetApplicationObject() As Object
@@ -157,6 +159,10 @@
     Function GetFlowsheetSurfaceHeight() As Integer
 
     Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String)
+
+    Function GetProcessData() As List(Of XElement)
+
+    Sub LoadProcessData(data As List(Of XElement))
 
 End Interface
 
