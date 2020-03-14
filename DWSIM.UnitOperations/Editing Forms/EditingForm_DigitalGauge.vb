@@ -56,9 +56,53 @@
 
             NumericUpDown2.Value = SimObject.DecimalDigits
 
+            tbVeryLow.Text = SimObject.VeryLowAlarmValue
+
+            tbLow.Text = SimObject.LowAlarmValue
+
+            tbHigh.Text = SimObject.HighAlarmValue
+
+            tbVeryHigh.Text = SimObject.VeryHighAlarmValue
+
+            chkVeryLow.Checked = SimObject.VeryLowAlarmEnabled
+
+            chkLow.Checked = SimObject.LowAlarmEnabled
+
+            chkHigh.Checked = SimObject.HighAlarmEnabled
+
+            chkVeryHigh.Checked = SimObject.VeryHighAlarmEnabled
+
         End With
 
         Loaded = True
+
+    End Sub
+
+    Private Sub chkVeryLow_CheckedChanged(sender As Object, e As EventArgs) Handles chkVeryLow.CheckedChanged, chkLow.CheckedChanged, chkHigh.CheckedChanged, chkVeryHigh.CheckedChanged
+
+        If sender Is chkVeryLow Then
+            SimObject.VeryLowAlarmEnabled = chkVeryLow.Checked
+        ElseIf sender Is chkLow Then
+            SimObject.LowAlarmEnabled = chkLow.Checked
+        ElseIf sender Is chkHigh Then
+            SimObject.HighAlarmEnabled = chkHigh.Checked
+        Else
+            SimObject.VeryHighAlarmEnabled = chkVeryHigh.Checked
+        End If
+
+    End Sub
+
+    Private Sub tbLow_KeyUp(sender As Object, e As KeyEventArgs) Handles tbVeryLow.KeyUp, tbVeryHigh.KeyUp, tbLow.KeyUp, tbHigh.KeyUp
+
+        If sender Is tbVeryLow Then
+            SimObject.VeryLowAlarmValue = tbVeryLow.Text.ParseExpressionToDouble
+        ElseIf sender Is tbLow Then
+            SimObject.LowAlarmValue = tbLow.Text.ParseExpressionToDouble
+        ElseIf sender Is tbHigh Then
+            SimObject.HighAlarmValue = tbHigh.Text.ParseExpressionToDouble
+        Else
+            SimObject.VeryHighAlarmValue = tbVeryHigh.Text.ParseExpressionToDouble
+        End If
 
     End Sub
 

@@ -46,6 +46,30 @@ Namespace UnitOperations
 
         Public Property SelectedPropertyUnits As String = "" Implements IIndicator.SelectedPropertyUnits
 
+        Public Property VeryLowAlarmEnabled As Boolean = False Implements IIndicator.VeryLowAlarmEnabled
+
+        Public Property LowAlarmEnabled As Boolean = False Implements IIndicator.LowAlarmEnabled
+
+        Public Property HighAlarmEnabled As Boolean = False Implements IIndicator.HighAlarmEnabled
+
+        Public Property VeryHighAlarmEnabled As Boolean = False Implements IIndicator.VeryHighAlarmEnabled
+
+        Public Property VeryLowAlarmValue As Double Implements IIndicator.VeryLowAlarmValue
+
+        Public Property LowAlarmValue As Double Implements IIndicator.LowAlarmValue
+
+        Public Property HighAlarmValue As Double Implements IIndicator.HighAlarmValue
+
+        Public Property VeryHighAlarmValue As Double Implements IIndicator.VeryHighAlarmValue
+
+        Public Property VeryLowAlarmActive As Boolean = False Implements IIndicator.VeryLowAlarmActive
+
+        Public Property LowAlarmActive As Boolean = False Implements IIndicator.LowAlarmActive
+
+        Public Property HighAlarmActive As Boolean = False Implements IIndicator.HighAlarmActive
+
+        Public Property VeryHighAlarmActive As Boolean = False Implements IIndicator.VeryHighAlarmActive
+
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()

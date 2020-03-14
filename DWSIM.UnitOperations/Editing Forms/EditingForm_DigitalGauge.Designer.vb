@@ -43,10 +43,20 @@ Partial Class EditingForm_DigitalGauge
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbVeryHigh = New System.Windows.Forms.TextBox()
+        Me.chkVeryHigh = New System.Windows.Forms.CheckBox()
+        Me.tbHigh = New System.Windows.Forms.TextBox()
+        Me.chkHigh = New System.Windows.Forms.CheckBox()
+        Me.tbLow = New System.Windows.Forms.TextBox()
+        Me.chkLow = New System.Windows.Forms.CheckBox()
+        Me.tbVeryLow = New System.Windows.Forms.TextBox()
+        Me.chkVeryLow = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -222,10 +232,87 @@ Partial Class EditingForm_DigitalGauge
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'GroupBox2
+        '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbVeryHigh)
+        Me.GroupBox2.Controls.Add(Me.chkVeryHigh)
+        Me.GroupBox2.Controls.Add(Me.tbHigh)
+        Me.GroupBox2.Controls.Add(Me.chkHigh)
+        Me.GroupBox2.Controls.Add(Me.tbLow)
+        Me.GroupBox2.Controls.Add(Me.chkLow)
+        Me.GroupBox2.Controls.Add(Me.tbVeryLow)
+        Me.GroupBox2.Controls.Add(Me.chkVeryLow)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        '
+        'tbVeryHigh
+        '
+        resources.ApplyResources(Me.tbVeryHigh, "tbVeryHigh")
+        Me.tbVeryHigh.Name = "tbVeryHigh"
+        Me.ToolTipChangeTag.SetToolTip(Me.tbVeryHigh, resources.GetString("tbVeryHigh.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.tbVeryHigh, resources.GetString("tbVeryHigh.ToolTip1"))
+        '
+        'chkVeryHigh
+        '
+        resources.ApplyResources(Me.chkVeryHigh, "chkVeryHigh")
+        Me.chkVeryHigh.Name = "chkVeryHigh"
+        Me.ToolTipValues.SetToolTip(Me.chkVeryHigh, resources.GetString("chkVeryHigh.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkVeryHigh, resources.GetString("chkVeryHigh.ToolTip1"))
+        Me.chkVeryHigh.UseVisualStyleBackColor = True
+        '
+        'tbHigh
+        '
+        resources.ApplyResources(Me.tbHigh, "tbHigh")
+        Me.tbHigh.Name = "tbHigh"
+        Me.ToolTipChangeTag.SetToolTip(Me.tbHigh, resources.GetString("tbHigh.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.tbHigh, resources.GetString("tbHigh.ToolTip1"))
+        '
+        'chkHigh
+        '
+        resources.ApplyResources(Me.chkHigh, "chkHigh")
+        Me.chkHigh.Name = "chkHigh"
+        Me.ToolTipValues.SetToolTip(Me.chkHigh, resources.GetString("chkHigh.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkHigh, resources.GetString("chkHigh.ToolTip1"))
+        Me.chkHigh.UseVisualStyleBackColor = True
+        '
+        'tbLow
+        '
+        resources.ApplyResources(Me.tbLow, "tbLow")
+        Me.tbLow.Name = "tbLow"
+        Me.ToolTipChangeTag.SetToolTip(Me.tbLow, resources.GetString("tbLow.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.tbLow, resources.GetString("tbLow.ToolTip1"))
+        '
+        'chkLow
+        '
+        resources.ApplyResources(Me.chkLow, "chkLow")
+        Me.chkLow.Name = "chkLow"
+        Me.ToolTipValues.SetToolTip(Me.chkLow, resources.GetString("chkLow.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkLow, resources.GetString("chkLow.ToolTip1"))
+        Me.chkLow.UseVisualStyleBackColor = True
+        '
+        'tbVeryLow
+        '
+        resources.ApplyResources(Me.tbVeryLow, "tbVeryLow")
+        Me.tbVeryLow.Name = "tbVeryLow"
+        Me.ToolTipChangeTag.SetToolTip(Me.tbVeryLow, resources.GetString("tbVeryLow.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.tbVeryLow, resources.GetString("tbVeryLow.ToolTip1"))
+        '
+        'chkVeryLow
+        '
+        resources.ApplyResources(Me.chkVeryLow, "chkVeryLow")
+        Me.chkVeryLow.Name = "chkVeryLow"
+        Me.ToolTipValues.SetToolTip(Me.chkVeryLow, resources.GetString("chkVeryLow.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkVeryLow, resources.GetString("chkVeryLow.ToolTip1"))
+        Me.chkVeryLow.UseVisualStyleBackColor = True
+        '
         'EditingForm_DigitalGauge
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Name = "EditingForm_DigitalGauge"
@@ -237,6 +324,8 @@ Partial Class EditingForm_DigitalGauge
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -261,4 +350,13 @@ Partial Class EditingForm_DigitalGauge
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Public WithEvents Label8 As Label
     Public WithEvents Label6 As Label
+    Friend WithEvents GroupBox2 As GroupBox
+    Public WithEvents tbVeryHigh As TextBox
+    Friend WithEvents chkVeryHigh As CheckBox
+    Public WithEvents tbHigh As TextBox
+    Friend WithEvents chkHigh As CheckBox
+    Public WithEvents tbLow As TextBox
+    Friend WithEvents chkLow As CheckBox
+    Public WithEvents tbVeryLow As TextBox
+    Friend WithEvents chkVeryLow As CheckBox
 End Class

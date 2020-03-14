@@ -160,9 +160,6 @@
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 81</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 357</value>
-  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Indicated Property</value>
   </data>
@@ -189,5 +186,38 @@
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Object ID</value>
+  </data>
+  <data name="chkVeryHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 17</value>
+  </data>
+  <data name="chkVeryHigh.Text" xml:space="preserve">
+    <value>Very High</value>
+  </data>
+  <data name="chkHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="chkHigh.Text" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="chkLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 17</value>
+  </data>
+  <data name="chkLow.Text" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="chkVeryLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 17</value>
+  </data>
+  <data name="chkVeryLow.Text" xml:space="preserve">
+    <value>Very Low</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 345</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 154</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Alarms</value>
   </data>
 </root>
