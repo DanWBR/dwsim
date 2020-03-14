@@ -123,127 +123,130 @@ Namespace GraphicObjects
                 canvas.DrawText(valtext, origin + w / 2 + 10 * f, stry, paint)
             End Using
 
-
             Owner.Calculate()
 
-            Dim tll = "LL"
-            Dim tl = "L"
-            Dim th = "H"
-            Dim thh = "HH"
+            If owneri.ShowAlarms Then
 
-            Dim r1 = 1
+                Dim tll = "LL"
+                Dim tl = "L"
+                Dim th = "H"
+                Dim thh = "HH"
 
-            Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
-                Select Case GlobalSettings.Settings.RunningPlatform
-                    Case GlobalSettings.Settings.Platform.Windows
-                        paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Linux
-                        paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Mac
-                        paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                End Select
-                Dim trll As New SKRect(0, 0, 2, 2)
-                paint.GetTextPath(thh, 0, 0).GetBounds(trll)
-                r1 = Math.Max(trll.Width, trll.Height)
-            End Using
+                Dim r1 = 1
 
-            Dim delta = -3 * r1 * f
-
-            Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
-                Select Case GlobalSettings.Settings.RunningPlatform
-                    Case GlobalSettings.Settings.Platform.Windows
-                        paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Linux
-                        paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Mac
-                        paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                End Select
-                Dim trll As New SKRect(0, 0, 2, 2)
-                paint.GetTextPath(tll, 0, 0).GetBounds(trll)
-                Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                    If owneri.VeryLowAlarmEnabled Then
-                        If owneri.VeryLowAlarmActive Then
-                            bpaint.Color = SKColors.Red
-                        Else
-                            bpaint.Color = SKColors.Black
-                        End If
-                    End If
-                    canvas.DrawOval(X, Y + delta - trll.Height / 2, r1, r1, bpaint)
+                Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
+                    Select Case GlobalSettings.Settings.RunningPlatform
+                        Case GlobalSettings.Settings.Platform.Windows
+                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Linux
+                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Mac
+                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+                    End Select
+                    Dim trll As New SKRect(0, 0, 2, 2)
+                    paint.GetTextPath(thh, 0, 0).GetBounds(trll)
+                    r1 = Math.Max(trll.Width, trll.Height)
                 End Using
-                canvas.DrawText(tll, X - trll.Width / 2, Y + delta, paint)
-            End Using
 
-            Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
-                Select Case GlobalSettings.Settings.RunningPlatform
-                    Case GlobalSettings.Settings.Platform.Windows
-                        paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Linux
-                        paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Mac
-                        paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                End Select
-                Dim trl As New SKRect(0, 0, 2, 2)
-                paint.GetTextPath(tl, 0, 0).GetBounds(trl)
-                Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                    If owneri.LowAlarmEnabled Then
-                        If owneri.LowAlarmActive Then
-                            bpaint.Color = SKColors.Red
-                        Else
-                            bpaint.Color = SKColors.Black
-                        End If
-                    End If
-                    canvas.DrawOval(X + 0.33 * w, Y + delta - trl.Height / 2, r1, r1, bpaint)
-                End Using
-                canvas.DrawText(tl, X + 0.33 * w - trl.Width / 2, Y + delta, paint)
-            End Using
+                Dim delta = -3 * r1 * f
 
-            Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
-                Select Case GlobalSettings.Settings.RunningPlatform
-                    Case GlobalSettings.Settings.Platform.Windows
-                        paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Linux
-                        paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Mac
-                        paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                End Select
-                Dim trh As New SKRect(0, 0, 2, 2)
-                paint.GetTextPath(th, 0, 0).GetBounds(trh)
-                Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                    If owneri.HighAlarmEnabled Then
-                        If owneri.HighAlarmActive Then
-                            bpaint.Color = SKColors.Red
-                        Else
-                            bpaint.Color = SKColors.Black
+                Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
+                    Select Case GlobalSettings.Settings.RunningPlatform
+                        Case GlobalSettings.Settings.Platform.Windows
+                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Linux
+                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Mac
+                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+                    End Select
+                    Dim trll As New SKRect(0, 0, 2, 2)
+                    paint.GetTextPath(tll, 0, 0).GetBounds(trll)
+                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
+                        If owneri.VeryLowAlarmEnabled Then
+                            If owneri.VeryLowAlarmActive Then
+                                bpaint.Color = SKColors.Red
+                            Else
+                                bpaint.Color = SKColors.Black
+                            End If
                         End If
-                    End If
-                    canvas.DrawOval(X + 0.66 * w, Y + delta - trh.Height / 2, r1, r1, bpaint)
+                        canvas.DrawOval(X, Y + delta - trll.Height / 2, r1, r1, bpaint)
+                    End Using
+                    canvas.DrawText(tll, X - trll.Width / 2, Y + delta, paint)
                 End Using
-                canvas.DrawText(th, X + 0.66 * w - trh.Width / 2, Y + delta, paint)
-            End Using
 
-            Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
-                Select Case GlobalSettings.Settings.RunningPlatform
-                    Case GlobalSettings.Settings.Platform.Windows
-                        paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Linux
-                        paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Mac
-                        paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                End Select
-                Dim trhh As New SKRect(0, 0, 2, 2)
-                paint.GetTextPath(thh, 0, 0).GetBounds(trhh)
-                Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                    If owneri.VeryHighAlarmEnabled Then
-                        If owneri.VeryHighAlarmActive Then
-                            bpaint.Color = SKColors.Red
-                        Else
-                            bpaint.Color = SKColors.Black
+                Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
+                    Select Case GlobalSettings.Settings.RunningPlatform
+                        Case GlobalSettings.Settings.Platform.Windows
+                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Linux
+                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Mac
+                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+                    End Select
+                    Dim trl As New SKRect(0, 0, 2, 2)
+                    paint.GetTextPath(tl, 0, 0).GetBounds(trl)
+                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
+                        If owneri.LowAlarmEnabled Then
+                            If owneri.LowAlarmActive Then
+                                bpaint.Color = SKColors.Red
+                            Else
+                                bpaint.Color = SKColors.Black
+                            End If
                         End If
-                    End If
-                    canvas.DrawOval(X + w, Y + delta - trhh.Height / 2, r1, r1, bpaint)
+                        canvas.DrawOval(X + 0.33 * w, Y + delta - trl.Height / 2, r1, r1, bpaint)
+                    End Using
+                    canvas.DrawText(tl, X + 0.33 * w - trl.Width / 2, Y + delta, paint)
                 End Using
-                canvas.DrawText(thh, X + w - trhh.Width / 2, Y + delta, paint)
-            End Using
+
+                Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
+                    Select Case GlobalSettings.Settings.RunningPlatform
+                        Case GlobalSettings.Settings.Platform.Windows
+                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Linux
+                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Mac
+                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+                    End Select
+                    Dim trh As New SKRect(0, 0, 2, 2)
+                    paint.GetTextPath(th, 0, 0).GetBounds(trh)
+                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
+                        If owneri.HighAlarmEnabled Then
+                            If owneri.HighAlarmActive Then
+                                bpaint.Color = SKColors.Red
+                            Else
+                                bpaint.Color = SKColors.Black
+                            End If
+                        End If
+                        canvas.DrawOval(X + 0.66 * w, Y + delta - trh.Height / 2, r1, r1, bpaint)
+                    End Using
+                    canvas.DrawText(th, X + 0.66 * w - trh.Width / 2, Y + delta, paint)
+                End Using
+
+                Using paint As New SKPaint With {.TextSize = 8, .Color = SKColors.White, .IsAntialias = True}
+                    Select Case GlobalSettings.Settings.RunningPlatform
+                        Case GlobalSettings.Settings.Platform.Windows
+                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Linux
+                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                        Case GlobalSettings.Settings.Platform.Mac
+                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+                    End Select
+                    Dim trhh As New SKRect(0, 0, 2, 2)
+                    paint.GetTextPath(thh, 0, 0).GetBounds(trhh)
+                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
+                        If owneri.VeryHighAlarmEnabled Then
+                            If owneri.VeryHighAlarmActive Then
+                                bpaint.Color = SKColors.Red
+                            Else
+                                bpaint.Color = SKColors.Black
+                            End If
+                        End If
+                        canvas.DrawOval(X + w, Y + delta - trhh.Height / 2, r1, r1, bpaint)
+                    End Using
+                    canvas.DrawText(thh, X + w - trhh.Width / 2, Y + delta, paint)
+                End Using
+
+            End If
 
         End Sub
 
