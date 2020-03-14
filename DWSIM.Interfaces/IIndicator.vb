@@ -40,4 +40,6 @@
 
     Property VeryHighAlarmActive As Boolean
 
+    Property ShowAlarms As Boolean
+
 End Interface

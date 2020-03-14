@@ -283,6 +283,18 @@
   <data name="GroupBox5.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="chkShowAlarms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 17</value>
+  </data>
+  <data name="chkShowAlarms.Text" xml:space="preserve">
+    <value>Show Alarm Indicators</value>
+  </data>
+  <data name="chkShowAlarms.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkShowAlarms.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="tbVeryHigh.ToolTip" xml:space="preserve">
     <value />
   </data>

@@ -91,6 +91,8 @@
             SimObject.VeryHighAlarmEnabled = chkVeryHigh.Checked
         End If
 
+        DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+
     End Sub
 
     Private Sub tbLow_KeyUp(sender As Object, e As KeyEventArgs) Handles tbVeryLow.KeyUp, tbVeryHigh.KeyUp, tbLow.KeyUp, tbHigh.KeyUp
@@ -104,6 +106,8 @@
         Else
             SimObject.VeryHighAlarmValue = tbVeryHigh.Text.ParseExpressionToDouble
         End If
+
+        DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
 
     End Sub
 
@@ -205,6 +209,14 @@
             Double.TryParse(tbMaxVal.Text, val)
             SimObject.MaximumValue = val
         End If
+
+    End Sub
+
+    Private Sub chkShowAlarms_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowAlarms.CheckedChanged
+
+        SimObject.ShowAlarms = chkShowAlarms.Checked
+
+        DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
 
     End Sub
 

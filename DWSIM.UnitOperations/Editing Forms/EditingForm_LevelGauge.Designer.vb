@@ -44,6 +44,7 @@ Partial Class EditingForm_LevelGauge
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkShowAlarms = New System.Windows.Forms.CheckBox()
         Me.tbVeryHigh = New System.Windows.Forms.TextBox()
         Me.chkVeryHigh = New System.Windows.Forms.CheckBox()
         Me.tbHigh = New System.Windows.Forms.TextBox()
@@ -227,6 +228,7 @@ Partial Class EditingForm_LevelGauge
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.chkShowAlarms)
         Me.GroupBox2.Controls.Add(Me.tbVeryHigh)
         Me.GroupBox2.Controls.Add(Me.chkVeryHigh)
         Me.GroupBox2.Controls.Add(Me.tbHigh)
@@ -239,6 +241,14 @@ Partial Class EditingForm_LevelGauge
         Me.GroupBox2.TabStop = False
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        '
+        'chkShowAlarms
+        '
+        resources.ApplyResources(Me.chkShowAlarms, "chkShowAlarms")
+        Me.chkShowAlarms.Name = "chkShowAlarms"
+        Me.ToolTipValues.SetToolTip(Me.chkShowAlarms, resources.GetString("chkShowAlarms.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkShowAlarms, resources.GetString("chkShowAlarms.ToolTip1"))
+        Me.chkShowAlarms.UseVisualStyleBackColor = True
         '
         'tbVeryHigh
         '
@@ -349,4 +359,5 @@ Partial Class EditingForm_LevelGauge
     Friend WithEvents chkLow As CheckBox
     Public WithEvents tbVeryLow As TextBox
     Friend WithEvents chkVeryLow As CheckBox
+    Friend WithEvents chkShowAlarms As CheckBox
 End Class

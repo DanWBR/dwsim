@@ -160,6 +160,9 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Indicated Property</value>
   </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Object ID</value>
+  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
@@ -169,8 +172,11 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Object ID</value>
+  <data name="chkShowAlarms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 17</value>
+  </data>
+  <data name="chkShowAlarms.Text" xml:space="preserve">
+    <value>Show Alarm Indicators</value>
   </data>
   <data name="chkVeryHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 17</value>
