@@ -26,9 +26,6 @@ Partial Class SplashScreen
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.LabelLicense = New System.Windows.Forms.Label()
         Me.lblCopyright = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblAppVersion = New System.Windows.Forms.Label()
-        Me.lblFrameworkVersion = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -54,30 +51,6 @@ Partial Class SplashScreen
         Me.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
         Me.lblCopyright.Name = "lblCopyright"
         '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Name = "Label1"
-        '
-        'lblAppVersion
-        '
-        resources.ApplyResources(Me.lblAppVersion, "lblAppVersion")
-        Me.lblAppVersion.BackColor = System.Drawing.Color.Transparent
-        Me.lblAppVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lblAppVersion.ForeColor = System.Drawing.Color.White
-        Me.lblAppVersion.Name = "lblAppVersion"
-        '
-        'lblFrameworkVersion
-        '
-        resources.ApplyResources(Me.lblFrameworkVersion, "lblFrameworkVersion")
-        Me.lblFrameworkVersion.BackColor = System.Drawing.Color.Transparent
-        Me.lblFrameworkVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lblFrameworkVersion.ForeColor = System.Drawing.Color.White
-        Me.lblFrameworkVersion.Name = "lblFrameworkVersion"
-        '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
@@ -93,9 +66,6 @@ Partial Class SplashScreen
         Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.DWSIM_splash
         Me.ControlBox = False
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.lblFrameworkVersion)
-        Me.Controls.Add(Me.lblAppVersion)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblCopyright)
         Me.Controls.Add(Me.LabelLicense)
         Me.Controls.Add(Me.lblVersion)
@@ -112,8 +82,5 @@ Partial Class SplashScreen
     Public WithEvents lblVersion As System.Windows.Forms.Label
     Public WithEvents LabelLicense As System.Windows.Forms.Label
     Public WithEvents lblCopyright As System.Windows.Forms.Label
-    Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents lblAppVersion As System.Windows.Forms.Label
-    Public WithEvents lblFrameworkVersion As System.Windows.Forms.Label
     Public WithEvents Label2 As Label
 End Class

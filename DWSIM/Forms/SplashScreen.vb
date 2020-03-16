@@ -38,15 +38,12 @@ Public NotInheritable Class SplashScreen
 #End If
 
         If Environment.Is64BitProcess Then
-            lblVersion.Text += " (64-bit)"
+            lblVersion.Text += " (" + My.Application.Info.Version.ToString + ", Classic UI, 64-bit)"
         Else
-            lblVersion.Text += " (32-bit)"
+            lblVersion.Text += " (" + My.Application.Info.Version.ToString + ", Classic UI, 32-bit)"
         End If
 
         lblCopyright.Text = My.Application.Info.Copyright
-
-        lblAppVersion.Text = "Version " + My.Application.Info.Version.ToString + " (Classic UI)"
-        lblFrameworkVersion.Text = SharedClasses.Utility.GetRuntimeVersion()
 
     End Sub
 
