@@ -1790,6 +1790,18 @@ Public Class FormMain
             End Try
         Next
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions").Elements.ToList
+
+            form.StoredSolutions.Clear()
+
+            For Each xel As XElement In data
+                form.StoredSolutions.Add(xel.Name.LocalName, xel.Elements)
+            Next
+
+        End If
+
         data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
 
         For Each xel As XElement In data
@@ -2315,6 +2327,18 @@ Public Class FormMain
             End Try
         Next
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions").Elements.ToList
+
+            form.StoredSolutions.Clear()
+
+            For Each xel As XElement In data
+                form.StoredSolutions.Add(xel.Name.LocalName, xel.Elements)
+            Next
+
+        End If
+
         data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
 
         For Each xel As XElement In data
@@ -2836,6 +2860,13 @@ Public Class FormMain
 
         For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In form.Options.Reactions
             xel.Add(New XElement("Reaction", {DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("StoredSolutions"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions")
+
+        For Each pp As KeyValuePair(Of String, List(Of XElement)) In form.StoredSolutions
+            xel.Add(New XElement("Solution", {DirectCast(pp.Value, ICustomXMLSerialization).SaveData().ToArray()}))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))

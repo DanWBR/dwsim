@@ -19,29 +19,29 @@
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
 
-Public Class DynamicEvent
+Public Class CauseAndEffectItem
 
-    Implements IDynamicsEvent, ICustomXMLSerialization
+    Implements IDynamicsCauseAndEffectItem, ICustomXMLSerialization
 
-    Public Property ID As String = "" Implements IDynamicsEvent.ID
+    Public Property ID As String Implements IDynamicsCauseAndEffectItem.ID
 
-    Public Property Description As String = "" Implements IDynamicsEvent.Description
+    Public Property Description As String Implements IDynamicsCauseAndEffectItem.Description
 
-    Public Property TimeStamp As Date Implements IDynamicsEvent.TimeStamp
+    Public Property Enabled As Boolean Implements IDynamicsCauseAndEffectItem.Enabled
 
-    Public Property EventType As Dynamics.DynamicsEventType = Dynamics.DynamicsEventType.ChangeProperty Implements IDynamicsEvent.EventType
+    Public Property AssociatedIndicator As String Implements IDynamicsCauseAndEffectItem.AssociatedIndicator
 
-    Public Property SimulationObjectID As String = "" Implements IDynamicsEvent.SimulationObjectID
+    Public Property AssociatedIndicatorAlarm As Dynamics.DynamicsAlarmType Implements IDynamicsCauseAndEffectItem.AssociatedIndicatorAlarm
 
-    Public Property SimulationObjectProperty As String = "" Implements IDynamicsEvent.SimulationObjectProperty
+    Public Property SimulationObjectID As String Implements IDynamicsCauseAndEffectItem.SimulationObjectID
 
-    Public Property SimulationObjectPropertyValue As String = "" Implements IDynamicsEvent.SimulationObjectPropertyValue
+    Public Property SimulationObjectProperty As String Implements IDynamicsCauseAndEffectItem.SimulationObjectProperty
 
-    Public Property SimulationObjectPropertyUnits As String = "" Implements IDynamicsEvent.SimulationObjectPropertyUnits
+    Public Property SimulationObjectPropertyValue As String Implements IDynamicsCauseAndEffectItem.SimulationObjectPropertyValue
 
-    Public Property ScriptID As String = "" Implements IDynamicsEvent.ScriptID
+    Public Property SimulationObjectPropertyUnits As String Implements IDynamicsCauseAndEffectItem.SimulationObjectPropertyUnits
 
-    Public Property Enabled As Boolean = True Implements IDynamicsEvent.Enabled
+    Public Property ScriptID As String Implements IDynamicsCauseAndEffectItem.ScriptID
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Return XMLSerializer.XMLSerializer.Serialize(Me)

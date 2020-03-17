@@ -64,7 +64,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CauseAndEffectItem.vb" />
+    <Compile Include="CauseAndEffectMatrix.vb" />
     <Compile Include="Event.vb" />
+    <Compile Include="EventSet.vb" />
     <Compile Include="Integrator.vb" />
     <Compile Include="Manager.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

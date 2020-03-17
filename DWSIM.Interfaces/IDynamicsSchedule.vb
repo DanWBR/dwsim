@@ -22,8 +22,14 @@ Public Interface IDynamicsSchedule
 
     Property Description As String
 
-    Property Events As Dictionary(Of String, IDynamicsEvent)
+    Property CurrentIntegrator As String
 
-    Property Integrator As IDynamicsIntegrator
+    Property UsesCauseAndEffectMatrix As Boolean
+
+    Property UsesEventList As Boolean
+
+    Property CurrentCauseAndEffectMatrix As String
+
+    Property CurrentEventList As String
 
 End Interface

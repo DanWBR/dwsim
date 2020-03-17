@@ -1293,6 +1293,17 @@ Imports DWSIM.Interfaces.Enums
             End Try
         Next
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions").Elements.ToList
+
+            StoredSolutions.Clear()
+
+            For Each xel As XElement In data
+                StoredSolutions.Add(xel.Name.LocalName, xel.Elements)
+            Next
+
+        End If
 
         If xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases") IsNot Nothing Then
 
@@ -1478,6 +1489,13 @@ Imports DWSIM.Interfaces.Enums
 
         For Each pp As KeyValuePair(Of String, IReaction) In Options.Reactions
             xel.Add(New XElement("Reaction", {DirectCast(pp.Value, ICustomXMLSerialization).SaveData().ToArray()}))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("StoredSolutions"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions")
+
+        For Each pp As KeyValuePair(Of String, List(Of XElement)) In StoredSolutions
+            xel.Add(New XElement("Solution", {DirectCast(pp.Value, ICustomXMLSerialization).SaveData().ToArray()}))
         Next
 
         Dim flsconfig As New System.Text.StringBuilder()
@@ -2260,6 +2278,8 @@ Label_00CC:
     Public Property Scripts As New Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
 
     Public Property Charts As Dictionary(Of String, IChart) = New Dictionary(Of String, IChart) Implements IFlowsheet.Charts
+
+    Public Property StoredSolutions As Dictionary(Of String, List(Of XElement)) = New Dictionary(Of String, List(Of XElement)) Implements IFlowsheet.StoredSolutions
 
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)

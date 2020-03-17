@@ -28,6 +28,10 @@ Public Class Manager
 
     Public Property CurrentSchedule As String = "" Implements IDynamicsManager.CurrentSchedule
 
+    Public Property CauseAndEffectMatrixList As Dictionary(Of String, IDynamicsCauseAndEffectMatrix) Implements IDynamicsManager.CauseAndEffectMatrixList
+
+    Public Property EventSetList As Dictionary(Of String, IDynamicsEventSet) Implements IDynamicsManager.EventSetList
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         Dim e1 = New XElement("ScheduleList")
@@ -36,6 +40,12 @@ Public Class Manager
                                 DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
         Next
         data.Add(e1)
+        Dim e2 = New XElement("EventSetList")
+        For Each kvp As KeyValuePair(Of String, IDynamicsEventSet) In EventSetList
+            e2.Add(New XElement(kvp.Key,
+                                DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
+        Next
+        data.Add(e2)
         Return data
     End Function
 
@@ -48,6 +58,15 @@ Public Class Manager
                 Dim sch = New Schedule()
                 DirectCast(sch, ICustomXMLSerialization).LoadData(xel2.Elements)
                 ScheduleList.Add(sch.ID, sch)
+            Next
+        End If
+        Dim elm2 As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "EventSetList").LastOrDefault
+        If Not elm2 Is Nothing Then
+            EventSetList = New Dictionary(Of String, IDynamicsEventSet)
+            For Each xel2 As XElement In elm2.Elements
+                Dim es = New EventSet
+                DirectCast(es, ICustomXMLSerialization).LoadData(xel2.Elements)
+                EventSetList.Add(es.ID, es)
             Next
         End If
         Return True

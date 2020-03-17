@@ -22,6 +22,10 @@ Public Interface IDynamicsManager
 
     Property ScheduleList As Dictionary(Of String, IDynamicsSchedule)
 
+    Property CauseAndEffectMatrixList As Dictionary(Of String, IDynamicsCauseAndEffectMatrix)
+
+    Property EventSetList As Dictionary(Of String, IDynamicsEventSet)
+
     Property CurrentSchedule As String
 
 End Interface

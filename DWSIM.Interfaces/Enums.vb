@@ -30,6 +30,13 @@ Namespace Enums
             RunScript = 1
         End Enum
 
+        Public Enum DynamicsAlarmType
+            LL = 0
+            L = 1
+            H = 2
+            HH = 3
+        End Enum
+
     End Class
 
     Public Class Helpers

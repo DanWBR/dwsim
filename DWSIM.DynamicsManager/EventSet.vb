@@ -1,4 +1,4 @@
-﻿'    DWSIM Interface definitions
+﻿'    DWSIM Dynamics Library
 '    Copyright 2020 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -16,26 +16,16 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Interface IDynamicsEvent
+Imports DWSIM.Interfaces
 
-    Property ID As String
+Public Class EventSet
 
-    Property Description As String
+    Implements IDynamicsEventSet
 
-    Property Enabled As Boolean
+    Public Property ID As String Implements IDynamicsEventSet.ID
 
-    Property TimeStamp As DateTime
+    Public Property Description As String Implements IDynamicsEventSet.Description
 
-    Property EventType As Enums.Dynamics.DynamicsEventType
+    Public Property Events As Dictionary(Of String, IDynamicsEvent) = New Dictionary(Of String, IDynamicsEvent) Implements IDynamicsEventSet.Events
 
-    Property SimulationObjectID As String
-
-    Property SimulationObjectProperty As String
-
-    Property SimulationObjectPropertyValue As String
-
-    Property SimulationObjectPropertyUnits As String
-
-    Property ScriptID As String
-
-End Interface
+End Class

@@ -128,13 +128,16 @@
     <value>12, 17</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>52, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
-    <value>Scenario</value>
+    <value>Schedule</value>
   </data>
   <data name="cbScenario.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 12</value>
+    <value>73, 12</value>
+  </data>
+  <data name="btnStop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 49</value>
   </data>
   <data name="TrackBar1.Location" type="System.Drawing.Point, System.Drawing">
     <value>137, 44</value>
@@ -146,6 +149,6 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Integrator Controls</value>
+    <value>Dynamic Mode Integrator Controls</value>
   </data>
 </root>

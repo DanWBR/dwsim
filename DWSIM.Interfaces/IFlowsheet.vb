@@ -68,6 +68,8 @@
 
     Property SimulationObjects As Dictionary(Of String, ISimulationObject)
 
+    Property StoredSolutions As Dictionary(Of String, List(Of XElement))
+
     Property Charts As Dictionary(Of String, IChart)
 
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType, Optional ByVal exceptionID As String = "")

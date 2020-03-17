@@ -95,7 +95,10 @@
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
     <Compile Include="ICustomXMLSerialization.vb" />
+    <Compile Include="IDynamicsCauseAndEffectItem.vb" />
+    <Compile Include="IDynamicsCauseAndEffectMatrix.vb" />
     <Compile Include="IDynamicsEvent.vb" />
+    <Compile Include="IDynamicsEventSet.vb" />
     <Compile Include="IDynamicsManager.vb" />
     <Compile Include="IDynamicsSchedule.vb" />
     <Compile Include="IFlashAlgorithm.vb" />

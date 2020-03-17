@@ -55,8 +55,12 @@ Public Class FormFlowsheet
 
     Public Property ExtraProperties As New ExpandoObject Implements IFlowsheet.ExtraProperties
 
+    Public Property StoredSolutions As Dictionary(Of String, List(Of XElement)) = New Dictionary(Of String, List(Of XElement)) Implements IFlowsheet.StoredSolutions
+
     Public Property MasterFlowsheet As IFlowsheet = Nothing Implements IFlowsheet.MasterFlowsheet
+
     <Xml.Serialization.XmlIgnore> Public Property MasterUnitOp As ISimulationObject = Nothing Implements IFlowsheet.MasterUnitOp
+
     Public Property RedirectMessages As Boolean = False Implements IFlowsheet.RedirectMessages
 
     Public FrmStSim1 As New FormSimulSettings
