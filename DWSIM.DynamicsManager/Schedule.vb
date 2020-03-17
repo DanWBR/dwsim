@@ -20,7 +20,7 @@ Imports DWSIM.Interfaces
 
 Public Class Schedule
 
-    Implements Interfaces.IDynamicsSchedule
+    Implements IDynamicsSchedule, ICustomXMLSerialization
 
     Public Property ID As String = "" Implements IDynamicsSchedule.ID
 
@@ -29,5 +29,14 @@ Public Class Schedule
     Public Property Events As Dictionary(Of String, IDynamicsEvent) = New Dictionary(Of String, IDynamicsEvent) Implements IDynamicsSchedule.Events
 
     Public Property Integrator As IDynamicsIntegrator = New Integrator Implements IDynamicsSchedule.Integrator
+
+    Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
+        Return XMLSerializer.XMLSerializer.Serialize(Me)
+    End Function
+
+    Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
+        XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        Return True
+    End Function
 
 End Class

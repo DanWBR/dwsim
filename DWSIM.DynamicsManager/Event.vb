@@ -21,7 +21,7 @@ Imports DWSIM.Interfaces.Enums
 
 Public Class DynamicEvent
 
-    Implements Interfaces.IDynamicsEvent
+    Implements IDynamicsEvent, ICustomXMLSerialization
 
     Public Property ID As String = "" Implements IDynamicsEvent.ID
 
@@ -40,5 +40,14 @@ Public Class DynamicEvent
     Public Property SimulationObjectPropertyUnits As String = "" Implements IDynamicsEvent.SimulationObjectPropertyUnits
 
     Public Property ScriptID As String = "" Implements IDynamicsEvent.ScriptID
+
+    Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
+        Return XMLSerializer.XMLSerializer.Serialize(Me)
+    End Function
+
+    Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
+        XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        Return True
+    End Function
 
 End Class

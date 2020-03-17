@@ -20,12 +20,21 @@ Imports DWSIM.Interfaces
 
 Public Class Manager
 
-    Implements Interfaces.IDynamicsManager
+    Implements Interfaces.IDynamicsManager, ICustomXMLSerialization
 
     Public Property Description As String = "" Implements IDynamicsManager.Description
 
     Public Property ScheduleList As Dictionary(Of String, IDynamicsSchedule) = New Dictionary(Of String, IDynamicsSchedule) Implements IDynamicsManager.ScheduleList
 
     Public Property CurrentSchedule As String = "" Implements IDynamicsManager.CurrentSchedule
+
+    Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
+        Return XMLSerializer.XMLSerializer.Serialize(Me)
+    End Function
+
+    Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
+        XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        Return True
+    End Function
 
 End Class

@@ -20,7 +20,7 @@ Imports DWSIM.Interfaces
 
 Public Class Integrator
 
-    Implements Interfaces.IDynamicsIntegrator
+    Implements Interfaces.IDynamicsIntegrator, ICustomXMLSerialization
 
     Public Property ShouldCalculateEquilibrium As Boolean Implements IDynamicsIntegrator.ShouldCalculateEquilibrium
 
@@ -43,5 +43,14 @@ Public Class Integrator
     Public Property RealTime As Boolean = False Implements IDynamicsIntegrator.RealTime
 
     Public Property StoredSolutions As Dictionary(Of Date, List(Of XElement)) = New Dictionary(Of Date, List(Of XElement)) Implements IDynamicsIntegrator.StoredSolutions
+
+    Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
+        Return XMLSerializer.XMLSerializer.Serialize(Me)
+    End Function
+
+    Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
+        XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        Return True
+    End Function
 
 End Class
