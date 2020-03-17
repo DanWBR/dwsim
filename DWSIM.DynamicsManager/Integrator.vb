@@ -45,11 +45,26 @@ Public Class Integrator
     Public Property StoredSolutions As Dictionary(Of Date, List(Of XElement)) = New Dictionary(Of Date, List(Of XElement)) Implements IDynamicsIntegrator.StoredSolutions
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
-        Return XMLSerializer.XMLSerializer.Serialize(Me)
+        Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
+        Dim e1 = New XElement("StoredSolutions")
+        For Each kvp As KeyValuePair(Of Date, List(Of XElement)) In StoredSolutions
+            e1.Add(New XElement(kvp.Key.ToBinary.ToString(Globalization.CultureInfo.InvariantCulture),
+                                kvp.Value))
+        Next
+        data.Add(e1)
+        Return data
     End Function
 
     Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
         XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "StoredSolutions").LastOrDefault
+        If Not elm Is Nothing Then
+            StoredSolutions = New Dictionary(Of Date, List(Of XElement))
+            For Each xel2 As XElement In elm.Elements
+                StoredSolutions.Add(Date.FromBinary(Double.Parse(xel2.Name.LocalName, Globalization.CultureInfo.InvariantCulture)),
+                                    xel2.Elements)
+            Next
+        End If
         Return True
     End Function
 

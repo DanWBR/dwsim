@@ -29,11 +29,27 @@ Public Class Manager
     Public Property CurrentSchedule As String = "" Implements IDynamicsManager.CurrentSchedule
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
-        Return XMLSerializer.XMLSerializer.Serialize(Me)
+        Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
+        Dim e1 = New XElement("ScheduleList")
+        For Each kvp As KeyValuePair(Of String, IDynamicsSchedule) In ScheduleList
+            e1.Add(New XElement(kvp.Key,
+                                DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
+        Next
+        data.Add(e1)
+        Return data
     End Function
 
     Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
         XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "ScheduleList").LastOrDefault
+        If Not elm Is Nothing Then
+            ScheduleList = New Dictionary(Of String, IDynamicsSchedule)
+            For Each xel2 As XElement In elm.Elements
+                Dim sch = New Schedule()
+                DirectCast(sch, ICustomXMLSerialization).LoadData(xel2.Elements)
+                ScheduleList.Add(sch.ID, sch)
+            Next
+        End If
         Return True
     End Function
 
