@@ -100,6 +100,8 @@
             SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Flow
         End If
 
+        SimObject.GetFlowsheet.UpdateInterface()
+
     End Sub
 
 End Class

@@ -192,6 +192,9 @@
   <data name="cbSourceUnits.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
@@ -285,8 +288,8 @@
   <data name="cbSourceObj.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="chkVeryLow.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -294,7 +297,7 @@
   <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblSourceVal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbSourceProp.ToolTip1" xml:space="preserve">
@@ -330,8 +333,8 @@
   <data name="&gt;&gt;tbVeryHigh.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 157</value>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 50</value>
   </data>
   <data name="GroupBox5.ToolTip1" xml:space="preserve">
     <value />
@@ -359,9 +362,6 @@
   </data>
   <data name="&gt;&gt;cbSourceObj.Name" xml:space="preserve">
     <value>cbSourceObj</value>
-  </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -397,7 +397,7 @@
     <value>Label3</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.0.7378.31806, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.0.7382.19174, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
     <value>334, 18</value>
@@ -411,14 +411,14 @@
   <data name="&gt;&gt;tbVeryHigh.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 61</value>
-  </data>
   <data name="chkShowAlarms.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="Label19.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 8</value>
@@ -447,14 +447,11 @@
   <data name="chkHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 118</value>
   </data>
-  <data name="chkVeryLow.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Propriedade</value>
-  </data>
-  <data name="NumericUpDown1.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
   </data>
   <data name="tbVeryHigh.ToolTip1" xml:space="preserve">
     <value />
@@ -501,11 +498,11 @@
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
+  <data name="GroupBox5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 19</value>
-  </data>
-  <data name="chkActive.ToolTip1" xml:space="preserve">
-    <value />
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 96</value>
@@ -519,8 +516,11 @@
   <data name="&gt;&gt;tbVeryLow.Name" xml:space="preserve">
     <value>tbVeryLow</value>
   </data>
-  <data name="&gt;&gt;lblSourceVal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Objeto</value>
+  </data>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -609,9 +609,6 @@
   <data name="&gt;&gt;chkVeryLow.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="chkVeryHigh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -635,9 +632,6 @@
   </data>
   <data name="&gt;&gt;lblTag.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
   </data>
   <data name="cbSourceUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -663,6 +657,9 @@
   <data name="&gt;&gt;cbSourceUnits.Name" xml:space="preserve">
     <value>cbSourceUnits</value>
   </data>
+  <data name="chkVeryHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 144</value>
+  </data>
   <data name="chkVeryHigh.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -687,14 +684,14 @@
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 229</value>
   </data>
+  <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 157</value>
+  </data>
   <data name="tbLow.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 89</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Objeto</value>
   </data>
   <data name="NumericUpDown1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -738,8 +735,8 @@
   <data name="tbHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 115</value>
   </data>
-  <data name="Label19.Text" xml:space="preserve">
-    <value>Objeto</value>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
   <data name="chkShowAlarms.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -840,6 +837,9 @@
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
   </data>
+  <data name="chkActive.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="chkVeryLow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -864,10 +864,13 @@
   <data name="chkShowAlarms.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="tbVeryLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 63</value>
+  </data>
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label19.ToolTip1" xml:space="preserve">
+  <data name="Label4.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;chkVeryHigh.Name" xml:space="preserve">
@@ -918,11 +921,14 @@
   <data name="&gt;&gt;cbSourceUnitType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 50</value>
+  <data name="chkVeryHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
   </data>
   <data name="GroupBox1.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="chkLow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -969,9 +975,6 @@
   <data name="&gt;&gt;lblSourceVal.Name" xml:space="preserve">
     <value>lblSourceVal</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox2.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -990,17 +993,11 @@
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
   <data name="tbHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
-  </data>
-  <data name="NumericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 20</value>
   </data>
   <data name="tbHigh.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -1017,14 +1014,14 @@
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Dígitos Decimais</value>
   </data>
   <data name="&gt;&gt;tbVeryLow.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="chkVeryHigh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
   </data>
   <data name="NumericUpDown2.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -1050,20 +1047,23 @@
   <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
+  <data name="&gt;&gt;chkHigh.Name" xml:space="preserve">
+    <value>chkHigh</value>
+  </data>
   <data name="&gt;&gt;tbHigh.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
   </data>
   <data name="NumericUpDown1.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="GroupBox5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 61</value>
   </data>
-  <data name="chkLow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="NumericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
   </data>
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1074,8 +1074,8 @@
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
-  <data name="tbVeryLow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 63</value>
+  <data name="chkVeryHigh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
@@ -1083,8 +1083,8 @@
   <data name="Label19.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 13</value>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="Label3.ToolTip" xml:space="preserve">
     <value />
@@ -1095,8 +1095,8 @@
   <data name="&gt;&gt;cbSourceUnitType.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="chkVeryHigh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 144</value>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Objeto</value>
   </data>
   <data name="cbSourceUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 21</value>
@@ -1122,8 +1122,8 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;chkHigh.Name" xml:space="preserve">
-    <value>chkHigh</value>
+  <data name="NumericUpDown1.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
   </data>
   <data name="chkVeryLow.ToolTip1" xml:space="preserve">
     <value />

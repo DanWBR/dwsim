@@ -161,13 +161,7 @@
     <value>7, 81</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Indicated Property</value>
-  </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 67</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Object ID</value>
+    <value>Monitored Property</value>
   </data>
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 29</value>
@@ -186,6 +180,12 @@
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 67</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Object ID</value>
   </data>
   <data name="chkShowAlarms.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 17</value>
