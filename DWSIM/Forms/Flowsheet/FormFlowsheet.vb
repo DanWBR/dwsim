@@ -3084,6 +3084,55 @@ Public Class FormFlowsheet
 
     End Function
 
+    Private Sub tsbStoreSolution_Click(sender As Object, e As EventArgs) Handles tsbStoreSolution.Click
+
+        Dim data = GetProcessData()
+
+        Dim f As New FormEnterName
+
+        If f.ShowDialog(Me) = DialogResult.OK Then
+            Dim name = f.tbName.Text
+            If name <> "" Then
+                If Not StoredSolutions.ContainsKey(name) Then
+                    StoredSolutions.Add(name, data)
+                    tscbStoredSolutions.Items.Add(name)
+                    MessageBox.Show(GetTranslatedString1("SolutionStored"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show(GetTranslatedString1("InvalidName"), GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MessageBox.Show(GetTranslatedString1("InvalidName"), GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub tsbLoadSolution_Click(sender As Object, e As EventArgs) Handles tsbLoadSolution.Click
+
+        If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
+            Try
+                LoadProcessData(StoredSolutions(tscbStoredSolutions.SelectedItem.ToString))
+                UpdateInterface()
+                UpdateOpenEditForms()
+                MessageBox.Show(GetTranslatedString1("SolutionRestored"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+
+    End Sub
+
+    Private Sub tsbDeleteSolution_Click(sender As Object, e As EventArgs) Handles tsbDeleteSolution.Click
+
+        If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
+            If MessageBox.Show(GetTranslatedString1("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                StoredSolutions.Remove(tscbStoredSolutions.SelectedItem.ToString)
+                tscbStoredSolutions.Items.Remove(tscbStoredSolutions.SelectedItem)
+            End If
+        End If
+
+    End Sub
+
     Public Sub LoadProcessData(data As List(Of XElement)) Implements IFlowsheet.LoadProcessData
 
         For Each xel In data

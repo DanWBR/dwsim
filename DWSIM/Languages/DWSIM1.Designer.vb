@@ -8272,6 +8272,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O nome informado não é valido..
+        '''</summary>
+        Friend Shared ReadOnly Property InvalidName() As String
+            Get
+                Return ResourceManager.GetString("InvalidName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to IsGradientBackground.
         '''</summary>
         Friend Shared ReadOnly Property IsGradientBackground() As String
@@ -14136,6 +14145,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Soloseco() As String
             Get
                 Return ResourceManager.GetString("Soloseco", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Estado restaurado com sucesso..
+        '''</summary>
+        Friend Shared ReadOnly Property SolutionRestored() As String
+            Get
+                Return ResourceManager.GetString("SolutionRestored", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Estado salvo com sucesso..
+        '''</summary>
+        Friend Shared ReadOnly Property SolutionStored() As String
+            Get
+                Return ResourceManager.GetString("SolutionStored", resourceCulture)
             End Get
         End Property
         

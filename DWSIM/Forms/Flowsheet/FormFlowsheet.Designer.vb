@@ -112,6 +112,12 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbUndo = New System.Windows.Forms.ToolStripDropDownButton()
         Me.tsbRedo = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.tscbStoredSolutions = New System.Windows.Forms.ToolStripComboBox()
+        Me.tsbStoreSolution = New System.Windows.Forms.ToolStripButton()
+        Me.tsbLoadSolution = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDeleteSolution = New System.Windows.Forms.ToolStripButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TSTable.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -668,7 +674,7 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tsbAtivar, Me.tsbCalcF, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver, Me.ToolStripSeparator2, Me.tsbUndo, Me.tsbRedo})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tsbAtivar, Me.tsbCalcF, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver, Me.ToolStripSeparator2, Me.tsbUndo, Me.tsbRedo, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.tscbStoredSolutions, Me.tsbStoreSolution, Me.tsbLoadSolution, Me.tsbDeleteSolution})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripButton1
@@ -736,6 +742,43 @@ Partial Class FormFlowsheet
         Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_16
         Me.tsbRedo.Name = "tsbRedo"
+        '
+        'ToolStripSeparator3
+        '
+        resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        '
+        'ToolStripLabel1
+        '
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        '
+        'tscbStoredSolutions
+        '
+        resources.ApplyResources(Me.tscbStoredSolutions, "tscbStoredSolutions")
+        Me.tscbStoredSolutions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tscbStoredSolutions.Name = "tscbStoredSolutions"
+        '
+        'tsbStoreSolution
+        '
+        resources.ApplyResources(Me.tsbStoreSolution, "tsbStoreSolution")
+        Me.tsbStoreSolution.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbStoreSolution.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
+        Me.tsbStoreSolution.Name = "tsbStoreSolution"
+        '
+        'tsbLoadSolution
+        '
+        resources.ApplyResources(Me.tsbLoadSolution, "tsbLoadSolution")
+        Me.tsbLoadSolution.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbLoadSolution.Image = Global.DWSIM.My.Resources.Resources.arrow_down
+        Me.tsbLoadSolution.Name = "tsbLoadSolution"
+        '
+        'tsbDeleteSolution
+        '
+        resources.ApplyResources(Me.tsbDeleteSolution, "tsbDeleteSolution")
+        Me.tsbDeleteSolution.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDeleteSolution.Image = Global.DWSIM.My.Resources.Resources.cross
+        Me.tsbDeleteSolution.Name = "tsbDeleteSolution"
         '
         'FormFlowsheet
         '
@@ -853,4 +896,10 @@ Partial Class FormFlowsheet
     Friend WithEvents tsbUndo As ToolStripDropDownButton
     Friend WithEvents tsbRedo As ToolStripDropDownButton
     Friend WithEvents tsbCalcF As ToolStripButton
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents tscbStoredSolutions As ToolStripComboBox
+    Friend WithEvents tsbStoreSolution As ToolStripButton
+    Friend WithEvents tsbLoadSolution As ToolStripButton
+    Friend WithEvents tsbDeleteSolution As ToolStripButton
 End Class

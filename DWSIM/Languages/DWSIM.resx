@@ -5625,4 +5625,13 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="Conductance" xml:space="preserve">
     <value>Condutância</value>
   </data>
+  <data name="InvalidName" xml:space="preserve">
+    <value>O nome informado não é valido.</value>
+  </data>
+  <data name="SolutionRestored" xml:space="preserve">
+    <value>Estado restaurado com sucesso.</value>
+  </data>
+  <data name="SolutionStored" xml:space="preserve">
+    <value>Estado salvo com sucesso.</value>
+  </data>
 </root>

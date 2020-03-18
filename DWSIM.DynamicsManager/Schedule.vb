@@ -36,6 +36,8 @@ Public Class Schedule
 
     Public Property CurrentEventList As String = "" Implements IDynamicsSchedule.CurrentEventList
 
+    Public Property InitialFlowsheetStateID As String = "" Implements IDynamicsSchedule.InitialFlowsheetStateID
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Return XMLSerializer.XMLSerializer.Serialize(Me)
     End Function

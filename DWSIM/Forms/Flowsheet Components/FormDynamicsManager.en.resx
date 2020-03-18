@@ -335,6 +335,12 @@
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Integrators</value>
   </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Initial Flowsheet State</value>
+  </data>
   <data name="chkIntegratorUseMatrix.Text" xml:space="preserve">
     <value>Uses Cause and Effect Matrix</value>
   </data>

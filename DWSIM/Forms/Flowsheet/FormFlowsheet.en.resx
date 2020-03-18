@@ -125,7 +125,7 @@
     <value>Close Active Simulation</value>
   </data>
   <data name="ArquivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+    <value>37, 24</value>
   </data>
   <data name="ArquivoToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;File</value>
@@ -204,7 +204,7 @@
     <value>Simulation Settings</value>
   </data>
   <data name="EditarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
+    <value>39, 24</value>
   </data>
   <data name="EditarToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;dit</value>
@@ -265,7 +265,7 @@
     <value>Chart</value>
   </data>
   <data name="InserirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
+    <value>48, 24</value>
   </data>
   <data name="InserirToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Insert</value>
@@ -275,6 +275,9 @@
   </data>
   <data name="CompoundCreatorWizardTSMI.Text" xml:space="preserve">
     <value>Compound Creator Wizard</value>
+  </data>
+  <data name="PropriedadesDasSubstanciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 22</value>
   </data>
   <data name="PropriedadesDasSubstanciasToolStripMenuItem.Text" xml:space="preserve">
     <value>Pure Compound Property Viewer/Editor</value>
@@ -307,7 +310,7 @@
     <value>321, 6</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
+    <value>46, 24</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
@@ -322,7 +325,7 @@
     <value>Add Utility</value>
   </data>
   <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
+    <value>58, 24</value>
   </data>
   <data name="UtilitiesTSMI.Text" xml:space="preserve">
     <value>&amp;Utilities</value>
@@ -343,7 +346,7 @@
     <value>Multivariate Optimizer</value>
   </data>
   <data name="OtimizaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
+    <value>88, 24</value>
   </data>
   <data name="OtimizaToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Optimization</value>
@@ -355,7 +358,7 @@
     <value>Create Report</value>
   </data>
   <data name="ResultadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
+    <value>56, 24</value>
   </data>
   <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Results</value>
@@ -418,7 +421,7 @@
     <value>Close Opened Object Editors</value>
   </data>
   <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>44, 24</value>
   </data>
   <data name="ExibirToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;View</value>
@@ -444,17 +447,8 @@
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="tsbAtivar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbAtivar.Text" xml:space="preserve">
     <value>Flowsheet Calculator Active (F6)</value>
-  </data>
-  <data name="tsbCalcF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbCalcF.ToolTipText" xml:space="preserve">
     <value>Force Solve (Shift+F5)</value>
@@ -471,32 +465,32 @@
   <data name="tsbAbortCalc.Text" xml:space="preserve">
     <value>Abort Solver (Pause/Break)</value>
   </data>
-  <data name="tsbSimultAdjustSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
     <value>Simultaneous Adjust Solver Active (F7)</value>
-  </data>
-  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="tsbUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 22</value>
   </data>
   <data name="tsbUndo.Text" xml:space="preserve">
     <value>Undo</value>
   </data>
-  <data name="tsbRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 22</value>
-  </data>
   <data name="tsbRedo.Text" xml:space="preserve">
     <value>Redo</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>951, 25</value>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 22</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Flowsheet States</value>
+  </data>
+  <data name="tsbStoreSolution.Text" xml:space="preserve">
+    <value>Store Current</value>
+  </data>
+  <data name="tsbLoadSolution.Text" xml:space="preserve">
+    <value>Restore Selected</value>
+  </data>
+  <data name="tsbDeleteSolution.Text" xml:space="preserve">
+    <value>Remove Selected</value>
+  </data>
+  <data name="tsbDeleteSolution.ToolTipText" xml:space="preserve">
+    <value>Remove Selected</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

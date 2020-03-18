@@ -32,4 +32,6 @@ Public Interface IDynamicsSchedule
 
     Property CurrentEventList As String
 
+    Property InitialFlowsheetStateID As String
+
 End Interface

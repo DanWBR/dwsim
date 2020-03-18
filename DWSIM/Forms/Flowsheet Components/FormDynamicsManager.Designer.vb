@@ -30,6 +30,16 @@ Partial Class FormDynamicsManager
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.gridselectedset = New System.Windows.Forms.DataGridView()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.active = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.itemname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coleventstamp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coleventtype = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.associatedobject = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.associatedproperty = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.currentvalue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.failsafevalue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.btnAddEvent = New System.Windows.Forms.ToolStripButton()
         Me.btnCopyEvent = New System.Windows.Forms.ToolStripButton()
@@ -45,6 +55,15 @@ Partial Class FormDynamicsManager
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.grdiselmatrix = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmatind = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colalarm = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewComboBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
         Me.btnAddMatrixItem = New System.Windows.Forms.ToolStripButton()
         Me.btnCopyMatrixItem = New System.Windows.Forms.ToolStripButton()
@@ -83,6 +102,8 @@ Partial Class FormDynamicsManager
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cbScheduleInitialState = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.cbAssociatedIntegrator = New System.Windows.Forms.ComboBox()
         Me.cbSelectedEventSet = New System.Windows.Forms.ComboBox()
         Me.chkIntegratorUseMatrix = New System.Windows.Forms.CheckBox()
@@ -101,25 +122,6 @@ Partial Class FormDynamicsManager
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.chkDynamics = New System.Windows.Forms.CheckBox()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.active = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.itemname = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coleventstamp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coleventtype = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.associatedobject = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.associatedproperty = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.currentvalue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.failsafevalue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmatind = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colalarm = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewComboBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewComboBoxColumn4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -196,6 +198,81 @@ Partial Class FormDynamicsManager
         Me.gridselectedset.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridselectedset.Name = "gridselectedset"
         Me.gridselectedset.RowHeadersVisible = False
+        '
+        'id
+        '
+        resources.ApplyResources(Me.id, "id")
+        Me.id.Name = "id"
+        '
+        'active
+        '
+        Me.active.FalseValue = "False"
+        Me.active.FillWeight = 15.0!
+        resources.ApplyResources(Me.active, "active")
+        Me.active.Name = "active"
+        Me.active.TrueValue = "True"
+        '
+        'itemname
+        '
+        Me.itemname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.itemname.FillWeight = 54.21845!
+        resources.ApplyResources(Me.itemname, "itemname")
+        Me.itemname.Name = "itemname"
+        '
+        'coleventstamp
+        '
+        resources.ApplyResources(Me.coleventstamp, "coleventstamp")
+        Me.coleventstamp.Name = "coleventstamp"
+        '
+        'coleventtype
+        '
+        resources.ApplyResources(Me.coleventtype, "coleventtype")
+        Me.coleventtype.Name = "coleventtype"
+        '
+        'associatedobject
+        '
+        Me.associatedobject.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        resources.ApplyResources(Me.associatedobject, "associatedobject")
+        Me.associatedobject.Name = "associatedobject"
+        Me.associatedobject.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.associatedobject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'associatedproperty
+        '
+        Me.associatedproperty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.associatedproperty.FillWeight = 200.0!
+        resources.ApplyResources(Me.associatedproperty, "associatedproperty")
+        Me.associatedproperty.Name = "associatedproperty"
+        Me.associatedproperty.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.associatedproperty.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'currentvalue
+        '
+        Me.currentvalue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.currentvalue.DefaultCellStyle = DataGridViewCellStyle1
+        Me.currentvalue.FillWeight = 54.21845!
+        resources.ApplyResources(Me.currentvalue, "currentvalue")
+        Me.currentvalue.Name = "currentvalue"
+        Me.currentvalue.ReadOnly = True
+        '
+        'failsafevalue
+        '
+        Me.failsafevalue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.failsafevalue.DefaultCellStyle = DataGridViewCellStyle2
+        Me.failsafevalue.FillWeight = 54.21845!
+        resources.ApplyResources(Me.failsafevalue, "failsafevalue")
+        Me.failsafevalue.Name = "failsafevalue"
+        '
+        'unit
+        '
+        Me.unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.unit.FillWeight = 45.18204!
+        resources.ApplyResources(Me.unit, "unit")
+        Me.unit.Name = "unit"
+        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'ToolStrip2
         '
@@ -312,6 +389,71 @@ Partial Class FormDynamicsManager
         Me.grdiselmatrix.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grdiselmatrix.Name = "grdiselmatrix"
         Me.grdiselmatrix.RowHeadersVisible = False
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'DataGridViewCheckBoxColumn1
+        '
+        Me.DataGridViewCheckBoxColumn1.FalseValue = "False"
+        Me.DataGridViewCheckBoxColumn1.FillWeight = 15.0!
+        resources.ApplyResources(Me.DataGridViewCheckBoxColumn1, "DataGridViewCheckBoxColumn1")
+        Me.DataGridViewCheckBoxColumn1.Name = "DataGridViewCheckBoxColumn1"
+        Me.DataGridViewCheckBoxColumn1.TrueValue = "True"
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DataGridViewTextBoxColumn2.FillWeight = 54.21845!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'colmatind
+        '
+        resources.ApplyResources(Me.colmatind, "colmatind")
+        Me.colmatind.Name = "colmatind"
+        '
+        'colalarm
+        '
+        resources.ApplyResources(Me.colalarm, "colalarm")
+        Me.colalarm.Name = "colalarm"
+        '
+        'DataGridViewComboBoxColumn2
+        '
+        Me.DataGridViewComboBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        resources.ApplyResources(Me.DataGridViewComboBoxColumn2, "DataGridViewComboBoxColumn2")
+        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
+        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'DataGridViewComboBoxColumn3
+        '
+        Me.DataGridViewComboBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DataGridViewComboBoxColumn3.FillWeight = 200.0!
+        resources.ApplyResources(Me.DataGridViewComboBoxColumn3, "DataGridViewComboBoxColumn3")
+        Me.DataGridViewComboBoxColumn3.Name = "DataGridViewComboBoxColumn3"
+        Me.DataGridViewComboBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DataGridViewTextBoxColumn5.FillWeight = 54.21845!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        '
+        'DataGridViewComboBoxColumn4
+        '
+        Me.DataGridViewComboBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DataGridViewComboBoxColumn4.FillWeight = 45.18204!
+        resources.ApplyResources(Me.DataGridViewComboBoxColumn4, "DataGridViewComboBoxColumn4")
+        Me.DataGridViewComboBoxColumn4.Name = "DataGridViewComboBoxColumn4"
+        Me.DataGridViewComboBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'ToolStrip3
         '
@@ -586,6 +728,8 @@ Partial Class FormDynamicsManager
         'Panel2
         '
         resources.ApplyResources(Me.Panel2, "Panel2")
+        Me.Panel2.Controls.Add(Me.cbScheduleInitialState)
+        Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.cbAssociatedIntegrator)
         Me.Panel2.Controls.Add(Me.cbSelectedEventSet)
         Me.Panel2.Controls.Add(Me.chkIntegratorUseMatrix)
@@ -593,6 +737,18 @@ Partial Class FormDynamicsManager
         Me.Panel2.Controls.Add(Me.chkIntegratorUseEventSet)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Name = "Panel2"
+        '
+        'cbScheduleInitialState
+        '
+        resources.ApplyResources(Me.cbScheduleInitialState, "cbScheduleInitialState")
+        Me.cbScheduleInitialState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbScheduleInitialState.FormattingEnabled = True
+        Me.cbScheduleInitialState.Name = "cbScheduleInitialState"
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
         '
         'cbAssociatedIntegrator
         '
@@ -719,146 +875,6 @@ Partial Class FormDynamicsManager
         Me.chkDynamics.ForeColor = System.Drawing.Color.White
         Me.chkDynamics.Name = "chkDynamics"
         Me.chkDynamics.UseVisualStyleBackColor = False
-        '
-        'id
-        '
-        resources.ApplyResources(Me.id, "id")
-        Me.id.Name = "id"
-        '
-        'active
-        '
-        Me.active.FalseValue = "False"
-        Me.active.FillWeight = 15.0!
-        resources.ApplyResources(Me.active, "active")
-        Me.active.Name = "active"
-        Me.active.TrueValue = "True"
-        '
-        'itemname
-        '
-        Me.itemname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.itemname.FillWeight = 54.21845!
-        resources.ApplyResources(Me.itemname, "itemname")
-        Me.itemname.Name = "itemname"
-        '
-        'coleventstamp
-        '
-        resources.ApplyResources(Me.coleventstamp, "coleventstamp")
-        Me.coleventstamp.Name = "coleventstamp"
-        '
-        'coleventtype
-        '
-        resources.ApplyResources(Me.coleventtype, "coleventtype")
-        Me.coleventtype.Name = "coleventtype"
-        '
-        'associatedobject
-        '
-        Me.associatedobject.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        resources.ApplyResources(Me.associatedobject, "associatedobject")
-        Me.associatedobject.Name = "associatedobject"
-        Me.associatedobject.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.associatedobject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'associatedproperty
-        '
-        Me.associatedproperty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.associatedproperty.FillWeight = 200.0!
-        resources.ApplyResources(Me.associatedproperty, "associatedproperty")
-        Me.associatedproperty.Name = "associatedproperty"
-        Me.associatedproperty.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.associatedproperty.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'currentvalue
-        '
-        Me.currentvalue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.currentvalue.DefaultCellStyle = DataGridViewCellStyle1
-        Me.currentvalue.FillWeight = 54.21845!
-        resources.ApplyResources(Me.currentvalue, "currentvalue")
-        Me.currentvalue.Name = "currentvalue"
-        Me.currentvalue.ReadOnly = True
-        '
-        'failsafevalue
-        '
-        Me.failsafevalue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.failsafevalue.DefaultCellStyle = DataGridViewCellStyle2
-        Me.failsafevalue.FillWeight = 54.21845!
-        resources.ApplyResources(Me.failsafevalue, "failsafevalue")
-        Me.failsafevalue.Name = "failsafevalue"
-        '
-        'unit
-        '
-        Me.unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.unit.FillWeight = 45.18204!
-        resources.ApplyResources(Me.unit, "unit")
-        Me.unit.Name = "unit"
-        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'DataGridViewCheckBoxColumn1
-        '
-        Me.DataGridViewCheckBoxColumn1.FalseValue = "False"
-        Me.DataGridViewCheckBoxColumn1.FillWeight = 15.0!
-        resources.ApplyResources(Me.DataGridViewCheckBoxColumn1, "DataGridViewCheckBoxColumn1")
-        Me.DataGridViewCheckBoxColumn1.Name = "DataGridViewCheckBoxColumn1"
-        Me.DataGridViewCheckBoxColumn1.TrueValue = "True"
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.DataGridViewTextBoxColumn2.FillWeight = 54.21845!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        '
-        'colmatind
-        '
-        resources.ApplyResources(Me.colmatind, "colmatind")
-        Me.colmatind.Name = "colmatind"
-        '
-        'colalarm
-        '
-        resources.ApplyResources(Me.colalarm, "colalarm")
-        Me.colalarm.Name = "colalarm"
-        '
-        'DataGridViewComboBoxColumn2
-        '
-        Me.DataGridViewComboBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        resources.ApplyResources(Me.DataGridViewComboBoxColumn2, "DataGridViewComboBoxColumn2")
-        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
-        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'DataGridViewComboBoxColumn3
-        '
-        Me.DataGridViewComboBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.DataGridViewComboBoxColumn3.FillWeight = 200.0!
-        resources.ApplyResources(Me.DataGridViewComboBoxColumn3, "DataGridViewComboBoxColumn3")
-        Me.DataGridViewComboBoxColumn3.Name = "DataGridViewComboBoxColumn3"
-        Me.DataGridViewComboBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DataGridViewTextBoxColumn5.FillWeight = 54.21845!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        '
-        'DataGridViewComboBoxColumn4
-        '
-        Me.DataGridViewComboBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.DataGridViewComboBoxColumn4.FillWeight = 45.18204!
-        resources.ApplyResources(Me.DataGridViewComboBoxColumn4, "DataGridViewComboBoxColumn4")
-        Me.DataGridViewComboBoxColumn4.Name = "DataGridViewComboBoxColumn4"
-        Me.DataGridViewComboBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'FormDynamicsManager
         '
@@ -1016,4 +1032,6 @@ Partial Class FormDynamicsManager
     Friend WithEvents DataGridViewComboBoxColumn3 As DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewComboBoxColumn4 As DataGridViewComboBoxColumn
+    Friend WithEvents cbScheduleInitialState As ComboBox
+    Friend WithEvents Label3 As Label
 End Class
