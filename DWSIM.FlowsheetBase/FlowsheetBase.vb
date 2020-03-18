@@ -1305,6 +1305,18 @@ Imports DWSIM.Interfaces.Enums
 
         End If
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager").Elements.ToList
+
+            Try
+                DirectCast(DynamicsManager, ICustomXMLSerialization).LoadData(data)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Dynamics Manager Information", ex))
+            End Try
+
+        End If
+
         If xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases") IsNot Nothing Then
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
@@ -1497,6 +1509,11 @@ Imports DWSIM.Interfaces.Enums
         For Each pp As KeyValuePair(Of String, List(Of XElement)) In StoredSolutions
             xel.Add(New XElement("Solution", {DirectCast(pp.Value, ICustomXMLSerialization).SaveData().ToArray()}))
         Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicsManager"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager")
+
+        xel.Add(DirectCast(DynamicsManager, ICustomXMLSerialization).SaveData().ToArray())
 
         Dim flsconfig As New System.Text.StringBuilder()
 

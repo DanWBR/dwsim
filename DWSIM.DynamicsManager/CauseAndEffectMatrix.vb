@@ -22,9 +22,9 @@ Public Class CauseAndEffectMatrix
 
     Implements IDynamicsCauseAndEffectMatrix, ICustomXMLSerialization
 
-    Public Property ID As String Implements IDynamicsCauseAndEffectMatrix.ID
+    Public Property ID As String = "" Implements IDynamicsCauseAndEffectMatrix.ID
 
-    Public Property Description As String Implements IDynamicsCauseAndEffectMatrix.Description
+    Public Property Description As String = "" Implements IDynamicsCauseAndEffectMatrix.Description
 
     Public Property Items As Dictionary(Of String, IDynamicsCauseAndEffectItem) = New Dictionary(Of String, IDynamicsCauseAndEffectItem) Implements IDynamicsCauseAndEffectMatrix.Items
 
@@ -32,8 +32,7 @@ Public Class CauseAndEffectMatrix
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         Dim e1 = New XElement("Items")
         For Each kvp As KeyValuePair(Of String, IDynamicsCauseAndEffectItem) In Items
-            e1.Add(New XElement(kvp.Key,
-                                DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
+            e1.Add(New XElement("Item", DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
         Next
         data.Add(e1)
         Return data
@@ -46,7 +45,7 @@ Public Class CauseAndEffectMatrix
             Items = New Dictionary(Of String, IDynamicsCauseAndEffectItem)
             For Each xel2 As XElement In elm.Elements
                 Dim cei = New CauseAndEffectItem
-                DirectCast(cei, ICustomXMLSerialization).LoadData(xel2.Elements)
+                DirectCast(cei, ICustomXMLSerialization).LoadData(xel2.Elements.ToList)
                 Items.Add(cei.ID, cei)
             Next
         End If

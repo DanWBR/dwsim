@@ -28,21 +28,21 @@ Public Class Manager
 
     Public Property CurrentSchedule As String = "" Implements IDynamicsManager.CurrentSchedule
 
-    Public Property CauseAndEffectMatrixList As Dictionary(Of String, IDynamicsCauseAndEffectMatrix) Implements IDynamicsManager.CauseAndEffectMatrixList
+    Public Property CauseAndEffectMatrixList As Dictionary(Of String, IDynamicsCauseAndEffectMatrix) = New Dictionary(Of String, IDynamicsCauseAndEffectMatrix) Implements IDynamicsManager.CauseAndEffectMatrixList
 
-    Public Property EventSetList As Dictionary(Of String, IDynamicsEventSet) Implements IDynamicsManager.EventSetList
+    Public Property EventSetList As Dictionary(Of String, IDynamicsEventSet) = New Dictionary(Of String, IDynamicsEventSet) Implements IDynamicsManager.EventSetList
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         Dim e1 = New XElement("ScheduleList")
         For Each kvp As KeyValuePair(Of String, IDynamicsSchedule) In ScheduleList
-            e1.Add(New XElement(kvp.Key,
+            e1.Add(New XElement("Schedule",
                                 DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
         Next
         data.Add(e1)
         Dim e2 = New XElement("EventSetList")
         For Each kvp As KeyValuePair(Of String, IDynamicsEventSet) In EventSetList
-            e2.Add(New XElement(kvp.Key,
+            e2.Add(New XElement("EventSet",
                                 DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
         Next
         data.Add(e2)
@@ -56,7 +56,7 @@ Public Class Manager
             ScheduleList = New Dictionary(Of String, IDynamicsSchedule)
             For Each xel2 As XElement In elm.Elements
                 Dim sch = New Schedule()
-                DirectCast(sch, ICustomXMLSerialization).LoadData(xel2.Elements)
+                DirectCast(sch, ICustomXMLSerialization).LoadData(xel2.Elements.ToList)
                 ScheduleList.Add(sch.ID, sch)
             Next
         End If
@@ -65,7 +65,7 @@ Public Class Manager
             EventSetList = New Dictionary(Of String, IDynamicsEventSet)
             For Each xel2 As XElement In elm2.Elements
                 Dim es = New EventSet
-                DirectCast(es, ICustomXMLSerialization).LoadData(xel2.Elements)
+                DirectCast(es, ICustomXMLSerialization).LoadData(xel2.Elements.ToList)
                 EventSetList.Add(es.ID, es)
             Next
         End If

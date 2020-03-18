@@ -27,7 +27,7 @@ Public Class DynamicEvent
 
     Public Property Description As String = "" Implements IDynamicsEvent.Description
 
-    Public Property TimeStamp As Date Implements IDynamicsEvent.TimeStamp
+    Public Property TimeStamp As Date = DateTime.MinValue Implements IDynamicsEvent.TimeStamp
 
     Public Property EventType As Dynamics.DynamicsEventType = Dynamics.DynamicsEventType.ChangeProperty Implements IDynamicsEvent.EventType
 

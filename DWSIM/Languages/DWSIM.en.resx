@@ -5690,4 +5690,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="SolutionStored" xml:space="preserve">
     <value>Flowsheet State saved sucessfully.</value>
   </data>
+  <data name="ChangeProperty" xml:space="preserve">
+    <value>Change Property</value>
+  </data>
+  <data name="RunScript" xml:space="preserve">
+    <value>Run Script</value>
+  </data>
 </root>

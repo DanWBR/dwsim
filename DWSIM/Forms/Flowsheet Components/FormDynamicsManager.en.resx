@@ -157,12 +157,6 @@
   <data name="associatedproperty.Width" type="System.Int32, mscorlib">
     <value>71</value>
   </data>
-  <data name="currentvalue.HeaderText" xml:space="preserve">
-    <value>Current Value</value>
-  </data>
-  <data name="currentvalue.Width" type="System.Int32, mscorlib">
-    <value>96</value>
-  </data>
   <data name="failsafevalue.HeaderText" xml:space="preserve">
     <value>New Value</value>
   </data>
@@ -181,7 +175,13 @@
   <data name="btnCopyEvent.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="btnCopyEvent.ToolTipText" xml:space="preserve">
+    <value>Copy</value>
+  </data>
   <data name="btnRemoveEvent.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="btnRemoveEvent.ToolTipText" xml:space="preserve">
     <value>Remove</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
@@ -193,8 +193,14 @@
   <data name="btnCopyEventSet.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="btnCopyEventSet.ToolTipText" xml:space="preserve">
+    <value>Copy</value>
+  </data>
   <data name="btnRemoveEventSet.Text" xml:space="preserve">
     <value>Remove Selected</value>
+  </data>
+  <data name="btnRemoveEventSet.ToolTipText" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Event Sets</value>
@@ -326,7 +332,13 @@
   <data name="btnCopyIntegrator.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="btnCopyIntegrator.ToolTipText" xml:space="preserve">
+    <value>Copy</value>
+  </data>
   <data name="btnRemoveIntegrator.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="btnRemoveIntegrator.ToolTipText" xml:space="preserve">
     <value>Remove</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
@@ -362,7 +374,13 @@
   <data name="btnCopySchedule.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="btnCopySchedule.ToolTipText" xml:space="preserve">
+    <value>Copy</value>
+  </data>
   <data name="btnRemoveSchedule.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="btnRemoveSchedule.ToolTipText" xml:space="preserve">
     <value>Remove</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">

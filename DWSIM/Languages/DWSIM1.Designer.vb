@@ -1613,6 +1613,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Mudar Propriedade.
+        '''</summary>
+        Friend Shared ReadOnly Property ChangeProperty() As String
+            Get
+                Return ResourceManager.GetString("ChangeProperty", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Mudanças em relação à versão anterior.
         '''</summary>
         Friend Shared ReadOnly Property Changes() As String
@@ -13218,6 +13227,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Rugosity() As String
             Get
                 Return ResourceManager.GetString("Rugosity", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Executar Script.
+        '''</summary>
+        Friend Shared ReadOnly Property RunScript() As String
+            Get
+                Return ResourceManager.GetString("RunScript", resourceCulture)
             End Get
         End Property
         

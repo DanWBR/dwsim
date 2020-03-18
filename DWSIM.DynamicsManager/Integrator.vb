@@ -48,7 +48,7 @@ Public Class Integrator
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         Dim e1 = New XElement("StoredSolutions")
         For Each kvp As KeyValuePair(Of Date, List(Of XElement)) In StoredSolutions
-            e1.Add(New XElement(kvp.Key.ToBinary.ToString(Globalization.CultureInfo.InvariantCulture),
+            e1.Add(New XElement("Solution" + "_" + kvp.Key.ToBinary.ToString(Globalization.CultureInfo.InvariantCulture),
                                 kvp.Value))
         Next
         data.Add(e1)
@@ -61,7 +61,7 @@ Public Class Integrator
         If Not elm Is Nothing Then
             StoredSolutions = New Dictionary(Of Date, List(Of XElement))
             For Each xel2 As XElement In elm.Elements
-                StoredSolutions.Add(Date.FromBinary(Double.Parse(xel2.Name.LocalName, Globalization.CultureInfo.InvariantCulture)),
+                StoredSolutions.Add(Date.FromBinary(Double.Parse(xel2.Name.LocalName.Split("_")(1), Globalization.CultureInfo.InvariantCulture)),
                                     xel2.Elements)
             Next
         End If

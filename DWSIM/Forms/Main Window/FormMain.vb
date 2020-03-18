@@ -1802,6 +1802,18 @@ Public Class FormMain
 
         End If
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager").Elements.ToList
+
+            Try
+                DirectCast(form.DynamicsManager, ICustomXMLSerialization).LoadData(data)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Dynamics Manager Information", ex))
+            End Try
+
+        End If
+
         data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
 
         For Each xel As XElement In data
@@ -2339,6 +2351,18 @@ Public Class FormMain
 
         End If
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager").Elements.ToList
+
+            Try
+                DirectCast(form.DynamicsManager, ICustomXMLSerialization).LoadData(data)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Dynamics Manager Information", ex))
+            End Try
+
+        End If
+
         data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
 
         For Each xel As XElement In data
@@ -2868,6 +2892,11 @@ Public Class FormMain
         For Each pp As KeyValuePair(Of String, List(Of XElement)) In form.StoredSolutions
             xel.Add(New XElement("Solution", {DirectCast(pp.Value, ICustomXMLSerialization).SaveData().ToArray()}))
         Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicsManager"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager")
+
+        xel.Add(DirectCast(form.DynamicsManager, ICustomXMLSerialization).SaveData().ToArray())
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases")
