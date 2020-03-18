@@ -22,6 +22,10 @@ Public Class Integrator
 
     Implements Interfaces.IDynamicsIntegrator, ICustomXMLSerialization
 
+    Public Property ID As String = "" Implements IDynamicsIntegrator.ID
+
+    Public Property Description As String = "" Implements IDynamicsIntegrator.Description
+
     Public Property ShouldCalculateEquilibrium As Boolean Implements IDynamicsIntegrator.ShouldCalculateEquilibrium
 
     Public Property ShouldCalculatePressureFlow As Boolean Implements IDynamicsIntegrator.ShouldCalculatePressureFlow

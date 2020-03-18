@@ -32,6 +32,8 @@ Public Class Manager
 
     Public Property EventSetList As Dictionary(Of String, IDynamicsEventSet) = New Dictionary(Of String, IDynamicsEventSet) Implements IDynamicsManager.EventSetList
 
+    Public Property IntegratorList As Dictionary(Of String, IDynamicsIntegrator) = New Dictionary(Of String, IDynamicsIntegrator) Implements IDynamicsManager.IntegratorList
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         Dim e1 = New XElement("ScheduleList")
@@ -43,6 +45,12 @@ Public Class Manager
         Dim e2 = New XElement("EventSetList")
         For Each kvp As KeyValuePair(Of String, IDynamicsEventSet) In EventSetList
             e2.Add(New XElement("EventSet",
+                                DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
+        Next
+        data.Add(e2)
+        Dim e3 = New XElement("IntegratorList")
+        For Each kvp As KeyValuePair(Of String, IDynamicsIntegrator) In IntegratorList
+            e3.Add(New XElement("Integrator",
                                 DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
         Next
         data.Add(e2)
@@ -67,6 +75,15 @@ Public Class Manager
                 Dim es = New EventSet
                 DirectCast(es, ICustomXMLSerialization).LoadData(xel2.Elements.ToList)
                 EventSetList.Add(es.ID, es)
+            Next
+        End If
+        Dim elm3 As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "IntegratorList").LastOrDefault
+        If Not elm3 Is Nothing Then
+            IntegratorList = New Dictionary(Of String, IDynamicsIntegrator)
+            For Each xel2 As XElement In elm3.Elements
+                Dim intg = New Integrator
+                DirectCast(intg, ICustomXMLSerialization).LoadData(xel2.Elements.ToList)
+                IntegratorList.Add(intg.ID, intg)
             Next
         End If
         Return True

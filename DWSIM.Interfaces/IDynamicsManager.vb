@@ -27,5 +27,5 @@ Public Interface IDynamicsManager
     Property EventSetList As Dictionary(Of String, IDynamicsEventSet)
 
     Property CurrentSchedule As String
-
+    Property IntegratorList As Dictionary(Of String, IDynamicsIntegrator)
 End Interface

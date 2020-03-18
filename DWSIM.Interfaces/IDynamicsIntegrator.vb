@@ -21,6 +21,10 @@
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IDynamicsIntegrator
 
+    Property ID As String
+
+    Property Description As String
+
     Property ShouldCalculateEquilibrium As Boolean
 
     Property ShouldCalculatePressureFlow As Boolean

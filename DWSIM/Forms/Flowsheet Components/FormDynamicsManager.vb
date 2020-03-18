@@ -75,9 +75,20 @@ Public Class FormDynamicsManager
 
     Sub UpdateAllPanels()
 
-        'events list
         For Each ev In Manager.EventSetList.Values
             gridsets.Rows.Add(New Object() {ev.ID, ev.Description})
+        Next
+
+        For Each ev In Manager.CauseAndEffectMatrixList.Values
+            gridmatrices.Rows.Add(New Object() {ev.ID, ev.Description})
+        Next
+
+        For Each ev In Manager.IntegratorList.Values
+            gridintegrators.Rows.Add(New Object() {ev.ID, ev.Description})
+        Next
+
+        For Each ev In Manager.ScheduleList.Values
+            gridschedules.Rows.Add(New Object() {ev.ID, ev.Description})
         Next
 
     End Sub
@@ -221,7 +232,57 @@ Public Class FormDynamicsManager
 
     Private Sub grdiselmatrix_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grdiselmatrix.CellValueChanged
 
-        If e.RowIndex < 0 Then Exit Sub
+        If e.RowIndex < 0 Or Adding Then Exit Sub
+
+        Dim cem = Manager.CauseAndEffectMatrixList(gridmatrices.Rows(gridmatrices.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        Dim cei = cem.Items(grdiselmatrix.Rows(e.RowIndex).Cells(0).Value)
+
+        Dim value = grdiselmatrix.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        Try
+            Select Case e.ColumnIndex
+                Case 1
+                    cei.Enabled = value
+                Case 2
+                    cei.Description = value
+                Case 3
+                    If value <> "" Then
+                        cei.AssociatedIndicator = Flowsheet.GetFlowsheetGraphicObject(value).Name
+                    End If
+                Case 4
+                    Select Case value.ToString
+                        Case "L"
+                            cei.AssociatedIndicatorAlarm = Dynamics.DynamicsAlarmType.L
+                        Case "LL"
+                            cei.AssociatedIndicatorAlarm = Dynamics.DynamicsAlarmType.LL
+                        Case "H"
+                            cei.AssociatedIndicatorAlarm = Dynamics.DynamicsAlarmType.H
+                        Case "HH"
+                            cei.AssociatedIndicatorAlarm = Dynamics.DynamicsAlarmType.HH
+                    End Select
+                Case 5
+                    If value <> "" Then
+                        cei.SimulationObjectID = Flowsheet.GetFlowsheetGraphicObject(value).Name
+                        Dim props = Flowsheet.SimulationObjects(cei.SimulationObjectID).GetProperties(PropertyType.WR)
+                        Dim cbcell = DirectCast(gridselectedset.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
+                        cbcell.Items.Clear()
+                        cbcell.Items.AddRange("")
+                        cbcell.Items.AddRange(props.Select(Function(p) Flowsheet.GetTranslatedString1(p)).ToArray)
+                    End If
+                Case 6
+                    If value <> "" Then
+                        Dim props = Flowsheet.SimulationObjects(cei.SimulationObjectID).GetProperties(PropertyType.WR)
+                        Dim cbcell = DirectCast(gridselectedset.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
+                        cei.SimulationObjectProperty = props(cbcell.Items.IndexOf(value))
+                    End If
+                Case 7
+                    cei.SimulationObjectPropertyValue = value
+                Case 8
+                    cei.SimulationObjectPropertyUnits = value
+            End Select
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
 
     End Sub
 
@@ -234,4 +295,96 @@ Public Class FormDynamicsManager
         es.Description = gridsets.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
 
     End Sub
+
+    Private Sub btnAddMatrix_Click(sender As Object, e As EventArgs) Handles btnAddMatrix.Click
+
+        Dim f As New FormEnterName
+
+        If f.ShowDialog(Me) = DialogResult.OK Then
+            Dim name = f.tbName.Text
+            If name <> "" Then
+                If Not Manager.CauseAndEffectMatrixList.ContainsKey(name) Then
+                    Dim cem = New CauseAndEffectMatrix With {.ID = Guid.NewGuid.ToString, .Description = name}
+                    Manager.CauseAndEffectMatrixList.Add(cem.ID, cem)
+                    gridmatrices.Rows.Add(New Object() {cem.ID, cem.Description})
+                Else
+                    MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub btnAddMatrixItem_Click(sender As Object, e As EventArgs) Handles btnAddMatrixItem.Click
+
+        Dim cem = Manager.CauseAndEffectMatrixList(gridmatrices.Rows(gridmatrices.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        Dim cei As New CauseAndEffectItem With {.ID = Guid.NewGuid.ToString}
+
+        cem.Items.Add(cei.ID, cei)
+
+        With cei
+            grdiselmatrix.Rows.Add(New Object() { .ID, .Enabled, .Description, "", "", "", "", "", ""})
+        End With
+
+    End Sub
+
+    Private Sub gridmatrices_SelectionChanged(sender As Object, e As EventArgs) Handles gridmatrices.SelectionChanged
+
+        PopulateCEMFromSelection()
+
+    End Sub
+
+    Sub PopulateCEMFromSelection()
+
+        Adding = True
+
+        Dim cem = Manager.CauseAndEffectMatrixList(gridmatrices.Rows(gridmatrices.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        grdiselmatrix.Rows.Clear()
+
+        For Each cei In cem.Items.Values
+            With cei
+                Dim atype As String = ""
+                Select Case .AssociatedIndicatorAlarm
+                    Case Dynamics.DynamicsAlarmType.L
+                        atype = "L"
+                    Case Dynamics.DynamicsAlarmType.LL
+                        atype = "LL"
+                    Case Dynamics.DynamicsAlarmType.H
+                        atype = "H"
+                    Case Dynamics.DynamicsAlarmType.HH
+                        atype = "HH"
+                End Select
+                Dim obj, prop, ind As String
+                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, "", atype, "", "", "", ""})
+                Dim addedrow = gridselectedset.Rows(gridselectedset.Rows.Count - 1)
+                If Flowsheet.SimulationObjects.ContainsKey(.AssociatedIndicator) Then
+                    ind = Flowsheet.SimulationObjects(.AssociatedIndicator).GraphicObject.Tag
+                    addedrow.Cells(3).Value = ind
+                End If
+                If Flowsheet.SimulationObjects.ContainsKey(.SimulationObjectID) Then
+                    obj = Flowsheet.SimulationObjects(.SimulationObjectID).GraphicObject.Tag
+                    addedrow.Cells(5).Value = obj
+                    Dim props = Flowsheet.SimulationObjects(.SimulationObjectID).GetProperties(PropertyType.WR)
+                    Dim cbcell = DirectCast(addedrow.Cells(6), DataGridViewComboBoxCell)
+                    cbcell.Items.Clear()
+                    cbcell.Items.AddRange("")
+                    cbcell.Items.AddRange(props.Select(Function(p) Flowsheet.GetTranslatedString1(p)).ToArray)
+                    If props.Contains(.SimulationObjectProperty) Then
+                        prop = Flowsheet.GetTranslatedString1(.SimulationObjectProperty)
+                        addedrow.Cells(6).Value = prop
+                    End If
+                End If
+                addedrow.Cells(7).Value = .SimulationObjectPropertyValue
+                addedrow.Cells(8).Value = .SimulationObjectPropertyUnits
+            End With
+        Next
+
+        Adding = False
+
+    End Sub
+
 End Class
