@@ -118,17 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ArquivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 24</value>
+  </data>
+  <data name="ArquivoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
   <data name="CloseToolStripMenuItem.Text" xml:space="preserve">
     <value>Close Active Simulation</value>
   </data>
-  <data name="ArquivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 24</value>
+  <data name="EditarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 24</value>
   </data>
-  <data name="ArquivoToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
+  <data name="EditarToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;dit</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tsmiUndo.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
@@ -203,11 +209,11 @@
   <data name="tsmiConfigSimulation.Text" xml:space="preserve">
     <value>Simulation Settings</value>
   </data>
-  <data name="EditarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 24</value>
+  <data name="InserirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 24</value>
   </data>
-  <data name="EditarToolStripMenuItem.Text" xml:space="preserve">
-    <value>E&amp;dit</value>
+  <data name="InserirToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Insert</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>None</value>
@@ -264,56 +270,56 @@
   <data name="GraficoToolStripMenuItem.Text" xml:space="preserve">
     <value>Chart</value>
   </data>
-  <data name="InserirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 24</value>
-  </data>
-  <data name="InserirToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Insert</value>
-  </data>
-  <data name="CompoundCreatorWizardTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
-  </data>
-  <data name="CompoundCreatorWizardTSMI.Text" xml:space="preserve">
-    <value>Compound Creator Wizard</value>
-  </data>
-  <data name="PropriedadesDasSubstanciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
-  </data>
-  <data name="PropriedadesDasSubstanciasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Pure Compound Property Viewer/Editor</value>
-  </data>
-  <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
-  </data>
-  <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Petroleum Characterization (Bulk C7+)</value>
-  </data>
-  <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
-  </data>
-  <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Petroleum Characterization (Distillation Curves)</value>
-  </data>
-  <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
-  </data>
-  <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Petroleum Assay Manager</value>
-  </data>
-  <data name="InspectorTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
-  </data>
-  <data name="InspectorTSMI.Text" xml:space="preserve">
-    <value>Solution Inspector</value>
-  </data>
-  <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 6</value>
-  </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 24</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
+  </data>
+  <data name="CompoundCreatorWizardTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 26</value>
+  </data>
+  <data name="CompoundCreatorWizardTSMI.Text" xml:space="preserve">
+    <value>Compound Creator Wizard</value>
+  </data>
+  <data name="PropriedadesDasSubstanciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 26</value>
+  </data>
+  <data name="PropriedadesDasSubstanciasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pure Compound Property Viewer/Editor</value>
+  </data>
+  <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 26</value>
+  </data>
+  <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Petroleum Characterization (Bulk C7+)</value>
+  </data>
+  <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 26</value>
+  </data>
+  <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Petroleum Characterization (Distillation Curves)</value>
+  </data>
+  <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 26</value>
+  </data>
+  <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Petroleum Assay Manager</value>
+  </data>
+  <data name="InspectorTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 26</value>
+  </data>
+  <data name="InspectorTSMI.Text" xml:space="preserve">
+    <value>Solution Inspector</value>
+  </data>
+  <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 6</value>
+  </data>
+  <data name="ModoDinâmicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 24</value>
+  </data>
+  <data name="ModoDinâmicoToolStripMenuItem.Text" xml:space="preserve">
+    <value>D&amp;ynamics</value>
   </data>
   <data name="ModoDinamicoAtivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 26</value>
@@ -333,21 +339,6 @@
   <data name="ControlesDoIntegradorToolStripMenuItem.Text" xml:space="preserve">
     <value>Integrator Controls</value>
   </data>
-  <data name="ModoDinâmicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 24</value>
-  </data>
-  <data name="ModoDinâmicoToolStripMenuItem.Text" xml:space="preserve">
-    <value>D&amp;ynamics</value>
-  </data>
-  <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 22</value>
-  </data>
-  <data name="TSMIAddUtility.Text" xml:space="preserve">
-    <value>Add Utility</value>
-  </data>
-  <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
-    <value>Add Utility</value>
-  </data>
   <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 24</value>
   </data>
@@ -357,17 +348,14 @@
   <data name="UtilitiesTSMI.ToolTipText" xml:space="preserve">
     <value>Displays a list of Utilities currently attached to Flowsheet Objects.</value>
   </data>
-  <data name="AnaliseDeSensibilidadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+  <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 26</value>
   </data>
-  <data name="AnaliseDeSensibilidadeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sensitivity Analysis</value>
+  <data name="TSMIAddUtility.Text" xml:space="preserve">
+    <value>Add Utility</value>
   </data>
-  <data name="MultivariateOptimizerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="MultivariateOptimizerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Multivariate Optimizer</value>
+  <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
+    <value>Add Utility</value>
   </data>
   <data name="OtimizaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 24</value>
@@ -375,11 +363,17 @@
   <data name="OtimizaToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Optimization</value>
   </data>
-  <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="AnaliseDeSensibilidadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 26</value>
   </data>
-  <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
-    <value>Create Report</value>
+  <data name="AnaliseDeSensibilidadeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sensitivity Analysis</value>
+  </data>
+  <data name="MultivariateOptimizerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 26</value>
+  </data>
+  <data name="MultivariateOptimizerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Multivariate Optimizer</value>
   </data>
   <data name="ResultadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 24</value>
@@ -387,8 +381,23 @@
   <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Results</value>
   </data>
+  <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 26</value>
+  </data>
+  <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
+    <value>Create Report</value>
+  </data>
+  <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 26</value>
+  </data>
   <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Text" xml:space="preserve">
     <value>CAPE-OPEN Plugins</value>
+  </data>
+  <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 24</value>
+  </data>
+  <data name="ExibirToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;View</value>
   </data>
   <data name="ExibirListaDeItensACalcularToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 22</value>
@@ -443,12 +452,6 @@
   </data>
   <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
     <value>Close Opened Object Editors</value>
-  </data>
-  <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 24</value>
-  </data>
-  <data name="ExibirToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;View</value>
   </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>This.toolStripMenuItem3</value>
