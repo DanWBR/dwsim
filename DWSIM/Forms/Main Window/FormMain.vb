@@ -79,20 +79,20 @@ Public Class FormMain
 
 #Region "    Form Events"
 
-    Public Sub InitializeChromium()
-        If My.Settings.ShowWebPanel And Not DWSIM.App.IsRunningOnMono Then
-            Try
-                Dim settings As CefSettings = New CefSettings
-                settings.IgnoreCertificateErrors = True
-                settings.PersistUserPreferences = True
-                settings.PersistSessionCookies = True
-                settings.CachePath = Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "BrowserDataCache")
-                CefSharp.CefSharpSettings.SubprocessExitIfParentProcessClosed = True
-                CefSharp.Cef.Initialize(settings)
-            Catch ex As Exception
-            End Try
-        End If
-    End Sub
+    'Public Sub InitializeChromium()
+    '    If Not DWSIM.App.IsRunningOnMono Then
+    '        Try
+    '            Dim settings As CefSettings = New CefSettings
+    '            settings.IgnoreCertificateErrors = True
+    '            settings.PersistUserPreferences = True
+    '            settings.PersistSessionCookies = True
+    '            settings.CachePath = Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "BrowserDataCache")
+    '            CefSharp.CefSharpSettings.SubprocessExitIfParentProcessClosed = True
+    '            CefSharp.Cef.Initialize(settings)
+    '        Catch ex As Exception
+    '        End Try
+    '    End If
+    'End Sub
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -3107,6 +3107,8 @@ Label_00CC:
 
     Sub LoadFile(fpath As String)
 
+        Me.WelcomePanel.Visible = False
+
         Dim floading As New FormLoadingSimulation
 
         floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & fpath & ")"
@@ -3434,6 +3436,8 @@ Label_00CC:
         If myLink.Text <> DWSIM.App.GetLocalString("vazio") Then
             If File.Exists(myLink.Tag.ToString) Then
 
+                Me.WelcomePanel.Visible = False
+
                 Dim floading As New FormLoadingSimulation
 
                 floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & myLink.Tag.ToString & ")"
@@ -3442,7 +3446,6 @@ Label_00CC:
                 Application.DoEvents()
 
                 Dim nome = myLink.Tag.ToString
-                'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " (" + nome + ")"
                 Me.filename = nome
                 Application.DoEvents()
                 Dim objStreamReader As FileStream = Nothing

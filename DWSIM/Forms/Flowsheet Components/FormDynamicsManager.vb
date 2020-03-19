@@ -71,6 +71,22 @@ Public Class FormDynamicsManager
 
         grdiselmatrix.Columns(5).CellTemplate = cbobjects
 
+        cbAssociatedIntegrator.Items.Clear()
+        cbAssociatedIntegrator.Items.AddRange(Manager.IntegratorList.Values.Select(Function(x) x.Description).ToArray)
+
+        cbSelectedCauseAndEffectMatrix.Items.Clear()
+        cbSelectedCauseAndEffectMatrix.Items.AddRange(Manager.CauseAndEffectMatrixList.Values.Select(Function(x) x.Description).ToArray)
+
+        cbSelectedEventSet.Items.Clear()
+        cbSelectedEventSet.Items.AddRange(Manager.EventSetList.Values.Select(Function(x) x.Description).ToArray)
+
+        cbScheduleInitialState.Items.Clear()
+        cbScheduleInitialState.Items.AddRange(Flowsheet.StoredSolutions.Keys.ToArray)
+
+        gridintegrators_SelectionChanged(gridintegrators, New EventArgs)
+
+        gridschedules_SelectionChanged(gridschedules, New EventArgs)
+
     End Sub
 
     Sub UpdateAllPanels()
@@ -384,6 +400,228 @@ Public Class FormDynamicsManager
         Next
 
         Adding = False
+
+    End Sub
+
+    Private Sub btnAddIntegrator_Click(sender As Object, e As EventArgs) Handles btnAddIntegrator.Click
+
+        Dim f As New FormEnterName
+
+        If f.ShowDialog(Me) = DialogResult.OK Then
+            Dim name = f.tbName.Text
+            If name <> "" Then
+                If Not Manager.IntegratorList.ContainsKey(name) Then
+                    Dim it1 = New Integrator With {.ID = Guid.NewGuid.ToString, .Description = name}
+                    Manager.IntegratorList.Add(it1.ID, it1)
+                    gridintegrators.Rows.Add(New Object() {it1.ID, it1.Description})
+                Else
+                    MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub btnAddSchedule_Click(sender As Object, e As EventArgs) Handles btnAddSchedule.Click
+
+        Dim f As New FormEnterName
+
+        If f.ShowDialog(Me) = DialogResult.OK Then
+            Dim name = f.tbName.Text
+            If name <> "" Then
+                If Not Manager.ScheduleList.ContainsKey(name) Then
+                    Dim it1 = New Schedule With {.ID = Guid.NewGuid.ToString, .Description = name}
+                    Manager.ScheduleList.Add(it1.ID, it1)
+                    gridschedules.Rows.Add(New Object() {it1.ID, it1.Description})
+                Else
+                    MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub gridintegrators_SelectionChanged(sender As Object, e As EventArgs) Handles gridintegrators.SelectionChanged
+
+        If gridintegrators.SelectedCells.Count < 1 Then Exit Sub
+
+        Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        dtpIntegrationStep.Value = dtpIntegrationStep.MinDate.Add(i1.IntegrationStep)
+
+        dtpIntegratorDuration.Value = dtpIntegratorDuration.MinDate.Add(i1.Duration)
+
+        nupCalcBalFreq.Value = i1.CalculationRatePressureFlow
+
+        nupCalcControlFreq.Value = i1.CalculationRateControl
+
+        nupCalcEqFreq.Value = i1.CalculationRateEquilibrium
+
+        panelSelIntegrator.Enabled = True
+
+    End Sub
+
+    Private Sub dtpIntegrationStep_ValueChanged(sender As Object, e As EventArgs) Handles dtpIntegrationStep.ValueChanged
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.IntegrationStep = dtpIntegrationStep.Value - dtpIntegrationStep.MinDate
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub dtpIntegratorDuration_ValueChanged(sender As Object, e As EventArgs) Handles dtpIntegratorDuration.ValueChanged
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.Duration = dtpIntegratorDuration.Value - dtpIntegratorDuration.MinDate
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub nupCalcEqFreq_ValueChanged(sender As Object, e As EventArgs) Handles nupCalcEqFreq.ValueChanged
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.CalculationRateEquilibrium = nupCalcEqFreq.Value
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub nupCalcBalFreq_ValueChanged(sender As Object, e As EventArgs) Handles nupCalcBalFreq.ValueChanged
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.CalculationRatePressureFlow = nupCalcBalFreq.Value
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub nupCalcControlFreq_ValueChanged(sender As Object, e As EventArgs) Handles nupCalcControlFreq.ValueChanged
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.CalculationRateControl = nupCalcControlFreq.Value
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub gridmatrices_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridmatrices.CellValueChanged
+
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim grid = DirectCast(sender, DataGridView)
+
+        Dim item = Manager.CauseAndEffectMatrixList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
+    End Sub
+
+    Private Sub gridintegrators_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridintegrators.CellValueChanged
+
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim grid = DirectCast(sender, DataGridView)
+
+        Dim item = Manager.IntegratorList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
+    End Sub
+
+    Private Sub gridschedules_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridschedules.CellValueChanged
+
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim grid = DirectCast(sender, DataGridView)
+
+        Dim item = Manager.ScheduleList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
+    End Sub
+
+    Private Sub gridschedules_SelectionChanged(sender As Object, e As EventArgs) Handles gridschedules.SelectionChanged
+
+        If gridschedules.SelectedCells.Count < 1 Then Exit Sub
+
+        Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        Try
+            cbAssociatedIntegrator.SelectedItem = Manager.IntegratorList(s1.CurrentIntegrator).Description
+        Catch ex As Exception
+        End Try
+
+        Try
+            cbSelectedEventSet.SelectedItem = Manager.EventSetList(s1.CurrentEventList).Description
+        Catch ex As Exception
+        End Try
+
+        Try
+            cbSelectedCauseAndEffectMatrix.SelectedItem = Manager.CauseAndEffectMatrixList(s1.CurrentCauseAndEffectMatrix).Description
+        Catch ex As Exception
+        End Try
+
+        Try
+            cbScheduleInitialState.SelectedItem = s1.InitialFlowsheetStateID
+        Catch ex As Exception
+        End Try
+
+        chkIntegratorUseEventSet.Checked = s1.UsesEventList
+
+        chkIntegratorUseMatrix.Checked = s1.UsesCauseAndEffectMatrix
+
+        panelSelSchedule.Enabled = True
+
+    End Sub
+
+    Private Sub cbAssociatedIntegrator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAssociatedIntegrator.SelectedIndexChanged
+
+        Try
+            Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+            s1.CurrentIntegrator = Manager.IntegratorList.Values.Where(Function(x) x.Description = cbAssociatedIntegrator.SelectedItem).FirstOrDefault.ID
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub cbSelectedEventSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSelectedEventSet.SelectedIndexChanged
+
+        Try
+            Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+            s1.CurrentEventList = Manager.EventSetList.Values.Where(Function(x) x.Description = cbSelectedEventSet.SelectedItem).FirstOrDefault.ID
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub cbSelectedCauseAndEffectMatrix_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSelectedCauseAndEffectMatrix.SelectedIndexChanged
+
+        Try
+            Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+            s1.CurrentCauseAndEffectMatrix = Manager.CauseAndEffectMatrixList.Values.Where(Function(x) x.Description = cbSelectedCauseAndEffectMatrix.SelectedItem).FirstOrDefault.ID
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub cbScheduleInitialState_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbScheduleInitialState.SelectedIndexChanged
+
+        Try
+            Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+            s1.InitialFlowsheetStateID = cbScheduleInitialState.SelectedItem
+        Catch ex As Exception
+        End Try
 
     End Sub
 

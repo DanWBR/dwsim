@@ -525,7 +525,7 @@ Namespace UnitOperations
 
             If epcol.ContainsKey(prop) Then
                 If epucol.ContainsKey(prop) Then
-                    Dim utype = DirectCast(epucol(prop), Enums.UnitOfMeasure)
+                    Dim utype = epucol(prop)
                     Return su.GetCurrentUnits(utype)
                 Else
                     Return ""

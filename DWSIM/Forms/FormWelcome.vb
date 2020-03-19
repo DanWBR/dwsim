@@ -374,10 +374,6 @@ Public Class FormWelcome
         Process.Start("https://patreon.com/dwsim")
     End Sub
 
-    Private Sub chkAutoClose_CheckedChanged(sender As Object, e As EventArgs)
-        My.Settings.AutoCloseWelcomePanel = True
-    End Sub
-
     Private Sub LinkLabel1_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Application.DoEvents()
         Application.DoEvents()

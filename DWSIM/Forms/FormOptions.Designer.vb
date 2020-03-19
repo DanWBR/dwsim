@@ -132,7 +132,6 @@ Partial Class FormOptions
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.ComboBoxUILanguage = New System.Windows.Forms.ComboBox()
         Me.Label22 = New System.Windows.Forms.Label()
-        Me.chkShowWebPanel = New System.Windows.Forms.CheckBox()
         Me.KryptonCheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.cbDebugLevel = New System.Windows.Forms.ComboBox()
@@ -930,7 +929,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.GroupBox9, "GroupBox9")
         Me.GroupBox9.Controls.Add(Me.ComboBoxUILanguage)
         Me.GroupBox9.Controls.Add(Me.Label22)
-        Me.GroupBox9.Controls.Add(Me.chkShowWebPanel)
         Me.GroupBox9.Controls.Add(Me.KryptonCheckBox1)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.TabStop = False
@@ -947,11 +945,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.Label22, "Label22")
         Me.Label22.Name = "Label22"
-        '
-        'chkShowWebPanel
-        '
-        resources.ApplyResources(Me.chkShowWebPanel, "chkShowWebPanel")
-        Me.chkShowWebPanel.Name = "chkShowWebPanel"
         '
         'KryptonCheckBox1
         '
@@ -1179,7 +1172,6 @@ Partial Class FormOptions
     Public WithEvents chkAA As CheckBox
     Friend WithEvents cbRenderer As ComboBox
     Public WithEvents Label23 As Label
-    Public WithEvents chkShowWebPanel As CheckBox
     Friend WithEvents ComboBoxUILanguage As ComboBox
     Friend WithEvents Label22 As Label
 End Class

@@ -718,7 +718,7 @@ Partial Class FormMain
 
             InitializeComponent()
 
-            If Not GlobalSettings.Settings.AutomationMode Then InitializeChromium()
+            'If Not GlobalSettings.Settings.AutomationMode Then InitializeChromium()
 
         End If
 
