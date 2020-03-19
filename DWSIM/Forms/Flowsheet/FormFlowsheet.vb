@@ -3097,6 +3097,7 @@ Public Class FormFlowsheet
                     StoredSolutions.Add(name, data)
                     tscbStoredSolutions.Items.Add(name)
                     MessageBox.Show(GetTranslatedString1("SolutionStored"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    FormDynamics.UpdateSelectables()
                 Else
                     MessageBox.Show(GetTranslatedString1("InvalidName"), GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -3128,9 +3129,23 @@ Public Class FormFlowsheet
             If MessageBox.Show(GetTranslatedString1("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 StoredSolutions.Remove(tscbStoredSolutions.SelectedItem.ToString)
                 tscbStoredSolutions.Items.Remove(tscbStoredSolutions.SelectedItem)
+                FormDynamics.UpdateSelectables()
             End If
         End If
 
+    End Sub
+
+    Private Sub GerenciadorDoModoDinâmicoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GerenciadorDoModoDinamicoToolStripMenuItem.Click
+        FormDynamics.Activate()
+    End Sub
+
+    Private Sub ControlesDoIntegradorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ControlesDoIntegradorToolStripMenuItem.Click
+        FormIntegratorControls.Show(GetDockPanel)
+    End Sub
+
+    Private Sub ModoDinamicoAtivoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModoDinamicoAtivoToolStripMenuItem.Click
+        Me.DynamicMode = ModoDinamicoAtivoToolStripMenuItem.Checked
+        Me.FormDynamics.chkDynamics.Checked = ModoDinamicoAtivoToolStripMenuItem.Checked
     End Sub
 
     Public Sub LoadProcessData(data As List(Of XElement)) Implements IFlowsheet.LoadProcessData
@@ -3141,6 +3156,11 @@ Public Class FormFlowsheet
             obj.LoadData(xel.Elements.ToList)
         Next
 
+    End Sub
+
+    Private Sub ModoDinamicoAtivoToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles ModoDinamicoAtivoToolStripMenuItem.CheckedChanged
+        Me.DynamicMode = ModoDinamicoAtivoToolStripMenuItem.Checked
+        Me.FormDynamics.chkDynamics.Checked = ModoDinamicoAtivoToolStripMenuItem.Checked
     End Sub
 
 #End Region

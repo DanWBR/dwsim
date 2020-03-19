@@ -53,7 +53,7 @@ Public Class Manager
             e3.Add(New XElement("Integrator",
                                 DirectCast(kvp.Value, ICustomXMLSerialization).SaveData))
         Next
-        data.Add(e2)
+        data.Add(e3)
         Return data
     End Function
 

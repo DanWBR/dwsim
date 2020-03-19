@@ -59,6 +59,10 @@ Partial Class FormFlowsheet
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InspectorTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ModoDinâmicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ModoDinamicoAtivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GerenciadorDoModoDinamicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ControlesDoIntegradorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UtilitiesTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMIAddUtility = New System.Windows.Forms.ToolStripMenuItem()
         Me.OtimizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -171,7 +175,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.UtilitiesTSMI, Me.OtimizaToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.ModoDinâmicoToolStripMenuItem, Me.UtilitiesTSMI, Me.OtimizaToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
@@ -413,6 +417,31 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator15.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ToolStripSeparator15.MergeIndex = 7
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
+        '
+        'ModoDinâmicoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ModoDinâmicoToolStripMenuItem, "ModoDinâmicoToolStripMenuItem")
+        Me.ModoDinâmicoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ModoDinamicoAtivoToolStripMenuItem, Me.GerenciadorDoModoDinamicoToolStripMenuItem, Me.ControlesDoIntegradorToolStripMenuItem})
+        Me.ModoDinâmicoToolStripMenuItem.MergeIndex = 4
+        Me.ModoDinâmicoToolStripMenuItem.Name = "ModoDinâmicoToolStripMenuItem"
+        '
+        'ModoDinamicoAtivoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ModoDinamicoAtivoToolStripMenuItem, "ModoDinamicoAtivoToolStripMenuItem")
+        Me.ModoDinamicoAtivoToolStripMenuItem.CheckOnClick = True
+        Me.ModoDinamicoAtivoToolStripMenuItem.Name = "ModoDinamicoAtivoToolStripMenuItem"
+        '
+        'GerenciadorDoModoDinamicoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.GerenciadorDoModoDinamicoToolStripMenuItem, "GerenciadorDoModoDinamicoToolStripMenuItem")
+        Me.GerenciadorDoModoDinamicoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_module
+        Me.GerenciadorDoModoDinamicoToolStripMenuItem.Name = "GerenciadorDoModoDinamicoToolStripMenuItem"
+        '
+        'ControlesDoIntegradorToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ControlesDoIntegradorToolStripMenuItem, "ControlesDoIntegradorToolStripMenuItem")
+        Me.ControlesDoIntegradorToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_ecg
+        Me.ControlesDoIntegradorToolStripMenuItem.Name = "ControlesDoIntegradorToolStripMenuItem"
         '
         'UtilitiesTSMI
         '
@@ -792,6 +821,7 @@ Partial Class FormFlowsheet
         Me.DoubleBuffered = True
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormFlowsheet"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TSTable.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
@@ -902,4 +932,8 @@ Partial Class FormFlowsheet
     Friend WithEvents tsbStoreSolution As ToolStripButton
     Friend WithEvents tsbLoadSolution As ToolStripButton
     Friend WithEvents tsbDeleteSolution As ToolStripButton
+    Friend WithEvents ModoDinâmicoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GerenciadorDoModoDinamicoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ControlesDoIntegradorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ModoDinamicoAtivoToolStripMenuItem As ToolStripMenuItem
 End Class

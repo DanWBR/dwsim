@@ -3003,12 +3003,14 @@
     <None Include="Resources\icons8-books.png" />
     <None Include="Resources\icons8-chemical_plant.png" />
     <None Include="Resources\icons8-line_chart.png" />
-    <None Include="Resources\icons8-module.png" />
     <None Include="Resources\icons8-test_tube.png" />
     <None Include="Resources\Patreon_Navy.jpg" />
     <None Include="Resources\icons8-pause.png" />
     <None Include="Resources\icons8-play.png" />
     <None Include="Resources\icons8-stop.png" />
+    <None Include="Resources\icons8-module1.png" />
+    <None Include="Resources\icons8-module.png" />
+    <None Include="Resources\icons8-ecg.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

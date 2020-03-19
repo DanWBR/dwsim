@@ -30,12 +30,14 @@ Public Class FormDynamicsManager
             Flowsheet.DynamicMode = True
             chkDynamics.ForeColor = Color.White
             chkDynamics.BackColor = Color.DarkGreen
+            Flowsheet.ModoDinamicoAtivoToolStripMenuItem.Checked = True
         Else
             chkDynamics.Text = DWSIM.App.GetLocalString("Activate")
             lblStatus.Text = DWSIM.App.GetLocalString("DynDisabled")
             Flowsheet.DynamicMode = False
             chkDynamics.ForeColor = Color.White
             chkDynamics.BackColor = Color.DarkRed
+            Flowsheet.ModoDinamicoAtivoToolStripMenuItem.Checked = False
         End If
     End Sub
 
@@ -120,6 +122,7 @@ Public Class FormDynamicsManager
                     Dim es = New EventSet With {.ID = Guid.NewGuid.ToString, .Description = name}
                     Manager.EventSetList.Add(es.ID, es)
                     gridsets.Rows.Add(New Object() {es.ID, es.Description})
+                    UpdateSelectables()
                 Else
                     MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -323,6 +326,7 @@ Public Class FormDynamicsManager
                     Dim cem = New CauseAndEffectMatrix With {.ID = Guid.NewGuid.ToString, .Description = name}
                     Manager.CauseAndEffectMatrixList.Add(cem.ID, cem)
                     gridmatrices.Rows.Add(New Object() {cem.ID, cem.Description})
+                    UpdateSelectables()
                 Else
                     MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -414,6 +418,7 @@ Public Class FormDynamicsManager
                     Dim it1 = New Integrator With {.ID = Guid.NewGuid.ToString, .Description = name}
                     Manager.IntegratorList.Add(it1.ID, it1)
                     gridintegrators.Rows.Add(New Object() {it1.ID, it1.Description})
+                    UpdateSelectables()
                 Else
                     MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -435,6 +440,7 @@ Public Class FormDynamicsManager
                     Dim it1 = New Schedule With {.ID = Guid.NewGuid.ToString, .Description = name}
                     Manager.ScheduleList.Add(it1.ID, it1)
                     gridschedules.Rows.Add(New Object() {it1.ID, it1.Description})
+                    UpdateSelectables()
                 Else
                     MessageBox.Show(Flowsheet.GetTranslatedString1("InvalidName"), Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
