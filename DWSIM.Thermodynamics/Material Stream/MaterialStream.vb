@@ -7652,12 +7652,146 @@ Namespace Streams
 
             newstream.SetMassFlow(W0 + W1)
 
+            For Each comp In newstream.Phases(0).Compounds.Values
+                comp.MassFlow += Vw(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(1).Compounds.Values
+                comp.MassFlow += Vwlo(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(2).Compounds.Values
+                comp.MassFlow += Vwv(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(3).Compounds.Values
+                comp.MassFlow += Vwl1(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(4).Compounds.Values
+                comp.MassFlow += Vwl2(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(7).Compounds.Values
+                comp.MassFlow += Vws(comp.Name)
+            Next
+
+            With newstream
+                Dim sub1 As BaseClasses.Compound
+                For Each p In .Phases.Values
+                    Dim mass_div_mm As Double = 0
+                    For Each sub1 In p.Compounds.Values
+                        mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                    Next
+                    For Each sub1 In p.Compounds.Values
+                        sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+                    Next
+                Next
+                .SpecType = StreamSpec.Pressure_and_Enthalpy
+            End With
+
+            Return newstream
 
         End Function
 
         Public Function Subtract(stream As MaterialStream, Optional ByVal EquilibriumFactor As Double = 1.0) As MaterialStream
 
+            Dim newstream = DirectCast(Clone1(), MaterialStream)
 
+            Dim W1 = stream.GetMassFlow()
+            Dim T1 = stream.GetTemperature()
+            Dim H1 = stream.GetEnthalpy()
+
+            Dim W0 = newstream.GetMassFlow()
+            Dim T0 = newstream.GetTemperature()
+            Dim H0 = newstream.GetEnthalpy()
+
+            Dim Vw As New Dictionary(Of String, Double)
+            Dim Vwv As New Dictionary(Of String, Double)
+            Dim Vwlo As New Dictionary(Of String, Double)
+            Dim Vwl1 As New Dictionary(Of String, Double)
+            Dim Vwl2 As New Dictionary(Of String, Double)
+            Dim Vws As New Dictionary(Of String, Double)
+
+            Dim comp As BaseClasses.Compound
+            For Each comp In stream.Phases(0).Compounds.Values
+                If Not Vw.ContainsKey(comp.Name) Then
+                    Vw.Add(comp.Name, 0)
+                End If
+                Vw(comp.Name) += comp.MassFlow.GetValueOrDefault
+            Next
+            For Each comp In stream.Phases(2).Compounds.Values
+                If Not Vwv.ContainsKey(comp.Name) Then
+                    Vwv.Add(comp.Name, 0)
+                End If
+                Vwv(comp.Name) += comp.MassFlow.GetValueOrDefault
+            Next
+            For Each comp In stream.Phases(1).Compounds.Values
+                If Not Vwlo.ContainsKey(comp.Name) Then
+                    Vwlo.Add(comp.Name, 0)
+                End If
+                Vwlo(comp.Name) += comp.MassFlow.GetValueOrDefault
+            Next
+            For Each comp In stream.Phases(3).Compounds.Values
+                If Not Vwl1.ContainsKey(comp.Name) Then
+                    Vwl1.Add(comp.Name, 0)
+                End If
+                Vwl1(comp.Name) += comp.MassFlow.GetValueOrDefault
+            Next
+            For Each comp In stream.Phases(4).Compounds.Values
+                If Not Vwl2.ContainsKey(comp.Name) Then
+                    Vwl2.Add(comp.Name, 0)
+                End If
+                Vwl2(comp.Name) += comp.MassFlow.GetValueOrDefault
+            Next
+            For Each comp In stream.Phases(7).Compounds.Values
+                If Not Vws.ContainsKey(comp.Name) Then
+                    Vws.Add(comp.Name, 0)
+                End If
+                Vws(comp.Name) += comp.MassFlow.GetValueOrDefault
+            Next
+
+            newstream.SetMassFlow(W0 + W1)
+
+            For Each comp In newstream.Phases(0).Compounds.Values
+                comp.MassFlow -= Vw(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(1).Compounds.Values
+                comp.MassFlow -= Vwlo(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(2).Compounds.Values
+                comp.MassFlow -= Vwv(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(3).Compounds.Values
+                comp.MassFlow -= Vwl1(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(4).Compounds.Values
+                comp.MassFlow -= Vwl2(comp.Name)
+            Next
+
+            For Each comp In newstream.Phases(7).Compounds.Values
+                comp.MassFlow -= Vws(comp.Name)
+            Next
+
+            With newstream
+                Dim sub1 As BaseClasses.Compound
+                For Each p In .Phases.Values
+                    Dim mass_div_mm As Double = 0
+                    For Each sub1 In p.Compounds.Values
+                        mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                    Next
+                    For Each sub1 In p.Compounds.Values
+                        sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+                    Next
+                Next
+                .SpecType = StreamSpec.Pressure_and_Enthalpy
+            End With
+
+            Return newstream
 
         End Function
 

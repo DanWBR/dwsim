@@ -144,6 +144,30 @@ Namespace UnitOperations
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Vessel)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
+        Public Overrides Sub CreateDynamicProperties()
+
+            AddDynamicProperty("Vessel Orientation (V = 0, H = 1)", "Vertical or Horizontal", 0, "")
+            AddDynamicProperty("Operating Pressure", "Current Vessel Operating Pressure", 0, UnitOfMeasure.pressure)
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
+            AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
+
+        End Sub
+
+        Public Overrides Sub RunDynamicModel()
+
+            Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
+            Dim oms1 As MaterialStream = Me.GetOutletMaterialStream(1)
+            Dim oms2 As MaterialStream = Me.GetOutletMaterialStream(2)
+
+            Dim s1, s2, s3 As Enums.Dynamics.DynamicsSpecType
+
+            s1 = ims.DynamicsSpec
+            s2 = oms1.DynamicsSpec
+            s3 = oms2.DynamicsSpec
+
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
