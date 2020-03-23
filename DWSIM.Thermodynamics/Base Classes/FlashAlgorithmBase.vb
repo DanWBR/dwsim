@@ -302,6 +302,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End With
                 ElseIf spec1 = FlashSpec.T And spec2 = FlashSpec.SF Then
                     Throw New NotImplementedException("Flash specification set not supported.")
+                ElseIf spec1 = FlashSpec.V And spec2 = FlashSpec.T Then
+                    Return Flash_VT(mixmolefrac, val1, val2, initialestimate, pp, useestimates, initialKval)
+                ElseIf spec1 = FlashSpec.V And spec2 = FlashSpec.P Then
+                    Return Flash_VP(mixmolefrac, val1, val2, initialestimate, pp, useestimates, initialKval)
+                ElseIf spec1 = FlashSpec.V And spec2 = FlashSpec.H Then
+                    Return Flash_VH(mixmolefrac, val1, val2, 101325, initialestimate, pp, useestimates, initialKval)
+                ElseIf spec1 = FlashSpec.V And spec2 = FlashSpec.S Then
+                    Return Flash_VS(mixmolefrac, val1, val2, 101325, initialestimate, pp, useestimates, initialKval)
                 Else
                     Throw New NotImplementedException("Flash specification set not supported.")
                 End If
@@ -408,7 +416,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         ''' <param name="ReuseKI"></param>
         ''' <param name="PrevKi"></param>
         ''' <returns></returns>
-        Public Function FlashVT(ByVal Vz As Double(), ByVal Vspec As Double, ByVal T As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+        Public Function Flash_VT(ByVal Vz As Double(), ByVal Vspec As Double, ByVal T As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
 
             'PV = nZRT
 
@@ -438,7 +446,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function FlashVP(ByVal Vz As Double(), ByVal Vspec As Double, ByVal P As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+        Public Function Flash_VP(ByVal Vz As Double(), ByVal Vspec As Double, ByVal P As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
 
             'PV = nZRT
 
@@ -468,7 +476,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function FlashVH(ByVal Vz As Double(), ByVal Vspec As Double, ByVal H As Double, ByVal Pref As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+        Public Function Flash_VH(ByVal Vz As Double(), ByVal Vspec As Double, ByVal H As Double, ByVal Pref As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
 
             'PV = nZRT
 
@@ -504,7 +512,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function FlashVS(ByVal Vz As Double(), ByVal Vspec As Double, ByVal S As Double, ByVal Pref As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+        Public Function Flash_VS(ByVal Vz As Double(), ByVal Vspec As Double, ByVal S As Double, ByVal Pref As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
 
             'PV = nZRT
 

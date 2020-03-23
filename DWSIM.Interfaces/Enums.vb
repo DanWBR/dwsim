@@ -286,6 +286,10 @@ Namespace Enums
         TemperatureVaporFraction = 6
         PressureSolidFraction = 7
         TemperatureSolidFraction = 8
+        VolumeTemperature = 9
+        VolumePressure = 10
+        VolumeEnthalpy = 11
+        VolumeEntropy = 12
     End Enum
 
     Public Enum AdjustVarType

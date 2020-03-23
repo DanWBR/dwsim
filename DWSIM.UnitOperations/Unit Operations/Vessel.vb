@@ -146,7 +146,7 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Vessel Orientation (V = 0, H = 1)", "Vertical or Horizontal", 0, "")
+            AddDynamicProperty("Vessel Orientation", "Vertical or Horizontal (V = 0, H = 1)", 0, "")
             AddDynamicProperty("Operating Pressure", "Current Vessel Operating Pressure", 0, UnitOfMeasure.pressure)
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
             AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
@@ -164,6 +164,31 @@ Namespace UnitOperations
             s1 = ims.DynamicsSpec
             s2 = oms1.DynamicsSpec
             s3 = oms2.DynamicsSpec
+
+            Dim Vol = ExtraProperties("Volume")
+            Dim Level = ExtraProperties("Liquid Level")
+            Dim Pressure = ExtraProperties("Operating Pressure")
+            Dim Orientation = ExtraProperties("Vessel Orientation")
+
+            If s2 = Dynamics.DynamicsSpecType.Pressure And s3 = Dynamics.DynamicsSpecType.Pressure Then
+
+                If AccumulationStream Is Nothing Then
+
+                    AccumulationStream = ims.Subtract(oms1).Subtract(oms2)
+
+                Else
+
+                    AccumulationStream = AccumulationStream.Add(ims).Subtract(oms1).Subtract(oms2)
+
+                End If
+
+                'calculate pressure
+
+                Dim result As IFlashCalculationResult
+
+                result = PropertyPackage.CalculateEquilibrium2()
+
+            End If
 
 
         End Sub
