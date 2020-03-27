@@ -99,6 +99,22 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Function GetDynamicProperty(id As String) As Object
+
+            Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            Return col1(id)
+
+        End Function
+
+        Public Function GetDynamicPropertyUnitType(id As String) As Enums.UnitOfMeasure
+
+            Dim col1 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+
+            Return col1(id)
+
+        End Function
+
         Public Sub RemoveDynamicProperty(pname As String) Implements ISimulationObject.RemoveDynamicProperty
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))

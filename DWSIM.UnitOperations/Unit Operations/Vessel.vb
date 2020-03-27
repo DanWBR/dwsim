@@ -165,10 +165,10 @@ Namespace UnitOperations
             s2 = oms1.DynamicsSpec
             s3 = oms2.DynamicsSpec
 
-            Dim Vol = ExtraProperties("Volume")
-            Dim Level = ExtraProperties("Liquid Level")
-            Dim Pressure = ExtraProperties("Operating Pressure")
-            Dim Orientation = ExtraProperties("Vessel Orientation")
+            Dim Vol As Double = GetDynamicProperty("Volume")
+            Dim Level As Double = GetDynamicProperty("Liquid Level")
+            Dim Pressure As Double = GetDynamicProperty("Operating Pressure")
+            Dim Orientation As Integer = GetDynamicProperty("Vessel Orientation")
 
             If s2 = Dynamics.DynamicsSpecType.Pressure And s3 = Dynamics.DynamicsSpecType.Pressure Then
 
@@ -184,9 +184,22 @@ Namespace UnitOperations
 
                 'calculate pressure
 
+                Dim M = AccumulationStream.GetMolarFlow()
+
+                Dim Temperature = AccumulationStream.GetTemperature
+
+                'm3/mol
+                Dim Mvol = Vol / M
+
                 Dim result As IFlashCalculationResult
 
-                result = PropertyPackage.CalculateEquilibrium2()
+                result = PropertyPackage.CalculateEquilibrium2(FlashCalculationType.VolumeTemperature, Mvol, Temperature, Pressure)
+
+                Pressure = result.CalculatedPressure
+
+                oms1.SetPressure(Pressure)
+
+                oms2.SetPressure(Pressure)
 
             End If
 

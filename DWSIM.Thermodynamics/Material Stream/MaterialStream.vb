@@ -7796,6 +7796,19 @@ Namespace Streams
         End Function
 
 
+        Public Function AssignFromPhase(phase As Enums.PhaseLabel, stream As MaterialStream)
+
+            Select Case phase
+                Case PhaseLabel.Mixture
+                Case PhaseLabel.Vapor
+                Case PhaseLabel.LiquidMixture
+                Case PhaseLabel.Liquid1
+                Case PhaseLabel.Liquid2
+                Case PhaseLabel.Solid
+            End Select
+
+        End Function
+
     End Class
 
     Public Class CalculationResults
