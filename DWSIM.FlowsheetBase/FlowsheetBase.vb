@@ -411,11 +411,11 @@ Imports DWSIM.Interfaces.Enums
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.EnergyStream, x, y, tag))
 
-            Case "Adiabatic Compressor"
+            Case "Compressor"
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Compressor, x, y, tag))
 
-            Case "Adiabatic Expander"
+            Case "Expander (Turbine)"
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Expander, x, y, tag))
 

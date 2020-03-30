@@ -545,6 +545,8 @@ restart:    B = F - D
                     Case 13
                         'PROP_SC_13	Reboiler Duty
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qb)
+                    Case 14
+                        value = m_N
                 End Select
 
                 Return value
@@ -560,11 +562,11 @@ restart:    B = F - D
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
-                    For i = 5 To 13
+                    For i = 5 To 14
                         proplist.Add("PROP_SC_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 13
+                    For i = 0 To 14
                         proplist.Add("PROP_SC_" + CStr(i))
                     Next
                 Case PropertyType.WR
@@ -572,7 +574,7 @@ restart:    B = F - D
                         proplist.Add("PROP_SC_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 13
+                    For i = 0 To 14
                         proplist.Add("PROP_SC_" + CStr(i))
                     Next
             End Select
@@ -665,6 +667,8 @@ restart:    B = F - D
                     Case 13
                         'PROP_SC_13	Reboiler Duty
                         value = su.heatflow
+                    Case 14
+                        value = ""
                 End Select
 
                 Return value

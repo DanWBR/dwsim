@@ -146,7 +146,7 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Vessel Orientation", "Vertical or Horizontal (V = 0, H = 1)", 0, "")
+            AddDynamicProperty("Vessel Orientation", "Vertical or Horizontal (V = 0, H = 1)", 0, UnitOfMeasure.none)
             AddDynamicProperty("Operating Pressure", "Current Vessel Operating Pressure", 0, UnitOfMeasure.pressure)
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
             AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
@@ -200,6 +200,10 @@ Namespace UnitOperations
                 oms1.SetPressure(Pressure)
 
                 oms2.SetPressure(Pressure)
+
+                oms1.AssignFromPhase(PhaseLabel.Vapor, AccumulationStream)
+
+                oms2.AssignFromPhase(PhaseLabel.LiquidMixture, AccumulationStream)
 
             End If
 

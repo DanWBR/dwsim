@@ -1581,4 +1581,7 @@
   <data name="PROP_PS_9" xml:space="preserve">
     <value>Elevação Total</value>
   </data>
+  <data name="PROP_SC_14" xml:space="preserve">
+    <value>Número de Estágios</value>
+  </data>
 </root>

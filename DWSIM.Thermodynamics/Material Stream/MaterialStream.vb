@@ -7539,11 +7539,11 @@ Namespace Streams
 
             Dim W1 = withstream.GetMassFlow()
             Dim T1 = withstream.GetTemperature()
-            Dim H1 = withstream.GetEnthalpy()
+            Dim H1 = withstream.GetMassEnthalpy()
 
             Dim W0 = Me.GetMassFlow()
             Dim T0 = Me.GetTemperature()
-            Dim H0 = Me.GetEnthalpy()
+            Dim H0 = Me.GetMassEnthalpy()
 
             Dim comp As BaseClasses.Compound
             For Each comp In withstream.Phases(0).Compounds.Values
@@ -7599,11 +7599,11 @@ Namespace Streams
 
             Dim W1 = stream.GetMassFlow()
             Dim T1 = stream.GetTemperature()
-            Dim H1 = stream.GetEnthalpy()
+            Dim H1 = stream.GetMassEnthalpy()
 
             Dim W0 = newstream.GetMassFlow()
             Dim T0 = newstream.GetTemperature()
-            Dim H0 = newstream.GetEnthalpy()
+            Dim H0 = newstream.GetMassEnthalpy()
 
             Dim Vw As New Dictionary(Of String, Double)
             Dim Vwv As New Dictionary(Of String, Double)
@@ -7700,11 +7700,11 @@ Namespace Streams
 
             Dim W1 = stream.GetMassFlow()
             Dim T1 = stream.GetTemperature()
-            Dim H1 = stream.GetEnthalpy()
+            Dim H1 = stream.GetMassEnthalpy()
 
             Dim W0 = newstream.GetMassFlow()
             Dim T0 = newstream.GetTemperature()
-            Dim H0 = newstream.GetEnthalpy()
+            Dim H0 = newstream.GetMassEnthalpy()
 
             Dim Vw As New Dictionary(Of String, Double)
             Dim Vwv As New Dictionary(Of String, Double)

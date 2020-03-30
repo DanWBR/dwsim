@@ -1476,6 +1476,9 @@
     <value>Reboiler Duty</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_SC_14" xml:space="preserve">
+    <value>Actual Stages</value>
+  </data>
   <data name="PROP_SC_2" xml:space="preserve">
     <value>Light Key Molar Fraction</value>
     <comment>1</comment>
