@@ -7462,7 +7462,7 @@ Namespace Streams
             Phases(0).Properties.volumetric_flow = Nothing
         End Sub
 
-        Public Function GetEnthalpy() As Double
+        Public Function GetMassEnthalpy() As Double
             Return Phases(0).Properties.enthalpy.GetValueOrDefault
         End Function
 
@@ -7795,19 +7795,78 @@ Namespace Streams
 
         End Function
 
+        Public Sub AssignFromPhase(phase As Enums.PhaseLabel, stream As MaterialStream)
 
-        Public Function AssignFromPhase(phase As Enums.PhaseLabel, stream As MaterialStream)
+            Clear()
+            ClearAllProps()
+
+            SetTemperature(stream.GetTemperature)
+            SetPressure(stream.GetPressure)
+            SetMassEnthalpy(stream.GetMassEnthalpy)
 
             Select Case phase
+
                 Case PhaseLabel.Mixture
+
+                    SetMassFlow(stream.Phases(0).Properties.massflow.GetValueOrDefault)
+
+                    For Each sub1 In Me.Phases(0).Compounds.Values
+                        sub1.MoleFraction = stream.Phases(0).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
+                        sub1.MassFraction = stream.Phases(0).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                    Next
+
                 Case PhaseLabel.Vapor
+
+                    SetMassFlow(stream.Phases(2).Properties.massflow.GetValueOrDefault)
+
+                    For Each sub1 In Me.Phases(0).Compounds.Values
+                        sub1.MoleFraction = stream.Phases(2).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
+                        sub1.MassFraction = stream.Phases(2).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                    Next
+
                 Case PhaseLabel.LiquidMixture
+
+                    SetMassFlow(stream.Phases(1).Properties.massflow.GetValueOrDefault)
+
+                    For Each sub1 In Me.Phases(0).Compounds.Values
+                        sub1.MoleFraction = stream.Phases(1).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
+                        sub1.MassFraction = stream.Phases(1).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                    Next
+
                 Case PhaseLabel.Liquid1
+
+                    SetMassFlow(stream.Phases(3).Properties.massflow.GetValueOrDefault)
+
+                    For Each sub1 In Me.Phases(0).Compounds.Values
+                        sub1.MoleFraction = stream.Phases(3).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
+                        sub1.MassFraction = stream.Phases(3).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                    Next
+
                 Case PhaseLabel.Liquid2
+
+                    SetMassFlow(stream.Phases(4).Properties.massflow.GetValueOrDefault)
+
+                    For Each sub1 In Me.Phases(0).Compounds.Values
+                        sub1.MoleFraction = stream.Phases(4).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
+                        sub1.MassFraction = stream.Phases(4).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                    Next
+
                 Case PhaseLabel.Solid
+
+                    SetMassFlow(stream.Phases(7).Properties.massflow.GetValueOrDefault)
+
+                    For Each sub1 In Me.Phases(0).Compounds.Values
+                        sub1.MoleFraction = stream.Phases(7).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
+                        sub1.MassFraction = stream.Phases(7).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                    Next
+
+                Case Else
+
+                    Throw New Exception("Unsupported Phase")
+
             End Select
 
-        End Function
+        End Sub
 
     End Class
 
