@@ -150,6 +150,7 @@ Namespace UnitOperations
             AddDynamicProperty("Operating Pressure", "Current Vessel Operating Pressure", 0, UnitOfMeasure.pressure)
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
             AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
+            AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance)
             AddDynamicProperty("Initialize using Inlet Stream", "Initializes the vessel content with information from the inlet stream, if the vessel content is null.", 1, UnitOfMeasure.none)
 
         End Sub
@@ -160,8 +161,8 @@ Namespace UnitOperations
             Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
 
             Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
-            Dim oms1 As MaterialStream = Me.GetOutletMaterialStream(1)
-            Dim oms2 As MaterialStream = Me.GetOutletMaterialStream(2)
+            Dim oms1 As MaterialStream = Me.GetOutletMaterialStream(0)
+            Dim oms2 As MaterialStream = Me.GetOutletMaterialStream(1)
 
             Dim s1, s2, s3 As Enums.Dynamics.DynamicsSpecType
 
@@ -170,7 +171,7 @@ Namespace UnitOperations
             s3 = oms2.DynamicsSpec
 
             Dim Vol As Double = GetDynamicProperty("Volume")
-            Dim Level As Double = GetDynamicProperty("Liquid Level")
+            Dim Height As Double = GetDynamicProperty("Height")
             Dim Pressure As Double = GetDynamicProperty("Operating Pressure")
             Dim Orientation As Integer = GetDynamicProperty("Vessel Orientation")
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Stream")
@@ -181,7 +182,7 @@ Namespace UnitOperations
 
                     If InitializeFromInlet Then
 
-                        AccumulationStream.Assign(ims)
+                        AccumulationStream = ims.CloneXML
 
                     Else
 
@@ -201,14 +202,33 @@ Namespace UnitOperations
 
                 Dim Temperature = AccumulationStream.GetTemperature
 
+                Pressure = AccumulationStream.GetPressure
+
                 'm3/mol
+
                 Dim Mvol = Vol / M
+
+                PropertyPackage.CurrentMaterialStream = AccumulationStream
 
                 Dim result As IFlashCalculationResult
 
                 result = PropertyPackage.CalculateEquilibrium2(FlashCalculationType.VolumeTemperature, Mvol, Temperature, Pressure)
 
                 Pressure = result.CalculatedPressure
+
+                AccumulationStream.SetPressure(Pressure)
+
+                AccumulationStream.PropertyPackage = PropertyPackage
+                AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+                AccumulationStream.Calculate(True, True)
+
+                SetDynamicProperty("Operating Pressure", Pressure)
+
+                Dim LiquidVolume = Vol * (result.GetLiquidPhase1MoleFraction + result.GetLiquidPhase2MoleFraction)
+
+                Dim RelativeLevel = LiquidVolume / Vol
+
+                SetDynamicProperty("Liquid Level", RelativeLevel * Height)
 
                 oms1.SetPressure(Pressure)
 

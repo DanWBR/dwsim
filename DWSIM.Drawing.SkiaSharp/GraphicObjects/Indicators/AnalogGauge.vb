@@ -131,7 +131,7 @@ Namespace GraphicObjects
                 canvas.DrawPath(needle, paint)
             End Using
 
-            Dim valtext = currentvalue.ToString("G")
+            Dim valtext = currentvalue.ToString("G4")
 
             Using paint As New SKPaint With {.TextSize = 15.0 * f, .Color = SKColors.Black, .IsAntialias = True}
                 Select Case GlobalSettings.Settings.RunningPlatform

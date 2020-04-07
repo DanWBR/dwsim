@@ -1146,7 +1146,9 @@ Namespace UnitOperations
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
+
             Dim cv As New SystemsOfUnits.Converter
+
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
@@ -1159,7 +1161,9 @@ Namespace UnitOperations
                     Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
 
             End Select
+
             Return 1
+
         End Function
 
         Public Overrides Function GetIconBitmap() As Object

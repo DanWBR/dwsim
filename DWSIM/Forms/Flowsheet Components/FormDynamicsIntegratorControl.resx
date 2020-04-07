@@ -121,6 +121,10 @@
   <data name="lblCurrent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>864, 114</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnStop.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -137,7 +141,6 @@
   <data name="&gt;&gt;btnRun.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
   </data>
@@ -230,9 +233,6 @@
   </data>
   <data name="&gt;&gt;lblStart.Name" xml:space="preserve">
     <value>lblStart</value>
-  </data>
-  <data name="&gt;&gt;lblFinish.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="lblFinish.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -336,8 +336,8 @@
   <data name="lblStart.Text" xml:space="preserve">
     <value>00:00:00</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>864, 114</value>
+  <data name="&gt;&gt;lblFinish.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>

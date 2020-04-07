@@ -1797,7 +1797,10 @@ Public Class FormMain
             form.StoredSolutions.Clear()
 
             For Each xel As XElement In data
-                form.StoredSolutions.Add(xel.Name.LocalName, xel.Elements)
+                Try
+                    form.StoredSolutions.Add(xel.@ID, xel.Elements.ToList)
+                Catch ex As Exception
+                End Try
             Next
 
         End If
@@ -2346,7 +2349,10 @@ Public Class FormMain
             form.StoredSolutions.Clear()
 
             For Each xel As XElement In data
-                form.StoredSolutions.Add(xel.Name.LocalName, xel.Elements)
+                Try
+                    form.StoredSolutions.Add(xel.@ID, xel.Elements.ToList)
+                Catch ex As Exception
+                End Try
             Next
 
         End If
@@ -2890,7 +2896,7 @@ Public Class FormMain
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions")
 
         For Each pp As KeyValuePair(Of String, List(Of XElement)) In form.StoredSolutions
-            xel.Add(New XElement("Solution", {DirectCast(pp.Value, ICustomXMLSerialization).SaveData().ToArray()}))
+            xel.Add(New XElement("Solution", New XAttribute("ID", pp.Key), pp.Value))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicsManager"))

@@ -436,6 +436,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
                                    ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
                                    ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
+                                   If Double.IsNaN(ZV) Then ZV = 0
+                                   If Double.IsNaN(ZL1) Then ZL1 = 0
+                                   If Double.IsNaN(ZL2) Then ZL2 = 0
                                    VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
                                    VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
                                    VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
@@ -466,6 +469,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
                                    ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
                                    ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
+                                   If Double.IsNaN(ZV) Then ZV = 0
+                                   If Double.IsNaN(ZL1) Then ZL1 = 0
+                                   If Double.IsNaN(ZL2) Then ZL2 = 0
                                    VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
                                    VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
                                    VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P

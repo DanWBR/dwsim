@@ -38,7 +38,7 @@
 
             If col2.ContainsKey(p.Key) And col3.ContainsKey(p.Key) Then
 
-                Dim utype = DirectCast(col3(p.Key), Enums.UnitOfMeasure)
+                Dim utype = col3(p.Key)
                 Dim unitsstring = units.GetCurrentUnits(utype)
 
                 Dim l As New Label With {.Text = p.Key, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}

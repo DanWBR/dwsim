@@ -94,10 +94,20 @@ Namespace UnitOperations
                 col2.Add(pname, pdesc)
                 col3.Add(pname, punittype)
             Else
-                Throw New Exception("Property already exists.")
+                'Throw New Exception("Property already exists.")
             End If
 
         End Sub
+
+        Public Function SetDynamicProperty(id As String, value As Object) As Boolean
+
+            Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            col1(id) = value
+
+            Return True
+
+        End Function
 
         Public Function GetDynamicProperty(id As String) As Object
 
@@ -734,9 +744,9 @@ Namespace UnitOperations
                 Next
             End If
 
-            If ExtraProperties.Count = 0 Then
-                CreateDynamicProperties()
-            End If
+            'If ExtraProperties.Count = 0 Then
+            CreateDynamicProperties()
+            'End If
 
             Dim xel_u = (From xel2 As XElement In data Select xel2 Where xel2.Name = "AttachedUtilities")
 

@@ -369,6 +369,20 @@ Public Class MaterialStreamEditor
                 TabPageInputComposition.Enabled = True
             End If
 
+            If MatStream.FlowSheet.DynamicMode Then
+                If MatStream.DynamicsSpec = Interfaces.Enums.Dynamics.DynamicsSpecType.Flow Then
+                    tbMassFlow.Enabled = True
+                    tbMoleFlow.Enabled = True
+                    tbVolFlow.Enabled = True
+                    tbPressure.Enabled = False
+                Else
+                    tbMassFlow.Enabled = False
+                    tbMoleFlow.Enabled = False
+                    tbVolFlow.Enabled = False
+                    tbPressure.Enabled = True
+                End If
+            End If
+
         End With
 
         Loaded = True

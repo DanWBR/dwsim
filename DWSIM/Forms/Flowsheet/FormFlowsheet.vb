@@ -324,6 +324,10 @@ Public Class FormFlowsheet
     End Function
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
+        For Each item In StoredSolutions
+            tscbStoredSolutions.Items.Add(item.Key)
+        Next
+
         If Not Me.m_IsLoadedFromFile Then
 
             Me.Invalidate()

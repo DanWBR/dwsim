@@ -1,4 +1,6 @@
-﻿Public Class FormDynamicsIntegratorControl
+﻿Imports System.Linq
+
+Public Class FormDynamicsIntegratorControl
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -26,4 +28,7 @@
 
     End Sub
 
+    Private Sub cbScenario_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbScenario.SelectedIndexChanged
+        Flowsheet.DynamicsManager.CurrentSchedule = Flowsheet.DynamicsManager.ScheduleList.Values.ToList(cbScenario.SelectedIndex).ID
+    End Sub
 End Class

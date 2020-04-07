@@ -1300,7 +1300,10 @@ Imports DWSIM.Interfaces.Enums
             StoredSolutions.Clear()
 
             For Each xel As XElement In data
-                StoredSolutions.Add(xel.Name.LocalName, xel.Elements)
+                Try
+                    StoredSolutions.Add(xel.@ID, xel.Elements)
+                Catch ex As Exception
+                End Try
             Next
 
         End If
@@ -1507,7 +1510,7 @@ Imports DWSIM.Interfaces.Enums
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("StoredSolutions")
 
         For Each pp As KeyValuePair(Of String, List(Of XElement)) In StoredSolutions
-            xel.Add(New XElement("Solution", {DirectCast(pp.Value, ICustomXMLSerialization).SaveData().ToArray()}))
+            xel.Add(New XElement("Solution", New XAttribute("ID", pp.Key), pp.Value))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicsManager"))
