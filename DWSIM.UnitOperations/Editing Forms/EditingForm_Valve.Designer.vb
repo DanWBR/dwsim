@@ -43,6 +43,7 @@ Partial Class EditingForm_Valve
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnCalcKv = New System.Windows.Forms.Button()
         Me.tbOp = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.tbKvOpRel = New System.Windows.Forms.TextBox()
@@ -179,8 +180,9 @@ Partial Class EditingForm_Valve
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
-    "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
         Me.ToolTipValues.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
@@ -261,6 +263,7 @@ Partial Class EditingForm_Valve
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.btnCalcKv)
         Me.GroupBox2.Controls.Add(Me.tbOp)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.tbKvOpRel)
@@ -281,6 +284,15 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'btnCalcKv
+        '
+        resources.ApplyResources(Me.btnCalcKv, "btnCalcKv")
+        Me.btnCalcKv.Name = "btnCalcKv"
+        Me.ToolTip1.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip2"))
+        Me.btnCalcKv.UseVisualStyleBackColor = True
         '
         'tbOp
         '
@@ -511,9 +523,9 @@ Partial Class EditingForm_Valve
         Me.UtilitiesCtxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI})
         Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
-        Me.ToolTipValues.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip2"))
+        Me.ToolTip1.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip2"))
         '
         'AddUtilityTSMI
         '
@@ -607,4 +619,5 @@ Partial Class EditingForm_Valve
     Public WithEvents tbOp As TextBox
     Public WithEvents Label5 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Friend WithEvents btnCalcKv As Button
 End Class

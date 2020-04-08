@@ -1,5 +1,4 @@
 ﻿Imports DWSIM.Interfaces.Enums.GraphicObjects
-Imports System.Windows.Forms
 Imports Converter = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports WeifenLuo.WinFormsUI.Docking
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
@@ -1171,6 +1170,7 @@ Public Class MaterialStreamEditor
     Sub RequestCalc()
 
         SaveViewState()
+
         MatStream.FlowSheet.RequestCalculation(MatStream)
 
     End Sub

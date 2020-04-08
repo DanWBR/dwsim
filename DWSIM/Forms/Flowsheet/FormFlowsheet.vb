@@ -2824,12 +2824,14 @@ Public Class FormFlowsheet
 
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional changecalcorder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
-        If Not sender Is Nothing Then
-            FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
-        Else
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode)
+        If Not DynamicMode Then
+            If Not sender Is Nothing Then
+                FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+            Else
+                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode)
+            End If
+            FormSurface.Invalidate()
         End If
-        FormSurface.Invalidate()
 
     End Sub
 

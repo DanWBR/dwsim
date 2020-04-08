@@ -198,6 +198,7 @@ Public Class EditingForm_Valve
                 tbOp.Enabled = False
                 chkEnableKvOpRel.Enabled = False
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.OutletPressure
+                btnCalcKv.Enabled = False
             Case 1
                 tbPressureDrop.Enabled = True
                 tbOutletPressure.Enabled = False
@@ -206,6 +207,7 @@ Public Class EditingForm_Valve
                 tbOp.Enabled = False
                 chkEnableKvOpRel.Enabled = False
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.DeltaP
+                btnCalcKv.Enabled = False
             Case 2
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -214,6 +216,7 @@ Public Class EditingForm_Valve
                 tbOp.Enabled = True
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Liquid
+                btnCalcKv.Enabled = True
             Case 3
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -222,6 +225,7 @@ Public Class EditingForm_Valve
                 tbOp.Enabled = True
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Gas
+                btnCalcKv.Enabled = True
             Case 4
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -230,6 +234,7 @@ Public Class EditingForm_Valve
                 tbOp.Enabled = True
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
+                btnCalcKv.Enabled = True
         End Select
 
     End Sub
@@ -500,4 +505,11 @@ Public Class EditingForm_Valve
 
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnCalcKv.Click
+
+        SimObject.CalculateKv()
+
+        UpdateInfo()
+
+    End Sub
 End Class

@@ -7593,7 +7593,7 @@ Namespace Streams
 
         End Sub
 
-        Public Function Add(stream As MaterialStream, Optional ByVal EquilibriumFactor As Double = 1.0) As MaterialStream
+        Public Function Add(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
             Dim newstream = DirectCast(Clone1(), MaterialStream)
 
@@ -7621,41 +7621,41 @@ Namespace Streams
                 If Not Vw.ContainsKey(comp.Name) Then
                     Vw.Add(comp.Name, 0)
                 End If
-                Vw(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vw(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(2).Compounds.Values
                 If Not Vwv.ContainsKey(comp.Name) Then
                     Vwv.Add(comp.Name, 0)
                 End If
-                Vwv(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwv(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(1).Compounds.Values
                 If Not Vwlo.ContainsKey(comp.Name) Then
                     Vwlo.Add(comp.Name, 0)
                 End If
-                Vwlo(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwlo(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(3).Compounds.Values
                 If Not Vwl1.ContainsKey(comp.Name) Then
                     Vwl1.Add(comp.Name, 0)
                 End If
-                Vwl1(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwl1(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(4).Compounds.Values
                 If Not Vwl2.ContainsKey(comp.Name) Then
                     Vwl2.Add(comp.Name, 0)
                 End If
-                Vwl2(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwl2(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(7).Compounds.Values
                 If Not Vws.ContainsKey(comp.Name) Then
                     Vws.Add(comp.Name, 0)
                 End If
-                Vws(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vws(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
 
-            newstream.SetMassFlow(W0 + W1)
-            newstream.SetMolarFlow(M0 + M1)
+            newstream.SetMassFlow(W0 + Factor * W1)
+            newstream.SetMolarFlow(M0 + Factor * M1)
 
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MassFlow += Vw(comp.Name)
@@ -7699,7 +7699,7 @@ Namespace Streams
 
         End Function
 
-        Public Function Subtract(stream As MaterialStream, Optional ByVal EquilibriumFactor As Double = 1.0) As MaterialStream
+        Public Function Subtract(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
             Dim newstream = DirectCast(Clone1(), MaterialStream)
 
@@ -7727,31 +7727,31 @@ Namespace Streams
                 If Not Vw.ContainsKey(comp.Name) Then
                     Vw.Add(comp.Name, 0)
                 End If
-                Vw(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vw(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(2).Compounds.Values
                 If Not Vwv.ContainsKey(comp.Name) Then
                     Vwv.Add(comp.Name, 0)
                 End If
-                Vwv(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwv(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(1).Compounds.Values
                 If Not Vwlo.ContainsKey(comp.Name) Then
                     Vwlo.Add(comp.Name, 0)
                 End If
-                Vwlo(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwlo(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(3).Compounds.Values
                 If Not Vwl1.ContainsKey(comp.Name) Then
                     Vwl1.Add(comp.Name, 0)
                 End If
-                Vwl1(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwl1(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(4).Compounds.Values
                 If Not Vwl2.ContainsKey(comp.Name) Then
                     Vwl2.Add(comp.Name, 0)
                 End If
-                Vwl2(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vwl2(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
             For Each comp In stream.Phases(7).Compounds.Values
                 If Not Vws.ContainsKey(comp.Name) Then
@@ -7760,8 +7760,8 @@ Namespace Streams
                 Vws(comp.Name) += comp.MassFlow.GetValueOrDefault
             Next
 
-            newstream.SetMassFlow(W0 + W1)
-            newstream.SetMolarFlow(M0 + M1)
+            newstream.SetMassFlow(W0 + Factor * W1)
+            newstream.SetMolarFlow(M0 + Factor * M1)
 
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MassFlow -= Vw(comp.Name)

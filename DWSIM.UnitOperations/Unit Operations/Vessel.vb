@@ -160,6 +160,8 @@ Namespace UnitOperations
             Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
             Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
 
+            Dim timestep = integrator.IntegrationStep.TotalSeconds
+
             Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
             Dim oms1 As MaterialStream = Me.GetOutletMaterialStream(0)
             Dim oms2 As MaterialStream = Me.GetOutletMaterialStream(1)
@@ -172,7 +174,7 @@ Namespace UnitOperations
 
             Dim Vol As Double = GetDynamicProperty("Volume")
             Dim Height As Double = GetDynamicProperty("Height")
-            Dim Pressure As Double = GetDynamicProperty("Operating Pressure")
+            Dim Pressure As Double
             Dim Orientation As Integer = GetDynamicProperty("Vessel Orientation")
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Stream")
 
@@ -186,13 +188,13 @@ Namespace UnitOperations
 
                     Else
 
-                        AccumulationStream = ims.Subtract(oms1).Subtract(oms2)
+                        AccumulationStream = ims.Subtract(oms1, timestep).Subtract(oms2, timestep)
 
                     End If
 
                 Else
 
-                        AccumulationStream = AccumulationStream.Add(ims).Subtract(oms1).Subtract(oms2)
+                    AccumulationStream = AccumulationStream.Add(ims, timestep).Subtract(oms1, timestep).Subtract(oms2, timestep)
 
                 End If
 
