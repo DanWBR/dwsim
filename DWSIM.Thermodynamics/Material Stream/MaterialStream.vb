@@ -7595,7 +7595,7 @@ Namespace Streams
 
         Public Function Add(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
-            Dim newstream = DirectCast(Clone1(), MaterialStream)
+            Dim newstream = DirectCast(CloneXML(), MaterialStream)
 
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()
@@ -7701,7 +7701,7 @@ Namespace Streams
 
         Public Function Subtract(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
-            Dim newstream = DirectCast(Clone1(), MaterialStream)
+            Dim newstream = DirectCast(CloneXML(), MaterialStream)
 
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()

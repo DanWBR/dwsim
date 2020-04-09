@@ -194,9 +194,12 @@ Namespace UnitOperations
 
                 Else
 
+                    AccumulationStream.SetFlowsheet(FlowSheet)
                     AccumulationStream = AccumulationStream.Add(ims, timestep).Subtract(oms1, timestep).Subtract(oms2, timestep)
 
                 End If
+
+                AccumulationStream.SetFlowsheet(FlowSheet)
 
                 'calculate pressure
 

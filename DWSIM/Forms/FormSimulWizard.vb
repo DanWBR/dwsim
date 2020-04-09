@@ -179,14 +179,14 @@ Public Class FormSimulWizard
         Dim needselecting As Boolean = True
 
         For Each r As DataGridViewRow In ogc1.Rows
-            If Not r.Cells(1).Value Is Nothing Then
-                If r.Cells(1).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(4).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
+            If Not r.Cells(2).Value Is Nothing Then
+                If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
+                   r.Cells(3).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
+                   r.Cells(5).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
                     r.Visible = True
-                    If r.Cells(1).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(4).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
+                    If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
+                                       r.Cells(3).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
+                                       r.Cells(5).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
                         r.Selected = True
                         needselecting = False
                     End If

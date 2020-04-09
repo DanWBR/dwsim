@@ -324,6 +324,8 @@ Public Class FormFlowsheet
     End Function
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
+        Me.WindowState = FormWindowState.Maximized
+
         For Each item In StoredSolutions
             tscbStoredSolutions.Items.Add(item.Key)
         Next
@@ -3116,15 +3118,17 @@ Public Class FormFlowsheet
 
     Private Sub tsbLoadSolution_Click(sender As Object, e As EventArgs) Handles tsbLoadSolution.Click
 
-        If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
-            Try
-                LoadProcessData(StoredSolutions(tscbStoredSolutions.SelectedItem.ToString))
-                UpdateInterface()
-                UpdateOpenEditForms()
-                MessageBox.Show(GetTranslatedString1("SolutionRestored"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(ex.Message, GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+        If tscbStoredSolutions.SelectedItem IsNot Nothing Then
+            If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
+                Try
+                    LoadProcessData(StoredSolutions(tscbStoredSolutions.SelectedItem.ToString))
+                    UpdateInterface()
+                    UpdateOpenEditForms()
+                    MessageBox.Show(GetTranslatedString1("SolutionRestored"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message, GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
         End If
 
     End Sub
@@ -3160,6 +3164,14 @@ Public Class FormFlowsheet
             Dim id As String = xel.<Name>.Value
             Dim obj = SimulationObjects(id)
             obj.LoadData(xel.Elements.ToList)
+            If TypeOf obj Is Streams.MaterialStream Then
+                Dim stream = DirectCast(obj, Streams.MaterialStream)
+                For Each p In stream.Phases.Values
+                    For Each c In p.Compounds.Values
+                        c.ConstantProperties = SelectedCompounds(c.Name)
+                    Next
+                Next
+            End If
         Next
 
     End Sub

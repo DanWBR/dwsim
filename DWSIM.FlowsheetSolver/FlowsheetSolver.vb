@@ -142,7 +142,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     myObj.Solve()
 
                     If fbag.DynamicMode Then
-                        'Adjust/Static Controllers are not supported in dynamic mode
+                        myObj.RunDynamicModel()
                     Else
                         myObj.Solve()
                     End If
