@@ -6,6 +6,10 @@ Public Class FormDynamicsIntegratorControl
 
     Public Flowsheet As FormFlowsheet
 
+    Public Busy As Boolean = False
+
+    Public Abort As Boolean = False
+
     Private Sub FormDynamicsIntegratorControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -34,11 +38,15 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
+        Abort = False
+
         Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
 
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
         Dim initialstate = Flowsheet.StoredSolutions(schedule.InitialFlowsheetStateID)
+
+        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
 
         Flowsheet.LoadProcessData(initialstate)
 
@@ -60,6 +68,10 @@ Public Class FormDynamicsIntegratorControl
 
         Dim final = integrator.Duration.TotalSeconds
 
+        For Each controller As PIDController In Controllers
+            controller.Reset()
+        Next
+
         For i = 0 To final Step interval
 
             TrackBar1.Value = i
@@ -72,7 +84,23 @@ Public Class FormDynamicsIntegratorControl
 
             integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
+            For Each controller As PIDController In Controllers
+                controller.Calculate()
+            Next
+
+            If Abort Then
+
+                Exit For
+
+            End If
+
         Next
+
+    End Sub
+
+    Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
+
+        Abort = True
 
     End Sub
 

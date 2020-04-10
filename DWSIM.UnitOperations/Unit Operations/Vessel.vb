@@ -235,6 +235,8 @@ Namespace UnitOperations
 
                 SetDynamicProperty("Liquid Level", RelativeLevel * Height)
 
+                ims.SetPressure(Pressure)
+
                 oms1.SetPressure(Pressure)
 
                 oms2.SetPressure(Pressure)

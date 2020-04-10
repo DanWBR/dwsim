@@ -59,6 +59,10 @@ Public Class EditingForm_PIDController
                     cbSourceObj.SelectedItem = .ManipulatedObjectData.Name
                     cbSourceProp.SelectedItem = .FlowSheet.GetTranslatedString(.ManipulatedObjectData.PropertyName)
                     cbSourceType.SelectedItem = [Enum].GetName(.ManipulatedObjectData.UnitsType.GetType, .ManipulatedObjectData.UnitsType)
+                    Try
+                        cbSourceUnits.SelectedItem = .ManipulatedObjectData.Units
+                    Catch ex As Exception
+                    End Try
                 End If
             End If
             If .ControlledObjectData.ID <> "" Then
@@ -69,15 +73,19 @@ Public Class EditingForm_PIDController
                     cbTargetProp.SelectedItem = .FlowSheet.GetTranslatedString(.ControlledObjectData.PropertyName)
                     cbTargetType.SelectedItem = [Enum].GetName(.ControlledObjectData.UnitsType.GetType, .ControlledObjectData.UnitsType)
                     Try
+                        cbTargetUnits.SelectedItem = .ControlledObjectData.Units
+                    Catch ex As Exception
+                    End Try
+                    Try
                         Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
                         'parameters
                         tbSetPoint.Text = su.Converter.ConvertFromSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(SimObject.AdjustValue)).ToString(nf)
                     Catch ex As Exception
                     End Try
-                    lblTargetVal.Text = Convert.ToDouble(obj2.GetPropertyValue(SimObject.ControlledObjectData.PropertyName, units)).ToString(nf) &
-                        " (" & (Convert.ToDouble(obj2.GetPropertyValue(SimObject.ControlledObjectData.PropertyName, units)) -
-                        su.Converter.ConvertFromSI(obj2.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") &
-                        ") " & obj2.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units)
+                    lblTargetVal.Text = su.Converter.ConvertFromSI(.ControlledObjectData.Units, Convert.ToDouble(obj2.GetPropertyValue(SimObject.ControlledObjectData.PropertyName))).ToString(nf) &
+                        " (" & (su.Converter.ConvertFromSI(.ControlledObjectData.Units, Convert.ToDouble(obj2.GetPropertyValue(SimObject.ControlledObjectData.PropertyName))) -
+                        SimObject.AdjustValue).ToString("+0.####;-0.####;0") &
+                        ") " & .ControlledObjectData.Units
                 End If
             End If
 
@@ -250,7 +258,6 @@ Public Class EditingForm_PIDController
                 If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then
                     SimObject.ControlledObjectData.PropertyName = p
                     lblTargetVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - su.Converter.ConvertFromSI(obj.GetPropertyUnit(p, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
-                    lblSPUnits.Text = obj.GetPropertyUnit(p, units)
                     Exit For
                 End If
             Next
@@ -336,7 +343,7 @@ Public Class EditingForm_PIDController
 
         If SimObject.ControlledObjectData IsNot Nothing Then
 
-            SimObject.ControlledObjectData.Units = cbSourceUnits.SelectedItem.ToString
+            SimObject.ControlledObjectData.Units = cbTargetUnits.SelectedItem.ToString
 
             Dim SelectedObject = SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.Name = SimObject.ControlledObjectData.ID).FirstOrDefault
 
@@ -366,16 +373,16 @@ Public Class EditingForm_PIDController
 
         If e.KeyCode = Keys.Enter And Loaded Then
 
-            Select Case sender
-                Case tbSetPoint
+            Select Case sender.Name
+                Case "tbSetPoint"
                     SimObject.AdjustValue = Double.Parse(tbSetPoint.Text.ParseExpressionToDouble)
-                Case tbOffset
+                Case "tbOffset"
                     SimObject.Offset = Double.Parse(tbOffset.Text.ParseExpressionToDouble)
-                Case tbKp
+                Case "tbKp"
                     SimObject.Kp = Double.Parse(tbKp.Text.ParseExpressionToDouble)
-                Case tbKi
+                Case "tbKi"
                     SimObject.Ki = Double.Parse(tbKi.Text.ParseExpressionToDouble)
-                Case tbKd
+                Case "tbKd"
                     SimObject.Kd = Double.Parse(tbKd.Text.ParseExpressionToDouble)
             End Select
 

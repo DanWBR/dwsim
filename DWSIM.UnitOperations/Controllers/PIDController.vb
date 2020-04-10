@@ -67,6 +67,20 @@ Namespace SpecialOps
         Public Property Kd As Double = 0.0
         Public Property Ki As Double = 0.0
 
+        Public Property CurrentError As Double = 0.0
+
+        Public Property LastError As Double = 0.0
+
+        Public Property PTerm As Double = 0.0
+
+        Public Property ITerm As Double = 0.0
+
+        Public Property DTerm As Double = 0.0
+
+        Public Property Output As Double = 0.0
+
+        Public Property OutputAbs As Double = 0.0
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
             obj.LoadData(Me.SaveData)
@@ -293,7 +307,7 @@ Namespace SpecialOps
                     .PropertyName = xel.@Property
                     .ObjectType = xel.@ObjectType
                     .Units = xel.@PropertyUnits
-                    .UnitsType = xel.@PropertyUnitsType
+                    .UnitsType = [Enum].Parse(.UnitsType.GetType, xel.@PropertyUnitsType)
                 End With
 
             End If
@@ -308,7 +322,7 @@ Namespace SpecialOps
                     .PropertyName = xel.@Property
                     .ObjectType = xel.@ObjectType
                     .Units = xel.@PropertyUnits
-                    .UnitsType = xel.@PropertyUnitsType
+                    .UnitsType = [Enum].Parse(.UnitsType.GetType, xel.@PropertyUnitsType)
                 End With
 
             End If
@@ -323,7 +337,7 @@ Namespace SpecialOps
                     .PropertyName = xel.@Property
                     .ObjectType = xel.@ObjectType
                     .Units = xel.@PropertyUnits
-                    .UnitsType = xel.@PropertyUnitsType
+                    .UnitsType = [Enum].Parse(.UnitsType.GetType, xel.@PropertyUnitsType)
                 End With
 
             End If
@@ -354,14 +368,14 @@ Namespace SpecialOps
                                   New XAttribute("Name", m_ControlledObjectData.Name),
                                   New XAttribute("Property", m_ControlledObjectData.PropertyName),
                                   New XAttribute("ObjectType", m_ControlledObjectData.ObjectType),
-                                  New XAttribute("PropertyUnitsType", m_ManipulatedObjectData.UnitsType),
-                                  New XAttribute("PropertyUnits", m_ManipulatedObjectData.Units)))
+                                  New XAttribute("PropertyUnitsType", m_ControlledObjectData.UnitsType),
+                                  New XAttribute("PropertyUnits", m_ControlledObjectData.Units)))
                 .Add(New XElement("ReferencedObjectData", New XAttribute("ID", m_ReferencedObjectData.ID),
                                   New XAttribute("Name", m_ReferencedObjectData.Name),
                                   New XAttribute("Property", m_ReferencedObjectData.PropertyName),
                                   New XAttribute("ObjectType", m_ReferencedObjectData.ObjectType),
-                                  New XAttribute("PropertyUnitsType", m_ManipulatedObjectData.UnitsType),
-                                  New XAttribute("PropertyUnits", m_ManipulatedObjectData.Units)))
+                                  New XAttribute("PropertyUnitsType", m_ReferencedObjectData.UnitsType),
+                                  New XAttribute("PropertyUnits", m_ReferencedObjectData.Units)))
             End With
 
             Return elements
@@ -508,6 +522,61 @@ Namespace SpecialOps
                 Return True
             End Get
         End Property
+
+        Public Sub Reset()
+
+            PTerm = 0.0
+            ITerm = 0.0
+            DTerm = 0.0
+
+            LastError = 0.0
+
+            Output = 0.0
+
+        End Sub
+
+        Public Overrides Sub Calculate(Optional args As Object = Nothing)
+
+            ' Calculates PID value for given reference feedback
+            ' u(t) = K_p e(t) + K_i \int_{0}^{t} e(t)dt + K_d {de}/{dt}
+
+            Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
+            Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
+
+            Dim timestep = integrator.IntegrationStep.TotalSeconds
+
+            Dim ControlledObject = GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = ControlledObjectData.ID).SingleOrDefault
+
+            Dim ManipulatedObject = GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = ManipulatedObjectData.ID).SingleOrDefault
+
+            Dim CurrentValue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(ControlledObjectData.Units, ControlledObject.GetPropertyValue(ControlledObjectData.PropertyName))
+
+            Dim CurrentManipulatedValue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(ManipulatedObjectData.Units, ManipulatedObject.GetPropertyValue(ManipulatedObjectData.PropertyName))
+
+            LastError = CurrentError
+
+            CurrentError = (AdjustValue - CurrentValue) / AdjustValue
+
+            Dim delta_error = CurrentError - LastError
+
+            PTerm = Kp * CurrentError
+
+            ITerm += CurrentError * timestep
+
+            DTerm = 0.0
+
+            If LastError > 0 Then DTerm = delta_error / timestep
+
+            Output = PTerm + Ki * ITerm + Kd * DTerm
+
+            OutputAbs = (1.0 - Output) * CurrentManipulatedValue
+
+            Dim OutputValue = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
+
+            ManipulatedObject.SetPropertyValue(ManipulatedObjectData.PropertyName, OutputValue)
+
+        End Sub
+
     End Class
 
 End Namespace

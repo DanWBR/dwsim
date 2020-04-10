@@ -59,7 +59,6 @@ Partial Class EditingForm_PIDController
         Me.Label8 = New System.Windows.Forms.Label()
         Me.tbKp = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblSPUnits = New System.Windows.Forms.Label()
         Me.tbSetPoint = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
@@ -319,7 +318,6 @@ Partial Class EditingForm_PIDController
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.tbKp)
         Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.lblSPUnits)
         Me.GroupBox2.Controls.Add(Me.tbSetPoint)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Name = "GroupBox2"
@@ -382,13 +380,6 @@ Partial Class EditingForm_PIDController
         Me.Label1.Name = "Label1"
         Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
-        '
-        'lblSPUnits
-        '
-        resources.ApplyResources(Me.lblSPUnits, "lblSPUnits")
-        Me.lblSPUnits.Name = "lblSPUnits"
-        Me.ToolTipValues.SetToolTip(Me.lblSPUnits, resources.GetString("lblSPUnits.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.lblSPUnits, resources.GetString("lblSPUnits.ToolTip1"))
         '
         'tbSetPoint
         '
@@ -457,7 +448,6 @@ Partial Class EditingForm_PIDController
     Public WithEvents Label8 As Label
     Public WithEvents tbKp As TextBox
     Public WithEvents Label1 As Label
-    Public WithEvents lblSPUnits As Label
     Public WithEvents tbSetPoint As TextBox
     Public WithEvents Label3 As Label
     Public WithEvents tbOffset As TextBox

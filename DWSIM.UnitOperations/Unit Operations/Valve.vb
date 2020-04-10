@@ -558,9 +558,9 @@ Namespace UnitOperations
                     Case 3
                         'PROP_VA_3	Temperature Drop
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
-                    Case 5
+                    Case 4
                         value = Kv
-                    Case 6
+                    Case 5
                         value = OpeningPct
                 End Select
 
@@ -618,9 +618,17 @@ Namespace UnitOperations
                 Case 4
                     Me.Kv = propval
                 Case 5
-                    Me.OpeningPct = propval
+                    If propval >= 0 And propval <= 100 Then
+                        Me.OpeningPct = propval
+                    ElseIf propval < 0 Then
+                        OpeningPct = 0
+                    Else
+                        OpeningPct = 100
+                    End If
             End Select
+
             Return 1
+
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
