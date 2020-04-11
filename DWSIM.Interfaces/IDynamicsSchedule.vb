@@ -34,4 +34,6 @@ Public Interface IDynamicsSchedule
 
     Property InitialFlowsheetStateID As String
 
+    Property UseCurrentStateAsInitial As Boolean
+
 End Interface

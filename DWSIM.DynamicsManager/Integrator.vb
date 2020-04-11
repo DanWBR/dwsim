@@ -46,13 +46,13 @@ Public Class Integrator
 
     Public Property RealTime As Boolean = False Implements IDynamicsIntegrator.RealTime
 
-    Public Property StoredSolutions As Dictionary(Of TimeSpan, List(Of XElement)) = New Dictionary(Of TimeSpan, List(Of XElement)) Implements IDynamicsIntegrator.StoredSolutions
+    Public Property StoredSolutions As Dictionary(Of Integer, List(Of XElement)) = New Dictionary(Of Integer, List(Of XElement)) Implements IDynamicsIntegrator.StoredSolutions
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         Dim e1 = New XElement("StoredSolutions")
-        For Each kvp As KeyValuePair(Of TimeSpan, List(Of XElement)) In StoredSolutions
-            e1.Add(New XElement("Solution" + "_" + kvp.Key.TotalSeconds.ToString(Globalization.CultureInfo.InvariantCulture),
+        For Each kvp As KeyValuePair(Of Integer, List(Of XElement)) In StoredSolutions
+            e1.Add(New XElement("Solution" + "_" + kvp.Key.ToString(Globalization.CultureInfo.InvariantCulture),
                                 kvp.Value))
         Next
         data.Add(e1)
@@ -63,10 +63,13 @@ Public Class Integrator
         XMLSerializer.XMLSerializer.Deserialize(Me, data)
         Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "StoredSolutions").LastOrDefault
         If Not elm Is Nothing Then
-            StoredSolutions = New Dictionary(Of TimeSpan, List(Of XElement))
+            StoredSolutions = New Dictionary(Of Integer, List(Of XElement))
             For Each xel2 As XElement In elm.Elements
-                StoredSolutions.Add(New TimeSpan(Double.Parse(xel2.Name.LocalName.Split("_")(1), Globalization.CultureInfo.InvariantCulture)),
-                                    xel2.Elements)
+                Try
+                    StoredSolutions.Add(Integer.Parse(xel2.Name.LocalName.Split("_")(1), Globalization.CultureInfo.InvariantCulture),
+                                    xel2.Elements.ToList)
+                Catch ex As Exception
+                End Try
             Next
         End If
         Return True

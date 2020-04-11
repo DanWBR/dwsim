@@ -152,6 +152,7 @@ Namespace UnitOperations
             AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
             AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance)
             AddDynamicProperty("Initialize using Inlet Stream", "Initializes the vessel content with information from the inlet stream, if the vessel content is null.", 1, UnitOfMeasure.none)
+            AddDynamicProperty("Reset Content", "Empties the vessel's content on the next run.", 0, UnitOfMeasure.none)
 
         End Sub
 
@@ -177,6 +178,13 @@ Namespace UnitOperations
             Dim Pressure As Double
             Dim Orientation As Integer = GetDynamicProperty("Vessel Orientation")
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Stream")
+
+            Dim Reset As Boolean = GetDynamicProperty("Reset Content")
+
+            If Reset Then
+                AccumulationStream = Nothing
+                SetDynamicProperty("Reset Content", False)
+            End If
 
             If s2 = Dynamics.DynamicsSpecType.Pressure And s3 = Dynamics.DynamicsSpecType.Pressure Then
 
@@ -222,6 +230,8 @@ Namespace UnitOperations
                 Pressure = result.CalculatedPressure
 
                 AccumulationStream.SetPressure(Pressure)
+                AccumulationStream.SetTemperature(ims.GetTemperature)
+                AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
 
                 AccumulationStream.PropertyPackage = PropertyPackage
                 AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream

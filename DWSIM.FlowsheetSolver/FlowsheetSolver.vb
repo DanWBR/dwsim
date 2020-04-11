@@ -139,7 +139,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     myObj.GraphicObject.Calculated = False
                     myObj.Calculated = False
-                    myObj.Solve()
 
                     If fbag.DynamicMode Then
                         myObj.RunDynamicModel()

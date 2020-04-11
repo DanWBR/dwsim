@@ -587,6 +587,8 @@ Public Class FormDynamicsManager
 
         chkIntegratorUseMatrix.Checked = s1.UsesCauseAndEffectMatrix
 
+        chkSchUseCurrentState.Checked = s1.UseCurrentStateAsInitial
+
         panelSelSchedule.Enabled = True
 
     End Sub
@@ -626,6 +628,17 @@ Public Class FormDynamicsManager
         Try
             Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
             s1.InitialFlowsheetStateID = cbScheduleInitialState.SelectedItem
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub chkSchUseCurrentState_CheckedChanged(sender As Object, e As EventArgs) Handles chkSchUseCurrentState.CheckedChanged
+
+        cbScheduleInitialState.Enabled = Not chkSchUseCurrentState.Checked
+        Try
+            Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+            s1.UseCurrentStateAsInitial = chkSchUseCurrentState.Checked
         Catch ex As Exception
         End Try
 

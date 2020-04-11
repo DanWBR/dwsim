@@ -442,7 +442,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
                                    VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
                                    VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
-                                   Return (Vspec - VV - VL1 - VL2) ^ 2
+                                   Return ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2
                                End Function, {var})
 
             Return flashresult
@@ -475,7 +475,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
                                    VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
                                    VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
-                                   Return (Vspec - VV - VL1 - VL2) ^ 2
+                                   Return ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2
                                End Function, {var})
 
             Return flashresult
@@ -511,7 +511,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    HL1 = flashresult.GetLiquidPhase1MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase1MoleFractions, T, P, State.Liquid)
                                    HL2 = flashresult.GetLiquidPhase2MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase2MoleFractions, T, P, State.Liquid)
                                    HV = flashresult.GetVaporPhaseMassFraction * PP.DW_CalcEnthalpy(flashresult.GetVaporPhaseMoleFractions, T, P, State.Vapor)
-                                   Return (Vspec - VV - VL1 - VL2) ^ 2 + (H - HV - HL1 - HL2) ^ 2
+                                   Return ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2 + ((H - HV - HL1 - HL2) / H) ^ 2
                                End Function, {var1, var2})
 
             Return flashresult
@@ -547,7 +547,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    SL1 = flashresult.GetLiquidPhase1MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase1MoleFractions, T, P, State.Liquid)
                                    SL2 = flashresult.GetLiquidPhase2MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase2MoleFractions, T, P, State.Liquid)
                                    SV = flashresult.GetVaporPhaseMassFraction * PP.DW_CalcEnthalpy(flashresult.GetVaporPhaseMoleFractions, T, P, State.Vapor)
-                                   Return (Vspec - VV - VL1 - VL2) ^ 2 + (S - SV - SL1 - SL2) ^ 2
+                                   Return ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2 + ((S - SV - SL1 - SL2) / S) ^ 2
                                End Function, {var1, var2})
 
             Return flashresult

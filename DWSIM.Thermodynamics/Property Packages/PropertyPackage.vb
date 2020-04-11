@@ -11077,12 +11077,12 @@ Final3:
             End Try
 
             Try
-                LiquidDensityCalculationMode_Subcritical = (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value
+                LiquidDensityCalculationMode_Subcritical = [Enum].Parse(LiquidDensityCalculationMode_Subcritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 
             Try
-                LiquidDensityCalculationMode_Supercritical = (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value
+                LiquidDensityCalculationMode_Supercritical = [Enum].Parse(LiquidDensityCalculationMode_Supercritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 
@@ -11097,12 +11097,12 @@ Final3:
             End Try
 
             Try
-                LiquidViscosityCalculationMode_Subcritical = (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Subcritical").FirstOrDefault.Value
+                LiquidViscosityCalculationMode_Subcritical = [Enum].Parse(LiquidViscosityCalculationMode_Subcritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Subcritical").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 
             Try
-                LiquidViscosityCalculationMode_Supercritical = (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Supercritical").FirstOrDefault.Value
+                LiquidViscosityCalculationMode_Supercritical = [Enum].Parse(LiquidViscosityCalculationMode_Supercritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Supercritical").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 
@@ -11112,17 +11112,17 @@ Final3:
             End Try
 
             Try
-                LiquidViscosity_MixingRule = (From el As XElement In data Select el Where el.Name = "LiquidViscosity_MixingRule").FirstOrDefault.Value
+                LiquidViscosity_MixingRule = [Enum].Parse(LiquidViscosity_MixingRule.GetType, (From el As XElement In data Select el Where el.Name = "LiquidViscosity_MixingRule").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 
             Try
-                VaporPhaseFugacityCalculationMode = (From el As XElement In data Select el Where el.Name = "VaporPhaseFugacityCalculationMode").FirstOrDefault.Value
+                VaporPhaseFugacityCalculationMode = [Enum].Parse(VaporPhaseFugacityCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "VaporPhaseFugacityCalculationMode").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 
             Try
-                SolidPhaseFugacityCalculationMethod = (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacityCalculationMethod").FirstOrDefault.Value
+                SolidPhaseFugacityCalculationMethod = [Enum].Parse(SolidPhaseFugacityCalculationMethod.GetType, (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacityCalculationMethod").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 
@@ -11137,7 +11137,7 @@ Final3:
             End Try
 
             Try
-                EnthalpyEntropyCpCvCalculationMode = (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value
+                EnthalpyEntropyCpCvCalculationMode = [Enum].Parse(EnthalpyEntropyCpCvCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
 

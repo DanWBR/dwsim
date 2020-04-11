@@ -44,13 +44,17 @@ Public Class FormDynamicsIntegratorControl
 
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
-        Dim initialstate = Flowsheet.StoredSolutions(schedule.InitialFlowsheetStateID)
-
         Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
 
-        Flowsheet.LoadProcessData(initialstate)
+        If Not schedule.UseCurrentStateAsInitial Then
 
-        Flowsheet.UpdateInterface()
+            Dim initialstate = Flowsheet.StoredSolutions(schedule.InitialFlowsheetStateID)
+
+            Flowsheet.LoadProcessData(initialstate)
+
+            Flowsheet.UpdateInterface()
+
+        End If
 
         TrackBar1.Value = 0
 
@@ -72,6 +76,8 @@ Public Class FormDynamicsIntegratorControl
             controller.Reset()
         Next
 
+        Dim j As Integer = 0
+
         For i = 0 To final Step interval
 
             TrackBar1.Value = i
@@ -80,7 +86,11 @@ Public Class FormDynamicsIntegratorControl
 
             FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
 
-            integrator.StoredSolutions.Add(New TimeSpan(0, 0, i), Flowsheet.GetProcessData())
+            Flowsheet.UpdateInterface()
+
+            Flowsheet.UpdateOpenEditForms()
+
+            integrator.StoredSolutions.Add(j, Flowsheet.GetProcessData())
 
             integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
@@ -93,6 +103,8 @@ Public Class FormDynamicsIntegratorControl
                 Exit For
 
             End If
+
+            j += 1
 
         Next
 

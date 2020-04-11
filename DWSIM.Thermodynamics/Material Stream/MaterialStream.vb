@@ -7654,8 +7654,8 @@ Namespace Streams
                 Vws(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
 
-            newstream.SetMassFlow(W0 + Factor * W1)
-            newstream.SetMolarFlow(M0 + Factor * M1)
+            newstream.Phases(0).Properties.massflow = (W0 + Factor * W1)
+            newstream.Phases(0).Properties.molarflow = (M0 + Factor * M1)
 
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MassFlow += Vw(comp.Name)
@@ -7760,8 +7760,8 @@ Namespace Streams
                 Vws(comp.Name) += comp.MassFlow.GetValueOrDefault
             Next
 
-            newstream.SetMassFlow(W0 + Factor * W1)
-            newstream.SetMolarFlow(M0 + Factor * M1)
+            newstream.Phases(0).Properties.massflow = (W0 - Factor * W1)
+            newstream.Phases(0).Properties.molarflow = (M0 - Factor * M1)
 
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MassFlow -= Vw(comp.Name)
@@ -7882,6 +7882,12 @@ Namespace Streams
             End Select
 
         End Sub
+
+        Public Overrides Function ToString() As String
+
+            Return MyBase.ToString() + String.Format(": T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow)
+
+        End Function
 
     End Class
 

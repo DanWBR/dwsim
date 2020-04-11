@@ -45,6 +45,6 @@
 
     Property RealTime As Boolean
 
-    Property StoredSolutions As Dictionary(Of TimeSpan, List(Of XElement))
+    Property StoredSolutions As Dictionary(Of Integer, List(Of XElement))
 
 End Interface

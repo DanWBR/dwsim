@@ -9,7 +9,7 @@
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
-    Private Sub DynamicsPropertyEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub DynamicsPropertyEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Shown
 
         UpdateInfo()
 
@@ -24,7 +24,11 @@
 
         Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetFlowsheet().GetTranslatedString("DynamicProperties") & ")"
 
-        rbPressure.Checked = If(SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Pressure, True, False)
+        If SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Pressure Then
+            rbPressure.Checked = True
+        Else
+            rbFlow.Checked = True
+        End If
 
         Dim col1 = DirectCast(SimObject.ExtraProperties, IDictionary(Of String, Object))
         Dim col2 = DirectCast(SimObject.ExtraPropertiesDescriptions, IDictionary(Of String, Object))
@@ -41,8 +45,8 @@
                 Dim utype = col3(p.Key)
                 Dim unitsstring = units.GetCurrentUnits(utype)
 
-                Dim l As New Label With {.Text = p.Key, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
-                Dim tb As New TextBox With {.Text = p.Value.ToString, .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
+                Dim l As New Label With {.Text = p.Key, .Font = New Drawing.Font(.Font, Drawing.FontStyle.Bold), .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
+                Dim tb As New TextBox With {.Text = If(Double.Parse(p.Value), Convert.ToDouble(p.Value).ToString(nf), p.Value.ToString), .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
                 Dim l2 As New Label With {.Text = unitsstring, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
                 Dim l3 As New Label With {.Text = col2(p.Key).ToString, .Dock = DockStyle.Fill, .AutoSize = False, .Height = 46 * GlobalSettings.Settings.DpiScale, .TextAlign = Drawing.ContentAlignment.TopLeft}
 
@@ -90,17 +94,25 @@
 
         PropertiesLayout.ResumeLayout()
 
+        PropertiesLayout.PerformLayout()
+
+        Loaded = True
+
     End Sub
 
-    Private Sub rbPressure_CheckedChanged(sender As Object, e As EventArgs) Handles rbPressure.CheckedChanged, rbFlow.CheckedChanged
+    Private Sub rbPressure_CheckedChanged(sender As Object, e As EventArgs) Handles rbPressure.CheckedChanged
 
-        If rbPressure.Checked Then
-            SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Pressure
-        Else
-            SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Flow
+        If Loaded Then
+
+            If rbPressure.Checked Then
+                SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Pressure
+            Else
+                SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Flow
+            End If
+
+            SimObject.GetFlowsheet.UpdateInterface()
+
         End If
-
-        SimObject.GetFlowsheet.UpdateInterface()
 
     End Sub
 
