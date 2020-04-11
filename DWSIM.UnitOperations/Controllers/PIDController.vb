@@ -555,7 +555,7 @@ Namespace SpecialOps
 
             LastError = CurrentError
 
-            CurrentError = (AdjustValue - CurrentValue) / AdjustValue
+            CurrentError = (AdjustValue - CurrentValue) / Math.Abs(AdjustValue)
 
             Dim delta_error = CurrentError - LastError
 
@@ -569,7 +569,7 @@ Namespace SpecialOps
 
             Output = PTerm + Ki * ITerm + Kd * DTerm
 
-            OutputAbs = (1.0 - Output) * CurrentManipulatedValue
+            OutputAbs = (1.0 - Output) * Math.Abs(AdjustValue)
 
             Dim OutputValue = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
 
