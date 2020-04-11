@@ -200,6 +200,8 @@ Namespace UnitOperations
                             Wi = Kvc * 31.62 * (v2 / ((P1 - P2) / 100000.0)) ^ 0.5 / 3600
                         End If
 
+                        If Double.IsNaN(Wi) Then Wi = 0.0
+
                         ims.SetMassFlow(Wi)
                         oms.SetMassFlow(Wi)
 
@@ -207,6 +209,8 @@ Namespace UnitOperations
                         oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
 
                         'valid! calculate P1
+
+                        If Double.IsNaN(Wi) Then Wi = 0.0
 
                         oms.SetMassFlow(Wi)
 
@@ -228,6 +232,8 @@ Namespace UnitOperations
                         oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
 
                         Wi = oms.GetMassFlow
+
+                        If Double.IsNaN(Wi) Then Wi = 0.0
 
                         ims.SetMassFlow(Wi)
 
