@@ -46,7 +46,7 @@
                 Dim unitsstring = units.GetCurrentUnits(utype)
 
                 Dim l As New Label With {.Text = p.Key, .Font = New Drawing.Font(.Font, Drawing.FontStyle.Bold), .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
-                Dim tb As New TextBox With {.Text = If(Double.Parse(p.Value), Convert.ToDouble(p.Value).ToString(nf), p.Value.ToString), .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
+                Dim tb As New TextBox With {.Text = If(Double.TryParse(p.Value, New Double), Convert.ToDouble(p.Value).ToString(nf), p.Value.ToString), .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
                 Dim l2 As New Label With {.Text = unitsstring, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
                 Dim l3 As New Label With {.Text = col2(p.Key).ToString, .Dock = DockStyle.Fill, .AutoSize = False, .Height = 46 * GlobalSettings.Settings.DpiScale, .TextAlign = Drawing.ContentAlignment.TopLeft}
 

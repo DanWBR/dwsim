@@ -18,6 +18,8 @@
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 Imports DWSIM.UnitOperations.SpecialOps.Helpers
+Imports OxyPlot
+Imports OxyPlot.Axes
 
 Namespace SpecialOps
 
@@ -80,6 +82,12 @@ Namespace SpecialOps
         Public Property Output As Double = 0.0
 
         Public Property OutputAbs As Double = 0.0
+
+        Public Property PVHistory As New List(Of Double)
+        Public Property MVHistory As New List(Of Double)
+        Public Property SPHistory As New List(Of Double)
+
+        Public BaseSP As Nullable(Of Double)
 
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
@@ -404,18 +412,24 @@ Namespace SpecialOps
                 Return val0
             Else
                 Select Case prop
-                    Case "MinVal"
-                        Return MinVal.GetValueOrDefault
-                    Case "MaxVal"
-                        Return MaxVal.GetValueOrDefault
-                    Case "AdjustValue"
+                    Case "LastError"
+                        Return LastError
+                    Case "CurrentError"
+                        Return CurrentError
+                    Case "SetPoint"
+                        Return 1.0
+                    Case "SetPointAbs"
                         Return AdjustValue
-                    Case "Tolerance"
-                        Return Tolerance
-                    Case "StepSize"
-                        Return StepSize
-                    Case "MaximumIterations"
-                        Return MaximumIterations
+                    Case "Kp"
+                        Return Kp
+                    Case "Ki"
+                        Return Ki
+                    Case "Kd"
+                        Return Kd
+                    Case "Output"
+                        Return Output
+                    Case "OutputAbs"
+                        Return OutputAbs
                     Case Else
                         Return Nothing
                 End Select
@@ -427,12 +441,15 @@ Namespace SpecialOps
             Dim proplist As New ArrayList
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
-            proplist.Add("MinVal")
-            proplist.Add("MaxVal")
-            proplist.Add("AdjustValue")
-            proplist.Add("Tolerance")
-            proplist.Add("StepSize")
-            proplist.Add("MaximumIterations")
+            proplist.Add("LastError")
+            proplist.Add("CurrentError")
+            proplist.Add("SetPoint")
+            proplist.Add("SetPointAbs")
+            proplist.Add("Kp")
+            proplist.Add("Ki")
+            proplist.Add("Kd")
+            proplist.Add("Output")
+            proplist.Add("OutputAbs")
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
@@ -442,18 +459,16 @@ Namespace SpecialOps
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 
             Select Case prop
-                Case "MinVal"
-                    MinVal = propval
-                Case "MaxVal"
-                    MaxVal = propval
-                Case "AdjustValue"
+                Case "SetPointAbs"
                     AdjustValue = propval
-                Case "Tolerance"
-                    Tolerance = propval
-                Case "StepSize"
-                    StepSize = propval
-                Case "MaximumIterations"
-                    MaximumIterations = propval
+                Case "Kp"
+                    Kp = propval
+                Case "Ki"
+                    Ki = propval
+                Case "Kd"
+                    Kd = propval
+                Case Else
+                    Return False
             End Select
             Return True
         End Function
@@ -533,6 +548,12 @@ Namespace SpecialOps
 
             Output = 0.0
 
+            PVHistory.Clear()
+            MVHistory.Clear()
+            SPHistory.Clear()
+
+            BaseSP = Nothing
+
         End Sub
 
         Public Overrides Sub Calculate(Optional args As Object = Nothing)
@@ -553,9 +574,15 @@ Namespace SpecialOps
 
             Dim CurrentManipulatedValue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(ManipulatedObjectData.Units, ManipulatedObject.GetPropertyValue(ManipulatedObjectData.PropertyName))
 
+            If BaseSP Is Nothing Then BaseSP = Math.Abs(AdjustValue)
+
+            SPHistory.Add(AdjustValue / BaseSP)
+
+            PVHistory.Add(CurrentValue / BaseSP)
+
             LastError = CurrentError
 
-            CurrentError = (AdjustValue - CurrentValue) / Math.Abs(AdjustValue)
+            CurrentError = (AdjustValue - CurrentValue) / BaseSP
 
             Dim delta_error = CurrentError - LastError
 
@@ -569,13 +596,64 @@ Namespace SpecialOps
 
             Output = PTerm + Ki * ITerm + Kd * DTerm
 
-            OutputAbs = (1.0 - Output) * Math.Abs(AdjustValue)
+            MVHistory.Add(Output)
+
+            OutputAbs = (1.0 - Output) * BaseSP
 
             Dim OutputValue = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
 
             ManipulatedObject.SetPropertyValue(ManipulatedObjectData.PropertyName, OutputValue)
 
         End Sub
+
+        Public Overrides Function GetChartModel(name As String) As Object
+
+            Dim model = New PlotModel() With {.Subtitle = name, .Title = GraphicObject.Tag}
+
+            Dim xavals = New List(Of Double)
+            For i = 0 To PVHistory.Count - 1
+                xavals.Add(i)
+            Next
+
+            model.TitleFontSize = 13
+            model.SubtitleFontSize = 12
+
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Bottom,
+                .FontSize = 12
+            })
+
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Left,
+                .FontSize = 10,
+                .Title = "Step",
+                .StartPosition = 0,
+                .EndPosition = 1,
+                .MajorStep = 1.0,
+                .MinorStep = 0.5
+            })
+
+            model.LegendFontSize = 13
+            model.LegendPlacement = LegendPlacement.Outside
+            model.LegendOrientation = LegendOrientation.Horizontal
+            model.LegendPosition = LegendPosition.BottomCenter
+            model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+
+            model.AddLineSeries(xavals, PVHistory, "PV")
+            model.AddLineSeries(xavals, SPHistory, "SP")
+            model.AddLineSeries(xavals, MVHistory, "MV")
+
+            Return model
+
+        End Function
+
+        Public Overrides Function GetChartModelNames() As List(Of String)
+            Return New List(Of String)({"History"})
+        End Function
 
     End Class
 
