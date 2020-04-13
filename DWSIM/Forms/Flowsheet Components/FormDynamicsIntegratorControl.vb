@@ -38,6 +38,8 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
+        btnRun.Enabled = False
+
         Abort = False
 
         Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
@@ -78,6 +80,8 @@ Public Class FormDynamicsIntegratorControl
 
         Dim j As Integer = 0
 
+        integrator.CurrentTime = New Date
+
         For i = 0 To final Step interval
 
             TrackBar1.Value = i
@@ -98,21 +102,47 @@ Public Class FormDynamicsIntegratorControl
                 controller.Calculate()
             Next
 
-            If Abort Then
-
-                Exit For
-
-            End If
+            If Abort Then Exit For
 
             j += 1
 
+            If schedule.UsesEventList Then
+
+                ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
+
+            End If
+
         Next
+
+        btnRun.Enabled = True
 
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
 
         Abort = True
+
+    End Sub
+
+    Sub ProcessEvents(eventsetID As String, currentposition As DateTime, interval As TimeSpan)
+
+        Dim eventset = Flowsheet.DynamicsManager.EventSetList(eventsetID)
+
+        Dim initialtime = currentposition - interval
+
+        Dim finaltime = currentposition
+
+        Dim events = eventset.Events.Values.Where(Function(x) x.TimeStamp >= initialtime And x.TimeStamp < finaltime).ToList
+
+        For Each ev In events
+            Select Case ev.EventType
+                Case Dynamics.DynamicsEventType.ChangeProperty
+                    Dim obj = Flowsheet.SimulationObjects(ev.SimulationObjectID)
+                    Dim value = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ev.SimulationObjectPropertyUnits, ev.SimulationObjectPropertyValue)
+                    obj.SetPropertyValue(ev.SimulationObjectProperty, value)
+                Case Dynamics.DynamicsEventType.RunScript
+            End Select
+        Next
 
     End Sub
 

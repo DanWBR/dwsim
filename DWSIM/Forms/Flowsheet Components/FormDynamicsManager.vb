@@ -644,4 +644,19 @@ Public Class FormDynamicsManager
 
     End Sub
 
+    Private Sub chkIntegratorUseEventSet_CheckedChanged(sender As Object, e As EventArgs) Handles chkIntegratorUseEventSet.CheckedChanged
+        Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+        Try
+            s1.UsesEventList = chkIntegratorUseEventSet.Checked
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub chkIntegratorUseMatrix_CheckedChanged(sender As Object, e As EventArgs) Handles chkIntegratorUseMatrix.CheckedChanged
+        Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+        Try
+            s1.UsesCauseAndEffectMatrix = chkIntegratorUseMatrix.Checked
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

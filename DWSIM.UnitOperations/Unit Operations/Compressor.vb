@@ -318,9 +318,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                             If DebugMode Then AppendDebugLine(String.Format("Power from definition: {0} kW", DeltaQ))
                         Case CalculationMode.Head, CalculationMode.Curves
                             If ProcessPath = ProcessPathType.Adiabatic Then
-                                DeltaQ = AdiabaticHead / 1000 / Wi * 9.8
+                                DeltaQ = AdiabaticHead / 1000 * Wi * 9.8 / (Me.AdiabaticEfficiency / 100)
                             Else
-                                DeltaQ = PolytropicHead / 1000 / Wi * 9.8
+                                DeltaQ = PolytropicHead / 1000 * Wi * 9.8 / (Me.PolytropicEfficiency / 100)
                             End If
                     End Select
 
@@ -482,22 +482,22 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     Dim Wic, Wpc As Double
 
-                    Wic = DeltaQ / (AdiabaticEfficiency / 100)
+                    Wic = DeltaQ * (AdiabaticEfficiency / 100)
 
-                    Wpc = DeltaQ / (PolytropicEfficiency / 100)
+                    Wpc = DeltaQ * (PolytropicEfficiency / 100)
 
                     If CalcMode = CalculationMode.Head And ProcessPath = ProcessPathType.Adiabatic Then
 
-                        PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
+                        PolytropicHead = Wpc * 1000 / Wi / 9.8 ' m
 
                     ElseIf CalcMode = CalculationMode.Head And ProcessPath = ProcessPathType.Polytropic Then
 
-                        AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
+                        AdiabaticHead = Wic * 1000 / Wi / 9.8 ' m
 
                     Else
 
-                        AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
-                        PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
+                        AdiabaticHead = Wic * 1000 / Wi / 9.8 ' m
+                        PolytropicHead = Wpc * 1000 / Wi / 9.8 ' m
 
                     End If
 
@@ -620,7 +620,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
                     IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
 
-                    Dim rho1, rho2, rho2i, n_isent, n_poly, CFi, CFp, Wisent, Wpoly, Wic, Wpc, fce As Double
+                    Dim rho1, rho2, rho2i, n_isent, n_poly, Wic, Wpc, fce As Double
                     Dim tms As MaterialStream = msin.Clone()
 
                     rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
@@ -663,15 +663,17 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     End If
 
-                    Wic = DeltaQ / (AdiabaticEfficiency / 100)
+                    Wic = DeltaQ * (AdiabaticEfficiency / 100) 'kW
 
-                    Wpc = DeltaQ / (PolytropicEfficiency / 100)
+                    Wpc = DeltaQ * (PolytropicEfficiency / 100) 'kW
 
                     ' heads
 
-                    AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
+                    ' 1 W = 1 kg*m2/s3 
 
-                    PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
+                    AdiabaticHead = Wic * 1000 / Wi / 9.8 'm
+
+                    PolytropicHead = Wpc * 1000 / Wi / 9.8 ' m
 
                     AdiabaticCoefficient = n_isent
 
@@ -814,9 +816,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         End If
                     Else
                         If ProcessPath = ProcessPathType.Adiabatic Then
-                            AdiabaticHead = CurvePower * 1000 * Wi / 9.8
+                            AdiabaticHead = CurvePower * 1000 / Wi / 9.8
                         Else
-                            PolytropicHead = CurvePower * 1000 * Wi / 9.8
+                            PolytropicHead = CurvePower * 1000 / Wi / 9.8
                         End If
                     End If
 

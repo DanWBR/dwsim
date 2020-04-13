@@ -341,9 +341,9 @@ Namespace UnitOperations
 
 Curves:             If CalcMode = CalculationMode.Head Then
                         If ProcessPath = ProcessPathType.Adiabatic Then
-                            DeltaQ = AdiabaticHead / 1000 / Wi * 9.8
+                            DeltaQ = AdiabaticHead / 1000 * Wi * 9.8 * (Me.AdiabaticEfficiency / 100)
                         Else
-                            DeltaQ = PolytropicHead / 1000 / Wi * 9.8
+                            DeltaQ = PolytropicHead / 1000 * Wi * 9.8 * (Me.PolytropicEfficiency / 100)
                         End If
                     End If
 
@@ -511,9 +511,9 @@ Curves:             If CalcMode = CalculationMode.Head Then
                         End If
                     Else
                         If ProcessPath = ProcessPathType.Adiabatic Then
-                            AdiabaticHead = CurvePower * 1000 * Wi / 9.8
+                            AdiabaticHead = CurvePower * 1000 / Wi / 9.8
                         Else
-                            PolytropicHead = CurvePower * 1000 * Wi / 9.8
+                            PolytropicHead = CurvePower * 1000 / Wi / 9.8
                         End If
                     End If
 
@@ -606,19 +606,19 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
             If CalcMode <> CalculationMode.Head Then
 
-                AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
+                AdiabaticHead = Wic * 1000 / Wi / 9.8 ' m
 
-                PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
+                PolytropicHead = Wpc * 1000 / Wi / 9.8 ' m
 
             Else
 
                 If ProcessPath = ProcessPathType.Adiabatic Then
 
-                    PolytropicHead = Wpc * 1000 * Wi / 9.8 ' m
+                    PolytropicHead = Wpc * 1000 / Wi / 9.8 ' m
 
                 Else
 
-                    AdiabaticHead = Wic * 1000 * Wi / 9.8 ' m
+                    AdiabaticHead = Wic * 1000 / Wi / 9.8 ' m
 
                 End If
 
