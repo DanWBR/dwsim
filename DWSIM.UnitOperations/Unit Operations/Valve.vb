@@ -132,6 +132,11 @@ Namespace UnitOperations
 
         Public Overrides Sub RunDynamicModel()
 
+            Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
+            Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
+
+            If Not integrator.ShouldCalculatePressureFlow Then Exit Sub
+
             Select Case CalcMode
 
                 Case CalculationMode.OutletPressure, CalculationMode.DeltaP

@@ -330,6 +330,19 @@ Namespace Streams
             End Select
         End Function
 
+        Public Overrides Sub RunDynamicModel()
+
+            If FlowSheet IsNot Nothing Then
+
+                Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
+                Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
+
+                If integrator.ShouldCalculateEquilibrium Then Calculate()
+
+            End If
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
             Calculate(True, True)
         End Sub

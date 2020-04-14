@@ -575,6 +575,7 @@ Partial Class FormDynamicsManager
         resources.ApplyResources(Me.dtpIntegratorDuration, "dtpIntegratorDuration")
         Me.dtpIntegratorDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.dtpIntegratorDuration.Name = "dtpIntegratorDuration"
+        Me.dtpIntegratorDuration.ShowUpDown = True
         Me.dtpIntegratorDuration.Value = New Date(1753, 1, 1, 0, 0, 0, 0)
         '
         'dtpIntegrationStep
@@ -582,6 +583,7 @@ Partial Class FormDynamicsManager
         resources.ApplyResources(Me.dtpIntegrationStep, "dtpIntegrationStep")
         Me.dtpIntegrationStep.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.dtpIntegrationStep.Name = "dtpIntegrationStep"
+        Me.dtpIntegrationStep.ShowUpDown = True
         Me.dtpIntegrationStep.Value = New Date(1753, 1, 1, 0, 0, 0, 0)
         '
         'nupCalcControlFreq

@@ -49,6 +49,8 @@ Namespace UnitOperations
         Protected m_T As Double = 298.15#
         Protected m_P As Double = 101325.0#
 
+        Private prevM, currentM As Double
+
         Public Enum PressureBehavior
             Average
             Maximum
@@ -219,15 +221,31 @@ Namespace UnitOperations
 
                 'm3/mol
 
-                Dim Mvol = Vol / M
+                prevM = currentM
+
+                currentM = Vol / M
 
                 PropertyPackage.CurrentMaterialStream = AccumulationStream
 
-                Dim result As IFlashCalculationResult
+                If prevM = 0.0 Or integrator.ShouldCalculateEquilibrium Then
 
-                result = PropertyPackage.CalculateEquilibrium2(FlashCalculationType.VolumeTemperature, Mvol, Temperature, Pressure)
+                    Dim result As IFlashCalculationResult
 
-                Pressure = result.CalculatedPressure
+                    result = PropertyPackage.CalculateEquilibrium2(FlashCalculationType.VolumeTemperature, currentM, Temperature, Pressure)
+
+                    Pressure = result.CalculatedPressure
+
+                    Dim LiquidVolume = Vol * (result.GetLiquidPhase1MoleFraction + result.GetLiquidPhase2MoleFraction)
+
+                    Dim RelativeLevel = LiquidVolume / Vol
+
+                    SetDynamicProperty("Liquid Level", RelativeLevel * Height)
+
+                Else
+
+                    Pressure = currentM / prevM * Pressure
+
+                End If
 
                 AccumulationStream.SetPressure(Pressure)
                 AccumulationStream.SetTemperature(ims.GetTemperature)
@@ -235,15 +253,14 @@ Namespace UnitOperations
 
                 AccumulationStream.PropertyPackage = PropertyPackage
                 AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
-                AccumulationStream.Calculate(True, True)
+
+                If integrator.ShouldCalculateEquilibrium Then
+
+                    AccumulationStream.Calculate(True, True)
+
+                End If
 
                 SetDynamicProperty("Operating Pressure", Pressure)
-
-                Dim LiquidVolume = Vol * (result.GetLiquidPhase1MoleFraction + result.GetLiquidPhase2MoleFraction)
-
-                Dim RelativeLevel = LiquidVolume / Vol
-
-                SetDynamicProperty("Liquid Level", RelativeLevel * Height)
 
                 ims.SetPressure(Pressure)
 

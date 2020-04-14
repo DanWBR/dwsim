@@ -252,7 +252,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         ms.GraphicObject.Calculated = False
 
-        ms.Solve()
+        If fbag.DynamicMode Then
+            ms.RunDynamicModel()
+        Else
+            ms.Solve()
+        End If
 
         fgui.ShowMessage(ms.GraphicObject.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
 
@@ -295,7 +299,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
-        ms.Solve()
+        If fbag.DynamicMode Then
+            ms.RunDynamicModel()
+        Else
+            ms.Solve()
+        End If
 
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, ms.Name)
 

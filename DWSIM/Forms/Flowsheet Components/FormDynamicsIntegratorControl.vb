@@ -82,11 +82,42 @@ Public Class FormDynamicsIntegratorControl
 
         integrator.CurrentTime = New Date
 
+        Dim controllers_check As Double = 100000
+        Dim streams_check As Double = 100000
+        Dim pf_check As Double = 100000
+
+        TrackBar1.Enabled = False
+
         For i = 0 To final Step interval
 
             TrackBar1.Value = i
 
             lblCurrent.Text = New TimeSpan(0, 0, i).ToString("c")
+
+            controllers_check += interval
+            streams_check += interval
+            pf_check += interval
+
+            If controllers_check >= integrator.CalculationRateControl * interval Then
+                controllers_check = 0.0
+                integrator.ShouldCalculateControl = True
+            Else
+                integrator.ShouldCalculateControl = False
+            End If
+
+            If streams_check >= integrator.CalculationRateEquilibrium * interval Then
+                streams_check = 0.0
+                integrator.ShouldCalculateEquilibrium = True
+            Else
+                integrator.ShouldCalculateEquilibrium = False
+            End If
+
+            If pf_check >= integrator.CalculationRatePressureFlow * interval Then
+                pf_check = 0.0
+                integrator.ShouldCalculatePressureFlow = True
+            Else
+                integrator.ShouldCalculatePressureFlow = False
+            End If
 
             FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
 
@@ -98,9 +129,11 @@ Public Class FormDynamicsIntegratorControl
 
             integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
-            For Each controller As PIDController In Controllers
-                controller.Calculate()
-            Next
+            If integrator.ShouldCalculateControl Then
+                For Each controller As PIDController In Controllers
+                    controller.Calculate()
+                Next
+            End If
 
             If Abort Then Exit For
 
@@ -113,6 +146,8 @@ Public Class FormDynamicsIntegratorControl
             End If
 
         Next
+
+        TrackBar1.Enabled = True
 
         btnRun.Enabled = True
 

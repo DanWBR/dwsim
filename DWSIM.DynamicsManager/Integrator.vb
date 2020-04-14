@@ -38,11 +38,11 @@ Public Class Integrator
 
     Public Property CurrentTime As Date = New Date() Implements IDynamicsIntegrator.CurrentTime
 
-    Public Property CalculationRateEquilibrium As Integer = 10 Implements IDynamicsIntegrator.CalculationRateEquilibrium
+    Public Property CalculationRateEquilibrium As Integer = 1 Implements IDynamicsIntegrator.CalculationRateEquilibrium
 
     Public Property CalculationRatePressureFlow As Integer = 1 Implements IDynamicsIntegrator.CalculationRatePressureFlow
 
-    Public Property CalculationRateControl As Integer = 2 Implements IDynamicsIntegrator.CalculationRateControl
+    Public Property CalculationRateControl As Integer = 1 Implements IDynamicsIntegrator.CalculationRateControl
 
     Public Property RealTime As Boolean = False Implements IDynamicsIntegrator.RealTime
 
