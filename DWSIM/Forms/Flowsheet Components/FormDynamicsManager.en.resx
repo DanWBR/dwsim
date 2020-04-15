@@ -123,6 +123,10 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>All Endpoint Material Streams are connected to Control Valves</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
+  </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Model Status</value>
   </data>
@@ -175,6 +179,9 @@
   <data name="unit.Width" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
+  <data name="gridselectedset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>701, 311</value>
+  </data>
   <data name="btnAddEvent.Text" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -190,8 +197,17 @@
   <data name="btnRemoveEvent.ToolTipText" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>701, 25</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>707, 355</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Selected Set</value>
+  </data>
+  <data name="gridsets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 311</value>
   </data>
   <data name="btnAddEventSet.Text" xml:space="preserve">
     <value>Add New</value>
@@ -208,8 +224,14 @@
   <data name="btnRemoveEventSet.ToolTipText" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 355</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Event Sets</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Event Sets</value>
@@ -262,6 +284,9 @@
   <data name="DataGridViewComboBoxColumn4.Width" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
+  <data name="grdiselmatrix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>701, 311</value>
+  </data>
   <data name="btnAddMatrixItem.Text" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -271,8 +296,17 @@
   <data name="btnRemoveMatrixItem.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>701, 25</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>707, 355</value>
+  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Selected Matrix</value>
+  </data>
+  <data name="gridmatrices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 311</value>
   </data>
   <data name="btnAddMatrix.Text" xml:space="preserve">
     <value>Add</value>
@@ -283,8 +317,14 @@
   <data name="btnRemoveMatrix.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 355</value>
+  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Matrix Sets</value>
+  </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Cause-and-Effect Matrices</value>
@@ -292,7 +332,6 @@
   <data name="panelSelIntegrator.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
   </data>
@@ -332,8 +371,17 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Integration Step</value>
   </data>
+  <data name="panelSelIntegrator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>699, 341</value>
+  </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>705, 360</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Selected Integrator</value>
+  </data>
+  <data name="gridintegrators.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 316</value>
   </data>
   <data name="btnAddIntegrator.Text" xml:space="preserve">
     <value>Add</value>
@@ -350,8 +398,14 @@
   <data name="btnRemoveIntegrator.ToolTipText" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 360</value>
+  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Integrators</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Integrators</value>
@@ -383,8 +437,17 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Associated Integrator</value>
   </data>
+  <data name="panelSelSchedule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>701, 343</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>707, 362</value>
+  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Selected Schedule</value>
+  </data>
+  <data name="gridschedules.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 318</value>
   </data>
   <data name="btnAddSchedule.Text" xml:space="preserve">
     <value>Add</value>
@@ -401,8 +464,14 @@
   <data name="btnRemoveSchedule.ToolTipText" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 362</value>
+  </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Schedules</value>
+  </data>
+  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
   </data>
   <data name="TabPage7.Text" xml:space="preserve">
     <value>Schedules</value>
@@ -415,7 +484,10 @@
     <value>Fill</value>
   </data>
   <data name="dgvControllers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>782, 345</value>
+    <value>924, 373</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Controllers</value>
@@ -430,16 +502,25 @@
     <value>Fill</value>
   </data>
   <data name="dgvIndicators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>782, 345</value>
+    <value>924, 373</value>
+  </data>
+  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
   </data>
   <data name="TabPage8.Text" xml:space="preserve">
     <value>Indicators</value>
   </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>924, 373</value>
+  </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Results</value>
   </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 399</value>
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 6</value>
+    <value>752, 6</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 35</value>
@@ -464,6 +545,9 @@
   </data>
   <data name="chkDynamics.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>942, 450</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1323,9 +1407,6 @@
         ////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////w==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
     <value>Dynamics Manager</value>
