@@ -594,7 +594,7 @@ Namespace SpecialOps
 
             If LastError > 0 Then DTerm = delta_error / timestep
 
-            Output = PTerm + Ki * ITerm + Kd * DTerm
+            Output = PTerm + Ki * ITerm + Kd * DTerm + Offset / BaseSP
 
             MVHistory.Add(Output)
 

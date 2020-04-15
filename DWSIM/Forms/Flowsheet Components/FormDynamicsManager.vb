@@ -21,6 +21,10 @@ Public Class FormDynamicsManager
 
         UpdateAllPanels()
 
+        UpdateControllerList()
+
+        UpdateIndicatorList()
+
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkDynamics.CheckedChanged
@@ -31,6 +35,7 @@ Public Class FormDynamicsManager
             chkDynamics.ForeColor = Color.White
             chkDynamics.BackColor = Color.DarkGreen
             Flowsheet.ModoDinamicoAtivoToolStripMenuItem.Checked = True
+            Flowsheet.tsbDynamics.Checked = True
         Else
             chkDynamics.Text = DWSIM.App.GetLocalString("Activate")
             lblStatus.Text = DWSIM.App.GetLocalString("DynDisabled")
@@ -38,6 +43,7 @@ Public Class FormDynamicsManager
             chkDynamics.ForeColor = Color.White
             chkDynamics.BackColor = Color.DarkRed
             Flowsheet.ModoDinamicoAtivoToolStripMenuItem.Checked = False
+            Flowsheet.tsbDynamics.Checked = False
         End If
     End Sub
 
@@ -46,7 +52,7 @@ Public Class FormDynamicsManager
         'Flowsheet.dckPanel.SaveAsXml("C:\Users\Daniel\Desktop\layout.xml")
     End Sub
 
-    Sub UpdateSelectables()
+    Public Sub UpdateSelectables()
 
         Dim cbobjects = New DataGridViewComboBoxCell
         cbobjects.Items.Add("")
@@ -91,7 +97,7 @@ Public Class FormDynamicsManager
 
     End Sub
 
-    Sub UpdateAllPanels()
+    Public Sub UpdateAllPanels()
 
         For Each ev In Manager.EventSetList.Values
             gridsets.Rows.Add(New Object() {ev.ID, ev.Description})
@@ -107,6 +113,40 @@ Public Class FormDynamicsManager
 
         For Each ev In Manager.ScheduleList.Values
             gridschedules.Rows.Add(New Object() {ev.ID, ev.Description})
+        Next
+
+    End Sub
+
+    Public Sub UpdateControllerList()
+
+        dgvControllers.Rows.Clear()
+
+        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
+
+        For Each controller In Controllers
+            With DirectCast(controller, PIDController)
+                Try
+                    dgvControllers.Rows.Add(New Object() { .Name, .GraphicObject.Tag, .Kp, .Ki, .Kd, .AdjustValue, .Offset})
+                Catch ex As Exception
+                End Try
+            End With
+        Next
+
+    End Sub
+
+    Public Sub UpdateIndicatorList()
+
+        dgvIndicators.Rows.Clear()
+
+        Dim Indicators = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Indicators).ToList
+
+        For Each item In Indicators
+            With DirectCast(item, Interfaces.IIndicator)
+                Try
+                    dgvIndicators.Rows.Add(New Object() {item.Name, item.GraphicObject.Tag, .CurrentValue, .VeryLowAlarmValue, .LowAlarmValue, .HighAlarmValue, .VeryHighAlarmValue})
+                Catch ex As Exception
+                End Try
+            End With
         Next
 
     End Sub

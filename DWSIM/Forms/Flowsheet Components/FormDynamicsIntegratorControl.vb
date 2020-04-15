@@ -145,6 +145,10 @@ Public Class FormDynamicsIntegratorControl
 
             End If
 
+            Flowsheet.FormDynamics.UpdateControllerList()
+
+            Flowsheet.FormDynamics.UpdateIndicatorList()
+
         Next
 
         TrackBar1.Enabled = True

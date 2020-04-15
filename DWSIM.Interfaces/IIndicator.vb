@@ -4,6 +4,8 @@
 
     Property MaximumValue As Double
 
+    Property CurrentValue As Double
+
     Property SelectedObjectID As String
 
     Property SelectedProperty As String

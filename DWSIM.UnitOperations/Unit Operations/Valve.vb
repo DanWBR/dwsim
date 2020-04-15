@@ -141,7 +141,7 @@ Namespace UnitOperations
 
                 Case CalculationMode.OutletPressure, CalculationMode.DeltaP
 
-                    Throw New Exception("This calculation mode is not supported on Dynamic Mode.")
+                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
 
                 Case Else
 

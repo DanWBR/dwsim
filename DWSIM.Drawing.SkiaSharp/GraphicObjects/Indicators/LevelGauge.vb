@@ -81,6 +81,7 @@ Namespace GraphicObjects
 
             If Not SelectedObject Is Nothing Then
                 currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, SelectedObject.GetPropertyValue(owneri.SelectedProperty))
+                owneri.CurrentValue = currentvalue
             End If
 
             Dim nf = Owner.GetFlowsheet.FlowsheetOptions.NumberFormat

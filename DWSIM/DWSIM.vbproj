@@ -3009,8 +3009,12 @@
     <None Include="Resources\icons8-play.png" />
     <None Include="Resources\icons8-stop.png" />
     <None Include="Resources\icons8-module1.png" />
-    <None Include="Resources\icons8-module.png" />
+    <None Include="Resources\icons8-exercise.png" />
+    <None Include="Resources\icons8-module2.png" />
     <None Include="Resources\icons8-ecg.png" />
+    <None Include="Resources\icons8-module.png" />
+    <None Include="Resources\icons8-cancel.png" />
+    <None Include="Resources\icons8-ok.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

@@ -169,6 +169,12 @@ Namespace UnitOperations
             Dim oms1 As MaterialStream = Me.GetOutletMaterialStream(0)
             Dim oms2 As MaterialStream = Me.GetOutletMaterialStream(1)
 
+            Dim oms3 As MaterialStream = Me.GetOutletMaterialStream(2)
+
+            If oms3 IsNot Nothing Then
+                Throw New Exception("The Gas-Liquid Separator currently supports only a single liquid phase in Dynamic Mode.")
+            End If
+
             Dim s1, s2, s3 As Enums.Dynamics.DynamicsSpecType
 
             s1 = ims.DynamicsSpec

@@ -3176,9 +3176,24 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Private Sub ToolStripButton2_CheckedChanged(sender As Object, e As EventArgs) Handles tsbDynamics.CheckedChanged
+        Me.DynamicMode = tsbDynamics.Checked
+        Me.FormDynamics.chkDynamics.Checked = Me.DynamicMode
+        Me.ModoDinamicoAtivoToolStripMenuItem.Checked = Me.DynamicMode
+    End Sub
+
+    Private Sub tsbDynManager_Click(sender As Object, e As EventArgs) Handles tsbDynManager.Click
+        FormDynamics.Activate()
+    End Sub
+
+    Private Sub tsbDynIntegrator_Click(sender As Object, e As EventArgs) Handles tsbDynIntegrator.Click
+        FormIntegratorControls.Show(GetDockPanel)
+    End Sub
+
     Private Sub ModoDinamicoAtivoToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles ModoDinamicoAtivoToolStripMenuItem.CheckedChanged
         Me.DynamicMode = ModoDinamicoAtivoToolStripMenuItem.Checked
-        Me.FormDynamics.chkDynamics.Checked = ModoDinamicoAtivoToolStripMenuItem.Checked
+        Me.FormDynamics.chkDynamics.Checked = Me.DynamicMode
+        Me.tsbDynamics.Checked = Me.DynamicMode
     End Sub
 
 #End Region

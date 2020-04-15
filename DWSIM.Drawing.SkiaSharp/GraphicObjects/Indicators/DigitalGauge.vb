@@ -78,6 +78,7 @@ Namespace GraphicObjects
 
             If Not SelectedObject Is Nothing Then
                 currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, SelectedObject.GetPropertyValue(owneri.SelectedProperty))
+                owneri.CurrentValue = currentvalue
             End If
 
             Dim valtext = currentvalue.ToString(formatstring)

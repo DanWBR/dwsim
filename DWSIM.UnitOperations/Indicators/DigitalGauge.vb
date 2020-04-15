@@ -38,6 +38,8 @@ Namespace UnitOperations
 
         Public Property MaximumValue As Double = 100 Implements IIndicator.MaximumValue
 
+        Public Property CurrentValue As Double Implements IIndicator.CurrentValue
+
         Public Property SelectedObjectID As String = "" Implements IIndicator.SelectedObjectID
 
         Public Property SelectedProperty As String = "" Implements IIndicator.SelectedProperty
