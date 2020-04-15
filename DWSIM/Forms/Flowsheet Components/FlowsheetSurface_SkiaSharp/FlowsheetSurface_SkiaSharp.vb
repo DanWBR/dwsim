@@ -66,7 +66,7 @@ Public Class FlowsheetSurface_SkiaSharp
             DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetObject = Flowsheet
         End If
 
-        SplitContainer1.Panel1.Controls.Add(FControl)
+        TableLayoutPanel1.Controls.Add(FControl, 1, 1)
 
         SimObjPanel = New SimulationObjectsPanel() With {.Dock = DockStyle.Fill, .Flowsheet = Flowsheet}
 
@@ -2562,9 +2562,9 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width - 14, SplitContainer1.Panel1.Height - 14)
+        FlowsheetSurface.ZoomAll(FControl.Width, FControl.Height)
         Application.DoEvents()
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width - 14, SplitContainer1.Panel1.Height - 14)
+        FlowsheetSurface.ZoomAll(FControl.Width, FControl.Height)
         Application.DoEvents()
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
         SplitContainer1.Panel1.Refresh()
@@ -3027,6 +3027,46 @@ Public Class FlowsheetSurface_SkiaSharp
             My.Application.PushUndoRedoAction = True
         End Try
 
+
+    End Sub
+
+    Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
+
+        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim z = FlowsheetSurface.Zoom
+
+        FlowsheetSurface.OffsetAll(0, s.Height / z)
+        FControl.Invalidate()
+
+    End Sub
+
+    Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
+
+        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim z = FlowsheetSurface.Zoom
+
+        FlowsheetSurface.OffsetAll(0, -s.Height / z)
+        FControl.Invalidate()
+
+    End Sub
+
+    Private Sub btnLeft_Click(sender As Object, e As EventArgs) Handles btnLeft.Click
+
+        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim z = FlowsheetSurface.Zoom
+
+        FlowsheetSurface.OffsetAll(s.Width / z, 0)
+        FControl.Invalidate()
+
+    End Sub
+
+    Private Sub btnRight_Click(sender As Object, e As EventArgs) Handles btnRight.Click
+
+        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim z = FlowsheetSurface.Zoom
+
+        FlowsheetSurface.OffsetAll(-s.Width / z, 0)
+        FControl.Invalidate()
 
     End Sub
 
