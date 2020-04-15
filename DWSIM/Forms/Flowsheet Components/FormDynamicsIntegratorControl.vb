@@ -123,6 +123,12 @@ Public Class FormDynamicsIntegratorControl
 
             Flowsheet.UpdateInterface()
 
+            Flowsheet.FormDynamics.UpdateControllerList()
+
+            Flowsheet.FormDynamics.UpdateIndicatorList()
+
+            Flowsheet.UpdateInterface()
+
             Flowsheet.UpdateOpenEditForms()
 
             integrator.StoredSolutions.Add(j, Flowsheet.GetProcessData())
@@ -144,10 +150,6 @@ Public Class FormDynamicsIntegratorControl
                 ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
 
             End If
-
-            Flowsheet.FormDynamics.UpdateControllerList()
-
-            Flowsheet.FormDynamics.UpdateIndicatorList()
 
         Next
 

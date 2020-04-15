@@ -2874,7 +2874,7 @@ Public Class FormFlowsheet
     End Sub
 
     Public Function GetSurface() As Object Implements IFlowsheetBag.GetSurface, IFlowsheet.GetSurface
-        Return Me.FormSurface
+        Return Me.FormSurface.FlowsheetSurface
     End Function
 
     Public Function GetNewInstance() As IFlowsheet Implements IFlowsheet.GetNewInstance

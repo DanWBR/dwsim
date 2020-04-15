@@ -142,10 +142,68 @@ Public Class FormDynamicsManager
 
         For Each item In Indicators
             With DirectCast(item, Interfaces.IIndicator)
+                Dim SelectedObject = Flowsheet.SimulationObjects.Values.Where(Function(x) x.Name = .SelectedObjectID).FirstOrDefault
+                If Not SelectedObject Is Nothing Then
+                    .CurrentValue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(.SelectedPropertyUnits, SelectedObject.GetPropertyValue(.SelectedProperty))
+                End If
                 Try
                     dgvIndicators.Rows.Add(New Object() {item.Name, item.GraphicObject.Tag, .CurrentValue, .VeryLowAlarmValue, .LowAlarmValue, .HighAlarmValue, .VeryHighAlarmValue})
                 Catch ex As Exception
                 End Try
+            End With
+        Next
+
+        For Each row As DataGridViewRow In dgvIndicators.Rows
+            Dim indicator = DirectCast(Flowsheet.SimulationObjects(row.Cells(0).Value), IIndicator)
+            With indicator
+                If .VeryLowAlarmEnabled Then
+                    If .VeryLowAlarmActive Then
+                        row.Cells(3).Style.BackColor = Color.Red
+                        row.Cells(3).Style.ForeColor = Color.White
+                    Else
+                        row.Cells(3).Style.BackColor = Color.Black
+                        row.Cells(3).Style.ForeColor = Color.White
+                    End If
+                Else
+                    row.Cells(3).Style.BackColor = Color.LightGray
+                    row.Cells(3).Style.ForeColor = Color.Black
+                End If
+                If .LowAlarmEnabled Then
+                    If .LowAlarmActive Then
+                        row.Cells(4).Style.BackColor = Color.Red
+                        row.Cells(4).Style.ForeColor = Color.White
+                    Else
+                        row.Cells(4).Style.BackColor = Color.Black
+                        row.Cells(4).Style.ForeColor = Color.White
+                    End If
+                Else
+                    row.Cells(4).Style.BackColor = Color.LightGray
+                    row.Cells(4).Style.ForeColor = Color.Black
+                End If
+                If .HighAlarmEnabled Then
+                    If .HighAlarmActive Then
+                        row.Cells(5).Style.BackColor = Color.Red
+                        row.Cells(5).Style.ForeColor = Color.White
+                    Else
+                        row.Cells(5).Style.BackColor = Color.Black
+                        row.Cells(5).Style.ForeColor = Color.White
+                    End If
+                Else
+                    row.Cells(5).Style.BackColor = Color.LightGray
+                    row.Cells(5).Style.ForeColor = Color.Black
+                End If
+                If .VeryHighAlarmEnabled Then
+                    If .VeryHighAlarmActive Then
+                        row.Cells(6).Style.BackColor = Color.Red
+                        row.Cells(6).Style.ForeColor = Color.White
+                    Else
+                        row.Cells(6).Style.BackColor = Color.Black
+                        row.Cells(6).Style.ForeColor = Color.White
+                    End If
+                Else
+                    row.Cells(6).Style.BackColor = Color.LightGray
+                    row.Cells(6).Style.ForeColor = Color.Black
+                End If
             End With
         Next
 
@@ -222,21 +280,27 @@ Public Class FormDynamicsManager
 
     Private Sub btnAddEvent_Click(sender As Object, e As EventArgs) Handles btnAddEvent.Click
 
-        Dim es = Manager.EventSetList(gridsets.Rows(gridsets.SelectedCells(0).RowIndex).Cells(0).Value)
+        Try
 
-        Dim ev As New DynamicEvent With {.ID = Guid.NewGuid.ToString}
+            Dim es = Manager.EventSetList(gridsets.Rows(gridsets.SelectedCells(0).RowIndex).Cells(0).Value)
 
-        es.Events.Add(ev.ID, ev)
+            Dim ev As New DynamicEvent With {.ID = Guid.NewGuid.ToString}
 
-        With ev
-            Dim etype As String
-            If .EventType = Dynamics.DynamicsEventType.ChangeProperty Then
-                etype = Flowsheet.GetTranslatedString1("ChangeProperty")
-            Else
-                etype = Flowsheet.GetTranslatedString1("RunScript")
-            End If
-            gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp, etype, "", "", "", ""})
-        End With
+            es.Events.Add(ev.ID, ev)
+
+            With ev
+                Dim etype As String
+                If .EventType = Dynamics.DynamicsEventType.ChangeProperty Then
+                    etype = Flowsheet.GetTranslatedString1("ChangeProperty")
+                Else
+                    etype = Flowsheet.GetTranslatedString1("RunScript")
+                End If
+                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp, etype, "", "", "", ""})
+            End With
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -379,15 +443,21 @@ Public Class FormDynamicsManager
 
     Private Sub btnAddMatrixItem_Click(sender As Object, e As EventArgs) Handles btnAddMatrixItem.Click
 
-        Dim cem = Manager.CauseAndEffectMatrixList(gridmatrices.Rows(gridmatrices.SelectedCells(0).RowIndex).Cells(0).Value)
+        Try
 
-        Dim cei As New CauseAndEffectItem With {.ID = Guid.NewGuid.ToString}
+            Dim cem = Manager.CauseAndEffectMatrixList(gridmatrices.Rows(gridmatrices.SelectedCells(0).RowIndex).Cells(0).Value)
 
-        cem.Items.Add(cei.ID, cei)
+            Dim cei As New CauseAndEffectItem With {.ID = Guid.NewGuid.ToString}
 
-        With cei
-            grdiselmatrix.Rows.Add(New Object() { .ID, .Enabled, .Description, "", "", "", "", "", ""})
-        End With
+            cem.Items.Add(cei.ID, cei)
+
+            With cei
+                grdiselmatrix.Rows.Add(New Object() { .ID, .Enabled, .Description, "", "", "", "", "", ""})
+            End With
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -699,4 +769,63 @@ Public Class FormDynamicsManager
         Catch ex As Exception
         End Try
     End Sub
+
+    Private Sub dgvControllers_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvControllers.CellValueChanged
+
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim controller = DirectCast(Flowsheet.SimulationObjects(dgvControllers.Rows(e.RowIndex).Cells(0).Value), PIDController)
+
+        Dim value = dgvControllers.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
+        Try
+            Select Case e.ColumnIndex
+                Case 1
+                    controller.GraphicObject.Tag = value
+                Case 2
+                    controller.Kp = value
+                Case 3
+                    controller.Ki = value
+                Case 4
+                    controller.Kd = value
+                Case 5
+                    controller.AdjustValue = value
+                Case 6
+                    controller.Offset = value
+            End Select
+            Flowsheet.UpdateOpenEditForms()
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub dgvIndicators_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvIndicators.CellValueChanged
+
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim indicator = DirectCast(Flowsheet.SimulationObjects(dgvIndicators.Rows(e.RowIndex).Cells(0).Value), IIndicator)
+
+        Dim value = dgvControllers.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
+        Try
+            Select Case e.ColumnIndex
+                Case 1
+                    DirectCast(indicator, ISimulationObject).GraphicObject.Tag = value
+                Case 2
+                    indicator.CurrentValue = value
+                Case 3
+                    indicator.VeryLowAlarmValue = value
+                Case 4
+                    indicator.LowAlarmValue = value
+                Case 5
+                    indicator.HighAlarmValue = value
+                Case 6
+                    indicator.VeryHighAlarmValue = value
+            End Select
+            Flowsheet.UpdateOpenEditForms()
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
 End Class
