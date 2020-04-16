@@ -479,9 +479,8 @@
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dgvControllers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="Column8.HeaderText" xml:space="preserve">
+    <value>Active</value>
   </data>
   <data name="dgvControllers.Size" type="System.Drawing.Size, System.Drawing">
     <value>924, 373</value>
@@ -497,9 +496,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
     <value>Current Value</value>
-  </data>
-  <data name="dgvIndicators.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="dgvIndicators.Size" type="System.Drawing.Size, System.Drawing">
     <value>924, 373</value>
@@ -1407,9 +1403,6 @@
         ////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////w==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
     <value>Dynamics Manager</value>

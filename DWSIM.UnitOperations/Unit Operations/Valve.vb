@@ -195,7 +195,7 @@ Namespace UnitOperations
                         P2 = oms.GetPressure
 
                         If CalcMode = CalculationMode.Kv_Liquid Then
-                            Wi = Kvc / (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5 / 3600
+                            Wi = Kvc * (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5 / 3600
                         ElseIf CalcMode = CalculationMode.Kv_Gas Then
                             ims.PropertyPackage.CurrentMaterialStream = ims
                             rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)

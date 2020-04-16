@@ -137,19 +137,25 @@ Public Class FormDynamicsIntegratorControl
 
             If integrator.ShouldCalculateControl Then
                 For Each controller As PIDController In Controllers
-                    controller.Calculate()
+                    If controller.Active Then controller.Calculate()
                 Next
             End If
 
             If Abort Then Exit For
-
-            j += 1
 
             If schedule.UsesEventList Then
 
                 ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
 
             End If
+
+            If schedule.UsesCauseAndEffectMatrix Then
+
+                ProcessCEMatrix(schedule.CurrentCauseAndEffectMatrix)
+
+            End If
+
+            j += 1
 
         Next
 
@@ -184,6 +190,37 @@ Public Class FormDynamicsIntegratorControl
                 Case Dynamics.DynamicsEventType.RunScript
             End Select
         Next
+
+    End Sub
+
+    Sub ProcessCEMatrix(cematrixID As String)
+
+        Dim matrix = Flowsheet.DynamicsManager.CauseAndEffectMatrixList(cematrixID)
+
+        For Each item In matrix.Items.Values
+
+            Dim indicator = DirectCast(Flowsheet.SimulationObjects(item.AssociatedIndicator), Interfaces.IIndicator)
+
+            Select Case item.AssociatedIndicatorAlarm
+                Case Dynamics.DynamicsAlarmType.LL
+                    If indicator.VeryLowAlarmActive Then DoAlarmEffect(item)
+                Case Dynamics.DynamicsAlarmType.L
+                    If indicator.LowAlarmActive Then DoAlarmEffect(item)
+                Case Dynamics.DynamicsAlarmType.H
+                    If indicator.HighAlarmActive Then DoAlarmEffect(item)
+                Case Dynamics.DynamicsAlarmType.HH
+                    If indicator.VeryHighAlarmActive Then DoAlarmEffect(item)
+            End Select
+
+        Next
+
+    End Sub
+
+    Sub DoAlarmEffect(ceitem As Interfaces.IDynamicsCauseAndEffectItem)
+
+        Dim obj = Flowsheet.SimulationObjects(ceitem.SimulationObjectID)
+        Dim value = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ceitem.SimulationObjectPropertyUnits, ceitem.SimulationObjectPropertyValue)
+        obj.SetPropertyValue(ceitem.SimulationObjectProperty, value)
 
     End Sub
 

@@ -422,4 +422,10 @@ Public Class EditingForm_CompoundSeparator
 
     End Sub
 
+    Private Sub DataGridView1_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyDown
+        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
+            PasteData(sender)
+        End If
+    End Sub
+
 End Class

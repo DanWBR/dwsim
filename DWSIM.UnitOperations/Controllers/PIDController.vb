@@ -89,6 +89,8 @@ Namespace SpecialOps
 
         Public BaseSP As Nullable(Of Double)
 
+        Public Active As Boolean = True
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
             obj.LoadData(Me.SaveData)
@@ -412,6 +414,8 @@ Namespace SpecialOps
                 Return val0
             Else
                 Select Case prop
+                    Case "Active"
+                        Return Active
                     Case "LastError"
                         Return LastError
                     Case "CurrentError"
@@ -441,6 +445,7 @@ Namespace SpecialOps
             Dim proplist As New ArrayList
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
+            proplist.Add("Active")
             proplist.Add("LastError")
             proplist.Add("CurrentError")
             proplist.Add("SetPoint")
@@ -459,6 +464,8 @@ Namespace SpecialOps
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 
             Select Case prop
+                Case "Active"
+                    Active = propval
                 Case "SetPointAbs"
                     AdjustValue = propval
                 Case "Kp"

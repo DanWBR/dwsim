@@ -126,7 +126,7 @@ Public Class FormDynamicsManager
         For Each controller In Controllers
             With DirectCast(controller, PIDController)
                 Try
-                    dgvControllers.Rows.Add(New Object() { .Name, .GraphicObject.Tag, .Kp, .Ki, .Kd, .AdjustValue, .Offset})
+                    Dim row = dgvControllers.Rows.Add(New Object() { .Name, .GraphicObject.Tag, .Active, .Kp, .Ki, .Kd, .AdjustValue, .Offset})
                 Catch ex As Exception
                 End Try
             End With
@@ -783,14 +783,16 @@ Public Class FormDynamicsManager
                 Case 1
                     controller.GraphicObject.Tag = value
                 Case 2
-                    controller.Kp = value
+                    controller.Active = value
                 Case 3
-                    controller.Ki = value
+                    controller.Kp = value
                 Case 4
-                    controller.Kd = value
+                    controller.Ki = value
                 Case 5
-                    controller.AdjustValue = value
+                    controller.Kd = value
                 Case 6
+                    controller.AdjustValue = value
+                Case 7
                     controller.Offset = value
             End Select
             Flowsheet.UpdateOpenEditForms()
