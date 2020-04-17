@@ -286,6 +286,8 @@ Namespace UnitOperations
                         For Each comp In .Phases(0).Compounds.Values
                             comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction
                             comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction
+                            comp.MassFlow = comp.MassFraction * Wi
+                            comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight * 1000
                             i += 1
                         Next
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy

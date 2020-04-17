@@ -7649,35 +7649,38 @@ Namespace Streams
                 Vm(comp.Name) += Factor * comp.MolarFlow.GetValueOrDefault
             Next
 
-            newstream.Phases(0).Properties.massflow = (W0 + Factor * W1)
-            newstream.Phases(0).Properties.molarflow = (M0 + Factor * M1)
-
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MassFlow += Vw(comp.Name)
             Next
 
+            For Each comp In newstream.Phases(0).Compounds.Values
+                comp.MolarFlow += Vm(comp.Name)
+            Next
+
             With newstream
                 Dim sub1 As BaseClasses.Compound
-                For Each p In .Phases.Values
-                    Dim mass_div_mm As Double = 0
-                    Dim total As Double = 0
-                    For Each sub1 In p.Compounds.Values
-                        total += sub1.MassFlow.GetValueOrDefault
-                    Next
-                    For Each sub1 In p.Compounds.Values
-                        sub1.MassFraction = sub1.MassFlow.GetValueOrDefault / total
-                    Next
-                    For Each sub1 In p.Compounds.Values
-                        mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
-                    Next
-                    For Each sub1 In p.Compounds.Values
-                        sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
-                    Next
+                Dim p = .Phases(0)
+                Dim mass_div_mm As Double = 0
+                Dim total As Double = 0
+                For Each sub1 In p.Compounds.Values
+                    total += sub1.MassFlow.GetValueOrDefault
                 Next
+                Dim totalm As Double = 0
+                For Each sub1 In p.Compounds.Values
+                    totalm += sub1.MolarFlow.GetValueOrDefault
+                Next
+                For Each sub1 In p.Compounds.Values
+                    sub1.MassFraction = sub1.MassFlow.GetValueOrDefault / total
+                Next
+                For Each sub1 In p.Compounds.Values
+                    mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                Next
+                For Each sub1 In p.Compounds.Values
+                    sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+                Next
+                .Phases(0).Properties.massflow = total
+                .Phases(0).Properties.molarflow = totalm
                 .SpecType = StreamSpec.Temperature_and_Pressure
-                .PropertyPackage = PropertyPackage
-                .PropertyPackage.CurrentMaterialStream = newstream
-                .Calculate()
             End With
 
             Return newstream
@@ -7720,49 +7723,40 @@ Namespace Streams
                 Vm(comp.Name) += Factor * comp.MolarFlow.GetValueOrDefault
             Next
 
-            If (Factor * W1 > W0) Then
-                newstream.Phases(0).Properties.massflow = 0.0
-                newstream.Phases(0).Properties.molarflow = 0.0
-            Else
-                newstream.Phases(0).Properties.massflow = (W0 - Factor * W1)
-                newstream.Phases(0).Properties.molarflow = (M0 - Factor * M1)
-            End If
-
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MassFlow -= Vw(comp.Name)
-                If comp.MassFlow < 0.0 Then
-                    comp.MassFlow = 0.0
-                End If
+                If comp.MassFlow < 0.0 Then comp.MassFlow = 0.0
             Next
 
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MolarFlow -= Vm(comp.Name)
-                If comp.MolarFlow < 0.0 Then
-                    comp.MolarFlow = 0.0
-                End If
+                If comp.MolarFlow < 0.0 Then comp.MolarFlow = 0.0
             Next
 
             With newstream
                 Dim sub1 As BaseClasses.Compound
-                For Each p In .Phases.Values
-                    Dim mass_div_mm As Double = 0
+                Dim p = .Phases(0)
+                Dim mass_div_mm As Double = 0
                     Dim total As Double = 0
-                    For Each sub1 In p.Compounds.Values
-                        total += sub1.MassFlow.GetValueOrDefault
-                    Next
-                    For Each sub1 In p.Compounds.Values
+                For Each sub1 In p.Compounds.Values
+                    total += sub1.MassFlow.GetValueOrDefault
+                Next
+                Dim totalm As Double = 0
+                For Each sub1 In p.Compounds.Values
+                    totalm += sub1.MolarFlow.GetValueOrDefault
+                Next
+                For Each sub1 In p.Compounds.Values
                         sub1.MassFraction = sub1.MassFlow.GetValueOrDefault / total
                     Next
                     For Each sub1 In p.Compounds.Values
                         mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                     Next
-                    For Each sub1 In p.Compounds.Values
-                        sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
-                    Next
+                For Each sub1 In p.Compounds.Values
+                    sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
                 Next
+                .Phases(0).Properties.massflow = total
+                .Phases(0).Properties.molarflow = totalm
                 .SpecType = StreamSpec.Temperature_and_Pressure
-                .PropertyPackage = PropertyPackage
-                .PropertyPackage.CurrentMaterialStream = newstream
             End With
 
             Return newstream

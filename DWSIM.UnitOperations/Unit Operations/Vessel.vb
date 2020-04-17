@@ -215,11 +215,7 @@ Namespace UnitOperations
                     AccumulationStream = AccumulationStream.Add(ims, timestep)
                     AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
                     AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
-                    If AccumulationStream.GetMassFlow <= 0.0 Then
-                        AccumulationStream.SetMassFlow(0.0)
-                        AccumulationStream.SetPressure(0.0)
-                    End If
-
+                    If AccumulationStream.GetMassFlow <= 0.0 Then AccumulationStream.SetMassFlow(0.0)
                 End If
 
                 AccumulationStream.SetFlowsheet(FlowSheet)
@@ -252,7 +248,7 @@ Namespace UnitOperations
 
                         Pressure = result.CalculatedPressure
 
-                        LiquidVolume = AccumulationStream.Phases(1).Properties.volumetric_flow.GetValueOrDefault
+                        LiquidVolume = AccumulationStream.Phases(3).Properties.volumetric_flow.GetValueOrDefault
 
                         RelativeLevel = LiquidVolume / Vol
 
@@ -301,7 +297,7 @@ Namespace UnitOperations
 
                 oms1.AssignFromPhase(PhaseLabel.Vapor, AccumulationStream)
 
-                oms2.AssignFromPhase(PhaseLabel.LiquidMixture, AccumulationStream)
+                oms2.AssignFromPhase(PhaseLabel.Liquid1, AccumulationStream)
 
             End If
 
