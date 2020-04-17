@@ -337,7 +337,14 @@ Namespace Streams
                 Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
                 Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
 
-                If integrator.ShouldCalculateEquilibrium Then Calculate()
+                If integrator.ShouldCalculateEquilibrium Then
+                    If GetPressure() > 0.0 Then
+                        Calculate()
+                    Else
+                        Clear()
+                        ClearAllProps()
+                    End If
+                End If
 
             End If
 
@@ -7623,48 +7630,23 @@ Namespace Streams
             Dim H0 = newstream.GetMassEnthalpy()
 
             Dim Vw As New Dictionary(Of String, Double)
-            Dim Vwv As New Dictionary(Of String, Double)
-            Dim Vwlo As New Dictionary(Of String, Double)
-            Dim Vwl1 As New Dictionary(Of String, Double)
-            Dim Vwl2 As New Dictionary(Of String, Double)
-            Dim Vws As New Dictionary(Of String, Double)
+
+            Dim Vm As New Dictionary(Of String, Double)
 
             Dim comp As BaseClasses.Compound
+
             For Each comp In stream.Phases(0).Compounds.Values
                 If Not Vw.ContainsKey(comp.Name) Then
                     Vw.Add(comp.Name, 0)
                 End If
                 Vw(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
-            For Each comp In stream.Phases(2).Compounds.Values
-                If Not Vwv.ContainsKey(comp.Name) Then
-                    Vwv.Add(comp.Name, 0)
+
+            For Each comp In stream.Phases(0).Compounds.Values
+                If Not Vm.ContainsKey(comp.Name) Then
+                    Vm.Add(comp.Name, 0)
                 End If
-                Vwv(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(1).Compounds.Values
-                If Not Vwlo.ContainsKey(comp.Name) Then
-                    Vwlo.Add(comp.Name, 0)
-                End If
-                Vwlo(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(3).Compounds.Values
-                If Not Vwl1.ContainsKey(comp.Name) Then
-                    Vwl1.Add(comp.Name, 0)
-                End If
-                Vwl1(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(4).Compounds.Values
-                If Not Vwl2.ContainsKey(comp.Name) Then
-                    Vwl2.Add(comp.Name, 0)
-                End If
-                Vwl2(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(7).Compounds.Values
-                If Not Vws.ContainsKey(comp.Name) Then
-                    Vws.Add(comp.Name, 0)
-                End If
-                Vws(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
+                Vm(comp.Name) += Factor * comp.MolarFlow.GetValueOrDefault
             Next
 
             newstream.Phases(0).Properties.massflow = (W0 + Factor * W1)
@@ -7674,30 +7656,17 @@ Namespace Streams
                 comp.MassFlow += Vw(comp.Name)
             Next
 
-            For Each comp In newstream.Phases(1).Compounds.Values
-                comp.MassFlow += Vwlo(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(2).Compounds.Values
-                comp.MassFlow += Vwv(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(3).Compounds.Values
-                comp.MassFlow += Vwl1(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(4).Compounds.Values
-                comp.MassFlow += Vwl2(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(7).Compounds.Values
-                comp.MassFlow += Vws(comp.Name)
-            Next
-
             With newstream
                 Dim sub1 As BaseClasses.Compound
                 For Each p In .Phases.Values
                     Dim mass_div_mm As Double = 0
+                    Dim total As Double = 0
+                    For Each sub1 In p.Compounds.Values
+                        total += sub1.MassFlow.GetValueOrDefault
+                    Next
+                    For Each sub1 In p.Compounds.Values
+                        sub1.MassFraction = sub1.MassFlow.GetValueOrDefault / total
+                    Next
                     For Each sub1 In p.Compounds.Values
                         mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                     Next
@@ -7705,7 +7674,10 @@ Namespace Streams
                         sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
                     Next
                 Next
-                .SpecType = StreamSpec.Pressure_and_Enthalpy
+                .SpecType = StreamSpec.Temperature_and_Pressure
+                .PropertyPackage = PropertyPackage
+                .PropertyPackage.CurrentMaterialStream = newstream
+                .Calculate()
             End With
 
             Return newstream
@@ -7729,81 +7701,58 @@ Namespace Streams
             Dim H0 = newstream.GetMassEnthalpy()
 
             Dim Vw As New Dictionary(Of String, Double)
-            Dim Vwv As New Dictionary(Of String, Double)
-            Dim Vwlo As New Dictionary(Of String, Double)
-            Dim Vwl1 As New Dictionary(Of String, Double)
-            Dim Vwl2 As New Dictionary(Of String, Double)
-            Dim Vws As New Dictionary(Of String, Double)
+
+            Dim Vm As New Dictionary(Of String, Double)
 
             Dim comp As BaseClasses.Compound
+
             For Each comp In stream.Phases(0).Compounds.Values
                 If Not Vw.ContainsKey(comp.Name) Then
                     Vw.Add(comp.Name, 0)
                 End If
                 Vw(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
             Next
-            For Each comp In stream.Phases(2).Compounds.Values
-                If Not Vwv.ContainsKey(comp.Name) Then
-                    Vwv.Add(comp.Name, 0)
+
+            For Each comp In stream.Phases(0).Compounds.Values
+                If Not Vm.ContainsKey(comp.Name) Then
+                    Vm.Add(comp.Name, 0)
                 End If
-                Vwv(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(1).Compounds.Values
-                If Not Vwlo.ContainsKey(comp.Name) Then
-                    Vwlo.Add(comp.Name, 0)
-                End If
-                Vwlo(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(3).Compounds.Values
-                If Not Vwl1.ContainsKey(comp.Name) Then
-                    Vwl1.Add(comp.Name, 0)
-                End If
-                Vwl1(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(4).Compounds.Values
-                If Not Vwl2.ContainsKey(comp.Name) Then
-                    Vwl2.Add(comp.Name, 0)
-                End If
-                Vwl2(comp.Name) += Factor * comp.MassFlow.GetValueOrDefault
-            Next
-            For Each comp In stream.Phases(7).Compounds.Values
-                If Not Vws.ContainsKey(comp.Name) Then
-                    Vws.Add(comp.Name, 0)
-                End If
-                Vws(comp.Name) += comp.MassFlow.GetValueOrDefault
+                Vm(comp.Name) += Factor * comp.MolarFlow.GetValueOrDefault
             Next
 
-            newstream.Phases(0).Properties.massflow = (W0 - Factor * W1)
-            newstream.Phases(0).Properties.molarflow = (M0 - Factor * M1)
+            If (Factor * W1 > W0) Then
+                newstream.Phases(0).Properties.massflow = 0.0
+                newstream.Phases(0).Properties.molarflow = 0.0
+            Else
+                newstream.Phases(0).Properties.massflow = (W0 - Factor * W1)
+                newstream.Phases(0).Properties.molarflow = (M0 - Factor * M1)
+            End If
 
             For Each comp In newstream.Phases(0).Compounds.Values
                 comp.MassFlow -= Vw(comp.Name)
+                If comp.MassFlow < 0.0 Then
+                    comp.MassFlow = 0.0
+                End If
             Next
 
-            For Each comp In newstream.Phases(1).Compounds.Values
-                comp.MassFlow -= Vwlo(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(2).Compounds.Values
-                comp.MassFlow -= Vwv(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(3).Compounds.Values
-                comp.MassFlow -= Vwl1(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(4).Compounds.Values
-                comp.MassFlow -= Vwl2(comp.Name)
-            Next
-
-            For Each comp In newstream.Phases(7).Compounds.Values
-                comp.MassFlow -= Vws(comp.Name)
+            For Each comp In newstream.Phases(0).Compounds.Values
+                comp.MolarFlow -= Vm(comp.Name)
+                If comp.MolarFlow < 0.0 Then
+                    comp.MolarFlow = 0.0
+                End If
             Next
 
             With newstream
                 Dim sub1 As BaseClasses.Compound
                 For Each p In .Phases.Values
                     Dim mass_div_mm As Double = 0
+                    Dim total As Double = 0
+                    For Each sub1 In p.Compounds.Values
+                        total += sub1.MassFlow.GetValueOrDefault
+                    Next
+                    For Each sub1 In p.Compounds.Values
+                        sub1.MassFraction = sub1.MassFlow.GetValueOrDefault / total
+                    Next
                     For Each sub1 In p.Compounds.Values
                         mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                     Next
@@ -7811,7 +7760,9 @@ Namespace Streams
                         sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
                     Next
                 Next
-                .SpecType = StreamSpec.Pressure_and_Enthalpy
+                .SpecType = StreamSpec.Temperature_and_Pressure
+                .PropertyPackage = PropertyPackage
+                .PropertyPackage.CurrentMaterialStream = newstream
             End With
 
             Return newstream
@@ -7836,6 +7787,8 @@ Namespace Streams
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(0).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(0).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                        sub1.MolarFlow = stream.Phases(0).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
+                        sub1.MassFlow = stream.Phases(0).Compounds(sub1.Name).MassFlow.GetValueOrDefault
                     Next
 
                 Case PhaseLabel.Vapor
@@ -7846,6 +7799,8 @@ Namespace Streams
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(2).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(2).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                        sub1.MolarFlow = stream.Phases(2).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
+                        sub1.MassFlow = stream.Phases(2).Compounds(sub1.Name).MassFlow.GetValueOrDefault
                     Next
 
                 Case PhaseLabel.LiquidMixture
@@ -7856,6 +7811,8 @@ Namespace Streams
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(1).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(1).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                        sub1.MolarFlow = stream.Phases(1).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
+                        sub1.MassFlow = stream.Phases(1).Compounds(sub1.Name).MassFlow.GetValueOrDefault
                     Next
 
                 Case PhaseLabel.Liquid1
@@ -7866,6 +7823,8 @@ Namespace Streams
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(3).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(3).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                        sub1.MolarFlow = stream.Phases(3).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
+                        sub1.MassFlow = stream.Phases(3).Compounds(sub1.Name).MassFlow.GetValueOrDefault
                     Next
 
                 Case PhaseLabel.Liquid2
@@ -7876,6 +7835,8 @@ Namespace Streams
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(4).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(4).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                        sub1.MolarFlow = stream.Phases(4).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
+                        sub1.MassFlow = stream.Phases(4).Compounds(sub1.Name).MassFlow.GetValueOrDefault
                     Next
 
                 Case PhaseLabel.Solid
@@ -7886,6 +7847,8 @@ Namespace Streams
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(7).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(7).Compounds(sub1.Name).MassFraction.GetValueOrDefault
+                        sub1.MolarFlow = stream.Phases(7).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
+                        sub1.MassFlow = stream.Phases(7).Compounds(sub1.Name).MassFlow.GetValueOrDefault
                     Next
 
                 Case Else

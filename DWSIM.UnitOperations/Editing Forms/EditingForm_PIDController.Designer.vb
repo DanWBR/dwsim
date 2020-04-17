@@ -51,6 +51,7 @@ Partial Class EditingForm_PIDController
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkControllerActive = New System.Windows.Forms.CheckBox()
         Me.tbOffset = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.tbKd = New System.Windows.Forms.TextBox()
@@ -310,6 +311,7 @@ Partial Class EditingForm_PIDController
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.chkControllerActive)
         Me.GroupBox2.Controls.Add(Me.tbOffset)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.tbKd)
@@ -324,6 +326,14 @@ Partial Class EditingForm_PIDController
         Me.GroupBox2.TabStop = False
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        '
+        'chkControllerActive
+        '
+        resources.ApplyResources(Me.chkControllerActive, "chkControllerActive")
+        Me.chkControllerActive.Name = "chkControllerActive"
+        Me.ToolTipValues.SetToolTip(Me.chkControllerActive, resources.GetString("chkControllerActive.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkControllerActive, resources.GetString("chkControllerActive.ToolTip1"))
+        Me.chkControllerActive.UseVisualStyleBackColor = True
         '
         'tbOffset
         '
@@ -461,4 +471,5 @@ Partial Class EditingForm_PIDController
     Public WithEvents cbSourceType As ComboBox
     Public WithEvents Label13 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Friend WithEvents chkControllerActive As CheckBox
 End Class

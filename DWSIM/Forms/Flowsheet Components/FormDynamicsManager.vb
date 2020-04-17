@@ -313,6 +313,7 @@ Public Class FormDynamicsManager
         Dim ev = es.Events(gridselectedset.Rows(e.RowIndex).Cells(0).Value)
 
         Dim value = gridselectedset.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
         Try
             Select Case e.ColumnIndex
                 Case 1
@@ -340,7 +341,7 @@ Public Class FormDynamicsManager
                     If value <> "" Then
                         Dim props = Flowsheet.SimulationObjects(ev.SimulationObjectID).GetProperties(PropertyType.WR)
                         Dim cbcell = DirectCast(gridselectedset.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
-                        ev.SimulationObjectProperty = props(cbcell.Items.IndexOf(value))
+                        ev.SimulationObjectProperty = props(cbcell.Items.IndexOf(value) - 1)
                     End If
                 Case 7
                     ev.SimulationObjectPropertyValue = value
@@ -396,7 +397,7 @@ Public Class FormDynamicsManager
                     If value <> "" Then
                         Dim props = Flowsheet.SimulationObjects(cei.SimulationObjectID).GetProperties(PropertyType.WR)
                         Dim cbcell = DirectCast(gridselectedset.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
-                        cei.SimulationObjectProperty = props(cbcell.Items.IndexOf(value))
+                        cei.SimulationObjectProperty = props(cbcell.Items.IndexOf(value) - 1)
                     End If
                 Case 7
                     cei.SimulationObjectPropertyValue = value
@@ -827,6 +828,70 @@ Public Class FormDynamicsManager
             Flowsheet.UpdateOpenEditForms()
         Catch ex As Exception
         End Try
+
+    End Sub
+
+    Private Sub btnRemoveMatrix_Click(sender As Object, e As EventArgs) Handles btnRemoveMatrix.Click
+
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
+                                           DWSIM.App.GetLocalString("Ateno2"),
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Manager.CauseAndEffectMatrixList.Remove(gridmatrices.SelectedCells(0).OwningRow.Cells(0).Value)
+
+            gridmatrices.Rows.RemoveAt(gridmatrices.SelectedCells(0).RowIndex)
+
+        End If
+
+    End Sub
+
+    Private Sub btnRemoveEventSet_Click(sender As Object, e As EventArgs) Handles btnRemoveEventSet.Click
+
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
+                                           DWSIM.App.GetLocalString("Ateno2"),
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Manager.EventSetList.Remove(gridsets.SelectedCells(0).OwningRow.Cells(0).Value)
+
+            gridsets.Rows.RemoveAt(gridsets.SelectedCells(0).RowIndex)
+
+        End If
+
+    End Sub
+
+    Private Sub btnRemoveEvent_Click(sender As Object, e As EventArgs) Handles btnRemoveEvent.Click
+
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
+                                          DWSIM.App.GetLocalString("Ateno2"),
+                                          MessageBoxButtons.YesNo,
+                                          MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Dim es = Manager.EventSetList(gridsets.Rows(gridsets.SelectedCells(0).RowIndex).Cells(0).Value)
+
+            Manager.EventSetList(es.ID).Events.Remove(gridselectedset.SelectedCells(0).OwningRow.Cells(0).Value)
+
+            gridselectedset.Rows.RemoveAt(gridselectedset.SelectedCells(0).RowIndex)
+
+        End If
+
+    End Sub
+
+    Private Sub btnRemoveMatrixItem_Click(sender As Object, e As EventArgs) Handles btnRemoveMatrixItem.Click
+
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
+                                          DWSIM.App.GetLocalString("Ateno2"),
+                                          MessageBoxButtons.YesNo,
+                                          MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Dim ce = Manager.CauseAndEffectMatrixList(gridmatrices.Rows(gridmatrices.SelectedCells(0).RowIndex).Cells(0).Value)
+
+            Manager.CauseAndEffectMatrixList(ce.ID).Items.Remove(grdiselmatrix.SelectedCells(0).OwningRow.Cells(0).Value)
+
+            grdiselmatrix.Rows.RemoveAt(grdiselmatrix.SelectedCells(0).RowIndex)
+
+        End If
 
     End Sub
 

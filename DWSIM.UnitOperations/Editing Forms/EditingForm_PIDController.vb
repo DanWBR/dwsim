@@ -30,6 +30,8 @@ Public Class EditingForm_PIDController
 
             chkActive.Checked = .GraphicObject.Active
 
+            chkControllerActive.Checked = SimObject.Active
+
             Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
 
             lblTag.Text = .GraphicObject.Tag
@@ -394,5 +396,7 @@ Public Class EditingForm_PIDController
 
     End Sub
 
-
+    Private Sub chkControllerActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkControllerActive.CheckedChanged
+        SimObject.Active = chkControllerActive.Checked
+    End Sub
 End Class

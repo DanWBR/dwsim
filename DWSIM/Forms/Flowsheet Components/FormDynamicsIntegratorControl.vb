@@ -182,13 +182,15 @@ Public Class FormDynamicsIntegratorControl
         Dim events = eventset.Events.Values.Where(Function(x) x.TimeStamp >= initialtime And x.TimeStamp < finaltime).ToList
 
         For Each ev In events
-            Select Case ev.EventType
-                Case Dynamics.DynamicsEventType.ChangeProperty
-                    Dim obj = Flowsheet.SimulationObjects(ev.SimulationObjectID)
-                    Dim value = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ev.SimulationObjectPropertyUnits, ev.SimulationObjectPropertyValue)
-                    obj.SetPropertyValue(ev.SimulationObjectProperty, value)
-                Case Dynamics.DynamicsEventType.RunScript
-            End Select
+            If ev.Enabled Then
+                Select Case ev.EventType
+                    Case Dynamics.DynamicsEventType.ChangeProperty
+                        Dim obj = Flowsheet.SimulationObjects(ev.SimulationObjectID)
+                        Dim value = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ev.SimulationObjectPropertyUnits, ev.SimulationObjectPropertyValue)
+                        obj.SetPropertyValue(ev.SimulationObjectProperty, value)
+                    Case Dynamics.DynamicsEventType.RunScript
+                End Select
+            End If
         Next
 
     End Sub
@@ -198,20 +200,19 @@ Public Class FormDynamicsIntegratorControl
         Dim matrix = Flowsheet.DynamicsManager.CauseAndEffectMatrixList(cematrixID)
 
         For Each item In matrix.Items.Values
-
-            Dim indicator = DirectCast(Flowsheet.SimulationObjects(item.AssociatedIndicator), Interfaces.IIndicator)
-
-            Select Case item.AssociatedIndicatorAlarm
-                Case Dynamics.DynamicsAlarmType.LL
-                    If indicator.VeryLowAlarmActive Then DoAlarmEffect(item)
-                Case Dynamics.DynamicsAlarmType.L
-                    If indicator.LowAlarmActive Then DoAlarmEffect(item)
-                Case Dynamics.DynamicsAlarmType.H
-                    If indicator.HighAlarmActive Then DoAlarmEffect(item)
-                Case Dynamics.DynamicsAlarmType.HH
-                    If indicator.VeryHighAlarmActive Then DoAlarmEffect(item)
-            End Select
-
+            If item.Enabled Then
+                Dim indicator = DirectCast(Flowsheet.SimulationObjects(item.AssociatedIndicator), Interfaces.IIndicator)
+                Select Case item.AssociatedIndicatorAlarm
+                    Case Dynamics.DynamicsAlarmType.LL
+                        If indicator.VeryLowAlarmActive Then DoAlarmEffect(item)
+                    Case Dynamics.DynamicsAlarmType.L
+                        If indicator.LowAlarmActive Then DoAlarmEffect(item)
+                    Case Dynamics.DynamicsAlarmType.H
+                        If indicator.HighAlarmActive Then DoAlarmEffect(item)
+                    Case Dynamics.DynamicsAlarmType.HH
+                        If indicator.VeryHighAlarmActive Then DoAlarmEffect(item)
+                End Select
+            End If
         Next
 
     End Sub

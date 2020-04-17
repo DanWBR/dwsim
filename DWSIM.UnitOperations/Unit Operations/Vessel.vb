@@ -204,14 +204,21 @@ Namespace UnitOperations
 
                     Else
 
-                        AccumulationStream = ims.Subtract(oms1, timestep).Subtract(oms2, timestep)
+                        AccumulationStream = ims.Subtract(oms1, timestep)
+                        AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
 
                     End If
 
                 Else
 
                     AccumulationStream.SetFlowsheet(FlowSheet)
-                    AccumulationStream = AccumulationStream.Add(ims, timestep).Subtract(oms1, timestep).Subtract(oms2, timestep)
+                    AccumulationStream = AccumulationStream.Add(ims, timestep)
+                    AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
+                    AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
+                    If AccumulationStream.GetMassFlow <= 0.0 Then
+                        AccumulationStream.SetMassFlow(0.0)
+                        AccumulationStream.SetPressure(0.0)
+                    End If
 
                 End If
 
@@ -233,23 +240,39 @@ Namespace UnitOperations
 
                 PropertyPackage.CurrentMaterialStream = AccumulationStream
 
-                If prevM = 0.0 Or integrator.ShouldCalculateEquilibrium Then
+                Dim LiquidVolume, RelativeLevel As Double
 
-                    Dim result As IFlashCalculationResult
+                If AccumulationStream.GetPressure > 0 Then
 
-                    result = PropertyPackage.CalculateEquilibrium2(FlashCalculationType.VolumeTemperature, currentM, Temperature, Pressure)
+                    If prevM = 0.0 Or integrator.ShouldCalculateEquilibrium Then
 
-                    Pressure = result.CalculatedPressure
+                        Dim result As IFlashCalculationResult
 
-                    Dim LiquidVolume = Vol * (result.GetLiquidPhase1MoleFraction + result.GetLiquidPhase2MoleFraction)
+                        result = PropertyPackage.CalculateEquilibrium2(FlashCalculationType.VolumeTemperature, currentM, Temperature, Pressure)
 
-                    Dim RelativeLevel = LiquidVolume / Vol
+                        Pressure = result.CalculatedPressure
 
-                    SetDynamicProperty("Liquid Level", RelativeLevel * Height)
+                        LiquidVolume = AccumulationStream.Phases(1).Properties.volumetric_flow.GetValueOrDefault
+
+                        RelativeLevel = LiquidVolume / Vol
+
+                        SetDynamicProperty("Liquid Level", RelativeLevel * Height)
+
+                    Else
+
+                        Pressure = currentM / prevM * Pressure
+
+                    End If
 
                 Else
 
-                    Pressure = currentM / prevM * Pressure
+                    Pressure = 0.0
+
+                    LiquidVolume = 0.0
+
+                    RelativeLevel = LiquidVolume / Vol
+
+                    SetDynamicProperty("Liquid Level", RelativeLevel * Height)
 
                 End If
 
@@ -260,7 +283,7 @@ Namespace UnitOperations
                 AccumulationStream.PropertyPackage = PropertyPackage
                 AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
 
-                If integrator.ShouldCalculateEquilibrium Then
+                If integrator.ShouldCalculateEquilibrium And Pressure > 0.0 Then
 
                     AccumulationStream.Calculate(True, True)
 
@@ -272,7 +295,9 @@ Namespace UnitOperations
 
                 oms1.SetPressure(Pressure)
 
-                oms2.SetPressure(Pressure)
+                Dim liqdens = AccumulationStream.Phases(3).Properties.density.GetValueOrDefault
+
+                oms2.SetPressure(Pressure + liqdens * 9.8 * RelativeLevel * Height)
 
                 oms1.AssignFromPhase(PhaseLabel.Vapor, AccumulationStream)
 

@@ -235,6 +235,9 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Linked Objects</value>
   </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>General Info</value>
+  </data>
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 19</value>
   </data>
@@ -250,11 +253,26 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>General Info</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="chkControllerActive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 17</value>
+  </data>
+  <data name="chkControllerActive.Text" xml:space="preserve">
+    <value>Controller Active</value>
+  </data>
+  <data name="tbOffset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 86</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 89</value>
+  </data>
+  <data name="tbSetPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 60</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 63</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>

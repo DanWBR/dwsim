@@ -45,13 +45,10 @@ Namespace BaseClasses
         End Sub
 
         Public Overrides Function ToString() As String
-            If Name <> "" Then
-                Return Name
-            Else
-                Return MyBase.ToString()
-            End If
-        End Function
 
+            Return Name + String.Format(": xm = {0}, xw = {1}, M = {2} mol/s, W = {3} kg/s", MoleFraction.GetValueOrDefault, MassFraction.GetValueOrDefault, MolarFlow.GetValueOrDefault, MassFlow.GetValueOrDefault)
+
+        End Function
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
@@ -1392,13 +1389,10 @@ Namespace BaseClasses
         End Sub
 
         Public Overrides Function ToString() As String
-            If Name <> "" Then
-                Return Name
-            Else
-                Return MyBase.ToString()
-            End If
-        End Function
 
+            Return Name + String.Format(": {0}, {1}, NBP = {2} K, Tc = {3} K, Pc = {4} Pa, AF = {5}", Formula, CAS_Number, NBP, Critical_Temperature, Critical_Pressure, Acentric_Factor)
+
+        End Function
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
 
