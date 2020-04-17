@@ -89,7 +89,7 @@ Namespace SpecialOps
 
         Public BaseSP As Nullable(Of Double)
 
-        Public Active As Boolean = True
+        Public Property Active As Boolean = True
 
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
