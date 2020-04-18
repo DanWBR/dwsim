@@ -293,6 +293,17 @@ Namespace UnitOperations
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     End With
 
+                    With ims
+                        Dim comp As BaseClasses.Compound
+                        Dim i As Integer = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MassFlow = comp.MassFraction * Wi
+                            comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight * 1000
+                            i += 1
+                        Next
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                    End With
+
             End Select
 
 

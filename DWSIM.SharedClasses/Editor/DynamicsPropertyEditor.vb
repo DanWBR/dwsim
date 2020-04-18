@@ -30,6 +30,12 @@
             rbFlow.Checked = True
         End If
 
+        If Not SimObject.ObjectClass = Enums.SimulationObjectClass.Streams Then
+            GroupBox1.Enabled = False
+        Else
+            GroupBox1.Enabled = True
+        End If
+
         Dim col1 = DirectCast(SimObject.ExtraProperties, IDictionary(Of String, Object))
         Dim col2 = DirectCast(SimObject.ExtraPropertiesDescriptions, IDictionary(Of String, Object))
         Dim col3 = DirectCast(SimObject.ExtraPropertiesUnitTypes, IDictionary(Of String, Object))

@@ -101,6 +101,10 @@ Public Class EditingForm_PIDController
 
             tbOffset.Text = SimObject.Offset
 
+            tbOutputMin.Text = SimObject.OutputMin
+
+            tbOutputMax.Text = SimObject.OutputMax
+
             'annotation
 
             Try
@@ -359,7 +363,7 @@ Public Class EditingForm_PIDController
 
     End Sub
 
-    Private Sub tbSetPoint_TextChanged(sender As Object, e As EventArgs) Handles tbSetPoint.TextChanged, tbKd.TextChanged, tbKi.TextChanged, tbKp.TextChanged, tbOffset.TextChanged
+    Private Sub tbSetPoint_TextChanged(sender As Object, e As EventArgs) Handles tbSetPoint.TextChanged, tbKd.TextChanged, tbKi.TextChanged, tbKp.TextChanged, tbOffset.TextChanged, tbOutputMin.TextChanged, tbOutputMax.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -371,13 +375,17 @@ Public Class EditingForm_PIDController
 
     End Sub
 
-    Private Sub tbSetPoint_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSetPoint.KeyDown, tbKd.KeyDown, tbKi.KeyDown, tbKp.KeyDown, tbOffset.KeyDown
+    Private Sub tbSetPoint_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSetPoint.KeyDown, tbKd.KeyDown, tbKi.KeyDown, tbKp.KeyDown, tbOffset.KeyDown, tbOutputMin.KeyDown, tbOutputMax.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded Then
 
             Select Case sender.Name
                 Case "tbSetPoint"
                     SimObject.AdjustValue = Double.Parse(tbSetPoint.Text.ParseExpressionToDouble)
+                Case "tbOutputMin"
+                    SimObject.OutputMin = Double.Parse(tbOutputMin.Text.ParseExpressionToDouble)
+                Case "tbOutputMax"
+                    SimObject.OutputMax = Double.Parse(tbOutputMax.Text.ParseExpressionToDouble)
                 Case "tbOffset"
                     SimObject.Offset = Double.Parse(tbOffset.Text.ParseExpressionToDouble)
                 Case "tbKp"

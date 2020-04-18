@@ -65,6 +65,20 @@
 
             MyBase.Draw(g)
 
+            Try
+
+                Dim SimObject = DirectCast(Owner, Interfaces.IAdjust)
+
+                SimObject.ManipulatedObject = SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
+                ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
+
+                SimObject.ControlledObject = SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
+                ConnectedToCv = SimObject.ControlledObject.GraphicObject
+
+            Catch ex As Exception
+
+            End Try
+
             Dim aPen As New SKPaint()
             With aPen
                 .Color = SKColors.Blue

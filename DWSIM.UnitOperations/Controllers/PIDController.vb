@@ -84,12 +84,18 @@ Namespace SpecialOps
         Public Property OutputAbs As Double = 0.0
 
         Public Property PVHistory As New List(Of Double)
+
         Public Property MVHistory As New List(Of Double)
+
         Public Property SPHistory As New List(Of Double)
 
         Public BaseSP As Nullable(Of Double)
 
         Public Property Active As Boolean = True
+
+        Public Property OutputMin As Double = -1000.0
+
+        Public Property OutputMax As Double = 1000.0
 
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
@@ -432,6 +438,10 @@ Namespace SpecialOps
                         Return Kd
                     Case "Output"
                         Return Output
+                    Case "OutputMin"
+                        Return OutputMin
+                    Case "OutputMax"
+                        Return OutputMax
                     Case "OutputAbs"
                         Return OutputAbs
                     Case Else
@@ -454,6 +464,8 @@ Namespace SpecialOps
             proplist.Add("Ki")
             proplist.Add("Kd")
             proplist.Add("Output")
+            proplist.Add("OutputMin")
+            proplist.Add("OutputMax")
             proplist.Add("OutputAbs")
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
@@ -468,6 +480,10 @@ Namespace SpecialOps
                     Active = propval
                 Case "SetPointAbs"
                     AdjustValue = propval
+                Case "OutputMin"
+                    OutputMin = propval
+                Case "OutputMax"
+                    OutputMax = propval
                 Case "Kp"
                     Kp = propval
                 Case "Ki"
@@ -602,6 +618,10 @@ Namespace SpecialOps
             If LastError > 0 Then DTerm = delta_error / timestep
 
             Output = PTerm + Ki * ITerm + Kd * DTerm + Offset / BaseSP
+
+            If Output > OutputMax Then Output = OutputMax
+
+            If Output < OutputMin Then Output = OutputMin
 
             MVHistory.Add(Output)
 

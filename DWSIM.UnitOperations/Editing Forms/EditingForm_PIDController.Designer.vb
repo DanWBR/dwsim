@@ -51,6 +51,10 @@ Partial Class EditingForm_PIDController
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbOutputMax = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.tbOutputMin = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.chkControllerActive = New System.Windows.Forms.CheckBox()
         Me.tbOffset = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -311,6 +315,10 @@ Partial Class EditingForm_PIDController
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbOutputMax)
+        Me.GroupBox2.Controls.Add(Me.Label17)
+        Me.GroupBox2.Controls.Add(Me.tbOutputMin)
+        Me.GroupBox2.Controls.Add(Me.Label16)
         Me.GroupBox2.Controls.Add(Me.chkControllerActive)
         Me.GroupBox2.Controls.Add(Me.tbOffset)
         Me.GroupBox2.Controls.Add(Me.Label10)
@@ -326,6 +334,34 @@ Partial Class EditingForm_PIDController
         Me.GroupBox2.TabStop = False
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        '
+        'tbOutputMax
+        '
+        resources.ApplyResources(Me.tbOutputMax, "tbOutputMax")
+        Me.tbOutputMax.Name = "tbOutputMax"
+        Me.ToolTipChangeTag.SetToolTip(Me.tbOutputMax, resources.GetString("tbOutputMax.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.tbOutputMax, resources.GetString("tbOutputMax.ToolTip1"))
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
+        '
+        'tbOutputMin
+        '
+        resources.ApplyResources(Me.tbOutputMin, "tbOutputMin")
+        Me.tbOutputMin.Name = "tbOutputMin"
+        Me.ToolTipChangeTag.SetToolTip(Me.tbOutputMin, resources.GetString("tbOutputMin.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.tbOutputMin, resources.GetString("tbOutputMin.ToolTip1"))
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
         '
         'chkControllerActive
         '
@@ -472,4 +508,8 @@ Partial Class EditingForm_PIDController
     Public WithEvents Label13 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
     Friend WithEvents chkControllerActive As CheckBox
+    Public WithEvents tbOutputMax As TextBox
+    Public WithEvents Label17 As Label
+    Public WithEvents tbOutputMin As TextBox
+    Public WithEvents Label16 As Label
 End Class

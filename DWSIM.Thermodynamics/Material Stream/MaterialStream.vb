@@ -844,6 +844,8 @@ Namespace Streams
                 For Each comp In Phases(i).Compounds.Values
                     comp.MoleFraction = Nothing
                     comp.MassFraction = Nothing
+                    comp.MolarFlow = Nothing
+                    comp.MassFlow = Nothing
                 Next
 
                 'Should be define after concentrations?!?!
@@ -7771,78 +7773,100 @@ Namespace Streams
             SetTemperature(stream.GetTemperature)
             SetPressure(stream.GetPressure)
 
+            Dim W = stream.GetMassFlow
+            Dim M = stream.GetMolarFlow
+            Dim H = stream.GetMassEnthalpy
+
             Select Case phase
 
                 Case PhaseLabel.Mixture
 
-                    SetMassFlow(stream.Phases(0).Properties.massflow.GetValueOrDefault)
-                    SetMassEnthalpy(stream.Phases(0).Properties.enthalpy.GetValueOrDefault)
+                    Dim wfrac = stream.Phases(0).Properties.massfraction.GetValueOrDefault
+                    Dim mfrac = stream.Phases(0).Properties.molarfraction.GetValueOrDefault
+
+                    SetMassFlow(W * wfrac)
+                    SetMassEnthalpy(H * wfrac)
 
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(0).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(0).Compounds(sub1.Name).MassFraction.GetValueOrDefault
-                        sub1.MolarFlow = stream.Phases(0).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
-                        sub1.MassFlow = stream.Phases(0).Compounds(sub1.Name).MassFlow.GetValueOrDefault
+                        sub1.MolarFlow = M * mfrac * sub1.MoleFraction
+                        sub1.MassFlow = W * wfrac * sub1.MassFraction
                     Next
 
                 Case PhaseLabel.Vapor
 
-                    SetMassFlow(stream.Phases(2).Properties.massflow.GetValueOrDefault)
-                    SetMassEnthalpy(stream.Phases(2).Properties.enthalpy.GetValueOrDefault)
+                    Dim wfrac = stream.Phases(2).Properties.massfraction.GetValueOrDefault
+                    Dim mfrac = stream.Phases(2).Properties.molarfraction.GetValueOrDefault
+
+                    SetMassFlow(W * wfrac)
+                    SetMassEnthalpy(H * wfrac)
 
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(2).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(2).Compounds(sub1.Name).MassFraction.GetValueOrDefault
-                        sub1.MolarFlow = stream.Phases(2).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
-                        sub1.MassFlow = stream.Phases(2).Compounds(sub1.Name).MassFlow.GetValueOrDefault
+                        sub1.MolarFlow = M * mfrac * sub1.MoleFraction
+                        sub1.MassFlow = W * wfrac * sub1.MassFraction
                     Next
 
                 Case PhaseLabel.LiquidMixture
 
-                    SetMassFlow(stream.Phases(1).Properties.massflow.GetValueOrDefault)
-                    SetMassEnthalpy(stream.Phases(1).Properties.enthalpy.GetValueOrDefault)
+                    Dim wfrac = stream.Phases(1).Properties.massfraction.GetValueOrDefault
+                    Dim mfrac = stream.Phases(1).Properties.molarfraction.GetValueOrDefault
+
+                    SetMassFlow(W * wfrac)
+                    SetMassEnthalpy(H * wfrac)
 
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(1).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(1).Compounds(sub1.Name).MassFraction.GetValueOrDefault
-                        sub1.MolarFlow = stream.Phases(1).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
-                        sub1.MassFlow = stream.Phases(1).Compounds(sub1.Name).MassFlow.GetValueOrDefault
+                        sub1.MolarFlow = M * mfrac * sub1.MoleFraction
+                        sub1.MassFlow = W * wfrac * sub1.MassFraction
                     Next
 
                 Case PhaseLabel.Liquid1
 
-                    SetMassFlow(stream.Phases(3).Properties.massflow.GetValueOrDefault)
-                    SetMassEnthalpy(stream.Phases(3).Properties.enthalpy.GetValueOrDefault)
+                    Dim wfrac = stream.Phases(3).Properties.massfraction.GetValueOrDefault
+                    Dim mfrac = stream.Phases(3).Properties.molarfraction.GetValueOrDefault
+
+                    SetMassFlow(W * wfrac)
+                    SetMassEnthalpy(H * wfrac)
 
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(3).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(3).Compounds(sub1.Name).MassFraction.GetValueOrDefault
-                        sub1.MolarFlow = stream.Phases(3).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
-                        sub1.MassFlow = stream.Phases(3).Compounds(sub1.Name).MassFlow.GetValueOrDefault
+                        sub1.MolarFlow = M * mfrac * sub1.MoleFraction
+                        sub1.MassFlow = W * wfrac * sub1.MassFraction
                     Next
 
                 Case PhaseLabel.Liquid2
 
-                    SetMassFlow(stream.Phases(4).Properties.massflow.GetValueOrDefault)
-                    SetMassEnthalpy(stream.Phases(4).Properties.enthalpy.GetValueOrDefault)
+                    Dim wfrac = stream.Phases(4).Properties.massfraction.GetValueOrDefault
+                    Dim mfrac = stream.Phases(4).Properties.molarfraction.GetValueOrDefault
+
+                    SetMassFlow(W * wfrac)
+                    SetMassEnthalpy(H * wfrac)
 
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(4).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(4).Compounds(sub1.Name).MassFraction.GetValueOrDefault
-                        sub1.MolarFlow = stream.Phases(4).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
-                        sub1.MassFlow = stream.Phases(4).Compounds(sub1.Name).MassFlow.GetValueOrDefault
+                        sub1.MolarFlow = M * mfrac * sub1.MoleFraction
+                        sub1.MassFlow = W * wfrac * sub1.MassFraction
                     Next
 
                 Case PhaseLabel.Solid
 
-                    SetMassFlow(stream.Phases(7).Properties.massflow.GetValueOrDefault)
-                    SetMassEnthalpy(stream.Phases(7).Properties.enthalpy.GetValueOrDefault)
+                    Dim wfrac = stream.Phases(7).Properties.massfraction.GetValueOrDefault
+                    Dim mfrac = stream.Phases(7).Properties.molarfraction.GetValueOrDefault
+
+                    SetMassFlow(W * wfrac)
+                    SetMassEnthalpy(H * wfrac)
 
                     For Each sub1 In Me.Phases(0).Compounds.Values
                         sub1.MoleFraction = stream.Phases(7).Compounds(sub1.Name).MoleFraction.GetValueOrDefault
                         sub1.MassFraction = stream.Phases(7).Compounds(sub1.Name).MassFraction.GetValueOrDefault
-                        sub1.MolarFlow = stream.Phases(7).Compounds(sub1.Name).MolarFlow.GetValueOrDefault
-                        sub1.MassFlow = stream.Phases(7).Compounds(sub1.Name).MassFlow.GetValueOrDefault
+                        sub1.MolarFlow = M * mfrac * sub1.MoleFraction
+                        sub1.MassFlow = W * wfrac * sub1.MassFraction
                     Next
 
                 Case Else

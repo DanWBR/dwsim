@@ -323,13 +323,13 @@ Namespace UnitOperations
 
             If f Is Nothing Then
                 f = New DynamicsPropertyEditor With {.SimObject = Me}
-                f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+                f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
                 f.Tag = "ObjectEditor"
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
                     f = New DynamicsPropertyEditor With {.SimObject = Me}
-                    f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+                    f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
                     f.Tag = "ObjectEditor"
                     Me.FlowSheet.DisplayForm(f)
                 Else
