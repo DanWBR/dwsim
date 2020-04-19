@@ -1200,7 +1200,6 @@ Partial Class FormDynamicsManager
         'DataGridViewComboBoxColumn1
         '
         Me.DataGridViewComboBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewComboBoxColumn1.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
         Me.DataGridViewComboBoxColumn1.FillWeight = 30.0!
         resources.ApplyResources(Me.DataGridViewComboBoxColumn1, "DataGridViewComboBoxColumn1")
         Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
@@ -1209,7 +1208,6 @@ Partial Class FormDynamicsManager
         'DataGridViewComboBoxColumn5
         '
         Me.DataGridViewComboBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewComboBoxColumn5.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
         Me.DataGridViewComboBoxColumn5.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewComboBoxColumn5, "DataGridViewComboBoxColumn5")
         Me.DataGridViewComboBoxColumn5.Name = "DataGridViewComboBoxColumn5"

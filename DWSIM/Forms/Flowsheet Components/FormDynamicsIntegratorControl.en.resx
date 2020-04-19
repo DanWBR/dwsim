@@ -168,7 +168,13 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>864, 120</value>
   </data>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Integrator Controls</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Dynamic Mode Integrator Controls</value>
+  </data>
+  <data name="$this.ToolTipText" xml:space="preserve">
+    <value>Integrator Controls</value>
   </data>
 </root>
