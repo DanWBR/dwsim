@@ -70,6 +70,7 @@
     <Compile Include="EventSet.vb" />
     <Compile Include="Integrator.vb" />
     <Compile Include="Manager.vb" />
+    <Compile Include="MonitoredVariable.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

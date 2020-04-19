@@ -117,6 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 32</value>
+  </data>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>All Unit Operations in Flowsheet supports Dynamic Mode</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 32</value>
+  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>All Control Valves are configured with Kv Calculation Modes</value>
   </data>
@@ -124,24 +134,14 @@
   <data name="pbValves.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pbValves.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
-  </data>
-  <data name="pbValves.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 32</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>All Endpoint Material Streams are connected to Control Valves</value>
   </data>
   <data name="pbStreamValves.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="pbStreamValves.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
-  </data>
-  <data name="pbStreamValves.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>924, 373</value>
@@ -351,11 +351,8 @@
   <data name="panelSelIntegrator.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 13</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Calculation Rates</value>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 25</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
@@ -363,20 +360,23 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Properties</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
+  <data name="dtpIntegratorDuration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 97</value>
   </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Controller Updates</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 62</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 13</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 13</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Pressure-Flow Relations</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Integration Step</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Equilibrium Flash</value>
+  <data name="dtpIntegrationStep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 60</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 99</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -384,11 +384,89 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Duration</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
+  <data name="nupCalcControlFreq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 245</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Integration Step</value>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 173</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Equilibrium Flash</value>
+  </data>
+  <data name="nupCalcBalFreq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 208</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 210</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Pressure-Flow Relations</value>
+  </data>
+  <data name="nupCalcEqFreq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 171</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 247</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Controller Updates</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 136</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 13</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Calculation Rates</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>691, 315</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Column9.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="DataGridViewComboBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="gridMonitoredVariables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>685, 284</value>
+  </data>
+  <data name="ToolStripButton1.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ToolStripButton1.ToolTipText" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ToolStripButton2.ToolTipText" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ToolStrip7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>685, 25</value>
+  </data>
+  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>691, 315</value>
+  </data>
+  <data name="TabPage9.Text" xml:space="preserve">
+    <value>Monitored Variables</value>
+  </data>
+  <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>699, 341</value>
   </data>
   <data name="panelSelIntegrator.Size" type="System.Drawing.Size, System.Drawing">
     <value>699, 341</value>
@@ -524,12 +602,6 @@
   </data>
   <data name="TabPage8.Text" xml:space="preserve">
     <value>Indicators</value>
-  </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 373</value>
-  </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>Results</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 399</value>

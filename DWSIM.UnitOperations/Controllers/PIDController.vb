@@ -649,19 +649,16 @@ Namespace SpecialOps
                 .MajorGridlineStyle = LineStyle.Dash,
                 .MinorGridlineStyle = LineStyle.Dot,
                 .Position = AxisPosition.Bottom,
-                .FontSize = 12
+                .FontSize = 12,
+                .Title = "Step"
             })
 
             model.Axes.Add(New LinearAxis() With {
                 .MajorGridlineStyle = LineStyle.Dash,
                 .MinorGridlineStyle = LineStyle.Dot,
                 .Position = AxisPosition.Left,
-                .FontSize = 10,
-                .Title = "Step",
-                .StartPosition = 0,
-                .EndPosition = 1,
-                .MajorStep = 1.0,
-                .MinorStep = 0.5
+                .FontSize = 12,
+                .Title = "Relative Value"
             })
 
             model.LegendFontSize = 13

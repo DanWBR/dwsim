@@ -30,6 +30,7 @@ Partial Class FormDynamicsIntegratorControl
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.lblCurrent = New System.Windows.Forms.Label()
         Me.btnRun = New System.Windows.Forms.Button()
+        Me.btnViewResults = New System.Windows.Forms.Button()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -81,10 +82,17 @@ Partial Class FormDynamicsIntegratorControl
         Me.btnRun.Name = "btnRun"
         Me.btnRun.UseVisualStyleBackColor = True
         '
+        'btnViewResults
+        '
+        resources.ApplyResources(Me.btnViewResults, "btnViewResults")
+        Me.btnViewResults.Name = "btnViewResults"
+        Me.btnViewResults.UseVisualStyleBackColor = True
+        '
         'FormDynamicsIntegratorControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.btnViewResults)
         Me.Controls.Add(Me.lblCurrent)
         Me.Controls.Add(Me.lblFinish)
         Me.Controls.Add(Me.lblStart)
@@ -118,4 +126,5 @@ Partial Class FormDynamicsIntegratorControl
     Friend WithEvents btnStop As Button
     Friend WithEvents TrackBar1 As TrackBar
     Friend WithEvents lblCurrent As Label
+    Friend WithEvents btnViewResults As Button
 End Class

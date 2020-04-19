@@ -40,6 +40,8 @@ Public Class FormDynamicsIntegratorControl
 
         btnRun.Enabled = False
 
+        btnViewResults.Enabled = False
+
         Abort = False
 
         Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
@@ -121,6 +123,8 @@ Public Class FormDynamicsIntegratorControl
 
             FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
 
+            StoreVariableValues(integrator, i, integrator.CurrentTime)
+
             Flowsheet.UpdateInterface()
 
             Flowsheet.FormDynamics.UpdateControllerList()
@@ -130,8 +134,6 @@ Public Class FormDynamicsIntegratorControl
             Flowsheet.UpdateInterface()
 
             Flowsheet.UpdateOpenEditForms()
-
-            integrator.StoredSolutions.Add(j, Flowsheet.GetProcessData())
 
             integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
@@ -163,11 +165,29 @@ Public Class FormDynamicsIntegratorControl
 
         btnRun.Enabled = True
 
+        btnViewResults.Enabled = True
+
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
 
         Abort = True
+
+    End Sub
+
+    Sub StoreVariableValues(integrator As DynamicsManager.Integrator, tstep As Integer, tstamp As DateTime)
+
+        Dim list As New List(Of Interfaces.IDynamicsMonitoredVariable)
+
+        For Each v As DynamicsManager.MonitoredVariable In integrator.MonitoredVariables
+            Dim vnew = DirectCast(v.Clone, DynamicsManager.MonitoredVariable)
+            Dim sobj = Flowsheet.SimulationObjects(vnew.ObjectID)
+            vnew.PropertyValue = SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, sobj.GetPropertyValue(vnew.PropertyID))
+            vnew.TimeStamp = tstamp
+            list.Add(vnew)
+        Next
+
+        integrator.MonitoredVariableValues.Add(tstep, list)
 
     End Sub
 

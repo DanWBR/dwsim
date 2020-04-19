@@ -100,6 +100,7 @@
     <Compile Include="IDynamicsEvent.vb" />
     <Compile Include="IDynamicsEventSet.vb" />
     <Compile Include="IDynamicsManager.vb" />
+    <Compile Include="IDynamicsMonitoredVariable.vb" />
     <Compile Include="IDynamicsSchedule.vb" />
     <Compile Include="IFlashAlgorithm.vb" />
     <Compile Include="IFlowsheet.vb" />

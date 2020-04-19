@@ -79,6 +79,8 @@ Public Class FormDynamicsManager
 
         grdiselmatrix.Columns(5).CellTemplate = cbobjects
 
+        gridMonitoredVariables.Columns(2).CellTemplate = cbobjects
+
         cbAssociatedIntegrator.Items.Clear()
         cbAssociatedIntegrator.Items.AddRange(Manager.IntegratorList.Values.Select(Function(x) x.Description).ToArray)
 
@@ -580,6 +582,33 @@ Public Class FormDynamicsManager
 
         panelSelIntegrator.Enabled = True
 
+        Adding = True
+
+        gridMonitoredVariables.Rows.Clear()
+
+        For Each cei In i1.MonitoredVariables
+            With cei
+                Dim obj, prop As String
+                gridMonitoredVariables.Rows.Add(New Object() { .ID, .Description, "", "", .PropertyUnits})
+                Dim addedrow = gridMonitoredVariables.Rows(gridMonitoredVariables.Rows.Count - 1)
+                If Flowsheet.SimulationObjects.ContainsKey(.ObjectID) Then
+                    obj = Flowsheet.SimulationObjects(.ObjectID).GraphicObject.Tag
+                    addedrow.Cells(2).Value = obj
+                    Dim props = Flowsheet.SimulationObjects(.ObjectID).GetProperties(PropertyType.WR)
+                    Dim cbcell = DirectCast(addedrow.Cells(3), DataGridViewComboBoxCell)
+                    cbcell.Items.Clear()
+                    cbcell.Items.AddRange("")
+                    cbcell.Items.AddRange(props.Select(Function(p) Flowsheet.GetTranslatedString1(p)).ToArray)
+                    If props.Contains(.PropertyID) Then
+                        prop = Flowsheet.GetTranslatedString1(.PropertyID)
+                        addedrow.Cells(3).Value = prop
+                    End If
+                End If
+            End With
+        Next
+
+        Adding = False
+
     End Sub
 
     Private Sub dtpIntegrationStep_ValueChanged(sender As Object, e As EventArgs) Handles dtpIntegrationStep.ValueChanged
@@ -890,6 +919,84 @@ Public Class FormDynamicsManager
             Manager.CauseAndEffectMatrixList(ce.ID).Items.Remove(grdiselmatrix.SelectedCells(0).OwningRow.Cells(0).Value)
 
             grdiselmatrix.Rows.RemoveAt(grdiselmatrix.SelectedCells(0).RowIndex)
+
+        End If
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+
+        Try
+
+            Dim int = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+
+            Dim v1 As New MonitoredVariable With {.ID = Guid.NewGuid.ToString}
+
+            int.MonitoredVariables.Add(v1)
+
+            With v1
+                gridMonitoredVariables.Rows.Add(New Object() { .ID, .Description, "", "", ""})
+            End With
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub gridMonitoredVariables_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridMonitoredVariables.CellValueChanged
+
+        If e.RowIndex < 0 Or Adding Then Exit Sub
+
+        Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+
+        Dim v1 = i1.MonitoredVariables.Where(Function(x) x.ID = gridMonitoredVariables.Rows(e.RowIndex).Cells(0).Value).FirstOrDefault
+
+        Dim value = gridMonitoredVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
+        Try
+            Select Case e.ColumnIndex
+                Case 1
+                    v1.Description = value
+                Case 2
+                    If value <> "" Then
+                        v1.ObjectID = Flowsheet.GetFlowsheetGraphicObject(value).Name
+                        Dim props = Flowsheet.SimulationObjects(v1.ObjectID).GetProperties(PropertyType.WR)
+                        Dim cbcell = DirectCast(gridMonitoredVariables.Rows(e.RowIndex).Cells(3), DataGridViewComboBoxCell)
+                        cbcell.Items.Clear()
+                        cbcell.Items.AddRange("")
+                        cbcell.Items.AddRange(props.Select(Function(p) Flowsheet.GetTranslatedString1(p)).ToArray)
+                    End If
+                Case 3
+                    If value <> "" Then
+                        Dim props = Flowsheet.SimulationObjects(v1.ObjectID).GetProperties(PropertyType.WR)
+                        Dim cbcell = DirectCast(gridMonitoredVariables.Rows(e.RowIndex).Cells(3), DataGridViewComboBoxCell)
+                        v1.PropertyID = props(cbcell.Items.IndexOf(value) - 1)
+                    End If
+                Case 4
+                    v1.PropertyUnits = value
+            End Select
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
+                                         DWSIM.App.GetLocalString("Ateno2"),
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+
+            Dim v1 = i1.MonitoredVariables.Where(Function(x) x.ID = gridMonitoredVariables.SelectedCells(0).OwningRow.Cells(0).Value).FirstOrDefault
+
+            i1.MonitoredVariables.Remove(v1)
+
+            gridMonitoredVariables.Rows.RemoveAt(gridMonitoredVariables.SelectedCells(0).RowIndex)
 
         End If
 

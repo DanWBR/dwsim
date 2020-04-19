@@ -106,9 +106,9 @@
 
     End Sub
 
-    Private Sub rbPressure_CheckedChanged(sender As Object, e As EventArgs) Handles rbPressure.CheckedChanged
+    Private Sub rbPressure_CheckedChanged(sender As Object, e As EventArgs) Handles rbPressure.CheckedChanged, rbFlow.CheckedChanged
 
-        If Loaded Then
+        If Loaded And IsActivated Then
 
             If rbPressure.Checked Then
                 SimObject.DynamicsSpec = Enums.Dynamics.DynamicsSpecType.Pressure

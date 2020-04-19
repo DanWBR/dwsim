@@ -46,30 +46,56 @@ Public Class Integrator
 
     Public Property RealTime As Boolean = False Implements IDynamicsIntegrator.RealTime
 
-    Public Property StoredSolutions As Dictionary(Of Integer, List(Of XElement)) = New Dictionary(Of Integer, List(Of XElement)) Implements IDynamicsIntegrator.StoredSolutions
+    Public Property MonitoredVariableValues As Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable)) = New Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable)) Implements IDynamicsIntegrator.MonitoredVariableValues
+
+    Public Property MonitoredVariables As List(Of IDynamicsMonitoredVariable) = New List(Of IDynamicsMonitoredVariable) Implements IDynamicsIntegrator.MonitoredVariables
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
-        Dim e1 = New XElement("StoredSolutions")
-        For Each kvp As KeyValuePair(Of Integer, List(Of XElement)) In StoredSolutions
-            e1.Add(New XElement("Solution" + "_" + kvp.Key.ToString(Globalization.CultureInfo.InvariantCulture),
-                                kvp.Value))
+        Dim e1 = New XElement("MonitoredVariableValues")
+        For Each kvp As KeyValuePair(Of Integer, List(Of IDynamicsMonitoredVariable)) In MonitoredVariableValues
+            Dim e2 = New XElement("Step" + "_" + kvp.Key.ToString(Globalization.CultureInfo.InvariantCulture))
+            For Each item As ICustomXMLSerialization In kvp.Value
+                e2.Add(item.SaveData)
+            Next
+            e1.Add(e2)
         Next
         data.Add(e1)
+        Dim e3 = New XElement("MonitoredVariables")
+        For Each item As ICustomXMLSerialization In MonitoredVariables
+            Dim e4 = New XElement("MonitoredVariable")
+            e4.Add(item.SaveData)
+            e3.Add(e4)
+        Next
+        data.Add(e3)
         Return data
     End Function
 
     Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
         XMLSerializer.XMLSerializer.Deserialize(Me, data)
-        Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "StoredSolutions").LastOrDefault
+        Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "MonitoredVariableValues").LastOrDefault
         If Not elm Is Nothing Then
-            StoredSolutions = New Dictionary(Of Integer, List(Of XElement))
+            MonitoredVariableValues = New Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable))
             For Each xel2 As XElement In elm.Elements
                 Try
-                    StoredSolutions.Add(Integer.Parse(xel2.Name.LocalName.Split("_")(1), Globalization.CultureInfo.InvariantCulture),
-                                    xel2.Elements.ToList)
+                    Dim l As New List(Of IDynamicsMonitoredVariable)
+                    For Each el In xel2.Elements
+                        Dim item As New MonitoredVariable
+                        item.LoadData(el.Elements.ToList)
+                        l.Add(item)
+                    Next
+                    MonitoredVariableValues.Add(Integer.Parse(xel2.Name.LocalName.Split("_")(1), Globalization.CultureInfo.InvariantCulture), l)
                 Catch ex As Exception
                 End Try
+            Next
+        End If
+        Dim elm2 As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "MonitoredVariables").LastOrDefault
+        If Not elm2 Is Nothing Then
+            MonitoredVariables = New List(Of IDynamicsMonitoredVariable)
+            For Each el In elm2.Elements
+                Dim item As New MonitoredVariable
+                item.LoadData(el.Elements.ToList)
+                MonitoredVariables.Add(item)
             Next
         End If
         Return True

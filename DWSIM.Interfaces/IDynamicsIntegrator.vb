@@ -45,6 +45,8 @@
 
     Property RealTime As Boolean
 
-    Property StoredSolutions As Dictionary(Of Integer, List(Of XElement))
+    Property MonitoredVariableValues As Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable))
+
+    Property MonitoredVariables As List(Of IDynamicsMonitoredVariable)
 
 End Interface
