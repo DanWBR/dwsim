@@ -64,7 +64,7 @@ Public Class FormDynamicsIntegratorControl
 
         TrackBar1.Minimum = 0
 
-        integrator.StoredSolutions.Clear()
+        integrator.MonitoredVariableValues.Clear()
 
         lblFinish.Text = integrator.Duration.ToString("c")
 
