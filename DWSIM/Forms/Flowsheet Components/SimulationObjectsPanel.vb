@@ -88,7 +88,7 @@ Public Class SimulationObjectsPanel
                     Me.PanelColumns.Controls.Add(item)
                 Case SimulationObjectClass.Exchangers
                     Me.PanelExchangers.Controls.Add(item)
-                Case SimulationObjectClass.Logical
+                Case SimulationObjectClass.Logical, SimulationObjectClass.Inputs, SimulationObjectClass.Switches
                     Me.PanelLogical.Controls.Add(item)
                 Case SimulationObjectClass.MixersSplitters
                     Me.PanelMixers.Controls.Add(item)

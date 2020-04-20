@@ -497,6 +497,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Atualiza o valor de uma variável diretamente do fluxograma.
+        '''</summary>
+        Friend Shared ReadOnly Property IN_Desc() As String
+            Get
+                Return ResourceManager.GetString("IN_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Caixa de Texto.
+        '''</summary>
+        Friend Shared ReadOnly Property IN_Name() As String
+            Get
+                Return ResourceManager.GetString("IN_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Operação unitária definida por um script Python.
         '''</summary>
         Friend Shared ReadOnly Property IPUO_Desc() As String
@@ -772,6 +790,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property SSEP_Name() As String
             Get
                 Return ResourceManager.GetString("SSEP_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Muda o valor de uma variável entre dois valores.
+        '''</summary>
+        Friend Shared ReadOnly Property SW_Desc() As String
+            Get
+                Return ResourceManager.GetString("SW_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Interruptor.
+        '''</summary>
+        Friend Shared ReadOnly Property SW_Name() As String
+            Get
+                Return ResourceManager.GetString("SW_Name", resourceCulture)
             End Get
         End Property
         

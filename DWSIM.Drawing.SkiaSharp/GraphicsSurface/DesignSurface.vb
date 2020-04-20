@@ -57,6 +57,8 @@ Public Class GraphicsSurface
 
     Public InvalidateCallback As Action
 
+    Public ControlPanelMode As Boolean = False
+
     Public Property DefaultTypeFace As SKTypeface
 
     Public Sub New()
@@ -82,6 +84,7 @@ Public Class GraphicsSurface
     End Enum
 
     Public Shared Property BackgroundColor As SKColor = SKColors.White
+
     Public Shared Property ForegroundColor As SKColor = SKColors.Black
 
     Public Property ResizingMode As Boolean = False

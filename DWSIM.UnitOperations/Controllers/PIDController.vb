@@ -93,9 +93,17 @@ Namespace SpecialOps
 
         Public Property Active As Boolean = True
 
+        Public Property ManualOverride As Boolean = False
+
         Public Property OutputMin As Double = -1000.0
 
         Public Property OutputMax As Double = 1000.0
+
+        Public Property PVValue As Double = 0.0
+
+        Public Property SPValue As Double = 0.0
+
+        Public Property MVValue As Double = 0.0
 
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
@@ -420,6 +428,8 @@ Namespace SpecialOps
                 Return val0
             Else
                 Select Case prop
+                    Case "ManualOverride"
+                        Return ManualOverride
                     Case "Active"
                         Return Active
                     Case "LastError"
@@ -456,6 +466,7 @@ Namespace SpecialOps
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             proplist.Add("Active")
+            proplist.Add("ManualOverride")
             proplist.Add("LastError")
             proplist.Add("CurrentError")
             proplist.Add("SetPoint")
@@ -476,6 +487,8 @@ Namespace SpecialOps
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 
             Select Case prop
+                Case "ManualOverride"
+                    ManualOverride = propval
                 Case "Active"
                     Active = propval
                 Case "SetPointAbs"
@@ -597,6 +610,10 @@ Namespace SpecialOps
 
             Dim CurrentManipulatedValue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(ManipulatedObjectData.Units, ManipulatedObject.GetPropertyValue(ManipulatedObjectData.PropertyName))
 
+            SPValue = AdjustValue
+
+            PVValue = CurrentValue
+
             If BaseSP Is Nothing Then BaseSP = Math.Abs(AdjustValue)
 
             SPHistory.Add(AdjustValue / BaseSP)
@@ -617,7 +634,11 @@ Namespace SpecialOps
 
             If LastError > 0 Then DTerm = delta_error / timestep
 
-            Output = PTerm + Ki * ITerm + Kd * DTerm + Offset / BaseSP
+            If Not ManualOverride Then
+
+                Output = PTerm + Ki * ITerm + Kd * DTerm + Offset / BaseSP
+
+            End If
 
             If Output > OutputMax Then Output = OutputMax
 
@@ -627,9 +648,9 @@ Namespace SpecialOps
 
             OutputAbs = (1.0 - Output) * BaseSP
 
-            Dim OutputValue = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
+            MVValue = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
 
-            ManipulatedObject.SetPropertyValue(ManipulatedObjectData.PropertyName, OutputValue)
+            ManipulatedObject.SetPropertyValue(ManipulatedObjectData.PropertyName, MVValue)
 
         End Sub
 

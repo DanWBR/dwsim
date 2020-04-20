@@ -65,6 +65,8 @@
 
             MyBase.Draw(g)
 
+            Dim f = Height / 50.0
+
             Try
 
                 Dim SimObject = DirectCast(Owner, Interfaces.IAdjust)
@@ -111,6 +113,22 @@
 
             Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
                 canvas.DrawImage(Image, New SKRect(X, Y, X + Width, Y + Height), p)
+            End Using
+
+            Using paint As New SKPaint With {.TextSize = 10.0 * f, .Color = SKColors.Black, .IsAntialias = True}
+                Select Case GlobalSettings.Settings.RunningPlatform
+                    Case GlobalSettings.Settings.Platform.Windows
+                        paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                    Case GlobalSettings.Settings.Platform.Linux
+                        paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                    Case GlobalSettings.Settings.Platform.Mac
+                        paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+                End Select
+                Dim trect As New SKRect(0, 0, 2, 2)
+                paint.GetTextPath("TEST", 0, 0).GetBounds(trect)
+                canvas.DrawText("SP " + Convert.ToDouble(Owner?.SPValue).ToString("G2"), X + Width + 3 * f, Y + Height * 0.8, paint)
+                canvas.DrawText("PV " + Convert.ToDouble(Owner?.PVValue).ToString("G2"), X + Width + 3 * f, Y + Height * 0.8 + trect.Height + 2 * f, paint)
+                canvas.DrawText("MV " + Convert.ToDouble(Owner?.MVValue).ToString("G2"), X + Width + 3 * f, Y + Height * 0.8 + 2 * trect.Height + 4 * f, paint)
             End Using
 
         End Sub

@@ -38,7 +38,7 @@ Partial Class FormDynamicsManager
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.pbUnitOps = New System.Windows.Forms.PictureBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.pbValves = New System.Windows.Forms.PictureBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -170,7 +170,7 @@ Partial Class FormDynamicsManager
         Me.DataGridViewTextBoxColumn18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbUnitOps, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbValves, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbStreamValves, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
@@ -231,7 +231,7 @@ Partial Class FormDynamicsManager
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.Label12)
-        Me.TabPage1.Controls.Add(Me.PictureBox1)
+        Me.TabPage1.Controls.Add(Me.pbUnitOps)
         Me.TabPage1.Controls.Add(Me.Label11)
         Me.TabPage1.Controls.Add(Me.pbValves)
         Me.TabPage1.Controls.Add(Me.Label10)
@@ -244,12 +244,12 @@ Partial Class FormDynamicsManager
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
         '
-        'PictureBox1
+        'pbUnitOps
         '
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.icons8_ok
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.TabStop = False
+        resources.ApplyResources(Me.pbUnitOps, "pbUnitOps")
+        Me.pbUnitOps.Image = Global.DWSIM.My.Resources.Resources.icons8_ok
+        Me.pbUnitOps.Name = "pbUnitOps"
+        Me.pbUnitOps.TabStop = False
         '
         'Label11
         '
@@ -1235,7 +1235,7 @@ Partial Class FormDynamicsManager
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbUnitOps, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbValves, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbStreamValves, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
@@ -1417,7 +1417,7 @@ Partial Class FormDynamicsManager
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Label12 As Label
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents pbUnitOps As PictureBox
     Friend WithEvents TabControl2 As TabControl
     Friend WithEvents TabPage5 As TabPage
     Friend WithEvents TabPage9 As TabPage

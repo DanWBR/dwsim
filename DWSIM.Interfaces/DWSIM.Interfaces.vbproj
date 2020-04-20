@@ -109,6 +109,7 @@
     <Compile Include="IGraphicObject.vb" />
     <Compile Include="IIndicator.vb" />
     <Compile Include="IDynamicsIntegrator.vb" />
+    <Compile Include="IInput.vb" />
     <Compile Include="IMaterialStream.vb" />
     <Compile Include="IPersistStream.vb" />
     <Compile Include="IPhase.vb" />
@@ -123,6 +124,7 @@
     <Compile Include="IExternalUnitOperation.vb" />
     <Compile Include="ISpecialOps.vb" />
     <Compile Include="ISimulationObject.vb" />
+    <Compile Include="ISwitch.vb" />
     <Compile Include="IUndoRedoAction.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="IUtilityPlugin.vb" />

@@ -138,6 +138,7 @@
     <Compile Include="GraphicObjects\Indicators\AnalogGauge.vb" />
     <Compile Include="GraphicObjects\Indicators\DigitalGauge.vb" />
     <Compile Include="GraphicObjects\Indicators\LevelGauge.vb" />
+    <Compile Include="GraphicObjects\Inputs\Input.vb" />
     <Compile Include="GraphicObjects\Other\ImageGraphic.vb" />
     <Compile Include="GraphicObjects\Other\RectangleGraphic.vb" />
     <Compile Include="GraphicObjects\Shapes\AbsorptionColumn.vb" />
@@ -177,6 +178,7 @@
     <Compile Include="GraphicObjects\Shapes\Spreadsheet.vb" />
     <Compile Include="GraphicObjects\Shapes\Tank.vb" />
     <Compile Include="GraphicObjects\Shapes\Valve.vb" />
+    <Compile Include="GraphicObjects\Switches\Switch.vb" />
     <Compile Include="GraphicObjects\Table\FloatingTable.vb" />
     <Compile Include="GraphicObjects\Table\MasterPropertyTable.vb" />
     <Compile Include="GraphicObjects\Table\PropertyTable.vb" />
@@ -255,10 +257,14 @@
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\switch_off.png" />
+    <EmbeddedResource Include="Bitmaps\switch_on.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Bitmaps\control_panel.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

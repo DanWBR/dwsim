@@ -413,6 +413,8 @@ Namespace Enums
         Other = 11
         Indicators = 12
         Controllers = 13
+        Switches = 14
+        Inputs = 15
 
     End Enum
 
@@ -548,6 +550,10 @@ Namespace Enums.GraphicObjects
         LevelGauge
 
         Controller_PID
+
+        Switch
+
+        Input
 
     End Enum
 

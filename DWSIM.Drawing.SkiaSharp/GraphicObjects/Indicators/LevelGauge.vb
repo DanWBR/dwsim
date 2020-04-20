@@ -86,9 +86,9 @@ Namespace GraphicObjects
 
             Dim nf = Owner.GetFlowsheet.FlowsheetOptions.NumberFormat
 
-            Dim minvaltext = owneri.MinimumValue.ToString(nf)
-            Dim maxvaltext = owneri.MaximumValue.ToString(nf)
-            Dim valtext = currentvalue.ToString(nf)
+            Dim minvaltext = owneri.MinimumValue.ToString("G2")
+            Dim maxvaltext = owneri.MaximumValue.ToString("G2")
+            Dim valtext = currentvalue.ToString("G2")
 
             Dim origin = X + w * 0.3
 
@@ -115,7 +115,15 @@ Namespace GraphicObjects
 
             canvas.Restore()
 
-            Using paint As New SKPaint With {.TextSize = 10.0 * f, .Color = SKColors.Black, .IsAntialias = True}
+            Using paint As New SKPaint With {.TextSize = 10.0 * f, .Color = SKColors.Blue, .IsAntialias = True}
+                Select Case GlobalSettings.Settings.RunningPlatform
+                    Case GlobalSettings.Settings.Platform.Windows
+                        paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
+                    Case GlobalSettings.Settings.Platform.Linux
+                        paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
+                    Case GlobalSettings.Settings.Platform.Mac
+                        paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
+                End Select
                 Dim trect As New SKRect(0, 0, 2, 2)
                 paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
                 Dim stry As Single = cly + trect.Height / 2
@@ -135,7 +143,7 @@ Namespace GraphicObjects
 
                 Dim r1 = 1
 
-                Using paint As New SKPaint With {.TextSize = 8 * f, .Color = SKColors.White, .IsAntialias = True}
+                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
                     Select Case GlobalSettings.Settings.RunningPlatform
                         Case GlobalSettings.Settings.Platform.Windows
                             paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
@@ -151,7 +159,7 @@ Namespace GraphicObjects
 
                 Dim delta = -3 * r1 * f
 
-                Using paint As New SKPaint With {.TextSize = 8 * f, .Color = SKColors.White, .IsAntialias = True}
+                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
                     Select Case GlobalSettings.Settings.RunningPlatform
                         Case GlobalSettings.Settings.Platform.Windows
                             paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
@@ -175,7 +183,7 @@ Namespace GraphicObjects
                     canvas.DrawText(tll, X - trll.Width / 2, Y + delta, paint)
                 End Using
 
-                Using paint As New SKPaint With {.TextSize = 8 * f, .Color = SKColors.White, .IsAntialias = True}
+                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
                     Select Case GlobalSettings.Settings.RunningPlatform
                         Case GlobalSettings.Settings.Platform.Windows
                             paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
@@ -199,7 +207,7 @@ Namespace GraphicObjects
                     canvas.DrawText(tl, X + 0.33 * w - trl.Width / 2, Y + delta, paint)
                 End Using
 
-                Using paint As New SKPaint With {.TextSize = 8 * f, .Color = SKColors.White, .IsAntialias = True}
+                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
                     Select Case GlobalSettings.Settings.RunningPlatform
                         Case GlobalSettings.Settings.Platform.Windows
                             paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
@@ -223,7 +231,7 @@ Namespace GraphicObjects
                     canvas.DrawText(th, X + 0.66 * w - trh.Width / 2, Y + delta, paint)
                 End Using
 
-                Using paint As New SKPaint With {.TextSize = 8 * f, .Color = SKColors.White, .IsAntialias = True}
+                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
                     Select Case GlobalSettings.Settings.RunningPlatform
                         Case GlobalSettings.Settings.Platform.Windows
                             paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)

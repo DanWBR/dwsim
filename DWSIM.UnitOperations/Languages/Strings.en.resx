@@ -261,6 +261,12 @@
   <data name="HEXCH_Name" xml:space="preserve">
     <value>Heat Exchanger</value>
   </data>
+  <data name="IN_Desc" xml:space="preserve">
+    <value>Displays and updates a variable directly from the flowsheet</value>
+  </data>
+  <data name="IN_Name" xml:space="preserve">
+    <value>Input Box</value>
+  </data>
   <data name="IPUO_Desc" xml:space="preserve">
     <value>Python Script Unit Operation</value>
   </data>
@@ -353,6 +359,12 @@
   </data>
   <data name="SSEP_Name" xml:space="preserve">
     <value>Solids Separator</value>
+  </data>
+  <data name="SW_Desc" xml:space="preserve">
+    <value>Changes a variable to one of two possible values</value>
+  </data>
+  <data name="SW_Name" xml:space="preserve">
+    <value>Switch</value>
   </data>
   <data name="TANK_Desc" xml:space="preserve">
     <value>Simple Tank model</value>

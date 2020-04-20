@@ -45,6 +45,8 @@
     Property FlowsheetShowCalculationQueue As Boolean
     Property FlowsheetShowWatchWindow As Boolean
 
+    Property FlowsheetControlPanelMode As Boolean
+
     Property Key As String
 
     Property SelectedUnitSystem As IUnitsOfMeasure

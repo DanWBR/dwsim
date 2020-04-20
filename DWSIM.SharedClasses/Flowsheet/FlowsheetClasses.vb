@@ -237,6 +237,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property CompoundOrderingMode As Enums.CompoundOrdering = CompoundOrdering.AsAdded Implements IFlowsheetOptions.CompoundOrderingMode
 
+        Public Property FlowsheetControlPanelMode As Boolean = False Implements IFlowsheetOptions.FlowsheetControlPanelMode
+
     End Class
 
 End Namespace

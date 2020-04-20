@@ -5,17 +5,21 @@ Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects
 
-    Public Class DigitalGaugeGraphic
+    Public Class SwitchGraphic
 
         Inherits ShapeGraphic
 
         <Xml.Serialization.XmlIgnore> Public Property PointList As New List(Of Point)
 
+        Private ImageOn As SKImage
+
+        Private ImageOff As SKImage
+
 #Region "Constructors"
 
         Public Sub New()
 
-            Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.DigitalGauge
+            Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.Switch
 
         End Sub
 
@@ -37,24 +41,13 @@ Namespace GraphicObjects
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            Dim w = Width
-            Dim h = Height
+            CreateConnectors(0, 0)
 
-            Dim f = Height / 40.0
+            UpdateStatus()
 
-            Dim owneri = DirectCast(Owner, IIndicator)
+            MyBase.Draw(g)
 
-            Dim currentvalue As Double
-
-            Dim formatstring = ""
-
-            For i = 1 To owneri.IntegralDigits
-                formatstring += "0"
-            Next
-            formatstring += "."
-            For i = 1 To owneri.DecimalDigits
-                formatstring += "0"
-            Next
+            Dim owneri = DirectCast(Owner, ISwitch)
 
             Dim SelectedObject = Owner?.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = owneri.SelectedObjectID).FirstOrDefault
             If Not SelectedObject Is Nothing Then
@@ -76,158 +69,38 @@ Namespace GraphicObjects
                 End Using
             End If
 
-            If Not SelectedObject Is Nothing Then
-                currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, SelectedObject.GetPropertyValue(owneri.SelectedProperty))
-                owneri.CurrentValue = currentvalue
-            End If
+            If owneri.IsOn Then
 
-            Dim valtext = currentvalue.ToString(formatstring)
+                If ImageOn Is Nothing Then
 
-            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = SKColors.LightGreen, .IsAntialias = True}
-                Dim assm = Me.GetType.Assembly
-                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.digital7_mono_italic.ttf")
-                    paint.Typeface = SKTypeface.FromStream(filestr)
-                    Dim trect As New SKRect(0, 0, 2, 2)
-                    paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
-                    Dim strx As Single = (w - trect.Width) / 2
-                    Dim stry As Single = h - trect.Height / 2
-                    w = trect.Width + 30 * f
-                    strx = (w - trect.Width) / 2
-                    Width = w
-                    Using paint2 As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                        canvas.DrawRect(X - 5 * f, Y - 5 * f, w + 10 * f, h + 10 * f, paint2)
+                    Dim assm = Me.GetType.Assembly
+                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.switch_on.png")
+                        Using bitmap = SKBitmap.Decode(filestr)
+                            ImageOn = SKImage.FromBitmap(bitmap)
+                        End Using
                     End Using
-                    Using paint2 As New SKPaint With {.Color = SKColors.LightGray, .IsStroke = False, .IsAntialias = True}
-                        canvas.DrawRect(X - 2 * f, Y - 2 * f, w + 4 * f, h + 4 * f, paint2)
-                    End Using
-                    Using paint2 As New SKPaint With {.Color = SKColors.Black, .IsStroke = False, .IsAntialias = True}
-                        canvas.DrawRect(X, Y, w, h, paint2)
-                    End Using
-                    canvas.DrawText(valtext, X + strx, Y + stry, paint)
-                End Using
-            End Using
 
-            Owner.Calculate()
+                End If
 
-            If owneri.ShowAlarms Then
-
-                Dim tll = "LL"
-                Dim tl = "L"
-                Dim th = "H"
-                Dim thh = "HH"
-
-                Dim r1 = 1
-
-                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
-                    Select Case GlobalSettings.Settings.RunningPlatform
-                        Case GlobalSettings.Settings.Platform.Windows
-                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Linux
-                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Mac
-                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                    End Select
-                    Dim trll As New SKRect(0, 0, 2, 2)
-                    paint.GetTextPath(thh, 0, 0).GetBounds(trll)
-                    r1 = Math.Max(trll.Width, trll.Height)
+                Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                    canvas.DrawImage(ImageOn, New SKRect(X, Y, X + Width, Y + Height), p)
                 End Using
 
-                Dim delta = -3 * r1 * f
+            Else
 
-                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
-                    Select Case GlobalSettings.Settings.RunningPlatform
-                        Case GlobalSettings.Settings.Platform.Windows
-                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Linux
-                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Mac
-                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                    End Select
-                    Dim trll As New SKRect(0, 0, 2, 2)
-                    paint.GetTextPath(tll, 0, 0).GetBounds(trll)
-                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                        If owneri.VeryLowAlarmEnabled Then
-                            If owneri.VeryLowAlarmActive Then
-                                bpaint.Color = SKColors.Red
-                            Else
-                                bpaint.Color = SKColors.Black
-                            End If
-                        End If
-                        canvas.DrawOval(X, Y + delta - trll.Height / 2, r1, r1, bpaint)
-                    End Using
-                    canvas.DrawText(tll, X - trll.Width / 2, Y + delta, paint)
-                End Using
+                If ImageOff Is Nothing Then
 
-                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
-                    Select Case GlobalSettings.Settings.RunningPlatform
-                        Case GlobalSettings.Settings.Platform.Windows
-                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Linux
-                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Mac
-                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                    End Select
-                    Dim trl As New SKRect(0, 0, 2, 2)
-                    paint.GetTextPath(tl, 0, 0).GetBounds(trl)
-                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                        If owneri.LowAlarmEnabled Then
-                            If owneri.LowAlarmActive Then
-                                bpaint.Color = SKColors.Red
-                            Else
-                                bpaint.Color = SKColors.Black
-                            End If
-                        End If
-                        canvas.DrawOval(X + 0.33 * w, Y + delta - trl.Height / 2, r1, r1, bpaint)
+                    Dim assm = Me.GetType.Assembly
+                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.switch_off.png")
+                        Using bitmap = SKBitmap.Decode(filestr)
+                            ImageOff = SKImage.FromBitmap(bitmap)
+                        End Using
                     End Using
-                    canvas.DrawText(tl, X + 0.33 * w - trl.Width / 2, Y + delta, paint)
-                End Using
 
-                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
-                    Select Case GlobalSettings.Settings.RunningPlatform
-                        Case GlobalSettings.Settings.Platform.Windows
-                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Linux
-                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Mac
-                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                    End Select
-                    Dim trh As New SKRect(0, 0, 2, 2)
-                    paint.GetTextPath(th, 0, 0).GetBounds(trh)
-                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                        If owneri.HighAlarmEnabled Then
-                            If owneri.HighAlarmActive Then
-                                bpaint.Color = SKColors.Red
-                            Else
-                                bpaint.Color = SKColors.Black
-                            End If
-                        End If
-                        canvas.DrawOval(X + 0.66 * w, Y + delta - trh.Height / 2, r1, r1, bpaint)
-                    End Using
-                    canvas.DrawText(th, X + 0.66 * w - trh.Width / 2, Y + delta, paint)
-                End Using
+                End If
 
-                Using paint As New SKPaint With {.TextSize = 10 * f, .Color = SKColors.White, .IsAntialias = True}
-                    Select Case GlobalSettings.Settings.RunningPlatform
-                        Case GlobalSettings.Settings.Platform.Windows
-                            paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Linux
-                            paint.Typeface = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Bold)
-                        Case GlobalSettings.Settings.Platform.Mac
-                            paint.Typeface = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Bold)
-                    End Select
-                    Dim trhh As New SKRect(0, 0, 2, 2)
-                    paint.GetTextPath(thh, 0, 0).GetBounds(trhh)
-                    Using bpaint As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                        If owneri.VeryHighAlarmEnabled Then
-                            If owneri.VeryHighAlarmActive Then
-                                bpaint.Color = SKColors.Red
-                            Else
-                                bpaint.Color = SKColors.Black
-                            End If
-                        End If
-                        canvas.DrawOval(X + w, Y + delta - trhh.Height / 2, r1, r1, bpaint)
-                    End Using
-                    canvas.DrawText(thh, X + w - trhh.Width / 2, Y + delta, paint)
+                Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                    canvas.DrawImage(ImageOff, New SKRect(X, Y, X + Width, Y + Height), p)
                 End Using
 
             End If
@@ -804,6 +677,7 @@ Namespace GraphicObjects
             PointList.Add(New Point(EndPos.X, EndPos.Y))
 
         End Sub
+
 
     End Class
 

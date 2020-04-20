@@ -473,6 +473,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property input() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("input", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property level_gauge() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("level_gauge", resourceCulture)
@@ -826,6 +836,16 @@ Namespace My.Resources
         Friend ReadOnly Property stream_en_32() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("stream_en_32", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property switch_on() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("switch_on", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

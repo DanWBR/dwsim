@@ -202,6 +202,18 @@
     <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_Switch.Designer.vb">
+      <DependentUpon>EditingForm_Switch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Switch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Input.Designer.vb">
+      <DependentUpon>EditingForm_Input.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Input.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_DigitalGauge.Designer.vb">
       <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
     </Compile>
@@ -523,7 +535,9 @@
     <Compile Include="Extenders\StreamListExtender.vb" />
     <Compile Include="Indicators\AnalogGauge.vb" />
     <Compile Include="Indicators\DigitalGauge.vb" />
+    <Compile Include="Inputs\Input.vb" />
     <Compile Include="Indicators\LevelGauge.vb" />
+    <Compile Include="Switches\Switch.vb" />
     <Compile Include="Languages\Strings.de.Designer.vb">
       <DependentUpon>Strings.de.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -635,6 +649,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.de.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Switch.en.resx">
+      <DependentUpon>EditingForm_Switch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Switch.resx">
+      <DependentUpon>EditingForm_Switch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Input.en.resx">
+      <DependentUpon>EditingForm_Input.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Input.resx">
+      <DependentUpon>EditingForm_Input.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_DigitalGauge.en.resx">
       <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
@@ -1603,7 +1629,9 @@
   <ItemGroup>
     <None Include="Resources\icons8-spy_male.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\input.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Icons\analog_gauge.png" />
   </ItemGroup>
@@ -1615,6 +1643,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Icons\level_gauge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\switch_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

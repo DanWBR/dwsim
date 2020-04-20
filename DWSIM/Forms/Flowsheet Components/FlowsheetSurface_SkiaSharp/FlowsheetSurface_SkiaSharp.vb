@@ -1565,6 +1565,32 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.CreateConnectors(0, 0)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, uoobj)
 
+            Case ObjectType.Switch
+
+                Dim myGobj As New SwitchGraphic(mpx, mpy, 25, 50)
+                myGobj.Tag = "SW-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "SW-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
+                Dim myObj As UnitOperations.UnitOperations.Switch = New UnitOperations.UnitOperations.Switch(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
+
+            Case ObjectType.Input
+
+                Dim myGobj As New InputGraphic(mpx, mpy, 25, 50)
+                myGobj.Tag = "IN-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "IN-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
+                Dim myObj As Input = New Input(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
+
             Case ObjectType.Controller_PID
 
                 Dim myGobj As New PIDControllerGraphic(mpx, mpy, 50, 50)
@@ -3077,4 +3103,24 @@ Public Class FlowsheetSurface_SkiaSharp
         tstbSearch.AutoCompleteCustomSource.AddRange(Flowsheet.GraphicObjects.Select(Function(x) x.Value.Tag).ToArray)
 
     End Sub
+
+    Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
+
+        If tsbControlPanelMode.Checked Then
+            btnDown.Visible = True
+            btnUp.Visible = True
+            btnLeft.Visible = True
+            btnRight.Visible = True
+            FlowsheetSurface.ControlPanelMode = True
+        Else
+            btnDown.Visible = False
+            btnUp.Visible = False
+            btnLeft.Visible = False
+            btnRight.Visible = False
+            FlowsheetSurface.ControlPanelMode = False
+        End If
+        FControl.Invalidate()
+
+    End Sub
+
 End Class
