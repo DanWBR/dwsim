@@ -89,6 +89,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property Extensions As Dictionary(Of String, IGraphicObjectExtension)
 
+    Sub DisplayControlPanelModeEditor()
+
+    Property ControlPanelModeEditorDisplayDelegate As Action
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

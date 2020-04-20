@@ -2567,12 +2567,14 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
+        If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.Zoom += 0.05
         Me.TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetSurface.Zoom, "#%")
         SplitContainer1.Panel1.Refresh()
     End Sub
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
+        If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.Zoom -= 0.05
         If FlowsheetSurface.Zoom < 0.05 Then FlowsheetSurface.Zoom = 0.05
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
@@ -2592,6 +2594,7 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
+        If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.ZoomAll(FControl.Width, FControl.Height)
         Application.DoEvents()
         FlowsheetSurface.ZoomAll(FControl.Width, FControl.Height)
@@ -2601,12 +2604,14 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton3.Click
+        If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.Zoom = 1
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
         SplitContainer1.Panel1.Refresh()
     End Sub
 
     Private Sub TSTBZoom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TSTBZoom.KeyDown
+        If tsbControlPanelMode.Checked Then Exit Sub
         If e.KeyCode = Keys.Enter Then
             FlowsheetSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
             Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
@@ -3108,6 +3113,10 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Private Sub tsbControlPanelMode_Click(sender As Object, e As EventArgs) Handles tsbControlPanelMode.Click
+
+    End Sub
+
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
 
         If tsbControlPanelMode.Checked Then
@@ -3116,12 +3125,18 @@ Public Class FlowsheetSurface_SkiaSharp
             btnLeft.Visible = True
             btnRight.Visible = True
             FlowsheetSurface.ControlPanelMode = True
+            GlobalSettings.Settings.DarkMode = True
+            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.Black
+            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.White
         Else
             btnDown.Visible = False
             btnUp.Visible = False
             btnLeft.Visible = False
             btnRight.Visible = False
             FlowsheetSurface.ControlPanelMode = False
+            GlobalSettings.Settings.DarkMode = False
+            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White
+            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black
         End If
         FControl.Invalidate()
 

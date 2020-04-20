@@ -100,7 +100,7 @@ Namespace GraphicObjects
                     Using paint2 As New SKPaint With {.Color = SKColors.LightGray, .IsStroke = False, .IsAntialias = True}
                         canvas.DrawRect(X - 2 * f, Y - 2 * f, w + 4 * f, h + 4 * f, paint2)
                     End Using
-                    Using paint2 As New SKPaint With {.Color = SKColors.Black, .IsStroke = False, .IsAntialias = True}
+                    Using paint2 As New SKPaint With {.Color = GetBackColor(), .IsStroke = False, .IsAntialias = True}
                         canvas.DrawRect(X, Y, w, h, paint2)
                     End Using
                     canvas.DrawText(valtext, X + strx, Y + stry, paint)

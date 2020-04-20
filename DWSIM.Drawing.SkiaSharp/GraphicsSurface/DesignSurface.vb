@@ -101,7 +101,7 @@ Public Class GraphicsSurface
 
     Public Property SurfaceMargins As SKRect
 
-    Public Property Zoom() As Single = 1.0F
+    Public Property Zoom() As Single = 1.0
 
     Public Overridable Property ShowGrid() As Boolean = False
 
@@ -585,6 +585,8 @@ Public Class GraphicsSurface
 
     Public Sub InputMove(x As Integer, y As Integer)
 
+        If ControlPanelMode Then Exit Sub
+
         Dim dx As Integer = -(x - dragStart.X)
         Dim dy As Integer = -(y - dragStart.Y)
 
@@ -771,6 +773,8 @@ Public Class GraphicsSurface
 
     Public Sub InputRelease()
 
+        If ControlPanelMode Then Exit Sub
+
         If Not ResizingMode Then
 
             draggingfs = False
@@ -823,57 +827,67 @@ Public Class GraphicsSurface
 
     Public Sub InputPress(x As Integer, y As Integer)
 
-        If MultiSelectMode Then
-            SelectRectangle = Not My.Computer.Keyboard.ShiftKeyDown
+        If ControlPanelMode Then
+
+            SelectedObject = FindObjectAtPoint(New SKPoint(x, y))
+
+            SelectedObject?.DisplayControlPanelModeEditor()
+
         Else
-            SelectRectangle = My.Computer.Keyboard.ShiftKeyDown
-        End If
 
-        Dim mousePT As New SKPoint(x, y)
-
-        dragStart = New SKPoint(x, y)
-
-        Me.SelectedObject = FindObjectAtPoint(mousePT)
-
-        If Not SelectedObject Is Nothing Then Size0 = New SKSize(SelectedObject.Width, SelectedObject.Height)
-
-        If Not ResizingMode Then
-
-            If Me.SelectedObject Is Nothing Then
-                Me.SelectedObjects.Clear()
-                justselected = False
-                draggingfs = Not SelectRectangle
+            If MultiSelectMode Then
+                SelectRectangle = Not My.Computer.Keyboard.ShiftKeyDown
             Else
-                If My.Computer.Keyboard.CtrlKeyDown And MultiSelectMode Then
-                    If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
-                        Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
-                    Else
-                        Me.SelectedObjects.Remove(Me.SelectedObject.Name)
-                    End If
-                    justselected = True
-                Else
-                    If Not justselected Then Me.SelectedObjects.Clear()
-                    If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
-                        Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
-                    End If
-                    justselected = False
-                End If
+                SelectRectangle = My.Computer.Keyboard.ShiftKeyDown
             End If
 
-            If Not SelectedObject Is Nothing Then
-                dragging = True
-                dragOffset.X = SelectedObject.X - mousePT.X
-                dragOffset.Y = SelectedObject.Y - mousePT.Y
-            Else
-                If Me.SelectRectangle Then
-                    selectionDragging = True
-                    rectp0.X = mousePT.X
-                    rectp0.Y = mousePT.Y
-                    selectionRect.Left = mousePT.X
-                    selectionRect.Top = mousePT.Y
-                    selectionRect.Right = mousePT.X + 1
-                    selectionRect.Bottom = mousePT.Y + 1
+            Dim mousePT As New SKPoint(x, y)
+
+            dragStart = New SKPoint(x, y)
+
+            SelectedObject = FindObjectAtPoint(mousePT)
+
+            If Not SelectedObject Is Nothing Then Size0 = New SKSize(SelectedObject.Width, SelectedObject.Height)
+
+            If Not ResizingMode Then
+
+                If Me.SelectedObject Is Nothing Then
+                    Me.SelectedObjects.Clear()
+                    justselected = False
+                    draggingfs = Not SelectRectangle
+                Else
+                    If My.Computer.Keyboard.CtrlKeyDown And MultiSelectMode Then
+                        If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
+                            Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
+                        Else
+                            Me.SelectedObjects.Remove(Me.SelectedObject.Name)
+                        End If
+                        justselected = True
+                    Else
+                        If Not justselected Then Me.SelectedObjects.Clear()
+                        If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
+                            Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
+                        End If
+                        justselected = False
+                    End If
                 End If
+
+                If Not SelectedObject Is Nothing Then
+                    dragging = True
+                    dragOffset.X = SelectedObject.X - mousePT.X
+                    dragOffset.Y = SelectedObject.Y - mousePT.Y
+                Else
+                    If Me.SelectRectangle Then
+                        selectionDragging = True
+                        rectp0.X = mousePT.X
+                        rectp0.Y = mousePT.Y
+                        selectionRect.Left = mousePT.X
+                        selectionRect.Top = mousePT.Y
+                        selectionRect.Right = mousePT.X + 1
+                        selectionRect.Bottom = mousePT.Y + 1
+                    End If
+                End If
+
             End If
 
         End If

@@ -47,23 +47,23 @@ Namespace GraphicObjects
             Dim f = Width / 100.0
 
             'draw circle
-            Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 5 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = GetForeColor(), .IsStroke = True, .StrokeWidth = 5 * f, .IsAntialias = True}
                 canvas.DrawCircle(center.X, center.Y, radius, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Green.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Green, .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
                 p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -225, 90)
                 canvas.DrawPath(p, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Yellow.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Yellow, .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
                 p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -135, 90)
                 canvas.DrawPath(p, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Red.WithAlpha(75), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Red, .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
                 p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -45, 90)
                 canvas.DrawPath(p, paint)
@@ -83,7 +83,7 @@ Namespace GraphicObjects
             Dim maxtick = 135.0
             Dim nstep = 10
 
-            Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = True, .StrokeWidth = 2 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = GetForeColor(), .IsStroke = True, .StrokeWidth = 2 * f, .IsAntialias = True}
                 For i As Integer = mintick To maxtick Step nstep
                     Dim angle = (i - 90) * Math.PI / 180
                     Dim p1 = New SKPoint(center.X + radius * Math.Cos(angle), center.Y + radius * Math.Sin(angle))
@@ -128,13 +128,13 @@ Namespace GraphicObjects
 
             needle.Transform(SKMatrix.MakeRotationDegrees(currenttick, center.X, center.Y))
 
-            Using paint As New SKPaint With {.Color = SKColors.Black, .IsStroke = False, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = GetForeColor(), .IsStroke = False, .IsAntialias = True}
                 canvas.DrawPath(needle, paint)
             End Using
 
             Dim valtext = currentvalue.ToString("G4")
 
-            Using paint As New SKPaint With {.TextSize = 15.0 * f, .Color = SKColors.Black, .IsAntialias = True}
+            Using paint As New SKPaint With {.TextSize = 15.0 * f, .Color = GetForeColor(), .IsAntialias = True}
                 Select Case GlobalSettings.Settings.RunningPlatform
                     Case GlobalSettings.Settings.Platform.Windows
                         paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)

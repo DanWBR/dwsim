@@ -492,23 +492,14 @@
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Default Zoom (100%)</value>
   </data>
-  <data name="tsbResizeMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbResizeMode.Text" xml:space="preserve">
     <value>Switch to/from Resize Object Mode</value>
-  </data>
-  <data name="tsbResizeModeKeepAR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbResizeModeKeepAR.Text" xml:space="preserve">
     <value>Keep Aspect Ratio on Resizing</value>
   </data>
   <data name="tsbDisplayGrid.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
-  </data>
-  <data name="tsbDisplayGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbDisplayGrid.Text" xml:space="preserve">
     <value>Snap Objects to Grid</value>
@@ -518,9 +509,6 @@
   </data>
   <data name="tsbSnapObjectsToGrid.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
-  </data>
-  <data name="tsbSnapObjectsToGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbSnapObjectsToGrid.Text" xml:space="preserve">
     <value>Snap Objects to Grid</value>

@@ -75,7 +75,7 @@ Namespace GraphicObjects
 
             Dim valtext = currentvalue.ToString(nf)
 
-            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = SKColors.White, .IsAntialias = True}
+            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = GetForeColor(), .IsAntialias = True}
                 Dim assm = Me.GetType.Assembly
                 Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.digital7_mono.ttf")
                     paint.Typeface = SKTypeface.FromStream(filestr)
@@ -92,7 +92,7 @@ Namespace GraphicObjects
                     Using paint2 As New SKPaint With {.Color = SKColors.LightGray, .IsStroke = False, .IsAntialias = True}
                         canvas.DrawRect(X - 1 * f, Y - 1 * f, w + 2 * f, h + 2 * f, paint2)
                     End Using
-                    Using paint2 As New SKPaint With {.Color = SKColors.Black, .IsStroke = False, .IsAntialias = True}
+                    Using paint2 As New SKPaint With {.Color = GetBackColor(), .IsStroke = False, .IsAntialias = True}
                         canvas.DrawRect(X, Y, w, h, paint2)
                     End Using
                     canvas.DrawText(valtext, X + strx, Y + stry, paint)
