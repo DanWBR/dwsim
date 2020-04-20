@@ -1567,7 +1567,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Case ObjectType.Switch
 
-                Dim myGobj As New SwitchGraphic(mpx, mpy, 25, 50)
+                Dim myGobj As New SwitchGraphic(mpx, mpy, 50, 40)
                 myGobj.Tag = "SW-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
@@ -1580,7 +1580,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Case ObjectType.Input
 
-                Dim myGobj As New InputGraphic(mpx, mpy, 25, 50)
+                Dim myGobj As New InputGraphic(mpx, mpy, 50, 25)
                 myGobj.Tag = "IN-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
@@ -2400,6 +2400,10 @@ Public Class FlowsheetSurface_SkiaSharp
                 tobj = ObjectType.LevelGauge
             Case "PIDController"
                 tobj = ObjectType.Controller_PID
+            Case "Input"
+                tobj = ObjectType.Input
+            Case "Switch"
+                tobj = ObjectType.Switch
         End Select
 
         AddObjectToSurface(tobj, x, y, chemsep)

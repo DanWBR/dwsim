@@ -40,7 +40,7 @@ Namespace GraphicObjects
             Dim w = Width
             Dim h = Height
 
-            Dim f = Height / 25.0
+            Dim f = Height / 40.0
 
             Dim owneri = DirectCast(Owner, IInput)
 
@@ -105,7 +105,7 @@ Namespace GraphicObjects
 
         Public Sub SetupPositioning(StartDir As ConDir, EndDir As ConDir)
 
-            Dim SimObject = Owner?.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = DirectCast(Owner, IIndicator).SelectedObjectID).FirstOrDefault
+            Dim SimObject = Owner?.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = DirectCast(Owner, IInput).SelectedObjectID).FirstOrDefault
 
             'posicionar pontos nos primeiros slots livres
 
