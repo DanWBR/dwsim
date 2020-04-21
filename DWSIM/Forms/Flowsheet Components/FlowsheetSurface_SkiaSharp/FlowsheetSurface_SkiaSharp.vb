@@ -1591,29 +1591,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myObj.GraphicObject = myGobj
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
 
-                gObj.ControlPanelModeEditorDisplayDelegate = Sub()
-                                                                 Dim f As New FormTextBox
-                                                                 Dim SelectedObject = myObj?.GetFlowsheet.SimulationObjects.Values.Where(Function(x2) x2.Name = myObj.SelectedObjectID).FirstOrDefault
-                                                                 If Not SelectedObject Is Nothing Then
-                                                                     Dim currentvalue = SystemsOfUnits.Converter.ConvertFromSI(myObj.SelectedPropertyUnits, SelectedObject.GetPropertyValue(myObj.SelectedProperty))
-                                                                     f.TextBox1.Text = currentvalue.ToString("G2")
-                                                                     f.Text = SelectedObject.GraphicObject.Tag + "/" + DWSIM.App.GetPropertyName(myObj.SelectedProperty)
-                                                                     AddHandler f.TextBox1.KeyDown,
-                                                                     Sub(s, e)
-                                                                         If e.KeyCode = Keys.Enter Then
-                                                                             Try
-                                                                                 SelectedObject.SetPropertyValue(myObj.SelectedProperty, f.TextBox1.Text.ToDoubleFromCurrent().ConvertToSI(myObj.SelectedPropertyUnits))
-                                                                             Catch ex As Exception
-                                                                                 MessageBox.Show(DWSIM.App.GetLocalString("Erro"), ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                                                             End Try
-                                                                             f.Close()
-                                                                         End If
-                                                                     End Sub
-                                                                     f.StartPosition = FormStartPosition.Manual
-                                                                     f.Location = Cursor.Position
-                                                                     f.ShowDialog()
-                                                                 End If
-                                                             End Sub
+                GraphicObjectControlPanelModeEditors.SetInputDelegate(myGobj, myObj)
 
             Case ObjectType.Controller_PID
 
@@ -1628,25 +1606,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myObj.GraphicObject = myGobj
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
 
-                gObj.ControlPanelModeEditorDisplayDelegate = Sub()
-                                                                 Dim f As New FormTextBox
-                                                                 f.TextBox1.Text = myObj.AdjustValue
-                                                                 f.Text = "SP (" + gObj.Tag + ")"
-                                                                 AddHandler f.TextBox1.KeyDown,
-                                                                 Sub(s, e)
-                                                                     If e.KeyCode = Keys.Enter Then
-                                                                         Try
-                                                                             myObj.AdjustValue = f.TextBox1.Text.ToDoubleFromCurrent
-                                                                         Catch ex As Exception
-                                                                             MessageBox.Show(DWSIM.App.GetLocalString("Erro"), ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                                                         End Try
-                                                                         f.Close()
-                                                                     End If
-                                                                 End Sub
-                                                                 f.StartPosition = FormStartPosition.Manual
-                                                                 f.Location = Cursor.Position
-                                                                 f.ShowDialog()
-                                                             End Sub
+                GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
 
             Case ObjectType.LevelGauge
 

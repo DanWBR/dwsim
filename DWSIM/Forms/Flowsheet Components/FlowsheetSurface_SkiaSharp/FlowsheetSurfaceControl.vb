@@ -111,11 +111,13 @@ Public Class FlowsheetSurfaceControl
                                 If FlowsheetObject.DynamicMode Then obj.CloseDynamicsEditForm()
                             Next
                         End If
-                        FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
-                        If FlowsheetObject.DynamicMode Then
-                            FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
+                        If Not FlowsheetSurface.ControlPanelMode Then
+                            FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
+                            If FlowsheetObject.DynamicMode Then
+                                FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
+                            End If
+                            EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
                         End If
-                        EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
                     End If
 
                     Focus()

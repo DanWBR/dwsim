@@ -1752,6 +1752,10 @@ Public Class FormMain
                                 gobj.Height = 180
                             End If
                         End If
+                    ElseIf TypeOf obj Is Input Then
+                        GraphicObjectControlPanelModeEditors.SetInputDelegate(gobj, obj)
+                    ElseIf TypeOf obj Is PIDController Then
+                        GraphicObjectControlPanelModeEditors.SetPIDDelegate(gobj, obj)
                     End If
                 End If
                 objlist.Add(obj)
@@ -2304,6 +2308,10 @@ Public Class FormMain
                                 gobj.Height = 180
                             End If
                         End If
+                    ElseIf TypeOf obj Is Input Then
+                        GraphicObjectControlPanelModeEditors.SetInputDelegate(gobj, obj)
+                    ElseIf TypeOf obj Is PIDController Then
+                        GraphicObjectControlPanelModeEditors.SetPIDDelegate(gobj, obj)
                     End If
                 End If
                 objlist.Add(obj)

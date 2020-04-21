@@ -115,7 +115,12 @@ Namespace GraphicObjects
 
             canvas.Restore()
 
-            Using paint As New SKPaint With {.TextSize = 10.0 * f, .Color = SKColors.Blue, .IsAntialias = True}
+            Using paint As New SKPaint With {.TextSize = 10.0 * f, .IsAntialias = True}
+                If GlobalSettings.Settings.DarkMode Then
+                    paint.Color = SKColors.White
+                Else
+                    paint.Color = SKColors.Blue
+                End If
                 Select Case GlobalSettings.Settings.RunningPlatform
                     Case GlobalSettings.Settings.Platform.Windows
                         paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)

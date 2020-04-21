@@ -585,8 +585,6 @@ Public Class GraphicsSurface
 
     Public Sub InputMove(x As Integer, y As Integer)
 
-        If ControlPanelMode Then Exit Sub
-
         Dim dx As Integer = -(x - dragStart.X)
         Dim dy As Integer = -(y - dragStart.Y)
 
