@@ -10,7 +10,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                          Dim SelectedObject = myObj?.GetFlowsheet.SimulationObjects.Values.Where(Function(x2) x2.Name = myObj.SelectedObjectID).FirstOrDefault
                                                          If Not SelectedObject Is Nothing Then
                                                              Dim currentvalue = SystemsOfUnits.Converter.ConvertFromSI(myObj.SelectedPropertyUnits, SelectedObject.GetPropertyValue(myObj.SelectedProperty))
-                                                             f.TextBox1.Text = currentvalue.ToString("G2")
+                                                             f.TextBox1.Text = currentvalue.ToString(myObj?.GetFlowsheet.FlowsheetOptions.NumberFormat)
                                                              f.Text = SelectedObject.GraphicObject.Tag + "/" + DWSIM.App.GetPropertyName(myObj.SelectedProperty)
                                                              AddHandler f.TextBox1.KeyDown,
                                                              Sub(s, e)

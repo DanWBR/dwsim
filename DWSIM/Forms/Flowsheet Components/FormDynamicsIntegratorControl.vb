@@ -1,4 +1,5 @@
 ﻿Imports System.Linq
+Imports System.Threading.Tasks
 
 Public Class FormDynamicsIntegratorControl
 
@@ -182,8 +183,6 @@ Public Class FormDynamicsIntegratorControl
             controller.Reset()
         Next
 
-        Dim j As Integer = 0
-
         integrator.CurrentTime = New Date
 
         Dim controllers_check As Double = 100000
@@ -192,88 +191,132 @@ Public Class FormDynamicsIntegratorControl
 
         TrackBar1.Enabled = False
 
-        For i = 0 To final Step interval
+        Task.Factory.StartNew(Sub()
 
-            TrackBar1.Value = i
+                                  Dim j As Integer = 0
 
-            lblCurrent.Text = New TimeSpan(0, 0, i).ToString("c")
+                                  For i = 0 To final Step interval
 
-            controllers_check += interval
-            streams_check += interval
-            pf_check += interval
+                                      Dim i0 As Integer = i
 
-            If controllers_check >= integrator.CalculationRateControl * interval Then
-                controllers_check = 0.0
-                integrator.ShouldCalculateControl = True
-            Else
-                integrator.ShouldCalculateControl = False
-            End If
+                                      Flowsheet.RunCodeOnUIThread(Sub()
+                                                                      TrackBar1.Value = i0
+                                                                      lblCurrent.Text = New TimeSpan(0, 0, i0).ToString("c")
+                                                                  End Sub)
 
-            If streams_check >= integrator.CalculationRateEquilibrium * interval Then
-                streams_check = 0.0
-                integrator.ShouldCalculateEquilibrium = True
-            Else
-                integrator.ShouldCalculateEquilibrium = False
-            End If
+                                      controllers_check += interval
+                                      streams_check += interval
+                                      pf_check += interval
 
-            If pf_check >= integrator.CalculationRatePressureFlow * interval Then
-                pf_check = 0.0
-                integrator.ShouldCalculatePressureFlow = True
-            Else
-                integrator.ShouldCalculatePressureFlow = False
-            End If
+                                      If controllers_check >= integrator.CalculationRateControl * interval Then
+                                          controllers_check = 0.0
+                                          integrator.ShouldCalculateControl = True
+                                      Else
+                                          integrator.ShouldCalculateControl = False
+                                      End If
 
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
+                                      If streams_check >= integrator.CalculationRateEquilibrium * interval Then
+                                          streams_check = 0.0
+                                          integrator.ShouldCalculateEquilibrium = True
+                                      Else
+                                          integrator.ShouldCalculateEquilibrium = False
+                                      End If
 
-            If Not realtime Then StoreVariableValues(integrator, i, integrator.CurrentTime)
+                                      If pf_check >= integrator.CalculationRatePressureFlow * interval Then
+                                          pf_check = 0.0
+                                          integrator.ShouldCalculatePressureFlow = True
+                                      Else
+                                          integrator.ShouldCalculatePressureFlow = False
+                                      End If
 
-            Flowsheet.UpdateInterface()
+                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
 
-            Flowsheet.FormDynamics.UpdateControllerList()
+                                      While GlobalSettings.Settings.CalculatorBusy
+                                          Task.Delay(500).Wait()
+                                      End While
 
-            Flowsheet.FormDynamics.UpdateIndicatorList()
+                                      If Not realtime Then StoreVariableValues(integrator, i, integrator.CurrentTime)
 
-            Flowsheet.UpdateInterface()
+                                      Flowsheet.RunCodeOnUIThread(Sub()
+                                                                      Flowsheet.FormDynamics.UpdateControllerList()
+                                                                      Flowsheet.FormDynamics.UpdateIndicatorList()
+                                                                      Flowsheet.UpdateInterface()
+                                                                      Flowsheet.UpdateOpenEditForms()
+                                                                  End Sub)
 
-            Flowsheet.UpdateOpenEditForms()
+                                      integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
-            integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
+                                      If integrator.ShouldCalculateControl Then
+                                          For Each controller As PIDController In Controllers
+                                              If controller.Active Then controller.Calculate()
+                                          Next
+                                      End If
 
-            If integrator.ShouldCalculateControl Then
-                For Each controller As PIDController In Controllers
-                    If controller.Active Then controller.Calculate()
-                Next
-            End If
+                                      If Abort Then Exit For
 
-            If Abort Then Exit For
+                                      If Not realtime Then
 
-            If Not realtime Then
+                                          If schedule.UsesEventList Then
 
-                If schedule.UsesEventList Then
+                                              ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
 
-                    ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
+                                          End If
 
-                End If
+                                          If schedule.UsesCauseAndEffectMatrix Then
 
-                If schedule.UsesCauseAndEffectMatrix Then
+                                              ProcessCEMatrix(schedule.CurrentCauseAndEffectMatrix)
 
-                    ProcessCEMatrix(schedule.CurrentCauseAndEffectMatrix)
+                                          End If
 
-                End If
+                                      End If
 
-            End If
+                                      j += 1
 
-            j += 1
+                                  Next
 
+                              End Sub).ContinueWith(Sub(t)
+                                                        Flowsheet.RunCodeOnUIThread(Sub()
+                                                                                        TrackBar1.Enabled = True
+                                                                                        btnRun.Enabled = True
+                                                                                        btnViewResults.Enabled = True
+                                                                                        btnRealtime.Enabled = True
+                                                                                    End Sub)
+                                                    End Sub)
+
+    End Sub
+
+    Private Sub btnViewResults_Click(sender As Object, e As EventArgs) Handles btnViewResults.Click
+
+        Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
+
+        Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
+
+        Dim sheet = Flowsheet.FormSpreadsheet.Spreadsheet.NewWorksheet()
+
+        sheet.Cells(0, 0).Data = "Time (s)"
+
+        Dim i, j As Integer
+
+        i = 1
+        For Each var In integrator.MonitoredVariables
+            sheet.Cells(0, i).Data = var.Description & If(var.PropertyUnits <> "", " (" + var.PropertyUnits + ")", "")
+            i += 1
         Next
 
-        TrackBar1.Enabled = True
+        i = 1
+        For Each item In integrator.MonitoredVariableValues
+            sheet.Cells(i, 0).Data = item.Key.ToString
+            j = 1
+            For Each var In item.Value
+                sheet.Cells(i, j).Data = var.PropertyValue
+                j += 1
+            Next
+            i += 1
+        Next
 
-        btnRun.Enabled = True
+        Flowsheet.FormSpreadsheet.Activate()
 
-        btnViewResults.Enabled = True
-
-        btnRealtime.Enabled = True
+        Flowsheet.FormSpreadsheet.Spreadsheet.CurrentWorksheet = sheet
 
     End Sub
 

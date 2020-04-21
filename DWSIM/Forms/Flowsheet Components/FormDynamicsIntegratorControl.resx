@@ -121,16 +121,13 @@
   <data name="lblCurrent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Controles do Integrador</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="lblCurrent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>884, 129</value>
-  </data>
   <data name="btnViewResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 23</value>
   </data>
@@ -149,17 +146,14 @@
   <data name="lblStart.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnStop.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 53</value>
   </data>
   <data name="TrackBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TrackBar1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="btnRealtime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 50</value>
   </data>
   <data name="lblCurrent.Text" xml:space="preserve">
     <value>00:00:45</value>
@@ -167,30 +161,33 @@
   <data name="&gt;&gt;cbScenario.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;lblCurrent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnRealtime.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>48, 22, 48, 22</value>
+  <data name="btnViewResults.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnStop.Name" xml:space="preserve">
     <value>btnStop</value>
   </data>
+  <data name="&gt;&gt;btnViewResults.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnRun.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblCurrent.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="lblFinish.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;btnRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFinish.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 18</value>
@@ -204,8 +201,8 @@
   <data name="&gt;&gt;btnRealtime.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cbScenario.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 21</value>
+  <data name="&gt;&gt;btnStop.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;lblStart.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -213,8 +210,8 @@
   <data name="lblStart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="btnRealtime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>48, 22, 48, 22</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Controles do Integrador</value>
   </data>
   <data name="btnStop.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -234,11 +231,17 @@
   <data name="lblStart.Location" type="System.Drawing.Point, System.Drawing">
     <value>195, 101</value>
   </data>
-  <data name="lblStart.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;btnViewResults.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnViewResults.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnViewResults.Name" xml:space="preserve">
+    <value>btnViewResults</value>
   </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -249,17 +252,14 @@
   <data name="lblFinish.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="btnViewResults.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;btnRun.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="lblCurrent.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
-  <data name="cbScenario.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>48, 22, 48, 22</value>
+  <data name="&gt;&gt;btnRealtime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblFinish.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -276,17 +276,14 @@
   <data name="lblStart.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="lblCurrent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 101</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
-  <data name="&gt;&gt;btnRealtime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TrackBar1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnViewResults.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbScenario.Name" xml:space="preserve">
-    <value>cbScenario</value>
+  <data name="btnRealtime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="btnRun.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -303,8 +300,8 @@
   <data name="btnStop.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 50</value>
   </data>
-  <data name="lblFinish.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="lblStart.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="Label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>48, 0, 48, 0</value>
@@ -327,8 +324,8 @@
   <data name="btnViewResults.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblCurrent.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbScenario.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 21</value>
   </data>
   <data name="btnStop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>48, 22, 48, 22</value>
@@ -339,20 +336,14 @@
   <data name="TrackBar1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="btnRun.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormDynamicsIntegratorControl</value>
+  <data name="&gt;&gt;lblFinish.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="btnRun.ToolTip" xml:space="preserve">
     <value>Executar Cenário</value>
   </data>
   <data name="&gt;&gt;lblCurrent.Name" xml:space="preserve">
     <value>lblCurrent</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
@@ -372,8 +363,8 @@
   <data name="$this.TabText" xml:space="preserve">
     <value>Controles do Integrador</value>
   </data>
-  <data name="btnViewResults.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="btnRun.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
   </data>
   <data name="Label3.ToolTip" xml:space="preserve">
     <value />
@@ -390,11 +381,11 @@
   <data name="btnRealtime.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 53</value>
   </data>
-  <data name="&gt;&gt;btnRun.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblFinish.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>657, 45</value>
+  <data name="lblCurrent.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnRun.Name" xml:space="preserve">
     <value>btnRun</value>
@@ -405,26 +396,23 @@
   <data name="btnRun.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 50</value>
   </data>
-  <data name="&gt;&gt;btnRealtime.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnStop.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="btnRun.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormDynamicsIntegratorControl</value>
   </data>
-  <data name="lblFinish.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="TrackBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="lblCurrent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>470, 101</value>
   </data>
   <data name="btnRealtime.ToolTip" xml:space="preserve">
     <value>Executar em Tempo Real</value>
   </data>
+  <data name="TrackBar1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
   <data name="lblCurrent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;btnStop.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFinish.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -447,8 +435,14 @@
   <data name="&gt;&gt;btnViewResults.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cbScenario.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="TrackBar1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;cbScenario.Name" xml:space="preserve">
+    <value>cbScenario</value>
   </data>
   <data name="btnRealtime.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -462,11 +456,11 @@
   <data name="TrackBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;lblCurrent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnViewResults.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnRealtime.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="lblFinish.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;lblCurrent.Parent" xml:space="preserve">
     <value>$this</value>
@@ -477,17 +471,23 @@
   <data name="lblStart.Text" xml:space="preserve">
     <value>00:00:00</value>
   </data>
-  <data name="btnStop.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="btnRun.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;lblFinish.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>884, 129</value>
   </data>
-  <data name="&gt;&gt;btnViewResults.Name" xml:space="preserve">
-    <value>btnViewResults</value>
+  <data name="lblFinish.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="btnRealtime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 50</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
+  <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>657, 45</value>
   </data>
   <data name="cbScenario.ToolTip" xml:space="preserve">
     <value />
@@ -498,14 +498,14 @@
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
   </data>
-  <data name="lblFinish.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="btnStop.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

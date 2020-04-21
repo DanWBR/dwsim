@@ -8,11 +8,11 @@
 
         chkAuto.Checked = Not PID.ManualOverride
 
-        tbSP.Text = PID.SPValue.ToString("G2")
+        tbSP.Text = PID.SPValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
 
-        tbPV.Text = PID.PVValue.ToString("G2")
+        tbPV.Text = PID.PVValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
 
-        tbMV.Text = PID.MVValue.ToString("G2")
+        tbMV.Text = PID.MVValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
 
         tbMV.ReadOnly = chkAuto.Checked
 

@@ -3136,6 +3136,7 @@ Public Class FlowsheetSurface_SkiaSharp
             GlobalSettings.Settings.DarkMode = True
             Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.Black
             Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.White
+            SplitContainer1.Panel2Collapsed = True
         Else
             btnDown.Visible = False
             btnUp.Visible = False
@@ -3149,6 +3150,7 @@ Public Class FlowsheetSurface_SkiaSharp
             GlobalSettings.Settings.DarkMode = False
             Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White
             Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black
+            SplitContainer1.Panel2Collapsed = False
         End If
         FControl.Invalidate()
 
