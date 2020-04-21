@@ -51,19 +51,19 @@ Namespace GraphicObjects
                 canvas.DrawCircle(center.X, center.Y, radius, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Green, .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Green.WithAlpha(100), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
                 p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -225, 90)
                 canvas.DrawPath(p, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Yellow, .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Yellow.WithAlpha(100), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
                 p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -135, 90)
                 canvas.DrawPath(p, paint)
             End Using
 
-            Using paint As New SKPaint With {.Color = SKColors.Red, .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
+            Using paint As New SKPaint With {.Color = SKColors.Red.WithAlpha(100), .IsStroke = True, .StrokeWidth = 20 * f, .IsAntialias = True}
                 Dim p As New SKPath()
                 p.AddArc(New SKRect(X + 10.0 * f, Y + 10.0 * f, X + w - 10.0 * f, Y + h - 10.0 * f), -45, 90)
                 canvas.DrawPath(p, paint)
