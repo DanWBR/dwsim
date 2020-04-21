@@ -115,7 +115,7 @@
                 canvas.DrawImage(Image, New SKRect(X, Y, X + Width, Y + Height), p)
             End Using
 
-            Using paint As New SKPaint With {.TextSize = 10.0 * f, .Color = SKColors.Black, .IsAntialias = True}
+            Using paint As New SKPaint With {.TextSize = 10.0 * f, .Color = GetForeColor(), .IsAntialias = True}
                 Select Case GlobalSettings.Settings.RunningPlatform
                     Case GlobalSettings.Settings.Platform.Windows
                         paint.Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold)

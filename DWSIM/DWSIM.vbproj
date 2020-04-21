@@ -3025,6 +3025,7 @@
     <None Include="Resources\icons8-module.png" />
     <None Include="Resources\icons8-cancel.png" />
     <None Include="Resources\icons8-ok.png" />
+    <None Include="Resources\icons8-realtime.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

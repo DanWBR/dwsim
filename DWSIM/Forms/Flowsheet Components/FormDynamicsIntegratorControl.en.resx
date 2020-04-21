@@ -119,10 +119,16 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 89</value>
+    <value>195, 89</value>
+  </data>
+  <data name="lblStart.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblFinish.Location" type="System.Drawing.Point, System.Drawing">
     <value>806, 89</value>
+  </data>
+  <data name="lblFinish.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 17</value>
@@ -133,23 +139,29 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Schedule</value>
   </data>
+  <data name="Label3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="cbScenario.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 12</value>
   </data>
-  <data name="btnStop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 49</value>
+  <data name="cbScenario.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="TrackBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 44</value>
+    <value>204, 44</value>
   </data>
   <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>718, 45</value>
+    <value>651, 45</value>
+  </data>
+  <data name="TrackBar1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblCurrent.Location" type="System.Drawing.Point, System.Drawing">
     <value>465, 89</value>
   </data>
-  <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 49</value>
+  <data name="lblCurrent.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnViewResults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -165,6 +177,27 @@
   <data name="btnViewResults.Text" xml:space="preserve">
     <value>View Results</value>
   </data>
+  <data name="btnViewResults.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnRealtime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 49</value>
+  </data>
+  <data name="btnRealtime.ToolTip" xml:space="preserve">
+    <value>Real-Time</value>
+  </data>
+  <data name="btnStop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 49</value>
+  </data>
+  <data name="btnStop.ToolTip" xml:space="preserve">
+    <value>Stop Execution</value>
+  </data>
+  <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 49</value>
+  </data>
+  <data name="btnRun.ToolTip" xml:space="preserve">
+    <value>Run Schedule</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>864, 120</value>
   </data>
@@ -173,6 +206,9 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Dynamic Mode Integrator Controls</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.ToolTipText" xml:space="preserve">
     <value>Integrator Controls</value>

@@ -38,134 +38,7 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
-        btnRun.Enabled = False
-
-        btnViewResults.Enabled = False
-
-        Abort = False
-
-        Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
-
-        Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
-
-        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
-
-        If Not schedule.UseCurrentStateAsInitial Then
-
-            Dim initialstate = Flowsheet.StoredSolutions(schedule.InitialFlowsheetStateID)
-
-            Flowsheet.LoadProcessData(initialstate)
-
-            Flowsheet.UpdateInterface()
-
-        End If
-
-        TrackBar1.Value = 0
-
-        TrackBar1.Minimum = 0
-
-        integrator.MonitoredVariableValues.Clear()
-
-        lblFinish.Text = integrator.Duration.ToString("c")
-
-        TrackBar1.Maximum = integrator.Duration.TotalSeconds
-
-        Dim interval = integrator.IntegrationStep.TotalSeconds
-
-        TrackBar1.TickFrequency = interval
-
-        Dim final = integrator.Duration.TotalSeconds
-
-        For Each controller As PIDController In Controllers
-            controller.Reset()
-        Next
-
-        Dim j As Integer = 0
-
-        integrator.CurrentTime = New Date
-
-        Dim controllers_check As Double = 100000
-        Dim streams_check As Double = 100000
-        Dim pf_check As Double = 100000
-
-        TrackBar1.Enabled = False
-
-        For i = 0 To final Step interval
-
-            TrackBar1.Value = i
-
-            lblCurrent.Text = New TimeSpan(0, 0, i).ToString("c")
-
-            controllers_check += interval
-            streams_check += interval
-            pf_check += interval
-
-            If controllers_check >= integrator.CalculationRateControl * interval Then
-                controllers_check = 0.0
-                integrator.ShouldCalculateControl = True
-            Else
-                integrator.ShouldCalculateControl = False
-            End If
-
-            If streams_check >= integrator.CalculationRateEquilibrium * interval Then
-                streams_check = 0.0
-                integrator.ShouldCalculateEquilibrium = True
-            Else
-                integrator.ShouldCalculateEquilibrium = False
-            End If
-
-            If pf_check >= integrator.CalculationRatePressureFlow * interval Then
-                pf_check = 0.0
-                integrator.ShouldCalculatePressureFlow = True
-            Else
-                integrator.ShouldCalculatePressureFlow = False
-            End If
-
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
-
-            StoreVariableValues(integrator, i, integrator.CurrentTime)
-
-            Flowsheet.UpdateInterface()
-
-            Flowsheet.FormDynamics.UpdateControllerList()
-
-            Flowsheet.FormDynamics.UpdateIndicatorList()
-
-            Flowsheet.UpdateInterface()
-
-            Flowsheet.UpdateOpenEditForms()
-
-            integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
-
-            If integrator.ShouldCalculateControl Then
-                For Each controller As PIDController In Controllers
-                    If controller.Active Then controller.Calculate()
-                Next
-            End If
-
-            If Abort Then Exit For
-
-            If schedule.UsesEventList Then
-
-                ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
-
-            End If
-
-            If schedule.UsesCauseAndEffectMatrix Then
-
-                ProcessCEMatrix(schedule.CurrentCauseAndEffectMatrix)
-
-            End If
-
-            j += 1
-
-        Next
-
-        TrackBar1.Enabled = True
-
-        btnRun.Enabled = True
-
-        btnViewResults.Enabled = True
+        RunIntegrator(False)
 
     End Sub
 
@@ -242,6 +115,165 @@ Public Class FormDynamicsIntegratorControl
         Dim obj = Flowsheet.SimulationObjects(ceitem.SimulationObjectID)
         Dim value = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ceitem.SimulationObjectPropertyUnits, ceitem.SimulationObjectPropertyValue)
         obj.SetPropertyValue(ceitem.SimulationObjectProperty, value)
+
+    End Sub
+
+    Private Sub btnRealtime_Click(sender As Object, e As EventArgs) Handles btnRealtime.Click
+
+        RunIntegrator(True)
+
+    End Sub
+
+    Public Sub RunIntegrator(realtime As Boolean)
+
+        btnRun.Enabled = False
+
+        btnRealtime.Enabled = False
+
+        btnViewResults.Enabled = False
+
+        Abort = False
+
+        Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
+
+        Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
+
+        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
+
+        If Not realtime Then
+
+            If Not schedule.UseCurrentStateAsInitial Then
+
+                Dim initialstate = Flowsheet.StoredSolutions(schedule.InitialFlowsheetStateID)
+
+                Flowsheet.LoadProcessData(initialstate)
+
+                Flowsheet.UpdateInterface()
+
+            End If
+
+        End If
+
+        TrackBar1.Value = 0
+
+        TrackBar1.Minimum = 0
+
+        integrator.MonitoredVariableValues.Clear()
+
+        lblFinish.Text = integrator.Duration.ToString("c")
+
+        If realtime Then
+
+            TrackBar1.Maximum = Integer.MaxValue
+
+        Else
+
+            TrackBar1.Maximum = integrator.Duration.TotalSeconds
+
+        End If
+
+        Dim interval = integrator.IntegrationStep.TotalSeconds
+
+        TrackBar1.TickFrequency = interval
+
+        Dim final = TrackBar1.Maximum
+
+        For Each controller As PIDController In Controllers
+            controller.Reset()
+        Next
+
+        Dim j As Integer = 0
+
+        integrator.CurrentTime = New Date
+
+        Dim controllers_check As Double = 100000
+        Dim streams_check As Double = 100000
+        Dim pf_check As Double = 100000
+
+        TrackBar1.Enabled = False
+
+        For i = 0 To final Step interval
+
+            TrackBar1.Value = i
+
+            lblCurrent.Text = New TimeSpan(0, 0, i).ToString("c")
+
+            controllers_check += interval
+            streams_check += interval
+            pf_check += interval
+
+            If controllers_check >= integrator.CalculationRateControl * interval Then
+                controllers_check = 0.0
+                integrator.ShouldCalculateControl = True
+            Else
+                integrator.ShouldCalculateControl = False
+            End If
+
+            If streams_check >= integrator.CalculationRateEquilibrium * interval Then
+                streams_check = 0.0
+                integrator.ShouldCalculateEquilibrium = True
+            Else
+                integrator.ShouldCalculateEquilibrium = False
+            End If
+
+            If pf_check >= integrator.CalculationRatePressureFlow * interval Then
+                pf_check = 0.0
+                integrator.ShouldCalculatePressureFlow = True
+            Else
+                integrator.ShouldCalculatePressureFlow = False
+            End If
+
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
+
+            If Not realtime Then StoreVariableValues(integrator, i, integrator.CurrentTime)
+
+            Flowsheet.UpdateInterface()
+
+            Flowsheet.FormDynamics.UpdateControllerList()
+
+            Flowsheet.FormDynamics.UpdateIndicatorList()
+
+            Flowsheet.UpdateInterface()
+
+            Flowsheet.UpdateOpenEditForms()
+
+            integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
+
+            If integrator.ShouldCalculateControl Then
+                For Each controller As PIDController In Controllers
+                    If controller.Active Then controller.Calculate()
+                Next
+            End If
+
+            If Abort Then Exit For
+
+            If Not realtime Then
+
+                If schedule.UsesEventList Then
+
+                    ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
+
+                End If
+
+                If schedule.UsesCauseAndEffectMatrix Then
+
+                    ProcessCEMatrix(schedule.CurrentCauseAndEffectMatrix)
+
+                End If
+
+            End If
+
+            j += 1
+
+        Next
+
+        TrackBar1.Enabled = True
+
+        btnRun.Enabled = True
+
+        btnViewResults.Enabled = True
+
+        btnRealtime.Enabled = True
 
     End Sub
 
