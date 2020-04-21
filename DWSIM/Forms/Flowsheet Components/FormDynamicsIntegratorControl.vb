@@ -293,6 +293,8 @@ Public Class FormDynamicsIntegratorControl
 
         Dim sheet = Flowsheet.FormSpreadsheet.Spreadsheet.NewWorksheet()
 
+        sheet.RowCount = integrator.MonitoredVariableValues.Count + 1
+
         sheet.Cells(0, 0).Data = "Time (s)"
 
         Dim i, j As Integer
