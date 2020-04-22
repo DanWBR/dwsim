@@ -155,9 +155,9 @@ Public Class FormDynamicsIntegratorControl
 
         End If
 
-        TrackBar1.Value = 0
+        ProgressBar1.Value = 0
 
-        TrackBar1.Minimum = 0
+        ProgressBar1.Minimum = 0
 
         integrator.MonitoredVariableValues.Clear()
 
@@ -165,19 +165,21 @@ Public Class FormDynamicsIntegratorControl
 
         If realtime Then
 
-            TrackBar1.Maximum = Integer.MaxValue
+            ProgressBar1.Maximum = Integer.MaxValue
+
+            ProgressBar1.Style = ProgressBarStyle.Marquee
 
         Else
 
-            TrackBar1.Maximum = integrator.Duration.TotalSeconds
+            ProgressBar1.Maximum = integrator.Duration.TotalSeconds
+
+            ProgressBar1.Style = ProgressBarStyle.Continuous
 
         End If
 
         Dim interval = integrator.IntegrationStep.TotalSeconds
 
-        TrackBar1.TickFrequency = interval
-
-        Dim final = TrackBar1.Maximum
+        Dim final = ProgressBar1.Maximum
 
         For Each controller As PIDController In Controllers
             controller.Reset()
@@ -189,8 +191,6 @@ Public Class FormDynamicsIntegratorControl
         Dim streams_check As Double = 100000
         Dim pf_check As Double = 100000
 
-        TrackBar1.Enabled = False
-
         Task.Factory.StartNew(Sub()
 
                                   Dim j As Integer = 0
@@ -200,7 +200,7 @@ Public Class FormDynamicsIntegratorControl
                                       Dim i0 As Integer = i
 
                                       Flowsheet.RunCodeOnUIThread(Sub()
-                                                                      TrackBar1.Value = i0
+                                                                      ProgressBar1.Value = i0
                                                                       lblCurrent.Text = New TimeSpan(0, 0, i0).ToString("c")
                                                                   End Sub)
 
@@ -276,10 +276,11 @@ Public Class FormDynamicsIntegratorControl
 
                               End Sub).ContinueWith(Sub(t)
                                                         Flowsheet.RunCodeOnUIThread(Sub()
-                                                                                        TrackBar1.Enabled = True
                                                                                         btnRun.Enabled = True
                                                                                         btnViewResults.Enabled = True
                                                                                         btnRealtime.Enabled = True
+                                                                                        ProgressBar1.Value = 0
+                                                                                        ProgressBar1.Style = ProgressBarStyle.Continuous
                                                                                     End Sub)
                                                     End Sub)
 

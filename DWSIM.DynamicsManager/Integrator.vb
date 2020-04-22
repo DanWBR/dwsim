@@ -52,15 +52,15 @@ Public Class Integrator
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
-        Dim e1 = New XElement("MonitoredVariableValues")
-        For Each kvp As KeyValuePair(Of Integer, List(Of IDynamicsMonitoredVariable)) In MonitoredVariableValues
-            Dim e2 = New XElement("Step" + "_" + kvp.Key.ToString(Globalization.CultureInfo.InvariantCulture))
-            For Each item As ICustomXMLSerialization In kvp.Value
-                e2.Add(item.SaveData)
-            Next
-            e1.Add(e2)
-        Next
-        data.Add(e1)
+        'Dim e1 = New XElement("MonitoredVariableValues")
+        'For Each kvp As KeyValuePair(Of Integer, List(Of IDynamicsMonitoredVariable)) In MonitoredVariableValues
+        '    Dim e2 = New XElement("Step" + "_" + kvp.Key.ToString(Globalization.CultureInfo.InvariantCulture))
+        '    For Each item As ICustomXMLSerialization In kvp.Value
+        '        e2.Add(item.SaveData)
+        '    Next
+        '    e1.Add(e2)
+        'Next
+        'data.Add(e1)
         Dim e3 = New XElement("MonitoredVariables")
         For Each item As ICustomXMLSerialization In MonitoredVariables
             Dim e4 = New XElement("MonitoredVariable")
@@ -73,22 +73,22 @@ Public Class Integrator
 
     Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
         XMLSerializer.XMLSerializer.Deserialize(Me, data)
-        Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "MonitoredVariableValues").LastOrDefault
-        If Not elm Is Nothing Then
-            MonitoredVariableValues = New Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable))
-            For Each xel2 As XElement In elm.Elements
-                Try
-                    Dim l As New List(Of IDynamicsMonitoredVariable)
-                    For Each el In xel2.Elements
-                        Dim item As New MonitoredVariable
-                        item.LoadData(el.Elements.ToList)
-                        l.Add(item)
-                    Next
-                    MonitoredVariableValues.Add(Integer.Parse(xel2.Name.LocalName.Split("_")(1), Globalization.CultureInfo.InvariantCulture), l)
-                Catch ex As Exception
-                End Try
-            Next
-        End If
+        'Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "MonitoredVariableValues").LastOrDefault
+        'If Not elm Is Nothing Then
+        '    MonitoredVariableValues = New Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable))
+        '    For Each xel2 As XElement In elm.Elements
+        '        Try
+        '            Dim l As New List(Of IDynamicsMonitoredVariable)
+        '            For Each el In xel2.Elements
+        '                Dim item As New MonitoredVariable
+        '                item.LoadData(el.Elements.ToList)
+        '                l.Add(item)
+        '            Next
+        '            MonitoredVariableValues.Add(Integer.Parse(xel2.Name.LocalName.Split("_")(1), Globalization.CultureInfo.InvariantCulture), l)
+        '        Catch ex As Exception
+        '        End Try
+        '    Next
+        'End If
         Dim elm2 As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "MonitoredVariables").LastOrDefault
         If Not elm2 Is Nothing Then
             MonitoredVariables = New List(Of IDynamicsMonitoredVariable)

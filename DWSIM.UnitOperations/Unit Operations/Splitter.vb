@@ -117,6 +117,12 @@ Namespace UnitOperations
             MyBase.New()
         End Sub
 
+        Public Overrides Sub RunDynamicModel()
+
+            Calculate()
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -126,7 +132,7 @@ Namespace UnitOperations
             IObj?.SetCurrent()
 
             IObj?.Paragraphs.Add("The splitter is a mass balance unit operation - divides a 
-                                    material stream into two or three other streams.")
+                                    material stream into two or three other streams with different overall flow rates but with the same composition.")
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac8"))

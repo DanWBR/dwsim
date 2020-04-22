@@ -77,14 +77,14 @@
                 tl.RowStyles.Clear()
                 tl.RowStyles.Add(New RowStyle(SizeType.Percent, 1.0))
                 tl.ColumnStyles.Clear()
-                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.5))
-                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.4))
-                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.1))
+                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.45))
+                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.25))
+                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.3))
                 tl.Controls.Add(l, 0, 0)
                 tl.Controls.Add(tb, 1, 0)
                 tl.Controls.Add(l2, 2, 0)
 
-                Dim tl2 As New TableLayoutPanel With {.Width = PropertiesLayout.Width - 10, .Height = 48 * GlobalSettings.Settings.DpiScale}
+                Dim tl2 As New TableLayoutPanel With {.Width = PropertiesLayout.Width - 10, .Height = 36 * GlobalSettings.Settings.DpiScale}
                 tl2.RowStyles.Clear()
                 tl2.RowStyles.Add(New RowStyle(SizeType.Percent, 1.0))
                 tl2.ColumnStyles.Clear()
@@ -119,6 +119,16 @@
             SimObject.GetFlowsheet.UpdateInterface()
 
         End If
+
+    End Sub
+
+    Private Sub DynamicsPropertyEditor_ClientSizeChanged(sender As Object, e As EventArgs) Handles Me.ClientSizeChanged
+
+        For Each c As Control In PropertiesLayout.Controls
+            c.Width = PropertiesLayout.Width - 10
+        Next
+
+        Invalidate()
 
     End Sub
 

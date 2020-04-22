@@ -198,6 +198,10 @@ Namespace Streams
 
 #End Region
 
+        Public Overrides Sub RunDynamicModel()
+
+        End Sub
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New EnergyStream()
             obj.LoadData(Me.SaveData)
@@ -293,7 +297,6 @@ Namespace Streams
             Return list
 
         End Function
-
 
         Public Overrides Function GetPropertyDescription(p As String) As String
             Return "Amount of heat flow carried by this stream."

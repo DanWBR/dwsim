@@ -640,13 +640,13 @@ Namespace SpecialOps
 
             End If
 
-            If Output > OutputMax Then Output = OutputMax
-
-            If Output < OutputMin Then Output = OutputMin
-
             MVHistory.Add(Output)
 
             OutputAbs = (1.0 - Output) * BaseSP
+
+            If OutputAbs > OutputMax Then OutputAbs = OutputMax
+
+            If OutputAbs < OutputMin Then OutputAbs = OutputMin
 
             MVValue = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
 
