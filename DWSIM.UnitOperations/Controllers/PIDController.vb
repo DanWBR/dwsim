@@ -95,6 +95,8 @@ Namespace SpecialOps
 
         Public Property ManualOverride As Boolean = False
 
+        Public Property ReverseActing As Boolean = False
+
         Public Property OutputMin As Double = -1000.0
 
         Public Property OutputMax As Double = 1000.0
@@ -632,7 +634,7 @@ Namespace SpecialOps
 
             DTerm = 0.0
 
-            If LastError > 0 Then DTerm = delta_error / timestep
+            If Math.Abs(LastError) > 0.0 Then DTerm = delta_error / timestep
 
             If Not ManualOverride Then
 
@@ -642,7 +644,11 @@ Namespace SpecialOps
 
             MVHistory.Add(Output)
 
-            OutputAbs = (1.0 - Output) * BaseSP
+            If Not ReverseActing Then
+                OutputAbs = (1.0 - Output) * BaseSP
+            Else
+                OutputAbs = (1.0 + Output) * BaseSP
+            End If
 
             If OutputAbs > OutputMax Then OutputAbs = OutputMax
 

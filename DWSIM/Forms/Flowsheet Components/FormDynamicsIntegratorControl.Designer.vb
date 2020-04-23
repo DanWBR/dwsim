@@ -40,55 +40,61 @@ Partial Class FormDynamicsIntegratorControl
         '
         resources.ApplyResources(Me.lblStart, "lblStart")
         Me.lblStart.Name = "lblStart"
+        Me.ToolTip1.SetToolTip(Me.lblStart, resources.GetString("lblStart.ToolTip"))
         '
         'lblFinish
         '
         resources.ApplyResources(Me.lblFinish, "lblFinish")
         Me.lblFinish.Name = "lblFinish"
+        Me.ToolTip1.SetToolTip(Me.lblFinish, resources.GetString("lblFinish.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'cbScenario
         '
+        resources.ApplyResources(Me.cbScenario, "cbScenario")
         Me.cbScenario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbScenario.FormattingEnabled = True
-        resources.ApplyResources(Me.cbScenario, "cbScenario")
         Me.cbScenario.Name = "cbScenario"
+        Me.ToolTip1.SetToolTip(Me.cbScenario, resources.GetString("cbScenario.ToolTip"))
         '
         'lblCurrent
         '
         resources.ApplyResources(Me.lblCurrent, "lblCurrent")
         Me.lblCurrent.Name = "lblCurrent"
+        Me.ToolTip1.SetToolTip(Me.lblCurrent, resources.GetString("lblCurrent.ToolTip"))
         '
         'btnViewResults
         '
         resources.ApplyResources(Me.btnViewResults, "btnViewResults")
         Me.btnViewResults.Name = "btnViewResults"
+        Me.ToolTip1.SetToolTip(Me.btnViewResults, resources.GetString("btnViewResults.ToolTip"))
         Me.btnViewResults.UseVisualStyleBackColor = True
         '
         'btnRealtime
         '
-        Me.btnRealtime.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_realtime
         resources.ApplyResources(Me.btnRealtime, "btnRealtime")
+        Me.btnRealtime.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_realtime
         Me.btnRealtime.Name = "btnRealtime"
         Me.ToolTip1.SetToolTip(Me.btnRealtime, resources.GetString("btnRealtime.ToolTip"))
         Me.btnRealtime.UseVisualStyleBackColor = True
         '
         'btnStop
         '
-        Me.btnStop.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_stop
         resources.ApplyResources(Me.btnStop, "btnStop")
+        Me.btnStop.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_stop
         Me.btnStop.Name = "btnStop"
         Me.ToolTip1.SetToolTip(Me.btnStop, resources.GetString("btnStop.ToolTip"))
         Me.btnStop.UseVisualStyleBackColor = True
         '
         'btnRun
         '
-        Me.btnRun.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_play
         resources.ApplyResources(Me.btnRun, "btnRun")
+        Me.btnRun.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_play
         Me.btnRun.Name = "btnRun"
         Me.ToolTip1.SetToolTip(Me.btnRun, resources.GetString("btnRun.ToolTip"))
         Me.btnRun.UseVisualStyleBackColor = True
@@ -98,6 +104,7 @@ Partial Class FormDynamicsIntegratorControl
         resources.ApplyResources(Me.ProgressBar1, "ProgressBar1")
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.ToolTip1.SetToolTip(Me.ProgressBar1, resources.GetString("ProgressBar1.ToolTip"))
         '
         'FormDynamicsIntegratorControl
         '
@@ -124,6 +131,7 @@ Partial Class FormDynamicsIntegratorControl
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

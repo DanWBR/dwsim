@@ -32,6 +32,8 @@ Public Class EditingForm_PIDController
 
             chkControllerActive.Checked = SimObject.Active
 
+            chkReverse.Checked = SimObject.ReverseActing
+
             Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
 
             lblTag.Text = .GraphicObject.Tag
@@ -407,4 +409,9 @@ Public Class EditingForm_PIDController
     Private Sub chkControllerActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkControllerActive.CheckedChanged
         SimObject.Active = chkControllerActive.Checked
     End Sub
+
+    Private Sub chkReverse_CheckedChanged(sender As Object, e As EventArgs) Handles chkReverse.CheckedChanged
+        SimObject.ReverseActing = chkReverse.Checked
+    End Sub
+
 End Class

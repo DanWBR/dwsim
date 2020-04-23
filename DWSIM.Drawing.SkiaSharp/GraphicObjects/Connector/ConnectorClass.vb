@@ -95,7 +95,11 @@ Namespace GraphicObjects
             ConnPen.Color = GraphicsSurface.ForegroundColor
 
             If Conn.AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And Conn.AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
-                ConnPen.Color = SKColors.SteelBlue
+                If s.DarkMode Then
+                    ConnPen.Color = SKColors.WhiteSmoke
+                Else
+                    ConnPen.Color = SKColors.SteelBlue
+                End If
             Else
                 ConnPen.Color = SKColors.Salmon
             End If
@@ -749,7 +753,11 @@ Namespace GraphicObjects
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .PathEffect = SKPathEffect.CreateCorner(6.0F)
                 If AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
-                    .Color = SKColors.SteelBlue
+                    If s.DarkMode Then
+                        .Color = SKColors.WhiteSmoke
+                    Else
+                        .Color = SKColors.SteelBlue
+                    End If
                 Else
                     .Color = SKColors.Salmon
                 End If

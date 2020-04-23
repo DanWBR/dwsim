@@ -6,7 +6,7 @@ Public Class GraphicObjectControlPanelModeEditors
     Public Shared Sub SetInputDelegate(gobj As IGraphicObject, myObj As ISimulationObject)
 
         gobj.ControlPanelModeEditorDisplayDelegate = Sub()
-                                                         Dim f As New FormTextBox
+                                                         Dim f As New FormTextBoxInput
                                                          Dim SelectedObject = myObj?.GetFlowsheet.SimulationObjects.Values.Where(Function(x2) x2.Name = myObj.SelectedObjectID).FirstOrDefault
                                                          If Not SelectedObject Is Nothing Then
                                                              Dim currentvalue = SystemsOfUnits.Converter.ConvertFromSI(myObj.SelectedPropertyUnits, SelectedObject.GetPropertyValue(myObj.SelectedProperty))

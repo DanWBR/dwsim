@@ -284,7 +284,7 @@ Namespace UnitOperations
 
             Else
 
-                Pressure = ims.GetPressure
+                Pressure = 0.0
 
             End If
 
@@ -306,7 +306,7 @@ Namespace UnitOperations
 
                     ims.SetPressure(Pressure)
 
-                    oms.AssignFromPhase(PhaseLabel.Mixture, AccumulationStream)
+                    oms.AssignFromPhase(PhaseLabel.Mixture, AccumulationStream, False)
                     oms.SetTemperature(AccumulationStream.GetTemperature)
                     oms.SetMassEnthalpy(AccumulationStream.GetMassEnthalpy)
                     oms.SetPressure(Pressure - DeltaP)

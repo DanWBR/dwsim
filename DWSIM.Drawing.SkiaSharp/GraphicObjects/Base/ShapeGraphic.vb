@@ -17,7 +17,11 @@ Namespace GraphicObjects
                 If Me.Active Then
                     Select Case Status
                         Case Status.Calculated
-                            LineColor = SKColors.SteelBlue
+                            If s.DarkMode Then
+                                LineColor = SKColors.WhiteSmoke
+                            Else
+                                LineColor = SKColors.SteelBlue
+                            End If
                         Case Status.Calculating
                             LineColor = SKColors.YellowGreen
                         Case Status.ErrorCalculating
@@ -44,10 +48,10 @@ Namespace GraphicObjects
         Public Overridable Property LineWidth As Integer = 1
         Public Overridable Property GradientMode As Boolean = True
         Public Overridable Property LineColor As SKColor = SKColors.Black
-        Public Overridable Property LineColorDark As SKColor = SKColors.SteelBlue
+        Public Overridable Property LineColorDark As SKColor = SKColors.WhiteSmoke
         Public Overridable Property Fill As Boolean = False
         Public Overridable Property FillColor As SKColor = SKColors.LightGray
-        Public Overridable Property FillColorDark As SKColor = SKColors.Black
+        Public Overridable Property FillColorDark As SKColor = SKColors.White
         Public Overridable Property GradientColor1 As SKColor = SKColors.LightGray
         Public Overridable Property GradientColor2 As SKColor = SKColors.White
         Public Overridable Property FontSize As Double = 10.0#

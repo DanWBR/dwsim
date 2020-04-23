@@ -141,9 +141,13 @@ Namespace GraphicObjects.Shapes
 
             If Owner?.GetFlowsheet.DynamicMode Then
 
-                'draw dyn spec
+                If ObjectType = ObjectType.MaterialStream And (Not InputConnectors(0).IsAttached Or Not OutputConnectors(0).IsAttached) Then
 
-                DrawDynSpec(canvas, Owner.DynamicsSpec)
+                    'draw dyn spec
+
+                    DrawDynSpec(canvas, Owner.DynamicsSpec)
+
+                End If
 
             End If
 

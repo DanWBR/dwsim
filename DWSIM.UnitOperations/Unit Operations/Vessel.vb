@@ -295,9 +295,9 @@ Namespace UnitOperations
 
                 oms2.SetPressure(Pressure + liqdens * 9.8 * RelativeLevel * Height)
 
-                oms1.AssignFromPhase(PhaseLabel.Vapor, AccumulationStream)
+                oms1.AssignFromPhase(PhaseLabel.Vapor, AccumulationStream, False)
 
-                oms2.AssignFromPhase(PhaseLabel.Liquid1, AccumulationStream)
+                oms2.AssignFromPhase(PhaseLabel.Liquid1, AccumulationStream, False)
 
             End If
 

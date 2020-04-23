@@ -6,6 +6,8 @@
 
         Text = PID.GraphicObject.Tag
 
+        chkActive.Checked = PID.Active
+
         chkAuto.Checked = Not PID.ManualOverride
 
         tbSP.Text = PID.SPValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
@@ -46,6 +48,8 @@
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkAuto.CheckedChanged
 
+        If PID Is Nothing Then Exit Sub
+
         PID.ManualOverride = Not chkAuto.Checked
 
         tbMV.ReadOnly = chkAuto.Checked
@@ -55,9 +59,39 @@
             chkAuto.BackColor = Color.Green
             chkAuto.Text = "AUTO"
         Else
-            chkAuto.ForeColor = Color.Black
-            chkAuto.BackColor = Color.Red
+            chkAuto.ForeColor = Color.White
+            chkAuto.BackColor = Color.Blue
             chkAuto.Text = "MANUAL"
+        End If
+
+    End Sub
+
+    Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
+
+        If PID Is Nothing Then Exit Sub
+
+        PID.Active = chkActive.Checked
+
+        If chkActive.Checked Then
+
+            chkActive.ForeColor = Color.White
+            chkActive.BackColor = Color.Green
+            chkActive.Text = "ON"
+            chkAuto.Enabled = True
+            tbMV.Enabled = True
+            tbPV.Enabled = True
+            tbSP.Enabled = True
+
+        Else
+
+            chkActive.ForeColor = Color.White
+            chkActive.BackColor = Color.Red
+            chkActive.Text = "OFF"
+            chkAuto.Enabled = False
+            tbMV.Enabled = False
+            tbPV.Enabled = False
+            tbSP.Enabled = False
+
         End If
 
     End Sub

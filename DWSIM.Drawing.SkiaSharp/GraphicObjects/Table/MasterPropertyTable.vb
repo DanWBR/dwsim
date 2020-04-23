@@ -130,10 +130,11 @@ Namespace GraphicObjects.Tables
 
         Public Property TextColor As SKColor = SKColors.Black
 
-        Public Property TextColorDark As SKColor = SKColors.SteelBlue
+        Public Property TextColorDark As SKColor = SKColors.WhiteSmoke
 
         Public Property BorderColor As SKColor = SKColors.Black
-        Public Property BorderColorDark As SKColor = SKColors.SteelBlue
+
+        Public Property BorderColorDark As SKColor = SKColors.WhiteSmoke
 
         Public Property SortBy() As String
             Get

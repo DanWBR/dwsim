@@ -29,11 +29,12 @@ Partial Class FormPIDCPEditor
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tbPV = New System.Windows.Forms.TextBox()
         Me.chkAuto = New System.Windows.Forms.CheckBox()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'tbSP
         '
-        Me.tbSP.Location = New System.Drawing.Point(52, 44)
+        Me.tbSP.Location = New System.Drawing.Point(52, 71)
         Me.tbSP.Name = "tbSP"
         Me.tbSP.Size = New System.Drawing.Size(100, 20)
         Me.tbSP.TabIndex = 0
@@ -41,7 +42,7 @@ Partial Class FormPIDCPEditor
         '
         'tbMV
         '
-        Me.tbMV.Location = New System.Drawing.Point(52, 96)
+        Me.tbMV.Location = New System.Drawing.Point(52, 123)
         Me.tbMV.Name = "tbMV"
         Me.tbMV.ReadOnly = True
         Me.tbMV.Size = New System.Drawing.Size(100, 20)
@@ -51,7 +52,7 @@ Partial Class FormPIDCPEditor
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 48)
+        Me.Label1.Location = New System.Drawing.Point(12, 75)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(21, 13)
         Me.Label1.TabIndex = 2
@@ -60,7 +61,7 @@ Partial Class FormPIDCPEditor
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 100)
+        Me.Label2.Location = New System.Drawing.Point(12, 127)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(23, 13)
         Me.Label2.TabIndex = 3
@@ -69,7 +70,7 @@ Partial Class FormPIDCPEditor
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 74)
+        Me.Label3.Location = New System.Drawing.Point(12, 101)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(21, 13)
         Me.Label3.TabIndex = 5
@@ -77,7 +78,7 @@ Partial Class FormPIDCPEditor
         '
         'tbPV
         '
-        Me.tbPV.Location = New System.Drawing.Point(52, 70)
+        Me.tbPV.Location = New System.Drawing.Point(52, 97)
         Me.tbPV.Name = "tbPV"
         Me.tbPV.ReadOnly = True
         Me.tbPV.Size = New System.Drawing.Size(100, 20)
@@ -87,19 +88,39 @@ Partial Class FormPIDCPEditor
         'chkAuto
         '
         Me.chkAuto.Appearance = System.Windows.Forms.Appearance.Button
-        Me.chkAuto.Location = New System.Drawing.Point(12, 12)
+        Me.chkAuto.BackColor = System.Drawing.Color.Green
+        Me.chkAuto.Checked = True
+        Me.chkAuto.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAuto.ForeColor = System.Drawing.Color.White
+        Me.chkAuto.Location = New System.Drawing.Point(12, 39)
         Me.chkAuto.Name = "chkAuto"
         Me.chkAuto.Size = New System.Drawing.Size(140, 24)
         Me.chkAuto.TabIndex = 6
         Me.chkAuto.Text = "AUTO"
         Me.chkAuto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.chkAuto.UseVisualStyleBackColor = True
+        Me.chkAuto.UseVisualStyleBackColor = False
+        '
+        'chkActive
+        '
+        Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
+        Me.chkActive.BackColor = System.Drawing.Color.Green
+        Me.chkActive.Checked = True
+        Me.chkActive.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkActive.ForeColor = System.Drawing.Color.White
+        Me.chkActive.Location = New System.Drawing.Point(12, 9)
+        Me.chkActive.Name = "chkActive"
+        Me.chkActive.Size = New System.Drawing.Size(140, 24)
+        Me.chkActive.TabIndex = 7
+        Me.chkActive.Text = "ON"
+        Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chkActive.UseVisualStyleBackColor = False
         '
         'FormPIDCPEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(169, 129)
+        Me.ClientSize = New System.Drawing.Size(169, 154)
+        Me.Controls.Add(Me.chkActive)
         Me.Controls.Add(Me.chkAuto)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.tbPV)
@@ -124,4 +145,5 @@ Partial Class FormPIDCPEditor
     Friend WithEvents Label3 As Label
     Friend WithEvents tbPV As TextBox
     Friend WithEvents chkAuto As CheckBox
+    Friend WithEvents chkActive As CheckBox
 End Class

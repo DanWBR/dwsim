@@ -3134,8 +3134,8 @@ Public Class FlowsheetSurface_SkiaSharp
             btnLeft.Height = 24
             FlowsheetSurface.ControlPanelMode = True
             GlobalSettings.Settings.DarkMode = True
-            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.Black
-            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.White
+            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray
+            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke
             SplitContainer1.Panel2Collapsed = True
         Else
             btnDown.Visible = False

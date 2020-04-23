@@ -75,9 +75,9 @@ Namespace GraphicObjects.Tables
 
         Public Property BorderColor As SKColor = SKColors.Black
 
-        Public Property TextColorDark As SKColor = SKColors.SteelBlue
+        Public Property TextColorDark As SKColor = SKColors.WhiteSmoke
 
-        Public Property BorderColorDark As SKColor = SKColors.SteelBlue
+        Public Property BorderColorDark As SKColor = SKColors.WhiteSmoke
 
 #End Region
 
