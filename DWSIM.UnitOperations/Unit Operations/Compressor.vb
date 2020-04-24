@@ -174,6 +174,22 @@ Namespace UnitOperations
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Compressor)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
+        Public Overrides Sub RunDynamicModel()
+
+            Select Case CalcMode
+
+                Case CalculationMode.OutletPressure, CalculationMode.Curves, CalculationMode.Head, CalculationMode.Delta_P
+
+                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
+
+                Case Else
+
+                    Calculate()
+
+            End Select
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()

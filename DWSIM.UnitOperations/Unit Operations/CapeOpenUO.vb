@@ -952,6 +952,12 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Sub RunDynamicModel()
+
+            Calculate()
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Not Calculator.IsRunningOnMono Then

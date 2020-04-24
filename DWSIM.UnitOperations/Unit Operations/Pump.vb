@@ -435,6 +435,22 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Sub RunDynamicModel()
+
+            Select Case CalcMode
+
+                Case CalculationMode.Curves, CalculationMode.Delta_P, CalculationMode.OutletPressure
+
+                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
+
+                Case Else
+
+                    Calculate()
+
+            End Select
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()

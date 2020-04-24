@@ -178,6 +178,24 @@ Namespace UnitOperations
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Expander)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
+        Public Overrides Sub RunDynamicModel()
+
+            Select Case CalcMode
+
+                Case CalculationMode.Curves, CalculationMode.Head, CalculationMode.Delta_P, CalculationMode.PowerGenerated
+
+                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
+
+                Case CalculationMode.OutletPressure
+
+                    POut = GetOutletMaterialStream(0).GetPressure()
+
+                    Calculate()
+
+            End Select
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -317,7 +335,6 @@ Namespace UnitOperations
                     IObj?.Paragraphs.Add("<mi>H_{2,id}</mi>: " & String.Format("{0} kJ/kg", tmp.CalculatedEnthalpy))
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
-
 
                     If ProcessPath = ProcessPathType.Adiabatic Then
                         Me.DeltaQ = -Wi * (H2s - Hi) * (Me.AdiabaticEfficiency / 100)

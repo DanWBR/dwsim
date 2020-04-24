@@ -119,7 +119,17 @@ Namespace UnitOperations
 
         Public Overrides Sub RunDynamicModel()
 
-            Calculate()
+            Select Case OperationMode
+
+                Case OpMode.StreamMassFlowSpec, OpMode.StreamMoleFlowSpec
+
+                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
+
+                Case Else
+
+                    Calculate()
+
+            End Select
 
         End Sub
 
