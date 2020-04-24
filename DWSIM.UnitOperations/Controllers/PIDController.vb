@@ -73,6 +73,8 @@ Namespace SpecialOps
 
         Public Property LastError As Double = 0.0
 
+        Public Property CumulativeError As Double = 0.0
+
         Public Property PTerm As Double = 0.0
 
         Public Property ITerm As Double = 0.0
@@ -438,6 +440,8 @@ Namespace SpecialOps
                         Return LastError
                     Case "CurrentError"
                         Return CurrentError
+                    Case "CumulativeError"
+                        Return CumulativeError
                     Case "SetPoint"
                         Return 1.0
                     Case "SetPointAbs"
@@ -471,6 +475,7 @@ Namespace SpecialOps
             proplist.Add("ManualOverride")
             proplist.Add("LastError")
             proplist.Add("CurrentError")
+            proplist.Add("CumulativeError")
             proplist.Add("SetPoint")
             proplist.Add("SetPointAbs")
             proplist.Add("Kp")
@@ -586,6 +591,8 @@ Namespace SpecialOps
 
             Output = 0.0
 
+            CumulativeError = 0.0
+
             PVHistory.Clear()
             MVHistory.Clear()
             SPHistory.Clear()
@@ -625,6 +632,8 @@ Namespace SpecialOps
             LastError = CurrentError
 
             CurrentError = (AdjustValue - CurrentValue) / BaseSP
+
+            CumulativeError += Math.Abs(CurrentError)
 
             Dim delta_error = CurrentError - LastError
 
