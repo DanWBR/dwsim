@@ -3190,6 +3190,14 @@ Public Class FormFlowsheet
         FormIntegratorControls.Show(GetDockPanel)
     End Sub
 
+    Private Sub FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Click
+
+        Dim ft As New FormPIDTuning
+
+        ft.Show(dckPanel)
+
+    End Sub
+
     Private Sub ModoDinamicoAtivoToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles ModoDinamicoAtivoToolStripMenuItem.CheckedChanged
         Me.DynamicMode = ModoDinamicoAtivoToolStripMenuItem.Checked
         Me.FormDynamics.chkDynamics.Checked = Me.DynamicMode

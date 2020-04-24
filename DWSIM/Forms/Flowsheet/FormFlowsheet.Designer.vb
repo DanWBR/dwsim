@@ -63,6 +63,7 @@ Partial Class FormFlowsheet
         Me.ModoDinamicoAtivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciadorDoModoDinamicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlesDoIntegradorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UtilitiesTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMIAddUtility = New System.Windows.Forms.ToolStripMenuItem()
         Me.OtimizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -426,7 +427,7 @@ Partial Class FormFlowsheet
         'ModoDinâmicoToolStripMenuItem
         '
         resources.ApplyResources(Me.ModoDinâmicoToolStripMenuItem, "ModoDinâmicoToolStripMenuItem")
-        Me.ModoDinâmicoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ModoDinamicoAtivoToolStripMenuItem, Me.GerenciadorDoModoDinamicoToolStripMenuItem, Me.ControlesDoIntegradorToolStripMenuItem})
+        Me.ModoDinâmicoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ModoDinamicoAtivoToolStripMenuItem, Me.GerenciadorDoModoDinamicoToolStripMenuItem, Me.ControlesDoIntegradorToolStripMenuItem, Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem})
         Me.ModoDinâmicoToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ModoDinâmicoToolStripMenuItem.MergeIndex = 4
         Me.ModoDinâmicoToolStripMenuItem.Name = "ModoDinâmicoToolStripMenuItem"
@@ -446,6 +447,12 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me.ControlesDoIntegradorToolStripMenuItem, "ControlesDoIntegradorToolStripMenuItem")
         Me.ControlesDoIntegradorToolStripMenuItem.Name = "ControlesDoIntegradorToolStripMenuItem"
+        '
+        'FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem
+        '
+        resources.ApplyResources(Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem, "FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem")
+        Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_slider
+        Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Name = "FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem"
         '
         'UtilitiesTSMI
         '
@@ -975,4 +982,5 @@ Partial Class FormFlowsheet
     Friend WithEvents tsbDynManager As ToolStripButton
     Friend WithEvents tsbDynIntegrator As ToolStripButton
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -649,6 +649,12 @@
     <Compile Include="Forms\FormPIDCPEditor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormPIDTuning.Designer.vb">
+      <DependentUpon>FormPIDTuning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPIDTuning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormSearchingChemeo.Designer.vb">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </Compile>
@@ -1370,6 +1376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPIDCPEditor.resx">
       <DependentUpon>FormPIDCPEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPIDTuning.en.resx">
+      <DependentUpon>FormPIDTuning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPIDTuning.resx">
+      <DependentUpon>FormPIDTuning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingChemeo.de.resx">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
@@ -3038,6 +3050,7 @@
     <None Include="Resources\icons8-cancel.png" />
     <None Include="Resources\icons8-ok.png" />
     <None Include="Resources\icons8-realtime.png" />
+    <None Include="Resources\icons8-slider.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
