@@ -338,7 +338,7 @@ Namespace Streams
                 Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
 
                 If integrator.ShouldCalculateEquilibrium Then
-                    If GetPressure() > 0.0 Then
+                    If GetPressure() > 0.0 And GetTemperature() > 0 And GetMassFlow() > 0 Then
                         Calculate()
                     Else
                         Clear()

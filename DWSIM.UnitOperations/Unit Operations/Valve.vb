@@ -199,7 +199,7 @@ Namespace UnitOperations
                         ElseIf CalcMode = CalculationMode.Kv_Gas Then
                             ims.PropertyPackage.CurrentMaterialStream = ims
                             rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                            Wi = 519 * Kvc / (Ti / (rhog20 * (P1 - P2) / 100000.0 * P2 / 100000.0)) ^ 0.5 / 3600
+                            Wi = 519 * Kvc / (Ti / (rhog20 * (P1 - P2) / 100000.0 * P1 / 100000.0)) ^ 0.5 / 3600
                         ElseIf CalcMode = CalculationMode.Kv_Steam Then
                             v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
                             Wi = Kvc * 31.62 * (v2 / ((P1 - P2) / 100000.0)) ^ 0.5 / 3600
@@ -226,7 +226,7 @@ Namespace UnitOperations
                         ElseIf CalcMode = CalculationMode.Kv_Gas Then
                             ims.PropertyPackage.CurrentMaterialStream = ims
                             rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                            P1 = P2 / 100000.0 + Ti / rhog20 / P2 * (519 * Kvc / (Wi * 3600)) ^ -2
+                            P1 = P2 / 100000.0 + Ti / rhog20 / (P2 / 100000) * (519 * Kvc / (Wi * 3600)) ^ -2
                         ElseIf CalcMode = CalculationMode.Kv_Steam Then
                             v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
                             P1 = P2 / 100000.0 + v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2

@@ -181,7 +181,7 @@ Namespace UnitOperations
 
             If Reset Then
                 AccumulationStream = Nothing
-                SetDynamicProperty("Reset Content", False)
+                SetDynamicProperty("Reset Content", 0)
             End If
 
             If AccumulationStream Is Nothing Then
@@ -196,6 +196,14 @@ Namespace UnitOperations
                     AccumulationStream = AccumulationStream.Subtract(oms, timestep)
 
                 End If
+
+                Dim density = AccumulationStream.Phases(0).Properties.density.GetValueOrDefault
+
+                AccumulationStream.SetMassFlow(density * Vol)
+                AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
+                AccumulationStream.PropertyPackage = PropertyPackage
+                AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+                AccumulationStream.Calculate()
 
             Else
 
@@ -221,24 +229,30 @@ Namespace UnitOperations
 
                     Qval = GetInletEnergyStream(1).EnergyFlow
 
-                    If Wa > 0 Then AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
-
                 Case CalculationMode.HeatAdded
 
                     Qval = DeltaQ.GetValueOrDefault
 
-                    If Wa > 0 Then AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
-
             End Select
 
-            AccumulationStream.SpecType = StreamSpec.Pressure_and_Enthalpy
+            If Qval <> 0.0 Then
 
-            AccumulationStream.PropertyPackage = PropertyPackage
-            AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+                If Wa > 0 Then
 
-            If integrator.ShouldCalculateEquilibrium Then
+                    AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
 
-                AccumulationStream.Calculate(True, True)
+                    AccumulationStream.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+                    AccumulationStream.PropertyPackage = PropertyPackage
+                    AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+
+                    If integrator.ShouldCalculateEquilibrium Then
+
+                        AccumulationStream.Calculate(True, True)
+
+                    End If
+
+                End If
 
             End If
 
@@ -278,13 +292,13 @@ Namespace UnitOperations
 
                 Else
 
-                    Pressure = 0.0
+                    Pressure = 0.01
 
                 End If
 
             Else
 
-                Pressure = 0.0
+                Pressure = 0.01
 
             End If
 

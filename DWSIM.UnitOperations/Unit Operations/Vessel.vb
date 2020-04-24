@@ -49,8 +49,6 @@ Namespace UnitOperations
         Protected m_T As Double = 298.15#
         Protected m_P As Double = 101325.0#
 
-        Private prevM, currentM As Double
-
         Public Enum PressureBehavior
             Average
             Maximum
@@ -158,6 +156,8 @@ Namespace UnitOperations
 
         End Sub
 
+        Private prevM, currentM As Double
+
         Public Overrides Sub RunDynamicModel()
 
             Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
@@ -191,7 +191,7 @@ Namespace UnitOperations
 
             If Reset Then
                 AccumulationStream = Nothing
-                SetDynamicProperty("Reset Content", False)
+                SetDynamicProperty("Reset Content", 0)
             End If
 
             If s2 = Dynamics.DynamicsSpecType.Pressure And s3 = Dynamics.DynamicsSpecType.Pressure Then
@@ -208,6 +208,14 @@ Namespace UnitOperations
                         AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
 
                     End If
+
+                    Dim density = AccumulationStream.Phases(0).Properties.density.GetValueOrDefault
+
+                    AccumulationStream.SetMassFlow(density * Vol)
+                    AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
+                    AccumulationStream.PropertyPackage = PropertyPackage
+                    AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+                    AccumulationStream.Calculate()
 
                 Else
 
