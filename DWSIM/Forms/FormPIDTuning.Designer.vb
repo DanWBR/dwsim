@@ -23,10 +23,10 @@ Partial Class FormPIDTuning
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPIDTuning))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lbControllers = New System.Windows.Forms.CheckedListBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbSolver = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.lbControllers = New System.Windows.Forms.ListBox()
         Me.cbScenario = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -40,14 +40,21 @@ Partial Class FormPIDTuning
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.lbControllers)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.cbSolver)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.lbControllers)
         Me.GroupBox1.Controls.Add(Me.cbScenario)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'lbControllers
+        '
+        resources.ApplyResources(Me.lbControllers, "lbControllers")
+        Me.lbControllers.CheckOnClick = True
+        Me.lbControllers.FormattingEnabled = True
+        Me.lbControllers.Name = "lbControllers"
         '
         'Label3
         '
@@ -67,17 +74,11 @@ Partial Class FormPIDTuning
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         '
-        'lbControllers
-        '
-        resources.ApplyResources(Me.lbControllers, "lbControllers")
-        Me.lbControllers.FormattingEnabled = True
-        Me.lbControllers.Name = "lbControllers"
-        '
         'cbScenario
         '
+        resources.ApplyResources(Me.cbScenario, "cbScenario")
         Me.cbScenario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbScenario.FormattingEnabled = True
-        resources.ApplyResources(Me.cbScenario, "cbScenario")
         Me.cbScenario.Name = "cbScenario"
         '
         'Label1
@@ -136,7 +137,7 @@ Partial Class FormPIDTuning
     Friend WithEvents Label3 As Label
     Friend WithEvents cbSolver As ComboBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents lbControllers As ListBox
     Friend WithEvents cbScenario As ComboBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents lbControllers As CheckedListBox
 End Class

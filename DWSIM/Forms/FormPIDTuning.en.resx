@@ -118,8 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbControllers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 62</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 59</value>
+    <value>11, 65</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -127,27 +130,11 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Controllers</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cbSolver.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="cbSolver.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 376</value>
   </data>
-  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 381</value>
-  </data>
-  <data name="lbControllers.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="lbControllers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 56</value>
-  </data>
-  <data name="lbControllers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 303</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -161,14 +148,14 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 422</value>
+  </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>405, 441</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Results</value>
-  </data>
-  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 422</value>
   </data>
   <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 430</value>
@@ -323,9 +310,6 @@
         wAD8/////8/AAPz/////z8AA/AAAAAAPwAD+AAAAAB/AAP///////8AA////////wAD////////AAP//
         /////8AA////////wAD////////AAA==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
     <value>PID Tuning</value>
