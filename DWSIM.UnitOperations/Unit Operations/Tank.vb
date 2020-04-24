@@ -239,11 +239,10 @@ Namespace UnitOperations
 
             Dim Ti, Pi, Hi, Wi, rho_li, qli, qvi, ei, ein, P2, Q As Double
 
-            Dim ims, oms As MaterialStream, es As Streams.EnergyStream
+            Dim ims, oms As MaterialStream
 
             ims = GetInletMaterialStream(0)
             oms = GetOutletMaterialStream(0)
-            es = GetEnergyStream()
 
             qvi = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault.ToString
 

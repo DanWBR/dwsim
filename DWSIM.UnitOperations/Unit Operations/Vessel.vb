@@ -228,6 +228,36 @@ Namespace UnitOperations
 
                 AccumulationStream.SetFlowsheet(FlowSheet)
 
+                ' Calculate Temperature
+
+                Dim Qval, Ha, Wa As Double
+
+                Ha = AccumulationStream.GetMassEnthalpy
+                Wa = AccumulationStream.GetMassFlow
+
+                Qval = GetInletEnergyStream(6)?.EnergyFlow
+
+                If Qval <> 0.0 Then
+
+                    If Wa > 0 Then
+
+                        AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
+
+                        AccumulationStream.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+                        AccumulationStream.PropertyPackage = PropertyPackage
+                        AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+
+                        If integrator.ShouldCalculateEquilibrium Then
+
+                            AccumulationStream.Calculate(True, True)
+
+                        End If
+
+                    End If
+
+                End If
+
                 'calculate pressure
 
                 Dim M = AccumulationStream.GetMolarFlow()
@@ -281,7 +311,6 @@ Namespace UnitOperations
                 End If
 
                 AccumulationStream.SetPressure(Pressure)
-                AccumulationStream.SetTemperature(ims.GetTemperature)
                 AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
 
                 AccumulationStream.PropertyPackage = PropertyPackage
