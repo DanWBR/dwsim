@@ -111,16 +111,16 @@ namespace DWSIM.Drawing.SkiaSharp.Renderers
             switch (GlobalSettings.Settings.RunningPlatform())
             {
                 case GlobalSettings.Settings.Platform.Windows:
-                    this.paint.Typeface = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold);
+                    this.paint.Typeface = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Normal);
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
-                    this.paint.Typeface = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold);
+                    this.paint.Typeface = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Normal);
                     break;
                 case GlobalSettings.Settings.Platform.Mac:
-                    this.paint.Typeface = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold);
+                    this.paint.Typeface = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Normal);
                     break;
             }
-            this.paint.Color = GlobalSettings.Settings.DarkMode ? SKColors.White : SKColors.Black;
+            this.paint.Color = GraphicsSurface.ForegroundColor;
         }
 
         /// <summary>

@@ -113,7 +113,6 @@ Namespace UnitOperations
         Public Overrides Sub CreateDynamicProperties()
 
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Volume", "Tank Volume", 1, UnitOfMeasure.volume)
             AddDynamicProperty("Height", "Available Liquid Height", 2, UnitOfMeasure.distance)
             AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank's content with information from the inlet stream, if the vessel content is null.", 1, UnitOfMeasure.none)
             AddDynamicProperty("Reset Content", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
@@ -137,7 +136,6 @@ Namespace UnitOperations
             s1 = ims.DynamicsSpec
             s2 = oms1.DynamicsSpec
 
-            Dim Vol As Double = GetDynamicProperty("Volume")
             Dim Height As Double = GetDynamicProperty("Height")
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Stream")
 
@@ -162,14 +160,6 @@ Namespace UnitOperations
 
                     End If
 
-                    Dim density = AccumulationStream.Phases(0).Properties.density.GetValueOrDefault
-
-                    AccumulationStream.SetMassFlow(density * Vol)
-                    AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
-                    AccumulationStream.PropertyPackage = PropertyPackage
-                    AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
-                    AccumulationStream.Calculate()
-
                 Else
 
                     AccumulationStream.SetFlowsheet(FlowSheet)
@@ -183,31 +173,17 @@ Namespace UnitOperations
 
                 ' atmospheric tank
 
+                AccumulationStream.SetTemperature(ims.GetTemperature)
                 AccumulationStream.SetPressure(101325)
 
-                ' Calculate Temperature
+                AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
 
-                Dim Qval, Ha, Wa As Double
+                AccumulationStream.PropertyPackage = PropertyPackage
+                AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
 
-                Ha = AccumulationStream.GetMassEnthalpy
-                Wa = AccumulationStream.GetMassFlow
+                If integrator.ShouldCalculateEquilibrium Then
 
-                Qval = GetEnergyStream().EnergyFlow
-
-                If Qval <> 0.0 Then
-
-                    If Wa > 0 Then AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
-
-                    AccumulationStream.SpecType = StreamSpec.Pressure_and_Enthalpy
-
-                    AccumulationStream.PropertyPackage = PropertyPackage
-                    AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
-
-                    If integrator.ShouldCalculateEquilibrium Then
-
-                        AccumulationStream.Calculate(True, True)
-
-                    End If
+                    AccumulationStream.Calculate(True, True)
 
                 End If
 
@@ -215,7 +191,7 @@ Namespace UnitOperations
 
                 LiquidVolume = AccumulationStream.Phases(3).Properties.volumetric_flow.GetValueOrDefault
 
-                RelativeLevel = LiquidVolume / Vol
+                RelativeLevel = LiquidVolume / Volume
 
                 SetDynamicProperty("Liquid Level", RelativeLevel * Height)
 

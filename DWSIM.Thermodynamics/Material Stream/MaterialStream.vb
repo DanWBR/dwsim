@@ -341,8 +341,8 @@ Namespace Streams
                     If GetPressure() > 0.0 And GetTemperature() > 0 And GetMassFlow() > 0 Then
                         Calculate()
                     Else
-                        Clear()
-                        ClearAllProps()
+                        'Clear()
+                        'ClearAllProps()
                     End If
                 End If
 

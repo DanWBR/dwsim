@@ -141,17 +141,17 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                             {
                                 using (var bmpcanvas = new SKCanvas(bmp))
                                 {
-                                    bmpcanvas.Clear(GlobalSettings.Settings.DarkMode ? SKColors.Black : SKColors.White);
+                                    bmpcanvas.Clear(GetBackColor());
                                     bmpcanvas.Scale(2.0f);
                                     renderer.SetTarget(bmpcanvas);
                                     model.Update(true);
                                     model.Render(renderer, Width, Height);
-                                    var paint = GetPaint(SKColors.Black);
+                                    var paint = GetPaint(GetForeColor());
                                     paint.FilterQuality = SKFilterQuality.High;
                                     paint.IsAutohinted = true;
                                     paint.IsAntialias = true;
                                     canvas.DrawBitmap(bmp, new SKRect(X, Y, X + Width, Y + Height), paint);
-                                    canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
+                                    canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(GetForeColor(), 1.0f));
                                 }
                             }
                         }

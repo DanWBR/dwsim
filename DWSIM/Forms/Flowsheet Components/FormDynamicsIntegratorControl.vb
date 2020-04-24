@@ -232,7 +232,7 @@ Public Class FormDynamicsIntegratorControl
                                       FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
 
                                       While GlobalSettings.Settings.CalculatorBusy
-                                          Task.Delay(500).Wait()
+                                          Task.Delay(200).Wait()
                                       End While
 
                                       If Not realtime Then StoreVariableValues(integrator, i, integrator.CurrentTime)
@@ -242,6 +242,7 @@ Public Class FormDynamicsIntegratorControl
                                                                       Flowsheet.FormDynamics.UpdateIndicatorList()
                                                                       Flowsheet.UpdateInterface()
                                                                       Flowsheet.UpdateOpenEditForms()
+                                                                      Application.DoEvents()
                                                                   End Sub)
 
                                       integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
