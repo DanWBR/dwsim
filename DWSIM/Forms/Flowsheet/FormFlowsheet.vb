@@ -3192,7 +3192,7 @@ Public Class FormFlowsheet
 
     Private Sub FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Click
 
-        Dim ft As New FormPIDTuning
+        Dim ft As New FormPIDTuning With {.Flowsheet = Me}
 
         ft.Show(dckPanel)
 

@@ -20,6 +20,10 @@ Public Class FormPIDTuning
             cbScenario.Items.Add(sch.Description)
         Next
 
+        If cbScenario.Items.Count > 0 Then cbScenario.SelectedIndex = 0
+
+        cbSolver.SelectedIndex = 0
+
     End Sub
 
 End Class

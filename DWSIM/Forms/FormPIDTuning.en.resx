@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lbControllers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 62</value>
+    <value>89, 56</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 65</value>
+    <value>11, 59</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -131,10 +131,16 @@
     <value>Controllers</value>
   </data>
   <data name="cbSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 376</value>
+    <value>89, 370</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 381</value>
+    <value>11, 375</value>
+  </data>
+  <data name="cbScenario.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 23</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 27</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
