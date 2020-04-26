@@ -34,6 +34,12 @@ Public Class FormPIDTuning
 
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
+        tbResults.Text = ""
+
+        If Not Flowsheet.DynamicMode Then
+            tbResults.AppendText("Error: Dynamic Mode is not activated. Activate Dynamic Mode and try again.")
+        End If
+
         Flowsheet.FormIntegratorControls.cbScenario.SelectedItem = cbScenario.SelectedItem
 
         Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
@@ -52,7 +58,6 @@ Public Class FormPIDTuning
         btnRun.Enabled = False
         btnCancel.Enabled = True
 
-        tbResults.Text = ""
 
         Dim simplex As New Simplex
 
@@ -72,10 +77,10 @@ Public Class FormPIDTuning
         Flowsheet.FormIntegratorControls.Show(Flowsheet.GetDockPanel)
 
         Dim result = simplex.ComputeMin(Function(x)
+                                            If Abort Then Return 0.0
                                             Flowsheet.RunCodeOnUIThread(Sub()
                                                                             tbResults.AppendText(String.Format("Beginning Iteration #{0}..." + vbCrLf, counter))
                                                                         End Sub)
-                                            If Abort Then Return 0.0
                                             Flowsheet.FormIntegratorControls.RestoreState(schedule.InitialFlowsheetStateID)
                                             Dim i = 0
                                             For Each controller In controllers
