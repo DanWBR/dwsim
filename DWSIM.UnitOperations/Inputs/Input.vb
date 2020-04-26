@@ -38,6 +38,8 @@ Namespace UnitOperations
 
         Public Property SelectedPropertyUnits As String = "" Implements IInput.SelectedPropertyUnits
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()

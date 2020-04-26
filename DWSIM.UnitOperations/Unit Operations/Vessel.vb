@@ -33,6 +33,8 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Separators
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Dim rhol, rhov, ql, qv, qe, rhoe, wl, wv As Double
         Dim C, VGI, VMAX, K As Double
         Dim BeH, BSGH, BSLH, AH, DH As Double

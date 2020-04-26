@@ -49,6 +49,8 @@ Namespace Streams
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Streams
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
 #Region "   CAPE-OPEN ICapeIdentification"
 
         Public Overrides Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription

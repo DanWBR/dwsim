@@ -74,6 +74,8 @@ Namespace UnitOperations
 
         Public Property ShowAlarms As Boolean = False Implements IIndicator.ShowAlarms
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()

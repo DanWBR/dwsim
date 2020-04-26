@@ -48,6 +48,8 @@ Namespace SpecialOps
         Protected m_InternalCounterW As Integer = 0
         Protected m_IterationsTaken As Integer = 0
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Property Converged As Boolean = False Implements Interfaces.IRecycle.Converged
 
         Public Property CopyOnStreamDataError As Boolean = False

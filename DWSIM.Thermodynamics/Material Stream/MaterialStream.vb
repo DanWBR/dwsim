@@ -61,6 +61,8 @@ Namespace Streams
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Streams
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
 #Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean

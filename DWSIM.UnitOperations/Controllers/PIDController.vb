@@ -109,6 +109,8 @@ Namespace SpecialOps
 
         Public Property MVValue As Double = 0.0
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New PIDController()
             obj.LoadData(Me.SaveData)

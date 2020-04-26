@@ -43,6 +43,8 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.UserModels
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Enum PythonExecutionEngine
             IronPython = 0
             PythonNET = 1

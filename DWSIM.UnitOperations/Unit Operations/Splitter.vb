@@ -31,6 +31,8 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Splitter
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Enum OpMode
             SplitRatios = 0
             StreamMassFlowSpec = 1

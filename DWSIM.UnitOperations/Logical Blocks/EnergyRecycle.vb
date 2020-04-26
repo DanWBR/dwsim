@@ -44,6 +44,8 @@ Namespace SpecialOps
         Protected m_InternalCounterE As Integer = 0
         Protected m_IterationsTaken As Integer = 0
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New EnergyRecycle()
             obj.LoadData(Me.SaveData)

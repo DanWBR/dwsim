@@ -61,6 +61,8 @@ Namespace UnitOperations
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.CAPEOPEN
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Sub New()
             MyBase.New()
             _ports = New List(Of ICapeUnitPort)

@@ -1,6 +1,7 @@
 ﻿Imports DWSIM.DynamicsManager
 Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
+Imports DWSIM.Thermodynamics.Streams
 Imports System.Linq
 
 Public Class FormDynamicsManager
@@ -24,6 +25,8 @@ Public Class FormDynamicsManager
         UpdateControllerList()
 
         UpdateIndicatorList()
+
+        CheckModelStatus()
 
     End Sub
 
@@ -998,6 +1001,81 @@ Public Class FormDynamicsManager
 
             gridMonitoredVariables.Rows.RemoveAt(gridMonitoredVariables.SelectedCells(0).RowIndex)
 
+        End If
+
+    End Sub
+
+    Private Sub TabControl1_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl1.Selected
+
+        If e.TabPage Is TabPage1 Then
+            CheckModelStatus()
+        End If
+
+    End Sub
+
+    Public Sub CheckModelStatus()
+
+        Dim streams_ok, uos_ok, valves_ok As Boolean
+
+        streams_ok = True
+        uos_ok = True
+        valves_ok = True
+
+        'material streams
+
+        For Each stream In Flowsheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is MaterialStream)
+            If stream.GraphicObject.InputConnectors(0).IsAttached And Not stream.GraphicObject.OutputConnectors(0).IsAttached Then
+                If stream.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.Valve Then
+                    streams_ok = False
+                    Exit For
+                End If
+            End If
+            If stream.GraphicObject.OutputConnectors(0).IsAttached And Not stream.GraphicObject.InputConnectors(0).IsAttached Then
+                If stream.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.ObjectType <> ObjectType.Valve Then
+                    streams_ok = False
+                    Exit For
+                End If
+            End If
+        Next
+
+        'unit operations
+
+        For Each obj In Flowsheet.SimulationObjects.Values
+            If Not obj.SupportsDynamicMode Then
+                uos_ok = False
+                Exit For
+            End If
+        Next
+
+        'valves
+
+        For Each v In Flowsheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is Valve)
+            If DirectCast(v, Valve).CalcMode = Valve.CalculationMode.DeltaP Then
+                valves_ok = False
+                Exit For
+            End If
+            If DirectCast(v, Valve).CalcMode = Valve.CalculationMode.OutletPressure Then
+                valves_ok = False
+                Exit For
+            End If
+        Next
+
+        If streams_ok Then
+            pbStreamValves.Image = My.Resources.icons8_ok
+        Else
+            pbStreamValves.Image = My.Resources.icons8_cancel
+        End If
+
+        If uos_ok Then
+            pbUnitOps.Image = My.Resources.icons8_ok
+        Else
+            pbUnitOps.Image = My.Resources.icons8_cancel
+        End If
+
+        If valves_ok Then
+            pbValves.Image = My.Resources.icons8_ok
+        Else
+            pbValves.Image = My.Resources.icons8_cancel
         End If
 
     End Sub

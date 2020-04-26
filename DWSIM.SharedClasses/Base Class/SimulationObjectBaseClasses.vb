@@ -1018,6 +1018,8 @@ Namespace UnitOperations
 
         Public Overridable Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Other Implements ISimulationObject.ObjectClass
 
+        Public Overridable ReadOnly Property SupportsDynamicMode As Boolean = False Implements ISimulationObject.SupportsDynamicMode
+
 #End Region
 
 
