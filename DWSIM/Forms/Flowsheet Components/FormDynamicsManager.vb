@@ -1080,4 +1080,10 @@ Public Class FormDynamicsManager
 
     End Sub
 
+    Private Sub FormDynamicsManager_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+        CheckModelStatus()
+
+    End Sub
+
 End Class
