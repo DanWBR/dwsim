@@ -23,6 +23,8 @@ Partial Class FormPIDTuning
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPIDTuning))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.lbControllers = New System.Windows.Forms.CheckedListBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbSolver = New System.Windows.Forms.ComboBox()
@@ -30,16 +32,19 @@ Partial Class FormPIDTuning
         Me.cbScenario = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.tbResults = New System.Windows.Forms.TextBox()
         Me.btnRun = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.NumericUpDown1)
+        Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.lbControllers)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.cbSolver)
@@ -48,6 +53,19 @@ Partial Class FormPIDTuning
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'NumericUpDown1
+        '
+        resources.ApplyResources(Me.NumericUpDown1, "NumericUpDown1")
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
         '
         'lbControllers
         '
@@ -89,15 +107,16 @@ Partial Class FormPIDTuning
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
+        Me.GroupBox2.Controls.Add(Me.tbResults)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
-        'TextBox1
+        'tbResults
         '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
+        resources.ApplyResources(Me.tbResults, "tbResults")
+        Me.tbResults.BackColor = System.Drawing.Color.White
+        Me.tbResults.Name = "tbResults"
+        Me.tbResults.ReadOnly = True
         '
         'btnRun
         '
@@ -123,6 +142,7 @@ Partial Class FormPIDTuning
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
@@ -131,7 +151,7 @@ Partial Class FormPIDTuning
 
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents tbResults As TextBox
     Friend WithEvents btnRun As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents Label3 As Label
@@ -140,4 +160,6 @@ Partial Class FormPIDTuning
     Friend WithEvents cbScenario As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents lbControllers As CheckedListBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents NumericUpDown1 As NumericUpDown
 End Class

@@ -677,6 +677,10 @@ Public Class FormFlowsheet
                                                                  strtipo = DWSIM.App.GetLocalString("Mensagem")
                                                          End Select
 
+                                                         If frlog.Grid1.Rows.Count > 1500 Then
+                                                             frlog.Grid1.Rows.Clear()
+                                                         End If
+
                                                          frlog.Grid1.Rows.Insert(0, New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
                                                          If frlog.Grid1.Rows.Count > 0 Then

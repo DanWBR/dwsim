@@ -180,19 +180,7 @@ Namespace UnitOperations
 
         Public Overrides Sub RunDynamicModel()
 
-            Select Case CalcMode
-
-                Case CalculationMode.Curves, CalculationMode.Head, CalculationMode.Delta_P, CalculationMode.PowerGenerated
-
-                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
-
-                Case CalculationMode.OutletPressure
-
-                    POut = GetOutletMaterialStream(0).GetPressure()
-
-                    Calculate()
-
-            End Select
+            Calculate()
 
         End Sub
 

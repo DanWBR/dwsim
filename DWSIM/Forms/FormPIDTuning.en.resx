@@ -118,8 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 386</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 389</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Max Iterations</value>
+  </data>
   <data name="lbControllers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 56</value>
+    <value>94, 55</value>
+  </data>
+  <data name="lbControllers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 289</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 59</value>
@@ -130,17 +145,18 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Controllers</value>
   </data>
-  <data name="cbSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 370</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbSolver.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 375</value>
+  <data name="cbSolver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 354</value>
   </data>
   <data name="cbScenario.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 23</value>
+    <value>94, 24</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 27</value>
+    <value>11, 28</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -149,34 +165,41 @@
     <value>Schedule</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 412</value>
+    <value>316, 416</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 422</value>
+  <data name="tbResults.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Consolas, 8.25pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbResults.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="tbResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 426</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 441</value>
+    <value>405, 445</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Results</value>
   </data>
   <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 430</value>
+    <value>13, 434</value>
   </data>
   <data name="btnRun.Text" xml:space="preserve">
     <value>Start Tuning</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 430</value>
+    <value>177, 434</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>751, 465</value>
+    <value>751, 469</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
