@@ -18,6 +18,8 @@ using DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts;
 using System.Reflection;
 using s = DWSIM.GlobalSettings.Settings;
 using DWSIM.UI.Desktop.Editors.Charts;
+using DWSIM.UI.Desktop.Editors.Dynamics;
+using Mono.Cecil.Cil;
 
 namespace DWSIM.UI.Forms
 {
@@ -42,6 +44,10 @@ namespace DWSIM.UI.Forms
 
         private DWSIM.UI.Desktop.Editors.ResultsViewer ResultsControl;
 
+        private DynamicsManagerControl DynManagerControl;
+
+        private DynamicsIntegratorControl DynIntegratorControl;
+
         public ChartManager ChartsControl;
 
         private DWSIM.UI.Desktop.Editors.MaterialStreamListViewer MaterialStreamListControl;
@@ -60,7 +66,7 @@ namespace DWSIM.UI.Forms
 
         public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActZoomDefault, ActSimultAdjustSolver, ActInspector;
         public Action ActDrawGrid, ActSnapToGrid, ActMultiSelect, ActAlignLefts, ActAlignCenters, ActAlignRights, ActAlignTops, ActAlignMiddles, ActAlignBottoms, ActHorizAlign, ActVertAlign;
-
+       
         private double sf = s.UIScalingFactor;
 
         private CheckToolItem btnmSnapToGrid, btnmDrawGrid, btnmMultiSelect;
@@ -133,6 +139,10 @@ namespace DWSIM.UI.Forms
             var btnmZoomFit = new ButtonToolItem { ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")) };
             var btnmZoomDefault = new ButtonToolItem { ToolTip = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")) };
 
+            var chkmDynamics = new CheckToolItem { Checked = FlowsheetObject.DynamicMode, ToolTip = "Enable/Disable Dynamic Mode", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-exercise.png")) };
+            var btnmDynManager = new ButtonToolItem { ToolTip = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png")) };
+            var btnmDynIntegrator = new ButtonToolItem { ToolTip = "Dynamics Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png")) };
+
             var chkmInspector = new CheckToolItem { Checked = GlobalSettings.Settings.InspectorEnabled, ToolTip = "Enable/Disable Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_male.png")) };
             var btnmInspector = new ButtonToolItem { ToolTip = "View Inspector Window", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
 
@@ -175,6 +185,9 @@ namespace DWSIM.UI.Forms
                 btnmAlignBottoms.Text = "Align Bottoms";
                 btnmEqHoriz.Text = "Eq. Horizontally";
                 btnmEqVert.Text = "Eq. Vertically";
+                chkmDynamics.Text = "Dynamic Mode";
+                btnmDynIntegrator.Text = "Integrator";
+                btnmDynManager.Text = "Dyn. Manager";
             }
 
             ToolBar = new ToolBar
@@ -182,6 +195,8 @@ namespace DWSIM.UI.Forms
                 Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space } , btnmComps, btnmBasis, btnmOptions,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space }, btnmSolve, btnmSimultSolve, new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault,
+                new SeparatorToolItem{ Type = SeparatorToolItemType.Space},
+                chkmDynamics, btnmDynManager, btnmDynIntegrator,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space},
                 btnmDrawGrid, btnmSnapToGrid,new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
                 btnmMultiSelect, btnmAlignLefts, btnmAlignCenters, btnmAlignRights, btnmAlignTops, btnmAlignMiddles, btnmAlignBottoms,btnmEqHoriz, btnmEqVert,
@@ -483,6 +498,7 @@ namespace DWSIM.UI.Forms
 
             Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SkiaSharp.SKColor.Parse(SystemColors.ControlBackground.ToHex());
             Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SkiaSharp.SKColor.Parse(SystemColors.ControlText.ToHex());
+            
             FlowsheetControl.KeyDown += (sender, e) =>
             {
                 if (e.Key == Keys.Delete) DeleteObject();
@@ -568,6 +584,12 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.ActSimultAdjustSolver = ActSimultAdjustSolver;
 
+            var chkDynamics = new CheckMenuItem { Text = "Enable/Disable Dynamic Mode" };
+            chkDynamics.Checked = FlowsheetObject.DynamicMode;
+            var btnDynManager = new ButtonMenuItem { Text = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png")) };
+            var btnDynIntegrator = new ButtonMenuItem { Text = "Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png")) };
+            var btnDynPIDTuning = new ButtonMenuItem { Text = "PID Controller Tuning", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-adjust.png")) };
+
             // menu items
 
             Menu = new MenuBar();
@@ -633,16 +655,18 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                         Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, btnSolveC, chkSimSolver } });
-                        Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
-                        Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
-                        Menu.Items.Insert(7, pluginsmenu);
-                        Menu.Items.Insert(7, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
+                        Menu.Items.Insert(6, new ButtonMenuItem { Text = "Dynamics", Items = { chkDynamics, btnDynManager, btnDynIntegrator, btnDynPIDTuning } });
+                        Menu.Items.Insert(7, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
+                        Menu.Items.Insert(8, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
+                        Menu.Items.Insert(9, pluginsmenu);
+                        Menu.Items.Insert(10, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
                     }
                     else
                     {
                         Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, btnSolveC, chkSimSolver } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Dynamics", Items = { chkDynamics, btnDynManager, btnDynIntegrator, btnDynPIDTuning } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Add(pluginsmenu);
@@ -654,6 +678,7 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions, btnGlobalOptions } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, btnSolveC, chkSimSolver } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "Dynamics", Items = { chkDynamics, btnDynManager, btnDynIntegrator, btnDynPIDTuning } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                     Menu.Items.Add(pluginsmenu);
@@ -774,9 +799,13 @@ namespace DWSIM.UI.Forms
                 });
             };
 
-            ResultsControl = new DWSIM.UI.Desktop.Editors.ResultsViewer(FlowsheetObject);
+            ResultsControl = new ResultsViewer(FlowsheetObject);
 
-            MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
+            MaterialStreamListControl = new MaterialStreamListViewer(FlowsheetObject);
+
+            DynManagerControl = new DynamicsManagerControl();
+
+            DynIntegratorControl = new DynamicsIntegratorControl();
 
             LoadObjects();
 
@@ -813,6 +842,9 @@ namespace DWSIM.UI.Forms
             var panelsolids = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var paneluser = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panellogical = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelcontrollers = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelindicators = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelinputs = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelother = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
 
@@ -828,6 +860,8 @@ namespace DWSIM.UI.Forms
             objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
             objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
             objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Ops" });
+            objcontainer.Pages.Add(new DocumentPage(panelcontrollers) { Closable = false, Text = "Controllers" });
+            objcontainer.Pages.Add(new DocumentPage(panelindicators) { Closable = false, Text = "Indicators" });
             objcontainer.Pages.Add(new DocumentPage(panelother) { Closable = false, Text = "Other" });
 
             var PanelObjects = new DocumentControl() { DisplayArrows = false, TabBarBackgroundColor = SystemColors.Highlight };
@@ -862,6 +896,8 @@ namespace DWSIM.UI.Forms
                         case Interfaces.Enums.SimulationObjectClass.Exchangers:
                             panelexchangers.Items.Add(pitem);
                             break;
+                        case Interfaces.Enums.SimulationObjectClass.Switches:
+                        case Interfaces.Enums.SimulationObjectClass.Inputs:
                         case Interfaces.Enums.SimulationObjectClass.Logical:
                             panellogical.Items.Add(pitem);
                             break;
@@ -888,6 +924,12 @@ namespace DWSIM.UI.Forms
                             break;
                         case Interfaces.Enums.SimulationObjectClass.UserModels:
                             paneluser.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Controllers:
+                            panelcontrollers.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.Indicators:
+                            panelindicators.Items.Add(pitem);
                             break;
                     }
                 }
@@ -925,6 +967,18 @@ namespace DWSIM.UI.Forms
             Split3.Panel2 = SetupLogWindow();
             Split3.Panel2.Height = (int)(sf * 100);
 
+            var documentcontainer = (DocumentControl)Split3.Panel2;
+
+            documentcontainer.Pages.Add(new DocumentPage(DynIntegratorControl) { Text = "Integrator Controls", Closable = false });
+
+            btnDynIntegrator.Click += (s, e) => {
+                documentcontainer.SelectedIndex = 1;
+            };
+
+            btnmDynIntegrator.Click += (s, e) => {
+                documentcontainer.SelectedIndex = 1;
+            };
+
             Split1.Panel2 = Split3;
 
             btnShowHideObjectPalette.Click += (sender, e) =>
@@ -934,15 +988,34 @@ namespace DWSIM.UI.Forms
 
             DocumentPageSpreadsheet = new DocumentPage { Content = SpreadsheetControl, Text = "Spreadsheet", Closable = false };
 
-            DocumentContainer = new DocumentControl() { AllowReordering = true, DisplayArrows = false };
+            DocumentContainer = new DocumentControl() { AllowReordering = false, DisplayArrows = false };
             DocumentContainer.Pages.Add(new DocumentPage { Content = Split2, Text = "Flowsheet", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = MaterialStreamListControl, Text = "Material Streams", Closable = false });
             DocumentContainer.Pages.Add(DocumentPageSpreadsheet);
             DocumentContainer.Pages.Add(new DocumentPage { Content = ChartsControl, Text = "Charts", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = ScriptListControl, Text = "Script Manager", Closable = false });
+            DocumentContainer.Pages.Add(new DocumentPage { Content = DynManagerControl, Text = "Dynamics Manager", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = ResultsControl, Text = "Results", Closable = false });
 
             Split3.Panel1 = DocumentContainer;
+
+            btnDynManager.Click += (s, e) => {
+                DocumentContainer.SelectedIndex = 5;
+            };
+
+            btnmDynManager.Click += (s, e) => {
+                DocumentContainer.SelectedIndex = 5;
+            };
+
+            chkmDynamics.CheckedChanged += (s, e) => {
+                FlowsheetObject.DynamicMode = chkmDynamics.Checked;
+                chkDynamics.Checked = FlowsheetObject.DynamicMode;
+            };
+
+            chkDynamics.CheckedChanged += (s, e) => {
+                FlowsheetObject.DynamicMode = chkDynamics.Checked;
+                chkmDynamics.Checked = FlowsheetObject.DynamicMode;
+            };
 
             // main container
 
@@ -1334,7 +1407,7 @@ namespace DWSIM.UI.Forms
             outtxt.ReadOnly = true;
             outtxt.SelectionBold = true;
 
-            var container = new DocumentControl() { DisplayArrows = false, TabBarBackgroundColor = SystemColors.Highlight };
+            var container = new DocumentControl() { DisplayArrows = false };
 
             container.Pages.Add(new DocumentPage(outtxt) { Text = "Log Panel", Closable = false });
 

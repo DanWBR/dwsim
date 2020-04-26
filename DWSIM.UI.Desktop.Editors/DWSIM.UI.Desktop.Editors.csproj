@@ -99,6 +99,8 @@
     <Compile Include="Compounds\CompoundViewer.cs" />
     <Compile Include="Compounds\DistCurves.cs" />
     <Compile Include="Compounds\Tools.cs" />
+    <Compile Include="Dynamics\DynamicsIntegratorControls.cs" />
+    <Compile Include="Dynamics\DynamicsManagerControl.cs" />
     <Compile Include="FlowsheetAnalysis\Optimization.cs" />
     <Compile Include="FlowsheetAnalysis\SensitivityAnalysis.cs" />
     <Compile Include="General\FloatingTables.cs" />

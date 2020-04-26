@@ -189,6 +189,20 @@ Imports DWSIM.Interfaces.Enums
                                 Me.SimulationObjects(adjobj.ReferencedObjectData.ID).IsAdjustAttached = False
                                 Me.SimulationObjects(adjobj.ReferencedObjectData.ID).AttachedAdjustId = ""
                             End If
+                        ElseIf gobj.ObjectType = ObjectType.Controller_PID Then
+                            Dim adjobj As PIDController = CType(SimulationObjects(namesel), PIDController)
+                            If Me.SimulationObjects.ContainsKey(adjobj.ManipulatedObjectData.ID) Then
+                                Me.SimulationObjects(adjobj.ManipulatedObjectData.ID).IsAdjustAttached = False
+                                Me.SimulationObjects(adjobj.ManipulatedObjectData.ID).AttachedAdjustId = ""
+                            End If
+                            If Me.SimulationObjects.ContainsKey(adjobj.ControlledObjectData.ID) Then
+                                Me.SimulationObjects(adjobj.ControlledObjectData.ID).IsAdjustAttached = False
+                                Me.SimulationObjects(adjobj.ControlledObjectData.ID).AttachedAdjustId = ""
+                            End If
+                            If Me.SimulationObjects.ContainsKey(adjobj.ReferencedObjectData.ID) Then
+                                Me.SimulationObjects(adjobj.ReferencedObjectData.ID).IsAdjustAttached = False
+                                Me.SimulationObjects(adjobj.ReferencedObjectData.ID).AttachedAdjustId = ""
+                            End If
                         End If
 
                         Me.SimulationObjects.Remove(namesel)
@@ -503,6 +517,30 @@ Imports DWSIM.Interfaces.Enums
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CapeOpenUO, x, y, tag))
 
+            Case "Digital Gauge"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DigitalGauge, x, y, tag))
+
+            Case "Analog Gauge"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AnalogGauge, x, y, tag))
+
+            Case "Level Gauge"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.LevelGauge, x, y, tag))
+
+            Case "PID Controller"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_PID, x, y, tag))
+
+            Case "Input Box"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Input, x, y, tag))
+
+            Case "Switch"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Switch, x, y, tag))
+
             Case Else
 
                 Return Nothing
@@ -532,6 +570,88 @@ Imports DWSIM.Interfaces.Enums
                 DirectCast(uoobj, ISimulationObject).GraphicObject = myNode
                 myNode.CreateConnectors(0, 0)
                 SimulationObjects.Add(myNode.Name, uoobj)
+
+            Case ObjectType.Switch
+
+                Dim myGobj As New SwitchGraphic(mpx, mpy, 50, 40)
+                myGobj.Tag = "SW-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "SW-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As UnitOperations.UnitOperations.Switch = New UnitOperations.UnitOperations.Switch(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
+
+            Case ObjectType.Input
+
+                Dim myGobj As New InputGraphic(mpx, mpy, 50, 25)
+                myGobj.Tag = "IN-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "IN-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As Input = New Input(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
+
+                'GraphicObjectControlPanelModeEditors.SetInputDelegate(myGobj, myObj)
+
+            Case ObjectType.Controller_PID
+
+                Dim myGobj As New PIDControllerGraphic(mpx, mpy, 50, 50)
+                myGobj.Tag = "PID-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "PID-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As PIDController = New PIDController(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
+
+                'GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
+
+            Case ObjectType.LevelGauge
+
+                Dim myGobj As New LevelGaugeGraphic(mpx, mpy, 40, 70)
+                myGobj.Tag = "LG-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "LG-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As LevelGauge = New LevelGauge(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
+
+            Case ObjectType.DigitalGauge
+
+                Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 40, 20)
+                myGobj.Tag = "DG-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "DG-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As DigitalGauge = New DigitalGauge(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
+
+            Case ObjectType.AnalogGauge
+
+                Dim myGobj As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
+                myGobj.Tag = "AG-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                gObj.Name = "AG-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As AnalogGauge = New AnalogGauge(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
 
             Case ObjectType.OT_Adjust
 
