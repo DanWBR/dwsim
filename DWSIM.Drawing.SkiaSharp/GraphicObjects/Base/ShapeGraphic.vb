@@ -8,6 +8,8 @@ Namespace GraphicObjects
 
         Inherits GraphicObject
 
+        Private AttentionImage As SKImage
+
         Public Sub UpdateStatus()
             Dim alpha As Integer = 255
 
@@ -58,7 +60,33 @@ Namespace GraphicObjects
         Public Overridable Property OverrideColors As Boolean = False
 
         Public Overrides Sub Draw(ByVal g As Object)
+
             MyBase.Draw(g)
+
+            If Not Owner?.SupportsDynamicMode And Owner?.GetFlowsheet.DynamicMode Then
+
+                DrawNotDynamicsCompatible(g)
+
+            End If
+
+        End Sub
+
+        Public Sub DrawNotDynamicsCompatible(ByVal canvas As SKCanvas)
+
+            If AttentionImage Is Nothing Then
+
+                Dim assm = Me.GetType.Assembly
+                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.attention.png")
+                    Using bitmap = SKBitmap.Decode(filestr)
+                        AttentionImage = SKImage.FromBitmap(bitmap)
+                    End Using
+                End Using
+
+            End If
+
+            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                canvas.DrawImage(AttentionImage, New SKRect(X + Width / 2 - 10, Y - 25, X + Width / 2 + 10, Y - 5), p)
+            End Using
 
         End Sub
 
