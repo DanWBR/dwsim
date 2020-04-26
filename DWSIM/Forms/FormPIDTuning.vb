@@ -38,6 +38,7 @@ Public Class FormPIDTuning
 
         If Not Flowsheet.DynamicMode Then
             tbResults.AppendText("Error: Dynamic Mode is not activated. Activate Dynamic Mode and try again.")
+            Exit Sub
         End If
 
         Flowsheet.FormIntegratorControls.cbScenario.SelectedItem = cbScenario.SelectedItem

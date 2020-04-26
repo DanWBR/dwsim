@@ -41,7 +41,7 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
-        RunIntegrator(False, False)
+        If Flowsheet.DynamicMode Then RunIntegrator(False, False)
 
     End Sub
 
