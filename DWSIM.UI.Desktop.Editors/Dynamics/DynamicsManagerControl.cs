@@ -15,6 +15,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         public CheckBox chkDynamics;
 
+        private DynamicLayout eventEditor;
+
         private Shared.Flowsheet Flowsheet;
 
         public DynamicsManagerControl(Shared.Flowsheet fs) : base()
@@ -89,9 +91,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var lce = new TableLayout();
             var rce = new TableLayout();
+            var rce2 = new TableLayout();
 
-            var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
+            var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
 
             var lbEventSets = new ListBox();
 
@@ -116,8 +119,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             rce.Rows.Add(new Label { Text = "Selected Event Set", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
-            var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
+            var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
 
             var menu2 = new StackLayout
             {
@@ -131,13 +134,42 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             };
             rce.Rows.Add(new TableRow(menu2));
 
-            rce.Rows.Add(new TableRow(new Panel()));
+            var lbEvents = new ListBox();
+
+            rce.Rows.Add(new TableRow(lbEvents));
             rce.Padding = new Padding(5, 5, 5, 5);
+
+            rce2.Rows.Add(new Label { Text = "Selected Event", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
+
+            var btnUpdateEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Update Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png")).WithSize(16, 16) };
+
+            var menu3 = new StackLayout
+            {
+                Items = { btnUpdateEvent },
+                Orientation = Orientation.Horizontal,
+                Spacing = 4,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Bottom,
+                Padding = 5,
+                Height = 34
+            };
+            rce2.Rows.Add(new TableRow(menu3));
+
+            eventEditor = new DynamicLayout();
+
+            rce2.Rows.Add(new TableRow(eventEditor));
+            rce2.Padding = new Padding(5, 5, 5, 5);
+
+            var splites2 = new Splitter() { };
+            splites2.Panel1 = rce;
+            splites2.Panel1.Width = 250;
+            splites2.Panel2 = rce2;
+            splites2.SplitterWidth = 2;
 
             var splites = new Splitter() { };
             splites.Panel1 = lce;
             splites.Panel1.Width = 250;
-            splites.Panel2 = rce;
+            splites.Panel2 = splites2;
             splites.SplitterWidth = 2;
 
             DocumentContainer.Pages[1].Content = splites;
