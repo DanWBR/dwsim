@@ -76,7 +76,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             Rows.Add(new TableRow(tl2));
 
             Rows.Add(null);
-        
+
         }
 
     }

@@ -69,7 +69,9 @@ namespace DWSIM.UI.Forms
        
         private double sf = s.UIScalingFactor;
 
-        private CheckToolItem btnmSnapToGrid, btnmDrawGrid, btnmMultiSelect;
+        private CheckToolItem btnmSnapToGrid, btnmDrawGrid, btnmMultiSelect, chkmDynamics;
+
+        private CheckMenuItem chkDynamics;
 
         void InitializeComponent()
         {
@@ -139,7 +141,7 @@ namespace DWSIM.UI.Forms
             var btnmZoomFit = new ButtonToolItem { ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")) };
             var btnmZoomDefault = new ButtonToolItem { ToolTip = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")) };
 
-            var chkmDynamics = new CheckToolItem { Checked = FlowsheetObject.DynamicMode, ToolTip = "Enable/Disable Dynamic Mode", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-exercise.png")) };
+            chkmDynamics = new CheckToolItem { Checked = FlowsheetObject.DynamicMode, ToolTip = "Enable/Disable Dynamic Mode", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-exercise.png")) };
             var btnmDynManager = new ButtonToolItem { ToolTip = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png")) };
             var btnmDynIntegrator = new ButtonToolItem { ToolTip = "Dynamics Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png")) };
 
@@ -584,7 +586,7 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.ActSimultAdjustSolver = ActSimultAdjustSolver;
 
-            var chkDynamics = new CheckMenuItem { Text = "Enable/Disable Dynamic Mode" };
+            chkDynamics = new CheckMenuItem { Text = "Enable/Disable Dynamic Mode" };
             chkDynamics.Checked = FlowsheetObject.DynamicMode;
             var btnDynManager = new ButtonMenuItem { Text = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png")) };
             var btnDynIntegrator = new ButtonMenuItem { Text = "Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png")) };
@@ -803,7 +805,7 @@ namespace DWSIM.UI.Forms
 
             MaterialStreamListControl = new MaterialStreamListViewer(FlowsheetObject);
 
-            DynManagerControl = new DynamicsManagerControl();
+            DynManagerControl = new DynamicsManagerControl(FlowsheetObject);
 
             DynIntegratorControl = new DynamicsIntegratorControl(FlowsheetObject);
 
@@ -1010,11 +1012,13 @@ namespace DWSIM.UI.Forms
             chkmDynamics.CheckedChanged += (s, e) => {
                 FlowsheetObject.DynamicMode = chkmDynamics.Checked;
                 chkDynamics.Checked = FlowsheetObject.DynamicMode;
+                DynManagerControl.chkDynamics.Checked = FlowsheetObject.DynamicMode;
             };
 
             chkDynamics.CheckedChanged += (s, e) => {
                 FlowsheetObject.DynamicMode = chkDynamics.Checked;
                 chkmDynamics.Checked = FlowsheetObject.DynamicMode;
+                DynManagerControl.chkDynamics.Checked = FlowsheetObject.DynamicMode;
             };
 
             // main container
@@ -1186,6 +1190,14 @@ namespace DWSIM.UI.Forms
             ScriptListControl.UpdateList();
 
             DynIntegratorControl.Init();
+
+            DynManagerControl.Init();
+
+            DynManagerControl.chkDynamics.CheckedChanged += (s2, e2) => {
+                FlowsheetObject.DynamicMode = DynManagerControl.chkDynamics.Checked.GetValueOrDefault();
+                chkmDynamics.Checked = FlowsheetObject.DynamicMode;
+                chkDynamics.Checked = FlowsheetObject.DynamicMode;
+            };
 
             if (Application.Instance.Platform.IsWpf)
             {
