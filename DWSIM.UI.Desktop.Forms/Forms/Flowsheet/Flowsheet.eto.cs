@@ -805,7 +805,7 @@ namespace DWSIM.UI.Forms
 
             DynManagerControl = new DynamicsManagerControl();
 
-            DynIntegratorControl = new DynamicsIntegratorControl();
+            DynIntegratorControl = new DynamicsIntegratorControl(FlowsheetObject);
 
             LoadObjects();
 
@@ -965,7 +965,7 @@ namespace DWSIM.UI.Forms
             SplitterFlowsheet = Split2;
 
             Split3.Panel2 = SetupLogWindow();
-            Split3.Panel2.Height = (int)(sf * 100);
+            Split3.Panel2.Height = (int)(sf * 120);
 
             var documentcontainer = (DocumentControl)Split3.Panel2;
 
@@ -1184,6 +1184,8 @@ namespace DWSIM.UI.Forms
             FlowsheetControl.Invalidate();
 
             ScriptListControl.UpdateList();
+
+            DynIntegratorControl.Init();
 
             if (Application.Instance.Platform.IsWpf)
             {

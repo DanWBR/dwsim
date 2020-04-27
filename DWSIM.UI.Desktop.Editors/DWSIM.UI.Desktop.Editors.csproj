@@ -261,6 +261,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\icons8-filled_trash.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-ecg.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-exercise.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-module.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-pause.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-realtime.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-slider.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-stop.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
