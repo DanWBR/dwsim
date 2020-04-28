@@ -925,7 +925,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) control.Width = (int)(sf * 140);
 
             var tr = new TableRow(txt, null, control);

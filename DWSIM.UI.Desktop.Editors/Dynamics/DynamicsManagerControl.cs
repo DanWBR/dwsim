@@ -1,10 +1,12 @@
 ﻿using Eto.Drawing;
 using Eto.Forms;
-using System;
-using System.Collections.Generic;
+using DWSIM.DynamicsManager;
+using DWSIM.ExtensionMethods;
+using DWSIM.ExtensionMethods.Eto;
+using DWSIM.UI.Shared;
+using System.CodeDom;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -15,7 +17,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         public CheckBox chkDynamics;
 
-        private DynamicLayout eventEditor;
+        private Panel eventEditor;
+
+        private ListBox lbEventSets, lbEvents;
 
         private Shared.Flowsheet Flowsheet;
 
@@ -96,7 +100,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
 
-            var lbEventSets = new ListBox();
+            lbEventSets = new ListBox();
 
             lce.Rows.Add(new Label { Text = "Event Sets", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
@@ -134,27 +138,13 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             };
             rce.Rows.Add(new TableRow(menu2));
 
-            var lbEvents = new ListBox();
+            lbEvents = new ListBox();
 
             rce.Rows.Add(new TableRow(lbEvents));
             rce.Padding = new Padding(5, 5, 5, 5);
 
             rce2.Rows.Add(new Label { Text = "Selected Event", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
-
-            var btnUpdateEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Update Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png")).WithSize(16, 16) };
-
-            var menu3 = new StackLayout
-            {
-                Items = { btnUpdateEvent },
-                Orientation = Orientation.Horizontal,
-                Spacing = 4,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                VerticalContentAlignment = VerticalAlignment.Bottom,
-                Padding = 5,
-                Height = 34
-            };
-            rce2.Rows.Add(new TableRow(menu3));
-
+           
             eventEditor = new DynamicLayout();
 
             rce2.Rows.Add(new TableRow(eventEditor));
@@ -173,6 +163,123 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             splites.SplitterWidth = 2;
 
             DocumentContainer.Pages[1].Content = splites;
+
+            // populate lists
+
+            foreach (var es in Flowsheet.DynamicsManager.EventSetList)
+            {
+                lbEventSets.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
+            }
+
+            lbEventSets.SelectedIndexChanged += (s, e) => {
+                lbEvents.Items.Clear();
+                var es = Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey];
+                foreach (var ev in es.Events)
+                {
+                    lbEvents.Items.Add(new ListItem { Key = ev.Key, Text = ev.Value.Description });
+                }
+            };
+
+            lbEvents.SelectedIndexChanged += (s, e) =>
+            {
+                var ev = Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey].Events[lbEvents.SelectedKey];
+                Flowsheet.RunCodeOnUIThread(() => {
+                    PopulateEventContainer(ev);
+                });
+            };
+
+        }
+
+        public void PopulateEventContainer(Interfaces.IDynamicsEvent ev)
+        {
+
+            var prevval = GlobalSettings.Settings.EditorTextBoxFixedSize;
+
+            GlobalSettings.Settings.EditorTextBoxFixedSize = false;
+
+            var layout = new DynamicLayout();
+
+            layout.CreateAndAddCheckBoxRow("Active", ev.Enabled, (s, e) => {
+                ev.Enabled = s.Checked.GetValueOrDefault();
+            }, null);
+
+            layout.CreateAndAddStringEditorRow("Name", ev.Description, (s, e) => {
+                ev.Description = s.Text;
+                lbEvents.Items[lbEvents.SelectedIndex].Text = s.Text;
+            }, null);
+
+            var dtp = new DateTimePicker { Mode = DateTimePickerMode.Time, Value = ev.TimeStamp };
+            dtp.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
+            dtp.ValueChanged += (s, e) => {
+                ev.TimeStamp = dtp.Value.GetValueOrDefault();
+            };
+
+            layout.CreateAndAddLabelAndControlRow("Timestamp", dtp);
+
+            layout.CreateAndAddDropDownRow("Type", ev.EventType.GetEnumNames(), (int)ev.EventType, (s, e) => {
+                ev.EventType = s.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventType>();
+            }, null);
+
+            var objects = Flowsheet.SimulationObjects.Values.Select((x) => x.GraphicObject.Tag).ToList();
+            objects.Insert(0, "");
+
+            DropDown propselector = null;
+            List<string> props = new List<string>();
+            List<string> propids = new List<string>();
+            props.Add("");
+            propids.Add("");
+
+            int idx = 0;
+            
+            if (ev.SimulationObjectID != "")
+            {
+                if (Flowsheet.SimulationObjects.ContainsKey(ev.SimulationObjectID))
+                {
+                    idx = objects.IndexOf(Flowsheet.SimulationObjects[ev.SimulationObjectID].GraphicObject.Tag);
+                    propids.AddRange(Flowsheet.SimulationObjects[ev.SimulationObjectID].GetProperties(Interfaces.Enums.PropertyType.WR));
+                    props.AddRange(propids.Select((x) => Flowsheet.GetTranslatedString(x)).ToArray());
+                }
+            }
+
+            layout.CreateAndAddDropDownRow("Object", objects, idx, (s, e) => {
+                if (s.SelectedIndex != 0)
+                {
+                    ev.SimulationObjectID = Flowsheet.GetFlowsheetSimulationObject(s.SelectedValue.ToString()).Name;
+                    propids.Clear();
+                    propids.Add("");
+                    propids.AddRange(Flowsheet.SimulationObjects[ev.SimulationObjectID].GetProperties(Interfaces.Enums.PropertyType.WR));
+                    props.Clear();
+                    props.Add("");
+                    props.AddRange(propids.Select((x) => Flowsheet.GetTranslatedString(x)).ToArray());
+                    propselector.Items.Clear();
+                    propselector.Items.AddRange(props.Select((x) => new ListItem { Text = x }));
+                }
+                else {
+                    ev.SimulationObjectID = "";                
+                }
+            }, null);
+
+            propselector = layout.CreateAndAddDropDownRow("Property", props,
+                props.IndexOf(Flowsheet.GetTranslatedString(ev.SimulationObjectProperty)),
+                (s, e) => {
+                    if (s.SelectedIndex >= 0) ev.SimulationObjectProperty = propids[s.SelectedIndex];                    
+                }, null);
+
+            layout.CreateAndAddStringEditorRow("Value",
+                ev.SimulationObjectPropertyValue, (s, e) => {
+                    ev.SimulationObjectPropertyValue = s.Text;
+                }, null);
+
+            layout.CreateAndAddStringEditorRow("Units",
+                ev.SimulationObjectPropertyUnits, (s, e) => {
+                    ev.SimulationObjectPropertyUnits = s.Text;
+                }, null);
+
+            GlobalSettings.Settings.EditorTextBoxFixedSize = prevval;
+
+            layout.Invalidate();
+
+            eventEditor.Content = layout;
 
         }
 
