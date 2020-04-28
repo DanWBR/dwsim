@@ -2,11 +2,12 @@
 using Eto.Forms;
 using DWSIM.DynamicsManager;
 using DWSIM.ExtensionMethods;
-using DWSIM.ExtensionMethods.Eto;
 using DWSIM.UI.Shared;
+using ext = DWSIM.UI.Shared.Common;
 using System.CodeDom;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -100,6 +101,42 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
 
+            btnAddEventSet.Click += (s, e) =>
+            {
+                try
+                {
+                    var es = new EventSet { ID = Guid.NewGuid().ToString() };
+                    Dialog form = null;
+                    var tb = new TextBox { Text = es.Description };
+                    form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => es.Description = tb.Text);
+                    form.Location = btnAddEventSet.Location;
+                    form.ShowModal(this);
+                    lbEventSets.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
+                    Flowsheet.DynamicsManager.EventSetList.Add(es.ID, es);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, MessageBoxType.Error);
+                }
+            };
+
+            btnRemoveEventSet.Click += (s, e) =>
+            {
+                var result = MessageBox.Show("Confirm?", "Remove Event Set", MessageBoxType.Question);
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        Flowsheet.DynamicsManager.EventSetList.Remove(lbEventSets.SelectedKey);
+                        lbEventSets.Items.RemoveAt(lbEventSets.SelectedIndex);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message, MessageBoxType.Error);
+                    }
+                }
+            };
+
             lbEventSets = new ListBox();
 
             lce.Rows.Add(new Label { Text = "Event Sets", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
@@ -126,6 +163,42 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
 
+            btnAddEvent.Click += (s, e) =>
+            {
+                try
+                {
+                    var ev = new DynamicEvent { ID = Guid.NewGuid().ToString() };
+                    Dialog form = null;
+                    var tb = new TextBox { Text = ev.Description };
+                    form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => ev.Description = tb.Text);
+                    form.Location = btnAddEvent.Location;
+                    form.ShowModal(this);
+                    lbEvents.Items.Add(new ListItem { Key = ev.ID, Text = ev.Description });
+                    Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey].Events.Add(ev.ID, ev);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, MessageBoxType.Error);
+                }
+            };
+
+            btnRemoveEvent.Click += (s, e) =>
+            {
+                var result = MessageBox.Show("Confirm?", "Remove Event", MessageBoxType.Question);
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey].Events.Remove(lbEvents.SelectedKey);
+                        lbEvents.Items.RemoveAt(lbEvents.SelectedIndex);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message, MessageBoxType.Error);
+                    }
+                }
+            };
+
             var menu2 = new StackLayout
             {
                 Items = { btnAddEvent, btnRemoveEvent },
@@ -144,7 +217,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             rce.Padding = new Padding(5, 5, 5, 5);
 
             rce2.Rows.Add(new Label { Text = "Selected Event", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
-           
+
             eventEditor = new DynamicLayout();
 
             rce2.Rows.Add(new TableRow(eventEditor));
@@ -171,7 +244,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 lbEventSets.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
             }
 
-            lbEventSets.SelectedIndexChanged += (s, e) => {
+            lbEventSets.SelectedIndexChanged += (s, e) =>
+            {
                 lbEvents.Items.Clear();
                 var es = Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey];
                 foreach (var ev in es.Events)
@@ -183,7 +257,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             lbEvents.SelectedIndexChanged += (s, e) =>
             {
                 var ev = Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey].Events[lbEvents.SelectedKey];
-                Flowsheet.RunCodeOnUIThread(() => {
+                Flowsheet.RunCodeOnUIThread(() =>
+                {
                     PopulateEventContainer(ev);
                 });
             };
@@ -199,26 +274,30 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var layout = new DynamicLayout();
 
-            layout.CreateAndAddCheckBoxRow("Active", ev.Enabled, (s, e) => {
+            layout.CreateAndAddCheckBoxRow("Active", ev.Enabled, (s, e) =>
+            {
                 ev.Enabled = s.Checked.GetValueOrDefault();
-            }, null);
+            });
 
-            layout.CreateAndAddStringEditorRow("Name", ev.Description, (s, e) => {
+            layout.CreateAndAddStringEditorRow("Name", ev.Description, (s, e) =>
+            {
                 ev.Description = s.Text;
                 lbEvents.Items[lbEvents.SelectedIndex].Text = s.Text;
-            }, null);
+            });
 
             var dtp = new DateTimePicker { Mode = DateTimePickerMode.Time, Value = ev.TimeStamp };
             dtp.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
-            dtp.ValueChanged += (s, e) => {
+            dtp.ValueChanged += (s, e) =>
+            {
                 ev.TimeStamp = dtp.Value.GetValueOrDefault();
             };
 
             layout.CreateAndAddLabelAndControlRow("Timestamp", dtp);
 
-            layout.CreateAndAddDropDownRow("Type", ev.EventType.GetEnumNames(), (int)ev.EventType, (s, e) => {
+            layout.CreateAndAddDropDownRow("Type", ev.EventType.GetEnumNames(), (int)ev.EventType, (s, e) =>
+            {
                 ev.EventType = s.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventType>();
-            }, null);
+            });
 
             var objects = Flowsheet.SimulationObjects.Values.Select((x) => x.GraphicObject.Tag).ToList();
             objects.Insert(0, "");
@@ -230,7 +309,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             propids.Add("");
 
             int idx = 0;
-            
+
             if (ev.SimulationObjectID != "")
             {
                 if (Flowsheet.SimulationObjects.ContainsKey(ev.SimulationObjectID))
@@ -241,7 +320,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 }
             }
 
-            layout.CreateAndAddDropDownRow("Object", objects, idx, (s, e) => {
+            layout.CreateAndAddDropDownRow("Object", objects, idx, (s, e) =>
+            {
                 if (s.SelectedIndex != 0)
                 {
                     ev.SimulationObjectID = Flowsheet.GetFlowsheetSimulationObject(s.SelectedValue.ToString()).Name;
@@ -254,26 +334,30 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     propselector.Items.Clear();
                     propselector.Items.AddRange(props.Select((x) => new ListItem { Text = x }));
                 }
-                else {
-                    ev.SimulationObjectID = "";                
+                else
+                {
+                    ev.SimulationObjectID = "";
                 }
-            }, null);
+            });
 
             propselector = layout.CreateAndAddDropDownRow("Property", props,
                 props.IndexOf(Flowsheet.GetTranslatedString(ev.SimulationObjectProperty)),
-                (s, e) => {
-                    if (s.SelectedIndex >= 0) ev.SimulationObjectProperty = propids[s.SelectedIndex];                    
-                }, null);
+                (s, e) =>
+                {
+                    if (s.SelectedIndex >= 0) ev.SimulationObjectProperty = propids[s.SelectedIndex];
+                });
 
             layout.CreateAndAddStringEditorRow("Value",
-                ev.SimulationObjectPropertyValue, (s, e) => {
+                ev.SimulationObjectPropertyValue, (s, e) =>
+                {
                     ev.SimulationObjectPropertyValue = s.Text;
-                }, null);
+                });
 
             layout.CreateAndAddStringEditorRow("Units",
-                ev.SimulationObjectPropertyUnits, (s, e) => {
+                ev.SimulationObjectPropertyUnits, (s, e) =>
+                {
                     ev.SimulationObjectPropertyUnits = s.Text;
-                }, null);
+                });
 
             GlobalSettings.Settings.EditorTextBoxFixedSize = prevval;
 

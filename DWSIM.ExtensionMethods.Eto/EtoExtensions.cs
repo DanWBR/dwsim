@@ -152,6 +152,24 @@ namespace DWSIM.UI.Shared
             return alert;
         }
 
+        public static Dialog CreateDialogWithButtons(Control content, String title, Action okclicked, int width = 0, int height = 0)
+        {
+            var alert = new Eto.Forms.Dialog();
+            var t1 = new Eto.Forms.TableLayout {Padding = new Padding(5), Spacing = new Size(5, 5) };
+            t1.Rows.Add(new Eto.Forms.TableRow(content));
+            var t2 = new Eto.Forms.TableLayout();
+            var b1 = new Button { Text = "OK" };
+            b1.Click += (s, e) => { okclicked.Invoke(); alert.Close(); };
+            t2.Rows.Add(new Eto.Forms.TableRow(null, b1));
+            t1.Rows.Add(new Eto.Forms.TableRow(t2));
+            alert.Content = t1;
+            if (height != 0) alert.Height = (int)(sf * height);
+            if (width != 0) alert.Width = (int)(sf * width);
+            alert.Title = title;
+            alert.Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
+            return alert;
+        }
+
         public static DynamicLayout GetDefaultContainer()
         {
             var content = new DynamicLayout();
