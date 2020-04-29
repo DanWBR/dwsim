@@ -1451,6 +1451,10 @@ namespace DWSIM.UI.Forms
                     var item = "[" + DateTime.Now.ToString() + "] " + text;
                     try
                     {
+                        if (FlowsheetObject.DynamicMode)
+                        {
+                            if (outtxt.Text.Length > 500 * 50) outtxt.Text = "";
+                        }
                         outtxt.Append(item, true);
                         outtxt.Selection = new Range<int>(outtxt.Text.Length - item.Length, outtxt.Text.Length - 1);
                         switch (mtype)

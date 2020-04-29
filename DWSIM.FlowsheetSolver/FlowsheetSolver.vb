@@ -1195,7 +1195,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                      'throws exceptions if any
 
-                                                     If GlobalSettings.Settings.SolverBreakOnException And exlist.Count > 0 Then Throw New AggregateException(exlist)
+                                                     If Settings.SolverBreakOnException And exlist.Count > 0 Then Throw New AggregateException(exlist)
 
                                                      'checks for recycle convergence.
 

@@ -44,7 +44,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             tr1.Cells.Add(null);
 
             tl1.Rows.Add(tr1);
-
+             
             Rows.Add(new TableRow(tl1));
 
             var DocumentContainer = new DocumentControl() { AllowReordering = false, DisplayArrows = false };
@@ -471,7 +471,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     form.Location = btnAddVar.Location;
                     form.ShowModal(this);
                     lbVariables.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
-                    Flowsheet.DynamicsManager.IntegratorList[lbIntegrators.SelectedKey].MonitoredVariables.Add(es);
+                    Flowsheet.DynamicsManager.IntegratorList[lbIntegrators.SelectedKey].MonitoredVariables.Add(es);               
                 }
                 catch (Exception ex)
                 {

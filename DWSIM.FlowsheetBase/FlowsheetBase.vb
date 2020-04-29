@@ -1421,7 +1421,7 @@ Imports DWSIM.Interfaces.Enums
 
             For Each xel As XElement In data
                 Try
-                    StoredSolutions.Add(xel.@ID, xel.Elements)
+                    StoredSolutions.Add(xel.@ID, xel.Elements.ToList())
                 Catch ex As Exception
                 End Try
             Next
@@ -1706,6 +1706,14 @@ Imports DWSIM.Interfaces.Enums
             Dim id As String = xel.<Name>.Value
             Dim obj = SimulationObjects(id)
             obj.LoadData(xel.Elements.ToList)
+            If TypeOf obj Is Streams.MaterialStream Then
+                Dim stream = DirectCast(obj, Streams.MaterialStream)
+                For Each p In stream.Phases.Values
+                    For Each c In p.Compounds.Values
+                        c.ConstantProperties = SelectedCompounds(c.Name)
+                    Next
+                Next
+            End If
         Next
 
     End Sub

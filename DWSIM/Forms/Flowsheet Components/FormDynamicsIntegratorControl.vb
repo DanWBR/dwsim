@@ -123,7 +123,7 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRealtime_Click(sender As Object, e As EventArgs) Handles btnRealtime.Click
 
-        RunIntegrator(True, False)
+        If Flowsheet.DynamicMode Then RunIntegrator(True, False)
 
     End Sub
 
@@ -243,7 +243,7 @@ Public Class FormDynamicsIntegratorControl
                                             integrator.ShouldCalculatePressureFlow = False
                                         End If
 
-                                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, 0)
+                                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode)
 
                                         While GlobalSettings.Settings.CalculatorBusy
                                             Task.Delay(200).Wait()
