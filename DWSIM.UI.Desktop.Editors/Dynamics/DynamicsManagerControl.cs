@@ -735,10 +735,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
         private void PopulateScheduleProperties(IDynamicsSchedule sch)
         {
 
-            var prevval = GlobalSettings.Settings.EditorTextBoxFixedSize;
-
-            GlobalSettings.Settings.EditorTextBoxFixedSize = false;
-
             var layout = ext.GetDefaultContainer();
 
             var integrators = Flowsheet.DynamicsManager.IntegratorList.Values.ToList();
@@ -802,8 +798,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.Padding = new Padding(10, 10, schEditor.Width / 2, 10);
 
-            GlobalSettings.Settings.EditorTextBoxFixedSize = prevval;
-
             layout.Invalidate();
 
             schEditor.Content = layout;
@@ -812,10 +806,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         private void PopulateMonitoredVariable(IDynamicsMonitoredVariable mv)
         {
-
-            var prevval = GlobalSettings.Settings.EditorTextBoxFixedSize;
-
-            GlobalSettings.Settings.EditorTextBoxFixedSize = false;
 
             var layout = new DynamicLayout();
 
@@ -877,8 +867,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     mv.PropertyUnits = s.Text;
                 });
 
-            GlobalSettings.Settings.EditorTextBoxFixedSize = prevval;
-
             layout.Padding = new Padding(10, 10, mvEditor.Width / 3, 10);
 
             layout.Invalidate();
@@ -889,10 +877,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         private void PopulateIntegratorProperties(IDynamicsIntegrator integ, DocumentPage page)
         {
-
-            var prevval = GlobalSettings.Settings.EditorTextBoxFixedSize;
-
-            GlobalSettings.Settings.EditorTextBoxFixedSize = false;
 
             var layout = ext.GetDefaultContainer();
 
@@ -932,8 +916,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.Padding = new Padding(10, 10, page.Width/2, 10);
 
-            GlobalSettings.Settings.EditorTextBoxFixedSize = prevval;
-
             layout.Invalidate();
 
             page.Content = layout;
@@ -942,10 +924,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         public void PopulateEventContainer(Interfaces.IDynamicsEvent ev)
         {
-
-            var prevval = GlobalSettings.Settings.EditorTextBoxFixedSize;
-
-            GlobalSettings.Settings.EditorTextBoxFixedSize = false;
 
             var layout = new DynamicLayout();
 
@@ -1032,8 +1010,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     ev.SimulationObjectPropertyUnits = s.Text;
                 });
 
-            GlobalSettings.Settings.EditorTextBoxFixedSize = prevval;
-
             layout.Padding = new Padding(10, 10, eventEditor.Width / 3, 10);
 
             layout.Invalidate();
@@ -1044,10 +1020,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         public void PopulateCEIContainer(Interfaces.IDynamicsCauseAndEffectItem ev)
         {
-
-            var prevval = GlobalSettings.Settings.EditorTextBoxFixedSize;
-
-            GlobalSettings.Settings.EditorTextBoxFixedSize = false;
 
             var layout = new DynamicLayout();
 
@@ -1149,8 +1121,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 {
                     ev.SimulationObjectPropertyUnits = s.Text;
                 });
-
-            GlobalSettings.Settings.EditorTextBoxFixedSize = prevval;
 
             layout.Padding = new Padding(10, 10, ceiEditor.Width / 3, 10);
 

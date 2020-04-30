@@ -374,6 +374,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     btnViewResults.Enabled = true;
                     btnRT.Enabled = true;
                     pbProgress.Value = 0;
+                    Flowsheet.SupressMessages = false;
                 });
             });
 

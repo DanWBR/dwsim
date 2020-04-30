@@ -205,6 +205,8 @@ Public Class FormDynamicsIntegratorControl
         Dim streams_check As Double = 100000
         Dim pf_check As Double = 100000
 
+        Flowsheet.SupressMessages = True
+
         Dim maintask = New Task(Sub()
 
                                     Dim j As Integer = 0
@@ -254,7 +256,7 @@ Public Class FormDynamicsIntegratorControl
                                         Flowsheet.RunCodeOnUIThread(Sub()
                                                                         Flowsheet.FormDynamics.UpdateControllerList()
                                                                         Flowsheet.FormDynamics.UpdateIndicatorList()
-                                                                        Flowsheet.UpdateInterface()
+                                                                        Flowsheet.FormSurface.Invalidate()
                                                                         Flowsheet.UpdateOpenEditForms()
                                                                         Application.DoEvents()
                                                                     End Sub)
@@ -298,6 +300,7 @@ Public Class FormDynamicsIntegratorControl
                                                                   btnRealtime.Enabled = True
                                                                   ProgressBar1.Value = 0
                                                                   ProgressBar1.Style = ProgressBarStyle.Continuous
+                                                                  Flowsheet.SupressMessages = False
                                                               End Sub)
                               End Sub)
 
