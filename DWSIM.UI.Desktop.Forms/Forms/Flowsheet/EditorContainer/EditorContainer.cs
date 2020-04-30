@@ -7,10 +7,11 @@ using DWSIM.UI.Desktop.Editors;
 using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using DWSIM.UI.Shared;
+using Mono.Cecil.Cil;
 
 namespace DWSIM.UI.Forms
 {
-    public class ObjectEditorContainer : TabControl
+    public class ObjectEditorContainer : DocumentControl
     {
 
         public ISimulationObject obj;
@@ -19,7 +20,7 @@ namespace DWSIM.UI.Forms
 
         private bool loaded = false;
 
-        private TabPage PageResults, PageEditor, PageConnections;
+        private DocumentPage PageResults, PageEditor, PageDynamics, PageConnections;
 
         public ObjectEditorContainer(ISimulationObject sobj) : base()
         {
@@ -45,7 +46,7 @@ namespace DWSIM.UI.Forms
                 obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
             {
 
-                var tab1 = new TabPage();
+                var tab1 = new DocumentPage { Closable = false };
                 tab1.Text = "Connections";
 
                 var cont0 = UI.Shared.Common.GetDefaultContainer();
@@ -68,7 +69,7 @@ namespace DWSIM.UI.Forms
 
             // properties
 
-            var tab2 = new TabPage();
+            var tab2 = new DocumentPage { Closable = false };
             tab2.Text = "Properties";
 
             Pages.Add(tab2);
@@ -119,12 +120,12 @@ namespace DWSIM.UI.Forms
                 cont2.Tag = "Hydraulic Profile";
                 cont2.Width = this.Width - 30;
                 new PipeHydraulicProfile(obj, cont2);
-                Pages.Add(new TabPage(new Scrollable() { Content = cont2, Width = this.Width - 30 }) { Text = "Hydraulic Profile" });
+                Pages.Add(new DocumentPage(new Scrollable() { Content = cont2, Width = this.Width - 30 }) { Text = "Hydraulic Profile", Closable = false });
                 var cont3 = UI.Shared.Common.GetDefaultContainer();
                 cont3.Tag = "Thermal Profile";
                 cont3.Width = this.Width - 30;
                 new PipeThermalProfile(obj, cont3);
-                Pages.Add(new TabPage(new Scrollable() { Content = cont3, Width = this.Width - 30 }) { Text = "Thermal Profile" });
+                Pages.Add(new DocumentPage(new Scrollable() { Content = cont3, Width = this.Width - 30 }) { Text = "Thermal Profile", Closable = false });
             }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
             {
@@ -157,27 +158,46 @@ namespace DWSIM.UI.Forms
                     cont2.Rows.Add(new TableRow(dyn1));
                     cont2.Rows.Add(new TableRow(scripteditor));
                 }
-                Pages.Add(new TabPage(new Scrollable() { Content = cont2, Width = this.Width - 30 }) { Text = "Python Script" });
+                Pages.Add(new DocumentPage(new Scrollable() { Content = cont2, Width = this.Width - 30 }) { Text = "Python Script", Closable = false });
             }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.HeatExchanger)
             {
                 tab2.Text = "General";
-                var dyn1 = new UI.Desktop.Editors.ShellAndTubePropertiesView(obj);
+                var dyn1 = new ShellAndTubePropertiesView(obj);
                 dyn1.Width = this.Width - 30;
-                Pages.Add(new TabPage(new Scrollable() { Content = dyn1, Width = this.Width - 30 }) { Text = "Shell and Tube Properties" });
+                Pages.Add(new DocumentPage(new Scrollable() { Content = dyn1, Width = this.Width - 30 }) { Text = "Shell and Tube Properties", Closable = false });
             }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn ||
                     obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
             {
                 tab2.Text = "General";
-                var dyn2 = UI.Desktop.Editors.RigorousColumnShared.GetInitialEstimatesEditor((Column)obj);
+                var dyn2 = RigorousColumnShared.GetInitialEstimatesEditor((Column)obj);
                 dyn2.Width = this.Width - 30;
-                Pages.Add(new TabPage(new Scrollable() { Content = dyn2, Width = this.Width - 30 }) { Text = "Initial Estimates" });
+                Pages.Add(new DocumentPage(new Scrollable() { Content = dyn2, Width = this.Width - 30 }) { Text = "Initial Estimates", Closable = false });
             }
 
             PageEditor = tab2;
 
-            var tabr = new TabPage();
+            // dynamics
+
+            var tabd = new DocumentPage { Closable = false };
+            tabd.Text = "Dynamics";
+
+            var contd = UI.Shared.Common.GetDefaultContainer();
+
+            contd.Width = this.Width - 30;
+
+            new DWSIM.UI.Desktop.Editors.DynamicPropertiesEditor(obj, contd);
+
+            tabd.Content = new Scrollable() { Content = contd, Width = this.Width - 30 };
+
+            PageDynamics = tabd;
+
+            Pages.Add(tabd);
+
+            // results
+
+            var tabr = new DocumentPage { Closable = false };
             tabr.Text = "Results";
 
             var container = new TableLayout();
@@ -191,7 +211,7 @@ namespace DWSIM.UI.Forms
 
             if (obj.GraphicObject is ShapeGraphic)
             {
-                var tabx = new TabPage();
+                var tabx = new DocumentPage { Closable = false };
                 tabx.Text = "Appearance";
                 var editor = new ObjectAppearanceEditorView(obj.GetFlowsheet(), (ShapeGraphic)obj.GraphicObject);
                 editor.Width = this.Width - 30;
@@ -222,7 +242,7 @@ namespace DWSIM.UI.Forms
                     obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
                 {
 
-                    var tab1 = new TabPage();
+                    var tab1 = new DocumentPage { Closable = false };
                     tab1.Text = "Connections";
 
                     var cont0 = UI.Shared.Common.GetDefaultContainer();

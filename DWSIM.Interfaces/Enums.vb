@@ -120,74 +120,74 @@ Namespace Enums
 
     Public Enum UnitOfMeasure
 
-        accel
-        activity
-        activityCoefficient
-        area
-        boilingPointTemperature
-        cakeresistance
-        cinematic_viscosity
-        compressibility
-        compressibilityFactor
-        deltaP
-        deltaT
-        density
-        diameter
-        distance
-        enthalpy
-        entropy
-        excessEnthalpy
-        excessEntropy
-        force
-        foulingfactor
-        fugacity
-        fugacityCoefficient
-        gor
-        head
-        heat_transf_coeff
-        heatCapacityCp
-        heatCapacityCv
-        heatflow
-        idealGasHeatCapacity
-        jouleThomsonCoefficient
-        kvalue
-        logFugacityCoefficient
-        logKvalue
-        mass
-        mass_conc
-        massflow
-        massfraction
-        mediumresistance
-        meltingTemperature
-        molar_conc
-        molar_enthalpy
-        molar_entropy
-        molar_volume
-        molarflow
-        molarfraction
-        molecularWeight
-        pressure
-        reac_rate
-        reac_rate_heterog
-        spec_vol
-        speedOfSound
-        surfaceTension
-        temperature
-        thermalConductivity
-        thermalConductivityOfLiquid
-        thermalConductivityOfVapor
-        thickness
-        time
-        vaporPressure
-        velocity
-        viscosity
-        viscosityOfLiquid
-        viscosityOfVapor
-        volume
-        volumetricFlow
-        diffusivity
-        none
-        conductance
+        accel = 0
+        activity = 1
+        activityCoefficient = 2
+        area = 3
+        boilingPointTemperature = 4
+        cakeresistance = 5
+        cinematic_viscosity = 6
+        compressibility = 7
+        compressibilityFactor = 8
+        deltaP = 9
+        deltaT = 10
+        density = 11
+        diameter = 12
+        distance = 13
+        enthalpy = 14
+        entropy = 15
+        excessEnthalpy = 16
+        excessEntropy = 17
+        force = 18
+        foulingfactor = 19
+        fugacity = 20
+        fugacityCoefficient = 21
+        gor = 22
+        head = 23
+        heat_transf_coeff = 24
+        heatCapacityCp = 25
+        heatCapacityCv = 26
+        heatflow = 27
+        idealGasHeatCapacity = 28
+        jouleThomsonCoefficient = 29
+        kvalue = 30
+        logFugacityCoefficient = 31
+        logKvalue = 32
+        mass = 33
+        mass_conc = 34
+        massflow = 35
+        massfraction = 36
+        mediumresistance = 37
+        meltingTemperature = 38
+        molar_conc = 39
+        molar_enthalpy = 40
+        molar_entropy = 41
+        molar_volume = 42
+        molarflow = 43
+        molarfraction = 44
+        molecularWeight = 45
+        pressure = 46
+        reac_rate = 47
+        reac_rate_heterog = 48
+        spec_vol = 49
+        speedOfSound = 50
+        surfaceTension = 51
+        temperature = 52
+        thermalConductivity = 53
+        thermalConductivityOfLiquid = 54
+        thermalConductivityOfVapor = 55
+        thickness = 56
+        time = 57
+        vaporPressure = 58
+        velocity = 59
+        viscosity = 60
+        viscosityOfLiquid = 61
+        viscosityOfVapor = 62
+        volume = 63
+        volumetricFlow = 64
+        diffusivity = 65
+        none = 66
+        conductance = 67
 
     End Enum
 
