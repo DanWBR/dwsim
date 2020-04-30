@@ -21,7 +21,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         private Shared.Flowsheet Flowsheet;
 
-        private Button btnPlay, btnRT, btnStop, btnViewResults;
+        public Button btnPlay, btnRT, btnStop, btnViewResults;
 
         private ProgressBar pbProgress;
 
@@ -393,7 +393,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var integrator = Flowsheet.DynamicsManager.IntegratorList[schedule.CurrentIntegrator];
 
-            var spreadsheet = (ReoGridControl)Flowsheet.GetSpreadsheetObject.Invoke();
+            var sheetc = ((dynamic)(Flowsheet.FlowsheetForm)).Spreadsheet.Sheet;
+
+            var spreadsheet = (ReoGridControl)sheetc;
 
             var sheet = spreadsheet.NewWorksheet();
 
@@ -422,10 +424,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 }
                 i += 1;
             }
-
-            var dp = (DocumentPage)spreadsheet.Parent.Parent.Parent.Parent;
-            var dc = (DocumentControl)dp.Parent;
-            dc.SelectedPage = dp;
 
             spreadsheet.CurrentWorksheet = sheet;
 

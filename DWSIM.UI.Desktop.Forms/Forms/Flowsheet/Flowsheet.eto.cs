@@ -1191,6 +1191,10 @@ namespace DWSIM.UI.Forms
 
             DynIntegratorControl.Init();
 
+            DynIntegratorControl.btnViewResults.Click += (s2, e2) => {
+                DocumentContainer.SelectedIndex = 2;
+            };
+
             DynManagerControl.Init();
 
             DynManagerControl.chkDynamics.CheckedChanged += (s2, e2) => {
