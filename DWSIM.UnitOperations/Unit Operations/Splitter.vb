@@ -121,17 +121,54 @@ Namespace UnitOperations
 
         Public Overrides Sub RunDynamicModel()
 
-            Select Case OperationMode
+            OutCount = 0
+            For Each cp In GraphicObject.OutputConnectors
+                If cp.IsAttached Then OutCount += 1
+            Next
 
-                Case OpMode.StreamMassFlowSpec, OpMode.StreamMoleFlowSpec
+            If OutCount = 1 Then
 
-                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
+                GetInletMaterialStream(0).SetMassFlow(GetOutletMaterialStream(0).GetMassFlow)
 
-                Case Else
+                GetOutletMaterialStream(0).SetPressure(GetInletMaterialStream(0).GetPressure)
+                GetOutletMaterialStream(0).SetTemperature(GetInletMaterialStream(0).GetTemperature)
+                GetOutletMaterialStream(0).SetMassEnthalpy(GetInletMaterialStream(0).GetMassEnthalpy)
+                GetOutletMaterialStream(0).AssignFromPhase(PhaseLabel.Mixture, GetInletMaterialStream(0), False)
 
-                    Calculate()
+            ElseIf OutCount = 2 Then
 
-            End Select
+                GetInletMaterialStream(0).SetMassFlow(GetOutletMaterialStream(0).GetMassFlow + GetOutletMaterialStream(1).GetMassFlow)
+
+                GetOutletMaterialStream(0).SetPressure(GetInletMaterialStream(0).GetPressure)
+                GetOutletMaterialStream(0).SetTemperature(GetInletMaterialStream(0).GetTemperature)
+                GetOutletMaterialStream(0).SetMassEnthalpy(GetInletMaterialStream(0).GetMassEnthalpy)
+                GetOutletMaterialStream(0).AssignFromPhase(PhaseLabel.Mixture, GetInletMaterialStream(0), False)
+
+                GetOutletMaterialStream(1).SetPressure(GetInletMaterialStream(0).GetPressure)
+                GetOutletMaterialStream(1).SetTemperature(GetInletMaterialStream(0).GetTemperature)
+                GetOutletMaterialStream(1).SetMassEnthalpy(GetInletMaterialStream(0).GetMassEnthalpy)
+                GetOutletMaterialStream(1).AssignFromPhase(PhaseLabel.Mixture, GetInletMaterialStream(0), False)
+
+            ElseIf OutCount = 3 Then
+
+                GetInletMaterialStream(0).SetMassFlow(GetOutletMaterialStream(0).GetMassFlow + GetOutletMaterialStream(1).GetMassFlow + GetOutletMaterialStream(2).GetMassFlow)
+
+                GetOutletMaterialStream(0).SetPressure(GetInletMaterialStream(0).GetPressure)
+                GetOutletMaterialStream(0).SetTemperature(GetInletMaterialStream(0).GetTemperature)
+                GetOutletMaterialStream(0).SetMassEnthalpy(GetInletMaterialStream(0).GetMassEnthalpy)
+                GetOutletMaterialStream(0).AssignFromPhase(PhaseLabel.Mixture, GetInletMaterialStream(0), False)
+
+                GetOutletMaterialStream(1).SetPressure(GetInletMaterialStream(0).GetPressure)
+                GetOutletMaterialStream(1).SetTemperature(GetInletMaterialStream(0).GetTemperature)
+                GetOutletMaterialStream(1).SetMassEnthalpy(GetInletMaterialStream(0).GetMassEnthalpy)
+                GetOutletMaterialStream(1).AssignFromPhase(PhaseLabel.Mixture, GetInletMaterialStream(0), False)
+
+                GetOutletMaterialStream(2).SetPressure(GetInletMaterialStream(0).GetPressure)
+                GetOutletMaterialStream(2).SetTemperature(GetInletMaterialStream(0).GetTemperature)
+                GetOutletMaterialStream(2).SetMassEnthalpy(GetInletMaterialStream(0).GetMassEnthalpy)
+                GetOutletMaterialStream(2).AssignFromPhase(PhaseLabel.Mixture, GetInletMaterialStream(0), False)
+
+            End If
 
         End Sub
 
