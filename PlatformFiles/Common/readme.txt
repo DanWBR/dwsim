@@ -5,7 +5,7 @@ Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
-DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
+DWSIM is a software for modeling, simulation and optimization of steady-state and dynamic chemical processes.
 
 ==================================================
 DISCLAIMER
@@ -63,6 +63,18 @@ VERSION HISTORY / CHANGELOG
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
 
 Version 6.0
+
+- [NEW] Dynamic Simulation Mode
+- [NEW] New Object Types: PID Controller, Analog/Digital/Level Gauges, Input Box, Switch
+- [NEW] New PID Controller Tuning tool
+- [NEW] Store/Restore Flowsheet Solutions
+- [FIX] Various bug fixes and enhancements
+
+Version 5.8 Update 11
+
+- [FIX] Fixed Compressor/Expander Head calculations
+- [FIX] Fixed Compressor/Expander not being added to the flowsheet (Cross-Platform UI)
+- [FIX] Fixed display of first and last stage pressures of Absorption Columns
 
 Version 5.8 Update 10
 
