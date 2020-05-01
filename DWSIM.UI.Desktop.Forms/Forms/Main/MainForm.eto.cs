@@ -220,48 +220,52 @@ namespace DWSIM.UI
             {
                 if (File.Exists(item))
                 {
-                    var li = new TreeGridItem();
-                    var data = new Dictionary<string, string>();
-                    if (Path.GetExtension(item).ToLower() == ".dwxmz")
+                    try
                     {
-                        data = SharedClasses.Utility.GetSimulationFileDetails(FlowsheetBase.FlowsheetBase.LoadZippedXMLDoc(item));
-                    }
-                    else
-                    {
-                        data = SharedClasses.Utility.GetSimulationFileDetails(XDocument.Load(item));
-                    }
-                    li.Tag = data;
-                    data.Add("Path", item);
-                    DateTime dt;
-                    if (data.ContainsKey("SavedOn"))
-                    {
-                        dt = DateTime.Parse(data["SavedOn"]);
-                    }
-                    else
-                    {
-                        dt = File.GetLastWriteTime(item);
-                    }
-                    string dwsimver, osver;
-                    if (data.ContainsKey("DWSIMVersion"))
-                    {
-                        dwsimver = data["DWSIMVersion"];
-                    }
-                    else
-                    {
-                        dwsimver = "N/A";
-                    }
-                    if (data.ContainsKey("OSInfo"))
-                    {
-                        osver = data["OSInfo"];
-                    }
-                    else
-                    {
-                        osver = "N/A";
-                    }
-                    li.Values = new object[] {new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")).WithSize(16, 16),
+                        var li = new TreeGridItem();
+                        var data = new Dictionary<string, string>();
+                        if (Path.GetExtension(item).ToLower() == ".dwxmz")
+                        {
+                            data = SharedClasses.Utility.GetSimulationFileDetails(FlowsheetBase.FlowsheetBase.LoadZippedXMLDoc(item));
+                        }
+                        else
+                        {
+                            data = SharedClasses.Utility.GetSimulationFileDetails(XDocument.Load(item));
+                        }
+                        li.Tag = data;
+                        data.Add("Path", item);
+                        DateTime dt;
+                        if (data.ContainsKey("SavedOn"))
+                        {
+                            dt = DateTime.Parse(data["SavedOn"]);
+                        }
+                        else
+                        {
+                            dt = File.GetLastWriteTime(item);
+                        }
+                        string dwsimver, osver;
+                        if (data.ContainsKey("DWSIMVersion"))
+                        {
+                            dwsimver = data["DWSIMVersion"];
+                        }
+                        else
+                        {
+                            dwsimver = "N/A";
+                        }
+                        if (data.ContainsKey("OSInfo"))
+                        {
+                            osver = data["OSInfo"];
+                        }
+                        else
+                        {
+                            osver = "N/A";
+                        }
+                        li.Values = new object[] {new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")).WithSize(16, 16),
                             System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Path.GetFileNameWithoutExtension(item)),
                             dt, dwsimver, osver};
-                    tgc.Add(li);
+                        tgc.Add(li);
+                    }
+                    catch { }
                 }
             }
 
@@ -347,7 +351,7 @@ namespace DWSIM.UI
                     var si = (TreeGridItem)MostRecentList.SelectedItem;
                     var data = (Dictionary<string, string>)si.Tag;
                     LoadSimulation(data["Path"]);
-                    //MostRecentList.SelectedIndex = -1;
+                    MostRecentList.UnselectAll();
                 };
             };
 
@@ -356,7 +360,7 @@ namespace DWSIM.UI
                 if (SampleList.SelectedIndex >= 0)
                 {
                     LoadSimulation(SampleList.SelectedKey);
-                    //MostRecentList.SelectedIndex = -1;
+                    SampleList.SelectedValue = null;
                 };
             };
 

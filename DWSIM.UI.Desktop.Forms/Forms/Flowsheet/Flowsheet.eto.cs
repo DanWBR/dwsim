@@ -804,7 +804,7 @@ namespace DWSIM.UI.Forms
             PanelObjects.Pages.Add(new DocumentPage(objcontainer) { Text = "Object Palette", Closable = false });
 
             Split2.Panel2 = PanelObjects;
-            Split2.Panel2.Height = 120;
+            Split2.Panel2.Height = 120 * (int)sf;
 
             foreach (var obj in ObjectList.Values.OrderBy(x => x.GetDisplayName()))
             {
@@ -962,28 +962,6 @@ namespace DWSIM.UI.Forms
 
             var chkControlPanelMode = new Eto.Forms.CheckBox { Text = "Control Panel Mode" };
 
-            chkControlPanelMode.CheckedChanged += (s, e) =>
-            {
-                if (chkControlPanelMode.Checked.GetValueOrDefault())
-                {
-                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = true;
-                    GlobalSettings.Settings.DarkMode = true;
-                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray;
-                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke;
-                    Split2.Panel2.Height = 1;
-                }
-                else
-                {
-                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = false;
-                    GlobalSettings.Settings.DarkMode = false;
-                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White;
-                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black;
-                    Split2.Panel2.Height = 120;
-                }
-                FlowsheetControl.Invalidate();
-                Split2.Invalidate();
-            };
-
             var menu1 = new StackLayout
             {
                 Items = { chkControlPanelMode,  new Label {Text =" " },
@@ -1001,11 +979,89 @@ namespace DWSIM.UI.Forms
 
             flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
 
-            flowsheetcontrolcontainer.Rows.Add(new TableRow(FlowsheetControl));
+            Button btnUp, btnLeft, btnRight, btnDown;
+
+            btnUp = new Button { Text = "^", Height = 24, Visible = false };
+            btnLeft = new Button { Text = "<", Width = 24, Visible = false };
+            btnRight = new Button { Text = ">", Width = 24, Visible = false };
+            btnDown = new Button { Text = "v", Height = 24, Visible = false };
+
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(btnUp));
+
+            var tabfl1 = new TableLayout();
+            var tabfl1r = new TableRow();
+            tabfl1r.Cells.Add(new TableCell(btnLeft));
+            tabfl1r.Cells.Add(new TableCell(FlowsheetControl, true));
+            tabfl1r.Cells.Add(new TableCell(btnRight));
+            tabfl1.Rows.Add(tabfl1r);
+
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(tabfl1) { ScaleHeight = true });
+
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(btnDown));
 
             Split2.Panel1 = flowsheetcontrolcontainer;
 
             SplitterFlowsheet = Split2;
+
+            btnLeft.Click += (s, e) => {
+                Size sz = SplitterFlowsheet.Panel1.Size;
+                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+                var offs = (double)sz.Width / (double)z * sf;
+                this.FlowsheetControl.FlowsheetSurface.OffsetAll((int)offs, 0);
+                this.FlowsheetControl.Invalidate();
+            };
+
+            btnRight.Click += (s, e) => {
+                Size sz = SplitterFlowsheet.Panel1.Size;
+                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+                var offs = -(double)sz.Width / (double)z * sf;
+                this.FlowsheetControl.FlowsheetSurface.OffsetAll((int)offs, 0);
+                this.FlowsheetControl.Invalidate();
+            };
+
+            btnUp.Click += (s, e) => {
+                Size sz = SplitterFlowsheet.Panel1.Size;
+                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+                var offs = (double)sz.Height / (double)z * sf;
+                this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, (int)offs);
+                this.FlowsheetControl.Invalidate();
+            };
+
+            btnDown.Click += (s, e) => {
+                Size sz = SplitterFlowsheet.Panel1.Size;
+                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+                var offs = (double)sz.Height / (double)z * sf;
+                this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, -(int)offs);
+                this.FlowsheetControl.Invalidate();
+            };
+
+            chkControlPanelMode.CheckedChanged += (s, e) =>
+            {
+                if (chkControlPanelMode.Checked.GetValueOrDefault())
+                {
+                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = true;
+                    GlobalSettings.Settings.DarkMode = true;
+                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray;
+                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke;
+                    btnLeft.Visible = true;
+                    btnUp.Visible = true;
+                    btnDown.Visible = true;
+                    btnRight.Visible = true;
+                }
+                else
+                {
+                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = false;
+                    GlobalSettings.Settings.DarkMode = false;
+                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White;
+                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black;
+                    btnLeft.Visible = false;
+                    btnUp.Visible = false;
+                    btnDown.Visible = false;
+                    btnRight.Visible = false;
+                }
+                FlowsheetControl.Invalidate();
+                Split2.Invalidate();
+            };
 
             Split3.Panel2 = SetupLogWindow();
             Split3.Panel2.Height = (int)(sf * 120);
@@ -1230,8 +1286,8 @@ namespace DWSIM.UI.Forms
             btnmSnapToGrid.Checked = FlowsheetObject.Options.FlowsheetSnapToGrid;
             btnmMultiSelect.Checked = FlowsheetObject.Options.FlowsheetMultiSelectMode;
 
-            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
-            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
+            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
             FlowsheetControl.Invalidate();
 
             ScriptListControl.UpdateList();
@@ -1252,9 +1308,13 @@ namespace DWSIM.UI.Forms
                 chkDynamics.Checked = FlowsheetObject.DynamicMode;
             };
 
+            DocumentContainer.SelectedIndexChanged += (sender2, e2) =>
+            {
+                DynManagerControl.CheckModelStatus();
+            };
+
             if (Application.Instance.Platform.IsWpf)
             {
-
                 DocumentContainer.SelectedIndexChanged += (sender2, e2) =>
                 {
                     if (TabSwitch)

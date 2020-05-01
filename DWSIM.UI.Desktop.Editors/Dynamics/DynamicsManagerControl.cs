@@ -9,6 +9,9 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using DWSIM.Interfaces;
+using DWSIM.Thermodynamics.Streams;
+using DWSIM.Interfaces.Enums.GraphicObjects;
+using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -24,6 +27,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
         private ListBox lbEventSets, lbEvents, lbCEM, lbCEI, lbSchedules, lbIntegrators, lbVariables;
 
         private Shared.Flowsheet Flowsheet;
+
+        private ImageView pb1, pb2, pb3;
 
         public DynamicsManagerControl(Shared.Flowsheet fs) : base()
         {
@@ -71,9 +76,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var l1 = new PixelLayout();
 
-            var pb1 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.Default) };
-            var pb2 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.Default) };
-            var pb3 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.Default) };
+            pb1 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High) };
+            pb2 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High) };
+            pb3 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High) };
 
             var label1 = new Label { Height = 40, Text = "All Endpoint Material Streams are connected to Control Valves", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()), VerticalAlignment = VerticalAlignment.Center };
             var label2 = new Label { Height = 40, Text = "All Control Valves are configured with Kv Calculation Modes", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()), VerticalAlignment = VerticalAlignment.Center };
@@ -88,6 +93,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             l1.Add(label3, 70, 120);
 
             DocumentContainer.Pages[0].Content = l1;
+
+            DocumentContainer.Pages[0].MouseEnter += (s, e) => {
+                CheckModelStatus();
+            };
 
             // event sets
 
@@ -220,13 +229,13 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             rce2.Rows.Add(new TableRow(eventEditor));
             rce2.Padding = new Padding(5, 5, 5, 5);
 
-            var splites2 = new Splitter() { };
+            var splites2 = new Eto.Forms.Splitter() { };
             splites2.Panel1 = rce;
             splites2.Panel1.Width = 250;
             splites2.Panel2 = rce2;
             splites2.SplitterWidth = 2;
 
-            var splites = new Splitter() { };
+            var splites = new Eto.Forms.Splitter() { };
             splites.Panel1 = lce;
             splites.Panel1.Width = 250;
             splites.Panel2 = splites2;
@@ -365,13 +374,13 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             rcce2.Rows.Add(new TableRow(ceiEditor));
             rcce2.Padding = new Padding(5, 5, 5, 5);
 
-            var splites2a = new Splitter() { };
+            var splites2a = new Eto.Forms.Splitter() { };
             splites2a.Panel1 = rcce;
             splites2a.Panel1.Width = 250;
             splites2a.Panel2 = rcce2;
             splites2a.SplitterWidth = 2;
 
-            var splitesa = new Splitter() { };
+            var splitesa = new Eto.Forms.Splitter() { };
             splitesa.Panel1 = lcce;
             splitesa.Panel1.Width = 250;
             splitesa.Panel2 = splites2a;
@@ -524,7 +533,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             rcv.Rows.Add(new TableRow(mvEditor));
             rcv.Padding = new Padding(5, 5, 5, 5);
 
-            var splites2b1 = new Splitter() { };
+            var splites2b1 = new Eto.Forms.Splitter() { };
             splites2b1.Panel1 = lcv;
             splites2b1.Panel1.Width = 250;
             splites2b1.Panel2 = rcv;
@@ -537,7 +546,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             docc1.Pages.Add(docp1);
             docc1.Pages.Add(docp2);
 
-            var splitesb = new Splitter() { };
+            var splitesb = new Eto.Forms.Splitter() { };
             splitesb.Panel1 = lcci;
             splitesb.Panel1.Width = 250;
             splitesb.Panel2 = rcci;
@@ -617,7 +626,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             rcs.Rows.Add(new TableRow(schEditor));
             rcs.Padding = new Padding(5, 5, 5, 5);
 
-            var splites2s = new Splitter() { };
+            var splites2s = new Eto.Forms.Splitter() { };
             splites2s.Panel1 = lcs;
             splites2s.Panel1.Width = 250;
             splites2s.Panel2 = rcs;
@@ -1125,6 +1134,79 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             ceiEditor.Content = layout;
 
+        }
+
+        public void CheckModelStatus()
+        {
+            bool streams_ok, uos_ok, valves_ok;
+
+            streams_ok = true;
+            uos_ok = true;
+            valves_ok = true;
+
+            // material streams
+
+            foreach (var stream in Flowsheet.SimulationObjects.Values.Where(x => x is MaterialStream))
+            {
+                if (stream.GraphicObject.InputConnectors[0].IsAttached & !stream.GraphicObject.OutputConnectors[0].IsAttached)
+                {
+                    if (stream.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.ObjectType != ObjectType.Valve)
+                    {
+                        streams_ok = false;
+                        break;
+                    }
+                }
+                if (stream.GraphicObject.OutputConnectors[0].IsAttached & !stream.GraphicObject.InputConnectors[0].IsAttached)
+                {
+                    if (stream.GraphicObject.OutputConnectors[0].AttachedConnector.AttachedTo.ObjectType != ObjectType.Valve)
+                    {
+                        streams_ok = false;
+                        break;
+                    }
+                }
+            }
+
+            // unit operations
+
+            foreach (var obj in Flowsheet.SimulationObjects.Values)
+            {
+                if (!obj.SupportsDynamicMode)
+                {
+                    uos_ok = false;
+                    break;
+                }
+            }
+
+            // valves
+
+            foreach (var v in Flowsheet.SimulationObjects.Values.Where(x => x is Valve))
+            {
+                if (((Valve)v).CalcMode == Valve.CalculationMode.DeltaP)
+                {
+                    valves_ok = false;
+                    break;
+                }
+                if (((Valve)v).CalcMode == Valve.CalculationMode.OutletPressure)
+                {
+                    valves_ok = false;
+                    break;
+                }
+            }
+
+            if (streams_ok)
+                pb1.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High);
+            else
+                pb1.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cancel.png"), 40, 40, ImageInterpolation.High);
+
+            if (uos_ok)
+                pb3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High);
+            else
+                pb3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cancel.png"), 40, 40, ImageInterpolation.High);
+
+            if (valves_ok)
+                pb2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High);
+            else
+                pb2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cancel.png"), 40, 40, ImageInterpolation.High);
         }
 
 
