@@ -408,7 +408,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             i = 1;
             foreach (var var in integrator.MonitoredVariables)
             {
-                sheet.Cells[0, i].Data = var.Description + var.PropertyUnits != "" ? " (" + var.PropertyUnits + ")" : "";
+                sheet.Cells[0, i].Data = var.Description + " " + (var.PropertyUnits != "" ? " (" + var.PropertyUnits + ")" : "");
                 i += 1;
             }
 

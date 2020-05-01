@@ -158,7 +158,7 @@ namespace DWSIM.UI.Forms
                 btnmInspector.Text = "View Inspector";
                 chkmDynamics.Text = "Dynamic Mode";
                 btnmDynIntegrator.Text = "Integrator";
-                btnmDynManager.Text = "Dyn. Manager";
+                btnmDynManager.Text = "Manager";
             }
 
             ToolBar = new ToolBar
