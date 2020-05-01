@@ -8,6 +8,7 @@ using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using DWSIM.UI.Shared;
 using Mono.Cecil.Cil;
+using System.Linq;
 
 namespace DWSIM.UI.Forms
 {
@@ -165,7 +166,7 @@ namespace DWSIM.UI.Forms
                 cont2.Width = this.Width - 30;
                 if (Application.Instance.Platform.IsWpf)
                 {
-                    var scripteditor = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl() {  ScriptText = ((CustomUO)obj).ScriptText };
+                    var scripteditor = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl() { ScriptText = ((CustomUO)obj).ScriptText };
                     var dyn1 = new DynamicLayout();
                     dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
                     {
@@ -210,20 +211,26 @@ namespace DWSIM.UI.Forms
 
             // dynamics
 
-            var tabd = new DocumentPage { Closable = false };
-            tabd.Text = "Dynamics";
+            if (obj.SupportsDynamicMode)
+            {
+                if (obj.ExtraPropertiesDescriptions.Count() > 0)
+                {
+                    var tabd = new DocumentPage { Closable = false };
+                    tabd.Text = "Dynamics";
 
-            var contd = UI.Shared.Common.GetDefaultContainer();
+                    var contd = UI.Shared.Common.GetDefaultContainer();
 
-            contd.Width = this.Width - 30;
+                    contd.Width = this.Width - 30;
 
-            new DynamicPropertiesEditor(obj, contd);
+                    new DynamicPropertiesEditor(obj, contd);
 
-            tabd.Content = new Scrollable() { Content = contd, Width = this.Width - 30 };
+                    tabd.Content = new Scrollable() { Content = contd, Width = this.Width - 30 };
 
-            PageDynamics = tabd;
+                    PageDynamics = tabd;
 
-            Pages.Add(tabd);
+                    Pages.Add(tabd);
+                }
+            }
 
             // results
 
@@ -259,7 +266,7 @@ namespace DWSIM.UI.Forms
         public void UpdateConnections()
         {
 
-            if ( PageConnections != null)
+            if (PageConnections != null)
             {
 
                 PageConnections.Content = null;
@@ -281,11 +288,11 @@ namespace DWSIM.UI.Forms
                     new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont0);
 
                     cont0.Width = this.Width - 30;
-                    
+
                     PageConnections.Content = new Scrollable() { Content = cont0, Width = this.Width - 30 };
 
                 }
-                
+
             }
 
         }
@@ -347,7 +354,7 @@ namespace DWSIM.UI.Forms
             }
 
             PageResults.Content = null;
-            
+
             var container = new TableLayout();
             new DWSIM.UI.Desktop.Editors.Results(obj, container);
             PageResults.Content = new Scrollable() { Content = container, Width = this.Width - 30 };
