@@ -24,6 +24,7 @@ namespace DWSIM.UI.Forms
 
         public ObjectEditorContainer(ISimulationObject sobj) : base()
         {
+            DisplayArrows = true;
             obj = sobj;
             Tag = obj.Name;
             this.Width = 300;
@@ -43,6 +44,11 @@ namespace DWSIM.UI.Forms
             if (obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream &&
                 obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream &&
                 obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.LevelGauge &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.AnalogGauge &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.DigitalGauge &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.Input &&
+                obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.Switch &&
                 obj.GraphicObject.ObjectType != Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
             {
 
@@ -94,6 +100,10 @@ namespace DWSIM.UI.Forms
             {
                 DWSIM.UI.Desktop.Editors.LogicalBlocks.AdjustEditor.Populate(obj, cont);
             }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Controller_PID)
+            {
+                DWSIM.UI.Desktop.Editors.LogicalBlocks.PIDControllerEditor.Populate(obj, cont);
+            }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
             {
                 DWSIM.UI.Desktop.Editors.LogicalBlocks.SpecEditor.Populate(obj, cont);
@@ -105,6 +115,26 @@ namespace DWSIM.UI.Forms
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_EnergyRecycle)
             {
                 DWSIM.UI.Desktop.Editors.LogicalBlocks.EnergyRecycleEditor.Populate(obj, cont);
+            }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.LevelGauge)
+            {
+                DWSIM.UI.Desktop.Editors.LogicalBlocks.LevelGaugeEditor.Populate(obj, cont);
+            }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AnalogGauge)
+            {
+                DWSIM.UI.Desktop.Editors.LogicalBlocks.AnalogGaugeEditor.Populate(obj, cont);
+            }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DigitalGauge)
+            {
+                DWSIM.UI.Desktop.Editors.LogicalBlocks.DigitalGaugeEditor.Populate(obj, cont);
+            }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Switch)
+            {
+                DWSIM.UI.Desktop.Editors.LogicalBlocks.SwitchEditor.Populate(obj, cont);
+            }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Input)
+            {
+                DWSIM.UI.Desktop.Editors.LogicalBlocks.InputEditor.Populate(obj, cont);
             }
             else
             {
@@ -187,7 +217,7 @@ namespace DWSIM.UI.Forms
 
             contd.Width = this.Width - 30;
 
-            new DWSIM.UI.Desktop.Editors.DynamicPropertiesEditor(obj, contd);
+            new DynamicPropertiesEditor(obj, contd);
 
             tabd.Content = new Scrollable() { Content = contd, Width = this.Width - 30 };
 

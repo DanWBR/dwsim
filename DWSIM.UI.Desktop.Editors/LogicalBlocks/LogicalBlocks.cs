@@ -27,6 +27,7 @@ using s = DWSIM.UI.Shared.Common;
 using DWSIM.Interfaces.Enums;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
+using DotNumerics.Optimization.TN;
 
 namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 {
@@ -526,6 +527,849 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             container.CreateAndAddLabelRow("Expression");
 
             container.CreateAndAddStringEditorRow2("Y = f(X) = ", "enter a math expression using X as the only variable", spec.Expression, (sender, e) => spec.Expression = sender.Text);
+
+        }
+
+    }
+
+    public static class PIDControllerEditor
+    {
+
+        public static void Populate(ISimulationObject simobj, DynamicLayout container)
+        {
+
+            var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
+            var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
+
+            var pid = (PIDController)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
+
+            var objlist = pid.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            objlist.Insert(0, "");
+            List<string> proplist = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Manipulated Object");
+
+            DropDown spin1 = null, spin2 = null;
+
+            spin1 = s.CreateAndAddDropDownRow(container, "Manipulated Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ManipulatedObjectData.ID))
+                    {
+                        var prevobj = pid.GetFlowsheet().SimulationObjects[pid.ManipulatedObjectData.ID];
+                        prevobj.IsAdjustAttached = false;
+                        prevobj.AttachedAdjustId = "";
+                        prevobj.AdjustVarType = AdjustVarType.None;
+                    }
+
+                    var obj = pid.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    pid.ManipulatedObjectData.ID = obj.Name;
+
+                    obj.IsAdjustAttached = true;
+                    obj.AttachedAdjustId = pid.Name;
+                    obj.AdjustVarType = AdjustVarType.Manipulated;
+
+                    pid.ManipulatedObject = (DWSIM.SharedClasses.UnitOperations.BaseClass)obj;
+                    ((PIDControllerGraphic)pid.GraphicObject).ConnectedToMv = (GraphicObject)obj.GraphicObject;
+
+                    proplist = obj.GetProperties(PropertyType.WR).ToList();
+                    proplist.Insert(0, "");
+
+                    spin2.Items.Clear();
+                    spin2.Items.AddRange(proplist.Select(x => new ListItem() { Text = pid.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (pid.ManipulatedObjectData.PropertyName != "" && proplist.Contains(pid.ManipulatedObjectData.PropertyName))
+                    {
+                        spin2.SelectedIndex = (proplist.IndexOf(pid.ManipulatedObjectData.PropertyName));
+                    }
+
+                }
+                else
+                {
+                    spin2.Items.Clear();
+                }
+            });
+
+            spin2 = s.CreateAndAddDropDownRow(container, "Manipulated Property", proplist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    pid.ManipulatedObjectData.PropertyName = proplist[sender.SelectedIndex];
+                }
+            });
+
+            s.CreateAndAddStringEditorRow(container, "Manipulated Property Units",
+                pid.ManipulatedObjectData.Units, (tb, e) =>
+                {
+                    pid.ManipulatedObjectData.Units = tb.Text;
+                });
+
+            List<string> proplist2 = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Controlled Object");
+
+            DropDown spin3 = null, spin4 = null;
+
+            spin3 = s.CreateAndAddDropDownRow(container, "Controlled Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ControlledObjectData.ID))
+                    {
+                        var prevobj = pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID];
+                        prevobj.IsAdjustAttached = false;
+                        prevobj.AttachedAdjustId = "";
+                        prevobj.AdjustVarType = AdjustVarType.None;
+                    }
+
+                    var obj = pid.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    pid.ControlledObjectData.ID = obj.Name;
+
+                    obj.IsAdjustAttached = true;
+                    obj.AttachedAdjustId = pid.Name;
+                    obj.AdjustVarType = AdjustVarType.Controlled;
+
+                    pid.ControlledObject = (DWSIM.SharedClasses.UnitOperations.BaseClass)pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID];
+                    ((PIDControllerGraphic)pid.GraphicObject).ConnectedToCv = (GraphicObject)pid.ControlledObject.GraphicObject;
+
+                    proplist2 = pid.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]).GetProperties(PropertyType.ALL).ToList();
+                    proplist2.Insert(0, "");
+
+                    spin4.Items.Clear();
+                    spin4.Items.AddRange(proplist2.Select(x => new ListItem() { Text = pid.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (pid.ControlledObjectData.PropertyName != "" && proplist2.Contains(pid.ControlledObjectData.PropertyName))
+                    {
+                        spin4.SelectedIndex = (proplist2.IndexOf(pid.ControlledObjectData.PropertyName));
+                    }
+                }
+                else
+                {
+                    spin4.Items.Clear();
+                }
+            });
+
+            spin4 = s.CreateAndAddDropDownRow(container, "Controlled Property", proplist2, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    pid.ControlledObjectData.PropertyName = proplist2[sender.SelectedIndex];
+                    var obj = pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID];
+                }
+            });
+
+            s.CreateAndAddStringEditorRow(container, "Controlled Property Units",
+                pid.ControlledObjectData.Units, (tb, e) =>
+                {
+                    pid.ControlledObjectData.Units = tb.Text;
+                });
+
+            s.CreateAndAddLabelRow(container, "Controller Parameters");
+
+            s.CreateAndAddCheckBoxRow(container, "Controller Active", pid.Active, (chk, e) =>
+            {
+                pid.Active = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Reverse Acting", pid.ReverseActing, (chk, e) =>
+            {
+                pid.ReverseActing = chk.Checked.GetValueOrDefault();
+            });
+
+            var txtvalue = s.CreateAndAddTextBoxRow(container, nf, "Set-Point", pid.AdjustValue, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.AdjustValue = Double.Parse(sender.Text);
+                }
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Offset (Bias)", pid.Offset, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.Offset = Double.Parse(sender.Text);
+                }
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Minimum Output Value", pid.OutputMin, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.OutputMin = Double.Parse(sender.Text);
+                }
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Maximum Output Value", pid.OutputMax, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.OutputMax = Double.Parse(sender.Text);
+                }
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Kp", pid.Kp, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.Kp = Double.Parse(sender.Text);
+                }
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Ki", pid.Ki, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.Ki = Double.Parse(sender.Text);
+                }
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Kd", pid.Kd, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.Kd = Double.Parse(sender.Text);
+                }
+            });
+
+            if (pid.ManipulatedObjectData.ID != "" && pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ManipulatedObjectData.ID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(pid.GetFlowsheet().SimulationObjects[pid.ManipulatedObjectData.ID].GraphicObject.Tag));
+            }
+
+            if (pid.ControlledObjectData.ID != "" && pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ControlledObjectData.ID))
+            {
+                spin3.SelectedIndex = (objlist.IndexOf(pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID].GraphicObject.Tag));
+            }
+
+        }
+
+    }
+
+    public static class LevelGaugeEditor
+    {
+
+        public static void Populate(ISimulationObject simobj, DynamicLayout container)
+        {
+
+            var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
+            var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
+
+            var spec = (LevelGauge)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
+
+            var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            objlist.Insert(0, "");
+            List<string> proplist = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Source Object");
+
+            DropDown spin1 = null, spin2 = null;
+
+            spin1 = s.CreateAndAddDropDownRow(container, "Source Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+                    {
+                        var prevobj = spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID];
+                        prevobj.IsSpecAttached = false;
+                        prevobj.AttachedSpecId = "";
+                        prevobj.SpecVarType = SpecVarType.None;
+                    }
+
+                    var obj = spec.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    spec.SelectedObjectID = obj.Name;
+
+                    proplist = obj.GetProperties(PropertyType.ALL).ToList();
+                    proplist.Insert(0, "");
+
+                    spin2.Items.Clear();
+                    spin2.Items.AddRange(proplist.Select(x => new ListItem() { Text = spec.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (spec.SelectedProperty != "" && proplist.Contains(spec.SelectedProperty))
+                    {
+                        spin2.SelectedIndex = (proplist.IndexOf(spec.SelectedProperty));
+                    }
+
+                }
+                else
+                {
+                    spin2.Items.Clear();
+                }
+            });
+
+            spin2 = s.CreateAndAddDropDownRow(container, "Source Property", proplist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    spec.SelectedProperty = proplist[sender.SelectedIndex];
+                }
+            });
+
+            if (spec.SelectedObjectID != "" && spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID].GraphicObject.Tag));
+            }
+
+            s.CreateAndAddStringEditorRow(container, "Source Property Units",
+               spec.SelectedPropertyUnits, (tb, e) =>
+               {
+                   spec.SelectedPropertyUnits = tb.Text;
+               });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Minimum Value",
+              spec.MinimumValue, (tb, e) =>
+              {
+                  spec.MinimumValue = tb.Text.ToDoubleFromCurrent();
+              });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Maximum Value",
+              spec.MaximumValue, (tb, e) =>
+              {
+                  spec.MaximumValue = tb.Text.ToDoubleFromCurrent();
+              });
+
+            s.CreateAndAddLabelRow(container, "Alarm Parameters");
+
+            s.CreateAndAddCheckBoxRow(container, "Show Alarm Indicators", spec.ShowAlarms, (chk, e) =>
+            {
+                spec.ShowAlarms = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Very Low", spec.VeryLowAlarmEnabled, (chk, e) =>
+            {
+                spec.VeryLowAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Very Low Value",
+            spec.VeryLowAlarmValue, (tb, e) =>
+            {
+                spec.VeryLowAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Low", spec.LowAlarmEnabled, (chk, e) =>
+            {
+                spec.LowAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Low Value",
+            spec.LowAlarmValue, (tb, e) =>
+            {
+                spec.LowAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "High", spec.HighAlarmEnabled, (chk, e) =>
+            {
+                spec.HighAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "High Value",
+            spec.HighAlarmValue, (tb, e) =>
+            {
+                spec.HighAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Very High", spec.VeryHighAlarmEnabled, (chk, e) =>
+            {
+                spec.VeryHighAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Very High Value",
+            spec.VeryHighAlarmValue, (tb, e) =>
+            {
+                spec.VeryHighAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+        }
+
+    }
+
+    public static class DigitalGaugeEditor
+    {
+
+        public static void Populate(ISimulationObject simobj, DynamicLayout container)
+        {
+
+            var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
+            var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
+
+            var spec = (DigitalGauge)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
+
+            var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            objlist.Insert(0, "");
+            List<string> proplist = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Source Object");
+
+            DropDown spin1 = null, spin2 = null;
+
+            spin1 = s.CreateAndAddDropDownRow(container, "Source Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+                    {
+                        var prevobj = spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID];
+                        prevobj.IsSpecAttached = false;
+                        prevobj.AttachedSpecId = "";
+                        prevobj.SpecVarType = SpecVarType.None;
+                    }
+
+                    var obj = spec.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    spec.SelectedObjectID = obj.Name;
+
+                    proplist = obj.GetProperties(PropertyType.ALL).ToList();
+                    proplist.Insert(0, "");
+
+                    spin2.Items.Clear();
+                    spin2.Items.AddRange(proplist.Select(x => new ListItem() { Text = spec.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (spec.SelectedProperty != "" && proplist.Contains(spec.SelectedProperty))
+                    {
+                        spin2.SelectedIndex = (proplist.IndexOf(spec.SelectedProperty));
+                    }
+
+                }
+                else
+                {
+                    spin2.Items.Clear();
+                }
+            });
+
+            spin2 = s.CreateAndAddDropDownRow(container, "Source Property", proplist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    spec.SelectedProperty = proplist[sender.SelectedIndex];
+                }
+            });
+
+            if (spec.SelectedObjectID != "" && spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID].GraphicObject.Tag));
+            }
+
+            s.CreateAndAddStringEditorRow(container, "Source Property Units",
+               spec.SelectedPropertyUnits, (tb, e) =>
+               {
+                   spec.SelectedPropertyUnits = tb.Text;
+               });
+
+            s.CreateAndAddNumericEditorRow(container, "Integer Digits", 
+                spec.IntegralDigits, 1, 10, 0, (ns, e) => {
+                    spec.IntegralDigits = (int)ns.Value;
+                });
+
+            s.CreateAndAddNumericEditorRow(container, "Decimal Digits",
+                spec.DecimalDigits, 1, 10, 0, (ns, e) => {
+                    spec.DecimalDigits = (int)ns.Value;
+                });
+
+            s.CreateAndAddLabelRow(container, "Alarm Parameters");
+
+            s.CreateAndAddCheckBoxRow(container, "Show Alarm Indicators", spec.ShowAlarms, (chk, e) =>
+            {
+                spec.ShowAlarms = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Very Low", spec.VeryLowAlarmEnabled, (chk, e) =>
+            {
+                spec.VeryLowAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Very Low Value",
+            spec.VeryLowAlarmValue, (tb, e) =>
+            {
+                spec.VeryLowAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Low", spec.LowAlarmEnabled, (chk, e) =>
+            {
+                spec.LowAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Low Value",
+            spec.LowAlarmValue, (tb, e) =>
+            {
+                spec.LowAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "High", spec.HighAlarmEnabled, (chk, e) =>
+            {
+                spec.HighAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "High Value",
+            spec.HighAlarmValue, (tb, e) =>
+            {
+                spec.HighAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Very High", spec.VeryHighAlarmEnabled, (chk, e) =>
+            {
+                spec.VeryHighAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Very High Value",
+            spec.VeryHighAlarmValue, (tb, e) =>
+            {
+                spec.VeryHighAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+        }
+
+    }
+
+    public static class AnalogGaugeEditor
+    {
+
+        public static void Populate(ISimulationObject simobj, DynamicLayout container)
+        {
+
+            var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
+            var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
+
+            var spec = (AnalogGauge)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
+
+            var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            objlist.Insert(0, "");
+            List<string> proplist = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Source Object");
+
+            DropDown spin1 = null, spin2 = null;
+
+            spin1 = s.CreateAndAddDropDownRow(container, "Source Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+                    {
+                        var prevobj = spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID];
+                        prevobj.IsSpecAttached = false;
+                        prevobj.AttachedSpecId = "";
+                        prevobj.SpecVarType = SpecVarType.None;
+                    }
+
+                    var obj = spec.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    spec.SelectedObjectID = obj.Name;
+
+                    proplist = obj.GetProperties(PropertyType.ALL).ToList();
+                    proplist.Insert(0, "");
+
+                    spin2.Items.Clear();
+                    spin2.Items.AddRange(proplist.Select(x => new ListItem() { Text = spec.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (spec.SelectedProperty != "" && proplist.Contains(spec.SelectedProperty))
+                    {
+                        spin2.SelectedIndex = (proplist.IndexOf(spec.SelectedProperty));
+                    }
+
+                }
+                else
+                {
+                    spin2.Items.Clear();
+                }
+            });
+
+            spin2 = s.CreateAndAddDropDownRow(container, "Source Property", proplist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    spec.SelectedProperty = proplist[sender.SelectedIndex];
+                }
+            });
+
+            if (spec.SelectedObjectID != "" && spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID].GraphicObject.Tag));
+            }
+
+            s.CreateAndAddStringEditorRow(container, "Source Property Units",
+               spec.SelectedPropertyUnits, (tb, e) =>
+               {
+                   spec.SelectedPropertyUnits = tb.Text;
+               });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Minimum Value",
+              spec.MinimumValue, (tb, e) =>
+              {
+                  spec.MinimumValue = tb.Text.ToDoubleFromCurrent();
+              });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Maximum Value",
+              spec.MaximumValue, (tb, e) =>
+              {
+                  spec.MaximumValue = tb.Text.ToDoubleFromCurrent();
+              });
+
+            s.CreateAndAddLabelRow(container, "Alarm Parameters");
+
+            s.CreateAndAddCheckBoxRow(container, "Show Alarm Indicators", spec.ShowAlarms, (chk, e) =>
+            {
+                spec.ShowAlarms = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Very Low", spec.VeryLowAlarmEnabled, (chk, e) =>
+            {
+                spec.VeryLowAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Very Low Value",
+            spec.VeryLowAlarmValue, (tb, e) =>
+            {
+                spec.VeryLowAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Low", spec.LowAlarmEnabled, (chk, e) =>
+            {
+                spec.LowAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Low Value",
+            spec.LowAlarmValue, (tb, e) =>
+            {
+                spec.LowAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "High", spec.HighAlarmEnabled, (chk, e) =>
+            {
+                spec.HighAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "High Value",
+            spec.HighAlarmValue, (tb, e) =>
+            {
+                spec.HighAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Very High", spec.VeryHighAlarmEnabled, (chk, e) =>
+            {
+                spec.VeryHighAlarmEnabled = chk.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Very High Value",
+            spec.VeryHighAlarmValue, (tb, e) =>
+            {
+                spec.VeryHighAlarmValue = tb.Text.ToDoubleFromCurrent();
+            });
+
+        }
+
+    }
+
+    public static class SwitchEditor
+    {
+
+        public static void Populate(ISimulationObject simobj, DynamicLayout container)
+        {
+
+            var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
+            var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
+
+            var spec = (UnitOperations.UnitOperations.Switch)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
+
+            var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            objlist.Insert(0, "");
+            List<string> proplist = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Selected Object");
+
+            DropDown spin1 = null, spin2 = null;
+
+            spin1 = s.CreateAndAddDropDownRow(container, "Selected Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+                    {
+                        var prevobj = spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID];
+                        prevobj.IsSpecAttached = false;
+                        prevobj.AttachedSpecId = "";
+                        prevobj.SpecVarType = SpecVarType.None;
+                    }
+
+                    var obj = spec.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    spec.SelectedObjectID = obj.Name;
+
+                    proplist = obj.GetProperties(PropertyType.ALL).ToList();
+                    proplist.Insert(0, "");
+
+                    spin2.Items.Clear();
+                    spin2.Items.AddRange(proplist.Select(x => new ListItem() { Text = spec.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (spec.SelectedProperty != "" && proplist.Contains(spec.SelectedProperty))
+                    {
+                        spin2.SelectedIndex = (proplist.IndexOf(spec.SelectedProperty));
+                    }
+
+                }
+                else
+                {
+                    spin2.Items.Clear();
+                }
+            });
+
+            spin2 = s.CreateAndAddDropDownRow(container, "Selected Property", proplist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    spec.SelectedProperty = proplist[sender.SelectedIndex];
+                }
+            });
+
+            if (spec.SelectedObjectID != "" && spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID].GraphicObject.Tag));
+            }
+
+            s.CreateAndAddStringEditorRow(container, "Property Units",
+               spec.SelectedPropertyUnits, (tb, e) =>
+               {
+                   spec.SelectedPropertyUnits = tb.Text;
+               });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Value when Off",
+              spec.OffValue, (tb, e) =>
+              {
+                  spec.OffValue = tb.Text.ToDoubleFromCurrent();
+              });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Value when On",
+              spec.OnValue, (tb, e) =>
+              {
+                  spec.OnValue = tb.Text.ToDoubleFromCurrent();
+              });
+
+        }
+
+    }
+
+    public static class InputEditor
+    {
+
+        public static void Populate(ISimulationObject simobj, DynamicLayout container)
+        {
+
+            var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
+            var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
+
+            var spec = (UnitOperations.UnitOperations.Input)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
+
+            var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            objlist.Insert(0, "");
+            List<string> proplist = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Selected Object");
+
+            DropDown spin1 = null, spin2 = null;
+
+            spin1 = s.CreateAndAddDropDownRow(container, "Selected Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+                    {
+                        var prevobj = spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID];
+                        prevobj.IsSpecAttached = false;
+                        prevobj.AttachedSpecId = "";
+                        prevobj.SpecVarType = SpecVarType.None;
+                    }
+
+                    var obj = spec.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    spec.SelectedObjectID = obj.Name;
+
+                    proplist = obj.GetProperties(PropertyType.ALL).ToList();
+                    proplist.Insert(0, "");
+
+                    spin2.Items.Clear();
+                    spin2.Items.AddRange(proplist.Select(x => new ListItem() { Text = spec.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (spec.SelectedProperty != "" && proplist.Contains(spec.SelectedProperty))
+                    {
+                        spin2.SelectedIndex = (proplist.IndexOf(spec.SelectedProperty));
+                    }
+
+                }
+                else
+                {
+                    spin2.Items.Clear();
+                }
+            });
+
+            spin2 = s.CreateAndAddDropDownRow(container, "Selected Property", proplist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    spec.SelectedProperty = proplist[sender.SelectedIndex];
+                }
+            });
+
+            if (spec.SelectedObjectID != "" && spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.SelectedObjectID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(spec.GetFlowsheet().SimulationObjects[spec.SelectedObjectID].GraphicObject.Tag));
+            }
+
+            s.CreateAndAddStringEditorRow(container, "Property Units",
+               spec.SelectedPropertyUnits, (tb, e) =>
+               {
+                   spec.SelectedPropertyUnits = tb.Text;
+               });
 
         }
 
