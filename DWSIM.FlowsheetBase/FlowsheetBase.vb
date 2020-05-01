@@ -597,7 +597,7 @@ Imports DWSIM.Interfaces.Enums
                 myObj.GraphicObject = myGobj
                 SimulationObjects.Add(myGobj.Name, myObj)
 
-                'GraphicObjectControlPanelModeEditors.SetInputDelegate(myGobj, myObj)
+                GraphicObjectControlPanelModeEditors.SetInputDelegate(myGobj, myObj)
 
             Case ObjectType.Controller_PID
 
@@ -612,7 +612,7 @@ Imports DWSIM.Interfaces.Enums
                 myObj.GraphicObject = myGobj
                 SimulationObjects.Add(myGobj.Name, myObj)
 
-                'GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
+                GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
 
             Case ObjectType.LevelGauge
 
@@ -1373,6 +1373,10 @@ Imports DWSIM.Interfaces.Enums
                                 gobj.Height = 180
                             End If
                         End If
+                    ElseIf TypeOf obj Is Input Then
+                        GraphicObjectControlPanelModeEditors.SetInputDelegate(gobj, obj)
+                    ElseIf TypeOf obj Is PIDController Then
+                        GraphicObjectControlPanelModeEditors.SetPIDDelegate(gobj, obj)
                     End If
                 End If
                 objlist.Add(obj)

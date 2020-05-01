@@ -3117,10 +3117,6 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
-    Private Sub tsbControlPanelMode_Click(sender As Object, e As EventArgs) Handles tsbControlPanelMode.Click
-
-    End Sub
-
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
 
         If tsbControlPanelMode.Checked Then

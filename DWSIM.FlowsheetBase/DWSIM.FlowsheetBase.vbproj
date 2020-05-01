@@ -123,6 +123,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -141,6 +142,19 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlPanelMode\FormPIDCPEditor.designer.vb">
+      <DependentUpon>FormPIDCPEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanelMode\FormPIDCPEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlPanelMode\FormTextBoxInput.designer.vb">
+      <DependentUpon>FormTextBoxInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanelMode\FormTextBoxInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlPanelMode\GraphicObjectControlPanelModeEditors.vb" />
     <Compile Include="FlowsheetBase.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -160,6 +174,15 @@
     <Compile Include="ReportCreator.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ControlPanelMode\FormPIDCPEditor.resx">
+      <DependentUpon>FormPIDCPEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanelMode\FormTextBoxInput.de.resx">
+      <DependentUpon>FormTextBoxInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanelMode\FormTextBoxInput.resx">
+      <DependentUpon>FormTextBoxInput.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -190,6 +213,10 @@
     <ProjectReference Include="..\DWSIM.DynamicsManager\DWSIM.DynamicsManager.vbproj">
       <Project>{654c0d60-c94b-4a0b-b34d-1d71a6a20420}</Project>
       <Name>DWSIM.DynamicsManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
@@ -224,6 +251,7 @@
       <Name>DWSIM.UnitOperations</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

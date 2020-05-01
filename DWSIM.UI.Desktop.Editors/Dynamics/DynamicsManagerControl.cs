@@ -28,6 +28,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
         public DynamicsManagerControl(Shared.Flowsheet fs) : base()
         {
             Flowsheet = fs;
+            Padding = new Padding(5);
+            Spacing = new Size(5, 5);
         }
 
         public void Init()
@@ -54,9 +56,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Cause-and-Effect Matrices", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Integrators", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Schedules", Closable = false });
-            //DocumentContainer.Pages.Add(new DocumentPage { Text = "Controllers", Closable = false });
-            //DocumentContainer.Pages.Add(new DocumentPage { Text = "Indicators", Closable = false });
-
+            
             var tl2 = new TableLayout { Padding = new Padding(5), Spacing = new Size(10, 10) };
 
             var tr2 = new TableRow();
@@ -106,7 +106,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Dialog form = null;
                     var tb = new TextBox { Text = es.Description };
                     form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => es.Description = tb.Text);
-                    form.Location = btnAddEventSet.Location;
+                    form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbEventSets.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
                     Flowsheet.DynamicsManager.EventSetList.Add(es.ID, es);
@@ -168,7 +168,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Dialog form = null;
                     var tb = new TextBox { Text = ev.Description };
                     form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => ev.Description = tb.Text);
-                    form.Location = btnAddEvent.Location;
+                    form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbEvents.Items.Add(new ListItem { Key = ev.ID, Text = ev.Description });
                     Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey].Events.Add(ev.ID, ev);
@@ -251,7 +251,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Dialog form = null;
                     var tb = new TextBox { Text = es.Description };
                     form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => es.Description = tb.Text);
-                    form.Location = btnAddCEM.Location;
+                    form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbCEM.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
                     Flowsheet.DynamicsManager.CauseAndEffectMatrixList.Add(es.ID, es);
@@ -313,7 +313,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Dialog form = null;
                     var tb = new TextBox { Text = ev.Description };
                     form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => ev.Description = tb.Text);
-                    form.Location = btnAddCEI.Location;
+                    form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbCEI.Items.Add(new ListItem { Key = ev.ID, Text = ev.Description });
                     Flowsheet.DynamicsManager.CauseAndEffectMatrixList[lbCEM.SelectedKey].Items.Add(ev.ID, ev);
@@ -395,7 +395,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Dialog form = null;
                     var tb = new TextBox { Text = es.Description };
                     form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => es.Description = tb.Text);
-                    form.Location = btnAddI.Location;
+                    form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbIntegrators.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
                     Flowsheet.DynamicsManager.IntegratorList.Add(es.ID, es);
@@ -468,7 +468,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Dialog form = null;
                     var tb = new TextBox { Text = es.Description };
                     form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => es.Description = tb.Text);
-                    form.Location = btnAddVar.Location;
+                    form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbVariables.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
                     Flowsheet.DynamicsManager.IntegratorList[lbIntegrators.SelectedKey].MonitoredVariables.Add(es);               
@@ -561,7 +561,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Dialog form = null;
                     var tb = new TextBox { Text = es.Description };
                     form = ext.CreateDialogWithButtons(tb, "Enter a Name", () => es.Description = tb.Text);
-                    form.Location = btnAddS.Location;
+                    form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbSchedules.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
                     Flowsheet.DynamicsManager.ScheduleList.Add(es.ID, es);
@@ -645,6 +645,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             lbEvents.SelectedIndexChanged += (s, e) =>
             {
+                if (lbEventSets.SelectedIndex < 0) return;
                 if (lbEvents.SelectedIndex < 0) return;
                 var ev = Flowsheet.DynamicsManager.EventSetList[lbEventSets.SelectedKey].Events[lbEvents.SelectedKey];
                 Flowsheet.RunCodeOnUIThread(() =>
@@ -671,6 +672,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             lbCEI.SelectedIndexChanged += (s, e) =>
             {
+                if (lbCEM.SelectedIndex < 0) return;
                 if (lbCEI.SelectedIndex < 0) return;
                 var ev = Flowsheet.DynamicsManager.CauseAndEffectMatrixList[lbCEM.SelectedKey].Items[lbCEI.SelectedKey];
                 Flowsheet.RunCodeOnUIThread(() =>
@@ -724,11 +726,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     PopulateScheduleProperties(sch);
                 });
             };
-
-            //if (lbEventSets.Items.Count > 0) lbEventSets.SelectedIndex = 0;
-            //if (lbCEM.Items.Count > 0) lbCEM.SelectedIndex = 0;
-            //if (lbIntegrators.Items.Count > 0) lbIntegrators.SelectedIndex = 0;
-            //if (lbSchedules.Items.Count > 0) lbSchedules.SelectedIndex = 0;
 
         }
 
