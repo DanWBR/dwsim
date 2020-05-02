@@ -71,7 +71,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             txtResults = new TextArea { ReadOnly = true, Wrap = true };
 
-            Rows.Add(new TableRow(leftcontainer, txtResults));
+            Rows.Add(new TableRow(leftcontainer, new Scrollable {Content = txtResults }));
 
             btnRun.Click += (s, e) =>
             {
@@ -148,6 +148,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                         Flowsheet.RunCodeOnUIThread(() =>
                         {
                             txtResults.Text += (string.Format("Total Error: {0}\n", totalerror));
+                            txtResults.CaretIndex = txtResults.Text.Length - 1;
                         });
                         Application.Instance.RunIteration();
                         counter += 1;
