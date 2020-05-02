@@ -101,6 +101,7 @@
     <Compile Include="Compounds\Tools.cs" />
     <Compile Include="Dynamics\DynamicsIntegratorControls.cs" />
     <Compile Include="Dynamics\DynamicsManagerControl.cs" />
+    <Compile Include="Dynamics\PIDTuningTool.cs" />
     <Compile Include="Dynamics\PropertiesEditor.cs" />
     <Compile Include="FlowsheetAnalysis\Optimization.cs" />
     <Compile Include="FlowsheetAnalysis\SensitivityAnalysis.cs" />

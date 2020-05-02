@@ -107,7 +107,7 @@ namespace DWSIM.UI.Forms
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
-            if (GlobalSettings.Settings.FlowsheetRenderer == GlobalSettings.Settings.SkiaCanvasRenderer.CPU)
+            if (s.FlowsheetRenderer == s.SkiaCanvasRenderer.CPU)
             {
                 FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl() { FlowsheetObject = FlowsheetObject, FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface() };
             }
@@ -143,7 +143,7 @@ namespace DWSIM.UI.Forms
             var btnmDynManager = new ButtonToolItem { ToolTip = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png")) };
             var btnmDynIntegrator = new ButtonToolItem { ToolTip = "Dynamics Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png")) };
 
-            var chkmInspector = new CheckToolItem { Checked = GlobalSettings.Settings.InspectorEnabled, ToolTip = "Enable/Disable Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_male.png")) };
+            var chkmInspector = new CheckToolItem { Checked = s.InspectorEnabled, ToolTip = "Enable/Disable Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_male.png")) };
             var btnmInspector = new ButtonToolItem { ToolTip = "View Inspector Window", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png")) };
 
             if (Application.Instance.Platform.IsMac)
@@ -233,7 +233,7 @@ namespace DWSIM.UI.Forms
 
             ActGlobalOptions = () =>
             {
-                new DWSIM.UI.Forms.Forms.GeneralSettings().GetForm().Show();
+                new Forms.GeneralSettings().GetForm().Show();
             };
 
             ActSave = () =>
@@ -525,6 +525,12 @@ namespace DWSIM.UI.Forms
             var btnDynManager = new ButtonMenuItem { Text = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png")) };
             var btnDynIntegrator = new ButtonMenuItem { Text = "Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png")) };
             var btnDynPIDTuning = new ButtonMenuItem { Text = "PID Controller Tuning", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-adjust.png")) };
+
+            btnDynPIDTuning.Click += (s, e) => {
+                var editor = new PIDTuningTool(FlowsheetObject, DynIntegratorControl);
+                var form = UI.Shared.Common.GetDefaultEditorForm("PID Tuning Tool", 800, 600, editor, false);
+                form.Show();
+            };
 
             // menu items
 

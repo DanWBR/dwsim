@@ -4,7 +4,6 @@ using DWSIM.DynamicsManager;
 using DWSIM.ExtensionMethods;
 using DWSIM.UI.Shared;
 using ext = DWSIM.UI.Shared.Common;
-using System.CodeDom;
 using System.Linq;
 using System.Collections.Generic;
 using System;
