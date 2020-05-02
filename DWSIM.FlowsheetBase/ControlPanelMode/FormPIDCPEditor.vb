@@ -30,6 +30,7 @@ Public Class FormPIDCPEditor
         If e.KeyCode = Keys.Enter Then
             Try
                 PID.AdjustValue = tbSP.Text.ToDoubleFromCurrent
+                PID.SPValue = PID.AdjustValue
                 Close()
             Catch ex As Exception
                 MessageBox.Show("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)

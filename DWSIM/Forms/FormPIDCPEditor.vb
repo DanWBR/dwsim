@@ -25,6 +25,7 @@
         If e.KeyCode = Keys.Enter Then
             Try
                 PID.AdjustValue = tbSP.Text.ToDoubleFromCurrent
+                PID.SPValue = PID.AdjustValue
                 Close()
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erro"), ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
