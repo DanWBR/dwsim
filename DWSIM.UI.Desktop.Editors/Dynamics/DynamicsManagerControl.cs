@@ -737,6 +737,16 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         }
 
+        public void UpdateSelectedSchedule()
+        {
+            if (lbSchedules.SelectedIndex < 0) return;
+            var sch = Flowsheet.DynamicsManager.ScheduleList[lbSchedules.SelectedKey];
+            Flowsheet.RunCodeOnUIThread(() =>
+            {
+                PopulateScheduleProperties(sch);
+            });
+        }
+
         private void PopulateScheduleProperties(IDynamicsSchedule sch)
         {
 

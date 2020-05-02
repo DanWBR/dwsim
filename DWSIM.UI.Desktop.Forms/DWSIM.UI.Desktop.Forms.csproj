@@ -351,6 +351,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\icons8-adjust.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-cancel.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-scroll_down.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-scroll_up.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

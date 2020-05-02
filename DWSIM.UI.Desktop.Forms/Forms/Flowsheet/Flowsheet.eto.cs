@@ -76,6 +76,8 @@ namespace DWSIM.UI.Forms
 
         private CheckMenuItem chkDynamics;
 
+        private DropDown ddstates;
+
         void InitializeComponent()
         {
 
@@ -185,6 +187,8 @@ namespace DWSIM.UI.Forms
             var btnGlobalOptions = new ButtonMenuItem { Text = "Global Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")), Shortcut = Keys.G | Application.Instance.AlternateModifier };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 };
             var btnSolveC = new ButtonMenuItem { Text = "Solve Flowsheet (Custom Calculation Order)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 | Application.Instance.CommonModifier | Application.Instance.AlternateModifier };
+
+            var dd = 
 
             // actions
 
@@ -346,7 +350,7 @@ namespace DWSIM.UI.Forms
 
             // button click events
 
-            chkmInspector.CheckedChanged += (sender, e) => GlobalSettings.Settings.InspectorEnabled = chkmInspector.Checked;
+            chkmInspector.CheckedChanged += (sender, e) => s.InspectorEnabled = chkmInspector.Checked;
 
             btnmInspector.Click += (sender, e) => ActInspector.Invoke();
 
@@ -911,7 +915,7 @@ namespace DWSIM.UI.Forms
             btnmDrawGrid = new Eto.Forms.CheckBox { Text = "Draw Grid" };
             btnmSnapToGrid = new Eto.Forms.CheckBox { Text = "Snap to Grid" };
 
-            btnmMultiSelect = new Eto.Forms.CheckBox { Text = "MultiSelect Mode" };
+            btnmMultiSelect = new Eto.Forms.CheckBox { Text = "MultiSelect" };
 
             btnmDrawGrid.CheckedChanged += (sender, e) => ActDrawGrid.Invoke();
             btnmSnapToGrid.CheckedChanged += (sender, e) => ActSnapToGrid.Invoke();
@@ -966,11 +970,79 @@ namespace DWSIM.UI.Forms
             btnmEqHoriz.Click += (sender, e) => ActHorizAlign.Invoke();
             btnmEqVert.Click += (sender, e) => ActVertAlign.Invoke();
 
-            var chkControlPanelMode = new Eto.Forms.CheckBox { Text = "Control Panel Mode" };
+            var chkControlPanelMode = new Eto.Forms.CheckBox { Text = "CP Mode", ToolTip = "Enable/Disable Control Panel Mode" };
+
+            ddstates = new DropDown { Width = 100 };
+            var btnSaveState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Save State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_up.png")) };
+            var btnLoadState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Load State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_down.png")) };
+            var btnDeleteState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Delete Selected State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-cancel.png")) };
+
+            btnDeleteState.Click += (s, e) => {
+                if (ddstates.SelectedValue != null)
+                {
+                    if (FlowsheetObject.StoredSolutions.ContainsKey(ddstates.SelectedValue.ToString()))
+                    {
+                        try
+                        {
+                            if (MessageBox.Show("Confirm?", MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
+                            {
+                                FlowsheetObject.StoredSolutions.Remove(ddstates.SelectedValue.ToString());
+                                ddstates.Items.RemoveAt(ddstates.SelectedIndex);
+                                DynManagerControl.UpdateSelectedSchedule();
+                                MessageBox.Show("State Deleted successfully.", MessageBoxButtons.OK, MessageBoxType.Information);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message, MessageBoxButtons.OK, MessageBoxType.Error);
+                        }
+                    }
+                }
+            };
+
+            btnSaveState.Click += (s, e) => {
+                string sname = "";
+                Dialog formName = null;
+                var tb = new TextBox { Text = "NewState" };
+                formName = UI.Shared.Common.CreateDialogWithButtons(tb, "Enter a Name", () => sname = tb.Text);
+                formName.Location = new Point(Mouse.Position);
+                formName.ShowModal(this);
+                if (sname != "" && !FlowsheetObject.StoredSolutions.ContainsKey(sname))
+                {
+                    FlowsheetObject.StoredSolutions.Add(sname, FlowsheetObject.GetProcessData());
+                    ddstates.Items.Add(sname);
+                    DynManagerControl.UpdateSelectedSchedule();
+                    MessageBox.Show("State Saved successfully.", MessageBoxButtons.OK, MessageBoxType.Information);
+                }
+                else {
+                    MessageBox.Show("Invalid name.", MessageBoxButtons.OK, MessageBoxType.Error);
+                }
+            };
+
+            btnLoadState.Click += (s, e) => {
+                if (ddstates.SelectedValue != null)
+                {
+                    if (FlowsheetObject.StoredSolutions.ContainsKey(ddstates.SelectedValue.ToString()))
+                    {
+                        try
+                        {
+                            FlowsheetObject.LoadProcessData(FlowsheetObject.StoredSolutions[ddstates.SelectedValue.ToString()]);
+                            FlowsheetObject.UpdateInterface();
+                            FlowsheetObject.UpdateEditorPanels?.Invoke();
+                            MessageBox.Show("State Restored successfully.", MessageBoxButtons.OK, MessageBoxType.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message, MessageBoxButtons.OK, MessageBoxType.Error);
+                        }
+                    }
+                }
+            };
 
             var menu1 = new StackLayout
             {
                 Items = { chkControlPanelMode,  new Label {Text =" " },
+                new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
                 btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
@@ -1295,6 +1367,13 @@ namespace DWSIM.UI.Forms
             FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
             FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
             FlowsheetControl.Invalidate();
+
+            ddstates.Items.Clear();
+            ddstates.Items.Add("");
+            foreach (var item in FlowsheetObject.StoredSolutions)
+            {
+                ddstates.Items.Add(item.Key);
+            }
 
             ScriptListControl.UpdateList();
 
