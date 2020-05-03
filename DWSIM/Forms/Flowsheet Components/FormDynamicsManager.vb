@@ -670,9 +670,11 @@ Public Class FormDynamicsManager
 
         Dim grid = DirectCast(sender, DataGridView)
 
-        Dim item = Manager.CauseAndEffectMatrixList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
-
-        item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        Try
+            Dim item = Manager.CauseAndEffectMatrixList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
+            item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        Catch ex As Exception
+        End Try
 
     End Sub
 
@@ -682,9 +684,11 @@ Public Class FormDynamicsManager
 
         Dim grid = DirectCast(sender, DataGridView)
 
-        Dim item = Manager.IntegratorList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
-
-        item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        Try
+            Dim item = Manager.IntegratorList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
+            item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        Catch ex As Exception
+        End Try
 
     End Sub
 
@@ -694,9 +698,11 @@ Public Class FormDynamicsManager
 
         Dim grid = DirectCast(sender, DataGridView)
 
-        Dim item = Manager.ScheduleList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
-
-        item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        Try
+            Dim item = Manager.ScheduleList(grid.Rows(grid.SelectedCells(0).RowIndex).Cells(0).Value)
+            item.Description = grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        Catch ex As Exception
+        End Try
 
     End Sub
 
